@@ -28,6 +28,7 @@ import _poolBasaltMonolith from "../pool/basalt-monolith.js";
 import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
 import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
+import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
@@ -197,6 +198,7 @@ import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
+import _poolProfessorHulk from "../pool/professor-hulk.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
@@ -342,6 +344,7 @@ const shard: CardShard = {
     _poolBatheInGold,
     _poolBeastAttack,
     _poolBigfinBouncer,
+    _poolBlackWidowAgileAvenger,
     _poolBladewingTheRisen,
     _poolBlindObedience,
     _poolBlowflyInfestation,
@@ -511,6 +514,7 @@ const shard: CardShard = {
     _poolPowerFist,
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
+    _poolProfessorHulk,
     _poolPryingEyes,
     _poolQuakestriderCeratops,
     _poolQuietPurity,

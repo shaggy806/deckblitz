@@ -561,7 +561,11 @@ export function parseTrigger(clause) {
     const spec = { on: "cast-spell", who };
     if (/first/.test(m[2])) spec.firstEachTurn = true;
     if (m[3] !== undefined) {
-      if (m[3] === "noncreature") spec.noncreatureOnly = true;
+      // "Your first noncreature spell each turn" counts noncreature spells
+      // (Esper Sentinel's `filter`); `noncreatureOnly` with `firstEachTurn`
+      // would be "your first spell, if it's noncreature".
+      if (m[3] === "noncreature" && spec.firstEachTurn === true) spec.filter = { notTypes: ["creature"] };
+      else if (m[3] === "noncreature") spec.noncreatureOnly = true;
       else {
         const filter = parseTypePhrase(m[3]);
         if (filter === null) return null;
@@ -993,7 +997,7 @@ export function parseSentence(sentence, ctx) {
   // Counterspells with a tax (Mana Leak): the spell's controller decides.
   if ((m = /^counter (target spell|target creature spell|target noncreature spell|target instant or sorcery spell) unless its controller pays ((?:\{\d+\})+)\.$/i.exec(s))) {
     const i = slot(m[1]);
-    return { kind: "unless", chooser: i, options: [{ pay: m[2] }], otherwise: { kind: "counter", target: i } };
+    return { kind: "unless", chooser: i, options: [{ pay: m[2], text: `Pay ${m[2]}` }], otherwise: { kind: "counter", target: i } };
   }
 
   // Libraries and graveyards.

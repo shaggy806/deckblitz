@@ -76,6 +76,7 @@ import _poolExclude from "../pool/exclude.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
+import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
 import _poolFamilyReunion from "../pool/family-reunion.js";
 import _poolFateForgotten from "../pool/fate-forgotten.js";
 import _poolFathomFleetFirebrand from "../pool/fathom-fleet-firebrand.js";
@@ -97,6 +98,7 @@ import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
+import _poolGoblinTown from "../pool/goblin-town.js";
 import _poolGoblinWarDrums from "../pool/goblin-war-drums.js";
 import _poolGodEternalOketra from "../pool/god-eternal-oketra.js";
 import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
@@ -367,6 +369,7 @@ const shard: CardShard = {
     _poolExpensiveTaste,
     _poolFaerieInvaders,
     _poolFaerieMastermind,
+    _poolFalconAndRedwing,
     _poolFamilyReunion,
     _poolFateForgotten,
     _poolFathomFleetFirebrand,
@@ -388,6 +391,7 @@ const shard: CardShard = {
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
+    _poolGoblinTown,
     _poolGoblinWarDrums,
     _poolGodEternalOketra,
     _poolGoldmawChampion,

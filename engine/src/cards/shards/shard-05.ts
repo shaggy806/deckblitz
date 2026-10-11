@@ -58,6 +58,7 @@ import _poolChorusOfWoe from "../pool/chorus-of-woe.js";
 import _poolChronicleOfVictory from "../pool/chronicle-of-victory.js";
 import _poolChronomaton from "../pool/chronomaton.js";
 import _poolCitywatchSphinx from "../pool/citywatch-sphinx.js";
+import _poolClapSnap from "../pool/clap-snap.js";
 import _poolCleaverRiot from "../pool/cleaver-riot.js";
 import _poolCliffhavenSellSword from "../pool/cliffhaven-sell-sword.js";
 import _poolClifftopLookout from "../pool/clifftop-lookout.js";
@@ -260,6 +261,7 @@ import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThinkTank from "../pool/think-tank.js";
+import _poolThranduilsCompany from "../pool/thranduils-company.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
@@ -360,6 +362,7 @@ const shard: CardShard = {
     _poolChronicleOfVictory,
     _poolChronomaton,
     _poolCitywatchSphinx,
+    _poolClapSnap,
     _poolCleaverRiot,
     _poolCliffhavenSellSword,
     _poolClifftopLookout,
@@ -562,6 +565,7 @@ const shard: CardShard = {
     _poolTheLadyOfTheMountain,
     _poolTheWaterCrystal,
     _poolThinkTank,
+    _poolThranduilsCompany,
     _poolTillerEngine,
     _poolTinderFarm,
     _poolTomeRaider,

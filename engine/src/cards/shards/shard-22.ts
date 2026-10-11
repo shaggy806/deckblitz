@@ -144,6 +144,7 @@ import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js"
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
 import _poolMintstrosity from "../pool/mintstrosity.js";
+import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMudflatVillage from "../pool/mudflat-village.js";
@@ -299,6 +300,7 @@ import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
+import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
@@ -449,6 +451,7 @@ const shard: CardShard = {
     _poolMindscourDragon,
     _poolMinotaurWarrior,
     _poolMintstrosity,
+    _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMizziumMortars,
     _poolMudflatVillage,
@@ -606,6 +609,7 @@ const shard: CardShard = {
     _poolZiatoraTheIncinerator,
   ],
   tokens: [
+    _tokensAxeToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,
     _tokensHarpyToken,

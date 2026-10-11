@@ -107,6 +107,7 @@ import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGardenize from "../pool/gardenize.js";
+import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
 import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
@@ -410,6 +411,7 @@ const shard: CardShard = {
     _poolFyndhornElves,
     _poolGalvanicBlast,
     _poolGardenize,
+    _poolGatheringOfDarkness,
     _poolGeistOfTheArchives,
     _poolGenerousEnt,
     _poolGenerousPup,

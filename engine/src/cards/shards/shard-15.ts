@@ -41,6 +41,7 @@ import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
 import _poolConcentratedFire from "../pool/concentrated-fire.js";
+import _poolConfusticateAndBebother from "../pool/confusticate-and-bebother.js";
 import _poolConjurersCloset from "../pool/conjurers-closet.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
@@ -120,6 +121,7 @@ import _poolHonor from "../pool/honor.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
+import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
 import _poolIronMyr from "../pool/iron-myr.js";
 import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
@@ -160,6 +162,7 @@ import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
+import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
 import _poolNearheathChaplain from "../pool/nearheath-chaplain.js";
@@ -174,6 +177,7 @@ import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
+import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
@@ -320,6 +324,7 @@ const shard: CardShard = {
     _poolCompulsiveResearch,
     _poolConcentrate,
     _poolConcentratedFire,
+    _poolConfusticateAndBebother,
     _poolConjurersCloset,
     _poolContingencyPlan,
     _poolCopperLonglegs,
@@ -399,6 +404,7 @@ const shard: CardShard = {
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
     _poolIrenicussVileDuplication,
+    _poolIronHillsBlacksmith,
     _poolIronMyr,
     _poolIzzetCluestone,
     _poolJhovallQueen,
@@ -439,6 +445,7 @@ const shard: CardShard = {
     _poolMothriderPatrol,
     _poolMoxEmerald,
     _poolMuldrothaTheGravetide,
+    _poolMultiversalRecruitment,
     _poolMysteriosPhantasm,
     _poolNaturalEnd,
     _poolNearheathChaplain,
@@ -453,6 +460,7 @@ const shard: CardShard = {
     _poolObscuraInitiate,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
+    _poolPantherRobot,
     _poolPashalikMons,
     _poolPiranhaMarsh,
     _poolPreposterousProportions,

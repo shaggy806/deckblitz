@@ -5378,6 +5378,34 @@
   "effect:count-graveyards-with-n-cards": {
    "family": "effect:amount-new-variants",
    "example": "The Master of Lake-town: 'draw a card for each graveyard with seven or more cards in it' — no EffectAmount counts players whose graveyard holds N or more cards."
+  },
+  "static:must-attack-specific-player": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Galactus, Devourer of Worlds: 'attacks an opponent with the most life among your opponents each combat if able' — must-attack has no defender requirement (rule 508.1d)."
+  },
+  "trigger:connives": {
+   "family": "trigger:surveils",
+   "example": "Glorious Purpose: 'Whenever a creature you control connives' — connive (rule 701.50) emits no event a trigger can watch, with the conniving creature as the trigger object."
+  },
+  "effect:amass-controller-of-target": {
+   "family": "effect:player-scope-extensions",
+   "example": "Azog, Moria's Ruin: 'destroy up to one other target creature. Its controller amasses Goblins X' — amass has no controller-of-target player; it always amasses for the effect's controller."
+  },
+  "condition:filter-same-name-as-permanent-you-control": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Key to the Side-Door: 'Discard a legendary card with the same name as a legendary permanent you control' — no CardFilter clause for 'has the same name as a permanent matching F'."
+  },
+  "replacement:exile-instead-when-you-do": {
+   "family": "replacement:exile-instead",
+   "example": "Head of the Hunt: \"If a creature an opponent controls would die, exile it instead. When you do, create a 2/2 green Wolf creature token\" — the exile replacement has no reflexive trigger per replaced event"
+  },
+  "decision:search-hand-and-library": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Last Light of Durin's Day: \"search your hand and/or library for a Dragon card and put it onto the battlefield. If you search your library this way, shuffle\" — search-library's zones never include the hand"
+  },
+  "trigger:creature-connives": {
+   "family": "keyword:connive",
+   "example": "Ultron, Unlimited; Iron Monger, Sadistic Tycoon: \"Whenever a creature you control connives, …\" — connive emits no event a trigger can see"
   }
  }
 }

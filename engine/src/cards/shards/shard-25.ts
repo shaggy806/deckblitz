@@ -21,7 +21,9 @@ import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
 import _poolBearDown from "../pool/bear-down.js";
+import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
 import _poolBendersWaterskin from "../pool/benders-waterskin.js";
+import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
 import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
@@ -163,6 +165,7 @@ import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
+import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
@@ -311,7 +314,9 @@ const shard: CardShard = {
     _poolBastionOfRemembrance,
     _poolBastionProtector,
     _poolBearDown,
+    _poolBejeweledWarg,
     _poolBendersWaterskin,
+    _poolBeornReluctantHost,
     _poolBerserkersOnslaught,
     _poolBindingMummy,
     _poolBirthingPod,
@@ -453,6 +458,7 @@ const shard: CardShard = {
     _poolNeedlevergePathway,
     _poolNeurokCommando,
     _poolNiblisOfTheMist,
+    _poolNoriTellerOfTales,
     _poolNorwoodArchers,
     _poolNyxbornSeaguard,
     _poolOldGrowthGrove,

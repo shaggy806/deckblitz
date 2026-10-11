@@ -59,6 +59,7 @@ import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
+import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
@@ -331,6 +332,7 @@ const shard: CardShard = {
     _poolDeduce,
     _poolDeeprootWaters,
     _poolDegaDisciple,
+    _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,

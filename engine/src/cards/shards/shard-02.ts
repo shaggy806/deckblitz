@@ -141,6 +141,7 @@ import _poolLargeBear from "../pool/large-bear.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
+import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLorienRevealed from "../pool/lorien-revealed.js";
 import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
 import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
@@ -421,6 +422,7 @@ const shard: CardShard = {
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,
+    _poolLokiTheDeceiver,
     _poolLorienRevealed,
     _poolLostInALabyrinth,
     _poolLostInTheMist,

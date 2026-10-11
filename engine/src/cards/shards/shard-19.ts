@@ -63,6 +63,7 @@ import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
+import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -259,6 +260,7 @@ import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
+import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
@@ -358,6 +360,7 @@ const shard: CardShard = {
     _poolDungroveElder,
     _poolEarthcraft,
     _poolElvenAmbush,
+    _poolElvenRaftSteerer,
     _poolEmrakulsMessenger,
     _poolEusocialEngineering,
     _poolExploreTheVastlands,
@@ -554,6 +557,7 @@ const shard: CardShard = {
     _poolTrashForTreasure,
     _poolTroyanGutsyExplorer,
     _poolUlamogsDreadsire,
+    _poolUncoverTheMoonLetters,
     _poolUnsubtleMockery,
     _poolUrborgDrake,
     _poolUrzaPrinceOfKroog,

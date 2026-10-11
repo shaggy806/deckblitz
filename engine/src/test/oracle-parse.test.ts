@@ -320,6 +320,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parsed.static[0]).toMatchObject({ replacement: { event: "enters-battlefield", prepared: true } });
   });
 
+  it("\"your first noncreature spell each turn\" counts noncreature spells (Valeria Richards)", () => {
+    const parsed = face("Whenever you cast your first noncreature spell each turn, draw a card.");
+    expect(parsed.triggered[0]?.trigger).toMatchObject({ on: "cast-spell", firstEachTurn: true, filter: { notTypes: ["creature"] } });
+    expect(parsed.triggered[0]?.trigger).not.toHaveProperty("noncreatureOnly");
+  });
+
   it("a target with a word it doesn't know isn't read", () => {
     expect(face("Destroy target creature with the greatest power.", "Sorcery").complete).toBe(false);
     expect(face("Destroy target sparkling creature.", "Sorcery").complete).toBe(false);

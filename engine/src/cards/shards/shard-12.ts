@@ -185,6 +185,7 @@ import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
+import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
@@ -254,6 +255,7 @@ import _poolThornspireVerge from "../pool/thornspire-verge.js";
 import _poolThrasiosTritonHero from "../pool/thrasios-triton-hero.js";
 import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
+import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTwincast from "../pool/twincast.js";
@@ -477,6 +479,7 @@ const shard: CardShard = {
     _poolPugnaciousHammerskull,
     _poolPullUnder,
     _poolPyroceratops,
+    _poolRageIntoTheValley,
     _poolRaidersWake,
     _poolRamosDragonEngine,
     _poolRazorfootGriffin,
@@ -546,6 +549,7 @@ const shard: CardShard = {
     _poolThrasiosTritonHero,
     _poolThreeTreeMascot,
     _poolThunderscapeApprentice,
+    _poolTillAndTend,
     _poolTormentingVoice,
     _poolTrevasAttendant,
     _poolTwincast,

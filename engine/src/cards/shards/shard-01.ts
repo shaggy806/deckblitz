@@ -101,6 +101,7 @@ import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
+import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
@@ -123,6 +124,7 @@ import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
 import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
+import _poolLittleBear from "../pool/little-bear.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
@@ -373,6 +375,7 @@ const shard: CardShard = {
     _poolIllustriousHistorian,
     _poolIndulgentAristocrat,
     _poolInsatiableHarpy,
+    _poolIronManArmoredAvenger,
     _poolJaddiOffshoot,
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
@@ -395,6 +398,7 @@ const shard: CardShard = {
     _poolLilianasSpecter,
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
+    _poolLittleBear,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,

@@ -72,6 +72,7 @@ import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
 import _poolDrossProwler from "../pool/dross-prowler.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
+import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
 import _poolEaglesOfTheNorth from "../pool/eagles-of-the-north.js";
@@ -270,6 +271,7 @@ import _poolWitchsFamiliar from "../pool/witchs-familiar.js";
 import _poolWizenedCenn from "../pool/wizened-cenn.js";
 import _poolWolfsbaneHighlandHero from "../pool/wolfsbane-highland-hero.js";
 import _poolWoodlandDruid from "../pool/woodland-druid.js";
+import _poolWoodlandWeavemaster from "../pool/woodland-weavemaster.js";
 import _poolWrongTurn from "../pool/wrong-turn.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
@@ -360,6 +362,7 @@ const shard: CardShard = {
     _poolDromadPurebred,
     _poolDrossProwler,
     _poolDryadArbor,
+    _poolDwarvenMattock,
     _poolDwynensElite,
     _poolEagerFirstYear,
     _poolEaglesOfTheNorth,
@@ -558,6 +561,7 @@ const shard: CardShard = {
     _poolWizenedCenn,
     _poolWolfsbaneHighlandHero,
     _poolWoodlandDruid,
+    _poolWoodlandWeavemaster,
     _poolWrongTurn,
     _poolYahenniUndyingPartisan,
     _poolYawningFissure,

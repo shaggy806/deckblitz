@@ -106,6 +106,7 @@ import _poolGiftOfGranite from "../pool/gift-of-granite.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
+import _poolGoblinTownFlunkies from "../pool/goblin-town-flunkies.js";
 import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
@@ -416,6 +417,7 @@ const shard: CardShard = {
     _poolGlittermonger,
     _poolGoblinHero,
     _poolGoblinReplica,
+    _poolGoblinTownFlunkies,
     _poolGoblinWarStrike,
     _poolGolgariCluestone,
     _poolGracefulAdept,

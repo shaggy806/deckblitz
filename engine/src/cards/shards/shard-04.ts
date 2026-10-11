@@ -247,6 +247,7 @@ import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
+import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
@@ -541,6 +542,7 @@ const shard: CardShard = {
     _poolTelJiladJustice,
     _poolTerisianMindbreaker,
     _poolTerminate,
+    _poolTheLordOfTheEagles,
     _poolTheReaperKingNoMore,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,

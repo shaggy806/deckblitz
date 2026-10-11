@@ -68,6 +68,7 @@ import _poolDefyGravity from "../pool/defy-gravity.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
+import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
 import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
@@ -114,6 +115,7 @@ import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
+import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
 import _poolHullcarver from "../pool/hullcarver.js";
 import _poolHundroog from "../pool/hundroog.js";
 import _poolHungryGhoul from "../pool/hungry-ghoul.js";
@@ -352,6 +354,7 @@ const shard: CardShard = {
     _poolDesertOfTheMindful,
     _poolDestroyEvil,
     _poolDiabolicEdict,
+    _poolDoctorDoomUnrivaled,
     _poolDragonlordAtarka,
     _poolDriftingMeadow,
     _poolDroverOfTheMighty,
@@ -398,6 +401,7 @@ const shard: CardShard = {
     _poolHerosBlade,
     _poolHinataDawnCrowned,
     _poolHuatlisSnubhorn,
+    _poolHulkbusterArmor,
     _poolHullcarver,
     _poolHundroog,
     _poolHungryGhoul,

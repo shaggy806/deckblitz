@@ -154,6 +154,7 @@ import _poolLibrary from "../pool/library.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
+import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLynx from "../pool/lynx.js";
@@ -245,6 +246,7 @@ import _poolSunderingEruption from "../pool/sundering-eruption.js";
 import _poolSunshotMilitia from "../pool/sunshot-militia.js";
 import _poolSurgeConductor from "../pool/surge-conductor.js";
 import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
+import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
@@ -262,6 +264,7 @@ import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
+import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTradingPost from "../pool/trading-post.js";
@@ -471,6 +474,7 @@ const shard: CardShard = {
     _poolLifecreedDuo,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
+    _poolLokisScepter,
     _poolLongtuskCub,
     _poolLoxodonLineBreaker,
     _poolLynx,
@@ -562,6 +566,7 @@ const shard: CardShard = {
     _poolSunshotMilitia,
     _poolSurgeConductor,
     _poolSurrakAndGoreclaw,
+    _poolSwordsmansSteel,
     _poolTalasScout,
     _poolTalismanOfResilience,
     _poolTempleOfPower,
@@ -579,6 +584,7 @@ const shard: CardShard = {
     _poolTimidShieldbearer,
     _poolToadstoolAdmirer,
     _poolTogetherForever,
+    _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,
     _poolTradingPost,

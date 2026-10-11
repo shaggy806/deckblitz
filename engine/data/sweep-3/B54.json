@@ -1,0 +1,433 @@
+{
+  "batch": "B54",
+  "status": "complete",
+  "ranks": "The Hobbit (HOB)'s last 38 and Marvel Super Heroes Commander (MSC)'s first 22: each set's top 50% by EDHREC rank (the set walk's next 60)",
+  "authored": [
+    {
+      "name": "Confusticate and Bebother",
+      "files": [
+        "engine/src/cards/pool/confusticate-and-bebother.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Nori, Teller of Tales",
+      "files": [
+        "engine/src/cards/pool/nori-teller-of-tales.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Panther Robot",
+      "files": [
+        "engine/src/cards/pool/panther-robot.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Desolation of Smaug",
+      "files": [
+        "engine/src/cards/pool/desolation-of-smaug.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tom, Bert, and William",
+      "files": [
+        "engine/src/cards/pool/tom-bert-and-william.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Hills Blacksmith",
+      "files": [
+        "engine/src/cards/pool/iron-hills-blacksmith.ts",
+        "engine/src/cards/tokens/axe-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Little Bear",
+      "files": [
+        "engine/src/cards/pool/little-bear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Uncover the Moon-Letters",
+      "files": [
+        "engine/src/cards/pool/uncover-the-moon-letters.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodland Weavemaster",
+      "files": [
+        "engine/src/cards/pool/woodland-weavemaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Misty Mountains Raider",
+      "files": [
+        "engine/src/cards/pool/misty-mountains-raider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Along the Crooked Way",
+      "files": [
+        "engine/src/cards/pool/along-the-crooked-way.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tidings of War",
+      "files": [
+        "engine/src/cards/pool/tidings-of-war.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Goblin-town Flunkies",
+      "files": [
+        "engine/src/cards/pool/goblin-town-flunkies.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Great Ugly-Looking Goblin // Clap! Snap!",
+      "files": [
+        "engine/src/cards/pool/great-ugly-looking-goblin.ts",
+        "engine/src/cards/pool/clap-snap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Man, Armored Avenger",
+      "files": [
+        "engine/src/cards/pool/iron-man-armored-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Black Widow, Agile Avenger",
+      "files": [
+        "engine/src/cards/pool/black-widow-agile-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hulkbuster Armor",
+      "files": [
+        "engine/src/cards/pool/hulkbuster-armor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Multiversal Recruitment",
+      "files": [
+        "engine/src/cards/pool/multiversal-recruitment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Falcon and Redwing",
+      "files": [
+        "engine/src/cards/pool/falcon-and-redwing.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Hills",
+      "files": [
+        "engine/src/cards/pool/iron-hills.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin-town",
+      "files": [
+        "engine/src/cards/pool/goblin-town.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Mattock",
+      "files": [
+        "engine/src/cards/pool/dwarven-mattock.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rage into the Valley",
+      "files": [
+        "engine/src/cards/pool/rage-into-the-valley.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bejeweled Warg",
+      "files": [
+        "engine/src/cards/pool/bejeweled-warg.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Lord of the Eagles",
+      "files": [
+        "engine/src/cards/pool/the-lord-of-the-eagles.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bard the Bowman",
+      "files": [
+        "engine/src/cards/pool/bard-the-bowman.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loki's Scepter",
+      "files": [
+        "engine/src/cards/pool/lokis-scepter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Swordsman's Steel",
+      "files": [
+        "engine/src/cards/pool/swordsmans-steel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Professor Hulk",
+      "files": [
+        "engine/src/cards/pool/professor-hulk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Loki, the Deceiver",
+      "files": [
+        "engine/src/cards/pool/loki-the-deceiver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Doctor Doom, Unrivaled",
+      "files": [
+        "engine/src/cards/pool/doctor-doom-unrivaled.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thranduil's Company",
+      "files": [
+        "engine/src/cards/pool/thranduils-company.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elven Raft-Steerer",
+      "files": [
+        "engine/src/cards/pool/elven-raft-steerer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beorn, Reluctant Host // Till and Tend",
+      "files": [
+        "engine/src/cards/pool/beorn-reluctant-host.ts",
+        "engine/src/cards/pool/till-and-tend.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bolg's Company",
+      "files": [
+        "engine/src/cards/pool/bolgs-company.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fearsome Goblin Pair",
+      "files": [
+        "engine/src/cards/pool/fearsome-goblin-pair.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gathering of Darkness",
+      "files": [
+        "engine/src/cards/pool/gathering-of-darkness.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Shortsword",
+      "files": [
+        "engine/src/cards/pool/dwarven-shortsword.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Puppet Master, String Puller",
+      "files": [
+        "engine/src/cards/pool/puppet-master-string-puller.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "H.E.R.B.I.E., Lovable Robot",
+      "files": [
+        "engine/src/cards/pool/h-e-r-b-i-e-lovable-robot.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Valeria Richards, Precocious",
+      "files": [
+        "engine/src/cards/pool/valeria-richards-precocious.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Bolg of the North",
+      "needs": [
+        "effect:excess-damage-amount"
+      ],
+      "why": "'amass Goblins X, where X is that excess damage' — no amount for the excess damage dealt by this effect (only excessToController and the excessDamageThisTurn filter exist)."
+    },
+    {
+      "name": "Galactus, Devourer of Worlds",
+      "needs": [
+        "static:must-attack-specific-player"
+      ],
+      "why": "Insatiable Hunger: 'attacks an opponent with the most life among your opponents each combat if able' — must-attack lets the controller pick any defender; no requirement naming which player, and no 'unless you control a creature named X' clause."
+    },
+    {
+      "name": "Glorious Purpose",
+      "needs": [
+        "trigger:connives",
+        "trigger:nth-counter-trigger"
+      ],
+      "why": "No 'whenever a creature you control connives' trigger, and no 'when the sixth plan counter is put on this' trigger."
+    },
+    {
+      "name": "Azog, Moria's Ruin",
+      "needs": [
+        "effect:amass-controller-of-target"
+      ],
+      "why": "'Its controller amasses Goblins X' — amass always acts for the effect's controller; it has no controller-of-target player (the destroyed creature's last controller, who may be an opponent)."
+    },
+    {
+      "name": "Bilbo, Luckwearer // Burglar's Plot",
+      "needs": [
+        "effect:exchange-control"
+      ],
+      "why": "Burglar's Plot: 'Exchange control of two target nonland permanents that share a card type' — no exchange-of-control effect, nor a 'shares a card type with the other target' target relation."
+    },
+    {
+      "name": "Inside Information",
+      "needs": [
+        "cost:alt-cost-pay-life-equal-mana-value"
+      ],
+      "why": "The opponent's-library impulse is built, but 'if you cast a spell this way, pay life equal to its mana value rather than pay its mana cost' isn't an impulse-exile option (only free or normal cost)."
+    },
+    {
+      "name": "Key to the Side-Door",
+      "needs": [
+        "condition:filter-same-name-as-permanent-you-control"
+      ],
+      "why": "'Discard a legendary card with the same name as a legendary permanent you control' — a discard cost's CardFilter has only nameDiffersFromEach/nameUnlike, no 'shares a name with a permanent matching F'."
+    },
+    {
+      "name": "Supper for Spiders",
+      "needs": [
+        "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+      ],
+      "why": "No filter for creature cards put into a graveyard from the battlefield this turn (only from the library); the returned cards also become Food artifacts losing their other types indefinitely."
+    },
+    {
+      "name": "Tippy-Toe, Terrific Partner",
+      "needs": [
+        "replacement:token-creation-add-extra"
+      ],
+      "why": "'Instead create those tokens plus an additional Food token' — would-create-token replacements only multiply or substitute (Divine Visitation), never add a different token."
+    },
+    {
+      "name": "Iron Man, Bleeding Edge",
+      "needs": [
+        "effect:copy-spell-except-nonlegendary"
+      ],
+      "why": "'You may copy it, except the copy isn't legendary' — copy-spell takes no copy exceptions, so a legendary artifact spell's token copy would hit the legend rule."
+    },
+    {
+      "name": "Dwarven Mauler",
+      "needs": [
+        "cost:equip-ability-cost-reduction"
+      ],
+      "why": "\"Equip abilities you activate that target this creature cost {2} less\": abilityCostModification has no equip-only flag and no clause on the ability's target"
+    },
+    {
+      "name": "Riddles in the Dark",
+      "needs": [
+        "mechanic:face-down-piles-opponent-chooses"
+      ],
+      "why": "separating four cards into a face-down and a face-up pile, an opponent choosing one, isn't built"
+    },
+    {
+      "name": "Head of the Hunt",
+      "needs": [
+        "replacement:exile-instead-when-you-do"
+      ],
+      "why": "the would-be-put-into-graveyard exile replacement (Liesa's) has no \"When you do, create a 2/2 Wolf\" reflexive trigger per replaced death"
+    },
+    {
+      "name": "Celebrate the Mountain-king",
+      "needs": [
+        "bug:oring-one-shot-return"
+      ],
+      "why": "its ruling returns the exiled cards immediately with nothing in between (rule 610.3); the engine's O-Ring return is a leaves-battlefield trigger on the stack (Grasp of Fate stays out on the same). Per-opponent { seat } targets and recruit (draw, discard, this-way discarded nonland) are expressible"
+    },
+    {
+      "name": "Last Light of Durin's Day",
+      "needs": [
+        "decision:search-hand-and-library"
+      ],
+      "why": "\"search your hand and/or library for a Dragon card and put it onto the battlefield\": search-library's zones are library/graveyard/both, never the hand"
+    },
+    {
+      "name": "Molecule Man",
+      "needs": [
+        "keyword:miracle"
+      ],
+      "why": "miracle isn't built, nor a static granting it to nonland cards in hand"
+    },
+    {
+      "name": "Ultron, Unlimited",
+      "needs": [
+        "trigger:creature-connives"
+      ],
+      "why": "no \"whenever a creature you control connives\" trigger (connive emits no event); the attack connive itself is expressible"
+    },
+    {
+      "name": "Iron Monger, Sadistic Tycoon",
+      "needs": [
+        "trigger:creature-connives"
+      ],
+      "why": "no \"whenever a creature you control connives\" trigger"
+    },
+    {
+      "name": "Doom's Time Platform",
+      "needs": [
+        "mechanic:suspend-and-time-counters"
+      ],
+      "why": "exiling a graveyard card with two time counters and granting it suspend: only suspend's own cast path marks a card suspended"
+    }
+  ]
+}

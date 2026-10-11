@@ -7,6 +7,7 @@ import _poolAardvarkSloth from "../pool/aardvark-sloth.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
+import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
 import _poolAltanakTheThriceCalled from "../pool/altanak-the-thrice-called.js";
 import _poolAmazingAcrobatics from "../pool/amazing-acrobatics.js";
@@ -132,6 +133,7 @@ import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIronBully from "../pool/iron-bully.js";
+import _poolIronHills from "../pool/iron-hills.js";
 import _poolIshaiOjutaiDragonspeaker from "../pool/ishai-ojutai-dragonspeaker.js";
 import _poolItThatBetrays from "../pool/it-that-betrays.js";
 import _poolIthilienKingfisher from "../pool/ithilien-kingfisher.js";
@@ -253,6 +255,7 @@ import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
+import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
@@ -289,6 +292,7 @@ const shard: CardShard = {
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
     _poolAkkiBattleSquad,
+    _poolAlongTheCrookedWay,
     _poolAlphaMyr,
     _poolAltanakTheThriceCalled,
     _poolAmazingAcrobatics,
@@ -414,6 +418,7 @@ const shard: CardShard = {
     _poolInheritedEnvelope,
     _poolIntoTheMawOfHell,
     _poolIronBully,
+    _poolIronHills,
     _poolIshaiOjutaiDragonspeaker,
     _poolItThatBetrays,
     _poolIthilienKingfisher,
@@ -535,6 +540,7 @@ const shard: CardShard = {
     _poolTuvasaTheSunlit,
     _poolUndercityShade,
     _poolUnexplainedAbsence,
+    _poolValeriaRichardsPrecocious,
     _poolValorSinger,
     _poolVampireCutthroat,
     _poolVaultOfCatlacan,

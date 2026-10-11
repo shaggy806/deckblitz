@@ -34,6 +34,7 @@ import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
+import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
 import _poolBorderGuard from "../pool/border-guard.js";
 import _poolBotanicalPlaza from "../pool/botanical-plaza.js";
@@ -97,6 +98,7 @@ import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
+import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralKrushok from "../pool/feral-krushok.js";
 import _poolFireMagic from "../pool/fire-magic.js";
@@ -240,6 +242,7 @@ import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
+import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
 import _poolTophTheFirstMetalbender from "../pool/toph-the-first-metalbender.js";
@@ -324,6 +327,7 @@ const shard: CardShard = {
     _poolBloodPet,
     _poolBloodbraidElf,
     _poolBogwaterLumaret,
+    _poolBolgsCompany,
     _poolBonescytheSliver,
     _poolBorderGuard,
     _poolBotanicalPlaza,
@@ -387,6 +391,7 @@ const shard: CardShard = {
     _poolEssenceAnchor,
     _poolExecutionersHood,
     _poolFangOfShigeki,
+    _poolFearsomeGoblinPair,
     _poolFencingAce,
     _poolFeralKrushok,
     _poolFireMagic,
@@ -530,6 +535,7 @@ const shard: CardShard = {
     _poolThePrydwenSteelFlagship,
     _poolTheaterOfHorrors,
     _poolThousandYearStorm,
+    _poolTidingsOfWar,
     _poolTitansGrave,
     _poolTopazDragon,
     _poolTophTheFirstMetalbender,
