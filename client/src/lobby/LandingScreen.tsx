@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
@@ -83,6 +83,34 @@ function useLandingZoom(): number {
 }
 
 /**
+ * Holds the page's column where it was first centred. The column is centred
+ * in the window, so anything that appears in it — a join error, the blitz
+ * paste box, its progress bar — moved everything by half its height (the
+ * jitter sweep, 2026-10-10). Measured once laid out, and again on a resize,
+ * the column then stays top-anchored at that offset (`.landing.pinned`) and
+ * grows downward.
+ */
+function usePinnedColumn(zoom: number): React.RefObject<HTMLDivElement | null> {
+  const ref = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const pin = (): void => {
+      el.classList.remove('pinned')
+      const first = el.querySelector<HTMLElement>(':scope > :not(.landing-backdrop)')
+      if (!first) return
+      const top = first.getBoundingClientRect().top - el.getBoundingClientRect().top + el.scrollTop
+      el.style.setProperty('--landing-top', `${Math.max(0, top)}px`)
+      el.classList.add('pinned')
+    }
+    pin()
+    window.addEventListener('resize', pin)
+    return () => window.removeEventListener('resize', pin)
+  }, [zoom])
+  return ref
+}
+
+/**
  * A callback ref for the drifting backdrop: holds its animation still while
  * the page is hidden. A compositor animation keeps time in a hidden tab
  * without drawing, so alt-tabbing back showed the frame from when it was
@@ -127,6 +155,7 @@ export function LandingScreen({
   const [joinCode, setJoinCode] = useState('')
   const zoom = useLandingZoom()
   const backdropRef = useHeldWhileHidden()
+  const columnRef = usePinnedColumn(zoom)
 
   const join = (code: string) => {
     if (code.length === ROOM_CODE_LENGTH) game.joinRoom(code)
@@ -136,7 +165,7 @@ export function LandingScreen({
   const heroArt = resolveArtUrl(PINNED_ART[HERO_CARD], HERO_CARD, 'art_crop')
 
   return (
-    <div className="landing" style={{ '--landing-zoom': zoom } as CSSProperties}>
+    <div className="landing" ref={columnRef} style={{ '--landing-zoom': zoom } as CSSProperties}>
       {/* A zoomed-in crop of the top-100-commanders tile, drifting diagonally
           behind everything. Two elements, not one: the outer holds the angle
           and clips, the inner does the moving — see landing.css for why the

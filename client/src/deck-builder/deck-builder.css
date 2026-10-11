@@ -153,6 +153,19 @@
   display: flex;
   gap: 6px;
 }
+/* The buttons and the delete confirm in one cell, the hidden one keeping its
+   room (`visibility`, not `display`), so asking to delete moves nothing. */
+.db-actions-slot {
+  display: grid;
+  justify-items: end;
+}
+.db-actions-slot > .db-editor-actions {
+  grid-area: 1 / 1;
+}
+.db-actions-slot > .db-editor-actions[hidden] {
+  display: flex;
+  visibility: hidden;
+}
 .db-delete-confirm {
   align-items: center;
 }
@@ -177,6 +190,22 @@
 }
 .db-legality.illegal {
   border-color: var(--warn);
+}
+.db-legality-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0 4px;
+  flex-wrap: wrap;
+}
+.db-issues-toggle {
+  margin-left: auto;
+}
+/* Opened, the issues keep one height however many there are — seven rows,
+   scrolling past them — so adding cards doesn't move what's under it. */
+.db-legality ul.db-issues {
+  height: calc(7 * 1.45em);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 .db-legality ul {
   margin: 6px 0 0;
@@ -414,12 +443,14 @@
    row out through the sides of the dialog on any window past ~1500px — a
    maximized one. Capped against the viewport's *height* too, so the row
    still fits a short screen. */
+/* Top-anchored, as .db-modal is: centred, the review moved as its steps
+   changed its height (the jitter sweep, 2026-10-10). */
 .rr-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 2vh 2vw;
   background: var(--scrim);
@@ -905,14 +936,16 @@
 
 /* --- the printing picker ------------------------------------------------ */
 
+/* Anchored at the top rather than centred: a box that grows as it loads (the
+   printing picker's printings) grows downward instead of re-centring. */
 .db-modal {
   position: fixed;
   inset: 0;
   z-index: 65;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: clamp(14px, 4vh, 44px) clamp(14px, 4vw, 44px);
+  padding: clamp(14px, 8vh, 80px) clamp(14px, 4vw, 44px) clamp(14px, 4vh, 44px);
   background: rgb(6 9 12 / 0.76);
   backdrop-filter: blur(3px);
 }

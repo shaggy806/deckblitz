@@ -1065,7 +1065,6 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             <span className="muted">({game.stopped})</span>
           </div>
         ) : null}
-        <ErrorLine game={game} />
         {game.blitzReport !== null ? <BlitzReportToast report={game.blitzReport} onDismiss={game.dismissBlitzReport} /> : null}
         {game.restarted && !game.isHost ? (
           <HighrollToast onDismiss={game.dismissRestarted}>
@@ -1082,6 +1081,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
               : `🎲 ${playerLabel(view.startingPlayer, game.seats)} won the highroll and goes first`}
           </HighrollToast>
         ) : null}
+        {/* Last: an error comes and goes, and above the notices that stay it
+            pushed them down a line each time (the jitter sweep, 2026-10-10). */}
+        <ErrorLine game={game} />
       </div>
 
       {/* A sibling of <Table>, not a child: Table remounts on every frame
@@ -4345,6 +4347,17 @@ function Table({
     const taxRates = attackAction.attackTax?.perCreature as Readonly<Record<string, number>> | undefined
     const attackTax = Object.values(attackAssignments).reduce((n, d) => n + (taxRates?.[d] ?? 0), 0)
     const overBudget = attackTax > (attackAction.attackTax?.budget ?? 0)
+    // Picking attackers to aim says so ("2 selected · click who they
+    // attack"). With more than one defender to aim at, that has a line of its
+    // own from the start, so picking doesn't wrap the prompt and grow the
+    // panel a line (the jitter sweep, 2026-10-10).
+    const pickHint =
+      attackPicks.length > 0
+        ? `${attackPicks.length} selected · ${
+            groupTargets.length > 0 ? 'click who they attack' : 'no one legal for all of them — narrow the selection'
+          }`
+        : ''
+    const hintLine = attackAction.defenders.length > 1
     controls = (
       <div className="controls">
         <span>
@@ -4353,12 +4366,7 @@ function Table({
               // needs a target, so the count is out of all of them.
               `${view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}choose what each attacks — ${assignedCount} of ${attackAction.eligible.length}`
             : `Declare attackers — ${assignedCount} attacking`}
-          {attackPicks.length > 0 ? `, ${attackPicks.length} selected` : ''}
-          {attackPicks.length > 0
-            ? groupTargets.length > 0
-              ? ' · click who they attack'
-              : ' · no one legal for all of them — narrow the selection'
-            : ''}
+          {!hintLine && pickHint ? `, ${pickHint}` : ''}
           {unmetMusts.length > 0 && enterAttackingAction === undefined
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
@@ -4369,6 +4377,7 @@ function Table({
               {overBudget ? ' — more than you can surely pay' : ''}
             </>
           ) : null}
+          {hintLine ? <span className="decision-hint">{pickHint || ' '}</span> : null}
         </span>
         {pairs.length > 0 ? (
           <span className="stack-counts">

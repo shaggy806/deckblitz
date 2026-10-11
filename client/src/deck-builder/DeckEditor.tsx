@@ -18,6 +18,7 @@ import { Symbols } from '../ui/Symbols.tsx'
 import { CardHoverPreview } from '../ui/CardHoverPreview.tsx'
 import type { HoverTarget } from '../ui/CardHoverPreview.tsx'
 import { CardContextMenu } from './CardContextMenu.tsx'
+import { StableLabel } from '../ui/StableLabel.tsx'
 import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import type { SavedDeck } from './decks.ts'
@@ -140,6 +141,9 @@ export function DeckEditor({
   // Delete asks first: a deck lives only in this browser, so a misclick
   // used to lose it for good.
   const [confirmingDelete, setConfirmingDelete] = useState(false)
+  // The legality's issues, behind a toggle: listed inline they came and went
+  // as cards were added, moving everything under them (the jitter sweep).
+  const [showIssues, setShowIssues] = useState(false)
   const [typeFilter, setTypeFilter] = useState<string | null>(null)
   // The pool kept to the commander's colour identity (rule 903.4) while the
   // deck has one: a Temur deck was offered white cards first, none of which
@@ -377,46 +381,65 @@ export function DeckEditor({
         {readOnly ? (
           <div className="db-editor-actions">
             <button type="button" onClick={onMakeActive} disabled={isActive}>
-              {isActive ? 'Active' : 'Make active'}
+              <StableLabel widest={['Make active']}>{isActive ? 'Active' : 'Make active'}</StableLabel>
             </button>
             <button type="button" onClick={onDuplicate}>
               Duplicate to edit
             </button>
           </div>
-        ) : confirmingDelete ? (
-          <div className="db-editor-actions db-delete-confirm" role="alert">
-            <span>Delete this deck? It can't be undone.</span>
-            <button type="button" className="db-danger" onClick={() => onDelete?.()}>
-              Delete
-            </button>
-            <button type="button" onClick={() => setConfirmingDelete(false)} autoFocus>
-              Cancel
-            </button>
-          </div>
         ) : (
-          <div className="db-editor-actions">
-            <button type="button" onClick={onMakeActive} disabled={isActive}>
-              {isActive ? 'Active' : 'Make active'}
-            </button>
-            <button type="button" onClick={onDuplicate}>
-              Duplicate
-            </button>
-            <button type="button" onClick={() => setConfirmingDelete(true)}>
-              Delete…
-            </button>
+          // The buttons and the delete confirm share one cell, the hidden one
+          // keeping its room, so asking to delete doesn't change the row.
+          <div className="db-actions-slot">
+            <div className="db-editor-actions db-delete-confirm" role={confirmingDelete ? 'alert' : undefined} hidden={!confirmingDelete}>
+              {/* Short, so the confirm is no wider than the buttons it shares
+                  a cell with and the head row doesn't wrap for it. */}
+              <span>Delete this deck?</span>
+              <button type="button" className="db-danger" title="It can't be undone." onClick={() => onDelete?.()}>
+                Delete
+              </button>
+              {confirmingDelete ? (
+                // Keyed apart from the idle one, so it mounts — and takes the
+                // focus — as the confirm opens.
+                <button key="cancel" type="button" onClick={() => setConfirmingDelete(false)} autoFocus>
+                  Cancel
+                </button>
+              ) : (
+                <button key="cancel-idle" type="button" tabIndex={-1}>
+                  Cancel
+                </button>
+              )}
+            </div>
+            <div className="db-editor-actions" hidden={confirmingDelete}>
+              <button type="button" onClick={onMakeActive} disabled={isActive}>
+                <StableLabel widest={['Make active']}>{isActive ? 'Active' : 'Make active'}</StableLabel>
+              </button>
+              <button type="button" onClick={onDuplicate}>
+                Duplicate
+              </button>
+              <button type="button" onClick={() => setConfirmingDelete(true)}>
+                Delete…
+              </button>
+            </div>
           </div>
         )}
       </div>
 
       <div className={`db-legality ${legality.legal ? 'legal' : 'illegal'}`}>
-        <strong>{legality.legal ? '✓ Commander-legal' : `✗ ${legality.violations.length} issue(s)`}</strong>
-        <span className="muted"> · identity: {legality.identity || 'colourless'}</span>
-        {legality.violations.length > 0 ? (
-          <ul>
-            {legality.violations.slice(0, 6).map((v, i) => (
+        <div className="db-legality-line">
+          <strong>{legality.legal ? '✓ Commander-legal' : `✗ ${legality.violations.length} issue(s)`}</strong>
+          <span className="muted"> · identity: {legality.identity || 'colourless'}</span>
+          {legality.violations.length > 0 ? (
+            <button type="button" className="link-button db-issues-toggle" aria-expanded={showIssues} onClick={() => setShowIssues((s) => !s)}>
+              <StableLabel widest={['Show issues', 'Hide issues']}>{showIssues ? 'Hide issues' : 'Show issues'}</StableLabel>
+            </button>
+          ) : null}
+        </div>
+        {showIssues && legality.violations.length > 0 ? (
+          <ul className="db-issues">
+            {legality.violations.map((v, i) => (
               <li key={i}>{v}</li>
             ))}
-            {legality.violations.length > 6 ? <li className="muted">…and {legality.violations.length - 6} more</li> : null}
           </ul>
         ) : null}
       </div>

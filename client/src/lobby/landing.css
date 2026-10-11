@@ -42,6 +42,12 @@
      front door and the game look like one product */
   background-image: radial-gradient(ellipse at 50% -10%, var(--table-glow) 0%, transparent 62%);
 }
+/* Once laid out, held where it was centred (`usePinnedColumn`): what appears
+   in the column grows it downward rather than moving it all by half. */
+.landing.pinned {
+  justify-content: flex-start;
+  padding-top: var(--landing-top);
+}
 
 /*
  * The drifting backdrop. Split across two elements on purpose.

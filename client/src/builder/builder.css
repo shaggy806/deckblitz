@@ -113,6 +113,17 @@
   background: var(--accent-bg);
   color: var(--accent);
 }
+.bp-head {
+  position: relative;
+}
+.bp-notice-float {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  box-shadow: var(--shadow-raised);
+}
 .bp-notice.bad {
   background: rgb(194 86 79 / 0.15);
   color: var(--bad);

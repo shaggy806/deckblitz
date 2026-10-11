@@ -181,7 +181,6 @@ item lands.
 - **The library and the deck builder load every card definition** (~3.1 MB).
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
-- **A few views still move on a click** (the jitter sweep, 2026-10-10): the landing page, the deck builder's legality list, the stack's two-line labels, the Game menu's confirms, and a wrapping decision prompt; each with its likely fix.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

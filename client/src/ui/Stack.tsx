@@ -176,7 +176,13 @@ export function Stack({
               onFocus={isGhost ? undefined : () => onFocusEntry?.(id)}
               onBlur={isGhost ? undefined : () => onFocusEntry?.(null)}
             >
-              <div className="stack-entry-label">
+              <div
+                className="stack-entry-label"
+                // One line, cut short with the whole of it here: a label that
+                // wrapped drew its card a line lower, so the top card's place
+                // moved as the top changed (the jitter sweep, 2026-10-10).
+                title={[isGhost ? null : playerLabel(obj.controller, seats), label].filter(Boolean).join(' · ')}
+              >
                 {/* Whose it is, in their seat colour: the card alone doesn't
                     say, and in a four-player game it's the first question. */}
                 {!isGhost ? (

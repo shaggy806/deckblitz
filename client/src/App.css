@@ -237,6 +237,17 @@
   gap: 6px;
   color: var(--text);
 }
+/* A confirm and the button that asks it, in one cell: the panel is as wide
+   as the confirm from the start, so asking moves nothing. */
+.seat-menu-slot {
+  display: grid;
+}
+.seat-menu-slot > * {
+  grid-area: 1 / 1;
+}
+.seat-menu-slot > .slot-hidden {
+  visibility: hidden;
+}
 .ts-menu .seat-menu-panel button.seat-menu-danger {
   border-color: var(--bad);
   color: var(--bad);
@@ -1333,7 +1344,13 @@
   /* A count in proportional figures ("4/5" against "5/5") moved the panel's
      contents as it changed (a bug report, 2026-10-10). */
   font-variant-numeric: tabular-nums;
+}/* A prompt's second line, there from the start where it'll be needed (the
+   attack aim hint at a table with several defenders), so filling it doesn't
+   grow the panel a line. */
+.decision-hint {
+  display: block;
 }
+
 .decision-banner .controls {
   margin-top: 0;
   /* The prompt gets its own row above the buttons, which stay side by side
@@ -2105,6 +2122,11 @@
 }
 .stack-entry-label {
   color: var(--muted);
+  /* One line whatever its length (its title has the whole): two lines put
+     the card under it a line lower. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* Only the top entry -- what a player is responding to -- says whose it is
    and what it targets (`shows-lines`, Stack.tsx: the real top entry under a

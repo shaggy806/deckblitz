@@ -80,9 +80,12 @@ export function SeatMenu({
               {botPlaying ? 'Take back control' : 'Let a bot play for me'}
             </button>
           ) : null}
+          {/* Each confirm shares a cell with the button that asks it (the
+              hidden one keeping its room), so asking doesn't widen the
+              right-anchored panel (the jitter sweep, 2026-10-10). */}
           {inGame && begun ? (
-            confirming ? (
-              <div className="seat-menu-confirm">
+            <div className="seat-menu-slot">
+              <div className={`seat-menu-confirm${confirming ? '' : ' slot-hidden'}`} aria-hidden={!confirming}>
                 <span>Concede the game?</span>
                 <button
                   type="button"
@@ -98,15 +101,19 @@ export function SeatMenu({
                   Cancel
                 </button>
               </div>
-            ) : (
-              <button type="button" onClick={() => setConfirming(true)}>
+              <button
+                type="button"
+                className={confirming ? 'slot-hidden' : undefined}
+                aria-hidden={confirming}
+                onClick={() => setConfirming(true)}
+              >
                 Concede…
               </button>
-            )
+            </div>
           ) : null}
           {game.isHost && game.canRematch && !view.result.over ? (
-            confirmingRestart ? (
-              <div className="seat-menu-confirm">
+            <div className="seat-menu-slot">
+              <div className={`seat-menu-confirm${confirmingRestart ? '' : ' slot-hidden'}`} aria-hidden={!confirmingRestart}>
                 <span>Restart for everyone?</span>
                 <button
                   type="button"
@@ -122,11 +129,15 @@ export function SeatMenu({
                   Cancel
                 </button>
               </div>
-            ) : (
-              <button type="button" onClick={() => setConfirmingRestart(true)}>
+              <button
+                type="button"
+                className={confirmingRestart ? 'slot-hidden' : undefined}
+                aria-hidden={confirmingRestart}
+                onClick={() => setConfirmingRestart(true)}
+              >
                 Restart game…
               </button>
-            )
+            </div>
           ) : null}
           {onShowResult !== undefined ? (
             <button

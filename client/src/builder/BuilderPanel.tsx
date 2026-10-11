@@ -285,9 +285,11 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
         <button type="button" className="bp-icon" title="Hide the builder" onClick={() => setOpen(false)}>
           ▸
         </button>
+        {/* Hung from the header, over what's under it: in the column it
+            pushed everything down for its 2.5 seconds (the jitter sweep). */}
+        {notice ? <p className="bp-notice bp-notice-float">{notice}</p> : null}
       </header>
 
-      {notice ? <p className="bp-notice">{notice}</p> : null}
       {!game.isHost ? <p className="bp-notice bad">Only this room's host can change the board.</p> : null}
 
       <div className="bp-scroll">

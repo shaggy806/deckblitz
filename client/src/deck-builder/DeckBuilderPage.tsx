@@ -18,6 +18,7 @@ import { DeckEditor } from './DeckEditor.tsx'
 import { importDecklist, resolveImport } from './importDeck.ts'
 import type { ImportProgress, ImportReport } from './importDeck.ts'
 import { ReplacementReview } from './ReplacementReview.tsx'
+import { StableLabel } from '../ui/StableLabel.tsx'
 import { CONFIDENCE_LABEL } from './replacement-labels.ts'
 import './deck-builder.css'
 
@@ -345,7 +346,7 @@ function ImportPanel({
             Paste from clipboard
           </button>
           <button type="submit" disabled={!text.trim() || loading}>
-            {loading ? 'Importing…' : 'Import'}
+            <StableLabel widest={['Importing…']}>{loading ? 'Importing…' : 'Import'}</StableLabel>
           </button>
         </div>
         {pasteNote !== null ? <p className="muted db-import-note">{pasteNote}</p> : null}
