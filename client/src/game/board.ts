@@ -47,9 +47,6 @@ export function bucketOf(obj: VisibleObject): Bucket {
   return 'enchantment'
 }
 
-const isEmpty = (counters: Readonly<Record<string, number>>): boolean =>
-  Object.keys(counters).length === 0
-
 /**
  * Everything a tile could show about `obj`, as one string — every field of
  * the view except its `id` and its `stackCount`, the two that differ between
@@ -103,8 +100,12 @@ export function computeBoardEntries(
     if (obj.controller !== pid) continue
     const attachments = attachmentsByHost.get(obj.id) ?? []
     const bucket = bucketOf(obj)
+    // Counters don't keep a tile apart: `tileKey` compares them, so only
+    // permanents with the same counters share a tile. Requiring none split
+    // seven Plants (fewer than the engine stacks, so seven objects on one
+    // tile) into seven tiles once Avenger of Zendikar's landfall gave each
+    // a counter (the user, 2026-10-10).
     const stackable =
-      isEmpty(obj.counters) &&
       attachments.length === 0 &&
       (bucket === 'land'
         ? obj.power === null // a man-land animated to a creature stands alone
