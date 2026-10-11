@@ -2590,4 +2590,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Serra Angel', 'Grizzly Bears', 'Island*3'] },
     }),
   ),
+  preset(
+    'Way of the Pyromancer',
+    board({
+      you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

@@ -7,6 +7,7 @@ import _poolAangAirNomad from "../pool/aang-air-nomad.js";
 import _poolAbundantGrowth from "../pool/abundant-growth.js";
 import _poolAbzanFalconer from "../pool/abzan-falconer.js";
 import _poolAccursedDuneyard from "../pool/accursed-duneyard.js";
+import _poolAjaniResolute from "../pool/ajani-resolute.js";
 import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
@@ -262,6 +263,7 @@ import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
+import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
 import _tokensGoatToken from "../tokens/goat-token.js";
 import _tokensGoblinToken from "../tokens/goblin-token.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
@@ -278,6 +280,7 @@ const shard: CardShard = {
     _poolAbundantGrowth,
     _poolAbzanFalconer,
     _poolAccursedDuneyard,
+    _poolAjaniResolute,
     _poolAkkiAvalanchers,
     _poolAkoumHellhound,
     _poolAlabasterKirin,
@@ -535,6 +538,7 @@ const shard: CardShard = {
   tokens: [
     _tokensBadgerToken,
     _tokensDragonToken55,
+    _tokensForestTentacleToken,
     _tokensGoatToken,
     _tokensGoblinToken,
     _tokensHumanClericToken,

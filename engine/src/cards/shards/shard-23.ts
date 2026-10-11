@@ -189,6 +189,7 @@ import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
+import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -256,6 +257,7 @@ import _poolVandalize from "../pool/vandalize.js";
 import _poolVanishingVerse from "../pool/vanishing-verse.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
+import _poolVerdantKraken from "../pool/verdant-kraken.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
 import _poolVirulentSliver from "../pool/virulent-sliver.js";
@@ -469,6 +471,7 @@ const shard: CardShard = {
     _poolRenegadeTroops,
     _poolRile,
     _poolRimefurReindeer,
+    _poolRoilingCanopy,
     _poolRottedHulk,
     _poolRuneScarredDemon,
     _poolSarkhanFireblood,
@@ -536,6 +539,7 @@ const shard: CardShard = {
     _poolVanishingVerse,
     _poolVashtaNerada,
     _poolVeinRipper,
+    _poolVerdantKraken,
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,
     _poolVirulentSliver,

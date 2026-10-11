@@ -130,6 +130,7 @@ import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
 import _poolKratosStoicFather from "../pool/kratos-stoic-father.js";
+import _poolKwiaVigorbloom from "../pool/kwia-vigorbloom.js";
 import _poolLandTax from "../pool/land-tax.js";
 import _poolLashOfTheWhip from "../pool/lash-of-the-whip.js";
 import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
@@ -180,6 +181,7 @@ import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
+import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
@@ -251,6 +253,7 @@ import _poolVraskaJoinsUp from "../pool/vraska-joins-up.js";
 import _poolWailingGhoul from "../pool/wailing-ghoul.js";
 import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
+import _poolWayOfTheNecromancer from "../pool/way-of-the-necromancer.js";
 import _poolWayfarersBauble from "../pool/wayfarers-bauble.js";
 import _poolWeb from "../pool/web.js";
 import _poolWeldfastWingsmith from "../pool/weldfast-wingsmith.js";
@@ -412,6 +415,7 @@ const shard: CardShard = {
     _poolKilnFiend,
     _poolKishlaSkimmer,
     _poolKratosStoicFather,
+    _poolKwiaVigorbloom,
     _poolLandTax,
     _poolLashOfTheWhip,
     _poolLeoninSnarecaster,
@@ -462,6 +466,7 @@ const shard: CardShard = {
     _poolRecruiterOfTheGuard,
     _poolRelmsSketching,
     _poolResoluteWatchdog,
+    _poolReturnToTheLightRealms,
     _poolRishadanDockhand,
     _poolRiverBear,
     _poolRiverKelpie,
@@ -533,6 +538,7 @@ const shard: CardShard = {
     _poolWailingGhoul,
     _poolWallOfWater,
     _poolWarChariot,
+    _poolWayOfTheNecromancer,
     _poolWayfarersBauble,
     _poolWeb,
     _poolWeldfastWingsmith,

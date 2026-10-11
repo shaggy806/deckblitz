@@ -77,6 +77,7 @@ import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
 import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
+import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
@@ -255,6 +256,7 @@ import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
 import _poolTogetherForever from "../pool/together-forever.js";
+import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTradingPost from "../pool/trading-post.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
@@ -293,6 +295,7 @@ import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
+import _tokensAjanisPridemateToken from "../tokens/ajanis-pridemate-token.js";
 import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
 import _tokensBlackDeathtouchSnakeToken from "../tokens/black-deathtouch-snake-token.js";
 import _tokensBlueBlackFaerieToken from "../tokens/blue-black-faerie-token.js";
@@ -384,6 +387,7 @@ const shard: CardShard = {
     _poolEmbraalGearSmasher,
     _poolEncroachingDragonstorm,
     _poolEndRazeForerunners,
+    _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
     _poolErodedCanyon,
     _poolEssenceFlux,
@@ -562,6 +566,7 @@ const shard: CardShard = {
     _poolTimidShieldbearer,
     _poolToadstoolAdmirer,
     _poolTogetherForever,
+    _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,
     _poolTradingPost,
     _poolTreeOfPerdition,
@@ -602,6 +607,7 @@ const shard: CardShard = {
     _poolZodiacHorse,
   ],
   tokens: [
+    _tokensAjanisPridemateToken,
     _tokensBirdIllusionToken,
     _tokensBlackDeathtouchSnakeToken,
     _tokensBlueBlackFaerieToken,

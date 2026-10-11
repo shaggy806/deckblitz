@@ -283,6 +283,7 @@ import _poolVindicate from "../pool/vindicate.js";
 import _poolVoraciousFellBeast from "../pool/voracious-fell-beast.js";
 import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
 import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
+import _poolVraskaSoulOfStone from "../pool/vraska-soul-of-stone.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
@@ -588,6 +589,7 @@ const shard: CardShard = {
     _poolVoraciousFellBeast,
     _poolVoyagerQuickwelder,
     _poolVraanExecutionerThane,
+    _poolVraskaSoulOfStone,
     _poolWallOfFire,
     _poolWandOfOrcus,
     _poolWanderingMusicians,

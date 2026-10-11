@@ -144,6 +144,7 @@ import _poolLance from "../pool/lance.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
+import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
@@ -170,6 +171,7 @@ import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
+import _poolPiaAetherAscetic from "../pool/pia-aether-ascetic.js";
 import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
@@ -283,6 +285,7 @@ import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
+import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
 import _tokensSoldierToken from "../tokens/soldier-token.js";
 import _tokensSpawnTokenSpawningPit from "../tokens/spawn-token-spawning-pit.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
@@ -431,6 +434,7 @@ const shard: CardShard = {
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
     _poolLavaDart,
+    _poolLichsRelic,
     _poolLightningElemental,
     _poolLordWindgrace,
     _poolLoyalSubordinate,
@@ -457,6 +461,7 @@ const shard: CardShard = {
     _poolPathOfAncestry,
     _poolPestMascot,
     _poolPhyrexianGhoul,
+    _poolPiaAetherAscetic,
     _poolPlatedGeopede,
     _poolPoisonTipArcher,
     _poolPrideGuardian,
@@ -572,6 +577,7 @@ const shard: CardShard = {
   tokens: [
     _tokensDragonTokenAvatarRoku,
     _tokensSandWarriorToken,
+    _tokensSculptureTreasureToken,
     _tokensSoldierToken,
     _tokensSpawnTokenSpawningPit,
     _tokensWallToken13,

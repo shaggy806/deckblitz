@@ -59,6 +59,7 @@ import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
+import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
 import _poolCrypticCommand from "../pool/cryptic-command.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
@@ -101,9 +102,11 @@ import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
+import _poolGardenize from "../pool/gardenize.js";
 import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
+import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
 import _poolGlamdring from "../pool/glamdring.js";
@@ -131,6 +134,7 @@ import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
+import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
@@ -244,6 +248,7 @@ import _poolThunderSpirit from "../pool/thunder-spirit.js";
 import _poolThunderingRaiju from "../pool/thundering-raiju.js";
 import _poolTidechannelPathway from "../pool/tidechannel-pathway.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
+import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
 import _poolTrashTheTown from "../pool/trash-the-town.js";
@@ -279,6 +284,7 @@ import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
 import _poolZodiacMonkey from "../pool/zodiac-monkey.js";
 import _tokensBeastToken33 from "../tokens/beast-token-3-3.js";
 import _tokensBlueBirdToken from "../tokens/blue-bird-token.js";
+import _tokensCadet from "../tokens/cadet.js";
 import _tokensCitizenToken from "../tokens/citizen-token.js";
 import _tokensDragonTokenFirebreathing from "../tokens/dragon-token-firebreathing.js";
 import _tokensEldraziSpawnToken from "../tokens/eldrazi-spawn-token.js";
@@ -350,6 +356,7 @@ const shard: CardShard = {
     _poolCoretapper,
     _poolCorruptCourtOfficial,
     _poolCrackTheEarth,
+    _poolCraterclawColossus,
     _poolCrumbAndGetIt,
     _poolCrypticCommand,
     _poolCultivatorsCaravan,
@@ -392,9 +399,11 @@ const shard: CardShard = {
     _poolFrozenShade,
     _poolFyndhornElves,
     _poolGalvanicBlast,
+    _poolGardenize,
     _poolGeistOfTheArchives,
     _poolGenerousEnt,
     _poolGenerousPup,
+    _poolGhaltaTheUnstoppable,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
     _poolGlamdring,
@@ -422,6 +431,7 @@ const shard: CardShard = {
     _poolJarvisEarthsMightiestButler,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
+    _poolKindredJudgment,
     _poolKingDarienXlviii,
     _poolKujaGenomeSorcerer,
     _poolLathlissDragonQueen,
@@ -535,6 +545,7 @@ const shard: CardShard = {
     _poolThunderingRaiju,
     _poolTidechannelPathway,
     _poolTimeSieve,
+    _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
     _poolTouchOfBrilliance,
     _poolTrashTheTown,
@@ -572,6 +583,7 @@ const shard: CardShard = {
   tokens: [
     _tokensBeastToken33,
     _tokensBlueBirdToken,
+    _tokensCadet,
     _tokensCitizenToken,
     _tokensDragonTokenFirebreathing,
     _tokensEldraziSpawnToken,

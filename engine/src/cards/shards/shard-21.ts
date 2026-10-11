@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
+import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -162,6 +163,7 @@ import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
+import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
@@ -269,6 +271,7 @@ const shard: CardShard = {
   pool: [
     _poolAangAtTheCrossroads,
     _poolAbueloAncestralEcho,
+    _poolAeridKonstrari,
     _poolAlpineWatchdog,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -426,6 +429,7 @@ const shard: CardShard = {
     _poolOpposition,
     _poolOrazcaRaptor,
     _poolOrzhovSignet,
+    _poolOverwriteTheMultiverse,
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPathOfAngersFlame,

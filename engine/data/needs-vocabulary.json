@@ -5214,6 +5214,38 @@
   "replacement:enter-replacement-sacrifice": {
    "family": "replacement:new-event-replacements",
    "example": "Lotus Vale: 'If this land would enter, sacrifice two untapped lands instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard.'"
+  },
+  "effect:duration-until-card-cast": {
+   "family": "effect:duration-extensions",
+   "example": "Emrakul, the Exigent Doom: a land gains '{T}: Add {C}{C}' until this card is cast from exile; it keeps it if the card leaves exile otherwise."
+  },
+  "static:planeswalker-zero-loyalty-survives": {
+   "family": "static:legend-rule-exemptions",
+   "example": "Sanctum Lurker: 'Planeswalkers you control aren't put into their owners' graveyards for having 0 loyalty' — an exemption from SBA 704.5i."
+  },
+  "effect:legend-rule-off-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Hall of Echoes: 'The legend rule doesn't apply to permanents you control this turn' — a player-effect, not an ability of the copy."
+  },
+  "replacement:artifact-tokens-instead": {
+   "family": "replacement:token-creation-additive",
+   "example": "Draconic Visitor: 'If one or more artifact tokens would be created under your control, that many 5/5 red Dragon creature tokens with flying are created instead.'"
+  },
+  "effect:target-spell-or-creature": {
+   "family": "effect:target-spec-additions",
+   "example": "Fatehold Charm: 'Return target spell or creature to its owner's hand' — any spell, or a creature permanent, in one slot."
+  },
+  "effect:delayed-trigger-until-your-next-turn": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Jace, Reality Sculptor: −3 'until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -5/-0 until end of turn'"
+  },
+  "effect:count-subtypes-among": {
+   "family": "effect:amount-new-variants",
+   "example": "Tam, the Possibility: X is 'the number of planeswalker types among planeswalkers you control'"
+  },
+  "decision:cast-copies-total-mana-value": {
+   "family": "decision:free-cast-choices",
+   "example": "Uldaros Theorix: copy up to one exiled card of each card type, then cast any number of the copies free with total mana value 6 or less — cast-now's copies + repeat have no total-mana-value cap"
   }
  }
 }

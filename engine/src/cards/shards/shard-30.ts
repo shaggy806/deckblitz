@@ -156,6 +156,7 @@ import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
 import _poolLoporritScout from "../pool/loporrit-scout.js";
+import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -442,6 +443,7 @@ const shard: CardShard = {
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
     _poolLoporritScout,
+    _poolLoyalTutor,
     _poolLumengridGargoyle,
     _poolManyPartings,
     _poolMarkovPatrician,

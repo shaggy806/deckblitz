@@ -326,6 +326,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ["Regenerate ~.", { kind: "regenerate", target: "source" }],
     ["Transform ~.", { kind: "transform", target: "source" }],
     ["The Ring tempts you.", { kind: "the-ring-tempts-you" }],
+    ["Empower Jace 2.", { kind: "empower-jace", amount: 2 }],
     [
       "~ deals 3 damage to any target and 1 damage to you.",
       {

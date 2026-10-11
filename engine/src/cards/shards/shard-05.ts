@@ -295,6 +295,7 @@ import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
 import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.js";
+import _tokensJaceToken from "../tokens/jace-token.js";
 import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
@@ -595,6 +596,7 @@ const shard: CardShard = {
     _tokensHalflingToken,
     _tokensHumanSoldierToken,
     _tokensInsectTokenFlyingHaste,
+    _tokensJaceToken,
     _tokensRatTokenVren,
     _tokensRobotVillainToken,
     _tokensZombieTokenOnWingsOfGold,

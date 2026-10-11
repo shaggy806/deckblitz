@@ -235,7 +235,8 @@
   "mechanic:the-ring",
   "mechanic:dice-rolling",
   "effect:random-choice",
-  "mechanic:kindred-card-type"
+  "mechanic:kindred-card-type",
+  "static:grant-loyalty-abilities"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -1,0 +1,438 @@
+{
+  "batch": "B50",
+  "status": "complete",
+  "ranks": "Reality Fracture (FRA, 2026-10-02): top 50% by EDHREC rank — its first 60 new cards (Commander-legal first printings), with Empower Jace built this batch (rule 701.71a)",
+  "authored": [
+    {
+      "name": "Samut, Hazoret's Champion",
+      "files": [
+        "engine/src/cards/pool/samut-hazorets-champion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ajani's Anguish",
+      "files": [
+        "engine/src/cards/pool/ajanis-anguish.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Theorist, Jace Beleren",
+      "files": [
+        "engine/src/cards/pool/the-theorist-jace-beleren.ts",
+        "engine/src/cards/tokens/illusion-token-plain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Geist of Saint Thalia",
+      "files": [
+        "engine/src/cards/pool/geist-of-saint-thalia.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Liliana the Faultless",
+      "files": [
+        "engine/src/cards/pool/liliana-the-faultless.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Samut, Tyrant of Naktamun",
+      "files": [
+        "engine/src/cards/pool/samut-tyrant-of-naktamun.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Craterclaw Colossus",
+      "files": [
+        "engine/src/cards/pool/craterclaw-colossus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flickering Hound",
+      "files": [
+        "engine/src/cards/pool/flickering-hound.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pia, Aether Ascetic",
+      "files": [
+        "engine/src/cards/pool/pia-aether-ascetic.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hexhaven Invigorator",
+      "files": [
+        "engine/src/cards/pool/hexhaven-invigorator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ajani Resolute",
+      "files": [
+        "engine/src/cards/pool/ajani-resolute.ts",
+        "engine/src/cards/tokens/ajanis-pridemate-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Loyal Tutor",
+      "files": [
+        "engine/src/cards/pool/loyal-tutor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ghalta the Unstoppable",
+      "files": [
+        "engine/src/cards/pool/ghalta-the-unstoppable.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vraska, Soul of Stone",
+      "files": [
+        "engine/src/cards/pool/vraska-soul-of-stone.ts",
+        "engine/src/cards/tokens/sculpture-treasure-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Verdant Kraken",
+      "files": [
+        "engine/src/cards/pool/verdant-kraken.ts",
+        "engine/src/cards/tokens/forest-tentacle-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Pyromancer",
+      "files": [
+        "engine/src/cards/pool/way-of-the-pyromancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ingris Stingerquill",
+      "files": [
+        "engine/src/cards/pool/ingris-stingerquill.ts",
+        "engine/src/cards/tokens/cadet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Return to the Light Realms",
+      "files": [
+        "engine/src/cards/pool/return-to-the-light-realms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kwia Vigorbloom",
+      "files": [
+        "engine/src/cards/pool/kwia-vigorbloom.ts",
+        "engine/src/cards/tokens/lotus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kindred Judgment",
+      "files": [
+        "engine/src/cards/pool/kindred-judgment.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aerid Konstrari",
+      "files": [
+        "engine/src/cards/pool/aerid-konstrari.ts",
+        "engine/src/cards/tokens/heartwood-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana the Repentant",
+      "files": [
+        "engine/src/cards/pool/liliana-the-repentant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enlightened Confidant",
+      "files": [
+        "engine/src/cards/pool/enlightened-confidant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Simulacrum Shaper",
+      "files": [
+        "engine/src/cards/pool/simulacrum-shaper.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Way of the Necromancer",
+      "files": [
+        "engine/src/cards/pool/way-of-the-necromancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Roiling Canopy",
+      "files": [
+        "engine/src/cards/pool/roiling-canopy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Overwrite the Multiverse",
+      "files": [
+        "engine/src/cards/pool/overwrite-the-multiverse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tomik, Izzet Sparkmage",
+      "files": [
+        "engine/src/cards/pool/tomik-izzet-sparkmage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vigorbloom Charm",
+      "files": [
+        "engine/src/cards/pool/vigorbloom-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tinybones, Pocket Nuisance",
+      "files": [
+        "engine/src/cards/pool/tinybones-pocket-nuisance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lyra, Archangel of Dawn",
+      "files": [
+        "engine/src/cards/pool/lyra-archangel-of-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ghalta the Immovable",
+      "files": [
+        "engine/src/cards/pool/ghalta-the-immovable.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lich's Relic",
+      "files": [
+        "engine/src/cards/pool/lichs-relic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Koth, the Geomancer",
+      "files": [
+        "engine/src/cards/pool/koth-the-geomancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sphinx of False Conclusions",
+      "files": [
+        "engine/src/cards/pool/sphinx-of-false-conclusions.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gideon's Memorial",
+      "files": [
+        "engine/src/cards/pool/gideons-memorial.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Mentor",
+      "files": [
+        "engine/src/cards/pool/way-of-the-mentor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gardenize",
+      "files": [
+        "engine/src/cards/pool/gardenize.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Ajani Unrelenting",
+      "needs": [
+        "trigger:activates-ability"
+      ],
+      "why": "'Whenever you activate a loyalty ability' — activates-ability only has who: \"attached\"; the rest of the card is expressible."
+    },
+    {
+      "name": "Emrakul, the Exigent Doom",
+      "needs": [
+        "effect:duration-until-card-cast"
+      ],
+      "why": "The granted '{T}: Add {C}{C}' lasts 'until this card is cast from exile' and outlives the card leaving exile any other way (the ruling) — no such duration."
+    },
+    {
+      "name": "Chandra, Chill of Compliance",
+      "needs": [
+        "cost:loyalty-x"
+      ],
+      "why": "−X loyalty cost (Put X stun counters) isn't modeled."
+    },
+    {
+      "name": "Sanctum Lurker",
+      "needs": [
+        "static:planeswalker-zero-loyalty-survives",
+        "static:grant-loyalty-abilities"
+      ],
+      "why": "No exemption from the 704.5i 0-loyalty SBA, and no static granting a loyalty ability (+2) to planeswalkers you control."
+    },
+    {
+      "name": "Hall of Echoes",
+      "needs": [
+        "effect:legend-rule-off-this-turn"
+      ],
+      "why": "'The legend rule doesn't apply to permanents you control this turn' is a player effect for the turn; a copy exception's legendRuleOff would end early if Hall stops being a copy or loses abilities, and would be copied by a Clone."
+    },
+    {
+      "name": "Draconic Visitor",
+      "needs": [
+        "replacement:artifact-tokens-instead"
+      ],
+      "why": "would-create-token substitution exists only for creature tokens (creatureTokensInstead, Divine Visitation); none for artifact tokens."
+    },
+    {
+      "name": "Fatehold Charm",
+      "needs": [
+        "effect:target-spell-or-creature"
+      ],
+      "why": "'Target spell or creature': spell-or-permanent's one filter applies to both, so any spell plus only creature permanents can't be said (no zone clause in CardFilter)."
+    },
+    {
+      "name": "Denzilore Fatehold",
+      "needs": [
+        "trigger:scry-trigger"
+      ],
+      "why": "'Whenever you scry or surveil' — only a surveil trigger (on: surveils) exists; nothing triggers on a scry."
+    },
+    {
+      "name": "Jace, Reality Sculptor",
+      "needs": [
+        "effect:delayed-trigger-until-your-next-turn"
+      ],
+      "why": "−3 'until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -5/-0' needs a delayed 'whenever' trigger lasting until your next turn; the +1 and the 0 are expressible."
+    },
+    {
+      "name": "Bloodline Recollector // Ancestral Craving",
+      "needs": [
+        "mechanic:prepare"
+      ],
+      "why": "Prepare layout / 'becomes prepared' isn't modeled."
+    },
+    {
+      "name": "Heartwood Crafter // Soul Tether",
+      "needs": [
+        "mechanic:prepare"
+      ],
+      "why": "'Enters prepared' and the prepare spell aren't modeled."
+    },
+    {
+      "name": "Jace's Machinations",
+      "needs": [
+        "effect:instant-speed-loyalty"
+      ],
+      "why": "'Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control … any time you could cast an instant' has no vocabulary."
+    },
+    {
+      "name": "Theorist's Sanctum",
+      "needs": [
+        "keyword:behold"
+      ],
+      "why": "'You may behold a Jace. If you don't, this land enters tapped' — behold (choose a Jace you control or reveal one from hand) isn't built; tappedUnlessRevealFromHand only covers the hand half."
+    },
+    {
+      "name": "Tam, the Possibility",
+      "needs": [
+        "effect:repeat-effect-x-times",
+        "effect:count-subtypes-among"
+      ],
+      "why": "'Proliferate X times' needs a repeat, and X = 'the number of planeswalker types among planeswalkers you control' has no amount."
+    },
+    {
+      "name": "Way of the Paradox",
+      "needs": [
+        "trigger:activates-ability"
+      ],
+      "why": "'Whenever you activate a loyalty ability' — activates-ability only has who: 'attached'."
+    },
+    {
+      "name": "Woodwork Prodigy // Soul Tether",
+      "needs": [
+        "mechanic:prepare"
+      ],
+      "why": "Prepare layout / becoming prepared (a castable copy of the prepare spell in exile) isn't modeled."
+    },
+    {
+      "name": "Countersculpt",
+      "needs": [
+        "keyword:behold"
+      ],
+      "why": "Additional cost 'behold a Jace or pay {1}': behold isn't built."
+    },
+    {
+      "name": "Way of the Mind Sculptor",
+      "needs": [
+        "trigger:activates-ability"
+      ],
+      "why": "'Whenever you activate a loyalty ability, if you removed two or more loyalty counters' — activates-ability is who: \"attached\" only, and the ability-activated event carries no loyalty cost."
+    },
+    {
+      "name": "Plan for All Outcomes",
+      "needs": [
+        "decision:owner-chooses-top-or-bottom"
+      ],
+      "why": "The target's owner chooses top or bottom of their library; put-on-library has a fixed position and each-player-may only reaches a target's controller, not its owner."
+    },
+    {
+      "name": "Garruk, Curse Breaker",
+      "needs": [
+        "trigger:attack-batch-per-defender-those-creatures"
+      ],
+      "why": "−4 sets up an until-your-next-turn 'whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and trample' — a per-defender attack batch acting on those attackers, held as a temporary trigger."
+    },
+    {
+      "name": "Yoshimaru, Beloved Companion",
+      "needs": [
+        "replacement:counter-addend-replacement"
+      ],
+      "why": "'That many plus one +1/+1 counters' — would-add-counter is a multiplier only."
+    },
+    {
+      "name": "Uldaros Theorix",
+      "needs": [
+        "decision:cast-copies-total-mana-value"
+      ],
+      "why": "Cast any number of the copies 'with total mana value 6 or less' — cast-now's copies/repeat have no running total-mana-value cap."
+    }
+  ]
+}

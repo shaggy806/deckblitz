@@ -947,6 +947,9 @@ export type BoardManaList =
    */
   | { readonly eachColorAmong: CardFilter };
 
+/** "A Jace planeswalker token you control" (rule 701.71a). */
+const JACE_TOKEN: CardFilter = { type: "planeswalker", subtype: "Jace", token: true, controlledBy: "you" };
+
 export type EffectSpec =
   | {
       /** Apply several effects in order, sharing the same targets and X.
@@ -3450,6 +3453,21 @@ export type EffectSpec =
        * daybound/nightbound permanents transform to match. */
       readonly kind: "day-night";
       readonly value: "day" | "night";
+    }
+  | {
+      /**
+       * Empower Jace N (rule 701.71a): "If you don't control a Jace
+       * planeswalker token, create a blue Jace planeswalker token with 0
+       * loyalty, '[−1]: Surveil 1,' and '[−3]: Draw a card.' Choose a Jace
+       * planeswalker token you control. Put N loyalty counters on it." Only a
+       * Jace planeswalker *token* counts — never a nontoken Jace, but a copy
+       * token does (the rulings); with one, nothing is asked; with several
+       * (a Doubling Season made two), the effect's controller chooses (a
+       * `choose-permanents`). The counters are `add-counter`'s, so a counter
+       * replacement applies.
+       */
+      readonly kind: "empower-jace";
+      readonly amount: EffectAmount;
     }
   | {
       /** A player becomes the monarch (rule 720 — ROADMAP Phase 10). `who`
@@ -6542,6 +6560,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
       applyEffectSpec(spec.effect, ctx.aboutPlayer(spec.player));
       return;
+    case "empower-jace": {
+      const amount = amountValue(spec.amount, ctx);
+      // No Jace planeswalker token: create one first (it enters with 0
+      // loyalty; the counters come in the same resolution, before any
+      // state-based check).
+      if (ctx.permanentsMatching(JACE_TOKEN).length === 0) {
+        applyEffectSpec({ kind: "create-token", token: "Jace Token", count: 1 }, ctx);
+      }
+      const jaces = ctx.permanentsMatching(JACE_TOKEN);
+      const onIt: EffectSpec = { kind: "add-counter", target: 0, counter: "loyalty", amount };
+      if (jaces.length === 1 && jaces[0].count === 1) {
+        applyEffectSpec(onIt, ctx.withTargets([{ kind: "object", object: jaces[0].object }]));
+      } else if (jaces.length > 0) {
+        ctx.choosePermanents(JACE_TOKEN, 1, 1, onIt, "Choose a Jace token to empower");
+      }
+      return;
+    }
     case "choose-random-card": {
       const whose = spec.whose ?? "you";
       let owner: PlayerId | undefined;

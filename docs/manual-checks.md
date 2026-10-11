@@ -4373,3 +4373,17 @@ stack count once per token)
   graveyard.
 - **Known limits:** None known.
 
+### Way of the Pyromancer
+
+*Careful rules call* — Empower Jace (rule 701.71a), and a granted loyalty ability that adds mana isn't a mana ability
+
+- **Setup:** Your precombat main. Your battlefield: Chandra, Torch of Defiance and four Mountains. Your
+  hand: Way of the Pyromancer and Lightning Bolt. Bob: Hill Giant.
+- **Do:** Cast Way of the Pyromancer. Then open the Jace token's menu and activate "+1: Add {R}"; let it
+  resolve and cast Lightning Bolt with the {R}. Open Chandra's menu.
+- **Check:** Way's trigger creates a blue Jace planeswalker token with 2 loyalty (−1: Surveil 1, −3: Draw a
+  card). The Jace token and Chandra each show "+1: Add {R}" beside their own abilities. Activating it on the
+  Jace token puts it on the stack (it isn't a mana ability: the stack shows it, Bob gets priority) and raises
+  the token to 3; once it resolves the {R} is in your pool. The Jace token then offers no other loyalty ability
+  this turn; Chandra still offers all hers.
+- **Known limits:** None known.

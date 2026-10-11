@@ -88,6 +88,7 @@ import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.j
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
+import _poolGideonsMemorial from "../pool/gideons-memorial.js";
 import _poolGigglingSkitterspike from "../pool/giggling-skitterspike.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
@@ -130,6 +131,7 @@ import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
+import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
 import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dragon.js";
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
@@ -364,6 +366,7 @@ const shard: CardShard = {
     _poolGelectrode,
     _poolGenerousVisitor,
     _poolGhostlySentinel,
+    _poolGideonsMemorial,
     _poolGigglingSkitterspike,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
@@ -406,6 +409,7 @@ const shard: CardShard = {
     _poolLairOfTheHydra,
     _poolLegolassQuickReflexes,
     _poolLonelySandbar,
+    _poolLyraArchangelOfDawn,
     _poolMaelstromOfTheSpiritDragon,
     _poolMagesGuile,
     _poolMagmaticForce,

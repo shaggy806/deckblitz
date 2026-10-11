@@ -264,6 +264,7 @@ import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
+import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThragtusk from "../pool/thragtusk.js";
@@ -281,6 +282,7 @@ import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
+import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
@@ -571,6 +573,7 @@ const shard: CardShard = {
     _poolTerritorialHellkite,
     _poolTheMightstoneAndWeakstone,
     _poolTheMycotyrant,
+    _poolTheTheoristJaceBeleren,
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThragtusk,
@@ -588,6 +591,7 @@ const shard: CardShard = {
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
     _poolVigilantDrake,
+    _poolVigorbloomCharm,
     _poolVihaanGoldwaker,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,

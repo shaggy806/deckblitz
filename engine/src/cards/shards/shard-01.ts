@@ -112,6 +112,7 @@ import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
 import _poolKorHalberd from "../pool/kor-halberd.js";
 import _poolKothFireOfResistance from "../pool/koth-fire-of-resistance.js";
+import _poolKothTheGeomancer from "../pool/koth-the-geomancer.js";
 import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
@@ -181,6 +182,7 @@ import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
 import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-faces.js";
+import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
@@ -374,6 +376,7 @@ const shard: CardShard = {
     _poolKodamaOfTheWestTree,
     _poolKorHalberd,
     _poolKothFireOfResistance,
+    _poolKothTheGeomancer,
     _poolKrenkoTinStreetKingpin,
     _poolLapisOrbOfDragonkind,
     _poolLavaSpike,
@@ -443,6 +446,7 @@ const shard: CardShard = {
     _poolRummagingWizard,
     _poolRuthlessDeathfang,
     _poolSakashimaOfAThousandFaces,
+    _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
     _poolSavageMansion,
     _poolSavannah,

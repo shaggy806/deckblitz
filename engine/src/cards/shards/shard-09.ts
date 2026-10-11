@@ -192,6 +192,7 @@ import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
+import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -477,6 +478,7 @@ const shard: CardShard = {
     _poolSaberclawGolem,
     _poolSacredPeaks,
     _poolSakashimaTheImpostor,
+    _poolSamutHazoretsChampion,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
     _poolSavaiCrystal,

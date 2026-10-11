@@ -124,6 +124,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-permanents": none,
   // Its `then` reads the card it picked as target 0.
   "choose-random-card": none,
+  "empower-jace": none,
   damage: (n, v) => {
     v.touch(n.target, "harm", MAJOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);

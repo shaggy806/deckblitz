@@ -959,6 +959,7 @@ export function parseSentence(sentence, ctx) {
     return { kind: "damage-all", filter: { type: "creature", notKeyword: "flying" }, amount: amount(m[1]) };
   }
   if (re("the Ring tempts you").test(s)) return { kind: "the-ring-tempts-you" };
+  if ((m = re(`empower Jace ${N}`).exec(s))) return { kind: "empower-jace", amount: amount(m[1]) };
   if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
   if ((m = re(`put (target card from a graveyard) on the bottom of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "bottom" };

@@ -7,6 +7,7 @@ import _poolAIMBot from "../pool/a-i-m-bot.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAhriman from "../pool/ahriman.js";
+import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
@@ -90,6 +91,7 @@ import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
+import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
@@ -128,6 +130,7 @@ import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeatherbackBaloth from "../pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "../pool/leatherhead-iron-gator.js";
 import _poolLeoninSunStandard from "../pool/leonin-sun-standard.js";
+import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLongRangeSensor from "../pool/long-range-sensor.js";
@@ -291,6 +294,7 @@ const shard: CardShard = {
     _poolAdaptiveTrainingPost,
     _poolAerieMystics,
     _poolAhriman,
+    _poolAjanisAnguish,
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
     _poolAltarsReap,
@@ -374,6 +378,7 @@ const shard: CardShard = {
     _poolFumeSpitter,
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,
+    _poolGhaltaTheImmovable,
     _poolGhostSpectralSaboteur,
     _poolGhoulcallerGisa,
     _poolGiantScorpion,
@@ -412,6 +417,7 @@ const shard: CardShard = {
     _poolLeatherbackBaloth,
     _poolLeatherheadIronGator,
     _poolLeoninSunStandard,
+    _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
     _poolLlanowarStalker,
     _poolLongRangeSensor,

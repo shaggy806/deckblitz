@@ -214,6 +214,7 @@ import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
+import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
@@ -267,6 +268,7 @@ import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
+import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
@@ -496,6 +498,7 @@ const shard: CardShard = {
     _poolShockingGrasp,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
+    _poolSimulacrumShaper,
     _poolSinewSliver,
     _poolSinisterHideout,
     _poolSinisterMonolith,
@@ -549,6 +552,7 @@ const shard: CardShard = {
     _poolVowOfDuty,
     _poolWarMammoth,
     _poolWasteland,
+    _poolWayOfThePyromancer,
     _poolWelderAutomaton,
     _poolWildernessReclamation,
     _poolWitchBlessedMeadow,

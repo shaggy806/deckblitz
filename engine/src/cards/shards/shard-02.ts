@@ -122,6 +122,7 @@ import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
+import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
@@ -398,6 +399,7 @@ const shard: CardShard = {
     _poolHyraxTowerScout,
     _poolImpulsivity,
     _poolInfectiousHost,
+    _poolIngrisStingerquill,
     _poolIonasJudgment,
     _poolJackdaw,
     _poolJawsOfDefeat,

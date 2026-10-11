@@ -123,6 +123,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
+import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
 import _poolLlanowarBehemoth from "../pool/llanowar-behemoth.js";
@@ -428,6 +429,7 @@ const shard: CardShard = {
     _poolKyoshiWarriorGuard,
     _poolLastWord,
     _poolLightningWolf,
+    _poolLilianaTheRepentant,
     _poolLionheartMaverick,
     _poolLiquimetalCoating,
     _poolLlanowarBehemoth,

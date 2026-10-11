@@ -96,6 +96,7 @@ import _poolFireball from "../pool/fireball.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
+import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
@@ -113,6 +114,7 @@ import _poolHerdBaloth from "../pool/herd-baloth.js";
 import _poolHeritageDruid from "../pool/heritage-druid.js";
 import _poolHermesOverseerOfElpis from "../pool/hermes-overseer-of-elpis.js";
 import _poolHerosHeirloom from "../pool/heros-heirloom.js";
+import _poolHexhavenInvigorator from "../pool/hexhaven-invigorator.js";
 import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
@@ -374,6 +376,7 @@ const shard: CardShard = {
     _poolFootSoldiers,
     _poolFrontierGuide,
     _poolGadwickTheWizened,
+    _poolGeistOfSaintThalia,
     _poolGeothermalCrevice,
     _poolGiftedAetherborn,
     _poolGilacorn,
@@ -391,6 +394,7 @@ const shard: CardShard = {
     _poolHeritageDruid,
     _poolHermesOverseerOfElpis,
     _poolHerosHeirloom,
+    _poolHexhavenInvigorator,
     _poolHexingSquelcher,
     _poolHiddenGrotto,
     _poolHollowmurkSiege,

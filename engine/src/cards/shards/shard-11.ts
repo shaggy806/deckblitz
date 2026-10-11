@@ -251,6 +251,7 @@ import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
+import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
@@ -305,6 +306,7 @@ import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
+import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolSongOfFreyalise,
     _poolSorinRavenousNeonate,
     _poolSowingMycospawn,
+    _poolSphinxOfFalseConclusions,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
     _poolSporecrownThallid,
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolVodalianHypnotist,
     _poolWatcherOfTheWayside,
     _poolWaterfallAerialist,
+    _poolWayOfTheMentor,
     _poolWaywardGiant,
     _poolWhiptongueHydra,
     _poolWieldingTheGreenDragon,

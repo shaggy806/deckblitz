@@ -90,6 +90,7 @@ import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
 import _poolFlameshadowConjuring from "../pool/flameshadow-conjuring.js";
+import _poolFlickeringHound from "../pool/flickering-hound.js";
 import _poolFloralEvoker from "../pool/floral-evoker.js";
 import _poolFogBank from "../pool/fog-bank.js";
 import _poolFog from "../pool/fog.js";
@@ -275,6 +276,7 @@ import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
+import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
@@ -369,6 +371,7 @@ const shard: CardShard = {
     _poolFlameJavelin,
     _poolFlameRift,
     _poolFlameshadowConjuring,
+    _poolFlickeringHound,
     _poolFloralEvoker,
     _poolFogBank,
     _poolFog,
@@ -556,6 +559,7 @@ const shard: CardShard = {
     _tokensAlienWarriorToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
+    _tokensIllusionTokenPlain,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
     _tokensRedWhiteSoldierHasteToken,

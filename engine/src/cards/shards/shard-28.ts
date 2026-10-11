@@ -282,6 +282,7 @@ import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
+import _tokensLotus from "../tokens/lotus.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 
 const shard: CardShard = {
@@ -567,6 +568,7 @@ const shard: CardShard = {
     _tokensElementalTokenWildfireAwakener,
     _tokensHumanMonkToken,
     _tokensKithkinToken,
+    _tokensLotus,
     _tokensRedHumanToken,
   ],
 };
