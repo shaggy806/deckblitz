@@ -19,6 +19,7 @@ import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
+import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
@@ -84,6 +85,7 @@ import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
+import _poolEasyPickings from "../pool/easy-pickings.js";
 import _poolElfhamePalace from "../pool/elfhame-palace.js";
 import _poolElvenChorus from "../pool/elven-chorus.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
@@ -319,6 +321,7 @@ const shard: CardShard = {
     _poolArchmageEmeritus,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
+    _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
     _poolAvenReedstalker,
     _poolBarbarianRing,
@@ -384,6 +387,7 @@ const shard: CardShard = {
     _poolDryadsFavor,
     _poolDuskdaleWurm,
     _poolDwynenGiltLeafDaen,
+    _poolEasyPickings,
     _poolElfhamePalace,
     _poolElvenChorus,
     _poolEmeraldOryx,

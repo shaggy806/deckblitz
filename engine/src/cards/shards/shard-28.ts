@@ -278,6 +278,7 @@ import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
+import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
 import _poolZap from "../pool/zap.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
@@ -564,6 +565,7 @@ const shard: CardShard = {
     _poolWhisperAgent,
     _poolWingsOfAesthir,
     _poolYunaGrandSummoner,
+    _poolYurikoHopeFromTheShadows,
     _poolZap,
     _poolZeganaUtopianSpeaker,
     _poolZendikarFarguide,

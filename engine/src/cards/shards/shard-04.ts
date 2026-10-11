@@ -154,6 +154,7 @@ import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.j
 import _poolManaConfluence from "../pool/mana-confluence.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMawcor from "../pool/mawcor.js";
+import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMoxJet from "../pool/mox-jet.js";
@@ -249,6 +250,7 @@ import _poolTerminate from "../pool/terminate.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
+import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
 import _poolTipTheScales from "../pool/tip-the-scales.js";
@@ -446,6 +448,7 @@ const shard: CardShard = {
     _poolManaConfluence,
     _poolMarneusCalgar,
     _poolMawcor,
+    _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMindfulBiomancer,
     _poolMoxJet,
@@ -541,6 +544,7 @@ const shard: CardShard = {
     _poolTheReaperKingNoMore,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
+    _poolThorinOakenshield,
     _poolThrorsMap,
     _poolTigerClaws,
     _poolTipTheScales,

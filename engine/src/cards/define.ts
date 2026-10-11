@@ -158,6 +158,13 @@ export type Keyword =
    * a static granting it to others (Rhythm of the Wild) isn't read as they
    * enter (AUTHORING §15). */
   | "riot"
+  /** Storied (rule 702.195a) — a static ability: any time its controller
+   * controls three or more permanents that are artifacts, Sagas and/or
+   * legendary, they have an enduring story for the rest of the game
+   * (`PlayerState.enduringStory`, `Game.grantEnduringStories`). Read off the
+   * permanent's current keywords, so one that lost its abilities grants
+   * nothing. */
+  | "storied"
   /** Infect (rule 702.90): damage this deals to a player gives them that
    * many poison counters instead of costing life (120.3b), and damage it
    * deals to a creature is that many -1/-1 counters instead of marked damage
@@ -522,6 +529,10 @@ export type StaticCondition =
   | { readonly kind: "opponent-count"; readonly atLeast: number }
   /** It's your turn. */
   | { readonly kind: "your-turn" }
+  /** You have an enduring story (rule 702.195 — storied's designation):
+   * "as long as you have an enduring story" (Fíli the Pathfinder), "if you
+   * have an enduring story" (Balin, Loremaster). */
+  | { readonly kind: "enduring-story" }
   /**
    * A player has at least `atLeast` counters of a kind (rule 122.1) — you,
    * or *some one* opponent counted on their own: corrupted's "as long as an

@@ -2602,6 +2602,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Fíli the Pathfinder, Bifur, Melodic Rider',
+    board({
+      you: {
+        bf: ['Fíli the Pathfinder', 'Mountain*4', 'Plains*4'],
+        hand: ['Sol Ring', 'Bifur, Melodic Rider', "Dáin's Company"],
+      },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

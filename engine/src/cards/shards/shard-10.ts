@@ -256,6 +256,7 @@ import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
+import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
@@ -565,6 +566,7 @@ const shard: CardShard = {
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
     _poolTheMindskinner,
+    _poolTheMistyMountainsCold,
     _poolTheSeriema,
     _poolThopterArchitect,
     _poolThoughtScour,

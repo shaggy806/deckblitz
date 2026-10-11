@@ -32,6 +32,7 @@ import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
 import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
+import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBladetuskBoar from "../pool/bladetusk-boar.js";
 import _poolBlindingSouleater from "../pool/blinding-souleater.js";
@@ -60,6 +61,7 @@ import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCursebreak from "../pool/cursebreak.js";
+import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
@@ -320,6 +322,7 @@ const shard: CardShard = {
     _poolBarrenMoor,
     _poolBattleflySwarm,
     _poolBenthicBehemoth,
+    _poolBeornTheFierce,
     _poolBitterTriumph,
     _poolBladetuskBoar,
     _poolBlindingSouleater,
@@ -348,6 +351,7 @@ const shard: CardShard = {
     _poolCrookclawElder,
     _poolCrystalGrotto,
     _poolCursebreak,
+    _poolDainsCompany,
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDeathsprout,

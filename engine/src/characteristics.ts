@@ -430,6 +430,8 @@ function evalStaticCondition(
   switch (condition.kind) {
     case "your-turn":
       return state.turnOrder[state.turn.activePlayerIndex] === you;
+    case "enduring-story":
+      return state.players[you]?.enduringStory === true;
     case "cast-this-turn": {
       const who = condition.who ?? "you";
       let n = 0;

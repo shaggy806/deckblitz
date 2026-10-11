@@ -513,8 +513,11 @@ function compare(def, card) {
   // So does a split card's half (a Room's door): its colour is its own
   // mana cost's (rules 105.2, 709.3b) — Restricted Office is white, Lecture
   // Hall blue.
+  // So does a preparation card's prepare spell (rule 722): Hallway Heckler's
+  // Vicious Verse is its own mana cost's colour.
   const spellHalf =
-    ((card.layout === "adventure" && face !== card.card_faces?.[0]) || card.layout === "split") &&
+    (((card.layout === "adventure" || card.layout === "prepare") && face !== card.card_faces?.[0]) ||
+      card.layout === "split") &&
     face !== card &&
     face.colors === undefined;
   const theirColors = spellHalf

@@ -217,6 +217,12 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A player got an enduring story (rule 702.195a — storied), for the
+       * rest of the game. */
+      readonly type: "enduring-story";
+      readonly player: PlayerId;
+    })
+  | (Base & {
       /** A permanent became prepared (rule 722.3a), and its controller made
        * `copy`, a copy of its prepare spell, in exile to cast (722.3c). */
       readonly type: "became-prepared";

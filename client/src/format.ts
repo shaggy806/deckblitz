@@ -146,6 +146,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
         : `The Ring tempts ${who(event.player)} (${event.count} time${event.count === 1 ? '' : 's'}) — ${name(event.chosen)} is the Ring-bearer`
     case 'card-on-adventure':
       return `${name(event.object)} goes on an adventure (exiled)`
+    case 'enduring-story':
+      return `${who(event.player)} has an enduring story`
     case 'became-prepared':
       return `${name(event.object)} becomes prepared — ${name(event.copy)} can be cast`
     case 'became-unprepared':

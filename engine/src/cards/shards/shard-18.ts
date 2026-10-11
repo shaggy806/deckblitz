@@ -250,6 +250,7 @@ import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
 import _poolTruefirePaladin from "../pool/truefire-paladin.js";
 import _poolTuneTheNarrative from "../pool/tune-the-narrative.js";
+import _poolTurbulentWetlands from "../pool/turbulent-wetlands.js";
 import _poolTyphoidRats from "../pool/typhoid-rats.js";
 import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUnholyAnnex from "../pool/unholy-annex.js";
@@ -551,6 +552,7 @@ const shard: CardShard = {
     _poolTremble,
     _poolTruefirePaladin,
     _poolTuneTheNarrative,
+    _poolTurbulentWetlands,
     _poolTyphoidRats,
     _poolUlamogsCrusher,
     _poolUnholyAnnex,

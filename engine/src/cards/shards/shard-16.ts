@@ -35,6 +35,7 @@ import _poolBladeOfSelves from "../pool/blade-of-selves.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
+import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
@@ -177,6 +178,7 @@ import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
+import _poolObNixilisTheAscended from "../pool/ob-nixilis-the-ascended.js";
 import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
@@ -265,6 +267,7 @@ import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTradingPost from "../pool/trading-post.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
+import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
 import _poolTukatongueThallid from "../pool/tukatongue-thallid.js";
 import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
 import _poolTurtleSeals from "../pool/turtle-seals.js";
@@ -349,6 +352,7 @@ const shard: CardShard = {
     _poolBlindPhantasm,
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
+    _poolBofurReliableGuardian,
     _poolBoltHound,
     _poolBoneShards,
     _poolBorosRecruit,
@@ -491,6 +495,7 @@ const shard: CardShard = {
     _poolNighthawkScavenger,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
+    _poolObNixilisTheAscended,
     _poolObekaSplitterOfSeconds,
     _poolOctoprophet,
     _poolOmegaMyr,
@@ -579,6 +584,7 @@ const shard: CardShard = {
     _poolTradingPost,
     _poolTreeOfPerdition,
     _poolTriplicateTitan,
+    _poolTroopOfPonies,
     _poolTukatongueThallid,
     _poolTunnelingGeopede,
     _poolTurtleSeals,

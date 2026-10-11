@@ -7,6 +7,7 @@ import _poolAbruptDecay from "../pool/abrupt-decay.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
+import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
@@ -120,6 +121,7 @@ import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
+import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
 import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
@@ -296,6 +298,7 @@ const shard: CardShard = {
     _poolAcolyteOfXathrid,
     _poolAgateInstigator,
     _poolAlleyEvasion,
+    _poolAnUnexpectedParty,
     _poolAngelfireCrusader,
     _poolApprenticeWizard,
     _poolArcadesTheStrategist,
@@ -409,6 +412,7 @@ const shard: CardShard = {
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKessigFlamebreather,
+    _poolKothOfTheHomestead,
     _poolKrenkosEnforcer,
     _poolKykarZephyrAwakener,
     _poolLagacLizard,

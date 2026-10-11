@@ -1536,6 +1536,10 @@ export interface PlayerState {
    * its choice and its completion — what "whenever the Ring tempts you"
    * names. Cleared as the temptation completes. */
   ringChosen?: ObjectId;
+  /** The enduring story designation (rule 702.195b): had for the rest of
+   * the game once this player controls a permanent with storied and three or
+   * more artifacts, Sagas and/or legendary permanents (`Game.grantEnduringStories`). */
+  enduringStory?: boolean;
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's

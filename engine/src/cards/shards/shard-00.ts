@@ -180,6 +180,7 @@ import _poolNightshadeHarvester from "../pool/nightshade-harvester.js";
 import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
+import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
@@ -284,6 +285,7 @@ import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
 import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
+import _poolViciousVerse from "../pool/vicious-verse.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
 import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
@@ -492,6 +494,7 @@ const shard: CardShard = {
     _poolNightshadeStinger,
     _poolNimblewrightSchematic,
     _poolNyleasForerunner,
+    _poolOinTheBrave,
     _poolOpenTheGraves,
     _poolOpulentPalace,
     _poolOriginOfMetalbending,
@@ -596,6 +599,7 @@ const shard: CardShard = {
     _poolUreniOfTheUnwritten,
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
+    _poolViciousVerse,
     _poolVigilantDrake,
     _poolVigorbloomCharm,
     _poolVihaanGoldwaker,

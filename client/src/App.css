@@ -365,7 +365,8 @@
   color: var(--muted);
   font-weight: 600;
 }
-.pp-monarch {
+.pp-monarch,
+.pp-story {
   margin-left: 4px;
 }
 /* A player's counters — poison, energy, experience — in the header row beside

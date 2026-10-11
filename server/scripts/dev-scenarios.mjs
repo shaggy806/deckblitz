@@ -933,6 +933,25 @@ export default {
     },
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  STORY: {
+    about:
+      "2p. Storied (rule 702.195): Fíli, Bifur and Sol Ring — three artifacts and legendaries with a storied " +
+      "permanent, so alice has an enduring story (📜 on her panel) once the first state-based check runs; Fíli " +
+      "gives her creatures +1/+1. Cast Dáin's Company: Bifur doubles Fíli's trigger, two Dwarf tokens.",
+    players: ["alice", "bob"],
+    lands: { alice: 6, bob: 3 },
+    battlefield: { alice: ["Fíli the Pathfinder", "Bifur, Melodic Rider", "Sol Ring"] },
+    hand: { alice: ["Dáin's Company"] },
+    bots: { bob: {} },
+  },
+  STOR4: {
+    about: "4p. STORY at a full table: the 📜 on one panel beside three without.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 6, bob: 3, carol: 3, dave: 3 },
+    battlefield: { alice: ["Fíli the Pathfinder", "Bifur, Melodic Rider", "Sol Ring"] },
+    hand: { alice: ["Dáin's Company"] },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
   PREPR: {
     about:
       "2p. Prepare (rule 722): Studious First-Year entered prepared — its tile says so, and its menu offers " +

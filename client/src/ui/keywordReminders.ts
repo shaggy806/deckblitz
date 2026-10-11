@@ -52,6 +52,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Flanking',
     text: 'Whenever a creature without flanking blocks it, the blocking creature gets -1/-1 until end of turn.',
   },
+  storied: {
+    name: 'Storied',
+    text: 'If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.',
+  },
   riot: { name: 'Riot', text: 'Enters with your choice of a +1/+1 counter or haste.' },
   infect: {
     name: 'Infect',

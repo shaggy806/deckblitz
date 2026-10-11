@@ -83,6 +83,7 @@ import _poolExtremisElite from "../pool/extremis-elite.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
+import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
 import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
@@ -267,6 +268,7 @@ import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
 import _poolVectisSilencers from "../pool/vectis-silencers.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
+import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
@@ -274,6 +276,7 @@ import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
+import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
 import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
@@ -373,6 +376,7 @@ const shard: CardShard = {
     _poolFalseDefeat,
     _poolFellMire,
     _poolFeralInvocation,
+    _poolFiliThePathfinder,
     _poolFlowstoneWyvern,
     _poolFlusterstorm,
     _poolForceOfSavagery,
@@ -557,6 +561,7 @@ const shard: CardShard = {
     _poolVectisSilencers,
     _poolVelaTheNightClad,
     _poolVesselOfVolatility,
+    _poolVigorbloomVanguard,
     _poolVirulentEmissary,
     _poolVisceraSeer,
     _poolVodalianMerchant,
@@ -564,6 +569,7 @@ const shard: CardShard = {
     _poolWallOfStone,
     _poolWarriorsHonor,
     _poolWaxenShapethief,
+    _poolWayOfTheWarlord,
     _poolWaywardServant,
     _poolWeatheredSentinels,
     _poolWitheringTorment,

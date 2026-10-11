@@ -29,6 +29,7 @@ import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
+import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
@@ -66,8 +67,10 @@ import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
+import _poolDainLordOfTheIronHills from "../pool/dain-lord-of-the-iron-hills.js";
 import _poolDakmorSalvage from "../pool/dakmor-salvage.js";
 import _poolDamnation from "../pool/damnation.js";
+import _poolDancingFromDarkToDawn from "../pool/dancing-from-dark-to-dawn.js";
 import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
@@ -329,6 +332,7 @@ const shard: CardShard = {
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
     _poolBenalishKnight,
+    _poolBifurMelodicRider,
     _poolBlessedOrator,
     _poolBlindCreeper,
     _poolBloodlineBidding,
@@ -366,8 +370,10 @@ const shard: CardShard = {
     _poolCuriosity,
     _poolDaggerclawImp,
     _poolDaiLiCensor,
+    _poolDainLordOfTheIronHills,
     _poolDakmorSalvage,
     _poolDamnation,
+    _poolDancingFromDarkToDawn,
     _poolDarkHeartOfTheWood,
     _poolDawnOfHope,
     _poolDawnhartGeist,

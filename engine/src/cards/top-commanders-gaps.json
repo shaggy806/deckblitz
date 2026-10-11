@@ -238,7 +238,8 @@
   "mechanic:kindred-card-type",
   "static:grant-loyalty-abilities",
   "effect:token-copy-for-each-matching",
-  "mechanic:prepare"
+  "mechanic:prepare",
+  "keyword:storied"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

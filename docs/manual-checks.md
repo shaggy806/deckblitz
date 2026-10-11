@@ -4402,3 +4402,16 @@ stack count once per token)
   and after it resolves no Rampant Growth is in your graveyard. Carnivorous Cultivator enters with the flag
   and offers "Cast Enroot (prepared)". On Bob's turn neither copy is offered (both are sorceries).
 - **Known limits:** None known.
+
+### Fíli the Pathfinder, Bifur, Melodic Rider
+
+*Careful rules call* — storied (rule 702.195): an enduring story, had for the rest of the game
+
+- **Setup:** Your precombat main. Your battlefield: Fíli the Pathfinder and eight lands. Your hand: Sol Ring,
+  Bifur, Melodic Rider and Dáin's Company. Bob: three lands.
+- **Do:** Cast Sol Ring, then Bifur, then Dáin's Company.
+- **Check:** With Fíli and Sol Ring alone (two of three) nothing changes. Once Bifur (legendary) is down,
+  your panel shows a 📜 and the log says you have an enduring story; your creatures get +1/+1 (Fíli). Dáin's
+  Company, a nontoken Dwarf, then makes two 2/2 red Dwarf tokens, not one (Bifur doubles Fíli's trigger). If
+  Sol Ring and Bifur later leave, the 📜 stays.
+- **Known limits:** None known.

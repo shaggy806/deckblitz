@@ -167,6 +167,7 @@ import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
+import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
@@ -219,6 +220,7 @@ import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
+import _poolSilvanRally from "../pool/silvan-rally.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
@@ -242,6 +244,7 @@ import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
+import _poolTheArkenstone from "../pool/the-arkenstone.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
@@ -456,6 +459,7 @@ const shard: CardShard = {
     _poolNyxbornMarauder,
     _poolOmenHawker,
     _poolOphidianEye,
+    _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOxiddaScrapmelter,
     _poolPatagiaGolem,
@@ -508,6 +512,7 @@ const shard: CardShard = {
     _poolShockingGrasp,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
+    _poolSilvanRally,
     _poolSimulacrumShaper,
     _poolSinewSliver,
     _poolSinisterHideout,
@@ -531,6 +536,7 @@ const shard: CardShard = {
     _poolTalonrend,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,
+    _poolTheArkenstone,
     _poolTheGreyHavens,
     _poolTheLordOfPain,
     _poolTheScarabGod,

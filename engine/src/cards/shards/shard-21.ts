@@ -14,6 +14,7 @@ import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
+import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
@@ -80,6 +81,7 @@ import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
+import _poolFlameshape from "../pool/flameshape.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
@@ -284,6 +286,7 @@ const shard: CardShard = {
     _poolArmoredWhirlTurtle,
     _poolAronBenaliasRuin,
     _poolArrogantVampire,
+    _poolAtTheDoor,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
     _poolAzoriusCharm,
@@ -350,6 +353,7 @@ const shard: CardShard = {
     _poolFirebendingStudent,
     _poolFiveHundredYearDiary,
     _poolFlameOfAnor,
+    _poolFlameshape,
     _poolFleetingEffigy,
     _poolFrontierBivouac,
     _poolFrostwindInvoker,

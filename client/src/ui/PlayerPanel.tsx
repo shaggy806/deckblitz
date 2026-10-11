@@ -163,6 +163,11 @@ export function PlayerPanel({
         ) : null}
         {wentFirst ? <span className="pp-went-first" title="Went first this game">🎲</span> : null}
         {isMonarch ? <span className="pp-monarch" title="The monarch (rule 720)">👑</span> : null}
+        {info.enduringStory ? (
+          <span className="pp-story" title="An enduring story (storied, rule 702.195), for the rest of the game">
+            📜
+          </span>
+        ) : null}
         {info.commanderDamageTaken.length > 0 ? (
           <span className="pp-cmdr-dmg">
             {info.commanderDamageTaken.map((d) => (

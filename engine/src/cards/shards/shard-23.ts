@@ -35,6 +35,7 @@ import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
 import _poolBloodrockCyclops from "../pool/bloodrock-cyclops.js";
 import _poolBloodstoneCameo from "../pool/bloodstone-cameo.js";
 import _poolBloomingMarsh from "../pool/blooming-marsh.js";
+import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
@@ -89,6 +90,7 @@ import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
+import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
 import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
 import _poolGiantCockroach from "../pool/giant-cockroach.js";
@@ -318,6 +320,7 @@ const shard: CardShard = {
     _poolBloodrockCyclops,
     _poolBloodstoneCameo,
     _poolBloomingMarsh,
+    _poolBomburGentleDreamer,
     _poolBorderlandMinotaur,
     _poolBrasssBounty,
     _poolBreatheYourLast,
@@ -372,6 +375,7 @@ const shard: CardShard = {
     _poolFrogButler,
     _poolFrontierSiege,
     _poolFuneralCharm,
+    _poolGandalfGoblinsBane,
     _poolGhirapurGearcrafter,
     _poolGhostLitRedeemer,
     _poolGiantCockroach,

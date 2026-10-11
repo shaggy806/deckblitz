@@ -264,6 +264,7 @@ import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
+import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
@@ -545,6 +546,7 @@ const shard: CardShard = {
     _poolWallOfWood,
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
+    _poolWayOfTheDeathbringer,
     _poolWickTheWhorledMind,
     _poolWipeClean,
     _poolWoodlandLiege,

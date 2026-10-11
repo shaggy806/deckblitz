@@ -26381,6 +26381,10 @@ export class Game {
       // battlefield ceases to exist — one made to be cast and never cast.
       if (this.removeStrayCardCopies()) changed = true;
 
+      // Rule 702.195c: an enduring story is had before the game looks for
+      // what triggered.
+      if (this.grantEnduringStories()) changed = true;
+
       // Continuous control effects (layer 2), recomputed each pass: a
       // permanent is controlled by its owner unless a control effect
       // (`controlEffects`) or an attached control-granting Aura says
@@ -28911,6 +28915,43 @@ export class Game {
     invalidateComputedCache();
     this.emit({ type: "became-prepared", object: id, copy, player });
     return true;
+  }
+
+  /**
+   * Storied (rule 702.195a): a player who controls a permanent with storied
+   * and three or more permanents that are artifacts, Sagas and/or legendary
+   * (each token of a stack counting) gets an enduring story for the rest of
+   * the game. Run in each state-based check, so it's had before the game
+   * looks for what triggered (702.195c) and before any player gets priority
+   * again. Whether anyone got one.
+   */
+  private grantEnduringStories(): boolean {
+    let granted = false;
+    for (const player of this.state.turnOrder) {
+      const playerState = this.state.players[player];
+      if (playerState === undefined || playerState.enduringStory === true || playerState.hasLost) continue;
+      let storied = false;
+      let story = 0;
+      for (const id of this.state.zones.shared.battlefield) {
+        const object = this.state.objects[id];
+        if (object.controller !== player) continue;
+        const c = computeCharacteristics(this.state, this.registry, id);
+        if (c.keywords.has("storied")) storied = true;
+        if (
+          c.types.includes("artifact") ||
+          supertypesOf(this.registry, object).includes("legendary") ||
+          c.subtypes.includes("Saga")
+        ) {
+          story += object.stackCount ?? 1;
+        }
+      }
+      if (!storied || story < 3) continue;
+      playerState.enduringStory = true;
+      invalidateComputedCache();
+      this.emit({ type: "enduring-story", player });
+      granted = true;
+    }
+    return granted;
   }
 
   /** `id` loses the prepared designation (rule 722.3b); its copy in exile

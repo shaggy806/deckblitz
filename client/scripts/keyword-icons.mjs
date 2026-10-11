@@ -27,7 +27,8 @@ const FONT = require.resolve('mana-font/fonts/mana.svg')
 const OUT = join(HERE, '..', 'src', 'ui', 'keywordIconPaths.ts')
 
 // keyword -> glyph, off the table the board uses.
-const icons = readFileSync(ICONS, 'utf8')
+// CRLF or LF alike: the table ends at the first "}" on a line of its own.
+const icons = readFileSync(ICONS, 'utf8').replace(/\r\n/g, '\n')
 const start = icons.indexOf('export const KEYWORD_GLYPH')
 const table = icons.slice(start, icons.indexOf('\n}\n', start))
 const glyphs = [...table.matchAll(/^\s*'?([a-z-]+)'?:\s*'(.)',/gmu)].map(([, keyword, glyph]) => ({

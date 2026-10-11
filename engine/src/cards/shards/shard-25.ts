@@ -49,6 +49,7 @@ import _poolClaimTheFirstborn from "../pool/claim-the-firstborn.js";
 import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
+import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCrudeBentBlade from "../pool/crude-bent-blade.js";
 import _poolCruelEdict from "../pool/cruel-edict.js";
@@ -233,6 +234,7 @@ import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
+import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
@@ -337,6 +339,7 @@ const shard: CardShard = {
     _poolCliffhavenVampire,
     _poolCloudCrusader,
     _poolCombatCelebrant,
+    _poolConcertedCare,
     _poolContaminatedLandscape,
     _poolCrudeBentBlade,
     _poolCruelEdict,
@@ -521,6 +524,7 @@ const shard: CardShard = {
     _poolSpireOfIndustry,
     _poolSqueeGoblinNabob,
     _poolStaunchDefenders,
+    _poolStingerquillVoxmancer,
     _poolStormCrow,
     _poolStorySeeker,
     _poolStrionicResonator,

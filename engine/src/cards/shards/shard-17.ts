@@ -22,6 +22,7 @@ import _poolAttendedSocialite from "../pool/attended-socialite.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
+import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
 import _poolBastionEnforcer from "../pool/bastion-enforcer.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
@@ -231,6 +232,7 @@ import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
+import _poolThroughTheForestGate from "../pool/through-the-forest-gate.js";
 import _poolThunderingFalls from "../pool/thundering-falls.js";
 import _poolThunderingRebuke from "../pool/thundering-rebuke.js";
 import _poolTideSkimmer from "../pool/tide-skimmer.js";
@@ -308,6 +310,7 @@ const shard: CardShard = {
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
     _poolBalefireLiege,
+    _poolBalinLoremaster,
     _poolBarrensteppeSiege,
     _poolBastionEnforcer,
     _poolBattlewiseValor,
@@ -517,6 +520,7 @@ const shard: CardShard = {
     _poolThePrismaticBridge,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,
+    _poolThroughTheForestGate,
     _poolThunderingFalls,
     _poolThunderingRebuke,
     _poolTideSkimmer,

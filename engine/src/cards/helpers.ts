@@ -1859,3 +1859,8 @@ export const entersPrepared = (text = "This creature enters prepared."): StaticA
   replacement: { event: "enters-battlefield", prepared: true },
   text,
 });
+
+/** Storied's printed line, reminder and all (rule 702.195): the keyword
+ * itself goes in `keywords` as `"storied"`. */
+export const STORIED_TEXT =
+  "Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)";

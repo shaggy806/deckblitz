@@ -294,6 +294,7 @@ import _tokensAstartesWarriorToken from "../tokens/astartes-warrior-token.js";
 import _tokensCragflame from "../tokens/cragflame.js";
 import _tokensDrakeToken from "../tokens/drake-token.js";
 import _tokensEggToken from "../tokens/egg-token.js";
+import _tokensElfToken from "../tokens/elf-token.js";
 import _tokensGoblinTokenGoblinSpymaster from "../tokens/goblin-token-goblin-spymaster.js";
 import _tokensHorseToken from "../tokens/horse-token.js";
 import _tokensIllusionTokenSkyclave from "../tokens/illusion-token-skyclave.js";
@@ -602,6 +603,7 @@ const shard: CardShard = {
     _tokensCragflame,
     _tokensDrakeToken,
     _tokensEggToken,
+    _tokensElfToken,
     _tokensGoblinTokenGoblinSpymaster,
     _tokensHorseToken,
     _tokensIllusionTokenSkyclave,

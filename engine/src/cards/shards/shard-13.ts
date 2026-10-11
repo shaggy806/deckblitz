@@ -121,6 +121,7 @@ import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
 import _poolIlluminatedWings from "../pool/illuminated-wings.js";
 import _poolImpactTremors from "../pool/impact-tremors.js";
 import _poolImperialSeal from "../pool/imperial-seal.js";
+import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
@@ -404,6 +405,7 @@ const shard: CardShard = {
     _poolIlluminatedWings,
     _poolImpactTremors,
     _poolImperialSeal,
+    _poolImprovisedAct,
     _poolInstantRamen,
     _poolIsolatedChapel,
     _poolIzzetLocket,

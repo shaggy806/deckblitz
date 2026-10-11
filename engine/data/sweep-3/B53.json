@@ -1,0 +1,471 @@
+{
+  "batch": "B53",
+  "status": "complete",
+  "ranks": "Reality Fracture (FRA)'s last 14, Reality Fracture Commander (FRC) and The Hobbit (HOB): each set's top 50% by EDHREC rank (the next 60 of the set walk); with storied built this batch (rule 702.195) and The Hobbit's storied cards outside the threshold",
+  "authored": [
+    {
+      "name": "Koth of the Homestead",
+      "files": [
+        "engine/src/cards/pool/koth-of-the-homestead.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Pompous Battlemage // Improvised Act",
+      "files": [
+        "engine/src/cards/pool/pompous-battlemage.ts",
+        "engine/src/cards/pool/improvised-act.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bofur, Reliable Guardian // Concerted Care",
+      "files": [
+        "engine/src/cards/pool/bofur-reliable-guardian.ts",
+        "engine/src/cards/pool/concerted-care.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Thorin Oakenshield",
+      "files": [
+        "engine/src/cards/pool/thorin-oakenshield.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Fíli the Pathfinder",
+      "files": [
+        "engine/src/cards/pool/fili-the-pathfinder.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dáin, Lord of the Iron Hills",
+      "files": [
+        "engine/src/cards/pool/dain-lord-of-the-iron-hills.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bifur, Melodic Rider",
+      "files": [
+        "engine/src/cards/pool/bifur-melodic-rider.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ori, Keeper of Songs",
+      "files": [
+        "engine/src/cards/pool/ori-keeper-of-songs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Óin the Brave",
+      "files": [
+        "engine/src/cards/pool/oin-the-brave.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Bombur, Gentle Dreamer",
+      "files": [
+        "engine/src/cards/pool/bombur-gentle-dreamer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Balin, Loremaster",
+      "files": [
+        "engine/src/cards/pool/balin-loremaster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Massacre Girl, Most Wanted",
+      "files": [
+        "engine/src/cards/pool/massacre-girl-most-wanted.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Repurposed Enforcer",
+      "files": [
+        "engine/src/cards/pool/repurposed-enforcer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stingerquill Charm",
+      "files": [
+        "engine/src/cards/pool/stingerquill-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacyn, Angel of Horror",
+      "files": [
+        "engine/src/cards/pool/avacyn-angel-of-horror.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Turbulent Wetlands",
+      "files": [
+        "engine/src/cards/pool/turbulent-wetlands.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ob Nixilis, the Ascended",
+      "files": [
+        "engine/src/cards/pool/ob-nixilis-the-ascended.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Troop of Ponies",
+      "files": [
+        "engine/src/cards/pool/troop-of-ponies.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Dancing from Dark to Dawn",
+      "files": [
+        "engine/src/cards/pool/dancing-from-dark-to-dawn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Through the Forest Gate",
+      "files": [
+        "engine/src/cards/pool/through-the-forest-gate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Misty Mountains Cold",
+      "files": [
+        "engine/src/cards/pool/the-misty-mountains-cold.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Beorn the Fierce",
+      "files": [
+        "engine/src/cards/pool/beorn-the-fierce.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vigorbloom Vanguard // Seed Suture",
+      "files": [
+        "engine/src/cards/pool/vigorbloom-vanguard.ts",
+        "engine/src/cards/pool/seed-suture.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stingerquill Voxmancer // Vicious Verse",
+      "files": [
+        "engine/src/cards/pool/stingerquill-voxmancer.ts",
+        "engine/src/cards/pool/vicious-verse.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Yuriko, Hope from the Shadows",
+      "files": [
+        "engine/src/cards/pool/yuriko-hope-from-the-shadows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Niv-Mizzet, Ghost Counsel",
+      "files": [
+        "engine/src/cards/pool/niv-mizzet-ghost-counsel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Smaug, Wicked Worm",
+      "files": [
+        "engine/src/cards/pool/smaug-wicked-worm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Sackville-Bagginses",
+      "files": [
+        "engine/src/cards/pool/the-sackville-bagginses.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thranduil, Sindarin Liege // Silvan Rally",
+      "files": [
+        "engine/src/cards/pool/thranduil-sindarin-liege.ts",
+        "engine/src/cards/pool/silvan-rally.ts",
+        "engine/src/cards/tokens/elf-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "An Unexpected Party // At the Door",
+      "files": [
+        "engine/src/cards/pool/an-unexpected-party.ts",
+        "engine/src/cards/pool/at-the-door.ts",
+        "engine/src/cards/tokens/2-2-red-dwarf-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dáin's Company",
+      "files": [
+        "engine/src/cards/pool/dains-company.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Deathbringer",
+      "files": [
+        "engine/src/cards/pool/way-of-the-deathbringer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Warlord",
+      "files": [
+        "engine/src/cards/pool/way-of-the-warlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Turbulent Shore",
+      "files": [
+        "engine/src/cards/pool/turbulent-shore.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Turbulent Crater",
+      "files": [
+        "engine/src/cards/pool/turbulent-crater.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Memnarch, the Warden",
+      "files": [
+        "engine/src/cards/pool/memnarch-the-warden.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Arkenstone // Seek the Heart",
+      "files": [
+        "engine/src/cards/pool/the-arkenstone.ts",
+        "engine/src/cards/pool/seek-the-heart.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hobbit Hole",
+      "files": [
+        "engine/src/cards/pool/hobbit-hole.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Lonely Mountain",
+      "files": [
+        "engine/src/cards/pool/the-lonely-mountain.ts",
+        "engine/src/cards/tokens/dwarf-token-2-2.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glóin the Mighty // Easy Pickings",
+      "files": [
+        "engine/src/cards/pool/gloin-the-mighty.ts",
+        "engine/src/cards/pool/easy-pickings.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gandalf, Goblins' Bane // Flameshape",
+      "files": [
+        "engine/src/cards/pool/gandalf-goblins-bane.ts",
+        "engine/src/cards/pool/flameshape.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Great Goblin",
+      "files": [
+        "engine/src/cards/pool/the-great-goblin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bothersome Noisemaker",
+      "files": [
+        "engine/src/cards/pool/bothersome-noisemaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Notary Hobbits",
+      "files": [
+        "engine/src/cards/pool/the-notary-hobbits.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Gideon the Oathless",
+      "needs": [
+        "trigger:activates-ability"
+      ],
+      "why": "\"Whenever an opponent activates a loyalty ability\": the activates-ability trigger exists only for who: \"attached\" (Illusionist's Bracers)."
+    },
+    {
+      "name": "Elrond, Moon-Reader",
+      "needs": [
+        "trigger:activates-ability"
+      ],
+      "why": "\"Whenever you activate an ability of a creature\" (mana abilities included, per its ruling): no activates-ability trigger beyond who: \"attached\", and that one never sees a mana ability."
+    },
+    {
+      "name": "Glamdring, Foe-hammer // Gleam of Death",
+      "needs": [
+        "cost:cost-reduction-equipped-creature-power"
+      ],
+      "why": "\"Cost {X} less, where X is equipped creature's power\": CostReductionAmount can't read the host of the Equipment doing the reducing."
+    },
+    {
+      "name": "Bilbo, Thief in the Night",
+      "needs": [
+        "cost:cost-reduction-cast-not-from-hand"
+      ],
+      "why": "\"Spells you cast from anywhere other than your hand cost {1} less\": a costModification filter can't read the zone a spell is being cast from (castFrom is set only once it's on the stack)."
+    },
+    {
+      "name": "Dáin Ironfoot",
+      "needs": [
+        "effect:reflexive-refers-to-creating-objects"
+      ],
+      "why": "\"Create … Axe … When you do, attach it to target creature you control\": a reflexive trigger's effect can't refer to the token the creating resolution made (attach's \"created\" is only a host, in the same resolution)."
+    },
+    {
+      "name": "Thorin, Mountain-king",
+      "needs": [
+        "effect:reflexive-refers-to-creating-objects"
+      ],
+      "why": "\"When one or more Equipment become attached to that creature this way, that creature deals damage …\": the reflexive ability can't name the creating ability's target creature, nor gate on how many attached this way."
+    },
+    {
+      "name": "Sting, Bilbo's Sword",
+      "needs": [
+        "mechanic:hone-counters"
+      ],
+      "why": "Hone counters (each grants +1/+0 to the creature the Equipment is attached to, from the counter itself) aren't modeled anywhere in the engine."
+    },
+    {
+      "name": "Yuriko, Blade of the Mighty",
+      "needs": [
+        "effect:prohibit-non-mana-abilities",
+        "trigger:attacks-alone-player"
+      ],
+      "why": "prohibits.abilitiesOf covers only permanents' abilities, mana abilities included (not 'abilities that aren't mana abilities' from any zone); attacks-alone can't require that the lone attacker attacks a player"
+    },
+    {
+      "name": "Darksteel Angel",
+      "needs": [
+        "static:counters-cant-be-put"
+      ],
+      "why": "no 'creatures you control can't have -1/-1 counters put on them' static (Platinum Angel's half is built)"
+    },
+    {
+      "name": "Jace, Multiverse Architect",
+      "needs": [
+        "effect:pay-or-cant-attack-you"
+      ],
+      "why": "no 'that opponent may pay {2}; if they don't, their creatures can't attack Jaces you control this turn' effect (the loyalty abilities are expressible: Aminatou/Identity Echo shapes)"
+    },
+    {
+      "name": "Kíli the Resourceful",
+      "needs": [
+        "cost:first-equip-each-turn-free"
+      ],
+      "why": "storied / enduring story isn't built; nor 'pay {0} rather than the equip cost of the first equip ability you activate each turn'"
+    },
+    {
+      "name": "Bard, King of Dale",
+      "needs": [
+        "replacement:draw-replacement-except-first",
+        "bug:stacking-draw-replacements"
+      ],
+      "why": "drawCountFor ignores exceptFirstInDrawStep for a 'draw two instead', and takes the max of draw-N replacements where two Bards multiply (ruling: x4)"
+    },
+    {
+      "name": "Elven Passage",
+      "needs": [
+        "keyword:behold"
+      ],
+      "why": "behold isn't built"
+    },
+    {
+      "name": "Desert Were-Worm",
+      "needs": [
+        "trigger:attack-with-total-power"
+      ],
+      "why": "attack-with counts attackers; no 'attack with creatures with total power 12 or greater for the first time each turn' trigger"
+    },
+    {
+      "name": "The Eagles Are Coming!",
+      "needs": [
+        "effect:delayed-count-done-this-way"
+      ],
+      "why": "the next-upkeep delayed trigger can't count the creatures returned this way: thisWay doesn't carry into it, and about-targets drop a returned token (the ruling counts tokens)"
+    },
+    {
+      "name": "Saheeli, Consul of Oversight",
+      "needs": [
+        "trigger:scry-trigger"
+      ],
+      "why": "'Whenever you scry or surveil': a surveils trigger exists, a scry one doesn't."
+    },
+    {
+      "name": "Titanbones, Towering Heart",
+      "needs": [
+        "trigger:discards-extensions"
+      ],
+      "why": "'When you discard this card, you gain 3 life': a discards trigger can't fire from the card itself as it reaches the graveyard (the graveyard scan skips a card that arrived in the same event)."
+    },
+    {
+      "name": "The Master of Lake-town",
+      "needs": [
+        "effect:count-graveyards-with-n-cards"
+      ],
+      "why": "'Draw a card for each graveyard with seven or more cards in it': no amount counts players whose graveyard holds N or more cards (cards-in-graveyard is your own only)."
+    },
+    {
+      "name": "Beorn's Hospitality",
+      "needs": [
+        "effect:animate-with-cda-pt"
+      ],
+      "why": "Becomes a Bear creature that gains 'P/T each equal to the number of lands you control': animate reads its P/T once, never live."
+    },
+    {
+      "name": "Dwalin, Weaponmaster",
+      "needs": [
+        "mechanic:hone-counters"
+      ],
+      "why": "Hone counters (rule 122.1j: +1/+0 to the creature the Equipment is attached to) aren't modeled."
+    }
+  ]
+}

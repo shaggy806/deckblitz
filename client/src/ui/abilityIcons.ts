@@ -56,6 +56,8 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   // No shadow icon anywhere in the font; shadow is evasion both ways, so the
   // Duels unblockable one, as desertwalk borrows it.
   shadow: '', // ms-ability-duels-unblockable
+  // Storied has no icon of its own; the Saga one — Sagas are what it counts.
+  storied: '', // ms-saga
   // No flanking icon anywhere in the font; it's a block trigger, so the
   // combat-condition one.
   flanking: '', // ms-ability-combat-condition

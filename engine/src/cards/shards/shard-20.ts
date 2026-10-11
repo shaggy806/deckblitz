@@ -156,6 +156,7 @@ import _poolManaDrain from "../pool/mana-drain.js";
 import _poolManagorgerHydra from "../pool/managorger-hydra.js";
 import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
+import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
 import _poolMillikin from "../pool/millikin.js";
@@ -258,9 +259,11 @@ import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
+import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
+import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
@@ -452,6 +455,7 @@ const shard: CardShard = {
     _poolManagorgerHydra,
     _poolMarshFlats,
     _poolMassProduction,
+    _poolMassacreGirlMostWanted,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
     _poolMillikin,
@@ -554,9 +558,11 @@ const shard: CardShard = {
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
     _poolTheEmperorOfPalamecia,
+    _poolTheGreatGoblin,
     _poolTheTenRings,
     _poolTheWhizzerClassicSpeedster,
     _poolThoughtVessel,
+    _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,
     _poolThrivingHeath,
     _poolTimberwatchElf,

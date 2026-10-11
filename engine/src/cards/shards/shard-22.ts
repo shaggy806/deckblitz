@@ -156,6 +156,7 @@ import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
+import _poolNivMizzetGhostCounsel from "../pool/niv-mizzet-ghost-counsel.js";
 import _poolNoMoreLies from "../pool/no-more-lies.js";
 import _poolNomadOutpost from "../pool/nomad-outpost.js";
 import _poolNukaColaVendingMachine from "../pool/nuka-cola-vending-machine.js";
@@ -176,6 +177,7 @@ import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
 import _poolPlumeveil from "../pool/plumeveil.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
+import _poolPompousBattlemage from "../pool/pompous-battlemage.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
@@ -187,6 +189,7 @@ import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
+import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
@@ -206,6 +209,7 @@ import _poolScarecrone from "../pool/scarecrone.js";
 import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
+import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
 import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
@@ -216,6 +220,7 @@ import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
+import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
 import _poolSouthernElephant from "../pool/southern-elephant.js";
@@ -246,6 +251,7 @@ import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
+import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
 import _poolTheWanderingRescuer from "../pool/the-wandering-rescuer.js";
 import _poolTheorixAnnex from "../pool/theorix-annex.js";
@@ -455,6 +461,7 @@ const shard: CardShard = {
     _poolNexusWardens,
     _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
+    _poolNivMizzetGhostCounsel,
     _poolNoMoreLies,
     _poolNomadOutpost,
     _poolNukaColaVendingMachine,
@@ -475,6 +482,7 @@ const shard: CardShard = {
     _poolPlatedWurm,
     _poolPlumeveil,
     _poolPollutedDelta,
+    _poolPompousBattlemage,
     _poolPrecisionBolt,
     _poolPrimordialHydra,
     _poolProudMentor,
@@ -486,6 +494,7 @@ const shard: CardShard = {
     _poolRecklessLackey,
     _poolReinforcedRonin,
     _poolRelearn,
+    _poolRepurposedEnforcer,
     _poolResurrection,
     _poolRiotDevils,
     _poolRishkarsExpertise,
@@ -505,6 +514,7 @@ const shard: CardShard = {
     _poolScavengingScarab,
     _poolSchemingSilvertongue,
     _poolSealOfStrength,
+    _poolSeekTheHeart,
     _poolSeismicSpike,
     _poolSentinelsOfGlenElendra,
     _poolShepherdOfRot,
@@ -515,6 +525,7 @@ const shard: CardShard = {
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,
     _poolSlipperyBogle,
+    _poolSmaugWickedWorm,
     _poolSnowCoveredForest,
     _poolSongOfCreation,
     _poolSouthernElephant,
@@ -545,6 +556,7 @@ const shard: CardShard = {
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
+    _poolTheSackvilleBagginses,
     _poolTheWallsOfBaSingSe,
     _poolTheWanderingRescuer,
     _poolTheorixAnnex,

@@ -5338,6 +5338,46 @@
   "replacement:skip-turn": {
    "family": "replacement:new-event-replacements",
    "example": "Time Vault: 'If you would begin your turn while this artifact is tapped, you may skip that turn instead. If you do, untap this artifact.'"
+  },
+  "keyword:storied": {
+   "family": "condition:player-state-thresholds",
+   "example": "Thorin Oakenshield: Storied — controlling three or more artifacts, legendaries and/or Sagas (each permanent counted once) while you control a storied permanent gives you an enduring story for the rest of the game; 'as long as you have an enduring story' needs a condition on it."
+  },
+  "cost:cost-reduction-equipped-creature-power": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Glamdring, Foe-hammer: 'Instant and sorcery spells you cast cost {X} less to cast, where X is equipped creature's power' — no CostReductionAmount reads the Equipment's host."
+  },
+  "effect:reflexive-refers-to-creating-objects": {
+   "family": "effect:reflexive-trigger",
+   "example": "Dáin Ironfoot: 'create … a token named Axe … When you do, attach it to target creature you control' — the reflexive ability's effect can't refer to the token, or (Thorin, Mountain-king) to the creating ability's target."
+  },
+  "mechanic:hone-counters": {
+   "family": "static:pt-per-amount",
+   "example": "Sting, Bilbo's Sword: hone counters on an Equipment each give the equipped creature +1/+0, from the counter itself (no ability on the Equipment)."
+  },
+  "effect:prohibit-non-mana-abilities": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Yuriko, Blade of the Mighty: 'During combat, players can't cast spells or activate abilities that aren't mana abilities' — prohibits.abilitiesOf reaches only permanents and includes mana abilities"
+  },
+  "trigger:attacks-alone-player": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Yuriko, Blade of the Mighty: 'Whenever a creature you control attacks a player alone' — attacks-alone has no defender clause (a lone attack on a planeswalker or battle mustn't fire it)"
+  },
+  "cost:first-equip-each-turn-free": {
+   "family": "cost:ability-cost-modification",
+   "example": "Kíli the Resourceful: 'you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn'"
+  },
+  "trigger:attack-with-total-power": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Desert Were-Worm: 'Whenever you attack with creatures with total power 12 or greater for the first time each turn' — power as attackers are declared (the ruling)"
+  },
+  "effect:delayed-count-done-this-way": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "The Eagles Are Coming!: 'At the beginning of the next upkeep, create a 4/4 … for each creature returned to your hand this way' — a count fixed at resolution, tokens included, read by a delayed trigger"
+  },
+  "effect:count-graveyards-with-n-cards": {
+   "family": "effect:amount-new-variants",
+   "example": "The Master of Lake-town: 'draw a card for each graveyard with seven or more cards in it' — no EffectAmount counts players whose graveyard holds N or more cards."
   }
  }
 }

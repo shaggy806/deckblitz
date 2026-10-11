@@ -205,6 +205,7 @@ import _poolScatheZombies from "../pool/scathe-zombies.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSear from "../pool/sear.js";
+import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
@@ -494,6 +495,7 @@ const shard: CardShard = {
     _poolScepterOfDominance,
     _poolSeahunter,
     _poolSear,
+    _poolSeedSuture,
     _poolSenateGuildmage,
     _poolSeraphSanctuary,
     _poolShanodinDryads,

@@ -73,6 +73,9 @@ export interface PublicPlayerInfo {
    * see `PlayerState.counters`). A kind they have none of is absent. Ten
    * poison counters lose the game (`POISON_LETHAL`). */
   readonly counters: Readonly<Partial<Record<PlayerCounterKind, number>>>;
+  /** The enduring story designation (rule 702.195b — storied), for the rest
+   * of the game once had. */
+  readonly enduringStory: boolean;
 }
 
 /** Combat damage one commander has dealt one player. */
@@ -765,6 +768,7 @@ function viewForUncached(
       commanderCastCounts: { ...playerState.commanderCastCounts },
       energy: playerState.energy,
       counters: { ...playerState.counters },
+      enduringStory: playerState.enduringStory === true,
     };
     graveyards[player] = [...zones.graveyard];
     visibleIds.push(...zones.graveyard);

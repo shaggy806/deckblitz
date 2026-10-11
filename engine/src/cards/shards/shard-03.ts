@@ -79,6 +79,7 @@ import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
+import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
@@ -348,6 +349,7 @@ const shard: CardShard = {
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
     _poolGlissasCourier,
+    _poolGloinTheMighty,
     _poolGnawingVermin,
     _poolGoShintaiOfBoundlessVigor,
     _poolGoblinCannon,

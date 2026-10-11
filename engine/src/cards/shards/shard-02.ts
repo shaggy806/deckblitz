@@ -274,6 +274,7 @@ import _poolWithoutWeakness from "../pool/without-weakness.js";
 import _poolWizardsRetort from "../pool/wizards-retort.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
+import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
@@ -555,6 +556,7 @@ const shard: CardShard = {
     _poolZephidsEmbrace,
   ],
   tokens: [
+    _tokens22RedDwarfToken,
     _tokensGnomeToken,
     _tokensGolemToken,
     _tokensKnightTokenChivalricAlliance,

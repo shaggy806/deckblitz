@@ -26,6 +26,7 @@ import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
 import _poolBlossomingBogbeast from "../pool/blossoming-bogbeast.js";
 import _poolBoneSplinters from "../pool/bone-splinters.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
+import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
 import _poolBuriedAlive from "../pool/buried-alive.js";
@@ -109,6 +110,7 @@ import _poolHiddenHideout from "../pool/hidden-hideout.js";
 import _poolHiddenNursery from "../pool/hidden-nursery.js";
 import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
+import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
 import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
@@ -223,6 +225,7 @@ import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
+import _poolStingerquillCharm from "../pool/stingerquill-charm.js";
 import _poolStingingBarrier from "../pool/stinging-barrier.js";
 import _poolStolenGrain from "../pool/stolen-grain.js";
 import _poolStormFleetSprinter from "../pool/storm-fleet-sprinter.js";
@@ -308,6 +311,7 @@ const shard: CardShard = {
     _poolBlossomingBogbeast,
     _poolBoneSplinters,
     _poolBoromirWardenOfTheTower,
+    _poolBothersomeNoisemaker,
     _poolBruseTarlBoorishHerder,
     _poolBurgeoning,
     _poolBuriedAlive,
@@ -391,6 +395,7 @@ const shard: CardShard = {
     _poolHiddenNursery,
     _poolHideousTaskmaster,
     _poolHithlainKnots,
+    _poolHobbitHole,
     _poolHulkingBugbear,
     _poolHungryLynx,
     _poolHuntersInsight,
@@ -505,6 +510,7 @@ const shard: CardShard = {
     _poolStarnheimCourser,
     _poolSteadfastness,
     _poolSteelSeraph,
+    _poolStingerquillCharm,
     _poolStingingBarrier,
     _poolStolenGrain,
     _poolStormFleetSprinter,

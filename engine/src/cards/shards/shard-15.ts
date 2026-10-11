@@ -243,6 +243,7 @@ import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
+import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
@@ -521,6 +522,7 @@ const shard: CardShard = {
     _poolTreasonousOgre,
     _poolTreasureCruise,
     _poolTundraWolves,
+    _poolTurbulentCrater,
     _poolTymorasInvoker,
     _poolUnmarkedGrave,
     _poolUrzasFactory,
