@@ -298,6 +298,102 @@ describe("a card parsed from its Oracle text plays", () => {
   });
 });
 
+describe("templates for features built since the parser began (2026-10-11)", () => {
+  const face = (oracle_text: string, type_line = "Creature — Human", extra: Record<string, unknown> = {}) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, ...extra }, { tokenFor: () => "Servo Token" });
+
+  it.each([
+    ["Destroy target tapped creature.", { kind: "permanent", filter: { tapped: true, type: "creature" } }],
+    ["Destroy target creature with flying.", { kind: "permanent", filter: { keyword: "flying", type: "creature" } }],
+    ["Destroy target creature with power 4 or greater.", { kind: "permanent", filter: { type: "creature", power: { op: "gte", n: 4 } } }],
+    ["Destroy target nonbasic land.", { kind: "permanent", filter: { notSupertype: "basic", type: "land" } }],
+    ["Destroy target attacking creature you control.", { kind: "permanent", whose: "you", filter: { attacking: true, type: "creature" } }],
+  ])("a target with modifiers — %s", (sentence, spec) => {
+    const c = ctx();
+    expect(parseSentence(sentence, c)).toEqual({ kind: "destroy", target: 0 });
+    expect(c.targets).toEqual([spec]);
+  });
+
+  it("a target with a word it doesn't know isn't read", () => {
+    expect(face("Destroy target creature with the greatest power.", "Sorcery").complete).toBe(false);
+    expect(face("Destroy target sparkling creature.", "Sorcery").complete).toBe(false);
+  });
+
+  it.each([
+    ["You lose 2 life.", { kind: "lose-life", amount: 2 }],
+    ["Each player loses 1 life.", { kind: "lose-life", amount: 1, who: "each-player" }],
+    ["~ deals 1 damage to you.", { kind: "damage", amount: 1, who: "you" }],
+    ["Regenerate ~.", { kind: "regenerate", target: "source" }],
+    ["Transform ~.", { kind: "transform", target: "source" }],
+    ["The Ring tempts you.", { kind: "the-ring-tempts-you" }],
+    [
+      "~ deals 3 damage to any target and 1 damage to you.",
+      {
+        kind: "sequence",
+        simultaneous: true,
+        effects: [
+          { kind: "damage", amount: 3, target: 0 },
+          { kind: "damage", amount: 1, who: "you" },
+        ],
+      },
+    ],
+    [
+      "Draw a card at the beginning of the next turn's upkeep.",
+      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+    ],
+  ])("%s", (sentence, expected) => {
+    expect(parseSentence(sentence, ctx())).toEqual(expected);
+  });
+
+  it("'it' is the source in a trigger about the source, the trigger's object in one about another, and nothing after a first sentence", () => {
+    const self = face("When ~ dies, it deals 2 damage to any target.");
+    expect(self.complete).toBe(true);
+    expect(self.triggered[0].effect).toEqual({ kind: "damage", amount: 2, target: 0 });
+    const other = face("Whenever a creature you control attacks, it gets +1/+0 until end of turn.");
+    expect(other.triggered[0].effect).toEqual({ kind: "modify-pt", target: "trigger-object", power: 1, toughness: 0, duration: "end-of-turn" });
+    // After "create a token", "it" is the token: not read.
+    const token = face("When ~ enters, create a 1/1 colorless Servo artifact creature token. Put a +1/+1 counter on it.");
+    expect(token.complete).toBe(false);
+    // A trigger about a step has no "it".
+    expect(face("At the beginning of your upkeep, it deals 1 damage to any target.").complete).toBe(false);
+  });
+
+  it("keyword lines a helper or a card field stands for", () => {
+    const vehicle = face("Crew 3", "Artifact — Vehicle");
+    expect(vehicle.activated[0].cost.tapOthers).toEqual({ count: 0, totalPower: 3, filter: { type: "creature" } });
+    expect(face("Morph {2}{G}").morph).toEqual({ keyword: "morph", cost: "{2}{G}" });
+    expect(face("Convoke", "Instant", {}).convoke).toBe(true);
+    expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
+    expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    const fab = face("Fabricate 2").triggered[0];
+    expect(fab.effect.modes.map((m: { effect: { kind: string } }) => m.effect.kind)).toEqual(["add-counter", "create-token"]);
+    // A keyword the engine doesn't run leaves the line to a person.
+    expect(face("Bushido 2").complete).toBe(false);
+  });
+
+  it("the intervening-ifs it knows become the ability's condition; others stay a TODO", () => {
+    const raid = face("At the beginning of your end step, if you attacked this turn, draw a card.");
+    expect(raid.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 });
+    expect(raid.complete).toBe(true);
+    expect(face("At the beginning of your end step, if you gained life this turn, draw a card.").complete).toBe(false);
+  });
+
+  it("'you may discard a card. If you do, draw a card' draws only if a card was discarded", () => {
+    const loot = face("When ~ enters, you may discard a card. If you do, draw a card.");
+    expect(loot.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Discard a card to draw a card?",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 1 },
+          { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
+        ],
+      },
+    });
+  });
+});
+
 describe("agreement with the hand-authored pool", () => {
   it("every ability the parser claims complete matches the authored one", () => {
     const { stats, mismatches } = checkPool(POOL_CARDS);

@@ -181,6 +181,12 @@ function faceSource(face, ctx) {
     cantBeCountered: parsed.cantBeCountered,
     cycling: parsed.cycling,
     flashback: parsed.flashback,
+    convoke: parsed.convoke,
+    morph: parsed.morph,
+    disturb: parsed.disturb,
+    suspend: parsed.suspend,
+    selfCostReduction: parsed.selfCostReduction,
+    additionalCost: parsed.additionalCost,
     text: face.oracle_text ?? "",
     targets: parsed.targets?.length ? parsed.targets : undefined,
     effect: parsed.effect ?? undefined,
@@ -474,16 +480,22 @@ function printCoverage(total) {
     const key = line.replace(/\b\d+\b/g, "N").replace(/\{[^}]+\}/g, "{…}");
     unparsed.set(key, (unparsed.get(key) ?? 0) + 1);
   };
+  // A face held back by exactly one thing: the template that reads it would
+  // finish the face outright — the best measure of what a template is worth.
+  const sole = new Map();
+  const keyOf = (line) => line.replace(/\b\d+\b/g, "N").replace(/\{[^}]+\}/g, "{…}");
   for (const p of report.parsed) {
+    const left = [];
     // An ability here had its cost or trigger read, whatever became of its
     // effect; a line read not at all is in `todo`.
     for (const a of [...p.activated, ...p.triggered]) {
       abilities += 1;
       if (a.effect !== null && a.__todo === undefined) finished += 1;
-      for (const t of a.__todo ?? []) count(t);
+      for (const t of a.__todo ?? []) count(t), left.push(t);
     }
     unreadLines += p.todo.length;
-    for (const t of p.todo) count(t);
+    for (const t of p.todo) count(t), left.push(t);
+    if (left.length === 1) sole.set(keyOf(left[0]), (sole.get(keyOf(left[0])) ?? 0) + 1);
   }
   const cards = report.autoFinished.length + report.scaffolded.length;
   console.log(`${total} names; ${cards} would be written (the rest are in the pool or not in the snapshot)`);
@@ -492,6 +504,11 @@ function printCoverage(total) {
   console.log(`  …with the effect read too: ${pct(finished, abilities)}`);
   console.log("\nThe unparsed lines that recur most — the next templates to write:");
   for (const [line, n] of [...unparsed].sort((a, b) => b[1] - a[1]).slice(0, 40)) {
+    console.log(`  ${String(n).padStart(4)}  ${line.length > 110 ? `${line.slice(0, 107)}…` : line}`);
+  }
+  const top = Number(option("--sole") ?? 40);
+  console.log(`\nThe only line left on a face — a template for it finishes that many outright (${[...sole.values()].reduce((a, b) => a + b, 0)} faces):`);
+  for (const [line, n] of [...sole].sort((a, b) => b[1] - a[1]).slice(0, top)) {
     console.log(`  ${String(n).padStart(4)}  ${line.length > 110 ? `${line.slice(0, 107)}…` : line}`);
   }
 }

@@ -28,12 +28,14 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "may",
-        prompt: "Discard a card, then draw a card?",
+        prompt: "Discard a card to draw a card?",
+        // "If you do": the draw only if a card was discarded (Artist's
+        // Talent's shape).
         effect: {
           kind: "sequence",
           effects: [
             { kind: "discard", target: "you", amount: 1 },
-            { kind: "draw", amount: 1 },
+            { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
           ],
         },
       },

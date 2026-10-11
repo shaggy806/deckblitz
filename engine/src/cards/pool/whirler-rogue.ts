@@ -25,7 +25,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: null, tap: false, tapOthers: { count: 2, filter: { type: "artifact", controlledBy: "you" } } },
+      cost: { mana: null, tap: false, tapOthers: { count: 2, filter: { type: "artifact", controlledBy: "you" }, includeSelf: true } },
       targets: ["creature"],
       effect: { kind: "grant-keyword", target: 0, keyword: "unblockable", duration: "end-of-turn" },
       resolve: null,

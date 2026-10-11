@@ -177,12 +177,23 @@ card:verify -w engine -- --dir review`, and `card:text` the same way)
 against its Oracle text and rulings, then move it into `pool/`.
 
 `npm run card:scaffold -w engine -- --report` writes nothing: it says how much
-of the backlog the parser reads and lists the unparsed lines that recur most,
-which is where a new template earns the most. `npm run card:parse-check -w
-engine` is the parser's ground truth — every ability it claims to have read,
-on every pool card, compared with the hand-authored one — and
-`test/oracle-parse.test.ts` fails on any disagreement. When you add a
-template, run both.
+of the backlog the parser reads, lists the unparsed lines that recur most, and
+— the better guide — the lines that are a face's **only** unread line (`--sole
+N` for more): a template for one of those finishes that many cards outright.
+`npm run card:parse-check -w engine` is the parser's ground truth: everything
+it claims to have read on every pool card — each ability, a spell's effect
+and modes, each static, and the card fields a keyword line sets (convoke,
+morph, cycling, …) — compared with the hand-authored card, two spellings of
+the same thing (`whose: "any"` or none, a scope or its filter, a nested
+`sequence`, …) counted as one; `test/oracle-parse.test.ts` fails on any
+disagreement. When you add a template, run both — and when a template can only
+be checked on cards not in the pool yet, pin it in `oracle-parse.test.ts`.
+
+A keyword the engine runs through a helper (`crew`, `undying`, `unearth`, …)
+is read as that helper's own output, imported from `dist/` — what a
+hand-authored card gets — so `oracle-parse.mjs` needs a build to run. "It" is
+read only in an effect's first sentence: the source in a trigger about the
+source, the trigger's object in one about another object, nothing otherwise.
 
 Or create `engine/src/cards/pool/grizzly-bears.ts` by hand:
 

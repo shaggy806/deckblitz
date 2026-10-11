@@ -18,7 +18,28 @@
 // serializer below prints both as comments.
 //
 // Pure: no I/O. `parseFace(face, ctx)`, where `ctx.tokenFor(description)`
-// names the engine token a "create …" clause means (or `null`).
+// names the engine token a "create …" clause means (or `null`). A keyword the
+// engine has a helper for (crew, undying, unearth, …) is that helper's own
+// output, read from the built engine, so it's exactly what a hand-authored
+// card gets.
+
+import {
+  affinity,
+  afflict,
+  annihilator,
+  crew,
+  dethrone,
+  evolve,
+  extort,
+  flanking,
+  livingWeapon,
+  mobilize,
+  myriad,
+  outlast,
+  persist,
+  undying,
+  unearth,
+} from "../dist/cards/helpers.js";
 
 // ------------------------------------------------------------------ text
 
@@ -87,8 +108,143 @@ export const KEYWORDS = {
   infect: "infect", wither: "wither",
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
-  changeling: "changeling", daybound: "daybound", nightbound: "nightbound",
+  changeling: "changeling", daybound: "daybound", nightbound: "nightbound", shadow: "shadow",
 };
+
+const COST = "((?:\\{[^}]+\\})+)";
+/**
+ * A keyword the engine runs as an ability or a card field rather than a
+ * `Keyword` — what it adds to the face, or `null`. Each shape is the one the
+ * pool's own cards use (the helper, or the card field).
+ */
+function keywordPart(part) {
+  const p = part.trim();
+  let m;
+  if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
+  if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
+  if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
+  if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
+  if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
+  if ((m = new RegExp(`^unearth ${COST}$`, "i").exec(p))) return { activated: [unearth(m[1])] };
+  if ((m = /^fabricate (\d+)$/i.exec(p))) {
+    // Angel of Invention's shape: the counters or that many Servos, chosen as it resolves.
+    const n = Number(m[1]);
+    return {
+      triggered: [
+        {
+          trigger: { on: "enters-battlefield", who: "self" },
+          targets: [],
+          effect: {
+            kind: "modal",
+            minModes: 1,
+            maxModes: 1,
+            modes: [
+              {
+                text: `Put ${n} +1/+1 counter${n === 1 ? "" : "s"} on this creature.`,
+                effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: n },
+              },
+              {
+                text: `Create ${n} 1/1 colorless Servo artifact creature token${n === 1 ? "" : "s"}.`,
+                effect: { kind: "create-token", token: "Servo Token", count: n },
+              },
+            ],
+          },
+          resolve: null,
+          text: `Fabricate ${n}`,
+        },
+      ],
+    };
+  }
+  if ((m = /^modular (\d+)$/i.exec(p))) {
+    // Arcbound Ravager's shape: enters with the counters; may move them as it dies.
+    const n = Number(m[1]);
+    return {
+      static: [
+        {
+          affects: { scope: "self" },
+          replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: n } },
+          text: `Modular ${n}`,
+        },
+      ],
+      triggered: [
+        {
+          trigger: { on: "dies", who: "self" },
+          targets: [{ kind: "permanent", filter: { types: ["artifact", "creature"] } }],
+          effect: {
+            kind: "may",
+            prompt: "Put this creature's +1/+1 counters on target artifact creature?",
+            effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { countersOn: "source", counter: "+1/+1" } },
+          },
+          resolve: null,
+          text: `Modular ${n}`,
+        },
+      ],
+    };
+  }
+  const simple = {
+    undying: () => ({ triggered: [undying()] }),
+    persist: () => ({ triggered: [persist()] }),
+    flanking: () => ({ keywords: ["flanking"], triggered: [flanking()] }),
+    dethrone: () => ({ triggered: [dethrone()] }),
+    myriad: () => ({ triggered: [myriad()] }),
+    extort: () => ({ triggered: [extort()] }),
+    evolve: () => ({ triggered: [evolve()] }),
+    "living weapon": () => ({ triggered: [livingWeapon()] }),
+    exalted: () => ({
+      triggered: [
+        {
+          trigger: { on: "attacks-alone", who: "you-control" },
+          targets: [],
+          effect: { kind: "modify-pt", target: "trigger-object", power: 1, toughness: 1, duration: "end-of-turn" },
+          resolve: null,
+          text: "Exalted",
+        },
+      ],
+    }),
+    "battle cry": () => ({
+      triggered: [
+        {
+          trigger: { on: "attacks", who: "self" },
+          targets: [],
+          effect: {
+            kind: "modify-pt-all",
+            filter: { type: "creature", attacking: true },
+            power: 1,
+            toughness: 0,
+            duration: "end-of-turn",
+            exceptSource: true,
+          },
+          resolve: null,
+          text: "Battle cry",
+        },
+      ],
+    }),
+    storm: () => ({ triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "storm" }, resolve: null, text: "Storm" }] }),
+    cascade: () => ({
+      triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" }],
+    }),
+    convoke: () => ({ card: { convoke: true } }),
+    // Devoid makes the card colourless (rule 702.114a), which its colours
+    // already say.
+    devoid: () => ({}),
+    "affinity for artifacts": () => ({ card: { selfCostReduction: affinity({ type: "artifact" }) } }),
+  }[p.toLowerCase()];
+  if (simple !== undefined) return simple();
+  if ((m = new RegExp(`^(morph|megamorph) ${COST}$`, "i").exec(p))) {
+    return { card: { morph: { keyword: m[1].toLowerCase(), cost: m[2] } } };
+  }
+  if ((m = new RegExp(`^disturb ${COST}$`, "i").exec(p))) return { card: { disturb: { cost: m[1] } } };
+  if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
+  // Landcycling and typecycling: cycling that searches (Ash Barrens, Eagles of the North).
+  if ((m = new RegExp(`^basic landcycling ${COST}$`, "i").exec(p))) {
+    return { card: { cycling: { cost: m[1], search: { supertype: "basic", type: "land" } } } };
+  }
+  if ((m = new RegExp(`^(plains|island|swamp|mountain|forest|desert)cycling ${COST}$`, "i").exec(p))) {
+    const type = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase();
+    return { card: { cycling: { cost: m[2], search: { subtype: type } } } };
+  }
+  return null;
+}
 
 /** Prowess (rule 702.108) is a triggered ability, not a `Keyword`: the shape
  * every pool card authors it in. */
@@ -233,19 +389,65 @@ const TARGET_PHRASES = [
   ["target opponent", "opponent"],
   ["any target", "any-target"],
 ];
-const targetOf = (phrase) => TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1];
+/**
+ * A target phrase the fixed list doesn't have, read word by word: "target
+ * tapped creature", "target attacking creature you control", "target nonbasic
+ * land", "target creature with flying", "target creature with power 4 or
+ * greater" — a `permanent` spec, or `undefined` for any word it doesn't know.
+ */
+function modifiedTargetOf(phrase) {
+  const m = new RegExp(
+    "^target (.+?)(?: (you control|an opponent controls|you don't control))?" +
+      "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?$",
+    "i",
+  ).exec(phrase);
+  if (m === null) return undefined;
+  const words = m[1].split(" ");
+  const filter = {};
+  // Adjectives before the type, each a filter clause of its own.
+  while (words.length > 1) {
+    const w = words[0].toLowerCase();
+    if (w === "tapped") filter.tapped = true;
+    else if (w === "untapped") filter.tapped = false;
+    else if (w === "attacking") filter.attacking = true;
+    else if (w === "blocking") filter.blocking = true;
+    else if (w === "nonbasic") filter.notSupertype = "basic";
+    else if (COLOR_WORD[w] !== undefined) filter.colors = [COLOR_WORD[w]];
+    else if (/^non(white|blue|black|red|green)$/.test(w)) filter.notColors = [COLOR_WORD[w.slice(3)]];
+    else break;
+    words.shift();
+  }
+  const typed = parseTypePhrase(words.join(" "));
+  // A permanent target needs a permanent type to stand on.
+  if (typed === null || (typed.type === undefined && typed.types === undefined && typed.typesAnyOf === undefined)) {
+    return undefined;
+  }
+  Object.assign(filter, typed);
+  const cmp = (n, way) => ({ op: way.toLowerCase() === "greater" ? "gte" : "lte", n: Number(n) });
+  if (m[3] !== undefined) {
+    if (/^(flying|reach)$/i.test(m[3])) filter.keyword = m[3].toLowerCase();
+    else if (m[4] !== undefined) filter.power = cmp(m[4], m[5]);
+    else if (m[6] !== undefined) filter.toughness = cmp(m[6], m[7]);
+    else if (m[8] !== undefined) filter.manaValue = cmp(m[8], m[9]);
+  }
+  const whose = m[2] === undefined ? undefined : m[2].toLowerCase() === "you control" ? "you" : "opponent";
+  return { kind: "permanent", ...(whose !== undefined ? { whose } : {}), filter };
+}
+const targetOf = (phrase) =>
+  TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1] ?? modifiedTargetOf(phrase.toLowerCase());
 // Non-capturing: a template wraps it in its own group where it wants the match,
-// so a nested group never shifts the numbering of the ones after it.
-const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")})`;
+// so a nested group never shifts the numbering of the ones after it. After the
+// fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
+const TARGET = `(?:${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
 
 /** "target creature card from your graveyard" and friends. */
 function graveyardTargetOf(phrase) {
-  const m = /^target (.+?) card from (your|a|an opponent's) graveyard$/i.exec(phrase);
+  const m = /^target (?:(.+?) )?card from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
-  const filter = parseTypePhrase(m[1], { cards: true });
+  const filter = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
   if (filter === null) return undefined;
   const whose = m[2] === "your" ? "you" : m[2] === "a" ? "any" : "opponent";
-  return { kind: "card-in-graveyard", whose, filter };
+  return { kind: "card-in-graveyard", whose, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
 }
 
 // ----------------------------------------------------------------- costs
@@ -678,6 +880,146 @@ export function parseSentence(sentence, ctx) {
     return choice(WUBRG, n);
   }
 
+  // Regeneration, transforming, prevention (rules 701.19, 701.28, 615).
+  if (re("regenerate ~").test(s)) return { kind: "regenerate", target: "source" };
+  if ((m = re(`regenerate (${TARGET})`).exec(s))) return { kind: "regenerate", target: slot(m[1]) };
+  if (re("transform ~").test(s)) return { kind: "transform", target: "source" };
+  if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
+    return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
+  }
+
+  // Combat this turn.
+  if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
+  if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
+    return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
+  }
+
+  // "Gets +N/+N and gains <keyword> until end of turn" — two instructions on one object.
+  if ((m = re(`(~|${TARGET}) gets ([+-]\\d+)/([+-]\\d+) and gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
+    const target = m[1] === "~" ? "source" : slot(m[1]);
+    const kws = [m[4], m[5]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt", target, power: Number(m[2]), toughness: Number(m[3]), duration: "end-of-turn" },
+        ...kws.map((keyword) => ({ kind: "grant-keyword", target, keyword, duration: "end-of-turn" })),
+      ],
+    };
+  }
+
+  // Everyone's creatures until end of turn.
+  if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
+  }
+  if ((m = re(`creatures your opponents control get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", controlledBy: "opponent" },
+      power: Number(m[1]),
+      toughness: Number(m[2]),
+      duration: "end-of-turn",
+    };
+  }
+  if ((m = re(`~ deals ${N} damage to each creature and each player`).exec(s))) {
+    // One event (Pestilence): the creatures and the players are dealt it at once.
+    const n = amount(m[1]);
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage-all", filter: { type: "creature" }, amount: n },
+        { kind: "damage", amount: n, who: "each-player" },
+      ],
+    };
+  }
+  if ((m = re(`~ deals ${N} damage to you`).exec(s))) return { kind: "damage", amount: amount(m[1]), who: "you" };
+
+  // Damage and life together (Lightning Helix): two instructions.
+  if ((m = re(`~ deals ${N} damage to (${TARGET}) and you gain ${N} life`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "damage", amount: amount(m[1]), target: slot(m[2]) },
+        { kind: "gain-life", amount: amount(m[3]) },
+      ],
+    };
+  }
+  if ((m = re(`~ deals ${N} damage to (${TARGET}) and ${N} damage to you`).exec(s))) {
+    // One instruction: both are dealt at once (rule 120.3, one damage event).
+    return {
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "damage", amount: amount(m[1]), target: slot(m[2]) },
+        { kind: "damage", amount: amount(m[3]), who: "you" },
+      ],
+    };
+  }
+  if ((m = re(`~ deals ${N} damage to each creature without flying`).exec(s))) {
+    return { kind: "damage-all", filter: { type: "creature", notKeyword: "flying" }, amount: amount(m[1]) };
+  }
+  if (re("the Ring tempts you").test(s)) return { kind: "the-ring-tempts-you" };
+  if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
+  if ((m = re(`put (target card from a graveyard) on the bottom of its owner's library`).exec(s))) {
+    return { kind: "put-on-library", target: slot(m[1]), position: "bottom" };
+  }
+
+  // Life, in the shapes the pool writes it.
+  if ((m = re(`you lose ${N} life`).exec(s))) return { kind: "lose-life", amount: amount(m[1]) };
+  if ((m = re(`each player loses ${N} life`).exec(s))) return { kind: "lose-life", amount: amount(m[1]), who: "each-player" };
+  if ((m = re(`(target player|target opponent) loses ${N} life and you gain ${N} life`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "lose-life", amount: amount(m[2]), target: slot(m[1]) },
+        { kind: "gain-life", amount: amount(m[3]) },
+      ],
+    };
+  }
+  if ((m = re(`you draw a card and you lose ${N} life`).exec(s))) {
+    return { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "lose-life", amount: amount(m[1]) }] };
+  }
+  if (re("draw a card at the beginning of the next turn's upkeep").test(s)) {
+    return { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." };
+  }
+
+  // Counterspells with a tax (Mana Leak): the spell's controller decides.
+  if ((m = /^counter (target spell|target creature spell|target noncreature spell|target instant or sorcery spell) unless its controller pays ((?:\{\d+\})+)\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    return { kind: "unless", chooser: i, options: [{ pay: m[2] }], otherwise: { kind: "counter", target: i } };
+  }
+
+  // Libraries and graveyards.
+  if ((m = re(`put (${TARGET}) on top of its owner's library`).exec(s))) {
+    return { kind: "put-on-library", target: slot(m[1]), position: "top" };
+  }
+  if (re("exile target card from a graveyard").test(s)) {
+    return { kind: "exile", target: ctx.target({ kind: "card-in-graveyard", whose: "any" }) };
+  }
+
+  // "It": the object the ability is about — its source, or the object its
+  // trigger names — and only while nothing has been targeted, which "it"
+  // could mean instead.
+  const it = ctx.targets.length === 0 ? ctx.it : undefined;
+  if (it !== undefined) {
+    if ((m = re(`it deals ${N} damage to (${TARGET})`).exec(s))) {
+      return { kind: "damage", amount: amount(m[1]), target: slot(m[2]), ...(it === "source" ? {} : { from: it }) };
+    }
+    if ((m = re(`it gets ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
+      return { kind: "modify-pt", target: it, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
+    }
+    if ((m = re(`it gains ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
+      const kws = [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+      const one = (keyword) => ({ kind: "grant-keyword", target: it, keyword, duration: "end-of-turn" });
+      return kws.length === 1 ? one(kws[0]) : { kind: "sequence", effects: kws.map(one) };
+    }
+    if ((m = re(`put ${N} \\+1/\\+1 counters? on it`).exec(s))) {
+      return { kind: "add-counter", target: it, counter: "+1/+1", amount: amount(m[1]) };
+    }
+    if (re("untap it").test(s)) return { kind: "untap", target: it };
+    if (re("it connives").test(s)) return { kind: "connive", target: it };
+  }
+
   // Everything else that's a whole instruction by itself.
   if (re("you become the monarch").test(s)) return { kind: "become-monarch" };
 
@@ -706,9 +1048,46 @@ export function parseEffect(text, outer) {
   const parsed = [];
   const todo = [];
   const hints = [];
-  for (const sentence of sentences) {
+  for (const [i, sentence] of sentences.entries()) {
+    // "If you do" after "you may discard a card": the draw happens only if a
+    // card was discarded (the pool's this-way conditional).
+    if (/^if you do, draw (a|one|two|three) cards?\.$/i.test(sentence) && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "discard" && parsed.at(-1).effect.target === "you") {
+      const draw = parseSentence(`${sentence.slice("If you do, ".length, "If you do, ".length + 1).toUpperCase()}${sentence.slice("If you do, ".length + 1)}`, ctx);
+      if (draw !== null && !containsUndefined(draw)) {
+        const may = parsed.pop();
+        hints.pop();
+        const combined = {
+          kind: "may",
+          prompt: "Discard a card to draw a card?",
+          effect: {
+            kind: "sequence",
+            effects: [may.effect, { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: draw }],
+          },
+        };
+        parsed.push(combined);
+        hints.push({ sentence, effect: combined });
+        continue;
+      }
+    }
+    // "It can't be regenerated." (rule 701.19c) after the destroy it's about.
+    if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
+      parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
+      continue;
+    }
+    // "Its controller loses N life." after the one sentence that targeted:
+    // that target's controller, as it last existed (Countersquall).
+    const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
+    if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
+      const loss = { kind: "lose-life", amount: numberOf(lossM[1]), toControllerOfTarget: 0 };
+      parsed.push(loss);
+      hints.push({ sentence, effect: loss });
+      continue;
+    }
     const before = ctx.targets.length;
-    const effect = parseSentence(sentence, ctx);
+    // "It" names the ability's object only in its first sentence: after
+    // another ("Create a 0/0 token. Put a +1/+1 counter on it.") it's
+    // whatever that sentence was about.
+    const effect = parseSentence(sentence, i === 0 ? ctx : { ...ctx, it: undefined });
     if (effect === null || containsUndefined(effect)) {
       ctx.targets.length = before;
       todo.push(sentence);
@@ -778,12 +1157,22 @@ export function parseFace(face, ctx = {}) {
       return /^\{/.test(w[1]) ? { mana: w[1] } : { payLife: Number(w[1]) };
     };
     const isProwess = (p) => p.toLowerCase() === "prowess";
-    if (parts.every((p) => KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null)) {
+    const known = (p) =>
+      KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p) !== null;
+    if (parts.every(known)) {
       for (const p of parts) {
         if (KEYWORDS[p.toLowerCase()] !== undefined) out.keywords.push(KEYWORDS[p.toLowerCase()]);
         else if (isProwess(p)) out.triggered.push(prowessAbility());
         else if (protectionOf(p) !== null) out.static.push(protectionOf(p));
-        else out.triggered.push(wardAbility(wardOf(p)));
+        else if (wardOf(p) !== null) out.triggered.push(wardAbility(wardOf(p)));
+        else {
+          const k = keywordPart(p);
+          out.keywords.push(...(k.keywords ?? []));
+          out.triggered.push(...(k.triggered ?? []));
+          out.activated.push(...(k.activated ?? []));
+          out.static.push(...(k.static ?? []));
+          Object.assign(out, k.card ?? {});
+        }
       }
       continue;
     }
@@ -820,6 +1209,10 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
+    if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {
+      out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
+      continue;
+    }
 
     // Static lines.
     const st = parseStatic(line, printed(raw));
@@ -882,13 +1275,17 @@ export function parseFace(face, ctx = {}) {
       });
       const base = { targets: [], effect: null, resolve: null, text: printed(raw), ...(oncePerTurn ? { oncePerTurn: true } : {}) };
       if (/^if /i.test(rest)) {
-        // An intervening-if (rule 603.4) belongs in `condition`, which isn't parsed.
-        base.__todo = [`the intervening-if: "${rest.slice(0, rest.indexOf(",") + 1)}"`];
+        // An intervening-if (rule 603.4) is the ability's `condition`: read
+        // for the few the engine names, else left to a person.
+        const clause = rest.slice(0, rest.indexOf(",") + 1);
+        const condition = INTERVENING_IFS[clause.toLowerCase()];
+        if (condition !== undefined) base.condition = condition;
+        else base.__todo = [`the intervening-if: "${clause}"`];
         rest = rest.slice(rest.indexOf(", ") + 2);
         rest = rest[0].toUpperCase() + rest.slice(1);
       } else rest = rest.length > 0 ? rest[0].toUpperCase() + rest.slice(1) : rest;
       const first = { trigger: triggers[0], ...base };
-      const next = fillEffect(first, rest, { tokenFor, onStack: true }, lines, i);
+      const next = fillEffect(first, rest, { tokenFor, onStack: true, it: itOf(triggers) }, lines, i);
       out.triggered.push(first);
       for (const t of triggers.slice(1)) out.triggered.push({ ...first, trigger: t, targets: [...first.targets] });
       i = next;
@@ -929,6 +1326,26 @@ export function parseFace(face, ctx = {}) {
   return out;
 }
 
+/** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
+ * raid (Alesha) and morbid (Liliana's Devotee). */
+const INTERVENING_IFS = {
+  "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+  "if a creature died this turn,": { kind: "creature-died-this-turn" },
+};
+
+/**
+ * What "it" means in a triggered ability's effect: the source itself, when the
+ * trigger is about the source ("When ~ dies, it deals 2 damage to any
+ * target"), or the object the trigger names ("Whenever a creature you control
+ * attacks, it gets +1/+0"). Nothing for a trigger about a step or a player.
+ */
+function itOf(triggers) {
+  const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
+  if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
+  if (triggers.every((t) => t.who !== "self" && t.filter !== undefined && objectEvents.includes(t.on))) return "trigger-object";
+  return undefined;
+}
+
 /** Fill `ability.effect` / `targets` from its effect text; a "choose one —"
  * swallows the bullet lines after it. Returns the last line index used. */
 /** Effects that move cards to or from a library. */
@@ -953,6 +1370,12 @@ function manaAbilityExtras(ability) {
   if (e?.kind !== "sequence" || e.effects[0]?.kind !== "add-mana" || ability.targets.length > 0) return;
   const rest = e.effects.slice(1);
   if (rest.length === 0 || rest.some((step) => step.kind === "add-mana")) return;
+  // "This land deals 1 damage to you": a pain land's mana ability, the
+  // damage part of it (`painToController`).
+  if (rest.length === 1 && rest[0].kind === "damage" && rest[0].who === "you" && typeof rest[0].amount === "number") {
+    ability.effect = { ...e.effects[0], painToController: rest[0].amount };
+    return;
+  }
   if (rest.some(touchesLibrary)) {
     ability.__todo = [...(ability.__todo ?? []), "not a mana ability (rule 605.1a: it moves a card to or from a library), so it uses the stack"];
     return;
@@ -984,7 +1407,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }
-  const r = parseEffect(text, { targets: ability.targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack });
+  const r = parseEffect(text, { targets: ability.targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack, it: ctx.it });
   ability.effect = r.effect;
   if (r.effect === null) {
     ability.__todo = [...(ability.__todo ?? []), ...r.todo];
@@ -1028,6 +1451,19 @@ function parseStatic(line, text) {
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };
   if (line === "~ attacks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-attack"], text };
   if (line === "~ can't be blocked.") return { affects: { scope: "self" }, grantKeywords: ["unblockable"], text };
+  if ((m = new RegExp(`^During your turn, ~ has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
+    // Avatar Kyoshi's shape.
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "your-turn" },
+      grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  if (line === "~ can block only creatures with flying.") return { affects: { scope: "self" }, canBlockOnly: { keyword: "flying" }, text };
+  if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
+    return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
+  }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
   if ((m = /^(Other )?creatures you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
     return { affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) }, grantPt: [Number(m[2]), Number(m[3])], text };
