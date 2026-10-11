@@ -722,6 +722,18 @@ in `git log`.
   `manifest-dread` (Den Protector, Kadena, Hooded Hydra, Arno Dorian, Trail of
   Mystery, Unwanted Remake; `morph.test.ts`). Open: turning face up by an
   effect, returning face down, manifesting from a hand.
+- **Random choice** (`effect:random-choice`, 2026-10-11, B48) — a card at
+  random from a graveyard (`choose-random-card`, bound as target 0), an
+  opponent or player at random (`choose-opponent`'s `random`/`anyPlayer`), and
+  a resolution-time mode at random among those whose `onlyIf` holds (`modal`'s
+  `random`), on the seeded stream, logged as `chosen-at-random` (Gamble, Arcane
+  Bombardment, Deadbridge Chant, Tomb Tyrant, Wondrous Crucible, Crystalline
+  Giant; `random-choice.test.ts`). It had 21 cards waiting, 16 of them on it
+  alone by their records; 7 were authorable — the rest each turned out to want
+  something more, now keyed: a random card from a hand or among linked exiles,
+  a mode at random as an ability goes on the stack. The random opponent is
+  built ahead: no pool card picks one yet (Vial Smasher, Indoraptor, Wildfire
+  Devils, Explosion of Riches each wait on something else).
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

@@ -28,6 +28,13 @@ export type EffectDuration =
    * effect would begin, so the effect doesn't (rule 611.2b). */
   | { readonly whileSource: { readonly id: ObjectId; readonly zoneChangeCount: number } | null };
 
+/** What a random choice picked — the `chosen-at-random` event: a player, a
+ * card (in a public zone, so everyone sees which), or a mode by its text. */
+export type RandomPick =
+  | { readonly kind: "player"; readonly player: PlayerId }
+  | { readonly kind: "card"; readonly object: ObjectId }
+  | { readonly kind: "mode"; readonly text: string };
+
 interface Base {
   /** Monotonic sequence number, assigned when the event is appended. */
   readonly seq: number;
@@ -526,6 +533,16 @@ export type GameEvent =
       readonly types: readonly CardType[];
       readonly subtypes: readonly string[];
       readonly duration: EffectDuration;
+    })
+  | (Base & {
+      /** `player`'s effect from `source` picked `chosen` at random — a
+       * player (Vial Smasher the Fierce's opponent), a card in a graveyard
+       * (Deadbridge Chant's) or a mode (Summon: Magus Sisters'). See
+       * `RandomPick`. */
+      readonly type: "chosen-at-random";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly chosen: RandomPick;
     })
   | (Base & {
       /** `player`'s effect picked `chosen` at random for `object` — the

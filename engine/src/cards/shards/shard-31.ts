@@ -251,6 +251,7 @@ import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
 import _poolValorSinger from "../pool/valor-singer.js";
+import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
@@ -527,6 +528,7 @@ const shard: CardShard = {
     _poolUndercityShade,
     _poolUnexplainedAbsence,
     _poolValorSinger,
+    _poolVampireCutthroat,
     _poolVaultOfCatlacan,
     _poolVesselOfParamnesia,
     _poolViashinoSpearhunter,

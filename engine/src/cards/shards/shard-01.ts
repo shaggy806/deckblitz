@@ -131,6 +131,7 @@ import _poolMalakirMire from "../pool/malakir-mire.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
+import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
 import _poolMentalMisstep from "../pool/mental-misstep.js";
@@ -143,6 +144,7 @@ import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
+import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -390,6 +392,7 @@ const shard: CardShard = {
     _poolMantaRiders,
     _poolMaraleafPixie,
     _poolMarionetteMaster,
+    _poolMausoleumWanderer,
     _poolMawOfTheMire,
     _poolMemorialToGlory,
     _poolMentalMisstep,
@@ -402,6 +405,7 @@ const shard: CardShard = {
     _poolMountainGoat,
     _poolMurkwaterPathway,
     _poolNightscapeMaster,
+    _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
     _poolOgnis,
     _poolOgreTaskmaster,

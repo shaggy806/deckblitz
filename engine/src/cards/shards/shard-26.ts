@@ -139,6 +139,7 @@ import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
+import _poolMagneticTheft from "../pool/magnetic-theft.js";
 import _poolMahamotiDjinn from "../pool/mahamoti-djinn.js";
 import _poolMalametWarScribe from "../pool/malamet-war-scribe.js";
 import _poolMantleOfWebs from "../pool/mantle-of-webs.js";
@@ -242,6 +243,7 @@ import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
+import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
@@ -419,6 +421,7 @@ const shard: CardShard = {
     _poolMaddeningCacophony,
     _poolMaelstromColossus,
     _poolMaestrosTheater,
+    _poolMagneticTheft,
     _poolMahamotiDjinn,
     _poolMalametWarScribe,
     _poolMantleOfWebs,
@@ -522,6 +525,7 @@ const shard: CardShard = {
     _poolThrissNantukoPrimus,
     _poolTimelessLotus,
     _poolTirelessTracker,
+    _poolToArms,
     _poolTorrentialGearhulk,
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,

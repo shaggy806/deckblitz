@@ -6,6 +6,8 @@ import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 import type { GameState } from "../state.js";
 
+import { A as HA, settle, spawn, table } from "./harness.js";
+
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
 
@@ -269,5 +271,34 @@ describe("Esoteric Duplicator — copies a sacrificed artifact at the next end s
     game.advanceUntil(quiet);
     expect(tokenCopies(game, "Clue Token")).toHaveLength(1);
     expect(game.state.objects[tokenCopies(game, "Clue Token")[0]].controller).toBe(A);
+  });
+});
+
+describe("a sacrificed creature that's also a mana source — the payment order is only a preference", () => {
+  it("Grim Backwoods sacrificing the only {G} source still pays, when ordering it first would spend it on {B}", () => {
+    // The fuzzer's seed 17 (2026-10-11): at 1 life the Talisman's coloured
+    // mana would deal its damage, so Ornithopter of Paradise is the only {G};
+    // put first as the creature sacrificed, it was spent on the {B}, and the
+    // activation the legality check had allowed then threw.
+    const { game } = table({ life: 1 });
+    const backwoods = spawn(game, "Grim Backwoods");
+    const ornithopter = spawn(game, "Ornithopter of Paradise");
+    spawn(game, "Talisman of Curiosity");
+    for (const land of ["Swamp", "Island", "Plains"]) spawn(game, land);
+    const action = {
+      type: "activate-ability",
+      player: HA,
+      source: backwoods,
+      abilityIndex: 1,
+      targets: [],
+      sacrifice: ornithopter,
+    } as const;
+    expect(game.canDispatch(action)).toBeNull();
+    const before = game.state.zones.perPlayer[HA].hand.length;
+    game.dispatch(action);
+    settle(game);
+    expect(game.state.objects[ornithopter].zone).toBe("graveyard");
+    expect(game.state.zones.perPlayer[HA].hand.length).toBe(before + 1);
+    expect(game.state.players[HA].life).toBe(1);
   });
 });

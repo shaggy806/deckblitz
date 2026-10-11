@@ -54,22 +54,24 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill). `npm run cards:needs
-  -w engine -- --next 60` lists the next untriaged cards by rank: Turntimber Symbiosis (rank
-  2312) is triaged since batch 37, so rank 6746 on. The nine other starter precons' 31 stand-ins
-  (`engine/data/sweep-3/PC-*.json`) go as their originals land.
+  -w engine -- --next 60` lists the next untriaged cards by rank: rank 6820 on (batch 48 took
+  6746–6819). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
+  as their originals land.
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
-- **Next: the top 5000 cards, then past them.** `top-commander-cards.txt` (3,491 of 5,000
-  implemented) is fully triaged, and past it Oracle EDHREC ranks 5011–6745 (batches 30–36, 46);
-  rank 6746 is next. Every card left needs engine work: build the features that block the most
-  of them — crew, the Ring, dice, ninjutsu, Rooms and most of casting during resolution landed
-  2026-10-09, Class 2026-10-10, attach to the trigger's object or the source and attach-all
-  (B46), and morph, disguise and manifest dread (B47) the same day; leading now (`cards:needs --
-  --rank`): random choice (21 cards, 16 fully unblocked), devotion (21, 9), attach extensions'
-  rest (19, 13), the Kindred card type (19, 17) (`neededCards-features.md`, "Open: the card
-  backlog"; the cheap recurring blockers are in `docs/card-blockers.md`, "Open leads"). **Next to
-  build: random choice** (`cards:needs -- --feature effect:random-choice`), then author what it
-  unblocks.
+- **Next: the top 5000 cards, then past them.** `top-commander-cards.txt` (3,496 of 5,000
+  implemented) is fully triaged, and past it Oracle EDHREC ranks 5011–6819 (batches 30–36, 46,
+  48); rank 6820 is next. Every card left needs engine work: build the features that block the
+  most of them — crew, the Ring, dice, ninjutsu, Rooms and most of casting during resolution
+  landed 2026-10-09, Class 2026-10-10, attach to the trigger's object or the source and
+  attach-all (B46), morph, disguise and manifest dread (B47) the same day, and random choice
+  2026-10-11 (B48: 7 of its 21 cards — the rest each wanted something else too, now recorded);
+  leading now (`cards:needs -- --rank`): devotion (21 cards, 9 fully unblocked), attach
+  extensions' rest (20, 13), the Kindred card type (19, 17), become-copy (16, 15)
+  (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
+  `docs/card-blockers.md`, "Open leads"). **Next to build: the Kindred card type** — the most
+  cards fully unblocked (`cards:needs -- --feature mechanic:kindred-card-type`), then author
+  what it unblocks.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).
@@ -118,6 +120,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.
 - **"Its controller may search" always searches** (Path to Exile, Assassin's Trophy, Ghost Quarter, …): a `may` asks the effect's controller, not that player.
+- **A Saga's chapter ability doesn't remember which Saga it came from** (The Aesir Escape Valhalla): once the Saga leaves, "the exiled card" reads nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
 - **A "trigger-object" that blinks is still found** (400.7): Atarka's double strike lands on a Dragon Cloudshifted in response.
 
@@ -181,6 +184,9 @@ item lands.
 - **The library and the deck builder load every card definition** (~3.1 MB).
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
+- **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
+- **A Settings button on the landing page and in the lobby** (the user, 2026-10-11): sound and music settings, and the priority preferences, persisting from game to game.
+- **A tutorial on how to use the site** (the user, 2026-10-11), and to explore: a seeded game that teaches how to play Commander.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

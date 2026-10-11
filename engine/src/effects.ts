@@ -23,6 +23,7 @@ import type { AggregateSpec, CardFilter } from "./filter.js";
 import type { Color, ManaType, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
+import type { RandomPick } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
   DelayedTriggerTiming,
@@ -1058,6 +1059,35 @@ export type EffectSpec =
        * and with none nothing happens. Asked as a `choose-modes`.
        */
       readonly kind: "choose-opponent";
+      readonly then: EffectSpec;
+      /** "Choose an opponent **at random**" (Vial Smasher the Fierce): nobody
+       * is asked — the game picks among them with its seeded randomness,
+       * announced as a `chosen-at-random` event. */
+      readonly random?: true;
+      /** "Choose a **player** at random" (Wildfire Devils): among every player
+       * still in the game, the effect's controller included. Only with
+       * `random`. */
+      readonly anyPlayer?: true;
+    }
+  | {
+      /**
+       * "Choose a card **at random** in your graveyard" (Deadbridge Chant),
+       * "return an instant or sorcery card at random from your graveyard"
+       * (Exalted Flamer of Tzeentch): as this resolves, one of the cards in
+       * `whose` graveyard matching `filter` (read from the effect's
+       * controller's side) is picked with the game's seeded randomness —
+       * each with an equal chance (the Deadbridge Chant ruling) — and `then`
+       * applies to it as target 0. Not a target: it's picked from whatever
+       * is there as this resolves, a card put there in response included
+       * (the ruling). Nothing happens when nothing matches. Announced as a
+       * `chosen-at-random` event.
+       */
+      readonly kind: "choose-random-card";
+      readonly zone: "graveyard";
+      /** Whose graveyard: the effect's controller's (the default),
+       * `"that-player"`, or a target slot holding a player. */
+      readonly whose?: "you" | "that-player" | number;
+      readonly filter?: CardFilter;
       readonly then: EffectSpec;
     }
   | {
@@ -3561,6 +3591,18 @@ export type EffectSpec =
        * an `other` relation on the earlier slots (`triggerTargetSpecs`).
        * Only with `announced`. */
       readonly eachTargetsDifferentPlayer?: true;
+      /**
+       * "Choose one **at random**" as the effect applies: nobody chooses —
+       * one mode is picked with the game's seeded randomness, each equally
+       * likely, among the modes whose `onlyIf` holds ("choose a kind of
+       * counter at random that this creature doesn't have on it" —
+       * Crystalline Giant). With none eligible, nothing happens. Only with
+       * `minModes` and `maxModes` 1, and not with `announced`: an ability
+       * that picks its mode at random as it goes on the stack, before its
+       * targets (Summon: Magus Sisters), isn't built. Announced as a
+       * `chosen-at-random` event.
+       */
+      readonly random?: true;
     }
   | {
       /** Apply `then` if `condition` holds at resolution, otherwise `else`
@@ -4304,6 +4346,10 @@ export interface ModeOption {
    * mana cost's alone.
    */
   readonly spreeCost?: string;
+  /** A resolution-time `random` modal's eligibility: the mode can be picked
+   * only while this holds, read as the effect applies (Crystalline Giant's
+   * "a kind of counter … that this creature doesn't have on it"). */
+  readonly onlyIf?: StaticCondition;
 }
 
 /** Primitive mutations an effect can perform. Implemented by the engine. */
@@ -4561,6 +4607,14 @@ export interface EffectApi {
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
+  /** An index in `0…count-1` (`count` > 0) picked with the game's seeded
+   * randomness, and announced as a `chosen-at-random` event naming what
+   * `pick` says the index stands for — a `random` choice: `choose-opponent`,
+   * `choose-random-card`, a `modal`'s mode. */
+  pickAtRandom(count: number, pick: (index: number) => RandomPick): number;
+  /** The cards in `owner`'s graveyard matching `filter`, read from the
+   * effect's controller's side, in graveyard order. */
+  graveyardMatching(owner: PlayerId, filter: CardFilter): readonly ObjectId[];
   /** The card types of what `target` points at — as it last existed on the
    * battlefield if it has left since the effect referred to it. For binding
    * `CardFilter.sharesCardTypeWith`. */
@@ -6455,6 +6509,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyEffectSpec(spec.effect, ctx.withConvoker(spec.index));
       return;
     case "choose-opponent": {
+      if (spec.random === true) {
+        // Nobody is asked: the game picks, each with an equal chance.
+        const among = ctx.playersInScope(spec.anyPlayer === true ? "each-player" : "each-opponent");
+        if (among.length === 0) return;
+        const chosen = among[ctx.pickAtRandom(among.length, (i) => ({ kind: "player", player: among[i] }))];
+        applyEffectSpec(spec.then, ctx.aboutPlayer(chosen));
+        return;
+      }
       const opponents = ctx.playersInScope("each-opponent");
       if (opponents.length === 0) return;
       if (opponents.length === 1) {
@@ -6475,6 +6537,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
       applyEffectSpec(spec.effect, ctx.aboutPlayer(spec.player));
       return;
+    case "choose-random-card": {
+      const whose = spec.whose ?? "you";
+      let owner: PlayerId | undefined;
+      if (whose === "you") owner = ctx.controller;
+      else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
+      else {
+        const ref = ctx.targets[whose];
+        owner = ref?.kind === "player" ? ref.player : undefined;
+      }
+      if (owner === undefined) return;
+      const cards = ctx.graveyardMatching(owner, spec.filter ?? {});
+      if (cards.length === 0) return;
+      const chosen = cards[ctx.pickAtRandom(cards.length, (i) => ({ kind: "card", object: cards[i] }))];
+      applyEffectSpec(spec.then, ctx.withTargets([{ kind: "object", object: chosen }]));
+      return;
+    }
     case "choose-permanents":
       ctx.choosePermanents(
         spec.filter,
@@ -7849,6 +7927,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           offset += count;
           if (mode !== undefined) applyEffectSpec(mode.effect, modeCtx);
         });
+        return;
+      }
+      if (spec.random === true) {
+        // "Choose one at random" as it applies: among the modes that could
+        // be chosen now, each with an equal chance.
+        const eligible = spec.modes.filter((mode) => mode.onlyIf === undefined || ctx.conditionMet(mode.onlyIf));
+        if (eligible.length === 0) return;
+        const mode = eligible[ctx.pickAtRandom(eligible.length, (i) => ({ kind: "mode", text: eligible[i].text }))];
+        applyEffectSpec(mode.effect, ctx);
         return;
       }
       ctx.chooseModes(

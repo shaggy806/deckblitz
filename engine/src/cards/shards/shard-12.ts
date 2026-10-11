@@ -45,6 +45,7 @@ import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
 import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
+import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
@@ -206,6 +207,7 @@ import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolShardOfTheNightbringer from "../pool/shard-of-the-nightbringer.js";
 import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
+import _poolShaunFatherOfSynths from "../pool/shaun-father-of-synths.js";
 import _poolShelteredByGhosts from "../pool/sheltered-by-ghosts.js";
 import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
@@ -324,6 +326,7 @@ const shard: CardShard = {
     _poolChocoSeekerOfParadise,
     _poolChromeProwler,
     _poolCircuitousRoute,
+    _poolCitadelOfPain,
     _poolCloudcrownOak,
     _poolCreepingTarPit,
     _poolCrystalSlipper,
@@ -485,6 +488,7 @@ const shard: CardShard = {
     _poolSelvalasStampede,
     _poolShardOfTheNightbringer,
     _poolShardmagesRescue,
+    _poolShaunFatherOfSynths,
     _poolShelteredByGhosts,
     _poolShelteringBoughs,
     _poolShockingGrasp,

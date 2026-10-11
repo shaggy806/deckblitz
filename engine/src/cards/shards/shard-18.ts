@@ -52,6 +52,7 @@ import _poolCopperlineGorge from "../pool/copperline-gorge.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
+import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
@@ -117,6 +118,7 @@ import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
+import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
@@ -231,12 +233,14 @@ import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
 import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
+import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTomeScour from "../pool/tome-scour.js";
 import _poolTorment from "../pool/torment.js";
+import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
 import _poolTreasureMap from "../pool/treasure-map.js";
 import _poolTremble from "../pool/tremble.js";
@@ -345,6 +349,7 @@ const shard: CardShard = {
     _poolCourserOfKruphix,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
+    _poolCrystallineGiant,
     _poolDalkovanPackbeasts,
     _poolDecadentDragon,
     _poolDeeprootChampion,
@@ -410,6 +415,7 @@ const shard: CardShard = {
     _poolKalonianHydra,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
+    _poolKinsbaileCavalier,
     _poolKothsCourier,
     _poolKozileksUnsealing,
     _poolKrenkoMobBoss,
@@ -524,12 +530,14 @@ const shard: CardShard = {
     _poolThoughtflare,
     _poolThreeBlindMice,
     _poolThunderingCeratok,
+    _poolThunderousVelocipede,
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,
     _poolTolarianWinds,
     _poolTomeScour,
     _poolTorment,
+    _poolToughCookie,
     _poolTowerDefense,
     _poolTreasureMap,
     _poolTremble,

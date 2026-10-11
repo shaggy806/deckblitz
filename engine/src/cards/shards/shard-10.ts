@@ -64,6 +64,7 @@ import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
+import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
@@ -367,6 +368,7 @@ const shard: CardShard = {
     _poolDarkness,
     _poolDarksteelSplicer,
     _poolDaybreakCharger,
+    _poolDeadbridgeChant,
     _poolDefensiveStance,
     _poolDelete,
     _poolDenOfTheBugbear,

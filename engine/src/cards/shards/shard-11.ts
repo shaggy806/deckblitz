@@ -282,6 +282,7 @@ import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
 import _poolTombOfTheSpiritDragon from "../pool/tomb-of-the-spirit-dragon.js";
+import _poolTomeOfTheGuildpact from "../pool/tome-of-the-guildpact.js";
 import _poolTophGreatestEarthbender from "../pool/toph-greatest-earthbender.js";
 import _poolTowerOfCalamities from "../pool/tower-of-calamities.js";
 import _poolTowerWinder from "../pool/tower-winder.js";
@@ -608,6 +609,7 @@ const shard: CardShard = {
     _poolThunderfootBaloth,
     _poolTimeOfNeed,
     _poolTombOfTheSpiritDragon,
+    _poolTomeOfTheGuildpact,
     _poolTophGreatestEarthbender,
     _poolTowerOfCalamities,
     _poolTowerWinder,

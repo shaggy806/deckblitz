@@ -291,6 +291,14 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} becomes ${[...event.subtypes, ...event.types].join(' ')} in addition to its other types${
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
+    case 'chosen-at-random':
+      return `${name(event.source)} chooses ${
+        event.chosen.kind === 'player'
+          ? who(event.chosen.player)
+          : event.chosen.kind === 'card'
+            ? name(event.chosen.object)
+            : `“${event.chosen.text}”`
+      } at random`
     case 'random-player-chosen':
       return `${who(event.chosen)} is chosen at random: ${name(event.object)} attacks them this combat if able`
     case 'attacker-declared':

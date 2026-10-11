@@ -122,6 +122,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-opponent": (n, v) => v.child(n.then),
   "about-player": (n, v) => v.child(n.effect),
   "choose-permanents": none,
+  // Its `then` reads the card it picked as target 0.
+  "choose-random-card": none,
   damage: (n, v) => {
     v.touch(n.target, "harm", MAJOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);

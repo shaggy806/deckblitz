@@ -5086,6 +5086,90 @@
   },
   "cost:exile-from-graveyard-additional": {
    "example": "Abhorrent Oculus: 'As an additional cost to cast this spell, exile six cards from your graveyard' — a spell's additional cost exiling N cards from the graveyard (escape has it only as part of escape)."
+  },
+  "effect:random-card-from-hand": {
+   "family": "effect:random-choice",
+   "example": "Urza's Bauble: 'look at a card at random in target player's hand' — choose-random-card reads only a graveyard (a hidden zone needs a private look)"
+  },
+  "effect:random-card-from-linked-exile": {
+   "family": "effect:random-choice",
+   "example": "River Song's Diary: 'choose one of them [the cards exiled with this artifact] at random' — choose-random-card reads only a graveyard"
+  },
+  "effect:random-mode-announced": {
+   "family": "effect:random-choice",
+   "example": "Summon: Magus Sisters: 'Choose one at random' on a chapter ability, picked as it goes on the stack before its targets; modal's random is resolution-time only"
+  },
+  "effect:cast-this-way-owner-loses-life": {
+   "family": "effect:this-way-results",
+   "example": "Kefka, Dancing Mad: 'each player who owns a spell you cast this way loses life equal to its mana value'"
+  },
+  "bug:chapter-ability-source-stint": {
+   "family": "bug:lore-counters-fire-chapters",
+   "example": "The Aesir Escape Valhalla: chapters II/III read 'the exiled card' (exiledWithSourceManaValue, return-exiled-by-source linked) through the Saga's current stint because chapter triggers carry no lastKnownRefs.source; once the Saga leaves before they resolve, they find nothing."
+  },
+  "effect:attach-to-created-token-by-filter": {
+   "family": "effect:attach-extensions",
+   "example": "Field-Tested Frying Pan: 'create a Food token, then create a 1/1 white Halfling creature token and attach this Equipment to it' - attach target 'created' picks the first token made (the Food)."
+  },
+  "effect:sacrifice-unless-shares-type-with-chosen": {
+   "family": "decision:choose-permanent",
+   "example": "Winnowing: for each player, you choose a creature that player controls; then each player sacrifices all other creatures they control that don't share a creature type with the chosen one."
+  },
+  "effect:exile-hands-face-down-return-later": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Memory Jar: each player exiles their hand face down and draws seven; at the beginning of the next end step each player discards their hand and returns the cards they exiled this way to their hand."
+  },
+  "static:grants-static-ability": {
+   "family": "static:affect-scope-by-filter",
+   "example": "Rune of Sustenance: as long as enchanted permanent is an Equipment, it has \"Equipped creature has lifelink.\" (the Rune cycle)."
+  },
+  "replacement:damage-doesnt-cause-life-loss": {
+   "family": "replacement:damage-modification",
+   "example": "Archon of Coronation: as long as you're the monarch, damage doesn't cause you to lose life."
+  },
+  "effect:exile-cast-spell-then-cast-linked-exiled": {
+   "family": "effect:cast-during-resolution",
+   "example": "Knowledge Pool: whenever a player casts a spell from their hand, that player exiles it; if they do, they may cast a spell from among other cards exiled with this artifact without paying its mana cost."
+  },
+  "cost:attack-tax-amount": {
+   "family": "cost:attack-tax",
+   "example": "Collective Restraint: 'pays {X} for each creature … where X is the number of basic land types among lands you control' — attackTax.generic is a fixed number"
+  },
+  "effect:may-pay-mana-and-sacrifice": {
+   "family": "effect:may-sacrifice-then",
+   "example": "Killer Service: 'you may pay {2} and sacrifice a token. If you do, create a 4/4 green Rhino Warrior creature token'"
+  },
+  "zone:exile-owner-may-play": {
+   "family": "zone:impulse-permission-options",
+   "example": "Soul Partition: Exile target nonland permanent. For as long as that card remains exiled, its owner may play it. A spell cast by an opponent this way costs {2} more to cast."
+  },
+  "zone:cast-from-library-top-flash": {
+   "family": "zone:cast-from-library-top",
+   "example": "Elsha of the Infinite: You may cast noncreature spells from the top of your library. If you cast a spell this way, you may cast it as though it had flash."
+  },
+  "condition:filter-same-name-as-chosen": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Canoptek Wraith: choose a land you control. Then search your library for up to two basic land cards which have the same name as the chosen land"
+  },
+  "static:pt-per-turn-history": {
+   "family": "static:pt-per-amount",
+   "example": "Kinbinding: Creatures you control get +X/+X, where X is the number of creatures that entered the battlefield under your control this turn."
+  },
+  "effect:temporary-enters-tapped-for-opponents": {
+   "family": "effect:temporary-player-effect",
+   "example": "Cone of Cold: Until your next turn, creatures your opponents control enter tapped."
+  },
+  "zone:play-from-opponent-library-top": {
+   "family": "zone:cast-from-library-top",
+   "example": "Xanathar, Guild Kingpin: Until end of turn, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way."
+  },
+  "decision:may-answered-by-other-player": {
+   "family": "effect:choices-by-other-players",
+   "example": "Arcum Dagsson: 'that player may search their library' — a `may` asks the effect's controller, so a decline still searches and shuffles (docs/engine-gaps.md, \"Its controller may search\")"
+  },
+  "effect:player-exiles-chosen-from-own-graveyard": {
+   "family": "effect:choices-by-other-players",
+   "example": "Wildfire Devils: 'that player exiles an instant or sorcery card from their graveyard' (their choice), unlinked — look-and-choose's 'exile' links the card to the source"
   }
  }
 }

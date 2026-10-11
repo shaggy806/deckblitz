@@ -233,7 +233,8 @@
   "keyword:afflict",
   "keyword:crew",
   "mechanic:the-ring",
-  "mechanic:dice-rolling"
+  "mechanic:dice-rolling",
+  "effect:random-choice"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -69,6 +69,7 @@ import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
+import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
 import _poolDauthiVoidwalker from "../pool/dauthi-voidwalker.js";
@@ -357,6 +358,7 @@ const shard: CardShard = {
     _poolCrashOfRhinos,
     _poolCrestedSunmare,
     _poolCrosswayTroublemakers,
+    _poolCrumblingAshes,
     _poolDanithaNewBenaliasLight,
     _poolDauntlessScrapbot,
     _poolDauthiVoidwalker,

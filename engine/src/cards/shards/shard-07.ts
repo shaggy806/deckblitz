@@ -7,6 +7,7 @@ import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
 import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
+import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
@@ -63,6 +64,7 @@ import _poolEliteInstructor from "../pool/elite-instructor.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
+import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
@@ -308,6 +310,7 @@ const shard: CardShard = {
     _poolAdvanceScout,
     _poolAgentVenom,
     _poolAgonasaurRex,
+    _poolAinokSurvivalist,
     _poolAjanisMantra,
     _poolAlterFate,
     _poolAlteredEgo,
@@ -364,6 +367,7 @@ const shard: CardShard = {
     _poolElvishRanger,
     _poolEmeraldDragonfly,
     _poolEnterTheEnigma,
+    _poolExaltedFlamerOfTzeentch,
     _poolExultantSkymarcher,
     _poolFaerieHarbinger,
     _poolFavoredOfIroas,

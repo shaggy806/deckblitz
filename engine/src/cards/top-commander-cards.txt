@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3491 already implemented / 1509 missing (marks refreshed 2026-10-11)
+3496 already implemented / 1504 missing (marks refreshed 2026-10-11)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -237,7 +237,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   238  Mithril Coat                             {3}              Legendary Artifact — Equipment
 [x]   239  Malakir Rebirth // Malakir Mire          {1}              Instant // Land
 [x]   240  Scute Swarm                              {2}{G}           Creature — Insect
-[ ]   241  Gamble                                   {R}              Sorcery
+[x]   241  Gamble                                   {R}              Sorcery
 [x]   242  Mox Opal                                 {0}              Legendary Artifact
 [x]   243  Rishkar's Expertise                      {4}{G}{G}        Sorcery
 [x]   244  Takenuma, Abandoned Mire                 {0}              Legendary Land
@@ -2304,7 +2304,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2311  Super State                              {7}              Legendary Enchantment — Aura
 [ ]  2312  Turntimber Symbiosis // Turntimber, Serpentine Wood {7}              Sorcery // Land
 [ ]  2313  Kindred Summons                          {5}{G}{G}        Instant
-[ ]  2314  Arcane Bombardment                       {4}{R}{R}        Enchantment
+[x]  2314  Arcane Bombardment                       {4}{R}{R}        Enchantment
 [x]  2315  Geth's Grimoire                          {4}              Artifact — Book
 [x]  2316  Rev, Tithe Extractor                     {3}{B}           Legendary Creature — Human Rogue
 [x]  2317  Displace                                 {2}{U}           Instant
@@ -3226,7 +3226,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3233  Desert of the True                       {0}              Land — Desert
 [ ]  3234  Court of Vantress                        {2}{U}{U}        Enchantment
 [x]  3235  Gathering Stone                          {4}              Artifact
-[ ]  3236  Exalted Flamer of Tzeentch               {2}{U}{R}        Creature — Demon
+[x]  3236  Exalted Flamer of Tzeentch               {2}{U}{R}        Creature — Demon
 [x]  3237  Tolaria West                             {0}              Land
 [x]  3238  Rain-Slicked Copse                       {0}              Land — Forest Island
 [x]  3239  Redoubled Stormsinger                    {2}{R}           Creature — Orc Wizard
@@ -3356,7 +3356,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3363  Rhys the Redeemed                        {G/W}            Legendary Creature — Elf Warrior
 [x]  3364  Increasing Devotion                      {3}{W}{W}        Sorcery
 [ ]  3365  Worldwalker Helm                         {2}{U}           Artifact
-[ ]  3366  Deadbridge Chant                         {4}{B}{G}        Enchantment
+[x]  3366  Deadbridge Chant                         {4}{B}{G}        Enchantment
 [ ]  3367  Out of the Tombs                         {2}{B}           Enchantment
 [x]  3368  Reshape the Earth                        {6}{G}{G}{G}     Sorcery
 [x]  3369  Clive, Ifrit's Dominant // Ifrit, Warden of Inferno {6}              Legendary Creature — Human Noble Warrior // Legendary Enchantment Creature — Saga Demon
@@ -4804,7 +4804,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4811  Act of Treason                           {2}{R}           Sorcery
 [ ]  4812  Nemata, Primeval Warden                  {2}{B}{G}        Legendary Creature — Treefolk
 [x]  4813  Audacity                                 {G}              Enchantment — Aura
-[ ]  4814  Wondrous Crucible                        {7}              Artifact
+[x]  4814  Wondrous Crucible                        {7}              Artifact
 [ ]  4815  Filigree Vector                          {3}{W}           Artifact Creature — Phyrexian Construct
 [x]  4816  Stormscale Scion                         {4}{R}{R}        Creature — Dragon
 [ ]  4817  Moonlit Meditation                       {2}{U}           Enchantment — Aura

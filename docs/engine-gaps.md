@@ -155,6 +155,16 @@ per gap under the same bold title; when a gap closes, delete it in both.
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
+- **A Saga's chapter ability doesn't remember which Saga it came from** — `Game.triggerChapters`
+  queues each chapter trigger with no `lastKnownRefs.source` (no stint), so an ability that reads
+  "the exiled card" — the cards linked to its source (rule 607.2a: `exiled-with-source`,
+  `exiledWithSourceManaValue`, `return-exiled-by-source`'s `linked`) — reads the Saga's current
+  stint. If the Saga leaves before the chapter resolves (bounced in response), the chapter finds
+  nothing: The Aesir Escape Valhalla's II put 0 counters instead of the exiled card's mana value,
+  and its III would leave the card in exile (found by batch 48's triage, which blocked the card on
+  `bug:chapter-ability-source-stint`). Fix: record the Saga's stint on the pending trigger, as a
+  permanent's own triggers do.
+
 - **"Its controller may search" always searches** — "its controller may search their library
   for a basic land card" (Path to Exile, Assassin's Trophy, Erode, Ghost Quarter, Price of
   Freedom, Boseiju, Who Endures, Volatile Fault, Demolition Field's first search, and the

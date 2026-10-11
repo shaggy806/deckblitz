@@ -21,6 +21,7 @@ import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js"
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
 import _poolArachnoid from "../pool/arachnoid.js";
 import _poolArbaazMir from "../pool/arbaaz-mir.js";
+import _poolArchfiendOfTheDross from "../pool/archfiend-of-the-dross.js";
 import _poolArgothianSwine from "../pool/argothian-swine.js";
 import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
@@ -52,6 +53,7 @@ import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCrimsonMage from "../pool/crimson-mage.js";
 import _poolCultGuildmage from "../pool/cult-guildmage.js";
+import _poolCuratorBeastie from "../pool/curator-beastie.js";
 import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
 import _poolDarksteelCitadel from "../pool/darksteel-citadel.js";
@@ -300,6 +302,7 @@ const shard: CardShard = {
     _poolAnnieJoinsUp,
     _poolArachnoid,
     _poolArbaazMir,
+    _poolArchfiendOfTheDross,
     _poolArgothianSwine,
     _poolArnoDorian,
     _poolAtalanJackal,
@@ -331,6 +334,7 @@ const shard: CardShard = {
     _poolCounselOfTheSoratami,
     _poolCrimsonMage,
     _poolCultGuildmage,
+    _poolCuratorBeastie,
     _poolCutthroatCenturion,
     _poolDakmorBat,
     _poolDarksteelCitadel,

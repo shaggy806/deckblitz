@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbsorb from "../pool/absorb.js";
+import _poolAcclaimedContender from "../pool/acclaimed-contender.js";
 import _poolAcidicSlime from "../pool/acidic-slime.js";
 import _poolAdantoTheFirstFort from "../pool/adanto-the-first-fort.js";
 import _poolAesthirGlider from "../pool/aesthir-glider.js";
@@ -20,6 +21,7 @@ import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
 import _poolAridArchway from "../pool/arid-archway.js";
+import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBannersRaised from "../pool/banners-raised.js";
@@ -50,6 +52,7 @@ import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
 import _poolCerodonYearling from "../pool/cerodon-yearling.js";
 import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
+import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolCliffThreader from "../pool/cliff-threader.js";
@@ -276,6 +279,7 @@ import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbsorb,
+    _poolAcclaimedContender,
     _poolAcidicSlime,
     _poolAdantoTheFirstFort,
     _poolAesthirGlider,
@@ -292,6 +296,7 @@ const shard: CardShard = {
     _poolArchfiendOfDepravity,
     _poolArchiveDragon,
     _poolAridArchway,
+    _poolAssembleTheEntmoot,
     _poolBalefulStrix,
     _poolBaneAlleyBlackguard,
     _poolBannersRaised,
@@ -322,6 +327,7 @@ const shard: CardShard = {
     _poolCerodonYearling,
     _poolChampionOfLambholt,
     _poolChampionOfThePerished,
+    _poolChanceEncounter,
     _poolChandraFlameshaper,
     _poolClawsOfGix,
     _poolCliffThreader,

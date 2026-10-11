@@ -121,6 +121,7 @@ import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
+import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
@@ -152,6 +153,7 @@ import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
+import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
 import _poolNoMoreLies from "../pool/no-more-lies.js";
 import _poolNomadOutpost from "../pool/nomad-outpost.js";
@@ -414,6 +416,7 @@ const shard: CardShard = {
     _poolJungleDelver,
     _poolK9MarkI,
     _poolKaervekTheMerciless,
+    _poolKelethSunmaneFamiliar,
     _poolKessDissidentMage,
     _poolKikiJikiMirrorBreaker,
     _poolKindredDominance,
@@ -445,6 +448,7 @@ const shard: CardShard = {
     _poolNeedlethornDrake,
     _poolNestedShambler,
     _poolNexusWardens,
+    _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
     _poolNoMoreLies,
     _poolNomadOutpost,

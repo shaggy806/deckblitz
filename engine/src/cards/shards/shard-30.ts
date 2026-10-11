@@ -15,6 +15,7 @@ import _poolAnabaShaman from "../pool/anaba-shaman.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
 import _poolAnkleShanker from "../pool/ankle-shanker.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
+import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
 import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
@@ -195,6 +196,7 @@ import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolResentfulRevelation from "../pool/resentful-revelation.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
@@ -296,6 +298,7 @@ const shard: CardShard = {
     _poolAngrathsMarauders,
     _poolAnkleShanker,
     _poolAragornKingOfGondor,
+    _poolArcaneBombardment,
     _poolArgothianEnchantress,
     _poolArtfulDodge,
     _poolAspectOfGorgon,
@@ -476,6 +479,7 @@ const shard: CardShard = {
     _poolRazorfieldThresher,
     _poolReadyToRumble,
     _poolRejuvenate,
+    _poolResentfulRevelation,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
     _poolRiteOfReplication,

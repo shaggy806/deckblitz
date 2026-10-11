@@ -27,6 +27,7 @@ import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
+import _poolBoromirGondorsHope from "../pool/boromir-gondors-hope.js";
 import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
 import _poolBrotherhoodVertibird from "../pool/brotherhood-vertibird.js";
@@ -298,6 +299,7 @@ const shard: CardShard = {
     _poolBlightMound,
     _poolBogWraith,
     _poolBoonOfTheWishGiver,
+    _poolBoromirGondorsHope,
     _poolBoundlessRealms,
     _poolBranchingEvolution,
     _poolBrotherhoodVertibird,

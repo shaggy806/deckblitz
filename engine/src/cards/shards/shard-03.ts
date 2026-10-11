@@ -246,6 +246,7 @@ import _poolWanderingArchaic from "../pool/wandering-archaic.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
+import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
 import _poolWoodlandChasm from "../pool/woodland-chasm.js";
 import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
@@ -507,6 +508,7 @@ const shard: CardShard = {
     _poolWhiteKnight,
     _poolWittyRoastmaster,
     _poolWoeStrider,
+    _poolWondrousCrucible,
     _poolWoodlandChasm,
     _poolWornPowerstone,
     _poolWraithViciousVigilante,

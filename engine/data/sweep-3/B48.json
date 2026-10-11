@@ -1,0 +1,597 @@
+{
+  "batch": "B48",
+  "status": "complete",
+  "ranks": "Oracle EDHREC ranks 6746–6819 (the next 60 untriaged), and the cards waiting on effect:random-choice, built this batch (choose-random-card, choose-opponent's random, modal's random)",
+  "authored": [
+    {
+      "name": "Gamble",
+      "files": [
+        "engine/src/cards/pool/gamble.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Exalted Flamer of Tzeentch",
+      "files": [
+        "engine/src/cards/pool/exalted-flamer-of-tzeentch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deadbridge Chant",
+      "files": [
+        "engine/src/cards/pool/deadbridge-chant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tomb Tyrant",
+      "files": [
+        "engine/src/cards/pool/tomb-tyrant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crystalline Giant",
+      "files": [
+        "engine/src/cards/pool/crystalline-giant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wondrous Crucible",
+      "files": [
+        "engine/src/cards/pool/wondrous-crucible.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Arcane Bombardment",
+      "files": [
+        "engine/src/cards/pool/arcane-bombardment.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crumbling Ashes",
+      "files": [
+        "engine/src/cards/pool/crumbling-ashes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moonsilver Spear",
+      "files": [
+        "engine/src/cards/pool/moonsilver-spear.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Citadel of Pain",
+      "files": [
+        "engine/src/cards/pool/citadel-of-pain.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Summon: G.F. Ifrit",
+      "files": [
+        "engine/src/cards/pool/summon-gf-ifrit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Adelbert Steiner",
+      "files": [
+        "engine/src/cards/pool/adelbert-steiner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Resentful Revelation",
+      "files": [
+        "engine/src/cards/pool/resentful-revelation.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Blustersquall",
+      "files": [
+        "engine/src/cards/pool/blustersquall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tough Cookie",
+      "files": [
+        "engine/src/cards/pool/tough-cookie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shaun, Father of Synths",
+      "files": [
+        "engine/src/cards/pool/shaun-father-of-synths.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kinsbaile Cavalier",
+      "files": [
+        "engine/src/cards/pool/kinsbaile-cavalier.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ainok Survivalist",
+      "files": [
+        "engine/src/cards/pool/ainok-survivalist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Adéwalé, Breaker of Chains",
+      "files": [
+        "engine/src/cards/pool/adewale-breaker-of-chains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vampire Cutthroat",
+      "files": [
+        "engine/src/cards/pool/vampire-cutthroat.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Boromir, Gondor's Hope",
+      "files": [
+        "engine/src/cards/pool/boromir-gondors-hope.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ishkanah, Grafwidow",
+      "files": [
+        "engine/src/cards/pool/ishkanah-grafwidow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magnetic Theft",
+      "files": [
+        "engine/src/cards/pool/magnetic-theft.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mausoleum Wanderer",
+      "files": [
+        "engine/src/cards/pool/mausoleum-wanderer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tome of the Guildpact",
+      "files": [
+        "engine/src/cards/pool/tome-of-the-guildpact.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nissa, Vastwood Seer // Nissa, Sage Animist",
+      "files": [
+        "engine/src/cards/pool/nissa-vastwood-seer.ts",
+        "engine/src/cards/pool/nissa-sage-animist.ts",
+        "engine/src/cards/tokens/ashaya-the-awoken-world.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Keleth, Sunmane Familiar",
+      "files": [
+        "engine/src/cards/pool/keleth-sunmane-familiar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "To Arms!",
+      "files": [
+        "engine/src/cards/pool/to-arms.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Genesis",
+      "files": [
+        "engine/src/cards/pool/genesis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thunderous Velocipede",
+      "files": [
+        "engine/src/cards/pool/thunderous-velocipede.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Acclaimed Contender",
+      "files": [
+        "engine/src/cards/pool/acclaimed-contender.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Assemble the Entmoot",
+      "files": [
+        "engine/src/cards/pool/assemble-the-entmoot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Archfiend of the Dross",
+      "files": [
+        "engine/src/cards/pool/archfiend-of-the-dross.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stormscape Familiar",
+      "files": [
+        "engine/src/cards/pool/stormscape-familiar.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Exsanguinator Cavalry",
+      "files": [
+        "engine/src/cards/pool/exsanguinator-cavalry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Curator Beastie",
+      "files": [
+        "engine/src/cards/pool/curator-beastie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Chance Encounter",
+      "files": [
+        "engine/src/cards/pool/chance-encounter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Summon: Primal Garuda",
+      "files": [
+        "engine/src/cards/pool/summon-primal-garuda.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Summon: Magus Sisters",
+      "needs": [
+        "mechanic:shield-counters",
+        "effect:random-mode-announced"
+      ],
+      "why": "random choice is built, but its chapters pick a mode at random as they go on the stack (before targets), and Defense! puts on a shield counter"
+    },
+    {
+      "name": "Urza's Bauble",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "'look at a card at random in target player's hand': choose-random-card reads only a graveyard"
+    },
+    {
+      "name": "Rona, Herald of Invasion",
+      "needs": [
+        "effect:random-card-from-hand"
+      ],
+      "why": "the back face's 'exiles a card from their hand at random'"
+    },
+    {
+      "name": "Crabomination",
+      "needs": [
+        "keyword:emerge",
+        "effect:random-card-from-hand"
+      ],
+      "why": "emerge, and 'a card at random from their hand'"
+    },
+    {
+      "name": "River Song's Diary",
+      "needs": [
+        "effect:random-card-from-linked-exile"
+      ],
+      "why": "chooses at random among the cards exiled with it, not a graveyard"
+    },
+    {
+      "name": "Omenpath Journey",
+      "needs": [
+        "effect:search-different-names",
+        "effect:random-card-from-linked-exile"
+      ],
+      "why": "lands with different names, then a random one among the cards exiled with it"
+    },
+    {
+      "name": "Kefka, Dancing Mad",
+      "needs": [
+        "effect:cast-this-way-owner-loses-life"
+      ],
+      "why": "the random exile is built; each owner of a spell cast this way losing life equal to its mana value isn't"
+    },
+    {
+      "name": "Sin, Spira's Punishment",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "the random exile is built; 'if the exiled card is a land card, repeat this process' isn't"
+    },
+    {
+      "name": "Tersa Lightshatter",
+      "needs": [
+        "decision:discard-any-number"
+      ],
+      "why": "the random exile is built; 'discard up to two cards, then draw that many' isn't"
+    },
+    {
+      "name": "Chaos Defiler",
+      "needs": [
+        "effect:random-choice-among-chosen"
+      ],
+      "why": "choose one per opponent, then destroy one of the chosen at random"
+    },
+    {
+      "name": "Wildfire Devils",
+      "needs": [
+        "effect:player-exiles-chosen-from-own-graveyard"
+      ],
+      "why": "the random player is built; 'that player exiles an instant or sorcery card from their graveyard' (their choice) has no unlinked exile — look-and-choose's 'exile' links it to the source as imprint does"
+    },
+    {
+      "name": "Explosion of Riches",
+      "needs": [
+        "effect:drawn-this-way-trigger"
+      ],
+      "why": "the random opponent is built; 'whenever a card is drawn this way' isn't"
+    },
+    {
+      "name": "Vial Smasher the Fierce",
+      "needs": [
+        "decision:choose-permanent"
+      ],
+      "why": "the random opponent is built; 'that player or a planeswalker that player controls' (your choice) isn't"
+    },
+    {
+      "name": "Indoraptor, the Perfect Hybrid",
+      "needs": [
+        "keyword:bloodthirst"
+      ],
+      "why": "the random opponent is built; bloodthirst X isn't"
+    },
+    {
+      "name": "Tibalt's Trickery",
+      "needs": [
+        "condition:same-name-as-target"
+      ],
+      "why": "'a nonland card with a different name than that spell': no name comparison with the countered spell"
+    },
+    {
+      "name": "Arcum Dagsson",
+      "needs": [
+        "decision:may-answered-by-other-player"
+      ],
+      "why": "'that player may search': a may another player answers isn't built, so a decline would still shuffle (docs/engine-gaps.md)"
+    },
+    {
+      "name": "Black Cat, Cunning Thief",
+      "needs": [
+        "effect:look-and-choose-target-opponent-library",
+        "effect:look-and-choose-exile-chosen-playable"
+      ],
+      "why": "Look at the top nine of TARGET OPPONENT's library and exile two of them face down with a while-exiled play permission (any mana type): look-and-choose reads only your own library and has no exile-with-play-permission destination; impulse-exile only exiles the top N."
+    },
+    {
+      "name": "The Aesir Escape Valhalla",
+      "needs": [
+        "bug:chapter-ability-source-stint"
+      ],
+      "why": "Chapter triggers carry no source stint (triggerChapters pushes no lastKnownRefs), so once the Saga leaves before II/III resolves, 'the exiled card' is unreachable: verified in a scratch run, bouncing it in response to II gave 0 counters (real card: its mana value), and III would leave the card in exile. A finished draft (passes while the Saga stays) is in staging/a/blocked-drafts/."
+    },
+    {
+      "name": "Field-Tested Frying Pan",
+      "needs": [
+        "effect:attach-extensions",
+        "effect:attach-to-created-token-by-filter"
+      ],
+      "why": "'Create a Food token, then create a 1/1 Halfling and attach this Equipment to it': attach's target 'created' is the FIRST token this resolution made (createdThisWay), i.e. the Food, so it can't reach the Halfling without reordering the creations."
+    },
+    {
+      "name": "Winnowing",
+      "needs": [
+        "decision:choose-permanent",
+        "effect:sacrifice-unless-shares-type-with-chosen"
+      ],
+      "why": "'For each player, you choose a creature that player controls', then each player sacrifices the rest not sharing a creature type with their chosen one: no per-player choice by the caster, and sharesCreatureTypeWith only reads a trigger object."
+    },
+    {
+      "name": "Memory Jar",
+      "needs": [
+        "effect:exile-hands-face-down-return-later"
+      ],
+      "why": "Each player exiles their hand face down, draws seven, and at the next end step discards their hand and returns the cards exiled this way: no exile-hand effect, and no delayed trigger that returns each player's exiled-this-way cards."
+    },
+    {
+      "name": "Rune of Sustenance",
+      "needs": [
+        "static:grants-static-ability"
+      ],
+      "why": "'As long as enchanted permanent is an Equipment, it has \"Equipped creature has lifelink\"': StaticAbility can grant keywords, activated and triggered abilities but not a static ability, and no affects scope reaches 'the creature the enchanted Equipment is attached to'."
+    },
+    {
+      "name": "Auspicious Starrix",
+      "needs": [
+        "mechanic:mutate"
+      ],
+      "why": "Mutate (rule 702.140) isn't modeled, and its trigger counts the times it has mutated."
+    },
+    {
+      "name": "Rankle's Prank",
+      "needs": [
+        "effect:hidden-simultaneous-choices"
+      ],
+      "why": "Its ruling: each player chooses two cards without revealing them, then all are discarded at the same time; a scoped discard asks one player at a time and discards each as they answer (later players see earlier discards first) - the same need Professor Onyx was blocked on (sweep-3/B19). The life and sacrifice modes are fine; a draft is in staging/a/blocked-drafts/."
+    },
+    {
+      "name": "Archon of Coronation",
+      "needs": [
+        "replacement:damage-doesnt-cause-life-loss"
+      ],
+      "why": "'As long as you're the monarch, damage doesn't cause you to lose life' (the damage is still dealt: lifelink, damage triggers and commander damage still count): no static or replacement for it."
+    },
+    {
+      "name": "Knowledge Pool",
+      "needs": [
+        "effect:exile-cast-spell-then-cast-linked-exiled"
+      ],
+      "why": "Imprint each player's top three linked to it, then 'whenever a player casts a spell from their hand, that player exiles it; if they do, they may cast a spell from among other cards exiled with this artifact' free: no exile-the-cast-spell effect, and cast-now can't offer another player's cast from the linked exile."
+    },
+    {
+      "name": "Brutal Hordechief",
+      "needs": [
+        "mechanic:control-attack-block-choices"
+      ],
+      "why": "'you choose how those creatures block' — no way for one player to declare another's blocks (the attack-trigger drain alone is expressible)"
+    },
+    {
+      "name": "Collective Restraint",
+      "needs": [
+        "effect:domain-count",
+        "cost:attack-tax-amount"
+      ],
+      "why": "attackTax is a fixed { generic: number }; this one is X per attacker, X = basic land types among your lands (no domain amount either)"
+    },
+    {
+      "name": "Legions to Ashes",
+      "needs": [
+        "condition:same-name-as-target"
+      ],
+      "why": "no filter for 'all tokens that player controls with the same name as that permanent' (Maelstrom Pulse's gap)"
+    },
+    {
+      "name": "Mutinous Massacre",
+      "needs": [
+        "decision:choose-odd-or-even"
+      ],
+      "why": "no 'choose odd or even' choice nor a mana-value parity filter (the steal-all/untap/haste half is Insurrection's)"
+    },
+    {
+      "name": "Ember Island Production",
+      "needs": [
+        "bug:token-copy-as-enters-choices"
+      ],
+      "why": "ruling: the copy's 'as [this creature] enters' abilities work; a token copy isn't asked its as-enters choices (§15, Ardyn's blocker) — otherwise castModal + create-token-copy would express it"
+    },
+    {
+      "name": "Call to the Netherworld",
+      "needs": [
+        "keyword:madness"
+      ],
+      "why": "madness is not modeled (discard-into-exile replacement + cast trigger)"
+    },
+    {
+      "name": "Ajani, Sleeper Agent",
+      "needs": [
+        "keyword:compleated",
+        "effect:distribute-counters"
+      ],
+      "why": "compleated (fewer loyalty when life paid for {G/W/P}) is unmodeled, and −3 distributes three +1/+1 counters among up to three targets (only fixed 1/1 splits exist)"
+    },
+    {
+      "name": "Dragonlord Silumgar",
+      "needs": [
+        "effect:control-while-you-control-source"
+      ],
+      "why": "gain-control only has whileSource ('remains on the battlefield'); rulings say losing control of Silumgar ends the effect and a pre-resolution control loss means no steal"
+    },
+    {
+      "name": "Killer Service",
+      "needs": [
+        "effect:may-pay-mana-and-sacrifice"
+      ],
+      "why": "end-step 'you may pay {2} and sacrifice a token. If you do' is one combined optional cost; `may` takes mana/life/energy but no sacrifice, and each-player-may's options are alternatives, not a pair"
+    },
+    {
+      "name": "Nexus of Becoming",
+      "needs": [
+        "bug:token-copy-as-enters-choices"
+      ],
+      "why": "ruling: the copy's 'as [this] enters' abilities work; a token copy isn't asked them (§15). Otherwise expressible: draw, then look-and-choose from hand to exile with a create-token-copy `then`"
+    },
+    {
+      "name": "Soul Partition",
+      "needs": [
+        "zone:exile-owner-may-play"
+      ],
+      "why": "exile's mayCast is the effect controller's cast-only permission; nothing gives the exiled card's owner a play permission while it stays exiled, nor taxes an opponent {2} for a spell cast that way"
+    },
+    {
+      "name": "Eiganjo Dynastorian // Replenish",
+      "needs": [
+        "mechanic:prepare"
+      ],
+      "why": "the prepare mechanic (becomes prepared, a castable copy of its spell in exile) isn't modeled"
+    },
+    {
+      "name": "Elsha of the Infinite",
+      "needs": [
+        "zone:cast-from-library-top-flash"
+      ],
+      "why": "castFromLibraryTop has no flash rider and castAsThoughFlash's filter can't say 'from the top of your library'; flash for every noncreature spell would be wrong"
+    },
+    {
+      "name": "Canoptek Wraith",
+      "needs": [
+        "condition:filter-same-name-as-chosen"
+      ],
+      "why": "no way to choose a land you control and search for basic land cards with the same name as it"
+    },
+    {
+      "name": "Dawnhand Dissident",
+      "needs": [
+        "keyword:blight",
+        "cost:remove-counters-from-chosen",
+        "zone:exiled-with-source-play"
+      ],
+      "why": "Blight N as a cost isn't built, and casting creature spells from cards exiled with it by removing three counters from among your creatures has no permission or cost"
+    },
+    {
+      "name": "Kinbinding",
+      "needs": [
+        "static:pt-per-turn-history"
+      ],
+      "why": "grantPtPerCount can't read the turnHistory 'entered' tally (creatures that entered under your control this turn, including ones since gone)"
+    },
+    {
+      "name": "Cone of Cold",
+      "needs": [
+        "effect:doesnt-untap-next-all",
+        "effect:temporary-enters-tapped-for-opponents"
+      ],
+      "why": "tap-all has no 'don't untap during their next untap step', and nothing installs 'until your next turn, creatures your opponents control enter tapped'"
+    },
+    {
+      "name": "Xanathar, Guild Kingpin",
+      "needs": [
+        "static:look-at-top-card-any-time",
+        "zone:play-from-opponent-library-top"
+      ],
+      "why": "no until-end-of-turn permission to look at and play the top card of a target opponent's library (with any-color spending)"
+    }
+  ]
+}

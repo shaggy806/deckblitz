@@ -202,6 +202,7 @@ import type {
   GameEvent,
   GameEventInput,
   GameEventType,
+  RandomPick,
 } from "./events.js";
 import {
   COLORS,
@@ -5948,6 +5949,24 @@ export class Game {
     attacker.mustAttackPlayerThisCombat = true;
     this.emit({ type: "random-player-chosen", player: controller, chosen, object: target });
     return true;
+  }
+
+  /**
+   * A random choice made by `controller`'s effect from `source`: an index in
+   * `0…count-1`, each equally likely, from the game's seeded randomness (so a
+   * replay makes the same pick), announced as a `chosen-at-random` event
+   * naming what `pick` says it stands for. See `ResolutionContext.pickAtRandom`.
+   */
+  private pickAtRandom(
+    controller: PlayerId,
+    source: ObjectId,
+    count: number,
+    pick: (index: number) => RandomPick,
+  ): number {
+    const index = Math.min(count - 1, Math.floor(this.rng.next() * count));
+    this.state.rngState = this.rng.seed;
+    this.emit({ type: "chosen-at-random", player: controller, source, chosen: pick(index) });
+    return index;
   }
 
   /** End every modifier that lasts "until end of combat" (rule 500.5a) —
@@ -12398,13 +12417,18 @@ export class Game {
     purpose: ManaPurpose = null,
     arrange?: ManaSourceArrangement,
   ): ManaPayment | null {
-    return planPayment(
-      this.manaPlanningView(player, purpose, arrange),
-      cost,
-      purpose,
-      avoid,
-      exclude,
-    );
+    const plan = planPayment(this.manaPlanningView(player, purpose, arrange), cost, purpose, avoid, exclude);
+    if (plan !== null || arrange === undefined || (arrange.first === undefined && arrange.last === undefined)) {
+      return plan;
+    }
+    // `first` and `last` only order the sources — a preference — and the
+    // planner takes them greedily in that order: a sacrificed Ornithopter of
+    // Paradise put first paid the {B} of Grim Backwoods' {2}{B}{G}, leaving no
+    // {G} once a painful Talisman was out at 1 life, while the legality check,
+    // which orders nothing, had found a way (a fuzzer crash, 2026-10-11). Any
+    // order that pays will do; `withheld` is a fact and stays.
+    const withheld = arrange.withheld !== undefined ? { withheld: arrange.withheld } : undefined;
+    return planPayment(this.manaPlanningView(player, purpose, withheld), cost, purpose, avoid, exclude);
   }
 
   /** The four facts {@link planPayment} may read off the board (see
@@ -17501,6 +17525,11 @@ export class Game {
         this.becomeCopyUntilEndOfTurn(target, of, exceptions, lastKnownOf({ kind: "object", object: of })),
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
+      pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
+      graveyardMatching: (owner, filter) =>
+        (this.state.zones.perPlayer[owner]?.graveyard ?? []).filter((id) =>
+          matchesFilter(this.state, this.registry, id, filter, { you: controller }),
+        ),
       permanentsMatching: (filter) =>
         this.battlefieldMatching(controller, filter).map((object) => ({
           object,

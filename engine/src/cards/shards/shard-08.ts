@@ -158,6 +158,7 @@ import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMindStone from "../pool/mind-stone.js";
 import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
+import _poolMoonsilverSpear from "../pool/moonsilver-spear.js";
 import _poolMorskaUnderseaSleuth from "../pool/morska-undersea-sleuth.js";
 import _poolMossbornHydra from "../pool/mossborn-hydra.js";
 import _poolMosswortBridge from "../pool/mosswort-bridge.js";
@@ -275,6 +276,7 @@ import _poolZimoneParadoxSculptor from "../pool/zimone-paradox-sculptor.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
 import _poolZoralineCosmosCaller from "../pool/zoraline-cosmos-caller.js";
 import _poolZuranOrb from "../pool/zuran-orb.js";
+import _tokensAshayaTheAwokenWorld from "../tokens/ashaya-the-awoken-world.js";
 import _tokensCatWarriorToken from "../tokens/cat-warrior-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-rhys-the-redeemed.js";
 import _tokensFoodToken from "../tokens/food-token.js";
@@ -441,6 +443,7 @@ const shard: CardShard = {
     _poolMindStone,
     _poolMirrisGuile,
     _poolMistSyndicateNaga,
+    _poolMoonsilverSpear,
     _poolMorskaUnderseaSleuth,
     _poolMossbornHydra,
     _poolMosswortBridge,
@@ -560,6 +563,7 @@ const shard: CardShard = {
     _poolZuranOrb,
   ],
   tokens: [
+    _tokensAshayaTheAwokenWorld,
     _tokensCatWarriorToken,
     _tokensElfWarriorTokenRhysTheRedeemed,
     _tokensFoodToken,

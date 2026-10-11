@@ -30,6 +30,7 @@ import _poolBlistergrub from "../pool/blistergrub.js";
 import _poolBloodRites from "../pool/blood-rites.js";
 import _poolBloodghast from "../pool/bloodghast.js";
 import _poolBloodstainedMire from "../pool/bloodstained-mire.js";
+import _poolBlustersquall from "../pool/blustersquall.js";
 import _poolBogWreckage from "../pool/bog-wreckage.js";
 import _poolBoneToAsh from "../pool/bone-to-ash.js";
 import _poolBonebreakerGiant from "../pool/bonebreaker-giant.js";
@@ -316,6 +317,7 @@ const shard: CardShard = {
     _poolBloodRites,
     _poolBloodghast,
     _poolBloodstainedMire,
+    _poolBlustersquall,
     _poolBogWreckage,
     _poolBoneToAsh,
     _poolBonebreakerGiant,

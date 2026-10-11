@@ -216,6 +216,7 @@ import _poolStolenStrategy from "../pool/stolen-strategy.js";
 import _poolStonehoofChieftain from "../pool/stonehoof-chieftain.js";
 import _poolStormOfSouls from "../pool/storm-of-souls.js";
 import _poolStormSpirit from "../pool/storm-spirit.js";
+import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSwornGuardian from "../pool/sworn-guardian.js";
 import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
@@ -498,6 +499,7 @@ const shard: CardShard = {
     _poolStonehoofChieftain,
     _poolStormOfSouls,
     _poolStormSpirit,
+    _poolStormscapeFamiliar,
     _poolStrengthOfThePack,
     _poolSwornGuardian,
     _poolSzarelGenesisShepherd,

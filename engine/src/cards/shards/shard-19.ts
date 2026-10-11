@@ -67,6 +67,7 @@ import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
+import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
@@ -237,6 +238,7 @@ import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
+import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
 import _poolSunbillowVerge from "../pool/sunbillow-verge.js";
 import _poolSunbladeSamurai from "../pool/sunblade-samurai.js";
@@ -357,6 +359,7 @@ const shard: CardShard = {
     _poolEusocialEngineering,
     _poolExploreTheVastlands,
     _poolExsanguinate,
+    _poolExsanguinatorCavalry,
     _poolFabledPassage,
     _poolFalkenrathNoble,
     _poolFellTheMighty,
@@ -527,6 +530,7 @@ const shard: CardShard = {
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,
     _poolStrikingSliver,
+    _poolSummonGfIfrit,
     _poolSummonKnightsOfRound,
     _poolSunbillowVerge,
     _poolSunbladeSamurai,

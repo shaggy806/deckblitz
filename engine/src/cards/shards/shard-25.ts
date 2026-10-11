@@ -102,6 +102,8 @@ import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
 import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
+import _poolGamble from "../pool/gamble.js";
+import _poolGenesis from "../pool/genesis.js";
 import _poolGeothermalBog from "../pool/geothermal-bog.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
@@ -234,6 +236,7 @@ import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
+import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
@@ -386,6 +389,8 @@ const shard: CardShard = {
     _poolFumigate,
     _poolGaeasGift,
     _poolGaleriderSliver,
+    _poolGamble,
+    _poolGenesis,
     _poolGeothermalBog,
     _poolGhostWarden,
     _poolGiantAdephage,
@@ -518,6 +523,7 @@ const shard: CardShard = {
     _poolStorySeeker,
     _poolStrionicResonator,
     _poolSultaiDevotee,
+    _poolSummonPrimalGaruda,
     _poolTaintedPeak,
     _poolTarSnare,
     _poolTerramorphicExpanse,

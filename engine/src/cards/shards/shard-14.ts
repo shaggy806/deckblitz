@@ -144,6 +144,7 @@ import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
+import _poolIshkanahGrafwidow from "../pool/ishkanah-grafwidow.js";
 import _poolIsperiaSupremeJudge from "../pool/isperia-supreme-judge.js";
 import _poolIvoraInsatiableHeir from "../pool/ivora-insatiable-heir.js";
 import _poolJeditsDragoons from "../pool/jedits-dragoons.js";
@@ -425,6 +426,7 @@ const shard: CardShard = {
     _poolInquisitiveGlimmer,
     _poolInvokeTheFiremind,
     _poolIronshellBeetle,
+    _poolIshkanahGrafwidow,
     _poolIsperiaSupremeJudge,
     _poolIvoraInsatiableHeir,
     _poolJeditsDragoons,
