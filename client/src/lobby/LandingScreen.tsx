@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
@@ -83,6 +83,26 @@ function useLandingZoom(): number {
 }
 
 /**
+ * A callback ref for the drifting backdrop: holds its animation still while
+ * the page is hidden. A compositor animation keeps time in a hidden tab
+ * without drawing, so alt-tabbing back showed the frame from when it was
+ * left, then snapped to where the clock had got to (the user, 2026-10-10).
+ * Paused instead, it carries on from where it was seen last.
+ */
+function useHeldWhileHidden(): (el: HTMLElement | null) => void {
+  return useCallback((el: HTMLElement | null) => {
+    if (el === null) return
+    const hold = () => {
+      el.style.animationPlayState = document.hidden ? 'paused' : 'running'
+    }
+    hold()
+    document.addEventListener('visibilitychange', hold)
+    // React 19 runs the ref's returned cleanup as the element goes.
+    return () => document.removeEventListener('visibilitychange', hold)
+  }, [])
+}
+
+/**
  * The app's front door: the screen anyone who isn't already in a room lands
  * on. Two jobs, deliberately given two separate panels with an "or" between
  * them — start a game, or join one someone else started — plus a footer row
@@ -106,6 +126,7 @@ export function LandingScreen({
 }) {
   const [joinCode, setJoinCode] = useState('')
   const zoom = useLandingZoom()
+  const backdropRef = useHeldWhileHidden()
 
   const join = (code: string) => {
     if (code.length === ROOM_CODE_LENGTH) game.joinRoom(code)
@@ -121,7 +142,7 @@ export function LandingScreen({
           and clips, the inner does the moving — see landing.css for why the
           loop can't just translate the outer. */}
       <div className="landing-backdrop" aria-hidden="true">
-        <div className="landing-backdrop-layer" />
+        <div className="landing-backdrop-layer" ref={backdropRef} />
       </div>
 
       <header className="landing-hero">

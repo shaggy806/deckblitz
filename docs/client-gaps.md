@@ -23,11 +23,6 @@ title; when one lands, delete it in both. The animation follow-ups are in
   side of the top of the card — the goal is for it to render with two separate costs. Where:
   `ui/CardTile.tsx`'s cost (`costNode`, `CostSymbols` over `obj.manaCost`), drawing each half's
   cost on its own side.
-- **The landing page's backdrop snaps on alt-tabbing back** (the user, 2026-10-10): coming
-  back to the landing page's tab, the drifting background snaps into place in one frame,
-  which is jarring. Where: `lobby/landing.css`, the `landing-backdrop-drift` animation of
-  `background-position` (`--backdrop-period`), which the browser likely pauses or throttles
-  in a hidden tab and then catches up in one step.
 - **A few views still move on a click** (the jitter sweep, 2026-10-10, after the in-game
   ones were fixed — the Pass row, decision panel, phase pips, hand row, History, zone viewer,
   split menus, player panel badges, lobby, library overlay and scroll boxes). What's left, each
