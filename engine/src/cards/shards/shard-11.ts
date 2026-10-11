@@ -25,6 +25,7 @@ import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
 import _poolBerserkersOfBloodRidge from "../pool/berserkers-of-blood-ridge.js";
 import _poolBigMotherMouser from "../pool/big-mother-mouser.js";
+import _poolBlackLotus from "../pool/black-lotus.js";
 import _poolBladeSplicer from "../pool/blade-splicer.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBloodVassal from "../pool/blood-vassal.js";
@@ -174,6 +175,7 @@ import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
+import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
 import _poolMyPrecious from "../pool/my-precious.js";
@@ -359,6 +361,7 @@ const shard: CardShard = {
     _poolBehindTheScenes,
     _poolBerserkersOfBloodRidge,
     _poolBigMotherMouser,
+    _poolBlackLotus,
     _poolBladeSplicer,
     _poolBlaze,
     _poolBloodVassal,
@@ -508,6 +511,7 @@ const shard: CardShard = {
     _poolMoriokReaver,
     _poolMossDiamond,
     _poolMossdog,
+    _poolMoxSapphire,
     _poolMoxTantalite,
     _poolMusterTheDeparted,
     _poolMyPrecious,

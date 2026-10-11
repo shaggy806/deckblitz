@@ -442,3 +442,33 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Ysgard's Call": "https://cards.scryfall.io/art_crop/back/b/2/b2419408-e907-4d62-b158-c97afc388c04.jpg",
   "Zof Bloodbog": "https://cards.scryfall.io/art_crop/back/9/8/98496d5b-1519-4f0c-8b46-0a43be643dfb.jpg",
 };
+
+/** The pool's cards banned in Commander (the Oracle snapshot's legality):
+ * in the pool for casual play — the user's call, 2026-10-11 — so a deck
+ * with one is still playable, and is told so (`validateDeck`'s
+ * `banned`), as the deck builder and the library show it. */
+export const COMMANDER_BANNED: readonly string[] = [
+  "Ancestral Recall",
+  "Black Lotus",
+  "Dockside Extortionist",
+  "Golos, Tireless Pilgrim",
+  "Griselbrand",
+  "Jeweled Lotus",
+  "Karakas",
+  "Library of Alexandria",
+  "Mana Crypt",
+  "Mox Emerald",
+  "Mox Jet",
+  "Mox Pearl",
+  "Mox Ruby",
+  "Mox Sapphire",
+  "Paradox Engine",
+  "Primeval Titan",
+  "Prophet of Kruphix",
+  "Recurring Nightmare",
+  "Rofellos, Llanowar Emissary",
+  "Time Walk",
+  "Tinker",
+  "Tolarian Academy",
+  "Upheaval",
+];

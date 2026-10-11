@@ -26,6 +26,16 @@ describe("validateCommanderDeck", () => {
     );
     expect(r.legal).toBe(true);
     expect(r.identity).toBe("WUBG");
+    expect(r.banned).toEqual([]);
+  });
+
+  it("names a card banned in Commander without making the deck illegal (casual play)", () => {
+    const r = validateCommanderDeck(
+      { commanders: ["Atraxa, Praetors' Voice"], cards: ["Ancestral Recall", "Counterspell", ...basics(97)], size: 100 },
+      reg,
+    );
+    expect(r.legal).toBe(true);
+    expect(r.banned).toEqual(["Ancestral Recall"]);
   });
 
   it("flags a colour-identity violation", () => {

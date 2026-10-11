@@ -155,12 +155,40 @@ function renderBarrel(bySub) {
   );
 }
 
+/**
+ * The names the Oracle snapshot (`data/oracle/cards.jsonl`) marks banned in
+ * Commander, a double-faced card by its front face too. Empty when there's
+ * no snapshot.
+ */
+function commanderBanned() {
+  const out = new Set();
+  let text;
+  try {
+    text = readFileSync(fileURLToPath(new URL("../data/oracle/cards.jsonl", import.meta.url)), "utf8");
+  } catch {
+    return out;
+  }
+  for (const line of text.split("\n")) {
+    if (line.trim() === "") continue;
+    const card = JSON.parse(line);
+    if (card.commander !== "banned") continue;
+    out.add(card.name);
+    out.add(card.name.split(" // ")[0]);
+  }
+  return out;
+}
+
 function renderIndex(bySub) {
   const byName = (a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
   const tokens = [...bySub.get("tokens")].sort(byName);
   const pinned = bySub
     .get("pool")
     .filter((e) => e.art !== null)
+    .sort(byName);
+  const bannedNames = commanderBanned();
+  const banned = bySub
+    .get("pool")
+    .filter((e) => bannedNames.has(e.name))
     .sort(byName);
   return (
     HEADER +
@@ -177,7 +205,14 @@ function renderIndex(bySub) {
     " * from its definition. */\n" +
     "export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {\n" +
     pinned.map((e) => `  ${JSON.stringify(e.name)}: ${JSON.stringify(e.art)},`).join("\n") +
-    "\n};\n"
+    "\n};\n\n" +
+    "/** The pool's cards banned in Commander (the Oracle snapshot's legality):\n" +
+    " * in the pool for casual play — the user's call, 2026-10-11 — so a deck\n" +
+    " * with one is still playable, and is told so (`validateDeck`'s\n" +
+    " * `banned`), as the deck builder and the library show it. */\n" +
+    "export const COMMANDER_BANNED: readonly string[] = [\n" +
+    banned.map((e) => `  ${JSON.stringify(e.name)},\n`).join("") +
+    "];\n"
   );
 }
 

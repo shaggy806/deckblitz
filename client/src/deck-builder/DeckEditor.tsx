@@ -425,9 +425,17 @@ export function DeckEditor({
         )}
       </div>
 
-      <div className={`db-legality ${legality.legal ? 'legal' : 'illegal'}`}>
+      <div
+        className={`db-legality ${!legality.legal ? 'illegal' : legality.banned.length > 0 ? 'banned' : 'legal'}`}
+      >
         <div className="db-legality-line">
-          <strong>{legality.legal ? '✓ Commander-legal' : `✗ ${legality.violations.length} issue(s)`}</strong>
+          <strong>
+            {!legality.legal
+              ? `✗ ${legality.violations.length} issue(s)`
+              : legality.banned.length > 0
+                ? `✓ Playable — ${legality.banned.length} banned in Commander`
+                : '✓ Commander-legal'}
+          </strong>
           <span className="muted"> · identity: {legality.identity || 'colourless'}</span>
           {legality.violations.length > 0 ? (
             <button type="button" className="link-button db-issues-toggle" aria-expanded={showIssues} onClick={() => setShowIssues((s) => !s)}>
@@ -435,6 +443,15 @@ export function DeckEditor({
             </button>
           ) : null}
         </div>
+        {legality.legal && legality.banned.length > 0 ? (
+          // Banned cards are in the pool for casual play (the user's call,
+          // 2026-10-11): any room takes the deck but one set to Commander-
+          // legal decks only.
+          <p className="db-banned muted">
+            {legality.banned.join(', ')} — banned in Commander. A room set to Commander-legal decks only
+            refuses this deck.
+          </p>
+        ) : null}
         {showIssues && legality.violations.length > 0 ? (
           <ul className="db-issues">
             {legality.violations.map((v, i) => (

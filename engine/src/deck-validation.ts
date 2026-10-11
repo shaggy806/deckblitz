@@ -13,6 +13,7 @@
 
 import { colorIdentityOf, identityString, withinIdentity } from "./identity.js";
 import { isCardFront, isTokenCard } from "./cards/classify.js";
+import { COMMANDER_BANNED } from "./cards/generated-index.js";
 import type { Color } from "./mana.js";
 import type { CardDefinition, CardRegistry } from "./cards.js";
 
@@ -29,6 +30,11 @@ export interface DeckToValidate {
 export interface DeckValidationResult {
   readonly legal: boolean;
   readonly violations: readonly string[];
+  /** The deck's cards banned in Commander (`COMMANDER_BANNED`), each once,
+   * commanders first. Not a violation: the pool has them for casual play
+   * among friends (the user's call, 2026-10-11), so the deck stays `legal`
+   * to play here and the deck builder says what a real table would refuse. */
+  readonly banned: readonly string[];
   /** The combined colour identity of the commander(s), as a WUBRG string. */
   readonly identity: string;
 }
@@ -269,9 +275,11 @@ export function validateCommanderDeck(
     violations.push(`deck has ${total} cards, the format wants ${size}`);
   }
 
+  const bannedNames = new Set(COMMANDER_BANNED);
   return {
     legal: violations.length === 0,
     violations,
+    banned: [...new Set([...deck.commanders, ...deck.cards])].filter((name) => bannedNames.has(name)),
     identity: identityString(commanderIdentity),
   };
 }

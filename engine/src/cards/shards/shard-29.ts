@@ -145,6 +145,7 @@ import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
+import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
@@ -243,6 +244,7 @@ import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThrottle from "../pool/throttle.js";
+import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
@@ -425,6 +427,7 @@ const shard: CardShard = {
     _poolMistvaultBridge,
     _poolMomentsPeace,
     _poolMorgueTheft,
+    _poolMoxRuby,
     _poolMulldrifter,
     _poolNaturesSpiral,
     _poolNecroblossomSnarl,
@@ -523,6 +526,7 @@ const shard: CardShard = {
     _poolTheUrDragon,
     _poolThoughtCourier,
     _poolThrottle,
+    _poolTimeWalk,
     _poolTorWauki,
     _poolTormodTheDesecrator,
     _poolTorturePit,

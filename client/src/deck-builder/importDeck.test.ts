@@ -18,6 +18,7 @@ const card = (name: string, extra: Partial<ImportedCardReport> = {}): ImportedCa
 const format = (commanders: readonly string[]): DeckFormatReport => ({
   legal: true,
   violations: [],
+  banned: [],
   identity: 'G',
   commanders,
 })

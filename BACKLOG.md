@@ -57,11 +57,12 @@ section keeps only what to do next.
   -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
   6820–6886). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
-- **Next after the Reality Fracture batch: the most popular banned cards** (the user, 2026-10-11),
-  so people can play them in decks with their friends. Every source so far filters to
-  `legal:commander`, so none is in the pool (Ancestral Recall arrives as Emeritus of Ideation's
-  prepare spell). A pass over the banned list by popularity, and likely a "banned in Commander"
-  mark in the deck builder and the deck check rather than a refusal.
+- **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
+  2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
+  Griselbrand and more). Balance, Channel, Emrakul, the Aeons Torn, Erayo, Fastbond, Flash,
+  Hullbreacher, Iona, Leovold, Limited Resources, Nadu, Sundering Titan, Sylvan Primordial, Time
+  Vault, Trade Secrets and Yawgmoth's Bargain each wait on a feature of their own
+  (`docs/card-blockers.md`).
 - **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11): each
   set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows

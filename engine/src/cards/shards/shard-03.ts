@@ -49,6 +49,7 @@ import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
+import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
 import _poolDreadhound from "../pool/dreadhound.js";
@@ -135,6 +136,7 @@ import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
+import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
@@ -316,6 +318,7 @@ const shard: CardShard = {
     _poolDemonsHorn,
     _poolDesmondMiles,
     _poolDiscipleOfTheOldWays,
+    _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
     _poolDogmeatEverLoyal,
     _poolDreadhound,
@@ -402,6 +405,7 @@ const shard: CardShard = {
     _poolMortify,
     _poolMossKami,
     _poolMossViper,
+    _poolMoxPearl,
     _poolNadirKraken,
     _poolNaruMehaMasterWizard,
     _poolNecronDeathmark,

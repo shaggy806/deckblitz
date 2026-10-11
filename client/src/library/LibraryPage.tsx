@@ -3,6 +3,7 @@ import type { FocusEvent, MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 import type { CardDefinition, CardType, Color } from 'engine/client'
 import {
+  COMMANDER_BANNED,
   canCommandAlone,
   edhrecRankOf,
   flavorNamesOf,
@@ -20,6 +21,9 @@ import { Symbols } from '../ui/Symbols.tsx'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
 import type { SetCards, SetInfo } from './setFilter.ts'
 import './library.css'
+
+/** Banned in Commander — in the pool for casual play (2026-10-11). */
+const BANNED: ReadonlySet<string> = new Set(COMMANDER_BANNED)
 
 const TYPE_FILTERS = [
   'creature',
@@ -676,6 +680,11 @@ function GridCard({ entry, onOpen }: { readonly entry: Entry; readonly onOpen: (
         </button>
       ) : null}
       {entry.isToken ? <span className="lib-token-badge">token</span> : null}
+      {BANNED.has(entry.def.name) ? (
+        <span className="lib-token-badge lib-banned-badge" title="Banned in Commander: here for casual play">
+          banned
+        </span>
+      ) : null}
     </div>
   )
 }
@@ -743,6 +752,12 @@ function CardOverlay({
             <h2>{entry.def.name}</h2>
             {entry.def.manaCost ? <Symbols text={entry.def.manaCost} /> : null}
           </div>
+          {BANNED.has(entry.def.name) ? (
+            <p className="lib-banned-note">
+              Banned in Commander. It's here for casual play: a room set to Commander-legal decks only refuses a
+              deck with it.
+            </p>
+          ) : null}
           <FaceText def={entry.def} />
           {entry.other ? (
             <>

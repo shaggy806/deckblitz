@@ -191,6 +191,13 @@
 .db-legality.illegal {
   border-color: var(--warn);
 }
+.db-legality.banned {
+  border-color: var(--accent);
+}
+.db-banned {
+  margin: 4px 0 0;
+  font-size: var(--text-sm);
+}
 .db-legality-line {
   display: flex;
   align-items: baseline;

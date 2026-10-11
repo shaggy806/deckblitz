@@ -267,6 +267,15 @@ html:has(.lib-page) {
   letter-spacing: 0.06em;
 }
 
+.lib-banned-badge {
+  color: var(--warn);
+}
+.lib-banned-note {
+  margin: 0 0 8px;
+  font-size: var(--text-sm);
+  color: var(--warn);
+}
+
 /* --- a card's own page, as an overlay ---------------------------------- */
 
 .lib-overlay {

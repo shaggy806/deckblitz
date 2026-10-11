@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PendingRoom } from "../pending-room.js";
+import { createDefaultRegistry, validateCommanderDeck } from "engine";
 import { ALICE, BOB, SEATS } from "../decks.js";
 
 function pendingRoom(players = 2): PendingRoom {
@@ -445,6 +446,24 @@ describe("PendingRoom: Commander-legal decks only", () => {
     // Another deck — the starter — and it's welcome.
     room.claimSeat(ALICE, "alice-token", alice, undefined, { cards: SEATS[0].cards, commanders: SEATS[0].commanders }, true);
     expect(room.allReady()).toBe(true);
+  });
+
+  it("on, refuses a deck with a card banned in Commander; off, any room takes it", () => {
+    // A starter with one card swapped for Ancestral Recall: legal to build,
+    // banned in Commander — in the pool for casual play (2026-10-11).
+    const registry = createDefaultRegistry();
+    const withBanned = SEATS.map((seat) => ({ commanders: seat.commanders, cards: [...seat.cards.slice(1), "Ancestral Recall"] })).find(
+      (deck) => validateCommanderDeck({ ...deck, size: 100 }, registry).legal,
+    )!;
+    expect(validateCommanderDeck({ ...withBanned, size: 100 }, registry).banned).toEqual(["Ancestral Recall"]);
+    const room = pendingRoom();
+    const alice = { send: () => {} };
+    room.claimSeat(ALICE, "alice-token", alice, undefined, withBanned);
+    room.setReady(alice, true);
+    expect(room.seatStatuses()[0].ready).toBe(true);
+    room.setSettings({ commanderLegalOnly: true });
+    expect(room.seatStatuses()[0].ready).toBe(false);
+    expect(() => room.setReady(alice, true)).toThrow(/"Ancestral Recall" is banned in Commander/);
   });
 
   it("on, refuses an illegal deck for a bot", () => {

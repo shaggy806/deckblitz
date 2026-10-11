@@ -247,6 +247,7 @@ import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
+import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
@@ -535,6 +536,7 @@ const shard: CardShard = {
     _poolThornhideWolves,
     _poolThrissNantukoPrimus,
     _poolTimelessLotus,
+    _poolTinker,
     _poolTirelessTracker,
     _poolToArms,
     _poolTorrentialGearhulk,

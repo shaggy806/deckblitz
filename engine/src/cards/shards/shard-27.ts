@@ -166,6 +166,7 @@ import _poolPrimevalsGloriousRebirth from "../pool/primevals-glorious-rebirth.js
 import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
+import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
@@ -242,6 +243,7 @@ import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
 import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
+import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
 import _poolTotemSpeaker from "../pool/totem-speaker.js";
 import _poolToweringViewpoint from "../pool/towering-viewpoint.js";
@@ -454,6 +456,7 @@ const shard: CardShard = {
     _poolPrimordialWurm,
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
+    _poolProphetOfKruphix,
     _poolQasaliSlingers,
     _poolQuirionRanger,
     _poolRadioactiveSpider,
@@ -530,6 +533,7 @@ const shard: CardShard = {
     _poolTheWanderingMinstrel,
     _poolThreeTreeRootweaver,
     _poolThunderbreakRegent,
+    _poolTolarianAcademy,
     _poolTolarianScholar,
     _poolTotemSpeaker,
     _poolToweringViewpoint,

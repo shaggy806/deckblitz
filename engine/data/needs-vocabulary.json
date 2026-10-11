@@ -5278,6 +5278,66 @@
   "effect:delayed-combat-damage-this-combat": {
    "family": "effect:delayed-trigger-extensions",
    "example": "Stensian Sanguinist: 'Whenever that creature deals combat damage to a player this combat' — a DelayedCombatDamage that lapses with the combat, not the turn."
+  },
+  "effect:keep-count-equal-to-fewest": {
+   "family": "effect:choices-by-other-players",
+   "example": "Balance: each player keeps lands (then cards, then creatures) equal to the fewest any player has, recounted per part, sacrificing/discarding the rest"
+  },
+  "effect:player-mana-ability-until-eot": {
+   "family": "effect:temporary-player-effect",
+   "example": "Channel: 'Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}.'"
+  },
+  "keyword:protection-from-colored-spells": {
+   "family": "keyword:protection-from-spells-and-cast-permanents",
+   "example": "Emrakul, the Aeons Torn: protection from spells that are one or more colors (not from colored permanents)"
+  },
+  "mechanic:flip-cards": {
+   "family": "mechanic:mdfc-transform",
+   "example": "Erayo, Soratami Ascendant // Erayo's Essence: Kamigawa flip card (rule 710), legendary on both halves"
+  },
+  "trigger:nth-spell-of-turn-any-player": {
+   "family": "trigger:nth-each-turn",
+   "example": "Erayo, Soratami Ascendant: 'Whenever the fourth spell of a turn is cast' counts every player's spells"
+  },
+  "static:unlimited-land-plays": {
+   "family": "trigger:plays-land",
+   "example": "Fastbond: 'You may play any number of lands on each of your turns.'"
+  },
+  "condition:not-first-land-played-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Fastbond: 'Whenever you play a land, if it wasn't the first land you played this turn' — no lands-played-this-turn condition"
+  },
+  "effect:sacrifice-unless-pay-reduced-mana-cost": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Flash: 'sacrifice it unless you pay its mana cost reduced by {2}' (generic only, X is 0)"
+  },
+  "replacement:draw-replacement-create-token": {
+   "family": "replacement:new-event-replacements",
+   "example": "Hullbreacher: 'If an opponent would draw a card except the first one they draw in each of their draw steps, instead you create a Treasure token.'"
+  },
+  "effect:prohibit-cast-chosen-color": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Iona, Shield of Emeria: 'Your opponents can't cast spells of the chosen color.'"
+  },
+  "effect:prohibit-land-plays": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Limited Resources: 'Players can't play lands as long as ten or more lands are on the battlefield.'"
+  },
+  "stat:trigger-limit-twice-per-turn": {
+   "family": "stat:per-ability-turn-counters",
+   "example": "Nadu, Winged Wisdom: granted 'This ability triggers only twice each turn' — TriggeredAbility.oncePerTurn has no N."
+  },
+  "effect:choose-land-per-basic-type": {
+   "family": "decision:choose-permanent",
+   "example": "Sundering Titan: choose a land of each basic land type (one land may be chosen for several types, a forced choice if it's the only one), then destroy them together."
+  },
+  "effect:target-per-opponent-mandatory": {
+   "family": "effect:target-spec-additions",
+   "example": "Sylvan Primordial: 'for each opponent, destroy target noncreature permanent that player controls' — a required per-seat slot, skipped only when that seat has no player or no legal target."
+  },
+  "replacement:skip-turn": {
+   "family": "replacement:new-event-replacements",
+   "example": "Time Vault: 'If you would begin your turn while this artifact is tapped, you may skip that turn instead. If you do, untap this artifact.'"
   }
  }
 }

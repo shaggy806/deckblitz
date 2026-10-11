@@ -122,11 +122,13 @@ import _poolGoblinChariot from "../pool/goblin-chariot.js";
 import _poolGoblinInstigator from "../pool/goblin-instigator.js";
 import _poolGoldfuryStrider from "../pool/goldfury-strider.js";
 import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
+import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGrandAbolisher from "../pool/grand-abolisher.js";
 import _poolGrappleWithDeath from "../pool/grapple-with-death.js";
 import _poolGravecrawler from "../pool/gravecrawler.js";
 import _poolGreataxe from "../pool/greataxe.js";
 import _poolGrimHaruspex from "../pool/grim-haruspex.js";
+import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
 import _poolGruulGuildgate from "../pool/gruul-guildgate.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
@@ -408,11 +410,13 @@ const shard: CardShard = {
     _poolGoblinInstigator,
     _poolGoldfuryStrider,
     _poolGoldspanDragon,
+    _poolGolosTirelessPilgrim,
     _poolGrandAbolisher,
     _poolGrappleWithDeath,
     _poolGravecrawler,
     _poolGreataxe,
     _poolGrimHaruspex,
+    _poolGriselbrand,
     _poolGrumgullyTheGenerous,
     _poolGruulGuildgate,
     _poolHagraCrocodile,

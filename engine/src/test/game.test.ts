@@ -57,7 +57,7 @@ describe("setup", () => {
     expect(() =>
       Game.create({
         decks: [
-          { player: A, cards: ["Black Lotus"] },
+          { player: A, cards: ["Not A Real Card"] },
           { player: B, cards: deck(40) },
         ],
       }),

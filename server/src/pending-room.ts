@@ -77,11 +77,16 @@ function deckIdentity(deck: PendingDeck): Set<Color> {
  * This is a live risk rather than a theoretical one: a deck saved in a
  * browser's `localStorage` outlives any card the pool later renames or drops.
  */
-/** Why `deck` isn't a Commander-legal deck (the first reason), or `null`. */
+/** Why `deck` isn't a Commander-legal deck (the first reason), or `null`. A
+ * card banned in Commander counts: the pool has them for casual play, and a
+ * room that wants only legal decks refuses them (the user's call,
+ * 2026-10-11). */
 function deckProblemOf(deck: PendingDeck | null): string | null {
   if (deck === null) return null;
   const result = validateCommanderDeck({ commanders: commandersOf(deck), cards: deck.cards, size: 100 }, REGISTRY);
-  return result.legal ? null : (result.violations[0] ?? "not a Commander-legal deck");
+  if (!result.legal) return result.violations[0] ?? "not a Commander-legal deck";
+  const [banned] = result.banned;
+  return banned === undefined ? null : `"${banned}" is banned in Commander`;
 }
 
 function assertDeckIsBuildable(deck: PendingDeck): void {

@@ -1,0 +1,281 @@
+{
+  "batch": "B52",
+  "status": "complete",
+  "ranks": "Cards banned in Commander for power (the Oracle snapshot's banned list less the Conspiracies, ante cards, cards banned for offensive content, dexterity cards and Shahrazad), added for casual play at the user's request — none has an EDHREC rank",
+  "authored": [
+    {
+      "name": "Black Lotus",
+      "files": [
+        "engine/src/cards/pool/black-lotus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mox Emerald",
+      "files": [
+        "engine/src/cards/pool/mox-emerald.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mox Jet",
+      "files": [
+        "engine/src/cards/pool/mox-jet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Griselbrand",
+      "files": [
+        "engine/src/cards/pool/griselbrand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Karakas",
+      "files": [
+        "engine/src/cards/pool/karakas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Library of Alexandria",
+      "files": [
+        "engine/src/cards/pool/library-of-alexandria.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mana Crypt",
+      "files": [
+        "engine/src/cards/pool/mana-crypt.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dockside Extortionist",
+      "files": [
+        "engine/src/cards/pool/dockside-extortionist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jeweled Lotus",
+      "files": [
+        "engine/src/cards/pool/jeweled-lotus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Golos, Tireless Pilgrim",
+      "files": [
+        "engine/src/cards/pool/golos-tireless-pilgrim.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mox Pearl",
+      "files": [
+        "engine/src/cards/pool/mox-pearl.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Mox Ruby",
+      "files": [
+        "engine/src/cards/pool/mox-ruby.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mox Sapphire",
+      "files": [
+        "engine/src/cards/pool/mox-sapphire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Paradox Engine",
+      "files": [
+        "engine/src/cards/pool/paradox-engine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Primeval Titan",
+      "files": [
+        "engine/src/cards/pool/primeval-titan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prophet of Kruphix",
+      "files": [
+        "engine/src/cards/pool/prophet-of-kruphix.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Recurring Nightmare",
+      "files": [
+        "engine/src/cards/pool/recurring-nightmare.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rofellos, Llanowar Emissary",
+      "files": [
+        "engine/src/cards/pool/rofellos-llanowar-emissary.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Time Walk",
+      "files": [
+        "engine/src/cards/pool/time-walk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tinker",
+      "files": [
+        "engine/src/cards/pool/tinker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tolarian Academy",
+      "files": [
+        "engine/src/cards/pool/tolarian-academy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Upheaval",
+      "files": [
+        "engine/src/cards/pool/upheaval.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Balance",
+      "needs": [
+        "effect:keep-count-equal-to-fewest",
+        "effect:hidden-simultaneous-choices"
+      ],
+      "why": "sacrifice-all-but keeps a fixed number, not 'as many as the player with the fewest' (recounted per part), and the discard part is chosen hidden then discarded simultaneously (ruling)"
+    },
+    {
+      "name": "Channel",
+      "needs": [
+        "effect:player-mana-ability-until-eot"
+      ],
+      "why": "'Until end of turn, any time you could activate a mana ability, you may pay 1 life: add {C}' is a player-level mana ability for the turn; no vocabulary"
+    },
+    {
+      "name": "Emrakul, the Aeons Torn",
+      "needs": [
+        "keyword:protection-from-colored-spells",
+        "trigger:self-put-into-graveyard-from-anywhere-trigger",
+        "effect:shuffle-graveyard-into-library"
+      ],
+      "why": "protection is colors/types/filter and can't tell a spell from a permanent (colored creatures must still block/damage it); no own put-into-graveyard-from-anywhere trigger; no shuffle-graveyard effect (the cast-trigger extra turn and annihilator 6 are fine)"
+    },
+    {
+      "name": "Erayo, Soratami Ascendant // Erayo's Essence",
+      "needs": [
+        "mechanic:flip-cards",
+        "trigger:nth-spell-of-turn-any-player"
+      ],
+      "why": "flip cards (rule 710) aren't modeled; nthEachTurn counts one caster's spells, not 'the fourth spell of a turn' by anyone (Erayo's Essence's trigger itself is Jace, Unraveler's emblem shape)"
+    },
+    {
+      "name": "Fastbond",
+      "needs": [
+        "static:unlimited-land-plays",
+        "condition:not-first-land-played-this-turn"
+      ],
+      "why": "extraLandsPerTurn is a finite count (Infinity would reach the client's view as null via maxLandsThisTurn) and isn't limited to your turns; no condition on lands played this turn for the plays-land trigger's intervening if"
+    },
+    {
+      "name": "Flash",
+      "needs": [
+        "effect:sacrifice-unless-pay-reduced-mana-cost"
+      ],
+      "why": "unless options pay a fixed string or generic amount; 'its mana cost reduced by {2}' (generic only, X=0, colored pips kept) of the put creature has no shape"
+    },
+    {
+      "name": "Hullbreacher",
+      "needs": [
+        "replacement:draw-replacement-create-token"
+      ],
+      "why": "would-draw's instead is you-draw / draws N / win-game; 'instead you create a Treasure' (one Treasure even with several Hullbreachers, per ruling) isn't expressible"
+    },
+    {
+      "name": "Iona, Shield of Emeria",
+      "needs": [
+        "effect:prohibit-cast-chosen-color"
+      ],
+      "why": "chooseOnEnter can name a color, but prohibits.spells' CardFilter has no 'of the source's chosen color' clause (chosenColorOnly exists only on affects)"
+    },
+    {
+      "name": "Leovold, Emissary of Trest",
+      "needs": [
+        "static:draw-limit"
+      ],
+      "why": "'Each opponent can't draw more than one card each turn' (draws past the first ignored, counting draws before it entered) has no static"
+    },
+    {
+      "name": "Limited Resources",
+      "needs": [
+        "effect:prohibit-land-plays"
+      ],
+      "why": "the ETB is sacrifice-all-but keep 5 each-player, but no static stops players playing lands (only spells/abilities in prohibits), conditioned on ten or more lands on the battlefield"
+    },
+    {
+      "name": "Nadu, Winged Wisdom",
+      "needs": [
+        "stat:trigger-limit-twice-per-turn",
+        "bug:granted-trigger-identity"
+      ],
+      "why": "The granted becomes-target trigger 'triggers only twice each turn' has no count (oncePerTurn only), and the rulings need each Nadu's grant to be a separate ability with its own per-creature count."
+    },
+    {
+      "name": "Sundering Titan",
+      "needs": [
+        "effect:choose-land-per-basic-type"
+      ],
+      "why": "'Choose a land of each basic land type, then destroy those lands': five mandatory untargeted choices (one land may fill several types) then one simultaneous destroy; choose-permanents applies its `then` per choice, so a dual land would be destroyed before the next type is chosen."
+    },
+    {
+      "name": "Sylvan Primordial",
+      "needs": [
+        "effect:target-per-opponent-mandatory"
+      ],
+      "why": "'For each opponent, destroy target noncreature permanent that player controls' is mandatory per opponent who has one (ruling); per-seat slots exist only as optional ('up to one'), and a required seat slot with no player or no legal target removes the whole trigger. The X-forest search (destroyed-this-way count) is expressible."
+    },
+    {
+      "name": "Time Vault",
+      "needs": [
+        "replacement:skip-turn"
+      ],
+      "why": "'If you would begin your turn while this artifact is tapped, you may skip that turn instead. If you do, untap this artifact' needs a skip-a-turn replacement; the other three lines are expressible."
+    },
+    {
+      "name": "Trade Secrets",
+      "needs": [
+        "effect:repeat-process"
+      ],
+      "why": "'That opponent may repeat this process as many times as they choose': an opponent-chosen loop of the whole effect has no shape."
+    },
+    {
+      "name": "Yawgmoth's Bargain",
+      "needs": [
+        "static:skip-draw-step"
+      ],
+      "why": "No static to skip your draw step; 'Pay 1 life: Draw a card' alone is expressible."
+    }
+  ]
+}

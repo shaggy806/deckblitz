@@ -105,6 +105,7 @@ import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
+import _poolKarakas from "../pool/karakas.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
@@ -161,6 +162,7 @@ import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
+import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
@@ -172,6 +174,7 @@ import _poolRakdosCarnarium from "../pool/rakdos-carnarium.js";
 import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
+import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
 import _poolRepercussion from "../pool/repercussion.js";
@@ -239,6 +242,7 @@ import _poolTwilightPanther from "../pool/twilight-panther.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
+import _poolUpheaval from "../pool/upheaval.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
@@ -372,6 +376,7 @@ const shard: CardShard = {
     _poolJenaraAsuraOfWar,
     _poolJhessianLookout,
     _poolKaradorGhostChieftain,
+    _poolKarakas,
     _poolKavuGlider,
     _poolKenrithTheReturnedKing,
     _poolKitsaOtterballElite,
@@ -428,6 +433,7 @@ const shard: CardShard = {
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,
+    _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,
     _poolPrizefighterConstruct,
@@ -439,6 +445,7 @@ const shard: CardShard = {
     _poolRakdosJoinsUp,
     _poolReaperKing,
     _poolReconstructHistory,
+    _poolRecurringNightmare,
     _poolRedwoodTreefolk,
     _poolRemnantElemental,
     _poolRepercussion,
@@ -506,6 +513,7 @@ const shard: CardShard = {
     _poolUlvenwaldTracker,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,
+    _poolUpheaval,
     _poolUrzasPowerPlant,
     _poolValakutTheMoltenPinnacle,
     _poolVampireInterloper,

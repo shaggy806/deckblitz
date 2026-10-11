@@ -144,6 +144,7 @@ import _poolLoamDryad from "../pool/loam-dryad.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
+import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
@@ -193,6 +194,7 @@ import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
+import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js";
 import _poolRosaResoluteWhiteMage from "../pool/rosa-resolute-white-mage.js";
 import _poolRousingRead from "../pool/rousing-read.js";
 import _poolRowanTreefolk from "../pool/rowan-treefolk.js";
@@ -442,6 +444,7 @@ const shard: CardShard = {
     _poolLoransEscape,
     _poolLotlethGiant,
     _poolLuminousAngel,
+    _poolManaCrypt,
     _poolMarduBanner,
     _poolMaritimeGuard,
     _poolMarkedByHonor,
@@ -491,6 +494,7 @@ const shard: CardShard = {
     _poolReefWorm,
     _poolRiotGear,
     _poolRiptideCrab,
+    _poolRofellosLlanowarEmissary,
     _poolRosaResoluteWhiteMage,
     _poolRousingRead,
     _poolRowanTreefolk,

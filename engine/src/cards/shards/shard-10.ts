@@ -129,6 +129,7 @@ import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
+import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
 import _poolJointExploration from "../pool/joint-exploration.js";
 import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js";
@@ -437,6 +438,7 @@ const shard: CardShard = {
     _poolInspiringRoar,
     _poolIronwrightsCleansing,
     _poolJeskaiBanner,
+    _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,
     _poolJointExploration,
     _poolJudithCarnageConnoisseur,

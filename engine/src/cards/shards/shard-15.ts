@@ -158,6 +158,7 @@ import _poolMoaningSpirit from "../pool/moaning-spirit.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
 import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
+import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
@@ -435,6 +436,7 @@ const shard: CardShard = {
     _poolMomentousFall,
     _poolMortuaryMire,
     _poolMothriderPatrol,
+    _poolMoxEmerald,
     _poolMuldrothaTheGravetide,
     _poolMysteriosPhantasm,
     _poolNaturalEnd,

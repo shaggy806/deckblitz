@@ -156,6 +156,7 @@ import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
+import _poolMoxJet from "../pool/mox-jet.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNineFingersKeene from "../pool/nine-fingers-keene.js";
 import _poolNirkanaAssassin from "../pool/nirkana-assassin.js";
@@ -447,6 +448,7 @@ const shard: CardShard = {
     _poolMawcor,
     _poolMentalNote,
     _poolMindfulBiomancer,
+    _poolMoxJet,
     _poolNeverwinterDryad,
     _poolNineFingersKeene,
     _poolNirkanaAssassin,
