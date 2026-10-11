@@ -47,7 +47,7 @@ import {
 import type { EffectAmount } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
-import type { Color } from "./mana.js";
+import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { activePlayerOf, attackedYouDuringTheirLastTurn, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, PtModifier, TurnHistoryKind } from "./state.js";
@@ -2099,6 +2099,37 @@ export function intrinsicManaAbility(color: Color): ActivatedAbility {
     text: `{T}: Add {${color}}.`,
   });
 }
+
+/**
+ * The one mana `ability` makes when it is nothing but "{T}: Add [that
+ * mana]" — a cost of only `{T}`, no targets, one mana of a single type
+ * (`makes`, for a variant of an "any color" ability), no spend restriction
+ * and no rider — or `undefined`. Two such abilities of one permanent making
+ * the same mana are interchangeable: a City of Brass that's every basic land
+ * type has its printed "any color" and the intrinsic "{T}: Add {W}" (rule
+ * 305.6), and either one taps it for the same {W}. Mana Confluence's (a life
+ * cost) or Plaza of Heroes' (a restriction) isn't plain, and stays its own
+ * choice. The `activate-ability` offer's `plainMana`.
+ */
+export function plainTapMana(
+  ability: ActivatedAbility,
+  makes: readonly ManaType[] | undefined,
+): ManaType | undefined {
+  const effect = ability.effect;
+  if (effect === null || effect.kind !== "add-mana" || effect.amount !== 1 || ability.resolve !== null) return undefined;
+  if (ability.cost.mana !== null || ability.cost.tap !== true || ability.targets.length > 0) return undefined;
+  const defined = (o: object): string[] =>
+    Object.entries(o)
+      .filter(([, v]) => v !== undefined)
+      .map(([k]) => k);
+  if (defined(ability.cost).some((k) => k !== "mana" && k !== "tap")) return undefined;
+  if (defined(effect).some((k) => k !== "kind" && k !== "mana" && k !== "amount")) return undefined;
+  if (defined(ability).some((k) => !["cost", "targets", "effect", "resolve", "text"].includes(k))) return undefined;
+  const made = makes ?? (typeof effect.mana === "string" && MANA_TYPES.has(effect.mana) ? [effect.mana as ManaType] : []);
+  return made.length === 1 ? made[0] : undefined;
+}
+
+const MANA_TYPES: ReadonlySet<string> = new Set<ManaType>(["W", "U", "B", "R", "G", "C"]);
 
 /**
  * Whether `object` has a **mana ability** (rule 605.1) — Raggadragga, Goreguts

@@ -912,5 +912,26 @@ export default {
     setup: handOfSpellsOnly("alice"),
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  DRYAD: {
+    about:
+      "2p. Two Dryads of the Ilysian Grove make every land every basic land type. Click City of Brass: " +
+      "five entries, one per colour (its 'any color' and the intrinsic {T}: Add {W} are one choice); " +
+      "Mana Confluence keeps its five 'Pay 1 life' entries beside five plain ones; the Forest shows five.",
+    players: ["alice", "bob"],
+    lands: { alice: 0, bob: 3 },
+    battlefield: {
+      alice: ["Dryad of the Ilysian Grove", "Dryad of the Ilysian Grove", "City of Brass", "Mana Confluence", "Forest"],
+    },
+    bots: { bob: {} },
+  },
+  DRYA4: {
+    about: "4p. DRYAD at a full table: the same menus beside four boards.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 0, bob: 3, carol: 3, dave: 3 },
+    battlefield: {
+      alice: ["Dryad of the Ilysian Grove", "Dryad of the Ilysian Grove", "City of Brass", "Mana Confluence", "Forest"],
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
 
 };

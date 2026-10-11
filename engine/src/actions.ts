@@ -961,6 +961,12 @@ export type LegalAction =
        * client can offer them as separate menu entries; absent for an ability
        * whose output is fixed. */
       readonly manaColors?: readonly ManaType[];
+      /** Set when this is nothing but "{T}: Add [this one mana]" — no other
+       * cost, no restriction, no rider (`plainTapMana`). Two offers of one
+       * source with the same `plainMana` tap it for the same mana (a City of
+       * Brass that's every basic land type: its "any color" and the
+       * intrinsic "{T}: Add {W}", rule 305.6), so a menu may show one. */
+      readonly plainMana?: ManaType;
       /** Set when the ability's cost contains `{X}` (ROADMAP Phase 11 EG-3).
        * `maxX` is the largest value of X this player could currently pay for
        * (0 when only X=0 is affordable). The driver must include `xValue` in

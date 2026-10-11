@@ -101,6 +101,28 @@ describe("intrinsic mana abilities", () => {
     expect(green).toHaveLength(1);
   });
 
+  it("an 'any color' land given every type: its plain {T}: Add twins are marked interchangeable, a costed one isn't", () => {
+    // A bug report (2026-10-11): City of Brass under Dryad of the Ilysian
+    // Grove listed ten abilities — its "any color" once per colour, and the
+    // intrinsic five. Both are real (rule 305.6); `plainMana` lets a menu
+    // show one of each pair.
+    const game = setUp();
+    const city = game.debugSpawn("City of Brass", A, "battlefield");
+    const confluence = game.debugSpawn("Mana Confluence", A, "battlefield");
+    everyLandType(game, city);
+    everyLandType(game, confluence);
+    const offers = (id: ObjectId) =>
+      game.legalActions(A).flatMap((action) => (action.kind === "activate-ability" && action.source === id ? [action] : []));
+    const cityOffers = offers(city);
+    expect(cityOffers).toHaveLength(10);
+    // Every one is plain: one per colour, twice.
+    expect(cityOffers.map((o) => o.plainMana).sort()).toEqual(["B", "B", "G", "G", "R", "R", "U", "U", "W", "W"]);
+    // Mana Confluence's costs 1 life: never the intrinsic one's twin.
+    const confluenceOffers = offers(confluence);
+    expect(confluenceOffers.filter((o) => o.abilityIndex === 0).every((o) => o.plainMana === undefined)).toBe(true);
+    expect(confluenceOffers.filter((o) => o.plainMana !== undefined)).toHaveLength(5);
+  });
+
   it("a land made a Mountain loses the rest (rule 305.7): Tropical Island taps for {R} alone", () => {
     const game = setUp();
     const island = game.debugSpawn("Tropical Island", A, "battlefield");

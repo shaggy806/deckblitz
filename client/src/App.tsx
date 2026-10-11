@@ -45,6 +45,8 @@ import { gameStats } from './game/gameStats.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
 import { useMusic } from './game/music.ts'
 import { tableActions } from './game/tableActions.ts'
+import { abilitiesBySource as abilitiesBySourceOf } from './game/abilityMenu.ts'
+import type { AbilityAction } from './game/abilityMenu.ts'
 import { useEscape } from './ui/useEscape.ts'
 import { computeBoardEntries } from './game/board.ts'
 import { applyBoardOrder } from './game/boardOrder.ts'
@@ -271,7 +273,6 @@ type LandAction = Extract<LegalAction, { kind: 'play-land' }>
 type SuspendAction = Extract<LegalAction, { kind: 'suspend' }>
 type ForetellAction = Extract<LegalAction, { kind: 'foretell' }>
 type CycleAction = Extract<LegalAction, { kind: 'cycle' }>
-type AbilityAction = Extract<LegalAction, { kind: 'activate-ability' }>
 type AttackAction = Extract<LegalAction, { kind: 'declare-attackers' }>
 type EnterAttackingAction = Extract<LegalAction, { kind: 'enter-attacking' }>
 type BlockAction = Extract<LegalAction, { kind: 'declare-blockers' }>
@@ -1518,16 +1519,8 @@ function Table({
     for (const a of actions) if (a.kind === 'turn-face-up') m.set(a.permanent, [...(m.get(a.permanent) ?? []), a])
     return m
   }, [actions])
-  const abilitiesBySource = useMemo(() => {
-    const m = new Map<ObjectId, AbilityAction[]>()
-    for (const a of actions) {
-      if (a.kind !== 'activate-ability') continue
-      const list = m.get(a.source) ?? []
-      list.push(a)
-      m.set(a.source, list)
-    }
-    return m
-  }, [actions])
+  // One of each set of interchangeable "{T}: Add {W}"s (`abilityMenu.ts`).
+  const abilitiesBySource = useMemo(() => abilitiesBySourceOf(actions), [actions])
 
   // The offer with each compacted token stack as one member per token
   // (game/stackMembers.ts): the bar picks and counts creatures, and

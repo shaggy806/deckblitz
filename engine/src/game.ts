@@ -97,6 +97,7 @@ import {
   extraIntrinsicManaColors,
   inactiveStandIn,
   intrinsicManaAbility,
+  plainTapMana,
   spellHasSplitSecond,
   spellCantBeCountered,
   playerCantLoseGame,
@@ -1845,6 +1846,7 @@ export class Game {
       // "X can't be 0" (Ruthless Technomancer).
       const minX = ability.minX ?? 0;
       if (maxX !== undefined && maxX < minX) return;
+      const plainMana = plainTapMana(ability, makes);
       const push = (
         targetOptions: readonly (readonly TargetRef[])[],
         xCost?: { readonly maxX: number; readonly minX?: number },
@@ -1878,6 +1880,7 @@ export class Game {
           })(),
           ...(ability.loyaltyCost !== undefined ? { loyalty: ability.loyaltyCost } : {}),
           ...(isManaAbility(ability) ? { manaAbility: true as const } : {}),
+          ...(plainMana !== undefined ? { plainMana } : {}),
           ...(xCost !== undefined ? { xCost } : {}),
           ...(ability.divided !== undefined ? { divide: ability.divided } : {}),
         });
