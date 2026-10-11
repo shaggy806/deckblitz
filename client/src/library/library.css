@@ -128,6 +128,10 @@ html:has(.lib-page) {
   border-radius: 0;
   padding: 4px 8px;
 }
+/* Set names run long ("Commander Legends: Battle for Baldur's Gate"). */
+.lib-set select {
+  max-width: min(22em, 60vw);
+}
 .lib-sort-dir {
   line-height: 1;
   cursor: pointer;

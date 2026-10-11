@@ -17,6 +17,8 @@ import { fetchMorePrintings, fetchPrintings } from '../deck-builder/printings.ts
 import type { Printing, PrintingPage } from '../deck-builder/printings.ts'
 import { CardImage } from '../ui/CardImage.tsx'
 import { Symbols } from '../ui/Symbols.tsx'
+import { fetchSetCards, fetchSets } from './setFilter.ts'
+import type { SetCards, SetInfo } from './setFilter.ts'
 import './library.css'
 
 const TYPE_FILTERS = [
@@ -232,6 +234,32 @@ function setCardParam(name: string | null): void {
   window.history.replaceState(null, '', url)
 }
 
+// A `?set=fra` link, the Set filter's choice.
+function setParam(): string | null {
+  return new URL(window.location.href).searchParams.get('set')?.toLowerCase() || null
+}
+function setSetParam(code: string | null): void {
+  const url = new URL(window.location.href)
+  if (code === null) url.searchParams.delete('set')
+  else url.searchParams.set('set', code)
+  window.history.replaceState(null, '', url)
+}
+
+/** A chosen set's cards: still coming, here, or Scryfall couldn't say. */
+type SetCardsState =
+  | { readonly code: string; readonly cards: SetCards }
+  | { readonly code: string; readonly failed: true }
+
+/** The offered sets in groups by the year they came out, newest first. */
+function setsByYear(sets: readonly SetInfo[]): [string, SetInfo[]][] {
+  const groups = new Map<string, SetInfo[]>()
+  for (const s of sets) {
+    const year = s.releasedAt.slice(0, 4)
+    groups.set(year, [...(groups.get(year) ?? []), s])
+  }
+  return [...groups]
+}
+
 /**
  * The public, read-only card library — every card the engine implements,
  * browsable as a grid of real card faces, with no room/seat/WebSocket
@@ -267,9 +295,53 @@ export function LibraryPage() {
     return param !== null && cardsByName.has(param) ? param : null
   })
 
+  // The Set filter (optional): the sets come from Scryfall the first time the
+  // menu is opened, and a set's cards when it's picked (`setFilter.ts`).
+  const [sets, setSets] = useState<readonly SetInfo[] | null>(null)
+  const [setsFailed, setSetsFailed] = useState(false)
+  const [setCode, setSetCode] = useState<string | null>(setParam)
+  const [setCardsState, setSetCardsState] = useState<SetCardsState | null>(null)
+  const loadSets = useCallback(() => {
+    fetchSets().then(
+      (list) => {
+        setSets(list)
+        setSetsFailed(false)
+      },
+      () => setSetsFailed(true),
+    )
+  }, [])
+  // A `?set=` link names a set before the menu is ever opened.
+  useEffect(() => {
+    if (setParam() !== null) loadSets()
+  }, [loadSets])
+  useEffect(() => {
+    if (setCode === null) return
+    let live = true
+    fetchSetCards(setCode).then(
+      (cards) => {
+        if (live) setSetCardsState({ code: setCode, cards })
+      },
+      () => {
+        if (live) setSetCardsState({ code: setCode, failed: true })
+      },
+    )
+    return () => {
+      live = false
+    }
+  }, [setCode])
+  const chooseSet = (code: string | null) => {
+    setSetCode(code)
+    setSetParam(code)
+  }
+  const setNow = setCardsState !== null && setCardsState.code === setCode ? setCardsState : null
+  const setNames = setNow !== null && 'cards' in setNow ? setNow.cards.names : null
+  const setName = sets?.find((s) => s.code === setCode)?.name ?? setCode?.toUpperCase() ?? ''
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
     const rows = entries.filter((e) => {
+      // A set still loading (or that couldn't be) matches nothing yet.
+      if (setCode !== null && (setNames === null || !setNames.has(e.def.name))) return false
       if (e.isToken && !showTokens) return false
       if (typeFilter !== null && !e.def.types.includes(typeFilter)) return false
       if (colorFilter.length > 0 && !e.colorKeys.some((c) => colorFilter.includes(c))) return false
@@ -297,7 +369,7 @@ export function LibraryPage() {
       // Ties stay alphabetical whichever way the sort runs.
       return key !== 0 ? sign * key : byName(a, b)
     })
-  }, [entries, query, typeFilter, colorFilter, sort, descending, showTokens])
+  }, [entries, query, typeFilter, colorFilter, sort, descending, showTokens, setCode, setNames])
 
   const [columns, gridRef] = useGridColumns()
   const pageSize = pageSizeFor(columns)
@@ -311,7 +383,7 @@ export function LibraryPage() {
   // effect. An effect would commit the stale page first and then immediately
   // re-render (which `react/set-state-in-effect` flags); this is React's
   // documented "adjust state when a prop changes" pattern and repaints once.
-  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}`
+  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}|${setCode ?? ''}|${setNames === null ? 0 : setNames.size}`
   const [pagedFor, setPagedFor] = useState(filterKey)
   if (pagedFor !== filterKey) {
     setPagedFor(filterKey)
@@ -376,7 +448,13 @@ export function LibraryPage() {
     setColorFilter((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]))
 
   const anyFilter =
-    query !== '' || typeFilter !== null || colorFilter.length > 0 || sort !== 'edhrec' || descending || showTokens
+    query !== '' ||
+    typeFilter !== null ||
+    colorFilter.length > 0 ||
+    sort !== 'edhrec' ||
+    descending ||
+    showTokens ||
+    setCode !== null
 
   return (
     <div className="lib-page">
@@ -452,6 +530,35 @@ export function LibraryPage() {
             </button>
           </label>
 
+          <label className="lib-sort lib-set">
+            Set
+            <select
+              value={setCode ?? ''}
+              // The list comes from Scryfall the first time it's wanted.
+              onFocus={sets === null ? loadSets : undefined}
+              onPointerDown={sets === null ? loadSets : undefined}
+              onChange={(e) => chooseSet(e.target.value === '' ? null : e.target.value)}
+            >
+              <option value="">All sets</option>
+              {sets === null ? (
+                <>
+                  {setCode !== null ? <option value={setCode}>{setName}</option> : null}
+                  <option disabled>{setsFailed ? "Couldn't reach Scryfall" : 'Loading sets…'}</option>
+                </>
+              ) : (
+                setsByYear(sets).map(([year, group]) => (
+                  <optgroup key={year} label={year}>
+                    {group.map((s) => (
+                      <option key={s.code} value={s.code}>
+                        {s.name} ({s.code.toUpperCase()})
+                      </option>
+                    ))}
+                  </optgroup>
+                ))
+              )}
+            </select>
+          </label>
+
           <label className="lib-toggle" title="Tokens aren't cards — they can't go in a deck">
             <input
               type="checkbox"
@@ -472,6 +579,7 @@ export function LibraryPage() {
                 setSort('edhrec')
                 setDescending(false)
                 setShowTokens(false)
+                chooseSet(null)
               }}
             >
               Clear
@@ -483,13 +591,20 @@ export function LibraryPage() {
       <main className="lib-results">
         <p className="lib-count muted mono">
           {filtered.length} {filtered.length === 1 ? 'card' : 'cards'}
+          {setNow !== null && 'cards' in setNow ? ` of ${setNow.cards.total} in ${setName}` : ''}
           {pageCount > 1
             ? ` — showing ${safePage * pageSize + 1}-${Math.min(filtered.length, (safePage + 1) * pageSize)}`
             : ''}
         </p>
-        {filtered.length === 0 ? (
+        {setCode !== null && setNow === null ? (
+          <p className="lib-empty muted">Loading {setName}&rsquo;s cards from Scryfall…</p>
+        ) : setNow !== null && 'failed' in setNow ? (
+          <p className="lib-empty muted">Couldn&rsquo;t load {setName}&rsquo;s cards from Scryfall. Try again later.</p>
+        ) : filtered.length === 0 ? (
           <p className="lib-empty muted">
-            No cards match. The pool is {cardCount} implemented cards — try a shorter search.
+            {setCode !== null
+              ? `None of ${setName}'s cards match — or none are implemented yet.`
+              : `No cards match. The pool is ${cardCount} implemented cards — try a shorter search.`}
           </p>
         ) : (
           <>
