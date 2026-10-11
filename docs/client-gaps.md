@@ -17,6 +17,11 @@ title; when one lands, delete it in both. The animation follow-ups are in
   after the jingle has played. Where: `game/music.ts` (`stopMusic` at the game's end;
   `startMusic` fades in) and the jingle in `game/sound.ts`, the fade-in timed from the
   jingle's end.
+- **A split card's two costs are drawn as one** (the user, 2026-10-10): for cards like
+  Expansion // Explosion, the mana pips for the cost should be split onto the left and right
+  side of the top of the card — the goal is for it to render with two separate costs. Where:
+  `ui/CardTile.tsx`'s cost (`costNode`, `CostSymbols` over `obj.manaCost`), drawing each half's
+  cost on its own side.
 - **No music in the lobby** (the user, 2026-10-10): the music plays only during a game, and
   should play in the lobby as well. Where: `App.tsx` turns it on with
   `useGameMusic(view !== null && !view.result.over && !lost)` (`game/music.ts`), so the
