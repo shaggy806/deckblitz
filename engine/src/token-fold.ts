@@ -43,7 +43,7 @@ function stableStringify(value: unknown): string {
  * it this turn, abilities used this turn).
  */
 export function exactTokenShape(o: GameObject): string {
-  const { id: _id, stackCount: _count, splitFromStack: _split, ...rest } = o;
+  const { id: _id, stackCount: _count, splitFromStack: _split, splitFrom: _from, ...rest } = o;
   return stableStringify(rest);
 }
 
@@ -56,6 +56,9 @@ export function exactTokenShape(o: GameObject): string {
  * up. Counting them kept apart every two tokens a spell had targeted. */
 const SNAPSHOT_STATE_FIELDS: ReadonlySet<string> = new Set(["ceasedTokens", "departedAbilities"]);
 const SNAPSHOT_OBJECT_FIELDS: ReadonlySet<string> = new Set(["lastOnStack", "lastKnown", "earlierLastKnown"]);
+/** An object's own bookkeeping that names another only for the client
+ * (`GameObject.splitFrom`): nothing in the game looks it up. */
+const CLIENT_ONLY_OBJECT_FIELDS: ReadonlySet<string> = new Set(["splitFrom"]);
 
 /** `TurnHistory` lists kept only to be counted, whose ids nothing looks up:
  * how much damage sources dealt (`damageDealt`, read by amount and colour).
@@ -119,7 +122,7 @@ export function referencedObjectIds(state: GameState): Set<ObjectId> {
   for (const object of Object.values(state.objects)) {
     if (object.zone === "library") continue;
     for (const [key, value] of Object.entries(object)) {
-      if (key !== "id" && !SNAPSHOT_OBJECT_FIELDS.has(key)) walk(value);
+      if (key !== "id" && !SNAPSHOT_OBJECT_FIELDS.has(key) && !CLIENT_ONLY_OBJECT_FIELDS.has(key)) walk(value);
     }
   }
   return seen;

@@ -173,3 +173,44 @@ describe("sacrificing several tokens out of one compacted stack", () => {
     for (const pick of picks) expect(pick).toEqual([stack, stack, stack]);
   });
 });
+
+describe("a token sacrificed from a stack names the stack it came from", () => {
+  it("Goblins sacrificed out of a stack leave naming it, and it stands smaller", () => {
+    const game = table();
+    const stack = stackOf(game, "Goblin Token", A, 9);
+    demand(game, A, 2);
+    const from = game.state.eventLog.length;
+    game.dispatch({ type: "sacrifice", player: A, permanents: [stack, stack] });
+    const left = game.state.eventLog.slice(from).filter((e) => e.type === "permanent-left-battlefield");
+    expect(left).toHaveLength(2);
+    for (const e of left) {
+      expect(e).toMatchObject({ toZone: "graveyard", stack });
+      expect(e.type === "permanent-left-battlefield" && e.object).not.toBe(stack);
+    }
+    expect(game.state.objects[stack].stackCount).toBe(7);
+  });
+
+  it("the stack's own last token names none: it is the stack", () => {
+    const game = table();
+    const stack = stackOf(game, "Goblin Token", A, 8);
+    demand(game, A, 8);
+    const left = game.state.eventLog.filter((e) => e.type === "permanent-left-battlefield");
+    const own = left.find((e) => e.type === "permanent-left-battlefield" && e.object === stack);
+    expect(own).toBeDefined();
+    expect(own !== undefined && "stack" in own).toBe(false);
+  });
+
+  it("a token that was never split off names no stack", () => {
+    const game = table();
+    const treasure = game.debugSpawn("Treasure Token", A, "battlefield");
+    game.state.objects[treasure].isToken = true;
+    const from = game.state.eventLog.length;
+    game.dispatch({ type: "activate-ability", player: A, source: treasure, abilityIndex: 0, targets: [] });
+    for (let i = 0; i < 5 && game.state.awaiting !== null; i += 1) {
+      game.dispatch({ type: "choose-modes", player: A, modes: [0] });
+    }
+    const left = game.state.eventLog.slice(from).find((e) => e.type === "permanent-left-battlefield");
+    expect(left).toBeDefined();
+    expect(left !== undefined && "stack" in left).toBe(false);
+  });
+});

@@ -3097,6 +3097,9 @@ function Table({
             className={`board-entry${own ? ' draggable' : ''}${dragged ? ' dragging' : ''}${dropSide}`}
             key={entry.ids[0]}
             data-obj-ids={entry.ids.join(' ')}
+            // How many permanents the tile stands for, which a leave reads to
+            // tell part of a stack going from the whole of it (`runLeaves`).
+            data-count={entry.count}
             style={dragged ? { translate: `${drag.dx}px ${drag.dy}px` } : undefined}
             onPointerDown={own ? (e) => boardDrag.start(e, entry.ids[0]) : undefined}
             // The art is an image the browser would drag natively, which

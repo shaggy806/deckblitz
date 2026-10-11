@@ -3088,6 +3088,7 @@ export class Game {
     // they fold back together once nothing tells them apart any more
     // (`refoldSplitTokens`, `recompactTokens`).
     this.state.objects[newId].splitFromStack = true;
+    this.state.objects[newId].splitFrom = id;
     if (remaining <= 1) stack.splitFromStack = true;
     this.state.zones.shared.battlefield.push(newId);
     // A new permanent on the battlefield: anything memoized about the board
@@ -3334,7 +3335,10 @@ export class Game {
       survivor.stackCount = (survivor.stackCount ?? 1) + (this.state.objects[id].stackCount ?? 1);
     }
     // A stack again, so no longer a token split off one.
-    if ((survivor.stackCount ?? 1) > 1) delete survivor.splitFromStack;
+    if ((survivor.stackCount ?? 1) > 1) {
+      delete survivor.splitFromStack;
+      delete survivor.splitFrom;
+    }
     return [...others];
   }
 
@@ -28481,7 +28485,16 @@ export class Game {
       (to === "graveyard" || to === "exile" || to === "hand" || to === "library" || to === "command")
     ) {
       this.leaveBatch?.left.push(id);
-      this.emit({ type: "permanent-left-battlefield", object: id, toZone: to });
+      // A token split off a stack names the stack, while it still stands:
+      // the client draws the leave as the stack going down by one.
+      const stack = object.splitFrom;
+      const fromStack = stack !== undefined && this.state.objects[stack]?.zone === "battlefield" ? stack : undefined;
+      this.emit({
+        type: "permanent-left-battlefield",
+        object: id,
+        toZone: to,
+        ...(fromStack !== undefined ? { stack: fromStack } : {}),
+      });
       // "For as long as [this] remains on the battlefield" ends — once what
       // leaves with it has left, in a simultaneous event.
       if (this.state.whileSourceIds?.includes(id) === true) {

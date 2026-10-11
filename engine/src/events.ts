@@ -710,6 +710,10 @@ export type GameEvent =
       readonly type: "permanent-left-battlefield";
       readonly object: ObjectId;
       readonly toZone: "graveyard" | "exile" | "hand" | "library" | "command";
+      /** For a token split off a compacted stack, the stack, while it's still
+       * on the battlefield (`GameObject.splitFrom`): the client draws the
+       * stack going down rather than a token it never drew leaving. */
+      readonly stack?: ObjectId;
     })
   | (Base & {
       readonly type: "permanent-attached";

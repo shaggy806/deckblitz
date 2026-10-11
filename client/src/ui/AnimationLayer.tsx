@@ -1470,6 +1470,45 @@ function boardTileOf(object: ObjectId): HTMLElement | null {
 }
 
 /**
+ * Permanents leaving in one frame, gathered per tile as arrivals are
+ * (`runEnters`). A tile that loses only some of what it stands for — Treasures
+ * sacrificed for mana, Goblins out of a token stack — stays, and says "−N"
+ * with a red glow rather than playing the whole tile's leave (the user,
+ * 2026-10-10). A token split off an engine stack was never drawn: it's found
+ * by the stack its leave names (`stack`). Anything else leaves as it always
+ * has, through `leave`.
+ */
+function runLeaves(
+  cues: readonly { readonly object: ObjectId; readonly stack?: ObjectId; readonly delay: number }[],
+  leave: (index: number) => void,
+  sound: (index: number) => void,
+): void {
+  const byTile = new Map<HTMLElement, number[]>()
+  cues.forEach((cue, i) => {
+    const wrap = boardTileOf(cue.object) ?? (cue.stack !== undefined ? boardTileOf(cue.stack) : null)
+    if (!wrap) {
+      leave(i)
+      return
+    }
+    byTile.set(wrap, [...(byTile.get(wrap) ?? []), i])
+  })
+  for (const [wrap, members] of byTile) {
+    const shown = Number(wrap.closest('[data-count]')?.getAttribute('data-count') ?? members.length)
+    if (members.length >= shown) {
+      for (const i of members) leave(i)
+      continue
+    }
+    const first = members.reduce((a, b) => (cues[b].delay < cues[a].delay ? b : a))
+    const delay = cues[first].delay
+    const duration = scaled(DEATH_STEP_MS)
+    const tile = wrap.querySelector<HTMLElement>('.mini-tile') ?? wrap
+    glow(tile, 'loss', delay, duration)
+    floatText(wrap, `−${members.length}`, 'loss', delay, duration * 1.5)
+    window.setTimeout(() => sound(first), delay)
+  }
+}
+
+/**
  * Arrivals in one frame, one animation per tile: identical permanents fold
  * into one tile, so several can arrive on it at once. A tile that's new grows
  * in once and says "×N"; one already on the board that some joined just
@@ -2506,6 +2545,9 @@ export function AnimationLayer({
       if (cues.some((c) => c.half === 'before')) dropAllLifted()
       // Arrivals are gathered and played per tile after the loop (`runEnters`).
       const enters: { object: ObjectId; isToken: boolean; delay: number }[] = []
+      // So are permanents leaving (`runLeaves`), so part of a stack going
+      // reads as the stack going down rather than as the tile leaving.
+      const leaves: AnimationCue[] = []
       // So are cards leaving libraries: a run of them shares one beat (one
       // delay), and plays as one, each library's cards in one sequence
       // (`runMill`).
@@ -2595,6 +2637,10 @@ export function AnimationLayer({
           captureMove(cue.event)
           continue
         }
+        if (cue.event.type === 'permanent-left-battlefield' && cue.event.toZone !== 'hand') {
+          leaves.push(cue)
+          continue
+        }
         if (cardsOffLibraries(cue.event) > 0) {
           const run = mills.get(cue.delay) ?? { events: [], view: cue.view }
           run.events.push(cue.event)
@@ -2604,6 +2650,14 @@ export function AnimationLayer({
         window.setTimeout(() => fire(cue), cue.delay)
       }
       runEnters(enters)
+      runLeaves(
+        leaves.map((cue) => {
+          const ev = cue.event as Extract<GameEvent, { type: 'permanent-left-battlefield' }>
+          return { object: ev.object, ...(ev.stack !== undefined ? { stack: ev.stack } : {}), delay: cue.delay }
+        }),
+        (i) => window.setTimeout(() => fire(leaves[i]), leaves[i].delay),
+        (i) => soundFor(leaves[i].event, seatRef.current, leaves[i].prev),
+      )
       for (const [delay, run] of handDraws) {
         const stagger = scaled(handDrawStaggerMs(run.objects.length))
         const pile = libraryCardOf(run.player)

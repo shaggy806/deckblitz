@@ -895,6 +895,12 @@ export interface GameObject {
    * (`tokenFoldKey`, `exactTokenShape`).
    */
   splitFromStack?: true;
+  /** The stack a token was split off (`splitFromStack`'s own, not the
+   * drained stack's). Bookkeeping for the client only: a leave names it
+   * (`permanent-left-battlefield`'s `stack`), so the stack's tile is drawn
+   * going down rather than the token leaving from nowhere. Left out of every
+   * comparison and of what names an object (`referencedObjectIds`). */
+  splitFrom?: ObjectId;
   /** True for a copy of a spell on the stack (rule 707.10 — storm, Twincast).
    * `cardName` is the copied spell's name; the copy ceases to exist instead of
    * moving to any zone other than the stack. ROADMAP Phase 8. Also a copy of
