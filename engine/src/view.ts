@@ -254,7 +254,8 @@ export interface VisibleObject {
   readonly ringBearer: boolean;
   /** On a permanent: the cards in exile linked to it — what an O-Ring holds
    * until it leaves (rule 720.2 — Banishing Light), or cards exiled with it
-   * that it lets someone play (Theater of Horrors, Maralen). Ids only: a
+   * that it lets someone play (Theater of Horrors, Maralen), or exiled with
+   * it (rule 607.2a — a hideaway card, Mosswort Bridge's). Ids only: a
    * card exiled face down (rule 406.3) is in the list, but its identity
    * stays out of `objects` for a seat that can't look at it, so a client
    * draws a card back. Absent when it holds nothing. */
@@ -619,8 +620,9 @@ function splitCostsOf(registry: CardRegistry, object: GameObject): { splitCosts?
 /**
  * Each battlefield permanent's linked exile — see `VisibleObject.holding`.
  * A link counts only while its permanent is on the battlefield: an O-Ring's
- * `exiledBy`, or an impulse permission's source (`source`, and only while
- * it's still the same object — rule 400.7; or a `while-source` expiry).
+ * `exiledBy`, an impulse permission's source (`source`, and only while
+ * it's still the same object — rule 400.7; or a `while-source` expiry), or
+ * the source a card was exiled with (`exiledWith`, the same stint only).
  */
 function exileHoldings(state: GameState): Map<ObjectId, ObjectId[]> {
   const out = new Map<ObjectId, ObjectId[]>();
@@ -629,16 +631,28 @@ function exileHoldings(state: GameState): Map<ObjectId, ObjectId[]> {
     const object = state.objects[id];
     if (object === undefined) continue;
     const linked = object.impulse?.source;
+    const sameStint = (link: { readonly id: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+      link !== undefined &&
+      onBattlefield(link.id) &&
+      (state.objects[link.id].zoneChangeCount ?? 0) === link.zoneChangeCount;
+    const exiledWith =
+      object.exiledWith === undefined
+        ? undefined
+        : { id: object.exiledWith.source, zoneChangeCount: object.exiledWith.zoneChangeCount };
     const holder =
       object.exiledBy !== undefined && onBattlefield(object.exiledBy)
         ? object.exiledBy
-        : linked !== undefined &&
-            onBattlefield(linked.id) &&
-            (state.objects[linked.id].zoneChangeCount ?? 0) === linked.zoneChangeCount
+        : linked !== undefined && sameStint(linked)
           ? linked.id
           : object.impulse?.expiry.kind === "while-source" && onBattlefield(object.impulse.expiry.source)
             ? object.impulse.expiry.source
-            : undefined;
+            : // "Exiled with" it (rule 607.2a): a hideaway card (Mosswort
+              // Bridge — face down, so by id only to a seat that can't look),
+              // an imprinted one, Arcane Bombardment's — while it's the same
+              // object that exiled them.
+              exiledWith !== undefined && sameStint(exiledWith)
+              ? exiledWith.id
+              : undefined;
     if (holder === undefined) continue;
     const list = out.get(holder);
     if (list === undefined) out.set(holder, [id]);

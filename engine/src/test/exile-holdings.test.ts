@@ -67,4 +67,22 @@ describe("what a permanent holds in exile", () => {
     game.debugApplyEffect(A, { kind: "flicker", target: 0 }, [{ kind: "object", object: maralen }]);
     expect(holdingOf(game, maralen, A)).toBeUndefined();
   });
+
+  it("a hideaway card, exiled face down with its land — shown to its controller, a card back to everyone else", () => {
+    const game = setUp();
+    const bridge = game.debugSpawn("Mosswort Bridge", A, "battlefield", { announceEntry: true });
+    quiet(game);
+    const hidden = game.state.zones.shared.exile.find((id) => game.state.objects[id].exiledWith?.source === bridge);
+    expect(hidden).toBeDefined();
+    expect(holdingOf(game, bridge, A)).toEqual([hidden]);
+    expect(holdingOf(game, bridge, B)).toEqual([hidden]);
+    // Face down (rule 702.75a): Alice may look at it, Bob may not.
+    expect(game.viewFor(A).objects[hidden as ObjectId]?.cardName).toBe("Island");
+    expect(game.viewFor(B).objects[hidden as ObjectId]).toBeUndefined();
+
+    // Flickered, the Bridge is a new object (rule 400.7): no longer linked.
+    game.debugApplyEffect(A, { kind: "flicker", target: 0 }, [{ kind: "object", object: bridge }]);
+    quiet(game);
+    expect(holdingOf(game, bridge, A)?.includes(hidden as ObjectId) ?? false).toBe(false);
+  });
 });
