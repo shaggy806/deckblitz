@@ -57,6 +57,12 @@ section keeps only what to do next.
   -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
   6820–6886). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
+- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11): each
+  set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
+  new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
+  the walk; it starts at Reality Fracture (FRA, 2026-10-02: 134 cards above the threshold, none
+  done), which the Oracle snapshot (2026-09-24) doesn't have yet — `npm run gen:oracle -w engine`
+  first.
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
 - **Every card triaged so far needs engine work: build what blocks the most.** Triage now runs

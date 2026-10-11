@@ -1,0 +1,118 @@
+---
+name: author-by-set
+description: Add the next batch of cards set by set — newest set first, then backwards — taking each set's own new cards (its Commander-legal first printings) that are popular for their set, so the cards people are seeing in games right now get in even before EDHREC ranks them highly; auto-finish what the scaffolder reads whole, author the rest the engine runs faithfully, record what blocks the others, test, and ship. Use when the user says to author by set, do the next set, work through recent sets, add the new set's cards, or runs this skill with no other instructions.
+---
+
+# Add the next set batch
+
+The goal is **the cards people meet in games now**: a set's new cards are
+played far more than their EDHREC rank says while they're new, so the order
+is **set by set, newest first**, and within a set its top share by EDHREC rank
+(by default the top half — the threshold is relative to the set, not one rank
+for every set). A set is done when every card above its threshold is in the
+pool or triaged; then the next older set. Cards already triaged by any other
+skill (`author-top-cards`, the commander skill) are skipped — their records
+stand.
+
+**The tools** (each prints what you'd otherwise grep for):
+
+- `npm run cards:sets -w engine -- --sets` — the newest sets: new cards,
+  above the threshold, done, triaged, left. `--set FRA` lists one set's cards,
+  each marked done / triaged / todo. `--next 60` — the next untriaged cards,
+  set by set. `--top 50` sets the share kept (percent); `--unranked` keeps the
+  cards EDHREC hasn't ranked yet (a set out this month may have none ranked);
+  `--refresh` refetches Scryfall (cached three days in `engine/.cache/`).
+  Reads `dist/`: build first.
+- `npm run card:scaffold -w engine -- "A" "B" …` — writes each card from the
+  Oracle snapshot; a card whose every line the parser reads goes, finished,
+  to `engine/src/cards/review/` (check it, then move it into `pool/`), the rest
+  to `cards/scaffold/` with a `// TODO(scaffold)` per unread line.
+- `npm run card:brief -w engine -- "A" "B" …` — Oracle text, rulings, triage
+  records and the pool's closest authored abilities per line.
+- `npm run card:vocab -w engine -- <term>`, `npm run cards:needs -w engine --
+  --rank | --feature <key>` — as in `author-top-cards`.
+
+Edit files with the Edit tool (`game.ts` included — it keeps its CRLF and
+NUL), not with scripts that rewrite text.
+
+**Rule zero governs everything here** (`engine/src/cards/AUTHORING.md` §0):
+never author a card the engine can't run *exactly*. A scaffolder-finished
+card is a draft like any other — its templates match sentences, not meaning
+— and gets read against its Oracle text and rulings before it moves.
+
+## 0. Orient
+
+- `git status` clean enough to work on (the `sync-check` skill if on a
+  different machine). `npm run build -w engine`.
+- `BACKLOG.md`, "Card backlog": anything to merge or fix first.
+- `engine/src/cards/AUTHORING.md` §0-1 and §15 if not already in context
+  this session.
+- **The snapshot has the set?** `cards:sets -- --set <code>` flags every card
+  the Oracle snapshot lacks ("not in the snapshot"). A set released since the
+  snapshot was taken needs `npm run gen:oracle -w engine` before its cards can
+  be briefed or scaffolded. That rewrites `data/oracle/cards.jsonl` (new cards,
+  and EDHREC ranks moved for the rest): commit it on its own (`Tooling:
+  refresh the Oracle snapshot`), after `npm run card:verify -w engine --
+  --offline` and the engine suite pass on it.
+
+## 1. Pick the batch
+
+1. `npm run cards:sets -w engine -- --sets` — where the walk is: the newest
+   set with cards left.
+2. `npm run cards:sets -w engine -- --next 60` — the batch: the next 60
+   untriaged cards, newest set first (the rest of one set, then the next).
+   A brand-new set may have few ranked cards: look at `--set <code>
+   --unranked` and take its unranked cards too when the ranked ones run out —
+   say so in the batch record.
+3. **Scaffold first**: `npm run card:scaffold -w engine -- "A" "B" …` over the
+   batch. Each card in `review/` is nearly done — read it against its Oracle
+   text and rulings (`card:brief`), fix what's wrong or move it back to the
+   hand-authored pile, then into `pool/`. The rest go to authoring.
+4. For the rest: `card:brief` each, and sort into **authorable now** and
+   **blocked** (a need key from `top-commanders-gaps.json`'s `features` or
+   `engine/data/needs-vocabulary.json`; add a new one with its `family` when
+   none fits), exactly as `author-top-cards` step 1.
+
+Parallel agents work here as in `author-top-cards`: three or four agents of
+~20 cards each writing to a scratchpad staging dir, each checking its files in
+a scratch copy of `engine/` (gen:cards, both typechecks, its test file,
+`pool.test`, `oracle-parse`, `card:verify --offline --text`), you reviewing
+every file against Oracle before integrating.
+
+## 2. Build a feature, if one leads
+
+If one missing feature blocks **five or more** cards of the batch — a set's
+new mechanic usually does — build it first (engine change + its own test file
++ the AUTHORING.md vocabulary entry, following `engine/CLAUDE.md`), then
+author every card it unblocks (`cards:needs -- --feature <key>`), in the set
+or not. **Teach the scaffolder too**: a template for the mechanic's keyword
+line or sentence in `scripts/oracle-parse.mjs`, checked by `npm run
+card:parse-check -w engine` (zero disagreements) and pinned in
+`test/oracle-parse.test.ts` — the next set with it then comes pre-drafted.
+A feature needing a new player decision is a client change too — check it
+live in a 2- and a 4-player room at ~768px tall.
+
+## 3. Author, test, record, ship
+
+As `author-top-cards` steps 3–6, with these differences:
+
+- **Test file**: `engine/src/test/set-<code>-batch-<N>.test.ts` (the set's
+  code, lower case; N counts that set's batches), on `src/test/harness.ts`.
+- **Record**: `engine/data/sweep-3/B<N>.json` in the usual shape, the next
+  batch number after the highest `B*.json`, with `"ranks"` naming the set and
+  the share: `"Reality Fracture (FRA, 2026-10-02): top 50% by EDHREC rank"`.
+  Every card of the batch is in it — authored or blocked — so `cards:sets
+  -- --next` and `cards:needs -- --next` skip them from then on.
+- **BACKLOG.md**, "Card backlog": the set walk's place — which set is done,
+  which is next — on the line for this skill; the batch summary goes in
+  `docs/card-blockers.md`.
+- **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
+  more` (or `Engine, Cards: <the feature>, and <Set name>'s …` when one was
+  built), the set and share, and any engine or scaffolder change with why.
+
+## 4. Report and offer the next
+
+A few lines: how many of the set's cards are in now (and of the threshold's),
+how many blocked and the feature blocking the most, anything built or taught
+to the scaffolder. Then offer the next batch — the rest of the set, or the
+next older set — but don't start it unasked.
