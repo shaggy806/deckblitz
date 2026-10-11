@@ -139,7 +139,6 @@ game to show a problem, listed in that plan's "Watching live games for" (wraths 
 under count budgets, deck biases, 1/1 tokens since `smallTokens`, Shiko or the other spell, and
 haste enablers in the crackback).
 
-- **Auto-pay taps a land whose other ability is still wanted**: Utvara Hellkite's payment took Mosswort Bridge ahead of Birds of Paradise and two Treasures, leaving its hideaway activation unpayable (capture AN5SU t22; the bots now activate first, `hideawayFirst`, but a human's auto-pay does the same). Fix outline: `mana-payment.ts` tries a source with a usable non-mana activated ability later among the plain sources. Risk: tapping a creature dork that would have attacked instead.
 - **A bot's Ring-bearer is its first creature**, not its best: `choose-permanents` asks bots
   for their own permanents in battlefield order, whatever the `then` does
   (`decisions/choose-permanents.ts`). Choosing an evasive or high-power creature is the play.

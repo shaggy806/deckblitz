@@ -45,9 +45,13 @@ export interface ScenarioCapture {
   readonly state: GameState;
   /** What the bot did there. */
   readonly did: Action;
-  /** The right answer: this move, or anything but the one it made. */
+  /** The right answer: this move, anything but the one it made, or any of
+   * several — written by hand when a fix makes more than one move right
+   * (AN5SU t22: once auto-pay spares Mosswort Bridge, casting Utvara
+   * Hellkite first keeps the Bridge's card as surely as activating it). */
   readonly expect:
     | { readonly kind: "action"; readonly action: Action }
+    | { readonly kind: "any-of"; readonly actions: readonly Action[] }
     | { readonly kind: "not-this" };
   /** ISO time it was saved. */
   readonly savedAt: string;
@@ -258,6 +262,15 @@ export function scenarioFromCapture(capture: ScenarioCapture): BotScenario {
       return sameMove(action, capture.expect.action)
         ? { passed: true, detail: `chose ${chose}` }
         : { passed: false, detail: `chose ${chose}, not ${want}` };
+    }
+    if (capture.expect.kind === "any-of") {
+      const wants = capture.expect.actions;
+      return wants.some((want) => sameMove(action, want))
+        ? { passed: true, detail: `chose ${chose}` }
+        : {
+            passed: false,
+            detail: `chose ${chose}, not any of ${wants.map((w) => describeMove(capture.state, w, registry)).join(" / ")}`,
+          };
     }
     const did = describeMove(capture.state, capture.did, registry);
     return sameMove(action, capture.did)

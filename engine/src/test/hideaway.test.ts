@@ -374,3 +374,49 @@ describe("hideaway — each card's condition", () => {
     expect(game.state.objects[ids["Grizzly Bears"]].zone).toBe("battlefield");
   });
 });
+
+describe("hideaway — auto-pay keeps the land for its card", () => {
+  /** Mosswort Bridge ready with `hidden` under it (or none), a Mountain, Birds
+   * of Paradise and two Treasures out, and Hill Giant ({3}{R}) in hand. */
+  const board = (hideIt: boolean) => {
+    const { game, permanent } = setUp("Mosswort Bridge", FOUR, "Lightning Bolt");
+    playIt(game, permanent);
+    game.state.objects[permanent].tapped = false;
+    if (!hideIt) {
+      for (const id of game.state.zones.shared.exile) delete game.state.objects[id].exiledWith;
+    }
+    game.debugSpawn("Mountain", A, "battlefield");
+    game.debugSpawn("Birds of Paradise", A, "battlefield", { summoningSick: false });
+    for (let i = 0; i < 2; i += 1) {
+      const t = game.debugSpawn("Treasure Token", A, "battlefield");
+      game.state.objects[t].isToken = true;
+    }
+    const giant = game.debugSpawn("Hill Giant", A, "hand");
+    return { game, bridge: permanent, giant };
+  };
+  const treasures = (game: Game): number =>
+    game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Treasure Token").length;
+
+  it("pays with Birds and the Treasures, leaving the Bridge untapped for its card (capture AN5SU t22)", () => {
+    const { game, bridge, giant } = board(true);
+    game.dispatch({ type: "cast-spell", player: A, card: giant, targets: [] });
+    expect(game.state.objects[giant].zone).toBe("stack");
+    expect(game.state.objects[bridge].tapped).toBe(false);
+    expect(treasures(game)).toBe(0);
+  });
+
+  it("taps the Bridge ahead of a Treasure when no card waits under it", () => {
+    const { game, bridge, giant } = board(false);
+    game.dispatch({ type: "cast-spell", player: A, card: giant, targets: [] });
+    expect(game.state.objects[bridge].tapped).toBe(true);
+    expect(treasures(game)).toBe(1);
+  });
+
+  it("still taps it when nothing else pays", () => {
+    const { game, bridge } = board(true);
+    const wurm = game.debugSpawn("Blanchwood Treefolk", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card: wurm, targets: [] });
+    expect(game.state.objects[wurm].zone).toBe("stack");
+    expect(game.state.objects[bridge].tapped).toBe(true);
+  });
+});

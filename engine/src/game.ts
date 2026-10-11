@@ -11948,6 +11948,29 @@ export class Game {
    * an alternative `ManaOption` — one tap picks one of them (rule 605.1a) and
    * `planManaPayment` makes that choice per cost.
    */
+  /**
+   * Whether `id` has a {T} ability that plays a card exiled with it for free
+   * (hideaway — Mosswort Bridge, Windbrisk Heights) with such a card waiting:
+   * tapping it for mana gives that up for the turn, so a payment reaches for
+   * it last (`ManaSource.reserved`). Utvara Hellkite's auto-pay took Mosswort
+   * Bridge ahead of Birds of Paradise and two Treasures (capture AN5SU t22).
+   */
+  private holdsFreeSpell(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined) return false;
+    const playsLinked = this.registry.get(rulesTextName(object)).activated.some((ability) => {
+      if (ability.cost.tap !== true || ability.effect === null || ability.effect.kind === "add-mana") return false;
+      const effect = JSON.stringify(ability.effect);
+      return effect.includes('"kind":"cast-now"') && effect.includes('"from":"exiled-with-source"');
+    });
+    if (!playsLinked) return false;
+    const stint = object.zoneChangeCount ?? 0;
+    return this.state.zones.shared.exile.some((cardId) => {
+      const link = this.state.objects[cardId]?.exiledWith;
+      return link !== undefined && link.source === id && link.zoneChangeCount === stint;
+    });
+  }
+
   private manaSources(player: PlayerId): ManaSource[] {
     // Recomputed for every `planManaPayment` call — which `legalActions` makes
     // once per castable-candidate variant (and several times per hybrid pip).
@@ -12251,6 +12274,7 @@ export class Game {
         isCreature: effectiveTypes(this.state, this.registry, object).includes("creature"),
         options,
         sacrificeSelf,
+        ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
       });
     }
     const flexibility = (s: ManaSource): number =>

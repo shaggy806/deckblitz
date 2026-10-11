@@ -141,6 +141,11 @@ export interface ManaSource {
   readonly isCreature?: boolean;
   readonly options: readonly ManaOption[];
   readonly sacrificeSelf: boolean;
+  /** Tapping it for mana gives up a better use this turn — a hideaway land
+   * with its card waiting (`Game.holdsFreeSpell`): reached for after every
+   * other source, the last resorts included, and still taken if nothing
+   * else pays. Absent reads as not. */
+  readonly reserved?: boolean;
 }
 
 /** One entry of a mana-payment plan: activate `source`, adding the concrete
@@ -707,8 +712,10 @@ function planManaPaymentOrdered(
     avoid === undefined
       ? all
       : [...all.filter((s) => s.id !== avoid), ...all.filter((s) => s.id === avoid)];
-  /** Where `s` falls in `order`: the groups a payment reaches for in turn. */
+  /** Where `s` falls in `order`: the groups a payment reaches for in turn.
+   * A reserved source (`ManaSource.reserved`) comes after all of them. */
   const groupOf = (s: ManaSource): number => {
+    if (s.reserved === true) return 3;
     const converter = isConverter(s);
     const last = !converter && isLastResort(s);
     switch (order) {
@@ -720,7 +727,7 @@ function planManaPaymentOrdered(
         return converter ? 1 : 0;
     }
   };
-  const sources = [0, 1, 2].flatMap((group) => ordered.filter((s) => groupOf(s) === group));
+  const sources = [0, 1, 2, 3].flatMap((group) => ordered.filter((s) => groupOf(s) === group));
 
   interface Tapped {
     readonly src: ManaSource;
@@ -954,7 +961,7 @@ function planManaPaymentOrdered(
     const free = sources.filter(
       (s) => !isTapped(s.id) && s.id !== exclude && !isConverter(s) && makesOne(s),
     );
-    const plainFree = free.filter((s) => !isLastResort(s));
+    const plainFree = free.filter((s) => !isLastResort(s) && s.reserved !== true);
     const from = plainFree.length > 0 ? plainFree : free;
     const next = from.find(dull) ?? from[0];
     if (next === undefined) return null;
