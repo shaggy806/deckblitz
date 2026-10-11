@@ -3,11 +3,12 @@ import { motionPrefs, useMotionPrefs } from './motionPrefs.ts'
 import { audio } from './sound.ts'
 
 /**
- * Background music in a game: RandomMind's medieval pieces (`public/music/`,
- * CC0; `CREDITS.md` there), shuffled, one after another for as long as the
- * game lasts, at the viewer's music volume (motionPrefs' `musicVolume`; 0 is
- * off). It fades in as a game starts and out as it ends, under the victory
- * tune, or as the viewer leaves.
+ * Background music in a room: RandomMind's medieval pieces (`public/music/`,
+ * CC0; `CREDITS.md` there), shuffled, one after another from the lobby
+ * through the game, at the viewer's music volume (motionPrefs' `musicVolume`;
+ * 0 is off). It fades in as the lobby opens, carries on into the game, fades
+ * out under the victory or defeat tune and back in once it has played, and
+ * fades out as the viewer leaves.
  *
  * Streamed from an `<audio>` element, so only the piece playing downloads,
  * and played through the sound effects' audio context (`sound.ts`'s
@@ -177,15 +178,24 @@ function volumeChanged(): void {
   glide(c.node, c.ctx, level(), 0.15)
 }
 
-/** Music while `on` (a game in progress, `GameScreen`), and none once it
- * isn't or the screen goes. */
-export function useGameMusic(on: boolean): void {
+/** Music while `on` — a room's lobby (`App`), a game in progress
+ * (`GameScreen`) — and none once it isn't or the screen goes. With
+ * `backAfterMs`, music that stopped comes back that long after, fading in
+ * again: the end of a game's victory or defeat tune (the user, 2026-10-10). */
+export function useMusic(on: boolean, backAfterMs: number | null = null): void {
   const { musicVolume } = useMotionPrefs()
   useEffect(() => {
-    if (!on) return
-    startMusic()
-    return () => stopMusic()
-  }, [on])
+    if (on) {
+      startMusic()
+      return () => stopMusic()
+    }
+    if (backAfterMs === null) return
+    const timer = window.setTimeout(startMusic, backAfterMs)
+    return () => {
+      window.clearTimeout(timer)
+      stopMusic()
+    }
+  }, [on, backAfterMs])
   useEffect(() => {
     volumeChanged()
   }, [musicVolume])

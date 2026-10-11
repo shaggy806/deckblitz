@@ -199,6 +199,16 @@ export function preloadSounds(cues: readonly SoundCue[] = Object.keys(SAMPLES) a
   }
 }
 
+/** How long `cue`'s longest recording runs, in milliseconds, once one has
+ * loaded; null before (or for a cue with none). */
+export function cueLengthMs(cue: SoundCue): number | null {
+  const lengths = (SAMPLES[cue] ?? []).flatMap((f) => {
+    const buffer = buffers.get(f)
+    return buffer === undefined ? [] : [buffer.duration * 1000]
+  })
+  return lengths.length === 0 ? null : Math.max(...lengths)
+}
+
 /** The take each cue played last, so the next one is a different take. */
 const lastTake = new Map<SoundCue, string>()
 

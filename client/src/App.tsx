@@ -42,8 +42,8 @@ import type { RematchOffer } from './net/rematch.ts'
 import { stackShowsSomething } from './game/decisionSource.ts'
 import { waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
-import { playSound } from './game/sound.ts'
-import { useGameMusic } from './game/music.ts'
+import { cueLengthMs, playSound } from './game/sound.ts'
+import { useMusic } from './game/music.ts'
 import { tableActions } from './game/tableActions.ts'
 import { useEscape } from './ui/useEscape.ts'
 import { computeBoardEntries } from './game/board.ts'
@@ -538,6 +538,10 @@ function handAbilityLabel(text: string): string {
 
 export default function App() {
   const game = useNetworkGame()
+  // Music in a room's lobby too (the user, 2026-10-10), here rather than in
+  // its two screens so moving from one to the other doesn't fade it; it
+  // carries on into the game, whose own `useMusic` takes over.
+  useMusic(game.status === 'choosing-seat' || game.status === 'waiting-for-players')
 
   if (game.status === 'connecting') {
     return <CenteredScreen title="Connecting…" />
@@ -800,6 +804,10 @@ function GameResultPanel({
   )
 }
 
+/** How long the end-of-game tune is taken to last before its recording has
+ * loaded (the defeat sting runs 3.7 seconds, the victory tune 5.4). */
+const TUNE_FALLBACK_MS = 4000
+
 /** Leaves the waiting room for the landing page, giving up my seat so the
  * table isn't left waiting on someone who has gone. */
 function BackToMenu({ game }: { readonly game: NetworkGame }) {
@@ -945,8 +953,17 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   useEffect(() => {
     if (lost) playSound('defeat')
   }, [lost])
-  // Music through the game, fading out as it ends.
-  useGameMusic(view !== null && !view.result.over && !lost)
+  // Music through the game, fading out as it ends — or as I'm knocked out —
+  // under the tune, and back in once the tune has played. Someone watching
+  // hears no tune, and the music back after a short pause.
+  const ended = view !== null && (view.result.over || lost)
+  const tune = won ? 'victory' : lost ? 'defeat' : null
+  const backAfterMs = !ended
+    ? null
+    : tune !== null && motionPrefs().soundVolume > 0
+      ? (cueLengthMs(tune) ?? TUNE_FALLBACK_MS)
+      : TUNE_FALLBACK_MS / 2
+  useMusic(view !== null && !ended, backAfterMs)
   // What the table may act on: the mulligan stays up through a frame playing
   // out, its buttons locked (`locked` below) — see `tableActions`.
   const latestActions = game.frame?.actions ?? EMPTY_ACTIONS
