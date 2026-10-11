@@ -95,10 +95,10 @@ const slug = (name) =>
 const WUBRG = ["W", "U", "B", "R", "G"];
 const orderColors = (colors = []) => WUBRG.filter((c) => colors.includes(c));
 const SUPERTYPES = new Set(["legendary", "basic", "snow", "world"]);
-const TYPES = new Set(["creature", "artifact", "enchantment", "land", "planeswalker", "instant", "sorcery", "battle"]);
+const TYPES = new Set(["kindred", "creature", "artifact", "enchantment", "land", "planeswalker", "instant", "sorcery", "battle"]);
 
 /** "Legendary Artifact Creature — Dragon" → its three lists, and any word the
- * engine has no type for (Kindred). */
+ * engine has no type for (Dungeon, Conspiracy). */
 function parseTypeLine(typeLine) {
   const [left, right = ""] = typeLine.split(" — ");
   const supertypes = [];

@@ -44,6 +44,7 @@ import _poolBurdenedAerialist from "../pool/burdened-aerialist.js";
 import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
+import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
@@ -69,6 +70,7 @@ import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
+import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDecisiveDenial from "../pool/decisive-denial.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
@@ -231,6 +233,7 @@ import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
+import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
@@ -327,6 +330,7 @@ const shard: CardShard = {
     _poolBurrogBanemaker,
     _poolCacklingCounterpart,
     _poolCameraLauncher,
+    _poolCandyTrail,
     _poolCapsizingWave,
     _poolCaveSense,
     _poolCelestialForce,
@@ -352,6 +356,7 @@ const shard: CardShard = {
     _poolCruelFinality,
     _poolCryptGhast,
     _poolCutADeal,
+    _poolDawnbringerCleric,
     _poolDayOfJudgment,
     _poolDecisiveDenial,
     _poolDeftDuelist,
@@ -514,6 +519,7 @@ const shard: CardShard = {
     _poolTangleMantis,
     _poolTempleOfMalice,
     _poolTheBalrogOfMoria,
+    _poolThePrydwenSteelFlagship,
     _poolTheaterOfHorrors,
     _poolThousandYearStorm,
     _poolTitansGrave,

@@ -86,6 +86,7 @@ import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
 import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
+import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
@@ -369,6 +370,7 @@ const shard: CardShard = {
     _poolFlusterstorm,
     _poolForceOfSavagery,
     _poolForgottenSentinel,
+    _poolFrenziedTrapbreaker,
     _poolFumeSpitter,
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,

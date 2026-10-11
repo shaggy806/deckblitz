@@ -734,6 +734,12 @@ in `git log`.
   a mode at random as an ability goes on the stack. The random opponent is
   built ahead: no pool card picks one yet (Vial Smasher, Indoraptor, Wildfire
   Devils, Explosion of Riches each wait on something else).
+- **The Kindred card type** (`mechanic:kindred-card-type`, 2026-10-11, B49) —
+  `"kindred"` in `CardType` (rule 308), creature types fitting it (rule 205.3m,
+  `subtypeFitsTypes`), changeling reaching it (`withChangeling`), and kindred
+  counting as a card type for delirium (`kindred.test.ts`); with it,
+  `damage-all`'s `controlledByTarget` (Ashling's Command). 13 of its 19 cards;
+  the other 6 each needed another feature, now keyed.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

@@ -32,6 +32,7 @@ import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
+import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
@@ -106,6 +107,7 @@ import _poolHengegatePathway from "../pool/hengegate-pathway.js";
 import _poolHighPriestOfPenance from "../pool/high-priest-of-penance.js";
 import _poolHighlandForest from "../pool/highland-forest.js";
 import _poolHillcomberGiant from "../pool/hillcomber-giant.js";
+import _poolHissingQuagmire from "../pool/hissing-quagmire.js";
 import _poolHolyDay from "../pool/holy-day.js";
 import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
@@ -294,6 +296,7 @@ const shard: CardShard = {
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCarnivorousPlant,
+    _poolCephalidFacetaker,
     _poolChainReaction,
     _poolChandrasMagmutt,
     _poolChartACourse,
@@ -368,6 +371,7 @@ const shard: CardShard = {
     _poolHighPriestOfPenance,
     _poolHighlandForest,
     _poolHillcomberGiant,
+    _poolHissingQuagmire,
     _poolHolyDay,
     _poolHoneyMammoth,
     _poolHugsGrislyGuardian,

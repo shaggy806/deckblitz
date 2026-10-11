@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3496 already implemented / 1504 missing (marks refreshed 2026-10-11)
+3504 already implemented / 1496 missing (marks refreshed 2026-10-11)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -612,7 +612,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   613  Carrion Feeder                           {B}              Creature — Zombie
 [x]   614  Vault of Whispers                        {0}              Artifact Land
 [x]   615  Elas il-Kor, Sadistic Pilgrim            {W}{B}           Legendary Creature — Phyrexian Kor Cleric
-[ ]   616  Bitterblossom                            {1}{B}           Kindred Enchantment — Faerie
+[x]   616  Bitterblossom                            {1}{B}           Kindred Enchantment — Faerie
 [x]   617  Simic Signet                             {2}              Artifact
 [x]   618  Shizo, Death's Storehouse                {0}              Legendary Land
 [x]   619  Stitcher's Supplier                      {B}              Creature — Zombie
@@ -986,7 +986,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   990  Moldervine Reclamation                   {3}{B}{G}        Enchantment
 [x]   991  Mirror Entity                            {2}{W}           Creature — Shapeshifter
 [x]   992  Krosan Verge                             {0}              Land
-[ ]   993  All Is Dust                              {7}              Kindred Sorcery — Eldrazi
+[x]   993  All Is Dust                              {7}              Kindred Sorcery — Eldrazi
 [x]   994  Sokenzan, Crucible of Defiance           {0}              Legendary Land
 [ ]   995  Mechanized Production                    {2}{U}{U}        Enchantment — Aura
 [x]   996  Mines of Moria                           {0}              Legendary Land
@@ -1587,7 +1587,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1594  Surrak and Goreclaw                      {4}{G}{G}        Legendary Creature — Human Bear
 [ ]  1595  Cultivator Colossus                      {4}{G}{G}{G}     Creature — Plant Beast
 [x]  1596  Siege-Gang Commander                     {3}{R}{R}        Creature — Goblin
-[ ]  1597  Eldrazi Conscription                     {8}              Kindred Enchantment — Eldrazi Aura
+[x]  1597  Eldrazi Conscription                     {8}              Kindred Enchantment — Eldrazi Aura
 [x]  1598  Sword of Vengeance                       {3}              Artifact — Equipment
 [ ]  1599  Fiery Confluence                         {2}{R}{R}        Sorcery
 [ ]  1600  Valakut Exploration                      {2}{R}           Enchantment
@@ -2456,7 +2456,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2463  Crimson Wisps                            {R}              Instant
 [ ]  2464  Agitator Ant                             {2}{R}           Creature — Insect
 [ ]  2465  Blade of the Bloodchief                  {1}              Artifact — Equipment
-[ ]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
+[x]  2466  Crib Swap                                {2}{W}           Kindred Instant — Shapeshifter
 [ ]  2467  Emrakul, the World Anew                  {12}             Legendary Creature — Eldrazi
 [x]  2468  Ureni of the Unwritten                   {4}{G}{U}{R}     Legendary Creature — Spirit Dragon
 [ ]  2469  Wrenn and Seven                          {3}{G}{G}        Legendary Planeswalker — Wrenn
@@ -2614,7 +2614,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2621  The Immortal Sun                         {6}              Legendary Artifact
 [x]  2622  Blood Pet                                {B}              Creature — Thrull
 [x]  2623  Twinferno                                {1}{R}           Instant
-[ ]  2624  Thornbite Staff                          {2}              Kindred Artifact — Shaman Equipment
+[x]  2624  Thornbite Staff                          {2}              Kindred Artifact — Shaman Equipment
 [x]  2625  Zul Ashur, Lich Lord                     {1}{B}           Legendary Creature — Zombie Warlock
 [x]  2626  Dwynen, Gilt-Leaf Daen                   {2}{G}{G}        Legendary Creature — Elf Warrior
 [x]  2627  Survivors' Encampment                    {0}              Land — Desert
@@ -3077,7 +3077,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3084  Lagomos, Hand of Hatred                  {1}{B}{R}        Legendary Creature — Human Shaman
 [x]  3085  Radstorm                                 {3}{U}           Instant
 [x]  3086  Saw It Coming                            {1}{U}{U}        Instant
-[ ]  3087  Elvish Promenade                         {3}{G}           Kindred Sorcery — Elf
+[x]  3087  Elvish Promenade                         {3}{G}           Kindred Sorcery — Elf
 [x]  3088  Bria, Riptide Rogue                      {2}{U}{R}        Legendary Creature — Otter Rogue
 [x]  3089  Empyrean Eagle                           {1}{W}{U}        Creature — Bird Spirit
 [ ]  3090  Elspeth Conquers Death                   {3}{W}{W}        Enchantment — Saga
@@ -3262,7 +3262,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3269  World at War                             {3}{R}{R}        Sorcery
 [x]  3270  Keeper of Secrets                        {5}{R}           Creature — Demon
 [x]  3271  Mistblade Shinobi                        {2}{U}           Creature — Human Ninja
-[ ]  3272  Firdoch Core                             {3}              Kindred Artifact — Shapeshifter
+[x]  3272  Firdoch Core                             {3}              Kindred Artifact — Shapeshifter
 [ ]  3273  Grievous Wound                           {3}{B}{B}        Enchantment — Aura
 [ ]  3274  Ezuri, Stalker of Spheres                {2}{G}{U}        Legendary Creature — Phyrexian Elf Warrior
 [x]  3275  Slagwoods Bridge                         {0}              Artifact Land
@@ -4600,7 +4600,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4607  Crawling Infestation                     {2}{G}           Enchantment
 [ ]  4608  Restoration Seminar                      {5}{W}{W}        Sorcery — Lesson
 [ ]  4609  Summon: Valefor                          {4}{U}           Enchantment Creature — Saga Drake
-[ ]  4610  Skittering Invasion                      {7}              Kindred Sorcery — Eldrazi
+[x]  4610  Skittering Invasion                      {7}              Kindred Sorcery — Eldrazi
 [x]  4611  Entrapment Maneuver                      {3}{W}           Instant
 [x]  4612  Xyris, the Writhing Storm                {2}{G}{U}{R}     Legendary Creature — Snake Leviathan
 [ ]  4613  Solar Array                              {3}              Artifact

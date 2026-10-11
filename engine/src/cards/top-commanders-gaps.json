@@ -234,7 +234,8 @@
   "keyword:crew",
   "mechanic:the-ring",
   "mechanic:dice-rolling",
-  "effect:random-choice"
+  "effect:random-choice",
+  "mechanic:kindred-card-type"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

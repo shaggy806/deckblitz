@@ -303,6 +303,7 @@ import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
+import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
 import _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin from "../tokens/vampire-token-edgar-charmed-groom-edgar-markovs-coffin.js";
 import _tokensXXDemonTokenFlying from "../tokens/x-x-demon-token-flying.js";
 import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
@@ -611,6 +612,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmLifelink,
     _tokensShapeshifterToken,
     _tokensSoldierArtifactToken,
+    _tokensTyranidToken55,
     _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin,
     _tokensXXDemonTokenFlying,
     _tokensZombieWarriorToken,

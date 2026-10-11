@@ -160,6 +160,7 @@ import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
+import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
@@ -457,6 +458,7 @@ const shard: CardShard = {
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
     _poolOtawaraSoaringCity,
+    _poolOutlandLiberator,
     _poolPatchworkAutomaton,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,

@@ -114,6 +114,7 @@ import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
+import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
@@ -189,6 +190,7 @@ import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
+import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
@@ -274,6 +276,7 @@ import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
+import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
 import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
@@ -396,6 +399,7 @@ const shard: CardShard = {
     _poolFuturistForge,
     _poolGaladrielLightOfValinor,
     _poolGhostsOfTheDamned,
+    _poolGlimpseTheCore,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
     _poolGoblinChainwhirler,
@@ -471,6 +475,7 @@ const shard: CardShard = {
     _poolPrimevalBounty,
     _poolPrismite,
     _poolProfessionalFaceBreaker,
+    _poolProwessOfTheFair,
     _poolProwlingCaracal,
     _poolRabbleRousing,
     _poolRakdosCharm,
@@ -558,6 +563,7 @@ const shard: CardShard = {
   tokens: [
     _tokensApeToken,
     _tokensDeathtouchRatToken,
+    _tokensElementalTokenDanceOfTheTumbleweeds,
     _tokensFishToken,
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,

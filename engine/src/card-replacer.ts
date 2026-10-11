@@ -39,6 +39,7 @@ const TYPE_WORDS: ReadonlySet<string> = new Set<CardType>([
   "sorcery",
   "planeswalker",
   "battle",
+  "kindred",
 ]);
 const SUPERTYPE_WORDS: ReadonlySet<string> = new Set(["basic", "legendary", "snow", "world"]);
 

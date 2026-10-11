@@ -50,6 +50,7 @@ import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
+import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
 import _poolCoruscationMage from "../pool/coruscation-mage.js";
 import _poolCragcrownPathway from "../pool/cragcrown-pathway.js";
@@ -103,6 +104,7 @@ import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
+import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
@@ -331,6 +333,7 @@ const shard: CardShard = {
     _poolCloudreaderSphinx,
     _poolCoastalTower,
     _poolCommandersInsignia,
+    _poolConsumedByGreed,
     _poolCopyEnchantment,
     _poolCoruscationMage,
     _poolCragcrownPathway,
@@ -384,6 +387,7 @@ const shard: CardShard = {
     _poolGalewindMoose,
     _poolGarnaBloodfistOfKeld,
     _poolGiantsBoulder,
+    _poolGiftOfParadise,
     _poolGoblinBalloonBrigade,
     _poolGoblinPiker,
     _poolGreatHornKrushok,

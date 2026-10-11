@@ -5170,6 +5170,50 @@
   "effect:player-exiles-chosen-from-own-graveyard": {
    "family": "effect:choices-by-other-players",
    "example": "Wildfire Devils: 'that player exiles an instant or sorcery card from their graveyard' (their choice), unlinked — look-and-choose's 'exile' links the card to the source"
+  },
+  "effect:target-player-scries": {
+   "family": "effect:target-spec-additions",
+   "example": "Kozilek's Command: 'Target player scries X, then draws a card' — scry has no target slot, only the effect's controller"
+  },
+  "static:pt-per-opponents-player-counters": {
+   "family": "static:pt-per-amount",
+   "example": "Vishgraz, the Doomhive: 'gets +1/+1 for each poison counter your opponents have' — grantPtPerCount.playerCounters counts only the controller's own counters."
+  },
+  "cost:loyalty-cost-increase": {
+   "family": "cost:ability-cost-modification",
+   "example": "Carth the Lion: 'Planeswalkers' loyalty abilities you activate cost an additional [+1] to activate' — cumulative, netted once as the cost is paid (a [-3] removes two)."
+  },
+  "effect:granted-trigger-refers-to-granter": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Hellish Rebuke: opponents' permanents gain 'When this permanent deals damage to the player who cast Hellish Rebuke, …' — the granted ability must remember its caster (Grothama: the granting permanent)."
+  },
+  "effect:amount-count-in-exile": {
+   "family": "effect:amount-new-variants",
+   "example": "Slime Against Humanity: 'the total number of cards you own in exile and in your graveyard that are Oozes or are named …' — face-up exiled cards only."
+  },
+  "stat:spells-cast-not-from-hand-this-turn": {
+   "family": "stat:spells-cast-this-turn-record",
+   "example": "Surge of Brilliance: 'Draw a card for each spell you've cast this turn from anywhere other than your hand' — the cast record keeps no castFrom."
+  },
+  "stat:damage-to-object-by-controller": {
+   "family": "stat:object-damage-history",
+   "example": "Grothama, All-Devouring: 'each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.'"
+  },
+  "effect:play-from-library-top-this-turn": {
+   "family": "zone:cast-from-library-top",
+   "example": "The Belligerent: 'Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.'"
+  },
+  "condition:noted-life-total": {
+   "family": "condition:source-state",
+   "example": "Sigarda's Splendor: 'As this enters, note your life total' and an upkeep draw if your life is at least the last noted total, then note it again — no per-permanent noted life value."
+  },
+  "replacement:dealt-damage-this-way-exile-if-dies": {
+   "family": "replacement:exile-instead",
+   "example": "Anger of the Gods: 'If a creature dealt damage this way would die this turn, exile it instead' — a turn-long exile-instead replacement on the creatures a spell damaged, lethal or not (its ruling)."
+  },
+  "replacement:enter-replacement-sacrifice": {
+   "family": "replacement:new-event-replacements",
+   "example": "Lotus Vale: 'If this land would enter, sacrifice two untapped lands instead. If you do, put this land onto the battlefield. If you don't, put it into its owner's graveyard.'"
   }
  }
 }

@@ -26,6 +26,7 @@ import _poolBattlegroundGeist from "../pool/battleground-geist.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
 import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
 import _poolBiowasteBlob from "../pool/biowaste-blob.js";
+import _poolBitterblossom from "../pool/bitterblossom.js";
 import _poolBlazingCrescendo from "../pool/blazing-crescendo.js";
 import _poolBlightedShaman from "../pool/blighted-shaman.js";
 import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
@@ -307,6 +308,7 @@ const shard: CardShard = {
     _poolBayekOfSiwa,
     _poolBeholdTheMultiverse,
     _poolBiowasteBlob,
+    _poolBitterblossom,
     _poolBlazingCrescendo,
     _poolBlightedShaman,
     _poolBlightsoilDruid,

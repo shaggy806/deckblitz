@@ -214,6 +214,7 @@ import _poolSilentObserver from "../pool/silent-observer.js";
 import _poolSilverquillCampus from "../pool/silverquill-campus.js";
 import _poolSizzle from "../pool/sizzle.js";
 import _poolSkirsdagFlayer from "../pool/skirsdag-flayer.js";
+import _poolSkitteringInvasion from "../pool/skittering-invasion.js";
 import _poolSkyknightSquire from "../pool/skyknight-squire.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
@@ -236,6 +237,7 @@ import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
+import _poolThornbiteStaff from "../pool/thornbite-staff.js";
 import _poolThrabenValiant from "../pool/thraben-valiant.js";
 import _poolThreaten from "../pool/threaten.js";
 import _poolThunderSpirit from "../pool/thunder-spirit.js";
@@ -503,6 +505,7 @@ const shard: CardShard = {
     _poolSilverquillCampus,
     _poolSizzle,
     _poolSkirsdagFlayer,
+    _poolSkitteringInvasion,
     _poolSkyknightSquire,
     _poolSmokeBomb,
     _poolSmolderingCrater,
@@ -525,6 +528,7 @@ const shard: CardShard = {
     _poolTheGooseMother,
     _poolThopterEngineer,
     _poolThopterFabricator,
+    _poolThornbiteStaff,
     _poolThrabenValiant,
     _poolThreaten,
     _poolThunderSpirit,

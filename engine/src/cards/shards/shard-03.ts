@@ -9,6 +9,7 @@ import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
+import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
@@ -231,6 +232,7 @@ import _poolThrillOfTheHunt from "../pool/thrill-of-the-hunt.js";
 import _poolThrivingBluff from "../pool/thriving-bluff.js";
 import _poolThrivingMoor from "../pool/thriving-moor.js";
 import _poolTidings from "../pool/tidings.js";
+import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
 import _poolTurnToFrog from "../pool/turn-to-frog.js";
 import _poolTwinferno from "../pool/twinferno.js";
 import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
@@ -271,6 +273,7 @@ const shard: CardShard = {
     _poolAncestralAnger,
     _poolAnodetLurker,
     _poolAppetiteForTheUnnatural,
+    _poolAragornAndArwenWed,
     _poolArchonOfCruelty,
     _poolArmyOfTheDamned,
     _poolAtarkaWorldRender,
@@ -493,6 +496,7 @@ const shard: CardShard = {
     _poolThrivingBluff,
     _poolThrivingMoor,
     _poolTidings,
+    _poolTitanicUltimatum,
     _poolTurnToFrog,
     _poolTwinferno,
     _poolUndercityDireRat,

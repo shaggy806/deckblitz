@@ -1396,6 +1396,11 @@ export type EffectSpec =
        * that much damage to each creature **that player** controls" is
        * `"trigger-player"`, the player it dealt combat damage to. */
       readonly whose?: PlayerScope;
+      /** Only permanents the player in this target slot controls — Ashling's
+       * Command's "deals 2 damage to each creature **target player**
+       * controls" (as `modify-pt-all`'s). Nothing when that target has gone
+       * illegal (rule 608.2b). */
+      readonly controlledByTarget?: number;
       /** Spare the effect's own source — "each **other** creature with
        * flying" (Harbinger of the Hunt). A `CardFilter` can't say this: it
        * describes the permanent being matched, not its relationship to the
@@ -6759,15 +6764,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "exile-all":
       ctx.exileAll(spec.filter);
       return;
-    case "damage-all":
-      ctx.damageAll(
-        spec.filter,
-        amountValue(spec.amount, ctx),
-        spec.exceptSource === true,
-        spec.whose === undefined ? undefined : ctx.playersInScope(spec.whose),
-        spec.from,
-      );
+    case "damage-all": {
+      let players = spec.whose === undefined ? undefined : ctx.playersInScope(spec.whose);
+      if (spec.controlledByTarget !== undefined) {
+        const target = ctx.targets[spec.controlledByTarget];
+        if (target?.kind !== "player") return;
+        players = [target.player];
+      }
+      ctx.damageAll(spec.filter, amountValue(spec.amount, ctx), spec.exceptSource === true, players, spec.from);
       return;
+    }
     case "creatures-damage-controllers":
       ctx.creaturesDamageControllers(spec.filter, amountValue(spec.amount, ctx));
       return;

@@ -16,6 +16,7 @@ import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
+import _poolBadRiver from "../pool/bad-river.js";
 import _poolBalaGedRecovery from "../pool/bala-ged-recovery.js";
 import _poolBanishingLight from "../pool/banishing-light.js";
 import _poolBaskingBroodscale from "../pool/basking-broodscale.js";
@@ -47,6 +48,7 @@ import _poolCollectorsVault from "../pool/collectors-vault.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
+import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
@@ -88,6 +90,7 @@ import _poolExcaliburIi from "../pool/excalibur-ii.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
 import _poolFarfinder from "../pool/farfinder.js";
+import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
@@ -120,6 +123,7 @@ import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
+import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
@@ -288,6 +292,7 @@ const shard: CardShard = {
     _poolAshnodsAltar,
     _poolAvenEnvoy,
     _poolAxebaneStag,
+    _poolBadRiver,
     _poolBalaGedRecovery,
     _poolBanishingLight,
     _poolBaskingBroodscale,
@@ -319,6 +324,7 @@ const shard: CardShard = {
     _poolCombustionMan,
     _poolConscriptedInfantry,
     _poolCopperHostCrusher,
+    _poolCribSwap,
     _poolCycleOfRenewal,
     _poolCyclonicRift,
     _poolCyclopsOfOneEyedPass,
@@ -360,6 +366,7 @@ const shard: CardShard = {
     _poolExiledBoggart,
     _poolFaithfulMending,
     _poolFarfinder,
+    _poolFearOfBurningAlive,
     _poolFelineSovereign,
     _poolFirebendingLesson,
     _poolFistsOfFlame,
@@ -392,6 +399,7 @@ const shard: CardShard = {
     _poolImpulsivity,
     _poolInfectiousHost,
     _poolIonasJudgment,
+    _poolJackdaw,
     _poolJawsOfDefeat,
     _poolJibbirikOmnivore,
     _poolJundBattlemage,

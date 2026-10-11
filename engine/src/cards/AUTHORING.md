@@ -277,7 +277,7 @@ from the same link.
 | `manaCost` | `string` | `"{1}{G}"`, `"{X}{R}"`, … — see §4. Omit for a land / token. |
 | `colors` | `Color[]` | `"W" \| "U" \| "B" \| "R" \| "G"`. Set it explicitly; the engine does **not** infer colour from the cost here (it *does* for colour identity — see `identity.ts`). |
 | `supertypes` | `("basic" \| "legendary" \| "snow" \| "world")[]` | |
-| `types` | `CardType[]` | **required**. `"land" \| "creature" \| "artifact" \| "enchantment" \| "instant" \| "sorcery" \| "planeswalker" \| "battle"` |
+| `types` | `CardType[]` | **required**. `"land" \| "creature" \| "artifact" \| "enchantment" \| "instant" \| "sorcery" \| "planeswalker" \| "battle" \| "kindred"`. **Kindred** (rule 308, "tribal" on old printings) always sits beside another type and goes first, as the type line prints it: Bitterblossom is `["kindred", "enchantment"]` with `subtypes: ["Faerie"]`. It's cast and resolves by its other type (308.1), and it's the only noncreature type that has creature types (205.3m), so they go in `subtypes` and every filter reads them — a kindred Elf enchantment is an "Elf you control", a kindred Eldrazi instant an "Eldrazi spell" — and changeling reaches it (Crib Swap, Firdoch Core). It counts as a card type of its own for delirium and other type counts (the rulings). `kindred.test.ts`. |
 | `subtypes` | `string[]` | creature types, land types, `"Aura"`, `"Equipment"`, … free-form strings |
 | `power` / `toughness` | `number` | creatures only; omit for everything else |
 | `keywords` | `Keyword[]` | see §5 |
@@ -4072,7 +4072,7 @@ Delete an entry in the same commit as the feature that retires it.
 **Not modeled at all:** phasing, Battles, dungeons / the Initiative / the Ring,
 banding, "day/night"-independent double-faced tokens, a static ability that
 makes a planeswalker a creature (Gideon), ability-dependency ordering (rule
-613.8), companions, the Kindred card type (Eldrazi Conscription), Cases,
+613.8), companions, Cases,
 a −X loyalty cost (Ugin, the
 Spirit Dragon).
 

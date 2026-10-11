@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbrade from "../pool/abrade.js";
 import _poolAcrobaticManeuver from "../pool/acrobatic-maneuver.js";
 import _poolAdmiralBrassUnsinkable from "../pool/admiral-brass-unsinkable.js";
+import _poolAdornedPouncer from "../pool/adorned-pouncer.js";
 import _poolAdunOakenshield from "../pool/adun-oakenshield.js";
 import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
@@ -14,6 +15,7 @@ import _poolAidTheFallen from "../pool/aid-the-fallen.js";
 import _poolAkoumHellkite from "../pool/akoum-hellkite.js";
 import _poolAlabasterMage from "../pool/alabaster-mage.js";
 import _poolAlertShuInfantry from "../pool/alert-shu-infantry.js";
+import _poolAllIsDust from "../pool/all-is-dust.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
@@ -291,6 +293,7 @@ const shard: CardShard = {
     _poolAbrade,
     _poolAcrobaticManeuver,
     _poolAdmiralBrassUnsinkable,
+    _poolAdornedPouncer,
     _poolAdunOakenshield,
     _poolAetherAdept,
     _poolAgentOfShauku,
@@ -299,6 +302,7 @@ const shard: CardShard = {
     _poolAkoumHellkite,
     _poolAlabasterMage,
     _poolAlertShuInfantry,
+    _poolAllIsDust,
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
     _poolAnaraWolvidFamiliar,

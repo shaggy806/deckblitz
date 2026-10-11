@@ -179,6 +179,7 @@ import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolRancor from "../pool/rancor.js";
+import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRatadrabikOfUrborg from "../pool/ratadrabik-of-urborg.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
@@ -474,6 +475,7 @@ const shard: CardShard = {
     _poolPrimordialHydra,
     _poolProudMentor,
     _poolRancor,
+    _poolRangersGuile,
     _poolRatadrabikOfUrborg,
     _poolRazorfinHunter,
     _poolRazortipWhip,

@@ -21,6 +21,7 @@ import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
 import _poolAridArchway from "../pool/arid-archway.js";
+import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
@@ -35,6 +36,7 @@ import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlur from "../pool/blur.js";
+import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
 import _poolBonesplitter from "../pool/bonesplitter.js";
 import _poolBorborygmos from "../pool/borborygmos.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
@@ -257,6 +259,7 @@ import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWarRoom from "../pool/war-room.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
+import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
@@ -296,6 +299,7 @@ const shard: CardShard = {
     _poolArchfiendOfDepravity,
     _poolArchiveDragon,
     _poolAridArchway,
+    _poolAshlingsCommand,
     _poolAssembleTheEntmoot,
     _poolBalefulStrix,
     _poolBaneAlleyBlackguard,
@@ -310,6 +314,7 @@ const shard: CardShard = {
     _poolBlacksmithsSkill,
     _poolBlinkingSpirit,
     _poolBlur,
+    _poolBoggartShenanigans,
     _poolBonesplitter,
     _poolBorborygmos,
     _poolBrambleweftBehemoth,
@@ -532,6 +537,7 @@ const shard: CardShard = {
     _poolWarRoom,
     _poolWarlordsFury,
     _poolWeaselbackRedcap,
+    _poolWerefoxBodyguard,
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWirewoodElf,

@@ -153,6 +153,7 @@ import _poolManagorgerHydra from "../pool/managorger-hydra.js";
 import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
+import _poolMerrowCommerce from "../pool/merrow-commerce.js";
 import _poolMillikin from "../pool/millikin.js";
 import _poolMindspliceApparatus from "../pool/mindsplice-apparatus.js";
 import _poolMirageMesa from "../pool/mirage-mesa.js";
@@ -442,6 +443,7 @@ const shard: CardShard = {
     _poolMarshFlats,
     _poolMassProduction,
     _poolMerfolkTraders,
+    _poolMerrowCommerce,
     _poolMillikin,
     _poolMindspliceApparatus,
     _poolMirageMesa,

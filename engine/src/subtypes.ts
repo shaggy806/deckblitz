@@ -185,7 +185,10 @@ export function subtypeKind(
  * Myrkul, Lord of Bones's enchantment copy of a creature card is no Bear.
  */
 export function subtypeFitsTypes(subtype: string, types: readonly CardType[]): boolean {
-  if (subtype === EVERY_CREATURE_TYPE || CREATURE_TYPE_SET.has(subtype)) return types.includes("creature");
+  // Creatures and kindreds share the creature types (rule 205.3m).
+  if (subtype === EVERY_CREATURE_TYPE || CREATURE_TYPE_SET.has(subtype)) {
+    return types.includes("creature") || types.includes("kindred");
+  }
   if (subtype === EVERY_LAND_TYPE || LAND_TYPE_SET.has(subtype)) return types.includes("land");
   if (ARTIFACT_TYPE_SET.has(subtype)) return types.includes("artifact");
   if (ENCHANTMENT_TYPE_SET.has(subtype)) return types.includes("enchantment");

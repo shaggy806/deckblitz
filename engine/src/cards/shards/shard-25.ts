@@ -45,6 +45,7 @@ import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
 import _poolCinderGlade from "../pool/cinder-glade.js";
 import _poolCindervines from "../pool/cindervines.js";
+import _poolClaimTheFirstborn from "../pool/claim-the-firstborn.js";
 import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
@@ -332,6 +333,7 @@ const shard: CardShard = {
     _poolChiefOfTheEdge,
     _poolCinderGlade,
     _poolCindervines,
+    _poolClaimTheFirstborn,
     _poolCliffhavenVampire,
     _poolCloudCrusader,
     _poolCombatCelebrant,

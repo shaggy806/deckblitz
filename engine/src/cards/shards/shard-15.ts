@@ -87,6 +87,7 @@ import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
+import _poolGeneratorServant from "../pool/generator-servant.js";
 import _poolGetOut from "../pool/get-out.js";
 import _poolGeyserGlider from "../pool/geyser-glider.js";
 import _poolGhostLitNourisher from "../pool/ghost-lit-nourisher.js";
@@ -257,6 +258,7 @@ import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
+import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
@@ -356,6 +358,7 @@ const shard: CardShard = {
     _poolGanaxAstralHunter,
     _poolGavonyTownship,
     _poolGazeOfGranite,
+    _poolGeneratorServant,
     _poolGetOut,
     _poolGeyserGlider,
     _poolGhostLitNourisher,
@@ -526,6 +529,7 @@ const shard: CardShard = {
     _poolWurmcoilEngine,
     _poolYoungPyromancer,
     _poolYumaProudProtector,
+    _poolZimoneQuandrixProdigy,
     _poolZuranSpellcaster,
   ],
   tokens: [

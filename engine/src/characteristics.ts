@@ -1271,8 +1271,9 @@ function printedSubtypes(registry: CardRegistry, object: GameObject): readonly s
  * (rule 613.3), in every zone (rule 604.3), and is read off the copiable
  * values — a copy of a changeling is every creature type too. Losing its
  * abilities doesn't undo it: that happens in layer 6, after layer 4 (the
- * changeling rulings). Only a creature takes it: a noncreature object can't
- * have creature types (rule 205.3d; the engine has no kindred type).
+ * changeling rulings). Only a creature or a kindred takes it: no other
+ * object can have creature types (rules 205.3d, 205.3m) — Crib Swap, a
+ * "Kindred Instant — Shapeshifter", is every creature type as a spell.
  */
 export function withChangeling(
   def: CardDefinition,
@@ -1281,7 +1282,7 @@ export function withChangeling(
    * of text boxes gave it that card's text (rule 612.5). */
   text: CardDefinition = def,
 ): readonly string[] {
-  return text.keywords.includes("changeling") && def.types.includes("creature")
+  return text.keywords.includes("changeling") && (def.types.includes("creature") || def.types.includes("kindred"))
     ? union(subtypes, [EVERY_CREATURE_TYPE])
     : subtypes;
 }

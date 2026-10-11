@@ -147,7 +147,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "destroy-all": none,
   regenerate: (n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
-  "damage-all": (n, v) => v.touch(n.from, "help", MINOR),
+  "damage-all": (n, v) => {
+    v.touch(n.from, "help", MINOR);
+    // "Each creature target player controls": that player is the one hurt.
+    v.touch(n.controlledByTarget, "harm", MAJOR);
+  },
   "creatures-damage-controllers": none,
   // An edict: the targeted player picks what goes, so it is major rather
   // than decisive — nothing in particular is removed.

@@ -152,6 +152,7 @@ import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
+import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
@@ -227,6 +228,7 @@ import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
+import _poolSunshowerDruid from "../pool/sunshower-druid.js";
 import _poolSuspiciousBookcase from "../pool/suspicious-bookcase.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
@@ -455,6 +457,7 @@ const shard: CardShard = {
     _poolNecroticHex,
     _poolNestOfScarabs,
     _poolNightpackAmbusher,
+    _poolOldOneEye,
     _poolOnTheTrail,
     _poolOnakkeOgre,
     _poolOnduWarCleric,
@@ -530,6 +533,7 @@ const shard: CardShard = {
     _poolSuddenStrength,
     _poolSunSentinel,
     _poolSungracePegasus,
+    _poolSunshowerDruid,
     _poolSuspiciousBookcase,
     _poolSwordOfFireAndIce,
     _poolSyphonSliver,

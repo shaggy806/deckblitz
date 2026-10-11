@@ -114,6 +114,7 @@ import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
 import _poolIcatianScout from "../pool/icatian-scout.js";
 import _poolIceTunnel from "../pool/ice-tunnel.js";
 import _poolIchorRats from "../pool/ichor-rats.js";
+import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
 import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
 import _poolImprovisedWeaponry from "../pool/improvised-weaponry.js";
@@ -215,6 +216,7 @@ import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSnowCoveredPlains from "../pool/snow-covered-plains.js";
+import _poolSokkasCharge from "../pool/sokkas-charge.js";
 import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
@@ -396,6 +398,7 @@ const shard: CardShard = {
     _poolIcatianScout,
     _poolIceTunnel,
     _poolIchorRats,
+    _poolIdolOfFalseGods,
     _poolImmolation,
     _poolImpetuousSunchaser,
     _poolImprovisedWeaponry,
@@ -497,6 +500,7 @@ const shard: CardShard = {
     _poolSimicLocket,
     _poolSkyclaveRelic,
     _poolSnowCoveredPlains,
+    _poolSokkasCharge,
     _poolSolidarityOfHeroes,
     _poolSpearSpewer,
     _poolSpectralReserves,

@@ -72,6 +72,7 @@ import _poolDrossProwler from "../pool/dross-prowler.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
+import _poolEaglesOfTheNorth from "../pool/eagles-of-the-north.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
@@ -353,6 +354,7 @@ const shard: CardShard = {
     _poolDryadArbor,
     _poolDwynensElite,
     _poolEagerFirstYear,
+    _poolEaglesOfTheNorth,
     _poolEatToExtinction,
     _poolEfficientConstruction,
     _poolElspethSunsChampion,

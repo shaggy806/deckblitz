@@ -85,6 +85,7 @@ import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
+import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
 import _poolFlameRift from "../pool/flame-rift.js";
@@ -232,6 +233,7 @@ import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
+import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
@@ -362,6 +364,7 @@ const shard: CardShard = {
     _poolFellwarStone,
     _poolFesteringGoblin,
     _poolFetidHeath,
+    _poolFirdochCore,
     _poolFistOfSuns,
     _poolFlameJavelin,
     _poolFlameRift,
@@ -509,6 +512,7 @@ const shard: CardShard = {
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTheBattleOfBywater,
+    _poolTheCircleOfLoyalty,
     _poolTheReaverCleaver,
     _poolTheWatcherInTheWater,
     _poolTheyCameFromThePipes,

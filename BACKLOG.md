@@ -46,7 +46,7 @@ that one card is the reason the deck exists. Live numbers for everything below c
   player panel to show a player's speed and the stack to draw its inherent trigger, which has
   no source (rule 702.179d).
 
-## Card backlog (top-5000 staples and the precons)
+## Card backlog (by EDHREC rank, and the precons)
 
 What blocks each unimplemented card, and which cards a built feature may have unblocked, is in
 **`docs/card-blockers.md`** ("Open leads" first, then batch by batch and family by family, over
@@ -54,24 +54,24 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill). `npm run cards:needs
-  -w engine -- --next 60` lists the next untriaged cards by rank: rank 6820 on (batch 48 took
-  6746–6819). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
+  -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
+  6820–6886). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
-- **Next: the top 5000 cards, then past them.** `top-commander-cards.txt` (3,496 of 5,000
-  implemented) is fully triaged, and past it Oracle EDHREC ranks 5011–6819 (batches 30–36, 46,
-  48); rank 6820 is next. Every card left needs engine work: build the features that block the
-  most of them — crew, the Ring, dice, ninjutsu, Rooms and most of casting during resolution
-  landed 2026-10-09, Class 2026-10-10, attach to the trigger's object or the source and
-  attach-all (B46), morph, disguise and manifest dread (B47) the same day, and random choice
-  2026-10-11 (B48: 7 of its 21 cards — the rest each wanted something else too, now recorded);
-  leading now (`cards:needs -- --rank`): devotion (21 cards, 9 fully unblocked), attach
-  extensions' rest (20, 13), the Kindred card type (19, 17), become-copy (16, 15)
+- **Every card triaged so far needs engine work: build what blocks the most.** Triage now runs
+  past rank 5000 (Oracle EDHREC ranks 5011–6886, batches 30–36 and 46–49). The top 5000 stay the
+  coverage figure — `top-commander-cards.txt`, 3,504 of 5,000 implemented, fully triaged, every
+  one left blocked on a feature — but no longer where new cards come from. Built lately: crew,
+  the Ring, dice, ninjutsu, Rooms and most of casting during resolution (2026-10-09), Class,
+  attach extensions (part) and morph/disguise/manifest dread (2026-10-10), random choice (B48)
+  and the Kindred card type (B49) 2026-10-11 — each unblocking fewer than its count, since most
+  waiting cards want something else too (now recorded). Leading now (`cards:needs -- --rank`):
+  devotion (21 cards, 9 fully unblocked), attach extensions' rest (20, 13), become-copy (16, 15),
+  counters removed from chosen permanents (16, 9), rad counters (15, 13)
   (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
-  `docs/card-blockers.md`, "Open leads"). **Next to build: the Kindred card type** — the most
-  cards fully unblocked (`cards:needs -- --feature mechanic:kindred-card-type`), then author
-  what it unblocks.
+  `docs/card-blockers.md`, "Open leads"). **Next to build: become-copy** — the most cards fully
+  unblocked (`cards:needs -- --feature effect:become-copy`), then author what it unblocks.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).
@@ -121,6 +121,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 - **Distinct targets in one token stack** can't take two tokens of one stack.
 - **"Its controller may search" always searches** (Path to Exile, Assassin's Trophy, Ghost Quarter, …): a `may` asks the effect's controller, not that player.
 - **A Saga's chapter ability doesn't remember which Saga it came from** (The Aesir Escape Valhalla): once the Saga leaves, "the exiled card" reads nothing.
+- **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
 - **A "trigger-object" that blinks is still found** (400.7): Atarka's double strike lands on a Dragon Cloudshifted in response.
 

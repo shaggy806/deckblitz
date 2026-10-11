@@ -1,0 +1,570 @@
+{
+  "batch": "B49",
+  "status": "complete",
+  "ranks": "Oracle EDHREC ranks 6820–6886 (the next 60 untriaged), and the cards waiting on mechanic:kindred-card-type, built this batch (the kindred card type, rule 308)",
+  "authored": [
+    {
+      "name": "Bitterblossom",
+      "files": [
+        "engine/src/cards/pool/bitterblossom.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elvish Promenade",
+      "files": [
+        "engine/src/cards/pool/elvish-promenade.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Skittering Invasion",
+      "files": [
+        "engine/src/cards/pool/skittering-invasion.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Merrow Commerce",
+      "files": [
+        "engine/src/cards/pool/merrow-commerce.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "All Is Dust",
+      "files": [
+        "engine/src/cards/pool/all-is-dust.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eldrazi Conscription",
+      "files": [
+        "engine/src/cards/pool/eldrazi-conscription.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crib Swap",
+      "files": [
+        "engine/src/cards/pool/crib-swap.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boggart Shenanigans",
+      "files": [
+        "engine/src/cards/pool/boggart-shenanigans.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Prowess of the Fair",
+      "files": [
+        "engine/src/cards/pool/prowess-of-the-fair.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thornbite Staff",
+      "files": [
+        "engine/src/cards/pool/thornbite-staff.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Firdoch Core",
+      "files": [
+        "engine/src/cards/pool/firdoch-core.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Idol of False Gods",
+      "files": [
+        "engine/src/cards/pool/idol-of-false-gods.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ashling's Command",
+      "files": [
+        "engine/src/cards/pool/ashlings-command.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Voracious Fell Beast",
+      "files": [
+        "engine/src/cards/pool/voracious-fell-beast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Outland Liberator",
+      "files": [
+        "engine/src/cards/pool/outland-liberator.ts",
+        "engine/src/cards/pool/frenzied-trapbreaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bad River",
+      "files": [
+        "engine/src/cards/pool/bad-river.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Adorned Pouncer",
+      "files": [
+        "engine/src/cards/pool/adorned-pouncer.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sunshower Druid",
+      "files": [
+        "engine/src/cards/pool/sunshower-druid.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Aragorn and Arwen, Wed",
+      "files": [
+        "engine/src/cards/pool/aragorn-and-arwen-wed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Consumed by Greed",
+      "files": [
+        "engine/src/cards/pool/consumed-by-greed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sokka's Charge",
+      "files": [
+        "engine/src/cards/pool/sokkas-charge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dance of the Tumbleweeds",
+      "files": [
+        "engine/src/cards/pool/dance-of-the-tumbleweeds.ts",
+        "engine/src/cards/tokens/elemental-token-dance-of-the-tumbleweeds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glimpse the Core",
+      "files": [
+        "engine/src/cards/pool/glimpse-the-core.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fear of Burning Alive",
+      "files": [
+        "engine/src/cards/pool/fear-of-burning-alive.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dawnbringer Cleric",
+      "files": [
+        "engine/src/cards/pool/dawnbringer-cleric.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jackdaw",
+      "files": [
+        "engine/src/cards/pool/jackdaw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gift of Paradise",
+      "files": [
+        "engine/src/cards/pool/gift-of-paradise.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Ranger's Guile",
+      "files": [
+        "engine/src/cards/pool/rangers-guile.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Generator Servant",
+      "files": [
+        "engine/src/cards/pool/generator-servant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Earthshape",
+      "files": [
+        "engine/src/cards/pool/earthshape.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Candy Trail",
+      "files": [
+        "engine/src/cards/pool/candy-trail.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Eagles of the North",
+      "files": [
+        "engine/src/cards/pool/eagles-of-the-north.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Prydwen, Steel Flagship",
+      "files": [
+        "engine/src/cards/pool/the-prydwen-steel-flagship.ts",
+        "engine/src/cards/tokens/human-knight-token-the-prydwen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mystifying Maze",
+      "files": [
+        "engine/src/cards/pool/mystifying-maze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glistener Elf",
+      "files": [
+        "engine/src/cards/pool/glistener-elf.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hermitic Herbalist",
+      "files": [
+        "engine/src/cards/pool/hermitic-herbalist.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Titanic Ultimatum",
+      "files": [
+        "engine/src/cards/pool/titanic-ultimatum.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Breathe Your Last",
+      "files": [
+        "engine/src/cards/pool/breathe-your-last.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Prismatic Undercurrents",
+      "files": [
+        "engine/src/cards/pool/prismatic-undercurrents.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hissing Quagmire",
+      "files": [
+        "engine/src/cards/pool/hissing-quagmire.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Circle of Loyalty",
+      "files": [
+        "engine/src/cards/pool/the-circle-of-loyalty.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cryptic Trilobite",
+      "files": [
+        "engine/src/cards/pool/cryptic-trilobite.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Claim the Firstborn",
+      "files": [
+        "engine/src/cards/pool/claim-the-firstborn.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Zimone, Quandrix Prodigy",
+      "files": [
+        "engine/src/cards/pool/zimone-quandrix-prodigy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elminster's Simulacrum",
+      "files": [
+        "engine/src/cards/pool/elminsters-simulacrum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cephalid Facetaker",
+      "files": [
+        "engine/src/cards/pool/cephalid-facetaker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Old One Eye",
+      "files": [
+        "engine/src/cards/pool/old-one-eye.ts",
+        "engine/src/cards/tokens/tyranid-token-5-5.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Werefox Bodyguard",
+      "files": [
+        "engine/src/cards/pool/werefox-bodyguard.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Lignify",
+      "needs": [
+        "static:static-lose-all-abilities"
+      ],
+      "why": "the Kindred type is built; 'enchanted creature … loses all abilities' as a static isn't"
+    },
+    {
+      "name": "Eldritch Immunity",
+      "needs": [
+        "effect:protection-from-each-color-overload"
+      ],
+      "why": "the Kindred type is built; protection from each colour, and overloaded, isn't"
+    },
+    {
+      "name": "Kozilek's Command",
+      "needs": [
+        "effect:target-player-scries"
+      ],
+      "why": "the Kindred type is built; 'target player scries X' isn't (scry has no target)"
+    },
+    {
+      "name": "Not of This World",
+      "needs": [
+        "effect:target-spell-or-ability"
+      ],
+      "why": "the Kindred type is built; 'counter target spell or ability that targets a permanent you control' and its target-keyed cost reduction aren't"
+    },
+    {
+      "name": "Notorious Throng",
+      "needs": [
+        "keyword:prowl"
+      ],
+      "why": "the Kindred type is built; prowl isn't"
+    },
+    {
+      "name": "Formless Genesis",
+      "needs": [
+        "keyword:retrace"
+      ],
+      "why": "the Kindred type is built; retrace isn't"
+    },
+    {
+      "name": "Glistening Oil",
+      "needs": [
+        "effect:effect-on-enchanted-permanent"
+      ],
+      "why": "The Aura's own upkeep trigger puts a -1/-1 counter on enchanted creature; no EffectTargetRef names an Aura's host (granting the trigger to the creature would make 'your upkeep' the creature controller's)."
+    },
+    {
+      "name": "Mishra, Claimed by Gix",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "why": "Its attack trigger melds it with Phyrexian Dragon Engine into Mishra, Lost to Phyrexia; meld isn't built."
+    },
+    {
+      "name": "Elrond, Master of Healing",
+      "needs": [
+        "trigger:scry-trigger"
+      ],
+      "why": "No 'whenever you scry' trigger, nor X = the number of cards looked at while scrying."
+    },
+    {
+      "name": "Spider-Man, Brooklyn Visionary",
+      "needs": [
+        "keyword:web-slinging"
+      ],
+      "why": "Web-slinging (alternative cost returning a tapped creature you control) isn't built."
+    },
+    {
+      "name": "Vishgraz, the Doomhive",
+      "needs": [
+        "static:pt-per-opponents-player-counters"
+      ],
+      "why": "'Gets +1/+1 for each poison counter your opponents have': grantPtPerCount.playerCounters reads only the controller's own counters."
+    },
+    {
+      "name": "Botanical Brawler",
+      "needs": [
+        "trigger:counters-put-first-time-each-turn"
+      ],
+      "why": "'If it's the first time +1/+1 counters have been put on that permanent this turn' needs a per-permanent counters-put-this-turn record (counting puts before Brawler arrived, per the ruling)."
+    },
+    {
+      "name": "Carth the Lion",
+      "needs": [
+        "cost:loyalty-cost-increase"
+      ],
+      "why": "'Planeswalkers' loyalty abilities you activate cost an additional [+1]': abilityCostModification only changes mana/ninjutsu costs, not a loyalty cost (cumulative, applied once at payment per the rulings)."
+    },
+    {
+      "name": "Hellish Rebuke",
+      "needs": [
+        "effect:granted-trigger-refers-to-granter"
+      ],
+      "why": "grant-triggered-all can grant the ability, but the granted trigger must fire only on damage to the player who cast Hellish Rebuke; a granted ability can't remember who granted it."
+    },
+    {
+      "name": "Constricting Sliver",
+      "needs": [
+        "bug:oring-one-shot-return"
+      ],
+      "why": "The O-Ring return is a leaves-battlefield trigger; a granted one is lost if Constricting Sliver leaves first (stranding another Sliver's card, against the ruling), and the ruling returns the card immediately with nothing in between."
+    },
+    {
+      "name": "Slime Against Humanity",
+      "needs": [
+        "mechanic:deck-any-number-copies",
+        "effect:amount-count-in-exile"
+      ],
+      "why": "Deck validation exempts only basic lands from singleton, and no EffectAmount counts face-up cards you own in exile (countInGraveyard covers only graveyards)."
+    },
+    {
+      "name": "Dreamtail Heron",
+      "needs": [
+        "mechanic:mutate"
+      ],
+      "why": "Mutate isn't built."
+    },
+    {
+      "name": "Surge of Brilliance",
+      "needs": [
+        "stat:spells-cast-not-from-hand-this-turn"
+      ],
+      "why": "castThisTurn's records are LKI snapshots without castFrom (castRecordOf runs before object.castFrom is set and takeLastKnown doesn't copy it), so 'spells cast this turn from anywhere other than your hand' can't be counted."
+    },
+    {
+      "name": "Goblin Cratermaker",
+      "needs": [
+        "effect:modal-activated-targeted-modes"
+      ],
+      "why": "A modal activated ability whose modes each bring their own target (chosen on activation, rule 700.2b) isn't modeled."
+    },
+    {
+      "name": "Guiltfeeder",
+      "needs": [
+        "trigger:unblocked-attackers-trigger"
+      ],
+      "why": "No 'whenever this creature attacks and isn't blocked' trigger (only becomes-blocked / blocked-by)."
+    },
+    {
+      "name": "Grothama, All-Devouring",
+      "needs": [
+        "effect:granted-trigger-refers-to-granter",
+        "stat:damage-to-object-by-controller"
+      ],
+      "why": "Other creatures' granted attack trigger must fight Grothama (the static's source, not the trigger's), and the leave trigger needs damage dealt to Grothama this turn split by each source's controller."
+    },
+    {
+      "name": "The Belligerent",
+      "needs": [
+        "effect:play-from-library-top-this-turn",
+        "static:look-at-top-card-any-time"
+      ],
+      "why": "playFromLibraryTop/castFromLibraryTop/looksAtOwnLibraryTop are static-only; no one-shot 'until end of turn, you may look at the top card any time and play lands and cast spells from the top of your library' (player-effect has no such field)."
+    },
+    {
+      "name": "Evie Frye",
+      "needs": [
+        "decision:may-answered-by-other-player"
+      ],
+      "why": "Partner with's 'target player may search' always searches and shuffles on a decline (partnerWithTrigger, docs/engine-gaps.md); the looter half is authorable"
+    },
+    {
+      "name": "Leonin Shikari",
+      "needs": [
+        "static:equip-at-instant-speed"
+      ],
+      "why": "No static letting equip abilities be activated at instant speed"
+    },
+    {
+      "name": "Anger of the Gods",
+      "needs": [
+        "replacement:dealt-damage-this-way-exile-if-dies"
+      ],
+      "why": "No turn-long 'if a creature dealt damage this way would die this turn, exile it instead' replacement keyed to the creatures this spell damaged"
+    },
+    {
+      "name": "Voldaren Bloodcaster // Bloodbat Summoner",
+      "needs": [
+        "trigger:token-created-trigger"
+      ],
+      "why": "'Whenever you create a Blood token' is keyed on the token's creator, which the engine doesn't record; an enters trigger isn't the same event"
+    },
+    {
+      "name": "Lotus Vale",
+      "needs": [
+        "replacement:enter-replacement-sacrifice"
+      ],
+      "why": "No entry replacement that sacrifices two untapped lands instead or else puts the land into the graveyard (Mox Diamond's discard form is unbuilt too)"
+    },
+    {
+      "name": "Time Spiral",
+      "needs": [
+        "effect:shuffle-hand-and-graveyard-into-library"
+      ],
+      "why": "No effect shuffling each player's hand and graveyard into their library (the self-exile and 'untap up to six lands' are expressible)"
+    },
+    {
+      "name": "Sigarda's Splendor",
+      "needs": [
+        "condition:noted-life-total"
+      ],
+      "why": "No per-permanent noted life total, set as it enters and re-noted on each upkeep trigger's resolution, for the draw condition to compare against"
+    },
+    {
+      "name": "Sicarian Infiltrator",
+      "needs": [
+        "keyword:squad"
+      ],
+      "why": "Squad (pay {2} any number of times as an additional cost, that many token copies on entering) isn't modeled"
+    },
+    {
+      "name": "Sudden Substitution",
+      "needs": [
+        "effect:exchange-control",
+        "effect:gain-control-spell"
+      ],
+      "why": "No exchange of control, and none between a spell on the stack and a creature (then the spell's controller choosing new targets)"
+    }
+  ]
+}

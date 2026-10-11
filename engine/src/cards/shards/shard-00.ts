@@ -79,6 +79,7 @@ import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
 import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
+import _poolEarthshape from "../pool/earthshape.js";
 import _poolElfhameWurm from "../pool/elfhame-wurm.js";
 import _poolEliteArchers from "../pool/elite-archers.js";
 import _poolElvishHandservant from "../pool/elvish-handservant.js";
@@ -385,6 +386,7 @@ const shard: CardShard = {
     _poolDyingToServe,
     _poolEagerTrufflesnout,
     _poolEarthquake,
+    _poolEarthshape,
     _poolElfhameWurm,
     _poolEliteArchers,
     _poolElvishHandservant,

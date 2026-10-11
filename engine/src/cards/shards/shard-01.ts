@@ -48,6 +48,7 @@ import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
+import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
@@ -309,6 +310,7 @@ const shard: CardShard = {
     _poolCourierHawk,
     _poolCryptothrall,
     _poolDailyBugleBuilding,
+    _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDefabricate,
     _poolDefiantSalvager,

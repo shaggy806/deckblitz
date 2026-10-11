@@ -36,7 +36,12 @@ export type CardType =
   | "instant"
   | "sorcery"
   | "planeswalker"
-  | "battle";
+  | "battle"
+  /** Kindred (rule 308 — "tribal" before 2024): always beside another card
+   * type, whose rules it's cast and resolved by (308.1), and the only other
+   * type that has creature types (205.3m) — Bitterblossom is a "Kindred
+   * Enchantment — Faerie". Listed first on the type line. */
+  | "kindred";
 
 export type Supertype = "basic" | "legendary" | "snow" | "world";
 

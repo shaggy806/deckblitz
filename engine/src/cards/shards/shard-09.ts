@@ -143,6 +143,7 @@ import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
 import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
+import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
@@ -427,6 +428,7 @@ const shard: CardShard = {
     _poolMoonSprite,
     _poolMudbuttonTorchrunner,
     _poolMysticalTutor,
+    _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
     _poolNemesisMask,
     _poolNetherHorror,

@@ -37,6 +37,7 @@ import _poolBloodstoneCameo from "../pool/bloodstone-cameo.js";
 import _poolBloomingMarsh from "../pool/blooming-marsh.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
+import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
@@ -68,6 +69,7 @@ import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
+import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
@@ -169,6 +171,7 @@ import _poolPongify from "../pool/pongify.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
 import _poolPrimevalHerald from "../pool/primeval-herald.js";
+import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
@@ -314,6 +317,7 @@ const shard: CardShard = {
     _poolBloomingMarsh,
     _poolBorderlandMinotaur,
     _poolBrasssBounty,
+    _poolBreatheYourLast,
     _poolBreenaTheDemagogue,
     _poolBurstLightning,
     _poolCapashenStandard,
@@ -345,6 +349,7 @@ const shard: CardShard = {
     _poolEatenAlive,
     _poolEclipsedSteppe,
     _poolEiganjoSeatOfTheEmpire,
+    _poolEldraziConscription,
     _poolEncampmentKeeper,
     _poolEnfeeblement,
     _poolEnthusiasticMechanaut,
@@ -446,6 +451,7 @@ const shard: CardShard = {
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,
     _poolPrimevalHerald,
+    _poolPrismaticUndercurrents,
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
     _poolProtectorOfGondor,

@@ -44,6 +44,7 @@ import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
 import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
 import _poolCryptIncursion from "../pool/crypt-incursion.js";
+import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
 import _poolDamn from "../pool/damn.js";
 import _poolDarkDeed from "../pool/dark-deed.js";
 import _poolDarkFortress from "../pool/dark-fortress.js";
@@ -63,6 +64,7 @@ import _poolDriftingShade from "../pool/drifting-shade.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
+import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
@@ -267,6 +269,7 @@ import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
+import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
 import _tokensMerfolkTokenDeeprootWaters from "../tokens/merfolk-token-deeproot-waters.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-horror-token-phyrexian-rebirth.js";
@@ -317,6 +320,7 @@ const shard: CardShard = {
     _poolCravenKnight,
     _poolCrumblingVestige,
     _poolCryptIncursion,
+    _poolCrypticTrilobite,
     _poolDamn,
     _poolDarkDeed,
     _poolDarkFortress,
@@ -336,6 +340,7 @@ const shard: CardShard = {
     _poolDrownyardExplorers,
     _poolDwarvenBloodboiler,
     _poolEleshNornMotherOfMachines,
+    _poolElvishPromenade,
     _poolEnduringInnocence,
     _poolErietteOfTheCharmedApple,
     _poolEtheriumAstrolabe,
@@ -542,6 +547,7 @@ const shard: CardShard = {
     _tokensElementalToken53,
     _tokensFaerieDragonToken,
     _tokensHornetToken,
+    _tokensHumanKnightTokenThePrydwen,
     _tokensImpTokenJudith,
     _tokensMerfolkTokenDeeprootWaters,
     _tokensPhyrexianHorrorTokenPhyrexianRebirth,
