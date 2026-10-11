@@ -17,6 +17,12 @@ title; when one lands, delete it in both. The animation follow-ups are in
   after the jingle has played. Where: `game/music.ts` (`stopMusic` at the game's end;
   `startMusic` fades in) and the jingle in `game/sound.ts`, the fade-in timed from the
   jingle's end.
+- **A revealed library top doesn't flip** (the user, 2026-10-10): when the top of a library
+  is revealed and that library gets shuffled, the top card should flip over (face down)
+  before the shuffle animation plays. Likewise, when the top card of a library begins to be
+  revealed, it should be flipped over (face up). Where: the shuffle animation's scheduling
+  (`game/animationSchedule.ts`) and drawing (`ui/AnimationLayer.tsx`), with a flip step
+  before it, and a flip when the library top first shows face up.
 - **A split card's two costs are drawn as one** (the user, 2026-10-10): for cards like
   Expansion // Explosion, the mana pips for the cost should be split onto the left and right
   side of the top of the card — the goal is for it to render with two separate costs. Where:
