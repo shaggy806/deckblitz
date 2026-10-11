@@ -5450,6 +5450,42 @@
   "effect:count-defending-player-controls": {
    "family": "effect:amount-new-variants",
    "example": "Killmonger, Ruthless Usurper: '+1/+0 until end of turn for each artifact defending player controls' — countOf has no trigger-player side."
+  },
+  "condition:player-attacked-you-last-turn": {
+   "family": "condition:player-state-thresholds",
+   "example": "Avenge: 'costs {2} less to cast if a player attacked you during their last turn' - attackedYouDuringTheirLastTurn exists in state.ts but no StaticCondition reads it."
+  },
+  "effect:until-end-of-your-next-turn": {
+   "family": "effect:duration-extensions",
+   "example": "Stilt-Man, Towering Terror: gain control of a permanent, and it gains 'can't be sacrificed', until the end of your next turn - gain-control has only untilEndOfTurn/whileSource, PtDuration only until-your-next-turn."
+  },
+  "effect:delayed-trigger-target-attacks-monarch": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Okoye, Mighty and Adored: 'Whenever that creature attacks the monarch this turn, it gains double strike and trample' - no delayed trigger keyed to a captured creature attacking, nor a defender-is-the-monarch clause."
+  },
+  "condition:creature-attacking-you": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Heroic Return: 'costs {2} less to cast if a creature is attacking you' - the attacking filter doesn't name the defender, so in multiplayer an attack on another opponent would count."
+  },
+  "trigger:attacks-the-monarch": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "The Spear of Bashenga: 'Whenever equipped creature attacks the monarch' — an attacks trigger whose defender must be the monarch (asked as the attack is declared)"
+  },
+  "trigger:dealt-damage-first-time-each-turn": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Hercules, Olympian Hero: 'Whenever Hercules is dealt damage for the first time each turn, put that many +1/+1 counters on him' — dealt-damage has no firstTimeEachTurn (attacks and gains-life do)."
+  },
+  "replacement:prevent-n-of-damage": {
+   "family": "replacement:damage-modification",
+   "example": "Heart-Shaped Herb: 'If a source an opponent controls would deal damage to you, prevent 1 of that damage' — a would-deal-damage replacement prevents all of it or none; no prevent-N."
+  },
+  "effect:delayed-combat-damage-that-much": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Human Torch: 'until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent' — DelayedCombatDamage's firing carries no triggerValue and no trigger-player."
+  },
+  "effect:colors-among-permanents-and-spells-cast": {
+   "family": "effect:amount-new-variants",
+   "example": "First Family: 'X is the number of colors among permanents you control and spells you've cast this turn' — colorsAmong reads battlefield permanents only."
   }
  }
 }

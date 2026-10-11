@@ -170,6 +170,7 @@ import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
 import _poolNicolBolasTheRavager from "../pool/nicol-bolas-the-ravager.js";
 import _poolNinjaOfTheHand from "../pool/ninja-of-the-hand.js";
+import _poolNovaFlame from "../pool/nova-flame.js";
 import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
@@ -183,6 +184,7 @@ import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
+import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
@@ -456,6 +458,7 @@ const shard: CardShard = {
     _poolNibelheimAflame,
     _poolNicolBolasTheRavager,
     _poolNinjaOfTheHand,
+    _poolNovaFlame,
     _poolOakhameAdversary,
     _poolObscuraStorefront,
     _poolOgreSlumlord,
@@ -469,6 +472,7 @@ const shard: CardShard = {
     _poolPrologueToPhyresis,
     _poolProwlingFelidar,
     _poolQuarryBeetle,
+    _poolQuicksilverSpeedster,
     _poolRakdosLordOfRiots,
     _poolRampagingFerocidon,
     _poolRenegadeMap,

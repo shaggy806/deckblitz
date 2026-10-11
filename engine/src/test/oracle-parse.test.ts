@@ -378,6 +378,9 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(vehicle.activated[0].cost.tapOthers).toEqual({ count: 0, totalPower: 3, filter: { type: "creature" } });
     expect(face("Morph {2}{G}").morph).toEqual({ keyword: "morph", cost: "{2}{G}" });
     expect(face("Convoke", "Instant", {}).convoke).toBe(true);
+    // Mayhem: a cost, or none on a land (played from the graveyard).
+    expect(face("Mayhem {4}{R}").mayhem).toEqual({ cost: "{4}{R}" });
+    expect(face("Mayhem", "Land").mayhem).toEqual({});
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     const fab = face("Fabricate 2").triggered[0];

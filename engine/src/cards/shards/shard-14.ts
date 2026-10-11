@@ -244,6 +244,7 @@ import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
+import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
 import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
@@ -534,6 +535,7 @@ const shard: CardShard = {
     _poolTheEternityElevator,
     _poolTheGitrogMonster,
     _poolThickestInTheThicket,
+    _poolTitaniaProudPummeler,
     _poolTorporOrb,
     _poolToucanPuffin,
     _poolTrainedJackal,

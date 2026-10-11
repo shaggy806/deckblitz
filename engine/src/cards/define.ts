@@ -2115,6 +2115,14 @@ export interface CardDefinition {
    * many loyalty counters). `null` for a non-planeswalker. `defineCard`
    * synthesizes the enters-with-counters replacement from this. */
   readonly loyalty: number | null;
+  /**
+   * Mayhem (rule 702.187) — while its owner discarded it this turn
+   * (`GameObject.discardedOnTurn`), it may be cast from their graveyard for
+   * `cost` rather than its mana cost (an alternative cost, 702.187b), timing
+   * rules and all; with no `cost`, played from there (702.187c — a land is
+   * a land play). `null` for a card without mayhem.
+   */
+  readonly mayhem: { readonly cost?: string } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -2429,6 +2437,7 @@ const PRINTED_ABILITY: {
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   loyalty: false,
   flashback: (def) => def.flashback !== null,
+  mayhem: (def) => def.mayhem !== null,
   harmonize: (def) => def.harmonize !== null,
   foretell: (def) => def.foretell !== null,
   warp: (def) => def.warp !== null,
@@ -2582,6 +2591,7 @@ interface CardDraft {
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
+  mayhem?: { readonly cost?: string };
   flashback?: {
     readonly cost: string;
     readonly payLife?: number;
@@ -2684,6 +2694,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseOnEnter: draft.chooseOnEnter ?? null,
     loyalty,
     flashback: draft.flashback ?? null,
+    mayhem: draft.mayhem ?? null,
     harmonize: draft.harmonize ?? null,
     foretell: draft.foretell ?? null,
     warp: draft.warp ?? null,

@@ -58,6 +58,7 @@ import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
+import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js";
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDeadapult from "../pool/deadapult.js";
@@ -121,6 +122,7 @@ import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
+import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
 import _poolIronTuskElephant from "../pool/iron-tusk-elephant.js";
 import _poolIronWill from "../pool/iron-will.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
@@ -348,6 +350,7 @@ const shard: CardShard = {
     _poolCurioVendor,
     _poolCursedFlesh,
     _poolCutYourLosses,
+    _poolDaredevilFearlessFighter,
     _poolDarigaazsCharm,
     _poolDarkthicketWolf,
     _poolDeadapult,
@@ -411,6 +414,7 @@ const shard: CardShard = {
     _poolImodaneThePyrohammer,
     _poolIndulgentTormentor,
     _poolInfernalGrasp,
+    _poolIronManFuturistParagon,
     _poolIronTuskElephant,
     _poolIronWill,
     _poolItlimocCradleOfTheSun,

@@ -289,6 +289,7 @@ import _tokensGolemTrampleToken from "../tokens/golem-trample-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
+import _tokensVillainToken from "../tokens/villain-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -580,6 +581,7 @@ const shard: CardShard = {
     _tokensHumanWarriorToken,
     _tokensPegasusToken22,
     _tokensSpiritToken,
+    _tokensVillainToken,
   ],
 };
 

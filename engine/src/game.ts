@@ -1691,6 +1691,23 @@ export class Game {
       );
     }
 
+    // Mayhem (rule 702.187): a card this player discarded this turn, from
+    // their graveyard — cast for its mayhem cost (an alternative cost), or a
+    // land played (702.187c).
+    for (const card of this.state.zones.perPlayer[player].graveyard) {
+      if (!this.mayhemCastable(player, card)) continue;
+      const def = this.registry.get(this.state.objects[card].cardName);
+      // A land is played, not cast: the graveyard land-play offers below take
+      // it (`mayPlayFromGraveyard`).
+      if (def.types.includes("land")) continue;
+      out.push(
+        ...this.castSpellActions(player, card, def.name, def, {
+          via: "mayhem",
+          costString: def.mayhem?.cost ?? def.manaCost,
+        }),
+      );
+    }
+
     // A prepared permanent's copy of its prepare spell (rule 722.3c): the
     // permanent's controller may cast it from exile, as the spell it is.
     for (const card of this.state.zones.shared.exile) {
@@ -7093,7 +7110,22 @@ export class Game {
    * "play lands" reaches a modal double-faced card's land face, though in
    * the graveyard the card is only its front (Ancient Greenwarden's ruling). */
   private mayPlayFromGraveyard(player: PlayerId, cardId: ObjectId, face = 0): boolean {
+    // A land with cost-less mayhem its owner discarded this turn (rule
+    // 702.187c — Oscorp Industries).
+    if (this.mayhemCastable(player, cardId) && this.registry.get(this.state.objects[cardId].cardName).types.includes("land")) {
+      return true;
+    }
     return this.playPermissionFrom(player, cardId, face, (ability) => ability.playFromGraveyard);
+  }
+
+  /** Mayhem (rule 702.187): `cardId` has it, is in `player`'s graveyard, and
+   * they discarded it this turn — the permission to cast (or play) it from
+   * there. Timing and the rest are the cast's own checks. */
+  private mayhemCastable(player: PlayerId, cardId: ObjectId): boolean {
+    const object = this.state.objects[cardId];
+    if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return false;
+    if (object.discardedOnTurn !== this.state.turn.number) return false;
+    return this.registry.get(object.cardName).mayhem !== null;
   }
 
   /** While a `playFromLibraryTop` static (Oracle of Mul Daya) is on the
@@ -8747,6 +8779,9 @@ export class Game {
         ? (this.flashbackOf(cardId, graveyardGrant)?.cost ?? null)
         : via === "harmonize"
         ? (def.harmonize?.cost ?? null)
+        : // Mayhem (rule 702.187b): its cost; with none, its mana cost (702.187c).
+          via === "mayhem"
+          ? (def.mayhem?.cost ?? def.manaCost)
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
           : via === "foretell"
@@ -9026,6 +9061,10 @@ export class Game {
       if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
+    } else if (via === "mayhem") {
+      // Rule 702.187b — a card its owner discarded this turn, from their
+      // graveyard.
+      if (!this.mayhemCastable(player, cardId)) return `${def.name} can't be cast with mayhem now`;
     } else if (via === "prepared") {
       // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
       // from exile by that permanent's controller while the link holds.
@@ -9958,7 +9997,8 @@ export class Game {
       via === "harmonize" ||
       via === "escape" ||
       via === "disturb" ||
-      via === "graveyard-permission"
+      via === "graveyard-permission" ||
+      via === "mayhem"
     ) {
       this.state.players[player].usedGraveyardThisTurn = true;
     }
@@ -27303,7 +27343,7 @@ export class Game {
     let mayPayLife = 0;
     const counters: { kind: string; amount: number }[] = [];
     const addCounters = (kind: string, base: number): void => {
-      const amount = base * this.counterMultiplier(id, kind);
+      const amount = base * this.counterMultiplier(id, kind, true);
       if (amount <= 0) return;
       // One placement per kind: everything it enters with is put on at once
       // (rule 122.6), so a "whenever counters are put on" trigger fires once.
@@ -27522,14 +27562,17 @@ export class Game {
 
   /** Product of every `would-add-counter` multiplier (rule 614) that applies
    * to putting `kind` counters on `target` — a Doubling Season controlled by
-   * `target`'s controller. `1` when there are none. `target` itself is skipped
-   * so a hypothetical self-doubler can't compound. */
-  private counterMultiplier(target: ObjectId, kind: string): number {
+   * `target`'s controller. `1` when there are none. A doubler on the
+   * battlefield doubles counters put on itself (Corpsejack Menace is a
+   * creature you control), but not those it enters with (`entering`): an effect that
+   * modifies how a permanent enters comes from the permanent itself only if it
+   * affects that permanent alone (rule 614.12 — Orb of Dreams). */
+  private counterMultiplier(target: ObjectId, kind: string, entering = false): number {
     const targetObject = this.state.objects[target];
     if (targetObject === undefined) return 1;
     let mult = 1;
     for (const id of this.state.zones.shared.battlefield) {
-      if (id === target) continue;
+      if (entering && id === target) continue;
       const object = this.state.objects[id];
       if (object.controller !== targetObject.controller || hasLostAbilities(object)) {
         continue;
@@ -28448,6 +28491,8 @@ export class Game {
     // zone change ends both (400.7). `castSpell` reads the link first.
     object.prepared = undefined;
     object.preparedFor = undefined;
+    // "Discarded this turn" was about the card in the graveyard it went to.
+    object.discardedOnTurn = undefined;
     // A multi-face card reverts to its front face while not on the battlefield
     // or stack (rule 712); casting/playing it sets the face again.
     if (object.faces !== undefined && to !== "battlefield" && to !== "stack") {
@@ -29032,6 +29077,14 @@ export class Game {
   }
 
   private emit(event: GameEventInput): void {
+    // Mayhem's "you discarded this card this turn" (rule 702.187b): each
+    // discarded card is marked as its discard is announced.
+    if (event.type === "cards-discarded") {
+      for (const id of event.objects) {
+        const card = this.state.objects[id];
+        if (card !== undefined) card.discardedOnTurn = this.state.turn.number;
+      }
+    }
     // Permanents entering together are announced together, once every one of
     // them is on the battlefield — see `withEnterBatch`.
     if (event.type === "permanent-entered-battlefield" && this.enterAnnouncements !== null) {

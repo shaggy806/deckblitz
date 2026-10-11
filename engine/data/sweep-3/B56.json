@@ -1,0 +1,463 @@
+{
+ "batch": "B56",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes Commander (MSC, 2026-06-26): top 50% by EDHREC rank, its next 59, with mayhem built (rule 702.187) and the four mayhem cards it unblocked (Chameleon, Oscorp Industries, The Squadron Sinister, Abomination)",
+ "authored": [
+  {
+   "name": "Rescue, Pepper Potts",
+   "files": [
+    "engine/src/cards/pool/rescue-pepper-potts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titania, Proud Pummeler",
+   "files": [
+    "engine/src/cards/pool/titania-proud-pummeler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Endless Ranks of HYDRA",
+   "files": [
+    "engine/src/cards/pool/endless-ranks-of-hydra.ts",
+    "engine/src/cards/tokens/villain-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Thing",
+   "files": [
+    "engine/src/cards/pool/the-thing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Widow, Deadly Hunter",
+   "files": [
+    "engine/src/cards/pool/black-widow-deadly-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nova Flame",
+   "files": [
+    "engine/src/cards/pool/nova-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invisible Woman",
+   "files": [
+    "engine/src/cards/pool/invisible-woman.ts",
+    "engine/src/cards/tokens/wall-token-invisible-woman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hulk, Strongest There Is",
+   "files": [
+    "engine/src/cards/pool/hulk-strongest-there-is.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spaceshift",
+   "files": [
+    "engine/src/cards/pool/spaceshift.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quicksilver, Speedster",
+   "files": [
+    "engine/src/cards/pool/quicksilver-speedster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fogwell's Gym",
+   "files": [
+    "engine/src/cards/pool/fogwells-gym.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Klaw, Master of Sound",
+   "files": [
+    "engine/src/cards/pool/klaw-master-of-sound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Widow, Intel Expert",
+   "files": [
+    "engine/src/cards/pool/black-widow-intel-expert.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hatut Zeraze Strike Force",
+   "files": [
+    "engine/src/cards/pool/hatut-zeraze-strike-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Damocles Base, Sword of Kang",
+   "files": [
+    "engine/src/cards/pool/damocles-base-sword-of-kang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanda's Vision",
+   "files": [
+    "engine/src/cards/pool/wandas-vision.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "T'Challa, the Black Panther",
+   "files": [
+    "engine/src/cards/pool/tchalla-the-black-panther.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bushmaster, Coiled Henchman",
+   "files": [
+    "engine/src/cards/pool/bushmaster-coiled-henchman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "King Solomon's Frogs",
+   "files": [
+    "engine/src/cards/pool/king-solomons-frogs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dora Milaje Elite",
+   "files": [
+    "engine/src/cards/pool/dora-milaje-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Man, Modern Marvel",
+   "files": [
+    "engine/src/cards/pool/iron-man-modern-marvel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "M.O.D.O.K., Evil Intellect",
+   "files": [
+    "engine/src/cards/pool/m-o-d-o-k-evil-intellect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Marvel, Shooting Star",
+   "files": [
+    "engine/src/cards/pool/captain-marvel-shooting-star.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shuri, the Black Panther",
+   "files": [
+    "engine/src/cards/pool/shuri-the-black-panther.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Man, Futurist Paragon",
+   "files": [
+    "engine/src/cards/pool/iron-man-futurist-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shang-Chi, Martial Mentor",
+   "files": [
+    "engine/src/cards/pool/shang-chi-martial-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lockjaw, Slobbering Teleporter",
+   "files": [
+    "engine/src/cards/pool/lockjaw-slobbering-teleporter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Absorbing Man and Titania",
+   "files": [
+    "engine/src/cards/pool/absorbing-man-and-titania.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancestral Communion",
+   "files": [
+    "engine/src/cards/pool/ancestral-communion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firebird, Blazing Ranger",
+   "files": [
+    "engine/src/cards/pool/firebird-blazing-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extract Power",
+   "files": [
+    "engine/src/cards/pool/extract-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lucky the Pizza Dog",
+   "files": [
+    "engine/src/cards/pool/lucky-the-pizza-dog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man, New Champion",
+   "files": [
+    "engine/src/cards/pool/spider-man-new-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daredevil, Fearless Fighter",
+   "files": [
+    "engine/src/cards/pool/daredevil-fearless-fighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thor, Guardian of Midgard",
+   "files": [
+    "engine/src/cards/pool/thor-guardian-of-midgard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zuri, Warrior of Wakanda",
+   "files": [
+    "engine/src/cards/pool/zuri-warrior-of-wakanda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Man, Tony Stark",
+   "files": [
+    "engine/src/cards/pool/iron-man-tony-stark.ts",
+    "engine/src/cards/tokens/robot-hero-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chameleon, Master of Disguise",
+   "files": [
+    "engine/src/cards/pool/chameleon-master-of-disguise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oscorp Industries",
+   "files": [
+    "engine/src/cards/pool/oscorp-industries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Squadron Sinister",
+   "files": [
+    "engine/src/cards/pool/the-squadron-sinister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abomination, World Ravager",
+   "files": [
+    "engine/src/cards/pool/abomination-world-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Methods of the Mighty",
+   "files": [
+    "engine/src/cards/pool/methods-of-the-mighty.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Kang Prime",
+   "needs": [
+    "mechanic:suspend-and-time-counters"
+   ],
+   "why": "\"Put two time counters on that card. If it doesn't have suspend, it gains suspend\" - no effect grants suspend to an exiled card"
+  },
+  {
+   "name": "Avenge",
+   "needs": [
+    "condition:player-attacked-you-last-turn"
+   ],
+   "why": "cost reduction \"if a player attacked you during their last turn\": state tracks it (attackedYouDuringTheirLastTurn) but no StaticCondition reads it"
+  },
+  {
+   "name": "Silver Surfer, Galactus's Herald",
+   "needs": [
+    "static:must-attack-specific-player",
+    "effect:until-end-of-your-next-turn"
+   ],
+   "why": "\"until the end of your next turn, target creature attacks that player each combat if able\" - no attack requirement naming a player, no end-of-your-next-turn duration"
+  },
+  {
+   "name": "Okoye, Mighty and Adored",
+   "needs": [
+    "effect:delayed-trigger-target-attacks-monarch"
+   ],
+   "why": "\"Whenever that creature attacks the monarch this turn\" - no delayed trigger on a captured creature attacking, and no attacks-the-monarch defender clause"
+  },
+  {
+   "name": "Stilt-Man, Towering Terror",
+   "needs": [
+    "effect:until-end-of-your-next-turn"
+   ],
+   "why": "gain-control and cant-be-sacrificed last until end of turn or indefinitely; \"until the end of your next turn\" isn't a duration either has"
+  },
+  {
+   "name": "Heroic Return",
+   "needs": [
+    "condition:creature-attacking-you"
+   ],
+   "why": "cost reduction \"if a creature is attacking you\": no condition or filter clause names the defending player (an attacker aimed at another opponent mustn't count)"
+  },
+  {
+   "name": "Storm, Queen of Wakanda",
+   "needs": [
+    "effect:damage-to-trigger-object"
+   ],
+   "why": "'Storm deals damage equal to her power to that creature' (the attacker): damage takes only a target slot; a one-sided fight with the trigger object deals nothing once Storm has left, where the ability should still deal damage by her last-known power (rule 608.2h)"
+  },
+  {
+   "name": "Fantastic Elasticity",
+   "needs": [
+    "keyword:rebound"
+   ],
+   "why": "Rebound isn't built"
+  },
+  {
+   "name": "It's Clobberin' Time!",
+   "needs": [
+    "keyword:rebound"
+   ],
+   "why": "Rebound isn't built"
+  },
+  {
+   "name": "Kimoyo Beads",
+   "needs": [
+    "new:modes-not-chosen-before"
+   ],
+   "why": "'Choose one that hasn't been chosen' (ever, for this object — Prime Bead's self-flicker resets it): modal's notChosenThisTurn forgets at end of turn"
+  },
+  {
+   "name": "Crimson Cowl, Master of Evil",
+   "needs": [
+    "trigger:attacks-player-filter"
+   ],
+   "why": "'Whenever one or more nontoken Villains you control attack a player' fires once per player attacked: attacks-player has no attacker filter, attack-with fires once per declaration"
+  },
+  {
+   "name": "Vision, Spectral Synthezoid",
+   "needs": [
+    "cost:free-cast-from-hand-static",
+    "cost:free-cast-once-each-turn"
+   ],
+   "why": "'Once during each of your turns, you may cast a noncreature or Robot spell from your hand without paying its mana cost': no static once-per-turn free cast from hand (player-effect castFromHandFree is a one-shot for a turn, unlimited)"
+  },
+  {
+   "name": "Captain America, Skybound",
+   "needs": [
+    "trigger:battalion"
+   ],
+   "why": "Battalion ('~ and at least two other creatures attack') has no trigger; attack-with can't require the source among the attackers"
+  },
+  {
+   "name": "The Spear of Bashenga",
+   "needs": [
+    "trigger:attacks-the-monarch",
+    "effect:defending-player-of-attached-attacker"
+   ],
+   "why": "'Whenever equipped creature attacks the monarch' has no defender-is-monarch trigger clause, and 'target tapped nonland permanent that player controls' needs the equipped attacker's defending player as a target's controller"
+  },
+  {
+   "name": "Hercules, Olympian Hero",
+   "needs": [
+    "trigger:dealt-damage-first-time-each-turn"
+   ],
+   "why": "'Whenever Hercules is dealt damage for the first time each turn': dealt-damage has no firstTimeEachTurn, and oncePerTurn differs once the ability is lost and regained mid-turn."
+  },
+  {
+   "name": "Heart-Shaped Herb",
+   "needs": [
+    "replacement:prevent-n-of-damage"
+   ],
+   "why": "'If a source an opponent controls would deal damage to you, prevent 1 of that damage': would-deal-damage prevents all or nothing (no prevent-N); the sacrifice-and-return ability wasn't examined further."
+  },
+  {
+   "name": "Vision, Synthezoid Avenger",
+   "needs": [
+    "mechanic:phasing"
+   ],
+   "why": "The second mode is 'Vision phases out'; phasing isn't modeled."
+  },
+  {
+   "name": "Stark's Ingenuity",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "'Whenever you draw a card, put a +1/+1 counter on enchanted creature': no EffectTargetRef names the Aura's host (a granted trigger would make the creature's controller the 'you')."
+  },
+  {
+   "name": "Human Torch",
+   "needs": [
+    "effect:delayed-combat-damage-that-much"
+   ],
+   "why": "'Until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent': DelayedCombatDamage fires with neither the amount nor the player dealt damage (no triggerValue / trigger-player)."
+  },
+  {
+   "name": "Wolverine, Claws Out",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "'You may have Wolverine assign his combat damage as though he weren't blocked' has no static."
+  },
+  {
+   "name": "First Family",
+   "needs": [
+    "effect:colors-among-permanents-and-spells-cast"
+   ],
+   "why": "X is the colours among permanents you control AND spells you've cast this turn, together; colorsAmong reads only battlefield permanents."
+  },
+  {
+   "name": "Lady Loki, Agent of Chaos",
+   "needs": [
+    "effect:possibility-storm-exile-spell-on-cast"
+   ],
+   "why": "'Exile it' — the cast spell, from the stack, as a cast trigger resolves — then reveal-until and the mana-value difference; no effect exiles the triggering spell."
+  }
+ ]
+}

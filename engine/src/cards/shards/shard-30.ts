@@ -104,6 +104,7 @@ import _poolFeralKrushok from "../pool/feral-krushok.js";
 import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
+import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
@@ -137,6 +138,7 @@ import _poolHorizonScholar from "../pool/horizon-scholar.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
 import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
+import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
 import _poolHurlerCyclops from "../pool/hurler-cyclops.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIlMhegPixie from "../pool/il-mheg-pixie.js";
@@ -144,6 +146,7 @@ import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolIntimidation from "../pool/intimidation.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
+import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
@@ -203,6 +206,7 @@ import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
@@ -398,6 +402,7 @@ const shard: CardShard = {
     _poolFireMagic,
     _poolFirefly,
     _poolFloodfarmVerge,
+    _poolFogwellsGym,
     _poolFortuitousFind,
     _poolFrenziedRaptor,
     _poolFrogSquirrels,
@@ -431,6 +436,7 @@ const shard: CardShard = {
     _poolHorridVigor,
     _poolHowltoothHollow,
     _poolHuatlisRaptor,
+    _poolHulkStrongestThereIs,
     _poolHurlerCyclops,
     _poolIfritWardenOfInferno,
     _poolIlMhegPixie,
@@ -438,6 +444,7 @@ const shard: CardShard = {
     _poolInspiringCall,
     _poolIntimidation,
     _poolIrohGrandLotus,
+    _poolIronManTonyStark,
     _poolIsochronScepter,
     _poolJeongJeongsDeserters,
     _poolKambalConsulOfAllocation,
@@ -497,6 +504,7 @@ const shard: CardShard = {
     _poolRazorfieldThresher,
     _poolReadyToRumble,
     _poolRejuvenate,
+    _poolRescuePepperPotts,
     _poolResentfulRevelation,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,

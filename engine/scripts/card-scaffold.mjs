@@ -181,6 +181,7 @@ function faceSource(face, ctx) {
     cantBeCountered: parsed.cantBeCountered,
     cycling: parsed.cycling,
     flashback: parsed.flashback,
+    mayhem: parsed.mayhem,
     convoke: parsed.convoke,
     morph: parsed.morph,
     disturb: parsed.disturb,

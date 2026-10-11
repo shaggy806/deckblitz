@@ -222,6 +222,7 @@ import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
+import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolStaffOfCompleation from "../pool/staff-of-compleation.js";
 import _poolStarscapeCleric from "../pool/starscape-cleric.js";
@@ -236,6 +237,7 @@ import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
 import _poolSyrGingerTheMealEnder from "../pool/syr-ginger-the-meal-ender.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
+import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
@@ -530,6 +532,7 @@ const shard: CardShard = {
     _poolSokkasSwordTraining,
     _poolSoulSnare,
     _poolSouredSprings,
+    _poolSpaceshift,
     _poolSpitfireLagac,
     _poolStaffOfCompleation,
     _poolStarscapeCleric,
@@ -544,6 +547,7 @@ const shard: CardShard = {
     _poolSyphonSliver,
     _poolSyrGingerTheMealEnder,
     _poolTalismanOfDominance,
+    _poolTchallaTheBlackPanther,
     _poolTemporalAdept,
     _poolThassasOracle,
     _poolTheLegendOfKyoshi,

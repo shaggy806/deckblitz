@@ -209,6 +209,7 @@ import _poolSear from "../pool/sear.js";
 import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
+import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
 import _poolShatteredAcolyte from "../pool/shattered-acolyte.js";
 import _poolShatteredLandscape from "../pool/shattered-landscape.js";
@@ -500,6 +501,7 @@ const shard: CardShard = {
     _poolSeedSuture,
     _poolSenateGuildmage,
     _poolSeraphSanctuary,
+    _poolShangChiMartialMentor,
     _poolShanodinDryads,
     _poolShatteredAcolyte,
     _poolShatteredLandscape,

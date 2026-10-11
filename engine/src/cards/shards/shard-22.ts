@@ -27,6 +27,7 @@ import _poolBazaarTrademage from "../pool/bazaar-trademage.js";
 import _poolBeaconOfTomorrows from "../pool/beacon-of-tomorrows.js";
 import _poolBeeSting from "../pool/bee-sting.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
+import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
@@ -88,6 +89,7 @@ import _poolFangrenHunter from "../pool/fangren-hunter.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
+import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
@@ -126,6 +128,7 @@ import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
+import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
@@ -335,6 +338,7 @@ const shard: CardShard = {
     _poolBeaconOfTomorrows,
     _poolBeeSting,
     _poolBenalishHeralds,
+    _poolBlackWidowIntelExpert,
     _poolBloomTender,
     _poolBogInitiate,
     _poolBrainFreeze,
@@ -396,6 +400,7 @@ const shard: CardShard = {
     _poolFarseek,
     _poolFearOfImpostors,
     _poolFightingDrake,
+    _poolFirebirdBlazingRanger,
     _poolFlickerOfFate,
     _poolFlowstoneShambler,
     _poolFontOfVigor,
@@ -434,6 +439,7 @@ const shard: CardShard = {
     _poolKessDissidentMage,
     _poolKikiJikiMirrorBreaker,
     _poolKindredDominance,
+    _poolKlawMasterOfSound,
     _poolKnightOfTheWhiteOrchid,
     _poolKonstrariAnnex,
     _poolLaserScrewdriver,

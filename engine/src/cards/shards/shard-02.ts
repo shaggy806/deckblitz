@@ -124,6 +124,7 @@ import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
+import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
@@ -239,6 +240,7 @@ import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js";
+import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
@@ -405,6 +407,7 @@ const shard: CardShard = {
     _poolImpulsivity,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
+    _poolInvisibleWoman,
     _poolIonasJudgment,
     _poolJackdaw,
     _poolJawsOfDefeat,
@@ -520,6 +523,7 @@ const shard: CardShard = {
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
     _poolTheRestorationOfEiganjo,
+    _poolTheSquadronSinister,
     _poolTheSurgicalBay,
     _poolTheThirteenthDoctor,
     _poolThrillingDiscovery,

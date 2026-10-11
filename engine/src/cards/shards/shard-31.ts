@@ -28,6 +28,7 @@ import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
+import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBloodCrypt from "../pool/blood-crypt.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
@@ -57,6 +58,7 @@ import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
+import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
@@ -155,6 +157,7 @@ import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
+import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
@@ -314,6 +317,7 @@ const shard: CardShard = {
     _poolBarbarianRiftcutter,
     _poolBeanstalkGiant,
     _poolBindingTheOldGods,
+    _poolBlackWidowDeadlyHunter,
     _poolBlightedAgent,
     _poolBloodCrypt,
     _poolBloodthroneVampire,
@@ -343,6 +347,7 @@ const shard: CardShard = {
     _poolCrimsonFleetCommodore,
     _poolCurseOfOpulence,
     _poolCurseOfVerbosity,
+    _poolDamoclesBaseSwordOfKang,
     _poolDematerialize,
     _poolDerangedWhelp,
     _poolDesertOfTheGlorified,
@@ -441,6 +446,7 @@ const shard: CardShard = {
     _poolLagomosHandOfHatred,
     _poolLilysplashMentor,
     _poolLizardWarrior,
+    _poolLockjawSlobberingTeleporter,
     _poolLongshotRebelBowman,
     _poolMagmaquake,
     _poolMalevolentRumble,

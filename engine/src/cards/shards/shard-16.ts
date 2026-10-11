@@ -256,6 +256,7 @@ import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLocustGod from "../pool/the-locust-god.js";
+import _poolTheThing from "../pool/the-thing.js";
 import _poolTheirNameIsDeath from "../pool/their-name-is-death.js";
 import _poolThrabenPurebloods from "../pool/thraben-purebloods.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
@@ -314,6 +315,7 @@ import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
+import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
 import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
@@ -576,6 +578,7 @@ const shard: CardShard = {
     _poolTerohsFaithful,
     _poolTheFalconSamWilson,
     _poolTheLocustGod,
+    _poolTheThing,
     _poolTheirNameIsDeath,
     _poolThrabenPurebloods,
     _poolThraxodemon,
@@ -636,6 +639,7 @@ const shard: CardShard = {
     _tokensLifelinkVampireToken,
     _tokensMunitionsToken,
     _tokensPhyrexianWurmLifelink,
+    _tokensRobotHeroToken,
     _tokensShapeshifterToken,
     _tokensSoldierArtifactToken,
     _tokensTyranidToken55,

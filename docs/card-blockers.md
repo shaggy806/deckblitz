@@ -54,6 +54,11 @@ lead when its cards land or turn out blocked on something else (record that in t
   (Shadrix Silverquill), and `keepsUnspentMana` (Leyline Tyrant). Cards manifest and cloak may
   have unblocked (a manifest or cloak with no morph, disguise or "turned face up" trigger):
   recheck each in the batch records citing `mechanic:face-down`.
+- **Two leads from batch 56's agents** (2026-10-11): `fromGraveyard` works on any trigger,
+  attacks included (Endless Ranks of HYDRA runs on it), so Vivi's Persistence's
+  `new:graveyard-commander-trigger` (`B35.json`) may be stale; and Crawling Sensation's "for the
+  first time each turn" is written as `oncePerTurn`, which differs when the turn's first event
+  came before it was on the battlefield — recheck it against rule zero.
 - **The cheap recurring blockers the top-5000 batches found:** "can't cast more than one spell
   each turn", the legendary sorcery restriction (205.4e), "sacrifice any number" as a spell's
   additional cost (`cost:sacrifice-multiple`'s remainder: Dargo, Plumb the Forbidden),
@@ -511,6 +516,8 @@ Five more passes, all merged (156 cards):
 - **Batch 54 (2026-10-11, the set walk: The Hobbit's last 38 and Marvel Super Heroes Commander's first 22)** — no feature led (connive as a trigger blocks three: Glorious Purpose, Ultron, Iron Monger). 41 authored (Tom, Bert, and William, Desolation of Smaug, Bard the Bowman, Loki, the Deceiver, Doctor Doom, Unrivaled, Iron Man, Armored Avenger, Black Widow, Hulkbuster Armor, Goblin-town, Puppet Master, Valeria Richards and more — `set-batch-54a`–`c`); 19 blocked (`B54.json`, 7 new need keys): a creature conniving as a trigger, an exchange of control (Bilbo, Luckwearer), excess damage as an amount (Bolg of the North), miracle (Molecule Man), suspend's time counters off its own cast path (Doom's Time Platform), face-down piles (Riddles in the Dark), and one-offs. Found on the way: the scaffolder read "your first noncreature spell each turn" as "your first spell, if it's noncreature" (fixed: a `filter`, Esper Sentinel's shape), and wrote an "unless … pays" option without its `text`.
 
 - **Batch 55 (2026-10-11, the set walk: Marvel Super Heroes Commander's next 60)** — no feature led the batch (mayhem 2 here, 6 across the records). 38 authored (Captain America, Team Leader, Scarlet Witch, Chaotic Avenger, Kingpin, Wilson Fisk, Ultron the Annihilator, Age of Ultron, Franklin Richards, Ascendant (discover 6, written out), Hawkeye, Trick Shot, Photon, Devil Dinosaur, Mister Fantastic, Winter Soldier, Ant-Man, Avengers Quinjet, Cosmic Crucible and more — `set-batch-55a`–`c`; Council of Reeds is a token and went in as one); 22 blocked (`B55.json`, 11 new need keys): mayhem (The Squadron Sinister, Abomination), "discarded this turn" (Living Laser, Typhoid Mary), rebound (Invisible Force Field), damage redirection (Heroic Sacrifice), a draw replacement's first-draw exception (Reed Richards), and one-offs.
+
+- **Batch 56 (2026-10-11, the set walk: Marvel Super Heroes Commander's next 59, and mayhem)** built mayhem (rule 702.187 — `CardDefinition.mayhem`, `GameObject.discardedOnTurn` stamped as a discard is announced; a cost-less mayhem land is played from the graveyard) and the four mayhem cards waiting on it (Chameleon, Master of Disguise, Oscorp Industries, The Squadron Sinister, Abomination, World Ravager); the scaffolder reads the keyword line. Fixed on the way: a counter doubler didn't double counters put on itself (`counterMultiplier` skipped its own permanent — Corpsejack Menace; now skipped only for the counters it enters with, rule 614.12). 42 authored (Shang-Chi, Martial Mentor, The Thing, Invisible Woman, Iron Man ×3, Black Widow ×2, Klaw, Hatut Zeraze Strike Force, Endless Ranks of HYDRA, King Solomon's Frogs, Daredevil, Thor, Firebird and more — `set-batch-56a`–`c`, `mayhem.test.ts`); 22 blocked (`B56.json`, 9 new need keys): "until the end of your next turn" (Silver Surfer, Stilt-Man), rebound (Fantastic Elasticity, It's Clobberin' Time!), attacks-the-monarch triggers (Okoye, The Spear of Bashenga), and one-offs.
 
 Past rank 6671, nothing is triaged.
 

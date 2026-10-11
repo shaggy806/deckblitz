@@ -82,6 +82,7 @@ import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
+import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditionEnvoy from "../pool/expedition-envoy.js";
@@ -122,6 +123,7 @@ import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
+import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
@@ -377,6 +379,7 @@ const shard: CardShard = {
     _poolElvenLyre,
     _poolElvishHexhunter,
     _poolEmptyTheWarrens,
+    _poolEndlessRanksOfHydra,
     _poolEscapeToTheWilds,
     _poolExorcise,
     _poolExpeditionEnvoy,
@@ -417,6 +420,7 @@ const shard: CardShard = {
     _poolGraspingLongneck,
     _poolHallOfHeliodsGenerosity,
     _poolHarnessedSnubhorn,
+    _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
     _poolHydaelynTheMothercrystal,
     _poolHydrosurge,

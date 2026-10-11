@@ -79,6 +79,7 @@ import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
+import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
@@ -326,6 +327,7 @@ import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
 import _poolZetalpaPrimalDawn from "../pool/zetalpa-primal-dawn.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
+import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
 import _tokensDragonTokenDragonbackAssault from "../tokens/dragon-token-dragonback-assault.js";
 import _tokensElementalToken from "../tokens/elemental-token.js";
@@ -416,6 +418,7 @@ const shard: CardShard = {
     _poolEnduringCourage,
     _poolEnduringVitality,
     _poolEpicureOfBlood,
+    _poolExtractPower,
     _poolFacetReader,
     _poolFanaticOfRhonas,
     _poolFaramirStewardOfGondor,
@@ -663,6 +666,7 @@ const shard: CardShard = {
     _poolYouFindTheVillainsLair,
     _poolZetalpaPrimalDawn,
     _poolZombieMaster,
+    _poolZuriWarriorOfWakanda,
   ],
   tokens: [
     _tokens22BlackBirdToken,

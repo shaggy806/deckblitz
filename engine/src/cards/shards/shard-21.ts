@@ -147,6 +147,7 @@ import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
 import _poolMesaEnchantress from "../pool/mesa-enchantress.js";
 import _poolMesmericOrb from "../pool/mesmeric-orb.js";
 import _poolMessengerDrake from "../pool/messenger-drake.js";
+import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
@@ -423,6 +424,7 @@ const shard: CardShard = {
     _poolMesaEnchantress,
     _poolMesmericOrb,
     _poolMessengerDrake,
+    _poolMethodsOfTheMighty,
     _poolMinionsReturn,
     _poolMirrorEntity,
     _poolMisguidedRage,

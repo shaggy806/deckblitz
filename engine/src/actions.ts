@@ -45,6 +45,9 @@ export type CastVia =
    * from exile by that permanent's controller for its own cost, keeping
    * every timing rule. */
   | "prepared"
+  /** Mayhem (rule 702.187b) — from the caster's graveyard, a card they
+   * discarded this turn, for its mayhem cost: an alternative cost. */
+  | "mayhem"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize

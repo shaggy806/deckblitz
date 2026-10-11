@@ -84,6 +84,7 @@ import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
+import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
@@ -223,6 +224,7 @@ import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
 import _poolShamanicRevelation from "../pool/shamanic-revelation.js";
 import _poolSheoldredsEdict from "../pool/sheoldreds-edict.js";
 import _poolShimmerMyr from "../pool/shimmer-myr.js";
+import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
@@ -303,6 +305,7 @@ import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensTarmogoyfToken from "../tokens/tarmogoyf-token.js";
+import _tokensWallTokenInvisibleWoman from "../tokens/wall-token-invisible-woman.js";
 
 const shard: CardShard = {
   pool: [
@@ -387,6 +390,7 @@ const shard: CardShard = {
     _poolDimirLocket,
     _poolDispel,
     _poolDonatelloWayWithMachines,
+    _poolDoraMilajeElite,
     _poolDoubleCleave,
     _poolDoublingSeason,
     _poolDreamThiefsBandana,
@@ -526,6 +530,7 @@ const shard: CardShard = {
     _poolShamanicRevelation,
     _poolSheoldredsEdict,
     _poolShimmerMyr,
+    _poolShuriTheBlackPanther,
     _poolSinisterSabotage,
     _poolSirShandlarOfEberyn,
     _poolSkyshipStalker,
@@ -608,6 +613,7 @@ const shard: CardShard = {
     _tokensInsectTokenBlackGreen,
     _tokensRabbitToken,
     _tokensTarmogoyfToken,
+    _tokensWallTokenInvisibleWoman,
   ],
 };
 

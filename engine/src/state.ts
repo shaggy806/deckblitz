@@ -175,6 +175,14 @@ export interface GameObject {
    */
   putIntoGraveyardFromLibraryOnTurn?: number;
   /**
+   * The turn this card was discarded on — set as the discard is announced
+   * (`cards-discarded`), read by mayhem's "as long as you discarded this card
+   * this turn" (rule 702.187b). Compared against `turn.number`; cleared on
+   * any zone change (a card that leaves the graveyard is a new object, rule
+   * 400.7).
+   */
+  discardedOnTurn?: number;
+  /**
    * True while the creature has not been under its controller's control since
    * the start of that player's most recent turn (rule 302.6). Set on entering
    * the battlefield, cleared in the controller's untap step.

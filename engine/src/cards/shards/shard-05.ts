@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
 import _poolAgeOfUltron from "../pool/age-of-ultron.js";
@@ -48,6 +49,7 @@ import _poolBrineShaman from "../pool/brine-shaman.js";
 import _poolBushwhack from "../pool/bushwhack.js";
 import _poolCadiraCallerOfTheSmall from "../pool/cadira-caller-of-the-small.js";
 import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
+import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star.js";
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
@@ -309,6 +311,7 @@ import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-
 
 const shard: CardShard = {
   pool: [
+    _poolAbsorbingManAndTitania,
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
     _poolAgeOfUltron,
@@ -354,6 +357,7 @@ const shard: CardShard = {
     _poolBushwhack,
     _poolCadiraCallerOfTheSmall,
     _poolCanyonWildcat,
+    _poolCaptainMarvelShootingStar,
     _poolCaravanHurda,
     _poolCastleArdenvale,
     _poolCentaurVinecrasher,

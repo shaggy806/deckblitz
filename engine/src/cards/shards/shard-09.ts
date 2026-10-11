@@ -42,6 +42,7 @@ import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
+import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
@@ -336,6 +337,7 @@ const shard: CardShard = {
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
     _poolBurglarRat,
+    _poolBushmasterCoiledHenchman,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCharmingPrince,

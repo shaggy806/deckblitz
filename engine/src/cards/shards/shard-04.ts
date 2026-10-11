@@ -253,6 +253,7 @@ import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
+import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
 import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
@@ -281,6 +282,7 @@ import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
 import _poolWallOfJunk from "../pool/wall-of-junk.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
+import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
@@ -550,6 +552,7 @@ const shard: CardShard = {
     _poolTheReaperKingNoMore,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
+    _poolThorGuardianOfMidgard,
     _poolThorinOakenshield,
     _poolThrorsMap,
     _poolTigerClaws,
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolVoltaicServant,
     _poolWallOfJunk,
     _poolWallOfTorches,
+    _poolWandasVision,
     _poolWardenOfTheWoods,
     _poolWeaverOfLightning,
     _poolWheelOfFortune,

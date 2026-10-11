@@ -150,6 +150,7 @@ import _poolLockerRoom from "../pool/locker-room.js";
 import _poolLoftyDenial from "../pool/lofty-denial.js";
 import _poolLongBodiedGreyDog from "../pool/long-bodied-grey-dog.js";
 import _poolLotusField from "../pool/lotus-field.js";
+import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
@@ -230,6 +231,7 @@ import _poolSmelt from "../pool/smelt.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
+import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
@@ -442,6 +444,7 @@ const shard: CardShard = {
     _poolLoftyDenial,
     _poolLongBodiedGreyDog,
     _poolLotusField,
+    _poolLuckyThePizzaDog,
     _poolLumberingFalls,
     _poolMaelstromArchangel,
     _poolMagetasBoon,
@@ -522,6 +525,7 @@ const shard: CardShard = {
     _poolSoulShred,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,
+    _poolSpiderManNewChampion,
     _poolSpiritOfMalevolence,
     _poolSplashPortal,
     _poolStingerquillAnnex,

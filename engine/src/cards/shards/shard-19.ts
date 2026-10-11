@@ -7,6 +7,7 @@ import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
+import _poolAncestralCommunion from "../pool/ancestral-communion.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
 import _poolApexOfPower from "../pool/apex-of-power.js";
 import _poolArashinCleric from "../pool/arashin-cleric.js";
@@ -123,6 +124,7 @@ import _poolInspiredSphinx from "../pool/inspired-sphinx.js";
 import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
+import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJoustThrough from "../pool/joust-through.js";
@@ -146,6 +148,7 @@ import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
 import _poolLylaHolographicAssistant from "../pool/lyla-holographic-assistant.js";
+import _poolMODOKEvilIntellect from "../pool/m-o-d-o-k-evil-intellect.js";
 import _poolMabel from "../pool/mabel.js";
 import _poolMadcapSkills from "../pool/madcap-skills.js";
 import _poolMageSlayer from "../pool/mage-slayer.js";
@@ -178,6 +181,7 @@ import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOrzhovLocket from "../pool/orzhov-locket.js";
+import _poolOscorpIndustries from "../pool/oscorp-industries.js";
 import _poolOswaldFiddlebender from "../pool/oswald-fiddlebender.js";
 import _poolOutlawMedic from "../pool/outlaw-medic.js";
 import _poolOwlbear from "../pool/owlbear.js";
@@ -305,6 +309,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAetherGale,
     _poolAmphinMutineer,
+    _poolAncestralCommunion,
     _poolAncientTomb,
     _poolApexOfPower,
     _poolArashinCleric,
@@ -421,6 +426,7 @@ const shard: CardShard = {
     _poolInspiritFlagshipVessel,
     _poolIntangibleVirtue,
     _poolIraxxaEmpressOfMars,
+    _poolIronManModernMarvel,
     _poolIronrootTreefolk,
     _poolIzzetChronarch,
     _poolJoustThrough,
@@ -444,6 +450,7 @@ const shard: CardShard = {
     _poolLunarchVeteran,
     _poolLurkingPredators,
     _poolLylaHolographicAssistant,
+    _poolMODOKEvilIntellect,
     _poolMabel,
     _poolMadcapSkills,
     _poolMageSlayer,
@@ -476,6 +483,7 @@ const shard: CardShard = {
     _poolNissaResurgentAnimist,
     _poolOgreBerserker,
     _poolOrzhovLocket,
+    _poolOscorpIndustries,
     _poolOswaldFiddlebender,
     _poolOutlawMedic,
     _poolOwlbear,

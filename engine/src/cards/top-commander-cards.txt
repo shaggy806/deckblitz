@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3511 already implemented / 1489 missing (marks refreshed 2026-10-11)
+3513 already implemented / 1487 missing (marks refreshed 2026-10-11)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1791,7 +1791,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1798  Unstoppable Plan                         {2}{U}           Enchantment
 [x]  1799  Legion Warboss                           {2}{R}           Creature — Goblin Soldier
 [x]  1800  Army of the Damned                       {5}{B}{B}{B}     Sorcery
-[ ]  1801  Chameleon, Master of Disguise            {3}{U}           Legendary Creature — Human Shapeshifter Villain
+[x]  1801  Chameleon, Master of Disguise            {3}{U}           Legendary Creature — Human Shapeshifter Villain
 [x]  1802  Kami of the Crescent Moon                {U}{U}           Legendary Creature — Spirit
 [x]  1803  Zacama, Primal Calamity                  {6}{R}{G}{W}     Legendary Creature — Elder Dinosaur
 [ ]  1804  Call Forth the Tempest                   {5}{R}{R}{R}     Sorcery
@@ -3552,7 +3552,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3559  Redemption Arc                           {2}{W}           Enchantment — Aura
 [x]  3560  Turbulent Springs                        {0}              Land — Island Mountain
 [ ]  3561  Irma, Part-Time Mutant                   {2}{U}           Legendary Creature — Human Mutant Shapeshifter
-[ ]  3562  Oscorp Industries                        {0}              Land
+[x]  3562  Oscorp Industries                        {0}              Land
 [x]  3563  Flow of Knowledge                        {4}{U}           Instant
 [x]  3564  Commissar Severina Raine                 {1}{W}{B}        Legendary Creature — Human Soldier
 [x]  3565  On Wings of Gold                         {3}{W}           Enchantment
