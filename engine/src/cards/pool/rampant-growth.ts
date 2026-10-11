@@ -2,6 +2,9 @@ import { defineCard } from "../define.js";
 
 export default defineCard({
   name: "Rampant Growth",
+  // Pinned: Scryfall answers "Rampant Growth" by name with Studious First-Year // Rampant Growth, whose
+  // prepare spell or adventure shares the name.
+  art: "b7c47024-5e08-4b17-b41a-7647f8b814b9",
   manaCost: "{1}{G}",
   colors: ["G"],
   types: ["sorcery"],

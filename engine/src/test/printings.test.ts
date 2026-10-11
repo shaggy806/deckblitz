@@ -102,16 +102,17 @@ describe("deck printings", () => {
   });
 
   it("leaves a name with no chosen printing on the card's own art", () => {
+    // Shock pins no art of its own (Lightning Bolt now does — art-pins.test).
     const game = Game.create({
       decks: [
-        { player: A, cards: deck(["Sol Ring", "Lightning Bolt"]), printings: { "Sol Ring": PRINTING } },
+        { player: A, cards: deck(["Sol Ring", "Shock"]), printings: { "Sol Ring": PRINTING } },
         { player: B, cards: deck([]) },
       ],
       seed: 3,
       shuffle: false,
     });
-    game.debugSpawn("Lightning Bolt", A, "hand");
-    expect(artOf(game, A, find(game, "Lightning Bolt"))).toBeNull();
+    game.debugSpawn("Shock", A, "hand");
+    expect(artOf(game, A, find(game, "Shock"))).toBeNull();
   });
 
   // A decklist names a double-faced card by its front face, so that's the

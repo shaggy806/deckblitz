@@ -4,6 +4,9 @@ import { defineCard } from "../define.js";
  * (rule 608.2h), so it still answers correctly having just been moved. */
 export default defineCard({
   name: "Reanimate",
+  // Pinned: Scryfall answers "Reanimate" by name with Grave Researcher // Reanimate, whose
+  // prepare spell or adventure shares the name.
+  art: "368b6903-5fc4-43e7-bd44-46b8107c8bb4",
   manaCost: "{B}",
   colors: ["B"],
   types: ["sorcery"],

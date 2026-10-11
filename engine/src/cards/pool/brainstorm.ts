@@ -4,6 +4,9 @@ import { defineCard } from "../define.js";
  * going to the top of your library — `min: 2` because it isn't optional. */
 export default defineCard({
   name: "Brainstorm",
+  // Pinned: Scryfall answers "Brainstorm" by name with Harmonized Trio // Brainstorm, whose
+  // prepare spell or adventure shares the name.
+  art: "ec7d6864-7b6b-4f74-8474-9b9ec96b1d33",
   manaCost: "{U}",
   colors: ["U"],
   types: ["instant"],

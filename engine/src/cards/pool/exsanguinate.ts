@@ -2,6 +2,9 @@ import { defineCard } from "../define.js";
 
 export default defineCard({
   name: "Exsanguinate",
+  // Pinned: Scryfall answers "Exsanguinate" by name with Stensian Sanguinist // Exsanguinate, whose
+  // prepare spell or adventure shares the name.
+  art: "f11d7311-4066-4a5d-ba28-9857fa707a0b",
   manaCost: "{X}{B}{B}",
   colors: ["B"],
   types: ["sorcery"],

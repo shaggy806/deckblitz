@@ -4,6 +4,9 @@ import { defineCard } from "../define.js";
 // card is played, so the spec is `"player"` rather than `"opponent"`.
 export default defineCard({
   name: "Sign in Blood",
+  // Pinned: Scryfall answers "Sign in Blood" by name with Scheming Silvertongue // Sign in Blood, whose
+  // prepare spell or adventure shares the name.
+  art: "b89d9372-8682-4a61-a003-8bccfbb6cbb4",
   manaCost: "{B}{B}",
   colors: ["B"],
   types: ["sorcery"],

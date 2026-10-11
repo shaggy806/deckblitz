@@ -5,6 +5,9 @@ import { defineCard } from "../define.js";
 // 608.2h), so a pumped creature gains its controller the pumped power.
 export default defineCard({
   name: "Swords to Plowshares",
+  // Pinned: Scryfall answers "Swords to Plowshares" by name with Emeritus of Truce // Swords to Plowshares, whose
+  // prepare spell or adventure shares the name.
+  art: "f7e12477-d59f-442b-a678-1be746d0b7be",
   manaCost: "{W}",
   colors: ["W"],
   types: ["instant"],
