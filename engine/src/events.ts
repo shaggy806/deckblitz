@@ -217,6 +217,20 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A permanent became prepared (rule 722.3a), and its controller made
+       * `copy`, a copy of its prepare spell, in exile to cast (722.3c). */
+      readonly type: "became-prepared";
+      readonly object: ObjectId;
+      readonly copy: ObjectId;
+      readonly player: PlayerId;
+    })
+  | (Base & {
+      /** A permanent lost the prepared designation (rule 722.3b) — its copy
+       * was cast (601.2i), or an effect unprepared it. */
+      readonly type: "became-unprepared";
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** Cascade exiled cards off the top of the library; `cast` is the
        * nonland card with lesser mana value that will be cast free, or `null`
        * (ROADMAP Phase 8). */

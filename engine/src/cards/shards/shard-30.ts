@@ -92,6 +92,7 @@ import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
+import _poolEnroot from "../pool/enroot.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
@@ -149,6 +150,7 @@ import _poolKazuulsCliffs from "../pool/kazuuls-cliffs.js";
 import _poolKeenEyedArchers from "../pool/keen-eyed-archers.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
+import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
@@ -379,6 +381,7 @@ const shard: CardShard = {
     _poolEnergizer,
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
+    _poolEnroot,
     _poolEreborFlamesmith,
     _poolEssenceAnchor,
     _poolExecutionersHood,
@@ -436,6 +439,7 @@ const shard: CardShard = {
     _poolKeenEyedArchers,
     _poolKingpinsEnforcers,
     _poolKnightOfTheEbonLegion,
+    _poolKonstrariImproviser,
     _poolLaeliaTheBladeReforged,
     _poolLavaglidePathway,
     _poolLightOfHope,

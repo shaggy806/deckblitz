@@ -112,6 +112,10 @@ export interface EntersBattlefieldReplacement {
    * 10b). Daybound's conditional "if it's night" is handled by the engine,
    * not this flag. */
   readonly transformed?: boolean;
+  /** It enters prepared — "This creature enters prepared" (rule 722.3a): it
+   * gains the designation as it enters, making its prepare spell's copy in
+   * exile (`Game.becomePrepared`). */
+  readonly prepared?: boolean;
 }
 
 /**

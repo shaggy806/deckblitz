@@ -728,6 +728,21 @@ export interface GameObject {
    * (rule 715.3 — ROADMAP Phase 10): its owner may cast the creature half from
    * exile. Cleared on any zone change. */
   onAdventure?: boolean;
+  /**
+   * The prepared designation (rule 722.3a) on a permanent with a prepare
+   * spell, and the copy of that spell it made in exile as it gained it
+   * (722.3c) — what its controller may cast. Cleared on any zone change, and
+   * as the copy is cast (601.2i) or an effect unprepares it (722.3b).
+   */
+  prepared?: { readonly copy: ObjectId };
+  /** On that copy in exile: the permanent it belongs to, in its battlefield
+   * stint — the copy stays in exile only while that permanent is still on
+   * the battlefield and prepared (rule 722.3c, an exception to 704.5e), and
+   * only that permanent's controller may cast it. */
+  preparedFor?: { readonly permanent: ObjectId; readonly stint: number };
+  /** A spell cast as a prepared copy (rule 722.3c) — "a prepared spell" to
+   * Codie, Ravenous Codex. A copy of it is one too (722.3d). */
+  preparedSpell?: boolean;
   /** What this creature is attacking — a player, or an opponent's planeswalker
    * (rule 508.1) — or `null` if not attacking. */
   attacking: PlayerId | ObjectId | null;

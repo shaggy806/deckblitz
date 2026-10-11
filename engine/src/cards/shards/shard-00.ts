@@ -15,6 +15,7 @@ import _poolAncientStoneIdol from "../pool/ancient-stone-idol.js";
 import _poolAngelheartProtector from "../pool/angelheart-protector.js";
 import _poolAngelicGift from "../pool/angelic-gift.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
+import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
 import _poolAvenCloudchaser from "../pool/aven-cloudchaser.js";
 import _poolAvenSentry from "../pool/aven-sentry.js";
@@ -97,6 +98,7 @@ import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
+import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
@@ -129,6 +131,7 @@ import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
+import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
@@ -324,6 +327,7 @@ const shard: CardShard = {
     _poolAngelheartProtector,
     _poolAngelicGift,
     _poolArcaneSanctum,
+    _poolArchiveArbiter,
     _poolArvadTheCursed,
     _poolAvenCloudchaser,
     _poolAvenSentry,
@@ -406,6 +410,7 @@ const shard: CardShard = {
     _poolFireshrieker,
     _poolFootHeadquarters,
     _poolForest,
+    _poolFormidableCommons,
     _poolFurnaceReins,
     _poolGalazethPrismari,
     _poolGatewayShade,
@@ -438,6 +443,7 @@ const shard: CardShard = {
     _poolHaughtyDjinn,
     _poolHellkiteCourser,
     _poolHornetHarasser,
+    _poolIdentityEcho,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
     _poolInGarruksWake,

@@ -156,6 +156,7 @@ import _poolMnemonicWall from "../pool/mnemonic-wall.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMoxOpal from "../pool/mox-opal.js";
+import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
@@ -438,6 +439,7 @@ const shard: CardShard = {
     _poolMomentaryBlink,
     _poolMothdustChangeling,
     _poolMoxOpal,
+    _poolMurmuringVolume,
     _poolMysticPeak,
     _poolNantukoElder,
     _poolNarnamCobra,

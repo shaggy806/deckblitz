@@ -32,7 +32,9 @@ import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBatterskull from "../pool/batterskull.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
+import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
 import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
+import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
 import _poolBoggartTrawler from "../pool/boggart-trawler.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
@@ -102,6 +104,7 @@ import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
+import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-caves.js";
 import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
@@ -129,6 +132,7 @@ import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
 import _poolImpulse from "../pool/impulse.js";
+import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
 import _poolInvoluntaryEmployment from "../pool/involuntary-employment.js";
 import _poolItllQuenchYa from "../pool/itll-quench-ya.js";
@@ -209,6 +213,7 @@ import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
+import _poolSecondHarvest from "../pool/second-harvest.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
 import _poolShalaiAndHallar from "../pool/shalai-and-hallar.js";
 import _poolShamanOfThePack from "../pool/shaman-of-the-pack.js";
@@ -285,6 +290,7 @@ import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
+import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
@@ -322,7 +328,9 @@ const shard: CardShard = {
     _poolBatterskull,
     _poolBellowingTanglewurm,
     _poolBlanchwoodTreefolk,
+    _poolBlazingFiresinger,
     _poolBloodsoakedInsight,
+    _poolBloombrute,
     _poolBlurredMongoose,
     _poolBoggartTrawler,
     _poolBoltOfKeranos,
@@ -392,6 +400,7 @@ const shard: CardShard = {
     _poolFurnaceSpirit,
     _poolGarrisonCat,
     _poolGeodeGrotto,
+    _poolGerminateRecruits,
     _poolGildedSentinel,
     _poolGimliOfTheGlitteringCaves,
     _poolGlacialFloodplain,
@@ -419,6 +428,7 @@ const shard: CardShard = {
     _poolHypnoticSprite,
     _poolIllusionistsBracers,
     _poolImpulse,
+    _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
     _poolInvoluntaryEmployment,
     _poolItllQuenchYa,
@@ -499,6 +509,7 @@ const shard: CardShard = {
     _poolSazhsChocobo,
     _poolScarecrowGuide,
     _poolSearingFlesh,
+    _poolSecondHarvest,
     _poolSevinnesReclamation,
     _poolShalaiAndHallar,
     _poolShamanOfThePack,
@@ -577,6 +588,7 @@ const shard: CardShard = {
     _poolZephyrNet,
   ],
   tokens: [
+    _tokensAngelToken33,
     _tokensFaerieToken,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,

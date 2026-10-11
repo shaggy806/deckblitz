@@ -960,6 +960,12 @@ export function parseSentence(sentence, ctx) {
   }
   if (re("the Ring tempts you").test(s)) return { kind: "the-ring-tempts-you" };
   if ((m = re(`empower Jace ${N}`).exec(s))) return { kind: "empower-jace", amount: amount(m[1]) };
+  // Rule 722.3a — "… becomes prepared".
+  if (re("~ becomes prepared").test(s)) return { kind: "become-prepared", target: "source" };
+  if (re("each creature you control becomes prepared").test(s)) {
+    return { kind: "become-prepared", filter: { type: "creature", controlledBy: "you" } };
+  }
+  if ((m = re(`(${TARGET}) becomes prepared`).exec(s))) return { kind: "become-prepared", target: slot(m[1]) };
   if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
   if ((m = re(`put (target card from a graveyard) on the bottom of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "bottom" };
@@ -1445,6 +1451,10 @@ function parseModalSpell(spellLines, ctx) {
 /** Static lines the engine models in one shape. */
 function parseStatic(line, text) {
   let m;
+  // Rule 722.3a — `entersPrepared()`.
+  if (line === "~ enters prepared.") {
+    return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
+  }
   if (line === "~ enters tapped.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", tapped: true }, text };
   }

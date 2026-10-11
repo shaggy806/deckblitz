@@ -8,6 +8,7 @@ import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
+import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
 import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
 import _poolAnointedProcession from "../pool/anointed-procession.js";
@@ -302,6 +303,7 @@ import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
+import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -314,6 +316,7 @@ const shard: CardShard = {
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAmphinCutthroat,
+    _poolAncestralCraving,
     _poolAncestralVengeance,
     _poolAnimarSoulOfElements,
     _poolAnointedProcession,
@@ -610,6 +613,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens11BlueBirdToken,
+    _tokensBeastTokenGarrukVeiledButcher,
     _tokensDragonToken66,
     _tokensKomasCoil,
     _tokensPhyrexianInsectToken,

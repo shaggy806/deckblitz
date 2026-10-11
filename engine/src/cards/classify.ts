@@ -36,6 +36,9 @@ export function isTokenCard(def: CardDefinition): boolean {
  * something that exists as its own card.
  */
 export function isCardFront(def: CardDefinition): boolean {
+  // A prepare spell that is no card of its own (rule 722.3c — Enroot) is
+  // part of its preparation card, never a card.
+  if (def.prepareSpellOnly) return false;
   if (def.faces === null || def.faces.length < 2) return true;
   return def.faces[0] === def.name;
 }

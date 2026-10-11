@@ -210,6 +210,22 @@ describe("deckbuilding flags", () => {
     const mismatched = POOL_CARDS.filter((def) => def.canBeCommander !== says(def)).map((d) => d.name);
     expect(mismatched).toEqual([]);
   });
+
+  // Rule 722: a preparation card names its prepare spell by registry key —
+  // an instant or sorcery the copy in exile is made from — and a spell that
+  // is no card of its own (`prepareSpellOnly`) exists only for one.
+  it("every prepare spell is a registered instant or sorcery, and every spell-only one is some card's", () => {
+    const registry = createDefaultRegistry();
+    const wrong = POOL_CARDS.filter((def) => def.prepareSpell !== null).flatMap((def) => {
+      const spell = def.prepareSpell!;
+      if (!registry.has(spell)) return [`${def.name}: no "${spell}"`];
+      const types = registry.get(spell).types;
+      return types.includes("instant") || types.includes("sorcery") ? [] : [`${def.name}: "${spell}" isn't a spell`];
+    });
+    expect(wrong).toEqual([]);
+    const named = new Set(POOL_CARDS.map((def) => def.prepareSpell));
+    expect(POOL_CARDS.filter((def) => def.prepareSpellOnly && !named.has(def.name)).map((d) => d.name)).toEqual([]);
+  });
 });
 
 describe("classify", () => {
@@ -220,7 +236,10 @@ describe("classify", () => {
 
   it("isCardFront picks the face a card is deck-listed under", () => {
     for (const def of POOL_CARDS) {
-      if (def.faces === null) {
+      if (def.prepareSpellOnly) {
+        // A prepare spell that is no card of its own (rule 722.3c).
+        expect(isCardFront(def), def.name).toBe(false);
+      } else if (def.faces === null) {
         expect(isCardFront(def), def.name).toBe(true);
       } else {
         expect(isCardFront(def), def.name).toBe(def.faces[0] === def.name);

@@ -1,0 +1,550 @@
+{
+  "batch": "B51",
+  "status": "complete",
+  "ranks": "Reality Fracture (FRA, 2026-10-02): top 50% by EDHREC rank — its next 60 new cards (Commander-legal first printings); with prepare built this batch (rule 722), the preparation cards waiting on it from Secrets of Strixhaven, and Second Harvest (its need built since)",
+  "authored": [
+    {
+      "name": "Bloombrute",
+      "files": [
+        "engine/src/cards/pool/bloombrute.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cast Away Doubt",
+      "files": [
+        "engine/src/cards/pool/cast-away-doubt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Greenhouse Propagator",
+      "files": [
+        "engine/src/cards/pool/greenhouse-propagator.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Protege's Awakening",
+      "files": [
+        "engine/src/cards/pool/proteges-awakening.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Vraska's Final Mercy",
+      "files": [
+        "engine/src/cards/pool/vraskas-final-mercy.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Studious First-Year // Rampant Growth",
+      "files": [
+        "engine/src/cards/pool/studious-first-year.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Carnivorous Cultivator // Enroot",
+      "files": [
+        "engine/src/cards/pool/carnivorous-cultivator.ts",
+        "engine/src/cards/pool/enroot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Second Harvest",
+      "files": [
+        "engine/src/cards/pool/second-harvest.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Curse-Marred Demon",
+      "files": [
+        "engine/src/cards/pool/curse-marred-demon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Healer",
+      "files": [
+        "engine/src/cards/pool/way-of-the-healer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Guiding Hydra",
+      "files": [
+        "engine/src/cards/pool/guiding-hydra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lyra, Tolarian Archangel",
+      "files": [
+        "engine/src/cards/pool/lyra-tolarian-archangel.ts",
+        "engine/src/cards/tokens/angel-token-3-3.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tenured Tethermage",
+      "files": [
+        "engine/src/cards/pool/tenured-tethermage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Thalia, the Survivor",
+      "files": [
+        "engine/src/cards/pool/thalia-the-survivor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jiang Yanggu, Never Alone",
+      "files": [
+        "engine/src/cards/pool/jiang-yanggu-never-alone.ts",
+        "engine/src/cards/tokens/mowu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Transformative Commons",
+      "files": [
+        "engine/src/cards/pool/transformative-commons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Formidable Commons",
+      "files": [
+        "engine/src/cards/pool/formidable-commons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avatar of Burgeoning Echoes",
+      "files": [
+        "engine/src/cards/pool/avatar-of-burgeoning-echoes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teyo, Lightshield Expert",
+      "files": [
+        "engine/src/cards/pool/teyo-lightshield-expert.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Identity Echo",
+      "files": [
+        "engine/src/cards/pool/identity-echo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fblthp, Impossibly Lost",
+      "files": [
+        "engine/src/cards/pool/fblthp-impossibly-lost.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saheeli, Jewel of Avishkar",
+      "files": [
+        "engine/src/cards/pool/saheeli-jewel-of-avishkar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Garruk, Veiled Butcher",
+      "files": [
+        "engine/src/cards/pool/garruk-veiled-butcher.ts",
+        "engine/src/cards/tokens/beast-token-garruk-veiled-butcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Innovative Commons",
+      "files": [
+        "engine/src/cards/pool/innovative-commons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eye of Jace",
+      "files": [
+        "engine/src/cards/pool/eye-of-jace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dedicated Commons",
+      "files": [
+        "engine/src/cards/pool/dedicated-commons.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Entrust the Spark",
+      "files": [
+        "engine/src/cards/pool/entrust-the-spark.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Multiply by Zero",
+      "files": [
+        "engine/src/cards/pool/multiply-by-zero.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Echoverse Fulcrum",
+      "files": [
+        "engine/src/cards/pool/the-echoverse-fulcrum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Germinate Recruits",
+      "files": [
+        "engine/src/cards/pool/germinate-recruits.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Murmuring Volume",
+      "files": [
+        "engine/src/cards/pool/murmuring-volume.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Archive Arbiter",
+      "files": [
+        "engine/src/cards/pool/archive-arbiter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Solarium Sentry",
+      "files": [
+        "engine/src/cards/pool/solarium-sentry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Konstrari Charm",
+      "files": [
+        "engine/src/cards/pool/konstrari-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Way of the Cryomancer",
+      "files": [
+        "engine/src/cards/pool/way-of-the-cryomancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fatehold Annex",
+      "files": [
+        "engine/src/cards/pool/fatehold-annex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Marwyn, the Preserver",
+      "files": [
+        "engine/src/cards/pool/marwyn-the-preserver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rewrite Regrets",
+      "files": [
+        "engine/src/cards/pool/rewrite-regrets.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Theorix Annex",
+      "files": [
+        "engine/src/cards/pool/theorix-annex.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stingcaster Mage",
+      "files": [
+        "engine/src/cards/pool/stingcaster-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Master of Barbs",
+      "files": [
+        "engine/src/cards/pool/master-of-barbs.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Meticulous Commons",
+      "files": [
+        "engine/src/cards/pool/meticulous-commons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vigorbloom Annex",
+      "files": [
+        "engine/src/cards/pool/vigorbloom-annex.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Stingerquill Annex",
+      "files": [
+        "engine/src/cards/pool/stingerquill-annex.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Hungering Puppetbeast",
+      "files": [
+        "engine/src/cards/pool/hungering-puppetbeast.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rise of the Deathbringer",
+      "files": [
+        "engine/src/cards/pool/rise-of-the-deathbringer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Konstrari Annex",
+      "files": [
+        "engine/src/cards/pool/konstrari-annex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blazing Firesinger // Seething Song",
+      "files": [
+        "engine/src/cards/pool/blazing-firesinger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bloodline Recollector // Ancestral Craving",
+      "files": [
+        "engine/src/cards/pool/bloodline-recollector.ts",
+        "engine/src/cards/pool/ancestral-craving.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eiganjo Dynastorian // Replenish",
+      "files": [
+        "engine/src/cards/pool/eiganjo-dynastorian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Replenish",
+      "files": [
+        "engine/src/cards/pool/replenish.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emeritus of Abundance // Regrowth",
+      "files": [
+        "engine/src/cards/pool/emeritus-of-abundance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emeritus of Ideation // Ancestral Recall",
+      "files": [
+        "engine/src/cards/pool/emeritus-of-ideation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ancestral Recall",
+      "files": [
+        "engine/src/cards/pool/ancestral-recall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emeritus of Woe // Demonic Tutor",
+      "files": [
+        "engine/src/cards/pool/emeritus-of-woe.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Grave Researcher // Reanimate",
+      "files": [
+        "engine/src/cards/pool/grave-researcher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Harmonized Trio // Brainstorm",
+      "files": [
+        "engine/src/cards/pool/harmonized-trio.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Konstrari Improviser // Soul Tether",
+      "files": [
+        "engine/src/cards/pool/konstrari-improviser.ts",
+        "engine/src/cards/pool/soul-tether.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Woodwork Prodigy // Soul Tether",
+      "files": [
+        "engine/src/cards/pool/woodwork-prodigy.ts",
+        "engine/src/cards/pool/soul-tether.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scheming Silvertongue // Sign in Blood",
+      "files": [
+        "engine/src/cards/pool/scheming-silvertongue.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Variable Chaser // Arc of Fortune",
+      "files": [
+        "engine/src/cards/pool/variable-chaser.ts",
+        "engine/src/cards/pool/arc-of-fortune.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Codie, Ravenous Codex",
+      "files": [
+        "engine/src/cards/pool/codie-ravenous-codex.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hexhaven Dueling Arena",
+      "files": [
+        "engine/src/cards/pool/hexhaven-dueling-arena.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Tomik, Orzhov Lawmage",
+      "needs": [
+        "static:attack-limit"
+      ],
+      "why": "Planeswalkers you control have 'No more than one creature can attack this planeswalker each combat' — no static limits how many creatures may attack a given defender."
+    },
+    {
+      "name": "Proctor of Potential",
+      "needs": [
+        "stat:scried-or-surveilled-this-turn"
+      ],
+      "why": "Graveyard return's 'Activate only if you've scried or surveilled this turn' — no per-turn record or condition for having scried/surveilled."
+    },
+    {
+      "name": "Theorist's Proxy",
+      "needs": [
+        "static:next-spell-uncounterable"
+      ],
+      "why": "'{U}, Sacrifice: The next spell you cast this turn can't be countered' — a one-shot grant to a future spell; a nextSpell delayed trigger would leave a window."
+    },
+    {
+      "name": "Loot, the Nexus",
+      "needs": [
+        "effect:count-distinct-powers"
+      ],
+      "why": "'Add one mana of that color for each different power among creatures you control' — no EffectAmount counts distinct power values."
+    },
+    {
+      "name": "Dark Matter Manipulator",
+      "needs": [
+        "static:pt-per-count-step"
+      ],
+      "why": "'+2/+0 for every seven cards in your graveyard' — grantPtPerCount has no per-N step (floor(count / 7))."
+    },
+    {
+      "name": "Face Yourself",
+      "needs": [
+        "effect:token-copy-each-of-target-players"
+      ],
+      "why": "\"For each creature target player controls, create a token copy\": create-token-copy's { each } filter can't point at a targeted player's permanents (controlledBy is only you/opponent/active-player); the haste + intervening-if end-step sacrifice exception is expressible."
+    },
+    {
+      "name": "Sphinx's Approach",
+      "needs": [
+        "mechanic:deck-any-number-copies",
+        "cost:may-exile-self-and-named-from-graveyard"
+      ],
+      "why": "'A deck can have any number of cards named Sphinx's Approach' has no singleton exemption in deck validation, and 'you may exile this spell and four cards named ~ from your graveyard. If you do, …' (the resolving spell itself plus four named cards, all or nothing) has no vocabulary."
+    },
+    {
+      "name": "Omnipresence",
+      "needs": [
+        "cost:free-cast-from-hand-static"
+      ],
+      "why": "A static 'you may cast spells … from your hand without paying their mana costs' (MV <= creatures you control) — only a temporary player effect (castFromHandFree, Yusri) or a one-shot cast-now exists."
+    },
+    {
+      "name": "Cruel Calculations",
+      "needs": [
+        "stat:cards-library-to-graveyard-this-turn"
+      ],
+      "why": "X counts cards put into target player's graveyard from their library this turn, including ones that have since left; no TurnStat counts library-only (cards-to-graveyard-from-hand-or-library includes discards), and the putIntoGraveyardFromLibraryThisTurn card marker only sees cards still there."
+    },
+    {
+      "name": "Diviner of Victory // Unwind History",
+      "needs": [
+        "trigger:scry-trigger"
+      ],
+      "why": "'Whenever you scry or surveil': only a `surveils` trigger exists; no scry trigger (the `predicate` hatch can't see the source's controller). Its spell Unwind History not authored either."
+    },
+    {
+      "name": "Pyre Rhymer // Molten Tide",
+      "needs": [
+        "effect:turn-scoped-mana-trigger"
+      ],
+      "why": "Molten Tide: 'Until end of turn, whenever you tap a Mountain for mana, add an additional {R}' is a turn-scoped triggered mana ability (High Tide's shape), not built. Molten Tide not authored."
+    },
+    {
+      "name": "Heartwood Crafter // Soul Tether",
+      "needs": [
+        "cost:mana-restriction-not-from-hand"
+      ],
+      "why": "'{T}: Add {C}. This mana can't be spent to cast spells from your hand': ManaRestriction has no cast-from-zone deny clause (notSpell's castFrom is unset while the card is still in hand as it's paid for)."
+    },
+    {
+      "name": "Stensian Sanguinist // Exsanguinate",
+      "needs": [
+        "effect:delayed-combat-damage-this-combat"
+      ],
+      "why": "'Whenever that creature deals combat damage to a player this combat': DelayedCombatDamage lasts the turn, so an extra combat would wrongly prepare it."
+    }
+  ]
+}

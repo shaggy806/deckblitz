@@ -84,6 +84,7 @@ import _poolErode from "../pool/erode.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
+import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
 import _poolFeralProwler from "../pool/feral-prowler.js";
 import _poolFeralRidgewolf from "../pool/feral-ridgewolf.js";
@@ -226,6 +227,7 @@ import _poolTaintedStrike from "../pool/tainted-strike.js";
 import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
+import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
@@ -364,6 +366,7 @@ const shard: CardShard = {
     _poolExpeditionMap,
     _poolExpressiveIteration,
     _poolExtinguishAllHope,
+    _poolEyeOfJace,
     _poolFellTheProfane,
     _poolFeralProwler,
     _poolFeralRidgewolf,
@@ -506,6 +509,7 @@ const shard: CardShard = {
     _poolTangledVale,
     _poolTavernBrawler,
     _poolTeferisProtege,
+    _poolTenuredTethermage,
     _poolTevalArbiterOfVirtue,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,

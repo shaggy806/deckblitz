@@ -142,6 +142,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   tap: (n, v) => v.touch(n.target, "harm", MINOR),
   untap: (n, v) => v.touch(n.target, "help", MINOR),
+  "become-prepared": (n, v) => v.touch(n.target, "help", MINOR),
   destroy: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "put-on-bottom-of-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),

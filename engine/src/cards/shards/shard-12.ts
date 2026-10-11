@@ -16,6 +16,7 @@ import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
+import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "../pool/aven-gagglemaster.js";
@@ -54,6 +55,7 @@ import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
 import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
+import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
@@ -142,6 +144,7 @@ import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
+import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
@@ -150,6 +153,7 @@ import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
+import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
 import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
 import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
 import _poolMutilate from "../pool/mutilate.js";
@@ -176,6 +180,7 @@ import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
+import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
@@ -300,6 +305,7 @@ const shard: CardShard = {
     _poolAspectOfLamprey,
     _poolAuguryOwl,
     _poolAuratog,
+    _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
     _poolAvenFogbringer,
     _poolAvenGagglemaster,
@@ -338,6 +344,7 @@ const shard: CardShard = {
     _poolDarksteelGargoyle,
     _poolDawntreaderElk,
     _poolDeadlyBrew,
+    _poolDedicatedCommons,
     _poolDemonicTutor,
     _poolDestinySpinner,
     _poolDetainedByLegionnaires,
@@ -426,6 +433,7 @@ const shard: CardShard = {
     _poolLosDiablosMissileBase,
     _poolManaTithe,
     _poolMarbleDiamond,
+    _poolMarwynThePreserver,
     _poolMelokuTheCloudedMirror,
     _poolMerrowReejerey,
     _poolMigratoryRoute,
@@ -434,6 +442,7 @@ const shard: CardShard = {
     _poolMireTriton,
     _poolMishrasWorkshop,
     _poolMoltenBlast,
+    _poolMultiplyByZero,
     _poolMurmuringBosk,
     _poolMurmuringMystic,
     _poolMutilate,
@@ -460,6 +469,7 @@ const shard: CardShard = {
     _poolPretendingPoxbearers,
     _poolProphetOfThePeak,
     _poolProsperity,
+    _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,
     _poolPyroceratops,

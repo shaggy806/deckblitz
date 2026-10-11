@@ -3456,6 +3456,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * "… becomes prepared" (rule 722.3a): `target` — a slot, or
+       * `"source"` (Emeritus of Woe's "this creature becomes prepared") — or
+       * every permanent `filter` matches (Codie, Ravenous Codex: "each
+       * creature you control"). Only a permanent with a prepare spell that
+       * isn't prepared already does; each makes its spell's copy in exile
+       * (722.3c — `Game.becomePrepared`).
+       */
+      readonly kind: "become-prepared";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+    }
+  | {
+      /**
        * Empower Jace N (rule 701.71a): "If you don't control a Jace
        * planeswalker token, create a blue Jace planeswalker token with 0
        * loyalty, '[−1]: Surveil 1,' and '[−3]: Draw a card.' Choose a Jace
@@ -4551,6 +4564,9 @@ export interface EffectApi {
   ): void;
   /** `doesntUntapNext`: see the `tap` {@link EffectSpec}. */
   tapPermanent(target: TargetRef, doesntUntapNext?: boolean): void;
+  /** `id` becomes prepared (rule 722.3a — `Game.becomePrepared`): each
+   * token of a compacted stack, singly. */
+  becomePrepared(id: ObjectId): void;
   untapPermanent(target: TargetRef): void;
   /** `cantBeRegenerated`: rule 701.15c. */
   destroyPermanent(target: TargetRef, cantBeRegenerated?: boolean): void;
@@ -6560,6 +6576,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
       applyEffectSpec(spec.effect, ctx.aboutPlayer(spec.player));
       return;
+    case "become-prepared": {
+      if (spec.filter !== undefined) {
+        for (const { object } of ctx.permanentsMatching(spec.filter)) ctx.becomePrepared(object);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target?.kind === "object") ctx.becomePrepared(target.object);
+      return;
+    }
     case "empower-jace": {
       const amount = amountValue(spec.amount, ctx);
       // No Jace planeswalker token: create one first (it enters with 0

@@ -41,6 +41,10 @@ export type CastVia =
   | "foretell"
   | "disturb"
   | "adventure"
+  /** A prepared permanent's copy of its prepare spell (rule 722.3c), cast
+   * from exile by that permanent's controller for its own cost, keeping
+   * every timing rule. */
+  | "prepared"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize

@@ -59,6 +59,7 @@ import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
+import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
@@ -112,6 +113,7 @@ import _poolKeepWatch from "../pool/keep-watch.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
 import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
+import _poolKonstrariCharm from "../pool/konstrari-charm.js";
 import _poolKorCartographer from "../pool/kor-cartographer.js";
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
@@ -239,6 +241,7 @@ import _poolUndercityDireRat from "../pool/undercity-dire-rat.js";
 import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
+import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
@@ -323,6 +326,7 @@ const shard: CardShard = {
     _poolElvishRejuvenator,
     _poolEmberwildeCaptain,
     _poolEmeriaAngel,
+    _poolEmeritusOfIdeation,
     _poolEndlessOne,
     _poolErraticVisionary,
     _poolFaerieDuelist,
@@ -376,6 +380,7 @@ const shard: CardShard = {
     _poolKnightPaladin,
     _poolKoalaSheep,
     _poolKolaghansCommand,
+    _poolKonstrariCharm,
     _poolKorCartographer,
     _poolKrarkClanStoker,
     _poolKravensCats,
@@ -503,6 +508,7 @@ const shard: CardShard = {
     _poolUrbanDaggertooth,
     _poolUtopiaTree,
     _poolValakutStoneforge,
+    _poolVariableChaser,
     _poolVeneratedRotpriest,
     _poolViridianLongbow,
     _poolVonaButcherOfMagan,

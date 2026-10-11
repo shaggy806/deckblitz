@@ -2770,6 +2770,9 @@
 .card-flag.level {
   background: #9fe0c0;
 }
+.card-flag.prepared {
+  background: #8fd0f0;
+}
 /* Sits in the art box's top-left corner (CardTile renders it inside .ct-art),
    scaled with the card like everything else on its face. */
 .card-badge {

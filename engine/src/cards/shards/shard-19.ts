@@ -81,6 +81,7 @@ import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFugue from "../pool/fugue.js";
+import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGiantFly from "../pool/giant-fly.js";
@@ -375,6 +376,7 @@ const shard: CardShard = {
     _poolFormidableSpeaker,
     _poolFortifiedVillage,
     _poolFugue,
+    _poolGarrukVeiledButcher,
     _poolGenerousGift,
     _poolGenesisUltimatum,
     _poolGiantFly,

@@ -36,6 +36,7 @@ import _poolBruceBanner from "../pool/bruce-banner.js";
 import _poolBulkUp from "../pool/bulk-up.js";
 import _poolCabalCoffers from "../pool/cabal-coffers.js";
 import _poolCaptivatingCave from "../pool/captivating-cave.js";
+import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
@@ -144,6 +145,7 @@ import _poolLorienRevealed from "../pool/lorien-revealed.js";
 import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
 import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
 import _poolLumberingWorldwagon from "../pool/lumbering-worldwagon.js";
+import _poolLyraTolarianArchangel from "../pool/lyra-tolarian-archangel.js";
 import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMayhemDevil from "../pool/mayhem-devil.js";
@@ -313,6 +315,7 @@ const shard: CardShard = {
     _poolBulkUp,
     _poolCabalCoffers,
     _poolCaptivatingCave,
+    _poolCastAwayDoubt,
     _poolCatBurglar,
     _poolCatacombSlug,
     _poolChangelingOutcast,
@@ -421,6 +424,7 @@ const shard: CardShard = {
     _poolLostInALabyrinth,
     _poolLostInTheMist,
     _poolLumberingWorldwagon,
+    _poolLyraTolarianArchangel,
     _poolMadrushCyclops,
     _poolMaestrosInitiate,
     _poolMayhemDevil,

@@ -73,6 +73,7 @@ import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
+import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
@@ -104,6 +105,7 @@ import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
+import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
@@ -235,6 +237,7 @@ import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
+import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
@@ -247,6 +250,7 @@ import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
+import _poolTransformativeCommons from "../pool/transformative-commons.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
@@ -357,6 +361,7 @@ const shard: CardShard = {
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
     _poolExploration,
+    _poolFblthpImpossiblyLost,
     _poolFertilid,
     _poolFetidPools,
     _poolFieryEmancipation,
@@ -388,6 +393,7 @@ const shard: CardShard = {
     _poolGriffinProtector,
     _poolGutterSkulk,
     _poolHarbingerOfTheHunt,
+    _poolHarmonizedTrio,
     _poolHeapGate,
     _poolHeartSliver,
     _poolHitTheMotherLode,
@@ -519,6 +525,7 @@ const shard: CardShard = {
     _poolTalismanOfProgress,
     _poolTemporalTrespass,
     _poolTerrianWorldTyrant,
+    _poolTheEchoverseFulcrum,
     _poolTheFireCrystal,
     _poolTheGreatHenge,
     _poolTheMagicMirror,
@@ -531,6 +538,7 @@ const shard: CardShard = {
     _poolTirelessTracker,
     _poolToArms,
     _poolTorrentialGearhulk,
+    _poolTransformativeCommons,
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,
     _poolTritonShorestalker,

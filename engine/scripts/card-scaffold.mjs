@@ -196,6 +196,8 @@ function faceSource(face, ctx) {
     static: parsed.static.length ? parsed.static : undefined,
     faces: ctx.faces,
     ...(ctx.flag ? { [ctx.flag]: true } : {}),
+    prepareSpell: ctx.prepareSpell,
+    prepareSpellOnly: ctx.prepareSpellOnly,
   };
   const body = toSource(def).replace(/\n}$/, "");
   const todos = [
@@ -326,8 +328,14 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
   // rather than exiled to be cast later: the engine's `omen` flag, not
   // `adventure`.
   const omen = faces.some((f) => /\bOmen\b/.test(f.type_line ?? ""));
+  // A preparation card (rule 722): the creature names its prepare spell,
+  // which is written as a file of its own only when it is no card of its own
+  // (`prepareSpellOnly` — Enroot); a reprint (Demonic Tutor) is that card.
+  const prepare = entry.layout === "prepare" && faces.length === 2;
+  const spellIsACard =
+    prepare && loadSnapshot().entries.some((e) => e.name === faces[1].name && e.layout !== "prepare");
   const layoutNote =
-    SUPPORTED_LAYOUTS.has(entry.layout) || multi ? null : `layout "${entry.layout}" isn't modeled`;
+    SUPPORTED_LAYOUTS.has(entry.layout) || multi || prepare ? null : `layout "${entry.layout}" isn't modeled`;
 
   // The tokens it makes, matched to ours or given a skeleton.
   const tokenNotes = [];
@@ -376,17 +384,22 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
       // Scryfall, whose card colours are the creature's: the half is the
       // colour of its own mana cost (rules 105.2, 715.3, 720.3b).
       colors:
-        entry.layout === "adventure" && i > 0 && face.colors === undefined
+        (entry.layout === "adventure" || prepare) && i > 0 && face.colors === undefined
           ? [...new Set((face.mana_cost ?? "").match(/[WUBRG]/g) ?? [])]
           : entry.colors,
       art: multi && i > 0 ? backArt(entry.printing) : undefined,
       faces: multi ? faces.map((f) => f.name) : undefined,
       flag: multi ? (omen ? "omen" : LAYOUT_FLAG[entry.layout]) : undefined,
+      prepareSpell: prepare && i === 0 ? faces[1].name : undefined,
+      prepareSpellOnly: prepare && i > 0 ? true : undefined,
       layoutNote,
       rulings: i === 0 ? (entry.rulings ?? []) : [],
       headerNotes: [
         ...(i === 0 && entry.edhrec_rank ? [`EDHREC rank ${entry.edhrec_rank}.`] : []),
         ...(i === 0 ? tokenNotes : []),
+        ...(i === 0 && spellIsACard
+          ? [`Its prepare spell, ${faces[1].name}, is a card of its own: the pool's (author it too if it isn't there), its art pinned.`]
+          : []),
       ],
     }),
   }));
@@ -398,6 +411,8 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
   if (autoOnly && !finished) return;
   for (const r of results) {
     if (poolNames.has(r.face.name)) continue;
+    // A reprint prepare spell is that card's own file, not this card's.
+    if (prepare && spellIsACard && r.face === faces[1]) continue;
     write(finished ? dirs.review : dirs.scaffold, `${slug(r.face.name)}.ts`, r.render(finished));
   }
   (finished ? report.autoFinished : report.scaffolded).push(entry.name);

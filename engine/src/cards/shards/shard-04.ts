@@ -232,6 +232,7 @@ import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
+import _poolStingcasterMage from "../pool/stingcaster-mage.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
 import _poolSummonBahamut from "../pool/summon-bahamut.js";
 import _poolSuntailHawk from "../pool/suntail-hawk.js";
@@ -522,6 +523,7 @@ const shard: CardShard = {
     _poolSquirrelMob,
     _poolSquirrelNest,
     _poolStellaLeeWildCard,
+    _poolStingcasterMage,
     _poolSultaiSkullkeeper,
     _poolSummonBahamut,
     _poolSuntailHawk,

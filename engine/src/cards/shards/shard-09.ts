@@ -184,6 +184,7 @@ import _poolReaperOfTheWilds from "../pool/reaper-of-the-wilds.js";
 import _poolRebuffTheWicked from "../pool/rebuff-the-wicked.js";
 import _poolRecklessCharge from "../pool/reckless-charge.js";
 import _poolRecklessFireweaver from "../pool/reckless-fireweaver.js";
+import _poolReplenish from "../pool/replenish.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
@@ -226,6 +227,7 @@ import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
 import _poolStormwatchEagle from "../pool/stormwatch-eagle.js";
 import _poolStreamHopper from "../pool/stream-hopper.js";
+import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
@@ -284,6 +286,7 @@ import _tokensForestDryadToken from "../tokens/forest-dryad-token.js";
 import _tokensGoblinTokenHaste from "../tokens/goblin-token-haste.js";
 import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestation-sage.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
+import _tokensMowu from "../tokens/mowu.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 
@@ -470,6 +473,7 @@ const shard: CardShard = {
     _poolRebuffTheWicked,
     _poolRecklessCharge,
     _poolRecklessFireweaver,
+    _poolReplenish,
     _poolRestorationGearsmith,
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
@@ -512,6 +516,7 @@ const shard: CardShard = {
     _poolStormsplitter,
     _poolStormwatchEagle,
     _poolStreamHopper,
+    _poolStudiousFirstYear,
     _poolSubterfuge,
     _poolSummonIxion,
     _poolSurvivorsEncampment,
@@ -572,6 +577,7 @@ const shard: CardShard = {
     _tokensGoblinTokenHaste,
     _tokensInsectTokenInfestationSage,
     _tokensMouseToken,
+    _tokensMowu,
     _tokensTreasureToken,
     _tokensZombieKnightToken,
   ],

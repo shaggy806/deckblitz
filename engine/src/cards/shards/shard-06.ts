@@ -85,6 +85,7 @@ import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
+import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
 import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
@@ -382,6 +383,7 @@ const shard: CardShard = {
     _poolDutifulServants,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
+    _poolEntrustTheSpark,
     _poolEshkiTemursRoar,
     _poolEternalThirst,
     _poolEtheriumSculptor,

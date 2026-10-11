@@ -57,12 +57,18 @@ section keeps only what to do next.
   -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
   6820–6886). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
+- **Next after the Reality Fracture batch: the most popular banned cards** (the user, 2026-10-11),
+  so people can play them in decks with their friends. Every source so far filters to
+  `legal:commander`, so none is in the pool (Ancestral Recall arrives as Emeritus of Ideation's
+  prepare spell). A pass over the banned list by popularity, and likely a "banned in Commander"
+  mark in the deck builder and the deck check rather than a refusal.
 - **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11): each
   set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
-  the walk. **Next: the rest of Reality Fracture** (FRA, 2026-10-02: 134 cards above the
-  threshold, 38 done and 22 blocked after batch 50, 74 left; prepare and "whenever you activate a
-  loyalty ability" block three each), then Reality Fracture Commander (FRC) and The Hobbit (HOB).
+  the walk. **Next: the last of Reality Fracture** (FRA, 2026-10-02: 134 cards above the
+  threshold, 89 done and 31 blocked after batch 51, 14 left), then Reality Fracture Commander
+  (FRC) and The Hobbit (HOB). Prepare is built: about 50 more Secrets of Strixhaven preparation
+  cards below its threshold could now be read (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
 - **Every card triaged so far needs engine work: build what blocks the most.** Triage now runs

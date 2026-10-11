@@ -36,6 +36,7 @@ import _poolBleachboneVerge from "../pool/bleachbone-verge.js";
 import _poolBlessedLight from "../pool/blessed-light.js";
 import _poolBlightPile from "../pool/blight-pile.js";
 import _poolBlightning from "../pool/blightning.js";
+import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBodyDropper from "../pool/body-dropper.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
@@ -335,6 +336,7 @@ const shard: CardShard = {
     _poolBlessedLight,
     _poolBlightPile,
     _poolBlightning,
+    _poolBloodlineRecollector,
     _poolBlossomingTortoise,
     _poolBodyDropper,
     _poolBraidsCabalMinion,

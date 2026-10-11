@@ -229,6 +229,7 @@ import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
+import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
 import _poolStockingThePantry from "../pool/stocking-the-pantry.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
@@ -516,6 +517,7 @@ const shard: CardShard = {
     _poolSpiderHamPeterPorker,
     _poolSpiritOfMalevolence,
     _poolSplashPortal,
+    _poolStingerquillAnnex,
     _poolStockingThePantry,
     _poolSulfurousMire,
     _poolSweetGumRecluse,

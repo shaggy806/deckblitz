@@ -149,7 +149,9 @@ function typeLineOf(def: CardDefinition): string {
 }
 
 function buildEntry(def: CardDefinition): Entry {
-  const otherName = def.faces && def.faces.length > 1 ? def.faces[1] : null
+  // A preparation card's prepare spell shows as its other half too (rule
+  // 722.2: printed in an inset frame on the one face).
+  const otherName = def.faces && def.faces.length > 1 ? def.faces[1] : def.prepareSpell
   const other = otherName === null ? null : (cardPool().byName.get(otherName) ?? null)
   return {
     def,
@@ -157,7 +159,7 @@ function buildEntry(def: CardDefinition): Entry {
     // An adventure's two halves share one printed face, so there's nothing to
     // flip *to* — unlike a transforming DFC or an MDFC, which have a real
     // back-face image.
-    flippable: other !== null && !def.adventure && !def.omen,
+    flippable: other !== null && !def.adventure && !def.omen && def.prepareSpell === null,
     isToken: isTokenCard(def),
     // The names it's printed under too ("Princess Sarah" finds Azusa).
     haystack: [def.name, ...flavorNamesOf(def.name), typeLineOf(def), def.text, other?.name, other?.text]

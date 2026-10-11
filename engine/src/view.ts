@@ -252,6 +252,11 @@ export interface VisibleObject {
   /** Its controller's Ring-bearer (rule 701.54) — a designation; the Ring
    * emblem says what that gives it. */
   readonly ringBearer: boolean;
+  /** On a permanent: it's prepared (rule 722.3a) — its controller may cast
+   * `preparedSpell`, its prepare spell's copy in exile (722.3c). On that
+   * copy in exile: `preparedBy`, the permanent it belongs to. */
+  readonly preparedSpell?: ObjectId;
+  readonly preparedBy?: ObjectId;
   /** On a permanent: the cards in exile linked to it — what an O-Ring holds
    * until it leaves (rule 720.2 — Banishing Light), or cards exiled with it
    * that it lets someone play (Theater of Horrors, Maralen), or exiled with
@@ -547,6 +552,8 @@ function visible(
     goadedBy: [...goadersOf(state, registry, id)],
     suspected: object.zone === "battlefield" && object.suspectedAt !== undefined,
     ringBearer: hasRingBearerDesignation(object),
+    ...(object.zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
+    ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),
   };
 }
 

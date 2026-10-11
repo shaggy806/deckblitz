@@ -5246,6 +5246,38 @@
   "decision:cast-copies-total-mana-value": {
    "family": "decision:free-cast-choices",
    "example": "Uldaros Theorix: copy up to one exiled card of each card type, then cast any number of the copies free with total mana value 6 or less — cast-now's copies + repeat have no total-mana-value cap"
+  },
+  "stat:scried-or-surveilled-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Proctor of Potential: 'Activate only if you've scried or surveilled this turn' — no per-turn flag for scrying or surveilling."
+  },
+  "effect:count-distinct-powers": {
+   "family": "effect:amount-new-variants",
+   "example": "Loot, the Nexus: 'one mana of that color for each different power among creatures you control' — no EffectAmount counts distinct powers."
+  },
+  "static:pt-per-count-step": {
+   "family": "static:pt-per-amount",
+   "example": "Dark Matter Manipulator: '+2/+0 for every seven cards in your graveyard' — grantPtPerCount can't divide its count by a step."
+  },
+  "effect:token-copy-each-of-target-players": {
+   "family": "effect:token-copy-options",
+   "example": "Face Yourself: 'for each creature target player controls, create a token that's a copy of that creature' — create-token-copy's { each } filter has no controlledByTarget."
+  },
+  "stat:cards-library-to-graveyard-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Cruel Calculations: 'Draw X cards, where X is the number of cards that were put into target player's graveyard from their library this turn' — a per-player tally of library-to-graveyard moves (mill, surveil, …), not the per-card marker, which forgets cards that left."
+  },
+  "cost:may-exile-self-and-named-from-graveyard": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Sphinx's Approach: 'Then you may exile this spell and four cards named Sphinx's Approach from your graveyard. If you do, search your library for a Sphinx creature card' — an optional all-or-nothing exile of the resolving spell plus N named graveyard cards gating an 'if you do'."
+  },
+  "cost:mana-restriction-not-from-hand": {
+   "family": "cost:mana-restriction-at-cast",
+   "example": "Heartwood Crafter: 'This mana can't be spent to cast spells from your hand' — a deny-list on the zone a spell is cast from (it pays for a prepared copy from exile, abilities, a graveyard cast)."
+  },
+  "effect:delayed-combat-damage-this-combat": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Stensian Sanguinist: 'Whenever that creature deals combat damage to a player this combat' — a DelayedCombatDamage that lapses with the combat, not the turn."
   }
  }
 }

@@ -393,6 +393,13 @@ export interface CardFilter {
   /** Is (or isn't) the filtering player's **Ring-bearer** (rule 701.54e) —
    * "if Frodo is your Ring-bearer", "unless Sauron is your Ring-bearer". */
   readonly ringBearer?: boolean;
+  /** Is (or isn't) prepared (rule 722.3a) — Woodwork Prodigy's "if this
+   * creature isn't prepared". Read on the battlefield only: off it, never. */
+  readonly prepared?: boolean;
+  /** Is (or isn't) a spell cast as a prepared permanent's copy of its prepare
+   * spell (rule 722.3c, `GameObject.preparedSpell`) — "whenever you cast a
+   * prepared spell" (Codie, Ravenous Codex). */
+  readonly preparedSpell?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1110,6 +1117,11 @@ export function matchesFilter(
   if (filter.ringBearer !== undefined && (live !== undefined && isRingBearer(state, ctx.you, id)) !== filter.ringBearer) {
     return false;
   }
+  if (filter.prepared !== undefined) {
+    const prepared = live !== undefined && live.zone === "battlefield" && live.prepared !== undefined;
+    if (prepared !== filter.prepared) return false;
+  }
+  if (filter.preparedSpell !== undefined && (live?.preparedSpell === true) !== filter.preparedSpell) return false;
   if (filter.faceDown !== undefined) {
     const down = live !== undefined ? live.faceDown !== undefined : lki?.faceDown === true;
     if (down !== filter.faceDown) return false;

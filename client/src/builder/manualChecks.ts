@@ -2591,6 +2591,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Studious First-Year, Carnivorous Cultivator',
+    board({
+      you: {
+        bf: ['Studious First-Year', 'Forest*4', 'Plains*2'],
+        hand: ['Carnivorous Cultivator'],
+        lib: ['Forest', 'Forest', 'Island'],
+      },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

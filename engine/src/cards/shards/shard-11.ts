@@ -41,6 +41,7 @@ import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
 import _poolCamaraderie from "../pool/camaraderie.js";
 import _poolCapashenTemplar from "../pool/capashen-templar.js";
+import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolChainsOfCustody from "../pool/chains-of-custody.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
@@ -72,6 +73,7 @@ import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
 import _poolElvishRegrower from "../pool/elvish-regrower.js";
+import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
@@ -118,12 +120,14 @@ import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
 import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
+import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
 import _poolHoardSmelterDragon from "../pool/hoard-smelter-dragon.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
 import _poolHovermyr from "../pool/hovermyr.js";
 import _poolHullBreach from "../pool/hull-breach.js";
+import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
@@ -158,6 +162,7 @@ import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
+import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
@@ -370,6 +375,7 @@ const shard: CardShard = {
     _poolCallerOfGales,
     _poolCamaraderie,
     _poolCapashenTemplar,
+    _poolCarnivorousCultivator,
     _poolCathedralSanctifier,
     _poolChainsOfCustody,
     _poolChaosChanneler,
@@ -401,6 +407,7 @@ const shard: CardShard = {
     _poolEidolonOfPhilosophy,
     _poolElectricRevelation,
     _poolElvishRegrower,
+    _poolEmeritusOfWoe,
     _poolEnduringCourage,
     _poolEnduringVitality,
     _poolEpicureOfBlood,
@@ -447,12 +454,14 @@ const shard: CardShard = {
     _poolHelmOfAwakening,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
+    _poolHexhavenDuelingArena,
     _poolHitchclawRecluse,
     _poolHoardRobber,
     _poolHoardSmelterDragon,
     _poolHookHauntDrifter,
     _poolHovermyr,
     _poolHullBreach,
+    _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
@@ -487,6 +496,7 @@ const shard: CardShard = {
     _poolManaCylix,
     _poolMaraudingMako,
     _poolMercilessEnforcers,
+    _poolMeticulousCommons,
     _poolMirrorImage,
     _poolMistcutterHydra,
     _poolMistyPalmsOasis,

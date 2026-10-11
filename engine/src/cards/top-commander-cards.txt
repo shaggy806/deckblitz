@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3504 already implemented / 1496 missing (marks refreshed 2026-10-11)
+3511 already implemented / 1489 missing (marks refreshed 2026-10-11)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -557,7 +557,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   558  Brotherhood Regalia                      {2}              Artifact — Equipment
 [ ]   559  Nesting Grounds                          {0}              Land
 [x]   560  Conduit of Worlds                        {2}{G}{G}        Artifact
-[ ]   561  Second Harvest                           {2}{G}{G}        Instant
+[x]   561  Second Harvest                           {2}{G}{G}        Instant
 [ ]   562  Unbreakable Formation                    {2}{W}           Instant
 [x]   563  Marionette Apprentice                    {1}{B}           Creature — Human Artificer
 [x]   564  Springleaf Drum                          {1}              Artifact
@@ -2311,7 +2311,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2318  Ezuri, Renegade Leader                   {1}{G}{G}        Legendary Creature — Elf Warrior
 [x]  2319  Tarnished Citadel                        {0}              Land
 [x]  2320  Spiteful Visions                         {2}{B/R}{B/R}    Enchantment
-[ ]  2321  Grave Researcher // Reanimate            {2}{B} // {B}    Creature — Troll Warlock // Sorcery
+[x]  2321  Grave Researcher // Reanimate            {2}{B} // {B}    Creature — Troll Warlock // Sorcery
 [x]  2322  Singularity Rupture                      {3}{U}{B}{B}     Sorcery
 [x]  2323  It That Heralds the End                  {1}{C}           Creature — Eldrazi Drone
 [x]  2324  Prized Statue                            {2}              Artifact
@@ -3032,7 +3032,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3039  Karametra's Acolyte                      {3}{G}           Creature — Human Druid
 [x]  3040  Infernal Plunge                          {R}              Sorcery
 [x]  3041  Eldrazi Displacer                        {2}{W}           Creature — Eldrazi
-[ ]  3042  Studious First-Year // Rampant Growth    {G} // {1}{G}    Creature — Bear Wizard // Sorcery
+[x]  3042  Studious First-Year // Rampant Growth    {G} // {1}{G}    Creature — Bear Wizard // Sorcery
 [x]  3043  Creeping Tar Pit                         {0}              Land
 [x]  3044  Cliffgate                                {0}              Land — Gate
 [ ]  3045  Meathook Massacre II                     {X}{X}{B}{B}{B}{B} Legendary Enchantment
@@ -3215,7 +3215,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3222  Octopus Form                             {U}              Instant — Lesson
 [ ]  3223  Éowyn, Fearless Knight                   {2}{R}{W}        Legendary Creature — Human Knight
 [ ]  3224  Strong Back                              {2}{G}           Enchantment — Aura
-[ ]  3225  Emeritus of Woe // Demonic Tutor         {3}{B} // {1}{B} Creature — Vampire Warlock // Sorcery
+[x]  3225  Emeritus of Woe // Demonic Tutor         {3}{B} // {1}{B} Creature — Vampire Warlock // Sorcery
 [x]  3226  Parhelion II                             {6}{W}{W}        Legendary Artifact — Vehicle
 [ ]  3227  Ingenious Prodigy                        {X}{U}           Creature — Human Wizard
 [x]  3228  Marang River Regent // Coil and Catch    {4}{U}{U} // {3}{U} Creature — Dragon // Instant — Omen
@@ -3806,7 +3806,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3813  Reckoner's Bargain                       {1}{B}           Instant
 [x]  3814  Warden of Evos Isle                      {2}{U}           Creature — Bird Wizard
 [x]  3815  Legion's Landing // Adanto, the First Fort {1}              Legendary Enchantment // Legendary Land
-[ ]  3816  Replenish                                {3}{W}           Sorcery
+[x]  3816  Replenish                                {3}{W}           Sorcery
 [ ]  3817  Folk Hero                                {1}{W}           Legendary Enchantment — Background
 [x]  3818  Lifecreed Duo                            {1}{W}           Creature — Bat Bird
 [x]  3819  Sharding Sphinx                          {4}{U}{U}        Artifact Creature — Sphinx
@@ -4042,7 +4042,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4049  Old Stickfingers                         {X}{B}{G}        Legendary Creature — Horror
 [x]  4050  Armageddon                               {3}{W}           Sorcery
 [x]  4051  Obelisk of Urd                           {6}              Artifact
-[ ]  4052  Scheming Silvertongue // Sign in Blood   {1}{B} // {B}{B} Creature — Vampire Warlock // Sorcery
+[x]  4052  Scheming Silvertongue // Sign in Blood   {1}{B} // {B}{B} Creature — Vampire Warlock // Sorcery
 [x]  4053  Altered Ego                              {X}{2}{G}{U}     Creature — Shapeshifter
 [ ]  4054  Nazgûl Battle-Mace                       {5}              Artifact — Equipment
 [x]  4055  Anara, Wolvid Familiar                   {3}{G}           Legendary Creature — Wolf Beast
@@ -4878,7 +4878,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4885  Thraben Watcher                          {2}{W}{W}        Creature — Angel
 [x]  4886  Sudden Breakthrough                      {1}{R}           Instant
 [ ]  4887  Elenda, Saint of Dusk                    {2}{W}{B}        Legendary Creature — Vampire Knight
-[ ]  4888  Harmonized Trio // Brainstorm            {U} // {U}       Creature — Merfolk Bard Wizard // Instant
+[x]  4888  Harmonized Trio // Brainstorm            {U} // {U}       Creature — Merfolk Bard Wizard // Instant
 [x]  4889  Attrition                                {1}{B}{B}        Enchantment
 [x]  4890  Kishla Village                           {0}              Land
 [x]  4891  Marchesa, the Black Rose                 {1}{U}{B}{R}     Legendary Creature — Human Wizard

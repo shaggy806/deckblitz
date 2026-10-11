@@ -69,6 +69,7 @@ import _poolDregRecycler from "../pool/dreg-recycler.js";
 import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
+import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
@@ -353,6 +354,7 @@ const shard: CardShard = {
     _poolDriftOfPhantasms,
     _poolDrossRipper,
     _poolDrownInDreams,
+    _poolEiganjoDynastorian,
     _poolElminstersSimulacrum,
     _poolElvishPiper,
     _poolEmberEyeWolf,

@@ -8,6 +8,7 @@ import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
+import _poolArcOfFortune from "../pool/arc-of-fortune.js";
 import _poolArchitectOfRestoration from "../pool/architect-of-restoration.js";
 import _poolArchmageOfEchoes from "../pool/archmage-of-echoes.js";
 import _poolArdbert from "../pool/ardbert.js";
@@ -253,6 +254,7 @@ import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
 import _poolVictimize from "../pool/victimize.js";
+import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
 import _poolVirtueOfCourage from "../pool/virtue-of-courage.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
@@ -286,6 +288,7 @@ const shard: CardShard = {
     _poolAffaProtector,
     _poolAllosaurusShepherd,
     _poolApproachOfTheSecondSun,
+    _poolArcOfFortune,
     _poolArchitectOfRestoration,
     _poolArchmageOfEchoes,
     _poolArdbert,
@@ -531,6 +534,7 @@ const shard: CardShard = {
     _poolVenomSliver,
     _poolViciousConquistador,
     _poolVictimize,
+    _poolVigorbloomAnnex,
     _poolVirtueOfCourage,
     _poolVoicelessSpirit,
     _poolVoloGuideToMonsters,

@@ -162,6 +162,7 @@ import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolManaFlare from "../pool/mana-flare.js";
+import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
@@ -447,6 +448,7 @@ const shard: CardShard = {
     _poolLoyalWarhound,
     _poolLuminousPhantom,
     _poolManaFlare,
+    _poolMasterOfBarbs,
     _poolMedusaInhumanQueen,
     _poolMemoryDeluge,
     _poolMerchantScroll,

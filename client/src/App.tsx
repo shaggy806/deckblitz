@@ -1512,6 +1512,19 @@ function Table({
     }
     return m
   }, [actions])
+  // A prepared permanent's copy of its prepare spell (rule 722.3c), cast
+  // from exile: offered in the permanent's own ability menu, since the copy
+  // belongs to it (`VisibleObject.preparedBy`).
+  const preparedCastsBySource = useMemo(() => {
+    const m = new Map<ObjectId, CastAction[]>()
+    for (const a of actions) {
+      if (a.kind !== 'cast-spell') continue
+      const by = view.objects[a.card]?.preparedBy
+      if (by === undefined) continue
+      m.set(by, [...(m.get(by) ?? []), a])
+    }
+    return m
+  }, [actions, view.objects])
   // Every way to turn each face-down permanent face up: its mana cost, its
   // morph or disguise cost, or both (a manifested card with morph).
   const faceUpBySource = useMemo(() => {
@@ -2654,7 +2667,10 @@ function Table({
         if (stack !== undefined) setBlockSplit((cur) => (cur === stack ? null : stack))
         return
       }
-      if (mode === 'priority' && (abilitiesBySource.has(id) || faceUpBySource.has(id) || unlockBySource.has(id))) {
+      if (
+        mode === 'priority' &&
+        (abilitiesBySource.has(id) || faceUpBySource.has(id) || unlockBySource.has(id) || preparedCastsBySource.has(id))
+      ) {
         setSelectedSource((cur) => (cur === id ? null : id))
       }
     },
@@ -2662,6 +2678,7 @@ function Table({
       abilitiesBySource,
       faceUpBySource,
       unlockBySource,
+      preparedCastsBySource,
       assignDamageAction,
       attackAction,
       attackAssignments,
@@ -3000,7 +3017,9 @@ function Table({
       highlight = eligibleToProliferate(proliferateAction, id) && !picked
       selected = picked
     } else if (mode === 'priority' && ownerSeat === seat) {
-      activatable = ids.some((i) => abilitiesBySource.has(i) || faceUpBySource.has(i) || unlockBySource.has(i))
+      activatable = ids.some(
+        (i) => abilitiesBySource.has(i) || faceUpBySource.has(i) || unlockBySource.has(i) || preparedCastsBySource.has(i),
+      )
       selected = selectedSource !== null && ids.includes(selectedSource)
     }
 
@@ -4752,6 +4771,7 @@ function Table({
     : []
   const selectedFaceUp = selectedSource ? faceUpBySource.get(selectedSource) : undefined
   const selectedUnlocks = selectedSource ? (unlockBySource.get(selectedSource) ?? []) : []
+  const selectedPreparedCasts = selectedSource ? (preparedCastsBySource.get(selectedSource) ?? []) : []
   // A commander whose tile opened the menu (it has an ability that works from
   // the command zone) is still cast from it.
   const selectedCast =
@@ -5346,7 +5366,10 @@ function Table({
           one hands off to `clickAbility` (targeting, an {X} prompt, a
           sacrifice choice), so the menu closes either way. */}
       {selectedSource !== null &&
-      (selectedAbilities.length > 0 || selectedFaceUp !== undefined || selectedUnlocks.length > 0) ? (
+      (selectedAbilities.length > 0 ||
+        selectedFaceUp !== undefined ||
+        selectedUnlocks.length > 0 ||
+        selectedPreparedCasts.length > 0) ? (
         <AbilityMenu
           source={selectedSource}
           title={game.nameOf(selectedSource)}
@@ -5363,6 +5386,16 @@ function Table({
                   },
                 ]
               : []),
+            // Its prepare spell's copy (rule 722.3c), cast as a hand card is
+            // (`playFace`): the same targeting, {X} and payment flow.
+            ...selectedPreparedCasts.slice(0, 1).map((c) => ({
+              key: `prepared:${c.card}`,
+              label: `Cast ${c.cardName} (prepared)`,
+              onSelect: () => {
+                setSelectedSource(null)
+                playFace(c)
+              },
+            })),
             ...selectedUnlocks.map((u) => ({
               key: `unlock:${u.door}`,
               label: `Unlock ${u.doorName} — pay ${u.cost}`,

@@ -4387,3 +4387,18 @@ stack count once per token)
   the token to 3; once it resolves the {R} is in your pool. The Jace token then offers no other loyalty ability
   this turn; Chandra still offers all hers.
 - **Known limits:** None known.
+
+### Studious First-Year, Carnivorous Cultivator
+
+*New decision* — prepare (rule 722): casting a prepared permanent's copy of its spell from its menu
+
+- **Setup:** Your precombat main. Your battlefield: Studious First-Year (entered prepared) and six lands
+  (Forests among them). Your hand: Carnivorous Cultivator. Your library's top: Forest, Forest, Island.
+  Bob: three lands.
+- **Do:** Open Studious First-Year's menu and cast "Rampant Growth (prepared)"; find a Forest. Then cast
+  Carnivorous Cultivator and, once it's on the battlefield, open its menu.
+- **Check:** First-Year shows a "Prep" flag and its menu offers the cast; the spell on the stack is a copy
+  of Rampant Growth with Rampant Growth's own art. Once it's cast the flag is gone, the menu offers nothing,
+  and after it resolves no Rampant Growth is in your graveyard. Carnivorous Cultivator enters with the flag
+  and offers "Cast Enroot (prepared)". On Bob's turn neither copy is offered (both are sorceries).
+- **Known limits:** None known.

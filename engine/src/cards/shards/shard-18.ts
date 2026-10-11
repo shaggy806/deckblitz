@@ -114,6 +114,7 @@ import _poolIvyLaneDenizen from "../pool/ivy-lane-denizen.js";
 import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
+import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
@@ -204,8 +205,10 @@ import _poolSkullCatapult from "../pool/skull-catapult.js";
 import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
 import _poolSkystrikeOfficer from "../pool/skystrike-officer.js";
 import _poolSnakeskinVeil from "../pool/snakeskin-veil.js";
+import _poolSolariumSentry from "../pool/solarium-sentry.js";
 import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
+import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
@@ -412,6 +415,7 @@ const shard: CardShard = {
     _poolIxallisLorekeeper,
     _poolIzzetCharm,
     _poolJagwaspSwarm,
+    _poolJiangYangguNeverAlone,
     _poolJodahTheUnifier,
     _poolKalonianHydra,
     _poolKeeningBanshee,
@@ -502,8 +506,10 @@ const shard: CardShard = {
     _poolSkyclaveApparition,
     _poolSkystrikeOfficer,
     _poolSnakeskinVeil,
+    _poolSolariumSentry,
     _poolSongsOfTheDamned,
     _poolSorinImperiousBloodlord,
+    _poolSoulTether,
     _poolSpawnbinderMage,
     _poolSpectrumSentinel,
     _poolSpellkeeperWeird,

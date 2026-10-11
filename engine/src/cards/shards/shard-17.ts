@@ -10,6 +10,7 @@ import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
+import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
@@ -295,6 +296,7 @@ const shard: CardShard = {
     _poolAlabornCavalier,
     _poolAmaranthineWall,
     _poolAmbushViper,
+    _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
     _poolArcticTreeline,

@@ -66,6 +66,7 @@ import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
+import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
@@ -94,6 +95,7 @@ import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
+import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
 import _poolGruulTurf from "../pool/gruul-turf.js";
@@ -185,6 +187,7 @@ import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
+import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
@@ -260,6 +263,7 @@ import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
+import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
@@ -332,6 +336,7 @@ const shard: CardShard = {
     _poolElanorGardner,
     _poolElvenFarsight,
     _poolElvishDoomsayer,
+    _poolEmeritusOfAbundance,
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolErase,
@@ -360,6 +365,7 @@ const shard: CardShard = {
     _poolGoblinWarchief,
     _poolGoroGoroDiscipleOfRyusei,
     _poolGreaterTanuki,
+    _poolGreenhousePropagator,
     _poolGrowingRanks,
     _poolGruesomeDeformity,
     _poolGruulTurf,
@@ -451,6 +457,7 @@ const shard: CardShard = {
     _poolRedHerring,
     _poolRendmawCreakingNest,
     _poolRevengeOfRavens,
+    _poolRewriteRegrets,
     _poolRipchainRazorkin,
     _poolRoilingRegrowth,
     _poolRustwingFalcon,
@@ -526,6 +533,7 @@ const shard: CardShard = {
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
     _poolWillOfTheSultai,
+    _poolWoodworkProdigy,
   ],
   tokens: [
     _tokensBirdTokenGwaihirGreatestOfTheEagles,

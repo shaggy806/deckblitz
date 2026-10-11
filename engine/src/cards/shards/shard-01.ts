@@ -218,7 +218,9 @@ import _poolTeleportationCircle from "../pool/teleportation-circle.js";
 import _poolTelethopter from "../pool/telethopter.js";
 import _poolTempleOfEpiphany from "../pool/temple-of-epiphany.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
+import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
+import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
@@ -250,6 +252,7 @@ import _poolVolrathsStronghold from "../pool/volraths-stronghold.js";
 import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
+import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
@@ -482,7 +485,9 @@ const shard: CardShard = {
     _poolTelethopter,
     _poolTempleOfEpiphany,
     _poolTemptWithVengeance,
+    _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,
+    _poolThaliaTheSurvivor,
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
@@ -514,6 +519,7 @@ const shard: CardShard = {
     _poolVoraciousBibliophile,
     _poolWanderOff,
     _poolWastewoodVerge,
+    _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
     _poolWestvaleAbbey,
     _poolWhirlwingStormbrood,

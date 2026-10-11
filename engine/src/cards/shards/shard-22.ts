@@ -126,6 +126,7 @@ import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
+import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
@@ -203,6 +204,7 @@ import _poolSawItComing from "../pool/saw-it-coming.js";
 import _poolScaleTheHeights from "../pool/scale-the-heights.js";
 import _poolScarecrone from "../pool/scarecrone.js";
 import _poolScavengingScarab from "../pool/scavenging-scarab.js";
+import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
 import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
@@ -246,6 +248,7 @@ import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monste
 import _poolThassasBounty from "../pool/thassas-bounty.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
 import _poolTheWanderingRescuer from "../pool/the-wandering-rescuer.js";
+import _poolTheorixAnnex from "../pool/theorix-annex.js";
 import _poolTheyWentThisWay from "../pool/they-went-this-way.js";
 import _poolThingInTheIce from "../pool/thing-in-the-ice.js";
 import _poolThornOfTheBlackRose from "../pool/thorn-of-the-black-rose.js";
@@ -422,6 +425,7 @@ const shard: CardShard = {
     _poolKikiJikiMirrorBreaker,
     _poolKindredDominance,
     _poolKnightOfTheWhiteOrchid,
+    _poolKonstrariAnnex,
     _poolLaserScrewdriver,
     _poolLastMarchOfTheEnts,
     _poolLethalScheme,
@@ -499,6 +503,7 @@ const shard: CardShard = {
     _poolScaleTheHeights,
     _poolScarecrone,
     _poolScavengingScarab,
+    _poolSchemingSilvertongue,
     _poolSealOfStrength,
     _poolSeismicSpike,
     _poolSentinelsOfGlenElendra,
@@ -542,6 +547,7 @@ const shard: CardShard = {
     _poolThassasBounty,
     _poolTheWallsOfBaSingSe,
     _poolTheWanderingRescuer,
+    _poolTheorixAnnex,
     _poolTheyWentThisWay,
     _poolThingInTheIce,
     _poolThornOfTheBlackRose,

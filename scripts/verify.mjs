@@ -105,6 +105,9 @@ function addedCards() {
     // deck can hold: its front face (also new) stands for it.
     const front = /^\s*faces:\s*\[\s*"((?:[^"\\]|\\.)*)"/m.exec(source);
     if (front !== null && JSON.parse(`"${front[1]}"`) !== name) continue;
+    // Nor is a prepare spell that is no card of its own (rule 722 — Enroot):
+    // the preparation card that names it (also new) brings it into games.
+    if (/^\s*prepareSpellOnly:\s*true/m.test(source)) continue;
     names.push(name);
   }
   return names;

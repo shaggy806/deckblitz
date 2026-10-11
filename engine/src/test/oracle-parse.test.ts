@@ -314,6 +314,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(c.targets).toEqual([spec]);
   });
 
+  it("a preparation card's \"enters prepared\" line is its own entering replacement (rule 722.3a)", () => {
+    const parsed = face("This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)");
+    expect(parsed.complete).toBe(true);
+    expect(parsed.static[0]).toMatchObject({ replacement: { event: "enters-battlefield", prepared: true } });
+  });
+
   it("a target with a word it doesn't know isn't read", () => {
     expect(face("Destroy target creature with the greatest power.", "Sorcery").complete).toBe(false);
     expect(face("Destroy target sparkling creature.", "Sorcery").complete).toBe(false);
@@ -327,6 +333,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ["Transform ~.", { kind: "transform", target: "source" }],
     ["The Ring tempts you.", { kind: "the-ring-tempts-you" }],
     ["Empower Jace 2.", { kind: "empower-jace", amount: 2 }],
+    ["~ becomes prepared.", { kind: "become-prepared", target: "source" }],
+    ["Each creature you control becomes prepared.", { kind: "become-prepared", filter: { type: "creature", controlledBy: "you" } }],
     [
       "~ deals 3 damage to any target and 1 damage to you.",
       {

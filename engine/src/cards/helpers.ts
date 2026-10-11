@@ -1843,3 +1843,19 @@ export function atLevel<T extends StaticAbility | TriggeredAbility>(level: numbe
     condition: ability.condition === undefined ? gate : { kind: "all", of: [gate, ability.condition] },
   };
 }
+
+/** The reminder a preparation card prints after "This creature enters
+ * prepared." (rule 722). */
+export const PREPARED_REMINDER = "(While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)";
+
+/**
+ * "This creature enters prepared." (rule 722.3a) — the card's own entering
+ * replacement: it gains the prepared designation as it enters, and its
+ * controller makes a copy of its prepare spell (`CardDefinition.prepareSpell`)
+ * in exile to cast. `text` is the line as printed, reminder and all.
+ */
+export const entersPrepared = (text = "This creature enters prepared."): StaticAbility => ({
+  affects: { scope: "self" },
+  replacement: { event: "enters-battlefield", prepared: true },
+  text,
+});

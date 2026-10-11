@@ -37,6 +37,7 @@ import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
+import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
 import _poolConcentratedFire from "../pool/concentrated-fire.js";
@@ -187,6 +188,7 @@ import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
+import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
 import _poolSanctumOfEternity from "../pool/sanctum-of-eternity.js";
 import _poolSangromancer from "../pool/sangromancer.js";
 import _poolSaplingNursery from "../pool/sapling-nursery.js";
@@ -253,7 +255,9 @@ import _poolVoiceOfTheBlessed from "../pool/voice-of-the-blessed.js";
 import _poolVolcanoImp from "../pool/volcano-imp.js";
 import _poolVolrathsGardens from "../pool/volraths-gardens.js";
 import _poolVoraciousVermin from "../pool/voracious-vermin.js";
+import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
+import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
@@ -310,6 +314,7 @@ const shard: CardShard = {
     _poolChandraAcolyteOfFlame,
     _poolCidFreeflierPilot,
     _poolCliffsideLookout,
+    _poolCodieRavenousCodex,
     _poolCompulsiveResearch,
     _poolConcentrate,
     _poolConcentratedFire,
@@ -460,6 +465,7 @@ const shard: CardShard = {
     _poolRestlessBivouac,
     _poolReunionOfTheHouse,
     _poolRoilCartographer,
+    _poolSaheeliJewelOfAvishkar,
     _poolSanctumOfEternity,
     _poolSangromancer,
     _poolSaplingNursery,
@@ -526,7 +532,9 @@ const shard: CardShard = {
     _poolVolcanoImp,
     _poolVolrathsGardens,
     _poolVoraciousVermin,
+    _poolVraskasFinalMercy,
     _poolWardenOfTheEye,
+    _poolWayOfTheHealer,
     _poolWeatherseedElf,
     _poolWorthyKnight,
     _poolWurmcoilEngine,

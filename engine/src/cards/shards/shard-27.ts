@@ -177,6 +177,7 @@ import _poolRecover from "../pool/recover.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
+import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRiverMerfolk from "../pool/river-merfolk.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
@@ -464,6 +465,7 @@ const shard: CardShard = {
     _poolRegathanFirecat,
     _poolRestlessCottage,
     _poolRetreatToKazandu,
+    _poolRiseOfTheDeathbringer,
     _poolRiverMerfolk,
     _poolRmsTitanic,
     _poolRobeOfTheArchmagi,

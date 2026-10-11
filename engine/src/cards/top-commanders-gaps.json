@@ -236,7 +236,9 @@
   "mechanic:dice-rolling",
   "effect:random-choice",
   "mechanic:kindred-card-type",
-  "static:grant-loyalty-abilities"
+  "static:grant-loyalty-abilities",
+  "effect:token-copy-for-each-matching",
+  "mechanic:prepare"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -60,6 +60,7 @@ import _poolCraterize from "../pool/craterize.js";
 import _poolCreakwoodLiege from "../pool/creakwood-liege.js";
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
+import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
@@ -85,6 +86,7 @@ import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
+import _poolFateholdAnnex from "../pool/fatehold-annex.js";
 import _poolFavorableWinds from "../pool/favorable-winds.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
@@ -112,11 +114,13 @@ import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
+import _poolGraveResearcher from "../pool/grave-researcher.js";
 import _poolGraveTitan from "../pool/grave-titan.js";
 import _poolGravenCairns from "../pool/graven-cairns.js";
 import _poolGruulCluestone from "../pool/gruul-cluestone.js";
 import _poolGruulNodorog from "../pool/gruul-nodorog.js";
 import _poolGuardianOfTheHalls from "../pool/guardian-of-the-halls.js";
+import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHeartstone from "../pool/heartstone.js";
@@ -370,6 +374,7 @@ const shard: CardShard = {
     _poolCreakwoodLiege,
     _poolCruxOfFate,
     _poolCunningSparkmage,
+    _poolCurseMarredDemon,
     _poolCybermanPatrol,
     _poolDawnCharm,
     _poolDayOfDestiny,
@@ -395,6 +400,7 @@ const shard: CardShard = {
     _poolEtherealInvestigator,
     _poolExtravagantReplication,
     _poolFaerieSeer,
+    _poolFateholdAnnex,
     _poolFavorableWinds,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
@@ -422,11 +428,13 @@ const shard: CardShard = {
     _poolGoblinChirurgeon,
     _poolGrapeshot,
     _poolGraspOfDarkness,
+    _poolGraveResearcher,
     _poolGraveTitan,
     _poolGravenCairns,
     _poolGruulCluestone,
     _poolGruulNodorog,
     _poolGuardianOfTheHalls,
+    _poolGuidingHydra,
     _poolGuulDrazMucklord,
     _poolHarmlessOffering,
     _poolHeartstone,

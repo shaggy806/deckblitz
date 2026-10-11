@@ -2309,6 +2309,21 @@ export interface CardDefinition {
    * as any spell does. `true` on both faces. */
   readonly omen: boolean;
   /**
+   * A preparation card (rule 722): the registry key of its prepare spell —
+   * the instant or sorcery in its inset frame, alternative characteristics
+   * it never has in any zone (722.4) and is never cast as (722.3). While the
+   * permanent is prepared, its controller may cast a copy of it from exile
+   * (722.3c — `GameObject.prepared`). A spell that is a card of its own
+   * (Demonic Tutor, Reanimate) is that card's definition, its Oracle text
+   * the same; one that isn't (Enroot) is a definition with
+   * `prepareSpellOnly`. Copiable (722.2b): a token copy has it too.
+   */
+  readonly prepareSpell: string | null;
+  /** A prepare spell that is no card of its own (Enroot, Soul Tether): its
+   * definition exists only to be copied for a preparation card (rule
+   * 722.3c), so it is never in a deck or the library. */
+  readonly prepareSpellOnly: boolean;
+  /**
    * A split card (rule 709): `faces` is `[the card, left half, right half]`.
    * Face 0 is the whole card — what it is in every zone but the stack, both
    * halves' characteristics combined (709.4: both names, the combined mana
@@ -2426,6 +2441,10 @@ const PRINTED_ABILITY: {
   disturb: (def) => def.disturb !== null,
   adventure: false,
   omen: false,
+  // Neither is an ability (rule 722.2: alternative characteristics, cast
+  // only as a copy) — "enters prepared" is the card's own replacement.
+  prepareSpell: false,
+  prepareSpellOnly: false,
   split: false,
   divided: false,
   pairing: (def) => def.pairing !== null,
@@ -2586,6 +2605,8 @@ interface CardDraft {
   disturb?: { readonly cost: string };
   adventure?: boolean;
   omen?: boolean;
+  prepareSpell?: string;
+  prepareSpellOnly?: boolean;
   pairing?: CommanderPairing;
   canBeCommander?: boolean;
 }
@@ -2675,6 +2696,8 @@ export function defineCard(draft: CardDraft): CardDefinition {
     disturb: draft.disturb ?? null,
     adventure: draft.adventure ?? false,
     omen: draft.omen ?? false,
+    prepareSpell: draft.prepareSpell ?? null,
+    prepareSpellOnly: draft.prepareSpellOnly ?? false,
     split: draft.split ?? false,
     divided: draft.divided ?? null,
     pairing: draft.pairing ?? null,

@@ -933,5 +933,30 @@ export default {
     },
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  PREPR: {
+    about:
+      "2p. Prepare (rule 722): Studious First-Year entered prepared — its tile says so, and its menu offers " +
+      "'Cast Rampant Growth (prepared)'; cast it (a Forest from the library), and the flag and the copy in exile go. " +
+      "Then cast Carnivorous Cultivator from hand: it enters prepared with Enroot to cast.",
+    players: ["alice", "bob"],
+    lands: { alice: 6, bob: 3 },
+    battlefield: { alice: ["Studious First-Year"] },
+    hand: { alice: ["Carnivorous Cultivator"] },
+    setup(game) {
+      for (const name of ["Forest", "Forest", "Island"]) game.debugSpawn(name, "alice", "library");
+    },
+    bots: { bob: {} },
+  },
+  PREP4: {
+    about: "4p. PREPR at a full table: the prepared flag and the menu's cast beside four boards.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 6, bob: 3, carol: 3, dave: 3 },
+    battlefield: { alice: ["Studious First-Year"] },
+    hand: { alice: ["Carnivorous Cultivator"] },
+    setup(game) {
+      for (const name of ["Forest", "Forest", "Island"]) game.debugSpawn(name, "alice", "library");
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
 
 };

@@ -512,6 +512,8 @@ interface EnteringReplacement {
   /** Riot (rule 702.136a) gives it haste: its controller didn't have it
    * enter with the +1/+1 counter. */
   readonly riotHaste: boolean;
+  /** It enters prepared (rule 722.3a — its own `prepared` replacement). */
+  readonly prepared: boolean;
 }
 
 /** Riot's two answers (rule 702.136a), as its `choose-creature-type` menu
@@ -1685,6 +1687,21 @@ export class Game {
           via: "adventure",
           face: 0,
           costString: creatureDef.manaCost,
+        }),
+      );
+    }
+
+    // A prepared permanent's copy of its prepare spell (rule 722.3c): the
+    // permanent's controller may cast it from exile, as the spell it is.
+    for (const card of this.state.zones.shared.exile) {
+      const link = this.state.objects[card]?.preparedFor;
+      if (link === undefined || !this.preparedCopyHolds(card)) continue;
+      if (this.state.objects[link.permanent].controller !== player) continue;
+      const spellDef = this.registry.get(this.state.objects[card].cardName);
+      out.push(
+        ...this.castSpellActions(player, card, spellDef.name, spellDef, {
+          via: "prepared",
+          costString: spellDef.manaCost,
         }),
       );
     }
@@ -3320,6 +3337,8 @@ export class Game {
       !this.isRestingToken(o) ||
       // Stolen tokens keep their own layer-2 history; never fold them.
       o.controlEffects !== undefined ||
+      // Each prepared token has its own prepare spell's copy (rule 722.3c).
+      o.prepared !== undefined ||
       !this.isStackableTokenName(printedCardName(o)) ||
       // A vanilla token that's been *granted* an activated ability
       // (Cryptolith Rite) has to be tapped one at a time — until there are
@@ -9007,6 +9026,16 @@ export class Game {
       if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
+    } else if (via === "prepared") {
+      // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
+      // from exile by that permanent's controller while the link holds.
+      const link = this.state.objects[cardId].preparedFor;
+      if (link === undefined || !this.preparedCopyHolds(cardId)) {
+        return `${def.name} is not a prepared permanent's spell`;
+      }
+      if (this.state.objects[link.permanent].controller !== player) {
+        return `${player} doesn't control the prepared permanent`;
+      }
     } else if (via === "adventure") {
       // Rule 715.3 — cast the creature (face 0) from exile after its adventure.
       const object = this.state.objects[cardId];
@@ -9743,6 +9772,9 @@ export class Game {
     // Where it's cast from, before anything moves it (601.2a) — see the
     // `spell-cast` event's `from`.
     const castFrom = object.zone;
+    // A prepare spell's copy (rule 722.3c): the permanent it belongs to, read
+    // before the move to the stack ends the link.
+    const preparedBy = via === "prepared" ? object.preparedFor?.permanent : undefined;
     // Set the face up front so `printedCardName` / characteristics resolve to
     // the chosen face for the rest of this method and while on the stack.
     if (object.faces !== undefined) object.face = face;
@@ -10079,6 +10111,12 @@ export class Game {
     this.recordCastName(player, cardId);
     this.state.spellsCastThisTurn += 1;
     object.castFrom = castFrom;
+    // The permanent loses the prepared designation as its copy becomes cast
+    // (rules 722.3c, 601.2i), and the copy is "a prepared spell".
+    if (preparedBy !== undefined) {
+      object.preparedSpell = true;
+      this.unprepare(preparedBy);
+    }
 
     this.emit({
       type: "spell-cast",
@@ -17604,6 +17642,12 @@ export class Game {
         object.skipsNextUntap = true;
       },
       untapPermanent: (target) => this.setTapped(target, false),
+      becomePrepared: (id) => {
+        for (let n = this.state.objects[id]?.stackCount ?? 1; n > 1; n -= 1) {
+          this.becomePrepared(this.splitOneFromStack(id));
+        }
+        this.becomePrepared(id);
+      },
       destroyPermanent: (target, cantBeRegenerated) =>
         this.destroyByEffect(target, true, cantBeRegenerated === true),
       destroyAll: (filter, onlyDamaged, cantBeRegenerated) =>
@@ -21092,6 +21136,14 @@ export class Game {
       for (const c of entering.counters) {
         this.emit({ type: "counter-added", object: id, counter: c.kind, amount: c.amount, by: controller });
       }
+      // Entering prepared (rule 722.3a), each token makes a copy of its own
+      // (722.3c): a batch is never one prepared stack.
+      if (entering.prepared) {
+        for (let n = this.state.objects[id].stackCount ?? 1; n > 1; n -= 1) {
+          this.becomePrepared(this.splitOneFromStack(id));
+        }
+        this.becomePrepared(id);
+      }
     }
     return id;
   }
@@ -24554,7 +24606,7 @@ export class Game {
     via: CastVia | undefined,
     player: PlayerId | undefined,
   ): readonly string[] {
-    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure") return [];
+    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" && via !== "prepared") return [];
     const costs: string[] = def.evoke !== null ? [def.evoke.cost] : [];
     if (player === undefined) return costs;
     const fromHand = via === undefined && this.state.zones.perPlayer[player].hand.includes(cardId);
@@ -24654,7 +24706,8 @@ export class Game {
     if (def.alternativeCost !== null) return def.alternativeCost;
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
-    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure") {
+    if (via !== undefined && via !== "impulse" && via !== "graveyard-permission" && via !== "adventure" &&
+      via !== "prepared") {
       return null;
     }
     if (caster === undefined) return null;
@@ -27241,6 +27294,7 @@ export class Game {
     let tapped = effectTapped || copyEnter?.tapped === true;
     let untapped = false;
     let transformed = effectTransformed;
+    let prepared = false;
     let painIfUntapped = 0;
     let mayPayLife = 0;
     const counters: { kind: string; amount: number }[] = [];
@@ -27290,6 +27344,7 @@ export class Game {
       if (r.painIfUntapped !== undefined) painIfUntapped = r.painIfUntapped;
       if (r.mayPayLife !== undefined) mayPayLife = r.mayPayLife;
       if (r.transformed) transformed = true;
+      if (r.prepared === true) prepared = true;
       if (r.counters) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
         // as it enters, never counting itself or what enters with it (Aeve,
@@ -27352,6 +27407,7 @@ export class Game {
       painIfUntapped: tapped ? 0 : painIfUntapped,
       mayPayLife: tapped || untapped ? 0 : mayPayLife,
       riotHaste,
+      prepared,
     };
   }
 
@@ -28383,6 +28439,11 @@ export class Game {
     // ends when the card changes zones. `resolveTopOfStack` re-sets it *after*
     // the move to exile that creates the state.
     object.onAdventure = false;
+    // The prepared designation was the permanent's, and a prepare spell's
+    // copy is cast from exile only while its link holds (rule 722.3c): a
+    // zone change ends both (400.7). `castSpell` reads the link first.
+    object.prepared = undefined;
+    object.preparedFor = undefined;
     // A multi-face card reverts to its front face while not on the battlefield
     // or stack (rule 712); casting/playing it sets the face again.
     if (object.faces !== undefined && to !== "battlefield" && to !== "stack") {
@@ -28507,6 +28568,9 @@ export class Game {
           by: enteringController,
         });
       }
+      // It enters prepared (rule 722.3a): the designation, and its prepare
+      // spell's copy in exile, are there before anything sees it arrive.
+      if (entering.prepared) this.becomePrepared(id);
       // The door it entered with unlocked was unlocked (rule 709.5h): its
       // "when you unlock this door" triggers as it enters.
       const door = object.doors?.left === true ? "left" : object.doors?.right === true ? "right" : null;
@@ -28788,6 +28852,9 @@ export class Game {
       for (let i = list.length - 1; i >= 0; i -= 1) {
         const object = this.state.objects[list[i]];
         if (object?.isCopy !== true) continue;
+        // A prepare spell's copy stays while its permanent is still on the
+        // battlefield and prepared (rule 722.3c — the exception to 704.5e).
+        if (object.zone === "exile" && this.preparedCopyHolds(list[i])) continue;
         delete this.state.objects[list[i]];
         list.splice(i, 1);
         removed = true;
@@ -28803,6 +28870,57 @@ export class Game {
     sweep(this.state.zones.shared.command);
     if (removed) invalidateComputedCache();
     return removed;
+  }
+
+  /** Whether `copyId`, a prepare spell's copy in exile, still belongs to a
+   * prepared permanent: the same one (rule 400.7), on the battlefield, still
+   * prepared with this copy (rule 722.3c). */
+  private preparedCopyHolds(copyId: ObjectId): boolean {
+    const link = this.state.objects[copyId]?.preparedFor;
+    if (link === undefined) return false;
+    const permanent = this.state.objects[link.permanent];
+    return (
+      permanent !== undefined &&
+      permanent.zone === "battlefield" &&
+      (permanent.zoneChangeCount ?? 0) === link.stint &&
+      permanent.prepared?.copy === copyId
+    );
+  }
+
+  /**
+   * `id` becomes prepared (rule 722.3a): only a permanent with a prepare
+   * spell (`CardDefinition.prepareSpell`, copiable — 722.2b; a face-down one
+   * has none), and only one not prepared already. As it gains the
+   * designation its controller makes a copy of that spell in exile, with
+   * only the spell's characteristics (722.3c), to cast while it lasts.
+   * Whether it became prepared.
+   */
+  private becomePrepared(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || object.prepared !== undefined) return false;
+    if (object.faceDown !== undefined) return false;
+    const spell = this.registry.get(printedCardName(object)).prepareSpell;
+    if (spell === null) return false;
+    const player = object.controller;
+    const copy = this.makeCardObject(spell, player, { zone: "exile" });
+    const made = this.state.objects[copy];
+    made.isCopy = true;
+    made.preparedFor = { permanent: id, stint: object.zoneChangeCount ?? 0 };
+    this.state.zones.shared.exile.push(copy);
+    object.prepared = { copy };
+    invalidateComputedCache();
+    this.emit({ type: "became-prepared", object: id, copy, player });
+    return true;
+  }
+
+  /** `id` loses the prepared designation (rule 722.3b); its copy in exile
+   * ceases to exist with the next state-based check (704.5e). */
+  private unprepare(id: ObjectId): void {
+    const object = this.state.objects[id];
+    if (object?.prepared === undefined) return;
+    object.prepared = undefined;
+    invalidateComputedCache();
+    this.emit({ type: "became-unprepared", object: id });
   }
 
   private zoneList(zone: ZoneType, owner: PlayerId): ObjectId[] {

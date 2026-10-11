@@ -55,6 +55,7 @@ export function CardFlags({
     goaders.length === 0 &&
     !obj.suspected &&
     !obj.ringBearer &&
+    obj.preparedSpell === undefined &&
     held === 0 &&
     chosen === null &&
     enchanting === null &&
@@ -95,6 +96,14 @@ export function CardFlags({
           title="Ring-bearer: it's legendary and can't be blocked by creatures with greater power — the Ring emblem says what else"
         >
           {compact ? 'Ring' : 'Ring-bearer'}
+        </span>
+      ) : null}
+      {obj.preparedSpell !== undefined ? (
+        <span
+          className="card-flag prepared"
+          title="Prepared: its controller may cast a copy of its spell — open its menu. Doing so unprepares it."
+        >
+          {compact ? 'Prep' : 'prepared'}
         </span>
       ) : null}
       {level !== null ? (
