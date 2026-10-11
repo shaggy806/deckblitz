@@ -202,6 +202,9 @@ interface DrawnCard {
   readonly fromY: number
   readonly toX: number
   readonly toY: number
+  /** The library pile's card width, which the drawn card keeps (the user,
+   * 2026-10-11: a fixed small back didn't match the deck it came off). */
+  readonly width: number
   /** The owner's seat colour, off their quadrant, for the cardback's tint
    * (App.css's `.seat-tinted`) — the flight is portalled out of it. */
   readonly seat: string
@@ -217,7 +220,7 @@ interface DrawnCard {
  */
 function drawFlight(
   player: PlayerId,
-): { fromX: number; fromY: number; toX: number; toY: number; seat: string } | null {
+): { fromX: number; fromY: number; toX: number; toY: number; width: number; seat: string } | null {
   const pile = libraryCardOf(player)
   const panel = document.querySelector<HTMLElement>(`[data-player-id="${CSS.escape(player)}"]`)
   const cell = panel?.closest<HTMLElement>('.quadrant-cell')
@@ -230,6 +233,8 @@ function drawFlight(
     fromY: p.top + p.height / 2 - window.innerHeight / 2,
     toX: to.x,
     toY: to.y,
+    // The pile's own card size: the card drawn is one of them.
+    width: p.width,
     seat: getComputedStyle(cell).getPropertyValue('--seat').trim(),
   }
 }
@@ -2732,59 +2737,78 @@ export function AnimationLayer({
     return null
   }
 
-  return createPortal(
-    <div className="anim-layer">
-      {playedCards.map((c) => (
-        <div
-          key={c.key}
-          className={`played-card-fly${c.holds ? ' holds' : ''}${c.fromHand ? ' from-hand' : ''}`}
-          data-played-key={c.key}
-          // Read by `liftSpotlight` to find the card its flight takes.
-          data-played-obj={c.obj.id}
-          style={
-            { '--fly-x': `${c.originX}px`, '--fly-y': `${c.originY}px` } as CSSProperties
-          }
-        >
-          <div className={`played-card-caption ${c.seatClass ?? ''}`}>{c.caption}</div>
-          <CardTile obj={c.obj} layout="art-first" />
-        </div>
-      ))}
-      {drawnCards.map((c) => (
-        <div
-          key={c.key}
-          className="drawn-card-fly seat-tinted"
-          style={
-            {
-              '--seat': c.seat,
-              '--draw-from-x': `${c.fromX}px`,
-              '--draw-from-y': `${c.fromY}px`,
-              '--draw-to-x': `${c.toX}px`,
-              '--draw-to-y': `${c.toY}px`,
-            } as CSSProperties
-          }
-        >
-          <div className="card-back" />
-        </div>
-      ))}
-      {reveals.map((r) => (
-        <div key={r.key} className="reveal-show">
-          <div className="reveal-caption">{r.caption}</div>
-          <div className="reveal-cards">
-            {r.cards.map((obj) => (
-              <CardTile key={obj.id} obj={obj} layout="art-first" />
+  // Draws in a layer of their own, under the dialogs (the mulligan popup):
+  // an opponent's new hand flew over ours while we chose (the user,
+  // 2026-10-11). Everything else stays on top of everything.
+  const draws =
+    drawnCards.length === 0
+      ? null
+      : createPortal(
+          <div className="anim-layer anim-layer-draws">
+            {drawnCards.map((c) => (
+              <div
+                key={c.key}
+                className="drawn-card-fly seat-tinted"
+                style={
+                  {
+                    '--seat': c.seat,
+                    '--draw-from-x': `${c.fromX}px`,
+                    '--draw-from-y': `${c.fromY}px`,
+                    '--draw-to-x': `${c.toX}px`,
+                    '--draw-to-y': `${c.toY}px`,
+                    '--draw-w': `${c.width}px`,
+                  } as CSSProperties
+                }
+              >
+                <div className="card-back" />
+              </div>
             ))}
-          </div>
-        </div>
-      ))}
-      {activeBanner ? (
-        <div
-          key={activeBanner.key}
-          className={`tp-banner tp-${activeBanner.kind} ${activeBanner.seatClass ?? ''}`}
-        >
-          {activeBanner.text}
-        </div>
-      ) : null}
-    </div>,
-    document.body,
+          </div>,
+          document.body,
+        )
+  if (playedCards.length === 0 && reveals.length === 0 && !activeBanner) return draws
+
+  return (
+    <>
+      {draws}
+      {createPortal(
+        <div className="anim-layer">
+          {playedCards.map((c) => (
+            <div
+              key={c.key}
+              className={`played-card-fly${c.holds ? ' holds' : ''}${c.fromHand ? ' from-hand' : ''}`}
+              data-played-key={c.key}
+              // Read by `liftSpotlight` to find the card its flight takes.
+              data-played-obj={c.obj.id}
+              style={
+                { '--fly-x': `${c.originX}px`, '--fly-y': `${c.originY}px` } as CSSProperties
+              }
+            >
+              <div className={`played-card-caption ${c.seatClass ?? ''}`}>{c.caption}</div>
+              <CardTile obj={c.obj} layout="art-first" />
+            </div>
+          ))}
+          {reveals.map((r) => (
+            <div key={r.key} className="reveal-show">
+              <div className="reveal-caption">{r.caption}</div>
+              <div className="reveal-cards">
+                {r.cards.map((obj) => (
+                  <CardTile key={obj.id} obj={obj} layout="art-first" />
+                ))}
+              </div>
+            </div>
+          ))}
+          {activeBanner ? (
+            <div
+              key={activeBanner.key}
+              className={`tp-banner tp-${activeBanner.kind} ${activeBanner.seatClass ?? ''}`}
+            >
+              {activeBanner.text}
+            </div>
+          ) : null}
+        </div>,
+        document.body,
+      )}
+    </>
   )
 }
