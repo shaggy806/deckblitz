@@ -86,6 +86,19 @@ describe("a split card", () => {
     expect(printedCardName(game.state.objects[card])).toBe("Expansion // Explosion");
   });
 
+  it("shows each half's cost while it's the whole card, and only the half's own on the stack", () => {
+    const { game, card } = setUp();
+    // The printed card's two costs, left and right, for the client to draw
+    // apart rather than as their sum.
+    expect(game.viewFor(B).objects[card]).toBeUndefined();
+    expect(game.viewFor(A).objects[card]?.splitCosts).toEqual(["{U/R}{U/R}", "{X}{U}{U}{R}{R}"]);
+    game.dispatch({ type: "cast-spell", player: A, card, face: 2, xValue: 1, targets: [player(B), player(A)] });
+    expect(game.viewFor(A).objects[card]?.splitCosts).toBeUndefined();
+    expect(game.viewFor(A).objects[card]?.manaCost).toBe("{X}{U}{U}{R}{R}");
+    game.advanceUntil(quiet);
+    expect(game.viewFor(B).objects[card]?.splitCosts).toEqual(["{U/R}{U/R}", "{X}{U}{U}{R}{R}"]);
+  });
+
   it("copies a spell of mana value 4 or less with Expansion, not a bigger one", () => {
     const { game, card } = setUp();
     const [first, second] = [0, 1].map(() => game.debugSpawn("Grizzly Bears", B, "battlefield"));

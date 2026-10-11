@@ -120,6 +120,10 @@ export interface VisibleObject {
     readonly subtypes: readonly string[];
     readonly text: string;
   };
+  /** A split card shown whole, off the battlefield (rule 709.4): each
+   * half's mana cost, left then right, so it can be drawn with two costs
+   * as the printed card is rather than their sum. Absent otherwise. */
+  readonly splitCosts?: readonly [string | null, string | null];
   /** A Scryfall link pinning this card's art (its up face's / copied card's),
    * or `null` for the by-name lookup. See `CardDefinition.art`. Carries the
    * printing this card's owner brought when they chose one (`DeckList.printings`). */
@@ -466,6 +470,7 @@ function visible(
     ...(nameOf(object) !== printedCardName(object) ? { name: nameOf(object) } : {}),
     faces: object.faces === undefined || faceDown !== undefined ? null : [...object.faces],
     ...(faceDown !== undefined ? {} : spellFaceOf(registry, object)),
+    ...(faceDown !== undefined ? {} : splitCostsOf(registry, object)),
     art: faceDown !== undefined ? null : (printing ?? cardDef.art),
     faceIsBack: faceDown !== undefined ? false : faceIsBack,
     ...(onBattlefield && computed.subtypes.includes("Class") ? { classLevel: object.classLevel ?? 1 } : {}),
@@ -597,6 +602,18 @@ function spellFaceOf(registry: CardRegistry, object: GameObject): { spellFace?: 
       text: half.text,
     },
   };
+}
+
+/** `VisibleObject.splitCosts` for `object`, as a spread: a split card's two
+ * halves' costs while it's the whole card (rule 709.4) — in a hand, a
+ * library, a graveyard, exile. A half cast is that half alone (709.3), and a
+ * Room on the battlefield shows its doors instead (`doors`). */
+function splitCostsOf(registry: CardRegistry, object: GameObject): { splitCosts?: VisibleObject["splitCosts"] } {
+  if (object.zone === "battlefield" || object.kind !== "card" || (object.face ?? 0) !== 0) return {};
+  const [whole, left, right] = object.faces ?? [];
+  if (whole === undefined || left === undefined || right === undefined) return {};
+  if (!registry.has(whole) || !registry.has(left) || !registry.has(right) || !registry.get(whole).split) return {};
+  return { splitCosts: [registry.get(left).manaCost, registry.get(right).manaCost] };
 }
 
 /**

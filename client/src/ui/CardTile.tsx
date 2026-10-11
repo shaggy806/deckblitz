@@ -271,6 +271,37 @@ export function CardTile({
       el.style.setProperty('--name-scale', String(scale))
     }
   }, [artFirst, obj.name, face])
+  // A split card's two costs share the top with its name: seven pips at full
+  // size outrun a hand card's width, the halves running into each other. So
+  // they shrink together, in steps, until the hand's two overlays keep a gap
+  // and a title bar keeps its name a quarter of the row, down to 60%.
+  const tileRef = useRef<HTMLButtonElement>(null)
+  const splitKey = obj.splitCosts?.join(' ') ?? null
+  useLayoutEffect(() => {
+    const tile = tileRef.current
+    if (!tile || splitKey === null) return
+    tile.style.removeProperty('--cost-scale')
+    const left = tile.querySelector<HTMLElement>('.ct-cost-left')
+    const right = tile.querySelector<HTMLElement>('.ct-cost-right')
+    const title = tile.querySelector<HTMLElement>('.ct-title')
+    const name = title?.querySelector<HTMLElement>('.ct-name') ?? null
+    if (!left || !right) return
+    // Offsets, not client rects: a hovered hand card is scaled by a
+    // transform, which a ratio shouldn't see.
+    const fits = (): boolean => {
+      if (artFirst) {
+        const l = left.parentElement ?? left
+        const r = right.parentElement ?? right
+        return r.offsetLeft - (l.offsetLeft + l.offsetWidth) >= 3
+      }
+      return title === null || name === null || name.offsetWidth >= title.clientWidth / 4
+    }
+    let scale = 1
+    while (!fits() && scale > 0.6) {
+      scale = Math.round((scale - 0.05) * 100) / 100
+      tile.style.setProperty('--cost-scale', String(scale))
+    }
+  }, [artFirst, splitKey, obj.name, face])
   const nameNode = (
     <span className="ct-name" ref={artFirst ? nameRef : undefined}>
       {faceDown ?? obj.name ?? face}
@@ -287,7 +318,19 @@ export function CardTile({
   // matters at a glance. Commander tax is not in here — it has its own
   // badge, just below.
   const shownCost = obj.effectiveManaCost ?? obj.manaCost
-  const costNode = obj.manaCost ? (
+  // A split card shown whole has two costs, one per half, drawn apart at
+  // the top's two ends as the printed card has them rather than as their
+  // sum (the user, 2026-10-10: Expansion // Explosion). Each is the half's
+  // printed cost: a reduction is to whichever half is cast.
+  const [leftCost, rightCost] = obj.splitCosts ?? [null, null]
+  const halfCost = (cost: string | null, side: 'left' | 'right') =>
+    cost ? (
+      <span className={`ct-cost ct-cost-${side}`} title={`${obj.faces?.[side === 'left' ? 1 : 2] ?? ''} ${cost}`}>
+        <CostSymbols shown={cost} printed={cost} />
+      </span>
+    ) : null
+  const leftCostNode = obj.splitCosts ? halfCost(leftCost, 'left') : null
+  const costNode = obj.splitCosts ? halfCost(rightCost, 'right') : obj.manaCost ? (
     <span
       className={`ct-cost${obj.effectiveManaCost !== undefined ? ' reduced' : ''}`}
       title={
@@ -327,12 +370,14 @@ export function CardTile({
   return (
     <button
       type="button"
+      ref={tileRef}
       className={classes}
       onClick={clickable ? onClick : undefined}
       disabled={!clickable}
     >
       {artFirst ? null : (
         <span className="ct-title">
+          {leftCostNode}
           {nameNode}
           {costNode}
         </span>
@@ -347,6 +392,7 @@ export function CardTile({
             onError={() => recordArtFailure(artSrc)}
           />
         ) : null}
+        {artFirst && leftCostNode ? <span className="ct-cost-overlay left">{leftCostNode}</span> : null}
         {artFirst && costNode ? <span className="ct-cost-overlay">{costNode}</span> : null}
         {/* In the art box rather than at a fixed offset from the card's top,
             which assumed a one-line title: a long name wraps where a card

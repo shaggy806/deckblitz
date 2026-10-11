@@ -18,11 +18,6 @@ title; when one lands, delete it in both. The animation follow-ups are in
   revealed, it should be flipped over (face up). Where: the shuffle animation's scheduling
   (`game/animationSchedule.ts`) and drawing (`ui/AnimationLayer.tsx`), with a flip step
   before it, and a flip when the library top first shows face up.
-- **A split card's two costs are drawn as one** (the user, 2026-10-10): for cards like
-  Expansion // Explosion, the mana pips for the cost should be split onto the left and right
-  side of the top of the card — the goal is for it to render with two separate costs. Where:
-  `ui/CardTile.tsx`'s cost (`costNode`, `CostSymbols` over `obj.manaCost`), drawing each half's
-  cost on its own side.
 - **A few views still move on a click** (the jitter sweep, 2026-10-10, after the in-game
   ones were fixed — the Pass row, decision panel, phase pips, hand row, History, zone viewer,
   split menus, player panel badges, lobby, library overlay and scroll boxes). What's left, each
