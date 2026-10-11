@@ -23,6 +23,8 @@ export interface SeatDeck {
   readonly cards: readonly string[];
   /** No commanders configured means a plain (non-Commander) 40-card deck. */
   readonly commanders?: readonly string[];
+  /** Its precon's printings (`SampleDeck.printings`). */
+  readonly printings?: Readonly<Record<string, string>>;
 }
 
 /** Every seat a room could have, in seating order — sliced to however many
@@ -32,6 +34,7 @@ export const SEATS: readonly SeatDeck[] = [ALICE, BOB, CAROL, DAVE].map((id, i) 
   name: BENCH_DECKS[i].name,
   commanders: BENCH_DECKS[i].commanders,
   cards: BENCH_DECKS[i].cards,
+  ...(BENCH_DECKS[i].printings !== undefined ? { printings: BENCH_DECKS[i].printings } : {}),
 }));
 
 /** Alice's and Bob's decks addressed by name, for tests that construct a

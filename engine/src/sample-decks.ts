@@ -44,6 +44,8 @@
  * now implemented, so none can outlive the reason for it.
  */
 
+import { PRECON_PRINTINGS } from "./starter-printings.js";
+
 export interface PreconSubstitution {
   /** The printed card the engine doesn't implement yet. */
   readonly original: string;
@@ -70,6 +72,27 @@ export interface SampleDeck {
    * swapped in. */
   readonly upgradeOf?: string;
   readonly swaps?: readonly (readonly [cut: string, add: string])[];
+  /**
+   * The printing each card had in the real product: card name → Scryfall
+   * card id, as a saved deck's `printings` (the client's `SavedDeck`), so a
+   * starter deck shows its precon's art. Generated into
+   * `starter-printings.ts` from MTGJSON's deck files
+   * (`scripts/gen-starter-printings.mjs`). Only the cards the deck plays: a
+   * stand-in, and an upgraded deck's added card, has the pool's default
+   * printing.
+   */
+  readonly printings?: Readonly<Record<string, string>>;
+}
+
+/** `printings` narrowed to the cards a deck plays (its commanders included). */
+function printingsFor(
+  printings: Readonly<Record<string, string>> | undefined,
+  plays: readonly string[],
+): Readonly<Record<string, string>> | undefined {
+  if (printings === undefined) return undefined;
+  const names = new Set(plays);
+  const kept = Object.entries(printings).filter(([name]) => names.has(name));
+  return kept.length > 0 ? Object.fromEntries(kept) : undefined;
 }
 
 const list = (entries: readonly (readonly [string, number])[]): string[] =>
@@ -96,6 +119,8 @@ function precon(deck: {
       throw new Error(`${deck.name}: substitution for ${original}, which isn't in the printed list`);
     }
   }
+  const cards = printed.map((name) => swap.get(name) ?? name);
+  const printings = printingsFor(PRECON_PRINTINGS[deck.name], [deck.commander, ...cards]);
   return {
     name: deck.name,
     ...(deck.bench === true ? { bench: true } : {}),
@@ -103,7 +128,8 @@ function precon(deck: {
     description: deck.description,
     printed,
     substitutions: deck.substitutions,
-    cards: printed.map((name) => swap.get(name) ?? name),
+    cards,
+    ...(printings !== undefined ? { printings } : {}),
   };
 }
 
@@ -1414,6 +1440,9 @@ function upgraded(
     if (cards.includes(add)) throw new Error(`${name}: adds ${add}, which it already plays`);
     cards[at] = add;
   }
+  // The precon's printings for the cards it keeps; what it adds has the
+  // pool's default.
+  const printings = printingsFor(source.printings, [...(source.commanders ?? []), ...cards]);
   return {
     name,
     commanders: source.commanders,
@@ -1421,6 +1450,7 @@ function upgraded(
     cards,
     upgradeOf: base,
     swaps,
+    ...(printings !== undefined ? { printings } : {}),
   };
 }
 

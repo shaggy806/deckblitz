@@ -295,7 +295,12 @@ export class PendingRoom {
   private fallbackDeck(player: PlayerId): PendingDeck {
     const example = SEATS.find((s) => s.id === player);
     if (example === undefined) throw new Error(`no such seat: ${player}`);
-    return { cards: example.cards, commanders: example.commanders, name: example.name };
+    return {
+      cards: example.cards,
+      commanders: example.commanders,
+      name: example.name,
+      ...(example.printings !== undefined ? { printings: example.printings } : {}),
+    };
   }
 
   /** A name for the bot playing `deck` in `player`'s seat, unlike any other

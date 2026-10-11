@@ -24,7 +24,13 @@ export function randomBotDeck(
   const free = decks.filter((d) => !taken.has(d.name))
   const pool: readonly SampleDeck[] = free.length > 0 ? free : decks
   const deck = pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))]
-  return { cards: deck.cards, commanders: deck.commanders, name: deck.name }
+  return {
+    cards: deck.cards,
+    commanders: deck.commanders,
+    name: deck.name,
+    // Its precon's art, as the deck builder shows the starter.
+    ...(deck.printings !== undefined ? { printings: deck.printings } : {}),
+  }
 }
 
 /**

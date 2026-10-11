@@ -80,3 +80,35 @@ describe("UPGRADED_DECKS", () => {
     });
   }
 });
+
+describe("starter deck printings", () => {
+  const SCRYFALL_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
+  it("give every card a precon plays from the real product its printing there, and nothing else one", () => {
+    for (const deck of SAMPLE_DECKS) {
+      if (deck.printed === undefined) continue;
+      const printings = deck.printings ?? {};
+      const standIns = new Set((deck.substitutions ?? []).map((s) => s.substitute));
+      for (const name of [...(deck.commanders ?? []), ...deck.cards]) {
+        if (standIns.has(name)) {
+          expect(printings[name], `${deck.name}: stand-in ${name}`).toBeUndefined();
+        } else {
+          expect(printings[name], `${deck.name}: ${name}`).toMatch(SCRYFALL_ID);
+        }
+      }
+    }
+  });
+
+  it("carry into an upgraded deck for the cards it keeps, not the ones it adds", () => {
+    for (const deck of UPGRADED_DECKS) {
+      const base = SAMPLE_DECKS.find((d) => d.name === deck.upgradeOf);
+      for (const [cut, add] of deck.swaps ?? []) {
+        expect(deck.printings?.[add], `${deck.name}: ${add}`).toBeUndefined();
+        expect(deck.printings?.[cut], `${deck.name}: ${cut}`).toBeUndefined();
+      }
+      for (const [name, id] of Object.entries(deck.printings ?? {})) {
+        expect(base?.printings?.[name]).toBe(id);
+      }
+    }
+  });
+});

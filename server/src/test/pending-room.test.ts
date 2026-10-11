@@ -87,8 +87,10 @@ describe("PendingRoom", () => {
     expect(room.seatStatuses().find((s) => s.player === ALICE)?.deck?.commanders).toEqual([
       { name: "Ureni of the Unwritten", printing: id },
     ]);
+    // Bob brought nothing, so he plays his seat's starter deck — and its
+    // precon's printing for its commander.
     expect(room.seatStatuses().find((s) => s.player === BOB)?.deck?.commanders.map((c) => c.printing)).toEqual([
-      null,
+      SEATS[1].printings?.[SEATS[1].commanders![0]] ?? null,
     ]);
   });
 
@@ -192,7 +194,7 @@ describe("PendingRoom", () => {
     expect(bobStatus?.isBot).toBe(true);
     expect(bobStatus?.deck).toEqual({
       name: SEATS[1].name,
-      commanders: [{ name: SEATS[1].commanders![0], printing: null }],
+      commanders: [{ name: SEATS[1].commanders![0], printing: SEATS[1].printings?.[SEATS[1].commanders![0]] ?? null }],
     });
     expect(() => room.addBot(BOB)).toThrow("already has a bot");
 

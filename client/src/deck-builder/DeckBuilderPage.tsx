@@ -242,6 +242,8 @@ export function DeckBuilderPage() {
               name: selectedStarter.name,
               commanders: commandersOf(selectedStarter),
               cards: selectedStarter.cards,
+              // Its precon's art (`SampleDeck.printings`).
+              ...(selectedStarter.printings !== undefined ? { printings: selectedStarter.printings } : {}),
             }}
             isActive={isActive({ kind: 'starter', index: starterIndex })}
             onMakeActive={() => markActive({ kind: 'starter', index: starterIndex })}

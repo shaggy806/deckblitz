@@ -197,6 +197,8 @@ export function duplicateStarter(index: number): SavedDeck | null {
     name: `${source.name} (copy)`,
     commanders: commandersOf(source),
     cards: source.cards,
+    // A copy keeps its precon's printings, as the starter shows them.
+    ...(source.printings !== undefined ? { printings: source.printings } : {}),
   }
   writeDecks([...readDecks(), copy])
   return copy
@@ -237,7 +239,7 @@ export function commanderPrintings(deck: DeckContents): readonly SeatCommander[]
 function starterContents(index: number): DeckContents | null {
   const deck = STARTER_DECKS[index]
   if (deck === undefined) return null
-  return { name: deck.name, commanders: commandersOf(deck), cards: deck.cards }
+  return { name: deck.name, commanders: commandersOf(deck), cards: deck.cards, printings: deck.printings }
 }
 
 /** The active deck's display name + card data, regardless of whether it's a
@@ -279,6 +281,7 @@ export function listPickableDecks(): readonly PickableDeck[] {
       name: d.name,
       commanders: commandersOf(d),
       cards: d.cards,
+      printings: d.printings,
     })),
   ]
 }
