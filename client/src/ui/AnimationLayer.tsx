@@ -2026,6 +2026,9 @@ function runReturnHand(seat: PlayerId): number {
 
 /** At most how many cards a shuffle twists out over its pile. */
 const SHUFFLE_CARDS = 7
+/** Of a shuffle's beat, how long a revealed top card takes to turn face down
+ * first (`runShuffle`). */
+const SHUFFLE_FLIP_MS = 360
 /** How far apart the shuffle's bottom and top cards turn, and slide (in
  * card widths), at full swing. */
 const SHUFFLE_TWIST_DEG = 64
@@ -2060,8 +2063,17 @@ function runShuffle(player: PlayerId): void {
   const height = Math.min(r.height, r.width * 1.4)
   const seat = getComputedStyle(top).getPropertyValue('--seat').trim()
   const total = scaled(SHUFFLE_STEP_MS)
-  const stagger = total * 0.025
-  const duration = total - stagger * (n - 1)
+  // A revealed top card turns face down before the pile is shuffled (the
+  // user, 2026-10-10): it swings edge-on, the top card back swings in where
+  // it was, and the shuffle takes the rest of the beat. The tile stays
+  // edge-on until the shuffled board replaces it.
+  const revealed = top.classList.contains('card-tile')
+  const flip = revealed ? scaled(SHUFFLE_FLIP_MS) : 0
+  if (revealed) {
+    top.animate([{ rotate: 'y 0deg' }, { rotate: 'y 90deg' }], { duration: flip / 2, easing: 'ease-in', fill: 'forwards' })
+  }
+  const stagger = (total - flip) * 0.025
+  const duration = total - flip - stagger * (n - 1)
   // How far the outermost cards reach past the pile's sides at full swing:
   // their swing, and the corners a turned card sticks out by.
   const swing = SHUFFLE_TWIST_DEG / 2
@@ -2091,6 +2103,20 @@ function runShuffle(player: PlayerId): void {
       number.textContent = pileCount.textContent
     }
     document.body.appendChild(card)
+    if (revealed) {
+      // Hidden while the face turns away; the top one swings in edge-on
+      // after it, and the rest are under it once it's there.
+      const top = i === n - 1
+      card.animate([{ opacity: 0 }, { opacity: 0 }], { duration: top ? flip / 2 : flip })
+      if (top) {
+        card.animate([{ rotate: 'y 90deg' }, { rotate: 'y 0deg' }], {
+          duration: flip / 2,
+          delay: flip / 2,
+          easing: 'ease-out',
+          fill: 'backwards',
+        })
+      }
+    }
     // From the bottom card (-0.5) to the top (+0.5): the further from the
     // middle, the further it swings, so the two ends cross.
     const f = i / (n - 1) - 0.5
@@ -2106,7 +2132,7 @@ function runShuffle(player: PlayerId): void {
         { transform: `translate(${shift * 0.15 + dx * 0.15}px, ${rise}px) rotate(${angle * 0.15}deg) scale(1)`, offset: 0.86 },
         { transform: `translate(0px, ${rise}px) rotate(0deg) scale(1)` },
       ],
-      { duration, delay: i * stagger, easing: 'ease-in-out', fill: 'both' },
+      { duration, delay: flip + i * stagger, easing: 'ease-in-out', fill: 'both' },
     )
     a.onfinish = () => card.remove()
     a.oncancel = () => card.remove()

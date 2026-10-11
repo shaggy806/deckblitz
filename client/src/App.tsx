@@ -3214,8 +3214,11 @@ function Table({
    * (`LibraryTopCard`). A card playable more than one way (a modal
    * double-faced card's two land faces) gets a button per way, as in the
    * hand. */
-  const libraryTopTile = (obj: VisibleObject) => {
+  const libraryTopTile = (obj: VisibleObject, pid: PlayerId) => {
     const faceOpts = mode === 'priority' ? (playFacesByCard.get(obj.id) ?? []) : []
+    // Turned face up as it's revealed: a card the board before didn't show
+    // on top (Oracle of Mul Daya arriving, a draw, a shuffle).
+    const flipIn = previousView !== null && (previousView.revealedLibraryTop[pid] ?? null) !== obj.id
     return (
       <>
         <LibraryTopCard
@@ -3223,6 +3226,7 @@ function Table({
           obj={obj}
           highlight={faceOpts.length > 0}
           onClick={() => clickHandCard(obj.id)}
+          flipIn={flipIn}
         />
         {faceOpts.length > 1
           ? faceOpts.map((a, i) => (
@@ -3269,7 +3273,7 @@ function Table({
               (which swaps the pile below for a real tile). */}
           <div className="side-zone-cards" data-library-of={pid}>
             {topObj ? (
-              libraryTopTile(topObj)
+              libraryTopTile(topObj, pid)
             ) : librarySize > 0 ? (
               <div
                 className="card-back"

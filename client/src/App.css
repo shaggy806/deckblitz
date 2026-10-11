@@ -1761,6 +1761,18 @@
   width: 100%;
   height: calc(var(--card-w) * 1.4);
 }
+/* A newly revealed top's card back, swinging away as the card turns face up
+   (LibraryTopCard's `flipIn`). */
+.library-top {
+  position: relative;
+}
+.library-top-back {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  min-height: 0;
+  pointer-events: none;
+}
 .library-top .card-tile:disabled {
   opacity: 1;
 }
