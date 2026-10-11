@@ -212,7 +212,7 @@ describe("a Signet as a mana source", () => {
   it("still counts when the lands alone would pay everything but its last mana", () => {
     // Two lands and a Signet are three mana: one land funds the Signet, which
     // makes two. A greedy planner that spends both lands on the cost first has
-    // nothing left to fund the Signet with, so the spell looked uncastable —
+    // nothing left to fund the Signet with, so the spell looked uncastable ï¿½
     // and a player skipping mana-only windows was passed out of their main
     // phase holding a castable spell.
     const game = makeGame();
@@ -295,7 +295,7 @@ describe("a filter land's hybrid activation cost", () => {
 describe("floating mana funds a converter", () => {
   // A bug report (2026-10-10): with {R} floating from a Mountain tapped by
   // hand, Mossfire Valley's `{1}, {T}: Add {R}{G}` could take that {R} and
-  // pay Rampant Growth's {1}{G} — but the planner funded a converter only from
+  // pay Rampant Growth's {1}{G} ï¿½ but the planner funded a converter only from
   // other sources, so the spell wasn't offered, the window counted as mana
   // only, and the server passed it.
   it("casts Rampant Growth with {R} floating and Mossfire Valley untapped", () => {
@@ -322,6 +322,27 @@ describe("floating mana funds a converter", () => {
     expect(game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === card)).toBe(true);
     game.dispatch({ type: "cast-spell", player: A, card, targets: [] });
     expect(game.state.zones.shared.stack).toContain(card);
+    expect(game.state.players[A].manaPool).toEqual([]);
+  });
+
+  it("funds a converter only with mana an ability's cost may spend", () => {
+    // Fuzzer seed 27 (2026-10-11): with a creature-only {W}, a {C} and a {U}
+    // floating, casting a creature spell funded Skycloud Expanse's {1} with
+    // the creature-only {W} â€” mana kept for a kind of spell can't pay an
+    // ability's cost â€” and the payment threw. The {C} funds it instead.
+    const game = makeGame();
+    open(game);
+    const [expanse] = spawn(game, ["Skycloud Expanse"]);
+    game.state.players[A].manaPool = [
+      { type: "W", restriction: { spell: { type: "creature" }, text: "Spend this mana only to cast a creature spell." } },
+      { type: "C" },
+      { type: "U" },
+    ];
+    const card = game.debugSpawn("Archaeomancer", A, "hand");
+    expect(game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === card)).toBe(true);
+    game.dispatch({ type: "cast-spell", player: A, card, targets: [] });
+    expect(game.state.zones.shared.stack).toContain(card);
+    expect(game.state.objects[expanse].tapped).toBe(true);
     expect(game.state.players[A].manaPool).toEqual([]);
   });
 

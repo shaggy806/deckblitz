@@ -661,6 +661,16 @@ function planManaPaymentOrdered(
   const spare: Record<ManaType, number> = { W: 0, U: 0, B: 0, R: 0, G: 0, C: 0 };
   for (const color of COLORS) spare[color] = pool[color] - Math.min(cost.colored[color], pool[color]);
   spare.C = pool.C - Math.min(cost.colorless, pool.C);
+  // Of those, the units a converter's own cost may take: a converter pays
+  // for an ability, not the spell, so mana kept for a kind of spell ("only
+  // to cast a creature spell") can't fund it — only an unrestricted unit or
+  // deny-list mana can (`Game.removeMana`'s rule). Fuzzer seed 27 tapped a
+  // Skycloud Expanse with the creature-only {W} beside a plain {C}.
+  const fundable = poolCounts(
+    view.pool.filter(
+      (unit) => view.canPay(unit) && (unit.restriction === undefined || unit.restriction.notSpell !== undefined),
+    ),
+  );
   const MANA_TYPES_ORDER = ["W", "U", "B", "R", "G", "C"] as const;
   const spareTotal = (): number => MANA_TYPES_ORDER.reduce((n, m) => n + spare[m], 0);
   let genericNeed = Math.max(0, cost.generic - spareTotal());
@@ -836,11 +846,13 @@ function planManaPaymentOrdered(
   const openFunded = (src: ManaSource, want: ManaType | null): Tapped | null => {
     const mark = tapped.length;
     const spareBefore = { ...spare };
+    const fundableBefore = { ...fundable };
     const genericBefore = genericNeed;
     const t = open(src, want);
     const fail = (): null => {
       tapped.length = mark;
       Object.assign(spare, spareBefore);
+      Object.assign(fundable, fundableBefore);
       genericNeed = genericBefore;
       return null;
     };
@@ -929,10 +941,11 @@ function planManaPaymentOrdered(
     const kinds = (of ?? MANA_TYPES_ORDER).filter(() => true).sort(
       (a, b) => Number(wantedColors.has(a)) - Number(wantedColors.has(b)),
     );
-    const floating = kinds.find((m) => spare[m] > 0);
+    const floating = kinds.find((m) => spare[m] > 0 && fundable[m] > 0);
     if (floating !== undefined) {
       const countedForGeneric = spareTotal() <= cost.generic;
       spare[floating] -= 1;
+      fundable[floating] -= 1;
       if (countedForGeneric) genericNeed += 1;
       return floating;
     }
