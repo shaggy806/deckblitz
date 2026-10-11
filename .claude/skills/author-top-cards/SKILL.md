@@ -57,7 +57,7 @@ broken build), do that first or tell the user.
 2. **`npm run cards:needs -w engine -- --next 60`**: the next untriaged cards
    by rank.
 3. **`npm run cards:needs -w engine -- --rank`**: what blocks the most
-   triaged cards. Every top-5000 card left is blocked by something, so
+   triaged cards. Every triaged card left is blocked by something, so
    building the leading feature is how the most-played cards get in.
 
 For each candidate: `npm run card:brief -w engine -- "Name" …` (several names

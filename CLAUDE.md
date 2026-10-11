@@ -46,9 +46,10 @@ for:
   nowhere but its own deck — and `top-commanders-gaps.json` maps every unimplemented one to the
   engine features it needs (a per-card triage over one ~245-feature vocabulary), which
   `npm run cmdrs:gaps -w engine` ranks by commanders blocked and as a greedy engine-only build
-  order. Add a feature's key to the JSON's `built` array when it lands. The card backlog is
-  `top-commander-cards.txt` (the top 5000 Commander cards by
-  EDHREC rank against the pool, ahead of more commanders), re-marked in place by `npm run cards:mark -w engine`.
+  order. Add a feature's key to the JSON's `built` array when it lands. The coverage figure is
+  `top-commander-cards.txt` (the top 5000 Commander cards by EDHREC rank against the pool, fully
+  triaged), re-marked in place by `npm run cards:mark -w engine`; new cards now come from the
+  Oracle EDHREC ranks past it.
   **The current authoring priority is simply more cards, in EDHREC rank order** (the
   `author-top-cards` skill; `npm run cards:needs -w engine -- --next 60` lists the next untriaged
   cards by rank, `-- --rank` what blocks the most triaged ones). The bots' decks' stand-ins (the
