@@ -75,6 +75,7 @@ import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
+import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
@@ -274,6 +275,7 @@ import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
+import _tokensVibraniumToken from "../tokens/vibranium-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -349,6 +351,7 @@ const shard: CardShard = {
     _poolFlameblastDragon,
     _poolFloodedGrove,
     _poolForumOfAmity,
+    _poolFranklinRichardsAscendant,
     _poolGhoulcallersAccomplice,
     _poolGiftOfStrands,
     _poolGlareOfSubdual,
@@ -550,6 +553,7 @@ const shard: CardShard = {
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensMutavaultToken,
+    _tokensVibraniumToken,
   ],
 };
 

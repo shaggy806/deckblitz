@@ -39,6 +39,7 @@ import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
 import _poolCancel from "../pool/cancel.js";
 import _poolCandlelightVigil from "../pool/candlelight-vigil.js";
 import _poolCantWakeUp from "../pool/cant-wake-up.js";
+import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
 import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
@@ -333,6 +334,7 @@ const shard: CardShard = {
     _poolCancel,
     _poolCandlelightVigil,
     _poolCantWakeUp,
+    _poolCaptainAmericaTeamLeader,
     _poolCavalierOfNight,
     _poolCelebrityFencer,
     _poolCentaurSafeguard,

@@ -67,6 +67,7 @@ import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCopperMyr from "../pool/copper-myr.js";
 import _poolCoralMerfolk from "../pool/coral-merfolk.js";
 import _poolCorsairCaptain from "../pool/corsair-captain.js";
+import _poolCosmicCrucible from "../pool/cosmic-crucible.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
@@ -125,6 +126,7 @@ import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHarrow from "../pool/harrow.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
+import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
@@ -260,7 +262,9 @@ import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
+import _poolTheGreatMound from "../pool/the-great-mound.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
+import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
@@ -366,6 +370,7 @@ const shard: CardShard = {
     _poolCopperMyr,
     _poolCoralMerfolk,
     _poolCorsairCaptain,
+    _poolCosmicCrucible,
     _poolCoverOfDarkness,
     _poolCrashOfRhinos,
     _poolCrestedSunmare,
@@ -424,6 +429,7 @@ const shard: CardShard = {
     _poolHaldanAvidArcanist,
     _poolHarrow,
     _poolHateMirage,
+    _poolHawkeyeTrickShot,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
     _poolHowlingMine,
@@ -559,7 +565,9 @@ const shard: CardShard = {
     _poolThaliaGuardianOfThraben,
     _poolTheEmperorOfPalamecia,
     _poolTheGreatGoblin,
+    _poolTheGreatMound,
     _poolTheTenRings,
+    _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,
     _poolThoughtVessel,
     _poolThranduilSindarinLiege,

@@ -260,6 +260,7 @@ import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
+import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
@@ -557,6 +558,7 @@ const shard: CardShard = {
     _poolTrashForTreasure,
     _poolTroyanGutsyExplorer,
     _poolUlamogsDreadsire,
+    _poolUltronTheAnnihilator,
     _poolUncoverTheMoonLetters,
     _poolUnsubtleMockery,
     _poolUrborgDrake,

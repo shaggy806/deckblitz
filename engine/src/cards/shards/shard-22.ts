@@ -52,6 +52,7 @@ import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
+import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
 import _poolCrystallizedSerah from "../pool/crystallized-serah.js";
 import _poolCullingRitual from "../pool/culling-ritual.js";
 import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
@@ -359,6 +360,7 @@ const shard: CardShard = {
     _poolCrimsonManticore,
     _poolCrookedCustodian,
     _poolCryptSliver,
+    _poolCrystalInhumanPrincess,
     _poolCrystallizedSerah,
     _poolCullingRitual,
     _poolCurseOfDisturbance,

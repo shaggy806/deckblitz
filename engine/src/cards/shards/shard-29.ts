@@ -52,6 +52,7 @@ import _poolDarkDeed from "../pool/dark-deed.js";
 import _poolDarkFortress from "../pool/dark-fortress.js";
 import _poolDarkOffering from "../pool/dark-offering.js";
 import _poolDarkProphecy from "../pool/dark-prophecy.js";
+import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
 import _poolDedicatedMartyr from "../pool/dedicated-martyr.js";
@@ -246,6 +247,7 @@ import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
+import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThrottle from "../pool/throttle.js";
 import _poolTimeWalk from "../pool/time-walk.js";
@@ -338,6 +340,7 @@ const shard: CardShard = {
     _poolDarkFortress,
     _poolDarkOffering,
     _poolDarkProphecy,
+    _poolDaughterOfTheDeep,
     _poolDazzlingDenial,
     _poolDecoctionModule,
     _poolDedicatedMartyr,
@@ -532,6 +535,7 @@ const shard: CardShard = {
     _poolTheMasterOfKeys,
     _poolTheQueenOfDale,
     _poolTheUrDragon,
+    _poolTheWaspWinsomeAvenger,
     _poolThoughtCourier,
     _poolThrottle,
     _poolTimeWalk,

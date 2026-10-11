@@ -155,6 +155,7 @@ import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
+import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
@@ -284,6 +285,7 @@ import _poolWindDrake from "../pool/wind-drake.js";
 import _poolWindfall from "../pool/windfall.js";
 import _poolWingedCoatl from "../pool/winged-coatl.js";
 import _poolWingedWords from "../pool/winged-words.js";
+import _poolWinterSoldierRebornAvenger from "../pool/winter-soldier-reborn-avenger.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
 import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
@@ -459,6 +461,7 @@ const shard: CardShard = {
     _poolMeetingOfMinds,
     _poolMikokoroCenterOfTheSea,
     _poolMirkoObsessiveTheorist,
+    _poolMisterFantastic,
     _poolMoggSalvage,
     _poolMoggSentry,
     _poolMrFoxglove,
@@ -588,6 +591,7 @@ const shard: CardShard = {
     _poolWindfall,
     _poolWingedCoatl,
     _poolWingedWords,
+    _poolWinterSoldierRebornAvenger,
     _poolWoodlandMystic,
     _poolWreckingBallArm,
     _poolZendikarResurgent,

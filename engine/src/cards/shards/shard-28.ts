@@ -160,6 +160,7 @@ import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
+import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
 import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
@@ -282,6 +283,7 @@ import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.
 import _poolZap from "../pool/zap.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
+import _tokensCouncilOfReeds from "../tokens/council-of-reeds.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
@@ -447,6 +449,7 @@ const shard: CardShard = {
     _poolNezumiProwler,
     _poolNightguardPatrol,
     _poolNissasPilgrimage,
+    _poolNyamiClassMotherShip,
     _poolOctomancer,
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
@@ -571,6 +574,7 @@ const shard: CardShard = {
     _poolZendikarFarguide,
   ],
   tokens: [
+    _tokensCouncilOfReeds,
     _tokensElementalTokenWildfireAwakener,
     _tokensHumanMonkToken,
     _tokensKithkinToken,

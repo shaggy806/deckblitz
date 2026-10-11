@@ -1,0 +1,437 @@
+{
+  "batch": "B55",
+  "status": "complete",
+  "ranks": "Marvel Super Heroes Commander (MSC, 2026-06-26): top 50% by EDHREC rank, its next 60 (Council of Reeds is a token, authored as one)",
+  "authored": [
+    {
+      "name": "Vibranium Strike Gauntlets",
+      "files": [
+        "engine/src/cards/pool/vibranium-strike-gauntlets.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "War Machine, Avenging Arsenal",
+      "files": [
+        "engine/src/cards/pool/war-machine-avenging-arsenal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Crystal, Inhuman Princess",
+      "files": [
+        "engine/src/cards/pool/crystal-inhuman-princess.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Vision and Scarlet Witch",
+      "files": [
+        "engine/src/cards/pool/the-vision-and-scarlet-witch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nico Minoru, Runaway",
+      "files": [
+        "engine/src/cards/pool/nico-minoru-runaway.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tri-Sentinel, Act of Vengeance",
+      "files": [
+        "engine/src/cards/pool/tri-sentinel-act-of-vengeance.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ultron the Annihilator",
+      "files": [
+        "engine/src/cards/pool/ultron-the-annihilator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vibranium Mining Mech",
+      "files": [
+        "engine/src/cards/pool/vibranium-mining-mech.ts",
+        "engine/src/cards/tokens/vibranium-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Photon, Mighty Marvel",
+      "files": [
+        "engine/src/cards/pool/photon-mighty-marvel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Age of Ultron",
+      "files": [
+        "engine/src/cards/pool/age-of-ultron.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Franklin Richards, Ascendant",
+      "files": [
+        "engine/src/cards/pool/franklin-richards-ascendant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Matt Murdock, Justice Seeker",
+      "files": [
+        "engine/src/cards/pool/matt-murdock-justice-seeker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hawkeye, Trick Shot",
+      "files": [
+        "engine/src/cards/pool/hawkeye-trick-shot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scarlet Witch, Chaotic Avenger",
+      "files": [
+        "engine/src/cards/pool/scarlet-witch-chaotic-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Captain America, Team Leader",
+      "files": [
+        "engine/src/cards/pool/captain-america-team-leader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bast, Panther Goddess",
+      "files": [
+        "engine/src/cards/pool/bast-panther-goddess.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Council of Reeds",
+      "files": [
+        "engine/src/cards/tokens/council-of-reeds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Red Ghost, Intangible Genius",
+      "files": [
+        "engine/src/cards/pool/red-ghost-intangible-genius.ts",
+        "engine/src/cards/tokens/ape-villain-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Frightful Four",
+      "files": [
+        "engine/src/cards/pool/the-frightful-four.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Royal Talon Fighter Jet",
+      "files": [
+        "engine/src/cards/pool/royal-talon-fighter-jet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ultron, Machine Overlord",
+      "files": [
+        "engine/src/cards/pool/ultron-machine-overlord.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alicia Masters, Skilled Sculptor",
+      "files": [
+        "engine/src/cards/pool/alicia-masters-skilled-sculptor.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Cosmic Crucible",
+      "files": [
+        "engine/src/cards/pool/cosmic-crucible.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Wasp, Winsome Avenger",
+      "files": [
+        "engine/src/cards/pool/the-wasp-winsome-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kingpin, Wilson Fisk",
+      "files": [
+        "engine/src/cards/pool/kingpin-wilson-fisk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "West Coast Expansion",
+      "files": [
+        "engine/src/cards/pool/west-coast-expansion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "N'Yami-Class Mother Ship",
+      "files": [
+        "engine/src/cards/pool/nyami-class-mother-ship.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unstable Molecule Suit",
+      "files": [
+        "engine/src/cards/pool/unstable-molecule-suit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devil Dinosaur",
+      "files": [
+        "engine/src/cards/pool/devil-dinosaur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Director Nick Fury",
+      "files": [
+        "engine/src/cards/pool/director-nick-fury.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Great Mound",
+      "files": [
+        "engine/src/cards/pool/the-great-mound.ts",
+        "engine/src/cards/tokens/vibranium-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Winter Soldier, Reborn Avenger",
+      "files": [
+        "engine/src/cards/pool/winter-soldier-reborn-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ant-Man, Elusive Avenger",
+      "files": [
+        "engine/src/cards/pool/ant-man-elusive-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Shuri's Fabricator",
+      "files": [
+        "engine/src/cards/pool/shuris-fabricator.ts",
+        "engine/src/cards/tokens/vibranium-token.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avengers Quinjet",
+      "files": [
+        "engine/src/cards/pool/avengers-quinjet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daughter of the Deep",
+      "files": [
+        "engine/src/cards/pool/daughter-of-the-deep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mister Fantastic",
+      "files": [
+        "engine/src/cards/pool/mister-fantastic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Iron Lad, Young Avenger",
+      "files": [
+        "engine/src/cards/pool/iron-lad-young-avenger.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": [
+    {
+      "name": "She-Hulk, Wallbreaker",
+      "needs": [
+        "effect:amount-creatures-blocking-it"
+      ],
+      "why": "\"put a +1/+1 counter on that Hero for each creature blocking it\": no amount counts the creatures blocking the trigger object (one blocked-by trigger per blocker would be N counter events, not one)"
+    },
+    {
+      "name": "Living Laser",
+      "needs": [
+        "stat:cards-discarded-this-turn",
+        "effect:token-copy-count-amount"
+      ],
+      "why": "\"for each card you've discarded this turn\": no discard tally, and create-token-copy's count is a fixed number"
+    },
+    {
+      "name": "Typhoid Mary, Fractured",
+      "needs": [
+        "stat:cards-discarded-this-turn",
+        "effect:random-mode-announced"
+      ],
+      "why": "\"if you discarded a card this turn, you choose one instead\" needs a discard tally, and a triggered ability's random mode is picked as it goes on the stack (modal random is resolution-time only)"
+    },
+    {
+      "name": "Captain Marvel, Apex Avenger",
+      "needs": [
+        "effect:add-counters-same-kind-as-trigger"
+      ],
+      "why": "\"put the same number and kind of counters on Captain Marvel\": add-counter takes a fixed counter kind; nothing reads the kind the counters-put trigger saw"
+    },
+    {
+      "name": "Doctor Strange, Surgeon",
+      "needs": [
+        "condition:life-above-starting"
+      ],
+      "why": "\"if you have at least 10 life more than your starting life total\": life-total's atLeast is a fixed number"
+    },
+    {
+      "name": "Kang Dynasty",
+      "needs": [
+        "effect:delayed-trigger-until-your-next-turn"
+      ],
+      "why": "\"Until your next turn, whenever any of those creatures deals combat damage to a player, draw a card\": the dealsCombatDamage delayed trigger lapses at end of turn"
+    },
+    {
+      "name": "The Thanos-Copter",
+      "needs": [
+        "effect:add-types-all"
+      ],
+      "why": "\"Vehicles you control become artifact creatures until end of turn\": add-types is single-target and animate-all sets base P/T"
+    },
+    {
+      "name": "Loki, Lord of Misrule",
+      "needs": [
+        "effect:become-copy"
+      ],
+      "why": "'Each creature you control other than the chosen creature becomes a copy of it until end of turn, except it isn't legendary': become-copy takes one target, no filter/each form."
+    },
+    {
+      "name": "The Squadron Sinister",
+      "needs": [
+        "keyword:mayhem"
+      ],
+      "why": "Mayhem {3}{U}{R} (cast from graveyard if discarded this turn) isn't built."
+    },
+    {
+      "name": "Abomination, World Ravager",
+      "needs": [
+        "keyword:mayhem"
+      ],
+      "why": "Mayhem {4}{R} isn't built; the rest is keywords."
+    },
+    {
+      "name": "Shang-Chi and the Ten Rings",
+      "needs": [
+        "trigger:nth-counter-trigger"
+      ],
+      "why": "'When the tenth +1/+1 counter is put on Shang-Chi' needs a trigger on crossing a counter count; counters-put can't see the count before."
+    },
+    {
+      "name": "Willie Lumpkin, Postman",
+      "needs": [
+        "effect:player-cant-attack-you-next-turn"
+      ],
+      "why": "The each-player-may draw is expressible, but 'that player can't attack you or permanents you control during their next turn' has no player-level attack prohibition with that duration."
+    },
+    {
+      "name": "Thor, Asgard's Avenger",
+      "needs": [
+        "replacement:damage-plus-from-other-sources"
+      ],
+      "why": "would-deal-damage has fromSelf but no 'another source you control' (excluding this object); a notName filter would wrongly exclude copies."
+    },
+    {
+      "name": "Everett K. Ross, Hapless Attaché",
+      "needs": [
+        "trigger:opponent-attacks-you-player-only"
+      ],
+      "why": "attack-with's attackingYou also counts attackers on your planeswalkers; 'attacks you with two or more creatures' counts only those attacking you (rule 508.3e)."
+    },
+    {
+      "name": "Panther Habit",
+      "needs": [
+        "replacement:prevent-damage-to-equipped-add-counters"
+      ],
+      "why": "would-deal-damage's `to` has no 'attached' recipient, and its `then` acts from the Equipment, so counters can't go on the equipped creature"
+    },
+    {
+      "name": "Archnemesis",
+      "needs": [
+        "effect:curse-attach-player"
+      ],
+      "why": "'you may attach this Aura to that player' moves an Aura onto the attacking player (not the trigger-player); no effect attaches an Aura to a player"
+    },
+    {
+      "name": "Reed Richards, Smartest Man",
+      "needs": [
+        "replacement:draw-replacement-except-first",
+        "replacement:draw-replacement-first-each-turn"
+      ],
+      "why": "would-draw `draws: N` ignores exceptFirstInDrawStep and has no 'first time each turn' limit"
+    },
+    {
+      "name": "Heroic Sacrifice",
+      "needs": [
+        "replacement:damage-redirection"
+      ],
+      "why": "redirecting all damage to you and your creatures onto a chosen creature until end of turn isn't expressible"
+    },
+    {
+      "name": "Jocasta, Automaton Avenger",
+      "needs": [
+        "zone:graveyard-commander-trigger",
+        "effect:return-from-graveyard-attacking"
+      ],
+      "why": "put-onto-battlefield has no `attacking`, so 'return it to the battlefield tapped and attacking' from the graveyard can't be said"
+    },
+    {
+      "name": "Fight for the Throne",
+      "needs": [
+        "effect:delayed-trigger-intervening-if"
+      ],
+      "why": "the delayed 'when that creature dies this turn, if you control your commander' needs an intervening-if on a delayed trigger; a resolution-only conditional would be wrong"
+    },
+    {
+      "name": "Killmonger, Ruthless Usurper",
+      "needs": [
+        "effect:count-defending-player-controls"
+      ],
+      "why": "'+1/+0 for each artifact defending player controls' — countOf reads only from the controller's or a target player's side, not the trigger-player's"
+    },
+    {
+      "name": "Invisible Force Field",
+      "needs": [
+        "keyword:rebound"
+      ],
+      "why": "rebound isn't modeled"
+    }
+  ]
+}

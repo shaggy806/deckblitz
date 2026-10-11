@@ -188,6 +188,7 @@ import _poolRavenousSquirrel from "../pool/ravenous-squirrel.js";
 import _poolRazorgrassAmbush from "../pool/razorgrass-ambush.js";
 import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReconstruction from "../pool/reconstruction.js";
+import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
@@ -263,11 +264,13 @@ import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js"
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
+import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
 import _poolWarriorsCharge from "../pool/warriors-charge.js";
 import _poolWarshipScout from "../pool/warship-scout.js";
 import _poolWaspLancer from "../pool/wasp-lancer.js";
 import _poolWeftstalkerArdent from "../pool/weftstalker-ardent.js";
+import _poolWestCoastExpansion from "../pool/west-coast-expansion.js";
 import _poolWildAesthir from "../pool/wild-aesthir.js";
 import _poolWildWanderer from "../pool/wild-wanderer.js";
 import _poolWingedHiveTyrant from "../pool/winged-hive-tyrant.js";
@@ -474,6 +477,7 @@ const shard: CardShard = {
     _poolRazorgrassAmbush,
     _poolRearingEmbermare,
     _poolReconstruction,
+    _poolRedGhostIntangibleGenius,
     _poolResurgentBelief,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
@@ -549,11 +553,13 @@ const shard: CardShard = {
     _poolVoiceOfMany,
     _poolVoidwielder,
     _poolVulshokMorningstar,
+    _poolWarMachineAvengingArsenal,
     _poolWardenOfEvosIsle,
     _poolWarriorsCharge,
     _poolWarshipScout,
     _poolWaspLancer,
     _poolWeftstalkerArdent,
+    _poolWestCoastExpansion,
     _poolWildAesthir,
     _poolWildWanderer,
     _poolWingedHiveTyrant,

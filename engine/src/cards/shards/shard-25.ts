@@ -259,6 +259,7 @@ import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
 import _poolUltimoCivilizationsEnd from "../pool/ultimo-civilizations-end.js";
 import _poolUltronDrone from "../pool/ultron-drone.js";
+import _poolUltronMachineOverlord from "../pool/ultron-machine-overlord.js";
 import _poolUndercitySewers from "../pool/undercity-sewers.js";
 import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
@@ -283,6 +284,7 @@ import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
+import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
@@ -552,6 +554,7 @@ const shard: CardShard = {
     _poolTyvarThePummeler,
     _poolUltimoCivilizationsEnd,
     _poolUltronDrone,
+    _poolUltronMachineOverlord,
     _poolUndercitySewers,
     _poolUndergroundSea,
     _poolUnleashFury,
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolWoodedBastion,
   ],
   tokens: [
+    _tokensApeVillainToken,
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
     _tokensElfWarriorToken,

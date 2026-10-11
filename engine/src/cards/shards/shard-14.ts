@@ -23,6 +23,7 @@ import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
+import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
@@ -312,6 +313,7 @@ const shard: CardShard = {
     _poolAzureMage,
     _poolBackupAgent,
     _poolBartizanBats,
+    _poolBastPantherGoddess,
     _poolBattleMastery,
     _poolBattleRampart,
     _poolBennieBracksZoologist,

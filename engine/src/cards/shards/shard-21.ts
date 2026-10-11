@@ -194,6 +194,7 @@ import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
+import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
@@ -235,6 +236,7 @@ import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
+import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
@@ -257,6 +259,7 @@ import _poolVensersJournal from "../pool/vensers-journal.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
 import _poolVexingBauble from "../pool/vexing-bauble.js";
+import _poolVibraniumMiningMech from "../pool/vibranium-mining-mech.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
@@ -467,6 +470,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRoilingRegrowth,
     _poolRustwingFalcon,
+    _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
     _poolScrubland,
     _poolSculptingSteel,
@@ -508,6 +512,7 @@ const shard: CardShard = {
     _poolTerrorOfTheFairgrounds,
     _poolTezzeretCruelCaptain,
     _poolTheEldestReborn,
+    _poolTheFrightfulFour,
     _poolTheRegalia,
     _poolThornwoodFalls,
     _poolThrivingGrove,
@@ -530,6 +535,7 @@ const shard: CardShard = {
     _poolVesperGhoul,
     _poolVesselOfEphemera,
     _poolVexingBauble,
+    _poolVibraniumMiningMech,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
     _poolVoraciousNull,

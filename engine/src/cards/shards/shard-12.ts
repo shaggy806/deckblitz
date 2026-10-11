@@ -121,6 +121,7 @@ import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
+import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
 import _poolIsland from "../pool/island.js";
 import _poolJaggedBarrens from "../pool/jagged-barrens.js";
 import _poolJaheiraFriendOfTheForest from "../pool/jaheira-friend-of-the-forest.js";
@@ -415,6 +416,7 @@ const shard: CardShard = {
     _poolIncreasingDevotion,
     _poolIngotChewer,
     _poolInspiringVantage,
+    _poolIronLadYoungAvenger,
     _poolIsland,
     _poolJaggedBarrens,
     _poolJaheiraFriendOfTheForest,

@@ -68,7 +68,8 @@ section keeps only what to do next.
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC) and The Hobbit (HOB) are done
   (batches 50–54). **Next: the rest of Marvel Super Heroes Commander** (MSC, 2026-06-26: 193
-  above the threshold, 24 done, 8 blocked, 161 left). Prepare is built: about 50 more Secrets of Strixhaven preparation
+  above the threshold; after batch 55, 62 done, 30 blocked, 101 left). Mayhem blocks six
+  triaged cards (Norman Osborn, a top-500 commander, among them): worth building next. Prepare is built: about 50 more Secrets of Strixhaven preparation
   cards below its threshold could now be read (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".

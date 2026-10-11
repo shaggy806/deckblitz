@@ -17,6 +17,7 @@ import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
+import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
 import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
@@ -272,6 +273,7 @@ import _poolTranquilCove from "../pool/tranquil-cove.js";
 import _poolTranquilLandscape from "../pool/tranquil-landscape.js";
 import _poolTreetopSnarespinner from "../pool/treetop-snarespinner.js";
 import _poolTrenchingSteed from "../pool/trenching-steed.js";
+import _poolTriSentinelActOfVengeance from "../pool/tri-sentinel-act-of-vengeance.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
@@ -328,6 +330,7 @@ const shard: CardShard = {
     _poolArchenemysCharm,
     _poolArmyAnts,
     _poolAsceticism,
+    _poolAvengersQuinjet,
     _poolAysenAbbey,
     _poolBadlands,
     _poolBalduvianBears,
@@ -583,6 +586,7 @@ const shard: CardShard = {
     _poolTranquilLandscape,
     _poolTreetopSnarespinner,
     _poolTrenchingSteed,
+    _poolTriSentinelActOfVengeance,
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,
     _poolTwinflameTyrant,

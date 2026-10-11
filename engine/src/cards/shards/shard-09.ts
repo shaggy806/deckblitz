@@ -263,6 +263,7 @@ import _poolVanquishersAxe from "../pool/vanquishers-axe.js";
 import _poolVastwoodFortification from "../pool/vastwood-fortification.js";
 import _poolVenerableLammasu from "../pool/venerable-lammasu.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
+import _poolVibraniumStrikeGauntlets from "../pool/vibranium-strike-gauntlets.js";
 import _poolVitalize from "../pool/vitalize.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
@@ -556,6 +557,7 @@ const shard: CardShard = {
     _poolVastwoodFortification,
     _poolVenerableLammasu,
     _poolVeteransSidearm,
+    _poolVibraniumStrikeGauntlets,
     _poolVitalize,
     _poolVolcanicStrength,
     _poolWallOfDenial,

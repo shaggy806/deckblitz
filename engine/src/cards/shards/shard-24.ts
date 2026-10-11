@@ -74,6 +74,7 @@ import _poolDeadpoolTradingCard from "../pool/deadpool-trading-card.js";
 import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
+import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
@@ -359,6 +360,7 @@ const shard: CardShard = {
     _poolDeathgazeCockatrice,
     _poolDesertOfTheFervent,
     _poolDestructiveForce,
+    _poolDevilDinosaur,
     _poolDimirInformant,
     _poolDowsingShaman,
     _poolDunesOfTheDead,

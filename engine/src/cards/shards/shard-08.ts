@@ -155,6 +155,7 @@ import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
+import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
@@ -251,6 +252,7 @@ import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
+import _poolUnstableMoleculeSuit from "../pool/unstable-molecule-suit.js";
 import _poolUnwantedRemake from "../pool/unwanted-remake.js";
 import _poolUnwind from "../pool/unwind.js";
 import _poolUrborgVolcano from "../pool/urborg-volcano.js";
@@ -445,6 +447,7 @@ const shard: CardShard = {
     _poolMagetasBoon,
     _poolMalakirCullblade,
     _poolMartialCoup,
+    _poolMattMurdockJusticeSeeker,
     _poolMemnite,
     _poolMercurialGeists,
     _poolMesaFalcon,
@@ -541,6 +544,7 @@ const shard: CardShard = {
     _poolTurbulentWilderness,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
+    _poolUnstableMoleculeSuit,
     _poolUnwantedRemake,
     _poolUnwind,
     _poolUrborgVolcano,

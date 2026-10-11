@@ -5406,6 +5406,50 @@
   "trigger:creature-connives": {
    "family": "keyword:connive",
    "example": "Ultron, Unlimited; Iron Monger, Sadistic Tycoon: \"Whenever a creature you control connives, …\" — connive emits no event a trigger can see"
+  },
+  "effect:amount-creatures-blocking-it": {
+   "family": "effect:amount-new-variants",
+   "example": "She-Hulk, Wallbreaker: 'put a +1/+1 counter on that Hero for each creature blocking it' — no amount counts the creatures blocking a given attacker"
+  },
+  "effect:add-counters-same-kind-as-trigger": {
+   "family": "effect:move-counter",
+   "example": "Captain Marvel, Apex Avenger: 'put the same number and kind of counters on Captain Marvel' — add-counter can't take the kind a counters-put trigger saw"
+  },
+  "effect:add-types-all": {
+   "family": "effect:add-subtype",
+   "example": "The Thanos-Copter: 'Vehicles you control become artifact creatures until end of turn' — no mass add-types (animate-all sets base P/T)"
+  },
+  "effect:player-cant-attack-you-next-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Willie Lumpkin, Postman: 'that player can't attack you or permanents you control during their next turn' — a player-level attack prohibition lasting the affected player's next turn."
+  },
+  "replacement:damage-plus-from-other-sources": {
+   "family": "replacement:damage-modification",
+   "example": "Thor, Asgard's Avenger: 'If another source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead' — a would-deal-damage source scope excluding the replacement's own permanent."
+  },
+  "trigger:opponent-attacks-you-player-only": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Everett K. Ross, Hapless Attaché: 'Whenever an opponent attacks you with two or more creatures' — attack-with counting only attackers aimed at you, not your planeswalkers (rule 508.3e)."
+  },
+  "replacement:prevent-damage-to-equipped-add-counters": {
+   "family": "replacement:damage-modification",
+   "example": "Panther Habit: 'If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it' — no would-deal-damage `to: \"attached\"`, and `then` can't name the host."
+  },
+  "replacement:draw-replacement-first-each-turn": {
+   "family": "replacement:new-event-replacements",
+   "example": "Reed Richards, Smartest Man: 'The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.'"
+  },
+  "effect:return-from-graveyard-attacking": {
+   "family": "effect:enter-attacking",
+   "example": "Jocasta, Automaton Avenger: 'if this card is in your graveyard, you may return it to the battlefield tapped and attacking' — put-onto-battlefield has no `attacking`."
+  },
+  "effect:delayed-trigger-intervening-if": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Fight for the Throne: 'When the creature an opponent controls dies this turn, if you control your commander, you become the monarch' — delayed-trigger has no condition."
+  },
+  "effect:count-defending-player-controls": {
+   "family": "effect:amount-new-variants",
+   "example": "Killmonger, Ruthless Usurper: '+1/+0 until end of turn for each artifact defending player controls' — countOf has no trigger-player side."
   }
  }
 }

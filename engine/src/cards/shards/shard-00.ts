@@ -192,6 +192,7 @@ import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
+import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
@@ -508,6 +509,7 @@ const shard: CardShard = {
     _poolParadoxGardens,
     _poolPeaceStrider,
     _poolPettyTheft,
+    _poolPhotonMightyMarvel,
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,
     _poolPlunderingPirate,

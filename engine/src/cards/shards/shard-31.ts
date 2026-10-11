@@ -211,6 +211,7 @@ import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
 import _poolShireScarecrow from "../pool/shire-scarecrow.js";
+import _poolShurisFabricator from "../pool/shuris-fabricator.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
@@ -496,6 +497,7 @@ const shard: CardShard = {
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,
     _poolShireScarecrow,
+    _poolShurisFabricator,
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
     _poolSireOfStagnation,

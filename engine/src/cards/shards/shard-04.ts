@@ -65,6 +65,7 @@ import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
+import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
@@ -132,6 +133,7 @@ import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
+import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
 import _poolKlauthUnrivaledAncient from "../pool/klauth-unrivaled-ancient.js";
 import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheReliquary from "../pool/knight-of-the-reliquary.js";
@@ -360,6 +362,7 @@ const shard: CardShard = {
     _poolDesperateParry,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
+    _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
     _poolDoubleDown,
     _poolDrakeHatchling,
@@ -427,6 +430,7 @@ const shard: CardShard = {
     _poolKeenSense,
     _poolKheruGoldkeeper,
     _poolKingCheetah,
+    _poolKingpinWilsonFisk,
     _poolKlauthUnrivaledAncient,
     _poolKnightErrant,
     _poolKnightOfTheReliquary,

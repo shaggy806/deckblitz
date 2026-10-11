@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
+import _poolAgeOfUltron from "../pool/age-of-ultron.js";
 import _poolAinokBondKin from "../pool/ainok-bond-kin.js";
 import _poolAlBhedSalvagers from "../pool/al-bhed-salvagers.js";
 import _poolAllThatGlitters from "../pool/all-that-glitters.js";
@@ -180,6 +181,7 @@ import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
 import _poolMossMonster from "../pool/moss-monster.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
+import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
@@ -309,6 +311,7 @@ const shard: CardShard = {
   pool: [
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
+    _poolAgeOfUltron,
     _poolAinokBondKin,
     _poolAlBhedSalvagers,
     _poolAllThatGlitters,
@@ -484,6 +487,7 @@ const shard: CardShard = {
     _poolMossMonster,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
+    _poolNicoMinoruRunaway,
     _poolNobleHierarch,
     _poolNorinTheWary,
     _poolOakhollowVillage,

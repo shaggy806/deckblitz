@@ -208,6 +208,7 @@ import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
+import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
@@ -501,6 +502,7 @@ const shard: CardShard = {
     _poolReturnToBattle,
     _poolRiteOfReplication,
     _poolRootwaterHunter,
+    _poolRoyalTalonFighterJet,
     _poolSageOfLatNam,
     _poolSavageLands,
     _poolSelflessSafewright,
