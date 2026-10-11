@@ -1800,6 +1800,10 @@ export class HeuristicBotController extends AutomaticController {
   /** `source:abilityIndex` -> activations so far, for `activationTurn`. */
   private activations = new Map<string, number>();
   private activationTurn = -1;
+  /** How much more an attacker must be worth than the blocker that trades
+   * with it before v1 takes the trade (`blockWorth`). The combat
+   * simulation's stand-in takes even trades (`CombatRolloutController`). */
+  protected readonly tradeMargin: number = 2;
 
   constructor(playerId: PlayerId, registry: CardRegistry = createDefaultRegistry()) {
     super(playerId);
@@ -3789,7 +3793,7 @@ export class HeuristicBotController extends AutomaticController {
     const kills = (x: ObjectId, y: ObjectId) => power(x) >= toughness(y) || deathtouch(x);
     const blocked = () => new Set(chosen.values());
     // A blocker that kills the attacker and dies to it, for an attacker
-    // worth clearly more.
+    // worth clearly more (`tradeMargin`).
     for (const entry of legal.eligible) {
       if (used.has(entry.blocker)) continue;
       const taken = blocked();
@@ -3799,7 +3803,7 @@ export class HeuristicBotController extends AutomaticController {
             !taken.has(a) &&
             !legal.menaceAttackers.includes(a) &&
             kills(entry.blocker, a) &&
-            worth(a) >= worth(entry.blocker) + 2,
+            worth(a) >= worth(entry.blocker) + this.tradeMargin,
         )
         .sort((a, b) => worth(b) - worth(a))[0];
       if (trade !== undefined) {

@@ -183,6 +183,10 @@ item lands.
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **A few views still move on a click** (the jitter sweep, 2026-10-10): the landing page, the deck builder's legality list, the stack's two-line labels, the Game menu's confirms, and a wrapping decision prompt; each with its likely fix.
+- **Part of a token stack leaving plays the whole tile's leave animation** (the user, 2026-10-10): sacrificing some Treasures to cast a spell should pop up a "−X" on the stack, like a counter being added, not animate the tile away.
+- **The music stays off after the victory or defeat jingle** (the user, 2026-10-10): it should fade back in once the jingle has played.
+- **No music in the lobby** (the user, 2026-10-10): the music should play in the lobby as well, not only in a game.
+- **The landing page's backdrop snaps on alt-tabbing back** (the user, 2026-10-10): the drifting background jumps into place in one frame, which is jarring.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

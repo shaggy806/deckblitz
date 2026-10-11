@@ -290,8 +290,17 @@ export function canRepeat(game: Game, action: Action): boolean {
  * every priority window. The priority search's stand-ins never block
  * (`AutomaticController`), which would make every attack look free. Never a
  * searching bot, or the simulation would recurse.
+ *
+ * It takes any trade, where v1 wants the attacker worth 2 more: the bots
+ * seated in live rooms are v2, whose block search trades and double-blocks
+ * freely — counting the damage a block stops, it traded a Colossal Dreadmaw
+ * for a Craw Wurm — and predicted with v1's blocks a Centaur Courser sent at
+ * a Hill Giant read as 3 unblocked damage (reported from a live game,
+ * 2026-10-10: "bots keep sending attackers in when they will die").
  */
 export class CombatRolloutController extends HeuristicBotController {
+  protected override readonly tradeMargin: number = -Infinity;
+
   act(view: ControllerView): Action {
     if (view.state.awaiting !== null) return super.act(view);
     return { type: "pass-priority", player: this.playerId };

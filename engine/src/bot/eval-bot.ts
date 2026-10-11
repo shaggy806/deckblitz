@@ -268,6 +268,14 @@ const MOVES_PER_ROUND = 8;
  * difference, damage that puts a player in danger or a blow at the leader. */
 const SPREAD_BONUS = 0.5;
 
+/** The share of each of our creatures an attack loses that the players left
+ * out of the combat gain on us, at a table of `players` still in the game:
+ * none head to head, half at three, two-thirds at four — the opponents
+ * outside the fight, over all of them. */
+export function bystanderShare(players: number): number {
+  return players <= 2 ? 0 : (players - 2) / (players - 1);
+}
+
 /** Two scores this close are a tie: the same end state reached by a
  * different order of floating-point sums. */
 export const TIE = 1e-9;
@@ -1501,8 +1509,26 @@ export class EvalBotController extends HeuristicBotController {
       const players = new Set(attackers.map((d) => defendingPlayer(d.defender)));
       const value = evaluateState(after, this.cards, me, w) + SPREAD_BONUS * Math.max(0, players.size - 1);
       if (after.result.over || deadAnyway) return value;
-      return this.crackbackLethal(after, grown) ? UNSAFE + value : value;
+      return lessBystanders(after, this.crackbackLethal(after, grown) ? UNSAFE + value : value);
     };
+
+    // What the players left out of the combat gain on us for each creature it
+    // costs us: `bystanderShare` of its value, over what the evaluation
+    // already counts. A 1-for-1 with the leading opponent otherwise scored
+    // +1.5 at four players — the leader is subtracted in full, so their loss
+    // paid for ours — and the bots traded into every block (reported from a
+    // live game, 2026-10-10: "in a 4 player format you and the opponent you
+    // are trading with are just falling behind the other two players"). Only
+    // here, not in the evaluation: removal leans on the leader counting in
+    // full. Counted as the value of our creatures before less after — not by
+    // id, since combat splits the tokens it sends off a stack as new objects
+    // (`combatCreatures` lists a stack once per token).
+    const share = bystanderShare(state.turnOrder.filter((p) => !state.players[p].hasLost).length);
+    const creaturesWorth = (s: GameState): number =>
+      combatCreatures(s, this.cards, me, false).reduce((sum, c) => sum + creatureValue(c, w), 0);
+    const worthBefore = share === 0 ? 0 : creaturesWorth(state);
+    const lessBystanders = (after: GameState, value: number): number =>
+      share === 0 ? value : value - share * Math.max(0, worthBefore - creaturesWorth(after));
 
     const mine = new Map(combatCreatures(state, this.cards, me, false).map((c) => [c.id, c]));
     const blockersOf = new Map<PlayerId, CombatCreature[]>();

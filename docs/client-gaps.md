@@ -5,6 +5,27 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it in both. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **Part of a token stack leaving plays the whole tile's leave animation** (the user,
+  2026-10-10): when part of a token stack is sacrificed or otherwise lost, the tile plays the
+  leaving-the-battlefield animation as if it had gone. It should stay put with a "−X" popping
+  up on it, the way a counter being added shows, X being how many tokens left. Most noticeable
+  sacrificing some Treasures to cast a spell. Where: the leave animation's scheduling
+  (`game/animationSchedule.ts`) and its drawing (`ui/AnimationLayer.tsx`), for a leave whose
+  stack is still on the battlefield with a smaller count.
+- **The music stays off after the victory or defeat jingle** (the user, 2026-10-10): the
+  music fades out as a game ends, under the jingle, and stays off. It should fade back in
+  after the jingle has played. Where: `game/music.ts` (`stopMusic` at the game's end;
+  `startMusic` fades in) and the jingle in `game/sound.ts`, the fade-in timed from the
+  jingle's end.
+- **No music in the lobby** (the user, 2026-10-10): the music plays only during a game, and
+  should play in the lobby as well. Where: `App.tsx` turns it on with
+  `useGameMusic(view !== null && !view.result.over && !lost)` (`game/music.ts`), so the
+  condition would also hold while seated in a room's lobby.
+- **The landing page's backdrop snaps on alt-tabbing back** (the user, 2026-10-10): coming
+  back to the landing page's tab, the drifting background snaps into place in one frame,
+  which is jarring. Where: `lobby/landing.css`, the `landing-backdrop-drift` animation of
+  `background-position` (`--backdrop-period`), which the browser likely pauses or throttles
+  in a hidden tab and then catches up in one step.
 - **A few views still move on a click** (the jitter sweep, 2026-10-10, after the in-game
   ones were fixed — the Pass row, decision panel, phase pips, hand row, History, zone viewer,
   split menus, player panel badges, lobby, library overlay and scroll boxes). What's left, each

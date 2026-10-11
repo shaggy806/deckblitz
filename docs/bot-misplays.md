@@ -6,7 +6,7 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-10-10 — Attackers sent in to die, or to trade, at four players
 
-Status: open.
+Status: fixed 2026-10-10 (its scenario now gates).
 
 - **Seen:** "bots keep sending attackers in when they will die, which most of the time is not a good
   idea" — in a four-player game a trade leaves you and the player you traded with behind the other
@@ -16,8 +16,8 @@ Status: open.
   alike. Bigger boards do the same (a Craw Wurm at a Craw Wurm + Hill Giant). With every opponent level
   (a Giant each) it keeps home, so it's the leading or the double-blocking player it goes at.
 - **Right:** keep the creatures home — every attack there dies to a block or a trade.
-- **Scenario:** "keeps a creature home when every attack dies to a block" (training; reads wrong today,
-  the Courser at dave).
+- **Scenario:** "keeps a creature home when every attack dies to a block" (a gate since the fix; it read
+  wrong before it, the Courser at dave).
 - **Why (two causes, measured):**
   1. *The block isn't foreseen.* The attack planner (`eval-bot.ts`, `declareAttackersSearched`) scores
      each attack by `simulateCombat` (`bot/simulate.ts`), whose defenders are v1
@@ -31,20 +31,18 @@ Status: open.
      (`evaluate.ts`) subtracts the strongest opponent at `opponent` 1.0 and the rest at
      `otherOpponents` 0.5 over their average, so the leader's lost creature pays for ours in full,
      and the two who sat out barely count.
-- **Fix (outline):**
-  1. Predict the blocks live bots make: the combat rollout's defender takes even trades (a blocker
-     that kills the attacker for one worth no more) and adds a second blocker beside one that trades
-     when that kills the attacker for less. Best kept to `CombatRolloutController` (or a v1 option it
-     sets) so v1's own blocking is unchanged. Risk: the planner turns timid where a real defender
-     wouldn't block (a bluffed trade it now refuses); the gate's "attacks the open player" and the
-     crackback scenarios guard the aggressive side.
-  2. Price the bystanders in the attack planner, not in `scoreOutcome`: at three or more live players,
-     each of our creatures the simulated combat kills costs a further share of its value (say
-     `(n − 2)/(n − 1)` of it — two-thirds at four), so a 1-for-1 reads as a loss unless the damage or
-     the kill is worth more. Kept out of `scoreOutcome` because removal and the priority search rely on
-     the leader counting in full ("removal takes the leader's threat first"). Risk: fewer attacks
-     that trade into a leader who is about to win; lethal and near-lethal swings are unaffected (the
-     win term dwarfs it).
+- **Fix (built):**
+  1. The combat stand-in takes any trade (`CombatRolloutController` sets v1's new `tradeMargin` from 2
+     to −∞; v1's own blocks are unchanged). Even trades weren't enough: a live v2 defender traded a
+     Colossal Dreadmaw (worth 17) for a Craw Wurm (15), counting the damage the block stopped. The
+     planner now assumes the worst a defender will do with a blocker that kills the attacker.
+  2. At three or more live players, an attack pays `bystanderShare` (`(n − 2)/(n − 1)`: half at three,
+     two-thirds at four) of the creature value it costs us, measured as our creatures' value before
+     less after (`eval-bot.ts`, `lessBystanders`; by id it misread a token stack the attack split as
+     tokens lost). Kept out of `scoreOutcome`, where removal needs the leader counted in full.
+  Every four-player board above now keeps home; head to head the Courser still trades into a Hill
+  Giant, which the user's reason doesn't cover. Risk: fewer attacks into a leader about to win who
+  could trade; lethal swings are unaffected (the win term dwarfs it).
 
 ## 2026-10-10 — A Mountain played where the Forest would cast Sakura-Tribe Elder too
 
