@@ -295,6 +295,20 @@ export interface AbilityCost {
    * another cost that asks a question (one can wait at a time).
    */
   readonly blight?: number;
+  /**
+   * The cost's mana is a **waterbend** cost (rule 701.67a — Geyser Leaper's
+   * "Waterbend {4}: Draw a card, then discard a card", Katara, Water Tribe's
+   * Hope's "Waterbend {X}: …"): `mana` holds the `{N}` (or `{X}`), and for
+   * each generic mana in it the activator may tap an untapped artifact or
+   * creature they control instead of paying it — named on the
+   * `activate-ability` action's `waterbend`, offered as the offer's
+   * `waterbend` (`WaterbendOffer`). Only that much generic may be paid by
+   * tapping, whatever increases or reduces the total (701.67b). Any
+   * artifact or creature may tap, summoning sick or not (the rulings) and
+   * the source too — unless the cost also has `{T}`, which taps it. Not on
+   * a mana ability, nor beside `tapOthers`.
+   */
+  readonly waterbend?: boolean;
 }
 
 export interface ActivatedAbility {

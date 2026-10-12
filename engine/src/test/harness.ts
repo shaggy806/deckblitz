@@ -168,9 +168,17 @@ export function activate(
   game: Game,
   source: ObjectId,
   index = 0,
-  opts: { player?: PlayerId; targets?: readonly (TargetRef | null)[]; x?: number; settle?: boolean } = {},
+  opts: {
+    player?: PlayerId;
+    targets?: readonly (TargetRef | null)[];
+    x?: number;
+    settle?: boolean;
+    /** What taps to pay a waterbend cost (rule 701.67a) — the action's
+     * `waterbend`. Left out, the engine taps the fewest that pay. */
+    waterbend?: readonly ObjectId[];
+  } = {},
 ): void {
-  const { player = A, targets, x, settle: andSettle = true } = opts;
+  const { player = A, targets, x, settle: andSettle = true, waterbend } = opts;
   dispatchOrExplain(game, {
     type: "activate-ability",
     player,
@@ -178,6 +186,7 @@ export function activate(
     abilityIndex: index,
     targets: targets ?? [],
     ...(x !== undefined ? { xValue: x } : {}),
+    ...(waterbend !== undefined ? { waterbend } : {}),
   } as Action);
   if (andSettle) settle(game);
 }

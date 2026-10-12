@@ -1919,6 +1919,21 @@ export interface CardDefinition {
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     /**
+     * "As an additional cost to cast this spell, **waterbend {5}**" (rule
+     * 701.67a — Water Whip): the generic mana is added to the total cost
+     * (601.2f), and for each of it the caster may tap an untapped artifact
+     * or creature they control instead of paying it — named on the
+     * `cast-spell` action's `waterbend`, offered as the variant's
+     * `waterbend` (`WaterbendOffer`). Only that much of the total
+     * cost's generic may be paid by tapping, whatever else adds to or takes
+     * off it (701.67b). `"x"` is "waterbend {X}" (Crashing Wave): it makes
+     * the spell an `{X}` spell the way `payLifeX` does — X announced as it's
+     * cast, `ctx.x` reading it — without an `{X}` in its mana cost, so its
+     * mana value doesn't count it. "You may waterbend {N}" is a kicker:
+     * `kicker.keyword: "waterbend"`.
+     */
+    readonly waterbend?: number | "x";
+    /**
      * "Behold an Elemental and exile it" (rule 701.4a — Champion of the
      * Path): a mandatory behold, castable only with one to behold, chosen as
      * the cost is paid once the spell is on the stack (601.2h). With
@@ -1976,8 +1991,15 @@ export interface CardDefinition {
      * (702.174j); `self-kicked` is "if the gift was promised" on a
      * permanent, whose gift is the `giftTrigger` helper. The opponent is
      * chosen as the cost is paid — see `GiftAsk`.
+     *
+     * `"waterbend"` is "as an additional cost to cast this spell, **you may
+     * waterbend {N}**" (rule 701.67a — Spirit Water Revival): `cost` is
+     * `"{N}"`, and the kicked variant is the one that waterbends — up to N of
+     * its total cost's generic may be paid by tapping untapped artifacts and
+     * creatures (701.67b; the `cast-spell` action's `waterbend`). "If this
+     * spell's additional cost was paid" is the spell being kicked.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
     /**
      * With `keyword: "behold"` and `cost: ""`: "As an additional cost to
      * cast this spell, you may behold a Dragon" (rule 701.4a — Dispelling
@@ -2655,6 +2677,7 @@ interface CardDraft {
     readonly discard?: number;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
+    readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
     readonly options?: readonly AdditionalCostOption[];
   };
@@ -2662,7 +2685,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
     readonly behold?: BeholdSpec;
     readonly flash?: boolean;
     readonly blight?: number;

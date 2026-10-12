@@ -204,6 +204,50 @@ export function defaultTapPicks(offer: TapCostOffer, preferFirst: (id: ObjectId)
   return picked;
 }
 
+/**
+ * What a waterbend cost may tap (rule 701.67a): "Pay [cost]. For each generic
+ * mana in that cost, you may tap an untapped artifact or creature you control
+ * rather than pay that mana." On a `cast-spell` offer whose total cost has a
+ * waterbend part (`additionalCost.waterbend`, a `waterbend` kicker) and on an
+ * `activate-ability` offer whose cost is one (`AbilityCost.waterbend`). The
+ * driver taps any `max` or fewer of `choices` and sends them as the action's
+ * `waterbend`; each pays {1} of the total cost's generic, the mana paying the
+ * rest — `[]` pays it all with mana. **Omitted**, the engine taps `proof`'s
+ * worth itself, for a driver that doesn't choose.
+ *
+ * A compacted token stack is one id in `choices`, named once per token
+ * tapped; `copies` lists only stacks, so it's absent on an ordinary board.
+ */
+export interface WaterbendOffer {
+  /** Every untapped artifact and creature the player controls that may
+   * tap — the ones that don't make mana first. An ability's own source is
+   * left out when its cost also has `{T}`. */
+  readonly choices: readonly ObjectId[];
+  readonly copies?: Readonly<Record<ObjectId, number>>;
+  /** The most that may tap: the waterbend part's generic mana, no more than
+   * the total cost has left to pay (rule 701.67b). For a `{X}` waterbend, at
+   * the largest X offered — `byX` has each. */
+  readonly max: number;
+  /** Taps known to work: the fewest, from the front of `choices`, that
+   * leave the rest payable with mana — empty when mana alone pays. At the
+   * least X offered, for an `{X}` cost. */
+  readonly proof: readonly ObjectId[];
+  /** For a cost with `{X}`: `max` and `proof` at each X from 0 to the
+   * offer's `xCost.maxX` ({@link waterbendAt} reads it). */
+  readonly byX?: readonly { readonly max: number; readonly proof: readonly ObjectId[] }[];
+}
+
+/** A waterbend offer's `max` and `proof` at `x` — the offer's own when its
+ * cost has no `{X}`. */
+export function waterbendAt(
+  offer: WaterbendOffer,
+  x = 0,
+): { readonly max: number; readonly proof: readonly ObjectId[] } {
+  if (offer.byX === undefined) return offer;
+  const at = offer.byX[Math.max(0, Math.min(offer.byX.length - 1, Math.floor(x)))];
+  return at ?? offer;
+}
+
 export type Action =
   | { readonly type: "pass-priority"; readonly player: PlayerId }
   | {
@@ -332,6 +376,11 @@ export type Action =
        * with its chosen contribution. Only meaningful for a card with
        * `CardDefinition.convoke`. */
       readonly convoke?: readonly ConvokePayment[];
+      /** The artifacts and creatures tapped to pay the waterbend part of the
+       * total cost (rule 701.67a), each paying {1} of its generic — a stack
+       * named once per token. `[]` pays it all with mana; omitted, the
+       * engine taps the offer's `proof` — see {@link WaterbendOffer}. */
+      readonly waterbend?: readonly ObjectId[];
       /** Cards in the caster's graveyard exiled for delve (rule 702.66a),
        * each paying {1} of the total cost's generic mana, picked from the
        * variant's `delve` offer. Only for a card with `CardDefinition.delve`;
@@ -376,6 +425,11 @@ export type Action =
        * picked from the offer's `tapCost`. Omitted, the engine picks for a
        * driver that doesn't choose. */
       readonly tap?: readonly ObjectId[];
+      /** The artifacts and creatures tapped to pay a waterbend cost (rule
+       * 701.67a — `AbilityCost.waterbend`), each paying {1} of its generic.
+       * `[]` pays it all with mana; omitted, the engine taps the offer's
+       * `proof` — see {@link WaterbendOffer}. */
+      readonly waterbend?: readonly ObjectId[];
       /** The chosen value for `{X}` in the ability's mana cost (ROADMAP Phase
        * 11 EG-3). Required (and only meaningful) when the cost contains `{X}`;
        * ignored otherwise. Folded into the generic portion when paid and
@@ -847,8 +901,9 @@ export type LegalAction =
        * promises the gift; to whom is asked once it's cast) — for
        * labelling — `"blight"` (701.68a: the variant that blights, with
        * `kickerCost` its N), `"behold"` (701.4a: the variant that beholds,
-       * with `kickerCost` what — "a Dragon"). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
+       * with `kickerCost` what — "a Dragon"), `"waterbend"` (701.67a: the
+       * variant that waterbends, with `kickerCost` its `{N}`). */
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */
@@ -973,6 +1028,9 @@ export type LegalAction =
          * this is absent on an ordinary board. */
         readonly copies?: Readonly<Record<ObjectId, number>>;
       };
+      /** The variant's total cost has a waterbend part (rule 701.67a) —
+       * what may tap for it. See {@link WaterbendOffer}. */
+      readonly waterbend?: WaterbendOffer;
     }
   | {
       readonly kind: "activate-ability";
@@ -989,6 +1047,9 @@ export type LegalAction =
       /** Present when the cost taps other permanents ("Tap five untapped
        * Zombies you control") — see {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;
+      /** Present when the cost is a waterbend cost (rule 701.67a) — see
+       * {@link WaterbendOffer}. */
+      readonly waterbend?: WaterbendOffer;
       /** Present for a planeswalker loyalty ability — the loyalty counters it
        * adds (negative = removes), so a UI can label it "+1" / "−3". */
       readonly loyalty?: number;

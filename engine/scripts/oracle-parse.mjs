@@ -566,7 +566,11 @@ export function parseCost(text) {
     else if (part === "Exile ~") cost.exileSelf = true;
     // Blight N (rule 701.68a), chosen as it's paid.
     else if ((m = /^Blight (\d+)$/.exec(part))) cost.blight = Number(m[1]);
-    else return null;
+    // Waterbend {N} (rule 701.67a): the mana, some of it maybe paid by tapping.
+    else if ((m = /^Waterbend (\{(?:\d+|X)\})$/.exec(part)) && cost.mana === null) {
+      cost.mana = m[1];
+      cost.waterbend = true;
+    } else return null;
   }
   // Without a {T} of its own, the source may be one of the creatures it taps
   // (Nullmage Shepherd).
@@ -1421,6 +1425,18 @@ export function parseFace(face, ctx = {}) {
       out.kicker = { cost: "", keyword: "behold", behold: beholdOf(m[1]) };
       continue;
     }
+    // Waterbend (rule 701.67a) as a spell's cost: "waterbend {5}" / "{X}"
+    // (an X the mana cost needn't have), and "you may waterbend {N}" (a
+    // kicker by another name, whose "if this spell's additional cost was
+    // paid" is read with the spell's text below).
+    if (castable && (m = /^As an additional cost to cast ~, waterbend \{(\d+|X)\}\.$/.exec(line))) {
+      out.additionalCost = { waterbend: m[1] === "X" ? "x" : Number(m[1]) };
+      continue;
+    }
+    if (castable && (m = /^As an additional cost to cast ~, you may waterbend (\{\d+\})\.$/.exec(line))) {
+      out.kicker = { cost: m[1], keyword: "waterbend" };
+      continue;
+    }
     if (castable && (m = /^As an additional cost to cast ~, behold (.+) and exile it\.$/.exec(line)) && beholdOf(m[1]) !== null) {
       out.additionalCost = { behold: { ...beholdOf(m[1]), exile: true } };
       continue;
@@ -1553,7 +1569,7 @@ export function parseFace(face, ctx = {}) {
       // this, with any target it adds after the spell's own. Not an
       // "instead", which rewrites the spell's text: that's a person's.
       let kickedTail;
-      if (out.kicker?.keyword === "behold") {
+      if (out.kicker?.keyword === "behold" || out.kicker?.keyword === "waterbend") {
         const sentences = sentencesOf(text);
         const last = sentences.at(-1) ?? "";
         const tail = /^If (?:a|an) .+ was beheld, (.+)$/.exec(last) ?? /^If ~'s additional cost was paid, (.+)$/.exec(last);

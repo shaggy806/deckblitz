@@ -609,6 +609,40 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       parseSentence("Until your next turn, your opponents can't cast spells from anywhere other than their hands.", ctx()),
     ).toEqual({ kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" });
   });
+
+  it("waterbend (rule 701.67a): an ability's cost, a spell's additional cost ({N} or {X}), and an optional one", () => {
+    expect(parseCost("Waterbend {4}").cost).toEqual({ mana: "{4}", tap: false, waterbend: true });
+    expect(parseCost("Waterbend {X}").cost).toEqual({ mana: "{X}", tap: false, waterbend: true });
+    expect(parseCost("Waterbend {3}, {T}").cost).toEqual({ mana: "{3}", tap: true, waterbend: true });
+    // One mana cost to a cost: a waterbend beside another mana part is a person's.
+    expect(parseCost("{1}, Waterbend {2}")).toBeNull();
+    const leaper = face("Waterbend {4}: Draw a card, then discard a card.");
+    expect(leaper.activated[0].cost).toEqual({ mana: "{4}", tap: false, waterbend: true });
+    expect(leaper.complete).toBe(true);
+    const whip = face("As an additional cost to cast this spell, waterbend {5}.\nDraw two cards.", "Sorcery — Lesson", {});
+    expect(whip.additionalCost).toEqual({ waterbend: 5 });
+    expect(whip.complete).toBe(true);
+    // Any spell's, a creature's too; "{X}" makes it an X spell.
+    expect(face("As an additional cost to cast this spell, waterbend {X}.\nFlying").additionalCost).toEqual({
+      waterbend: "x",
+    });
+    // "You may waterbend {N}" is a kicker by another name, its "if this
+    // spell's additional cost was paid" closing the spell read with it.
+    const optional = face(
+      "As an additional cost to cast this spell, you may waterbend {4}.\nDraw a card. If this spell's additional cost was paid, you gain 2 life.",
+      "Sorcery",
+      {},
+    );
+    expect(optional.kicker).toEqual({
+      cost: "{4}",
+      keyword: "waterbend",
+      effect: { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "gain-life", amount: 2 }] },
+    });
+    expect(optional.effect).toEqual({ kind: "draw", amount: 1 });
+    // "Unless you waterbend" and ward's waterbend aren't built: a person's.
+    expect(face("Draw three cards. Then discard a card unless you waterbend {2}.", "Sorcery", {}).complete).toBe(false);
+    expect(face("Ward—Waterbend {4}.").complete).toBe(false);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

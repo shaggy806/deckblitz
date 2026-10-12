@@ -15,6 +15,7 @@ import type {
   TargetRef,
   TargetSpec,
   VisibleObject,
+  WaterbendOffer,
 } from 'engine/client'
 import {
   anyNumberSlot,
@@ -33,6 +34,7 @@ import {
   standardAssignment,
   tapPicksPower,
   targetCountAtX,
+  waterbendAt,
 } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 import { useNetworkGame } from './net/useNetworkGame.ts'
@@ -239,6 +241,11 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.convoke !== undefined && cast.convoke.candidates.length > 0
     ? { convokeOffer: cast.convoke }
     : {}),
+  // What may tap for a waterbend part of the cost (rule 701.67a): asked
+  // once the targets are in, at the X chosen.
+  ...(cast.waterbend !== undefined && cast.waterbend.choices.length > 0
+    ? { waterbendOffer: cast.waterbend }
+    : {}),
 })
 
 /** The costs of a cast already chosen before its modes / X / targets, carried
@@ -442,6 +449,9 @@ interface Targeting {
   /** A convoke spell's creatures still to pick, once the targets are in —
    * see `pendingConvoke`. */
   readonly convokeOffer?: ConvokeOffer
+  /** What may tap to pay a waterbend cost — a spell's or an ability's —
+   * still to pick, once the targets are in — see `pendingWaterbend`. */
+  readonly waterbendOffer?: WaterbendOffer
   /** How many distinct targets the cast is affordable with, under a "for
    * each target" cost (Hinata, Dawn-Crowned) — see `currentSlotOptions`. */
   readonly targetCount?: TargetCountRange
@@ -1442,6 +1452,18 @@ function Table({
     readonly offer: ConvokeOffer
     readonly picks: readonly ObjectId[]
   } | null>(null)
+  /** A spell or ability with a waterbend cost whose targets (and X) are in,
+   * waiting on which artifacts and creatures tap to pay for it (rule
+   * 701.67a): up to `max`, each paying {1}; none at all is paying with mana.
+   * `least` is how many the mana can't do without — the offer's proof at
+   * this X, which `picks` starts from. A stack is named once per token. */
+  const [pendingWaterbend, setPendingWaterbend] = useState<{
+    readonly action: Action
+    readonly offer: WaterbendOffer
+    readonly max: number
+    readonly least: number
+    readonly picks: readonly ObjectId[]
+  } | null>(null)
   /** The token stack whose "how many of these?" menu is open, if any. */
   const [stackMenu, setStackMenu] = useState<ObjectId | null>(null)
   // A tile of several attackers clicked while declaring attacks: the popup
@@ -1813,6 +1835,7 @@ function Table({
     | 'choose-sacrifice'
     | 'choose-tap'
     | 'choose-convoke'
+    | 'choose-waterbend'
     | 'choose-division'
     | 'assign-combat-damage'
     | 'targeting'
@@ -1873,6 +1896,8 @@ function Table({
                       ? 'choose-tap'
                     : pendingConvoke
                       ? 'choose-convoke'
+                    : pendingWaterbend
+                      ? 'choose-waterbend'
                     : pendingDivision
                       ? 'choose-division'
                     : activeTargeting
@@ -1934,6 +1959,7 @@ function Table({
         | 'sneakReturn'
         | 'webSlingingReturn'
         | 'convokeOffer'
+        | 'waterbendOffer'
         | 'divide'
       >,
       targets: readonly (TargetRef | null)[],
@@ -2014,6 +2040,17 @@ function Table({
           picks: convoke.manaAffordable ? [] : convoke.proof.map((p) => p.creature),
         })
         return
+      }
+      // Waterbend (rule 701.67a): which artifacts and creatures tap for the
+      // waterbend part, at the X chosen. Nothing to tap for at this X (X=0)
+      // asks nothing; mana pays it.
+      const bend = t.waterbendOffer
+      if (bend !== undefined && action.type !== 'choose-targets') {
+        const at = waterbendAt(bend, t.xValue ?? 0)
+        if (at.max > 0) {
+          setPendingWaterbend({ action, offer: bend, max: at.max, least: at.proof.length, picks: [...at.proof] })
+          return
+        }
       }
       const offer = t.tapCost
       if (offer === undefined || action.type === 'choose-targets') {
@@ -2233,6 +2270,9 @@ function Table({
         options: action.targetOptions,
         xValue: value,
         ...(action.tapCost !== undefined ? { tapCost: action.tapCost } : {}),
+        ...(action.waterbend !== undefined && action.waterbend.choices.length > 0
+          ? { waterbendOffer: action.waterbend }
+          : {}),
         ...(action.divide !== undefined ? { divide: action.divide } : {}),
       })
     },
@@ -2278,6 +2318,7 @@ function Table({
         ...(sacrifice !== undefined ? { sacrifice } : {}),
         ...(ab.manaColors !== undefined ? { manaColors: ab.manaColors } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
+        ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
         ...(ab.divide !== undefined ? { divide: ab.divide } : {}),
       })
     },
@@ -2455,6 +2496,8 @@ function Table({
           ? pendingTap
           : mode === 'choose-convoke'
             ? pendingConvoke
+            : mode === 'choose-waterbend'
+              ? pendingWaterbend
             : mode === 'choose-permanents'
               ? { picks: permanentPicks }
               : null
@@ -2464,7 +2507,7 @@ function Table({
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, permanentPicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks],
   )
 
   const clickPermanent = useCallback(
@@ -2577,6 +2620,27 @@ function Table({
                 picks: cur.picks.includes(id)
                   ? cur.picks.filter((x) => x !== id)
                   : cur.picks.length >= offer.maxCreatures
+                    ? cur.picks
+                    : [...cur.picks, id],
+              },
+        )
+        return
+      }
+      if (mode === 'choose-waterbend' && pendingWaterbend) {
+        const { offer } = pendingWaterbend
+        if (!offer.choices.includes(id)) return
+        if ((offer.copies?.[id] ?? 1) > 1) {
+          setStackMenu((cur) => (cur === id ? null : id))
+          return
+        }
+        setPendingWaterbend((cur) =>
+          cur === null
+            ? cur
+            : {
+                ...cur,
+                picks: cur.picks.includes(id)
+                  ? cur.picks.filter((x) => x !== id)
+                  : cur.picks.length >= cur.max
                     ? cur.picks
                     : [...cur.picks, id],
               },
@@ -2724,6 +2788,7 @@ function Table({
       startAbility,
       pendingTap,
       pendingConvoke,
+      pendingWaterbend,
       proliferateAction,
       activeTargeting,
       defendersFor,
@@ -3013,6 +3078,14 @@ function Table({
       const taken = picks.filter((x) => members.includes(x)).length
       const of = members.reduce((n, i) => n + (offer.copies?.[i] ?? 1), 0)
       highlight = of > taken && picks.length < offer.maxCreatures
+      selected = taken > 0
+      if (of > 1 && taken > 0) badge = `↷ ${taken}/${of}`
+    } else if (mode === 'choose-waterbend' && pendingWaterbend) {
+      const { offer, picks, max } = pendingWaterbend
+      const members = ids.filter((i) => offer.choices.includes(i))
+      const taken = picks.filter((x) => members.includes(x)).length
+      const of = members.reduce((n, i) => n + (offer.copies?.[i] ?? 1), 0)
+      highlight = of > taken && picks.length < max
       selected = taken > 0
       if (of > 1 && taken > 0) badge = `↷ ${taken}/${of}`
     } else if (mode === 'choose-enchant' && enchantAction) {
@@ -3941,6 +4014,36 @@ function Table({
           {picks.length === 0 ? 'Pay with mana' : `Convoke ${picks.length}`}
         </button>
         <button type="button" onClick={() => setPendingConvoke(null)}>
+          Cancel
+        </button>
+      </div>
+    )
+  } else if (mode === 'choose-waterbend' && pendingWaterbend) {
+    const { action, max, least, picks } = pendingWaterbend
+    const name =
+      action.type === 'cast-spell'
+        ? game.nameOf(action.card)
+        : action.type === 'activate-ability'
+          ? game.nameOf(action.source)
+          : ''
+    controls = (
+      <div className="controls">
+        <span>
+          {name}: waterbend — tap up to {max} artifact{max === 1 ? '' : 's'} or creature
+          {max === 1 ? '' : 's'} to pay <Symbols text="{1}" /> each
+          {least > 0 ? `, at least ${least}` : ''} ({picks.length} chosen)
+        </span>
+        <button
+          type="button"
+          disabled={picks.length < least}
+          onClick={() => {
+            setPendingWaterbend(null)
+            game.dispatch({ ...action, waterbend: [...picks] } as Action)
+          }}
+        >
+          {picks.length === 0 ? 'Pay with mana' : `Waterbend ${picks.length}`}
+        </button>
+        <button type="button" onClick={() => setPendingWaterbend(null)}>
           Cancel
         </button>
       </div>
@@ -4927,7 +5030,16 @@ function Table({
                 set: (next: readonly ObjectId[]) =>
                   setPendingConvoke((cur) => (cur === null ? cur : { ...cur, picks: next })),
               }
-            : null
+            : mode === 'choose-waterbend' && pendingWaterbend
+              ? {
+                  verb: 'Waterbend',
+                  count: pendingWaterbend.max,
+                  of: pendingWaterbend.offer.copies?.[stackMenu] ?? 1,
+                  picks: pendingWaterbend.picks,
+                  set: (next: readonly ObjectId[]) =>
+                    setPendingWaterbend((cur) => (cur === null ? cur : { ...cur, picks: next })),
+                }
+              : null
     if (pick === null) return null
     const taken = pick.picks.filter((x) => x === stackMenu).length
     // What this stack could be raised to: everything not already promised to

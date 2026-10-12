@@ -41,6 +41,7 @@ import type {
   LegalAction,
   PlayLandOffer,
   TapCostOffer,
+  WaterbendOffer,
 } from "./actions.js";
 import {
   autoAssignForAttacker,
@@ -1236,29 +1237,31 @@ export class Game {
         this.sneakReturnChoice = action.sneakReturn;
         this.webSlingingReturnChoice = action.webSlingingReturn;
         try {
-          this.castSpell(
-            action.player,
-            action.card,
-            normalizeTargets(action.targets),
-            action.xValue ?? 0,
-            action.via,
-            action.face ?? 0,
-            action.modes,
-            action.kicked === true ? (action.kickCount ?? true) : false,
-            action.sacrifice,
-            action.overload === true,
-            action.free === true,
-            action.convoke,
-            action.altCost === true,
-            action.costOption,
-            action.tap,
-            action.graveyardGrant,
-            action.escapeExile,
-            action.prototype === true,
-            action.offspring === true,
-            action.evoke === true ? (action.evokeCost ?? "") : null,
-            action.division,
-            action.delve,
+          this.withWaterbendChoice(action.card, action.waterbend, () =>
+            this.castSpell(
+              action.player,
+              action.card,
+              normalizeTargets(action.targets),
+              action.xValue ?? 0,
+              action.via,
+              action.face ?? 0,
+              action.modes,
+              action.kicked === true ? (action.kickCount ?? true) : false,
+              action.sacrifice,
+              action.overload === true,
+              action.free === true,
+              action.convoke,
+              action.altCost === true,
+              action.costOption,
+              action.tap,
+              action.graveyardGrant,
+              action.escapeExile,
+              action.prototype === true,
+              action.offspring === true,
+              action.evoke === true ? (action.evokeCost ?? "") : null,
+              action.division,
+              action.delve,
+            ),
           );
         } finally {
           this.sneakReturnChoice = undefined;
@@ -1266,16 +1269,18 @@ export class Game {
         }
         break;
       case "activate-ability":
-        this.activateAbility(
-          action.player,
-          action.source,
-          action.abilityIndex,
-          normalizeTargets(action.targets),
-          action.sacrifice,
-          action.xValue ?? 0,
-          action.manaColors,
-          action.tap,
-          action.division,
+        this.withWaterbendChoice(action.source, action.waterbend, () =>
+          this.activateAbility(
+            action.player,
+            action.source,
+            action.abilityIndex,
+            normalizeTargets(action.targets),
+            action.sacrifice,
+            action.xValue ?? 0,
+            action.manaColors,
+            action.tap,
+            action.division,
+          ),
         );
         break;
       default:
@@ -1427,36 +1432,40 @@ export class Game {
             return "web-slinging returns a tapped creature you control";
           }
         }
-        return this.whyCannotCastSpell(
-          action.player,
-          action.card,
-          action.via,
-          action.face ?? 0,
-          action.modes,
-          action.kicked === true ? (action.kickCount ?? true) : false,
-          action.sacrifice,
-          action.overload === true,
-          action.free === true,
-          action.convoke,
-          action.altCost === true,
-          action.costOption,
-          action.tap,
-          action.graveyardGrant,
-          action.xValue,
-          distinctTargetCount(action.targets, this.targetCopies(action.targets ?? [])),
-          action.escapeExile,
-          action.prototype === true,
-          action.offspring === true,
-          action.evoke === true ? (action.evokeCost ?? "") : null,
-          action.delve,
+        return this.withWaterbendChoice(action.card, action.waterbend, () =>
+          this.whyCannotCastSpell(
+            action.player,
+            action.card,
+            action.via,
+            action.face ?? 0,
+            action.modes,
+            action.kicked === true ? (action.kickCount ?? true) : false,
+            action.sacrifice,
+            action.overload === true,
+            action.free === true,
+            action.convoke,
+            action.altCost === true,
+            action.costOption,
+            action.tap,
+            action.graveyardGrant,
+            action.xValue,
+            distinctTargetCount(action.targets, this.targetCopies(action.targets ?? [])),
+            action.escapeExile,
+            action.prototype === true,
+            action.offspring === true,
+            action.evoke === true ? (action.evokeCost ?? "") : null,
+            action.delve,
+          ),
         );
       case "activate-ability":
-        return this.whyCannotActivateAbility(
-          action.player,
-          action.source,
-          action.abilityIndex,
-          action.tap,
-          action.xValue ?? 0,
+        return this.withWaterbendChoice(action.source, action.waterbend, () =>
+          this.whyCannotActivateAbility(
+            action.player,
+            action.source,
+            action.abilityIndex,
+            action.tap,
+            action.xValue ?? 0,
+          ),
         );
       default:
         return `unknown action: ${(action as { type: string }).type}`;
@@ -1937,14 +1946,17 @@ export class Game {
       if (this.whyCannotActivateAbility(player, source, index) !== null) return;
       const manaX =
         parseManaCost(ability.cost.mana).x > 0
-          ? // Mirrors activateAbility's own payMana call exactly — see
-            // maxAffordableAbilityX.
-            this.maxAffordableAbilityX(
-              player,
-              (x) => this.activatedAbilityManaCost(player, source, ability, x).cost,
-              ability.cost.tap || ability.zone !== undefined ? undefined : source,
-              ability.cost.tap ? source : undefined,
-            )
+          ? ability.cost.waterbend === true
+            ? // "Waterbend {X}": taps pay for X too (rule 701.67a).
+              this.maxWaterbendAbilityX(player, source, ability, ability.minX ?? 0)
+            : // Mirrors activateAbility's own payMana call exactly — see
+              // maxAffordableAbilityX.
+              this.maxAffordableAbilityX(
+                player,
+                (x) => this.activatedAbilityManaCost(player, source, ability, x).cost,
+                ability.cost.tap || ability.zone !== undefined ? undefined : source,
+                ability.cost.tap ? source : undefined,
+              )
           : undefined;
       // "Sacrifice X Treasures": as many as there are to sacrifice once the
       // mana is paid.
@@ -1998,6 +2010,9 @@ export class Game {
             const tapCost = this.abilityTapCostOffer(player, source, ability);
             return tapCost === null ? {} : { tapCost };
           })(),
+          ...(ability.cost.waterbend === true
+            ? { waterbend: this.abilityWaterbendOffer(player, source, ability, xCost) }
+            : {}),
           ...(ability.loyaltyCost !== undefined ? { loyalty: ability.loyaltyCost } : {}),
           ...(isManaAbility(ability) ? { manaAbility: true as const } : {}),
           ...(plainMana !== undefined ? { plainMana } : {}),
@@ -2689,7 +2704,7 @@ export class Game {
       }
       const alternative = altCost === true ? this.alternativeCostOf(card, def, via, player) : null;
       const paidBase = evoke ?? printedOrPrototype;
-      const cost = alternative !== null
+      const costBeforeWaterbend = alternative !== null
         ? alternative.mana
         : free
         ? kicked && def.kicker !== null ? "{0}" + def.kicker.cost.repeat(kickCount ?? 1) : "{0}"
@@ -2700,6 +2715,8 @@ export class Game {
             : paidBase !== null && offspring === true
               ? paidBase + (offspringCost ?? "")
               : paidBase;
+      // An additional "waterbend {X}" makes it an {X} spell (rule 701.67a).
+      const cost = costBeforeWaterbend === null ? null : costBeforeWaterbend + Game.waterbendCostString(def);
       const sacrifices = this.additionalCostSacrifices(
         player,
         def,
@@ -2909,6 +2926,32 @@ export class Game {
                 },
               };
             })()
+          : {}),
+        // Waterbend (rule 701.67a): what may tap for the waterbend part, and
+        // the fewest that make the rest payable.
+        ...(variantCost !== null && this.spellHasWaterbend(def, kicked)
+          ? {
+              waterbend: this.withFace(card, face ?? 0, () =>
+                this.waterbendOffer(
+                  player,
+                  (x) => ({
+                    cost: this.castingCostOf(player, card, def, x, variantCost, pricedAt),
+                    waterbend: this.spellWaterbend(def, kicked, x),
+                  }),
+                  (rest, withheld) =>
+                    this.payMana(
+                      player,
+                      rest,
+                      undefined,
+                      undefined,
+                      { kind: "cast", card, face: face ?? 0 },
+                      withheld.size > 0 ? { withheld } : undefined,
+                    ) !== null,
+                  xPlan === null ? undefined : xPlan.maxX,
+                  xFloor,
+                ),
+              ),
+            }
           : {}),
         ...(targetCount !== undefined ? { targetCount } : {}),
         ...(xGroup !== null ? { targetCount: xGroup.targetCount } : {}),
@@ -8699,7 +8742,48 @@ export class Game {
     const manaOnly = this.maxAffordableX(player, cardId, def, costString, face, targetCount);
     const plan = this.xPlanByConvoke(player, cardId, def, costString, face, targetCount, manaOnly);
     const byDelve = this.maxXByDelve(player, cardId, def, costString, face, targetCount, plan.maxX);
-    return byDelve > plan.maxX ? { maxX: byDelve, convoke: [] } : plan;
+    const byWaterbend = this.maxXByWaterbend(player, cardId, def, costString, face, targetCount, plan.maxX);
+    const most = Math.max(byDelve, byWaterbend);
+    return most > plan.maxX ? { maxX: most, convoke: [] } : plan;
+  }
+
+  /**
+   * The largest `{X}` an additional "waterbend {X}" reaches with mana and
+   * taps together (rule 701.67a: X of the total cost's generic may be paid
+   * by tapping artifacts and creatures), at least `floor` — or `floor` for
+   * a spell without one. Dearer as X rises, so tried upwards until it fails.
+   */
+  private maxXByWaterbend(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    costString: string | null,
+    face: number,
+    targetCount: number,
+    floor: number,
+  ): number {
+    if (def.additionalCost?.waterbend === undefined) return floor;
+    return this.withFace(cardId, face, () => {
+      const purpose: ManaPurpose = { kind: "cast", card: cardId };
+      const pays = (rest: ManaCost, withheld: ReadonlySet<ObjectId>): boolean =>
+        this.payMana(player, rest, undefined, undefined, purpose, withheld.size > 0 ? { withheld } : undefined) !==
+        null;
+      const payable = (k: number): boolean => {
+        const cost = this.castingCostOf(player, cardId, def, k, costString, targetCount);
+        const most = Math.min(this.spellWaterbend(def, false, k), cost.generic);
+        return this.waterbendProof(player, cost, most, pays) !== null;
+      };
+      const cap =
+        this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
+        this.state.players[player].manaPool.length +
+        this.waterbendUnits(this.waterbendCandidates(player)).length;
+      let best = floor;
+      for (let k = floor + 1; k <= cap; k += 1) {
+        if (!payable(k)) break;
+        best = k;
+      }
+      return best;
+    });
   }
 
   /**
@@ -8914,8 +8998,12 @@ export class Game {
     const escalateCost = def.castModal?.costPerExtraMode;
     const extraModes = modes.length - 1;
     const spree = modes.map((i) => def.castModal?.modes[i]?.spreeCost ?? "").join("");
+    // So is "as an additional cost to cast this spell, waterbend {5}" (rule
+    // 701.67a): its mana is paid on top, some of it maybe by tapping.
     const escalate =
-      (escalateCost === undefined || extraModes <= 0 ? "" : escalateCost.repeat(extraModes)) + spree;
+      (escalateCost === undefined || extraModes <= 0 ? "" : escalateCost.repeat(extraModes)) +
+      spree +
+      Game.waterbendCostString(def);
     // A chosen additional-cost branch that is paid in mana (Redirect
     // Lightning's "or pay {2}") concatenates the same way kicker does, and
     // for the same reason — an additional cost adds to what's being paid,
@@ -9620,14 +9708,33 @@ export class Game {
     const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
-    const arrangement: ManaSourceArrangement | undefined =
-      convoked.length === 0 && sacrificeCandidates === undefined
+    // So is an artifact or creature tapped to waterbend (rule 701.67a).
+    const arrangementWith = (tapped: Iterable<ObjectId>): ManaSourceArrangement | undefined => {
+      const withheld = new Set([...convoked.map((p) => p.creature), ...tapped]);
+      return withheld.size === 0 && sacrificeCandidates === undefined
         ? undefined
         : {
-            ...(convoked.length > 0 ? { withheld: new Set(convoked.map((p) => p.creature)) } : {}),
+            ...(withheld.size > 0 ? { withheld } : {}),
             ...(sacrificeCandidates !== undefined ? { last: sacrificeCandidates } : {}),
           };
-    const plan = this.payMana(player, cost, undefined, undefined, purpose, arrangement);
+    };
+    const waterbent = this.waterbendTaps(
+      player,
+      cardId,
+      def.name,
+      cost,
+      this.spellWaterbend(def, kicked, xValue),
+      (rest, withheld) => this.payMana(player, rest, undefined, undefined, purpose, arrangementWith(withheld)) !== null,
+    );
+    if (typeof waterbent === "string") return waterbent;
+    const plan = this.payMana(
+      player,
+      { ...cost, generic: cost.generic - waterbent.length },
+      undefined,
+      undefined,
+      purpose,
+      arrangementWith(waterbent),
+    );
     if (plan === null) return `${player} cannot pay the cost of ${def.name}`;
     if (
       sacrificeParts !== null &&
@@ -9734,6 +9841,318 @@ export class Game {
       else colored[pays] -= 1;
     }
     return { ...cost, generic, colored };
+  }
+
+  // --- waterbend (rule 701.67) -------------------------------------------
+
+  /**
+   * The `waterbend` taps of the `cast-spell` / `activate-ability` being
+   * dispatched or checked (rule 701.67a), with the card or source it names —
+   * read only for that one, as its cost is checked and paid. Unset, or for
+   * another object, the engine taps the fewest that pay (`waterbendProof`):
+   * what `legalActions` judges an offer by, and a driver that doesn't choose
+   * gets.
+   */
+  private waterbendChoice: { readonly for: ObjectId; readonly taps: readonly ObjectId[] } | undefined = undefined;
+
+  private withWaterbendChoice<T>(id: ObjectId, taps: readonly ObjectId[] | undefined, run: () => T): T {
+    const before = this.waterbendChoice;
+    this.waterbendChoice = taps === undefined ? undefined : { for: id, taps };
+    try {
+      return run();
+    } finally {
+      this.waterbendChoice = before;
+    }
+  }
+
+  private waterbendTapsFor(id: ObjectId): readonly ObjectId[] | undefined {
+    return this.waterbendChoice?.for === id ? this.waterbendChoice.taps : undefined;
+  }
+
+  /** The generic mana of a spell's waterbend costs at `x` (rule 701.67b):
+   * its `additionalCost.waterbend`, and a waterbend kicker's when kicked. 0
+   * for none. */
+  private spellWaterbend(def: CardDefinition, kicked: boolean | number, x: number): number {
+    const fixed = def.additionalCost?.waterbend;
+    let generic = fixed === undefined ? 0 : fixed === "x" ? Math.max(0, Math.floor(x)) : fixed;
+    if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "waterbend") {
+      generic += parseManaCost(def.kicker.cost).generic;
+    }
+    return generic;
+  }
+
+  /** Whether a spell cast so has a waterbend cost at all — "waterbend {X}"
+   * at any X included. */
+  private spellHasWaterbend(def: CardDefinition, kicked: boolean | number): boolean {
+    return (
+      def.additionalCost?.waterbend !== undefined ||
+      (kicked !== false && kicked !== 0 && def.kicker?.keyword === "waterbend")
+    );
+  }
+
+  /** The mana an additional "waterbend {5}" / "waterbend {X}" adds to the
+   * total cost (rule 601.2f) — `""` for none. */
+  private static waterbendCostString(def: CardDefinition): string {
+    const waterbend = def.additionalCost?.waterbend;
+    return waterbend === undefined ? "" : waterbend === "x" ? "{X}" : `{${waterbend}}`;
+  }
+
+  /** The generic mana of an ability's waterbend cost at `x` — 0 when its
+   * cost isn't one. */
+  private abilityWaterbend(ability: ActivatedAbility, x: number): number {
+    if (ability.cost.waterbend !== true) return 0;
+    const parsed = parseManaCost(ability.cost.mana);
+    return parsed.generic + parsed.x * Math.max(0, Math.floor(x));
+  }
+
+  /**
+   * Untapped artifacts and creatures `player` controls that could tap for a
+   * waterbend cost (rule 701.67a — summoning sick or not, the rulings), less
+   * `except` (an ability's source, which its own `{T}` taps). In the order the
+   * engine taps them for a driver that doesn't choose: artifacts that aren't
+   * creatures, then creatures, then `avoidLast` (an ability's own source),
+   * and anything that makes mana last of all — tapped for waterbend, it can't
+   * tap for mana as well (the rulings).
+   */
+  private waterbendCandidates(player: PlayerId, except?: ObjectId, avoidLast?: ObjectId): ObjectId[] {
+    const makesMana = new Set(this.manaSources(player).map((s) => s.id));
+    const eligible: { id: ObjectId; rank: number }[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      if (id === except) continue;
+      const object = this.state.objects[id];
+      if (object.controller !== player || object.tapped) continue;
+      const types = computeCharacteristics(this.state, this.registry, id).types;
+      const creature = types.includes("creature");
+      if (!creature && !types.includes("artifact")) continue;
+      eligible.push({ id, rank: makesMana.has(id) ? 3 : id === avoidLast ? 2 : creature ? 1 : 0 });
+    }
+    return eligible.sort((a, b) => a.rank - b.rank).map((e) => e.id);
+  }
+
+  /** `candidates` with each token stack named once per token. */
+  private waterbendUnits(candidates: readonly ObjectId[]): ObjectId[] {
+    return candidates.flatMap((id) => Array<ObjectId>(this.state.objects[id].stackCount ?? 1).fill(id));
+  }
+
+  /** Why `taps` can't pay a waterbend cost of which `most` generic mana may
+   * be paid by tapping (rule 701.67b): each must be an untapped artifact or
+   * creature `player` controls, named no more often than it has tokens, and
+   * not `except` — the source a `{T}` in the same cost taps. */
+  private whyWaterbendIsWrong(
+    player: PlayerId,
+    taps: readonly ObjectId[],
+    most: number,
+    except?: ObjectId,
+  ): string | null {
+    if (taps.length > most) {
+      return `waterbend may tap only ${most} to pay for that cost's generic mana`;
+    }
+    const seen = new Map<ObjectId, number>();
+    for (const id of taps) {
+      if (id === except) return "that permanent is tapped by {T} in the same cost";
+      const object = this.state.objects[id];
+      if (object === undefined || object.zone !== "battlefield" || object.controller !== player) {
+        return `${player} does not control that permanent`;
+      }
+      const times = (seen.get(id) ?? 0) + 1;
+      if (times > (object.stackCount ?? 1)) return "the same permanent can't tap twice";
+      seen.set(id, times);
+      if (object.tapped) return "that permanent is already tapped";
+      const types = computeCharacteristics(this.state, this.registry, id).types;
+      if (!types.includes("artifact") && !types.includes("creature")) {
+        return "only an artifact or creature can tap to waterbend";
+      }
+    }
+    return null;
+  }
+
+  /**
+   * The fewest waterbend candidates, from the front, whose tapping leaves
+   * the rest of `cost` payable — `pays(rest, withheld)` says whether it is,
+   * the tapped ones withheld from paying it as mana. `[]` when mana alone
+   * pays; `null` when no number up to `most` does.
+   */
+  private waterbendProof(
+    player: PlayerId,
+    cost: ManaCost,
+    most: number,
+    pays: (rest: ManaCost, withheld: ReadonlySet<ObjectId>) => boolean,
+    except?: ObjectId,
+    avoidLast?: ObjectId,
+  ): ObjectId[] | null {
+    if (pays(cost, new Set())) return [];
+    const units = this.waterbendUnits(this.waterbendCandidates(player, except, avoidLast));
+    const at = (k: number): boolean => pays({ ...cost, generic: cost.generic - k }, new Set(units.slice(0, k)));
+    // Tapping one more that makes no mana never hurts, so the most that may
+    // tap is tried first and the fewest found by halving. Mana makers come
+    // last, and one can pay more as mana than tapped (a land creature making
+    // a colour the cost needs): should the most fail, fewer are tried.
+    let hi = Math.min(most, cost.generic, units.length);
+    while (hi > 0 && !at(hi)) hi -= 1;
+    if (hi === 0) return null;
+    let lo = 1;
+    while (lo < hi) {
+      const mid = Math.floor((lo + hi) / 2);
+      if (at(mid)) hi = mid;
+      else lo = mid + 1;
+    }
+    return units.slice(0, hi);
+  }
+
+  /**
+   * What pays the waterbend part of `cost` (rule 701.67a) for the cast or
+   * activation of `id`: the driver's `waterbend`, checked, or else the
+   * fewest that leave the rest payable (`waterbendProof`). `waterbend` is
+   * the waterbend part's generic mana, and no more than that of `cost` may
+   * be paid by tapping (701.67b). A reason instead when it can't be paid.
+   * The rest of `cost` is checked by the caller.
+   */
+  private waterbendTaps(
+    player: PlayerId,
+    id: ObjectId,
+    name: string,
+    cost: ManaCost,
+    waterbend: number,
+    pays: (rest: ManaCost, withheld: ReadonlySet<ObjectId>) => boolean,
+    except?: ObjectId,
+    avoidLast?: ObjectId,
+  ): ObjectId[] | string {
+    const most = Math.min(waterbend, cost.generic);
+    const chosen = this.waterbendTapsFor(id);
+    if (chosen !== undefined) {
+      if (chosen.length > 0 && waterbend === 0) return `${name} has no waterbend cost to pay`;
+      const wrong = this.whyWaterbendIsWrong(player, chosen, most, except);
+      return wrong ?? [...chosen];
+    }
+    if (waterbend === 0) return [];
+    return this.waterbendProof(player, cost, most, pays, except, avoidLast) ?? `${player} cannot pay ${name}'s waterbend cost`;
+  }
+
+  /**
+   * How a waterbend ability's cost is paid at `x` (rule 701.67a): the taps —
+   * the driver's, checked, or the fewest that pay — and the mana left to pay,
+   * which `activateAbility` pays as it planned it here. A reason instead when
+   * it can't be paid. A source the cost taps with `{T}` can't tap for it too;
+   * one it doesn't is the last the engine taps.
+   */
+  private abilityWaterbendPayment(
+    player: PlayerId,
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    x: number,
+  ): { readonly taps: ObjectId[]; readonly rest: ManaCost } | string {
+    const name = `${printedCardName(this.state.objects[sourceId])}'s ability`;
+    const cost = this.activatedAbilityManaCost(player, sourceId, ability, x).cost;
+    // As `activateAbility` passes them to `payMana`: see there.
+    const avoid = ability.cost.tap || ability.zone !== undefined ? undefined : sourceId;
+    const except = ability.cost.tap ? sourceId : undefined;
+    const pays = (rest: ManaCost, withheld: ReadonlySet<ObjectId>): boolean =>
+      this.payMana(
+        player,
+        rest,
+        avoid,
+        except,
+        { kind: "ability", source: sourceId },
+        withheld.size > 0 ? { withheld } : undefined,
+      ) !== null;
+    const taps = this.waterbendTaps(player, sourceId, name, cost, this.abilityWaterbend(ability, x), pays, except, avoid);
+    if (typeof taps === "string") return taps;
+    const rest = { ...cost, generic: cost.generic - taps.length };
+    if (!pays(rest, new Set(taps))) return `${player} cannot pay for ${name}`;
+    return { taps, rest };
+  }
+
+  /** A waterbend ability's offer (see {@link WaterbendOffer}), at each X
+   * `xCost` offers when its cost has `{X}`. */
+  private abilityWaterbendOffer(
+    player: PlayerId,
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    xCost: { readonly maxX: number; readonly minX?: number } | undefined,
+  ): WaterbendOffer {
+    const avoid = ability.cost.tap || ability.zone !== undefined ? undefined : sourceId;
+    const except = ability.cost.tap ? sourceId : undefined;
+    return this.waterbendOffer(
+      player,
+      (x) => ({
+        cost: this.activatedAbilityManaCost(player, sourceId, ability, x).cost,
+        waterbend: this.abilityWaterbend(ability, x),
+      }),
+      (rest, withheld) =>
+        this.payMana(
+          player,
+          rest,
+          avoid,
+          except,
+          { kind: "ability", source: sourceId },
+          withheld.size > 0 ? { withheld } : undefined,
+        ) !== null,
+      parseManaCost(ability.cost.mana).x > 0 ? xCost?.maxX : undefined,
+      xCost?.minX ?? 0,
+      except,
+      avoid,
+    );
+  }
+
+  /** The largest `{X}` a waterbend ability's cost reaches with mana and taps
+   * together (rule 701.67a — Katara, Water Tribe's Hope's "Waterbend {X}"),
+   * at least `floor`. Dearer as X rises, so tried upwards until it fails. */
+  private maxWaterbendAbilityX(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility, floor: number): number {
+    const cap =
+      this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
+      this.state.players[player].manaPool.length +
+      this.waterbendUnits(this.waterbendCandidates(player)).length;
+    let best = floor;
+    for (let k = Math.max(1, floor + 1); k <= cap; k += 1) {
+      if (typeof this.abilityWaterbendPayment(player, sourceId, ability, k) === "string") break;
+      best = k;
+    }
+    return best;
+  }
+
+  /** Taps what a waterbend cost was paid with (rule 701.67a) — a token
+   * peeled off a stack for each time the stack is named. */
+  private tapForWaterbend(taps: readonly ObjectId[]): void {
+    for (const named of taps) {
+      if (this.state.objects[named] === undefined) continue;
+      const id = this.splitOneFromStack(named);
+      this.state.objects[id].tapped = true;
+      this.emit({ type: "permanent-tapped", object: id });
+    }
+  }
+
+  /** The offer of a waterbend cost (see {@link WaterbendOffer}): `at(x)` is
+   * the cost and its waterbend part's generic mana at X, `pays` as for
+   * `waterbendProof`, `xs` the X values on offer (none for a cost without
+   * `{X}`) and `leastX` the least of them. */
+  private waterbendOffer(
+    player: PlayerId,
+    at: (x: number) => { readonly cost: ManaCost; readonly waterbend: number },
+    pays: (rest: ManaCost, withheld: ReadonlySet<ObjectId>) => boolean,
+    maxX: number | undefined,
+    leastX: number,
+    except?: ObjectId,
+    avoidLast?: ObjectId,
+  ): WaterbendOffer {
+    const choices = this.waterbendCandidates(player, except, avoidLast);
+    const units = this.waterbendUnits(choices).length;
+    const copies: Record<ObjectId, number> = {};
+    for (const id of choices) {
+      const n = this.state.objects[id].stackCount ?? 1;
+      if (n > 1) copies[id] = n;
+    }
+    const offerAt = (x: number): { max: number; proof: ObjectId[] } => {
+      const { cost, waterbend } = at(x);
+      const most = Math.min(waterbend, cost.generic);
+      return {
+        max: Math.min(most, units),
+        proof: this.waterbendProof(player, cost, most, pays, except, avoidLast) ?? [],
+      };
+    };
+    const base = { choices, ...(Object.keys(copies).length > 0 ? { copies } : {}) };
+    if (maxX === undefined) return { ...base, ...offerAt(0) };
+    const byX = Array.from({ length: maxX + 1 }, (_v, x) => offerAt(x));
+    return { ...base, max: byX[maxX].max, proof: byX[Math.min(leastX, maxX)].proof, byX };
   }
 
   /**
@@ -9962,25 +10381,27 @@ export class Game {
     this.castNowProbe = this.castNowOffer(player, cast.card);
     this.state.awaiting = null;
     try {
-      this.castSpell(
-        cast.player,
-        cast.card,
-        normalizeTargets(cast.targets),
-        cast.xValue ?? 0,
-        cast.via,
-        cast.face ?? 0,
-        cast.modes,
-        cast.kicked === true ? (cast.kickCount ?? true) : false,
-        cast.sacrifice,
-        cast.overload === true,
-        cast.free === true,
-        cast.convoke,
-        cast.altCost === true,
-        cast.costOption,
-        cast.tap,
-        cast.graveyardGrant,
-        cast.escapeExile,
-        cast.prototype === true,
+      this.withWaterbendChoice(cast.card, cast.waterbend, () =>
+        this.castSpell(
+          cast.player,
+          cast.card,
+          normalizeTargets(cast.targets),
+          cast.xValue ?? 0,
+          cast.via,
+          cast.face ?? 0,
+          cast.modes,
+          cast.kicked === true ? (cast.kickCount ?? true) : false,
+          cast.sacrifice,
+          cast.overload === true,
+          cast.free === true,
+          cast.convoke,
+          cast.altCost === true,
+          cast.costOption,
+          cast.tap,
+          cast.graveyardGrant,
+          cast.escapeExile,
+          cast.prototype === true,
+        ),
       );
     } finally {
       this.castNowProbe = null;
@@ -10207,9 +10628,31 @@ export class Game {
       // land pays and its mana is lost (a bug report, 2026-10-05).
       manaArrangement = { ...(manaArrangement ?? {}), first: new Set([sacrificeVictim]) };
     }
+    // Waterbend (rule 701.67a): the artifacts and creatures tapped for the
+    // waterbend part pay generic mana, and none of them taps for mana too.
+    const arrangementBefore = manaArrangement;
+    const withWaterbent = (tapped: ReadonlySet<ObjectId>): ManaSourceArrangement | undefined =>
+      tapped.size === 0
+        ? arrangementBefore
+        : { ...(arrangementBefore ?? {}), withheld: new Set([...(arrangementBefore?.withheld ?? []), ...tapped]) };
+    const waterbent =
+      alternativeTaps !== undefined
+        ? []
+        : this.waterbendTaps(
+            player,
+            cardId,
+            def.name,
+            cost,
+            this.spellWaterbend(def, kicked, chosenX),
+            (rest, withheld) =>
+              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId }, withWaterbent(withheld)) !==
+              null,
+          );
+    if (typeof waterbent === "string") throw new Error(waterbent);
+    manaArrangement = withWaterbent(new Set(waterbent));
     const payment = this.payMana(
       player,
-      cost,
+      { ...cost, generic: cost.generic - waterbent.length },
       undefined,
       undefined,
       { kind: "cast", card: cardId },
@@ -10218,6 +10661,7 @@ export class Game {
     if (payment === null) {
       throw new Error(`${player} cannot pay the cost of ${def.name}`);
     }
+    this.tapForWaterbend(waterbent);
     // Convoke (rule 702.51a): tap the chosen creatures as part of the cost,
     // alongside the mana payment above — a token peeled off a stack for each
     // time the stack is named.
@@ -11621,6 +12065,9 @@ export class Game {
         return `${def.name}'s ability has no legal combination of targets`;
       }
     }
+    if (ability.cost.waterbend === true && ability.cost.tapOthers !== undefined) {
+      return `${def.name}'s ability can't waterbend beside another tapping cost yet`;
+    }
     if (ability.cost.tapOthers !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.abilityTapCostOffer(player, sourceId, ability);
@@ -11634,6 +12081,13 @@ export class Game {
         const wrong = this.whyTapChoiceIsWrong(`${def.name}'s ability`, offer, tap);
         if (wrong !== null) return wrong;
       }
+    } else if (ability.cost.waterbend === true) {
+      // Waterbend (rule 701.67a): checked at the X it's activated with, or
+      // the least it may have.
+      if (isManaAbility(ability)) return `${def.name}'s mana ability can't waterbend yet`;
+      const at = x ?? ability.minX ?? 0;
+      const paid = this.abilityWaterbendPayment(player, sourceId, ability, at);
+      if (typeof paid === "string") return paid;
     } else if (
       this.payMana(
         player,
@@ -11858,9 +12312,25 @@ export class Game {
         // source with a {T} in the cost, it still is.
         manaArrangement = { first: new Set([sacrificeVictim]) };
       }
+      // Waterbend (rule 701.67a): what taps for it pays generic mana, and
+      // none of it taps for mana as well.
+      let manaToPay = manaCost;
+      let waterbent: ObjectId[] = [];
+      if (ability.cost.waterbend === true && ability.cost.tapOthers === undefined) {
+        const paid = this.abilityWaterbendPayment(player, sourceId, ability, xValue);
+        if (typeof paid === "string") throw new Error(paid);
+        waterbent = paid.taps;
+        manaToPay = paid.rest;
+        if (waterbent.length > 0) {
+          manaArrangement = {
+            ...(manaArrangement ?? {}),
+            withheld: new Set([...(manaArrangement?.withheld ?? []), ...waterbent]),
+          };
+        }
+      }
       const payment = this.payMana(
         player,
-        manaCost,
+        manaToPay,
         ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
         ability.cost.tap ? sourceId : undefined,
         { kind: "ability", source: sourceId },
@@ -11871,12 +12341,12 @@ export class Game {
       }
       return {
         source, def, ability, grantedAbility, sourceStint,
-        sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares,
+        sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent,
       };
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
-      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares,
+      sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent,
     } = planned;
     let sacrificedRef: LastKnownRefs["sacrificed"];
 
@@ -11885,6 +12355,7 @@ export class Game {
       source.tapped = true;
       this.emit({ type: "permanent-tapped", object: sourceId });
     }
+    this.tapForWaterbend(waterbent);
     // "Tap five untapped Zombies you control" — see `AbilityCost.tapOthers`.
     // A cost that tapped one permanent remembers it: "the tapped creature's
     // power" (station, rule 702.184a) is read as the ability resolves, as it
