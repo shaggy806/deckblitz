@@ -298,6 +298,26 @@ export interface GameObject {
    */
   monstrous?: true;
   /**
+   * The permanent is **saddled** (rule 702.171b): a designation a saddle
+   * ability's effect (or Kolodin's, Guidelight Matrix's…) gives it, which
+   * "attacks while saddled" and "if this creature is saddled" read (the
+   * `saddled` filter clause). Neither an ability nor a copiable value, so a
+   * copy of a saddled Mount isn't saddled; it lasts until the turn ends
+   * (cleared in the cleanup step, rule 514.2) or the permanent leaves the
+   * battlefield (`moveObject` clears it).
+   */
+  saddled?: true;
+  /**
+   * The permanents this creature **saddled** this turn (rule 702.171c: it
+   * did as it was tapped to pay one's saddle cost), each with the
+   * `zoneChangeCount` that permanent had then — "a creature that saddled it
+   * this turn" (`CardFilter.saddledSource`). Kept on the creature rather than
+   * the Mount so the Mount leaving doesn't erase it (Fortune, Loyal Steed's
+   * ruling); a zone change of the creature clears it (rule 400.7), and so
+   * does the cleanup step.
+   */
+  saddledThisTurn?: { readonly mount: ObjectId; readonly stint: number }[];
+  /**
    * Exerted (rule 701.43a): it won't untap during this player's next untap
    * step — the player who exerted it, whoever controls it then (a creature
    * borrowed until end of turn and exerted still untaps in its owner's untap
@@ -1291,6 +1311,9 @@ export interface LastKnownInfo {
   readonly goaders?: readonly PlayerId[];
   /** It was suspected (rule 701.60). */
   readonly suspected?: boolean;
+  /** It was saddled (rule 702.171b) — Caustic Bronco's "if this creature
+   * isn't saddled", read as it last existed once it has left (its ruling). */
+  readonly saddled?: boolean;
   /** It had lost all its abilities (layer 6 — Turn to Frog), so none of its
    * own leaves-the-battlefield abilities trigger. */
   readonly lostAbilities: boolean;
@@ -2046,6 +2069,11 @@ export type AwaitingDecision =
       readonly then?: EffectSpec;
       readonly thenSource?: ObjectId;
       readonly thenX?: number;
+      /** The battlefield stint of `thenSource` the resolution referred to
+       * (`LastKnownRefs.source`), so a `then` reading the source after it has
+       * left reads it as it last was there (rule 608.2h — Caustic Bronco's
+       * "if this creature isn't saddled"). */
+      readonly thenSourceStint?: number;
       /** Where every *chosen* card after the first goes, when a tutor splits
        * its finds across two zones (Cultivate: "put one onto the battlefield
        * tapped and the other into your hand"). Absent means every chosen card
@@ -3870,6 +3898,8 @@ export function tokenFoldKey(o: GameObject): string {
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,
     o.monstrous ?? false,
+    o.saddled ?? false,
+    o.saddledThisTurn ?? null,
     o.exertedBy ?? null,
     o.exertedOnTurn ?? null,
     o.skipsNextUntap ?? false,

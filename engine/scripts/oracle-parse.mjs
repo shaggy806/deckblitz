@@ -37,6 +37,7 @@ import {
   myriad,
   outlast,
   persist,
+  saddle,
   undying,
   unearth,
 } from "../dist/cards/helpers.js";
@@ -121,6 +122,8 @@ function keywordPart(part) {
   const p = part.trim();
   let m;
   if ((m = /^crew (\d+)$/i.exec(p))) return { activated: [crew(Number(m[1]))] };
+  // Saddle N (rule 702.171a): crew's cost at sorcery speed, the Mount saddled.
+  if ((m = /^saddle (\d+)$/i.exec(p))) return { activated: [saddle(Number(m[1]))] };
   if ((m = /^afflict (\d+)$/i.exec(p))) return { triggered: [afflict(Number(m[1]))] };
   if ((m = /^annihilator (\d+)$/i.exec(p))) return { triggered: [annihilator(Number(m[1]))] };
   if ((m = /^mobilize (\d+)$/i.exec(p))) return { triggered: [mobilize(Number(m[1]))] };
@@ -609,6 +612,11 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ blocks$/.test(c)) return self("blocks");
   if (/^Whenever ~ becomes blocked$/.test(c)) return self("becomes-blocked");
   if (/^Whenever ~ attacks or blocks$/.test(c)) return [...self("attacks"), ...self("blocks")];
+  // A saddled designation (rule 702.171b) becoming true: "for the first time
+  // each turn" only when it wasn't saddled already.
+  if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
+    return [{ on: "becomes-saddled", who: "self", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
+  }
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
@@ -887,6 +895,12 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };
   if (re("untap ~").test(s)) return { kind: "untap", target: "source" };
+  // Saddled (rule 702.171b) without a saddle ability: Guidelight Matrix.
+  if ((m = re(`(${TARGET}) becomes saddled until end of turn`).exec(s))) {
+    const i = slot(m[1]);
+    return i === undefined ? null : { kind: "become-saddled", target: i };
+  }
+  if (re("~ becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: "source" };
   if ((m = re(`counter (${TARGET})`).exec(s))) {
     const t = targetOf(m[1]);
     if (typeof t !== "string" || !/(spell|triggered-ability)$/.test(t)) return null;
@@ -1154,6 +1168,7 @@ export function parseSentence(sentence, ctx) {
       return { kind: "add-counter", target: it, counter: "+1/+1", amount: amount(m[1]) };
     }
     if (re("untap it").test(s)) return { kind: "untap", target: it };
+    if (re("it becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: it };
     if (re("airbend (?:it|that creature|that permanent)").test(s)) return { kind: "exile", target: it, airbend: true };
     if (re("it connives").test(s)) return { kind: "connive", target: it };
   }
@@ -1518,16 +1533,31 @@ export function parseFace(face, ctx = {}) {
     // Triggered abilities: "When/Whenever/At …, effect".
     if (/^(When|Whenever|At )/.test(line)) {
       const comma = line.indexOf(", ");
-      const clause = comma > 0 ? line.slice(0, comma) : line;
+      let clause = comma > 0 ? line.slice(0, comma) : line;
+      // "Whenever ~ attacks while saddled" (rule 702.171b): saddled is part
+      // of the trigger condition (603.1), asked as it attacks — not an
+      // intervening "if" (the rulings).
+      const whileSaddled = / while saddled$/.test(clause);
+      if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
       const triggers = parseTrigger(clause);
-      if (triggers === null) { out.todo.push(printed(raw)); continue; }
+      if (triggers === null || (whileSaddled && !triggers.every((t) => t.on === "attacks" && t.who === "self"))) {
+        out.todo.push(printed(raw));
+        continue;
+      }
       let rest = comma > 0 ? line.slice(comma + 2) : "";
       let oncePerTurn = false;
       rest = rest.replace(/ This ability triggers only once each turn\.$/, () => {
         oncePerTurn = true;
         return "";
       });
-      const base = { targets: [], effect: null, resolve: null, text: printed(raw), ...(oncePerTurn ? { oncePerTurn: true } : {}) };
+      const base = {
+        targets: [],
+        effect: null,
+        resolve: null,
+        text: printed(raw),
+        ...(oncePerTurn ? { oncePerTurn: true } : {}),
+        ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
+      };
       if (/^if /i.test(rest)) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.

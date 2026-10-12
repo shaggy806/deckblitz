@@ -129,6 +129,14 @@ export type GameEvent =
       readonly amount: number;
     })
   | (Base & {
+      /** A permanent became saddled (rule 702.171b — the `become-saddled`
+       * effect). `first` when it wasn't saddled already: "becomes saddled for
+       * the first time each turn" (Stubborn Burrowfiend). */
+      readonly type: "became-saddled";
+      readonly object: ObjectId;
+      readonly first: boolean;
+    })
+  | (Base & {
       /** The game became day or night (rule 726 — ROADMAP Phase 10b). */
       readonly type: "day-night-changed";
       readonly value: "day" | "night";

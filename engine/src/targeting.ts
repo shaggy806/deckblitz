@@ -49,10 +49,13 @@ export interface TargetSource {
   readonly x?: number;
 }
 
-/** What a target filter is matched with on behalf of `source`. */
+/** What a target filter is matched with on behalf of `source` — the
+ * permanent it comes from, for a clause about it ("target creature that
+ * saddled it this turn"). */
 function targetFilterContext(forPlayer: PlayerId, source: TargetSource | undefined) {
   return {
     you: forPlayer,
+    ...(source?.object !== undefined ? { source: source.object } : {}),
     ...(source?.amount !== undefined ? { amount: source.amount } : {}),
     ...(source?.x !== undefined ? { x: source.x } : {}),
   };

@@ -22,6 +22,7 @@ function asCardFace(obj: VisibleObject): VisibleObject {
     attachedToPlayer: null,
     goadedBy: [],
     suspected: false,
+    saddled: false,
   }
 }
 

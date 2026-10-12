@@ -259,6 +259,39 @@ export const crewText = (n: number): string =>
   `Crew ${n} (Tap any number of creatures you control with total power ${n} or more: This Vehicle becomes an artifact creature until end of turn.)`;
 
 /**
+ * Saddle N (rule 702.171a): "Tap any number of other untapped creatures you
+ * control with total power N or greater: This permanent becomes saddled until
+ * end of turn. Activate only as a sorcery." Crew's cost (`tapOthers
+ * .totalPower` — summoning-sick creatures may pay it, never the Mount
+ * itself), at sorcery speed, and each creature tapped for it saddles the
+ * Mount (`saddle: true`, 702.171c). It may be activated while the Mount is
+ * saddled already (the rulings). `text` defaults to the bare keyword;
+ * `saddleText(n)` is the line with its reminder.
+ */
+export const saddle = (n: number, text = `Saddle ${n}`): ActivatedAbility => ({
+  cost: { mana: null, tap: false, tapOthers: { count: 0, totalPower: n, filter: { type: "creature" } } },
+  targets: [],
+  effect: { kind: "become-saddled", target: "source" },
+  resolve: null,
+  sorcerySpeed: true,
+  saddle: true,
+  text,
+});
+
+/** Saddle N's printed line with its reminder text. */
+export const saddleText = (n: number): string =>
+  `Saddle ${n} (Tap any number of other creatures you control with total power ${n} or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)`;
+
+/** "Whenever this creature attacks while saddled" (rule 702.171b): an attack
+ * trigger whose trigger condition — not an intervening "if" (603.4) — is
+ * that it's saddled as it's declared an attacker (the rulings), so it
+ * resolves even if it stops being saddled. Spread into a triggered ability. */
+export const ATTACKS_WHILE_SADDLED = {
+  trigger: { on: "attacks", who: "self" },
+  whileCondition: { kind: "source", filter: { saddled: true } },
+} as const satisfies Pick<TriggeredAbility, "trigger" | "whileCondition">;
+
+/**
  * Ninjutsu [cost] (rule 702.49a): "[Cost], Reveal this card from your hand,
  * Return an unblocked attacking creature you control to its owner's hand:
  * Put this card onto the battlefield from your hand tapped and attacking."

@@ -2848,9 +2848,12 @@ export type EffectSpec =
       /** `target` (an instant/sorcery card in a graveyard, via the
        * `"instant-or-sorcery-in-your-graveyard"` target spec) gains flashback
        * until end of turn for a cost equal to its mana cost — Snapcaster Mage
-       * (ROADMAP Phase 6b). */
+       * (ROADMAP Phase 6b). `cost` gives it that flashback cost instead —
+       * Archmage's Newt's "flashback {0}", which a card with no mana cost
+       * gains too. */
       readonly kind: "grant-flashback";
       readonly target: number;
+      readonly cost?: string;
     }
   | {
       /** The mass form of `grant-flashback`: each card in your graveyard
@@ -4036,6 +4039,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * A permanent **becomes saddled** until end of turn (rule 702.171a-b):
+       * a saddle ability's own effect (`"source"` — the `saddle()` helper),
+       * Guidelight Matrix's "target Mount you control" (a slot), Kolodin,
+       * Triumph Caster's "it" (`"trigger-object"`). Only a permanent can
+       * (702.171b); one already saddled becomes saddled again (a second
+       * activation is allowed — the rulings), firing `becomes-saddled`
+       * triggers but not a "for the first time each turn" one.
+       */
+      readonly kind: "become-saddled";
+      readonly target: EffectTargetRef;
+    }
+  | {
+      /**
        * "Until your next turn, creatures your opponents control attack each
        * combat if able **and attack a player other than you if able**"
        * (Kardur, Doomscourge): goad's requirements imposed as a rule of the
@@ -4978,8 +4994,8 @@ export interface EffectApi {
   ): boolean;
   /** Grant flashback to `target` (an instant/sorcery card in a graveyard) for
    * the rest of the turn, at a flashback cost equal to its mana cost
-   * (Snapcaster Mage). */
-  grantFlashback(target: TargetRef): void;
+   * (Snapcaster Mage), or at `cost` when given (Archmage's Newt's {0}). */
+  grantFlashback(target: TargetRef, cost?: string): void;
   /** See the `"grant-flashback-all"` {@link EffectSpec}. */
   grantFlashbackAll(filter: CardFilter): void;
   /** Let this effect's controller cast `target` (a card in a graveyard)
@@ -5109,6 +5125,8 @@ export interface EffectApi {
   /** See the `"unsuspect"` {@link EffectSpec}: `target`, or every permanent
    * matching `filter`. */
   unsuspect(target: TargetRef | { readonly filter: CardFilter }): void;
+  /** See the `"become-saddled"` {@link EffectSpec}. */
+  becomeSaddled(target: TargetRef): void;
   /** See the `"attack-requirement"` {@link EffectSpec}. */
   addAttackRequirement(filter: CardFilter, otherThanYou: boolean): void;
   /** See the `"impulse-exile"` {@link EffectSpec}. */
@@ -6277,6 +6295,7 @@ function containsDynamicCompare(value: unknown): boolean {
     : isAmountCompare(value as Record<string, unknown>) ||
       "sharesCardTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
+      "saddledSource" in value ||
       Object.entries(value).some(
         ([key, v]) => !NESTED_EFFECT_KEYS.has(key) && containsDynamicCompare(v),
       );
@@ -6341,7 +6360,14 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
   // "Shares a card type with it": the sacrificed permanent's types as it
   // last existed, or the trigger object's — the spell whose casting fired
   // the trigger — ANDed with whatever `anyOf` the filter already had.
-  const bindShares = (walked: Record<string, unknown>): unknown => {
+  const bindShares = (bound: Record<string, unknown>): unknown => {
+    // "A creature that saddled it this turn" (rule 702.171c): the resolving
+    // ability's source, which the matching then reads by id.
+    let walked = bound;
+    if (walked["saddledSource"] === true) {
+      const { saddledSource: _saddled, ...rest } = walked;
+      walked = { ...rest, saddledBy: ctx.source };
+    }
     if (!("sharesCardTypeWith" in walked)) return walked;
     const { sharesCardTypeWith: withWhat, anyOf, ...rest } = walked as CardFilter;
     const other = withWhat === "trigger-object" ? ctx.triggerObject : ctx.sacrificed;
@@ -7262,7 +7288,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "grant-flashback": {
       const target = ctx.targets[spec.target];
-      if (target !== undefined) ctx.grantFlashback(target);
+      if (target !== undefined) ctx.grantFlashback(target, spec.cost);
       return;
     }
     case "grant-flashback-all":
@@ -8289,6 +8315,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.unsuspect(target);
+      return;
+    }
+    case "become-saddled": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.becomeSaddled(target);
       return;
     }
     case "attack-requirement":

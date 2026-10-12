@@ -64,6 +64,7 @@ export function defToVisible(def: CardDefinition, art?: string | null): VisibleO
     isCommander: def.supertypes.includes('legendary'),
     goadedBy: [],
     suspected: false,
+    saddled: false,
     ringBearer: false,
   }
 }
@@ -128,6 +129,7 @@ export function emblemToVisible(
     isCommander: false,
     goadedBy: [],
     suspected: false,
+    saddled: false,
     ringBearer: false,
   }
 }

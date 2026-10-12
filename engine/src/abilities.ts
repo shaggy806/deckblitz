@@ -323,6 +323,12 @@ export interface ActivatedAbility {
    * `station()`), which makes its card a station card (702.184b): one whose
    * printed power and toughness belong to a station symbol (721.2b). */
   readonly station?: boolean;
+  /** This is a saddle ability (rule 702.171a — `cards/helpers.ts`'s
+   * `saddle()`): each creature tapped for its `tapOthers` cost **saddles** its
+   * source as it's tapped (702.171c), which the creature remembers for the
+   * rest of the turn (`GameObject.saddledThisTurn`) — "a creature that
+   * saddled it this turn" (`CardFilter.saddledSource`). */
+  readonly saddle?: true;
   /**
    * A loyalty ability (rule 606) — present ⇒ this ability's cost is "add
    * `loyaltyCost` loyalty counters to the source" (negative removes them),
@@ -900,6 +906,21 @@ export type TriggerSpec =
       readonly on: "becomes-monstrous";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
+    }
+  | {
+      /** A permanent became saddled (rule 702.171b — the `become-saddled`
+       * effect, a saddle ability's or another's: "whenever this creature
+       * becomes saddled" is `who: "self"`). Fires again for one already
+       * saddled that becomes saddled again (a second saddle activation — the
+       * rulings let it). `firstTimeEachTurn` is Stubborn Burrowfiend's "for
+       * the first time each turn": only when it wasn't saddled already —
+       * which, since saddled lasts the turn and a permanent that left is a
+       * new object (400.7), is the first time this object became saddled
+       * this turn. The permanent is the trigger object. */
+      readonly on: "becomes-saddled";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+      readonly firstTimeEachTurn?: boolean;
     }
   | {
       /** A permanent was exerted (rule 701.43). `asItAttacks` is the "when

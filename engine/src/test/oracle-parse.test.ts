@@ -676,6 +676,41 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Draw three cards. Then discard a card unless you waterbend {2}.", "Sorcery", {}).complete).toBe(false);
     expect(face("Ward—Waterbend {4}.").complete).toBe(false);
   });
+
+  it("saddle (rule 702.171): the keyword, 'attacks while saddled', 'becomes saddled' and the effect", () => {
+    const lagac = face(
+      "Deathtouch\nWhenever this creature attacks while saddled, it gets +0/+3 until end of turn.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",
+      "Creature — Lizard Mount",
+    );
+    expect(lagac.activated[0]).toMatchObject({
+      cost: { mana: null, tap: false, tapOthers: { count: 0, totalPower: 2, filter: { type: "creature" } } },
+      effect: { kind: "become-saddled", target: "source" },
+      sorcerySpeed: true,
+      saddle: true,
+    });
+    // Saddled is part of the trigger condition (603.1), not an intervening "if".
+    expect(lagac.triggered[0].trigger).toEqual({ on: "attacks", who: "self" });
+    expect(lagac.triggered[0].whileCondition).toEqual({ kind: "source", filter: { saddled: true } });
+    expect(lagac.triggered[0].condition).toBeUndefined();
+    expect(lagac.complete).toBe(true);
+    // Only an attack trigger of its own: anything else "while saddled" is a person's.
+    expect(face("Whenever ~ blocks while saddled, draw a card.").complete).toBe(false);
+    const fiend = face("Whenever this creature becomes saddled for the first time each turn, draw a card.");
+    expect(fiend.triggered[0].trigger).toEqual({ on: "becomes-saddled", who: "self", firstTimeEachTurn: true });
+    expect(face("Whenever this creature becomes saddled, draw a card.").triggered[0].trigger).toEqual({
+      on: "becomes-saddled",
+      who: "self",
+    });
+    // Kolodin's "it": the Mount whose entering fired the trigger.
+    const kolodin = face("Whenever a creature you control enters, it becomes saddled until end of turn.");
+    expect(kolodin.triggered[0].effect).toEqual({ kind: "become-saddled", target: "trigger-object" });
+    const c = ctx();
+    expect(parseSentence("Target creature you control becomes saddled until end of turn.", c)).toEqual({
+      kind: "become-saddled",
+      target: 0,
+    });
+    expect(c.targets).toEqual(["creature-you-control"]);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

@@ -252,6 +252,9 @@ export interface VisibleObject {
   /** Suspected (rule 701.60). Its menace and can't-block already show among
    * `keywords` and `restrictions`; this is the designation itself. */
   readonly suspected: boolean;
+  /** Saddled until end of turn (rule 702.171b) — a designation, which
+   * "attacks while saddled" abilities read. */
+  readonly saddled: boolean;
   /** Its controller's Ring-bearer (rule 701.54) — a designation; the Ring
    * emblem says what that gives it. */
   readonly ringBearer: boolean;
@@ -554,6 +557,7 @@ function visible(
     isCommander: object.isCommander && (faceDown === undefined || viewer === object.controller),
     goadedBy: [...goadersOf(state, registry, id)],
     suspected: object.zone === "battlefield" && object.suspectedAt !== undefined,
+    saddled: object.zone === "battlefield" && object.saddled === true,
     ringBearer: hasRingBearerDesignation(object),
     ...(object.zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
     ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),

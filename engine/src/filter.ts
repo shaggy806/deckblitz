@@ -257,6 +257,26 @@ export interface CardFilter {
    * Nelly Borca's "goad all suspected creatures". One that has left the
    * battlefield is asked as it last was. */
   readonly suspected?: boolean;
+  /** Is (or isn't) **saddled** (rule 702.171b — `GameObject.saddled`):
+   * "whenever this creature attacks while saddled" (a `whileCondition` on
+   * the source), "if this creature is saddled". One that has left the
+   * battlefield is asked as it last was (Caustic Bronco's ruling). */
+  readonly saddled?: boolean;
+  /**
+   * It **saddled** the permanent applying the filter this turn (rule
+   * 702.171c — `GameObject.saddledThisTurn`): Giant Beaver's "target
+   * creature that saddled it this turn", The Gitrog's "sacrifice a creature
+   * that saddled it this turn". "It" is the permanent as it is now, or —
+   * once it has left — as it last was on the battlefield, so its records
+   * outlast it (Fortune, Loyal Steed's ruling). Read against
+   * `FilterContext.source` where the filter is matched with one (a target
+   * or trigger filter); in an effect, `bindDynamicCompares` binds it to
+   * `saddledBy` first. Without a source, nothing saddled it.
+   */
+  readonly saddledSource?: boolean;
+  /** `saddledSource` bound to the permanent it means — written by
+   * `bindDynamicCompares`, never authored. */
+  readonly saddledBy?: ObjectId;
   /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
@@ -669,6 +689,25 @@ export interface FilterContext {
   };
 }
 
+/**
+ * Whether `creature` saddled `mount` this turn (rule 702.171c) — the `mount`
+ * as it is on the battlefield now or, once it has left, as it last was there
+ * (its `lastKnown` stint), so a delayed trigger of a Mount that has gone
+ * still finds the creatures that saddled it (Fortune, Loyal Steed's ruling).
+ */
+export function saddledMount(state: GameState, creature: GameObject, mount: ObjectId): boolean {
+  const records = creature.saddledThisTurn;
+  if (records === undefined || records.length === 0) return false;
+  const object = state.objects[mount];
+  const stint =
+    object === undefined
+      ? state.ceasedTokens?.[mount]?.zoneChangeCount
+      : object.zone === "battlefield"
+        ? (object.zoneChangeCount ?? 0)
+        : object.lastKnown?.zoneChangeCount;
+  return stint !== undefined && records.some((r) => r.mount === mount && r.stint === stint);
+}
+
 /** What is attached to `id` on the battlefield, for the attachment clauses.
  * Attachments leave with the permanent, so off the battlefield it's none —
  * which is why a leaving permanent's snapshot records them first
@@ -930,6 +969,18 @@ export function matchesFilter(
     const suspected =
       live !== undefined ? live.zone === "battlefield" && live.suspectedAt !== undefined : lki!.suspected === true;
     if (suspected !== filter.suspected) return false;
+  }
+  if (filter.saddled !== undefined) {
+    const saddled = live !== undefined ? live.zone === "battlefield" && live.saddled === true : lki!.saddled === true;
+    if (saddled !== filter.saddled) return false;
+  }
+  if (filter.saddledSource !== undefined || filter.saddledBy !== undefined) {
+    // Rule 702.171c: only a creature on the battlefield now can have saddled
+    // anything this turn — one that left is a new object (400.7).
+    const mount = filter.saddledBy ?? ctx.source;
+    const did = live !== undefined && mount !== undefined && saddledMount(state, live, mount);
+    if (filter.saddledSource !== undefined && did !== filter.saddledSource) return false;
+    if (filter.saddledBy !== undefined && !did) return false;
   }
   if (filter.goaded !== undefined) {
     // Goaded is a designation of a permanent (rule 701.15b): nothing off the

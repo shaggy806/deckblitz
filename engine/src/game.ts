@@ -5847,6 +5847,7 @@ export class Game {
       ...(awaiting.leftoverIf !== undefined ? { leftoverIf: awaiting.leftoverIf } : {}),
       ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
       ...(awaiting.thenX !== undefined ? { thenX: awaiting.thenX } : {}),
+      ...(awaiting.thenSourceStint !== undefined ? { thenSourceStint: awaiting.thenSourceStint } : {}),
       // "May reveal a land card and/or an instant or sorcery card" (Explore
       // the Vastlands): what the second choice takes is shown too.
       ...(awaiting.reveal === true ? { reveal: true } : {}),
@@ -6114,6 +6115,12 @@ export class Game {
         player,
         chosen.map((id) => ({ kind: "object", object: id }) as const),
         awaiting.thenX ?? 0,
+        0,
+        undefined,
+        1,
+        0,
+        [],
+        awaiting.thenSourceStint !== undefined ? { source: awaiting.thenSourceStint } : {},
       );
       // The rest still to be ordered onto the bottom: `then` comes after
       // that, as any step after a decision waits for it.
@@ -6273,8 +6280,11 @@ export class Game {
     const cleared: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      // Regeneration shields last only this turn (rule 514.2).
+      // Regeneration shields last only this turn (rule 514.2), as does being
+      // saddled (702.171b) and what a creature saddled this turn (702.171c).
       delete object.regenerationShields;
+      delete object.saddled;
+      delete object.saddledThisTurn;
       if (object.damageMarked !== 0 || object.markedByDeathtouch) {
         object.damageMarked = 0;
         object.markedByDeathtouch = false;
@@ -12361,6 +12371,9 @@ export class Game {
     // power" (station, rule 702.184a) is read as the ability resolves, as it
     // last existed if it has left (the station ruling).
     const tapped = this.payTapCost(tapPicked);
+    // Saddle (rule 702.171c): each creature tapped for the cost saddles the
+    // source as it's tapped — whether or not the ability goes on to resolve.
+    if (ability.saddle === true) this.recordSaddlers(sourceId, tapped);
     const tappedRef: LastKnownRefs["tapped"] =
       tapped.length === 1
         ? { object: tapped[0], zoneChangeCount: this.state.objects[tapped[0]].zoneChangeCount ?? 0 }
@@ -15813,6 +15826,7 @@ export class Game {
             event.type === "permanent-sacrificed" ||
             event.type === "permanent-transformed" ||
             event.type === "became-monstrous" ||
+            event.type === "became-saddled" ||
             event.type === "permanent-exerted" ||
             // "Whenever a permanent you control is turned face up … it"
             // (Trail of Mystery).
@@ -16847,6 +16861,13 @@ export class Game {
       case "becomes-monstrous":
         return (
           event.type === "became-monstrous" &&
+          this.matchesWho(spec.who, event.object, self) &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
+      case "becomes-saddled":
+        return (
+          event.type === "became-saddled" &&
+          (spec.firstTimeEachTurn !== true || event.first) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -19058,7 +19079,7 @@ export class Game {
           transformed,
           tapped,
         ),
-      grantFlashback: (target) => this.grantFlashbackByEffect(target, source),
+      grantFlashback: (target, cost) => this.grantFlashbackByEffect(target, source, cost),
       grantFlashbackAll: (filter) => {
         // Fixed as it resolves: a snapshot, since granting moves nothing.
         for (const id of [...this.state.zones.perPlayer[controller].graveyard]) {
@@ -19366,6 +19387,9 @@ export class Game {
       },
       suspect: (target) => {
         if (target.kind === "object") this.suspect(target.object);
+      },
+      becomeSaddled: (target) => {
+        if (target.kind === "object") this.becomeSaddled(target.object);
       },
       unsuspect: (target) => {
         const ids =
@@ -20240,7 +20264,9 @@ export class Game {
           enterTapped === true,
           // The source and X outlive the resolution for a `then` to apply
           // and a `leftoverIf` to be asked once the choice is answered.
-          then === undefined && leftoverIf === undefined ? undefined : { effect: then, source, x },
+          then === undefined && leftoverIf === undefined
+            ? undefined
+            : { effect: then, source, x, ...(refs.source !== undefined ? { sourceStint: refs.source } : {}) },
           reveal ?? false,
           leftoverIf,
           secondPick,
@@ -20283,7 +20309,7 @@ export class Game {
     leftover: "bottom-random" | "bottom-any-order" | "stay" | "hand" | "graveyard" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
-    then?: { effect: EffectSpec | undefined; source: ObjectId; x: number },
+    then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number },
     reveal: boolean | "chosen" = false,
     leftoverIf?: LookAndChooseLeftoverIf,
     secondPick?: ZoneSecondPick,
@@ -20356,6 +20382,7 @@ export class Game {
       ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
+      ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
@@ -23085,6 +23112,31 @@ export class Game {
     invalidateComputedCache();
   }
 
+  /** `id` becomes saddled until end of turn (rule 702.171b) — only a
+   * permanent can — and its `becomes-saddled` triggers fire, `first` when it
+   * wasn't saddled already. */
+  private becomeSaddled(id: ObjectId): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield") return;
+    const first = object.saddled !== true;
+    object.saddled = true;
+    invalidateComputedCache();
+    this.emit({ type: "became-saddled", object: id, first });
+  }
+
+  /** The creatures tapped to pay `mount`'s saddle cost saddle it (rule
+   * 702.171c): each remembers it, in the stint it's in, for the turn. */
+  private recordSaddlers(mount: ObjectId, creatures: readonly ObjectId[]): void {
+    const stint = this.state.objects[mount]?.zoneChangeCount ?? 0;
+    for (const id of creatures) {
+      const creature = this.state.objects[id];
+      if (creature === undefined) continue;
+      const had = creature.saddledThisTurn ?? [];
+      if (had.some((r) => r.mount === mount && r.stint === stint)) continue;
+      creature.saddledThisTurn = [...had, { mount, stint }];
+    }
+  }
+
   /** `id` is no longer suspected (rule 701.60a). */
   private unsuspect(id: ObjectId): void {
     const object = this.state.objects[id];
@@ -25715,12 +25767,13 @@ export class Game {
   }
 
   /** Snapcaster Mage — grant flashback to a graveyard instant/sorcery until
-   * end of turn, at a cost equal to its mana cost. */
-  private grantFlashbackByEffect(target: TargetRef, by: ObjectId): void {
+   * end of turn, at a cost equal to its mana cost, or at `fixedCost`
+   * (Archmage's Newt's {0}). */
+  private grantFlashbackByEffect(target: TargetRef, by: ObjectId, fixedCost?: string): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "graveyard") return;
-    const cost = this.registry.get(printedCardName(object)).manaCost;
+    const cost = fixedCost ?? this.registry.get(printedCardName(object)).manaCost;
     if (cost === null) return;
     object.grantedFlashback = { cost, untilEndOfTurn: true, by };
     this.emit({ type: "flashback-granted", object: target.object, cost });
@@ -29065,6 +29118,7 @@ export class Game {
       ...(object.attachedToPlayer !== undefined ? { attachedToPlayer: object.attachedToPlayer } : {}),
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),
+      ...(object.saddled === true ? { saddled: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
       ...(object.textFrom !== undefined ? { textName: object.textFrom } : {}),
@@ -29602,6 +29656,9 @@ export class Game {
     // Monstrous lasts until the permanent leaves the battlefield (701.37b);
     // being exerted, until it's a new object.
     delete object.monstrous;
+    // So does saddled (702.171b); what it saddled was the old object's (400.7).
+    delete object.saddled;
+    delete object.saddledThisTurn;
     delete object.exertedBy;
     delete object.exertedOnTurn;
     delete object.skipsNextUntap;

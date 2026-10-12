@@ -2759,6 +2759,9 @@
 .card-flag.suspect {
   background: #b89be0;
 }
+.card-flag.saddled {
+  background: #d9a86c;
+}
 .card-flag.holding {
   background: #9fc3e8;
 }
