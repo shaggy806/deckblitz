@@ -1608,6 +1608,26 @@ export class Game {
       );
     }
 
+    // Airbend (rule 701.65a) — a card of this player's airbended into exile
+    // may be cast from there for {2} rather than its mana cost, as either
+    // face of a modal card. Never a land: lands are played, not cast, and
+    // airbend only lets it be cast (the rulings).
+    for (const card of this.state.zones.shared.exile) {
+      const object = this.state.objects[card];
+      if (object === undefined || object.airbended !== true || object.owner !== player) continue;
+      for (const face of this.modalFaces(card)) {
+        const def = this.faceDef(card, face ?? 0);
+        if (def.types.includes("land")) continue;
+        out.push(
+          ...this.castSpellActions(player, card, def.name, def, {
+            via: "airbend",
+            ...(face !== undefined ? { face } : {}),
+            costString: Game.AIRBEND_COST,
+          }),
+        );
+      }
+    }
+
     // Flashback (rule 702.34) — an instant/sorcery in this player's graveyard
     // with a printed *or granted* (Snapcaster Mage) flashback cost may be cast
     // from there. Once per flashback it has, when it has several (Past in
@@ -2313,8 +2333,8 @@ export class Game {
     // with warp, itself an alternative cost (rule 118.9a: only one applies).
     // Blitz is an alternative cost from the hand too (rule 702.152a), and so
     // is web-slinging (702.188a; its ruling: never with "without paying its
-    // mana cost").
-    const warp = via === "warp" || via === "blitz" || via === "web-slinging";
+    // mana cost"), and airbend's {2} from exile (701.65a).
+    const warp = via === "warp" || via === "blitz" || via === "web-slinging" || via === "airbend";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
     }
@@ -3253,6 +3273,10 @@ export class Game {
    * synchronous dispatch. No human game gets near the cap.
    */
   static readonly MAX_EFFECT_INSTANCES = 1000;
+
+  /** What an airbended card is cast for "rather than paying its mana cost"
+   * (rule 701.65a). */
+  static readonly AIRBEND_COST = "{2}";
 
   /** How many earlier departures' snapshots a card keeps besides its
    * latest (`GameObject.earlierLastKnown`): enough for an ability to outlive
@@ -8938,6 +8962,9 @@ export class Game {
           ? (def.sneak?.cost ?? null)
         : via === "web-slinging"
           ? (def.webSlinging?.cost ?? null)
+        : // Airbend (rule 701.65a): {2} rather than its mana cost.
+          via === "airbend"
+          ? Game.AIRBEND_COST
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
           : via === "foretell"
@@ -9224,6 +9251,16 @@ export class Game {
       }
       if (object.foretoldOnTurn === this.state.turn.number) {
         return `${def.name} was foretold this turn`;
+      }
+    } else if (via === "airbend") {
+      // Rule 701.65a — its owner, while it remains exiled, for {2} rather
+      // than its mana cost: an alternative cost, so no other one goes with
+      // it (118.9a).
+      const object = this.state.objects[cardId];
+      if (object?.airbended !== true || object.zone !== "exile") return `${def.name} was not airbended`;
+      if (object.owner !== player) return `only ${def.name}'s owner may cast it for its airbend cost`;
+      if (overload || free || altCost || evoke !== null) {
+        return `airbend's {2} is an alternative cost, and can't be combined with another`;
       }
     } else if (via === "disturb") {
       // Rule 702.150 — cast the back face (face 1) from the graveyard.
@@ -16268,6 +16305,7 @@ export class Game {
       case "becomes-target":
         return (
           event.type === "object-targeted" &&
+          !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
           // "… an opponent controls" — relative to whoever controls the
@@ -18109,7 +18147,7 @@ export class Game {
         }
       },
       returnToHandAll: (filter) => this.returnToHandAllByEffect(controller, filter),
-      exileAll: (filter) => this.exileAllByEffect(controller, filter),
+      exileAll: (filter, airbend, except) => this.exileAllByEffect(controller, filter, airbend === true, except),
       damageAll: (filter, amount, exceptSource, whose, from) => {
         const by = damageSource(from);
         if (by === undefined) return;
@@ -18308,7 +18346,7 @@ export class Game {
         }
         this.returnToHandByEffect(target, true, from ?? "battlefield", source);
       },
-      exileObject: (target, untilSourceLeaves, withCounters, mayCast, linked) => {
+      exileObject: (target, untilSourceLeaves, withCounters, mayCast, linked, airbend) => {
         if (untilSourceLeaves === true) {
           // Rule 610.3a/b: exiled "until" something that has already happened
           // — its source gone, or back as a new object (400.7) — it isn't
@@ -18354,6 +18392,11 @@ export class Game {
             castOnly: true,
             ...(mayCast.spendAs !== undefined ? { spendAs: mayCast.spendAs } : {}),
           };
+        }
+        // Airbend (rule 701.65a): its owner may cast the card this exiled for
+        // {2} — a card, a token having ceased to exist (111.7).
+        if (airbend === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
+          exiled.airbended = true;
         }
         // "Exile it with this" (rule 607.2a): linked to the stint the
         // resolving ability refers to, and counted by it for good (the
@@ -22382,6 +22425,15 @@ export class Game {
         return `${player} can't cast ${def.name} this turn`;
       }
     }
+    // "Until your next turn, your opponents can't cast spells from anywhere
+    // other than their hands" (Avatar's Wrath): the command zone, a
+    // graveyard, exile and a library top all barred.
+    if (
+      (this.state.playerEffects ?? []).some((e) => e.castOnlyFromHand?.includes(player) === true) &&
+      !this.state.zones.perPlayer[player].hand.includes(cardId)
+    ) {
+      return `${player} can't cast spells from anywhere other than their hand`;
+    }
     for (const { source, prohibits } of this.prohibitionsOn(player)) {
       const spells = prohibits.spells;
       if (spells === undefined) continue;
@@ -23770,11 +23822,20 @@ export class Game {
 
   /** `exile-all` — the mass form of `exileByEffect`, as one event (rule
    * 603.10a), a token stack exiled whole rather than one token of it. */
-  private exileAllByEffect(you: PlayerId, filter: CardFilter): void {
+  private exileAllByEffect(you: PlayerId, filter: CardFilter, airbend = false, except?: ObjectId): void {
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter);
+      const victims = this.battlefieldMatching(you, filter).filter((id) => id !== except);
       this.snapshotLeaving(victims);
-      for (const id of victims) this.exileByEffect({ kind: "object", object: id }, undefined, false);
+      for (const id of victims) {
+        const before = this.state.objects[id]?.zoneChangeCount;
+        this.exileByEffect({ kind: "object", object: id }, undefined, false);
+        // "Airbend all other creatures" (rule 701.65a): each card exiled
+        // this way may be cast by its owner for {2}; a token is gone (111.7).
+        const exiled = this.state.objects[id];
+        if (airbend && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
+          exiled.airbended = true;
+        }
+      }
     });
   }
 
@@ -25436,6 +25497,8 @@ export class Game {
     readonly mana: string;
     readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
   } | null {
+    // Cast for airbend's {2}, an alternative cost already (118.9a).
+    if (via === "airbend") return null;
     if (def.alternativeCost !== null) return def.alternativeCost;
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
     // alternative costs (or no cost) already: only one applies (118.9a).
@@ -29148,6 +29211,8 @@ export class Game {
     object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;
+    // Airbend's permission lasts "for as long as it remains exiled" (701.65a).
+    delete object.airbended;
     object.exiledFaceDown = undefined;
     // A new object isn't face down (400.7) — `moveObject` revealed it as it
     // left the battlefield (708.9); one entering face down is turned so below.

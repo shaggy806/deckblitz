@@ -1609,6 +1609,15 @@ export type EffectSpec =
        * whole. The mass form of `exile`, as `destroy-all` is of `destroy`. */
       readonly kind: "exile-all";
       readonly filter: CardFilter;
+      /** "Airbend all other creatures" (rule 701.65a — Avatar's Wrath): each
+       * card exiled this way may be cast by its owner for {2}, as the
+       * `exile` effect's `airbend`. */
+      readonly airbend?: boolean;
+      /** Not the permanent in this target slot — "choose up to one target
+       * creature, then airbend all **other** creatures" (Avatar's Wrath). An
+       * empty slot spares nothing; a lone target gone illegal has the spell
+       * not resolve at all (608.2b). */
+      readonly exceptTarget?: number;
     }
   | {
       /** Put a target permanent into exile — or, with `"trigger-object"`,
@@ -1642,6 +1651,14 @@ export type EffectSpec =
        * so there's nothing to cast.
        */
       readonly mayCast?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs };
+      /**
+       * **Airbend** it (rule 701.65a): exile it, and for as long as the card
+       * remains exiled its *owner* may cast it by paying {2} rather than its
+       * mana cost (`GameObject.airbended`, the `"airbend"` cast). A token
+       * exiled ceases to exist (111.7), so there's nothing to cast; a land
+       * card can't be cast at all.
+       */
+      readonly airbend?: boolean;
       /**
        * Exile it **with this source** (rule 607.2a): the card is linked to the
        * source's battlefield stint (`GameObject.exiledWith`), so a later
@@ -2626,6 +2643,12 @@ export type EffectSpec =
       readonly cantLoseGame?: PlayerScope;
       readonly cantWinGame?: PlayerScope;
       readonly cantLoseLife?: PlayerScope;
+      /** "Until your next turn, your opponents can't cast spells from
+       * anywhere other than their hands" (Avatar's Wrath — `"each-opponent"`,
+       * fixed as it resolves): a rule about casting (101.2), so no
+       * permission gets past it — a commander, a flashback, an airbended or
+       * impulse-exiled card, a copy cast from exile, all barred. */
+      readonly castOnlyFromHand?: PlayerScope;
       readonly damageLifeFloor?: { readonly who: PlayerScope; readonly floor: number };
       /** "Until end of turn, if one or more tokens would be created under
        * your control, twice that many of those tokens are created instead"
@@ -4669,8 +4692,9 @@ export interface EffectApi {
   regenerateAll(filter: CardFilter): void;
   /** Return every battlefield permanent matching `filter` to its owner's hand. */
   returnToHandAll(filter: CardFilter): void;
-  /** Exile every battlefield permanent matching `filter` — see `exile-all`. */
-  exileAll(filter: CardFilter): void;
+  /** Exile every battlefield permanent matching `filter` but `except` — see
+   * `exile-all`; `airbend` airbends them (rule 701.65a). */
+  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId): void;
   /** Deal `amount` damage to every battlefield permanent matching `filter`. */
   damageAll(
     filter: CardFilter,
@@ -4769,6 +4793,8 @@ export interface EffectApi {
     withCounters?: { readonly kind: string; readonly amount: number },
     mayCast?: { readonly duration: "end-of-turn" | "while-exiled"; readonly spendAs?: SpendAs },
     linked?: boolean,
+    /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
+    airbend?: boolean,
   ): void;
   /** See the `"return-exiled-by-source"` {@link EffectSpec}.
    * Returns `true` when it stopped to ask an "as this enters" choice first
@@ -6958,9 +6984,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "return-to-hand-all":
       ctx.returnToHandAll(spec.filter);
       return;
-    case "exile-all":
-      ctx.exileAll(spec.filter);
+    case "exile-all": {
+      const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+      ctx.exileAll(spec.filter, spec.airbend === true, spared?.kind === "object" ? spared.object : undefined);
       return;
+    }
     case "damage-all": {
       let players = spec.whose === undefined ? undefined : ctx.playersInScope(spec.whose);
       if (spec.controlledByTarget !== undefined) {
@@ -7078,7 +7106,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "exile": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true);
+      if (target !== undefined) {
+        ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
+          spec.airbend === true);
+      }
       return;
     }
     case "return-exiled-by-source": {
@@ -7588,6 +7619,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantLoseGame !== undefined ? { cantLoseGame: ctx.playersInScope(spec.cantLoseGame) } : {}),
         ...(spec.cantWinGame !== undefined ? { cantWinGame: ctx.playersInScope(spec.cantWinGame) } : {}),
         ...(spec.cantLoseLife !== undefined ? { cantLoseLife: ctx.playersInScope(spec.cantLoseLife) } : {}),
+        ...(spec.castOnlyFromHand !== undefined
+          ? { castOnlyFromHand: ctx.playersInScope(spec.castOnlyFromHand) }
+          : {}),
         ...(spec.damageLifeFloor !== undefined
           ? {
               damageLifeFloor: {

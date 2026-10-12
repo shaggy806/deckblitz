@@ -721,6 +721,9 @@ export type TriggerSpec =
       /** Narrow which targeted permanent counts (Thunderbreak Regent: "a
        * Dragon you control"). */
       readonly filter?: CardFilter;
+      /** "Another …" — this permanent itself becoming a target doesn't count
+       * (Monk Gyatso). */
+      readonly otherOnly?: boolean;
       /** Only when the spell or ability belongs to an opponent of this
        * permanent's controller — which is how every printed card of this
        * shape words it. */

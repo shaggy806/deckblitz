@@ -82,6 +82,12 @@ export type CastVia =
   | "warp"
   /** Blitz (rule 702.152a) — cast from the hand for its blitz cost. */
   | "blitz"
+  /** Airbend (rule 701.65a): a card airbended into exile (`GameObject
+   * .airbended`), cast from there by its owner for {2} rather than its mana
+   * cost — an alternative cost, so no other goes with it (118.9a), though
+   * additional costs are paid on top (118.9d) and X is 0 (107.3b). Timing
+   * is the card's own. */
+  | "airbend"
   /** Morph, megamorph or disguise (rules 702.37c, 702.168a) — cast from the
    * hand face down, as a 2/2 creature spell with no name, text, subtypes or
    * mana cost, for {3}: an alternative cost. It resolves into a face-down

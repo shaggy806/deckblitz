@@ -691,6 +691,13 @@ export interface GameObject {
    * turn). Both cleared on any zone change. */
   foretold?: boolean;
   foretoldOnTurn?: number | null;
+  /** True while this card is in exile because it was **airbended** (rule
+   * 701.65a): for as long as it remains exiled, its *owner* — whoever
+   * airbended it — may cast it by paying {2} rather than its mana cost (the
+   * `"airbend"` cast). Set only on a card (a token exiled has ceased to
+   * exist, rule 111.7); cleared on any zone change, which ends "for as long
+   * as it remains exiled". */
+  airbended?: boolean;
   /** Exiled **face down** (rule 406.3): nobody may look at it but these
    * players — the one an instruction let look at it ("look at the top card
    * of that player's library, then exile it face down" — Edward Kenway), who
@@ -2987,6 +2994,9 @@ export interface PlayerEffect {
    * they lose life does nothing, and a cost that has them pay life (more
    * than 0, rule 119.4b) can't be paid. See `playerCantLoseLife`. */
   readonly cantLoseLife?: readonly PlayerId[];
+  /** These players can't cast spells from anywhere other than their hands
+   * (Avatar's Wrath) — see `whyProhibitedFromCasting`. */
+  readonly castOnlyFromHand?: readonly PlayerId[];
   /** "Damage that would reduce your life total to less than `floor` reduces
    * it to `floor` instead" (Angel's Grace, `floor: 1`) — for damage dealt to
    * one of `players`. Only damage, and only a total at or above the floor:

@@ -541,11 +541,13 @@ export class AutomaticController implements PlayerController {
     if (movedTo === "hand") return false;
     // The command zone — but a commander in exile that can still be cast from
     // there (on an adventure, foretold, suspended) is where its owner put it
-    // on purpose, and casting it from there costs no tax.
+    // on purpose, and casting it from there costs no tax. An airbended one
+    // costs {2} from exile, never more than from the command zone (rule
+    // 701.65a), so it stays too.
     const object = view.state.objects[commander];
     return !(
       object?.zone === "exile" &&
-      (object.onAdventure || object.foretold || object.suspended)
+      (object.onAdventure || object.foretold || object.suspended || object.airbended === true)
     );
   }
 

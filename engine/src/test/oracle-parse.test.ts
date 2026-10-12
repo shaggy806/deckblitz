@@ -565,6 +565,50 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       ).complete,
     ).toBe(false);
   });
+
+  it("airbend (rule 701.65a): each quantity of target, all other creatures, 'that creature', and the hand-only lock", () => {
+    const airbend = (target: unknown) => ({ kind: "exile", target, airbend: true });
+    const yours = { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } };
+    const aang = face("When this creature enters, airbend up to one other target nonland permanent.");
+    expect(aang.triggered[0].targets).toEqual([{ kind: "optional", of: { kind: "other", of: "nonland-permanent" } }]);
+    expect(aang.triggered[0].effect).toEqual(airbend(0));
+    expect(aang.complete).toBe(true);
+    expect(face("When this creature enters, airbend another target creature.").triggered[0].targets).toEqual([
+      { kind: "other", of: "creature" },
+    ]);
+    const appa = face("When this creature enters, airbend any number of other target nonland permanents you control.");
+    expect(appa.triggered[0].targets).toEqual([{ kind: "any-number", of: { kind: "other", of: yours } }]);
+    expect(appa.triggered[0].effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: airbend(0) });
+    // "Up to two": one instance of "target" over two slots, exiled together.
+    const two = face("Airbend up to two target creatures.", "Instant");
+    expect(two.targets).toEqual([
+      { kind: "optional", of: "creature" },
+      { kind: "optional", of: { kind: "other", of: "creature", than: { slots: [0] } } },
+    ]);
+    expect(two.effect).toEqual({ kind: "sequence", simultaneous: true, effects: [airbend(0), airbend(1)] });
+    expect(face("Airbend target nonland permanent.\nDraw a card.", "Instant").complete).toBe(true);
+    // A spell has no "other" to be other than: a person's.
+    expect(face("Airbend another target creature.", "Instant").complete).toBe(false);
+    const gyatso = face(
+      "Whenever another creature you control becomes the target of a spell or ability, you may airbend that creature.",
+    );
+    expect(gyatso.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "you-control",
+      filter: { type: "creature" },
+      otherOnly: true,
+    });
+    expect(gyatso.triggered[0].effect).toEqual({ kind: "may", prompt: "Airbend that creature?", effect: airbend("trigger-object") });
+    expect(parseSentence("Choose up to one target creature, then airbend all other creatures.", ctx())).toEqual({
+      kind: "exile-all",
+      filter: { type: "creature" },
+      airbend: true,
+      exceptTarget: 0,
+    });
+    expect(
+      parseSentence("Until your next turn, your opponents can't cast spells from anywhere other than their hands.", ctx()),
+    ).toEqual({ kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" });
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

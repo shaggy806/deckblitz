@@ -386,6 +386,7 @@ const TARGET_PHRASES = [
   ["target creature or planeswalker", { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you don't control", "nonland-permanent-an-opponent-controls"],
+  ["target nonland permanent you control", { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } }],
   ["target creature an opponent controls", "creature-an-opponent-controls"],
   ["target creature you don't control", "creature-an-opponent-controls"],
   ["target artifact an opponent controls", "artifact-an-opponent-controls"],
@@ -461,6 +462,56 @@ function modifiedTargetOf(phrase) {
 }
 const targetOf = (phrase) =>
   TARGET_PHRASES.find(([p]) => p === phrase.toLowerCase())?.[1] ?? modifiedTargetOf(phrase.toLowerCase());
+
+/** "nonland permanents you control" → "nonland permanent you control". */
+const singularTarget = (phrase) => phrase.replace(/s( you control| an opponent controls| you don't control)?$/i, "$1");
+
+/**
+ * A target phrase with its quantity, its slots allocated through `ctx.target`:
+ * "target creature" and "another target creature" (other than the source —
+ * on a permanent's ability only) take one slot, "up to one (other) target …"
+ * one `optional` slot, "up to two target creatures" one optional slot each,
+ * every one after the first other than those before it (one instance of
+ * "target", rule 601.2c — `distinctTargets`), and "any number of (other)
+ * target …s" one `any-number` group. Returns the slots, and `group` for an
+ * any-number group; `undefined` for a phrase it doesn't read.
+ */
+function quantifiedSlots(phrase, ctx) {
+  let m;
+  const other = (of) => (ctx.spell ? undefined : { kind: "other", of });
+  if ((m = /^any number of (other )?target (.+)$/i.exec(phrase))) {
+    const of = targetOf(`target ${singularTarget(m[2])}`);
+    const spec = of === undefined ? undefined : m[1] ? other(of) : of;
+    return spec === undefined ? undefined : { slots: [ctx.target({ kind: "any-number", of: spec })], group: true };
+  }
+  if ((m = /^up to (one|two|three) (other )?target (.+)$/i.exec(phrase))) {
+    const n = numberOf(m[1]);
+    const of = targetOf(`target ${n === 1 ? m[3] : singularTarget(m[3])}`);
+    if (of === undefined || typeof n !== "number") return undefined;
+    if (n === 1) {
+      const spec = m[2] ? other(of) : of;
+      return spec === undefined ? undefined : { slots: [ctx.target({ kind: "optional", of: spec })] };
+    }
+    // "Up to two other target …": other than what is a person's call.
+    if (m[2]) return undefined;
+    const slots = [];
+    for (let i = 0; i < n; i += 1) {
+      const spec = i === 0 ? of : { kind: "other", of, than: { slots: [...slots] } };
+      slots.push(ctx.target({ kind: "optional", of: spec }));
+    }
+    return { slots };
+  }
+  if ((m = /^another (target .+)$/i.exec(phrase))) {
+    const of = targetOf(m[1]);
+    const spec = of === undefined ? undefined : other(of);
+    return spec === undefined ? undefined : { slots: [ctx.target(spec)] };
+  }
+  if (/^target /i.test(phrase)) {
+    const of = targetOf(phrase);
+    return of === undefined ? undefined : { slots: [ctx.target(of)] };
+  }
+  return undefined;
+}
 // Non-capturing: a template wraps it in its own group where it wants the match,
 // so a nested group never shifts the numbering of the ones after it. After the
 // fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
@@ -560,6 +611,13 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
     return [{ on: "becomes-target", who: "self", byOpponentOnly: true }];
+  }
+  // "Whenever another creature you control becomes the target of a spell or
+  // ability" (Monk Gyatso): its trigger object is the creature.
+  if ((m = /^Whenever (another|a) (\w+) you control becomes the target of a spell or ability$/.exec(c))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null || filter.type === undefined) return null;
+    return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
   if (/^When you cast (?:~|this spell)$/.test(c)) return [{ on: "this-cast" }];
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
@@ -784,6 +842,28 @@ export function parseSentence(sentence, ctx) {
   // Removal and movement.
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };
+  // Airbend (rule 701.65a): exiled, its owner may cast it for {2}. Several
+  // targets are one instruction, exiled together (603.10a).
+  if ((m = /^airbend (.+)\.$/i.exec(s)) && !/^(it|that \w+|all )/i.test(m[1])) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got === undefined) return null;
+    const one = (target) => ({ kind: "exile", target, airbend: true });
+    if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
+    return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
+  }
+  // "Choose up to one target creature, then airbend all other creatures"
+  // (Avatar's Wrath): every other one, together.
+  if ((m = /^choose up to one target (\w+), then airbend all other (\w+)\.$/i.exec(s)) && singularTarget(m[2]) === m[1]) {
+    const of = targetOf(`target ${m[1]}`);
+    const filter = parseTypePhrase(m[1]);
+    if (of === undefined || filter === null) return null;
+    return { kind: "exile-all", filter, airbend: true, exceptTarget: ctx.target({ kind: "optional", of }) };
+  }
+  // "Until your next turn, your opponents can't cast spells from anywhere
+  // other than their hands."
+  if (re("until your next turn, your opponents can't cast spells from anywhere other than their hands").test(s)) {
+    return { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" };
+  }
   if ((m = re(`return (${TARGET}) to its owner's hand`).exec(s))) {
     // A spell is on the stack: "return target spell to its owner's hand"
     // (Unsubstantiate, Take It Back) takes it from there. Without `from`,
@@ -1070,6 +1150,7 @@ export function parseSentence(sentence, ctx) {
       return { kind: "add-counter", target: it, counter: "+1/+1", amount: amount(m[1]) };
     }
     if (re("untap it").test(s)) return { kind: "untap", target: it };
+    if (re("airbend (?:it|that creature|that permanent)").test(s)) return { kind: "exile", target: it, airbend: true };
     if (re("it connives").test(s)) return { kind: "connive", target: it };
   }
 
@@ -1542,7 +1623,9 @@ const INTERVENING_IFS = {
 function itOf(triggers) {
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
-  if (triggers.every((t) => t.who !== "self" && t.filter !== undefined && objectEvents.includes(t.on))) return "trigger-object";
+  // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).
+  const othersEvents = [...objectEvents, "becomes-target"];
+  if (triggers.every((t) => t.who !== "self" && t.filter !== undefined && othersEvents.includes(t.on))) return "trigger-object";
   return undefined;
 }
 
