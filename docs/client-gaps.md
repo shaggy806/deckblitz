@@ -81,5 +81,8 @@ where the decision is raised); bots and the fuzzer answer it already.
 - **A Settings button on the landing page and in the lobby** (the user, 2026-10-11). Settings
   today are reached from inside a game; the user wants them before one too: sound and music
   settings, and the priority preferences, which should persist from game to game.
+- **The library's Set filter doesn't show that set's printings** (the user, 2026-10-12). With a
+  set chosen in the library's Set filter (`client/src/library/LibraryPage.tsx`), each card should
+  show its printing from that set rather than its default art.
 - **A tutorial on how to use the site** (the user, 2026-10-11). Build one; also explore a seeded
   game (fixed decks and draws) that walks a new player through how to play Commander.

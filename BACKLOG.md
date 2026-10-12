@@ -208,6 +208,7 @@ item lands.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
 - **A Settings button on the landing page and in the lobby** (the user, 2026-10-11): sound and music settings, and the priority preferences, persisting from game to game.
+- **The library's Set filter doesn't show that set's printings** (the user, 2026-10-12): filtering by a set should show each card's printing from that set, not its default art (`client/src/library/LibraryPage.tsx`).
 - **A tutorial on how to use the site** (the user, 2026-10-11), and to explore: a seeded game that teaches how to play Commander.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
