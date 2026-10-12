@@ -159,6 +159,14 @@ export type Keyword =
   /** Shadow (rule 702.28) — can be blocked only by creatures with shadow,
    * and can block only creatures with shadow (Dauthi Voidwalker). */
   | "shadow"
+  /** Start your engines! (rule 702.179a) — a static ability: a player who
+   * controls a permanent with it and has no speed gets a speed of 1, as a
+   * state-based action (704.5aa — `Game.startEngines`; see
+   * `PlayerState.speed`). Read off the permanent's current keywords, so one
+   * that lost its abilities starts nothing, and one whose control changed
+   * starts its new controller's. "Max speed — [ability]" is the
+   * `maxSpeed()` helper's static. */
+  | "start-your-engines"
   /** Flanking (rule 702.25) — a triggered ability: the keyword is what a
    * "creature without flanking" asks about, and the `flanking()` card helper
    * is the trigger itself, so a card lists both (Sidar Kondo of Jamuraa). */
@@ -544,6 +552,23 @@ export type StaticCondition =
    * "as long as you have an enduring story" (Fíli the Pathfinder), "if you
    * have an enduring story" (Balin, Loremaster). */
   | { readonly kind: "enduring-story" }
+  /**
+   * A player's speed (rule 702.179), inclusive bounds — 0 for a player with
+   * none (702.179f). "Max speed — [ability]" and "if you have max speed" are
+   * `atLeast: 4` (702.178a, 702.179e), "unless you have max speed" (Hazoret,
+   * Godseeker) `atMost: 3`, the inherent ability's "if your speed is less
+   * than 4" (702.179d) `atMost: 3`. `who` is `"you"` (default) or
+   * `"that-player"`, the player a resolving effect is about — Outpace
+   * Oblivion's "each player **who doesn't have max speed**", a
+   * `for-each-player` over a `conditional`; only a resolution knows that
+   * player, and anywhere else it's false.
+   */
+  | {
+      readonly kind: "speed";
+      readonly atLeast?: number;
+      readonly atMost?: number;
+      readonly who?: "you" | "that-player";
+    }
   /**
    * A player has at least `atLeast` counters of a kind (rule 122.1) — you,
    * or *some one* opponent counted on their own: corrupted's "as long as an
@@ -1042,6 +1067,10 @@ export interface StaticAbility {
      * depends on nothing the fold computes.
      */
     readonly commanderManaValue?: "greatest";
+    /** This permanent's controller's speed (rule 702.179; 0 with none,
+     * 702.179f) — Samut, the Driving Force's "other creatures you control get
+     * +X/+0, where X is your speed" is `{ speed: true, pt: [1, 0] }`. */
+    readonly speed?: true;
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };

@@ -454,6 +454,10 @@ export type CostReductionAmount =
   /** One per counter of a kind its controller has — Mizzix of the Izmagnus's
    * "{1} less to cast for each experience counter you have". */
   | { readonly playerCounters: PlayerCounterKind }
+  /** Its controller's speed (rule 702.179; 0 with none, 702.179f) — Samut,
+   * the Driving Force's "noncreature spells you cast cost {X} less to cast,
+   * where X is your speed". */
+  | { readonly speed: "you" }
   /** A turn stat summed over players — Rakdos, Lord of Riots' "{1} less to
    * cast for each 1 life your opponents have lost this turn" is `{
    * turnStat: "life-lost", who: "opponent" }`; Heliod, the Warped Eclipse's

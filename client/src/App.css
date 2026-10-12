@@ -389,6 +389,19 @@
   font-size: var(--text-sm);
   color: #9fb8e6;
 }
+/* Speed (rule 702.179), beside the counters; brighter at max speed, which is
+   what the cards ask about. */
+.pp-speed {
+  margin-left: 4px;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.pp-speed.max {
+  color: #e8873a;
+  font-weight: 700;
+}
 .turn-banner.seat-a .turn-banner-player {
   color: var(--seat-a);
 }

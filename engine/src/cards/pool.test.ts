@@ -20,6 +20,7 @@ import type { CardDefinition } from "./define.js";
 import { EMBLEM_DEFINITIONS } from "./emblem.js";
 import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
 import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
+import { SPEED_DEFINITIONS } from "./speed.js";
 import { POOL_CARDS, TOKEN_CARDS } from "./generated.js";
 import { PINNED_ART, TOKEN_NAMES } from "./generated-index.js";
 import { createDefaultRegistry } from "./registry.js";
@@ -50,15 +51,21 @@ describe("card pool layout", () => {
     }
   });
 
-  it("the registry contains exactly the cards on disk, the face-down 2/2s, the locked Room and the emblem", () => {
+  it("the registry contains exactly the cards on disk, the face-down 2/2s, the locked Room, the emblem and speed", () => {
     const onDisk = new Set(files.map(([, mod]) => mod.default.name));
     const registry = createDefaultRegistry();
 
     // The internal face-down definitions (rule 708.2a — `cards/face-down.ts`),
-    // a Room with both doors locked (709.5 — `cards/locked-room.ts`) and the
-    // emblem object's (rule 114 — `cards/emblem.ts`) are registered by hand,
-    // never written to disk as cards.
-    const internal = [...FACE_DOWN_DEFINITIONS, LOCKED_ROOM_DEFINITION, ...EMBLEM_DEFINITIONS];
+    // a Room with both doors locked (709.5 — `cards/locked-room.ts`), the
+    // emblem object's (rule 114 — `cards/emblem.ts`) and a player's speed
+    // ability object's (rule 702.179d — `cards/speed.ts`) are registered by
+    // hand, never written to disk as cards.
+    const internal = [
+      ...FACE_DOWN_DEFINITIONS,
+      LOCKED_ROOM_DEFINITION,
+      ...EMBLEM_DEFINITIONS,
+      ...SPEED_DEFINITIONS,
+    ];
     expect(registry.size).toBe(onDisk.size + internal.length);
     for (const def of internal) {
       expect(onDisk.has(def.name), `${def.name} is a card file too`).toBe(false);

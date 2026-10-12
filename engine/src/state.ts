@@ -1600,6 +1600,29 @@ export interface PlayerState {
    * the game once this player controls a permanent with storied and three or
    * more artifacts, Sagas and/or legendary permanents (`Game.grantEnduringStories`). */
   enduringStory?: boolean;
+  /**
+   * This player's speed (rule 702.179): absent while they have none (rule
+   * 702.179b — a player has no speed until a rule or effect sets it), then
+   * 1 to 4. Controlling a permanent with start your engines! makes it 1, a
+   * state-based action (704.5aa — `Game.startEngines`); the inherent
+   * triggered ability `speedAbility` raises it once a turn; and nothing
+   * lowers it — losing the permanents changes nothing (the rulings). Read as
+   * 0 while absent (702.179f): the `speed` amount and condition, "max speed"
+   * at 4 (702.179e).
+   */
+  speed?: number;
+  /**
+   * The object carrying the inherent triggered ability of a player with
+   * speed (rule 702.179d: "Whenever one or more opponents lose life during
+   * your turn, if your speed is less than 4, your speed increases by 1.
+   * This ability triggers only once each turn."), made as their speed is
+   * first set. The ability has no source in the rules; the engine still
+   * needs an object for it to trigger from and go on the stack as — this
+   * one, in the command zone but in no zone list, like an emblem's
+   * (`Game.createEmblem`): no player can see, target or move it, and it is
+   * read only by the trigger scan. Its definition is `cards/speed.ts`'s.
+   */
+  speedAbility?: ObjectId;
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's
@@ -3854,6 +3877,13 @@ export const permanentCount = (state: GameState, ids: readonly ObjectId[]): numb
 
 export const activePlayerOf = (state: GameState): PlayerId =>
   state.turnOrder[state.turn.activePlayerIndex];
+
+/** Max speed (rule 702.179e): a player has it while their speed is 4. */
+export const MAX_SPEED = 4;
+
+/** A player's speed for anything that reads it (rule 702.179f): 0 while
+ * they have none. See `PlayerState.speed`. */
+export const speedOf = (state: GameState, player: PlayerId): number => state.players[player]?.speed ?? 0;
 
 /**
  * Whether `them` attacked `you` during their last turn — the most recent

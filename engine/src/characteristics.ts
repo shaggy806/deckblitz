@@ -49,7 +49,14 @@ import type { CardFilter } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { activePlayerOf, attackedYouDuringTheirLastTurn, permanentCount, printedCardName, rulesTextName } from "./state.js";
+import {
+  activePlayerOf,
+  attackedYouDuringTheirLastTurn,
+  permanentCount,
+  printedCardName,
+  rulesTextName,
+  speedOf,
+} from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, PtModifier, TurnHistoryKind } from "./state.js";
 import {
   BASIC_LAND_TYPE_COLORS,
@@ -474,6 +481,11 @@ function evalStaticCondition(
       return condition.who === "you"
         ? state.monarch === you
         : state.monarch !== null && state.monarch !== you;
+    case "speed": {
+      // "That player" is known only to a resolution, as for player-counters.
+      if (condition.who === "that-player") return false;
+      return speedWithin(speedOf(state, you), condition);
+    }
     case "player-counters": {
       const has = (p: PlayerId): boolean =>
         (state.players[p]?.counters[condition.counter] ?? 0) >= condition.atLeast;
@@ -933,6 +945,15 @@ export function keywordCountersOn(object: GameObject): Keyword[] {
     if ((n ?? 0) > 0 && KEYWORD_COUNTERS.has(kind as Keyword)) out.push(kind as Keyword);
   }
   return out;
+}
+
+/** Whether a speed (rule 702.179 — 0 for none) is within a `speed`
+ * condition's bounds. */
+export function speedWithin(
+  speed: number,
+  bounds: { readonly atLeast?: number; readonly atMost?: number },
+): boolean {
+  return (bounds.atLeast === undefined || speed >= bounds.atLeast) && (bounds.atMost === undefined || speed <= bounds.atMost);
 }
 
 /**
@@ -2510,6 +2531,8 @@ function collectStaticEffects(
             )
           : per.playerCounters !== undefined
             ? (state.players[source.controller]?.counters[per.playerCounters] ?? 0)
+            : per.speed === true
+            ? speedOf(state, source.controller)
             : per.countersOnAffected !== undefined
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined

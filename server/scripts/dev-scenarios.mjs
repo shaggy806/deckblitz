@@ -952,6 +952,36 @@ export default {
     hand: { alice: ["Dáin's Company"] },
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  SPEED: {
+    about:
+      "2p. Speed (rules 702.178–702.179): alice controls Walking Sarcophagus (start your engines!), so her " +
+      "panel shows 🏁 once the first state-based check runs, and set to 3 here (🏁 3/4); bob has none. Attack " +
+      "bob with Gastal Thrillseeker: the speed ability goes on the stack ('Speed') and resolves to max speed " +
+      "(🏁 max, brighter) — the Sarcophagus becomes 3/3 and Muraganda Raceway offers '{T}: Add {C}{C}'. A " +
+      "second loss of life this turn doesn't raise it again.",
+    players: ["alice", "bob"],
+    lands: { alice: 4, bob: 3 },
+    battlefield: { alice: ["Walking Sarcophagus", "Gastal Thrillseeker", "Muraganda Raceway"] },
+    hand: { alice: ["Lightning Bolt"] },
+    setup(game) {
+      game.debugApplyEffect("alice", { kind: "increase-speed", amount: 3 });
+    },
+    bots: { bob: {} },
+  },
+  SPEED4: {
+    about: "4p. SPEED at a full table: alice's 🏁 3/4 beside bob at max speed and two panels without speed.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 4, bob: 3, carol: 3, dave: 3 },
+    battlefield: {
+      alice: ["Walking Sarcophagus", "Gastal Thrillseeker", "Muraganda Raceway"],
+      bob: ["Streaking Oilgorger"],
+    },
+    setup(game) {
+      game.debugApplyEffect("alice", { kind: "increase-speed", amount: 3 });
+      game.debugApplyEffect("bob", { kind: "increase-speed", amount: 4 });
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
   SNEAK: {
     about:
       "2p. Sneak (rule 702.190): attack bob with Grizzly Bears (he has nothing to block with). In the declare " +

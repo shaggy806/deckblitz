@@ -231,6 +231,15 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A player's speed was set (rule 702.179): to 1 by start your
+       * engines! (704.5aa — `from` absent: they had none), or up by its
+       * inherent triggered ability (702.179d). */
+      readonly type: "speed-changed";
+      readonly player: PlayerId;
+      readonly speed: number;
+      readonly from?: number;
+    })
+  | (Base & {
       /** A permanent became prepared (rule 722.3a), and its controller made
        * `copy`, a copy of its prepare spell, in exile to cast (722.3c). */
       readonly type: "became-prepared";

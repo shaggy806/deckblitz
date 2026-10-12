@@ -524,6 +524,40 @@ export const stationBand = (
   condition: { kind: "source", filter: { counters: { kind: "charge", compare: { op: "gte", n: at } } } },
 });
 
+/** Start your engines! (rule 702.179a) as printed, reminder text and all —
+ * the card's `text` line beside its `"start-your-engines"` keyword. */
+export const START_YOUR_ENGINES_TEXT =
+  "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)";
+
+/** "As long as you have max speed" (rules 702.178a, 702.179e): speed 4. */
+export const MAX_SPEED_CONDITION = { kind: "speed", atLeast: 4 } as const satisfies StaticCondition;
+
+/**
+ * Max speed (rule 702.178a): "Max speed — [Ability]" means "As long as your
+ * speed is 4, this object has '[Ability]'" — a static ability on the card
+ * itself, live while its controller has max speed (702.179e), holding what
+ * the ability is: `grantsActivated`, `grantsTriggered`, `grantKeywords` and
+ * `grantPt` ("This creature gets +1/+1 and has menace"), a `replacement`
+ * (Far Fortune, End Boss), a `costModification` (Racers' Scoreboard). A
+ * static ability of the line that reaches other permanents passes its own
+ * `affects`. `text` is the printed line, "Max speed — " and all.
+ *
+ * An ability that works from a graveyard (702.178b — "Max speed — {3},
+ * Exile this card from your graveyard: Draw a card") is no static here: the
+ * card's `activated` entry with `zone: "graveyard"` and the
+ * `MAX_SPEED_CONDITION` as its `condition`, "you" being its owner; "Max speed
+ * — You may cast this card from your graveyard" is `castFromGraveyardIf`
+ * with the same condition.
+ */
+export const maxSpeed = (
+  band: Omit<StaticAbility, "affects" | "condition">,
+  affects: StaticAbility["affects"] = { scope: "self" },
+): StaticAbility => ({
+  ...band,
+  affects,
+  condition: MAX_SPEED_CONDITION,
+});
+
 /**
  * Affinity for [something] (rule 702.41a): "This spell costs {1} less to
  * cast for each [something] you control" — the card's `selfCostReduction`.

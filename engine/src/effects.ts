@@ -424,6 +424,12 @@ export type EffectAmount =
    * of Progress). `who` defaults to `"you"`. See `PlayerState.counters`.
    */
   | { readonly playerCounters: PlayerCounterKind; readonly who?: PlayerScope }
+  /**
+   * The effect's controller's speed (rule 702.179) — "where X is your
+   * speed" (The Speed Demon, Point the Way, Momentum Breaker's "life equal
+   * to your speed"). 0 while they have none (702.179f).
+   */
+  | { readonly speed: "you" }
   /** The sum of several amounts — "N plus an amount": a mana value "1
    * greater than the sacrificed creature's" is `{ sum: [{ manaValueOf:
    * "sacrificed" }, 1] }`, in a filter's `{ amount }` operand as much as in
@@ -1212,6 +1218,12 @@ export type EffectSpec =
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
        * for each of them. */
       readonly who?: PlayerScope;
+      /** With `who`: only the players of it this holds for, asked about each
+       * (`"that-player"` names them) — Outpace Oblivion's "2 damage to each
+       * player **who doesn't have max speed**" is `{ kind: "speed", who:
+       * "that-player", atMost: 3 }`. Dealt to them all at once, as `who`'s
+       * damage is. */
+      readonly whoseIf?: StaticCondition;
       /** Untargeted damage to whatever the triggering event was aimed at —
        * "deals 2 damage to **that permanent or player**" (Ghyrson Starn), or
        * "the player or planeswalker **it's attacking**" (Mage Slayer).
@@ -3610,6 +3622,16 @@ export type EffectSpec =
       readonly who?: PlayerScope;
     }
   | {
+      /** The effect's controller's speed increases by `amount` (rule
+       * 702.179): with no speed, it becomes `amount` (702.179c). What the
+       * inherent triggered ability of a player with speed does (702.179d —
+       * `cards/speed.ts`, whose "if your speed is less than 4" is its
+       * intervening-if, so this never takes it past max speed); no printed
+       * card says it yet. */
+      readonly kind: "increase-speed";
+      readonly amount: number;
+    }
+  | {
       /**
        * **The Ring tempts you** (rule 701.54): the effect's controller gets the
        * Ring emblem if they have none (701.54c — before choosing), chooses a
@@ -5455,6 +5477,11 @@ export interface EffectApi {
   setDayNight(value: "day" | "night"): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined): void;
+  /** `player`'s speed increases by `amount` — see the `"increase-speed"`
+   * {@link EffectSpec}. */
+  increaseSpeed(player: PlayerId, amount: number): void;
+  /** `player`'s speed, 0 for none — the `speed` {@link EffectAmount}. */
+  speedOf(player: PlayerId): number;
   /** The Ring tempts the controller (rule 701.54): the emblem first, if they
    * have none. */
   ringTemptBegin(): void;
@@ -6092,6 +6119,7 @@ function signedAmountValue(
       .playersInScope(amount.who ?? "you")
       .reduce((n, p) => n + ctx.playerCountersOf(p, amount.playerCounters), 0);
   }
+  if ("speed" in amount) return ctx.speedOf(ctx.controller);
   if ("playersWithTurnStat" in amount) {
     return ctx
       .playersCountedInScope(amount.who)
@@ -6851,7 +6879,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.who !== undefined) {
-        ctx.dealDamageScoped(spec.who, (player) => amountValue(spec.amount, ctx, player), spec.from);
+        const whoseIf = spec.whoseIf;
+        // A player the condition leaves out is dealt 0, which is dealing
+        // nothing (rule 120.8).
+        ctx.dealDamageScoped(
+          spec.who,
+          (player) =>
+            whoseIf !== undefined && !ctx.aboutPlayer(player).conditionMet(whoseIf)
+              ? 0
+              : amountValue(spec.amount, ctx, player),
+          spec.from,
+        );
         return;
       }
       const target =
@@ -8132,6 +8170,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "become-monarch":
       ctx.becomeMonarch(spec.who);
+      return;
+    case "increase-speed":
+      ctx.increaseSpeed(ctx.controller, spec.amount);
       return;
     case "the-ring-tempts-you":
       ctx.ringTemptBegin();

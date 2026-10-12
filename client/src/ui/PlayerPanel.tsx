@@ -1,4 +1,4 @@
-import { POISON_LETHAL } from 'engine/client'
+import { MAX_SPEED, POISON_LETHAL } from 'engine/client'
 import type { ManaPool, PlayerId, PublicPlayerInfo } from 'engine/client'
 import { playerLabel } from '../format.ts'
 import type { SeatClass } from '../format.ts'
@@ -159,6 +159,20 @@ export function PlayerPanel({
                 ✦ {experience} exp
               </span>
             ) : null}
+          </span>
+        ) : null}
+        {/* Speed (rule 702.179) once they have one, beside the counters:
+            1 to 4, and "max" at 4 — what every "Max speed —" line asks. */}
+        {info.speed !== null ? (
+          <span
+            className={`pp-speed${info.speed >= MAX_SPEED ? ' max' : ''}`}
+            title={
+              info.speed >= MAX_SPEED
+                ? 'Max speed (rule 702.179e): "Max speed —" abilities are on'
+                : `Speed ${info.speed} of ${MAX_SPEED} (rule 702.179): rises once on each of their turns when an opponent loses life`
+            }
+          >
+            🏁 {info.speed >= MAX_SPEED ? 'max' : `${info.speed}/${MAX_SPEED}`}
           </span>
         ) : null}
         {wentFirst ? <span className="pp-went-first" title="Went first this game">🎲</span> : null}

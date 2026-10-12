@@ -106,6 +106,7 @@ export const KEYWORDS = {
   "first strike": "first-strike", "double strike": "double-strike", trample: "trample",
   deathtouch: "deathtouch", lifelink: "lifelink", menace: "menace", indestructible: "indestructible",
   hexproof: "hexproof", shroud: "shroud", flash: "flash", fear: "fear", intimidate: "intimidate", skulk: "skulk", riot: "riot", storied: "storied",
+  "start your engines!": "start-your-engines",
   infect: "infect", wither: "wither",
   plainswalk: "plainswalk", islandwalk: "islandwalk", swampwalk: "swampwalk",
   mountainwalk: "mountainwalk", forestwalk: "forestwalk", desertwalk: "desertwalk",
@@ -1319,6 +1320,21 @@ export function parseFace(face, ctx = {}) {
     if (/^\d+\+ \| /.test(raw)) inStriation = true;
     if (inStriation) { out.todo.push(printed(raw)); continue; }
     const whole = normalize(raw, face.name);
+    // "Max speed — [ability]" (rule 702.178a): the ability, had only while
+    // its controller's speed is 4 — the line read on its own, then given
+    // the condition: a static on the card itself carrying it (`maxSpeed()`),
+    // or, for an ability that works from the graveyard (702.178b), that
+    // ability with the condition, "you" its owner.
+    if (/^Max speed — /.test(whole)) {
+      const maxed = maxSpeedLine(face, raw.replace(/^Max speed — /, ""), printed(raw), ctx);
+      if (maxed === null) out.todo.push(printed(raw));
+      else {
+        out.activated.push(...maxed.activated);
+        out.static.push(...maxed.static);
+        Object.assign(out, maxed.card);
+      }
+      continue;
+    }
     // An ability word or flavor word ("Landfall —", "Crushing Teeth —") means
     // nothing, so it's dropped. A few labels written the same way do mean
     // something: Exhaust and Boast restrict an activated ability and become
@@ -1649,6 +1665,55 @@ export function parseFace(face, ctx = {}) {
   return out;
 }
 
+/** "As long as you have max speed" (rules 702.178a, 702.179e) — the
+ * `maxSpeed()` helper's condition. */
+const MAX_SPEED = { kind: "speed", atLeast: 4 };
+
+/**
+ * One "Max speed — [ability]" line's ability (rule 702.178a), `inner` the
+ * printed ability and `text` the whole printed line: read as a line of its
+ * own, then gated on max speed. A static of the card's own gets the
+ * condition; activated and triggered abilities become a static granting them
+ * (`grantsActivated`, `grantsTriggered`), as `maxSpeed()` writes them — save
+ * one that works from the graveyard (702.178b), which keeps its place with
+ * the condition, and "You may cast this card from your graveyard", the
+ * card's `castFromGraveyardIf`. `null` for anything else, or anything the
+ * line's own reading left to a person.
+ */
+function maxSpeedLine(face, inner, text, ctx) {
+  if (normalize(inner, face.name) === "You may cast ~ from your graveyard.") {
+    return { activated: [], static: [], card: { castFromGraveyardIf: MAX_SPEED } };
+  }
+  const read = parseFace({ ...face, oracle_text: inner }, ctx);
+  if (!read.complete || read.keywords.length > 0 || read.effect !== undefined) return null;
+  const known = new Set(["keywords", "activated", "triggered", "static", "todo", "complete"]);
+  if (Object.keys(read).some((k) => !known.has(k))) return null;
+  const activated = [];
+  const statics = [];
+  const grantsActivated = [];
+  for (const ability of read.activated) {
+    if (ability.zone === "graveyard" && ability.condition === undefined) activated.push({ ...ability, condition: MAX_SPEED, text });
+    else if (ability.zone === undefined) grantsActivated.push(ability);
+    else return null;
+  }
+  for (const st of read.static) {
+    if (st.affects?.scope !== "self" || st.condition !== undefined || st.fromGraveyard !== undefined) return null;
+    statics.push({ ...st, condition: MAX_SPEED, text });
+  }
+  if (grantsActivated.length > 0 || read.triggered.length > 0) {
+    if (statics.length > 0) return null;
+    statics.push({
+      affects: { scope: "self" },
+      ...(grantsActivated.length > 0 ? { grantsActivated } : {}),
+      ...(read.triggered.length > 0 ? { grantsTriggered: read.triggered } : {}),
+      condition: MAX_SPEED,
+      text,
+    });
+  }
+  if (activated.length + statics.length === 0) return null;
+  return { activated, static: statics, card: {} };
+}
+
 /** Void (Edge of Eternities): a nonland permanent — anyone's — left the
  * battlefield this turn, or a spell — anyone's — was cast for its warp cost
  * (rule 702.185c). */
@@ -1805,6 +1870,19 @@ function parseStatic(line, text) {
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };
+  // Hazoret, Godseeker: "unless you have max speed" (rule 702.179e).
+  if (line === "~ can't attack or block unless you have max speed.") {
+    return { affects: { scope: "self" }, condition: { kind: "speed", atMost: 3 }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  // A permanent's own keywords and bonus — what "Max speed —" lines grant
+  // (Burnout Bashtronaut, Gastal Raider, Walking Sarcophagus).
+  if ((m = new RegExp(`^~ has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
+    return { affects: { scope: "self" }, grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]), text };
+  }
+  if ((m = new RegExp(`^~ gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
+    const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    return { affects: { scope: "self" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
   if (line === "~ attacks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-attack"], text };
   if (line === "~ can't be blocked.") return { affects: { scope: "self" }, grantKeywords: ["unblockable"], text };
   if ((m = new RegExp(`^During your turn, ~ has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {

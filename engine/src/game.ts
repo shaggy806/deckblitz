@@ -61,6 +61,7 @@ import {
 } from "./combat/eligibility.js";
 import { CardRegistry, createDefaultRegistry } from "./cards.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
+import { SPEED_CARD } from "./cards/speed.js";
 import type {
   AdditionalCostOption,
   CardDefinition,
@@ -110,6 +111,7 @@ import {
   staticReaches,
   suspendComputedCache,
   turnStatOf,
+  speedWithin,
   withComputedCache,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
@@ -260,6 +262,7 @@ import {
   rulesTextName,
   nameOf,
   tokenFoldKey,
+  speedOf,
 } from "./state.js";
 import type {
   AwaitingDecision,
@@ -15628,6 +15631,12 @@ export class Game {
     // An emblem's triggered abilities work from the command zone (rule
     // 114.4): its object is scanned with the battlefield, every ability of it.
     for (const emblem of this.state.emblems) if (emblem.object !== undefined) candidates.add(emblem.object);
+    // A player with speed has its inherent triggered ability (rule
+    // 702.179d), carried by an object of its own (`PlayerState.speedAbility`).
+    for (const player of this.state.turnOrder) {
+      const speedAbility = this.state.players[player]?.speedAbility;
+      if (speedAbility !== undefined) candidates.add(speedAbility);
+    }
     // Eminence (an ability word, rule 207.2c): a card in the command zone
     // whose triggered ability says it functions there (rule 113.6b). Added to
     // the same scan rather than given one of its own, so ordering, APNAP and
@@ -18220,6 +18229,16 @@ export class Game {
           (this.state.players[that].counters[condition.counter] ?? 0) >= condition.atLeast
         );
       }
+      // "Each player who doesn't have max speed" (Outpace Oblivion): that
+      // player's speed, 0 for none (rule 702.179f).
+      if (condition.kind === "speed" && condition.who === "that-player") {
+        const that = refs.player;
+        return (
+          that !== undefined &&
+          this.state.players[that]?.hasLost === false &&
+          speedWithin(speedOf(this.state, that), condition)
+        );
+      }
       // "If X is 10 or more" — the X the resolving spell was cast with.
       if (condition.kind === "x") return compareNum(x, condition.compare, x);
       // "If ~ is still on the battlefield" — as the same object.
@@ -20096,6 +20115,8 @@ export class Game {
           this.setMonarch(p, "effect");
         }
       },
+      increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
+      speedOf: (player) => speedOf(this.state, player),
       ringTemptBegin: () => {
         // Rule 701.54c: the emblem comes before the choice of Ring-bearer.
         if (this.state.emblems.some((e) => e.ring === true && e.owner === controller)) return;
@@ -23221,6 +23242,7 @@ export class Game {
     if ("playerCounters" in amount) {
       return this.state.players[player]?.counters[amount.playerCounters] ?? 0;
     }
+    if ("speed" in amount) return speedOf(this.state, player);
     if ("turnStat" in amount) {
       return this.state.turnOrder
         .filter((p) => amount.who === "any-player" || (amount.who === "you") === (p === player))
@@ -27745,6 +27767,10 @@ export class Game {
       // otherwise — the latest timestamp wins.
       if (this.recomputeControl()) changed = true;
 
+      // Rule 704.5aa: a player who controls a permanent with start your
+      // engines! and has no speed gets a speed of 1.
+      if (this.startEngines()) changed = true;
+
       for (const player of this.state.turnOrder) {
         const playerState = this.state.players[player];
         if (playerState.hasLost) continue;
@@ -28474,9 +28500,13 @@ export class Game {
     return true;
   }
 
-  /** How many cards a single draw of `player`'s becomes under a `would-draw`
-   * "draw N instead" of their own (the largest, if several) — 1 without
-   * one. */
+  /** How many cards a single draw of `player`'s becomes under the `would-draw`
+   * "draw N instead" effects of their own — 1 without one. Several are
+   * cumulative (Vnwxt, Verbose Host's ruling: with Thought Reflection too,
+   * "four times the original number of cards"): each applies to every draw
+   * the others make, though not again to its own (rule 614.5), so they
+   * multiply, whatever order they're applied in. A token stack is that many
+   * effects. */
   private drawCountFor(player: PlayerId): number {
     let draws = 1;
     for (const id of this.state.zones.shared.battlefield) {
@@ -28486,7 +28516,7 @@ export class Game {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object") continue;
         if (!this.staticActive(source, ability)) continue;
-        draws = Math.max(draws, r.instead.draws);
+        draws *= r.instead.draws ** (source.stackCount ?? 1);
       }
     }
     return draws;
@@ -30381,6 +30411,53 @@ export class Game {
       granted = true;
     }
     return granted;
+  }
+
+  /**
+   * Start your engines! (rules 702.179a, 704.5aa): a player who controls a
+   * permanent with it and has no speed gets a speed of 1 — a state-based
+   * action, so gaining control of one starts its new controller's too, and
+   * one that lost its abilities starts nothing. Whether anyone's started.
+   */
+  private startEngines(): boolean {
+    let started = false;
+    for (const player of this.state.turnOrder) {
+      const playerState = this.state.players[player];
+      if (playerState === undefined || playerState.speed !== undefined || playerState.hasLost) continue;
+      const engines = this.state.zones.shared.battlefield.some(
+        (id) =>
+          this.state.objects[id]?.controller === player &&
+          objHasKeyword(this.state, this.registry, id, "start-your-engines"),
+      );
+      if (!engines) continue;
+      this.setSpeed(player, 1);
+      started = true;
+    }
+    return started;
+  }
+
+  /**
+   * Set `player`'s speed (rule 702.179). The first time they have one, the
+   * object carrying its inherent triggered ability (702.179d) is made too —
+   * see `PlayerState.speedAbility`: in the command zone but in no zone list,
+   * as an emblem's object is, so it's never seen, targeted or moved, and
+   * `detectTriggers` scans it with the battlefield.
+   */
+  private setSpeed(player: PlayerId, speed: number): void {
+    const playerState = this.state.players[player];
+    if (playerState === undefined || playerState.speed === speed) return;
+    const from = playerState.speed;
+    playerState.speed = speed;
+    if (playerState.speedAbility === undefined) {
+      const object = this.makeCardObject(SPEED_CARD, player, { zone: "command" });
+      this.state.objects[object].kind = "emblem";
+      this.state.objects[object].timestamp = this.freshTimestamp();
+      playerState.speedAbility = object;
+      // Public from the start, so the log names its trigger "Speed".
+      this.openStint(object);
+    }
+    invalidateComputedCache();
+    this.emit({ type: "speed-changed", player, speed, ...(from !== undefined ? { from } : {}) });
   }
 
   /** `id` loses the prepared designation (rule 722.3b); its copy in exile

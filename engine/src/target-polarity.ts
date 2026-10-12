@@ -352,6 +352,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "become-copy": (n, v) => v.touch(n.target, "either", MINOR),
   "day-night": none,
   "become-monarch": none,
+  // Its controller's own speed: no slot.
+  "increase-speed": none,
   "the-ring-tempts-you": none,
   // Slot 0 is the creature chosen, not the enclosing ability's target.
   "become-ring-bearer": none,

@@ -307,6 +307,15 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     }
     case "take-extra-turn":
       return effect.target === undefined ? onPlayers(you, 3 * CARD, ctx) : 0;
+    case "increase-speed": {
+      // Speed going up is good for its player (rule 702.179): a step toward
+      // max speed, whose abilities are what the cards are built around —
+      // the last step most of all; past max it's nothing.
+      const now = ctx.state.players[ctx.controller]?.speed ?? 0;
+      const after = Math.min(4, now + effect.amount);
+      if (after <= now) return 0;
+      return onPlayers(you, after === 4 ? CARD : 0.25 * (after - now) * CARD, ctx);
+    }
     // The game's outcome outweighs everything else here, as decking does: a
     // win ends the game for every seat (an opponent's is ours lost), and a
     // pact left unpaid loses it.

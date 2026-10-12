@@ -3,6 +3,7 @@
  * playground scripts' `format.mjs`, used by the event log.
  */
 
+import { MAX_SPEED } from 'engine/client'
 import type { CombatRestriction, GameEvent, ObjectId, PlayerId, Step, TargetRef } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 
@@ -150,6 +151,12 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} goes on an adventure (exiled)`
     case 'enduring-story':
       return `${who(event.player)} has an enduring story`
+    case 'speed-changed':
+      return event.from === undefined
+        ? `${who(event.player)} starts their engines — speed ${event.speed}`
+        : event.speed >= MAX_SPEED
+          ? `${who(event.player)} reaches max speed`
+          : `${who(event.player)}'s speed rises to ${event.speed}`
     case 'became-prepared':
       return `${name(event.object)} becomes prepared — ${name(event.copy)} can be cast`
     case 'became-unprepared':

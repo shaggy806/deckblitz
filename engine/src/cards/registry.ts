@@ -5,6 +5,7 @@ import { CardRegistry } from "./card-registry.js";
 import { EMBLEM_DEFINITIONS } from "./emblem.js";
 import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
 import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
+import { SPEED_DEFINITIONS } from "./speed.js";
 import { BUILTIN_CARDS } from "./generated.js";
 
 export { CardRegistry };
@@ -15,5 +16,6 @@ export function createDefaultRegistry(): CardRegistry {
   for (const card of FACE_DOWN_DEFINITIONS) registry.register(card);
   registry.register(LOCKED_ROOM_DEFINITION);
   for (const card of EMBLEM_DEFINITIONS) registry.register(card);
+  for (const card of SPEED_DEFINITIONS) registry.register(card);
   return registry;
 }

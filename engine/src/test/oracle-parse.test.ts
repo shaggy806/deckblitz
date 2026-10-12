@@ -711,6 +711,59 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     expect(c.targets).toEqual(["creature-you-control"]);
   });
+
+  it("speed (rules 702.178–702.179): start your engines!, and each kind of max speed line", () => {
+    const MAX = { kind: "speed", atLeast: 4 };
+    const engines =
+      "Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)";
+    expect(face(engines).keywords).toEqual(["start-your-engines"]);
+    expect(face("Start your engines!").keywords).toEqual(["start-your-engines"]);
+    // A bonus of its own: the static, given the condition.
+    const raider = face(`${engines}\nMax speed — This creature gets +1/+1 and has menace.`);
+    expect(raider.static).toEqual([
+      {
+        affects: { scope: "self" },
+        grantPt: [1, 1],
+        grantKeywords: ["menace"],
+        condition: MAX,
+        text: "Max speed — This creature gets +1/+1 and has menace.",
+      },
+    ]);
+    expect(raider.complete).toBe(true);
+    expect(face("Max speed — This creature has double strike.").static[0]).toEqual({
+      affects: { scope: "self" },
+      grantKeywords: ["double-strike"],
+      condition: MAX,
+      text: "Max speed — This creature has double strike.",
+    });
+    // An activated or triggered ability: a static granting it.
+    const raceway = face("{T}: Add {C}.\nMax speed — {T}: Add {C}{C}.", "Land");
+    expect(raceway.activated).toHaveLength(1);
+    expect(raceway.static).toHaveLength(1);
+    expect(raceway.static[0].condition).toEqual(MAX);
+    expect(raceway.static[0].grantsActivated[0].effect).toEqual({ kind: "add-mana", mana: "C", amount: 2 });
+    expect(raceway.static[0].text).toBe("Max speed — {T}: Add {C}{C}.");
+    const regent = face("Max speed — At the beginning of your end step, create a 2/2 black Zombie creature token.");
+    expect(regent.static[0].grantsTriggered[0].trigger).toEqual({ on: "step-begins", step: "end", who: "you" });
+    // One that works from the graveyard keeps its place, with the condition
+    // (rule 702.178b).
+    const surveyor = face("Max speed — {3}, Exile this card from your graveyard: Draw a card.");
+    expect(surveyor.static).toEqual([]);
+    expect(surveyor.activated[0]).toMatchObject({ zone: "graveyard", condition: MAX, effect: { kind: "draw", amount: 1 } });
+    expect(surveyor.complete).toBe(true);
+    // "You may cast this card from your graveyard."
+    expect(face("Max speed — You may cast this card from your graveyard.", "Enchantment — Aura").castFromGraveyardIf).toEqual(MAX);
+    // "Unless you have max speed" (Hazoret, Godseeker).
+    expect(face("Hazoret can't attack or block unless you have max speed.").static).toEqual([]);
+    expect(
+      parseFace(
+        { name: "Hazoret, Godseeker", type_line: "Legendary Creature — God", oracle_text: "Hazoret can't attack or block unless you have max speed." },
+        { tokenFor: () => null },
+      ).static[0],
+    ).toMatchObject({ condition: { kind: "speed", atMost: 3 }, restrictions: ["cant-attack", "cant-block"] });
+    // A line it can't read stays a person's, never half-gated.
+    expect(face("Max speed — Whenever you cast a spell with mana value 7 or greater, you win the game.").complete).toBe(false);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {
