@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3527 already implemented / 1473 missing (marks refreshed 2026-10-12)
+3528 already implemented / 1472 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2963,7 +2963,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2970  Starnheim Courser                        {2}{W}           Creature — Pegasus
 [x]  2971  Ulvenwald Tracker                        {G}              Creature — Human Shaman
 [ ]  2972  Doppelgang                               {X}{X}{X}{G}{U}  Sorcery
-[ ]  2973  Fatal Push                               {B}              Instant
+[x]  2973  Fatal Push                               {B}              Instant
 [ ]  2974  Lifestream's Blessing                    {4}{G}{G}        Instant
 [ ]  2975  Uncivil Unrest                           {4}{R}           Enchantment
 [x]  2976  Jumbo Cactuar                            {5}{G}{G}        Creature — Plant

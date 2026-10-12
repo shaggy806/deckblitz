@@ -35,6 +35,7 @@ import _poolBoneMiser from "../pool/bone-miser.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
+import _poolCallForUnity from "../pool/call-for-unity.js";
 import _poolCanoptekSpyder from "../pool/canoptek-spyder.js";
 import _poolCanopyBaloth from "../pool/canopy-baloth.js";
 import _poolCanyonSlough from "../pool/canyon-slough.js";
@@ -336,6 +337,7 @@ import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
 import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
+import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
@@ -387,6 +389,7 @@ const shard: CardShard = {
     _poolBorosReckoner,
     _poolBrainWeevil,
     _poolBrenardGingerSculptor,
+    _poolCallForUnity,
     _poolCanoptekSpyder,
     _poolCanopyBaloth,
     _poolCanyonSlough,
@@ -688,6 +691,7 @@ const shard: CardShard = {
     _poolWebOfLifeAndDestiny,
     _poolWorthyKnight,
     _poolWurmcoilEngine,
+    _poolWurmwallSweeper,
     _poolYoungPyromancer,
     _poolYumaProudProtector,
     _poolZimoneQuandrixProdigy,

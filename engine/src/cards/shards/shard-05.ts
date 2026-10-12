@@ -174,6 +174,7 @@ import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
+import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
@@ -238,6 +239,7 @@ import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
+import _poolPutridPals from "../pool/putrid-pals.js";
 import _poolPyknite from "../pool/pyknite.js";
 import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
@@ -551,6 +553,7 @@ const shard: CardShard = {
     _poolIncubationDruid,
     _poolInfernalTribute,
     _poolInquisitivePuppet,
+    _poolInsectoidExterminator,
     _poolInspiredCharge,
     _poolInvokeTheDivine,
     _poolJacesSanctum,
@@ -615,6 +618,7 @@ const shard: CardShard = {
     _poolProphetOfDistortion,
     _poolProtomatterPowder,
     _poolPuresteelPaladin,
+    _poolPutridPals,
     _poolPyknite,
     _poolQuicksilverAmulet,
     _poolQuicksilverPietroMaximoff,

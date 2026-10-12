@@ -172,6 +172,7 @@ import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
+import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
@@ -234,6 +235,7 @@ import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
+import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolKydeleChosenOfKruphix,
     _poolLeafkinDruid,
     _poolLeechCollector,
+    _poolLifecraftCavalry,
     _poolLightOfPromise,
     _poolLilianasStandardBearer,
     _poolLonesomeUnicorn,
@@ -591,6 +594,7 @@ const shard: CardShard = {
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
     _poolReflectionsOfLittjara,
+    _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolReverentHoplite,
     _poolReyavMasterSmith,

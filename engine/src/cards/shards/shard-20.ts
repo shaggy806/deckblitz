@@ -79,6 +79,7 @@ import _poolCoralMerfolk from "../pool/coral-merfolk.js";
 import _poolCorsairCaptain from "../pool/corsair-captain.js";
 import _poolCosmicCrucible from "../pool/cosmic-crucible.js";
 import _poolCountersculpt from "../pool/countersculpt.js";
+import _poolCountlessGearsRenegade from "../pool/countless-gears-renegade.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
@@ -305,6 +306,7 @@ import _poolSocialClimber from "../pool/social-climber.js";
 import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
+import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
@@ -481,6 +483,7 @@ const shard: CardShard = {
     _poolCorsairCaptain,
     _poolCosmicCrucible,
     _poolCountersculpt,
+    _poolCountlessGearsRenegade,
     _poolCoverOfDarkness,
     _poolCrashOfRhinos,
     _poolCrestedSunmare,
@@ -707,6 +710,7 @@ const shard: CardShard = {
     _poolSorcererOfTheFang,
     _poolSoulcageFiend,
     _poolSourbreadAuntie,
+    _poolSpaceTimeAnomaly,
     _poolSpearbreakerBehemoth,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,

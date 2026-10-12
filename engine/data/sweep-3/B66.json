@@ -1,0 +1,733 @@
+{
+ "batch": "B66",
+ "status": "complete",
+ "ranks": "Edge of Eternities (EOE, 2025-08-01): top 50% by EDHREC rank, its last 53 (EOE done); Final Fantasy (FIN, 2025-06-13): top 50% by EDHREC rank, its last 8 (FIN done); with void and revolt built and every card they unblocked",
+ "authored": [
+  {
+   "name": "All-Fates Stalker",
+   "files": [
+    "engine/src/cards/pool/all-fates-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alpharael, Stonechosen",
+   "files": [
+    "engine/src/cards/pool/alpharael-stonechosen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astelli Reclaimer",
+   "files": [
+    "engine/src/cards/pool/astelli-reclaimer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atmospheric Greenhouse",
+   "files": [
+    "engine/src/cards/pool/atmospheric-greenhouse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Beyond the Quiet",
+   "files": [
+    "engine/src/cards/pool/beyond-the-quiet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chorale of the Void",
+   "files": [
+    "engine/src/cards/pool/chorale-of-the-void.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chrome Companion",
+   "files": [
+    "engine/src/cards/pool/chrome-companion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cut Propulsion",
+   "files": [
+    "engine/src/cards/pool/cut-propulsion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Decode Transmissions",
+   "files": [
+    "engine/src/cards/pool/decode-transmissions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delivery Moogle",
+   "files": [
+    "engine/src/cards/pool/delivery-moogle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Divert Disaster",
+   "files": [
+    "engine/src/cards/pool/divert-disaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drill Too Deep",
+   "files": [
+    "engine/src/cards/pool/drill-too-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drix Fatemaker",
+   "files": [
+    "engine/src/cards/pool/drix-fatemaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dual-Sun Technique",
+   "files": [
+    "engine/src/cards/pool/dual-sun-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dyadrine, Synthesis Amalgam",
+   "files": [
+    "engine/src/cards/pool/dyadrine-synthesis-amalgam.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embrace Oblivion",
+   "files": [
+    "engine/src/cards/pool/embrace-oblivion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emergency Eject",
+   "files": [
+    "engine/src/cards/pool/emergency-eject.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gladiolus Amicitia",
+   "files": [
+    "engine/src/cards/pool/gladiolus-amicitia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haliya, Ascendant Cadet",
+   "files": [
+    "engine/src/cards/pool/haliya-ascendant-cadet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hardlight Containment",
+   "files": [
+    "engine/src/cards/pool/hardlight-containment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hymn of the Faller",
+   "files": [
+    "engine/src/cards/pool/hymn-of-the-faller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Larval Scoutlander",
+   "files": [
+    "engine/src/cards/pool/larval-scoutlander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lumen-Class Frigate",
+   "files": [
+    "engine/src/cards/pool/lumen-class-frigate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meltstrider Eulogist",
+   "files": [
+    "engine/src/cards/pool/meltstrider-eulogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mental Modulation",
+   "files": [
+    "engine/src/cards/pool/mental-modulation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nanoform Sentinel",
+   "files": [
+    "engine/src/cards/pool/nanoform-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nova Hellkite",
+   "files": [
+    "engine/src/cards/pool/nova-hellkite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pinnacle Kill-Ship",
+   "files": [
+    "engine/src/cards/pool/pinnacle-kill-ship.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pull Through the Weft",
+   "files": [
+    "engine/src/cards/pool/pull-through-the-weft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Requiem Monolith",
+   "files": [
+    "engine/src/cards/pool/requiem-monolith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rescue Skiff",
+   "files": [
+    "engine/src/cards/pool/rescue-skiff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sami, Ship's Engineer",
+   "files": [
+    "engine/src/cards/pool/sami-ships-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrounge for Eternity",
+   "files": [
+    "engine/src/cards/pool/scrounge-for-eternity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seedship Agrarian",
+   "files": [
+    "engine/src/cards/pool/seedship-agrarian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seedship Broodtender",
+   "files": [
+    "engine/src/cards/pool/seedship-broodtender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seedship Impact",
+   "files": [
+    "engine/src/cards/pool/seedship-impact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Self-Destruct",
+   "files": [
+    "engine/src/cards/pool/self-destruct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sledge-Class Seedship",
+   "files": [
+    "engine/src/cards/pool/sledge-class-seedship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Space-Time Anomaly",
+   "files": [
+    "engine/src/cards/pool/space-time-anomaly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steelswarm Operator",
+   "files": [
+    "engine/src/cards/pool/steelswarm-operator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stiltzkin, Moogle Merchant",
+   "files": [
+    "engine/src/cards/pool/stiltzkin-moogle-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: Choco/Mog",
+   "files": [
+    "engine/src/cards/pool/summon-choco-mog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Synthesizer Labship",
+   "files": [
+    "engine/src/cards/pool/synthesizer-labship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Syr Vondam, the Lucent",
+   "files": [
+    "engine/src/cards/pool/syr-vondam-the-lucent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tragic Trajectory",
+   "files": [
+    "engine/src/cards/pool/tragic-trajectory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Virulent Silencer",
+   "files": [
+    "engine/src/cards/pool/virulent-silencer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warmaker Gunship",
+   "files": [
+    "engine/src/cards/pool/warmaker-gunship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wurmwall Sweeper",
+   "files": [
+    "engine/src/cards/pool/wurmwall-sweeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zero Point Ballad",
+   "files": [
+    "engine/src/cards/pool/zero-point-ballad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aid from the Cowl",
+   "files": [
+    "engine/src/cards/pool/aid-from-the-cowl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airdrop Aeronauts",
+   "files": [
+    "engine/src/cards/pool/airdrop-aeronauts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call for Unity",
+   "files": [
+    "engine/src/cards/pool/call-for-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Countless Gears Renegade",
+   "files": [
+    "engine/src/cards/pool/countless-gears-renegade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadeye Harpooner",
+   "files": [
+    "engine/src/cards/pool/deadeye-harpooner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Decommission",
+   "files": [
+    "engine/src/cards/pool/decommission.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elegy Acolyte",
+   "files": [
+    "engine/src/cards/pool/elegy-acolyte.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fatal Push",
+   "files": [
+    "engine/src/cards/pool/fatal-push.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foot Mystic",
+   "files": [
+    "engine/src/cards/pool/foot-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greenwheel Liberator",
+   "files": [
+    "engine/src/cards/pool/greenwheel-liberator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Herbalists",
+   "files": [
+    "engine/src/cards/pool/hidden-herbalists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Stockpile",
+   "files": [
+    "engine/src/cards/pool/hidden-stockpile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hylderblade",
+   "files": [
+    "engine/src/cards/pool/hylderblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insatiable Skittermaw",
+   "files": [
+    "engine/src/cards/pool/insatiable-skittermaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insectoid Exterminator",
+   "files": [
+    "engine/src/cards/pool/insectoid-exterminator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Interceptor Mechan",
+   "files": [
+    "engine/src/cards/pool/interceptor-mechan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavaron Skywarden",
+   "files": [
+    "engine/src/cards/pool/kavaron-skywarden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kutzil's Flanker",
+   "files": [
+    "engine/src/cards/pool/kutzils-flanker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifecraft Cavalry",
+   "files": [
+    "engine/src/cards/pool/lifecraft-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lord Dregg, Insect Invader",
+   "files": [
+    "engine/src/cards/pool/lord-dregg-insect-invader.ts",
+    "engine/src/cards/tokens/insect-warrior-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lulu, Loyal Hollyphant",
+   "files": [
+    "engine/src/cards/pool/lulu-loyal-hollyphant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Michelangelo, Game Master",
+   "files": [
+    "engine/src/cards/pool/michelangelo-game-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Narnam Renegade",
+   "files": [
+    "engine/src/cards/pool/narnam-renegade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Night Market Aeronaut",
+   "files": [
+    "engine/src/cards/pool/night-market-aeronaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pizza Face, Gastromancer",
+   "files": [
+    "engine/src/cards/pool/pizza-face-gastromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plasma Bolt",
+   "files": [
+    "engine/src/cards/pool/plasma-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Putrid Pals",
+   "files": [
+    "engine/src/cards/pool/putrid-pals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Rallier",
+   "files": [
+    "engine/src/cards/pool/renegade-rallier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roving Actuator",
+   "files": [
+    "engine/src/cards/pool/roving-actuator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarevok, Deathbringer",
+   "files": [
+    "engine/src/cards/pool/sarevok-deathbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shortcut to Mushrooms",
+   "files": [
+    "engine/src/cards/pool/shortcut-to-mushrooms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silkweaver Elite",
+   "files": [
+    "engine/src/cards/pool/silkweaver-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solemn Recruit",
+   "files": [
+    "engine/src/cards/pool/solemn-recruit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tale of Momo",
+   "files": [
+    "engine/src/cards/pool/tale-of-momo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "That's Rough Buddy",
+   "files": [
+    "engine/src/cards/pool/thats-rough-buddy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Rebel",
+   "files": [
+    "engine/src/cards/pool/vengeful-rebel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voidforged Titan",
+   "files": [
+    "engine/src/cards/pool/voidforged-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vrock",
+   "files": [
+    "engine/src/cards/pool/vrock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "West Wind Avatar",
+   "files": [
+    "engine/src/cards/pool/west-wind-avatar.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Broodguard Elite",
+   "needs": [
+    "effect:put-its-counters-each-kind"
+   ],
+   "why": "'Put its counters on target creature you control' — every kind it had as it left; add-counter takes one kind."
+  },
+  {
+   "name": "Quantum Riddler",
+   "needs": [
+    "replacement:draw-instruction-plus-one"
+   ],
+   "why": "'If you would draw one or more cards, draw that many plus one instead' — once per instruction."
+  },
+  {
+   "name": "Emissary Escort",
+   "needs": [
+    "effect:amount-aggregate"
+   ],
+   "why": "+X/+0 where X is the greatest mana value among other artifacts you control."
+  },
+  {
+   "name": "Bioengineered Future",
+   "needs": [
+    "effect:turn-stat-lands-entered"
+   ],
+   "why": "A counter for each land that entered under your control this turn, ones since gone included."
+  },
+  {
+   "name": "Uthros Psionicist",
+   "needs": [
+    "cost:cost-reduction-nth-spell-each-turn"
+   ],
+   "why": "A cost reduction for the second spell you cast each turn."
+  },
+  {
+   "name": "Lightstall Inquisitor",
+   "needs": [
+    "effect:each-opponent-exiles-choice",
+    "zone:exiled-from-hand-play-permission-taxed"
+   ],
+   "why": "Each opponent exiles a card from hand; you may play them, spells costing {1} more and lands entering tapped."
+  },
+  {
+   "name": "Meltstrider's Resolve",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "'Enchanted creature fights up to one target creature.'"
+  },
+  {
+   "name": "The Dominion Bracelet",
+   "needs": [
+    "mechanic:control-player",
+    "cost:cost-reduction-source-power"
+   ],
+   "why": "Controlling another player's turn, with a cost reduced by the creature's power."
+  },
+  {
+   "name": "Survey Mechan",
+   "needs": [
+    "effect:distinct-names-count"
+   ],
+   "why": "{X} less, X the number of differently named lands you control."
+  },
+  {
+   "name": "Raubahn, Bull of Ala Mhigo",
+   "needs": [
+    "decision:ward-dynamic-x"
+   ],
+   "why": "Ward—Pay life equal to Raubahn's power."
+  },
+  {
+   "name": "Cloud, Planet's Champion",
+   "needs": [
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "Equip abilities that target Cloud cost {2} less."
+  },
+  {
+   "name": "Sorceress's Schemes",
+   "needs": [
+    "effect:target-card-in-exile"
+   ],
+   "why": "A target that is an instant or sorcery card in your graveyard or an exiled card with flashback you own."
+  },
+  {
+   "name": "Temporal Intervention",
+   "needs": [
+    "effect:discard-chosen-from-revealed-hand"
+   ],
+   "why": "'You choose a nonland card from it' from a revealed hand."
+  },
+  {
+   "name": "Aether Revolt",
+   "needs": [
+    "trigger:energy-gained"
+   ],
+   "why": "'Whenever you get one or more {E}', dealing that much damage; its revolt half is expressible."
+  },
+  {
+   "name": "Minthara, Merciless Soul",
+   "needs": [
+    "decision:ward-dynamic-x"
+   ],
+   "why": "Ward {X}, X the number of experience counters you have."
+  }
+ ]
+}

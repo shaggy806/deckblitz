@@ -10,6 +10,7 @@ import _poolAgeGracedChapel from "../pool/age-graced-chapel.js";
 import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
 import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
+import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
@@ -178,6 +179,7 @@ import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
+import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
@@ -209,6 +211,7 @@ import _poolManaFlare from "../pool/mana-flare.js";
 import _poolMasterOfBarbs from "../pool/master-of-barbs.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
+import _poolMentalModulation from "../pool/mental-modulation.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
 import _poolMerfolkLooter from "../pool/merfolk-looter.js";
 import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
@@ -241,6 +244,7 @@ import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
 import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
+import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
@@ -369,6 +373,7 @@ const shard: CardShard = {
     _poolAgnaQela,
     _poolAgonizingSyphon,
     _poolAjanisWelcome,
+    _poolAllFatesStalker,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
     _poolArborealGrazer,
@@ -537,6 +542,7 @@ const shard: CardShard = {
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
+    _poolInsatiableSkittermaw,
     _poolInvokeTheFiremind,
     _poolIronShieldElf,
     _poolIronshellBeetle,
@@ -568,6 +574,7 @@ const shard: CardShard = {
     _poolMasterOfBarbs,
     _poolMedusaInhumanQueen,
     _poolMemoryDeluge,
+    _poolMentalModulation,
     _poolMerchantScroll,
     _poolMerfolkLooter,
     _poolMerfolkMistbinder,
@@ -600,6 +607,7 @@ const shard: CardShard = {
     _poolPiaNalaar,
     _poolPiercingLight,
     _poolPlagueDogs,
+    _poolPlasmaBolt,
     _poolPrimevalBounty,
     _poolPrismite,
     _poolProfessionalFaceBreaker,

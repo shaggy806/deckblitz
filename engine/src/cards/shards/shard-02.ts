@@ -263,6 +263,7 @@ import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
+import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
@@ -619,6 +620,7 @@ const shard: CardShard = {
     _poolScionOfGlaciers,
     _poolScouringSands,
     _poolScrybSprites,
+    _poolSeedshipBroodtender,
     _poolSerraSphinx,
     _poolShalaiVoiceOfPlenty,
     _poolShatterskullGiant,

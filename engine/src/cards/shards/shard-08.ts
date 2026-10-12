@@ -83,9 +83,11 @@ import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
 import _poolDispersingOrb from "../pool/dispersing-orb.js";
 import _poolDisruptingScepter from "../pool/disrupting-scepter.js";
+import _poolDivertDisaster from "../pool/divert-disaster.js";
 import _poolDocOcksHenchmen from "../pool/doc-ocks-henchmen.js";
 import _poolDowsingDevice from "../pool/dowsing-device.js";
 import _poolDragonflySuit from "../pool/dragonfly-suit.js";
+import _poolDrixFatemaker from "../pool/drix-fatemaker.js";
 import _poolDrownInSorrow from "../pool/drown-in-sorrow.js";
 import _poolDrudgeReavers from "../pool/drudge-reavers.js";
 import _poolDruidLyrist from "../pool/druid-lyrist.js";
@@ -99,6 +101,7 @@ import _poolElendasHierophant from "../pool/elendas-hierophant.js";
 import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
+import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEndlessRanksOfTheDead from "../pool/endless-ranks-of-the-dead.js";
 import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
@@ -299,12 +302,14 @@ import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
 import _poolSpiritOfMalevolence from "../pool/spirit-of-malevolence.js";
 import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
+import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
 import _poolStingerquillAnnex from "../pool/stingerquill-annex.js";
 import _poolStockingThePantry from "../pool/stocking-the-pantry.js";
 import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStratosoarer from "../pool/stratosoarer.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
+import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
 import _poolSwarmBeingOfBees from "../pool/swarm-being-of-bees.js";
 import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
@@ -324,6 +329,7 @@ import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
 import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
+import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
@@ -458,9 +464,11 @@ const shard: CardShard = {
     _poolDevouringDeep,
     _poolDispersingOrb,
     _poolDisruptingScepter,
+    _poolDivertDisaster,
     _poolDocOcksHenchmen,
     _poolDowsingDevice,
     _poolDragonflySuit,
+    _poolDrixFatemaker,
     _poolDrownInSorrow,
     _poolDrudgeReavers,
     _poolDruidLyrist,
@@ -474,6 +482,7 @@ const shard: CardShard = {
     _poolElephantAmbush,
     _poolElfswornGiant,
     _poolElvishVanguard,
+    _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
     _poolEndlessRanksOfTheDead,
     _poolEntrapmentManeuver,
@@ -674,12 +683,14 @@ const shard: CardShard = {
     _poolSpiritOfMalevolence,
     _poolSplashPortal,
     _poolSteamclaw,
+    _poolSteelswarmOperator,
     _poolStingerquillAnnex,
     _poolStockingThePantry,
     _poolStokeTheFlames,
     _poolStormStrike,
     _poolStratosoarer,
     _poolSulfurousMire,
+    _poolSummonChocoMog,
     _poolSwarmBeingOfBees,
     _poolSweetGumRecluse,
     _poolSyphonFuel,
@@ -699,6 +710,7 @@ const shard: CardShard = {
     _poolTocasiasDigSite,
     _poolTownSentry,
     _poolToxicNim,
+    _poolTragicTrajectory,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
     _poolUltimateGreenGoblin,

@@ -354,6 +354,7 @@ import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
+import _poolVrock from "../pool/vrock.js";
 import _poolWallOfBlossoms from "../pool/wall-of-blossoms.js";
 import _poolWallOfBone from "../pool/wall-of-bone.js";
 import _poolWallOfSwords from "../pool/wall-of-swords.js";
@@ -737,6 +738,7 @@ const shard: CardShard = {
     _poolVihaanGoldwaker,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
+    _poolVrock,
     _poolWallOfBlossoms,
     _poolWallOfBone,
     _poolWallOfSwords,

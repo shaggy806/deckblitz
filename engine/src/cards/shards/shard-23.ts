@@ -130,6 +130,7 @@ import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
 import _poolHelpingHand from "../pool/helping-hand.js";
 import _poolHeraldOfTheFair from "../pool/herald-of-the-fair.js";
 import _poolHiddenBlade from "../pool/hidden-blade.js";
+import _poolHiddenStockpile from "../pool/hidden-stockpile.js";
 import _poolHideousEnd from "../pool/hideous-end.js";
 import _poolHighbornGhoul from "../pool/highborn-ghoul.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
@@ -154,6 +155,7 @@ import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
 import _poolJunktown from "../pool/junktown.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
+import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
@@ -161,6 +163,7 @@ import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
+import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
@@ -168,6 +171,8 @@ import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
+import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
+import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
 import _poolManaPrism from "../pool/mana-prism.js";
@@ -323,6 +328,7 @@ import _poolWingShredder from "../pool/wing-shredder.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWithstand from "../pool/withstand.js";
+import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
 import _poolZofConsumption from "../pool/zof-consumption.js";
 import _tokensAssemblyWorkerToken from "../tokens/assembly-worker-token.js";
@@ -461,6 +467,7 @@ const shard: CardShard = {
     _poolHelpingHand,
     _poolHeraldOfTheFair,
     _poolHiddenBlade,
+    _poolHiddenStockpile,
     _poolHideousEnd,
     _poolHighbornGhoul,
     _poolHiredBlade,
@@ -485,6 +492,7 @@ const shard: CardShard = {
     _poolJunktown,
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
+    _poolKavaronSkywarden,
     _poolKeeningApparition,
     _poolKeldonRaider,
     _poolKembasSkyguard,
@@ -492,6 +500,7 @@ const shard: CardShard = {
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKuraTheBoundlessSky,
+    _poolLarvalScoutlander,
     _poolLavaAxe,
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
@@ -499,6 +508,8 @@ const shard: CardShard = {
     _poolLightningBlow,
     _poolLostLegion,
     _poolLotusGuardian,
+    _poolLuluLoyalHollyphant,
+    _poolLumenClassFrigate,
     _poolMakindiOx,
     _poolMammothSpider,
     _poolManaPrism,
@@ -654,6 +665,7 @@ const shard: CardShard = {
     _poolWinterflame,
     _poolWirewoodHivemaster,
     _poolWithstand,
+    _poolZeroPointBallad,
     _poolZimoneInfiniteAnalyst,
     _poolZofConsumption,
   ],

@@ -19,6 +19,7 @@ import _poolAnthemOfChampions from "../pool/anthem-of-champions.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
+import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
@@ -121,6 +122,7 @@ import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
 import _poolHorizonChimera from "../pool/horizon-chimera.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
+import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
@@ -187,6 +189,7 @@ import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
+import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
@@ -223,6 +226,7 @@ import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
+import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
@@ -234,6 +238,7 @@ import _poolSakashimaOfAThousandFaces from "../pool/sakashima-of-a-thousand-face
 import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
 import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
+import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
@@ -256,6 +261,7 @@ import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
+import _poolSolemnRecruit from "../pool/solemn-recruit.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
 import _poolSoulOfWindgrace from "../pool/soul-of-windgrace.js";
 import _poolSoulOfZendikar from "../pool/soul-of-zendikar.js";
@@ -327,6 +333,7 @@ import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
+import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
@@ -362,6 +369,7 @@ const shard: CardShard = {
     _poolAnticipate,
     _poolArchweaver,
     _poolArtisansSorrow,
+    _poolAstelliReclaimer,
     _poolAwakenTheBear,
     _poolAzureDrake,
     _poolBambooGroveArcher,
@@ -464,6 +472,7 @@ const shard: CardShard = {
     _poolHordelingOutburst,
     _poolHorizonChimera,
     _poolHuntersTalent,
+    _poolHylderblade,
     _poolHypnoticSpecter,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,
@@ -530,6 +539,7 @@ const shard: CardShard = {
     _poolMountainGoat,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
+    _poolNarnamRenegade,
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
@@ -566,6 +576,7 @@ const shard: CardShard = {
     _poolRemnantElemental,
     _poolRepercussion,
     _poolRepulse,
+    _poolRescueSkiff,
     _poolRestorativeTechnique,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
@@ -577,6 +588,7 @@ const shard: CardShard = {
     _poolSaltRoadPatrol,
     _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
+    _poolSarevokDeathbringer,
     _poolSavageMansion,
     _poolSavannah,
     _poolScaldingTarn,
@@ -599,6 +611,7 @@ const shard: CardShard = {
     _poolSkyhunterStrikeForce,
     _poolSmolderingSpires,
     _poolSnowCoveredSwamp,
+    _poolSolemnRecruit,
     _poolSoulFeast,
     _poolSoulOfWindgrace,
     _poolSoulOfZendikar,
@@ -670,6 +683,7 @@ const shard: CardShard = {
     _poolWastewoodVerge,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
+    _poolWestWindAvatar,
     _poolWestvaleAbbey,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,

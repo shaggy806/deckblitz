@@ -120,6 +120,7 @@ import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
 import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
+import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
@@ -507,6 +508,7 @@ const shard: CardShard = {
     _poolGrizzlyBears,
     _poolHaldirLorienLieutenant,
     _poolHalfElfMonk,
+    _poolHaliyaAscendantCadet,
     _poolHaloHopper,
     _poolHandOfDeath,
     _poolHapatraVizierOfPoisons,

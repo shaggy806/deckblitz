@@ -85,6 +85,7 @@ import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
 import _poolDawnsLightArcher from "../pool/dawns-light-archer.js";
+import _poolDeadeyeHarpooner from "../pool/deadeye-harpooner.js";
 import _poolDeadeyeTormentor from "../pool/deadeye-tormentor.js";
 import _poolDeadpoolTradingCard from "../pool/deadpool-trading-card.js";
 import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
@@ -146,6 +147,7 @@ import _poolHerosHeirloom from "../pool/heros-heirloom.js";
 import _poolHexhavenInvigorator from "../pool/hexhaven-invigorator.js";
 import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
+import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
@@ -248,6 +250,7 @@ import _poolSeachromeCoast from "../pool/seachrome-coast.js";
 import _poolSeafaringWerewolf from "../pool/seafaring-werewolf.js";
 import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
+import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
@@ -436,6 +439,7 @@ const shard: CardShard = {
     _poolDarksteelJuggernaut,
     _poolDarksteelPlate,
     _poolDawnsLightArcher,
+    _poolDeadeyeHarpooner,
     _poolDeadeyeTormentor,
     _poolDeadpoolTradingCard,
     _poolDeathgazeCockatrice,
@@ -497,6 +501,7 @@ const shard: CardShard = {
     _poolHexhavenInvigorator,
     _poolHexingSquelcher,
     _poolHiddenGrotto,
+    _poolHiddenHerbalists,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
     _poolHondenOfLifesWeb,
@@ -599,6 +604,7 @@ const shard: CardShard = {
     _poolSeafaringWerewolf,
     _poolSeagrafSkaab,
     _poolSearingSpearAskari,
+    _poolSeedshipImpact,
     _poolShepherdingSpirits,
     _poolShootTheSheriff,
     _poolShrikeForce,

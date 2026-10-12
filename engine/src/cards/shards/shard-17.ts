@@ -35,6 +35,7 @@ import _poolBatterbone from "../pool/batterbone.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
+import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
 import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
@@ -92,6 +93,7 @@ import _poolDrossProwler from "../pool/dross-prowler.js";
 import _poolDryadArbor from "../pool/dryad-arbor.js";
 import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
+import _poolDyadrineSynthesisAmalgam from "../pool/dyadrine-synthesis-amalgam.js";
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
 import _poolEaglesOfTheNorth from "../pool/eagles-of-the-north.js";
 import _poolEarthKingsLieutenant from "../pool/earth-kings-lieutenant.js";
@@ -249,6 +251,7 @@ import _poolScouredBarrens from "../pool/scoured-barrens.js";
 import _poolSeafloorDebris from "../pool/seafloor-debris.js";
 import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
+import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
@@ -398,6 +401,7 @@ const shard: CardShard = {
     _poolBattleflightEagle,
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
+    _poolBeyondTheQuiet,
     _poolBirdsOfParadise,
     _poolBlastZone,
     _poolBloodServitor,
@@ -455,6 +459,7 @@ const shard: CardShard = {
     _poolDryadArbor,
     _poolDwarvenMattock,
     _poolDwynensElite,
+    _poolDyadrineSynthesisAmalgam,
     _poolEagerFirstYear,
     _poolEaglesOfTheNorth,
     _poolEarthKingsLieutenant,
@@ -612,6 +617,7 @@ const shard: CardShard = {
     _poolSeafloorDebris,
     _poolSearslicerGoblin,
     _poolSecondThoughts,
+    _poolSeedshipAgrarian,
     _poolSeethingLandscape,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,

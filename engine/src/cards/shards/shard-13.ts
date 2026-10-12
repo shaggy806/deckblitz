@@ -203,6 +203,7 @@ import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
+import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
 import _poolMigratingKetradon from "../pool/migrating-ketradon.js";
 import _poolMindslicer from "../pool/mindslicer.js";
@@ -280,6 +281,7 @@ import _poolSiegeWurm from "../pool/siege-wurm.js";
 import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
+import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
@@ -332,6 +334,7 @@ import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVengeance from "../pool/vengeance.js";
+import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
@@ -570,6 +573,7 @@ const shard: CardShard = {
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
+    _poolMichelangeloGameMaster,
     _poolMidnightBanshee,
     _poolMigratingKetradon,
     _poolMindslicer,
@@ -647,6 +651,7 @@ const shard: CardShard = {
     _poolSightedCasteSorcerer,
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
+    _poolSledgeClassSeedship,
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
@@ -699,6 +704,7 @@ const shard: CardShard = {
     _poolUnhinge,
     _poolValiantGuard,
     _poolVengeance,
+    _poolVengefulRebel,
     _poolViashinoSandsprinter,
     _poolVillainousWrath,
     _poolVivVisionTeenSynthezoid,

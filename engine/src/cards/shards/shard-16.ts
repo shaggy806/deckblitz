@@ -195,6 +195,7 @@ import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
+import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
 import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
@@ -232,6 +233,7 @@ import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
+import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
@@ -258,6 +260,7 @@ import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
+import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
@@ -286,6 +289,7 @@ import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
+import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
@@ -589,6 +593,7 @@ const shard: CardShard = {
     _poolMarketbackWalker,
     _poolMarwynTheClearcutter,
     _poolMawOfKozilek,
+    _poolMeltstriderEulogist,
     _poolMemoryPlunder,
     _poolMerfolkSkydiver,
     _poolMikaeusTheUnhallowed,
@@ -626,6 +631,7 @@ const shard: CardShard = {
     _poolPhyrexianDefiler,
     _poolPiratesPillage,
     _poolPitOfOfferings,
+    _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
     _poolPredatorySliver,
     _poolPridefulParent,
@@ -652,6 +658,7 @@ const shard: CardShard = {
     _poolSacredFoundry,
     _poolSavagePackmate,
     _poolScatterTheSeeds,
+    _poolScroungeForEternity,
     _poolScurryOak,
     _poolSelesnyaGuildmage,
     _poolSenateCourier,
@@ -680,6 +687,7 @@ const shard: CardShard = {
     _poolSpitefulVisions,
     _poolSprout,
     _poolStaffOfTheStoryteller,
+    _poolStiltzkinMoogleMerchant,
     _poolStoicRebuttal,
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,

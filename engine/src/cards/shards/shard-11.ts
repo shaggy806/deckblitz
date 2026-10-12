@@ -19,6 +19,7 @@ import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
 import _poolAshenFirebeast from "../pool/ashen-firebeast.js";
+import _poolAtmosphericGreenhouse from "../pool/atmospheric-greenhouse.js";
 import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
@@ -79,6 +80,7 @@ import _poolCursecatcher from "../pool/cursecatcher.js";
 import _poolDakmorPlague from "../pool/dakmor-plague.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
+import _poolDecommission from "../pool/decommission.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
@@ -339,6 +341,7 @@ import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
 import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
 import _poolTetsukoUmezawaFugitive from "../pool/tetsuko-umezawa-fugitive.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
+import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
@@ -423,6 +426,7 @@ const shard: CardShard = {
     _poolArchaeomender,
     _poolArmsDealer,
     _poolAshenFirebeast,
+    _poolAtmosphericGreenhouse,
     _poolAttrition,
     _poolAudacity,
     _poolAuraExtraction,
@@ -483,6 +487,7 @@ const shard: CardShard = {
     _poolDakmorPlague,
     _poolDarksteelForge,
     _poolDawnsireSunstarDreadnought,
+    _poolDecommission,
     _poolDefacingDuskmage,
     _poolDelusionsOfMediocrity,
     _poolDemystify,
@@ -743,6 +748,7 @@ const shard: CardShard = {
     _poolTerrorOfThePeaks,
     _poolTetsukoUmezawaFugitive,
     _poolThaliaHereticCathar,
+    _poolThatsRoughBuddy,
     _poolTheBeamtownBullies,
     _poolTheThingBenGrimm,
     _poolThornscapeApprentice,

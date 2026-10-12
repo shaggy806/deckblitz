@@ -9,6 +9,7 @@ import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
+import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
@@ -80,6 +81,7 @@ import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
+import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
@@ -97,6 +99,7 @@ import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
+import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
@@ -123,6 +126,7 @@ import _poolGhaltaAndMavren from "../pool/ghalta-and-mavren.js";
 import _poolGhostShip from "../pool/ghost-ship.js";
 import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
+import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
@@ -299,6 +303,7 @@ import _poolSyphonFlesh from "../pool/syphon-flesh.js";
 import _poolSyrVondamSunstarExemplar from "../pool/syr-vondam-sunstar-exemplar.js";
 import _poolTakeUpArms from "../pool/take-up-arms.js";
 import _poolTalasMerchant from "../pool/talas-merchant.js";
+import _poolTaleOfMomo from "../pool/tale-of-momo.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
@@ -377,6 +382,7 @@ const shard: CardShard = {
     _poolAerithLastAncient,
     _poolAgentPhilCoulson,
     _poolAjaniOutlandChaperone,
+    _poolAlpharaelStonechosen,
     _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
     _poolAncestralCraving,
@@ -448,6 +454,7 @@ const shard: CardShard = {
     _poolDarksteelSplicer,
     _poolDaybreakCharger,
     _poolDeadbridgeChant,
+    _poolDecodeTransmissions,
     _poolDefensiveStance,
     _poolDelete,
     _poolDenOfTheBugbear,
@@ -465,6 +472,7 @@ const shard: CardShard = {
     _poolDutyBeyondDeath,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
+    _poolElegyAcolyte,
     _poolElementalistAdept,
     _poolElvenkingsHarper,
     _poolEntropicCloud,
@@ -491,6 +499,7 @@ const shard: CardShard = {
     _poolGhostShip,
     _poolGiantWarthog,
     _poolGiftOfGranite,
+    _poolGladiolusAmicitia,
     _poolGlittermonger,
     _poolGoblinHero,
     _poolGoblinReplica,
@@ -667,6 +676,7 @@ const shard: CardShard = {
     _poolSyrVondamSunstarExemplar,
     _poolTakeUpArms,
     _poolTalasMerchant,
+    _poolTaleOfMomo,
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,

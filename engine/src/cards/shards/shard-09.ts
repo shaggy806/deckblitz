@@ -58,6 +58,7 @@ import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
+import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
@@ -429,6 +430,7 @@ const shard: CardShard = {
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCharmingPrince,
+    _poolChromeCompanion,
     _poolChulane,
     _poolCitanulDruid,
     _poolClarionConqueror,

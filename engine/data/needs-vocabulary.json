@@ -5748,6 +5748,29 @@
   },
   "effect:unless-waterbend": {
    "example": "Waterbending Lesson: \"discard a card unless you waterbend {2}\" — an unless payment where taps help."
+  },
+  "effect:turn-stat-lands-entered": {
+   "family": "effect:amount-turn-stat",
+   "example": "Bioengineered Future: \"an additional +1/+1 counter for each land that entered the battlefield under your control this turn\" — counting ones that have since left (a sacrificed fetch land)."
+  },
+  "cost:cost-reduction-nth-spell-each-turn": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Uthros Psionicist: a cost reduction for the second spell you cast each turn — costModification knows only the first."
+  },
+  "zone:exiled-from-hand-play-permission-taxed": {
+   "family": "zone:impulse-permission-options",
+   "example": "Lightstall Inquisitor: each opponent exiles a card from their hand; you may play those cards while they stay exiled, spells costing {1} more and lands entering tapped."
+  },
+  "effect:target-card-in-exile": {
+   "family": "effect:target-spec-additions",
+   "example": "Sorceress's Schemes: \"target instant or sorcery card from your graveyard or exiled card with flashback you own\" — no target spec for an exiled card, nor one slot over two zones."
+  },
+  "replacement:draw-instruction-plus-one": {
+   "family": "replacement:new-event-replacements",
+   "example": "Quantum Riddler: \"if you would draw one or more cards, you draw that many cards plus one instead\" — once per draw instruction (Decode Transmissions's 3 becomes 4, not 6); would-draw replaces single draws."
+  },
+  "trigger:energy-gained": {
+   "example": "Aether Revolt: \"Whenever you get one or more {E}, … deals that much damage\" — no trigger on getting energy that carries the amount."
   }
  }
 }

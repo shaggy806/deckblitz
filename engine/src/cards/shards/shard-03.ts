@@ -74,6 +74,7 @@ import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
+import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEndlessOne from "../pool/endless-one.js";
@@ -242,6 +243,7 @@ import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
+import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSkinwing from "../pool/skinwing.js";
 import _poolSkullOfOrm from "../pool/skull-of-orm.js";
@@ -414,6 +416,7 @@ const shard: CardShard = {
     _poolEloiseNephaliaSleuth,
     _poolElvishRejuvenator,
     _poolEmberwildeCaptain,
+    _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
     _poolEndlessOne,
@@ -582,6 +585,7 @@ const shard: CardShard = {
     _poolSheoldredWhisperingOne,
     _poolShivanBranchBurner,
     _poolShopkeepersBane,
+    _poolSilkweaverElite,
     _poolSilverbackShaman,
     _poolSkinwing,
     _poolSkullOfOrm,

@@ -153,6 +153,7 @@ import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
+import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
@@ -193,6 +194,7 @@ import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
+import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
@@ -226,6 +228,7 @@ import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
+import _poolRenegadeRallier from "../pool/renegade-rallier.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
@@ -484,6 +487,7 @@ const shard: CardShard = {
     _poolKodamaOfTheNorthTree,
     _poolKreeCommandos,
     _poolKrumarBondKin,
+    _poolKutzilsFlanker,
     _poolLambholtHarrier,
     _poolLensFlare,
     _poolLibraryLarcenist,
@@ -524,6 +528,7 @@ const shard: CardShard = {
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
     _poolNightmareShepherd,
+    _poolNovaHellkite,
     _poolNoxiousRevival,
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
@@ -557,6 +562,7 @@ const shard: CardShard = {
     _poolReaveSoul,
     _poolRedHerring,
     _poolRendmawCreakingNest,
+    _poolRenegadeRallier,
     _poolRevengeOfRavens,
     _poolRewriteRegrets,
     _poolRipchainRazorkin,

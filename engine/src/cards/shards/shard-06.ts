@@ -86,6 +86,7 @@ import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeepSight from "../pool/deep-sight.js";
+import _poolDeliveryMoogle from "../pool/delivery-moogle.js";
 import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
 import _poolDesertedBeach from "../pool/deserted-beach.js";
 import _poolDesertedTemple from "../pool/deserted-temple.js";
@@ -96,6 +97,7 @@ import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
+import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
@@ -454,6 +456,7 @@ const shard: CardShard = {
     _poolDawnwingMarshal,
     _poolDeadlyRiposte,
     _poolDeepSight,
+    _poolDeliveryMoogle,
     _poolDepthsOfDesire,
     _poolDesertedBeach,
     _poolDesertedTemple,
@@ -464,6 +467,7 @@ const shard: CardShard = {
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
+    _poolDualSunTechnique,
     _poolDutifulServants,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,

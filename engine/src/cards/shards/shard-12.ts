@@ -170,6 +170,7 @@ import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
 import _poolLongbowArcher from "../pool/longbow-archer.js";
 import _poolLooterIlKor from "../pool/looter-il-kor.js";
+import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
 import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
@@ -196,6 +197,7 @@ import _poolNantukoHusk from "../pool/nantuko-husk.js";
 import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
+import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolLodestoneMyr,
     _poolLongbowArcher,
     _poolLooterIlKor,
+    _poolLordDreggInsectInvader,
     _poolLorescaleCoatl,
     _poolLosDiablosMissileBase,
     _poolManaTithe,
@@ -555,6 +558,7 @@ const shard: CardShard = {
     _poolNarciFableSinger,
     _poolNecromanticSelection,
     _poolNecropolisRegent,
+    _poolNightMarketAeronaut,
     _poolNightscapeFamiliar,
     _poolNorthernAirTemple,
     _poolNyxbornMarauder,

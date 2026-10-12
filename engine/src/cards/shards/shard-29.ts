@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
+import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
@@ -46,6 +47,7 @@ import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
+import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
 import _poolCleverImpersonator from "../pool/clever-impersonator.js";
@@ -148,6 +150,7 @@ import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
 import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
 import _poolHurloonMinotaur from "../pool/hurloon-minotaur.js";
+import _poolHymnOfTheFaller from "../pool/hymn-of-the-faller.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
@@ -357,6 +360,7 @@ const shard: CardShard = {
     _poolAIMSynthoids,
     _poolAdaptiveGemguard,
     _poolAffaProtector,
+    _poolAidFromTheCowl,
     _poolAllosaurusShepherd,
     _poolApproachOfTheSecondSun,
     _poolArcOfFortune,
@@ -397,6 +401,7 @@ const shard: CardShard = {
     _poolCelestialAncient,
     _poolChar,
     _poolChargingBadger,
+    _poolChoraleOfTheVoid,
     _poolCinderElemental,
     _poolCityOfDeath,
     _poolCleverImpersonator,
@@ -499,6 +504,7 @@ const shard: CardShard = {
     _poolHungryLynx,
     _poolHuntersInsight,
     _poolHurloonMinotaur,
+    _poolHymnOfTheFaller,
     _poolIcecaveCrasher,
     _poolIdolized,
     _poolImotekhTheStormlord,

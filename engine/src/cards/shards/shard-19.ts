@@ -213,6 +213,7 @@ import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
+import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
@@ -257,6 +258,7 @@ import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
+import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
 import _poolRubbleReading from "../pool/rubble-reading.js";
 import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
@@ -280,6 +282,7 @@ import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
 import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
+import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
@@ -586,6 +589,7 @@ const shard: CardShard = {
     _poolMuckRats,
     _poolMuddleTheMixture,
     _poolNaktamunLorespinner,
+    _poolNanoformSentinel,
     _poolNaturalReclamation,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
@@ -630,6 +634,7 @@ const shard: CardShard = {
     _poolRoaringEarth,
     _poolRoguesPassage,
     _poolRootwaterAlligator,
+    _poolRovingActuator,
     _poolRowanScionOfWar,
     _poolRubbleReading,
     _poolRunawaySteamKin,
@@ -653,6 +658,7 @@ const shard: CardShard = {
     _poolShadowmageInfiltrator,
     _poolShangChiAndTheTenRings,
     _poolShefetDunes,
+    _poolShortcutToMushrooms,
     _poolShuEliteInfantry,
     _poolShuko,
     _poolSift,

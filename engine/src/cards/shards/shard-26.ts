@@ -98,6 +98,7 @@ import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
 import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
+import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
@@ -144,6 +145,7 @@ import _poolInfectiousBite from "../pool/infectious-bite.js";
 import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
 import _poolInspiringCleric from "../pool/inspiring-cleric.js";
 import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
+import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
@@ -206,6 +208,7 @@ import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
+import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
@@ -445,6 +448,7 @@ const shard: CardShard = {
     _poolFlowstoneMauler,
     _poolFluxChanneler,
     _poolFlyingMen,
+    _poolFootMystic,
     _poolFracturedRealm,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
@@ -491,6 +495,7 @@ const shard: CardShard = {
     _poolInspiredTinkering,
     _poolInspiringCleric,
     _poolInspiringUnicorn,
+    _poolInterceptorMechan,
     _poolIronGiant,
     _poolJaceUnravelerOfSecrets,
     _poolJeditOjanen,
@@ -553,6 +558,7 @@ const shard: CardShard = {
     _poolPixieQueen,
     _poolPortTown,
     _poolProdigalSorcerer,
+    _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
     _poolPygmyRazorback,
     _poolQarsiRevenant,

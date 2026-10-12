@@ -107,6 +107,7 @@ import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFallenShinobi from "../pool/fallen-shinobi.js";
+import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
@@ -140,6 +141,7 @@ import _poolGoldenglowMoth from "../pool/goldenglow-moth.js";
 import _poolGolgariGermination from "../pool/golgari-germination.js";
 import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
+import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolHalberdier from "../pool/halberdier.js";
@@ -324,12 +326,14 @@ import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
+import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
+import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
 import _poolWaterfrontDistrict from "../pool/waterfront-district.js";
 import _poolWaveGoodbye from "../pool/wave-goodbye.js";
 import _poolWayOfTheDeathbringer from "../pool/way-of-the-deathbringer.js";
@@ -460,6 +464,7 @@ const shard: CardShard = {
     _poolEnlightenedManiac,
     _poolFacevaulter,
     _poolFallenShinobi,
+    _poolFatalPush,
     _poolFellwarStone,
     _poolFesteringGoblin,
     _poolFetidHeath,
@@ -493,6 +498,7 @@ const shard: CardShard = {
     _poolGolgariGermination,
     _poolGontisAetherHeart,
     _poolGrabbyGiant,
+    _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
     _poolGuidingBolt,
     _poolHalberdier,
@@ -677,12 +683,14 @@ const shard: CardShard = {
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,
+    _poolVirulentSilencer,
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,
     _poolWalkingAtlas,
     _poolWallOfMist,
     _poolWallOfWood,
+    _poolWarmakerGunship,
     _poolWaterfrontDistrict,
     _poolWaveGoodbye,
     _poolWayOfTheDeathbringer,

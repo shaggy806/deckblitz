@@ -371,6 +371,7 @@ import _tokensFaerieRogueToken from "../tokens/faerie-rogue-token.js";
 import _tokensFishTokenReefWorm from "../tokens/fish-token-reef-worm.js";
 import _tokensHumanKnightToken from "../tokens/human-knight-token.js";
 import _tokensInklingToken from "../tokens/inkling-token.js";
+import _tokensInsectWarriorToken from "../tokens/insect-warrior-token.js";
 import _tokensKrakenTokenSpawningKraken from "../tokens/kraken-token-spawning-kraken.js";
 import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
@@ -751,6 +752,7 @@ const shard: CardShard = {
     _tokensFishTokenReefWorm,
     _tokensHumanKnightToken,
     _tokensInklingToken,
+    _tokensInsectWarriorToken,
     _tokensKrakenTokenSpawningKraken,
     _tokensPhyrexianHorrorToken,
     _tokensRatTokenCantBlock,

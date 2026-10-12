@@ -57,6 +57,7 @@ import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
+import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
@@ -130,6 +131,7 @@ import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
+import _poolHardlightContainment from "../pool/hardlight-containment.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
@@ -257,6 +259,7 @@ import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
+import _poolSelfDestruct from "../pool/self-destruct.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
@@ -421,6 +424,7 @@ const shard: CardShard = {
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
     _poolCultistOfTheAbsolute,
+    _poolCutPropulsion,
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
@@ -494,6 +498,7 @@ const shard: CardShard = {
     _poolGruffTriplets,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
+    _poolHardlightContainment,
     _poolHazeriderDrake,
     _poolHealerOfThePride,
     _poolHeapDoll,
@@ -621,6 +626,7 @@ const shard: CardShard = {
     _poolSeafloorOracle,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
+    _poolSelfDestruct,
     _poolShadowRift,
     _poolShadowyBackstreet,
     _poolShelobsAmbush,

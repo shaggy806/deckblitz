@@ -7,6 +7,7 @@ import _poolAccursedSpirit from "../pool/accursed-spirit.js";
 import _poolAerieBowmasters from "../pool/aerie-bowmasters.js";
 import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
+import _poolAirdropAeronauts from "../pool/airdrop-aeronauts.js";
 import _poolAirshipEngineRoom from "../pool/airship-engine-room.js";
 import _poolAjanisSunstriker from "../pool/ajanis-sunstriker.js";
 import _poolAkromasMemorial from "../pool/akromas-memorial.js";
@@ -220,6 +221,7 @@ import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
+import _poolPinnacleKillShip from "../pool/pinnacle-kill-ship.js";
 import _poolPlains from "../pool/plains.js";
 import _poolPoisonDartFrog from "../pool/poison-dart-frog.js";
 import _poolPoisonTheBlade from "../pool/poison-the-blade.js";
@@ -260,6 +262,7 @@ import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabotender from "../pool/sabotender.js";
+import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
@@ -307,6 +310,8 @@ import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
+import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
+import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTempleOfMystery from "../pool/temple-of-mystery.js";
@@ -342,6 +347,7 @@ import _poolVeneratedStormsinger from "../pool/venerated-stormsinger.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
 import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
+import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
@@ -373,6 +379,7 @@ const shard: CardShard = {
     _poolAerieBowmasters,
     _poolAgelessGuardian,
     _poolAgentsOfHydra,
+    _poolAirdropAeronauts,
     _poolAirshipEngineRoom,
     _poolAjanisSunstriker,
     _poolAkromasMemorial,
@@ -586,6 +593,7 @@ const shard: CardShard = {
     _poolPhyrexianMetamorph,
     _poolPillarvergePathway,
     _poolPinnacleEmissary,
+    _poolPinnacleKillShip,
     _poolPlains,
     _poolPoisonDartFrog,
     _poolPoisonTheBlade,
@@ -626,6 +634,7 @@ const shard: CardShard = {
     _poolRunehornHellkite,
     _poolRustedSlasher,
     _poolSabotender,
+    _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSavedByTheShell,
     _poolScalebanesElite,
@@ -673,6 +682,8 @@ const shard: CardShard = {
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
     _poolSyndicateGuildmage,
+    _poolSynthesizerLabship,
+    _poolSyrVondamTheLucent,
     _poolTajuruPathwarden,
     _poolTelJiladLifebreather,
     _poolTempleOfMystery,
@@ -708,6 +719,7 @@ const shard: CardShard = {
     _poolViashinoSandscout,
     _poolVisceraDragger,
     _poolVodalianSoldiers,
+    _poolVoidforgedTitan,
     _poolVolcanicUpheaval,
     _poolWalkingCorpse,
     _poolWarclampMastiff,

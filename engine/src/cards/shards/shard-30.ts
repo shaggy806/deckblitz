@@ -97,6 +97,7 @@ import _poolDraconicLore from "../pool/draconic-lore.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
 import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
+import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
@@ -463,6 +464,7 @@ const shard: CardShard = {
     _poolDreadhordeInvasion,
     _poolDreamBeavers,
     _poolDreamrootCascade,
+    _poolDrillTooDeep,
     _poolDromokaWarrior,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,

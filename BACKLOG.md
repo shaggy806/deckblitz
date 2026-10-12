@@ -69,13 +69,13 @@ section keeps only what to do next.
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
   Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
-  Commander set (ECL, ECC), Avatar: The Last Airbender (TLA) and Marvel's Spider-Man (SPM) are
-  done (batches 50–65). **Next: Edge of Eternities** (EOE, 2025-08-01: 53 left), then Final
-  Fantasy (FIN, 8 left) and Tarkir: Dragonstorm (TDM, 45 left) — **a whole set per batch**, two
-  when a set is small (the user's call, 2026-10-12: 4-5 agents with more cards each; batch 65
-  ran three feature agents in worktrees beside two authoring agents). Mayhem (56), rebound (57),
-  teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63), behold (64),
-  web-slinging, waterbend and airbend (65) are built;
+  Commander set (ECL, ECC), Avatar: The Last Airbender (TLA), Marvel's Spider-Man (SPM), Edge of
+  Eternities (EOE, EOC) and Final Fantasy (FIN, FIC) are done (batches 50–66). **Next: Tarkir:
+  Dragonstorm** (TDM, 2025-04-11: 45 left), then Aetherdrift (DFT, 66 left) — **a whole set per
+  batch**, two when a set is small (the user's call, 2026-10-12: 4-5 agents with more cards each;
+  batch 65 ran three feature agents in worktrees beside two authoring agents). Mayhem (56),
+  rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63),
+  behold (64), web-slinging, waterbend and airbend (65), void and revolt (66) are built;
   Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold

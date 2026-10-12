@@ -176,6 +176,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Insect Token (Flying, Haste)",
   "Insect Token (Infestation Sage)",
   "Insect Token (Nest of Scarabs)",
+  "Insect Warrior Token",
   "Jace Token",
   "Junk Token",
   "Karox Bladewing",
