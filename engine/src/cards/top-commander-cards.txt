@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3516 already implemented / 1484 missing (marks refreshed 2026-10-12)
+3517 already implemented / 1483 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1701,7 +1701,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1708  Overrun                                  {2}{G}{G}{G}     Sorcery
 [x]  1709  Eldrazi Temple                           {0}              Land
 [x]  1710  Shigeki, Jukai Visionary                 {1}{G}           Legendary Enchantment Creature — Snake Druid
-[ ]  1711  Profane Tutor                            {0}              Sorcery
+[x]  1711  Profane Tutor                            {0}              Sorcery
 [x]  1712  Clock of Omens                           {4}              Artifact
 [x]  1713  Utter End                                {2}{W}{B}        Instant
 [ ]  1714  Fathom Mage                              {2}{G}{U}        Creature — Human Wizard

@@ -32,6 +32,12 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ENGINE = path.join(ROOT, "engine");
 const LOGS = os.tmpdir();
+/** A long `--with` list as a file, one name per line (`--with-file`). */
+const withFile = (names) => {
+  const file = path.join(LOGS, "verify-with-cards.txt");
+  writeFileSync(file, names.join("\n"));
+  return file;
+};
 
 const args = process.argv.slice(2);
 const withNames = [];
@@ -166,7 +172,20 @@ if (!skip.has("fuzz")) {
 }
 if (!skip.has("fuzzwith") && cards.length > 0) {
   late.push(
-    run("fuzz with new cards", "node", ["scripts/random-demo.mjs", "--games", "40", "--players", "4", ...cards.flatMap((c) => ["--with", c])], ENGINE),
+    run(
+      "fuzz with new cards",
+      "node",
+      [
+        "scripts/random-demo.mjs",
+        "--games",
+        "40",
+        "--players",
+        "4",
+        // A long list goes in a file: a command line has a length limit.
+        ...(cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c])),
+      ],
+      ENGINE,
+    ),
   );
 }
 if (!skip.has("gate")) late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"]));

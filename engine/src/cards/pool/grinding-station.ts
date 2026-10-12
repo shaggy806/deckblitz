@@ -19,7 +19,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "any", filter: { type: "artifact" } },
       targets: [],
-      effect: { kind: "may", prompt: "Untap ~?", effect: { kind: "untap", target: "source" } },
+      effect: { kind: "may", prompt: "Untap Grinding Station?", effect: { kind: "untap", target: "source" } },
       resolve: null,
       text: "Whenever an artifact enters, you may untap this artifact.",
     },

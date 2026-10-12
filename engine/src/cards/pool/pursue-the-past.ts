@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "gain-life", amount: 2 },
       {
         kind: "may",
-        prompt: "Discard a card to draw a card?",
+        prompt: "Discard a card to draw two cards?",
         effect: {
           kind: "sequence",
           effects: [

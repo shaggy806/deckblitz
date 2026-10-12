@@ -26,7 +26,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { subtype: "Wizard" } },
       targets: [],
-      effect: { kind: "may", prompt: "Untap ~?", effect: { kind: "untap", target: "source" } },
+      effect: { kind: "may", prompt: "Untap Inspired Sprite?", effect: { kind: "untap", target: "source" } },
       resolve: null,
       text: "Whenever you cast a Wizard spell, you may untap this creature.",
     },

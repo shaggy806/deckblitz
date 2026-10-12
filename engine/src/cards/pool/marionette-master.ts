@@ -23,19 +23,26 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "modal",
-        minModes: 1,
-        maxModes: 1,
-        modes: [
-          {
-            text: "Put three +1/+1 counters on this creature.",
-            effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
-          },
-          {
-            text: "Create three 1/1 colorless Servo artifact creature tokens.",
-            effect: { kind: "create-token", token: "Servo Token", count: 3 },
-          },
-        ],
+        // Fabricate (rule 702.123a): the choice only while it's still on the
+        // battlefield; otherwise the counters can't go on it, so the Servos (ruling).
+        kind: "conditional",
+        condition: { kind: "source-on-battlefield" },
+        then: {
+          kind: "modal",
+          minModes: 1,
+          maxModes: 1,
+          modes: [
+            {
+              text: "Put three +1/+1 counters on this creature.",
+              effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
+            },
+            {
+              text: "Create three 1/1 colorless Servo artifact creature tokens.",
+              effect: { kind: "create-token", token: "Servo Token", count: 3 },
+            },
+          ],
+        },
+        else: { kind: "create-token", token: "Servo Token", count: 3 },
       },
       resolve: null,
       text: FABRICATE_TEXT,

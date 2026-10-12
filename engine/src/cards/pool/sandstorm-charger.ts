@@ -1,0 +1,13 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Sandstorm Charger",
+  manaCost: "{4}{W}",
+  colors: ["W"],
+  types: ["creature"],
+  subtypes: ["Beast"],
+  power: 3,
+  toughness: 4,
+  morph: { keyword: "megamorph", cost: "{4}{W}" },
+  text: "Megamorph {4}{W} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)",
+});

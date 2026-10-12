@@ -1077,6 +1077,12 @@ export type TriggerSpec =
       readonly from?: ZoneType;
       readonly notFrom?: ZoneType;
       readonly batched?: boolean;
+      /** "…are put into your graveyard from anywhere **for the first time each
+       * turn**" (Crawling Sensation): only when no matching card reached that
+       * graveyard earlier this turn — before this permanent was around too,
+       * unlike `oncePerTurn`. Read off the turn's `descended` history, so the
+       * filter must name permanent cards (a land card, a creature card). */
+      readonly firstTimeEachTurn?: boolean;
     }
   | {
       /** A player surveilled (rule 701.42) — Mirko, Obsessive Theorist's

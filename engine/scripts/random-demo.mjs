@@ -24,7 +24,9 @@
 import { Worker } from "node:worker_threads";
 
 import { Game, RandomController, asPlayerId, createRng } from "../dist/index.js";
-import { coverage, seatsFor, unknownCards } from "./fuzz-decks.mjs";
+import { readFileSync } from "node:fs";
+
+import { coverage, forcedChunks, seatsFor, unknownCards } from "./fuzz-decks.mjs";
 import { printLog, printSummary } from "./format.mjs";
 import { progress } from "./progress.mjs";
 
@@ -33,7 +35,7 @@ const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
 };
-const games = Number(flag("games", "10"));
+let games = Number(flag("games", "10"));
 const showLog = args.includes("--log");
 const numPlayers = Number(flag("players", "2"));
 // Long runs print nothing until the very end, so a game that never terminates
@@ -52,13 +54,23 @@ const players = [A, B, C, D].slice(0, numPlayers);
 // Each seed builds its own decks: a commander and 99 cards drawn from the
 // whole pool (`fuzz-decks.mjs`). `--with "Card"` (repeatable) puts a card in
 // every seat's deck — the way to fuzz a card you just authored.
-const forced = args.flatMap((a, i) => (a === "--with" && args[i + 1] !== undefined ? [args[i + 1]] : []));
+// `--with-file <path>`: one name per line, for more than a command line holds.
+const withFile = flag("with-file", null);
+const forced = [
+  ...args.flatMap((a, i) => (a === "--with" && args[i + 1] !== undefined ? [args[i + 1]] : [])),
+  ...(withFile === null ? [] : readFileSync(withFile, "utf8").split(/\r?\n/).filter(Boolean)),
+];
 const unknown = unknownCards(forced);
 if (unknown.length > 0) {
   console.error(`--with: not a deckable pool card: ${unknown.join(", ")}`);
   process.exit(1);
 }
-const seatsForSeed = (seed) => seatsFor(seed, players, { forced });
+// More than a deck holds: groups of cards sharing a colour identity, each
+// forced into games of its own — at least one game per group.
+const CHUNK = 30;
+const chunks = forced.length > CHUNK ? forcedChunks(forced, CHUNK) : [forced];
+if (chunks.length > games) games = chunks.length;
+const seatsForSeed = (seed) => seatsFor(seed, players, { forced: chunks[(seed - 1) % chunks.length] });
 
 const results = [];
 const failures = [];

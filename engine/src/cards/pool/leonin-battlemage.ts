@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you" },
       targets: [],
-      effect: { kind: "may", prompt: "Untap ~?", effect: { kind: "untap", target: "source" } },
+      effect: { kind: "may", prompt: "Untap Leonin Battlemage?", effect: { kind: "untap", target: "source" } },
       resolve: null,
       text: "Whenever you cast a spell, you may untap this creature.",
     },

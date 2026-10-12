@@ -99,9 +99,12 @@ section keeps only what to do next.
   Incarnations' evoke by exiling a card, and the labelled abilities (Case, Forecast, Max speed)
   (`docs/card-blockers.md`, "Open leads").
 - **More Oracle-parser templates.** The unread lines that recur most are the next templates
-  ("Choose one —" on an ability, Crew, "Regenerate ~", "You may pay {…}", "Transform ~"):
-  `npm run card:scaffold -w engine -- --report --all` for today's figures; keep
-  `npm run card:parse-check -w engine` at zero disagreements.
+  ("Choose one —" on an ability, "You may pay {…}", "Put the rest on the bottom … in a random
+  order", kicker's "if it was kicked"): `npm run card:scaffold -w engine -- --report --all` for
+  today's figures; keep `npm run card:parse-check -w engine` at zero disagreements. Every card
+  the scaffolder reads whole went in on 2026-10-12 (batch 60, reviewed): **after a template
+  lands, run `card:scaffold -- --auto-scan --all` and review what it finishes** — a template
+  matches sentences, not meaning, so each new card is read against its Oracle text.
 
 ## Engine rules gaps
 

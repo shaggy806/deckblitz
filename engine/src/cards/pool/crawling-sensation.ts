@@ -19,8 +19,7 @@ export default defineCard({
       text: MILL_TEXT,
     },
     {
-      trigger: { on: "put-into-graveyard", who: "you", filter: { type: "land" }, batched: true },
-      oncePerTurn: true,
+      trigger: { on: "put-into-graveyard", who: "you", filter: { type: "land" }, batched: true, firstTimeEachTurn: true },
       targets: [],
       effect: { kind: "create-token", token: "Insect Token", count: 1 },
       resolve: null,

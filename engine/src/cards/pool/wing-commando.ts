@@ -1,0 +1,22 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Wing Commando",
+  manaCost: "{2}{U}",
+  colors: ["U"],
+  types: ["creature"],
+  subtypes: ["Human", "Soldier"],
+  power: 2,
+  toughness: 2,
+  keywords: ["flying"],
+  text: "Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+  triggered: [
+    {
+      trigger: { on: "cast-spell", who: "you", noncreatureOnly: true },
+      targets: [],
+      effect: { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
+      resolve: null,
+      text: "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)",
+    },
+  ],
+});

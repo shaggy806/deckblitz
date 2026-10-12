@@ -71,6 +71,22 @@ export function unknownCards(names) {
   return names.filter((n) => !byName.has(n));
 }
 
+/** More forced cards than a deck can hold, or than one commander allows: the
+ * cards split into groups of at most `size` that share a colour identity, each
+ * forced into its own games (a whole-pool sweep — the scaffolder's run). */
+export function forcedChunks(names, size) {
+  const byIdentity = new Map();
+  for (const n of names) {
+    const key = [...(identityOf.get(n) ?? [])].sort().join("");
+    byIdentity.set(key, [...(byIdentity.get(key) ?? []), n]);
+  }
+  const chunks = [];
+  for (const group of byIdentity.values()) {
+    for (let i = 0; i < group.length; i += size) chunks.push(group.slice(i, i + size));
+  }
+  return chunks;
+}
+
 /**
  * The pool, walked in a fixed order: pass `n` over `list` is its own seeded
  * shuffle, and position `i` is card `i mod length` of pass `i div length`.

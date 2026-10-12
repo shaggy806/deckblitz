@@ -16,7 +16,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "may",
-        prompt: "Put a +1/+1 counter on ~?",
+        prompt: "Put a +1/+1 counter on Scavenger Drake?",
         effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       },
       resolve: null,

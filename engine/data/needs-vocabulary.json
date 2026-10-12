@@ -5629,6 +5629,14 @@
   "condition:opponent-more-cards-in-hand": {
    "family": "condition:player-state-thresholds",
    "example": "Joined Researchers: 'At the beginning of each end step, if an opponent has more cards in hand than you' — no condition compares hand sizes across players."
+  },
+  "keyword:multiple-typecycling": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Valley Rannet: 'Mountaincycling {2}, forestcycling {2}' — CardDefinition.cycling holds one cycling ability; the ruling has you choose which as you activate."
+  },
+  "mechanic:morph-land": {
+   "family": "mechanic:face-down",
+   "example": "Zoetic Cavern: a land with morph — the engine offers a land card only as a land play, never a face-down cast."
   }
  }
 }

@@ -134,20 +134,27 @@ function keywordPart(part) {
         {
           trigger: { on: "enters-battlefield", who: "self" },
           targets: [],
+          // Only while it's still on the battlefield is there a choice: gone,
+          // the counters can't go on it, so the Servos (rule 702.123a's ruling).
           effect: {
-            kind: "modal",
-            minModes: 1,
-            maxModes: 1,
-            modes: [
-              {
-                text: `Put ${n} +1/+1 counter${n === 1 ? "" : "s"} on this creature.`,
-                effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: n },
-              },
-              {
-                text: `Create ${n} 1/1 colorless Servo artifact creature token${n === 1 ? "" : "s"}.`,
-                effect: { kind: "create-token", token: "Servo Token", count: n },
-              },
-            ],
+            kind: "conditional",
+            condition: { kind: "source-on-battlefield" },
+            then: {
+              kind: "modal",
+              minModes: 1,
+              maxModes: 1,
+              modes: [
+                {
+                  text: `Put ${n} +1/+1 counter${n === 1 ? "" : "s"} on this creature.`,
+                  effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: n },
+                },
+                {
+                  text: `Create ${n} 1/1 colorless Servo artifact creature token${n === 1 ? "" : "s"}.`,
+                  effect: { kind: "create-token", token: "Servo Token", count: n },
+                },
+              ],
+            },
+            else: { kind: "create-token", token: "Servo Token", count: n },
           },
           resolve: null,
           text: `Fabricate ${n}`,
@@ -760,7 +767,14 @@ export function parseSentence(sentence, ctx) {
     // return-to-hand bounces a permanent and would do nothing to a spell.
     const spec = targetOf(m[1]);
     const onStack = typeof spec === "string" ? spec.endsWith("spell") : spec?.kind === "spell";
-    return { kind: "return-to-hand", target: slot(m[1]), ...(onStack ? { from: "stack" } : {}) };
+    // A card in a graveyard ("target creature card from a graveyard") comes
+    // from there — without `from`, return-to-hand bounces only a permanent.
+    const inGraveyard = graveyardTargetOf(m[1]) !== undefined;
+    return {
+      kind: "return-to-hand",
+      target: slot(m[1]),
+      ...(onStack ? { from: "stack" } : inGraveyard ? { from: "graveyard" } : {}),
+    };
   }
   if (re("return ~ to its owner's hand").test(s)) return { kind: "return-to-hand", target: "source" };
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
@@ -1072,9 +1086,10 @@ export function parseEffect(text, outer) {
       if (draw !== null && !containsUndefined(draw)) {
         const may = parsed.pop();
         hints.pop();
+        const howMany = /^if you do, draw (a|one|two|three) cards?\.$/i.exec(sentence)[1].toLowerCase();
         const combined = {
           kind: "may",
-          prompt: "Discard a card to draw a card?",
+          prompt: howMany === "a" || howMany === "one" ? "Discard a card to draw a card?" : `Discard a card to draw ${howMany} cards?`,
           effect: {
             kind: "sequence",
             effects: [may.effect, { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: draw }],
@@ -1175,7 +1190,15 @@ export function parseFace(face, ctx = {}) {
     const isProwess = (p) => p.toLowerCase() === "prowess";
     const known = (p) =>
       KEYWORDS[p.toLowerCase()] !== undefined || wardOf(p) !== null || isProwess(p) || protectionOf(p) !== null || keywordPart(p) !== null;
-    if (parts.every(known)) {
+    // Two typecyclings on one line ("Mountaincycling {2}, forestcycling {2}")
+    // are two abilities, and `cycling` holds one: such a line is a person's.
+    const cardFields = parts.flatMap((p) => (KEYWORDS[p.toLowerCase()] === undefined ? Object.keys(keywordPart(p)?.card ?? {}) : []));
+    const twice =
+      cardFields.some((f, i) => cardFields.indexOf(f) !== i) ||
+      // Morph on a land (Zoetic Cavern): a land is played, never cast, and the
+      // engine offers no face-down cast for one.
+      (cardFields.includes("morph") && /\bLand\b/.test(face.type_line ?? ""));
+    if (!twice && parts.every(known)) {
       for (const p of parts) {
         if (KEYWORDS[p.toLowerCase()] !== undefined) out.keywords.push(KEYWORDS[p.toLowerCase()]);
         else if (isProwess(p)) out.triggered.push(prowessAbility());
@@ -1344,6 +1367,17 @@ export function parseFace(face, ctx = {}) {
   out.complete =
     out.todo.length === 0 &&
     [...out.activated, ...out.triggered].every((a) => a.effect !== null && a.__todo === undefined);
+  // A "you may" question is shown to the player: "~" in it is the card's name.
+  const namePrompts = (node) => {
+    if (Array.isArray(node)) node.forEach(namePrompts);
+    else if (node !== null && typeof node === "object") {
+      for (const [k, v] of Object.entries(node)) {
+        if (k === "prompt" && typeof v === "string" && face.name !== undefined) node[k] = v.replaceAll("~", face.name);
+        else namePrompts(v);
+      }
+    }
+  };
+  namePrompts([out.activated, out.triggered, out.static, out.effect]);
   return out;
 }
 

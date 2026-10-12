@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
       targets: [],
-      effect: { kind: "may", prompt: "Untap ~?", effect: { kind: "untap", target: "source" } },
+      effect: { kind: "may", prompt: "Untap Gelectrode?", effect: { kind: "untap", target: "source" } },
       resolve: null,
       text: "Whenever you cast an instant or sorcery spell, you may untap this creature.",
     },

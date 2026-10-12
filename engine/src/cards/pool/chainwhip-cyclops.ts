@@ -1,0 +1,21 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Chainwhip Cyclops",
+  manaCost: "{4}{R}",
+  colors: ["R"],
+  types: ["creature"],
+  subtypes: ["Cyclops", "Warrior"],
+  power: 4,
+  toughness: 4,
+  text: "{3}{R}: Target creature can't block this turn.",
+  activated: [
+    {
+      cost: { mana: "{3}{R}", tap: false },
+      targets: ["creature"],
+      effect: { kind: "restrict", target: 0, restrictions: ["cant-block"] },
+      resolve: null,
+      text: "{3}{R}: Target creature can't block this turn.",
+    },
+  ],
+});

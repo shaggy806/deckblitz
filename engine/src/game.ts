@@ -3896,6 +3896,14 @@ export class Game {
         state.deferredCommanderMove = next;
       }
       const { commander, intendedZone, from, stint } = state.deferredCommanderMove;
+      // Nothing is asked of a player who has left the game (rule 800.4a) —
+      // one whose commander died in the same state-based check that saw them
+      // lose (Hideous End on their own commander at 2 life).
+      const owner = state.objects[commander]?.owner;
+      if (owner !== undefined && state.players[owner]?.hasLost === true) {
+        state.deferredCommanderMove = null;
+        continue;
+      }
       if (stillHere(commander, from ?? "battlefield", stint)) {
         state.awaiting = {
           kind: "commander-replacement",
@@ -16122,11 +16130,11 @@ export class Game {
           !(spec.otherOnly === true && event.attacker === self.id) &&
           this.triggerFilterOk(spec.filter, event.attacker, self)
         );
-      case "put-into-graveyard":
-        return (
-          event.type === "cards-put-into-graveyard" &&
-          this.graveyardArrivals(spec, event.arrivals, self).length > 0
-        );
+      case "put-into-graveyard": {
+        if (event.type !== "cards-put-into-graveyard") return false;
+        const arrived = this.graveyardArrivals(spec, event.arrivals, self);
+        return arrived.length > 0 && (spec.firstTimeEachTurn !== true || !this.reachedGraveyardEarlier(spec, event.arrivals, arrived, self));
+      }
       case "surveils":
         return (
           event.type === "scried" &&
@@ -26905,6 +26913,11 @@ export class Game {
 
     this.state.pendingTriggers = this.state.pendingTriggers.filter((t) => t.controller !== player);
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => t.controller !== player);
+    // A commander's 903.9 question waiting on them is asked of nobody now.
+    if (this.state.awaiting?.kind === "commander-replacement" && this.state.awaiting.player === player) {
+      this.state.awaiting = null;
+      this.state.deferredCommanderMove = null;
+    }
 
     if (this.state.monarch === player) {
       const order = this.state.turnOrder;
@@ -28907,6 +28920,43 @@ export class Game {
         this.state.objects[id] !== undefined &&
         matchesFilter(this.state, this.registry, id, filter, { you: self.controller }),
     );
+  }
+
+  /** Whether a card matching `spec`'s filter reached the graveyard of an
+   * owner of `arrived` earlier this turn than this move (`arrivals`): the
+   * turn's `descended` history, less this move's own entries (recorded just
+   * before triggers are looked for). */
+  private reachedGraveyardEarlier(
+    spec: Extract<TriggerSpec, { on: "put-into-graveyard" }>,
+    arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType }[],
+    arrived: readonly ObjectId[],
+    self: GameObject,
+  ): boolean {
+    const owners = new Set(arrived.map((id) => this.state.objects[id]?.owner));
+    for (const owner of owners) {
+      if (owner === undefined) continue;
+      const history = this.state.players[owner]?.turnHistory?.descended ?? [];
+      const thisMove = arrivals.filter(({ object: id }) => {
+        const card = this.state.objects[id];
+        return (
+          card !== undefined &&
+          card.owner === owner &&
+          effectiveTypes(this.state, this.registry, card).some((t) => PERMANENT_TYPES.has(t))
+        );
+      }).length;
+      const earlier = history.slice(0, Math.max(0, history.length - thisMove));
+      if (
+        earlier.some(
+          ({ object: id }) =>
+            this.state.objects[id] !== undefined &&
+            (spec.filter === undefined ||
+              matchesFilter(this.state, this.registry, id, spec.filter, { you: self.controller })),
+        )
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private graveyardArrivals(

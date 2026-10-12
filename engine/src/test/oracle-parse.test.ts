@@ -87,6 +87,31 @@ describe("costs and triggers", () => {
     expect(parseCost("{1}, Discard a card")).toBeNull();
   });
 
+  it("lines the scaffolder must leave to a person, and what it must get right (the 2026-10-12 review)", () => {
+    // Two typecyclings on one line are two abilities; `cycling` holds one.
+    const rannet = parseFace({ name: "Valley Rannet", type_line: "Creature — Mount", oracle_text: "Mountaincycling {2}, forestcycling {2}" });
+    expect(rannet.cycling).toBeUndefined();
+    expect(rannet.complete).toBe(false);
+    // Morph on a land: the engine offers no face-down cast for a land.
+    const cavern = parseFace({ name: "Zoetic Cavern", type_line: "Land", oracle_text: "Morph {2}" });
+    expect(cavern.morph).toBeUndefined();
+    expect(cavern.complete).toBe(false);
+    // A card returned from a graveyard comes from there.
+    const pulse = parseFace({
+      name: "Pulse of Murasa",
+      type_line: "Instant",
+      oracle_text: "Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.",
+    });
+    expect(pulse.effect.effects[0]).toEqual({ kind: "return-to-hand", target: 0, from: "graveyard" });
+    // The discard-to-draw question says how many.
+    const loot = parseFace({
+      name: "Looter",
+      type_line: "Creature — Human",
+      oracle_text: "When ~ enters, you may discard a card. If you do, draw two cards.",
+    });
+    expect(loot.triggered[0].effect.prompt).toBe("Discard a card to draw two cards?");
+  });
+
   it("the Nth counter put on this", () => {
     expect(parseTrigger("When the fourth plan counter is put on this enchantment")).toEqual([
       { on: "counters-put", who: "self", counter: "plan", nth: 4 },
@@ -395,7 +420,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     const fab = face("Fabricate 2").triggered[0];
-    expect(fab.effect.modes.map((m: { effect: { kind: string } }) => m.effect.kind)).toEqual(["add-counter", "create-token"]);
+    // The choice only while it's still there; gone, the Servos (rule 702.123a's ruling).
+    expect(fab.effect.condition).toEqual({ kind: "source-on-battlefield" });
+    expect(fab.effect.then.modes.map((m: { effect: { kind: string } }) => m.effect.kind)).toEqual(["add-counter", "create-token"]);
+    expect(fab.effect.else).toEqual({ kind: "create-token", token: "Servo Token", count: 2 });
     // A keyword the engine doesn't run leaves the line to a person.
     expect(face("Bushido 2").complete).toBe(false);
   });

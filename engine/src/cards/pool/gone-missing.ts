@@ -1,0 +1,17 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Gone Missing",
+  manaCost: "{4}{U}",
+  colors: ["U"],
+  types: ["sorcery"],
+  text: "Put target permanent on top of its owner's library.\nInvestigate. (Create a Clue token. It's an artifact with \"{2}, Sacrifice this token: Draw a card.\")",
+  targets: ["permanent"],
+  effect: {
+    kind: "sequence",
+    effects: [
+      { kind: "put-on-library", target: 0, position: "top" },
+      { kind: "create-token", token: "Clue Token", count: 1 },
+    ],
+  },
+});
