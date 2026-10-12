@@ -55,6 +55,7 @@ import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
 import _poolCatalog from "../pool/catalog.js";
 import _poolCathodion from "../pool/cathodion.js";
+import _poolCausticExhale from "../pool/caustic-exhale.js";
 import _poolCavernCrawler from "../pool/cavern-crawler.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
@@ -402,6 +403,7 @@ const shard: CardShard = {
     _poolCaptainStormCosmiumRaider,
     _poolCatalog,
     _poolCathodion,
+    _poolCausticExhale,
     _poolCavernCrawler,
     _poolCemeteryReaper,
     _poolCephalidColiseum,

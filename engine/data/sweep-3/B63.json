@@ -336,9 +336,9 @@
   {
    "name": "Celestial Reunion",
    "needs": [
-    "keyword:behold"
+    "cost:choose-creature-type-as-cast"
    ],
-   "why": "Its optional additional cost is choosing a creature type and beholding two of it."
+   "why": "Behold is built (batch 64); the creature type chosen as it is cast, and read on resolution, is not."
   },
   {
    "name": "Curious Colossus",

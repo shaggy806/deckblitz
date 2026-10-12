@@ -239,6 +239,7 @@ import _poolRootOut from "../pool/root-out.js";
 import _poolRustMonster from "../pool/rust-monster.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
+import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
 import _poolSeafloorDebris from "../pool/seafloor-debris.js";
@@ -597,6 +598,7 @@ const shard: CardShard = {
     _poolRustMonster,
     _poolSabertoothWyvern,
     _poolSabretoothTiger,
+    _poolSarkhanDragonAscendant,
     _poolScarwoodTreefolk,
     _poolScouredBarrens,
     _poolSeafloorDebris,

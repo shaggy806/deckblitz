@@ -585,6 +585,38 @@ export interface WardCost {
   readonly blight?: number;
 }
 
+/**
+ * "Behold a [quality]" (rule 701.4a): "reveal a [quality] card from your hand
+ * or choose a [quality] permanent you control on the battlefield". `filter`
+ * is the quality, matched against the card in hand or the permanent —
+ * `{ subtype: "Dragon" }` for "a Dragon" (a Dragon card, or a Dragon you
+ * control: a kindred Dragon too), `{ type: "creature", subtype: "Gamma" }`
+ * for "a Gamma creature". `text` is what's beheld, for prompts and labels:
+ * `"a Dragon"`, `"three Elementals"`.
+ *
+ * `count` (default 1) is "behold three Elementals": that many **different**
+ * objects, any mix of revealed cards and chosen permanents (the Kindle the
+ * Inner Flame ruling) — a token stack is that many permanents.
+ *
+ * `exile` is "behold an Elf **and exile it**" (the Champions): the beheld
+ * card or permanent is exiled as the cost is paid; a spell's is linked to the
+ * permanent that spell becomes (rule 607.2q), whose "return the exiled card"
+ * is `return-exiled-by-source { linked: "hand" }`. A token beheld this way
+ * ceases to exist in exile (rule 111.7), so nothing comes back.
+ *
+ * Which object is asked with the `choose-from-zone` decision (its
+ * `behold` set): its candidates are both zones' at once. With exactly as many
+ * candidates as it takes, nothing is asked. A revealed card is shown to every
+ * player (701.4a, rule 701.20a — `cards-revealed`). Whatever offers a
+ * behold checks first that it can be done (`Game.canBehold`).
+ */
+export interface BeholdSpec {
+  readonly filter: CardFilter;
+  readonly text: string;
+  readonly count?: number;
+  readonly exile?: boolean;
+}
+
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a
  * card's ability text and the payment prompt read the same. */
 export function wardCostText(cost: WardCost): string {
@@ -1035,14 +1067,38 @@ export type EffectSpec =
        * the blighted creature" is `then: { kind: "create-token-copy", of: 0,
        * … }`. Like a `choose-permanents`' `then`, it shouldn't itself stop to
        * ask anything.
+       *
+       * `who: { target: n }` is "**target opponent** blights 2" (Champion of
+       * the Weird): the player in that slot, nobody if it's illegal (608.2b).
        */
       readonly kind: "blight";
       readonly amount: number;
-      readonly who?: PlayerScope;
+      readonly who?: PlayerScope | { readonly target: number };
       readonly then?: EffectSpec;
       /** Set by the engine on the copy it parks when one player's choice is
        * asked: the players still to blight. */
       readonly remaining?: readonly PlayerId[];
+    }
+  | {
+      /**
+       * Behold (rule 701.4a — {@link BeholdSpec}) as an effect: the
+       * controller reveals a card matching `filter` from their hand or
+       * chooses a permanent they control matching it, as this resolves — not
+       * a target — with the `choose-from-zone` decision (asked only when
+       * there's a choice to make). One who can't does nothing, so "you may
+       * behold a Dragon. If you do, …" is a `may` of this with the rest as
+       * the may's `then` (Sarkhan, Dragon Ascendant), not offered at all when
+       * nothing qualifies (`mayBeDone`).
+       *
+       * `then` applies right after, with the beheld object as its target 0
+       * — what "the beheld card" would read. Like a blight's `then`, it
+       * shouldn't itself stop to ask anything.
+       */
+      readonly kind: "behold";
+      readonly filter: CardFilter;
+      readonly text: string;
+      readonly count?: number;
+      readonly then?: EffectSpec;
     }
   | {
       /** One member's turn of a `for-each-target`: target `index` bound to
@@ -4676,6 +4732,13 @@ export interface EffectApi {
    * creature chosen now, or asked for — then `then` with it as target 0.
    * Nothing, if they control no creature (rule 701.68b). */
   blight(player: PlayerId, amount: number, then?: EffectSpec): void;
+  /** See the `"behold"` {@link EffectSpec}: the controller beholds (rule
+   * 701.4a) — the object chosen now, or asked for — then `then` with it as
+   * target 0. Nothing, if nothing qualifies. */
+  behold(spec: BeholdSpec, then?: EffectSpec): void;
+  /** Whether the controller could behold `spec` right now (rule 701.4a): as
+   * many cards in hand and permanents they control matching it as it takes. */
+  canBehold(spec: BeholdSpec): boolean;
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
@@ -6305,11 +6368,26 @@ function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // "You may blight 1": a player who controls no creature can't choose to
   // (rule 701.68b).
   if (action.kind === "blight") {
-    return ctx
-      .playersInScope(action.who ?? "you")
-      .every((player) => ctx.countMatching({ type: "creature", controlledBy: "you" }, undefined, player) > 0);
+    return blightingPlayers(action.who, ctx).every(
+      (player) => ctx.countMatching({ type: "creature", controlledBy: "you" }, undefined, player) > 0,
+    );
   }
+  // "You may behold a Dragon" (rule 701.4a): only with one to behold.
+  if (action.kind === "behold") return ctx.canBehold(action);
   return true;
+}
+
+/** Who a `blight` effect's `who` names: a scope's players, or the player in
+ * a target slot — nobody if that slot is illegal (rule 608.2b). */
+function blightingPlayers(
+  who: PlayerScope | { readonly target: number } | undefined,
+  ctx: ResolutionContext,
+): readonly PlayerId[] {
+  if (typeof who === "object") {
+    const player = effectPlayer(who, ctx);
+    return player === undefined ? [] : [player];
+  }
+  return ctx.playersInScope(who ?? "you");
 }
 
 /** Whether `spell` targets a permanent or a player — one of its targets was
@@ -6671,7 +6749,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "blight": {
       // One player at a time from the active player (rule 101.4), the rest
       // parked while one is asked, as `for-each-player` parks its players.
-      const players = spec.remaining ?? ctx.apnap(ctx.playersInScope(spec.who ?? "you"));
+      const players = spec.remaining ?? ctx.apnap(blightingPlayers(spec.who, ctx));
       const pendingBefore = ctx.decisionPending();
       for (let i = 0; i < players.length; i += 1) {
         const parked = ctx.parkedCount();
@@ -6683,6 +6761,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "behold":
+      // Rule 701.4a: by the effect's controller, chosen as it resolves.
+      ctx.behold(spec, spec.then);
+      return;
     case "damage-divided-evenly": {
       // A member found illegal as it resolved isn't there (rule 608.2b), and
       // doesn't count toward the division.

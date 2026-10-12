@@ -155,6 +155,7 @@ import {
   wardCostText,
 } from "./effects.js";
 import type {
+  BeholdSpec,
   BoardManaList,
   CascadeFinish,
   CascadeFound,
@@ -744,6 +745,9 @@ type FlashbackOption = {
   /** Permanents sacrificed for it — only a printed flashback's (Dread
    * Return's "Flashback—Sacrifice three creatures"). */
   readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+  /** What's beheld for it — only a printed flashback's (Kindle the Inner
+   * Flame's "Behold three Elementals", rule 701.4a). */
+  readonly behold?: BeholdSpec;
   /** What gave it: the effect's source (Past in Flames) or the permanent
    * whose static grants it. Absent for the card's own. */
   readonly grantor?: ObjectId;
@@ -2713,11 +2717,14 @@ export class Game {
         ...(kicked && def.kicker !== null
           ? {
               kicked: true,
-              // A blight variant is labelled with its N ("blight 1").
+              // A blight variant is labelled with its N ("blight 1"), a
+              // behold variant with what it beholds ("behold a Dragon").
               kickerCost:
                 def.kicker.keyword === "blight" && def.kicker.blight !== undefined
                   ? String(def.kicker.blight)
-                  : def.kicker.cost.repeat(kickCount ?? 1),
+                  : def.kicker.keyword === "behold" && def.kicker.behold !== undefined
+                    ? def.kicker.behold.text
+                    : def.kicker.cost.repeat(kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
@@ -5635,6 +5642,11 @@ export class Game {
     if (awaiting === null || awaiting.kind !== "choose-from-zone") {
       throw new Error("unreachable: whyCannotChooseFromZone should have caught this");
     }
+    // A behold (rule 701.4a) moves nothing by `destination`: its own answer.
+    if (awaiting.behold !== undefined) {
+      this.applyBehold(player, chosen, awaiting);
+      return;
+    }
 
     // "…, reveal it, …" — before anything moves, so the event names the cards
     // where every player just saw them.
@@ -5890,6 +5902,8 @@ export class Game {
         }
         return;
       }
+      // A behold's answer never reaches here (`applyBehold`): it moves nothing.
+      if (to === "behold") return;
       if (to === "library-bottom") {
         // In the order chosen: each goes under the one before it.
         const fromHand = this.state.objects[id]?.zone === "hand";
@@ -7492,6 +7506,7 @@ export class Game {
     | { readonly kind: "choose"; readonly options?: readonly string[] }
     | { readonly kind: "enchant"; readonly as: CardDefinition }
     | { readonly kind: "reveal"; readonly subtypes: readonly string[] }
+    | { readonly kind: "behold"; readonly spec: BeholdSpec }
     | { readonly kind: "riot" }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | null {
@@ -7522,6 +7537,9 @@ export class Game {
         const r = ability.replacement;
         if (r?.event === "enters-battlefield" && r.tappedUnlessRevealFromHand !== undefined) {
           return { kind: "reveal", subtypes: r.tappedUnlessRevealFromHand };
+        }
+        if (r?.event === "enters-battlefield" && r.tappedUnlessBehold !== undefined) {
+          return { kind: "behold", spec: r.tappedUnlessBehold };
         }
       }
     }
@@ -7614,6 +7632,19 @@ export class Game {
         const options = this.revealableFromHand(chooser, next.subtypes).filter((card) => card !== id);
         if (options.length > 0) {
           this.state.awaiting = { kind: "reveal-for-untapped", player: chooser, source: id, options };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, reveal: null };
+        continue;
+      }
+      if (next.kind === "behold") {
+        // A behold land (Theorist's Sanctum): "you may", so asked whenever
+        // there's something to behold — never the land itself, still in
+        // hand while a land play asks this — none chosen being "you don't".
+        if (this.canBehold(chooser, next.spec, id)) {
+          this.withDecisionSource(id, () =>
+            this.beginBehold(chooser, id, next.spec, { except: id, optional: true, enterOf: id }),
+          );
           return true;
         }
         object.enterChoice = { ...object.enterChoice, reveal: null };
@@ -9276,6 +9307,9 @@ export class Game {
       via !== "sneak" &&
       !def.types.includes("instant") &&
       !def.keywords.includes("flash") &&
+      // "As though it had flash if you behold a Dragon as an additional
+      // cost" (Molten Exhale): the kicked cast may begin any time (601.3c).
+      !(kicked && def.kicker?.flash === true) &&
       // Judged as the spell it would be — an Omen or an adventure is its
       // instant or sorcery half (rules 715.3, 720.3a).
       !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))
@@ -9315,6 +9349,22 @@ export class Game {
     // "You may blight 1" (rule 701.68b): only with a creature to blight.
     if (kicked && def.kicker?.keyword === "blight" && !this.canBlight(player)) {
       return `${player} controls no creature to blight for ${def.name}`;
+    }
+    // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
+    // spell itself (on its way to the stack, 601.2a) not among them.
+    const kickerBehold = kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined;
+    if (kickerBehold !== undefined && !this.canBehold(player, kickerBehold, cardId)) {
+      return `${player} has nothing to behold ${kickerBehold.text} for ${def.name}`;
+    }
+    // A mandatory behold ("behold an Elemental and exile it"), and a
+    // flashback cost's ("Flashback—{1}{R}, Behold three Elementals").
+    const mandatoryBehold = def.additionalCost?.behold;
+    if (mandatoryBehold !== undefined && !this.canBehold(player, mandatoryBehold, cardId)) {
+      return `${player} has nothing to behold ${mandatoryBehold.text} for ${def.name}`;
+    }
+    const flashbackBehold = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.behold : undefined;
+    if (flashbackBehold !== undefined && !this.canBehold(player, flashbackBehold, cardId)) {
+      return `${player} has nothing to behold ${flashbackBehold.text} for ${def.name}'s flashback`;
     }
     if (typeof kicked === "number" && kicked > 1 && def.kicker?.multi !== true) {
       return `${def.name}'s kicker can be paid only once`;
@@ -10356,6 +10406,29 @@ export class Game {
     const blightCost =
       chosenOption?.blight ?? (kicked && def.kicker?.keyword === "blight" ? def.kicker.blight : undefined);
     if (blightCost !== undefined) this.beginBlight(player, cardId, blightCost, { x: chosenX, priorityTo });
+    // "Behold an Elf or pay {2}" with the behold chosen, "you may behold a
+    // Dragon" taken, "behold an Elemental and exile it", or a flashback
+    // cost's "behold three Elementals" (rule 701.4a): which, chosen now as
+    // the cost is paid (601.2h). What a spell exiles this way is linked to
+    // the permanent it becomes (607.2q) — the stint after this one on the
+    // stack, which only resolving onto the battlefield reaches.
+    const beholdCost =
+      chosenOption?.behold ??
+      (kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined) ??
+      def.additionalCost?.behold ??
+      flashback?.behold;
+    if (beholdCost !== undefined) {
+      const onStack = this.state.objects[cardId];
+      this.withDecisionSource(cardId, () =>
+        this.beginBehold(player, cardId, beholdCost, {
+          x: chosenX,
+          priorityTo,
+          ...(beholdCost.exile === true && onStack !== undefined
+            ? { exileLink: { source: cardId, zoneChangeCount: (onStack.zoneChangeCount ?? 0) + 1 } }
+            : {}),
+        }),
+      );
+    }
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
     this.queueCasualty(player, cardId, priorityTo);
     this.afterPlayerAction(priorityTo);
@@ -10639,6 +10712,11 @@ export class Game {
     // Rule 701.68b: no creature to put the counters on, no blighting.
     if (option.blight !== undefined && !this.canBlight(player)) {
       return `${player} controls no creature to ${option.text.toLowerCase()} for ${def.name}`;
+    }
+    // Rule 701.4a: nothing to reveal or choose, no beholding — the spell
+    // itself, on its way to the stack (601.2a), not among them.
+    if (option.behold !== undefined && !this.canBehold(player, option.behold, cardId)) {
+      return `${player} has nothing to ${option.text.toLowerCase()} for ${def.name}`;
     }
     return null;
   }
@@ -14617,9 +14695,11 @@ export class Game {
     if (object.abilityKind === "chapter") return (def.chapters ?? [])[index];
     // An activated ability's source may still be on the battlefield with a
     // granted ability at this index (rule 608.2b — last-known info); fall back
-    // to the printed list if it's gone (a self-sacrifice cost, Evolving Wilds).
+    // to the printed list if it's gone (a self-sacrifice cost, Evolving Wilds)
+    // or no longer the face it was activated as (a transformed planeswalker
+    // dying to its own loyalty cost turns face up again — rule 113.7a).
     const src = object.sourceObjectId;
-    if (src !== null && this.state.objects[src] !== undefined) {
+    if (src !== null && this.state.objects[src] !== undefined && printedCardName(this.state.objects[src]) === object.cardName) {
       const eff = this.effectiveActivated(src)[index];
       if (eff !== undefined) return eff;
     }
@@ -18806,6 +18886,8 @@ export class Game {
       choosePermanents: (filter, min, max, then, prompt, exceptSource) =>
         this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
+      behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
+      canBehold: (spec) => this.canBehold(controller, spec),
       grantKeyword: (target, keyword, duration) =>
         this.grantKeyword(target, keyword, lastingHere(duration)),
       restrict: (target, filter, restrictions, duration) =>
@@ -23080,6 +23162,183 @@ export class Game {
   }
 
   /**
+   * What `player` could behold for `spec` (rule 701.4a): the cards in their
+   * hand and the permanents they control that match its quality — each read
+   * where it is, so a changeling card is a Dragon card (rule 702.73a works
+   * in every zone) and a kindred Dragon a Dragon. `except` is never one: the
+   * spell being cast (on its way to the stack, rule 601.2a), or the land
+   * whose "as this enters" behold this is. Nor is a permanent entering in
+   * the same batch (rule 614.12).
+   */
+  private beholdCandidates(player: PlayerId, spec: BeholdSpec, except?: ObjectId): ObjectId[] {
+    if (this.state.players[player]?.hasLost !== false) return [];
+    const ctx = { you: player };
+    const cards = this.state.zones.perPlayer[player].hand.filter(
+      (id) =>
+        id !== except &&
+        this.state.objects[id] !== undefined &&
+        matchesFilter(this.state, this.registry, id, spec.filter, ctx),
+    );
+    const permanents = this.state.zones.shared.battlefield.filter(
+      (id) =>
+        id !== except &&
+        this.enterBatch?.has(id) !== true &&
+        this.state.objects[id]?.controller === player &&
+        matchesFilter(this.state, this.registry, id, spec.filter, ctx),
+    );
+    return [...cards, ...permanents];
+  }
+
+  /** Whether `player` could behold `spec` now (rule 701.4a): as many
+   * different objects as it takes — a token stack is every token in it. */
+  private canBehold(player: PlayerId, spec: BeholdSpec, except?: ObjectId): boolean {
+    const candidates = this.beholdCandidates(player, spec, except);
+    return permanentCount(this.state, candidates) >= (spec.count ?? 1);
+  }
+
+  /**
+   * Behold (rule 701.4a): `player` reveals a card matching `spec` from their
+   * hand or chooses a permanent they control matching it — `spec.count`
+   * different ones, any mix — as a cost being paid (`priorityTo` set: who
+   * gets priority once it's chosen, rule 117.3c — a spell's additional or
+   * flashback cost), as the `"behold"` effect resolves, or as a land enters
+   * (`enterOf`, `optional`: Theorist's Sanctum). Which is the
+   * `choose-from-zone` decision with its `behold` set, both zones' candidates
+   * at once; with no more candidates than it takes (a token stack is one
+   * choice: its tokens are identical), and nothing optional about it, those
+   * are beheld unasked. Not enough, nothing (whatever offers a behold checks
+   * `canBehold` first).
+   *
+   * With `spec.exile`, what's beheld is exiled as well — linked through
+   * `exileLink` (rule 607.2q). `then` follows, the first beheld object its
+   * target 0.
+   */
+  private beginBehold(
+    player: PlayerId,
+    source: ObjectId,
+    spec: BeholdSpec,
+    opts: {
+      readonly x?: number;
+      readonly then?: EffectSpec;
+      readonly priorityTo?: PlayerId;
+      readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+      readonly except?: ObjectId;
+      readonly optional?: boolean;
+      readonly enterOf?: ObjectId;
+    } = {},
+  ): void {
+    const count = spec.count ?? 1;
+    let eligible = this.beholdCandidates(player, spec, opts.except);
+    if (permanentCount(this.state, eligible) < count) return;
+    // "Behold three Elementals" takes different permanents (the ruling), so
+    // tokens of one stack are offered one by one — as many of them as it
+    // could take, the rest staying stacked behind the first.
+    if (count > 1) {
+      eligible = eligible.flatMap((id) => {
+        const split: ObjectId[] = [id];
+        while (split.length < count && (this.state.objects[id]?.stackCount ?? 1) > 1) {
+          split.push(this.splitOneFromStack(id));
+        }
+        return split;
+      });
+    }
+    const behold = {
+      source,
+      x: opts.x ?? 0,
+      ...(opts.then !== undefined ? { then: opts.then } : {}),
+      ...(opts.enterOf !== undefined ? { enterOf: opts.enterOf } : {}),
+    };
+    if (opts.optional !== true && eligible.length === count) {
+      this.carryOutBehold(player, eligible, spec.exile === true, opts.exileLink, behold);
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: opts.optional === true ? 0 : count,
+      max: count,
+      destination: spec.exile === true ? "exile" : "behold",
+      leftover: "stay",
+      behold,
+      ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),
+      ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
+    };
+  }
+
+  /**
+   * Answers a behold's `choose-from-zone` (see `beginBehold`). A land's "you
+   * may behold" as it enters records what was beheld, or `null`, on the land
+   * (`enterChoice.reveal`), which `moveObject` reads to have it enter
+   * untapped or tapped; anything else is carried out now.
+   */
+  private applyBehold(
+    player: PlayerId,
+    chosen: readonly ObjectId[],
+    awaiting: Extract<AwaitingDecision, { kind: "choose-from-zone" }>,
+  ): void {
+    const behold = awaiting.behold;
+    if (behold === undefined) return;
+    this.state.awaiting = null;
+    if (behold.enterOf !== undefined) {
+      const land = this.state.objects[behold.enterOf];
+      const pick = chosen[0] ?? null;
+      if (pick !== null && this.state.objects[pick]?.zone === "hand") this.revealCards(player, [pick], "hand");
+      if (land !== undefined) land.enterChoice = { ...land.enterChoice, reveal: pick };
+    } else {
+      this.carryOutBehold(player, chosen, awaiting.destination === "exile", awaiting.exileLink, behold);
+    }
+    if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
+  }
+
+  /**
+   * Behold `chosen` (rule 701.4a): the cards among them in `player`'s hand
+   * are revealed to every player (701.20a — the reveal lasts the turn,
+   * `revealedThisTurn`, as long as the spell it paid for is on the stack),
+   * and the permanents are simply the ones chosen. With `exile`, each is
+   * then exiled — a permanent singled out of its stack, and every one linked
+   * through `exileLink` (rule 607.2q) but a token, which ceases to exist
+   * there (111.7). Then the behold's `then`, the first beheld object its
+   * target 0.
+   */
+  private carryOutBehold(
+    player: PlayerId,
+    chosen: readonly ObjectId[],
+    exile: boolean,
+    exileLink: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined,
+    behold: { readonly source: ObjectId; readonly x: number; readonly then?: EffectSpec },
+  ): void {
+    const fromHand = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
+    if (fromHand.length > 0) this.revealCards(player, fromHand, "hand");
+    const beheld = chosen.map((id) =>
+      this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id,
+    );
+    if (exile) {
+      this.withLeaveBatch(() => {
+        for (const id of beheld) {
+          const object = this.state.objects[id];
+          if (object === undefined || (object.zone !== "hand" && object.zone !== "battlefield")) continue;
+          const wasPermanent = object.zone === "battlefield";
+          if (!this.moveObject(id, "exile")) continue;
+          const exiled = this.state.objects[id];
+          if (exiled?.zone === "exile" && exileLink !== undefined && exiled.isToken !== true) {
+            exiled.exiledWith = exileLink;
+          }
+          if (wasPermanent) this.emit({ type: "permanent-exiled", object: id });
+        }
+      });
+    }
+    const first = beheld[0];
+    if (behold.then !== undefined && first !== undefined) {
+      applyEffectSpec(
+        behold.then,
+        this.makeResolutionContext(behold.source, player, [{ kind: "object", object: first }], behold.x),
+      );
+    }
+  }
+
+  /**
    * See the `"choose-permanents"` {@link EffectSpec}: `player` chooses from
    * `min` to `max` of the permanents matching `filter` as the effect
    * resolves. Nothing is asked when nothing matches; with fewer than `min`
@@ -24867,7 +25126,11 @@ export class Game {
     const add = (option: FlashbackOption): void => {
       if (
         out.some(
-          (f) => f.cost === option.cost && f.payLife === option.payLife && f.sacrifice === option.sacrifice,
+          (f) =>
+            f.cost === option.cost &&
+            f.payLife === option.payLife &&
+            f.sacrifice === option.sacrifice &&
+            f.behold === option.behold,
         )
       ) {
         return;
@@ -24876,7 +25139,11 @@ export class Game {
     };
     const printed = this.registry.get(object.cardName).flashback;
     if (printed !== null) {
-      add(printed.payLife === undefined && printed.sacrifice === undefined ? { cost: printed.cost } : { ...printed });
+      add(
+        printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined
+          ? { cost: printed.cost }
+          : { ...printed },
+      );
     }
     const granted = object.grantedFlashback;
     if (granted != null) add({ cost: granted.cost, ...(granted.by !== undefined ? { grantor: granted.by } : {}) });
@@ -27748,6 +28015,14 @@ export class Game {
           : reveal === null);
       // Either sparing it (Temple of the Dragon Queen), or each needed.
       if (r.revealOrCondition === true ? failsCondition && failsReveal : failsCondition || failsReveal) {
+        tapped = true;
+      }
+      // A behold land (rule 701.4a — Theorist's Sanctum), the same way: what
+      // was beheld as it was about to enter, or whether anything could be.
+      if (
+        r.tappedUnlessBehold !== undefined &&
+        (reveal === undefined ? !this.canBehold(object.controller, r.tappedUnlessBehold, id) : reveal === null)
+      ) {
         tapped = true;
       }
       if (r.painIfUntapped !== undefined) painIfUntapped = r.painIfUntapped;

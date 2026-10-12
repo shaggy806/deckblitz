@@ -3839,6 +3839,13 @@
 .zone-viewer-card {
   position: relative;
 }
+/* Where the card is, when a choice spans zones (behold: hand or battlefield). */
+.zone-viewer-card > .zv-zone {
+  display: block;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
 .zone-viewer-card > button.zv-flip {
   position: absolute;
   top: calc(var(--card-w) * 0.2);

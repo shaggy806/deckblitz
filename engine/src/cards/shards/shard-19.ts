@@ -167,6 +167,7 @@ import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
+import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
@@ -536,6 +537,7 @@ const shard: CardShard = {
     _poolKelsienThePlague,
     _poolKhenraSpellspear,
     _poolKillerWhale,
+    _poolKinsbaileAspirant,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
     _poolKrovikanFetish,

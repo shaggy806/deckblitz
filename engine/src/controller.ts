@@ -3218,6 +3218,10 @@ export class HeuristicBotController extends AutomaticController {
     if (forPlayer !== undefined && forPlayer !== this.playerId) {
       return this.leastUsefulTo(view.state, forPlayer, eligible, min);
     }
+    // What a Champion beholds is exiled (rule 701.4a): give up the least.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.behold !== undefined && awaiting.destination === "exile") {
+      return this.leastUsefulTo(view.state, this.playerId, eligible, min);
+    }
     // A land search takes a colour we can't make yet first (`land-colors.ts`).
     const ranked = newColorsFirst(view.state, this.registry, this.playerId, eligible);
     return ranked.slice(0, Math.max(min, Math.min(max, ranked.length)));

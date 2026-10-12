@@ -31,7 +31,7 @@
  */
 
 import type { StaticCondition } from "./cards/define.js";
-import type { EffectAmount, EffectSpec } from "./effects.js";
+import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 
 /** A single replacement clause on a `StaticAbility`. Discriminated by `event`. */
@@ -88,6 +88,17 @@ export interface EntersBattlefieldReplacement {
    * asks (a token copy), it reveals whenever it can.
    */
   readonly tappedUnlessRevealFromHand?: readonly string[];
+  /**
+   * It enters tapped unless its controller beholds (rule 701.4a) — reveals a
+   * matching card from their hand or chooses a matching permanent they
+   * control: Theorist's Sanctum's "As this land enters, you may behold a
+   * Jace. If you don't, this land enters tapped." The "you may" is a
+   * `choose-from-zone` with the awaiting's `behold` set (none chosen is
+   * declining), asked before it moves (`Game.askEnterChoice`, rule 614.12),
+   * and the land itself is never a candidate. Entering some way that never
+   * asks (a token copy), it beholds whenever it can.
+   */
+  readonly tappedUnlessBehold?: BeholdSpec;
   /** With both `tappedUnless` and `tappedUnlessRevealFromHand`: either one
    * spares it — Temple of the Dragon Queen's "enters tapped unless you
    * revealed a Dragon card this way **or** you control a Dragon". Without

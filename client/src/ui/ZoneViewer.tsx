@@ -30,6 +30,15 @@ function otherFaceOf(
   return obj.art ? { ...tile, faceIsBack: !obj.faceIsBack } : tile
 }
 
+/** Where a card in a zone-spanning choice is, under its tile. */
+const ZONE_CAPTION: Partial<Record<VisibleObject['zone'], string>> = {
+  hand: 'In your hand',
+  battlefield: 'On the battlefield',
+  graveyard: 'In a graveyard',
+  exile: 'In exile',
+  library: 'In a library',
+}
+
 export interface ZoneViewerProps {
   readonly title: string
   readonly ids: readonly ObjectId[]
@@ -153,6 +162,10 @@ export function ZoneViewer({
 
   if (selection && collapsed) return null
 
+  // A choice spanning zones (behold: a card in your hand or a permanent you
+  // control) says where each one is, or two copies of a card look alike.
+  const mixedZones = new Set(ids.map((id) => resolve(id)?.zone).filter((z) => z !== undefined)).size > 1
+
   return (
     <div className="zone-viewer-overlay" onClick={selection ? undefined : onClose}>
       <div
@@ -230,6 +243,7 @@ export function ZoneViewer({
                         : undefined
                   }
                 />
+                {mixedZones ? <span className="zv-zone">{ZONE_CAPTION[obj.zone] ?? obj.zone}</span> : null}
                 {other ? (
                   <button
                     type="button"

@@ -169,6 +169,7 @@ import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
+import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
@@ -185,6 +186,7 @@ import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
 import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
+import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
@@ -505,6 +507,7 @@ const shard: CardShard = {
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMinotaurAggressor,
+    _poolMoltenExhale,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,
@@ -521,6 +524,7 @@ const shard: CardShard = {
     _poolNyxbornBrute,
     _poolOfferingToAsha,
     _poolOgreResister,
+    _poolOkoLorwynLiege,
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,

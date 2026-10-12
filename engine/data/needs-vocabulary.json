@@ -5701,6 +5701,13 @@
   "cost:blight-x-additional-cost": {
    "family": "cost:sacrifice-multiple",
    "example": "Soul Immolation: \"As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control\" — blight N is built; an announced X capped by toughness isn't."
+  },
+  "keyword:conspire": {
+   "example": "Raiding Schemes: \"Each noncreature spell you cast has conspire\" — conspire (rule 702.78), an optional additional cost of tapping two untapped creatures you control that share a colour with the spell to copy it, isn't built, nor granted to spells by a static."
+  },
+  "cost:choose-creature-type-as-cast": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Celestial Reunion: \"you may choose a creature type and behold two creatures of that type\" — a creature type named as the spell is cast (601.2b), remembered on it and read as it resolves."
   }
  }
 }

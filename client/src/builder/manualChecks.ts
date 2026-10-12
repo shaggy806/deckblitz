@@ -2643,6 +2643,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Champion of the Weird, Lys Alana Dignitary, Theorist's Sanctum",
+    board({
+      you: {
+        bf: ['Gristle Glutton', 'Swamp*4', 'Forest*3', 'Island*2'],
+        hand: ['Champion of the Weird', 'Lys Alana Dignitary', 'Llanowar Elves', 'Gristle Glutton', "Theorist's Sanctum", 'Jace Beleren'],
+      },
+      opp: { bf: ['Grizzly Bears', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

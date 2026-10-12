@@ -122,8 +122,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "choose-opponent": (n, v) => v.child(n.then),
   "about-player": (n, v) => v.child(n.effect),
   "choose-permanents": none,
-  // Its `then` reads the blighted creature as target 0.
-  blight: none,
+  // Its `then` reads the blighted creature as target 0. "Target opponent
+  // blights 2" harms the player in that slot.
+  blight: (n, v) => {
+    if (typeof n.who === "object") v.touch(n.who.target, "harm", MAJOR);
+  },
+  // Its `then` reads the beheld card or permanent as target 0.
+  behold: none,
   // Its `then` reads the card it picked as target 0.
   "choose-random-card": none,
   "empower-jace": none,

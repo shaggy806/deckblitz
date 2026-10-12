@@ -475,6 +475,75 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     // A mandatory additional blight isn't a choice of costs.
     expect(face("As an additional cost to cast this spell, blight 2.\nDraw a card.", "Sorcery", {}).complete).toBe(false);
   });
+
+  it("behold (rule 701.4a): a choice of costs, an optional cost and its 'if … was beheld', 'and exile it' with its return, flashback, a land, an effect", () => {
+    const dragon = { filter: { subtype: "Dragon" }, text: "a Dragon" };
+    expect(parseSentence("Target opponent blights 2.", ctx())).toEqual({ kind: "blight", amount: 2, who: { target: 0 } });
+    expect(parseSentence("Behold a Gamma creature.", ctx())).toEqual({
+      kind: "behold",
+      filter: { type: "creature", subtype: "Gamma" },
+      text: "a Gamma creature",
+    });
+    // Any spell's, a creature's too.
+    const mudbutton = face("As an additional cost to cast this spell, behold a Goblin or pay {2}.\nThis creature can't block.");
+    expect(mudbutton.additionalCost).toEqual({
+      options: [{ text: "Behold a Goblin", behold: { filter: { subtype: "Goblin" }, text: "a Goblin" } }, { text: "Pay {2}", mana: "{2}" }],
+    });
+    expect(mudbutton.complete).toBe(true);
+    // "If a Dragon was beheld" closes the spell: the kicked cast does it too.
+    const osseous = face(
+      "As an additional cost to cast this spell, you may behold a Dragon.\nThis spell deals 5 damage to target attacking or blocking creature. If a Dragon was beheld, you gain 2 life.",
+      "Instant",
+    );
+    expect(osseous.kicker).toEqual({
+      cost: "",
+      keyword: "behold",
+      behold: dragon,
+      effect: { kind: "sequence", effects: [{ kind: "damage", amount: 5, target: 0 }, { kind: "gain-life", amount: 2 }] },
+    });
+    expect(osseous.effect).toEqual({ kind: "damage", amount: 5, target: 0 });
+    expect(osseous.complete).toBe(true);
+    // "… instead" rewrites the spell: a person's.
+    expect(
+      face(
+        "As an additional cost to cast this spell, you may behold a Dragon.\nCounter target spell unless its controller pays {2}. If a Dragon was beheld, counter that spell unless its controller pays {4} instead.",
+        "Instant",
+      ).complete,
+    ).toBe(false);
+    // "Behold … and exile it" and the linked return (rule 607.2q).
+    const champion = face(
+      "As an additional cost to cast this spell, behold an Elf and exile it.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.",
+    );
+    expect(champion.additionalCost).toEqual({ behold: { filter: { subtype: "Elf" }, text: "an Elf", exile: true } });
+    expect(champion.triggered[0].effect).toEqual({ kind: "return-exiled-by-source", linked: "hand" });
+    expect(champion.complete).toBe(true);
+    // The return is read only beside the exile it's linked to.
+    expect(face("When this creature leaves the battlefield, return the exiled card to its owner's hand.").complete).toBe(false);
+    expect(face("Draw a card.\nFlashback—{1}{R}, Behold three Elementals.", "Sorcery").flashback).toEqual({
+      cost: "{1}{R}",
+      behold: { filter: { subtype: "Elemental" }, text: "three Elementals", count: 3 },
+    });
+    const sanctum = face("As this land enters, you may behold a Jace. If you don't, this land enters tapped.", "Land");
+    expect(sanctum.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      tappedUnlessBehold: { filter: { subtype: "Jace" }, text: "a Jace" },
+    });
+    const sarkhan = face("When this creature enters, you may behold a Dragon. If you do, create a Treasure token.");
+    expect(sarkhan.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Behold a Dragon?",
+      effect: { kind: "behold", ...dragon },
+      then: { kind: "create-token", token: "Servo Token", count: 1 },
+    });
+    expect(sarkhan.complete).toBe(true);
+    // "That land" reaches back past the may: a person's.
+    expect(
+      face(
+        "{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. You may behold an Elf. If you do, untap that land.",
+        "Land",
+      ).complete,
+    ).toBe(false);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

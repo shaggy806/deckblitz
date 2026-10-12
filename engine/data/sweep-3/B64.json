@@ -1,0 +1,223 @@
+{
+ "batch": "B64",
+ "status": "complete",
+ "ranks": "Lorwyn Eclipsed (ECL, 2026-01-23): top 50% by EDHREC rank, its last 10 (ECL done); with behold built and every behold card it unblocked",
+ "authored": [
+  {
+   "name": "Oko, Lorwyn Liege // Oko, Shadowmoor Scion",
+   "files": [
+    "engine/src/cards/pool/oko-lorwyn-liege.ts",
+    "engine/src/cards/pool/oko-shadowmoor-scion.ts",
+    "engine/src/cards/tokens/elk-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kindle the Inner Flame",
+   "files": [
+    "engine/src/cards/pool/kindle-the-inner-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glamermite",
+   "files": [
+    "engine/src/cards/pool/glamermite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightmare Sower",
+   "files": [
+    "engine/src/cards/pool/nightmare-sower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disruptor of Currents",
+   "files": [
+    "engine/src/cards/pool/disruptor-of-currents.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Champion of the Weird",
+   "files": [
+    "engine/src/cards/pool/champion-of-the-weird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sourbread Auntie",
+   "files": [
+    "engine/src/cards/pool/sourbread-auntie.ts",
+    "engine/src/cards/tokens/goblin-token-boggart-mischief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lys Alana Dignitary",
+   "files": [
+    "engine/src/cards/pool/lys-alana-dignitary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvergill Mentor",
+   "files": [
+    "engine/src/cards/pool/silvergill-mentor.ts",
+    "engine/src/cards/tokens/merfolk-token-silvergill-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulbright Seeker",
+   "files": [
+    "engine/src/cards/pool/soulbright-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mudbutton Cursetosser",
+   "files": [
+    "engine/src/cards/pool/mudbutton-cursetosser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kinsbaile Aspirant",
+   "files": [
+    "engine/src/cards/pool/kinsbaile-aspirant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Countersculpt",
+   "files": [
+    "engine/src/cards/pool/countersculpt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caustic Exhale",
+   "files": [
+    "engine/src/cards/pool/caustic-exhale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dispelling Exhale",
+   "files": [
+    "engine/src/cards/pool/dispelling-exhale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piercing Exhale",
+   "files": [
+    "engine/src/cards/pool/piercing-exhale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Osseous Exhale",
+   "files": [
+    "engine/src/cards/pool/osseous-exhale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hulk's Thunderclap",
+   "files": [
+    "engine/src/cards/pool/hulks-thunderclap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hyperion's Atomic Vision",
+   "files": [
+    "engine/src/cards/pool/hyperions-atomic-vision.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champion of the Path",
+   "files": [
+    "engine/src/cards/pool/champion-of-the-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champions of the Perfect",
+   "files": [
+    "engine/src/cards/pool/champions-of-the-perfect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champions of the Shoal",
+   "files": [
+    "engine/src/cards/pool/champions-of-the-shoal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champion of the Clachan",
+   "files": [
+    "engine/src/cards/pool/champion-of-the-clachan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarkhan, Dragon Ascendant",
+   "files": [
+    "engine/src/cards/pool/sarkhan-dragon-ascendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elven Passage",
+   "files": [
+    "engine/src/cards/pool/elven-passage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Theorist's Sanctum",
+   "files": [
+    "engine/src/cards/pool/theorists-sanctum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Exhale",
+   "files": [
+    "engine/src/cards/pool/molten-exhale.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Emptiness",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "'If {W}{W} was spent to cast it' needs a count of each colour spent (Vibrance, Wistfulness)."
+  },
+  {
+   "name": "Gilt-Leaf's Embrace",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "The Aura's enters trigger grants keywords to 'enchanted creature' — no effect target names the creature its source is attached to."
+  },
+  {
+   "name": "Raiding Schemes",
+   "needs": [
+    "keyword:conspire"
+   ],
+   "why": "'Each noncreature spell you cast has conspire' — conspire isn't built, nor granted to spells."
+  }
+ ]
+}

@@ -826,8 +826,9 @@ export type LegalAction =
        * `"offspring"` (rule 702.175), `"gift"` (702.174: the variant that
        * promises the gift; to whom is asked once it's cast) — for
        * labelling — `"blight"` (701.68a: the variant that blights, with
-       * `kickerCost` its N). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight";
+       * `kickerCost` its N), `"behold"` (701.4a: the variant that beholds,
+       * with `kickerCost` what — "a Dragon"). */
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */
@@ -1128,7 +1129,9 @@ export type LegalAction =
        * order chosen, the first chosen highest and the last on the very
        * bottom (Valakut Awakening). `"exile"` exiles them face up — a cost's
        * "exile two cards from your graveyard" (Varina, Lich Queen), or
-       * imprint's "exile a card from your hand" (Chrome Mox). */
+       * imprint's "exile a card from your hand" (Chrome Mox). `"behold"`
+       * moves nothing (rule 701.4a): a card chosen from the hand is
+       * revealed, a permanent chosen stays where it is. */
       readonly destination:
         | "battlefield"
         | "hand"
@@ -1138,7 +1141,13 @@ export type LegalAction =
         | "manifest"
         | "library-top"
         | "library-bottom"
-        | "graveyard";
+        | "graveyard"
+        | "behold";
+      /** A behold (rule 701.4a): `ids` are cards in the chooser's hand and
+       * permanents they control at once — "reveal a card from your hand or
+       * choose a permanent you control". `destination` is `"behold"`, or
+       * `"exile"` for "behold an Elf and exile it" (the Champions). */
+      readonly behold?: true;
       /** A split tutor (Cultivate): only the first chosen card goes to
        * `destination`, the rest elsewhere. */
       readonly split?: true;

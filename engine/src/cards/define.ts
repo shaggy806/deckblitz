@@ -14,6 +14,7 @@
 
 import type { ActivatedAbility, CostReductionAmount, TriggeredAbility } from "../abilities.js";
 import type {
+  BeholdSpec,
   CopyExceptions,
   EffectSpec,
   ModeOption,
@@ -118,6 +119,11 @@ export interface AdditionalCostOption {
    * which creature is chosen as the cost is paid, once the spell is on the
    * stack, with the `choose-permanents` decision (601.2h). */
   readonly blight?: number;
+  /** "Behold an Elf" (rule 701.4a — Lys Alana Dignitary's "behold an Elf or
+   * pay {2}"): offered only while the caster has one to behold, and which
+   * one is chosen as the cost is paid, once the spell is on the stack, with
+   * the `choose-from-zone` decision (601.2h) — see {@link BeholdSpec}. */
+  readonly behold?: BeholdSpec;
 }
 
 export type Keyword =
@@ -1913,6 +1919,17 @@ export interface CardDefinition {
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     /**
+     * "Behold an Elemental and exile it" (rule 701.4a — Champion of the
+     * Path): a mandatory behold, castable only with one to behold, chosen as
+     * the cost is paid once the spell is on the stack (601.2h). With
+     * `exile`, the card or permanent is exiled linked to the permanent the
+     * spell becomes (rule 607.2q) — "return the exiled card" is that
+     * permanent's `return-exiled-by-source { linked: "hand" }`. A spell
+     * countered keeps it in exile for good (the rulings). See
+     * {@link BeholdSpec}.
+     */
+    readonly behold?: BeholdSpec;
+    /**
      * A **choice** between whole costs, of which the caster pays exactly one
      * (Bitter Triumph: "discard a card **or** pay 3 life").
      *
@@ -1960,7 +1977,25 @@ export interface CardDefinition {
      * permanent, whose gift is the `giftTrigger` helper. The opponent is
      * chosen as the cost is paid — see `GiftAsk`.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
+    /**
+     * With `keyword: "behold"` and `cost: ""`: "As an additional cost to
+     * cast this spell, you may behold a Dragon" (rule 701.4a — Dispelling
+     * Exhale). The kicked variant is the one that beholds, offered only
+     * while the caster has one to behold; which is chosen as the cost is
+     * paid, once the spell is on the stack, with the `choose-from-zone`
+     * decision (601.2h). "If a Dragon was beheld" (701.4b) and "if this
+     * spell's additional cost was paid" are both the spell being kicked:
+     * `targets` / `effect` say what changes.
+     */
+    readonly behold?: BeholdSpec;
+    /**
+     * The kicked variant may be cast as though it had flash (Molten
+     * Exhale's "you may cast this spell as though it had flash if you behold
+     * a Dragon as an additional cost to cast it" — rule 601.3c: it may be
+     * begun as though it had flash, the additional cost then paid).
+     */
+    readonly flash?: boolean;
     /**
      * With `keyword: "blight"` and `cost: ""`: "As an additional cost to
      * cast this spell, you may blight N" (rule 701.68a — Burning
@@ -2186,6 +2221,11 @@ export interface CardDefinition {
      * Return's "Flashback—Sacrifice three creatures", whose `cost` is `""`.
      * Chosen as the cost is paid, as `additionalCost.sacrificeCount`'s are. */
     readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+    /** Beholding as part of the flashback cost — Kindle the Inner Flame's
+     * "Flashback—{1}{R}, Behold three Elementals" (rule 701.4a). Castable
+     * that way only with as many to behold; which ones is chosen as the cost
+     * is paid, as `additionalCost.behold`'s are. */
+    readonly behold?: BeholdSpec;
   } | null;
   /** Harmonize (rule 702.180a) — this card may be cast from its owner's
    * graveyard for `cost`, tapping up to one untapped creature they control,
@@ -2600,13 +2640,16 @@ interface CardDraft {
     readonly discard?: number;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
+    readonly behold?: BeholdSpec;
     readonly options?: readonly AdditionalCostOption[];
   };
   kicker?: {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold";
+    readonly behold?: BeholdSpec;
+    readonly flash?: boolean;
     readonly blight?: number;
     readonly teamwork?: number;
     readonly multi?: boolean;
@@ -2651,6 +2694,7 @@ interface CardDraft {
     readonly cost: string;
     readonly payLife?: number;
     readonly sacrifice?: { readonly filter: CardFilter; readonly count: number };
+    readonly behold?: BeholdSpec;
   };
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };

@@ -63,6 +63,7 @@ import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
+import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
@@ -407,6 +408,7 @@ const shard: CardShard = {
     _poolDecreeOfPain,
     _poolDinaEssenceBrewer,
     _poolDismissiveDenial,
+    _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
     _poolDrEggman,
     _poolDragonFodder,

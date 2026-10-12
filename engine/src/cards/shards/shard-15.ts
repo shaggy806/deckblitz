@@ -42,6 +42,7 @@ import _poolCapashenKnight from "../pool/capashen-knight.js";
 import _poolCarnassid from "../pool/carnassid.js";
 import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
+import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
@@ -222,6 +223,7 @@ import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
+import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
@@ -389,6 +391,7 @@ const shard: CardShard = {
     _poolCarnassid,
     _poolCarrionScreecher,
     _poolCarrionWall,
+    _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
     _poolCidFreeflierPilot,
     _poolCinderbones,
@@ -569,6 +572,7 @@ const shard: CardShard = {
     _poolOrdinaryBear,
     _poolPantherRobot,
     _poolPashalikMons,
+    _poolPiercingExhale,
     _poolPiranhaMarsh,
     _poolPitchburnDevils,
     _poolPoliticalTriumph,

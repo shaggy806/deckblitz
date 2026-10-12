@@ -302,6 +302,7 @@ import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
+import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
@@ -662,6 +663,7 @@ const shard: CardShard = {
     _poolTheMightyThorJaneFoster,
     _poolThePrydwenSteelFlagship,
     _poolTheaterOfHorrors,
+    _poolTheoristsSanctum,
     _poolThousandYearStorm,
     _poolTidingsOfWar,
     _poolTitansGrave,

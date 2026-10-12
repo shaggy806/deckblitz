@@ -858,7 +858,18 @@ function viewForUncached(
                 state.awaiting.together !== undefined &&
                 state.awaiting.player !== viewer
               ? { ...state.awaiting, together: { ...state.awaiting.together, tags: {} } }
-              : state.awaiting,
+              : // Which hand cards a behold could reveal says what they are
+                // (rule 701.4a), until one is: the others see only the
+                // permanents it could choose.
+                state.awaiting?.kind === "choose-from-zone" &&
+                  state.awaiting.behold !== undefined &&
+                  state.awaiting.player !== viewer
+                ? {
+                    ...state.awaiting,
+                    ids: state.awaiting.ids.filter((id) => state.objects[id]?.zone !== "hand"),
+                    eligible: state.awaiting.eligible.filter((id) => state.objects[id]?.zone !== "hand"),
+                  }
+                : state.awaiting,
     decisionSource: decisionSourceFor(state),
     result: { ...state.result },
     players,

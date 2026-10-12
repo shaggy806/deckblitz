@@ -46,6 +46,7 @@ import _poolCastleDoom from "../pool/castle-doom.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
+import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
@@ -104,6 +105,7 @@ import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
+import _poolGlamermite from "../pool/glamermite.js";
 import _poolGlamorousGrapplers from "../pool/glamorous-grapplers.js";
 import _poolGleamOfBattle from "../pool/gleam-of-battle.js";
 import _poolGleamingBarrier from "../pool/gleaming-barrier.js";
@@ -416,6 +418,7 @@ const shard: CardShard = {
     _poolCatharticAdept,
     _poolCauldronFamiliar,
     _poolCelestialArmor,
+    _poolChampionsOfThePerfect,
     _poolClamorousIronclad,
     _poolCodsworthHandyHelper,
     _poolColdWaterSnapper,
@@ -474,6 +477,7 @@ const shard: CardShard = {
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
     _poolGiantSolifuge,
+    _poolGlamermite,
     _poolGlamorousGrapplers,
     _poolGleamOfBattle,
     _poolGleamingBarrier,

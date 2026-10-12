@@ -17,6 +17,13 @@
  * revealing before moving, shuffling before a `library-top` destination, and
  * a **bare** `prepareForPriority` rather than the guarded one `applyScry`
  * uses. None of that moves.
+ *
+ * A fifth, `beginBehold`, asks a behold (rule 701.4a — "reveal a Dragon card
+ * from your hand or choose a Dragon you control"): the one decision whose
+ * shown cards span two zones, the chooser's hand and their permanents,
+ * which a client draws side by side. The awaiting's `behold` routes the
+ * answer to `Game.applyBehold` instead of a move; `destination` is
+ * `"behold"`, or `"exile"` for the Champions' "behold … and exile it".
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -46,6 +53,8 @@ export const chooseFromZone = defineDecision({
       ...(awaiting.together !== undefined ? { together: awaiting.together } : {}),
       ...(awaiting.order === true ? { order: true } : {}),
       ...(awaiting.forPlayer !== undefined ? { forPlayer: awaiting.forPlayer } : {}),
+      // A behold (rule 701.4a): hand cards and permanents at once.
+      ...(awaiting.behold !== undefined ? { behold: true as const } : {}),
     },
   ],
 
@@ -110,7 +119,8 @@ export const chooseFromZone = defineDecision({
     if (legal.kind !== "choose-from-zone") return [];
     const together = legal.together;
     // What a cost exiles is given up, so the least valuable go first, as a
-    // sacrifice's and a discard's do.
+    // sacrifice's and a discard's do — a Champion's beheld card or
+    // permanent too. A plain behold gives nothing up: any order serves.
     const ranked =
       legal.destination === "exile" ? [...helpers.order(legal.eligible)].reverse() : helpers.order(legal.eligible);
     // A set rule drops the subsets that break it before the cap, so all the

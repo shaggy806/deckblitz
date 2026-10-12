@@ -76,6 +76,7 @@ import _poolDemandAnswers from "../pool/demand-answers.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
+import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
@@ -424,6 +425,7 @@ const shard: CardShard = {
     _poolDemolitionStomper,
     _poolDesertDrake,
     _poolDesolationTwin,
+    _poolDispellingExhale,
     _poolDouserOfLights,
     _poolDrafnaFounderOfLatNam,
     _poolDragonsRageChanneler,

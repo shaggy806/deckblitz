@@ -360,6 +360,24 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
   return filter;
 }
 
+/**
+ * What "behold …" names (rule 701.4a) — "an Elf", "a Gamma creature",
+ * "three Elementals" — as a `BeholdSpec`: its quality as a filter over a card
+ * in hand or a permanent, and the phrase itself as its `text`. `null` for a
+ * phrase the type reader doesn't know, or one that says whose ("you control"
+ * is behold's own).
+ */
+export function beholdOf(phrase) {
+  const m = /^(a|an|two|three|four|five) (.+)$/.exec(phrase);
+  if (m === null) return null;
+  const count = numberOf(m[1]);
+  const filter = parseTypePhrase(m[2]);
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  // Only a type or subtype is a quality the reminder text names.
+  if (Object.keys(filter).some((k) => k !== "type" && k !== "subtype")) return null;
+  return { filter, text: phrase, ...(count > 1 ? { count } : {}) };
+}
+
 // --------------------------------------------------------------- targets
 
 /** Target phrases, longest first, as the engine's target specs. */
@@ -1061,6 +1079,14 @@ export function parseSentence(sentence, ctx) {
   if ((m = re("each (opponent|player) blights (\\d+)").exec(s))) {
     return { kind: "blight", amount: Number(m[2]), who: m[1] === "opponent" ? "each-opponent" : "each-player" };
   }
+  if ((m = re("target (opponent|player) blights (\\d+)").exec(s))) {
+    return { kind: "blight", amount: Number(m[2]), who: { target: ctx.target(m[1]) } };
+  }
+  // Behold (rule 701.4a): reveal one from your hand or choose one you control.
+  if ((m = re("behold (.+)").exec(s)) && beholdOf(m[1]) !== null) {
+    const { filter, text, count } = beholdOf(m[1]);
+    return { kind: "behold", filter, text, ...(count !== undefined ? { count } : {}) };
+  }
 
   // "You may <sentence>." wraps whatever the inner sentence is.
   if ((m = /^you may (.+)\.$/i.exec(s))) {
@@ -1109,12 +1135,15 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
-    // "If you do" after "you may blight N": what follows happens only if the
-    // player blighted — and the may is offered only when they can (rule
-    // 701.68b) — so it's the may's `then`. Not one that names "the blighted
-    // creature" (701.68c: that's the blight's own `then`, a person's).
+    // "If you do" after "you may blight N" or "you may behold a Dragon": what
+    // follows happens only if the player did — and the may is offered only
+    // when they can (rules 701.68b, 701.4a) — so it's the may's `then`. Not
+    // one that names "the blighted creature" (701.68c: that's the blight's
+    // own `then`, a person's), nor "that land" or the like, which reaches
+    // back past the may.
     const ifDid = /^if you do, (.+)$/i.exec(sentence);
-    if (ifDid !== null && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "blight" && parsed.at(-1).then === undefined && !/\bblighted\b/i.test(sentence)) {
+    const mayKind = parsed.at(-1)?.kind === "may" ? parsed.at(-1).effect.kind : undefined;
+    if (ifDid !== null && (mayKind === "blight" || mayKind === "behold") && parsed.at(-1).then === undefined && !/\b(blighted|beheld|that)\b/i.test(sentence)) {
       const then = parseSentence(`${ifDid[1][0].toUpperCase()}${ifDid[1].slice(1)}`, ctx);
       if (then !== null && !containsUndefined(then)) {
         const may = { ...parsed.pop(), then };
@@ -1294,6 +1323,50 @@ export function parseFace(face, ctx = {}) {
       out.kicker = { cost: "", keyword: "blight", blight: Number(m[1]) };
       continue;
     }
+    // Behold (rule 701.4a) as a spell's cost — any spell's, a creature's too:
+    // "behold an Elf or pay {2}" (a choice of whole costs), "you may behold a
+    // Dragon" (a kicker by another name, whose "if a Dragon was beheld" is
+    // read with the spell's text below), and "behold an Elemental and exile
+    // it" (the Champions, the exiled card linked to the permanent, 607.2q).
+    const castable = !/\bLand\b/.test(face.type_line ?? "");
+    if (castable && (m = /^As an additional cost to cast ~, behold (.+) or pay ((?:\{[^}]+\})+)\.$/.exec(line)) && beholdOf(m[1]) !== null) {
+      out.additionalCost = { options: [{ text: `Behold ${m[1]}`, behold: beholdOf(m[1]) }, { text: `Pay ${m[2]}`, mana: m[2] }] };
+      continue;
+    }
+    if (castable && (m = /^As an additional cost to cast ~, you may behold (.+)\.$/.exec(line)) && beholdOf(m[1]) !== null) {
+      out.kicker = { cost: "", keyword: "behold", behold: beholdOf(m[1]) };
+      continue;
+    }
+    if (castable && (m = /^As an additional cost to cast ~, behold (.+) and exile it\.$/.exec(line)) && beholdOf(m[1]) !== null) {
+      out.additionalCost = { behold: { ...beholdOf(m[1]), exile: true } };
+      continue;
+    }
+    // "Return the exiled card", linked to that exile (rule 607.2q).
+    if (out.additionalCost?.behold?.exile === true && line === "When ~ leaves the battlefield, return the exiled card to its owner's hand.") {
+      out.triggered.push({
+        trigger: { on: "leaves-battlefield", who: "self" },
+        targets: [],
+        effect: { kind: "return-exiled-by-source", linked: "hand" },
+        resolve: null,
+        text: printed(raw),
+      });
+      continue;
+    }
+    // "Flashback—{1}{R}, Behold three Elementals." (rule 702.34a with 701.4a).
+    if (isSpell && (m = /^Flashback—((?:\{[^}]+\})+), Behold (.+)\.$/.exec(line)) && beholdOf(m[2]) !== null) {
+      out.flashback = { cost: m[1], behold: beholdOf(m[2]) };
+      continue;
+    }
+    // A behold land: "As ~ enters, you may behold a Jace. If you don't, ~
+    // enters tapped." — asked as it enters (rule 614.12).
+    if ((m = /^As ~ enters, you may behold (.+)\. If you don't, ~ enters tapped\.$/.exec(line)) && beholdOf(m[1]) !== null) {
+      out.static.push({
+        affects: { scope: "self" },
+        replacement: { event: "enters-battlefield", tappedUnlessBehold: beholdOf(m[1]) },
+        text: printed(raw),
+      });
+      continue;
+    }
 
     // Static lines.
     const st = parseStatic(line, printed(raw));
@@ -1389,13 +1462,41 @@ export function parseFace(face, ctx = {}) {
       else Object.assign(out, modal);
     } else {
       const ctx2 = { targets: spellTargets, tokenFor, onStack: true, spell: true };
-      const text = out.spellLines.map((l) => l.line).join(" ");
+      let text = out.spellLines.map((l) => l.line).join(" ");
+      // "If a Dragon was beheld, …" / "If this spell's additional cost was
+      // paid, …" closing a "you may behold" spell (rules 701.4b, 607.2i):
+      // the kicked cast does that too — its effect the spell's and then
+      // this, with any target it adds after the spell's own. Not an
+      // "instead", which rewrites the spell's text: that's a person's.
+      let kickedTail;
+      if (out.kicker?.keyword === "behold") {
+        const sentences = sentencesOf(text);
+        const last = sentences.at(-1) ?? "";
+        const tail = /^If (?:a|an) .+ was beheld, (.+)$/.exec(last) ?? /^If ~'s additional cost was paid, (.+)$/.exec(last);
+        if (tail !== null && sentences.length > 1 && !/\binstead\b/.test(last)) {
+          text = sentences.slice(0, -1).join(" ");
+          kickedTail = { sentence: last, rest: `${tail[1][0].toUpperCase()}${tail[1].slice(1)}` };
+        }
+      }
       const r = parseEffect(text, ctx2);
-      out.targets = spellTargets;
+      const ownTargets = [...spellTargets];
+      out.targets = ownTargets;
       out.effect = r.effect;
       if (r.effect === null) {
         out.todo.push(...r.todo);
         out.effectHints = r.hints;
+      }
+      if (kickedTail !== undefined) {
+        const extra = r.effect === null ? { effect: null } : parseEffect(kickedTail.rest, ctx2);
+        if (extra.effect === null) out.todo.push(kickedTail.sentence);
+        else {
+          const steps = (e) => (e.kind === "sequence" && e.simultaneous !== true ? e.effects : [e]);
+          out.kicker = {
+            ...out.kicker,
+            ...(spellTargets.length > ownTargets.length ? { targets: [...spellTargets] } : {}),
+            effect: { kind: "sequence", effects: [...steps(r.effect), ...steps(extra.effect)] },
+          };
+        }
       }
     }
     delete out.spellLines;

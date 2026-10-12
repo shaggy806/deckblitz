@@ -156,6 +156,7 @@ import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
+import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
 import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
 import _poolKinscaerSentry from "../pool/kinscaer-sentry.js";
@@ -517,6 +518,7 @@ const shard: CardShard = {
     _poolKarumonixTheRatKing,
     _poolKeenSense,
     _poolKheruGoldkeeper,
+    _poolKindleTheInnerFlame,
     _poolKingCheetah,
     _poolKingpinWilsonFisk,
     _poolKinscaerSentry,

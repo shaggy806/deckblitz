@@ -51,6 +51,7 @@ import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
+import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClear from "../pool/clear.js";
@@ -206,6 +207,7 @@ import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
+import _poolNightmareSower from "../pool/nightmare-sower.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
@@ -403,6 +405,7 @@ const shard: CardShard = {
     _poolCastAwayDoubt,
     _poolCatBurglar,
     _poolCatacombSlug,
+    _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
     _poolCircleOfTheLandDruid,
     _poolClear,
@@ -558,6 +561,7 @@ const shard: CardShard = {
     _poolNavigatorsRuin,
     _poolNeckSnap,
     _poolNicolBolasTheArisen,
+    _poolNightmareSower,
     _poolNissaVitalForce,
     _poolNissasExpedition,
     _poolNoviceInspector,

@@ -224,6 +224,7 @@ import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
+import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
@@ -280,6 +281,7 @@ import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
+import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
 import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
 import _poolSkeletonArcher from "../pool/skeleton-archer.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
@@ -288,6 +290,7 @@ import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
+import _poolSoulbrightSeeker from "../pool/soulbright-seeker.js";
 import _poolSovereignsBite from "../pool/sovereigns-bite.js";
 import _poolSparkReaper from "../pool/spark-reaper.js";
 import _poolSpectatorSeating from "../pool/spectator-seating.js";
@@ -598,6 +601,7 @@ const shard: CardShard = {
     _poolNoviceOccultist,
     _poolOakhollowVillage,
     _poolObsidianGiant,
+    _poolOkoShadowmoorScion,
     _poolOperaLoveSong,
     _poolOraclesGift,
     _poolOverwhelmingStampede,
@@ -654,6 +658,7 @@ const shard: CardShard = {
     _poolShorelineRanger,
     _poolShriekdiver,
     _poolSifterOfSkulls,
+    _poolSilvergillMentor,
     _poolSipOfHemlock,
     _poolSkeletonArcher,
     _poolSkyTheaterStrix,
@@ -662,6 +667,7 @@ const shard: CardShard = {
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,
+    _poolSoulbrightSeeker,
     _poolSovereignsBite,
     _poolSparkReaper,
     _poolSpectatorSeating,

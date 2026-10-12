@@ -4460,3 +4460,20 @@ stack count once per token)
   put a counter on one of his own creatures (his choice), not yours. With no creature, no blight version is
   offered.
 - **Known limits:** None known.
+
+### Champion of the Weird, Lys Alana Dignitary, Theorist's Sanctum
+
+*New player decision* — behold (rule 701.4): reveal a card of a quality from your hand or choose a permanent of it you control
+
+- **Setup:** Your precombat main. Your battlefield: Gristle Glutton, four Swamps, three Forests and two Islands.
+  Your hand: Champion of the Weird, Lys Alana Dignitary, Llanowar Elves, a second Gristle Glutton, Theorist's
+  Sanctum and Jace Beleren. Bob: Grizzly Bears and three lands.
+- **Do:** Cast Champion of the Weird and behold the Gristle Glutton in your hand. Cast Lys Alana Dignitary
+  choosing "Behold an Elf" and reveal Llanowar Elves. Play Theorist's Sanctum and behold Jace Beleren.
+- **Check:** Champion's behold offers both Gristle Gluttons — the one in your hand and the one on the
+  battlefield — and the chosen one is exiled (the log says you revealed it if it came from your hand); if
+  Champion later leaves, that card returns to your hand. Lys Alana Dignitary's cast menu offers "Behold an
+  Elf" and "Pay {2}"; beholding reveals Llanowar Elves, which stays in your hand. Theorist's Sanctum asks
+  whether to behold a Jace (choosing none is allowed) and enters untapped only if you do. Bob never sees
+  which hand cards were eligible, only the one revealed.
+- **Known limits:** A permanent beheld on the battlefield gets no log line of its own.

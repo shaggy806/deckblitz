@@ -331,11 +331,18 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
         ? 'Put them on the bottom in the order you pick: the last you pick goes on the very bottom'
         : `Choose ${cards} to put on the bottom of your library, in order: the last you pick goes on the very bottom`
     case 'exile':
-      return `Choose ${cards} to exile`
+      // "Behold an Elf and exile it" (the Champions, rule 701.4a).
+      return action.behold === true
+        ? `Behold and exile ${cards} — from your hand or a permanent you control`
+        : `Choose ${cards} to exile`
     case 'exile-playable':
       return `Choose ${cards} you may play`
     case 'exile-face-down':
       return `Choose ${cards} to exile face down`
+    case 'behold':
+      // Behold (rule 701.4a): nothing moves — a hand card is revealed, a
+      // permanent is just pointed at.
+      return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
     case 'manifest':
       // Manifest dread (rule 701.62a): the rest go to the graveyard.
       return `Manifest dread: choose ${cards} to put onto the battlefield face down as a 2/2 — the rest go to your graveyard`
@@ -5586,6 +5593,8 @@ function Table({
             max: zoneChoiceAction.max,
             eligible: zoneChoiceAction.eligible,
             onConfirm: confirmZoneChoice,
+            // An optional behold (Theorist's Sanctum): declining it isn't "putting" anything.
+            ...(zoneChoiceAction.behold === true ? { noneLabel: "Don't behold" } : {}),
             ...(zoneChoiceAction.together
               ? { fits: (picked: readonly ObjectId[]) => fitsTogether(zoneChoiceAction.together!, picked) }
               : {}),

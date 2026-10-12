@@ -104,6 +104,7 @@ import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
 import _poolEddieBrock from "../pool/eddie-brock.js";
 import _poolEldraziTemple from "../pool/eldrazi-temple.js";
 import _poolElsha from "../pool/elsha.js";
+import _poolElvenPassage from "../pool/elven-passage.js";
 import _poolElvesOfDeepShadow from "../pool/elves-of-deep-shadow.js";
 import _poolElvishChampion from "../pool/elvish-champion.js";
 import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
@@ -150,6 +151,7 @@ import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
 import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
+import _poolHulksThunderclap from "../pool/hulks-thunderclap.js";
 import _poolHullcarver from "../pool/hullcarver.js";
 import _poolHumanTorchJohnnyStorm from "../pool/human-torch-johnny-storm.js";
 import _poolHumbleTheBrute from "../pool/humble-the-brute.js";
@@ -355,6 +357,7 @@ import _tokensDemonToken from "../tokens/demon-token.js";
 import _tokensEldraziHorrorToken from "../tokens/eldrazi-horror-token.js";
 import _tokensGolemTrampleToken from "../tokens/golem-trample-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
+import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
@@ -462,6 +465,7 @@ const shard: CardShard = {
     _poolEddieBrock,
     _poolEldraziTemple,
     _poolElsha,
+    _poolElvenPassage,
     _poolElvesOfDeepShadow,
     _poolElvishChampion,
     _poolEmryLurkerOfTheLoch,
@@ -508,6 +512,7 @@ const shard: CardShard = {
     _poolHinataDawnCrowned,
     _poolHuatlisSnubhorn,
     _poolHulkbusterArmor,
+    _poolHulksThunderclap,
     _poolHullcarver,
     _poolHumanTorchJohnnyStorm,
     _poolHumbleTheBrute,
@@ -715,6 +720,7 @@ const shard: CardShard = {
     _tokensEldraziHorrorToken,
     _tokensGolemTrampleToken,
     _tokensHumanWarriorToken,
+    _tokensMerfolkTokenSilvergillMentor,
     _tokensPegasusToken22,
     _tokensSpiritToken,
     _tokensVillainToken,

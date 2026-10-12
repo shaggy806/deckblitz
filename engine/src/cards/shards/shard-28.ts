@@ -139,6 +139,7 @@ import _poolHiredPoisoner from "../pool/hired-poisoner.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
+import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
 import _poolIncineratingBlast from "../pool/incinerating-blast.js";
 import _poolIndustrialAdvancement from "../pool/industrial-advancement.js";
@@ -357,6 +358,7 @@ import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _tokensCouncilOfReeds from "../tokens/council-of-reeds.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
+import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
@@ -501,6 +503,7 @@ const shard: CardShard = {
     _poolHordewingSkaab,
     _poolHorizonCanopy,
     _poolHulkBrutalBrawler,
+    _poolHyperionsAtomicVision,
     _poolImpeccableTiming,
     _poolIncineratingBlast,
     _poolIndustrialAdvancement,
@@ -721,6 +724,7 @@ const shard: CardShard = {
   tokens: [
     _tokensCouncilOfReeds,
     _tokensElementalTokenWildfireAwakener,
+    _tokensElkToken,
     _tokensHumanMonkToken,
     _tokensKithkinToken,
     _tokensLotus,

@@ -173,6 +173,7 @@ import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
+import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
 import _poolMODOK from "../pool/m-o-d-o-k.js";
 import _poolMagebaneLizard from "../pool/magebane-lizard.js";
 import _poolMagicDamper from "../pool/magic-damper.js";
@@ -543,6 +544,7 @@ const shard: CardShard = {
     _poolLightningArmyOfOne,
     _poolLordOfTheUndead,
     _poolLushPortico,
+    _poolLysAlanaDignitary,
     _poolMODOK,
     _poolMagebaneLizard,
     _poolMagicDamper,

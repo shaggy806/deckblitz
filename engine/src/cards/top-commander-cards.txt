@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3518 already implemented / 1482 missing (marks refreshed 2026-10-12)
+3519 already implemented / 1481 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4082,7 +4082,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4089  Spawning Kraken                          {5}{U}           Creature — Kraken
 [ ]  4090  Banefire                                 {X}{R}           Sorcery
 [x]  4091  Eumidian Hatchery                        {0}              Land
-[ ]  4092  Champions of the Perfect                 {3}{G}           Creature — Elf Warrior
+[x]  4092  Champions of the Perfect                 {3}{G}           Creature — Elf Warrior
 [x]  4093  Lux Cannon                               {4}              Artifact
 [x]  4094  Honor-Worn Shaku                         {3}              Artifact
 [x]  4095  Aragorn, King of Gondor                  {1}{U}{R}{W}     Legendary Creature — Human Noble

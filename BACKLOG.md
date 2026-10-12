@@ -55,7 +55,7 @@ section keeps only what to do next.
 
 - **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill). `npm run cards:needs
   -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
-  6820–6886). The nine other starter precons' 31 stand-ins (`engine/data/sweep-3/PC-*.json`) go
+  6820–6886). The nine other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
   2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
@@ -68,11 +68,12 @@ section keeps only what to do next.
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
-  Secrets of Strixhaven (SOS) and Teenage Mutant Ninja Turtles (TMT) are done (batches 50–62).
-  **Next: the rest of Lorwyn Eclipsed** (ECL, 2026-01-23: 126 above the threshold; after batch
-  63, 76 done, 40 blocked, 10 left), then **a whole set per batch** (the user's call, 2026-10-12:
-  4-5 agents with more cards each). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
-  (61), blight (63) are built; behold now leads Lorwyn Eclipsed's blockers (four cards); Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
+  Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
+  Commander set (ECL, ECC) are done (batches 50–64). **Next: Avatar: The Last Airbender** (TLA,
+  2025-11-21: 30 left), then Marvel's Spider-Man (SPM, 41 left) — **a whole set per batch** (the
+  user's call, 2026-10-12: 4-5 agents with more cards each). Mayhem (56), rebound (57), teamwork
+  (58), the Nth-counter trigger (59), opus and sneak (61), blight (63) and behold (64) are built;
+  Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
   could now be read (`card:scaffold` drafts them).

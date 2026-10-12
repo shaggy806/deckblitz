@@ -190,6 +190,7 @@ import _poolMonsterMashup from "../pool/monster-mashup.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
+import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
@@ -572,6 +573,7 @@ const shard: CardShard = {
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,
+    _poolMudbuttonCursetosser,
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,

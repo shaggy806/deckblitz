@@ -40,6 +40,7 @@ import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
+import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
 import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
@@ -198,6 +199,7 @@ import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
+import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
@@ -368,6 +370,7 @@ const shard: CardShard = {
     _poolCarnivorousPlant,
     _poolCephalidFacetaker,
     _poolChainReaction,
+    _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
     _poolChargingPaladin,
     _poolChartACourse,
@@ -526,6 +529,7 @@ const shard: CardShard = {
     _poolOpposition,
     _poolOrazcaRaptor,
     _poolOrzhovSignet,
+    _poolOsseousExhale,
     _poolOvalchaseDragster,
     _poolOverwriteTheMultiverse,
     _poolParallelLives,

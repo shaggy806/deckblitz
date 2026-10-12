@@ -537,7 +537,8 @@ export interface GameObject {
      * would otherwise ask, and then `enchant` stays unset. */
     readonly enchantPlayer?: PlayerId;
     /** The card a reveal land's controller revealed from hand, or `null`
-     * for none (it enters tapped). */
+     * for none (it enters tapped) — or what a behold land's controller
+     * beheld (`tappedUnlessBehold`, rule 701.4a), a card or a permanent. */
     readonly reveal?: ObjectId | null;
     /** Riot's choice (rule 702.136a): an additional +1/+1 counter, or haste. */
     readonly riot?: "counter" | "haste";
@@ -1931,7 +1932,25 @@ export type AwaitingDecision =
         | "manifest"
         | "library-top"
         | "library-bottom"
-        | "graveyard";
+        | "graveyard"
+        | "behold";
+      /**
+       * A behold (rule 701.4a — `Game.beginBehold`): `ids` are cards in
+       * `player`'s hand and permanents they control, both at once, and the
+       * answer is carried out by `Game.applyBehold` rather than moved by
+       * `destination` — `"behold"`, or `"exile"` for "behold … and exile it"
+       * (linked through `exileLink`, rule 607.2q). A card chosen from the
+       * hand is revealed to every player. `then` (the first beheld object
+       * its target 0, applied from `source` with `x`) follows; `enterOf` is
+       * the land whose "you may behold" as it enters this asks
+       * (`tappedUnlessBehold`), which records the answer instead.
+       */
+      readonly behold?: {
+        readonly source: ObjectId;
+        readonly x: number;
+        readonly then?: EffectSpec;
+        readonly enterOf?: ObjectId;
+      };
       /**
        * Only an **order** is asked: every card in `ids` is picked, and the
        * order picked is where each goes (rule 401.4 — the owner arranges

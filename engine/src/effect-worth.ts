@@ -240,13 +240,23 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       const card = ctx.triggerObject !== undefined ? ctx.state.objects[ctx.triggerObject] : undefined;
       return card !== undefined && card.owner === ctx.controller ? onPlayers(you, CARD / 2, ctx) : 0;
     }
-    case "blight":
+    case "blight": {
       // -1/-1 counters on one of each blighting player's creatures (rule
       // 701.68a), and what your own blight's `then` does with the creature.
+      // "Target opponent blights 2": the player in that slot.
+      const who = effect.who ?? "you";
+      const slot = typeof who === "object" ? ctx.targets[who.target] : undefined;
+      const players =
+        typeof who !== "object" ? playersIn(who, ctx) : slot?.kind === "player" ? [slot.player] : null;
       return (
-        onPlayers(playersIn(effect.who ?? "you", ctx), -effect.amount, ctx) +
-        ((effect.who ?? "you") === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
+        onPlayers(players, -effect.amount, ctx) +
+        (who === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
       );
+    }
+    case "behold":
+      // Revealing a card or choosing a permanent costs nothing: what follows
+      // is the worth (rule 701.4a).
+      return effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0;
     case "sacrifice-source":
       return (
         onObjectRef("source", -CARD, ctx) +

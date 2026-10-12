@@ -57,6 +57,7 @@ import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
+import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
@@ -422,6 +423,7 @@ const shard: CardShard = {
     _poolBurstOfEnergy,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
+    _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
     _poolChangelingWayfinder,
     _poolChapelGeist,
