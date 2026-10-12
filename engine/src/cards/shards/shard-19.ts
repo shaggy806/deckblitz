@@ -72,6 +72,7 @@ import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
+import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
@@ -107,6 +108,7 @@ import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
+import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
 import _poolHibernationSliver from "../pool/hibernation-sliver.js";
 import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
@@ -123,6 +125,7 @@ import _poolInspiration from "../pool/inspiration.js";
 import _poolInspiredSphinx from "../pool/inspired-sphinx.js";
 import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
+import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
@@ -162,6 +165,7 @@ import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMeticulousArchive from "../pool/meticulous-archive.js";
+import _poolMidnightAngelArmor from "../pool/midnight-angel-armor.js";
 import _poolMindbladeRender from "../pool/mindblade-render.js";
 import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
@@ -374,6 +378,7 @@ const shard: CardShard = {
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
     _poolFalkenrathNoble,
+    _poolFantasticElasticity,
     _poolFellTheMighty,
     _poolFerventCharge,
     _poolFireLordZuko,
@@ -409,6 +414,7 @@ const shard: CardShard = {
     _poolHandOfSilumgar,
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
+    _poolHelmutZemoMastermind,
     _poolHibernationSliver,
     _poolHiddenVolcano,
     _poolHieroglyphicIllumination,
@@ -425,6 +431,7 @@ const shard: CardShard = {
     _poolInspiredSphinx,
     _poolInspiritFlagshipVessel,
     _poolIntangibleVirtue,
+    _poolInvisibleForceField,
     _poolIraxxaEmpressOfMars,
     _poolIronManModernMarvel,
     _poolIronrootTreefolk,
@@ -464,6 +471,7 @@ const shard: CardShard = {
     _poolMasterOfDarkRites,
     _poolMercilessExecutioner,
     _poolMeticulousArchive,
+    _poolMidnightAngelArmor,
     _poolMindbladeRender,
     _poolMineshaftSpider,
     _poolMirarisWake,

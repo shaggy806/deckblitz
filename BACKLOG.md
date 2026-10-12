@@ -66,11 +66,11 @@ section keeps only what to do next.
 - **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11): each
   set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
-  the walk. Reality Fracture (FRA), its Commander set (FRC) and The Hobbit (HOB) are done
-  (batches 50–54). **Next: the rest of Marvel Super Heroes Commander** (MSC, 2026-06-26: 193
-  above the threshold; after batch 56, 102 done, 50 blocked, 41 left), then Marvel Super
-  Heroes (MSH). Mayhem is built (batch 56); Norman Osborn still waits on granting it and on a
-  graveyard-cast cost reduction. Prepare is built: about 50 more Secrets of Strixhaven preparation
+  the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
+  Heroes Commander (MSC) are done (batches 50–57). **Next: the rest of Marvel Super Heroes**
+  (MSH, 2026-06-26: 135 above the threshold; after batch 57, 35 done, 14 blocked, 86 left).
+  Mayhem (batch 56) and rebound (batch 57) are built; Norman Osborn still waits on granting
+  mayhem and on a graveyard-cast cost reduction, Ojer Pakpatiq on granting rebound. Prepare is built: about 50 more Secrets of Strixhaven preparation
   cards below its threshold could now be read (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".

@@ -14090,6 +14090,7 @@ export class Game {
         adventure ||
         object.castVia === "flashback" ||
         object.castVia === "harmonize" ||
+        this.rebounds(object) ||
         this.exilesItselfInstead(object) ||
         object.exileIfWouldGoToGraveyard === true ||
         this.graveyardIsReplacedWithExile(id, false);
@@ -14129,6 +14130,8 @@ export class Game {
       if (def.shuffleIntoLibraryOnResolve) {
         this.moveObject(id, "library", { libraryPlacement: "shuffle" });
         this.shuffleLibraryOf(object.owner);
+      } else if (this.rebounds(object)) {
+        this.reboundAsItResolves(id);
       } else {
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
       }
@@ -14157,6 +14160,40 @@ export class Game {
       "next-end-step",
       { kind: "return-to-hand", target: 0, from: "exile" },
       "Return it to your hand at the beginning of the next end step.",
+      [{ kind: "object", object: id }],
+      ["exile"],
+    );
+  }
+
+  /** Whether rebound (rule 702.88a) applies to the resolving spell `object`:
+   * a card with rebound, cast from its owner's hand. */
+  private rebounds(object: GameObject): boolean {
+    return (
+      object.isCopy !== true &&
+      object.castFrom === "hand" &&
+      this.registry.get(printedCardName(object)).rebound
+    );
+  }
+
+  /** Rebound (rule 702.88a): the resolved spell `id` is exiled instead of put
+   * into its owner's graveyard, and at the beginning of its controller's next
+   * upkeep a delayed trigger lets them cast it from exile without paying its
+   * mana cost — an alternative cost (702.88b), timing ignored as it's cast
+   * while that trigger resolves (608.2g). The card must still be the one
+   * exiled (400.7). */
+  private reboundAsItResolves(id: ObjectId): void {
+    const object = this.state.objects[id];
+    const controller = object.controller;
+    const before = object.zoneChangeCount ?? 0;
+    this.moveObject(id, "exile");
+    object.targets = null;
+    if (object.zone !== "exile" || (object.zoneChangeCount ?? 0) === before) return;
+    this.createDelayedTrigger(
+      id,
+      controller,
+      "your-next-upkeep",
+      { kind: "cast-now", target: 0, free: true },
+      "Rebound — you may cast this card from exile without paying its mana cost.",
       [{ kind: "object", object: id }],
       ["exile"],
     );
@@ -14652,11 +14689,19 @@ export class Game {
   private pendingTriggerTurnKey(trigger: PendingTrigger): string | undefined {
     if (trigger.delayed !== undefined || trigger.reflexive !== undefined) return undefined;
     const granted = trigger.grantedAbility;
+    const source = this.state.objects[trigger.sourceObjectId];
+    // One ability written as two entries counts as one (`sameAbilityAs`), as
+    // `abilityTurnKey` does — "When ~ enters and whenever …, choose one that
+    // hasn't been chosen this turn" (The Fantastic Four).
+    const same =
+      !trigger.chapter && granted === undefined && source !== undefined
+        ? this.registry.get(printedCardName(source)).triggered[trigger.abilityIndex]?.sameAbilityAs
+        : undefined;
     const which =
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
-        : `${trigger.chapter ? "chapter" : "triggered"}:${trigger.abilityIndex}`;
-    return `${trigger.sourceObjectId}@${this.state.objects[trigger.sourceObjectId]?.timestamp ?? 0}#${which}`;
+        : `${trigger.chapter ? "chapter" : "triggered"}:${same ?? trigger.abilityIndex}`;
+    return `${trigger.sourceObjectId}@${source?.timestamp ?? 0}#${which}`;
   }
 
   private abilityTurnKey(object: GameObject): string | undefined {

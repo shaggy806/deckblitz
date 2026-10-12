@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3513 already implemented / 1487 missing (marks refreshed 2026-10-11)
+3516 already implemented / 1484 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -433,7 +433,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   434  Taiga                                    {0}              Land — Mountain Forest
 [x]   435  Tainted Wood                             {0}              Land
 [x]   436  Bident of Thassa                         {2}{U}{U}        Legendary Enchantment Artifact
-[ ]   437  Ephemerate                               {W}              Instant
+[x]   437  Ephemerate                               {W}              Instant
 [x]   438  Psychosis Crawler                        {5}              Artifact Creature — Phyrexian Horror
 [x]   439  Sram, Senior Edificer                    {1}{W}           Legendary Creature — Dwarf Advisor
 [x]   440  Unnatural Growth                         {1}{G}{G}{G}{G}  Enchantment
@@ -1759,7 +1759,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1766  Adaptive Automaton                       {3}              Artifact Creature — Construct
 [x]  1767  Supernatural Stamina                     {B}              Instant
 [x]  1768  Sunlit Marsh                             {0}              Land — Plains Swamp
-[ ]  1769  Quantum Misalignment                     {4}{U}           Sorcery
+[x]  1769  Quantum Misalignment                     {4}{U}           Sorcery
 [x]  1770  Ghalta and Mavren                        {3}{G}{G}{W}{W}  Legendary Creature — Dinosaur Vampire
 [x]  1771  Platinum Angel                           {7}              Artifact Creature — Angel
 [x]  1772  Extravagant Replication                  {4}{U}{U}        Enchantment
@@ -2697,7 +2697,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2704  Hyena Umbra                              {W}              Enchantment — Aura
 [ ]  2705  Cloudstone Curio                         {3}              Artifact
 [ ]  2706  Loading Zone                             {3}{G}           Enchantment
-[ ]  2707  Transpose                                {2}{B}           Instant
+[x]  2707  Transpose                                {2}{B}           Instant
 [x]  2708  Torrential Gearhulk                      {4}{U}{U}        Artifact Creature — Construct
 [ ]  2709  Thrakkus the Butcher                     {3}{R}{G}        Legendary Creature — Dragon Peasant
 [x]  2710  Bloodsoaked Insight // Sanguine Morass   {7}              Sorcery // Land

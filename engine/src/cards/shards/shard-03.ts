@@ -16,6 +16,7 @@ import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
+import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
 import _poolBeastWithin from "../pool/beast-within.js";
 import _poolBehemothSledge from "../pool/behemoth-sledge.js";
 import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
@@ -52,6 +53,7 @@ import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
+import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
@@ -62,6 +64,7 @@ import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEndlessOne from "../pool/endless-one.js";
+import _poolEphemerate from "../pool/ephemerate.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
@@ -98,11 +101,13 @@ import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
+import _poolHulkAlwaysAngry from "../pool/hulk-always-angry.js";
 import _poolIchorWellspring from "../pool/ichor-wellspring.js";
 import _poolImperiousPerfect from "../pool/imperious-perfect.js";
 import _poolInfiniteGuidelineStation from "../pool/infinite-guideline-station.js";
 import _poolInsomniaCrownCity from "../pool/insomnia-crown-city.js";
 import _poolIntoTheFloodMaw from "../pool/into-the-flood-maw.js";
+import _poolIntoTheTimeVortex from "../pool/into-the-time-vortex.js";
 import _poolIrrigationDitch from "../pool/irrigation-ditch.js";
 import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
@@ -229,6 +234,7 @@ import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
+import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
@@ -286,6 +292,7 @@ const shard: CardShard = {
     _poolAvacynAngelOfHope,
     _poolAvatarKyoshiEarthbender,
     _poolBakeIntoAPie,
+    _poolBaronStruckerHydraOverlord,
     _poolBeastWithin,
     _poolBehemothSledge,
     _poolBellowingAegisaur,
@@ -322,6 +329,7 @@ const shard: CardShard = {
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
     _poolDogmeatEverLoyal,
+    _poolDoombotHarbinger,
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
@@ -332,6 +340,7 @@ const shard: CardShard = {
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
     _poolEndlessOne,
+    _poolEphemerate,
     _poolErraticVisionary,
     _poolFaerieDuelist,
     _poolFanBearer,
@@ -368,11 +377,13 @@ const shard: CardShard = {
     _poolHengeOfRamos,
     _poolHourOfDefeat,
     _poolHowlingFury,
+    _poolHulkAlwaysAngry,
     _poolIchorWellspring,
     _poolImperiousPerfect,
     _poolInfiniteGuidelineStation,
     _poolInsomniaCrownCity,
     _poolIntoTheFloodMaw,
+    _poolIntoTheTimeVortex,
     _poolIrrigationDitch,
     _poolIsshinTwoHeavensAsOne,
     _poolIvyGleefulSpellthief,
@@ -499,6 +510,7 @@ const shard: CardShard = {
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,
     _poolTesharAncestorsApostle,
+    _poolTheFantasticFour,
     _poolTheGaffer,
     _poolTheIncredibleHulk,
     _poolTheScorpionGod,

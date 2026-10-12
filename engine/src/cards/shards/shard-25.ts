@@ -216,6 +216,7 @@ import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
 import _poolSandScout from "../pool/sand-scout.js";
 import _poolSandsower from "../pool/sandsower.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
+import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
@@ -262,6 +263,7 @@ import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
 import _poolUltimoCivilizationsEnd from "../pool/ultimo-civilizations-end.js";
 import _poolUltronDrone from "../pool/ultron-drone.js";
 import _poolUltronMachineOverlord from "../pool/ultron-machine-overlord.js";
+import _poolUndeadHandNinja from "../pool/undead-hand-ninja.js";
 import _poolUndercitySewers from "../pool/undercity-sewers.js";
 import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
@@ -513,6 +515,7 @@ const shard: CardShard = {
     _poolSandScout,
     _poolSandsower,
     _poolSarkhansUnsealing,
+    _poolSauronDinoDevotee,
     _poolScourgeOfFleets,
     _poolScuteSwarm,
     _poolSeasonOfRenewal,
@@ -559,6 +562,7 @@ const shard: CardShard = {
     _poolUltimoCivilizationsEnd,
     _poolUltronDrone,
     _poolUltronMachineOverlord,
+    _poolUndeadHandNinja,
     _poolUndercitySewers,
     _poolUndergroundSea,
     _poolUnleashFury,

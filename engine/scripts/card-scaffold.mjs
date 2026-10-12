@@ -182,6 +182,7 @@ function faceSource(face, ctx) {
     cycling: parsed.cycling,
     flashback: parsed.flashback,
     mayhem: parsed.mayhem,
+    rebound: parsed.rebound,
     convoke: parsed.convoke,
     morph: parsed.morph,
     disturb: parsed.disturb,

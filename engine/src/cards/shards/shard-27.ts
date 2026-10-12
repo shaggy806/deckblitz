@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAIMBot from "../pool/a-i-m-bot.js";
+import _poolAbominationIrradiatedBrute from "../pool/abomination-irradiated-brute.js";
 import _poolAdaptiveTrainingPost from "../pool/adaptive-training-post.js";
 import _poolAerieMystics from "../pool/aerie-mystics.js";
 import _poolAhriman from "../pool/ahriman.js";
@@ -23,6 +24,7 @@ import _poolBarbtoothWurm from "../pool/barbtooth-wurm.js";
 import _poolBattleHurda from "../pool/battle-hurda.js";
 import _poolBeskirShieldmate from "../pool/beskir-shieldmate.js";
 import _poolBitterbloomBearer from "../pool/bitterbloom-bearer.js";
+import _poolBlackPantherMostDangerous from "../pool/black-panther-most-dangerous.js";
 import _poolBladedPinions from "../pool/bladed-pinions.js";
 import _poolBladewingDeathlessTyrant from "../pool/bladewing-deathless-tyrant.js";
 import _poolBloodBairn from "../pool/blood-bairn.js";
@@ -154,6 +156,7 @@ import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
+import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNegate from "../pool/negate.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
@@ -291,6 +294,7 @@ import _poolZendikarsRoil from "../pool/zendikars-roil.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
+import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
@@ -300,6 +304,7 @@ import _tokensShrineToken from "../tokens/shrine-token.js";
 const shard: CardShard = {
   pool: [
     _poolAIMBot,
+    _poolAbominationIrradiatedBrute,
     _poolAdaptiveTrainingPost,
     _poolAerieMystics,
     _poolAhriman,
@@ -319,6 +324,7 @@ const shard: CardShard = {
     _poolBattleHurda,
     _poolBeskirShieldmate,
     _poolBitterbloomBearer,
+    _poolBlackPantherMostDangerous,
     _poolBladedPinions,
     _poolBladewingDeathlessTyrant,
     _poolBloodBairn,
@@ -450,6 +456,7 @@ const shard: CardShard = {
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
     _poolMosscoatGoriak,
+    _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNegate,
     _poolObsianusGolem,
@@ -589,6 +596,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensClownRobotToken,
+    _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,
     _tokensHumanToken,
     _tokensRaccoonToken,

@@ -197,6 +197,7 @@ import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
+import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRacersRing from "../pool/racers-ring.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
@@ -297,6 +298,7 @@ import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
 import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
 import _poolWhisperBloodLiturgist from "../pool/whisper-blood-liturgist.js";
+import _poolWiccanYoungAvenger from "../pool/wiccan-young-avenger.js";
 import _poolWildwoodRebirth from "../pool/wildwood-rebirth.js";
 import _poolWillowElf from "../pool/willow-elf.js";
 import _poolWindDancer from "../pool/wind-dancer.js";
@@ -510,6 +512,7 @@ const shard: CardShard = {
     _poolPrismaticOmen,
     _poolProwlersHelm,
     _poolPunkFrogs,
+    _poolQuantumMisalignment,
     _poolRacersRing,
     _poolRavenousRats,
     _poolRealmwalker,
@@ -610,6 +613,7 @@ const shard: CardShard = {
     _poolWeddingAnnouncement,
     _poolWelcomingVampire,
     _poolWhisperBloodLiturgist,
+    _poolWiccanYoungAvenger,
     _poolWildwoodRebirth,
     _poolWillowElf,
     _poolWindDancer,

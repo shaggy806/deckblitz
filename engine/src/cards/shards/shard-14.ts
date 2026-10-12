@@ -197,6 +197,7 @@ import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
+import _poolPymParticles from "../pool/pym-particles.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRegress from "../pool/regress.js";
@@ -488,6 +489,7 @@ const shard: CardShard = {
     _poolProwessOfTheFair,
     _poolProwlingCaracal,
     _poolPuppetMasterStringPuller,
+    _poolPymParticles,
     _poolRabbleRousing,
     _poolRakdosCharm,
     _poolRegress,

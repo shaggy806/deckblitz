@@ -208,6 +208,7 @@ import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
+import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
@@ -289,6 +290,7 @@ import _poolWindseekerCentaur from "../pool/windseeker-centaur.js";
 import _poolWindsweptHeath from "../pool/windswept-heath.js";
 import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
+import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolZephyrBoots from "../pool/zephyr-boots.js";
 import _poolZodiacTiger from "../pool/zodiac-tiger.js";
@@ -506,6 +508,7 @@ const shard: CardShard = {
     _poolRejuvenate,
     _poolRescuePepperPotts,
     _poolResentfulRevelation,
+    _poolReturnOfTheMoleMan,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
     _poolRiteOfReplication,
@@ -587,6 +590,7 @@ const shard: CardShard = {
     _poolWindsweptHeath,
     _poolWizardClass,
     _poolWizardsOfThay,
+    _poolWkabiShieldOfTheNation,
     _poolWordsOfWisdom,
     _poolZephyrBoots,
     _poolZodiacTiger,

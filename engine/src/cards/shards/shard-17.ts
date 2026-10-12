@@ -209,6 +209,7 @@ import _poolShock from "../pool/shock.js";
 import _poolShoreLurker from "../pool/shore-lurker.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
 import _poolSnarlingWolf from "../pool/snarling-wolf.js";
+import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
 import _poolSoulbladeDjinn from "../pool/soulblade-djinn.js";
@@ -501,6 +502,7 @@ const shard: CardShard = {
     _poolShoreLurker,
     _poolSkyshroudTroopers,
     _poolSnarlingWolf,
+    _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
     _poolSoulOfTheHarvest,
     _poolSoulbladeDjinn,

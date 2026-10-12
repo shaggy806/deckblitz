@@ -21,6 +21,7 @@ import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
+import _poolAvengersTower from "../pool/avengers-tower.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBallroom from "../pool/ballroom.js";
@@ -88,6 +89,7 @@ import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
 import _poolFesteringGoblin from "../pool/festering-goblin.js";
 import _poolFetidHeath from "../pool/fetid-heath.js";
+import _poolFeveredSuspicion from "../pool/fevered-suspicion.js";
 import _poolFirdochCore from "../pool/firdoch-core.js";
 import _poolFistOfSuns from "../pool/fist-of-suns.js";
 import _poolFlameJavelin from "../pool/flame-javelin.js";
@@ -310,6 +312,7 @@ const shard: CardShard = {
     _poolArmoredCancrix,
     _poolAtraxaPraetorsVoice,
     _poolAvatarRokuFirebender,
+    _poolAvengersTower,
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
     _poolBallroom,
@@ -377,6 +380,7 @@ const shard: CardShard = {
     _poolFellwarStone,
     _poolFesteringGoblin,
     _poolFetidHeath,
+    _poolFeveredSuspicion,
     _poolFirdochCore,
     _poolFistOfSuns,
     _poolFlameJavelin,

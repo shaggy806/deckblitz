@@ -282,6 +282,7 @@ import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
+import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
@@ -601,6 +602,7 @@ const shard: CardShard = {
     _poolTimberlandRuins,
     _poolToothOfRamos,
     _poolTorchDrake,
+    _poolTranspose,
     _poolTrenoDarkCity,
     _poolTwistedLandscape,
     _poolUnspeakableSymbol,

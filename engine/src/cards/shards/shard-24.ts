@@ -95,6 +95,7 @@ import _poolFilth from "../pool/filth.js";
 import _poolFinalShowdown from "../pool/final-showdown.js";
 import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
+import _poolFlameOn from "../pool/flame-on.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
@@ -286,6 +287,7 @@ import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
+import _tokensRhinoToken from "../tokens/rhino-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
 import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
 
@@ -383,6 +385,7 @@ const shard: CardShard = {
     _poolFinalShowdown,
     _poolFireElemental,
     _poolFireball,
+    _poolFlameOn,
     _poolFootSoldiers,
     _poolFrontierGuide,
     _poolGadwickTheWizened,
@@ -576,6 +579,7 @@ const shard: CardShard = {
     _tokensFrogLizardToken,
     _tokensHeroToken,
     _tokensPestToken,
+    _tokensRhinoToken,
     _tokensSquidToken,
     _tokensStormCrowToken,
   ],

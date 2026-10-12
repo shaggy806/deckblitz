@@ -191,6 +191,7 @@ import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
+import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
@@ -499,6 +500,7 @@ const shard: CardShard = {
     _poolOperaLoveSong,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
+    _poolPeggyCarterSecretAgent,
     _poolPermissionDenied,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,

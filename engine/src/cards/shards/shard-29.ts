@@ -263,6 +263,7 @@ import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
 import _poolVictimize from "../pool/victimize.js";
 import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
+import _poolVillainousHideout from "../pool/villainous-hideout.js";
 import _poolVirtueOfCourage from "../pool/virtue-of-courage.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
@@ -272,6 +273,7 @@ import _poolWeaponizeTheMonsters from "../pool/weaponize-the-monsters.js";
 import _poolWeatherlight from "../pool/weatherlight.js";
 import _poolWeightOfTheUnderworld from "../pool/weight-of-the-underworld.js";
 import _poolWharfInfiltrator from "../pool/wharf-infiltrator.js";
+import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
@@ -288,6 +290,7 @@ import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-hor
 import _tokensRatToken from "../tokens/rat-token.js";
 import _tokensSaprolingToken from "../tokens/saproling-token.js";
 import _tokensSpawnToken from "../tokens/spawn-token.js";
+import _tokensWallTokenTheFantasticFour from "../tokens/wall-token-the-fantastic-four.js";
 
 const shard: CardShard = {
   pool: [
@@ -551,6 +554,7 @@ const shard: CardShard = {
     _poolViciousConquistador,
     _poolVictimize,
     _poolVigorbloomAnnex,
+    _poolVillainousHideout,
     _poolVirtueOfCourage,
     _poolVoicelessSpirit,
     _poolVoloGuideToMonsters,
@@ -560,6 +564,7 @@ const shard: CardShard = {
     _poolWeatherlight,
     _poolWeightOfTheUnderworld,
     _poolWharfInfiltrator,
+    _poolWhiteWidowYelenaBelova,
     _poolWildRide,
     _poolWithstandDeath,
     _poolWortBoggartAuntie,
@@ -578,6 +583,7 @@ const shard: CardShard = {
     _tokensRatToken,
     _tokensSaprolingToken,
     _tokensSpawnToken,
+    _tokensWallTokenTheFantasticFour,
   ],
 };
 

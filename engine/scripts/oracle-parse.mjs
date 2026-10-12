@@ -1219,6 +1219,7 @@ export function parseFace(face, ctx = {}) {
     }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
+    if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }

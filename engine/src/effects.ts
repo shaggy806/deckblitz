@@ -7363,7 +7363,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // it last existed: its last controller draws and discards, and nothing
       // gets a counter (rule 701.50b). A context that only reads it (a
       // `for-each-convoker`'s) says which it was.
-      const read = target ?? (typeof spec.target === "number" ? ctx.readTargets?.[spec.target] : undefined);
+      // A source or trigger object that has left is read the same way (M.O.D.O.K.,
+      // killed in response to his own connive).
+      const read =
+        target ??
+        (typeof spec.target === "number"
+          ? ctx.readTargets?.[spec.target]
+          : spec.target === "source"
+            ? { kind: "object" as const, object: ctx.source }
+            : ctx.triggerObject !== undefined
+              ? { kind: "object" as const, object: ctx.triggerObject }
+              : undefined);
       if (read?.kind !== "object") return;
       if (spec.discardsSince === undefined) {
         const player = ctx.controllerOf(read);

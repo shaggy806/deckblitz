@@ -79,6 +79,7 @@ import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
+import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
@@ -86,6 +87,7 @@ import _poolGorgonFlail from "../pool/gorgon-flail.js";
 import _poolGravelighter from "../pool/gravelighter.js";
 import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
+import _poolGrimReapersScythe from "../pool/grim-reapers-scythe.js";
 import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
@@ -243,6 +245,7 @@ import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
+import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
@@ -355,6 +358,7 @@ const shard: CardShard = {
     _poolGhoulcallersAccomplice,
     _poolGiftOfStrands,
     _poolGlareOfSubdual,
+    _poolGleamingBastion,
     _poolGoblinRaider,
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
@@ -362,6 +366,7 @@ const shard: CardShard = {
     _poolGravelighter,
     _poolGrenzoHavocRaiser,
     _poolGrimGuardian,
+    _poolGrimReapersScythe,
     _poolGrowingRitesOfItlimoc,
     _poolGuttersnipe,
     _poolHarrierGriffin,
@@ -519,6 +524,7 @@ const shard: CardShard = {
     _poolTurbulentShore,
     _poolTwiceTheRage,
     _poolTwilightPanther,
+    _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,

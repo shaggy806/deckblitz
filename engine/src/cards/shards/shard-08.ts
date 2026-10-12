@@ -130,6 +130,7 @@ import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
 import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
+import _poolJenniferWalters from "../pool/jennifer-walters.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
@@ -171,6 +172,7 @@ import _poolMosswortBridge from "../pool/mosswort-bridge.js";
 import _poolMountainBandit from "../pool/mountain-bandit.js";
 import _poolMysticRetrieval from "../pool/mystic-retrieval.js";
 import _poolMythicProportions from "../pool/mythic-proportions.js";
+import _poolNamorScourgeOfTheSeas from "../pool/namor-scourge-of-the-seas.js";
 import _poolNaturesClaim from "../pool/natures-claim.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
@@ -424,6 +426,7 @@ const shard: CardShard = {
     _poolJayemdaeTome,
     _poolJazalGoldmane,
     _poolJechtReluctantGuardian,
+    _poolJenniferWalters,
     _poolJonIrenicusShatteredOne,
     _poolJwariScuttler,
     _poolKabiraTakedown,
@@ -465,6 +468,7 @@ const shard: CardShard = {
     _poolMountainBandit,
     _poolMysticRetrieval,
     _poolMythicProportions,
+    _poolNamorScourgeOfTheSeas,
     _poolNaturesClaim,
     _poolNecroduality,
     _poolNevinyrralsDisk,

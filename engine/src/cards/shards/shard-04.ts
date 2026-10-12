@@ -251,6 +251,8 @@ import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
+import _poolTheSensationalSheHulk from "../pool/the-sensational-she-hulk.js";
+import _poolTheVision from "../pool/the-vision.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
 import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
@@ -550,6 +552,8 @@ const shard: CardShard = {
     _poolTerminate,
     _poolTheLordOfTheEagles,
     _poolTheReaperKingNoMore,
+    _poolTheSensationalSheHulk,
+    _poolTheVision,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
     _poolThorGuardianOfMidgard,

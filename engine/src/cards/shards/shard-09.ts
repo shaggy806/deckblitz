@@ -18,6 +18,7 @@ import _poolArgivianArchaeologist from "../pool/argivian-archaeologist.js";
 import _poolArwenMortalQueen from "../pool/arwen-mortal-queen.js";
 import _poolArwenWeaverOfHope from "../pool/arwen-weaver-of-hope.js";
 import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
+import _poolAsgardianInspiration from "../pool/asgardian-inspiration.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
@@ -43,6 +44,7 @@ import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
+import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
@@ -135,6 +137,7 @@ import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
+import _poolMODOK from "../pool/m-o-d-o-k.js";
 import _poolMagebaneLizard from "../pool/magebane-lizard.js";
 import _poolMagicDamper from "../pool/magic-damper.js";
 import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
@@ -286,6 +289,7 @@ import _poolZofShade from "../pool/zof-shade.js";
 import _tokensArmyToken from "../tokens/army-token.js";
 import _tokensAssassinToken from "../tokens/assassin-token.js";
 import _tokensBirdTokenHermesOverseerOfElpis from "../tokens/bird-token-hermes-overseer-of-elpis.js";
+import _tokensDoombot from "../tokens/doombot.js";
 import _tokensElementalTokenAllColors from "../tokens/elemental-token-all-colors.js";
 import _tokensElephantToken from "../tokens/elephant-token.js";
 import _tokensForestDryadToken from "../tokens/forest-dryad-token.js";
@@ -313,6 +317,7 @@ const shard: CardShard = {
     _poolArwenMortalQueen,
     _poolArwenWeaverOfHope,
     _poolAsgardianCitadel,
+    _poolAsgardianInspiration,
     _poolAshlingRekindled,
     _poolAspiringAeronaut,
     _poolAuraMutation,
@@ -338,6 +343,7 @@ const shard: CardShard = {
     _poolBreathOfMalfegor,
     _poolBurglarRat,
     _poolBushmasterCoiledHenchman,
+    _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCharmingPrince,
@@ -430,6 +436,7 @@ const shard: CardShard = {
     _poolLightningArmyOfOne,
     _poolLordOfTheUndead,
     _poolLushPortico,
+    _poolMODOK,
     _poolMagebaneLizard,
     _poolMagicDamper,
     _poolMagusOfTheWheel,
@@ -583,6 +590,7 @@ const shard: CardShard = {
     _tokensArmyToken,
     _tokensAssassinToken,
     _tokensBirdTokenHermesOverseerOfElpis,
+    _tokensDoombot,
     _tokensElementalTokenAllColors,
     _tokensElephantToken,
     _tokensForestDryadToken,

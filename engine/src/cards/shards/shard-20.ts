@@ -83,6 +83,7 @@ import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDispel from "../pool/dispel.js";
+import _poolDistortionStrike from "../pool/distortion-strike.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
 import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
@@ -130,6 +131,7 @@ import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
+import _poolHeroesForHire from "../pool/heroes-for-hire.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
@@ -389,6 +391,7 @@ const shard: CardShard = {
     _poolDelayedBlastFireball,
     _poolDimirLocket,
     _poolDispel,
+    _poolDistortionStrike,
     _poolDonatelloWayWithMachines,
     _poolDoraMilajeElite,
     _poolDoubleCleave,
@@ -436,6 +439,7 @@ const shard: CardShard = {
     _poolHawkeyeTrickShot,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
+    _poolHeroesForHire,
     _poolHowlingMine,
     _poolHulkingOgre,
     _poolHypnoticSprite,

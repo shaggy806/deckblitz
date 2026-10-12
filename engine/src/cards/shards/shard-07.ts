@@ -99,6 +99,7 @@ import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
 import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
+import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
@@ -109,6 +110,7 @@ import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
+import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJetmirsGarden from "../pool/jetmirs-garden.js";
 import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
@@ -409,6 +411,7 @@ const shard: CardShard = {
     _poolHeartwoodGiant,
     _poolHerculesPrinceOfPower,
     _poolHermiticNautilus,
+    _poolHiddenLair,
     _poolHiddenNecropolis,
     _poolHighlandLake,
     _poolHydraBroodmaster,
@@ -419,6 +422,7 @@ const shard: CardShard = {
     _poolInordinateRage,
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,
+    _poolItsClobberinTime,
     _poolJetmirsGarden,
     _poolJwariRuins,
     _poolKabiraPlateau,

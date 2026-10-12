@@ -25,6 +25,7 @@ import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrowWitches from "../pool/barrow-witches.js";
+import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
 import _poolBloodPact from "../pool/blood-pact.js";
@@ -104,6 +105,7 @@ import _poolFurnaceWhelp from "../pool/furnace-whelp.js";
 import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
+import _poolGatheringPlace from "../pool/gathering-place.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
@@ -315,6 +317,7 @@ const shard: CardShard = {
     _poolBagOfHolding,
     _poolBardHeirOfGirion,
     _poolBarrowWitches,
+    _poolBaxterBuilding,
     _poolBiteDown,
     _poolBlazemireVerge,
     _poolBloodPact,
@@ -394,6 +397,7 @@ const shard: CardShard = {
     _poolFyndhornBrownie,
     _poolGalewindMoose,
     _poolGarnaBloodfistOfKeld,
+    _poolGatheringPlace,
     _poolGiantsBoulder,
     _poolGiftOfParadise,
     _poolGoblinBalloonBrigade,

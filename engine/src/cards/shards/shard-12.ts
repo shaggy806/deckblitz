@@ -258,6 +258,7 @@ import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
 import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
 import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
+import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
@@ -553,6 +554,7 @@ const shard: CardShard = {
     _poolThunderscapeApprentice,
     _poolTillAndTend,
     _poolTormentingVoice,
+    _poolTrainingCompound,
     _poolTrevasAttendant,
     _poolTwincast,
     _poolTyrantGuard,

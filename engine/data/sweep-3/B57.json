@@ -1,0 +1,515 @@
+{
+ "batch": "B57",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes Commander (MSC, 2026-06-26): top 50% by EDHREC rank, its last 41; Marvel Super Heroes (MSH, 2026-06-26): its first 19; with rebound built (rule 702.88) and the rebound cards it unblocked (Ephemerate, Transpose, Quantum Misalignment and more)",
+ "authored": [
+  {
+   "name": "White Widow, Yelena Belova",
+   "files": [
+    "engine/src/cards/pool/white-widow-yelena-belova.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hulk, Always Angry",
+   "files": [
+    "engine/src/cards/pool/hulk-always-angry.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Midnight Angel Armor",
+   "files": [
+    "engine/src/cards/pool/midnight-angel-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Fantasticar",
+   "files": [
+    "engine/src/cards/pool/the-fantasticar.ts",
+    "engine/src/cards/tokens/construct-token-the-fantasticar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return of the Mole Man",
+   "files": [
+    "engine/src/cards/pool/return-of-the-mole-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Panther, Most Dangerous",
+   "files": [
+    "engine/src/cards/pool/black-panther-most-dangerous.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America, Unbowed",
+   "files": [
+    "engine/src/cards/pool/captain-america-unbowed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Helmut Zemo, Mastermind",
+   "files": [
+    "engine/src/cards/pool/helmut-zemo-mastermind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Asgardian Inspiration",
+   "files": [
+    "engine/src/cards/pool/asgardian-inspiration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Songbird, Sonic Screamer",
+   "files": [
+    "engine/src/cards/pool/songbird-sonic-screamer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Namor, Scourge of the Seas",
+   "files": [
+    "engine/src/cards/pool/namor-scourge-of-the-seas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undead Hand Ninja",
+   "files": [
+    "engine/src/cards/pool/undead-hand-ninja.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Reaper's Scythe",
+   "files": [
+    "engine/src/cards/pool/grim-reapers-scythe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "W'Kabi, Shield of the Nation",
+   "files": [
+    "engine/src/cards/pool/wkabi-shield-of-the-nation.ts",
+    "engine/src/cards/tokens/rhino-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doombot Harbinger",
+   "files": [
+    "engine/src/cards/pool/doombot-harbinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Abomination, Irradiated Brute",
+   "files": [
+    "engine/src/cards/pool/abomination-irradiated-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sauron, Dino Devotee",
+   "files": [
+    "engine/src/cards/pool/sauron-dino-devotee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Green Goblin, Back for More",
+   "files": [
+    "engine/src/cards/pool/green-goblin-back-for-more.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wiccan, Young Avenger",
+   "files": [
+    "engine/src/cards/pool/wiccan-young-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroes for Hire",
+   "files": [
+    "engine/src/cards/pool/heroes-for-hire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Peggy Carter, Secret Agent",
+   "files": [
+    "engine/src/cards/pool/peggy-carter-secret-agent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nakia, Wakandan Operative",
+   "files": [
+    "engine/src/cards/pool/nakia-wakandan-operative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quantum Entanglement",
+   "files": [
+    "engine/src/cards/pool/quantum-entanglement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultron's Auxiliary",
+   "files": [
+    "engine/src/cards/pool/ultrons-auxiliary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fevered Suspicion",
+   "files": [
+    "engine/src/cards/pool/fevered-suspicion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gleaming Bastion",
+   "files": [
+    "engine/src/cards/pool/gleaming-bastion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Lair",
+   "files": [
+    "engine/src/cards/pool/hidden-lair.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gathering Place",
+   "files": [
+    "engine/src/cards/pool/gathering-place.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Training Compound",
+   "files": [
+    "engine/src/cards/pool/training-compound.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Avengers Tower",
+   "files": [
+    "engine/src/cards/pool/avengers-tower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Villainous Hideout",
+   "files": [
+    "engine/src/cards/pool/villainous-hideout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baxter Building",
+   "files": [
+    "engine/src/cards/pool/baxter-building.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Castle Doom",
+   "files": [
+    "engine/src/cards/pool/castle-doom.ts",
+    "engine/src/cards/tokens/doombot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Vision",
+   "files": [
+    "engine/src/cards/pool/the-vision.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jennifer Walters // The Sensational She-Hulk",
+   "files": [
+    "engine/src/cards/pool/jennifer-walters.ts",
+    "engine/src/cards/pool/the-sensational-she-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vision of Love",
+   "files": [
+    "engine/src/cards/pool/vision-of-love.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pym Particles",
+   "files": [
+    "engine/src/cards/pool/pym-particles.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "M.O.D.O.K.",
+   "files": [
+    "engine/src/cards/pool/m-o-d-o-k.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baron Strucker, HYDRA Overlord",
+   "files": [
+    "engine/src/cards/pool/baron-strucker-hydra-overlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Fantastic Four",
+   "files": [
+    "engine/src/cards/pool/the-fantastic-four.ts",
+    "engine/src/cards/tokens/wall-token-the-fantastic-four.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame On!",
+   "files": [
+    "engine/src/cards/pool/flame-on.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ephemerate",
+   "files": [
+    "engine/src/cards/pool/ephemerate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quantum Misalignment",
+   "files": [
+    "engine/src/cards/pool/quantum-misalignment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Distortion Strike",
+   "files": [
+    "engine/src/cards/pool/distortion-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invisible Force Field",
+   "files": [
+    "engine/src/cards/pool/invisible-force-field.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fantastic Elasticity",
+   "files": [
+    "engine/src/cards/pool/fantastic-elasticity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "It's Clobberin' Time!",
+   "files": [
+    "engine/src/cards/pool/its-clobberin-time.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Into the Time Vortex",
+   "files": [
+    "engine/src/cards/pool/into-the-time-vortex.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Transpose",
+   "files": [
+    "engine/src/cards/pool/transpose.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Wakanda Forever!",
+   "needs": [
+    "effect:look-and-choose-enters-with-counters"
+   ],
+   "why": "look-and-choose can't put its battlefield pick onto the battlefield WITH an indestructible counter; a `then` add-counter lands after the card's entry is announced, so enters triggers wouldn't see it (put-onto-battlefield's withCounters adds them before the announce)."
+  },
+  {
+   "name": "Silver Surfer, Cosmic Voyager",
+   "needs": [
+    "effect:flicker-lands-return-tapped"
+   ],
+   "why": "flicker's `tapped` returns everything tapped; 'If a land enters this way, it enters tapped' needs tapped-by-type on the batched end-step return, and splitting per target breaks the simultaneous exile/return."
+  },
+  {
+   "name": "Namor, Atlantean King",
+   "needs": [
+    "trigger:attacks-player-with-more-life-than-you",
+    "condition:filter-attacking-same-player"
+   ],
+   "why": "No attacks-trigger gate for 'a player who has more life than you' (defenderLife has only most / more-than-another-opponent), and no filter for 'creatures attacking that player'."
+  },
+  {
+   "name": "Hyperion, Supreme Hero",
+   "needs": [
+    "replacement:prevent-all-but-n-damage",
+    "replacement:damage-prevented-to-filter"
+   ],
+   "why": "would-deal-damage has only full `prevent`; no 'prevent all but 1', and `to` can't say 'you or a Hero you control'."
+  },
+  {
+   "name": "Queen Mother Ramonda",
+   "needs": [
+    "static:cant-attack-you-player-only"
+   ],
+   "why": "cantAttackController is 'can't attack you or planeswalkers you control'; Ramonda's 'can't attack you' leaves your planeswalkers attackable."
+  },
+  {
+   "name": "Power Pack",
+   "needs": [
+    "effect:random-target"
+   ],
+   "why": "'exile target instant or sorcery card from your graveyard chosen at random' is a target picked at random as the trigger goes on the stack; choose-random-card picks at resolution and isn't targeted (respondable knowledge, fizzling differ)."
+  },
+  {
+   "name": "Astonishing Spider-Man",
+   "needs": [
+    "stat:cards-discarded-this-turn"
+   ],
+   "why": "No turn stat for cards you've discarded this turn (the draw count includes discards earlier in the turn, not just the hand discarded now)."
+  },
+  {
+   "name": "Captain America, Liberator",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "'for each Equipment attached to him' needs an amount counting Equipment attached to the source; countOf's attachedTo can't name the source, and equipmentAttached is only a NumCompare"
+  },
+  {
+   "name": "Hawkeye, Avenging Archer",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "'if Hawkeye dealt damage to it this turn': damagedThisTurnBy filters by type/subtype/controller only, never this source"
+  },
+  {
+   "name": "Karolina Dean, Runaway",
+   "needs": [
+    "cost:mana-restriction-not-from-hand"
+   ],
+   "why": "'This mana can't be spent to cast spells from your hand': notSpell's castFrom can't match a card still in hand at payment time"
+  },
+  {
+   "name": "Immortus, Master of Eternity",
+   "needs": [
+    "effect:shuffle-hand-and-graveyard-into-library"
+   ],
+   "why": "power-up's 'each player shuffles their hand and graveyard into their library' has no effect kind (the mana ability itself is authorable)"
+  },
+  {
+   "name": "Mysterio's Mirage",
+   "needs": [
+    "stat:cards-discarded-this-turn"
+   ],
+   "why": "'if you discarded a card this turn' has no turn stat or condition"
+  },
+  {
+   "name": "Vulture, Feathered Fiend",
+   "needs": [
+    "effect:damage-batch-those-creatures"
+   ],
+   "why": "deals-damage-batch gives no reference to the creatures in the batch for 'put a +1/+1 counter on each of those creatures'"
+  },
+  {
+   "name": "M'Baku, Jabari Chieftain",
+   "needs": [
+    "effect:target-player-becomes-monarch",
+    "condition:no-monarch",
+    "trigger:attacks-the-monarch"
+   ],
+   "why": "become-monarch takes no target, no 'if there is no monarch' condition, and no attacks trigger keyed to the defending player being the monarch"
+  },
+  {
+   "name": "Hulk's Thunderclap",
+   "needs": [
+    "keyword:behold"
+   ],
+   "why": "optional 'behold a Gamma creature' additional cost and its 'if this spell's additional cost was paid' aren't modeled"
+  },
+  {
+   "name": "World at War",
+   "needs": [
+    "effect:additional-combat-after-main"
+   ],
+   "why": "rebound is built now, but additional-combat can't be placed 'after the second main phase' (cast in upkeep via rebound or the first main) nor carry 'at the beginning of that combat, untap all creatures that attacked this turn'"
+  },
+  {
+   "name": "Ojer Pakpatiq, Deepest Epoch",
+   "needs": [
+    "effect:grant-rebound-to-spell"
+   ],
+   "why": "rebound is a printed card field only; nothing grants it to a spell on the stack from a cast trigger (the rest of the card looks authorable)"
+  },
+  {
+   "name": "Captain America, Living Legend",
+   "needs": [
+    "trigger:becomes-tapped-first-time-your-turn"
+   ],
+   "why": "'if it's the first time that creature has become tapped this turn' — becomes-tapped has no per-object first-time-this-turn clause and nothing tracks taps per object"
+  },
+  {
+   "name": "World War Hulk",
+   "needs": [
+    "effect:next-spell-free-this-turn"
+   ],
+   "why": "chapter I 'the next red or green creature spell you cast this turn can be cast without paying its mana cost' — player-effect's castFromHandFree is every spell from hand, not the next one from any zone; II and III are authorable (modify-pt powerOf/toughnessOf doubling)"
+  },
+  {
+   "name": "Thor, God of Thunder",
+   "needs": [
+    "zone:exile-target-play-until-next-turn"
+   ],
+   "why": "'exile target ... card from your graveyard. Until the end of your next turn, you may play that card' — exile's mayCast is cast-only (an MDFC's land face can't be played) with only end-of-turn/while-exiled durations"
+  },
+  {
+   "name": "Loki, God of Mischief",
+   "needs": [
+    "trigger:becomes-target-by-your-ability"
+   ],
+   "why": "'whenever a player or permanent becomes the target of an ability you control' — becomes-target watches permanents by their controller, has no abilities-only / targeter-is-you clause, and never fires for a player"
+  },
+  {
+   "name": "Leader, Super-Genius",
+   "needs": [
+    "replacement:connive-replacement"
+   ],
+   "why": "'If a creature you control would connive, instead you draw a card, then that creature connives' — no replacement on the connive event"
+  }
+ ]
+}

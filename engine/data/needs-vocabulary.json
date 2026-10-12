@@ -5486,6 +5486,58 @@
   "effect:colors-among-permanents-and-spells-cast": {
    "family": "effect:amount-new-variants",
    "example": "First Family: 'X is the number of colors among permanents you control and spells you've cast this turn' — colorsAmong reads battlefield permanents only."
+  },
+  "effect:flicker-lands-return-tapped": {
+   "family": "effect:flicker-generalized",
+   "example": "Silver Surfer, Cosmic Voyager"
+  },
+  "trigger:attacks-player-with-more-life-than-you": {
+   "family": "condition:defending-player-life-rank",
+   "example": "Namor, Atlantean King"
+  },
+  "condition:filter-attacking-same-player": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Namor, Atlantean King"
+  },
+  "static:cant-attack-you-player-only": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Queen Mother Ramonda"
+  },
+  "effect:random-target": {
+   "family": "effect:random-choice",
+   "example": "Power Pack"
+  },
+  "effect:count-equipment-attached-to-source": {
+   "family": "effect:amount-new-variants",
+   "example": "Captain America, Liberator: 'for each Equipment attached to him, create a 1/1 white Soldier' — an EffectAmount counting Equipment attached to the source"
+  },
+  "effect:damage-batch-those-creatures": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Vulture, Feathered Fiend: 'Whenever one or more creatures you control with flying deal combat damage to a player, put a +1/+1 counter on each of those creatures' — the batch's sources as an effect target"
+  },
+  "condition:no-monarch": {
+   "family": "condition:player-state-thresholds",
+   "example": "M'Baku, Jabari Chieftain: 'if there is no monarch' — the monarch condition is only who: you | opponent"
+  },
+  "effect:grant-rebound-to-spell": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "Ojer Pakpatiq, Deepest Epoch: 'Whenever you cast an instant spell from your hand, it gains rebound' — a cast trigger granting rebound to the triggering spell"
+  },
+  "effect:next-spell-free-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "World War Hulk I: 'The next red or green creature spell you cast this turn can be cast without paying its mana cost' — a one-use free-cast permission for the next matching spell, from any zone"
+  },
+  "zone:exile-target-play-until-next-turn": {
+   "family": "zone:impulse-permission-options",
+   "example": "Thor, God of Thunder: 'exile target Equipment, instant, or sorcery card from your graveyard. Until the end of your next turn, you may play that card' — exile's mayCast is cast-only, durations end-of-turn / while-exiled"
+  },
+  "trigger:becomes-target-by-your-ability": {
+   "family": "trigger:becomes-target-fixes",
+   "example": "Loki, God of Mischief: 'Whenever a player or permanent becomes the target of an ability you control' — any permanent or player, targeted by an ability (not a spell) whose controller is you"
+  },
+  "replacement:connive-replacement": {
+   "family": "replacement:new-event-replacements",
+   "example": "Leader, Super-Genius: 'If a creature you control would connive, instead you draw a card, then that creature connives'"
   }
  }
 }

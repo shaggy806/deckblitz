@@ -38,6 +38,7 @@ import _poolCabalStronghold from "../pool/cabal-stronghold.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
+import _poolCastleDoom from "../pool/castle-doom.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
@@ -340,6 +341,7 @@ const shard: CardShard = {
     _poolCallOfTheHerd,
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
+    _poolCastleDoom,
     _poolCatharticAdept,
     _poolCauldronFamiliar,
     _poolCelestialArmor,

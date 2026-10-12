@@ -118,6 +118,7 @@ import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
 import _poolGraveResearcher from "../pool/grave-researcher.js";
 import _poolGraveTitan from "../pool/grave-titan.js";
 import _poolGravenCairns from "../pool/graven-cairns.js";
+import _poolGreenGoblinBackForMore from "../pool/green-goblin-back-for-more.js";
 import _poolGruulCluestone from "../pool/gruul-cluestone.js";
 import _poolGruulNodorog from "../pool/gruul-nodorog.js";
 import _poolGuardianOfTheHalls from "../pool/guardian-of-the-halls.js";
@@ -440,6 +441,7 @@ const shard: CardShard = {
     _poolGraveResearcher,
     _poolGraveTitan,
     _poolGravenCairns,
+    _poolGreenGoblinBackForMore,
     _poolGruulCluestone,
     _poolGruulNodorog,
     _poolGuardianOfTheHalls,

@@ -185,6 +185,7 @@ import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
+import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
@@ -239,6 +240,7 @@ import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
+import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js";
 import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
@@ -261,6 +263,7 @@ import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
+import _poolVisionOfLove from "../pool/vision-of-love.js";
 import _poolVivienReid from "../pool/vivien-reid.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
@@ -468,6 +471,7 @@ const shard: CardShard = {
     _poolPsychicCorrosion,
     _poolPsychicFrog,
     _poolPulseTracker,
+    _poolQuantumEntanglement,
     _poolRampagingBaloths,
     _poolRavenousBaloth,
     _poolRavenousChupacabra,
@@ -522,6 +526,7 @@ const shard: CardShard = {
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
+    _poolTheFantasticar,
     _poolTheRestorationOfEiganjo,
     _poolTheSquadronSinister,
     _poolTheSurgicalBay,
@@ -544,6 +549,7 @@ const shard: CardShard = {
     _poolVerixBladewing,
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
+    _poolVisionOfLove,
     _poolVivienReid,
     _poolVrenTheRelentless,
     _poolWallOfEarth,

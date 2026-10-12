@@ -2123,6 +2123,14 @@ export interface CardDefinition {
    * a land play). `null` for a card without mayhem.
    */
   readonly mayhem: { readonly cost?: string } | null;
+  /**
+   * Rebound (rule 702.88) — an instant or sorcery cast from its owner's hand
+   * is exiled as it resolves instead of going to the graveyard, and at the
+   * beginning of its controller's next upkeep they may cast it from exile
+   * without paying its mana cost. Not as it's countered or doesn't resolve,
+   * and never for a copy (not cast from a hand).
+   */
+  readonly rebound: boolean;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -2438,6 +2446,7 @@ const PRINTED_ABILITY: {
   loyalty: false,
   flashback: (def) => def.flashback !== null,
   mayhem: (def) => def.mayhem !== null,
+  rebound: (def) => def.rebound,
   harmonize: (def) => def.harmonize !== null,
   foretell: (def) => def.foretell !== null,
   warp: (def) => def.warp !== null,
@@ -2592,6 +2601,7 @@ interface CardDraft {
   chooseOnEnter?: readonly string[];
   loyalty?: number;
   mayhem?: { readonly cost?: string };
+  rebound?: boolean;
   flashback?: {
     readonly cost: string;
     readonly payLife?: number;
@@ -2695,6 +2705,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     loyalty,
     flashback: draft.flashback ?? null,
     mayhem: draft.mayhem ?? null,
+    rebound: draft.rebound ?? false,
     harmonize: draft.harmonize ?? null,
     foretell: draft.foretell ?? null,
     warp: draft.warp ?? null,
