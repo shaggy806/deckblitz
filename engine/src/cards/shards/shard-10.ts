@@ -7,6 +7,7 @@ import _pool2Mace from "../pool/2-mace.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
+import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
@@ -185,6 +186,7 @@ import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
+import _poolPhotonLivingLight from "../pool/photon-living-light.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
 import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
@@ -261,6 +263,7 @@ import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
+import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
 import _poolTigereyeCameo from "../pool/tigereye-cameo.js";
@@ -322,6 +325,7 @@ const shard: CardShard = {
     _poolAbstergoEntertainment,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
+    _poolAgentPhilCoulson,
     _poolAmphinCutthroat,
     _poolAncestralCraving,
     _poolAncestralVengeance,
@@ -500,6 +504,7 @@ const shard: CardShard = {
     _poolOrcishSiegemaster,
     _poolPerimeterPatrol,
     _poolPersonify,
+    _poolPhotonLivingLight,
     _poolPiaAndKiranNalaar,
     _poolPilgrimsEye,
     _poolPinToTheEarth,
@@ -576,6 +581,7 @@ const shard: CardShard = {
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
     _poolTheSeriema,
+    _poolTheWondrousWasp,
     _poolThopterArchitect,
     _poolThoughtScour,
     _poolTigereyeCameo,

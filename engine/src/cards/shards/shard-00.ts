@@ -49,6 +49,7 @@ import _poolBurningOil from "../pool/burning-oil.js";
 import _poolBygoneColossus from "../pool/bygone-colossus.js";
 import _poolCageOfHands from "../pool/cage-of-hands.js";
 import _poolCalderaPyremaw from "../pool/caldera-pyremaw.js";
+import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
@@ -133,6 +134,7 @@ import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
+import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
@@ -369,6 +371,7 @@ const shard: CardShard = {
     _poolBygoneColossus,
     _poolCageOfHands,
     _poolCalderaPyremaw,
+    _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
@@ -453,6 +456,7 @@ const shard: CardShard = {
     _poolHaughtyDjinn,
     _poolHellkiteCourser,
     _poolHornetHarasser,
+    _poolHydraAssaultRobot,
     _poolIdentityEcho,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,

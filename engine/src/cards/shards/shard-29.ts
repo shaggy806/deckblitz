@@ -246,6 +246,7 @@ import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
+import _poolTheSentryGoldenGuardian from "../pool/the-sentry-golden-guardian.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
@@ -537,6 +538,7 @@ const shard: CardShard = {
     _poolTheFirstSliver,
     _poolTheMasterOfKeys,
     _poolTheQueenOfDale,
+    _poolTheSentryGoldenGuardian,
     _poolTheUrDragon,
     _poolTheWaspWinsomeAvenger,
     _poolThoughtCourier,

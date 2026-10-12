@@ -77,6 +77,7 @@ import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
+import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
 import _poolEerieInterlude from "../pool/eerie-interlude.js";
 import _poolElegantParlor from "../pool/elegant-parlor.js";
 import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
@@ -235,6 +236,7 @@ import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
+import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
@@ -250,6 +252,7 @@ import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolTifaLockhart from "../pool/tifa-lockhart.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
+import _poolTooEvilToStayDead from "../pool/too-evil-to-stay-dead.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
 import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
 import _poolTowerOfChampions from "../pool/tower-of-champions.js";
@@ -267,6 +270,7 @@ import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
+import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
@@ -368,6 +372,7 @@ const shard: CardShard = {
     _poolDragonspeakerShaman,
     _poolDreadReturn,
     _poolEastWindAvatar,
+    _poolEchoPerceptiveProdigy,
     _poolEerieInterlude,
     _poolElegantParlor,
     _poolElendaTheDuskRose,
@@ -526,6 +531,7 @@ const shard: CardShard = {
     _poolStoneskin,
     _poolStrokeOfGenius,
     _poolSummerBloom,
+    _poolSuperAdaptoid,
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSylvanSafekeeper,
@@ -541,6 +547,7 @@ const shard: CardShard = {
     _poolTifaLockhart,
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,
+    _poolTooEvilToStayDead,
     _poolTorchFiend,
     _poolTouchTheSpiritRealm,
     _poolTowerOfChampions,
@@ -558,6 +565,7 @@ const shard: CardShard = {
     _poolVaultOfCatlacan,
     _poolVesselOfParamnesia,
     _poolViashinoSpearhunter,
+    _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolWalkingAtlas,
     _poolWallOfMist,

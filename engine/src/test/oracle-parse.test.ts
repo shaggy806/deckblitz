@@ -382,6 +382,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Mayhem {4}{R}").mayhem).toEqual({ cost: "{4}{R}" });
     expect(face("Mayhem", "Land").mayhem).toEqual({});
     expect(face("Rebound", "Instant", {}).rebound).toBe(true);
+    expect(face("Teamwork 4", "Instant", {}).kicker).toEqual({ cost: "", keyword: "teamwork", teamwork: 4 });
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     const fab = face("Fabricate 2").triggered[0];

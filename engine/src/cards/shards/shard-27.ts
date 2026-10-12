@@ -156,6 +156,7 @@ import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
+import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNegate from "../pool/negate.js";
@@ -456,6 +457,7 @@ const shard: CardShard = {
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
     _poolMosscoatGoriak,
+    _poolMultiversalIncursion,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNegate,

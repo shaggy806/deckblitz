@@ -52,6 +52,7 @@ import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
+import _poolDoctorDoom from "../pool/doctor-doom.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
 import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
 import _poolDreadhound from "../pool/dreadhound.js";
@@ -328,6 +329,7 @@ const shard: CardShard = {
     _poolDiscipleOfTheOldWays,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
+    _poolDoctorDoom,
     _poolDogmeatEverLoyal,
     _poolDoombotHarbinger,
     _poolDreadhound,

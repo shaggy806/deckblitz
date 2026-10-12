@@ -1,0 +1,436 @@
+{
+ "batch": "B58",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes (MSH, 2026-06-26): top 50% by EDHREC rank, its next 60; with teamwork built (rule 702.194)",
+ "authored": [
+  {
+   "name": "Tony Stark // The Invincible Iron Man",
+   "files": [
+    "engine/src/cards/pool/tony-stark.ts",
+    "engine/src/cards/pool/the-invincible-iron-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "H.E.R.B.I.E. Scout Unit",
+   "files": [
+    "engine/src/cards/pool/h-e-r-b-i-e-scout-unit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kang, Temporal Tyrant",
+   "files": [
+    "engine/src/cards/pool/kang-temporal-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Sentry, Golden Guardian",
+   "files": [
+    "engine/src/cards/pool/the-sentry-golden-guardian.ts",
+    "engine/src/cards/tokens/the-void.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doctor Doom",
+   "files": [
+    "engine/src/cards/pool/doctor-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epic Fight",
+   "files": [
+    "engine/src/cards/pool/epic-fight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Hulk",
+   "files": [
+    "engine/src/cards/pool/red-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Multiversal Incursion",
+   "files": [
+    "engine/src/cards/pool/multiversal-incursion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent Phil Coulson",
+   "files": [
+    "engine/src/cards/pool/agent-phil-coulson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Training Regimen",
+   "files": [
+    "engine/src/cards/pool/training-regimen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ares, God of War",
+   "files": [
+    "engine/src/cards/pool/ares-god-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Echo, Perceptive Prodigy",
+   "files": [
+    "engine/src/cards/pool/echo-perceptive-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mighty Thor, Jane Foster",
+   "files": [
+    "engine/src/cards/pool/the-mighty-thor-jane-foster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Lad, Diverging Destiny",
+   "files": [
+    "engine/src/cards/pool/iron-lad-diverging-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Man, Master of Machines",
+   "files": [
+    "engine/src/cards/pool/iron-man-master-of-machines.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Restorative Technique",
+   "files": [
+    "engine/src/cards/pool/restorative-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America, Wings of Freedom",
+   "files": [
+    "engine/src/cards/pool/captain-america-wings-of-freedom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crossbones, Malicious Mercenary",
+   "files": [
+    "engine/src/cards/pool/crossbones-malicious-mercenary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "HYDRA Assault Robot",
+   "files": [
+    "engine/src/cards/pool/hydra-assault-robot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visions of Villainy",
+   "files": [
+    "engine/src/cards/pool/visions-of-villainy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Human Torch, Johnny Storm",
+   "files": [
+    "engine/src/cards/pool/human-torch-johnny-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Thing, Ben Grimm",
+   "files": [
+    "engine/src/cards/pool/the-thing-ben-grimm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Wondrous Wasp",
+   "files": [
+    "engine/src/cards/pool/the-wondrous-wasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daredevil, Man Without Fear",
+   "files": [
+    "engine/src/cards/pool/daredevil-man-without-fear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armor Wars",
+   "files": [
+    "engine/src/cards/pool/armor-wars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super-Adaptoid",
+   "files": [
+    "engine/src/cards/pool/super-adaptoid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hawkeye's Bow",
+   "files": [
+    "engine/src/cards/pool/hawkeyes-bow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "HULK SMASH!",
+   "files": [
+    "engine/src/cards/pool/hulk-smash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Go Nuts!",
+   "files": [
+    "engine/src/cards/pool/go-nuts.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "We Say Thee Nay!",
+   "files": [
+    "engine/src/cards/pool/we-say-thee-nay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth's Mightiest Heroes",
+   "files": [
+    "engine/src/cards/pool/earths-mightiest-heroes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Too Evil to Stay Dead",
+   "files": [
+    "engine/src/cards/pool/too-evil-to-stay-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madame Hydra",
+   "files": [
+    "engine/src/cards/pool/madame-hydra.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Monica Rambeau // Photon, Living Light",
+   "files": [
+    "engine/src/cards/pool/monica-rambeau.ts",
+    "engine/src/cards/pool/photon-living-light.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Taskmaster, Mercenary Mimic",
+   "needs": [
+    "effect:become-copy-of-card",
+    "effect:become-copy-until-your-next-turn"
+   ],
+   "why": "become-copy lasts only until end of turn and copies only a permanent; this targets a creature or a creature card in a graveyard and lasts until your next turn"
+  },
+  {
+   "name": "Hawkeye, Young Avenger",
+   "needs": [
+    "replacement:damage-plus-source-power"
+   ],
+   "why": "would-deal-damage's `plus` is a fixed number; 'plus X, where X is Hawkeye's power' needs a live amount"
+  },
+  {
+   "name": "Super-Soldier Serum",
+   "needs": [
+    "static:static-grant-supertype"
+   ],
+   "why": "'is a legendary Soldier in addition to its other types': no static adds a supertype"
+  },
+  {
+   "name": "Super Intelligence",
+   "needs": [
+    "trigger:attached-controller-step-begins"
+   ],
+   "why": "step-begins `who` is any/you/opponent only; no 'the upkeep of enchanted creature's controller' trigger, nor 'that player' for its draw"
+  },
+  {
+   "name": "Iron Man Armor",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "animate can't give the creature the static 'This creature gets +1/+1 for each artifact you control'; a one-shot modify-pt wouldn't track the count"
+  },
+  {
+   "name": "Kid Loki",
+   "needs": [
+    "condition:counters-put-by-you-this-turn"
+   ],
+   "why": "no filter for 'creature you've put one or more +1/+1 counters on this turn'"
+  },
+  {
+   "name": "Doc Samson, Super Psychiatrist",
+   "needs": [
+    "replacement:counter-addend-replacement"
+   ],
+   "why": "would-add-counter is a multiplier only; 'that many plus one of each kind' needs an addend"
+  },
+  {
+   "name": "Ironheart, Clever Champion",
+   "needs": [
+    "keyword:improvise"
+   ],
+   "why": "improvise isn't modeled, nor granting it to noncreature spells you cast"
+  },
+  {
+   "name": "The Scarlet Witch",
+   "needs": [
+    "cost:cost-reduction-source-power"
+   ],
+   "why": "CostReductionAmount has no 'this permanent's power'; reduceGeneric takes counts and aggregates over filters, none of which names the source alone"
+  },
+  {
+   "name": "Captain America, Super-Soldier",
+   "needs": [
+    "mechanic:shield-counters"
+   ],
+   "why": "shield counters (rule 122.1c) aren't modeled"
+  },
+  {
+   "name": "Doom Reigns Supreme",
+   "needs": [
+    "trigger:nth-counter-trigger",
+    "decision:cast-up-to-n-free"
+   ],
+   "why": "Plan: no 'when the Nth plan counter is put on this' trigger (counters-put fires on any put, no threshold crossing); and cast-now's repeat has no 'up to two' cap."
+  },
+  {
+   "name": "Claim the Kingdom",
+   "needs": [
+    "trigger:nth-counter-trigger"
+   ],
+   "why": "Plan: no 'when the fourth plan counter is put on this enchantment' trigger; the landfall half and the reflexive indestructible counter are otherwise expressible."
+  },
+  {
+   "name": "Construct a Cosmic Cube",
+   "needs": [
+    "trigger:nth-counter-trigger",
+    "mechanic:control-player"
+   ],
+   "why": "Plan: no Nth-counter trigger, and controlling an opponent during their next turn (Mindslaver) isn't modeled."
+  },
+  {
+   "name": "Namor the Sub-Mariner",
+   "needs": [
+    "effect:amount-mana-symbols-of-color-in-spell"
+   ],
+   "why": "'Create that many' = the number of blue mana symbols in the cast spell's mana cost: no amount (or filter) counts one colour's symbols in a trigger spell's cost; the */4 Merfolk CDA alone is fine."
+  },
+  {
+   "name": "Moonstone, Harsh Mistress",
+   "needs": [
+    "zone:exile-discarded-play-this-turn"
+   ],
+   "why": "Exiling the discarded card from the graveyard with a PLAY permission until the end of your next turn: exile's mayCast is cast-only and end-of-turn/while-exiled; impulse-exile only reads a library."
+  },
+  {
+   "name": "Attuma, Atlantean Warlord",
+   "needs": [
+    "trigger:attacks-player-filter"
+   ],
+   "why": "'Whenever one or more Merfolk you control attack a player' — attacks-player has no attacker filter, attacks-batch no player-only defender."
+  },
+  {
+   "name": "The Astonishing Ant-Man",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "'Remove any number of +1/+1 counters: create that many' — removeCounter is a fixed count."
+  },
+  {
+   "name": "The Serpent Society",
+   "needs": [
+    "decision:ward-poison-counters"
+   ],
+   "why": "Ward—Get five poison counters: WardCost has mana/life/sacrifice/discard only."
+  },
+  {
+   "name": "Heroic Feast",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "'choose up to that many target creatures you control' — a trigger's target count from its trigger value (life gained); any-number's max is only a number or a spell's X"
+  },
+  {
+   "name": "Avengers Assemble!",
+   "needs": [
+    "stat:attacked-with-filter-this-turn"
+   ],
+   "why": "'if you attacked with a Hero this turn' — the attackers turn stat has no filter (the entered-a-Hero half is turn-history 'entered')"
+  },
+  {
+   "name": "Baron Helmut Zemo",
+   "needs": [
+    "cost:exile-from-graveyard-mana-symbol-total",
+    "decision:cast-up-to-n-free"
+   ],
+   "why": "Boast cost exiles any number of black cards totalling fifteen or more {B} symbols; then casting up to three of the copies free (the connive trigger alone is authorable)"
+  },
+  {
+   "name": "Invisible Woman, Sue Storm",
+   "needs": [
+    "trigger:counters-put-batch"
+   ],
+   "why": "'one or more +1/+1 counters on one or more other Heroes' fires once per event; counters-put fires once per permanent, so a mass counter effect would make several Walls"
+  },
+  {
+   "name": "Call Damage Control",
+   "needs": [
+    "effect:modal-modes-one-instruction"
+   ],
+   "why": "the modes only choose targets and 'Return those cards' is one simultaneous move; castModal applies each mode separately, so a batched leaves-graveyard trigger (Desecrated Tomb) would fire twice"
+  },
+  {
+   "name": "Black Widow, Super Spy",
+   "needs": [
+    "zone:allow-cast-from-exile-spend-any-type"
+   ],
+   "why": "the card is already exiled by reveal-until; allow-cast-from-exile grants 'cast until end of turn' but has no 'mana of any type can be spent' (spendAs)"
+  },
+  {
+   "name": "Political Triumph",
+   "needs": [
+    "trigger:nth-counter-trigger"
+   ],
+   "why": "'When the fourth plan counter is put on this enchantment' — no trigger on the Nth counter crossing (counters-put + a self-counters intervening-if would also fire on the fifth)"
+  },
+  {
+   "name": "Nick Fury, Agent of S.H.I.E.L.D.",
+   "needs": [
+    "effect:look-and-choose-may-enter-transformed"
+   ],
+   "why": "'If it's a double-faced card, you may transform it' — look-and-choose to the battlefield has no player choice to enter transformed"
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-403 already implemented / 97 missing
+404 already implemented / 96 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -396,7 +396,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  390  Bilbo, Birthday Celebrant                       7415 decks  {W}{B}{G}        Legendary Creature — Halfling Rogue
 [x]  391  The Beamtown Bullies                            7406 decks  {1}{B}{R}{G}     Legendary Creature — Ogre Devil Warrior
 [x]  392  Pramikon, Sky Rampart                           7391 decks  {U}{R}{W}        Legendary Creature — Wall
-[ ]  393  Tony Stark                                      7376 decks  {1}{U}           Legendary Creature — Human Artificer Hero // Legendary Artifact Creature — Human Hero
+[x]  393  Tony Stark                                      7376 decks  {1}{U}           Legendary Creature — Human Artificer Hero // Legendary Artifact Creature — Human Hero
 [x]  394  Kiora, Sovereign of the Deep                    7371 decks  {3}{G}{U}        Legendary Creature — Merfolk Noble
 [x]  395  Azusa, Lost but Seeking                         7363 decks  {2}{G}           Legendary Creature — Human Monk
 [x]  396  Clive, Ifrit's Dominant                         7343 decks  {4}{R}{R}        Legendary Creature — Human Noble Warrior // Legendary Enchantment Creature — Saga Demon

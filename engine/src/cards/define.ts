@@ -1782,6 +1782,11 @@ export interface CastModalSpec {
    * control a commander as you cast this spell, you may choose both
    * instead." Asked of the card being cast, so `controls` reads its caster. */
   readonly maxModesIf?: { readonly condition: StaticCondition; readonly maxModes: number };
+  /** "Choose one. If this spell was cast using teamwork, choose both
+   * instead" (HULK SMASH!): exactly this many modes when the spell is kicked
+   * (its teamwork cost paid — `CardDefinition.kicker`), both chosen as it's
+   * cast (rule 601.2b). */
+  readonly kickedModes?: number;
   /**
    * Escalate (rule 702.120a): "For each mode you choose beyond the first as
    * you cast this spell, you pay an additional [cost]." This mana, once per
@@ -1950,7 +1955,17 @@ export interface CardDefinition {
      * permanent, whose gift is the `giftTrigger` helper. The opponent is
      * chosen as the cost is paid — see `GiftAsk`.
      */
-    readonly keyword?: "offspring" | "gift";
+    readonly keyword?: "offspring" | "gift" | "teamwork";
+    /**
+     * Teamwork N (rule 702.194a): "as an additional cost to cast this spell,
+     * you may tap any number of creatures you control with total power N or
+     * more" — with `keyword: "teamwork"` and `cost: ""`. The creatures are
+     * picked from the offer's `tapCost` (crew's `totalPower` form, summoning
+     * sick ones included), and "cast using teamwork" (702.194b) is the spell
+     * being kicked: `targets` / `effect` / `CastModalSpec.kickedModes` say
+     * what changes.
+     */
+    readonly teamwork?: number;
     /**
      * Multikicker (rule 702.33c): "you may pay an additional [cost] any
      * number of times as you cast this spell". The spell is offered once per
@@ -2564,7 +2579,8 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift";
+    readonly keyword?: "offspring" | "gift" | "teamwork";
+    readonly teamwork?: number;
     readonly multi?: boolean;
   };
   overload?: {

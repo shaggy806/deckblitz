@@ -59,6 +59,7 @@ import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
 import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
 import _poolCraterize from "../pool/craterize.js";
 import _poolCreakwoodLiege from "../pool/creakwood-liege.js";
+import _poolCrossbonesMaliciousMercenary from "../pool/crossbones-malicious-mercenary.js";
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
@@ -143,6 +144,7 @@ import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
 import _poolItThatHeraldsTheEnd from "../pool/it-that-heralds-the-end.js";
 import _poolJaceWielderOfMysteries from "../pool/jace-wielder-of-mysteries.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
+import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
@@ -382,6 +384,7 @@ const shard: CardShard = {
     _poolCourtOfGarenbrig,
     _poolCraterize,
     _poolCreakwoodLiege,
+    _poolCrossbonesMaliciousMercenary,
     _poolCruxOfFate,
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
@@ -466,6 +469,7 @@ const shard: CardShard = {
     _poolItThatHeraldsTheEnd,
     _poolJaceWielderOfMysteries,
     _poolJungleWeaver,
+    _poolKangTemporalTyrant,
     _poolKataraHeroicHealer,
     _poolKazanduValley,
     _poolKinjallisCaller,

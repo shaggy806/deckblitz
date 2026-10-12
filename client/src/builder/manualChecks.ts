@@ -2602,6 +2602,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'HULK SMASH!, Too Evil to Stay Dead',
+    board({
+      you: {
+        bf: ['Grizzly Bears', 'Hill Giant', 'Mountain*2', 'Swamp*3'],
+        hand: ['HULK SMASH!', 'Too Evil to Stay Dead'],
+        gy: ['Craw Wurm'],
+      },
+      opp: { bf: ['Grizzly Bears', 'Sol Ring', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Fíli the Pathfinder, Bifur, Melodic Rider',
     board({
       you: {

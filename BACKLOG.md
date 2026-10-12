@@ -68,8 +68,9 @@ section keeps only what to do next.
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
   Heroes Commander (MSC) are done (batches 50–57). **Next: the rest of Marvel Super Heroes**
-  (MSH, 2026-06-26: 135 above the threshold; after batch 57, 35 done, 14 blocked, 86 left).
-  Mayhem (batch 56) and rebound (batch 57) are built; Norman Osborn still waits on granting
+  (MSH, 2026-06-26: 135 above the threshold; after batch 58, 69 done, 40 blocked, 26 left).
+  Mayhem (batch 56), rebound (batch 57) and teamwork (batch 58) are built; the four MSH Plans and
+  Midnight Clock wait on "when the Nth counter is put on this" (`trigger:nth-counter-trigger`); Norman Osborn still waits on granting
   mayhem and on a graveyard-cast cost reduction, Ojer Pakpatiq on granting rebound. Prepare is built: about 50 more Secrets of Strixhaven preparation
   cards below its threshold could now be read (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,

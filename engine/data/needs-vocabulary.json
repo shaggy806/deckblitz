@@ -5538,6 +5538,61 @@
   "replacement:connive-replacement": {
    "family": "replacement:new-event-replacements",
    "example": "Leader, Super-Genius: 'If a creature you control would connive, instead you draw a card, then that creature connives'"
+  },
+  "keyword:teamwork": {
+   "example": "HULK SMASH!: 'Teamwork 4' — an optional additional cost of tapping creatures with total power 4 or more (built with its set, batch 58)."
+  },
+  "effect:become-copy-until-your-next-turn": {
+   "family": "effect:become-copy",
+   "example": "Taskmaster, Mercenary Mimic: 'until your next turn, Taskmaster becomes a copy of up to one target creature … or creature card in a graveyard' — become-copy's `until` is end-of-turn only"
+  },
+  "replacement:damage-plus-source-power": {
+   "family": "replacement:damage-modification",
+   "example": "Hawkeye, Young Avenger: 'it deals that much damage plus X, where X is Hawkeye's power' — `plus` is a fixed number"
+  },
+  "trigger:attached-controller-step-begins": {
+   "family": "effect:player-scope-extensions",
+   "example": "Super Intelligence: 'At the beginning of the upkeep of enchanted creature's controller, that player draws a card' — step-begins has no attached-controller subject or 'that player'"
+  },
+  "condition:counters-put-by-you-this-turn": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Kid Loki: 'Each creature you control that you've put one or more +1/+1 counters on this turn has hexproof' — no per-permanent counters-put-this-turn filter"
+  },
+  "cost:cost-reduction-source-power": {
+   "family": "cost:cost-modification-extensions",
+   "example": "The Scarlet Witch: 'cost {X} less to cast, where X is The Scarlet Witch's power' — CostReductionAmount can't read the source's power"
+  },
+  "effect:amount-mana-symbols-of-color-in-spell": {
+   "family": "effect:amount-new-variants",
+   "example": "Namor the Sub-Mariner: 'Whenever you cast a noncreature spell with one or more blue mana symbols in its mana cost, create that many 1/1 blue Merfolk' — no amount/filter for one colour's symbols in the trigger spell's mana cost."
+  },
+  "decision:ward-poison-counters": {
+   "family": "decision:ward-payment",
+   "example": "The Serpent Society: 'Ward—Get five poison counters' — WardCost has no poison-counter cost."
+  },
+  "stat:attacked-with-filter-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Avengers Assemble!: 'if you attacked with a Hero this turn' — the attackers turn stat counts creatures declared but can't filter them by subtype."
+  },
+  "cost:exile-from-graveyard-mana-symbol-total": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Baron Helmut Zemo: Boast — 'Exile any number of black cards from your graveyard with fifteen or more black mana symbols among their mana costs' as an activation cost."
+  },
+  "trigger:counters-put-batch": {
+   "family": "trigger:counters-put",
+   "example": "Invisible Woman, Sue Storm: 'Whenever you put one or more +1/+1 counters on one or more other Heroes you control' — once per event, not once per permanent."
+  },
+  "effect:modal-modes-one-instruction": {
+   "family": "bug:simultaneous-zone-moves",
+   "example": "Call Damage Control: 'Choose up to two. Return those cards from your graveyard to your hand.' — modes that only pick targets, followed by one simultaneous return across them."
+  },
+  "zone:allow-cast-from-exile-spend-any-type": {
+   "family": "zone:impulse-permission-options",
+   "example": "Black Widow, Super Spy: 'you may cast the exiled nonland card until end of turn and mana of any type can be spent to cast that spell' — allow-cast-from-exile has no spendAs."
+  },
+  "effect:look-and-choose-may-enter-transformed": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Nick Fury, Agent of S.H.I.E.L.D.: 'You may put a Hero, Equipment, or Vehicle card from among them onto the battlefield. If it's a double-faced card, you may transform it.'"
   }
  }
 }

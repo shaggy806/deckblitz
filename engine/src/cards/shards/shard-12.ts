@@ -106,11 +106,13 @@ import _poolGhostlyVisit from "../pool/ghostly-visit.js";
 import _poolGiantSpectacle from "../pool/giant-spectacle.js";
 import _poolGlenElendraLiege from "../pool/glen-elendra-liege.js";
 import _poolGnarledMass from "../pool/gnarled-mass.js";
+import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
+import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
 import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
@@ -122,6 +124,7 @@ import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
 import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
+import _poolIronManMasterOfMachines from "../pool/iron-man-master-of-machines.js";
 import _poolIsland from "../pool/island.js";
 import _poolJaggedBarrens from "../pool/jagged-barrens.js";
 import _poolJaheiraFriendOfTheForest from "../pool/jaheira-friend-of-the-forest.js";
@@ -259,6 +262,7 @@ import _poolThunderscapeApprentice from "../pool/thunderscape-apprentice.js";
 import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
+import _poolTrainingRegimen from "../pool/training-regimen.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
@@ -402,11 +406,13 @@ const shard: CardShard = {
     _poolGiantSpectacle,
     _poolGlenElendraLiege,
     _poolGnarledMass,
+    _poolGoNuts,
     _poolGoShintaiOfSharedPurpose,
     _poolGoldForgedThopteryx,
     _poolGoobbueGardener,
     _poolGreaterAuramancy,
     _poolGwaihirGreatestOfTheEagles,
+    _poolHERBIEScoutUnit,
     _poolHaazdaOfficer,
     _poolHaliyaGuidedByLight,
     _poolHallOfOracles,
@@ -418,6 +424,7 @@ const shard: CardShard = {
     _poolIngotChewer,
     _poolInspiringVantage,
     _poolIronLadYoungAvenger,
+    _poolIronManMasterOfMachines,
     _poolIsland,
     _poolJaggedBarrens,
     _poolJaheiraFriendOfTheForest,
@@ -555,6 +562,7 @@ const shard: CardShard = {
     _poolTillAndTend,
     _poolTormentingVoice,
     _poolTrainingCompound,
+    _poolTrainingRegimen,
     _poolTrevasAttendant,
     _poolTwincast,
     _poolTyrantGuard,

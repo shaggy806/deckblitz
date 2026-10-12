@@ -53,6 +53,7 @@ import _poolCurseOfBounty from "../pool/curse-of-bounty.js";
 import _poolCurseOfTheSwine from "../pool/curse-of-the-swine.js";
 import _poolDaemogothTitan from "../pool/daemogoth-titan.js";
 import _poolDaggerfangDuo from "../pool/daggerfang-duo.js";
+import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js";
 import _poolDarkNourishment from "../pool/dark-nourishment.js";
 import _poolDeathgreeter from "../pool/deathgreeter.js";
 import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
@@ -65,6 +66,7 @@ import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
+import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
@@ -238,6 +240,7 @@ import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
+import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
@@ -330,6 +333,7 @@ const shard: CardShard = {
     _poolCurseOfTheSwine,
     _poolDaemogothTitan,
     _poolDaggerfangDuo,
+    _poolDaredevilManWithoutFear,
     _poolDarkNourishment,
     _poolDeathgreeter,
     _poolDeceptiveFrostkite,
@@ -342,6 +346,7 @@ const shard: CardShard = {
     _poolDjeruAndHazoret,
     _poolDranasChosen,
     _poolDuskLegionZealot,
+    _poolEarthsMightiestHeroes,
     _poolElanorGardner,
     _poolElvenFarsight,
     _poolElvishDoomsayer,
@@ -515,6 +520,7 @@ const shard: CardShard = {
     _poolTezzeretCruelCaptain,
     _poolTheEldestReborn,
     _poolTheFrightfulFour,
+    _poolTheInvincibleIronMan,
     _poolTheRegalia,
     _poolThornwoodFalls,
     _poolThrivingGrove,

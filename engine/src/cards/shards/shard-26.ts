@@ -112,6 +112,7 @@ import _poolHeartSliver from "../pool/heart-sliver.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
+import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
 import _poolHungryMegasloth from "../pool/hungry-megasloth.js";
 import _poolIcatianScout from "../pool/icatian-scout.js";
@@ -404,6 +405,7 @@ const shard: CardShard = {
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
     _poolHostileMinotaur,
+    _poolHulkSmash,
     _poolHumbleDefector,
     _poolHungryMegasloth,
     _poolIcatianScout,

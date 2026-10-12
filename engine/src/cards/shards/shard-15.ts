@@ -13,7 +13,9 @@ import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
+import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
+import _poolArmorWars from "../pool/armor-wars.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
@@ -114,6 +116,7 @@ import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
+import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
@@ -158,6 +161,7 @@ import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
+import _poolMonicaRambeau from "../pool/monica-rambeau.js";
 import _poolMortuaryMire from "../pool/mortuary-mire.js";
 import _poolMothriderPatrol from "../pool/mothrider-patrol.js";
 import _poolMoxEmerald from "../pool/mox-emerald.js";
@@ -296,7 +300,9 @@ const shard: CardShard = {
     _poolAlabasterKirin,
     _poolAncientCopperDragon,
     _poolAnglerDrake,
+    _poolAresGodOfWar,
     _poolArgivianFind,
+    _poolArmorWars,
     _poolArtisanOfKozilek,
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,
@@ -397,6 +403,7 @@ const shard: CardShard = {
     _poolHamatoNinpo,
     _poolHaruHiddenTalent,
     _poolHavenOfTheSpiritDragon,
+    _poolHawkeyesBow,
     _poolHealersFlock,
     _poolHighlandWeald,
     _poolHillGiant,
@@ -441,6 +448,7 @@ const shard: CardShard = {
     _poolMisshapenFiend,
     _poolMoaningSpirit,
     _poolMomentousFall,
+    _poolMonicaRambeau,
     _poolMortuaryMire,
     _poolMothriderPatrol,
     _poolMoxEmerald,

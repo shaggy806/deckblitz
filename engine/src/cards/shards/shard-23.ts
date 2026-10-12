@@ -120,6 +120,7 @@ import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
+import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
 import _poolIvoryTower from "../pool/ivory-tower.js";
@@ -405,6 +406,7 @@ const shard: CardShard = {
     _poolIdyllicTutor,
     _poolIgneousCur,
     _poolIncurableOgre,
+    _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
     _poolItzquinthFirstbornOfGishath,
     _poolIvoryTower,

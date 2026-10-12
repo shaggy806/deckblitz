@@ -77,6 +77,7 @@ import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
+import _poolEpicFight from "../pool/epic-fight.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
 import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
@@ -388,6 +389,7 @@ const shard: CardShard = {
     _poolEmielTheBlessed,
     _poolEndTheFestivities,
     _poolEnterTheAvatarState,
+    _poolEpicFight,
     _poolEtherswornAdjudicator,
     _poolEvolutionaryLeap,
     _poolExemplarOfLight,

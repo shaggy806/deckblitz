@@ -277,6 +277,7 @@ import _poolWallOfRazors from "../pool/wall-of-razors.js";
 import _poolWallOfVines from "../pool/wall-of-vines.js";
 import _poolWarkiteMarauder from "../pool/warkite-marauder.js";
 import _poolWarthog from "../pool/warthog.js";
+import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
 import _poolWernogRidersChaplain from "../pool/wernog-riders-chaplain.js";
 import _poolWhiptongueFrog from "../pool/whiptongue-frog.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
@@ -589,6 +590,7 @@ const shard: CardShard = {
     _poolWallOfVines,
     _poolWarkiteMarauder,
     _poolWarthog,
+    _poolWeSayTheeNay,
     _poolWernogRidersChaplain,
     _poolWhiptongueFrog,
     _poolWildfireAwakener,

@@ -4403,6 +4403,19 @@ stack count once per token)
   and offers "Cast Enroot (prepared)". On Bob's turn neither copy is offered (both are sorceries).
 - **Known limits:** None known.
 
+### HULK SMASH!, Too Evil to Stay Dead
+
+*New player decision* — teamwork (rule 702.194): an optional additional cost of tapping creatures with total power N
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, Hill Giant, two Mountains and three Swamps.
+  Your hand: HULK SMASH! and Too Evil to Stay Dead; Craw Wurm in your graveyard. Bob: Grizzly Bears and Sol Ring.
+- **Do:** Cast HULK SMASH! with teamwork, tapping Grizzly Bears and Hill Giant; choose both modes, Sol Ring
+  and Hill Giant hitting Bob's Bears. Next turn, cast Too Evil to Stay Dead with and without teamwork.
+- **Check:** The cast menu offers HULK SMASH! plain and "(teamwork)"; the teamwork cast asks for creatures with
+  total power 4 (one alone isn't enough) and then asks for exactly two modes. Sol Ring and Bob's Bears die,
+  your two creatures are tapped. Too Evil to Stay Dead can target the Craw Wurm (mana value 6) only with teamwork.
+- **Known limits:** None known.
+
 ### Fíli the Pathfinder, Bifur, Melodic Rider
 
 *Careful rules call* — storied (rule 702.195): an enduring story, had for the rest of the game

@@ -2138,13 +2138,16 @@ export class Game {
     /** Spree (rule 702.172a): the sets of modes this variant can pay for —
      * see `spreeModeSets`. */
     modeSets?: readonly (readonly number[])[],
+    /** A kicked variant: teamwork's "choose both instead" (`kickedModes`). */
+    kicked = false,
   ): Pick<Extract<LegalAction, { kind: "cast-spell" }>, "castModal"> {
     if (def.castModal === null) return {};
     const mostInASet = modeSets === undefined ? undefined : Math.max(0, ...modeSets.map((set) => set.length));
+    const range = this.castModalRange(def.castModal, card, kicked);
     return {
       castModal: {
-        minModes: def.castModal.minModes,
-        maxModes: mostInASet ?? affordableMaxModes ?? this.castModalMaxModes(def.castModal, card),
+        minModes: range.minModes,
+        maxModes: mostInASet ?? affordableMaxModes ?? range.maxModes,
         modes: def.castModal.modes.map((m) => ({
           text: m.text,
           targetSpecs: [...(m.targets ?? [])],
@@ -2585,6 +2588,17 @@ export class Game {
       ) {
         continue;
       }
+      // Teamwork's "choose both instead": each of those modes needs its
+      // targets (rule 601.2c).
+      if (kicked && def.castModal?.kickedModes !== undefined) {
+        const facts = stateTargetFacts(this.state, this.registry);
+        const source = this.cardSource(def, card);
+        const fillable = def.castModal.modes.filter((m) => {
+          const modeSpecs = m.targets ?? [];
+          return targetsFillable(modeSpecs, this.targetOptionsFor(modeSpecs, player, source), [], 0, facts);
+        }).length;
+        if (fillable < def.castModal.kickedModes) continue;
+      }
       const alternative = altCost === true ? this.alternativeCostOf(card, def, via, player) : null;
       const paidBase = evoke ?? printedOrPrototype;
       const cost = alternative !== null
@@ -2661,7 +2675,7 @@ export class Game {
         ...(via !== undefined ? { via } : {}),
         ...(graveyardGrant !== undefined ? { graveyardGrant } : {}),
         ...(face !== undefined ? { face } : {}),
-        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined),
+        ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true),
         ...(sacrifices.length > 0 ? { sacrifice: { choices: sacrifices } } : {}),
         ...(kicked && def.kicker !== null
           ? {
@@ -2691,7 +2705,12 @@ export class Game {
               const tapCost = this.altCostTapOffer(player, card, via, face ?? 0);
               return tapCost === null ? { altCost: true } : { altCost: true, tapCost };
             })()
-          : {}),
+          : kicked === true && def.kicker?.teamwork !== undefined
+            ? (() => {
+                const tapCost = this.altCostTapOffer(player, card, via, face ?? 0, true);
+                return tapCost === null ? {} : { tapCost };
+              })()
+            : {}),
         ...(costOption !== undefined && costOptions !== undefined
           ? { costOption, costOptionText: costOptions[costOption].text }
           : {}),
@@ -8893,16 +8912,31 @@ export class Game {
       : castModal.maxModes;
   }
 
+  /** How many modes `card` is cast with: `kickedModes` exactly when it's
+   * kicked (teamwork's "choose both instead" — HULK SMASH!), else its own
+   * range, `maxModesIf` included. */
+  private castModalRange(
+    castModal: CastModalSpec,
+    card: ObjectId,
+    kicked: boolean,
+  ): { readonly minModes: number; readonly maxModes: number } {
+    if (kicked && castModal.kickedModes !== undefined) {
+      return { minModes: castModal.kickedModes, maxModes: castModal.kickedModes };
+    }
+    return { minModes: castModal.minModes, maxModes: this.castModalMaxModes(castModal, card) };
+  }
+
   /** Why the chosen `modes` are illegal for a `castModal` card (or `null`). */
   private whyCannotChooseCastModes(
     castModal: CastModalSpec,
     card: ObjectId,
     modes: readonly number[],
+    kicked = false,
   ): string | null {
     if (new Set(modes).size !== modes.length) return "the same mode was chosen twice";
-    const maxModes = this.castModalMaxModes(castModal, card);
-    if (modes.length < castModal.minModes || modes.length > maxModes) {
-      return `choose between ${castModal.minModes} and ${maxModes} mode(s)`;
+    const { minModes, maxModes } = this.castModalRange(castModal, card, kicked);
+    if (modes.length < minModes || modes.length > maxModes) {
+      return `choose between ${minModes} and ${maxModes} mode(s)`;
     }
     if (modes.some((i) => !Number.isInteger(i) || i < 0 || i >= castModal.modes.length)) {
       return "invalid mode index";
@@ -9177,7 +9211,7 @@ export class Game {
       if (timing !== null) return timing;
     }
     if (def.castModal !== null && modes !== undefined) {
-      const bad = this.whyCannotChooseCastModes(def.castModal, cardId, modes);
+      const bad = this.whyCannotChooseCastModes(def.castModal, cardId, modes, kicked !== false && kicked !== 0);
       if (bad !== null) return `${def.name}: ${bad}`;
     }
     // A choice of additional costs: the driver must name a branch, and the
@@ -9335,7 +9369,7 @@ export class Game {
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face };
-    const alternativeTaps = altCost ? this.alternativeCostOf(cardId, def, via, player)?.tapCreatures : undefined;
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.tapCostOffer(
@@ -9348,8 +9382,10 @@ export class Game {
         purpose,
       );
       if (offer === null) return `${player} cannot pay the cost of ${def.name}`;
-      if (this.tapCapacity(offer.choices) < offer.count) {
-        return `${def.name}'s alternative cost needs ${offer.count} untapped creatures`;
+      if (!this.tapOfferPayable(offer)) {
+        return offer.totalPower !== undefined
+          ? `${def.name}'s teamwork needs untapped creatures with total power ${offer.totalPower}`
+          : `${def.name}'s alternative cost needs ${offer.count} untapped creatures`;
       }
       return tap === undefined ? null : this.whyTapChoiceIsWrong(def.name, offer, tap);
     }
@@ -9822,7 +9858,7 @@ export class Game {
     // alternative cost belongs to it there.
     const escape = via === "escape" ? this.escapeOf(cardId, face, graveyardGrant) : null;
     const flashback = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant) : null;
-    const alternativeTaps = altCost ? this.alternativeCostOf(cardId, def, via, player)?.tapCreatures : undefined;
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked !== false && kicked !== 0);
     const costString = this.castCostString(
       cardId,
       via,
@@ -15014,9 +15050,12 @@ export class Game {
                         // "that player" of a `draws` trigger.
                         event.type === "card-drawn" || event.type === "counter-added"
                         ? event.object
-                        : // The permanent that untapped: "that permanent's
-                          // controller" (Mesmeric Orb).
-                          event.type === "permanent-untapped" || event.type === "creature-fought"
+                        : // The permanent that untapped or became tapped:
+                          // "that permanent's controller" (Mesmeric Orb), "it
+                          // deals 1 damage" (Hawkeye's Bow).
+                          event.type === "permanent-untapped" ||
+                            event.type === "permanent-tapped" ||
+                            event.type === "creature-fought"
                           ? event.object
                           : undefined;
           const powerOfId =
@@ -20456,6 +20495,25 @@ export class Game {
     return n;
   }
 
+  /** The creatures casting `cardId` taps as part of its cost: an
+   * alternative cost's (Sephara — `altCost`), or a kicked spell's teamwork
+   * (rule 702.194a: any number of creatures you control with total power N
+   * or more, summoning sick ones included). `undefined` for none. */
+  private spellTapCost(
+    cardId: ObjectId,
+    def: CardDefinition,
+    via: CastVia | undefined,
+    player: PlayerId,
+    altCost: boolean,
+    kicked: boolean,
+  ): { readonly count: number; readonly totalPower?: number; readonly filter: CardFilter } | undefined {
+    if (altCost) return this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
+    if (kicked && def.kicker?.teamwork !== undefined) {
+      return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
+    }
+    return undefined;
+  }
+
   /** Whether everything `offer` offers could pay it: `count` permanents, or
    * — crew — enough power, every token of a stack tapped. */
   private tapOfferPayable(offer: TapCostOffer): boolean {
@@ -20534,15 +20592,17 @@ export class Game {
   }
 
   /** {@link tapCostOffer} for casting `cardId` for its alternative cost
-   * (Sephara) — the cost {@link whyCannotCastSpell} checks it against. */
+   * (Sephara), or — `teamwork` — kicked for its teamwork cost: the cost
+   * {@link whyCannotCastSpell} checks it against. */
   private altCostTapOffer(
     player: PlayerId,
     cardId: ObjectId,
     via: CastVia | undefined,
     face: number,
+    teamwork = false,
   ): TapCostOffer | null {
     const def = this.faceDef(cardId, face);
-    const taps = this.alternativeCostOf(cardId, def, via, player)?.tapCreatures;
+    const taps = this.spellTapCost(cardId, def, via, player, !teamwork, teamwork);
     if (taps === undefined) return null;
     const cost = this.withFace(cardId, face, () =>
       this.castingCostOf(
@@ -20550,7 +20610,7 @@ export class Game {
         cardId,
         def,
         0,
-        this.castCostString(cardId, via, face, false, false, false, true, undefined, player),
+        this.castCostString(cardId, via, face, teamwork, false, false, !teamwork, undefined, player),
       ),
     );
     return this.tapCostOffer(

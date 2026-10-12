@@ -184,6 +184,7 @@ import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
+import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
@@ -463,6 +464,7 @@ const shard: CardShard = {
     _poolRemnantElemental,
     _poolRepercussion,
     _poolRepulse,
+    _poolRestorativeTechnique,
     _poolRiddlemasterSphinx,
     _poolRockyTarPit,
     _poolRottingFensnake,

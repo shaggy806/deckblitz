@@ -952,6 +952,38 @@ export default {
     hand: { alice: ["Dáin's Company"] },
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  TEAMW: {
+    about:
+      "2p. Teamwork (rule 702.194): HULK SMASH! in hand. Cast it with teamwork — pick creatures with total power 4 " +
+      "(Grizzly Bears + Hill Giant; one alone isn't enough) — and both modes: destroy bob's Sol Ring " +
+      "and have a creature of yours hit his Bears. Without teamwork it's one mode. Too Evil to Stay Dead brings back " +
+      "the Craw Wurm in the graveyard only with teamwork.",
+    players: ["alice", "bob"],
+    lands: { alice: 0, bob: 3 },
+    battlefield: {
+      alice: ["Grizzly Bears", "Hill Giant", "Mountain", "Mountain", "Swamp", "Swamp", "Swamp"],
+      bob: ["Grizzly Bears", "Sol Ring"],
+    },
+    hand: { alice: ["HULK SMASH!", "Too Evil to Stay Dead"] },
+    setup(game) {
+      game.debugSpawn("Craw Wurm", "alice", "graveyard");
+    },
+    bots: { bob: {} },
+  },
+  TEAM4: {
+    about: "4p. TEAMW at a full table: the tap picker and both modes beside four boards.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 0, bob: 3, carol: 3, dave: 3 },
+    battlefield: {
+      alice: ["Grizzly Bears", "Hill Giant", "Mountain", "Mountain", "Swamp", "Swamp", "Swamp"],
+      bob: ["Grizzly Bears", "Sol Ring"],
+    },
+    hand: { alice: ["HULK SMASH!", "Too Evil to Stay Dead"] },
+    setup(game) {
+      game.debugSpawn("Craw Wurm", "alice", "graveyard");
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
   PREPR: {
     about:
       "2p. Prepare (rule 722): Studious First-Year entered prepared — its tile says so, and its menu offers " +

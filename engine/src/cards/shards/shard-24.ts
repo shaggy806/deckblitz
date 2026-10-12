@@ -245,6 +245,7 @@ import _poolThoughtMonitor from "../pool/thought-monitor.js";
 import _poolThrabenInspector from "../pool/thraben-inspector.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
+import _poolTonyStark from "../pool/tony-stark.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
@@ -535,6 +536,7 @@ const shard: CardShard = {
     _poolThrabenInspector,
     _poolThroneOfTheHighCity,
     _poolTolariaWest,
+    _poolTonyStark,
     _poolToskiBearerOfSecrets,
     _poolTreasureVault,
     _poolTreetopFreedomFighters,

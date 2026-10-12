@@ -119,6 +119,7 @@ import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
 import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
 import _poolHullcarver from "../pool/hullcarver.js";
+import _poolHumanTorchJohnnyStorm from "../pool/human-torch-johnny-storm.js";
 import _poolHundroog from "../pool/hundroog.js";
 import _poolHungryGhoul from "../pool/hungry-ghoul.js";
 import _poolIchorclawMyr from "../pool/ichorclaw-myr.js";
@@ -411,6 +412,7 @@ const shard: CardShard = {
     _poolHuatlisSnubhorn,
     _poolHulkbusterArmor,
     _poolHullcarver,
+    _poolHumanTorchJohnnyStorm,
     _poolHundroog,
     _poolHungryGhoul,
     _poolIchorclawMyr,
