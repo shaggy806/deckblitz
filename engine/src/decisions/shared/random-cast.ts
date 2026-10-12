@@ -86,6 +86,7 @@ export function randomCast(
     ...(sac !== undefined && sac.choices.length > 0 ? { sacrifice: sac.choices[rng.pickIndex(sac.choices.length)] } : {}),
     ...(legal.tapCost !== undefined ? { tap } : {}),
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
+    ...(legal.webSlingingReturn !== undefined ? { webSlingingReturn: legal.webSlingingReturn.object } : {}),
     ...(convoke.length > 0 ? { convoke } : {}),
     // Delve: only the fewest it needs, newest first — the other end from the
     // bots' most-and-oldest, so the fuzzer walks both. No random draw, so

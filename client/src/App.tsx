@@ -198,6 +198,7 @@ function graveyardVariantLabel(
     if (a.evoke) parts.push(`evoke ${a.evokeCost ?? ''}`.trim())
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
+    if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
   }
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
 }
@@ -226,6 +227,8 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.harmonizeTap !== undefined ? { tap: [cast.harmonizeTap.object] } : {}),
   // A sneak variant's creature to return (rule 702.190a): its own offer.
   ...(cast.sneakReturn !== undefined ? { sneakReturn: cast.sneakReturn.object } : {}),
+  // A web-slinging variant's tapped creature to return (rule 702.188a): its own offer.
+  ...(cast.webSlingingReturn !== undefined ? { webSlingingReturn: cast.webSlingingReturn.object } : {}),
   // "4 damage divided as you choose" (Magma Opus): asked once the targets are in.
   ...(cast.divide !== undefined ? { divide: cast.divide } : {}),
   // Not echoed either: how many distinct targets are affordable, which the
@@ -433,6 +436,9 @@ interface Targeting {
   /** A sneak cast's unblocked creature to return (rule 702.190a), echoed
    * back as the cast's `sneakReturn`. */
   readonly sneakReturn?: ObjectId
+  /** A web-slinging cast's tapped creature to return (rule 702.188a),
+   * echoed back as the cast's `webSlingingReturn`. */
+  readonly webSlingingReturn?: ObjectId
   /** A convoke spell's creatures still to pick, once the targets are in —
    * see `pendingConvoke`. */
   readonly convokeOffer?: ConvokeOffer
@@ -1926,6 +1932,7 @@ function Table({
         | 'tapCost'
         | 'tap'
         | 'sneakReturn'
+        | 'webSlingingReturn'
         | 'convokeOffer'
         | 'divide'
       >,
@@ -1965,6 +1972,7 @@ function Table({
                 ...(t.delve !== undefined && t.delve.length > 0 ? { delve: [...t.delve] } : {}),
                 ...(t.tap !== undefined ? { tap: [...t.tap] } : {}),
                 ...(t.sneakReturn !== undefined ? { sneakReturn: t.sneakReturn } : {}),
+                ...(t.webSlingingReturn !== undefined ? { webSlingingReturn: t.webSlingingReturn } : {}),
                 ...(division !== undefined ? { division: [...division] } : {}),
               }
             : {
@@ -5244,6 +5252,9 @@ function Table({
                         : ''}
                       {a.kind === 'cast-spell' && a.via === 'sneak' && a.sneakReturn
                         ? ` (sneak, returning ${a.sneakReturn.cardName})`
+                        : ''}
+                      {a.kind === 'cast-spell' && a.via === 'web-slinging' && a.webSlingingReturn
+                        ? ` (web-slinging, returning ${a.webSlingingReturn.cardName})`
                         : ''}
                       {a.kind === 'cast-spell' && a.costOptionText ? (
                         <> (<Symbols text={a.costOptionText} />)</>

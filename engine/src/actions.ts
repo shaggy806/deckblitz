@@ -53,6 +53,11 @@ export type CastVia =
    * creature they control to its owner's hand (`sneakReturn`). An
    * alternative cost; timing is an instant's. */
   | "sneak"
+  /** For its web-slinging cost (rule 702.188a): from the hand or the
+   * command zone, returning a tapped creature the caster controls to its
+   * owner's hand (`webSlingingReturn`). An alternative cost (601.2b,
+   * 601.2f–h); every timing rule still applies. */
+  | "web-slinging"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
@@ -334,6 +339,11 @@ export type Action =
        * to its owner's hand as part of the cost — the offer's `sneakReturn`.
        * Omitted, the engine returns the first eligible one. */
       readonly sneakReturn?: ObjectId;
+      /** For `via: "web-slinging"` (rule 702.188a): the tapped creature
+       * returned to its owner's hand as part of the cost — the offer's
+       * `webSlingingReturn`. Omitted, the engine returns the first eligible
+       * one. */
+      readonly webSlingingReturn?: ObjectId;
       /** For `via: "escape"`: the other cards in the caster's graveyard
        * exiled to pay the escape cost (rule 702.139a — "exile N other cards
        * from your graveyard"), picked from the variant's `escapeExile` offer:
@@ -722,6 +732,10 @@ export type LegalAction =
       /** A sneak variant's unblocked attacker to return (rule 702.190a): one
        * offer per creature that could be, echoed back as `sneakReturn`. */
       readonly sneakReturn?: { readonly object: ObjectId; readonly cardName: string };
+      /** A web-slinging variant's tapped creature to return (rule 702.188a):
+       * one offer per creature that could be, echoed back as
+       * `webSlingingReturn`. */
+      readonly webSlingingReturn?: { readonly object: ObjectId; readonly cardName: string };
       /** Set for a *targeted modal* spell (rule 700.2 — ROADMAP Phase 11 EG-2):
        * the driver picks `minModes..maxModes` of `modes` (each a text label +
        * its own target specs), then targets for the chosen modes, then echoes

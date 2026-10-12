@@ -1157,6 +1157,7 @@ function castExtras(
   delve?: ObjectId[];
   prototype?: boolean;
   tap?: ObjectId[];
+  webSlingingReturn?: ObjectId;
 } {
   const sac = legal.sacrifice;
   const convokeInfo = legal.convoke;
@@ -1179,6 +1180,8 @@ function castExtras(
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
     // A harmonize variant names the creature it taps (rule 702.180a): echoed.
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
+    // A web-slinging variant names the creature it returns (rule 702.188a).
+    ...(legal.webSlingingReturn !== undefined ? { webSlingingReturn: legal.webSlingingReturn.object } : {}),
     ...(sac !== undefined && sac.choices.length > 0
       ? { sacrifice: sac.choices[pickIndex(sac.choices.length)] }
       : {}),

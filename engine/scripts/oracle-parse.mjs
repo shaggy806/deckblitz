@@ -399,6 +399,7 @@ const TARGET_PHRASES = [
   ["target nonblack creature", "nonblack-creature"],
   ["target attacking or blocking creature", "attacking-or-blocking-creature"],
   ["target nonland permanent", "nonland-permanent"],
+  ["target instant spell, sorcery spell, or triggered ability", "instant-or-sorcery-spell-or-triggered-ability"],
   ["target noncreature spell", "noncreature-spell"],
   ["target instant or sorcery spell", "instant-or-sorcery-spell"],
   ["target creature spell", "creature-spell"],
@@ -804,7 +805,7 @@ export function parseSentence(sentence, ctx) {
   if (re("untap ~").test(s)) return { kind: "untap", target: "source" };
   if ((m = re(`counter (${TARGET})`).exec(s))) {
     const t = targetOf(m[1]);
-    if (typeof t !== "string" || !/spell$/.test(t)) return null;
+    if (typeof t !== "string" || !/(spell|triggered-ability)$/.test(t)) return null;
     return { kind: "counter", target: slot(m[1]) };
   }
   if ((m = /^return (target .+? card from your graveyard) to your hand\.$/i.exec(s))) {
@@ -1303,6 +1304,8 @@ export function parseFace(face, ctx = {}) {
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
+    // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
+    if ((m = /^Web-slinging ((?:\{[^}]+\})+)$/.exec(line))) { out.webSlinging = { cost: m[1] }; continue; }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.
     if (isSpell && (m = /^Teamwork (\d+)$/.exec(line))) { out.kicker = { cost: "", keyword: "teamwork", teamwork: Number(m[1]) }; continue; }
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
@@ -1524,6 +1527,10 @@ export function parseFace(face, ctx = {}) {
 const INTERVENING_IFS = {
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
+  // How its spell was cast (rule 702.188a): the permanent keeps `castVia`.
+  "if it was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
+  "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
+  "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
 };
 
 /**
@@ -1643,6 +1650,11 @@ function parseStatic(line, text) {
   }
   if (line === "~ enters tapped.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", tapped: true }, text };
+  }
+  // Web-slinging's returned creature (rule 702.188a — Scarlet Spider, Ben
+  // Reilly): its mana value as it last existed, 0 unless web-slinging paid.
+  if (/^If ~ was cast using web-slinging, (?:it|he|she|they) enters? with X \+1\/\+1 counters on (?:it|him|her|them), where X is the mana value of the returned creature\.$/.test(line)) {
+    return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: "web-slinging-mana-value" } }, text };
   }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };

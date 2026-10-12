@@ -2207,6 +2207,20 @@ export interface CardDefinition {
    * for none.
    */
   readonly sneak: { readonly cost: string } | null;
+  /**
+   * Web-slinging (rule 702.188a) — "you may cast this spell by paying `cost`
+   * and returning a tapped creature you control to its owner's hand rather
+   * than paying its mana cost": an alternative cost (601.2b, 601.2f–h), from
+   * the hand or — a commander — the command zone, under every normal timing
+   * rule. Offered once per tapped creature the caster controls
+   * (`LegalAction.webSlingingReturn`); a creature tapped for mana floats it
+   * first, then is returned (the ruling). The spell's `castVia` is
+   * `"web-slinging"` ("if it was cast using web-slinging"), and the returned
+   * creature's last-known mana value rides on it
+   * (`GameObject.webSlingingManaValue` — `counters.amount:
+   * "web-slinging-mana-value"`). `null` for none.
+   */
+  readonly webSlinging: { readonly cost: string } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -2529,6 +2543,7 @@ const PRINTED_ABILITY: {
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
   sneak: (def) => def.sneak !== null,
+  webSlinging: (def) => def.webSlinging !== null,
   harmonize: (def) => def.harmonize !== null,
   foretell: (def) => def.foretell !== null,
   warp: (def) => def.warp !== null,
@@ -2690,6 +2705,7 @@ interface CardDraft {
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
   sneak?: { readonly cost: string };
+  webSlinging?: { readonly cost: string };
   flashback?: {
     readonly cost: string;
     readonly payLife?: number;
@@ -2796,6 +2812,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
     sneak: draft.sneak ?? null,
+    webSlinging: draft.webSlinging ?? null,
     harmonize: draft.harmonize ?? null,
     foretell: draft.foretell ?? null,
     warp: draft.warp ?? null,

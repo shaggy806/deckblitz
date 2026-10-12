@@ -418,6 +418,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Rebound", "Instant", {}).rebound).toBe(true);
     expect(face("Teamwork 4", "Instant", {}).kicker).toEqual({ cost: "", keyword: "teamwork", teamwork: 4 });
     expect(face("Sneak {1}{R}{R}").sneak).toEqual({ cost: "{1}{R}{R}" });
+    // Web-slinging (rule 702.188a): the line, its reminder text stripped.
+    const slinger = face(
+      "Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.)",
+    );
+    expect(slinger.webSlinging).toEqual({ cost: "{R}{G}" });
+    expect(slinger.complete).toBe(true);
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     const fab = face("Fabricate 2").triggered[0];
@@ -434,6 +440,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(raid.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 });
     expect(raid.complete).toBe(true);
     expect(face("At the beginning of your end step, if you gained life this turn, draw a card.").complete).toBe(false);
+    // How the permanent's spell was cast (rule 702.188a — Spiders-Man, Heroic Horde).
+    const slung = face("When ~ enters, if they were cast using web-slinging, you gain 3 life.");
+    expect(slung.triggered[0].condition).toEqual({ kind: "source", filter: { castVia: "web-slinging" } });
+    expect(slung.complete).toBe(true);
+  });
+
+  it("web-slinging's returned creature: its mana value, as Scarlet Spider's counters", () => {
+    const save = face(
+      "Sensational Save — If ~ was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.",
+    );
+    expect(save.static[0].replacement).toEqual({
+      event: "enters-battlefield",
+      counters: { kind: "+1/+1", amount: "web-slinging-mana-value" },
+    });
+    expect(save.complete).toBe(true);
   });
 
   it("'you may discard a card. If you do, draw a card' draws only if a card was discarded", () => {

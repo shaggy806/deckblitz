@@ -1234,6 +1234,7 @@ export class Game {
         break;
       case "cast-spell":
         this.sneakReturnChoice = action.sneakReturn;
+        this.webSlingingReturnChoice = action.webSlingingReturn;
         try {
           this.castSpell(
             action.player,
@@ -1261,6 +1262,7 @@ export class Game {
           );
         } finally {
           this.sneakReturnChoice = undefined;
+          this.webSlingingReturnChoice = undefined;
         }
         break;
       case "activate-ability":
@@ -1419,6 +1421,12 @@ export class Game {
         ) {
           return "sneak returns an unblocked creature you control";
         }
+        if (action.webSlingingReturn !== undefined) {
+          if (action.via !== "web-slinging") return "only a web-slinging cast returns a creature for its cost";
+          if (!this.webSlingingReturns(action.player).includes(action.webSlingingReturn)) {
+            return "web-slinging returns a tapped creature you control";
+          }
+        }
         return this.whyCannotCastSpell(
           action.player,
           action.card,
@@ -1528,6 +1536,27 @@ export class Game {
                 costString: blitzCost,
               }),
             );
+          }
+          // Web-slinging (rule 702.188a) — for its web-slinging cost, one
+          // offer per tapped creature that could be returned, which the cast
+          // names. Normal timing: `castSpellActions` judges it.
+          if (def.webSlinging !== null) {
+            const returnable = this.webSlingingReturns(player);
+            if (returnable.length > 0) {
+              for (const offer of this.castSpellActions(player, card, cardName, def, {
+                ...faceProp,
+                via: "web-slinging",
+                costString: def.webSlinging.cost,
+              })) {
+                if (offer.kind !== "cast-spell") continue;
+                for (const returned of returnable) {
+                  out.push({
+                    ...offer,
+                    webSlingingReturn: { object: returned, cardName: this.state.objects[returned].cardName },
+                  });
+                }
+              }
+            }
           }
           // Morph, megamorph and disguise (rules 702.37c, 702.168a) — face
           // down for {3}, worked out as the face-down 2/2 spell it would be.
@@ -2282,8 +2311,10 @@ export class Game {
     // Guardianship) are each an alternative cast, mutually exclusive with
     // kicker and each other (no card on the list has more than one) — and
     // with warp, itself an alternative cost (rule 118.9a: only one applies).
-    // Blitz is an alternative cost from the hand too (rule 702.152a).
-    const warp = via === "warp" || via === "blitz";
+    // Blitz is an alternative cost from the hand too (rule 702.152a), and so
+    // is web-slinging (702.188a; its ruling: never with "without paying its
+    // mana cost").
+    const warp = via === "warp" || via === "blitz" || via === "web-slinging";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
     }
@@ -7211,6 +7242,20 @@ export class Game {
     );
   }
 
+  /** The creatures `player` could return to pay a web-slinging cost (rule
+   * 702.188a): each tapped creature they control, at any time. One a mana
+   * ability would tap as the cost is paid counts once it's tapped — tap it
+   * for mana first, then cast (the ruling: it need only be tapped as costs
+   * are paid, and mana paid from the pool is the same payment). */
+  private webSlingingReturns(player: PlayerId): ObjectId[] {
+    return this.state.zones.shared.battlefield.filter(
+      (id) =>
+        this.state.objects[id]?.controller === player &&
+        this.state.objects[id].tapped &&
+        matchesFilter(this.state, this.registry, id, { type: "creature" }, { you: player }),
+    );
+  }
+
   private mayhemCastable(player: PlayerId, cardId: ObjectId): boolean {
     const object = this.state.objects[cardId];
     if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return false;
@@ -8891,6 +8936,8 @@ export class Game {
           ? (def.mayhem?.cost ?? def.manaCost)
         : via === "sneak"
           ? (def.sneak?.cost ?? null)
+        : via === "web-slinging"
+          ? (def.webSlinging?.cost ?? null)
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
           : via === "foretell"
@@ -9199,6 +9246,20 @@ export class Game {
       }
       if (this.sneakReturns(player).length === 0) {
         return `${def.name} can be cast with sneak only in your declare blockers step, returning an unblocked creature`;
+      }
+    } else if (via === "web-slinging") {
+      // Rule 702.188a — from the hand (or a commander from the command zone),
+      // returning a tapped creature the caster controls: an alternative cost,
+      // so no other one goes with it (118.9a). Timing is the spell's own.
+      if (def.webSlinging === null) return `${def.name} doesn't have web-slinging`;
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (overload || free || altCost || evoke !== null) {
+        return `web-slinging is an alternative cost, and can't be combined with another`;
+      }
+      if (this.webSlingingReturns(player).length === 0) {
+        return `${def.name}'s web-slinging returns a tapped creature you control, and ${player} controls none`;
       }
     } else if (via === "prepared") {
       // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
@@ -9658,6 +9719,9 @@ export class Game {
   /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
    * read as its cost is paid; unset otherwise. */
   private sneakReturnChoice: ObjectId | undefined = undefined;
+  /** The `webSlingingReturn` of the `cast-spell` being dispatched (rule
+   * 702.188a), read as its cost is paid; unset otherwise. */
+  private webSlingingReturnChoice: ObjectId | undefined = undefined;
   /** The creature that harmonize cast taps, held back from paying for it as
    * mana while `{X}` is sized (`maxAffordableX`). */
   private harmonizeCreature: ObjectId | null = null;
@@ -10273,6 +10337,21 @@ export class Game {
       if (choice !== undefined && returned !== undefined) {
         if (returned.attacking !== null && returned.attacking !== undefined) object.sneakAttacking = returned.attacking;
         this.moveObject(choice, "hand");
+      }
+    }
+    // Web-slinging's "returning a tapped creature you control to its owner's
+    // hand" (rule 702.188a), the other half of that cost, paid after the mana
+    // (601.2g–h): one token singled out of a stack first. Its mana value as
+    // it last existed on the battlefield rides on the spell (the ruling —
+    // Scarlet Spider, Ben Reilly's X).
+    if (via === "web-slinging") {
+      const eligible = this.webSlingingReturns(player);
+      const named = this.webSlingingReturnChoice;
+      const choice = named !== undefined && eligible.includes(named) ? named : eligible[0];
+      if (choice !== undefined) {
+        const one = this.splitOneFromStack(choice);
+        object.webSlingingManaValue = this.takeLastKnown(one).manaValue;
+        this.moveObject(one, "hand");
       }
     }
     // "Flashback—{cost}, Pay N life" (Deep Analysis) — part of the cost, paid
@@ -28039,7 +28118,13 @@ export class Game {
             ? (object.xValue ?? 0)
             : r.counters.amount === "times-kicked"
               ? (object.enteredTimesKicked ?? 0)
-              : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
+              : // The returned creature's mana value, only when the spell it
+                // was cast as paid its web-slinging cost (rule 702.188a).
+                r.counters.amount === "web-slinging-mana-value"
+                ? object.castVia === "web-slinging"
+                  ? (object.webSlingingManaValue ?? 0)
+                  : 0
+                : this.enteringCounterAmount(id, object.controller, id, r.counters.amount),
         );
       }
     }
@@ -29288,6 +29373,8 @@ export class Game {
       // fresh 0/0 with X=0, not its old size.
       object.xValue = null;
       object.castVia = null;
+      // So does what its web-slinging cost returned (rule 702.188a).
+      object.webSlingingManaValue = undefined;
       // "Has haste until it leaves the battlefield" (a suspend cast) ends here.
       object.hastyUntilItLeaves = false;
     }

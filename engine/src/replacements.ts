@@ -116,8 +116,15 @@ export interface EntersBattlefieldReplacement {
    * `{X}` chosen when it was cast (Walking Ballista); `"times-kicked"` the
    * number of times its multikicker was paid (Everflowing Chalice's "a
    * charge counter on it for each time it was kicked" — rule 702.33c), 0
-   * when it wasn't cast. */
-  readonly counters?: { readonly kind: string; readonly amount: EffectAmount | "times-kicked" };
+   * when it wasn't cast; `"web-slinging-mana-value"` the mana value of the
+   * creature returned to pay its web-slinging cost, as that creature last
+   * existed on the battlefield (rule 702.188a — Scarlet Spider, Ben
+   * Reilly's "X is the mana value of the returned creature"), 0 when it
+   * wasn't cast using web-slinging. */
+  readonly counters?: {
+    readonly kind: string;
+    readonly amount: EffectAmount | "times-kicked" | "web-slinging-mana-value";
+  };
   /** It enters transformed — a transforming DFC that says "enters the
    * battlefield transformed" unconditionally (rule 712.10 — ROADMAP Phase
    * 10b). Daybound's conditional "if it's night" is handled by the engine,

@@ -93,6 +93,11 @@ export type TargetSpec =
    * "counter target activated or triggered ability"). A mana ability never
    * is one (rule 605.3b); a Saga chapter is a triggered ability (714.2b). */
   | "activated-or-triggered-ability"
+  /** An instant spell, a sorcery spell, or a triggered ability on the stack,
+   * in one slot (Spider-Sense). A Saga chapter, a delayed or reflexive
+   * trigger and a ward trigger are triggered abilities (rules 714.2b, 603.7,
+   * 603.12, 702.21a); an activated ability isn't one. */
+  | "instant-or-sorcery-spell-or-triggered-ability"
   /** An instant or sorcery card in the targeting player's graveyard
    * (Snapcaster Mage — ROADMAP Phase 6b). */
   | "instant-or-sorcery-in-your-graveyard"

@@ -184,6 +184,7 @@ function faceSource(face, ctx) {
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
     sneak: parsed.sneak,
+    webSlinging: parsed.webSlinging,
     kicker: parsed.kicker,
     convoke: parsed.convoke,
     morph: parsed.morph,

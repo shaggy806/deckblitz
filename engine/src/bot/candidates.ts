@@ -47,6 +47,7 @@ function castExtras(legal: CastSpellLegal): {
   convoke?: ConvokePayment[];
   prototype?: boolean;
   tap?: ObjectId[];
+  webSlingingReturn?: ObjectId;
 } {
   const sacrifice = legal.sacrifice;
   const convoke = legal.convoke;
@@ -64,6 +65,9 @@ function castExtras(legal: CastSpellLegal): {
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
     // A harmonize variant names the creature it taps (rule 702.180a): echoed.
     ...(legal.harmonizeTap !== undefined ? { tap: [legal.harmonizeTap.object] } : {}),
+    // A web-slinging variant names the creature it returns (rule 702.188a):
+    // echoed, so each creature is its own candidate.
+    ...(legal.webSlingingReturn !== undefined ? { webSlingingReturn: legal.webSlingingReturn.object } : {}),
     // The last choice rather than the first: `castSpellActions` may only be
     // offering this variant at all because the *most* expendable permanent
     // can pay, and the list is ordered oldest-first.

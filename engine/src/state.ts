@@ -186,6 +186,13 @@ export interface GameObject {
    * (rule 702.190b) — the permanent it becomes enters tapped and attacking
    * that. Set as the cost is paid; cleared by any zone change. */
   sneakAttacking?: PlayerId | ObjectId;
+  /** The mana value of the creature returned to pay this spell's
+   * web-slinging cost, as it last existed on the battlefield (rule
+   * 702.188a; Scarlet Spider, Ben Reilly's ruling). Set as the cost is
+   * paid; kept by the permanent the spell becomes, as `xValue` and
+   * `castVia` are, for an `enters-battlefield` replacement's
+   * `"web-slinging-mana-value"`; cleared by any move off the battlefield. */
+  webSlingingManaValue?: number;
   /**
    * True while the creature has not been under its controller's control since
    * the start of that player's most recent turn (rule 302.6). Set on entering

@@ -564,6 +564,15 @@ export function isLegalTarget(
         state.objects[ref.object]?.zone === "stack" &&
         state.objects[ref.object]?.kind === "ability"
       );
+    case "instant-or-sorcery-spell-or-triggered-ability": {
+      if (ref.kind !== "object") return false;
+      const object = state.objects[ref.object];
+      if (object === undefined || object.zone !== "stack") return false;
+      if (object.kind === "ability") return object.abilityKind === "triggered" || object.abilityKind === "chapter";
+      if (object.kind !== "card") return false;
+      const t = registry.get(printedCardName(object)).types;
+      return t.includes("instant") || t.includes("sorcery");
+    }
     case "instant-or-sorcery-in-your-graveyard": {
       if (ref.kind !== "object") return false;
       const object = state.objects[ref.object];
