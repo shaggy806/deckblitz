@@ -659,10 +659,14 @@ export type StaticCondition =
    * `atLeast` times (default 1): "if another Human entered the battlefield
    * under your control this turn" (Éowyn, Shieldmaiden: `{ what: "entered",
    * filter: { subtype: "Human" }, excludeSelf: true }`), "if a creature died
-   * under your control this turn", "if you descended this turn". `who` is
-   * whose (default `"you"`); `filter` narrows the objects — one that has left
-   * the battlefield as it last existed there, a card put into a graveyard as
-   * it is now; `excludeSelf` leaves this permanent out ("another").
+   * under your control this turn", "if you descended this turn"; revolt's
+   * "if a permanent you controlled left the battlefield this turn" is `{
+   * what: "left" }`, and void's "if a nonland permanent left the battlefield
+   * this turn" `{ what: "left", who: "any-player", filter: { notTypes:
+   * ["land"] } }`. `who` is whose (default `"you"`); `filter` narrows the
+   * objects — one that has left the battlefield as it last existed there, a
+   * card put into a graveyard as it is now; `excludeSelf` leaves this
+   * permanent out ("another").
    */
   /**
    * Sources a player controlled dealt at least `atLeast` damage this turn —
@@ -711,6 +715,11 @@ export type StaticCondition =
    * if you attacked this turn" (Michelangelo, the Heart) is a `turn-structure`
    * and a `turn-stat` together. */
   | { readonly kind: "all"; readonly of: readonly StaticCondition[] }
+  /** At least one of these holds — void's "if a nonland permanent left the
+   * battlefield this turn **or** a spell was warped this turn" (Elegy
+   * Acolyte): a `turn-history` `left` over every player and a
+   * `cast-this-turn` `{ castVia: "warp" }` over every player. */
+  | { readonly kind: "any"; readonly of: readonly StaticCondition[] }
   /**
    * "If you've cast a creature spell this turn": how many of the spells a
    * player — `"you"` by default, or each opponent's, or anyone's — has cast

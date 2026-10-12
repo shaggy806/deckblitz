@@ -637,13 +637,19 @@ countered spells too),
 scope have a nonzero total — "for each opponent who lost life this turn";
 Tymna the Weaver's "the number of opponents that were dealt combat damage this
 turn" is `"combat-damage-taken"`),
-`{ turnHistory: "entered" | "died" | "sacrificed" | "exiled" | "descended", who?, filter? }`
-(how many permanents entered under the scope's control, creatures died under
+`{ turnHistory: "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended", who?, filter? }`
+(how many permanents entered under the scope's control, left the battlefield
+from under it — for anywhere, however, a token too, its controller as it left
+(Kutzil's Flanker's "for each creature that left the battlefield under your
+control this turn": `{ turnHistory: "left", filter: { type: "creature" } }`),
+creatures died under
 it, permanents they sacrificed, permanents were exiled from under their
 control (Vren, the Relentless: `{ turnHistory: "exiled", who:
 "each-opponent", filter: { type: "creature" } }`), or permanent cards were put
 into their graveyards — "you descended" — this turn; a token stack counts every token.
-`filter` narrows them: a permanent that has left as it last existed, a card in
+`filter` narrows them: a permanent that has left as it last existed (a `left`
+entry as it was in the stint it left, though it has come back and left again
+since — rule 603.10a), a card in
 a graveyard as it is now. See `PlayerState.turnHistory`),
 `{ damageDealtThisTurn: true, who?, combat?, colors? }` (how much damage
 sources the scope's players controlled dealt this turn, to anything — only
@@ -802,7 +808,7 @@ target, so hexproof doesn't stop them.
 | `destroy-all` | `filter`, `cantBeRegenerated?` | Wrath of God (`cantBeRegenerated: true` — "They can't be regenerated"). |
 | `exile` | `target`, `untilSourceLeaves?`, `withCounters?`, `mayCast?`, `airbend?` | Angelic Edict. `airbend: true` is **airbend** (rule 701.65a — Airbending Lesson, Aang): the card this exiled may be cast from exile by its **owner** (not the effect's controller) for {2} rather than its mana cost for as long as it stays there (`GameObject.airbended`, offered as a `via: "airbend"` cast) — an alternative cost, so no other goes with it (no evoke, overload or free cast), while kicker and mandatory additional costs are paid on top and X is 0; a token exiled ceases to exist and a land card can't be played. Several targets airbended are one instruction: a `simultaneous` `sequence` (Whirlwind Technique's "up to two target creatures") or a `simultaneous` `for-each-target` over an `any-number` group (Appa, Steadfast Guardian). Works on a card in a **graveyard** as well as a permanent (Withered Wretch), and on a **spell**: it leaves the stack without being countered, so one that can't be countered goes too (Mindbreak Trap), and a copy ceases to exist (rule 707.10c). `untilSourceLeaves` is an "O-Ring" (Banishing Light, Conclave Tribunal) — see below. `target` may be `"trigger-object"`: a dies trigger's "you may exile it" (Brenard, Ginger Sculptor; Myrkul, Lord of Bones), which acts only while it's still the card that died (rule 400.7 — reanimated in response, it's a new object and stays put); follow it with a `this-way` `"exiled"` `conditional` for "if you do". `withCounters: { kind, amount }` is "exile it **with a croak counter on it**": counters the card gets in exile, only if this effect put it there (whatever it had on the battlefield is gone, rule 400.7). `mayCast: { duration: "while-exiled" | "end-of-turn", spendAs? }` gives the controller an impulse permission to *cast* the card this exiled ("you may cast that card for as long as it remains exiled, and mana of any type can be spent to cast that spell"); a token exiled has ceased to exist. Not for an O-Ring that lets you cast what it took (Hostage Taker): the engine returns an O-Ring's card with a trigger, and in that window the permission would still be live, where rule 610.3 returns it at once. The effect's controller is recorded as having exiled the card (`exiledByPlayer` — Haldan's "cards you exiled"). `linked: true` exiles it **with** this source (rule 607.2a — `GameObject.exiledWith`, the battlefield stint the ability refers to) and counts it on the source for good (`exiledWithCount`, read by the `exiled-with-source` condition): Colfenor's Urn's "you may exile it" and "if three or more cards have been exiled with this artifact" — every card ever exiled with it, though some have left exile since (its ruling). |
 | `return-exiled-by-source` | `linked?: "hand" \| "battlefield"` | The other half of an O-Ring: returns everything this source exiled, to the battlefield under its **owner's** control. `linked: "hand"` instead puts the cards **linked** to this source (hideaway's, rule 607.2a — `GameObject.exiledWith`) into their owners' hands, unrevealed: Watcher for Tomorrow's "When this creature leaves the battlefield, put the exiled card into its owner's hand" — the leaves trigger reaches the card the stint that left exiled, so one that left before its hideaway resolved finds nothing (the ruling). `linked: "battlefield"` puts those linked cards onto the battlefield under their owners' control, together — Colfenor's Urn's "sacrifice it. If you do, return those cards", found though the Urn has just gone (a `sacrifice-source`'s `then`). `linked: "hand"` is also the Champions' "return the exiled card to its owner's hand", whose card a `behold … and exile it` cost linked (rule 607.2q — `additionalCost.behold`). |
-| `put-onto-battlefield` | `target` (an `EffectTargetRef`, so `"trigger-object"` works — Undying returns *itself*), `underYourControl?`, `under?`, `enterTapped?`, `withCounters?`, `exileIfItWouldLeave?`, `transformed?`, `setTypes?`, `addSubtypes?` | Reanimation that names one card, from anyone's graveyard — as opposed to `return-from-graveyard`'s filter over your own. `underYourControl` makes controller diverge from owner, so the card still goes back to its **owner's** graveyard when it dies. `under` (an `EffectPlayerRef`) is someone else's control instead — The Beamtown Bullies' "target opponent … puts target … card from your graveyard onto the battlefield under their control" (`under: { target: 0 }`); an illegal target, either one, moves nothing (rule 608.2b). `transformed` is "…onto the battlefield transformed" (Ojer Axonil's "return it to the battlefield tapped and transformed"): a transforming double-faced card enters back face up; anything else just enters. `setTypes` replaces its card types for as long as it stays: the Enduring cycle's "return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)" is `setTypes: ["enchantment"]` (the `enduringReturn(name)` helper writes the whole trigger). It's in place as the card enters (rule 614.12), so it enters *as* an enchantment — a "whenever a creature enters" never sees it, an enchantment's enters trigger does — and the subtypes that went only with the lost types go too (rule 205.1a); supertypes stay. `addSubtypes` is the same for "in addition to its other types": Portal to Phyrexia's "put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types" is `addSubtypes: ["Phyrexian"]`, in place as it enters. |
+| `put-onto-battlefield` | `target` (an `EffectTargetRef`, so `"trigger-object"` works — Undying returns *itself*), `underYourControl?`, `under?`, `enterTapped?`, `withCounters?`, `exileIfItWouldLeave?`, `transformed?`, `setTypes?`, `addSubtypes?`, `attacking?` | Reanimation that names one card, from anyone's graveyard — as opposed to `return-from-graveyard`'s filter over your own. `underYourControl` makes controller diverge from owner, so the card still goes back to its **owner's** graveyard when it dies. `under` (an `EffectPlayerRef`) is someone else's control instead — The Beamtown Bullies' "target opponent … puts target … card from your graveyard onto the battlefield under their control" (`under: { target: 0 }`); an illegal target, either one, moves nothing (rule 608.2b). `transformed` is "…onto the battlefield transformed" (Ojer Axonil's "return it to the battlefield tapped and transformed"): a transforming double-faced card enters back face up; anything else just enters. `setTypes` replaces its card types for as long as it stays: the Enduring cycle's "return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)" is `setTypes: ["enchantment"]` (the `enduringReturn(name)` helper writes the whole trigger). It's in place as the card enters (rule 614.12), so it enters *as* an enchantment — a "whenever a creature enters" never sees it, an enchantment's enters trigger does — and the subtypes that went only with the lost types go too (rule 205.1a); supertypes stay. `addSubtypes` is the same for "in addition to its other types": Portal to Phyrexia's "put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types" is `addSubtypes: ["Phyrexian"]`, in place as it enters. `attacking` (an `EnterAttacking`, with `enterTapped`) is "…tapped and attacking" (Chorale of the Void: `attacking: "choose"` — its controller picks what it attacks, rule 508.4; it was never declared an attacker). |
 | `exile-graveyard` | `target` (a player slot, `"you"`, `"each-player"` or `"each-opponent"`) | Bojuka Bog — exiles that player's whole graveyard at once (rule 406; the cards in it are never individually targeted). `"each-opponent"` is Soul-Guide Lantern's "exile each opponent's graveyard", all of them in one move. `filter?` exiles only the matching cards — Living Death's "each player exiles all creature cards from their graveyard" (`{ target: "each-player", filter: { type: "creature" } }`). |
 | `sacrifice-all` | `who`, `filter` | "Each player sacrifices **all** creatures they control" (Living Death): every matching permanent each player in `who` controls, all at once (one event, rule 603.10a), nobody choosing; one that can't be sacrificed stays. |
 | `put-exiled-this-way-onto-battlefield` | — | Living Death's "then puts all cards they exiled this way onto the battlefield": every card the resolution has exiled so far from a graveyard, hand or library — not a permanent it exiled (a Leyline of the Void's replacement as a creature is sacrificed — the ruling) — still in exile, onto the battlefield under its owner's control, together; each one's "as this enters" choices asked first. |
@@ -2602,7 +2608,8 @@ to others with `grantsTriggered: [ward(...)]`. `cost` is a `WardCost` —
 `{ mana: "{2}" }` (Ward {2}), `{ payLife: 2 }` (Ward—Pay 2 life.),
 `{ mana: "{2}", payLife: 2 }` (Ward—{2}, Pay 2 life.),
 `{ sacrifice: { filter, count?, text: "Sacrifice a Food" } }`,
-`{ discard: 1 }`, `{ blight: 2 }` (Ward—Blight 2: the payer puts two -1/-1
+`{ discard: 1 }`, `{ discard: 1, discardAtRandom: true }` (Ward—Discard a card
+at random: Alpharael, Stonechosen — nobody picks which), `{ blight: 2 }` (Ward—Blight 2: the payer puts two -1/-1
 counters on a creature they control, rule 701.68a — payable only with one,
 701.68b). When the trigger resolves, the player whose spell or
 ability targeted the permanent (`GameObject.targetedBy`) is asked a
@@ -3362,7 +3369,13 @@ clause (section 9):
   under your control this turn" is `{ what: "entered", filter: { subtype:
   "Human" }, excludeSelf: true }` (a Human that entered and left since still
   counts); "if a creature died under your control this turn" is `{ what:
-  "died" }`; "if you descended this turn" `{ what: "descended" }`. `who` is
+  "died" }`; "if you descended this turn" `{ what: "descended" }`. **Revolt**
+  (and disappear, and "if a permanent you controlled left the battlefield this
+  turn") is `{ what: "left" }` — `REVOLT_CONDITION` in `helpers.ts`: a
+  permanent its controller controlled as it left (rule 603.10a), for any zone,
+  however it left, a token too; Tale of Momo's "if a creature left the
+  battlefield under your control" adds `filter: { type: "creature" }`.
+  Phasing out isn't leaving (rule 702.26d). `who` is
   `"you"` (default), `"opponent"` or `"any-player"`. The `turn-stat`
   condition covers the running totals, raid (`stat: "attacked"`) and
   `"combat-damage-taken"` among them.
@@ -3384,7 +3397,11 @@ clause (section 9):
   notTypes: ["creature"] } }` — an Adventure cast as its instant or sorcery
   half was a noncreature spell, though a creature card sits in exile after.
   The cast trigger's `firstEachTurn`/`nthEachTurn` with a filter, and a
-  `costModification`'s `firstEachTurn`, count the same records.
+  `costModification`'s `firstEachTurn`, count the same records. Each record
+  knows how its spell was cast, so `cast`, `castBy`, `castFrom` and `castVia`
+  read it: "if a spell was warped this turn" (rule 702.185c) is `{ who:
+  "any", filter: { castVia: "warp" } }` — a warped spell countered since
+  still counts.
 - `{ kind: "trigger-spell-first", anyOf: [{ filter, otherThanSource? }] }` — a
   cast trigger's spell is its caster's first spell this turn matching one of
   the filters (Alania, Divergent Storm — see `whileCondition` in §9), counting
@@ -3411,6 +3428,16 @@ clause (section 9):
   the Heart's "at the beginning of your second main phase, if you attacked this
   turn" is a `postcombat-main` trigger whose condition is a `turn-structure`
   `mainPhase: 2` and a `turn-stat` `attacked` together.
+- `{ kind: "any", of: [...] }` — at least one of the conditions holds. **Void**
+  ("if a nonland permanent left the battlefield this turn or a spell was
+  warped this turn") is `VOID_CONDITION` in `helpers.ts`: a `turn-history`
+  `{ what: "left", who: "any-player", filter: { notTypes: ["land"] } }` or a
+  `cast-this-turn` `{ who: "any", filter: { castVia: "warp" } }`. Fatal Push's
+  "mana value 2 or less, or 4 or less with revolt" is an `any` of a `target`
+  and an `all` of revolt and a `target`. As an intervening if it's a
+  triggered ability's `condition`; "sacrifice it unless …" (Chorale of the
+  Void) is a `conditional` on its `not`, read only as it resolves; "… instead
+  if …" a `conditional` with `else`, or an `ifCondition` amount (Plasma Bolt).
 - `{ kind: "not", of }` — the negation of any other condition (Titan Hunter's
   "**if no creatures died this turn**"). Composes, so it's cheaper than a
   `no-` variant of each condition.

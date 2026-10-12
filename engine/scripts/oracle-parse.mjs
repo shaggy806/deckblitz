@@ -1619,11 +1619,29 @@ export function parseFace(face, ctx = {}) {
   return out;
 }
 
+/** Void (Edge of Eternities): a nonland permanent — anyone's — left the
+ * battlefield this turn, or a spell — anyone's — was cast for its warp cost
+ * (rule 702.185c). */
+const VOID_CONDITION = {
+  kind: "any",
+  of: [
+    { kind: "turn-history", what: "left", who: "any-player", filter: { notTypes: ["land"] } },
+    { kind: "cast-this-turn", who: "any", filter: { castVia: "warp" } },
+  ],
+};
+/** Revolt (Aether Revolt), disappear (TMNT): a permanent you controlled as
+ * it left left the battlefield this turn. */
+const REVOLT_CONDITION = { kind: "turn-history", what: "left" };
+
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
- * raid (Alesha) and morbid (Liliana's Devotee). */
+ * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte) and
+ * revolt (Hidden Stockpile). */
 const INTERVENING_IFS = {
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
+  "if a nonland permanent left the battlefield this turn or a spell was warped this turn,": VOID_CONDITION,
+  "if a permanent left the battlefield under your control this turn,": REVOLT_CONDITION,
+  "if a permanent you controlled left the battlefield this turn,": REVOLT_CONDITION,
   // How its spell was cast (rule 702.188a): the permanent keeps `castVia`.
   "if it was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },

@@ -10884,7 +10884,7 @@ export class Game {
       counts[name] = (counts[name] ?? 0) + 1;
     }
     this.state.players[player].spellsCastThisTurn += 1;
-    (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId));
+    (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId, player, castFrom));
     this.recordCastName(player, cardId);
     this.state.spellsCastThisTurn += 1;
     object.castFrom = castFrom;
@@ -18222,6 +18222,7 @@ export class Game {
       // `not`, which `staticConditionMet` alone would read as always false.
       if (condition.kind === "not") return !conditionMet(condition.of);
       if (condition.kind === "all") return condition.of.every(conditionMet);
+      if (condition.kind === "any") return condition.of.some(conditionMet);
       // Resolution happens outside the layer fold, so the source can count
       // itself ("if creatures you control have total power 10 or greater"
       // includes the creature asking) without recursing.
@@ -18936,7 +18937,7 @@ export class Game {
         });
         return false;
       },
-      putOntoBattlefield: (target, under, enterTapped, withCounters, exileIfLeaves, transformed, types) =>
+      putOntoBattlefield: (target, under, enterTapped, withCounters, exileIfLeaves, transformed, types, attacking) =>
         this.putOntoBattlefieldByEffect(
           target,
           controller,
@@ -18947,6 +18948,7 @@ export class Game {
           transformed === true,
           under,
           types,
+          attacking,
         ),
       exileGraveyard: (target, filter) => {
         if (target.kind !== "player") return;
@@ -25532,7 +25534,7 @@ export class Game {
   /**
    * Note `event` in the turn history of the player it concerns (see
    * `TurnHistory`) — from `emit`, so every path that announces an entry, a
-   * death, a sacrifice, a card put into a graveyard, damage or an attack
+   * leave, a death, a sacrifice, a card put into a graveyard, damage or an attack
    * counts.
    */
   private recordTurnHistory(event: GameEvent): void {
@@ -25550,13 +25552,16 @@ export class Game {
         return;
       }
       case "permanent-left-battlefield": {
-        if (event.toZone !== "graveyard" && event.toZone !== "exile") return;
         const object = this.state.objects[event.object];
         const lki = object?.lastKnown ?? this.state.ceasedTokens?.[event.object];
         if (lki === undefined) return;
+        // Its controller as it left (rule 603.10a), wherever it went — a
+        // token too, which still moved before it ceased to exist (rule 111.7).
         const history = historyOf(lki.controller);
         if (history === undefined) return;
         const entry = { object: event.object, count: object?.stackCount ?? 1 };
+        (history.left ??= []).push({ ...entry, stint: lki.zoneChangeCount });
+        if (event.toZone !== "graveyard" && event.toZone !== "exile") return;
         if (event.toZone === "exile") (history.exiled ??= []).push(entry);
         else if (lki.types.includes("creature")) (history.died ??= []).push(entry);
         return;
@@ -26296,7 +26301,12 @@ export class Game {
       });
     }
     if (cost.discard !== undefined) {
-      parts.push({ kind: "discard", target: "you", amount: cost.discard });
+      parts.push({
+        kind: "discard",
+        target: "you",
+        amount: cost.discard,
+        ...(cost.discardAtRandom === true ? { random: true } : {}),
+      });
     }
     // "Ward—Blight 2" (rule 701.68a): the payer's own creature.
     if (cost.blight !== undefined) {
@@ -26799,10 +26809,21 @@ export class Game {
   }
 
   /** The spell `id` as it was cast, for `PlayerState.spellsCastThisTurnAs`:
-   * a snapshot of it on the stack, its mana value counting its {X}. */
-  private castRecordOf(id: ObjectId): CastSpellRecord {
+   * a snapshot of it on the stack, its mana value counting its {X}, and how
+   * it was cast (its `entry.cast`, replacing whatever an earlier stint on the
+   * battlefield left there) — "if a spell was warped this turn" (rule
+   * 702.185c) asks its `castVia`. */
+  private castRecordOf(id: ObjectId, caster: PlayerId, castFrom: ZoneType): CastSpellRecord {
     const spell = this.takeLastKnown(id);
-    return { id, spell: { ...spell, manaValue: this.manaValueOnStack(this.state.objects[id]) } };
+    const via = this.state.objects[id]?.castVia ?? undefined;
+    return {
+      id,
+      spell: {
+        ...spell,
+        manaValue: this.manaValueOnStack(this.state.objects[id]),
+        entry: { from: castFrom, cast: { by: caster, from: castFrom, ...(via !== undefined ? { via } : {}) } },
+      },
+    };
   }
 
   /** A spell's mana value while it's on the stack: printed, plus each {X}

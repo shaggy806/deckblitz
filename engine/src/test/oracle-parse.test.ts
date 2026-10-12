@@ -446,6 +446,39 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(slung.complete).toBe(true);
   });
 
+  it("void and revolt (and disappear): the `left` turn history and a warped spell", () => {
+    // Void (Edge of Eternities): anyone's nonland permanent, or a spell cast
+    // for its warp cost (rule 702.185c). The ability word is dropped.
+    const voided = face(
+      "Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, put a +1/+1 counter on this creature.",
+    );
+    expect(voided.triggered[0].condition).toEqual({
+      kind: "any",
+      of: [
+        { kind: "turn-history", what: "left", who: "any-player", filter: { notTypes: ["land"] } },
+        { kind: "cast-this-turn", who: "any", filter: { castVia: "warp" } },
+      ],
+    });
+    expect(voided.complete).toBe(true);
+    // Revolt / disappear, and the "you controlled" wording (Vrock, Lulu).
+    const revolt = { kind: "turn-history", what: "left" };
+    for (const text of [
+      "Revolt — When this creature enters, if a permanent left the battlefield under your control this turn, draw a card.",
+      "Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, draw a card.",
+      "At the beginning of your end step, if a permanent you controlled left the battlefield this turn, each opponent loses 3 life.",
+    ]) {
+      const parsed = face(text);
+      expect(parsed.triggered[0].condition).toEqual(revolt);
+      expect(parsed.complete).toBe(true);
+    }
+    // Not the "unless" or "instead" forms, which a person writes.
+    expect(
+      face(
+        "Void — At the beginning of your end step, sacrifice this Aura unless a nonland permanent left the battlefield this turn or a spell was warped this turn.",
+      ).complete,
+    ).toBe(false);
+  });
+
   it("web-slinging's returned creature: its mana value, as Scarlet Spider's counters", () => {
     const save = face(
       "Sensational Save — If ~ was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.",

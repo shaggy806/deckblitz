@@ -66,6 +66,28 @@ export const thisOrAnother = (ability: TriggeredAbility, self?: CardFilter): Tri
 };
 
 /**
+ * Void (an ability word, rule 207.2c — Edge of Eternities): "if a nonland
+ * permanent left the battlefield this turn or a spell was warped this turn".
+ * Anyone's permanent, however it left, a token too (the `left` turn history,
+ * read as it last existed — rule 603.10a); anyone's spell cast for its warp
+ * cost, countered since or not (rule 702.185c and its ruling).
+ */
+export const VOID_CONDITION: StaticCondition = {
+  kind: "any",
+  of: [
+    { kind: "turn-history", what: "left", who: "any-player", filter: { notTypes: ["land"] } },
+    { kind: "cast-this-turn", who: "any", filter: { castVia: "warp" } },
+  ],
+};
+
+/**
+ * Revolt (an ability word, Aether Revolt) and disappear (TMNT): "if a
+ * permanent left the battlefield under your control this turn" — one you
+ * controlled as it left, for anywhere, a token too.
+ */
+export const REVOLT_CONDITION: StaticCondition = { kind: "turn-history", what: "left" };
+
+/**
  * Ward (rule 702.21a): "Whenever this permanent becomes the target of a spell
  * or ability an opponent controls, counter that spell or ability unless that
  * player pays [cost]." A real triggered ability, so each instance triggers

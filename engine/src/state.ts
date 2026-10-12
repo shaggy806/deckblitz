@@ -1329,6 +1329,11 @@ export interface LastKnownInfo {
  */
 export interface CastSpellRecord {
   readonly id: ObjectId;
+  /** The spell's snapshot on the stack. Its `entry.cast` is how it was cast
+   * — by whom, from where, under which permission — so the filter's `cast`,
+   * `castBy`, `castFrom` and `castVia` clauses answer for it as they do for a
+   * live spell: "if a spell was warped this turn" (void, rule 702.185c) is
+   * `{ castVia: "warp" }` over every player's records. */
   readonly spell: LastKnownInfo;
 }
 
@@ -2556,10 +2561,15 @@ export interface CombatId {
 export interface TurnHistoryEntry {
   readonly object: ObjectId;
   readonly count: number;
+  /** For a permanent that left the battlefield (`left`): the battlefield
+   * stint it left — its `LastKnownInfo.zoneChangeCount` — so it's matched as
+   * it was *then* (rule 603.10a), not as a later stint left it, once it has
+   * come back and left again. */
+  readonly stint?: number;
 }
 
 /** The lists a {@link TurnHistory} keeps. */
-export type TurnHistoryKind = "entered" | "died" | "sacrificed" | "exiled" | "descended";
+export type TurnHistoryKind = "entered" | "left" | "died" | "sacrificed" | "exiled" | "descended";
 
 /**
  * What one player's turn so far has held, for "this turn" conditions and
@@ -2573,6 +2583,15 @@ export type TurnHistoryKind = "entered" | "died" | "sacrificed" | "exiled" | "de
 export interface TurnHistory {
   /** Permanents that entered the battlefield under this player's control. */
   entered?: TurnHistoryEntry[];
+  /** Permanents that left the battlefield while this player controlled them
+   * — controlled as they left (rule 603.10a looks back) — for any zone,
+   * however they left, a token included: revolt's "if a permanent you
+   * controlled left the battlefield this turn", void's "if a nonland
+   * permanent left the battlefield this turn" (every player's list, filtered
+   * `notTypes: ["land"]`). Phasing out isn't leaving (rule 702.26d): it
+   * moves nothing, so nothing is announced. Each entry names the stint it
+   * left. */
+  left?: TurnHistoryEntry[];
   /** Creatures that died under this player's control. */
   died?: TurnHistoryEntry[];
   /** Permanents this player sacrificed. */

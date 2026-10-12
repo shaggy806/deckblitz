@@ -579,6 +579,9 @@ export interface WardCost {
   };
   /** "Discard a card" (Arna Kenneruud): how many; the payer picks which. */
   readonly discard?: number;
+  /** With `discard`: "Discard a card **at random**" (Alpharael,
+   * Stonechosen) — no one picks which. */
+  readonly discardAtRandom?: boolean;
   /** "Ward—Blight 2" (Auntie Ool): the payer puts two -1/-1 counters on a
    * creature they control (rule 701.68a), choosing which as they pay — the
    * `blight` effect. Payable only while they control a creature (701.68b). */
@@ -625,7 +628,8 @@ export function wardCostText(cost: WardCost): string {
   if (cost.payLife !== undefined) parts.push(`Pay ${cost.payLife} life`);
   if (cost.sacrifice !== undefined) parts.push(cost.sacrifice.text);
   if (cost.discard !== undefined) {
-    parts.push(cost.discard === 1 ? "Discard a card" : `Discard ${cost.discard} cards`);
+    const random = cost.discardAtRandom === true ? " at random" : "";
+    parts.push(cost.discard === 1 ? `Discard a card${random}` : `Discard ${cost.discard} cards${random}`);
   }
   if (cost.blight !== undefined) parts.push(`Blight ${cost.blight}`);
   const onlyMana = cost.mana !== undefined && parts.length === 1;
@@ -1752,6 +1756,10 @@ export type EffectSpec =
        * as it enters, as `setTypes` is: "whenever a Phyrexian enters" sees
        * it arrive as one. */
       readonly addSubtypes?: readonly string[];
+      /** "…onto the battlefield under your control **tapped and attacking**"
+       * (Chorale of the Void, rule 508.4) — see {@link EnterAttacking}.
+       * Pair it with `enterTapped`. */
+      readonly attacking?: EnterAttacking;
     }
   | {
       /** Exile every card in a target *player's* graveyard (rule 406 — Bojuka
@@ -5498,6 +5506,8 @@ export interface EffectApi {
     /** The types it enters with — see the effect's `setTypes` and
      * `addSubtypes`. */
     types?: EnterTypes,
+    /** "…tapped and attacking" — see the effect's `attacking`. */
+    attacking?: ResolvedEnterAttacking,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
   searchLibrary(
@@ -7154,6 +7164,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                 ...(spec.addSubtypes !== undefined ? { addSubtypes: spec.addSubtypes } : {}),
               }
             : undefined,
+          resolveEnterAttacking(spec.attacking, ctx),
         );
         if (asked) ctx.resumeAfterDecisions(spec, parked);
       }

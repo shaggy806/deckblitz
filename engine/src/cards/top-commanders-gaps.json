@@ -252,7 +252,9 @@
   "keyword:storied",
   "keyword:web-slinging",
   "keyword:waterbend",
-  "keyword:airbend"
+  "keyword:airbend",
+  "condition:void-condition",
+  "stat:revolt-condition"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

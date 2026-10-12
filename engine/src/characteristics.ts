@@ -734,6 +734,8 @@ function evalStaticCondition(
       return !evalStaticCondition(state, registry, source, condition.of, opts);
     case "all":
       return condition.of.every((each) => evalStaticCondition(state, registry, source, each, opts));
+    case "any":
+      return condition.of.some((each) => evalStaticCondition(state, registry, source, each, opts));
     case "opponent-lost-life-this-turn":
       return state.turnOrder.some(
         (p) => p !== you && state.players[p].lifeLostThisTurn > 0,
@@ -993,8 +995,10 @@ export function damageDealtThisTurn(
  * How many things of one {@link TurnHistory} list `players` have this turn,
  * matching `filter` from `you`'s side — a token stack counting as every
  * token in it. A permanent that has left the battlefield is matched as it
- * last existed there; a card put into a graveyard (`descended`), as it is
- * now. `except` leaves one object out ("another Human").
+ * last existed there — a `left` entry as it was in the stint it left (rule
+ * 603.10a), though it has come back and left again since; a card put into a
+ * graveyard (`descended`), as it is now. `except` leaves one object out
+ * ("another Human").
  */
 export function turnHistoryCount(
   state: GameState,
@@ -1009,19 +1013,37 @@ export function turnHistoryCount(
   for (const player of players) {
     for (const entry of state.players[player]?.turnHistory?.[what] ?? []) {
       if (entry.object === except) continue;
-      if (
-        filter !== undefined &&
-        !matchesFilter(state, registry, entry.object, filter, {
-          you,
-          ...(what === "descended" ? {} : { lastKnown: true }),
-        })
-      ) {
-        continue;
+      if (filter !== undefined) {
+        const snapshot = entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint);
+        const matched = matchesFilter(
+          state,
+          registry,
+          entry.object,
+          filter,
+          snapshot !== undefined
+            ? { you, snapshot }
+            : { you, ...(what === "descended" ? {} : { lastKnown: true }) },
+        );
+        if (!matched) continue;
       }
       n += entry.count;
     }
   }
   return n;
+}
+
+/** Object `id` as it last existed on the battlefield in battlefield stint
+ * `stint` — its `lastKnown`, one of its `earlierLastKnown`, or a ceased
+ * token's snapshot — or nothing once that snapshot is no longer kept. */
+function snapshotOfStint(state: GameState, id: ObjectId, stint: number): LastKnownInfo | undefined {
+  const object = state.objects[id];
+  if (object === undefined) {
+    const ceased = state.ceasedTokens?.[id];
+    return ceased?.zoneChangeCount === stint ? ceased : undefined;
+  }
+  return [object.lastKnown, ...(object.earlierLastKnown ?? [])].find(
+    (known) => known !== undefined && known.zoneChangeCount === stint,
+  );
 }
 
 /**
