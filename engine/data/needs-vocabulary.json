@@ -5637,6 +5637,34 @@
   "mechanic:morph-land": {
    "family": "mechanic:face-down",
    "example": "Zoetic Cavern: a land with morph — the engine offers a land card only as a land play, never a face-down cast."
+  },
+  "replacement:enters-tapped-if-x": {
+   "family": "replacement:new-event-replacements",
+   "example": "Slumbering Trudge: 'If X is 2 or less, it enters tapped' — an enters-tapped replacement conditioned on the X it was cast with (tappedUnless gets no X)."
+  },
+  "effect:copy-spell-grants": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Choreographed Sparks: 'Copy target creature spell you control. The copy gains haste and \"At the beginning of the end step, sacrifice this token.\"' — copy-spell has no grants for the resulting token."
+  },
+  "cost:self-cost-reduction-colored": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Brush Off: 'This spell costs {1}{U} less to cast if …' — selfCostReduction reduces only generic mana."
+  },
+  "effect:cards-in-target-player-hand": {
+   "family": "effect:amount-new-variants",
+   "example": "Borrowed Knowledge: draw cards equal to the number of cards in target opponent's hand — cardsInHand has no target-slot form."
+  },
+  "effect:mana-ability-graveyard-exile-cost": {
+   "family": "effect:mana-ability-side-effects",
+   "example": "Rubble Rouser: '{T}, Exile a card from your graveyard: Add {R}. When you do, this creature deals 1 damage to each opponent' — a mana ability with a graveyard-exile cost (refused today) and a reflexive trigger."
+  },
+  "effect:look-and-choose-split-by-type": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "Zimone's Experiment: reveal up to two creature and/or land cards from the top five; lands onto the battlefield tapped, creatures into your hand."
+  },
+  "static:grant-sneak-to-graveyard": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Ninja Teen (level 3): creature cards in your graveyard have sneak {3}{B}, and you may cast them from your graveyard using sneak."
   }
  }
 }

@@ -37,6 +37,7 @@ import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
+import _poolBloodletting from "../pool/bloodletting.js";
 import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
 import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
@@ -299,6 +300,7 @@ import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
+import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
@@ -429,6 +431,7 @@ const shard: CardShard = {
     _poolBellowingTanglewurm,
     _poolBlanchwoodTreefolk,
     _poolBlazingFiresinger,
+    _poolBloodletting,
     _poolBloodsoakedInsight,
     _poolBloombrute,
     _poolBlurredMongoose,
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolSoulcageFiend,
     _poolSpearbreakerBehemoth,
     _poolSpitefulBanditry,
+    _poolSplintersTechnique,
     _poolSquirrelanoids,
     _poolStargaze,
     _poolStarnheimAspirant,

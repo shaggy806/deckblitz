@@ -182,6 +182,10 @@ export interface GameObject {
    * 400.7).
    */
   discardedOnTurn?: number;
+  /** What the creature returned to pay this spell's sneak cost was attacking
+   * (rule 702.190b) — the permanent it becomes enters tapped and attacking
+   * that. Set as the cost is paid; cleared by any zone change. */
+  sneakAttacking?: PlayerId | ObjectId;
   /**
    * True while the creature has not been under its controller's control since
    * the start of that player's most recent turn (rule 302.6). Set on entering

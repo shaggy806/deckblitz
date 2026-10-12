@@ -224,6 +224,7 @@ import _poolPondProphet from "../pool/pond-prophet.js";
 import _poolPortOfKarfell from "../pool/port-of-karfell.js";
 import _poolPowerDepot from "../pool/power-depot.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
+import _poolProcrastinate from "../pool/procrastinate.js";
 import _poolProfaneInsight from "../pool/profane-insight.js";
 import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
@@ -280,6 +281,7 @@ import _poolSkyclaveGeopede from "../pool/skyclave-geopede.js";
 import _poolSkyscanner from "../pool/skyscanner.js";
 import _poolSkyshipBuccaneer from "../pool/skyship-buccaneer.js";
 import _poolSkywaySniper from "../pool/skyway-sniper.js";
+import _poolSlashReptileRampager from "../pool/slash-reptile-rampager.js";
 import _poolSlaughterDrone from "../pool/slaughter-drone.js";
 import _poolSliptideSerpent from "../pool/sliptide-serpent.js";
 import _poolSliverHive from "../pool/sliver-hive.js";
@@ -355,6 +357,7 @@ import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wil
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
+import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 
 const shard: CardShard = {
@@ -580,6 +583,7 @@ const shard: CardShard = {
     _poolPortOfKarfell,
     _poolPowerDepot,
     _poolPrimarisChaplain,
+    _poolProcrastinate,
     _poolProfaneInsight,
     _poolPropaganda,
     _poolProtectorOfTheWastes,
@@ -636,6 +640,7 @@ const shard: CardShard = {
     _poolSkyscanner,
     _poolSkyshipBuccaneer,
     _poolSkywaySniper,
+    _poolSlashReptileRampager,
     _poolSlaughterDrone,
     _poolSliptideSerpent,
     _poolSliverHive,
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _tokensHumanMonkToken,
     _tokensKithkinToken,
     _tokensLotus,
+    _tokensPestTokenAttacks,
     _tokensRedHumanToken,
   ],
 };

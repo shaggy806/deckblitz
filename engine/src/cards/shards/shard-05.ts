@@ -224,6 +224,7 @@ import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
+import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
@@ -592,6 +593,7 @@ const shard: CardShard = {
     _poolOakhollowVillage,
     _poolObsidianGiant,
     _poolOperaLoveSong,
+    _poolOraclesGift,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
     _poolPathmakerInitiate,

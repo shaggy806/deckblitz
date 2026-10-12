@@ -48,6 +48,11 @@ export type CastVia =
   /** Mayhem (rule 702.187b) — from the caster's graveyard, a card they
    * discarded this turn, for its mayhem cost: an alternative cost. */
   | "mayhem"
+  /** For its sneak cost (rule 702.190a): from the hand or the command zone,
+   * during the caster's declare blockers step, returning an unblocked
+   * creature they control to its owner's hand (`sneakReturn`). An
+   * alternative cost; timing is an instant's. */
+  | "sneak"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
@@ -325,6 +330,10 @@ export type Action =
        * you control with flying"), picked from the variant's `tapCost` offer.
        * Omitted, the engine picks for a driver that doesn't choose. */
       readonly tap?: readonly ObjectId[];
+      /** For `via: "sneak"` (rule 702.190a): the unblocked creature returned
+       * to its owner's hand as part of the cost — the offer's `sneakReturn`.
+       * Omitted, the engine returns the first eligible one. */
+      readonly sneakReturn?: ObjectId;
       /** For `via: "escape"`: the other cards in the caster's graveyard
        * exiled to pay the escape cost (rule 702.139a — "exile N other cards
        * from your graveyard"), picked from the variant's `escapeExile` offer:
@@ -710,6 +719,9 @@ export type LegalAction =
        * power comes off the cost — the cast echoes it as `tap: [object]`.
        * Absent on the variant that taps none. */
       readonly harmonizeTap?: { readonly object: ObjectId; readonly cardName: string; readonly power: number };
+      /** A sneak variant's unblocked attacker to return (rule 702.190a): one
+       * offer per creature that could be, echoed back as `sneakReturn`. */
+      readonly sneakReturn?: { readonly object: ObjectId; readonly cardName: string };
       /** Set for a *targeted modal* spell (rule 700.2 — ROADMAP Phase 11 EG-2):
        * the driver picks `minModes..maxModes` of `modes` (each a text label +
        * its own target specs), then targets for the chosen modes, then echoes

@@ -221,6 +221,7 @@ import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
+import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
@@ -568,6 +569,7 @@ const shard: CardShard = {
     _poolPacifism,
     _poolPatriarsSeal,
     _poolPeregrineGriffin,
+    _poolPestFriend,
     _poolPetrifiedField,
     _poolPhyrexianLens,
     _poolPriestsOfNorn,

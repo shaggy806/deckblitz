@@ -130,6 +130,7 @@ import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
+import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
@@ -474,6 +475,7 @@ const shard: CardShard = {
     _poolGudulLurker,
     _poolGyreEngineer,
     _poolHERBIELovableRobot,
+    _poolHardenedAcademic,
     _poolHavocDevils,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,

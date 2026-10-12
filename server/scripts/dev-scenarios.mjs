@@ -952,6 +952,32 @@ export default {
     hand: { alice: ["Dáin's Company"] },
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  SNEAK: {
+    about:
+      "2p. Sneak (rule 702.190): attack bob with Grizzly Bears (he has nothing to block with). In the declare " +
+      "blockers step the hand offers 'Cast (sneak, returning Grizzly Bears)': Raphael, the Nightwatcher for " +
+      "{1}{R}{R} — the Bears go back to hand, Raphael enters tapped and attacking bob with double strike; or " +
+      "Shredder's Technique for {B} on bob's Glorious Anthem (you lose 2 life).",
+    players: ["alice", "bob"],
+    lands: { alice: 0, bob: 3 },
+    battlefield: {
+      alice: ["Grizzly Bears", "Mountain", "Mountain", "Mountain", "Swamp"],
+      bob: ["Glorious Anthem"],
+    },
+    hand: { alice: ["Raphael, the Nightwatcher", "Shredder's Technique"] },
+    bots: { bob: {} },
+  },
+  SNEA4: {
+    about: "4p. SNEAK at a full table: attack carol with the Bears, then sneak Raphael in — he attacks carol.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 0, bob: 3, carol: 3, dave: 3 },
+    battlefield: {
+      alice: ["Grizzly Bears", "Mountain", "Mountain", "Mountain", "Swamp"],
+      bob: ["Glorious Anthem"],
+    },
+    hand: { alice: ["Raphael, the Nightwatcher", "Shredder's Technique"] },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
   TEAMW: {
     about:
       "2p. Teamwork (rule 702.194): HULK SMASH! in hand. Cast it with teamwork — pick creatures with total power 4 " +

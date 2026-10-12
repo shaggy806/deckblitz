@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbruptDecay from "../pool/abrupt-decay.js";
+import _poolAbstractPaintmage from "../pool/abstract-paintmage.js";
 import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
@@ -217,6 +218,7 @@ import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
+import _poolPotionersTrove from "../pool/potioners-trove.js";
 import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
@@ -370,6 +372,7 @@ import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbruptDecay,
+    _poolAbstractPaintmage,
     _poolAccomplishedAutomaton,
     _poolAcolyteOfXathrid,
     _poolAdamantWill,
@@ -583,6 +586,7 @@ const shard: CardShard = {
     _poolPlateau,
     _poolPlatedCrusher,
     _poolPlumecreedEscort,
+    _poolPotionersTrove,
     _poolPrakhataClubSecurity,
     _poolPriceOfFreedom,
     _poolPricklyBoggart,

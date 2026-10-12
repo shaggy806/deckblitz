@@ -58,10 +58,12 @@ import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
 import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
+import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConsider from "../pool/consider.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
+import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
@@ -81,6 +83,7 @@ import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
 import _poolDawnwingMarshal from "../pool/dawnwing-marshal.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
+import _poolDeepSight from "../pool/deep-sight.js";
 import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
 import _poolDesertedBeach from "../pool/deserted-beach.js";
 import _poolDesertedTemple from "../pool/deserted-temple.js";
@@ -118,6 +121,7 @@ import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
 import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
+import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
@@ -171,6 +175,7 @@ import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
+import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
@@ -204,6 +209,7 @@ import _poolPhyrexianDenouncer from "../pool/phyrexian-denouncer.js";
 import _poolPlagueBeetle from "../pool/plague-beetle.js";
 import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
+import _poolPracticedOffense from "../pool/practiced-offense.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
@@ -414,10 +420,12 @@ const shard: CardShard = {
     _poolClanDefiance,
     _poolCliffgate,
     _poolCloudchaserEagle,
+    _poolComfortingCounsel,
     _poolConsider,
     _poolCopyArtifact,
     _poolCoretapper,
     _poolCorruptCourtOfficial,
+    _poolCostOfBrilliance,
     _poolCrackTheEarth,
     _poolCraterclawColossus,
     _poolCrumbAndGetIt,
@@ -437,6 +445,7 @@ const shard: CardShard = {
     _poolDawnhartGeist,
     _poolDawnwingMarshal,
     _poolDeadlyRiposte,
+    _poolDeepSight,
     _poolDepthsOfDesire,
     _poolDesertedBeach,
     _poolDesertedTemple,
@@ -474,6 +483,7 @@ const shard: CardShard = {
     _poolGeistOfTheArchives,
     _poolGenerousEnt,
     _poolGenerousPup,
+    _poolGeometersArthropod,
     _poolGhaltaTheUnstoppable,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
@@ -527,6 +537,7 @@ const shard: CardShard = {
     _poolMaritimeGuard,
     _poolMarkedByHonor,
     _poolMeetingOfMinds,
+    _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMirkoObsessiveTheorist,
     _poolMisterFantastic,
@@ -560,6 +571,7 @@ const shard: CardShard = {
     _poolPlagueBeetle,
     _poolPollutedBonds,
     _poolPollywogProdigy,
+    _poolPracticedOffense,
     _poolPrimalFrenzy,
     _poolPrismaticVista,
     _poolProsperTomeBound,

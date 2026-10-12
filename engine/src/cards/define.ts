@@ -2146,6 +2146,16 @@ export interface CardDefinition {
    * and never for a copy (not cast from a hand).
    */
   readonly rebound: boolean;
+  /**
+   * Sneak (rule 702.190) — "any time you could cast an instant during your
+   * declare blockers step, you may cast this spell by paying `cost` and
+   * returning an unblocked creature you control to its owner's hand rather
+   * than paying its mana cost" (an alternative cost, from the hand or — a
+   * commander — the command zone). A permanent spell cast this way enters
+   * tapped and attacking what that creature was attacking (702.190b). `null`
+   * for none.
+   */
+  readonly sneak: { readonly cost: string } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
    * exiled instead of going anywhere else from the stack. `null` for a card
@@ -2462,6 +2472,7 @@ const PRINTED_ABILITY: {
   flashback: (def) => def.flashback !== null,
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
+  sneak: (def) => def.sneak !== null,
   harmonize: (def) => def.harmonize !== null,
   foretell: (def) => def.foretell !== null,
   warp: (def) => def.warp !== null,
@@ -2618,6 +2629,7 @@ interface CardDraft {
   loyalty?: number;
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
+  sneak?: { readonly cost: string };
   flashback?: {
     readonly cost: string;
     readonly payLife?: number;
@@ -2722,6 +2734,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     flashback: draft.flashback ?? null,
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
+    sneak: draft.sneak ?? null,
     harmonize: draft.harmonize ?? null,
     foretell: draft.foretell ?? null,
     warp: draft.warp ?? null,

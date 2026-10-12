@@ -1,0 +1,472 @@
+{
+ "batch": "B61",
+ "status": "complete",
+ "ranks": "Secrets of Strixhaven (SOS, 2026-04-24): top 50% by EDHREC rank, its last 50 (SOS done); Teenage Mutant Ninja Turtles (TMT, 2026-03-06): top 50% by EDHREC rank, the first 10; with opus and sneak built and the cards they unblocked",
+ "authored": [
+  {
+   "name": "Embrace the Paradox",
+   "files": [
+    "engine/src/cards/pool/embrace-the-paradox.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Practiced Offense",
+   "files": [
+    "engine/src/cards/pool/practiced-offense.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abstract Paintmage",
+   "files": [
+    "engine/src/cards/pool/abstract-paintmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diary of Dreams",
+   "files": [
+    "engine/src/cards/pool/diary-of-dreams.ts"
+   ],
+   "tested": true,
+   "note": "NEEDS A ONE-LINE ENGINE FIX: game.ts activatedAbilityManaCost calls costReductionAmount(ability.costReduction.reduceGeneric, player) without sourceId, so { countersOnSource } on an ACTIVATED ability's costReduction always reads 0 (no pool card used it before). Fix: pass sourceId as the third argument. Verified in the scratch copy: the test fails without it, passes with it."
+  },
+  {
+   "name": "Essenceknit Scholar",
+   "files": [
+    "engine/src/cards/pool/essenceknit-scholar.ts",
+    "engine/src/cards/tokens/pest-token-attacks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Growth Curve",
+   "files": [
+    "engine/src/cards/pool/growth-curve.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Withering Curse",
+   "files": [
+    "engine/src/cards/pool/withering-curse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stirring Hopesinger",
+   "files": [
+    "engine/src/cards/pool/stirring-hopesinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geometer's Arthropod",
+   "files": [
+    "engine/src/cards/pool/geometers-arthropod.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lluwen, Exchange Student // Pest Friend",
+   "files": [
+    "engine/src/cards/pool/lluwen-exchange-student.ts",
+    "engine/src/cards/pool/pest-friend.ts",
+    "engine/src/cards/tokens/pest-token-attacks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fix What's Broken",
+   "files": [
+    "engine/src/cards/pool/fix-whats-broken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Send in the Pest",
+   "files": [
+    "engine/src/cards/pool/send-in-the-pest.ts",
+    "engine/src/cards/tokens/pest-token-attacks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pull from the Grave",
+   "files": [
+    "engine/src/cards/pool/pull-from-the-grave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tam, Observant Sequencer // Deep Sight",
+   "files": [
+    "engine/src/cards/pool/tam-observant-sequencer.ts",
+    "engine/src/cards/pool/deep-sight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Comforting Counsel",
+   "files": [
+    "engine/src/cards/pool/comforting-counsel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Potioner's Trove",
+   "files": [
+    "engine/src/cards/pool/potioners-trove.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primary Research",
+   "files": [
+    "engine/src/cards/pool/primary-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hardened Academic",
+   "files": [
+    "engine/src/cards/pool/hardened-academic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splatter Technique",
+   "files": [
+    "engine/src/cards/pool/splatter-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Divergent Equation",
+   "files": [
+    "engine/src/cards/pool/divergent-equation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Informed Inkwright",
+   "files": [
+    "engine/src/cards/pool/informed-inkwright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildgrowth Archaic",
+   "files": [
+    "engine/src/cards/pool/wildgrowth-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aziza, Mage Tower Captain",
+   "files": [
+    "engine/src/cards/pool/aziza-mage-tower-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graduation Day",
+   "files": [
+    "engine/src/cards/pool/graduation-day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabid Attack",
+   "files": [
+    "engine/src/cards/pool/rabid-attack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Root Manipulation",
+   "files": [
+    "engine/src/cards/pool/root-manipulation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cost of Brilliance",
+   "files": [
+    "engine/src/cards/pool/cost-of-brilliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Applied Geometry",
+   "files": [
+    "engine/src/cards/pool/applied-geometry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Procrastinate",
+   "files": [
+    "engine/src/cards/pool/procrastinate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hydro-Channeler",
+   "files": [
+    "engine/src/cards/pool/hydro-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jadzi, Steward of Fate // Oracle's Gift",
+   "files": [
+    "engine/src/cards/pool/jadzi-steward-of-fate.ts",
+    "engine/src/cards/pool/oracles-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oracle's Restoration",
+   "files": [
+    "engine/src/cards/pool/oracles-restoration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mica, Reader of Ruins",
+   "files": [
+    "engine/src/cards/pool/mica-reader-of-ruins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elite Interceptor // Rejoinder",
+   "files": [
+    "engine/src/cards/pool/elite-interceptor.ts",
+    "engine/src/cards/pool/rejoinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leech Collector // Bloodletting",
+   "files": [
+    "engine/src/cards/pool/leech-collector.ts",
+    "engine/src/cards/pool/bloodletting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mikey & Leo, Chaos & Order",
+   "files": [
+    "engine/src/cards/pool/mikey-leo-chaos-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chrome Dome",
+   "files": [
+    "engine/src/cards/pool/chrome-dome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Robots",
+   "files": [
+    "engine/src/cards/pool/ravenous-robots.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slash, Reptile Rampager",
+   "files": [
+    "engine/src/cards/pool/slash-reptile-rampager.ts",
+    "engine/src/cards/tokens/mutant-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lita, Little Orphan Amphibian",
+   "files": [
+    "engine/src/cards/pool/lita-little-orphan-amphibian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderdrum Soloist",
+   "files": [
+    "engine/src/cards/pool/thunderdrum-soloist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muse Seeker",
+   "files": [
+    "engine/src/cards/pool/muse-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colorstorm Stallion",
+   "files": [
+    "engine/src/cards/pool/colorstorm-stallion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Exhibition Tidecaller",
+   "files": [
+    "engine/src/cards/pool/exhibition-tidecaller.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Molten-Core Maestro",
+   "files": [
+    "engine/src/cards/pool/molten-core-maestro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raphael, the Nightwatcher",
+   "files": [
+    "engine/src/cards/pool/raphael-the-nightwatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shredder's Technique",
+   "files": [
+    "engine/src/cards/pool/shredders-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splinter's Technique",
+   "files": [
+    "engine/src/cards/pool/splinters-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elektra, Daughter of the Hand",
+   "files": [
+    "engine/src/cards/pool/elektra-daughter-of-the-hand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Leo & Shredder",
+   "files": [
+    "engine/src/cards/pool/dark-leo-shredder.ts",
+    "engine/src/cards/tokens/ninja-token-dark-leo-shredder.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Emil, Vastlands Roamer",
+   "needs": [
+    "effect:distinct-names-count"
+   ],
+   "why": "'the number of differently named lands you control' — only distinctTokenNames exists"
+  },
+  {
+   "name": "Berta, Wise Extrapolator",
+   "needs": [
+    "keyword:increment"
+   ],
+   "why": "Increment (mana spent vs this creature's power OR toughness, intervening-if) isn't built; a trigger-object filter can't compare manaSpent against the source's P/T (no amount context in matchesKnown)"
+  },
+  {
+   "name": "Pox Plague",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "'sacrifices half the permanents they control' — sacrifice count is a fixed number; the half-life and half-hand parts are expressible ({ half: { lifeTotal/cardsInHand: 'each' }, round: 'down' })"
+  },
+  {
+   "name": "Slumbering Trudge",
+   "needs": [
+    "replacement:enters-tapped-if-x"
+   ],
+   "why": "'If X is 2 or less, it enters tapped' — tappedUnless's StaticCondition gets no X (the 'x' kind reads opts.x, not passed there); the 3-minus-X stun counters are expressible ({ difference: [3, 'x'] })"
+  },
+  {
+   "name": "Choreographed Sparks",
+   "needs": [
+    "static:spell-cant-be-copied",
+    "effect:copy-spell-grants"
+   ],
+   "why": "'This spell can't be copied' isn't modeled, and copy-spell can't give a creature spell's copy haste and 'At the beginning of the end step, sacrifice this token.'"
+  },
+  {
+   "name": "Steal the Show",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "\"Target player discards any number of cards, then draws that many\": `discard` takes a fixed amount; no any-number real discard chosen by the target player."
+  },
+  {
+   "name": "Moment of Reckoning",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "\"Choose up to four. You may choose the same mode more than once\": castModal can't pick a mode twice."
+  },
+  {
+   "name": "Zaffai and the Tempests",
+   "needs": [
+    "cost:free-cast-from-hand-static",
+    "cost:free-cast-once-each-turn"
+   ],
+   "why": "A static once-each-of-your-turns free cast of an instant/sorcery from hand; castFromHandFree exists only as a temporary player-effect, with no once-per-turn."
+  },
+  {
+   "name": "Brush Off",
+   "needs": [
+    "cost:cost-reduction-if-targets",
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "\"Costs {1}{U} less if it targets an instant or sorcery spell\": selfCostReduction is board-conditioned and generic-only."
+  },
+  {
+   "name": "Borrowed Knowledge",
+   "needs": [
+    "effect:cards-in-target-player-hand"
+   ],
+   "why": "Mode 1 draws 'cards equal to the number of cards in target opponent's hand': EffectAmount cardsInHand takes a PlayerScope, not a target slot."
+  },
+  {
+   "name": "Rubble Rouser",
+   "needs": [
+    "effect:mana-ability-graveyard-exile-cost"
+   ],
+   "why": "'{T}, Exile a card from your graveyard: Add {R}. When you do, ...' is a mana ability; whyCannotActivateAbility refuses a mana ability with an exileFromGraveyard cost ('can't exile cards from a graveyard yet'), and a reflexive trigger riding a mana ability's `also` is unproven."
+  },
+  {
+   "name": "Zimone's Experiment",
+   "needs": [
+    "effect:look-and-choose-split-by-type"
+   ],
+   "why": "One choice of up to two creature and/or land cards, then lands to the battlefield tapped and creatures to hand: look-and-choose has one destination per pick and no shared cap across a secondPick."
+  },
+  {
+   "name": "Ninja Teen",
+   "needs": [
+    "static:grant-sneak-to-graveyard"
+   ],
+   "why": "Level 3: 'Creature cards in your graveyard have sneak {3}{B}' and casting them from the graveyard with it — grantsToGraveyard grants only flashback/escape, and sneak is offered only from hand and command zone."
+  },
+  {
+   "name": "Rat King, Verminister",
+   "needs": [
+    "stat:revolt-condition",
+    "condition:same-name-as-target"
+   ],
+   "why": "Disappear's 'if a permanent left the battlefield under your control this turn' has no condition (TurnHistory tracks no leaves), and 'return target creature card and all other cards with the same name' has no same-name filter."
+  }
+ ]
+}

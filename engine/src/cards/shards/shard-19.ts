@@ -59,6 +59,7 @@ import _poolCloakedSiren from "../pool/cloaked-siren.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
+import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
@@ -86,6 +87,7 @@ import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
+import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
@@ -295,6 +297,7 @@ import _poolStalkingPredator from "../pool/stalking-predator.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
+import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
@@ -423,6 +426,7 @@ const shard: CardShard = {
     _poolCloudDjinn,
     _poolCloudSpirit,
     _poolCoastalPeak,
+    _poolColorstormStallion,
     _poolConsumingSinkhole,
     _poolContractKilling,
     _poolCourierGriffin,
@@ -450,6 +454,7 @@ const shard: CardShard = {
     _poolElvenRaftSteerer,
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
+    _poolEssenceknitScholar,
     _poolEusocialEngineering,
     _poolExploreTheVastlands,
     _poolExsanguinate,
@@ -659,6 +664,7 @@ const shard: CardShard = {
     _poolStarnheimMemento,
     _poolStartFromScratch,
     _poolSteelWreckingBall,
+    _poolStirringHopesinger,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,
     _poolStrikingSliver,

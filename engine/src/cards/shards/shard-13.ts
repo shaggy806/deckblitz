@@ -90,6 +90,7 @@ import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
 import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
+import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
@@ -224,6 +225,7 @@ import _poolPillage from "../pool/pillage.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
+import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
 import _poolRangersPath from "../pool/rangers-path.js";
@@ -440,6 +442,7 @@ const shard: CardShard = {
     _poolDesperateLunge,
     _poolDestroyEvil,
     _poolDiabolicEdict,
+    _poolDivergentEquation,
     _poolDoctorDoomUnrivaled,
     _poolDragonlordAtarka,
     _poolDriftingMeadow,
@@ -574,6 +577,7 @@ const shard: CardShard = {
     _poolPiousInterdiction,
     _poolPiranhaFly,
     _poolPridemalkin,
+    _poolRabidAttack,
     _poolRakdosGuildgate,
     _poolRampantGrowth,
     _poolRangersPath,

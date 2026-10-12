@@ -18,6 +18,7 @@ import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAuraShards from "../pool/aura-shards.js";
+import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
 import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
@@ -346,6 +347,7 @@ const shard: CardShard = {
     _poolArmoredSkaab,
     _poolAttercop,
     _poolAuraShards,
+    _poolAzizaMageTowerCaptain,
     _poolAzoriusChancery,
     _poolAzoriusKnightArbiter,
     _poolBackInTown,

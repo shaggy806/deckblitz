@@ -1229,30 +1229,35 @@ export class Game {
         this.cycleCard(action.player, action.card);
         break;
       case "cast-spell":
-        this.castSpell(
-          action.player,
-          action.card,
-          normalizeTargets(action.targets),
-          action.xValue ?? 0,
-          action.via,
-          action.face ?? 0,
-          action.modes,
-          action.kicked === true ? (action.kickCount ?? true) : false,
-          action.sacrifice,
-          action.overload === true,
-          action.free === true,
-          action.convoke,
-          action.altCost === true,
-          action.costOption,
-          action.tap,
-          action.graveyardGrant,
-          action.escapeExile,
-          action.prototype === true,
-          action.offspring === true,
-          action.evoke === true ? (action.evokeCost ?? "") : null,
-          action.division,
-          action.delve,
-        );
+        this.sneakReturnChoice = action.sneakReturn;
+        try {
+          this.castSpell(
+            action.player,
+            action.card,
+            normalizeTargets(action.targets),
+            action.xValue ?? 0,
+            action.via,
+            action.face ?? 0,
+            action.modes,
+            action.kicked === true ? (action.kickCount ?? true) : false,
+            action.sacrifice,
+            action.overload === true,
+            action.free === true,
+            action.convoke,
+            action.altCost === true,
+            action.costOption,
+            action.tap,
+            action.graveyardGrant,
+            action.escapeExile,
+            action.prototype === true,
+            action.offspring === true,
+            action.evoke === true ? (action.evokeCost ?? "") : null,
+            action.division,
+            action.delve,
+          );
+        } finally {
+          this.sneakReturnChoice = undefined;
+        }
         break;
       case "activate-ability":
         this.activateAbility(
@@ -1403,6 +1408,13 @@ export class Game {
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
+        if (
+          action.via === "sneak" &&
+          action.sneakReturn !== undefined &&
+          !this.sneakReturns(action.player).includes(action.sneakReturn)
+        ) {
+          return "sneak returns an unblocked creature you control";
+        }
         return this.whyCannotCastSpell(
           action.player,
           action.card,
@@ -1706,6 +1718,27 @@ export class Game {
           costString: def.mayhem?.cost ?? def.manaCost,
         }),
       );
+    }
+
+    // Sneak (rule 702.190a): in their declare blockers step, a card in hand
+    // (or their commander) for its sneak cost — one offer per unblocked
+    // creature that could be returned, which the cast names.
+    const sneakers = this.sneakReturns(player);
+    if (sneakers.length > 0) {
+      const sneakCards = [
+        ...this.state.zones.perPlayer[player].hand,
+        ...this.state.zones.shared.command.filter((id) => this.isCastableCommander(player, id)),
+      ];
+      for (const card of sneakCards) {
+        const def = this.registry.get(this.state.objects[card].cardName);
+        if (def.sneak === null) continue;
+        for (const offer of this.castSpellActions(player, card, def.name, def, { via: "sneak", costString: def.sneak.cost })) {
+          if (offer.kind !== "cast-spell") continue;
+          for (const returned of sneakers) {
+            out.push({ ...offer, sneakReturn: { object: returned, cardName: this.state.objects[returned].cardName } });
+          }
+        }
+      }
     }
 
     // A prepared permanent's copy of its prepare spell (rule 722.3c): the
@@ -7148,6 +7181,18 @@ export class Game {
   /** Mayhem (rule 702.187): `cardId` has it, is in `player`'s graveyard, and
    * they discarded it this turn — the permission to cast (or play) it from
    * there. Timing and the rest are the cast's own checks. */
+  /** The creatures `player` could return to pay a sneak cost (rule
+   * 702.190a): none outside their own declare blockers step; in it, each
+   * unblocked attacking creature they control. */
+  private sneakReturns(player: PlayerId): ObjectId[] {
+    if (this.state.turn.step !== "declare-blockers" || this.activePlayer !== player) return [];
+    return this.state.zones.shared.battlefield.filter(
+      (id) =>
+        this.state.objects[id]?.controller === player &&
+        matchesFilter(this.state, this.registry, id, { type: "creature", unblocked: true }, { you: player }),
+    );
+  }
+
   private mayhemCastable(player: PlayerId, cardId: ObjectId): boolean {
     const object = this.state.objects[cardId];
     if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return false;
@@ -8809,6 +8854,8 @@ export class Game {
         : // Mayhem (rule 702.187b): its cost; with none, its mana cost (702.187c).
           via === "mayhem"
           ? (def.mayhem?.cost ?? def.manaCost)
+        : via === "sneak"
+          ? (def.sneak?.cost ?? null)
         : via === "escape"
           ? (this.escapeOf(cardId, face, graveyardGrant)?.cost ?? null)
           : via === "foretell"
@@ -9107,6 +9154,17 @@ export class Game {
       // Rule 702.187b — a card its owner discarded this turn, from their
       // graveyard.
       if (!this.mayhemCastable(player, cardId)) return `${def.name} can't be cast with mayhem now`;
+    } else if (via === "sneak") {
+      // Rule 702.190a — from the hand (or a commander from the command zone),
+      // during the caster's declare blockers step, with an unblocked creature
+      // of theirs to return.
+      if (def.sneak === null) return `${def.name} doesn't have sneak`;
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (this.sneakReturns(player).length === 0) {
+        return `${def.name} can be cast with sneak only in your declare blockers step, returning an unblocked creature`;
+      }
     } else if (via === "prepared") {
       // Rule 722.3c — a prepared permanent's copy of its prepare spell, cast
       // from exile by that permanent's controller while the link holds.
@@ -9209,6 +9267,9 @@ export class Game {
     // effect has it cast now, which ignores timing (rule 608.2g).
     if (
       via !== "effect" &&
+      // Sneak: "any time you could cast an instant during your declare
+      // blockers step" (rule 702.190a) — `sneakReturns` checked the step.
+      via !== "sneak" &&
       !def.types.includes("instant") &&
       !def.keywords.includes("flash") &&
       // Judged as the spell it would be — an Omen or an adventure is its
@@ -9536,6 +9597,9 @@ export class Game {
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
   private harmonizeProbed = false;
+  /** The `sneakReturn` of the `cast-spell` being dispatched (rule 702.190a),
+   * read as its cost is paid; unset otherwise. */
+  private sneakReturnChoice: ObjectId | undefined = undefined;
   /** The creature that harmonize cast taps, held back from paying for it as
    * mana while `{X}` is sized (`maxAffordableX`). */
   private harmonizeCreature: ObjectId | null = null;
@@ -10142,6 +10206,17 @@ export class Game {
     // Sephara's "tap four untapped creatures you control with flying" — the
     // other half of its alternative cost, paid as the spell is cast.
     this.payTapCost(tapPicked);
+    // Sneak's "returning an unblocked creature you control to its owner's
+    // hand" (rule 702.190a), the other half of that cost: what it was
+    // attacking is what the permanent this spell becomes attacks (702.190b).
+    if (via === "sneak") {
+      const choice = this.sneakReturnChoice ?? this.sneakReturns(player)[0];
+      const returned = choice === undefined ? undefined : this.state.objects[choice];
+      if (choice !== undefined && returned !== undefined) {
+        if (returned.attacking !== null && returned.attacking !== undefined) object.sneakAttacking = returned.attacking;
+        this.moveObject(choice, "hand");
+      }
+    }
     // "Flashback—{cost}, Pay N life" (Deep Analysis) — part of the cost, paid
     // as the spell is cast. Only its own flashback's: one Past in Flames gave
     // it costs just the mana.
@@ -11095,7 +11170,9 @@ export class Game {
       generic = Math.max(Math.min(generic, floor), generic - mod.reduceGenericLeavingOne);
     }
     if (ability.costReduction !== undefined) {
-      generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player);
+      // Its own source: "costs {1} less for each page counter on this" (Diary
+      // of Dreams) reads that permanent's counters.
+      generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player, sourceId);
     }
     generic -= mod.reduceGeneric;
     const cost: ManaCost = {
@@ -13740,12 +13817,19 @@ export class Game {
     const under = object.controller !== object.owner ? object.controller : undefined;
     // A face-down spell resolves into a face-down permanent (rule 708.4).
     const down = object.faceDown?.kind;
+    // Its sneak cost paid: it enters tapped and attacking what the returned
+    // creature was attacking (rule 702.190b).
+    const sneakAt = object.castVia === "sneak" ? object.sneakAttacking : undefined;
     const entered = this.moveObject(id, "battlefield", {
       ...(under !== undefined ? { under } : {}),
       ...(down !== undefined ? { faceDown: down } : {}),
+      ...(sneakAt !== undefined ? { tapped: true } : {}),
     });
     object.targets = null;
     if (!entered) return;
+    if (sneakAt !== undefined && this.state.objects[id]?.zone === "battlefield") {
+      this.putIntoAttack([id], this.state.objects[id].controller, { defender: sneakAt });
+    }
     if (under !== undefined && this.state.objects[id]?.zone === "battlefield" && this.state.objects[id].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: id }, false, true, { split: false });
       this.state.objects[id].summoningSick = true;
@@ -17375,6 +17459,21 @@ export class Game {
       }
       if (condition.kind === "trigger-object") {
         if (triggerObject === undefined) return false;
+        // Opus's "if five or more mana was spent to cast that spell": a spell
+        // gone from the stack since (countered in response) is asked what was
+        // spent on it there — the ruling — as `manaSpentOf` reads it.
+        const spell = this.state.objects[triggerObject];
+        const { manaSpent, ...rest } = condition.filter;
+        if (
+          manaSpent !== undefined &&
+          spell !== undefined &&
+          refs.triggerSpell !== undefined &&
+          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell) &&
+          spell.lastStackManaSpent !== undefined
+        ) {
+          if (!compareNum(spell.lastStackManaSpent, manaSpent, x)) return false;
+          return Object.keys(rest).length === 0 || matchesKnown(triggerObject, rest);
+        }
         return matchesKnown(triggerObject, condition.filter);
       }
       if (condition.kind === "sacrificed") {
@@ -28637,6 +28736,7 @@ export class Game {
     object.preparedFor = undefined;
     // "Discarded this turn" was about the card in the graveyard it went to.
     object.discardedOnTurn = undefined;
+    object.sneakAttacking = undefined;
     // A multi-face card reverts to its front face while not on the battlefield
     // or stack (rule 712); casting/playing it sets the face again.
     if (object.faces !== undefined && to !== "battlefield" && to !== "stack") {

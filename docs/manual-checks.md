@@ -4403,6 +4403,20 @@ stack count once per token)
   and offers "Cast Enroot (prepared)". On Bob's turn neither copy is offered (both are sorceries).
 - **Known limits:** None known.
 
+### Raphael, the Nightwatcher, Shredder's Technique
+
+*New player decision* — sneak (rule 702.190): an alternative cost in your declare blockers step
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, three Mountains and a Swamp. Your hand:
+  Raphael, the Nightwatcher and Shredder's Technique. Bob: Glorious Anthem, no creatures.
+- **Do:** Attack Bob with Grizzly Bears. In the declare blockers step, cast Raphael "(sneak, returning
+  Grizzly Bears)". Next turn, attack again and cast Shredder's Technique with sneak on Glorious Anthem.
+- **Check:** Neither card offers a sneak cast before blockers are declared. Raphael's sneak cast returns
+  the Bears to your hand and Raphael enters tapped and attacking Bob, dealing 2 twice (double strike).
+  Shredder's Technique, a sorcery, is cast in the declare blockers step for {B}; the Anthem is destroyed and
+  you lose 2 life. In a 4-player game Raphael attacks whoever the returned creature was attacking.
+- **Known limits:** None known.
+
 ### HULK SMASH!, Too Evil to Stay Dead
 
 *New player decision* — teamwork (rule 702.194): an optional additional cost of tapping creatures with total power N

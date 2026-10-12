@@ -191,6 +191,7 @@ import _poolMayhemDevil from "../pool/mayhem-devil.js";
 import _poolMelesseSpirit from "../pool/melesse-spirit.js";
 import _poolMemorialToWar from "../pool/memorial-to-war.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
+import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
@@ -224,6 +225,7 @@ import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
+import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
@@ -537,6 +539,7 @@ const shard: CardShard = {
     _poolMelesseSpirit,
     _poolMemorialToWar,
     _poolMetallurgicSummonings,
+    _poolMicaReaderOfRuins,
     _poolMidnightCharm,
     _poolMindSpring,
     _poolMishrasOnslaught,
@@ -570,6 +573,7 @@ const shard: CardShard = {
     _poolPlacidRottentail,
     _poolPlasmaElemental,
     _poolPlunderingPredator,
+    _poolPrimaryResearch,
     _poolPrimordialSage,
     _poolPrizedGriffin,
     _poolPsychicCorrosion,

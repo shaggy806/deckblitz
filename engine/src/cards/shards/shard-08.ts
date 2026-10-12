@@ -98,6 +98,7 @@ import _poolElendasHierophant from "../pool/elendas-hierophant.js";
 import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
+import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEndlessRanksOfTheDead from "../pool/endless-ranks-of-the-dead.js";
 import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
@@ -159,6 +160,7 @@ import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfest from "../pool/infest.js";
+import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
@@ -302,6 +304,7 @@ import _poolSweetGumRecluse from "../pool/sweet-gum-recluse.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
+import _poolTamObservantSequencer from "../pool/tam-observant-sequencer.js";
 import _poolTangleHulk from "../pool/tangle-hulk.js";
 import _poolTeeteringPeaks from "../pool/teetering-peaks.js";
 import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
@@ -310,6 +313,7 @@ import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
+import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
 import _poolTownSentry from "../pool/town-sentry.js";
@@ -462,6 +466,7 @@ const shard: CardShard = {
     _poolElephantAmbush,
     _poolElfswornGiant,
     _poolElvishVanguard,
+    _poolEmbraceTheParadox,
     _poolEndlessRanksOfTheDead,
     _poolEntrapmentManeuver,
     _poolErdwalRipper,
@@ -523,6 +528,7 @@ const shard: CardShard = {
     _poolImmoralBargain,
     _poolIndomitableAncients,
     _poolInfest,
+    _poolInformedInkwright,
     _poolIorethOfTheHealingHouse,
     _poolJanJansenChaosCrafter,
     _poolJayemdaeTome,
@@ -666,6 +672,7 @@ const shard: CardShard = {
     _poolSyphonFuel,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,
+    _poolTamObservantSequencer,
     _poolTangleHulk,
     _poolTeeteringPeaks,
     _poolTegwyllDukeOfSplendor,
@@ -674,6 +681,7 @@ const shard: CardShard = {
     _poolThaliasLancers,
     _poolTheAutonomousFurnace,
     _poolThroneOfGeth,
+    _poolThunderdrumSoloist,
     _poolTidehollowStrix,
     _poolTocasiasDigSite,
     _poolTownSentry,

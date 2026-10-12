@@ -183,6 +183,7 @@ function faceSource(face, ctx) {
     flashback: parsed.flashback,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
+    sneak: parsed.sneak,
     kicker: parsed.kicker,
     convoke: parsed.convoke,
     morph: parsed.morph,

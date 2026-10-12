@@ -75,6 +75,7 @@ import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
 import _poolDwarvenWarriors from "../pool/dwarven-warriors.js";
 import _poolElectrickery from "../pool/electrickery.js";
 import _poolEliteInstructor from "../pool/elite-instructor.js";
+import _poolEliteInterceptor from "../pool/elite-interceptor.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
@@ -221,6 +222,7 @@ import _poolRapidHybridization from "../pool/rapid-hybridization.js";
 import _poolRaptorCompanion from "../pool/raptor-companion.js";
 import _poolRaugrinTriome from "../pool/raugrin-triome.js";
 import _poolRavenhillFlock from "../pool/ravenhill-flock.js";
+import _poolRavenousRobots from "../pool/ravenous-robots.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
@@ -453,6 +455,7 @@ const shard: CardShard = {
     _poolDwarvenWarriors,
     _poolElectrickery,
     _poolEliteInstructor,
+    _poolEliteInterceptor,
     _poolElvishRanger,
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
@@ -599,6 +602,7 @@ const shard: CardShard = {
     _poolRaptorCompanion,
     _poolRaugrinTriome,
     _poolRavenhillFlock,
+    _poolRavenousRobots,
     _poolRealmOfKoh,
     _poolReanimate,
     _poolReconnaissanceMission,

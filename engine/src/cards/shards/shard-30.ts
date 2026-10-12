@@ -173,6 +173,7 @@ import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
+import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
@@ -188,6 +189,7 @@ import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
+import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
@@ -219,6 +221,7 @@ import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
 import _poolMurasaBrute from "../pool/murasa-brute.js";
+import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
@@ -526,6 +529,7 @@ const shard: CardShard = {
     _poolIronManTonyStark,
     _poolIsochronScepter,
     _poolIxallisKeeper,
+    _poolJadziStewardOfFate,
     _poolJeongJeongsDeserters,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,
@@ -541,6 +545,7 @@ const shard: CardShard = {
     _poolLaunchParty,
     _poolLavaglidePathway,
     _poolLightOfHope,
+    _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
@@ -572,6 +577,7 @@ const shard: CardShard = {
     _poolMoorishCavalry,
     _poolMoriokScavenger,
     _poolMurasaBrute,
+    _poolMuseSeeker,
     _poolMyrMoonvessel,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,

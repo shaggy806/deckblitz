@@ -67,13 +67,14 @@ section keeps only what to do next.
   set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
-  Heroes Commander (MSC), Marvel Super Heroes (MSH) and Secrets of Strixhaven Commander (SOC) are
-  done (batches 50–59). **Next: the rest of Secrets of Strixhaven** (SOS, 2026-04-24: 128 above
-  the threshold; after batch 59, 49 done, 22 blocked, 57 left). Mayhem (56), rebound (57),
-  teamwork (58) and the Nth-counter trigger (59) are built; opus (Strixhaven, 11 cards in the
-  snapshot) waits on a spell's mana spent being readable through a filter once it's gone; Norman Osborn still waits on granting
-  mayhem and on a graveyard-cast cost reduction, Ojer Pakpatiq on granting rebound. Prepare is built: about 50 more Secrets of Strixhaven preparation
-  cards below its threshold could now be read (`card:scaffold` drafts them).
+  Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
+  Secrets of Strixhaven (SOS) are done (batches 50–61). **Next: the rest of Teenage Mutant Ninja
+  Turtles** (TMT, 2026-03-06: 94 above the threshold; after batch 61, 32 done, 5 blocked, 57
+  left). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
+  (61) are built; Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
+  reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
+  Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
+  could now be read (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
 - **Every card triaged so far needs engine work: build what blocks the most.** Triage now runs

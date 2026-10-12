@@ -234,6 +234,7 @@ import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
+import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
@@ -604,6 +605,7 @@ const shard: CardShard = {
     _poolRazorgrassField,
     _poolRecover,
     _poolRegathanFirecat,
+    _poolRejoinder,
     _poolRestlessCottage,
     _poolRetreatToKazandu,
     _poolRipclawWrangler,

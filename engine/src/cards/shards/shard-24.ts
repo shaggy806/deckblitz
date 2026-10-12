@@ -78,6 +78,7 @@ import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
+import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
 import _poolDarksteelJuggernaut from "../pool/darksteel-juggernaut.js";
 import _poolDarksteelPlate from "../pool/darksteel-plate.js";
@@ -208,6 +209,7 @@ import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
+import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
@@ -420,6 +422,7 @@ const shard: CardShard = {
     _poolCrystacean,
     _poolCullingTheWeak,
     _poolCylianElf,
+    _poolDarkLeoShredder,
     _poolDarkRitual,
     _poolDarksteelJuggernaut,
     _poolDarksteelPlate,
@@ -550,6 +553,7 @@ const shard: CardShard = {
     _poolPressurePoint,
     _poolPrologueToPhyresis,
     _poolProwlingFelidar,
+    _poolPullFromTheGrave,
     _poolPurifyTheGrave,
     _poolQuarryBeetle,
     _poolQuicksilverSpeedster,

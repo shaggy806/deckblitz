@@ -184,6 +184,7 @@ import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
+import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
 import _poolMalcatorsWatcher from "../pool/malcators-watcher.js";
@@ -280,6 +281,7 @@ import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
+import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
@@ -557,6 +559,7 @@ const shard: CardShard = {
     _poolLazotepBehemoth,
     _poolLedevGuardian,
     _poolLightningAngel,
+    _poolLluwenExchangeStudent,
     _poolMagnify,
     _poolMahaItsFeathersNight,
     _poolMalcatorsWatcher,
@@ -653,6 +656,7 @@ const shard: CardShard = {
     _poolSetonKrosanProtector,
     _poolShiftingSliver,
     _poolShinkaTheBloodsoakedKeep,
+    _poolShreddersTechnique,
     _poolSiegeSmash,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,

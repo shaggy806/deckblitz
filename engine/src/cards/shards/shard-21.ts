@@ -117,6 +117,7 @@ import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
+import _poolGrowthCurve from "../pool/growth-curve.js";
 import _poolGruesomeDeformity from "../pool/gruesome-deformity.js";
 import _poolGruulTurf from "../pool/gruul-turf.js";
 import _poolGutShot from "../pool/gut-shot.js";
@@ -215,6 +216,7 @@ import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
 import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
+import _poolRaphaelTheNightwatcher from "../pool/raphael-the-nightwatcher.js";
 import _poolRathiTrapper from "../pool/rathi-trapper.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
 import _poolReaveSoul from "../pool/reave-soul.js";
@@ -441,6 +443,7 @@ const shard: CardShard = {
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
     _poolGrowingRanks,
+    _poolGrowthCurve,
     _poolGruesomeDeformity,
     _poolGruulTurf,
     _poolGutShot,
@@ -539,6 +542,7 @@ const shard: CardShard = {
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
     _poolRakshasaDebaser,
+    _poolRaphaelTheNightwatcher,
     _poolRathiTrapper,
     _poolRazortoothRats,
     _poolReaveSoul,

@@ -58,6 +58,7 @@ import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
+import _poolChromeDome from "../pool/chrome-dome.js";
 import _poolCircleOfDreamsDruid from "../pool/circle-of-dreams-druid.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
@@ -410,6 +411,7 @@ const shard: CardShard = {
     _poolChannelTheSuns,
     _poolChiefOfTheScale,
     _poolChocoboRacetrack,
+    _poolChromeDome,
     _poolCircleOfDreamsDruid,
     _poolClingingAnemones,
     _poolCloudshredderSliver,

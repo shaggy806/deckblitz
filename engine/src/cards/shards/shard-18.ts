@@ -10,6 +10,7 @@ import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
+import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
@@ -77,6 +78,7 @@ import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
+import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
 import _poolElfReplica from "../pool/elf-replica.js";
 import _poolElgaudInquisitor from "../pool/elgaud-inquisitor.js";
 import _poolElturgardRanger from "../pool/elturgard-ranger.js";
@@ -375,6 +377,7 @@ const shard: CardShard = {
     _poolAkkiScrapchomper,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
+    _poolAppliedGeometry,
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
     _poolAvengerOfZendikar,
@@ -442,6 +445,7 @@ const shard: CardShard = {
     _poolDutyBoundDead,
     _poolEagerCadet,
     _poolElderGargaroth,
+    _poolElektraDaughterOfTheHand,
     _poolElfReplica,
     _poolElgaudInquisitor,
     _poolElturgardRanger,

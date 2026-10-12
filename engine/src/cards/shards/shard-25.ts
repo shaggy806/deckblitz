@@ -170,6 +170,7 @@ import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
+import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
@@ -205,6 +206,7 @@ import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOpportunisticDragon from "../pool/opportunistic-dragon.js";
 import _poolOppression from "../pool/oppression.js";
+import _poolOraclesRestoration from "../pool/oracles-restoration.js";
 import _poolOrchardStrider from "../pool/orchard-strider.js";
 import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
@@ -521,6 +523,7 @@ const shard: CardShard = {
     _poolKnightOfNewBenalia,
     _poolKydeleChosenOfKruphix,
     _poolLeafkinDruid,
+    _poolLeechCollector,
     _poolLightOfPromise,
     _poolLilianasStandardBearer,
     _poolLonesomeUnicorn,
@@ -556,6 +559,7 @@ const shard: CardShard = {
     _poolOmashuCity,
     _poolOpportunisticDragon,
     _poolOppression,
+    _poolOraclesRestoration,
     _poolOrchardStrider,
     _poolOrnithopter,
     _poolOrthionHeroOfLavabrink,

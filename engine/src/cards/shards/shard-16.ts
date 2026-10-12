@@ -151,6 +151,7 @@ import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
+import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
@@ -540,6 +541,7 @@ const shard: CardShard = {
     _poolHondenOfCleansingFire,
     _poolHoverstonePilgrim,
     _poolHulkingCyclops,
+    _poolHydroChanneler,
     _poolIkraShidiqiTheUsurper,
     _poolImmolatingSouleater,
     _poolImperiousInkmage,

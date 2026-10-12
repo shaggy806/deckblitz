@@ -80,6 +80,7 @@ import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEphemerate from "../pool/ephemerate.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
+import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
@@ -228,6 +229,7 @@ import _poolSeacoastDrake from "../pool/seacoast-drake.js";
 import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
+import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
@@ -325,6 +327,7 @@ import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
+import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
@@ -410,6 +413,7 @@ const shard: CardShard = {
     _poolEphemerate,
     _poolErraticVisionary,
     _poolEtheriumHornSorcerer,
+    _poolExhibitionTidecaller,
     _poolFaerieDuelist,
     _poolFanBearer,
     _poolFanaticalStrength,
@@ -558,6 +562,7 @@ const shard: CardShard = {
     _poolSeasideCitadel,
     _poolSeatOfTheSynod,
     _poolSeleniaDarkAngel,
+    _poolSendInThePest,
     _poolSerrasEmbrace,
     _poolSewerdreg,
     _poolShamblingGhoul,
@@ -657,6 +662,7 @@ const shard: CardShard = {
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
+    _tokensMutantToken,
     _tokensOxToken,
     _tokensPlantToken,
     _tokensSpiritTokenWhiteBlack,

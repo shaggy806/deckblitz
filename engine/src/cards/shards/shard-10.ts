@@ -235,6 +235,7 @@ import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
+import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
@@ -596,6 +597,7 @@ const shard: CardShard = {
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiverchurnMonument,
+    _poolRootManipulation,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
     _poolRushwoodDryad,

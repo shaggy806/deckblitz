@@ -107,6 +107,7 @@ import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
 import _poolFetchQuest from "../pool/fetch-quest.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
+import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
@@ -463,6 +464,7 @@ const shard: CardShard = {
     _poolFervor,
     _poolFetchQuest,
     _poolFieryConclusion,
+    _poolFixWhatsBroken,
     _poolFlameSpirit,
     _poolForerunnerOfTheLegion,
     _poolForlornFlats,

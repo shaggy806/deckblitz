@@ -325,6 +325,7 @@ import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
+import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
@@ -662,6 +663,7 @@ const shard: CardShard = {
     _poolWestvaleAbbey,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,
+    _poolWildgrowthArchaic,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
     _poolWrennsResolve,

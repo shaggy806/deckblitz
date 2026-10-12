@@ -62,6 +62,7 @@ import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
 import _poolDespark from "../pool/despark.js";
+import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
@@ -130,6 +131,7 @@ import _poolGolgariCharm from "../pool/golgari-charm.js";
 import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
 import _poolGolgariRotFarm from "../pool/golgari-rot-farm.js";
+import _poolGraduationDay from "../pool/graduation-day.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
@@ -191,6 +193,7 @@ import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMisshapenFiend from "../pool/misshapen-fiend.js";
 import _poolMoaningSpirit from "../pool/moaning-spirit.js";
+import _poolMoltenCoreMaestro from "../pool/molten-core-maestro.js";
 import _poolMomentousFall from "../pool/momentous-fall.js";
 import _poolMonicaRambeau from "../pool/monica-rambeau.js";
 import _poolMoongloveChangeling from "../pool/moonglove-changeling.js";
@@ -403,6 +406,7 @@ const shard: CardShard = {
     _poolDefiantBloodlord,
     _poolDemonicCounsel,
     _poolDespark,
+    _poolDiaryOfDreams,
     _poolDissipate,
     _poolDivingGriffin,
     _poolDoggedHunter,
@@ -471,6 +475,7 @@ const shard: CardShard = {
     _poolGolgariGraveTroll,
     _poolGolgariLonglegs,
     _poolGolgariRotFarm,
+    _poolGraduationDay,
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,
@@ -532,6 +537,7 @@ const shard: CardShard = {
     _poolMirrormade,
     _poolMisshapenFiend,
     _poolMoaningSpirit,
+    _poolMoltenCoreMaestro,
     _poolMomentousFall,
     _poolMonicaRambeau,
     _poolMoongloveChangeling,

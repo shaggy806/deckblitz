@@ -2602,6 +2602,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Raphael, the Nightwatcher, Shredder's Technique",
+    board({
+      you: {
+        bf: ['Grizzly Bears', 'Mountain*3', 'Swamp'],
+        hand: ['Raphael, the Nightwatcher', "Shredder's Technique"],
+      },
+      opp: { bf: ['Glorious Anthem', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'HULK SMASH!, Too Evil to Stay Dead',
     board({
       you: {

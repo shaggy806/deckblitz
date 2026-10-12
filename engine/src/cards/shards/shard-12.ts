@@ -337,6 +337,7 @@ import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
+import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
@@ -346,6 +347,7 @@ import _tokensChocoboBirdToken from "../tokens/chocobo-bird-token.js";
 import _tokensDragonIllusionToken from "../tokens/dragon-illusion-token.js";
 import _tokensElementalToken55 from "../tokens/elemental-token-5-5.js";
 import _tokensHamsterToken from "../tokens/hamster-token.js";
+import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shredder.js";
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
 import _tokensVampireToken from "../tokens/vampire-token.js";
@@ -688,6 +690,7 @@ const shard: CardShard = {
     _poolWildernessReclamation,
     _poolWildsize,
     _poolWitchBlessedMeadow,
+    _poolWitheringCurse,
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,
@@ -699,6 +702,7 @@ const shard: CardShard = {
     _tokensDragonIllusionToken,
     _tokensElementalToken55,
     _tokensHamsterToken,
+    _tokensNinjaTokenDarkLeoShredder,
     _tokensPhyrexianGolemToken,
     _tokensSoldierTokenFinaleOfGlory,
     _tokensVampireToken,

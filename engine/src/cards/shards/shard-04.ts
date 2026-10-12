@@ -273,6 +273,7 @@ import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
+import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
@@ -630,6 +631,7 @@ const shard: CardShard = {
     _poolSparringMummy,
     _poolSpellweaverEternal,
     _poolSpitFlame,
+    _poolSplatterTechnique,
     _poolSpringleafDrum,
     _poolSproutingThrinax,
     _poolSqueesToy,
