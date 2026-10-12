@@ -1,0 +1,469 @@
+{
+ "batch": "B59",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes (MSH, 2026-06-26): its last 19 (MSH done); Secrets of Strixhaven Commander (SOC, 2026-04-24) and Secrets of Strixhaven (SOS, 2026-04-24): top 50% by EDHREC rank, the next; with the Nth-counter trigger built and the cards it unblocked (Political Triumph, Claim the Kingdom, Shang-Chi and the Ten Rings), plus Stensian Sanguinist rechecked (prepare built)",
+ "authored": [
+  {
+   "name": "The Coming of Galactus",
+   "files": [
+    "engine/src/cards/pool/the-coming-of-galactus.ts",
+    "engine/src/cards/tokens/galactus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderbolts Conspiracy",
+   "files": [
+    "engine/src/cards/pool/thunderbolts-conspiracy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ka-Zar of the Savage Land",
+   "files": [
+    "engine/src/cards/pool/ka-zar-of-the-savage-land.ts",
+    "engine/src/cards/tokens/zabu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madame Masque",
+   "files": [
+    "engine/src/cards/pool/madame-masque.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of the Avengers",
+   "files": [
+    "engine/src/cards/pool/origin-of-the-avengers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Masters of Evil",
+   "files": [
+    "engine/src/cards/pool/the-masters-of-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Strength",
+   "files": [
+    "engine/src/cards/pool/super-strength.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercover Skrull",
+   "files": [
+    "engine/src/cards/pool/undercover-skrull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avengers: Under Siege",
+   "files": [
+    "engine/src/cards/pool/avengers-under-siege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Mar-Vell, Space-Born",
+   "files": [
+    "engine/src/cards/pool/captain-mar-vell-space-born.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiling Daemogoth",
+   "files": [
+    "engine/src/cards/pool/defiling-daemogoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coercive Impetus",
+   "files": [
+    "engine/src/cards/pool/coercive-impetus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eccentric Pestfinder // Turn Stones",
+   "files": [
+    "engine/src/cards/pool/eccentric-pestfinder.ts",
+    "engine/src/cards/pool/turn-stones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kinetic Ooze",
+   "files": [
+    "engine/src/cards/pool/kinetic-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorma, the Gullet",
+   "files": [
+    "engine/src/cards/pool/gorma-the-gullet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Owlin Spiralmancer",
+   "files": [
+    "engine/src/cards/pool/owlin-spiralmancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defacing Duskmage // Vandal's Edit",
+   "files": [
+    "engine/src/cards/pool/defacing-duskmage.ts",
+    "engine/src/cards/pool/vandals-edit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Naktamun Lorespinner // Wheel of Fortune",
+   "files": [
+    "engine/src/cards/pool/naktamun-lorespinner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emeritus of Truce // Swords to Plowshares",
+   "files": [
+    "engine/src/cards/pool/emeritus-of-truce.ts",
+    "engine/src/cards/tokens/inkling-token-emeritus-of-truce.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Professor Dellian Fel",
+   "files": [
+    "engine/src/cards/pool/professor-dellian-fel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emeritus of Conflict // Lightning Bolt",
+   "files": [
+    "engine/src/cards/pool/emeritus-of-conflict.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primo, the Unbounded",
+   "files": [
+    "engine/src/cards/pool/primo-the-unbounded.ts",
+    "engine/src/cards/tokens/fractal-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quandrix, the Proof",
+   "files": [
+    "engine/src/cards/pool/quandrix-the-proof.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind into Matter",
+   "files": [
+    "engine/src/cards/pool/mind-into-matter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quandrix Charm",
+   "files": [
+    "engine/src/cards/pool/quandrix-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanar, Unfinished Genius // Wild Idea",
+   "files": [
+    "engine/src/cards/pool/sanar-unfinished-genius.ts",
+    "engine/src/cards/pool/wild-idea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daydream",
+   "files": [
+    "engine/src/cards/pool/daydream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arnyn, Deathbloom Botanist",
+   "files": [
+    "engine/src/cards/pool/arnyn-deathbloom-botanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Dawning Archaic",
+   "files": [
+    "engine/src/cards/pool/the-dawning-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vastlands Scavenger // Bind to Life",
+   "files": [
+    "engine/src/cards/pool/vastlands-scavenger.ts",
+    "engine/src/cards/pool/bind-to-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Hall of the Biblioplex",
+   "files": [
+    "engine/src/cards/pool/great-hall-of-the-biblioplex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skycoach Conductor // All Aboard",
+   "files": [
+    "engine/src/cards/pool/skycoach-conductor.ts",
+    "engine/src/cards/pool/all-aboard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vicious Rivalry",
+   "files": [
+    "engine/src/cards/pool/vicious-rivalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Robot Domination",
+   "files": [
+    "engine/src/cards/pool/robot-domination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Political Triumph",
+   "files": [
+    "engine/src/cards/pool/political-triumph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Claim the Kingdom",
+   "files": [
+    "engine/src/cards/pool/claim-the-kingdom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shang-Chi and the Ten Rings",
+   "files": [
+    "engine/src/cards/pool/shang-chi-and-the-ten-rings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thor Odinson",
+   "files": [
+    "engine/src/cards/pool/thor-odinson.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dependable Quinjet",
+   "files": [
+    "engine/src/cards/pool/dependable-quinjet.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pursue the Past",
+   "files": [
+    "engine/src/cards/pool/pursue-the-past.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Frozen in Ice",
+   "needs": [
+    "static:static-lose-all-abilities",
+    "static:cant-become-untapped"
+   ],
+   "why": "'Enchanted creature loses all abilities and can't become untapped' — no static lose-all-abilities, and nothing stops a permanent untapping by any means (doesntUntap is only its own untap step, only on itself)."
+  },
+  {
+   "name": "Storm, Windrider",
+   "needs": [
+    "static:cant-attack-you-player-only",
+    "effect:cast-spell-trigger-spell-targets"
+   ],
+   "why": "cantAttackController also protects your planeswalkers (Storm says only 'you'); a cast-spell trigger can't name 'those creatures' the triggering spell targets."
+  },
+  {
+   "name": "Misty Knight, Hero for Hire",
+   "needs": [
+    "stat:cards-discarded-this-turn"
+   ],
+   "why": "No amount counting the cards you've discarded this turn (discardedOnTurn is a per-card marker, lost when the card leaves the graveyard)."
+  },
+  {
+   "name": "Quicksilver, Brash Blur",
+   "needs": [
+    "mechanic:begin-game-on-battlefield"
+   ],
+   "why": "No opening-hand 'begin the game with him on the battlefield'."
+  },
+  {
+   "name": "Ms. Marvel, Kamala Khan",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "Until end of turn she gains a power-setting CDA ('base power equal to the cards in your hand', live); no effect grants a static/CDA for a duration."
+  },
+  {
+   "name": "Avengers Disassembled",
+   "needs": [
+    "decision:may-answered-by-other-player"
+   ],
+   "why": "'Its controller may search' — a decline still searches and shuffles (docs/engine-gaps.md)."
+  },
+  {
+   "name": "Night Nurse, Healer of Heroes",
+   "needs": [
+    "condition:put-into-graveyard-this-turn-any-zone"
+   ],
+   "why": "No filter for a graveyard card 'put there from anywhere this turn' (only putIntoGraveyardFromLibraryThisTurn)."
+  },
+  {
+   "name": "Wolverine, Fierce Fighter",
+   "needs": [
+    "replacement:damage-heals-prior-damage"
+   ],
+   "why": "'Instead that damage is dealt, but all other damage already dealt to him is healed' — no damage replacement that removes marked damage."
+  },
+  {
+   "name": "Hawkeye, Master Marksman",
+   "needs": [
+    "decision:pay-cost-up-to-n-times"
+   ],
+   "why": "'You may pay {1} up to three times. When you do, choose up to that many' modes."
+  },
+  {
+   "name": "Loki Laufeyson",
+   "needs": [
+    "effect:delayed-next-spell-live-amount"
+   ],
+   "why": "Rechecked: fireCastWatchers matches the nextSpell filter with only { you }, so an { amount: { powerOf: 'source' } } operand ('mana value <= Loki's power', read as the spell is cast) has no context and fails closed."
+  },
+  {
+   "name": "Death to Our Enemies",
+   "needs": [
+    "effect:reflexive-divided-damage"
+   ],
+   "why": "'When you do, it deals 7 damage divided among one or two targets' is a reflexive trigger, and ReflexiveTrigger carries only targets/effect/text: no `divided`, so no split is asked or kept (game.ts reads `(ability as TriggeredAbility).divided` off the reflexive record, always undefined)."
+  },
+  {
+   "name": "Elektra, Daughter of the Hand",
+   "needs": [
+    "keyword:sneak"
+   ],
+   "why": "Sneak (return an unblocked attacker during declare blockers, cast, enters tapped and attacking) isn't modeled."
+  },
+  {
+   "name": "Vision Quest",
+   "needs": [
+    "effect:search-with-counters"
+   ],
+   "why": "search-library to the battlefield has no 'with X additional +1/+1 counters' (it must enter with them, rule 614.1c), nor a way to give 'it' (the found card) haste afterward."
+  },
+  {
+   "name": "Ribtruss Roaster",
+   "needs": [
+    "keyword:devour"
+   ],
+   "why": "Devour isn't modeled."
+  },
+  {
+   "name": "Scriv, the Obligator",
+   "needs": [
+    "effect:attach-extensions",
+    "condition:attacking-an-opponent-filter"
+   ],
+   "why": "No 'create an Aura token attached to target creature' (it must be created attached, and not at all if it can't enchant it — the ruling); Contract's 'if it's attacking one of your opponents' (the Aura controller's opponents) has no condition."
+  },
+  {
+   "name": "Brass Infiniscope",
+   "needs": [
+    "effect:delayed-trigger-reads-spell-x"
+   ],
+   "why": "Its nextSpell delayed trigger ('gain half X life') needs the trigger spell's X as it is on the stack (or last was) when it resolves; fireCastWatchers queues the delayed trigger with no x, and no EffectAmount reads the trigger spell's X."
+  },
+  {
+   "name": "Topiary Lecturer",
+   "needs": [
+    "keyword:increment"
+   ],
+   "why": "Increment's intervening-if compares the trigger spell's mana spent with the source's power/toughness; a trigger-object filter's { amount } operand fails closed in conditionMet's matchesKnown (no FilterContext.amount), so nothing can say it."
+  },
+  {
+   "name": "Joined Researchers // Secret Rendezvous",
+   "needs": [
+    "condition:opponent-more-cards-in-hand"
+   ],
+   "why": "No StaticCondition for 'if an opponent has more cards in hand than you' (hand-size is only your own bounds or each player's; opponent-controls-more counts permanents)."
+  },
+  {
+   "name": "Molten-Core Maestro",
+   "needs": [
+    "keyword:opus"
+   ],
+   "why": "Opus resolves even if the spell was countered (ruling), but moveObject clears manaSpent on stack->graveyard and lastOnStack/LastKnownInfo don't keep it for a spell, so a trigger-object { manaSpent } check reads 0 — proved in a scratch test (countered 5-mana spell: no {R} added)."
+  },
+  {
+   "name": "Exhibition Tidecaller",
+   "needs": [
+    "keyword:opus"
+   ],
+   "why": "Same opus gap: 'if five or more mana was spent to cast that spell' reads 0 once the spell has been countered in response, so it would mill three instead of ten."
+  },
+  {
+   "name": "Ark of Hunger",
+   "needs": [
+    "zone:graveyard-cast-permissions"
+   ],
+   "why": "'Mill a card. You may play that card this turn' needs a one-shot *play* permission (lands included) for the milled card in the graveyard; grant-graveyard-cast is cast-only and targeted."
+  },
+  {
+   "name": "Ral Zarek, Guest Lecturer",
+   "needs": [
+    "replacement:skip-turn"
+   ],
+   "why": "The -7's 'target opponent skips their next X turns' has no vocabulary."
+  },
+  {
+   "name": "Petrified Hamlet",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "'Choose a land card name' as it enters, then a named-source prohibition and grant, isn't built."
+  },
+  {
+   "name": "Stensian Sanguinist // Exsanguinate",
+   "needs": [
+    "effect:delayed-combat-damage-this-combat"
+   ],
+   "why": "\"whenever that creature deals combat damage to a player this combat\": the dealsCombatDamage delayed watch lasts the turn, so an extra combat would fire it again"
+  }
+ ]
+}

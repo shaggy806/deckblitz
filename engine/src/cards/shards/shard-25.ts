@@ -17,6 +17,7 @@ import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
+import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
@@ -78,6 +79,7 @@ import _poolDreadbore from "../pool/dreadbore.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
+import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
@@ -121,6 +123,7 @@ import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
 import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
+import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
@@ -293,6 +296,7 @@ import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-anc
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
+import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
@@ -316,6 +320,7 @@ const shard: CardShard = {
     _poolArmoredPegasus,
     _poolAshenMonstrosity,
     _poolAssaultZeppelid,
+    _poolAvengersUnderSiege,
     _poolBaSingSe,
     _poolBastionOfRemembrance,
     _poolBastionProtector,
@@ -377,6 +382,7 @@ const shard: CardShard = {
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
+    _poolEccentricPestfinder,
     _poolEldraziDevastator,
     _poolElvenLyre,
     _poolElvishHexhunter,
@@ -420,6 +426,7 @@ const shard: CardShard = {
     _poolGolemsHeart,
     _poolGrahaTiaScionReborn,
     _poolGraspingLongneck,
+    _poolGreatHallOfTheBiblioplex,
     _poolHallOfHeliodsGenerosity,
     _poolHarnessedSnubhorn,
     _poolHatutZerazeStrikeForce,
@@ -594,6 +601,7 @@ const shard: CardShard = {
     _tokensConstructTokenRetrofitterFoundry,
     _tokensElfWarriorToken,
     _tokensGlimmerToken,
+    _tokensInklingTokenEmeritusOfTruce,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
     _tokensShapeshifterTokenIrregularCohort,

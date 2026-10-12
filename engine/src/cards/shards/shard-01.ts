@@ -38,6 +38,7 @@ import _poolCatapultMaster from "../pool/catapult-master.js";
 import _poolCetaDisciple from "../pool/ceta-disciple.js";
 import _poolCinderStorm from "../pool/cinder-storm.js";
 import _poolClaimTerritory from "../pool/claim-territory.js";
+import _poolClaimTheKingdom from "../pool/claim-the-kingdom.js";
 import _poolClarionCathars from "../pool/clarion-cathars.js";
 import _poolClementTheWorrywort from "../pool/clement-the-worrywort.js";
 import _poolCloudheathDrake from "../pool/cloudheath-drake.js";
@@ -318,6 +319,7 @@ const shard: CardShard = {
     _poolCetaDisciple,
     _poolCinderStorm,
     _poolClaimTerritory,
+    _poolClaimTheKingdom,
     _poolClarionCathars,
     _poolClementTheWorrywort,
     _poolCloudheathDrake,

@@ -62,6 +62,7 @@ import _poolCuratorsWard from "../pool/curators-ward.js";
 import _poolCuriosityCrafter from "../pool/curiosity-crafter.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
+import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDemystify from "../pool/demystify.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
@@ -402,6 +403,7 @@ const shard: CardShard = {
     _poolCuriosityCrafter,
     _poolDarksteelForge,
     _poolDawnsireSunstarDreadnought,
+    _poolDefacingDuskmage,
     _poolDemystify,
     _poolDevoteeOfStrength,
     _poolDimirGuildmage,

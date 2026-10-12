@@ -184,6 +184,7 @@ import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
+import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
@@ -256,6 +257,8 @@ import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
 import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
+import _poolVandalsEdit from "../pool/vandals-edit.js";
+import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
 import _poolViashivanDragon from "../pool/viashivan-dragon.js";
@@ -471,6 +474,7 @@ const shard: CardShard = {
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPiranhaMarsh,
+    _poolPoliticalTriumph,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrizefight,
@@ -543,6 +547,8 @@ const shard: CardShard = {
     _poolUnmarkedGrave,
     _poolUrzasFactory,
     _poolVampireSoulcaller,
+    _poolVandalsEdit,
+    _poolVastlandsScavenger,
     _poolVegaTheWatcher,
     _poolViashinoGrappler,
     _poolViashivanDragon,

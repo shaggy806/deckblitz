@@ -796,6 +796,11 @@ export interface GameObject {
    * card moves on (a countered spell exiled from the graveyard was still
    * that spell). */
   lastStackManaValue?: number;
+  /** The mana spent to cast it as it last left the stack (`manaSpent`) — the
+   * `{ manaSpentOf: "trigger-object" }` of a cast trigger whose spell was
+   * countered in response (Aetherflux Conduit). Kept like
+   * `lastStackManaValue`. */
+  lastStackManaSpent?: number;
   /** This spell as it last existed on the stack, set each time it leaves:
    * what a copy of it copies once it has gone (rule 707.10 — Shiko and
    * Narset, Unified copies "that spell" even after it was countered in

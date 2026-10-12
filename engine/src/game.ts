@@ -12714,7 +12714,7 @@ export class Game {
     if (object === undefined || object.zone !== "battlefield" || count <= 0) return;
     object.counters[kind] = (object.counters[kind] ?? 0) + count;
     invalidateComputedCache();
-    this.emit({ type: "counter-added", object: id, counter: kind, amount: count, by });
+    this.emit({ type: "counter-added", object: id, counter: kind, amount: count, by, after: object.counters[kind] });
   }
 
   private useManaSource(step: ManaPlanStep): void {
@@ -15911,6 +15911,10 @@ export class Game {
           event.type === "counter-added" &&
           event.amount > 0 &&
           (spec.counter === undefined || event.counter === spec.counter) &&
+          // "When the Nth counter is put on": the placement that takes it
+          // from fewer than N to N or more (Midnight Clock).
+          (spec.nth === undefined ||
+            (event.after !== undefined && event.after >= spec.nth && event.after - event.amount < spec.nth)) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
           (spec.byYou !== true || event.by === self.controller)
@@ -17582,6 +17586,17 @@ export class Game {
       },
       manaSpentOf: (target) => {
         if (target.kind !== "object") return 0;
+        // The spell that fired a cast trigger, gone from the stack since
+        // (countered in response): what was spent on it there (608.2h).
+        const spell = target.object === triggerObject ? this.state.objects[target.object] : undefined;
+        if (
+          spell !== undefined &&
+          refs.triggerSpell !== undefined &&
+          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell) &&
+          spell.lastStackManaSpent !== undefined
+        ) {
+          return spell.lastStackManaSpent;
+        }
         const lki = lastKnownOf(target);
         return lki !== undefined
           ? (lki.manaSpent ?? 0)
@@ -21279,7 +21294,14 @@ export class Game {
       this.state.zones.shared.battlefield.push(id);
       // Entering with counters is putting them on it (rule 122.6).
       for (const c of entering.counters) {
-        this.emit({ type: "counter-added", object: id, counter: c.kind, amount: c.amount, by: controller });
+        this.emit({
+          type: "counter-added",
+          object: id,
+          counter: c.kind,
+          amount: c.amount,
+          by: controller,
+          after: this.state.objects[id].counters[c.kind],
+        });
       }
       // Entering prepared (rule 722.3a), each token makes a copy of its own
       // (722.3c): a batch is never one prepared stack.
@@ -22716,7 +22738,7 @@ export class Game {
     if (total > 0 && KEYWORD_COUNTERS.has(counter as Keyword)) {
       object.counterTimestamps = { ...object.counterTimestamps, [counter]: this.freshTimestamp() };
     }
-    this.emit({ type: "counter-added", object: id, counter, amount: total, by: by ?? object.controller });
+    this.emit({ type: "counter-added", object: id, counter, amount: total, by: by ?? object.controller, after: before + total });
     if (counter === "lore" && total > 0) this.triggerChapters(id, before, before + total);
   }
 
@@ -27581,7 +27603,10 @@ export class Game {
   ): number {
     if (typeof amount === "number") return amount;
     const notYet = [entering, ...(this.enterBatch ?? [])];
-    const ctx = this.makeResolutionContext(source, controller, [], 0, 0, entering);
+    // Its own "enters with" reads the X it was cast with wherever X appears
+    // in the amount — Primo's "twice X" — not only a bare `"x"`.
+    const x = source === entering ? (this.state.objects[entering]?.xValue ?? 0) : 0;
+    const ctx = this.makeResolutionContext(source, controller, [], x, 0, entering);
     const fromGraveyard = notYet.filter((id) => {
       const object = this.state.objects[id];
       return object?.zone === "battlefield" && object.entry?.from === "graveyard" && !object.isToken;
@@ -28314,6 +28339,7 @@ export class Game {
     // doesn't change because the card was exiled from the graveyard since.
     if (object.zone === "stack" && object.kind === "card") {
       object.lastStackManaValue = this.manaValueOnStack(object);
+      object.lastStackManaSpent = object.manaSpent ?? 0;
       // Already taken if its targets were cleared on the way out (see
       // `forgetSpellTargets`).
       if (object.lastOnStack?.zoneChangeCount !== (object.zoneChangeCount ?? 0)) {
@@ -28720,6 +28746,7 @@ export class Game {
           counter: c.kind,
           amount: c.amount,
           by: enteringController,
+          after: object.counters[c.kind],
         });
       }
       // It enters prepared (rule 722.3a): the designation, and its prepare

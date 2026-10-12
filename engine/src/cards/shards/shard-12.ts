@@ -286,6 +286,7 @@ import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
+import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
@@ -586,6 +587,7 @@ const shard: CardShard = {
     _poolWasteland,
     _poolWayOfThePyromancer,
     _poolWelderAutomaton,
+    _poolWildIdea,
     _poolWildernessReclamation,
     _poolWitchBlessedMeadow,
     _poolWretchedDoll,

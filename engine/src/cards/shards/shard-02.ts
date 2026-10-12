@@ -174,6 +174,7 @@ import _poolOketrasMonument from "../pool/oketras-monument.js";
 import _poolOloroAgelessAscetic from "../pool/oloro-ageless-ascetic.js";
 import _poolOnslaught from "../pool/onslaught.js";
 import _poolOpenTheGates from "../pool/open-the-gates.js";
+import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolPaleBears from "../pool/pale-bears.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
@@ -461,6 +462,7 @@ const shard: CardShard = {
     _poolOloroAgelessAscetic,
     _poolOnslaught,
     _poolOpenTheGates,
+    _poolOriginOfTheAvengers,
     _poolPaleBears,
     _poolPavelMaliki,
     _poolPearlDragon,

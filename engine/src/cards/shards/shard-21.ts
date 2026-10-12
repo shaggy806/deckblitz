@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
+import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
@@ -98,6 +99,7 @@ import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
+import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
@@ -238,6 +240,7 @@ import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
+import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
@@ -286,6 +289,7 @@ const shard: CardShard = {
     _poolAangAtTheCrossroads,
     _poolAbueloAncestralEcho,
     _poolAeridKonstrari,
+    _poolAllAboard,
     _poolAlpineWatchdog,
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
@@ -378,6 +382,7 @@ const shard: CardShard = {
     _poolGoblinLackey,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
+    _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
@@ -518,6 +523,7 @@ const shard: CardShard = {
     _poolTendrilsOfAgony,
     _poolTerrorOfTheFairgrounds,
     _poolTezzeretCruelCaptain,
+    _poolTheDawningArchaic,
     _poolTheEldestReborn,
     _poolTheFrightfulFour,
     _poolTheInvincibleIronMan,

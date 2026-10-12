@@ -14,6 +14,7 @@ import _poolAnger from "../pool/anger.js";
 import _poolAnglerTurtle from "../pool/angler-turtle.js";
 import _poolAqueousForm from "../pool/aqueous-form.js";
 import _poolArborElf from "../pool/arbor-elf.js";
+import _poolArnynDeathbloomBotanist from "../pool/arnyn-deathbloom-botanist.js";
 import _poolArtfulTakedown from "../pool/artful-takedown.js";
 import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
@@ -204,6 +205,8 @@ import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
+import _poolPursueThePast from "../pool/pursue-the-past.js";
+import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
@@ -277,6 +280,7 @@ import _poolTriplicateTitan from "../pool/triplicate-titan.js";
 import _poolTroopOfPonies from "../pool/troop-of-ponies.js";
 import _poolTukatongueThallid from "../pool/tukatongue-thallid.js";
 import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
+import _poolTurnStones from "../pool/turn-stones.js";
 import _poolTurtleSeals from "../pool/turtle-seals.js";
 import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
 import _poolTwistedExperiment from "../pool/twisted-experiment.js";
@@ -339,6 +343,7 @@ const shard: CardShard = {
     _poolAnglerTurtle,
     _poolAqueousForm,
     _poolArborElf,
+    _poolArnynDeathbloomBotanist,
     _poolArtfulTakedown,
     _poolAshBarrens,
     _poolAssembleTheLegion,
@@ -529,6 +534,8 @@ const shard: CardShard = {
     _poolPlatinumAngel,
     _poolPredatorySliver,
     _poolProwcatcherSpecialist,
+    _poolPursueThePast,
+    _poolQuandrixTheProof,
     _poolRabanastreRoyalCity,
     _poolRagingBull,
     _poolRazorkinNeedlehead,
@@ -602,6 +609,7 @@ const shard: CardShard = {
     _poolTroopOfPonies,
     _poolTukatongueThallid,
     _poolTunnelingGeopede,
+    _poolTurnStones,
     _poolTurtleSeals,
     _poolTwinscrollShaman,
     _poolTwistedExperiment,

@@ -118,6 +118,7 @@ import _poolKabutoMoth from "../pool/kabuto-moth.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKindercatch from "../pool/kindercatch.js";
+import _poolKineticOoze from "../pool/kinetic-ooze.js";
 import _poolKingfisher from "../pool/kingfisher.js";
 import _poolKnightOfTheTusk from "../pool/knight-of-the-tusk.js";
 import _poolKnightWatch from "../pool/knight-watch.js";
@@ -431,6 +432,7 @@ const shard: CardShard = {
     _poolKariZevSkyshipRaider,
     _poolKeigaTheTideStar,
     _poolKindercatch,
+    _poolKineticOoze,
     _poolKingfisher,
     _poolKnightOfTheTusk,
     _poolKnightWatch,

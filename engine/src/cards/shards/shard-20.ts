@@ -76,6 +76,7 @@ import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
 import _poolDauthiVoidwalker from "../pool/dauthi-voidwalker.js";
+import _poolDaydream from "../pool/daydream.js";
 import _poolDeadlyInsect from "../pool/deadly-insect.js";
 import _poolDeadlyRollick from "../pool/deadly-rollick.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
@@ -200,6 +201,7 @@ import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
 import _poolQuagmireDruid from "../pool/quagmire-druid.js";
+import _poolQuandrixCharm from "../pool/quandrix-charm.js";
 import _poolQueensCommission from "../pool/queens-commission.js";
 import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
@@ -216,6 +218,7 @@ import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
+import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
@@ -270,6 +273,7 @@ import _poolTheGreatMound from "../pool/the-great-mound.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
+import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThoughtVessel from "../pool/thought-vessel.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
@@ -384,6 +388,7 @@ const shard: CardShard = {
     _poolDanithaNewBenaliasLight,
     _poolDauntlessScrapbot,
     _poolDauthiVoidwalker,
+    _poolDaydream,
     _poolDeadlyInsect,
     _poolDeadlyRollick,
     _poolDeathreapRitual,
@@ -508,6 +513,7 @@ const shard: CardShard = {
     _poolPutridGoblin,
     _poolQasaliPridemage,
     _poolQuagmireDruid,
+    _poolQuandrixCharm,
     _poolQueensCommission,
     _poolQuintoriusHistoryChaser,
     _poolRadhaHeirToKeld,
@@ -524,6 +530,7 @@ const shard: CardShard = {
     _poolRishkarPeemaRenegade,
     _poolRottedHystrix,
     _poolRubyMedallion,
+    _poolSanarUnfinishedGenius,
     _poolSazhsChocobo,
     _poolScarecrowGuide,
     _poolSearingFlesh,
@@ -578,6 +585,7 @@ const shard: CardShard = {
     _poolTheTenRings,
     _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,
+    _poolThorOdinson,
     _poolThoughtVessel,
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,

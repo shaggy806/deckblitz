@@ -76,6 +76,7 @@ import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
+import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
@@ -277,6 +278,7 @@ import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
+import _poolViciousRivalry from "../pool/vicious-rivalry.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
@@ -377,6 +379,7 @@ const shard: CardShard = {
     _poolElderfangDisciple,
     _poolElvishWarrior,
     _poolEmergeFromTheCocoon,
+    _poolEmeritusOfConflict,
     _poolEngineRat,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolVergeRangers,
     _poolVexingGull,
     _poolViashinoBladescout,
+    _poolViciousRivalry,
     _poolVillageCannibals,
     _poolVitalizingWind,
     _poolVoiceOfTheProvinces,

@@ -60,6 +60,7 @@ import _poolDarkslickShores from "../pool/darkslick-shores.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
+import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
@@ -297,6 +298,7 @@ import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
+import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
@@ -361,6 +363,7 @@ const shard: CardShard = {
     _poolDeathHoodCobra,
     _poolDeconstruct,
     _poolDeepAnalysis,
+    _poolDefilingDaemogoth,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
     _poolDesecratedTomb,
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _tokensClownRobotToken,
     _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,
+    _tokensFractalToken,
     _tokensHumanToken,
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,

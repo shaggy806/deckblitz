@@ -5593,6 +5593,42 @@
   "effect:look-and-choose-may-enter-transformed": {
    "family": "effect:put-onto-battlefield-options",
    "example": "Nick Fury, Agent of S.H.I.E.L.D.: 'You may put a Hero, Equipment, or Vehicle card from among them onto the battlefield. If it's a double-faced card, you may transform it.'"
+  },
+  "static:cant-become-untapped": {
+   "family": "static:affect-scope-by-filter",
+   "example": "Frozen in Ice: 'Enchanted creature ... can't become untapped' — stops every untap, not just the untap step; doesntUntap covers only its own permanent in its controller's untap step."
+  },
+  "effect:cast-spell-trigger-spell-targets": {
+   "family": "trigger:cast-spell-clauses",
+   "example": "Storm, Windrider: 'Whenever you cast a spell that targets one or more creatures, those creatures gain flying until end of turn' — no effect ref for the triggering spell's targets."
+  },
+  "condition:put-into-graveyard-this-turn-any-zone": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Night Nurse, Healer of Heroes: 'target permanent card in your graveyard that was put there from anywhere this turn' — only putIntoGraveyardFromLibraryThisTurn exists."
+  },
+  "replacement:damage-heals-prior-damage": {
+   "family": "replacement:damage-modification",
+   "example": "Wolverine, Fierce Fighter: 'If damage would be dealt to Wolverine, instead that damage is dealt, but all other damage already dealt to him is healed.'"
+  },
+  "effect:delayed-next-spell-live-amount": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Loki Laufeyson: a delayed nextSpell filter 'with mana value less than or equal to Loki's power' needs an { amount } operand answered as the spell is cast (rule 603.2); fireCastWatchers passes no amount context."
+  },
+  "effect:reflexive-divided-damage": {
+   "family": "effect:divide-among-targets",
+   "example": "Death to Our Enemies: 'sacrifice it. When you do, it deals 7 damage divided as you choose among one or two targets' — a reflexive-trigger can't carry `divided`."
+  },
+  "effect:delayed-trigger-reads-spell-x": {
+   "family": "bug:x-value-propagation",
+   "example": "Brass Infiniscope: 'When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life' — a nextSpell delayed trigger can't read the X of the spell that fired it."
+  },
+  "keyword:opus": {
+   "family": "stat:mana-spent-to-cast",
+   "example": "Molten-Core Maestro: opus's 'if five or more mana was spent to cast that spell' must read the spell's mana spent after it left the stack (countered in response — the ruling); GameObject.manaSpent is cleared on the move and the spell's last-on-stack snapshot doesn't keep it."
+  },
+  "condition:opponent-more-cards-in-hand": {
+   "family": "condition:player-state-thresholds",
+   "example": "Joined Researchers: 'At the beginning of each end step, if an opponent has more cards in hand than you' — no condition compares hand sizes across players."
   }
  }
 }

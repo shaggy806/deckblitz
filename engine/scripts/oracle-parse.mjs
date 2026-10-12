@@ -533,6 +533,11 @@ export function parseTrigger(clause) {
   }
   if (/^When you cast (?:~|this spell)$/.test(c)) return [{ on: "this-cast" }];
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
+  // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
+  if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
+    const nth = ["second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"].indexOf(m[1]) + 2;
+    return [{ on: "counters-put", who: "self", counter: m[2], nth }];
+  }
 
   // "Whenever [another] [nontoken] <type> [you control | an opponent controls] enters / dies / attacks"
   if ((m = /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks)$/.exec(c))) {

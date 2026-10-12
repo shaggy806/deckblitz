@@ -61,6 +61,7 @@ import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDematerialize from "../pool/dematerialize.js";
+import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
 import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
@@ -84,6 +85,7 @@ import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
 import _poolElixirOfVitality from "../pool/elixir-of-vitality.js";
 import _poolElspethStormSlayer from "../pool/elspeth-storm-slayer.js";
 import _poolElvishLyrist from "../pool/elvish-lyrist.js";
+import _poolEmeritusOfTruce from "../pool/emeritus-of-truce.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFallenShinobi from "../pool/fallen-shinobi.js";
@@ -356,6 +358,7 @@ const shard: CardShard = {
     _poolCurseOfVerbosity,
     _poolDamoclesBaseSwordOfKang,
     _poolDematerialize,
+    _poolDependableQuinjet,
     _poolDerangedWhelp,
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
@@ -379,6 +382,7 @@ const shard: CardShard = {
     _poolElixirOfVitality,
     _poolElspethStormSlayer,
     _poolElvishLyrist,
+    _poolEmeritusOfTruce,
     _poolEnergyRefractor,
     _poolFacevaulter,
     _poolFallenShinobi,

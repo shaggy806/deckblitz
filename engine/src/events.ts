@@ -517,6 +517,10 @@ export type GameEvent =
        * them: a batch that entered with counters and folded into a stack
        * already there. Absent, every token the object stands for did. */
       readonly count?: number;
+      /** How many of that kind the object has once these are on — what "when
+       * the Nth counter is put on" reads (the placement crossing N). Absent
+       * for a token stack's arrivals. */
+      readonly after?: number;
     })
   | (Base & {
       /** Counters removed (from a `removeCounter` ability cost — Walking

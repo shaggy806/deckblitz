@@ -164,6 +164,7 @@ import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
 import _poolMigrationPath from "../pool/migration-path.js";
+import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
@@ -260,6 +261,7 @@ import _poolTalasMerchant from "../pool/talas-merchant.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
@@ -482,6 +484,7 @@ const shard: CardShard = {
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
     _poolMigrationPath,
+    _poolMindIntoMatter,
     _poolMindlessAutomaton,
     _poolMockingbird,
     _poolMoonHeron,
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTheMastersOfEvil,
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
     _poolTheSeriema,

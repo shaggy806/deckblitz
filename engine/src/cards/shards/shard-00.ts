@@ -203,6 +203,7 @@ import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
+import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
@@ -273,6 +274,7 @@ import _poolTempestAngler from "../pool/tempest-angler.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
+import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
@@ -525,6 +527,7 @@ const shard: CardShard = {
     _poolPowerFist,
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
+    _poolProfessorDellianFel,
     _poolProfessorHulk,
     _poolPryingEyes,
     _poolQuakestriderCeratops,
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolTempestDrake,
     _poolTemporalManipulation,
     _poolTerritorialHellkite,
+    _poolTheComingOfGalactus,
     _poolTheMightstoneAndWeakstone,
     _poolTheMycotyrant,
     _poolTheTheoristJaceBeleren,

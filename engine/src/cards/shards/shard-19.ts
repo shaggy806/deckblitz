@@ -174,6 +174,7 @@ import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
+import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
@@ -229,6 +230,7 @@ import _poolSerraZealot from "../pool/serra-zealot.js";
 import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
+import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
@@ -270,6 +272,7 @@ import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
+import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
@@ -480,6 +483,7 @@ const shard: CardShard = {
     _poolMorophonTheBoundless,
     _poolMuckRats,
     _poolMuddleTheMixture,
+    _poolNaktamunLorespinner,
     _poolNaturalReclamation,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
@@ -535,6 +539,7 @@ const shard: CardShard = {
     _poolShadowInTheWarp,
     _poolShadowTheHedgehog,
     _poolShadowmageInfiltrator,
+    _poolShangChiAndTheTenRings,
     _poolShefetDunes,
     _poolShuEliteInfantry,
     _poolShuko,
@@ -576,6 +581,7 @@ const shard: CardShard = {
     _poolUlamogsDreadsire,
     _poolUltronTheAnnihilator,
     _poolUncoverTheMoonLetters,
+    _poolUndercoverSkrull,
     _poolUnsubtleMockery,
     _poolUrborgDrake,
     _poolUrzaPrinceOfKroog,

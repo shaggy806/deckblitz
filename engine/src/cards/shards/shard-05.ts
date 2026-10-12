@@ -195,6 +195,7 @@ import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
+import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
 import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
@@ -233,6 +234,7 @@ import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
+import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
@@ -251,6 +253,7 @@ import _poolStudyHall from "../pool/study-hall.js";
 import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
 import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
+import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSwanSong from "../pool/swan-song.js";
@@ -302,12 +305,14 @@ import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
 import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of-alexandria.js";
 import _tokensBananaToken from "../tokens/banana-token.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
+import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
 import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.js";
 import _tokensJaceToken from "../tokens/jace-token.js";
 import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
+import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
 
 const shard: CardShard = {
@@ -504,6 +509,7 @@ const shard: CardShard = {
     _poolPermissionDenied,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
+    _poolPrimoTheUnbounded,
     _poolProtomatterPowder,
     _poolPuresteelPaladin,
     _poolQuicksilverAmulet,
@@ -542,6 +548,7 @@ const shard: CardShard = {
     _poolShriekdiver,
     _poolSifterOfSkulls,
     _poolSkyTheaterStrix,
+    _poolSkycoachConductor,
     _poolSlagdrillScrapper,
     _poolSnapcasterMage,
     _poolSolRing,
@@ -560,6 +567,7 @@ const shard: CardShard = {
     _poolSuburbanSanctuary,
     _poolSugarRush,
     _poolSunscorchedDesert,
+    _poolSuperStrength,
     _poolSupplyRunners,
     _poolSupremeVerdict,
     _poolSwanSong,
@@ -613,12 +621,14 @@ const shard: CardShard = {
     _tokensAssassinTokenAyaOfAlexandria,
     _tokensBananaToken,
     _tokensDeathtouchSnakeToken,
+    _tokensGalactus,
     _tokensHalflingToken,
     _tokensHumanSoldierToken,
     _tokensInsectTokenFlyingHaste,
     _tokensJaceToken,
     _tokensRatTokenVren,
     _tokensRobotVillainToken,
+    _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,
   ],
 };

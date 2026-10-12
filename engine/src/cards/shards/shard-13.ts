@@ -42,6 +42,7 @@ import _poolCactusfolkSureshot from "../pool/cactusfolk-sureshot.js";
 import _poolCallOfTheRing from "../pool/call-of-the-ring.js";
 import _poolCanopyGorger from "../pool/canopy-gorger.js";
 import _poolCanopyTactician from "../pool/canopy-tactician.js";
+import _poolCaptainMarVellSpaceBorn from "../pool/captain-mar-vell-space-born.js";
 import _poolCarrionAnts from "../pool/carrion-ants.js";
 import _poolCastleEmbereth from "../pool/castle-embereth.js";
 import _poolCatharsShield from "../pool/cathars-shield.js";
@@ -176,6 +177,7 @@ import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
 import _poolOverflowingInsight from "../pool/overflowing-insight.js";
+import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
@@ -200,6 +202,7 @@ import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
+import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
@@ -335,6 +338,7 @@ const shard: CardShard = {
     _poolCallOfTheRing,
     _poolCanopyGorger,
     _poolCanopyTactician,
+    _poolCaptainMarVellSpaceBorn,
     _poolCarrionAnts,
     _poolCastleEmbereth,
     _poolCatharsShield,
@@ -469,6 +473,7 @@ const shard: CardShard = {
     _poolOrcishLumberjack,
     _poolOrzhovCluestone,
     _poolOverflowingInsight,
+    _poolOwlinSpiralmancer,
     _poolPersonalTutor,
     _poolPhyrexianDelver,
     _poolPhyrexianVivisector,
@@ -493,6 +498,7 @@ const shard: CardShard = {
     _poolRipscalePredator,
     _poolRitesOfFlourishing,
     _poolRivenTurnbull,
+    _poolRobotDomination,
     _poolRottingMastodon,
     _poolRoyalFalcon,
     _poolRussetWolves,

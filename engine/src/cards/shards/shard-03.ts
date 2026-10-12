@@ -114,6 +114,7 @@ import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
+import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
 import _poolKarazikarTheEyeTyrant from "../pool/karazikar-the-eye-tyrant.js";
 import _poolKataraWaterbendingMaster from "../pool/katara-waterbending-master.js";
@@ -391,6 +392,7 @@ const shard: CardShard = {
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
     _poolJandorsSaddlebags,
+    _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,
     _poolKarazikarTheEyeTyrant,
     _poolKataraWaterbendingMaster,

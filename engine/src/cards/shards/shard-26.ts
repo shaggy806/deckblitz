@@ -44,6 +44,7 @@ import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
 import _poolClaimThePrecious from "../pool/claim-the-precious.js";
 import _poolCoastalPiracy from "../pool/coastal-piracy.js";
+import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
 import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
@@ -337,6 +338,7 @@ const shard: CardShard = {
     _poolCityOfBrass,
     _poolClaimThePrecious,
     _poolCoastalPiracy,
+    _poolCoerciveImpetus,
     _poolCogworkersPuzzleknot,
     _poolCorpseKnight,
     _poolCountOnLuck,

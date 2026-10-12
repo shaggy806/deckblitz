@@ -87,6 +87,15 @@ describe("costs and triggers", () => {
     expect(parseCost("{1}, Discard a card")).toBeNull();
   });
 
+  it("the Nth counter put on this", () => {
+    expect(parseTrigger("When the fourth plan counter is put on this enchantment")).toEqual([
+      { on: "counters-put", who: "self", counter: "plan", nth: 4 },
+    ]);
+    expect(parseTrigger("When the tenth +1/+1 counter is put on ~")).toEqual([
+      { on: "counters-put", who: "self", counter: "+1/+1", nth: 10 },
+    ]);
+  });
+
   it("triggers", () => {
     expect(parseTrigger("When ~ enters")).toEqual([{ on: "enters-battlefield", who: "self" }]);
     expect(parseTrigger("Whenever ~ enters or attacks")).toHaveLength(2);

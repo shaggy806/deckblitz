@@ -666,6 +666,11 @@ export type TriggerSpec =
       readonly counter?: string;
       readonly filter?: CardFilter;
       readonly byYou?: boolean;
+      /** "When the Nth [`counter`] counter is put on this" (Midnight Clock,
+       * the Plans): only the placement that takes that kind from fewer than
+       * N to N or more — several at once past N count, and later ones don't
+       * fire it again until it has dropped back below N. */
+      readonly nth?: number;
     }
   | {
       /**
