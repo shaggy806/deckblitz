@@ -108,6 +108,7 @@ import _poolEnroot from "../pool/enroot.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
+import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
@@ -182,6 +183,7 @@ import _poolKeenEyedArchers from "../pool/keen-eyed-archers.js";
 import _poolKeldonHalberdier from "../pool/keldon-halberdier.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKingpinsPet from "../pool/kingpins-pet.js";
+import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
@@ -241,6 +243,7 @@ import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
+import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
@@ -464,6 +467,7 @@ const shard: CardShard = {
     _poolEreborFlamesmith,
     _poolEriettesLullaby,
     _poolEssenceAnchor,
+    _poolEverythingPizza,
     _poolExecutionersHood,
     _poolFallowEarth,
     _poolFangOfShigeki,
@@ -538,6 +542,7 @@ const shard: CardShard = {
     _poolKeldonHalberdier,
     _poolKingpinsEnforcers,
     _poolKingpinsPet,
+    _poolKitsunesTechnique,
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKonstrariImproviser,
@@ -597,6 +602,7 @@ const shard: CardShard = {
     _poolPlazaOfHeroes,
     _poolPollutedDead,
     _poolPrakhataPillarBug,
+    _poolPrehistoricPet,
     _poolPropellerPioneer,
     _poolPurpleCrystalCrab,
     _poolRakdosPatronOfChaos,

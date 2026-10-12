@@ -307,6 +307,7 @@ import _poolToxinAnalysis from "../pool/toxin-analysis.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
 import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
+import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
@@ -655,6 +656,7 @@ const shard: CardShard = {
     _poolTreasureCove,
     _poolTreasureDredger,
     _poolTreeOfRedemption,
+    _poolTurncoatKunoichi,
     _poolTuvasaTheSunlit,
     _poolTweeze,
     _poolUmbralJuke,

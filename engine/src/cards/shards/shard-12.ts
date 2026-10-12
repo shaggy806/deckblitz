@@ -197,6 +197,7 @@ import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
+import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
@@ -550,6 +551,7 @@ const shard: CardShard = {
     _poolNightscapeFamiliar,
     _poolNyxbornMarauder,
     _poolOmenHawker,
+    _poolOozeSpill,
     _poolOphidianEye,
     _poolOriKeeperOfSongs,
     _poolOrimsChant,

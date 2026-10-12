@@ -66,6 +66,7 @@ import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
+import _poolDonatelloGadgetMaster from "../pool/donatello-gadget-master.js";
 import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
@@ -410,6 +411,7 @@ const shard: CardShard = {
     _poolDissipate,
     _poolDivingGriffin,
     _poolDoggedHunter,
+    _poolDonatelloGadgetMaster,
     _poolDoranBesiegedByTime,
     _poolDragonTrainer,
     _poolDragonmasterOutcast,

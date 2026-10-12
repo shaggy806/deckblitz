@@ -20,6 +20,7 @@ import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
 import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
+import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
@@ -206,6 +207,7 @@ import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
+import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
@@ -262,6 +264,7 @@ import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShortBow from "../pool/short-bow.js";
+import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
 import _poolShriekRaptor from "../pool/shriek-raptor.js";
 import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
@@ -372,6 +375,7 @@ const shard: CardShard = {
     _poolAngelicSkirmisher,
     _poolArcaneSignet,
     _poolArchghoulOfThraben,
+    _poolArmaggonFutureShark,
     _poolArrowsOfJustice,
     _poolAsphyxiate,
     _poolAuthorityOfTheConsuls,
@@ -558,6 +562,7 @@ const shard: CardShard = {
     _poolMorphling,
     _poolNarsetEnlightenedMaster,
     _poolNeedletoothPack,
+    _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
     _poolNomadicElf,
     _poolNoviceDissector,
@@ -614,6 +619,7 @@ const shard: CardShard = {
     _poolSelflessCathar,
     _poolSharedRoots,
     _poolShortBow,
+    _poolShredderUnrelenting,
     _poolShriekRaptor,
     _poolSiegeGangLieutenant,
     _poolSiegeWurm,

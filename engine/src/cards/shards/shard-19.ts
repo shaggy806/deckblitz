@@ -79,6 +79,7 @@ import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
+import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
@@ -240,6 +241,7 @@ import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
+import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
@@ -446,6 +448,7 @@ const shard: CardShard = {
     _poolDimensionX,
     _poolDismiss,
     _poolDisruptivePitmage,
+    _poolDonLeoProblemSolvers,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
@@ -607,6 +610,7 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolRaiseDead,
+    _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
     _poolRecklessBrute,
     _poolRedElementalBlast,

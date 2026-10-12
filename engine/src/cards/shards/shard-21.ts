@@ -216,6 +216,7 @@ import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
 import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
+import _poolRaphLeoSiblingRivals from "../pool/raph-leo-sibling-rivals.js";
 import _poolRaphaelTheNightwatcher from "../pool/raphael-the-nightwatcher.js";
 import _poolRathiTrapper from "../pool/rathi-trapper.js";
 import _poolRazortoothRats from "../pool/razortooth-rats.js";
@@ -542,6 +543,7 @@ const shard: CardShard = {
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
     _poolRakshasaDebaser,
+    _poolRaphLeoSiblingRivals,
     _poolRaphaelTheNightwatcher,
     _poolRathiTrapper,
     _poolRazortoothRats,

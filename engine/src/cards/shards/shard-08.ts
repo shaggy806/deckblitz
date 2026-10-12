@@ -224,6 +224,7 @@ import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
+import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
@@ -275,6 +276,7 @@ import _poolShakeTheFoundations from "../pool/shake-the-foundations.js";
 import _poolShamblingShell from "../pool/shambling-shell.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
+import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
@@ -592,6 +594,7 @@ const shard: CardShard = {
     _poolObeliskOfEsper,
     _poolOpenTheArmory,
     _poolOphiomancer,
+    _poolOrokuSakiShredderRising,
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
@@ -643,6 +646,7 @@ const shard: CardShard = {
     _poolShamblingShell,
     _poolShieldmatesBlessing,
     _poolShoreKeeper,
+    _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolSilentDeparture,
     _poolSilkenfistFighter,

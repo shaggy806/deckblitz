@@ -279,6 +279,7 @@ import _poolSeizeTheSpoils from "../pool/seize-the-spoils.js";
 import _poolSenateGriffin from "../pool/senate-griffin.js";
 import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
+import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
@@ -654,6 +655,7 @@ const shard: CardShard = {
     _poolSenateGriffin,
     _poolSerahFarron,
     _poolSetonKrosanProtector,
+    _poolSewerVeillanceCam,
     _poolShiftingSliver,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,

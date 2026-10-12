@@ -162,6 +162,7 @@ import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolLeechriddenSwamp from "../pool/leechridden-swamp.js";
 import _poolLegionExtruder from "../pool/legion-extruder.js";
+import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
 import _poolLivingWall from "../pool/living-wall.js";
@@ -258,6 +259,7 @@ import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
+import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
@@ -521,6 +523,7 @@ const shard: CardShard = {
     _poolKnotvineMystic,
     _poolLeechriddenSwamp,
     _poolLegionExtruder,
+    _poolLeonardoCuttingEdge,
     _poolLeoninBattlemage,
     _poolLeoninElder,
     _poolLivingWall,
@@ -617,6 +620,7 @@ const shard: CardShard = {
     _poolRustedSlasher,
     _poolSabotender,
     _poolSanctumWeaver,
+    _poolSavedByTheShell,
     _poolScalebanesElite,
     _poolScaledWurm,
     _poolScribeOfTheMindful,

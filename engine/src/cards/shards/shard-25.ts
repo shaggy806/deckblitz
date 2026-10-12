@@ -347,6 +347,7 @@ import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-r
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
+import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
@@ -702,6 +703,7 @@ const shard: CardShard = {
     _tokensElfWarriorToken,
     _tokensGlimmerToken,
     _tokensInklingTokenEmeritusOfTruce,
+    _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
     _tokensShapeshifterTokenIrregularCohort,

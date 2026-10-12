@@ -197,6 +197,7 @@ import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
+import _poolPain101 from "../pool/pain-101.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
@@ -236,6 +237,7 @@ import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights
 import _poolSandstormVerge from "../pool/sandstorm-verge.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
+import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
@@ -542,6 +544,7 @@ const shard: CardShard = {
     _poolOnyxMage,
     _poolOrcishMedicine,
     _poolOtharriSunsGlory,
+    _poolPain101,
     _poolParhelionIi,
     _poolPathOfAnnihilation,
     _poolPetAvengers,
@@ -581,6 +584,7 @@ const shard: CardShard = {
     _poolSandstormVerge,
     _poolSarythTheVipersFang,
     _poolSavaiTriome,
+    _poolSavantiRomeroTimesExile,
     _poolScarlandThrinax,
     _poolScatterArc,
     _poolSeaSpirit,

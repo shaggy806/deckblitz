@@ -1,0 +1,437 @@
+{
+ "batch": "B62",
+ "status": "complete",
+ "ranks": "Teenage Mutant Ninja Turtles (TMT, 2026-03-06): top 50% by EDHREC rank, its last 57 (TMT done); Lorwyn Eclipsed (ECL, 2026-01-23): top 50% by EDHREC rank, the first 3",
+ "authored": [
+  {
+   "name": "Shark Shredder, Killer Clone",
+   "files": [
+    "engine/src/cards/pool/shark-shredder-killer-clone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karai, Future of the Foot",
+   "files": [
+    "engine/src/cards/pool/karai-future-of-the-foot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitsune's Technique",
+   "files": [
+    "engine/src/cards/pool/kitsunes-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonardo's Technique",
+   "files": [
+    "engine/src/cards/pool/leonardos-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonardo, Big Brother",
+   "files": [
+    "engine/src/cards/pool/leonardo-big-brother.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "New Generation's Technique",
+   "files": [
+    "engine/src/cards/pool/new-generations-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oroku Saki, Shredder Rising",
+   "files": [
+    "engine/src/cards/pool/oroku-saki-shredder-rising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raphael's Technique",
+   "files": [
+    "engine/src/cards/pool/raphaels-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shredder, Unrelenting",
+   "files": [
+    "engine/src/cards/pool/shredder-unrelenting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splinter, Hamato Yoshi",
+   "files": [
+    "engine/src/cards/pool/splinter-hamato-yoshi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Last Ronin's Technique",
+   "files": [
+    "engine/src/cards/pool/the-last-ronins-technique.ts",
+    "engine/src/cards/tokens/ninja-turtle-spirit-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turncoat Kunoichi",
+   "files": [
+    "engine/src/cards/pool/turncoat-kunoichi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Donatello, Gadget Master",
+   "files": [
+    "engine/src/cards/pool/donatello-gadget-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Does Machines",
+   "files": [
+    "engine/src/cards/pool/does-machines.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everything Pizza",
+   "files": [
+    "engine/src/cards/pool/everything-pizza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fugitive Droid",
+   "files": [
+    "engine/src/cards/pool/fugitive-droid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genghis Frog",
+   "files": [
+    "engine/src/cards/pool/genghis-frog.ts",
+    "engine/src/cards/tokens/mutagen-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guac & Marshmallow Pizza",
+   "files": [
+    "engine/src/cards/pool/guac-marshmallow-pizza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Improvised Arsenal",
+   "files": [
+    "engine/src/cards/pool/improvised-arsenal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krang, Master Mind",
+   "files": [
+    "engine/src/cards/pool/krang-master-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Michelangelo, Mutant BFF",
+   "files": [
+    "engine/src/cards/pool/michelangelo-mutant-bff.ts",
+    "engine/src/cards/tokens/mutagen-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ooze Spill",
+   "files": [
+    "engine/src/cards/pool/ooze-spill.ts",
+    "engine/src/cards/tokens/mutagen-token.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sewer-veillance Cam",
+   "files": [
+    "engine/src/cards/pool/sewer-veillance-cam.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Technodrome",
+   "files": [
+    "engine/src/cards/pool/technodrome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weather Maker",
+   "files": [
+    "engine/src/cards/pool/weather-maker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent Bishop, Man in Black",
+   "files": [
+    "engine/src/cards/pool/agent-bishop-man-in-black.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armaggon, Future Shark",
+   "files": [
+    "engine/src/cards/pool/armaggon-future-shark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bebop & Rocksteady",
+   "files": [
+    "engine/src/cards/pool/bebop-rocksteady.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Don & Leo, Problem Solvers",
+   "files": [
+    "engine/src/cards/pool/don-leo-problem-solvers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Groundchuck & Dirtbag",
+   "files": [
+    "engine/src/cards/pool/groundchuck-dirtbag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leader's Talent",
+   "files": [
+    "engine/src/cards/pool/leaders-talent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madame Null, Power Broker",
+   "files": [
+    "engine/src/cards/pool/madame-null-power-broker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prehistoric Pet",
+   "files": [
+    "engine/src/cards/pool/prehistoric-pet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raph & Leo, Sibling Rivals",
+   "files": [
+    "engine/src/cards/pool/raph-leo-sibling-rivals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raphael, Ninja Destroyer",
+   "files": [
+    "engine/src/cards/pool/raphael-ninja-destroyer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sally Pride, Lioness Leader",
+   "files": [
+    "engine/src/cards/pool/sally-pride-lioness-leader.ts",
+    "engine/src/cards/tokens/mutant-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savanti Romero, Time's Exile",
+   "files": [
+    "engine/src/cards/pool/savanti-romero-times-exile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saved by the Shell",
+   "files": [
+    "engine/src/cards/pool/saved-by-the-shell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splinter, Radical Rat",
+   "files": [
+    "engine/src/cards/pool/splinter-radical-rat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tainted Treats",
+   "files": [
+    "engine/src/cards/pool/tainted-treats.ts",
+    "engine/src/cards/tokens/food-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shredder's Revenge",
+   "files": [
+    "engine/src/cards/pool/shredders-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pain 101",
+   "files": [
+    "engine/src/cards/pool/pain-101.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triceraton Commander",
+   "files": [
+    "engine/src/cards/pool/triceraton-commander.ts",
+    "engine/src/cards/tokens/dinosaur-soldier-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonardo, Cutting Edge",
+   "files": [
+    "engine/src/cards/pool/leonardo-cutting-edge.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Donatello's Technique",
+   "files": [
+    "engine/src/cards/pool/donatellos-technique.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Turtles Forever",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "Searches outside the game; an opponent choosing two of the four is fine, the sideboard isn't."
+  },
+  {
+   "name": "Leonardo, Sewer Samurai",
+   "needs": [
+    "replacement:enters-modifier-via-permission"
+   ],
+   "why": "The graveyard-cast permission is expressible; 'that creature enters with a finality counter' for a spell cast through this permission alone isn't (castVia can't tell it from Muldrotha's)."
+  },
+  {
+   "name": "Michelangelo, Improviser",
+   "needs": [
+    "effect:look-and-choose-second-pick-together"
+   ],
+   "why": "'A creature card and/or a land card from your hand' needs secondPick, which moves the two picks as separate events, not one."
+  },
+  {
+   "name": "Donatello, Mutant Mechanic",
+   "needs": [
+    "effect:move-counter"
+   ],
+   "why": "'Put those counters on' — every kind the dead artifact had, from last-known information — has no effect (The Ozolith's need)."
+  },
+  {
+   "name": "Turtle Van",
+   "needs": [
+    "keyword:crewed-it-this-turn"
+   ],
+   "why": "Nothing tracks which creatures crewed a Vehicle this turn."
+  },
+  {
+   "name": "Leatherhead, Swamp Stalker",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "'Remove a counter from her' — the player picks the kind; remove-counter takes one fixed kind."
+  },
+  {
+   "name": "Party Dude",
+   "needs": [
+    "trigger:opponents-attacked-batch"
+   ],
+   "why": "'Whenever one or more of your opponents are attacked' fires once per attack; attacks-player fires once per opponent attacked."
+  },
+  {
+   "name": "Quintessential Katana",
+   "needs": [
+    "trigger:deals-combat-damage-once-per-event"
+   ],
+   "why": "The granted 'whenever this creature deals combat damage' triggers once per damage step (rulings); deals-damage fires once per recipient."
+  },
+  {
+   "name": "The Cloning of Shredder",
+   "needs": [
+    "effect:linked-exile-token-copy"
+   ],
+   "why": "Chapters II-III copy 'a card exiled with this Saga'; create-token-copy has no linked-exile source."
+  },
+  {
+   "name": "Northampton Farm",
+   "needs": [
+    "effect:return-linked-filter"
+   ],
+   "why": "Returns one chosen creature card exiled with it to the battlefield and each other linked card to hand; return-exiled-by-source sends all to one zone."
+  },
+  {
+   "name": "Mikey & Don, Party Planners",
+   "needs": [
+    "zone:cast-from-library-top-enters-counter"
+   ],
+   "why": "Everything but 'that creature enters with an additional +1/+1 counter' for a spell cast through this permission — which permission a spell used isn't recorded."
+  },
+  {
+   "name": "Krang & Shredder",
+   "needs": [
+    "stat:revolt-condition",
+    "effect:reveal-until-each-opponent-linked"
+   ],
+   "why": "Disappear needs 'a permanent left the battlefield under your control this turn'; the exiled-until-nonland cards aren't linked to it for the later free cast."
+  },
+  {
+   "name": "Morningtide's Light",
+   "needs": [
+    "replacement:prevent-all-damage-to-player"
+   ],
+   "why": "'Until your next turn, prevent all damage that would be dealt to you' has no player-level prevention lasting past this turn."
+  },
+  {
+   "name": "Champion of the Path",
+   "needs": [
+    "keyword:behold"
+   ],
+   "why": "Behold-and-exile as an additional cost, and returning that card when it leaves, aren't expressible."
+  },
+  {
+   "name": "Glen Elendra's Answer",
+   "needs": [
+    "effect:counter-all-spells"
+   ],
+   "why": "Countering every spell and ability opponents control, and a token per one countered, has no effect."
+  }
+ ]
+}

@@ -198,6 +198,7 @@ import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
+import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolManalith from "../pool/manalith.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
@@ -272,6 +273,7 @@ import _poolSerraAdvocate from "../pool/serra-advocate.js";
 import _poolSerraAngel from "../pool/serra-angel.js";
 import _poolShamanOfSpring from "../pool/shaman-of-spring.js";
 import _poolShamblingGoblin from "../pool/shambling-goblin.js";
+import _poolSharkShredderKillerClone from "../pool/shark-shredder-killer-clone.js";
 import _poolSharlayanNationOfScholars from "../pool/sharlayan-nation-of-scholars.js";
 import _poolShatterskullRecruit from "../pool/shatterskull-recruit.js";
 import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
@@ -360,6 +362,7 @@ import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
 import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of-alexandria.js";
 import _tokensBananaToken from "../tokens/banana-token.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
+import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
 import _tokensHumanSoldierToken from "../tokens/human-soldier-token.js";
@@ -567,6 +570,7 @@ const shard: CardShard = {
     _poolLoyalGuardian,
     _poolLumraBellowOfTheWoods,
     _poolLyseHext,
+    _poolMadameNullPowerBroker,
     _poolMalachiteGolem,
     _poolManalith,
     _poolMarbleChalice,
@@ -641,6 +645,7 @@ const shard: CardShard = {
     _poolSerraAngel,
     _poolShamanOfSpring,
     _poolShamblingGoblin,
+    _poolSharkShredderKillerClone,
     _poolSharlayanNationOfScholars,
     _poolShatterskullRecruit,
     _poolShivaWardenOfIce,
@@ -731,6 +736,7 @@ const shard: CardShard = {
     _tokensAssassinTokenAyaOfAlexandria,
     _tokensBananaToken,
     _tokensDeathtouchSnakeToken,
+    _tokensDinosaurSoldierToken,
     _tokensGalactus,
     _tokensHalflingToken,
     _tokensHumanSoldierToken,

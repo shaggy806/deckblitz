@@ -82,6 +82,7 @@ import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
+import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
@@ -297,6 +298,7 @@ import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSwornGuardian from "../pool/sworn-guardian.js";
 import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
+import _poolTaintedTreats from "../pool/tainted-treats.js";
 import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTawnossWand from "../pool/tawnoss-wand.js";
@@ -453,6 +455,7 @@ const shard: CardShard = {
     _poolDigThroughTime,
     _poolDisruptiveStudent,
     _poolDocksideChef,
+    _poolDonatellosTechnique,
     _poolDrumhunter,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
@@ -668,6 +671,7 @@ const shard: CardShard = {
     _poolSunderFromWithin,
     _poolSwornGuardian,
     _poolSzarelGenesisShepherd,
+    _poolTaintedTreats,
     _poolTalionTheKindlyLord,
     _poolTalismanOfIndulgence,
     _poolTawnossWand,

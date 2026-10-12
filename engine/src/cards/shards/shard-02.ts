@@ -161,6 +161,7 @@ import _poolJeskaiBrushmaster from "../pool/jeskai-brushmaster.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
+import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
 import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
@@ -281,6 +282,7 @@ import _poolSpectralLynx from "../pool/spectral-lynx.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
 import _poolSpikeJester from "../pool/spike-jester.js";
 import _poolSpittingDrake from "../pool/spitting-drake.js";
+import _poolSplinterHamatoYoshi from "../pool/splinter-hamato-yoshi.js";
 import _poolSteadyProgress from "../pool/steady-progress.js";
 import _poolSteamClean from "../pool/steam-clean.js";
 import _poolSteamSpitter from "../pool/steam-spitter.js";
@@ -509,6 +511,7 @@ const shard: CardShard = {
     _poolJibbirikOmnivore,
     _poolJundBattlemage,
     _poolKaaliaOfTheVast,
+    _poolKaraiFutureOfTheFoot,
     _poolKeepersOfTheFaith,
     _poolKessigRecluse,
     _poolKherKeep,
@@ -629,6 +632,7 @@ const shard: CardShard = {
     _poolSpidersilkNet,
     _poolSpikeJester,
     _poolSpittingDrake,
+    _poolSplinterHamatoYoshi,
     _poolSteadyProgress,
     _poolSteamClean,
     _poolSteamSpitter,

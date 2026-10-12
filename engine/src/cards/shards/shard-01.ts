@@ -147,6 +147,7 @@ import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
+import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
 import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
 import _poolLifegift from "../pool/lifegift.js";
@@ -485,6 +486,7 @@ const shard: CardShard = {
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
     _poolLavaSpike,
+    _poolLeonardosTechnique,
     _poolLeylineTyrant,
     _poolLieutenantKirtar,
     _poolLifegift,

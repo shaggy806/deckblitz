@@ -138,6 +138,7 @@ import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
+import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
@@ -310,6 +311,7 @@ import _poolTownGossipmonger from "../pool/town-gossipmonger.js";
 import _poolTrashTheTown from "../pool/trash-the-town.js";
 import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
 import _poolTreeMonkey from "../pool/tree-monkey.js";
+import _poolTriceratonCommander from "../pool/triceraton-commander.js";
 import _poolTurnAside from "../pool/turn-aside.js";
 import _poolTurntimberGrove from "../pool/turntimber-grove.js";
 import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolGreyHavensNavigator,
     _poolGrislySalvage,
     _poolGroundbreaker,
+    _poolGuacMarshmallowPizza,
     _poolGuardDuty,
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
@@ -672,6 +675,7 @@ const shard: CardShard = {
     _poolTrashTheTown,
     _poolTraverseTheOutlands,
     _poolTreeMonkey,
+    _poolTriceratonCommander,
     _poolTurnAside,
     _poolTurntimberGrove,
     _poolTwoHeadedSliver,

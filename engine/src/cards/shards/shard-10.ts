@@ -183,6 +183,7 @@ import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
 import _poolMetallurgeon from "../pool/metallurgeon.js";
+import _poolMichelangeloMutantBff from "../pool/michelangelo-mutant-bff.js";
 import _poolMigrationPath from "../pool/migration-path.js";
 import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
@@ -242,6 +243,7 @@ import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
 import _poolRustvaleBridge from "../pool/rustvale-bridge.js";
 import _poolSacredNectar from "../pool/sacred-nectar.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
+import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
 import _poolSamutTyrantSmasher from "../pool/samut-tyrant-smasher.js";
 import _poolSandstoneOracle from "../pool/sandstone-oracle.js";
 import _poolSanguineBond from "../pool/sanguine-bond.js";
@@ -545,6 +547,7 @@ const shard: CardShard = {
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
     _poolMetallurgeon,
+    _poolMichelangeloMutantBff,
     _poolMigrationPath,
     _poolMindIntoMatter,
     _poolMindlessAutomaton,
@@ -604,6 +607,7 @@ const shard: CardShard = {
     _poolRustvaleBridge,
     _poolSacredNectar,
     _poolSaheeliTheSunsBrilliance,
+    _poolSallyPrideLionessLeader,
     _poolSamutTyrantSmasher,
     _poolSandstoneOracle,
     _poolSanguineBond,

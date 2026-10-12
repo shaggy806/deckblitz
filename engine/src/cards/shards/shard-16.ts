@@ -122,6 +122,7 @@ import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
 import _poolGalestrike from "../pool/galestrike.js";
+import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGlacialWall from "../pool/glacial-wall.js";
@@ -312,6 +313,7 @@ import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
 import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
+import _poolTheLastRoninsTechnique from "../pool/the-last-ronins-technique.js";
 import _poolTheLocustGod from "../pool/the-locust-god.js";
 import _poolTheThing from "../pool/the-thing.js";
 import _poolTheirNameIsDeath from "../pool/their-name-is-death.js";
@@ -512,6 +514,7 @@ const shard: CardShard = {
     _poolFurycalmSnarl,
     _poolFutureFlight,
     _poolGalestrike,
+    _poolGenghisFrog,
     _poolGeosurge,
     _poolGhostlyPilferer,
     _poolGlacialWall,
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolTerashisVerdict,
     _poolTerohsFaithful,
     _poolTheFalconSamWilson,
+    _poolTheLastRoninsTechnique,
     _poolTheLocustGod,
     _poolTheThing,
     _poolTheirNameIsDeath,

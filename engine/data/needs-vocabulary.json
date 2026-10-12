@@ -5665,6 +5665,26 @@
   "static:grant-sneak-to-graveyard": {
    "family": "static:grant-to-cards-outside-battlefield",
    "example": "Ninja Teen (level 3): creature cards in your graveyard have sneak {3}{B}, and you may cast them from your graveyard using sneak."
+  },
+  "zone:cast-from-library-top-enters-counter": {
+   "family": "zone:cast-from-library-top",
+   "example": "Mikey & Don, Party Planners: \"if you cast a creature spell this way, that creature enters with an additional +1/+1 counter\" — castFromLibraryTop has the filter but nothing records which permission a spell was cast under, so a rider on it would apply through a second permission too."
+  },
+  "effect:reveal-until-each-opponent-linked": {
+   "family": "effect:reveal-until",
+   "example": "Krang & Shredder: each opponent exiles from the top of their library until a nonland card, the cards linked to the source so a later ability can cast \"a card exiled with\" it."
+  },
+  "trigger:opponents-attacked-batch": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Party Dude: \"Whenever one or more of your opponents are attacked\" — once per attack declaration however many opponents; attacks-player fires once per opponent."
+  },
+  "trigger:deals-combat-damage-once-per-event": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Quintessential Katana: \"Whenever this creature deals combat damage\" triggers once per combat damage step whatever it hits (the rulings); deals-damage fires once per recipient."
+  },
+  "effect:look-and-choose-second-pick-together": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "Michelangelo, Improviser: \"a creature card and/or a land card from your hand onto the battlefield\" — secondPick moves its cards after the first pick, not in one move."
   }
  }
 }

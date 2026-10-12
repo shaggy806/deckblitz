@@ -68,9 +68,9 @@ section keeps only what to do next.
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
-  Secrets of Strixhaven (SOS) are done (batches 50–61). **Next: the rest of Teenage Mutant Ninja
-  Turtles** (TMT, 2026-03-06: 94 above the threshold; after batch 61, 32 done, 5 blocked, 57
-  left). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
+  Secrets of Strixhaven (SOS) and Teenage Mutant Ninja Turtles (TMT) are done (batches 50–62).
+  **Next: the rest of Lorwyn Eclipsed** (ECL, 2026-01-23: 126 above the threshold; after batch
+  62, 33 done, 23 blocked, 70 left). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
   (61) are built; Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold

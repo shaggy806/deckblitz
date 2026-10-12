@@ -19,6 +19,7 @@ import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
 import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
+import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
@@ -69,6 +70,7 @@ import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
+import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
@@ -144,6 +146,7 @@ import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
+import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
@@ -386,6 +389,7 @@ const shard: CardShard = {
     _poolAzoriusSignet,
     _poolBanishingBetrayal,
     _poolBarbedBattlegear,
+    _poolBebopRocksteady,
     _poolBedevil,
     _poolBighornerRancher,
     _poolBirdMaiden,
@@ -436,6 +440,7 @@ const shard: CardShard = {
     _poolDevoutChaplain,
     _poolDiscipleOfBolas,
     _poolDisempower,
+    _poolDoesMachines,
     _poolDoomedNecromancer,
     _poolDragonBlood,
     _poolDragonlordsServant,
@@ -511,6 +516,7 @@ const shard: CardShard = {
     _poolKinsbaileCavalier,
     _poolKothsCourier,
     _poolKozileksUnsealing,
+    _poolKrangMasterMind,
     _poolKrenkoMobBoss,
     _poolKynaiosAndTiroOfMeletis,
     _poolLavafumeInvoker,

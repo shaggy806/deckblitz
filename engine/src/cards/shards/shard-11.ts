@@ -159,6 +159,7 @@ import _poolHovermyr from "../pool/hovermyr.js";
 import _poolHullBreach from "../pool/hull-breach.js";
 import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
+import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
 import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
@@ -184,6 +185,7 @@ import _poolKollTheForgemaster from "../pool/koll-the-forgemaster.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
+import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLilianasSteward from "../pool/lilianas-steward.js";
@@ -329,6 +331,7 @@ import _poolTaintedWood from "../pool/tainted-wood.js";
 import _poolTalrandsInvocation from "../pool/talrands-invocation.js";
 import _poolTanglespanBridgeworks from "../pool/tanglespan-bridgeworks.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
+import _poolTechnodrome from "../pool/technodrome.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
 import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
@@ -555,6 +558,7 @@ const shard: CardShard = {
     _poolHullBreach,
     _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
+    _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
     _poolInevitableDefeat,
@@ -580,6 +584,7 @@ const shard: CardShard = {
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLegolasGreenleaf,
+    _poolLeonardoBigBrother,
     _poolLeoninSkyhunter,
     _poolLeshracsRite,
     _poolLilianasSteward,
@@ -725,6 +730,7 @@ const shard: CardShard = {
     _poolTalrandsInvocation,
     _poolTanglespanBridgeworks,
     _poolTearAsunder,
+    _poolTechnodrome,
     _poolTempestTechnique,
     _poolTenzaGodosMaul,
     _poolTerrorOfThePeaks,

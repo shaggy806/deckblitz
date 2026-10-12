@@ -311,6 +311,7 @@ import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
+import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
@@ -327,6 +328,7 @@ import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
+import _tokensMutagenToken from "../tokens/mutagen-token.js";
 import _tokensMutantToken from "../tokens/mutant-token.js";
 import _tokensOxToken from "../tokens/ox-token.js";
 import _tokensPlantToken from "../tokens/plant-token.js";
@@ -644,6 +646,7 @@ const shard: CardShard = {
     _poolVraskasContempt,
     _poolWallOfRoots,
     _poolWanderingArchaic,
+    _poolWeatherMaker,
     _poolWebShot,
     _poolWhiteKnight,
     _poolWittyRoastmaster,
@@ -662,6 +665,7 @@ const shard: CardShard = {
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,
+    _tokensMutagenToken,
     _tokensMutantToken,
     _tokensOxToken,
     _tokensPlantToken,

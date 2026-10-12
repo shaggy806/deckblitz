@@ -130,6 +130,7 @@ import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
+import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
@@ -487,6 +488,7 @@ const shard: CardShard = {
     _poolGrazingKelpie,
     _poolGrimBounty,
     _poolGrimReapersSprint,
+    _poolGroundchuckDirtbag,
     _poolGroundskeeper,
     _poolHammersOfMoradin,
     _poolHangedExecutioner,

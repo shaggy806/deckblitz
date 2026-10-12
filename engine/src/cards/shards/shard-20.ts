@@ -126,6 +126,7 @@ import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFissure from "../pool/fissure.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
+import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
@@ -520,6 +521,7 @@ const shard: CardShard = {
     _poolFissure,
     _poolFlowstoneStrike,
     _poolFolkOfAnHavva,
+    _poolFugitiveDroid,
     _poolFurnaceSpirit,
     _poolGarrisonCat,
     _poolGeodeGrotto,

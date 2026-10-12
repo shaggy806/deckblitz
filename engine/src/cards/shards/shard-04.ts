@@ -173,6 +173,7 @@ import _poolLance from "../pool/lance.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
+import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
@@ -531,6 +532,7 @@ const shard: CardShard = {
     _poolLathrilBladeOfTheElves,
     _poolLaughingJasperFlint,
     _poolLavaDart,
+    _poolLeadersTalent,
     _poolLichsRelic,
     _poolLightningElemental,
     _poolLongFinnedSkywhale,

@@ -281,6 +281,7 @@ import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
+import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
 import _poolStaffOfZegon from "../pool/staff-of-zegon.js";
@@ -649,6 +650,7 @@ const shard: CardShard = {
     _poolSparkTrooper,
     _poolSpiderManWebSpinner,
     _poolSplatterGoblin,
+    _poolSplinterRadicalRat,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,
     _poolStaffOfZegon,
