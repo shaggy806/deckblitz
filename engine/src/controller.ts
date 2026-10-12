@@ -1220,11 +1220,14 @@ function castExtras(
  * free and legal any number of times, so a controller choosing uniformly
  * among its options stacks it without end (each copy hands priority back to
  * it); `RandomController` leaves it until the one on the stack resolves.
- * Not a rule — a fuzzing guard.
+ * Any other ability with no cost to run out of does the same — Hyalopterous
+ * Lemure's "{0}: … gets -1/-0 and gains flying" stacked 150 deep (fuzzer
+ * seed 40, 2026-10-12) — so past three of one ability on the stack it waits
+ * too. Not a rule — a fuzzing guard.
  */
 function idleRepeat(state: GameState, offer: LegalAction): boolean {
-  if (offer.kind !== "activate-ability" || offer.xCost === undefined || offer.xCost.maxX > 0) return false;
-  return state.zones.shared.stack.some((id) => {
+  if (offer.kind !== "activate-ability" || offer.manaAbility === true) return false;
+  const onStack = state.zones.shared.stack.filter((id) => {
     const object = state.objects[id];
     return (
       object?.kind === "ability" &&
@@ -1232,7 +1235,9 @@ function idleRepeat(state: GameState, offer: LegalAction): boolean {
       object.abilityIndex === offer.abilityIndex &&
       object.abilityKind === "activated"
     );
-  });
+  }).length;
+  const idleX = offer.xCost !== undefined && offer.xCost.maxX === 0;
+  return onStack >= (idleX ? 1 : 3);
 }
 
 export class RandomController extends AutomaticController {
