@@ -15,6 +15,10 @@
  * sacrifice a creature with power N or greater"): up to one of the caster's
  * creatures, raised by `Game.promptNextCasualty` with the awaiting's
  * `casualty` set, and answered by `Game.applyCasualty` instead of `then`.
+ *
+ * And which creature blights (rule 701.68a — `Game.beginBlight`, with the
+ * awaiting's `blight` set): exactly one of the player's creatures, for a
+ * cost being paid or a `blight` effect resolving.
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -52,6 +56,7 @@ export const choosePermanents = defineDecision({
         ...(awaiting.maxTotalPower !== undefined
           ? { maxTotalPower: awaiting.maxTotalPower, powers: powersOf(ctx, awaiting.eligible) }
           : {}),
+        ...(awaiting.blight !== undefined ? { blight: awaiting.blight } : {}),
       },
     ];
   },
@@ -131,6 +136,14 @@ export const choosePermanents = defineDecision({
           return true;
         })
         .map((permanents) => ({ type: "choose-permanents", player, permanents }));
+    }
+    // Which creature blights (rule 701.68a): which one is the whole
+    // question, so each is a candidate — the least valuable first, the
+    // creature that shrugs the counters off as likely as the one that dies
+    // to them — and choosing none isn't one.
+    if (legal.blight !== undefined) {
+      const each = [...helpers.order(legal.eligible)].reverse().slice(0, Math.max(1, limit));
+      return each.map((id) => ({ type: "choose-permanents", player, permanents: [id] }));
     }
     // "You may choose one" (a casualty, Deadpool's exchange): which one is
     // the whole question, so each is a candidate — the most valuable first,

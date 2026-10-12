@@ -32,6 +32,7 @@ import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
+import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
@@ -401,6 +402,7 @@ const shard: CardShard = {
     _poolBlindingDrone,
     _poolBloomTender,
     _poolBogInitiate,
+    _poolBoneclubBerserker,
     _poolBrainFreeze,
     _poolBroodcallerScourge,
     _poolBuriedRuin,

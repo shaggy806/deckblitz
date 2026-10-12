@@ -5685,6 +5685,22 @@
   "effect:look-and-choose-second-pick-together": {
    "family": "effect:look-and-choose-second-pick",
    "example": "Michelangelo, Improviser: \"a creature card and/or a land card from your hand onto the battlefield\" — secondPick moves its cards after the first pick, not in one move."
+  },
+  "cost:remove-counter-any-kind": {
+   "family": "cost:ability-cost-modification",
+   "example": "Flitterwing Nuisance: \"Remove a counter from this creature\" as a cost — any kind, the player choosing; removeCounter takes one fixed kind."
+  },
+  "effect:look-and-choose-target-player": {
+   "family": "effect:look-and-choose-leftover",
+   "example": "Grub's Command: \"Target player mills five cards, then puts each Goblin card milled this way into their hand\" — look-and-choose reaches only the controller's own zones."
+  },
+  "effect:grant-protection-temporary": {
+   "family": "effect:grant-protection-choice",
+   "example": "Sygg, Wanderbrine Shield: \"target creature you control gains protection from each color until your next turn\" — protection is a static field only; no effect grants it for a duration."
+  },
+  "cost:blight-x-additional-cost": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Soul Immolation: \"As an additional cost to cast this spell, blight X. X can't be greater than the greatest toughness among creatures you control\" — blight N is built; an announced X capped by toughness isn't."
   }
  }
 }

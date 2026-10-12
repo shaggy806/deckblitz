@@ -1145,9 +1145,9 @@
     {
       "name": "Soul Immolation",
       "needs": [
-        "keyword:blight"
+        "cost:blight-x-additional-cost"
       ],
-      "why": "Blight X additional cost isn't built."
+      "why": "Blight X as a mandatory additional cost, X announced and capped at the greatest toughness among your creatures, isn't built (blight N is, batch 63)."
     },
     {
       "name": "Veteran Explorer",

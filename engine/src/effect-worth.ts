@@ -240,6 +240,13 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       const card = ctx.triggerObject !== undefined ? ctx.state.objects[ctx.triggerObject] : undefined;
       return card !== undefined && card.owner === ctx.controller ? onPlayers(you, CARD / 2, ctx) : 0;
     }
+    case "blight":
+      // -1/-1 counters on one of each blighting player's creatures (rule
+      // 701.68a), and what your own blight's `then` does with the creature.
+      return (
+        onPlayers(playersIn(effect.who ?? "you", ctx), -effect.amount, ctx) +
+        ((effect.who ?? "you") === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)
+      );
     case "sacrifice-source":
       return (
         onObjectRef("source", -CARD, ctx) +

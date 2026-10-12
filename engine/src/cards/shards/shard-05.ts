@@ -318,6 +318,7 @@ import _poolTeferisPuzzleBox from "../pool/teferis-puzzle-box.js";
 import _poolTempleBell from "../pool/temple-bell.js";
 import _poolTempleOfDeceit from "../pool/temple-of-deceit.js";
 import _poolTempleOfMalady from "../pool/temple-of-malady.js";
+import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
@@ -328,6 +329,7 @@ import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolTriskelion from "../pool/triskelion.js";
+import _poolTrystansCommand from "../pool/trystans-command.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
 import _poolTwinbladeSlasher from "../pool/twinblade-slasher.js";
 import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
@@ -690,6 +692,7 @@ const shard: CardShard = {
     _poolTempleBell,
     _poolTempleOfDeceit,
     _poolTempleOfMalady,
+    _poolTendTheSprigs,
     _poolTheGoldSaucer,
     _poolTheLadyOfTheMountain,
     _poolTheWaterCrystal,
@@ -700,6 +703,7 @@ const shard: CardShard = {
     _poolTithebearerGiant,
     _poolTomeRaider,
     _poolTriskelion,
+    _poolTrystansCommand,
     _poolTwentyToedToad,
     _poolTwinbladeSlasher,
     _poolTwoHeadedHellkite,

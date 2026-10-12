@@ -4442,3 +4442,21 @@ stack count once per token)
   Company, a nontoken Dwarf, then makes two 2/2 red Dwarf tokens, not one (Bifur doubles Fíli's trigger). If
   Sol Ring and Bifur later leave, the 📜 stays.
 - **Known limits:** None known.
+
+### Gristle Glutton, Bogslither's Embrace, Burning Curiosity, High Perfect Morcant
+
+*New player decision* — blight (rule 701.68): putting -1/-1 counters on a creature you control, as a cost or an effect
+
+- **Setup:** Your precombat main. Your battlefield: Gristle Glutton, Grizzly Bears, Hill Giant, three Swamps,
+  three Mountains and two Forests. Your hand: Bogslither's Embrace, Burning Curiosity, High Perfect Morcant and
+  a Forest. Bob: Grizzly Bears, Hill Giant and three lands.
+- **Do:** Activate Gristle Glutton (blight 1), discarding the Forest. Cast Bogslither's Embrace on Bob's Hill
+  Giant, choosing "blight 1" rather than paying {3}. Cast Burning Curiosity "(blight 1)". Next turn, cast High
+  Perfect Morcant.
+- **Check:** Each blight asks "Blight 1 — put a -1/-1 counter on a creature you control" and offers only your
+  creatures; the counter lands on the one you picked (a 2/2 Bears becomes 1/1). Bogslither's Embrace's cast
+  menu offers both the blight and the pay-{3} version; Burning Curiosity offers plain and "(blight 1)", and the
+  blight version exiles three cards, playable until the end of your next turn. Morcant's entering makes Bob
+  put a counter on one of his own creatures (his choice), not yours. With no creature, no blight version is
+  offered.
+- **Known limits:** None known.

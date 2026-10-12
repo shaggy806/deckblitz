@@ -36,6 +36,7 @@ import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
 import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
+import _poolBileVialBoggart from "../pool/bile-vial-boggart.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBladetuskBoar from "../pool/bladetusk-boar.js";
 import _poolBlindingSouleater from "../pool/blinding-souleater.js";
@@ -173,6 +174,7 @@ import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
+import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
@@ -406,6 +408,7 @@ const shard: CardShard = {
     _poolBenevolentAncestor,
     _poolBenthicBehemoth,
     _poolBeornTheFierce,
+    _poolBileVialBoggart,
     _poolBitterTriumph,
     _poolBladetuskBoar,
     _poolBlindingSouleater,
@@ -543,6 +546,7 @@ const shard: CardShard = {
     _poolKarooMeerkat,
     _poolKhalniTerritory,
     _poolKinsbaileSkirmisher,
+    _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
     _poolKomodoRhino,
     _poolKwainItinerantMeddler,

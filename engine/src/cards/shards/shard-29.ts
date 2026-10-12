@@ -246,6 +246,7 @@ import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
+import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShockingSharpshooter from "../pool/shocking-sharpshooter.js";
 import _poolShorelineLooter from "../pool/shoreline-looter.js";
 import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
@@ -593,6 +594,7 @@ const shard: CardShard = {
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
     _poolShadowcloakVampire,
+    _poolShimmercreep,
     _poolShockingSharpshooter,
     _poolShorelineLooter,
     _poolSiegebreakerGiant,

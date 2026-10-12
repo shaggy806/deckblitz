@@ -45,6 +45,7 @@ import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
 import _poolBredForTheHunt from "../pool/bred-for-the-hunt.js";
 import _poolBurnerRocket from "../pool/burner-rocket.js";
+import _poolBurningCuriosity from "../pool/burning-curiosity.js";
 import _poolBurnishedDunestomper from "../pool/burnished-dunestomper.js";
 import _poolBusterSword from "../pool/buster-sword.js";
 import _poolCabalArchon from "../pool/cabal-archon.js";
@@ -80,6 +81,7 @@ import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
 import _poolCunningBreezedancer from "../pool/cunning-breezedancer.js";
+import _poolDarknessDescends from "../pool/darkness-descends.js";
 import _poolDarkstarAugur from "../pool/darkstar-augur.js";
 import _poolDauthiEmbrace from "../pool/dauthi-embrace.js";
 import _poolDawnhartDisciple from "../pool/dawnhart-disciple.js";
@@ -139,6 +141,7 @@ import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
 import _poolGroveRumbler from "../pool/grove-rumbler.js";
+import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
@@ -400,6 +403,7 @@ const shard: CardShard = {
     _poolBreathstealer,
     _poolBredForTheHunt,
     _poolBurnerRocket,
+    _poolBurningCuriosity,
     _poolBurnishedDunestomper,
     _poolBusterSword,
     _poolCabalArchon,
@@ -435,6 +439,7 @@ const shard: CardShard = {
     _poolCrushingDisappointment,
     _poolCrypticCaves,
     _poolCunningBreezedancer,
+    _poolDarknessDescends,
     _poolDarkstarAugur,
     _poolDauthiEmbrace,
     _poolDawnhartDisciple,
@@ -494,6 +499,7 @@ const shard: CardShard = {
     _poolGoblinPiker,
     _poolGreatHornKrushok,
     _poolGroveRumbler,
+    _poolGrubNotoriousAuntie,
     _poolGuidedStrike,
     _poolHaazdaVigilante,
     _poolHajarLoyalBodyguard,

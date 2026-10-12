@@ -32,6 +32,7 @@ import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
+import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBombard from "../pool/bombard.js";
@@ -291,6 +292,7 @@ import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
+import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
@@ -396,6 +398,7 @@ const shard: CardShard = {
     _poolBenalishKnight,
     _poolBifurMelodicRider,
     _poolBlessedOrator,
+    _poolBlightRot,
     _poolBlindCreeper,
     _poolBloodlineBidding,
     _poolBombard,
@@ -655,6 +658,7 @@ const shard: CardShard = {
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
     _poolTakenumaAbandonedMire,
+    _poolTanufelRimespeaker,
     _poolTeeterpeakAmbusher,
     _poolTelimtorsDarts,
     _poolTheBoulderReadyToRumble,

@@ -1,0 +1,452 @@
+{
+ "batch": "B63",
+ "status": "complete",
+ "ranks": "Lorwyn Eclipsed (ECL, 2026-01-23): top 50% by EDHREC rank, the next 60; with blight built and the cards it unblocked (High Perfect Morcant, Scuzzback Scrounger)",
+ "authored": [
+  {
+   "name": "Abigale, Eloquent First-Year",
+   "files": [
+    "engine/src/cards/pool/abigale-eloquent-first-year.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Outland Chaperone",
+   "files": [
+    "engine/src/cards/pool/ajani-outland-chaperone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bile-Vial Boggart",
+   "files": [
+    "engine/src/cards/pool/bile-vial-boggart.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blight Rot",
+   "files": [
+    "engine/src/cards/pool/blight-rot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boneclub Berserker",
+   "files": [
+    "engine/src/cards/pool/boneclub-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bre of Clan Stoutarm",
+   "files": [
+    "engine/src/cards/pool/bre-of-clan-stoutarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bristlebane Battler",
+   "files": [
+    "engine/src/cards/pool/bristlebane-battler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darkness Descends",
+   "files": [
+    "engine/src/cards/pool/darkness-descends.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eclipsed Boggart",
+   "files": [
+    "engine/src/cards/pool/eclipsed-boggart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eclipsed Elf",
+   "files": [
+    "engine/src/cards/pool/eclipsed-elf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eclipsed Flamekin",
+   "files": [
+    "engine/src/cards/pool/eclipsed-flamekin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Flock Impostor",
+   "files": [
+    "engine/src/cards/pool/flock-impostor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giantfall",
+   "files": [
+    "engine/src/cards/pool/giantfall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glamer Gifter",
+   "files": [
+    "engine/src/cards/pool/glamer-gifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloom Ripper",
+   "files": [
+    "engine/src/cards/pool/gloom-ripper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron-Shield Elf",
+   "files": [
+    "engine/src/cards/pool/iron-shield-elf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kinscaer Sentry",
+   "files": [
+    "engine/src/cards/pool/kinscaer-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirol, Attentive First-Year",
+   "files": [
+    "engine/src/cards/pool/kirol-attentive-first-year.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavaleaper",
+   "files": [
+    "engine/src/cards/pool/lavaleaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lluwen, Imperfect Naturalist",
+   "files": [
+    "engine/src/cards/pool/lluwen-imperfect-naturalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Tilling",
+   "files": [
+    "engine/src/cards/pool/midnight-tilling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moon-Vigil Adherents",
+   "files": [
+    "engine/src/cards/pool/moon-vigil-adherents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonshadow",
+   "files": [
+    "engine/src/cards/pool/moonshadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morcant's Eyes",
+   "files": [
+    "engine/src/cards/pool/morcants-eyes.ts",
+    "engine/src/cards/tokens/black-green-elf-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rimefire Torque",
+   "files": [
+    "engine/src/cards/pool/rimefire-torque.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarblade's Malice",
+   "files": [
+    "engine/src/cards/pool/scarblades-malice.ts",
+    "engine/src/cards/tokens/black-green-elf-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shimmercreep",
+   "files": [
+    "engine/src/cards/pool/shimmercreep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shinestriker",
+   "files": [
+    "engine/src/cards/pool/shinestriker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalactite Dagger",
+   "files": [
+    "engine/src/cards/pool/stalactite-dagger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tanufel Rimespeaker",
+   "files": [
+    "engine/src/cards/pool/tanufel-rimespeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tend the Sprigs",
+   "files": [
+    "engine/src/cards/pool/tend-the-sprigs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thirst for Identity",
+   "files": [
+    "engine/src/cards/pool/thirst-for-identity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trystan's Command",
+   "files": [
+    "engine/src/cards/pool/trystans-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trystan, Callous Cultivator // Trystan, Penitent Culler",
+   "files": [
+    "engine/src/cards/pool/trystan-callous-cultivator.ts",
+    "engine/src/cards/pool/trystan-penitent-culler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unforgiving Aim",
+   "files": [
+    "engine/src/cards/pool/unforgiving-aim.ts",
+    "engine/src/cards/tokens/black-green-elf-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unwelcome Sprite",
+   "files": [
+    "engine/src/cards/pool/unwelcome-sprite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voracious Tome-Skimmer",
+   "files": [
+    "engine/src/cards/pool/voracious-tome-skimmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Mischief",
+   "files": [
+    "engine/src/cards/pool/boggart-mischief.ts",
+    "engine/src/cards/tokens/goblin-token-boggart-mischief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bogslither's Embrace",
+   "files": [
+    "engine/src/cards/pool/bogslithers-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Curiosity",
+   "files": [
+    "engine/src/cards/pool/burning-curiosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gristle Glutton",
+   "files": [
+    "engine/src/cards/pool/gristle-glutton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Unraveling",
+   "files": [
+    "engine/src/cards/pool/wild-unraveling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grub, Storied Matriarch // Grub, Notorious Auntie",
+   "files": [
+    "engine/src/cards/pool/grub-storied-matriarch.ts",
+    "engine/src/cards/pool/grub-notorious-auntie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High Perfect Morcant",
+   "files": [
+    "engine/src/cards/pool/high-perfect-morcant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scuzzback Scrounger",
+   "files": [
+    "engine/src/cards/pool/scuzzback-scrounger.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aurora Awakener",
+   "needs": [
+    "effect:reveal-until-count"
+   ],
+   "why": "Vivid's 'reveal until you reveal X permanent cards', then put any number onto the battlefield: reveal-until stops at the first match."
+  },
+  {
+   "name": "Celestial Reunion",
+   "needs": [
+    "keyword:behold"
+   ],
+   "why": "Its optional additional cost is choosing a creature type and beholding two of it."
+  },
+  {
+   "name": "Curious Colossus",
+   "needs": [
+    "effect:animate-all-lose-abilities"
+   ],
+   "why": "Each creature target opponent controls permanently loses all abilities, becomes a Coward and has base P/T 1/1."
+  },
+  {
+   "name": "Flitterwing Nuisance",
+   "needs": [
+    "cost:remove-counter-any-kind",
+    "effect:delayed-trigger-extensions"
+   ],
+   "why": "'Remove a counter from this creature' of any kind as a cost, and a this-turn trigger for every creature you control dealing combat damage to a player or planeswalker."
+  },
+  {
+   "name": "Goliath Daydreamer",
+   "needs": [
+    "replacement:spell-exiled-as-it-resolves",
+    "effect:cast-now-exiled-with-counter"
+   ],
+   "why": "Exiling the resolving spell with a dream counter, and casting from among your exiled cards with dream counters."
+  },
+  {
+   "name": "Grub's Command",
+   "needs": [
+    "effect:look-and-choose-target-player"
+   ],
+   "why": "Mode 4: target player mills five and puts each Goblin card milled this way into their hand."
+  },
+  {
+   "name": "Lys Alana Dignitary",
+   "needs": [
+    "keyword:behold"
+   ],
+   "why": "'Behold an Elf or pay {2}' as an additional cost."
+  },
+  {
+   "name": "Mornsong Aria",
+   "needs": [
+    "static:draw-limit"
+   ],
+   "why": "'Players can't draw cards' has no static."
+  },
+  {
+   "name": "Noggle the Mind",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "An Aura making the creature lose all abilities and setting its color, type and base P/T."
+  },
+  {
+   "name": "Rhys, the Evermore",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "'Remove any number of counters from target creature you control' — kinds and count the player's choice."
+  },
+  {
+   "name": "Shimmerwilds Growth",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "'Enchanted land is the chosen color' — no static sets a color."
+  },
+  {
+   "name": "Spinerock Tyrant",
+   "needs": [
+    "effect:copy-spell-grants"
+   ],
+   "why": "'If you do, those spells gain wither' — the copy can't be granted a keyword."
+  },
+  {
+   "name": "Spry and Mighty",
+   "needs": [
+    "decision:choose-permanent",
+    "effect:amount-new-variants"
+   ],
+   "why": "'Choose exactly two creatures you control' with X the difference of their powers."
+  },
+  {
+   "name": "Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "The back face's 'protection from each color until your next turn' has no effect form."
+  },
+  {
+   "name": "Unbury",
+   "needs": [
+    "effect:targets-share-type"
+   ],
+   "why": "Mode 2's 'two target creature cards that share a creature type'."
+  },
+  {
+   "name": "Vibrance",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "'If {R}{R} was spent to cast it' needs a count of each colour spent."
+  },
+  {
+   "name": "Wistfulness",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "'If {G}{G} was spent to cast it' needs a count of each colour spent."
+  }
+ ]
+}

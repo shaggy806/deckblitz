@@ -2273,6 +2273,11 @@ export type AwaitingDecision =
        * cost: that ability on the stack, which records what the returned
        * creature was attacking (`LastKnownRefs.returnedAttacking`). */
       readonly costOf?: ObjectId;
+      /** Set when the choice is which creature blights this many (rule
+       * 701.68a — `Game.beginBlight`): exactly one of the player's
+       * creatures, singled out of a token stack, and `then` puts the
+       * counters on it. */
+      readonly blight?: number;
     }
   | {
       /** A modal spell/ability is resolving (rule 700.2), or a "you may"

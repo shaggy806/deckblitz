@@ -8,6 +8,7 @@ import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
+import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
@@ -372,6 +373,7 @@ const shard: CardShard = {
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
     _poolAgentPhilCoulson,
+    _poolAjaniOutlandChaperone,
     _poolAmphinCutthroat,
     _poolAncestralCraving,
     _poolAncestralVengeance,

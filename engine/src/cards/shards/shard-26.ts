@@ -305,6 +305,7 @@ import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
+import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
@@ -648,6 +649,7 @@ const shard: CardShard = {
     _poolTritonShorestalker,
     _poolUktabiOrangutan,
     _poolUnderworldConnections,
+    _poolUnforgivingAim,
     _poolUnholyFiend,
     _poolUtopiaSprawl,
     _poolVarinaLichQueen,

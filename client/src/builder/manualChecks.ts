@@ -2633,6 +2633,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Gristle Glutton, Bogslither's Embrace, Burning Curiosity, High Perfect Morcant",
+    board({
+      you: {
+        bf: ['Gristle Glutton', 'Grizzly Bears', 'Hill Giant', 'Swamp*3', 'Mountain*3', 'Forest*2'],
+        hand: ["Bogslither's Embrace", 'Burning Curiosity', 'High Perfect Morcant', 'Forest'],
+      },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

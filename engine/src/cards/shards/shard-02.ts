@@ -173,6 +173,7 @@ import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
@@ -313,6 +314,7 @@ import _poolTransitMage from "../pool/transit-mage.js";
 import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
+import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
@@ -523,6 +525,7 @@ const shard: CardShard = {
     _poolKrenkosCommand,
     _poolLambholtRavager,
     _poolLargeBear,
+    _poolLavaleaper,
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,
@@ -663,6 +666,7 @@ const shard: CardShard = {
     _poolTributeToTheWild,
     _poolTritonShorethief,
     _poolTropicalIsland,
+    _poolTrystanCallousCultivator,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
     _poolUrbanEvolution,

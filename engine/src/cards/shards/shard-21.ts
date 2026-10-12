@@ -77,6 +77,7 @@ import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
+import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
@@ -404,6 +405,7 @@ const shard: CardShard = {
     _poolDuskLegionZealot,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
+    _poolEclipsedFlamekin,
     _poolElanorGardner,
     _poolElvenFarsight,
     _poolElvishDoomsayer,

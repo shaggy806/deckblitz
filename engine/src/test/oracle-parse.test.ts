@@ -450,6 +450,31 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     });
   });
+
+  it("blight (rule 701.68a): a cost, a choice of costs, an optional cost, an effect and 'you may blight N. If you do, …'", () => {
+    expect(parseCost("{T}, Blight 1").cost).toEqual({ mana: null, tap: true, blight: 1 });
+    expect(parseSentence("Each opponent blights 1.", ctx())).toEqual({ kind: "blight", amount: 1, who: "each-opponent" });
+    expect(parseSentence("Blight 2.", ctx())).toEqual({ kind: "blight", amount: 2 });
+    const embrace = face("As an additional cost to cast this spell, blight 1 or pay {3}.\nExile target creature.", "Sorcery", {});
+    expect(embrace.additionalCost).toEqual({
+      options: [{ text: "Blight 1", blight: 1 }, { text: "Pay {3}", mana: "{3}" }],
+    });
+    expect(embrace.complete).toBe(true);
+    const curiosity = face("As an additional cost to cast this spell, you may blight 1.\nExile the top two cards of your library.", "Sorcery", {});
+    expect(curiosity.kicker).toEqual({ cost: "", keyword: "blight", blight: 1 });
+    const scrounger = face("At the beginning of your first main phase, you may blight 1. If you do, draw a card.");
+    expect(scrounger.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Blight 1?",
+      effect: { kind: "blight", amount: 1 },
+      then: { kind: "draw", amount: 1 },
+    });
+    expect(scrounger.complete).toBe(true);
+    // "The blighted creature" (701.68c) is the blight's own `then`: a person's.
+    expect(face("Whenever ~ attacks, you may blight 1. If you do, the blighted creature gains flying until end of turn.").complete).toBe(false);
+    // A mandatory additional blight isn't a choice of costs.
+    expect(face("As an additional cost to cast this spell, blight 2.\nDraw a card.", "Sorcery", {}).complete).toBe(false);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

@@ -92,6 +92,7 @@ import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
+import _poolEclipsedElf from "../pool/eclipsed-elf.js";
 import _poolEerieInterlude from "../pool/eerie-interlude.js";
 import _poolElegantParlor from "../pool/elegant-parlor.js";
 import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
@@ -441,6 +442,7 @@ const shard: CardShard = {
     _poolDreadReturn,
     _poolEastWindAvatar,
     _poolEchoPerceptiveProdigy,
+    _poolEclipsedElf,
     _poolEerieInterlude,
     _poolElegantParlor,
     _poolElendaTheDuskRose,

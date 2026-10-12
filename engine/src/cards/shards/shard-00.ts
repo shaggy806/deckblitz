@@ -141,6 +141,7 @@ import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGravelHideGoblin from "../pool/gravel-hide-goblin.js";
 import _poolGravewaker from "../pool/gravewaker.js";
 import _poolGreenhouse from "../pool/greenhouse.js";
+import _poolGristleGlutton from "../pool/gristle-glutton.js";
 import _poolGrixisPanorama from "../pool/grixis-panorama.js";
 import _poolGrotagThrasher from "../pool/grotag-thrasher.js";
 import _poolGruulWarChant from "../pool/gruul-war-chant.js";
@@ -203,6 +204,7 @@ import _poolMoltenRavager from "../pool/molten-ravager.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
 import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
+import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
 import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMourning from "../pool/mourning.js";
@@ -253,6 +255,7 @@ import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolRevelInRiches from "../pool/revel-in-riches.js";
 import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
 import _poolRigForWar from "../pool/rig-for-war.js";
+import _poolRimefireTorque from "../pool/rimefire-torque.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
@@ -323,6 +326,7 @@ import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
+import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
 import _poolThragtusk from "../pool/thragtusk.js";
 import _poolThranDynamo from "../pool/thran-dynamo.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
@@ -359,6 +363,7 @@ import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
 import _poolWhipcorder from "../pool/whipcorder.js";
 import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
 import _poolWildCeratok from "../pool/wild-ceratok.js";
+import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWitchingWell from "../pool/witching-well.js";
 import _poolWoodedRidgeline from "../pool/wooded-ridgeline.js";
 import _poolWreckingGecko from "../pool/wrecking-gecko.js";
@@ -517,6 +522,7 @@ const shard: CardShard = {
     _poolGravelHideGoblin,
     _poolGravewaker,
     _poolGreenhouse,
+    _poolGristleGlutton,
     _poolGrixisPanorama,
     _poolGrotagThrasher,
     _poolGruulWarChant,
@@ -579,6 +585,7 @@ const shard: CardShard = {
     _poolMongooseLizard,
     _poolMonstrousGrowth,
     _poolMoonCircuitHacker,
+    _poolMoonVigilAdherents,
     _poolMorcantsLoyalist,
     _poolMortivore,
     _poolMourning,
@@ -629,6 +636,7 @@ const shard: CardShard = {
     _poolRevelInRiches,
     _poolRideTheShoopuf,
     _poolRigForWar,
+    _poolRimefireTorque,
     _poolRiotPiker,
     _poolRiseOfTheDreadMarn,
     _poolRitualChamber,
@@ -699,6 +707,7 @@ const shard: CardShard = {
     _poolTheTheoristJaceBeleren,
     _poolTheWindCrystal,
     _poolThirdPathSavant,
+    _poolThirstForIdentity,
     _poolThragtusk,
     _poolThranDynamo,
     _poolTiamatsFanatics,
@@ -735,6 +744,7 @@ const shard: CardShard = {
     _poolWhipcorder,
     _poolWhisperOfTheDross,
     _poolWildCeratok,
+    _poolWildUnraveling,
     _poolWitchingWell,
     _poolWoodedRidgeline,
     _poolWreckingGecko,

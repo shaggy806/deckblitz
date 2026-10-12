@@ -49,6 +49,7 @@ import _poolBottomlessPoolLockerRoom from "../pool/bottomless-pool-locker-room.j
 import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
+import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
@@ -260,6 +261,7 @@ import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
 import _poolShaunFatherOfSynths from "../pool/shaun-father-of-synths.js";
 import _poolShelteredByGhosts from "../pool/sheltered-by-ghosts.js";
 import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
+import _poolShinestriker from "../pool/shinestriker.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
@@ -403,6 +405,7 @@ const shard: CardShard = {
     _poolBraidsConjurerAdept,
     _poolBreathOfFire,
     _poolBrightglassGearhulk,
+    _poolBristlebaneBattler,
     _poolBruteSuit,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
@@ -614,6 +617,7 @@ const shard: CardShard = {
     _poolShaunFatherOfSynths,
     _poolShelteredByGhosts,
     _poolShelteringBoughs,
+    _poolShinestriker,
     _poolShockingGrasp,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,

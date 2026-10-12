@@ -70,8 +70,9 @@ section keeps only what to do next.
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
   Secrets of Strixhaven (SOS) and Teenage Mutant Ninja Turtles (TMT) are done (batches 50–62).
   **Next: the rest of Lorwyn Eclipsed** (ECL, 2026-01-23: 126 above the threshold; after batch
-  62, 33 done, 23 blocked, 70 left). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
-  (61) are built; Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
+  63, 76 done, 40 blocked, 10 left), then **a whole set per batch** (the user's call, 2026-10-12:
+  4-5 agents with more cards each). Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak
+  (61), blight (63) are built; behold now leads Lorwyn Eclipsed's blockers (four cards); Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
   could now be read (`card:scaffold` drafts them).

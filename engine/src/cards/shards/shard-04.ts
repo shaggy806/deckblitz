@@ -158,6 +158,7 @@ import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
 import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
+import _poolKinscaerSentry from "../pool/kinscaer-sentry.js";
 import _poolKlauthUnrivaledAncient from "../pool/klauth-unrivaled-ancient.js";
 import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheNewCoalition from "../pool/knight-of-the-new-coalition.js";
@@ -190,6 +191,7 @@ import _poolMawcor from "../pool/mawcor.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
+import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
@@ -517,6 +519,7 @@ const shard: CardShard = {
     _poolKheruGoldkeeper,
     _poolKingCheetah,
     _poolKingpinWilsonFisk,
+    _poolKinscaerSentry,
     _poolKlauthUnrivaledAncient,
     _poolKnightErrant,
     _poolKnightOfTheNewCoalition,
@@ -549,6 +552,7 @@ const shard: CardShard = {
     _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMindfulBiomancer,
+    _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,
     _poolNeverwinterDryad,

@@ -91,6 +91,7 @@ import _poolFireSprites from "../pool/fire-sprites.js";
 import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
 import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
+import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
@@ -426,6 +427,7 @@ const shard: CardShard = {
     _poolFlamewaveInvoker,
     _poolFlayerHusk,
     _poolFlight,
+    _poolFlockImpostor,
     _poolForsakenMonument,
     _poolFyndhornBow,
     _poolGalvanicIteration,

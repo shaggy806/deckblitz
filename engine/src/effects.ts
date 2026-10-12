@@ -579,10 +579,9 @@ export interface WardCost {
   };
   /** "Discard a card" (Arna Kenneruud): how many; the payer picks which. */
   readonly discard?: number;
-  /** "Ward—Blight 2" (Auntie Ool: put two -1/-1 counters on a creature you
-   * control). Reserved for the unbuilt blight keyword: a cost naming it is
-   * treated as unpayable, and the `ward` card helper refuses to build one,
-   * so no card can be authored with it until blight lands. */
+  /** "Ward—Blight 2" (Auntie Ool): the payer puts two -1/-1 counters on a
+   * creature they control (rule 701.68a), choosing which as they pay — the
+   * `blight` effect. Payable only while they control a creature (701.68b). */
   readonly blight?: number;
 }
 
@@ -1014,6 +1013,36 @@ export type EffectSpec =
       /** "Any number of **other** nonland permanents you control" (Abdel
        * Adrian, Gorion's Ward): never the effect's own source. */
       readonly exceptSource?: boolean;
+    }
+  | {
+      /**
+       * Blight N (rule 701.68a): each player in `who` (default `"you"`) puts
+       * `amount` -1/-1 counters on a creature they control, which they choose
+       * as this resolves — not a target — with the `choose-permanents`
+       * decision (asked only when there's more than one to choose from). All
+       * of them on one creature; it needn't survive them (the rulings). A
+       * player who controls no creature can't, and does nothing (701.68b) —
+       * so "you may blight 1. If you do, …" is a `may` of this with `then`,
+       * not offered at all without a creature (`mayBeDone`).
+       *
+       * Several players blight one at a time from the active player (rule
+       * 101.4 — High Perfect Morcant's "each opponent blights 1"), each
+       * choosing their own creature.
+       *
+       * `then` applies right after a player's counters go on, with **the
+       * blighted creature** (701.68c) as its target 0 and that player as its
+       * controller: Grub, Notorious Auntie's "create a token that's a copy of
+       * the blighted creature" is `then: { kind: "create-token-copy", of: 0,
+       * … }`. Like a `choose-permanents`' `then`, it shouldn't itself stop to
+       * ask anything.
+       */
+      readonly kind: "blight";
+      readonly amount: number;
+      readonly who?: PlayerScope;
+      readonly then?: EffectSpec;
+      /** Set by the engine on the copy it parks when one player's choice is
+       * asked: the players still to blight. */
+      readonly remaining?: readonly PlayerId[];
     }
   | {
       /** One member's turn of a `for-each-target`: target `index` bound to
@@ -4643,6 +4672,10 @@ export interface EffectApi {
     prompt: string,
     exceptSource?: boolean,
   ): void;
+  /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
+   * creature chosen now, or asked for — then `then` with it as target 0.
+   * Nothing, if they control no creature (rule 701.68b). */
+  blight(player: PlayerId, amount: number, then?: EffectSpec): void;
   /** This context, about `player`: the `"that-player"` scope names them —
    * an `"each-player-may"`'s follow-ups. */
   aboutPlayer(player: PlayerId): ResolutionContext;
@@ -6269,6 +6302,13 @@ function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
       return has >= amountValue(action.amount, ctx, ref.player);
     });
   }
+  // "You may blight 1": a player who controls no creature can't choose to
+  // (rule 701.68b).
+  if (action.kind === "blight") {
+    return ctx
+      .playersInScope(action.who ?? "you")
+      .every((player) => ctx.countMatching({ type: "creature", controlledBy: "you" }, undefined, player) > 0);
+  }
   return true;
 }
 
@@ -6628,6 +6668,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exceptSource,
       );
       return;
+    case "blight": {
+      // One player at a time from the active player (rule 101.4), the rest
+      // parked while one is asked, as `for-each-player` parks its players.
+      const players = spec.remaining ?? ctx.apnap(ctx.playersInScope(spec.who ?? "you"));
+      const pendingBefore = ctx.decisionPending();
+      for (let i = 0; i < players.length; i += 1) {
+        const parked = ctx.parkedCount();
+        ctx.blight(players[i], spec.amount, spec.then);
+        if (i + 1 < players.length && !pendingBefore && ctx.decisionPending()) {
+          ctx.resumeAfterDecisions({ ...spec, remaining: players.slice(i + 1) }, parked);
+          return;
+        }
+      }
+      return;
+    }
     case "damage-divided-evenly": {
       // A member found illegal as it resolved isn't there (rule 608.2b), and
       // doesn't count toward the division.

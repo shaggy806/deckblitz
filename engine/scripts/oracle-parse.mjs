@@ -494,6 +494,8 @@ export function parseCost(text) {
     } else if (part === "Exile ~ from your graveyard") extra.zone = "graveyard";
     else if (part === "Discard ~") extra.zone = "hand";
     else if (part === "Exile ~") cost.exileSelf = true;
+    // Blight N (rule 701.68a), chosen as it's paid.
+    else if ((m = /^Blight (\d+)$/.exec(part))) cost.blight = Number(m[1]);
     else return null;
   }
   // Without a {T} of its own, the source may be one of the creatures it taps
@@ -509,6 +511,8 @@ const STEPS = {
   "draw step": "draw",
   "end step": "end",
   "precombat main phase": "precombat-main",
+  // Rule 505.1a: only the first main phase of a turn is a precombat one.
+  "first main phase": "precombat-main",
   "postcombat main phase": "postcombat-main",
   "postcombat main phases": "postcombat-main",
 };
@@ -617,7 +621,7 @@ export function parseTrigger(clause) {
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
   if (/^At the beginning of each combat$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "any" }];
-  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's) (upkeep|draw step|end step|precombat main phase|postcombat main phases?)$/.exec(c))) {
+  if ((m = /^At the beginning of (your|each of your|each|the|each opponent's|each player's) (upkeep|draw step|end step|precombat main phase|first main phase|postcombat main phases?)$/.exec(c))) {
     return [{ on: "step-begins", step: STEPS[m[2]], who: WHO_STEP[m[1]] }];
   }
   return null;
@@ -1052,6 +1056,11 @@ export function parseSentence(sentence, ctx) {
 
   // Everything else that's a whole instruction by itself.
   if (re("you become the monarch").test(s)) return { kind: "become-monarch" };
+  // Blight N (rule 701.68a): you, or each opponent, each on a creature of theirs.
+  if ((m = re("blight (\\d+)").exec(s))) return { kind: "blight", amount: Number(m[1]) };
+  if ((m = re("each (opponent|player) blights (\\d+)").exec(s))) {
+    return { kind: "blight", amount: Number(m[2]), who: m[1] === "opponent" ? "each-opponent" : "each-player" };
+  }
 
   // "You may <sentence>." wraps whatever the inner sentence is.
   if ((m = /^you may (.+)\.$/i.exec(s))) {
@@ -1097,6 +1106,21 @@ export function parseEffect(text, outer) {
         };
         parsed.push(combined);
         hints.push({ sentence, effect: combined });
+        continue;
+      }
+    }
+    // "If you do" after "you may blight N": what follows happens only if the
+    // player blighted — and the may is offered only when they can (rule
+    // 701.68b) — so it's the may's `then`. Not one that names "the blighted
+    // creature" (701.68c: that's the blight's own `then`, a person's).
+    const ifDid = /^if you do, (.+)$/i.exec(sentence);
+    if (ifDid !== null && parsed.at(-1)?.kind === "may" && parsed.at(-1).effect.kind === "blight" && parsed.at(-1).then === undefined && !/\bblighted\b/i.test(sentence)) {
+      const then = parseSentence(`${ifDid[1][0].toUpperCase()}${ifDid[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const may = { ...parsed.pop(), then };
+        hints.pop();
+        parsed.push(may);
+        hints.push({ sentence, effect: may });
         continue;
       }
     }
@@ -1257,6 +1281,17 @@ export function parseFace(face, ctx = {}) {
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
     if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
+      continue;
+    }
+    // "Blight N or pay {M}" (rule 701.68a): a choice of whole costs.
+    if (isSpell && (m = /^As an additional cost to cast ~, blight (\d+) or pay ((?:\{[^}]+\})+)\.$/.exec(line))) {
+      out.additionalCost = { options: [{ text: `Blight ${m[1]}`, blight: Number(m[1]) }, { text: `Pay ${m[2]}`, mana: m[2] }] };
+      continue;
+    }
+    // "You may blight N": a kicker by another name — what paying it changes
+    // ("if this spell's additional cost was paid") is the card's own.
+    if (isSpell && (m = /^As an additional cost to cast ~, you may blight (\d+)\.$/.exec(line))) {
+      out.kicker = { cost: "", keyword: "blight", blight: Number(m[1]) };
       continue;
     }
 

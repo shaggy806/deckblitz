@@ -49,6 +49,7 @@ import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
 import _poolBragoKingEternal from "../pool/brago-king-eternal.js";
 import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
 import _poolBrassSecretary from "../pool/brass-secretary.js";
+import _poolBreOfClanStoutarm from "../pool/bre-of-clan-stoutarm.js";
 import _poolBreakDown from "../pool/break-down.js";
 import _poolBriaRiptideRogue from "../pool/bria-riptide-rogue.js";
 import _poolBridgeworksBattle from "../pool/bridgeworks-battle.js";
@@ -135,6 +136,7 @@ import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-caves.js";
 import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
 import _poolGlacialStalker from "../pool/glacial-stalker.js";
+import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
@@ -359,6 +361,7 @@ import _poolTreetopVillage from "../pool/treetop-village.js";
 import _poolTrenchWurm from "../pool/trench-wurm.js";
 import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
+import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
@@ -444,6 +447,7 @@ const shard: CardShard = {
     _poolBragoKingEternal,
     _poolBrambleSovereign,
     _poolBrassSecretary,
+    _poolBreOfClanStoutarm,
     _poolBreakDown,
     _poolBriaRiptideRogue,
     _poolBridgeworksBattle,
@@ -530,6 +534,7 @@ const shard: CardShard = {
     _poolGimliOfTheGlitteringCaves,
     _poolGlacialFloodplain,
     _poolGlacialStalker,
+    _poolGlamerGifter,
     _poolGloriousAnthem,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
@@ -754,6 +759,7 @@ const shard: CardShard = {
     _poolTrenchWurm,
     _poolTrollAscetic,
     _poolTrostaniDiscordant,
+    _poolTrystanPenitentCuller,
     _poolUndeadAugur,
     _poolUrukHaiBerserker,
     _poolUtromMonitor,

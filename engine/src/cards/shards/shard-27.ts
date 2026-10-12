@@ -123,6 +123,7 @@ import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
+import _poolGiantfall from "../pool/giantfall.js";
 import _poolGiftOfTheFae from "../pool/gift-of-the-fae.js";
 import _poolGladecoverScout from "../pool/gladecover-scout.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
@@ -496,6 +497,7 @@ const shard: CardShard = {
     _poolGhostSpectralSaboteur,
     _poolGhoulcallerGisa,
     _poolGiantScorpion,
+    _poolGiantfall,
     _poolGiftOfTheFae,
     _poolGladecoverScout,
     _poolGoblinMountaineer,

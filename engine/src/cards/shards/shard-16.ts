@@ -148,6 +148,7 @@ import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHeadstone from "../pool/headstone.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
+import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
 import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
@@ -381,6 +382,7 @@ import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
 import _tokensBlackDeathtouchSnakeToken from "../tokens/black-deathtouch-snake-token.js";
 import _tokensBlueBlackFaerieToken from "../tokens/blue-black-faerie-token.js";
 import _tokensDinosaurToken31 from "../tokens/dinosaur-token-3-1.js";
+import _tokensGoblinTokenBoggartMischief from "../tokens/goblin-token-boggart-mischief.js";
 import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
@@ -540,6 +542,7 @@ const shard: CardShard = {
     _poolHeadstone,
     _poolHeartstone,
     _poolHematiteGolem,
+    _poolHighPerfectMorcant,
     _poolHomaridExplorer,
     _poolHondenOfCleansingFire,
     _poolHoverstonePilgrim,
@@ -775,6 +778,7 @@ const shard: CardShard = {
     _tokensBlackDeathtouchSnakeToken,
     _tokensBlueBlackFaerieToken,
     _tokensDinosaurToken31,
+    _tokensGoblinTokenBoggartMischief,
     _tokensInsectToken,
     _tokensLifelinkVampireToken,
     _tokensMunitionsToken,

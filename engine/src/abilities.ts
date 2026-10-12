@@ -284,6 +284,17 @@ export interface AbilityCost {
    * own question, and only one can wait at a time).
    */
   readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
+  /**
+   * "Blight N" as a cost (rule 701.68a — Gristle Glutton's "{T}, Blight 1:
+   * …"): put N -1/-1 counters on a creature you control. The creature is
+   * chosen as the cost is paid — once the ability is on the stack and its
+   * mana paid, before anyone gets priority (rules 602.2b, 601.2h) — with the
+   * `choose-permanents` decision, asked only when there's more than one to
+   * choose from. The source itself may be the one. Activatable only while
+   * you control a creature (701.68b). Not on a mana ability, nor beside
+   * another cost that asks a question (one can wait at a time).
+   */
+  readonly blight?: number;
 }
 
 export interface ActivatedAbility {

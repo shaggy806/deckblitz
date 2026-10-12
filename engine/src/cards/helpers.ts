@@ -77,18 +77,13 @@ export const thisOrAnother = (ability: TriggeredAbility, self?: CardFilter): Tri
  * is "Ward—{2}, Pay 2 life." — one compound cost, paid all together. Put the
  * printed line in the card's `text` as well; this is the ability's own.
  */
-export const ward = (cost: WardCost): TriggeredAbility => {
-  if (cost.blight !== undefined) {
-    throw new Error("ward: a blight cost isn't built yet (the blight keyword is unimplemented)");
-  }
-  return {
-    trigger: { on: "becomes-target", who: "self", byOpponentOnly: true },
-    targets: [],
-    effect: { kind: "ward", cost },
-    resolve: null,
-    text: `Ward${wardCostText(cost)}`,
-  };
-};
+export const ward = (cost: WardCost): TriggeredAbility => ({
+  trigger: { on: "becomes-target", who: "self", byOpponentOnly: true },
+  targets: [],
+  effect: { kind: "ward", cost },
+  resolve: null,
+  text: `Ward${wardCostText(cost)}`,
+});
 
 /**
  * Undying (rule 702.93): "When this permanent dies, if it had no +1/+1

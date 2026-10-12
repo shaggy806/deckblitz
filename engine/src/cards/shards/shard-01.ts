@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbigaleEloquentFirstYear from "../pool/abigale-eloquent-first-year.js";
 import _poolAdarkarSentinel from "../pool/adarkar-sentinel.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
@@ -181,6 +182,7 @@ import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
+import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
@@ -234,6 +236,7 @@ import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
+import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
@@ -342,6 +345,7 @@ import _tokensVibraniumToken from "../tokens/vibranium-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbigaleEloquentFirstYear,
     _poolAdarkarSentinel,
     _poolAetherfluxConduit,
     _poolAinokTracker,
@@ -520,6 +524,7 @@ const shard: CardShard = {
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
     _poolMoonBlessedCleric,
+    _poolMorcantsEyes,
     _poolMountainGoat,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
@@ -573,6 +578,7 @@ const shard: CardShard = {
     _poolSavageMansion,
     _poolSavannah,
     _poolScaldingTarn,
+    _poolScarbladesMalice,
     _poolScattershot,
     _poolScreamingPhantom,
     _poolSearchForTomorrow,

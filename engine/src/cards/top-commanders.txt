@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-404 already implemented / 96 missing
+405 already implemented / 95 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -111,7 +111,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  105  Sidar Jabari of Zhalfir                        17798 decks  {1}{W}{U}{B}     Legendary Creature — Human Knight
 [x]  106  Obeka, Splitter of Seconds                     17786 decks  {1}{U}{B}{R}     Legendary Creature — Ogre Warlock
 [x]  107  Silas Renn, Seeker Adept                       17784 decks  {1}{U}{B}        Legendary Artifact Creature — Human
-[ ]  108  High Perfect Morcant                           17751 decks  {2}{B}{G}        Legendary Creature — Elf Noble
+[x]  108  High Perfect Morcant                           17751 decks  {2}{B}{G}        Legendary Creature — Elf Noble
 [x]  109  Kraum, Ludevic's Opus                          17741 decks  {3}{U}{R}        Legendary Creature — Zombie Horror
 [x]  110  Marneus Calgar                                 17703 decks  {2}{W}{U}{B}     Legendary Creature — Astartes Warrior
 [ ]  111  Atraxa, Grand Unifier                          17614 decks  {3}{G}{W}{U}{B}  Legendary Creature — Phyrexian Angel

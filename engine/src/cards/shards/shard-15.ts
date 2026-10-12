@@ -27,6 +27,8 @@ import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
+import _poolBoggartMischief from "../pool/boggart-mischief.js";
+import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
 import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
@@ -372,6 +374,8 @@ const shard: CardShard = {
     _poolBlightstepPathway,
     _poolBloodMoney,
     _poolBloodtallowCandle,
+    _poolBoggartMischief,
+    _poolBogslithersEmbrace,
     _poolBoltwave,
     _poolBondBeetle,
     _poolBoneMiser,

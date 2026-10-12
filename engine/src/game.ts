@@ -2713,7 +2713,11 @@ export class Game {
         ...(kicked && def.kicker !== null
           ? {
               kicked: true,
-              kickerCost: def.kicker.cost.repeat(kickCount ?? 1),
+              // A blight variant is labelled with its N ("blight 1").
+              kickerCost:
+                def.kicker.keyword === "blight" && def.kicker.blight !== undefined
+                  ? String(def.kicker.blight)
+                  : def.kicker.cost.repeat(kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
@@ -9308,6 +9312,10 @@ export class Game {
     if (kicked && def.kicker?.keyword === "gift" && this.giftCandidates(player).length === 0) {
       return `${player} has no opponent to promise ${def.name}'s gift to`;
     }
+    // "You may blight 1" (rule 701.68b): only with a creature to blight.
+    if (kicked && def.kicker?.keyword === "blight" && !this.canBlight(player)) {
+      return `${player} controls no creature to blight for ${def.name}`;
+    }
     if (typeof kicked === "number" && kicked > 1 && def.kicker?.multi !== true) {
       return `${def.name}'s kicker can be paid only once`;
     }
@@ -10342,6 +10350,12 @@ export class Game {
     // Cast during a resolution: once that resolution finishes, the active
     // player gets priority (rule 117.3b), not necessarily the caster.
     const priorityTo = via === "effect" ? this.activePlayer : player;
+    // "Blight 1 or pay {3}" with the blight chosen, or "you may blight 1"
+    // taken (rule 701.68a): which creature is chosen now, as the cost is
+    // paid (601.2h), the spell on the stack.
+    const blightCost =
+      chosenOption?.blight ?? (kicked && def.kicker?.keyword === "blight" ? def.kicker.blight : undefined);
+    if (blightCost !== undefined) this.beginBlight(player, cardId, blightCost, { x: chosenX, priorityTo });
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
     this.queueCasualty(player, cardId, priorityTo);
     this.afterPlayerAction(priorityTo);
@@ -10621,6 +10635,10 @@ export class Game {
       if (candidates.length === 0) {
         return `${player} has nothing to sacrifice to cast ${def.name}`;
       }
+    }
+    // Rule 701.68b: no creature to put the counters on, no blighting.
+    if (option.blight !== undefined && !this.canBlight(player)) {
+      return `${player} controls no creature to ${option.text.toLowerCase()} for ${def.name}`;
     }
     return null;
   }
@@ -11511,6 +11529,21 @@ export class Game {
         return `${player} controls too few permanents to return for ${def.name}'s cost`;
       }
     }
+    if (ability.cost.blight !== undefined) {
+      // Chosen once the ability is on the stack (see `activateAbility`),
+      // which a mana ability never is; and one cost asks one thing at a time.
+      if (
+        isManaAbility(ability) ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        costReturn !== undefined
+      ) {
+        return `${def.name}'s ability can't blight as part of that cost`;
+      }
+      // Rule 701.68b: no creature to put the counters on, no blighting.
+      if (!this.canBlight(player)) return `${player} controls no creature to blight for ${def.name}'s cost`;
+    }
     return null;
   }
 
@@ -11929,6 +11962,12 @@ export class Game {
     // too (rules 602.2b, 601.2h).
     const costReturn = ability.cost.returnToHand;
     if (costReturn !== undefined) this.payReturnToHandCost(player, sourceId, costReturn, abilityId);
+    // "Blight 1" (rule 701.68a): which creature, chosen now too.
+    if (ability.cost.blight !== undefined) {
+      this.withDecisionSource(sourceId, () =>
+        this.beginBlight(player, sourceId, ability.cost.blight as number, { x: chosenX, priorityTo: player }),
+      );
+    }
     this.afterPlayerAction(player);
   }
 
@@ -18766,6 +18805,7 @@ export class Game {
       splitMana: (ask) => this.beginManaSplit(source, controller, x, ask),
       choosePermanents: (filter, min, max, then, prompt, exceptSource) =>
         this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true),
+      blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       grantKeyword: (target, keyword, duration) =>
         this.grantKeyword(target, keyword, lastingHere(duration)),
       restrict: (target, filter, restrictions, duration) =>
@@ -20284,8 +20324,13 @@ export class Game {
       if (impulse.expiry.kind === "end-of-turn") {
         if (impulse.expiry.turn <= this.state.turn.number) delete object.impulse;
       } else if (impulse.expiry.kind === "your-turns" && impulse.player === active) {
+        // A new record, never a write through the old one: the cards one
+        // effect exiled together were granted one `expiry` object, so
+        // counting it down in place counted it once per card — the second
+        // of Reckless Impulse's two lost its permission at the end of the
+        // turn it was exiled.
         if (impulse.expiry.remaining <= 0) delete object.impulse;
-        else impulse.expiry.remaining -= 1;
+        else object.impulse = { ...impulse, expiry: { ...impulse.expiry, remaining: impulse.expiry.remaining - 1 } };
       }
     }
   }
@@ -22977,6 +23022,63 @@ export class Game {
   }
 
 
+  /** Whether `player` could blight (rule 701.68b): they control a creature
+   * to put the counters on. */
+  private canBlight(player: PlayerId): boolean {
+    return this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).length > 0;
+  }
+
+  /**
+   * Blight N (rule 701.68a): `player` puts `amount` -1/-1 counters on a
+   * creature they control — as a cost being paid (`priorityTo` set: who
+   * gets priority once it's chosen, rule 117.3c — an activated ability's
+   * `AbilityCost.blight`, a spell's additional cost) or as the `"blight"`
+   * effect resolves. Which creature is the `choose-permanents` decision;
+   * with one to choose from (a token stack is one — its tokens are
+   * identical) it's that one, unasked. All the counters go on that one
+   * creature, which needn't survive them (the rulings). No creature,
+   * nothing (701.68b — whatever offers a choice to blight checks that
+   * first, `canBlight`). `then` follows the counters, with the blighted
+   * creature (701.68c) as its target 0 and `player` its controller.
+   */
+  private beginBlight(
+    player: PlayerId,
+    source: ObjectId,
+    amount: number,
+    opts: { readonly x?: number; readonly then?: EffectSpec; readonly priorityTo?: PlayerId } = {},
+  ): void {
+    if (this.state.players[player]?.hasLost !== false) return;
+    const eligible = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" });
+    if (eligible.length === 0) return;
+    const then: EffectSpec = {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "-1/-1", amount },
+        ...(opts.then !== undefined ? [opts.then] : []),
+      ],
+    };
+    if (eligible.length === 1) {
+      // The one a stack stands for is singled out first, so "the blighted
+      // creature" is the token that got the counters.
+      const one = this.splitOneFromStack(eligible[0]);
+      applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], opts.x ?? 0));
+      return;
+    }
+    this.state.awaiting = {
+      kind: "choose-permanents",
+      player,
+      eligible,
+      min: 1,
+      max: 1,
+      prompt: `Blight ${amount} — put ${amount === 1 ? "a -1/-1 counter" : `${amount} -1/-1 counters`} on a creature you control`,
+      then,
+      source,
+      x: opts.x ?? 0,
+      blight: amount,
+      ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
+    };
+  }
+
   /**
    * See the `"choose-permanents"` {@link EffectSpec}: `player` chooses from
    * `min` to `max` of the permanents matching `filter` as the effect
@@ -23154,9 +23256,20 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
       return;
     }
-    const { then, source, x, priorityTo, costOf } = awaiting;
+    const { then, source, x, priorityTo, costOf, blight } = awaiting;
     this.state.awaiting = null;
     if (costOf !== undefined) for (const id of chosen) this.recordReturnedAttacking(costOf, id);
+    // A blight's creature is singled out of its stack before the counters
+    // go on, so its `then` reads the blighted one (rule 701.68c).
+    if (blight !== undefined) {
+      const id = chosen[0];
+      if (id !== undefined && this.state.objects[id]?.zone === "battlefield") {
+        const one = this.splitOneFromStack(id);
+        applyEffectSpec(then, this.makeResolutionContext(source, player, [{ kind: "object", object: one }], x));
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
+      return;
+    }
     // One instruction acting on each permanent chosen (rule 608.2c), so one
     // event: God-Eternal Bontu's "sacrifice any number of other permanents"
     // sacrifices them all at once, and a "whenever one or more" sees one batch.
@@ -25305,6 +25418,10 @@ export class Game {
     if (cost.discard !== undefined) {
       parts.push({ kind: "discard", target: "you", amount: cost.discard });
     }
+    // "Ward—Blight 2" (rule 701.68a): the payer's own creature.
+    if (cost.blight !== undefined) {
+      parts.push({ kind: "blight", amount: cost.blight });
+    }
     const spellName = printedCardName(spell);
     const what = spell.kind === "card" ? spellName : `${spellName}'s ability`;
     this.beginModesChoice(
@@ -25337,7 +25454,8 @@ export class Game {
 
   /**
    * Can `player` pay all of a ward cost right now? Life can be paid down to
-   * exactly 0 (rule 119.4); blight isn't built, so a cost naming it can't be.
+   * exactly 0 (rule 119.4); a blight needs a creature to put the counters on
+   * (701.68b).
    *
    * The parts are one cost, so they're checked together: the mana is paid
    * first (it rides on the decision), and the plan for it — the same plan
@@ -25350,7 +25468,6 @@ export class Game {
   private canPayWardCost(player: PlayerId, cost: WardCost): boolean {
     const state = this.state.players[player];
     if (state === undefined || state.hasLost) return false;
-    if (cost.blight !== undefined) return false;
     let lifeLeft = state.life;
     const spent = new Map<ObjectId, number>();
     if (cost.mana !== undefined) {
@@ -25372,6 +25489,15 @@ export class Game {
         0,
       );
       if (eligible < (cost.sacrifice.count ?? 1)) return false;
+    }
+    if (cost.blight !== undefined) {
+      // A creature left once the mana is paid: one sacrificed for mana is
+      // gone. (No printed ward cost both sacrifices and blights.)
+      const creatures = this.battlefieldMatching(player, { type: "creature", controlledBy: "you" }).reduce(
+        (n, id) => n + Math.max(0, (this.state.objects[id].stackCount ?? 1) - (spent.get(id) ?? 0)),
+        0,
+      );
+      if (creatures < 1) return false;
     }
     if (
       cost.discard !== undefined &&

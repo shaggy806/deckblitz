@@ -314,6 +314,7 @@ import _poolSporemound from "../pool/sporemound.js";
 import _poolSpringsageRitual from "../pool/springsage-ritual.js";
 import _poolSquallDrifter from "../pool/squall-drifter.js";
 import _poolStaffOfNin from "../pool/staff-of-nin.js";
+import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
@@ -359,6 +360,7 @@ import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
 import _poolUnfriendlyFire from "../pool/unfriendly-fire.js";
+import _poolUnwelcomeSprite from "../pool/unwelcome-sprite.js";
 import _poolUrabrasksForge from "../pool/urabrasks-forge.js";
 import _poolUrborgElf from "../pool/urborg-elf.js";
 import _poolUrnOfGodfire from "../pool/urn-of-godfire.js";
@@ -713,6 +715,7 @@ const shard: CardShard = {
     _poolSpringsageRitual,
     _poolSquallDrifter,
     _poolStaffOfNin,
+    _poolStalactiteDagger,
     _poolSteelshapersGift,
     _poolStomperCub,
     _poolStormfistCrusader,
@@ -758,6 +761,7 @@ const shard: CardShard = {
     _poolUndeadWarchief,
     _poolUndergroundMortuary,
     _poolUnfriendlyFire,
+    _poolUnwelcomeSprite,
     _poolUrabrasksForge,
     _poolUrborgElf,
     _poolUrnOfGodfire,

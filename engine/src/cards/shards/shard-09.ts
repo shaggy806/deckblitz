@@ -257,6 +257,7 @@ import _poolScourForScrap from "../pool/scour-for-scrap.js";
 import _poolScourFromExistence from "../pool/scour-from-existence.js";
 import _poolScouringSwarm from "../pool/scouring-swarm.js";
 import _poolScrybRanger from "../pool/scryb-ranger.js";
+import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
 import _poolSedgemoorWitch from "../pool/sedgemoor-witch.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
@@ -626,6 +627,7 @@ const shard: CardShard = {
     _poolScourFromExistence,
     _poolScouringSwarm,
     _poolScrybRanger,
+    _poolScuzzbackScrounger,
     _poolSearchlightCompanion,
     _poolSedgemoorWitch,
     _poolSephirothPlanetsHeir,

@@ -156,6 +156,20 @@ describe("impulse-exile", () => {
     expect(impulseExiled(game).length).toBe(1);
   });
 
+  it("every card exiled together keeps its `your-next-turn` permission through the opponent's turn", () => {
+    // Reckless Impulse's two: they were granted one expiry record, which once
+    // counted down per card, so the second lost its permission as the turn
+    // it was exiled ended.
+    const game = makeGame();
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 3, duration: "your-next-turn" });
+    expect(impulseExiled(game).length).toBe(3);
+    game.advanceUntil((s) => s.turn.number === 3 || s.result.over);
+    expect(impulseExiled(game).length).toBe(3);
+    game.advanceUntil((s) => s.turn.number === 4 || s.result.over);
+    expect(impulseExiled(game).length).toBe(0);
+  });
+
   it("granted on an opponent's turn, a `your-next-turn` permission ends with your next turn", () => {
     // Tectonic Giant targeted by an opponent's spell: "your next turn" is the
     // very next one of yours, not the one after.

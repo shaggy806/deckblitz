@@ -96,6 +96,7 @@ import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
 import _poolDreadwing from "../pool/dreadwing.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
+import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolErode from "../pool/erode.js";
@@ -173,6 +174,7 @@ import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
 import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
 import _poolLightningHounds from "../pool/lightning-hounds.js";
+import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.js";
 import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLumberknot from "../pool/lumberknot.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
@@ -337,6 +339,7 @@ import _poolZodiacGoat from "../pool/zodiac-goat.js";
 import _tokens32ShapeshifterToken from "../tokens/3-2-shapeshifter-token.js";
 import _tokensAngelToken44 from "../tokens/angel-token-4-4.js";
 import _tokensAngelVigilanceToken from "../tokens/angel-vigilance-token.js";
+import _tokensBlackGreenElfToken from "../tokens/black-green-elf-token.js";
 import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
@@ -440,6 +443,7 @@ const shard: CardShard = {
     _poolDreadwing,
     _poolDunesOfTheDead,
     _poolEarthbendingLesson,
+    _poolEclipsedBoggart,
     _poolEleshNornGrandCenobite,
     _poolElvishVisionary,
     _poolErode,
@@ -517,6 +521,7 @@ const shard: CardShard = {
     _poolLiesaForgottenArchangel,
     _poolLightningBolt,
     _poolLightningHounds,
+    _poolLluwenImperfectNaturalist,
     _poolLotusPetal,
     _poolLumberknot,
     _poolMarbleGargoyle,
@@ -683,6 +688,7 @@ const shard: CardShard = {
     _tokens32ShapeshifterToken,
     _tokensAngelToken44,
     _tokensAngelVigilanceToken,
+    _tokensBlackGreenElfToken,
     _tokensDevilToken,
     _tokensFrogLizardToken,
     _tokensHeroToken,

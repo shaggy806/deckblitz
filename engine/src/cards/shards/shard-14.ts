@@ -178,6 +178,7 @@ import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
+import _poolIronShieldElf from "../pool/iron-shield-elf.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
 import _poolIshkanahGrafwidow from "../pool/ishkanah-grafwidow.js";
 import _poolIsperiaSupremeJudge from "../pool/isperia-supreme-judge.js";
@@ -324,6 +325,7 @@ import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
+import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
 import _poolWalkingBallista from "../pool/walking-ballista.js";
 import _poolWargRider from "../pool/warg-rider.js";
@@ -531,6 +533,7 @@ const shard: CardShard = {
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
     _poolInvokeTheFiremind,
+    _poolIronShieldElf,
     _poolIronshellBeetle,
     _poolIshkanahGrafwidow,
     _poolIsperiaSupremeJudge,
@@ -677,6 +680,7 @@ const shard: CardShard = {
     _poolVillageBellRinger,
     _poolVinereapMentor,
     _poolVoldarenEstate,
+    _poolVoraciousTomeSkimmer,
     _poolWakestoneGargoyle,
     _poolWalkingBallista,
     _poolWargRider,

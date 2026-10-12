@@ -825,8 +825,9 @@ export type LegalAction =
       /** The keyword that optional cost goes by when it isn't kicker —
        * `"offspring"` (rule 702.175), `"gift"` (702.174: the variant that
        * promises the gift; to whom is asked once it's cast) — for
-       * labelling. */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork";
+       * labelling — `"blight"` (701.68a: the variant that blights, with
+       * `kickerCost` its N). */
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */
@@ -1326,6 +1327,9 @@ export type LegalAction =
        * each eligible permanent's power (`powers`). */
       readonly maxTotalPower?: number;
       readonly powers?: Readonly<Record<ObjectId, number>>;
+      /** Set when it's which creature blights this many (rule 701.68a):
+       * exactly one, and the counters go on it. */
+      readonly blight?: number;
     }
   | {
       readonly kind: "scry";

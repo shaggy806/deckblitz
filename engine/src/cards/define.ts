@@ -113,6 +113,11 @@ export interface AdditionalCostOption {
   readonly discard?: number;
   readonly payLife?: number;
   readonly mana?: string;
+  /** "Blight N" (rule 701.68a — Bogslither's Embrace's "blight 1 or pay
+   * {3}"): offered only while the caster controls a creature (701.68b), and
+   * which creature is chosen as the cost is paid, once the spell is on the
+   * stack, with the `choose-permanents` decision (601.2h). */
+  readonly blight?: number;
 }
 
 export type Keyword =
@@ -1955,7 +1960,18 @@ export interface CardDefinition {
      * permanent, whose gift is the `giftTrigger` helper. The opponent is
      * chosen as the cost is paid — see `GiftAsk`.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight";
+    /**
+     * With `keyword: "blight"` and `cost: ""`: "As an additional cost to
+     * cast this spell, you may blight N" (rule 701.68a — Burning
+     * Curiosity). The kicked variant is the one that blights, offered only
+     * while the caster controls a creature (701.68b); which creature is
+     * chosen as the cost is paid, once the spell is on the stack, with the
+     * `choose-permanents` decision (601.2h). "If this spell's additional
+     * cost was paid" is the spell being kicked: `targets` / `effect` say
+     * what changes, and `self-kicked` asks it on a permanent.
+     */
+    readonly blight?: number;
     /**
      * Teamwork N (rule 702.194a): "as an additional cost to cast this spell,
      * you may tap any number of creatures you control with total power N or
@@ -2590,7 +2606,8 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight";
+    readonly blight?: number;
     readonly teamwork?: number;
     readonly multi?: boolean;
   };

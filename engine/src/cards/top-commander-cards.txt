@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3517 already implemented / 1483 missing (marks refreshed 2026-10-12)
+3518 already implemented / 1482 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3688,7 +3688,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3695  Glorious Sunrise                         {3}{G}{G}        Enchantment
 [x]  3696  Arcbound Ravager                         {2}              Artifact Creature — Beast
 [x]  3697  Turbulent Moor                           {0}              Land — Plains Swamp
-[ ]  3698  High Perfect Morcant                     {2}{B}{G}        Legendary Creature — Elf Noble
+[x]  3698  High Perfect Morcant                     {2}{B}{G}        Legendary Creature — Elf Noble
 [x]  3699  Seal of Primordium                       {1}{G}           Enchantment
 [x]  3700  Diluvian Primordial                      {5}{U}{U}        Creature — Avatar
 [x]  3701  Lord of Extinction                       {3}{B}{G}        Creature — Elemental

@@ -144,6 +144,7 @@ import _poolGravePact from "../pool/grave-pact.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
+import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
@@ -503,6 +504,7 @@ const shard: CardShard = {
     _poolGreatIntelligencesPlan,
     _poolGreaterForgeling,
     _poolGrixisCharm,
+    _poolGrubStoriedMatriarch,
     _poolGwennaEyesOfGaea,
     _poolHagraSharpshooter,
     _poolHammerhand,

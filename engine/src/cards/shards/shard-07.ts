@@ -105,6 +105,7 @@ import _poolGhaltaStampedeTyrant from "../pool/ghalta-stampede-tyrant.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
+import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldhound from "../pool/goldhound.js";
@@ -486,6 +487,7 @@ const shard: CardShard = {
     _poolGhorClanWrecker,
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
+    _poolGloomRipper,
     _poolGoblinShortcutter,
     _poolGoldMyr,
     _poolGoldhound,

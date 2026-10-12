@@ -182,6 +182,7 @@ import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
 import _poolMindControl from "../pool/mind-control.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
@@ -543,6 +544,7 @@ const shard: CardShard = {
     _poolMartialGlory,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMidnightTilling,
     _poolMightOfTheAncestors,
     _poolMindControl,
     _poolMinecartDaredevil,
