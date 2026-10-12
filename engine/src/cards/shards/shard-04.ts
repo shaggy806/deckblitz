@@ -276,6 +276,7 @@ import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
+import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
@@ -327,6 +328,7 @@ import _poolUnburiedEarthcarver from "../pool/unburied-earthcarver.js";
 import _poolUncomfortableChill from "../pool/uncomfortable-chill.js";
 import _poolUnderfootUnderdogs from "../pool/underfoot-underdogs.js";
 import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
+import _poolUnstableExperiment from "../pool/unstable-experiment.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
@@ -638,6 +640,7 @@ const shard: CardShard = {
     _poolSongMadTreachery,
     _poolSparringMummy,
     _poolSpellweaverEternal,
+    _poolSpiderBot,
     _poolSpitFlame,
     _poolSplatterTechnique,
     _poolSpringleafDrum,
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolUncomfortableChill,
     _poolUnderfootUnderdogs,
     _poolUnflinchingHortimancer,
+    _poolUnstableExperiment,
     _poolVampireChampion,
     _poolVaultSkirge,
     _poolVenomizedCat,

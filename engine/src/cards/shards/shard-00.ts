@@ -74,6 +74,7 @@ import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
+import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
@@ -323,6 +324,7 @@ import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
+import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
@@ -455,6 +457,7 @@ const shard: CardShard = {
     _poolConversionApparatus,
     _poolCosmicCube,
     _poolCraterhoofBehemoth,
+    _poolCrescentIslandTemple,
     _poolCrosswayVampire,
     _poolCrushingCanopy,
     _poolCryptcallerChariot,
@@ -704,6 +707,7 @@ const shard: CardShard = {
     _poolTheComingOfGalactus,
     _poolTheMightstoneAndWeakstone,
     _poolTheMycotyrant,
+    _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
     _poolTheWindCrystal,
     _poolThirdPathSavant,

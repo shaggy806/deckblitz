@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangsIceberg from "../pool/aangs-iceberg.js";
 import _poolAardvarkSloth from "../pool/aardvark-sloth.js";
 import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
@@ -19,6 +20,7 @@ import _poolAngelOfVitality from "../pool/angel-of-vitality.js";
 import _poolAnguishedUnmaking from "../pool/anguished-unmaking.js";
 import _poolAnimalSanctuary from "../pool/animal-sanctuary.js";
 import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js";
+import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
@@ -345,6 +347,7 @@ import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
+import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
@@ -353,6 +356,7 @@ import _tokensSliverToken from "../tokens/sliver-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAangsIceberg,
     _poolAardvarkSloth,
     _poolAbbeyGargoyles,
     _poolAbzanBanner,
@@ -369,6 +373,7 @@ const shard: CardShard = {
     _poolAnguishedUnmaking,
     _poolAnimalSanctuary,
     _poolApostleOfPurifyingLight,
+    _poolAppaSteadfastGuardian,
     _poolArchersParapet,
     _poolArdentPlea,
     _poolArmoredCancrix,
@@ -697,6 +702,7 @@ const shard: CardShard = {
     _tokensAlienWarriorToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
+    _tokensHumanCitizenToken,
     _tokensIllusionTokenPlain,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,

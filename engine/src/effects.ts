@@ -2387,7 +2387,9 @@ export type EffectSpec =
       /** Scope the filter to a *targeted* player's permanents — Great Oak
        * Guardian's "creatures **target player** controls get +2/+2". A
        * `CardFilter`'s `controlledBy` only knows "you" and "opponent", which
-       * can't name one seat at a 3-4 player table. */
+       * can't name one seat at a 3-4 player table, so this makes the filter's
+       * "you" mean that player: **pair it with `controlledBy: "you"`** —
+       * without it the filter matches every player's creatures. */
       readonly controlledByTarget?: number;
     }
   | {

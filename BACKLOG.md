@@ -69,10 +69,13 @@ section keeps only what to do next.
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
   Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
-  Commander set (ECL, ECC) are done (batches 50–64). **Next: Avatar: The Last Airbender** (TLA,
-  2025-11-21: 30 left), then Marvel's Spider-Man (SPM, 41 left) — **a whole set per batch** (the
-  user's call, 2026-10-12: 4-5 agents with more cards each). Mayhem (56), rebound (57), teamwork
-  (58), the Nth-counter trigger (59), opus and sneak (61), blight (63) and behold (64) are built;
+  Commander set (ECL, ECC), Avatar: The Last Airbender (TLA) and Marvel's Spider-Man (SPM) are
+  done (batches 50–65). **Next: Edge of Eternities** (EOE, 2025-08-01: 53 left), then Final
+  Fantasy (FIN, 8 left) and Tarkir: Dragonstorm (TDM, 45 left) — **a whole set per batch**, two
+  when a set is small (the user's call, 2026-10-12: 4-5 agents with more cards each; batch 65
+  ran three feature agents in worktrees beside two authoring agents). Mayhem (56), rebound (57),
+  teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63), behold (64),
+  web-slinging, waterbend and airbend (65) are built;
   Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
@@ -116,7 +119,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack; attacking was fixed on 2026-10-07 (a counted attacking stack, `attackingStackPart`).
 - **A mandatory loop throws instead of drawing the game** (104.4b, 732.4): the room stops that game rather than the server going down, but it should be a draw.
-- **Blitz is offered only from the hand and the command zone** (702.152a).
+- **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
+- **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
 - **Changing a spell or ability's target** (115.7; Return the Favor).

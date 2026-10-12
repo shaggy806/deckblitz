@@ -22,6 +22,7 @@ import _poolArmoredGriffin from "../pool/armored-griffin.js";
 import _poolArmoredScrapgorger from "../pool/armored-scrapgorger.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
+import _poolAvatarsWrath from "../pool/avatars-wrath.js";
 import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
@@ -296,6 +297,7 @@ import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
+import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
@@ -388,6 +390,7 @@ const shard: CardShard = {
     _poolArmoredScrapgorger,
     _poolAtog,
     _poolAugmentingAutomaton,
+    _poolAvatarsWrath,
     _poolBalambTRexaur,
     _poolBallLightning,
     _poolBalothPrime,
@@ -662,6 +665,7 @@ const shard: CardShard = {
     _poolTeeterpeakAmbusher,
     _poolTelimtorsDarts,
     _poolTheBoulderReadyToRumble,
+    _poolTheDeathOfGwenStacy,
     _poolTheGooseMother,
     _poolThopterEngineer,
     _poolThopterFabricator,

@@ -184,6 +184,7 @@ import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
+import _poolMomoFriendlyFlier from "../pool/momo-friendly-flier.js";
 import _poolMotherBear from "../pool/mother-bear.js";
 import _poolMultiplyByZero from "../pool/multiply-by-zero.js";
 import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
@@ -196,6 +197,7 @@ import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
+import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
@@ -316,6 +318,7 @@ import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
 import _poolUnburialRites from "../pool/unburial-rites.js";
+import _poolUncleIroh from "../pool/uncle-iroh.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
@@ -540,6 +543,7 @@ const shard: CardShard = {
     _poolMireTriton,
     _poolMishrasWorkshop,
     _poolMoltenBlast,
+    _poolMomoFriendlyFlier,
     _poolMotherBear,
     _poolMultiplyByZero,
     _poolMurmuringBosk,
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolNecromanticSelection,
     _poolNecropolisRegent,
     _poolNightscapeFamiliar,
+    _poolNorthernAirTemple,
     _poolNyxbornMarauder,
     _poolOmenHawker,
     _poolOozeSpill,
@@ -672,6 +677,7 @@ const shard: CardShard = {
     _poolTyrantGuard,
     _poolUlvenwaldOddity,
     _poolUnburialRites,
+    _poolUncleIroh,
     _poolUntamedHunger,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,

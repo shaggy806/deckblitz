@@ -3,9 +3,11 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
+import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
@@ -92,6 +94,7 @@ import _poolDwarvenMattock from "../pool/dwarven-mattock.js";
 import _poolDwynensElite from "../pool/dwynens-elite.js";
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
 import _poolEaglesOfTheNorth from "../pool/eagles-of-the-north.js";
+import _poolEarthKingsLieutenant from "../pool/earth-kings-lieutenant.js";
 import _poolEasyPrey from "../pool/easy-prey.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
@@ -107,6 +110,7 @@ import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
 import _poolFetchQuest from "../pool/fetch-quest.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
+import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
@@ -362,9 +366,11 @@ import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-fl
 
 const shard: CardShard = {
   pool: [
+    _poolAangTheLastAirbender,
     _poolAbandonedOutpost,
     _poolAdeptWatershaper,
     _poolAdewaleBreakerOfChains,
+    _poolAirbendersReversal,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
     _poolAlabornCavalier,
@@ -451,6 +457,7 @@ const shard: CardShard = {
     _poolDwynensElite,
     _poolEagerFirstYear,
     _poolEaglesOfTheNorth,
+    _poolEarthKingsLieutenant,
     _poolEasyPrey,
     _poolEatToExtinction,
     _poolEfficientConstruction,
@@ -466,6 +473,7 @@ const shard: CardShard = {
     _poolFervor,
     _poolFetchQuest,
     _poolFieryConclusion,
+    _poolFireNationAttacks,
     _poolFixWhatsBroken,
     _poolFlameSpirit,
     _poolForerunnerOfTheLegion,

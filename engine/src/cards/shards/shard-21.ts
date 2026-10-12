@@ -330,6 +330,7 @@ import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
 import _tokensRagavanToken from "../tokens/ragavan-token.js";
+import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-nation-attacks.js";
 
 const shard: CardShard = {
   pool: [
@@ -662,6 +663,7 @@ const shard: CardShard = {
     _tokensPhyrexianGoblinToken,
     _tokensPlantWarriorToken,
     _tokensRagavanToken,
+    _tokensSoldierTokenFireNationAttacks,
   ],
 };
 

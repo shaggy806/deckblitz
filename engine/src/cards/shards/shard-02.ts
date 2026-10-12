@@ -267,6 +267,7 @@ import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
+import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
@@ -293,6 +294,7 @@ import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
+import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
@@ -621,6 +623,7 @@ const shard: CardShard = {
     _poolShalaiVoiceOfPlenty,
     _poolShatterskullGiant,
     _poolSickleRipper,
+    _poolSilkWebWeaver,
     _poolSimianSimulacrum,
     _poolSinisterStarfish,
     _poolSkeletalSnake,
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolStonecoilSerpent,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
+    _poolSukiKyoshiWarrior,
     _poolSulfurFalls,
     _poolSunmanePegasus,
     _poolSurtlandFrostpyre,

@@ -222,6 +222,7 @@ import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
+import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
@@ -290,6 +291,7 @@ import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
 import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
 import _poolSmelt from "../pool/smelt.js";
+import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
@@ -324,6 +326,7 @@ import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
+import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
 import _poolUnlikelyAid from "../pool/unlikely-aid.js";
@@ -594,6 +597,7 @@ const shard: CardShard = {
     _poolNecrogenesis,
     _poolNevinyrralsDisk,
     _poolNightveilPredator,
+    _poolNorthPolePatrol,
     _poolOakhameRanger,
     _poolObeliskOfEsper,
     _poolOpenTheArmory,
@@ -662,6 +666,7 @@ const shard: CardShard = {
     _poolSkyswirlHarrier,
     _poolSlagwurmArmor,
     _poolSmelt,
+    _poolSokkasHaiku,
     _poolSoulShred,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,
@@ -696,6 +701,7 @@ const shard: CardShard = {
     _poolToxicNim,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
+    _poolUltimateGreenGoblin,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
     _poolUnlikelyAid,

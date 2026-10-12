@@ -163,6 +163,7 @@ import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarokWrangler from "../pool/karok-wrangler.js";
+import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
@@ -207,6 +208,7 @@ import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
+import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
@@ -348,6 +350,7 @@ import _poolWallOfMulch from "../pool/wall-of-mulch.js";
 import _poolWallOfReverence from "../pool/wall-of-reverence.js";
 import _poolWarPriestOfThune from "../pool/war-priest-of-thune.js";
 import _poolWarScreecher from "../pool/war-screecher.js";
+import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
@@ -533,6 +536,7 @@ const shard: CardShard = {
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
     _poolKarokWrangler,
+    _poolKataraSeekingRevenge,
     _poolKelpieGuide,
     _poolKelsienThePlague,
     _poolKhenraSpellspear,
@@ -577,6 +581,7 @@ const shard: CardShard = {
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMoldervineReclamation,
+    _poolMorlunDevourerOfSpiders,
     _poolMorophonTheBoundless,
     _poolMuckRats,
     _poolMuddleTheMixture,
@@ -718,6 +723,7 @@ const shard: CardShard = {
     _poolWallOfReverence,
     _poolWarPriestOfThune,
     _poolWarScreecher,
+    _poolWaterbenderAscension,
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,

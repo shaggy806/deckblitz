@@ -67,6 +67,7 @@ import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
+import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
 import _poolDosansOldestChant from "../pool/dosans-oldest-chant.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
@@ -101,8 +102,10 @@ import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
 import _poolGemhideSliver from "../pool/gemhide-sliver.js";
 import _poolGeneralKreatTheBoltbringer from "../pool/general-kreat-the-boltbringer.js";
 import _poolGeralfsMessenger from "../pool/geralfs-messenger.js";
+import _poolGeyserLeaper from "../pool/geyser-leaper.js";
 import _poolGhaltaStampedeTyrant from "../pool/ghalta-stampede-tyrant.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
+import _poolGiantKoi from "../pool/giant-koi.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
@@ -296,6 +299,7 @@ import _poolSunshowerDruid from "../pool/sunshower-druid.js";
 import _poolSuspiciousBookcase from "../pool/suspicious-bookcase.js";
 import _poolSwiftResponse from "../pool/swift-response.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
+import _poolSymbioteSpiderMan from "../pool/symbiote-spider-man.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
 import _poolSyrGingerTheMealEnder from "../pool/syr-ginger-the-meal-ender.js";
 import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
@@ -450,6 +454,7 @@ const shard: CardShard = {
     _poolDisfigure,
     _poolDisplacerKitten,
     _poolDivineResilience,
+    _poolDocOcksTentacles,
     _poolDosansOldestChant,
     _poolDragonstorm,
     _poolDreadmalkin,
@@ -484,8 +489,10 @@ const shard: CardShard = {
     _poolGemhideSliver,
     _poolGeneralKreatTheBoltbringer,
     _poolGeralfsMessenger,
+    _poolGeyserLeaper,
     _poolGhaltaStampedeTyrant,
     _poolGhorClanWrecker,
+    _poolGiantKoi,
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
@@ -679,6 +686,7 @@ const shard: CardShard = {
     _poolSuspiciousBookcase,
     _poolSwiftResponse,
     _poolSwordOfFireAndIce,
+    _poolSymbioteSpiderMan,
     _poolSyphonSliver,
     _poolSyrGingerTheMealEnder,
     _poolTabaxiToucaneers,

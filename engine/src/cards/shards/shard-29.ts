@@ -77,6 +77,7 @@ import _poolDemolitionStomper from "../pool/demolition-stomper.js";
 import _poolDesertDrake from "../pool/desert-drake.js";
 import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
+import _poolDoctorOctopusMasterPlanner from "../pool/doctor-octopus-master-planner.js";
 import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
@@ -142,6 +143,7 @@ import _poolHiddenNursery from "../pool/hidden-nursery.js";
 import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
+import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
 import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
@@ -426,6 +428,7 @@ const shard: CardShard = {
     _poolDesertDrake,
     _poolDesolationTwin,
     _poolDispellingExhale,
+    _poolDoctorOctopusMasterPlanner,
     _poolDouserOfLights,
     _poolDrafnaFounderOfLatNam,
     _poolDragonsRageChanneler,
@@ -491,6 +494,7 @@ const shard: CardShard = {
     _poolHideousTaskmaster,
     _poolHithlainKnots,
     _poolHobbitHole,
+    _poolHowToStartARiot,
     _poolHulkingBugbear,
     _poolHungryLynx,
     _poolHuntersInsight,

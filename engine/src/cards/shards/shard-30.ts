@@ -31,6 +31,7 @@ import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
+import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
@@ -153,6 +154,7 @@ import _poolHarvesterOfSouls from "../pool/harvester-of-souls.js";
 import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
 import _poolHeadlessRider from "../pool/headless-rider.js";
 import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
+import _poolHeroesHangout from "../pool/heroes-hangout.js";
 import _poolHeroicStanza from "../pool/heroic-stanza.js";
 import _poolHexplateGolem from "../pool/hexplate-golem.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
@@ -286,6 +288,7 @@ import _poolSmugglersSurprise from "../pool/smugglers-surprise.js";
 import _poolSneeringShadewriter from "../pool/sneering-shadewriter.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
+import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
@@ -340,6 +343,8 @@ import _poolWanderersIntervention from "../pool/wanderers-intervention.js";
 import _poolWarleadersCall from "../pool/warleaders-call.js";
 import _poolWashOut from "../pool/wash-out.js";
 import _poolWatcherInTheMist from "../pool/watcher-in-the-mist.js";
+import _poolWaterWhip from "../pool/water-whip.js";
+import _poolWaterbendingScroll from "../pool/waterbending-scroll.js";
 import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
@@ -392,6 +397,7 @@ const shard: CardShard = {
     _poolBalothWoodcrasher,
     _poolBasimIbnIshaq,
     _poolBeetleformMage,
+    _poolBenevolentRiverSpirit,
     _poolBilboBirthdayCelebrant,
     _poolBlackPantherVanguard,
     _poolBlackbladeReforged,
@@ -514,6 +520,7 @@ const shard: CardShard = {
     _poolHavenOfTheHarvest,
     _poolHeadlessRider,
     _poolHeliodsPilgrim,
+    _poolHeroesHangout,
     _poolHeroicStanza,
     _poolHexplateGolem,
     _poolHopToIt,
@@ -647,6 +654,7 @@ const shard: CardShard = {
     _poolSneeringShadewriter,
     _poolSoltariPriest,
     _poolSoulcatchersAerie,
+    _poolSouthernAirTemple,
     _poolSpawningKraken,
     _poolSpinedThopter,
     _poolSpireMonitor,
@@ -701,6 +709,8 @@ const shard: CardShard = {
     _poolWarleadersCall,
     _poolWashOut,
     _poolWatcherInTheMist,
+    _poolWaterWhip,
+    _poolWaterbendingScroll,
     _poolWateryGrave,
     _poolWavebreakHippocamp,
     _poolWhiteSunsTwilight,

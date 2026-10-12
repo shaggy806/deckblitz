@@ -30,11 +30,18 @@ per gap under the same bold title; when a gap closes, delete it in both.
   ends that room's game alone, publishing why (`state.stopped`, a lasting toast for every
   seat). What's left is the rules: detecting the loop (the same state and stack recurring with
   only mandatory choices) and declaring the draw, rather than stopping on an error.
-- **Blitz is offered only from the hand and the command zone.** `Game.blitzCostOf` gates on
+- **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
+  limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
+  rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
   those two zones, so a blitz card another permission lets you cast (an impulse exile, a
   graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
   702.152a allows it. Henzie's discount also moves only a cost's generic number, never an `{X}`
   (no blitz cost in the pool has one yet).
+- **A multi-target flicker's leaves aren't one batch.** `Game.flickerByEffect` exiles each of its
+  objects in turn rather than inside `withLeaveBatch`, so a batched "whenever one or more … leave"
+  trigger would fire once per object for Brago or Eerie Interlude rather than once (rule 603.2c:
+  one event, one trigger). Nothing in the pool reads that batch yet; Aang, Airbending Master
+  (`trigger:leaves-batch-trigger`) will, so fix it with that trigger (found building airbend, batch 65).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
   (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast

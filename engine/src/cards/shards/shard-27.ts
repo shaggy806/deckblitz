@@ -197,6 +197,7 @@ import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMistDancer from "../pool/mist-dancer.js";
 import _poolMnemonicDeluge from "../pool/mnemonic-deluge.js";
 import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
+import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
@@ -272,13 +273,16 @@ import _poolSlagStrider from "../pool/slag-strider.js";
 import _poolSlagstorm from "../pool/slagstorm.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
+import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
 import _poolSokkaWolfCovesProtector from "../pool/sokka-wolf-coves-protector.js";
+import _poolSolsticeRevelations from "../pool/solstice-revelations.js";
 import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
+import _poolSpiderSense from "../pool/spider-sense.js";
 import _poolSpinalVillain from "../pool/spinal-villain.js";
 import _poolSpinerockKnoll from "../pool/spinerock-knoll.js";
 import _poolSpiritedCompanion from "../pool/spirited-companion.js";
@@ -362,6 +366,7 @@ import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
+import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
 import _poolZendikarsRoil from "../pool/zendikars-roil.js";
 import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
@@ -571,6 +576,7 @@ const shard: CardShard = {
     _poolMistDancer,
     _poolMnemonicDeluge,
     _poolMoltenGatekeeper,
+    _poolMomoPlayfulPet,
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
     _poolMosscoatGoriak,
@@ -646,13 +652,16 @@ const shard: CardShard = {
     _poolSlagstorm,
     _poolSlinkingSkirge,
     _poolSnappingCreeper,
+    _poolSokkaLateralStrategist,
     _poolSokkaWolfCovesProtector,
+    _poolSolsticeRevelations,
     _poolSoulreaperOfMogis,
     _poolSoulsMajesty,
     _poolSoulswornJury,
     _poolSparkElemental,
     _poolSpellbookSeeker,
     _poolSphinxMindbreaker,
+    _poolSpiderSense,
     _poolSpinalVillain,
     _poolSpinerockKnoll,
     _poolSpiritedCompanion,
@@ -736,6 +745,7 @@ const shard: CardShard = {
     _poolWorldBreaker,
     _poolWrapInVigor,
     _poolYotianMedic,
+    _poolYueTheMoonSpirit,
     _poolZendikarsRoil,
     _poolZhurTaaSwine,
     _poolZiatorasProvingGround,

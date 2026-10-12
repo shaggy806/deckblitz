@@ -80,13 +80,13 @@ export default defineCard({
           effects: [
             {
               kind: "modify-pt-all",
-              filter: { type: "creature" },
+              filter: { type: "creature", controlledBy: "you" },
               controlledByTarget: 0,
               power: 3,
               toughness: 3,
               duration: "end-of-turn",
             },
-            { kind: "untap-all", filter: { type: "creature" }, controlledByTarget: 0 },
+            { kind: "untap-all", filter: { type: "creature", controlledBy: "you" }, controlledByTarget: 0 },
           ],
         },
       },

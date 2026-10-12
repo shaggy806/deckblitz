@@ -26,6 +26,7 @@ import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
+import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
 import _poolBenthicDjinn from "../pool/benthic-djinn.js";
 import _poolBigScore from "../pool/big-score.js";
@@ -314,6 +315,7 @@ import _poolWardscaleCrocodile from "../pool/wardscale-crocodile.js";
 import _poolWarpathGhoul from "../pool/warpath-ghoul.js";
 import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
+import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
@@ -355,6 +357,7 @@ const shard: CardShard = {
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
+    _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
     _poolBenthicDjinn,
     _poolBigScore,
@@ -643,6 +646,7 @@ const shard: CardShard = {
     _poolWarpathGhoul,
     _poolWarpedLandscape,
     _poolWatcherForTomorrow,
+    _poolWaterTribeRallier,
     _poolWebWarriors,
     _poolWindriderEel,
     _poolWindurstFederationCenter,

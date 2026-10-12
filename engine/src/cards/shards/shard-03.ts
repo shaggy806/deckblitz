@@ -154,6 +154,7 @@ import _poolKravensCats from "../pool/kravens-cats.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
+import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
@@ -257,6 +258,7 @@ import _poolSparkmageApprentice from "../pool/sparkmage-apprentice.js";
 import _poolSpectralDeluge from "../pool/spectral-deluge.js";
 import _poolSpectralSailor from "../pool/spectral-sailor.js";
 import _poolSpellSnip from "../pool/spell-snip.js";
+import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
@@ -492,6 +494,7 @@ const shard: CardShard = {
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
     _poolLiberatedDwarf,
+    _poolLizardConnorssCurse,
     _poolLlanowarTribe,
     _poolLokhustHeavyDestroyer,
     _poolLoxodonMystic,
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolSpectralDeluge,
     _poolSpectralSailor,
     _poolSpellSnip,
+    _poolSpiderManNoir,
     _poolSpikedCorridor,
     _poolSplendidReclamation,
     _poolStarlitAngel,

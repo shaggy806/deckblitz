@@ -32,6 +32,7 @@ import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
+import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
 import _poolBloodPact from "../pool/blood-pact.js";
@@ -121,6 +122,7 @@ import _poolFieryHellhound from "../pool/fiery-hellhound.js";
 import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
+import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
@@ -165,6 +167,7 @@ import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
+import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
@@ -265,6 +268,7 @@ import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
+import _poolSecretIdentity from "../pool/secret-identity.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
@@ -282,6 +286,7 @@ import _poolSoporificSprings from "../pool/soporific-springs.js";
 import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
+import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
@@ -358,6 +363,7 @@ import _tokensEldraziHorrorToken from "../tokens/eldrazi-horror-token.js";
 import _tokensGolemTrampleToken from "../tokens/golem-trample-token.js";
 import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
+import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
@@ -393,6 +399,7 @@ const shard: CardShard = {
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
+    _poolBiorganicCarapace,
     _poolBiteDown,
     _poolBlazemireVerge,
     _poolBloodPact,
@@ -482,6 +489,7 @@ const shard: CardShard = {
     _poolFireNationSentinels,
     _poolFireslinger,
     _poolFlamekinBrawler,
+    _poolFlexibleWaterbender,
     _poolFlowstoneHellion,
     _poolFlyingCarpet,
     _poolFogOfGnats,
@@ -526,6 +534,7 @@ const shard: CardShard = {
     _poolImprovisedAct,
     _poolInfiltratorIlKor,
     _poolInstantRamen,
+    _poolInvasionSubmersible,
     _poolIsolatedChapel,
     _poolIzzetLocket,
     _poolJadecraftArtisan,
@@ -626,6 +635,7 @@ const shard: CardShard = {
     _poolSeaOfClouds,
     _poolSealOfRemoval,
     _poolSecludedCourtyard,
+    _poolSecretIdentity,
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSharedRoots,
@@ -643,6 +653,7 @@ const shard: CardShard = {
     _poolSoulstoneSanctuary,
     _poolSpawningPit,
     _poolSphinxSummoner,
+    _poolSpiderGwenFreeSpirit,
     _poolSpikedCorridorTorturePit,
     _poolSpinalCentipede,
     _poolSpontaneousCombustion,
@@ -721,6 +732,7 @@ const shard: CardShard = {
     _tokensGolemTrampleToken,
     _tokensHumanWarriorToken,
     _tokensMerfolkTokenSilvergillMentor,
+    _tokensMonkTokenCrescentIslandTemple,
     _tokensPegasusToken22,
     _tokensSpiritToken,
     _tokensVillainToken,

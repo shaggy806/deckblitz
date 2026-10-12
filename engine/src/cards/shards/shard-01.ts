@@ -181,6 +181,7 @@ import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
+import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
@@ -523,6 +524,7 @@ const shard: CardShard = {
     _poolMindRavel,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
+    _poolMonkGyatso,
     _poolMoonBlessedCleric,
     _poolMorcantsEyes,
     _poolMountainGoat,

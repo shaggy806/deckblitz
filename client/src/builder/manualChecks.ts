@@ -2653,6 +2653,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Scarlet Spider, Ben Reilly, Spiders-Man, Heroic Horde',
+    board({
+      you: {
+        bf: [{ name: 'Hill Giant', tapped: true }, { name: 'Grizzly Bears', tapped: true }, 'Mountain*3', 'Forest*5'],
+        hand: ['Scarlet Spider, Ben Reilly', 'Spiders-Man, Heroic Horde'],
+      },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
+    'Geyser Leaper, Water Whip',
+    board({
+      you: { bf: ['Geyser Leaper', 'Ornithopter', 'Sol Ring', 'Grizzly Bears', 'Island*4'], hand: ['Water Whip'] },
+      opp: { bf: ['Hill Giant', 'Grizzly Bears', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
+    "Airbending Lesson, Avatar's Wrath",
+    board({
+      you: { bf: ['Grizzly Bears', 'Plains*7'], hand: ['Airbending Lesson', "Avatar's Wrath"] },
+      opp: { bf: ['Hill Giant', 'Craw Wurm', 'Island', 'Swamp', 'Mountain'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

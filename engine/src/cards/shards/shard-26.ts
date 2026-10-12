@@ -149,6 +149,7 @@ import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
+import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
@@ -265,6 +266,7 @@ import _poolSoltariMonk from "../pool/soltari-monk.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
+import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
@@ -494,6 +496,7 @@ const shard: CardShard = {
     _poolJeditOjanen,
     _poolJosuVessLichKnight,
     _poolKangeeSkyWarden,
+    _poolKataraWaterTribesHope,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKhalniAmbush,
@@ -610,6 +613,7 @@ const shard: CardShard = {
     _poolSorinsThirst,
     _poolSpearSpewer,
     _poolSpectralReserves,
+    _poolSpiderManIndia,
     _poolSporeSwarm,
     _poolSpringmaneCervin,
     _poolSquiresDevotion,

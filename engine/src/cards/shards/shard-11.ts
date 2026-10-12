@@ -153,6 +153,7 @@ import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
 import _poolHoardSmelterDragon from "../pool/hoard-smelter-dragon.js";
+import _poolHobgoblinMantledMarauder from "../pool/hobgoblin-mantled-marauder.js";
 import _poolHonoredHeirloom from "../pool/honored-heirloom.js";
 import _poolHookHauntDrifter from "../pool/hook-haunt-drifter.js";
 import _poolHovermyr from "../pool/hovermyr.js";
@@ -360,6 +361,7 @@ import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
 import _poolUnfriendlyFire from "../pool/unfriendly-fire.js";
+import _poolUnluckyCabbageMerchant from "../pool/unlucky-cabbage-merchant.js";
 import _poolUnwelcomeSprite from "../pool/unwelcome-sprite.js";
 import _poolUrabrasksForge from "../pool/urabrasks-forge.js";
 import _poolUrborgElf from "../pool/urborg-elf.js";
@@ -377,6 +379,7 @@ import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
 import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
+import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
 import _poolWildJhovall from "../pool/wild-jhovall.js";
 import _poolWirewoodSymbiote from "../pool/wirewood-symbiote.js";
@@ -554,6 +557,7 @@ const shard: CardShard = {
     _poolHitchclawRecluse,
     _poolHoardRobber,
     _poolHoardSmelterDragon,
+    _poolHobgoblinMantledMarauder,
     _poolHonoredHeirloom,
     _poolHookHauntDrifter,
     _poolHovermyr,
@@ -761,6 +765,7 @@ const shard: CardShard = {
     _poolUndeadWarchief,
     _poolUndergroundMortuary,
     _poolUnfriendlyFire,
+    _poolUnluckyCabbageMerchant,
     _poolUnwelcomeSprite,
     _poolUrabrasksForge,
     _poolUrborgElf,
@@ -778,6 +783,7 @@ const shard: CardShard = {
     _poolWayOfTheMentor,
     _poolWaywardGiant,
     _poolWhiptongueHydra,
+    _poolWhirlwindTechnique,
     _poolWieldingTheGreenDragon,
     _poolWildJhovall,
     _poolWirewoodSymbiote,

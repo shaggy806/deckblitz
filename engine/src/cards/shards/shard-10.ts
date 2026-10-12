@@ -9,6 +9,7 @@ import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
 import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
+import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
@@ -226,6 +227,7 @@ import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRacersRing from "../pool/racers-ring.js";
+import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
 import _poolReconCraftTheta from "../pool/recon-craft-theta.js";
@@ -375,6 +377,7 @@ const shard: CardShard = {
     _poolAerithLastAncient,
     _poolAgentPhilCoulson,
     _poolAjaniOutlandChaperone,
+    _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
     _poolAncestralCraving,
     _poolAncestralVengeance,
@@ -592,6 +595,7 @@ const shard: CardShard = {
     _poolPunkFrogs,
     _poolQuantumMisalignment,
     _poolRacersRing,
+    _poolRanAndShaw,
     _poolRavenousRats,
     _poolRealmwalker,
     _poolReconCraftTheta,

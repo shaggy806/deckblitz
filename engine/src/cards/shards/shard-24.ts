@@ -15,6 +15,7 @@ import _poolAgentOfTreachery from "../pool/agent-of-treachery.js";
 import _poolAggressiveMammoth from "../pool/aggressive-mammoth.js";
 import _poolAggressiveUrge from "../pool/aggressive-urge.js";
 import _poolAgoraphobia from "../pool/agoraphobia.js";
+import _poolAirbendingLesson from "../pool/airbending-lesson.js";
 import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
@@ -227,6 +228,7 @@ import _poolRhoxBrute from "../pool/rhox-brute.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
+import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
@@ -286,6 +288,7 @@ import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
+import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
 import _poolTheWorldTree from "../pool/the-world-tree.js";
 import _poolThornado from "../pool/thornado.js";
@@ -363,6 +366,7 @@ const shard: CardShard = {
     _poolAggressiveMammoth,
     _poolAggressiveUrge,
     _poolAgoraphobia,
+    _poolAirbendingLesson,
     _poolAlaniaDivergentStorm,
     _poolAlchemistsApprentice,
     _poolAncestorsAid,
@@ -575,6 +579,7 @@ const shard: CardShard = {
     _poolRikuOfManyPaths,
     _poolRisenSanctuary,
     _poolRoccoCabarettiCaterer,
+    _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
     _poolRootwaterDiver,
     _poolRotcrownGhoul,
@@ -634,6 +639,7 @@ const shard: CardShard = {
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
     _poolTheNotaryHobbits,
+    _poolTheSpotsPortal,
     _poolTheTarrasque,
     _poolTheWorldTree,
     _poolThornado,

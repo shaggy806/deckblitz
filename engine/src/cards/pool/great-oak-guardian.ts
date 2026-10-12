@@ -21,10 +21,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            // `controlledByTarget` names a seat; a `CardFilter`'s
-            // `controlledBy` only knows "you" and "opponent".
+            // `controlledByTarget` makes the filter's "you" mean the target
+            // player — it narrows nothing without `controlledBy: "you"`.
             kind: "modify-pt-all",
-            filter: { type: "creature" },
+            filter: { type: "creature", controlledBy: "you" },
             controlledByTarget: 0,
             power: 2,
             toughness: 2,
@@ -32,7 +32,7 @@ export default defineCard({
           },
           {
             kind: "untap-all",
-            filter: { type: "creature" },
+            filter: { type: "creature", controlledBy: "you" },
             controlledByTarget: 0,
           },
         ],

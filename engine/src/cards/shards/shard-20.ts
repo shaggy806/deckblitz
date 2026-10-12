@@ -9,6 +9,7 @@ import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
 import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "../pool/affa-guard-hound.js";
+import _poolAirbenderAscension from "../pool/airbender-ascension.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
 import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
@@ -180,6 +181,7 @@ import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
+import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
@@ -409,6 +411,7 @@ const shard: CardShard = {
     _poolAetherChanneler,
     _poolAeveProgenitorOoze,
     _poolAffaGuardHound,
+    _poolAirbenderAscension,
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
     _poolAleshasLegacy,
@@ -580,6 +583,7 @@ const shard: CardShard = {
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
     _poolKarametrasAcolyte,
+    _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKindlyCustomer,
     _poolKrangUtromWarlord,

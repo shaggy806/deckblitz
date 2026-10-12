@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3519 already implemented / 1481 missing (marks refreshed 2026-10-12)
+3527 already implemented / 1473 missing (marks refreshed 2026-10-12)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1601,7 +1601,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1608  End-Raze Forerunners                     {5}{G}{G}{G}     Creature — Boar
 [ ]  1609  Thran Power Suit                         {2}              Artifact — Equipment
 [x]  1610  Electrostatic Field                      {1}{R}           Creature — Wall
-[ ]  1611  Avatar's Wrath                           {2}{W}{W}        Sorcery
+[x]  1611  Avatar's Wrath                           {2}{W}{W}        Sorcery
 [x]  1612  Cryptic Command                          {1}{U}{U}{U}     Instant
 [x]  1613  Consuming Aberration                     {3}{U}{B}        Creature — Horror
 [x]  1614  Unmarked Grave                           {1}{B}           Sorcery
@@ -2392,7 +2392,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2399  Berserkers' Onslaught                    {3}{R}{R}        Enchantment
 [x]  2400  Shivan Gorge                             {0}              Legendary Land
 [x]  2401  Zealous Conscripts                       {4}{R}           Creature — Human Warrior
-[ ]  2402  Airbender Ascension                      {1}{W}           Enchantment
+[x]  2402  Airbender Ascension                      {1}{W}           Enchantment
 [ ]  2403  Professor Onyx                           {4}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2404  Endbringer                               {5}{C}           Creature — Eldrazi
 [ ]  2405  Mimic Vat                                {3}              Artifact
@@ -2931,7 +2931,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2938  Angel of Destiny                         {3}{W}{W}        Creature — Angel Cleric
 [x]  2939  Necroskitter                             {1}{B}{B}        Creature — Elemental
 [ ]  2940  Beacon of Immortality                    {5}{W}           Instant
-[ ]  2941  Spider-Sense                             {1}{U}           Instant
+[x]  2941  Spider-Sense                             {1}{U}           Instant
 [x]  2942  The Goose Mother                         {X}{G}{U}        Legendary Creature — Bird Hydra
 [x]  2943  Jolrael, Mwonvuli Recluse                {1}{G}           Legendary Creature — Human Druid
 [ ]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
@@ -3062,7 +3062,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3069  Legion Lieutenant                        {W}{B}           Creature — Vampire Knight
 [x]  3070  Blinkmoth Nexus                          {0}              Land
 [x]  3071  Selfless Savior                          {W}              Creature — Dog
-[ ]  3072  Appa, Steadfast Guardian                 {2}{W}{W}        Legendary Creature — Bison Ally
+[x]  3072  Appa, Steadfast Guardian                 {2}{W}{W}        Legendary Creature — Bison Ally
 [x]  3073  The Legend of Kyoshi // Avatar Kyoshi    {6}              Enchantment — Saga // Legendary Creature — Avatar
 [x]  3074  Ravenous Squirrel                        {B/G}            Creature — Squirrel
 [ ]  3075  Abyssal Harvester                        {1}{B}{B}        Creature — Demon Warlock
@@ -3778,7 +3778,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3785  Llanowar Visionary                       {2}{G}           Creature — Elf Druid
 [ ]  3786  Dark Petition                            {3}{B}{B}        Sorcery
 [ ]  3787  Joshua, Phoenix's Dominant // Phoenix, Warden of Fire {3}              Legendary Creature — Human Noble Wizard // Legendary Enchantment Creature — Saga Phoenix
-[ ]  3788  Waterbender Ascension                    {1}{U}           Enchantment
+[x]  3788  Waterbender Ascension                    {1}{U}           Enchantment
 [ ]  3789  Blessed Respite                          {1}{G}           Instant
 [x]  3790  Goldnight Commander                      {3}{W}           Creature — Human Cleric Soldier
 [x]  3791  White Auracite                           {2}{W}{W}        Artifact
@@ -4023,7 +4023,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4030  Empowered Autogenerator                  {4}              Artifact
 [x]  4031  Baloth Prime                             {3}{G}           Creature — Beast
 [x]  4032  Virus Beetle                             {1}{B}           Artifact Creature — Insect
-[ ]  4033  Airbending Lesson                        {2}{W}           Instant — Lesson
+[x]  4033  Airbending Lesson                        {2}{W}           Instant — Lesson
 [x]  4034  Ajani's Chosen                           {2}{W}{W}        Creature — Cat Soldier
 [x]  4035  Bag of Holding                           {1}              Artifact
 [x]  4036  Lotus Bloom                              {0}              Artifact
@@ -4238,7 +4238,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4245  Neyith of the Dire Hunt                  {2}{G}{G}        Legendary Creature — Human Warrior
 [x]  4246  Herd Baloth                              {3}{G}{G}        Creature — Beast
 [x]  4247  Manakin                                  {2}              Artifact Creature — Construct
-[ ]  4248  Airbender's Reversal                     {1}{W}           Instant — Lesson
+[x]  4248  Airbender's Reversal                     {1}{W}           Instant — Lesson
 [ ]  4249  Subtlety                                 {2}{U}{U}        Creature — Elemental Incarnation
 [ ]  4250  The Gitrog, Ravenous Ride                {3}{B}{G}        Legendary Creature — Frog Horror Mount
 [ ]  4251  Firemind Vessel                          {4}              Artifact
@@ -4584,7 +4584,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4591  RMS Titanic                              {3}{R}           Legendary Artifact — Vehicle
 [x]  4592  Electrickery                             {R}              Instant
 [ ]  4593  Thran Portal                             {0}              Land — Gate
-[ ]  4594  Katara, Water Tribe's Hope               {2}{W}{U}{U}     Legendary Creature — Human Warrior Ally
+[x]  4594  Katara, Water Tribe's Hope               {2}{W}{U}{U}     Legendary Creature — Human Warrior Ally
 [x]  4595  Grim Affliction                          {2}{B}           Instant
 [ ]  4596  Endless Evil                             {2}{U}           Enchantment — Aura
 [x]  4597  Ghostfire Slice                          {2}{R}           Instant

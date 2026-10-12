@@ -4477,3 +4477,44 @@ stack count once per token)
   whether to behold a Jace (choosing none is allowed) and enters untapped only if you do. Bob never sees
   which hand cards were eligible, only the one revealed.
 - **Known limits:** A permanent beheld on the battlefield gets no log line of its own.
+
+### Scarlet Spider, Ben Reilly, Spiders-Man, Heroic Horde
+
+*New player decision* — web-slinging (rule 702.188): an alternative cost returning a tapped creature you control to hand
+
+- **Setup:** Your precombat main. Your battlefield: Hill Giant and Grizzly Bears, both tapped, three Mountains and
+  five Forests. Your hand: Scarlet Spider, Ben Reilly and Spiders-Man, Heroic Horde. Bob: three lands.
+- **Do:** Cast Scarlet Spider with web-slinging, returning Hill Giant. Then cast Spiders-Man with web-slinging,
+  returning Grizzly Bears.
+- **Check:** Each card's cast menu offers its normal cast and one "(web-slinging, returning …)" entry per tapped
+  creature — never an untapped one. Scarlet Spider costs {R}{G}, Hill Giant goes to your hand, and Scarlet
+  Spider enters with four +1/+1 counters (Hill Giant's mana value). Spiders-Man costs {4}{G}{G}; you gain 3 life
+  and get two 2/1 green Spiders with reach. Cast normally, neither gets its bonus.
+- **Known limits:** Web-slinging (like sneak and blitz) is offered only from the hand and the command zone.
+
+### Geyser Leaper, Water Whip
+
+*New player decision* — waterbend (rule 701.67): tapping artifacts and creatures to pay a waterbend cost's generic mana
+
+- **Setup:** Your precombat main. Your battlefield: Geyser Leaper, Ornithopter, Sol Ring, Grizzly Bears and four
+  Islands. Your hand: Water Whip. Bob: Hill Giant, Grizzly Bears and three lands.
+- **Do:** Activate Geyser Leaper's "Waterbend {4}", tapping Ornithopter, Sol Ring, Grizzly Bears and Geyser
+  Leaper itself. Next turn, cast Water Whip on Bob's two creatures, paying {U}{U} from Islands and the
+  waterbend {5} with two Islands and three taps.
+- **Check:** The banner says "waterbend — tap up to N artifacts or creatures to pay {1} each" and your
+  artifacts and creatures light up on the board (not Bob's, not lands); each click toggles one, and the
+  confirm reads "Waterbend n" or "Pay with mana". The tapped permanents tap; the rest is paid from your
+  lands. Water Whip's {U}{U} can't be paid by tapping creatures.
+- **Known limits:** None known.
+
+### Airbending Lesson, Avatar's Wrath
+
+*Careful rules call* — airbend (rule 701.65): exiled, and castable by its owner for {2} while it stays exiled
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears and seven Plains. Your hand: Airbending Lesson
+  and Avatar's Wrath. Bob: Hill Giant, Craw Wurm, an Island, a Swamp and a Mountain.
+- **Do:** Cast Airbending Lesson on Bob's Craw Wurm. Then cast Avatar's Wrath, choosing your Grizzly Bears.
+- **Check:** Craw Wurm goes to Bob's exile; sitting at Bob's seat, his exile viewer offers "Cast (airbend)" for
+  {2} (you aren't offered it — it's his card). Avatar's Wrath exiles Hill Giant but not your Bears, and exiles
+  itself; until your next turn Bob can't cast either creature from exile, then he can for {2} each.
+- **Known limits:** Airbending a spell on the stack isn't built (no card in the pool does it).

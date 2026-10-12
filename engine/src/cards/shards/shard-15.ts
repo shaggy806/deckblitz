@@ -166,6 +166,7 @@ import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
 import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
 import _poolKitchen from "../pool/kitchen.js";
+import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLamentation from "../pool/lamentation.js";
 import _poolLanternKami from "../pool/lantern-kami.js";
 import _poolLarderZombie from "../pool/larder-zombie.js";
@@ -277,6 +278,7 @@ import _poolSoulWarden from "../pool/soul-warden.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
 import _poolSpellscornCoven from "../pool/spellscorn-coven.js";
 import _poolSpellstutterSprite from "../pool/spellstutter-sprite.js";
+import _poolSpiderUk from "../pool/spider-uk.js";
 import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
@@ -331,6 +333,7 @@ import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWardenOfTheEye from "../pool/warden-of-the-eye.js";
 import _poolWayOfTheHealer from "../pool/way-of-the-healer.js";
 import _poolWeatherseedElf from "../pool/weatherseed-elf.js";
+import _poolWebOfLifeAndDestiny from "../pool/web-of-life-and-destiny.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
@@ -515,6 +518,7 @@ const shard: CardShard = {
     _poolKetriaTriome,
     _poolKiloApogeeMind,
     _poolKitchen,
+    _poolKyoshiIslandPlaza,
     _poolLamentation,
     _poolLanternKami,
     _poolLarderZombie,
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolSpartanVeteran,
     _poolSpellscornCoven,
     _poolSpellstutterSprite,
+    _poolSpiderUk,
     _poolSpincrusher,
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
@@ -680,6 +685,7 @@ const shard: CardShard = {
     _poolWardenOfTheEye,
     _poolWayOfTheHealer,
     _poolWeatherseedElf,
+    _poolWebOfLifeAndDestiny,
     _poolWorthyKnight,
     _poolWurmcoilEngine,
     _poolYoungPyromancer,

@@ -230,12 +230,16 @@ import _poolRelentlessHunter from "../pool/relentless-hunter.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
+import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRunewing from "../pool/runewing.js";
+import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
+import _poolSandmanShiftingScoundrel from "../pool/sandman-shifting-scoundrel.js";
 import _poolSarcomiteMyr from "../pool/sarcomite-myr.js";
 import _poolSatyrEnchanter from "../pool/satyr-enchanter.js";
 import _poolSavannahLions from "../pool/savannah-lions.js";
+import _poolScarletSpiderBenReilly from "../pool/scarlet-spider-ben-reilly.js";
 import _poolScavengedBrawler from "../pool/scavenged-brawler.js";
 import _poolScepterOfFugue from "../pool/scepter-of-fugue.js";
 import _poolScrap from "../pool/scrap.js";
@@ -291,6 +295,7 @@ import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
+import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
@@ -341,6 +346,7 @@ import _poolWarrenElder from "../pool/warren-elder.js";
 import _poolWaryOkapi from "../pool/wary-okapi.js";
 import _poolWastes from "../pool/wastes.js";
 import _poolWatchfulGiant from "../pool/watchful-giant.js";
+import _poolWaterbendersRestoration from "../pool/waterbenders-restoration.js";
 import _poolWearDown from "../pool/wear-down.js";
 import _poolWellOfIdeas from "../pool/well-of-ideas.js";
 import _poolWerebear from "../pool/werebear.js";
@@ -602,12 +608,16 @@ const shard: CardShard = {
     _poolResoluteRider,
     _poolRiftSower,
     _poolRipApart,
+    _poolRiskyResearch,
     _poolRunewing,
+    _poolRuthlessWaterbender,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
+    _poolSandmanShiftingScoundrel,
     _poolSarcomiteMyr,
     _poolSatyrEnchanter,
     _poolSavannahLions,
+    _poolScarletSpiderBenReilly,
     _poolScavengedBrawler,
     _poolScepterOfFugue,
     _poolScrap,
@@ -663,6 +673,7 @@ const shard: CardShard = {
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,
     _poolTheEarthCrystal,
+    _poolTheMechanistAerialArtisan,
     _poolThirstingRoots,
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
@@ -713,6 +724,7 @@ const shard: CardShard = {
     _poolWaryOkapi,
     _poolWastes,
     _poolWatchfulGiant,
+    _poolWaterbendersRestoration,
     _poolWearDown,
     _poolWellOfIdeas,
     _poolWerebear,

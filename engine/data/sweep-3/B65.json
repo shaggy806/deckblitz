@@ -1,0 +1,783 @@
+{
+ "batch": "B65",
+ "status": "complete",
+ "ranks": "Avatar: The Last Airbender (TLA, 2025-11-21) and Marvel's Spider-Man (SPM, 2025-09-26): top 50% by EDHREC rank, each set's last (TLA and SPM done) — two whole sets; with web-slinging, waterbend and airbend built and every card each unblocked",
+ "authored": [
+  {
+   "name": "The Mechanist, Aerial Artisan",
+   "files": [
+    "engine/src/cards/pool/the-mechanist-aerial-artisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solstice Revelations",
+   "files": [
+    "engine/src/cards/pool/solstice-revelations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "How to Start a Riot",
+   "files": [
+    "engine/src/cards/pool/how-to-start-a-riot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momo, Friendly Flier",
+   "files": [
+    "engine/src/cards/pool/momo-friendly-flier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suki, Kyoshi Warrior",
+   "files": [
+    "engine/src/cards/pool/suki-kyoshi-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Spirit Oasis",
+   "files": [
+    "engine/src/cards/pool/the-spirit-oasis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Southern Air Temple",
+   "files": [
+    "engine/src/cards/pool/southern-air-temple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Northern Air Temple",
+   "files": [
+    "engine/src/cards/pool/northern-air-temple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kyoshi Island Plaza",
+   "files": [
+    "engine/src/cards/pool/kyoshi-island-plaza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crescent Island Temple",
+   "files": [
+    "engine/src/cards/pool/crescent-island-temple.ts",
+    "engine/src/cards/tokens/monk-token-crescent-island-temple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation Attacks",
+   "files": [
+    "engine/src/cards/pool/fire-nation-attacks.ts",
+    "engine/src/cards/tokens/soldier-token-fire-nation-attacks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth King's Lieutenant",
+   "files": [
+    "engine/src/cards/pool/earth-kings-lieutenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterbending Scroll",
+   "files": [
+    "engine/src/cards/pool/waterbending-scroll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokka, Lateral Strategist",
+   "files": [
+    "engine/src/cards/pool/sokka-lateral-strategist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rocky Rebuke",
+   "files": [
+    "engine/src/cards/pool/rocky-rebuke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unlucky Cabbage Merchant",
+   "files": [
+    "engine/src/cards/pool/unlucky-cabbage-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun Warriors",
+   "files": [
+    "engine/src/cards/pool/sun-warriors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sokka's Haiku",
+   "files": [
+    "engine/src/cards/pool/sokkas-haiku.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ran and Shaw",
+   "files": [
+    "engine/src/cards/pool/ran-and-shaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uncle Iroh",
+   "files": [
+    "engine/src/cards/pool/uncle-iroh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beifong's Bounty Hunters",
+   "files": [
+    "engine/src/cards/pool/beifongs-bounty-hunters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momo, Playful Pet",
+   "files": [
+    "engine/src/cards/pool/momo-playful-pet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultimate Green Goblin",
+   "files": [
+    "engine/src/cards/pool/ultimate-green-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Web of Life and Destiny",
+   "files": [
+    "engine/src/cards/pool/web-of-life-and-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Risky Research",
+   "files": [
+    "engine/src/cards/pool/risky-research.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spider-Bot",
+   "files": [
+    "engine/src/cards/pool/spider-bot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Web Up",
+   "files": [
+    "engine/src/cards/pool/web-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Spot's Portal",
+   "files": [
+    "engine/src/cards/pool/the-spots-portal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doctor Octopus, Master Planner",
+   "files": [
+    "engine/src/cards/pool/doctor-octopus-master-planner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morlun, Devourer of Spiders",
+   "files": [
+    "engine/src/cards/pool/morlun-devourer-of-spiders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hobgoblin, Mantled Marauder",
+   "files": [
+    "engine/src/cards/pool/hobgoblin-mantled-marauder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Gwen, Free Spirit",
+   "files": [
+    "engine/src/cards/pool/spider-gwen-free-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroes' Hangout",
+   "files": [
+    "engine/src/cards/pool/heroes-hangout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Death of Gwen Stacy",
+   "files": [
+    "engine/src/cards/pool/the-death-of-gwen-stacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biorganic Carapace",
+   "files": [
+    "engine/src/cards/pool/biorganic-carapace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doc Ock's Tentacles",
+   "files": [
+    "engine/src/cards/pool/doc-ocks-tentacles.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rocket-Powered Goblin Glider",
+   "files": [
+    "engine/src/cards/pool/rocket-powered-goblin-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandman, Shifting Scoundrel",
+   "files": [
+    "engine/src/cards/pool/sandman-shifting-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lizard, Connors's Curse",
+   "files": [
+    "engine/src/cards/pool/lizard-connorss-curse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secret Identity",
+   "files": [
+    "engine/src/cards/pool/secret-identity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "J. Jonah Jameson",
+   "files": [
+    "engine/src/cards/pool/j-jonah-jameson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man Noir",
+   "files": [
+    "engine/src/cards/pool/spider-man-noir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unstable Experiment",
+   "files": [
+    "engine/src/cards/pool/unstable-experiment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Symbiote Spider-Man",
+   "files": [
+    "engine/src/cards/pool/symbiote-spider-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarlet Spider, Ben Reilly",
+   "files": [
+    "engine/src/cards/pool/scarlet-spider-ben-reilly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silk, Web Weaver",
+   "files": [
+    "engine/src/cards/pool/silk-web-weaver.ts",
+    "engine/src/cards/tokens/human-citizen-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man India",
+   "files": [
+    "engine/src/cards/pool/spider-man-india.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-UK",
+   "files": [
+    "engine/src/cards/pool/spider-uk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiders-Man, Heroic Horde",
+   "files": [
+    "engine/src/cards/pool/spiders-man-heroic-horde.ts",
+    "engine/src/cards/tokens/spider-token-2-1-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amazing Spider-Girl",
+   "files": [
+    "engine/src/cards/pool/amazing-spider-girl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man, Brooklyn Visionary",
+   "files": [
+    "engine/src/cards/pool/spider-man-brooklyn-visionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man, Web-Slinger",
+   "files": [
+    "engine/src/cards/pool/spider-man-web-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Sense",
+   "files": [
+    "engine/src/cards/pool/spider-sense.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glider Staff",
+   "files": [
+    "engine/src/cards/pool/glider-staff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aang, the Last Airbender",
+   "files": [
+    "engine/src/cards/pool/aang-the-last-airbender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airbender Ascension",
+   "files": [
+    "engine/src/cards/pool/airbender-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airbender's Reversal",
+   "files": [
+    "engine/src/cards/pool/airbenders-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airbending Lesson",
+   "files": [
+    "engine/src/cards/pool/airbending-lesson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Appa, Loyal Sky Bison",
+   "files": [
+    "engine/src/cards/pool/appa-loyal-sky-bison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Appa, Steadfast Guardian",
+   "files": [
+    "engine/src/cards/pool/appa-steadfast-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avatar's Wrath",
+   "files": [
+    "engine/src/cards/pool/avatars-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monk Gyatso",
+   "files": [
+    "engine/src/cards/pool/monk-gyatso.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whirlwind Technique",
+   "files": [
+    "engine/src/cards/pool/whirlwind-technique.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "North Pole Patrol",
+   "files": [
+    "engine/src/cards/pool/north-pole-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aang's Iceberg",
+   "files": [
+    "engine/src/cards/pool/aangs-iceberg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benevolent River Spirit",
+   "files": [
+    "engine/src/cards/pool/benevolent-river-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flexible Waterbender",
+   "files": [
+    "engine/src/cards/pool/flexible-waterbender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foggy Swamp Vinebender",
+   "files": [
+    "engine/src/cards/pool/foggy-swamp-vinebender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geyser Leaper",
+   "files": [
+    "engine/src/cards/pool/geyser-leaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Koi",
+   "files": [
+    "engine/src/cards/pool/giant-koi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion Submersible",
+   "files": [
+    "engine/src/cards/pool/invasion-submersible.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katara, Bending Prodigy",
+   "files": [
+    "engine/src/cards/pool/katara-bending-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katara, Seeking Revenge",
+   "files": [
+    "engine/src/cards/pool/katara-seeking-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katara, Water Tribe's Hope",
+   "files": [
+    "engine/src/cards/pool/katara-water-tribes-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruthless Waterbender",
+   "files": [
+    "engine/src/cards/pool/ruthless-waterbender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Water Tribe Rallier",
+   "files": [
+    "engine/src/cards/pool/water-tribe-rallier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Water Whip",
+   "files": [
+    "engine/src/cards/pool/water-whip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterbender Ascension",
+   "files": [
+    "engine/src/cards/pool/waterbender-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterbender's Restoration",
+   "files": [
+    "engine/src/cards/pool/waterbenders-restoration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yue, the Moon Spirit",
+   "files": [
+    "engine/src/cards/pool/yue-the-moon-spirit.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Azula, Cunning Usurper",
+   "needs": [
+    "decision:choose-permanent",
+    "zone:cast-from-linked-exile"
+   ],
+   "why": "The target opponent chooses what's exiled, and casting from its linked exile with flash on your turn has no permission."
+  },
+  {
+   "name": "Combustion Technique",
+   "needs": [
+    "replacement:dealt-damage-this-way-exile-if-dies"
+   ],
+   "why": "'If that creature would die this turn, exile it instead.'"
+  },
+  {
+   "name": "The Fire Nation Drill",
+   "needs": [
+    "effect:lose-keyword-until-eot"
+   ],
+   "why": "Opponents' permanents losing hexproof and indestructible until end of turn."
+  },
+  {
+   "name": "Honest Work",
+   "needs": [
+    "effect:remove-all-counters",
+    "static:set-name"
+   ],
+   "why": "Removing all counters, and the enchanted creature being named Humble Merchant."
+  },
+  {
+   "name": "Superior Spider-Man",
+   "needs": [
+    "replacement:copy-on-enter-options"
+   ],
+   "why": "Entering as a copy of a creature card in a graveyard."
+  },
+  {
+   "name": "Peter Parker // Amazing Spider-Man",
+   "needs": [
+    "static:grant-web-slinging"
+   ],
+   "why": "The back face gives legendary colored spells web-slinging; web-slinging (batch 65) isn't grantable."
+  },
+  {
+   "name": "Carnage, Crimson Chaos",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "The returned creature gains 'attacks each combat if able' as an ability, which a later 'loses all abilities' must remove."
+  },
+  {
+   "name": "Miles Morales // Ultimate Spider-Man",
+   "needs": [
+    "effect:set-color-effect",
+    "effect:double-counters-each-kind"
+   ],
+   "why": "'Becomes colorless until end of turn', and doubling each kind of counter on each Spider and legendary creature."
+  },
+  {
+   "name": "Gwen Stacy // Ghost-Spider",
+   "needs": [
+    "cost:remove-any-counter-cost",
+    "zone:impulse-while-you-control-source"
+   ],
+   "why": "'Remove two counters' of any kinds, and playing the card for as long as you control this creature."
+  },
+  {
+   "name": "Spider-Man No More",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "An Aura making the enchanted creature lose all other abilities."
+  },
+  {
+   "name": "Green Goblin, Revenant",
+   "needs": [
+    "stat:cards-discarded-this-turn"
+   ],
+   "why": "A card for each card you've discarded this turn."
+  },
+  {
+   "name": "Spider-Man 2099",
+   "needs": [
+    "stat:spells-cast-not-from-hand-this-turn",
+    "condition:own-turn-count"
+   ],
+   "why": "Spells cast and lands played from outside the hand this turn, and 'your first three turns'."
+  },
+  {
+   "name": "Spider-Verse",
+   "needs": [
+    "effect:copy-spell-grants"
+   ],
+   "why": "A copy that is a permanent spell gains haste."
+  },
+  {
+   "name": "Parker Luck",
+   "needs": [
+    "effect:mutual-reveal-cross-life-loss"
+   ],
+   "why": "Two players reveal, each loses life by the other's card."
+  },
+  {
+   "name": "Mister Negative",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "Exchanging two players' life totals."
+  },
+  {
+   "name": "The Clone Saga",
+   "needs": [
+    "effect:copy-spell-except-nonlegendary",
+    "decision:name-a-card"
+   ],
+   "why": "A copy that isn't legendary, and choosing a card name."
+  },
+  {
+   "name": "Spinneret and Spiderling",
+   "needs": [
+    "trigger:damage-trigger-extensions"
+   ],
+   "why": "'Deals 4 or more damage' summed once per event over everything it hits."
+  },
+  {
+   "name": "Costume Closet",
+   "needs": [
+    "effect:move-counter"
+   ],
+   "why": "'Move a +1/+1 counter' moves nothing when the counter can't be put on the target (rule 122.5); remove-then-add would still remove it."
+  },
+  {
+   "name": "Crashing Wave",
+   "needs": [
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "Stun counters distributed among tapped untargeted opposing creatures."
+  },
+  {
+   "name": "Secret of Bloodbending",
+   "needs": [
+    "mechanic:control-player"
+   ],
+   "why": "Controlling another player's turn."
+  },
+  {
+   "name": "Arachne, Psionic Weaver",
+   "needs": [
+    "effect:look-at-opponent-hand-as-enters"
+   ],
+   "why": "Looking at an opponent's hand as it enters, before its card-type choice."
+  },
+  {
+   "name": "Aang, Airbending Master",
+   "needs": [
+    "trigger:leaves-batch-trigger"
+   ],
+   "why": "'Whenever one or more creatures you control leave the battlefield without dying.'"
+  },
+  {
+   "name": "Foggy Swamp Visions",
+   "needs": [
+    "effect:token-copy-of-exiled-card"
+   ],
+   "why": "Token copies of the cards it exiled, sacrificed at your next end step."
+  },
+  {
+   "name": "Hama, the Bloodbender",
+   "needs": [
+    "cost:alt-cost-waterbend"
+   ],
+   "why": "Casting the linked exiled card by waterbending {X} instead of its mana cost."
+  },
+  {
+   "name": "Ruinous Waterbending",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "'Whenever a creature dies this turn, you gain 1 life.'"
+  },
+  {
+   "name": "Spirit Water Revival",
+   "needs": [
+    "effect:player-no-max-hand-size-for-game"
+   ],
+   "why": "No maximum hand size for the rest of the game."
+  },
+  {
+   "name": "The Unagi of Kyoshi Island",
+   "needs": [
+    "decision:ward-waterbend"
+   ],
+   "why": "Ward—Waterbend {4}."
+  },
+  {
+   "name": "Waterbending Lesson",
+   "needs": [
+    "effect:unless-waterbend"
+   ],
+   "why": "'Discard a card unless you waterbend {2}.'"
+  },
+  {
+   "name": "Watery Grasp",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "static:doesnt-untap-filter"
+   ],
+   "why": "An effect on the enchanted creature, and its not untapping."
+  }
+ ]
+}

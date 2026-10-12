@@ -139,6 +139,7 @@ import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
+import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
@@ -183,6 +184,7 @@ import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
 import _poolIshkanahGrafwidow from "../pool/ishkanah-grafwidow.js";
 import _poolIsperiaSupremeJudge from "../pool/isperia-supreme-judge.js";
 import _poolIvoraInsatiableHeir from "../pool/ivora-insatiable-heir.js";
+import _poolJJonahJameson from "../pool/j-jonah-jameson.js";
 import _poolJeditsDragoons from "../pool/jedits-dragoons.js";
 import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
@@ -283,6 +285,8 @@ import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
 import _poolSpiderIslanders from "../pool/spider-islanders.js";
+import _poolSpiderManWebSlinger from "../pool/spider-man-web-slinger.js";
+import _poolSpidersManHeroicHorde from "../pool/spiders-man-heroic-horde.js";
 import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
@@ -494,6 +498,7 @@ const shard: CardShard = {
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
     _poolGhostsOfTheDamned,
+    _poolGliderStaff,
     _poolGlimpseTheCore,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
@@ -538,6 +543,7 @@ const shard: CardShard = {
     _poolIshkanahGrafwidow,
     _poolIsperiaSupremeJudge,
     _poolIvoraInsatiableHeir,
+    _poolJJonahJameson,
     _poolJeditsDragoons,
     _poolJinGitaxiasCoreAugur,
     _poolJolraelsCentaur,
@@ -638,6 +644,8 @@ const shard: CardShard = {
     _poolSparringConstruct,
     _poolSphinxOfTheSteelWind,
     _poolSpiderIslanders,
+    _poolSpiderManWebSlinger,
+    _poolSpidersManHeroicHorde,
     _poolSpiteflameWitch,
     _poolSpitefulMotives,
     _poolStitchTogether,

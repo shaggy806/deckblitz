@@ -303,6 +303,7 @@ import _poolStarWhale from "../pool/star-whale.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
+import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
@@ -364,6 +365,7 @@ import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
+import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 
 const shard: CardShard = {
   pool: [
@@ -667,6 +669,7 @@ const shard: CardShard = {
     _poolStickyFingers,
     _poolStonybrookBanneret,
     _poolStrixhavenStadium,
+    _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
     _poolSyndicateGuildmage,
@@ -730,6 +733,7 @@ const shard: CardShard = {
     _tokensLotus,
     _tokensPestTokenAttacks,
     _tokensRedHumanToken,
+    _tokensSpiderToken21Reach,
   ],
 };
 

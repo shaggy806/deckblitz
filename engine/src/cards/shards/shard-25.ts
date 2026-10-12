@@ -120,6 +120,7 @@ import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
 import _poolFlowstoneInfusion from "../pool/flowstone-infusion.js";
 import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
+import _poolFoggySwampVinebender from "../pool/foggy-swamp-vinebender.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
@@ -242,6 +243,7 @@ import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
+import _poolRockyRebuke from "../pool/rocky-rebuke.js";
 import _poolRograkhSonOfRohgahh from "../pool/rograkh-son-of-rohgahh.js";
 import _poolRoilingDragonstorm from "../pool/roiling-dragonstorm.js";
 import _poolRollingHamsphere from "../pool/rolling-hamsphere.js";
@@ -278,6 +280,7 @@ import _poolSolidarity from "../pool/solidarity.js";
 import _poolSoulmender from "../pool/soulmender.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
+import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
@@ -474,6 +477,7 @@ const shard: CardShard = {
     _poolFlowstoneInfusion,
     _poolFlumph,
     _poolFlushOut,
+    _poolFoggySwampVinebender,
     _poolFontOfFortunes,
     _poolFoundryOfTheConsuls,
     _poolFugitiveWizard,
@@ -596,6 +600,7 @@ const shard: CardShard = {
     _poolRiskyShortcut,
     _poolRiveteersInitiate,
     _poolRockfallVale,
+    _poolRockyRebuke,
     _poolRograkhSonOfRohgahh,
     _poolRoilingDragonstorm,
     _poolRollingHamsphere,
@@ -632,6 +637,7 @@ const shard: CardShard = {
     _poolSoulmender,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,
+    _poolSpiderManBrooklynVisionary,
     _poolSpineOfIshSah,
     _poolSpinedBasher,
     _poolSpireOfIndustry,

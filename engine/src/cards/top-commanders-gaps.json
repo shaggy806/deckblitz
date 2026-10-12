@@ -249,7 +249,10 @@
   "static:grant-loyalty-abilities",
   "effect:token-copy-for-each-matching",
   "mechanic:prepare",
-  "keyword:storied"
+  "keyword:storied",
+  "keyword:web-slinging",
+  "keyword:waterbend",
+  "keyword:airbend"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

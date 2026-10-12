@@ -13,6 +13,7 @@ import _poolAngelicAccord from "../pool/angelic-accord.js";
 import _poolAnkhOfMishra from "../pool/ankh-of-mishra.js";
 import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
+import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArdentMilitia from "../pool/ardent-militia.js";
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
@@ -346,6 +347,7 @@ import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
+import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
@@ -383,6 +385,7 @@ const shard: CardShard = {
     _poolAnkhOfMishra,
     _poolAnnoyedAltisaur,
     _poolAnowonTheRuinSage,
+    _poolAppaLoyalSkyBison,
     _poolArchivist,
     _poolArdentMilitia,
     _poolArkOfBlight,
@@ -716,6 +719,7 @@ const shard: CardShard = {
     _poolWalkingDead,
     _poolWallOfOpposition,
     _poolWaterloggedTeachings,
+    _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,
     _poolWildGriffin,
