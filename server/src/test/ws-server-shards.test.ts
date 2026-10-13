@@ -406,6 +406,36 @@ describe("rooms on two shards (loopback)", () => {
     expect(await c.next()).toMatchObject({ type: "room-joined", roomId: first });
   });
 
+  it("loads a setup module in each shard before ready, and runs its commands there", async () => {
+    const h = await serve({ setup: new URL("./fixtures/shard-setup.ts", import.meta.url).href });
+    // Each shard's rooms are routed from its `ready`.
+    expect([h.shardOf("FIXA0"), h.shardOf("FIXA1")]).toEqual([0, 1]);
+    expect(await h.control(1, { op: "where" })).toEqual({
+      ok: true,
+      json: JSON.stringify({ index: 1, count: 2, rooms: ["FIXA1"] }),
+    });
+    expect(await h.control(0, { op: "reset", room: "FIXA0" })).toEqual({
+      ok: true,
+      json: JSON.stringify({ reset: "FIXA0" }),
+      dropConnections: true,
+    });
+    expect(await h.control(0, { op: "nope" })).toEqual({ ok: false, json: JSON.stringify({ error: 'unknown op "nope"' }) });
+    const c = await connect();
+    c.send({ type: "join-room", roomId: "FIXA1" });
+    expect(await c.next()).toMatchObject({ type: "room-joined", roomId: "FIXA1", pending: true });
+  });
+
+  it("refuses a command for a shard with no setup module, or one that isn't up", async () => {
+    const h = await serve({}, {}, { baseMs: 60_000 });
+    expect(await h.control(0, { op: "list" })).toEqual({
+      ok: false,
+      json: JSON.stringify({ error: "this shard has no setup module" }),
+    });
+    channels[1].crash(1);
+    await phase(h, 1, "restarting");
+    expect(await h.control(1, { op: "list" })).toEqual({ ok: false, json: JSON.stringify({ error: "shard 1 isn't up" }) });
+  });
+
   it("compresses frames, sent from a shard's bytes as text", async () => {
     await serve();
     const c = await connect();

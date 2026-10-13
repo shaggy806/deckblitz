@@ -26,257 +26,116 @@
 //
 // Rooms pace their bots the way the real server does (realtime, one move per
 // frame shown), so animations and the ack gate behave as they do in play.
+//
+// `--shards N` (or $DEV_ROOMS_SHARDS) runs the rooms on N worker threads as
+// the real server's `--shards` does (`docs/plans/room-shards.md`): the boards
+// and the ops are `dev-rooms-shard.mjs`, run in each shard (the scenarios
+// dealt out among them); this thread keeps the sockets and the command port,
+// fans `list` out to every shard and sends every other op to the shard that
+// holds its room — `eval` runs there. 0, the default, runs everything here.
 
 import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
-import { COMMANDER_RULES, Game, createDefaultRegistry } from "engine";
-import { Room } from "../dist/room.js";
-import { RoomManager } from "../dist/room-manager.js";
-import { DEFAULT_CAPTURE_DIR } from "../dist/capture.js";
-import { ScriptedBot } from "../dist/scripted-bot.js";
-import { COMPRESSION, attachRoomServer } from "../dist/ws-server.js";
-import SCENARIOS, { COMMANDERS } from "./dev-scenarios.mjs";
+import { COMPRESSION, attachTransport } from "../dist/transport.js";
 
 const PORT = Number(process.env.PORT ?? 4000);
 const CONTROL_PORT = Number(process.env.CONTROL_PORT ?? 4099);
-const registry = createDefaultRegistry();
-const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
-const basics = (n) => Array.from({ length: n }, (_, i) => BASICS[i % BASICS.length]);
-
-/**
- * A scenario's `bots` entry as a script for `ScriptedBot` (`src/scripted-bot.ts`),
- * so the decision under test comes up on cue: the bot passes every priority
- * window except for its scripted casts, each once, on its own precombat main;
- * attacks only if told whom, every turn, with everything that can; and blocks
- * only the named attacker, with every creature of the named ones that can.
- * Anything else it's asked (a discard, a sacrifice) goes to v1's answer.
- */
-const scriptOf = (bot = {}) => ({
-  otherwise: "pass",
-  moves: [
-    ...(bot.casts ?? []).map(({ name, target }) => ({ do: "cast", card: name, ...(target !== undefined ? { target } : {}) })),
-    ...(bot.attack ? [{ do: "attack", at: bot.attack, repeat: true }] : []),
-    ...(bot.block ? [{ do: "block", card: bot.block.with, at: bot.block.attacker, repeat: true }] : []),
-  ],
-});
-
-function buildGame(scenario) {
-  const players = scenario.players;
-  const game = Game.create({
-    seed: 1,
-    shuffle: false,
-    rules: COMMANDER_RULES,
-    decks: players.map((player) => ({
-      player,
-      cards: basics(60),
-      commanders: [scenario.commanders?.[player] ?? COMMANDERS[player]],
-    })),
-  });
-  const start = scenario.start ?? "precombat-main";
-  game.advanceUntil((s) => s.turn.step === start && s.priority.holder === players[0]);
-
-  const ids = {};
-  for (const player of players) {
-    for (const land of basics(scenario.lands?.[player] ?? 0)) {
-      game.debugSpawn(land, player, "battlefield", { summoningSick: false });
-    }
-    ids[player] = (scenario.battlefield?.[player] ?? []).map((name) =>
-      game.debugSpawn(name, player, "battlefield", { summoningSick: false }),
-    );
-    for (const name of scenario.hand?.[player] ?? []) game.debugSpawn(name, player, "hand");
-    if (scenario.life?.[player] !== undefined) game.state.players[player].life = scenario.life[player];
-  }
-  scenario.setup?.(game, ids);
-  return game;
-}
-
-// A developer's server: bot decisions are always kept for saving as training
-// scenarios (`src/capture.ts`), in its scenario rooms and in any room created
-// here.
-const CAPTURE = { dir: DEFAULT_CAPTURE_DIR, registry };
-const manager = new RoomManager({ capture: CAPTURE });
-/** code -> { room, game } for every scenario currently being served. */
-const live = new Map();
-
-function buildRoom(code) {
-  const scenario = SCENARIOS[code];
-  const game = buildGame(scenario);
-  const bots = scenario.bots ?? {};
-  const room = new Room(code, game, {
-    pacing: "realtime",
-    capture: CAPTURE,
-    botController: (player) => new ScriptedBot(player, scriptOf(bots[player]), registry),
-  });
-  for (const player of Object.keys(bots)) room.addBot(player);
-  room.start();
-  // Served under its own code, its frames going out as any room's do.
-  manager.adopt(room);
-  live.set(code, { room, game });
-}
-
-for (const code of Object.keys(SCENARIOS)) buildRoom(code);
+const shardsAt = process.argv.indexOf("--shards");
+const SHARDS = Number((shardsAt >= 0 ? process.argv[shardsAt + 1] : undefined) ?? process.env.DEV_ROOMS_SHARDS ?? 0);
+if (!Number.isInteger(SHARDS) || SHARDS < 0) throw new Error(`--shards needs a whole number, 0 or more (got ${SHARDS})`);
+const SETUP = new URL("./dev-rooms-shard.mjs", import.meta.url);
 
 const httpServer = createServer();
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
-// A developer's server: the scenario builder is on too.
-attachRoomServer(wss, manager, { builder: true });
 
-// ---- the control port --------------------------------------------------
+/**
+ * One command, wherever its room is: `{ ok, result | error, dropConnections }`.
+ * `list` asks every shard and merges the answers.
+ */
+let command;
 
-const describe = (game, id) => {
-  const o = game.state.objects[id];
-  const bits = [o.cardName];
-  if (o.tapped) bits.push("tapped");
-  if (o.counters?.loyalty !== undefined) bits.push(`loyalty ${o.counters.loyalty}`);
-  if (o.attacking) bits.push(`attacking ${o.attacking}`);
-  return `${id} ${bits.join(", ")}`;
-};
-
-function stateOf(game) {
-  const s = game.state;
-  const players = {};
-  for (const p of s.turnOrder) {
-    players[p] = {
-      life: s.players[p].life,
-      hand: s.zones.perPlayer[p].hand.map((id) => describe(game, id)),
-      battlefield: s.zones.shared.battlefield
-        .filter((id) => s.objects[id].controller === p && !BASICS.includes(s.objects[id].cardName))
-        .map((id) => describe(game, id)),
-      lands: s.zones.shared.battlefield.filter(
-        (id) => s.objects[id].controller === p && BASICS.includes(s.objects[id].cardName),
-      ).length,
-      command: s.zones.shared.command
-        .filter((id) => s.objects[id].owner === p)
-        .map((id) => describe(game, id)),
-    };
-  }
-  return {
-    turn: s.turn.number,
-    active: s.turnOrder[s.turn.activePlayerIndex],
-    step: s.turn.step,
-    priority: s.priority.holder,
-    awaiting: s.awaiting ? `${s.awaiting.kind} (${s.awaiting.player ?? "several"})` : null,
-    stack: s.zones.shared.stack.map((id) => describe(game, id)),
-    players,
+if (SHARDS === 0) {
+  // Everything on this thread, as dev-rooms always ran.
+  const { createDefaultRegistry } = await import("engine");
+  const { RoomManager } = await import("../dist/room-manager.js");
+  const { DEFAULT_CAPTURE_DIR } = await import("../dist/capture.js");
+  const { InProcessRoomHost } = await import("../dist/in-process-host.js");
+  const { setup } = await import(SETUP.href);
+  const registry = createDefaultRegistry();
+  // A developer's server: bot decisions are always kept for saving as
+  // training scenarios (`src/capture.ts`), in any room created here too.
+  const manager = new RoomManager({ capture: { dir: DEFAULT_CAPTURE_DIR, registry } });
+  const rooms = setup({ manager, registry, index: 0, count: 1 });
+  // A developer's server: the scenario builder is on too.
+  attachTransport(wss, new InProcessRoomHost(manager, { builder: true }));
+  command = async (cmd) => {
+    try {
+      const out = rooms.control(cmd);
+      return { ok: true, result: out.result, dropConnections: out.dropConnections === true };
+    } catch (err) {
+      return { ok: false, error: String(err?.message ?? err) };
+    }
+  };
+} else {
+  const { WorkerRoomHost, workerChannel } = await import("../dist/worker-host.js");
+  const started = Date.now();
+  const host = new WorkerRoomHost({
+    shards: SHARDS,
+    // `capture.dir` empty: `capture.ts`'s `DEFAULT_CAPTURE_DIR`.
+    config: { builder: true, capture: { dir: "" }, loadReportMs: 1_000, setup: SETUP.href },
+    spawn: (config) => workerChannel(config),
+  });
+  await host.start();
+  console.log(`${SHARDS} room shard(s) ready in ${((Date.now() - started) / 1000).toFixed(1)} s`);
+  attachTransport(wss, host);
+  const unpack = (reply) =>
+    reply.ok
+      ? { ok: true, result: JSON.parse(reply.json), dropConnections: reply.dropConnections === true }
+      : { ok: false, error: JSON.parse(reply.json).error };
+  command = async (cmd) => {
+    if (cmd.op === "list") {
+      const up = host.phases().flatMap((phase, index) => (phase === "up" ? [index] : []));
+      const replies = await Promise.all(up.map((index) => host.control(index, cmd)));
+      const failed = replies.find((r) => !r.ok);
+      if (failed !== undefined) return unpack(failed);
+      return { ok: true, result: Object.assign({}, ...replies.map((r) => JSON.parse(r.json))) };
+    }
+    const shard = host.shardOf(cmd.room);
+    if (shard === undefined) return { ok: false, error: `no room "${cmd.room}"` };
+    return unpack(await host.control(shard, cmd));
   };
 }
 
-/** Object ids from `ids`, or every object named in `names` (optionally only
- * `player`'s), anywhere but the library. */
-function resolveIds(game, { ids, names, player }) {
-  if (ids) return ids;
-  const s = game.state;
-  return Object.keys(s.objects).filter((id) => {
-    const o = s.objects[id];
-    return (
-      names?.includes(o.cardName) &&
-      o.zone !== "library" &&
-      (player === undefined || o.controller === player || o.owner === player)
-    );
-  });
-}
-
-const ops = {
-  list: () =>
-    Object.fromEntries(
-      [...live].map(([code, { game }]) => [
-        code,
-        {
-          about: SCENARIOS[code].about,
-          players: game.state.turnOrder,
-          bots: Object.keys(SCENARIOS[code].bots ?? {}),
-          step: `turn ${game.state.turn.number}, ${game.state.turn.step}`,
-          url: `http://localhost:5173/?room=${code}`,
-        },
-      ]),
-    ),
-  state: (_room, game) => stateOf(game),
-  reset: (_room, _game, cmd) => {
-    // Disposes the old room's timers as it goes.
-    manager.remove(cmd.room);
-    buildRoom(cmd.room);
-    // Tabs reconnect on their own and reclaim their seat with the token they
-    // already hold; the rebuilt room has every seat free, so the claim lands.
-    for (const client of wss.clients) client.close();
-    return { reset: cmd.room };
-  },
-  spawn: (_room, game, cmd) => {
-    const zone = cmd.zone ?? "battlefield";
-    return cmd.cards.map((name) =>
-      game.debugSpawn(name, cmd.player, zone, {
-        summoningSick: cmd.sick === true ? undefined : false,
-        tapped: cmd.tapped === true,
-      }),
-    );
-  },
-  move: (_room, game, cmd) => {
-    const ids = resolveIds(game, cmd);
-    for (const id of ids) game.moveObject(id, cmd.to);
-    return ids;
-  },
-  life: (_room, game, cmd) => {
-    game.state.players[cmd.player].life = cmd.value;
-    return { [cmd.player]: cmd.value };
-  },
-  // Read-only, unlike `eval` (which pushes a frame): the objects named in
-  // `names` (or by `ids`) as the engine holds them — a token stack's
-  // `stackCount`, counters — for a test polling a board mid-animation.
-  objects: (_room, game, cmd) =>
-    resolveIds(game, cmd).map((id) => {
-      const o = game.state.objects[id];
-      return {
-        id,
-        cardName: o.cardName,
-        controller: o.controller,
-        zone: o.zone,
-        stackCount: o.stackCount ?? 1,
-        tapped: o.tapped,
-        counters: o.counters,
-      };
-    }),
-  eval: (room, game, cmd) => new Function("game", "room", "registry", cmd.js)(game, room, registry),
-};
-/** A room a browser created and started here (a blitz, a rematch), rather
- * than a scenario: the same commands reach its game, but there's no scenario
- * to `reset` it to. Whichever game is under the code now, after a rematch. */
-function startedRoom(code, op) {
-  const room = manager.get(code);
-  if (!(room instanceof Room) || op === "reset") return undefined;
-  return { room, game: room.game };
-}
-
-/** Commands that change a room, and so push a frame afterwards. */
-const MUTATES = new Set(["spawn", "move", "life", "eval"]);
+// ---- the control port --------------------------------------------------
 
 createServer((req, res) => {
   let body = "";
   req.on("data", (chunk) => (body += chunk));
-  req.on("end", () => {
+  req.on("end", async () => {
     res.setHeader("Content-Type", "application/json");
+    let cmd;
     try {
-      const cmd = body ? JSON.parse(body) : { op: "list" };
-      const op = ops[cmd.op];
-      if (!op) throw new Error(`unknown op "${cmd.op}" (try: ${Object.keys(ops).join(", ")})`);
-      let result;
-      if (cmd.op === "list") {
-        result = op();
-      } else {
-        const entry = live.get(cmd.room) ?? startedRoom(cmd.room, cmd.op);
-        if (!entry) throw new Error(`no room "${cmd.room}" (try: ${[...live.keys()].join(", ")})`);
-        result = op(entry.room, entry.game, cmd);
-        if (MUTATES.has(cmd.op)) entry.room.publish();
-      }
-      res.end(`${JSON.stringify(result ?? null, null, 2)}\n`);
+      cmd = body ? JSON.parse(body) : { op: "list" };
     } catch (err) {
       res.statusCode = 400;
       res.end(`${JSON.stringify({ error: String(err?.message ?? err) })}\n`);
+      return;
     }
+    const out = await command(cmd);
+    if (!out.ok) {
+      res.statusCode = 400;
+      res.end(`${JSON.stringify({ error: out.error })}\n`);
+      return;
+    }
+    if (out.dropConnections) for (const client of wss.clients) client.close();
+    res.end(`${JSON.stringify(out.result ?? null, null, 2)}\n`);
   });
 }).listen(CONTROL_PORT, "127.0.0.1");
 
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, async () => {
   console.log(`dev rooms on ws://localhost:${PORT}, commands on http://127.0.0.1:${CONTROL_PORT}`);
-  for (const [code, info] of Object.entries(ops.list())) {
+  const listed = await command({ op: "list" });
+  for (const [code, info] of Object.entries(listed.result ?? {})) {
     console.log(`  ${code}  ${info.url}\n         ${info.about}`);
   }
 });

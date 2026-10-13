@@ -22,7 +22,16 @@ import { BOT_DECISIONS, Room } from "./room.js";
 import { RoomManager } from "./room-manager.js";
 import { RoomService } from "./room-service.js";
 import type { ConnId, RoomEvent } from "./room-host.js";
-import type { Delivery, FromShard, ShardConfig, ShardLoad, ToShard } from "./shard-protocol.js";
+import type { Delivery, FromShard, ShardConfig, ShardControl, ShardLoad, ToShard } from "./shard-protocol.js";
+
+/** A `ShardConfig.setup` module's export: given the shard's rooms, it may
+ * build some, and answers `control` commands. */
+export type SetupModule = (shard: {
+  readonly manager: RoomManager;
+  readonly registry: CardRegistry;
+  readonly index: number;
+  readonly count: number;
+}) => ShardControl;
 import { roomSummaries } from "./status.js";
 
 /** The rooms' side of a config: its own registry, and a manager over it. */
@@ -126,6 +135,16 @@ export function createShard(
 
   const deps: ImportDeps | null = config.importJobs ? importDeps(registry) : null;
 
+  // dev-rooms' boards and ops (`config.setup`): loaded before `ready`, so
+  // the rooms it builds are routed from the start.
+  let controller: ShardControl | null = null;
+  const setupDone: Promise<void> =
+    config.setup === undefined
+      ? Promise.resolve()
+      : import(config.setup).then((mod: { setup: SetupModule }) => {
+          controller = mod.setup({ manager, registry, index: config.index, count: config.shardCount ?? 1 });
+        });
+
   const receive = (message: ToShard): void => {
     if (stopped) return;
     switch (message.t) {
@@ -175,6 +194,32 @@ export function createShard(
         });
         return;
       }
+      case "control": {
+        const req = message.req;
+        // Its answer goes after whatever frames the command pushed: they
+        // flush in a microtask queued while it ran.
+        setupDone
+          .then(() => {
+            if (controller === null) throw new Error("this shard has no setup module");
+            return controller.control(message.cmd);
+          })
+          .then(
+            (out) =>
+              post(
+                {
+                  t: "control",
+                  req,
+                  ok: true,
+                  json: JSON.stringify(out.result ?? null),
+                  ...(out.dropConnections === true ? { dropConnections: true } : {}),
+                },
+                [],
+              ),
+            (err: unknown) =>
+              post({ t: "control", req, ok: false, json: JSON.stringify({ error: err instanceof Error ? err.message : String(err) }) }, []),
+          );
+        return;
+      }
       case "stop":
         stop();
         return;
@@ -190,17 +235,28 @@ export function createShard(
     for (const room of manager.all()) if (room instanceof Room) room.dispose();
   };
 
-  post(
-    {
-      t: "ready",
-      rooms: manager.all().map((room) => ({
-        id: room.id,
-        kind: manager.kindOf(room.id) ?? "adopted",
-        stage: room instanceof PendingRoom ? "waiting" : room.game.state.result.over ? "finished" : "playing",
-      })),
-    },
-    [],
-  );
+  const announce = (): void =>
+    post(
+      {
+        t: "ready",
+        rooms: manager.all().map((room) => ({
+          id: room.id,
+          kind: manager.kindOf(room.id) ?? "adopted",
+          stage: room instanceof PendingRoom ? "waiting" : room.game.state.result.over ? "finished" : "playing",
+        })),
+      },
+      [],
+    );
+  if (config.setup === undefined) announce();
+  else {
+    setupDone.then(announce, (err: unknown) => {
+      // A shard that can't set up never says it's ready: thrown out of the
+      // event loop, it ends the worker, and the host's start fails.
+      setTimeout(() => {
+        throw err;
+      });
+    });
+  }
 
   return { receive, stop, manager };
 }

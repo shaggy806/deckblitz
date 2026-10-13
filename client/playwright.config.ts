@@ -12,6 +12,9 @@ const isolated =
   process.env.E2E_SERVER_PORT !== undefined ||
   process.env.E2E_CONTROL_PORT !== undefined
 const reuseExistingServer = !process.env.CI && !isolated
+// `DEV_ROOMS_SHARDS=N` runs dev-rooms' rooms on N worker threads, as the real
+// server's `--shards N` does; 0 (the default) keeps them on its main thread.
+const devRoomsShards = process.env.DEV_ROOMS_SHARDS ?? '0'
 
 export default defineConfig({
   testDir: './e2e',
@@ -39,7 +42,12 @@ export default defineConfig({
       command: 'npm run dev-rooms -w server',
       cwd: '..',
       url: `http://127.0.0.1:${controlPort}`,
-      env: { ...process.env, PORT: String(serverPort), CONTROL_PORT: String(controlPort) } as Record<string, string>,
+      env: {
+        ...process.env,
+        PORT: String(serverPort),
+        CONTROL_PORT: String(controlPort),
+        DEV_ROOMS_SHARDS: devRoomsShards,
+      } as Record<string, string>,
       reuseExistingServer,
       timeout: 60_000,
     },

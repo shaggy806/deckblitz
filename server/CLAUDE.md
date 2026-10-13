@@ -68,7 +68,8 @@ loopback status page, with `load-monitor.ts`'s event-loop numbers). Tests in
   for rooms on N worker threads), `dev`. `test/worker-smoke.test.ts` runs real workers on
   `dist/` and skips itself when `dist/` is older than `src/`: build before trusting a pass.
 - `dev-rooms`: a room server preloaded with the boards in `scripts/dev-scenarios.mjs`, plus a
-  loopback command port on 4099. Use it to check a client change against a known position (the
+  loopback command port on 4099 (`-- --shards N` or `DEV_ROOMS_SHARDS=N` runs its rooms on worker
+  threads, the boards and ops from `scripts/dev-rooms-shard.mjs` in each). Use it to check a client change against a known position (the
   `dev-up` skill starts it). Room codes and command-port ops are in
   `docs/architecture/server.md`.
 - `gen:oracle-tags`: regenerates the tag index (takes most of an hour; run it in the background).

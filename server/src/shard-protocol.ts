@@ -36,6 +36,25 @@ export interface ShardConfig {
   /** Tests only: a room message `{type: "__crash", roomId}` throws out of
    * the shard's event loop, ending its worker as a real crash would. */
   readonly testHooks?: boolean;
+  /** How many shards there are (the host fills it in; 1 if absent). */
+  readonly shardCount?: number;
+  /** A module URL to `import()` before `ready` (dev-rooms'
+   * `scripts/dev-rooms-shard.mjs`): its `setup({ manager, registry, index,
+   * count })` may build rooms into the shard, and returns a `ShardControl`,
+   * which `control` messages run. */
+  readonly setup?: string;
+}
+
+/** One command's outcome from a `setup` module: its result (JSON-able), and
+ * whether every socket should be dropped (dev-rooms' `reset`). */
+export interface ControlOutcome {
+  readonly result?: unknown;
+  readonly dropConnections?: boolean;
+}
+
+/** What a `setup` module's `setup` returns. `control` throws to refuse. */
+export interface ShardControl {
+  control(cmd: unknown): ControlOutcome | Promise<ControlOutcome>;
 }
 
 /** Shard-side load: its own thread's `LoadReport`, and its rooms. */
@@ -53,6 +72,8 @@ export type ToShard =
   | { readonly t: "unspectate"; readonly conn: ConnId }
   | { readonly t: "status"; readonly req: number }
   | { readonly t: "import"; readonly job: number; readonly text: string }
+  /** One command for the `setup` module's `control` (dev-rooms' ops). */
+  | { readonly t: "control"; readonly req: number; readonly cmd: unknown }
   | { readonly t: "stop" };
 
 /** One `ServerMessage`, UTF-8, for every connection in `conns`. */
@@ -76,4 +97,13 @@ export type FromShard =
     }
   /** One import job's output: a `line` (JSON text), a `reject`ion (its
    * message), or the `end`. */
-  | { readonly t: "import"; readonly job: number; readonly kind: "line" | "reject" | "end"; readonly text?: string };
+  | { readonly t: "import"; readonly job: number; readonly kind: "line" | "reject" | "end"; readonly text?: string }
+  /** A `control` command's answer: its result as JSON text, or `{error}`
+   * when not `ok`; `dropConnections` asks main to close every socket. */
+  | {
+      readonly t: "control";
+      readonly req: number;
+      readonly ok: boolean;
+      readonly json: string;
+      readonly dropConnections?: boolean;
+    };

@@ -64,7 +64,10 @@ export function workerChannel(
 }
 
 /** The shards' settings, but for what's per shard. */
-export type ShardSettings = Omit<ShardConfig, "index" | "importJobs">;
+export type ShardSettings = Omit<ShardConfig, "index" | "importJobs" | "shardCount">;
+
+/** A `control` command's answer (`ShardControl`, dev-rooms' ops). */
+export type ControlReply = Omit<Extract<FromShard, { t: "control" }>, "t" | "req">;
 
 export interface WorkerHostOptions {
   readonly shards: number;
@@ -175,6 +178,8 @@ export class WorkerRoomHost implements RoomHost {
   private nextRequest = 1;
   private readonly statusRequests = new Map<number, (index: ShardIndex, reply: Extract<FromShard, { t: "status" }>) => void>();
   private readonly imports = new Map<number, ImportSink>();
+  /** `control` commands awaiting their shard's answer. */
+  private readonly controls = new Map<number, { readonly index: ShardIndex; readonly resolve: (reply: ControlReply) => void }>();
   private stopping = false;
   /** `start` has finished: from here a shard that ends is restarted. */
   private started = false;
@@ -213,7 +218,12 @@ export class WorkerRoomHost implements RoomHost {
    * has since been replaced are ignored. */
   private launch(shard: ShardState): Promise<void> {
     const index = shard.index;
-    const channel = this.options.spawn({ ...this.options.config, index, importJobs: index === 0 });
+    const channel = this.options.spawn({
+      ...this.options.config,
+      index,
+      importJobs: index === 0,
+      shardCount: this.options.shards,
+    });
     let resolveExit: (code: number) => void = () => {};
     shard.channel = channel;
     shard.phase = "starting";
@@ -345,6 +355,19 @@ export class WorkerRoomHost implements RoomHost {
     return { rooms, roomsCreated, shards };
   }
 
+  /** Runs one command in shard `index`'s `setup` module (dev-rooms' ops);
+   * refused at once for a shard that isn't up. */
+  control(index: ShardIndex, cmd: unknown): Promise<ControlReply> {
+    if (this.shards[index]?.phase !== "up") {
+      return Promise.resolve({ ok: false, json: JSON.stringify({ error: `shard ${index} isn't up` }) });
+    }
+    const req = this.nextRequest++;
+    return new Promise((resolve) => {
+      this.controls.set(req, { index, resolve });
+      this.post(index, { t: "control", req, cmd });
+    });
+  }
+
   importDeck(text: string, sink: ImportSink): void {
     const shard = this.shards[0];
     if (shard === undefined || shard.phase !== "up") {
@@ -468,6 +491,16 @@ export class WorkerRoomHost implements RoomHost {
         }
         return;
       }
+      case "control": {
+        const pending = this.controls.get(message.req);
+        this.controls.delete(message.req);
+        pending?.resolve({
+          ok: message.ok,
+          json: message.json,
+          ...(message.dropConnections === true ? { dropConnections: true } : {}),
+        });
+        return;
+      }
       case "ready":
         return;
     }
@@ -499,6 +532,11 @@ export class WorkerRoomHost implements RoomHost {
       for (const [id, route] of this.routes) if (route.shard === shard.index) this.routes.delete(id);
       for (const [conn, touched] of this.touched) {
         if (touched.has(shard.index)) this.links.get(conn)?.close(1011, "the server lost this room");
+      }
+      for (const [req, pending] of this.controls) {
+        if (pending.index !== shard.index) continue;
+        this.controls.delete(req);
+        pending.resolve({ ok: false, json: JSON.stringify({ error: `shard ${shard.index} ended` }) });
       }
       if (shard.index === 0) {
         for (const [job, sink] of this.imports) {

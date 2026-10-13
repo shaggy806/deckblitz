@@ -13,6 +13,13 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # dev-rooms' rooms on the main thread (0) and on a worker thread (1), as
+    # the server's --shards runs them (docs/plans/room-shards.md).
+    strategy:
+      fail-fast: false
+      matrix:
+        shards: [0, 1]
+    name: smoke (shards ${{ matrix.shards }})
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -26,10 +33,12 @@ jobs:
         working-directory: client
       # Starts dev-rooms and the Vite dev server itself (client/playwright.config.ts).
       - run: npm run test:e2e -w client
+        env:
+          DEV_ROOMS_SHARDS: ${{ matrix.shards }}
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report
+          name: playwright-report-shards-${{ matrix.shards }}
           path: |
             client/playwright-report
             client/test-results
