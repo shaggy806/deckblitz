@@ -3564,21 +3564,49 @@ export type EffectSpec =
     }
   | {
       /**
-       * `target` becomes a copy of `of` until end of turn (rules 707.2,
-       * 611.2a), with `exceptions` — Sarkhan, Soul Aflame's "you may have
+       * An existing permanent becomes a copy of `of` (rules 707.2, 613.2 —
+       * layer 1), with `exceptions` — Sarkhan, Soul Aflame's "you may have
        * Sarkhan become a copy of it until end of turn, except its name is
        * Sarkhan, Soul Aflame and it's legendary in addition to its other
-       * types". It copies `of`'s copiable values as they are now — what
-       * that is copying, if anything — or as it last existed if it has left
-       * the battlefield (rule 608.2h); not its counters, tapped state or
-       * other effects on it. `target` keeps its own status and counters
-       * (rule 707.2). In the cleanup step (rule 514.2) it is what it was
-       * before again — a copy of whatever it copied, if it was one.
+       * types". Which: `target` — a slot, `"source"`, `"trigger-object"` —
+       * or every permanent `filter` matches as the effect begins ("each
+       * other creature", Nanogene Conversion; "Shards you control", Niko,
+       * Light of Hope), less `of` itself with `exceptOf` ("each **other**
+       * creature"). They change at once, and all copy `of` as it was before
+       * any of them did (Mirrorform's target may be one of them).
+       *
+       * It copies `of`'s copiable values as they are now — what that is
+       * copying, if anything, with that copy's exceptions (rule 707.9b) — or
+       * as it last existed if it has left the battlefield (rule 608.2h); not
+       * its counters, tapped state or other effects on it. A *card* — one
+       * in a graveyard, exile or a library (Likeness Looter's "target
+       * creature card in your graveyard", Taskmaster's "or creature card in
+       * a graveyard") — has only its printed values, front face up (rule
+       * 712.8a); `ofCard` says `of` means the card even where it was a
+       * permanent until it got there (Lazav, Dimir Mastermind's "that card",
+       * whose ruling: "copy effects that applied to the creature card when
+       * it was on the battlefield won't be copied"). A spell on the stack
+       * has its card's values and its own copy exceptions (The Myriad
+       * Pools).
+       *
+       * The permanent stays the same object: its counters, tapped and
+       * summoning-sick status, attachments and every non-copy effect on it
+       * stay, and nothing enters or leaves (rule 707.4), so no "enters"
+       * ability or "as this enters" replacement of what it copies applies.
+       * It is that copy until `until`: `"end-of-turn"` (the cleanup step,
+       * rule 514.2), `"next-end-step"` (as the next end step begins — Niko),
+       * `"your-next-turn"` (as the effect's controller's next turn begins —
+       * Taskmaster), or, absent, for as long as it is that object (rule
+       * 611.2a — Thespian's Stage, Mirrorform). Then it is what it was before
+       * again — see `GameObject.temporaryCopies`.
        */
       readonly kind: "become-copy";
-      readonly target: EffectTargetRef;
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly exceptOf?: true;
       readonly of: EffectTargetRef;
-      readonly until: "end-of-turn";
+      readonly ofCard?: true;
+      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
       readonly exceptions?: CopyExceptions;
     }
   | {
@@ -3759,6 +3787,12 @@ export type EffectSpec =
        * one has been. Counted per ability, like `resolved-this-turn`, so a
        * permanent that leaves and comes back starts again (rule 400.7). */
       readonly notChosenThisTurn?: boolean;
+      /** "Choose one **that hasn't been chosen**" (Silent Hallcreeper): the
+       * same, but over this object's whole time on the battlefield — "refers
+       * only to that specific Silent Hallcreeper", and one that leaves and
+       * returns is a new object with no memory of its modes (its ruling,
+       * rule 400.7). */
+      readonly notChosenBefore?: boolean;
       /** "You **may** choose two" (Shadrix Silverquill): no mode at all is
        * also an answer, removing the ability — but never fewer than
        * `minModes` otherwise (the ruling: zero or two, not one). Only with
@@ -4480,6 +4514,19 @@ export interface CopyExceptions {
    * creature becomes the target of a spell or ability, sacrifice it.'" (rule
    * 707.9a: a copiable value, so a copy of the copy has it too). */
   readonly triggered?: readonly TriggeredAbility[];
+  /** "…except it has **this ability**" (Thespian's Stage, Court of Vantress,
+   * Irma, Part-Time Mutant): the ability of `card`'s definition at that
+   * index of its `activated` or `triggered` list — the very ability making
+   * the copy, named by its card rather than by the object, which by then may
+   * be a copy of something else that has it only this way. Looked up as the
+   * copy is made, and from then on it's like `activated` / `triggered`: a
+   * copiable value (rule 707.9a), so a copy of the copy has it too (Court of
+   * Vantress's ruling). */
+  readonly thisAbility?: {
+    readonly card: string;
+    readonly activated?: number;
+    readonly triggered?: number;
+  };
   /** "…and it isn't legendary" (Spark Double, Auton Soldier) — copiable, so
    * a later copy of it isn't either (Spark Double's ruling). Read through
    * `supertypesOf`. */
@@ -5466,9 +5513,18 @@ export interface EffectApi {
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. */
   transform(target: TargetRef): void;
-  /** The permanent `target` becomes a copy of `of` until end of turn — see
-   * the `"become-copy"` {@link EffectSpec}. */
-  becomeCopy(target: ObjectId, of: ObjectId, exceptions?: CopyExceptions): void;
+  /** The permanents `targets` become copies of `of` — see the
+   * `"become-copy"` {@link EffectSpec}, whose `ofCard`, `until` and
+   * `exceptions` `opts` carries. */
+  becomeCopy(
+    targets: readonly ObjectId[],
+    of: ObjectId,
+    opts: {
+      readonly ofCard?: boolean;
+      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
+      readonly exceptions?: CopyExceptions;
+    },
+  ): void;
   /** Pick an opponent at random for creature `target` to attack this combat
    * — see the `"attack-random-opponent"` {@link EffectSpec}. `false` when
    * there was nobody to pick; `true` otherwise, `target` gone included. */
@@ -5523,8 +5579,9 @@ export interface EffectApi {
     /** A mana cost the chooser must pay to pick a mode — see `may.cost`. */
     cost?: string,
     /** Offer only the modes this ability hasn't had chosen this turn — see
-     * `modal`'s `notChosenThisTurn` and `may`'s `oncePerTurn`. */
-    notChosenThisTurn?: boolean,
+     * `modal`'s `notChosenThisTurn` and `may`'s `oncePerTurn` — or, `"ever"`,
+     * as long as its object has been on the battlefield (`notChosenBefore`). */
+    notChosenThisTurn?: boolean | "ever",
     /** The rest of a `may`'s cost: life and energy, as numbers. */
     otherCost?: { readonly life?: number; readonly energy?: number },
     /** The player the question is about — see `may`'s `aboutThatPlayer`. */
@@ -8160,9 +8217,24 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // Acting on `target` needs it to be the same object still (rule
       // 400.7); `of` is only read, so one that has left is read as it last
       // existed (rule 608.2h).
-      const target = resolveEffectTarget(spec.target, ctx);
       const of = resolveAmountRef(spec.of, ctx);
-      if (target?.kind === "object" && of?.kind === "object") ctx.becomeCopy(target.object, of.object, spec.exceptions);
+      if (of?.kind !== "object") return;
+      let targets: readonly ObjectId[];
+      if (spec.filter !== undefined) {
+        targets = ctx
+          .permanentsMatching(spec.filter)
+          .map((m) => m.object)
+          .filter((id) => spec.exceptOf !== true || id !== of.object);
+      } else {
+        const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+        targets = target?.kind === "object" ? [target.object] : [];
+      }
+      if (targets.length === 0) return;
+      ctx.becomeCopy(targets, of.object, {
+        ...(spec.ofCard === true ? { ofCard: true } : {}),
+        ...(spec.until !== undefined ? { until: spec.until } : {}),
+        ...(spec.exceptions !== undefined ? { exceptions: spec.exceptions } : {}),
+      });
       return;
     }
     case "day-night":
@@ -8271,7 +8343,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.modes,
         undefined,
         undefined,
-        spec.notChosenThisTurn === true,
+        spec.notChosenBefore === true ? "ever" : spec.notChosenThisTurn === true,
       );
       return;
     case "may": {

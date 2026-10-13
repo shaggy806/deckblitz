@@ -349,7 +349,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "create-token-copy": (n, v) => v.touch(n.of, n.who === "you" ? "take" : "help", MAJOR),
   attach: (n, v) => v.touch(n.target, "help", MINOR),
   transform: (n, v) => v.touch(n.target, "either", MINOR),
-  "become-copy": (n, v) => v.touch(n.target, "either", MINOR),
+  // What becomes the copy, and what it copies: either may be anyone's
+  // (Mirage Mirror copies an opponent's best; Shuri, two of your own).
+  "become-copy": (n, v) => {
+    v.touch(n.target, "either", MINOR);
+    v.touch(n.of, "either", MINOR);
+  },
   "day-night": none,
   "become-monarch": none,
   // Its controller's own speed: no slot.

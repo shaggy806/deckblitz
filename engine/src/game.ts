@@ -303,6 +303,8 @@ import type {
   SpellSnapshot,
   TargetedBy,
   ZoneType,
+  CopyEnds,
+  CopyValues,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -432,8 +434,20 @@ interface TriggeredEntry {
 }
 
 /** A copy effect's exceptions as the copiable modifier the copy carries
- * (rule 707.9b) — see {@link CopyExceptions}. */
-function copyExceptionModifier(exceptions: CopyExceptions): PtModifier {
+ * (rule 707.9b) — see {@link CopyExceptions}. "This ability" (`thisAbility`)
+ * is looked up in `registry`, and becomes one of the abilities it has (rule
+ * 707.9a). */
+function copyExceptionModifier(exceptions: CopyExceptions, registry?: CardRegistry): PtModifier {
+  const own = exceptions.thisAbility;
+  if (own !== undefined && registry === undefined) throw new Error("copy exception 'thisAbility' needs the registry");
+  const ownDef = own === undefined ? undefined : registry!.get(own.card);
+  const ownActivated = own?.activated === undefined ? undefined : ownDef!.activated[own.activated];
+  const ownTriggered = own?.triggered === undefined ? undefined : ownDef!.triggered[own.triggered];
+  if (own !== undefined && ownActivated === undefined && ownTriggered === undefined) {
+    throw new Error(`copy exception 'thisAbility': ${own.card} has no such ability`);
+  }
+  const activated = [...(exceptions.activated ?? []), ...(ownActivated !== undefined ? [ownActivated] : [])];
+  const triggered = [...(exceptions.triggered ?? []), ...(ownTriggered !== undefined ? [ownTriggered] : [])];
   return {
     power: 0,
     toughness: 0,
@@ -441,8 +455,8 @@ function copyExceptionModifier(exceptions: CopyExceptions): PtModifier {
     ...(exceptions.setTypes !== undefined ? { setTypes: [...exceptions.setTypes] } : {}),
     ...(exceptions.setSubtypes !== undefined ? { setSubtypes: [...exceptions.setSubtypes] } : {}),
     ...(exceptions.addTypes !== undefined ? { addTypes: [...exceptions.addTypes] } : {}),
-    ...(exceptions.activated !== undefined ? { grantsActivated: [...exceptions.activated] } : {}),
-    ...(exceptions.triggered !== undefined ? { grantsTriggered: [...exceptions.triggered] } : {}),
+    ...(activated.length > 0 ? { grantsActivated: activated } : {}),
+    ...(triggered.length > 0 ? { grantsTriggered: triggered } : {}),
     ...(exceptions.notLegendary === true ? { notLegendary: true as const } : {}),
     ...(exceptions.addSupertypes !== undefined ? { addSupertypes: [...exceptions.addSupertypes] } : {}),
     ...(exceptions.legendRuleOff !== undefined ? { legendRuleOff: exceptions.legendRuleOff } : {}),
@@ -4186,7 +4200,7 @@ export class Game {
               // copies a copy that lasts until end of turn keeps it.
               ...copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
               ...(copied.notLegendary === true ? [copyExceptionModifier({ notLegendary: true })] : []),
-              ...(spec?.except !== undefined ? [copyExceptionModifier(spec.except)] : []),
+              ...(spec?.except !== undefined ? [copyExceptionModifier(spec.except, this.registry)] : []),
             ],
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
@@ -4361,6 +4375,9 @@ export class Game {
     ability: {
       readonly key?: string;
       readonly notChosenThisTurn?: boolean;
+      /** With `notChosenThisTurn`: not this turn but ever — `modal`'s
+       * `notChosenBefore` (`GameState.modesChosenEver`). */
+      readonly notChosenEver?: boolean;
       readonly costLife?: number;
       readonly costEnergy?: number;
       /** See the `choose-modes` decision's `modesController`. */
@@ -4402,7 +4419,10 @@ export class Game {
     // with none left there is nothing to choose — a `may` falls to its "if
     // you don't".
     const onlyUnchosen = ability.notChosenThisTurn === true && key !== undefined;
-    const chosenBefore = onlyUnchosen ? (this.state.modesChosenThisTurn?.[key] ?? []) : [];
+    const ever = ability.notChosenEver === true;
+    const chosenBefore = onlyUnchosen
+      ? ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[key] ?? [])
+      : [];
     const offered = modes.map((_mode, i) => i).filter((i) => !chosenBefore.includes(i));
     if (offered.length === 0 && modes.length > 0) {
       decline();
@@ -4459,6 +4479,7 @@ export class Game {
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
       ...(key !== undefined ? { abilityKey: key } : {}),
       ...(onlyUnchosen ? { notChosenThisTurn: offered } : {}),
+      ...(onlyUnchosen && ever ? { chosenEver: true as const } : {}),
       ...(costLife > 0 ? { costLife } : {}),
       ...(costEnergy > 0 ? { costEnergy } : {}),
       ...(ability.modesController !== undefined && ability.modesController !== controller
@@ -4521,7 +4542,10 @@ export class Game {
       // "That hasn't been chosen this turn": chosen as it goes on the
       // stack, so a second copy triggered alongside it already can't.
       if (awaiting.abilityKey !== undefined && ordered.length > 0) {
-        const record = (this.state.modesChosenThisTurn ??= {});
+        const record =
+          awaiting.chosenEver === true
+            ? (this.state.modesChosenEver ??= {})
+            : (this.state.modesChosenThisTurn ??= {});
         record[awaiting.abilityKey] = [...(record[awaiting.abilityKey] ?? []), ...ordered];
       }
       this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: ordered });
@@ -4586,7 +4610,10 @@ export class Game {
       ...(awaiting.sourceLost === true ? { sourceLost: true } : {}),
     };
     if (unchosen !== undefined && abilityKey !== undefined && own.length > 0) {
-      const record = (this.state.modesChosenThisTurn ??= {});
+      const record =
+        awaiting.chosenEver === true
+          ? (this.state.modesChosenEver ??= {})
+          : (this.state.modesChosenThisTurn ??= {});
       record[abilityKey] = [...(record[abilityKey] ?? []), ...own];
     }
     this.emit({ type: "modes-chosen", source, player, modes: own });
@@ -5133,6 +5160,13 @@ export class Game {
           (m) => m.untilTurnOf === undefined || !beginningFor.includes(m.untilTurnOf),
         );
       }
+      // A copy "until your next turn" (Taskmaster, Mercenary Mimic).
+      if (
+        object?.temporaryCopies !== undefined &&
+        this.endTemporaryCopies(object, (ends) => typeof ends === "object" && beginningFor.includes(ends.turnOf))
+      ) {
+        invalidateComputedCache();
+      }
       // A goad lasts "until your next turn" (rule 701.15a) — on every
       // creature, not just the goader's. A goad for the rest of the game
       // (`goadedForGameBy`) doesn't.
@@ -5459,6 +5493,15 @@ export class Game {
    * beginning of their end step (rule 720.6 — a triggered ability; folded in
    * here without the stack, like the draw step). */
   private endStepActions(): void {
+    // A copy "until the next end step" (Niko, Light of Hope) ends as it
+    // begins: what it was before again, where it is.
+    let copyEnded = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object?.temporaryCopies === undefined) continue;
+      if (this.endTemporaryCopies(object, (ends) => ends === "next-end-step")) copyEnded = true;
+    }
+    if (copyEnded) invalidateComputedCache();
     // "Until your next end step" impulse permissions lapse as it begins.
     const active = this.activePlayer;
     for (const id of this.state.zones.shared.exile) {
@@ -6263,24 +6306,15 @@ export class Game {
     const expired: ObjectId[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      const copyEnds = object.copyEndsAtCleanup === true;
-      // A copy "until end of turn" (Cursed Mirror) ends (rule 514.2): it's
-      // itself again where it is, so nothing enters or leaves.
-      if (copyEnds) {
-        // What it was before a `become-copy` (Sarkhan, Soul Aflame), else
-        // itself again.
-        object.copyOf = object.copyRestore?.copyOf ?? null;
-        delete object.copyEndsAtCleanup;
-      }
+      // A copy "until end of turn" (Cursed Mirror, Mirage Mirror) ends (rule
+      // 514.2): it's what it was before again where it is, so nothing enters
+      // or leaves.
+      const copyEnded = this.endTemporaryCopies(object, (ends) => ends === "end-of-turn");
       if (object.modifiers.some((m) => m.untilEndOfTurn)) {
         object.modifiers = object.modifiers.filter((m) => !m.untilEndOfTurn);
         expired.push(id);
-      } else if (copyEnds) {
+      } else if (copyEnded) {
         expired.push(id);
-      }
-      if (copyEnds && object.copyRestore !== undefined) {
-        object.modifiers = [...object.copyRestore.modifiers, ...object.modifiers];
-        delete object.copyRestore;
       }
     }
     if (expired.length > 0) invalidateComputedCache();
@@ -17714,8 +17748,15 @@ export class Game {
       // (Galadriel, Light of Valinor), one this ability of this object has
       // had chosen this turn; with none left, the ability is removed.
       const modeSource = this.abilityTargetSource(trigger);
-      const turnKey = modal.notChosenThisTurn === true ? this.pendingTriggerTurnKey(trigger) : undefined;
-      const chosenBefore = turnKey === undefined ? [] : (this.state.modesChosenThisTurn?.[turnKey] ?? []);
+      // So for "choose one that hasn't been chosen" (Silent Hallcreeper), one
+      // this object has had chosen since it entered.
+      const ever = modal.notChosenBefore === true;
+      const turnKey =
+        modal.notChosenThisTurn === true || ever ? this.pendingTriggerTurnKey(trigger) : undefined;
+      const chosenBefore =
+        turnKey === undefined
+          ? []
+          : ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[turnKey] ?? []);
       const offered = modal.modes.flatMap((mode, i) =>
         !chosenBefore.includes(i) &&
         (mode.targets ?? []).every(
@@ -17744,6 +17785,7 @@ export class Game {
         modes: offered.map((i) => ({ text: modal.modes[i].text, effect: modal.modes[i].effect })),
         ...(offered.length < modal.modes.length ? { announcedFrom: offered } : {}),
         ...(turnKey !== undefined ? { abilityKey: turnKey } : {}),
+        ...(turnKey !== undefined && ever ? { chosenEver: true as const } : {}),
         x: trigger.x ?? 0,
         targets: [],
         ...(trigger.triggerValue !== undefined && trigger.triggerValue !== 0
@@ -18565,8 +18607,14 @@ export class Game {
         }
         return names.size;
       },
-      becomeCopy: (target, of, exceptions) =>
-        this.becomeCopyUntilEndOfTurn(target, of, exceptions, lastKnownOf({ kind: "object", object: of })),
+      becomeCopy: (targets, of, opts) =>
+        this.becomeCopy(
+          targets,
+          of,
+          opts,
+          controller,
+          opts.ofCard === true ? undefined : lastKnownOf({ kind: "object", object: of }),
+        ),
       attackRandomOpponent: (target, notAttackedLastCombat) =>
         this.attackRandomOpponent(controller, target, notAttackedLastCombat),
       pickAtRandom: (count, pick) => this.pickAtRandom(controller, source, count, pick),
@@ -20216,7 +20264,8 @@ export class Game {
           {
             key: opts.abilityKey,
             ...(opts.sourceLost === true ? { sourceLost: true } : {}),
-            notChosenThisTurn: notChosenThisTurn === true,
+            ...(notChosenThisTurn === "ever" ? { notChosenEver: true } : {}),
+            notChosenThisTurn: notChosenThisTurn === true || notChosenThisTurn === "ever",
             ...(otherCost?.life !== undefined ? { costLife: otherCost.life } : {}),
             ...(otherCost?.energy !== undefined ? { costEnergy: otherCost.energy } : {}),
             ...(about !== undefined ? { about } : {}),
@@ -21896,7 +21945,7 @@ export class Game {
             },
           ]
         : []),
-      ...(opts.exceptions !== undefined ? [copyExceptionModifier(opts.exceptions)] : []),
+      ...(opts.exceptions !== undefined ? [copyExceptionModifier(opts.exceptions, this.registry)] : []),
       ...untilEndOfTurnKeywords(opts.gainUntilEndOfTurn ?? []),
       ...(opts.gainKeywords !== undefined && opts.gainKeywords.length > 0
         ? [{ power: 0, toughness: 0, keywords: [...opts.gainKeywords], untilEndOfTurn: false }]
@@ -21965,46 +22014,127 @@ export class Game {
   }
 
   /**
-   * The `become-copy` effect: permanent `id` becomes a copy of `ofId` until
-   * end of turn, with `exceptions` (rule 707.2 — Sarkhan, Soul Aflame). It
-   * copies `ofId`'s copiable values — its printed card, or what it copies,
-   * and the copy exceptions that made it so (rule 707.9b) — read off
-   * `departed` if it has left the battlefield (rule 608.2h). Its own status,
-   * counters and the non-copy effects on it stay (rule 707.2). The copiable
-   * values it had are set aside in `copyRestore` until the cleanup step
-   * (rule 514.2); one that a copy until end of turn had already changed goes
-   * back to what was under that, as both end then.
+   * The `become-copy` effect: the permanents `ids` become copies of `ofId`,
+   * with `exceptions` (rules 707.2, 707.4 — Sarkhan, Soul Aflame, Mirrorform).
+   * They copy `ofId`'s copiable values as they are before any of them changes
+   * — see {@link copiableValuesOf} — and keep their own status, counters and
+   * the non-copy effects on them (707.4). With `until`, each copy ends then
+   * (`temporaryCopies`); without, it lasts as long as the permanent does
+   * (rule 611.2a).
    */
-  private becomeCopyUntilEndOfTurn(
-    id: ObjectId,
+  private becomeCopy(
+    ids: readonly ObjectId[],
     ofId: ObjectId,
-    exceptions: CopyExceptions | undefined,
+    opts: {
+      readonly ofCard?: boolean;
+      readonly until?: "end-of-turn" | "next-end-step" | "your-next-turn";
+      readonly exceptions?: CopyExceptions;
+    },
+    controller: PlayerId,
     departed: LastKnownInfo | undefined,
   ): void {
-    const object = this.state.objects[id];
-    const of = this.state.objects[ofId];
-    if (object === undefined || object.zone !== "battlefield") return;
-    if (departed === undefined && of?.zone !== "battlefield") return;
-    const copyName = departed !== undefined ? departed.name : printedCardName(of!);
-    this.registry.get(copyName); // validate it's a known definition
+    const source = this.copiableValuesOf(ofId, opts.ofCard === true, departed);
+    if (source === undefined) return;
     const copied: PtModifier[] = [
-      // A copy's duration isn't copiable (Cursed Mirror's ruling).
-      ...(departed !== undefined ? (departed.copiable ?? []) : of!.modifiers)
-        .filter((m) => m.copiable === true)
-        .map((m) => ({ ...m, timestamp: -2, untilEndOfTurn: true })),
-      ...((departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true)
-        ? [{ ...copyExceptionModifier({ notLegendary: true }), untilEndOfTurn: true }]
-        : []),
-      ...(exceptions !== undefined ? [{ ...copyExceptionModifier(exceptions), untilEndOfTurn: true }] : []),
-    ];
-    object.copyRestore ??= object.copyEndsAtCleanup === true
-      ? { copyOf: null, modifiers: object.modifiers.filter((m) => m.copiable === true && !m.untilEndOfTurn) }
-      : { copyOf: object.copyOf, modifiers: object.modifiers.filter((m) => m.copiable === true) };
-    object.modifiers = [...object.modifiers.filter((m) => m.copiable !== true), ...copied];
-    object.copyOf = copyName;
-    object.copyEndsAtCleanup = true;
+      ...source.modifiers,
+      ...(opts.exceptions !== undefined ? [copyExceptionModifier(opts.exceptions, this.registry)] : []),
+    ].map((m) => ({ ...m, timestamp: -2 }));
+    const ends: CopyEnds | undefined =
+      opts.until === undefined ? undefined : opts.until === "your-next-turn" ? { turnOf: controller } : opts.until;
+    const changed: ObjectId[] = [];
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "battlefield") continue;
+      this.setCopiableValues(object, { copyOf: source.copyOf, modifiers: copied.map((m) => ({ ...m })) }, ends);
+      changed.push(id);
+    }
+    if (changed.length === 0) return;
     invalidateComputedCache();
-    this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
+    for (const id of changed) this.emit({ type: "permanent-copied", object: id, copyOf: source.copyOf });
+  }
+
+  /**
+   * What copying `ofId` gives a copy (rule 707.2): the name of the card it
+   * has the printed values of, and its copy exceptions (707.9b) — a token
+   * copy's "isn't legendary" among them — with no duration, which isn't
+   * copiable (Cursed Mirror's ruling). A permanent's are as they are now, or
+   * as it last existed (`departed`, rule 608.2h) if it has left; a spell's
+   * are its card's and its own exceptions. A card elsewhere (`asCard`, or
+   * any card not on the battlefield or the stack) has only its printed
+   * values, front face up (rule 712.8a). `undefined` when there's nothing to
+   * copy — an ability, or a token gone without a trace.
+   */
+  private copiableValuesOf(
+    ofId: ObjectId,
+    asCard: boolean,
+    departed: LastKnownInfo | undefined,
+  ): (CopyValues & { readonly copyOf: string }) | undefined {
+    const withoutDuration = (modifiers: readonly PtModifier[], notLegendary: boolean): PtModifier[] => [
+      ...modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
+      ...(notLegendary ? [copyExceptionModifier({ notLegendary: true })] : []),
+    ];
+    if (!asCard && departed !== undefined) {
+      this.registry.get(departed.name); // validate it's a known definition
+      return { copyOf: departed.name, modifiers: withoutDuration(departed.copiable ?? [], departed.notLegendary === true) };
+    }
+    const of = this.state.objects[ofId];
+    if (of === undefined || of.kind !== "card") return undefined;
+    if (!asCard && (of.zone === "battlefield" || of.zone === "stack")) {
+      return { copyOf: printedCardName(of), modifiers: withoutDuration(of.modifiers, of.notLegendary === true) };
+    }
+    if (of.isToken === true) return undefined;
+    return { copyOf: of.cardName, modifiers: [] };
+  }
+
+  /**
+   * Make `object`'s copiable values `values` (rule 707.2): its `copyOf`, and
+   * its copiable modifiers in place of the ones it had (a token copy's "isn't
+   * legendary" with them). With `ends`, a copy effect with that duration on
+   * top of whatever it was (`temporaryCopies`); without, one that lasts —
+   * later than every temporary one, so they're gone (rule 613.7a).
+   */
+  private setCopiableValues(object: GameObject, values: CopyValues & { readonly copyOf: string }, ends?: CopyEnds): void {
+    if (ends === undefined) {
+      delete object.temporaryCopies;
+      delete object.copyBase;
+    } else {
+      object.copyBase ??= {
+        copyOf: object.copyOf,
+        modifiers: object.modifiers.filter((m) => m.copiable === true),
+        ...(object.notLegendary === true ? { notLegendary: true as const } : {}),
+      };
+      object.temporaryCopies = [...(object.temporaryCopies ?? []), { ...values, ends }];
+    }
+    this.applyCopiableValues(object, values);
+  }
+
+  private applyCopiableValues(object: GameObject, values: CopyValues): void {
+    object.copyOf = values.copyOf;
+    object.modifiers = [
+      ...object.modifiers.filter((m) => m.copiable !== true),
+      ...values.modifiers.map((m) => ({ ...m })),
+    ];
+    if (values.notLegendary === true) object.notLegendary = true;
+    else delete object.notLegendary;
+  }
+
+  /**
+   * End `object`'s temporary copy effects whose end `ends` says has come: it
+   * is the latest one left, else what it was under them all (`copyBase`).
+   * Whether any ended. The caller invalidates the computed cache.
+   */
+  private endTemporaryCopies(object: GameObject, ends: (ends: CopyEnds) => boolean): boolean {
+    const copies = object.temporaryCopies;
+    if (copies === undefined || !copies.some((c) => ends(c.ends))) return false;
+    const left = copies.filter((c) => !ends(c.ends));
+    const now = left.at(-1) ?? object.copyBase ?? { copyOf: null, modifiers: [] };
+    this.applyCopiableValues(object, now);
+    if (left.length > 0) object.temporaryCopies = left;
+    else {
+      delete object.temporaryCopies;
+      delete object.copyBase;
+    }
+    return true;
   }
 
   /** Below this, a *fresh* batch (no existing pristine match to fold into)
@@ -29755,8 +29885,8 @@ export class Game {
     // A copy effect ends when the object changes zones (rule 707.2) — a Clone
     // that dies and returns is a Clone again.
     object.copyOf = null;
-    delete object.copyEndsAtCleanup;
-    delete object.copyRestore;
+    delete object.temporaryCopies;
+    delete object.copyBase;
     // So does an exchange of text boxes (rule 612.5): a new object has its
     // own text again (400.7).
     delete object.textFrom;
@@ -29775,13 +29905,14 @@ export class Game {
     object.enterChoice = undefined;
     if (to === "battlefield" && enterChoice !== undefined) {
       if (enterChoice.copyOf !== undefined && enterChoice.copyOf !== null) {
-        object.copyOf = enterChoice.copyOf;
-        // A copy "until end of turn" (Cursed Mirror): its exceptions end with
-        // it in the cleanup step (rule 514.2), which clears `copyOf` too.
-        const untilEndOfTurn = enterChoice.copyEnter?.untilEndOfTurn === true;
-        if (untilEndOfTurn) object.copyEndsAtCleanup = true;
-        for (const m of enterChoice.copyModifiers ?? []) {
-          object.modifiers.push({ ...m, timestamp: -2, ...(untilEndOfTurn ? { untilEndOfTurn: true } : {}) });
+        // A copy "until end of turn" (Cursed Mirror): it and its exceptions
+        // end in the cleanup step (rule 514.2), and it's itself again.
+        const copied = (enterChoice.copyModifiers ?? []).map((m) => ({ ...m, timestamp: -2, untilEndOfTurn: false }));
+        if (enterChoice.copyEnter?.untilEndOfTurn === true) {
+          this.setCopiableValues(object, { copyOf: enterChoice.copyOf, modifiers: copied }, "end-of-turn");
+        } else {
+          object.copyOf = enterChoice.copyOf;
+          object.modifiers.push(...copied);
         }
         this.emit({ type: "permanent-copied", object: id, copyOf: enterChoice.copyOf });
       }

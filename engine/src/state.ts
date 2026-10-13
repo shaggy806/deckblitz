@@ -506,16 +506,23 @@ export interface GameObject {
    * abilities are read through {@link rulesTextName}. Cleared on any zone
    * change, with `copyOf`. */
   textFrom?: string;
-  /** Its copy effect lasts until end of turn (Cursed Mirror — rule 514.2):
-   * the cleanup step clears `copyOf` along with the copy's exceptions, which
-   * were made until-end-of-turn modifiers. Cleared on any zone change. */
-  copyEndsAtCleanup?: true;
-  /** What it was before a `become-copy` until end of turn made it a copy
-   * (Sarkhan, Soul Aflame): its `copyOf` and the copiable modifiers that
-   * copy set aside (a copy's copiable values replace them all — rule
-   * 707.2). The cleanup step puts them back with `copyEndsAtCleanup`.
-   * Cleared on any zone change. */
-  copyRestore?: { readonly copyOf: string | null; readonly modifiers: PtModifier[] };
+  /**
+   * The copy effects with a duration that apply to it, oldest first —
+   * entering as a copy until end of turn (Cursed Mirror), a `become-copy`
+   * until end of turn (Mirage Mirror), until the next end step (Niko, Light
+   * of Hope) or until its controller's next turn (Taskmaster, Mercenary
+   * Mimic). Copy effects apply in timestamp order and each sets every
+   * copiable value (rules 613.2, 613.7a, 707.2), so the last one is what it
+   * is — its `copyOf` and copiable modifiers are that one's — and under them
+   * all it is {@link copyBase}. As one ends it's dropped, and it is the
+   * latest left again, else its base (`Game.endTemporaryCopies`). A copy
+   * effect without a duration that applies later is later than every one of
+   * them, so it replaces them all. Cleared on any zone change.
+   */
+  temporaryCopies?: TemporaryCopy[];
+  /** What it is under every one of {@link temporaryCopies}: set as the first
+   * begins, cleared with the last. Cleared on any zone change. */
+  copyBase?: CopyValues;
   /** The creature type chosen as this permanent entered (Urza's Incubator —
    * needed-cards P14, rule 601.2f-adjacent — an ETB choice, not a cast-time
    * one). Absent for a permanent with no such choice; cleared on any zone
@@ -1027,6 +1034,29 @@ export interface SpellSnapshot {
   readonly convokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
+}
+
+/** A permanent's copiable values as a copy effect sets them (rule 707.2):
+ * what it's a copy of (`null` for itself), its copiable modifiers (the copy
+ * exceptions, rule 707.9b) and a token copy's "isn't legendary"
+ * (`GameObject.notLegendary`). */
+export interface CopyValues {
+  readonly copyOf: string | null;
+  readonly modifiers: readonly PtModifier[];
+  readonly notLegendary?: true;
+}
+
+/** When a copy effect with a duration ends: in the cleanup step ("until end
+ * of turn", rule 514.2), as the next end step begins ("until the next end
+ * step"), or as `turnOf`'s next turn begins ("until your next turn" — or as
+ * it would have, once they've left the game, rule 800.4m). */
+export type CopyEnds = "end-of-turn" | "next-end-step" | { readonly turnOf: PlayerId };
+
+/** One of `GameObject.temporaryCopies`: the values that copy effect gives it,
+ * and when it ends. */
+export interface TemporaryCopy extends CopyValues {
+  readonly copyOf: string;
+  readonly ends: CopyEnds;
 }
 
 export interface PtModifier {
@@ -2470,8 +2500,10 @@ export type AwaitingDecision =
       readonly abilityKey?: string;
       /** "That hasn't been chosen this turn": which of the ability's modes
        * each offered one is, recorded in `GameState.modesChosenThisTurn`
-       * once chosen. */
+       * once chosen — or in `GameState.modesChosenEver`, with `chosenEver`
+       * ("that hasn't been chosen"). */
       readonly notChosenThisTurn?: readonly number[];
+      readonly chosenEver?: true;
       /** Announcing (`announcing`) out of fewer than all of the ability's
        * modes — one needing a target it can't have can't be chosen (rule
        * 603.3c): which of its own modes each offered one is. */
@@ -3223,6 +3255,11 @@ export interface GameState {
    * cleared as a turn begins.
    */
   modesChosenThisTurn?: Record<string, number[]>;
+  /** The same, never cleared — for "choose one that hasn't been chosen"
+   * (`modal`'s `notChosenBefore` — Silent Hallcreeper). The key carries the
+   * permanent's timestamp, which it gets as it enters, so a permanent that
+   * leaves and comes back is a new object with none chosen (rule 400.7). */
+  modesChosenEver?: Record<string, number[]>;
   /**
    * "The same for all of them": a player's answer to one trigger's "you
    * may", standing for the identical triggers that were under it on the
@@ -3913,8 +3950,8 @@ export function tokenFoldKey(o: GameObject): string {
   return JSON.stringify([
     o.cardName,
     o.copyOf,
-    o.copyEndsAtCleanup ?? false,
-    o.copyRestore ?? null,
+    o.temporaryCopies ?? null,
+    o.copyBase ?? null,
     o.owner,
     o.controller,
     o.tapped,

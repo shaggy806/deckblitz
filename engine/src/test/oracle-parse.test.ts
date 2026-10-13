@@ -354,6 +354,40 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parsed.static[0]).toMatchObject({ replacement: { event: "enters-battlefield", prepared: true } });
   });
 
+  it("becoming a copy (rules 707.2, 707.9a): for good or until end of turn, \"another\" target, and \"this ability\" named by its place", () => {
+    const stage = face("{T}: Add {C}.\n{2}, {T}: This land becomes a copy of target land, except it has this ability.", "Land");
+    expect(stage.complete).toBe(true);
+    expect(stage.activated[1]).toMatchObject({
+      targets: ["land"],
+      effect: {
+        kind: "become-copy",
+        target: "source",
+        of: 0,
+        exceptions: { thisAbility: { card: "Test Card", activated: 1 } },
+      },
+    });
+    const c = ctx();
+    expect(parseSentence("~ becomes a copy of target artifact until end of turn.", c)).toEqual({
+      kind: "become-copy",
+      target: "source",
+      of: 0,
+      until: "end-of-turn",
+    });
+    expect(c.targets).toEqual(["artifact"]);
+    const plasm = face(
+      "At the beginning of your upkeep, you may have this creature become a copy of another target creature, except it has this ability.",
+    );
+    expect(plasm.complete).toBe(true);
+    expect(plasm.triggered[0].targets).toEqual([{ kind: "other", of: "creature" }]);
+    expect(plasm.triggered[0].effect).toMatchObject({
+      kind: "may",
+      prompt: "Have Test Card become a copy of another target creature, except it has this ability?",
+      effect: { kind: "become-copy", target: "source", of: 0, exceptions: { thisAbility: { card: "Test Card", triggered: 0 } } },
+    });
+    // Any other exception is a person's.
+    expect(face("{2}: This creature becomes a copy of target creature, except its name is Test Card.").complete).toBe(false);
+  });
+
   it("\"your first noncreature spell each turn\" counts noncreature spells (Valeria Richards)", () => {
     const parsed = face("Whenever you cast your first noncreature spell each turn, draw a card.");
     expect(parsed.triggered[0]?.trigger).toMatchObject({ on: "cast-spell", firstEachTurn: true, filter: { notTypes: ["creature"] } });

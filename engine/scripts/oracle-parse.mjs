@@ -1029,6 +1029,22 @@ export function parseSentence(sentence, ctx) {
   if (re("regenerate ~").test(s)) return { kind: "regenerate", target: "source" };
   if ((m = re(`regenerate (${TARGET})`).exec(s))) return { kind: "regenerate", target: slot(m[1]) };
   if (re("transform ~").test(s)) return { kind: "transform", target: "source" };
+  // Becoming a copy (rules 707.2, 707.4): the source, of a target — for good
+  // (rule 611.2a) or until end of turn — with "this ability" (707.9a). "Have
+  // ~ become …" is what "you may" wraps; "another" target is one other than
+  // the source.
+  if ((m = re(`(?:~ becomes|have ~ become) a copy of (another )?(${TARGET})( until end of turn)?(, except it has this ability)?`).exec(s))) {
+    const [, another, phrase, untilEndOfTurn, thisAbility] = m;
+    const spec = targetOf(phrase);
+    if (spec === undefined || (another && ctx.spell)) return null;
+    return {
+      kind: "become-copy",
+      target: "source",
+      of: ctx.target(another ? { kind: "other", of: spec } : spec),
+      ...(untilEndOfTurn ? { until: "end-of-turn" } : {}),
+      ...(thisAbility ? { exceptions: { thisAbility: THIS_ABILITY } } : {}),
+    };
+  }
   if ((m = re(`prevent the next ${N} damage that would be dealt to (${TARGET}) this turn`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2]), amount: amount(m[1]) };
   }
@@ -1662,8 +1678,25 @@ export function parseFace(face, ctx = {}) {
     }
   };
   namePrompts([out.activated, out.triggered, out.static, out.effect]);
+  // "…except it has this ability" (rule 707.9a): the ability the sentence is
+  // in, named by the card and its place in the card's list (`thisAbility`).
+  const nameThisAbility = (node, where) => {
+    if (Array.isArray(node)) node.forEach((n) => nameThisAbility(n, where));
+    else if (node !== null && typeof node === "object") {
+      for (const [k, v] of Object.entries(node)) {
+        if (k === "thisAbility" && v === THIS_ABILITY) node[k] = { card: face.name, ...where };
+        else nameThisAbility(v, where);
+      }
+    }
+  };
+  out.activated.forEach((a, i) => nameThisAbility(a.effect, { activated: i }));
+  out.triggered.forEach((a, i) => nameThisAbility(a.effect, { triggered: i }));
   return out;
 }
+
+/** Stands for "this ability" in a copy exception until `parseFace` knows
+ * which ability the sentence is in. */
+const THIS_ABILITY = "this ability";
 
 /** "As long as you have max speed" (rules 702.178a, 702.179e) — the
  * `maxSpeed()` helper's condition. */
