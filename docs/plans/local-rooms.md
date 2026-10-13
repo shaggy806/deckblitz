@@ -32,9 +32,10 @@ that player the bots' hands).
   the lobby (`create-room`, even if the host then fills every other seat with bots) stays on the
   server, since another person may join. A local room has no code anyone else can join, and no
   spectating or invite link.
-- **Fallback to the server** when the browser can't (no module workers), the device looks too
-  weak (`navigator.deviceMemory < 4`, `hardwareConcurrency < 4`), the card shards fail to load, or
-  a `?local=0` override is set. The server path stays exactly as it is.
+- **Fallback to the server** when the browser can't (no module workers), the card shards fail to
+  load, or a `?local=0` override is set. The site is desktop and laptop only (never phones), so
+  there's no device sniffing: the weakest machine to plan for is a low-end laptop, and the user has
+  one to test on (step 6). The server path stays exactly as it is.
 
 ## What has to change
 
@@ -77,7 +78,7 @@ over nearly all 32 shards anyway: load them all (`loadCardShard`, 6.3 MB of JS, 
 bot. The library and deck builder already load the same files, so a returning player usually
 has them cached. Memory: the server measured ~150 MB of heap for the engine and the pool in a
 fresh Node isolate; measure the browser worker's (`performance.measureUserAgentSpecificMemory`
-where available), since phones are the risk.
+where available) on the user's low-end laptop.
 
 ### Deck import stays a server call
 
@@ -87,11 +88,11 @@ returned deck goes to the local room instead of the server's.
 
 ### The bots on a player's device
 
-v2's budget is wall clock (`BOT_DECISION_BUDGET_MS`, 300 ms): on a slow phone it searches less and
-plays weaker. Options: keep the wall clock but raise it on weak devices (the pause the room takes
-for animations covers it), or count simulations instead. Measure a decision's simulations on a
-mid-range phone (the load test's decision-times script, run in a browser) before choosing. Run
-the room in a worker so a search never freezes the page.
+v2's budget is wall clock (`BOT_DECISION_BUDGET_MS`, 300 ms): on a slow laptop it searches less and
+plays weaker. Options: keep the wall clock but raise it on slower machines (the pause the room
+takes for animations covers it), or count simulations instead. Measure a decision's simulations on
+the user's low-end laptop (the decision-times script, run in its browser) before choosing. Run the
+room in a worker so a search never freezes the page.
 
 ### What the server used to give for free
 
@@ -122,14 +123,15 @@ to another player, and a room with a second human never goes local.
    socket; the existing blitz e2e still passes on the server path.
 4. **Tutorials local** (the lesson data and `buildScenario` in the shared code).
 5. **Resume after reload** (IndexedDB snapshots), **uploads for bug reports**, the optional ping.
-6. **Bot budget on devices**: measure, then choose wall clock or a simulation count.
+6. **Bot budget on a slow machine**: measure bot decisions and the worker's memory on the user's low-end
+   laptop, then choose wall clock or a simulation count.
 7. **Default on** for blitz and tutorials, with the fallback rules; the load test confirms the
    server no longer sees them; deploy.
 
 ## Risks
 
-- **Phones**: memory for the pool plus the engine, and bot strength under a wall-clock budget.
-  The fallback keeps weak devices on the server.
+- **Slow laptops**: memory for the pool plus the engine, and bot strength under a wall-clock
+  budget — measured on the user's low-end laptop before default-on.
 - **Two code paths for the same game**: the same `RoomService` on both sides keeps them one; the
   e2e suite runs blitz both ways.
 - **Bundle size**: the engine and bots add to the client; load them only when a local game starts

@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MTG-Engine is a Magic: The Gathering rules engine (`engine/`) with an authoritative multiplayer
 room server (`server/`) and a React web client (`client/`) — a real networked 2-4 player game
-(Commander-capable), not a local hot-seat demo. The repo is an **npm workspaces monorepo**
+(Commander-capable), not a local hot-seat demo. **Desktop and laptop only, permanently**: never
+design, plan, test or fix for phones or tablets; the weakest machine to plan for is a low-end
+laptop. The repo is an **npm workspaces monorepo**
 (`workspaces: ["engine", "protocol", "server", "client"]` in the root `package.json`, in
 that order so `engine` builds first, then `protocol`, then `server`).
 
