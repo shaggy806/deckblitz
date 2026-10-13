@@ -4,6 +4,37 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-10-12 — Roiling Dragonstorm on turn two over Rampant Growth
+
+Status: open.
+
+- **Seen:** room LCKCN, round 2 (four players, the user's seat bot-played): a Temur Dragons deck
+  with Temple of Mystery and Shivan Reef out and its land drop made cast Roiling Dragonstorm ({1}{U}:
+  draw two, then discard one) with Rampant Growth and Farseek in hand, beside Defense of the Heart,
+  Maelstrom Colossus and Scourge of Valkas.
+- **Right:** Rampant Growth (or Farseek). On turn two a land ahead of the curve is mana every turn
+  after, and the hand is four- and five-drops under a six-mana commander; looting only sorts the hand.
+- **Scenario:** "casts Rampant Growth on turn two, not Roiling Dragonstorm" (training; reads wrong,
+  casting Dragonstorm by 0.05).
+- **Why:** v2's search scores the two against passing (18.43): Dragonstorm **+2.45**, Rampant Growth
+  **+2.40**.
+  - Dragonstorm leaves the hand at seven (cast one, draw two, discard one) and puts an enchantment on
+    the battlefield worth `otherPermanents` 2 + `permanentManaValue` 1. That enchantment does nothing
+    more until a Dragon bounces it, but it scores like a Sol Ring.
+  - Rampant Growth is a land (`lands` 4.5) for a card (`hand` 2).
+  - `earlyMana` (+6 a mana through round 2, fading by round 6) prices exactly this acceleration, but
+    it reads `nonlandMana`, mana from rocks and creatures only. So a turn-two Arcane Signet counts
+    the early bonus and a turn-two Rampant Growth doesn't.
+  - `bot:fit-scenarios`: `permanentManaValue` 0.5 → 0.38 or `handManaValue` 0.05 → 0.08 flips it
+    and breaks nothing, but only by 0.19 — tuning to one board, not a cause.
+- **Likely fix:** count a land beyond the curve (lands on the battlefield past one per round played)
+  toward `earlyMana`, the same as a mana rock. That would put Rampant Growth about +6 ahead on turn
+  two, and Explore and Sakura-Tribe Elder ahead with it.
+  - Risk: an opponent who ramped reads as a bigger threat early, and removal aimed by `earlyMana`
+    could go at a ramped player's creatures. The removal scenarios (`kills an early Llanowar Elves`,
+    `kills a Craw Wurm ramped out on turn two`) would show it.
+  - Lands from the bot's own natural drops never count, so a land-pass turn gains nothing.
+
 ## 2026-10-10 — Attackers sent in to die, or to trade, at four players
 
 Status: fixed 2026-10-10 (its scenario now gates).

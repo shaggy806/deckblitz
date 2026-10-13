@@ -2304,6 +2304,39 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "casts Rampant Growth on turn two, not Roiling Dragonstorm",
+    kind: "training",
+    rule: "On turn two a ramp spell puts a land down for every turn after, where looting two cards only sorts the hand; with a six-mana commander and a hand of four- and five-drops, ramp first.",
+    position(registry) {
+      // Reported from a live game (2026-10-12, room LCKCN, no capture; the
+      // user's seat bot-played): on its second turn, Temple of Mystery and
+      // Shivan Reef out and its land drop made, the bot cast Roiling
+      // Dragonstorm (draw two, discard one) with Rampant Growth and Farseek
+      // in hand, a Temur Dragons deck whose hand was Defense of the Heart,
+      // Maelstrom Colossus and Scourge of Valkas.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 5; // alice's second turn
+      // Out since turn one, so untapped: it enters tapped even when spawned.
+      game.state.objects[onBoard(game, "Temple of Mystery", A)].tapped = false;
+      onBoard(game, "Shivan Reef", A);
+      game.state.players[A].landsPlayedThisTurn = 1;
+      for (const land of ["Mountain", "Island"]) game.debugSpawn(land, A, "library");
+      game.debugSpawn("Roiling Dragonstorm", A, "hand");
+      const ramp = [game.debugSpawn("Rampant Growth", A, "hand"), game.debugSpawn("Farseek", A, "hand")];
+      for (const card of ["Mountain", "Defense of the Heart", "Maelstrom Colossus", "Scourge of Valkas"]) {
+        game.debugSpawn(card, A, "hand");
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && ramp.includes(action.card),
+          detail: `chose ${action.type === "cast-spell" ? cardOf(game, action.card) : describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "plays Glacial Fortress tapped on turn one over a Mountain for nothing it would cast",
     rule: "A land letting you cast a spell is of no value if you wouldn't cast the spell with the mana.",
     position(registry) {
