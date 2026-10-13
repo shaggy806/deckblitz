@@ -358,8 +358,12 @@ export type EffectAmount =
    * `"that-color"` is the colour an `add-mana` of `"any-color"` is making —
    * Nykthos, Shrine to Nyx's "Choose a color. Add an amount of mana of that
    * color equal to your devotion to that color": the colour is chosen first,
-   * then the amount read for it. 0 anywhere else. */
-  | { readonly devotionTo: Color | "that-color" }
+   * then the amount read for it. 0 anywhere else.
+   *
+   * A list is "your devotion to [colour] and [colour]" (rule 700.5): every
+   * symbol that's either colour, a `{W/B}` counted once. `characteristics.ts`'s
+   * `devotionOf`, which the `devotion` condition and CDA count read too. */
+  | { readonly devotionTo: Color | readonly Color[] | "that-color" }
   /** The greatest mana value among the effect's controller's commanders,
    * wherever each one is, as it is now (Cactus Preserve's "an X/X … where X
    * is the greatest mana value among your commanders" — its ruling); 0 with
@@ -4810,7 +4814,7 @@ export interface EffectApi {
    */
   controllerOf(ref: TargetRef): PlayerId | undefined;
   /** See the `{ devotionTo }` {@link EffectAmount}. */
-  devotionTo(color: Color): number;
+  devotionTo(colors: readonly Color[]): number;
   /** See the `{ greatestCommanderManaValue }` {@link EffectAmount}. */
   greatestCommanderManaValue(): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
@@ -6488,8 +6492,9 @@ function signedAmountValue(
   if ("devotionTo" in amount) {
     // "Your devotion to that color" — the colour the `add-mana` reading it
     // is making (Nykthos); with none chosen there's no colour to be devoted to.
+    if (Array.isArray(amount.devotionTo)) return ctx.devotionTo(amount.devotionTo);
     const color = amount.devotionTo === "that-color" ? ctx.manaColor : amount.devotionTo;
-    return color === undefined || color === "C" ? 0 : ctx.devotionTo(color);
+    return color === undefined || color === "C" ? 0 : ctx.devotionTo([color as Color]);
   }
   if ("greatestCommanderManaValue" in amount) return ctx.greatestCommanderManaValue();
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);

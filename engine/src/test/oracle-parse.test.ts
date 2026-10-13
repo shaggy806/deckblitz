@@ -827,6 +827,62 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Max speed — Whenever you cast a spell with mana value 7 or greater, you win the game.").complete).toBe(false);
   });
 
+  it("devotion (rule 700.5): a God's 'isn't a creature', a Demigod's power, Altar's bonus, a devotion intervening-if", () => {
+    const god = face(
+      "As long as your devotion to white and black is less than seven, Test Card isn't a creature.",
+      "Legendary Enchantment Creature — God",
+    );
+    expect(god.static).toEqual([
+      {
+        affects: { scope: "self" },
+        condition: { kind: "devotion", colors: ["W", "B"], atMost: 6 },
+        removeTypes: ["creature"],
+        text: "As long as your devotion to white and black is less than seven, Test Card isn't a creature.",
+      },
+    ]);
+    expect(god.complete).toBe(true);
+    // The reminder text stays printed and is read past.
+    expect(
+      face(
+        "As long as your devotion to red is less than five, Test Card isn't a creature. (Each {R} in the mana costs of permanents you control counts toward your devotion to red.)",
+      ).static[0].condition,
+    ).toEqual({ kind: "devotion", colors: ["R"], atMost: 4 });
+    expect(face("Test Card's power is equal to your devotion to green.").static[0].setBasePtFromCount).toEqual({
+      countOf: { devotionTo: ["G"] },
+      plusPower: 0,
+      plusToughness: 0,
+      only: "power",
+    });
+    expect(face("Your devotion to each color and each combination of colors is increased by one.", "Artifact").static[0]).toMatchObject({
+      devotionBonus: 1,
+    });
+    const march = face(
+      "At the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying.",
+      "Enchantment",
+    );
+    expect(march.triggered[0].condition).toEqual({ kind: "devotion", colors: ["W", "B"], atLeast: 7 });
+    // A comparison it doesn't know stays a person's.
+    expect(face("As long as your devotion to blue is five or more, Test Card has flying.").complete).toBe(false);
+  });
+
+  it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
+    const titan = face(
+      "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",
+      "Creature — Illusion",
+    );
+    expect(titan.chooseCreatureTypeOnEnter).toBe(true);
+    expect(titan.static).toEqual([
+      { affects: { scope: "self" }, addsChosenCreatureType: true, text: "This creature is the chosen type in addition to its other types." },
+    ]);
+    // Only with the choice on the card.
+    expect(face("This creature is the chosen type in addition to its other types.").complete).toBe(false);
+    // Arixmethes, Slumbering Isle: its card types replaced while it has a counter.
+    expect(face("As long as Test Card has a slumber counter on it, it's a land. (It's not a creature.)").static[0]).toMatchObject({
+      condition: { kind: "self-counters", counter: "slumber", compare: { op: "gte", n: 1 } },
+      setTypes: ["land"],
+    });
+  });
+
   it("moving counters (rule 122.5): of a kind, all, a chosen kind or any number between two targets", () => {
     const closet = face("{T}: Move a +1/+1 counter from this artifact onto target creature you control.", "Artifact");
     expect(closet.activated[0].effect).toEqual({ kind: "move-counters", from: "source", to: 0, counter: "+1/+1" });

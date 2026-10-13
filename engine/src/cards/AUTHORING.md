@@ -602,7 +602,9 @@ cost, station's — see "Last-known information" below), `{ lifeTotal: "you" }`
 (Storm Herd), `{ devotionTo: Color }` (rule 700.5 — Gray Merchant of
 Asphodel; a hybrid pip counts for each colour it contains, `{X}` and generic
 for nothing; `"that-color"` is the colour an `"any-color"` `add-mana` is
-making — Nykthos, Shrine to Nyx), `{ greatestCommanderManaValue: true }`
+making — Nykthos, Shrine to Nyx; a list is "your devotion to [one] and
+[other]", a `{W/B}` counted once; Altar of the Pantheon's `devotionBonus`
+adds to every one), `{ greatestCommanderManaValue: true }`
 (the greatest mana value among your commanders, wherever they are — Cactus
 Preserve's X/X), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard
@@ -955,7 +957,7 @@ Neither goes on the stack yet (§15, "Partial").
 | `grant-keyword-all` | `filter`, `keyword`, `duration`, `exceptSource?` | Overrun's trample. `exceptSource` is "**other** Spiders you control gain …" (Cosmic Spider-Man). Hits what matches as it resolves (rule 611.2c) — a creature arriving later doesn't gain it. |
 | `connive` | `target`, `amount?` | Connive (rule 701.50): the permanent's controller draws `amount` (1 by default; "connives X" is an amount), discards that many, then puts a +1/+1 counter on it for each nonland card discarded — by its own discards only, so two connives in one resolution don't count each other's. A permanent that has left is connived with by its last controller and gets no counter (701.50b). Ledger Shredder (`target: "source"`), Raffine, Scheming Seer, Spymaster's Vault. |
 | `for-each-convoker` | `effect` | `effect` for each creature that convoked the resolving spell (rule 702.51c) — for a copy of it, the original's (rule 707.10: an effect of a copy that refers to objects used to pay its costs uses the original's) — bound to target 0 — Lethal Scheme's "each creature that convoked this spell connives" is `{ kind: "for-each-convoker", effect: { kind: "connive", target: 0 } }`. One at a time in the order the spell's controller chooses (a `choose-modes` naming each, asked while more than one is left — the ruling), each step done before the next is asked. One that has left the battlefield since — or is back as a new object — is only read, as it last existed: it still connives (its controller draws and discards) with no counter (rule 701.50b). The spell records its convokers as it's cast (`GameObject.convokedBy`), and a copy carries them (`SpellSnapshot.convokedBy`). |
-| `add-counter` | `target`, `counter` (string), `amount`, `by?` | `by` (an `EffectPlayerRef`) is who puts them when the card says someone else does — Alexios's "that player … puts a +1/+1 counter on it" is `by: "active-player"` — which a "whenever you put … counters" trigger reads; the effect's controller otherwise. `counter: "+1/+1"` etc. A **keyword counter** (rule 122.1b) is a counter named for the keyword, spelled as the engine's `Keyword` — `"flying"`, `"first-strike"`, `"double-strike"`, `"deathtouch"`, `"haste"`, `"hexproof"`, `"indestructible"`, `"lifelink"`, `"menace"`, `"reach"`, `"trample"`, `"vigilance"` — and the permanent has that keyword while the counter is on it (layer 6; `KEYWORD_COUNTERS` in `characteristics.ts`). Decayed, exalted and shadow counters aren't modeled. A **stun counter** (rule 122.1d) is `"stun"`: whenever a permanent with one would become untapped — in its untap step or by an effect — one is removed instead (`Game.untapUnlessStunned`; Pugnacious Hammerskull, Baloth Prime's entering six by an `enters-battlefield` replacement's `counters`). |
+| `add-counter` | `target`, `counter` (string), `amount`, `by?` | `by` (an `EffectPlayerRef`) is who puts them when the card says someone else does — Alexios's "that player … puts a +1/+1 counter on it" is `by: "active-player"` — which a "whenever you put … counters" trigger reads; the effect's controller otherwise. `counter: "+1/+1"` etc. A **keyword counter** (rule 122.1b) is a counter named for the keyword, spelled as the engine's `Keyword` — `"flying"`, `"first-strike"`, `"double-strike"`, `"deathtouch"`, `"haste"`, `"hexproof"`, `"indestructible"`, `"lifelink"`, `"menace"`, `"reach"`, `"shadow"`, `"trample"`, `"vigilance"` — and the permanent has that keyword while the counter is on it (layer 6; `KEYWORD_COUNTERS` in `characteristics.ts` — Minas Morgul, Dark Fortress's shadow counter). Decayed and exalted counters aren't modeled. A **stun counter** (rule 122.1d) is `"stun"`: whenever a permanent with one would become untapped — in its untap step or by an effect — one is removed instead (`Game.untapUnlessStunned`; Pugnacious Hammerskull, Baloth Prime's entering six by an `enters-battlefield` replacement's `counters`). |
 | `remove-counter` | `target`, `counter` (string), `amount` | The reverse of `add-counter` — Unbreathing Horde's "prevent that damage and remove a +1/+1 counter from it" (the `then` of its `would-deal-damage` prevention, `target: "source"`). Removes up to `amount`, as many as there are, and none from a permanent with none (its ruling); announced as `counter-removed`, so "for as long as it has a counter" durations end with the last. Only a permanent still on the battlefield as the same object loses any (rule 122.2). |
 | `move-counters` | `from`, `to`, `counter?`, `amount?`, `ifMoved?` | **Move** counters (rule 122.5): each removed from `from` (`counter-removed`) and put onto `to` (`counter-added`, by the effect's controller) — so a "whenever counters are put on" trigger, a "whenever you put" one and Doubling Season all see the put (the rulings). If either half can't happen, neither does: nothing moves between a permanent and itself (two instances of "target" may name one permanent, rule 115.3 — Nesting Grounds, Tidus), from one without that kind, or with either end gone; a `may` of one isn't offered then. `amount` 1 (default) is "move **a** counter": of `counter` (Costume Closet's `"+1/+1"`), or — no `counter` — of a kind the controller chooses among those on `from` as it resolves (a `choose-modes`, asked only with two or more kinds: Nesting Grounds, Tidus). `"all"`: every counter on `from` (The Ozolith). `"each-kind-missing"`: one of each kind `from` has and `to` hasn't (Goldberry's first ability). `"any"`: how many of each kind, kind by kind, none included (Resourceful Defense); `"one-or-more"` the same but not none (Goldberry's second, whose "if you do, draw a card" is `ifMoved`). With `"any"` one end may be `{ choose: filter, prompt }` — chosen as it resolves, one permanent at a time (a `choose-permanents`, none to stop), never the other end nor one chosen already; not a target: Forgotten Ancient's "onto other creatures" (`to`, with `counter`: at least one onto each one chosen), Slippery Bogbonder's "from among creatures you control" (`from`). Not "put its counters on" — that's `put-counters-of`. Graft is the `graft` row under "Tokens / attach / transform". `move-counters.test.ts`. |
 | `put-counters-of` | `of` (an `AmountRef`), `target` | "Put its counters on target creature you control" (Essence Channeler, Broodguard Elite: `of: "source"` on its own dies or leaves trigger), "put those counters on The Ozolith" (`of: "trigger-object"`, `target: "source"`): the same number of each kind `of` had, read as it last existed (rule 608.2h), put onto `target` — **not** a move (rules 122.8, 122.9, every such card's ruling): nothing is removed, so The Ozolith and Iron Apprentice's own trigger both get the full set. Each kind goes on as `add-counter` puts it (a doubler applies; -1/-1 counters too). "If it had counters on it" is the trigger's `counters` filter (`{ compare: { op: "gte", n: 1 } }`), or `self-counters` on a self trigger; "this creature or another creature you control dies" is `thisOrAnother`, with the same `counters` filter as its self half (Host of the Hereafter, Reluctant Role Model) — the self half's trigger object is the source. |
@@ -2501,7 +2503,7 @@ triggered: [
 | `cast-spell` | `who`, `noncreatureOnly?`, `firstEachTurn?`, `nthEachTurn?`, `filter?`, `from?`, `notFrom?` | a spell is cast. `who: "opponent"` is anyone but this permanent's controller (Kaervek the Merciless); `filter` narrows on the *spell* — `{ typesAnyOf: ["instant", "sorcery"] }` for Guttersnipe. `noncreatureOnly` predates `filter` and stays, because prowess is printed as its own word. `withTargets: true` narrows to a spell with one or more targets, `{ triggerValue: true }` then how many (Voracious Bibliophile's "draw that many cards"); `countCastBefore: CardFilter` makes `{ triggerValue: true }` how many matching spells the caster cast this turn **before** this one, each read as it was cast and fixed as it triggers, so a spell cast in response doesn't change it (Thousand-Year Storm's "for each other instant and sorcery spell you've cast before it this turn", countered ones included); `modal: true` narrows to a modal spell (one cast with modes chosen — a `castModal` card), with `{ triggerValue: true }` then the number of times a mode was chosen for it (Riku of Many Paths); `sharesNoCreatureType: true` to a spell sharing no creature type with a creature its caster controls or a creature card in their graveyard, changeling on either side sharing every one (Volo, Guide to Monsters). `trigger-object` is the spell, so `{ manaValueOf: "trigger-object" }` reads its mana value, and `"x"` is its X, read as it was cast (Zaxara, the Exemplary's "put X +1/+1 counters" — a spell countered before the trigger resolves still gave its X). `firstEachTurn` / `nthEachTurn: N` is the caster's first / Nth spell this turn — and **with a `filter`, their first / Nth *matching* spell** (Tuvasa's "your first enchantment spell each turn", which can be your third spell). `from` / `notFrom` are the **zone it was cast from** (the `spell-cast` event records it before the spell moves to the stack): `from: "exile"` is "whenever you cast a spell from exile", `notFrom: "hand"` is "from anywhere other than your hand". A spell cast via foretell, suspend, cascade, an adventure, airbend or an impulse exile comes from `"exile"`; flashback / escape from `"graveyard"`; a commander from `"command"`. A `filter` with a `targets` clause asks what the spell targets as it's cast (the `CardFilter` list in §6): Season of Growth's "a spell that targets a creature you control", Zada's "that targets only Zada", Ivy's "that targets only a single creature other than Ivy". |
 | `cast-spell` + `orCopy: true` | | Magecraft — "whenever you cast **or copy** an instant or sorcery spell" (Archmage Emeritus). A copy isn't cast (rule 707.10), so plain `cast-spell` never sees one; with `orCopy` a `spell-copied` event matches too, `who` being the copy's controller, `filter` asking about the copy, the copy the trigger object. The cast-only narrowings (`from`, `firstEachTurn`, …) never match a copy. `copyOnly: true` matches **only** the copies — Kalamax, the Stormsire's "whenever you copy an instant spell". |
 | `counters-put` | `who`, `counter?`, `filter?`, `byYou?`, `nth?` | one or more counters were put on a permanent — including the ones it **entered with** (rule 122.6). Once per permanent per event, so two creatures at once is two triggers; `{ triggerValue: true }` is how many, and the permanent is the trigger object. `who` / `filter` are about the permanent; `byYou` is "whenever **you** put …" (Hapatra). Shalai and Hallar: `{ who: "you-control", counter: "+1/+1", filter: { type: "creature" } }`.. `nth: N` is "when the Nth [`counter`] counter is put on this" (the Marvel Plans, Midnight Clock, Shang-Chi and the Ten Rings): only the placement that takes that kind from fewer than N to N or more — several at once past N fire it once — read off the event's `after`. A Plan's "sacrifice it. When you do, …" is `sacrifice-source` with a `reflexive-trigger` `then`; "sacrifice it, draw …, and …" is a plain `sequence`. |
-| `draws` | `who`, `nthEachTurn?`, `exceptFirstInDrawStep?` | a player draws a card, once per card (Nekusar). `nthEachTurn: 2` is "your second card each turn"; `exceptFirstInDrawStep` is Xyris's "except the first one they draw in each of their draw steps" (only their own draw step's first card is exempt). |
+| `draws` | `who`, `nthEachTurn?`, `exceptFirstInDrawStep?`, `filter?` | a player draws a card, once per card (Nekusar). `nthEachTurn: 2` is "your second card each turn"; `exceptFirstInDrawStep` is Xyris's "except the first one they draw in each of their draw steps" (only their own draw step's first card is exempt). `filter` narrows on the card drawn, as it is in hand: Keranos, God of Storms' "whenever you reveal a land card this way" (the first card of each of your turns, which its `revealsFirstDrawEachTurn` static reveals) is `nthEachTurn: 1, filter: { type: "land" }` with a `your-turn` `whileCondition`. |
 | `plays-land` | `who`, `otherOnly?` | a player **plays** a land — the special action (rule 305.1; Burgeoning, Fastbond), not a land put onto the battlefield (that's an `enters-battlefield` filtered to lands). `otherOnly` is City of Traitors' "when you play **another** land": its own play doesn't count, though it's on the battlefield by the time that play is announced. |
 | `plays-card` | `who`, `from?`, `filter?` | a player **plays a card** — plays a land *or* casts a spell, since "play" covers both (Prosper, Tome-Bound's "whenever you play a card **from exile**" is `{ on: "plays-card", who: "you", from: "exile" }`, which a land played off an impulse exile fires as well as a foretold card cast from there). `from` is the zone recorded on the `land-played` / `spell-cast` event. `filter` asks about the card played, as the land on the battlefield or the spell on the stack (Rendmaw, Creaking Nest's "a card with two or more card types" is `{ cardTypeCount: { op: "gte", n: 2 } }`). For lands alone, `plays-land`. |
 | `this-cast` | — | the spell carrying this ability is cast (cascade, storm). Cascade's free cast is a whole cast, offered as a `cast-now` (modes, kicker, targets, or decline), the spell needing a lesser mana value than the cascade spell's (rule 702.85a). |
@@ -2740,6 +2742,19 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   while it's on the battlefield; gone, the mana goes as the current step ends
   (the rulings). Savage Ventmaw's mana for the turn is `add-mana`'s
   `persists` instead.
+- `unspentManaBecomesColorless: true` — Kruphix, God of Horizons' "If you
+  would lose unspent mana, that mana becomes colorless instead": every unit
+  that would empty stays as `{C}`, its restrictions and riders kept (the
+  rulings).
+- `revealsFirstDrawEachTurn: true` — Keranos, God of Storms' "Reveal the first
+  card you draw on each of your turns" (rule 701.16): shown to every player
+  as it's drawn. Its "whenever you reveal a land card this way" is a `draws`
+  trigger (§7: `nthEachTurn: 1`, a drawn-card `filter`, a `your-turn`
+  `whileCondition`).
+- `devotionBonus: 1` — Altar of the Pantheon's "Your devotion to each color
+  and each combination of colors is increased by one" (rule 700.5a): counted
+  by every devotion its controller has, even once it has lost its abilities
+  (its ruling — devotion is read before other effects).
   A fact about the *controller* rather than about anything the ability
   affects, so it's read straight off the battlefield at cleanup instead of
   going through the layer system; pair it with `affects: { scope: "self" }`.
@@ -2976,6 +2991,31 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   types.)" is `setSubtypes: ["Dragon"]`. The static form of `animate`'s
   `setSubtypes`; a layer-4 part like `addTypes`, in timestamp order with the
   rest.
+- `removeTypes: CardType[]` — layer 4: the affected permanents **aren't**
+  these, and lose the subtypes that went only with them (rule 205.1a);
+  supertypes stay. A Theros God's "As long as your devotion to white is less
+  than five, Heliod isn't a creature" is the `godDevotion(colors, lessThan,
+  text)` helper — `affects: { scope: "self" }`, a `devotion` condition,
+  `removeTypes: ["creature"]`: a legendary enchantment and no God below it,
+  its own pips counting (but not while it's entering — rule 614.12, the
+  rulings), still not a creature once it has lost its abilities (layer 6 is
+  later), and a later effect that makes it a creature wins (timestamp). An
+  attacker or blocker that stops being a creature is removed from combat
+  (rule 506.4), and a noncreature permanent's power and toughness read 0
+  (rule 208.3 — Phenax's "X is this creature's toughness").
+- `setTypes: CardType[]` — layer 4: the affected permanents' card types are
+  **replaced** by these, and the subtypes that went only with the old ones go
+  (rule 205.1a); supertypes stay. Arixmethes, Slumbering Isle's "as long as
+  Arixmethes has a slumber counter on it, it's a land" (`self-counters`
+  condition); Swift Reconfiguration's "Enchanted permanent is a Vehicle
+  artifact with crew 5 and it loses all other card types" is `affects: {
+  scope: "attached" }, setTypes: ["artifact"], setSubtypes: ["Vehicle"],
+  grantsActivated: [crew(5)]` — crewing it, a later effect, makes it a
+  creature again. Applied before the same static's `addTypes`.
+- `addsChosenCreatureType: true` — layer 4: the creature type this static's
+  own permanent chose as it entered (`chooseCreatureTypeOnEnter`) is added —
+  Titan of Littjara's "This creature is the chosen type in addition to its
+  other types", from the moment it's chosen.
 - `setBasePt: { power?, toughness? }` — layer 7b: the affected permanents
   *have base* power and/or toughness N ("have base power and toughness 10/10";
   a lone `toughness` is "have base toughness 1"). In timestamp order with
@@ -3025,6 +3065,10 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
     matches, 0 with none (Karn, Legacy Reforged: `{ type: "artifact",
     controlledBy: "you" }`). Mana value only: a greatest *power* or
     *toughness* of other permanents in a CDA is still out (§15).
+  - `{ devotionTo: Color[] }` — its controller's devotion (rule 700.5), its
+    own pips included: Anax, Hardened in the Forge's and Renata, Called to
+    the Hunt's "power is equal to your devotion to red / green" (`only:
+    "power"`, printed power 0).
 
   It applies in every zone (rule 604.3), so the card has that size in a
   library, hand, graveyard or the command zone too; "you" is its controller,
@@ -3345,6 +3389,12 @@ clause (section 9):
   opponents control eight or more lands" — plural "opponents" sums, unlike
   `opponent-controls`'s singular "an opponent").
 - `{ kind: "your-turn" }`
+- `{ kind: "devotion", colors, atLeast?, atMost? }` — your devotion (rule
+  700.5) to one colour or two (a `{W/B}` once for "white and black"),
+  inclusive bounds, the static's own permanent counting: the Theros Gods'
+  "less than five" is `atMost: 4` (`godDevotion` — §4's `removeTypes`), March
+  of the Canonized's intervening "if your devotion to white and black is seven
+  or greater" `{ colors: ["W", "B"], atLeast: 7 }`.
 - `{ kind: "player-counters", counter, who: "you" | "opponent" | "that-player", atLeast }` —
   a player has at least that many counters of a kind; `"opponent"` is *one*
   opponent on their own. Corrupted ("as long as an opponent has three or more
@@ -3692,7 +3742,7 @@ clause (section 9):
   `multiplier: 2` is Rhox Faithmender's "you gain twice that much life
   instead", applied after every `plus` (the order the gaining player would
   pick, rule 616.1).
-- `{ event: "would-deal-damage", multiplier?, plus?, atLeast?, combat?, prevent?, then?, source?, fromSelf?, to? }`
+- `{ event: "would-deal-damage", multiplier?, plus?, atLeast?, combat?, prevent?, then?, source?, fromSelf?, to?, toFilter? }`
   (`fromSelf: true` — only damage this permanent deals: Wolverine's "double all damage Wolverine would deal")
   — damage about to be dealt, changed. With neither `source` nor `to` it is
   **symmetric and global** (Dictate of the Twin Gods' `multiplier: 2` doubles
@@ -3702,7 +3752,11 @@ clause (section 9):
   "you", enteredThisTurn: true }`; Kuja's Flare Star: a Wizard you control; a
   departed source as it last existed); `to` narrows the recipient —
   `"opponent"`, `"opponent-side"` (an opponent or a permanent an opponent
-  controls — Torbran's `plus: 2`), `"you"` or `"self"`. `prevent: true`
+  controls — Torbran's `plus: 2`), `"you"` or `"self"`; `toFilter` to a
+  permanent matching a filter from this permanent's controller's side, as it
+  is then — Iroas, God of Victory's "prevent all damage that would be dealt to
+  attacking creatures you control" (`prevent: true, toFilter: { type:
+  "creature", attacking: true, controlledBy: "you" }`). `prevent: true`
   prevents it instead, then applies `then` as this permanent's controller's
   effect with `"x"` the damage prevented: The Mindskinner's "prevent that
   damage and each opponent mills that many cards" (`to: "opponent"`, `source:
@@ -4084,8 +4138,8 @@ Delete an entry in the same commit as the feature that retires it.
   Metallic Mimic ("each other creature you control **of the chosen type**
   enters with an additional +1/+1 counter") has its filter now (`ofChosenType`),
   but an `others-enter-battlefield` replacement doesn't hand its filter a
-  source to read the choice off, and "is the chosen type in addition to its
-  other types" isn't modeled.
+  source to read the choice off. "Is the chosen type in addition to its other
+  types" is a static's `addsChosenCreatureType` (Titan of Littjara — §4).
 - **Bestow** (rule 702.103 — Springheart Nantuko), **Embalm** (rule 702.128
   — Vizier of Many Faces, whose Clone ability has to carry it) and **retrace**
   (rule 702.81 — Six) are unmodeled alt-cast mechanics (needed-cards P18).

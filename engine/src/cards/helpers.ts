@@ -1949,3 +1949,17 @@ export const entersPrepared = (text = "This creature enters prepared."): StaticA
  * itself goes in `keywords` as `"storied"`. */
 export const STORIED_TEXT =
   "Storied (If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.)";
+
+/**
+ * A Theros God's "As long as your devotion to [colour(s)] is less than N, ~
+ * isn't a creature." (rules 700.5, 205.1a): a `"self"` static removing the
+ * creature type — and with it the creature type God — while the devotion
+ * (the God's own pips included) is under `lessThan`. `text` is the line as
+ * printed, reminder and all.
+ */
+export const godDevotion = (colors: readonly Color[], lessThan: number, text: string): StaticAbility => ({
+  affects: { scope: "self" },
+  condition: { kind: "devotion", colors, atMost: lessThan - 1 },
+  removeTypes: ["creature"],
+  text,
+});

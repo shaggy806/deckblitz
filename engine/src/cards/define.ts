@@ -359,7 +359,14 @@ export type CountSpec =
    * (rule 202.3e). A mana value isn't a characteristic the layer fold
    * computes, so a CDA can read other permanents' without the dependency
    * problem a greatest *power* would have (AUTHORING §15). */
-  | { readonly greatestManaValueOf: CardFilter };
+  | { readonly greatestManaValueOf: CardFilter }
+  /** Its controller's devotion to these colours (rule 700.5) — Anax,
+   * Hardened in the Forge's "power is equal to your devotion to red" is `{
+   * devotionTo: ["R"] }` with `only: "power"`. Two colours are "devotion to
+   * [one] and [the other]": a symbol of either counts once. Devotion reads
+   * mana costs, which no later layer changes (700.5a), so a CDA can read it
+   * without a dependency problem; the CDA's own permanent counts. */
+  | { readonly devotionTo: readonly Color[] };
 
 /**
  * A per-player running total the engine keeps for the current turn, readable
@@ -548,6 +555,27 @@ export type StaticCondition =
   | { readonly kind: "opponent-count"; readonly atLeast: number }
   /** It's your turn. */
   | { readonly kind: "your-turn" }
+  /**
+   * Your devotion (rule 700.5) to `colors`, inclusive bounds: the mana
+   * symbols of those colours among the mana costs of permanents you control,
+   * this one included. Two colours are "devotion to [one] and [the other]"
+   * — a symbol that's either, or both (a `{W/B}`), counts once. A hybrid or
+   * Phyrexian symbol counts for each of its colours; generic and `{X}` count
+   * for none. The Theros Gods' "as long as your devotion to white is less
+   * than five, Heliod isn't a creature" is `{ colors: ["W"], atMost: 4 }`
+   * beside a `removeTypes: ["creature"]`; March of the Canonized's "if your
+   * devotion to white and black is seven or greater" `{ colors: ["W", "B"],
+   * atLeast: 7 }`. Altar of the Pantheon's `devotionBonus` adds to it.
+   * Unlike the board-scanning conditions, the static's own permanent counts
+   * (its rulings) — but not while it is entering: a replacement that judges
+   * it as it enters is applied before it's on the battlefield (rule 614.12).
+   */
+  | {
+      readonly kind: "devotion";
+      readonly colors: readonly Color[];
+      readonly atLeast?: number;
+      readonly atMost?: number;
+    }
   /** You have an enduring story (rule 702.195 — storied's designation):
    * "as long as you have an enduring story" (Fíli the Pathfinder), "if you
    * have an enduring story" (Balin, Loremaster). */
@@ -999,6 +1027,46 @@ export interface StaticAbility {
    * abilities and P/T apply to exactly the permanents it gave the type to.
    */
   readonly addTypes?: readonly CardType[];
+  /**
+   * Layer 4 — card types the affected permanents **don't** have: the Theros
+   * Gods' "as long as your devotion to white is less than five, Heliod isn't
+   * a creature" is `removeTypes: ["creature"]` under a `devotion`
+   * condition, `affects: { scope: "self" }`. The subtypes that went only
+   * with a removed type go with it (rule 205.1a — a God that isn't a
+   * creature isn't a God either, its rulings), and its supertypes stay. In
+   * timestamp order with the rest of layer 4, so a later effect that makes
+   * it a creature wins. Like every layer-4 part it still applies once the
+   * permanent has lost its abilities (layer 6 comes later — the Gods'
+   * ruling). Damage and counters stay on it, meaningless (205.1a).
+   */
+  readonly removeTypes?: readonly CardType[];
+  /**
+   * Layer 4 — the affected permanents' card types are **replaced** by these
+   * (rule 205.1a): Arixmethes, Slumbering Isle's "as long as Arixmethes has a
+   * slumber counter on it, it's a land. (It's not a creature.)" is
+   * `setTypes: ["land"]`; Swift Reconfiguration's "enchanted permanent is a
+   * Vehicle artifact … and it loses all other card types" `setTypes:
+   * ["artifact"]` with `addSubtypes: ["Vehicle"]`. Subtypes tied only to a
+   * lost type go (205.1a); supertypes stay. Applied before the static's own
+   * `addTypes` / `addSubtypes`.
+   */
+  readonly setTypes?: readonly CardType[];
+  /**
+   * Layer 4 — the creature type this static's own permanent chose as it
+   * entered (`chooseCreatureTypeOnEnter`, its `chosenCreatureType`), added to
+   * the affected permanents' types: Titan of Littjara's "This creature is the
+   * chosen type in addition to its other types" (`affects: { scope: "self"
+   * }`). It applies as soon as the choice is made (the ruling), and adds
+   * nothing while no type is chosen.
+   */
+  readonly addsChosenCreatureType?: true;
+  /**
+   * "Your devotion to each color and each combination of colors is
+   * increased by one" (Altar of the Pantheon): this much more to every
+   * devotion its controller has, condition or amount (rule 700.5a — effects
+   * that modify devotion are taken into account).
+   */
+  readonly devotionBonus?: number;
   /** Layer 4 — subtypes added the same way ("are Bears in addition to their
    * other types", "Artifacts you control are Foods"). */
   readonly addSubtypes?: readonly string[];
@@ -1466,6 +1534,20 @@ export interface StaticAbility {
    * mana is lost as the step or phase it left in ends. Like `noMaxHandSize`,
    * a property of the player, read off the battlefield. */
   readonly keepsUnspentMana?: readonly ManaType[];
+  /** "If you would lose unspent mana, that mana becomes colorless instead"
+   * (Kruphix, God of Horizons — a replacement, rule 614): every unit its
+   * controller would lose as a step or phase ends (rule 500.4) stays in
+   * their pool as colorless mana, its restrictions and riders kept (the
+   * rulings). Once it's gone, the mana empties as the step or phase it left
+   * in ends. Read off the battlefield like `keepsUnspentMana`. */
+  readonly unspentManaBecomesColorless?: boolean;
+  /** "Reveal the first card you draw on each of your turns" (Keranos, God of
+   * Storms — rule 701.16): as its controller draws their first card of a
+   * turn of theirs, every player sees it. Its "whenever you reveal a land
+   * card this way" triggers are `draws` triggers (`nthEachTurn: 1`) whose
+   * `whileCondition` asks that it's your turn and what the card is. Read off
+   * the battlefield like `keepsUnspentMana`. */
+  readonly revealsFirstDrawEachTurn?: boolean;
   /** "**You** have hexproof" (rule 702.11d — Shalai, Voice of Plenty): this
    * permanent's controller can't be the target of spells or abilities their
    * opponents control. Like `noMaxHandSize`, a property of the player, read

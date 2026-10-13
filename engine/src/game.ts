@@ -83,6 +83,8 @@ import {
   computeCharacteristics,
   computedCacheMemo,
   effectiveColors,
+  devotionOf,
+  withDevotionUnseen,
   greatestCommanderManaValue,
   objHasKeyword,
   effectiveSubtypes,
@@ -5248,13 +5250,16 @@ export class Game {
       // Leyline Tyrant's "you don't lose unspent red mana": every step, cleanup
       // too, while it's there (`keepsUnspentMana`).
       const keptTypes = pool.length === 0 ? new Set<ManaType>() : this.keptManaTypes(player);
-      const kept = pool.filter(
-        (unit) =>
-          keptTypes.has(unit.type) ||
-          (keepPersistent && (unit.persists === true || (stillCombat && unit.untilEndOfCombat === true))),
-      );
+      const keeps = (unit: ManaUnit): boolean =>
+        keptTypes.has(unit.type) ||
+        (keepPersistent && (unit.persists === true || (stillCombat && unit.untilEndOfCombat === true)));
+      const kept = pool.filter(keeps);
       if (kept.length !== pool.length) {
-        this.state.players[player].manaPool = kept;
+        // Kruphix's "that mana becomes colorless instead": what would be
+        // lost stays, colorless, restrictions and all (its rulings).
+        this.state.players[player].manaPool = this.losesManaAsColorless(player)
+          ? pool.map((unit) => (keeps(unit) || unit.type === "C" ? unit : { ...unit, type: "C" }))
+          : kept;
       }
     }
     // "Until end of combat" effects end with the combat phase (rule 500.5a).
@@ -5664,6 +5669,19 @@ export class Game {
    * maximum" wins, and the other way round (the Twenty-Toed Toad ruling).
    * Never below 0.
    */
+  /** Whether mana `player` would lose as a step or phase ends becomes
+   * colorless instead (`unspentManaBecomesColorless` — Kruphix). */
+  private losesManaAsColorless(player: PlayerId): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.unspentManaBecomesColorless === true && this.staticActive(source, ability)) return true;
+      }
+    }
+    return false;
+  }
+
   /** The mana types `player` keeps as steps and phases end: those a static
    * of a permanent they control names (`keepsUnspentMana` — Leyline Tyrant). */
   private keptManaTypes(player: PlayerId): Set<ManaType> {
@@ -13941,34 +13959,6 @@ export class Game {
     pool.splice(index, 1);
   }
 
-  /**
-   * Devotion to `color` (rule 700.5): every mana symbol of that colour in the
-   * mana costs of permanents `player` controls. A hybrid or Phyrexian pip
-   * counts for each colour it contains, and `{X}` / generic count for nothing.
-   *
-   * Read off each permanent's mana cost as copy effects leave it (700.5a) —
-   * the up face's own (a transformed back face has none), a prototype's
-   * (718.3b), none for an embalmed token — and once for each token in a
-   * stack.
-   */
-  private devotionTo(player: PlayerId, color: Color): number {
-    let total = 0;
-    for (const id of this.state.zones.shared.battlefield) {
-      const object = this.state.objects[id];
-      if (object.controller !== player) continue;
-      const override = manaCostOverride(object);
-      const manaCost = override !== undefined ? override : this.registry.get(printedCardName(object)).manaCost;
-      if (manaCost === null) continue;
-      const cost = parseManaCost(manaCost);
-      let symbols = cost.colored[color];
-      for (const pip of cost.hybrid) {
-        if (pip.some((o) => o.kind === "color" && o.color === color)) symbols += 1;
-      }
-      total += symbols * (object.stackCount ?? 1);
-    }
-    return total;
-  }
-
   private addMana(
     player: PlayerId,
     mana: ManaType | "any-color" | { readonly oneOf: readonly ManaType[] },
@@ -16813,7 +16803,10 @@ export class Game {
           event.type === "card-drawn" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           (spec.nthEachTurn === undefined || event.nthThisTurn === spec.nthEachTurn) &&
-          (spec.exceptFirstInDrawStep !== true || event.firstInDrawStep !== true)
+          (spec.exceptFirstInDrawStep !== true || event.firstInDrawStep !== true) &&
+          (spec.filter === undefined ||
+            (this.state.objects[event.object] !== undefined &&
+              matchesFilter(this.state, this.registry, event.object, spec.filter, { you: self.controller })))
         );
       case "plays-land":
         return (
@@ -19538,19 +19531,26 @@ export class Game {
       // "Damage equal to its power" from a dies trigger reads the power it
       // died with (the Juri and Elenda rulings); a target that has left, the
       // power it left with.
+      // A noncreature permanent has no power or toughness (rule 208.3): a God
+      // that isn't a creature as Phenax's granted ability resolves, or wasn't
+      // as it left, mills nothing (its ruling).
       powerOf: (target) => {
         const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.power;
-        return target.kind === "object" && this.state.objects[target.object] !== undefined
-          ? computeCharacteristics(this.state, this.registry, target.object).power
-          : 0;
+        if (lki !== undefined) return lki.types.includes("creature") ? lki.power : 0;
+        if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
+        const chars = computeCharacteristics(this.state, this.registry, target.object);
+        return this.state.objects[target.object].zone === "battlefield" && !chars.types.includes("creature")
+          ? 0
+          : chars.power;
       },
       toughnessOf: (target) => {
         const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.toughness;
-        return target.kind === "object" && this.state.objects[target.object] !== undefined
-          ? computeCharacteristics(this.state, this.registry, target.object).toughness
-          : 0;
+        if (lki !== undefined) return lki.types.includes("creature") ? lki.toughness : 0;
+        if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
+        const chars = computeCharacteristics(this.state, this.registry, target.object);
+        return this.state.objects[target.object].zone === "battlefield" && !chars.types.includes("creature")
+          ? 0
+          : chars.toughness;
       },
       countersOf: (target, counter) => {
         const lki = lastKnownOf(target);
@@ -20114,7 +20114,7 @@ export class Game {
         ref.kind === "player"
           ? ref.player
           : (lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller),
-      devotionTo: (color) => this.devotionTo(controller, color),
+      devotionTo: (colors) => devotionOf(this.state, this.registry, controller, colors),
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
       opponentsControllingFewer: (filter) => {
         const mine = this.countBattlefieldMatching(controller, filter);
@@ -27319,6 +27319,14 @@ export class Game {
         if (target.kind !== "object" || target.object !== by.id) return false;
         break;
     }
+    if (
+      r.toFilter !== undefined &&
+      (target.kind !== "object" ||
+        this.state.objects[target.object]?.zone !== "battlefield" ||
+        !matchesFilter(this.state, this.registry, target.object, r.toFilter, { you }))
+    ) {
+      return false;
+    }
     if (r.source === undefined) return true;
     return (
       (sourceLastKnown !== undefined || this.state.objects[source] !== undefined) &&
@@ -27957,6 +27965,21 @@ export class Game {
     withComputedCache(() => this.runStateBasedActionsUncached());
   }
 
+  /** Rule 506.4: every attacker or blocker that isn't a creature any more
+   * stops being in combat. Whether any did. */
+  private removeNoncreaturesFromCombat(): boolean {
+    let removed = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || (object.attacking === null && object.blocking === null)) continue;
+      if (effectiveTypes(this.state, this.registry, object).includes("creature")) continue;
+      this.removeFromCombat(id);
+      removed = true;
+    }
+    if (removed) invalidateComputedCache();
+    return removed;
+  }
+
   private runStateBasedActionsUncached(): void {
     let changed = true;
     while (changed) {
@@ -27984,6 +28007,11 @@ export class Game {
       // (`controlEffects`) or an attached control-granting Aura says
       // otherwise — the latest timestamp wins.
       if (this.recomputeControl()) changed = true;
+
+      // Rule 506.4: an attacking or blocking creature that has stopped being
+      // a creature — a God whose devotion fell — is removed from combat, and
+      // doesn't rejoin it if it's a creature again (the Gods' ruling).
+      if (this.removeNoncreaturesFromCombat()) changed = true;
 
       // Rule 704.5aa: a player who controls a permanent with start your
       // engines! and has no speed gets a speed of 1.
@@ -28858,7 +28886,24 @@ export class Game {
       nthThisTurn: seat.cardsDrawnThisTurn,
       ...(firstInDrawStep ? { firstInDrawStep: true } : {}),
     });
+    // Keranos's "reveal the first card you draw on each of your turns".
+    if (seat.cardsDrawnThisTurn === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) {
+      this.revealCards(player, [id], "hand");
+    }
     this.tallyDraw(player);
+  }
+
+  /** Whether `player` controls a permanent that reveals the first card they
+   * draw on each of their turns (`revealsFirstDrawEachTurn` — Keranos). */
+  private revealsFirstDraw(player: PlayerId): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.revealsFirstDrawEachTurn === true && this.staticActive(source, ability)) return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -28886,7 +28931,12 @@ export class Game {
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
     riot?: "counter" | "haste",
   ): EnteringReplacement {
-    const entering = this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot);
+    // It isn't on the battlefield yet as these are judged (rule 614.12), so
+    // its mana cost — and what enters with it — doesn't count toward a
+    // devotion that decides whether it's a creature (a Theros God's ruling).
+    const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
+      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot),
+    );
     this.enterBatch?.add(id);
     return entering;
   }

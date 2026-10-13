@@ -52,6 +52,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import {
   activePlayerOf,
   attackedYouDuringTheirLastTurn,
+  manaCostOverride,
   permanentCount,
   printedCardName,
   rulesTextName,
@@ -63,6 +64,7 @@ import {
   EVERY_CREATURE_TYPE,
   EVERY_LAND_TYPE,
   hasSubtype,
+  isCreatureType,
   isLandType,
   subtypeFitsTypes,
   subtypeKind,
@@ -357,6 +359,76 @@ export interface ConditionOptions {
 }
 
 /**
+ * Objects a devotion count leaves out although they are in the battlefield
+ * list: a permanent entering, and whatever enters with it, while the
+ * replacements that apply as it enters are judged (rule 614.12 — "because
+ * replacement effects are considered before the God is on the battlefield,
+ * the mana symbols in its mana cost won't be counted", the Theros Gods'
+ * ruling). Set only by {@link withDevotionUnseen}. Transient scaffolding.
+ */
+let devotionUnseen: ReadonlySet<ObjectId> | null = null;
+
+/**
+ * Run `fn` with `unseen` left out of every devotion count (see
+ * {@link devotionUnseen}). The computed cache is dropped on the way in and
+ * out, since types and P/T read through devotion differ inside.
+ */
+export function withDevotionUnseen<T>(unseen: ReadonlySet<ObjectId>, fn: () => T): T {
+  const outer = devotionUnseen;
+  devotionUnseen = unseen;
+  invalidateComputedCache();
+  try {
+    return fn();
+  } finally {
+    devotionUnseen = outer;
+    invalidateComputedCache();
+  }
+}
+
+/**
+ * A player's devotion to `colors` (rule 700.5): the mana symbols among the
+ * mana costs of permanents they control that are any of those colours, each
+ * symbol once — "devotion to white and black" counts a `{W/B}` once, a `{W}`
+ * and a `{B}` once each. A hybrid or Phyrexian symbol counts for each of its
+ * colours; generic, `{C}`, `{S}` and `{X}` for none.
+ *
+ * Read after copy, control and text-changing effects and before any other
+ * (700.5a): each permanent's mana cost as copy effects leave it — a
+ * prototype's (718.3b), none for an embalmed token, none for a transformed
+ * back face — its current controller, and the `devotionBonus` of the statics
+ * its text has (Altar of the Pantheon), whatever later layers do. A token
+ * stack counts once per token.
+ */
+export function devotionOf(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  colors: readonly Color[],
+): number {
+  let total = 0;
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || object.controller !== player || devotionUnseen?.has(id) === true) continue;
+    const copies = object.stackCount ?? 1;
+    for (const ability of registry.get(rulesTextName(object)).static) {
+      if (ability.devotionBonus !== undefined) total += ability.devotionBonus * copies;
+    }
+    // The face that's up: a transformed back face has no mana cost.
+    const override = manaCostOverride(object);
+    const manaCost = override !== undefined ? override : registry.get(printedCardName(object)).manaCost;
+    if (manaCost === null) continue;
+    const cost = parseManaCost(manaCost);
+    let symbols = 0;
+    for (const color of colors) symbols += cost.colored[color];
+    for (const pip of cost.hybrid) {
+      if (pip.some((o) => o.kind === "color" && colors.includes(o.color))) symbols += 1;
+    }
+    total += symbols * copies;
+  }
+  return total;
+}
+
+/**
  * Whether a {@link StaticCondition} is currently met, evaluated from the
  * perspective of `source`'s controller. A static / trigger with no condition
  * is always "met" — callers check that first.
@@ -481,6 +553,15 @@ function evalStaticCondition(
       return condition.who === "you"
         ? state.monarch === you
         : state.monarch !== null && state.monarch !== you;
+    case "devotion": {
+      // The source's own mana cost counts (the Gods' rulings), so this reads
+      // the battlefield itself rather than through `skipsSelf`.
+      const n = devotionOf(state, registry, you, condition.colors);
+      return (
+        (condition.atLeast === undefined || n >= condition.atLeast) &&
+        (condition.atMost === undefined || n <= condition.atMost)
+      );
+    }
     case "speed": {
       // "That player" is known only to a resolution, as for player-counters.
       if (condition.who === "that-player") return false;
@@ -931,6 +1012,7 @@ export const KEYWORD_COUNTERS: ReadonlySet<Keyword> = new Set<Keyword>([
   "lifelink",
   "menace",
   "reach",
+  "shadow",
   "trample",
   "vigilance",
 ]);
@@ -1521,6 +1603,16 @@ function foldLayerFourOnce(
     ) {
       continue;
     }
+    if (ability.setTypes !== undefined || ability.removeTypes !== undefined) {
+      // Arixmethes' "it's a land (it's not a creature)", a God's "isn't a
+      // creature": the types replaced or taken away, and with them every
+      // subtype that went only with a lost type (rule 205.1a — no God, no
+      // Kraken). Supertypes aren't card types, and stay.
+      const removed = ability.removeTypes ?? [];
+      const kept = (ability.setTypes ?? types).filter((t) => !removed.includes(t));
+      types = kept;
+      subtypes = subtypes.filter((s) => subtypeFitsTypes(s, kept));
+    }
     if (ability.addTypes !== undefined) types = union(types, ability.addTypes);
     if (ability.setSubtypes !== undefined) {
       // Rule 205.1a: they replace the existing subtypes of their own kind —
@@ -1530,6 +1622,12 @@ function foldLayerFourOnce(
       subtypes = [...subtypes.filter((s) => !kinds.has(subtypeKind(s))), ...set];
     }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
+    if (ability.addsChosenCreatureType === true) {
+      // Titan of Littjara's "is the chosen type in addition": its source's
+      // choice, a creature type (`chooseCreatureTypeOnEnter`).
+      const chosen = source.chosenCreatureType;
+      if (typeof chosen === "string" && isCreatureType(chosen)) subtypes = union(subtypes, [chosen]);
+    }
     applied.push(step.grant);
   }
   return { types, subtypes, applied };
@@ -1557,7 +1655,12 @@ function assertSameLayerFour(cached: LayerFour, fresh: LayerFour, id: ObjectId):
  * permanents the rest of it applies to (rule 613.6). */
 export function hasLayerFourPart(ability: StaticAbility): boolean {
   return (
-    ability.addTypes !== undefined || ability.addSubtypes !== undefined || ability.setSubtypes !== undefined
+    ability.addTypes !== undefined ||
+    ability.addSubtypes !== undefined ||
+    ability.setSubtypes !== undefined ||
+    ability.setTypes !== undefined ||
+    ability.removeTypes !== undefined ||
+    ability.addsChosenCreatureType === true
   );
 }
 
@@ -1742,6 +1845,7 @@ export function countValue(
     if ("cardTypesInGraveyard" in spec) {
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
+    if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     return allGraveyards().filter((id) =>
       matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller }),
     ).length;

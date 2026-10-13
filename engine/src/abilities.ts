@@ -732,6 +732,10 @@ export type TriggerSpec =
       /** Only their Nth card of the turn — "whenever you draw your second
        * card each turn". */
       readonly nthEachTurn?: number;
+      /** Only a drawn card matching this, as it is in the hand it was drawn
+       * into — Keranos, God of Storms' "whenever you reveal a **land** card
+       * this way" (the first card drawn on each of your turns). */
+      readonly filter?: CardFilter;
       /** Not the first card they draw in their own draw step — Xyris, the
        * Writhing Storm's "except the first one they draw in each of their
        * draw steps". A draw in someone else's draw step still counts. */

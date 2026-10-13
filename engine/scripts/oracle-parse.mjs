@@ -32,6 +32,7 @@ import {
   evolve,
   extort,
   flanking,
+  godDevotion,
   livingWeapon,
   mobilize,
   myriad,
@@ -1586,6 +1587,16 @@ export function parseFace(face, ctx = {}) {
       out.flashback = { cost: m[1], behold: beholdOf(m[2]) };
       continue;
     }
+    // "As ~ enters, choose a creature type." (rule 614.12) — and Titan of
+    // Littjara's "~ is the chosen type in addition to its other types."
+    if (line === "As ~ enters, choose a creature type.") {
+      out.chooseCreatureTypeOnEnter = true;
+      continue;
+    }
+    if (out.chooseCreatureTypeOnEnter === true && line === "~ is the chosen type in addition to its other types.") {
+      out.static.push({ affects: { scope: "self" }, addsChosenCreatureType: true, text: printed(raw) });
+      continue;
+    }
     // A behold land: "As ~ enters, you may behold a Jace. If you don't, ~
     // enters tapped." — asked as it enters (rule 614.12).
     if ((m = /^As ~ enters, you may behold (.+)\. If you don't, ~ enters tapped\.$/.exec(line)) && beholdOf(m[1]) !== null) {
@@ -1677,7 +1688,7 @@ export function parseFace(face, ctx = {}) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.
         const clause = rest.slice(0, rest.indexOf(",") + 1);
-        const condition = INTERVENING_IFS[clause.toLowerCase()];
+        const condition = INTERVENING_IFS[clause.toLowerCase()] ?? devotionIf(clause);
         if (condition !== undefined) base.condition = condition;
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
@@ -1872,6 +1883,16 @@ const INTERVENING_IFS = {
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
 };
 
+/** "If your devotion to white and black is seven or greater," (March of the
+ * Canonized — rule 700.5) as a `devotion` condition, or `undefined`. */
+function devotionIf(clause) {
+  const m = new RegExp(`^if your devotion to ${DEVOTION} is ${N} or (greater|less),$`).exec(clause);
+  if (m === null) return undefined;
+  const n = numberOf(m[3]);
+  if (typeof n !== "number") return undefined;
+  return { kind: "devotion", colors: devotionColors(m[1], m[2]), ...(m[4] === "greater" ? { atLeast: n } : { atMost: n }) };
+}
+
 /**
  * What "it" means in a triggered ability's effect: the source itself, when the
  * trigger is about the source ("When ~ dies, it deals 2 damage to any
@@ -2002,6 +2023,11 @@ function parseModalSpell(spellLines, ctx) {
 }
 
 /** Static lines the engine models in one shape. */
+const COLOR_WORDS = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+/** "your devotion to [white]( and [black])" — one colour or two (rule 700.5). */
+const DEVOTION = "(white|blue|black|red|green)(?: and (white|blue|black|red|green))?";
+const devotionColors = (a, b) => [a, b].filter(Boolean).map((w) => COLOR_WORDS[w]);
+
 function parseStatic(line, text) {
   let m;
   // Rule 722.3a — `entersPrepared()`.
@@ -2057,6 +2083,34 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
+  // Devotion (rule 700.5). A Theros God's "as long as your devotion to white
+  // [and black] is less than N, ~ isn't a creature" (`godDevotion`), a
+  // Demigod's "~'s power is equal to your devotion to red" (a CDA), and Altar
+  // of the Pantheon's "increased by one".
+  if ((m = new RegExp(`^As long as your devotion to ${DEVOTION} is less than ${N}, ~ isn't a creature\\.$`).exec(line))) {
+    const n = numberOf(m[3]);
+    if (typeof n === "number") return godDevotion(devotionColors(m[1], m[2]), n, text);
+  }
+  if ((m = new RegExp(`^~'s power is equal to your devotion to ${DEVOTION}\\.$`).exec(line))) {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { devotionTo: devotionColors(m[1], m[2]) }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
+  // Arixmethes' "as long as ~ has a slumber counter on it, it's a land" — its
+  // card types replaced while it does (rule 205.1a).
+  if ((m = new RegExp(`^As long as ~ has an? ([a-z]+) counter on it, it's an? (${CARD_TYPES.join("|")})\\.$`).exec(line))) {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "self-counters", counter: m[1], compare: { op: "gte", n: 1 } },
+      setTypes: [m[2]],
+      text,
+    };
+  }
+  if (line === "Your devotion to each color and each combination of colors is increased by one.") {
+    return { affects: { scope: "self" }, devotionBonus: 1, text };
+  }
   if ((m = /^(Other )?creatures you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
     return { affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) }, grantPt: [Number(m[2]), Number(m[3])], text };
   }

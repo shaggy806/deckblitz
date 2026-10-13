@@ -378,4 +378,10 @@ export interface DamageMultiplierReplacement {
    * Is's "double all damage Wolverine would deal". */
   readonly fromSelf?: boolean;
   readonly to?: "opponent" | "opponent-side" | "you" | "self";
+  /** Only damage to a permanent matching this filter, from this permanent's
+   * controller's side, as it is when the damage would be dealt — Iroas, God
+   * of Victory's "prevent all damage that would be dealt to attacking
+   * creatures you control" is `{ type: "creature", attacking: true,
+   * controlledBy: "you" }` with `prevent`. Never a player. */
+  readonly toFilter?: CardFilter;
 }
