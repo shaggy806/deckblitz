@@ -237,6 +237,7 @@ item lands.
 
 ## Code health
 
+- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Next: after `room-shards.md` step 1, the engine's registry injection and an `engine/local` entry.
 - **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop
