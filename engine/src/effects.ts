@@ -691,6 +691,36 @@ export interface EachPlayerMayProgress {
   readonly results?: readonly { readonly player: PlayerId; readonly did: boolean }[];
 }
 
+/** A `move-counters` end chosen as it resolves — see that effect. */
+export interface MoveCountersChooser {
+  /** Permanents matching this from the controller's side. */
+  readonly choose: CardFilter;
+  /** What the `choose-permanents` decision says. */
+  readonly prompt: string;
+}
+
+/**
+ * How far an `"any"` `move-counters` has got — set by the engine on the copy
+ * each of its decisions carries on with. Never authored. The ends are object
+ * ids: nothing else happens while the effect resolves (rule 608.2), so
+ * neither can change zones in between, and each was singled out of a token
+ * stack as it was fixed.
+ */
+export interface MoveCountersProgress {
+  readonly from?: ObjectId;
+  readonly to?: ObjectId;
+  /** Permanents already chosen for the chosen end, not offered again. */
+  readonly used: readonly ObjectId[];
+  /** Counters moved so far — `ifMoved`, `"one-or-more"`. */
+  readonly moved: number;
+  /** The kinds still to ask about for the current pair of ends. */
+  readonly kinds?: readonly string[];
+  /** The move the answer to the last question asked for. */
+  readonly pending?: { readonly counter: string; readonly amount: number };
+  /** The `choose-permanents` answer is this copy's target 0. */
+  readonly picking?: true;
+}
+
 /** @deprecated Use {@link CardFilter} directly — kept as an alias so existing
  * `look-and-choose` / `matchesZoneChoiceFilter` call sites still type-check. */
 export type ZoneChoiceFilter = CardFilter;
@@ -2507,6 +2537,71 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly counter: string;
       readonly amount: EffectAmount;
+    }
+  | {
+      /**
+       * **Move** counters from one permanent onto another (rule 122.5): each
+       * is removed from `from` (a `counter-removed`) and put onto `to` (a
+       * `counter-added` by the effect's controller) — so "whenever one or
+       * more counters are put on" triggers and a counter replacement
+       * (Doubling Season) apply to the put, and "whenever a counter is
+       * removed" to the removal (the rulings on Nesting Grounds, Tidus). If
+       * either half isn't possible, neither happens: nothing moves between
+       * an object and itself, from one without that kind, or when either
+       * has left the battlefield (122.5). Not "put its counters on" — that's
+       * `put-counters-of` (122.8, 122.9).
+       *
+       * - `amount` 1 (the default): "move **a** counter". With `counter`,
+       *   one of that kind (Costume Closet's "a +1/+1 counter", graft);
+       *   without, of a kind the controller chooses among those on `from`
+       *   as this resolves (the Nesting Grounds ruling) — a `choose-modes`
+       *   decision, asked only when there are two or more kinds.
+       * - `"all"`: every counter on `from` (of `counter`, if given) — The
+       *   Ozolith's "move all counters from The Ozolith onto target
+       *   creature" (never only some — its ruling).
+       * - `"each-kind-missing"`: one of each kind on `from` that `to` has
+       *   none of (Goldberry, River-Daughter's "a counter of each kind not on
+       *   Goldberry").
+       * - `"any"`: "any number of counters" — kind by kind, how many of
+       *   each (a `choose-modes`, from none to all of them); `"one-or-more"`
+       *   the same, but not none at all (Goldberry's second ability).
+       *
+       * With `"any"`, one end may be chosen as this resolves instead of
+       * named — `{ choose: filter }`, permanents matching it from the
+       * controller's side (a `choose-permanents` decision, one at a time,
+       * none to stop), never the other end nor one already chosen:
+       * Forgotten Ancient's "move any number of +1/+1 counters from this
+       * creature onto other creatures" (`to`, with `counter`: how many onto
+       * each one chosen, at least one), Slippery Bogbonder's "from among
+       * creatures you control onto that creature" (`from`: each one's kinds
+       * in turn). Not targets (the Forgotten Ancient ruling).
+       */
+      readonly kind: "move-counters";
+      readonly from: EffectTargetRef | MoveCountersChooser;
+      readonly to: EffectTargetRef | MoveCountersChooser;
+      readonly counter?: string;
+      readonly amount?: 1 | "all" | "each-kind-missing" | "any" | "one-or-more";
+      /** "If you do, draw a card" (Goldberry): after the moves, if any
+       * counter moved. Not with a chosen end. */
+      readonly ifMoved?: EffectSpec;
+      /** Set by the engine as an `"any"` move goes on across its decisions.
+       * Never authored. */
+      readonly progress?: MoveCountersProgress;
+    }
+  | {
+      /**
+       * "Put its counters on target creature you control" (Essence
+       * Channeler), "put those counters on The Ozolith": the same number of
+       * each kind of counter `of` had — read as it last existed on the
+       * battlefield (rule 608.2h) — put onto `target`. Not a move (rules
+       * 122.8, 122.9, and every such card's ruling): nothing is removed,
+       * and two such abilities each put the full set (The Ozolith and a
+       * dying Iron Apprentice). Each kind is put as `add-counter` puts it,
+       * so a doubler applies, and -1/-1 counters go too (the rulings).
+       */
+      readonly kind: "put-counters-of";
+      readonly of: AmountRef;
+      readonly target: EffectTargetRef;
     }
   | {
       /**
@@ -4846,6 +4941,8 @@ export interface EffectApi {
     then: EffectSpec,
     prompt: string,
     exceptSource?: boolean,
+    /** Never these (a `move-counters`' other end, and those chosen already). */
+    except?: readonly ObjectId[],
   ): void;
   /** See the `"blight"` {@link EffectSpec}: `player` blights `amount` — the
    * creature chosen now, or asked for — then `then` with it as target 0.
@@ -5634,6 +5731,20 @@ export interface EffectApi {
   ownerOf(target: TargetRef): PlayerId | undefined;
   /** See the `"remove-counter"` {@link EffectSpec}. */
   removeCounter(target: TargetRef, counter: string, amount: number): void;
+  /** Move up to `amount` counters of kind `counter` from `from` onto `to`
+   * (rule 122.5 — see the `"move-counters"` {@link EffectSpec}), put by the
+   * effect's controller; how many moved, 0 when the move isn't possible. */
+  moveCounters(from: TargetRef, to: TargetRef, counter: string, amount: number): number;
+  /** The counters on a permanent still on the battlefield now, each kind
+   * with at least one; `undefined` for anything else. */
+  countersHere(target: TargetRef): Readonly<Record<string, number>> | undefined;
+  /** Every kind of counter on what `target` names, with how many — read as
+   * it last existed on the battlefield if it has left (rule 608.2h), as the
+   * `{ countersOn }` amount reads it. */
+  counterKindsOf(target: TargetRef): Readonly<Record<string, number>>;
+  /** The one permanent of a token stack an effect singles out (split off
+   * first — see `Game.splitOneFromStack`); anything else as it is. */
+  singleOut(target: TargetRef): TargetRef;
   /** See the `"look-and-choose"` {@link EffectSpec}. */
   lookAndChoose(
     /** `{ cards }` — the look-and-choose's `"targets"`, already resolved. */
@@ -5791,6 +5902,195 @@ function eachPlayerMayAsks(
   const ref = ctx.targets[who.controllerOfTarget];
   const player = ref === undefined ? undefined : ctx.controllerOf(ref);
   return player === undefined || !ctx.playersInScope("each-player").includes(player) ? [] : [player];
+}
+
+/** "a +1/+1 counter", "2 flying counters". */
+function countersText(n: number, kind: string): string {
+  return `${n === 1 ? "a" : n} ${kind} counter${n === 1 ? "" : "s"}`;
+}
+
+function isMoveChooser(end: EffectTargetRef | MoveCountersChooser): end is MoveCountersChooser {
+  return typeof end === "object";
+}
+
+/** The kinds on a permanent now, in the order it got them — only those of
+ * `counter` when it names one. */
+function kindsHere(ctx: ResolutionContext, ref: TargetRef, counter: string | undefined): string[] {
+  const here = ctx.countersHere(ref) ?? {};
+  return Object.keys(here).filter((k) => (here[k] ?? 0) > 0 && (counter === undefined || k === counter));
+}
+
+/**
+ * A `"move-counters"` (rule 122.5). "A counter", "all" and "a counter of
+ * each kind not on it" are one step, with at most a choice of kind; `"any"`
+ * goes on across its decisions, the copy each answer applies carrying its
+ * `progress`: for the pair of ends it has, one `choose-modes` per kind on
+ * `from` (how many of that kind), each answer's move made as the next
+ * question is asked; with a chosen end, a `choose-permanents` for it before
+ * each pair, until none is chosen or nothing is left to move.
+ */
+type MoveCountersSpec = Extract<EffectSpec, { kind: "move-counters" }>;
+
+function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void {
+  const amount = spec.amount ?? 1;
+  const p = spec.progress;
+  if (p === undefined) {
+    const from = isMoveChooser(spec.from) ? undefined : resolveEffectTarget(spec.from, ctx);
+    const to = isMoveChooser(spec.to) ? undefined : resolveEffectTarget(spec.to, ctx);
+    // A named end that's gone (an illegal target, a source that has left):
+    // nothing can move (122.5).
+    if (!isMoveChooser(spec.from) && from?.kind !== "object") return;
+    if (!isMoveChooser(spec.to) && to?.kind !== "object") return;
+    if (amount === "any" || amount === "one-or-more") {
+      const fixed = (ref: TargetRef | undefined): ObjectId | undefined => {
+        const one = ref === undefined ? undefined : ctx.singleOut(ref);
+        return one?.kind === "object" ? one.object : undefined;
+      };
+      const fromId = fixed(from);
+      const toId = fixed(to);
+      applyMoveCounters(
+        {
+          ...spec,
+          progress: {
+            ...(fromId !== undefined ? { from: fromId } : {}),
+            ...(toId !== undefined ? { to: toId } : {}),
+            used: [],
+            moved: 0,
+            ...(fromId !== undefined && toId !== undefined
+              ? { kinds: kindsHere(ctx, { kind: "object", object: fromId }, spec.counter) }
+              : {}),
+          },
+        },
+        ctx,
+      );
+      return;
+    }
+    if (from === undefined || to === undefined) return;
+    if (amount === "all" || amount === "each-kind-missing") {
+      const onTo = ctx.countersHere(to) ?? {};
+      for (const kind of kindsHere(ctx, from, spec.counter)) {
+        if (amount === "each-kind-missing" && (onTo[kind] ?? 0) > 0) continue;
+        const n = amount === "all" ? (ctx.countersHere(from)?.[kind] ?? 0) : 1;
+        ctx.moveCounters(from, to, kind, n);
+      }
+      return;
+    }
+    // "A counter": of the named kind, or of one its controller chooses among
+    // those there now (the Nesting Grounds ruling) — asked only with two or
+    // more to choose between.
+    const kinds = kindsHere(ctx, from, spec.counter);
+    if (kinds.length === 1) ctx.moveCounters(from, to, kinds[0], 1);
+    else if (kinds.length > 1) {
+      ctx.chooseModes(
+        1,
+        1,
+        kinds.map((kind) => ({ text: `Move ${countersText(1, kind)}`, effect: { ...spec, counter: kind } })),
+      );
+    }
+    return;
+  }
+
+  // The answer to the last question: that many of that kind.
+  let moved = p.moved;
+  const ref = (id: ObjectId): TargetRef => ({ kind: "object", object: id });
+  if (p.pending !== undefined && p.from !== undefined && p.to !== undefined) {
+    moved += ctx.moveCounters(ref(p.from), ref(p.to), p.pending.counter, p.pending.amount);
+  }
+  // This copy carries the permanent just chosen for the open end, as its
+  // target 0.
+  let from = p.from;
+  let to = p.to;
+  let kinds = p.kinds;
+  if (p.picking === true) {
+    const picked = ctx.targets[0];
+    if (picked?.kind !== "object") return;
+    const one = ctx.singleOut(picked);
+    if (one.kind !== "object") return;
+    if (from === undefined) from = one.object;
+    else to = one.object;
+    kinds = kindsHere(ctx, ref(from), spec.counter);
+  }
+  const chooserFrom = isMoveChooser(spec.from) ? spec.from : undefined;
+  const chooserTo = isMoveChooser(spec.to) ? spec.to : undefined;
+  const chooser = chooserFrom ?? chooserTo;
+
+  if (from !== undefined && to !== undefined && kinds !== undefined) {
+    // The next kind there's any of, and how many to move.
+    let rest = kinds;
+    while (rest.length > 0) {
+      const kind = rest[0];
+      rest = rest.slice(1);
+      const n = ctx.countersHere(ref(from))?.[kind] ?? 0;
+      if (n <= 0) continue;
+      // Not none at all: "one or more", or of the one kind onto a creature
+      // just chosen for them (Forgotten Ancient — choosing it is choosing to
+      // move some).
+      const later = rest.some((k) => (ctx.countersHere(ref(from))?.[k] ?? 0) > 0);
+      const least =
+        (amount === "one-or-more" && moved === 0 && !later) || (chooserTo !== undefined && spec.counter !== undefined)
+          ? 1
+          : 0;
+      const next = (i: number): MoveCountersSpec => ({
+        ...spec,
+        progress: {
+          used: p.used,
+          moved,
+          from,
+          to,
+          kinds: rest,
+          ...(i > 0 ? { pending: { counter: kind, amount: i } } : {}),
+        },
+      });
+      const options = Array.from({ length: n - least + 1 }, (_unused, k) => least + k);
+      if (options.length === 1) {
+        applyMoveCounters(next(options[0]), ctx);
+        return;
+      }
+      ctx.chooseModes(
+        1,
+        1,
+        options.map((i) => ({
+          text: i === 0 ? `Move no ${kind} counters` : `Move ${countersText(i, kind)}`,
+          effect: next(i),
+        })),
+      );
+      return;
+    }
+    // This pair is done.
+    if (chooser === undefined) {
+      if (spec.ifMoved !== undefined && moved > 0) applyEffectSpec(spec.ifMoved, ctx);
+      return;
+    }
+    const chosen = chooserFrom !== undefined ? from : to;
+    applyMoveCounters(
+      {
+        ...spec,
+        progress: {
+          ...(chooserFrom !== undefined ? { to } : { from }),
+          used: [...p.used, chosen],
+          moved,
+        },
+      },
+      ctx,
+    );
+    return;
+  }
+
+  // Choose the open end: one at a time, none to stop.
+  if (chooser === undefined) return;
+  const fixedEnd = from ?? to;
+  if (fixedEnd === undefined || ctx.countersHere(ref(fixedEnd)) === undefined) return;
+  // Onto chosen permanents: only while there's something left to move.
+  if (from !== undefined && kindsHere(ctx, ref(from), spec.counter).length === 0) return;
+  ctx.choosePermanents(
+    chooser.choose,
+    0,
+    1,
+    { ...spec, progress: { ...(from !== undefined ? { from } : { to }), used: p.used, moved, picking: true } },
+    chooser.prompt,
+    false,
+    [fixedEnd, ...p.used],
+  );
 }
 
 /**
@@ -6523,6 +6823,15 @@ function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   }
   // "You may behold a Dragon" (rule 701.4a): only with one to behold.
   if (action.kind === "behold") return ctx.canBehold(action);
+  // "You may move a counter": not when none could move (rule 122.5) — from
+  // a permanent with none (of that kind) left, or with either end gone.
+  if (action.kind === "move-counters" && !isMoveChooser(action.from) && !isMoveChooser(action.to)) {
+    const from = resolveEffectTarget(action.from, ctx);
+    const to = resolveEffectTarget(action.to, ctx);
+    if (from === undefined || to === undefined || ctx.countersHere(to) === undefined) return false;
+    if (from.kind === "object" && to.kind === "object" && from.object === to.object) return false;
+    return kindsHere(ctx, from, action.counter).length > 0;
+  }
   return true;
 }
 
@@ -7704,6 +8013,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "remove-counter": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.removeCounter(target, spec.counter, amountValue(spec.amount, ctx));
+      return;
+    }
+    case "move-counters":
+      applyMoveCounters(spec, ctx);
+      return;
+    case "put-counters-of": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      const of = resolveAmountRef(spec.of, ctx);
+      if (target === undefined || of === undefined) return;
+      // The same number of each kind it had (rule 122.8), each put as any
+      // counter is — a -1/-1 among them too.
+      for (const [kind, n] of Object.entries(ctx.counterKindsOf(of))) {
+        if (n > 0) ctx.addCounter(target, kind, n);
+      }
       return;
     }
     case "add-counter": {

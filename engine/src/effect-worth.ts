@@ -299,6 +299,17 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "add-counter":
       if (typeof effect.target === "number") return 0;
       return onObjectRef(effect.target, HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1, ctx);
+    case "put-counters-of":
+      return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, 1, ctx);
+    case "move-counters": {
+      // The untargeted ends (graft's "from this onto it"): a counter is worth
+      // to whoever gains it, and half that lost to whoever gives it up (it's
+      // often a land's or an artifact's, doing nothing where it is).
+      const sign = effect.counter !== undefined && HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1;
+      const end = (ref: typeof effect.from, worth: number): number =>
+        typeof ref === "number" || typeof ref === "object" ? 0 : onObjectRef(ref, worth, ctx);
+      return end(effect.to, sign) + end(effect.from, -0.5 * sign);
+    }
     case "modify-pt": {
       if (typeof effect.target === "number") return 0;
       const signOf = (a: EffectAmount): number => (typeof a === "number" ? Math.sign(a) : 1);

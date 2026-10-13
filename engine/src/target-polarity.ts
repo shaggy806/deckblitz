@@ -265,6 +265,16 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // The reverse of `add-counter`: losing a harmful counter helps.
   "remove-counter": (n, v) =>
     v.touch(n.target, HARMFUL_COUNTERS.has(n.counter) ? "help" : "harm", MAJOR),
+  // A counter taken from one onto the other: the kind chosen as it resolves
+  // when unnamed, read as a good one.
+  "move-counters": (n, v) => {
+    const harmful = n.counter !== undefined && HARMFUL_COUNTERS.has(n.counter);
+    v.touch(n.from, harmful ? "help" : "harm", MINOR);
+    v.touch(n.to, harmful ? "harm" : "help", MAJOR);
+    v.child(n.ifMoved);
+  },
+  // Whatever it had — read as the +1/+1 counters it nearly always is.
+  "put-counters-of": (n, v) => v.touch(n.target, "help", MAJOR),
   // Card selection and maybe a counter, for the conniving permanent's side.
   connive: (n, v) => v.touch(n.target, "help", MAJOR),
   "grant-player-hexproof": none,

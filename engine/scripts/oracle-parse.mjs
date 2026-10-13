@@ -192,6 +192,35 @@ function keywordPart(part) {
       ],
     };
   }
+  if ((m = /^graft (\d+)$/i.exec(p))) {
+    // Graft N (rule 702.58a): enters with the counters; whenever another
+    // creature enters, if this has a +1/+1 counter (an intervening if,
+    // 603.4), may move one onto it (a move, 122.5).
+    const n = Number(m[1]);
+    return {
+      static: [
+        {
+          affects: { scope: "self" },
+          replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: n } },
+          text: `Graft ${n}`,
+        },
+      ],
+      triggered: [
+        {
+          trigger: { on: "enters-battlefield", who: "any", filter: { type: "creature" }, otherOnly: true },
+          condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "gte", n: 1 } },
+          targets: [],
+          effect: {
+            kind: "may",
+            prompt: "Move a +1/+1 counter from ~ onto the creature that entered?",
+            effect: { kind: "move-counters", from: "source", to: "trigger-object", counter: "+1/+1" },
+          },
+          resolve: null,
+          text: `Graft ${n}`,
+        },
+      ],
+    };
+  }
   const simple = {
     undying: () => ({ triggered: [undying()] }),
     persist: () => ({ triggered: [persist()] }),
@@ -413,6 +442,7 @@ const TARGET_PHRASES = [
   ["target artifact", "artifact"],
   ["target enchantment", "enchantment"],
   ["target land", "land"],
+  ["target permanent you control", { kind: "permanent", whose: "you", filter: {} }],
   ["target permanent", "permanent"],
   ["target player or planeswalker", "player-or-planeswalker"],
   ["target opponent or planeswalker", "opponent-or-planeswalker"],
@@ -641,14 +671,40 @@ export function parseTrigger(clause) {
   }
 
   // "Whenever [another] [nontoken] <type> [you control | an opponent controls] enters / dies / attacks"
-  if ((m = /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks)$/.exec(c))) {
+  // "Whenever ~ or another creature you control dies": the two triggers it is
+  // (`thisOrAnother`) — the source itself, whatever it is by then, and every
+  // other one matching.
+  if ((m = /^Whenever ~ or another (.+?) you control (dies|leaves the battlefield)$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    // A type to stand on ("another Zombie" is a creature — a person's call).
+    if (filter === null || (filter.type === undefined && filter.typesAnyOf === undefined)) return null;
+    const on = m[2] === "dies" ? "dies" : "leaves-battlefield";
+    return [
+      { on, who: "self" },
+      { on, who: "you-control", filter, otherOnly: true },
+    ];
+  }
+  if (
+    (m =
+      /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks|leaves the battlefield|is put into a graveyard from the battlefield)$/.exec(
+        c,
+      ))
+  ) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
-    const on = { enters: "enters-battlefield", dies: "dies", attacks: "attacks" }[m[4]];
+    const on = {
+      enters: "enters-battlefield",
+      dies: "dies",
+      attacks: "attacks",
+      "leaves the battlefield": "leaves-battlefield",
+      "is put into a graveyard from the battlefield": "dies",
+    }[m[4]];
     if (on === "attacks" && m[3] !== "you control") return null;
     const who = m[3] === "you control" ? "you-control" : "any";
     if (m[3] === "an opponent controls") filter.controlledBy = "opponent";
-    return [{ on, who, filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
+    // "Another permanent leaves the battlefield" is any of them: no filter.
+    const any = on === "leaves-battlefield" && Object.keys(filter).length === 0;
+    return [{ on, who, ...(any ? {} : { filter }), ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
   if ((m = /^Whenever (a|another) (.+?) you control deals combat damage to a player$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
@@ -851,6 +907,32 @@ export function parseSentence(sentence, ctx) {
     return { kind: "add-counter", target: slot(m[2]), counter: "+1/+1", amount: n };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
+  // Moving counters (rule 122.5): "a [kind] counter from ~ onto …", "all
+  // counters from ~ onto …", "a counter" (a kind chosen as it resolves) or
+  // "any number of counters" from one target onto a second.
+  if ((m = re(`move an? ([+-]\\d+/[+-]\\d+|[a-z]+) counter from ~ onto (${TARGET})`).exec(s)) && m[1].toLowerCase() !== "counter") {
+    return { kind: "move-counters", from: "source", to: slot(m[2]), counter: m[1].toLowerCase() };
+  }
+  if ((m = re(`move all counters from ~ onto (${TARGET})`).exec(s))) {
+    return { kind: "move-counters", from: "source", to: slot(m[1]), amount: "all" };
+  }
+  if ((m = re(`move (a counter|any number of counters) from (${TARGET}) onto (?:a second )?(${TARGET})`).exec(s))) {
+    const from = slot(m[2]);
+    return {
+      kind: "move-counters",
+      from,
+      to: slot(m[3]),
+      ...(/^any/i.test(m[1]) ? { amount: "any" } : {}),
+    };
+  }
+  // "Put its counters on …" / "put those counters on …" of a permanent that
+  // left (rule 122.8): each kind it had, put on — the ability's own object
+  // (a self dies or leaves trigger) or the one its trigger names.
+  if (ctx.departed !== undefined && (m = re(`put (?:its|those) counters on (~|up to one ${TARGET}|${TARGET})`).exec(s))) {
+    const target =
+      m[1] === "~" ? "source" : /^up to one /i.test(m[1]) ? quantifiedSlots(m[1], ctx)?.slots[0] : slot(m[1]);
+    return { kind: "put-counters-of", of: ctx.departed, target };
+  }
 
   // Removal and movement.
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };
@@ -1289,7 +1371,7 @@ export function parseEffect(text, outer) {
     // "It" names the ability's object only in its first sentence: after
     // another ("Create a 0/0 token. Put a +1/+1 counter on it.") it's
     // whatever that sentence was about.
-    const effect = parseSentence(sentence, i === 0 ? ctx : { ...ctx, it: undefined });
+    const effect = parseSentence(sentence, i === 0 ? ctx : { ...ctx, it: undefined, departed: undefined });
     if (effect === null || containsUndefined(effect)) {
       ctx.targets.length = before;
       todo.push(sentence);
@@ -1571,8 +1653,8 @@ export function parseFace(face, ctx = {}) {
       // intervening "if" (the rulings).
       const whileSaddled = / while saddled$/.test(clause);
       if (whileSaddled) clause = clause.replace(/ while saddled$/, "");
-      const triggers = parseTrigger(clause);
-      if (triggers === null || (whileSaddled && !triggers.every((t) => t.on === "attacks" && t.who === "self"))) {
+      const parsedTriggers = parseTrigger(clause);
+      if (parsedTriggers === null || (whileSaddled && !parsedTriggers.every((t) => t.on === "attacks" && t.who === "self"))) {
         out.todo.push(printed(raw));
         continue;
       }
@@ -1590,18 +1672,31 @@ export function parseFace(face, ctx = {}) {
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
       };
+      let triggers = parsedTriggers;
       if (/^if /i.test(rest)) {
         // An intervening-if (rule 603.4) is the ability's `condition`: read
         // for the few the engine names, else left to a person.
         const clause = rest.slice(0, rest.indexOf(",") + 1);
         const condition = INTERVENING_IFS[clause.toLowerCase()];
         if (condition !== undefined) base.condition = condition;
-        else base.__todo = [`the intervening-if: "${clause}"`];
+        else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
+          // A permanent that left, read as it last existed: its own counters
+          // (a self trigger), or each trigger's filter on what left (the
+          // self half of "this or another" too).
+          if (departedOf(triggers) === "source") base.condition = { kind: "self-counters", compare: { op: "gte", n: 1 } };
+          else triggers = triggers.map((t) => ({ ...t, filter: { ...t.filter, counters: { compare: { op: "gte", n: 1 } } } }));
+        } else base.__todo = [`the intervening-if: "${clause}"`];
         rest = rest.slice(rest.indexOf(", ") + 2);
         rest = rest[0].toUpperCase() + rest.slice(1);
       } else rest = rest.length > 0 ? rest[0].toUpperCase() + rest.slice(1) : rest;
       const first = { trigger: triggers[0], ...base };
-      const next = fillEffect(first, rest, { tokenFor, onStack: true, it: itOf(triggers) }, lines, i);
+      const next = fillEffect(
+        first,
+        rest,
+        { tokenFor, onStack: true, it: itOf(triggers), departed: departedOf(triggers) },
+        lines,
+        i,
+      );
       out.triggered.push(first);
       for (const t of triggers.slice(1)) out.triggered.push({ ...first, trigger: t, targets: [...first.targets] });
       i = next;
@@ -1774,6 +1869,7 @@ const INTERVENING_IFS = {
   "if it was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
+  "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
 };
 
 /**
@@ -1789,6 +1885,19 @@ function itOf(triggers) {
   const othersEvents = [...objectEvents, "becomes-target"];
   if (triggers.every((t) => t.who !== "self" && t.filter !== undefined && othersEvents.includes(t.on))) return "trigger-object";
   return undefined;
+}
+
+/**
+ * The permanent a leaves-the-battlefield trigger is about, for "put its
+ * counters on …" (rule 122.8): the ability's own source when it's "this"
+ * one, the trigger object when it's one the trigger names — "this creature
+ * or another" too, whose self half has the source as its trigger object;
+ * `undefined` for any other trigger.
+ */
+function departedOf(triggers) {
+  const leaving = ["dies", "leaves-battlefield"];
+  if (!triggers.every((t) => leaving.includes(t.on))) return undefined;
+  return triggers.every((t) => t.who === "self") ? "source" : "trigger-object";
 }
 
 /** Fill `ability.effect` / `targets` from its effect text; a "choose one —"
@@ -1852,7 +1961,13 @@ function fillEffect(ability, text, ctx, lines, i) {
     else ability.__todo = [...(ability.__todo ?? []), `the modes: ${bullets.join(" / ")}`];
     return j - 1;
   }
-  const r = parseEffect(text, { targets: ability.targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack, it: ctx.it });
+  const r = parseEffect(text, {
+    targets: ability.targets,
+    tokenFor: ctx.tokenFor,
+    onStack: ctx.onStack,
+    it: ctx.it,
+    departed: ctx.departed,
+  });
   ability.effect = r.effect;
   if (r.effect === null) {
     ability.__todo = [...(ability.__todo ?? []), ...r.todo];

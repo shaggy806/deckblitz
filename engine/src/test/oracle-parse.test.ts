@@ -826,6 +826,83 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     // A line it can't read stays a person's, never half-gated.
     expect(face("Max speed — Whenever you cast a spell with mana value 7 or greater, you win the game.").complete).toBe(false);
   });
+
+  it("moving counters (rule 122.5): of a kind, all, a chosen kind or any number between two targets", () => {
+    const closet = face("{T}: Move a +1/+1 counter from this artifact onto target creature you control.", "Artifact");
+    expect(closet.activated[0].effect).toEqual({ kind: "move-counters", from: "source", to: 0, counter: "+1/+1" });
+    expect(closet.activated[0].targets).toEqual(["creature-you-control"]);
+    const ozolith = face(
+      "At the beginning of combat on your turn, if Test Card has counters on it, you may move all counters from Test Card onto target creature.",
+      "Legendary Artifact",
+    );
+    expect(ozolith.triggered[0].condition).toEqual({ kind: "self-counters", compare: { op: "gte", n: 1 } });
+    expect(ozolith.triggered[0].effect).toMatchObject({
+      kind: "may",
+      effect: { kind: "move-counters", from: "source", to: 0, amount: "all" },
+    });
+    const grounds = face("{1}, {T}: Move a counter from target permanent you control onto a second target permanent.", "Land");
+    expect(grounds.activated[0].effect).toEqual({ kind: "move-counters", from: 0, to: 1 });
+    expect(grounds.activated[0].targets).toEqual([{ kind: "permanent", whose: "you", filter: {} }, "permanent"]);
+    const defense = face(
+      "{4}{W}: Move any number of counters from target permanent you control onto a second target permanent you control.",
+      "Enchantment",
+    );
+    expect(defense.activated[0].effect).toEqual({ kind: "move-counters", from: 0, to: 1, amount: "any" });
+    expect(defense.complete).toBe(true);
+  });
+
+  it("graft N (rule 702.58a): enters with the counters, and may move one onto another creature that enters", () => {
+    const frog = face("Graft 3", "Creature — Frog Mutant");
+    expect(frog.static).toEqual([
+      { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: 3 } }, text: "Graft 3" },
+    ]);
+    expect(frog.triggered[0]).toMatchObject({
+      trigger: { on: "enters-battlefield", who: "any", filter: { type: "creature" }, otherOnly: true },
+      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "gte", n: 1 } },
+      effect: { kind: "may", effect: { kind: "move-counters", from: "source", to: "trigger-object", counter: "+1/+1" } },
+    });
+    expect(frog.complete).toBe(true);
+  });
+
+  it("'put its counters on …' of a permanent that left (rule 122.8), and 'if it had counters on it'", () => {
+    // Its own: the source, the intervening if on its counters as it died.
+    const apprentice = face(
+      "When this creature dies, if it had counters on it, put those counters on target creature you control.",
+      "Artifact Creature — Construct",
+    );
+    expect(apprentice.triggered[0]).toMatchObject({
+      trigger: { on: "dies", who: "self" },
+      condition: { kind: "self-counters", compare: { op: "gte", n: 1 } },
+      targets: ["creature-you-control"],
+      effect: { kind: "put-counters-of", of: "source", target: 0 },
+    });
+    expect(face("When this creature leaves the battlefield, put its counters on target creature you control.").triggered[0].effect).toEqual({
+      kind: "put-counters-of",
+      of: "source",
+      target: 0,
+    });
+    // Another's: the trigger object, the "if" on what left as the trigger's
+    // filter; "this creature or another" is the two triggers it is.
+    const ozolith = face(
+      "Whenever a creature you control leaves the battlefield, if it had counters on it, put those counters on Test Card.",
+      "Legendary Artifact",
+    );
+    expect(ozolith.triggered[0]).toMatchObject({
+      trigger: { on: "leaves-battlefield", who: "you-control", filter: { type: "creature", counters: { compare: { op: "gte", n: 1 } } } },
+      effect: { kind: "put-counters-of", of: "trigger-object", target: "source" },
+    });
+    const host = face(
+      "Whenever this creature or another creature you control dies, if it had counters on it, put its counters on up to one target creature you control.",
+    );
+    expect(host.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "dies", who: "self", filter: { counters: { compare: { op: "gte", n: 1 } } } },
+      { on: "dies", who: "you-control", filter: { type: "creature", counters: { compare: { op: "gte", n: 1 } } }, otherOnly: true },
+    ]);
+    expect(host.triggered[0].targets).toEqual([{ kind: "optional", of: "creature-you-control" }]);
+    expect(host.triggered[1].effect).toEqual({ kind: "put-counters-of", of: "trigger-object", target: 0 });
+    // Not after another sentence: "its" is then whatever that one was about.
+    expect(face("When this creature dies, draw a card. Put its counters on target creature you control.").complete).toBe(false);
+  });
 });
 
 describe("agreement with the hand-authored pool", () => {

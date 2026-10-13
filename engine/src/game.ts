@@ -19195,6 +19195,21 @@ export class Game {
         if (object.counters[counter] <= 0) delete object.counters[counter];
         this.emit({ type: "counter-removed", object: id, counter, amount: n });
       },
+      moveCounters: (from, to, counter, amount) => this.moveCounters(from, to, counter, amount, controller),
+      countersHere: (target) => {
+        if (target.kind !== "object") return undefined;
+        const object = this.state.objects[target.object];
+        return object?.zone === "battlefield" ? object.counters : undefined;
+      },
+      counterKindsOf: (target) => {
+        const lki = lastKnownOf(target);
+        if (lki !== undefined) return lki.counters;
+        return target.kind === "object" ? (this.state.objects[target.object]?.counters ?? {}) : {};
+      },
+      singleOut: (target) =>
+        target.kind === "object" && this.state.objects[target.object]?.zone === "battlefield"
+          ? { kind: "object", object: this.splitOneFromStack(target.object) }
+          : target,
       delayTrigger: (at, effect, text, delayedController, own) =>
         this.createDelayedTrigger(
           source,
@@ -19578,8 +19593,8 @@ export class Game {
       },
       proliferate: (then) => this.beginProliferate(source, controller, x, then),
       splitMana: (ask) => this.beginManaSplit(source, controller, x, ask),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource) =>
-        this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true),
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except) =>
+        this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true, except),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
@@ -23824,6 +23839,37 @@ export class Game {
   }
 
   /**
+   * Move up to `amount` counters of kind `counter` from one permanent onto
+   * another (rule 122.5: "remove that counter from the object it's currently
+   * on and put it onto a second object. If either of these actions isn't
+   * possible, it's not possible to move a counter, and no counter is removed
+   * from or put onto anything"). Not possible between an object and itself,
+   * from one without that kind, or with either no longer on the battlefield
+   * — the only place this engine keeps counters on an object, and nothing
+   * in it says a permanent can't have counters put on it. The removal is a
+   * `counter-removed`; the put goes through `addCounter`, so it's put by
+   * `by` (a "whenever you put" trigger sees it — the rulings) and a
+   * counter replacement applies to it. How many were moved.
+   */
+  private moveCounters(from: TargetRef, to: TargetRef, counter: string, amount: number, by: PlayerId): number {
+    if (from.kind !== "object" || to.kind !== "object" || amount <= 0 || from.object === to.object) return 0;
+    const source = this.state.objects[from.object];
+    const dest = this.state.objects[to.object];
+    if (source?.zone !== "battlefield" || dest?.zone !== "battlefield") return 0;
+    const have = source.counters[counter] ?? 0;
+    if (have <= 0) return 0;
+    const n = Math.min(amount, have);
+    // One token of a stack gives them up, not every token in it.
+    const id = this.splitOneFromStack(from.object);
+    const object = this.state.objects[id];
+    object.counters[counter] = have - n;
+    if (object.counters[counter] <= 0) delete object.counters[counter];
+    this.emit({ type: "counter-removed", object: id, counter, amount: n });
+    this.addCounter(to, counter, n, true, by);
+    return n;
+  }
+
+  /**
    * Everything that could be proliferated right now (rule 701.27a): every
    * battlefield permanent carrying at least one counter, in battlefield
    * order, then every player still in the game with a counter — energy,
@@ -24201,8 +24247,11 @@ export class Game {
     then: EffectSpec,
     prompt: string,
     exceptSource = false,
+    except: readonly ObjectId[] = [],
   ): void {
-    const eligible = this.battlefieldMatching(player, filter).filter((id) => !exceptSource || id !== source);
+    const eligible = this.battlefieldMatching(player, filter).filter(
+      (id) => (!exceptSource || id !== source) && !except.includes(id),
+    );
     const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
     const most = Math.min(Math.max(0, max), available);
     if (most <= 0) return;
