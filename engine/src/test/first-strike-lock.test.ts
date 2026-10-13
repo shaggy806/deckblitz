@@ -143,3 +143,34 @@ describe("rule 510.4 — who deals damage in the second combat-damage step", () 
     expect(game.state.combatDamage).toBeNull();
   });
 });
+
+// A bug report (2026-10-13): a Reassembling Skeleton that blocked a double
+// striker, died to its first-strike damage and was returned from the
+// graveyard before the regular step was dealt that step's damage, and dealt
+// its own — it still sat in the attacker's `blockedBy`, under the same id.
+// The returned Skeleton is a new object that blocks nothing (rules 400.7,
+// 506.4); the attacker stays blocked (509.1h).
+describe("a blocker that dies to first-strike damage and comes back", () => {
+  it("is not in combat for the regular step: deals and is dealt no damage", () => {
+    const { game, a, b } = mkGame();
+    const ace = spawn(game, "Fencing Ace", A); // 1/1 double strike
+    const skeleton = spawn(game, "Reassembling Skeleton", B); // 1/1
+    spawn(game, "Swamp", B);
+    spawn(game, "Swamp", B);
+    a.declareAttackersFn = () => [{ attacker: ace, defender: B }];
+    b.declareBlockersFn = () => [{ blocker: skeleton, attacker: ace }];
+
+    game.advanceUntil(betweenSteps);
+    expect(game.state.objects[skeleton].zone).toBe("graveyard");
+    // Alice passes; Bob returns the Skeleton ({1}{B}: tapped, from the graveyard).
+    game.dispatch({ type: "pass-priority", player: A });
+    game.dispatch({ type: "activate-ability", player: B, source: skeleton, abilityIndex: 0, targets: [] });
+    game.advanceUntil(toPostcombat);
+
+    expect(game.state.objects[skeleton].zone).toBe("battlefield");
+    expect(game.state.objects[skeleton].damageMarked).toBe(0);
+    expect(game.state.objects[ace].zone).toBe("battlefield");
+    // Still blocked, so no damage to Bob either.
+    expect(life(game, B)).toBe(20);
+  });
+});

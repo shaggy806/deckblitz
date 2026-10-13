@@ -26588,8 +26588,9 @@ export class Game {
       if (object.controller !== controller) {
         object.controller = controller;
         object.summoningSick = true;
-        object.attacking = null;
-        object.blocking = null;
+        // A change of control removes it from combat (rule 506.4), its
+        // attacker's list of blockers included.
+        this.removeFromCombat(id);
         invalidateComputedCache();
         this.emit({
           type: "control-changed",
@@ -26679,8 +26680,9 @@ export class Game {
     if (object.controller === player) return;
     object.controller = player;
     object.summoningSick = true;
-    object.attacking = null;
-    object.blocking = null;
+    // A change of control removes it from combat (rule 506.4), its
+    // attacker's list of blockers included.
+    this.removeFromCombat(id);
     this.emit({
       type: "control-changed",
       object: id,
@@ -30187,7 +30189,12 @@ export class Game {
       ];
     }
 
-    // A change of zone resets everything that only applies in one zone.
+    // A change of zone resets everything that only applies in one zone —
+    // combat first, through `removeFromCombat`, so a blocker that left is
+    // also struck from its attacker's `blockedBy` (rule 506.4): the id stays
+    // the card's, and a creature returned before damage (Reassembling
+    // Skeleton) is a new object that blocks nothing (400.7).
+    this.removeFromCombat(id);
     object.attacking = null;
     // What it did there was that object's (rule 400.7).
     delete object.tally;

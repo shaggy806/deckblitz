@@ -27,14 +27,18 @@ import { assignedCombatDamage, computeCharacteristics, objHasKeyword } from "../
 import type { ObjectId } from "../primitives.js";
 import type { GameState } from "../state.js";
 
-/** The blockers of `attackerId` that are still on the battlefield — one may
- * have been removed in response after blocks were declared — in the order
- * they were declared, which means nothing to the rules but keeps every
- * per-blocker list lined up. */
+/** The blockers of `attackerId` that are still on the battlefield and still
+ * blocking — one may have been removed in response after blocks were
+ * declared — in the order they were declared, which means nothing to the
+ * rules but keeps every per-blocker list lined up. "Still blocking" because
+ * an id outlives its object: a blocker that died and came back before damage
+ * (Reassembling Skeleton) is a new object on the battlefield that blocks
+ * nothing (rules 400.7, 506.4). */
 export function liveBlockersOf(state: GameState, attackerId: ObjectId): ObjectId[] {
-  return state.objects[attackerId].blockedBy.filter(
-    (id) => state.objects[id]?.zone === "battlefield",
-  );
+  return state.objects[attackerId].blockedBy.filter((id) => {
+    const blocker = state.objects[id];
+    return blocker?.zone === "battlefield" && blocker.blocking !== null;
+  });
 }
 
 /** How much damage counts as lethal to `blockerId` right now: its remaining
