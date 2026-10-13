@@ -1,7 +1,11 @@
 # Tutorials
 
-Status: **planning** (2026-10-12; the user's answers 2026-10-13) — a technical plan, nothing
-built. The user's decisions are recorded at the end and shape everything above them.
+Status: **in progress** (planned 2026-10-12; the user's answers 2026-10-13). Build order
+phases 1 and 2 are built (2026-10-13): the overlay with the site tour, and the tutorial room with
+Learn Commander playing `basics-proof`, a proof lesson standing in for the real games. Next:
+phase 4's seeded decks and game 1's chapters, and phase 3's in-game stops. The user's decisions
+are recorded at the end and shape everything above them; "As built" below records where the
+build departed from this plan.
 
 Two tutorials, asked for together (the user, 2026-10-12):
 
@@ -202,6 +206,31 @@ boards are two-player unless the lesson is about the table.
 - **Copy rot** — every lesson's text in one place per lesson, next to its board.
 - **Cost on the live server**: a tutorial room is a normal room plus a script; the fixed fallback
   (v1) is cheaper than v2.
+
+## As built (2026-10-13)
+
+Where phases 1 and 2 differ from the shape above (the code and `docs/architecture/` have the
+detail):
+
+- **Next cards block clicks even inside the spotlight**, so pressing Start Game mid-explanation
+  can't strand a tour; cards waiting on the player let the spotlight through (`interactive`).
+- **Lesson goal cards let the board through**: blocking needs a click on a creature and then the
+  banner's Block, which only appears once a blocker is picked, so spotlight-only blocking would
+  make the goal unreachable. Only the top strip's menus stay blocked on those cards.
+- **Goals belong to coach cards, not chapters**; a chapter is done when its last card is. A new
+  board is only reached through a Next card (no room swap from inside the publish hook).
+- **The room hook is `RoomOptions.onPublish`**, not an after-settle hook: every settle ends in a
+  publish, so the frame showing a move also carries the updated card.
+- **`holdPriority` on a lesson card**: with nothing to do, the server passes a player's empty-stack
+  windows on its own, which skipped "pass the turn"; a card can hold them until the player passes.
+- **Retry rewinds to the chapter last opened**, whose snapshot already includes the previous
+  chapter's goal (playing the land), so it can't undo that.
+- **Anchors from the server** are a small grammar the client resolves: `tour:`, `card:`,
+  `player:`, `step:`, `css:`.
+- **Spec additions** went in as planned (turn number, a commander's cast count, damage marked);
+  lethal damage is refused rather than killed at the start.
+- **Not built yet**: frozen look-only steps, a stop message (leaving disconnects and the reaper
+  drops the room).
 
 ## The user's decisions (2026-10-13)
 

@@ -20,7 +20,7 @@ is still unscoped.
 
 `deck-autopsies` (**first pass done**) records the deck-against-deck win-rate run, why its v1 column is confounded, the four deck autopsies, and the bot fixes they found and left.
 
-`tutorials` (**planning**) plans the two tutorials — Learn Commander (one or two seeded games against a scripted opponent, the lessons as chapters checked from the event log) and a site tour (coach marks over the real pages) — on a shared coach-mark overlay that blocks other clicks and a production-safe tutorial room, with the user's decisions of 2026-10-13.
+`tutorials` (**in progress** — the overlay, site tour, tutorial room and a proof lesson built) plans the two tutorials — Learn Commander (one or two seeded games against a scripted opponent, the lessons as chapters checked from the event log) and a site tour (coach marks over the real pages) — on a shared coach-mark overlay that blocks other clicks and a production-safe tutorial room, with the user's decisions of 2026-10-13.
 
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 

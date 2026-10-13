@@ -11,9 +11,9 @@ title; when one lands, delete it in both. The animation follow-ups are in
   the engine side is `promptNextGift`.
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or
-  face-down card, no damage marked, no effects lasting a turn, nothing on the stack, and no turn
-  number (play starts on turn 1, though `active`/`step` set whose turn and which step) — so
-  "Edit from here" leaves all of those behind. A commander placed in a library goes to its
+  face-down card, no effects lasting a turn, and nothing on the stack — so "Edit from here"
+  leaves all of those behind (and drops damage a creature can no longer hold without them). The
+  turn number, a commander's cast count and damage marked are fields since 2026-10-13. A commander placed in a library goes to its
   bottom, whatever its place in the list. Each is a field on `ScenarioCard`/`ScenarioSpec` and a
   step in `server/src/builder.ts`'s `buildScenario` and `snapshotScenario`.
 - **One art-crop primitive (from the 2026-09-28 rendering audit).** The client draws a card
@@ -41,8 +41,11 @@ title; when one lands, delete it in both. The animation follow-ups are in
   `toGameConfig`, as starting life and the first player are.
 - **Server-side deck save and share** is still unscoped. Decks live in `localStorage`.
 - **The library and the deck builder load every card definition.** Both fetch all 32 card
-  shards (`client/src/cards/cardData.ts`): about 3.1 MB, 610 kB gzipped, at 5,400 cards, and
-  growing with the pool. They read only printed fields, each ability's text (colour identity)
+  shards (`client/src/cards/cardData.ts`): about 3.1 MB, 610 kB gzipped, at 5,400 cards; 6.3 MB
+  (1.26 MB brotli) at 12,089 definitions on 2026-10-13, and growing with the pool. Running the
+  shards blocks the page in one go (~0.25 s on a fast desktop, then ~0.3 s assembling and
+  drawing the library), so the bar can't repaint and seems to stall near the end — the user saw
+  it on the live site (2026-10-13); the largest JS cost is the definition builder's defaults. They read only printed fields, each ability's text (colour identity)
   and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
   a fraction of the size. The game page loads no definitions up front.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07).
@@ -84,4 +87,9 @@ where the decision is raised); bots and the fuzzer answer it already.
   tutorial room (games held on the server by id, a scripted name-based opponent promoted from
   dev-rooms' `ScriptedBot`, goals checked from the event log). The user's decisions (2026-10-13):
   one or two seeded games with lessons as chapters, custom decks, blocking clicks, a first-visit
-  callout, a friendly voice.
+  callout, a friendly voice. **Built 2026-10-13** (plan phases 1-2): the overlay and site tour,
+  the tutorial room (`server/src/tutorial-session.ts`, `server/src/tutorials/`,
+  `server/src/scripted-bot.ts`), and Learn Commander in the "?" menu playing `basics-proof`, a
+  proof lesson (`LEARN_COMMANDER_LESSON` in `client/src/tutorial/lesson.ts` names it). Left: the
+  seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
+  card is spotlit, pausing the opponent under a Next card mid-game.

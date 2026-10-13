@@ -211,16 +211,16 @@ item lands.
 - **A forced look-and-choose still asks**: Yuriko's and Dark Confidant's "reveal the top card and put it into your hand" open a one-card picker with nothing to choose (`look-and-choose` with `count`, `min` and `max` 1); it could take the card unasked.
 - **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review): with bot speed moved into Settings every step shows at 1366, but at 1024 the track stops at EC.
 - **A gift's opponent is asked one opponent at a time** — one prompt naming every opponent would read better.
-- **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), damage, turn-long effects, the stack, the turn number.
+- **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **One art-crop primitive** — the art lookup is repeated in six components.
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).
-- **The library and the deck builder load every card definition** (~3.1 MB).
+- **The library and the deck builder load every card definition** (~6.3 MB at 12,089 definitions; the user saw the bar stall near the end, 2026-10-13).
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
-- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Next: build phase 1, the overlay.
+- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Built 2026-10-13: the overlay, the site tour, the tutorial room with a scripted opponent, chapter goals and retry, and Learn Commander playing a proof lesson (`basics-proof`). Next: the seeded decks and game 1's chapters (plan phase 4), then the in-game tour stops (phase 3).
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs
