@@ -19,7 +19,7 @@ import type { Printing, PrintingPage } from '../deck-builder/printings.ts'
 import { CardImage } from '../ui/CardImage.tsx'
 import { Symbols } from '../ui/Symbols.tsx'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
-import type { SetCards, SetInfo } from './setFilter.ts'
+import type { SetCards, SetInfo, SetPrinting } from './setFilter.ts'
 import './library.css'
 
 /** Banned in Commander — in the pool for casual play (2026-10-11). */
@@ -256,6 +256,20 @@ type SetCardsState =
   | { readonly code: string; readonly cards: SetCards }
   | { readonly code: string; readonly failed: true }
 
+/** A chosen set's printing of each card, by every name the card answers to. */
+type SetPrintings = ReadonlyMap<string, SetPrinting>
+
+/**
+ * `def` as the chosen set printed it: its image from that set (`art`, which
+ * `CardImage` sends through `resolveArtUrl` like any pinned printing), or
+ * `def` unchanged with no set chosen or none printed for this name. A
+ * double-faced card's back face gets the back's image under its own name.
+ */
+function inSet(def: CardDefinition, printings: SetPrintings | null): CardDefinition {
+  const image = printings?.get(def.name)?.image
+  return image ? { ...def, art: image } : def
+}
+
 /** The offered sets in groups by the year they came out, newest first. */
 function setsByYear(sets: readonly SetInfo[]): [string, SetInfo[]][] {
   const groups = new Map<string, SetInfo[]>()
@@ -341,6 +355,8 @@ export function LibraryPage() {
   }
   const setNow = setCardsState !== null && setCardsState.code === setCode ? setCardsState : null
   const setNames = setNow !== null && 'cards' in setNow ? setNow.cards.names : null
+  // While a set is chosen every card shows its printing from that set.
+  const setPrintings = setNow !== null && 'cards' in setNow ? setNow.cards.printings : null
   const setName = sets?.find((s) => s.code === setCode)?.name ?? setCode?.toUpperCase() ?? ''
 
   const filtered = useMemo(() => {
@@ -616,7 +632,12 @@ export function LibraryPage() {
           <>
             <div className="lib-grid" ref={gridRef}>
               {pageRows.map((e) => (
-                <GridCard key={e.def.name} entry={e} onOpen={() => select(e.def.name)} />
+                <GridCard
+                  key={e.def.name}
+                  entry={e}
+                  printings={setPrintings}
+                  onOpen={() => select(e.def.name)}
+                />
               ))}
             </div>
             {pageCount > 1 ? (
@@ -644,6 +665,7 @@ export function LibraryPage() {
           // it fresh (front face up) rather than carrying a flip across.
           key={selected.name}
           entry={entries.find((e) => e.def.name === selected.name) ?? buildEntry(selected)}
+          printings={setPrintings}
           onClose={() => select(null)}
           onPrev={selectedIndex > 0 ? () => step(-1) : null}
           onNext={
@@ -658,14 +680,23 @@ export function LibraryPage() {
 /** One result in the grid: the card face, and — for a two-faced card — a
  * corner button that turns it over in place, the same affordance Scryfall
  * puts on a double-faced search result. */
-function GridCard({ entry, onOpen }: { readonly entry: Entry; readonly onOpen: () => void }) {
+function GridCard({
+  entry,
+  printings,
+  onOpen,
+}: {
+  readonly entry: Entry
+  /** The chosen set's printings, or `null` for each card's own art. */
+  readonly printings: SetPrintings | null
+  readonly onOpen: () => void
+}) {
   const [flipped, setFlipped] = useState(false)
   const shown = flipped && entry.other ? entry.other : entry.def
 
   return (
     <div className="lib-card">
       <button type="button" className="lib-card-open" onClick={onOpen} title={entry.def.name}>
-        <CardImage def={shown} />
+        <CardImage def={inSet(shown, printings)} />
         <span className="lib-card-caption">{shown.name}</span>
       </button>
       {entry.flippable ? (
@@ -694,11 +725,15 @@ function GridCard({ entry, onOpen }: { readonly entry: Entry; readonly onOpen: (
  * you'd open a card in the first place. */
 function CardOverlay({
   entry,
+  printings,
   onClose,
   onPrev,
   onNext,
 }: {
   readonly entry: Entry
+  /** The chosen set's printings: the card opens in its printing from that
+   * set, as the grid showed it. */
+  readonly printings: SetPrintings | null
   readonly onClose: () => void
   readonly onPrev: (() => void) | null
   readonly onNext: (() => void) | null
@@ -708,7 +743,8 @@ function CardOverlay({
   const tokens = useMemo(() => tokensOf(entry), [entry])
   const [preview, setPreview] = useState<PreviewTarget | null>(null)
   // The printing picked in the printings panel, or null for the card's own
-  // art. A printing is a whole card, so a flipped one shows its back face.
+  // art (its printing from the chosen set, if any). A printing is a whole
+  // card, so a flipped one shows its back face.
   const [printing, setPrinting] = useState<Printing | null>(null)
 
   useEffect(() => {
@@ -736,7 +772,7 @@ function CardOverlay({
 
         <div className="lib-overlay-art">
           {printing === null ? (
-            <CardImage def={shown} version="large" />
+            <CardImage def={inSet(shown, printings)} version="large" />
           ) : (
             <CardImage def={{ ...shown, art: printing.id }} version="large" backFace={flipped} />
           )}
@@ -789,7 +825,11 @@ function CardOverlay({
             Previous/Next buttons stay put as you walk the results. */}
         <aside className="lib-overlay-side">
           {entry.isToken ? null : (
-            <PrintingsPanel name={entry.def.name} chosen={printing?.id ?? null} onChoose={setPrinting} />
+            <PrintingsPanel
+              name={entry.def.name}
+              chosen={printing?.id ?? printings?.get(entry.def.name)?.id ?? null}
+              onChoose={setPrinting}
+            />
           )}
           {tokens.length > 0 ? (
             <section className="lib-overlay-tokens" aria-label="Tokens this card makes">
