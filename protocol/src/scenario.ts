@@ -2,8 +2,9 @@
  * The scenario builder's board, as it travels between a developer's client
  * and a server started with `--builder` (never the public site).
  *
- * A scenario is plain data: who sits where, their life, whose turn and which
- * step it is, and every card placed, with the zone it's in and how it lies.
+ * A scenario is plain data: who sits where, their life, whose turn, which
+ * turn and which step it is, and every card placed, with the zone it's in and
+ * how it lies.
  * The server builds a fresh `Game` from it on every edit — cards are placed
  * silently, so nothing triggers while the board is being built — and again
  * when play starts. See `docs/plans/scenario-builder.md`.
@@ -39,6 +40,15 @@ export interface ScenarioCard {
   /** Battlefield only: the `key` of the permanent this Aura or Equipment is
    * attached to. */
   readonly attachedTo?: string;
+  /** Battlefield only, and only on a creature: damage marked on it this turn
+   * (rule 120.3e), there until the cleanup step (514.2). Never lethal — a
+   * board where it would be (704.5g) is refused, unless it's indestructible.
+   * Absent means 0. */
+  readonly damage?: number;
+  /** A commander only: how many times its owner has cast it from the command
+   * zone already, each adding {2} to its next cast from there (rule 903.8).
+   * Absent means 0. */
+  readonly casts?: number;
 }
 
 export interface ScenarioSeat {
@@ -56,6 +66,11 @@ export interface ScenarioSpec {
   /** Whose turn it is. */
   readonly active: PlayerId;
   readonly step: ScenarioStep;
+  /** The game's turn number (1 or more; absent means 1). Past the first
+   * turn nobody skips a draw (rule 103.8a only skips the starting player's
+   * first), and the starting player is whoever's seat makes this turn the
+   * active player's. */
+  readonly turn?: number;
   /** Basic lands under each library's listed cards, so drawing doesn't lose
    * the game at once. */
   readonly libraryFill: number;

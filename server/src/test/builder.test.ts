@@ -129,6 +129,157 @@ describe("buildScenario", () => {
     expect(back.step).toBe(original.step);
     // And it builds again.
     expect(() => buildScenario(back)).not.toThrow();
+    // A scenario without a turn number, damage or cast counts comes back
+    // without them: an old saved scenario stays as it was.
+    expect(back.turn).toBeUndefined();
+    expect(back.cards.some((c) => c.damage !== undefined || c.casts !== undefined)).toBe(false);
+  });
+});
+
+describe("the turn number, a commander's tax and damage", () => {
+  const handAtMain = (built: ReturnType<typeof buildScenario>, player = ALICE) => {
+    const s = built.game.state;
+    const turn = s.turn.number;
+    built.game.advanceUntil((st) => st.turn.number === turn && st.turn.step === "precombat-main");
+    return s.zones.perPlayer[player].hand.map((id) => s.objects[id].cardName);
+  };
+
+  it("starts on the turn it says, the active player's, and nobody skips a draw past turn 1", () => {
+    const top = card("top", "Hill Giant", { zone: "library" });
+    const five = buildScenario(spec([top], { turn: 5, step: "upkeep" }));
+    const s = five.game.state;
+    expect(s.turn.number).toBe(5);
+    expect(s.turnOrder[s.turn.activePlayerIndex]).toBe(ALICE);
+    expect(s.turn.step).toBe("upkeep");
+    expect(s.priority.holder).toBe(ALICE);
+    // Turns 1, 3 and 5 are alice's: she started, and this is round 3.
+    expect(s.startingPlayer).toBe(ALICE);
+    expect(s.turn.round).toBe(3);
+    expect(s.players[ALICE].lastTurnTaken).toBe(5);
+    // Rule 103.8a skips only the starting player's first draw.
+    expect(handAtMain(five)).toEqual(["Hill Giant"]);
+
+    // On turn 1 the starting player skips it, as before.
+    expect(handAtMain(buildScenario(spec([top], { step: "upkeep" })))).toEqual([]);
+    expect(handAtMain(buildScenario(spec([top], { turn: 1, step: "upkeep" })))).toEqual([]);
+
+    // Turn 4 is bob's when alice started: turns 2 and 4 are his.
+    const four = buildScenario(spec([card("top", "Hill Giant", { owner: BOB, zone: "library" })], { turn: 4, active: BOB, step: "upkeep" }));
+    expect(four.game.state.turn.number).toBe(4);
+    expect(four.game.state.startingPlayer).toBe(ALICE);
+    expect(four.game.state.turn.round).toBe(2);
+    expect(handAtMain(four, BOB)).toEqual(["Hill Giant"]);
+
+    // At three seats, turn 6 is bob's when carol started (carol 1, alice 2,
+    // bob 3, carol 4, alice 5, bob 6), in round 2.
+    const three = buildScenario(
+      spec([], {
+        seats: [ALICE, BOB, asPlayerId("carol")].map((player) => ({ player, life: 40, bot: false })),
+        active: BOB,
+        turn: 6,
+      }),
+    );
+    expect(three.game.state.startingPlayer).toBe(asPlayerId("carol"));
+    expect(three.game.state.turn.round).toBe(2);
+  });
+
+  it("past turn 1, a permanent that isn't summoning sick entered on an earlier turn", () => {
+    const { game, objects } = buildScenario(
+      spec([card("bears", "Grizzly Bears"), card("wurm", "Craw Wurm", { sick: true })], { turn: 3 }),
+    );
+    expect(game.state.objects[idOf(objects, "bears")].enteredBattlefieldOnTurn).toBe(2);
+    expect(game.state.objects[idOf(objects, "wurm")].enteredBattlefieldOnTurn).toBe(3);
+    // Turn 1, as it always was: everything placed entered this turn.
+    const one = buildScenario(spec([card("bears", "Grizzly Bears")]));
+    expect(one.game.state.objects[idOf(one.objects, "bears")].enteredBattlefieldOnTurn).toBe(1);
+  });
+
+  it("adds {2} to a commander's cost for each cast from the command zone it's had", () => {
+    const board = (lands: number, casts?: number) =>
+      spec([
+        card("cmdr", "Chandra, Acolyte of Flame", { zone: "command", commander: true, ...(casts !== undefined ? { casts } : {}) }),
+        ...Array.from({ length: lands }, (_, i) => card(`m${i}`, "Mountain")),
+      ]);
+    const castable = (s: ScenarioSpec) =>
+      buildScenario(s)
+        .game.legalActions(ALICE)
+        .some((a) => a.kind === "cast-spell" && a.cardName === "Chandra, Acolyte of Flame");
+    // {1}{R}{R}, and {3}{R}{R} after one cast.
+    expect(castable(board(3))).toBe(true);
+    expect(castable(board(3, 0))).toBe(true);
+    expect(castable(board(4, 1))).toBe(false);
+    expect(castable(board(5, 1))).toBe(true);
+    const { game } = buildScenario(board(0, 2));
+    expect(game.state.players[ALICE].commanderCastCounts).toEqual({ "Chandra, Acolyte of Flame": 2 });
+    // The client draws the tax from the count each seat sees.
+    expect(game.viewFor(BOB).players[ALICE].commanderCastCounts).toEqual({ "Chandra, Acolyte of Flame": 2 });
+  });
+
+  it("marks damage on a creature, which cleanup removes, and refuses damage it couldn't survive", () => {
+    const built = buildScenario(spec([card("bears", "Grizzly Bears", { damage: 1 })]));
+    const bears = built.game.state.objects[idOf(built.objects, "bears")];
+    expect(bears.damageMarked).toBe(1);
+    expect(built.game.viewFor(BOB).objects[bears.id]?.damageMarked).toBe(1);
+    built.game.advanceUntil((s) => s.turn.number === 2);
+    expect(built.game.state.objects[bears.id].damageMarked).toBe(0);
+    expect(built.game.state.objects[bears.id].zone).toBe("battlefield");
+
+    // Lethal (rule 704.5g) is refused, counted against the built board's toughness.
+    expect(() => buildScenario(spec([card("bears", "Grizzly Bears", { damage: 2 })]))).toThrow(/would die/);
+    expect(() => buildScenario(spec([card("bears", "Grizzly Bears", { damage: 2, counters: { "+1/+1": 1 } })]))).not.toThrow();
+    expect(() =>
+      buildScenario(spec([card("bears", "Grizzly Bears", { damage: 2 }), card("anthem", "Glorious Anthem")])),
+    ).not.toThrow();
+    // Indestructible survives any amount.
+    const myr = buildScenario(spec([card("myr", "Darksteel Myr", { damage: 5 })]));
+    expect(myr.game.state.objects[idOf(myr.objects, "myr")].damageMarked).toBe(5);
+    // Only a creature has damage marked (rule 120.3e).
+    expect(() => buildScenario(spec([card("anthem", "Glorious Anthem", { damage: 1 })]))).toThrow(/isn't a creature/);
+  });
+
+  it("refuses a bad turn number, cast count or damage", () => {
+    for (const turn of [0, -1, 1.5, 1000]) expect(() => validateScenario(spec([], { turn }))).toThrow(/turn number/);
+    expect(() => validateScenario(spec([card("b", "Grizzly Bears", { damage: -1 })]))).toThrow(/damage/);
+    expect(() => validateScenario(spec([card("b", "Grizzly Bears", { damage: 0.5 })]))).toThrow(/damage/);
+    expect(() => validateScenario(spec([card("b", "Grizzly Bears", { zone: "hand", damage: 1 })]))).toThrow(/permanent/);
+    expect(() => validateScenario(spec([card("b", "Grizzly Bears", { casts: 1 })]))).toThrow(/commander/);
+    expect(() =>
+      validateScenario(spec([card("c", "Chandra, Acolyte of Flame", { zone: "command", commander: true, casts: -1 })])),
+    ).toThrow(/cast count/);
+    expect(() =>
+      validateScenario(spec([card("c", "Chandra, Acolyte of Flame", { zone: "command", commander: true, casts: 100 })])),
+    ).toThrow(/cast count/);
+  });
+
+  it("comes back from a game with the turn, the damage and the cast counts", () => {
+    const original = spec(
+      [
+        card("bears", "Grizzly Bears", { damage: 1 }),
+        card("cmdr", "Chandra, Acolyte of Flame", { zone: "command", commander: true, casts: 3 }),
+        card("theirs", "Chandra, Acolyte of Flame", { owner: BOB, commander: true, casts: 1, counters: { loyalty: 4 } }),
+      ],
+      { turn: 7 },
+    );
+    const { game } = buildScenario(original);
+    const back = snapshotScenario(game, original);
+    expect(back.turn).toBe(7);
+    const shape = (s: ScenarioSpec) =>
+      s.cards.map(({ key: _key, ...rest }) => rest).sort((a, b) => (a.owner + a.zone).localeCompare(b.owner + b.zone));
+    expect(shape(back)).toEqual(shape(original));
+    const again = buildScenario(back);
+    expect(again.game.state.turn.number).toBe(7);
+    expect(again.game.state.players[BOB].commanderCastCounts).toEqual({ "Chandra, Acolyte of Flame": 1 });
+  });
+
+  it("leaves behind damage only an effect it can't say kept from being lethal", () => {
+    // A 4/4 Bears with 3 damage — and then the counters that made it a 4/4
+    // are gone, as a turn-long pump would be from a scenario.
+    const original = spec([card("bears", "Grizzly Bears", { damage: 3, counters: { "+1/+1": 2 } })]);
+    const { game, objects } = buildScenario(original);
+    game.state.objects[idOf(objects, "bears")].counters = {};
+    const back = snapshotScenario(game, original);
+    expect(back.cards).toEqual([{ key: "c1", name: "Grizzly Bears", owner: ALICE, zone: "battlefield" }]);
+    expect(() => buildScenario(back)).not.toThrow();
   });
 });
 

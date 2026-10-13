@@ -12,7 +12,7 @@
  * way: `docs/plans/scenario-builder.md`.
  */
 
-import { COMMANDER_RULES, Game, asPlayerId, createDefaultRegistry, isTokenCard } from "engine";
+import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, createDefaultRegistry, isTokenCard } from "engine";
 import type { CardRegistry, GameObject, ObjectId, PlayerId, Step } from "engine";
 import type { BuilderInfo, ScenarioCard, ScenarioSeat, ScenarioSpec, ScenarioStep, ScenarioZone } from "protocol";
 import type { CaptureConfig } from "./capture.js";
@@ -27,6 +27,8 @@ const ZONES: readonly ScenarioZone[] = ["battlefield", "hand", "graveyard", "exi
 const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const MAX_CARDS = 600;
 const MAX_FILL = 200;
+const MAX_TURN = 999;
+const MAX_CASTS = 99;
 
 let sharedRegistry: CardRegistry | null = null;
 const registryOf = (): CardRegistry => (sharedRegistry ??= createDefaultRegistry());
@@ -62,6 +64,9 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = re
   const players = new Set<string>(seats.map((s) => s.player));
   if (!players.has(spec.active)) throw new Error(`${spec.active} isn't at the table`);
   if (!STEPS.includes(spec.step)) throw new Error(`a scenario can't start in the ${spec.step} step`);
+  if (spec.turn !== undefined && (!isCount(spec.turn, MAX_TURN) || spec.turn < 1)) {
+    throw new Error(`the turn number must be 1-${MAX_TURN}`);
+  }
   if (!isCount(spec.libraryFill, MAX_FILL)) throw new Error(`library fill must be 0-${MAX_FILL}`);
   if (!Array.isArray(spec.cards) || spec.cards.length > MAX_CARDS) throw new Error(`at most ${MAX_CARDS} cards`);
 
@@ -93,6 +98,14 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = re
         if (kind === "" || kind.length > 40 || !isCount(n, 999)) throw new Error(`${card.name}: bad ${kind} counters`);
       }
     }
+    if (card.damage !== undefined) {
+      if (!isCount(card.damage, 999)) throw new Error(`${card.name}: damage must be 0-999`);
+      if (card.damage > 0 && card.zone !== "battlefield") throw new Error(`${card.name}: only a permanent has damage marked`);
+    }
+    if (card.casts !== undefined) {
+      if (!isCount(card.casts, MAX_CASTS)) throw new Error(`${card.name}: cast count must be 0-${MAX_CASTS}`);
+      if (card.casts > 0 && card.commander !== true) throw new Error(`${card.name}: only a commander has a cast count`);
+    }
   }
   for (const card of spec.cards) {
     if (card.attachedTo === undefined) continue;
@@ -110,31 +123,89 @@ export interface BuiltScenario {
 }
 
 /**
- * A fresh game laid out as `spec` says: turn 1, the active player's, at
- * `spec.step` with them holding priority. Placing cards triggers nothing —
- * `debugSpawn` announces no entry, and anything queued anyway (a commander
- * moving out of the command zone) is dropped.
+ * A fresh game laid out as `spec` says: turn `spec.turn` (1 if absent), the
+ * active player's, at `spec.step` with them holding priority. Placing cards
+ * triggers nothing — `debugSpawn` announces no entry, and anything queued
+ * anyway (a commander moving out of the command zone) is dropped. Throws, as
+ * `validateScenario` does, for a board it can't build — and for damage that
+ * the built board can't hold (`damageProblem`).
  */
 export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = registryOf()): BuiltScenario {
+  const laid = layOut(spec, registry);
+  for (const card of spec.cards) {
+    const problem = damageProblem(laid, card);
+    if (problem !== null) throw new Error(problem);
+  }
+  return { game: laid.game, objects: laid.objects };
+}
+
+interface LaidOut extends BuiltScenario {
+  readonly registry: CardRegistry;
+  readonly byKey: ReadonlyMap<string, ObjectId>;
+}
+
+/**
+ * What's wrong with `card`'s damage on the built board, or `null`. Damage is
+ * only ever marked on a creature (rule 120.3e — a planeswalker loses loyalty
+ * instead, 120.3c), and a scenario's is never lethal: a board where it was
+ * would have the creature destroyed before anyone could act (704.5g), so a
+ * creature with damage at or over its toughness is refused rather than
+ * killed at the start — unless it's indestructible, which lets it live with
+ * any amount.
+ */
+function damageProblem(laid: LaidOut, card: ScenarioCard): string | null {
+  if (card.damage === undefined || card.damage === 0) return null;
+  const id = laid.byKey.get(card.key);
+  if (id === undefined || laid.game.state.objects[id]?.zone !== "battlefield") return null;
+  const computed = computeCharacteristics(laid.game.state, laid.registry, id);
+  if (!computed.types.includes("creature")) return `${card.name} isn't a creature: only a creature has damage marked`;
+  if (computed.keywords.has("indestructible") || computed.toughness <= 0) return null;
+  if (card.damage >= computed.toughness) {
+    return `${card.name} would die to its ${card.damage} damage (toughness ${computed.toughness}): at most ${computed.toughness - 1}`;
+  }
+  return null;
+}
+
+function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
   validateScenario(spec, registry);
   const players = spec.seats.map((s) => s.player);
   const fill = Array.from({ length: spec.libraryFill }, (_, i) => BASICS[i % BASICS.length]);
+  const turn = spec.turn ?? 1;
+  const seats = players.length;
+  const activeAt = players.indexOf(spec.active);
+  const seatAt = (offset: number): PlayerId => players[(((activeAt + offset) % seats) + seats) % seats];
   const game = Game.create({
     seed: 1,
     shuffle: false,
     registry,
     startingPlayer: spec.active,
     rules: { ...COMMANDER_RULES, openingHandSize: 0 },
+    // Past turn 1, a (handless) mulligan holds the first turn back, so the
+    // game can be wound to the turn before, the seat before the active
+    // player's taking it: the turn that begins is then turn `turn`, theirs,
+    // begun as any later turn is — no draw skipped (rule 103.8a skips only
+    // the starting player's first), and "first turn" checks read the number.
+    mulligans: turn > 1,
     decks: players.map((player) => ({
       player,
       cards: fill,
       commanders: spec.cards.filter((c) => c.owner === player && c.commander === true).map((c) => c.name),
     })),
   });
+  if (turn > 1) {
+    game.state.turn.number = turn - 1;
+    game.state.turn.activePlayerIndex = players.indexOf(seatAt(-1));
+  }
   game.advanceUntil(
     (s) => s.turn.step === spec.step && s.priority.holder === spec.active && s.zones.shared.stack.length === 0,
   );
   const s = game.state;
+  if (turn > 1) {
+    // Who started, had every turn so far been taken in order, and so which
+    // round this is (`TurnState.round`).
+    s.startingPlayer = seatAt(-(turn - 1));
+    s.turn.round = Math.ceil(turn / seats);
+  }
   // Whatever the turn so far drew goes back: a hand is only what the
   // scenario puts in it.
   for (const player of players) {
@@ -175,6 +246,10 @@ export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = regis
       object.tapped = card.tapped === true;
       object.summoningSick = card.sick === true;
     }
+    // Counted per player and commander name, as the tax reads it (903.8).
+    if (card.casts !== undefined && card.casts > 0) {
+      s.players[card.owner].commanderCastCounts = { ...s.players[card.owner].commanderCastCounts, [card.name]: card.casts };
+    }
   }
   // Libraries are listed top first, and each spawn goes on top: last first.
   const libraryCards = spec.cards.filter((c) => c.commander !== true && c.zone === "library");
@@ -204,6 +279,12 @@ export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = regis
       object.counters = counters;
     }
     if (card.attachedTo !== undefined) object.attachedTo = byKey.get(card.attachedTo) ?? null;
+    if (card.damage !== undefined && card.damage > 0) object.damageMarked = card.damage;
+    // Past turn 1, a permanent that isn't summoning sick has been there since
+    // an earlier turn, not this one ("entered this turn" — and the bots —
+    // read the turn it entered on). Turn 1 keeps every placed permanent
+    // entered this turn, as it always has.
+    if (turn > 1 && card.sick !== true) object.enteredBattlefieldOnTurn = turn - 1;
   }
   for (const seat of spec.seats) {
     const player = s.players[seat.player];
@@ -214,7 +295,7 @@ export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = regis
   // would, so the board isn't left waiting on it.
   if (s.awaiting !== null) game.advanceUntil((st) => st.awaiting === null);
   game.state.pendingTriggers = [];
-  return { game, objects };
+  return { game, objects, registry, byKey };
 }
 
 /** The scenario step a game's current step is closest to. */
@@ -226,11 +307,13 @@ function scenarioStepOf(step: Step): ScenarioStep {
 }
 
 /**
- * The game as it stands, as a scenario to build on: every card where it is,
- * tapped, sick and countered as it is, each token of a stack its own card.
- * What a scenario can't say is left behind — the stack, who controls what
- * they don't own, a transformed face, damage, effects that last a turn.
- * Each library's run of basic lands at the bottom comes back as its fill.
+ * The game as it stands, as a scenario to build on: the turn number, every
+ * card where it is, tapped, sick, countered and damaged as it is, each
+ * commander's cast count, each token of a stack its own card. What a
+ * scenario can't say is left behind — the stack, who controls what they
+ * don't own, a transformed face, effects that last a turn (and damage that
+ * only such an effect kept from being lethal). Each library's run of basic
+ * lands at the bottom comes back as its fill.
  */
 export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSpec {
   const s = game.state;
@@ -259,6 +342,7 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
       ...(o.tapped ? { tapped: true } : {}),
       ...(o.summoningSick ? { sick: true } : {}),
       ...(Object.keys(counters).length > 0 ? { counters } : {}),
+      ...(o.damageMarked > 0 ? { damage: o.damageMarked } : {}),
     });
   }
   let fill = previous.libraryFill;
@@ -281,8 +365,14 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     const o = s.objects[id];
     if (o.isCommander) add(o, "command");
   }
+  // Each commander's cast count, wherever it is now (rule 903.8: its owner's
+  // casts from the command zone, as the tax reads them).
+  const withCasts = cards.map((card) => {
+    const casts = card.commander === true ? (s.players[card.owner]?.commanderCastCounts[card.name] ?? 0) : 0;
+    return casts > 0 ? { ...card, casts } : card;
+  });
   // Attachments, now every permanent has a key.
-  const withAttachments = cards.map((card) => {
+  const withAttachments = withCasts.map((card) => {
     const id = [...keyOf].find(([, key]) => key === card.key)?.[0];
     const host = id === undefined ? null : s.objects[id].attachedTo;
     const hostKey = host === null ? undefined : keyOf.get(host);
@@ -300,7 +390,38 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     return { player: seat.player, life: player?.life ?? seat.life, bot: seat.bot, ...(poison > 0 ? { poison } : {}) };
   });
   const active = s.turnOrder[s.turn.activePlayerIndex] ?? previous.active;
-  return { seats, cards: kept, active, step: scenarioStepOf(s.turn.step), libraryFill: Math.max(0, fill) };
+  const turn = Math.max(1, Math.min(MAX_TURN, s.turn.number));
+  const spec: ScenarioSpec = {
+    seats,
+    cards: kept,
+    active,
+    step: scenarioStepOf(s.turn.step),
+    ...(turn > 1 ? { turn } : {}),
+    libraryFill: Math.max(0, fill),
+  };
+  return withoutUnholdableDamage(spec, registry);
+}
+
+/**
+ * `spec` less any damage its built board can't hold. A game's damage is
+ * never lethal once state-based actions have looked, but what kept it so can
+ * be an effect a scenario leaves behind — Giant Growth on a Grizzly Bears
+ * with 4 damage, both gone at cleanup (rule 514.2) — so on the rebuilt board
+ * it would be. That damage goes the way of the effect.
+ */
+function withoutUnholdableDamage(spec: ScenarioSpec, registry: CardRegistry): ScenarioSpec {
+  if (!spec.cards.some((c) => (c.damage ?? 0) > 0)) return spec;
+  const laid = layOut(spec, registry);
+  const drop = new Set(spec.cards.filter((c) => damageProblem(laid, c) !== null).map((c) => c.key));
+  if (drop.size === 0) return spec;
+  return {
+    ...spec,
+    cards: spec.cards.map((c) => {
+      if (!drop.has(c.key)) return c;
+      const { damage: _damage, ...rest } = c;
+      return rest;
+    }),
+  };
 }
 
 /** What a builder session needs from the manager that owns its code. */
