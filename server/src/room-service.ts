@@ -20,19 +20,33 @@ import type { CaptureLog } from "./capture.js";
 import { PendingRoom } from "./pending-room.js";
 import type { BuilderSession } from "./builder.js";
 import type { TutorialSession } from "./tutorial-session.js";
-import type { ConnId } from "./room-host.js";
+import type { ConnId, RoomEvent, RoomStage } from "./room-host.js";
 
 /** Where a service's messages go. */
 export interface ServiceOutbox {
   /** One message for one connection. */
   send(conn: ConnId, message: ServerMessage): void;
+  /** A room appeared, moved to another stage, or went. */
+  roomChanged?(event: RoomEvent): void;
 }
 
-/** What a server offers beyond the public game. */
+/** What a server offers beyond the public game, and how it looks after its
+ * rooms. */
 export interface RoomServerOptions {
   /** The scenario builder's messages (`builder.ts`): a developer's server
    * only, since it lets a client put any card anywhere. */
   readonly builder?: boolean;
+  /** Reap rooms with nobody connected once idle this long
+   * (`RoomManager.reapIdle`), checking every `reapIntervalMs`. Off without
+   * both. */
+  readonly reapIdleMs?: number;
+  readonly reapIntervalMs?: number;
+}
+
+/** A room's stage, as `RoomEvent`s report it. */
+function stageOf(room: Room | PendingRoom): RoomStage {
+  if (room instanceof PendingRoom) return "waiting";
+  return room.game.state.result.over ? "finished" : "playing";
 }
 
 /** Throws unless `connection` holds `room`'s host role — see `HostRole`. */
@@ -99,6 +113,10 @@ export class RoomService {
   private readonly sentArtManifest = new WeakSet<Connection>();
   private readonly artManifests = new WeakMap<Room, readonly ArtManifestEntry[]>();
 
+  /** The stage each room was last reported at, by code. */
+  private readonly stages = new Map<string, RoomStage>();
+  private readonly reaper: ReturnType<typeof setInterval> | null;
+
   constructor(manager: RoomManager, outbox: ServiceOutbox, options: RoomServerOptions = {}) {
     this.manager = manager;
     this.outbox = outbox;
@@ -107,6 +125,37 @@ export class RoomService {
     // just handled or from a bot the room released on its own clock — goes out
     // through here.
     manager.onRoomUpdate = this.broadcast;
+    manager.onRoomAdded = (id) => {
+      const room = manager.get(id);
+      if (room !== undefined) this.noteStage(room);
+    };
+    manager.onRoomRemoved = (id, kind) => {
+      this.stages.delete(id);
+      this.outbox.roomChanged?.({ id, kind, stage: "gone" });
+    };
+    const { reapIdleMs, reapIntervalMs } = options;
+    if (reapIdleMs !== undefined && reapIntervalMs !== undefined) {
+      this.reaper = setInterval(() => {
+        const reaped = manager.reapIdle(reapIdleMs);
+        if (reaped > 0) console.log(`reaped ${reaped} idle room(s)`);
+      }, reapIntervalMs);
+      this.reaper.unref();
+    } else {
+      this.reaper = null;
+    }
+  }
+
+  /** Stops the reaper. The rooms stay as they are. */
+  stop(): void {
+    if (this.reaper !== null) clearInterval(this.reaper);
+  }
+
+  /** Reports `room`'s stage if it's not the one last reported. */
+  private noteStage(room: Room | PendingRoom): void {
+    const stage = stageOf(room);
+    if (this.stages.get(room.id) === stage) return;
+    this.stages.set(room.id, stage);
+    this.outbox.roomChanged?.({ id: room.id, kind: this.manager.kindOf(room.id) ?? "adopted", stage });
   }
 
   /** The `Connection` standing for `conn` in every room it's in. */
@@ -160,6 +209,7 @@ export class RoomService {
    * the room for one via `room.publish()`.
    */
   private readonly broadcast = (room: Room): void => {
+    this.noteStage(room);
     const seats = room.seatStatuses();
     for (const { seat, connection } of room.connectedSeats()) connection.send(this.seatFrame(room, seat, connection, seats));
     for (const connection of this.spectatorsOf(room.id)) connection.send(this.spectatorFrame(room, connection));
@@ -292,6 +342,7 @@ export class RoomService {
    * seat list (no `state` — there's no `Game` yet), same as `broadcast` does
    * for a real `Room`. */
   private broadcastPending(room: PendingRoom, except?: Connection): void {
+    this.noteStage(room);
     const connections = room.connectedSeats().map((s) => s.connection);
     // A host who hasn't picked a seat yet is running the table from the seat
     // picker, and needs to see it change as much as anyone seated.

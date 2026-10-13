@@ -10,18 +10,8 @@ import { BuilderSession } from "./builder.js";
 import { TutorialSession } from "./tutorial-session.js";
 import { lessonById } from "./tutorials/index.js";
 import { HostRole } from "./host.js";
-
-// No 0/O/1/I — avoids characters easily confused when a code is read aloud.
-const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-const CODE_LENGTH = 5;
-
-function randomRoomId(): string {
-  let out = "";
-  for (let i = 0; i < CODE_LENGTH; i += 1) {
-    out += CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)];
-  }
-  return out;
-}
+import { allocateRoomCode } from "./room-code.js";
+import type { RoomKind } from "./room-host.js";
 
 export class RoomManager {
   private readonly rooms = new Map<string, Room | PendingRoom>();
@@ -31,6 +21,8 @@ export class RoomManager {
   /** Tutorial rooms (`tutorial-session.ts`), by code — each also in `rooms`,
    * under whichever `Room` it's serving right now. */
   private readonly tutorials = new Map<string, TutorialSession>();
+  /** What made each room, by code. */
+  private readonly kinds = new Map<string, RoomKind>();
   private created = 0;
   /** Handed to every room this manager promotes — see `RoomOptions.capture`. */
   private readonly capture: CaptureConfig | undefined;
@@ -65,16 +57,58 @@ export class RoomManager {
    */
   onRoomUpdate: (room: Room) => void = () => {};
 
+  /** Called once a new code holds a room — after `createPending`,
+   * `createBuilder`, `createTutorial` or `adopt` — with what made it. The
+   * room service reports it on (`RoomEvent`). */
+  onRoomAdded: (id: string, kind: RoomKind) => void = () => {};
+
+  /** Called once a code's room is gone: reaped (`reapIdle`) or `remove`d. */
+  onRoomRemoved: (id: string, kind: RoomKind) => void = () => {};
+
+  /** What made the room under `id`, while there is one. */
+  kindOf(id: string): RoomKind | undefined {
+    return this.kinds.get(id);
+  }
+
+  /** The code for a new room of `kind`: `id` as given — a code the caller
+   * allocated, as main does for a shard (`room-code.ts`) — or a fresh one.
+   * The kind is recorded at once: a tutorial or builder publishes its first
+   * frame from inside its constructor, before `added`. */
+  private claimCode(id: string | undefined, kind: RoomKind): string {
+    if (id !== undefined && (this.rooms.has(id) || this.kinds.has(id))) {
+      throw new Error(`room code ${id} is already in use`);
+    }
+    const code = id ?? allocateRoomCode((c) => this.rooms.has(c) || this.kinds.has(c));
+    this.kinds.set(code, kind);
+    return code;
+  }
+
+  /** Builds the room for a code `claimCode` handed out, letting the code go
+   * again if building it throws. */
+  private build<T>(id: string, make: () => T): T {
+    try {
+      return make();
+    } catch (err) {
+      this.kinds.delete(id);
+      this.rooms.delete(id);
+      throw err;
+    }
+  }
+
+  private added(id: string): void {
+    this.onRoomAdded(id, this.kinds.get(id) ?? "adopted");
+  }
+
   /** Creates a room with no `Game` yet — every seat's deck is unknown until
    * whoever claims it connects (see `PendingRoom`'s own comment). Call
    * `promote` once `get(id).isReady()` (a `PendingRoom` only) to actually
    * build the `Game` and turn it into a real `Room`. */
-  createPending(players: number, config: PendingGameConfig, hostToken?: string): PendingRoom {
-    let id = randomRoomId();
-    while (this.rooms.has(id)) id = randomRoomId();
-    const room = new PendingRoom(id, players, config, hostToken);
+  createPending(players: number, config: PendingGameConfig, hostToken?: string, roomId?: string): PendingRoom {
+    const id = this.claimCode(roomId, "lobby");
+    const room = this.build(id, () => new PendingRoom(id, players, config, hostToken));
     this.rooms.set(id, room);
     this.created += 1;
+    this.added(id);
     return room;
   }
 
@@ -190,17 +224,21 @@ export class RoomManager {
   }
 
   /** Opens a scenario builder room on an empty board. A server started with
-   * `--builder` only — the transport checks. */
-  createBuilder(hostToken: string): BuilderSession {
-    let id = randomRoomId();
-    while (this.rooms.has(id)) id = randomRoomId();
-    const session = new BuilderSession(id, new HostRole(hostToken), {
-      install: (room) => this.rooms.set(id, room),
-      onUpdate: (room) => this.onRoomUpdate(room),
-      ...(this.capture !== undefined ? { capture: this.capture } : {}),
-    });
+   * `--builder` only — the room service checks. `roomId` as `createPending`'s. */
+  createBuilder(hostToken: string, roomId?: string): BuilderSession {
+    const id = this.claimCode(roomId, "builder");
+    const session = this.build(
+      id,
+      () =>
+        new BuilderSession(id, new HostRole(hostToken), {
+          install: (room) => this.rooms.set(id, room),
+          onUpdate: (room) => this.onRoomUpdate(room),
+          ...(this.capture !== undefined ? { capture: this.capture } : {}),
+        }),
+    );
     this.builders.set(id, session);
     this.created += 1;
+    this.added(id);
     return session;
   }
 
@@ -212,18 +250,22 @@ export class RoomManager {
   /** Opens a tutorial room on lesson `lesson`'s first board — any server,
    * the public one included: a client names a lesson by id and nothing more,
    * and an id with no lesson is refused. `hostToken` binds the creator as
-   * host, as `createPending`'s does. */
-  createTutorial(lesson: unknown, hostToken?: string): TutorialSession {
+   * host, as `createPending`'s does, and `roomId` is as `createPending`'s. */
+  createTutorial(lesson: unknown, hostToken?: string, roomId?: string): TutorialSession {
     const found = lessonById(lesson);
-    let id = randomRoomId();
-    while (this.rooms.has(id)) id = randomRoomId();
-    const session = new TutorialSession(id, found, new HostRole(hostToken ?? null), {
-      install: (room) => this.rooms.set(id, room),
-      onUpdate: (room) => this.onRoomUpdate(room),
-      ...this.sharedOptions(),
-    });
+    const id = this.claimCode(roomId, "tutorial");
+    const session = this.build(
+      id,
+      () =>
+        new TutorialSession(id, found, new HostRole(hostToken ?? null), {
+          install: (room) => this.rooms.set(id, room),
+          onUpdate: (room) => this.onRoomUpdate(room),
+          ...this.sharedOptions(),
+        }),
+    );
     this.tutorials.set(id, session);
     this.created += 1;
+    this.added(id);
     return session;
   }
 
@@ -237,15 +279,37 @@ export class RoomManager {
    * for the life of the process. Returns how many were reaped. */
   reapIdle(maxIdleMs: number): number {
     let reaped = 0;
-    for (const [id, room] of this.rooms) {
+    for (const [id, room] of [...this.rooms]) {
       if (room.connectedSeats().length === 0 && room.idleMs() > maxIdleMs) {
-        if (room instanceof Room) room.dispose();
-        this.rooms.delete(id);
-        this.builders.delete(id);
-        this.tutorials.delete(id);
+        this.remove(id);
         reaped += 1;
       }
     }
     return reaped;
+  }
+
+  /** Serves a `Room` built by hand (dev-rooms' boards) under its own code:
+   * its frames go out through `onRoomUpdate` like any room's here. Refused
+   * for a code already in use. */
+  adopt(room: Room): void {
+    this.claimCode(room.id, "adopted");
+    room.onUpdate = (r) => this.onRoomUpdate(r);
+    this.rooms.set(room.id, room);
+    this.added(room.id);
+  }
+
+  /** Drops the room under `id`, whatever made it, disposing a game's timers.
+   * Returns whether there was one. */
+  remove(id: string): boolean {
+    const room = this.rooms.get(id);
+    if (room === undefined) return false;
+    if (room instanceof Room) room.dispose();
+    this.rooms.delete(id);
+    this.builders.delete(id);
+    this.tutorials.delete(id);
+    const kind = this.kinds.get(id) ?? "adopted";
+    this.kinds.delete(id);
+    this.onRoomRemoved(id, kind);
+    return true;
   }
 }

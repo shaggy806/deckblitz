@@ -109,10 +109,8 @@ function buildRoom(code) {
   });
   for (const player of Object.keys(bots)) room.addBot(player);
   room.start();
-  // `RoomManager` has no public way to adopt a hand-built room. The
-  // transport binds a room's frames to itself on first message
-  // (`requireRoom`), which is the pattern this relies on.
-  manager.rooms.set(code, room);
+  // Served under its own code, its frames going out as any room's do.
+  manager.adopt(room);
   live.set(code, { room, game });
 }
 
@@ -193,9 +191,9 @@ const ops = {
       ]),
     ),
   state: (_room, game) => stateOf(game),
-  reset: (room, _game, cmd) => {
-    room.dispose();
-    manager.rooms.delete(cmd.room);
+  reset: (_room, _game, cmd) => {
+    // Disposes the old room's timers as it goes.
+    manager.remove(cmd.room);
     buildRoom(cmd.room);
     // Tabs reconnect on their own and reclaim their seat with the token they
     // already hold; the rebuilt room has every seat free, so the claim lands.

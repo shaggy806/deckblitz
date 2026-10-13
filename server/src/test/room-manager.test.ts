@@ -23,6 +23,37 @@ describe("RoomManager", () => {
     expect(ids.size).toBe(50);
   });
 
+  it("takes a code its caller allocated, and refuses one in use", () => {
+    const manager = new RoomManager();
+    const room = manager.createPending(2, config(), undefined, "ABCDE");
+    expect(room.id).toBe("ABCDE");
+    expect(manager.get("ABCDE")).toBe(room);
+    expect(() => manager.createPending(2, config(), undefined, "ABCDE")).toThrow(/already in use/);
+    expect(() => manager.createTutorial("basics-proof", undefined, "ABCDE")).toThrow(/already in use/);
+    expect(manager.get("ABCDE")).toBe(room);
+    expect(manager.createTutorial("basics-proof", undefined, "TUTOR").id).toBe("TUTOR");
+    expect(manager.createBuilder("dev", "BUILD").id).toBe("BUILD");
+    expect(manager.kindOf("ABCDE")).toBe("lobby");
+    expect(manager.kindOf("TUTOR")).toBe("tutorial");
+    expect(manager.kindOf("BUILD")).toBe("builder");
+  });
+
+  it("says when a room is added or removed, and what made it", () => {
+    const manager = new RoomManager();
+    const seen: string[] = [];
+    manager.onRoomAdded = (id, kind) => seen.push(`+${id}:${kind}`);
+    manager.onRoomRemoved = (id, kind) => seen.push(`-${id}:${kind}`);
+    manager.createPending(2, config(), undefined, "LOBBY");
+    // An unknown lesson is refused before any code is taken.
+    expect(() => manager.createTutorial("no-such-lesson", undefined, "NOPE2")).toThrow();
+    expect(manager.remove("LOBBY")).toBe(true);
+    expect(manager.remove("LOBBY")).toBe(false);
+    expect(seen).toEqual(["+LOBBY:lobby", "-LOBBY:lobby"]);
+    expect(manager.kindOf("LOBBY")).toBeUndefined();
+    // The code is free again.
+    expect(manager.createPending(2, config(), undefined, "LOBBY").id).toBe("LOBBY");
+  });
+
   it("returns undefined for an unknown room id", () => {
     const manager = new RoomManager();
     expect(manager.get("NOPE1")).toBeUndefined();

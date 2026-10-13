@@ -40,12 +40,10 @@ if (builder) console.log("scenario builder on");
 const statusPort = Number(process.env.STATUS_PORT ?? 4010);
 startStatusServer(manager, statusPort);
 
+// A room with nobody connected goes once it's been idle this long, checked
+// this often — by the room service, which owns the rooms.
 const IDLE_ROOM_MS = 30 * 60 * 1000;
 const REAP_INTERVAL_MS = 15 * 60 * 1000;
-setInterval(() => {
-  const reaped = manager.reapIdle(IDLE_ROOM_MS);
-  if (reaped > 0) console.log(`reaped ${reaped} idle room(s)`);
-}, REAP_INTERVAL_MS);
 
 const httpServer = createServer((req, res) => {
   if (req.method === "POST" && req.url === "/import-deck") {
@@ -122,7 +120,7 @@ const httpServer = createServer((req, res) => {
 });
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
-attachRoomServer(wss, manager, { builder });
+attachRoomServer(wss, manager, { builder, reapIdleMs: IDLE_ROOM_MS, reapIntervalMs: REAP_INTERVAL_MS });
 
 httpServer.listen(port, () => {
   console.log(`MTG Deck Blitz room server listening on ws://localhost:${port}`);

@@ -39,5 +39,7 @@ export class InProcessRoomHost implements RoomHost {
     this.links.delete(link.id);
   }
 
-  async stop(): Promise<void> {}
+  async stop(): Promise<void> {
+    this.service.stop();
+  }
 }

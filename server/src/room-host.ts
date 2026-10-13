@@ -14,6 +14,23 @@ import type { ClientMessage } from "protocol";
  * late message about a closed socket can't reach its successor. */
 export type ConnId = number;
 
+/** What made a room: a seat board's `create-room` (`lobby`), a tutorial, a
+ * scenario builder, or a room built by hand and handed to the manager
+ * (`adopted` — dev-rooms' boards). */
+export type RoomKind = "lobby" | "tutorial" | "builder" | "adopted";
+
+/** Where a room is: seats still filling (a `PendingRoom`), a game on, or a
+ * game over. */
+export type RoomStage = "waiting" | "playing" | "finished";
+
+/** A room appearing, changing stage, or going (`gone`: reaped, removed, or a
+ * create that was refused). */
+export interface RoomEvent {
+  readonly id: string;
+  readonly kind: RoomKind;
+  readonly stage: RoomStage | "gone";
+}
+
 /** One client socket as a host sees it. */
 export interface ClientLink {
   readonly id: ConnId;
