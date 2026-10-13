@@ -1,6 +1,9 @@
 # Rooms on worker threads (room shards)
 
-Status: **designed** (2026-10-13), not built — phase 2 of `scaling-rooms.md`. The design came
+Status: **in progress** — rollout steps 1-5 built (2026-10-13): rooms run on worker threads behind
+`--shards N`, default 0 (in-process, exactly as before). Steps 6-9 (admission, crash restarts,
+dev-rooms on shards, the default) are next; "As built" below records the departures and the
+measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
 
@@ -177,6 +180,47 @@ export type FromShard =
   rooms the IP created across all three create kinds — "You have too many rooms open — finish or
   leave one first." Loopback without a CF header is exempt (only the box itself reaches 4000
   without the tunnel). Optional `error.code` (`"server-full" | "too-many-rooms"`).
+
+## As built (steps 1-5, 2026-10-13)
+
+- **Departures**: the shared types (`ConnId`, `RoomKind`, `RoomStage`, `RoomEvent`) live in
+  `room-host.ts` (step 2 needed them first); `shard-protocol.ts` re-exports them. No `control`
+  message or `setup`/`testHooks` yet (steps 7-8). `RoomHost` also carries `status()`,
+  `importDeck()` and a decisions histogram; `StatusSnapshot` gains `main` and `shards`;
+  `load-monitor.ts` is a main-side module. Placement is simply the up shard with fewest rooms
+  (weights and admission are step 6). Spectators share one view per broadcast, and identical
+  frames one message, encoded once — in-process too. A shard that exits is marked down, its
+  routes dropped and its connections closed with 1011; no restart yet (step 7). An over-size
+  import (413) drains the body rather than closing (closing showed the client a reset).
+  Spectating a room on another shard un-spectates the old one before the new one confirms.
+- **Also fixed on the way**: a message of bare JSON (`null`, a number) threw out of the socket
+  listener and would have taken the process down; it's "malformed message" now.
+- **Measured on the dev PC** (much faster than the box; the comparison between modes is what
+  counts). Idle 60 s: `--shards 0` 194 MB rss (main heap 120 MB); `--shards 1` 213 MB (main
+  heap 9 MB); `--shards 2` 370 MB — ~157 MB rss a shard, ~56 MB for main alone; startup ~4.1-4.3
+  s either way. `NODE_COMPILE_CACHE` made startup *slower* here (5.4-5.6 s) — don't enable it
+  without measuring on the box. Load test, stages 1/2/4/8 at 30 s, acks at 600 ms:
+
+  | rooms | mode | frames/s | gap median / p90 | main delay p99 / max | main busy | rss |
+  |---|---|---|---|---|---|---|
+  | 4 | 0 | 3.47 | 1326 / 1431 ms | 64 / 175 ms | 17% | 522 MB |
+  | 8 | 0 | 6.50 | 1332 / 1594 ms | 171 / 304 ms | 43% | 991 MB |
+  | 4 | 2 shards | 3.53 | 1321 / 1391 ms | 9.8 / 14 ms | <1% | 860 MB |
+  | 8 | 2 shards | 6.76 | 1321 / 1423 ms | 11.3 / 15 ms | <1% | 1531 MB |
+
+  At 8 rooms the two shards' own delay p99 was 46 and 80 ms, busy 13% and 17%, bot decision p99
+  41 and 73 ms. Main stays flat (risk 2 answered). **Memory is the risk to watch** (risk 1): each
+  shard's heap grew to ~600 MB with 4 rooms — V8 letting an isolate's heap grow before
+  collecting — so step 7's `resourceLimits` cap must be measured on the 2 GB box.
+- **The load test's probe** (an unknown-room spectate) is answered by main, so with shards it
+  measures only main's loop; shard stalls show in `/status`'s per-shard numbers — step 9 adds them
+  to `load-test.mjs`.
+- **Notes for steps 6-9**: placement is `WorkerRoomHost.place()`; routes hold shard, kind and
+  stage but not the creator's IP (add it from the link's ip for the per-IP cap); `shard.load`
+  arrives every second from a 10 s window (admission may want a shorter one); the refused-create
+  path is in and tested. `exited()` does the drop and 1011 close; restart needs `start()`'s spawn
+  and wiring pulled into a per-index method; `loopbackChannel(...).crash(code)` exists.
+  `worker-smoke.test.ts` compares only top-level `src/*.ts` mtimes against `dist`.
 
 ## Rollout
 

@@ -144,7 +144,7 @@ They multiply with phase 2, so they come first; each is chosen by phase 0's prof
 
 ## Phase 2: rooms on worker threads (the step that lets a bigger box pay)
 
-**The detailed design is `room-shards.md`** (2026-10-13): the boundary, the main↔shard protocol,
+**The detailed design is `room-shards.md`** (2026-10-13; steps 1-5 built the same day, behind `--shards N`, default 0): the boundary, the main↔shard protocol,
 memory measured (~250-300 MB per worker — one shard plus main on the 2 GB box), and a
 nine-commit rollout. What follows is the sketch it grew from.
 
