@@ -19,6 +19,7 @@ import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
+import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
@@ -189,6 +190,7 @@ import _poolMindSculpt from "../pool/mind-sculpt.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
+import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
 import _poolMomoFriendlyFlier from "../pool/momo-friendly-flier.js";
 import _poolMotherBear from "../pool/mother-bear.js";
@@ -305,6 +307,7 @@ import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
 import _poolTalonrend from "../pool/talonrend.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
+import _poolThassasIntervention from "../pool/thassas-intervention.js";
 import _poolTheArkenstone from "../pool/the-arkenstone.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
@@ -389,6 +392,7 @@ const shard: CardShard = {
     _poolArgivianRestoration,
     _poolArtifistAcumen,
     _poolAspectOfLamprey,
+    _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
     _poolAvatarOfBurgeoningEchoes,
@@ -559,6 +563,7 @@ const shard: CardShard = {
     _poolMinesOfMoria,
     _poolMireTriton,
     _poolMishrasWorkshop,
+    _poolMogisGodOfSlaughter,
     _poolMoltenBlast,
     _poolMomoFriendlyFlier,
     _poolMotherBear,
@@ -675,6 +680,7 @@ const shard: CardShard = {
     _poolTalonrend,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,
+    _poolThassasIntervention,
     _poolTheArkenstone,
     _poolTheGreyHavens,
     _poolTheLordOfPain,

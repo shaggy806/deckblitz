@@ -78,6 +78,7 @@ import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
+import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
@@ -171,6 +172,7 @@ import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
+import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
@@ -178,6 +180,7 @@ import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
+import _poolLightningAxe from "../pool/lightning-axe.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLoomingAltisaur from "../pool/looming-altisaur.js";
@@ -448,6 +451,7 @@ const shard: CardShard = {
     _poolDemandingDragon,
     _poolDevilishValet,
     _poolDictateOfKruphix,
+    _poolDimirKeyrune,
     _poolDissectionTools,
     _poolDoggedPursuit,
     _poolDonAndresTheRenegade,
@@ -541,6 +545,7 @@ const shard: CardShard = {
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
     _poolKnightOfNewBenalia,
+    _poolKrileBaldesion,
     _poolKydeleChosenOfKruphix,
     _poolLasydProwler,
     _poolLeafkinDruid,
@@ -548,6 +553,7 @@ const shard: CardShard = {
     _poolLifecraftCavalry,
     _poolLightOfPromise,
     _poolLightfootTechnique,
+    _poolLightningAxe,
     _poolLilianasStandardBearer,
     _poolLonesomeUnicorn,
     _poolLoomingAltisaur,

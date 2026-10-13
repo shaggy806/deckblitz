@@ -83,6 +83,7 @@ import _poolDigThroughTime from "../pool/dig-through-time.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
+import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
@@ -135,6 +136,7 @@ import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
+import _poolHaystack from "../pool/haystack.js";
 import _poolHazoretsMonument from "../pool/hazorets-monument.js";
 import _poolHeal from "../pool/heal.js";
 import _poolHealerOfTheGlade from "../pool/healer-of-the-glade.js";
@@ -170,6 +172,7 @@ import _poolKnollspineDragon from "../pool/knollspine-dragon.js";
 import _poolKoboldTaskmaster from "../pool/kobold-taskmaster.js";
 import _poolKomaWorldEater from "../pool/koma-world-eater.js";
 import _poolKoskunKeep from "../pool/koskun-keep.js";
+import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
@@ -469,6 +472,7 @@ const shard: CardShard = {
     _poolDisruptiveStudent,
     _poolDocksideChef,
     _poolDonatellosTechnique,
+    _poolDragonCursedHalls,
     _poolDrumhunter,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
@@ -521,6 +525,7 @@ const shard: CardShard = {
     _poolGuidelightSynergist,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
+    _poolHaystack,
     _poolHazoretsMonument,
     _poolHeal,
     _poolHealerOfTheGlade,
@@ -556,6 +561,7 @@ const shard: CardShard = {
     _poolKoboldTaskmaster,
     _poolKomaWorldEater,
     _poolKoskunKeep,
+    _poolKruphixGodOfHorizons,
     _poolKyoshiWarriors,
     _poolLathnuSailback,
     _poolLeapingLizard,

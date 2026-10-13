@@ -2724,6 +2724,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Haystack, Oubliette, Teferi's Protection",
+    board({
+      you: {
+        bf: ['Haystack', 'Grizzly Bears', { name: 'Bonesplitter', attach: 'Grizzly Bears' }, 'Hill Giant', 'Plains*3', 'Swamp*3'],
+        hand: ['Oubliette', "Teferi's Protection"],
+      },
+      opp: { bf: ['Craw Wurm', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
+    'Nylea, God of the Hunt',
+    board({
+      you: { bf: ['Nylea, God of the Hunt', 'Forest*5'], hand: ['Grizzly Bears', 'Leatherback Baloth'] },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

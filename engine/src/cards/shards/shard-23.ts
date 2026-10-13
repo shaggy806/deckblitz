@@ -7,6 +7,7 @@ import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
+import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
@@ -47,6 +48,7 @@ import _poolBloomingMarsh from "../pool/blooming-marsh.js";
 import _poolBoggartRamGang from "../pool/boggart-ram-gang.js";
 import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
+import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
@@ -166,6 +168,7 @@ import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
+import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
@@ -226,6 +229,7 @@ import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
+import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPython from "../pool/python.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
@@ -339,6 +343,7 @@ import _poolWingShredder from "../pool/wing-shredder.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWithstand from "../pool/withstand.js";
+import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
 import _poolZofConsumption from "../pool/zof-consumption.js";
@@ -355,6 +360,7 @@ const shard: CardShard = {
     _poolAgonyWarp,
     _poolAjaniTheGreathearted,
     _poolAmbitionsCost,
+    _poolAnaxHardenedInTheForge,
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
     _poolAngrathsRampage,
@@ -395,6 +401,7 @@ const shard: CardShard = {
     _poolBoggartRamGang,
     _poolBomburGentleDreamer,
     _poolBorderlandMinotaur,
+    _poolBorrowing100000Arrows,
     _poolBrasssBounty,
     _poolBreatheYourLast,
     _poolBreenaTheDemagogue,
@@ -514,6 +521,7 @@ const shard: CardShard = {
     _poolKeeningApparition,
     _poolKeldonRaider,
     _poolKembasSkyguard,
+    _poolKeranosGodOfStorms,
     _poolKnightOfObligation,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
@@ -574,6 +582,7 @@ const shard: CardShard = {
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
     _poolProtectorOfGondor,
+    _poolPurphorosBronzeBlooded,
     _poolPython,
     _poolRainOfFilth,
     _poolRaiseThePalisade,
@@ -687,6 +696,7 @@ const shard: CardShard = {
     _poolWinterflame,
     _poolWirewoodHivemaster,
     _poolWithstand,
+    _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,
     _poolZimoneInfiniteAnalyst,
     _poolZofConsumption,

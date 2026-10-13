@@ -224,11 +224,13 @@ import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOgreMenial from "../pool/ogre-menial.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
+import _poolOneWithNature from "../pool/one-with-nature.js";
 import _poolOneWithTheWind from "../pool/one-with-the-wind.js";
 import _poolOniCultAnvil from "../pool/oni-cult-anvil.js";
 import _poolOnulet from "../pool/onulet.js";
 import _poolOranRiefHydra from "../pool/oran-rief-hydra.js";
 import _poolOrbOfDragonkind from "../pool/orb-of-dragonkind.js";
+import _poolOubliette from "../pool/oubliette.js";
 import _poolOvergrowth from "../pool/overgrowth.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
@@ -245,6 +247,7 @@ import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
+import _poolPurphorosGodOfTheForge from "../pool/purphoros-god-of-the-forge.js";
 import _poolPursueThePast from "../pool/pursue-the-past.js";
 import _poolPyreSpawn from "../pool/pyre-spawn.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
@@ -634,11 +637,13 @@ const shard: CardShard = {
     _poolOctoprophet,
     _poolOgreMenial,
     _poolOmegaMyr,
+    _poolOneWithNature,
     _poolOneWithTheWind,
     _poolOniCultAnvil,
     _poolOnulet,
     _poolOranRiefHydra,
     _poolOrbOfDragonkind,
+    _poolOubliette,
     _poolOvergrowth,
     _poolPainDistributor,
     _poolPalladiumMyr,
@@ -655,6 +660,7 @@ const shard: CardShard = {
     _poolPridefulParent,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,
+    _poolPurphorosGodOfTheForge,
     _poolPursueThePast,
     _poolPyreSpawn,
     _poolQuandrixTheProof,

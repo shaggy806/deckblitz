@@ -16,6 +16,7 @@ import _poolAnkleBiter from "../pool/ankle-biter.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
+import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
 import _poolAviationPioneer from "../pool/aviation-pioneer.js";
@@ -150,6 +151,7 @@ import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
+import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
 import _poolInfectiousHorror from "../pool/infectious-horror.js";
 import _poolInferno from "../pool/inferno.js";
@@ -395,6 +397,7 @@ const shard: CardShard = {
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
     _poolAtarkaMonument,
+    _poolAthreosShroudVeiled,
     _poolAuroralProcession,
     _poolAvenSkirmisher,
     _poolAviationPioneer,
@@ -529,6 +532,7 @@ const shard: CardShard = {
     _poolHulkingGoblin,
     _poolHumongulus,
     _poolImposingVantasaur,
+    _poolImskirIronEater,
     _poolIndrikStomphowler,
     _poolInfectiousHorror,
     _poolInferno,

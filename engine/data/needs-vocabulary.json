@@ -5860,6 +5860,66 @@
   "effect:attach-equipment-that-was-attached": {
    "family": "effect:attach-extensions",
    "example": "Zack Fair: attach an Equipment that was attached to Zack Fair to that creature — nothing records what was attached once he's gone."
+  },
+  "static:cascade-put-land": {
+   "example": "Averna, the Chaos Bloom: as you cascade, you may put a land card from among the exiled cards onto the battlefield tapped — nothing hooks into cascade's resolution."
+  },
+  "static:pt-per-affected-colors": {
+   "family": "static:pt-per-amount",
+   "example": "Knight of New Alara: each other multicolored creature you control gets +1/+1 for each of its colors — the count is the affected creature's own."
+  },
+  "effect:token-copy-each-destroyed-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Red Sun's Twilight: create a token copy of each artifact destroyed this way (up to X targets), as each last existed."
+  },
+  "cost:return-permanent-additional-cost": {
+   "example": "Familiar's Ruse: as an additional cost, return a creature you control to its owner's hand."
+  },
+  "target:chosen-by-other-player": {
+   "family": "effect:choices-by-other-players",
+   "example": "Bladegriff Prototype: the damaged player chooses the target of an ability you control."
+  },
+  "zone:cast-from-library-top-extra-cost": {
+   "family": "zone:cast-from-library-top",
+   "example": "Falco Spara, Pactweaver: cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs."
+  },
+  "effect:shuffle-permanents-reveal-that-many": {
+   "family": "effect:shuffle-into-library",
+   "example": "Warp World: each player shuffles all permanents they own into their library, reveals that many cards, and puts artifacts, creatures and lands, then enchantments, onto the battlefield."
+  },
+  "mechanic:restart-the-game": {
+   "example": "Karn Liberated: restart the game, leaving the cards exiled with Karn out (rule 727)."
+  },
+  "static:add-chosen-color-all-zones": {
+   "example": "Painter's Servant: all cards that aren't on the battlefield, spells and permanents are the chosen color in addition to their other colors."
+  },
+  "effect:animate-add-supertype": {
+   "example": "Cacophony Unleashed: becomes a legendary 6/6 Nightmare God creature — animate can't add a supertype, and the legend rule then applies."
+  },
+  "effect:reveal-until-rest-bottom-any-order": {
+   "example": "Proteus Staff: the rest go on the bottom in any order — reveal-until's rest is random only."
+  },
+  "effect:turn-face-down": {
+   "family": "mechanic:face-down",
+   "example": "Illithid Harvester: turn target tapped creature face down; it's a 2/2 Horror — only manifest and cloak put things face down."
+  },
+  "amount:beheld-object-power": {
+   "family": "keyword:behold",
+   "example": "Dragon's Fire: damage equal to the beheld Dragon's power (last known if it's gone)."
+  },
+  "mechanic:coin-flip-by-other-player": {
+   "family": "mechanic:coin-flip",
+   "example": "Planar Chaos: that player flips a coin — flip-coin always flips for the effect's controller."
+  },
+  "effect:shuffle-into-library-from-graveyard": {
+   "family": "effect:shuffle-into-library",
+   "example": "Cavalier of Gales: when it dies, shuffle it into its owner's library from the graveyard, shuffling that library even if it has left (rule 701.24c)."
+  },
+  "condition:entered-last-turn": {
+   "example": "Ephara, God of the Polis: if you had another creature enter the battlefield under your control last turn — each judged as it entered."
+  },
+  "cost:exile-cards-from-hand-cost-reduction": {
+   "example": "March of Swirling Mist: as an additional cost, exile any number of blue cards from your hand; this spell costs {2} less for each."
   }
  }
 }

@@ -38,6 +38,7 @@ import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
+import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
@@ -87,10 +88,12 @@ import _poolElvishRanger from "../pool/elvish-ranger.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
+import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFallenFerromancer from "../pool/fallen-ferromancer.js";
+import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
@@ -103,6 +106,7 @@ import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
+import _poolFumikoTheLowblood from "../pool/fumiko-the-lowblood.js";
 import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
 import _poolGemhideSliver from "../pool/gemhide-sliver.js";
@@ -133,6 +137,7 @@ import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
+import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
 import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
 import _poolHiddenLair from "../pool/hidden-lair.js";
@@ -143,6 +148,7 @@ import _poolHydraBroodmaster from "../pool/hydra-broodmaster.js";
 import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
+import _poolImmersturmPredator from "../pool/immersturm-predator.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
@@ -187,6 +193,7 @@ import _poolManaReflection from "../pool/mana-reflection.js";
 import _poolManaweftSliver from "../pool/manaweft-sliver.js";
 import _poolManedServal from "../pool/maned-serval.js";
 import _poolMaraudingBlightPriest from "../pool/marauding-blight-priest.js";
+import _poolMarchOfTheCanonized from "../pool/march-of-the-canonized.js";
 import _poolMarduRoughrider from "../pool/mardu-roughrider.js";
 import _poolMarinaVendrell from "../pool/marina-vendrell.js";
 import _poolMarshThreader from "../pool/marsh-threader.js";
@@ -212,6 +219,7 @@ import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
+import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
@@ -373,6 +381,7 @@ import _poolWoodfallPrimus from "../pool/woodfall-primus.js";
 import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
+import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
 import _poolYavimayaAncients from "../pool/yavimaya-ancients.js";
 import _poolYavimayaGnats from "../pool/yavimaya-gnats.js";
@@ -438,6 +447,7 @@ const shard: CardShard = {
     _poolBlueSunsTwilight,
     _poolBojukaBog,
     _poolBoldBiochemist,
+    _poolBountyAgent,
     _poolBronzebeakMoa,
     _poolChandrasEmberling,
     _poolChatterstorm,
@@ -487,10 +497,12 @@ const shard: CardShard = {
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
     _poolEnterTheEnigma,
+    _poolErebosGodOfTheDead,
     _poolExaltedFlamerOfTzeentch,
     _poolExultantSkymarcher,
     _poolFaerieHarbinger,
     _poolFallenFerromancer,
+    _poolFalthisShadowcatFamiliar,
     _poolFavoredOfIroas,
     _poolFear,
     _poolFearlessPup,
@@ -503,6 +515,7 @@ const shard: CardShard = {
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
+    _poolFumikoTheLowblood,
     _poolFuriousStrength,
     _poolGalecasterColossus,
     _poolGemhideSliver,
@@ -533,6 +546,7 @@ const shard: CardShard = {
     _poolHapatraVizierOfPoisons,
     _poolHeartlessSummoning,
     _poolHeartwoodGiant,
+    _poolHeliodSunCrowned,
     _poolHerculesPrinceOfPower,
     _poolHermiticNautilus,
     _poolHiddenLair,
@@ -543,6 +557,7 @@ const shard: CardShard = {
     _poolHystericalBlindness,
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
+    _poolImmersturmPredator,
     _poolInfantryVeteran,
     _poolInfestationSage,
     _poolInnocentBlood,
@@ -587,6 +602,7 @@ const shard: CardShard = {
     _poolManaweftSliver,
     _poolManedServal,
     _poolMaraudingBlightPriest,
+    _poolMarchOfTheCanonized,
     _poolMarduRoughrider,
     _poolMarinaVendrell,
     _poolMarshThreader,
@@ -612,6 +628,7 @@ const shard: CardShard = {
     _poolNestOfScarabs,
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
+    _poolNyleaKeenEyed,
     _poolOldOneEye,
     _poolOnTheTrail,
     _poolOnakkeOgre,
@@ -773,6 +790,7 @@ const shard: CardShard = {
     _poolWoodlandStream,
     _poolWoodlotCrawler,
     _poolWorthyCost,
+    _poolWrithingChrysalis,
     _poolXolatoyacTheSmilingFlood,
     _poolYavimayaAncients,
     _poolYavimayaGnats,

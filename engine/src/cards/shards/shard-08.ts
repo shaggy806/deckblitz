@@ -116,6 +116,7 @@ import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
 import _poolEvernightShade from "../pool/evernight-shade.js";
 import _poolEviscerator from "../pool/eviscerator.js";
 import _poolExplosiveVegetation from "../pool/explosive-vegetation.js";
+import _poolEyeOfVecna from "../pool/eye-of-vecna.js";
 import _poolEzuriRenegadeLeader from "../pool/ezuri-renegade-leader.js";
 import _poolFaerieConclave from "../pool/faerie-conclave.js";
 import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
@@ -238,6 +239,7 @@ import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
 import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
+import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
@@ -262,6 +264,7 @@ import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
 import _poolRefocus from "../pool/refocus.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
+import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
 import _poolRetractionHelix from "../pool/retraction-helix.js";
@@ -367,6 +370,7 @@ import _poolVernalFen from "../pool/vernal-fen.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
+import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
 import _poolWhipSilk from "../pool/whip-silk.js";
@@ -510,6 +514,7 @@ const shard: CardShard = {
     _poolEvernightShade,
     _poolEviscerator,
     _poolExplosiveVegetation,
+    _poolEyeOfVecna,
     _poolEzuriRenegadeLeader,
     _poolFaerieConclave,
     _poolFallajiChaindancer,
@@ -632,6 +637,7 @@ const shard: CardShard = {
     _poolOphiomancer,
     _poolOptimisticScavenger,
     _poolOrokuSakiShredderRising,
+    _poolOtherworldAtlas,
     _poolOverflowingBasin,
     _poolOverrun,
     _poolOxiddaDaredevil,
@@ -656,6 +662,7 @@ const shard: CardShard = {
     _poolReaverAmbush,
     _poolRefocus,
     _poolRemoveSoul,
+    _poolRenataCalledToTheHunt,
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
     _poolRetractionHelix,
@@ -761,6 +768,7 @@ const shard: CardShard = {
     _poolVisionSkeins,
     _poolVithianRenegades,
     _poolVividMarsh,
+    _poolVronosMaskedInquisitor,
     _poolWatchwolf,
     _poolWellWornSpatula,
     _poolWhipSilk,

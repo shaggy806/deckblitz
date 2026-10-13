@@ -751,6 +751,14 @@ in `git log`.
   (rule 122.5; moving counts as putting, per the rulings) and `put-counters-of`
   for a departed permanent's counters (122.8), graft spelled out
   (`move-counters.test.ts`). 16 of its 21 cards.
+- **Devotion and permanents changing their own types** (`condition:devotion`,
+  `static:self-type-changes` on the battlefield, 2026-10-13, B70) — `devotionOf`
+  (rule 700.5) as a condition, a count and an amount; layer-4 `removeTypes` /
+  `setTypes` / chosen creature type (`devotion.test.ts`). 20 Theros Gods and 8
+  more; Grist waits on the off-the-battlefield half.
+- **Phasing** (`mechanic:phasing`, 2026-10-13, B70) — rule 702.26, phased-out
+  permanents kept in `GameState.phasedOut`, with Teferi's Protection's
+  player-protection and life-can't-change (`phasing.test.ts`). 16 of its 18 cards.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

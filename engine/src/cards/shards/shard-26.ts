@@ -122,6 +122,7 @@ import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
+import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
@@ -295,6 +296,7 @@ import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
+import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
@@ -479,6 +481,7 @@ const shard: CardShard = {
     _poolGreed,
     _poolGriffinProtector,
     _poolGutterSkulk,
+    _poolHaakonStromgaldScourge,
     _poolHarbingerOfTheHunt,
     _poolHarmonizedTrio,
     _poolHavocSower,
@@ -652,6 +655,7 @@ const shard: CardShard = {
     _poolTalismanOfProgress,
     _poolTemporalTrespass,
     _poolTerrianWorldTyrant,
+    _poolThassaGodOfTheSea,
     _poolTheEchoverseFulcrum,
     _poolTheFireCrystal,
     _poolTheGreatHenge,

@@ -344,6 +344,7 @@ import _poolSweettoothWitch from "../pool/sweettooth-witch.js";
 import _poolSylvanTutor from "../pool/sylvan-tutor.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
+import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
 import _poolTermagantSwarm from "../pool/termagant-swarm.js";
@@ -759,6 +760,7 @@ const shard: CardShard = {
     _poolSylvanTutor,
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,
+    _poolTalonGatesOfMadara,
     _poolTatyova,
     _poolTavernScoundrel,
     _poolTermagantSwarm,

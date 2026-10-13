@@ -16,6 +16,7 @@ import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolArchivist from "../pool/archivist.js";
 import _poolArdentMilitia from "../pool/ardent-militia.js";
+import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js";
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
 import _poolArtifactMutation from "../pool/artifact-mutation.js";
 import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
@@ -152,6 +153,7 @@ import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
+import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
 import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
@@ -232,6 +234,7 @@ import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
 import _poolRatadrabikOfUrborg from "../pool/ratadrabik-of-urborg.js";
+import _poolRayFilletWaveWarrior from "../pool/ray-fillet-wave-warrior.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
@@ -368,6 +371,7 @@ import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
 import _poolWuInfantry from "../pool/wu-infantry.js";
 import _poolWydwenTheBitingGale from "../pool/wydwen-the-biting-gale.js";
+import _poolXenagosGodOfRevels from "../pool/xenagos-god-of-revels.js";
 import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
@@ -397,6 +401,7 @@ const shard: CardShard = {
     _poolAppaLoyalSkyBison,
     _poolArchivist,
     _poolArdentMilitia,
+    _poolArixmethesSlumberingIsle,
     _poolArkOfBlight,
     _poolArtifactMutation,
     _poolAshenmoorGouger,
@@ -533,6 +538,7 @@ const shard: CardShard = {
     _poolJungleDelver,
     _poolK9MarkI,
     _poolKaervekTheMerciless,
+    _poolKarametraGodOfHarvests,
     _poolKelethSunmaneFamiliar,
     _poolKessDissidentMage,
     _poolKikiJikiMirrorBreaker,
@@ -613,6 +619,7 @@ const shard: CardShard = {
     _poolRangersGuile,
     _poolRaphaelsTechnique,
     _poolRatadrabikOfUrborg,
+    _poolRayFilletWaveWarrior,
     _poolRazorfinHunter,
     _poolRazortipWhip,
     _poolRecklessLackey,
@@ -749,6 +756,7 @@ const shard: CardShard = {
     _poolWrathfulJailbreaker,
     _poolWuInfantry,
     _poolWydwenTheBitingGale,
+    _poolXenagosGodOfRevels,
     _poolYargleAndMultani,
     _poolYargleGluttonOfUrborg,
     _poolYavimayaElder,

@@ -4588,3 +4588,31 @@ stack count once per token)
   Mirror again after cleanup. The second Hallcreeper trigger offers only the two modes not chosen yet; the
   copy turns it into a Craw Wurm for good (it stays one next turn).
 - **Known limits:** None known.
+
+### Haystack, Oubliette, Teferi's Protection
+
+*A careful rules call* — phasing (rule 702.26): phased-out permanents are treated as though they don't exist
+
+- **Setup:** Your precombat main. Your battlefield: Haystack, Grizzly Bears wearing Bonesplitter, Hill Giant,
+  three Plains and three Swamps; in hand Oubliette and Teferi's Protection. Bob: Craw Wurm and three lands.
+- **Do:** Activate Haystack targeting Grizzly Bears. Cast Oubliette targeting Bob's Craw Wurm. Pass to your
+  next turn, then cast Teferi's Protection.
+- **Check:** The Bears and the Bonesplitter stay at your seat, dimmed and greyed, the Equipment still tucked
+  under the Bears; they can't be clicked for anything, and the log reads "phases out". The Craw Wurm dims at
+  Bob's seat. On your next turn the Bears phase in undimmed with the Bonesplitter attached; the Wurm stays
+  out until Oubliette leaves and then comes back tapped. Teferi's Protection dims every permanent you
+  control and the log notes your protection; they all phase back in at your next untap step. Check at ~768px tall and at full size, in a 2- and a
+  4-player room.
+- **Known limits:** "When this phases in/out" triggers (603.10b) aren't modeled; no pool card has one.
+
+### Nylea, God of the Hunt
+
+*A careful rules call* — a God isn't a creature below its devotion (rules 700.5, 613.1d)
+
+- **Setup:** Your precombat main. Your battlefield: Nylea, God of the Hunt and five Forests; in hand Grizzly
+  Bears and Leatherback Baloth ({G}{G}{G}). Bob: three lands.
+- **Do:** Look at Nylea, then cast Grizzly Bears and Leatherback Baloth.
+- **Check:** Nylea starts as a legendary enchantment (no P/T box, not a creature, can't attack) with devotion
+  to green 1; at five (Nylea's {G}, the Bears' {G} and the Baloth's three) she becomes a 6/6 creature God.
+  Your creatures have trample throughout.
+- **Known limits:** None known.

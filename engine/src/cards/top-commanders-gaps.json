@@ -260,7 +260,15 @@
   "static:crews-as-though-power",
   "static:crews-using-toughness",
   "effect:become-copy",
-  "effect:move-counter"
+  "effect:move-counter",
+  "condition:devotion",
+  "mechanic:phasing",
+  "effect:player-protection",
+  "static:life-total-cant-change",
+  "effect:instant-speed-loyalty",
+  "static:devotion-condition-type",
+  "static:slumber-counters-type-change",
+  "static:type-while-counter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

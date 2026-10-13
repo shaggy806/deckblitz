@@ -13,6 +13,7 @@ import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
 import _poolAltarOfBone from "../pool/altar-of-bone.js";
+import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
@@ -195,6 +196,7 @@ import _poolKeldonHalberdier from "../pool/keldon-halberdier.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKingpinsPet from "../pool/kingpins-pet.js";
 import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
+import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
@@ -391,6 +393,7 @@ const shard: CardShard = {
     _poolAlabasterWall,
     _poolAlphinaudLeveilleur,
     _poolAltarOfBone,
+    _poolAltarOfThePantheon,
     _poolAmprynTactician,
     _poolAnabaShaman,
     _poolAngrathsMarauders,
@@ -573,6 +576,7 @@ const shard: CardShard = {
     _poolKingpinsEnforcers,
     _poolKingpinsPet,
     _poolKitsunesTechnique,
+    _poolKlothysGodOfDestiny,
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKonstrariImproviser,

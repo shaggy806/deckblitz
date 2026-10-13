@@ -47,6 +47,7 @@ import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
+import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
@@ -284,6 +285,7 @@ import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
 import _poolStarfallInvocation from "../pool/starfall-invocation.js";
 import _poolStarstorm from "../pool/starstorm.js";
+import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
@@ -303,6 +305,7 @@ import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
+import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
@@ -436,6 +439,7 @@ const shard: CardShard = {
     _poolCauldronFamiliar,
     _poolCelestialArmor,
     _poolChampionsOfThePerfect,
+    _poolChangeOfPlans,
     _poolChillingScreech,
     _poolClamorousIronclad,
     _poolCodsworthHandyHelper,
@@ -673,6 +677,7 @@ const shard: CardShard = {
     _poolStarAthlete,
     _poolStarfallInvocation,
     _poolStarstorm,
+    _poolStaticPrison,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
     _poolStormcragElemental,
@@ -692,6 +697,7 @@ const shard: CardShard = {
     _poolTerastodon,
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,
+    _poolThassaDeepDwelling,
     _poolTheEarthCrystal,
     _poolTheMechanistAerialArtisan,
     _poolThirstingRoots,

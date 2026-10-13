@@ -61,6 +61,7 @@ import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
 import _poolCircleOfDreamsDruid from "../pool/circle-of-dreams-druid.js";
+import _poolClarionSpirit from "../pool/clarion-spirit.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
 import _poolCobaltGolem from "../pool/cobalt-golem.js";
@@ -79,6 +80,7 @@ import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
 import _poolDakmorLancer from "../pool/dakmor-lancer.js";
+import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js";
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
 import _poolDavenantHealer from "../pool/davenant-healer.js";
 import _poolDawnOfANewAge from "../pool/dawn-of-a-new-age.js";
@@ -195,6 +197,7 @@ import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
 import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
+import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
@@ -366,6 +369,7 @@ import _tokensFishToken from "../tokens/fish-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
+import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
 import _tokensTentacleToken from "../tokens/tentacle-token.js";
 import _tokensTreefolkToken from "../tokens/treefolk-token.js";
@@ -431,6 +435,7 @@ const shard: CardShard = {
     _poolChocoboRacetrack,
     _poolChromeDome,
     _poolCircleOfDreamsDruid,
+    _poolClarionSpirit,
     _poolClingingAnemones,
     _poolCloudshredderSliver,
     _poolCobaltGolem,
@@ -449,6 +454,7 @@ const shard: CardShard = {
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,
     _poolDakmorLancer,
+    _poolDalakosCrafterOfWonders,
     _poolDarkslickDrake,
     _poolDavenantHealer,
     _poolDawnOfANewAge,
@@ -565,6 +571,7 @@ const shard: CardShard = {
     _poolJolraelsCentaur,
     _poolJoragaWarcaller,
     _poolJoustingDummy,
+    _poolKaitoShizuki,
     _poolKeenBuccaneer,
     _poolKonaRescueBeastie,
     _poolKrarkTheThumbless,
@@ -738,6 +745,7 @@ const shard: CardShard = {
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
     _tokensKrakenToken,
+    _tokensNinjaTokenKaitoShizuki,
     _tokensSpiritTokenGhostlyDancers,
     _tokensTentacleToken,
     _tokensTreefolkToken,

@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAetherHub from "../pool/aether-hub.js";
+import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
@@ -43,6 +44,7 @@ import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
 import _poolBraidsArisenNightmare from "../pool/braids-arisen-nightmare.js";
+import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
 import _poolBrazenWolves from "../pool/brazen-wolves.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
@@ -203,6 +205,7 @@ import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
 import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
+import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
@@ -308,6 +311,7 @@ import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
 import _poolSkyhunterSkirmisher from "../pool/skyhunter-skirmisher.js";
 import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
+import _poolSlipOutTheBack from "../pool/slip-out-the-back.js";
 import _poolSliverHivelord from "../pool/sliver-hivelord.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
@@ -344,6 +348,7 @@ import _poolTalrandsInvocation from "../pool/talrands-invocation.js";
 import _poolTanglespanBridgeworks from "../pool/tanglespan-bridgeworks.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
 import _poolTechnodrome from "../pool/technodrome.js";
+import _poolTeferisProtection from "../pool/teferis-protection.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
 import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
@@ -421,6 +426,7 @@ const shard: CardShard = {
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
     _poolAetherHub,
+    _poolAfterlifeInsurance,
     _poolAkkiRockspeaker,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
@@ -458,6 +464,7 @@ const shard: CardShard = {
     _poolBorderPatrol,
     _poolBorosGuildmage,
     _poolBraidsArisenNightmare,
+    _poolBramblewoodParagon,
     _poolBrazenWolves,
     _poolBreedingPool,
     _poolBrittleEffigy,
@@ -618,6 +625,7 @@ const shard: CardShard = {
     _poolMercilessEnforcers,
     _poolMeteorite,
     _poolMeticulousCommons,
+    _poolMinasMorgulDarkFortress,
     _poolMirrorImage,
     _poolMistcutterHydra,
     _poolMistyPalmsOasis,
@@ -723,6 +731,7 @@ const shard: CardShard = {
     _poolSkyhunterSkirmisher,
     _poolSlingGangLieutenant,
     _poolSlipOnTheRing,
+    _poolSlipOutTheBack,
     _poolSliverHivelord,
     _poolSomnomancer,
     _poolSongOfFreyalise,
@@ -759,6 +768,7 @@ const shard: CardShard = {
     _poolTanglespanBridgeworks,
     _poolTearAsunder,
     _poolTechnodrome,
+    _poolTeferisProtection,
     _poolTempestTechnique,
     _poolTenzaGodosMaul,
     _poolTerrorOfThePeaks,

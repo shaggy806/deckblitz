@@ -34,6 +34,7 @@ import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
+import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
@@ -219,6 +220,7 @@ import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
+import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
@@ -260,6 +262,7 @@ import _poolRuggedPrairie from "../pool/rugged-prairie.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
+import _poolSapseepForest from "../pool/sapseep-forest.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
@@ -399,6 +402,7 @@ const shard: CardShard = {
     _poolBarbarianRiftcutter,
     _poolBatteringCraghorn,
     _poolBeanstalkGiant,
+    _poolBeanstalkWurm,
     _poolBestowGreatness,
     _poolBindingTheOldGods,
     _poolBlackWidowDeadlyHunter,
@@ -584,6 +588,7 @@ const shard: CardShard = {
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
     _poolMortalitySpear,
+    _poolNewHorizons,
     _poolNimReplica,
     _poolNoxiousGearhulk,
     _poolOkaunEyeOfChaos,
@@ -625,6 +630,7 @@ const shard: CardShard = {
     _poolSamuraisKatana,
     _poolSandbarSerpent,
     _poolSanguinaryPriest,
+    _poolSapseepForest,
     _poolSazhKatzroy,
     _poolScaledBehemoth,
     _poolScavengingOoze,

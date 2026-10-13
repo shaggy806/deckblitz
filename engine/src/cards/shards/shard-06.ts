@@ -240,6 +240,7 @@ import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
+import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
 import _poolRighteousness from "../pool/righteousness.js";
 import _poolRiotGear from "../pool/riot-gear.js";
@@ -620,6 +621,7 @@ const shard: CardShard = {
     _poolRedoubledStormsinger,
     _poolReefWorm,
     _poolReitoSentinel,
+    _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
     _poolRighteousness,
     _poolRiotGear,

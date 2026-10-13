@@ -83,6 +83,7 @@ import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
+import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDragoonsWyvern from "../pool/dragoons-wyvern.js";
 import _poolDreamPillager from "../pool/dream-pillager.js";
 import _poolDregRecycler from "../pool/dreg-recycler.js";
@@ -347,6 +348,7 @@ import _poolUndergroundRiver from "../pool/underground-river.js";
 import _poolUnderworldBreach from "../pool/underworld-breach.js";
 import _poolUniversalAutomaton from "../pool/universal-automaton.js";
 import _poolUrsapine from "../pool/ursapine.js";
+import _poolVaanStreetThief from "../pool/vaan-street-thief.js";
 import _poolValakutAwakening from "../pool/valakut-awakening.js";
 import _poolValeronOutlander from "../pool/valeron-outlander.js";
 import _poolVampireRevenant from "../pool/vampire-revenant.js";
@@ -371,6 +373,7 @@ import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.
 import _poolZap from "../pool/zap.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
+import _tokensClericToken from "../tokens/cleric-token.js";
 import _tokensCouncilOfReeds from "../tokens/council-of-reeds.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
@@ -463,6 +466,7 @@ const shard: CardShard = {
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
+    _poolDoggedDetective,
     _poolDragoonsWyvern,
     _poolDreamPillager,
     _poolDregRecycler,
@@ -727,6 +731,7 @@ const shard: CardShard = {
     _poolUnderworldBreach,
     _poolUniversalAutomaton,
     _poolUrsapine,
+    _poolVaanStreetThief,
     _poolValakutAwakening,
     _poolValeronOutlander,
     _poolVampireRevenant,
@@ -753,6 +758,7 @@ const shard: CardShard = {
     _poolZendikarFarguide,
   ],
   tokens: [
+    _tokensClericToken,
     _tokensCouncilOfReeds,
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,

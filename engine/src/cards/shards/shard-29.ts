@@ -237,6 +237,7 @@ import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
+import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
@@ -598,6 +599,7 @@ const shard: CardShard = {
     _poolRevivingMelody,
     _poolRingwraiths,
     _poolRiverSneak,
+    _poolRobeOfStars,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
     _poolSacredArmory,

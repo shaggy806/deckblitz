@@ -55,13 +55,11 @@ section keeps only what to do next.
 
 - **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill; the user moved back to
   it from the set walk on 2026-10-13). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7040 on (batch 69 took 6377–7037, ranks that moved since the
-  snapshot included). Batches run as the set walk's did: 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees (batch 69: become-copy and move-counter). Leading
-  blockers now (`cards:needs -- --rank`): devotion (21 cards, most of its Gods also needing their
-  "isn't a creature unless" type change, `static:self-type-changes`), attach-extensions,
-  phasing, rad counters, variable target counts. The nine other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go
-  as their originals land.
+  untriaged cards by rank: rank 7181 on (batch 70 took 7040–7178). Batches run as the set walk's
+  did: 4-5 agents, ~30 cards each, with the leading features built alongside in worktrees (batch
+  69: become-copy and move-counter; batch 70: devotion with the Gods' type change, and phasing).
+  Leading blockers now: `cards:needs -w engine -- --rank` (attach-extensions first). The nine
+  other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
   2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
   Griselbrand and more). Balance, Channel, Emrakul, the Aeons Torn, Erayo, Fastbond, Flash,

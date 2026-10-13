@@ -97,6 +97,7 @@ import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDreadShade from "../pool/dread-shade.js";
+import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
@@ -218,6 +219,7 @@ import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
@@ -289,6 +291,7 @@ import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
+import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
@@ -479,6 +482,7 @@ const shard: CardShard = {
     _poolDivinerOfMist,
     _poolDragonbackAssault,
     _poolDreadShade,
+    _poolDryadsRevival,
     _poolDutyBeyondDeath,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
@@ -600,6 +604,7 @@ const shard: CardShard = {
     _poolOnduGiant,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolPerchProtection,
     _poolPerimeterPatrol,
     _poolPersonify,
     _poolPhotonLivingLight,
@@ -671,6 +676,7 @@ const shard: CardShard = {
     _poolSpatialContortion,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
+    _poolSpiderManMilesMorales,
     _poolSpirebluffCanal,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,

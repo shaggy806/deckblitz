@@ -134,6 +134,7 @@ import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
 import _poolGrimBauble from "../pool/grim-bauble.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
+import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
@@ -204,6 +205,7 @@ import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
+import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
@@ -246,6 +248,7 @@ import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
+import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
@@ -255,6 +258,7 @@ import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
+import _poolPsychicImpetus from "../pool/psychic-impetus.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
@@ -264,6 +268,7 @@ import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
+import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
 import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
@@ -527,6 +532,7 @@ const shard: CardShard = {
     _poolGriffinDreamfinder,
     _poolGrimBauble,
     _poolGrolnokTheOmnivore,
+    _poolGuardianOfFaith,
     _poolGuardianProject,
     _poolGuardiansOfMeletis,
     _poolHadanasClimb,
@@ -597,6 +603,7 @@ const shard: CardShard = {
     _poolMarcusMutantMayor,
     _poolMarduHeartPiercer,
     _poolMasterOfDarkRites,
+    _poolMayaelsAria,
     _poolMazeSkullbomb,
     _poolMercilessExecutioner,
     _poolMetalspinnersPuzzleknot,
@@ -639,6 +646,7 @@ const shard: CardShard = {
     _poolPerilousLandscape,
     _poolPerilousSnare,
     _poolPestilentWolf,
+    _poolPhenaxGodOfDeception,
     _poolPiratePeddlers,
     _poolPlagueMyr,
     _poolPlayfulShove,
@@ -648,6 +656,7 @@ const shard: CardShard = {
     _poolProdigysPrototype,
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
+    _poolPsychicImpetus,
     _poolRaiseDead,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
@@ -657,6 +666,7 @@ const shard: CardShard = {
     _poolResupply,
     _poolRighteousCharge,
     _poolRipClanCrasher,
+    _poolRipplesOfPotential,
     _poolRiteOfFlame,
     _poolRiveteersOverlook,
     _poolRoaringEarth,

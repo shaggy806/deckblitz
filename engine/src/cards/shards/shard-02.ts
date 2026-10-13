@@ -54,6 +54,7 @@ import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
+import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClear from "../pool/clear.js";
 import _poolClone from "../pool/clone.js";
@@ -154,10 +155,12 @@ import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
+import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
+import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
 import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJamuraanLion from "../pool/jamuraan-lion.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
@@ -262,6 +265,7 @@ import _poolRunAmok from "../pool/run-amok.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
+import _poolSamutVizierOfNaktamun from "../pool/samut-vizier-of-naktamun.js";
 import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
@@ -310,6 +314,7 @@ import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
+import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js";
 import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
@@ -420,6 +425,7 @@ const shard: CardShard = {
     _poolCausticBronco,
     _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
+    _poolCharitableLevy,
     _poolCircleOfTheLandDruid,
     _poolClear,
     _poolClone,
@@ -520,10 +526,12 @@ const shard: CardShard = {
     _poolHurloonShaman,
     _poolHyraxTowerScout,
     _poolImpulsivity,
+    _poolIndomitableArchangel,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
     _poolInvisibleWoman,
     _poolIonasJudgment,
+    _poolIroasGodOfVictory,
     _poolJackdaw,
     _poolJamuraanLion,
     _poolJawsOfDefeat,
@@ -628,6 +636,7 @@ const shard: CardShard = {
     _poolRuthlessTechnomancer,
     _poolSagesRowSavant,
     _poolSalvationEngine,
+    _poolSamutVizierOfNaktamun,
     _poolSandstoneWarrior,
     _poolSangriteSurge,
     _poolSapphireMedallion,
@@ -676,6 +685,7 @@ const shard: CardShard = {
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
+    _poolTeferiMasterOfTime,
     _poolTheFantasticar,
     _poolTheRestorationOfEiganjo,
     _poolTheSquadronSinister,

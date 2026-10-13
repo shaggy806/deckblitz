@@ -17,6 +17,7 @@ import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
+import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
@@ -103,6 +104,7 @@ import _poolEarthKingsLieutenant from "../pool/earth-kings-lieutenant.js";
 import _poolEasyPrey from "../pool/easy-prey.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
+import _poolElectrolyze from "../pool/electrolyze.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
@@ -123,6 +125,7 @@ import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
+import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGenesisHydra from "../pool/genesis-hydra.js";
@@ -396,6 +399,7 @@ const shard: CardShard = {
     _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
+    _poolArcadeCabinet,
     _poolArcboundBruiser,
     _poolArcticTreeline,
     _poolArdentRecruit,
@@ -482,6 +486,7 @@ const shard: CardShard = {
     _poolEasyPrey,
     _poolEatToExtinction,
     _poolEfficientConstruction,
+    _poolElectrolyze,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
     _poolEnterTheGodEternals,
@@ -502,6 +507,7 @@ const shard: CardShard = {
     _poolForlornFlats,
     _poolFoulmireKnight,
     _poolFriendlyGhost,
+    _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGavonyTrapper,
     _poolGenesisHydra,

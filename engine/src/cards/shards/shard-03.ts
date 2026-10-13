@@ -42,6 +42,7 @@ import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
+import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCommandTower from "../pool/command-tower.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
@@ -152,6 +153,7 @@ import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
 import _poolKeepWatch from "../pool/keep-watch.js";
 import _poolKeeperOfTheQuietHour from "../pool/keeper-of-the-quiet-hour.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
+import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
 import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
@@ -174,6 +176,7 @@ import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
+import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
@@ -250,6 +253,7 @@ import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
 import _poolSheHulkAttorneyAtLaw from "../pool/she-hulk-attorney-at-law.js";
 import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
+import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
@@ -394,6 +398,7 @@ const shard: CardShard = {
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolCinderBarrens,
+    _poolCleverConcealment,
     _poolCommandTower,
     _poolCondemn,
     _poolCondescend,
@@ -504,6 +509,7 @@ const shard: CardShard = {
     _poolKeepWatch,
     _poolKeeperOfTheQuietHour,
     _poolKilnWalker,
+    _poolKnightOfTheStampede,
     _poolKnightPaladin,
     _poolKoalaSheep,
     _poolKolaghansCommand,
@@ -526,6 +532,7 @@ const shard: CardShard = {
     _poolMalevolentAwakening,
     _poolMandibularKite,
     _poolMapTheFrontier,
+    _poolMassMutiny,
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
     _poolMerfolkCoralsmith,
@@ -602,6 +609,7 @@ const shard: CardShard = {
     _poolSheHulkAttorneyAtLaw,
     _poolShelteredThicket,
     _poolSheoldredWhisperingOne,
+    _poolShimmerdriftVale,
     _poolShivanBranchBurner,
     _poolShopkeepersBane,
     _poolSilkweaverElite,

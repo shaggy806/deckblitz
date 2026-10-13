@@ -562,12 +562,15 @@ describe("evaluateDecklist", () => {
   it("counts every entry exactly once across both lookup passes", async () => {
     stubCollection({
       "Arcane Signet": { id: "aaaa1111-0000-0000-0000-000000000004", name: "Arcane Signet", set: "p04", collector_number: "44" },
-      // Phasing is out of scope, so this stays unimplemented (Chromatic
-      // Orrery, used before, was authored 2026-10-03).
-      "Teferi's Protection": {
-        name: "Teferi's Protection",
-        mana_cost: "{2}{W}",
-        type_line: "Instant",
+      // A dexterity card stays out of the pool for good (the user's rule), so
+      // this stays unimplemented (Chromatic Orrery and then Teferi's
+      // Protection, used before, were authored). Not one another test looks
+      // up first: lookups are cached for the process, and a cached name
+      // reports no lookup pass.
+      "Chaos Orb": {
+        name: "Chaos Orb",
+        mana_cost: "{2}",
+        type_line: "Artifact",
         oracle_text: "",
       },
     });
@@ -577,7 +580,7 @@ describe("evaluateDecklist", () => {
       [
         { name: "Lightning Bolt", count: 1 }, // free — local registry
         { name: "Arcane Signet", count: 1, printing: { set: "p04", collectorNumber: "44" } },
-        { name: "Teferi's Protection", count: 1 }, // unimplemented — name lookup
+        { name: "Chaos Orb", count: 1 }, // unimplemented — name lookup
       ],
       registry,
       ({ done, total }) => seen.push({ done, total }),

@@ -117,6 +117,7 @@ import _poolGoblinWarchief from "../pool/goblin-warchief.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
+import _poolGravebornMuse from "../pool/graveborn-muse.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
@@ -457,6 +458,7 @@ const shard: CardShard = {
     _poolGoldmeadowDodger,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
+    _poolGravebornMuse,
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
     _poolGrowingRanks,

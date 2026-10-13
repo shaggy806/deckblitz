@@ -201,6 +201,7 @@ import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
+import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
 import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
@@ -314,6 +315,7 @@ import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
 import _poolSvyelunOfSeaAndSky from "../pool/svyelun-of-sea-and-sky.js";
 import _poolSwiftEnd from "../pool/swift-end.js";
+import _poolSwiftReconfiguration from "../pool/swift-reconfiguration.js";
 import _poolSwiftSpinner from "../pool/swift-spinner.js";
 import _poolSylvanBrushstrider from "../pool/sylvan-brushstrider.js";
 import _poolSylvanRanger from "../pool/sylvan-ranger.js";
@@ -366,6 +368,7 @@ import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
+import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZephid from "../pool/zephid.js";
 import _poolZephyrCharge from "../pool/zephyr-charge.js";
 import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
@@ -379,6 +382,7 @@ import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
+import _tokensSatyrToken from "../tokens/satyr-token.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
 
@@ -582,6 +586,7 @@ const shard: CardShard = {
     _poolMagusOfTheBazaar,
     _poolMalametBrawler,
     _poolMaraudingBrinefang,
+    _poolMarduAscendancy,
     _poolMarshGas,
     _poolMassacreWurm,
     _poolMephiticVapors,
@@ -695,6 +700,7 @@ const shard: CardShard = {
     _poolSurlyFarrier,
     _poolSvyelunOfSeaAndSky,
     _poolSwiftEnd,
+    _poolSwiftReconfiguration,
     _poolSwiftSpinner,
     _poolSylvanBrushstrider,
     _poolSylvanRanger,
@@ -747,6 +753,7 @@ const shard: CardShard = {
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
     _poolWoodlandPatrol,
+    _poolYouSeeAPairOfGoblins,
     _poolZephid,
     _poolZephyrCharge,
     _poolZndrspltEyeOfWisdom,
@@ -762,6 +769,7 @@ const shard: CardShard = {
     _tokensMerfolkTokenSilvergillMentor,
     _tokensMonkTokenCrescentIslandTemple,
     _tokensPegasusToken22,
+    _tokensSatyrToken,
     _tokensSpiritToken,
     _tokensVillainToken,
   ],

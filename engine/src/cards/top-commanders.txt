@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-412 already implemented / 88 missing
+416 already implemented / 84 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -296,14 +296,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  290  Tayam, Luminous Enigma                          9240 decks  {1}{W}{B}{G}     Legendary Creature — Nightmare Beast
 [x]  291  Brenard, Ginger Sculptor                        9226 decks  {1}{G}{W}{U}     Legendary Creature — Human Artificer
 [x]  292  Reaper King                                     9223 decks  {2/W}{2/U}{2/B}{2/R}{2/G} Legendary Artifact Creature — Scarecrow
-[ ]  293  Phenax, God of Deception                        9215 decks  {3}{U}{B}        Legendary Enchantment Creature — God
+[x]  293  Phenax, God of Deception                        9215 decks  {3}{U}{B}        Legendary Enchantment Creature — God
 [ ]  294  Indominus Rex, Alpha                            9195 decks  {1}{U/B}{U/B}{G}{G} Legendary Creature — Dinosaur Mutant
 [x]  295  Tannuk, Memorial Ensign                         9181 decks  {1}{R}{G}        Legendary Creature — Kavu Pilot
 [x]  296  Elsha, Threefold Master                         9167 decks  {U}{R}{W}        Legendary Creature — Djinn Monk
 [x]  297  Gargos, Vicious Watcher                         9116 decks  {3}{G}{G}{G}     Legendary Creature — Hydra
 [ ]  298  Noctis, Prince of Lucis                         9100 decks  {1}{W}{U}{B}     Legendary Creature — Human Noble
 [x]  299  Syr Gwyn, Hero of Ashvale                       9089 decks  {3}{R}{W}{B}     Legendary Creature — Human Knight
-[ ]  300  Athreos, God of Passage                         9079 decks  {1}{W}{B}        Legendary Enchantment Creature — God
+[x]  300  Athreos, God of Passage                         9079 decks  {1}{W}{B}        Legendary Enchantment Creature — God
 [ ]  301  Coram, the Undertaker                           9077 decks  {1}{B}{R}{G}     Legendary Creature — Human Warrior
 [ ]  302  Marvo, Deep Operative                           9069 decks  {3}{U}{B}        Legendary Creature — Octopus Rogue
 [x]  303  Norin the Wary                                  9063 decks  {R}              Legendary Creature — Human Warrior
@@ -331,7 +331,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  325  Elas il-Kor, Sadistic Pilgrim                   8681 decks  {W}{B}           Legendary Creature — Phyrexian Kor Cleric
 [ ]  326  Brimaz, Blight of Oreskos                       8673 decks  {2}{W}{B}        Legendary Creature — Phyrexian Cat
 [x]  327  Kess, Dissident Mage                            8649 decks  {1}{U}{B}{R}     Legendary Creature — Human Wizard
-[ ]  328  Xenagos, God of Revels                          8608 decks  {3}{R}{G}        Legendary Enchantment Creature — God
+[x]  328  Xenagos, God of Revels                          8608 decks  {3}{R}{G}        Legendary Enchantment Creature — God
 [x]  329  Cloud, Midgar Mercenary                         8526 decks  {W}{W}           Legendary Creature — Human Soldier Mercenary
 [x]  330  Braids, Arisen Nightmare                        8469 decks  {1}{B}{B}        Legendary Creature — Nightmare
 [x]  331  Haldan, Avid Arcanist                           8466 decks  {2}{U}           Legendary Creature — Human Wizard
@@ -459,7 +459,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  453  Abaddon the Despoiler                           6708 decks  {2}{U}{B}{R}     Legendary Creature — Astartes Warrior
 [x]  454  Imodane, the Pyrohammer                         6698 decks  {2}{R}{R}        Legendary Creature — Human Knight
 [ ]  455  Marchesa, Dealer of Death                       6692 decks  {U}{B}{R}        Legendary Creature — Human Rogue
-[ ]  456  Karametra, God of Harvests                      6674 decks  {3}{G}{W}        Legendary Enchantment Creature — God
+[x]  456  Karametra, God of Harvests                      6674 decks  {3}{G}{W}        Legendary Enchantment Creature — God
 [x]  457  Delney, Streetwise Lookout                      6658 decks  {2}{W}           Legendary Creature — Human Scout
 [x]  458  Yusri, Fortune's Flame                          6649 decks  {1}{U}{R}        Legendary Creature — Efreet
 [x]  459  Greasefang, Okiba Boss                          6625 decks  {1}{W}{B}        Legendary Creature — Rat Pilot

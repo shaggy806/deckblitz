@@ -223,6 +223,7 @@ import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
+import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
@@ -606,6 +607,7 @@ const shard: CardShard = {
     _poolPhyrexianDebaser,
     _poolPhytoburst,
     _poolPlagueStinger,
+    _poolPlantBeans,
     _poolPlateau,
     _poolPlatedCrusher,
     _poolPlumecreedEscort,

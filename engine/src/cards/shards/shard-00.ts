@@ -104,6 +104,7 @@ import _poolElvishHandservant from "../pool/elvish-handservant.js";
 import _poolElvishHarbinger from "../pool/elvish-harbinger.js";
 import _poolEmbercleave from "../pool/embercleave.js";
 import _poolEnragedCeratok from "../pool/enraged-ceratok.js";
+import _poolErebosBleakHearted from "../pool/erebos-bleak-hearted.js";
 import _poolEverethViceroyOfPlunder from "../pool/evereth-viceroy-of-plunder.js";
 import _poolExplorersScope from "../pool/explorers-scope.js";
 import _poolExplosion from "../pool/explosion.js";
@@ -342,6 +343,7 @@ import _poolThranDynamo from "../pool/thran-dynamo.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
 import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
+import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTranspose from "../pool/transpose.js";
@@ -360,6 +362,8 @@ import _poolViciousVerse from "../pool/vicious-verse.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
 import _poolVigorbloomCharm from "../pool/vigorbloom-charm.js";
 import _poolVihaanGoldwaker from "../pool/vihaan-goldwaker.js";
+import _poolViridianJoiner from "../pool/viridian-joiner.js";
+import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
 import _poolVolunteerMilitia from "../pool/volunteer-militia.js";
 import _poolVrock from "../pool/vrock.js";
@@ -497,6 +501,7 @@ const shard: CardShard = {
     _poolElvishHarbinger,
     _poolEmbercleave,
     _poolEnragedCeratok,
+    _poolErebosBleakHearted,
     _poolEverethViceroyOfPlunder,
     _poolExplorersScope,
     _poolExplosion,
@@ -735,6 +740,7 @@ const shard: CardShard = {
     _poolTiamatsFanatics,
     _poolTidusBlitzballStar,
     _poolTimberlandRuins,
+    _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
     _poolTorchDrake,
     _poolTranspose,
@@ -753,6 +759,8 @@ const shard: CardShard = {
     _poolVigilantDrake,
     _poolVigorbloomCharm,
     _poolVihaanGoldwaker,
+    _poolViridianJoiner,
+    _poolVisionSynthezoidAvenger,
     _poolVodalianWaveKnight,
     _poolVolunteerMilitia,
     _poolVrock,

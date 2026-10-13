@@ -338,6 +338,7 @@ import _poolThinkTank from "../pool/think-tank.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
+import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolTriskelion from "../pool/triskelion.js";
@@ -724,6 +725,7 @@ const shard: CardShard = {
     _poolThranduilsCompany,
     _poolTillerEngine,
     _poolTinderFarm,
+    _poolTitanOfLittjara,
     _poolTithebearerGiant,
     _poolTomeRaider,
     _poolTriskelion,

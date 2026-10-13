@@ -1,0 +1,969 @@
+{
+ "batch": "B70",
+ "status": "complete",
+ "ranks": "EDHREC ranks 7040–7178 (the next 90 untriaged; Keranos and Anax to the devotion agent, Change of Plans to phasing); with devotion, the Gods' type change and phasing built and every card each unblocked",
+ "authored": [
+  {
+   "name": "Afterlife Insurance",
+   "files": [
+    "engine/src/cards/pool/afterlife-insurance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Altar of the Pantheon",
+   "files": [
+    "engine/src/cards/pool/altar-of-the-pantheon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anax, Hardened in the Forge",
+   "files": [
+    "engine/src/cards/pool/anax-hardened-in-the-forge.ts",
+    "engine/src/cards/tokens/satyr-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcade Cabinet",
+   "files": [
+    "engine/src/cards/pool/arcade-cabinet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arixmethes, Slumbering Isle",
+   "files": [
+    "engine/src/cards/pool/arixmethes-slumbering-isle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assaultron Dominator",
+   "files": [
+    "engine/src/cards/pool/assaultron-dominator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Athreos, God of Passage",
+   "files": [
+    "engine/src/cards/pool/athreos-god-of-passage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Athreos, Shroud-Veiled",
+   "files": [
+    "engine/src/cards/pool/athreos-shroud-veiled.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beanstalk Wurm",
+   "files": [
+    "engine/src/cards/pool/beanstalk-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Borrowing 100,000 Arrows",
+   "files": [
+    "engine/src/cards/pool/borrowing-100-000-arrows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounty Agent",
+   "files": [
+    "engine/src/cards/pool/bounty-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bramblewood Paragon",
+   "files": [
+    "engine/src/cards/pool/bramblewood-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Change of Plans",
+   "files": [
+    "engine/src/cards/pool/change-of-plans.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charitable Levy",
+   "files": [
+    "engine/src/cards/pool/charitable-levy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clarion Spirit",
+   "files": [
+    "engine/src/cards/pool/clarion-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clever Concealment",
+   "files": [
+    "engine/src/cards/pool/clever-concealment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dalakos, Crafter of Wonders",
+   "files": [
+    "engine/src/cards/pool/dalakos-crafter-of-wonders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dimir Keyrune",
+   "files": [
+    "engine/src/cards/pool/dimir-keyrune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dogged Detective",
+   "files": [
+    "engine/src/cards/pool/dogged-detective.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon-Cursed Halls",
+   "files": [
+    "engine/src/cards/pool/dragon-cursed-halls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dryad's Revival",
+   "files": [
+    "engine/src/cards/pool/dryads-revival.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Electrolyze",
+   "files": [
+    "engine/src/cards/pool/electrolyze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erebos, Bleak-Hearted",
+   "files": [
+    "engine/src/cards/pool/erebos-bleak-hearted.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erebos, God of the Dead",
+   "files": [
+    "engine/src/cards/pool/erebos-god-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eye of Vecna",
+   "files": [
+    "engine/src/cards/pool/eye-of-vecna.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Falthis, Shadowcat Familiar",
+   "files": [
+    "engine/src/cards/pool/falthis-shadowcat-familiar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fumiko the Lowblood",
+   "files": [
+    "engine/src/cards/pool/fumiko-the-lowblood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadriel's Dismissal",
+   "files": [
+    "engine/src/cards/pool/galadriels-dismissal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graveborn Muse",
+   "files": [
+    "engine/src/cards/pool/graveborn-muse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian of Faith",
+   "files": [
+    "engine/src/cards/pool/guardian-of-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haakon, Stromgald Scourge",
+   "files": [
+    "engine/src/cards/pool/haakon-stromgald-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haystack",
+   "files": [
+    "engine/src/cards/pool/haystack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heliod, God of the Sun",
+   "files": [
+    "engine/src/cards/pool/heliod-god-of-the-sun.ts",
+    "engine/src/cards/tokens/cleric-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heliod, Sun-Crowned",
+   "files": [
+    "engine/src/cards/pool/heliod-sun-crowned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immersturm Predator",
+   "files": [
+    "engine/src/cards/pool/immersturm-predator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imskir Iron-Eater",
+   "files": [
+    "engine/src/cards/pool/imskir-iron-eater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Indomitable Archangel",
+   "files": [
+    "engine/src/cards/pool/indomitable-archangel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iroas, God of Victory",
+   "files": [
+    "engine/src/cards/pool/iroas-god-of-victory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaito Shizuki",
+   "files": [
+    "engine/src/cards/pool/kaito-shizuki.ts",
+    "engine/src/cards/tokens/ninja-token-kaito-shizuki.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karametra, God of Harvests",
+   "files": [
+    "engine/src/cards/pool/karametra-god-of-harvests.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keranos, God of Storms",
+   "files": [
+    "engine/src/cards/pool/keranos-god-of-storms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Klothys, God of Destiny",
+   "files": [
+    "engine/src/cards/pool/klothys-god-of-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of the Stampede",
+   "files": [
+    "engine/src/cards/pool/knight-of-the-stampede.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Krile Baldesion",
+   "files": [
+    "engine/src/cards/pool/krile-baldesion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kruphix, God of Horizons",
+   "files": [
+    "engine/src/cards/pool/kruphix-god-of-horizons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Axe",
+   "files": [
+    "engine/src/cards/pool/lightning-axe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "March of the Canonized",
+   "files": [
+    "engine/src/cards/pool/march-of-the-canonized.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mardu Ascendancy",
+   "files": [
+    "engine/src/cards/pool/mardu-ascendancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mass Mutiny",
+   "files": [
+    "engine/src/cards/pool/mass-mutiny.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mayael's Aria",
+   "files": [
+    "engine/src/cards/pool/mayaels-aria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minas Morgul, Dark Fortress",
+   "files": [
+    "engine/src/cards/pool/minas-morgul-dark-fortress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogis, God of Slaughter",
+   "files": [
+    "engine/src/cards/pool/mogis-god-of-slaughter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "New Horizons",
+   "files": [
+    "engine/src/cards/pool/new-horizons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nylea, God of the Hunt",
+   "files": [
+    "engine/src/cards/pool/nylea-god-of-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nylea, Keen-Eyed",
+   "files": [
+    "engine/src/cards/pool/nylea-keen-eyed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One with Nature",
+   "files": [
+    "engine/src/cards/pool/one-with-nature.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Otherworld Atlas",
+   "files": [
+    "engine/src/cards/pool/otherworld-atlas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oubliette",
+   "files": [
+    "engine/src/cards/pool/oubliette.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perch Protection",
+   "files": [
+    "engine/src/cards/pool/perch-protection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phenax, God of Deception",
+   "files": [
+    "engine/src/cards/pool/phenax-god-of-deception.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plant Beans",
+   "files": [
+    "engine/src/cards/pool/plant-beans.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Psychic Impetus",
+   "files": [
+    "engine/src/cards/pool/psychic-impetus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Purphoros, Bronze-Blooded",
+   "files": [
+    "engine/src/cards/pool/purphoros-bronze-blooded.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purphoros, God of the Forge",
+   "files": [
+    "engine/src/cards/pool/purphoros-god-of-the-forge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ray Fillet, Wave Warrior",
+   "files": [
+    "engine/src/cards/pool/ray-fillet-wave-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renata, Called to the Hunt",
+   "files": [
+    "engine/src/cards/pool/renata-called-to-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rienne, Angel of Rebirth",
+   "files": [
+    "engine/src/cards/pool/rienne-angel-of-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ripples of Potential",
+   "files": [
+    "engine/src/cards/pool/ripples-of-potential.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Robe of Stars",
+   "files": [
+    "engine/src/cards/pool/robe-of-stars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samut, Vizier of Naktamun",
+   "files": [
+    "engine/src/cards/pool/samut-vizier-of-naktamun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sapseep Forest",
+   "files": [
+    "engine/src/cards/pool/sapseep-forest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shimmerdrift Vale",
+   "files": [
+    "engine/src/cards/pool/shimmerdrift-vale.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slip Out the Back",
+   "files": [
+    "engine/src/cards/pool/slip-out-the-back.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man, Miles Morales",
+   "files": [
+    "engine/src/cards/pool/spider-man-miles-morales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Static Prison",
+   "files": [
+    "engine/src/cards/pool/static-prison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swift Reconfiguration",
+   "files": [
+    "engine/src/cards/pool/swift-reconfiguration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talon Gates of Madara",
+   "files": [
+    "engine/src/cards/pool/talon-gates-of-madara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi, Master of Time",
+   "files": [
+    "engine/src/cards/pool/teferi-master-of-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi's Protection",
+   "files": [
+    "engine/src/cards/pool/teferis-protection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thassa, Deep-Dwelling",
+   "files": [
+    "engine/src/cards/pool/thassa-deep-dwelling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thassa, God of the Sea",
+   "files": [
+    "engine/src/cards/pool/thassa-god-of-the-sea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thassa's Intervention",
+   "files": [
+    "engine/src/cards/pool/thassas-intervention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thud",
+   "files": [
+    "engine/src/cards/pool/thud.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Titan of Littjara",
+   "files": [
+    "engine/src/cards/pool/titan-of-littjara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Too Greedily, Too Deep",
+   "files": [
+    "engine/src/cards/pool/too-greedily-too-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vaan, Street Thief",
+   "files": [
+    "engine/src/cards/pool/vaan-street-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viridian Joiner",
+   "files": [
+    "engine/src/cards/pool/viridian-joiner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vision, Synthezoid Avenger",
+   "files": [
+    "engine/src/cards/pool/vision-synthezoid-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vronos, Masked Inquisitor",
+   "files": [
+    "engine/src/cards/pool/vronos-masked-inquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Writhing Chrysalis",
+   "files": [
+    "engine/src/cards/pool/writhing-chrysalis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xenagos, God of Revels",
+   "files": [
+    "engine/src/cards/pool/xenagos-god-of-revels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You See a Pair of Goblins",
+   "files": [
+    "engine/src/cards/pool/you-see-a-pair-of-goblins.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zask, Skittering Swarmlord",
+   "files": [
+    "engine/src/cards/pool/zask-skittering-swarmlord.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Pouncing Shoreshark",
+   "needs": [
+    "mechanic:mutate"
+   ],
+   "why": "Mutate."
+  },
+  {
+   "name": "Averna, the Chaos Bloom",
+   "needs": [
+    "static:cascade-put-land"
+   ],
+   "why": "As you cascade, put a land card from among the exiled cards onto the battlefield tapped."
+  },
+  {
+   "name": "Knight of New Alara",
+   "needs": [
+    "static:pt-per-affected-colors"
+   ],
+   "why": "+1/+1 for each of the affected creature's own colors."
+  },
+  {
+   "name": "Homing Sliver",
+   "needs": [
+    "static:grant-cycling-to-cards-in-hand"
+   ],
+   "why": "Slivercycling granted to Sliver cards in each player's hand."
+  },
+  {
+   "name": "Lily Bowen, Raging Grandma",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "Gain 1 life for each +1/+1 counter removed this way."
+  },
+  {
+   "name": "Red Sun's Twilight",
+   "needs": [
+    "effect:token-copy-each-destroyed-this-way"
+   ],
+   "why": "A token copy of each artifact destroyed this way."
+  },
+  {
+   "name": "Familiar's Ruse",
+   "needs": [
+    "cost:return-permanent-additional-cost"
+   ],
+   "why": "Return a creature you control as an additional cost."
+  },
+  {
+   "name": "Raiyuu, Storm's Edge",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "Whenever a Samurai or Warrior you control attacks alone."
+  },
+  {
+   "name": "Decaying Time Loop",
+   "needs": [
+    "keyword:retrace"
+   ],
+   "why": "Retrace."
+  },
+  {
+   "name": "Lobelia Sackville-Baggins",
+   "needs": [
+    "condition:return-cards-put-in-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "A card put into a graveyard from the battlefield this turn."
+  },
+  {
+   "name": "Bladegriff Prototype",
+   "needs": [
+    "target:chosen-by-other-player"
+   ],
+   "why": "The damaged player chooses the target."
+  },
+  {
+   "name": "Smirking Spelljacker",
+   "needs": [
+    "condition:cards-currently-exiled-with-source-condition"
+   ],
+   "why": "While a card exiled with it is still exiled — exiled-with-source counts cards ever exiled."
+  },
+  {
+   "name": "Falco Spara, Pactweaver",
+   "needs": [
+    "zone:cast-from-library-top-extra-cost",
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "Cast from the top of your library by removing a counter from a creature you control."
+  },
+  {
+   "name": "Profane Transfusion",
+   "needs": [
+    "effect:exchange-life-totals"
+   ],
+   "why": "Two target players exchange life totals."
+  },
+  {
+   "name": "Yuna's Decision",
+   "needs": [
+    "effect:look-and-choose-second-pick-together"
+   ],
+   "why": "A creature card and/or a land card from your hand onto the battlefield together."
+  },
+  {
+   "name": "Mob Verdict",
+   "needs": [
+    "mechanic:voting"
+   ],
+   "why": "Each player votes for a player (secretly)."
+  },
+  {
+   "name": "Belt of Giant Strength",
+   "needs": [
+    "cost:cost-reduction-if-targets"
+   ],
+   "why": "Costs {X} less, X the targeted creature's power."
+  },
+  {
+   "name": "Warp World",
+   "needs": [
+    "effect:shuffle-permanents-reveal-that-many"
+   ],
+   "why": "Shuffle all permanents into libraries, reveal that many, put permanents back."
+  },
+  {
+   "name": "Chief Engineer",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "Artifact spells you cast have convoke."
+  },
+  {
+   "name": "The Ninth Doctor",
+   "needs": [
+    "trigger:untap-trigger",
+    "effect:additional-upkeep-steps"
+   ],
+   "why": "Becomes untapped during your untap step; an additional upkeep after this one."
+  },
+  {
+   "name": "Roshan, Hidden Magister",
+   "needs": [
+    "static:static-types-outside-battlefield"
+   ],
+   "why": "Creature spells and cards are Assassins outside the battlefield too."
+  },
+  {
+   "name": "Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar",
+   "needs": [
+    "effect:delayed-trigger-until-your-next-turn",
+    "effect:emblem-no-max-hand-size"
+   ],
+   "why": "The +2 until your next turn, and the −7 emblem."
+  },
+  {
+   "name": "Utter Insignificance",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "Enchanted creature loses all abilities (a static)."
+  },
+  {
+   "name": "Scale Up",
+   "needs": [
+    "effect:animate-all-lose-abilities"
+   ],
+   "why": "Overload: each creature you control becomes a 6/4 green Wurm."
+  },
+  {
+   "name": "Vendilion Clique",
+   "needs": [
+    "effect:look-and-choose-target-player"
+   ],
+   "why": "You choose a nonland card from target player's hand; they bottom it and draw."
+  },
+  {
+   "name": "Merchant Raiders",
+   "needs": [
+    "effect:doesnt-untap-while-you-control-source"
+   ],
+   "why": "Doesn't untap for as long as you control it."
+  },
+  {
+   "name": "Dog Umbra",
+   "needs": [
+    "keyword:umbra-armor"
+   ],
+   "why": "Umbra armor, switched by who controls the creature."
+  },
+  {
+   "name": "Karn Liberated",
+   "needs": [
+    "mechanic:restart-the-game"
+   ],
+   "why": "The −14 restarts the game (and the +4's exile is linked to Karn)."
+  },
+  {
+   "name": "Painter's Servant",
+   "needs": [
+    "static:add-chosen-color-all-zones"
+   ],
+   "why": "Every card, spell and permanent is the chosen colour too."
+  },
+  {
+   "name": "Bartz and Boko",
+   "needs": [
+    "effect:each-permanent-deals-damage"
+   ],
+   "why": "Each other Bird deals damage equal to its power, one simultaneous event."
+  },
+  {
+   "name": "Cacophony Unleashed",
+   "needs": [
+    "effect:animate-add-supertype"
+   ],
+   "why": "Becomes a legendary 6/6 Nightmare God creature."
+  },
+  {
+   "name": "Proteus Staff",
+   "needs": [
+    "effect:reveal-until-rest-bottom-any-order"
+   ],
+   "why": "The rest on the bottom in any order."
+  },
+  {
+   "name": "Illithid Harvester // Plant Tadpoles",
+   "needs": [
+    "effect:turn-face-down"
+   ],
+   "why": "Turn target tapped creature face down."
+  },
+  {
+   "name": "Dragon's Fire",
+   "needs": [
+    "amount:beheld-object-power"
+   ],
+   "why": "Damage equal to the beheld Dragon's power."
+  },
+  {
+   "name": "Planar Chaos",
+   "needs": [
+    "mechanic:coin-flip-by-other-player"
+   ],
+   "why": "That player flips a coin."
+  },
+  {
+   "name": "Time Stop",
+   "needs": [
+    "effect:end-the-turn"
+   ],
+   "why": "End the turn."
+  },
+  {
+   "name": "Thrull Parasite",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "Remove a counter of a kind chosen on resolution."
+  },
+  {
+   "name": "Smoke Shroud",
+   "needs": [
+    "effect:aura-returns-attached"
+   ],
+   "why": "Return it from the graveyard attached to the entering Ninja."
+  },
+  {
+   "name": "Cavalier of Gales",
+   "needs": [
+    "effect:shuffle-into-library-from-graveyard"
+   ],
+   "why": "Shuffle it into its owner's library from the graveyard."
+  },
+  {
+   "name": "Grist, the Hunger Tide",
+   "needs": [
+    "static:self-type-changes",
+    "effect:repeat-process",
+    "effect:may-sacrifice-then"
+   ],
+   "why": "A 1/1 Insect creature off the battlefield; the +1's repeat; the −2's reflexive sacrifice."
+  },
+  {
+   "name": "Ephara, God of the Polis",
+   "needs": [
+    "condition:entered-last-turn"
+   ],
+   "why": "If another creature entered under your control last turn (devotion half built)."
+  },
+  {
+   "name": "Out of Time",
+   "needs": [
+    "keyword:vanishing"
+   ],
+   "why": "Vanishing's last-counter trigger (the phase-out half is built)."
+  },
+  {
+   "name": "March of Swirling Mist",
+   "needs": [
+    "cost:exile-cards-from-hand-cost-reduction"
+   ],
+   "why": "Exile blue cards from hand as an additional cost, {2} less each."
+  }
+ ]
+}

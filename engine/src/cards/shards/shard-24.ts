@@ -25,6 +25,7 @@ import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
 import _poolAridArchway from "../pool/arid-archway.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
+import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
@@ -141,6 +142,7 @@ import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
+import _poolHeliodGodOfTheSun from "../pool/heliod-god-of-the-sun.js";
 import _poolHellsKitchen from "../pool/hells-kitchen.js";
 import _poolHerdBaloth from "../pool/herd-baloth.js";
 import _poolHeritageDruid from "../pool/heritage-druid.js";
@@ -303,6 +305,7 @@ import _poolThoughtMonitor from "../pool/thought-monitor.js";
 import _poolThrabenInspector from "../pool/thraben-inspector.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
 import _poolThrunTheLastTroll from "../pool/thrun-the-last-troll.js";
+import _poolThud from "../pool/thud.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonyStark from "../pool/tony-stark.js";
@@ -385,6 +388,7 @@ const shard: CardShard = {
     _poolArchiveDragon,
     _poolAridArchway,
     _poolAshlingsCommand,
+    _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
     _poolAvenSquire,
     _poolBalefulStrix,
@@ -501,6 +505,7 @@ const shard: CardShard = {
     _poolHanweirGarrison,
     _poolHeartWarden,
     _poolHelgaSkittishSeer,
+    _poolHeliodGodOfTheSun,
     _poolHellsKitchen,
     _poolHerdBaloth,
     _poolHeritageDruid,
@@ -663,6 +668,7 @@ const shard: CardShard = {
     _poolThrabenInspector,
     _poolThroneOfTheHighCity,
     _poolThrunTheLastTroll,
+    _poolThud,
     _poolTibaltsRager,
     _poolTolariaWest,
     _poolTonyStark,
