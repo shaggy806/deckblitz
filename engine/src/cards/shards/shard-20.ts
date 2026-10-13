@@ -176,6 +176,7 @@ import _poolImpulse from "../pool/impulse.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
 import _poolInvoluntaryEmployment from "../pool/involuntary-employment.js";
+import _poolIrmaPartTimeMutant from "../pool/irma-part-time-mutant.js";
 import _poolItllQuenchYa from "../pool/itll-quench-ya.js";
 import _poolIzzetBoilerworks from "../pool/izzet-boilerworks.js";
 import _poolJackhammer from "../pool/jackhammer.js";
@@ -214,6 +215,7 @@ import _poolMindspliceApparatus from "../pool/mindsplice-apparatus.js";
 import _poolMirageMesa from "../pool/mirage-mesa.js";
 import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
 import _poolMirrorRoomFracturedRealm from "../pool/mirror-room-fractured-realm.js";
+import _poolMirrorform from "../pool/mirrorform.js";
 import _poolMischievousPoltergeist from "../pool/mischievous-poltergeist.js";
 import _poolMoltenTributary from "../pool/molten-tributary.js";
 import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
@@ -242,6 +244,7 @@ import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
+import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
@@ -588,6 +591,7 @@ const shard: CardShard = {
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
     _poolInvoluntaryEmployment,
+    _poolIrmaPartTimeMutant,
     _poolItllQuenchYa,
     _poolIzzetBoilerworks,
     _poolJackhammer,
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolMirageMesa,
     _poolMirriCatWarrior,
     _poolMirrorRoomFracturedRealm,
+    _poolMirrorform,
     _poolMischievousPoltergeist,
     _poolMoltenTributary,
     _poolMoltensteelDragon,
@@ -654,6 +659,7 @@ const shard: CardShard = {
     _poolOrochiLeafcaller,
     _poolOssification,
     _poolOvergrownArmasaur,
+    _poolOversimplify,
     _poolOverwhelmingInstinct,
     _poolPatronWizard,
     _poolPeacewalkerColossus,

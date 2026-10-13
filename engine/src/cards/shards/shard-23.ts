@@ -70,6 +70,7 @@ import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
+import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
@@ -262,6 +263,7 @@ import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
+import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
 import _poolSmash from "../pool/smash.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
@@ -416,6 +418,7 @@ const shard: CardShard = {
     _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
+    _poolCostumeCloset,
     _poolCrossbowAmbush,
     _poolCryptOfTheEternals,
     _poolDaringEscape,
@@ -608,6 +611,7 @@ const shard: CardShard = {
     _poolSkeletonCrew,
     _poolSkycloudExpanse,
     _poolSkylineDespot,
+    _poolSlipperyBogbonder,
     _poolSlobadGoblinTinkerer,
     _poolSmash,
     _poolSoddenVerdure,

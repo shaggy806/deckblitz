@@ -122,6 +122,7 @@ import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
 import _poolGenesisWave from "../pool/genesis-wave.js";
+import _poolGeralfTheFleshwright from "../pool/geralf-the-fleshwright.js";
 import _poolGeyserfieldStalker from "../pool/geyserfield-stalker.js";
 import _poolGhaltaAndMavren from "../pool/ghalta-and-mavren.js";
 import _poolGhostShip from "../pool/ghost-ship.js";
@@ -164,6 +165,7 @@ import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js
 import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
 import _poolKarnLegacyReforged from "../pool/karn-legacy-reforged.js";
 import _poolKathariRemnant from "../pool/kathari-remnant.js";
+import _poolKimahriValiantGuardian from "../pool/kimahri-valiant-guardian.js";
 import _poolKioraBehemothBeckoner from "../pool/kiora-behemoth-beckoner.js";
 import _poolKissOfDeath from "../pool/kiss-of-death.js";
 import _poolKnightsCharge from "../pool/knights-charge.js";
@@ -174,8 +176,10 @@ import _poolLadyOrca from "../pool/lady-orca.js";
 import _poolLateToDinner from "../pool/late-to-dinner.js";
 import _poolLavaspurBoots from "../pool/lavaspur-boots.js";
 import _poolLayOfTheLand from "../pool/lay-of-the-land.js";
+import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLightningTalons from "../pool/lightning-talons.js";
+import _poolLikenessLooter from "../pool/likeness-looter.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingDeath from "../pool/living-death.js";
@@ -249,6 +253,7 @@ import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
+import _poolRustElemental from "../pool/rust-elemental.js";
 import _poolRustvaleBridge from "../pool/rustvale-bridge.js";
 import _poolSacredNectar from "../pool/sacred-nectar.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
@@ -374,6 +379,7 @@ import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-v
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
+import _tokensSkeletonTokenGutTrueSoulZealot from "../tokens/skeleton-token-gut-true-soul-zealot.js";
 import _tokensTreefolkTokenSylvanOffering from "../tokens/treefolk-token-sylvan-offering.js";
 import _tokensVehicleToken from "../tokens/vehicle-token.js";
 
@@ -498,6 +504,7 @@ const shard: CardShard = {
     _poolGavonyUnhallowed,
     _poolGenerousStray,
     _poolGenesisWave,
+    _poolGeralfTheFleshwright,
     _poolGeyserfieldStalker,
     _poolGhaltaAndMavren,
     _poolGhostShip,
@@ -540,6 +547,7 @@ const shard: CardShard = {
     _poolKalakscionHungerTyrant,
     _poolKarnLegacyReforged,
     _poolKathariRemnant,
+    _poolKimahriValiantGuardian,
     _poolKioraBehemothBeckoner,
     _poolKissOfDeath,
     _poolKnightsCharge,
@@ -550,8 +558,10 @@ const shard: CardShard = {
     _poolLateToDinner,
     _poolLavaspurBoots,
     _poolLayOfTheLand,
+    _poolLazavDimirMastermind,
     _poolLeoninScimitar,
     _poolLightningTalons,
+    _poolLikenessLooter,
     _poolLionheartGlimmer,
     _poolLiveOrDie,
     _poolLivingDeath,
@@ -625,6 +635,7 @@ const shard: CardShard = {
     _poolRottenheartGhoul,
     _poolRumblingSentry,
     _poolRushwoodDryad,
+    _poolRustElemental,
     _poolRustvaleBridge,
     _poolSacredNectar,
     _poolSaheeliTheSunsBrilliance,
@@ -752,6 +763,7 @@ const shard: CardShard = {
     _tokensDragonToken66,
     _tokensKomasCoil,
     _tokensPhyrexianInsectToken,
+    _tokensSkeletonTokenGutTrueSoulZealot,
     _tokensTreefolkTokenSylvanOffering,
     _tokensVehicleToken,
   ],

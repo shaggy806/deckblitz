@@ -5812,6 +5812,54 @@
   },
   "cost:cycling-x": {
    "example": "Valor's Flagship: Cycling {X}{2}{W}, and \"when you cycle this card, create X Pilot tokens\" — cycling's cost takes no X, and a cycle trigger can't read one."
+  },
+  "effect:counters-removed-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Chandra, Legacy of Fire: \"Exile that many cards\" — the loyalty counters an earlier step of the same resolution removed; no amount counts them."
+  },
+  "cost:attack-tax-planeswalkers": {
+   "family": "cost:attack-tax",
+   "example": "Onakke Oathkeeper: \"Creatures can't attack planeswalkers you control unless their controller pays {1} for each\" — the attack tax covers attacks on a player only."
+  },
+  "condition:extra-turn": {
+   "example": "Medomai the Ageless: \"can't attack during extra turns\" — no condition reads whether this turn is an extra turn."
+  },
+  "cost:sacrifice-granting-source": {
+   "example": "Toggo, Goblin Weaponsmith: a Rock token whose granted ability costs \"Sacrifice Rock\" — the permanent granting the ability, not the one it's on."
+  },
+  "effect:roll-keep-highest": {
+   "family": "mechanic:dice-rolls",
+   "example": "Iron Mastiff: roll a d20 for each player being attacked and ignore all but the highest roll — roll-dice totals its dice."
+  },
+  "effect:skip-steps-this-turn": {
+   "example": "Fatespinner: that player chooses draw step, main phase or combat phase and skips each instance of it this turn."
+  },
+  "effect:duration-while-you-control-source": {
+   "example": "Aegis Angel: a granted indestructible \"for as long as you control Aegis Angel\" — while-source ends only when the source leaves, not when control changes."
+  },
+  "static:trigger-doubler-draw-cause": {
+   "family": "static:trigger-doubling-filter",
+   "example": "Krang, the All-Powerful: an ability triggering on a player drawing a card triggers an additional time — no doubleTriggers cause for draws."
+  },
+  "effect:copy-starting-loyalty": {
+   "example": "Jace, Mirror Mage: a token copy \"except it has loyalty 1\" — CopyExceptions has no starting-loyalty exception."
+  },
+  "effect:switch-pt": {
+   "example": "Twisted Image: switch target creature's power and toughness until end of turn (layer 7d) — no switch in the layer system."
+  },
+  "effect:choose-card-exiled-with-source": {
+   "example": "Valki, God of Lies: \"choose a creature card exiled with Valki with mana value X\" as the ability resolves."
+  },
+  "trigger:cast-with-mana-from-source": {
+   "example": "The Everflowing Well (The Myriad Pools): \"Whenever you cast a permanent spell using mana produced by\" this — once per spell with a target chosen as it triggers; whenSpent fires per unit of mana."
+  },
+  "effect:cant-be-blocked-by-filter-until-eot": {
+   "family": "effect:grant-static-to-permanent",
+   "example": "Rikku, Resourceful Guardian: until end of turn, that creature can't be blocked by creatures your opponents control — read from the effect controller's side, not unblockable."
+  },
+  "effect:attach-equipment-that-was-attached": {
+   "family": "effect:attach-extensions",
+   "example": "Zack Fair: attach an Equipment that was attached to Zack Fair to that creature — nothing records what was attached once he's gone."
   }
  }
 }

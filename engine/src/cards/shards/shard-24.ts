@@ -219,6 +219,7 @@ import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
+import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
@@ -313,6 +314,7 @@ import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
+import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
@@ -577,6 +579,7 @@ const shard: CardShard = {
     _poolProwlingFelidar,
     _poolPullFromTheGrave,
     _poolPurifyTheGrave,
+    _poolPyrogoyf,
     _poolQuarryBeetle,
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,
     _poolTwoHandedAxe,
+    _poolUnderdarkRift,
     _poolUnnaturalSpeed,
     _poolUproot,
     _poolUrGolemsEye,

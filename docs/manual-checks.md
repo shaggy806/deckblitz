@@ -4558,3 +4558,33 @@ stack count once per token)
   or the Ox alone is enough and the Bears isn't. The Mechanic's own power stays 2 everywhere else (its tile,
   combat).
 - **Known limits:** Only a creature's own "crews as though" counts; nothing grants it to others.
+
+### Forgotten Ancient, Nesting Grounds
+
+*New player decision* — moving counters (rule 122.5): which kind, how many, and onto what
+
+- **Setup:** Bob's end step. Your battlefield: Forgotten Ancient with three +1/+1 counters, Grizzly Bears,
+  Llanowar Elves, Hill Giant with a +1/+1 counter and a flying counter, Nesting Grounds and two Forests.
+  Bob: three lands, no creatures.
+- **Do:** Pass to your turn. At your upkeep, accept Forgotten Ancient's move: pick Grizzly Bears on the board, move 2 counters, then
+  pick Llanowar Elves and move 1. In your main phase, activate Nesting Grounds targeting Hill Giant, then
+  Grizzly Bears, and choose the flying counter.
+- **Check:** The upkeep prompt asks for a creature on the board ("none to stop"); a creature already given
+  counters isn't offered again, and the count offered never exceeds what Forgotten Ancient has left. After
+  the move it's a 0/3 with none, the Bears 4/4, the Elves 2/2. Nesting Grounds asks which kind (buttons
+  "Move a +1/+1 counter" / "Move a flying counter") in the bottom-right banner; the Bears gain flying and
+  the Giant loses it.
+- **Known limits:** None known.
+
+### Mirage Mirror, Silent Hallcreeper
+
+*A careful rules call* — becoming a copy for a while (rules 707.2, 613.2)
+
+- **Setup:** Your precombat main. Your battlefield: Mirage Mirror, Silent Hallcreeper, Craw Wurm and four
+  Islands. Bob: Hill Giant and three lands.
+- **Do:** Activate Mirage Mirror targeting Bob's Hill Giant. Attack with Silent Hallcreeper; when it deals
+  damage choose "Draw a card". Next turn attack again and choose the copy mode, targeting Craw Wurm.
+- **Check:** Mirage Mirror's tile shows Hill Giant (a 3/3 creature you control) for the turn and is Mirage
+  Mirror again after cleanup. The second Hallcreeper trigger offers only the two modes not chosen yet; the
+  copy turns it into a Craw Wurm for good (it stays one next turn).
+- **Known limits:** None known.

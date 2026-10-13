@@ -8397,9 +8397,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "create-token":
       // A per-player count ("its controller creates a token for each
-      // creature destroyed this way") is read for each player the scope
-      // names, each creating their own.
-      if (spec.who !== undefined && spec.who !== "target-controller" && readsEachPlayer(spec.count)) {
+      // creature destroyed this way") — or per-player counters on it
+      // (Oversimplify) — is read for each player the scope names, each
+      // creating their own.
+      if (
+        spec.who !== undefined &&
+        spec.who !== "target-controller" &&
+        (readsEachPlayer(spec.count) || (spec.thenCounters !== undefined && readsEachPlayer(spec.thenCounters.amount)))
+      ) {
         for (const player of ctx.playersInScope(spec.who)) {
           ctx
             .aboutPlayer(player)

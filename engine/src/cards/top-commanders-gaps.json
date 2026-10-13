@@ -258,7 +258,9 @@
   "mechanic:speed",
   "keyword:saddle",
   "static:crews-as-though-power",
-  "static:crews-using-toughness"
+  "static:crews-using-toughness",
+  "effect:become-copy",
+  "effect:move-counter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

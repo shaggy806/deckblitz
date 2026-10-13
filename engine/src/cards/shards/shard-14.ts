@@ -103,6 +103,7 @@ import _poolDrossforgeBridge from "../pool/drossforge-bridge.js";
 import _poolDrownedCatacomb from "../pool/drowned-catacomb.js";
 import _poolDrudgeSkeletons from "../pool/drudge-skeletons.js";
 import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
+import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
@@ -135,6 +136,7 @@ import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
+import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
@@ -229,6 +231,7 @@ import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
 import _poolMutantTown from "../pool/mutant-town.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
+import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
@@ -470,6 +473,7 @@ const shard: CardShard = {
     _poolDrownedCatacomb,
     _poolDrudgeSkeletons,
     _poolDuergarCaveGuard,
+    _poolDukeUlderRavengard,
     _poolDuskImp,
     _poolEbonDrake,
     _poolEdgarMarkov,
@@ -502,6 +506,7 @@ const shard: CardShard = {
     _poolFortifiedRampart,
     _poolFrenziedArynx,
     _poolFreshVolunteers,
+    _poolFrogtosserBanneret,
     _poolFuelForTheCause,
     _poolFuturistForge,
     _poolGaladrielLightOfValinor,
@@ -596,6 +601,7 @@ const shard: CardShard = {
     _poolMoongloveWinnower,
     _poolMutantTown,
     _poolMyrelShieldOfArgive,
+    _poolNanogeneConversion,
     _poolNecrogenScudder,
     _poolNivMizzetParun,
     _poolNoMercy,

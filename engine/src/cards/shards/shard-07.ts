@@ -50,6 +50,7 @@ import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
+import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
@@ -210,6 +211,7 @@ import _poolNaturalState from "../pool/natural-state.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
+import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
@@ -448,6 +450,7 @@ const shard: CardShard = {
     _poolColossapede,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
+    _poolCourtOfVantress,
     _poolCrazedSkirge,
     _poolCreosoteHeath,
     _poolCrushOfWurms,
@@ -608,6 +611,7 @@ const shard: CardShard = {
     _poolNecroticHex,
     _poolNestOfScarabs,
     _poolNightpackAmbusher,
+    _poolNikoLightOfHope,
     _poolOldOneEye,
     _poolOnTheTrail,
     _poolOnakkeOgre,

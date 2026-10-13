@@ -53,9 +53,14 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
-- **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill). `npm run cards:needs
-  -w engine -- --next 60` lists the next untriaged cards by rank: rank 6887 on (batch 49 took
-  6820–6886). The nine other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go
+- **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill; the user moved back to
+  it from the set walk on 2026-10-13). `npm run cards:needs -w engine -- --next 60` lists the next
+  untriaged cards by rank: rank 7040 on (batch 69 took 6377–7037, ranks that moved since the
+  snapshot included). Batches run as the set walk's did: 4-5 agents, ~30 cards each, with the
+  leading features built alongside in worktrees (batch 69: become-copy and move-counter). Leading
+  blockers now (`cards:needs -- --rank`): devotion (21 cards, most of its Gods also needing their
+  "isn't a creature unless" type change, `static:self-type-changes`), attach-extensions,
+  phasing, rad counters, variable target counts. The nine other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go
   as their originals land.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
   2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
@@ -63,7 +68,7 @@ section keeps only what to do next.
   Hullbreacher, Iona, Leovold, Limited Resources, Nadu, Sundering Titan, Sylvan Primordial, Time
   Vault, Trade Secrets and Yawgmoth's Bargain each wait on a feature of their own
   (`docs/card-blockers.md`).
-- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11): each
+- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11; paused 2026-10-13 at the user's call): each
   set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
   new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
   the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super

@@ -30,6 +30,7 @@ import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
+import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
@@ -95,6 +96,7 @@ import _poolDimirAqueduct from "../pool/dimir-aqueduct.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
 import _poolDisperse from "../pool/disperse.js";
+import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
 import _poolDraconicLore from "../pool/draconic-lore.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
@@ -113,6 +115,7 @@ import _poolEnroot from "../pool/enroot.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
+import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
@@ -208,6 +211,7 @@ import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolManyPartings from "../pool/many-partings.js";
+import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
 import _poolMarkovsServant from "../pool/markovs-servant.js";
 import _poolMarshBoa from "../pool/marsh-boa.js";
@@ -260,6 +264,7 @@ import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
+import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
 import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
@@ -403,6 +408,7 @@ const shard: CardShard = {
     _poolAzulaAlwaysLies,
     _poolBalothWoodcrasher,
     _poolBasimIbnIshaq,
+    _poolBazaarTrader,
     _poolBeetleformMage,
     _poolBenevolentRiverSpirit,
     _poolBilboBirthdayCelebrant,
@@ -468,6 +474,7 @@ const shard: CardShard = {
     _poolDiregrafColossus,
     _poolDirtwaterWraith,
     _poolDisperse,
+    _poolDonatelloMutantMechanic,
     _poolDraconicLore,
     _poolDreadhordeInvasion,
     _poolDreamBeavers,
@@ -486,6 +493,7 @@ const shard: CardShard = {
     _poolEreborFlamesmith,
     _poolEriettesLullaby,
     _poolEssenceAnchor,
+    _poolEtalisFavor,
     _poolEverythingPizza,
     _poolExecutionersHood,
     _poolFallowEarth,
@@ -581,6 +589,7 @@ const shard: CardShard = {
     _poolLumengridGargoyle,
     _poolMadameMasque,
     _poolManyPartings,
+    _poolMarchingDuodrone,
     _poolMarkovPatrician,
     _poolMarkovsServant,
     _poolMarshBoa,
@@ -633,6 +642,7 @@ const shard: CardShard = {
     _poolRazorfieldThresher,
     _poolReadyToRumble,
     _poolRejuvenate,
+    _poolReluctantRoleModel,
     _poolRescuePepperPotts,
     _poolResentfulRevelation,
     _poolReturnOfTheMoleMan,

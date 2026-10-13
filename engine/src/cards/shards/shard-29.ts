@@ -346,12 +346,14 @@ import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoungWolf from "../pool/young-wolf.js";
 import _poolYuyanArchers from "../pool/yuyan-archers.js";
+import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
 import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
+import _tokensIcyManalithToken from "../tokens/icy-manalith-token.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
 import _tokensMerfolkTokenDeeprootWaters from "../tokens/merfolk-token-deeproot-waters.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-horror-token-phyrexian-rebirth.js";
@@ -705,6 +707,7 @@ const shard: CardShard = {
     _poolYellowScarvesTroops,
     _poolYoungWolf,
     _poolYuyanArchers,
+    _poolZoanthrope,
     _poolZookeeperMechan,
   ],
   tokens: [
@@ -713,6 +716,7 @@ const shard: CardShard = {
     _tokensFaerieDragonToken,
     _tokensHornetToken,
     _tokensHumanKnightTokenThePrydwen,
+    _tokensIcyManalithToken,
     _tokensImpTokenJudith,
     _tokensMerfolkTokenDeeprootWaters,
     _tokensPhyrexianHorrorTokenPhyrexianRebirth,

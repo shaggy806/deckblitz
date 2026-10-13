@@ -148,6 +148,7 @@ import _poolIndustrialAdvancement from "../pool/industrial-advancement.js";
 import _poolInfiltrationLens from "../pool/infiltration-lens.js";
 import _poolIngaAndEsika from "../pool/inga-and-esika.js";
 import _poolIngeniousInfiltrator from "../pool/ingenious-infiltrator.js";
+import _poolInquisitorialRosette from "../pool/inquisitorial-rosette.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
@@ -282,6 +283,7 @@ import _poolShivanZombie from "../pool/shivan-zombie.js";
 import _poolShortSword from "../pool/short-sword.js";
 import _poolShroofusSproutsire from "../pool/shroofus-sproutsire.js";
 import _poolSickleslicer from "../pool/sickleslicer.js";
+import _poolSigardasSummons from "../pool/sigardas-summons.js";
 import _poolSigiledStarfish from "../pool/sigiled-starfish.js";
 import _poolSilentSentinel from "../pool/silent-sentinel.js";
 import _poolSilverclawGriffin from "../pool/silverclaw-griffin.js";
@@ -307,6 +309,7 @@ import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
 import _poolStarWhale from "../pool/star-whale.js";
+import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
@@ -331,6 +334,7 @@ import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTitanicGrowth from "../pool/titanic-growth.js";
+import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
@@ -524,6 +528,7 @@ const shard: CardShard = {
     _poolInfiltrationLens,
     _poolIngaAndEsika,
     _poolIngeniousInfiltrator,
+    _poolInquisitorialRosette,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,
@@ -658,6 +663,7 @@ const shard: CardShard = {
     _poolShortSword,
     _poolShroofusSproutsire,
     _poolSickleslicer,
+    _poolSigardasSummons,
     _poolSigiledStarfish,
     _poolSilentSentinel,
     _poolSilverclawGriffin,
@@ -683,6 +689,7 @@ const shard: CardShard = {
     _poolSplitUp,
     _poolSporeFrog,
     _poolStarWhale,
+    _poolSteelburrChampion,
     _poolStickyFingers,
     _poolStonybrookBanneret,
     _poolStrixhavenStadium,
@@ -707,6 +714,7 @@ const shard: CardShard = {
     _poolThundermawHellkite,
     _poolTickedOff,
     _poolTitanicGrowth,
+    _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,
     _poolTravelingPhilosopher,

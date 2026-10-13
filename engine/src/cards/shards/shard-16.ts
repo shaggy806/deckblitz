@@ -208,6 +208,7 @@ import _poolMillstone from "../pool/millstone.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
+import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
 import _poolNaturalize from "../pool/naturalize.js";
@@ -617,6 +618,7 @@ const shard: CardShard = {
     _poolMirrorpool,
     _poolMoxAmber,
     _poolMundasVanguard,
+    _poolMyrSire,
     _poolMyrTurbine,
     _poolNajeelaTheBladeBlossom,
     _poolNaturalize,

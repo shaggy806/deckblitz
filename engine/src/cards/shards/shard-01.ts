@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbigaleEloquentFirstYear from "../pool/abigale-eloquent-first-year.js";
+import _poolAbundantHarvest from "../pool/abundant-harvest.js";
 import _poolAdarkarSentinel from "../pool/adarkar-sentinel.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
@@ -56,6 +57,7 @@ import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
+import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
@@ -82,6 +84,7 @@ import _poolElectrostaticField from "../pool/electrostatic-field.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
+import _poolEssenceChanneler from "../pool/essence-channeler.js";
 import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
@@ -196,6 +199,7 @@ import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
+import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
@@ -363,6 +367,7 @@ import _tokensVibraniumToken from "../tokens/vibranium-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbigaleEloquentFirstYear,
+    _poolAbundantHarvest,
     _poolAdarkarSentinel,
     _poolAetherfluxConduit,
     _poolAinokTracker,
@@ -415,6 +420,7 @@ const shard: CardShard = {
     _poolCodexShredder,
     _poolComeBackWrong,
     _poolConformerShuriken,
+    _poolControlMagic,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
     _poolCryptothrall,
@@ -441,6 +447,7 @@ const shard: CardShard = {
     _poolElugeTheShorelessSea,
     _poolEmbodimentOfSpring,
     _poolEnvironmentalScientist,
+    _poolEssenceChanneler,
     _poolEtheriumAbomination,
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
@@ -555,6 +562,7 @@ const shard: CardShard = {
     _poolMysticOfTheHiddenWay,
     _poolNarnamRenegade,
     _poolNeglectedManor,
+    _poolNestingGrounds,
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,

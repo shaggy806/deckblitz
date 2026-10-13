@@ -45,6 +45,8 @@ import _poolBoggartBog from "../pool/boggart-bog.js";
 import _poolBondedFetch from "../pool/bonded-fetch.js";
 import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
+import _poolBroodguardElite from "../pool/broodguard-elite.js";
+import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
@@ -141,6 +143,7 @@ import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
+import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
 import _poolHammersOfMoradin from "../pool/hammers-of-moradin.js";
 import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
@@ -421,6 +424,8 @@ const shard: CardShard = {
     _poolBondedFetch,
     _poolBondedHerdbeast,
     _poolBorosCharm,
+    _poolBroodguardElite,
+    _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
     _poolCascadeBluffs,
@@ -517,6 +522,7 @@ const shard: CardShard = {
     _poolGrimReapersSprint,
     _poolGroundchuckDirtbag,
     _poolGroundskeeper,
+    _poolGutTrueSoulZealot,
     _poolHammersOfMoradin,
     _poolHangedExecutioner,
     _poolHashepOasis,

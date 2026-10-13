@@ -14,6 +14,7 @@ import _poolArchwingDragon from "../pool/archwing-dragon.js";
 import _poolArlinnsWolf from "../pool/arlinns-wolf.js";
 import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
+import _poolArmoryAutomaton from "../pool/armory-automaton.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
@@ -286,6 +287,7 @@ import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
 import _poolTerramorph from "../pool/terramorph.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
+import _poolTerrorTide from "../pool/terror-tide.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolThalakosSentry from "../pool/thalakos-sentry.js";
 import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
@@ -352,6 +354,7 @@ const shard: CardShard = {
     _poolArlinnsWolf,
     _poolArmorcraftJudge,
     _poolArmoredWhirlTurtle,
+    _poolArmoryAutomaton,
     _poolAronBenaliasRuin,
     _poolArrogantVampire,
     _poolAtTheDoor,
@@ -624,6 +627,7 @@ const shard: CardShard = {
     _poolTendrilsOfDespair,
     _poolTerramorph,
     _poolTerrorOfTheFairgrounds,
+    _poolTerrorTide,
     _poolTezzeretCruelCaptain,
     _poolThalakosSentry,
     _poolTheDawningArchaic,

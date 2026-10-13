@@ -32,6 +32,7 @@ import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
+import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
@@ -258,6 +259,7 @@ import _poolShatteredLandscape from "../pool/shattered-landscape.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
+import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
@@ -387,6 +389,7 @@ const shard: CardShard = {
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
     _poolBatteringKrasis,
+    _poolBedlam,
     _poolBefuddle,
     _poolBlessedWine,
     _poolBogSmugglers,
@@ -613,6 +616,7 @@ const shard: CardShard = {
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
     _poolShireiShizosCaretaker,
+    _poolShuriWakandanInventor,
     _poolSilverErne,
     _poolSilverbeakGriffin,
     _poolSilverstrike,

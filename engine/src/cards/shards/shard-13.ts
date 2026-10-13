@@ -18,6 +18,7 @@ import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
 import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
+import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
 import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
@@ -327,6 +328,7 @@ import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
+import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
@@ -397,6 +399,7 @@ const shard: CardShard = {
     _poolAncientGreenwarden,
     _poolAngelOfInvention,
     _poolAngelicSkirmisher,
+    _poolAquitectsWill,
     _poolArcaneSignet,
     _poolArchghoulOfThraben,
     _poolArmaggonFutureShark,
@@ -706,6 +709,7 @@ const shard: CardShard = {
     _poolTevalsJudgment,
     _poolTheDrossPits,
     _poolTheJollyBalloonMan,
+    _poolThespiansStage,
     _poolThornwindFaeries,
     _poolTitanothRex,
     _poolTomeOfLegends,

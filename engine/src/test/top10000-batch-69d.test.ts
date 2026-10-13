@@ -163,6 +163,36 @@ describe("Irma, Part-Time Mutant", () => {
   });
 });
 
+describe("Kimahri, Valiant Guardian", () => {
+  it("puts a counter on itself, taps the opponent's creature and may become a copy with vigilance and this ability", () => {
+    const { game, a } = table();
+    const kimahri = spawn(game, "Kimahri, Valiant Guardian");
+    const dreadmaw = spawn(game, "Colossal Dreadmaw", B);
+    pickTargets(a, dreadmaw);
+    pickModes(a, 0);
+    toStep(game, "begin-combat");
+    settle(game);
+    expect(game.state.objects[dreadmaw].tapped).toBe(true);
+    expect(copyOf(game, kimahri)).toBe("Colossal Dreadmaw");
+    expect(nameOf(game.state.objects[kimahri])).toBe("Kimahri, Valiant Guardian");
+    expect(keywords(game, kimahri).has("vigilance")).toBe(true);
+    expect(keywords(game, kimahri).has("trample")).toBe(true);
+    // The counter went on before the copy and stays: a 6/6 with one.
+    expect(pt(game, kimahri)).toEqual({ power: 7, toughness: 7 });
+    // "This ability" came with it: next turn it fires again.
+    const bears = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, bears);
+    pickModes(a);
+    nextTurn(game);
+    nextTurn(game);
+    toStep(game, "begin-combat");
+    settle(game);
+    expect(game.state.objects[bears].tapped).toBe(true);
+    expect(counters(game, kimahri)).toBe(2);
+    expect(copyOf(game, kimahri)).toBe("Colossal Dreadmaw");
+  });
+});
+
 describe("Sunfrill Imitator", () => {
   it("attacking, may become a copy of another Dinosaur named Sunfrill Imitator, keeping this ability", () => {
     const { game, a } = table();

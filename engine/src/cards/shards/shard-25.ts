@@ -227,6 +227,7 @@ import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
+import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
 import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
@@ -263,6 +264,7 @@ import _poolRoyalAssassin from "../pool/royal-assassin.js";
 import _poolRoyalWarden from "../pool/royal-warden.js";
 import _poolRuinousIntrusion from "../pool/ruinous-intrusion.js";
 import _poolRumblingBaloth from "../pool/rumbling-baloth.js";
+import _poolSalvationColossus from "../pool/salvation-colossus.js";
 import _poolSamiteHealer from "../pool/samite-healer.js";
 import _poolSandScout from "../pool/sand-scout.js";
 import _poolSandsower from "../pool/sandsower.js";
@@ -595,6 +597,7 @@ const shard: CardShard = {
     _poolPlunder,
     _poolPointTheWay,
     _poolPorcelainLegionnaire,
+    _poolPrimevalProtector,
     _poolPrimocEscapee,
     _poolPrismariCampus,
     _poolProdigalPyromancer,
@@ -631,6 +634,7 @@ const shard: CardShard = {
     _poolRoyalWarden,
     _poolRuinousIntrusion,
     _poolRumblingBaloth,
+    _poolSalvationColossus,
     _poolSamiteHealer,
     _poolSandScout,
     _poolSandsower,

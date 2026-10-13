@@ -197,6 +197,7 @@ import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
+import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
 import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
@@ -228,6 +229,7 @@ import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
+import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPestFriend from "../pool/pest-friend.js";
@@ -262,6 +264,7 @@ import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
 import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
+import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
@@ -272,6 +275,7 @@ import _poolShivanHarvest from "../pool/shivan-harvest.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
+import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
@@ -558,6 +562,7 @@ const shard: CardShard = {
     _poolLagomosHandOfHatred,
     _poolLilysplashMentor,
     _poolLizardWarrior,
+    _poolLlanowarReborn,
     _poolLockjawSlobberingTeleporter,
     _poolLoftyDreams,
     _poolLongshotRebelBowman,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolOrochiSustainer,
     _poolOverkill,
     _poolPacifism,
+    _poolParadoxicalOutcome,
     _poolPatriarsSeal,
     _poolPeregrineGriffin,
     _poolPestFriend,
@@ -623,6 +629,7 @@ const shard: CardShard = {
     _poolScaledBehemoth,
     _poolScavengingOoze,
     _poolScornfulAetherLich,
+    _poolScrapMastery,
     _poolSeveredLegion,
     _poolShardlessAgent,
     _poolShimmeringBarrier,
@@ -633,6 +640,7 @@ const shard: CardShard = {
     _poolShurisFabricator,
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
+    _poolSilentHallcreeper,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
     _poolSlaughterSpecialist,

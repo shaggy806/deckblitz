@@ -101,6 +101,7 @@ import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
+import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
@@ -223,6 +224,7 @@ import _poolOpenTheGates from "../pool/open-the-gates.js";
 import _poolOriginOfTheAvengers from "../pool/origin-of-the-avengers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPaleBears from "../pool/pale-bears.js";
+import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
 import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
@@ -303,6 +305,7 @@ import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
+import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
 import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
@@ -316,6 +319,7 @@ import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
+import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolToweringBaloth from "../pool/towering-baloth.js";
@@ -463,6 +467,7 @@ const shard: CardShard = {
     _poolDuneBeetle,
     _poolDuskmantleHouseOfShadow,
     _poolEarthblighter,
+    _poolEbondeathDracolich,
     _poolEidolonOfBlossoms,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
@@ -585,6 +590,7 @@ const shard: CardShard = {
     _poolOriginOfTheAvengers,
     _poolOrzhovaTheChurchOfDeals,
     _poolPaleBears,
+    _poolPathOfThePyromancer,
     _poolPavelMaliki,
     _poolPearlDragon,
     _poolPeculiarLighthouse,
@@ -665,6 +671,7 @@ const shard: CardShard = {
     _poolSulfurFalls,
     _poolSunmanePegasus,
     _poolSurtlandFrostpyre,
+    _poolSvellaIceShaper,
     _poolSwordOfTheSqueak,
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
@@ -678,6 +685,7 @@ const shard: CardShard = {
     _poolThroatSlitter,
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
+    _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
     _poolToweringBaloth,

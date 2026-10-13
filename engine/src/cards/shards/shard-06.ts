@@ -32,6 +32,7 @@ import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
+import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
@@ -160,6 +161,7 @@ import _poolInitiatesCompanion from "../pool/initiates-companion.js";
 import _poolInklingSummoning from "../pool/inkling-summoning.js";
 import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
 import _poolIntoTheRoil from "../pool/into-the-roil.js";
+import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
@@ -215,6 +217,7 @@ import _poolPharikasMender from "../pool/pharikas-mender.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
 import _poolPhyrexianDenouncer from "../pool/phyrexian-denouncer.js";
 import _poolPlagueBeetle from "../pool/plague-beetle.js";
+import _poolPlaxcasterFrogling from "../pool/plaxcaster-frogling.js";
 import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
@@ -314,6 +317,7 @@ import _poolThreaten from "../pool/threaten.js";
 import _poolThunderSpirit from "../pool/thunder-spirit.js";
 import _poolThunderingRaiju from "../pool/thundering-raiju.js";
 import _poolTidechannelPathway from "../pool/tidechannel-pathway.js";
+import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
@@ -373,6 +377,7 @@ import _tokensLanderToken from "../tokens/lander-token.js";
 import _tokensMeteoriteToken from "../tokens/meteorite-token.js";
 import _tokensNinjaToken from "../tokens/ninja-token.js";
 import _tokensPowerstoneToken from "../tokens/powerstone-token.js";
+import _tokensShardToken from "../tokens/shard-token.js";
 import _tokensTheVoid from "../tokens/the-void.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 
@@ -407,6 +412,7 @@ const shard: CardShard = {
     _poolBecomeTheAvalanche,
     _poolBenalishKnight,
     _poolBifurMelodicRider,
+    _poolBigApple3AM,
     _poolBlessedOrator,
     _poolBlightRot,
     _poolBlindCreeper,
@@ -535,6 +541,7 @@ const shard: CardShard = {
     _poolInklingSummoning,
     _poolInsatiableAvarice,
     _poolIntoTheRoil,
+    _poolIronApprentice,
     _poolJarvisEarthsMightiestButler,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
@@ -590,6 +597,7 @@ const shard: CardShard = {
     _poolPhyrexianArena,
     _poolPhyrexianDenouncer,
     _poolPlagueBeetle,
+    _poolPlaxcasterFrogling,
     _poolPollutedBonds,
     _poolPollywogProdigy,
     _poolPracticedOffense,
@@ -689,6 +697,7 @@ const shard: CardShard = {
     _poolThunderSpirit,
     _poolThunderingRaiju,
     _poolTidechannelPathway,
+    _poolTidusYunasGuardian,
     _poolTimeSieve,
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
@@ -750,6 +759,7 @@ const shard: CardShard = {
     _tokensMeteoriteToken,
     _tokensNinjaToken,
     _tokensPowerstoneToken,
+    _tokensShardToken,
     _tokensTheVoid,
     _tokensWizardTokenGuff,
   ],

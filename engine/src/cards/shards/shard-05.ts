@@ -198,6 +198,7 @@ import _poolLlanowarCavalry from "../pool/llanowar-cavalry.js";
 import _poolLlanowarScout from "../pool/llanowar-scout.js";
 import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
+import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
@@ -322,6 +323,7 @@ import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
 import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
+import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
 import _poolTeferisPuzzleBox from "../pool/teferis-puzzle-box.js";
 import _poolTempleBell from "../pool/temple-bell.js";
@@ -330,6 +332,7 @@ import _poolTempleOfMalady from "../pool/temple-of-malady.js";
 import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
+import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThinkTank from "../pool/think-tank.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
@@ -581,6 +584,7 @@ const shard: CardShard = {
     _poolLlanowarScout,
     _poolLlanowarVisionary,
     _poolLocthwainScorn,
+    _poolLokiLordOfMisrule,
     _poolLordOfAtlantis,
     _poolLoyalGuardian,
     _poolLumraBellowOfTheWoods,
@@ -705,6 +709,7 @@ const shard: CardShard = {
     _poolSwordDancer,
     _poolSyggRiverCutthroat,
     _poolSylvanAnthem,
+    _poolTaboraxHopesDemise,
     _poolTarmogoyf,
     _poolTeferisPuzzleBox,
     _poolTempleBell,
@@ -713,6 +718,7 @@ const shard: CardShard = {
     _poolTendTheSprigs,
     _poolTheGoldSaucer,
     _poolTheLadyOfTheMountain,
+    _poolTheOzolith,
     _poolTheWaterCrystal,
     _poolThinkTank,
     _poolThranduilsCompany,

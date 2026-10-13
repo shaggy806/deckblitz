@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-409 already implemented / 91 missing
+412 already implemented / 88 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -68,7 +68,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   62  Gishath, Sun's Avatar                          21340 decks  {5}{R}{G}{W}     Legendary Creature — Dinosaur Avatar
 [x]   63  Zhulodok, Void Gorger                          21261 decks  {5}{C}           Legendary Creature — Eldrazi
 [x]   64  Tom Bombadil                                   21241 decks  {W}{U}{B}{R}{G}  Legendary Creature — God Bard
-[ ]   65  Tidus, Yuna's Guardian                         21194 decks  {G}{W}{U}        Legendary Creature — Human Warrior
+[x]   65  Tidus, Yuna's Guardian                         21194 decks  {G}{W}{U}        Legendary Creature — Human Warrior
 [x]   66  Atla Palani, Nest Tender                       21123 decks  {1}{R}{G}{W}     Legendary Creature — Human Shaman
 [x]   67  Korvold, Fae-Cursed King                       21034 decks  {2}{B}{R}{G}     Legendary Creature — Dragon Noble
 [x]   68  Shorikai, Genesis Engine                       20987 decks  {2}{W}{U}        Legendary Artifact — Vehicle
@@ -245,7 +245,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  239  Krark, the Thumbless                           10505 decks  {1}{R}           Legendary Creature — Goblin Wizard
 [x]  240  Rakdos, Lord of Riots                          10471 decks  {B}{B}{R}{R}     Legendary Creature — Demon
 [x]  241  Infinite Guideline Station                     10457 decks  {W}{U}{B}{R}{G}  Legendary Artifact — Spacecraft
-[ ]  242  Niko, Light of Hope                            10448 decks  {2}{W}{U}        Legendary Creature — Human Wizard
+[x]  242  Niko, Light of Hope                            10448 decks  {2}{W}{U}        Legendary Creature — Human Wizard
 [x]  243  Ketramose, the New Dawn                        10444 decks  {1}{W}{B}        Legendary Creature — God
 [x]  244  Prismari, the Inspiration                      10435 decks  {5}{U}{R}        Legendary Creature — Elder Dragon
 [x]  245  Ojer Axonil, Deepest Might                     10413 decks  {2}{R}{R}        Legendary Creature — God // Land
@@ -448,7 +448,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  442  Zethi, Arcane Blademaster                       6777 decks  {1}{W}{U}        Legendary Creature — Human Soldier
 [x]  443  Emry, Lurker of the Loch                        6759 decks  {2}{U}           Legendary Creature — Merfolk Wizard
 [x]  444  Kambal, Profiteering Mayor                      6759 decks  {1}{W}{B}        Legendary Creature — Human Advisor
-[ ]  445  Brudiclad, Telchor Engineer                     6751 decks  {4}{U}{R}        Legendary Artifact Creature — Phyrexian Artificer
+[x]  445  Brudiclad, Telchor Engineer                     6751 decks  {4}{U}{R}        Legendary Artifact Creature — Phyrexian Artificer
 [ ]  446  Magar of the Magic Strings                      6744 decks  {1}{B}{R}        Legendary Creature — Minotaur Performer
 [x]  447  Ravos, Soultender                               6739 decks  {3}{W}{B}        Legendary Creature — Human Cleric
 [x]  448  Thorin, King of Durin's Folk                    6732 decks  {3}{R}{W}        Legendary Creature — Dwarf Noble

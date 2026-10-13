@@ -300,6 +300,7 @@ import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
+import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
@@ -692,6 +693,7 @@ const shard: CardShard = {
     _poolSlithPredator,
     _poolSmitingHelix,
     _poolSnappingDrake,
+    _poolSoldierMilitaryProgram,
     _poolSoulherder,
     _poolSowerOfChaos,
     _poolSpectacleSummit,

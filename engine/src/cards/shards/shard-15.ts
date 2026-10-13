@@ -36,6 +36,7 @@ import _poolBoneMiser from "../pool/bone-miser.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
+import _poolByForce from "../pool/by-force.js";
 import _poolCallForUnity from "../pool/call-for-unity.js";
 import _poolCanoptekSpyder from "../pool/canoptek-spyder.js";
 import _poolCanopyBaloth from "../pool/canopy-baloth.js";
@@ -155,6 +156,7 @@ import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHonor from "../pool/honor.js";
+import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
@@ -397,6 +399,7 @@ const shard: CardShard = {
     _poolBorosReckoner,
     _poolBrainWeevil,
     _poolBrenardGingerSculptor,
+    _poolByForce,
     _poolCallForUnity,
     _poolCanoptekSpyder,
     _poolCanopyBaloth,
@@ -516,6 +519,7 @@ const shard: CardShard = {
     _poolHillGiant,
     _poolHillGigas,
     _poolHonor,
+    _poolHostOfTheHereafter,
     _poolHystrodon,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,

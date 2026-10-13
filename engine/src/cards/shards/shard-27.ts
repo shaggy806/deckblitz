@@ -189,6 +189,7 @@ import _poolMagmaw from "../pool/magmaw.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
+import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
@@ -268,6 +269,7 @@ import _poolShivanOasis from "../pool/shivan-oasis.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
+import _poolSkullportMerchant from "../pool/skullport-merchant.js";
 import _poolSkySkiff from "../pool/sky-skiff.js";
 import _poolSkySpirit from "../pool/sky-spirit.js";
 import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
@@ -573,6 +575,7 @@ const shard: CardShard = {
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,
+    _poolMarchesasDecree,
     _poolMarduHordechief,
     _poolMarduWarshrieker,
     _poolMasterDecoy,
@@ -652,6 +655,7 @@ const shard: CardShard = {
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
+    _poolSkullportMerchant,
     _poolSkySkiff,
     _poolSkySpirit,
     _poolSkybridgeTowers,

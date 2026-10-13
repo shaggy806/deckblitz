@@ -740,6 +740,17 @@ in `git log`.
   counting as a card type for delirium (`kindred.test.ts`); with it,
   `damage-all`'s `controlledByTarget` (Ashling's Command). 13 of its 19 cards;
   the other 6 each needed another feature, now keyed.
+- **Becoming a copy** (`effect:become-copy`, 2026-10-13, B69) — an existing
+  permanent, or each one matching a filter, becomes a copy of a permanent, a
+  spell or a card (rules 707.2, 707.9, 613.2) for good or until end of turn,
+  the next end step or your next turn; `CopyExceptions.thisAbility` for
+  "except it has this ability", temporary copies kept in
+  `GameObject.temporaryCopies` (`become-copy.test.ts`). 17 of its 21 cards and
+  Kimahri; the rest each wait on another feature, now keyed.
+- **Moving counters** (`effect:move-counter`, 2026-10-13, B69) — `move-counters`
+  (rule 122.5; moving counts as putting, per the rulings) and `put-counters-of`
+  for a departed permanent's counters (122.8), graft spelled out
+  (`move-counters.test.ts`). 16 of its 21 cards.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

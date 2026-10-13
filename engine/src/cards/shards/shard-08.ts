@@ -210,6 +210,7 @@ import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.j
 import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
+import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
@@ -231,6 +232,7 @@ import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
+import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
@@ -256,6 +258,7 @@ import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
+import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
 import _poolRefocus from "../pool/refocus.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
@@ -601,6 +604,7 @@ const shard: CardShard = {
     _poolMemnite,
     _poolMercurialGeists,
     _poolMesaFalcon,
+    _poolMeteorCrater,
     _poolMidnightReaper,
     _poolMilitantMonk,
     _poolMindStone,
@@ -622,6 +626,7 @@ const shard: CardShard = {
     _poolNightveilPredator,
     _poolNorthPolePatrol,
     _poolOakhameRanger,
+    _poolOathOfGideon,
     _poolObeliskOfEsper,
     _poolOpenTheArmory,
     _poolOphiomancer,
@@ -647,6 +652,7 @@ const shard: CardShard = {
     _poolRagingKavu,
     _poolRangingRaptors,
     _poolRaucousTheater,
+    _poolReapersScythe,
     _poolReaverAmbush,
     _poolRefocus,
     _poolRemoveSoul,

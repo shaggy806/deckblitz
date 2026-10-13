@@ -2698,6 +2698,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Forgotten Ancient, Nesting Grounds',
+    board({
+      you: {
+        bf: [
+          { name: 'Forgotten Ancient', counters: { '+1/+1': 3 } },
+          'Grizzly Bears',
+          'Llanowar Elves',
+          { name: 'Hill Giant', counters: { '+1/+1': 1, flying: 1 } },
+          'Nesting Grounds',
+          'Forest*2',
+        ],
+      },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+      turn: 0,
+      step: 'end',
+    }),
+    "from Bob's end step",
+  ),
+  preset(
+    'Mirage Mirror, Silent Hallcreeper',
+    board({
+      you: { bf: ['Mirage Mirror', 'Silent Hallcreeper', 'Craw Wurm', 'Island*4'] },
+      opp: { bf: ['Hill Giant', 'Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

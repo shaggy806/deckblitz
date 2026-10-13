@@ -60,6 +60,7 @@ import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
+import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
@@ -159,6 +160,7 @@ import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
+import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
@@ -217,8 +219,10 @@ import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
+import _poolNagaFleshcrafter from "../pool/naga-fleshcrafter.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
+import _poolNarsetOfTheAncientWay from "../pool/narset-of-the-ancient-way.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
 import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
@@ -309,6 +313,7 @@ import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
+import _poolSramsExpertise from "../pool/srams-expertise.js";
 import _poolStalkingPredator from "../pool/stalking-predator.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
@@ -448,6 +453,7 @@ const shard: CardShard = {
     _poolCloakedSiren,
     _poolCloudDjinn,
     _poolCloudSpirit,
+    _poolCloutOfTheDominus,
     _poolCoastalPeak,
     _poolColorstormStallion,
     _poolConsumingSinkhole,
@@ -547,6 +553,7 @@ const shard: CardShard = {
     _poolIntangibleVirtue,
     _poolInvisibleForceField,
     _poolIraxxaEmpressOfMars,
+    _poolIrohDragonOfTheWest,
     _poolIronManModernMarvel,
     _poolIronrootTreefolk,
     _poolIzzetChronarch,
@@ -605,8 +612,10 @@ const shard: CardShard = {
     _poolMuckRats,
     _poolMuddleTheMixture,
     _poolMuragandaRaceway,
+    _poolNagaFleshcrafter,
     _poolNaktamunLorespinner,
     _poolNanoformSentinel,
+    _poolNarsetOfTheAncientWay,
     _poolNaturalReclamation,
     _poolNecrogenCommunion,
     _poolNehebTheEternal,
@@ -697,6 +706,7 @@ const shard: CardShard = {
     _poolSpiderWomanStunningSavior,
     _poolSquirmingEmergence,
     _poolSramSeniorEdificer,
+    _poolSramsExpertise,
     _poolStalkingPredator,
     _poolStarnheimMemento,
     _poolStartFromScratch,

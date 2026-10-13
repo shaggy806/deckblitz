@@ -1,0 +1,950 @@
+{
+ "batch": "B69",
+ "status": "complete",
+ "ranks": "EDHREC ranks 6377–7037 (the next 89 untriaged, Lazav to the become-copy agent) and Stensian Sanguinist; with become-copy and move-counter built and every card each unblocked",
+ "authored": [
+  {
+   "name": "Abundant Harvest",
+   "files": [
+    "engine/src/cards/pool/abundant-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancestral Statue",
+   "files": [
+    "engine/src/cards/pool/ancestral-statue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aquitect's Will",
+   "files": [
+    "engine/src/cards/pool/aquitects-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armory Automaton",
+   "files": [
+    "engine/src/cards/pool/armory-automaton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bazaar Trader",
+   "files": [
+    "engine/src/cards/pool/bazaar-trader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bedlam",
+   "files": [
+    "engine/src/cards/pool/bedlam.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Big Apple, 3 a.m.",
+   "files": [
+    "engine/src/cards/pool/big-apple-3-a-m.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodguard Elite",
+   "files": [
+    "engine/src/cards/pool/broodguard-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brudiclad, Telchor Engineer",
+   "files": [
+    "engine/src/cards/pool/brudiclad-telchor-engineer.ts",
+    "engine/src/cards/tokens/phyrexian-myr-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Buried in the Garden",
+   "files": [
+    "engine/src/cards/pool/buried-in-the-garden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "By Force",
+   "files": [
+    "engine/src/cards/pool/by-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clout of the Dominus",
+   "files": [
+    "engine/src/cards/pool/clout-of-the-dominus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Control Magic",
+   "files": [
+    "engine/src/cards/pool/control-magic.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Costume Closet",
+   "files": [
+    "engine/src/cards/pool/costume-closet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Court of Vantress",
+   "files": [
+    "engine/src/cards/pool/court-of-vantress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Donatello, Mutant Mechanic",
+   "files": [
+    "engine/src/cards/pool/donatello-mutant-mechanic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duke Ulder Ravengard",
+   "files": [
+    "engine/src/cards/pool/duke-ulder-ravengard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ebondeath, Dracolich",
+   "files": [
+    "engine/src/cards/pool/ebondeath-dracolich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Channeler",
+   "files": [
+    "engine/src/cards/pool/essence-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etali's Favor",
+   "files": [
+    "engine/src/cards/pool/etalis-favor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forgotten Ancient",
+   "files": [
+    "engine/src/cards/pool/forgotten-ancient.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frogtosser Banneret",
+   "files": [
+    "engine/src/cards/pool/frogtosser-banneret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geralf, the Fleshwright",
+   "files": [
+    "engine/src/cards/pool/geralf-the-fleshwright.ts",
+    "engine/src/cards/tokens/zombie-rogue-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghost Town",
+   "files": [
+    "engine/src/cards/pool/ghost-town.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goldberry, River-Daughter",
+   "files": [
+    "engine/src/cards/pool/goldberry-river-daughter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graaz, Unstoppable Juggernaut",
+   "files": [
+    "engine/src/cards/pool/graaz-unstoppable-juggernaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gut, True Soul Zealot",
+   "files": [
+    "engine/src/cards/pool/gut-true-soul-zealot.ts",
+    "engine/src/cards/tokens/skeleton-token-gut-true-soul-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Host of the Hereafter",
+   "files": [
+    "engine/src/cards/pool/host-of-the-hereafter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inquisitorial Rosette",
+   "files": [
+    "engine/src/cards/pool/inquisitorial-rosette.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Irma, Part-Time Mutant",
+   "files": [
+    "engine/src/cards/pool/irma-part-time-mutant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iroh, Dragon of the West",
+   "files": [
+    "engine/src/cards/pool/iroh-dragon-of-the-west.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Apprentice",
+   "files": [
+    "engine/src/cards/pool/iron-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Justiciar's Portal",
+   "files": [
+    "engine/src/cards/pool/justiciars-portal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kari Zev's Expertise",
+   "files": [
+    "engine/src/cards/pool/kari-zevs-expertise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kimahri, Valiant Guardian",
+   "files": [
+    "engine/src/cards/pool/kimahri-valiant-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lazav, Dimir Mastermind",
+   "files": [
+    "engine/src/cards/pool/lazav-dimir-mastermind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Likeness Looter",
+   "files": [
+    "engine/src/cards/pool/likeness-looter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Llanowar Reborn",
+   "files": [
+    "engine/src/cards/pool/llanowar-reborn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loki, Lord of Misrule",
+   "files": [
+    "engine/src/cards/pool/loki-lord-of-misrule.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marchesa's Decree",
+   "files": [
+    "engine/src/cards/pool/marchesas-decree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marching Duodrone",
+   "files": [
+    "engine/src/cards/pool/marching-duodrone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meteor Crater",
+   "files": [
+    "engine/src/cards/pool/meteor-crater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirage Mirror",
+   "files": [
+    "engine/src/cards/pool/mirage-mirror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirrorform",
+   "files": [
+    "engine/src/cards/pool/mirrorform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myr Sire",
+   "files": [
+    "engine/src/cards/pool/myr-sire.ts",
+    "engine/src/cards/tokens/phyrexian-myr-token-myr-sire.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Naga Fleshcrafter",
+   "files": [
+    "engine/src/cards/pool/naga-fleshcrafter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nanogene Conversion",
+   "files": [
+    "engine/src/cards/pool/nanogene-conversion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Narset of the Ancient Way",
+   "files": [
+    "engine/src/cards/pool/narset-of-the-ancient-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nesting Grounds",
+   "files": [
+    "engine/src/cards/pool/nesting-grounds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niko, Light of Hope",
+   "files": [
+    "engine/src/cards/pool/niko-light-of-hope.ts",
+    "engine/src/cards/tokens/shard-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa, Steward of Elements",
+   "files": [
+    "engine/src/cards/pool/nissa-steward-of-elements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oath of Gideon",
+   "files": [
+    "engine/src/cards/pool/oath-of-gideon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oath of Nissa",
+   "files": [
+    "engine/src/cards/pool/oath-of-nissa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oversimplify",
+   "files": [
+    "engine/src/cards/pool/oversimplify.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paradoxical Outcome",
+   "files": [
+    "engine/src/cards/pool/paradoxical-outcome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of the Pyromancer",
+   "files": [
+    "engine/src/cards/pool/path-of-the-pyromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plaxcaster Frogling",
+   "files": [
+    "engine/src/cards/pool/plaxcaster-frogling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primeval Protector",
+   "files": [
+    "engine/src/cards/pool/primeval-protector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyrogoyf",
+   "files": [
+    "engine/src/cards/pool/pyrogoyf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reaper's Scythe",
+   "files": [
+    "engine/src/cards/pool/reapers-scythe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reluctant Role Model",
+   "files": [
+    "engine/src/cards/pool/reluctant-role-model.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resourceful Defense",
+   "files": [
+    "engine/src/cards/pool/resourceful-defense.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rust Elemental",
+   "files": [
+    "engine/src/cards/pool/rust-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salvation Colossus",
+   "files": [
+    "engine/src/cards/pool/salvation-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrap Mastery",
+   "files": [
+    "engine/src/cards/pool/scrap-mastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sharuum the Hegemon",
+   "files": [
+    "engine/src/cards/pool/sharuum-the-hegemon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shifting Woodland",
+   "files": [
+    "engine/src/cards/pool/shifting-woodland.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shuri, Wakandan Inventor",
+   "files": [
+    "engine/src/cards/pool/shuri-wakandan-inventor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigarda's Summons",
+   "files": [
+    "engine/src/cards/pool/sigardas-summons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silent Hallcreeper",
+   "files": [
+    "engine/src/cards/pool/silent-hallcreeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullport Merchant",
+   "files": [
+    "engine/src/cards/pool/skullport-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slippery Bogbonder",
+   "files": [
+    "engine/src/cards/pool/slippery-bogbonder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "SOLDIER Military Program",
+   "files": [
+    "engine/src/cards/pool/soldier-military-program.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sram's Expertise",
+   "files": [
+    "engine/src/cards/pool/srams-expertise.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Steelburr Champion",
+   "files": [
+    "engine/src/cards/pool/steelburr-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunfrill Imitator",
+   "files": [
+    "engine/src/cards/pool/sunfrill-imitator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Svella, Ice Shaper",
+   "files": [
+    "engine/src/cards/pool/svella-ice-shaper.ts",
+    "engine/src/cards/tokens/icy-manalith-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taborax, Hope's Demise",
+   "files": [
+    "engine/src/cards/pool/taborax-hopes-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terror Tide",
+   "files": [
+    "engine/src/cards/pool/terror-tide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mycosynth Gardens",
+   "files": [
+    "engine/src/cards/pool/the-mycosynth-gardens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Ozolith",
+   "files": [
+    "engine/src/cards/pool/the-ozolith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thespian's Stage",
+   "files": [
+    "engine/src/cards/pool/thespians-stage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidus, Yuna's Guardian",
+   "files": [
+    "engine/src/cards/pool/tidus-yunas-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomik, Wielder of Law",
+   "files": [
+    "engine/src/cards/pool/tomik-wielder-of-law.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trace of Abundance",
+   "files": [
+    "engine/src/cards/pool/trace-of-abundance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trelasarra, Moon Dancer",
+   "files": [
+    "engine/src/cards/pool/trelasarra-moon-dancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Underdark Rift",
+   "files": [
+    "engine/src/cards/pool/underdark-rift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zoanthrope",
+   "files": [
+    "engine/src/cards/pool/zoanthrope.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Chandra, Legacy of Fire",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "'Exile that many cards' — the loyalty counters removed by the earlier step; nothing counts them."
+  },
+  {
+   "name": "Onakke Oathkeeper",
+   "needs": [
+    "cost:attack-tax-planeswalkers"
+   ],
+   "why": "Attack tax on attacks at planeswalkers you control; attackTaxPerCreature covers attacks on a player only."
+  },
+  {
+   "name": "Medomai the Ageless",
+   "needs": [
+    "condition:extra-turn"
+   ],
+   "why": "Can't attack during extra turns."
+  },
+  {
+   "name": "Toggo, Goblin Weaponsmith",
+   "needs": [
+    "cost:sacrifice-granting-source"
+   ],
+   "why": "The Rock's granted ability costs 'Sacrifice Rock' — the permanent granting it."
+  },
+  {
+   "name": "Coveted Prize",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "A cost reduction per party member, and a full-party check."
+  },
+  {
+   "name": "Dack Fayden",
+   "needs": [
+    "effect:cast-spell-trigger-spell-targets"
+   ],
+   "why": "The emblem gains control of the permanents the spell targets."
+  },
+  {
+   "name": "Scheming Aspirant",
+   "needs": [
+    "trigger:proliferate-trigger"
+   ],
+   "why": "'Whenever you proliferate.'"
+  },
+  {
+   "name": "Fall of Cair Andros",
+   "needs": [
+    "effect:excess-damage-amount",
+    "trigger:excess-damage-trigger"
+   ],
+   "why": "Whenever a creature an opponent controls is dealt excess noncombat damage, amass that much."
+  },
+  {
+   "name": "Vronos, Masked Inquisitor",
+   "needs": [
+    "mechanic:phasing"
+   ],
+   "why": "The +1 phases out planeswalkers."
+  },
+  {
+   "name": "Iron Mastiff",
+   "needs": [
+    "effect:roll-keep-highest"
+   ],
+   "why": "Roll a d20 per player being attacked, keep only the highest."
+  },
+  {
+   "name": "Ring of Xathrid",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "'Regenerate equipped creature' and the upkeep counter on the equipped creature."
+  },
+  {
+   "name": "Radiant Solar",
+   "needs": [
+    "mechanic:dungeon"
+   ],
+   "why": "Venture into the dungeon."
+  },
+  {
+   "name": "Emergent Ultimatum",
+   "needs": [
+    "effect:search-different-names",
+    "effect:opponent-chooses-from-found"
+   ],
+   "why": "Up to three different-named cards; an opponent chooses one of them."
+  },
+  {
+   "name": "Kolaghan, the Storm's Fury",
+   "needs": [
+    "keyword:dash"
+   ],
+   "why": "Dash."
+  },
+  {
+   "name": "Riders of Rohan",
+   "needs": [
+    "keyword:dash"
+   ],
+   "why": "Dash."
+  },
+  {
+   "name": "Kalitas, Traitor of Ghet",
+   "needs": [
+    "replacement:exile-instead-when-you-do"
+   ],
+   "why": "Exile instead of dying, and the Zombie is part of that replacement, not a reflexive trigger."
+  },
+  {
+   "name": "Emergent Woodwurm",
+   "needs": [
+    "keyword:backup"
+   ],
+   "why": "Backup."
+  },
+  {
+   "name": "Fatespinner",
+   "needs": [
+    "effect:skip-steps-this-turn"
+   ],
+   "why": "That player chooses a step or phase and skips each instance of it this turn."
+  },
+  {
+   "name": "Evil Twin",
+   "needs": [
+    "condition:filter-same-name-as-source"
+   ],
+   "why": "Destroy target creature with the same name as this creature."
+  },
+  {
+   "name": "Donatello, the Brains",
+   "needs": [
+    "replacement:token-creation-add-extra"
+   ],
+   "why": "Those tokens plus a Mutagen token."
+  },
+  {
+   "name": "Aegis Angel",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "Indestructible for as long as you control Aegis Angel (ends on a control change too)."
+  },
+  {
+   "name": "Francisco, Fowl Marauder",
+   "needs": [
+    "keyword:explore"
+   ],
+   "why": "Explore."
+  },
+  {
+   "name": "Wyleth, Soul of Steel",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "Draw a card for each Aura and Equipment attached to it (last-known, the ruling)."
+  },
+  {
+   "name": "Krang, the All-Powerful",
+   "needs": [
+    "static:trigger-doubler-draw-cause"
+   ],
+   "why": "An ability triggering on a draw triggers an additional time."
+  },
+  {
+   "name": "Planewide Celebration",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "You may choose the same mode more than once."
+  },
+  {
+   "name": "Jace, Mirror Mage",
+   "needs": [
+    "effect:copy-starting-loyalty"
+   ],
+   "why": "A token copy except it has loyalty 1."
+  },
+  {
+   "name": "Mirage Phalanx",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond."
+  },
+  {
+   "name": "Necrogen Rotpriest",
+   "needs": [
+    "filter:has-toxic"
+   ],
+   "why": "Creatures you control with toxic."
+  },
+  {
+   "name": "Boon of Safety",
+   "needs": [
+    "mechanic:shield-counters"
+   ],
+   "why": "Shield counters."
+  },
+  {
+   "name": "Ashiok, Nightmare Muse",
+   "needs": [
+    "decision:cast-up-to-n-free",
+    "zone:cast-cards-you-dont-own"
+   ],
+   "why": "The -7 casts up to three face-up exiled cards opponents own."
+  },
+  {
+   "name": "Kaalia, Zenith Seeker",
+   "needs": [
+    "effect:look-and-choose-one-per-type"
+   ],
+   "why": "An Angel, a Demon and/or a Dragon card, one each."
+  },
+  {
+   "name": "Twisted Image",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "Switch target creature's power and toughness until end of turn."
+  },
+  {
+   "name": "Basri Ket",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Whenever one or more nontoken creatures attack this turn."
+  },
+  {
+   "name": "Elusive Otter // Grove's Bounty",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "Distribute X +1/+1 counters among any number of target creatures you control."
+  },
+  {
+   "name": "Stensian Sanguinist // Exsanguinate",
+   "needs": [
+    "effect:delayed-combat-damage-this-combat"
+   ],
+   "why": "Whenever that creature deals combat damage to a player this combat — the watch lasts the turn, so an extra combat prepares it wrongly."
+  },
+  {
+   "name": "Taskmaster, Mercenary Mimic",
+   "needs": [
+    "decision:mixed-zone-targets"
+   ],
+   "why": "Target creature on the battlefield or creature card in a graveyard."
+  },
+  {
+   "name": "Scion of the Ur-Dragon",
+   "needs": [
+    "effect:search-then-act-on-found"
+   ],
+   "why": "Become a copy of the card the search found."
+  },
+  {
+   "name": "Valki, God of Lies",
+   "needs": [
+    "effect:exile-until-leaves-per-opponent",
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "Each opponent's exiled creature; choose one exiled with Valki with mana value X."
+  },
+  {
+   "name": "The Everflowing Well // The Myriad Pools",
+   "needs": [
+    "trigger:cast-with-mana-from-source"
+   ],
+   "why": "Whenever you cast a permanent spell using mana produced by The Myriad Pools."
+  },
+  {
+   "name": "The Irencrag",
+   "needs": [
+    "effect:become-named-equipment"
+   ],
+   "why": "Becomes a legendary Equipment Artifact named Everflame, losing its other abilities — not a copy."
+  },
+  {
+   "name": "Diamond City",
+   "needs": [
+    "mechanic:shield-counters"
+   ],
+   "why": "Shield counters."
+  },
+  {
+   "name": "Sin, Unending Cataclysm",
+   "needs": [
+    "effect:as-enters-remove-counters-from-any-number"
+   ],
+   "why": "As it enters, remove counters from any number of permanents (its counters' move is now buildable)."
+  },
+  {
+   "name": "Captain Marvel, Apex Avenger",
+   "needs": [
+    "effect:add-counters-same-kind-as-trigger"
+   ],
+   "why": "Counters of the same kind as those put."
+  },
+  {
+   "name": "Rikku, Resourceful Guardian",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "Can't be blocked by creatures your opponents control until end of turn (the Steal move works)."
+  },
+  {
+   "name": "Zack Fair",
+   "needs": [
+    "effect:attach-equipment-that-was-attached"
+   ],
+   "why": "Attach an Equipment that was attached to Zack Fair — nothing records it once he's gone."
+  }
+ ]
+}

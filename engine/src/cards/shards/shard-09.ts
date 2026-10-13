@@ -51,6 +51,7 @@ import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
+import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
@@ -113,6 +114,7 @@ import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
 import _poolFling from "../pool/fling.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
+import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
@@ -186,6 +188,7 @@ import _poolManaLeak from "../pool/mana-leak.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
+import _poolMirageMirror from "../pool/mirage-mirror.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
@@ -201,6 +204,7 @@ import _poolNezumiCutthroat from "../pool/nezumi-cutthroat.js";
 import _poolNightsWhisper from "../pool/nights-whisper.js";
 import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
 import _poolNinjaPizza from "../pool/ninja-pizza.js";
+import _poolNissaStewardOfElements from "../pool/nissa-steward-of-elements.js";
 import _poolNobleSteeds from "../pool/noble-steeds.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
 import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets.js";
@@ -430,6 +434,7 @@ const shard: CardShard = {
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
     _poolBrothersOfFire,
+    _poolBrudicladTelchorEngineer,
     _poolBurglarRat,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
@@ -492,6 +497,7 @@ const shard: CardShard = {
     _poolFlatten,
     _poolFling,
     _poolForebodingLandscape,
+    _poolForgottenAncient,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
     _poolFuriousAssault,
@@ -565,6 +571,7 @@ const shard: CardShard = {
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
     _poolMindseekerOculus,
+    _poolMirageMirror,
     _poolMistralCharger,
     _poolMizzixsMastery,
     _poolMonasterySwiftspear,
@@ -580,6 +587,7 @@ const shard: CardShard = {
     _poolNightsWhisper,
     _poolNightsquadCommando,
     _poolNinjaPizza,
+    _poolNissaStewardOfElements,
     _poolNobleSteeds,
     _poolNornsChoirmaster,
     _poolNullGroupBiologicalAssets,

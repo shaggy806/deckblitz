@@ -125,6 +125,7 @@ import _poolGoblinOutlander from "../pool/goblin-outlander.js";
 import _poolGoblinPiledriver from "../pool/goblin-piledriver.js";
 import _poolGoblinSpelunkers from "../pool/goblin-spelunkers.js";
 import _poolGohnTownOfRuin from "../pool/gohn-town-of-ruin.js";
+import _poolGoldberryRiverDaughter from "../pool/goldberry-river-daughter.js";
 import _poolGondGate from "../pool/gond-gate.js";
 import _poolGratefulApparition from "../pool/grateful-apparition.js";
 import _poolGravelSlinger from "../pool/gravel-slinger.js";
@@ -158,6 +159,7 @@ import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
+import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
@@ -241,6 +243,7 @@ import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
+import _poolResourcefulDefense from "../pool/resourceful-defense.js";
 import _poolRestInPeace from "../pool/rest-in-peace.js";
 import _poolRestorationMagic from "../pool/restoration-magic.js";
 import _poolRetreatToCoralhelm from "../pool/retreat-to-coralhelm.js";
@@ -325,6 +328,7 @@ import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
 import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
+import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
 import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
@@ -367,11 +371,13 @@ import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
+import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
 import _tokensSoldierToken from "../tokens/soldier-token.js";
 import _tokensSpawnTokenSpawningPit from "../tokens/spawn-token-spawning-pit.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
+import _tokensZombieRogueToken from "../tokens/zombie-rogue-token.js";
 import _tokensZombieTokenGeralfVisionaryStitcher from "../tokens/zombie-token-geralf-visionary-stitcher.js";
 
 const shard: CardShard = {
@@ -498,6 +504,7 @@ const shard: CardShard = {
     _poolGoblinPiledriver,
     _poolGoblinSpelunkers,
     _poolGohnTownOfRuin,
+    _poolGoldberryRiverDaughter,
     _poolGondGate,
     _poolGratefulApparition,
     _poolGravelSlinger,
@@ -531,6 +538,7 @@ const shard: CardShard = {
     _poolIroassChampion,
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
+    _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
     _poolKeenSense,
     _poolKheruGoldkeeper,
@@ -614,6 +622,7 @@ const shard: CardShard = {
     _poolRazeTheEffigy,
     _poolReckonersBargain,
     _poolResearchAssistant,
+    _poolResourcefulDefense,
     _poolRestInPeace,
     _poolRestorationMagic,
     _poolRetreatToCoralhelm,
@@ -698,6 +707,7 @@ const shard: CardShard = {
     _poolTouchOfInvisibility,
     _poolToweringTitan,
     _poolToxicDeluge,
+    _poolTrelasarraMoonDancer,
     _poolTritonWaverider,
     _poolTrollsOfTelJilad,
     _poolTrostaniThreeWhispers,
@@ -742,11 +752,13 @@ const shard: CardShard = {
   tokens: [
     _tokensDragonTokenAvatarRoku,
     _tokensGremlinToken,
+    _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,
     _tokensSoldierToken,
     _tokensSpawnTokenSpawningPit,
     _tokensWallToken13,
+    _tokensZombieRogueToken,
     _tokensZombieTokenGeralfVisionaryStitcher,
   ],
 };

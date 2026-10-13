@@ -135,6 +135,7 @@ import _poolGoddricCloakedReveler from "../pool/goddric-cloaked-reveler.js";
 import _poolGolbezCrystalCollector from "../pool/golbez-crystal-collector.js";
 import _poolGoliathSphinx from "../pool/goliath-sphinx.js";
 import _poolGorillaWarrior from "../pool/gorilla-warrior.js";
+import _poolGraazUnstoppableJuggernaut from "../pool/graaz-unstoppable-juggernaut.js";
 import _poolGrapplingSundew from "../pool/grappling-sundew.js";
 import _poolGravpackMonoist from "../pool/gravpack-monoist.js";
 import _poolGraypeltRefuge from "../pool/graypelt-refuge.js";
@@ -176,6 +177,7 @@ import _poolJadeMage from "../pool/jade-mage.js";
 import _poolJayasGreeting from "../pool/jayas-greeting.js";
 import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
 import _poolJinSakaiGhostOfTsushima from "../pool/jin-sakai-ghost-of-tsushima.js";
+import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
@@ -291,6 +293,7 @@ import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
 import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
 import _poolShieldOfTheOversoul from "../pool/shield-of-the-oversoul.js";
+import _poolShiftingWoodland from "../pool/shifting-woodland.js";
 import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
 import _poolShoreUp from "../pool/shore-up.js";
 import _poolShowOfValor from "../pool/show-of-valor.js";
@@ -329,6 +332,7 @@ import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
+import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
@@ -546,6 +550,7 @@ const shard: CardShard = {
     _poolGolbezCrystalCollector,
     _poolGoliathSphinx,
     _poolGorillaWarrior,
+    _poolGraazUnstoppableJuggernaut,
     _poolGrapplingSundew,
     _poolGravpackMonoist,
     _poolGraypeltRefuge,
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolJayasGreeting,
     _poolJhoirasFamiliar,
     _poolJinSakaiGhostOfTsushima,
+    _poolJusticiarsPortal,
     _poolKangeesLieutenant,
     _poolKedissEmberclawFamiliar,
     _poolKetriaCrystal,
@@ -702,6 +708,7 @@ const shard: CardShard = {
     _poolShamblingStrider,
     _poolShaoJun,
     _poolShieldOfTheOversoul,
+    _poolShiftingWoodland,
     _poolShiningAerosaur,
     _poolShoreUp,
     _poolShowOfValor,
@@ -740,6 +747,7 @@ const shard: CardShard = {
     _poolStrengthOfTheHarvest,
     _poolSummonPrimalOdin,
     _poolSunderingGrowth,
+    _poolSunfrillImitator,
     _poolSungoldBarrage,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,
