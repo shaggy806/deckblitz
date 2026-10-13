@@ -61,6 +61,12 @@ network (~53 ms) plus however long the event loop was busy.
   decisions: p50 37 ms here, 152 ms there; its slowest single decision 0.6 s, double the
   budget, as one simulation there is 100-250 ms). No single decision explains the stall; the
   chain does.
+  **Built (2026-10-13)**: the settle slicing below, and the land search looks once per land
+  name; measured locally, one room's worst event-loop stall went 234 → 65 ms and the longest
+  settle is now the slice plus one real decision (≤ ~350 ms here). The land search's saving is
+  small (≤ 20%, only with duplicate lands in hand): most of its outside-the-budget time is the
+  look at each *different* land (`castableAfterPlay`'s board clones and one-spell simulation),
+  which a cheaper `legalActionsAfter` would cut.
   **Fix outline** (phase 1): in `"realtime"` pacing, let `settleNow` give the event loop back
   once it has run ~50 ms — continue on `setImmediate` instead of looping on, with a guard so a
   `settle()` arriving meanwhile doesn't start a second loop. It changes no frame and no

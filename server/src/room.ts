@@ -164,6 +164,21 @@ const BOT_LINGER_MS: Readonly<Record<BotSpeed, number>> = {
 
 const SETTLE_BUDGET = 10_000;
 
+/**
+ * How long one `settle()` may run in `"realtime"` pacing before it gives the
+ * event loop back and carries on from a timer (see `settleNow`).
+ *
+ * Every room shares the process's one thread, and a settle doesn't stop for
+ * a bot's priority pass — no frame, no gate — so between one real move and
+ * the next it can walk every bot through every empty step: 25-45 decisions
+ * measured, some of them searched, then the next real move searched to its
+ * budget. ~400 ms on a developer's PC, 1.2-1.7 s on the live box, during
+ * which no other room moved and no message was read (2026-10-13 load test,
+ * `docs/plans/scaling-rooms.md`). Handing back after 50 ms bounds a stall to
+ * about one decision; it changes no frame and no decision.
+ */
+const SETTLE_SLICE_MS = 50;
+
 /** A seat's passing preferences until its device sends its own. */
 const NO_PASS_SETTINGS: PassSettings = {
   passToMain: false,
@@ -300,6 +315,10 @@ export interface RoomOptions {
    * Auto-pass still passes the window.
    */
   readonly holdsPriority?: (room: Room, player: PlayerId) => boolean;
+  /** {@link SETTLE_SLICE_MS} by default. The fake-clock pacing tests set
+   * `Infinity`, since a slice is real time and a yield resumes on their
+   * hand-cranked clock; the slicing test sets 0, yielding after every pass. */
+  readonly settleSliceMs?: number;
 }
 
 /**
@@ -395,6 +414,10 @@ export class Room {
   private combatAtPublish: ReadonlySet<string> = new Set();
   private readonly showStackArrivals: boolean;
   private gate: FrameGate | null = null;
+  /** A `settle()` that used up its slice and carries on from this timer —
+   * see `settleNow`. */
+  private resumeHandle: unknown = null;
+  private readonly settleSliceMs: number;
   readonly host: HostRole;
   botSpeed: BotSpeed;
   /** See `RoomOptions.firstPlayerChosen`. */
@@ -445,6 +468,7 @@ export class Room {
     this.pacing = options.pacing ?? "realtime";
     this.showStackArrivals = options.showStackArrivals ?? true;
     this.timers = options.timers ?? realTimers;
+    this.settleSliceMs = options.settleSliceMs ?? SETTLE_SLICE_MS;
     this.captures = options.capture !== undefined ? new CaptureLog(options.capture, id) : null;
     // With capture on, the default bots report every candidate they score,
     // kept with the decision (`CaptureLog.record`'s `search`).
@@ -1191,18 +1215,30 @@ export class Room {
    * Advances the game one settled state at a time, stopping at the first
    * thing a human has to answer — or, in `"realtime"` pacing, at each bot
    * action, which is published as its own frame and then held behind the
-   * frame gate (see the class comment). Always publishes exactly one frame
-   * before it returns. One `advanceUntil` hop at a time (never the cascading
-   * `autoSettle`) so a just-reached stopping point can never be jumped over
-   * mid-cascade.
+   * frame gate (see the class comment). Publishes exactly one frame before it
+   * returns — unless it used up its slice (`SETTLE_SLICE_MS`) on bots'
+   * passes, when it carries on from a timer and publishes there. One
+   * `advanceUntil` hop at a time (never the cascading `autoSettle`) so a
+   * just-reached stopping point can never be jumped over mid-cascade.
+   *
+   * A settle asked for while one is waiting to resume simply runs now in its
+   * place: the loop keeps nothing between hops but the game, so starting it
+   * early is the same as resuming it.
    */
-  private settle(): void {
+  private settle(stepsLeft = SETTLE_BUDGET): void {
     if (this.stopped !== null) return;
+    this.cancelResume();
     try {
-      this.settleNow();
+      this.settleNow(stepsLeft);
     } catch (error) {
       this.stop(error);
     }
+  }
+
+  private cancelResume(): void {
+    if (this.resumeHandle === null) return;
+    this.timers.clearTimeout(this.resumeHandle);
+    this.resumeHandle = null;
   }
 
   /**
@@ -1217,6 +1253,7 @@ export class Room {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`room ${this.id}: the game stopped on an engine error`, error);
     this.stopped = message;
+    this.cancelResume();
     const gate = this.gate;
     this.gate = null;
     if (gate !== null) {
@@ -1232,7 +1269,7 @@ export class Room {
     }
   }
 
-  private settleNow(): void {
+  private settleNow(stepsLeft: number): void {
     if (this.frozen) {
       this.publish();
       return;
@@ -1247,7 +1284,21 @@ export class Room {
       return;
     }
 
-    for (let i = 0; i < SETTLE_BUDGET; i += 1) {
+    // Passes don't stop the loop (no frame, no gate), so it can run on for a
+    // whole stretch of bots' empty steps: past the slice, the rest goes to a
+    // timer, which lets every other room and message in first.
+    const sliceEnds = this.pacing === "immediate" ? Infinity : performance.now() + this.settleSliceMs;
+    const yielded = (stepsUsed: number): boolean => {
+      if (performance.now() < sliceEnds) return false;
+      const rest = stepsLeft - stepsUsed;
+      this.resumeHandle = this.timers.setTimeout(() => {
+        this.resumeHandle = null;
+        this.settle(rest);
+      }, 0);
+      return true;
+    };
+
+    for (let i = 0; i < stepsLeft; i += 1) {
       this.game.advanceUntil(isSettled);
       const s = this.game.state;
       if (s.result.over) break;
@@ -1297,6 +1348,7 @@ export class Room {
           // than asking again is both correct and free.
           this.game.dispatch(move);
           this.lastActivityAt = Date.now();
+          if (yielded(i + 1)) return;
           continue;
         }
         // Show the board this bot is about to act on, then let the clients
@@ -1322,7 +1374,10 @@ export class Room {
         return;
       }
 
-      if (this.autoAdvanceHumanSeat(s)) continue;
+      if (this.autoAdvanceHumanSeat(s)) {
+        if (yielded(i + 1)) return;
+        continue;
+      }
       break;
     }
     this.publish();
@@ -1512,6 +1567,7 @@ export class Room {
   /** Drops any parked bot move and its timers — for a room being reaped, so
    * nothing keeps firing against a game nobody is watching. */
   dispose(): void {
+    this.cancelResume();
     const gate = this.gate;
     if (gate === null) return;
     this.gate = null;

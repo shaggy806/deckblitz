@@ -85,6 +85,7 @@ function makePacedRoom(
   ackAll: boolean,
   botSpeed: BotSpeed = "fast",
   botController: ((player: PlayerId) => PlayerController) | undefined = undefined,
+  settleSliceMs = Infinity,
 ) {
   const clock = fakeClock();
   const forests = Array<string>(40).fill("Forest");
@@ -101,6 +102,7 @@ function makePacedRoom(
   const alice = watcher(() => room, ackAll);
   room = new Room("PACE1", game, {
     timers: clock.timers,
+    settleSliceMs,
     botController: botController ?? ((player) => new HeuristicBotController(player)),
     // No pause after a move is shown, so these tests are about the ack gate
     // alone; the pause itself has its own tests below.
@@ -131,6 +133,53 @@ function makePacedRoom(
 }
 
 describe("Room pacing (realtime)", () => {
+  it("hands the event loop back mid-settle and finishes from a timer, where an unsliced settle would have", () => {
+    // Alice passes her turn: a settle walks both seats through every empty
+    // step of it, with no frame between, until Bob's land drop. A slice of 0
+    // yields after each pass, so the same walk runs one timer at a time.
+    const run = (settleSliceMs: number) => {
+      const paced = makePacedRoom(true, "fast", undefined, settleSliceMs);
+      paced.room.addBot(BOB);
+      paced.room.start();
+      const framesBefore = paced.alice.frames.length;
+      paced.room.requestPassTurn(paced.alice.connection);
+      const framesRightAfter = paced.alice.frames.length - framesBefore;
+      const pendingRightAfter = paced.clock.pendingCount;
+      // Short of the bots' think-time floor: only the resumed settle can run.
+      paced.clock.advance(0);
+      const s = paced.room.game.state;
+      return {
+        framesRightAfter,
+        pendingRightAfter,
+        frames: paced.alice.frames.length - framesBefore,
+        where: `${s.turn.number}:${s.turn.activePlayerIndex}:${s.turn.step}`,
+        events: paced.room.game.events.length,
+      };
+    };
+    const whole = run(Infinity);
+    const sliced = run(0);
+    // The sliced settle returned before publishing anything, a resume waiting…
+    expect(sliced.framesRightAfter).toBe(0);
+    expect(sliced.pendingRightAfter).toBe(1);
+    expect(whole.framesRightAfter).toBeGreaterThan(0);
+    // …and once resumed it ended exactly where the whole one did, with the
+    // same frames shown.
+    expect(sliced.where).toBe(whole.where);
+    expect(sliced.events).toBe(whole.events);
+    expect(sliced.frames).toBe(whole.frames);
+    expect(whole.where.startsWith("2:")).toBe(true);
+  });
+
+  it("drops a waiting resume when the room is disposed", () => {
+    const { room, clock, alice } = makePacedRoom(true, "fast", undefined, 0);
+    room.addBot(BOB);
+    room.start();
+    room.requestPassTurn(alice.connection);
+    expect(clock.pendingCount).toBe(1);
+    room.dispose();
+    expect(clock.pendingCount).toBe(0);
+  });
+
   it("publishes a frame before a bot acts, and holds the bot until it's acked", () => {
     const { room, clock, alice } = makePacedRoom(false);
     room.addBot(BOB);
@@ -513,6 +562,7 @@ describe("Room pacing (realtime)", () => {
       autoSettle(game);
       const room = new Room("PACE3", game, {
         timers: clock.timers,
+        settleSliceMs: Infinity,
         showStackArrivals: false,
         botController: (player) => new HeuristicBotController(player),
       });
@@ -541,6 +591,7 @@ describe("Room pacing (realtime)", () => {
       autoSettle(game);
       const room = new Room("PACE2", game, {
         timers: clock.timers,
+        settleSliceMs: Infinity,
         pacing: "immediate",
         botController: (player) => new HeuristicBotController(player),
       });
