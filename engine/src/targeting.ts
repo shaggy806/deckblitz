@@ -2,7 +2,12 @@
 
 import type { CardDefinition, CardRegistry, CardType } from "./cards.js";
 import type { EffectAmount } from "./effects.js";
-import { computeCharacteristics, effectiveTypes, playerHasHexproof } from "./characteristics.js";
+import {
+  computeCharacteristics,
+  effectiveTypes,
+  playerHasHexproof,
+  playerHasProtectionFromEverything,
+} from "./characteristics.js";
 import { filterReadsX, matchesFilter } from "./filter.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -265,6 +270,10 @@ export function isLegalTarget(
     ref.player !== forPlayer &&
     playerHasHexproof(state, registry, ref.player)
   ) {
+    return false;
+  } else if (playerHasProtectionFromEverything(state, ref.player)) {
+    // Protection from everything: no spell or ability targets them, their
+    // own included (rule 702.16j).
     return false;
   }
   // An optional slot accepts exactly what its inner spec accepts; whether it

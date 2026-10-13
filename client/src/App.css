@@ -1620,6 +1620,14 @@
 .board-entry > .mini-tile-wrap {
   z-index: 20;
 }
+/* A phased-out permanent (rule 702.26) keeps its place at the table but is
+   treated as though it doesn't exist until it phases in: drawn faded and
+   desaturated, with whatever phased out attached to it. */
+.board-entry.phased-out > .mini-tile-wrap,
+.board-entry.phased-out .attachments > * {
+  opacity: 0.38;
+  filter: grayscale(0.75);
+}
 /* ...until a strip is hovered or focused, which lifts that attachment out of
    the pile so it can be read in place as well as in its popover */
 .board-entry .attachments > *:hover,

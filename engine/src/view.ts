@@ -42,7 +42,15 @@ import type {
 import { decisionHasSource } from "./decisions/registry.js";
 import { goadersOf } from "./goad.js";
 import { hasRingBearerDesignation } from "./ring.js";
-import { activePlayerOf, faceName, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
+import {
+  activePlayerOf,
+  faceName,
+  manaCostOverride,
+  nameOf,
+  phasedOutIds,
+  printedCardName,
+  rulesTextName,
+} from "./state.js";
 import { withoutTypeMarkers } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
 
@@ -252,6 +260,11 @@ export interface VisibleObject {
    * `goadersOf`). Empty off the battlefield or when it isn't goaded. A
    * designation, not an ability, so nothing else in the view shows it. */
   readonly goadedBy: readonly PlayerId[];
+  /** Phased out (rule 702.26): on the battlefield (`zone` says so) but
+   * treated as though it doesn't exist until it phases in — listed in
+   * `zones.phasedOut`, never in `zones.battlefield`. What it shows (P/T,
+   * keywords, types, colours) is what it was as it phased out. */
+  readonly phasedOut?: true;
   /** Suspected (rule 701.60). Its menace and can't-block already show among
    * `keywords` and `restrictions`; this is the designation itself. */
   readonly suspected: boolean;
@@ -308,6 +321,11 @@ export interface PlayerView {
   readonly objects: Readonly<Record<ObjectId, VisibleObject>>;
   readonly zones: {
     readonly battlefield: readonly ObjectId[];
+    /** The phased-out permanents (rule 702.26) — on the battlefield, but
+     * treated as though they don't exist, so never in `battlefield`. Each
+     * object's `phasedOut` says so too; a client draws them apart (dimmed)
+     * with their controller's permanents. */
+    readonly phasedOut: readonly ObjectId[];
     readonly stack: readonly ObjectId[];
     /** Single shared zones — each object's `owner` says whose card it is. */
     readonly exile: readonly ObjectId[];
@@ -383,7 +401,7 @@ function decisionSourceFor(state: GameState): DecisionSource | null {
 /** See `VisibleObject.chosen`. Read off a permanent only: both fields are
  * cleared on a zone change, but a card on its way in can carry a stale one. */
 function chosenOf(object: GameObject): string | null {
-  if (object.zone !== "battlefield") return null;
+  if (object.zone !== "battlefield" && object.zone !== "phased-out") return null;
   return object.chosenOnEnter ?? object.chosenCreatureType ?? null;
 }
 
@@ -394,20 +412,36 @@ function visible(
   viewer?: PlayerId,
 ): VisibleObject {
   const object = state.objects[id];
+  // A phased-out permanent (rule 702.26) is still on the battlefield, and is
+  // shown as it was as it phased out — its `lastKnown`, taken then.
+  const phased = object.zone === "phased-out" ? object.lastKnown : undefined;
+  const zone = object.zone === "phased-out" ? "battlefield" : object.zone;
   // A face-down permanent — or a face-down spell, cast with morph or
   // disguise (708.4) — shows only a face-down 2/2 (rule 708.2a), and which
-  // card it is only to its controller (708.5).
-  const faceDown = object.zone === "battlefield" || object.zone === "stack" ? object.faceDown : undefined;
+  // card it is only to its controller (708.5), phased out or not.
+  const faceDown = zone === "battlefield" || zone === "stack" ? object.faceDown : undefined;
   const printedName = printedCardName(object);
   const def = registry.get(printedName);
   // A Room on the battlefield is drawn as its whole card — both doors are
   // public, locked or not — with what each door is in `doors`; the rest
   // here is what it has (rule 709.5: a locked door's name, cost and text
   // aren't the permanent's).
-  const roomDoors = object.zone === "battlefield" ? object.doors : undefined;
+  const roomDoors = zone === "battlefield" ? object.doors : undefined;
   const cardDef = roomDoors !== undefined ? registry.get(object.cardName) : def;
   const chosen = chosenOf(object);
-  const computed = computeCharacteristics(state, registry, id);
+  const live = computeCharacteristics(state, registry, id);
+  const computed =
+    phased === undefined
+      ? live
+      : {
+          ...live,
+          power: phased.power,
+          toughness: phased.toughness,
+          types: phased.types,
+          subtypes: phased.subtypes,
+          colors: new Set(phased.colors),
+          keywords: new Set(phased.keywords),
+        };
   // The printing this card's *owner* brought (see `PlayerState.printings`)
   // stands in for the pool's default illustration. Keyed by the card's front
   // face, which is the name a decklist (and so the printings map) uses — a
@@ -427,7 +461,7 @@ function visible(
   const isCreature = computed.types.includes("creature");
   // A permanent that lost its abilities (layer 6 — Turn to Frog) shows no
   // rules text; its keywords are already gone from `computed`.
-  const onBattlefield = object.zone === "battlefield";
+  const onBattlefield = zone === "battlefield";
   const lostAbilities =
     onBattlefield && object.modifiers.some((m) => m.loseAbilities === true);
   // Its text box, which an exchange (rule 612.5 — Deadpool) may have made
@@ -508,7 +542,8 @@ function visible(
       : {}),
     owner: object.owner,
     controller: object.controller,
-    zone: object.zone,
+    zone,
+    ...(object.zone === "phased-out" ? { phasedOut: true as const } : {}),
     manaCost: manaCostOverride(object) !== undefined ? (manaCostOverride(object) ?? null) : def.manaCost,
     text,
     types: computed.types,
@@ -522,7 +557,7 @@ function visible(
     // On the battlefield, its loyalty counters; anywhere else, the loyalty
     // printed on the card (rule 306.5a), as the card shows it in a hand.
     loyalty: computed.types.includes("planeswalker")
-      ? object.zone === "battlefield"
+      ? zone === "battlefield"
         ? (object.counters.loyalty ?? 0)
         : def.loyalty
       : null,
@@ -559,10 +594,10 @@ function visible(
     // A face-down commander is a commander only to the one who may look.
     isCommander: object.isCommander && (faceDown === undefined || viewer === object.controller),
     goadedBy: [...goadersOf(state, registry, id)],
-    suspected: object.zone === "battlefield" && object.suspectedAt !== undefined,
-    saddled: object.zone === "battlefield" && object.saddled === true,
+    suspected: zone === "battlefield" && object.suspectedAt !== undefined,
+    saddled: zone === "battlefield" && object.saddled === true,
     ringBearer: hasRingBearerDesignation(object),
-    ...(object.zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
+    ...(zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
     ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),
   };
 }
@@ -604,7 +639,8 @@ export function artManifest(state: GameState, registry: CardRegistry): ArtManife
 /** `VisibleObject.spellFace` for `object`, as a spread: its card's Adventure
  * or Omen half while it shows its creature face off the battlefield. */
 function spellFaceOf(registry: CardRegistry, object: GameObject): { spellFace?: VisibleObject["spellFace"] } {
-  if (object.zone === "battlefield" || object.kind !== "card" || (object.face ?? 0) !== 0) return {};
+  if (object.zone === "battlefield" || object.zone === "phased-out") return {};
+  if (object.kind !== "card" || (object.face ?? 0) !== 0) return {};
   const front = object.faces?.[0];
   const back = object.faces?.[1];
   if (front === undefined || back === undefined || !registry.has(front) || !registry.has(back)) return {};
@@ -627,7 +663,8 @@ function spellFaceOf(registry: CardRegistry, object: GameObject): { spellFace?: 
  * library, a graveyard, exile. A half cast is that half alone (709.3), and a
  * Room on the battlefield shows its doors instead (`doors`). */
 function splitCostsOf(registry: CardRegistry, object: GameObject): { splitCosts?: VisibleObject["splitCosts"] } {
-  if (object.zone === "battlefield" || object.kind !== "card" || (object.face ?? 0) !== 0) return {};
+  if (object.zone === "battlefield" || object.zone === "phased-out") return {};
+  if (object.kind !== "card" || (object.face ?? 0) !== 0) return {};
   const [whole, left, right] = object.faces ?? [];
   if (whole === undefined || left === undefined || right === undefined) return {};
   if (!registry.has(whole) || !registry.has(left) || !registry.has(right) || !registry.get(whole).split) return {};
@@ -707,6 +744,7 @@ function viewForUncached(
   const revealedLibraryTop: Record<PlayerId, ObjectId | null> = {};
   const visibleIds: ObjectId[] = [
     ...state.zones.shared.battlefield,
+    ...phasedOutIds(state),
     ...state.zones.shared.stack,
     // A foretold card is face-down in exile — its identity is hidden from
     // everyone but its owner (ROADMAP Phase 6b); a card exiled face down by
@@ -884,6 +922,7 @@ function viewForUncached(
     objects,
     zones: {
       battlefield: [...state.zones.shared.battlefield],
+      phasedOut: [...phasedOutIds(state)],
       stack: [...state.zones.shared.stack],
       exile: [...state.zones.shared.exile],
       exileOwners: Object.fromEntries(

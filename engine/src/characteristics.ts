@@ -1307,7 +1307,23 @@ export function playerCantWinGame(state: GameState, registry: CardRegistry, play
 /** Whether `player` can't lose life (rule 119.8 — Everybody Lives!'s "players
  * can't lose life this turn"): a `player-effect` names them. */
 export function playerCantLoseLife(state: GameState, player: PlayerId): boolean {
-  return (state.playerEffects ?? []).some((e) => e.cantLoseLife?.includes(player) === true);
+  return (state.playerEffects ?? []).some(
+    (e) => e.cantLoseLife?.includes(player) === true || e.lifeCantChange?.includes(player) === true,
+  );
+}
+
+/** Whether `player`'s life total can't change (Teferi's Protection — rules
+ * 119.7, 119.8): they can't gain life or lose it. `playerCantLoseLife` says
+ * yes for them too. */
+export function playerLifeCantChange(state: GameState, player: PlayerId): boolean {
+  return (state.playerEffects ?? []).some((e) => e.lifeCantChange?.includes(player) === true);
+}
+
+/** Whether `player` has protection from everything (rule 702.16j — Teferi's
+ * Protection's "you gain protection from everything"): no spell or ability
+ * may target them, no Aura enchant them, and damage to them is prevented. */
+export function playerHasProtectionFromEverything(state: GameState, player: PlayerId): boolean {
+  return (state.playerEffects ?? []).some((e) => e.protectionFromEverything?.includes(player) === true);
 }
 
 /** The keywords `grantsToSpells` statics on the battlefield give `spell`. */

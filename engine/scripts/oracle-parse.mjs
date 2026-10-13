@@ -947,6 +947,22 @@ export function parseSentence(sentence, ctx) {
     if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
     return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
   }
+  // Phasing out (rule 702.26b): the source, the creature the source equips,
+  // every permanent you control (Teferi's Protection), or one target, "up to
+  // one", or "any number of" them, which phase out together. "…until ~
+  // leaves the battlefield" (rule 610.4 — Oubliette's "tap that creature as
+  // it phases in") is a person's call.
+  if ((m = /^(.+?) phases? out\.$/i.exec(s)) && !/^(?:it|he|she|that \w+|they|those \w+)$/i.test(m[1])) {
+    const who = m[1];
+    if (who === "~") return { kind: "phase-out", target: "source" };
+    if (/^equipped creature$/i.test(who)) return { kind: "phase-out", attachedToSource: true };
+    if (/^all permanents you control$/i.test(who)) return { kind: "phase-out", filter: { controlledBy: "you" } };
+    const got = quantifiedSlots(who, ctx);
+    if (got === undefined) return null;
+    const one = (target) => ({ kind: "phase-out", target });
+    if (got.group) return { kind: "for-each-target", from: got.slots[0], simultaneous: true, effect: one(got.slots[0]) };
+    return got.slots.length === 1 ? one(got.slots[0]) : { kind: "sequence", simultaneous: true, effects: got.slots.map(one) };
+  }
   // "Choose up to one target creature, then airbend all other creatures"
   // (Avatar's Wrath): every other one, together.
   if ((m = /^choose up to one target (\w+), then airbend all other (\w+)\.$/i.exec(s)) && singularTarget(m[2]) === m[1]) {
@@ -1271,6 +1287,8 @@ export function parseSentence(sentence, ctx) {
     if (re("it becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: it };
     if (re("airbend (?:it|that creature|that permanent)").test(s)) return { kind: "exile", target: it, airbend: true };
     if (re("it connives").test(s)) return { kind: "connive", target: it };
+    // "He phases out" (Kaito Shizuki), "it phases out" (rule 702.26b).
+    if (re("(?:it|he|she) phases out").test(s)) return { kind: "phase-out", target: it };
   }
 
   // Everything else that's a whole instruction by itself.
@@ -1361,6 +1379,14 @@ export function parseEffect(text, outer) {
     }
     // "Its controller loses N life." after the one sentence that targeted:
     // that target's controller, as it last existed (Countersquall).
+    // "It phases out." after the one sentence that targeted: that target
+    // (Slip Out the Back — rule 702.26b).
+    if (/^it phases out\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const out = { kind: "phase-out", target: 0 };
+      parsed.push(out);
+      hints.push({ sentence, effect: out });
+      continue;
+    }
     const lossM = /^its controller loses (\w+) life\.$/i.exec(sentence);
     if (lossM !== null && ctx.targets.length === 1 && parsed.length > 0 && typeof numberOf(lossM[1]) === "number") {
       const loss = { kind: "lose-life", amount: numberOf(lossM[1]), toControllerOfTarget: 0 };

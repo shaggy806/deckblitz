@@ -107,6 +107,8 @@ import {
   playerCantLoseGame,
   playerCantLoseLife,
   playerCantWinGame,
+  playerHasProtectionFromEverything,
+  playerLifeCantChange,
   invalidateComputedCache,
   staticConditionMet,
   spellGrantReaches,
@@ -260,6 +262,7 @@ import {
   faceName,
   manaCostOverride,
   permanentCount,
+  phasedOutIds,
   printedCardName,
   rulesTextName,
   nameOf,
@@ -295,6 +298,7 @@ import type {
   TurnHistory,
   PendingEntry,
   PendingTrigger,
+  PhasedOutStatus,
   TriggerOrderEntry,
   PublicStint,
   PlayerCounterKind,
@@ -918,6 +922,10 @@ export class Game {
     /** Sources of "for as long as" effects that left in it, ended once it's
      * done (`endWhileSourceEffects`). */
     readonly endsWhileSource: ObjectId[];
+    /** Permanents that left in it, each in the stint it left: what phased
+     * out "until" one of them left phases in once the event is over (rule
+     * 610.4 — `phaseInUntilLeft`). */
+    readonly phaseInAfter: { readonly source: ObjectId; readonly zoneChangeCount: number }[];
   } | null = null;
 
   /** The permanents that have entered the battlefield so far in the one
@@ -5060,7 +5068,7 @@ export class Game {
     );
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object.attackedThisTurn === true) object.attackedThisTurn = false;
     }
@@ -5155,7 +5163,17 @@ export class Game {
         (e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)),
       );
     }
-    for (const id of this.state.zones.shared.battlefield) {
+    // A permanent that phased out under a player who has left the game phases
+    // in during the next untap step after that player's next turn would have
+    // begun (rule 702.26n) — this turn's, which is about to begin.
+    for (const id of phasedOutIds(this.state)) {
+      const status = this.state.objects[id]?.phasedOut;
+      if (status !== undefined && status.controller !== this.activePlayer && beginningFor.includes(status.controller)) {
+        status.released = true;
+      }
+    }
+    // These durations run out while a permanent is phased out too (702.26f).
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object !== undefined && object.modifiers.some((m) => m.untilTurnOf !== undefined)) {
         object.modifiers = object.modifiers.filter(
@@ -5549,21 +5567,29 @@ export class Game {
 
   private untapStep(): void {
     const active = this.activePlayer;
-    for (const id of this.state.zones.shared.battlefield) {
+    // First, phasing (rule 502.1), before anything untaps.
+    this.phasingStep(active);
+    // The turn's resets reach a phased-out permanent too: what it did on an
+    // earlier turn isn't "this turn" when it phases in (702.26d — its history
+    // goes on through the phasing).
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       // "Activate only once each turn" (rule 602.5b) is each turn, anyone's:
       // Wall of Roots used on its controller's turn makes mana again on the
       // next player's.
       object.abilitiesUsedThisTurn = [];
+      // A loyalty ability may be activated again (rule 606.3) — "that turn"
+      // is each turn, so one whose loyalty abilities may be activated on any
+      // player's turn (Teferi, Master of Time) gets one on this turn too.
+      object.loyaltyActivatedThisTurn = false;
       if (object.controller !== active) continue;
       // Summoning sickness wears off as the controller's turn begins.
       object.summoningSick = false;
-      // A loyalty ability may be activated again (rule 606.3).
-      object.loyaltyActivatedThisTurn = false;
       object.graveyardCastUsedThisTurn = false;
       object.graveyardCastTypesUsedThisTurn = undefined;
       object.combatDamagedPlayersThisTurn = [];
       object.attackedThisTurn = false;
+      if (object.zone !== "battlefield") continue;
       // Exerted (rule 701.43a): not during its exerter's next untap step —
       // this one, if that's who's active. Nor one an effect said doesn't
       // untap during this player's next untap step.
@@ -5588,8 +5614,8 @@ export class Game {
     }
     // That was their next untap step: whatever they exerted has served its
     // time, untapped or not (the rulings) — and so has a "doesn't untap
-    // during its controller's next untap step".
-    for (const id of this.state.zones.shared.battlefield) {
+    // during its controller's next untap step" — a phased-out one's too.
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object?.exertedBy === active) delete object.exertedBy;
       if (object?.controller === active) delete object.skipsNextUntap;
@@ -6298,7 +6324,10 @@ export class Game {
     // falls to whichever control effect is now the latest (rule 613.7), else
     // the owner, and the creature is summoning-sick for them again.
     let controlEffectEnded = false;
-    for (const id of this.state.zones.shared.battlefield) {
+    // Every "until end of turn" effect ends, and all damage marked is removed
+    // — a phased-out permanent's included (rule 514.2).
+    const permanents = [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)];
+    for (const id of permanents) {
       const object = this.state.objects[id];
       if (!object.controlEndsAtCleanup) continue;
       object.controlEndsAtCleanup = false;
@@ -6322,7 +6351,7 @@ export class Game {
     }
 
     const expired: ObjectId[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of permanents) {
       const object = this.state.objects[id];
       // A copy "until end of turn" (Cursed Mirror, Mirage Mirror) ends (rule
       // 514.2): it's what it was before again where it is, so nothing enters
@@ -6341,7 +6370,7 @@ export class Game {
     }
 
     const cleared: ObjectId[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    for (const id of permanents) {
       const object = this.state.objects[id];
       // Regeneration shields last only this turn (rule 514.2), as does being
       // saddled (702.171b) and what a creature saddled this turn (702.171c).
@@ -7881,6 +7910,8 @@ export class Game {
    */
   private canEnchantPlayer(aura: ObjectId, player: PlayerId, controller: PlayerId, def: CardDefinition): boolean {
     if (this.state.players[player]?.hasLost !== false) return false;
+    // Protection from everything: no Aura at all (rule 702.16j).
+    if (playerHasProtectionFromEverything(this.state, player)) return false;
     const spec = def.targets[0];
     if (spec === undefined) return false;
     const onBattlefield = this.state.objects[aura]?.zone === "battlefield";
@@ -12098,7 +12129,11 @@ export class Game {
     if (ability.loyaltyCost !== undefined) {
       // Loyalty ability (rule 606): sorcery-speed, once per permanent per turn,
       // and a "minus" ability needs that many loyalty counters to spend.
-      const timing = this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
+      // Unless the permanent says any time you could cast an instant, on any
+      // player's turn (Teferi, Master of Time) — priority is all it needs.
+      const timing = this.hasOwnStatic(source, (a) => a.loyaltyAtInstantSpeed === true)
+        ? null
+        : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
       if (source.loyaltyActivatedThisTurn) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
@@ -16582,6 +16617,7 @@ export class Game {
       deferred: [] as ObjectId[],
       snapshots: new Map<ObjectId, LastKnownInfo>(),
       endsWhileSource: [] as ObjectId[],
+      phaseInAfter: [] as { readonly source: ObjectId; readonly zoneChangeCount: number }[],
     };
     this.leaveBatch = batch;
     try {
@@ -16591,6 +16627,10 @@ export class Game {
       this.leaveBatch = null;
     }
     this.endWhileSourceEffects(batch.endsWhileSource);
+    // "Until [this] leaves the battlefield" (rule 610.4): right after the
+    // event — so a wrath that took Oubliette with it doesn't reach what it
+    // held.
+    if (batch.phaseInAfter.length > 0) this.phaseInUntilLeft(batch.phaseInAfter);
     if (batch.deferred.length === 0 || batch.left.length + batch.deferred.length < 2) return;
     // The other deferred commanders too: whichever of them is answered
     // later still left with the ones answered first (the seed drops any
@@ -17152,6 +17192,9 @@ export class Game {
         if (spec.sharesNoCreatureType === true && this.sharesCreatureTypeWithOwn(event.object, event.player)) {
           return false;
         }
+        // "If it isn't that player's turn" — true as it resolves too, since
+        // the turn can't change with the ability on the stack (rule 603.4).
+        if (spec.offTurn === true && event.player === this.activePlayer) return false;
         return true;
       }
       case "this-cast":
@@ -18912,11 +18955,11 @@ export class Game {
         if (untilSourceLeaves === true) {
           // Rule 610.3a/b: exiled "until" something that has already happened
           // — its source gone, or back as a new object (400.7) — it isn't
-          // exiled at all.
+          // exiled at all. A source phased out hasn't left (702.26d).
           const src = this.state.objects[source];
           if (
             src === undefined ||
-            src.zone !== "battlefield" ||
+            (src.zone !== "battlefield" && src.zone !== "phased-out") ||
             (refs.source !== undefined && (src.zoneChangeCount ?? 0) !== refs.source)
           ) {
             return;
@@ -20044,6 +20087,42 @@ export class Game {
             this.emit({ type: "permanent-tapped", object: id });
           }
         }
+      },
+      phaseOut: (what) => {
+        // "…until this leaves the battlefield" (rule 610.4): not at all if it
+        // already has, or is back as a new object (610.4b-c). Phased out
+        // itself, it hasn't left.
+        let until: PhasedOutStatus["until"];
+        if (what.untilSourceLeaves === true) {
+          const src = this.state.objects[source];
+          if (
+            src === undefined ||
+            (src.zone !== "battlefield" && src.zone !== "phased-out") ||
+            (refs.source !== undefined && (src.zoneChangeCount ?? 0) !== refs.source)
+          ) {
+            return;
+          }
+          until = {
+            source,
+            zoneChangeCount: src.zoneChangeCount ?? 0,
+            ...(what.tappedOnReturn === true ? { tapped: true } : {}),
+          };
+        }
+        if (what.filter !== undefined) {
+          // Every match at once, a token stack whole.
+          this.phaseOut(this.battlefieldMatching(what.scopeTo ?? controller, what.filter), until);
+          return;
+        }
+        if (what.attachedToSource === true) {
+          // "Equipped creature phases out": the one it's attached to now.
+          const src = this.state.objects[source];
+          const host = src?.zone === "battlefield" ? src.attachedTo : null;
+          if (host !== null && host !== undefined) this.phaseOut([host], until);
+          return;
+        }
+        const target = what.target;
+        if (target?.kind !== "object" || this.state.objects[target.object]?.zone !== "battlefield") return;
+        this.phaseOut([this.splitOneFromStack(target.object)], until);
       },
       animate: (target, opts) => this.animate(target, { ...opts, duration: lastingHere(opts.duration) }),
       addTypes: (target, types, subtypes, duration) =>
@@ -23237,6 +23316,7 @@ export class Game {
    * gain life"). Asked before an exchange, which can't happen at all then
    * (rule 701.12a). */
   private playerCantGainLife(player: PlayerId): boolean {
+    if (playerLifeCantChange(this.state, player)) return true;
     return this.playerEventReplacements(player).some(
       (r) => r.event === "would-gain-life" && (r as LifeGainReplacement).prevent === true,
     );
@@ -24549,6 +24629,170 @@ export class Game {
       const o = this.state.objects[other];
       if (o.blockedBy.includes(id)) o.blockedBy = o.blockedBy.filter((b) => b !== id);
     }
+  }
+
+  // --- phasing (rule 702.26) -----------------------------------------
+
+  /**
+   * Phase out `ids` — the permanents something phases out directly — at once
+   * (rule 702.26b), and with each, indirectly, whatever is attached to it and
+   * to those in turn (702.26g); one that would phase out both ways phases out
+   * indirectly (702.26h). Each keeps its id, stint, counters, status and
+   * attachments, and moves from the battlefield's list to
+   * `GameState.phasedOut` with `zone: "phased-out"`: no zone changes and no
+   * leaves-the-battlefield trigger fires (702.26d). It's removed from combat
+   * (506.4); a "for as long as" effect tracking it ends (702.26f); its
+   * `lastKnown` is it as it last existed, for whatever still reads it as gone
+   * (608.2h). `until` is a "phases out until …" (610.4), on those phased out
+   * directly. Returns what phased out, those phased out directly first.
+   */
+  private phaseOut(ids: readonly ObjectId[], until?: PhasedOutStatus["until"]): ObjectId[] {
+    const battlefield = this.state.zones.shared.battlefield;
+    const direct = ids.filter((id, i) => ids.indexOf(id) === i && this.state.objects[id]?.zone === "battlefield");
+    if (direct.length === 0) return [];
+    // What phases out with what: everything attached to one phasing out.
+    const withHost = new Map<ObjectId, ObjectId>();
+    const all = new Set<ObjectId>(direct);
+    const queue = [...direct];
+    while (queue.length > 0) {
+      const host = queue.shift() as ObjectId;
+      for (const id of battlefield) {
+        if (this.state.objects[id]?.attachedTo !== host || withHost.has(id)) continue;
+        withHost.set(id, host);
+        if (!all.has(id)) {
+          all.add(id);
+          queue.push(id);
+        }
+      }
+    }
+    const order = [...all];
+    // Each as it last existed, read before any of them goes.
+    const snapshots = withComputedCache(() => new Map(order.map((id) => [id, this.takeLastKnown(id)] as const)));
+    for (const id of order) {
+      const object = this.state.objects[id];
+      this.removeFromCombat(id);
+      const host = withHost.get(id);
+      const attachedTo = object.attachedTo === null ? undefined : this.state.objects[object.attachedTo];
+      object.phasedOut = {
+        controller: object.controller,
+        ...(host !== undefined ? { with: host } : {}),
+        ...(host === undefined && attachedTo !== undefined
+          ? { host: { id: attachedTo.id, zoneChangeCount: attachedTo.zoneChangeCount ?? 0 } }
+          : {}),
+        ...(host === undefined && until !== undefined ? { until } : {}),
+        ...(object.lastKnown !== undefined ? { priorLastKnown: object.lastKnown } : {}),
+      };
+      const snapshot = snapshots.get(id);
+      if (snapshot !== undefined) object.lastKnown = snapshot;
+      const at = battlefield.indexOf(id);
+      if (at >= 0) battlefield.splice(at, 1);
+      (this.state.phasedOut ??= []).push(id);
+      object.zone = "phased-out";
+    }
+    invalidateComputedCache();
+    this.emit({ type: "permanents-phased-out", objects: order });
+    this.endWhileSourceEffects(order);
+    return order;
+  }
+
+  /**
+   * Phase in `ids` (rule 702.26c), and with each whatever phased out
+   * indirectly with it, in turn (702.26g), at once: back on the battlefield's
+   * list as the same objects, with no enters trigger (702.26d). A directly
+   * phased-out Aura or Equipment comes back attached to what it was on if
+   * that's still on the battlefield as the same object, and unattached if not
+   * (702.26i) — state-based actions then deal with it. Control is worked out
+   * again: an effect that ended while it was out gives it to nobody now (the
+   * rulings). Returns what phased in.
+   */
+  private phaseIn(ids: readonly ObjectId[], tapped: readonly ObjectId[] = []): ObjectId[] {
+    const queue = ids.filter((id, i) => ids.indexOf(id) === i && this.state.objects[id]?.zone === "phased-out");
+    const all = new Set<ObjectId>(queue);
+    const order: ObjectId[] = [];
+    while (queue.length > 0) {
+      const host = queue.shift() as ObjectId;
+      order.push(host);
+      for (const id of phasedOutIds(this.state)) {
+        if (all.has(id) || this.state.objects[id]?.phasedOut?.with !== host) continue;
+        all.add(id);
+        queue.push(id);
+      }
+    }
+    if (order.length === 0) return [];
+    const statuses = new Map<ObjectId, PhasedOutStatus>();
+    for (const id of order) {
+      const object = this.state.objects[id];
+      const status = object.phasedOut as PhasedOutStatus;
+      statuses.set(id, status);
+      delete object.phasedOut;
+      if (status.priorLastKnown !== undefined) object.lastKnown = status.priorLastKnown;
+      else delete object.lastKnown;
+      this.state.phasedOut = (this.state.phasedOut ?? []).filter((other) => other !== id);
+      object.zone = "battlefield";
+      this.state.zones.shared.battlefield.push(id);
+      // "Tap that creature as it phases in this way" (Oubliette): it's
+      // tapped as it arrives, not becoming tapped once there — nothing that
+      // watches a permanent become tapped sees it (the ruling).
+      if (tapped.includes(id)) object.tapped = true;
+    }
+    if (this.state.phasedOut?.length === 0) delete this.state.phasedOut;
+    for (const id of order) {
+      const host = statuses.get(id)?.host;
+      if (host === undefined) continue;
+      const on = this.state.objects[host.id];
+      if (on?.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== host.zoneChangeCount) {
+        this.state.objects[id].attachedTo = null;
+      }
+    }
+    invalidateComputedCache();
+    this.recomputeControl();
+    this.emit({ type: "permanents-phased-in", objects: order });
+    return order;
+  }
+
+  /** What phased out "until" one of `left` left the battlefield, in the
+   * stint it left, phases in (rule 610.4) — tapped, if it said so. One that
+   * has phased in some other way since isn't waiting on it any more (610.4a). */
+  private phaseInUntilLeft(left: readonly { readonly source: ObjectId; readonly zoneChangeCount: number }[]): void {
+    const waiting = phasedOutIds(this.state).filter((id) => {
+      const object = this.state.objects[id];
+      const until = object?.phasedOut?.until;
+      // One whose owner has left the game left with them (rule 702.26k).
+      if (until === undefined || this.state.players[object.owner]?.hasLost !== false) return false;
+      return left.some((l) => l.source === until.source && l.zoneChangeCount === until.zoneChangeCount);
+    });
+    if (waiting.length === 0) return;
+    const tapped = waiting.filter((id) => this.state.objects[id].phasedOut?.until?.tapped === true);
+    this.phaseIn(waiting, tapped);
+  }
+
+  /**
+   * The phasing turn-based action (rules 502.1, 703.4a, 702.26a), as the
+   * untap step begins: every phased-in permanent with phasing the active
+   * player controls phases out, and every permanent that phased out under
+   * their control phases in — simultaneously. Not one waiting "until"
+   * something happens (610.4a), nor one that phased out indirectly (it comes
+   * with its host), nor one whose owner has left the game (it left with them,
+   * 702.26k). One that phased out under a player who has since left phases in
+   * now if that player's turn would have begun (702.26n — `released`).
+   */
+  private phasingStep(active: PlayerId): void {
+    const outgoing = this.state.zones.shared.battlefield.filter((id) => {
+      const object = this.state.objects[id];
+      return (
+        object?.controller === active &&
+        computeCharacteristics(this.state, this.registry, id).keywords.has("phasing")
+      );
+    });
+    const incoming = phasedOutIds(this.state).filter((id) => {
+      const object = this.state.objects[id];
+      const status = object?.phasedOut;
+      if (status === undefined || status.with !== undefined || status.until !== undefined) return false;
+      if (this.state.players[object.owner]?.hasLost !== false) return false;
+      return status.controller === active || status.released === true;
+    });
+    if (outgoing.length > 0) this.phaseOut(outgoing);
+    if (incoming.length > 0) this.phaseIn(incoming);
   }
 
   /** Destroy every battlefield permanent matching `filter` (Wrath of God),
@@ -27517,6 +27761,12 @@ export class Game {
     const many = sources > 1 ? { sources } : {};
     if (target.kind === "player") {
       if (this.state.players[target.player] === undefined) return 0;
+      // A player with protection from everything: all damage that would be
+      // dealt to them is prevented (rule 702.16j).
+      if (playerHasProtectionFromEverything(this.state, target.player)) {
+        this.emit({ type: "damage-prevented", source, target, amount });
+        return 0;
+      }
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
       this.tallyDamage(source, target, amount);
       // The damage is dealt in full — lifelink, commander damage and "is
@@ -27774,6 +28024,10 @@ export class Game {
     // "Players can't lose life this turn" (rule 119.8): a loss, from damage
     // or an effect, doesn't happen.
     if (delta < 0 && playerCantLoseLife(this.state, player)) return;
+    // "Your life total can't change" (rule 119.7): no gain either — and so
+    // nothing that would replace one applies (the Teferi's Protection
+    // rulings).
+    if (delta > 0 && playerLifeCantChange(this.state, player)) return;
     // Gaining life, changed: "…that much life plus 1 instead" (Bilbo),
     // "…twice that much life instead" (Rhox Faithmender), or not at all
     // ("your opponents can't gain life"). Rule 616.1 lets the player gaining
@@ -29583,6 +29837,9 @@ export class Game {
       player !== undefined && this.state.players[player]?.hasLost === true;
     if (left(object.owner) && this.departing !== object.owner) return false;
     if (to === "battlefield" && left(enter.under)) return false;
+    // A phased-out permanent can't be affected by anything (rule 702.26b):
+    // it goes nowhere until it phases in.
+    if (object.zone === "phased-out") return false;
     // An instant or sorcery card that would enter the battlefield stays where
     // it was (rule 400.4a).
     if (to === "battlefield" && object.zone !== "battlefield") {
@@ -30316,6 +30573,14 @@ export class Game {
         if (this.leaveBatch !== null) this.leaveBatch.endsWhileSource.push(id);
         else this.endWhileSourceEffects([id]);
       }
+      // What phased out "until [this] leaves the battlefield" phases in
+      // (rule 610.4) — right after the event it left in.
+      const stint = object.lastKnown?.zoneChangeCount;
+      if (stint !== undefined && phasedOutIds(this.state).length > 0) {
+        const left = { source: id, zoneChangeCount: stint };
+        if (this.leaveBatch !== null) this.leaveBatch.phaseInAfter.push(left);
+        else this.phaseInUntilLeft([left]);
+      }
     }
     if (leftGraveyard !== undefined) this.noteGraveyardDeparture(id, leftGraveyard);
     // A card put into a graveyard (tokens aren't cards — rule 111.1).
@@ -30743,6 +31008,7 @@ export class Game {
     if (zone === "library" || zone === "hand" || zone === "graveyard") {
       return this.state.zones.perPlayer[owner][zone];
     }
+    if (zone === "phased-out") return (this.state.phasedOut ??= []);
     return this.state.zones.shared[zone];
   }
 
@@ -30753,7 +31019,8 @@ export class Game {
     if (!ids.includes(id)) ids.push(id);
   }
 
-  /** `ids` have left the battlefield: end every modifier and control effect
+  /** `ids` have left the battlefield, or phased out (rule 702.26f — such an
+   * effect can no longer see it): end every modifier and control effect
    * that lasted "for as long as" one of them remained (rule 611.2b). Called
    * once everything leaving with them has left, so the event's look back
    * (rule 603.10a) still sees what the effects took away. A source already
@@ -30776,7 +31043,8 @@ export class Game {
     if (this.state.whileSourceIds.length === 0) delete this.state.whileSourceIds;
     const expired: ObjectId[] = [];
     let controlEnded = false;
-    for (const id of this.state.zones.shared.battlefield) {
+    // A phased-out permanent's effects end too (rule 702.26f).
+    for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object.modifiers.some((m) => over(m.whileSource))) {
         object.modifiers = object.modifiers.filter((m) => !over(m.whileSource));

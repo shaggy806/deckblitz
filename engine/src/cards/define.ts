@@ -167,6 +167,11 @@ export type Keyword =
    * starts its new controller's. "Max speed — [ability]" is the
    * `maxSpeed()` helper's static. */
   | "start-your-engines"
+  /** Phasing (rule 702.26a) — a static ability that modifies the untap step:
+   * as each of its controller's untap steps begins, it phases out (and what
+   * phased out under that player phases in) — `Game.phasingStep`. Read off
+   * the permanent's current keywords; several are redundant (702.26p). */
+  | "phasing"
   /** Flanking (rule 702.25) — a triggered ability: the keyword is what a
    * "creature without flanking" asks about, and the `flanking()` card helper
    * is the trigger itself, so a card lists both (Sidar Kondo of Jamuraa). */
@@ -1604,6 +1609,12 @@ export interface StaticAbility {
    * it during another player's (Seedborn Muse) still does. `affects` is
    * ignored — it is always the permanent carrying it. */
   readonly doesntUntap?: boolean;
+  /** "You may activate loyalty abilities of [this] on any player's turn any
+   * time you could cast an instant" (Teferi, Master of Time): its loyalty
+   * abilities aren't held to sorcery timing (rule 606.3) — still one per
+   * turn, each turn. `affects` is ignored — it is always the permanent
+   * carrying it. */
+  readonly loyaltyAtInstantSpeed?: boolean;
   /**
    * "You may exert this creature as it attacks" (rule 701.43d — Glorybringer):
    * an optional cost to attack (508.1g), asked of its controller once its

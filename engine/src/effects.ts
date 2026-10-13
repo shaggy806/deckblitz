@@ -823,7 +823,11 @@ export type ThisWayKind =
    * you control. If you do, this creature gets +X/+0": a `choose-permanents`
    * tapping them, then this. One already tapped isn't tapped again, and so
    * isn't counted. */
-  | "tapped";
+  | "tapped"
+  /** Permanents it put a counter on — Ripples of Potential's "permanents you
+   * control that had a counter put on them this way", after a proliferate.
+   * A player isn't one. */
+  | "counters-put";
 
 export type PlayerScope =
   | "each-player"
@@ -2775,6 +2779,14 @@ export type EffectSpec =
        * your control, twice that many of those tokens are created instead"
        * (Kaya, Geist Hunter's −2) — `2`. Compounds with a Doubling Season. */
       readonly tokenMultiplier?: number;
+      /** "Your life total can't change" (Teferi's Protection — rules 119.7,
+       * 119.8): no gain and no loss, from damage or an effect; no life paid
+       * but 0; no exchange of life totals. */
+      readonly lifeCantChange?: PlayerScope;
+      /** "You gain protection from everything" (rule 702.16j): not a target
+       * of spells or abilities, not enchanted by Auras, all damage to them
+       * prevented. */
+      readonly protectionFromEverything?: PlayerScope;
     }
   | {
       /**
@@ -3361,6 +3373,32 @@ export type EffectSpec =
        * single chosen target. */
       readonly kind: "tap-all";
       readonly filter: CardFilter;
+    }
+  | {
+      /**
+       * Phase out (rule 702.26b): the permanent `target` names (a slot,
+       * `"source"` — "he phases out" — or `"trigger-object"`), the one the
+       * effect's source is attached to as this resolves (`attachedToSource` —
+       * Robe of Stars' "equipped creature phases out"), or every permanent
+       * matching `filter` from the controller's side at once ("all permanents
+       * you control phase out" — Teferi's Protection; with
+       * `controlledByTarget`, "each creature target player controls" —
+       * Galadriel's Dismissal kicked). What's attached to each phases out with
+       * it, indirectly (702.26g, 702.26h). Treated as though it doesn't exist
+       * until it phases in (702.26b–d): during the untap step of the player
+       * who controlled it as it phased out (502.1), or —
+       * `untilSourceLeaves` — only as the effect's source leaves the
+       * battlefield (610.4 — Oubliette), and not at all if the source has
+       * already left, or is back as a new object, as this resolves (610.4b-c).
+       * `tappedOnReturn`: "tap that creature as it phases in this way".
+       */
+      readonly kind: "phase-out";
+      readonly target?: EffectTargetRef;
+      readonly attachedToSource?: boolean;
+      readonly filter?: CardFilter;
+      readonly controlledByTarget?: number;
+      readonly untilSourceLeaves?: boolean;
+      readonly tappedOnReturn?: boolean;
     }
   | {
       /** `target` becomes a creature (rule 613 layer 4 for the added/set
@@ -5507,6 +5545,17 @@ export interface EffectApi {
   /** See the `"exert"` {@link EffectSpec}. */
   exert(target: TargetRef, asItAttacks: boolean): void;
   tapAll(filter: CardFilter): void;
+  /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
+   * the permanent the source is attached to, or every permanent matching
+   * `filter` — at once. */
+  phaseOut(what: {
+    readonly target?: TargetRef;
+    readonly attachedToSource?: boolean;
+    readonly filter?: CardFilter;
+    readonly scopeTo?: PlayerId;
+    readonly untilSourceLeaves?: boolean;
+    readonly tappedOnReturn?: boolean;
+  }): void;
   /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}. */
   animate(
     target: TargetRef,
@@ -8093,6 +8142,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.tokenMultiplier !== undefined ? { tokenMultiplier: spec.tokenMultiplier } : {}),
+        ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
+        ...(spec.protectionFromEverything !== undefined
+          ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
+          : {}),
       });
       return;
     case "win-game":
@@ -8365,6 +8418,27 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "tap-all":
       ctx.tapAll(spec.filter);
       return;
+    case "phase-out": {
+      const until = {
+        ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
+        ...(spec.tappedOnReturn === true ? { tappedOnReturn: true } : {}),
+      };
+      if (spec.filter !== undefined) {
+        // "Each creature target player controls": nobody's, once that
+        // target is gone (rule 608.2b).
+        const scopeTo = scopedController(spec.controlledByTarget, ctx);
+        if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+        ctx.phaseOut({ filter: spec.filter, ...(scopeTo !== undefined ? { scopeTo } : {}), ...until });
+        return;
+      }
+      if (spec.attachedToSource === true) {
+        if (ctx.sourceLost !== true) ctx.phaseOut({ attachedToSource: true, ...until });
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.phaseOut({ target, ...until });
+      return;
+    }
     case "animate": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) {

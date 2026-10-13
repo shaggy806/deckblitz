@@ -169,6 +169,17 @@ export function thisWayEntries(
           }
         }
         break;
+      case "counters-put":
+        // A permanent's counters (a player's are `player-counters-changed`):
+        // its controller now, whoever put them.
+        if (event.type === "counter-added" && event.amount > 0) {
+          const object = state.objects[event.object];
+          if (object !== undefined && !seen.has(event.object)) {
+            seen.add(event.object);
+            out.push({ object: event.object, player: object.controller, departed: false, count: 1 });
+          }
+        }
+        break;
       case "put-onto-battlefield":
         // Moved there from a zone — not a token created, nor a permanent
         // spell resolving.

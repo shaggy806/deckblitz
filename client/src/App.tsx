@@ -3204,7 +3204,10 @@ function Table({
               : ''
           return (
           <div
-            className={`board-entry${own ? ' draggable' : ''}${dragged ? ' dragging' : ''}${dropSide}`}
+            // A phased-out permanent (rule 702.26) is drawn dimmed: there,
+            // but treated as though it doesn't exist until it phases in.
+            className={`board-entry${own ? ' draggable' : ''}${dragged ? ' dragging' : ''}${dropSide}${entry.sample.phasedOut === true ? ' phased-out' : ''}`}
+            title={entry.sample.phasedOut === true ? 'Phased out — treated as though it doesn’t exist until it phases in' : undefined}
             key={entry.ids[0]}
             data-obj-ids={entry.ids.join(' ')}
             // How many permanents the tile stands for, which a leave reads to

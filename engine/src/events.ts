@@ -288,6 +288,20 @@ export type GameEvent =
       readonly asItAttacks: boolean;
     })
   | (Base & {
+      /** Permanents phased out together (rule 702.26b) — those phased out
+       * directly and, after them, what phased out indirectly with them
+       * (702.26g). No zone changed (702.26d): nothing that watches a
+       * permanent leave sees this. */
+      readonly type: "permanents-phased-out";
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
+      /** Permanents phased in together (rule 702.26c): no zone changed, so
+       * nothing that watches a permanent enter sees this (702.26d). */
+      readonly type: "permanents-phased-in";
+      readonly objects: readonly ObjectId[];
+    })
+  | (Base & {
       /** `player` promised `spell`'s gift to the opponent `to` (rule
        * 702.174a), as its gift cost was paid. The gift is given as it
        * resolves, or as the permanent it becomes enters. */

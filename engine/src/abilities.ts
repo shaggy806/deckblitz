@@ -1407,6 +1407,10 @@ export type TriggerSpec =
        * to Monsters. A changeling on either side shares every type (rule
        * 702.73a); a spell with no creature type shares none. */
       readonly sharesNoCreatureType?: boolean;
+      /** "…if it isn't that player's turn" (Vision, Synthezoid Avenger): only
+       * a spell cast by someone other than the active player. An intervening
+       * "if" (rule 603.4) that can't change before the ability resolves. */
+      readonly offTurn?: boolean;
     }
   | {
       /**

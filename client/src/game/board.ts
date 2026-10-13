@@ -70,7 +70,13 @@ export function computeBoardEntries(
   view: PlayerView,
   pid: PlayerId,
 ): BoardEntry[] {
-  const all = view.zones.battlefield
+  // A phased-out permanent (rule 702.26) is still on its controller's side
+  // of the table, drawn dimmed (`VisibleObject.phasedOut`, which `tileKey`
+  // compares, so it never folds into a phased-in one's tile) — after the
+  // rest, so the board doesn't shuffle as things phase out and in.
+  // (A hand-built view — a test's, the scenario builder's — may leave the
+  // phased-out list out.)
+  const all = [...view.zones.battlefield, ...(view.zones.phasedOut ?? [])]
     .map((id) => view.objects[id])
     .filter((o): o is VisibleObject => Boolean(o))
   const byId = new Map(all.map((o) => [o.id, o]))

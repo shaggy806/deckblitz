@@ -35,7 +35,49 @@ import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 export type PrivateZone = "library" | "hand" | "graveyard";
 export type SharedZone = "battlefield" | "stack" | "exile" | "command";
-export type ZoneType = PrivateZone | SharedZone;
+/**
+ * `"phased-out"` isn't a zone (rule 702.26d: phasing changes no zone and no
+ * control) but the status of a permanent that is treated as though it doesn't
+ * exist (702.26b). A phased-out permanent keeps its id, `zoneChangeCount`,
+ * counters, attachments and the rest, sits in `GameState.phasedOut` rather
+ * than the battlefield's list, and has this as its `zone` — so every read of
+ * the battlefield, and every "is it still on the battlefield" check, passes
+ * it over without being told to. See {@link PhasedOutStatus}.
+ */
+export type ZoneType = PrivateZone | SharedZone | "phased-out";
+
+/**
+ * Why and how a permanent phased out (rule 702.26) — `GameObject.phasedOut`,
+ * present exactly while its `zone` is `"phased-out"`.
+ */
+export interface PhasedOutStatus {
+  /** Who controlled it as it phased out: it phases in during that player's
+   * untap step (rule 502.1), under whoever controls it then (the rulings —
+   * a stolen creature whose control effect ended meanwhile comes back to its
+   * owner). */
+  readonly controller: PlayerId;
+  /** Phased out *indirectly* (rule 702.26g), with the permanent it's attached
+   * to: it never phases in by itself, only along with that one. */
+  readonly with?: ObjectId;
+  /** An Aura or Equipment that phased out *directly*: what it was attached
+   * to, in that object's stint — it phases in attached to it if that's still
+   * on the battlefield as the same object, else unattached (702.26i). */
+  readonly host?: { readonly id: ObjectId; readonly zoneChangeCount: number };
+  /** "Phases out until [this] leaves the battlefield" (rule 610.4 — Oubliette):
+   * the permanent whose leaving phases it in, in that permanent's stint. Such
+   * a permanent doesn't phase in during an untap step (610.4a). `tapped`:
+   * "tap that creature as it phases in this way". */
+  readonly until?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly tapped?: boolean };
+  /** It phased out under a player who has since left the game, and that
+   * player's next turn would have begun: it phases in during the next untap
+   * step (rule 702.26n). */
+  released?: true;
+  /** Its `lastKnown` before it phased out, put back as it phases in: the
+   * snapshot taken as it phased out (what it was as it last existed, for an
+   * ability that reads a source treated as gone — rule 608.2h) belongs to
+   * that absence only. */
+  readonly priorLastKnown?: LastKnownInfo;
+}
 
 /** One layer-2 control-changing effect on a permanent — see
  * `GameObject.controlEffects`. */
@@ -67,6 +109,9 @@ export interface GameObject {
   readonly owner: PlayerId;
   controller: PlayerId;
   zone: ZoneType;
+  /** Phased out (rule 702.26) — see {@link PhasedOutStatus}. Present exactly
+   * while `zone` is `"phased-out"`. */
+  phasedOut?: PhasedOutStatus;
   tapped: boolean;
   damageMarked: number;
   /**
@@ -3110,6 +3155,17 @@ export interface PlayerEffect {
    * Hunter's −2): multiplies every token creation under `owner`'s control,
    * alongside a Doubling Season's (rule 614 — they compound). */
   readonly tokenMultiplier?: number;
+  /** "Your life total can't change" (Teferi's Protection): these players can
+   * neither gain nor lose life (rules 119.7, 119.8) — a gain or a loss, from
+   * damage or an effect, does nothing; a cost that has them pay more than 0
+   * life or gain life can't be paid; an exchange of life totals doesn't
+   * happen. Damage is still dealt. See `playerLifeCantChange`. */
+  readonly lifeCantChange?: readonly PlayerId[];
+  /** "You gain protection from everything" (rule 702.16j): these players
+   * can't be the target of spells or abilities, can't be enchanted by Auras
+   * (a Curse on one goes, 704.5m), and all damage that would be dealt to them
+   * is prevented. See `playerHasProtectionFromEverything`. */
+  readonly protectionFromEverything?: readonly PlayerId[];
 }
 
 /**
@@ -3204,6 +3260,13 @@ export interface GameState {
     perPlayer: Record<PlayerId, Record<PrivateZone, ObjectId[]>>;
     shared: Record<SharedZone, ObjectId[]>;
   };
+  /**
+   * The phased-out permanents (rule 702.26), in the order they phased out —
+   * each with `zone: "phased-out"` and a `phasedOut` status. Out of the
+   * battlefield's list, so nothing that reads the battlefield sees them
+   * (702.26b). Absent while none is.
+   */
+  phasedOut?: ObjectId[];
   turn: TurnState;
   priority: PriorityState;
   result: GameResult;
@@ -3911,6 +3974,12 @@ export const nameOf = (object: GameObject): string => {
  */
 export const permanentCount = (state: GameState, ids: readonly ObjectId[]): number =>
   ids.reduce((n, id) => n + (state.objects[id]?.stackCount ?? 1), 0);
+
+/** The phased-out permanents (rule 702.26) — see `GameState.phasedOut`. Read
+ * only by what the rules say sees them: the untap step's phasing, cleanup's
+ * damage removal and end of "until end of turn" effects (514.2), effects
+ * expiring (702.26f), a player leaving (702.26k), and a view. */
+export const phasedOutIds = (state: GameState): readonly ObjectId[] => state.phasedOut ?? [];
 
 export const activePlayerOf = (state: GameState): PlayerId =>
   state.turnOrder[state.turn.activePlayerIndex];

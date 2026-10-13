@@ -125,6 +125,10 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} becomes saddled`
     case 'permanent-exerted':
       return `${who(event.player)} exerts ${name(event.object)}`
+    case 'permanents-phased-out':
+      return `${event.objects.map(name).join(', ')} phase${event.objects.length === 1 ? 's' : ''} out`
+    case 'permanents-phased-in':
+      return `${event.objects.map(name).join(', ')} phase${event.objects.length === 1 ? 's' : ''} in`
     case 'gift-promised':
       return `${who(event.player)} promises ${name(event.spell)}'s gift to ${who(event.to)}`
     case 'day-night-changed':

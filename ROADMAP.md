@@ -232,7 +232,7 @@ Six increments closing gaps that made real cards inexpressible:
 ## Where next
 
 Not here. [`BACKLOG.md`](BACKLOG.md) is the single list of open work. That includes what
-these phases deferred: Phase 10's Battles, phasing,
+these phases deferred: Phase 10's Battles (phasing has since landed),
 dungeons/Initiative/Ring and banding, Phase 9's Companion and legend-rule choice, Phase 11's
 `choose-replacement-order` and damage redirection. Engine features
 are ranked by the cards they unblock in `engine/src/cards/neededCards-features.md`.

@@ -66,6 +66,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     text: 'Deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.',
   },
   wither: { name: 'Wither', text: 'Deals damage to creatures in the form of -1/-1 counters.' },
+  phasing: {
+    name: 'Phasing',
+    text: "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.",
+  },
   plainswalk: { name: 'Plainswalk', text: "Can't be blocked as long as defending player controls a Plains." },
   islandwalk: { name: 'Islandwalk', text: "Can't be blocked as long as defending player controls an Island." },
   swampwalk: { name: 'Swampwalk', text: "Can't be blocked as long as defending player controls a Swamp." },

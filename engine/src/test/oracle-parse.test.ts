@@ -677,6 +677,40 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toEqual({ kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" });
   });
 
+  it("phasing out (rule 702.26b): a target, up to one, any number, the source, the equipped creature, all you control, 'it'", () => {
+    const out = (target: unknown) => ({ kind: "phase-out", target });
+    const haystack = face(
+      "{2}, {T}: Target creature you control phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)",
+      "Artifact",
+    );
+    expect(haystack.activated[0].targets).toEqual(["creature-you-control"]);
+    expect(haystack.activated[0].effect).toEqual(out(0));
+    expect(haystack.complete).toBe(true);
+    const gates = face("When this land enters, up to one target creature phases out.", "Land — Gate");
+    expect(gates.triggered[0].targets).toEqual([{ kind: "optional", of: "creature" }]);
+    expect(gates.triggered[0].effect).toEqual(out(0));
+    const guardian = face("When this creature enters, any number of other target creatures you control phase out.");
+    expect(guardian.triggered[0].targets).toEqual([{ kind: "any-number", of: { kind: "other", of: "creature-you-control" } }]);
+    expect(guardian.triggered[0].effect).toEqual({ kind: "for-each-target", from: 0, simultaneous: true, effect: out(0) });
+    expect(parseSentence("~ phases out.", ctx())).toEqual(out("source"));
+    expect(parseSentence("Equipped creature phases out.", ctx())).toEqual({ kind: "phase-out", attachedToSource: true });
+    expect(parseSentence("All permanents you control phase out.", ctx())).toEqual({
+      kind: "phase-out",
+      filter: { controlledBy: "you" },
+    });
+    // "It" after the sentence that targeted: that target.
+    const slip = face("Put a +1/+1 counter on target creature. It phases out.", "Instant");
+    expect(slip.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 }, out(0)],
+    });
+    // "…until ~ leaves the battlefield" (rule 610.4) is a person's.
+    expect(
+      face("When this enchantment enters, target creature phases out until this enchantment leaves the battlefield.", "Enchantment")
+        .complete,
+    ).toBe(false);
+  });
+
   it("waterbend (rule 701.67a): an ability's cost, a spell's additional cost ({N} or {X}), and an optional one", () => {
     expect(parseCost("Waterbend {4}").cost).toEqual({ mana: "{4}", tap: false, waterbend: true });
     expect(parseCost("Waterbend {X}").cost).toEqual({ mana: "{X}", tap: false, waterbend: true });

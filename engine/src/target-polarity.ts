@@ -343,6 +343,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "damage-divided": none,
   "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),
   "tap-all": none,
+  // Phasing out is a blocker gone for a turn when it's theirs (rule
+  // 702.26b) — read as that, a minor harm; one that can only be yours says
+  // so in its spec (Guardian of Faith, Haystack), and a counter put on first
+  // outranks it (Slip Out the Back). "Each creature target player
+  // controls": theirs.
+  "phase-out": (n, v) => {
+    v.touch(n.target, "harm", MINOR);
+    v.touch(n.controlledByTarget, "harm", MINOR);
+  },
   // Turn to Frog is removal; animating a land is a man-land. Only the first
   // says which.
   animate: (n, v) => v.touch(n.target, n.loseAbilities === true ? "harm" : "either", MAJOR),
