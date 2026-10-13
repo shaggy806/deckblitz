@@ -23,11 +23,11 @@
  * opponent's whole turn in one frame) can't slip past a chapter's opening.
  */
 
-import type { PlayerId } from "engine";
+import type { PlayerId } from "engine/local";
 import type { ScenarioSpec, TutorialAnchor, TutorialCoachStep } from "protocol";
 import { buildScenario } from "../builder.js";
 import type { OpponentScript } from "../scripted-bot.js";
-import { scriptRegistry } from "../scripted-bot.js";
+import { cardRegistry } from "../card-registry.js";
 import { conditionCards } from "./conditions.js";
 import type { TutorialCondition } from "./conditions.js";
 
@@ -91,7 +91,7 @@ export function humanSeat(board: LessonBoard): PlayerId {
 /** Throws, naming the first thing wrong, unless `lesson` can be run. */
 export function validateLesson(lesson: Lesson): void {
   const where = (what: string): string => `lesson ${lesson.id}: ${what}`;
-  const registry = scriptRegistry();
+  const registry = cardRegistry();
   // Chapters, cards and goals each have ids of their own.
   const ids = new Map<string, Set<string>>();
   const unique = (id: string, what: string): void => {

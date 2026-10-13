@@ -5,7 +5,7 @@
  * truth is, every time the tutorial room publishes a frame.
  */
 
-import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine";
+import type { GameEvent, GameState, ObjectId, PlayerId, Step } from "engine/local";
 
 /**
  * One thing to wait for. Every `event` condition is met by the first such

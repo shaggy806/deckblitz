@@ -59,7 +59,8 @@ describe("main-side modules", () => {
     const found = importsOf(read("index.ts"));
     expect(found.some((i) => i.specifier === "./worker-host.js" && !i.typeOnly)).toBe(true);
     expect(found.some((i) => i.specifier === "./room-host.js" && i.typeOnly)).toBe(true);
-    expect(importsOf(read("shard.ts")).some((i) => i.specifier === "engine" && !i.typeOnly)).toBe(true);
+    // The room code takes the engine (`engine/local`), which a main-side module may not.
+    expect(importsOf(read("card-registry.ts")).some((i) => i.specifier === "engine/local" && !i.typeOnly)).toBe(true);
   });
 
   it("loads the in-process rooms only by a dynamic import, for --shards 0", () => {

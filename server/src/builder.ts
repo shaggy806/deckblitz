@@ -12,10 +12,11 @@
  * way: `docs/plans/scenario-builder.md`.
  */
 
-import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, createDefaultRegistry, isTokenCard } from "engine";
-import type { CardRegistry, GameObject, ObjectId, PlayerId, Step } from "engine";
+import { COMMANDER_RULES, Game, asPlayerId, computeCharacteristics, isTokenCard } from "engine/local";
+import { cardRegistry } from "./card-registry.js";
+import type { CardRegistry, GameObject, ObjectId, PlayerId, Step } from "engine/local";
 import type { BuilderInfo, ScenarioCard, ScenarioSeat, ScenarioSpec, ScenarioStep, ScenarioZone } from "protocol";
-import type { CaptureConfig } from "./capture.js";
+import type { CaptureFactory } from "./capture.js";
 import type { HostRole } from "./host.js";
 import { Room } from "./room.js";
 import type { Connection } from "./room.js";
@@ -29,9 +30,6 @@ const MAX_CARDS = 600;
 const MAX_FILL = 200;
 const MAX_TURN = 999;
 const MAX_CASTS = 99;
-
-let sharedRegistry: CardRegistry | null = null;
-const registryOf = (): CardRegistry => (sharedRegistry ??= createDefaultRegistry());
 
 /** An empty two-player board on alice's first main phase. */
 export function defaultScenario(): ScenarioSpec {
@@ -49,7 +47,7 @@ const isCount = (n: unknown, max: number): n is number =>
 
 /** Throws, naming the first thing wrong, unless `spec` is a board the
  * builder can build. It comes from a client, so nothing is taken on trust. */
-export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = registryOf()): void {
+export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = cardRegistry()): void {
   if (typeof spec !== "object" || spec === null) throw new Error("no scenario");
   const seats = spec.seats;
   if (!Array.isArray(seats) || seats.length < 2 || seats.length > 4) throw new Error("a scenario has 2-4 seats");
@@ -130,7 +128,7 @@ export interface BuiltScenario {
  * `validateScenario` does, for a board it can't build — and for damage that
  * the built board can't hold (`damageProblem`).
  */
-export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = registryOf()): BuiltScenario {
+export function buildScenario(spec: ScenarioSpec, registry: CardRegistry = cardRegistry()): BuiltScenario {
   const laid = layOut(spec, registry);
   for (const card of spec.cards) {
     const problem = damageProblem(laid, card);
@@ -380,7 +378,7 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
   });
   // Tokens off the battlefield are gone (rule 704.5d), and so is a card a
   // scenario can't name (an emblem has no card).
-  const registry = registryOf();
+  const registry = cardRegistry();
   const kept = withAttachments.filter(
     (c) => registry.has(c.name) && (c.zone === "battlefield" || !isTokenCard(registry.get(c.name))),
   );
@@ -429,7 +427,7 @@ export interface BuilderHost {
   /** Puts `room` under the session's code, in place of the one before. */
   readonly install: (room: Room) => void;
   readonly onUpdate: (room: Room) => void;
-  readonly capture?: CaptureConfig;
+  readonly capture?: CaptureFactory;
 }
 
 /**

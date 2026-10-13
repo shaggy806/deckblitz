@@ -6,7 +6,7 @@
  * random, and a name another seat at the table already uses is passed over.
  */
 
-import type { Color } from "engine";
+import type { Color } from "engine/local";
 
 interface Character {
   readonly name: string;

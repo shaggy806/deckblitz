@@ -16,8 +16,9 @@
  * null-checks through `Room`'s entire API for no benefit.
  */
 
-import { colorIdentityOf, commandersOf, createDefaultRegistry, validateCommanderDeck } from "engine";
-import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine";
+import { colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
+import { cardRegistry } from "./card-registry.js";
+import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine/local";
 import { botNameFits, botNameFor } from "./bot-names.js";
 import type { Connection } from "./room.js";
 import { HostRole } from "./host.js";
@@ -47,10 +48,8 @@ const MAX_DISPLAY_NAME_LENGTH = 20;
  * anyone in the room can send either message. */
 const MIN_SEATS = 2;
 
-/** Every card the registry knows, built once — the first time a deck is
- * checked, not when this module loads, so importing it costs nothing. */
-let registryBuilt: CardRegistry | null = null;
-const registry = (): CardRegistry => (registryBuilt ??= createDefaultRegistry());
+/** The thread's shared card registry (`card-registry.ts`). */
+const registry = (): CardRegistry => cardRegistry();
 
 /** The maximum distinct unknown names worth naming back to the client — a
  * decklist built against an older pool could have dozens. */

@@ -16,6 +16,13 @@ export type * from "./index.js";
 
 export * from "./client.js";
 export { registryFrom } from "./cards/registry-from.js";
+// The registry a game or bot falls back on: the whole pool in Node, the stub
+// that refuses in a browser bundle. Re-exported for the room code
+// (`server/src/card-registry.ts`), which runs in both.
+export { defaultRegistry } from "./cards/default-registry.js";
+export { actionPlayer } from "./actions.js";
+export { computeCharacteristics } from "./characteristics.js";
+export { autoAnswerFor, decisionHasSource, mayActOn } from "./decisions/registry.js";
 export * from "./game.js";
 export * from "./controller.js";
 export * from "./auto-settle.js";

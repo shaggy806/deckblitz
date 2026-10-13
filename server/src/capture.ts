@@ -122,6 +122,16 @@ function decodeImage(dataUrl: string): { bytes: Buffer; extension: string } {
   return { bytes, extension: IMAGE_TYPES[type as keyof typeof IMAGE_TYPES] };
 }
 
+/** How a room gets its capture log: a factory a Node host hands the room
+ * code (`RoomOptions.capture`), so the room code never imports this module,
+ * which writes files — it runs in a browser too (`docs/plans/local-rooms.md`). */
+export type CaptureFactory = (roomId: string) => CaptureLog;
+
+/** A capture log for each room, kept as `config` says. */
+export function captureLogs(config: CaptureConfig): CaptureFactory {
+  return (roomId) => new CaptureLog(config, roomId);
+}
+
 export class CaptureLog {
   private readonly config: CaptureConfig;
   private readonly roomId: string;

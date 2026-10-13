@@ -21,7 +21,8 @@
  * dispatched (a realtime room re-deciding after a wait) isn't lost.
  */
 
-import { HeuristicBotController, activePlayerOf, createDefaultRegistry, fitCastTargets } from "engine";
+import { HeuristicBotController, activePlayerOf, fitCastTargets } from "engine/local";
+import { cardRegistry } from "./card-registry.js";
 import type {
   Action,
   AttackerDeclaration,
@@ -35,7 +36,7 @@ import type {
   PlayerId,
   Step,
   TargetRef,
-} from "engine";
+} from "engine/local";
 
 /** What a scripted move does. */
 export type ScriptedMoveKind = "cast" | "activate" | "play-land" | "attack" | "block" | "pass";
@@ -88,10 +89,6 @@ export interface OpponentScript {
   readonly otherwise?: "v1" | "pass";
 }
 
-let sharedRegistry: CardRegistry | null = null;
-/** One card registry for every scripted bot and tutorial board — building
- * the whole pool's is too slow to do per room. */
-export const scriptRegistry = (): CardRegistry => (sharedRegistry ??= createDefaultRegistry());
 
 const namesOf = (move: ScriptedMove): readonly string[] =>
   move.card === undefined ? [] : typeof move.card === "string" ? [move.card] : move.card;
@@ -146,7 +143,7 @@ function aim(state: GameState, options: readonly TargetRef[], target: string | u
 export class ScriptedBot extends HeuristicBotController {
   private readonly script: OpponentScript;
 
-  constructor(player: PlayerId, script: OpponentScript, registry: CardRegistry = scriptRegistry()) {
+  constructor(player: PlayerId, script: OpponentScript, registry: CardRegistry = cardRegistry()) {
     super(player, registry);
     this.script = script;
   }

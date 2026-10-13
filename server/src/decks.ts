@@ -9,8 +9,8 @@
  * server's fixed seat identities.
  */
 
-import { BENCH_DECKS, asPlayerId } from "engine";
-import type { PlayerId } from "engine";
+import { BENCH_DECKS, asPlayerId } from "engine/local";
+import type { PlayerId } from "engine/local";
 
 export const ALICE: PlayerId = asPlayerId("alice");
 export const BOB: PlayerId = asPlayerId("bob");

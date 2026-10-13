@@ -14,7 +14,7 @@
 
 import { COMMANDER_RULES, Game } from "engine";
 import { Room } from "../dist/room.js";
-import { DEFAULT_CAPTURE_DIR } from "../dist/capture.js";
+import { DEFAULT_CAPTURE_DIR, captureLogs } from "../dist/capture.js";
 import { ScriptedBot } from "../dist/scripted-bot.js";
 import SCENARIOS, { COMMANDERS } from "./dev-scenarios.mjs";
 
@@ -127,7 +127,7 @@ const MUTATES = new Set(["spawn", "move", "life", "eval"]);
 export function setup({ manager, registry, index = 0, count = 1 }) {
   // A developer's server: bot decisions are always kept for saving as
   // training scenarios (`src/capture.ts`), in the scenario rooms too.
-  const capture = { dir: DEFAULT_CAPTURE_DIR, registry };
+  const capture = captureLogs({ dir: DEFAULT_CAPTURE_DIR, registry });
   /** code -> { room, game } for every scenario this shard serves. */
   const live = new Map();
   const mine = Object.keys(SCENARIOS).filter((_, i) => i % count === index);

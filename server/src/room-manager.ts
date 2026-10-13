@@ -1,11 +1,12 @@
 /** Creates rooms with unique short codes and looks them up by code. */
 
-import { Game } from "engine";
+import { Game } from "engine/local";
 import { PendingRoom } from "./pending-room.js";
 import type { PendingGameConfig } from "./pending-room.js";
 import { Room } from "./room.js";
 import type { GameRecipe, RoomOptions } from "./room.js";
-import type { CaptureConfig } from "./capture.js";
+import type { CaptureFactory } from "./capture.js";
+import { cardRegistry } from "./card-registry.js";
 import { BuilderSession } from "./builder.js";
 import { TutorialSession } from "./tutorial-session.js";
 import { lessonById } from "./tutorials/index.js";
@@ -25,12 +26,12 @@ export class RoomManager {
   private readonly kinds = new Map<string, RoomKind>();
   private created = 0;
   /** Handed to every room this manager promotes — see `RoomOptions.capture`. */
-  private readonly capture: CaptureConfig | undefined;
+  private readonly capture: CaptureFactory | undefined;
   /** Likewise `RoomOptions.pacing`: tests drive whole games through the
    * transport with `"immediate"`. */
   private readonly pacing: RoomOptions["pacing"];
 
-  constructor(options: { readonly capture?: CaptureConfig; readonly pacing?: RoomOptions["pacing"] } = {}) {
+  constructor(options: { readonly capture?: CaptureFactory; readonly pacing?: RoomOptions["pacing"] } = {}) {
     this.capture = options.capture;
     this.pacing = options.pacing;
   }
@@ -124,7 +125,7 @@ export class RoomManager {
     if (!pending.isReady()) throw new Error(`room ${id} isn't ready to start yet`);
 
     const config = pending.toGameConfig();
-    const game = Game.create(config);
+    const game = Game.create({ ...config, registry: cardRegistry() });
     const room = new Room(id, game, {
       onUpdate: (r) => this.onRoomUpdate(r),
       host: pending.host,
@@ -180,6 +181,7 @@ export class RoomManager {
     const players = recipe.config.decks.map((d) => d.player);
     const game = Game.create({
       ...recipe.config,
+      registry: cardRegistry(),
       seed: Math.floor(Math.random() * 0x100000000),
       startingPlayer:
         recipe.firstPlayer === "random" ? players[Math.floor(Math.random() * players.length)] : recipe.firstPlayer,

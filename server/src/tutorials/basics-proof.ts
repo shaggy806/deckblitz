@@ -11,7 +11,7 @@
  * a 1/1, a fair trade.
  */
 
-import { asPlayerId } from "engine";
+import { asPlayerId } from "engine/local";
 import type { ScenarioCard } from "protocol";
 import type { Lesson } from "./lesson.js";
 

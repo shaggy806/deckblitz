@@ -11,8 +11,8 @@
  * instance field, so two services never share any of it.
  */
 
-import { COMMANDER_RULES, SPECTATOR } from "engine";
-import type { ArtManifestEntry, PlayerId, PlayerView } from "engine";
+import { COMMANDER_RULES, SPECTATOR } from "engine/local";
+import type { ArtManifestEntry, PlayerId, PlayerView } from "engine/local";
 import type { ClientMessage, SeatStatus, ServerMessage } from "protocol";
 import type { RoomManager } from "./room-manager.js";
 import type { Room, Connection } from "./room.js";

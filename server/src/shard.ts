@@ -10,15 +10,16 @@
  * frame — once for all of them) and its buffer transferred, not copied.
  */
 
-import { createDefaultRegistry } from "engine";
+import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry } from "engine";
 import type { ClientMessage, ServerMessage } from "protocol";
-import { DEFAULT_CAPTURE_DIR } from "./capture.js";
+import { DEFAULT_CAPTURE_DIR, captureLogs } from "./capture.js";
 import { importDeps, runImportJob } from "./import-deck.js";
 import type { ImportDeps } from "./import-deck.js";
 import { LoadMonitor } from "./load-monitor.js";
 import { PendingRoom } from "./pending-room.js";
-import { BOT_DECISIONS, Room } from "./room.js";
+import { Room } from "./room.js";
+import { botDecisions } from "./bot-decisions.js";
 import { RoomManager } from "./room-manager.js";
 import { RoomService } from "./room-service.js";
 import type { ConnId, RoomEvent } from "./room-host.js";
@@ -37,16 +38,16 @@ import { roomSummaries } from "./status.js";
 /** The rooms' side of a config: its own registry, and a manager over it. */
 export function roomsFor(
   config: Pick<ShardConfig, "capture" | "pacing">,
-  registry: CardRegistry = createDefaultRegistry(),
+  registry: CardRegistry = cardRegistry(),
 ): { readonly registry: CardRegistry; readonly manager: RoomManager } {
   const manager = new RoomManager({
     ...(config.capture !== null
       ? {
-          capture: {
+          capture: captureLogs({
             dir: config.capture.dir || DEFAULT_CAPTURE_DIR,
             registry,
             ...(config.capture.keep !== undefined ? { keep: config.capture.keep } : {}),
-          },
+          }),
         }
       : {}),
     ...(config.pacing !== undefined ? { pacing: config.pacing } : {}),
@@ -128,7 +129,7 @@ export function createShard(
     },
   );
 
-  const monitor = new LoadMonitor({ decisions: BOT_DECISIONS });
+  const monitor = new LoadMonitor({ decisions: botDecisions() });
   const load = (): ShardLoad => ({ ...monitor.read(), rooms: manager.all().length });
   const loadTimer = setInterval(() => post({ t: "load", report: load() }, []), config.loadReportMs);
   loadTimer.unref();

@@ -13,7 +13,7 @@ import {
 } from "engine";
 import type { ScenarioCapture } from "engine";
 
-import { BUG_REPORT_EVENTS } from "../capture.js";
+import { BUG_REPORT_EVENTS, captureLogs } from "../capture.js";
 import type { BugReport } from "../capture.js";
 import { ALICE, BOB, DECKS } from "../decks.js";
 import { Room } from "../room.js";
@@ -43,7 +43,7 @@ function playedRoom(capture: boolean): { room: Room; dir: string } {
   const room = new Room("CAPT1", game, {
     pacing: "immediate",
     botController: (player) => new HeuristicBotController(player, registry),
-    ...(capture ? { capture: { dir, registry, keep: KEEP } } : {}),
+    ...(capture ? { capture: captureLogs({ dir, registry, keep: KEEP }) } : {}),
   });
   room.addBot(ALICE);
   room.addBot(BOB);
@@ -71,7 +71,7 @@ describe("capturing bot decisions", () => {
     for (let i = 0; i < 4; i += 1) game.debugSpawn("Mountain", ALICE, "battlefield");
     game.debugSpawn("Lightning Bolt", ALICE, "hand");
     game.debugSpawn("Grizzly Bears", BOB, "battlefield", { summoningSick: false });
-    const room = new Room("CAPT2", game, { pacing: "immediate", capture: { dir, registry, keep: 50 } });
+    const room = new Room("CAPT2", game, { pacing: "immediate", capture: captureLogs({ dir, registry, keep: 50 }) });
     room.addBot(ALICE);
     const log = room.captures;
     if (log === null) throw new Error("no capture log");

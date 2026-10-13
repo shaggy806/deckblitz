@@ -28,12 +28,10 @@
  * push at the end — which is what tests and scripts drive rooms with.
  */
 
-import { createHistogram } from "node:perf_hooks";
-import type { RecordableHistogram } from "node:perf_hooks";
-import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine";
-import { autoAnswerFor } from "engine";
-import { CaptureLog } from "./capture.js";
-import type { CaptureConfig } from "./capture.js";
+import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine/local";
+import { autoAnswerFor } from "engine/local";
+import type { CaptureFactory, CaptureLog } from "./capture.js";
+import { cardRegistry } from "./card-registry.js";
 import type {
   Action,
   AwaitingDecision,
@@ -46,7 +44,7 @@ import type {
   PlayerController,
   PlayerId,
   Step,
-} from "engine";
+} from "engine/local";
 import { HostRole } from "./host.js";
 import type { BotSpeed, BuilderInfo, PassSettings, SeatStatus, ServerMessage, TutorialInfo, WireDeck } from "protocol";
 
@@ -150,13 +148,25 @@ const BOT_MIN_THINK_MS = 350;
  * degrades to v1-quality play rather than to nothing.
  */
 const BOT_DECISION_BUDGET_MS = 300;
+/** Where each bot decision's time goes, in microseconds. */
+export interface DecisionRecorder {
+  record(micros: number): void;
+}
+
 /**
- * Every bot decision's time on this thread, in microseconds — what `/status`
- * reads its decision p99 from (`LoadMonitor`), which shows how far the
- * budget above overruns under load. One per thread: a worker that runs rooms
- * has its own.
+ * This thread's bot-decision recorder: what `/status` reads its decision p99
+ * from (`LoadMonitor`), which shows how far the budget above overruns under
+ * load. Node's `perf_hooks` histogram, plugged in by a Node host
+ * (`bot-decisions.ts`); none in a browser, where nothing reads it. The room
+ * code imports nothing Node-only, so it runs in a browser too
+ * (`docs/plans/local-rooms.md`).
  */
-export const BOT_DECISIONS: RecordableHistogram = createHistogram();
+let decisionRecorder: DecisionRecorder | null = null;
+
+/** Record this thread's bot decisions to `recorder` (`null`: stop). */
+export function recordBotDecisionsTo(recorder: DecisionRecorder | null): void {
+  decisionRecorder = recorder;
+}
 /**
  * The host's bot speed, as a pause *after* every client has finished showing
  * a bot's move and before the next one. On top of the animation wait rather
@@ -283,9 +293,11 @@ export interface RoomOptions {
    */
   readonly botController?: (player: PlayerId) => PlayerController;
   /** Keep the state before each bot decision, for saving one as a training
-   * scenario (`capture.ts`). A developer's server only — omitted, as on the
-   * public site, nothing is kept. */
-  readonly capture?: CaptureConfig;
+   * scenario: the room's `CaptureLog`, made by a Node host (`captureLogs` in
+   * `capture.ts`, which writes files — so the room code never imports it). A
+   * developer's server only — omitted, as on the public site, nothing is
+   * kept. */
+  readonly capture?: CaptureFactory;
   /**
    * A scenario builder's board while it's being built (`builder.ts`): nobody
    * acts — no bot moves, no auto-pass, no dispatch — and every seat is sent
@@ -377,7 +389,7 @@ export interface SeatClaim {
  * an effect-aware base: `docs/plans/bot-effect-knowledge.md`.
  */
 const DEFAULT_BOT = (player: PlayerId, trace?: EvalBotOptions["trace"]): PlayerController =>
-  new EvalBotController(player, undefined, {
+  new EvalBotController(player, cardRegistry(), {
     timeBudgetMs: BOT_DECISION_BUDGET_MS,
     ...(trace !== undefined ? { trace } : {}),
   });
@@ -478,7 +490,7 @@ export class Room {
     this.showStackArrivals = options.showStackArrivals ?? true;
     this.timers = options.timers ?? realTimers;
     this.settleSliceMs = options.settleSliceMs ?? SETTLE_SLICE_MS;
-    this.captures = options.capture !== undefined ? new CaptureLog(options.capture, id) : null;
+    this.captures = options.capture?.(id) ?? null;
     // With capture on, the default bots report every candidate they score,
     // kept with the decision (`CaptureLog.record`'s `search`).
     this.makeBot =
@@ -1060,7 +1072,7 @@ export class Room {
     this.searchTrace = [];
     const asked = performance.now();
     const action = bot.act(view);
-    BOT_DECISIONS.record(Math.max(1, Math.round((performance.now() - asked) * 1000)));
+    decisionRecorder?.record(Math.max(1, Math.round((performance.now() - asked) * 1000)));
     if (captured !== null) {
       const audit = "lastDecision" in bot ? ((bot as { lastDecision: DecisionAudit | null }).lastDecision ?? null) : null;
       this.captures?.record(seat, captured, action, { audit, trace: this.searchTrace });

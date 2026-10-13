@@ -14,15 +14,16 @@
  * where the lesson stands as of that frame.
  */
 
-import { Game } from "engine";
-import type { GameState, PlayerId } from "engine";
+import { Game } from "engine/local";
+import type { GameState, PlayerId } from "engine/local";
 import type { TutorialCoachStep, TutorialInfo } from "protocol";
 import { buildScenario } from "./builder.js";
-import type { CaptureConfig } from "./capture.js";
+import type { CaptureFactory } from "./capture.js";
 import type { HostRole } from "./host.js";
 import { Room } from "./room.js";
 import type { RoomOptions } from "./room.js";
-import { ScriptedBot, scriptRegistry } from "./scripted-bot.js";
+import { ScriptedBot } from "./scripted-bot.js";
+import { cardRegistry } from "./card-registry.js";
 import { metAt } from "./tutorials/conditions.js";
 import { humanSeat } from "./tutorials/lesson.js";
 import type { Lesson, LessonBoard, LessonStep } from "./tutorials/lesson.js";
@@ -32,7 +33,7 @@ export interface TutorialHost {
   /** Puts `room` under the session's code, in place of the one before. */
   readonly install: (room: Room) => void;
   readonly onUpdate: (room: Room) => void;
-  readonly capture?: CaptureConfig;
+  readonly capture?: CaptureFactory;
   readonly pacing?: RoomOptions["pacing"];
 }
 
@@ -76,7 +77,7 @@ export class TutorialSession {
     if (board === undefined) throw new Error(`lesson ${lesson.id} has no board to start on`);
     this.seat = humanSeat(board);
     this.board = board;
-    const game = buildScenario(board.spec, scriptRegistry()).game;
+    const game = buildScenario(board.spec, cardRegistry()).game;
     this.checkpoint = this.open(0, game, game.events.length);
     this.current = this.makeRoom(game, 0);
     this.env.install(this.current);
@@ -99,7 +100,7 @@ export class TutorialSession {
     const last = this.step === chapters[this.chapter].steps.length - 1;
     if (last && following?.board !== undefined) {
       const board = following.board;
-      const game = buildScenario(board.spec, scriptRegistry()).game;
+      const game = buildScenario(board.spec, cardRegistry()).game;
       this.board = board;
       this.checkpoint = this.open(this.chapter + 1, game, game.events.length);
       this.swap(game);
@@ -114,7 +115,7 @@ export class TutorialSession {
    * its board as it stood then, its goals undone. */
   retry(): void {
     const { chapter, board, state } = this.checkpoint;
-    const game = Game.fromSnapshot(state, { registry: scriptRegistry() });
+    const game = Game.fromSnapshot(state, { registry: cardRegistry() });
     this.board = board;
     this.complete = false;
     this.checkpoint = this.open(chapter, game, game.events.length);
@@ -231,7 +232,7 @@ export class TutorialSession {
       botSpeed: "normal",
       botController: (player) => {
         const opponent = board.opponents[player];
-        return new ScriptedBot(player, opponent?.script ?? { moves: [] }, scriptRegistry());
+        return new ScriptedBot(player, opponent?.script ?? { moves: [] }, cardRegistry());
       },
       ...(this.env.capture !== undefined ? { capture: this.env.capture } : {}),
       ...(this.env.pacing !== undefined ? { pacing: this.env.pacing } : {}),

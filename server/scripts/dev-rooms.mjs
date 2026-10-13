@@ -56,15 +56,15 @@ let command;
 
 if (SHARDS === 0) {
   // Everything on this thread, as dev-rooms always ran.
-  const { createDefaultRegistry } = await import("engine");
   const { RoomManager } = await import("../dist/room-manager.js");
-  const { DEFAULT_CAPTURE_DIR } = await import("../dist/capture.js");
+  const { DEFAULT_CAPTURE_DIR, captureLogs } = await import("../dist/capture.js");
+  const { cardRegistry } = await import("../dist/card-registry.js");
   const { InProcessRoomHost } = await import("../dist/in-process-host.js");
   const { setup } = await import(SETUP.href);
-  const registry = createDefaultRegistry();
+  const registry = cardRegistry();
   // A developer's server: bot decisions are always kept for saving as
   // training scenarios (`src/capture.ts`), in any room created here too.
-  const manager = new RoomManager({ capture: { dir: DEFAULT_CAPTURE_DIR, registry } });
+  const manager = new RoomManager({ capture: captureLogs({ dir: DEFAULT_CAPTURE_DIR, registry }) });
   const rooms = setup({ manager, registry, index: 0, count: 1 });
   // A developer's server: the scenario builder is on too.
   attachTransport(wss, new InProcessRoomHost(manager, { builder: true }));

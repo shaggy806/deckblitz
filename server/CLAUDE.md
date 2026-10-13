@@ -33,6 +33,11 @@ that file.
   `--max-rooms-per-ip`), and both hosts ask it the same way, so `--shards 0` keeps the same caps.
   A lobby counts as the game it will become: joins, starts, rematches and tutorial steps never
   meet a limit.
+- **The room code runs in a browser too** (solo games, `docs/plans/local-rooms.md`): the rooms, lobbies,
+  bots, builder and lessons import values only from `engine/local` and each other — no Node built-in,
+  no `ws`, no `engine` barrel, no Node-side module (`test/room-core-imports.test.ts`). The card registry
+  (`cardRegistry()`), capture (`captureLogs`) and the decision histogram (`botDecisions()`) come in from
+  the hosts.
 - **The wire protocol lives in the `protocol/` workspace**, imported as types by both server
   and client. Change it there, never restate it here.
 - **Security-relevant:** printings are accepted only as a bare Scryfall card id

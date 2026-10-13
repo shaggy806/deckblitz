@@ -2,7 +2,7 @@ import type { AddressInfo } from "node:net";
 import { describe, expect, it } from "vitest";
 
 import { RoomManager } from "../room-manager.js";
-import { BOT_DECISIONS } from "../room.js";
+import { botDecisions } from "../bot-decisions.js";
 import { renderStatus, statusParts, statusSnapshot } from "../status.js";
 import { assembleStatus, startStatusServer } from "../status-server.js";
 import type { ShardStatus, StatusSnapshot } from "../status-server.js";
@@ -158,11 +158,11 @@ describe("status snapshot", () => {
   });
 
   it("times every bot decision on this thread", () => {
-    const before = BOT_DECISIONS.count;
+    const before = botDecisions().count;
     // Paced as in play: the bots decide up to their first frame, then wait.
     startedRoom(new RoomManager()).dispose();
-    expect(BOT_DECISIONS.count).toBeGreaterThan(before);
-    const monitor = new LoadMonitor({ decisions: BOT_DECISIONS });
+    expect(botDecisions().count).toBeGreaterThan(before);
+    const monitor = new LoadMonitor({ decisions: botDecisions() });
     try {
       expect(monitor.read().botDecisionP99Ms).toBeGreaterThanOrEqual(0);
     } finally {

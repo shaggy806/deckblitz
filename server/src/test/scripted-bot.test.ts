@@ -13,7 +13,8 @@ import type { ScenarioCard, ScenarioSpec } from "protocol";
 import { buildScenario } from "../builder.js";
 import { Room } from "../room.js";
 import type { Connection } from "../room.js";
-import { ScriptedBot, scriptRegistry } from "../scripted-bot.js";
+import { ScriptedBot } from "../scripted-bot.js";
+import { cardRegistry } from "../card-registry.js";
 import type { OpponentScript } from "../scripted-bot.js";
 
 const ALICE = asPlayerId("alice");
@@ -53,7 +54,7 @@ const connection = { send: () => {} } as unknown as Connection;
 function seat(game: Game, script: OpponentScript): Room {
   const room = new Room("SCRPT", game, {
     pacing: "immediate",
-    botController: (player) => new ScriptedBot(player, script, scriptRegistry()),
+    botController: (player) => new ScriptedBot(player, script, cardRegistry()),
   });
   room.claimSeat(ALICE, "alice-token", connection);
   room.addBot(BOB);
@@ -87,7 +88,7 @@ const turnOf = (s: GameState): number => s.turn.number;
 
 describe("a scripted opponent", () => {
   it("casts and attacks by name on the turn it's told to, once, and otherwise passes", () => {
-    const room = seat(buildScenario(board(), scriptRegistry()).game, {
+    const room = seat(buildScenario(board(), cardRegistry()).game, {
       otherwise: "pass",
       moves: [
         { do: "cast", card: "Grizzly Bears", on: { turn: 2 } },
@@ -106,7 +107,7 @@ describe("a scripted opponent", () => {
   });
 
   it("repeats a move that says so, and blocks only with the creatures it names", () => {
-    const room = seat(buildScenario(board([card("Hill Giant", ALICE)]), scriptRegistry()).game, {
+    const room = seat(buildScenario(board([card("Hill Giant", ALICE)]), cardRegistry()).game, {
       otherwise: "pass",
       moves: [
         { do: "cast", card: "Grizzly Bears", repeat: true },
@@ -130,11 +131,11 @@ describe("a scripted opponent", () => {
 
   it("reads what it has done off the log: rebuilt over a snapshot, it doesn't cast again", () => {
     const script: OpponentScript = { otherwise: "pass", moves: [{ do: "cast", card: "Grizzly Bears" }] };
-    const room = seat(buildScenario(board(), scriptRegistry()).game, script);
+    const room = seat(buildScenario(board(), cardRegistry()).game, script);
     // Bob's Bears on the stack, alice holding priority over it.
     aliceWaits(room, (s) => s.zones.shared.stack.length > 0);
     expect(castsBy(room.game.state, BOB, "Grizzly Bears")).toBe(1);
-    const again = seat(Game.fromSnapshot(room.game.snapshot(), { registry: scriptRegistry() }), script);
+    const again = seat(Game.fromSnapshot(room.game.snapshot(), { registry: cardRegistry() }), script);
     aliceWaits(again, (s) => turnOf(s) === 5);
     expect(castsBy(again.game.state, BOB, "Grizzly Bears")).toBe(1);
   });
@@ -142,7 +143,7 @@ describe("a scripted opponent", () => {
   it("leaves the rest to v1, and plays the same game every time", () => {
     const play = (): string[] => {
       const spec = board([card("Llanowar Elves", BOB, "library"), card("Hill Giant", BOB, "library")]);
-      const room = seat(buildScenario(spec, scriptRegistry()).game, {
+      const room = seat(buildScenario(spec, cardRegistry()).game, {
         moves: [{ do: "attack", card: "Elvish Mystic", at: "alice", on: { turn: 2 } }],
       });
       aliceWaits(room, (s) => turnOf(s) === 7);

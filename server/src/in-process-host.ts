@@ -6,7 +6,7 @@
  * `docs/plans/room-shards.md`).
  */
 
-import { createDefaultRegistry } from "engine";
+import { cardRegistry } from "./card-registry.js";
 import type { ClientMessage, ServerMessage } from "protocol";
 import { CREATES, capKey, initialStage, placeRoom } from "./admission.js";
 import type { AdmissionLimits, RoomRecord, ShardCandidate } from "./admission.js";
@@ -14,7 +14,7 @@ import type { ClientLink, ConnId, RoomEvent, RoomHost } from "./room-host.js";
 import { allocateRoomCode } from "./room-code.js";
 import { sendMessage } from "./transport.js";
 import type { RoomManager } from "./room-manager.js";
-import { BOT_DECISIONS } from "./room.js";
+import { botDecisions } from "./bot-decisions.js";
 import { RoomService } from "./room-service.js";
 import type { RoomServerOptions } from "./room-service.js";
 import { statusParts } from "./status.js";
@@ -56,7 +56,7 @@ const ONE_SHARD: readonly ShardCandidate[] = [{ index: 0, up: true, elu: null, d
 
 export class InProcessRoomHost implements RoomHost {
   readonly service: RoomService;
-  readonly decisions = BOT_DECISIONS;
+  readonly decisions = botDecisions();
   /** The open sockets, by id: a message the service sends to one that has
    * closed since goes nowhere. */
   private readonly links = new Map<ConnId, ClientLink>();
@@ -123,7 +123,7 @@ export class InProcessRoomHost implements RoomHost {
   }
 
   importDeck(text: string, sink: ImportSink): void {
-    this.deps ??= importDeps(createDefaultRegistry());
+    this.deps ??= importDeps(cardRegistry());
     void runImportJob(text, this.deps, sink);
   }
 

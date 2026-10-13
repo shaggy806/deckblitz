@@ -6,7 +6,7 @@
  * shared, so what a test drives is what production sends.
  */
 
-import { createDefaultRegistry } from "engine";
+import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry } from "engine";
 import { createShard } from "./shard.js";
 import type { FromShard, ShardConfig } from "./shard-protocol.js";
@@ -22,7 +22,7 @@ export interface LoopbackChannel extends ShardChannel {
 export function loopbackChannel(config: ShardConfig): LoopbackChannel {
   // One registry for every in-thread shard: building one is most of a
   // shard's start-up, and nothing writes to it.
-  sharedRegistry ??= createDefaultRegistry();
+  sharedRegistry ??= cardRegistry();
   let listener: ((message: FromShard) => void) | null = null;
   const exitListeners: ((code: number) => void)[] = [];
   let alive = true;
