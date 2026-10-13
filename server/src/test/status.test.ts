@@ -1,7 +1,13 @@
+import type { AddressInfo } from "node:net";
 import { describe, expect, it } from "vitest";
 
 import { RoomManager } from "../room-manager.js";
-import { renderStatus, statusSnapshot } from "../status.js";
+import { BOT_DECISIONS } from "../room.js";
+import { renderStatus, statusParts, statusSnapshot } from "../status.js";
+import { assembleStatus, startStatusServer } from "../status-server.js";
+import type { ShardStatus, StatusSnapshot } from "../status-server.js";
+import { LoadMonitor } from "../load-monitor.js";
+import type { LoadReport } from "../load-monitor.js";
 import { ALICE, BOB } from "../decks.js";
 
 const config = (seed = 1) => ({ seed });
@@ -86,6 +92,71 @@ describe("status snapshot", () => {
     expect(text).toMatch(/rss \d+ MB/);
     // Bot seats read as "bot" rather than as a player name.
     expect(text).toContain("bot,bot");
+  });
+
+  it("shows main's own loop, and a table of shards when the rooms run on them", () => {
+    const load: LoadReport = {
+      elu: 0.25,
+      delayP50Ms: 10.2,
+      delayP99Ms: 31.5,
+      delayMaxMs: 80,
+      heapUsedMb: 120,
+      botDecisions: 40,
+      botDecisionP99Ms: 310,
+      windowMs: 10_000,
+    };
+    const shard = (index: number, over: Partial<ShardStatus> = {}): ShardStatus => ({
+      index,
+      up: true,
+      responsive: true,
+      restarts: 0,
+      roomsCreated: 3,
+      counts: { total: 3, waiting: 1, playing: 2, finished: 0 },
+      load,
+      ...over,
+    });
+    const text = renderStatus(
+      assembleStatus(
+        { rooms: [], roomsCreated: 6, shards: [shard(0), shard(1, { responsive: false, restarts: 2 }), shard(2, { up: false, load: null })] },
+        load,
+      ),
+    );
+    expect(text).toContain("delay p50 10.2 ms, p99 31.5 ms, max 80 ms; busy 25%");
+    expect(text).toMatch(/SHARD/);
+    expect(text).toMatch(/\n {2}0 +up +1\/2\/0 +25% +10.2\/31.5 ms +120 MB +310 ms\n/);
+    expect(text).toMatch(/\n {2}1 +unresponsive \(2x\)/);
+    expect(text).toMatch(/\n {2}2 +down +1\/2\/0 +— +— +— +—\n/);
+  });
+
+  it("serves the snapshot from an async source, with main's load measured", async () => {
+    const manager = new RoomManager();
+    startedRoom(manager);
+    const server = startStatusServer(async () => statusParts(manager), 0);
+    try {
+      await new Promise<void>((resolve) => server.once("listening", () => resolve()));
+      const { port } = server.address() as AddressInfo;
+      const snap = (await (await fetch(`http://127.0.0.1:${port}/status.json`)).json()) as StatusSnapshot;
+      expect(snap.counts.playing).toBe(1);
+      expect(snap.main?.heapUsedMb).toBeGreaterThan(0);
+      expect(snap.main?.elu).toBeGreaterThanOrEqual(0);
+      const text = await (await fetch(`http://127.0.0.1:${port}/status`)).text();
+      expect(text).toMatch(/loop {5}delay p50/);
+    } finally {
+      await new Promise<void>((resolve) => server.close(() => resolve()));
+    }
+  });
+
+  it("times every bot decision on this thread", () => {
+    const before = BOT_DECISIONS.count;
+    // Paced as in play: the bots decide up to their first frame, then wait.
+    startedRoom(new RoomManager()).dispose();
+    expect(BOT_DECISIONS.count).toBeGreaterThan(before);
+    const monitor = new LoadMonitor({ decisions: BOT_DECISIONS });
+    try {
+      expect(monitor.read().botDecisionP99Ms).toBeGreaterThanOrEqual(0);
+    } finally {
+      monitor.stop();
+    }
   });
 
   it("carries room codes, which is why the endpoint is loopback-only", () => {

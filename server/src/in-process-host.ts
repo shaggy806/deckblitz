@@ -9,11 +9,15 @@
 import type { ClientMessage, ServerMessage } from "protocol";
 import type { ClientLink, ConnId, RoomHost } from "./room-host.js";
 import type { RoomManager } from "./room-manager.js";
+import { BOT_DECISIONS } from "./room.js";
 import { RoomService } from "./room-service.js";
 import type { RoomServerOptions } from "./room-service.js";
+import { statusParts } from "./status.js";
+import type { StatusParts } from "./status-server.js";
 
 export class InProcessRoomHost implements RoomHost {
   readonly service: RoomService;
+  readonly decisions = BOT_DECISIONS;
   /** The open sockets, by id: a message the service sends to one that has
    * closed since goes nowhere. */
   private readonly links = new Map<ConnId, ClientLink>();
@@ -37,6 +41,10 @@ export class InProcessRoomHost implements RoomHost {
   close(link: ClientLink): void {
     this.service.close(link.id);
     this.links.delete(link.id);
+  }
+
+  async status(): Promise<StatusParts> {
+    return statusParts(this.service.manager);
   }
 
   async stop(): Promise<void> {

@@ -6,7 +6,7 @@ import { COMPRESSION, attachRoomServer } from "./ws-server.js";
 import { evaluateDecklist, formatCheck, parseDecklistText } from "./import-deck.js";
 import { loadOracleTagIndex } from "./oracle-tags.js";
 import { loadCardData } from "./card-data.js";
-import { startStatusServer } from "./status.js";
+import { startStatusServer } from "./status-server.js";
 import { CAPTURE_KEEP, DEFAULT_CAPTURE_DIR } from "./capture.js";
 
 const port = Number(process.env.PORT ?? 4000);
@@ -38,7 +38,6 @@ if (builder) console.log("scenario builder on");
 // on that port would be worthless anyway, since `cloudflared` makes every
 // public request arrive from 127.0.0.1. See `status.ts`.
 const statusPort = Number(process.env.STATUS_PORT ?? 4010);
-startStatusServer(manager, statusPort);
 
 // A room with nobody connected goes once it's been idle this long, checked
 // this often — by the room service, which owns the rooms.
@@ -120,7 +119,8 @@ const httpServer = createServer((req, res) => {
 });
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
-attachRoomServer(wss, manager, { builder, reapIdleMs: IDLE_ROOM_MS, reapIntervalMs: REAP_INTERVAL_MS });
+const host = attachRoomServer(wss, manager, { builder, reapIdleMs: IDLE_ROOM_MS, reapIntervalMs: REAP_INTERVAL_MS });
+startStatusServer(() => host.status(), statusPort, host.decisions);
 
 httpServer.listen(port, () => {
   console.log(`MTG Deck Blitz room server listening on ws://localhost:${port}`);

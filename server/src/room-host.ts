@@ -8,8 +8,9 @@
  * without loading a game.
  */
 
+import type { RecordableHistogram } from "node:perf_hooks";
 import type { ClientMessage } from "protocol";
-
+import type { StatusParts } from "./status-server.js";
 /** A socket's id, given by the transport: incrementing, never reused, so a
  * late message about a closed socket can't reach its successor. */
 export type ConnId = number;
@@ -50,6 +51,10 @@ export interface RoomHost {
   message(link: ClientLink, message: ClientMessage, raw: string): void;
   /** The socket closed: whatever it held is let go. */
   close(link: ClientLink): void;
+  /** The rooms, for the status page. */
+  status(): Promise<StatusParts>;
+  /** Bot decision times on this thread, when the host runs rooms on it. */
+  readonly decisions?: RecordableHistogram;
   /** Stops the host's own timers (and whatever else it runs). */
   stop(): Promise<void>;
 }

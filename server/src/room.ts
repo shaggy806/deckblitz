@@ -28,6 +28,8 @@
  * push at the end — which is what tests and scripts drive rooms with.
  */
 
+import { createHistogram } from "node:perf_hooks";
+import type { RecordableHistogram } from "node:perf_hooks";
 import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine";
 import { autoAnswerFor } from "engine";
 import { CaptureLog } from "./capture.js";
@@ -148,6 +150,13 @@ const BOT_MIN_THINK_MS = 350;
  * degrades to v1-quality play rather than to nothing.
  */
 const BOT_DECISION_BUDGET_MS = 300;
+/**
+ * Every bot decision's time on this thread, in microseconds — what `/status`
+ * reads its decision p99 from (`LoadMonitor`), which shows how far the
+ * budget above overruns under load. One per thread: a worker that runs rooms
+ * has its own.
+ */
+export const BOT_DECISIONS: RecordableHistogram = createHistogram();
 /**
  * The host's bot speed, as a pause *after* every client has finished showing
  * a bot's move and before the next one. On top of the animation wait rather
@@ -1049,7 +1058,9 @@ export class Room {
         ? this.captures.before(this.game.state)
         : null;
     this.searchTrace = [];
+    const asked = performance.now();
     const action = bot.act(view);
+    BOT_DECISIONS.record(Math.max(1, Math.round((performance.now() - asked) * 1000)));
     if (captured !== null) {
       const audit = "lastDecision" in bot ? ((bot as { lastDecision: DecisionAudit | null }).lastDecision ?? null) : null;
       this.captures?.record(seat, captured, action, { audit, trace: this.searchTrace });

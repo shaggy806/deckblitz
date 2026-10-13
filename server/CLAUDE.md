@@ -44,7 +44,8 @@ else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's ge
 `capture.ts`, `builder.ts` (the scenario builder: a board built from data, rebuilt into a new
 frozen `Room` under the same code on every edit), `scripted-bot.ts` (an opponent that plays a
 script by card name, v1 answering the rest; dev-rooms' bots too), `tutorial-session.ts` and
-`tutorials/` (tutorial rooms: lessons as data, goals checked on every frame), `status.ts`. Tests in
+`tutorials/` (tutorial rooms: lessons as data, goals checked on every frame), `status.ts` (rooms' summaries) and `status-server.ts` (the
+loopback status page, with `load-monitor.ts`'s event-loop numbers). Tests in
 `src/test/`.
 
 ## Commands
