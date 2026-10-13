@@ -67,6 +67,22 @@ network (~53 ms) plus however long the event loop was busy.
   small (≤ 20%, only with duplicate lands in hand): most of its outside-the-budget time is the
   look at each *different* land (`castableAfterPlay`'s board clones and one-spell simulation),
   which a cheaper `legalActionsAfter` would cut.
+  **Rerun on the live box after deploying it** (38d0ee85, same script and stages):
+
+  | rooms | frames/s | frame gap median / p90 | probe p50 / p95 / max |
+  |---|---|---|---|
+  | 1 | 0.76 | 1.37 s / 1.6 s | 53 ms / 120 ms / 315 ms |
+  | 2 | 1.48 | 1.38 s / 1.7 s | 53 ms / 221 ms / 837 ms |
+  | 4 | 2.72 | 1.48 s / 2.0 s | 55 ms / 357 ms / 523 ms |
+  | 6 | 3.63 | 1.65 s / 2.4 s | 93 ms / 480 ms / 1.1 s |
+  | 8 | 3.80 | 1.94 s / 3.0 s | 104 ms / 780 ms / 1.2 s |
+  | 12 | 4.05 | 2.96 s / 4.3 s | 236 ms / 1.07 s / 1.5 s |
+  | 16 | 5.24 | 3.01 s / 4.1 s | 273 ms / 1.17 s / 1.7 s |
+
+  Stalls fell by half to five times at every load (one room's worst 1.7 s → 0.3 s; four rooms'
+  2.3 s → 0.5 s), and rooms kept their pace further up (four rooms at 1.48 s a frame against
+  1.67 s). The ceiling is still about 4-5 moves a second: what's left of a stall is one real
+  decision overrunning its budget, and past the knee it's plain CPU, which only more cores fix.
   **Fix outline** (phase 1): in `"realtime"` pacing, let `settleNow` give the event loop back
   once it has run ~50 ms — continue on `setImmediate` instead of looping on, with a guard so a
   `settle()` arriving meanwhile doesn't start a second loop. It changes no frame and no
