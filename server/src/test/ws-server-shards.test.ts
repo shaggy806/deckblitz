@@ -17,7 +17,7 @@ import type { LoopbackChannel } from "../loopback-channel.js";
 import { assembleStatus, renderStatus } from "../status-server.js";
 import { COMPRESSION, attachTransport } from "../transport.js";
 import { WorkerRoomHost } from "../worker-host.js";
-import type { ShardSettings } from "../worker-host.js";
+import type { ShardPhase, ShardSettings, WorkerHostOptions } from "../worker-host.js";
 
 type StateMessage = Extract<ServerMessage, { type: "state" }>;
 const isState = (m: ServerMessage): m is StateMessage => m.type === "state";
@@ -75,6 +75,12 @@ async function nextState(c: Client, match: (m: StateMessage) => boolean = () => 
 
 const settle = (ms = 50): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 
+/** Waits for `host`'s shard `index` to reach `phase`. */
+async function phase(host: WorkerRoomHost, index: number, want: ShardPhase): Promise<void> {
+  for (let i = 0; i < 400 && host.phases()[index] !== want; i += 1) await settle(10);
+  expect(host.phases()[index]).toBe(want);
+}
+
 describe("rooms on two shards (loopback)", () => {
   let wss: WebSocketServer | null = null;
   let host: WorkerRoomHost | null = null;
@@ -82,11 +88,16 @@ describe("rooms on two shards (loopback)", () => {
   let port = 0;
   const sockets: WebSocket[] = [];
 
-  async function serve(config: Partial<ShardSettings> = {}, admission: AdmissionLimits = {}): Promise<WorkerRoomHost> {
+  async function serve(
+    config: Partial<ShardSettings> = {},
+    admission: AdmissionLimits = {},
+    restart: WorkerHostOptions["restart"] = { baseMs: 10 },
+  ): Promise<WorkerRoomHost> {
     channels = [];
     host = new WorkerRoomHost({
       shards: 2,
       admission,
+      restart,
       config: { builder: true, capture: null, loadReportMs: 1_000, ...config },
       spawn: (shardConfig) => {
         const channel = loopbackChannel(shardConfig);
@@ -420,9 +431,51 @@ describe("rooms on two shards (loopback)", () => {
     expect(h.shardOf(roomB)).toBeUndefined();
     a.send({ type: "join-room", roomId: roomB });
     expect(await a.next()).toEqual({ type: "error", message: `no such room: ${roomB}` });
-    // New rooms go to the shard still up.
+  });
+
+  it("restarts a shard that ends, after a backoff, and places rooms on it again", async () => {
+    const h = await serve({}, {}, { baseMs: 300 });
+    const a = await connect();
+    const b = await connect();
+    const roomB = await create(b);
+    const roomA = await create(a);
+    expect([h.shardOf(roomA), h.shardOf(roomB)]).toEqual([0, 1]);
+    channels[1].crash(1);
+    expect(await b.closed).toBe(1011);
+    // While it's down, new rooms go to the shard still up, and /status
+    // says it's on its way back.
+    expect(h.phases()).toEqual(["up", "restarting"]);
     expect(h.shardOf(await create(a))).toBe(0);
+    expect((await h.status()).shards?.[1]).toMatchObject({ up: false, state: "restarting", responsive: false });
+    await phase(h, 1, "up");
+    expect(channels).toHaveLength(3);
+    expect((await h.status()).shards?.[1]).toMatchObject({ up: true, state: "up", restarts: 1, responsive: true });
+    // Back, and empty: the next room goes there.
+    const fresh = await create(a);
+    expect(h.shardOf(fresh)).toBe(1);
+    a.send({ type: "join-room", roomId: fresh });
+    expect(await a.next()).toMatchObject({ type: "room-joined", roomId: fresh });
+    // The lost room stays lost.
+    a.send({ type: "join-room", roomId: roomB });
+    expect(await a.next()).toEqual({ type: "error", message: `no such room: ${roomB}` });
+  });
+
+  it("leaves a shard down that keeps ending", async () => {
+    const h = await serve({}, {}, { baseMs: 1, loopLimit: 2 });
+    for (let crash = 1; crash <= 2; crash += 1) {
+      const spawned = channels.length;
+      channels.at(-1)?.crash(1);
+      for (let i = 0; i < 400 && channels.length === spawned; i += 1) await settle(5);
+      await phase(h, 1, "up");
+    }
+    channels.at(-1)?.crash(1);
+    await phase(h, 1, "failed");
+    await settle(50);
+    expect(channels).toHaveLength(4); // the two shards, and two restarts
     const parts = await h.status();
-    expect(parts.shards?.[1]).toMatchObject({ up: false, responsive: false });
+    expect(parts.shards?.[1]).toMatchObject({ up: false, state: "failed", restarts: 2 });
+    expect(renderStatus(assembleStatus(parts))).toMatch(/\n {2}1 +crash-looped \(2x\)/);
+    const c = await connect();
+    expect([h.shardOf(await create(c)), h.shardOf(await create(c))]).toEqual([0, 0]);
   });
 });

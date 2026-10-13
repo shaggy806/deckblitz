@@ -63,6 +63,10 @@ export interface ShardStatus {
   readonly index: number;
   /** Running, as far as main knows. */
   readonly up: boolean;
+  /** Where it is: `starting` (spawned, not ready), `up`, `restarting` (ended
+   * unasked, back after a backoff), `failed` (ended too often lately, left
+   * down), `stopped`. */
+  readonly state: "starting" | "up" | "restarting" | "failed" | "stopped";
   /** Answered this status request in time (a second). */
   readonly responsive: boolean;
   readonly restarts: number;
@@ -172,7 +176,14 @@ export function renderStatus(snapshot: StatusSnapshot): string {
         `${"DELAY p50/p99".padEnd(16)}${"HEAP".padEnd(8)}BOT p99`,
     );
     for (const shard of snapshot.shards) {
-      const state = !shard.up ? "down" : !shard.responsive ? "unresponsive" : "up";
+      const state =
+        shard.state === "failed"
+          ? "crash-looped"
+          : shard.state !== "up"
+            ? shard.state
+            : !shard.responsive
+              ? "unresponsive"
+              : "up";
       const restarts = shard.restarts > 0 ? ` (${shard.restarts}x)` : "";
       const c = shard.counts;
       const load = shard.load;

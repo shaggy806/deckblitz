@@ -137,6 +137,14 @@ export function createShard(
           // Main parsed it before forwarding; nothing else sends here.
           return;
         }
+        if (config.testHooks === true && (parsed as { type: string }).type === "__crash") {
+          // Uncaught, outside any handler: what a bug past `settle`'s catch
+          // or an out-of-memory does to a worker.
+          setTimeout(() => {
+            throw new Error("__crash (a test hook)");
+          });
+          return;
+        }
         service.handle(message.conn, parsed, message.roomId);
         return;
       }

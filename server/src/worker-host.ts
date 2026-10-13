@@ -38,12 +38,18 @@ export interface ShardChannel {
 
 export type SpawnShard = (config: ShardConfig) => ShardChannel;
 
-/** A real worker thread running `shard-worker.js` (built: `dist/`). */
+/** A real worker thread running `shard-worker.js` (built: `dist/`).
+ * `heapMb` caps its old generation (`resourceLimits.maxOldGenerationSizeMb`),
+ * so running out of memory ends that one shard rather than the process. */
 export function workerChannel(
   config: ShardConfig,
   script: URL = new URL("./shard-worker.js", import.meta.url),
+  heapMb?: number,
 ): ShardChannel {
-  const worker = new Worker(script, { workerData: config });
+  const worker = new Worker(script, {
+    workerData: config,
+    ...(heapMb !== undefined ? { resourceLimits: { maxOldGenerationSizeMb: heapMb } } : {}),
+  });
   return {
     post: (message) => worker.postMessage(message),
     onMessage: (listener) => worker.on("message", listener),
@@ -70,14 +76,33 @@ export interface WorkerHostOptions {
   readonly stopGraceMs?: number;
   /** The caps on creates (`admission.ts`); none if absent. */
   readonly admission?: AdmissionLimits;
+  /** Restarting a shard that ended unasked: after `baseMs` (1 s), doubling
+   * with each recent exit up to `maxMs` (30 s); one that has ended more than
+   * `loopLimit` (5) times within `loopWindowMs` (5 minutes) is left down. */
+  readonly restart?: {
+    readonly baseMs?: number;
+    readonly maxMs?: number;
+    readonly loopLimit?: number;
+    readonly loopWindowMs?: number;
+  };
 }
+
+/** Where a shard is: spawned and not yet `ready`, taking rooms, waiting to
+ * be restarted after ending unasked, left down after ending too often
+ * (`failed`), or ended by `stop`. */
+export type ShardPhase = "starting" | "up" | "restarting" | "failed" | "stopped";
 
 interface ShardState {
   readonly index: ShardIndex;
-  readonly channel: ShardChannel;
-  up: boolean;
+  /** The running incarnation's channel. */
+  channel: ShardChannel | null;
+  phase: ShardPhase;
   restarts: number;
+  /** When it ended unasked, within the crash-loop window. */
+  crashes: number[];
+  restartTimer: ReturnType<typeof setTimeout> | null;
   load: ShardLoad | null;
+  /** The running incarnation's end. */
   exited: Promise<number>;
 }
 
@@ -129,6 +154,10 @@ const ROOM_MESSAGES = new Set([
 const EVENT_DELTAS = JSON.stringify({ type: "event-deltas" });
 const DEFAULT_STATUS_TIMEOUT_MS = 1_000;
 const DEFAULT_STOP_GRACE_MS = 2_000;
+const DEFAULT_RESTART_BASE_MS = 1_000;
+const DEFAULT_RESTART_MAX_MS = 30_000;
+const DEFAULT_CRASH_LOOP_LIMIT = 5;
+const DEFAULT_CRASH_LOOP_WINDOW_MS = 5 * 60_000;
 
 export class WorkerRoomHost implements RoomHost {
   private readonly options: WorkerHostOptions;
@@ -147,48 +176,68 @@ export class WorkerRoomHost implements RoomHost {
   private readonly statusRequests = new Map<number, (index: ShardIndex, reply: Extract<FromShard, { t: "status" }>) => void>();
   private readonly imports = new Map<number, ImportSink>();
   private stopping = false;
+  /** `start` has finished: from here a shard that ends is restarted. */
+  private started = false;
 
   constructor(options: WorkerHostOptions) {
     if (!Number.isInteger(options.shards) || options.shards < 1) throw new Error("a worker host needs at least one shard");
     this.options = options;
+    for (let index = 0; index < options.shards; index += 1) {
+      this.shards.push({
+        index,
+        channel: null,
+        phase: "starting",
+        restarts: 0,
+        crashes: [],
+        restartTimer: null,
+        load: null,
+        exited: Promise.resolve(0),
+      });
+    }
   }
 
-  /** Spawns every shard; resolves once each is ready, its rooms routed. */
+  /** Spawns every shard; resolves once each is ready, its rooms routed, and
+   * rejects if one ends before it is. */
   async start(): Promise<void> {
-    const ready: Promise<void>[] = [];
-    for (let index = 0; index < this.options.shards; index += 1) {
-      const config: ShardConfig = { ...this.options.config, index, importJobs: index === 0 };
-      const channel = this.options.spawn(config);
-      let resolveExit: (code: number) => void = () => {};
-      const shard: ShardState = {
-        index,
-        channel,
-        up: false,
-        restarts: 0,
-        load: null,
-        exited: new Promise<number>((resolve) => (resolveExit = resolve)),
-      };
-      this.shards.push(shard);
-      ready.push(
-        new Promise<void>((resolve, reject) => {
-          channel.onMessage((message) => {
-            if (message.t === "ready") {
-              shard.up = true;
-              for (const event of message.rooms) this.roomChanged(index, event);
-              resolve();
-              return;
-            }
-            this.fromShard(shard, message);
-          });
-          channel.onExit((code) => {
-            resolveExit(code);
-            if (!shard.up) reject(new Error(`shard ${index} exited (${code}) before it was ready`));
-            this.exited(shard, code);
-          });
-        }),
-      );
-    }
-    await Promise.all(ready);
+    await Promise.all(this.shards.map((shard) => this.launch(shard)));
+    this.started = true;
+  }
+
+  /** Where each shard is (`ShardPhase`), by index. */
+  phases(): ShardPhase[] {
+    return this.shards.map((shard) => shard.phase);
+  }
+
+  /** Spawns one incarnation of `shard` and wires it up; resolves on its
+   * `ready`, rejects if it ends first. Messages from an incarnation that
+   * has since been replaced are ignored. */
+  private launch(shard: ShardState): Promise<void> {
+    const index = shard.index;
+    const channel = this.options.spawn({ ...this.options.config, index, importJobs: index === 0 });
+    let resolveExit: (code: number) => void = () => {};
+    shard.channel = channel;
+    shard.phase = "starting";
+    shard.load = null;
+    shard.exited = new Promise<number>((resolve) => (resolveExit = resolve));
+    return new Promise<void>((resolve, reject) => {
+      channel.onMessage((message) => {
+        if (shard.channel !== channel) return;
+        if (message.t === "ready") {
+          shard.phase = "up";
+          for (const event of message.rooms) this.roomChanged(index, event);
+          resolve();
+          return;
+        }
+        this.fromShard(shard, message);
+      });
+      channel.onExit((code) => {
+        resolveExit(code);
+        if (shard.channel !== channel) return;
+        const wasUp = shard.phase === "up";
+        if (!wasUp) reject(new Error(`shard ${index} exited (${code}) before it was ready`));
+        this.exited(shard, code, wasUp);
+      });
+    });
   }
 
   /** Which shard holds `roomId`, if any — for tests and the status page. */
@@ -255,7 +304,7 @@ export class WorkerRoomHost implements RoomHost {
   async status(): Promise<StatusParts> {
     const req = this.nextRequest++;
     const replies = new Map<ShardIndex, Extract<FromShard, { t: "status" }>>();
-    const asked = this.shards.filter((s) => s.up);
+    const asked = this.shards.filter((s) => s.phase === "up");
     await new Promise<void>((resolve) => {
       const timer = setTimeout(resolve, this.options.statusTimeoutMs ?? DEFAULT_STATUS_TIMEOUT_MS);
       this.statusRequests.set(req, (index, reply) => {
@@ -283,7 +332,8 @@ export class WorkerRoomHost implements RoomHost {
       }
       return {
         index: shard.index,
-        up: shard.up,
+        up: shard.phase === "up",
+        state: shard.phase,
         responsive: reply !== undefined,
         restarts: shard.restarts,
         roomsCreated: reply?.roomsCreated ?? 0,
@@ -297,7 +347,7 @@ export class WorkerRoomHost implements RoomHost {
 
   importDeck(text: string, sink: ImportSink): void {
     const shard = this.shards[0];
-    if (shard === undefined || !shard.up) {
+    if (shard === undefined || shard.phase !== "up") {
       sink.reject("the deck importer isn't running right now — try again in a minute");
       return;
     }
@@ -311,15 +361,24 @@ export class WorkerRoomHost implements RoomHost {
     const grace = this.options.stopGraceMs ?? DEFAULT_STOP_GRACE_MS;
     await Promise.all(
       this.shards.map(async (shard) => {
-        if (shard.up) this.post(shard.index, { t: "stop" });
-        let timer: ReturnType<typeof setTimeout> | undefined;
-        const ended = await Promise.race([
-          shard.exited.then(() => true),
-          new Promise<boolean>((resolve) => (timer = setTimeout(() => resolve(false), grace))),
-        ]);
-        clearTimeout(timer);
-        if (!ended) await shard.channel.terminate();
-        shard.up = false;
+        if (shard.restartTimer !== null) clearTimeout(shard.restartTimer);
+        shard.restartTimer = null;
+        const phase = shard.phase;
+        shard.phase = "stopped";
+        const channel = shard.channel;
+        if (channel === null) return;
+        if (phase === "up") {
+          channel.post({ t: "stop" });
+          let timer: ReturnType<typeof setTimeout> | undefined;
+          const ended = await Promise.race([
+            shard.exited.then(() => true),
+            new Promise<boolean>((resolve) => (timer = setTimeout(() => resolve(false), grace))),
+          ]);
+          clearTimeout(timer);
+          if (!ended) await channel.terminate();
+        } else if (phase === "starting") {
+          await channel.terminate();
+        }
       }),
     );
   }
@@ -328,7 +387,8 @@ export class WorkerRoomHost implements RoomHost {
   private place(ip: string | null): Placement {
     const candidates = this.shards.map((shard) => ({
       index: shard.index,
-      up: shard.up,
+      // Starting, restarting or left down: no rooms go there.
+      up: shard.phase === "up",
       elu: shard.load?.elu ?? null,
       delayP99Ms: shard.load?.delayP99Ms ?? null,
     }));
@@ -359,7 +419,7 @@ export class WorkerRoomHost implements RoomHost {
 
   private post(index: ShardIndex, message: ToShard): void {
     const shard = this.shards[index];
-    if (shard?.up === true) shard.channel.post(message);
+    if (shard?.phase === "up") shard.channel?.post(message);
   }
 
   /** A message for a code main has no room under, answered as the room
@@ -425,22 +485,63 @@ export class WorkerRoomHost implements RoomHost {
 
   /** A shard ended. Its rooms are gone with it: their routes go, and every
    * connection that reached it is closed (1011) so its client reconnects
-   * and finds out. Restarting it is the crash handling still to come. */
-  private exited(shard: ShardState, code: number): void {
-    const wasUp = shard.up;
-    shard.up = false;
-    if (this.stopping || !wasUp) return;
-    console.error(`shard ${shard.index} exited (${code}); its rooms are lost`);
-    for (const [id, route] of this.routes) if (route.shard === shard.index) this.routes.delete(id);
-    for (const [conn, touched] of this.touched) {
-      if (touched.has(shard.index)) this.links.get(conn)?.close(1011, "the server lost this room");
+   * and finds out. Then it's restarted after a backoff — 1, 2, 4 … 30 s by
+   * how often it has ended lately — unless it has ended more than
+   * `loopLimit` times in `loopWindowMs`, when it's left down (`failed`, on
+   * `/status`) rather than restarted in a loop. */
+  private exited(shard: ShardState, code: number, wasUp: boolean): void {
+    if (this.stopping) {
+      shard.phase = "stopped";
+      return;
     }
-    if (shard.index === 0) {
-      for (const [job, sink] of this.imports) {
-        this.imports.delete(job);
-        sink.line({ type: "error", error: "the deck importer stopped — try again" });
-        sink.end();
+    if (wasUp) {
+      console.error(`shard ${shard.index} exited (${code}); its rooms are lost`);
+      for (const [id, route] of this.routes) if (route.shard === shard.index) this.routes.delete(id);
+      for (const [conn, touched] of this.touched) {
+        if (touched.has(shard.index)) this.links.get(conn)?.close(1011, "the server lost this room");
+      }
+      if (shard.index === 0) {
+        for (const [job, sink] of this.imports) {
+          this.imports.delete(job);
+          sink.line({ type: "error", error: "the deck importer stopped — try again" });
+          sink.end();
+        }
       }
     }
+    // Before `start` has finished, an exit fails the start instead.
+    if (!this.started) {
+      shard.phase = "failed";
+      return;
+    }
+    const restart = this.options.restart ?? {};
+    const now = Date.now();
+    const window = restart.loopWindowMs ?? DEFAULT_CRASH_LOOP_WINDOW_MS;
+    shard.crashes = shard.crashes.filter((t) => now - t < window);
+    shard.crashes.push(now);
+    if (shard.crashes.length > (restart.loopLimit ?? DEFAULT_CRASH_LOOP_LIMIT)) {
+      shard.phase = "failed";
+      console.error(
+        `shard ${shard.index} has ended ${shard.crashes.length} times in ${Math.round(window / 1000)} s; leaving it down`,
+      );
+      return;
+    }
+    const delay = Math.min(
+      restart.maxMs ?? DEFAULT_RESTART_MAX_MS,
+      (restart.baseMs ?? DEFAULT_RESTART_BASE_MS) * 2 ** (shard.crashes.length - 1),
+    );
+    shard.phase = "restarting";
+    console.error(`shard ${shard.index}: restarting in ${(delay / 1000).toFixed(1)} s`);
+    shard.restartTimer = setTimeout(() => {
+      shard.restartTimer = null;
+      if (this.stopping) return;
+      shard.restarts += 1;
+      const began = Date.now();
+      // An incarnation that ends before it's ready comes back through here.
+      this.launch(shard).then(
+        () => console.log(`shard ${shard.index} back up in ${((Date.now() - began) / 1000).toFixed(1)} s`),
+        () => {},
+      );
+    }, delay);
+    shard.restartTimer.unref();
   }
 }

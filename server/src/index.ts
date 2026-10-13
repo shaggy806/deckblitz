@@ -21,6 +21,17 @@ import { startStatusServer } from "./status-server.js";
 import { COMPRESSION, attachTransport } from "./transport.js";
 
 const port = Number(process.env.PORT ?? 4000);
+
+/**
+ * A shard's heap cap unless `--shard-heap-mb` says otherwise. Uncapped, V8
+ * lets a shard's heap grow to ~600 MB with four rooms before collecting much
+ * (dev PC, 2026-10-13). A 384 MB cap held eight rooms on one shard at ~220
+ * MB used with no cost in frames, delay or busy-ness, and took the
+ * two-shard run's rss from 1.5 GB to 0.85 GB; 256 MB doubled the shards'
+ * busy share (GC). 512 leaves twice the eight-room heap for a one-shard box
+ * that puts every room on its one shard.
+ */
+const DEFAULT_SHARD_HEAP_MB = 512;
 // "*" is fine for local/LAN dev; set CLIENT_ORIGIN to the real site once
 // this is reachable from the open internet so a stranger's page can't drive
 // this endpoint against a browser that happens to have it open.
@@ -35,6 +46,15 @@ const argAfter = (flag: string): string | undefined => {
 const shardsArg = argAfter("--shards") ?? process.env.SHARDS ?? "0";
 const shards = Number(shardsArg);
 if (!Number.isInteger(shards) || shards < 0) throw new Error(`--shards needs a whole number, 0 or more (got ${shardsArg})`);
+
+// `--shard-heap-mb N` (or `SHARD_HEAP_MB`): each shard's old-generation heap
+// cap (`resourceLimits.maxOldGenerationSizeMb`), so a shard that runs out of
+// memory ends alone — and is restarted — rather than taking the process and
+// every other shard's rooms with it. 0 leaves V8's own limit.
+const heapArg = argAfter("--shard-heap-mb") ?? process.env.SHARD_HEAP_MB ?? String(DEFAULT_SHARD_HEAP_MB);
+const heapMb = Number(heapArg);
+if (!Number.isInteger(heapMb) || heapMb < 0) throw new Error(`--shard-heap-mb needs a whole number of MB, 0 for none (got ${heapArg})`);
+const shardHeapMb = heapMb === 0 ? undefined : heapMb;
 
 // `--capture`: keep bots' recent decisions so a blunder can be saved as a
 // training scenario (`capture.ts`). The local `dev` script passes it; the
@@ -104,7 +124,12 @@ if (shards === 0) {
   host = createInProcessHost(settings, admission);
 } else {
   const started = Date.now();
-  const workers = new WorkerRoomHost({ shards, config: settings, admission, spawn: (config) => workerChannel(config) });
+  const workers = new WorkerRoomHost({
+    shards,
+    config: settings,
+    admission,
+    spawn: (config) => workerChannel(config, undefined, shardHeapMb),
+  });
   await workers.start();
   console.log(`${shards} room shard(s) ready in ${((Date.now() - started) / 1000).toFixed(1)} s`);
   host = workers;

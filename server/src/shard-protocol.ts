@@ -33,6 +33,9 @@ export interface ShardConfig {
   readonly importJobs: boolean;
   /** `RoomOptions.pacing` for every room (tests drive games `"immediate"`). */
   readonly pacing?: "realtime" | "immediate";
+  /** Tests only: a room message `{type: "__crash", roomId}` throws out of
+   * the shard's event loop, ending its worker as a real crash would. */
+  readonly testHooks?: boolean;
 }
 
 /** Shard-side load: its own thread's `LoadReport`, and its rooms. */

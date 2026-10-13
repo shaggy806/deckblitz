@@ -108,6 +108,7 @@ describe("status snapshot", () => {
     const shard = (index: number, over: Partial<ShardStatus> = {}): ShardStatus => ({
       index,
       up: true,
+      state: "up",
       responsive: true,
       restarts: 0,
       roomsCreated: 3,
@@ -117,7 +118,16 @@ describe("status snapshot", () => {
     });
     const text = renderStatus(
       assembleStatus(
-        { rooms: [], roomsCreated: 6, shards: [shard(0), shard(1, { responsive: false, restarts: 2 }), shard(2, { up: false, load: null })] },
+        {
+          rooms: [],
+          roomsCreated: 6,
+          shards: [
+            shard(0),
+            shard(1, { responsive: false, restarts: 2 }),
+            shard(2, { up: false, state: "restarting", load: null }),
+            shard(3, { up: false, state: "failed", restarts: 5, load: null }),
+          ],
+        },
         load,
       ),
     );
@@ -125,7 +135,8 @@ describe("status snapshot", () => {
     expect(text).toMatch(/SHARD/);
     expect(text).toMatch(/\n {2}0 +up +1\/2\/0 +25% +10.2\/31.5 ms +120 MB +310 ms\n/);
     expect(text).toMatch(/\n {2}1 +unresponsive \(2x\)/);
-    expect(text).toMatch(/\n {2}2 +down +1\/2\/0 +— +— +— +—\n/);
+    expect(text).toMatch(/\n {2}2 +restarting +1\/2\/0 +— +— +— +—\n/);
+    expect(text).toMatch(/\n {2}3 +crash-looped \(5x\)/);
   });
 
   it("serves the snapshot from an async source, with main's load measured", async () => {

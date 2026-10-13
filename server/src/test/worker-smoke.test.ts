@@ -93,4 +93,55 @@ describe.skipIf(!distIsFresh())("rooms on real worker threads (dist)", () => {
     expect(parts.shards?.[1].load?.heapUsedMb).toBeGreaterThan(20);
     ws.close();
   }, 120_000);
+
+  it("a worker that crashes ends alone, its sockets closed 1011, and is restarted", async () => {
+    host = new WorkerRoomHost({
+      shards: 2,
+      config: { builder: false, capture: null, loadReportMs: 200, testHooks: true },
+      spawn: (config) => workerChannel(config, WORKER, 1024),
+      restart: { baseMs: 100 },
+    });
+    await host.start();
+    const server = new WebSocketServer({ port: 0 });
+    wss = server;
+    attachTransport(server, host);
+    await new Promise<void>((resolve) => server.once("listening", resolve));
+    const url = `ws://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    const open = async (): Promise<{ ws: WebSocket; created: Promise<string>; closed: Promise<number> }> => {
+      const ws = new WebSocket(url);
+      await new Promise<void>((resolve, reject) => {
+        ws.once("open", () => resolve());
+        ws.once("error", reject);
+      });
+      const created = new Promise<string>((resolve) =>
+        ws.on("message", (raw: Buffer) => {
+          const m = JSON.parse(raw.toString()) as ServerMessage;
+          if (m.type === "room-created") resolve(m.roomId);
+        }),
+      );
+      return { ws, created, closed: new Promise((resolve) => ws.once("close", (code) => resolve(code))) };
+    };
+    const doomed = await open();
+    doomed.ws.send(JSON.stringify({ type: "create-room" }));
+    const lost = await doomed.created;
+    const other = await open();
+    other.ws.send(JSON.stringify({ type: "create-room" }));
+    const kept = await other.created;
+    expect([host.shardOf(lost), host.shardOf(kept)]).toEqual([1, 0]);
+
+    doomed.ws.send(JSON.stringify({ type: "__crash", roomId: lost }));
+    expect(await doomed.closed).toBe(1011);
+    expect(host.shardOf(lost)).toBeUndefined();
+    expect(host.shardOf(kept)).toBe(0);
+    // Back after its backoff and a fresh start-up.
+    const deadline = Date.now() + 60_000;
+    while (host.phases()[1] !== "up" && Date.now() < deadline) await new Promise((resolve) => setTimeout(resolve, 100));
+    const parts = await host.status();
+    expect(parts.shards?.map((s) => [s.state, s.restarts])).toEqual([
+      ["up", 0],
+      ["up", 1],
+    ]);
+    expect(parts.rooms.map((r) => r.id)).toEqual([kept]);
+    other.ws.close();
+  }, 120_000);
 });
