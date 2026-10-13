@@ -99,6 +99,17 @@ export interface ControllerView {
    * then asks (a fetch's search, `castableAfterPlay`) as this player would.
    * `null` if the engine refused one; optional, as `legalActionsAfter`. */
   viewAfter?(action: Action | readonly Action[]): ControllerView | null;
+  /**
+   * `viewAfter` for a view that is itself a look ahead's copy, carrying on
+   * from it: the copy's own events are kept, where `viewAfter` starts the copy
+   * with none. A resolution under way reads its own events ("this way",
+   * `this-way.ts`), so a look that stops mid-resolution (a fetch's search) and
+   * then carries on must keep them — and stepping on from where it stopped,
+   * rather than replaying every step from the real game each time, is what
+   * makes a long look cheap (`castableAfterPlay`). Called on the real game's
+   * view it would copy the whole log; use `viewAfter` there.
+   */
+  continueAfter?(action: Action | readonly Action[]): ControllerView | null;
 }
 
 /**
@@ -1470,6 +1481,12 @@ export interface LandReach {
 /** A land the view can't look past. */
 const NO_REACH: LandReach = { together: 0, castable: 0 };
 
+/** The look ahead's copy `from`, one step (or several) further on, keeping
+ * the look's own events (`ControllerView.continueAfter`); `null` if the
+ * engine refused it or the view can't look further. */
+const carryOn = (from: ControllerView, action: Action | readonly Action[]): ControllerView | null =>
+  from.continueAfter?.(action) ?? null;
+
 /** Positive when `a` reaches further than `b`, 0 when they're level. */
 export function compareReach(a: LandReach, b: LandReach): number {
   return a.together !== b.together ? a.together - b.together : a.castable - b.castable;
@@ -2033,29 +2050,31 @@ export class HeuristicBotController extends AutomaticController {
   /** {@link castableAfter} for a `play-land` action already built — what v2's
    * land search asks of each land it might play. */
   protected castableAfterPlay(view: ControllerView, play: Action): LandReach {
-    const steps: Action[] = [play];
-    let after = view.legalActionsAfter?.(steps);
+    // The look steps one copy of the game forward — `viewAfter` once, then
+    // each further step from the copy before it (`carryOn`) — rather than
+    // replaying every step from the real game each time, which was most of
+    // a land decision's cost (~4.5 copies and their replays a look,
+    // 2026-10-13).
+    let at = view.viewAfter?.(play) ?? null;
     // A land that asks "choose a colour" as it enters (Valgavoth's Lair)
     // stops there, with nothing castable yet: answer it as we would, and look
     // past it. Read before, it cast nothing and lost to any untapped land.
-    const choice = after?.find(
-      (a): a is Extract<LegalAction, { kind: "choose-creature-type" }> => a.kind === "choose-creature-type",
-    );
-    if (choice !== undefined) {
+    const choice = at
+      ?.legalActions()
+      .find((a): a is Extract<LegalAction, { kind: "choose-creature-type" }> => a.kind === "choose-creature-type");
+    if (at !== null && choice !== undefined) {
       const creatureType = this.chooseCreatureType(view, choice.source, choice.options, choice.suggested);
-      steps.push({ type: "choose-creature-type", player: this.playerId, creatureType });
-      after = view.legalActionsAfter?.(steps);
+      at = carryOn(at, { type: "choose-creature-type", player: this.playerId, creatureType });
     }
     // A shock land asks "pay 2 life?" as it enters, and stopped the look
     // there too: Stomping Ground read as casting nothing, a tie with a
     // Mountain, when paid it casts a turn-one Birds of Paradise (reported from
     // a live game, 2026-10-07). Look past it as paid: whether to pay is
     // asked again when it enters, and paid only if something's cast.
-    if (after?.some((a) => a.kind === "pay-life-for-untapped")) {
-      steps.push({ type: "pay-life-for-untapped", player: this.playerId, pay: true });
-      after = view.legalActionsAfter?.(steps);
+    if (at?.legalActions().some((a) => a.kind === "pay-life-for-untapped")) {
+      at = carryOn(at, { type: "pay-life-for-untapped", player: this.playerId, pay: true });
     }
-    if (after === null || after === undefined) return NO_REACH;
+    if (at === null) return NO_REACH;
     // A fetch makes no mana itself, so the look stopped at it too: Wooded
     // Foothills read as casting nothing, a tie with a tapped Jungle Hollow,
     // when cracked for a Forest it casts a turn-one Birds of Paradise
@@ -2063,10 +2082,10 @@ export class HeuristicBotController extends AutomaticController {
     // whatever the land puts on the stack (Bojuka Bog's enters trigger, a
     // Titania token for the fetch gone to the graveyard): a spell can't be
     // cast at sorcery speed over it, so it read as casting nothing too.
-    const crack = this.fetchCrack(view, play, steps, after);
-    const settled = this.settledPath(view, crack === undefined ? steps : [...steps, crack]);
-    const landed = settled?.steps ?? steps;
-    after = settled?.actions ?? after;
+    const crack = this.fetchCrack(at, play);
+    const settled = this.settledFrom(crack === undefined ? at : carryOn(at, crack));
+    const landed = settled?.view ?? at;
+    const after = settled?.actions ?? at.legalActions();
     // Only what we'd actually cast: a land that "lets us cast" Sticky
     // Fingers with nothing of ours to enchant buys nothing (reported from a
     // live game, 2026-10-05 — an Island played over a Glacial Fortress on
@@ -2086,7 +2105,7 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   /**
-   * Whether the spell this bot casts first after `path` — the dearest of
+   * Whether the spell this bot casts first on the look's copy `landed` — the dearest of
    * `offers`, as `act` picks it — leaves another castable once it has
    * resolved: 2 when it does, 1 when it doesn't, and `offers`' count below
    * two. Counted one at a time, every land that casts something ties: with
@@ -2100,74 +2119,66 @@ export class HeuristicBotController extends AutomaticController {
    */
   private castTogether(
     view: ControllerView,
-    path: readonly Action[],
+    landed: ControllerView,
     offers: readonly CastSpellLegal[],
     options: readonly LegalAction[],
   ): number {
-    if (offers.length < 2 || view.viewAfter === undefined) return offers.length;
+    if (offers.length < 2) return offers.length;
     const ready = offers.filter((o) => !this.holdsForNextSpell(o, options));
     const first = (ready.length > 0 ? ready : offers).reduce((a, b) => (this.manaValueOf(b.cardName) > this.manaValueOf(a.cardName) ? b : a));
-    const landed = view.viewAfter(path);
-    if (landed === null) return 1;
     const cast = this.toCastSpell(landed.state, first);
     if (cast.type !== "cast-spell") return 1;
-    const next = this.settledPath(view, [...path, cast]);
+    const next = this.settledFrom(carryOn(landed, cast));
     if (next === undefined) return 1;
     return this.castsWeWouldMake(view.state, next.actions).some((a) => a.card !== first.card) ? 2 : 1;
   }
 
   /**
-   * The activation cracking the land `play` just put down (after `steps`),
-   * when it's a fetch this bot cracks at once (`isFreeFetch`) — for the look
-   * to carry on past it. `undefined` when it isn't such a fetch, or the view
-   * can't look that far.
+   * The activation cracking the land `play` just put down, on the look's copy
+   * `at`, when it's a fetch this bot cracks at once (`isFreeFetch`) — for the
+   * look to carry on past it. `undefined` when it isn't such a fetch.
    */
-  private fetchCrack(
-    view: ControllerView,
-    play: Action,
-    steps: readonly Action[],
-    after: readonly LegalAction[],
-  ): Action | undefined {
-    if (play.type !== "play-land" || view.viewAfter === undefined) return undefined;
-    const crack = after.find(
-      (a): a is ActivateAbilityLegal => a.kind === "activate-ability" && a.source === play.card,
-    );
-    if (crack === undefined) return undefined;
-    const landed = view.viewAfter(steps);
-    if (landed === null || !this.isFreeFetch(landed.state, crack.source, crack.abilityIndex)) return undefined;
-    return this.toActivateAbility(landed.state, crack);
+  private fetchCrack(at: ControllerView, play: Action): Action | undefined {
+    if (play.type !== "play-land") return undefined;
+    const crack = at
+      .legalActions()
+      .find((a): a is ActivateAbilityLegal => a.kind === "activate-ability" && a.source === play.card);
+    if (crack === undefined || !this.isFreeFetch(at.state, crack.source, crack.abilityIndex)) return undefined;
+    return this.toActivateAbility(at.state, crack);
   }
 
   /**
-   * What we could do after `path` once the stack it leaves has resolved:
-   * every player passing round until it's empty, and what's asked of us on
-   * the way — a fetch's search, a trigger's target — answered as this bot
-   * will answer it (`answerAwaited`), so the land a crack counts is the one
-   * it will find, untapped or not (Evolving Wilds' enters tapped, and buys
-   * nothing this turn). With the path that got there, for a look further on
-   * (`castTogether`). `undefined` when the view can't look ahead, a choice
-   * is someone else's, or it doesn't settle in a few steps.
+   * What we could do from the look's copy `start` once the stack it leaves
+   * has resolved: every player passing round until it's empty, and what's
+   * asked of us on the way — a fetch's search, a trigger's target — answered
+   * as this bot will answer it (`answerAwaited`), so the land a crack counts
+   * is the one it will find, untapped or not (Evolving Wilds' enters tapped,
+   * and buys nothing this turn). With the copy it got to, for a look further
+   * on (`castTogether`). `undefined` when `start` is `null` (the engine
+   * refused the step to it), a choice is someone else's, or it doesn't settle
+   * in eight copies.
    */
-  private settledPath(
-    view: ControllerView,
-    path: readonly Action[],
-  ): { readonly steps: readonly Action[]; readonly actions: readonly LegalAction[] } | undefined {
-    if (view.viewAfter === undefined) return undefined;
-    let steps = [...path];
+  private settledFrom(
+    start: ControllerView | null,
+  ): { readonly view: ControllerView; readonly actions: readonly LegalAction[] } | undefined {
+    let at = start;
     for (let i = 0; i < 8; i += 1) {
-      const next = view.viewAfter(steps);
-      if (next === null) return undefined;
-      const state = next.state;
+      if (at === null) return undefined;
+      const state = at.state;
+      let next: Action | readonly Action[];
       if (state.awaiting !== null) {
-        const answer = answerAwaited(this, next);
+        const answer = answerAwaited(this, at);
         if (answer === null) return undefined;
-        steps = [...steps, answer];
-        continue;
+        next = answer;
+      } else if (state.zones.shared.stack.length === 0) {
+        return { view: at, actions: at.legalActions() };
+      } else {
+        const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
+        const from = Math.max(0, order.indexOf(state.priority.holder ?? this.playerId));
+        next = [...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p));
       }
-      if (state.zones.shared.stack.length === 0) return { steps, actions: next.legalActions() };
-      const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
-      const from = Math.max(0, order.indexOf(state.priority.holder ?? this.playerId));
-      steps = [...steps, ...[...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p))];
+      if (i === 7) return undefined;
+      at = carryOn(at, next);
     }
     return undefined;
   }

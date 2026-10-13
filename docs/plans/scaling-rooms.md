@@ -65,8 +65,10 @@ network (~53 ms) plus however long the event loop was busy.
   name; measured locally, one room's worst event-loop stall went 234 → 65 ms and the longest
   settle is now the slice plus one real decision (≤ ~350 ms here). The land search's saving is
   small (≤ 20%, only with duplicate lands in hand): most of its outside-the-budget time is the
-  look at each *different* land (`castableAfterPlay`'s board clones and one-spell simulation),
-  which a cheaper `legalActionsAfter` would cut.
+  look at each *different* land (`castableAfterPlay`'s board clones and one-spell simulation).
+  Later the same day the look stopped replaying its path from the real game at every step (one
+  copy stepped forward, `continueAfter`): 7.5 → 4.3 ms a look, its share of all bot play 10.6% →
+  6.4% on five four-player games, every decision identical.
   **Rerun on the live box after deploying it** (38d0ee85, same script and stages):
 
   | rooms | frames/s | frame gap median / p90 | probe p50 / p95 / max |

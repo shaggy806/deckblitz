@@ -2198,6 +2198,17 @@ export class Game {
           return null;
         }
       },
+      continueAfter: (action) => {
+        // As `viewAfter`, but keeping this game's events: asked of a look
+        // ahead's own copy, whose log holds only the look's events.
+        try {
+          const copy = Game.fromSnapshot(this.state, { registry: this.registry });
+          for (const each of Array.isArray(action) ? action : [action]) copy.dispatch(each);
+          return copy.controllerView(player);
+        } catch {
+          return null;
+        }
+      },
     };
   }
 
