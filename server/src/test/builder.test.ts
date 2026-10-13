@@ -375,7 +375,7 @@ describe("a scenario builder room", () => {
     expect(built.actions).toEqual([]);
     expect(Object.values(built.builder?.objects ?? {}).sort()).toEqual(["bears", "bolt", "land"]);
     const bears = Object.keys(built.builder!.objects).find((id) => built.builder!.objects[id] === "bears")!;
-    expect(built.view.objects[bears]?.cardName).toBe("Grizzly Bears");
+    expect(built.view.objects[bears as ObjectId]?.cardName).toBe("Grizzly Bears");
 
     // Frozen: nothing can be done on the board being built.
     send({ type: "dispatch", roomId, action: { type: "pass-priority", player: ALICE } });

@@ -58,7 +58,7 @@ real `Room` the moment every seat is claimed or bot-filled.
 
 ## Server commands, in full
 
-- `npm run test -w server` / `test:watch` / `build` / `typecheck`
+- `npm run test -w server` / `test:watch` / `build` / `typecheck` (the build's `tsc --noEmit`, then the tests through `tsconfig.tests.json`: vitest never type-checks them; its root sits above `src` and it allows `.ts` imports, for `manual-check-presets.test.ts`'s import of the client's preset list)
 - `npm run start -w server` — runs the built `dist/index.js`: a real room server on `ws://localhost:4000` (or `$PORT`); `-- --shards N` (or `SHARDS=N`) runs its rooms on N worker threads, 0 (the default) on the main thread
 - `npm run dev -w server` — `tsc --watch` + `node --watch dist/index.js` together
 - `npm run load-test -w server -- [url] [stages] [stageSeconds] [ackDelayMs]` — `scripts/load-test.mjs`: ramps four-seat all-bot rooms against a running server (`ws://localhost:4000`, stages `1,2,4`, 60 s each, frames acked 600 ms after arrival), times a cheap round trip every 500 ms as the event loop's busyness, and prints per stage frames/s, each room's gap between frames and the probe's p50/p95/max; stops past a 3 s p95 and pauses every room's bots when done. Against the live site (`wss://ws.deckblitz.net`) only with nobody playing. Results so far: `docs/plans/scaling-rooms.md`.

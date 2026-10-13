@@ -99,7 +99,7 @@ them in full.
 - `npm run build` — builds `engine` (tsc), then `server` (tsc), then `client` (`tsc -b && vite build`)
 - `npm test` — runs `engine`, `server` and `client` vitest, each once (the client's Playwright suite is separate: `npm run test:e2e -w client`)
 - `npm run lint` — oxlint on `client`
-- `npm run typecheck` — `tsc --noEmit` on `engine`, `tsc --noEmit` on `server`, `tsc -b` on `client`
+- `npm run typecheck` — `tsc --noEmit` on `engine` and `server` (each then its tests, through `tsconfig.tests.json`), `tsc -b` on `client`
 - `npm run verify [-- --with "Card"] [-- --skip fuzz,gate]` — everything a change must pass, fastest-failing first (`scripts/verify.mjs`): gen:cards, build, the backlog re-marks, typecheck + lint, the three suites, the test files you added type-checked (vitest never does), card:verify offline, then the fuzzer at 2 and 4 players, the fuzzer with every card the change adds forced in, and the bot gate, side by side. Logs per step in the OS temp dir.
 
 Local servers: the `dev-up` / `dev-down` skills start and stop the room server (or `dev-rooms`,
@@ -116,7 +116,7 @@ preloaded test boards) and Vite. Scripts and the fuzzer run `dist/`, so build be
 - **Module systems differ**: `engine`/`server` are ESM + NodeNext, so their own relative imports need explicit `.js` extensions (e.g. `import { x } from "./foo.js"` even though the file is `foo.ts`). `client` is ESM + bundler mode.
 - **Engine/server TS config is `erasableSyntaxOnly`** (same as the client): **no `enum`, no `namespace`, no constructor parameter properties**. Use string-literal unions + `as const satisfies` tables instead. Also `verbatimModuleSyntax` → split `import type { … }` from value imports. `strict` + `noUnusedLocals`/`noUnusedParameters`.
 - **Client TS config** (`client/tsconfig.app.json`) is strict bundler-mode: `verbatimModuleSyntax`, `erasableSyntaxOnly`, `noUnusedLocals`/`noUnusedParameters`, `allowImportingTsExtensions` (relative imports include the `.tsx`/`.ts` extension). `noEmit` — Vite does the transform.
-- **Engine/server tsconfig excludes `src/**/*.test.ts`** from the build, and vitest doesn't type-check tests: the engine's `typecheck` checks them through `engine/tsconfig.tests.json`.
+- **Engine/server tsconfig excludes `src/**/*.test.ts`** from the build, and vitest doesn't type-check tests: each one's `typecheck` checks them through its own `tsconfig.tests.json` (the server's since 2026-10-13, which found seven errors).
 - **`package-lock.json` is written by npm 11.** npm 10 drops the `libc` fields npm 11 records for platform-specific optional packages, so changing dependencies with npm 10 churns the lockfile. Where the installed npm is older (the cloud sessions' image has 10.9), use `npx npm@11 install …`.
 - **Shared dev deps are hoisted to the root** `package.json` (`typescript`, `@types/node`). Don't re-add them to a workspace unless a version needs to diverge.
 - **Lint** is oxlint, not ESLint. Config in `client/.oxlintrc.json` (`react`, `typescript`, `oxc` plugins; `react/rules-of-hooks` errors).

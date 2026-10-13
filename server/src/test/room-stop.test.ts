@@ -12,8 +12,10 @@ const registry = createDefaultRegistry();
  * engine bug, or a loop `Game.advance` gave up on, as a bot's move meets it. */
 class FailingBot extends HeuristicBotController {
   private calls = 0;
-  constructor(player: typeof ALICE, private readonly failAt: number) {
+  private readonly failAt: number;
+  constructor(player: typeof ALICE, failAt: number) {
     super(player, registry);
+    this.failAt = failAt;
   }
   override act(view: ControllerView) {
     this.calls += 1;

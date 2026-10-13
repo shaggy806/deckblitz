@@ -452,7 +452,7 @@ describe("PendingRoom: Commander-legal decks only", () => {
     // A starter with one card swapped for Ancestral Recall: legal to build,
     // banned in Commander — in the pool for casual play (2026-10-11).
     const registry = createDefaultRegistry();
-    const withBanned = SEATS.map((seat) => ({ commanders: seat.commanders, cards: [...seat.cards.slice(1), "Ancestral Recall"] })).find(
+    const withBanned = SEATS.map((seat) => ({ commanders: seat.commanders ?? [], cards: [...seat.cards.slice(1), "Ancestral Recall"] })).find(
       (deck) => validateCommanderDeck({ ...deck, size: 100 }, registry).legal,
     )!;
     expect(validateCommanderDeck({ ...withBanned, size: 100 }, registry).banned).toEqual(["Ancestral Recall"]);

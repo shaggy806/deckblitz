@@ -132,7 +132,7 @@ function openLesson(id: string) {
 
 describe("a tutorial room", () => {
   it("plays basics-proof through with the right answers, chapter by chapter, to the end", () => {
-    const { manager, session, info, passUntil } = openLesson("basics-proof");
+    const { manager, session, info } = openLesson("basics-proof");
     expect(manager.tutorial(session.id)).toBe(session);
     expect(session.seat).toBe(ALICE);
     expect(session.room.seatStatuses().find((s) => s.player === BOB)).toMatchObject({ isBot: true, displayName: "Rowan" });
