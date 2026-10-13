@@ -177,6 +177,13 @@ game to show a problem, listed in that plan's "Watching live games for" (wraths 
 under count budgets, deck biases, 1/1 tokens since `smallTokens`, Shiko or the other spell, and
 haste enablers in the crackback).
 
+- **Play with the bots' simulation budget** (the user, 2026-10-13): v2 stops on whichever comes first,
+  a count (`maxSimulations`, default 200 a decision; 12 rollouts for a non-priority decision) or the
+  room's wall clock (300 ms). The clock makes strength depend on the CPU — the live box ran a searched
+  decision in 152 ms typical against 37 ms on the dev PC — and matters again for solo games in the
+  browser (`docs/plans/local-rooms.md` step 6). Try count-only budgets of a few sizes against the clock:
+  strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop, and stalls
+  (`npm run load-test -w server`).
 - **A bot's Ring-bearer is its first creature**, not its best: `choose-permanents` asks bots
   for their own permanents in battlefield order, whatever the `then` does
   (`decisions/choose-permanents.ts`). Choosing an evasive or high-power creature is the play.
