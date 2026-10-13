@@ -1,12 +1,13 @@
 # Tutorials
 
-Status: **planning** (2026-10-12) — a technical plan, nothing built; the open questions for the
-user are at the end.
+Status: **planning** (2026-10-12; the user's answers 2026-10-13) — a technical plan, nothing
+built. The user's decisions are recorded at the end and shape everything above them.
 
 Two tutorials, asked for together (the user, 2026-10-12):
 
-- **Learn Commander** — for someone who doesn't know how to play: short lessons, each a real game
-  on a board set up for it, against an opponent that plays a script.
+- **Learn Commander** — for someone who doesn't know how to play: one or two whole games on
+  seeded decks built for the tutorial, against an opponent that plays a script, with the lessons
+  as chapters inside them.
 - **Site tour** — for someone who knows Magic but not this site: guided pointers over the real
   pages (landing, blitz, deck builder, library, lobby, the game board).
 
@@ -71,8 +72,10 @@ A small module, `client/src/tutorial/`:
 - **`CoachLayer`**, mounted once at the app root and in the two lazy pages, portalled to `<body>`
   above everything that can cover an anchor (above `.anim-layer`'s 10001 and the Settings panel's
   10003). It draws one **card** (title, a few sentences, Next / Back / Skip) beside its anchor, an
-  optional ring or spotlight cut-out around the anchor, and nothing else: the page underneath stays
-  usable unless a step says otherwise.
+  ring and spotlight cut-out around the anchor. **Other clicks are blocked** (the user's call): a
+  full-screen catcher under the card and over the page passes clicks through only inside the
+  spotlight's hole, plus the card's own buttons and an always-present way out (Skip / Exit
+  tutorial); keyboard shortcuts that would act (Space to pass) are swallowed the same way.
 - **A step** is data:
   `{ id, anchor, title, body, placement?, advance, spotlight?, blockOthers? }`, where `anchor` is a
   CSS selector (or a small resolver for "the tile of the card named X") and `advance` is one of
@@ -93,8 +96,13 @@ A small module, `client/src/tutorial/`:
   `passSettings.ts`'s. The site tour's place survives the full page loads to `/library` and
   `/deck-builder` through it.
 - **Entry**: a **"?" square button** in the corner toolbar, beside Settings, opening a small menu:
-  *Learn Commander* (the lessons, with ticks) and *Tour the site*. Whether it also offers itself to
-  a first-time visitor is an open question.
+  *Learn Commander* and *Tour the site*, each with its progress. **On a first visit** (no
+  `mtg.tutorials` key yet), a small, non-blocking callout rises beside the "?" button — "New
+  here? Take the tour or learn to play" — with the two choices and a dismiss; dismissed or
+  followed, it's recorded and never shown again. It doesn't cover the page's actions or delay
+  blitzing.
+- **Voice**: friendly — a short line of encouragement around each instruction, never more than
+  two or three sentences on a card; the copy lives beside each step's data.
 
 ### 2. The tutorial room (server, for the lessons and the in-game tour stops)
 
@@ -130,26 +138,29 @@ A production-safe sibling of the builder:
 
 ### 3. Learn Commander (content on the room)
 
-Each lesson is one board (or a few), a script for the opponent, and steps with goals. A draft
-syllabus, shortest first — each 2–5 minutes, each ending with something won:
+**One or two whole games, not a string of separate boards** (the user's call: as many lessons as
+it takes, which could fit in one or two games). Each game starts from a board and runs to its
+end; the "lessons" are chapters triggered by what happens in it.
 
-1. **The table** (frozen): life 40, the command zone and your commander, library, hand,
-   battlefield, graveyard; whose turn; the phase track.
-2. **Lands and mana**: play a land, tap it, cast a two-drop; summoning sickness.
-3. **The turn**: untap, draw, main, combat, end; priority and Pass.
-4. **Combat**: attack, the opponent's scripted block, damage; blocking their attack.
-5. **Your commander**: cast it from the command zone; it dies — command zone or graveyard;
-   recast for {2} more (tax).
-6. **Commander damage and the table**: 21 from one commander; attacking a chosen opponent at a
-   three-player table.
-7. **Instants and the stack**: the opponent casts a removal spell; respond with a protection
-   spell; the stack resolves last in, first out.
-8. **Card types in play**: artifacts, enchantments, a planeswalker, removal — one board each, short.
-9. **A real game**: a short game against one opponent on two small fixed decks, the tutorial's
-   pointers switched off unless asked for, then an offer to blitz.
-
-The lessons use a **teaching deck** — a fixed, simple list (a mono-colour or two-colour precon
-from `SAMPLE_DECKS` cut down, or one built for it) — so the hand and draws are known.
+- **Seeded decks built for the tutorial** (the user's call): a small, fixed list for each side,
+  libraries set top first, so every draw is known and the chapters land on the turns written for
+  them. Kept short (a few turns each game), with simple cards that show one idea each.
+- **Chapters**: a chapter opens on a game moment (`turn-began` for turn N, `step-began`, a card
+  drawn, the opponent casting a spell) and closes on a goal, the server checking both from the
+  event log. The draft order, folded into the games:
+  - **Game 1, the basics**: the table (life 40, command zone, library, hand, graveyard, the phase
+    track) → play a land and tap it → cast a creature (summoning sickness) → the turn and
+    priority (Pass) → attack, and the opponent's scripted block → cast your commander from the
+    command zone → block their attack → finish them off.
+  - **Game 2, Commander's own rules** (if one game can't hold it all): commander damage (21),
+    the commander dying and going back to the command zone, recasting it with tax, instants and
+    the stack (respond to their removal), a three-player table and choosing whom to attack.
+- **Retry without a restart**: a snapshot (`game.snapshot()`) at each chapter's start, so a wrong
+  turn ("you attacked into a bigger blocker") can rewind to the chapter rather than the game —
+  `TutorialSession` swaps in a room built from the snapshot (`Game.fromSnapshot`).
+- **Blocking clicks** means each chapter's goal must be reachable inside its spotlight: the
+  scripted opponent and the seeded draws make the board known, so each step can name the tile
+  or button to press.
 
 ### 4. The site tour (content on the overlay)
 
@@ -170,11 +181,13 @@ Client-only except for its in-game part:
    "?" button and menu; the site tour's landing, deck builder, library and lobby stops (no server
    work). An e2e spec walks the tour.
 2. **The tutorial room**: protocol messages and the `tutorial` field, `TutorialSession`, the
-   scripted bot moved into `server/src` with its script, goal predicates and the `Room` hook, the
-   spec additions; one lesson end to end (lesson 2) as the proof, with a server test that plays its
-   scripted right answers to the end (as `manual-check-presets.test.ts` builds every preset).
+   scripted bot moved into `server/src` with its script, chapter triggers and goals and the `Room`
+   hook, chapter snapshots for retry, the spec additions; game 1's first chapters end to end as
+   the proof, with a server test that plays the scripted right answers (as
+   `manual-check-presets.test.ts` builds every preset).
 3. **The in-game tour stops**, on a tutorial-room board.
-4. **The lessons**, one per batch, each with its server test and an e2e smoke.
+4. **The tutorial games**: the seeded decks, game 1's chapters, then game 2's if needed, each
+   with a server test that plays the scripted right answers to the end and an e2e smoke.
 5. **Polish**: skip and replay, a lesson picker with progress, the copy read aloud end to end.
 
 Each phase is checked live at ~768px tall, 1920x1080 and 2560x1440 (the standing UI rule); lesson
@@ -190,14 +203,12 @@ boards are two-player unless the lesson is about the table.
 - **Cost on the live server**: a tutorial room is a normal room plus a script; the fixed fallback
   (v1) is cheaper than v2.
 
-## Open questions for the user
+## The user's decisions (2026-10-13)
 
-1. **Scope of Learn Commander**: the nine-lesson syllabus above, or fewer and longer? Is lesson 9 (a
-   short real game) wanted, or does the tutorial end by handing over to Blitz?
-2. **The teaching deck**: a cut-down precon from `SAMPLE_DECKS`, or a deck built for it (and which
-   commander)?
-3. **How firm the guidance is**: pointers that can be ignored, or spotlight steps that block other
-   clicks until the goal is met (more hand-holding, more chance of feeling stuck)?
-4. **First visit**: should the site offer the tour (or Learn Commander) to someone arriving for the
-   first time, or only from the "?" button?
-5. **Voice**: terse instructions ("Play a land.") or a friendlier narrator?
+1. **Lesson count**: as many as it takes — it could fit in one or two games. → Learn Commander is
+   one or two whole games with the lessons as chapters (section 3).
+2. **Decks**: seeded custom decks made for the tutorial.
+3. **Guidance**: block other clicks — the spotlight is the only thing that can be clicked, plus a
+   way out.
+4. **First visit**: a non-invasive indicator recommends it; the tutorial isn't forced.
+5. **Voice**: friendlier.

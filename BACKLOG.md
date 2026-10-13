@@ -220,7 +220,7 @@ item lands.
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
-- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay, a production-safe tutorial room with a scripted opponent, a nine-lesson draft syllabus); open questions for the user at its end.
+- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Next: build phase 1, the overlay.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

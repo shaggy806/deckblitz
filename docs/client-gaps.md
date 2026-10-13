@@ -81,5 +81,7 @@ where the decision is raised); bots and the fuzzer answer it already.
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12).
   The plan is `docs/plans/tutorials.md`: a coach-mark overlay (`client/src/tutorial/`, `data-tour`
   anchors, progress in `localStorage`, a "?" button in the corner toolbar), and a production-safe
-  tutorial room (lessons held on the server by id, a scripted name-based opponent promoted from
-  dev-rooms' `ScriptedBot`, goals checked from the event log). Its open questions are the user's.
+  tutorial room (games held on the server by id, a scripted name-based opponent promoted from
+  dev-rooms' `ScriptedBot`, goals checked from the event log). The user's decisions (2026-10-13):
+  one or two seeded games with lessons as chapters, custom decks, blocking clicks, a first-visit
+  callout, a friendly voice.
