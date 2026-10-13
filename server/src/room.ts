@@ -371,6 +371,8 @@ export class Room {
   private eventsAtPublish = 0;
   /** The stack as the last frame showed it — see `stackArrivalUnshown`. */
   private stackAtPublish: readonly ObjectId[] = [];
+  /** The attacks and blocks the last frame showed — see `combatUnshown`. */
+  private combatAtPublish: ReadonlySet<string> = new Set();
   private readonly showStackArrivals: boolean;
   private gate: FrameGate | null = null;
   readonly host: HostRole;
@@ -1230,6 +1232,14 @@ export class Room {
         this.holdForClients(() => this.settle(), false);
         return;
       }
+      // A creature attacking or blocking that no frame has shown: show that
+      // board, its arrows drawn, before anyone passes the combat on into
+      // damage. Held the same way, for its animation only.
+      if (this.pacing !== "immediate" && this.combatUnshown()) {
+        this.publish();
+        this.holdForClients(() => this.settle(), false);
+        return;
+      }
 
       const bot = this.currentBotActor();
       if (bot !== null) {
@@ -1376,6 +1386,7 @@ export class Room {
     this.seq += 1;
     this.eventsAtPublish = this.game.events.length;
     this.stackAtPublish = [...this.game.state.zones.shared.stack];
+    this.combatAtPublish = this.combatPairs();
     this.onUpdate(this);
   }
 
@@ -1399,6 +1410,41 @@ export class Room {
     if (!this.showStackArrivals) return false;
     const shown = new Set(this.stackAtPublish);
     return this.game.state.zones.shared.stack.some((id) => !shown.has(id));
+  }
+
+  /**
+   * Each attack and block on the battlefield, as `attacker->defender` and
+   * `blocker->attacker` keys: what the client's arrows are drawn from
+   * (`ArrowLayer` reads them off the board, not off events).
+   */
+  private combatPairs(): Set<string> {
+    const state = this.game.state;
+    const pairs = new Set<string>();
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object === undefined) continue;
+      if (object.attacking !== null) pairs.add(`a:${id}->${object.attacking}`);
+      if (object.blocking !== null) pairs.add(`b:${id}->${object.blocking}`);
+    }
+    return pairs;
+  }
+
+  /**
+   * An attack or a block is on the battlefield that no frame has shown yet:
+   * declared, or a creature put onto it attacking. The client draws combat's
+   * arrows from the board it shows, and plays a frame's combat damage over
+   * the board before that frame. So when nobody was asked anything between
+   * the declaration and the damage — the defender with nothing to block
+   * with, every window passing itself — both landed in one frame, the hits
+   * played over a board with no attack on it, and the arrow showing who was
+   * attacking whom came after the damage, or never (a user report,
+   * 2026-10-12). Declaring attackers and blockers is always followed by a
+   * priority window before damage (rules 508.2, 509.2), which is where
+   * `settle()` stops to show it.
+   */
+  private combatUnshown(): boolean {
+    for (const pair of this.combatPairs()) if (!this.combatAtPublish.has(pair)) return true;
+    return false;
   }
 
   private resolvedUnshown(): boolean {

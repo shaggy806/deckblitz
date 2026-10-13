@@ -124,6 +124,14 @@ export function flightMs(distance: number, diagonal: number): number {
 export const MARK_STEP_MS = 520
 /** A double-faced card turning over. */
 export const FLIP_STEP_MS = 460
+/**
+ * Attack arrows and block lines drawing themselves in on the board that
+ * first has them (`ArrowLayer`; App.css's `.arrow.is-new` is this long), with
+ * the declaration's sword or clash. The frame is held for them, so the next
+ * one's combat damage never strikes before the arrow saying who is attacking
+ * whom is all there.
+ */
+export const ARROW_DRAW_MS = 420
 /** Life gained or lost, damage marked on a creature: a flash and a number
  * floating up off the life total or the tile. Long enough to read the number. */
 export const HURT_STEP_MS = 700
@@ -457,8 +465,10 @@ type SlotKind =
   | 'move'
   | 'crown'
   | 'shuffle'
-  // Nothing drawn, only heard (attackers or a blocker declared, a shuffle
-  // under reduced motion): costs no time.
+  // Attackers or a blocker declared: the new board's arrows drawing in.
+  | 'arrows'
+  // Nothing drawn, only heard (a declaration whose combat damage is in the
+  // same frame, a shuffle under reduced motion): costs no time.
   | 'sound'
 
 /**
@@ -476,6 +486,8 @@ const AFTER_ORDER: readonly SlotKind[] = [
   // pile) is hovering where it was held until it lands, so nothing else on
   // the new board goes before it.
   'putDown',
+  // The arrows draw in as the board mounts, so their beat starts it.
+  'arrows',
   'untap',
   'tap',
   // A drawn card settling into the hand, once the tiles have tapped or
@@ -522,6 +534,7 @@ const PACED: ReadonlySet<SlotKind> = new Set<SlotKind>([
   'move',
   'crown',
   'shuffle',
+  'arrows',
 ])
 /** Kinds where a run in one frame plays together on one beat rather than one
  * after another: a wrath's deaths, a spell's worth of lands tapping. */
@@ -613,6 +626,7 @@ function slotsFor(
   phase: { current: Phase },
   reduced: boolean,
   landings: Landings,
+  hitsFollow: boolean,
 ): Slot[] {
   const start = landings.byBefore.get(ev.seq)
   const flight = landings.byAfter.get(ev.seq)
@@ -657,14 +671,15 @@ function slotsFor(
       { event: ev, kind: 'crown', duration: CROWN_STEP_MS },
     ]
   }
-  const slot = slotFor(ev, phase, reduced)
+  const slot = slotFor(ev, phase, reduced, hitsFollow)
   return slot === null ? [] : [slot]
 }
 
 /** The single slot an event reserves, or `null`. Mutates `phase` so a
  * `step-began` into the *same* phase, or the "beginning" phase a
- * `turn-began` already announced, doesn't also claim one. */
-function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean): Slot | null {
+ * `turn-began` already announced, doesn't also claim one. `hitsFollow`:
+ * combat damage comes later in the same frame. */
+function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean, hitsFollow: boolean): Slot | null {
   if (ev.type === 'spell-cast' || ev.type === 'land-played') {
     return { event: ev, kind: 'card', duration: CARD_STEP_MS }
   }
@@ -733,9 +748,13 @@ function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean): Sl
   if (ev.type === 'dice-rolled') {
     return { event: ev, kind: 'dice', duration: DICE_STEP_MS }
   }
-  // A declaration's sword sound: the arrows it draws are the board's own.
+  // A declaration: the arrows it draws are the board's own (`ArrowLayer`),
+  // drawing in as the new board mounts, and the frame waits for them. The
+  // server shows every new attack or block in a frame of its own before any
+  // damage (`Room.combatUnshown`); one whose damage is in this frame anyway
+  // keeps only its sound, where it happened, ahead of the hits.
   if (ev.type === 'attackers-declared' || ev.type === 'blocker-declared') {
-    return { event: ev, kind: 'sound', duration: 0 }
+    return hitsFollow ? { event: ev, kind: 'sound', duration: 0 } : { event: ev, kind: 'arrows', duration: ARROW_DRAW_MS }
   }
   // A mulligan shuffles the hand back in without a `library-shuffled`. Pure
   // movement, so reduced motion keeps only its sound.
@@ -794,8 +813,14 @@ function layOutFrame(
 ): { schedule: EventSchedule; paired: Set<number> } {
   const phase = { current: startPhase }
   const slots: Slot[] = []
-  for (const event of events) {
-    for (const slot of slotsFor(event, phase, reduced, landings)) {
+  // Where the frame's last combat damage is: a declaration before it has its
+  // hits in this frame too.
+  let lastHit = -1
+  for (const [index, event] of events.entries()) {
+    if (event.type === 'damage-dealt' && event.combat) lastHit = index
+  }
+  for (const [index, event] of events.entries()) {
+    for (const slot of slotsFor(event, phase, reduced, landings, index < lastHit)) {
       // A draw into the viewer's own hand settles into its place there, over
       // the new board.
       const own = slot.kind === 'draw' && slot.event.type === 'card-drawn' && handDraws.has(slot.event.object)

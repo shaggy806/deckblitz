@@ -7,7 +7,7 @@
 
 import { describe, expect, it } from "vitest";
 import { Game, HeuristicBotController, autoSettle } from "engine";
-import type { Action, ControllerView, PlayerController, PlayerId } from "engine";
+import type { Action, ControllerView, ObjectId, PlayerController, PlayerId, PlayerView } from "engine";
 import { Room } from "../room.js";
 import type { Connection, RoomTimers } from "../room.js";
 import type { BotSpeed, ServerMessage } from "protocol";
@@ -54,11 +54,13 @@ function fakeClock() {
 /** Records every frame pushed to this seat, the way the WebSocket layer
  * would. Acks are opt-in per test: `ackAll` mimics a client that keeps up. */
 function watcher(room: () => Room, ackAll: boolean) {
-  const frames: { seq: number; events: number }[] = [];
+  const frames: { seq: number; events: number; view: PlayerView }[] = [];
   const connection: Connection = {
     send: (m: ServerMessage) => {
       if (m.type !== "state") return;
-      frames.push({ seq: m.seq, events: m.view.events.length });
+      // A copy, as the wire would make one: a view can share the game's
+      // live arrays.
+      frames.push({ seq: m.seq, events: m.view.events.length, view: structuredClone(m.view) });
       if (ackAll) room().ack(connection, m.seq);
     },
   };
@@ -552,6 +554,76 @@ describe("Room pacing (realtime)", () => {
 
       room.requestResolveAll(connection);
       expect(game.state.zones.shared.stack).toHaveLength(0);
+    });
+  });
+
+  describe("combat", () => {
+    /** Whether `attacker` has dealt combat damage yet. */
+    const hasHit = (room: Room, attacker: ObjectId): boolean =>
+      room.game.events.some((e) => e.type === "damage-dealt" && e.combat && e.source === attacker);
+
+    /**
+     * For each frame Alice was shown: whether its board draws `attacker` as
+     * attacking (the client's attack arrow is drawn from exactly that), and
+     * whether its new events are `attacker`'s combat damage — which the
+     * client plays over the board of the frame *before* it.
+     */
+    function combatFrames(frames: readonly { view: PlayerView }[], attacker: ObjectId) {
+      let shown = 0;
+      return frames.map(({ view }) => {
+        const events = view.events.slice(shown);
+        shown = view.events.length;
+        return {
+          attacking: (view.objects[attacker]?.attacking ?? null) !== null,
+          hits: events.some((e) => e.type === "damage-dealt" && e.combat && e.source === attacker),
+        };
+      });
+    }
+
+    /** The board each hit plays over must already be drawing the attack. */
+    function expectAttackShownBeforeDamage(frames: readonly { view: PlayerView }[], attacker: ObjectId) {
+      const seen = combatFrames(frames, attacker);
+      const hit = seen.findIndex((f) => f.hits);
+      expect(hit).toBeGreaterThan(0);
+      expect(seen[hit - 1].attacking).toBe(true);
+    }
+
+    it("shows a bot's attack on the board before its combat damage", () => {
+      // Alice has nothing to block with or respond with, so nobody is asked
+      // anything between the attack and its damage: the case where both used
+      // to land in one frame, the hit playing over a board with no arrow.
+      const { room, clock, alice } = makePacedRoom(true);
+      room.addBot(BOB);
+      room.start();
+      const bears = room.game.debugSpawn("Grizzly Bears", BOB, "battlefield", { summoningSick: false });
+      room.publish();
+      room.requestPassTurn(alice.connection);
+      for (let i = 0; i < 60 && !hasHit(room, bears); i += 1) clock.advance(400);
+      expect(hasHit(room, bears)).toBe(true);
+      // And the frame carrying the damage has gone out too.
+      for (let i = 0; i < 10 && !combatFrames(alice.frames, bears).some((f) => f.hits); i += 1) clock.advance(400);
+      expectAttackShownBeforeDamage(alice.frames, bears);
+    });
+
+    it("shows a player's own attack on the board before its combat damage", () => {
+      const { room, clock, alice } = makePacedRoom(true);
+      room.addBot(BOB);
+      room.start();
+      const bears = room.game.debugSpawn("Grizzly Bears", ALICE, "battlefield", { summoningSick: false });
+      room.publish();
+      for (let i = 0; i < 20 && room.game.state.awaiting === null; i += 1) {
+        if (room.game.state.priority.holder !== ALICE) break;
+        room.dispatch(alice.connection, { type: "pass-priority", player: ALICE });
+      }
+      expect(room.game.state.awaiting?.kind).toBe("attackers");
+      room.dispatch(alice.connection, {
+        type: "declare-attackers",
+        player: ALICE,
+        attackers: [{ attacker: bears, defender: BOB }],
+      });
+      for (let i = 0; i < 10 && !combatFrames(alice.frames, bears).some((f) => f.hits); i += 1) clock.advance(400);
+      expect(hasHit(room, bears)).toBe(true);
+      expectAttackShownBeforeDamage(alice.frames, bears);
     });
   });
 });

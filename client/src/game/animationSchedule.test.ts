@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import {
+  ARROW_DRAW_MS,
   CARD_HOLD_MS,
   CARD_STEP_MS,
   DEATH_STEP_MS,
@@ -436,13 +437,43 @@ describe('scheduleEvents', () => {
     expect(scheduleEvents([mulligan('p1')], 'beginning', { scale: 1, reduced: false }).totalMs).toBe(SHUFFLE_STEP_MS)
   })
 
-  it('gives attackers and blockers declared a slot to be heard in, costing nothing', () => {
+  it('holds a frame declaring attackers or blockers until its arrows have drawn in', () => {
+    // The board this frame ends on is the first with the attack on it: its
+    // arrows draw in as it mounts, first thing, the sword heard with them,
+    // and the frame waits for them before the tilt to tapped and before the
+    // next frame's damage can strike.
+    const attackers = ev({ type: 'attackers-declared', player: 'p1', attackers: ['a'] })
+    const s = scheduleEvents([tap('a'), attackers], 'combat')
+    expect(s.items).toEqual([])
+    expect(s.after.map((i) => [i.event.type, i.offset])).toEqual([
+      ['attackers-declared', 0],
+      ['permanent-tapped', ARROW_DRAW_MS],
+    ])
+    expect(s.afterMs).toBe(ARROW_DRAW_MS + TAP_STEP_MS)
+    // Several blockers draw their lines together, on one beat.
+    const blocks = scheduleEvents(
+      [
+        ev({ type: 'blocker-declared', blocker: 'b', attacker: 'a' }),
+        ev({ type: 'blocker-declared', blocker: 'c', attacker: 'a' }),
+      ],
+      'combat',
+    )
+    expect(blocks.after.map((i) => i.offset)).toEqual([0, 0])
+    expect(blocks.afterMs).toBe(ARROW_DRAW_MS)
+    // Scaled with the viewer's speed, as App.css's draw-in is.
+    expect(scheduleEvents([attackers], 'combat', { scale: 2, reduced: false }).afterMs).toBe(2 * ARROW_DRAW_MS)
+  })
+
+  it('keeps only the sound of a declaration whose combat damage is in the same frame, ahead of the hits', () => {
+    // No board between them shows the attack, so there are no arrows to wait
+    // for over the new one, and the sword mustn't sound after the hit.
     const s = scheduleEvents(
       [
         dies(),
         ev({ type: 'attackers-declared', player: 'p1', attackers: ['a'] }),
         ev({ type: 'blocker-declared', blocker: 'b', attacker: 'a' }),
         dies(),
+        hit(),
       ],
       'combat',
     )
@@ -451,8 +482,10 @@ describe('scheduleEvents', () => {
       ['attackers-declared', DEATH_STEP_MS],
       ['blocker-declared', DEATH_STEP_MS],
       ['permanent-left-battlefield', 0],
+      ['damage-dealt', DEATH_STEP_MS],
     ])
-    expect(s.totalMs).toBe(DEATH_STEP_MS)
+    expect(s.totalMs).toBe(DEATH_STEP_MS + HIT_STEP_MS)
+    expect(s.after).toEqual([])
   })
 
   it('keeps only a shuffle to be heard under reduced motion, costing nothing and splitting no beat', () => {
