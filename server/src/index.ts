@@ -3,9 +3,8 @@ import { WebSocketServer } from "ws";
 import { createDefaultRegistry } from "engine";
 import { RoomManager } from "./room-manager.js";
 import { COMPRESSION, attachRoomServer } from "./ws-server.js";
-import { evaluateDecklist, formatCheck, parseDecklistText } from "./import-deck.js";
-import { loadOracleTagIndex } from "./oracle-tags.js";
-import { loadCardData } from "./card-data.js";
+import { importDeps } from "./import-deck.js";
+import { handleImportRoute } from "./import-route.js";
 import { startStatusServer } from "./status-server.js";
 import { CAPTURE_KEEP, DEFAULT_CAPTURE_DIR } from "./capture.js";
 
@@ -36,7 +35,7 @@ if (builder) console.log("scenario builder on");
 // Cloudflare tunnel does not forward. It carries room codes, which are join
 // credentials, so it must never share the public port — and a loopback *check*
 // on that port would be worthless anyway, since `cloudflared` makes every
-// public request arrive from 127.0.0.1. See `status.ts`.
+// public request arrive from 127.0.0.1. See `status-server.ts`.
 const statusPort = Number(process.env.STATUS_PORT ?? 4010);
 
 // A room with nobody connected goes once it's been idle this long, checked
@@ -45,81 +44,19 @@ const IDLE_ROOM_MS = 30 * 60 * 1000;
 const REAP_INTERVAL_MS = 15 * 60 * 1000;
 
 const httpServer = createServer((req, res) => {
-  if (req.method === "POST" && req.url === "/import-deck") {
-    let body = "";
-    req.on("data", (chunk: Buffer) => {
-      body += chunk;
-    });
-    req.on("end", () => {
-      void (async () => {
-        // Newline-delimited JSON, streamed: one `{type:"progress"}` line per
-        // resolved card, then a single `{type:"result"}` line. A long
-        // decklist spends a throttled Scryfall round-trip on every card the
-        // engine doesn't implement, so the client needs to see it moving
-        // rather than stare at a silent request for half a minute.
-        let streaming = false;
-        const write = (line: unknown): void => {
-          res.write(`${JSON.stringify(line)}\n`);
-        };
-        try {
-          const { text } = JSON.parse(body) as { text?: string };
-          if (typeof text !== "string") throw new Error("missing 'text' field");
-          const { entries, commanders, commanderSource } = parseDecklistText(text, registry);
-
-          res.writeHead(200, {
-            "Content-Type": "application/x-ndjson",
-            "Cache-Control": "no-cache, no-transform",
-            // Asks an intermediate proxy not to buffer the body, which would
-            // defeat the point of streaming it.
-            "X-Accel-Buffering": "no",
-            "Access-Control-Allow-Origin": clientOrigin,
-          });
-          streaming = true;
-          write({ type: "progress", done: 0, total: entries.length, name: null });
-
-          const cards = await evaluateDecklist(
-            entries,
-            registry,
-            (p) => write({ type: "progress", ...p }),
-            { commanders, tags: loadOracleTagIndex(), cardData: loadCardData() },
-          );
-          const format = formatCheck(entries, registry, commanders, commanderSource);
-          write({ type: "result", cards, format });
-          res.end();
-        } catch (err) {
-          const message = err instanceof Error ? err.message : String(err);
-          if (streaming) {
-            // Headers are already out at 200 — the only way left to report
-            // the failure is an error line the client watches for.
-            write({ type: "error", error: message });
-            res.end();
-            return;
-          }
-          res.writeHead(400, {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": clientOrigin,
-          });
-          res.end(JSON.stringify({ error: message }));
-        }
-      })();
-    });
-    return;
-  }
-  if (req.method === "OPTIONS" && req.url === "/import-deck") {
-    res.writeHead(204, {
-      "Access-Control-Allow-Origin": clientOrigin,
-      "Access-Control-Allow-Methods": "POST",
-      "Access-Control-Allow-Headers": "Content-Type",
-    });
-    res.end();
-    return;
-  }
+  // `POST /import-deck`: the job runs wherever the host keeps the card pool.
+  if (handleImportRoute(req, res, (text, sink) => host.importDeck(text, sink), clientOrigin)) return;
   res.writeHead(404);
   res.end();
 });
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
-const host = attachRoomServer(wss, manager, { builder, reapIdleMs: IDLE_ROOM_MS, reapIntervalMs: REAP_INTERVAL_MS });
+const host = attachRoomServer(wss, manager, {
+  builder,
+  reapIdleMs: IDLE_ROOM_MS,
+  reapIntervalMs: REAP_INTERVAL_MS,
+  importDeps: importDeps(registry),
+});
 startStatusServer(() => host.status(), statusPort, host.decisions);
 
 httpServer.listen(port, () => {

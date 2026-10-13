@@ -9,7 +9,7 @@
 import type { WebSocketServer } from "ws";
 import type { RoomManager } from "./room-manager.js";
 import { InProcessRoomHost } from "./in-process-host.js";
-import type { RoomServerOptions } from "./room-service.js";
+import type { InProcessHostOptions } from "./in-process-host.js";
 import { attachTransport } from "./transport.js";
 
 export { COMPRESSION } from "./transport.js";
@@ -18,7 +18,7 @@ export type { RoomServerOptions } from "./room-service.js";
 export function attachRoomServer(
   wss: WebSocketServer,
   manager: RoomManager,
-  options: RoomServerOptions = {},
+  options: InProcessHostOptions = {},
 ): InProcessRoomHost {
   const host = new InProcessRoomHost(manager, options);
   attachTransport(wss, host);

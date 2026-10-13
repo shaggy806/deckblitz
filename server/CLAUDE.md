@@ -38,8 +38,8 @@ that file.
 `room.ts`, `pending-room.ts`, `room-manager.ts`, `room-service.ts` (the message handlers and
 `broadcast`, per connection by `ConnId`), `transport.ts` (sockets, rate limit, compression),
 `room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `host.ts`, `decks.ts` (fallback
-seat decks from the engine's `SAMPLE_DECKS`), `import-deck.ts` (`POST /import-deck`, streamed
-NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `card-data.ts`,
+seat decks from the engine's `SAMPLE_DECKS`), `import-deck.ts` (`POST /import-deck`'s job,
+`runImportJob`, whose HTTP side with a 1 MB body cap is `import-route.ts`; streamed NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `card-data.ts`,
 else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's generated tag index),
 `capture.ts`, `builder.ts` (the scenario builder: a board built from data, rebuilt into a new
 frozen `Room` under the same code on every edit), `scripted-bot.ts` (an opponent that plays a

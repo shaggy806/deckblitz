@@ -39,6 +39,9 @@ import type {
   PrintingRef,
   ReplacementOption,
 } from "protocol";
+import { loadCardData } from "./card-data.js";
+import { loadOracleTagIndex } from "./oracle-tags.js";
+import type { ImportSink } from "./import-route.js";
 
 /** Re-exported so this module stays the single import site for everything
  * the decklist audit produces, wire shapes included. */
@@ -802,4 +805,52 @@ export function formatCheck(
   }
   const result = validateCommanderDeck({ commanders, cards: rest, size: 100 }, registry);
   return { ...result, commanders };
+}
+
+/** What an import job reads besides the list: the pool, and the two
+ * read-once files a stand-in is chosen with. */
+export interface ImportDeps {
+  readonly registry: CardRegistry;
+  readonly tags: () => OracleTagIndex | null;
+  readonly cardData: () => LocalCardData | null;
+}
+
+/** The deps over `registry`, reading the tag index and the Oracle snapshot
+ * the first time a job needs them. */
+export function importDeps(registry: CardRegistry): ImportDeps {
+  return { registry, tags: loadOracleTagIndex, cardData: loadCardData };
+}
+
+/**
+ * One `POST /import-deck`, as a job: parses `text`, then writes a
+ * `{type:"progress", done: 0}` line, a progress line as `evaluateDecklist`
+ * advances, and one `{type:"result", cards, format}` line, and ends. A list
+ * that doesn't parse is `reject`ed before any line (a 400); a failure after
+ * the first line can only be reported in-band, as `{type:"error"}`. Runs
+ * wherever the registry is (`import-route.ts` is the HTTP side).
+ */
+export async function runImportJob(text: string, deps: ImportDeps, sink: ImportSink): Promise<void> {
+  let streaming = false;
+  try {
+    const { entries, commanders, commanderSource } = parseDecklistText(text, deps.registry);
+    streaming = true;
+    sink.line({ type: "progress", done: 0, total: entries.length, name: null });
+    const cards = await evaluateDecklist(
+      entries,
+      deps.registry,
+      (p) => sink.line({ type: "progress", ...p }),
+      { commanders, tags: deps.tags(), cardData: deps.cardData() },
+    );
+    const format = formatCheck(entries, deps.registry, commanders, commanderSource);
+    sink.line({ type: "result", cards, format });
+    sink.end();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (!streaming) {
+      sink.reject(message);
+      return;
+    }
+    sink.line({ type: "error", error: message });
+    sink.end();
+  }
 }

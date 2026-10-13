@@ -6,6 +6,7 @@
  * `docs/plans/room-shards.md`).
  */
 
+import { createDefaultRegistry } from "engine";
 import type { ClientMessage, ServerMessage } from "protocol";
 import type { ClientLink, ConnId, RoomHost } from "./room-host.js";
 import type { RoomManager } from "./room-manager.js";
@@ -14,6 +15,15 @@ import { RoomService } from "./room-service.js";
 import type { RoomServerOptions } from "./room-service.js";
 import { statusParts } from "./status.js";
 import type { StatusParts } from "./status-server.js";
+import { importDeps, runImportJob } from "./import-deck.js";
+import type { ImportDeps } from "./import-deck.js";
+import type { ImportSink } from "./import-route.js";
+
+export interface InProcessHostOptions extends RoomServerOptions {
+  /** What `/import-deck` jobs read; a registry of its own, built on the
+   * first import, if absent. */
+  readonly importDeps?: ImportDeps;
+}
 
 export class InProcessRoomHost implements RoomHost {
   readonly service: RoomService;
@@ -21,13 +31,15 @@ export class InProcessRoomHost implements RoomHost {
   /** The open sockets, by id: a message the service sends to one that has
    * closed since goes nowhere. */
   private readonly links = new Map<ConnId, ClientLink>();
+  private deps: ImportDeps | null;
 
-  constructor(manager: RoomManager, options: RoomServerOptions = {}) {
+  constructor(manager: RoomManager, options: InProcessHostOptions = {}) {
     this.service = new RoomService(
       manager,
       { send: (conn: ConnId, message: ServerMessage) => this.links.get(conn)?.send(JSON.stringify(message)) },
       options,
     );
+    this.deps = options.importDeps ?? null;
   }
 
   open(link: ClientLink): void {
@@ -45,6 +57,11 @@ export class InProcessRoomHost implements RoomHost {
 
   async status(): Promise<StatusParts> {
     return statusParts(this.service.manager);
+  }
+
+  importDeck(text: string, sink: ImportSink): void {
+    this.deps ??= importDeps(createDefaultRegistry());
+    void runImportJob(text, this.deps, sink);
   }
 
   async stop(): Promise<void> {

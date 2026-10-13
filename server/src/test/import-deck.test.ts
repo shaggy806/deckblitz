@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { colorIdentityOf, createDefaultRegistry, defineCard, withinIdentity } from "engine";
-import { evaluateDecklist, formatCheck, parseDecklistText } from "../import-deck.js";
+import { evaluateDecklist, formatCheck, parseDecklistText, runImportJob } from "../import-deck.js";
 
 const registry = createDefaultRegistry();
 
@@ -719,5 +719,58 @@ describe("formatCheck (over a pasted list's implemented cards)", () => {
     expect(r.violations).toContain(
       `"Atraxa, Praetors' Voice" and "Ureni of the Unwritten" can't be paired: both commanders need Partner`,
     );
+  });
+});
+
+describe("runImportJob", () => {
+  /** A sink that records what a job wrote. */
+  function recorder() {
+    const out: { lines: unknown[]; rejected: string | null; ended: number } = { lines: [], rejected: null, ended: 0 };
+    return {
+      out,
+      sink: {
+        line: (value: unknown) => out.lines.push(value),
+        reject: (message: string) => {
+          out.rejected = message;
+        },
+        end: () => {
+          out.ended += 1;
+        },
+      },
+    };
+  }
+
+  it("streams progress from zero, then one result, then ends", async () => {
+    const { out, sink } = recorder();
+    await runImportJob("1 Sol Ring\n1 Forest", { registry, tags: () => null, cardData: () => null }, sink);
+    expect(out.rejected).toBeNull();
+    expect(out.ended).toBe(1);
+    expect(out.lines[0]).toEqual({ type: "progress", done: 0, total: 2, name: null });
+    const last = out.lines.at(-1) as { type: string; cards: { name: string }[] };
+    expect(last.type).toBe("result");
+    expect(last.cards.map((c) => c.name)).toEqual(["Sol Ring", "Forest"]);
+  });
+
+  it("refuses a list it can't read before any line, and reports a later failure in-band", async () => {
+    const broken = new Proxy(registry, {
+      get: (target, key) =>
+        key === "has"
+          ? () => {
+              throw new Error("registry down");
+            }
+          : Reflect.get(target, key),
+    });
+    const refused = recorder();
+    await runImportJob("1 Sol Ring", { registry: broken, tags: () => null, cardData: () => null }, refused.sink);
+    expect(refused.out).toEqual({ lines: [], rejected: "registry down", ended: 0 });
+
+    const failed = recorder();
+    const tags = (): null => {
+      throw new Error("tags unreadable");
+    };
+    await runImportJob("1 Sol Ring", { registry, tags, cardData: () => null }, failed.sink);
+    expect(failed.out.rejected).toBeNull();
+    expect(failed.out.lines.at(-1)).toEqual({ type: "error", error: "tags unreadable" });
+    expect(failed.out.ended).toBe(1);
   });
 });

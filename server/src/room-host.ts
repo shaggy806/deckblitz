@@ -11,6 +11,8 @@
 import type { RecordableHistogram } from "node:perf_hooks";
 import type { ClientMessage } from "protocol";
 import type { StatusParts } from "./status-server.js";
+import type { ImportSink } from "./import-route.js";
+
 /** A socket's id, given by the transport: incrementing, never reused, so a
  * late message about a closed socket can't reach its successor. */
 export type ConnId = number;
@@ -53,6 +55,9 @@ export interface RoomHost {
   close(link: ClientLink): void;
   /** The rooms, for the status page. */
   status(): Promise<StatusParts>;
+  /** Runs one `/import-deck` job (`runImportJob`) wherever the host keeps
+   * the card pool. */
+  importDeck(text: string, sink: ImportSink): void;
   /** Bot decision times on this thread, when the host runs rooms on it. */
   readonly decisions?: RecordableHistogram;
   /** Stops the host's own timers (and whatever else it runs). */
