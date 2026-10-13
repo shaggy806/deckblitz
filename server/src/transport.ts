@@ -100,6 +100,13 @@ export function attachTransport(wss: WebSocketServer, host: RoomHost): void {
         if (!isRateLimited(ip)) sendMessage(link, { type: "error", message: "malformed message" });
         return;
       }
+      // Valid JSON that isn't an object (`null`, a number) has no `type` to
+      // read — and reading one off `null` here, outside any try, would throw
+      // out of the socket's listener and take the whole process down.
+      if (typeof message !== "object" || message === null) {
+        if (!isRateLimited(ip)) sendMessage(link, { type: "error", message: "malformed message" });
+        return;
+      }
       // `ack` is automatic traffic — one per frame the client finishes
       // showing, with no effect beyond releasing a bot — and a busy table
       // sends plenty of them, so it doesn't spend the budget meant for

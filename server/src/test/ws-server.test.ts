@@ -553,6 +553,18 @@ describe("room server (end to end over WebSocket)", () => {
     const reply = await nextMessage(aliceWs);
     expect(reply.type).toBe("error");
   });
+
+  it("answers JSON that isn't an object as malformed, and keeps serving", async () => {
+    // `null` once threw out of the socket's listener reading its `type`,
+    // which would have ended the process.
+    const ws = await openSocket();
+    for (const text of ["null", "42", "\"create-room\""]) {
+      ws.send(text);
+      expect(await nextMessage(ws)).toEqual({ type: "error", message: "malformed message" });
+    }
+    ws.send(JSON.stringify({ type: "create-room" }));
+    expect((await nextMessage(ws)).type).toBe("room-created");
+  });
 });
 
 describe("compression (permessage-deflate)", () => {
