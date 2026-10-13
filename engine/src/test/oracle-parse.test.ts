@@ -712,6 +712,34 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(c.targets).toEqual(["creature-you-control"]);
   });
 
+  it("a Pilot's crew bonus (rules 702.122a, 702.171a): 'as though its power were N greater' and 'using its toughness', saddle only when it says so", () => {
+    const diver = face("This creature saddles Mounts and crews Vehicles as though its power were 2 greater.", "Creature — Goblin Pilot");
+    expect(diver.static).toEqual([
+      {
+        affects: { scope: "self" },
+        crewsAs: { plus: 2, saddles: true },
+        text: "This creature saddles Mounts and crews Vehicles as though its power were 2 greater.",
+      },
+    ]);
+    expect(diver.complete).toBe(true);
+    expect(face("This creature crews Vehicles as though its power were 2 greater.").static[0].crewsAs).toEqual({ plus: 2 });
+    expect(face("This creature crews Vehicles using its toughness rather than its power.").static[0].crewsAs).toEqual({
+      toughness: true,
+    });
+    expect(
+      face("This creature saddles Mounts and crews Vehicles using its toughness rather than its power.").static[0].crewsAs,
+    ).toEqual({ toughness: true, saddles: true });
+    // A token's own line ("This token …") reads the same.
+    expect(face("This token crews Vehicles as though its power were 2 greater.", "Token Creature — Pilot").static[0].crewsAs).toEqual({
+      plus: 2,
+    });
+    // Anything else about crewing is a person's.
+    expect(face("This creature crews Vehicles as though its power were 2 greater and can't block.").complete).toBe(false);
+    expect(face("Creatures you control crew Vehicles as though their power were 2 greater.").complete).toBe(false);
+    // The crew keyword marks its ability as crew's, which is what the bonus reads.
+    expect(face("Crew 3", "Artifact — Vehicle", { power: "4", toughness: "4" }).activated[0]).toMatchObject({ crew: true });
+  });
+
   it("speed (rules 702.178–702.179): start your engines!, and each kind of max speed line", () => {
     const MAX = { kind: "speed", atLeast: 4 };
     const engines =

@@ -33,6 +33,7 @@ export default defineCard({
         duration: "end-of-turn",
       },
       resolve: null,
+      crew: true,
       text: "Crew 2",
     },
   ],

@@ -329,6 +329,13 @@ export interface ActivatedAbility {
    * rest of the turn (`GameObject.saddledThisTurn`) — "a creature that
    * saddled it this turn" (`CardFilter.saddledSource`). */
   readonly saddle?: true;
+  /** This is a crew ability (rule 702.122a — `cards/helpers.ts`'s `crew()`):
+   * each creature tapped for its `tapOthers` cost **crews** its source
+   * (702.122b). What marks the cost as crew's for a creature that "crews
+   * Vehicles as though its power were 2 greater" or "using its toughness
+   * rather than its power" (`StaticAbility.crewsAs`), which a saddle cost
+   * reaches only when it says "saddles Mounts" and teamwork's never does. */
+  readonly crew?: true;
   /**
    * A loyalty ability (rule 606) — present ⇒ this ability's cost is "add
    * `loyaltyCost` loyalty counters to the source" (negative removes them),

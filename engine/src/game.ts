@@ -634,6 +634,14 @@ function untilEndOfTurnKeywords(keywords: readonly Keyword[]): PtModifier[] {
     : [{ power: 0, toughness: 0, keywords: [...keywords], untilEndOfTurn: true }];
 }
 
+/** Which keyword's total-power tap cost an activated ability's `tapOthers`
+ * is — crew's (rule 702.122a) or saddle's (702.171a) — for the `crewsAs`
+ * statics that change what a creature pays it with; `undefined` for any
+ * other. */
+function tapCostKeyword(ability: ActivatedAbility): "crew" | "saddle" | undefined {
+  return ability.crew === true ? "crew" : ability.saddle === true ? "saddle" : undefined;
+}
+
 /** `cost` with its X at `x`: generic mana, or — a `may`'s `xColor`, "pay
  * any amount of {R}" — that many pips of one colour. */
 function concreteX(cost: ManaCost, x: number, xColor: Color | undefined): ManaCost {
@@ -12300,6 +12308,7 @@ export class Game {
           ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
           ability.cost.tap ? sourceId : undefined,
           { kind: "ability", source: sourceId },
+          tapCostKeyword(ability),
         );
         if (offer === null) throw new Error(`${player} cannot pay for ${def.name}'s ability`);
         tapPicked = this.tapCostPicks(`${def.name}'s ability`, offer, tap);
@@ -21435,6 +21444,7 @@ export class Game {
     avoid: ObjectId | undefined,
     exclude: ObjectId | undefined,
     purpose: ManaPurpose,
+    keyword?: "crew" | "saddle",
   ): TapCostOffer | null {
     const candidates = this.tapOthersCandidates(player, sourceId, spec);
     const plan = this.payMana(player, manaCost, avoid, exclude, purpose, {
@@ -21450,10 +21460,10 @@ export class Game {
     }
     // Crew's total power (rule 702.122a): each creature's power as the cost
     // is paid — nothing can change it once the activation is announced (the
-    // crew rulings).
+    // crew rulings) — or what a `crewsAs` static says it crews with.
     const power: Record<ObjectId, number> = {};
     if (spec.totalPower !== undefined) {
-      for (const id of choices) power[id] = computeCharacteristics(this.state, this.registry, id).power;
+      for (const id of choices) power[id] = this.tapCostPower(id, keyword);
     }
     return {
       count: spec.totalPower !== undefined ? 0 : spec.count,
@@ -21480,7 +21490,36 @@ export class Game {
       ability.cost.tap || ability.zone !== undefined ? undefined : sourceId,
       ability.cost.tap ? sourceId : undefined,
       { kind: "ability", source: sourceId },
+      tapCostKeyword(ability),
     );
+  }
+
+  /**
+   * What creature `id` adds to a total-power tap cost: its power now, or —
+   * when the cost is a crew ability's (rule 702.122a) or a saddle ability's
+   * (702.171a) — what a `crewsAs` static of its own makes it: "crews
+   * Vehicles [and saddles Mounts] as though its power were 2 greater" adds
+   * that much, "…using its toughness rather than its power" reads its
+   * toughness. A saddle cost only under `saddles` ("saddles Mounts"), and
+   * any other total-power cost (teamwork, 702.194a) never. An ability of the
+   * creature, so gone once it has lost its abilities (layer 6); its actual
+   * power doesn't change (the rulings).
+   */
+  private tapCostPower(id: ObjectId, keyword: "crew" | "saddle" | undefined): number {
+    const c = computeCharacteristics(this.state, this.registry, id);
+    const object = this.state.objects[id];
+    if (keyword === undefined || object === undefined || hasLostAbilities(object)) return c.power;
+    let byToughness = false;
+    let plus = 0;
+    for (const ability of this.registry.get(rulesTextName(object)).static) {
+      const crews = ability.crewsAs;
+      if (crews === undefined || ability.affects.scope !== "self") continue;
+      if (keyword === "saddle" && crews.saddles !== true) continue;
+      if (!this.staticActive(object, ability)) continue;
+      if (crews.toughness === true) byToughness = true;
+      plus += crews.plus ?? 0;
+    }
+    return (byToughness ? c.toughness : c.power) + plus;
   }
 
   /** {@link tapCostOffer} for casting `cardId` for its alternative cost

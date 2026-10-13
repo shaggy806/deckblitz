@@ -1172,6 +1172,22 @@ export interface StaticAbility {
    */
   readonly combatDamageByToughness?: "always" | "if-toughness-greater";
   /**
+   * What this creature adds to a crew cost's total power (rule 702.122a —
+   * an ability marked `crew`), and with `saddles` to a saddle cost's
+   * (702.171a — marked `saddle`): "This creature crews Vehicles **as though
+   * its power were 2 greater**" is `{ plus: 2 }` (Hotshot Mechanic, the NEO
+   * Pilot token), "…saddles Mounts and crews Vehicles as though…" `{ plus:
+   * 2, saddles: true }` (Dynamite Diver, the DFT Pilot token), "…crews
+   * Vehicles **using its toughness rather than its power**" `{ toughness:
+   * true }` (Giant Ox; Interface Ace with `saddles`). Only `affects: {
+   * scope: "self" }` — an ability of the creature, so it's gone once the
+   * creature loses its abilities (layer 6). Its power doesn't change for
+   * anything else (the rulings): a 0-power Pilot still adds 2, and teamwork
+   * (702.194a) or any other total-power cost reads the real power. Read as
+   * the cost is offered (`Game.tapCostPower`), into the offer's `power`.
+   */
+  readonly crewsAs?: { readonly plus?: number; readonly toughness?: true; readonly saddles?: true };
+  /**
    * The affected creatures "can attack as though they didn't have defender"
    * (Arcades, the Strategist; Felothar the Steadfast; High Alert). A
    * permission rather than a restriction, so it lifts only defender's "can't

@@ -256,7 +256,9 @@
   "condition:void-condition",
   "stat:revolt-condition",
   "mechanic:speed",
-  "keyword:saddle"
+  "keyword:saddle",
+  "static:crews-as-though-power",
+  "static:crews-using-toughness"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

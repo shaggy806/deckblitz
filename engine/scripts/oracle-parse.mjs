@@ -1895,6 +1895,16 @@ function parseStatic(line, text) {
     };
   }
   if (line === "~ can block only creatures with flying.") return { affects: { scope: "self" }, canBlockOnly: { keyword: "flying" }, text };
+  // A Pilot's crew bonus (rules 702.122a, 702.171a): "~ [saddles Mounts and]
+  // crews Vehicles as though its power were N greater" / "…using its
+  // toughness rather than its power" — `crewsAs`, saddle only when it says so.
+  if ((m = /^~ (saddles Mounts and )?crews Vehicles (?:as though its power were (\d+) greater|(using its toughness rather than its power))\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      crewsAs: { ...(m[2] ? { plus: Number(m[2]) } : { toughness: true }), ...(m[1] ? { saddles: true } : {}) },
+      text,
+    };
+  }
   if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
     return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
   }

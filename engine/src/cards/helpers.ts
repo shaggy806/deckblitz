@@ -251,6 +251,7 @@ export const crew = (n: number, text = `Crew ${n}`): ActivatedAbility => ({
   targets: [],
   effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
   resolve: null,
+  crew: true,
   text,
 });
 
