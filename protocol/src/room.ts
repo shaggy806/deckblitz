@@ -395,6 +395,27 @@ export type ClientMessage =
       readonly roomId: string;
       readonly seq: number;
     }
+  | {
+      /**
+       * "I keep the event log myself": from now on this connection's `state`
+       * frames carry only the events it hasn't been sent yet (see the
+       * message's `eventsFrom`). Sent once, as the socket opens. A connection
+       * that never sends it — a client older than it, a script — goes on
+       * getting the whole log in every frame.
+       */
+      readonly type: "event-deltas";
+    }
+  | {
+      /**
+       * "My event log doesn't line up with this frame's `eventsFrom`" — a
+       * frame this client couldn't use. The server answers with the current
+       * frame again, to this connection alone and under the same `seq`,
+       * carrying the whole log (`eventsFrom: 0`). Nothing is answered for a
+       * room with no game, or one the connection neither sits in nor watches.
+       */
+      readonly type: "resync";
+      readonly roomId: string;
+    }
   // --- capture (a server started with `--capture` only; see the `state`
   // message's `capture`) -----------------------------------------------------
   | {
@@ -558,7 +579,23 @@ export type ServerMessage =
        * next. */
       readonly game: number;
       readonly seat: PlayerId;
+      /** The board as this seat sees it — except that its `events` are the
+       * game's event log from index `eventsFrom` on, not the whole of it. */
       readonly view: PlayerView;
+      /**
+       * Where in the game's event log `view.events` starts. 0 — the whole
+       * log — on a connection's first frame of a room's game, after anything
+       * that puts a new game under the room's code (a rematch, a scenario
+       * builder's rebuild, a tutorial's retry or next board), after joining,
+       * claiming a seat, spectating or a `resync`, and always for a
+       * connection that hasn't sent `event-deltas`. Otherwise it's the length
+       * of the log this connection was sent in its last frame of this game,
+       * and `view.events` holds only what has happened since: a client
+       * appends them to what it has. One that doesn't line up (its log isn't
+       * `eventsFrom` long) asks for a `resync`. Absent from a server older
+       * than it: the whole log.
+       */
+      readonly eventsFrom?: number;
       readonly actions: readonly LegalAction[];
       readonly seats: readonly SeatStatus[];
       /** Whether *this* seat currently has an auto-pass in effect, paused or

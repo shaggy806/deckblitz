@@ -313,4 +313,37 @@ describe("a tutorial over the wire", () => {
     // The chapter under way is "land", which began at the Next.
     expect(rewound.tutorial).toMatchObject({ chapter: "land", step: { id: "play-land" } });
   });
+
+  it("sends a client that keeps the event log the whole of it again after a retry", async () => {
+    const { next, send } = await connect();
+    send({ type: "event-deltas" });
+    send({ type: "tutorial-create", lesson: "basics-proof", hostToken: "h" });
+    const created = await next();
+    if (created.type !== "room-created") throw new Error(`got ${created.type}`);
+    const roomId = created.roomId;
+    send({ type: "join-room", roomId, hostToken: "h" });
+    await next();
+    send({ type: "claim-seat", roomId, seat: ALICE, clientToken: "t" });
+    const first = await nextState(next);
+    expect(first.eventsFrom).toBe(0);
+    send({ type: "tutorial-next", roomId, step: "welcome" });
+    const second = await nextState(next);
+    expect(second.eventsFrom).toBe(first.view.events.length);
+
+    // The land goes down: only its events come.
+    const land = second.actions.find((a) => a.kind === "play-land");
+    if (land?.kind !== "play-land") throw new Error("no land to play");
+    send({ type: "dispatch", roomId, action: { type: "play-land", player: ALICE, card: land.card } });
+    const played = await nextState(next);
+    expect(played.eventsFrom).toBe(first.view.events.length + second.view.events.length);
+    expect(played.view.events.some((e) => e.type === "land-played")).toBe(true);
+
+    // Back to the chapter's start: a new room under the code, its log (no
+    // longer than what was sent) sent whole — the client finds nothing in it
+    // to animate, as before.
+    send({ type: "tutorial-retry", roomId });
+    const rewound = await nextState(next);
+    expect(rewound.eventsFrom).toBe(0);
+    expect(rewound.view.events.length).toBeLessThanOrEqual(played.eventsFrom! + played.view.events.length);
+  });
 });

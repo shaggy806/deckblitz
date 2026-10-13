@@ -8,14 +8,14 @@
 import type { IncomingMessage } from "node:http";
 import type { PerMessageDeflateOptions, WebSocket, WebSocketServer } from "ws";
 import { COMMANDER_RULES, SPECTATOR } from "engine";
-import type { ArtManifestEntry } from "engine";
+import type { ArtManifestEntry, PlayerId, PlayerView } from "engine";
 import type { RoomManager } from "./room-manager.js";
 import type { Room, Connection } from "./room.js";
 import type { CaptureLog } from "./capture.js";
 import { PendingRoom } from "./pending-room.js";
 import type { BuilderSession } from "./builder.js";
 import type { TutorialSession } from "./tutorial-session.js";
-import type { ClientMessage, ServerMessage } from "protocol";
+import type { ClientMessage, SeatStatus, ServerMessage } from "protocol";
 
 /**
  * permessage-deflate (RFC 7692), for every connection that offers it — every
@@ -60,33 +60,87 @@ function send(ws: WebSocket, message: ServerMessage): void {
  */
 function broadcast(room: Room): void {
   const seats = room.seatStatuses();
-  for (const { seat, connection } of room.connectedSeats()) {
-    const firstFrame = !sentArtManifest.has(connection);
-    if (firstFrame) sentArtManifest.add(connection);
-    connection.send({
-      type: "state",
-      roomId: room.id,
-      seq: room.frameSeq,
-      game: room.gameNumber,
-      seat,
-      view: room.game.viewFor(seat),
-      actions: room.frozen ? [] : room.game.legalActions(seat),
-      seats,
-      autoPassing: room.isAutoPassing(seat),
-      autoPassPaused: room.isAutoPassPaused(seat),
-      isHost: room.isHost(connection),
-      botSpeed: room.botSpeed,
-      botsPaused: room.botsPaused,
-      ...(room.firstPlayerChosen ? { firstPlayerChosen: true as const } : {}),
-      ...(room.recipe !== null ? { canRematch: true as const } : {}),
-      ...(room.stopped !== null ? { stopped: room.stopped } : {}),
-      ...(room.captures !== null ? { capture: true as const } : {}),
-      ...(room.builder !== null ? { builder: room.builder } : {}),
-      ...(room.tutorial !== null ? { tutorial: room.tutorial } : {}),
-      ...(firstFrame ? { artManifest: artManifestFor(room) } : {}),
-    });
-  }
+  for (const { seat, connection } of room.connectedSeats()) connection.send(seatFrame(room, seat, connection, seats));
   for (const connection of spectatorsOf(room.id)) connection.send(spectatorFrame(room, connection));
+}
+
+/** One frame of `room`'s game for the connection seated at `seat`. */
+function seatFrame(
+  room: Room,
+  seat: PlayerId,
+  connection: Connection,
+  seats: readonly SeatStatus[] = room.seatStatuses(),
+): ServerMessage {
+  const firstFrame = !sentArtManifest.has(connection);
+  if (firstFrame) sentArtManifest.add(connection);
+  return {
+    type: "state",
+    roomId: room.id,
+    seq: room.frameSeq,
+    game: room.gameNumber,
+    seat,
+    ...newEvents(room, room.game.viewFor(seat), connection),
+    actions: room.frozen ? [] : room.game.legalActions(seat),
+    seats,
+    autoPassing: room.isAutoPassing(seat),
+    autoPassPaused: room.isAutoPassPaused(seat),
+    isHost: room.isHost(connection),
+    botSpeed: room.botSpeed,
+    botsPaused: room.botsPaused,
+    ...(room.firstPlayerChosen ? { firstPlayerChosen: true as const } : {}),
+    ...(room.recipe !== null ? { canRematch: true as const } : {}),
+    ...(room.stopped !== null ? { stopped: room.stopped } : {}),
+    ...(room.captures !== null ? { capture: true as const } : {}),
+    ...(room.builder !== null ? { builder: room.builder } : {}),
+    ...(room.tutorial !== null ? { tutorial: room.tutorial } : {}),
+    ...(firstFrame ? { artManifest: artManifestFor(room) } : {}),
+  };
+}
+
+/**
+ * The connections that said they keep the event log themselves
+ * (`event-deltas`), so a frame can carry only the events they haven't had.
+ * Any other connection — a client from before the message existed, a script
+ * — gets the whole log in every frame, as it always did.
+ */
+const eventDeltas = new WeakSet<Connection>();
+
+/**
+ * How much of each room's event log each connection has been sent, by room
+ * code: the `Room` it was sent from and the log's length then. A rematch, a
+ * builder's rebuild and a tutorial's retry or next board all put a new `Room`
+ * under the same code, whose log has nothing to do with the old one's, so a
+ * record from another `Room` counts for nothing. A new connection (a reload,
+ * a reconnect) has no record at all.
+ */
+const sentEvents = new WeakMap<Connection, Map<string, { readonly room: Room; readonly count: number }>>();
+
+/** Forgets what `connection` was sent of `roomId`'s log, so its next frame
+ * carries the whole of it — on joining, claiming a seat, spectating, or its
+ * own `resync`. */
+function forgetSentEvents(connection: Connection, roomId: string): void {
+  sentEvents.get(connection)?.delete(roomId);
+}
+
+/**
+ * `view` as `connection` should get it: with only the events after the ones
+ * it was last sent of this room's log, and `eventsFrom` saying where in the
+ * log they start — or the whole log (`eventsFrom: 0`) on its first frame of
+ * this `Room`, to a connection that doesn't keep the log, or if the log is
+ * somehow shorter than what was sent. The engine's log only ever grows within
+ * one `Game`, and every seat's view carries the same one (`viewFor`), so the
+ * events a connection has had are the log's first `count`, whichever seat or
+ * spectator it was watching from. Never touches `view` itself.
+ */
+function newEvents(room: Room, view: PlayerView, connection: Connection): { view: PlayerView; eventsFrom: number } {
+  const total = view.events.length;
+  let sent = sentEvents.get(connection);
+  if (sent === undefined) sentEvents.set(connection, (sent = new Map()));
+  const last = sent.get(room.id);
+  const from =
+    eventDeltas.has(connection) && last !== undefined && last.room === room && last.count <= total ? last.count : 0;
+  sent.set(room.id, { room, count: total });
+  return from === 0 ? { view, eventsFrom: 0 } : { view: { ...view, events: view.events.slice(from) }, eventsFrom: from };
 }
 
 /**
@@ -124,7 +178,7 @@ function spectatorFrame(room: Room, connection: Connection): ServerMessage {
     seq: room.frameSeq,
     game: room.gameNumber,
     seat: room.game.state.turnOrder[0],
-    view: room.game.viewFor(SPECTATOR),
+    ...newEvents(room, room.game.viewFor(SPECTATOR), connection),
     actions: [],
     seats: room.seatStatuses(),
     autoPassing: false,
@@ -351,6 +405,7 @@ export function attachRoomServer(
         case "join-room": {
           const room = requireRoom(manager, message.roomId);
           boundRoom = room;
+          forgetSentEvents(connection, room.id);
           room.bindHost(connection, message.hostToken);
           send(ws, roomJoined(room, connection));
           // The host coming back takes the role back from whoever was
@@ -381,6 +436,7 @@ export function attachRoomServer(
             return;
           }
           boundRoom = room;
+          forgetSentEvents(connection, room.id);
           if (room instanceof PendingRoom) broadcastPending(room);
           else room.publish();
           return;
@@ -493,6 +549,7 @@ export function attachRoomServer(
           let set = spectators.get(room.id);
           if (set === undefined) spectators.set(room.id, (set = new Set()));
           set.add(connection);
+          forgetSentEvents(connection, room.id);
           if (room instanceof PendingRoom) send(ws, { ...roomJoined(room, connection), spectating: true });
           else send(ws, spectatorFrame(room, connection));
           return;
@@ -679,6 +736,24 @@ export function attachRoomServer(
           const room = manager.get(message.roomId);
           if (room instanceof PendingRoom || room === undefined) return;
           room.ack(connection, message.seq);
+          return;
+        }
+        case "event-deltas": {
+          eventDeltas.add(connection);
+          return;
+        }
+        case "resync": {
+          // The client's log doesn't line up with what this connection was
+          // sent: the frame that's current again, with the whole log, to it
+          // alone — same `seq`, so it acks it as it would have the frame it
+          // couldn't use. Nothing to send for a room with no game, or one
+          // this connection isn't watching.
+          const room = manager.get(message.roomId);
+          if (room instanceof PendingRoom || room === undefined) return;
+          forgetSentEvents(connection, room.id);
+          const seat = room.connectedSeats().find((s) => s.connection === connection)?.seat;
+          if (seat !== undefined) connection.send(seatFrame(room, seat, connection));
+          else if (spectators.get(room.id)?.has(connection) === true) connection.send(spectatorFrame(room, connection));
           return;
         }
       }

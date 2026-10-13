@@ -397,6 +397,44 @@ describe("a scenario builder room", () => {
     expect(again.builder?.spec.cards.map((c) => c.name).sort()).toEqual(["Grizzly Bears", "Lightning Bolt", "Mountain"]);
   });
 
+  it("sends a client that keeps the event log the whole of it again after every rebuild", async () => {
+    await open(true);
+    const { next, send } = await connect();
+    send({ type: "event-deltas" });
+    send({ type: "builder-create", hostToken: "h" });
+    const created = await next();
+    if (created.type !== "room-created") throw new Error(`got ${created.type}`);
+    const roomId = created.roomId;
+    send({ type: "join-room", roomId, hostToken: "h" });
+    await next();
+    send({ type: "claim-seat", roomId, seat: ALICE, clientToken: "t" });
+    expect((await nextState(next)).eventsFrom).toBe(0);
+
+    // Each edit is a new room under the code, with a log of its own.
+    const board = spec([card("bears", "Grizzly Bears"), card("land", "Mountain")], {
+      seats: [
+        { player: ALICE, life: 40, bot: false },
+        { player: BOB, life: 40, bot: true },
+      ],
+    });
+    send({ type: "builder-update", roomId, spec: board });
+    const built = await nextState(next);
+    expect(built.eventsFrom).toBe(0);
+    send({ type: "builder-start", roomId });
+    const playing = await nextState(next);
+    expect(playing.eventsFrom).toBe(0);
+
+    // Within one room, only what's new.
+    send({ type: "dispatch", roomId, action: { type: "pass-priority", player: ALICE } });
+    const passed = await nextState(next);
+    expect(passed.eventsFrom).toBe(playing.view.events.length);
+
+    send({ type: "builder-stop", roomId });
+    let again = await nextState(next);
+    while (again.builder?.mode !== "build") again = await nextState(next);
+    expect(again.eventsFrom).toBe(0);
+  });
+
   it("only lets its host change the board", async () => {
     await open(true);
     const host = await connect();
