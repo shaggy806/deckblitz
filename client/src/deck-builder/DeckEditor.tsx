@@ -365,7 +365,7 @@ export function DeckEditor({
 
   return (
     <div className="db-editor">
-      <div className="db-editor-head">
+      <div className="db-editor-head" data-tour="db-editor">
         {readOnly ? (
           <h2>{deck.name}</h2>
         ) : (
@@ -380,7 +380,7 @@ export function DeckEditor({
         )}
         {readOnly ? (
           <div className="db-editor-actions">
-            <button type="button" onClick={onMakeActive} disabled={isActive}>
+            <button type="button" data-tour="db-make-active" onClick={onMakeActive} disabled={isActive}>
               <StableLabel widest={['Make active']}>{isActive ? 'Active' : 'Make active'}</StableLabel>
             </button>
             <button type="button" onClick={onDuplicate}>
@@ -411,7 +411,7 @@ export function DeckEditor({
               )}
             </div>
             <div className="db-editor-actions" hidden={confirmingDelete}>
-              <button type="button" onClick={onMakeActive} disabled={isActive}>
+              <button type="button" data-tour="db-make-active" onClick={onMakeActive} disabled={isActive}>
                 <StableLabel widest={['Make active']}>{isActive ? 'Active' : 'Make active'}</StableLabel>
               </button>
               <button type="button" onClick={onDuplicate}>

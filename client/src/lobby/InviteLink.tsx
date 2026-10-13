@@ -30,7 +30,7 @@ export function InviteLink({ roomId }: { readonly roomId: string }) {
   }
 
   return (
-    <span className="invite-link">
+    <span className="invite-link" data-tour="lobby-invite">
       <button type="button" onClick={copy}>
         {/* Its width held, so it doesn't shrink under the cursor. */}
         <StableLabel widest={['Copy invite link', '✓ Link copied']}>

@@ -46,7 +46,7 @@ export function PhaseTrack({ view, seat }: { readonly view: PlayerView; readonly
   const stops = mine ? settings.stops.mine : settings.stops.theirs
   const whose = mine ? 'your turns' : "other players' turns"
   return (
-    <ol className="phase-steps" ref={listRef}>
+    <ol className="phase-steps" ref={listRef} data-tour="game-phase-track">
       {STEPS.map(([step, abbr, name]) => {
         const stoppable = seat !== null && STOPPABLE_STEPS.has(step)
         const stopped = stops.includes(step)

@@ -59,6 +59,7 @@ export function SeatMenu({
     <div className="motion-control seat-menu" ref={boxRef}>
       <button
         type="button"
+        data-tour="game-menu"
         // Amber while a bot has the seat, as the bots' pause button is when
         // paused; the strip has no room for a longer label.
         className={botPlaying ? 'ts-paused' : undefined}

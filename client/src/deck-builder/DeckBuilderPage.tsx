@@ -111,11 +111,11 @@ export function DeckBuilderPage() {
         </a>
         <h1>Deck Builder</h1>
 
-        <div className="db-list-section">
+        <div className="db-list-section" data-tour="db-my-decks">
           <div className="db-list-head">
             <span>My decks</span>
             <div className="db-list-head-actions">
-              <button type="button" onClick={() => setImporting(true)}>
+              <button type="button" data-tour="db-import" onClick={() => setImporting(true)}>
                 Import
               </button>
               <button
@@ -148,7 +148,7 @@ export function DeckBuilderPage() {
           </ul>
         </div>
 
-        <div className="db-list-section">
+        <div className="db-list-section" data-tour="db-starters">
           <div className="db-list-head">
             <span>Starter decks</span>
           </div>
@@ -464,7 +464,7 @@ function StarterIntro({
     <>
       {description ? <p className="db-starter-description">{description}</p> : null}
       {substitutions.length > 0 ? (
-        <details className="db-substitutions">
+        <details className="db-substitutions" data-tour="db-stand-ins">
           <summary>
             {substitutions.length} stand-in{substitutions.length === 1 ? '' : 's'} for cards the
             engine doesn't support yet

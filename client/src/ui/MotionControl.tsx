@@ -86,12 +86,13 @@ export function MotionControl({
           aria-expanded={open}
           aria-label="Settings"
           title="Settings"
+          data-tour="corner-settings"
           onClick={() => setOpen((o) => !o)}
         >
           <CogIcon />
         </button>
       ) : (
-        <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} data-tour="game-settings" onClick={() => setOpen((o) => !o)}>
           Settings
         </button>
       )}

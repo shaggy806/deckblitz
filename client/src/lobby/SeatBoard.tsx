@@ -149,12 +149,12 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
   return (
     <div className="seat-board">
       <div className="seat-board-main">
-        <div className="overlay-box seat-board-box">
+        <div className="overlay-box seat-board-box" data-tour="lobby-room">
           {children}
           {/* Always four places, so the board never moves as seats come and
               go: the seats, then an Add player tile in each place left —
               a plain empty place for anyone but the host. */}
-          <div className="seat-board-grid">
+          <div className="seat-board-grid" data-tour="lobby-seats">
             {game.seats.map((s, i) => {
               const isMySeat = s.player === mySeatPlayer
               // My own seat draws from the local deck, which has the whole
@@ -225,7 +225,12 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                     ) : null}
                   </div>
 
-                  <DeckSlot deck={deck} editable={deckEditable} onClick={() => setPickerSeat(s.player)} />
+                  <DeckSlot
+                    deck={deck}
+                    editable={deckEditable}
+                    tour={isMySeat ? 'lobby-my-deck' : undefined}
+                    onClick={() => setPickerSeat(s.player)}
+                  />
                   {refused !== null ? (
                     <span className="seat-deck-refused" title={refused}>
                       Not Commander-legal: {refused}
@@ -241,13 +246,19 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                     </button>
                     {isMySeat ? (
                       amReady ? (
-                        <button type="button" className="seat-panel-ready-btn active" onClick={() => game.setReady(false)}>
+                        <button
+                          type="button"
+                          className="seat-panel-ready-btn active"
+                          data-tour="lobby-ready"
+                          onClick={() => game.setReady(false)}
+                        >
                           ✓ Ready
                         </button>
                       ) : (
                         <button
                           type="button"
                           className="seat-panel-ready-btn"
+                          data-tour="lobby-ready"
                           onClick={readyUp}
                           disabled={refused !== null}
                           title={refused !== null ? 'Only Commander-legal decks may play in this room' : undefined}
@@ -259,6 +270,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       <button
                         type="button"
                         className="seat-panel-add-bot"
+                        data-tour="lobby-add-bot"
                         onClick={() =>
                           game.addBot(s.player, randomBotDeck(game.seats, Math.random, game.roomSettings?.botDecks))
                         }
@@ -289,7 +301,13 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
 
           <div className="seat-board-footer">
             {host ? (
-              <button type="button" className="start-game-btn" disabled={!allReady} onClick={game.startGame}>
+              <button
+                type="button"
+                className="start-game-btn"
+                data-tour="lobby-start"
+                disabled={!allReady}
+                onClick={game.startGame}
+              >
                 Start Game
               </button>
             ) : null}
@@ -330,10 +348,13 @@ type SlotDeck = {
 function DeckSlot({
   deck,
   editable,
+  tour,
   onClick,
 }: {
   readonly deck: SlotDeck | null
   readonly editable: boolean
+  /** Its `data-tour` name, for my own seat's slot. */
+  readonly tour?: string
   readonly onClick: () => void
 }) {
   const commanderNames = deck?.commanders.map((c) => c.name).join(' & ') ?? ''
@@ -341,6 +362,7 @@ function DeckSlot({
   return (
     <button
       type="button"
+      data-tour={tour}
       className={`seat-deck-slot${deck ? '' : ' blank'}${editable ? ' editable' : ''}`}
       onClick={editable ? onClick : undefined}
       disabled={!editable}

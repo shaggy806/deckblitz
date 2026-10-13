@@ -488,6 +488,7 @@ export function LibraryPage() {
           <h1>Card Library</h1>
           <input
             className="lib-search"
+            data-tour="lib-search"
             type="search"
             placeholder={`Search ${cardCount} cards by name, type or rules text…`}
             value={query}
@@ -496,7 +497,7 @@ export function LibraryPage() {
         </div>
 
         <div className="lib-filters">
-          <div className="lib-chipset" role="group" aria-label="Card type">
+          <div className="lib-chipset" role="group" aria-label="Card type" data-tour="lib-types">
             <button
               type="button"
               className={typeFilter === null ? 'selected' : undefined}
@@ -516,7 +517,7 @@ export function LibraryPage() {
             ))}
           </div>
 
-          <div className="lib-colors" role="group" aria-label="Colour">
+          <div className="lib-colors" role="group" aria-label="Colour" data-tour="lib-colors">
             {COLOR_FILTERS.map((c) => (
               <button
                 key={c}
@@ -552,7 +553,7 @@ export function LibraryPage() {
             </button>
           </label>
 
-          <label className="lib-sort lib-set">
+          <label className="lib-sort lib-set" data-tour="lib-set">
             Set
             <select
               value={setCode ?? ''}
@@ -630,7 +631,7 @@ export function LibraryPage() {
           </p>
         ) : (
           <>
-            <div className="lib-grid" ref={gridRef}>
+            <div className="lib-grid" ref={gridRef} data-tour="lib-grid">
               {pageRows.map((e) => (
                 <GridCard
                   key={e.def.name}
@@ -694,7 +695,7 @@ function GridCard({
   const shown = flipped && entry.other ? entry.other : entry.def
 
   return (
-    <div className="lib-card">
+    <div className="lib-card" data-tour="lib-card">
       <button type="button" className="lib-card-open" onClick={onOpen} title={entry.def.name}>
         <CardImage def={inSet(shown, printings)} />
         <span className="lib-card-caption">{shown.name}</span>
@@ -915,7 +916,7 @@ function PrintingsPanel({
   }
 
   return (
-    <section className="lib-printings" aria-label="Printings">
+    <section className="lib-printings" aria-label="Printings" data-tour="lib-printings">
       <h3>
         Printings
         {typeof page === 'string' ? null : <span className="lib-printings-count mono"> {page.total}</span>}

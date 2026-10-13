@@ -82,7 +82,13 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
 
   return (
     <section className="landing-blitz" aria-label="Blitz a deck">
-      <button type="button" className="landing-cta landing-blitz-btn" onClick={fromClipboard} disabled={busy}>
+      <button
+        type="button"
+        className="landing-cta landing-blitz-btn"
+        data-tour="landing-blitz"
+        onClick={fromClipboard}
+        disabled={busy}
+      >
         Have a deck copied? Click here to blitz!
       </button>
 
