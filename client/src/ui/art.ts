@@ -377,6 +377,24 @@ function withImageParams(base: string, version: ArtVersion, backFace: boolean): 
   return `${base}?format=image&version=${version}${backFace ? '&face=back' : ''}`
 }
 
+/**
+ * A printing's image straight off Scryfall's CDN, from its card id alone:
+ * `cards.scryfall.io/{version}/{front|back}/{id[0]}/{id[1]}/{id}.jpg` (`.png`
+ * for the PNG). Every pinned printing — a deck's chosen art, a precon's — is a
+ * bare id, and each used to go through the API's `/cards/{id}?format=image`, a
+ * redirect per image under the API's rate limit (about ten a second): a game's
+ * first boards, their hover previews and the art prefetch together ran past it,
+ * the images that failed retried four times and then stayed blank for the
+ * session — Sol Ring and basic lands, the cards on the table earliest (a bug
+ * report, 2026-10-13). The CDN has no rate limit and needs no redirect. A back
+ * face is the CDN's `back` file, which only a double-faced card has
+ * (`ArtOptions.backFace` is only set for one).
+ */
+function cdnFileOf(id: string, version: ArtVersion, backFace: boolean): string {
+  const extension = version === 'png' ? 'png' : 'jpg'
+  return `https://cards.scryfall.io/${version}/${backFace ? 'back' : 'front'}/${id[0]}/${id[1]}/${id}.${extension}`
+}
+
 /** Hosts an art URL may point at.
  *
  * Defence in depth around `CardDefinition.art`, which is authored in this
@@ -455,9 +473,7 @@ export function resolveArtUrl(
   }
   const trimmed = art.trim()
 
-  if (UUID_RE.test(trimmed)) {
-    return withImageParams(`https://api.scryfall.com/cards/${trimmed}`, version, back)
-  }
+  if (UUID_RE.test(trimmed)) return cdnFileOf(trimmed.toLowerCase(), version, back)
 
   const page = PAGE_RE.exec(trimmed)
   if (page) {
@@ -495,8 +511,9 @@ export function resolveArtUrl(
 const PREFETCH_DELAY_MS = 1500
 /** At most this many pre-load images downloading at once. */
 const PREFETCH_CONCURRENCY = 4
-/** A pinned printing's URL goes through Scryfall's API (a 302 to the image),
- * which allows about ten requests a second: these are spaced under that. */
+/** A printing named by its page or API link (not a bare id, which goes to the
+ * CDN — `cdnFileOf`) goes through Scryfall's API (a 302 to the image), which
+ * allows about ten requests a second: these are spaced under that. */
 const PREFETCH_API_GAP_MS = 150
 
 /**
