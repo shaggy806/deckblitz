@@ -128,9 +128,10 @@ export const BASICS_PROOF: Lesson = {
           title: "Rowan attacks!",
           body:
             "Rowan's Elvish Mystic is coming at you. Your Elves can block it: they'll fight each other " +
-            "instead of you losing life. Block with your Elves.",
+            "instead of you losing life. Click your Elves, then press Block.",
           anchor: "card:Llanowar Elves",
-          placement: "top",
+          // Beside them, not above: above is Rowan's side, where the attacker is.
+          placement: "right",
           goals: [{ id: "blocked", label: "Block with Llanowar Elves", when: { event: "blocker-declared", player: YOU } }],
         },
         {
