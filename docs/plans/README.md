@@ -20,6 +20,8 @@ is still unscoped.
 
 `deck-autopsies` (**first pass done**) records the deck-against-deck win-rate run, why its v1 column is confounded, the four deck autopsies, and the bot fixes they found and left.
 
+`tutorials` (**planning**) plans the two tutorials — Learn Commander (lessons on server-held boards against a scripted opponent, goals checked from the event log) and a site tour (coach marks over the real pages) — on a shared coach-mark overlay and a production-safe tutorial room, with the open questions for the user.
+
 `decision-registry` records how the decision kinds (19 then, 20 with `cast-now`) became one module each under
 `engine/src/decisions/`, and why `game.ts` stays binary to git.
 

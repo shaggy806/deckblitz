@@ -78,8 +78,8 @@ where the decision is raised); bots and the fuzzer answer it already.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
   Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
   Policy): the required notices and attribution, and where on the site they go.
-- **A Settings button on the landing page and in the lobby** (the user, 2026-10-11). Settings
-  today are reached from inside a game; the user wants them before one too: sound and music
-  settings, and the priority preferences, which should persist from game to game.
-- **A tutorial on how to use the site** (the user, 2026-10-11). Build one; also explore a seeded
-  game (fixed decks and draws) that walks a new player through how to play Commander.
+- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12).
+  The plan is `docs/plans/tutorials.md`: a coach-mark overlay (`client/src/tutorial/`, `data-tour`
+  anchors, progress in `localStorage`, a "?" button in the corner toolbar), and a production-safe
+  tutorial room (lessons held on the server by id, a scripted name-based opponent promoted from
+  dev-rooms' `ScriptedBot`, goals checked from the event log). Its open questions are the user's.
