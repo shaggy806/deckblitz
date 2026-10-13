@@ -23,6 +23,7 @@ import {
   canPairCommanders,
   colorIdentityOf,
   isBackground,
+  isCardFront,
   nameForFlavorName,
   validateCommanderDeck,
 } from "engine";
@@ -97,14 +98,46 @@ function splitPrintingSuffix(rest: string): { name: string; printing?: PrintingR
   };
 }
 
+// A face separator as exports write it: Scryfall's " // ", or a single
+// spaced slash ("Mirror Room / Fractured Realm"). No card's own name has a
+// spaced slash, so either is only ever between two faces.
+const FACE_SEPARATOR = /\s+\/\s+|\s*\/\/\s*/g;
+
+/**
+ * The name a written card goes by in the pool — the name of the whole card,
+ * however the list spelled its faces.
+ *
+ * Exports disagree: a Room or split card is in the pool under both faces
+ * ("Mirror Room // Fractured Realm") but often written with one slash; an
+ * adventurer or a double-faced card is in it under its front face alone
+ * (rule 712.3) but often written with both. Read as written, either misses
+ * the pool, and the importer then offers the card itself as its own stand-in.
+ * A face named alone (a Room's door, an adventure's spell) is a face, not a
+ * card: it reads as the card it's on.
+ *
+ * Without a registry only the separator is normalised, to Scryfall's.
+ */
+export function poolNameOf(written: string, registry?: CardRegistry): string {
+  const name = written.replace(FACE_SEPARATOR, " // ");
+  if (registry === undefined) return name;
+  const front = name.split(" // ")[0];
+  const found = [name, front].find((n) => registry.has(n));
+  if (found === undefined) return name;
+  const def = registry.get(found);
+  if (isCardFront(def)) return found;
+  const card = def.faces?.[0];
+  return card !== undefined && registry.has(card) ? card : found;
+}
+
 /** Parses decklist lines, merging duplicate names (e.g. a commander also
  * listed among the support cards). Blank lines and `//` comments are
  * skipped; any other non-matching line is treated as a section header (some
  * export variants have one, e.g. "Commander"/"Companion"/"Deck") — silently
  * ignored except for "Commander" itself, whose cards are also collected
  * into `commanders`. A section ends at the next header line or a blank
- * line, whichever comes first. */
-export function parseDecklistText(text: string): ParsedDecklist {
+ * line, whichever comes first. With the `registry`, each name is read as
+ * the pool names it ({@link poolNameOf}). */
+export function parseDecklistText(text: string, registry?: CardRegistry): ParsedDecklist {
   const counts = new Map<string, number>();
   // One printing per name — the first line that names one wins, since a deck
   // brings a single art per card (see `SavedDeck.printings`).
@@ -141,7 +174,7 @@ export function parseDecklistText(text: string): ParsedDecklist {
     // card it is (Azusa, Lost but Seeking), here, so every lookup after this
     // one — the pool, Scryfall, oracle tags, the format check — sees its
     // Oracle name. The printing it named is still that card's.
-    const name = nameForFlavorName(written) ?? written;
+    const name = poolNameOf(nameForFlavorName(written) ?? written, registry);
     counts.set(name, (counts.get(name) ?? 0) + Number(match[1]));
     if (printing !== undefined && !printings.has(name)) printings.set(name, printing);
     if (inCommanderSection) commanders.push(name);

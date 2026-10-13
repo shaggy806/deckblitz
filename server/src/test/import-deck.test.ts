@@ -112,7 +112,7 @@ describe("parseDecklistText", () => {
     const { entries } = parseDecklistText("1 Marang River Regent / Coil and Catch (TDM) 378");
     expect(entries).toEqual([
       {
-        name: "Marang River Regent / Coil and Catch",
+        name: "Marang River Regent // Coil and Catch",
         count: 1,
         printing: { set: "tdm", collectorNumber: "378" },
       },
@@ -200,6 +200,44 @@ describe("parseDecklistText — alternate names", () => {
 
   it("leaves a name that isn't one alone", () => {
     expect(parseDecklistText("1 Sol Ring").entries).toEqual([{ name: "Sol Ring", count: 1 }]);
+  });
+});
+
+// A bug report (2026-10-12): "1 Mirror Room / Fractured Realm" missed the
+// pool's "Mirror Room // Fractured Realm", so the importer offered the card as
+// its own stand-in.
+describe("parseDecklistText — a card's faces, however they're written", () => {
+  const names = (text: string): string[] =>
+    parseDecklistText(text, registry).entries.map((e) => e.name);
+
+  it("reads a Room or split card written with one slash as the pool's card", () => {
+    expect(names("1 Mirror Room / Fractured Realm")).toEqual(["Mirror Room // Fractured Realm"]);
+    expect(names("1 Spiked Corridor // Torture Pit")).toEqual(["Spiked Corridor // Torture Pit"]);
+  });
+
+  it("reads one door of a Room as the whole card", () => {
+    expect(names("1 Mirror Room")).toEqual(["Mirror Room // Fractured Realm"]);
+  });
+
+  it("reads an adventurer or Omen card written with both faces as its front face", () => {
+    expect(names("1 Virtue of Knowledge / Vantress Visions")).toEqual(["Virtue of Knowledge"]);
+    expect(names("1 Obyra's Attendants // Desperate Parry")).toEqual(["Obyra's Attendants"]);
+    expect(names("1 Desperate Parry")).toEqual(["Obyra's Attendants"]);
+  });
+
+  it("merges two spellings of one card", () => {
+    expect(parseDecklistText("1 Mirror Room / Fractured Realm\n1 Mirror Room // Fractured Realm", registry).entries)
+      .toEqual([{ name: "Mirror Room // Fractured Realm", count: 2 }]);
+  });
+
+  it("writes an unknown card's faces as Scryfall does, so it can still be looked up", () => {
+    expect(names("1 Not A Card / Nor This")).toEqual(["Not A Card // Nor This"]);
+  });
+
+  it("finds the pool's card, not a stand-in for it", async () => {
+    const { entries } = parseDecklistText("1 Mirror Room / Fractured Realm", registry);
+    const [result] = await evaluateDecklist(entries, registry);
+    expect(result).toMatchObject({ name: "Mirror Room // Fractured Realm", implemented: true, replacements: [] });
   });
 });
 

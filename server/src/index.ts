@@ -67,7 +67,7 @@ const httpServer = createServer((req, res) => {
         try {
           const { text } = JSON.parse(body) as { text?: string };
           if (typeof text !== "string") throw new Error("missing 'text' field");
-          const { entries, commanders, commanderSource } = parseDecklistText(text);
+          const { entries, commanders, commanderSource } = parseDecklistText(text, registry);
 
           res.writeHead(200, {
             "Content-Type": "application/x-ndjson",
