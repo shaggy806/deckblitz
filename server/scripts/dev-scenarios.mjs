@@ -57,6 +57,17 @@ const handOfSpellsOnly = (player) => (game) => {
   }
 };
 
+/** LANDS' and LAND4's `setup`: alice's opening hand of basics goes back to
+ * her library and she holds one Forest, the one land to play, and Llanowar
+ * Elves — something left to cast, so the client stops for her after the land
+ * instead of passing her into her next turn, where the Forest's summoning
+ * sickness has worn off. */
+const landsOnlyForest = (game) => {
+  handOfSpellsOnly("alice")(game);
+  game.debugSpawn("Forest", "alice", "hand");
+  game.debugSpawn("Llanowar Elves", "alice", "hand");
+};
+
 export default {
   TWOAA: {
     about:
@@ -1063,6 +1074,26 @@ export default {
     setup(game) {
       for (const name of ["Forest", "Forest", "Island"]) game.debugSpawn(name, "alice", "library");
     },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
+  LANDS: {
+    about:
+      "2p. A land played joins its identical fellows' tile at once: alice has two Forests " +
+      "(x2) and an Island. Play the Forest from hand: the tile reads x3 straight away, not " +
+      "only from her next turn (it entered 'summoning sick', which no land minds). Llanowar " +
+      "Elves in hand keeps the client from passing her on into that next turn.",
+    players: ["alice", "bob"],
+    lands: { bob: 3 },
+    battlefield: { alice: ["Forest", "Forest", "Island"] },
+    setup: landsOnlyForest,
+    bots: { bob: {} },
+  },
+  LAND4: {
+    about: "4p. LANDS in the quadrant layout: play the Forest, and the Forest tile reads x3.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { bob: 3, carol: 3, dave: 3 },
+    battlefield: { alice: ["Forest", "Forest", "Island"] },
+    setup: landsOnlyForest,
     bots: { bob: {}, carol: {}, dave: {} },
   },
 

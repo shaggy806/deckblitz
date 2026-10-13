@@ -59,10 +59,17 @@ export function bucketOf(obj: VisibleObject): Bucket {
  * `blocked` is left out too: some of a stack of attacking tokens being
  * blocked doesn't make them different creatures, and the stack's tile counts
  * how many are (`MiniTile`'s `blockedCount`) rather than splitting in two.
+ *
+ * `summoningSick` counts only on a creature. The engine sets it on every
+ * permanent that enters and clears it as its controller's turn begins, but
+ * only a creature is held back by it (rule 302.6) and only a creature's tile
+ * shows it (`CardFlags`), so on anything else it kept a Forest played this
+ * turn, or a Treasure just made, off the tile of its identical fellows until
+ * the next turn (the user, 2026-10-12).
  */
 function tileKey(obj: VisibleObject): string {
-  const { id: _id, stackCount: _stackCount, blocked: _blocked, ...shown } = obj
-  return JSON.stringify(shown)
+  const { id: _id, stackCount: _stackCount, blocked: _blocked, summoningSick, ...shown } = obj
+  return JSON.stringify({ ...shown, sick: summoningSick && obj.types.includes('creature') })
 }
 
 /** All battlefield entries for `pid`'s board, bucketed and stacked. */
