@@ -478,3 +478,15 @@
     grid-column: 1;
   }
 }
+
+/* The corner toolbar (LandingScreen): square buttons fixed to the bottom
+   right, out of the column's flow — Settings for now, more to come beside it.
+   Zoomed with the rest of the page (`.landing > :not(.landing-backdrop)`). */
+.landing-corner {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+}

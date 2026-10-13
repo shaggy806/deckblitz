@@ -115,6 +115,37 @@
   font-size: var(--text-sm);
   white-space: nowrap;
 }
+/* Out of a game: opened from a corner button at the bottom of the screen, so
+   it rises above it, scrolling if the window is too short for it all. */
+.motion-panel.up {
+  top: auto;
+  bottom: calc(100% + 6px);
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+}
+/* The corner toolbar's Settings button: a square with the cog. */
+.motion-cog {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 0;
+  cursor: pointer;
+}
+.motion-cog:hover,
+.motion-cog[aria-expanded='true'] {
+  color: var(--accent);
+  background: var(--panel-2);
+  border-color: var(--accent);
+}
+.motion-cog svg {
+  width: 24px;
+  height: 24px;
+}
 .motion-row {
   display: flex;
   align-items: center;

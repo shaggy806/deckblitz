@@ -40,12 +40,20 @@ const ENTRANCE_LABEL: Record<CastEntrance, string> = {
  *   each a slider from off up.
  *
  * Both speeds read slowest to fastest.
+ *
+ * Out of a game (`place: "corner"`, the landing page's corner toolbar) it's a
+ * square cog button that opens the same panel upward: the settings are this
+ * device's, kept from game to game, so they're worth setting before one.
  */
 export function MotionControl({
   botSpeed,
+  place = 'strip',
 }: {
   /** The room's bot speed, when this viewer may set it. */
   readonly botSpeed?: { readonly speed: BotSpeed; readonly onChange: (speed: BotSpeed) => void }
+  /** The game's top strip (a text button, the panel below it), or a corner
+   * toolbar out of a game (a cog, the panel above it). */
+  readonly place?: 'strip' | 'corner'
 } = {}) {
   const prefs = useMotionPrefs()
   const pass = usePassSettings()
@@ -71,11 +79,24 @@ export function MotionControl({
 
   return (
     <div className="motion-control" ref={boxRef}>
-      <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        Settings
-      </button>
+      {place === 'corner' ? (
+        <button
+          type="button"
+          className="motion-cog"
+          aria-expanded={open}
+          aria-label="Settings"
+          title="Settings"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <CogIcon />
+        </button>
+      ) : (
+        <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          Settings
+        </button>
+      )}
       {open ? (
-        <div className="motion-panel" role="dialog" aria-label="Settings">
+        <div className={`motion-panel${place === 'corner' ? ' up' : ''}`} role="dialog" aria-label="Settings">
           <div className="motion-heading">Priority</div>
           <label className="motion-row">
             <input
@@ -110,7 +131,8 @@ export function MotionControl({
             Order my own triggers — asked when different ones trigger together
           </label>
           <div className="motion-note motion-wrap">
-            Pass to main and pass through combat never pass with something on the stack. Click a step in the bar above to make it a
+            Pass to main and pass through combat never pass with something on the stack.{' '}
+            {place === 'corner' ? 'In a game, click a step in the phase bar' : 'Click a step in the bar above'} to make it a
             stop, where you keep priority whatever would pass it.
           </div>
           <StopList label="Stops on my turns" steps={pass.stops.mine} />
@@ -200,6 +222,26 @@ export function MotionControl({
         </div>
       ) : null}
     </div>
+  )
+}
+
+/** The settings cog: eight rounded teeth around a hole, in the button's text
+ * colour. */
+function CogIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
   )
 }
 
