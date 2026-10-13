@@ -49,7 +49,13 @@ Read a file's entry before changing that file; you don't need the rest.
 - **`"sideEffects": false`** holds only because no engine module does anything at import time
   but define things. Keep it so, or every page ships the whole card pool.
 - **The client imports `engine/client`** (`src/client.ts`), never the barrel. It must not start
-  exporting `BUILTIN_CARDS`, `POOL_CARDS`, `TOKEN_CARDS` or `createDefaultRegistry`.
+  exporting `BUILTIN_CARDS`, `POOL_CARDS`, `TOKEN_CARDS` or `createDefaultRegistry`. A page that
+  runs a game imports **`engine/local`** (`src/local.ts`) instead, bundled with
+  `engineLocalPlugin()` (`engine/local-plugin`), and passes a `registryFrom(…)` registry built from
+  the shards to the game and every bot: `Game` and the bots reach the pool only through
+  `cards/default-registry.ts`, which the plugin swaps for a stub that throws. Import the registry
+  helpers from their own modules (`cards/card-registry.ts`, `cards/default-registry.ts`), never the
+  `cards.ts` barrel, in anything `local.ts` reaches (`test/local-entry.test.ts`).
 - **Determinism:** same seed + same controllers ⇒ identical replay. The fuzzer's `RandomSource`
   draw order and bots' default-off `timeBudgetMs` exist to protect it.
 - **`game.ts` contains a literal NUL byte**, so git and grep treat it as binary: use `grep -a`,

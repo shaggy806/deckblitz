@@ -30,7 +30,8 @@ import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js"
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import type { RandomSource } from "./decisions/contract.js";
 import { assignedCombatDamage, combatDamageOf, computeCharacteristics, staticConditionMet } from "./characteristics.js";
-import { CardRegistry, createDefaultRegistry } from "./cards.js";
+import { CardRegistry } from "./cards/card-registry.js";
+import { defaultRegistry } from "./cards/default-registry.js";
 import { chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
 import { crackback, isLethal } from "./bot/combat-math.js";
 import { DEFAULT_WEIGHTS } from "./bot/evaluate.js";
@@ -1834,7 +1835,7 @@ export class HeuristicBotController extends AutomaticController {
    * simulation's stand-in takes even trades (`CombatRolloutController`). */
   protected readonly tradeMargin: number = 2;
 
-  constructor(playerId: PlayerId, registry: CardRegistry = createDefaultRegistry()) {
+  constructor(playerId: PlayerId, registry: CardRegistry = defaultRegistry()) {
     super(playerId);
     this.registry = registry;
   }

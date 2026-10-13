@@ -59,7 +59,8 @@ import {
   whyCannotAttack,
   whyCannotBlock,
 } from "./combat/eligibility.js";
-import { CardRegistry, createDefaultRegistry } from "./cards.js";
+import { CardRegistry } from "./cards/card-registry.js";
+import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { SPEED_CARD } from "./cards/speed.js";
 import type {
@@ -1068,7 +1069,7 @@ export class Game {
     }
     const seed = config.seed ?? 0x9e3779b9;
     const rng = createRng(seed);
-    const registry = config.registry ?? createDefaultRegistry();
+    const registry = config.registry ?? defaultRegistry();
 
     const controllers: Record<PlayerId, PlayerController> = {};
     for (const player of turnOrder) {
@@ -1137,7 +1138,7 @@ export class Game {
 
   static fromSnapshot(snapshot: GameState, env: SnapshotEnv = {}): Game {
     const state = cloneGameState(snapshot);
-    const registry = env.registry ?? createDefaultRegistry();
+    const registry = env.registry ?? defaultRegistry();
     const controllers: Record<PlayerId, PlayerController> = {};
     for (const player of state.turnOrder) {
       controllers[player] =

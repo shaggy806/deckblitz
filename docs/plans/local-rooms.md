@@ -1,7 +1,9 @@
 # Local rooms: solo games in the player's browser
 
-Status: **planning** (2026-10-13). Depends on step 1 of `room-shards.md` (the `RoomService`
-split), which is being built; revisit the "Shape" section once it lands.
+Status: **in progress** (planned 2026-10-13). Step 1 is built: `engine/local`, `registryFrom`
+and `engineLocalPlugin`. `room-shards.md`'s `RoomService` split (its step 1) has landed, so
+the browser can run the same room code; step 2 waits until the worker-thread work's later steps
+settle the server files it touches.
 
 ## Why
 
@@ -114,8 +116,12 @@ to another player, and a room with a second human never goes local.
 
 ## Rollout
 
-1. **After `room-shards.md` step 1 lands**: the engine's registry injection and `engine/local`, with
-   the "no `generated.js`" build check. No behaviour change.
+1. **Built (2026-10-13)**: `engine/local` (`src/local.ts`) and `registryFrom(cards)`; `Game` and
+   the bots fall back on `cards/default-registry.ts`, which `engineLocalPlugin()` (`engine/
+   local-plugin`) swaps for a stub that throws in a browser bundle. `test/local-entry.test.ts`
+   walks the sources with the swap; `test/local-bundle.test.ts` bundles `dist/local.js` with
+   Rolldown, finds no card definition outside the 32 on-demand shard chunks, and plays a bot
+   game from a registry built from the shards. No behaviour change.
 2. **Browser-safe room code**: the shared rooms package (or subtree) and its static "no Node
    imports" test; `PendingRoom`'s registry injected; captures out of the graph.
 3. **The worker and `LocalTransport`** behind `?local=1` (off by default): blitz plays locally end

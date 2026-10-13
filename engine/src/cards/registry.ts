@@ -2,20 +2,12 @@
  * default one, which knows every built-in card. */
 
 import { CardRegistry } from "./card-registry.js";
-import { EMBLEM_DEFINITIONS } from "./emblem.js";
-import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
-import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
-import { SPEED_DEFINITIONS } from "./speed.js";
 import { BUILTIN_CARDS } from "./generated.js";
+import { registryFrom } from "./registry-from.js";
 
 export { CardRegistry };
+export { registryFrom };
 
 export function createDefaultRegistry(): CardRegistry {
-  const registry = new CardRegistry();
-  for (const card of BUILTIN_CARDS) registry.register(card);
-  for (const card of FACE_DOWN_DEFINITIONS) registry.register(card);
-  registry.register(LOCKED_ROOM_DEFINITION);
-  for (const card of EMBLEM_DEFINITIONS) registry.register(card);
-  for (const card of SPEED_DEFINITIONS) registry.register(card);
-  return registry;
+  return registryFrom(BUILTIN_CARDS);
 }

@@ -25,7 +25,7 @@
 import type { Action, AttackerDeclaration, BlockerDeclaration, LegalAction } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
-import { createDefaultRegistry } from "../cards.js";
+import { defaultRegistry } from "../cards/default-registry.js";
 import { HeuristicBotController, compareReach, isLandfallPermanent, payoffFirst } from "../controller.js";
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -645,7 +645,7 @@ export class EvalBotController extends HeuristicBotController {
 
   constructor(
     playerId: PlayerId,
-    registry: CardRegistry = createDefaultRegistry(),
+    registry: CardRegistry = defaultRegistry(),
     options: EvalBotOptions = {},
   ) {
     super(playerId, registry);
