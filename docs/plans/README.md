@@ -22,6 +22,8 @@ is still unscoped.
 
 `tutorials` (**planning**) plans the two tutorials — Learn Commander (one or two seeded games against a scripted opponent, the lessons as chapters checked from the event log) and a site tour (coach marks over the real pages) — on a shared coach-mark overlay that blocks other clicks and a production-safe tutorial room, with the user's decisions of 2026-10-13.
 
+`scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
+
 `decision-registry` records how the decision kinds (19 then, 20 with `cast-now`) became one module each under
 `engine/src/decisions/`, and why `game.ts` stays binary to git.
 

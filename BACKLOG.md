@@ -237,6 +237,10 @@ item lands.
 
 ## Code health
 
+- **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
+  `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
+  little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop
+  delay on `/status`, a profile).
 - **A per-player cap on open rooms** (the user, 2026-10-13): nothing stops one connection
   opening rooms in a loop — `create-room`, blitz and `tutorial-create` are guarded only by the
   per-IP message rate limit (40 per 5 s, `ws-server.ts`), and an unjoined room lives until the idle
