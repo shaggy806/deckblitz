@@ -25,7 +25,7 @@ import type { DamageAssignmentOffer } from "./combat/damage.js";
 import { polarityBias } from "./deck-bias.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
-import type { CardDefinition } from "./cards/define.js";
+import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import type { RandomSource } from "./decisions/contract.js";
@@ -1481,6 +1481,9 @@ export interface LandReach {
 /** A land the view can't look past. */
 const NO_REACH: LandReach = { together: 0, castable: 0 };
 
+/** Keywords that get a Ring-bearer past most blockers (`bestRingBearer`). */
+const RING_BEARER_EVASION: readonly Keyword[] = ["flying", "unblockable", "menace", "shadow", "fear", "intimidate", "skulk"];
+
 /** The look ahead's copy `from`, one step (or several) further on, keeping
  * the look's own events (`ControllerView.continueAfter`); `null` if the
  * engine refused it or the view can't look further. */
@@ -2035,6 +2038,60 @@ export class HeuristicBotController extends AutomaticController {
   ): string {
     if (allColors(options)) return colorToName(view.state, this.registry, this.playerId, options);
     return super.chooseCreatureType(view, source, options, suggested);
+  }
+
+  /** The Ring tempting us (`become-ring-bearer` after the choice) picks a
+   * Ring-bearer worth being one (`bestRingBearer`); every other choice of
+   * permanents is the default's. */
+  override choosePermanents(
+    view: ControllerView,
+    eligible: readonly ObjectId[],
+    min: number,
+    max: number,
+    cap?: PowerCap,
+  ): readonly ObjectId[] {
+    const awaiting = view.state.awaiting;
+    if (
+      cap === undefined &&
+      eligible.length > 0 &&
+      max >= 1 &&
+      awaiting?.kind === "choose-permanents" &&
+      awaiting.then.kind === "become-ring-bearer"
+    ) {
+      return [this.bestRingBearer(view.state, eligible)];
+    }
+    return super.choosePermanents(view, eligible, min, max, cap);
+  }
+
+  /**
+   * The Ring-bearer to choose (rule 701.54). Every level of the Ring is about
+   * attacking — the bearer can't be blocked by creatures with greater power,
+   * loots when it attacks, makes a blocker's controller sacrifice it, and
+   * drains each opponent 3 when it deals combat damage to a player — so a
+   * creature that can attack and deal damage comes first, an evasive one
+   * (it connects) before the rest, then the most combat damage. Ties keep
+   * the battlefield's order. It took the first creature, whatever it was
+   * (BACKLOG, 2026-10-13: a wall or a mana dork over the flyer).
+   */
+  private bestRingBearer(state: GameState, eligible: readonly ObjectId[]): ObjectId {
+    const score = (id: ObjectId): number => {
+      const c = computeCharacteristics(state, this.registry, id);
+      const damage = combatDamageOf(c);
+      const attacks =
+        (!c.keywords.has("defender") || c.canAttackAsThoughNoDefender) && !c.restrictions.has("cant-attack") && damage > 0;
+      const evasive = RING_BEARER_EVASION.some((keyword) => c.keywords.has(keyword));
+      return (attacks ? 1000 : 0) + (attacks && evasive ? 100 : 0) + Math.max(0, damage);
+    };
+    let best = eligible[0];
+    let bestScore = score(best);
+    for (const id of eligible.slice(1)) {
+      const s = score(id);
+      if (s > bestScore) {
+        best = id;
+        bestScore = s;
+      }
+    }
+    return best;
   }
 
   /**

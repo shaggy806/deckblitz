@@ -184,9 +184,6 @@ haste enablers in the crackback).
   browser (`docs/plans/local-rooms.md` step 6). Try count-only budgets of a few sizes against the clock:
   strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop, and stalls
   (`npm run load-test -w server`).
-- **A bot's Ring-bearer is its first creature**, not its best: `choose-permanents` asks bots
-  for their own permanents in battlefield order, whatever the `then` does
-  (`decisions/choose-permanents.ts`). Choosing an evasive or high-power creature is the play.
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield);
   premium removal fired at weak targets past the first two rounds (the early half is done).

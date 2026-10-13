@@ -4710,6 +4710,41 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "makes the evasive attacker its Ring-bearer, not its first creature",
+    rule: "The Ring's every level is about attacking, so the Ring-bearer is a creature that can attack and connect.",
+    position(registry) {
+      // The bots took the first creature on the battlefield, whatever the
+      // Ring then does with it (BACKLOG, "A bot's Ring-bearer is its first
+      // creature"). A Grizzly Bears came first here; the wall can't attack;
+      // the Wurm hits hardest but any of bob's creatures with less power can
+      // block it; the Drake flies over them all and drains when it connects.
+      const game = table(registry, [A, B], A);
+      onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Wall of Omens", A);
+      onBoard(game, "Craw Wurm", A);
+      const drake = onBoard(game, "Wind Drake", A);
+      onBoard(game, "Grizzly Bears", B);
+      lands(game, "Island", A, 1);
+      const escape = game.debugSpawn("Birthday Escape", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: escape });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-permanents" || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-permanents") {
+        return { passed: false, detail: "the Ring never asked for a Ring-bearer" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => {
+          const chosen = action.type === "choose-permanents" ? action.permanents : [];
+          return {
+            passed: chosen.length === 1 && chosen[0] === drake,
+            detail: `chose ${chosen.map((id) => game.state.objects[id]?.cardName ?? id).join(", ") || describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  asked({
     name: "holds Swords to Plowshares for more than a wall",
     rule: "Removal isn't spent in the first two rounds on a creature that threatens nothing.",
     position(registry) {
