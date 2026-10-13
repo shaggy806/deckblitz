@@ -1,6 +1,6 @@
 # Scaling the rooms
 
-Status: **planning** (2026-10-13) — nothing built. The user plans to move to a bigger box
+Status: **planning** (2026-10-13) — nothing built; a first load measurement of the live box is recorded below. The user plans to move to a bigger box
 eventually and wants the server able to use what a bigger box adds; this plan is how.
 
 ## Where it stands
@@ -29,9 +29,39 @@ wall-clock budget, so time spent waiting for the thread is time not spent search
 vCPU sits mostly idle. Burstable CPU adds a cliff: under sustained load the credits run out and
 the box throttles.
 
-**Not measured.** The guess is single-digit concurrent busy blitz rooms (three v2 bots each)
-before the loop saturates; tutorial rooms (v1, a scripted opponent) and all-human rooms cost a
-fraction of that. Phase 0 replaces the guess with a number.
+**First measurement (2026-10-13, the live box, idle beforehand).** A load script (kept in the
+session scratchpad as `stress.mjs`; phase 0 turns it into `server/scripts/load-test.mjs`) ramped
+four-seat rooms with every seat played by v2 (the human seat handed to a bot), each frame acked
+600 ms after it arrived as a browser would after animating it, bot speed normal, 75 s per stage.
+A probe timed a cheap request (spectating an unknown room) every 500 ms: its round trip is
+network (~53 ms) plus however long the event loop was busy.
+
+| rooms | frames/s (all rooms) | gap between a room's frames, median / p90 | probe p50 / p95 / max |
+|---|---|---|---|
+| 1 | 0.68 | 1.38 s / 2.0 s | 53 ms / 0.78 s / 1.7 s |
+| 2 | 1.39 | 1.43 s / 1.9 s | 53 ms / 0.49 s / 1.1 s |
+| 4 | 2.36 | 1.67 s / 2.4 s | 54 ms / 0.98 s / 2.3 s |
+| 6 | 2.91 | 1.83 s / 3.0 s | 63 ms / 1.25 s / 4.7 s |
+| 8 | 3.33 | 2.22 s / 3.3 s | 56 ms / 1.66 s / 3.3 s |
+| 12 | 4.11 | 2.67 s / 4.2 s | 272 ms / 1.83 s / 3.2 s |
+| 16 | 4.08 | 3.28 s / 7.2 s | 264 ms / 2.38 s / 4.7 s |
+
+- **The ceiling is about 4 bot moves a second for the whole server**, reached at ~12 rooms; past
+  it more rooms only slow every room down. Rooms start to feel slower from ~4 (frame gaps +20%)
+  and are clearly slow by 8 (+60%). The paced floor is ~1.35 s a frame (ack 600 ms + the think
+  floor + normal bot speed's linger).
+- **Even one room blocks the loop for up to 1.7 s at a time** — far past the 300 ms search
+  budget, so something else in a settle runs long on its own: several bots' decisions back to
+  back in one settle, or building a late board's view and legal actions. The profile in phase 0
+  should find it; it matters for every room count, since it's a stall every player feels.
+- **Memory isn't the limit**: rss 206 MB idle → 438 MB at 16 rooms (~15 MB a room). CPU is:
+  the process showed 110–130% (the main thread plus GC and zlib's threads), load average ~1.8
+  on 2 cores.
+- **Caveats**: all-bot rooms are somewhat heavier than blitz (three bots and a human who
+  thinks); all clients came from one IP; the box's burst credits were full.
+
+Translated: a handful of simultaneous blitz games before players notice, about ten before it's
+bad. Tutorial rooms (v1, a scripted opponent) and all-human rooms cost a fraction of a blitz room.
 
 ## The key point for a bigger box
 
