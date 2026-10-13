@@ -29,8 +29,8 @@ wall-clock budget, so time spent waiting for the thread is time not spent search
 vCPU sits mostly idle. Burstable CPU adds a cliff: under sustained load the credits run out and
 the box throttles.
 
-**First measurement (2026-10-13, the live box, idle beforehand).** A load script (kept in the
-session scratchpad as `stress.mjs`; phase 0 turns it into `server/scripts/load-test.mjs`) ramped
+**First measurement (2026-10-13, the live box, idle beforehand).** A load script (now
+`server/scripts/load-test.mjs`, `npm run load-test -w server`) ramped
 four-seat rooms with every seat played by v2 (the human seat handed to a bot), each frame acked
 600 ms after it arrived as a browser would after animating it, bot speed normal, 75 s per stage.
 A probe timed a cheap request (spectating an unknown room) every 500 ms: its round trip is

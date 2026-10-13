@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "dev-rooms": "tsc && node scripts/dev-rooms.mjs",
-    "gen:oracle-tags": "node scripts/gen-oracle-tags.mjs"
+    "gen:oracle-tags": "node scripts/gen-oracle-tags.mjs",
+    "load-test": "node scripts/load-test.mjs"
   },
   "dependencies": {
     "engine": "*",
