@@ -6,8 +6,10 @@ import {
   duplicateCard,
   parseScenario,
   removeCard,
+  setCardCount,
   setCounter,
   setSeatCount,
+  setTurn,
   updateCard,
 } from './spec.ts'
 
@@ -68,8 +70,31 @@ describe('scenario edits', () => {
     expect(spec.active).toBe(ALICE)
   })
 
+  it('sets damage, a cast count and the turn, each left out at its default', () => {
+    let spec = addCards(empty, { name: 'Grizzly Bears', owner: ALICE, zone: 'battlefield' })
+    const bears = spec.cards[0].key
+    spec = setCardCount(spec, bears, 'damage', 1)
+    expect(spec.cards[0].damage).toBe(1)
+    expect(setCardCount(spec, bears, 'damage', 0).cards[0]).not.toHaveProperty('damage')
+    // Damage goes with the battlefield.
+    expect(updateCard(spec, bears, { zone: 'hand' }).cards[0]).not.toHaveProperty('damage')
+
+    spec = addCards(spec, { name: 'Chandra, Acolyte of Flame', owner: ALICE, zone: 'command', commander: true })
+    const cmdr = spec.cards[1].key
+    spec = setCardCount(spec, cmdr, 'casts', 2)
+    expect(spec.cards[1].casts).toBe(2)
+    // A cast count goes with being a commander, and isn't duplicated.
+    expect(updateCard(spec, cmdr, { commander: false }).cards[1]).not.toHaveProperty('casts')
+    expect(duplicateCard(spec, cmdr).cards[2]).not.toHaveProperty('casts')
+    expect(updateCard(spec, cmdr, { zone: 'battlefield' }).cards[1].casts).toBe(2)
+
+    expect(setTurn(empty, 5).turn).toBe(5)
+    expect(setTurn(setTurn(empty, 5), 1)).toEqual(empty)
+  })
+
   it('reads a pasted scenario, refusing what isn’t one', () => {
     expect(parseScenario(JSON.stringify(empty))).toEqual(empty)
+    expect(parseScenario(JSON.stringify({ ...empty, turn: 4 })).turn).toBe(4)
     expect(() => parseScenario('{"cards": []}')).toThrow(/seats/)
     expect(() => parseScenario('nope')).toThrow()
   })

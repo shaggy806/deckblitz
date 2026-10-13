@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import { isCardFront, isTokenCard } from 'engine/client'
-import type { CardDefinition, PlayerId } from 'engine/client'
+import type { CardDefinition, ObjectId, PlayerId } from 'engine/client'
 import type { ScenarioCard, ScenarioSpec, ScenarioZone } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { loadCardPool } from '../cards/cardData.ts'
 import type { CardPool } from '../cards/cardData.ts'
 import { CardHoverPreview } from '../ui/CardHoverPreview.tsx'
 import type { HoverTarget } from '../ui/CardHoverPreview.tsx'
+import { CountStepper } from '../ui/CountStepper.tsx'
 import {
   STEPS,
   ZONES,
@@ -16,8 +17,10 @@ import {
   duplicateCard,
   parseScenario,
   removeCard,
+  setCardCount,
   setCounter,
   setSeatCount,
+  setTurn,
   updateCard,
   updateSeat,
 } from './spec.ts'
@@ -226,6 +229,16 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
       ? undefined
       : Object.keys(objects).find((id) => objects[id] === selectedCard.key)
   const defOf = (name: string): CardDefinition | undefined => pool?.byName.get(name)
+  // The most damage the selected permanent can hold, read off the built
+  // board: under its toughness (the server refuses lethal, rule 704.5g), any
+  // amount if it's indestructible, and `null` when it isn't a creature.
+  const selectedView = selectedObject === undefined ? undefined : game.view?.objects[selectedObject as ObjectId]
+  const selectedDamageMax =
+    selectedView === undefined || selectedView.toughness === null
+      ? null
+      : selectedView.keywords.includes('indestructible')
+        ? 999
+        : Math.max(0, selectedView.toughness - 1)
 
   const add = (def: CardDefinition) => {
     const token = isTokenCard(def)
@@ -387,6 +400,9 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
           </table>
           {building ? (
             <div className="bp-row">
+              <label title="The game's turn number: past turn 1, nobody skips their draw">
+                Turn <NumberField title="Turn number" value={spec.turn ?? 1} min={1} max={999} onCommit={(turn) => send(setTurn(spec, turn))} />
+              </label>
               <label>
                 Step{' '}
                 <select value={spec.step} onChange={(e) => send({ ...spec, step: e.target.value as ScenarioSpec['step'] })}>
@@ -512,6 +528,23 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
                 )
               })()}
             </div>
+            {selectedCard.commander === true ? (
+              <div className="bp-row bp-casts" title="Times its owner has cast it from the command zone: each adds {2} to the next (commander tax)">
+                <span className="bp-stepper">
+                  <CountStepper
+                    label="Cast"
+                    count={selectedCard.casts ?? 0}
+                    max={99}
+                    showMax={false}
+                    onChange={(n) => send(setCardCount(spec, selectedCard.key, 'casts', n))}
+                  />
+                </span>
+                <span>times</span>
+                <span className="bp-dim">
+                  {(selectedCard.casts ?? 0) > 0 ? `tax +${2 * (selectedCard.casts ?? 0)}` : 'from the command zone'}
+                </span>
+              </div>
+            ) : null}
             {selectedCard.zone === 'battlefield' ? (
               <>
                 <div className="bp-row">
@@ -532,6 +565,22 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
                     Summoning sick
                   </label>
                 </div>
+                {selectedDamageMax !== null || (selectedCard.damage ?? 0) > 0 ? (
+                  <div className="bp-row bp-damage" title="Damage marked on it this turn, gone at cleanup — never lethal">
+                    <span className="bp-stepper">
+                      <CountStepper
+                        label="Damage"
+                        count={selectedCard.damage ?? 0}
+                        max={Math.max(selectedCard.damage ?? 0, selectedDamageMax ?? 0)}
+                        showMax={false}
+                        onChange={(n) => send(setCardCount(spec, selectedCard.key, 'damage', n))}
+                      />
+                    </span>
+                    {selectedDamageMax !== null && selectedDamageMax < 999 ? (
+                      <span className="bp-dim">at most {selectedDamageMax}</span>
+                    ) : null}
+                  </div>
+                ) : null}
                 <div className="bp-counters">
                   {Object.entries(selectedCard.counters ?? {}).map(([kind, n]) => (
                     <span key={kind} className="bp-counter">
@@ -642,6 +691,8 @@ export default function BuilderPanel({ game }: { readonly game: NetworkGame }) {
                               {c.commander ? <span className="bp-flag">cmdr</span> : null}
                               {c.tapped ? <span className="bp-flag">tapped</span> : null}
                               {c.sick ? <span className="bp-flag">sick</span> : null}
+                              {c.damage ? <span className="bp-flag">{c.damage} damage</span> : null}
+                              {c.casts ? <span className="bp-flag">cast {c.casts}×</span> : null}
                               {c.attachedTo ? <span className="bp-flag">attached</span> : null}
                               {Object.entries(c.counters ?? {}).map(([k, n]) => (
                                 <span key={k} className="bp-flag">

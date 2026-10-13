@@ -60,14 +60,19 @@ export function addCards(
 }
 
 /** Changes one card. Leaving the battlefield drops what only makes sense
- * there (tapped, counters, attachments — to it and by it). */
+ * there (tapped, counters, damage, attachments — to it and by it); no longer
+ * a commander drops its cast count. */
 export function updateCard(spec: ScenarioSpec, key: string, change: Partial<Omit<ScenarioCard, 'key'>>): ScenarioSpec {
   const before = spec.cards.find((c) => c.key === key)
   if (before === undefined) return spec
   let after: ScenarioCard = { ...before, ...change }
   const leftBattlefield = after.zone !== 'battlefield'
   if (leftBattlefield) {
-    const { tapped: _t, sick: _s, counters: _c, attachedTo: _a, ...rest } = after
+    const { tapped: _t, sick: _s, counters: _c, attachedTo: _a, damage: _d, ...rest } = after
+    after = rest
+  }
+  if (after.commander !== true) {
+    const { casts: _n, ...rest } = after
     after = rest
   }
   if (after.zone === 'command' && after.commander !== true) after = { ...after, zone: 'battlefield' }
@@ -98,7 +103,7 @@ export function removeCard(spec: ScenarioSpec, key: string): ScenarioSpec {
 export function duplicateCard(spec: ScenarioSpec, key: string): ScenarioSpec {
   const i = spec.cards.findIndex((c) => c.key === key)
   if (i < 0) return spec
-  const { attachedTo: _a, commander: _c, ...rest } = spec.cards[i]
+  const { attachedTo: _a, commander: _c, casts: _n, ...rest } = spec.cards[i]
   const copy: ScenarioCard = { ...rest, key: newKey(spec), ...(rest.zone === 'command' ? { zone: 'battlefield' } : {}) }
   return { ...spec, cards: [...spec.cards.slice(0, i + 1), copy, ...spec.cards.slice(i + 1)] }
 }
@@ -113,6 +118,24 @@ export function setCounter(spec: ScenarioSpec, key: string, kind: string, n: num
   const { counters: _c, ...rest } = card
   const next = Object.keys(counters).length > 0 ? { ...rest, counters } : rest
   return { ...spec, cards: spec.cards.map((c) => (c.key === key ? next : c)) }
+}
+
+/** Sets a card's damage marked or a commander's cast count to `n`, leaving
+ * the field out at 0 (where an absent one means 0). */
+export function setCardCount(spec: ScenarioSpec, key: string, field: 'damage' | 'casts', n: number): ScenarioSpec {
+  const card = spec.cards.find((c) => c.key === key)
+  if (card === undefined) return spec
+  const { [field]: _old, ...rest } = card
+  const next: ScenarioCard = n > 0 ? { ...rest, [field]: Math.floor(n) } : rest
+  return { ...spec, cards: spec.cards.map((c) => (c.key === key ? next : c)) }
+}
+
+/** The turn the scenario starts on, leaving the field out at turn 1 (where an
+ * absent one means 1). */
+export function setTurn(spec: ScenarioSpec, turn: number): ScenarioSpec {
+  const { turn: _old, ...rest } = spec
+  const n = Math.floor(turn)
+  return n > 1 ? { ...rest, turn: n } : rest
 }
 
 /** Two to four seats: added seats start at the first seat's life; a removed
@@ -153,6 +176,7 @@ export function parseScenario(text: string): ScenarioSpec {
     cards: spec.cards,
     active: spec.active,
     step: spec.step ?? 'precombat-main',
+    ...(spec.turn !== undefined ? { turn: spec.turn } : {}),
     libraryFill: spec.libraryFill ?? 40,
   }
 }

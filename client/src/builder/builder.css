@@ -240,6 +240,12 @@
   color: var(--accent);
 }
 
+/* A `CountStepper` (its own cells are `display: contents`) laid out in a row. */
+.bp-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 .bp-counters {
   display: flex;
   flex-wrap: wrap;

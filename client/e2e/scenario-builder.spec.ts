@@ -82,6 +82,80 @@ test('builds a board, edits a card picked on it, plays it, and builds on from th
   await expect(panel.locator('.bp-zone', { hasText: 'Hand' })).toContainText('Lightning Bolt')
 })
 
+test('sets the turn number, a commander’s cast count and damage, and play starts from them', async ({ page }) => {
+  test.setTimeout(120_000)
+  await page.goto('/')
+  await page.getByRole('button', { name: /Scenario builder/ }).click()
+  const panel = page.locator('.builder-panel')
+  await expect(panel.getByLabel('Search cards')).toBeEnabled(paced)
+
+  // Turn 5: alice's, in round 3 of a two-player game.
+  const turn = panel.getByLabel('Turn number')
+  await turn.fill('5')
+  await turn.press('Enter')
+  await expect(page.locator('.turn-banner-round')).toHaveAttribute('title', /turn 5 of the game/, paced)
+  await expect(page.locator('.turn-banner-round')).toContainText('3')
+
+  // A Grizzly Bears with 1 damage — all it can hold.
+  await addCard(page, 'Grizzly Bears')
+  const bears = page.locator('.board [data-obj-id]', { hasText: 'Grizzly Bears' }).first()
+  await expect(bears).toBeVisible(paced)
+  await bears.click()
+  const selected = panel.locator('.bp-section', { hasText: 'Selected' })
+  const damage = selected.locator('.bp-damage')
+  await expect(damage).toContainText('at most 1')
+  await damage.getByRole('button', { name: 'One more' }).click()
+  await expect(panel.locator('.bp-card', { hasText: 'Grizzly Bears' })).toContainText('1 damage', paced)
+  await expect(damage.getByRole('button', { name: 'One more' })).toBeDisabled()
+  await expect(page.locator('.board [data-obj-id]', { hasText: 'Grizzly Bears' }).first().locator('.ct-dmg')).toContainText('1', paced)
+  await shots(page, 'builder-turn-damage')
+
+  // A commander in the command zone, cast twice already: {4} of tax.
+  await addCard(page, 'Chandra, Acolyte of Flame')
+  await panel.locator('.bp-card', { hasText: 'Chandra, Acolyte of Flame' }).click()
+  await expect(selected.locator('.bp-selected-name')).toContainText('Chandra, Acolyte of Flame')
+  await selected.getByRole('checkbox', { name: 'Commander' }).click()
+  await expect(panel.locator('.bp-card', { hasText: 'Chandra, Acolyte of Flame' })).toContainText('cmdr', paced)
+  await selected.getByLabel('Zone', { exact: true }).selectOption('command')
+  await expect(panel.locator('.bp-zone', { hasText: 'Command zone' })).toContainText('Chandra, Acolyte of Flame', paced)
+  const casts = selected.locator('.bp-casts')
+  await casts.getByRole('button', { name: 'One more' }).click()
+  await expect(panel.locator('.bp-card', { hasText: 'Chandra, Acolyte of Flame' })).toContainText('cast 1×', paced)
+  await casts.getByRole('button', { name: 'One more' }).click()
+  await expect(panel.locator('.bp-card', { hasText: 'Chandra, Acolyte of Flame' })).toContainText('cast 2×', paced)
+  await expect(casts).toContainText('tax +4')
+  await expect(page.locator('.ct-tax', { hasText: '+4' }).first()).toBeVisible(paced)
+  await shots(page, 'builder-commander-tax')
+  // The board under the drawer: the commander's tile with its tax.
+  if (SHOTS !== undefined) {
+    await panel.getByTitle('Hide the builder').click()
+    await shots(page, 'builder-board-drawer-hidden')
+    await page.getByRole('button', { name: /^Builder/ }).click()
+    await expect(panel).toBeVisible()
+  }
+
+  // A Mountain and a Lightning Bolt in hand, so alice has something to do in
+  // her main phase and play waits there.
+  await addCard(page, 'Mountain')
+  await panel.locator('.bp-section', { hasText: 'Add cards' }).getByLabel('Zone', { exact: true }).selectOption('hand')
+  await addCard(page, 'Lightning Bolt')
+  await expect(panel.locator('.bp-card', { hasText: 'Lightning Bolt' })).toBeVisible(paced)
+
+  // Play starts from all three.
+  await panel.getByRole('button', { name: /Start play/ }).click()
+  await expect(panel.locator('.bp-mode')).toHaveText('Playing', paced)
+  await expect(page.locator('.turn-banner-round')).toHaveAttribute('title', /turn 5 of the game/, paced)
+  await expect(page.locator('.ct-tax', { hasText: '+4' }).first()).toBeVisible(paced)
+  await expect(page.locator('.board [data-obj-id]', { hasText: 'Grizzly Bears' }).first().locator('.ct-dmg')).toContainText('1')
+
+  // And comes back with them, from the game as it stands.
+  await panel.getByRole('button', { name: 'Edit from here' }).click()
+  await expect(panel.locator('.bp-mode')).toHaveText('Building', paced)
+  await expect(panel.getByLabel('Turn number')).toHaveValue('5')
+  await expect(panel.locator('.bp-card', { hasText: 'Grizzly Bears' })).toContainText('1 damage')
+  await expect(panel.locator('.bp-card', { hasText: 'Chandra, Acolyte of Flame' })).toContainText('cast 2×')
+})
+
 test('grows the table to four and sits at another seat, the board redrawn for it', async ({ page }) => {
   test.setTimeout(120_000)
   await page.goto('/')
