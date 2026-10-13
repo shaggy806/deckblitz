@@ -4,9 +4,19 @@
 // cheap request (spectating an unknown room) every 500 ms — its round trip is
 // the network plus however long the server's event loop was busy.
 //
-//   node server/scripts/load-test.mjs [url] [stages] [stageSeconds] [ackDelayMs]
+//   node server/scripts/load-test.mjs [url] [stages] [stageSeconds] [ackDelayMs] [--status statusUrl]
 //   node server/scripts/load-test.mjs ws://localhost:4000 1,2,4 60 600
 //   node server/scripts/load-test.mjs wss://ws.deckblitz.net 1,2,4,6,8,12,16 75 600
+//   node server/scripts/load-test.mjs ws://localhost:4000 1,2,4 60 600 --status http://127.0.0.1:4010/status.json
+//
+// `--status` polls the server's own numbers (`status-server.ts`'s `/status.json`,
+// loopback only: on the box, run this there or through an SSH tunnel) every
+// 2 s and adds them to each stage's row: main's event-loop delay p99, how busy
+// it was, its heap and the process's rss, and with rooms on worker threads the
+// same per shard plus its bots' decision p99. The probe below is answered by
+// main, so with shards only these show a shard's own stalls. Each number is a
+// 10 s rolling window: a stage's samples from its first 10 s are left out
+// when there are later ones.
 //
 // Against the live site only when nobody is playing (check `/status` first): it
 // spends the box's CPU and burst credits. Stops ramping once the probe's p95
@@ -19,10 +29,13 @@ import { randomUUID } from "node:crypto";
 import { performance } from "node:perf_hooks";
 import WebSocket from "ws";
 
-const url = process.argv[2] ?? "ws://localhost:4000";
-const stages = (process.argv[3] ?? "1,2,4").split(",").map(Number);
-const stageSeconds = Number(process.argv[4] ?? 60);
-const ackDelay = Number(process.argv[5] ?? 600);
+const argv = process.argv.slice(2);
+const statusAt = argv.indexOf("--status");
+const statusUrl = statusAt >= 0 ? argv.splice(statusAt, 2)[1] : null;
+const url = argv[0] ?? "ws://localhost:4000";
+const stages = (argv[1] ?? "1,2,4").split(",").map(Number);
+const stageSeconds = Number(argv[2] ?? 60);
+const ackDelay = Number(argv[3] ?? 600);
 // The live server only takes sockets from the site's own origin.
 const origin = url.includes("deckblitz.net") ? "https://deckblitz.net" : undefined;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -100,6 +113,56 @@ const probeTimer = setInterval(() => {
   probe.send(JSON.stringify({ type: "spectate-room", roomId: "ZZZZZ" }));
 }, 500);
 
+// The server's own numbers, sampled while the stages run.
+const statusSamples = [];
+const statusTimer =
+  statusUrl === null
+    ? null
+    : setInterval(() => {
+        fetch(statusUrl)
+          .then((res) => res.json())
+          .then((snap) => statusSamples.push([now(), snap]))
+          .catch((e) => errors.push(`status: ${e.message}`));
+      }, 2000);
+
+/** A stage's server-side numbers: the worst delay p99 and heap, the mean
+ * busy share, per thread. */
+function statusRow(from, to) {
+  let inStage = statusSamples.filter(([t]) => t >= from && t < to).map(([, s]) => s);
+  const settled = statusSamples.filter(([t]) => t >= from + 10_000 && t < to).map(([, s]) => s);
+  if (settled.length > 0) inStage = settled;
+  if (inStage.length === 0) return {};
+  const max = (xs) => (xs.length === 0 ? null : Math.max(...xs));
+  const mean = (xs) => (xs.length === 0 ? null : xs.reduce((a, b) => a + b, 0) / xs.length);
+  const thread = (loads) => {
+    const present = loads.filter((l) => l !== null && l !== undefined);
+    const busy = mean(present.map((l) => l.elu));
+    return {
+      delayP99Ms: max(present.map((l) => l.delayP99Ms)),
+      busyPct: busy === null ? null : Math.round(busy * 100),
+      heapMb: max(present.map((l) => l.heapUsedMb)),
+    };
+  };
+  const row = {
+    rssMb: max(inStage.map((s) => s.rssMb)),
+    main: thread(inStage.map((s) => s.main)),
+  };
+  const shardCount = Math.max(0, ...inStage.map((s) => s.shards?.length ?? 0));
+  if (shardCount > 0) {
+    row.shards = [];
+    for (let i = 0; i < shardCount; i += 1) {
+      const loads = inStage.map((s) => s.shards?.[i]?.load ?? null);
+      row.shards.push({
+        index: i,
+        ...thread(loads),
+        botP99Ms: max(loads.filter((l) => l?.botDecisionP99Ms != null).map((l) => l.botDecisionP99Ms)),
+        restarts: max(inStage.map((s) => s.shards?.[i]?.restarts ?? 0)),
+      });
+    }
+  }
+  return row;
+}
+
 const pct = (xs, p) => {
   if (xs.length === 0) return NaN;
   const sorted = [...xs].sort((a, b) => a - b);
@@ -136,6 +199,7 @@ for (const target of stages) {
     probes: rtt.length,
     kbPerSec: Math.round((rooms.reduce((a, r) => a + r.bytes, 0) - bytesBefore) / 1024 / ((to - from) / 1000)),
     errors: errors.length,
+    ...(statusUrl !== null ? { server: statusRow(from, to) } : {}),
   };
   results.push(row);
   log(JSON.stringify(row));
@@ -150,6 +214,7 @@ for (const target of stages) {
 }
 
 clearInterval(probeTimer);
+if (statusTimer !== null) clearInterval(statusTimer);
 for (const r of rooms) {
   if (r.id !== null && r.ws.readyState === WebSocket.OPEN) {
     r.ws.send(JSON.stringify({ type: "set-bots-paused", roomId: r.id, paused: true }));

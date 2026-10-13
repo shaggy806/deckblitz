@@ -23,7 +23,8 @@ that file.
   (`requireHost` in `room-service.ts`). A rematch is a new `Room` under the same code
   (`RoomManager.rematch`), its frames carrying the next `game` number.
 - **Rooms can run on worker threads** (`--shards N`, default 0 = on the main thread;
-  `docs/plans/room-shards.md`). Then main keeps sockets, routes and HTTP and **imports no engine**:
+  `docs/plans/room-shards.md`; production sets `SHARDS` explicitly in its unit, `DEPLOYMENT.md`,
+  and both modes must behave the same — the loopback suite and the e2e matrix check it). Then main keeps sockets, routes and HTTP and **imports no engine**:
   `index.ts`, `transport.ts`, `worker-host.ts`, `room-host.ts`, `shard-protocol.ts`,
   `room-code.ts`, `status-server.ts`, `import-route.ts`, `load-monitor.ts` and `admission.ts` import values only
   from Node, `ws` and each other (`test/main-imports.test.ts`); everything a room does is

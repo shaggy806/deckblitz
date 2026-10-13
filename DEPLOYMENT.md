@@ -84,6 +84,8 @@ Restart=on-failure
 RestartSec=2
 Environment=PORT=4000
 Environment=CLIENT_ORIGIN=https://deckblitz.net
+# Rooms on worker threads (below): one shard on the 2-vCPU box, main on the other core.
+Environment=SHARDS=1
 User=ubuntu
 
 [Install]
@@ -95,6 +97,46 @@ WantedBy=multi-user.target
 crash comes back on its own. Server-side hardening for being open to the internet (rate-limiting
 connections per IP, reaping idle rooms) is in the code itself, not config — see
 `server/src/transport.ts` and `server/src/room-manager.ts`.
+
+### Rooms on worker threads (`SHARDS`)
+
+`SHARDS=N` (or `--shards N`) runs the rooms on N worker threads ("shards",
+`docs/plans/room-shards.md`): the main thread keeps the sockets, routing and HTTP and loads no
+engine, so a busy game no longer holds up every other room's frames. The code's default is 0
+(every room on the main thread, as before), so a box without the line behaves as it always did
+— the unit sets it explicitly. **Removing the line is the rollback.** After editing the unit:
+`sudo systemctl daemon-reload && sudo systemctl restart mtg-server`, then check `/status` shows
+the shard `up`.
+
+- **How many**: one per core, less one for main — `max(1, cores − 1)`. On the 2-vCPU box that's
+  `SHARDS=1`; a 4-vCPU box would take 3. More shards than cores just time-slice the bots'
+  300 ms decision budget.
+- **Memory**: each shard holds its own copy of the engine — about 160 MB rss idle (measured on the
+  dev PC: `--shards 0` 194 MB, `--shards 1` 213 MB, `--shards 2` 370 MB; main alone ~56 MB) —
+  plus its rooms, ~15 MB a busy four-player game. Each shard's heap is capped at
+  `SHARD_HEAP_MB` (`--shard-heap-mb`, default 512): uncapped, V8 let a shard grow to ~600 MB with
+  four rooms before collecting, and the cap makes it collect sooner at no measured cost (two
+  shards with eight rooms: 1.5 GB rss uncapped, 0.9 GB at 512). So budget ~160 MB + the cap per
+  shard at worst, plus main. One shard fits the 2 GB box with room to spare; size a bigger box at
+  ~300-700 MB a core.
+- **Startup**: a shard takes ~4-5 s to load the engine (longer on the box), before the port
+  opens. The journal logs `N room shard(s) ready in X s`.
+- **A shard that crashes** (out of memory past its cap, or a bug outside a room's own catch)
+  loses only its own rooms: their players are disconnected and find the room gone on reconnect.
+  It's restarted after 1, 2, 4 … 30 s; one that crashes more than five times in five minutes
+  is left down and shows as `crash-looped` on `/status` — restart the service to bring it back.
+- **`UV_THREADPOOL_SIZE`**: compressing frames (permessage-deflate) runs on libuv's threadpool,
+  four threads by default, shared by the whole process. Leave it on the 2-vCPU box; on a box
+  with more cores set it to the core count (`Environment=UV_THREADPOOL_SIZE=8`).
+- **Caps on opening rooms** (both modes): `MAX_ROOMS_PER_IP` (`--max-rooms-per-ip`, default 6)
+  refuses one address its seventh open room; `MAX_ROOMS_PER_SHARD` (`--max-rooms-per-shard`,
+  unset = unlimited) refuses a create once every shard holds that many weighted rooms (a game or
+  lobby 1, a tutorial 0.5, a finished game 0.1). Set the latter from the load test's knee on the
+  box (`npm run load-test -w server`, with `--status http://127.0.0.1:4010/status.json`, run
+  on the box with nobody playing): the stage where the frame-gap median passes +20% over one
+  room.
+- `/status` gains a shard table: each shard's state and restarts, its rooms, how busy it is, its
+  event-loop delay, heap and bots' decision p99.
 
 ## The static client (Caddy)
 

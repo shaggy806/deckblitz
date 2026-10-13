@@ -5,8 +5,11 @@
  * `--shards N` (or `SHARDS`) runs the rooms on N worker threads
  * (`worker-host.ts`, `docs/plans/room-shards.md`); this thread then keeps
  * only the sockets, routes and HTTP, and imports no engine. `0`, the
- * default for now, runs them on this thread as the server always has — that
- * path is loaded only when asked for.
+ * default, runs them on this thread as the server always has — that path is
+ * loaded only when asked for. A production box says how many explicitly
+ * (`SHARDS=1` in the systemd unit on the 2-vCPU box: one per core, less one
+ * for main — `DEPLOYMENT.md`), so a script, a test or a dev server never
+ * starts workers it didn't ask for.
  */
 
 import { createServer } from "node:http";
