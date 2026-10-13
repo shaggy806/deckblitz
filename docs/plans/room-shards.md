@@ -1,9 +1,10 @@
 # Rooms on worker threads (room shards)
 
-Status: **in progress** — rollout steps 1-5 built (2026-10-13): rooms run on worker threads behind
-`--shards N`, default 0 (in-process, exactly as before). Steps 6-9 (admission, crash restarts,
-dev-rooms on shards, the default) are next; "As built" below records the departures and the
-measurements. Phase 2 of `scaling-rooms.md`. The design came
+Status: **built** (2026-10-13), not yet live: rollout steps 1-8 and the code half of 9. Rooms run
+on worker threads behind `--shards N` (default 0 in code: in-process, exactly as before);
+production turns them on with `SHARDS=1` in the service unit (`DEPLOYMENT.md`). What's left of
+step 9: the deploy, measuring the box's knee to set `--max-rooms-per-shard`, and the same on a
+bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
 
@@ -221,6 +222,35 @@ export type FromShard =
   path is in and tested. `exited()` does the drop and 1011 close; restart needs `start()`'s spawn
   and wiring pulled into a per-index method; `loopbackChannel(...).crash(code)` exists.
   `worker-smoke.test.ts` compares only top-level `src/*.ts` mtimes against `dist`.
+
+## As built (steps 6-9, 2026-10-13)
+
+- **Admission** (`admission.ts`, main-side, pure): the design's weights and placement (shard 0
+  +0.5 for imports, a shard over 250 ms delay p99 skipped unless all are, ties by ELU then index —
+  so the first room now goes to shard 1). `--max-rooms-per-shard` / `MAX_ROOMS_PER_SHARD`
+  (unlimited by default) and `--max-rooms-per-ip` / `MAX_ROOMS_PER_IP` (6 on the CLI, unlimited
+  in the library); refusals carry `error.code` (`server-full`, `too-many-rooms`). Loopback without a
+  CF header is exempt. The in-process host allocates codes too and tracks each room's stage and
+  creator from room events, so `--shards 0` enforces the same caps. Creates in flight count through
+  their route, registered before forwarding. Placement reads the 10 s load window. A refused blitz
+  drops back to the landing page with its host token forgotten (checked in Playwright).
+- **Crashes**: a per-shard `launch()` (messages from a replaced incarnation ignored), `ShardPhase`
+  (`starting`/`up`/`restarting`/`failed`/`stopped`; only `up` shards are placed on, posted to and
+  reported as up), backoff 1, 2, 4 … 30 s by exits in the last 5 minutes, more than 5 → `failed`
+  ("crash-looped" on `/status`). A shard that exits before `start()` finishes fails the start.
+  `--shard-heap-mb` / `SHARD_HEAP_MB` (default 512) sets `resourceLimits.maxOldGenerationSizeMb`.
+  `__crash` (behind `ShardConfig.testHooks`) throws from a timer — an uncaught exception.
+- **dev-rooms**: `ShardConfig.setup`/`shardCount` and `control` both ways;
+  `scripts/dev-rooms-shard.mjs`; `list` fans out (shard order now, not `dev-scenarios.mjs`
+  order), other ops route by code, `eval` runs in the owning worker; `DEV_ROOMS_SHARDS` in the
+  Playwright config and an e2e matrix over 0 and 1 in CI (jobs "smoke (shards 0/1)").
+- **Step 9's code half**: the default stays 0; `DEPLOYMENT.md`'s unit sets `SHARDS=1` for the
+  2-vCPU box (removing the line is the rollback); `load-test.mjs --status <url>` polls
+  `/status.json` and reports main's and each shard's delay p99, busy and heap per stage.
+- **The heap cap, measured** (dev PC, `--shards 2`, stages 4 → 8 rooms): uncapped, rss 971 → 1490
+  MB and shard heaps to ~560 MB; capped at 512, 807 → 911 MB, heaps ~210-310 MB, frames/s and gaps
+  unchanged; 384 similar; 256 doubles the shards' busy share (GC). 512 chosen: one shard holding
+  8 rooms peaked ~220 MB, so it's twice that in headroom before an out-of-memory restart.
 
 ## Rollout
 
