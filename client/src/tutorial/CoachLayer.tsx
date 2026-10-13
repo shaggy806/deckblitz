@@ -31,6 +31,18 @@ const WAIT_NOTICE_MS = 1500
 const resolveAnchor = (anchor: Anchor): Element | null =>
   typeof anchor === 'string' ? document.querySelector(anchor) : anchor()
 
+/** The click-catchers for a step open to the whole page: one over each of
+ * the first four elements its `guard` finds, the other strips empty. */
+function guardRects(selector: string | undefined, none: Rect): Rect[] {
+  const found = selector === undefined ? [] : [...document.querySelectorAll(selector)].slice(0, 4)
+  const rects: Rect[] = found.map((el) => {
+    const r = el.getBoundingClientRect()
+    return { left: r.left, top: r.top, width: r.width, height: r.height }
+  })
+  while (rects.length < 4) rects.push(none)
+  return rects
+}
+
 /** The viewport without its scrollbar, which the blockers mustn't cover. */
 const viewport = () => ({ width: document.documentElement.clientWidth, height: document.documentElement.clientHeight })
 
@@ -82,9 +94,10 @@ export function CoachLayer({ page, resumable = SITE_TOUR }: { readonly page: Pag
   const { tour, index, offer } = coach
   const step = tour?.steps[index]
 
-  // While a tour is open, Escape leaves it from anywhere.
+  // While a tour is open, Escape leaves it from anywhere — unless it's one
+  // whose way out does more than close a card (a lesson's leaves its room).
   useEffect(() => {
-    if (tour === null) return
+    if (tour === null || tour.keepOnEscape === true) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return
       e.preventDefault()
@@ -149,6 +162,9 @@ function StepView({
   const blockRefs = useRef<(HTMLDivElement | null)[]>([])
   const anchorEl = useRef<Element | null>(null)
   const interactive = isInteractive(step)
+  // A step whose goal takes clicks across the page: nothing blocked but what
+  // it guards, and nothing held up while its anchor is away.
+  const open = step.reach === 'page'
 
   // The frame loop: advance by itself when the step says so, find the
   // anchor, and write the ring, the click-catchers and the card.
@@ -189,7 +205,9 @@ function StepView({
         show('center')
         placeCardAt(centerCard(cardSize, view))
       } else if (hole !== null && el !== null) {
-        if (!scrolled) {
+        // Not in a game, whose page never scrolls: a hand card tucked half
+        // below the screen would scroll its tray instead.
+        if (!scrolled && page !== 'game') {
           scrolled = true
           el.scrollIntoView({ block: 'nearest', inline: 'nearest' })
         }
@@ -210,7 +228,11 @@ function StepView({
         // it mounts.
         const full = { left: 0, top: 0, width: view.width, height: view.height }
         const none = { left: 0, top: 0, width: 0, height: 0 }
-        const strips = interactive ? blockerRects(hole, view) : [full, none, none, none]
+        const strips = open
+          ? guardRects(step.guard, none)
+          : interactive
+            ? blockerRects(hole, view)
+            : [full, none, none, none]
         strips.forEach((s, i) => {
           const b = blockRefs.current[i]
           if (!b) return
@@ -236,7 +258,7 @@ function StepView({
       done = true
       cancelAnimationFrame(raf)
     }
-  }, [index, interactive, onPage, step])
+  }, [index, interactive, onPage, open, page, step])
 
   // A click inside the spotlight on what the step waits for moves it on —
   // in the capture phase, so the place is saved before a link's page load.
@@ -252,8 +274,10 @@ function StepView({
   }, [index, step])
 
   // Keys that would act on the page are swallowed: only the card, an
-  // interactive spotlight, and Tab get them (Escape is the layer's).
+  // interactive spotlight, and Tab get them (Escape is the layer's) — except
+  // on a step open to the whole page, where they all go through.
   useEffect(() => {
+    if (open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === 'Tab') return
       const t = e.target
@@ -270,7 +294,7 @@ function StepView({
       window.removeEventListener('keydown', onKey, true)
       window.removeEventListener('keyup', onKey, true)
     }
-  }, [interactive])
+  }, [interactive, open])
 
   const backTo = backFrom(tour, index, page)
   const last = index === tour.steps.length - 1
@@ -288,37 +312,86 @@ function StepView({
       data-step={step.id}
     >
       <div className="coach-count mono">
-        {tour.title} · {index + 1} of {tour.steps.length}
+        {tour.counter ?? `${tour.title} · ${index + 1} of ${tour.steps.length}`}
       </div>
       <h2 className="coach-title" id="coach-title">
         {step.title}
       </h2>
-      <p className="coach-body">
-        {phase === 'waiting' ? "Hang on: this part of the page hasn't shown up yet." : step.body}
-      </p>
-      <div className="coach-actions">
-        <button type="button" className="link-button coach-exit" onClick={stopTour}>
-          Exit tour
-        </button>
-        <span className="coach-spacer" />
-        {backTo !== null ? (
-          <button type="button" className="coach-back" onClick={back}>
-            Back
+      {phase === 'waiting' && !open ? (
+        <p className="coach-body">Hang on: this part of the page hasn't shown up yet.</p>
+      ) : (
+        // A blank line starts a paragraph (a lesson's copy uses them).
+        step.body.split(/\n\s*\n/).map((para, i) => (
+          <p key={i} className="coach-body">
+            {para}
+          </p>
+        ))
+      )}
+      {step.goals !== undefined && step.goals.length > 0 ? (
+        <ul className="coach-goals" aria-label="To do">
+          {step.goals.map((g) => (
+            <li key={g.id} className={g.done ? 'done' : undefined} data-goal={g.id} data-done={g.done}>
+              <span className="coach-goal-box" aria-hidden="true">
+                {g.done ? '✓' : ''}
+              </span>
+              <span>{g.label}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {step.buttons !== undefined ? (
+        // The quiet links on the left, the buttons pushed right.
+        <div className="coach-actions">
+          {step.buttons
+            .filter((b) => b.link === true)
+            .map((b) => (
+              <button key={b.label} type="button" className="link-button coach-exit" onClick={b.onClick}>
+                {b.label}
+              </button>
+            ))}
+          <span className="coach-spacer" />
+          {step.buttons
+            .filter((b) => b.link !== true)
+            .map((b) =>
+              b.primary === true ? (
+                <NextButton
+                  key={b.label}
+                  label={b.label}
+                  shown={phase !== 'pending' && phase !== 'missing'}
+                  onClick={b.onClick}
+                />
+              ) : (
+                <button key={b.label} type="button" className="coach-back" onClick={b.onClick}>
+                  {b.label}
+                </button>
+              ),
+            )}
+        </div>
+      ) : (
+        <div className="coach-actions">
+          <button type="button" className="link-button coach-exit" onClick={stopTour}>
+            Exit tour
           </button>
-        ) : null}
-        {waits ? null : (
-          <NextButton
-            label={last ? 'Done' : 'Next'}
-            shown={phase !== 'pending' && phase !== 'missing'}
-            onClick={() => advance(index, 'next')}
-          />
-        )}
-      </div>
+          <span className="coach-spacer" />
+          {backTo !== null ? (
+            <button type="button" className="coach-back" onClick={back}>
+              Back
+            </button>
+          ) : null}
+          {waits ? null : (
+            <NextButton
+              label={last ? 'Done' : 'Next'}
+              shown={phase !== 'pending' && phase !== 'missing'}
+              onClick={() => advance(index, 'next')}
+            />
+          )}
+        </div>
+      )}
     </div>
   )
 
   return (
-    <div className="coach-layer" data-phase={phase}>
+    <div className="coach-layer" data-phase={phase} data-reach={open ? 'page' : 'spotlight'}>
       {/* The ring and the strips are always there, shown only while
           anchored (coach.css), so the frame that finds the anchor can
           place them before the render that shows them. */}
@@ -332,7 +405,7 @@ function StepView({
           }}
         />
       ))}
-      {phase === 'center' || phase === 'waiting' ? (
+      {open ? null : phase === 'center' || phase === 'waiting' ? (
         <div className="coach-dim" />
       ) : phase === 'anchored' ? null : (
         // Pending or briefly missing: nothing to see, but nothing to click

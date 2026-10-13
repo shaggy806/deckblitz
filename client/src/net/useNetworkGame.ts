@@ -26,11 +26,13 @@ import type {
   ScenarioSpec,
   SeatStatus,
   ServerMessage,
+  TutorialInfo,
   WireDeck,
 } from 'protocol'
 import { prefetchArt } from '../ui/art.ts'
 import { randomBotDecks } from '../lobby/randomBotDeck.ts'
 import { isRematch } from './rematch.ts'
+import { LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 
 const SERVER_URL =
@@ -142,6 +144,17 @@ function clearRoomFromUrl(): void {
   const url = new URL(window.location.href)
   url.searchParams.delete('room')
   window.history.replaceState(null, '', url)
+}
+
+/** A `?tutorial=` the page loaded with (`lessonUrl`), taken off the URL as
+ * it's read so a reload doesn't open a second room. */
+function takeLessonFromUrl(): string | null {
+  const url = new URL(window.location.href)
+  const lesson = url.searchParams.get(LESSON_PARAM)
+  if (lesson === null) return null
+  url.searchParams.delete(LESSON_PARAM)
+  window.history.replaceState(null, '', url)
+  return lesson
 }
 
 /** What a capture-enabled server has answered so far — see
@@ -344,6 +357,20 @@ export interface NetworkGame {
   builderStop: (snapshot: boolean) => void
   /** Moves this tab to another seat, to act for that side. */
   builderSeat: (seat: PlayerId) => void
+  /** Where a tutorial room's lesson stands, from the newest frame
+   * (`state.tutorial`); `null` in any other room. What the coach shows comes
+   * from the frame on screen instead (`Playback.tutorial`). */
+  readonly tutorial: TutorialInfo | null
+  /** Opens lesson `lesson` in a tutorial room of its own, against its
+   * scripted opponent, and takes the seat it keeps for this tab — straight
+   * into the game, no seat board. */
+  createTutorial: (lesson: string) => void
+  /** Between `createTutorial` and the lesson's first frame. */
+  readonly tutorialStarting: boolean
+  /** Next, on the coach card `step` (host only — the tab that opened it). */
+  tutorialNext: (step: string) => void
+  /** Rewinds the lesson to the start of its chapter. */
+  tutorialRetry: () => void
   nameOf: (id: ObjectId) => string
   clearError: () => void
   reconnect: () => void
@@ -370,6 +397,12 @@ export function useNetworkGame(): NetworkGame {
   /** Set by `blitz` until its game's first frame: the deck and bots to seat
    * once the room is joined, and whether that's been sent. */
   const pendingBlitzRef = useRef<{ deck: WireDeck; bots: readonly WireDeck[]; sent: boolean } | null>(null)
+  /** Set by `createTutorial` until its seat is claimed: the seat the tutorial
+   * room keeps for this tab, once `room-created` names it. */
+  const pendingTutorialRef = useRef<{ seat: PlayerId | null } | null>(null)
+  /** `createTutorial`, for the socket's `onopen` (a `?tutorial=` URL), which
+   * is built before it. */
+  const startTutorialRef = useRef<(lesson: string) => void>(() => {})
   /** The game the last frame was from, to tell a rematch's first frame. */
   const lastGameRef = useRef<GameKey | null>(null)
   const unmountedRef = useRef(false)
@@ -407,6 +440,8 @@ export function useNetworkGame(): NetworkGame {
   const [gameNumber, setGameNumber] = useState(0)
   const [canRematch, setCanRematch] = useState(false)
   const [restarted, setRestarted] = useState(false)
+  const [tutorial, setTutorial] = useState<TutorialInfo | null>(null)
+  const [tutorialStarting, setTutorialStarting] = useState(false)
   /** Whether the last frame's game was over, to tell a restart from a rematch. */
   const lastOverRef = useRef(false)
   const view = frame?.view ?? null
@@ -434,10 +469,13 @@ export function useNetworkGame(): NetworkGame {
       setEverConnected(true)
       setError(null)
       const fromUrl = new URL(window.location.href).searchParams.get('room')
+      const lesson = fromUrl ? null : takeLessonFromUrl()
       if (fromUrl) {
         joinRoomId(fromUrl)
       } else {
         setStatus('no-room')
+        // "Play again", or Learn Commander from a lobby: a room of its own.
+        if (lesson !== null) startTutorialRef.current(lesson)
       }
     }
 
@@ -451,6 +489,7 @@ export function useNetworkGame(): NetworkGame {
             pendingHostTokenRef.current = null
           }
           if (pendingBlitzRef.current !== null) setBlitzRoomId(message.roomId)
+          if (pendingTutorialRef.current !== null) pendingTutorialRef.current.seat = message.seat ?? null
           roomIdRef.current = message.roomId
           setRoomId(message.roomId)
           window.history.replaceState(null, '', roomUrl(message.roomId))
@@ -492,6 +531,16 @@ export function useNetworkGame(): NetworkGame {
               others.forEach((s, i) => send({ type: 'add-bot', roomId: message.roomId, seat: s.player, deck: blitz.bots[i] }))
               send({ type: 'start-game', roomId: message.roomId })
             }
+            return
+          }
+          // A tutorial room, just made: claim the seat it kept for this tab.
+          // Its game is already dealt, so straight to the first frame.
+          const lesson = pendingTutorialRef.current
+          if (lesson !== null && lesson.seat !== null && message.pending !== true) {
+            pendingTutorialRef.current = null
+            const clientToken = newClientToken()
+            pendingClaimRef.current = { seat: lesson.seat, clientToken }
+            send({ type: 'claim-seat', roomId: message.roomId, seat: lesson.seat, clientToken })
             return
           }
           const pending = pendingClaimRef.current
@@ -557,6 +606,7 @@ export function useNetworkGame(): NetworkGame {
           isPlayingRef.current = true
           pendingBlitzRef.current = null
           setBlitzing(false)
+          setTutorialStarting(false)
           // The game's first frame names every card in it: load their art now.
           if (message.artManifest) prefetchArt(message.artManifest)
           // A `state` for our pending seat confirms the claim — persist it now,
@@ -581,7 +631,13 @@ export function useNetworkGame(): NetworkGame {
           setCanRematch(message.canRematch === true)
           setSeats(message.seats)
           setSeat(message.seat)
-          setFrame({ seq: message.seq, view: message.view, actions: message.actions })
+          setTutorial(message.tutorial ?? null)
+          setFrame({
+            seq: message.seq,
+            view: message.view,
+            actions: message.actions,
+            ...(message.tutorial !== undefined ? { tutorial: message.tutorial } : {}),
+          })
           setAutoPassing(message.autoPassing)
           setAutoPassPaused(message.autoPassPaused)
           setIsHost(message.isHost)
@@ -631,9 +687,12 @@ export function useNetworkGame(): NetworkGame {
           setError(message.message)
           setErrorSeq((n) => n + 1)
           // A blitz that went wrong on the way in leaves its room's seat
-          // board up, error and all, to carry on from by hand.
+          // board up, error and all, to carry on from by hand. A lesson
+          // refused (an unknown id) leaves the landing page up.
           pendingBlitzRef.current = null
           setBlitzing(false)
+          pendingTutorialRef.current = null
+          setTutorialStarting(false)
           if (!isPlayingRef.current && roomIdRef.current !== null) {
             // A rejected seat claim — drop the unconfirmed claim and any stored
             // token for it, so nothing (an auto-reclaim included) retries it in
@@ -655,6 +714,8 @@ export function useNetworkGame(): NetworkGame {
       isPlayingRef.current = false
       pendingBlitzRef.current = null
       setBlitzing(false)
+      pendingTutorialRef.current = null
+      setTutorialStarting(false)
       setStatus('disconnected')
       const delay = Math.min(1000 * 2 ** reconnectAttemptRef.current, MAX_RECONNECT_DELAY_MS)
       reconnectAttemptRef.current += 1
@@ -710,6 +771,36 @@ export function useNetworkGame(): NetworkGame {
   )
 
   const dismissBlitzReport = useCallback(() => setBlitzReport(null), [])
+
+  const createTutorial = useCallback(
+    (lesson: string) => {
+      // A second click while the first is on its way opens nothing more.
+      if (pendingTutorialRef.current !== null) return
+      const hostToken = newClientToken()
+      pendingHostTokenRef.current = hostToken
+      pendingTutorialRef.current = { seat: null }
+      setBlitzReport(null)
+      setTutorialStarting(true)
+      send({ type: 'tutorial-create', lesson, hostToken })
+    },
+    [send],
+  )
+  useEffect(() => {
+    startTutorialRef.current = createTutorial
+  }, [createTutorial])
+
+  const tutorialNext = useCallback(
+    (step: string) => {
+      const id = roomIdRef.current
+      if (id !== null) send({ type: 'tutorial-next', roomId: id, step })
+    },
+    [send],
+  )
+
+  const tutorialRetry = useCallback(() => {
+    const id = roomIdRef.current
+    if (id !== null) send({ type: 'tutorial-retry', roomId: id })
+  }, [send])
 
   const joinRoom = useCallback(
     (id: string) => {
@@ -1127,6 +1218,11 @@ export function useNetworkGame(): NetworkGame {
     builderStart,
     builderStop,
     builderSeat,
+    tutorial,
+    createTutorial,
+    tutorialStarting,
+    tutorialNext,
+    tutorialRetry,
     nameOf,
     clearError,
     reconnect,

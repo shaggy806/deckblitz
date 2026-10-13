@@ -55,6 +55,35 @@ export interface Step {
    * behind (Start Game, a link to another page).
    */
   readonly interactive?: boolean
+  /**
+   * Where clicks reach while the step is open. `'spotlight'` (the default):
+   * only inside the spotlight's hole, and not even there on a step that
+   * isn't `interactive`. `'page'`: anywhere but {@link guard} — for a step
+   * whose goal takes clicks all over the board (a block: the blocker, the
+   * attacker, then the decision banner's Confirm), which a hole round one
+   * card would make impossible. The spotlight still marks where to start.
+   */
+  readonly reach?: 'spotlight' | 'page'
+  /** With `reach: 'page'`: what still can't be clicked, as a selector (the
+   * top strip's menus, which could leave the lesson behind). */
+  readonly guard?: string
+  /** A checklist on the card: what the step asks for, each line ticked as
+   * it's done (a tutorial room's goals, which the server checks). */
+  readonly goals?: readonly { readonly id: string; readonly label: string; readonly done: boolean }[]
+  /**
+   * The card's own buttons, in place of Exit / Back / Next: for a step the
+   * tour doesn't move on by itself (a tutorial room's, which the server moves
+   * on). The `primary` one is styled and focused as Next is; a `link` one is
+   * drawn as a quiet link, as Exit is.
+   */
+  readonly buttons?: readonly StepButton[]
+}
+
+export interface StepButton {
+  readonly label: string
+  readonly onClick: () => void
+  readonly primary?: boolean
+  readonly link?: boolean
 }
 
 export interface Tour {
@@ -74,4 +103,11 @@ export interface Tour {
   /** Saved to the progress store as the player goes (`tour.at`), so it
    * survives page loads. The site tour is; a lesson inside a room isn't. */
   readonly persist?: boolean
+  /** The card's small heading line, in place of "<title> · <n> of <count>"
+   * — a lesson's chapter count, say, which its one-step tour can't know. */
+  readonly counter?: string
+  /** Escape doesn't leave this tour: a lesson's way out leaves its room too,
+   * too much for a stray key, and in a game Escape cancels what's being
+   * picked, so the key goes on to the page instead. */
+  readonly keepOnEscape?: boolean
 }

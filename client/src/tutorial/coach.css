@@ -24,6 +24,14 @@
 .coach-layer[data-phase='anchored'] .coach-ring {
   display: block;
 }
+/* A step open to the whole page (a lesson's goal: a block takes the
+   blocker, the attacker and the banner's Confirm): the page only lightly
+   dimmed, since the player has to find more on it than the spotlight. */
+.coach-layer[data-reach='page'] .coach-ring {
+  box-shadow:
+    0 0 0 4px var(--accent-bg),
+    0 0 0 200vmax color-mix(in srgb, var(--bg) 22%, transparent);
+}
 
 /* The click-catchers: four strips around the hole (or the first one over
    the whole screen, for a step that only explains), shown while anchored;
@@ -120,6 +128,39 @@
   margin: 0 0 12px;
   color: var(--text);
   font-size: var(--text-base);
+}
+/* A lesson card's goals: a checklist the server ticks. */
+.coach-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: -4px 0 12px;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+.coach-goals li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.coach-goal-box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid var(--accent);
+  color: var(--on-accent);
+  font-size: 0.9em;
+  line-height: 1;
+}
+.coach-goals li.done {
+  color: var(--muted);
+}
+.coach-goals li.done .coach-goal-box {
+  background: var(--good);
+  border-color: var(--good);
 }
 .coach-actions {
   display: flex;
@@ -270,6 +311,12 @@ button.coach-next:hover:not(:disabled) {
 }
 .help-callout p {
   margin: 0 0 10px;
+}
+/* Its two ways in, wrapping onto two lines in a narrow gutter. */
+.help-callout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .help-callout-close {
   position: absolute;

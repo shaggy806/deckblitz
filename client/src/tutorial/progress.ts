@@ -120,3 +120,10 @@ export function markIntroSeen(): void {
   if (progressStore.get().seenIntro) return
   progressStore.update((p) => ({ ...p, seenIntro: true }))
 }
+
+/** A Learn Commander lesson was played through to its end. Taking one counts
+ * as having seen the intro. */
+export function finishLesson(id: string): void {
+  if (progressStore.get().lessons[id] === 'done') return
+  progressStore.update((p) => ({ ...p, seenIntro: true, lessons: { ...p.lessons, [id]: 'done' } }))
+}

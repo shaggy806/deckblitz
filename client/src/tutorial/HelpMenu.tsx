@@ -2,20 +2,32 @@ import { useEffect, useRef, useState } from 'react'
 import { apply, coachPage, continueFrom, startTour, useCoach } from './coach.ts'
 import { markIntroSeen, setTourAt, useTutorialProgress } from './progress.ts'
 import { SITE_TOUR } from './tours/site.ts'
+import { LEARN_COMMANDER_LESSON, lessonUrl } from './lesson.ts'
 import './coach.css'
 
 /**
  * The corner toolbar's "?" button, beside the Settings cog: a small menu of
  * the tutorials, each with its progress — *Tour the site* (not started, the
- * step it's at, or done and ready to replay) and *Learn Commander* (coming
- * in a later phase, shown disabled for now).
+ * step it's at, or done and ready to replay) and *Learn Commander* (a guided
+ * game, or done and ready to play again).
  *
  * With `intro` (the landing page), a first visit — nothing in the progress
- * store yet — also gets a small callout rising above the button, pointing
- * at the tour. It blocks nothing and covers only the corner; dismissed or
- * followed, it's recorded and never shown again.
+ * store yet — also gets a small callout rising above the button, offering
+ * the tour and the lesson. It blocks nothing and covers only the corner;
+ * dismissed or followed, it's recorded and never shown again.
+ *
+ * *Learn Commander* opens a tutorial room on {@link LEARN_COMMANDER_LESSON}
+ * through `onLearn`: the landing page creates it over its own connection;
+ * anywhere else (the default) a page load to {@link lessonUrl} does, which
+ * leaves a lobby's room the way a game's "Leave the room" does.
  */
-export function HelpMenu({ intro = false }: { readonly intro?: boolean }) {
+export function HelpMenu({
+  intro = false,
+  onLearn = () => window.location.assign(lessonUrl(LEARN_COMMANDER_LESSON)),
+}: {
+  readonly intro?: boolean
+  readonly onLearn?: () => void
+}) {
   const progress = useTutorialProgress()
   const coach = useCoach()
   const [open, setOpen] = useState(false)
@@ -48,6 +60,13 @@ export function HelpMenu({ intro = false }: { readonly intro?: boolean }) {
       : progress.tour.done
         ? 'Done ✓'
         : `${SITE_TOUR.steps.length} stops`
+  const lessonDone = progress.lessons[LEARN_COMMANDER_LESSON] === 'done'
+
+  const learn = () => {
+    setOpen(false)
+    markIntroSeen()
+    onLearn()
+  }
 
   /** From where it stands (on this page, or by the way to its page), or —
    * not running — from the start of this page's part. */
@@ -73,10 +92,15 @@ export function HelpMenu({ intro = false }: { readonly intro?: boolean }) {
             ×
           </button>
           <p className="help-callout-title">New here?</p>
-          <p>Take a quick tour of the site. Learning to play Commander is coming soon too.</p>
-          <button type="button" className="coach-next" onClick={() => takeTour()}>
-            Take the tour
-          </button>
+          <p>Take a quick tour of the site, or learn to play Commander in a short guided game.</p>
+          <div className="help-callout-actions">
+            <button type="button" className="coach-next" onClick={() => takeTour()}>
+              Take the tour
+            </button>
+            <button type="button" onClick={learn}>
+              Learn to play
+            </button>
+          </div>
         </div>
       ) : null}
       <button
@@ -118,9 +142,11 @@ export function HelpMenu({ intro = false }: { readonly intro?: boolean }) {
               Start it over
             </button>
           ) : null}
-          <button type="button" role="menuitem" className="help-item" disabled>
-            <span>Learn Commander</span>
-            <span className="help-item-note">Coming soon</span>
+          <button type="button" role="menuitem" className="help-item" onClick={learn}>
+            <span>{lessonDone ? 'Learn Commander again' : 'Learn Commander'}</span>
+            <span className={`help-item-note${lessonDone ? ' help-item-done' : ''}`}>
+              {lessonDone ? 'Done ✓' : 'A guided game'}
+            </span>
           </button>
         </div>
       ) : null}

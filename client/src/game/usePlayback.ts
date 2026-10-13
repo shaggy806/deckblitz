@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { GameEvent, LegalAction, ObjectId, Phase, PlayerId, PlayerView } from 'engine/client'
 import { phaseOfStep } from 'engine/client'
+import type { TutorialInfo } from 'protocol'
 import { retimeFlights, scheduleEvents } from './animationSchedule.ts'
 import type { ScheduledEvent } from './animationSchedule.ts'
 import type { AnimationBus, AnimationCue } from './animationBus.ts'
@@ -13,6 +14,10 @@ export interface Frame {
   readonly seq: number
   readonly view: PlayerView
   readonly actions: readonly LegalAction[]
+  /** A tutorial room's lesson as of this frame (`state.tutorial`): carried
+   * through playback untouched, so a coach card comes up with the board it
+   * describes rather than ahead of it. */
+  readonly tutorial?: TutorialInfo
 }
 
 export interface Playback {
@@ -39,6 +44,9 @@ export interface Playback {
   /** There's a last update to replay (see `replay`): something happened in
    * it, and the board before it is known. */
   readonly replayable: boolean
+  /** The lesson as the frame on screen has it (`Frame.tutorial`), or `null`
+   * outside a tutorial room. Unchanged by a replay. */
+  readonly tutorial: TutorialInfo | null
 }
 
 export interface PlaybackControls {
@@ -130,6 +138,7 @@ export function usePlayback(
     busy: false,
     answered: false,
     replayable: false,
+    tutorial: frame?.tutorial ?? null,
   })
   /** The last frame that had anything in it, with what replaying it needs:
    * the board it started from, its new events and the phase it began in. */
@@ -325,6 +334,7 @@ export function usePlayback(
         busy,
         answered: false,
         replayable: replayable || cur.replayable,
+        tutorial: next.tutorial ?? null,
       }))
       if (afterMs <= 0) finish()
     }
@@ -353,6 +363,7 @@ export function usePlayback(
       busy: true,
       answered: true,
       replayable: cur.replayable,
+      tutorial: cur.tutorial,
     }))
     // …mounted before its first half measures it, then the update again.
     timerRef.current = window.setTimeout(() => {
@@ -415,6 +426,7 @@ export function usePlayback(
         busy: false,
         answered: false,
         replayable: false,
+        tutorial: null,
       })
       return
     }

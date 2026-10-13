@@ -4,6 +4,7 @@ import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
 import { cssUrl, resolveArtUrl } from '../ui/art.ts'
 import { CornerToolbar } from '../ui/CornerToolbar.tsx'
+import { LEARN_COMMANDER_LESSON } from '../tutorial/lesson.ts'
 import { BlitzPanel } from './BlitzPanel.tsx'
 import './landing.css'
 
@@ -278,7 +279,7 @@ export function LandingScreen({
       <BlitzPanel game={game} />
 
       {/* The tutorials' first-visit callout shows on this page only. */}
-      <CornerToolbar intro />
+      <CornerToolbar intro onLearn={() => game.createTutorial(LEARN_COMMANDER_LESSON)} />
     </div>
   )
 }

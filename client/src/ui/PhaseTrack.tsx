@@ -56,6 +56,8 @@ export function PhaseTrack({ view, seat }: { readonly view: PlayerView; readonly
               type="button"
               className="phase-pip"
               data-abbr={abbr}
+              // What a tutorial's `step:<Step>` anchor finds (tutorial/anchors.ts).
+              data-step={step}
               disabled={!stoppable}
               aria-pressed={stoppable ? stopped : undefined}
               title={

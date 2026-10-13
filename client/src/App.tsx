@@ -116,6 +116,9 @@ import { LandingScreen } from './lobby/LandingScreen.tsx'
 import { CornerToolbar } from './ui/CornerToolbar.tsx'
 import { CoachLayer } from './tutorial/CoachLayer.tsx'
 import type { PageId } from './tutorial/types.ts'
+import { lessonAnchor } from './tutorial/anchors.ts'
+import { lessonUrl, useLessonCoach } from './tutorial/lesson.ts'
+import type { LessonControls } from './tutorial/lesson.ts'
 import { InviteLink } from './lobby/InviteLink.tsx'
 import './App.css'
 
@@ -1033,6 +1036,29 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
     () => tableActions(shown.actions, latestActions, shown.busy, botPlaying),
     [shown.actions, latestActions, shown.busy, botPlaying],
   )
+  // A tutorial room's lesson on the coach overlay: the card the frame on
+  // screen carries (never a newer frame's, which would describe a board
+  // that hasn't played out yet), its anchor found on that same board.
+  const shownViewRef = useRef(view)
+  useLayoutEffect(() => {
+    shownViewRef.current = view
+  }, [view])
+  const anchorFor = useCallback(
+    (anchor: string | undefined) => lessonAnchor(anchor, () => shownViewRef.current, seat),
+    [seat],
+  )
+  const { tutorialNext, tutorialRetry } = game
+  const lessonControls = useMemo<LessonControls>(
+    () => ({
+      next: tutorialNext,
+      retry: tutorialRetry,
+      // Out of the room the way the Game menu's "Leave the room" goes.
+      exit: () => window.location.assign('/'),
+      again: (lesson) => window.location.assign(lessonUrl(lesson)),
+    }),
+    [tutorialNext, tutorialRetry],
+  )
+  useLessonCoach(spectating ? null : shown.tutorial, anchorFor, lessonControls)
   if (view === null || seat === null || opponents.length === 0) {
     return <CenteredScreen title="Loading…" />
   }
