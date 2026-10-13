@@ -30,7 +30,11 @@ export interface LoadReport {
 }
 
 const DEFAULT_WINDOW_MS = 10_000;
-const ms = (ns: number): number => Math.round((ns / 1e6) * 10) / 10;
+/** How often the delay histogram samples. Each sample is the whole time
+ * between two ticks of a timer this often, so the resolution itself is taken
+ * off to leave the delay (Windows' coarse timers still show a few ms idle). */
+const RESOLUTION_MS = 10;
+const ms = (ns: number): number => Math.max(0, Math.round((ns / 1e6 - RESOLUTION_MS) * 10) / 10);
 
 export class LoadMonitor {
   private readonly delay: IntervalHistogram;
@@ -43,7 +47,7 @@ export class LoadMonitor {
   /** `decisions`: a histogram of bot decision times in microseconds
    * (`BOT_DECISIONS` in `room.ts`), on a thread that runs rooms. */
   constructor(options: { readonly windowMs?: number; readonly decisions?: RecordableHistogram } = {}) {
-    this.delay = monitorEventLoopDelay({ resolution: 10 });
+    this.delay = monitorEventLoopDelay({ resolution: RESOLUTION_MS });
     this.delay.enable();
     this.decisions = options.decisions ?? null;
     this.elu = performance.eventLoopUtilization();
