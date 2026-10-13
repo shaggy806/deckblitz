@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-408 already implemented / 92 missing
+409 already implemented / 91 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -71,7 +71,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   65  Tidus, Yuna's Guardian                         21194 decks  {G}{W}{U}        Legendary Creature — Human Warrior
 [x]   66  Atla Palani, Nest Tender                       21123 decks  {1}{R}{G}{W}     Legendary Creature — Human Shaman
 [x]   67  Korvold, Fae-Cursed King                       21034 decks  {2}{B}{R}{G}     Legendary Creature — Dragon Noble
-[ ]   68  Shorikai, Genesis Engine                       20987 decks  {2}{W}{U}        Legendary Artifact — Vehicle
+[x]   68  Shorikai, Genesis Engine                       20987 decks  {2}{W}{U}        Legendary Artifact — Vehicle
 [x]   69  Zurgo Stormrender                              20864 decks  {R}{W}{B}        Legendary Creature — Orc Warrior
 [x]   70  Go-Shintai of Life's Origin                    20615 decks  {3}{G}           Legendary Enchantment Creature — Shrine
 [ ]   71  Urza, Lord High Artificer                      20594 decks  {2}{U}{U}        Legendary Creature — Human Artificer

@@ -72,6 +72,7 @@ import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
+import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
@@ -114,6 +115,7 @@ import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
+import _poolFoulRoads from "../pool/foul-roads.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
@@ -132,6 +134,7 @@ import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
+import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
 import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
@@ -434,6 +437,7 @@ const shard: CardShard = {
     _poolDeadlyBrew,
     _poolDedicatedCommons,
     _poolDemonicTutor,
+    _poolDerelictAttic,
     _poolDestinySpinner,
     _poolDetainedByLegionnaires,
     _poolDimirCluestone,
@@ -476,6 +480,7 @@ const shard: CardShard = {
     _poolFlayerOfTheHatebound,
     _poolForcedFruition,
     _poolForumsFavor,
+    _poolFoulRoads,
     _poolFrolickingFamiliar,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
@@ -494,6 +499,7 @@ const shard: CardShard = {
     _poolGoobbueGardener,
     _poolGorillaChieftain,
     _poolGreaterAuramancy,
+    _poolGremlinTamer,
     _poolGwaihirGreatestOfTheEagles,
     _poolHERBIEScoutUnit,
     _poolHaazdaOfficer,

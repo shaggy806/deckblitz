@@ -78,6 +78,7 @@ import _poolDefiledCryptCadaverLab from "../pool/defiled-crypt-cadaver-lab.js";
 import _poolDemandingDragon from "../pool/demanding-dragon.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
+import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
@@ -198,6 +199,7 @@ import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
+import _poolMurkySewer from "../pool/murky-sewer.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
@@ -444,6 +446,7 @@ const shard: CardShard = {
     _poolDemandingDragon,
     _poolDevilishValet,
     _poolDictateOfKruphix,
+    _poolDissectionTools,
     _poolDoggedPursuit,
     _poolDonAndresTheRenegade,
     _poolDovinsVeto,
@@ -564,6 +567,7 @@ const shard: CardShard = {
     _poolMorbidOpportunist,
     _poolMorgueThrull,
     _poolMuYanlingWindRider,
+    _poolMurkySewer,
     _poolMutagenicGrowth,
     _poolMycosynthGolem,
     _poolMysticArchaeologist,

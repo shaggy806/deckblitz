@@ -44,6 +44,7 @@ import _poolBloodthornTaunter from "../pool/bloodthorn-taunter.js";
 import _poolBloodthroneVampire from "../pool/bloodthrone-vampire.js";
 import _poolBogRaiders from "../pool/bog-raiders.js";
 import _poolBoonOfTheSpiritRealm from "../pool/boon-of-the-spirit-realm.js";
+import _poolBornToDrive from "../pool/born-to-drive.js";
 import _poolBottomlessPool from "../pool/bottomless-pool.js";
 import _poolBoulderloftPathway from "../pool/boulderloft-pathway.js";
 import _poolBoundingWolf from "../pool/bounding-wolf.js";
@@ -79,6 +80,7 @@ import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
 import _poolDesolateMire from "../pool/desolate-mire.js";
+import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
 import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
@@ -165,6 +167,7 @@ import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
+import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronHills from "../pool/iron-hills.js";
@@ -402,6 +405,7 @@ const shard: CardShard = {
     _poolBloodthroneVampire,
     _poolBogRaiders,
     _poolBoonOfTheSpiritRealm,
+    _poolBornToDrive,
     _poolBottomlessPool,
     _poolBoulderloftPathway,
     _poolBoundingWolf,
@@ -437,6 +441,7 @@ const shard: CardShard = {
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
     _poolDesolateMire,
+    _poolDewdropCure,
     _poolDiabolicMachine,
     _poolDiffusionSliver,
     _poolDimirHouseGuard,
@@ -523,6 +528,7 @@ const shard: CardShard = {
     _poolImmersturmRaider,
     _poolInfestationExpert,
     _poolInheritedEnvelope,
+    _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIronBully,
     _poolIronHills,

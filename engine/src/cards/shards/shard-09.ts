@@ -305,6 +305,7 @@ import _poolStudiousFirstYear from "../pool/studious-first-year.js";
 import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
+import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
@@ -683,6 +684,7 @@ const shard: CardShard = {
     _poolSubterfuge,
     _poolSummonIxion,
     _poolSurvivorsEncampment,
+    _poolSutinaSpeakerOfTheTajuru,
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSythisHarvestsHand,

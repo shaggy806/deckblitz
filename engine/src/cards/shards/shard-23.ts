@@ -188,6 +188,7 @@ import _poolMarkOfFury from "../pool/mark-of-fury.js";
 import _poolMassiveRaid from "../pool/massive-raid.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
+import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
@@ -233,6 +234,7 @@ import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
+import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
 import _poolRedXiiiProudWarrior from "../pool/red-xiii-proud-warrior.js";
 import _poolRegisaurAlpha from "../pool/regisaur-alpha.js";
 import _poolRelicBarrier from "../pool/relic-barrier.js";
@@ -296,6 +298,7 @@ import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
+import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
@@ -531,6 +534,7 @@ const shard: CardShard = {
     _poolMassiveRaid,
     _poolMastermindPlum,
     _poolMastersCall,
+    _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
     _poolMesaUnicorn,
     _poolMetathranSoldier,
@@ -576,6 +580,7 @@ const shard: CardShard = {
     _poolRazakethTheFoulblooded,
     _poolReachThroughMists,
     _poolRecklessAirStrike,
+    _poolReckonerBankbuster,
     _poolRedXiiiProudWarrior,
     _poolRegisaurAlpha,
     _poolRelicBarrier,
@@ -639,6 +644,7 @@ const shard: CardShard = {
     _poolTigraFelineFury,
     _poolToriDavenantFuryRider,
     _poolTrainedCaracal,
+    _poolTrappedInTheScreen,
     _poolTraumaticCritique,
     _poolTrokinHighGuard,
     _poolTwilightDrover,

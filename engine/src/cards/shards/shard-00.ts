@@ -116,6 +116,7 @@ import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
+import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
@@ -225,6 +226,7 @@ import _poolOraxid from "../pool/oraxid.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
+import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
 import _poolPakoArcaneRetriever from "../pool/pako-arcane-retriever.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
@@ -506,6 +508,7 @@ const shard: CardShard = {
     _poolFieryInscription,
     _poolFillWithFright,
     _poolFireshrieker,
+    _poolFloodpitsDrowner,
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
     _poolForest,
@@ -615,6 +618,7 @@ const shard: CardShard = {
     _poolOriginOfMetalbending,
     _poolOutrageousRobbery,
     _poolOwlFamiliar,
+    _poolOzoxTheClatteringKing,
     _poolPakoArcaneRetriever,
     _poolParadiseDruid,
     _poolParadoxGardens,

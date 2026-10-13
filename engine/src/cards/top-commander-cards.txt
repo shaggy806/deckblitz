@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3535 already implemented / 1465 missing (marks refreshed 2026-10-12)
+3538 already implemented / 1462 missing (marks refreshed 2026-10-13)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2294,7 +2294,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2301  Brago, King Eternal                      {2}{W}{U}        Legendary Creature — Spirit Noble
 [x]  2302  Sheltering Landscape                     {0}              Land
 [x]  2303  Lys Alana Huntmaster                     {2}{G}{G}        Creature — Elf Warrior
-[ ]  2304  Shorikai, Genesis Engine                 {2}{W}{U}        Legendary Artifact — Vehicle
+[x]  2304  Shorikai, Genesis Engine                 {2}{W}{U}        Legendary Artifact — Vehicle
 [x]  2305  Drossforge Bridge                        {0}              Artifact Land
 [x]  2306  Summon: Primal Odin                      {4}{B}{B}        Enchantment Creature — Saga Knight
 [x]  2307  Trophy Mage                              {2}{U}           Creature — Human Wizard
@@ -3303,7 +3303,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3310  Ogre Battledriver                        {2}{R}{R}        Creature — Ogre Warrior
 [x]  3311  Seal of Cleansing                        {1}{W}           Enchantment
 [x]  3312  Rampant Rejuvenator                      {3}{G}           Creature — Plant Hydra
-[ ]  3313  Defend the Rider                         {G}              Instant
+[x]  3313  Defend the Rider                         {G}              Instant
 [x]  3314  Kinjalli's Sunwing                       {2}{W}           Creature — Dinosaur
 [x]  3315  Vampire of the Dire Moon                 {B}              Creature — Vampire
 [x]  3316  Mana Flare                               {2}{R}           Enchantment
@@ -3750,7 +3750,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3757  Infiltration Lens                        {1}              Artifact — Equipment
 [x]  3758  Nekusar, the Mindrazer                   {2}{U}{B}{R}     Legendary Creature — Zombie Wizard
 [ ]  3759  Victory Chimes                           {3}              Artifact
-[ ]  3760  Reckoner Bankbuster                      {2}              Artifact — Vehicle
+[x]  3760  Reckoner Bankbuster                      {2}              Artifact — Vehicle
 [x]  3761  Argoth, Sanctum of Nature                {0}              Land
 [ ]  3762  Devastating Onslaught                    {X}{X}{R}        Sorcery
 [x]  3763  Lightning Helix                          {R}{W}           Instant

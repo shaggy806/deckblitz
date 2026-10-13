@@ -176,6 +176,7 @@ import _poolMarisisTwinclaws from "../pool/marisis-twinclaws.js";
 import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
 import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
+import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
@@ -337,6 +338,7 @@ import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
 import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
+import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolMarrowGnawer,
     _poolMassiveMight,
     _poolMasterTransmuter,
+    _poolMeatLocker,
     _poolMetalworkColossus,
     _poolMistCloakedHerald,
     _poolMoorlandInquisitor,
@@ -690,6 +693,7 @@ const shard: CardShard = {
     _poolWarpingWail,
     _poolWarriorsOfWakanda,
     _poolWeldingJar,
+    _poolWildRoads,
     _poolWingsOfHope,
     _poolWitchEnchanter,
     _poolWolfCoveVillager,

@@ -225,6 +225,7 @@ import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js
 import _poolPaleBears from "../pool/pale-bears.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
+import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
@@ -359,6 +360,7 @@ import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
 import _tokensKorAllyToken from "../tokens/kor-ally-token.js";
+import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles.js";
 import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js";
 
 const shard: CardShard = {
@@ -585,6 +587,7 @@ const shard: CardShard = {
     _poolPaleBears,
     _poolPavelMaliki,
     _poolPearlDragon,
+    _poolPeculiarLighthouse,
     _poolPewterGolem,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
@@ -721,6 +724,7 @@ const shard: CardShard = {
     _tokensGolemToken,
     _tokensKnightTokenChivalricAlliance,
     _tokensKorAllyToken,
+    _tokensPilotTokenCrewsVehicles,
     _tokensSalamanderWarriorToken,
   ],
 };

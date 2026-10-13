@@ -4545,3 +4545,16 @@ stack count once per token)
   saddled; attacking, it gets +0/+3. The chip is gone next turn. Saddle isn't offered on Bob's turn
   (sorcery speed).
 - **Known limits:** None known.
+
+### Hotshot Mechanic, Giant Ox, Reckoner Bankbuster
+
+*A careful rules call* — crewing as though power were 2 greater, and with toughness (rule 702.122a; the rulings)
+
+- **Setup:** Your precombat main. Your battlefield: Reckoner Bankbuster (Crew 3), Hotshot Mechanic (2/1), Giant
+  Ox (0/6), Grizzly Bears and three Islands. Bob: three lands, no creatures.
+- **Do:** Choose Reckoner Bankbuster's "Crew 3" and look at what each creature counts for, then crew it with
+  Hotshot Mechanic alone. Next turn crew it with Giant Ox alone.
+- **Check:** The picker counts Hotshot Mechanic as 4, Giant Ox as 6 and Grizzly Bears as 2, so the Mechanic
+  or the Ox alone is enough and the Bears isn't. The Mechanic's own power stays 2 everywhere else (its tile,
+  combat).
+- **Known limits:** Only a creature's own "crews as though" counts; nothing grants it to others.

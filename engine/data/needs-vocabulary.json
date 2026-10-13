@@ -5798,6 +5798,20 @@
   },
   "effect:flicker-source-and-chosen": {
    "example": "Fortune, Loyal Steed: exile Fortune and up to one creature that saddled it at once (chosen as it resolves), then return both."
+  },
+  "effect:manifested-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Valgavoth's Onslaught: \"Manifest dread X times, then put X +1/+1 counters on each of those creatures\" — nothing refers to the creature(s) a manifest dread just put onto the battlefield."
+  },
+  "effect:count-distinct-mana-values": {
+   "family": "effect:amount-new-variants",
+   "example": "Lunar Insight: \"Draw a card for each different mana value among nonland permanents you control\" — no EffectAmount counts distinct mana values."
+  },
+  "cost:cost-reduction-cards-in-exile": {
+   "example": "Huskburster Swarm: {1} less for each creature card you own in exile and in your graveyard — a self cost reduction counts the graveyard only, and can't sum two zones."
+  },
+  "cost:cycling-x": {
+   "example": "Valor's Flagship: Cycling {X}{2}{W}, and \"when you cycle this card, create X Pilot tokens\" — cycling's cost takes no X, and a cycle trigger can't read one."
   }
  }
 }

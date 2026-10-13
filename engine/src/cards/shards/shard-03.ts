@@ -125,6 +125,7 @@ import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
 import _poolHarvestSeason from "../pool/harvest-season.js";
 import _poolHasteMagic from "../pool/haste-magic.js";
+import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
@@ -278,6 +279,7 @@ import _poolStoneKavu from "../pool/stone-kavu.js";
 import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
 import _poolStrangle from "../pool/strangle.js";
+import _poolStrangledCemetery from "../pool/strangled-cemetery.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
     _poolHarrierNaga,
     _poolHarvestSeason,
     _poolHasteMagic,
+    _poolHazelsNocturne,
     _poolHealersHawk,
     _poolHengeOfRamos,
     _poolHookbladeVeteran,
@@ -628,6 +631,7 @@ const shard: CardShard = {
     _poolStoneSeederHierophant,
     _poolStrandwalker,
     _poolStrangle,
+    _poolStrangledCemetery,
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,

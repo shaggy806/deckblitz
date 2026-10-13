@@ -99,6 +99,7 @@ import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
+import _poolDynamiteDiver from "../pool/dynamite-diver.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
@@ -184,6 +185,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
+import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
@@ -268,6 +270,7 @@ import _poolSelflessSavior from "../pool/selfless-savior.js";
 import _poolSerumSnare from "../pool/serum-snare.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolShambleshark from "../pool/shambleshark.js";
+import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
 import _poolSiegecraft from "../pool/siegecraft.js";
 import _poolSigardaFontOfBlessings from "../pool/sigarda-font-of-blessings.js";
@@ -471,6 +474,7 @@ const shard: CardShard = {
     _poolDrakusethMawOfFlames,
     _poolDualSunTechnique,
     _poolDutifulServants,
+    _poolDynamiteDiver,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
     _poolEntrustTheSpark,
@@ -556,6 +560,7 @@ const shard: CardShard = {
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
     _poolMirkoObsessiveTheorist,
+    _poolMistbreathElder,
     _poolMisterFantastic,
     _poolMoggSalvage,
     _poolMoggSentry,
@@ -640,6 +645,7 @@ const shard: CardShard = {
     _poolSerumSnare,
     _poolSetessanChampion,
     _poolShambleshark,
+    _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
     _poolSiegecraft,
     _poolSigardaFontOfBlessings,

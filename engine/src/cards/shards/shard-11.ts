@@ -314,6 +314,7 @@ import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
+import _poolSplitskinDoll from "../pool/splitskin-doll.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
 import _poolSporemound from "../pool/sporemound.js";
 import _poolSpringsageRitual from "../pool/springsage-ritual.js";
@@ -724,6 +725,7 @@ const shard: CardShard = {
     _poolSphinxOfFalseConclusions,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
+    _poolSplitskinDoll,
     _poolSporecrownThallid,
     _poolSporemound,
     _poolSpringsageRitual,

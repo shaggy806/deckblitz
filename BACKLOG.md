@@ -70,15 +70,16 @@ section keeps only what to do next.
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
   Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
   Commander set (ECL, ECC), Avatar: The Last Airbender (TLA), Marvel's Spider-Man (SPM), Edge of
-  Eternities (EOE, EOC), Final Fantasy (FIN, FIC), Tarkir: Dragonstorm (TDM) and Aetherdrift (DFT)
-  are done (batches 50–67). **Next: Foundations (FDN, 5 left), Foundations Jumpstart (J25, 13),
-  Duskmourn (DSK, 38) and Bloomburrow (BLB, 10)** together, then Assassin's Creed (ACR, 10) and
-  Outlaws of Thunder Junction (OTJ, 44) — **whole sets per batch**, several when they're small (the
-  user's call, 2026-10-12: 4-5 agents with more cards each; features build in parallel worktrees).
-  Leading blocker from batch 67: "saddles Mounts and crews Vehicles as though its power were 2
-  greater" (`static:crews-as-though-power`, 8 Aetherdrift cards). Mayhem (56), rebound (57),
-  teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63), behold (64),
-  web-slinging, waterbend and airbend (65), void and revolt (66), speed and saddle (67) are built;
+  Eternities (EOE, EOC), Final Fantasy (FIN, FIC), Tarkir: Dragonstorm (TDM), Aetherdrift (DFT),
+  Foundations (FDN), Foundations Jumpstart (J25), Duskmourn (DSK) and Bloomburrow (BLB) are done
+  (batches 50–68). **Next: Assassin's Creed (ACR, 10 left) and Outlaws of Thunder Junction (OTJ,
+  44)** together — **whole sets per batch**, several when they're small (the user's call,
+  2026-10-12: 4-5 agents with more cards each; features build in parallel worktrees). Batch 68's
+  blockers are one or two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight
+  Room) is the only one with two. Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger
+  (59), opus and sneak (61), blight (63), behold (64), web-slinging, waterbend and airbend (65),
+  void and revolt (66), speed and saddle (67), crewing as though power were greater and with
+  toughness (68) are built;
   Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
@@ -218,7 +219,9 @@ item lands.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
 - **A Settings button on the landing page and in the lobby** (the user, 2026-10-11): sound and music settings, and the priority preferences, persisting from game to game.
 - **The library's Set filter doesn't show that set's printings** (the user, 2026-10-12): filtering by a set should show each card's printing from that set, not its default art (`client/src/library/LibraryPage.tsx`).
+- **Duplicate lands don't combine into a stack until the start of your turn** (the user, 2026-10-12): a land that joins identical ones stays its own tile until then; the folding is `client/src/game/board.ts` (`tileKey`), so something that differs only that turn likely keeps it apart.
 - **A tutorial on how to use the site** (the user, 2026-10-11), and to explore: a seeded game that teaches how to play Commander.
+- **Combat damage sometimes animates before the attack arrows** (the user, 2026-10-12): double-check animation staging — the damage plays before the arrow showing who's attacking whom (the ordering is `client/src/game/animationSchedule.ts`).
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

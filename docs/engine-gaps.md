@@ -124,7 +124,7 @@ per gap under the same bold title; when a gap closes, delete it in both.
   flagged these while blocking a new card for the same reason; none was re-run, so check each:
   - `each-player-may` asks one player at a time where the ruling has every player choose first,
     then all act at once: Will of the Jeskai's wheel mode, Kwain, Itinerant Meddler. Perforating
-    Artist (batch 36) is blocked on it.
+    Artist (batch 36) and Osseous Sticktwister (batch 68) are blocked on it.
   - `trigger-controller` for "that player" on a spell-cast trigger reads the spell's controller as
     the trigger resolves, so a stolen-library spell countered first points at its owner: Forced
     Fruition, Ruric Thar, Spellshock, Magebane Lizard.

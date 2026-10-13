@@ -154,6 +154,7 @@ import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
+import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
@@ -190,6 +191,7 @@ import _poolMyrEnforcer from "../pool/myr-enforcer.js";
 import _poolMyrRetriever from "../pool/myr-retriever.js";
 import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
+import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
@@ -490,6 +492,7 @@ const shard: CardShard = {
     _poolKreeCommandos,
     _poolKrumarBondKin,
     _poolKutzilsFlanker,
+    _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLensFlare,
     _poolLibraryLarcenist,
@@ -526,6 +529,7 @@ const shard: CardShard = {
     _poolMyrRetriever,
     _poolNabanDeanOfIteration,
     _poolNagaEternal,
+    _poolNashiSearcherInTheDark,
     _poolNebulaDragon,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,

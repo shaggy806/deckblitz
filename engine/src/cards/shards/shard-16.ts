@@ -259,6 +259,7 @@ import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
+import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
@@ -400,6 +401,7 @@ import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
+import _tokensPilotToken from "../tokens/pilot-token.js";
 import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
@@ -666,6 +668,7 @@ const shard: CardShard = {
     _poolRhysticStudy,
     _poolRipTheSeams,
     _poolRiverglidePathway,
+    _poolRoadsideAssistance,
     _poolRonomUnicorn,
     _poolRootboundCrag,
     _poolRuinRat,
@@ -809,6 +812,7 @@ const shard: CardShard = {
     _tokensLifelinkVampireToken,
     _tokensMunitionsToken,
     _tokensPhyrexianWurmLifelink,
+    _tokensPilotToken,
     _tokensRobotHeroToken,
     _tokensShapeshifterToken,
     _tokensSoldierArtifactToken,

@@ -138,6 +138,7 @@ import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
+import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
@@ -251,6 +252,7 @@ import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
+import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
 import _poolResonatingLute from "../pool/resonating-lute.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
@@ -519,6 +521,7 @@ const shard: CardShard = {
     _poolGatewaySneak,
     _poolGenjiGlove,
     _poolGhostlyChangeling,
+    _poolGiantOx,
     _poolGild,
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolRavenousIntruder,
     _poolRecklessPangolin,
     _poolRememberTheFallen,
+    _poolRepelCalamity,
     _poolReshape,
     _poolResonatingLute,
     _poolRhonassMonument,

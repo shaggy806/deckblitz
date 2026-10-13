@@ -42,6 +42,7 @@ import _poolBoggartBrute from "../pool/boggart-brute.js";
 import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
 import _poolBoneSabres from "../pool/bone-sabres.js";
+import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
 import _poolBredForTheHunt from "../pool/bred-for-the-hunt.js";
@@ -276,6 +277,7 @@ import _poolSecretIdentity from "../pool/secret-identity.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
+import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
 import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
 import _poolShriekRaptor from "../pool/shriek-raptor.js";
@@ -315,6 +317,7 @@ import _poolSwiftSpinner from "../pool/swift-spinner.js";
 import _poolSylvanBrushstrider from "../pool/sylvan-brushstrider.js";
 import _poolSylvanRanger from "../pool/sylvan-ranger.js";
 import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
+import _poolSylvanScavenging from "../pool/sylvan-scavenging.js";
 import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
@@ -418,6 +421,7 @@ const shard: CardShard = {
     _poolBoilingRockPrison,
     _poolBoneDevourer,
     _poolBoneSabres,
+    _poolBrauliosOfPheresBand,
     _poolBrawn,
     _poolBreathstealer,
     _poolBredForTheHunt,
@@ -652,6 +656,7 @@ const shard: CardShard = {
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSharedRoots,
+    _poolShorikaiGenesisEngine,
     _poolShortBow,
     _poolShredderUnrelenting,
     _poolShriekRaptor,
@@ -691,6 +696,7 @@ const shard: CardShard = {
     _poolSylvanBrushstrider,
     _poolSylvanRanger,
     _poolSylvanReclamation,
+    _poolSylvanScavenging,
     _poolSynchronizedCharge,
     _poolSyrGwynHeroOfAshvale,
     _poolTamiyosJournal,

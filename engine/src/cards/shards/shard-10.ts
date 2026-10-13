@@ -295,6 +295,7 @@ import _poolStormsurgeKraken from "../pool/stormsurge-kraken.js";
 import _poolStriderHarness from "../pool/strider-harness.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
 import _poolSummonTitan from "../pool/summon-titan.js";
+import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
 import _poolSustenance from "../pool/sustenance.js";
 import _poolSwarmIntelligence from "../pool/swarm-intelligence.js";
@@ -670,6 +671,7 @@ const shard: CardShard = {
     _poolStriderHarness,
     _poolSuddenBreakthrough,
     _poolSummonTitan,
+    _poolSurgicalSuiteHospitalRoom,
     _poolSurveillingSprite,
     _poolSustenance,
     _poolSwarmIntelligence,

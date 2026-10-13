@@ -34,6 +34,7 @@ import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
 import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
+import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
 import _poolBrokersHideout from "../pool/brokers-hideout.js";
@@ -153,6 +154,7 @@ import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
+import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
 import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
 import _poolLifegift from "../pool/lifegift.js";
@@ -193,6 +195,7 @@ import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
+import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
@@ -255,6 +258,7 @@ import _poolSensoryDeprivation from "../pool/sensory-deprivation.js";
 import _poolSerrasGuardian from "../pool/serras-guardian.js";
 import _poolShadowfeed from "../pool/shadowfeed.js";
 import _poolShadyTraveler from "../pool/shady-traveler.js";
+import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
@@ -324,6 +328,7 @@ import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
 import _poolVengefulDead from "../pool/vengeful-dead.js";
+import _poolVengefulPossession from "../pool/vengeful-possession.js";
 import _poolVeteranCavalier from "../pool/veteran-cavalier.js";
 import _poolVirusBeetle from "../pool/virus-beetle.js";
 import _poolVisaraTheDreadful from "../pool/visara-the-dreadful.js";
@@ -388,6 +393,7 @@ const shard: CardShard = {
     _poolBosssChauffeur,
     _poolBoundInSilence,
     _poolBrallinSkysharkRider,
+    _poolBreakDownTheDoor,
     _poolBreathWeapon,
     _poolBrokenBond,
     _poolBrokersHideout,
@@ -507,6 +513,7 @@ const shard: CardShard = {
     _poolLavaFlow,
     _poolLavaSpike,
     _poolLeonardosTechnique,
+    _poolLetsPlayAGame,
     _poolLeylineTyrant,
     _poolLieutenantKirtar,
     _poolLifegift,
@@ -547,6 +554,7 @@ const shard: CardShard = {
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
     _poolNarnamRenegade,
+    _poolNeglectedManor,
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
@@ -609,6 +617,7 @@ const shard: CardShard = {
     _poolSerrasGuardian,
     _poolShadowfeed,
     _poolShadyTraveler,
+    _poolShatteredYard,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
     _poolSignpostScarecrow,
@@ -678,6 +687,7 @@ const shard: CardShard = {
     _poolVanquishTheHorde,
     _poolVedalkenEntrancer,
     _poolVengefulDead,
+    _poolVengefulPossession,
     _poolVeteranCavalier,
     _poolVirusBeetle,
     _poolVisaraTheDreadful,

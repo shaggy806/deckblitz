@@ -24,6 +24,7 @@ import _poolAzimaetDrake from "../pool/azimaet-drake.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
+import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
@@ -62,6 +63,7 @@ import _poolCrowdFavorites from "../pool/crowd-favorites.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
 import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
+import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
@@ -126,6 +128,7 @@ import _poolGiantOctopus from "../pool/giant-octopus.js";
 import _poolGideonsReproach from "../pool/gideons-reproach.js";
 import _poolGigantosaurus from "../pool/gigantosaurus.js";
 import _poolGlacierGodmaw from "../pool/glacier-godmaw.js";
+import _poolGlassworks from "../pool/glassworks.js";
 import _poolGlint from "../pool/glint.js";
 import _poolGloomwidow from "../pool/gloomwidow.js";
 import _poolGnottvoldRecluse from "../pool/gnottvold-recluse.js";
@@ -158,6 +161,7 @@ import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
 import _poolIronMyr from "../pool/iron-myr.js";
+import _poolIrreverentGremlin from "../pool/irreverent-gremlin.js";
 import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
@@ -225,6 +229,7 @@ import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
+import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
@@ -292,6 +297,7 @@ import _poolSulfurousSprings from "../pool/sulfurous-springs.js";
 import _poolSultaiBanner from "../pool/sultai-banner.js";
 import _poolSunhomeGuildmage from "../pool/sunhome-guildmage.js";
 import _poolSupplyDrop from "../pool/supply-drop.js";
+import _poolSurgicalSuite from "../pool/surgical-suite.js";
 import _poolSwabGoblin from "../pool/swab-goblin.js";
 import _poolSwamp from "../pool/swamp.js";
 import _poolSymbioticElf from "../pool/symbiotic-elf.js";
@@ -379,6 +385,7 @@ const shard: CardShard = {
     _poolBayou,
     _poolBenthicGiant,
     _poolBladeOfTheSixthPride,
+    _poolBleedingWoods,
     _poolBlightstepPathway,
     _poolBloodMoney,
     _poolBloodtallowCandle,
@@ -417,6 +424,7 @@ const shard: CardShard = {
     _poolCrystalQuarry,
     _poolCutthroatContender,
     _poolCybermenSquadron,
+    _poolCynetteJellyDrover,
     _poolDeathBomb,
     _poolDefiantBloodlord,
     _poolDemonicCounsel,
@@ -481,6 +489,7 @@ const shard: CardShard = {
     _poolGideonsReproach,
     _poolGigantosaurus,
     _poolGlacierGodmaw,
+    _poolGlassworks,
     _poolGlint,
     _poolGloomwidow,
     _poolGnottvoldRecluse,
@@ -513,6 +522,7 @@ const shard: CardShard = {
     _poolIrenicussVileDuplication,
     _poolIronHillsBlacksmith,
     _poolIronMyr,
+    _poolIrreverentGremlin,
     _poolIzzetCluestone,
     _poolJhovallQueen,
     _poolJillShivasDominant,
@@ -580,6 +590,7 @@ const shard: CardShard = {
     _poolOrdinaryBear,
     _poolPantherRobot,
     _poolPashalikMons,
+    _poolPearlOfWisdom,
     _poolPiercingExhale,
     _poolPiranhaMarsh,
     _poolPitchburnDevils,
@@ -647,6 +658,7 @@ const shard: CardShard = {
     _poolSultaiBanner,
     _poolSunhomeGuildmage,
     _poolSupplyDrop,
+    _poolSurgicalSuite,
     _poolSwabGoblin,
     _poolSwamp,
     _poolSymbioticElf,

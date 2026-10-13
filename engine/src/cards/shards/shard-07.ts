@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbandonedCampground from "../pool/abandoned-campground.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdvanceScout from "../pool/advance-scout.js";
 import _poolAgentBishopManInBlack from "../pool/agent-bishop-man-in-black.js";
@@ -44,6 +45,7 @@ import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
+import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
@@ -96,6 +98,7 @@ import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
+import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
@@ -190,6 +193,7 @@ import _poolMaskOfGriselbrand from "../pool/mask-of-griselbrand.js";
 import _poolMawOfTheObzedat from "../pool/maw-of-the-obzedat.js";
 import _poolMechanizedNinjaCavalry from "../pool/mechanized-ninja-cavalry.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
+import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
@@ -397,6 +401,7 @@ import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbandonedCampground,
     _poolActionNewsCrew,
     _poolAdvanceScout,
     _poolAgentBishopManInBlack,
@@ -438,6 +443,7 @@ const shard: CardShard = {
     _poolChishiroTheShatteredBlade,
     _poolChitinGravestalker,
     _poolCircuitMender,
+    _poolClockworkPercussionist,
     _poolCollectorOuphe,
     _poolColossapede,
     _poolConstrictingTendrils,
@@ -490,6 +496,7 @@ const shard: CardShard = {
     _poolFetidHorror,
     _poolFieryIntervention,
     _poolFlamebornViron,
+    _poolFleshBurrower,
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
@@ -584,6 +591,7 @@ const shard: CardShard = {
     _poolMawOfTheObzedat,
     _poolMechanizedNinjaCavalry,
     _poolMerchantOfSecrets,
+    _poolMidnightSnack,
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMoltenFrame,

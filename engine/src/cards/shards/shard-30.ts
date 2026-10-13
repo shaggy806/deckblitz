@@ -82,8 +82,10 @@ import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
+import _poolDeathlessPilot from "../pool/deathless-pilot.js";
 import _poolDecisiveDenial from "../pool/decisive-denial.js";
 import _poolDefeat from "../pool/defeat.js";
+import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
 import _poolDeliberate from "../pool/deliberate.js";
 import _poolDemolish from "../pool/demolish.js";
@@ -163,6 +165,7 @@ import _poolHopToIt from "../pool/hop-to-it.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
 import _poolHornedTroll from "../pool/horned-troll.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
+import _poolHotshotMechanic from "../pool/hotshot-mechanic.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
 import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
 import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
@@ -452,8 +455,10 @@ const shard: CardShard = {
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
     _poolDayOfJudgment,
+    _poolDeathlessPilot,
     _poolDecisiveDenial,
     _poolDefeat,
+    _poolDefendTheRider,
     _poolDeftDuelist,
     _poolDeliberate,
     _poolDemolish,
@@ -533,6 +538,7 @@ const shard: CardShard = {
     _poolHorizonScholar,
     _poolHornedTroll,
     _poolHorridVigor,
+    _poolHotshotMechanic,
     _poolHowltoothHollow,
     _poolHuatlisRaptor,
     _poolHulkStrongestThereIs,

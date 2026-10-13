@@ -56,6 +56,7 @@ import _poolColossadactyl from "../pool/colossadactyl.js";
 import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolCouncilOfAdvisors from "../pool/council-of-advisors.js";
+import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
 import _poolCracklingPerimeter from "../pool/crackling-perimeter.js";
 import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
@@ -67,6 +68,7 @@ import _poolCrystallizedSerah from "../pool/crystallized-serah.js";
 import _poolCullingRitual from "../pool/culling-ritual.js";
 import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
+import _poolCynicalLoner from "../pool/cynical-loner.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
 import _poolDeathGrasp from "../pool/death-grasp.js";
@@ -134,6 +136,7 @@ import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
+import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
@@ -224,6 +227,7 @@ import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
+import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
@@ -432,6 +436,7 @@ const shard: CardShard = {
     _poolColossalSkyturtle,
     _poolCombatCourier,
     _poolCouncilOfAdvisors,
+    _poolCountryRoads,
     _poolCovenantOfBlood,
     _poolCracklingPerimeter,
     _poolCradleOfTheAccursed,
@@ -443,6 +448,7 @@ const shard: CardShard = {
     _poolCullingRitual,
     _poolCurseOfDisturbance,
     _poolCursedMirror,
+    _poolCynicalLoner,
     _poolDaruLancer,
     _poolDeadlyTempest,
     _poolDeathGrasp,
@@ -510,6 +516,7 @@ const shard: CardShard = {
     _poolHomunculusHorde,
     _poolHonorGuard,
     _poolHoppingAutomaton,
+    _poolHospitalRoom,
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
@@ -600,6 +607,7 @@ const shard: CardShard = {
     _poolPredatorsStrike,
     _poolPrimordialHydra,
     _poolProudMentor,
+    _poolQalaAjanisPridemate,
     _poolRancor,
     _poolRangersGuile,
     _poolRaphaelsTechnique,

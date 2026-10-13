@@ -59,6 +59,7 @@ import _poolCleansingNova from "../pool/cleansing-nova.js";
 import _poolCleverLumimancer from "../pool/clever-lumimancer.js";
 import _poolClockworkGnomes from "../pool/clockwork-gnomes.js";
 import _poolCloudKey from "../pool/cloud-key.js";
+import _poolCloudspireCaptain from "../pool/cloudspire-captain.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
@@ -231,6 +232,7 @@ import _poolQuickStudy from "../pool/quick-study.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
+import _poolRaucousCarnival from "../pool/raucous-carnival.js";
 import _poolRavos from "../pool/ravos.js";
 import _poolReadTheBones from "../pool/read-the-bones.js";
 import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
@@ -433,6 +435,7 @@ const shard: CardShard = {
     _poolCleverLumimancer,
     _poolClockworkGnomes,
     _poolCloudKey,
+    _poolCloudspireCaptain,
     _poolCogworkWrestler,
     _poolCollateralDamage,
     _poolComposerOfSpring,
@@ -605,6 +608,7 @@ const shard: CardShard = {
     _poolRaffineSchemingSeer,
     _poolRainOfTears,
     _poolRattleclawMystic,
+    _poolRaucousCarnival,
     _poolRavos,
     _poolReadTheBones,
     _poolReaperFromTheAbyss,

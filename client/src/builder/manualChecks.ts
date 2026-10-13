@@ -2691,6 +2691,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Hotshot Mechanic, Giant Ox, Reckoner Bankbuster',
+    board({
+      you: { bf: ['Reckoner Bankbuster', 'Hotshot Mechanic', 'Giant Ox', 'Grizzly Bears', 'Island*3'] },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

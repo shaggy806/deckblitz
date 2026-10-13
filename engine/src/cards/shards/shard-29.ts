@@ -125,6 +125,7 @@ import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
 import _poolGideonsMemorial from "../pool/gideons-memorial.js";
 import _poolGigglingSkitterspike from "../pool/giggling-skitterspike.js";
+import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
@@ -483,6 +484,7 @@ const shard: CardShard = {
     _poolGhostlySentinel,
     _poolGideonsMemorial,
     _poolGigglingSkitterspike,
+    _poolGlassworksShatteredYard,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
     _poolGoblinOffensive,

@@ -1,0 +1,674 @@
+{
+ "batch": "B68",
+ "status": "complete",
+ "ranks": "Foundations (FDN, 2024-11-15), Foundations Jumpstart (J25), Duskmourn: House of Horror (DSK, 2024-09-27) and Bloomburrow (BLB, 2024-08-02): top 50% by EDHREC rank, each set's last; with crews-as-though-power and crews-using-toughness built and the cards they unblocked",
+ "authored": [
+  {
+   "name": "Abandoned Campground",
+   "files": [
+    "engine/src/cards/pool/abandoned-campground.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Back on Track",
+   "files": [
+    "engine/src/cards/pool/back-on-track.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balemurk Leech",
+   "files": [
+    "engine/src/cards/pool/balemurk-leech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bleeding Woods",
+   "files": [
+    "engine/src/cards/pool/bleeding-woods.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Born to Drive",
+   "files": [
+    "engine/src/cards/pool/born-to-drive.ts",
+    "engine/src/cards/tokens/pilot-token-crews-vehicles.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Braulios of Pheres Band",
+   "files": [
+    "engine/src/cards/pool/braulios-of-pheres-band.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Break Down the Door",
+   "files": [
+    "engine/src/cards/pool/break-down-the-door.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brigone, Soldier of Meletis",
+   "files": [
+    "engine/src/cards/pool/brigone-soldier-of-meletis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cat Collector",
+   "files": [
+    "engine/src/cards/pool/cat-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockwork Percussionist",
+   "files": [
+    "engine/src/cards/pool/clockwork-percussionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudspire Captain",
+   "files": [
+    "engine/src/cards/pool/cloudspire-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Country Roads",
+   "files": [
+    "engine/src/cards/pool/country-roads.ts",
+    "engine/src/cards/tokens/pilot-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cynette, Jelly Drover",
+   "files": [
+    "engine/src/cards/pool/cynette-jelly-drover.ts",
+    "engine/src/cards/tokens/jellyfish-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cynical Loner",
+   "files": [
+    "engine/src/cards/pool/cynical-loner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathless Pilot",
+   "files": [
+    "engine/src/cards/pool/deathless-pilot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defend the Rider",
+   "files": [
+    "engine/src/cards/pool/defend-the-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Derelict Attic",
+   "files": [
+    "engine/src/cards/pool/derelict-attic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Derelict Attic // Widow's Walk",
+   "files": [
+    "engine/src/cards/pool/derelict-attic-widows-walk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dewdrop Cure",
+   "files": [
+    "engine/src/cards/pool/dewdrop-cure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dissection Tools",
+   "files": [
+    "engine/src/cards/pool/dissection-tools.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamdew Entrancer",
+   "files": [
+    "engine/src/cards/pool/dreamdew-entrancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drowned Diner",
+   "files": [
+    "engine/src/cards/pool/drowned-diner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dynamite Diver",
+   "files": [
+    "engine/src/cards/pool/dynamite-diver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flesh Burrower",
+   "files": [
+    "engine/src/cards/pool/flesh-burrower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Floodpits Drowner",
+   "files": [
+    "engine/src/cards/pool/floodpits-drowner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foul Roads",
+   "files": [
+    "engine/src/cards/pool/foul-roads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Ox",
+   "files": [
+    "engine/src/cards/pool/giant-ox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glassworks",
+   "files": [
+    "engine/src/cards/pool/glassworks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glassworks // Shattered Yard",
+   "files": [
+    "engine/src/cards/pool/glassworks-shattered-yard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gremlin Tamer",
+   "files": [
+    "engine/src/cards/pool/gremlin-tamer.ts",
+    "engine/src/cards/tokens/gremlin-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hazel's Nocturne",
+   "files": [
+    "engine/src/cards/pool/hazels-nocturne.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hearthborn Battler",
+   "files": [
+    "engine/src/cards/pool/hearthborn-battler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hospital Room",
+   "files": [
+    "engine/src/cards/pool/hospital-room.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hotshot Mechanic",
+   "files": [
+    "engine/src/cards/pool/hotshot-mechanic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Interface Ace",
+   "files": [
+    "engine/src/cards/pool/interface-ace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Irreverent Gremlin",
+   "files": [
+    "engine/src/cards/pool/irreverent-gremlin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lakeside Shack",
+   "files": [
+    "engine/src/cards/pool/lakeside-shack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Let's Play a Game",
+   "files": [
+    "engine/src/cards/pool/lets-play-a-game.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meat Locker",
+   "files": [
+    "engine/src/cards/pool/meat-locker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meat Locker // Drowned Diner",
+   "files": [
+    "engine/src/cards/pool/meat-locker-drowned-diner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Snack",
+   "files": [
+    "engine/src/cards/pool/midnight-snack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistbreath Elder",
+   "files": [
+    "engine/src/cards/pool/mistbreath-elder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Murky Sewer",
+   "files": [
+    "engine/src/cards/pool/murky-sewer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nashi, Searcher in the Dark",
+   "files": [
+    "engine/src/cards/pool/nashi-searcher-in-the-dark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neglected Manor",
+   "files": [
+    "engine/src/cards/pool/neglected-manor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Optimistic Scavenger",
+   "files": [
+    "engine/src/cards/pool/optimistic-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ozox, the Clattering King",
+   "files": [
+    "engine/src/cards/pool/ozox-the-clattering-king.ts",
+    "engine/src/cards/tokens/jumblebones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pearl of Wisdom",
+   "files": [
+    "engine/src/cards/pool/pearl-of-wisdom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peculiar Lighthouse",
+   "files": [
+    "engine/src/cards/pool/peculiar-lighthouse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plagon, Lord of the Beach",
+   "files": [
+    "engine/src/cards/pool/plagon-lord-of-the-beach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prodigy's Prototype",
+   "files": [
+    "engine/src/cards/pool/prodigys-prototype.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Qala, Ajani's Pridemate",
+   "files": [
+    "engine/src/cards/pool/qala-ajanis-pridemate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raucous Carnival",
+   "files": [
+    "engine/src/cards/pool/raucous-carnival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Amulet",
+   "files": [
+    "engine/src/cards/pool/ravenous-amulet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razortrap Gorge",
+   "files": [
+    "engine/src/cards/pool/razortrap-gorge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckoner Bankbuster",
+   "files": [
+    "engine/src/cards/pool/reckoner-bankbuster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reef Roads",
+   "files": [
+    "engine/src/cards/pool/reef-roads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repel Calamity",
+   "files": [
+    "engine/src/cards/pool/repel-calamity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roadside Assistance",
+   "files": [
+    "engine/src/cards/pool/roadside-assistance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rocky Roads",
+   "files": [
+    "engine/src/cards/pool/rocky-roads.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shattered Yard",
+   "files": [
+    "engine/src/cards/pool/shattered-yard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shorikai, Genesis Engine",
+   "files": [
+    "engine/src/cards/pool/shorikai-genesis-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shroudstomper",
+   "files": [
+    "engine/src/cards/pool/shroudstomper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splitskin Doll",
+   "files": [
+    "engine/src/cards/pool/splitskin-doll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strangled Cemetery",
+   "files": [
+    "engine/src/cards/pool/strangled-cemetery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surgical Suite",
+   "files": [
+    "engine/src/cards/pool/surgical-suite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surgical Suite // Hospital Room",
+   "files": [
+    "engine/src/cards/pool/surgical-suite-hospital-room.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sutina, Speaker of the Tajuru",
+   "files": [
+    "engine/src/cards/pool/sutina-speaker-of-the-tajuru.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvan Scavenging",
+   "files": [
+    "engine/src/cards/pool/sylvan-scavenging.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taeko, the Patient Avalanche",
+   "files": [
+    "engine/src/cards/pool/taeko-the-patient-avalanche.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trapped in the Screen",
+   "files": [
+    "engine/src/cards/pool/trapped-in-the-screen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twist Reality",
+   "files": [
+    "engine/src/cards/pool/twist-reality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Under the Skin",
+   "files": [
+    "engine/src/cards/pool/under-the-skin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urdnan, Dromoka Warrior",
+   "files": [
+    "engine/src/cards/pool/urdnan-dromoka-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Possession",
+   "files": [
+    "engine/src/cards/pool/vengeful-possession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Widow's Walk",
+   "files": [
+    "engine/src/cards/pool/widows-walk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Roads",
+   "files": [
+    "engine/src/cards/pool/wild-roads.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Lunar Insight",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "Draw a card for each different mana value among nonland permanents you control."
+  },
+  {
+   "name": "Neerdiv, Devious Diver",
+   "needs": [
+    "trigger:activates-ability"
+   ],
+   "why": "'Or activate an ability of a card in your graveyard' — activates-ability only watches attached sources."
+  },
+  {
+   "name": "Frontline Heroism",
+   "needs": [
+    "effect:copy-spell-extensions"
+   ],
+   "why": "A copy of the spell retargeted at the token the same effect just created."
+  },
+  {
+   "name": "Aphelia, Viper Whisperer",
+   "needs": [
+    "effect:delayed-trigger-extensions"
+   ],
+   "why": "Until end of turn, whenever one or more Gorgons and/or Snakes you control deal combat damage to a player — a turn-long batched delayed trigger."
+  },
+  {
+   "name": "Dropkick Bomber",
+   "needs": [
+    "trigger:deals-combat-damage-once-per-event"
+   ],
+   "why": "The granted 'When this creature deals combat damage, sacrifice it' fires once per combat damage event (603.2c), not once per recipient."
+  },
+  {
+   "name": "Unidentified Hovership",
+   "needs": [
+    "effect:player-scope-extensions"
+   ],
+   "why": "The exiled card's owner manifests dread — manifest-dread's who takes only you or a target's controller."
+  },
+  {
+   "name": "Marina Vendrell's Grimoire",
+   "needs": [
+    "static:no-loss-for-zero-life"
+   ],
+   "why": "You don't lose the game for having 0 or less life."
+  },
+  {
+   "name": "Valgavoth's Onslaught",
+   "needs": [
+    "effect:manifested-this-way",
+    "effect:amount-fields-dynamic"
+   ],
+   "why": "Manifest dread X times, then counters on each of those creatures — manifest-dread's count is fixed and nothing names the manifested creatures."
+  },
+  {
+   "name": "Osseous Sticktwister",
+   "needs": [
+    "effect:each-player-chooses-then-all-act"
+   ],
+   "why": "Each opponent chooses in turn order, then all act at once (ruling); each-player-may does each player's before asking the next — Perforating Artist's block."
+  },
+  {
+   "name": "Central Elevator // Promising Stairs",
+   "needs": [
+    "condition:filter-same-name-as-permanent-you-control",
+    "condition:control-distinct-names-count"
+   ],
+   "why": "A Room card that doesn't share a name with a Room you control (any one name, unlocked doors only); Promising Stairs counts distinct names among unlocked doors."
+  },
+  {
+   "name": "Moldering Gym // Weight Room",
+   "needs": [
+    "effect:manifested-this-way"
+   ],
+   "why": "Weight Room: manifest dread, then put three +1/+1 counters on that creature."
+  },
+  {
+   "name": "Norin, Swift Survivalist",
+   "needs": [
+    "zone:impulse-permission-options"
+   ],
+   "why": "'You may play that card' — exile's mayCast is cast-only, so a land creature card couldn't be played."
+  },
+  {
+   "name": "Carrot Cake",
+   "needs": [
+    "trigger:self-sacrifice-trigger"
+   ],
+   "why": "'When you sacrifice this' — the sacrifice trigger has no self-only scope, and a name filter fires for another Carrot Cake."
+  },
+  {
+   "name": "Feed the Cycle",
+   "needs": [
+    "keyword:forage"
+   ],
+   "why": "Forage as an additional cost."
+  },
+  {
+   "name": "Huskburster Swarm",
+   "needs": [
+    "cost:cost-reduction-cards-in-exile"
+   ],
+   "why": "{1} less for each creature card you own in exile and in your graveyard."
+  },
+  {
+   "name": "Cloudspire Coordinator",
+   "needs": [
+    "stat:entered-this-turn-as-entered"
+   ],
+   "why": "Mounts and/or Vehicles that entered this turn, counted as they entered, not as they are now (B67's crew block lifted)."
+  },
+  {
+   "name": "Valor's Flagship",
+   "needs": [
+    "cost:cycling-x"
+   ],
+   "why": "Cycling {X}{2}{W} and a cycle trigger reading X (B67's crew block lifted)."
+  }
+ ]
+}

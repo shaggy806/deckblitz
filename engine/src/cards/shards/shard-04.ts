@@ -20,6 +20,7 @@ import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
 import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
+import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
@@ -78,6 +79,7 @@ import _poolDoubleDown from "../pool/double-down.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
+import _poolDrownedDiner from "../pool/drowned-diner.js";
 import _poolDrySpell from "../pool/dry-spell.js";
 import _poolDungeonShade from "../pool/dungeon-shade.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
@@ -364,6 +366,7 @@ import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
+import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
 import _tokensSoldierToken from "../tokens/soldier-token.js";
@@ -390,6 +393,7 @@ const shard: CardShard = {
     _poolAvenSkirmisher,
     _poolAviationPioneer,
     _poolAysenBureaucrats,
+    _poolBackOnTrack,
     _poolBaelothBarritylEntertainer,
     _poolBaronyVampire,
     _poolBarrinMasterWizard,
@@ -448,6 +452,7 @@ const shard: CardShard = {
     _poolDrakeHatchling,
     _poolDreadPresence,
     _poolDrossHarvester,
+    _poolDrownedDiner,
     _poolDrySpell,
     _poolDungeonShade,
     _poolEarthRumble,
@@ -736,6 +741,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensDragonTokenAvatarRoku,
+    _tokensGremlinToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,
     _tokensSoldierToken,

@@ -234,6 +234,7 @@ import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
+import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
@@ -245,6 +246,7 @@ import _poolPhantomMonster from "../pool/phantom-monster.js";
 import _poolPharikasCure from "../pool/pharikas-cure.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
+import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
@@ -268,6 +270,7 @@ import _poolRisenNecroregent from "../pool/risen-necroregent.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
+import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
@@ -337,6 +340,7 @@ import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
+import _poolTwistReality from "../pool/twist-reality.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
@@ -382,6 +386,7 @@ import _tokensCatWarriorToken from "../tokens/cat-warrior-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-rhys-the-redeemed.js";
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
+import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
@@ -620,6 +625,7 @@ const shard: CardShard = {
     _poolObeliskOfEsper,
     _poolOpenTheArmory,
     _poolOphiomancer,
+    _poolOptimisticScavenger,
     _poolOrokuSakiShredderRising,
     _poolOverflowingBasin,
     _poolOverrun,
@@ -631,6 +637,7 @@ const shard: CardShard = {
     _poolPharikasCure,
     _poolPierceStrider,
     _poolPilgrimOfTheFires,
+    _poolPlagonLordOfTheBeach,
     _poolPreemptiveStrike,
     _poolPrimalDruid,
     _poolProfessorsWarning,
@@ -654,6 +661,7 @@ const shard: CardShard = {
     _poolRishadanPort,
     _poolRisingPopulace,
     _poolRiteOfPassage,
+    _poolRockyRoads,
     _poolRoofstalkerWight,
     _poolSageOfTheMaze,
     _poolSalvagerOfSecrets,
@@ -723,6 +731,7 @@ const shard: CardShard = {
     _poolTragicTrajectory,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
+    _poolTwistReality,
     _poolUltimateGreenGoblin,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
@@ -770,6 +779,7 @@ const shard: CardShard = {
     _tokensElfWarriorTokenRhysTheRedeemed,
     _tokensFoodToken,
     _tokensHorrorToken,
+    _tokensJellyfishToken,
     _tokensOtterToken,
     _tokensThopterToken,
     _tokensWarriorToken,

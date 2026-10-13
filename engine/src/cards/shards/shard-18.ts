@@ -127,6 +127,7 @@ import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
+import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
@@ -296,6 +297,7 @@ import _poolSuturePriest from "../pool/suture-priest.js";
 import _poolSwordOfTheChosen from "../pool/sword-of-the-chosen.js";
 import _poolSymbioteSpawn from "../pool/symbiote-spawn.js";
 import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
+import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTerastodon from "../pool/terastodon.js";
@@ -514,6 +516,7 @@ const shard: CardShard = {
     _poolHardenedTactician,
     _poolHauntTheNetwork,
     _poolHauntedCloak,
+    _poolHearthbornBattler,
     _poolHellkiteOverlord,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
@@ -683,6 +686,7 @@ const shard: CardShard = {
     _poolSwordOfTheChosen,
     _poolSymbioteSpawn,
     _poolSyrKonradTheGrim,
+    _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
     _poolTeferisTimeTwist,
     _poolTerastodon,

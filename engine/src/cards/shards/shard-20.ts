@@ -108,6 +108,7 @@ import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
+import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
 import _poolDuskmantleProwler from "../pool/duskmantle-prowler.js";
@@ -264,6 +265,7 @@ import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
+import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
@@ -373,6 +375,7 @@ import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
+import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
@@ -390,6 +393,7 @@ import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
 import _poolWeldfastEngineer from "../pool/weldfast-engineer.js";
 import _poolWellRested from "../pool/well-rested.js";
+import _poolWidowsWalk from "../pool/widows-walk.js";
 import _poolWildCantor from "../pool/wild-cantor.js";
 import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
@@ -516,6 +520,7 @@ const shard: CardShard = {
     _poolDoubleCleave,
     _poolDoublingSeason,
     _poolDreamThiefsBandana,
+    _poolDreamdewEntrancer,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
     _poolDuskmantleProwler,
@@ -672,6 +677,7 @@ const shard: CardShard = {
     _poolRaiseThePast,
     _poolRatcatcher,
     _poolRavagingHorde,
+    _poolRavenousAmulet,
     _poolRecklessAssault,
     _poolRefresh,
     _poolRestrictedOffice,
@@ -781,6 +787,7 @@ const shard: CardShard = {
     _poolTrostaniDiscordant,
     _poolTrystanPenitentCuller,
     _poolUndeadAugur,
+    _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
     _poolUtromMonitor,
     _poolVeloheartBike,
@@ -798,6 +805,7 @@ const shard: CardShard = {
     _poolWeddingFestivity,
     _poolWeldfastEngineer,
     _poolWellRested,
+    _poolWidowsWalk,
     _poolWildCantor,
     _poolWillowrushVerge,
     _poolWirewoodGuardian,

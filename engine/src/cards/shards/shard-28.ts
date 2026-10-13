@@ -243,9 +243,11 @@ import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
+import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
+import _poolReefRoads from "../pool/reef-roads.js";
 import _poolRepelTheVile from "../pool/repel-the-vile.js";
 import _poolResistanceSkywarden from "../pool/resistance-skywarden.js";
 import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
@@ -617,9 +619,11 @@ const shard: CardShard = {
     _poolRamunapExcavator,
     _poolRapaciousGuest,
     _poolRazortideBridge,
+    _poolRazortrapGorge,
     _poolRazorvergeThicket,
     _poolRecklessImpulse,
     _poolRedcapThief,
+    _poolReefRoads,
     _poolRepelTheVile,
     _poolResistanceSkywarden,
     _poolResoluteReinforcements,
