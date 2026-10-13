@@ -340,7 +340,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "additional-upkeep-steps": none,
   "additional-land-drop": none,
   "shuffle-library": none,
-  "damage-divided": none,
+  // The split's targets take the damage (Inferno Titan, Electrolyze).
+  "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
   "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),
   "tap-all": none,
   // Phasing out is a blocker gone for a turn when it's theirs (rule
