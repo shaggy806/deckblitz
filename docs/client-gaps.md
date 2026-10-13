@@ -45,7 +45,12 @@ title; when one lands, delete it in both. The animation follow-ups are in
   (1.26 MB brotli) at 12,089 definitions on 2026-10-13, and growing with the pool. Running the
   shards blocks the page in one go (~0.25 s on a fast desktop, then ~0.3 s assembling and
   drawing the library), so the bar can't repaint and seems to stall near the end — the user saw
-  it on the live site (2026-10-13); the largest JS cost is the definition builder's defaults. They read only printed fields, each ability's text (colour identity)
+  it on the live site (2026-10-13); the largest JS cost is the definition builder's defaults.
+  **Their stall (postponed, 2026-10-13):** in their own Chrome, only on the first visit (a reload
+  is instant), on this same PC. Not reproduced: cold loads in fresh Chrome and Edge profiles and
+  Playwright's Chromium on the same PC and network all showed cards in 0.7–0.85 s with no long
+  task. Suspects: an extension in their profile, or the CPU pegged by test runs at the time. Next:
+  have them try an incognito window, and time the stall. They read only printed fields, each ability's text (colour identity)
   and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
   a fraction of the size. The game page loads no definitions up front.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07).

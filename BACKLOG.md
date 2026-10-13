@@ -216,7 +216,7 @@ item lands.
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).
-- **The library and the deck builder load every card definition** (~6.3 MB at 12,089 definitions; the user saw the bar stall near the end, 2026-10-13).
+- **The library and the deck builder load every card definition** (~6.3 MB at 12,089 definitions); the user's first-visit stall in their Chrome is postponed, not reproduced (2026-10-13).
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
