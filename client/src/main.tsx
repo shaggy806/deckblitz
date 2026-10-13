@@ -6,6 +6,8 @@ import App from './App.tsx'
 import { loadCardPool } from './cards/cardData.ts'
 import { PoolLoadBoundary, PoolLoading } from './cards/PoolLoading.tsx'
 import { clickButtons } from './game/sound.ts'
+import { CoachLayer } from './tutorial/CoachLayer.tsx'
+import type { PageId } from './tutorial/types.ts'
 
 /**
  * A page that works over the whole card pool, loaded with it. The library
@@ -28,9 +30,15 @@ const DeckBuilderPage = withCardPool(() =>
   import('./deck-builder/DeckBuilderPage.tsx').then((m) => m.DeckBuilderPage),
 )
 
-const poolPage = (page: ReactNode) => (
+// The tutorials' coach marks go inside the Suspense with the page, so a tour
+// carried over from another page picks up once the page is there, not over
+// the pool's loading bar.
+const poolPage = (page: ReactNode, coachPage: PageId) => (
   <PoolLoadBoundary>
-    <Suspense fallback={<PoolLoading />}>{page}</Suspense>
+    <Suspense fallback={<PoolLoading />}>
+      {page}
+      <CoachLayer page={coachPage} />
+    </Suspense>
   </PoolLoadBoundary>
 )
 
@@ -40,9 +48,9 @@ const poolPage = (page: ReactNode) => (
 // (see `client/src/net/useNetworkGame.ts`) never opens for these routes.
 const path = window.location.pathname
 const page = path.startsWith('/library')
-  ? poolPage(<LibraryPage />)
+  ? poolPage(<LibraryPage />, 'library')
   : path.startsWith('/deck-builder')
-    ? poolPage(<DeckBuilderPage />)
+    ? poolPage(<DeckBuilderPage />, 'deck-builder')
     : <App />
 
 // Every button on every page clicks.

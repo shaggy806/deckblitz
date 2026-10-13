@@ -1,0 +1,288 @@
+/* The tutorials' coach marks (tutorial/CoachLayer.tsx), portalled to <body>.
+   Above everything that can cover an anchor: the animation layer (10001),
+   the Settings panel and the in-game popups (10003). Placement is JS (the
+   frame loop writes left/top/width/height), so nothing here positions the
+   card but `position: fixed`. */
+.coach-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  pointer-events: none;
+}
+
+/* The ring around the anchor; its huge shadow is the dimmed page around
+   the spotlight's hole. Never catches a click. */
+.coach-ring {
+  position: fixed;
+  display: none;
+  border: 2px solid var(--accent);
+  box-shadow:
+    0 0 0 4px var(--accent-bg),
+    0 0 0 200vmax color-mix(in srgb, var(--bg) 62%, transparent);
+  pointer-events: none;
+}
+.coach-layer[data-phase='anchored'] .coach-ring {
+  display: block;
+}
+
+/* The click-catchers: four strips around the hole (or the first one over
+   the whole screen, for a step that only explains), shown while anchored;
+   one over everything while the anchor is still being looked for. */
+.coach-block {
+  position: fixed;
+  pointer-events: auto;
+}
+.coach-strip {
+  display: none;
+}
+.coach-layer[data-phase='anchored'] .coach-strip {
+  display: block;
+}
+.coach-block-full {
+  inset: 0;
+}
+
+/* No anchor (an intro card, a notice): the whole page dimmed, and blocked. */
+.coach-dim {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  pointer-events: auto;
+}
+
+.coach-card {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  width: clamp(260px, 24vw, 380px);
+  max-width: calc(100vw - 20px);
+  padding: 14px 16px 12px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  box-shadow: var(--frame-raised), var(--shadow-dialog);
+  font-size: var(--text-md);
+  line-height: 1.45;
+  pointer-events: auto;
+  visibility: hidden;
+}
+.coach-card.placed {
+  visibility: visible;
+}
+.coach-card.coach-card-hidden {
+  visibility: hidden;
+}
+.coach-card.centered {
+  width: clamp(300px, 30vw, 440px);
+}
+/* A card outside any step (the offer to pick a tour back up): centred by
+   CSS, no frame loop to place it. */
+.coach-card.coach-card-fixed {
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+.coach-card.placed:not(.coach-card-hidden) {
+  animation: coach-card-in calc(180ms * var(--anim-scale, 1)) ease-out;
+}
+@keyframes coach-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+:root[data-reduce-motion] .coach-card.placed:not(.coach-card-hidden) {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .coach-card.placed:not(.coach-card-hidden) {
+    animation: none;
+  }
+}
+
+.coach-count {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+}
+.coach-title {
+  margin: 4px 0 6px;
+  font-family: var(--font-display);
+  font-size-adjust: var(--font-display-adjust);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+.coach-body {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: var(--text-base);
+}
+.coach-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.coach-spacer {
+  flex: 1;
+}
+.coach-exit {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+.coach-next {
+  font-weight: 600;
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+button.coach-next:hover:not(:disabled) {
+  border-color: var(--text);
+}
+
+/* --- the "?" button, its menu and the first-visit callout (HelpMenu.tsx),
+   in the corner toolbar beside the Settings cog. --- */
+.help-control {
+  position: relative;
+}
+/* The same square as the cog (.motion-cog). */
+.help-button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-soft);
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.help-button:hover,
+.help-button[aria-expanded='true'] {
+  color: var(--accent);
+  background: var(--panel-2);
+  border-color: var(--accent);
+}
+.help-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  z-index: 10003;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: max-content;
+  min-width: 240px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--panel);
+  box-shadow: var(--frame-raised), var(--shadow-popover);
+  font-size: var(--text-sm);
+}
+.help-menu-heading {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.help-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+}
+.help-item-note {
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+.help-item:disabled .help-item-note {
+  color: var(--muted-dim);
+}
+.help-item-done {
+  color: var(--good);
+}
+.help-restart {
+  align-self: flex-start;
+  font-size: var(--text-xs);
+}
+
+/* The first-visit callout: rises above the "?" button, right-aligned to
+   the toolbar, and only as wide as the gutter beside the landing page's
+   column (880px wide, centred), so it never sits over the page's own
+   actions — at 1366px that gutter is about 240px. */
+.help-callout {
+  position: absolute;
+  /* Right-aligned with the toolbar's own edge, past the cog beside the "?"
+     button (one 44px button and the toolbar's 8px gap). */
+  right: -52px;
+  bottom: calc(100% + 10px);
+  z-index: 21;
+  box-sizing: border-box;
+  width: clamp(180px, calc((100vw - 880px) / 2 - 36px), 260px);
+  padding: 12px 14px 10px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  box-shadow: var(--frame-raised), var(--shadow-popover);
+  font-size: var(--text-md);
+  line-height: 1.4;
+  animation: help-callout-in calc(260ms * var(--anim-scale, 1)) ease-out;
+}
+/* A notch pointing down at the "?" button. */
+.help-callout::after {
+  content: '';
+  position: absolute;
+  right: calc(52px + 15px);
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: var(--panel);
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  rotate: 45deg;
+}
+@keyframes help-callout-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+:root[data-reduce-motion] .help-callout {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .help-callout {
+    animation: none;
+  }
+}
+.help-callout-title {
+  margin: 0 22px 4px 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+.help-callout p {
+  margin: 0 0 10px;
+}
+.help-callout-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  padding: 2px 6px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+.help-callout-close:hover {
+  color: var(--text);
+}

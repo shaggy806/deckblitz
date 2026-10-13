@@ -21,6 +21,10 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   so state that must survive a frame lives in `GameScreen`.
 - **`setState` updaters must stay pure.** Measure layout that changes what's drawn in a
   `useLayoutEffect` or a callback ref, never a plain `useEffect`.
+- **`data-tour="…"` attributes are the tutorials' contract** (`tutorial/anchors.ts` lists them):
+  a tour points at a control through it, never through a class name, and
+  `e2e/site-tour.spec.ts` fails when one goes missing. Keep the attribute when you restyle or
+  move a control it's on.
 - **Art URLs go through `ui/art.ts`'s `resolveArtUrl`** (host-checked against
   `ALLOWED_ART_HOSTS`), and into CSS through `cssUrl()`, always.
 

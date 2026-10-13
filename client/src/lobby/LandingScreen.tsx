@@ -202,7 +202,7 @@ export function LandingScreen({
       <div className="landing-actions">
         <section className="landing-card">
           <h2>Start a game</h2>
-          <button type="button" className="landing-cta" onClick={() => game.createRoom()}>
+          <button type="button" className="landing-cta" data-tour="landing-create" onClick={() => game.createRoom()}>
             Create a game
           </button>
         </section>
@@ -211,7 +211,7 @@ export function LandingScreen({
           <span>or</span>
         </div>
 
-        <section className="landing-card">
+        <section className="landing-card" data-tour="landing-join">
           <h2>Join a game</h2>
           <form
             className="landing-join-form"
@@ -260,10 +260,10 @@ export function LandingScreen({
       </div>
 
       <nav className="landing-nav" aria-label="Other pages">
-        <a className="landing-nav-card" href="/deck-builder">
+        <a className="landing-nav-card" href="/deck-builder" data-tour="landing-deck-builder">
           <span className="landing-nav-name">Deck builder</span>
         </a>
-        <a className="landing-nav-card" href="/library">
+        <a className="landing-nav-card" href="/library" data-tour="landing-library">
           <span className="landing-nav-name">Card library</span>
         </a>
         {/* A dev build only (and a server started with --builder): it puts
@@ -277,7 +277,8 @@ export function LandingScreen({
 
       <BlitzPanel game={game} />
 
-      <CornerToolbar />
+      {/* The tutorials' first-visit callout shows on this page only. */}
+      <CornerToolbar intro />
     </div>
   )
 }

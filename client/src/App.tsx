@@ -114,6 +114,8 @@ import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
 import { SeatBoard } from './lobby/SeatBoard.tsx'
 import { LandingScreen } from './lobby/LandingScreen.tsx'
 import { CornerToolbar } from './ui/CornerToolbar.tsx'
+import { CoachLayer } from './tutorial/CoachLayer.tsx'
+import type { PageId } from './tutorial/types.ts'
 import { InviteLink } from './lobby/InviteLink.tsx'
 import './App.css'
 
@@ -574,6 +576,33 @@ export default function App() {
   // carries on into the game, whose own `useMusic` takes over.
   useMusic(game.status === 'choosing-seat' || game.status === 'waiting-for-players')
 
+  return (
+    <>
+      <AppScreen game={game} />
+      {/* The tutorials' coach marks, over whichever screen is up. */}
+      <CoachLayer page={coachPageOf(game.status)} />
+    </>
+  )
+}
+
+/** Which of the tutorials' pages a connection status is. Connecting and
+ * reconnecting count as the game: the layer stays quiet over them, and picks
+ * a saved tour up once the landing page or the lobby is actually there. */
+function coachPageOf(status: NetworkGame['status']): PageId {
+  switch (status) {
+    case 'no-room':
+    case 'room-not-found':
+      return 'landing'
+    case 'choosing-seat':
+    case 'waiting-for-players':
+      return 'lobby'
+    default:
+      return 'game'
+  }
+}
+
+/** The screen for the connection's status. */
+function AppScreen({ game }: { readonly game: NetworkGame }) {
   if (game.status === 'connecting') {
     return <CenteredScreen title="Connecting…" />
   }
@@ -1077,7 +1106,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                 : undefined
             }
           />
-          <button type="button" onClick={() => setShowHistory(true)}>
+          <button type="button" data-tour="game-history" onClick={() => setShowHistory(true)}>
             History
           </button>
           {/* A developer's server only (`--capture`), and only its host. */}
@@ -4858,6 +4887,7 @@ function Table({
             {view.zones.stack.length > 0 ? (
               <button
                 type="button"
+                data-tour="game-resolve-stack"
                 onClick={game.resolveAll}
                 disabled={!canPass}
                 title="Keep passing until the stack has resolved — stops if anything needs you"
@@ -4867,16 +4897,17 @@ function Table({
                 {view.zones.stack.reduce((n, id) => n + (view.objects[id]?.stackCount ?? 1), 0)})
               </button>
             ) : null}
-            <button type="button" onClick={pass} disabled={!canPass}>
+            <button type="button" data-tour="game-pass" onClick={pass} disabled={!canPass}>
               Pass (space)
             </button>
-            <button type="button" onClick={game.passTurn} disabled={!canPassTurn}>
+            <button type="button" data-tour="game-pass-turn" onClick={game.passTurn} disabled={!canPassTurn}>
               Pass Turn
             </button>
             {/* Short labels so all four fit one row; `title` carries the full
                 sentence, since that's the part that actually explains them. */}
             <button
               type="button"
+              data-tour="game-auto-pass"
               onClick={game.autoPass}
               title={
                 game.autoPassPaused
@@ -5503,9 +5534,9 @@ function Table({
       {renderHandStrip()}
 
       {mode === 'priority' ? (
-        <div className="priority-actions">{controls}</div>
+        <div className="priority-actions" data-tour="game-priority">{controls}</div>
       ) : peekable ? (
-        <div className="decision-banner">{controls}</div>
+        <div className="decision-banner" data-tour="game-decision-banner">{controls}</div>
       ) : null}
 
       {/* The selected permanent's activated abilities, beside the permanent
