@@ -29,10 +29,11 @@
 
 import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
-import { COMMANDER_RULES, Game, HeuristicBotController, createDefaultRegistry } from "engine";
+import { COMMANDER_RULES, Game, createDefaultRegistry } from "engine";
 import { Room } from "../dist/room.js";
 import { RoomManager } from "../dist/room-manager.js";
 import { DEFAULT_CAPTURE_DIR } from "../dist/capture.js";
+import { ScriptedBot } from "../dist/scripted-bot.js";
 import { COMPRESSION, attachRoomServer } from "../dist/ws-server.js";
 import SCENARIOS, { COMMANDERS } from "./dev-scenarios.mjs";
 
@@ -43,69 +44,21 @@ const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const basics = (n) => Array.from({ length: n }, (_, i) => BASICS[i % BASICS.length]);
 
 /**
- * A bot that does only what its scenario says, so the decision under test
- * comes up on cue: it passes every priority window except for scripted casts
- * on its own precombat main, attacks only if told whom, and blocks only the
- * named attacker with the named creatures. Anything else it's asked (a
- * discard, a sacrifice) goes to v1's answer.
+ * A scenario's `bots` entry as a script for `ScriptedBot` (`src/scripted-bot.ts`),
+ * so the decision under test comes up on cue: the bot passes every priority
+ * window except for its scripted casts, each once, on its own precombat main;
+ * attacks only if told whom, every turn, with everything that can; and blocks
+ * only the named attacker, with every creature of the named ones that can.
+ * Anything else it's asked (a discard, a sacrifice) goes to v1's answer.
  */
-class ScriptedBot extends HeuristicBotController {
-  constructor(player, script = {}) {
-    super(player, registry);
-    this.script = script;
-    this.casts = [...(script.casts ?? [])];
-  }
-
-  act(view) {
-    const s = view.state;
-    if (s.awaiting) return super.act(view);
-    const active = s.turnOrder[s.turn.activePlayerIndex];
-    const onOwnMain = active === this.playerId && s.turn.step === "precombat-main";
-    if (onOwnMain && s.zones.shared.stack.length === 0 && this.casts.length > 0) {
-      const { name, target } = this.casts[0];
-      const cast = view
-        .legalActions()
-        .find((a) => a.kind === "cast-spell" && s.objects[a.card]?.cardName === name);
-      if (cast) {
-        this.casts.shift();
-        const options = cast.targetOptions?.[0] ?? [];
-        // A player by id, or a permanent by name.
-        const chosen =
-          options.find((o) => o.kind === "player" && o.player === target) ??
-          options.find((o) => o.kind === "object" && s.objects[o.object]?.cardName === target) ??
-          options[0];
-        return { type: "cast-spell", player: this.playerId, card: cast.card, targets: chosen ? [chosen] : [] };
-      }
-    }
-    return { type: "pass-priority", player: this.playerId };
-  }
-
-  declareAttackers(view) {
-    const at = this.script.attack;
-    const offer = at ? view.legalActions().find((a) => a.kind === "declare-attackers") : null;
-    if (!offer) return [];
-    return offer.eligible
-      .filter((id) => (offer.defendersFor[id] ?? []).includes(at))
-      .map((attacker) => ({ attacker, defender: at }));
-  }
-
-  declareBlockers(view) {
-    const rule = this.script.block;
-    if (!rule) return [];
-    const s = view.state;
-    const battlefield = s.zones.shared.battlefield;
-    const target = battlefield.find(
-      (id) => s.objects[id]?.cardName === rule.attacker && s.objects[id]?.attacking,
-    );
-    if (!target) return [];
-    return battlefield
-      .filter((id) => {
-        const o = s.objects[id];
-        return o?.controller === this.playerId && [rule.with].flat().includes(o.cardName) && !o.tapped;
-      })
-      .map((blocker) => ({ blocker, attacker: target }));
-  }
-}
+const scriptOf = (bot = {}) => ({
+  otherwise: "pass",
+  moves: [
+    ...(bot.casts ?? []).map(({ name, target }) => ({ do: "cast", card: name, ...(target !== undefined ? { target } : {}) })),
+    ...(bot.attack ? [{ do: "attack", at: bot.attack, repeat: true }] : []),
+    ...(bot.block ? [{ do: "block", card: bot.block.with, at: bot.block.attacker, repeat: true }] : []),
+  ],
+});
 
 function buildGame(scenario) {
   const players = scenario.players;
@@ -152,7 +105,7 @@ function buildRoom(code) {
   const room = new Room(code, game, {
     pacing: "realtime",
     capture: CAPTURE,
-    botController: (player) => new ScriptedBot(player, bots[player] ?? {}),
+    botController: (player) => new ScriptedBot(player, scriptOf(bots[player]), registry),
   });
   for (const player of Object.keys(bots)) room.addBot(player);
   room.start();

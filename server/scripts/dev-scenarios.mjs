@@ -5,8 +5,9 @@
 //
 // Every scenario starts on turn 1 with the first player at `start` (default
 // "precombat-main") holding priority. The first player is the human seat;
-// everyone listed under `bots` is a scripted bot (see `ScriptedBot` in
-// dev-rooms.mjs), and any other player is a second human seat.
+// everyone listed under `bots` is a scripted bot (`ScriptedBot`, in
+// src/scripted-bot.ts, playing the script dev-rooms.mjs's `scriptOf` makes of
+// its entry), and any other player is a second human seat.
 //
 //   players     seating order; commanders default per seat (COMMANDERS)
 //   lands       basics per player, mixed colours, untapped

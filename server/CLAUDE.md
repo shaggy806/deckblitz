@@ -38,7 +38,9 @@ seat decks from the engine's `SAMPLE_DECKS`), `import-deck.ts` (`POST /import-de
 NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `card-data.ts`,
 else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's generated tag index),
 `capture.ts`, `builder.ts` (the scenario builder: a board built from data, rebuilt into a new
-frozen `Room` under the same code on every edit), `status.ts`. Tests in `src/test/`.
+frozen `Room` under the same code on every edit), `scripted-bot.ts` (an opponent that plays a
+script by card name, v1 answering the rest; dev-rooms' bots too), `status.ts`. Tests in
+`src/test/`.
 
 ## Commands
 
