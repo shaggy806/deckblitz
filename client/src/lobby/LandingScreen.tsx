@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
 import { cssUrl, resolveArtUrl } from '../ui/art.ts'
-import { MotionControl } from '../ui/MotionControl.tsx'
+import { CornerToolbar } from '../ui/CornerToolbar.tsx'
 import { BlitzPanel } from './BlitzPanel.tsx'
 import './landing.css'
 
@@ -277,11 +277,7 @@ export function LandingScreen({
 
       <BlitzPanel game={game} />
 
-      {/* The corner toolbar: square buttons in the bottom right, Settings for
-          now, room for more beside it. */}
-      <div className="landing-corner" role="toolbar" aria-label="Site">
-        <MotionControl place="corner" />
-      </div>
+      <CornerToolbar />
     </div>
   )
 }

@@ -113,6 +113,7 @@ import { motionPrefs } from './game/motionPrefs.ts'
 import { LibraryTopCard } from './ui/LibraryTopCard.tsx'
 import { SeatBoard } from './lobby/SeatBoard.tsx'
 import { LandingScreen } from './lobby/LandingScreen.tsx'
+import { CornerToolbar } from './ui/CornerToolbar.tsx'
 import { InviteLink } from './lobby/InviteLink.tsx'
 import './App.css'
 
@@ -871,6 +872,7 @@ function SeatPickerScreen({ game }: { readonly game: NetworkGame }) {
           </p>
         ) : null}
       </SeatBoard>
+      <CornerToolbar />
     </div>
   )
 }
@@ -894,6 +896,7 @@ function WaitingForPlayersScreen({ game }: { readonly game: NetworkGame }) {
           <ErrorLine game={game} />
         </div>
       </SeatBoard>
+      <CornerToolbar />
     </div>
   )
 }

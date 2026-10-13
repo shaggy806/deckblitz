@@ -123,6 +123,18 @@
   max-height: calc(100vh - 96px);
   overflow-y: auto;
 }
+/* The corner toolbar out of a game (ui/CornerToolbar.tsx, the landing page
+   and the lobby): square buttons fixed to the bottom right, out of the
+   page's flow. On the landing page it's zoomed with the rest of the page
+   (`.landing > :not(.landing-backdrop)`). */
+.corner-toolbar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+}
 /* The corner toolbar's Settings button: a square with the cog. */
 .motion-cog {
   display: grid;
