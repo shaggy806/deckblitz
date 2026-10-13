@@ -51,9 +51,22 @@ network (~53 ms) plus however long the event loop was busy.
   and are clearly slow by 8 (+60%). The paced floor is ~1.35 s a frame (ack 600 ms + the think
   floor + normal bot speed's linger).
 - **Even one room blocks the loop for up to 1.7 s at a time** — far past the 300 ms search
-  budget, so something else in a settle runs long on its own: several bots' decisions back to
-  back in one settle, or building a late board's view and legal actions. The profile in phase 0
-  should find it; it matters for every room count, since it's a stall every player feels.
+  budget. **Found (2026-10-13)**: one `Room.settle` runs a whole stretch of priority passes
+  synchronously. Passes don't get a frame (`settleNow`'s `pass-priority` branch dispatches and
+  `continue`s), so from one real move to the next a settle walks every bot through every empty
+  step — timed locally with a wrapper on `settleNow`/`botAction`, the longest settles held 25-45
+  decisions (end of one turn through the next turn's main phase), most answered in 0-1 ms by a
+  shortcut but every fourth or so searched (10-35 ms), then the real move searched to its
+  budget (150-330 ms): ~400 ms in one go here, and the box runs v2 3-4x slower (the same seed's
+  decisions: p50 37 ms here, 152 ms there; its slowest single decision 0.6 s, double the
+  budget, as one simulation there is 100-250 ms). No single decision explains the stall; the
+  chain does.
+  **Fix outline** (phase 1): in `"realtime"` pacing, let `settleNow` give the event loop back
+  once it has run ~50 ms — continue on `setImmediate` instead of looping on, with a guard so a
+  `settle()` arriving meanwhile doesn't start a second loop. It changes no frame and no
+  decision, only lets other rooms' messages and acks in between, bounding a stall to about one
+  decision. Second, the `"land search"` path spent ~380 ms *outside* the budget on the box
+  (`eval-bot.ts`): bring it under the deadline.
 - **Memory isn't the limit**: rss 206 MB idle → 438 MB at 16 rooms (~15 MB a room). CPU is:
   the process showed 110–130% (the main thread plus GC and zlib's threads), load average ~1.8
   on 2 cores.
