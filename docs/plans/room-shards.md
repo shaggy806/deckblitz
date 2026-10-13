@@ -1,10 +1,9 @@
 # Rooms on worker threads (room shards)
 
-Status: **built** (2026-10-13), not yet live: rollout steps 1-8 and the code half of 9. Rooms run
-on worker threads behind `--shards N` (default 0 in code: in-process, exactly as before);
-production turns them on with `SHARDS=1` in the service unit (`DEPLOYMENT.md`). What's left of
-step 9: the deploy, measuring the box's knee to set `--max-rooms-per-shard`, and the same on a
-bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
+Status: **live** (2026-10-13): built, deployed at 77b43d95 and turned on with `SHARDS=1` in the
+box's service unit (`DEPLOYMENT.md`; the code's default stays 0). The box's knee is measured
+below; `--max-rooms-per-shard` is left unset until the user picks the limit. Left: that limit,
+and the same measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
 
@@ -251,6 +250,35 @@ export type FromShard =
   MB and shard heaps to ~560 MB; capped at 512, 807 → 911 MB, heaps ~210-310 MB, frames/s and gaps
   unchanged; 384 similar; 256 doubles the shards' busy share (GC). 512 chosen: one shard holding
   8 rooms peaked ~220 MB, so it's twice that in headroom before an out-of-memory restart.
+
+## Live on the 2-vCPU box (2026-10-13)
+
+`SHARDS=1` (one room shard plus a main thread without the engine), same load test as
+`scaling-rooms.md`'s first measurement, with `--status` through an SSH tunnel; the per-address
+cap lifted for the run by a systemd drop-in, removed after (the cap of 6 is live):
+
+| rooms | frames/s | gap median / p90 | probe (main) p95 / max | shard busy | shard delay p99 | rss |
+|---|---|---|---|---|---|---|
+| 1 | 0.80 | 1.37 / 1.54 s | 56 / 73 ms | 10% | 41 ms | 315 MB |
+| 2 | 1.57 | 1.37 / 1.65 s | 58 / 89 ms | 20% | 92 ms | 331 MB |
+| 4 | 3.03 | 1.39 / 1.74 s | 58 / 80 ms | 39% | 343 ms | 357 MB |
+| 6 | 3.92 | 1.50 / 2.07 s | 64 / 82 ms | 69% | 517 ms | 373 MB |
+| 8 | 3.68 | 1.99 / 3.01 s | 59 / 64 ms | 93% | 1.05 s | 387 MB |
+| 12 | 3.84 | 2.75 / 4.64 s | 59 / 100 ms | 100% | 2.68 s | 410 MB |
+| 16 | 4.55 | 3.12 / 4.92 s | 65 / 89 ms | 100% | 2.25 s | 429 MB |
+
+- **The main thread stays at network speed at every load** (probe max ≤ 100 ms, against 1.7-4.7 s
+  in the first run): connecting, joining and clicking never wait on a game.
+- **The shard's knee is 6-8 all-bot rooms**: the frame-gap median passes +20% over one room
+  (1.64 s) between 6 (1.50 s) and 8 (1.99 s), and the shard is saturated by 8 (93% busy). Up to
+  6, rooms keep a faster pace than either earlier run (4 rooms: 1.39 s against 1.67 and 1.48).
+  The whole box still tops out near 4-5 bot moves a second — one core's worth, as expected
+  until a bigger box adds shards.
+- **Memory** with the 512 MB heap cap: 315 → 429 MB rss at 16 rooms (the first run, no shards,
+  was 438 MB) — comfortable on 2 GB.
+- Bot decision p99 280-420 ms in the shard.
+- The load test's byte rate doesn't show event-only frames: it doesn't send `event-deltas`, so it
+  gets whole logs (a browser opts in).
 
 ## Rollout
 
