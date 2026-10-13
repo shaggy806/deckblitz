@@ -1455,6 +1455,25 @@ export class RandomController extends AutomaticController {
   }
 }
 
+/**
+ * What a land drop lets us cast this turn (`castableAfterPlay`): how many
+ * spells we'd cast together, following our own first pick one spell deep (0,
+ * 1 or 2 — `castTogether`), and how many one at a time. The first decides,
+ * the second breaks its ties.
+ */
+export interface LandReach {
+  readonly together: number;
+  readonly castable: number;
+}
+
+/** A land the view can't look past. */
+const NO_REACH: LandReach = { together: 0, castable: 0 };
+
+/** Positive when `a` reaches further than `b`, 0 when they're level. */
+export function compareReach(a: LandReach, b: LandReach): number {
+  return a.together !== b.together ? a.together - b.together : a.castable - b.castable;
+}
+
 type CastSpellLegal = Extract<LegalAction, { kind: "cast-spell" }>;
 type CastNowOffer = Extract<LegalAction, { kind: "cast-now" }>;
 type CastSpellAction = Extract<Action, { type: "cast-spell" }>;
@@ -1868,7 +1887,8 @@ export class HeuristicBotController extends AutomaticController {
    * first again.
    *
    * So the choice is made here, first on what each land lets us cast *this
-   * turn* (`castableAfter`), and then, among lands that unlock the same
+   * turn* (`castableAfter`: how many spells together, then how many one at a
+   * time — `LandReach`), and then, among lands that unlock the same
    * number of spells, on how many coloured pips in hand a land unlocks that
    * no land already on the battlefield can pay. Pips alone get it wrong: with
    * a Mountain down and {R}{R} and {U}{U} spells in hand, an Island adds a
@@ -1917,12 +1937,13 @@ export class HeuristicBotController extends AutomaticController {
     });
 
     let best = lands[0];
-    let bestCastable = -1;
+    let bestCastable: LandReach = { together: -1, castable: -1 };
     let bestFetch = false;
     let bestTapped = false;
     let bestScore = -1;
     for (const land of lands) {
-      const castable = this.castableAfter(view, land);
+      const reach = this.castableAfter(view, land);
+      const castable = compareReach(reach, bestCastable);
       const fetch = landfallOut && this.crackedOnPlay(view, land);
       const tapped = this.entersTapped(state, land.card, land.cardName);
       let score = 0;
@@ -1934,12 +1955,12 @@ export class HeuristicBotController extends AutomaticController {
         score += have.has(color) ? wanted : wanted * 10 + 100;
       }
       if (
-        castable > bestCastable ||
-        (castable === bestCastable && fetch && !bestFetch) ||
-        (castable === bestCastable && fetch === bestFetch && tapped && !bestTapped) ||
-        (castable === bestCastable && fetch === bestFetch && tapped === bestTapped && score > bestScore)
+        castable > 0 ||
+        (castable === 0 && fetch && !bestFetch) ||
+        (castable === 0 && fetch === bestFetch && tapped && !bestTapped) ||
+        (castable === 0 && fetch === bestFetch && tapped === bestTapped && score > bestScore)
       ) {
-        bestCastable = castable;
+        bestCastable = reach;
         bestFetch = fetch;
         bestTapped = tapped;
         bestScore = score;
@@ -1999,18 +2020,18 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   /**
-   * How many different spells we could cast right after playing `land` — the
+   * What we could cast right after playing `land` (`LandReach`) — the
    * engine's own answer, so cost reductions, alternative costs and lands that
-   * enter tapped all count as they would. 0 when the view can't say, which
-   * leaves the choice to the pip count.
+   * enter tapped all count as they would. Nothing when the view can't say,
+   * which leaves the choice to the pip count.
    */
-  private castableAfter(view: ControllerView, land: PlayLandLegal): number {
+  private castableAfter(view: ControllerView, land: PlayLandLegal): LandReach {
     return this.castableAfterPlay(view, this.toPlayLand(land));
   }
 
   /** {@link castableAfter} for a `play-land` action already built — what v2's
    * land search asks of each land it might play. */
-  protected castableAfterPlay(view: ControllerView, play: Action): number {
+  protected castableAfterPlay(view: ControllerView, play: Action): LandReach {
     const steps: Action[] = [play];
     let after = view.legalActionsAfter?.(steps);
     // A land that asks "choose a colour" as it enters (Valgavoth's Lair)
@@ -2033,7 +2054,7 @@ export class HeuristicBotController extends AutomaticController {
       steps.push({ type: "pay-life-for-untapped", player: this.playerId, pay: true });
       after = view.legalActionsAfter?.(steps);
     }
-    if (after === null || after === undefined) return 0;
+    if (after === null || after === undefined) return NO_REACH;
     // A fetch makes no mana itself, so the look stopped at it too: Wooded
     // Foothills read as casting nothing, a tie with a tapped Jungle Hollow,
     // when cracked for a Forest it casts a turn-one Birds of Paradise
@@ -2042,14 +2063,56 @@ export class HeuristicBotController extends AutomaticController {
     // Titania token for the fetch gone to the graveyard): a spell can't be
     // cast at sorcery speed over it, so it read as casting nothing too.
     const crack = this.fetchCrack(view, play, steps, after);
-    after = this.settledAfter(view, crack === undefined ? steps : [...steps, crack]) ?? after;
+    const settled = this.settledPath(view, crack === undefined ? steps : [...steps, crack]);
+    const landed = settled?.steps ?? steps;
+    after = settled?.actions ?? after;
     // Only what we'd actually cast: a land that "lets us cast" Sticky
     // Fingers with nothing of ours to enchant buys nothing (reported from a
     // live game, 2026-10-05 — an Island played over a Glacial Fortress on
     // turn one for exactly that).
-    return new Set(
-      after.flatMap((a) => (a.kind === "cast-spell" && this.wouldCast(view.state, a) ? [a.card] : [])),
-    ).size;
+    const offers = this.castsWeWouldMake(view.state, after);
+    return { together: this.castTogether(view, landed, offers, after), castable: offers.length };
+  }
+
+  /** One cast offer per card in `actions` that this bot would cast
+   * (`wouldCast`, asked on `state`, the board the choice is made on). */
+  private castsWeWouldMake(state: GameState, actions: readonly LegalAction[]): CastSpellLegal[] {
+    const byCard = new Map<ObjectId, CastSpellLegal>();
+    for (const a of actions) {
+      if (a.kind === "cast-spell" && !byCard.has(a.card) && this.wouldCast(state, a)) byCard.set(a.card, a);
+    }
+    return [...byCard.values()];
+  }
+
+  /**
+   * Whether the spell this bot casts first after `path` — the dearest of
+   * `offers`, as `act` picks it — leaves another castable once it has
+   * resolved: 2 when it does, 1 when it doesn't, and `offers`' count below
+   * two. Counted one at a time, every land that casts something ties: with
+   * Hinterland Harbor the only green source, a Mountain and a Forest each
+   * cast Temur Battlecrier or Sakura-Tribe Elder, but only the Forest casts
+   * both, the Mountain's Battlecrier taking the Harbor's {G} (a live misplay,
+   * 2026-10-10). The bot's own first spell, not any pair: with the Mountain,
+   * the Elder and Frostcliff Siege fit together too, but the bot casts
+   * Battlecrier first and then neither. One spell deep is enough to choose a
+   * land drop by, and a simulation a land.
+   */
+  private castTogether(
+    view: ControllerView,
+    path: readonly Action[],
+    offers: readonly CastSpellLegal[],
+    options: readonly LegalAction[],
+  ): number {
+    if (offers.length < 2 || view.viewAfter === undefined) return offers.length;
+    const ready = offers.filter((o) => !this.holdsForNextSpell(o, options));
+    const first = (ready.length > 0 ? ready : offers).reduce((a, b) => (this.manaValueOf(b.cardName) > this.manaValueOf(a.cardName) ? b : a));
+    const landed = view.viewAfter(path);
+    if (landed === null) return 1;
+    const cast = this.toCastSpell(landed.state, first);
+    if (cast.type !== "cast-spell") return 1;
+    const next = this.settledPath(view, [...path, cast]);
+    if (next === undefined) return 1;
+    return this.castsWeWouldMake(view.state, next.actions).some((a) => a.card !== first.card) ? 2 : 1;
   }
 
   /**
@@ -2080,10 +2143,14 @@ export class HeuristicBotController extends AutomaticController {
    * the way — a fetch's search, a trigger's target — answered as this bot
    * will answer it (`answerAwaited`), so the land a crack counts is the one
    * it will find, untapped or not (Evolving Wilds' enters tapped, and buys
-   * nothing this turn). `undefined` when the view can't look ahead, a choice
+   * nothing this turn). With the path that got there, for a look further on
+   * (`castTogether`). `undefined` when the view can't look ahead, a choice
    * is someone else's, or it doesn't settle in a few steps.
    */
-  private settledAfter(view: ControllerView, path: readonly Action[]): readonly LegalAction[] | undefined {
+  private settledPath(
+    view: ControllerView,
+    path: readonly Action[],
+  ): { readonly steps: readonly Action[]; readonly actions: readonly LegalAction[] } | undefined {
     if (view.viewAfter === undefined) return undefined;
     let steps = [...path];
     for (let i = 0; i < 8; i += 1) {
@@ -2096,7 +2163,7 @@ export class HeuristicBotController extends AutomaticController {
         steps = [...steps, answer];
         continue;
       }
-      if (state.zones.shared.stack.length === 0) return next.legalActions();
+      if (state.zones.shared.stack.length === 0) return { steps, actions: next.legalActions() };
       const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
       const from = Math.max(0, order.indexOf(state.priority.holder ?? this.playerId));
       steps = [...steps, ...[...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p))];

@@ -102,7 +102,23 @@ Status: fixed 2026-10-10 (its scenario now gates).
 
 ## 2026-10-10 — A Mountain played where the Forest would cast Sakura-Tribe Elder too
 
-Status: open.
+Status: fixed 2026-10-12 (its scenario now gates).
+
+- **Fix (built):** a land drop is ranked first by whether the spell the bot casts first after it —
+  the dearest it would cast, as v1's `act` picks — leaves another castable once it has resolved
+  (`castTogether` in `controller.ts`), then by the one-at-a-time count as before (the two a
+  `LandReach`, compared by `compareReach`); v1's `bestLand` and v2's land search (`eval-bot.ts`,
+  which searches only the lands that reach furthest) both use it. The Forest now reads 2 together
+  against the Mountain's 1.
+  - Not "the best pair", as the outline had it: with the Mountain, Sakura-Tribe Elder and Frostcliff
+    Siege fit together too, so every pair tied; but the bot casts Battlecrier first (the dearest,
+    level with the Siege and listed first) and then neither. Following its own first pick measures
+    the turn it will actually play, at one simulation a land.
+  - `bot:diff` against the earlyMana fix (six four-player games): 4 of 12,579 decisions, all land
+    drops from round 5 on — Smoldering Marsh over a tapped Dakmor Salvage, Command Tower over
+    Evolving Wilds and Sulfur Falls over a Mountain, each an untapped land or a colour that lets the
+    turn's first spell be followed (right), and Cabaretti Courtyard over Fabled Passage (a judgment
+    call, not checked by hand: the replay's board drifted from the diff's).
 
 - **Seen:** room FU6RP, turn 11 (four players, the user's seat bot-played): the bot played a Mountain
   and cast Temur Battlecrier, with a Forest in hand that would also have cast Sakura-Tribe Elder.
@@ -112,7 +128,7 @@ Status: open.
 - **Right:** the Forest — Forest, Island and Mountain cast Battlecrier, the Harbor the Elder. With the
   Mountain, Battlecrier takes the Harbor's {G} and the Elder has none.
 - **Scenario:** "plays the Forest that casts Temur Battlecrier and Sakura-Tribe Elder, not a Mountain"
-  (training; reads wrong today, choosing the Mountain).
+  (a gate since the fix; it read wrong before it, choosing the Mountain).
 - **Why:** v1's `bestLand` (`controller.ts`) ranks lands by `castableAfterPlay` — how many spells are
   castable *one at a time* after the land — and every spell here is, after either land, so they tie.
   The colour tie-break ties too (green and red are both on the board already: 2 wanted pips each), and

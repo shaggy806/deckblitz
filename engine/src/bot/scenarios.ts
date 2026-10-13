@@ -1692,7 +1692,6 @@ const SCENARIOS: readonly BotScenario[] = [
   }),
   asked({
     name: "plays the Forest that casts Temur Battlecrier and Sakura-Tribe Elder, not a Mountain",
-    kind: "training",
     rule: "The land drop that lets two of this turn's spells be cast together beats one that casts either alone.",
     position(registry) {
       // Reported from a live game (2026-10-10, room FU6RP turn 11, no
@@ -1701,7 +1700,10 @@ const SCENARIOS: readonly BotScenario[] = [
       // source was Hinterland Harbor alone: with the Mountain, Battlecrier
       // ({G}{U}{R}) takes the Harbor's {G} and the Elder (then {G}, a power-4
       // creature out) has none; with the Forest, Forest, Island and Mountain
-      // cast Battlecrier and the Harbor the Elder.
+      // cast Battlecrier and the Harbor the Elder. Every spell was castable
+      // one at a time after either land, so they tied; a land drop is now
+      // ranked first by whether the spell the bot casts first leaves another
+      // castable (`LandReach`, `castTogether` in `controller.ts`).
       const game = table(registry, [A, B, C, D], A);
       game.state.turn.number = 9;
       onBoard(game, "Island", A);

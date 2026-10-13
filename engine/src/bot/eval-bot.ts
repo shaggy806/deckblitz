@@ -26,7 +26,7 @@ import type { Action, AttackerDeclaration, BlockerDeclaration, LegalAction } fro
 import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
 import { createDefaultRegistry } from "../cards.js";
-import { HeuristicBotController, isLandfallPermanent, payoffFirst } from "../controller.js";
+import { HeuristicBotController, compareReach, isLandfallPermanent, payoffFirst } from "../controller.js";
 import type { ControllerView, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -886,9 +886,13 @@ export class EvalBotController extends HeuristicBotController {
       // casts more: a shock land paid for a turn-one Birds of Paradise scored
       // as 2 life for nothing and lost to a Mountain (reported from a live
       // game, 2026-10-07).
-      const castable = new Map(lands.map((l) => [l, this.castableAfterPlay(view, l)]));
-      const most = Math.max(...castable.values());
-      const fits = lands.filter((l) => castable.get(l) === most);
+      // And a land that casts two of this turn's spells together beats one
+      // that casts either alone (`LandReach`; a live misplay, 2026-10-10: a
+      // Mountain over the Forest that cast Sakura-Tribe Elder beside Temur
+      // Battlecrier).
+      const reach = lands.map((land) => ({ land, reach: this.castableAfterPlay(view, land) }));
+      const most = reach.reduce((a, b) => (compareReach(b.reach, a.reach) > 0 ? b : a)).reach;
+      const fits = reach.filter((r) => compareReach(r.reach, most) === 0).map((r) => r.land);
       const order = [
         ...fits.filter((l) => sameLand(l, inherited)),
         ...fits.filter((l) => !sameLand(l, inherited)),
