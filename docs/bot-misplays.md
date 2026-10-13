@@ -6,7 +6,32 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-10-12 — Roiling Dragonstorm on turn two over Rampant Growth
 
-Status: open.
+Status: fixed 2026-10-12 (its scenario now gates).
+
+- **Fix (built):** `earlyMana` (`features.ts`) counts each land past one per land drop the player has
+  had (`landDropsHad`: one a turn begun, less the active player's own while it hasn't played one) on
+  top of `nonlandMana`, so Rampant Growth's land is a turn-two Arcane Signet: it now scores +8.39 over
+  passing against Dragonstorm's +2.44. The leftover enchantment (`otherPermanents` 2 +
+  `permanentManaValue` 1) is the other half of the margin, but that's how every noncreature permanent
+  is priced, and a mana rock below a card in hand made casting one a loss; the missing term was the
+  ramp, not the enchantment.
+  - Counting "turns begun" alone read the next player as behind at a rollout's end (the turn has
+    begun, its land drop not yet made), so a ramped opponent whose Llanowar Elves was killed fell below
+    the two who weren't, and the bot held its Swords to Plowshares in "kills an early Llanowar Elves"
+    and "kills a Craw Wurm ramped out on turn two"; counting land drops had keeps both right (margins
+    1.8 and 1.0, as before).
+  - `bot:diff` against c0568051 (six four-player games): 5 of 12,567 decisions, all in rounds 3–5 —
+    two attacks moved to another opponent, Myriad Landscape and Harvest Season fetching lands over a
+    spell or a token, and Sakura-Tribe Elder cracked in its own main phase. The last is wrong (its land
+    enters tapped either way, and the 0/2 loses a round of blocking; the rollouts end with the turn, so
+    they never see the crack at the end of the turn before ours). Held in its own turn, it cracked in
+    the next player's upkeep instead, so a creature fetch is now held whenever it isn't due and the
+    stack is empty, outside the declare-blockers and damage steps (`holdsCreatureFetch`,
+    `controller.ts`; in its own turn, unless a landfall permanent of ours is out), gated by "keeps
+    Sakura-Tribe Elder in its own main phase early on" and "… in another player's upkeep early on".
+    The rest stand: the two attacks are judgment calls (the same attacker at another opponent, the
+    table's strength read differently once ramp counts), and Myriad Landscape and Harvest Season
+    ramping in rounds 4–5 is what the term is for.
 
 - **Seen:** room LCKCN, round 2 (four players, the user's seat bot-played): a Temur Dragons deck
   with Temple of Mystery and Shivan Reef out and its land drop made cast Roiling Dragonstorm ({1}{U}:
@@ -14,8 +39,8 @@ Status: open.
   Maelstrom Colossus and Scourge of Valkas.
 - **Right:** Rampant Growth (or Farseek). On turn two a land ahead of the curve is mana every turn
   after, and the hand is four- and five-drops under a six-mana commander; looting only sorts the hand.
-- **Scenario:** "casts Rampant Growth on turn two, not Roiling Dragonstorm" (training; reads wrong,
-  casting Dragonstorm by 0.05).
+- **Scenario:** "casts Rampant Growth on turn two, not Roiling Dragonstorm" (a gate since the fix; it
+  read wrong before it, casting Dragonstorm by 0.05).
 - **Why:** v2's search scores the two against passing (18.43): Dragonstorm **+2.45**, Rampant Growth
   **+2.40**.
   - Dragonstorm leaves the hand at seven (cast one, draw two, discard one) and puts an enchantment on

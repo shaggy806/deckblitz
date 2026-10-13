@@ -156,10 +156,11 @@ export interface EvalWeights {
    * (`features.ts`), on top of the card `hand` counts each as: what holds a
    * Swords to Plowshares back from the first creature the table plays. */
   readonly earlyRemoval: number;
-  /** Mana a turn from nonland permanents (`nonlandMana`), again, in the
-   * opening rounds only — in full through round 2, fading to nothing by round
-   * 6 (`features.ts`): acceleration is worth most, to have and to kill,
-   * before everyone has lands. */
+  /** Mana a turn from nonland permanents (`nonlandMana`), again, plus each
+   * land past one per turn the player has begun (Rampant Growth's, Sakura-Tribe
+   * Elder's), in the opening rounds only — in full through round 2, fading to
+   * nothing by round 6 (`features.ts`): acceleration is worth most, to have
+   * and to kill, before everyone has lands. */
   readonly earlyMana: number;
   /** Subtracted: creature tokens with at most 1 power and 1 toughness, whose
    * body `creatures` prices like any other (`features.ts`). */

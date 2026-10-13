@@ -2278,6 +2278,17 @@ export class HeuristicBotController extends AutomaticController {
    * capture ("bob, turn 11 end: not Pass", two lands on turn 11).
    */
   protected isCreatureFetchDue(state: GameState, source: ObjectId, abilityIndex: number): boolean {
+    if (!this.isCreatureFetch(state, source, abilityIndex) || !this.isEndOfTurnBeforeOurs(state)) return false;
+    const lands = state.zones.shared.battlefield.filter((id) => {
+      const o = state.objects[id];
+      return o?.controller === this.playerId && computeCharacteristics(state, this.registry, id).types.includes("land");
+    }).length;
+    return lands < LANDS_BEFORE_FLOOD;
+  }
+
+  /** Whether `source`'s ability `abilityIndex` is a creature's free "sacrifice
+   * this: put a land onto the battlefield" (Sakura-Tribe Elder). */
+  private isCreatureFetch(state: GameState, source: ObjectId, abilityIndex: number): boolean {
     const object = state.objects[source];
     if (object === undefined || object.zone !== "battlefield" || !this.registry.has(object.cardName)) {
       return false;
@@ -2287,13 +2298,34 @@ export class HeuristicBotController extends AutomaticController {
     const ability = def.activated?.[abilityIndex];
     if (ability === undefined || ability.cost.sacrifice !== "self" || ability.cost.mana !== null) return false;
     const effect = JSON.stringify(ability.effect ?? null);
-    if (!effect.includes('"search-library"') || !effect.includes('"destination":"battlefield"')) return false;
-    if (!this.isEndOfTurnBeforeOurs(state)) return false;
-    const lands = state.zones.shared.battlefield.filter((id) => {
-      const o = state.objects[id];
-      return o?.controller === this.playerId && computeCharacteristics(state, this.registry, id).types.includes("land");
-    }).length;
-    return lands < LANDS_BEFORE_FLOOD;
+    return effect.includes('"search-library"') && effect.includes('"destination":"battlefield"');
+  }
+
+  /**
+   * A creature fetch (`isCreatureFetch`) with nothing on the stack, outside
+   * its moment (`isCreatureFetchDue`, the end of the turn before ours) and a
+   * combat it may be blocking in: held. Its land enters tapped and untaps
+   * only at our next turn whenever it's cracked, so cracking it sooner only
+   * gives up blocking — and with the stack empty nothing threatens it. Once
+   * `earlyMana` counted a land ahead of the curve, the search cracked
+   * Sakura-Tribe Elder in its own main phase and in another player's upkeep
+   * (`bot:diff`, 2026-10-12): its rollouts end with the turn, so the crack at
+   * the end of the turn before ours is never seen. In our own turn a landfall
+   * permanent of ours wants the land now, so then it's the search's call; so
+   * is a spell on the stack (removal to answer) and a block (chump, then
+   * sacrifice it before damage).
+   */
+  protected holdsCreatureFetch(state: GameState, legal: LegalAction): boolean {
+    if (legal.kind !== "activate-ability" || !this.isCreatureFetch(state, legal.source, legal.abilityIndex)) {
+      return false;
+    }
+    if (state.zones.shared.stack.length > 0 || this.isEndOfTurnBeforeOurs(state)) return false;
+    if (state.turn.step === "declare-blockers" || state.turn.step === "combat-damage") return false;
+    if (activePlayerOf(state) !== this.playerId) return true;
+    return !state.zones.shared.battlefield.some((id) => {
+      const object = state.objects[id];
+      return object?.controller === this.playerId && isLandfallPermanent(this.registry, object.cardName);
+    });
   }
 
   /**
@@ -3569,6 +3601,7 @@ export class HeuristicBotController extends AutomaticController {
         this.isManaOnlyAbility(o) ||
         this.isPointlessReattach(view.state, o) ||
         this.holdsManaLandFetch(view.state, o) ||
+        this.holdsCreatureFetch(view.state, o) ||
         (this.activations.get(`${o.source}:${o.abilityIndex}`) ?? 0) >= MAX_ACTIVATIONS_PER_TURN ||
         this.aimsOnlyAtWrongSide(view.state, o) ||
         this.wastedNow(view.state, o) ||

@@ -1594,6 +1594,51 @@ const SCENARIOS: readonly BotScenario[] = [
   ),
   ...(
     [
+      ["keeps Sakura-Tribe Elder in its own main phase early on", A, 9],
+      ["keeps Sakura-Tribe Elder in another player's upkeep early on", C, 11],
+    ] as const
+  ).map(([name, active, turn]) =>
+    asked({
+      name,
+      rule: "A creature that fetches a land by sacrificing itself does it at the end of the turn before ours, where the land enters tapped all the same, and blocks until then.",
+      position(registry) {
+        // `bot:diff` (2026-10-12): once `earlyMana` counted a land past the
+        // curve, the search cracked the Elder in its own main phase and in
+        // another player's upkeep in round 3 — its rollouts end with the
+        // turn, so the crack at the end of the turn before ours never shows,
+        // and the land now outscored the 0/2. `holdsCreatureFetch`.
+        const game = table(registry, [A, B, C, D], active);
+        game.state.turn.number = turn; // round 3
+        lands(game, "Forest", A, 3);
+        const elder = onBoard(game, "Sakura-Tribe Elder", A);
+        game.debugSpawn("Forest", A, "library");
+        onBoard(game, "Llanowar Elves", C);
+        if (active === A) {
+          game.state.players[A].landsPlayedThisTurn = 1;
+        } else {
+          // On to dave's upkeep, the next turn, with alice holding priority.
+          game.advanceUntil(
+            (s) =>
+              (s.turn.step === "upkeep" && s.priority.holder === A && s.zones.shared.stack.length === 0) ||
+              s.result.over,
+          );
+          if (game.state.turn.step !== "upkeep" || game.state.priority.holder !== A) {
+            return { passed: false, detail: "never reached an upkeep with priority" };
+          }
+        }
+        return {
+          game,
+          player: A,
+          judge: (action) => ({
+            passed: !(action.type === "activate-ability" && action.source === elder),
+            detail: `chose ${describeAction(action)}`,
+          }),
+        };
+      },
+    }),
+  ),
+  ...(
+    [
       ["cracks Bountiful Landscape at the end of the turn before its own", D, true],
       ["holds Bountiful Landscape at another player's end step", B, false],
     ] as const
@@ -2305,7 +2350,6 @@ const SCENARIOS: readonly BotScenario[] = [
   }),
   asked({
     name: "casts Rampant Growth on turn two, not Roiling Dragonstorm",
-    kind: "training",
     rule: "On turn two a ramp spell puts a land down for every turn after, where looting two cards only sorts the hand; with a six-mana commander and a hand of four- and five-drops, ramp first.",
     position(registry) {
       // Reported from a live game (2026-10-12, room LCKCN, no capture; the
@@ -2313,7 +2357,11 @@ const SCENARIOS: readonly BotScenario[] = [
       // Shivan Reef out and its land drop made, the bot cast Roiling
       // Dragonstorm (draw two, discard one) with Rampant Growth and Farseek
       // in hand, a Temur Dragons deck whose hand was Defense of the Heart,
-      // Maelstrom Colossus and Scourge of Valkas.
+      // Maelstrom Colossus and Scourge of Valkas. `earlyMana` counted rocks
+      // and mana creatures only, so Rampant Growth's land (+2.40) lost to
+      // the loot and its leftover enchantment (+2.45); a land past one per
+      // land drop had counts too now, as a turn-two Arcane Signet does
+      // (`docs/bot-misplays.md`).
       const game = table(registry, [A, B, C, D], A);
       game.state.turn.number = 5; // alice's second turn
       // Out since turn one, so untapped: it enters tapped even when spawned.

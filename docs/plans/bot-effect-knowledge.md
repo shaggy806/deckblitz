@@ -545,7 +545,10 @@ the Warhammer in use over a Sol Ring" on the other side. `isRemoval` now reads a
 modes too (Abrade). `scenarios.ts`'s mid-game clock moved to round 9, past the fade. `bot:diff`
 against 2b1f63c8: 22 of 27,452 decisions over 12 four-player games — Arcane Signet and Orb of
 Dragonkind cast ahead of spells in rounds 2–3, Dismantling Wave at a Sol Ring over cycling it,
-a Lightning Bolt held from a Scavenging Ooze, and a few attacks and blocks.
+a Lightning Bolt held from a Scavenging Ooze, and a few attacks and blocks. Since 2026-10-12
+it counts lands past one per land drop had too (a turn-two Rampant Growth lost to Roiling
+Dragonstorm's loot without it — `docs/bot-misplays.md`), with a creature fetch held until its
+moment (`holdsCreatureFetch`) so the land it now scores doesn't crack Sakura-Tribe Elder early.
 
 **After the plan: tokens and spare life (2026-10-04, the user's call).** Two terms that only work
 together. `smallTokens` (1.4, subtracted): creature tokens of 1 power and 1 toughness, whose body

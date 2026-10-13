@@ -758,6 +758,9 @@ export class EvalBotController extends HeuristicBotController {
         // A land that taps for mana and fetches (Bountiful Landscape) waits
         // for the end of the turn before ours (`holdsManaLandFetch`).
         if (this.holdsManaLandFetch(view.state, legal)) continue;
+        // So does a creature's (Sakura-Tribe Elder), outside a combat or a
+        // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
+        if (this.holdsCreatureFetch(view.state, legal)) continue;
         const due = this.isCantripDue(view.state, legal) || this.isSuspendDue(legal);
         const aimed = candidateActions(aimOffer(view.state, this.cards, player, legal), player);
         for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {

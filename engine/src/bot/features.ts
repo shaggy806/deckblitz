@@ -215,6 +215,20 @@ export function roundOf(state: GameState): number {
   return Math.ceil(state.turn.number / Math.max(1, state.turnOrder.length));
 }
 
+/** How many land drops `player` has had: one a turn begun (the round, less
+ * one while their seat hasn't come round yet this round), less this turn's
+ * while it's theirs and no land is down yet — a rollout stops as the next
+ * turn begins, before its land drop, and a ramped player read there as
+ * behind. Extra turns aren't counted. */
+function landDropsHad(state: GameState, player: PlayerId): number {
+  const seats = Math.max(1, state.turnOrder.length);
+  const round = roundOf(state);
+  const offset = (state.turnOrder.indexOf(player) - state.turn.activePlayerIndex + seats) % seats;
+  if (offset === 0) return Math.max(0, state.players[player].landsPlayedThisTurn > 0 ? round : round - 1);
+  const activeAt = (state.turn.number - 1) % seats;
+  return activeAt + offset >= seats ? round : Math.max(0, round - 1);
+}
+
 /** How much of `nonlandMana` counts as `earlyMana` this round: 1 through
  * `EARLY_MANA_FULL`, falling in a line to 0 at `EARLY_MANA_END`. */
 function earlyManaShare(state: GameState): number {
@@ -1174,8 +1188,13 @@ function playerFeaturesUncached(
     earlyRemoval,
     // Mana from rocks and creatures in the opening rounds, on top of
     // `nonlandMana`: a turn-one Sol Ring is worth killing then and much less
-    // by turn six (the user's ask, 2026-10-04).
-    earlyMana: nonlandMana * earlyManaShare(state),
+    // by turn six (the user's ask, 2026-10-04). A land past one per land drop
+    // the player has had is the same acceleration — a turn-two Rampant Growth
+    // is the turn-two Arcane Signet — and counted as only rocks and
+    // creatures, the bot looted with Roiling Dragonstorm over Rampant Growth
+    // on turn two (a live game, 2026-10-12). A natural land drop never
+    // counts, so a land-pass turn gains nothing.
+    earlyMana: (nonlandMana + Math.max(0, landCount - landDropsHad(state, player))) * earlyManaShare(state),
     smallTokens,
   };
 }
