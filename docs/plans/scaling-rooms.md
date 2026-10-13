@@ -139,6 +139,10 @@ They multiply with phase 2, so they come first; each is chosen by phase 0's prof
 
 ## Phase 2: rooms on worker threads (the step that lets a bigger box pay)
 
+**The detailed design is `room-shards.md`** (2026-10-13): the boundary, the main↔shard protocol,
+memory measured (~250-300 MB per worker — one shard plus main on the 2 GB box), and a
+nine-commit rollout. What follows is the sketch it grew from.
+
 **Room shards.** N worker threads (`worker_threads`), each owning a share of the rooms whole:
 their `Game`s, bots, settles, views and stringified frames. The main thread keeps only the
 sockets, HTTP, the rate limiter and a room-id → shard map, and forwards messages both ways

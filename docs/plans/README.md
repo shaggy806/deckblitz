@@ -24,6 +24,8 @@ is still unscoped.
 
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
+`room-shards` (**designed**) is phase 2 of `scaling-rooms` in detail: rooms on worker threads, the main thread loading no engine, the main↔shard message protocol, memory per worker, placement and admission, and the commit-by-commit rollout.
+
 `decision-registry` records how the decision kinds (19 then, 20 with `cast-now`) became one module each under
 `engine/src/decisions/`, and why `game.ts` stays binary to git.
 
