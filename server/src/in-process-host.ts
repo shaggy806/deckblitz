@@ -18,11 +18,26 @@ import type { StatusParts } from "./status-server.js";
 import { importDeps, runImportJob } from "./import-deck.js";
 import type { ImportDeps } from "./import-deck.js";
 import type { ImportSink } from "./import-route.js";
+import { roomsFor } from "./shard.js";
+import type { ShardConfig } from "./shard-protocol.js";
 
 export interface InProcessHostOptions extends RoomServerOptions {
   /** What `/import-deck` jobs read; a registry of its own, built on the
    * first import, if absent. */
   readonly importDeps?: ImportDeps;
+}
+
+/** The server's rooms on this thread, set up from the same settings a shard
+ * gets (`index.ts` with `--shards 0`): one registry, a manager over it, the
+ * reaper and the deck importer. */
+export function createInProcessHost(settings: Omit<ShardConfig, "index" | "importJobs" | "loadReportMs">): InProcessRoomHost {
+  const { registry, manager } = roomsFor(settings);
+  return new InProcessRoomHost(manager, {
+    builder: settings.builder,
+    ...(settings.reapIdleMs !== undefined ? { reapIdleMs: settings.reapIdleMs } : {}),
+    ...(settings.reapIntervalMs !== undefined ? { reapIntervalMs: settings.reapIntervalMs } : {}),
+    importDeps: importDeps(registry),
+  });
 }
 
 export class InProcessRoomHost implements RoomHost {

@@ -22,6 +22,12 @@ that file.
   bots, set bot decks and speed, start the game, and deal a rematch once it's over
   (`requireHost` in `room-service.ts`). A rematch is a new `Room` under the same code
   (`RoomManager.rematch`), its frames carrying the next `game` number.
+- **Rooms can run on worker threads** (`--shards N`, default 0 = on the main thread;
+  `docs/plans/room-shards.md`). Then main keeps sockets, routes and HTTP and **imports no engine**:
+  `index.ts`, `transport.ts`, `worker-host.ts`, `room-host.ts`, `shard-protocol.ts`,
+  `room-code.ts`, `status-server.ts`, `import-route.ts` and `load-monitor.ts` import values only
+  from Node, `ws` and each other (`test/main-imports.test.ts`); everything a room does is
+  shard-side, behind `RoomService`. Keep per-connection state in the service, never a module.
 - **The wire protocol lives in the `protocol/` workspace**, imported as types by both server
   and client. Change it there, never restate it here.
 - **Security-relevant:** printings are accepted only as a bare Scryfall card id
@@ -37,7 +43,9 @@ that file.
 
 `room.ts`, `pending-room.ts`, `room-manager.ts`, `room-service.ts` (the message handlers and
 `broadcast`, per connection by `ConnId`), `transport.ts` (sockets, rate limit, compression),
-`room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `host.ts`, `decks.ts` (fallback
+`room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `worker-host.ts` /
+`shard.ts` / `shard-worker.ts` / `shard-protocol.ts` (rooms on worker threads; tests drive them
+in-thread through `loopback-channel.ts`), `room-code.ts`, `host.ts`, `decks.ts` (fallback
 seat decks from the engine's `SAMPLE_DECKS`), `import-deck.ts` (`POST /import-deck`'s job,
 `runImportJob`, whose HTTP side with a 1 MB body cap is `import-route.ts`; streamed NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `card-data.ts`,
 else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's generated tag index),
@@ -52,7 +60,9 @@ loopback status page, with `load-monitor.ts`'s event-loop numbers). Tests in
 
 (From the repo root with `-w server`.)
 
-- `test`, `typecheck`, `build`, `start` (the real server on `ws://localhost:4000`), `dev`.
+- `test`, `typecheck`, `build`, `start` (the real server on `ws://localhost:4000`; `-- --shards N`
+  for rooms on N worker threads), `dev`. `test/worker-smoke.test.ts` runs real workers on
+  `dist/` and skips itself when `dist/` is older than `src/`: build before trusting a pass.
 - `dev-rooms`: a room server preloaded with the boards in `scripts/dev-scenarios.mjs`, plus a
   loopback command port on 4099. Use it to check a client change against a known position (the
   `dev-up` skill starts it). Room codes and command-port ops are in

@@ -43,6 +43,14 @@ export interface RoomServerOptions {
   readonly reapIntervalMs?: number;
 }
 
+/** What one broadcast's spectators have in common: the view, the seats, and
+ * each distinct frame made so far, by the log slice and art it carries. */
+interface SharedSpectatorFrame {
+  readonly view: PlayerView;
+  readonly seats: readonly SeatStatus[];
+  readonly frames: Map<string, ServerMessage>;
+}
+
 /** A room's stage, as `RoomEvent`s report it. */
 function stageOf(room: Room | PendingRoom): RoomStage {
   if (room instanceof PendingRoom) return "waiting";
@@ -169,14 +177,26 @@ export class RoomService {
   }
 
   /** One message from `conn`. Whatever it throws goes back to `conn` as an
-   * `error`. */
-  handle(conn: ConnId, message: ClientMessage): void {
+   * `error`. `roomId`, on a create, is the code to open the room under — one
+   * main allocated and is already routing here; if no room ends up under it
+   * (an unknown lesson), it's reported `gone` so main lets it go. */
+  handle(conn: ConnId, message: ClientMessage, roomId?: string): void {
     const connection = this.connection(conn);
     try {
-      this.dispatch(conn, connection, message);
+      this.dispatch(conn, connection, message, roomId);
     } catch (err) {
       connection.send({ type: "error", message: err instanceof Error ? err.message : String(err) });
     }
+    if (roomId !== undefined && this.manager.get(roomId) === undefined) {
+      const kind = message.type === "tutorial-create" ? "tutorial" : message.type === "builder-create" ? "builder" : "lobby";
+      this.outbox.roomChanged?.({ id: roomId, kind, stage: "gone" });
+    }
+  }
+
+  /** `conn` is watching a room on another shard now: it stops watching here. */
+  unspectate(conn: ConnId): void {
+    const connection = this.connections.get(conn);
+    if (connection !== undefined) this.stopSpectating(connection);
   }
 
   /** `conn` closed: it stops watching, and leaves the room it's bound to. */
@@ -212,7 +232,12 @@ export class RoomService {
     this.noteStage(room);
     const seats = room.seatStatuses();
     for (const { seat, connection } of room.connectedSeats()) connection.send(this.seatFrame(room, seat, connection, seats));
-    for (const connection of this.spectatorsOf(room.id)) connection.send(this.spectatorFrame(room, connection));
+    const spectators = this.spectatorsOf(room.id);
+    if (spectators.length === 0) return;
+    // Every spectator sees the same view; those who had the same frames
+    // before get the very same message, which a shard encodes once.
+    const shared: SharedSpectatorFrame = { view: room.game.viewFor(SPECTATOR), seats, frames: new Map() };
+    for (const connection of spectators) connection.send(this.spectatorFrame(room, connection, shared));
   };
 
   /** One frame of `room`'s game for the connection seated at `seat`. */
@@ -293,19 +318,25 @@ export class RoomService {
   }
 
   /** One frame of `room`'s game for a spectator: every hand hidden
-   * (`SPECTATOR`'s view), no actions, the first seat nearest. */
-  private spectatorFrame(room: Room, connection: Connection): ServerMessage {
+   * (`SPECTATOR`'s view), no actions, the first seat nearest. Within one
+   * broadcast (`shared`), spectators whose frame would read the same — the
+   * same slice of the log, and the art manifest or not — get one message. */
+  private spectatorFrame(room: Room, connection: Connection, shared?: SharedSpectatorFrame): ServerMessage {
     const firstFrame = !this.sentArtManifest.has(connection);
     if (firstFrame) this.sentArtManifest.add(connection);
-    return {
+    const sliced = this.newEvents(room, shared?.view ?? room.game.viewFor(SPECTATOR), connection);
+    const key = `${sliced.eventsFrom}:${firstFrame}`;
+    const same = shared?.frames.get(key);
+    if (same !== undefined) return same;
+    const message: ServerMessage = {
       type: "state",
       roomId: room.id,
       seq: room.frameSeq,
       game: room.gameNumber,
       seat: room.game.state.turnOrder[0],
-      ...this.newEvents(room, room.game.viewFor(SPECTATOR), connection),
+      ...sliced,
       actions: [],
-      seats: room.seatStatuses(),
+      seats: shared?.seats ?? room.seatStatuses(),
       autoPassing: false,
       autoPassPaused: false,
       isHost: false,
@@ -316,6 +347,8 @@ export class RoomService {
       spectating: true,
       ...(firstFrame ? { artManifest: this.artManifestFor(room) } : {}),
     };
+    shared?.frames.set(key, message);
+    return message;
   }
 
   /** Every card in the room's decks, worked out once: the cards are all there
@@ -430,7 +463,7 @@ export class RoomService {
     return session;
   }
 
-  private dispatch(conn: ConnId, connection: Connection, message: ClientMessage): void {
+  private dispatch(conn: ConnId, connection: Connection, message: ClientMessage, roomId: string | undefined): void {
     const manager = this.manager;
     switch (message.type) {
       case "create-room": {
@@ -449,6 +482,7 @@ export class RoomService {
             rules: COMMANDER_RULES,
           },
           message.hostToken,
+          roomId,
         );
         connection.send({ type: "room-created", roomId: room.id });
         return;
@@ -727,7 +761,7 @@ export class RoomService {
       }
       case "builder-create": {
         if (!this.builderEnabled) throw new Error("this server wasn't started with --builder");
-        const session = manager.createBuilder(message.hostToken);
+        const session = manager.createBuilder(message.hostToken, roomId);
         connection.send({ type: "room-created", roomId: session.id });
         return;
       }
@@ -764,6 +798,7 @@ export class RoomService {
         const session = manager.createTutorial(
           message.lesson,
           typeof message.hostToken === "string" ? message.hostToken : undefined,
+          roomId,
         );
         connection.send({ type: "room-created", roomId: session.id, seat: session.seat });
         return;

@@ -17,7 +17,7 @@
  */
 
 import { colorIdentityOf, commandersOf, createDefaultRegistry, validateCommanderDeck } from "engine";
-import type { Color, DeckList, GameConfig, PlayerId } from "engine";
+import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine";
 import { botNameFits, botNameFor } from "./bot-names.js";
 import type { Connection } from "./room.js";
 import { HostRole } from "./host.js";
@@ -47,8 +47,10 @@ const MAX_DISPLAY_NAME_LENGTH = 20;
  * anyone in the room can send either message. */
 const MIN_SEATS = 2;
 
-/** Every card the registry knows, built once. */
-const REGISTRY = createDefaultRegistry();
+/** Every card the registry knows, built once — the first time a deck is
+ * checked, not when this module loads, so importing it costs nothing. */
+let registryBuilt: CardRegistry | null = null;
+const registry = (): CardRegistry => (registryBuilt ??= createDefaultRegistry());
 
 /** The maximum distinct unknown names worth naming back to the client — a
  * decklist built against an older pool could have dozens. */
@@ -60,8 +62,8 @@ function deckIdentity(deck: PendingDeck): Set<Color> {
   const commanders = commandersOf(deck);
   const identity = new Set<Color>();
   for (const name of commanders.length > 0 ? commanders : deck.cards) {
-    if (!REGISTRY.has(name)) continue;
-    for (const c of colorIdentityOf(REGISTRY.get(name), REGISTRY)) identity.add(c);
+    if (!registry().has(name)) continue;
+    for (const c of colorIdentityOf(registry().get(name), registry())) identity.add(c);
   }
   return identity;
 }
@@ -83,7 +85,7 @@ function deckIdentity(deck: PendingDeck): Set<Color> {
  * 2026-10-11). */
 function deckProblemOf(deck: PendingDeck | null): string | null {
   if (deck === null) return null;
-  const result = validateCommanderDeck({ commanders: commandersOf(deck), cards: deck.cards, size: 100 }, REGISTRY);
+  const result = validateCommanderDeck({ commanders: commandersOf(deck), cards: deck.cards, size: 100 }, registry());
   if (!result.legal) return result.violations[0] ?? "not a Commander-legal deck";
   const [banned] = result.banned;
   return banned === undefined ? null : `"${banned}" is banned in Commander`;
@@ -98,7 +100,7 @@ function assertDeckIsBuildable(deck: PendingDeck): void {
     throw new Error(`a deck has at most two commanders, this one names ${commanders.length}`);
   }
   const unknown = [
-    ...new Set([...deck.cards, ...commanders].filter((name) => !REGISTRY.has(name))),
+    ...new Set([...deck.cards, ...commanders].filter((name) => !registry().has(name))),
   ];
   if (unknown.length === 0) return;
   const shown = unknown.slice(0, MAX_REPORTED_UNKNOWN).join(", ");

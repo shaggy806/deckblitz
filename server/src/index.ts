@@ -1,19 +1,40 @@
+/**
+ * The room server: sockets on `PORT` (4000), the operator status page on
+ * loopback `STATUS_PORT` (4010), `POST /import-deck`.
+ *
+ * `--shards N` (or `SHARDS`) runs the rooms on N worker threads
+ * (`worker-host.ts`, `docs/plans/room-shards.md`); this thread then keeps
+ * only the sockets, routes and HTTP, and imports no engine. `0`, the
+ * default for now, runs them on this thread as the server always has — that
+ * path is loaded only when asked for.
+ */
+
 import { createServer } from "node:http";
+import { fileURLToPath } from "node:url";
 import { WebSocketServer } from "ws";
-import { createDefaultRegistry } from "engine";
-import { RoomManager } from "./room-manager.js";
-import { COMPRESSION, attachRoomServer } from "./ws-server.js";
-import { importDeps } from "./import-deck.js";
 import { handleImportRoute } from "./import-route.js";
+import type { RoomHost } from "./room-host.js";
+import type { ShardSettings } from "./worker-host.js";
+import { WorkerRoomHost, workerChannel } from "./worker-host.js";
 import { startStatusServer } from "./status-server.js";
-import { CAPTURE_KEEP, DEFAULT_CAPTURE_DIR } from "./capture.js";
+import { COMPRESSION, attachTransport } from "./transport.js";
 
 const port = Number(process.env.PORT ?? 4000);
 // "*" is fine for local/LAN dev; set CLIENT_ORIGIN to the real site once
 // this is reachable from the open internet so a stranger's page can't drive
 // this endpoint against a browser that happens to have it open.
 const clientOrigin = process.env.CLIENT_ORIGIN ?? "*";
-const registry = createDefaultRegistry();
+
+const argAfter = (flag: string): string | undefined => {
+  const at = process.argv.indexOf(flag);
+  return at >= 0 ? process.argv[at + 1] : undefined;
+};
+
+// `--shards N`: how many worker threads run the rooms; 0 runs them here.
+const shardsArg = argAfter("--shards") ?? process.env.SHARDS ?? "0";
+const shards = Number(shardsArg);
+if (!Number.isInteger(shards) || shards < 0) throw new Error(`--shards needs a whole number, 0 or more (got ${shardsArg})`);
+
 // `--capture`: keep bots' recent decisions so a blunder can be saved as a
 // training scenario (`capture.ts`). The local `dev` script passes it; the
 // production service runs `node dist/index.js` without it, and must — a
@@ -21,11 +42,15 @@ const registry = createDefaultRegistry();
 const capture = process.argv.includes("--capture");
 // `--capture-keep N`: how many decisions each room keeps (`CAPTURE_KEEP`
 // otherwise). Each is a whole game state, ~0.4 MB late in a four-player game.
-const keepArg = process.argv.indexOf("--capture-keep");
-const keep = keepArg >= 0 ? Number(process.argv[keepArg + 1]) : CAPTURE_KEEP;
-if (!Number.isInteger(keep) || keep < 1) throw new Error("--capture-keep needs a whole number of decisions, at least 1");
-const manager = new RoomManager(capture ? { capture: { dir: DEFAULT_CAPTURE_DIR, registry, keep } } : {});
-if (capture) console.log(`capturing bot decisions to ${DEFAULT_CAPTURE_DIR}, the last ${keep} per room`);
+const keepArg = argAfter("--capture-keep");
+const keep = keepArg === undefined ? undefined : Number(keepArg);
+if (keep !== undefined && (!Number.isInteger(keep) || keep < 1)) {
+  throw new Error("--capture-keep needs a whole number of decisions, at least 1");
+}
+// `captures/` at the repo root — `capture.ts`'s `DEFAULT_CAPTURE_DIR`, worked
+// out here too so this thread needn't load the engine to say where.
+const captureDir = fileURLToPath(new URL("../../captures/", import.meta.url));
+if (capture) console.log(`capturing bot decisions to ${captureDir}, the last ${keep ?? "200"} per room`);
 // `--builder`: the scenario builder (`builder.ts`), which lets a client put
 // any card anywhere — a developer's server only, never the public site.
 const builder = process.argv.includes("--builder");
@@ -43,6 +68,26 @@ const statusPort = Number(process.env.STATUS_PORT ?? 4010);
 const IDLE_ROOM_MS = 30 * 60 * 1000;
 const REAP_INTERVAL_MS = 15 * 60 * 1000;
 
+const settings: ShardSettings = {
+  builder,
+  capture: capture ? { dir: captureDir, ...(keep !== undefined ? { keep } : {}) } : null,
+  reapIdleMs: IDLE_ROOM_MS,
+  reapIntervalMs: REAP_INTERVAL_MS,
+  loadReportMs: 1_000,
+};
+
+let host: RoomHost;
+if (shards === 0) {
+  const { createInProcessHost } = await import("./in-process-host.js");
+  host = createInProcessHost(settings);
+} else {
+  const started = Date.now();
+  const workers = new WorkerRoomHost({ shards, config: settings, spawn: (config) => workerChannel(config) });
+  await workers.start();
+  console.log(`${shards} room shard(s) ready in ${((Date.now() - started) / 1000).toFixed(1)} s`);
+  host = workers;
+}
+
 const httpServer = createServer((req, res) => {
   // `POST /import-deck`: the job runs wherever the host keeps the card pool.
   if (handleImportRoute(req, res, (text, sink) => host.importDeck(text, sink), clientOrigin)) return;
@@ -51,15 +96,25 @@ const httpServer = createServer((req, res) => {
 });
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
-const host = attachRoomServer(wss, manager, {
-  builder,
-  reapIdleMs: IDLE_ROOM_MS,
-  reapIntervalMs: REAP_INTERVAL_MS,
-  importDeps: importDeps(registry),
-});
-startStatusServer(() => host.status(), statusPort, host.decisions);
+attachTransport(wss, host);
+const statusServer = startStatusServer(() => host.status(), statusPort, host.decisions);
 
 httpServer.listen(port, () => {
   console.log(`MTG Deck Blitz room server listening on ws://localhost:${port}`);
   console.log(`status (loopback only): curl localhost:${statusPort}/status`);
 });
+
+// Stop taking connections, let the rooms' host stop (a shard is given two
+// seconds, then terminated), and exit.
+let stopping = false;
+const shutdown = (signal: string): void => {
+  if (stopping) return;
+  stopping = true;
+  console.log(`${signal}: shutting down`);
+  httpServer.close();
+  statusServer.close();
+  for (const client of wss.clients) client.terminate();
+  void host.stop().finally(() => process.exit(0));
+};
+process.once("SIGTERM", () => shutdown("SIGTERM"));
+process.once("SIGINT", () => shutdown("SIGINT"));
