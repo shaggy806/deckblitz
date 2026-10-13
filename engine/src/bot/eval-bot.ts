@@ -27,7 +27,7 @@ import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
 import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController, compareReach, isLandfallPermanent, payoffFirst } from "../controller.js";
-import type { ControllerView, PlayerController } from "../controller.js";
+import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import { manaValue, parseManaCost } from "../mana.js";
@@ -890,13 +890,36 @@ export class EvalBotController extends HeuristicBotController {
       // that casts either alone (`LandReach`; a live misplay, 2026-10-10: a
       // Mountain over the Forest that cast Sakura-Tribe Elder beside Temur
       // Battlecrier).
-      const reach = lands.map((land) => ({ land, reach: this.castableAfterPlay(view, land) }));
+      //
+      // One look and one search per land *name*: two Forests in hand reach the
+      // same spells and score the same, and each look is several board clones
+      // and a simulation one spell deep, run outside the search budget — with a
+      // few basics in hand, most of a land decision's time (~380 ms on the live
+      // box, 2026-10-13; `docs/plans/scaling-rooms.md`).
+      const nameOf = (land: Action): string =>
+        land.type === "play-land" ? (view.state.objects[land.card]?.cardName ?? land.card) : "";
+      const reachByName = new Map<string, LandReach>();
+      const reach = lands.map((land) => {
+        const name = nameOf(land);
+        let landReach = reachByName.get(name);
+        if (landReach === undefined) {
+          landReach = this.castableAfterPlay(view, land);
+          reachByName.set(name, landReach);
+        }
+        return { land, reach: landReach };
+      });
       const most = reach.reduce((a, b) => (compareReach(b.reach, a.reach) > 0 ? b : a)).reach;
       const fits = reach.filter((r) => compareReach(r.reach, most) === 0).map((r) => r.land);
+      const seen = new Set<string>();
       const order = [
         ...fits.filter((l) => sameLand(l, inherited)),
         ...fits.filter((l) => !sameLand(l, inherited)),
-      ];
+      ].filter((l) => {
+        const name = nameOf(l);
+        if (seen.has(name)) return false;
+        seen.add(name);
+        return true;
+      });
       let bestLand = order[0];
       let bestLandScore = -Infinity;
       for (const land of order) {
