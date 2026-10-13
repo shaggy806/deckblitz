@@ -29,7 +29,9 @@ that file.
   `/status` endpoint runs on a **separate loopback-only port** (4010) on purpose: the game port
   is public through the Cloudflare tunnel. Captures (`--capture`) hold whole hidden state, and the
   scenario builder (`--builder`, `builder.ts`) lets a client put any card anywhere, so both are
-  dev-only: the production service starts with neither.
+  dev-only: the production service starts with neither. A **tutorial room** (`tutorial-session.ts`)
+  is on every server, so a client names a lesson by id only, never a board, and its `state`
+  carries the lesson's progress (`TutorialInfo`), never the spec.
 
 ## Where things are
 
@@ -39,7 +41,8 @@ NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `car
 else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's generated tag index),
 `capture.ts`, `builder.ts` (the scenario builder: a board built from data, rebuilt into a new
 frozen `Room` under the same code on every edit), `scripted-bot.ts` (an opponent that plays a
-script by card name, v1 answering the rest; dev-rooms' bots too), `status.ts`. Tests in
+script by card name, v1 answering the rest; dev-rooms' bots too), `tutorial-session.ts` and
+`tutorials/` (tutorial rooms: lessons as data, goals checked on every frame), `status.ts`. Tests in
 `src/test/`.
 
 ## Commands

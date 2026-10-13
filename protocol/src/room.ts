@@ -12,6 +12,7 @@
 
 import type { Action, ArtManifestEntry, LegalAction, PlayerId, PlayerView, Step } from "engine";
 import type { BuilderInfo, ScenarioSpec } from "./scenario.js";
+import type { TutorialInfo } from "./tutorial.js";
 
 /**
  * A player's standing priority-passing preferences — their own, kept on
@@ -470,6 +471,34 @@ export type ClientMessage =
       readonly type: "builder-seat";
       readonly roomId: string;
       readonly seat: PlayerId;
+    }
+  // --- tutorial rooms (any server; see `tutorial.ts` and the `state`
+  // message's `tutorial`) -----------------------------------------------------
+  | {
+      /** Opens a tutorial room on lesson `lesson`'s first board, against its
+       * scripted opponent. Answered with `room-created`, whose `seat` is the
+       * seat kept for the creator: the client joins (presenting `hostToken`)
+       * and claims it as for any room. An unknown lesson is refused. */
+      readonly type: "tutorial-create";
+      readonly lesson: string;
+      /** As `create-room`'s: binds the creator as the room's host on
+       * `join-room`, which is who may press Next and Retry. */
+      readonly hostToken?: string;
+    }
+  | {
+      /** The player pressed Next on a coach card whose `advance` is
+       * `"next"`. Host only; refused on a `"goal"` card. */
+      readonly type: "tutorial-next";
+      readonly roomId: string;
+      /** The id of the card the Next was pressed on, so a double click (or a
+       * stale card) can't skip the one after it. */
+      readonly step: string;
+    }
+  | {
+      /** Rewinds the lesson to the start of its current chapter: the board as
+       * it stood then, the chapter's goals undone. Host only. */
+      readonly type: "tutorial-retry";
+      readonly roomId: string;
     };
 
 /** One bot decision a capture-enabled room kept — see `capture-list`. */
@@ -485,7 +514,13 @@ export interface CaptureSummary {
 }
 
 export type ServerMessage =
-  | { readonly type: "room-created"; readonly roomId: string }
+  | {
+      readonly type: "room-created";
+      readonly roomId: string;
+      /** The seat kept for the creator — a tutorial room's, whose other
+       * seats are its scripted opponents. Absent for any other room. */
+      readonly seat?: PlayerId;
+    }
   | {
       readonly type: "room-joined";
       readonly roomId: string;
@@ -555,6 +590,10 @@ export type ServerMessage =
       readonly capture?: true;
       /** Present in a scenario builder room — see `scenario.ts`. */
       readonly builder?: BuilderInfo;
+      /** Present in a tutorial room: where its lesson stands — see
+       * `tutorial.ts`. Never the board's spec, nor anything a seat's view
+       * hides. */
+      readonly tutorial?: TutorialInfo;
       /** This connection is a spectator (`spectate-room`): `seat` is only
        * whose side of the table is drawn nearest, `view` hides every hand,
        * and `actions` is empty. */

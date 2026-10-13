@@ -14,6 +14,7 @@ import type { Room, Connection } from "./room.js";
 import type { CaptureLog } from "./capture.js";
 import { PendingRoom } from "./pending-room.js";
 import type { BuilderSession } from "./builder.js";
+import type { TutorialSession } from "./tutorial-session.js";
 import type { ClientMessage, ServerMessage } from "protocol";
 
 /**
@@ -81,6 +82,7 @@ function broadcast(room: Room): void {
       ...(room.stopped !== null ? { stopped: room.stopped } : {}),
       ...(room.captures !== null ? { capture: true as const } : {}),
       ...(room.builder !== null ? { builder: room.builder } : {}),
+      ...(room.tutorial !== null ? { tutorial: room.tutorial } : {}),
       ...(firstFrame ? { artManifest: artManifestFor(room) } : {}),
     });
   }
@@ -265,6 +267,16 @@ function requireBuilder(manager: RoomManager, roomId: string, enabled: boolean):
   if (!enabled) throw new Error("this server wasn't started with --builder");
   const session = manager.builder(roomId);
   if (session === undefined) throw new Error(`room ${roomId} isn't a scenario builder`);
+  // As `requireRoom` does: bind this transport to the room's frames.
+  session.room.onUpdate = broadcast;
+  return session;
+}
+
+/** The tutorial serving `roomId`, or why there isn't one. Any server: a
+ * tutorial room is part of the public site. */
+function requireTutorial(manager: RoomManager, roomId: string): TutorialSession {
+  const session = manager.tutorial(roomId);
+  if (session === undefined) throw new Error(`room ${roomId} isn't a tutorial`);
   // As `requireRoom` does: bind this transport to the room's frames.
   session.room.onUpdate = broadcast;
   return session;
@@ -637,6 +649,27 @@ export function attachRoomServer(
         }
         case "builder-seat": {
           requireBuilder(manager, message.roomId, builderEnabled).switchSeat(connection, message.seat);
+          return;
+        }
+        case "tutorial-create": {
+          // Only a lesson's id comes off the wire; an unknown one throws.
+          const session = manager.createTutorial(
+            message.lesson,
+            typeof message.hostToken === "string" ? message.hostToken : undefined,
+          );
+          send(ws, { type: "room-created", roomId: session.id, seat: session.seat });
+          return;
+        }
+        case "tutorial-next": {
+          const session = requireTutorial(manager, message.roomId);
+          requireHost(session.room, connection, "move the lesson on");
+          session.next(String(message.step));
+          return;
+        }
+        case "tutorial-retry": {
+          const session = requireTutorial(manager, message.roomId);
+          requireHost(session.room, connection, "rewind the lesson");
+          session.retry();
           return;
         }
         case "ack": {

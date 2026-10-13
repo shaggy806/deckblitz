@@ -46,7 +46,7 @@ import type {
   Step,
 } from "engine";
 import { HostRole } from "./host.js";
-import type { BotSpeed, BuilderInfo, PassSettings, SeatStatus, ServerMessage, WireDeck } from "protocol";
+import type { BotSpeed, BuilderInfo, PassSettings, SeatStatus, ServerMessage, TutorialInfo, WireDeck } from "protocol";
 
 export interface Connection {
   readonly send: (message: ServerMessage) => void;
@@ -280,6 +280,15 @@ export interface RoomOptions {
    * each rematch. Said on every frame, so a client knows a new game from a
    * later frame of the old one. */
   readonly gameNumber?: number;
+  /**
+   * Called just before each frame goes out, with the game as that frame
+   * shows it — so whoever owns the room can update what rides on it. Every
+   * `settle()` ends in a publish (or parks a bot move behind one), so this
+   * sees every move. A tutorial checks its goals here (`tutorial-session.ts`)
+   * and sets `room.tutorial`. It may read the game and the room's own
+   * fields, never dispatch, settle or publish.
+   */
+  readonly onPublish?: (room: Room) => void;
 }
 
 /**
@@ -397,6 +406,11 @@ export class Room {
   /** What a scenario builder adds to each `state` push (`builder.ts`), or
    * `null` in any other room. */
   builder: BuilderInfo | null = null;
+  /** What a tutorial room adds to each `state` push (`tutorial-session.ts`),
+   * or `null` in any other room. */
+  tutorial: TutorialInfo | null = null;
+  /** See `RoomOptions.onPublish`. */
+  private readonly onPublish: ((room: Room) => void) | null;
   /** See `RoomOptions.recipe`; `null` when this room can't be rematched. */
   readonly recipe: GameRecipe | null;
   /** See `RoomOptions.gameNumber`. */
@@ -413,6 +427,7 @@ export class Room {
     this.botSpeed = options.botSpeed ?? "normal";
     this.firstPlayerChosen = options.firstPlayerChosen === true;
     this.onUpdate = options.onUpdate ?? (() => {});
+    this.onPublish = options.onPublish ?? null;
     this.pacing = options.pacing ?? "realtime";
     this.showStackArrivals = options.showStackArrivals ?? true;
     this.timers = options.timers ?? realTimers;
@@ -1383,6 +1398,7 @@ export class Room {
    * push — `ws-server.ts` turns one of these into one message per connected
    * seat — so every seat always sees the same frame under the same `seq`. */
   publish(): void {
+    this.onPublish?.(this);
     this.seq += 1;
     this.eventsAtPublish = this.game.events.length;
     this.stackAtPublish = [...this.game.state.zones.shared.stack];

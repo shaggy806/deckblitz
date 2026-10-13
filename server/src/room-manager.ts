@@ -7,6 +7,8 @@ import { Room } from "./room.js";
 import type { GameRecipe, RoomOptions } from "./room.js";
 import type { CaptureConfig } from "./capture.js";
 import { BuilderSession } from "./builder.js";
+import { TutorialSession } from "./tutorial-session.js";
+import { lessonById } from "./tutorials/index.js";
 import { HostRole } from "./host.js";
 
 // No 0/O/1/I — avoids characters easily confused when a code is read aloud.
@@ -26,6 +28,9 @@ export class RoomManager {
   /** Scenario builder rooms (`builder.ts`), by code — each also in `rooms`,
    * under whichever `Room` it's serving right now. */
   private readonly builders = new Map<string, BuilderSession>();
+  /** Tutorial rooms (`tutorial-session.ts`), by code — each also in `rooms`,
+   * under whichever `Room` it's serving right now. */
+  private readonly tutorials = new Map<string, TutorialSession>();
   private created = 0;
   /** Handed to every room this manager promotes — see `RoomOptions.capture`. */
   private readonly capture: CaptureConfig | undefined;
@@ -204,6 +209,29 @@ export class RoomManager {
     return this.builders.get(roomId);
   }
 
+  /** Opens a tutorial room on lesson `lesson`'s first board — any server,
+   * the public one included: a client names a lesson by id and nothing more,
+   * and an id with no lesson is refused. `hostToken` binds the creator as
+   * host, as `createPending`'s does. */
+  createTutorial(lesson: unknown, hostToken?: string): TutorialSession {
+    const found = lessonById(lesson);
+    let id = randomRoomId();
+    while (this.rooms.has(id)) id = randomRoomId();
+    const session = new TutorialSession(id, found, new HostRole(hostToken ?? null), {
+      install: (room) => this.rooms.set(id, room),
+      onUpdate: (room) => this.onRoomUpdate(room),
+      ...this.sharedOptions(),
+    });
+    this.tutorials.set(id, session);
+    this.created += 1;
+    return session;
+  }
+
+  /** The tutorial serving `roomId`, if it is one. */
+  tutorial(roomId: string): TutorialSession | undefined {
+    return this.tutorials.get(roomId);
+  }
+
   /** Deletes rooms with no connected seats that have been idle past
    * `maxIdleMs`, so an abandoned or never-joined room doesn't sit in memory
    * for the life of the process. Returns how many were reaped. */
@@ -214,6 +242,7 @@ export class RoomManager {
         if (room instanceof Room) room.dispose();
         this.rooms.delete(id);
         this.builders.delete(id);
+        this.tutorials.delete(id);
         reaped += 1;
       }
     }
