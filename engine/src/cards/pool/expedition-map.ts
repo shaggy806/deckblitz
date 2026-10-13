@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Any land card, basic or not (2009 ruling). A search for a card with a
-// stated quality may come up empty (rule 701.19b), hence `min: 0`. Only the
+// stated quality may come up empty (rule 701.23b), hence `min: 0`. Only the
 // front face counts in a library, so a spell // land MDFC isn't a land card
 // here.
 export default defineCard({

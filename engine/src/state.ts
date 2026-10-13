@@ -2121,7 +2121,7 @@ export type AwaitingDecision =
       /** What happens to any candidate not chosen: shuffled to the bottom of
        * the library; left exactly where it already was (nothing was ever
        * moved just to look at it — the graveyard-search case); the whole
-       * library is shuffled (a library *search* / tutor — rule 701.19); or
+       * library is shuffled (a library *search* / tutor — rule 701.23); or
        * put into the chooser's hand (Genesis Ultimatum — needed-cards P19).
        * `"bottom-any-order"`: on the bottom in an order the chooser picks
        * next (`Game.beginLibraryOrder`). */

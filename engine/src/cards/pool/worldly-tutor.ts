@@ -10,7 +10,7 @@ export default defineCard({
     kind: "search-library",
     filter: { type: "creature" },
     // The find never leaves the library: `library-top` places it *after* the
-    // search's own shuffle (rule 701.19j), which is what keeps it on top.
+    // search's own shuffle (rule 701.24b), which is what keeps it on top.
     destination: "library-top",
     min: 0,
     max: 1,

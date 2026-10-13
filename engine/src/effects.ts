@@ -4406,7 +4406,7 @@ export type EffectSpec =
       readonly filter: CardFilter;
       /** `"library-top"` is the tutor-to-top family (Vampiric Tutor, Mystical
        * Tutor): the find never leaves the library, it is just moved to the top
-       * *after* the shuffle the search itself causes (rule 701.19j — the
+       * *after* the shuffle the search itself causes (rule 701.24b — the
        * shuffle comes first, or the card wouldn't stay on top). */
       readonly destination: "hand" | "battlefield" | "library-top" | "graveyard";
       readonly min: number;
@@ -4438,7 +4438,7 @@ export type EffectSpec =
        * player says which. Only a search that includes the library shuffles
        * it ("if you search your library this way, shuffle"). A graveyard is
        * public, so a matching card there can't be missed: failing to find is
-       * allowed only in a hidden zone (rule 701.19b).
+       * allowed only in a hidden zone (rule 701.23b).
        */
       readonly zones?: SearchZones;
       /** A rule over the finds as a set, which `filter` (one card at a

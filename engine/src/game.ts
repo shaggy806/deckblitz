@@ -6174,7 +6174,7 @@ export class Game {
       // choice is done (`beginLibraryOrder`).
       toOrder = leftover;
     } else if (leftoverTo === "shuffle") {
-      // A library search — shuffle the whole library afterwards (rule 701.19j).
+      // A library search — shuffle the whole library afterwards (rule 701.24b).
       this.shuffleLibraryOf(player);
     } else if (leftoverTo === "hand") {
       // Genesis Ultimatum: "… and the rest into your hand." needed-cards P19.
@@ -6200,7 +6200,7 @@ export class Game {
     // at, never removed from wherever they already were.
 
     // Now the shuffle has happened, the tutor's find goes on top (rule
-    // 701.19j — "shuffle, *then* put that card on top"). Last chosen first,
+    // 701.24b — "shuffle, *then* put that card on top"). Last chosen first,
     // so a multi-card find ends up in the order it was chosen.
     if (awaiting.destination === "library-top") {
       for (const id of [...chosen].reverse()) if (!toCommandZone.has(id)) this.putOnLibrary(id, "top");
@@ -20580,7 +20580,7 @@ export class Game {
   /** See the `"search-library"` {@link EffectSpec}. Lists only the matching
    * cards (a real search reveals the whole library, but the only decision is
    * which matching card to take); `leftover: "shuffle"` shuffles the whole
-   * library afterwards, whiff or not (rule 701.19). */
+   * library afterwards, whiff or not (rule 701.23). */
   private beginLibrarySearch(
     player: PlayerId,
     filter: CardFilter,
@@ -20603,7 +20603,7 @@ export class Game {
     const library = zones !== "graveyard";
     const inGraveyard = zones === "library" ? [] : matching("graveyard");
     const eligible = [...(library ? matching("library") : []), ...inGraveyard];
-    // Only a hidden zone lets a search fail to find (rule 701.19b): a match
+    // Only a hidden zone lets a search fail to find (rule 701.23b): a match
     // in the graveyard, which everyone can see, must be found.
     const least = inGraveyard.length > 0 ? Math.max(min, 1) : min;
     const set = together === undefined ? undefined : this.searchTogether(together, eligible, player, x);

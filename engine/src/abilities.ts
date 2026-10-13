@@ -889,7 +889,7 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
-      /** A player sacrificed a permanent (Korvold, Mayhem Devil — rule 701.19).
+      /** A player sacrificed a permanent (Korvold, Mayhem Devil — rule 701.21).
        * `who` is relative to the sacrificing player: `"you"` = this permanent's
        * controller sacrificed one, `"any"` = anyone did. needed-cards P6.
        * `filter` narrows it ("whenever you sacrifice a **nontoken**

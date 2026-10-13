@@ -5,7 +5,7 @@ import type { EffectSpec } from "../../effects.js";
 //
 // Kicked, the two-card search replaces the one-card search (Grow from the
 // Ashes' shape); the two finds are one per slot (Axgard Armory's
-// `together.oneEach`), either of which may be missed (rule 701.19b). The life
+// `together.oneEach`), either of which may be missed (rule 701.23b). The life
 // gain happens either way.
 const BASIC_LAND = { supertype: "basic", type: "land" } as const;
 const GAIN: EffectSpec = { kind: "gain-life", amount: 2 };

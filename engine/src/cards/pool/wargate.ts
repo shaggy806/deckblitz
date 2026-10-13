@@ -16,7 +16,7 @@ export default defineCard({
   types: ["sorcery"],
   text: "Search your library for a permanent card with mana value X or less, put it onto the battlefield, then shuffle.",
   // Finale of Devastation's search: the filter reads this spell's X. A search
-  // of a hidden zone may fail to find (rule 701.19b), hence `min: 0`.
+  // of a hidden zone may fail to find (rule 701.23b), hence `min: 0`.
   effect: {
     kind: "search-library",
     filter: {

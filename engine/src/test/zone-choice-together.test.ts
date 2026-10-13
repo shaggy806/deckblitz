@@ -7,7 +7,7 @@
  *   card alone always can (the card's ruling).
  * - `oneEach` (Krosan Verge's "a Forest card and a Plains card"): one find
  *   per slot, a card that fits both slots filling either, and either slot
- *   may be missed (rule 701.19b).
+ *   may be missed (rule 701.23b).
  *
  * The decision offers every card the search's filter admits and rejects a
  * set that breaks the rule; the bots' answers are turned into legal sets;
@@ -184,7 +184,7 @@ describe("Krosan Verge: a Forest card and a Plains card", () => {
     expect(game.state.zones.shared.battlefield).toContain(forest);
   });
 
-  it("may find only one of the two (rule 701.19b)", () => {
+  it("may find only one of the two (rule 701.23b)", () => {
     const { game, land } = setUp("Krosan Verge");
     search(game, land);
     const [plains] = inLibrary(game, "Plains");

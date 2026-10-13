@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // "A Forest card and a Plains card": one find per slot (the search's
 // `together.oneEach`), any card with the subtype — not only a basic, so a
-// Forest Plains dual fills either slot. Either may be missed (rule 701.19b),
+// Forest Plains dual fills either slot. Either may be missed (rule 701.23b),
 // and what's found enters at once, tapped.
 const SEARCH_TEXT =
   "{2}, {T}, Sacrifice this land: Search your library for a Forest card and a Plains card, put " +

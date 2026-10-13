@@ -11,7 +11,7 @@
  *   card per slot — Krosan Verge's "a Forest card and a Plains card", where a
  *   card's tags are the slots it could fill (a Forest Plains fills either, so
  *   two of them are both finds). Finding fewer than every slot is allowed —
- *   a search of a hidden zone may fail to find (rule 701.19b).
+ *   a search of a hidden zone may fail to find (rule 701.23b).
  *
  * The tags are worked out as the decision is raised, so checking a set is
  * pure and needs neither the registry nor the layer fold: the validator

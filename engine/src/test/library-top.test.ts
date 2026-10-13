@@ -4,7 +4,7 @@
  * Mortuary Mire).
  *
  * The ordering matters and is easy to get wrong: a tutor shuffles *and then*
- * puts the find on top (rule 701.19j), so a find placed before the shuffle
+ * puts the find on top (rule 701.24b), so a find placed before the shuffle
  * would just get lost in it.
  */
 import { describe, expect, it } from "vitest";

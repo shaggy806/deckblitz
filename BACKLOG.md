@@ -237,10 +237,14 @@ item lands.
   `top-commanders.txt`) and `edhrec-rank.ts` are frozen. Re-fetching them moves the roster, so
   do it on purpose.
 
-- **Stale 701.19b citations.** 701.19b is regenerate, but about 11 files cite it for "a search
-  may fail to find" (701.23b): `effects.ts`, `game.ts`, `zone-choice-together.ts`, AUTHORING,
-  Chord of Calling, Expedition Map, Krosan Verge, Wargate, Axgard Armory, Aang's Journey and
-  `zone-choice-together.test.ts`.
+- **Keyword-action citations on an older numbering** (found 2026-10-13, fixing 701.19b): section
+  701 was renumbered in a later edition and many comments still cite the old numbers —
+  regeneration as 701.15 (Goad now; regenerate is 701.19), reveal as 701.16 (Investigate; reveal
+  is 701.20), transform as 701.28 (Convert; 701.27), proliferate as 701.27, counter as 701.5
+  (Cast; 701.6), discard as 701.8 (Destroy; 701.9), fight as 701.12, scry/surveil, amass, populate,
+  manifest's turn face up. A heuristic audit (each `701.N` against its heading's keyword) flags
+  164 lines across `game.ts`, `state.ts`, tests and cards, some false hits. Sweep it against
+  `docs/rules/`, and check 702 the same way.
 
 ## Code health
 

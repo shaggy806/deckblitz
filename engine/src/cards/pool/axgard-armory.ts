@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 3437.
 //
 // "An Aura card and/or an Equipment card": one find per slot (Krosan Verge's
-// `together.oneEach`), either of which may be missed (rule 701.19b).
+// `together.oneEach`), either of which may be missed (rule 701.23b).
 
 const SEARCH_TEXT =
   "{1}{R}{R}{W}, {T}, Sacrifice this land: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle.";
