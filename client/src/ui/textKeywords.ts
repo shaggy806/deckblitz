@@ -74,7 +74,7 @@ const TERMS: readonly TextTerm[] = [
     key: 'cascade',
     name: 'Cascade',
     pattern: /\bcascade\b/i,
-    text: 'When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it free. Put the rest on the bottom in a random order.',
+    text: 'When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less than this spell. You may cast it without paying its mana cost. Put the rest on the bottom of your library in a random order.',
   },
   {
     key: 'delve',
@@ -273,7 +273,7 @@ const TERMS: readonly TextTerm[] = [
     key: 'discover',
     name: 'Discover',
     pattern: /\bdiscover \d+/i,
-    text: 'Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it free, or put it into your hand.',
+    text: 'Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom of your library in a random order.',
   },
   // Predefined tokens.
   {

@@ -35,3 +35,15 @@ describe('tooltips for a card', () => {
     expect(tipsFor([], 'This creature is equipped.')).toEqual([])
   })
 })
+
+// A bug report (2026-10-12): Cascade's tooltip read "You may cast it free".
+describe('tooltip wording', () => {
+  const tip = (name: string, text: string): string => tipsFor([], text).find((t) => t.name === name)!.text
+
+  it('says what cascade and discover cast, as their reminder text does', () => {
+    expect(tip('Cascade', 'Cascade')).toBe(
+      'When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less than this spell. You may cast it without paying its mana cost. Put the rest on the bottom of your library in a random order.',
+    )
+    expect(tip('Discover', 'Discover 4')).toContain('Cast it without paying its mana cost or put it into your hand.')
+  })
+})
