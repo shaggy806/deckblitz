@@ -9,7 +9,9 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
 
 ## Rules that aren't obvious from any one file
 
-- **Import the engine as `engine/client`, never `engine`.** The barrel pulls in every card
+- **Import the engine as `engine/client`, never `engine`** — except the local room worker
+  (`src/local/room-worker.ts`, solo games in the browser), which runs a game with `engine/local` and
+  the server's room code, bundled with `engineLocalPlugin` (`vite.config.ts`). The barrel pulls in every card
   module. Card definitions come only through `cards/cardData.ts`: a single card's shard by name,
   or the whole pool (`loadCardPool`/`cardPool()`) for the library and deck builder, which are
   lazy chunks. The game page holds no card definitions: everything it plays comes in the

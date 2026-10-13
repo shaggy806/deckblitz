@@ -36,6 +36,9 @@ import { NO_EVENT_LOG, receiveFrame } from './eventLog.ts'
 import type { EventLogState } from './eventLog.ts'
 import { LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
+import { localMode } from '../local/localMode.ts'
+import { LocalSocket } from '../local/localSocket.ts'
+import type { RoomSocket } from '../local/localSocket.ts'
 
 const SERVER_URL =
   (import.meta.env.VITE_SERVER_URL as string | undefined) ??
@@ -379,7 +382,7 @@ export interface NetworkGame {
 }
 
 export function useNetworkGame(): NetworkGame {
-  const wsRef = useRef<WebSocket | null>(null)
+  const wsRef = useRef<RoomSocket | null>(null)
   const roomIdRef = useRef<string | null>(null)
   const isPlayingRef = useRef(false)
   /** True while waiting on the reply to a `join-room` we just sent — an
@@ -456,7 +459,9 @@ export function useNetworkGame(): NetworkGame {
   }, [])
 
   const openSocket = useCallback(() => {
-    const ws = new WebSocket(SERVER_URL)
+    // In local mode the rooms run in a worker in this tab, not on the server
+    // (`local/localSocket.ts`); the messages are the same either way.
+    const ws: RoomSocket = localMode() ? new LocalSocket() : (new WebSocket(SERVER_URL) as RoomSocket)
     wsRef.current = ws
     isPlayingRef.current = false
     const isCurrent = () => wsRef.current === ws

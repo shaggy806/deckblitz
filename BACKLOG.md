@@ -225,6 +225,8 @@ item lands.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Built 2026-10-13: the overlay, the site tour, the tutorial room with a scripted opponent, chapter goals and retry, and Learn Commander playing a proof lesson (`basics-proof`). Next: the seeded decks and game 1's chapters (plan phase 4), then the in-game tour stops (phase 3).
+- **Condense the site tour into how the game is played** (the user, 2026-10-13): the 29-stop tour (`client/src/tutorial/tours/`) spends most of its stops on navigating the site; assume players know Scryfall and Moxfield, and teach only what isn't obvious here — how commander damage is shown, how to view the different zones, what the priority buttons in the bottom right do, what the settings change, and how to cast spells in different ways (casting for flashback is simple at a real table but takes a few more steps here). Most of it needs the in-game stops (`docs/plans/tutorials.md` phase 3).
+- **Remove the entrance animation options from the settings panel** (the user, 2026-10-13): the "Card entrance" row (`client/src/ui/MotionControl.tsx`, `castEntrance` in `game/motionPrefs.ts`).
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs
@@ -245,7 +247,7 @@ item lands.
 
 ## Code health
 
-- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Next: after `room-shards.md` step 1, the engine's registry injection and an `engine/local` entry.
+- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13: steps 1-3 — `engine/local`, browser-safe room code, and blitz in a Web Worker behind `?local=1`. Next: step 4, tutorials local; then resume after a reload and bug-report uploads (step 5), measuring on the user's low-end laptop (step 6), default on (step 7).
 - **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop

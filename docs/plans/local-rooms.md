@@ -1,9 +1,8 @@
 # Local rooms: solo games in the player's browser
 
-Status: **in progress** (planned 2026-10-13). Step 1 is built: `engine/local`, `registryFrom`
-and `engineLocalPlugin`. `room-shards.md`'s `RoomService` split (its step 1) has landed, so
-the browser can run the same room code; step 2 waits until the worker-thread work's later steps
-settle the server files it touches.
+Status: **in progress** (planned 2026-10-13). Steps 1-3 are built: `engine/local`; the server's
+room code browser-safe; and **blitz plays in a Web Worker behind `?local=1`** (`client/src/local/`,
+`server/src/local-host.ts`). Next: step 4, tutorials local.
 
 ## Why
 
@@ -122,11 +121,27 @@ to another player, and a room with a second human never goes local.
    walks the sources with the swap; `test/local-bundle.test.ts` bundles `dist/local.js` with
    Rolldown, finds no card definition outside the 32 on-demand shard chunks, and plays a bot
    game from a registry built from the shards. No behaviour change.
-2. **Browser-safe room code**: the shared rooms package (or subtree) and its static "no Node
-   imports" test; `PendingRoom`'s registry injected; captures out of the graph.
-3. **The worker and `LocalTransport`** behind `?local=1` (off by default): blitz plays locally end
-   to end. An e2e spec plays a blitz locally and checks no game traffic reached the server's
-   socket; the existing blitz e2e still passes on the server path.
+2. **Built (2026-10-13)**: the room code (`room-service`, `room-manager`, `room`, `pending-room`,
+   `tutorial-session`, `tutorials/`, `builder`, `scripted-bot`, `decks`, `bot-names`, `host`,
+   `room-code`, `card-registry`) imports values only from `engine/local` and itself, in place —
+   no package split. `card-registry.ts`'s `cardRegistry()` is each thread's one registry (a
+   browser host calls `provideCardRegistry(registryFrom(shards))` first); capture is a factory
+   (`captureLogs`); the decision histogram a recorder (`bot-decisions.ts`). Held by
+   `room-core-imports.test.ts` (the sources) and `room-core-bundle.test.ts` (a Rolldown browser
+   bundle, tree-shaking off). **For step 3**, a browser host needs: `provideCardRegistry(...)`, a
+   `RoomManager` (no capture), and a `RoomService` over it with an outbox that posts each
+   `ServerMessage` to the page — the same shape `InProcessRoomHost` gives the server, minus the
+   import job and status.
+3. **Built (2026-10-13)**: `client/src/local/` — `localMode()` (`?local=1`, kept per tab in
+   `sessionStorage`), `LocalSocket` (a WebSocket's surface over a module worker, the same JSON
+   both ways) and `room-worker.ts` (all 32 shards → `registryFrom` → `provideCardRegistry`, then the
+   server's `LocalRoomHost`); `useNetworkGame` opens a `LocalSocket` in local mode, nothing above it
+   changed. `vite.config.ts` adds `engineLocalPlugin` for the dev server and the worker build
+   (`worker.format: 'es'`). The worker bundle is ~1 MB (engine and room code, no card definition up
+   front; its 32 shards are its own chunks, a second copy of the library's — worth sharing later).
+   `e2e/local-blitz.spec.ts` blitzes locally and watches the bots play, with no socket to the room
+   server (red without local mode); the server-path blitz e2e is unchanged. Not yet: a reload ends
+   a local game (step 5), and lessons still go to the server (step 4).
 4. **Tutorials local** (the lesson data and `buildScenario` in the shared code).
 5. **Resume after reload** (IndexedDB snapshots), **uploads for bug reports**, the optional ping.
 6. **Bot budget on a slow machine**: measure bot decisions and the worker's memory on the user's low-end
