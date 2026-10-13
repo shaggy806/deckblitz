@@ -157,11 +157,19 @@ describe("a tutorial room", () => {
     const elves = idNamed(session.room.game.state, "Llanowar Elves", "hand");
     session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: elves, targets: [] });
 
-    // Pass the turn; Rowan's scripted attack opens the last chapter.
-    // With nothing left to do, alice's windows pass themselves: the cast's
-    // one frame runs on through Rowan's attack, and the "turn" chapter's goal
-    // and the "block" chapter's opening are both met inside it.
-    passUntil((st) => st.awaiting?.kind === "blockers");
+    // Pass the turn. Alice has nothing left to do, but the card asking her to
+    // pass holds her window once the Elves have resolved (`holdPriority`),
+    // rather than the room passing it for her straight into Rowan's turn.
+    expect(info().chapter).toBe("turn");
+    expect(info().step).toMatchObject({ id: "pass-turn", anchor: "tour:game-pass-turn", advance: "goal" });
+    const held = session.room.game.state;
+    expect(held).toMatchObject({ turn: { number: 1, step: "precombat-main" }, awaiting: null });
+    expect(held.priority.holder).toBe(ALICE);
+    expect(held.zones.shared.stack).toEqual([]);
+    expect(held.objects[elves].zone).toBe("battlefield");
+    // Pass Turn passes it; Rowan's scripted attack opens the last chapter.
+    session.room.requestPassTurn(connection);
+    expect(session.room.game.state.awaiting?.kind).toBe("blockers");
     expect(info()).toMatchObject({ chapter: "block", chapterIndex: 4 });
     expect(info().step).toMatchObject({ id: "block", advance: "goal" });
     const st = session.room.game.state;

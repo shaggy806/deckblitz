@@ -289,6 +289,17 @@ export interface RoomOptions {
    * fields, never dispatch, settle or publish.
    */
   readonly onPublish?: (room: Room) => void;
+  /**
+   * Whether `player`'s priority window — the stack empty, nothing to do in
+   * it but pass (or tap for mana) — waits for them instead of passing
+   * itself. A tutorial's (`tutorial-session.ts`): a coach card that asks the
+   * player to pass the turn needs a window to press Pass Turn in, and with
+   * nothing left to cast the room would otherwise pass straight through it
+   * into the next turn. Asked from `settle()`, so like `onPublish` it may
+   * read the game, never dispatch, settle or publish. An armed Pass Turn or
+   * Auto-pass still passes the window.
+   */
+  readonly holdsPriority?: (room: Room, player: PlayerId) => boolean;
 }
 
 /**
@@ -411,6 +422,8 @@ export class Room {
   tutorial: TutorialInfo | null = null;
   /** See `RoomOptions.onPublish`. */
   private readonly onPublish: ((room: Room) => void) | null;
+  /** See `RoomOptions.holdsPriority`. */
+  private readonly holdsPriority: ((room: Room, player: PlayerId) => boolean) | null;
   /** See `RoomOptions.recipe`; `null` when this room can't be rematched. */
   readonly recipe: GameRecipe | null;
   /** See `RoomOptions.gameNumber`. */
@@ -428,6 +441,7 @@ export class Room {
     this.firstPlayerChosen = options.firstPlayerChosen === true;
     this.onUpdate = options.onUpdate ?? (() => {});
     this.onPublish = options.onPublish ?? null;
+    this.holdsPriority = options.holdsPriority ?? null;
     this.pacing = options.pacing ?? "realtime";
     this.showStackArrivals = options.showStackArrivals ?? true;
     this.timers = options.timers ?? realTimers;
@@ -1116,8 +1130,12 @@ export class Room {
     const justCleared = this.clearAutoPassIfDone(seat, s);
 
     const legal = this.game.legalActions(holder);
-    const forcedPass = legal.length === 1 && legal[0].kind === "pass-priority";
-    const manaOnlyAndSkipping = seat.pass.skipManaOnly !== false && this.game.isDeadForMana(holder);
+    // A tutorial asking the player to pass keeps an empty-stack window for
+    // them even with nothing in it (`RoomOptions.holdsPriority`).
+    const kept =
+      this.holdsPriority !== null && s.zones.shared.stack.length === 0 && this.holdsPriority(this, holder);
+    const forcedPass = !kept && legal.length === 1 && legal[0].kind === "pass-priority";
+    const manaOnlyAndSkipping = !kept && seat.pass.skipManaOnly !== false && this.game.isDeadForMana(holder);
 
     // A one-shot resolve-all: keep passing while the stack drains, and
     // disarm the moment anything real happens (including the stack running

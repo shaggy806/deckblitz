@@ -48,6 +48,13 @@ export interface LessonStep {
   readonly anchor?: TutorialAnchor;
   readonly placement?: TutorialCoachStep["placement"];
   readonly goals?: readonly LessonGoal[];
+  /**
+   * While this card is up, the player's windows with an empty stack wait for
+   * them even when there's nothing to do in them (`RoomOptions.holdsPriority`)
+   * — for a card that asks them to pass, which they couldn't if the room
+   * passed it for them. Every other window passes itself as usual.
+   */
+  readonly holdPriority?: boolean;
 }
 
 /** A fresh game for a lesson: the board, and who plays each bot seat. */

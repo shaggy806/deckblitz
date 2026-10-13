@@ -210,6 +210,16 @@ export class TutorialSession {
     room.tutorial = this.info();
   }
 
+  /** Whether the card up keeps the player's empty windows for them
+   * (`LessonStep.holdPriority`). Asked mid-settle, so the lesson is first
+   * brought up to date with the game: the card that asks for the pass may
+   * have come up since the last frame. */
+  private holdsPriority(room: Room, player: PlayerId): boolean {
+    if (room !== this.current || player !== this.seat) return false;
+    this.advance(room.game);
+    return this.currentStep()?.holdPriority === true;
+  }
+
   private makeRoom(game: Game, startSeq: number): Room {
     const board = this.board;
     return new Room(this.id, game, {
@@ -217,6 +227,7 @@ export class TutorialSession {
       host: this.host,
       onUpdate: this.env.onUpdate,
       onPublish: (room) => this.onPublish(room),
+      holdsPriority: (room, player) => this.holdsPriority(room, player),
       botSpeed: "normal",
       botController: (player) => {
         const opponent = board.opponents[player];

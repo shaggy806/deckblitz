@@ -74,7 +74,7 @@ export const BASICS_PROOF: Lesson = {
         {
           id: "play-land",
           title: "Play a land",
-          body: "Lands make the mana you cast spells with. You can play one each turn — drag a Forest from your hand onto the battlefield.",
+          body: "Lands make the mana you cast spells with. You can play one each turn — click a Forest in your hand to play it.",
           anchor: "card:Forest",
           placement: "top",
           goals: [{ id: "land-played", label: "Play a Forest", when: { event: "land-played", player: YOU } }],
@@ -111,8 +111,9 @@ export const BASICS_PROOF: Lesson = {
           body:
             "Your Elves are on the battlefield, but a creature can't attack or tap on the turn it arrives. " +
             "That's all for this turn — pass it to Rowan.",
-          anchor: "tour:pass-turn",
+          anchor: "tour:game-pass-turn",
           placement: "top",
+          holdPriority: true,
           goals: [{ id: "rowans-turn", label: "Pass the turn", when: { event: "turn-began", turn: 2 } }],
         },
       ],
