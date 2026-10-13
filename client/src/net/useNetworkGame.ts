@@ -32,6 +32,8 @@ import type {
 import { prefetchArt } from '../ui/art.ts'
 import { randomBotDecks } from '../lobby/randomBotDeck.ts'
 import { isRematch } from './rematch.ts'
+import { NO_EVENT_LOG, receiveFrame } from './eventLog.ts'
+import type { EventLogState } from './eventLog.ts'
 import { LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 
@@ -405,6 +407,8 @@ export function useNetworkGame(): NetworkGame {
   const startTutorialRef = useRef<(lesson: string) => void>(() => {})
   /** The game the last frame was from, to tell a rematch's first frame. */
   const lastGameRef = useRef<GameKey | null>(null)
+  /** The event log as this socket's frames have built it (`eventLog.ts`). */
+  const eventLogRef = useRef<EventLogState>(NO_EVENT_LOG)
   const unmountedRef = useRef(false)
   const reconnectAttemptRef = useRef(0)
   const reconnectTimeoutRef = useRef<number | null>(null)
@@ -465,6 +469,11 @@ export function useNetworkGame(): NetworkGame {
 
     ws.onopen = () => {
       if (!isCurrent()) return
+      // A new connection is sent the whole log on its first frame; until
+      // then there's nothing to add to. And from here on, frames need carry
+      // only the events this socket hasn't had.
+      eventLogRef.current = NO_EVENT_LOG
+      send({ type: 'event-deltas' })
       reconnectAttemptRef.current = 0
       setEverConnected(true)
       setError(null)
@@ -602,6 +611,24 @@ export function useNetworkGame(): NetworkGame {
           return
         }
         case 'state': {
+          // The frame carries only the events this socket hasn't had: put
+          // the whole log back together, which is what everything past here
+          // sees. One that doesn't follow on is dropped, never shown or
+          // acked, and the whole log asked for again — the answer is the
+          // current frame again (eventLog.ts).
+          const verdict = receiveFrame(eventLogRef.current, {
+            roomId: message.roomId,
+            game: message.game,
+            eventsFrom: message.eventsFrom,
+            events: message.view.events,
+          })
+          eventLogRef.current = verdict.state
+          if (verdict.kind === 'drop') {
+            if (verdict.resync) send({ type: 'resync', roomId: message.roomId })
+            return
+          }
+          const events = verdict.log.events
+          const view = events === message.view.events ? message.view : { ...message.view, events }
           const wasPlaying = isPlayingRef.current
           isPlayingRef.current = true
           pendingBlitzRef.current = null
@@ -625,7 +652,7 @@ export function useNetworkGame(): NetworkGame {
             setRestarted(!lastOverRef.current)
           }
           lastGameRef.current = game
-          lastOverRef.current = message.view.result.over
+          lastOverRef.current = view.result.over
           setGameNumber(message.game)
           setSpectating(message.spectating === true)
           setCanRematch(message.canRematch === true)
@@ -634,7 +661,7 @@ export function useNetworkGame(): NetworkGame {
           setTutorial(message.tutorial ?? null)
           setFrame({
             seq: message.seq,
-            view: message.view,
+            view,
             actions: message.actions,
             ...(message.tutorial !== undefined ? { tutorial: message.tutorial } : {}),
           })

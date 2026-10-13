@@ -12,6 +12,8 @@ import { tilesOf } from './board.ts'
  * settled into, and what this seat may do once it's shown. */
 export interface Frame {
   readonly seq: number
+  /** Its `events` are the game's whole log so far, whatever slice of it the
+   * push itself carried (`net/eventLog.ts` puts it back together). */
   readonly view: PlayerView
   readonly actions: readonly LegalAction[]
   /** A tutorial room's lesson as of this frame (`state.tutorial`): carried
