@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   createOracleTagIndex,
   parseTypeLine,
+  popularityOf,
   suggestReplacements,
 } from "../card-replacer.js";
 import type { ReplacementTarget } from "../card-replacer.js";
@@ -181,6 +182,31 @@ describe("suggestReplacements — for a particular deck", () => {
       { identity: ["B"], limit: 10 },
     )) {
       expect(registry.get(s.name).types).not.toContain("creature");
+    }
+  });
+});
+
+describe("suggestReplacements — Commander popularity", () => {
+  it("reads EDHREC rank on a log scale: the top card is 1, an unranked name 0", () => {
+    expect(popularityOf("Sol Ring")).toBe(1);
+    expect(popularityOf("Sol Ring")).toBeGreaterThan(popularityOf("Grizzly Bears"));
+    expect(popularityOf("Grizzly Bears")).toBeGreaterThan(0);
+    expect(popularityOf("Not A Real Card")).toBe(0);
+  });
+
+  it("puts the more played of two otherwise equal stand-ins first", () => {
+    // A plain 2/2 Bear: many pool cards match it identically on type, mana
+    // value and body, so only popularity tells them apart.
+    const all = suggestReplacements(
+      { manaCost: "{1}{G}", typeLine: "Creature — Bear", power: "2", toughness: "2" },
+      { limit: 40 },
+    );
+    const base = (s: { name: string; score: number }) =>
+      Math.round((s.score / (0.85 + 0.3 * popularityOf(s.name))) * 1e9);
+    const ties = all.filter((s) => base(s) === base(all[0]));
+    expect(ties.length).toBeGreaterThan(1);
+    for (let i = 1; i < ties.length; i++) {
+      expect(popularityOf(ties[i - 1].name)).toBeGreaterThanOrEqual(popularityOf(ties[i].name));
     }
   });
 });

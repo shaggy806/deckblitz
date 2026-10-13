@@ -22,7 +22,7 @@
  * (`server/src/oracle-tags.ts`).
  */
 
-import { BUILTIN_CARDS, isDeckableCard } from "./cards.js";
+import { BUILTIN_CARDS, edhrecRankOf, isDeckableCard } from "./cards.js";
 import type { CardDefinition, CardType } from "./cards/define.js";
 import { canCommandAlone } from "./deck-validation.js";
 import { colorIdentityOf, withinIdentity } from "./identity.js";
@@ -221,6 +221,24 @@ const CROSS_TYPE_SIMILARITY = 0.5;
  * much the same job. */
 const CROSS_TYPE_FACTOR = 0.8;
 
+/** How far Commander popularity moves a score: a card EDHREC ranks near the
+ * top is worth up to this much more, an unranked one this much less
+ * (×0.85–×1.15). Of two cards doing much the same job the more played one
+ * leads — it's the one a player would reach for — while a clearly better
+ * match still beats a popular card that fits worse. */
+const POPULARITY_SWING = 0.15;
+/** The rank at which popularity counts for nothing: past ~30,000 EDHREC's
+ * ranks are cards nobody plays in Commander. */
+const POPULARITY_FLOOR_RANK = 30_000;
+
+/** 0..1 — 1 for EDHREC's top card, on a log scale (rank 100 ≈ 0.55, rank
+ * 1,000 ≈ 0.33, rank 10,000 ≈ 0.11), 0 for an unranked card. */
+export function popularityOf(name: string): number {
+  const rank = edhrecRankOf(name);
+  if (rank === null) return 0;
+  return Math.max(0, 1 - Math.log(rank) / Math.log(POPULARITY_FLOOR_RANK));
+}
+
 /** Keywords worth matching on a creature's body: the ones that decide what it
  * does in combat. */
 const COMBAT_KEYWORDS: ReadonlySet<string> = new Set([
@@ -311,7 +329,9 @@ const BUILTIN_FACES: FaceLookup = {
  * sorcery count as one), unless their oracle tags say they do much the same
  * thing; a land only ever stands in for a land. Among those, the score is
  * mostly the tags when the target has any — what the card does — and then
- * card type, mana value, and for creatures, body. Ties go to the name, so the
+ * card type, mana value, and for creatures, body; Commander popularity
+ * (EDHREC rank, {@link popularityOf}) then scales it, so of two comparable
+ * stand-ins the more played one comes first. Ties go to the name, so the
  * result is deterministic.
  */
 export function suggestReplacements(
@@ -384,6 +404,9 @@ export function suggestReplacements(
       for (const c of def.colors) if (targetColors.has(c)) overlap += 1;
       score += 0.05 * (overlap / Math.max(targetColors.size, def.colors.length));
     }
+    // Popularity scales the whole score, last, so it decides between
+    // comparable matches without lifting a poor one over a good one.
+    score *= 1 - POPULARITY_SWING + 2 * POPULARITY_SWING * popularityOf(def.name);
 
     scored.push({ name: def.name, confidence: confidenceOf(similarity, hasTags), sharedTags: shared, score });
   }

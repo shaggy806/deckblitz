@@ -6,18 +6,22 @@
 // The output is checked in, so nothing needs the network at runtime. Rerun it
 // when the pool grows, or occasionally to refresh the ranking itself.
 //
-// Two consumers, which is why it's a table rather than a field on each card:
+// Three consumers, which is why it's a table rather than a field on each card:
 //
 //  - The **card library** sorts by it, so the gallery opens on the cards people
 //    actually play instead of alphabetically on whatever starts with "A".
 //  - The **authoring backlog** is ordered by it. `top-commander-cards.txt` is a
 //    frozen snapshot of the same data; this table is the live version, and the
 //    two should agree where they overlap.
+//  - The **deck importer's stand-ins** (`card-replacer.ts`) lean towards the
+//    more played of two cards that do much the same job.
 //
-// Scryfall returns `edhrec_rank` on every card, so this costs one batched
-// request per 75 names rather than a scrape. A card with no rank (never played
-// in Commander, or too new to have one) is simply left out of the table —
-// absent means "unranked", and consumers sort those last.
+// The ranks come from the checked-in Oracle snapshot (`data/oracle/
+// cards.jsonl`, refreshed by `npm run gen:oracle`), so a run needs no network
+// and covers every pool card. `-- --online` asks Scryfall instead, one batched
+// request per 75 names. A card with no rank (never played in Commander, or too
+// new to have one) is simply left out of the table — absent means "unranked",
+// and consumers sort those last.
 
 import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -25,6 +29,9 @@ import { fileURLToPath } from "node:url";
 
 import { POOL_CARDS } from "../dist/cards/generated.js";
 import { isDeckableCard } from "../dist/cards/classify.js";
+import { findCard } from "./oracle-snapshot.mjs";
+
+const online = process.argv.includes("--online");
 
 const USER_AGENT = "MTG-Engine-CardAuthoring/1.0";
 const COLLECTION_BATCH_SIZE = 75;
@@ -45,41 +52,52 @@ const chunk = (arr, size) => {
 
 const ranks = new Map();
 let missing = 0;
-const batches = chunk(names, COLLECTION_BATCH_SIZE);
 
-for (const [i, batch] of batches.entries()) {
-  const res = await fetch("https://api.scryfall.com/cards/collection", {
-    method: "POST",
-    headers: {
-      "User-Agent": USER_AGENT,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ identifiers: batch.map((name) => ({ name })) }),
-  });
-  if (!res.ok) {
-    console.error(`Scryfall collection request failed: ${res.status}`);
-    process.exit(1);
-  }
-  const body = await res.json();
-  for (const card of body.data ?? []) {
-    // Responses carry no echo of which identifier produced which card, so
-    // they're matched back by name — the same approach `import-deck.ts` uses.
-    // A card's own name, and for a DFC the front-face name a decklist writes.
-    const rank = card.edhrec_rank;
-    if (typeof rank !== "number") continue;
-    ranks.set(card.name, rank);
-    const front = card.card_faces?.[0]?.name;
-    if (front !== undefined && !ranks.has(front)) ranks.set(front, rank);
-    if (card.name.includes(" // ")) {
-      const single = card.name.split(" // ")[0];
-      if (!ranks.has(single)) ranks.set(single, rank);
+if (online) {
+  for (const [i, batch] of chunk(names, COLLECTION_BATCH_SIZE).entries()) {
+    const res = await fetch("https://api.scryfall.com/cards/collection", {
+      method: "POST",
+      headers: {
+        "User-Agent": USER_AGENT,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ identifiers: batch.map((name) => ({ name })) }),
+    });
+    if (!res.ok) {
+      console.error(`Scryfall collection request failed: ${res.status}`);
+      process.exit(1);
     }
+    const body = await res.json();
+    for (const card of body.data ?? []) {
+      // Responses carry no echo of which identifier produced which card, so
+      // they're matched back by name — the same approach `import-deck.ts` uses.
+      // A card's own name, and for a DFC the front-face name a decklist writes.
+      const rank = card.edhrec_rank;
+      if (typeof rank !== "number") continue;
+      ranks.set(card.name, rank);
+      const front = card.card_faces?.[0]?.name;
+      if (front !== undefined && !ranks.has(front)) ranks.set(front, rank);
+      if (card.name.includes(" // ")) {
+        const single = card.name.split(" // ")[0];
+        if (!ranks.has(single)) ranks.set(single, rank);
+      }
+    }
+    missing += (body.not_found ?? []).length;
+    process.stderr.write(`  batch ${i + 1}/${chunk(names, COLLECTION_BATCH_SIZE).length}, ${ranks.size} ranked\n`);
+    // Scryfall asks for 50-100ms between requests.
+    await new Promise((resolve) => setTimeout(resolve, 120));
   }
-  missing += (body.not_found ?? []).length;
-  process.stderr.write(`  batch ${i + 1}/${batches.length}, ${ranks.size} ranked\n`);
-  // Scryfall asks for 50-100ms between requests.
-  await new Promise((resolve) => setTimeout(resolve, 120));
+} else {
+  // The checked-in Oracle snapshot carries every card's rank as of its last
+  // refresh (`npm run gen:oracle`), so no request is needed — and every pool
+  // card is in it, where a network run that lagged the pool left thousands
+  // of newer cards unranked.
+  for (const name of names) {
+    const rank = findCard(name)?.edhrec_rank;
+    if (typeof rank === "number") ranks.set(name, rank);
+    else if (findCard(name) === undefined) missing += 1;
+  }
 }
 
 const ranked = names.filter((name) => ranks.has(name));

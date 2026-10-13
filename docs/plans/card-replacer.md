@@ -256,3 +256,18 @@ Regent → Old Gnawbone. The low-confidence first choices are the cards nothing 
 the badge is for. Remaining judgement calls rather than errors: Necromantic Selection → Rakshasa
 Debaser (both put opponents' creatures onto your battlefield) over Damnation; Ob Nixilis Reignited →
 Greed (the draw half) with no black-red planeswalker to offer.
+
+## Popularity (2026-10-13)
+
+At the user's ask, the stand-ins lean towards cards people play: `suggestReplacements` multiplies
+each candidate's score by ×0.85–×1.15 from its EDHREC rank (`popularityOf` — log scale, rank 1 is
+1, rank 100 ≈ 0.55, rank 1,000 ≈ 0.33, unranked 0), applied last so it decides between comparable
+matches without lifting a poor one over a good one. On fourteen blocked cards it changed the top
+three each time, usually by promoting the staple among near-equals (Quantum Riddler → Consecrated
+Sphinx, Spider-Man No More → Pacifism, Glen Elendra's Answer → Access Denied); where every candidate
+is a loose match (Balance, Flash) the staples now lead, and those stay badged Loose.
+
+The rank table (`cards/edhrec-rank.ts`) had fallen to ~5,400 of the pool's ~11,250 deckable cards —
+its generator asked Scryfall and was rarely rerun. `npm run gen:edhrec-rank -w engine` now reads the
+checked-in Oracle snapshot (`-- --online` still asks Scryfall), and covers 11,224 of 11,259. The
+card library's sort reads the same table.
