@@ -126,7 +126,12 @@ from the measured rooms-per-core.
 
 They multiply with phase 2, so they come first; each is chosen by phase 0's profile.
 
-- **Frames carry only new events.** The client already keeps what it has seen; a frame can send
+- **Frames carry only new events** — **built 2026-10-13** (`state.eventsFrom`, the client's
+  `event-deltas` opt-in and `resync`; `net/eventLog.ts`). Measured on a four-bot game: a frame
+  at turn 10 96 → 29 KB (deflated 11 → 4.5 KB), turn 29 347 → 87 KB (36 → 11 KB), the whole game
+  39.6 → 10.8 MB (4.3 → 1.5 MB on the wire). What's left is the board, growing far slower. Server
+  CPU barely moves: building and stringifying a whole late frame was ~1.5 ms here.
+  The original sketch: the client already keeps what it has seen; a frame can send
   the events since that connection's last frame, with the whole log only on join and reconnect.
   Makes frame cost independent of game length. A protocol change (`protocol/src/room.ts`) and a
   client one (`net/`, `usePlayback`), but a small one beside full view diffs, which wait until
