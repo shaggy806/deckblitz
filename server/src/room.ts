@@ -239,7 +239,7 @@ const realTimers: RoomTimers = {
 
 export interface RoomOptions {
   /** Where this room's published frames go. The transport layer turns each
-   * into a `state` push per connected seat (see `ws-server.ts`), and binds
+   * into a `state` push per connected seat (see `room-service.ts`), and binds
    * it itself for any room it's handed — passing it here matters for a room
    * that publishes before its first message, which is every promoted one. */
   readonly onUpdate?: (room: Room) => void;
@@ -1468,7 +1468,7 @@ export class Room {
   }
 
   /** Numbers and hands out the next frame. The single path to a `state`
-   * push — `ws-server.ts` turns one of these into one message per connected
+   * push — `room-service.ts` turns one of these into one message per connected
    * seat — so every seat always sees the same frame under the same `seq`. */
   publish(): void {
     this.onPublish?.(this);

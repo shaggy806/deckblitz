@@ -20,7 +20,7 @@ that file.
   (`room.publish()` → `onUpdate`).
 - **The host** (`host.ts`) is whoever created the room. Only they may add or remove seats and
   bots, set bot decks and speed, start the game, and deal a rematch once it's over
-  (`requireHost` in `ws-server.ts`). A rematch is a new `Room` under the same code
+  (`requireHost` in `room-service.ts`). A rematch is a new `Room` under the same code
   (`RoomManager.rematch`), its frames carrying the next `game` number.
 - **The wire protocol lives in the `protocol/` workspace**, imported as types by both server
   and client. Change it there, never restate it here.
@@ -35,7 +35,9 @@ that file.
 
 ## Where things are
 
-`room.ts`, `pending-room.ts`, `room-manager.ts`, `ws-server.ts`, `host.ts`, `decks.ts` (fallback
+`room.ts`, `pending-room.ts`, `room-manager.ts`, `room-service.ts` (the message handlers and
+`broadcast`, per connection by `ConnId`), `transport.ts` (sockets, rate limit, compression),
+`room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `host.ts`, `decks.ts` (fallback
 seat decks from the engine's `SAMPLE_DECKS`), `import-deck.ts` (`POST /import-deck`, streamed
 NDJSON; an unimplemented card is read from the engine's Oracle snapshot via `card-data.ts`,
 else looked up on Scryfall in batches), `oracle-tags.ts` (the card replacer's generated tag index),

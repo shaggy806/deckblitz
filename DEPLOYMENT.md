@@ -38,7 +38,7 @@ runs plain HTTP internally on `:8080`.
 
 The tunnel was first chosen because the home box's IP was dynamic. The instance has a static IP,
 but the tunnel stays, because **the rate limiter depends on it**: `clientIp()` in
-`server/src/ws-server.ts` trusts Cloudflare's `CF-Connecting-IP` header without checking where
+`server/src/transport.ts` trusts Cloudflare's `CF-Connecting-IP` header without checking where
 the request came from. Behind the tunnel only Cloudflare can reach :4000, so that's safe. With
 :4000 or :443 open to the internet, anyone could fake the header and get around the per-IP
 limit. Dropping the tunnel would need a code change (trust the header only from a known proxy)
@@ -94,7 +94,7 @@ WantedBy=multi-user.target
 `server/src/index.ts` default of `*`. `enabled` so it starts on boot; `Restart=on-failure` so a
 crash comes back on its own. Server-side hardening for being open to the internet (rate-limiting
 connections per IP, reaping idle rooms) is in the code itself, not config — see
-`server/src/ws-server.ts` and `server/src/room-manager.ts`.
+`server/src/transport.ts` and `server/src/room-manager.ts`.
 
 ## The static client (Caddy)
 
@@ -259,7 +259,7 @@ down (cloudflared stopped, or the instance is).
   (`IDLE_ROOM_MS` in `server/src/index.ts`), swept every 15 minutes — no manual cleanup needed.
 - **Rate limiting**: per-IP (via Cloudflare's `CF-Connecting-IP` header, since the tunnel means
   the socket's own remote address is always local, not the real visitor), 40 messages per
-  5-second window — see `server/src/ws-server.ts`.
+  5-second window — see `server/src/transport.ts`.
 - **Players' saved data** (decks, pass and motion settings) lives in their browsers, tied to the
   site's address; the server keeps nothing. Moving the site to a new domain starts every player
   empty.
