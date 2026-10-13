@@ -38,6 +38,7 @@ import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
+import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
@@ -184,6 +185,7 @@ import _poolMurmuration from "../pool/murmuration.js";
 import _poolMuseDrake from "../pool/muse-drake.js";
 import _poolMyrScrapling from "../pool/myr-scrapling.js";
 import _poolMysticSanctuary from "../pool/mystic-sanctuary.js";
+import _poolNarsetJeskaiWaymaster from "../pool/narset-jeskai-waymaster.js";
 import _poolNaturalOrder from "../pool/natural-order.js";
 import _poolNecropouncer from "../pool/necropouncer.js";
 import _poolNeedleSpires from "../pool/needle-spires.js";
@@ -261,6 +263,7 @@ import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
+import _poolSlickImitator from "../pool/slick-imitator.js";
 import _poolSnowCoveredPlains from "../pool/snow-covered-plains.js";
 import _poolSokkasCharge from "../pool/sokkas-charge.js";
 import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
@@ -388,6 +391,7 @@ const shard: CardShard = {
     _poolBoldImpaler,
     _poolBorealShelf,
     _poolBreakneckBerserker,
+    _poolBulwarkOx,
     _poolByrkeLongEarOfTheLaw,
     _poolCactusPreserve,
     _poolCallToTheFeast,
@@ -534,6 +538,7 @@ const shard: CardShard = {
     _poolMuseDrake,
     _poolMyrScrapling,
     _poolMysticSanctuary,
+    _poolNarsetJeskaiWaymaster,
     _poolNaturalOrder,
     _poolNecropouncer,
     _poolNeedleSpires,
@@ -611,6 +616,7 @@ const shard: CardShard = {
     _poolSimicLocket,
     _poolSkeletalChangeling,
     _poolSkyclaveRelic,
+    _poolSlickImitator,
     _poolSnowCoveredPlains,
     _poolSokkasCharge,
     _poolSolidarityOfHeroes,

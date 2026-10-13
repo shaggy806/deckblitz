@@ -32,6 +32,7 @@ import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
+import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
 import _poolCanopyGargantuan from "../pool/canopy-gargantuan.js";
 import _poolCaptainOfUmbar from "../pool/captain-of-umbar.js";
@@ -52,6 +53,7 @@ import _poolCystbearer from "../pool/cystbearer.js";
 import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
+import _poolDeathBegetsLife from "../pool/death-begets-life.js";
 import _poolDecimate from "../pool/decimate.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
 import _poolDefendTheCampus from "../pool/defend-the-campus.js";
@@ -66,6 +68,7 @@ import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.
 import _poolDoctorDoom from "../pool/doctor-doom.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
 import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
+import _poolDracosaurAuxiliary from "../pool/dracosaur-auxiliary.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
@@ -73,11 +76,13 @@ import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
 import _poolElvishRejuvenator from "../pool/elvish-rejuvenator.js";
+import _poolEmbalmedAscendant from "../pool/embalmed-ascendant.js";
 import _poolEmberwildeCaptain from "../pool/emberwilde-captain.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEndlessOne from "../pool/endless-one.js";
+import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
@@ -114,6 +119,7 @@ import _poolGontiCannyAcquisitor from "../pool/gonti-canny-acquisitor.js";
 import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
+import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
@@ -168,6 +174,7 @@ import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
+import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
@@ -235,6 +242,7 @@ import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
+import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
@@ -374,6 +382,7 @@ const shard: CardShard = {
     _poolBovineIntervention,
     _poolBrotherhoodPatriarch,
     _poolCaitSithFortuneTeller,
+    _poolCalamityGallopingInferno,
     _poolCandlekeepSage,
     _poolCanopyGargantuan,
     _poolCaptainOfUmbar,
@@ -394,6 +403,7 @@ const shard: CardShard = {
     _poolDalekSquadron,
     _poolDeadlyDerision,
     _poolDeadlyVisit,
+    _poolDeathBegetsLife,
     _poolDecimate,
     _poolDeeptreadMerrow,
     _poolDefendTheCampus,
@@ -408,6 +418,7 @@ const shard: CardShard = {
     _poolDoctorDoom,
     _poolDogmeatEverLoyal,
     _poolDoombotHarbinger,
+    _poolDracosaurAuxiliary,
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
@@ -415,11 +426,13 @@ const shard: CardShard = {
     _poolElementalSummoning,
     _poolEloiseNephaliaSleuth,
     _poolElvishRejuvenator,
+    _poolEmbalmedAscendant,
     _poolEmberwildeCaptain,
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
     _poolEndlessOne,
+    _poolEndriderCatalyzer,
     _poolEphemerate,
     _poolErraticVisionary,
     _poolEtheriumHornSorcerer,
@@ -456,6 +469,7 @@ const shard: CardShard = {
     _poolGorgonsHead,
     _poolGrimServant,
     _poolGuardianKirin,
+    _poolGuardianSunmare,
     _poolHalimarDepths,
     _poolHaplessResearcher,
     _poolHarrierNaga,
@@ -510,6 +524,7 @@ const shard: CardShard = {
     _poolMandibularKite,
     _poolMapTheFrontier,
     _poolMassOfMysteries,
+    _poolMaximumOverdrive,
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMinotaurAggressor,
@@ -577,6 +592,7 @@ const shard: CardShard = {
     _poolSeatOfTheSynod,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,
+    _poolSeraphicSteed,
     _poolSerrasEmbrace,
     _poolSewerdreg,
     _poolShamblingGhoul,

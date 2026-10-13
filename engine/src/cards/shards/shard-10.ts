@@ -12,6 +12,7 @@ import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
 import _poolAmazingSpiderGirl from "../pool/amazing-spider-girl.js";
 import _poolAmphinCutthroat from "../pool/amphin-cutthroat.js";
+import _poolAnafenzaUnyieldingLineage from "../pool/anafenza-unyielding-lineage.js";
 import _poolAncestralCraving from "../pool/ancestral-craving.js";
 import _poolAncestralVengeance from "../pool/ancestral-vengeance.js";
 import _poolAnimarSoulOfElements from "../pool/animar-soul-of-elements.js";
@@ -373,6 +374,7 @@ import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
 import _tokensTreefolkTokenSylvanOffering from "../tokens/treefolk-token-sylvan-offering.js";
+import _tokensVehicleToken from "../tokens/vehicle-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -385,6 +387,7 @@ const shard: CardShard = {
     _poolAlpharaelStonechosen,
     _poolAmazingSpiderGirl,
     _poolAmphinCutthroat,
+    _poolAnafenzaUnyieldingLineage,
     _poolAncestralCraving,
     _poolAncestralVengeance,
     _poolAnimarSoulOfElements,
@@ -748,6 +751,7 @@ const shard: CardShard = {
     _tokensKomasCoil,
     _tokensPhyrexianInsectToken,
     _tokensTreefolkTokenSylvanOffering,
+    _tokensVehicleToken,
   ],
 };
 

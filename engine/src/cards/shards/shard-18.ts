@@ -47,6 +47,7 @@ import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
+import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
@@ -69,14 +70,17 @@ import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
 import _poolDevoutChaplain from "../pool/devout-chaplain.js";
+import _poolDirgurIslandDragon from "../pool/dirgur-island-dragon.js";
 import _poolDiscipleOfBolas from "../pool/disciple-of-bolas.js";
 import _poolDisempower from "../pool/disempower.js";
+import _poolDistrictMascot from "../pool/district-mascot.js";
 import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
+import _poolDroverGrizzly from "../pool/drover-grizzly.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
@@ -117,9 +121,11 @@ import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
 import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
+import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolHall from "../pool/hall.js";
 import _poolHamzaGuardianOfArashin from "../pool/hamza-guardian-of-arashin.js";
 import _poolHardenedTactician from "../pool/hardened-tactician.js";
+import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
 import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
@@ -181,6 +187,7 @@ import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
+import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
@@ -376,6 +383,7 @@ import _tokensKrakenTokenSpawningKraken from "../tokens/kraken-token-spawning-kr
 import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
+import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensWhiteDogToken11 from "../tokens/white-dog-token-1-1.js";
 import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
@@ -426,6 +434,7 @@ const shard: CardShard = {
     _poolCauldronFamiliar,
     _poolCelestialArmor,
     _poolChampionsOfThePerfect,
+    _poolChillingScreech,
     _poolClamorousIronclad,
     _poolCodsworthHandyHelper,
     _poolColdWaterSnapper,
@@ -448,14 +457,17 @@ const shard: CardShard = {
     _poolDesperateCharge,
     _poolDevotedDruid,
     _poolDevoutChaplain,
+    _poolDirgurIslandDragon,
     _poolDiscipleOfBolas,
     _poolDisempower,
+    _poolDistrictMascot,
     _poolDoesMachines,
     _poolDoomedNecromancer,
     _poolDragonBlood,
     _poolDragonlordsServant,
     _poolDreadmawsIre,
     _poolDrelnoch,
+    _poolDroverGrizzly,
     _poolDuskmantleOperative,
     _poolDutyBoundDead,
     _poolEagerCadet,
@@ -496,9 +508,11 @@ const shard: CardShard = {
     _poolGrangerGuildmage,
     _poolGreedyFreebooter,
     _poolGrinningDemon,
+    _poolGuidelightMatrix,
     _poolHall,
     _poolHamzaGuardianOfArashin,
     _poolHardenedTactician,
+    _poolHauntTheNetwork,
     _poolHauntedCloak,
     _poolHellkiteOverlord,
     _poolHeraldsHorn,
@@ -560,6 +574,7 @@ const shard: CardShard = {
     _poolMichelangeloTheHeart,
     _poolMichikosReignOfTruth,
     _poolMillicentRestlessRevenant,
+    _poolMindspringMerfolk,
     _poolMirkwoodSpider,
     _poolMistRaven,
     _poolMolecularModifier,
@@ -757,6 +772,7 @@ const shard: CardShard = {
     _tokensPhyrexianHorrorToken,
     _tokensRatTokenCantBlock,
     _tokensSkeletonPirateToken,
+    _tokensSpiritTokenGreatArashinCity,
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensWhiteDogToken11,
     _tokensZombieDruidToken,

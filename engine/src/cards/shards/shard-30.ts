@@ -97,6 +97,7 @@ import _poolDraconicLore from "../pool/draconic-lore.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
 import _poolDreamBeavers from "../pool/dream-beavers.js";
 import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
+import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
@@ -240,6 +241,7 @@ import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
+import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
@@ -359,6 +361,7 @@ import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
+import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
 import _poolZephyrBoots from "../pool/zephyr-boots.js";
 import _poolZodiacTiger from "../pool/zodiac-tiger.js";
 import _poolZulAshurLichLord from "../pool/zul-ashur-lich-lord.js";
@@ -464,6 +467,7 @@ const shard: CardShard = {
     _poolDreadhordeInvasion,
     _poolDreamBeavers,
     _poolDreamrootCascade,
+    _poolDredgersInsight,
     _poolDrillTooDeep,
     _poolDromokaWarrior,
     _poolElasIlKorSadisticPilgrim,
@@ -607,6 +611,7 @@ const shard: CardShard = {
     _poolOnduInversion,
     _poolOrcishBowmasters,
     _poolOutlandBoar,
+    _poolOutpaceOblivion,
     _poolOverprotect,
     _poolPanharmonicon,
     _poolPantherWarriors,
@@ -726,6 +731,7 @@ const shard: CardShard = {
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
     _poolWordsOfWisdom,
+    _poolZahurGlorysPast,
     _poolZephyrBoots,
     _poolZodiacTiger,
     _poolZulAshurLichLord,

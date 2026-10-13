@@ -40,6 +40,7 @@ import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
 import _poolBrainstone from "../pool/brainstone.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
+import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
 import _poolBrigidDounsMind from "../pool/brigid-douns-mind.js";
 import _poolBrilliantRestoration from "../pool/brilliant-restoration.js";
@@ -119,6 +120,7 @@ import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
+import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
@@ -155,6 +157,7 @@ import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
+import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
@@ -245,6 +248,7 @@ import _poolRadiantFountain from "../pool/radiant-fountain.js";
 import _poolRagefire from "../pool/ragefire.js";
 import _poolRagostDeftGastronaut from "../pool/ragost-deft-gastronaut.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
+import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
@@ -285,6 +289,7 @@ import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
+import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
@@ -377,6 +382,7 @@ import _poolZhaoTheSeethingFlame from "../pool/zhao-the-seething-flame.js";
 import _poolZukoExiledPrince from "../pool/zuko-exiled-prince.js";
 import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
 import _poolZurgoThundersDecree from "../pool/zurgo-thunders-decree.js";
+import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
 import _tokensDroneToken from "../tokens/drone-token.js";
 import _tokensElementalTokenLagomosHandOfHatred from "../tokens/elemental-token-lagomos-hand-of-hatred.js";
 import _tokensFirstMateRagavan from "../tokens/first-mate-ragavan.js";
@@ -424,6 +430,7 @@ const shard: CardShard = {
     _poolBootsOfSpeed,
     _poolBrainstone,
     _poolBreechesEagerPillager,
+    _poolBrightfieldGlider,
     _poolBrigidClachansHeart,
     _poolBrigidDounsMind,
     _poolBrilliantRestoration,
@@ -503,6 +510,7 @@ const shard: CardShard = {
     _poolFootHeadquarters,
     _poolForest,
     _poolFormidableCommons,
+    _poolFrontlineRush,
     _poolFuneralLongboat,
     _poolFurnaceReins,
     _poolGalazethPrismari,
@@ -539,6 +547,7 @@ const shard: CardShard = {
     _poolHaughtyDjinn,
     _poolHellkiteCourser,
     _poolHornetHarasser,
+    _poolHowlsquadHeavy,
     _poolHydraAssaultRobot,
     _poolIdentityEcho,
     _poolImperialOutrider,
@@ -629,6 +638,7 @@ const shard: CardShard = {
     _poolRagefire,
     _poolRagostDeftGastronaut,
     _poolRallyOfWings,
+    _poolRamblingPossum,
     _poolRangerEnVec,
     _poolRapturousMoment,
     _poolRecklessRansacking,
@@ -669,6 +679,7 @@ const shard: CardShard = {
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
     _poolShiftingSliver,
+    _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
     _poolSiegeSmash,
@@ -763,6 +774,7 @@ const shard: CardShard = {
     _poolZurgoThundersDecree,
   ],
   tokens: [
+    _tokensDinosaurDragonToken,
     _tokensDroneToken,
     _tokensElementalTokenLagomosHandOfHatred,
     _tokensFirstMateRagavan,

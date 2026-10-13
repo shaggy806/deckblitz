@@ -2677,6 +2677,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Gastal Thrillseeker, Walking Sarcophagus',
+    board({
+      you: { bf: ['Walking Sarcophagus', 'Swamp', 'Mountain'], hand: ['Gastal Thrillseeker'] },
+      opp: { bf: ['Plains', 'Island', 'Forest'] },
+    }),
+  ),
+  preset(
+    'Venomsac Lagac',
+    board({
+      you: { bf: ['Venomsac Lagac', { name: 'Grizzly Bears', sick: true }, 'Llanowar Elves', 'Forest'] },
+      opp: { bf: ['Plains', 'Island', 'Swamp'] },
+    }),
+  ),
+  preset(
     'Way of the Pyromancer',
     board({
       you: { bf: ['Chandra, Torch of Defiance', 'Mountain*4'], hand: ['Way of the Pyromancer', 'Lightning Bolt'] },

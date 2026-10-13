@@ -5771,6 +5771,33 @@
   },
   "trigger:energy-gained": {
    "example": "Aether Revolt: \"Whenever you get one or more {E}, … deals that much damage\" — no trigger on getting energy that carries the amount."
+  },
+  "trigger:becomes-target-spell-on-stack": {
+   "family": "trigger:becomes-target-fixes",
+   "example": "Surrak, Elusive Hunter: \"Whenever a creature you control or a creature spell you control becomes the target of a spell or ability an opponent controls\" — targets are announced only for battlefield objects."
+  },
+  "effect:put-counters-of-departed": {
+   "family": "effect:move-counter",
+   "example": "Host of the Hereafter: put the same number of each kind of counter a creature died with onto a target."
+  },
+  "effect:put-onto-battlefield-multiple-counter-kinds": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Perennation: returns with a hexproof counter and an indestructible counter — withCounters holds one kind."
+  },
+  "static:crews-using-toughness": {
+   "family": "keyword:crew",
+   "example": "Interface Ace: \"This creature saddles Mounts and crews Vehicles using its toughness rather than its power.\""
+  },
+  "trigger:attack-with-each-of-filters": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Fearless Swashbuckler: \"Whenever you attack with a Pirate and a Vehicle\" — attackers including one matching each filter, the same creature allowed."
+  },
+  "effect:delayed-trigger-next-activation": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Pit Automaton: \"When you next activate an exhaust ability that isn't a mana ability this turn, copy it\" — only a next-spell delayed trigger exists."
+  },
+  "effect:flicker-source-and-chosen": {
+   "example": "Fortune, Loyal Steed: exile Fortune and up to one creature that saddled it at once (chosen as it resolves), then return both."
   }
  }
 }

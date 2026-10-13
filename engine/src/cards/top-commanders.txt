@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-405 already implemented / 95 missing
+408 already implemented / 92 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -123,7 +123,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  117  Zur the Enchanter                              17114 decks  {1}{W}{U}{B}     Legendary Creature — Human Wizard
 [x]  118  Urza, Chief Artificer                          17039 decks  {3}{W}{U}{B}     Legendary Creature — Human Artificer
 [x]  119  Alela, Artful Provocateur                      16894 decks  {1}{W}{U}{B}     Legendary Creature — Faerie Warlock
-[ ]  120  Mendicant Core, Guidelight                     16880 decks  {W}{U}           Legendary Artifact Creature — Robot
+[x]  120  Mendicant Core, Guidelight                     16880 decks  {W}{U}           Legendary Artifact Creature — Robot
 [x]  121  Galadriel, Light of Valinor                    16855 decks  {2}{G}{W}{U}     Legendary Creature — Elf Noble
 [x]  122  Jin Sakai, Ghost of Tsushima                   16513 decks  {1}{W}{U}{B}     Legendary Creature — Human Samurai
 [x]  123  Storm, Force of Nature                         16444 decks  {1}{G}{U}{R}     Legendary Creature — Mutant Hero
@@ -342,7 +342,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  336  Neriv, Heart of the Storm                       8274 decks  {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  337  Marwyn, the Nurturer                            8228 decks  {2}{G}           Legendary Creature — Elf Druid
 [ ]  338  Ghave, Guru of Spores                           8185 decks  {2}{W}{B}{G}     Legendary Creature — Fungus Shaman
-[ ]  339  Vnwxt, Verbose Host                             8171 decks  {1}{U}           Legendary Creature — Homunculus
+[x]  339  Vnwxt, Verbose Host                             8171 decks  {1}{U}           Legendary Creature — Homunculus
 [ ]  340  Saskia the Unyielding                           8145 decks  {B}{R}{G}{W}     Legendary Creature — Human Soldier
 [x]  341  Imotekh the Stormlord                           8137 decks  {2}{B}{B}        Legendary Artifact Creature — Necron
 [x]  342  Talion, the Kindly Lord                         8105 decks  {2}{U}{B}        Legendary Creature — Faerie Noble
@@ -369,7 +369,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  363  Gluntch, the Bestower                           7816 decks  {1}{G}{W}        Legendary Creature — Jellyfish
 [x]  364  Gisa and Geralf                                 7809 decks  {2}{U}{B}        Legendary Creature — Human Wizard
 [x]  365  Admiral Brass, Unsinkable                       7808 decks  {2}{U}{B}{R}     Legendary Creature — Human Pirate
-[ ]  366  The Gitrog, Ravenous Ride                       7797 decks  {3}{B}{G}        Legendary Creature — Frog Horror Mount
+[x]  366  The Gitrog, Ravenous Ride                       7797 decks  {3}{B}{G}        Legendary Creature — Frog Horror Mount
 [x]  367  Breena, the Demagogue                           7785 decks  {1}{W}{B}        Legendary Creature — Bird Warlock
 [x]  368  Kadena, Slinking Sorcerer                       7779 decks  {1}{B}{G}{U}     Legendary Creature — Snake Wizard Sorcerer
 [ ]  369  Sméagol, Helpful Guide                          7751 decks  {1}{B}{G}        Legendary Creature — Halfling Horror

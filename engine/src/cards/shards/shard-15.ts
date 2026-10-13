@@ -257,6 +257,7 @@ import _poolSaplingNursery from "../pool/sapling-nursery.js";
 import _poolSarkhansCatharsis from "../pool/sarkhans-catharsis.js";
 import _poolSavageHunger from "../pool/savage-hunger.js";
 import _poolScionOfUgin from "../pool/scion-of-ugin.js";
+import _poolScroungingSkyray from "../pool/scrounging-skyray.js";
 import _poolSealOfCleansing from "../pool/seal-of-cleansing.js";
 import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
@@ -611,6 +612,7 @@ const shard: CardShard = {
     _poolSarkhansCatharsis,
     _poolSavageHunger,
     _poolScionOfUgin,
+    _poolScroungingSkyray,
     _poolSealOfCleansing,
     _poolSealOfPrimordium,
     _poolSeasideHaven,

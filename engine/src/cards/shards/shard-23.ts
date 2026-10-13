@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
@@ -49,6 +50,7 @@ import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBrasssBounty from "../pool/brasss-bounty.js";
 import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
+import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
@@ -62,8 +64,10 @@ import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
 import _poolChopDown from "../pool/chop-down.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
+import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
+import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
@@ -78,6 +82,7 @@ import _poolDeadlyPlot from "../pool/deadly-plot.js";
 import _poolDeathStroke from "../pool/death-stroke.js";
 import _poolDeathriteShaman from "../pool/deathrite-shaman.js";
 import _poolDemolitionField from "../pool/demolition-field.js";
+import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
@@ -118,6 +123,7 @@ import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
+import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
@@ -340,6 +346,7 @@ import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAatchikEmeraldRadian,
     _poolAgonyWarp,
     _poolAjaniTheGreathearted,
     _poolAmbitionsCost,
@@ -386,6 +393,7 @@ const shard: CardShard = {
     _poolBrasssBounty,
     _poolBreatheYourLast,
     _poolBreenaTheDemagogue,
+    _poolBroodheartEngine,
     _poolBurstLightning,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
@@ -399,8 +407,10 @@ const shard: CardShard = {
     _poolChatterOfTheSquirrel,
     _poolChopDown,
     _poolCloudboundMoogle,
+    _poolCoalstokeGearhulk,
     _poolCoeurl,
     _poolCommuneWithLava,
+    _poolCongregationGryff,
     _poolCoolButRude,
     _poolCoordinatedCharge,
     _poolCrossbowAmbush,
@@ -415,6 +425,7 @@ const shard: CardShard = {
     _poolDeathStroke,
     _poolDeathriteShaman,
     _poolDemolitionField,
+    _poolDesperateMeasures,
     _poolDespoil,
     _poolDistinguishedConjurer,
     _poolDrivnodCarnageDominus,
@@ -455,6 +466,7 @@ const shard: CardShard = {
     _poolGoblinEngineer,
     _poolGoblinMatron,
     _poolGrayMerchantOfAsphodel,
+    _poolGreatArashinCity,
     _poolGreenwoodSentinel,
     _poolGuma,
     _poolGustSkimmer,

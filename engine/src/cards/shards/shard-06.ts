@@ -144,6 +144,7 @@ import _poolGrislySalvage from "../pool/grisly-salvage.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
+import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
@@ -240,6 +241,7 @@ import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiphookRaider from "../pool/riphook-raider.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
 import _poolRoarOfTheWurm from "../pool/roar-of-the-wurm.js";
+import _poolRocketeerBoostbuggy from "../pool/rocketeer-boostbuggy.js";
 import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js";
 import _poolRosaResoluteWhiteMage from "../pool/rosa-resolute-white-mage.js";
 import _poolRousingRead from "../pool/rousing-read.js";
@@ -514,6 +516,7 @@ const shard: CardShard = {
     _poolGroundbreaker,
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
+    _poolGuidelightOptimizer,
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
@@ -610,6 +613,7 @@ const shard: CardShard = {
     _poolRiphookRaider,
     _poolRiptideCrab,
     _poolRoarOfTheWurm,
+    _poolRocketeerBoostbuggy,
     _poolRofellosLlanowarEmissary,
     _poolRosaResoluteWhiteMage,
     _poolRousingRead,

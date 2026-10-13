@@ -128,6 +128,7 @@ import _poolFoxfireOak from "../pool/foxfire-oak.js";
 import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
+import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
@@ -485,6 +486,7 @@ const shard: CardShard = {
     _poolFreshFacedRecruit,
     _poolFungalInfection,
     _poolGallifreyCouncilChamber,
+    _poolGastalThrillseeker,
     _poolGatheringStone,
     _poolGenesisChamber,
     _poolGhostlyFlicker,

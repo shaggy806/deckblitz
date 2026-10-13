@@ -51,6 +51,7 @@ import _poolCaptivatingCave from "../pool/captivating-cave.js";
 import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
+import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
@@ -111,6 +112,7 @@ import _poolExcaliburIi from "../pool/excalibur-ii.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
+import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
@@ -237,6 +239,7 @@ import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
+import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
@@ -408,6 +411,7 @@ const shard: CardShard = {
     _poolCastAwayDoubt,
     _poolCatBurglar,
     _poolCatacombSlug,
+    _poolCausticBronco,
     _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
     _poolCircleOfTheLandDruid,
@@ -468,6 +472,7 @@ const shard: CardShard = {
     _poolExiledBoggart,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
+    _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
     _poolFelineSovereign,
@@ -594,6 +599,7 @@ const shard: CardShard = {
     _poolPulseTracker,
     _poolQuantumEntanglement,
     _poolQuillBladeLaureate,
+    _poolRacersScoreboard,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
     _poolRavenousBaloth,

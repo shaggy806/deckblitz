@@ -35,6 +35,7 @@ import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
+import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
@@ -77,6 +78,7 @@ import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
+import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
 import _poolDragonskullSummit from "../pool/dragonskull-summit.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
@@ -132,6 +134,7 @@ import _poolHighlandGame from "../pool/highland-game.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
+import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
@@ -262,6 +265,7 @@ import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
+import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
 import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
@@ -407,6 +411,7 @@ const shard: CardShard = {
     _poolBogInitiate,
     _poolBoneclubBerserker,
     _poolBrainFreeze,
+    _poolBridledBighorn,
     _poolBroodcallerScourge,
     _poolBuriedRuin,
     _poolBurntOffering,
@@ -449,6 +454,7 @@ const shard: CardShard = {
     _poolDisplace,
     _poolDistantMelody,
     _poolDoomBlade,
+    _poolDraconauticsEngineer,
     _poolDraconicMuralists,
     _poolDragonskullSummit,
     _poolDramaticReversal,
@@ -504,6 +510,7 @@ const shard: CardShard = {
     _poolHomunculusHorde,
     _poolHonorGuard,
     _poolHoppingAutomaton,
+    _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
     _poolHydraOmnivore,
@@ -634,6 +641,7 @@ const shard: CardShard = {
     _poolSiegeGangCommander,
     _poolSightlessGhoul,
     _poolSilverFurMaster,
+    _poolSkimmingStrike,
     _poolSkirkProspector,
     _poolSkitteringSurveyor,
     _poolSkycatSovereign,

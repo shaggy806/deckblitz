@@ -136,6 +136,7 @@ import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
+import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
 import _poolGoShintaiOfHiddenCruelty from "../pool/go-shintai-of-hidden-cruelty.js";
 import _poolGoblinMotivator from "../pool/goblin-motivator.js";
 import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
@@ -170,10 +171,12 @@ import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
+import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
+import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLoomingAltisaur from "../pool/looming-altisaur.js";
@@ -194,6 +197,7 @@ import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
+import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
@@ -219,6 +223,7 @@ import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
+import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
@@ -244,6 +249,7 @@ import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
 import _poolRiveteersInitiate from "../pool/riveteers-initiate.js";
+import _poolRoamersRoutine from "../pool/roamers-routine.js";
 import _poolRockfallVale from "../pool/rockfall-vale.js";
 import _poolRockyRebuke from "../pool/rocky-rebuke.js";
 import _poolRograkhSonOfRohgahh from "../pool/rograkh-son-of-rohgahh.js";
@@ -356,6 +362,7 @@ import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.j
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
+import _tokensSheepToken from "../tokens/sheep-token.js";
 import _tokensSpiritClericToken from "../tokens/spirit-cleric-token.js";
 import _tokensWizardTokenKuja from "../tokens/wizard-token-kuja.js";
 import _tokensWurmToken from "../tokens/wurm-token.js";
@@ -495,6 +502,7 @@ const shard: CardShard = {
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
     _poolGloriousDecay,
+    _poolGloryheathLynx,
     _poolGoShintaiOfHiddenCruelty,
     _poolGoblinMotivator,
     _poolGoldForgedSentinel,
@@ -529,10 +537,12 @@ const shard: CardShard = {
     _poolKindlesparkDuo,
     _poolKnightOfNewBenalia,
     _poolKydeleChosenOfKruphix,
+    _poolLasydProwler,
     _poolLeafkinDruid,
     _poolLeechCollector,
     _poolLifecraftCavalry,
     _poolLightOfPromise,
+    _poolLightfootTechnique,
     _poolLilianasStandardBearer,
     _poolLonesomeUnicorn,
     _poolLoomingAltisaur,
@@ -553,6 +563,7 @@ const shard: CardShard = {
     _poolMoggcatcher,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
+    _poolMuYanlingWindRider,
     _poolMutagenicGrowth,
     _poolMycosynthGolem,
     _poolMysticArchaeologist,
@@ -578,6 +589,7 @@ const shard: CardShard = {
     _poolPlanarIncision,
     _poolPloverKnights,
     _poolPlunder,
+    _poolPointTheWay,
     _poolPorcelainLegionnaire,
     _poolPrimocEscapee,
     _poolPrismariCampus,
@@ -603,6 +615,7 @@ const shard: CardShard = {
     _poolRiseOfTheEldrazi,
     _poolRiskyShortcut,
     _poolRiveteersInitiate,
+    _poolRoamersRoutine,
     _poolRockfallVale,
     _poolRockyRebuke,
     _poolRograkhSonOfRohgahh,
@@ -717,6 +730,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,
     _tokensShapeshifterTokenIrregularCohort,
+    _tokensSheepToken,
     _tokensSpiritClericToken,
     _tokensWizardTokenKuja,
     _tokensWurmToken,

@@ -142,6 +142,7 @@ import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
+import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
@@ -236,6 +237,7 @@ import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
+import _poolPactdollTerror from "../pool/pactdoll-terror.js";
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
@@ -265,6 +267,7 @@ import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
+import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
@@ -332,6 +335,7 @@ import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
+import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
 import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolGhostsOfTheDamned,
     _poolGliderStaff,
     _poolGlimpseTheCore,
+    _poolGlitchGhostSurveyor,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
     _poolGoblinChainwhirler,
@@ -599,6 +604,7 @@ const shard: CardShard = {
     _poolOldFlitterfang,
     _poolOnyxGoblet,
     _poolOonasGatewarden,
+    _poolPactdollTerror,
     _poolPanacea,
     _poolParasiticImpetus,
     _poolPearledUnicorn,
@@ -628,6 +634,7 @@ const shard: CardShard = {
     _poolRoccoStreetChef,
     _poolRocketVolley,
     _poolRuinousGremlin,
+    _poolRunescaleStormbrood,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
     _poolSazacapsBrew,
@@ -695,6 +702,7 @@ const shard: CardShard = {
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,
     _poolVinereapMentor,
+    _poolVnwxtVerboseHost,
     _poolVoldarenEstate,
     _poolVoraciousTomeSkimmer,
     _poolWakestoneGargoyle,

@@ -70,12 +70,15 @@ section keeps only what to do next.
   Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
   Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
   Commander set (ECL, ECC), Avatar: The Last Airbender (TLA), Marvel's Spider-Man (SPM), Edge of
-  Eternities (EOE, EOC) and Final Fantasy (FIN, FIC) are done (batches 50–66). **Next: Tarkir:
-  Dragonstorm** (TDM, 2025-04-11: 45 left), then Aetherdrift (DFT, 66 left) — **a whole set per
-  batch**, two when a set is small (the user's call, 2026-10-12: 4-5 agents with more cards each;
-  batch 65 ran three feature agents in worktrees beside two authoring agents). Mayhem (56),
-  rebound (57), teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63),
-  behold (64), web-slinging, waterbend and airbend (65), void and revolt (66) are built;
+  Eternities (EOE, EOC), Final Fantasy (FIN, FIC), Tarkir: Dragonstorm (TDM) and Aetherdrift (DFT)
+  are done (batches 50–67). **Next: Foundations (FDN, 5 left), Foundations Jumpstart (J25, 13),
+  Duskmourn (DSK, 38) and Bloomburrow (BLB, 10)** together, then Assassin's Creed (ACR, 10) and
+  Outlaws of Thunder Junction (OTJ, 44) — **whole sets per batch**, several when they're small (the
+  user's call, 2026-10-12: 4-5 agents with more cards each; features build in parallel worktrees).
+  Leading blocker from batch 67: "saddles Mounts and crews Vehicles as though its power were 2
+  greater" (`static:crews-as-though-power`, 8 Aetherdrift cards). Mayhem (56), rebound (57),
+  teamwork (58), the Nth-counter trigger (59), opus and sneak (61), blight (63), behold (64),
+  web-slinging, waterbend and airbend (65), void and revolt (66), speed and saddle (67) are built;
   Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold

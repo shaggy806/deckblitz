@@ -4518,3 +4518,30 @@ stack count once per token)
   {2} (you aren't offered it — it's his card). Avatar's Wrath exiles Hill Giant but not your Bears, and exiles
   itself; until your next turn Bob can't cast either creature from exile, then he can for {2} each.
 - **Known limits:** Airbending a spell on the stack isn't built (no card in the pool does it).
+
+### Gastal Thrillseeker, Walking Sarcophagus
+
+*Careful rules call* — speed (rules 702.178–702.179): start your engines!, the once-a-turn rise, max speed
+
+- **Setup:** Your precombat main. Your battlefield: Walking Sarcophagus and a Swamp and a Mountain. Your hand:
+  Gastal Thrillseeker. Bob: three lands, no creatures.
+- **Do:** Note your panel (speed 1 — Walking Sarcophagus started your engines). Cast Gastal Thrillseeker
+  (it deals 1 damage to Bob). Attack with Walking Sarcophagus. Pass to your next turn and attack again.
+- **Check:** Your panel shows "🏁 1/4" from the start; Bob's shows none. Bob losing life puts a "Speed" ability
+  on the stack (its text shown) and your speed becomes 2 — once only: the combat damage that turn doesn't
+  raise it again. Next turn it rises to 3. At 4 the badge turns bright ("🏁 max"), Walking Sarcophagus is
+  3/3 and Gastal Thrillseeker has deathtouch and haste.
+- **Known limits:** None known.
+
+### Venomsac Lagac
+
+*New player decision* — saddle (rule 702.171): tapping creatures with total power N to saddle a Mount
+
+- **Setup:** Your precombat main. Your battlefield: Venomsac Lagac, Grizzly Bears (summoning sick), Llanowar
+  Elves and a Forest. Bob: three lands, no creatures.
+- **Do:** Open Venomsac Lagac's menu and choose "Saddle 2", tapping Grizzly Bears. Attack Bob with it.
+- **Check:** The picker asks for creatures with total power 2 (Llanowar Elves alone isn't enough; a
+  summoning-sick Bears may saddle). Venomsac Lagac shows a "Sdl" chip and the log says it becomes
+  saddled; attacking, it gets +0/+3. The chip is gone next turn. Saddle isn't offered on Bob's turn
+  (sorcery speed).
+- **Known limits:** None known.

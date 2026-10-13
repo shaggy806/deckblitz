@@ -33,6 +33,7 @@ import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAssassinate from "../pool/assassinate.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
+import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
@@ -198,6 +199,7 @@ import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
+import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
 import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
@@ -405,6 +407,7 @@ const shard: CardShard = {
     _poolAssassinate,
     _poolAtalanJackal,
     _poolAvenSmokeweaver,
+    _poolAvishkarRaceway,
     _poolAxgardCavalry,
     _poolBartolomeDelPresidio,
     _poolBazaarOfBaghdad,
@@ -570,6 +573,7 @@ const shard: CardShard = {
     _poolMutantTownMusicians,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
+    _poolNestingBot,
     _poolNezumiProwler,
     _poolNightguardPatrol,
     _poolNightscapeApprentice,

@@ -254,7 +254,9 @@
   "keyword:waterbend",
   "keyword:airbend",
   "condition:void-condition",
-  "stat:revolt-condition"
+  "stat:revolt-condition",
+  "mechanic:speed",
+  "keyword:saddle"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

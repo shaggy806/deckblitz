@@ -193,6 +193,7 @@ import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
+import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
@@ -214,6 +215,7 @@ import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMorphling from "../pool/morphling.js";
+import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
@@ -235,6 +237,7 @@ import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
+import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
@@ -301,6 +304,7 @@ import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
+import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
@@ -311,6 +315,7 @@ import _poolSwiftSpinner from "../pool/swift-spinner.js";
 import _poolSylvanBrushstrider from "../pool/sylvan-brushstrider.js";
 import _poolSylvanRanger from "../pool/sylvan-ranger.js";
 import _poolSylvanReclamation from "../pool/sylvan-reclamation.js";
+import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
@@ -332,6 +337,7 @@ import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
 import _poolUnhinge from "../pool/unhinge.js";
+import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
@@ -563,6 +569,7 @@ const shard: CardShard = {
     _poolLegionLoyalty,
     _poolLightningHelix,
     _poolLordSkittersButcher,
+    _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
@@ -584,6 +591,7 @@ const shard: CardShard = {
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMorphling,
+    _poolMutantSurveyor,
     _poolNarsetEnlightenedMaster,
     _poolNeedletoothPack,
     _poolNewGenerationsTechnique,
@@ -605,6 +613,7 @@ const shard: CardShard = {
     _poolPillage,
     _poolPiousInterdiction,
     _poolPiranhaFly,
+    _poolPrideOfTheRoad,
     _poolPridemalkin,
     _poolRabidAttack,
     _poolRakdosGuildgate,
@@ -671,6 +680,7 @@ const shard: CardShard = {
     _poolStrandsOfNight,
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
+    _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
@@ -681,6 +691,7 @@ const shard: CardShard = {
     _poolSylvanBrushstrider,
     _poolSylvanRanger,
     _poolSylvanReclamation,
+    _poolSynchronizedCharge,
     _poolSyrGwynHeroOfAshvale,
     _poolTamiyosJournal,
     _poolTarPitcher,
@@ -702,6 +713,7 @@ const shard: CardShard = {
     _poolUkudCobra,
     _poolUlvenwaldHydra,
     _poolUnhinge,
+    _poolUnswervingSloth,
     _poolValiantGuard,
     _poolVengeance,
     _poolVengefulRebel,

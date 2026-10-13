@@ -200,6 +200,7 @@ import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
+import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
 import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
@@ -290,6 +291,7 @@ import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
+import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
@@ -534,6 +536,7 @@ const shard: CardShard = {
     _poolObeliskOfGrixis,
     _poolOpposition,
     _poolOrazcaRaptor,
+    _poolOrneryTumblewagg,
     _poolOrzhovSignet,
     _poolOsseousExhale,
     _poolOvalchaseDragster,
@@ -624,6 +627,7 @@ const shard: CardShard = {
     _poolTheFrightfulFour,
     _poolTheInvincibleIronMan,
     _poolTheRegalia,
+    _poolTheSibsigCeremony,
     _poolThornwoodFalls,
     _poolThrivingGrove,
     _poolTomBombadil,

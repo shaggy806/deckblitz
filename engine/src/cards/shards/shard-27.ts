@@ -122,6 +122,7 @@ import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
+import _poolGiantBeaver from "../pool/giant-beaver.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
 import _poolGiantfall from "../pool/giantfall.js";
 import _poolGiftOfTheFae from "../pool/gift-of-the-fae.js";
@@ -131,6 +132,7 @@ import _poolGravelgillAxeshark from "../pool/gravelgill-axeshark.js";
 import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
 import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
+import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
 import _poolHazoretsMonument from "../pool/hazorets-monument.js";
@@ -174,6 +176,7 @@ import _poolLeapingLizard from "../pool/leaping-lizard.js";
 import _poolLeatherbackBaloth from "../pool/leatherback-baloth.js";
 import _poolLeatherheadIronGator from "../pool/leatherhead-iron-gator.js";
 import _poolLeoninSunStandard from "../pool/leonin-sun-standard.js";
+import _poolLeoninSurveyor from "../pool/leonin-surveyor.js";
 import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
@@ -340,10 +343,12 @@ import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
 import _poolUnderworldRageHound from "../pool/underworld-rage-hound.js";
+import _poolUnendingWhisper from "../pool/unending-whisper.js";
 import _poolUniversalSolvent from "../pool/universal-solvent.js";
 import _poolUnlicensedDisintegration from "../pool/unlicensed-disintegration.js";
 import _poolUntetheredExpress from "../pool/untethered-express.js";
 import _poolUrborgTombOfYawgmoth from "../pool/urborg-tomb-of-yawgmoth.js";
+import _poolUthrosPsionicist from "../pool/uthros-psionicist.js";
 import _poolValgavothsLair from "../pool/valgavoths-lair.js";
 import _poolVanquishTheFoul from "../pool/vanquish-the-foul.js";
 import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
@@ -501,6 +506,7 @@ const shard: CardShard = {
     _poolGhaltaTheImmovable,
     _poolGhostSpectralSaboteur,
     _poolGhoulcallerGisa,
+    _poolGiantBeaver,
     _poolGiantScorpion,
     _poolGiantfall,
     _poolGiftOfTheFae,
@@ -510,6 +516,7 @@ const shard: CardShard = {
     _poolGreatDivideGuide,
     _poolGrimclawBats,
     _poolGrixisBattlemage,
+    _poolGuidelightSynergist,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
     _poolHazoretsMonument,
@@ -553,6 +560,7 @@ const shard: CardShard = {
     _poolLeatherbackBaloth,
     _poolLeatherheadIronGator,
     _poolLeoninSunStandard,
+    _poolLeoninSurveyor,
     _poolLightshellDuo,
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
@@ -719,10 +727,12 @@ const shard: CardShard = {
     _poolUltimaWeapon,
     _poolUnderdarkBasilisk,
     _poolUnderworldRageHound,
+    _poolUnendingWhisper,
     _poolUniversalSolvent,
     _poolUnlicensedDisintegration,
     _poolUntetheredExpress,
     _poolUrborgTombOfYawgmoth,
+    _poolUthrosPsionicist,
     _poolValgavothsLair,
     _poolVanquishTheFoul,
     _poolVatOfRebirth,

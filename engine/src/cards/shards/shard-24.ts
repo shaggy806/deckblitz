@@ -92,6 +92,7 @@ import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
+import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -305,6 +306,7 @@ import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonyStark from "../pool/tony-stark.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
 import _poolTotallyLost from "../pool/totally-lost.js";
+import _poolTrainedArynx from "../pool/trained-arynx.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
@@ -343,6 +345,7 @@ import _poolWorldShaper from "../pool/world-shaper.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
+import _poolZurgosVanguard from "../pool/zurgos-vanguard.js";
 import _tokens32ShapeshifterToken from "../tokens/3-2-shapeshifter-token.js";
 import _tokensAngelToken44 from "../tokens/angel-token-4-4.js";
 import _tokensAngelVigilanceToken from "../tokens/angel-vigilance-token.js";
@@ -446,6 +449,7 @@ const shard: CardShard = {
     _poolDesertOfTheFervent,
     _poolDestructiveForce,
     _poolDevilDinosaur,
+    _poolDevotedDuelist,
     _poolDimirInformant,
     _poolDireStrainBrawler,
     _poolDowsingShaman,
@@ -659,6 +663,7 @@ const shard: CardShard = {
     _poolTonyStark,
     _poolToskiBearerOfSecrets,
     _poolTotallyLost,
+    _poolTrainedArynx,
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
     _poolTwinbladeBlessing,
@@ -697,6 +702,7 @@ const shard: CardShard = {
     _poolYotianDissident,
     _poolZephyrSprite,
     _poolZodiacGoat,
+    _poolZurgosVanguard,
   ],
   tokens: [
     _tokens32ShapeshifterToken,

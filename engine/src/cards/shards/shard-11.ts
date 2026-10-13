@@ -241,6 +241,7 @@ import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
 import _poolPestInfestation from "../pool/pest-infestation.js";
 import _poolPestilentKathari from "../pool/pestilent-kathari.js";
+import _poolPettyRevenge from "../pool/petty-revenge.js";
 import _poolPharikasChosen from "../pool/pharikas-chosen.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
 import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
@@ -309,6 +310,7 @@ import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
+import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
@@ -318,6 +320,7 @@ import _poolSpringsageRitual from "../pool/springsage-ritual.js";
 import _poolSquallDrifter from "../pool/squall-drifter.js";
 import _poolStaffOfNin from "../pool/staff-of-nin.js";
 import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
+import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
@@ -648,6 +651,7 @@ const shard: CardShard = {
     _poolPerennialBehemoth,
     _poolPestInfestation,
     _poolPestilentKathari,
+    _poolPettyRevenge,
     _poolPharikasChosen,
     _poolPhyrexianJuggernaut,
     _poolPhyrexianRebirth,
@@ -716,6 +720,7 @@ const shard: CardShard = {
     _poolSongOfFreyalise,
     _poolSorinRavenousNeonate,
     _poolSowingMycospawn,
+    _poolSpectralInterference,
     _poolSphinxOfFalseConclusions,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
@@ -725,6 +730,7 @@ const shard: CardShard = {
     _poolSquallDrifter,
     _poolStaffOfNin,
     _poolStalactiteDagger,
+    _poolStarryEyedSkyrider,
     _poolSteelshapersGift,
     _poolStomperCub,
     _poolStormfistCrusader,

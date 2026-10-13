@@ -68,6 +68,7 @@ import _poolDejaVu from "../pool/deja-vu.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
+import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -114,6 +115,7 @@ import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
+import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
@@ -154,6 +156,7 @@ import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
 import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
 import _poolLifegift from "../pool/lifegift.js";
+import _poolLightwheelEnhancements from "../pool/lightwheel-enhancements.js";
 import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
 import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
@@ -269,6 +272,7 @@ import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolStab from "../pool/stab.js";
+import _poolStartingColumn from "../pool/starting-column.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStun from "../pool/stun.js";
 import _poolSunderflock from "../pool/sunderflock.js";
@@ -418,6 +422,7 @@ const shard: CardShard = {
     _poolDerangedAssistant,
     _poolDiamondWeapon,
     _poolDismalBackwater,
+    _poolDisruptiveStormbrood,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
@@ -464,6 +469,7 @@ const shard: CardShard = {
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,
     _poolHaywireMite,
+    _poolHazoretGodseeker,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeroesRemembered,
@@ -504,6 +510,7 @@ const shard: CardShard = {
     _poolLeylineTyrant,
     _poolLieutenantKirtar,
     _poolLifegift,
+    _poolLightwheelEnhancements,
     _poolLilianasDevotee,
     _poolLilianasSpecter,
     _poolLimestoneGolem,
@@ -619,6 +626,7 @@ const shard: CardShard = {
     _poolSpellSwindle,
     _poolSpewFlame,
     _poolStab,
+    _poolStartingColumn,
     _poolStormChargedSlasher,
     _poolStun,
     _poolSunderflock,

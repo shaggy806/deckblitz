@@ -316,6 +316,7 @@ import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
+import _poolTuneUp from "../pool/tune-up.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
@@ -677,6 +678,7 @@ const shard: CardShard = {
     _poolTrainingRegimen,
     _poolTrevasAttendant,
     _poolTriplicateSpirits,
+    _poolTuneUp,
     _poolTwincast,
     _poolTyrantGuard,
     _poolUlvenwaldOddity,

@@ -52,6 +52,7 @@ import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
+import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
@@ -120,6 +121,7 @@ import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
 import _poolGammaGrotesque from "../pool/gamma-grotesque.js";
 import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
+import _poolGasGuzzler from "../pool/gas-guzzler.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
@@ -227,8 +229,10 @@ import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPunySnack from "../pool/puny-snack.js";
+import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
+import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
 import _poolRayOfRevelation from "../pool/ray-of-revelation.js";
 import _poolRealityHemorrhage from "../pool/reality-hemorrhage.js";
@@ -331,6 +335,7 @@ import _poolVanquishTheWeak from "../pool/vanquish-the-weak.js";
 import _poolVanquishersAxe from "../pool/vanquishers-axe.js";
 import _poolVastwoodFortification from "../pool/vastwood-fortification.js";
 import _poolVenerableLammasu from "../pool/venerable-lammasu.js";
+import _poolVeteranBeastrider from "../pool/veteran-beastrider.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
 import _poolVibraniumStrikeGauntlets from "../pool/vibranium-strike-gauntlets.js";
 import _poolVioletPall from "../pool/violet-pall.js";
@@ -339,6 +344,7 @@ import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
+import _poolWarEffort from "../pool/war-effort.js";
 import _poolWatchfulAutomaton from "../pool/watchful-automaton.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
 import _poolWeiInfantry from "../pool/wei-infantry.js";
@@ -424,6 +430,7 @@ const shard: CardShard = {
     _poolBreathOfMalfegor,
     _poolBrothersOfFire,
     _poolBurglarRat,
+    _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
@@ -492,6 +499,7 @@ const shard: CardShard = {
     _poolGammaGrotesque,
     _poolGarenbrigCarver,
     _poolGarruksCompanion,
+    _poolGasGuzzler,
     _poolGeistOfTheMoors,
     _poolGiantBadger,
     _poolGiantKiller,
@@ -599,8 +607,10 @@ const shard: CardShard = {
     _poolPrimalRage,
     _poolProsperousBandit,
     _poolPunySnack,
+    _poolQuilledCharger,
     _poolRageReflection,
     _poolRainSlickedCopse,
+    _poolRakshasasBargain,
     _poolRallyThePeasants,
     _poolRayOfRevelation,
     _poolRealityHemorrhage,
@@ -703,6 +713,7 @@ const shard: CardShard = {
     _poolVanquishersAxe,
     _poolVastwoodFortification,
     _poolVenerableLammasu,
+    _poolVeteranBeastrider,
     _poolVeteransSidearm,
     _poolVibraniumStrikeGauntlets,
     _poolVioletPall,
@@ -711,6 +722,7 @@ const shard: CardShard = {
     _poolVolcanicStrength,
     _poolWallOfDenial,
     _poolWarBehemoth,
+    _poolWarEffort,
     _poolWatchfulAutomaton,
     _poolWaveWingElemental,
     _poolWeiInfantry,

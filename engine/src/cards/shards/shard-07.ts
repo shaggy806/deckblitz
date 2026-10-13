@@ -42,6 +42,7 @@ import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
+import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
@@ -54,6 +55,7 @@ import _poolCurate from "../pool/curate.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
 import _poolDaggersailAeronaut from "../pool/daggersail-aeronaut.js";
 import _poolDancingScimitar from "../pool/dancing-scimitar.js";
+import _poolDarettiRocketeerEngineer from "../pool/daretti-rocketeer-engineer.js";
 import _poolDarigaazsAttendant from "../pool/darigaazs-attendant.js";
 import _poolDarkBetrayal from "../pool/dark-betrayal.js";
 import _poolDawnGryff from "../pool/dawn-gryff.js";
@@ -106,6 +108,7 @@ import _poolGeyserLeaper from "../pool/geyser-leaper.js";
 import _poolGhaltaStampedeTyrant from "../pool/ghalta-stampede-tyrant.js";
 import _poolGhorClanWrecker from "../pool/ghor-clan-wrecker.js";
 import _poolGiantKoi from "../pool/giant-koi.js";
+import _poolGilaCourser from "../pool/gila-courser.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
@@ -190,6 +193,7 @@ import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
+import _poolMomentumBreaker from "../pool/momentum-breaker.js";
 import _poolMonsterMashup from "../pool/monster-mashup.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
@@ -310,6 +314,7 @@ import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
+import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
@@ -336,6 +341,7 @@ import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
 import _poolVampiresKiss from "../pool/vampires-kiss.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
+import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
 import _poolVolcanicGeyser from "../pool/volcanic-geyser.js";
@@ -430,6 +436,7 @@ const shard: CardShard = {
     _poolChatterstorm,
     _poolChildOfAlara,
     _poolChishiroTheShatteredBlade,
+    _poolChitinGravestalker,
     _poolCircuitMender,
     _poolCollectorOuphe,
     _poolColossapede,
@@ -442,6 +449,7 @@ const shard: CardShard = {
     _poolCuriousPair,
     _poolDaggersailAeronaut,
     _poolDancingScimitar,
+    _poolDarettiRocketeerEngineer,
     _poolDarigaazsAttendant,
     _poolDarkBetrayal,
     _poolDawnGryff,
@@ -494,6 +502,7 @@ const shard: CardShard = {
     _poolGhaltaStampedeTyrant,
     _poolGhorClanWrecker,
     _poolGiantKoi,
+    _poolGilaCourser,
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
@@ -578,6 +587,7 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMoltenFrame,
+    _poolMomentumBreaker,
     _poolMonsterMashup,
     _poolMordantDragon,
     _poolMossbeardAncient,
@@ -698,6 +708,7 @@ const shard: CardShard = {
     _poolTemporalAdept,
     _poolThassasOracle,
     _poolTheBlackBreath,
+    _poolTheGitrogRavenousRide,
     _poolTheLegendOfKyoshi,
     _poolTheShire,
     _poolThornMammoth,
@@ -724,6 +735,7 @@ const shard: CardShard = {
     _poolValleyQuestcaller,
     _poolVampiresKiss,
     _poolVenomousHierophant,
+    _poolVenomsacLagac,
     _poolVigilantBaloth,
     _poolViviOrnitier,
     _poolVolcanicGeyser,

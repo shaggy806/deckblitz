@@ -106,6 +106,7 @@ import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
+import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
 import _poolFearOfSurveillance from "../pool/fear-of-surveillance.js";
 import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
@@ -129,6 +130,7 @@ import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
+import _poolGoblinSurveyor from "../pool/goblin-surveyor.js";
 import _poolGoldmireBridge from "../pool/goldmire-bridge.js";
 import _poolGongagaReactorTown from "../pool/gongaga-reactor-town.js";
 import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
@@ -145,6 +147,7 @@ import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
+import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
@@ -165,6 +168,7 @@ import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
+import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
 import _poolKrarkClanGrunt from "../pool/krark-clan-grunt.js";
@@ -188,6 +192,7 @@ import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
+import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
@@ -292,6 +297,7 @@ import _poolSummitProwler from "../pool/summit-prowler.js";
 import _poolSummoningMateria from "../pool/summoning-materia.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
+import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
@@ -357,6 +363,7 @@ import _poolZealousGuardian from "../pool/zealous-guardian.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
 import _poolZodiacPig from "../pool/zodiac-pig.js";
 import _poolZombify from "../pool/zombify.js";
+import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
@@ -365,6 +372,7 @@ import _tokensGriffinToken from "../tokens/griffin-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
+import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
 import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-flying-haste.js";
 
 const shard: CardShard = {
@@ -472,6 +480,7 @@ const shard: CardShard = {
     _poolEpharasWarden,
     _poolExpelTheInterlopers,
     _poolFaerieVandal,
+    _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
     _poolFearOfSurveillance,
     _poolFeatherOfFlight,
@@ -495,6 +504,7 @@ const shard: CardShard = {
     _poolGlitteringMassif,
     _poolGloomPangolin,
     _poolGoblinRingleader,
+    _poolGoblinSurveyor,
     _poolGoldmireBridge,
     _poolGongagaReactorTown,
     _poolGoroGoroAndSatoru,
@@ -511,6 +521,7 @@ const shard: CardShard = {
     _poolHeadlessHorseman,
     _poolHedgeMaze,
     _poolHeraldOfKozilek,
+    _poolHighspireBellRinger,
     _poolHollowDogs,
     _poolHondenOfNightsReach,
     _poolHornedTurtle,
@@ -531,6 +542,7 @@ const shard: CardShard = {
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
     _poolKeyToTheCity,
+    _poolKickoffCelebrations,
     _poolKilnFiend,
     _poolKishlaSkimmer,
     _poolKrarkClanGrunt,
@@ -554,6 +566,7 @@ const shard: CardShard = {
     _poolManamorphose,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
+    _poolMendicantCoreGuidelight,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
@@ -658,6 +671,7 @@ const shard: CardShard = {
     _poolSummoningMateria,
     _poolSuperShredder,
     _poolSwiftbladeVindicator,
+    _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
     _poolTaintedIsle,
     _poolTatteredApparition,
@@ -725,6 +739,7 @@ const shard: CardShard = {
     _poolZombify,
   ],
   tokens: [
+    _tokensAngelToken33White,
     _tokensBeastToken,
     _tokensCatBeastToken,
     _tokensEldraziToken,
@@ -733,6 +748,7 @@ const shard: CardShard = {
     _tokensKnightToken,
     _tokensMoloidToken,
     _tokensRedSpiritTokenMenace,
+    _tokensSpiritTokenAnafenzaUnyieldingLineage,
     _tokensXXElementalTokenFlyingHaste,
   ],
 };

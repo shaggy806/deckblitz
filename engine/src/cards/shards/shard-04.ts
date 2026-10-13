@@ -7,6 +7,7 @@ import _poolAberrantReturn from "../pool/aberrant-return.js";
 import _poolAbzanAscendancy from "../pool/abzan-ascendancy.js";
 import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
+import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
@@ -183,6 +184,7 @@ import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
+import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
@@ -278,6 +280,7 @@ import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
+import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
@@ -374,6 +377,7 @@ const shard: CardShard = {
     _poolAbzanAscendancy,
     _poolAetherHelix,
     _poolAjanisChosen,
+    _poolAlacrianJaguar,
     _poolAlelaCunningConqueror,
     _poolAngelicChorus,
     _poolAngelsGrace,
@@ -550,6 +554,7 @@ const shard: CardShard = {
     _poolLongFinnedSkywhale,
     _poolLoomingSpires,
     _poolLordWindgrace,
+    _poolLotuslightDancers,
     _poolLoyalSubordinate,
     _poolMacabreWaltz,
     _poolMagnifyingGlass,
@@ -645,6 +650,7 @@ const shard: CardShard = {
     _poolSongMadRuins,
     _poolSongMadTreachery,
     _poolSparringMummy,
+    _poolSpectralDenial,
     _poolSpellweaverEternal,
     _poolSpiderBot,
     _poolSpitFlame,

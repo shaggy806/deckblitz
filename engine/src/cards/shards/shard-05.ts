@@ -22,6 +22,7 @@ import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
+import _poolArchmagesNewt from "../pool/archmages-newt.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
@@ -104,6 +105,7 @@ import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
+import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
@@ -401,6 +403,7 @@ const shard: CardShard = {
     _poolArcboundCrusher,
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
+    _poolArchmagesNewt,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
     _poolAudaciousThief,
@@ -483,6 +486,7 @@ const shard: CardShard = {
     _poolDireStrainDemolisher,
     _poolDismember,
     _poolDiveDown,
+    _poolDragonclawStrike,
     _poolDragonkinBerserker,
     _poolDragonsPresence,
     _poolDryadsFavor,

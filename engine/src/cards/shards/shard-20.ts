@@ -47,6 +47,7 @@ import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
+import _poolBounceOff from "../pool/bounce-off.js";
 import _poolBragoKingEternal from "../pool/brago-king-eternal.js";
 import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
 import _poolBrassSecretary from "../pool/brass-secretary.js";
@@ -74,6 +75,7 @@ import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
+import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
 import _poolCopperMyr from "../pool/copper-myr.js";
 import _poolCoralMerfolk from "../pool/coral-merfolk.js";
 import _poolCorsairCaptain from "../pool/corsair-captain.js";
@@ -185,9 +187,11 @@ import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
+import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
+import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
@@ -451,6 +455,7 @@ const shard: CardShard = {
     _poolBoonReflection,
     _poolBorosLocket,
     _poolBothersomeQuasit,
+    _poolBounceOff,
     _poolBragoKingEternal,
     _poolBrambleSovereign,
     _poolBrassSecretary,
@@ -478,6 +483,7 @@ const shard: CardShard = {
     _poolColosYearling,
     _poolConsulateDreadnought,
     _poolContagionClasp,
+    _poolCoordinatedManeuver,
     _poolCopperMyr,
     _poolCoralMerfolk,
     _poolCorsairCaptain,
@@ -589,9 +595,11 @@ const shard: CardShard = {
     _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKindlyCustomer,
+    _poolKolodinTriumphCaster,
     _poolKrangUtromWarlord,
     _poolKraulStinger,
     _poolKruinStriker,
+    _poolLagorinSoulOfAlacria,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
     _poolLeoninArmorguard,

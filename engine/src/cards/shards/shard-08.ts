@@ -14,8 +14,10 @@ import _poolAetherAdept from "../pool/aether-adept.js";
 import _poolAgentOfShauku from "../pool/agent-of-shauku.js";
 import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
+import _poolAinokWayfarer from "../pool/ainok-wayfarer.js";
 import _poolAkoumHellkite from "../pool/akoum-hellkite.js";
 import _poolAlabasterMage from "../pool/alabaster-mage.js";
+import _poolAlacrianArmory from "../pool/alacrian-armory.js";
 import _poolAlertShuInfantry from "../pool/alert-shu-infantry.js";
 import _poolAllIsDust from "../pool/all-is-dust.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
@@ -50,6 +52,7 @@ import _poolBonecallerCleric from "../pool/bonecaller-cleric.js";
 import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
 import _poolBraidwoodCup from "../pool/braidwood-cup.js";
 import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
+import _poolBrightfieldMustang from "../pool/brightfield-mustang.js";
 import _poolBrokenWings from "../pool/broken-wings.js";
 import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
@@ -67,6 +70,7 @@ import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
 import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
+import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
@@ -260,6 +264,7 @@ import _poolReturnedCentaur from "../pool/returned-centaur.js";
 import _poolRevelRuiner from "../pool/revel-ruiner.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
+import _poolRisenNecroregent from "../pool/risen-necroregent.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
@@ -395,8 +400,10 @@ const shard: CardShard = {
     _poolAgentOfShauku,
     _poolAggravatedAssault,
     _poolAidTheFallen,
+    _poolAinokWayfarer,
     _poolAkoumHellkite,
     _poolAlabasterMage,
+    _poolAlacrianArmory,
     _poolAlertShuInfantry,
     _poolAllIsDust,
     _poolAlphaTyrranax,
@@ -431,6 +438,7 @@ const shard: CardShard = {
     _poolBountifulLandscape,
     _poolBraidwoodCup,
     _poolBranchloftPathway,
+    _poolBrightfieldMustang,
     _poolBrokenWings,
     _poolBywayCourier,
     _poolCabalEvangel,
@@ -448,6 +456,7 @@ const shard: CardShard = {
     _poolContemplation,
     _poolCoralCommando,
     _poolCorpseBlockade,
+    _poolCorrodingDragonstorm,
     _poolCourtOfBounty,
     _poolCrookclawElder,
     _poolCrystalGrotto,
@@ -641,6 +650,7 @@ const shard: CardShard = {
     _poolRevelRuiner,
     _poolRicketyGazebo,
     _poolRighteousAvengers,
+    _poolRisenNecroregent,
     _poolRishadanPort,
     _poolRisingPopulace,
     _poolRiteOfPassage,

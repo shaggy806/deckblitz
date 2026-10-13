@@ -1,0 +1,1158 @@
+{
+ "batch": "B67",
+ "status": "complete",
+ "ranks": "Tarkir: Dragonstorm (TDM, 2025-04-11) and Aetherdrift (DFT, 2025-02-14): top 50% by EDHREC rank, each set's last (TDM 45, DFT 66 — both done); with speed and saddle built and every card each unblocked, and Uthros Psionicist (B66)",
+ "authored": [
+  {
+   "name": "Aether Syphon",
+   "files": [
+    "engine/src/cards/pool/aether-syphon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alacrian Armory",
+   "files": [
+    "engine/src/cards/pool/alacrian-armory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alacrian Jaguar",
+   "files": [
+    "engine/src/cards/pool/alacrian-jaguar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amonkhet Raceway",
+   "files": [
+    "engine/src/cards/pool/amonkhet-raceway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archmage's Newt",
+   "files": [
+    "engine/src/cards/pool/archmages-newt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Autarch Mammoth",
+   "files": [
+    "engine/src/cards/pool/autarch-mammoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avishkar Raceway",
+   "files": [
+    "engine/src/cards/pool/avishkar-raceway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounding Felidar",
+   "files": [
+    "engine/src/cards/pool/bounding-felidar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bridled Bighorn",
+   "files": [
+    "engine/src/cards/pool/bridled-bighorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brightfield Glider",
+   "files": [
+    "engine/src/cards/pool/brightfield-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brightfield Mustang",
+   "files": [
+    "engine/src/cards/pool/brightfield-mustang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bulwark Ox",
+   "files": [
+    "engine/src/cards/pool/bulwark-ox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burnout Bashtronaut",
+   "files": [
+    "engine/src/cards/pool/burnout-bashtronaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calamity, Galloping Inferno",
+   "files": [
+    "engine/src/cards/pool/calamity-galloping-inferno.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caustic Bronco",
+   "files": [
+    "engine/src/cards/pool/caustic-bronco.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Congregation Gryff",
+   "files": [
+    "engine/src/cards/pool/congregation-gryff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "District Mascot",
+   "files": [
+    "engine/src/cards/pool/district-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dracosaur Auxiliary",
+   "files": [
+    "engine/src/cards/pool/dracosaur-auxiliary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drover Grizzly",
+   "files": [
+    "engine/src/cards/pool/drover-grizzly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embalmed Ascendant",
+   "files": [
+    "engine/src/cards/pool/embalmed-ascendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endrider Catalyzer",
+   "files": [
+    "engine/src/cards/pool/endrider-catalyzer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endrider Spikespitter",
+   "files": [
+    "engine/src/cards/pool/endrider-spikespitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Far Fortune, End Boss",
+   "files": [
+    "engine/src/cards/pool/far-fortune-end-boss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gas Guzzler",
+   "files": [
+    "engine/src/cards/pool/gas-guzzler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gastal Thrillseeker",
+   "files": [
+    "engine/src/cards/pool/gastal-thrillseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Beaver",
+   "files": [
+    "engine/src/cards/pool/giant-beaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gila Courser",
+   "files": [
+    "engine/src/cards/pool/gila-courser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilded Ghoda",
+   "files": [
+    "engine/src/cards/pool/gilded-ghoda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glitch Ghost Surveyor",
+   "files": [
+    "engine/src/cards/pool/glitch-ghost-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloryheath Lynx",
+   "files": [
+    "engine/src/cards/pool/gloryheath-lynx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Surveyor",
+   "files": [
+    "engine/src/cards/pool/goblin-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian Sunmare",
+   "files": [
+    "engine/src/cards/pool/guardian-sunmare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guidelight Matrix",
+   "files": [
+    "engine/src/cards/pool/guidelight-matrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hazoret, Godseeker",
+   "files": [
+    "engine/src/cards/pool/hazoret-godseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hour of Victory",
+   "files": [
+    "engine/src/cards/pool/hour-of-victory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howlsquad Heavy",
+   "files": [
+    "engine/src/cards/pool/howlsquad-heavy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kickoff Celebrations",
+   "files": [
+    "engine/src/cards/pool/kickoff-celebrations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kolodin, Triumph Caster",
+   "files": [
+    "engine/src/cards/pool/kolodin-triumph-caster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lagorin, Soul of Alacria",
+   "files": [
+    "engine/src/cards/pool/lagorin-soul-of-alacria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonin Surveyor",
+   "files": [
+    "engine/src/cards/pool/leonin-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightwheel Enhancements",
+   "files": [
+    "engine/src/cards/pool/lightwheel-enhancements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loxodon Surveyor",
+   "files": [
+    "engine/src/cards/pool/loxodon-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mendicant Core, Guidelight",
+   "files": [
+    "engine/src/cards/pool/mendicant-core-guidelight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Momentum Breaker",
+   "files": [
+    "engine/src/cards/pool/momentum-breaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muraganda Raceway",
+   "files": [
+    "engine/src/cards/pool/muraganda-raceway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutant Surveyor",
+   "files": [
+    "engine/src/cards/pool/mutant-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nesting Bot",
+   "files": [
+    "engine/src/cards/pool/nesting-bot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ornery Tumblewagg",
+   "files": [
+    "engine/src/cards/pool/ornery-tumblewagg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outpace Oblivion",
+   "files": [
+    "engine/src/cards/pool/outpace-oblivion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perilous Snare",
+   "files": [
+    "engine/src/cards/pool/perilous-snare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Point the Way",
+   "files": [
+    "engine/src/cards/pool/point-the-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pride of the Road",
+   "files": [
+    "engine/src/cards/pool/pride-of-the-road.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quilled Charger",
+   "files": [
+    "engine/src/cards/pool/quilled-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Racers' Scoreboard",
+   "files": [
+    "engine/src/cards/pool/racers-scoreboard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rambling Possum",
+   "files": [
+    "engine/src/cards/pool/rambling-possum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Risen Necroregent",
+   "files": [
+    "engine/src/cards/pool/risen-necroregent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samut, the Driving Force",
+   "files": [
+    "engine/src/cards/pool/samut-the-driving-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seraphic Steed",
+   "files": [
+    "engine/src/cards/pool/seraphic-steed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slick Imitator",
+   "files": [
+    "engine/src/cards/pool/slick-imitator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starting Column",
+   "files": [
+    "engine/src/cards/pool/starting-column.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Streaking Oilgorger",
+   "files": [
+    "engine/src/cards/pool/streaking-oilgorger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stubborn Burrowfiend",
+   "files": [
+    "engine/src/cards/pool/stubborn-burrowfiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swiftwing Assailant",
+   "files": [
+    "engine/src/cards/pool/swiftwing-assailant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Gitrog, Ravenous Ride",
+   "files": [
+    "engine/src/cards/pool/the-gitrog-ravenous-ride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Speed Demon",
+   "files": [
+    "engine/src/cards/pool/the-speed-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trained Arynx",
+   "files": [
+    "engine/src/cards/pool/trained-arynx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unswerving Sloth",
+   "files": [
+    "engine/src/cards/pool/unswerving-sloth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venomsac Lagac",
+   "files": [
+    "engine/src/cards/pool/venomsac-lagac.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vnwxt, Verbose Host",
+   "files": [
+    "engine/src/cards/pool/vnwxt-verbose-host.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Sarcophagus",
+   "files": [
+    "engine/src/cards/pool/walking-sarcophagus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zahur, Glory's Past",
+   "files": [
+    "engine/src/cards/pool/zahur-glorys-past.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aatchik, Emerald Radian",
+   "files": [
+    "engine/src/cards/pool/aatchik-emerald-radian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ainok Wayfarer",
+   "files": [
+    "engine/src/cards/pool/ainok-wayfarer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anafenza, Unyielding Lineage",
+   "files": [
+    "engine/src/cards/pool/anafenza-unyielding-lineage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounce Off",
+   "files": [
+    "engine/src/cards/pool/bounce-off.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodheart Engine",
+   "files": [
+    "engine/src/cards/pool/broodheart-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chilling Screech",
+   "files": [
+    "engine/src/cards/pool/chilling-screech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chitin Gravestalker",
+   "files": [
+    "engine/src/cards/pool/chitin-gravestalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coalstoke Gearhulk",
+   "files": [
+    "engine/src/cards/pool/coalstoke-gearhulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coordinated Maneuver",
+   "files": [
+    "engine/src/cards/pool/coordinated-maneuver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Corroding Dragonstorm",
+   "files": [
+    "engine/src/cards/pool/corroding-dragonstorm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daretti, Rocketeer Engineer",
+   "files": [
+    "engine/src/cards/pool/daretti-rocketeer-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Begets Life",
+   "files": [
+    "engine/src/cards/pool/death-begets-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desperate Measures",
+   "files": [
+    "engine/src/cards/pool/desperate-measures.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devoted Duelist",
+   "files": [
+    "engine/src/cards/pool/devoted-duelist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dirgur Island Dragon",
+   "files": [
+    "engine/src/cards/pool/dirgur-island-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disruptive Stormbrood",
+   "files": [
+    "engine/src/cards/pool/disruptive-stormbrood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Draconautics Engineer",
+   "files": [
+    "engine/src/cards/pool/draconautics-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonclaw Strike",
+   "files": [
+    "engine/src/cards/pool/dragonclaw-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dredger's Insight",
+   "files": [
+    "engine/src/cards/pool/dredgers-insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fangkeeper's Familiar",
+   "files": [
+    "engine/src/cards/pool/fangkeepers-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Focus the Mind",
+   "files": [
+    "engine/src/cards/pool/focus-the-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frontline Rush",
+   "files": [
+    "engine/src/cards/pool/frontline-rush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Arashin City",
+   "files": [
+    "engine/src/cards/pool/great-arashin-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guidelight Optimizer",
+   "files": [
+    "engine/src/cards/pool/guidelight-optimizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guidelight Synergist",
+   "files": [
+    "engine/src/cards/pool/guidelight-synergist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haunt the Network",
+   "files": [
+    "engine/src/cards/pool/haunt-the-network.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Highspire Bell-Ringer",
+   "files": [
+    "engine/src/cards/pool/highspire-bell-ringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knockout Maneuver",
+   "files": [
+    "engine/src/cards/pool/knockout-maneuver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lasyd Prowler",
+   "files": [
+    "engine/src/cards/pool/lasyd-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightfoot Technique",
+   "files": [
+    "engine/src/cards/pool/lightfoot-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lotuslight Dancers",
+   "files": [
+    "engine/src/cards/pool/lotuslight-dancers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maximum Overdrive",
+   "files": [
+    "engine/src/cards/pool/maximum-overdrive.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mindspring Merfolk",
+   "files": [
+    "engine/src/cards/pool/mindspring-merfolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mu Yanling, Wind Rider",
+   "files": [
+    "engine/src/cards/pool/mu-yanling-wind-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Narset, Jeskai Waymaster",
+   "files": [
+    "engine/src/cards/pool/narset-jeskai-waymaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pactdoll Terror",
+   "files": [
+    "engine/src/cards/pool/pactdoll-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Petty Revenge",
+   "files": [
+    "engine/src/cards/pool/petty-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakshasa's Bargain",
+   "files": [
+    "engine/src/cards/pool/rakshasas-bargain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redshift, Rocketeer Chief",
+   "files": [
+    "engine/src/cards/pool/redshift-rocketeer-chief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roamer's Routine",
+   "files": [
+    "engine/src/cards/pool/roamers-routine.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rocketeer Boostbuggy",
+   "files": [
+    "engine/src/cards/pool/rocketeer-boostbuggy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runescale Stormbrood",
+   "files": [
+    "engine/src/cards/pool/runescale-stormbrood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrounging Skyray",
+   "files": [
+    "engine/src/cards/pool/scrounging-skyray.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seize Opportunity",
+   "files": [
+    "engine/src/cards/pool/seize-opportunity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shiko, Paragon of the Way",
+   "files": [
+    "engine/src/cards/pool/shiko-paragon-of-the-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinkhole Surveyor",
+   "files": [
+    "engine/src/cards/pool/sinkhole-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skimming Strike",
+   "files": [
+    "engine/src/cards/pool/skimming-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Denial",
+   "files": [
+    "engine/src/cards/pool/spectral-denial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Interference",
+   "files": [
+    "engine/src/cards/pool/spectral-interference.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Starry-Eyed Skyrider",
+   "files": [
+    "engine/src/cards/pool/starry-eyed-skyrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stillness in Motion",
+   "files": [
+    "engine/src/cards/pool/stillness-in-motion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Synchronized Charge",
+   "files": [
+    "engine/src/cards/pool/synchronized-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Sibsig Ceremony",
+   "files": [
+    "engine/src/cards/pool/the-sibsig-ceremony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tune Up",
+   "files": [
+    "engine/src/cards/pool/tune-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unending Whisper",
+   "files": [
+    "engine/src/cards/pool/unending-whisper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Uthros Psionicist",
+   "files": [
+    "engine/src/cards/pool/uthros-psionicist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran Beastrider",
+   "files": [
+    "engine/src/cards/pool/veteran-beastrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War Effort",
+   "files": [
+    "engine/src/cards/pool/war-effort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yathan Tombguard",
+   "files": [
+    "engine/src/cards/pool/yathan-tombguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zurgo's Vanguard",
+   "files": [
+    "engine/src/cards/pool/zurgos-vanguard.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Magmatic Hellkite",
+   "needs": [
+    "effect:search-with-counters"
+   ],
+   "why": "Puts the searched card onto the battlefield tapped with a stun counter."
+  },
+  {
+   "name": "Surrak, Elusive Hunter",
+   "needs": [
+    "trigger:becomes-target-spell-on-stack"
+   ],
+   "why": "'Or a creature spell you control becomes the target' — only battlefield targets are announced."
+  },
+  {
+   "name": "Host of the Hereafter",
+   "needs": [
+    "effect:put-counters-of-departed"
+   ],
+   "why": "The counters a creature died with, each kind, onto a target."
+  },
+  {
+   "name": "Thunder of Unity",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapters II-III: 'whenever a creature you control enters this turn'."
+  },
+  {
+   "name": "Feral Deathgorger",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "'Up to two target cards from a single graveyard' (its Omen too)."
+  },
+  {
+   "name": "Strategic Betrayal",
+   "needs": [
+    "effect:each-opponent-exiles-choice"
+   ],
+   "why": "Target opponent exiles a creature they control (their choice)."
+  },
+  {
+   "name": "Perennation",
+   "needs": [
+    "effect:put-onto-battlefield-multiple-counter-kinds"
+   ],
+   "why": "Returns with a hexproof and an indestructible counter."
+  },
+  {
+   "name": "New Way Forward",
+   "needs": [
+    "replacement:prevent-damage-from-chosen-source",
+    "replacement:prevent-and-reflect-damage"
+   ],
+   "why": "Prevent the next damage from a chosen source, deal that much to its controller and draw."
+  },
+  {
+   "name": "Tempest Hawk",
+   "needs": [
+    "mechanic:deck-any-number-copies"
+   ],
+   "why": "'A deck can have any number of cards named Tempest Hawk.'"
+  },
+  {
+   "name": "Revival of the Ancestors",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "Chapter II distributes three counters among one to three targets."
+  },
+  {
+   "name": "Valor's Flagship",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot tokens saddle and crew as though their power were 2 greater."
+  },
+  {
+   "name": "Skyserpent Seeker",
+   "needs": [
+    "effect:reveal-until-count"
+   ],
+   "why": "Reveal until two land cards."
+  },
+  {
+   "name": "Interface Ace",
+   "needs": [
+    "static:crews-using-toughness"
+   ],
+   "why": "Saddles and crews using its toughness."
+  },
+  {
+   "name": "Cursecloth Wrappings",
+   "needs": [
+    "keyword:embalm"
+   ],
+   "why": "Grants embalm to a graveyard card until end of turn."
+  },
+  {
+   "name": "Country Roads",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot token saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Pyrewood Gearhulk",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "'Damage can't be prevented this turn.'"
+  },
+  {
+   "name": "Spectacular Pileup",
+   "needs": [
+    "effect:lose-keyword-until-eot"
+   ],
+   "why": "Permanents losing indestructible until end of turn."
+  },
+  {
+   "name": "Guidelight Pathmaker",
+   "needs": [
+    "effect:search-destination-by-type"
+   ],
+   "why": "The found card to the battlefield if mana value 2 or less, else to hand."
+  },
+  {
+   "name": "Oildeep Gearhulk",
+   "needs": [
+    "effect:discard-chosen-from-revealed-hand"
+   ],
+   "why": "Look at a hand, you choose the card they discard."
+  },
+  {
+   "name": "Possession Engine",
+   "needs": [
+    "effect:control-while-you-control-source"
+   ],
+   "why": "Control for as long as you control this, not while it's on the battlefield."
+  },
+  {
+   "name": "Caradora, Heart of Alacria",
+   "needs": [
+    "replacement:additive-counter-replacement"
+   ],
+   "why": "'That many plus one' counters."
+  },
+  {
+   "name": "Basri, Tomorrow's Champion",
+   "needs": [
+    "cost:exert"
+   ],
+   "why": "Exert as part of an activated ability's cost."
+  },
+  {
+   "name": "Push the Limit",
+   "needs": [
+    "effect:add-types-all"
+   ],
+   "why": "Vehicles you control become artifact creatures until end of turn."
+  },
+  {
+   "name": "Fearless Swashbuckler",
+   "needs": [
+    "trigger:attack-with-each-of-filters"
+   ],
+   "why": "'Whenever you attack with a Pirate and a Vehicle.'"
+  },
+  {
+   "name": "Pit Automaton",
+   "needs": [
+    "effect:delayed-trigger-next-activation"
+   ],
+   "why": "'When you next activate an exhaust ability … copy it.'"
+  },
+  {
+   "name": "Rocky Roads",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot token saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Reef Roads",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot token saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Wild Roads",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot token saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Cloudspire Coordinator",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Its Pilot tokens saddle and crew as though their power were 2 greater."
+  },
+  {
+   "name": "Cloudspire Captain",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Dynamite Diver",
+   "needs": [
+    "static:crews-as-though-power"
+   ],
+   "why": "Saddles and crews as though its power were 2 greater."
+  },
+  {
+   "name": "Gastal Raider",
+   "needs": [
+    "effect:discard-chosen-from-revealed-hand"
+   ],
+   "why": "Target opponent reveals their hand; you choose an instant or sorcery card to discard."
+  },
+  {
+   "name": "Fortune, Loyal Steed",
+   "needs": [
+    "effect:flicker-source-and-chosen"
+   ],
+   "why": "Exile Fortune and up to one creature that saddled it at once, then return both."
+  }
+ ]
+}

@@ -116,6 +116,7 @@ import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
+import _poolGildedGhoda from "../pool/gilded-ghoda.js";
 import _poolGildedLotus from "../pool/gilded-lotus.js";
 import _poolGlassGolem from "../pool/glass-golem.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
@@ -212,6 +213,7 @@ import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js"
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
+import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
 import _poolNaturalReclamation from "../pool/natural-reclamation.js";
@@ -235,6 +237,7 @@ import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
+import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
@@ -287,6 +290,7 @@ import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
+import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
 import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
 import _poolSkirmishRhino from "../pool/skirmish-rhino.js";
@@ -308,6 +312,7 @@ import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
+import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
 import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
@@ -367,6 +372,7 @@ import _poolWintersIntervention from "../pool/winters-intervention.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWyluliWolf from "../pool/wyluli-wolf.js";
+import _poolYathanTombguard from "../pool/yathan-tombguard.js";
 import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
@@ -492,6 +498,7 @@ const shard: CardShard = {
     _poolGenesisUltimatum,
     _poolGiantFly,
     _poolGiantSpider,
+    _poolGildedGhoda,
     _poolGildedLotus,
     _poolGlassGolem,
     _poolGlistenerElf,
@@ -588,6 +595,7 @@ const shard: CardShard = {
     _poolMorophonTheBoundless,
     _poolMuckRats,
     _poolMuddleTheMixture,
+    _poolMuragandaRaceway,
     _poolNaktamunLorespinner,
     _poolNanoformSentinel,
     _poolNaturalReclamation,
@@ -611,6 +619,7 @@ const shard: CardShard = {
     _poolPaleRiderOfTrostad,
     _poolPendulumOfPatterns,
     _poolPerilousLandscape,
+    _poolPerilousSnare,
     _poolPestilentWolf,
     _poolPiratePeddlers,
     _poolPlagueMyr,
@@ -663,6 +672,7 @@ const shard: CardShard = {
     _poolShuko,
     _poolSift,
     _poolSignInBlood,
+    _poolSinkholeSurveyor,
     _poolSkarrgGoliath,
     _poolSkeletalWurm,
     _poolSkirmishRhino,
@@ -684,6 +694,7 @@ const shard: CardShard = {
     _poolStirringHopesinger,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,
+    _poolStreakingOilgorger,
     _poolStrikingSliver,
     _poolSummonGfIfrit,
     _poolSummonKnightsOfRound,
@@ -743,6 +754,7 @@ const shard: CardShard = {
     _poolWitchsCottage,
     _poolWoodlandChangeling,
     _poolWyluliWolf,
+    _poolYathanTombguard,
     _poolYavimayaWurm,
     _poolYawgmothsVileOffering,
     _poolZenithFestival,

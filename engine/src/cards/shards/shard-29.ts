@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAIMSynthoids from "../pool/a-i-m-synthoids.js";
 import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
+import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
@@ -92,6 +93,7 @@ import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
+import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
 import _poolEnduringInnocence from "../pool/enduring-innocence.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
 import _poolEternalStudent from "../pool/eternal-student.js";
@@ -224,6 +226,7 @@ import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
+import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
@@ -278,6 +281,7 @@ import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
+import _poolStillnessInMotion from "../pool/stillness-in-motion.js";
 import _poolStingerquillCharm from "../pool/stingerquill-charm.js";
 import _poolStingingBarrier from "../pool/stinging-barrier.js";
 import _poolStolenGrain from "../pool/stolen-grain.js";
@@ -359,6 +363,7 @@ const shard: CardShard = {
   pool: [
     _poolAIMSynthoids,
     _poolAdaptiveGemguard,
+    _poolAetherSyphon,
     _poolAffaProtector,
     _poolAidFromTheCowl,
     _poolAllosaurusShepherd,
@@ -446,6 +451,7 @@ const shard: CardShard = {
     _poolEleshNornMotherOfMachines,
     _poolElvenFortress,
     _poolElvishPromenade,
+    _poolEndriderSpikespitter,
     _poolEnduringInnocence,
     _poolErietteOfTheCharmedApple,
     _poolEternalStudent,
@@ -578,6 +584,7 @@ const shard: CardShard = {
     _poolRaffinesTower,
     _poolRagingPoltergeist,
     _poolRakishHeir,
+    _poolRedshiftRocketeerChief,
     _poolReignOfThePit,
     _poolRelicOfSauron,
     _poolRenegadeDemon,
@@ -632,6 +639,7 @@ const shard: CardShard = {
     _poolStarnheimCourser,
     _poolSteadfastness,
     _poolSteelSeraph,
+    _poolStillnessInMotion,
     _poolStingerquillCharm,
     _poolStingingBarrier,
     _poolStolenGrain,
