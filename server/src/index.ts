@@ -12,6 +12,7 @@
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { WebSocketServer } from "ws";
+import type { AdmissionLimits } from "./admission.js";
 import { handleImportRoute } from "./import-route.js";
 import type { RoomHost } from "./room-host.js";
 import type { ShardSettings } from "./worker-host.js";
@@ -68,6 +69,27 @@ const statusPort = Number(process.env.STATUS_PORT ?? 4010);
 const IDLE_ROOM_MS = 30 * 60 * 1000;
 const REAP_INTERVAL_MS = 15 * 60 * 1000;
 
+// The caps on opening rooms (`admission.ts`), in both modes. Only a create
+// is ever refused. `--max-rooms-per-shard M` (or `MAX_ROOMS_PER_SHARD`):
+// weighted rooms a shard holds — a lobby or a game 1, a tutorial 0.5, a
+// finished game 0.1 — before it takes no more; a create is refused only
+// when every shard is that full. Unlimited unless set (the load test's knee
+// on the box decides it). `--max-rooms-per-ip N` (or `MAX_ROOMS_PER_IP`,
+// default 6): waiting and playing rooms one address may have opened at once;
+// the box itself (loopback, no `CF-Connecting-IP`) is exempt. `Infinity`
+// turns either off.
+const limitArg = (flag: string, env: string, fallback: number): number => {
+  const raw = argAfter(flag) ?? process.env[env];
+  if (raw === undefined) return fallback;
+  const value = Number(raw);
+  if (!(value > 0)) throw new Error(`${flag} needs a number above 0, or Infinity (got ${raw})`);
+  return value;
+};
+const admission: AdmissionLimits = {
+  maxRoomsPerShard: limitArg("--max-rooms-per-shard", "MAX_ROOMS_PER_SHARD", Infinity),
+  maxRoomsPerIp: limitArg("--max-rooms-per-ip", "MAX_ROOMS_PER_IP", 6),
+};
+
 const settings: ShardSettings = {
   builder,
   capture: capture ? { dir: captureDir, ...(keep !== undefined ? { keep } : {}) } : null,
@@ -79,10 +101,10 @@ const settings: ShardSettings = {
 let host: RoomHost;
 if (shards === 0) {
   const { createInProcessHost } = await import("./in-process-host.js");
-  host = createInProcessHost(settings);
+  host = createInProcessHost(settings, admission);
 } else {
   const started = Date.now();
-  const workers = new WorkerRoomHost({ shards, config: settings, spawn: (config) => workerChannel(config) });
+  const workers = new WorkerRoomHost({ shards, config: settings, admission, spawn: (config) => workerChannel(config) });
   await workers.start();
   console.log(`${shards} room shard(s) ready in ${((Date.now() - started) / 1000).toFixed(1)} s`);
   host = workers;

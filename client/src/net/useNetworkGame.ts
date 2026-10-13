@@ -713,6 +713,13 @@ export function useNetworkGame(): NetworkGame {
           }
           setError(message.message)
           setErrorSeq((n) => n + 1)
+          // A create the server refused for its limits (full, or this
+          // address has too many rooms open): no room was made, so the host
+          // token minted for it and a blitz's report of its list go too.
+          if (message.code !== undefined) {
+            pendingHostTokenRef.current = null
+            setBlitzReport(null)
+          }
           // A blitz that went wrong on the way in leaves its room's seat
           // board up, error and all, to carry on from by hand. A lesson
           // refused (an unknown id) leaves the landing page up.

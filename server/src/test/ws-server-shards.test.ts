@@ -11,6 +11,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { WebSocket, WebSocketServer } from "ws";
 import type { ClientMessage, ServerMessage } from "protocol";
 import { ALICE, BOB } from "../decks.js";
+import type { AdmissionLimits } from "../admission.js";
 import { loopbackChannel } from "../loopback-channel.js";
 import type { LoopbackChannel } from "../loopback-channel.js";
 import { assembleStatus, renderStatus } from "../status-server.js";
@@ -81,10 +82,11 @@ describe("rooms on two shards (loopback)", () => {
   let port = 0;
   const sockets: WebSocket[] = [];
 
-  async function serve(config: Partial<ShardSettings> = {}): Promise<WorkerRoomHost> {
+  async function serve(config: Partial<ShardSettings> = {}, admission: AdmissionLimits = {}): Promise<WorkerRoomHost> {
     channels = [];
     host = new WorkerRoomHost({
       shards: 2,
+      admission,
       config: { builder: true, capture: null, loadReportMs: 1_000, ...config },
       spawn: (shardConfig) => {
         const channel = loopbackChannel(shardConfig);
@@ -110,8 +112,10 @@ describe("rooms on two shards (loopback)", () => {
     host = null;
   });
 
-  async function connect(): Promise<Client> {
-    const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+  /** A socket; `ip` arrives as Cloudflare's `CF-Connecting-IP`, as every
+   * visitor's does through the tunnel. */
+  async function connect(ip?: string): Promise<Client> {
+    const ws = new WebSocket(`ws://127.0.0.1:${port}`, ip !== undefined ? { headers: { "cf-connecting-ip": ip } } : {});
     await new Promise<void>((resolve, reject) => {
       ws.once("open", () => resolve());
       ws.once("error", reject);
@@ -143,7 +147,9 @@ describe("rooms on two shards (loopback)", () => {
     const c = await connect();
     const codes: string[] = [];
     for (let i = 0; i < 4; i += 1) codes.push(await create(c));
-    expect(codes.map((code) => h.shardOf(code))).toEqual([0, 1, 0, 1]);
+    // Shard 0 runs the deck importer, so it counts half a room more: the
+    // first room goes to shard 1.
+    expect(codes.map((code) => h.shardOf(code))).toEqual([1, 0, 1, 0]);
     for (const roomId of codes) {
       c.send({ type: "join-room", roomId });
       const joined = await c.next();
@@ -194,8 +200,9 @@ describe("rooms on two shards (loopback)", () => {
     expect(refused.type === "error" && refused.message).toMatch(/no lesson "no-such-lesson"/);
     await settle();
     expect((await h.status()).rooms).toEqual([]);
-    // Placement counts no leftover route: the next room goes to shard 0.
-    expect(h.shardOf(await create(c))).toBe(0);
+    // Placement counts no leftover route: the next room goes where the
+    // first would have.
+    expect(h.shardOf(await create(c))).toBe(1);
   });
 
   it("spectates across shards, one room at a time", async () => {
@@ -205,7 +212,7 @@ describe("rooms on two shards (loopback)", () => {
     const s = await connect();
     const roomA = await create(a, { type: "create-room", hostToken: "a" });
     const roomB = await create(b, { type: "create-room", hostToken: "b" });
-    expect([h.shardOf(roomA), h.shardOf(roomB)]).toEqual([0, 1]);
+    expect([h.shardOf(roomA), h.shardOf(roomB)]).toEqual([1, 0]);
     a.send({ type: "join-room", roomId: roomA, hostToken: "a" });
     b.send({ type: "join-room", roomId: roomB, hostToken: "b" });
     await a.next();
@@ -227,11 +234,11 @@ describe("rooms on two shards (loopback)", () => {
 
   it("keeps a rematch on its room's shard, the game and frames numbered on, the log whole again", async () => {
     const h = await serve({ pacing: "immediate" });
-    await create(await connect()); // shard 0 taken, so this room goes to shard 1
+    await create(await connect()); // shard 1 taken, so this room goes to shard 0
     const c = await connect();
     c.send({ type: "event-deltas" });
     const { roomId, first } = await startWithBot(c);
-    expect(h.shardOf(roomId)).toBe(1);
+    expect(h.shardOf(roomId)).toBe(0);
     expect(first.game).toBe(1);
     c.send({ type: "dispatch", roomId, action: { type: "mulligan", player: ALICE, keep: true } });
     const kept = await nextState(c);
@@ -243,7 +250,7 @@ describe("rooms on two shards (loopback)", () => {
     expect(second.roomId).toBe(roomId);
     expect(second.seq).toBeGreaterThan(over.seq);
     expect(second.eventsFrom).toBe(0);
-    expect(h.shardOf(roomId)).toBe(1);
+    expect(h.shardOf(roomId)).toBe(0);
   }, 30_000);
 
   it("keeps a tutorial's retry and a builder's rebuild on their shard, frames numbered on", async () => {
@@ -262,14 +269,16 @@ describe("rooms on two shards (loopback)", () => {
 
     const d = await connect();
     const builder = await create(d, { type: "builder-create", hostToken: "d" });
-    expect([h.shardOf(tutorial), h.shardOf(builder)]).toEqual([0, 1]);
+    // The tutorial (half a room) to shard 1, which then costs what shard 0
+    // does; the builder (nothing) to the lower index on the tie.
+    expect([h.shardOf(tutorial), h.shardOf(builder)]).toEqual([1, 0]);
     d.send({ type: "join-room", roomId: builder, hostToken: "d" });
     d.send({ type: "claim-seat", roomId: builder, seat: ALICE, clientToken: "dd" });
     const board = await nextState(d);
     d.send({ type: "builder-start", roomId: builder });
     const playing = await nextState(d, (m) => m.seq > board.seq);
     expect(playing.builder?.mode).toBe("play");
-    expect([h.shardOf(tutorial), h.shardOf(builder)]).toEqual([0, 1]);
+    expect([h.shardOf(tutorial), h.shardOf(builder)]).toEqual([1, 0]);
   }, 30_000);
 
   it("hands the host role on when the host's socket closes, and binds it by token", async () => {
@@ -325,8 +334,8 @@ describe("rooms on two shards (loopback)", () => {
     expect(parts.rooms.map((r) => r.id).sort()).toEqual([...codes].sort());
     expect(parts.roomsCreated).toBe(3);
     expect(parts.shards?.map((s) => [s.index, s.up, s.responsive, s.counts.waiting])).toEqual([
-      [0, true, true, 2],
-      [1, true, true, 1],
+      [0, true, true, 1],
+      [1, true, true, 2],
     ]);
     expect(parts.shards?.[0].load?.heapUsedMb).toBeGreaterThan(0);
     expect(renderStatus(assembleStatus(parts))).toMatch(/SHARD/);
@@ -346,6 +355,46 @@ describe("rooms on two shards (loopback)", () => {
     expect(lines.at(-1)?.type).toBe("result");
   });
 
+  it("caps the rooms one address has open across the shards, and frees one when its game ends", async () => {
+    const h = await serve({ pacing: "immediate" }, { maxRoomsPerIp: 2 });
+    const c = await connect("198.51.100.4");
+    const { roomId } = await startWithBot(c);
+    c.send({ type: "tutorial-create", lesson: "basics-proof" });
+    expect((await c.next((m) => m.type === "room-created" || m.type === "error")).type).toBe("room-created");
+    c.send({ type: "create-room" });
+    expect(await c.next((m) => m.type === "error")).toEqual({
+      type: "error",
+      code: "too-many-rooms",
+      message: "You have too many rooms open — finish or leave one first.",
+    });
+    // Its two rooms are on different shards; the refused one opened nowhere.
+    expect((await h.status()).rooms).toHaveLength(2);
+    // The box itself isn't counted.
+    const local = await connect();
+    for (let i = 0; i < 3; i += 1) await create(local);
+
+    c.send({ type: "dispatch", roomId, action: { type: "mulligan", player: ALICE, keep: true } });
+    c.send({ type: "concede", roomId });
+    await nextState(c, (m) => m.view.result.over);
+    expect(await create(c)).toMatch(/^[A-Z2-9]{5}$/);
+  }, 30_000);
+
+  it("refuses a create only when every shard is full, and never a join", async () => {
+    const h = await serve({}, { maxRoomsPerShard: 1 });
+    const c = await connect();
+    const first = await create(c);
+    const second = await create(c);
+    expect([h.shardOf(first), h.shardOf(second)].sort()).toEqual([0, 1]);
+    c.send({ type: "tutorial-create", lesson: "basics-proof" });
+    expect(await c.next()).toEqual({
+      type: "error",
+      code: "server-full",
+      message: "The server is full right now — try again in a minute.",
+    });
+    c.send({ type: "join-room", roomId: first });
+    expect(await c.next()).toMatchObject({ type: "room-joined", roomId: first });
+  });
+
   it("compresses frames, sent from a shard's bytes as text", async () => {
     await serve();
     const c = await connect();
@@ -363,8 +412,8 @@ describe("rooms on two shards (loopback)", () => {
     const h = await serve();
     const a = await connect();
     const b = await connect();
-    const roomA = await create(a);
     const roomB = await create(b);
+    const roomA = await create(a);
     expect([h.shardOf(roomA), h.shardOf(roomB)]).toEqual([0, 1]);
     channels[1].crash(1);
     expect(await b.closed).toBe(1011);

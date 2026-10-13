@@ -84,6 +84,7 @@ export function attachTransport(wss: WebSocketServer, host: RoomHost): void {
     const link: ClientLink = {
       id: nextId++,
       ip,
+      forwarded: typeof req.headers["cf-connecting-ip"] === "string",
       // UTF-8 bytes go as a text frame all the same: a shard encodes each
       // frame once, and the transport never decodes it again.
       send: (data) => (typeof data === "string" ? ws.send(data) : ws.send(data, { binary: false })),

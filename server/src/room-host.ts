@@ -39,6 +39,10 @@ export interface ClientLink {
   readonly id: ConnId;
   /** The client's address (`CF-Connecting-IP` behind the tunnel). */
   readonly ip: string;
+  /** Whether `ip` came from a `CF-Connecting-IP` header rather than the
+   * socket — a loopback socket without one is the box itself, which the
+   * per-address room cap leaves alone (`admission.ts`'s `capKey`). */
+  readonly forwarded?: boolean;
   /** Sends one message, already serialised: a string as it is, or UTF-8
    * bytes — still a text frame. */
   send(data: string | Uint8Array): void;

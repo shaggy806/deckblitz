@@ -250,11 +250,6 @@ item lands.
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop
   delay on `/status`, a profile).
-- **A per-player cap on open rooms** (the user, 2026-10-13): nothing stops one connection
-  opening rooms in a loop — `create-room`, blitz and `tutorial-create` are guarded only by the
-  per-IP message rate limit (40 per 5 s, `transport.ts`; with `--shards` this lands in `room-shards.md` step 6), and an unjoined room lives until the idle
-  reaper. Cap the rooms one IP (or host token) holds at once across all three kinds, refusing the
-  next with an `error` until one closes or is reaped.
 - **Drop the saved-deck migrations** (from about 2027). Since 2026-10-09 `client/src/deck-builder/decks.ts`
   writes a deck it migrated back on its first read (a lone `commander`, a flavor name); once old
   decks have had time to be read, `fromStorage`'s rewrites can go.

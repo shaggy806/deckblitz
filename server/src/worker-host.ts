@@ -15,6 +15,9 @@
 
 import { Worker } from "node:worker_threads";
 import type { ClientMessage } from "protocol";
+// Creates (`CREATES`): main allocates the code and places the room.
+import { CREATES, capKey, initialStage, placeRoom } from "./admission.js";
+import type { AdmissionLimits, Placement } from "./admission.js";
 import type { ImportSink } from "./import-route.js";
 import { allocateRoomCode } from "./room-code.js";
 import type { ClientLink, ConnId, RoomEvent, RoomHost, RoomKind, RoomStage } from "./room-host.js";
@@ -65,6 +68,8 @@ export interface WorkerHostOptions {
   readonly statusTimeoutMs?: number;
   /** How long `stop` lets a shard end on its own before terminating it. */
   readonly stopGraceMs?: number;
+  /** The caps on creates (`admission.ts`); none if absent. */
+  readonly admission?: AdmissionLimits;
 }
 
 interface ShardState {
@@ -80,14 +85,10 @@ interface Route {
   readonly shard: ShardIndex;
   readonly kind: RoomKind;
   stage: RoomStage;
+  /** The address that created it, for the per-address cap; `null` if none
+   * applies (loopback, a room the shard started with). */
+  readonly ip: string | null;
 }
-
-/** Creates: main allocates the code and places the room. */
-const CREATES: Readonly<Record<string, RoomKind>> = {
-  "create-room": "lobby",
-  "tutorial-create": "tutorial",
-  "builder-create": "builder",
-};
 
 /** Room messages a code with no route is answered for exactly as a shard's
  * service would answer it (`requireRoom` and friends). */
@@ -207,15 +208,18 @@ export class WorkerRoomHost implements RoomHost {
         sendMessage(link, { type: "error", message: "this server wasn't started with --builder" });
         return;
       }
-      const shard = this.place();
-      if (shard === undefined) {
-        sendMessage(link, { type: "error", message: "the server can't open a room right now — try again in a minute" });
+      const ip = capKey(link.ip, link.forwarded === true);
+      const placed = this.place(ip);
+      if ("refused" in placed) {
+        sendMessage(link, { type: "error", message: placed.refused.message, code: placed.refused.code });
         return;
       }
+      const shard = placed.shard;
       const code = allocateRoomCode((c) => this.routes.has(c));
       // Routed before it's forwarded, so whatever the client sends next
-      // follows the create to the same shard.
-      this.routes.set(code, { shard, kind, stage: kind === "lobby" ? "waiting" : "playing" });
+      // follows the create to the same shard — and placement counts it
+      // while it's in flight.
+      this.routes.set(code, { shard, kind, stage: initialStage(kind), ip });
       this.forward(shard, conn, raw, code);
       return;
     }
@@ -320,16 +324,15 @@ export class WorkerRoomHost implements RoomHost {
     );
   }
 
-  /** The up shard with the fewest rooms, lowest index on a tie. */
-  private place(): ShardIndex | undefined {
-    const counts = new Map<ShardIndex, number>();
-    for (const route of this.routes.values()) counts.set(route.shard, (counts.get(route.shard) ?? 0) + 1);
-    let best: ShardIndex | undefined;
-    for (const shard of this.shards) {
-      if (!shard.up) continue;
-      if (best === undefined || (counts.get(shard.index) ?? 0) < (counts.get(best) ?? 0)) best = shard.index;
-    }
-    return best;
+  /** Where a create from `ip` goes, or why it can't open (`placeRoom`). */
+  private place(ip: string | null): Placement {
+    const candidates = this.shards.map((shard) => ({
+      index: shard.index,
+      up: shard.up,
+      elu: shard.load?.elu ?? null,
+      delayP99Ms: shard.load?.delayP99Ms ?? null,
+    }));
+    return placeRoom(candidates, this.routes.values(), this.options.admission ?? {}, ip);
   }
 
   private routeCounts(index: ShardIndex): ShardStatus["counts"] {
@@ -416,7 +419,7 @@ export class WorkerRoomHost implements RoomHost {
       if (route?.shard === index) this.routes.delete(event.id);
       return;
     }
-    if (route === undefined) this.routes.set(event.id, { shard: index, kind: event.kind, stage: event.stage });
+    if (route === undefined) this.routes.set(event.id, { shard: index, kind: event.kind, stage: event.stage, ip: null });
     else if (route.shard === index) route.stage = event.stage;
   }
 

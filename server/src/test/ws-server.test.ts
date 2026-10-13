@@ -608,3 +608,97 @@ describe("compression (permessage-deflate)", () => {
     }
   });
 });
+
+describe("the caps on opening rooms (in-process)", () => {
+  let wss: WebSocketServer;
+  let port: number;
+  const sockets: WebSocket[] = [];
+
+  async function serve(admission: { maxRoomsPerIp?: number; maxRoomsPerShard?: number }): Promise<void> {
+    wss = new WebSocketServer({ port: 0 });
+    attachRoomServer(wss, new RoomManager({ pacing: "immediate" }), { admission });
+    await new Promise<void>((resolve) => wss.once("listening", resolve));
+    port = (wss.address() as AddressInfo).port;
+  }
+
+  afterEach(async () => {
+    for (const ws of sockets.splice(0)) ws.close();
+    await new Promise<void>((resolve) => wss.close(() => resolve()));
+  });
+
+  /** A socket from `ip` as the tunnel delivers it (`CF-Connecting-IP`), or
+   * a bare loopback one. */
+  async function from(ip?: string): Promise<{ ws: WebSocket; next: () => Promise<ServerMessage> }> {
+    const ws = await new Promise<WebSocket>((resolve, reject) => {
+      const socket = new WebSocket(`ws://127.0.0.1:${port}`, ip !== undefined ? { headers: { "cf-connecting-ip": ip } } : {});
+      socket.once("open", () => resolve(socket));
+      socket.once("error", reject);
+    });
+    sockets.push(ws);
+    return { ws, next: messageQueue(ws) };
+  }
+
+  it("refuses an address past its open rooms, across every kind of create, and frees one when its game ends", async () => {
+    await serve({ maxRoomsPerIp: 2 });
+    const c = await from("203.0.113.7");
+    c.ws.send(JSON.stringify({ type: "create-room", hostToken: "h" }));
+    const created = await c.next();
+    if (created.type !== "room-created") throw new Error(`got ${created.type}`);
+    const roomId = created.roomId;
+    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "basics-proof" }));
+    expect((await c.next()).type).toBe("room-created");
+    c.ws.send(JSON.stringify({ type: "create-room" }));
+    expect(await c.next()).toEqual({
+      type: "error",
+      code: "too-many-rooms",
+      message: "You have too many rooms open — finish or leave one first.",
+    });
+
+    // Starting the room it has is never refused.
+    c.ws.send(JSON.stringify({ type: "join-room", roomId, hostToken: "h" }));
+    c.ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: ALICE, clientToken: "a", ready: true }));
+    c.ws.send(JSON.stringify({ type: "add-bot", roomId, seat: BOB }));
+    c.ws.send(JSON.stringify({ type: "start-game", roomId }));
+    let m = await c.next();
+    while (m.type !== "state") m = await c.next();
+    // Another address, and the box itself, are counted apart.
+    const other = await from("203.0.113.8");
+    other.ws.send(JSON.stringify({ type: "create-room" }));
+    expect((await other.next()).type).toBe("room-created");
+    const local = await from();
+    for (let i = 0; i < 3; i += 1) {
+      local.ws.send(JSON.stringify({ type: "create-room" }));
+      expect((await local.next()).type).toBe("room-created");
+    }
+
+    // The game ends: that room no longer counts.
+    c.ws.send(JSON.stringify({ type: "dispatch", roomId, action: { type: "mulligan", player: ALICE, keep: true } }));
+    c.ws.send(JSON.stringify({ type: "concede", roomId }));
+    m = await c.next();
+    while (m.type !== "state" || !m.view.result.over) m = await c.next();
+    c.ws.send(JSON.stringify({ type: "create-room" }));
+    expect((await c.next()).type).toBe("room-created");
+    // And a rematch, back over the cap, isn't refused either.
+    c.ws.send(JSON.stringify({ type: "rematch", roomId }));
+    m = await c.next();
+    while (m.type !== "state" || m.game !== 2) m = await c.next();
+  }, 30_000);
+
+  it("refuses a create once this thread's rooms reach the per-shard cap, but not a join", async () => {
+    await serve({ maxRoomsPerShard: 1.5 });
+    const c = await from();
+    c.ws.send(JSON.stringify({ type: "create-room" }));
+    const created = await c.next();
+    if (created.type !== "room-created") throw new Error(`got ${created.type}`);
+    c.ws.send(JSON.stringify({ type: "tutorial-create", lesson: "basics-proof" }));
+    expect((await c.next()).type).toBe("room-created");
+    c.ws.send(JSON.stringify({ type: "create-room" }));
+    expect(await c.next()).toEqual({
+      type: "error",
+      code: "server-full",
+      message: "The server is full right now — try again in a minute.",
+    });
+    c.ws.send(JSON.stringify({ type: "join-room", roomId: created.roomId }));
+    expect(await c.next()).toMatchObject({ type: "room-joined", roomId: created.roomId });
+  });
+});

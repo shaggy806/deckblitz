@@ -649,4 +649,11 @@ export type ServerMessage =
       readonly options: readonly { readonly index: number; readonly text: string }[];
     }
   | { readonly type: "capture-saved"; readonly file: string }
-  | { readonly type: "error"; readonly message: string };
+  | {
+      readonly type: "error";
+      readonly message: string;
+      /** Set on a create the server refused for its limits: `server-full`
+       * (every room shard is at its cap) or `too-many-rooms` (this address
+       * already has its share open). Absent on every other error. */
+      readonly code?: "server-full" | "too-many-rooms";
+    };

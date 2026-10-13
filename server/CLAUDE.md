@@ -25,9 +25,13 @@ that file.
 - **Rooms can run on worker threads** (`--shards N`, default 0 = on the main thread;
   `docs/plans/room-shards.md`). Then main keeps sockets, routes and HTTP and **imports no engine**:
   `index.ts`, `transport.ts`, `worker-host.ts`, `room-host.ts`, `shard-protocol.ts`,
-  `room-code.ts`, `status-server.ts`, `import-route.ts` and `load-monitor.ts` import values only
+  `room-code.ts`, `status-server.ts`, `import-route.ts`, `load-monitor.ts` and `admission.ts` import values only
   from Node, `ws` and each other (`test/main-imports.test.ts`); everything a room does is
   shard-side, behind `RoomService`. Keep per-connection state in the service, never a module.
+- **Only a create is ever refused** for load (`admission.ts`: `--max-rooms-per-shard`,
+  `--max-rooms-per-ip`), and both hosts ask it the same way, so `--shards 0` keeps the same caps.
+  A lobby counts as the game it will become: joins, starts, rematches and tutorial steps never
+  meet a limit.
 - **The wire protocol lives in the `protocol/` workspace**, imported as types by both server
   and client. Change it there, never restate it here.
 - **Security-relevant:** printings are accepted only as a bare Scryfall card id

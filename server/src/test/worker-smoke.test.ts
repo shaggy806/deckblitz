@@ -80,7 +80,8 @@ describe.skipIf(!distIsFresh())("rooms on real worker threads (dist)", () => {
     ws.send(JSON.stringify({ type: "create-room", hostToken: "h" }));
     await enough;
     expect(binary).toBe(false);
-    expect(host.shardOf(roomId)).toBe(0);
+    // Shard 0 runs the deck importer, so the first room goes to shard 1.
+    expect(host.shardOf(roomId)).toBe(1);
 
     const parts = await host.status();
     expect(parts.rooms.map((r) => r.id)).toEqual([roomId]);

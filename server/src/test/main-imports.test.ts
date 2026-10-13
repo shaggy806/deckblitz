@@ -20,6 +20,7 @@ const MAIN_SIDE = [
   "status-server.ts",
   "import-route.ts",
   "load-monitor.ts",
+  "admission.ts",
 ];
 
 /** Value imports a main-side module may make besides its own side. */
