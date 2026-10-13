@@ -86,6 +86,8 @@ Environment=PORT=4000
 Environment=CLIENT_ORIGIN=https://deckblitz.net
 # Rooms on worker threads (below): one shard on the 2-vCPU box, main on the other core.
 Environment=SHARDS=1
+# "The server is full" past 8 weighted rooms on the shard (below; the box's knee, 2026-10-13).
+Environment=MAX_ROOMS_PER_SHARD=8
 User=ubuntu
 
 [Install]
@@ -134,7 +136,12 @@ the shard `up`.
   lobby 1, a tutorial 0.5, a finished game 0.1). Set the latter from the load test's knee on the
   box (`npm run load-test -w server`, with `--status http://127.0.0.1:4010/status.json`, run
   on the box with nobody playing): the stage where the frame-gap median passes +20% over one
-  room.
+  room. **Set to 8 on the 2-vCPU box** (2026-10-13): its one shard passed that between 6 and 8
+  all-bot rooms (`docs/plans/room-shards.md`, "Live on the 2-vCPU box"), and a real blitz room,
+  three bots and a person thinking, is lighter. The load test needs the per-address cap lifted
+  for its run (every room comes from one address): a drop-in
+  `/etc/systemd/system/mtg-server.service.d/loadtest.conf` with `Environment=MAX_ROOMS_PER_IP=Infinity`,
+  removed (and the service restarted) afterwards.
 - `/status` gains a shard table: each shard's state and restarts, its rooms, how busy it is, its
   event-loop delay, heap and bots' decision p99.
 

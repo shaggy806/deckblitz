@@ -2,8 +2,8 @@
 
 Status: **live** (2026-10-13): built, deployed at 77b43d95 and turned on with `SHARDS=1` in the
 box's service unit (`DEPLOYMENT.md`; the code's default stays 0). The box's knee is measured
-below; `--max-rooms-per-shard` is left unset until the user picks the limit. Left: that limit,
-and the same measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
+below; `MAX_ROOMS_PER_SHARD=8` on the box (the user's choice, from that knee). Left: the same
+measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
 
