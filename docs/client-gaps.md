@@ -83,41 +83,48 @@ card that must be taken (seen live 2026-10-09). The engine could skip the `choos
 the eligible cards are exactly `min` = `max` and there's no order to pick (`Game`'s look-and-choose,
 where the decision is raised); bots and the fuzzer answer it already.
 
-- **The game page's own rendering on a slow laptop** (2026-10-13/14). **Waiting on a laptop
-  test.** The user's i5-6300U laptop (2 cores / 4 threads, 16 GB, Chrome 153) ran a local blitz
-  at ~42 fps with ~120 main-thread freezes a minute, the worst 762 ms (`docs/plans/local-rooms.md`,
-  step 6). Fixed since, whatever the laptop shows: the board-fit search starts from the last
-  width (`game/boardFit.ts`) and is skipped when a board's room and rows are unchanged, each
-  seat's board ref is stable, and the stack glow and decision banner's pulse animate a
-  pseudo-element's opacity on the compositor (d7f00bbf).
+- **The game page's own rendering on a slow laptop** (2026-10-13/14). **Mostly fixed; one
+  cost left, no Lite setting needed yet.** The user's i5-6300U laptop (2 cores / 4 threads,
+  16 GB, Chrome 153, 1366x768) ran a local blitz on 2026-10-13 at ~42 fps with ~120 main-thread
+  freezes a minute, the worst 762 ms (`docs/plans/local-rooms.md`, step 6). Fixed since: the
+  board-fit search starts from the last width (`game/boardFit.ts`) and is skipped when a
+  board's room and rows are unchanged, each seat's board ref is stable, and the stack glow and
+  decision banner's pulse animate a pseudo-element's opacity on the compositor (d7f00bbf).
 
-  What the dev PC can't tell: throttling the page 4x there (CDP `Emulation.setCPUThrottlingRate`)
-  slows only its main thread — the room worker running the bots gets a free core of 14. Traced
-  quiet, old build against new, alternating (2026-10-14): main thread busy 11-19%, 16-27 freezes
-  a minute, worst 93-177 ms, old and new within run-to-run noise. The first traces (45-54% busy)
-  had a game running on the PC and overstated everything, the board fit's share included. So the
-  laptop's stutter is most likely the bots' worker, the page and Chrome's compositor competing
-  for its two cores, which no dev-PC trace models.
+  **Measured on the laptop, 2026-10-14** (live site at e947bf60, driven through Claude in Chrome
+  with an in-page probe: long tasks, long-animation-frame entries, rAF frame gaps; the
+  "Tramplesaurus Rex" Ghalta precon with a bot playing the seat, so a real game; each run cut at
+  game over):
 
-  **The test** (on the laptop, a local production build: `git pull`, `npm install`,
-  `npm run build`, `npm start -w server`, then in a second terminal `npm run preview -w client`),
-  the same prompt as step 6, twice: once at `http://localhost:4173/?local=1` (the bots in the
-  page) and once at `http://localhost:4173/?local=0` (the bots on the local server — a separate
-  process, so still the same CPU; for the cleanest split, the deployed site at
-  `https://deckblitz.net/?local=0`, where the bots run on Lightsail). Compare the freezes a minute
-  and the worst (`deckblitzLocal.stats()` covers the local run; for the `?local=0` run, the
-  prompt's own frame-gap/long-task probe). **If the freezes mostly go with `?local=0`**: it's CPU
-  contention — fix the worker's share (pause or yield its search while the page animates, a
-  smaller budget on 2-core machines by measured contention) rather than the visuals. **If they
-  don't**: the page is the cost, and the rest of the list below comes next, then the Lite
-  setting (Auto/Full/Lite in Settings, auto-switched by measured freezes, not hardware hints: the
-  laptop reports 4 threads and 16 GB). The rest: the active-seat `background-color` transition on
-  `.app` (~2%), the tiles' hover `box-shadow` transitions, card flights the compositor refused
-  (`ghost-flight`, reason 4096), `Table` remounting every frame. To trace again (the
-  scripts used weren't kept in the repo): the CDP `Tracing` domain
-  with the devtools.timeline categories (plus `disabled-by-default-devtools.timeline.stack` for
-  forced-layout call stacks) on a `vite preview` build, mapped through a `vite build --sourcemap`
-  copy (trace call frames are 1-based).
+  | run | bots think | opponents | minutes | fps | long tasks/min | worst | frame gaps >250 ms |
+  |---|---|---|---|---|---|---|---|
+  | 1 | in the page | Sidisi, Kykar, Zurgo (53 permanents) | ~6.5 | ~55 | ~15-20 | 340 ms | 10 |
+  | 2 | on Lightsail | Muldrotha, Elsha, Karador (45) | 8.7 (not over) | 56.7 | 3.9 | 126 ms | 0 |
+  | 3 | in the page | Yasova, Alesha, … (35) | 6.7 | 57.2 | 1.9 | 103 ms | 1 (at load) |
+
+  (Run 1's probe kept counting a minute or two past game over, so its per-minute figure is a
+  range.) **Not CPU contention**: run 3 had the bots in the page and was the quietest; the
+  cost follows the board — what's on it and how much happens — not where the bots think. So the
+  worker needs no yield or smaller budget. Bot decisions in the page: p90 84-88 ms, p99 302-498
+  ms, the worst 417 ms and 1.56 s (the 300 ms budget overshoots between simulations, as on
+  2026-10-13).
+
+  **What's left** is run 1's ten 250-400 ms frames, all one thing: a frame's board landing.
+  The long-animation-frame entries put them in `usePlayback`'s `show` (the timer that puts the
+  next view on screen: the source position resolved against the live bundle), 290-340 ms of
+  script of which 190-260 ms is forced style and layout, and React's scheduler right after with
+  another 75-205 ms forced. That's the board mounting afresh (`Table` remounts per frame shown)
+  and layout effects measuring it mid-render, on a 50-permanent board. The next step, when it's
+  worth one: keep `Table` mounted across frames, then see which layout effect forces the
+  layout (a dev-PC trace with the page throttled 4x is enough now that contention is ruled out).
+  The smaller items: the active-seat `background-color` transition on `.app` (~2%), the tiles'
+  hover `box-shadow` transitions, card flights the compositor refused (`ghost-flight`, reason
+  4096). A Lite setting (Auto/Full/Lite, switched by measured freezes, not hardware hints) only if
+  a busier board shows freezes again. To trace: the CDP `Tracing` domain with the
+  devtools.timeline categories (plus `disabled-by-default-devtools.timeline.stack` for
+  forced-layout call stacks) on a `vite preview` build, mapped through a `vite build
+  --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
+  through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
   Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
   Policy): the required notices and attribution, and where on the site they go.
