@@ -215,6 +215,54 @@ export function simulatePlan(
 }
 
 /**
+ * Play `action` against a copy of `state` until it has resolved and `me` has
+ * priority again in the same step with an empty stack — the board a follow-up
+ * would be played on — and return that copy, or `null` if it never gets back
+ * there (the step ends, the engine refuses the action, the game ends). Every
+ * seat passes while it resolves, and what's asked on the way is answered as
+ * the `"combat"` policy's stand-ins answer it (v1), our own seat's too unless
+ * `self` says otherwise. A land, which doesn't use the stack, is back at once.
+ */
+export function simulateSettled(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  action: Action,
+  self?: PlayerController,
+): Game | null {
+  const { number, step } = state.turn;
+  try {
+    const sim = Game.fromSnapshot(
+      { ...state, eventLog: [] },
+      { registry, controllers: rolloutControllers(state, registry, me, "combat", self) },
+    );
+    sim.dispatch(action);
+    let steps = 0;
+    let back = false;
+    sim.advanceUntil((s) => {
+      if (s.result.over || s.turn.number !== number || s.turn.step !== step) return true;
+      // A trigger the action set off (landfall from a land, which never uses
+      // the stack) waits in `pendingTriggers` until the next tick puts it on
+      // the stack: not back until that has resolved too.
+      if (
+        s.zones.shared.stack.length === 0 &&
+        s.pendingTriggers.length === 0 &&
+        s.awaiting === null &&
+        s.priority.holder === me
+      ) {
+        back = true;
+        return true;
+      }
+      steps += 1;
+      return steps > MAX_STEPS;
+    });
+    return back ? sim : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * `simulateAction` for an action put off until after combat: from our first
  * main phase, we pass, the rollout plays our combat (our seat attacking as
  * the policy has it), and at our second main phase, with priority back and

@@ -68,6 +68,7 @@ import {
   simulateCombat,
   simulatePlan,
   simulateRepeated,
+  simulateSettled,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
 
@@ -85,6 +86,12 @@ export interface EvalBotOptions {
    * asks us are always searched this way.
    */
   readonly rolloutDecisions?: boolean;
+  /**
+   * Whether a priority search in our own main phase also weighs what each
+   * move lets us do next this turn (`followUps`). On by default; off plays
+   * the one-move search alone, for an A/B.
+   */
+  readonly followUps?: boolean;
   /**
    * Ceiling on simulations per decision. The action space is small in
    * practice (median 2 concrete actions per window, 99th percentile around 9),
@@ -146,6 +153,8 @@ interface SearchBudget {
   readonly until: number;
   simulations: number;
   ms: number;
+  /** {@link spent} said stop at least once: something was left unscored. */
+  cut: boolean;
 }
 
 const newBudget = (left: number, until: number): SearchBudget => ({
@@ -153,6 +162,7 @@ const newBudget = (left: number, until: number): SearchBudget => ({
   until,
   simulations: 0,
   ms: 0,
+  cut: false,
 });
 
 /**
@@ -175,6 +185,12 @@ const newBudget = (left: number, until: number): SearchBudget => ({
  * prediction waits for both, and only the deadline itself can stop the second.
  */
 const spent = (budget: SearchBudget): boolean => {
+  const stop = mustStop(budget);
+  if (stop) budget.cut = true;
+  return stop;
+};
+
+const mustStop = (budget: SearchBudget): boolean => {
   if (budget.left <= 0) return true;
   if (budget.until === Infinity) return false;
   const now = Date.now();
@@ -212,6 +228,10 @@ export interface DecisionAudit {
   readonly via: string;
   /** The wall-clock budget ran out before the search finished. */
   readonly expired: boolean;
+  /** The search stopped with something left unscored — out of simulations,
+   * past the deadline, or predicted not to fit another simulation before it
+   * (which `expired` misses). */
+  readonly cut: boolean;
 }
 
 const audit = (kind: DecisionAudit["kind"], budget: SearchBudget | null, via = "search"): DecisionAudit => ({
@@ -220,6 +240,7 @@ const audit = (kind: DecisionAudit["kind"], budget: SearchBudget | null, via = "
   ms: budget?.ms ?? 0,
   via,
   expired: budget !== null && budget.until !== Infinity && Date.now() >= budget.until,
+  cut: budget?.cut ?? false,
 });
 
 /** Structural equality, for spotting v1's chosen action among the enumerated
@@ -354,6 +375,30 @@ function hillClimb<T>(
  */
 const DECISION_ROLLOUTS = 12;
 const NESTED_DECISION_ROLLOUTS = 2;
+
+/**
+ * Simulations one priority search may spend on follow-ups (`followUps`), the
+ * settling of each first move included — its own ceiling, under the decision's.
+ * Every move times every move after it grows with the square of a wide board:
+ * with only the decision's 200 to stop it, one search on a 79-permanent
+ * four-player board ran 381 simulations and 126 s, and its bench game timed
+ * out (seed 232, 2026-10-14). A search needed about 13 at the 90th
+ * percentile, so this bites only on the wide boards, where what each move
+ * opens up decides what's reached.
+ */
+const FOLLOW_UP_SIMULATIONS = 24;
+
+/**
+ * The decisions a rollout searches when it meets them (`DecisionRolloutController`):
+ * a "you may" — a modal choice, which is how the engine asks one — and a "you
+ * may cast", the yes-or-no answers the nesting is for. Anything else inside a
+ * rollout (a trigger's target, a card from a zone, a sacrifice) takes v1's
+ * answer, as every priority rollout's decisions do. Searched, they were the
+ * dearer half of decision search: a Mayhem Devil ping inside each of a ping's
+ * rollouts was searched again, and nested decisions took 23% of one
+ * four-player game's bot time against the top-level ones' 19% (2026-10-14).
+ */
+const NESTED_DECISION_KINDS: ReadonlySet<string> = new Set(["choose-modes", "cast-now"]);
 
 /**
  * The best answer to the decision pending in `view`, by playing each candidate
@@ -524,9 +569,9 @@ function byManaValue(
 
 /**
  * Our own seat inside a decision's rollout: passes priority, fights combat
- * the way the rollout policy says, and searches any further decision one
- * level deep — with plain v1 answers beneath that, so it can't recurse — out
- * of one small budget for the whole rollout.
+ * the way the rollout policy says, and searches a further "you may" one level
+ * deep (`NESTED_DECISION_KINDS`) — with plain v1 answers beneath that, so it
+ * can't recurse — out of one small budget for the whole rollout.
  */
 class DecisionRolloutController extends CombatRolloutController {
   private readonly cards: CardRegistry;
@@ -551,7 +596,7 @@ class DecisionRolloutController extends CombatRolloutController {
 
   act(view: ControllerView): Action {
     const inherited = super.act(view);
-    if (view.state.awaiting === null) return inherited;
+    if (view.state.awaiting === null || !NESTED_DECISION_KINDS.has(view.state.awaiting.kind)) return inherited;
     return bestDecision(
       view,
       inherited,
@@ -622,6 +667,11 @@ export class EvalBotController extends HeuristicBotController {
   } | null = null;
   /** See {@link DecisionAudit}. Written, never read. */
   lastDecision: DecisionAudit | null = null;
+  /** When the last priority search's move won by what it lets us do next
+   * (`followUps`): the move, its best follow-up and their score. `null` when
+   * no follow-up beat the moves scored alone. Written, never read. */
+  lastFollowUp: { readonly action: Action; readonly score: number; readonly then: Action } | null = null;
+  private readonly followUpsOn: boolean;
   /** What the last priority search played in place of passing, when the
    * search's best was to pass (a due cantrip — `isCantripDue`), so a replay
    * of its scores can do the same (`scenario-fit.ts`). Written, never read. */
@@ -658,6 +708,7 @@ export class EvalBotController extends HeuristicBotController {
     this.rollout = options.rollout ?? "combat";
     this.decisionRollout = this.rollout;
     this.rolloutDecisions = options.rolloutDecisions ?? false;
+    this.followUpsOn = options.followUps ?? true;
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.trace = options.trace;
@@ -672,6 +723,7 @@ export class EvalBotController extends HeuristicBotController {
 
   private actSearched(view: ControllerView): Action {
     this.lastDecision = null;
+    this.lastFollowUp = null;
     this.lastPassFallback = null;
     this.lastHeldForCombat = [];
     const fromPlan = this.continuePlan(view);
@@ -713,76 +765,9 @@ export class EvalBotController extends HeuristicBotController {
     this.decisionRollout =
       this.rollout !== "acting" && castPayoff(view.state, this.cards, this.playerId) ? "acting" : this.rollout;
 
-    const candidates: Action[] = [];
-    // Candidates that help an opponent's attacker with something lasting:
-    // kept only if the defending player dies (`opponentPump`).
-    const mustKill = new Map<Action, PlayerId>();
-    // A cantrip due now (`isCantripDue`), played if the search would pass.
-    let cantrip: Action | null = null;
-    // Wipes held for after combat: chosen, they mean "pass to combat".
-    const heldForCombat = new Set<Action>();
-    // A read-only region: ranking targets folds every option's
-    // characteristics, and nothing changes the state until the simulations
-    // below, which run outside it.
-    withComputedCache(() => {
-      for (const legal of view.legalActions()) {
-        // Mana abilities are never worth a simulation: casting auto-pays, so
-        // tapping for mana on its own gains nothing the evaluation could see,
-        // and on a wide board they're nearly every candidate there is — 27 of
-        // 30 on one 38-permanent board, which made a single decision a 2s search.
-        if (legal.kind === "activate-ability" && this.isManaOnlyAbility(legal)) continue;
-        // An {X} ability affordable only at X = 0, whose effect is all X
-        // (`inertAtZeroX`): Necropolis Fiend's -0/-0.
-        if (legal.kind === "activate-ability" && this.inertAtZeroX(legal)) continue;
-        // A copy of the next instant or sorcery with none to cast
-        // (`holdsForNextSpell`): Adaptive Training Post's counters wasted.
-        if (this.holdsForNextSpell(legal, view.legalActions())) continue;
-        // An until-end-of-turn pump where it can't matter (`wastedNow`): the
-        // rollout plays our own seat passively, so mana it would have cast
-        // spells with looks free to spend, and v2 pumped away its upkeep.
-        if (this.wastedNow(view.state, legal)) continue;
-        // A creature that counters a spell as it enters, with no opponent's
-        // spell to counter (`holdsForASpell`): the body alone outscores the
-        // card in hand, so the search would cast it and waste the counter.
-        if (this.holdsForASpell(view.state, legal)) continue;
-        // A board wipe that would take our own would-be attackers, before
-        // combat (`holdsWipeForCombat`): cast after the attack instead. It
-        // stays a candidate, so that if it's the best play the bot passes to
-        // combat with its mana intact — left out, something cheaper spent the
-        // mana and the wipe was never affordable after combat (the Sultai
-        // autopsy: Blood Money in hand 61 turn starts, never cast).
-        const heldWipe = this.holdsWipeForCombat(view.state, legal);
-        // Mana our own main phase could cast a spell with, spent in our upkeep
-        // (`holdsManaForMain`): the rollouts never show that spell.
-        if (this.holdsManaForMain(view.state, legal)) continue;
-        // A land that taps for mana and fetches (Bountiful Landscape) waits
-        // for the end of the turn before ours (`holdsManaLandFetch`).
-        if (this.holdsManaLandFetch(view.state, legal)) continue;
-        // So does a creature's (Sakura-Tribe Elder), outside a combat or a
-        // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
-        if (this.holdsCreatureFetch(view.state, legal)) continue;
-        const due = this.isCantripDue(view.state, legal) || this.isSuspendDue(legal);
-        const aimed = candidateActions(aimOffer(view.state, this.cards, player, legal), player);
-        for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {
-          // A draw aimed at a player is a cantrip aimed at us (Compulsive
-          // Research's "target player draws three").
-          if (due && cantrip === null && aimedOnlyAt(action, player)) cantrip = action;
-          // Beast Within and kin wait for the target's controller's turn
-          // (`holdsCompensationFor`), when their token can't attack.
-          if (this.holdsCompensationFor(view.state, action)) continue;
-          const verdict = this.opponentPump(view.state, legal, action);
-          if (verdict === "drop") continue;
-          if (verdict !== "ok") mustKill.set(action, verdict.kills);
-          // Mana a play held for after combat needs, spent on a combat trick:
-          // kept only if it kills the player it's aimed at this combat.
-          const spends = this.spendsHeldMana(view.state, action);
-          if (spends === "drop") continue;
-          if (spends !== "ok" && !mustKill.has(action)) mustKill.set(action, spends.kills);
-          if (heldWipe) heldForCombat.add(action);
-          candidates.push(action);
-        }
-      }
-    });
+    const listed = this.listCandidates(view);
+    const { candidates, mustKill, heldForCombat } = listed;
+    let cantrip = listed.cantrip;
 
     // **Nothing to choose between, nothing to simulate.** Passing used to be
     // rolled out to the end of the turn *before* the candidates were listed,
@@ -975,12 +960,15 @@ export class EvalBotController extends HeuristicBotController {
     const tiesAct = this.decisionRollout === "acting";
     this.lastTiesAct = tiesAct;
     let passAlone: number | null | undefined;
+    // Each move's own score, for the follow-ups to order by (`followUps`).
+    const scored = new Map<Action, number>();
     for (const action of candidates) {
       if (spent(budget)) break;
       budget.left -= 1;
       const victim = mustKill.get(action);
       const score = this.score(view, action, budget, victim);
       if (score === null) continue;
+      scored.set(action, score);
       const tiesPass = best.type === "pass-priority" && Math.abs(score - bestScore) <= TIE;
       if (tiesPass) {
         if (!tiesAct) continue;
@@ -1084,6 +1072,17 @@ export class EvalBotController extends HeuristicBotController {
       batch = null;
       plan = { untap: p.untap, cast: p.cast.card };
     }
+    // **Follow-ups**: a move is also worth what it lets us do next this
+    // turn (`followUps`) — the cost reducer before what it reduces, the
+    // ramp before what it pays for. Last of all, so under a clock they spend
+    // only the time every single move, batch and untap plan has left.
+    const followed = this.followUps(view, candidates, scored, mustKill, heldForCombat, bestScore, budget);
+    if (followed !== null) {
+      best = followed.action;
+      bestScore = followed.score;
+      batch = null;
+      plan = null;
+    }
     if (plan !== null && best.type === "activate-ability") {
       this.plan = {
         ...plan,
@@ -1141,6 +1140,93 @@ export class EvalBotController extends HeuristicBotController {
       this.actedOn = { turn: view.state.turn.number, stack: [...view.state.zones.shared.stack] };
     }
     return best;
+  }
+
+  /**
+   * The moves a priority window searches: every legal action but the ones a
+   * hold or a filter says aren't worth a simulation now, each concrete
+   * filling of its targets and sacrifices (`aimOffer`, `withSacrificeChoices`).
+   * Read on the real board for the window itself, and on a rollout's board
+   * after one of them has resolved for the follow-ups (`followUps`).
+   */
+  private listCandidates(view: ControllerView): {
+    readonly candidates: Action[];
+    /** Candidates that help an opponent's attacker with something lasting:
+     * kept only if the defending player dies (`opponentPump`). */
+    readonly mustKill: Map<Action, PlayerId>;
+    /** A cantrip due now (`isCantripDue`), played if the search would pass. */
+    readonly cantrip: Action | null;
+    /** Wipes held for after combat: chosen, they mean "pass to combat". */
+    readonly heldForCombat: Set<Action>;
+  } {
+    const player = this.playerId;
+    const candidates: Action[] = [];
+    const mustKill = new Map<Action, PlayerId>();
+    let cantrip: Action | null = null;
+    const heldForCombat = new Set<Action>();
+    // A read-only region: ranking targets folds every option's
+    // characteristics, and nothing changes the state until the simulations
+    // after, which run outside it.
+    withComputedCache(() => {
+      for (const legal of view.legalActions()) {
+        // Mana abilities are never worth a simulation: casting auto-pays, so
+        // tapping for mana on its own gains nothing the evaluation could see,
+        // and on a wide board they're nearly every candidate there is — 27 of
+        // 30 on one 38-permanent board, which made a single decision a 2s search.
+        if (legal.kind === "activate-ability" && this.isManaOnlyAbility(legal)) continue;
+        // An {X} ability affordable only at X = 0, whose effect is all X
+        // (`inertAtZeroX`): Necropolis Fiend's -0/-0.
+        if (legal.kind === "activate-ability" && this.inertAtZeroX(legal)) continue;
+        // A copy of the next instant or sorcery with none to cast
+        // (`holdsForNextSpell`): Adaptive Training Post's counters wasted.
+        if (this.holdsForNextSpell(legal, view.legalActions())) continue;
+        // An until-end-of-turn pump where it can't matter (`wastedNow`): the
+        // rollout plays our own seat passively, so mana it would have cast
+        // spells with looks free to spend, and v2 pumped away its upkeep.
+        if (this.wastedNow(view.state, legal)) continue;
+        // A creature that counters a spell as it enters, with no opponent's
+        // spell to counter (`holdsForASpell`): the body alone outscores the
+        // card in hand, so the search would cast it and waste the counter.
+        if (this.holdsForASpell(view.state, legal)) continue;
+        // A board wipe that would take our own would-be attackers, before
+        // combat (`holdsWipeForCombat`): cast after the attack instead. It
+        // stays a candidate, so that if it's the best play the bot passes to
+        // combat with its mana intact — left out, something cheaper spent the
+        // mana and the wipe was never affordable after combat (the Sultai
+        // autopsy: Blood Money in hand 61 turn starts, never cast).
+        const heldWipe = this.holdsWipeForCombat(view.state, legal);
+        // Mana our own main phase could cast a spell with, spent in our upkeep
+        // (`holdsManaForMain`): the rollouts never show that spell.
+        if (this.holdsManaForMain(view.state, legal)) continue;
+        // A land that taps for mana and fetches (Bountiful Landscape) waits
+        // for the end of the turn before ours (`holdsManaLandFetch`).
+        if (this.holdsManaLandFetch(view.state, legal)) continue;
+        // So does a creature's (Sakura-Tribe Elder), outside a combat or a
+        // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
+        if (this.holdsCreatureFetch(view.state, legal)) continue;
+        const due = this.isCantripDue(view.state, legal) || this.isSuspendDue(legal);
+        const aimed = candidateActions(aimOffer(view.state, this.cards, player, legal), player);
+        for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {
+          // A draw aimed at a player is a cantrip aimed at us (Compulsive
+          // Research's "target player draws three").
+          if (due && cantrip === null && aimedOnlyAt(action, player)) cantrip = action;
+          // Beast Within and kin wait for the target's controller's turn
+          // (`holdsCompensationFor`), when their token can't attack.
+          if (this.holdsCompensationFor(view.state, action)) continue;
+          const verdict = this.opponentPump(view.state, legal, action);
+          if (verdict === "drop") continue;
+          if (verdict !== "ok") mustKill.set(action, verdict.kills);
+          // Mana a play held for after combat needs, spent on a combat trick:
+          // kept only if it kills the player it's aimed at this combat.
+          const spends = this.spendsHeldMana(view.state, action);
+          if (spends === "drop") continue;
+          if (spends !== "ok" && !mustKill.has(action)) mustKill.set(action, spends.kills);
+          if (heldWipe) heldForCombat.add(action);
+          candidates.push(action);
+        }
+      }
+    });
+    return { candidates, mustKill, cantrip, heldForCombat };
   }
 
   /**
@@ -2161,6 +2247,136 @@ export class EvalBotController extends HeuristicBotController {
       ),
     );
     return after === null ? null : evaluateState(after, this.cards, this.playerId, this.weights);
+  }
+
+  /**
+   * **One more step of our own turn.** A move scored on its own is "I do
+   * this, and then the rollout plays the turn out" — and the rollout passes
+   * our seat, so a move whose worth is what it lets us do next (a cost
+   * reducer, a mana rock, an untap, a sacrifice outlet) scores below one that
+   * is worth something by itself, and the follow-up it was for is never seen.
+   * So in our own main phase, with nothing on the stack, each move is also
+   * played until it has resolved (`simulateSettled`), and every move we'd
+   * search on that board (`listCandidates`) is scored from there: the move is
+   * worth the best of those, if that beats everything scored so far. Only
+   * that first move is played; the next window searches again.
+   *
+   * Which moves are expanded is decided by what they open up, not by their
+   * own score, which is exactly what undersells a setup move: every move
+   * that leaves a follow-up is expanded, those that make something castable
+   * that wasn't first (the reducer, the rock), then the rest by their own
+   * score. Under a clock, what isn't reached by then keeps its own score.
+   * `null` when nothing beat `bestScore`.
+   */
+  private followUps(
+    view: ControllerView,
+    candidates: readonly Action[],
+    scored: ReadonlyMap<Action, number>,
+    mustKill: ReadonlyMap<Action, PlayerId>,
+    heldForCombat: ReadonlySet<Action>,
+    bestScore: number,
+    budget: SearchBudget,
+  ): { readonly action: Action; readonly score: number } | null {
+    this.lastFollowUp = null;
+    if (!this.followUpsOn) return null;
+    const state = view.state;
+    const me = this.playerId;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
+    if (state.zones.shared.stack.length > 0 || state.awaiting !== null) return null;
+    // What's on offer now, by the offer a move comes from: a follow-up from
+    // anything else is something the first move opened up.
+    const offerKey = (a: Action): string =>
+      a.type === "cast-spell"
+        ? `cast:${a.card}`
+        : a.type === "activate-ability"
+          ? `ability:${a.source}:${a.abilityIndex}`
+          : a.type;
+    const offeredNow = new Set(candidates.map(offerKey));
+    // A follow-up can't be a card that was in our library: the rollout knows
+    // which cards a draw finds, and we don't. Followed by what it drew, Read
+    // the Bones at 5 life was worth its 2 life (the scenario "keeps its life
+    // when it is running out").
+    const library = new Set(state.zones.perPlayer[me]?.library ?? []);
+    const known = (b: Action): boolean => {
+      const id =
+        b.type === "cast-spell" || b.type === "play-land"
+          ? b.card
+          : b.type === "activate-ability"
+            ? b.source
+            : undefined;
+      return id === undefined || !library.has(id);
+    };
+    // The cheapest first moves are settled first: what a move leaves to spend
+    // is what a follow-up needs, and a setup move — a rock, a reducer — is
+    // usually cheap. Their own score only breaks ties, so a wide board's cap
+    // doesn't fall back on the score that undersells a setup move.
+    const spends = (a: Action): number =>
+      a.type === "cast-spell" ? this.manaValueOf(state.objects[a.card]?.cardName ?? "") : 0;
+    const firsts = candidates
+      .filter((a) => a.type !== "pass-priority" && scored.has(a) && !mustKill.has(a) && !heldForCombat.has(a))
+      .sort((x, y) => spends(x) - spends(y) || (scored.get(y) ?? 0) - (scored.get(x) ?? 0));
+    // Their own ceiling (`FOLLOW_UP_SIMULATIONS`), counted in simulations as
+    // `timed` counts them: half of it at most on settling, so a wide board
+    // still gets follow-ups scored.
+    const startedAt = budget.simulations;
+    const used = (): number => budget.simulations - startedAt;
+    const settled: { first: Action; board: ControllerView; next: readonly Action[]; opened: number }[] = [];
+    for (const first of firsts) {
+      if (spent(budget) || used() >= FOLLOW_UP_SIMULATIONS / 2) break;
+      budget.left -= 1;
+      const sim = timed(budget, () => simulateSettled(state, this.cards, me, first));
+      if (sim === null) continue;
+      const board = sim.controllerView(me);
+      // Moves that must kill aren't followed up: the kill is read at the end
+      // of their own rollout.
+      const listed = this.listCandidates(board);
+      const next = listed.candidates.filter(
+        (b) => known(b) && !listed.mustKill.has(b) && !listed.heldForCombat.has(b),
+      );
+      if (next.length === 0) continue;
+      const opened = new Set(next.map(offerKey).filter((k) => !offeredNow.has(k))).size;
+      settled.push({ first, board, next, opened });
+    }
+    settled.sort((x, y) => y.opened - x.opened || (scored.get(y.first) ?? 0) - (scored.get(x.first) ?? 0));
+    let found: { action: Action; score: number; then: Action } | null = null;
+    let bar = bestScore;
+    scoring: for (const { first, board, next } of settled) {
+      for (const then of next) {
+        if (spent(budget) || used() >= FOLLOW_UP_SIMULATIONS) break scoring;
+        budget.left -= 1;
+        const value = this.scoreFrom(board, first, then, budget);
+        if (value === null || !(value > bar + TIE)) continue;
+        bar = value;
+        found = { action: first, score: value, then };
+      }
+    }
+    this.lastFollowUp = found;
+    return found;
+  }
+
+  /** `score` for a follow-up `action`, on the board `first` left
+   * (`followUps`): the same rollout and the same crackback check. Traced as
+   * an answer for `first` — playing it is what the pair means — so a replay
+   * of this window (`scenario-fit.ts`) weighs the pair as the search did; an
+   * unsafe pair isn't, the replay having no way to mark it so, and it can
+   * only win where every move was unsafe too. */
+  private scoreFrom(board: ControllerView, first: Action, action: Action, budget: SearchBudget): number | null {
+    const after = timed(budget, () =>
+      simulateAction(
+        board.state,
+        this.cards,
+        action,
+        this.horizon,
+        this.decisionRollout,
+        this.rolloutDecisions ? this.selfInRollouts() : undefined,
+      ),
+    );
+    if (after === null) return null;
+    const value = evaluateState(after, this.cards, this.playerId, this.weights);
+    if (this.tapsIntoCrackback(board.state, action, budget)) return UNSAFE + value;
+    this.trace?.(first, after);
+    return value;
   }
 
   /**

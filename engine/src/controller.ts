@@ -1850,6 +1850,14 @@ export class HeuristicBotController extends AutomaticController {
   /** `source:abilityIndex` -> activations so far, for `activationTurn`. */
   private activations = new Map<string, number>();
   private activationTurn = -1;
+  /** `castableAfterPlay`'s answers on one board, by the land card played: v1's
+   * `bestLand` looks at every land in hand, then v2's land search asked the
+   * same of each land again on the same board — the same copies and steps
+   * twice (2026-10-14). Dropped as each `act` starts, since a game changes
+   * its `GameState` in place; within one `act` the real game stands still
+   * (every look and search runs on copies), and the `state` check keeps a
+   * look at a copy from answering for the real board. */
+  private reachMemo: { readonly state: GameState; readonly byCard: Map<string, LandReach> } | null = null;
   /** How much more an attacker must be worth than the blocker that trades
    * with it before v1 takes the trade (`blockWorth`). The combat
    * simulation's stand-in takes even trades (`CombatRolloutController`). */
@@ -1860,7 +1868,7 @@ export class HeuristicBotController extends AutomaticController {
     this.registry = registry;
   }
 
-  private manaValueOf(cardName: string): number {
+  protected manaValueOf(cardName: string): number {
     if (!this.registry.has(cardName)) return 0;
     return manaValue(parseManaCost(this.registry.get(cardName).manaCost));
   }
@@ -2107,6 +2115,19 @@ export class HeuristicBotController extends AutomaticController {
   /** {@link castableAfter} for a `play-land` action already built — what v2's
    * land search asks of each land it might play. */
   protected castableAfterPlay(view: ControllerView, play: Action): LandReach {
+    if (play.type !== "play-land") return this.lookAfterPlay(view, play);
+    if (this.reachMemo?.state !== view.state) this.reachMemo = { state: view.state, byCard: new Map() };
+    // The face too: a modal double-faced card is a different land either way up.
+    const key = `${play.card}:${play.face ?? ""}`;
+    const known = this.reachMemo.byCard.get(key);
+    if (known !== undefined) return known;
+    const reach = this.lookAfterPlay(view, play);
+    this.reachMemo.byCard.set(key, reach);
+    return reach;
+  }
+
+  /** {@link castableAfterPlay} itself, unremembered. */
+  private lookAfterPlay(view: ControllerView, play: Action): LandReach {
     // The look steps one copy of the game forward — `viewAfter` once, then
     // each further step from the copy before it (`carryOn`) — rather than
     // replaying every step from the real game each time, which was most of
@@ -3657,6 +3678,7 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   act(view: ControllerView): Action {
+    this.reachMemo = null;
     const awaited = answerAwaited(this, view);
     if (awaited !== null) return awaited;
 

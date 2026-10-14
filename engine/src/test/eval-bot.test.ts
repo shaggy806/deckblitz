@@ -10,6 +10,7 @@ import { HeuristicBotController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { PlayerId } from "../primitives.js";
+import type { Action } from "../actions.js";
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -197,7 +198,7 @@ describe("what a decision costs", () => {
     for (let i = 0; i < 3; i += 1) game.debugSpawn("Forest", A, "battlefield");
     const bot = new EvalBotController(A, registry);
     expect(bot.act(viewOf(game))).toEqual({ type: "pass-priority", player: A });
-    expect(bot.lastDecision).toEqual({ kind: "priority", simulations: 0, ms: 0, via: "no candidates", expired: false });
+    expect(bot.lastDecision).toEqual({ kind: "priority", simulations: 0, ms: 0, via: "no candidates", expired: false, cut: false });
   });
 
   it("plays a lone land drop without one either", () => {
@@ -218,8 +219,42 @@ describe("what a decision costs", () => {
     game.debugSpawn("Grizzly Bears", A, "hand");
     const bot = new EvalBotController(A, registry);
     expect(bot.act(viewOf(game)).type).toBe("cast-spell");
-    // Passing and the Bears, each rolled out to the horizon.
-    expect(bot.lastDecision?.simulations).toBe(2);
+    // Passing and the Bears, each rolled out to the horizon, and the Bears
+    // played until they've resolved to look for a follow-up (none: no mana).
+    expect(bot.lastDecision?.simulations).toBe(3);
+    expect(bot.lastFollowUp).toBeNull();
+  });
+});
+
+describe("follow-ups", () => {
+  // Three Forests, and in hand a Sol Ring, a 3/3 for three and a 4/4 for
+  // four. Scored alone, the 3/3 is the best move: the rollouts pass our own
+  // seat, so a Sol Ring is two colourless mana nobody spends. With the step
+  // after it, the Ring casts the 4/4 this turn too.
+  const atMain = (): Game => {
+    const forests = (player: PlayerId) => ({ player, cards: Array<string>(40).fill("Forest") });
+    const game = Game.create({ seed: 4, registry, decks: [forests(A), forests(B)] });
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    // Round 7: past the opening rounds, where the evaluation prices a mana
+    // rock's mana by itself (`earlyMana`) and the Ring would win alone.
+    game.state.turn.number += 12;
+    game.state.zones.perPlayer[A].hand = [];
+    for (let i = 0; i < 3; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    for (const name of ["Sol Ring", "Centaur Courser", "Rumbling Baloth"]) game.debugSpawn(name, A, "hand");
+    return game;
+  };
+  const viewOf = (game: Game): ControllerView => game.controllerView(A);
+  const cardOf = (game: Game, action: Action): string =>
+    action.type === "cast-spell" ? game.state.objects[action.card].cardName : action.type;
+
+  it("plays the move that sets up a better one this turn", () => {
+    const game = atMain();
+    const alone = new EvalBotController(A, registry, { followUps: false });
+    expect(cardOf(game, alone.act(viewOf(game)))).toBe("Centaur Courser");
+    const ahead = new EvalBotController(A, registry);
+    expect(cardOf(game, ahead.act(viewOf(game)))).toBe("Sol Ring");
+    const followed = ahead.lastFollowUp;
+    expect(followed === null ? null : cardOf(game, followed.then)).toBe("Rumbling Baloth");
   });
 });
 
@@ -682,8 +717,8 @@ describe("the acting rollout", () => {
     for (const name of hand) game.debugSpawn(name, A, "hand");
     return game;
   };
-  const choose = (game: Game, rollout: "combat" | "acting"): string => {
-    const action = new EvalBotController(A, registry, { rollout }).act({
+  const choose = (game: Game, rollout: "combat" | "acting", followUps = false): string => {
+    const action = new EvalBotController(A, registry, { rollout, followUps }).act({
       state: game.state,
       player: A,
       legalActions: () => game.legalActions(A),
@@ -697,6 +732,8 @@ describe("the acting rollout", () => {
     // one Bears loses to the Baloth; playing its turn out as v1, it does.
     expect(choose(mainPhaseWith(hand), "combat")).toBe("Rumbling Baloth");
     expect(choose(mainPhaseWith(hand), "acting")).toBe("Grizzly Bears");
+    // The follow-ups see it under either: a Bears, then the other.
+    expect(choose(mainPhaseWith(hand), "combat", true)).toBe("Grizzly Bears");
   });
 
   it("casts now what passing would only cast later", () => {
