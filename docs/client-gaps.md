@@ -83,28 +83,41 @@ card that must be taken (seen live 2026-10-09). The engine could skip the `choos
 the eligible cards are exactly `min` = `max` and there's no order to pick (`Game`'s look-and-choose,
 where the decision is raised); bots and the fuzzer answer it already.
 
-- **The game page's own rendering on a slow laptop** (2026-10-13). The user's i5-6300U laptop ran a blitz at ~42 fps
-  with hundreds of 100-250 ms main-thread hitches (`docs/plans/local-rooms.md`, step 6). A CPU
-  profile of the same game on the dev PC with the page throttled 4x put 38% of main-thread work
-  in `recomputeBoardMiniW`'s board-fit search, started from the last width (`game/boardFit.ts`):
-  busy time 66 s → 39 s. Then two Chrome performance traces (`Tracing`, the devtools.timeline
-  categories, rounds 3-6, 4x throttle) split what was left: the main thread busy 45-54% of the
-  time, rendering about half of that (style 13-16%, layout 7-12%, paint + pre-paint + layerize
-  ~25%), script ~20%; the freezes over 50 ms were script, layout and style, the paint spread
-  over ordinary frames while cards moved (an idle board paints a few times a second). With call
-  stacks: the board-fit search was still half the forced restyles (each probe restyles every
-  tile — `--mini-w-fit` is inherited) and re-ran every frame and render; the hover carry's
-  `elementFromPoint` forced a full layout between boards' writes; and `stack-top-glow` animated
-  `box-shadow` on the main thread most of the game. Fixed the same day: the search is skipped
-  when a board's room and rows are unchanged and the board drawn at its width from the start,
-  each seat's board ref is stable, and the stack glow and the decision banner's pulse animate a
-  pseudo-element's opacity on the compositor. The hover carry's extra layouts came from boards writing between tiles' hit tests, so they should go with the skipped writes — unconfirmed. **Next**: trace again on a quiet machine (the
-  2026-10-13 one was cut short by a game running on the dev PC) and compare with traces A/B; then
-  the rest — the active-seat `background-color` transition on `.app` (~2%), the tile hover
-  `box-shadow` transitions, card flights the compositor refused (`ghost-flight`, reason 4096),
-  `Table` remounting every frame — and only then decide on a Lite setting (Auto/Full/Lite in
-  Settings, auto-switched by measured freezes, not hardware hints: the laptop reports 4 threads
-  and 16 GB).
+- **The game page's own rendering on a slow laptop** (2026-10-13/14). **Waiting on a laptop
+  test.** The user's i5-6300U laptop (2 cores / 4 threads, 16 GB, Chrome 153) ran a local blitz
+  at ~42 fps with ~120 main-thread freezes a minute, the worst 762 ms (`docs/plans/local-rooms.md`,
+  step 6). Fixed since, whatever the laptop shows: the board-fit search starts from the last
+  width (`game/boardFit.ts`) and is skipped when a board's room and rows are unchanged, each
+  seat's board ref is stable, and the stack glow and decision banner's pulse animate a
+  pseudo-element's opacity on the compositor (d7f00bbf).
+
+  What the dev PC can't tell: throttling the page 4x there (CDP `Emulation.setCPUThrottlingRate`)
+  slows only its main thread — the room worker running the bots gets a free core of 14. Traced
+  quiet, old build against new, alternating (2026-10-14): main thread busy 11-19%, 16-27 freezes
+  a minute, worst 93-177 ms, old and new within run-to-run noise. The first traces (45-54% busy)
+  had a game running on the PC and overstated everything, the board fit's share included. So the
+  laptop's stutter is most likely the bots' worker, the page and Chrome's compositor competing
+  for its two cores, which no dev-PC trace models.
+
+  **The test** (on the laptop, a local production build: `git pull`, `npm install`,
+  `npm run build`, `npm start -w server`, then in a second terminal `npm run preview -w client`),
+  the same prompt as step 6, twice: once at `http://localhost:4173/?local=1` (the bots in the
+  page) and once at `http://localhost:4173/?local=0` (the bots on the local server — a separate
+  process, so still the same CPU; for the cleanest split, the deployed site at
+  `https://deckblitz.net/?local=0`, where the bots run on Lightsail). Compare the freezes a minute
+  and the worst (`deckblitzLocal.stats()` covers the local run; for the `?local=0` run, the
+  prompt's own frame-gap/long-task probe). **If the freezes mostly go with `?local=0`**: it's CPU
+  contention — fix the worker's share (pause or yield its search while the page animates, a
+  smaller budget on 2-core machines by measured contention) rather than the visuals. **If they
+  don't**: the page is the cost, and the rest of the list below comes next, then the Lite
+  setting (Auto/Full/Lite in Settings, auto-switched by measured freezes, not hardware hints: the
+  laptop reports 4 threads and 16 GB). The rest: the active-seat `background-color` transition on
+  `.app` (~2%), the tiles' hover `box-shadow` transitions, card flights the compositor refused
+  (`ghost-flight`, reason 4096), `Table` remounting every frame. To trace again (the
+  scripts used weren't kept in the repo): the CDP `Tracing` domain
+  with the devtools.timeline categories (plus `disabled-by-default-devtools.timeline.stack` for
+  forced-layout call stacks) on a `vite preview` build, mapped through a `vite build --sourcemap`
+  copy (trace call frames are 1-based).
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
   Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
   Policy): the required notices and attribution, and where on the site they go.
