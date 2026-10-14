@@ -335,8 +335,13 @@ export const TOKEN_NAMES: readonly string[] = [
   "Zombie Knight Token",
   "Zombie Rogue Token",
   "Zombie Token",
+  "Zombie Token (Crowded Crypt)",
+  "Zombie Token (Curse of the Restless Dead)",
   "Zombie Token (Geralf, Visionary Stitcher)",
+  "Zombie Token (Ghoulish Procession)",
+  "Zombie Token (Jadar, Ghoulcaller of Nephalia)",
   "Zombie Token (On Wings of Gold)",
+  "Zombie Token (Wilhelt, the Rotcleaver)",
   "Zombie Warrior Token",
 ];
 

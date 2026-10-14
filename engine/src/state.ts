@@ -2808,6 +2808,9 @@ export interface DelayedDamageWatch {
 
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
+  /** Or the next ability its controller activates with {X} in its
+   * activation cost — `DelayedNextSpell.orNextAbility`. */
+  readonly orNextAbility?: { readonly xInCost: true };
   /** The turn it was made on: it lapses as the next begins. */
   readonly turn: number;
 }

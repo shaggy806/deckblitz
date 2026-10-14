@@ -263,6 +263,7 @@ import _poolReturnToNature from "../pool/return-to-nature.js";
 import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
+import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
@@ -674,6 +675,7 @@ const shard: CardShard = {
     _poolRevokeExistence,
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
+    _poolRingsOfBrighthearth,
     _poolRoarOfChallenge,
     _poolRoguesGloves,
     _poolRootbornDefenses,

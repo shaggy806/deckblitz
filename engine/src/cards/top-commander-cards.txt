@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3613 already implemented / 1387 missing (marks refreshed 2026-10-14)
+3620 already implemented / 1380 missing (marks refreshed 2026-10-14)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1328,7 +1328,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1335  Sword of Fire and Ice                    {3}              Artifact — Equipment
 [ ]  1336  Baral, Chief of Compliance               {1}{U}           Legendary Creature — Human Wizard
 [ ]  1337  Secret Tunnel                            {0}              Land — Cave
-[ ]  1338  Jadar, Ghoulcaller of Nephalia           {1}{B}           Legendary Creature — Human Wizard
+[x]  1338  Jadar, Ghoulcaller of Nephalia           {1}{B}           Legendary Creature — Human Wizard
 [x]  1339  Shimmer Myr                              {3}              Artifact Creature — Myr
 [x]  1340  Rootborn Defenses                        {2}{W}           Instant
 [x]  1341  Ulamog, the Ceaseless Hunger             {10}             Legendary Creature — Eldrazi
@@ -1414,7 +1414,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1421  Altar of the Brood                       {1}              Artifact
 [x]  1422  Ghostly Pilferer                         {1}{U}           Creature — Spirit Rogue
 [x]  1423  Contagion Clasp                          {2}              Artifact
-[ ]  1424  Rings of Brighthearth                    {3}              Artifact
+[x]  1424  Rings of Brighthearth                    {3}              Artifact
 [x]  1425  Cathar Commando                          {1}{W}           Creature — Human Soldier
 [x]  1426  Boltwave                                 {R}              Sorcery
 [x]  1427  Imperious Perfect                        {2}{G}           Creature — Elf Warrior
@@ -2417,7 +2417,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2424  Tinder Wall                              {G}              Creature — Plant Wall
 [x]  2425  God-Eternal Oketra                       {3}{W}{W}        Legendary Creature — Zombie God
 [ ]  2426  Not of This World                        {7}              Kindred Instant — Eldrazi
-[ ]  2427  Crowded Crypt                            {2}{B}           Artifact
+[x]  2427  Crowded Crypt                            {2}{B}           Artifact
 [x]  2428  Abundant Growth                          {G}              Enchantment — Aura
 [ ]  2429  Force of Despair                         {1}{B}{B}        Instant
 [ ]  2430  Winds of Change                          {R}              Sorcery
@@ -2432,7 +2432,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2439  Villainous Wealth                        {X}{B}{G}{U}     Sorcery
 [x]  2440  Faerie Seer                              {U}              Creature — Faerie Wizard
 [ ]  2441  Odric, Master Tactician                  {2}{W}{W}        Legendary Creature — Human Soldier
-[ ]  2442  Harsh Mentor                             {1}{R}           Creature — Human Cleric
+[x]  2442  Harsh Mentor                             {1}{R}           Creature — Human Cleric
 [x]  2443  Harvest Season                           {2}{G}           Sorcery
 [x]  2444  Mogis, God of Slaughter                  {2}{B}{R}        Legendary Enchantment Creature — God
 [x]  2445  The Jolly Balloon Man                    {1}{R}{W}        Legendary Creature — Human Clown
@@ -2447,7 +2447,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2454  Collector Ouphe                          {1}{G}           Creature — Ouphe
 [x]  2455  Molten Echoes                            {2}{R}{R}        Enchantment
 [x]  2456  Pyrohemia                                {2}{R}{R}        Enchantment
-[ ]  2457  Runic Armasaur                           {1}{G}{G}        Creature — Dinosaur
+[x]  2457  Runic Armasaur                           {1}{G}{G}        Creature — Dinosaur
 [ ]  2458  Pantlaza, Sun-Favored                    {2}{R}{G}{W}     Legendary Creature — Dinosaur
 [x]  2459  Yarok, the Desecrated                    {2}{B}{G}{U}     Legendary Creature — Elemental Horror
 [x]  2460  Atraxa, Praetors' Voice                  {G}{W}{U}{B}     Legendary Creature — Phyrexian Angel Horror
@@ -2742,7 +2742,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2749  Cryptothrall                             {4}              Artifact Creature — Construct
 [x]  2750  Traumatize                               {3}{U}{U}        Sorcery
 [x]  2751  Heartless Summoning                      {1}{B}           Enchantment
-[ ]  2752  Wilhelt, the Rotcleaver                  {2}{U}{B}        Legendary Creature — Zombie Warrior
+[x]  2752  Wilhelt, the Rotcleaver                  {2}{U}{B}        Legendary Creature — Zombie Warrior
 [ ]  2753  Virtue of Strength // Garenbrig Growth   {5}{G}{G} // {G} Enchantment // Sorcery — Adventure
 [ ]  2754  Flesh Duplicate                          {U}{U}           Creature — Shapeshifter Rebel
 [ ]  2755  Charred Foyer // Warped Space            {3}{R} // {4}{R}{R} Enchantment — Room // Enchantment — Room
@@ -3664,7 +3664,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3671  Skullwinder                              {2}{G}           Creature — Snake
 [x]  3672  Ral, Storm Conduit                       {2}{U}{R}        Legendary Planeswalker — Ral
 [ ]  3673  Charix, the Raging Isle                  {2}{U}{U}        Legendary Creature — Leviathan Crab
-[ ]  3674  Satoru Umezawa                           {1}{U}{B}        Legendary Creature — Human Ninja
+[x]  3674  Satoru Umezawa                           {1}{U}{B}        Legendary Creature — Human Ninja
 [x]  3675  Garna, Bloodfist of Keld                 {1}{B}{R}{R}     Legendary Creature — Human Berserker
 [x]  3676  Aether Gale                              {3}{U}{U}        Sorcery
 [x]  3677  Village Bell-Ringer                      {2}{W}           Creature — Human Scout

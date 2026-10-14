@@ -417,6 +417,7 @@ import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js"
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensTarmogoyfToken from "../tokens/tarmogoyf-token.js";
 import _tokensWallTokenInvisibleWoman from "../tokens/wall-token-invisible-woman.js";
+import _tokensZombieTokenJadarGhoulcallerOfNephalia from "../tokens/zombie-token-jadar-ghoulcaller-of-nephalia.js";
 
 const shard: CardShard = {
   pool: [
@@ -836,6 +837,7 @@ const shard: CardShard = {
     _tokensRabbitToken,
     _tokensTarmogoyfToken,
     _tokensWallTokenInvisibleWoman,
+    _tokensZombieTokenJadarGhoulcallerOfNephalia,
   ],
 };
 

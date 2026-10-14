@@ -135,6 +135,7 @@ import _poolGeothermalBog from "../pool/geothermal-bog.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
 import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
+import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
@@ -508,6 +509,7 @@ const shard: CardShard = {
     _poolGhostWarden,
     _poolGiantAdephage,
     _poolGiantDustwasp,
+    _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
     _poolGloriousDecay,

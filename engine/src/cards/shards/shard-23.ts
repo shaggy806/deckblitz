@@ -74,6 +74,7 @@ import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
+import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
@@ -428,6 +429,7 @@ const shard: CardShard = {
     _poolCoordinatedCharge,
     _poolCostumeCloset,
     _poolCrossbowAmbush,
+    _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
     _poolDaringEscape,
     _poolDaringThunderThief,

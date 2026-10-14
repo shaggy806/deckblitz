@@ -16,7 +16,7 @@ None open.
 
 ## Commander gap (the current priority)
 
-**416 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**419 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
@@ -27,11 +27,10 @@ that one card is the reason the deck exists. Live numbers for everything below c
 - **Build down the greedy order.** `cmdrs:gaps` ranks every missing engine feature over
   `engine/src/cards/top-commanders-gaps.json`. When a feature lands, add its key to that file's
   `built` array and author the commanders it unblocks in the same commit. The next ones,
-  engine-only, with the commanders each fully unblocks: `trigger:activates-ability` (+2), then
-  `replacement:as-transforms`, `keyword:decayed`, `trigger:bends`,
-  `trigger:you-tap-opponent-creature`, `keyword:bloodthirst`, `effect:amount-aggregate`,
-  `effect:repeat-process`, `effect:put-commanders-onto-battlefield`, `keyword:freerunning`,
-  `replacement:mana-pool-emptying` and `static:mana-pool-reads` (+1 each). Lynde, Cheerful
+  engine-only, with the commanders each fully unblocks (+1 each): `replacement:as-transforms`,
+  `trigger:bends`, `trigger:you-tap-opponent-creature`, `keyword:bloodthirst`,
+  `effect:amount-aggregate`, `effect:repeat-process`, `effect:put-commanders-onto-battlefield`,
+  `keyword:freerunning`, `replacement:mana-pool-emptying`, `static:mana-pool-reads`. Lynde, Cheerful
   Tormentor also waits on `effect:curse-attach-player` (a Curse put onto the battlefield
   attached to a player, or moved to an opponent).
 - **Most-needed features overall** (commanders needing each): `cost:sacrifice-multiple`,
@@ -125,7 +124,6 @@ there and move this line to `COMPLETED.md`.
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
 - **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).
-- **"Whenever you activate an ability"** (Rings of Brighthearth).
 - **An O-Ring's return is a triggered ability, not rule 610.3's one-shot effect.**
 - **End-step token removal resolves without the stack** (603.7, 701.21a).
 - **Replacement order is chosen for the affected player, never asked** (616.1).

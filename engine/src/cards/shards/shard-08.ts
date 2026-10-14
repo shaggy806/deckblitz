@@ -153,6 +153,7 @@ import _poolGrixisSlavedriver from "../pool/grixis-slavedriver.js";
 import _poolGuildThief from "../pool/guild-thief.js";
 import _poolHagiMob from "../pool/hagi-mob.js";
 import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
+import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvesttideAssailant from "../pool/harvesttide-assailant.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
 import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
@@ -399,6 +400,7 @@ import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
 import _tokensWolfToken from "../tokens/wolf-token.js";
+import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-curse-of-the-restless-dead.js";
 
 const shard: CardShard = {
   pool: [
@@ -552,6 +554,7 @@ const shard: CardShard = {
     _poolGuildThief,
     _poolHagiMob,
     _poolHarmattanEfreet,
+    _poolHarshMentor,
     _poolHarvesttideAssailant,
     _poolHeatShimmer,
     _poolHierophantsChalice,
@@ -800,6 +803,7 @@ const shard: CardShard = {
     _tokensThopterToken,
     _tokensWarriorToken,
     _tokensWolfToken,
+    _tokensZombieTokenCurseOfTheRestlessDead,
   ],
 };
 

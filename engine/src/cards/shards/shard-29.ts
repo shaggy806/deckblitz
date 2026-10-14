@@ -362,6 +362,7 @@ import _tokensRatToken from "../tokens/rat-token.js";
 import _tokensSaprolingToken from "../tokens/saproling-token.js";
 import _tokensSpawnToken from "../tokens/spawn-token.js";
 import _tokensWallTokenTheFantasticFour from "../tokens/wall-token-the-fantastic-four.js";
+import _tokensZombieTokenGhoulishProcession from "../tokens/zombie-token-ghoulish-procession.js";
 
 const shard: CardShard = {
   pool: [
@@ -726,6 +727,7 @@ const shard: CardShard = {
     _tokensSaprolingToken,
     _tokensSpawnToken,
     _tokensWallTokenTheFantasticFour,
+    _tokensZombieTokenGhoulishProcession,
   ],
 };
 

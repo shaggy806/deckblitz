@@ -180,6 +180,13 @@ export interface DelayedLeaves {
  * spell is its trigger object. */
 export interface DelayedNextSpell {
   readonly nextSpell: CardFilter;
+  /** "…**or activate an ability with {X} in its activation cost** this
+   * turn" (Magus Lucea Kane): whichever comes first fires it, and that
+   * ability is the trigger object (a `copy-ability` of `"trigger-ability"`
+   * copies it). An activated ability only, never a mana ability — one that
+   * uses the stack (the rulings: a triggered ability asking for {X} isn't
+   * one, nor is a cost that says X without the {X} symbol). */
+  readonly orNextAbility?: { readonly xInCost: true };
 }
 
 /** "Whenever **that creature** deals combat damage to a player this turn"
@@ -7833,7 +7840,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (typeof spec.at === "object" && "nextSpell" in spec.at) {
-        ctx.delayTrigger({ nextSpell: spec.at.nextSpell }, spec.effect, spec.text, controller);
+        ctx.delayTrigger(
+          {
+            nextSpell: spec.at.nextSpell,
+            ...(spec.at.orNextAbility !== undefined ? { orNextAbility: spec.at.orNextAbility } : {}),
+          },
+          spec.effect,
+          spec.text,
+          controller,
+        );
         return;
       }
       if (typeof spec.at === "object") {

@@ -1076,7 +1076,8 @@
     {
       "name": "Gisa, Glorious Resurrector",
       "needs": [
-        "keyword:decayed"
+        "keyword:decayed",
+        "replacement:exile-instead-linked"
       ],
       "why": "decayed not modeled, and no 'exiled with Gisa' link from the die-to-exile replacement"
     },

@@ -189,6 +189,7 @@ import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
 import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
+import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
@@ -578,6 +579,7 @@ const shard: CardShard = {
     _poolLumengridWarden,
     _poolLuxCannon,
     _poolMagmaw,
+    _poolMagusLuceaKane,
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,

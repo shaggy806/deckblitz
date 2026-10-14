@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-416 already implemented / 84 missing
+419 already implemented / 81 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -57,7 +57,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   51  Caesar, Legion's Emperor                       22746 decks  {1}{R}{W}{B}     Legendary Creature — Human Soldier
 [x]   52  Arabella, Abandoned Doll                       22645 decks  {R}{W}           Legendary Artifact Creature — Toy
 [ ]   53  Breya, Etherium Shaper                         22511 decks  {W}{U}{B}{R}     Legendary Artifact Creature — Human
-[ ]   54  Wilhelt, the Rotcleaver                        22477 decks  {2}{U}{B}        Legendary Creature — Zombie Warrior
+[x]   54  Wilhelt, the Rotcleaver                        22477 decks  {2}{U}{B}        Legendary Creature — Zombie Warrior
 [x]   55  Maralen, Fae Ascendant                         22471 decks  {2}{B}{G}{U}     Legendary Creature — Elf Faerie Noble
 [x]   56  Oloro, Ageless Ascetic                         22360 decks  {3}{W}{U}{B}     Legendary Creature — Giant Soldier
 [x]   57  Meren of Clan Nel Toth                         22233 decks  {2}{B}{G}        Legendary Creature — Human Shaman
@@ -141,14 +141,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  135  Leonardo, the Balance                          15298 decks  {3}{W}           Legendary Creature — Mutant Ninja Turtle
 [x]  136  Marina Vendrell                                15239 decks  {W}{U}{B}{R}{G}  Legendary Creature — Human Warlock
 [x]  137  Éowyn, Shieldmaiden                            15206 decks  {2}{U}{R}{W}     Legendary Creature — Human Knight
-[ ]  138  Magus Lucea Kane                               15193 decks  {1}{G}{U}{R}     Legendary Creature — Human Tyranid Wizard
+[x]  138  Magus Lucea Kane                               15193 decks  {1}{G}{U}{R}     Legendary Creature — Human Tyranid Wizard
 [x]  139  Brago, King Eternal                            15135 decks  {2}{W}{U}        Legendary Creature — Spirit Noble
 [x]  140  Lord of the Nazgûl                             15118 decks  {3}{U}{B}        Legendary Creature — Wraith Noble
 [x]  141  Iroh, Grand Lotus                              14966 decks  {3}{G}{U}{R}     Legendary Creature — Human Noble Ally
 [x]  142  Satya, Aetherflux Genius                       14905 decks  {1}{U}{R}{W}     Legendary Creature — Human Artificer
 [x]  143  Lightning, Army of One                         14834 decks  {1}{R}{W}        Legendary Creature — Human Soldier
 [x]  144  Kibo, Uktabi Prince                            14790 decks  {2}{G}           Legendary Creature — Monkey Noble
-[ ]  145  Satoru Umezawa                                 14657 decks  {1}{U}{B}        Legendary Creature — Human Ninja
+[x]  145  Satoru Umezawa                                 14657 decks  {1}{U}{B}        Legendary Creature — Human Ninja
 [x]  146  Eshki, Temur's Roar                            14510 decks  {G}{U}{R}        Legendary Creature — Human Warrior
 [x]  147  Inalla, Archmage Ritualist                     14464 decks  {2}{U}{B}{R}     Legendary Creature — Human Wizard
 [x]  148  Prosper, Tome-Bound                            14312 decks  {2}{B}{R}        Legendary Creature — Tiefling Warlock

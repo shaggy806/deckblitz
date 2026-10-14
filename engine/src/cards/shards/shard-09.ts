@@ -385,6 +385,7 @@ import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
+import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
 
 const shard: CardShard = {
   pool: [
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _tokensMowu,
     _tokensTreasureToken,
     _tokensZombieKnightToken,
+    _tokensZombieTokenCrowdedCrypt,
   ],
 };
 

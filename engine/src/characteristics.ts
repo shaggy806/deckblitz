@@ -998,14 +998,15 @@ export interface Characteristics {
  * Keyword counters (rule 122.1b): a permanent with a flying, lifelink,
  * vigilance… counter on it has that keyword, in layer 6 alongside every other
  * ability-adding effect. The counter's kind is the keyword's own name here
- * (`"first-strike"`, not "first strike"). Decayed, exalted and shadow
- * counters aren't among them: the engine has no such keywords.
+ * (`"first-strike"`, not "first strike"). Exalted counters aren't among
+ * them: the engine has no such keyword.
  */
 export const KEYWORD_COUNTERS: ReadonlySet<Keyword> = new Set<Keyword>([
   "flying",
   "first-strike",
   "double-strike",
   "deathtouch",
+  "decayed",
   "haste",
   "hexproof",
   "indestructible",
@@ -3089,6 +3090,10 @@ function computeCharacteristicsUncached(
   // form asks about the final values.
   const damageByToughness =
     byToughness === "always" || (byToughness === "if-toughness-greater" && toughness > power);
+
+  // Decayed's static half (rule 702.147a): "This creature can't block" — for
+  // as long as it has the keyword, however it got it.
+  if (keywords.has("decayed")) restrictions.add("cant-block");
 
   return {
     power,

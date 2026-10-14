@@ -242,6 +242,7 @@ import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
+import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScrubland from "../pool/scrubland.js";
@@ -584,6 +585,7 @@ const shard: CardShard = {
     _poolRunawayBoulder,
     _poolRustwingFalcon,
     _poolSandstoneBridge,
+    _poolSatoruUmezawa,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
     _poolScrubland,

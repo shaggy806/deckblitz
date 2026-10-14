@@ -61,6 +61,7 @@ import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
 import _poolCracklingDoom from "../pool/crackling-doom.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
+import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
@@ -420,6 +421,7 @@ const shard: CardShard = {
     _poolCracklingDoom,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
+    _poolCurseOfTheRestlessDead,
     _poolDauthiJackal,
     _poolDecreeOfPain,
     _poolDinaEssenceBrewer,

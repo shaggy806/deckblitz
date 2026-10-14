@@ -128,6 +128,7 @@ import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
 import _poolGhirapurOsprey from "../pool/ghirapur-osprey.js";
 import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
+import _poolGhoulishProcession from "../pool/ghoulish-procession.js";
 import _poolGiantStrength from "../pool/giant-strength.js";
 import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
@@ -549,6 +550,7 @@ const shard: CardShard = {
     _poolGethsGrimoire,
     _poolGhirapurOsprey,
     _poolGhostlyDancers,
+    _poolGhoulishProcession,
     _poolGiantStrength,
     _poolGiftOfTheViper,
     _poolGildedGoose,

@@ -759,6 +759,21 @@ in `git log`.
 - **Phasing** (`mechanic:phasing`, 2026-10-13, B70) — rule 702.26, phased-out
   permanents kept in `GameState.phasedOut`, with Teferi's Protection's
   player-protection and life-can't-change (`phasing.test.ts`). 16 of its 18 cards.
+- **"Whenever a player activates an ability"** (`trigger:activates-ability`,
+  2026-10-14) — `activates-ability` with `who: "you" | "opponent"` and
+  `ninjutsu`/`loyalty`/`source` narrowing, `grantsNinjutsuInHand`, and a
+  `nextSpell` delayed trigger's `orNextAbility` for an {X} activation
+  (`commanders-activates-ability.test.ts`). Satoru Umezawa, Magus Lucea Kane,
+  Harsh Mentor, Runic Armasaur, Ajani Unrelenting, Way of the Paradox, Gideon
+  the Oathless, Rings of Brighthearth. Elrond, Moon-Reader waits on announced
+  mana abilities; Way of the Mind Sculptor on "if you removed two or more
+  loyalty counters"; Neerdiv on "an ability of a card in your graveyard".
+- **Decayed** (`keyword:decayed`, 2026-10-14) — rule 702.147a: the keyword's
+  `cant-block` restriction and its own attack trigger (`DECAYED_TRIGGER`),
+  decayed counters (122.1b) (`decayed.test.ts`). Wilhelt, the Rotcleaver,
+  Crowded Crypt, Ghoulish Procession, Curse of the Restless Dead, Jadar,
+  Ghoulcaller of Nephalia. Gisa waits on a linked exile replacement
+  (`replacement:exile-instead-linked`), Rot-Curse Rakshasa on X targets.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

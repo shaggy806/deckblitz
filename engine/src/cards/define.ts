@@ -172,6 +172,13 @@ export type Keyword =
    * phased out under that player phases in) — `Game.phasingStep`. Read off
    * the permanent's current keywords; several are redundant (702.26p). */
   | "phasing"
+  /** Decayed (rule 702.147a) — "This creature can't block" (a `cant-block`
+   * restriction while it has the keyword) and "When this creature attacks,
+   * sacrifice it at end of combat", a triggered ability the keyword itself
+   * carries (`Game.effectiveTriggeredEntries` lists `DECAYED_TRIGGER` for
+   * it), so a creature that gains decayed (Gisa, Glorious Resurrector) has
+   * it too, and one that loses it doesn't. */
+  | "decayed"
   /** Flanking (rule 702.25) — a triggered ability: the keyword is what a
    * "creature without flanking" asks about, and the `flanking()` card helper
    * is the trigger itself, so a card lists both (Sidar Kondo of Jamuraa). */
@@ -1447,6 +1454,14 @@ export interface StaticAbility {
    * warped one; a card with warp of its own uses its own.
    */
   readonly grantsWarpInHand?: { readonly cost: string; readonly filter: CardFilter };
+  /**
+   * Cards matching `filter` in this permanent's controller's hand have
+   * ninjutsu for `cost` (rule 702.49) — Satoru Umezawa's "each creature card
+   * in your hand has ninjutsu {2}{U}{B}". The ability is the `ninjutsu()`
+   * helper's, listed after the card's own (a card with ninjutsu of its own
+   * has both), so a "ninjutsu abilities you activate" static or trigger sees it.
+   */
+  readonly grantsNinjutsuInHand?: { readonly cost: string; readonly filter: CardFilter };
   /**
    * The creature spells this permanent's controller casts that match
    * `filter` have blitz, its cost equal to their mana cost (rule 702.152a —

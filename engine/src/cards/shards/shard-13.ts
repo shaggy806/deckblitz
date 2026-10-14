@@ -11,6 +11,7 @@ import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
 import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
+import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
 import _poolAltarsLight from "../pool/altars-light.js";
@@ -397,6 +398,7 @@ const shard: CardShard = {
     _poolAfterlifeFromTheLoam,
     _poolAgentOfHorizons,
     _poolAgentOfKotis,
+    _poolAjaniUnrelenting,
     _poolAkroanMastiff,
     _poolAlandraSkyDreamer,
     _poolAltarsLight,

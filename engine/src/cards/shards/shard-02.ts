@@ -162,6 +162,7 @@ import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
 import _poolJackdaw from "../pool/jackdaw.js";
+import _poolJadarGhoulcallerOfNephalia from "../pool/jadar-ghoulcaller-of-nephalia.js";
 import _poolJamuraanLion from "../pool/jamuraan-lion.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
 import _poolJeskaiBrushmaster from "../pool/jeskai-brushmaster.js";
@@ -534,6 +535,7 @@ const shard: CardShard = {
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
     _poolJackdaw,
+    _poolJadarGhoulcallerOfNephalia,
     _poolJamuraanLion,
     _poolJawsOfDefeat,
     _poolJeskaiBrushmaster,

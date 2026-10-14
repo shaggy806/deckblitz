@@ -78,9 +78,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   boxes, 612.5, is built). ROADMAP's Phase 10 deferred these as large or niche. None of them
   blocks ordinary Commander play. The alt-cast long tail left by Phase 6 (retrace, Warp,
   Bestow, Prototype, …) is in AUTHORING §15 and the limitation ledger.
-- **"Whenever you activate an ability" (Rings of Brighthearth).** `activates-ability` offers
-  only `who: "attached"`. Cycling's draw is on the stack now (an ability object sourced from the
-  cycled card), so a cycling activation would be one more for it to see.
 - **An O-Ring's return is a triggered ability, not rule 610.3's one-shot effect.** "Exile …
   until ~ leaves the battlefield" returns the card "immediately after" (610.3; Grasp of Fate's
   ruling: "Nothing happens between the two events, including state-based actions"), but the

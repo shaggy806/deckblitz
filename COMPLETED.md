@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Decayed** (`keyword:decayed`, rule 702.147): Wilhelt, the Rotcleaver, with Crowded Crypt,
+  Ghoulish Procession, Curse of the Restless Dead and Jadar, Ghoulcaller of Nephalia
+  (2026-10-14).
+- **"Whenever a player activates an ability"** (`trigger:activates-ability`): Satoru Umezawa
+  (and ninjutsu granted to cards in hand) and Magus Lucea Kane (copying the next {X} spell or
+  ability), with Harsh Mentor, Runic Armasaur, Ajani Unrelenting, Way of the Paradox, Gideon
+  the Oathless and Rings of Brighthearth, which closes the engine gap "Whenever you activate
+  an ability" (2026-10-14).
 - **Speed** (`mechanic:speed`, rule 702.179) with the player panel showing it and its inherent
   trigger drawn on the stack: Mendicant Core, Vnwxt, the four Raceways, Howlsquad Heavy
   (2026-10-12, a7789807).

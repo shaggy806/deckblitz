@@ -947,9 +947,10 @@
     {
       "name": "Rot-Curse Rakshasa",
       "needs": [
-        "new:decayed"
+        "new:decayed",
+        "decision:variable-target-count"
       ],
-      "why": "decayed keyword/counter not modeled"
+      "why": "decayed keyword/counter not modeled; renew's 'each of X target creatures'"
     },
     {
       "name": "Emet-Selch, Unsundered",

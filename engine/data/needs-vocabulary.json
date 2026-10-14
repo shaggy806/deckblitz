@@ -5049,6 +5049,10 @@
    "family": "effect:amount-new-variants",
    "example": "Blitzball Stadium: An EffectAmount for the number of different kinds of counters on an object ('draw a card for each kind of counter on it' — Blitzball Stadium)."
   },
+  "replacement:exile-instead-linked": {
+   "family": "replacement:new-event-replacements",
+   "example": "Gisa, Glorious Resurrector: a would-die exile replacement whose exiled cards are linked to its source ('put all creature cards exiled with Gisa onto the battlefield'), which the would-be-put-into-graveyard replacement doesn't record."
+  },
   "replacement:gain-life-becomes-loss": {
    "family": "replacement:new-event-replacements",
    "example": "Tainted Remedy: A would-gain-life replacement that makes the player lose that much life instead (Tainted Remedy: 'if an opponent would gain life, that player loses that much life instead')."

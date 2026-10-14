@@ -252,6 +252,7 @@ import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
 import _poolRottingRegisaur from "../pool/rotting-regisaur.js";
+import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
@@ -355,6 +356,7 @@ import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
 import _poolWildIdea from "../pool/wild-idea.js";
 import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
+import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
@@ -373,6 +375,7 @@ import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-
 import _tokensVampireToken from "../tokens/vampire-token.js";
 import _tokensWurmToken66 from "../tokens/wurm-token-6-6.js";
 import _tokensXXDinosaurTokenTrample from "../tokens/x-x-dinosaur-token-trample.js";
+import _tokensZombieTokenWilheltTheRotcleaver from "../tokens/zombie-token-wilhelt-the-rotcleaver.js";
 
 const shard: CardShard = {
   pool: [
@@ -625,6 +628,7 @@ const shard: CardShard = {
     _poolRoseRoomTreasurer,
     _poolRottingLegion,
     _poolRottingRegisaur,
+    _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
     _poolRydiaSummonerOfMist,
@@ -728,6 +732,7 @@ const shard: CardShard = {
     _poolWildIdea,
     _poolWildernessReclamation,
     _poolWildsize,
+    _poolWilheltTheRotcleaver,
     _poolWitchBlessedMeadow,
     _poolWitheringCurse,
     _poolWreckingBeast,
@@ -748,6 +753,7 @@ const shard: CardShard = {
     _tokensVampireToken,
     _tokensWurmToken66,
     _tokensXXDinosaurTokenTrample,
+    _tokensZombieTokenWilheltTheRotcleaver,
   ],
 };
 

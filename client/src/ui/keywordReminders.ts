@@ -65,6 +65,7 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Infect',
     text: 'Deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.',
   },
+  decayed: { name: 'Decayed', text: "Can't block. When it attacks, it's sacrificed at end of combat." },
   wither: { name: 'Wither', text: 'Deals damage to creatures in the form of -1/-1 counters.' },
   phasing: {
     name: 'Phasing',

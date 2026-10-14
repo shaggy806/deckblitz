@@ -429,6 +429,18 @@ steps begins, before anything untaps, it phases out, or back in
 (`Game.phasingStep`); read off its current keywords, so one granted it phases
 too. Phasing out as an effect is the `phase-out` effect (§6).
 
+**Decayed** (rule 702.147a): `decayed` — "this creature can't block" (a
+`cant-block` restriction while it has the keyword) and "when this creature
+attacks, sacrifice it at end of combat", a trigger the keyword carries: a
+decayed token is `keywords: ["decayed"]` and nothing else. One that gains it
+by an effect (`grant-keyword`, Gisa's "they gain decayed") or a decayed
+counter (rule 122.1b) has both halves; a **static** granting decayed isn't
+read for the trigger (no card does it yet — `Game.effectiveTriggeredEntries`
+would need to look). "If it didn't have decayed" on a dies trigger is the
+filter's `notKeyword: "decayed"` (Wilhelt, the Rotcleaver), read as it last
+existed; "if you control no creatures with decayed" a `controls` condition
+with `keyword: "decayed"` (Jadar). `decayed.test.ts`.
+
 **Riot** (rule 702.136): `riot` — the engine asks "+1/+1 counter or haste" as
 the permanent is about to enter (a fixed-menu `choose-creature-type` with
 `riot`), puts the counter on as it enters or gives it haste for as long as it
@@ -922,7 +934,16 @@ random order" is `at: { nextSpell: {} }` with a `reveal-until` (`exile: true`,
 a `manaValue` compare on `{ amount: { manaValueOf: "trigger-object" } }`,
 `rest: "bottom-random"`, `keepFound: true`) whose `then` is `{ kind:
 "allow-cast-from-exile", target: 0, free: true }` — "until end of turn, you may
-cast that card" (`free`: only without paying its mana cost).
+cast that card" (`free`: only without paying its mana cost). `orNextAbility: {
+xInCost: true }` also fires it on its controller's next activated ability with
+{X} in its activation cost, whichever comes first, the ability its trigger
+object — Magus Lucea Kane's "when you next cast a spell with {X} in its mana
+cost or activate an ability with {X} in its activation cost this turn, copy
+that spell or ability" is `at: { nextSpell: { xInManaCost: true },
+orNextAbility: { xInCost: true } }` over a `sequence` of `copy-spell` of
+`"trigger-spell"` and `copy-ability` of `"trigger-ability"` (each finds nothing
+when the trigger object is the other kind), set up by its mana ability's
+`add-mana` `also`.
 
 **"That card."** A delayed trigger carries the creating ability's trigger
 object: Shirei, Shizo's Caretaker's "whenever a creature you control with power
@@ -2546,7 +2567,8 @@ triggered: [
 | `plays-land` | `who`, `otherOnly?` | a player **plays** a land — the special action (rule 305.1; Burgeoning, Fastbond), not a land put onto the battlefield (that's an `enters-battlefield` filtered to lands). `otherOnly` is City of Traitors' "when you play **another** land": its own play doesn't count, though it's on the battlefield by the time that play is announced. |
 | `plays-card` | `who`, `from?`, `filter?` | a player **plays a card** — plays a land *or* casts a spell, since "play" covers both (Prosper, Tome-Bound's "whenever you play a card **from exile**" is `{ on: "plays-card", who: "you", from: "exile" }`, which a land played off an impulse exile fires as well as a foretold card cast from there). `from` is the zone recorded on the `land-played` / `spell-cast` event. `filter` asks about the card played, as the land on the battlefield or the spell on the stack (Rendmaw, Creaking Nest's "a card with two or more card types" is `{ cardTypeCount: { op: "gte", n: 2 } }`). For lands alone, `plays-land`. |
 | `this-cast` | — | the spell carrying this ability is cast (cascade, storm). Cascade's free cast is a whole cast, offered as a `cast-now` (modes, kicker, targets, or decline), the spell needing a lesser mana value than the cascade spell's (rule 702.85a). |
-| `activates-ability` | `who: "attached"` | an ability of the Equipment's or Aura's host is activated onto the stack — never a mana ability, which doesn't use it (rule 605.3b) — the host still attached once the costs are paid, so one sacrificed to pay them isn't (Illusionist's Bracers' rulings). The trigger object is the ability on the stack: `copy-ability`'s `"trigger-ability"` copies it, as it last was there if it's been countered (Battlemage's Bracers puts that in a `may` with `cost: "{1}"`). "Whenever **you** activate an ability" (Rings of Brighthearth) isn't offered yet; a cycling activation is one now (its draw uses the stack). |
+| `activates-ability` | `who: "attached"` | an ability of the Equipment's or Aura's host is activated onto the stack — never a mana ability, which doesn't use it (rule 605.3b) — the host still attached once the costs are paid, so one sacrificed to pay them isn't (Illusionist's Bracers' rulings). The trigger object is the ability on the stack: `copy-ability`'s `"trigger-ability"` copies it, as it last was there if it's been countered (Battlemage's Bracers puts that in a `may` with `cost: "{1}"`). |
+| `activates-ability` | `who: "you" \| "opponent"`, `ninjutsu?`, `loyalty?`, `source?` | an ability its controller (or an opponent) activates onto the stack, from any zone — cycling's too; never a mana ability. `"trigger-player"` is that player, and the trigger object the ability. `ninjutsu: true` is a ninjutsu ability, a granted one included (Satoru Umezawa); `loyalty: true` a loyalty ability (Ajani Unrelenting's Cadet, which enters before the loyalty ability resolves; Gideon the Oathless); `source` a permanent's ability whose source matches as it's activated — Harsh Mentor's "an ability of an artifact, creature, or land on the battlefield" is `{ typesAnyOf: ["artifact", "creature", "land"] }`, which leaves out a card's in a hand or graveyard and a Vehicle being crewed (not a creature yet). Rings of Brighthearth: `who: "you"`, a `may` with `cost: "{2}"` over `copy-ability` of `"trigger-ability"`. A trigger counting **mana** abilities (Elrond, Moon-Reader) can't be written: one activated while paying a cost isn't announced. |
 | `this-cycled` | — | "When you cycle this card" (rule 702.29c: "when you discard this card to pay an activation cost of a cycling ability") — Dismantling Wave's "destroy all artifacts and enchantments". Triggers from wherever the card ended up, for this card only, and goes on the stack above the cycling ability, so it resolves before the draw (the rulings). |
 | `predicate` | `match: (event) => boolean` | escape hatch — match the raw `GameEvent` |
 
@@ -2932,6 +2954,11 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   hand have warp for `cost` (rule 702.185 — Tannuk, Steadfast Second's
   "artifact cards and red creature cards in your hand have warp {2}{R}"):
   offered and resolved exactly as a printed warp.
+- `grantsNinjutsuInHand: { cost, filter }` — cards matching `filter` in your
+  hand have ninjutsu for `cost` (rule 702.49 — Satoru Umezawa's "each creature
+  card in your hand has ninjutsu {2}{U}{B}"): the `ninjutsu()` helper's
+  ability, listed after the card's own, so "ninjutsu abilities you activate"
+  (a cost reduction, an `activates-ability` trigger) sees it.
 - `grantsBlitzInHand: { filter }` — the creature spells you cast matching
   `filter` have blitz for their mana cost (rule 702.152a — Henzie "Toolbox"
   Torre's "each creature spell you cast with mana value 4 or greater has

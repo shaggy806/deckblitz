@@ -62,6 +62,7 @@ import {
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
+import { ninjutsu } from "./cards/helpers.js";
 import { SPEED_CARD } from "./cards/speed.js";
 import type {
   AdditionalCostOption,
@@ -589,6 +590,25 @@ function copyExceptionModifier(exceptions: CopyExceptions, registry?: CardRegist
  * case, so the per-event battlefield scan allocates nothing for a plain land
  * or vanilla creature. */
 const EMPTY_TRIGGERED_ENTRIES: readonly TriggeredEntry[] = [];
+
+/** Decayed's triggered half (rule 702.147a): "When this creature attacks,
+ * sacrifice it at end of combat." Carried by the keyword, not printed —
+ * `Game.effectiveTriggeredEntries` lists it for a permanent that has decayed
+ * now, so one that gained it has it and one that lost it doesn't, and an
+ * attack-trigger doubler doubles it. The delayed trigger sacrifices this
+ * object only (rule 400.7): one that left and came back isn't it. */
+const DECAYED_TRIGGER: TriggeredAbility = {
+  trigger: { on: "attacks", who: "self" },
+  targets: [],
+  effect: {
+    kind: "delayed-trigger",
+    at: "end-of-combat",
+    effect: { kind: "sacrifice-source" },
+    text: "Sacrifice it at end of combat.",
+  },
+  resolve: null,
+  text: "Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)",
+};
 
 const EMPTY_ID_SET: ReadonlySet<ObjectId> = new Set();
 
@@ -11784,13 +11804,25 @@ export class Game {
   ): readonly TriggeredEntry[] {
     const target = this.state.objects[objectId];
     if (target === undefined) return EMPTY_TRIGGERED_ENTRIES;
-    const printedAbilities = this.registry.get(rulesTextName(target)).triggered;
+    const text = this.registry.get(rulesTextName(target));
+    const printedAbilities = text.triggered;
+    // Decayed carries a trigger (rule 702.147a). Only a creature printed with
+    // it, one with a modifier (an effect that gave it decayed — Gisa) or one
+    // with a decayed counter (rule 122.1b) can have it: no static grants it.
+    // A copy's keywords are the copied card's (layer 1), so read both names.
+    const decayedCandidate =
+      target.zone === "battlefield" &&
+      (target.modifiers.length > 0 ||
+        (target.counters.decayed ?? 0) > 0 ||
+        text.keywords.includes("decayed") ||
+        this.registry.get(printedCardName(target)).keywords.includes("decayed"));
     // The common case — a land, a vanilla creature — has nothing printed, no
     // modifiers and no grantors to consult: skip the allocations below. This
     // runs for every battlefield permanent on every emitted event.
     if (
       printedAbilities.length === 0 &&
       target.modifiers.length === 0 &&
+      !decayedCandidate &&
       (grantors !== undefined && grantors.length === 0) &&
       target.zone !== "stack"
     ) {
@@ -11832,6 +11864,9 @@ export class Game {
       }
       grants.sort((a, b) => a.ts - b.ts);
       for (const g of grants) granted.push(...g.entries);
+      if (decayedCandidate && this.characteristics(target.id).keywords.has("decayed")) {
+        granted.push({ ability: DECAYED_TRIGGER, ref: { kind: "modifier", ability: DECAYED_TRIGGER } });
+      }
     }
     // A spell on the stack: what grants abilities to its controller's spells
     // (`grantsToSpells` — cascade, most often), by the granting permanent's
@@ -11934,6 +11969,7 @@ export class Game {
     grantors?: readonly GrantSource[],
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
     const target = this.state.objects[objectId];
+    if (target?.zone === "hand") return this.handGrantedActivated(target);
     if (target === undefined || target.zone !== "battlefield") return [];
     // Only what was granted after a loss of all its abilities (rule 613.7).
     const lostAt = abilitiesLostAt(target);
@@ -11965,6 +12001,22 @@ export class Game {
     }
     grants.sort((a, b) => a.ts - b.ts);
     return [...own, ...grants.flatMap((g) => g.entries)];
+  }
+
+  /** The activated abilities a card in a hand has from a permanent its owner
+   * controls: ninjutsu (`grantsNinjutsuInHand` — Satoru Umezawa), one per
+   * grant that reaches it, in the order the battlefield lists them. */
+  private handGrantedActivated(
+    card: GameObject,
+  ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
+    const out: { ability: ActivatedAbility; ref: GrantedAbilityRef }[] = [];
+    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsNinjutsuInHand !== undefined)) {
+      const grant = ability.grantsNinjutsuInHand!;
+      if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
+      const granted = ninjutsu(grant.cost);
+      out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
+    }
+    return out;
   }
 
   /** Where `sourceId`'s activated ability at `abilityIndex` was granted from,
@@ -16487,6 +16539,9 @@ export class Game {
     // see them.
     if (event.type === "permanent-left-battlefield") this.fireLeaveWatchers(event);
     if (event.type === "spell-cast") this.fireCastWatchers(event);
+    if (event.type === "ability-activated" && event.onStack && event.ability !== undefined) {
+      this.fireActivationWatchers(event.player, event.ability);
+    }
     if (event.type === "damage-dealt") this.fireDamageWatchers(event);
   }
 
@@ -16668,6 +16723,10 @@ export class Game {
       // The player who sacrificed it (Bloodroot Apothecary: "whenever an
       // opponent sacrifices a noncreature token, that player gets two
       // poison counters").
+      player = event.player;
+    } else if (event.type === "ability-activated") {
+      // The player who activated it (Harsh Mentor: "deals 2 damage to that
+      // player").
       player = event.player;
     } else if (event.type === "attacker-blocked") {
       // The defending player — the one whose creatures blocked it.
@@ -17287,6 +17346,29 @@ export class Game {
         // an Equipment that was, equips nothing by then (the Illusionist's
         // Bracers rulings), unlike a dies trigger's look back.
         if (event.type !== "ability-activated" || !event.onStack || event.ability === undefined) return false;
+        if (spec.who !== "attached") {
+          if (self.zone !== "battlefield") return false;
+          if ((spec.who === "you") !== (event.player === self.controller)) return false;
+          if (spec.source !== undefined) {
+            // A permanent's ability, read as it is now that the costs are
+            // paid: a Vehicle being crewed isn't a creature yet.
+            const source = this.state.objects[event.source];
+            if (source?.zone !== "battlefield") return false;
+            if (!matchesFilter(this.state, this.registry, source.id, spec.source, { you: self.controller, source: self.id })) {
+              return false;
+            }
+          }
+          if (spec.ninjutsu !== true && spec.loyalty !== true) return true;
+          // The ability as it was activated — a granted ninjutsu (Satoru
+          // Umezawa's) included, through the stack object's grant.
+          const activated = this.state.objects[event.ability];
+          if (activated === undefined) return false;
+          const ability = this.stackAbilityOf(activated) as Partial<ActivatedAbility>;
+          return (
+            (spec.ninjutsu !== true || ability.ninjutsu === true) &&
+            (spec.loyalty !== true || ability.loyaltyCost !== undefined)
+          );
+        }
         const host = this.state.objects[event.source];
         return (
           self.zone === "battlefield" &&
@@ -26064,7 +26146,11 @@ export class Game {
   ): void {
     let when: DelayedTriggerTiming | DelayedLeaveWatch | DelayedCastWatch | DelayedDamageWatch;
     if (typeof at === "object" && "nextSpell" in at) {
-      when = { nextSpell: at.nextSpell, turn: this.state.turn.number };
+      when = {
+        nextSpell: at.nextSpell,
+        ...(at.orNextAbility !== undefined ? { orNextAbility: at.orNextAbility } : {}),
+        turn: this.state.turn.number,
+      };
     } else if (typeof at === "object" && "dealsCombatDamage" in at) {
       const watched = this.state.objects[at.dealsCombatDamage];
       if (watched?.zone !== "battlefield") return;
@@ -26329,6 +26415,40 @@ export class Game {
         controller: trigger.controller,
         triggerObject: event.source,
         lastKnownRefs: { triggerObject: stint },
+        delayed: trigger,
+      });
+    }
+  }
+
+  /** A `nextSpell` delayed trigger that also waits for its controller's next
+   * activated ability with {X} in its activation cost (`orNextAbility` —
+   * Magus Lucea Kane), fired by `player` activating `abilityId`: the ability
+   * on the stack is its trigger object. A mana ability never gets here (it
+   * doesn't use the stack), nor does a triggered ability that asks for X. */
+  private fireActivationWatchers(player: PlayerId, abilityId: ObjectId): void {
+    if (this.state.delayedTriggers.length === 0) return;
+    const ability = this.state.objects[abilityId];
+    if (ability === undefined || ability.abilityKind !== "activated") return;
+    const firing = this.state.delayedTriggers.filter(
+      (t) =>
+        typeof t.at === "object" &&
+        "nextSpell" in t.at &&
+        t.at.orNextAbility !== undefined &&
+        t.at.turn === this.state.turn.number &&
+        t.controller === player,
+    );
+    if (firing.length === 0) return;
+    const cost = (this.stackAbilityOf(ability) as Partial<ActivatedAbility>).cost;
+    // "{X} in its activation cost": the mana symbol, not an X elsewhere.
+    if (cost === undefined || parseManaCost(cost.mana).x === 0) return;
+    this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));
+    for (const trigger of firing) {
+      this.state.pendingTriggers.push({
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        triggerObject: abilityId,
         delayed: trigger,
       });
     }

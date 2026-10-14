@@ -1422,13 +1422,29 @@ export type TriggerSpec =
        * trigger object is the ability on the stack, which a `copy-ability`
        * of `"trigger-ability"` copies.
        *
-       * Only a permanent's abilities, for now: "whenever you activate an
-       * ability" (Rings of Brighthearth) would also have to see one
-       * activated from a hand — cycling's (rule 702.29a), an ability on the
-       * stack sourced from the cycled card.
+       * `who: "you"` / `"opponent"` is an ability this permanent's controller
+       * (or an opponent of theirs) activates, wherever its source is, and
+       * `"trigger-player"` is that player. Narrowed by `ninjutsu` to a
+       * ninjutsu ability (rule 702.49 — Satoru Umezawa's "whenever you
+       * activate a ninjutsu ability", which resolves before the ninjutsu
+       * does), by `loyalty` to a loyalty ability (rule 606 — Ajani
+       * Unrelenting; Gideon the Oathless's "whenever an opponent activates a
+       * loyalty ability"), and by `source` to an ability of a permanent on
+       * the battlefield matching it as the ability is activated (Harsh
+       * Mentor's "an ability of an artifact, creature, or land on the
+       * battlefield"; a card's in a hand or graveyard never counts, nor a
+       * Vehicle crewed by it, which isn't a creature yet — the Runic Armasaur
+       * rulings). Unnarrowed it sees every ability that uses the stack, from
+       * any zone — cycling's too (rule 702.29a), whose draw goes on the stack
+       * sourced from the cycled card. Never a mana ability: one activated to
+       * pay a cost isn't announced, so a trigger that counts them (Elrond,
+       * Moon-Reader) can't be written.
        */
       readonly on: "activates-ability";
-      readonly who: "attached";
+      readonly who: "attached" | "you" | "opponent";
+      readonly ninjutsu?: true;
+      readonly loyalty?: true;
+      readonly source?: CardFilter;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered

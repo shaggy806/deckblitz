@@ -374,6 +374,7 @@ import _poolWallOfReverence from "../pool/wall-of-reverence.js";
 import _poolWarPriestOfThune from "../pool/war-priest-of-thune.js";
 import _poolWarScreecher from "../pool/war-screecher.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
+import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _poolWarPriestOfThune,
     _poolWarScreecher,
     _poolWaterbenderAscension,
+    _poolWayOfTheParadox,
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,
