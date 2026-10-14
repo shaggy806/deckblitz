@@ -9,12 +9,15 @@
 
 import { parentPort } from "node:worker_threads";
 
-import { Game, RandomController, createRng, setComputedCacheCheck } from "../dist/index.js";
+import { Game, RandomController, createRng, setComputedCacheCheck, setFreezeSharedSnapshots } from "../dist/index.js";
 
 // MTG_CACHE_CHECK=1 turns every computed-cache hit into a recompute +
 // deep-compare that throws on divergence — the empirical verification that
 // every mutation inside a cache region invalidates (see characteristics.ts).
 if (process.env.MTG_CACHE_CHECK) setComputedCacheCheck(true);
+// MTG_FREEZE_SNAPSHOTS=1 freezes the snapshots a copy of the state shares
+// (`cloneGameState`), so a write into one throws.
+if (process.env.MTG_FREEZE_SNAPSHOTS) setFreezeSharedSnapshots(true);
 // MTG_ORDER_TRIGGERS=1 has every seat order its own simultaneous triggers, so
 // the `order-triggers` decision is fuzzed too (off, the engine orders them and
 // nobody is asked). Changes every seed's trajectory, so it's opt-in.

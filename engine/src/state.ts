@@ -3840,9 +3840,31 @@ export function createPlayerState(id: PlayerId, rules: GameRules): PlayerState {
  * whole state per simulated candidate (and, for v3, per sampled world), so
  * this is directly on the "how many candidates fit in the decision budget"
  * path.
+ *
+ * An object's snapshots — `lastKnown`, `earlierLastKnown`, `lastOnStack` —
+ * are shared, not copied: they're history, only ever replaced whole (a new
+ * departure, a new stint on the stack), never written into, so a copy that
+ * points at the same one can't see it change. On a turn-54 four-player board
+ * they were 18% of everything copied (2026-10-14).
+ * `setFreezeSharedSnapshots(true)` freezes each one it shares, so that a
+ * write into one throws — the fuzzer's check that the rule holds.
  */
 export function cloneGameState(state: GameState): GameState {
   return clonePlainTree(state) as GameState;
+}
+
+let freezeShared = false;
+
+/** Freeze every snapshot {@link cloneGameState} shares, so a write into one
+ * throws (fuzzing only: `MTG_FREEZE_SNAPSHOTS=1`). */
+export function setFreezeSharedSnapshots(on: boolean): void {
+  freezeShared = on;
+}
+
+function deepFreeze(value: unknown): void {
+  if (value === null || typeof value !== "object" || Object.isFrozen(value)) return;
+  Object.freeze(value);
+  for (const key in value) deepFreeze((value as Record<string, unknown>)[key]);
 }
 
 /** Deep-copy one piece of a `GameState` — an object of it, say — under the
@@ -3860,7 +3882,18 @@ function clonePlainTree(value: unknown): unknown {
   }
   const out: Record<string, unknown> = {};
   for (const key in value) {
-    out[key] = clonePlainTree((value as Record<string, unknown>)[key]);
+    const field = (value as Record<string, unknown>)[key];
+    if (
+      field !== null &&
+      typeof field === "object" &&
+      (key === "lastKnown" || key === "earlierLastKnown" || key === "lastOnStack")
+    ) {
+      // A snapshot: shared — see `cloneGameState`.
+      if (freezeShared) deepFreeze(field);
+      out[key] = field;
+    } else {
+      out[key] = clonePlainTree(field);
+    }
   }
   return out;
 }

@@ -1694,19 +1694,16 @@ function typeGrantSources(
   let out: ContributingStatic[] | null = null;
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
-    const statics = registry.get(rulesTextName(source)).static;
-    if (statics.length === 0) continue;
-    for (const ability of statics) {
-      if (!hasLayerFourPart(ability)) continue;
-      // As in `contributingStaticSources`: a permanent whose controller has
-      // left the game grants nothing. One that has lost its abilities still
-      // does here: that loss is a layer-6 effect, and layer 4 comes first
-      // (rule 613.1d, 613.1f), so the ability is still there to apply — and
-      // having started to apply, it keeps applying in the later layers
-      // (rule 613.6; Goddric, Cloaked Reveler's ruling).
-      if (state.players[source.controller]?.hasLost === true) break;
-      (out ??= []).push({ source, ability });
-    }
+    const layer4 = staticsOf(registry, rulesTextName(source)).layer4;
+    if (layer4.length === 0) continue;
+    // As in `contributingStaticSources`: a permanent whose controller has
+    // left the game grants nothing. One that has lost its abilities still
+    // does here: that loss is a layer-6 effect, and layer 4 comes first
+    // (rule 613.1d, 613.1f), so the ability is still there to apply — and
+    // having started to apply, it keeps applying in the later layers
+    // (rule 613.6; Goddric, Cloaked Reveler's ruling).
+    if (state.players[source.controller]?.hasLost === true) continue;
+    for (const ability of layer4) (out ??= []).push({ source, ability });
   }
   const result = out ?? NO_STATICS;
   if (activeCache !== null) activeCache.typeSources = result;
@@ -2073,12 +2070,13 @@ function abilityGrantSources(
     const source = state.objects[sourceId];
     if (source === undefined) continue;
     if (state.players[source.controller]?.hasLost === true) continue;
+    const grants = staticsOf(registry, rulesTextName(source)).grants;
+    if (grants.length === 0) continue;
     // A static with a layer-4 part outlives its source's loss of abilities
     // (rule 613.6 — see `typeGrantSources`); its grants then go against that
     // loss in timestamp order, like any (`grantOutlastsLoss`).
     const lost = hasLostAbilities(source);
-    for (const ability of registry.get(rulesTextName(source)).static) {
-      if (ability.grantsActivated === undefined && ability.grantsTriggered === undefined) continue;
+    for (const ability of grants) {
       if (lost && !hasLayerFourPart(ability)) continue;
       (out ??= []).push({ source, ability });
     }
@@ -2480,6 +2478,55 @@ interface AppliedEffect {
 /** Whether a static carries anything {@link collectStaticEffects} folds into
  * a permanent's characteristics — the rest (a replacement, a CDA, a cost
  * change, a permission) modify nothing there. */
+/**
+ * A card's statics as each board scan wants them, worked out once per name:
+ * the scans run every cache region over every permanent (and every card in
+ * every graveyard), and filtering each card's statics each time — with the
+ * lookups to reach them — was several percent of a bot game (2026-10-14).
+ */
+interface StaticsInfo {
+  /** What {@link contributingStaticSources} takes from the battlefield. */
+  readonly contributing: readonly StaticAbility[];
+  /** What it takes from a graveyard (`fromGraveyard`). */
+  readonly fromGraveyard: readonly StaticAbility[];
+  /** What {@link typeGrantSources} takes (`hasLayerFourPart`). */
+  readonly layer4: readonly StaticAbility[];
+  /** What {@link abilityGrantSources} takes. */
+  readonly grants: readonly StaticAbility[];
+}
+
+const staticsInfoByRegistry = new WeakMap<CardRegistry, Map<string, StaticsInfo>>();
+
+/** {@link StaticsInfo} for the card `name`, `null` when `registry` doesn't
+ * know it (not remembered: a registry may yet learn it). */
+function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
+  let byName = staticsInfoByRegistry.get(registry);
+  if (byName === undefined) {
+    byName = new Map();
+    staticsInfoByRegistry.set(registry, byName);
+  }
+  const known = byName.get(name);
+  if (known !== undefined) return known;
+  if (!registry.has(name)) return null;
+  const statics = registry.get(name).static;
+  const info: StaticsInfo = {
+    contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
+    fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
+    layer4: statics.filter(hasLayerFourPart),
+    grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
+  };
+  byName.set(name, info);
+  return info;
+}
+
+/** {@link staticsInfo} for a card that must be known — throwing as
+ * `registry.get` does when it isn't. */
+function staticsOf(registry: CardRegistry, name: string): StaticsInfo {
+  const info = staticsInfo(registry, name);
+  if (info === null) registry.get(name);
+  return info as StaticsInfo;
+}
+
 function contributesToCharacteristics(ability: StaticAbility): boolean {
   return (
     ability.grantPt !== undefined ||
@@ -2523,25 +2570,26 @@ function contributingStaticSources(
   const out: ContributingStatic[] = [];
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
+    // Only P/T-bonus / keyword-grant / restriction statics contribute here,
+    // and none that works from a graveyard ("as long as this card is in your
+    // graveyard": not from here). A static that is purely a replacement (rule
+    // 614 — "enters tapped") or a CDA (`setBasePtFromCount`, handled in its
+    // own pass) modifies nothing. See `StaticsInfo`.
+    const contributing = staticsOf(registry, rulesTextName(source)).contributing;
+    if (contributing.length === 0) continue;
+    // An eliminated player's permanents stay on the board to be looked at but
+    // stop affecting the game — so their anthems and lords stop applying too.
+    // See the note in `matchesFilter`: they leave play, not view — rule
+    // 800.4a would have removed them from the game entirely.
+    if (state.players[source.controller]?.hasLost === true) continue;
     // Layer 6 — a permanent that lost its abilities has no statics, bar one
     // with a layer-4 part: that part applied before the loss (layer 4), so
     // the rest of it keeps applying in the later layers (rule 613.6 — see
     // `typeGrantSources`), its layer-6 grants in timestamp order with the
     // loss (`grantOutlastsLoss`).
     const lost = hasLostAbilities(source);
-    // An eliminated player's permanents stay on the board to be looked at but
-    // stop affecting the game — so their anthems and lords stop applying too.
-    // See the note in `matchesFilter`: they leave play, not view — rule
-    // 800.4a would have removed them from the game entirely.
-    if (state.players[source.controller]?.hasLost === true) continue;
-    for (const ability of registry.get(rulesTextName(source)).static) {
+    for (const ability of contributing) {
       if (lost && !hasLayerFourPart(ability)) continue;
-      // "As long as this card is in your graveyard": not from here.
-      if (ability.fromGraveyard === true) continue;
-      // Only P/T-bonus / keyword-grant / restriction statics contribute here.
-      // A static that is purely a replacement (rule 614 — "enters tapped") or
-      // a CDA (`setBasePtFromCount`, handled in its own pass) modifies nothing.
-      if (!contributesToCharacteristics(ability)) continue;
       out.push({ source, ability });
     }
   }
@@ -2554,11 +2602,15 @@ function contributingStaticSources(
     if (state.players[player]?.hasLost === true) continue;
     for (const sourceId of state.zones.perPlayer[player]?.graveyard ?? []) {
       const source = state.objects[sourceId];
-      if (source === undefined || !registry.has(printedCardName(source))) continue;
-      for (const ability of registry.get(rulesTextName(source)).static) {
-        if (ability.fromGraveyard !== true || !contributesToCharacteristics(ability)) continue;
-        out.push({ source, ability });
-      }
+      if (source === undefined) continue;
+      // One lookup a card: almost every one's text is its printed card's,
+      // and an unknown card has none (`staticsInfo`).
+      const printed = printedCardName(source);
+      const text = rulesTextName(source);
+      if (text !== printed && !registry.has(printed)) continue;
+      const fromGraveyard = staticsInfo(registry, text)?.fromGraveyard;
+      if (fromGraveyard === undefined) continue;
+      for (const ability of fromGraveyard) out.push({ source, ability });
     }
   }
   if (activeCache !== null) activeCache.staticSources = out;
