@@ -15,6 +15,7 @@
 /** What the page sends the worker. */
 export type ToRoomWorker =
   | { readonly kind: 'open' }
+  | { readonly kind: 'stats'; readonly id: number }
   | { readonly kind: 'send'; readonly data: string }
   | { readonly kind: 'close' }
 
@@ -23,6 +24,25 @@ export type FromRoomWorker =
   | { readonly kind: 'open' }
   | { readonly kind: 'message'; readonly data: string }
   | { readonly kind: 'failed'; readonly message: string }
+  | { readonly kind: 'stats'; readonly id: number; readonly stats: LocalStats }
+
+/** The worker's numbers, for measuring local games on a slower machine
+ * (`docs/plans/local-rooms.md`, step 6): `deckblitzLocal.stats()` in the
+ * browser console prints them. */
+export interface LocalStats {
+  /** From the worker starting to its rooms being up: the card pool loaded
+   * and any saved games seated. */
+  readonly readyMs: number | null
+  readonly decisions: number
+  readonly decisionP50Ms: number | null
+  readonly decisionP90Ms: number | null
+  readonly decisionP99Ms: number | null
+  readonly decisionMaxMs: number | null
+  /** Running games the worker holds. */
+  readonly games: number
+  /** The worker's JS heap, where the browser says (Chrome). */
+  readonly workerHeapMb: number | null
+}
 
 /** The part of a WebSocket `useNetworkGame` uses. */
 export interface RoomSocket {
@@ -40,6 +60,8 @@ export class LocalSocket implements RoomSocket {
   onclose: (() => void) | null = null
   onerror: (() => void) | null = null
   private worker: Worker | null
+  private nextStats = 0
+  private readonly waitingStats = new Map<number, (stats: LocalStats) => void>()
 
   constructor() {
     this.worker = new Worker(new URL('./room-worker.ts', import.meta.url), { type: 'module' })
@@ -47,7 +69,10 @@ export class LocalSocket implements RoomSocket {
       const message = event.data
       if (message.kind === 'open') this.onopen?.()
       else if (message.kind === 'message') this.onmessage?.({ data: message.data })
-      else this.fail(message.message)
+      else if (message.kind === 'stats') {
+        this.waitingStats.get(message.id)?.(message.stats)
+        this.waitingStats.delete(message.id)
+      } else this.fail(message.message)
     }
     this.worker.onerror = (event) => this.fail(event.message)
     this.post({ kind: 'open' })
@@ -55,6 +80,15 @@ export class LocalSocket implements RoomSocket {
 
   send(data: string): void {
     this.post({ kind: 'send', data })
+  }
+
+  /** The worker's numbers (`LocalStats`). */
+  stats(): Promise<LocalStats> {
+    const id = (this.nextStats += 1)
+    return new Promise((resolve) => {
+      this.waitingStats.set(id, resolve)
+      this.post({ kind: 'stats', id })
+    })
   }
 
   /** Whether the worker is gone (closed, or failed). */
@@ -172,7 +206,10 @@ export class HybridSocket implements RoomSocket {
    * when the socket opens. */
   private worker(): LocalSocket {
     if (this.local !== null && !this.local.dead) return this.local
-    if (tabWorker === null || tabWorker.dead) tabWorker = new LocalSocket()
+    if (tabWorker === null || tabWorker.dead) {
+      tabWorker = new LocalSocket()
+      exposeStats()
+    }
     const local = tabWorker
     this.local = local
     local.onmessage = (event) => {
@@ -197,5 +234,39 @@ export class HybridSocket implements RoomSocket {
     }
     local.send(JSON.stringify({ type: 'event-deltas' }))
     return local
+  }
+}
+
+/** The page's main-thread freezes since local games started (long tasks,
+ * Chrome): what a slow machine's bot search must not cause. */
+const longTasks: number[] = []
+
+/** `deckblitzLocal.stats()` in the console: the worker's numbers and the
+ * page's freezes, as a table — for checking local games on a slower machine
+ * (`docs/plans/local-rooms.md`, step 6). */
+function exposeStats(): void {
+  try {
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) longTasks.push(entry.duration)
+    }).observe({ type: 'longtask', buffered: true })
+  } catch {
+    // No long-task timing in this browser: the freezes read as none.
+  }
+  const target = window as Window & { deckblitzLocal?: { stats: () => Promise<unknown> } }
+  target.deckblitzLocal = {
+    stats: async () => {
+      const worker = tabWorker
+      if (worker === null || worker.dead) return 'no local game in this tab'
+      const stats = await worker.stats()
+      const sorted = [...longTasks].sort((a, b) => a - b)
+      const report = {
+        ...stats,
+        pageFreezes: sorted.length,
+        pageFreezeMaxMs: sorted.length === 0 ? 0 : Math.round(sorted[sorted.length - 1]),
+        cores: navigator.hardwareConcurrency,
+      }
+      console.table(report)
+      return report
+    },
   }
 }

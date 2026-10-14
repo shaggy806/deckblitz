@@ -155,7 +155,17 @@ to another player, and a room with a second human never goes local.
    `sessionStorage`, so a reload's rejoin goes to the worker. Lessons restart. **Not built**: bug-report
    uploads (only a `--capture` dev server has the panel) and the optional ping.
 6. **Bot budget on a slow machine**: measure bot decisions and the worker's memory on the user's low-end
-   laptop, then choose wall clock or a simulation count.
+   laptop, then choose wall clock or a simulation count. **Ready to run** (built 2026-10-13): the
+   worker records every bot decision's time (`recordBotDecisionsTo`), its start-up time and, in
+   Chrome, its heap; the page records its own long tasks. On the laptop, in Chrome:
+   1. open `https://deckblitz.net/?local=1` and blitz a deck (or Learn Commander);
+   2. play a few rounds — Auto-pass is fine;
+   3. open the console (F12) and run `deckblitzLocal.stats()`: a table of `readyMs` (the pool and
+      saved games loaded), decision p50/p90/p99/max, `workerHeapMb`, the page's freezes
+      (`pageFreezes`, `pageFreezeMaxMs`) and the core count;
+   4. Chrome's Task Manager (Shift+Esc) shows the worker's whole memory as a "Dedicated Worker" row.
+   For comparison: the live box's decisions ran p50 ~150 ms, the dev PC's ~37 ms, against the
+   300 ms budget.
 7. **Default on** for blitz and tutorials, with the fallback rules; the load test confirms the
    server no longer sees them; deploy.
 

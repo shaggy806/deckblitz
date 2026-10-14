@@ -23,7 +23,8 @@ import { CARD_SHARD_COUNT, loadCardShard, registryFrom } from 'engine/local'
 import type { ClientMessage, ServerMessage } from 'protocol'
 import { provideCardRegistry } from 'server/dist/card-registry.js'
 import { LocalRoomHost } from 'server/dist/local-host.js'
-import type { FromRoomWorker, ToRoomWorker } from './localSocket.ts'
+import { recordBotDecisionsTo } from 'server/dist/room.js'
+import type { FromRoomWorker, LocalStats, ToRoomWorker } from './localSocket.ts'
 import { loadSavedRooms, saveRooms } from './savedRooms.ts'
 
 declare const self: DedicatedWorkerGlobalScope
@@ -34,6 +35,34 @@ const post = (message: FromRoomWorker): void => self.postMessage(message)
 const SAVE_EVERY_MS = 1000
 
 let host: LocalRoomHost | null = null
+
+/** What `stats` reports, for measuring a slower machine (the plan's step 6):
+ * every bot decision's time, and how long the pool and saved games took. */
+const started = performance.now()
+let readyMs: number | null = null
+const decisionsMs: number[] = []
+recordBotDecisionsTo({
+  record: (micros) => {
+    decisionsMs.push(micros / 1000)
+    if (decisionsMs.length > 5000) decisionsMs.shift()
+  },
+})
+
+function stats(): LocalStats {
+  const sorted = [...decisionsMs].sort((a, b) => a - b)
+  const at = (q: number): number | null => (sorted.length === 0 ? null : Math.round(sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))]))
+  const memory = (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory
+  return {
+    readyMs,
+    decisions: sorted.length,
+    decisionP50Ms: at(0.5),
+    decisionP90Ms: at(0.9),
+    decisionP99Ms: at(0.99),
+    decisionMaxMs: sorted.length === 0 ? null : Math.round(sorted[sorted.length - 1]),
+    games: host?.save().length ?? 0,
+    workerHeapMb: memory === undefined ? null : Math.round(memory.usedJSHeapSize / 1048576),
+  }
+}
 let saveTimer: ReturnType<typeof setTimeout> | null = null
 /** The rooms last written, so a game that's ended has its save deleted. */
 let saved = new Set<string>()
@@ -63,6 +92,7 @@ const ready: Promise<void> = (async () => {
   provideCardRegistry(registryFrom(shards.flatMap((shard) => [...shard.pool, ...shard.tokens])))
   host = new LocalRoomHost(deliver)
   saved = new Set(host.restore(rooms))
+  readyMs = Math.round(performance.now() - started)
 })()
 
 self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
@@ -76,6 +106,9 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
     return
   }
   switch (message.kind) {
+    case 'stats':
+      post({ kind: 'stats', id: message.id, stats: stats() })
+      return
     case 'open':
       post({ kind: 'open' })
       return

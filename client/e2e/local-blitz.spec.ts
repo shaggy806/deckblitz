@@ -88,6 +88,14 @@ test('a local blitz plays against three bots in the page, never on the room serv
     )
     .toBeGreaterThan(0)
 
+  // The numbers a slower machine is measured by (the plan's step 6).
+  const stats = await page.evaluate(
+    () => (window as unknown as { deckblitzLocal: { stats: () => Promise<Record<string, number | null>> } }).deckblitzLocal.stats(),
+  )
+  expect(stats.decisions).toBeGreaterThan(0)
+  expect(stats.readyMs).toBeGreaterThan(0)
+  expect(stats.games).toBe(1)
+
   // It was all in this tab: nothing about the game went to the room server.
   expect(typesOf(sent)).toEqual([])
   expect(sent.some((s) => s.includes(roomId!))).toBe(false)
