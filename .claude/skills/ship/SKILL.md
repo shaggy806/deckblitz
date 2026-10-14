@@ -51,8 +51,9 @@ git on purpose; edit it with the Edit tool, which keeps its CRLF and NUL).
 
 ## 4. Docs, in the same commit as the work
 
-- `BACKLOG.md`: delete the line for what landed; add one for anything found
-  and left.
+- `BACKLOG.md`: move the line for what landed to `COMPLETED.md` (newest first,
+  same section, with the date and commit — amend the hash in after committing,
+  or name the commit by its title); add one for anything found and left.
 - `CLAUDE.md` (root or the workspace's) for a new invariant, command or doc, and the file's entry in `docs/architecture/<workspace>.md` for new files, flags or architecture.
 - A plan in `docs/plans/` the work belongs to: its progress entry.
 

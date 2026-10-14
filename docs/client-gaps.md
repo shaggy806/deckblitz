@@ -2,7 +2,7 @@
 
 The detail behind `BACKLOG.md`'s "Client / UI" items: what the client can't show or ask yet,
 and the cleanups found along the way. `BACKLOG.md` keeps one line per item under the same bold
-title; when one lands, delete it in both. The animation follow-ups are in
+title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 - **A gift's opponent is asked one opponent at a time** (rule 702.174a): with two or more

@@ -1,8 +1,11 @@
 # BACKLOG.md
 
 What is left to do, and nothing else. Each item is one line that points to where the detail
-lives. Finished work belongs in `git log` and in the design records' `Status:` lines, not here.
-When something lands, delete its line. When you find something new, add one.
+lives. **When something lands, move its line to `COMPLETED.md`** (newest first, under the same
+section, with the date and commit) and delete it here; when part of an item lands, move that
+part and keep the rest. When you find something new, add one. Before starting work, check both:
+this file for whether it's planned and how it's scoped, `COMPLETED.md` for whether it's already
+built.
 
 ## Questions for the user
 
@@ -13,7 +16,7 @@ None open.
 
 ## Commander gap (the current priority)
 
-**401 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**416 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
@@ -24,27 +27,26 @@ that one card is the reason the deck exists. Live numbers for everything below c
 - **Build down the greedy order.** `cmdrs:gaps` ranks every missing engine feature over
   `engine/src/cards/top-commanders-gaps.json`. When a feature lands, add its key to that file's
   `built` array and author the commanders it unblocks in the same commit. The next ones,
-  engine-only, with the commanders each fully unblocks: `keyword:decayed`,
-  `trigger:activates-ability`, `trigger:you-tap-opponent-creature`, `effect:amount-aggregate`,
-  `effect:put-commanders-onto-battlefield` (+1 each), `mechanic:speed` (+2), `keyword:mayhem`,
-  `keyword:freerunning`, `replacement:mana-pool-emptying` and `static:mana-pool-reads` (+1
-  each). Lynde, Cheerful Tormentor also waits on `effect:curse-attach-player` (a Curse put onto
-  the battlefield attached to a player, or moved to an opponent).
-- **Most-needed features overall.** `effect:cast-during-resolution` (9),
-  `effect:attach-extensions` (7), `zone:visibility-extensions` (6), and
-  `effect:missing-tokens`, `cost:sacrifice-multiple`, `static:self-type-changes` (5 each). Orvar needs `decision:choose-permanent` and `trigger:discards-extensions`. Ulalek needs
-  `cost:colorless-hybrid-mana` and `keyword:devoid`.
+  engine-only, with the commanders each fully unblocks: `trigger:activates-ability` (+2), then
+  `replacement:as-transforms`, `keyword:decayed`, `trigger:bends`,
+  `trigger:you-tap-opponent-creature`, `keyword:bloodthirst`, `effect:amount-aggregate`,
+  `effect:repeat-process`, `effect:put-commanders-onto-battlefield`, `keyword:freerunning`,
+  `replacement:mana-pool-emptying` and `static:mana-pool-reads` (+1 each). Lynde, Cheerful
+  Tormentor also waits on `effect:curse-attach-player` (a Curse put onto the battlefield
+  attached to a player, or moved to an opponent).
+- **Most-needed features overall** (commanders needing each): `cost:sacrifice-multiple`,
+  `effect:missing-tokens`, `decision:choose-from-zone-extensions`,
+  `effect:cast-during-resolution`, `effect:attach-extensions` (5 each), then
+  `decision:variable-target-count`, `decision:choose-permanent`,
+  `replacement:mana-pool-emptying` (4 each). Orvar needs `decision:choose-permanent` and
+  `trigger:discards-extensions`. Ulalek needs `cost:colorless-hybrid-mana` and `keyword:devoid`.
 - **UI-bound features.** These need a new client decision and a browser check:
-  `effect:cast-during-resolution` (10; partly built on 2026-09-30 as the `cast-now` effect, and
-  what's left is in its `top-commanders-gaps.json` description), `effect:attach-extensions` (7),
-  `cost:sacrifice-multiple`, `decision:choose-permanent` and
-  `decision:choose-from-zone-extensions` (5 each). Sen Triplets also needs
+  `effect:cast-during-resolution` (what's left after the `cast-now` effect is in its
+  `top-commanders-gaps.json` description), `effect:attach-extensions`,
+  `cost:sacrifice-multiple`, `decision:choose-permanent`, `decision:variable-target-count` and
+  `decision:choose-from-zone-extensions`. Sen Triplets also needs
   `zone:cast-from-opponents-hand` (playing cards from the target's revealed hand), on top of
   the revealed hand itself.
-- **Speed waits on the client** (AUTHORING §15). Speed (`mechanic:speed`) blocks Mendicant
-  Core, Vnwxt, the four Raceways and Howlsquad Heavy, and Max speed's 34 cards. It needs the
-  player panel to show a player's speed and the stack to draw its inherent trigger, which has
-  no source (rule 702.179d).
 
 ## Card backlog (by EDHREC rank, and the precons)
 
@@ -55,53 +57,39 @@ section keeps only what to do next.
 
 - **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill; the user moved back to
   it from the set walk on 2026-10-13). `npm run cards:needs -w engine -- --next 60` lists the next
-  untriaged cards by rank: rank 7181 on (batch 70 took 7040–7178). Batches run as the set walk's
-  did: 4-5 agents, ~30 cards each, with the leading features built alongside in worktrees (batch
-  69: become-copy and move-counter; batch 70: devotion with the Gods' type change, and phasing).
-  Leading blockers now: `cards:needs -w engine -- --rank` (attach-extensions first). The nine
-  other starter precons' 29 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals land.
-- **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
-  2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
-  Griselbrand and more). Balance, Channel, Emrakul, the Aeons Torn, Erayo, Fastbond, Flash,
-  Hullbreacher, Iona, Leovold, Limited Resources, Nadu, Sundering Titan, Sylvan Primordial, Time
-  Vault, Trade Secrets and Yawgmoth's Bargain each wait on a feature of their own
-  (`docs/card-blockers.md`).
-- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11; paused 2026-10-13 at the user's call): each
-  set's own new cards (Commander-legal first printings) in its top half by EDHREC rank, since a
-  new card is played far more than its rank says. `npm run cards:sets -w engine -- --sets` shows
-  the walk. Reality Fracture (FRA), its Commander set (FRC), The Hobbit (HOB) and Marvel Super
-  Heroes Commander (MSC), Marvel Super Heroes (MSH), Secrets of Strixhaven Commander (SOC) and
-  Secrets of Strixhaven (SOS), Teenage Mutant Ninja Turtles (TMT) and Lorwyn Eclipsed with its
-  Commander set (ECL, ECC), Avatar: The Last Airbender (TLA), Marvel's Spider-Man (SPM), Edge of
-  Eternities (EOE, EOC), Final Fantasy (FIN, FIC), Tarkir: Dragonstorm (TDM), Aetherdrift (DFT),
-  Foundations (FDN), Foundations Jumpstart (J25), Duskmourn (DSK) and Bloomburrow (BLB) are done
-  (batches 50–68). **Next: Assassin's Creed (ACR, 10 left) and Outlaws of Thunder Junction (OTJ,
-  44)** together — **whole sets per batch**, several when they're small (the user's call,
-  2026-10-12: 4-5 agents with more cards each; features build in parallel worktrees). Batch 68's
-  blockers are one or two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight
-  Room) is the only one with two. Mayhem (56), rebound (57), teamwork (58), the Nth-counter trigger
-  (59), opus and sneak (61), blight (63), behold (64), web-slinging, waterbend and airbend (65),
-  void and revolt (66), speed and saddle (67), crewing as though power were greater and with
-  toughness (68) are built;
-  Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
+  untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
+  leading features built alongside in worktrees. The nine other starter precons' 29 stand-ins
+  (`engine/data/sweep-3/PC-*.json`) go as their originals land.
+- **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
+  (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked):
+  `effect:attach-extensions` (20, 13), `cost:remove-counters-from-chosen` (16, 9),
+  `zone:graveyard-cast-permissions` (16, 10), `mechanic:rad-counters` (15, 13),
+  `decision:variable-target-count` (14, 11), `effect:repeat-process` (13, 12)
+  (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
+  `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
+  all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
+  Ground and Doc Samson after the additive counters each need more).
+- **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`). Balance, Channel,
+  Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
+  Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
+  Bargain each wait on a feature of their own (`docs/card-blockers.md`).
+- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11; paused
+  2026-10-13 at the user's call): each set's own new cards (Commander-legal first printings) in
+  its top half by EDHREC rank, since a new card is played far more than its rank says. `npm run
+  cards:sets -w engine -- --sets` shows the walk (the sets done are in `COMPLETED.md`). **Next:
+  Assassin's Creed (ACR, 10 left) and Outlaws of Thunder Junction (OTJ, 44)** together —
+  **whole sets per batch**, several when they're small (the user's call, 2026-10-12: 4-5 agents
+  with more cards each; features build in parallel worktrees). Batch 68's blockers are one or
+  two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
+  one with two. Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
-  Prepare is built: about 50 more Secrets of Strixhaven preparation cards below its threshold
-  could now be read (`card:scaffold` drafts them).
+  About 50 more Secrets of Strixhaven preparation cards below its threshold can be read now
+  that prepare is built (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
-- **Every card triaged so far needs engine work: build what blocks the most.** Triage now runs
-  past rank 5000 (Oracle EDHREC ranks 5011–6886, batches 30–36 and 46–49). The top 5000 stay the
-  coverage figure — `top-commander-cards.txt`, 3,504 of 5,000 implemented, fully triaged, every
-  one left blocked on a feature — but no longer where new cards come from. Built lately: crew,
-  the Ring, dice, ninjutsu, Rooms and most of casting during resolution (2026-10-09), Class,
-  attach extensions (part) and morph/disguise/manifest dread (2026-10-10), random choice (B48)
-  and the Kindred card type (B49) 2026-10-11 — each unblocking fewer than its count, since most
-  waiting cards want something else too (now recorded). Leading now (`cards:needs -- --rank`):
-  devotion (21 cards, 9 fully unblocked), attach extensions' rest (20, 13), become-copy (16, 15),
-  counters removed from chosen permanents (16, 9), rad counters (15, 13)
-  (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
-  `docs/card-blockers.md`, "Open leads"). **Next to build: become-copy** — the most cards fully
-  unblocked (`cards:needs -- --feature effect:become-copy`), then author what it unblocks.
+- **Lord of the Nazgûl's "protection from Ring-bearers" is still inert** (found 2026-10-14): it was
+  left out because nothing made a Ring-bearer, but the Ring tempts you now (7779cae6), so the card
+  runs inaccurately. Author it (`filter.ts` has `ringBearer`) or pull the card.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).
@@ -114,18 +102,18 @@ section keeps only what to do next.
 - **More Oracle-parser templates.** The unread lines that recur most are the next templates
   ("Choose one —" on an ability, "You may pay {…}", "Put the rest on the bottom … in a random
   order", kicker's "if it was kicked"): `npm run card:scaffold -w engine -- --report --all` for
-  today's figures; keep `npm run card:parse-check -w engine` at zero disagreements. Every card
-  the scaffolder reads whole went in on 2026-10-12 (batch 60, reviewed): **after a template
-  lands, run `card:scaffold -- --auto-scan --all` and review what it finishes** — a template
-  matches sentences, not meaning, so each new card is read against its Oracle text.
+  today's figures; keep `npm run card:parse-check -w engine` at zero disagreements. **After a
+  template lands, run `card:scaffold -- --auto-scan --all` and review what it finishes** — a
+  template matches sentences, not meaning, so each new card is read against its Oracle text.
 
 ## Engine rules gaps
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
-**`docs/engine-gaps.md`**, under the same bold title. Delete both when a gap closes.
+**`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
+there and move this line to `COMPLETED.md`.
 
-- **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack; attacking was fixed on 2026-10-07 (a counted attacking stack, `attackingStackPart`).
-- **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): a loop of passes is drawn now; one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
+- **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
+- **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
@@ -136,7 +124,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 - **A set rule on a graveyard choice** (Lively Dirge's total mana value 4 or less).
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
-- **Not modeled**: battles, phasing, dungeons/Initiative/the Ring, banding, Companion, snow sources, morph/disguise/manifest dread (face-down permanents are built: manifest and cloak), word-replacing text change (612.2).
+- **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).
 - **"Whenever you activate an ability"** (Rings of Brighthearth).
 - **An O-Ring's return is a triggered ability, not rule 610.3's one-shot effect.**
 - **End-step token removal resolves without the stack** (603.7, 701.21a).
@@ -162,42 +150,43 @@ when a card that needs it is authored.
 
 - **Counters put as a cost skip counter replacements and prohibitions.**
 - **Convoke with a target-dependent cost.**
-- **A ceased token's last-known information lasts only the turn** (`ceasedTokens`; delayed triggers carry their own since 2026-10-09).
+- **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
 - **A `{T}` ability granted to a token stack taps the whole stack** without splitting one off.
 - **Convoke with a choice of additional costs** (`castableAt` passes no `costOption`).
 
 ## Bots
 
-Every step of `docs/plans/bot-effect-knowledge.md` (keep v2, give it an effect-aware base,
-retire v3) has landed. What's open is tuning: the items below, and the ones waiting on a live
-game to show a problem, listed in that plan's "Watching live games for" (wraths since
-`threat`, pumping an opponent's attacker, the `"acting"` rollout, big boards and deep stacks
-under count budgets, deck biases, 1/1 tokens since `smallTokens`, Shiko or the other spell, and
-haste enablers in the crackback).
+`docs/plans/bot-effect-knowledge.md` is the plan of record. What's open is tuning: the items
+below, and the ones waiting on a live game to show a problem, listed in that plan's "Watching
+live games for" (wraths since `threat`, pumping an opponent's attacker, the `"acting"` rollout,
+big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
+Shiko or the other spell, and haste enablers in the crackback).
 
 - **Play with the bots' simulation budget** (the user, 2026-10-13): v2 stops on whichever comes first,
   a count (`maxSimulations`, default 200 a decision; 12 rollouts for a non-priority decision) or the
   room's wall clock (300 ms). The clock makes strength depend on the CPU — the live box ran a searched
   decision in 152 ms typical against 37 ms on the dev PC — and matters again for solo games in the
   browser (`docs/plans/local-rooms.md` step 6). Try count-only budgets of a few sizes against the clock:
-  strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop (measured there 2026-10-13: every bot action p99 433 ms, max 1 s — the clock overshoots, it doesn't starve), and stalls
+  strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop, and stalls
   (`npm run load-test -w server`).
-- **Bots that think more than one step ahead, with pruning to pay for it** (the user, 2026-10-14): the user wants better-scoped single turns, not multi-turn plans. Built: one step more of our own turn (`followUps` in `engine/src/bot/eval-bot.ts`): in our main phase every move is played until it has resolved and each move we'd search there is rolled out from that board, expanded by what a move opens up, never shortlisted by its own score (a setup move's score is what undersells it); a follow-up can't use a card from our library (the rollout knows what a draw finds). Gate 196/196; a 400-game four-player A/B of the uncapped version against the one-move search: 27.1% [22.9, 31.6] (even 25%) — no worse, not proven better. Capped at 24 simulations a search (`FOLLOW_UP_SIMULATIONS`) after one search ran 126 s, which brought 16 games' bot time back to the one-move search's (995 s vs 1,005 s; p99 2.1 s vs 1.5 s); the capped version wasn't A/B'd (the user stopped it to move on to performance). Next: replaying the chosen follow-up at the next window instead of searching again, and retiring the shortcuts it makes redundant (`reducerFirst`, `hideawayFirst`, untap plans) one at a time against the gate. The v3 record (`docs/plans/bot-v3-search.md`) is why it's within our own turn: deeper turns didn't measurably help.
+- **The follow-up search's next steps** (`followUps` in `engine/src/bot/eval-bot.ts`; what it does
+  is in `COMPLETED.md`): A/B the capped version (`FOLLOW_UP_SIMULATIONS` = 24), replay the chosen
+  follow-up at the next window instead of searching again, and retire the shortcuts it makes
+  redundant (`reducerFirst`, `hideawayFirst`, untap plans) one at a time against the gate. The v3
+  record (`docs/plans/bot-v3-search.md`) is why it stays within our own turn.
 - **The "think longer" checkbox is a trial** (the user, 2026-10-14): Settings' "Think longer — up to 1 s a decision" (`set-bot-think-long`, `room.ts`'s `BOT_LONG_BUDGET`), offered only where a room's thinking holds up no one else — a game in the browser, or a server started with `--long-bot-thinking`. It changes only decisions the 300 ms cut short (wide boards, slow machines). Remove it, or keep it, once tried.
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
-  beyond engines (sacrifice outlets, leaves-the-battlefield);
-  premium removal fired at weak targets past the first two rounds (the early half is done).
+  beyond engines (sacrifice outlets, leaves-the-battlefield); premium removal fired at weak
+  targets past the first two rounds.
 - **More training scenarios.** 120 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which
   `bot:scenarios` and `bot:fit-scenarios` read as training scenarios, as does each blunder
   `bot:behaviour` shows. `npm run bot:captures -w engine` lists them with v2's answer today;
   once one is fixed, `-- resolve` moves it to `captures/resolved/`, where it gates.
-- **A wider pool of bot decks (later — raised 2026-09-26).** `SAMPLE_DECKS` is fourteen precons
-  since 2026-10-02 (the five Tarkir: Dragonstorm decks, the five 2022 starter decks and four more —
-  `docs/plans/precon-decks.md`), six flagged `bench`, whose first four are the seats' fallbacks.
-  Since 2026-10-07 the five TDC precons also come upgraded (`UPGRADED_DECKS`, a room's "Bot decks"
-  setting; `docs/plans/upgraded-decks.md`). Still unscoped: more power levels, and upgrades of the
+- **A wider pool of bot decks (later — raised 2026-09-26).** `SAMPLE_DECKS` (fourteen precons,
+  `docs/plans/precon-decks.md`) and the five upgraded TDC precons (`UPGRADED_DECKS`,
+  `docs/plans/upgraded-decks.md`). Still unscoped: more power levels, and upgrades of the
   other nine.
 - **Sultai Arisen and Jeskai Striker (Upgraded) didn't measure stronger than their precons**
   (16.7% and 8.3% against 20.8% and 14.6%, 48 games each, within noise; Temur Roar's upgrade
@@ -209,8 +198,8 @@ haste enablers in the crackback).
 ## Client / UI
 
 One line each; the detail is in **`docs/client-gaps.md`**, under the same bold title, and the
-animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". Delete both when an
-item lands.
+animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
+delete its detail there and move this line to `COMPLETED.md`.
 
 - **A forced look-and-choose still asks**: Yuriko's and Dark Confidant's "reveal the top card and put it into your hand" open a one-card picker with nothing to choose (`look-and-choose` with `count`, `min` and `max` 1); it could take the card unasked.
 - **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review): with bot speed moved into Settings every step shows at 1366, but at 1024 the track stops at EC.
@@ -224,9 +213,9 @@ item lands.
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07): Scute Swarm's, for example.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
-- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Built 2026-10-13: the overlay, the site tour (cut down to the front page, ending on the offer of the board tour), the tutorial room with a scripted opponent, chapter goals and retry, Learn Commander playing a proof lesson (`basics-proof`), and the board tour (`board-tour`, the in-game stops). Next: the seeded decks and game 1's chapters (plan phase 4).
+- **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md`, the user's decisions (2026-10-13) at its end; what's built is in `COMPLETED.md`. Next: the seeded decks and game 1's chapters (plan phase 4).
 - **Remove the entrance animation options from the settings panel** (the user, 2026-10-13): the "Card entrance" row (`client/src/ui/MotionControl.tsx`, `castEntrance` in `game/motionPrefs.ts`).
-- **The game page's own rendering on a slow laptop** (2026-10-13/14): mostly fixed — the laptop now runs a blitz at ~55-57 fps with 2-20 short freezes a minute (was ~42 fps, ~120, worst 762 ms), the same with the bots in the page or on the server. Left: a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
+- **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs
@@ -235,7 +224,6 @@ item lands.
 - **Refresh the snapshots.** The EDHREC ranking snapshots (`top-commander-cards.txt`,
   `top-commanders.txt`) and `edhrec-rank.ts` are frozen. Re-fetching them moves the roster, so
   do it on purpose.
-
 - **Keyword-action citations on an older numbering** (found 2026-10-13, fixing 701.19b): section
   701 was renumbered in a later edition and many comments still cite the old numbers —
   regeneration as 701.15 (Goad now; regenerate is 701.19), reveal as 701.16 (Investigate; reveal
@@ -247,7 +235,9 @@ item lands.
 
 ## Code health
 
-- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13, behind `?local=1`: steps 1-5 — blitz and lessons in a Web Worker, lobbies on the server, a local game surviving a reload — step 6, measured on the user's low-end laptop (bots and memory fine; the page's main thread was the cost, its biggest piece fixed) — and step 7, on by default on the site with a fallback to the server. Left: bug-report uploads from a local game (only a `--capture` dev server has the panel).
+- **Solo games in the player's browser: bug reports** (the user, 2026-10-13;
+  `docs/plans/local-rooms.md`, built steps in `COMPLETED.md`): bug-report uploads from a local
+  game (only a `--capture` dev server has the panel).
 - **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop

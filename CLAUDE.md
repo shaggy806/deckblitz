@@ -33,8 +33,13 @@ for:
 
 - **`BACKLOG.md`** — **the plan of record for open work**: one line per thing still to do
   (commander gap, card backlog, engine rules gaps, bots, client/UI, tooling), each pointing at
-  where its detail lives. Delete a line when it lands; add one when you find something. Nothing
-  else lists open work, so check it before starting and update it in the same commit.
+  where its detail lives, and nothing finished. When an item lands, move its line to
+  `COMPLETED.md`; add one when you find something. Nothing else lists open work, so check it
+  before starting and update it in the same commit.
+- **`COMPLETED.md`** — the backlog's landed items, newest first, under the backlog's sections,
+  each with its date and commit (since 2026-10-14; older work is in `git log` and `ROADMAP.md`).
+  **Check it before building something**, with `top-commanders-gaps.json`'s `built` array and
+  `git log --grep`: the feature may already exist.
 - **`ROADMAP.md`** — the engine's build history, condensed. Its 11 phases and the follow-on
   "needed-cards" P0–P20 passes are **all done**; ~180 source comments cite "ROADMAP Phase N", so
   the phase index stays. **Read its *Architecture constraints* section before touching the
@@ -75,7 +80,8 @@ for:
 - **`docs/bot-misplays.md`** — bot misplays the user saw on the live site without a capture, each rebuilt as a training scenario by the `bot-misplay` skill, with why the bot chose it and the likely fix.
 - **`docs/engine-gaps.md`** and **`docs/client-gaps.md`** — the detail behind `BACKLOG.md`'s
   "Engine rules gaps" and "Client / UI" items (rule numbers, code sites, blocked cards), under
-  the same bold titles; `BACKLOG.md` keeps one line each. Add or delete an item in both.
+  the same bold titles; `BACKLOG.md` keeps one line each. Add an item in both; when one lands,
+  delete its detail and move its `BACKLOG.md` line to `COMPLETED.md`.
 - **`engine/src/cards/AUTHORING.md`** — the hand-authoring guide for adding a card. Read before
   authoring.
 - **`DEPLOYMENT.md`** — the deckblitz.net (AWS Lightsail) production hosting/update runbook.

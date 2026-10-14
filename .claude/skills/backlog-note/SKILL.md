@@ -19,7 +19,8 @@ interrupted.
 `BACKLOG.md` is sectioned: Commander gap, Card backlog, Engine rules gaps,
 Bots, Client / UI, Tooling / docs, Code health. Pick the one it belongs to.
 Search the file first (Grep for its key words). If a line already covers it,
-extend that line instead of adding a second.
+extend that line instead of adding a second. Grep `COMPLETED.md` too: if it
+was already built, tell the user what's there instead of adding a line.
 
 At most one or two quick look-ups (a Grep, reading a few lines) to name the
 file or function the work would touch. That's what makes the line useful

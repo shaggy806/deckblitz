@@ -74,7 +74,7 @@ filled in against the Oracle text). Partners and backgrounds: the declarative
 
 - `npm run cmdrs:mark -w engine` and `npm run cards:mark -w engine`.
 - `BACKLOG.md`: the "N of the 500" count, the greedy order's next ten (rerun
-  `cmdrs:gaps`), the most-needed list; delete what landed.
+  `cmdrs:gaps`), the most-needed list; move what landed to `COMPLETED.md`.
 - `neededCards-features.md`: the feature under its finished passes.
 
 ## 6. Ship

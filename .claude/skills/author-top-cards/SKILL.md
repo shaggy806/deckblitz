@@ -129,7 +129,8 @@ Target 30-50 cards. For each:
   **Next** line if the ranking of blockers changed; the batch's summary
   (authored headliners, what blocks the rest) goes in `docs/card-blockers.md`,
   not BACKLOG; `neededCards-features.md` if a feature landed or a new one now
-  leads.
+  leads. A feature that landed and was a BACKLOG item: its line to
+  `COMPLETED.md`.
 - A new player decision or a careful rules call: an entry in
   `docs/manual-checks.md` with its board in `client/src/builder/manualChecks.ts`.
 

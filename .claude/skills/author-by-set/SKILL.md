@@ -103,9 +103,9 @@ As `author-top-cards` steps 3–6, with these differences:
   the share: `"Reality Fracture (FRA, 2026-10-02): top 50% by EDHREC rank"`.
   Every card of the batch is in it — authored or blocked — so `cards:sets
   -- --next` and `cards:needs -- --next` skip them from then on.
-- **BACKLOG.md**, "Card backlog": the set walk's place — which set is done,
-  which is next — on the line for this skill; the batch summary goes in
-  `docs/card-blockers.md`.
+- **BACKLOG.md**, "Card backlog": which set is next, on the line for this
+  skill; a set finished goes on `COMPLETED.md`'s set-walk line; the batch
+  summary goes in `docs/card-blockers.md`.
 - **Commit**: `Cards: <Set name> — <three or four headline cards> and <count>
   more` (or `Engine, Cards: <the feature>, and <Set name>'s …` when one was
   built), the set and share, and any engine or scaffolder change with why.
