@@ -141,6 +141,7 @@ import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
+import _poolHardenedScales from "../pool/hardened-scales.js";
 import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
 import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
@@ -525,6 +526,7 @@ const shard: CardShard = {
     _poolGriptide,
     _poolGuardianGladewalker,
     _poolHamperingSnare,
+    _poolHardenedScales,
     _poolHarmonicSliver,
     _poolHauntedRidge,
     _poolHavocDemon,

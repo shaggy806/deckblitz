@@ -69,6 +69,7 @@ import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
+import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
@@ -489,6 +490,7 @@ const shard: CardShard = {
     _poolClockworkDrawbridge,
     _poolCoatWithVenom,
     _poolCoffinPurge,
+    _poolConclaveMentor,
     _poolConduitOfWorlds,
     _poolCordialVampire,
     _poolCorpulentCorpse,

@@ -140,10 +140,9 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 - **"Whenever you activate an ability"** (Rings of Brighthearth).
 - **An O-Ring's return is a triggered ability, not rule 610.3's one-shot effect.**
 - **End-step token removal resolves without the stack** (603.7, 701.21a).
-- **Replacement ordering** — no general `choose-replacement-order` (616.1).
+- **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
 - **Toxic's last two shapes** (Skrelv, Defector Mite; Skrelv's Hive).
-- **Damage modifiers apply in a fixed order** (616.1).
 - **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape** — Will of the Jeskai, Kwain, Forced Fruition, Ruric Thar, Spellshock, Magebane Lizard, Black Mage's Rod.
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4c, 800.4g–h).

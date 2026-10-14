@@ -193,6 +193,7 @@ import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
+import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
 import _poolMetallurgeon from "../pool/metallurgeon.js";
@@ -311,6 +312,7 @@ import _poolSwirlingTorrent from "../pool/swirling-torrent.js";
 import _poolSwordOfTruthAndJustice from "../pool/sword-of-truth-and-justice.js";
 import _poolSyphonFlesh from "../pool/syphon-flesh.js";
 import _poolSyrVondamSunstarExemplar from "../pool/syr-vondam-sunstar-exemplar.js";
+import _poolTaintedRemedy from "../pool/tainted-remedy.js";
 import _poolTakeUpArms from "../pool/take-up-arms.js";
 import _poolTalasMerchant from "../pool/talas-merchant.js";
 import _poolTaleOfMomo from "../pool/tale-of-momo.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolManifoldKey,
     _poolMarduDevotee,
     _poolMarduHateblade,
+    _poolMauhurUrukHaiCaptain,
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
     _poolMetallurgeon,
@@ -696,6 +699,7 @@ const shard: CardShard = {
     _poolSwordOfTruthAndJustice,
     _poolSyphonFlesh,
     _poolSyrVondamSunstarExemplar,
+    _poolTaintedRemedy,
     _poolTakeUpArms,
     _poolTalasMerchant,
     _poolTaleOfMomo,

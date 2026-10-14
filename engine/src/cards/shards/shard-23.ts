@@ -343,6 +343,7 @@ import _poolWingShredder from "../pool/wing-shredder.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
 import _poolWithstand from "../pool/withstand.js";
+import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
@@ -696,6 +697,7 @@ const shard: CardShard = {
     _poolWinterflame,
     _poolWirewoodHivemaster,
     _poolWithstand,
+    _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,
     _poolZimoneInfiniteAnalyst,

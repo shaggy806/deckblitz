@@ -99,8 +99,18 @@ per gap under the same bold title; when a gap closes, delete it in both.
   or copy it (Strionic Resonator). `exileAtEndOfCombat` (myriad) already sets up a real delayed
   trigger over the tokens it made; these need the same, kept out of token stacks, and the
   sacrifice made by the token's controller then (rule 701.21a).
-- **Replacement ordering.** There is no general `choose-replacement-order` (rule 616.1) — only
-  Feather's exile beside another exiling replacement asks — and no damage redirection to a
+- **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
+  affected player (or the controller of the affected object) order the replacement and
+  prevention effects that apply to one event. The engine picks the order best for them, as
+  Arena does, instead of asking: damage the least dealt (then the fewest shield points spent,
+  `Game.bestDamageOrder` over every order of the doublers, pluses, at-least raises, prevent-alls
+  and prevention shields), counters the most +1/+1 and the fewest -1/-1 (`Game.counterTotal`:
+  a "that many plus one" before a doubler, or after it for -1/-1), and a life gain turned to
+  loss (Tainted Remedy) before anything grows it, a prevented one before both. A player who
+  wants the worse result — more damage to their own creature for a "dealt damage" trigger, more
+  -1/-1 counters for a persist loop — doesn't get it. Asking needs a decision in the middle of
+  `dealDamage`/`addCounter`, which are synchronous at every call site. Only Feather's exile
+  beside another exiling replacement asks today. There is also no damage redirection to a
   third object.
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.** At a table of three
   or more, when Thieves controlled by different opponents could each take a draw, the drawing
@@ -111,11 +121,6 @@ per gap under the same bold title; when a gap closes, delete it in both.
   Skrelv, Defector Mite, which also needs hexproof from a colour) and a static scoped to
   "creatures with toxic" (Skrelv's Hive: toxic is folded in the layer such a scope would have
   to wait for).
-- **Damage modifiers apply in a fixed order.** When a doubler (Dictate of the Twin Gods,
-  Torbran, Gratuitous Violence) meets prevention or another modifier, the affected player (or
-  controller of the affected object) chooses the order (rule 616.1); the engine fixes it. The
-  pool's doublers have it today; Furnace of Rath, Collective Inferno and Mechanized Warfare wait
-  on it.
 - **Pool cards the no-engine-work pass (2026-10-04) found sharing a blocked shape.** Each reviewer
   flagged these while blocking a new card for the same reason; none was re-run, so check each:
   - `each-player-may` asks one player at a time where the ruling has every player choose first,

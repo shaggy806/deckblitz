@@ -27,6 +27,7 @@ import _poolBehemothSledge from "../pool/behemoth-sledge.js";
 import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
 import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
+import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
@@ -383,6 +384,7 @@ const shard: CardShard = {
     _poolBellowingAegisaur,
     _poolBelovedPrincess,
     _poolBenalishCavalry,
+    _poolBenevolentHydra,
     _poolBlightedCataract,
     _poolBoroughBackup,
     _poolBovineIntervention,

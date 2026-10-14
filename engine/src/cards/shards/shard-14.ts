@@ -65,6 +65,7 @@ import _poolClarionSpirit from "../pool/clarion-spirit.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
 import _poolCobaltGolem from "../pool/cobalt-golem.js";
+import _poolCollectiveInferno from "../pool/collective-inferno.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
@@ -439,6 +440,7 @@ const shard: CardShard = {
     _poolClingingAnemones,
     _poolCloudshredderSliver,
     _poolCobaltGolem,
+    _poolCollectiveInferno,
     _poolCombatThresher,
     _poolCompanyCommander,
     _poolConiferStrider,

@@ -216,7 +216,17 @@ export interface TokenMultiplierReplacement {
  * multiply. */
 export interface CounterMultiplierReplacement {
   readonly event: "would-add-counter";
-  readonly multiplier: number;
+  /** "Twice that many … instead" (Doubling Season). */
+  readonly multiplier?: number;
+  /** "That many plus one … instead" (Hardened Scales, Winding Constrictor):
+   * added once to each placement of one or more counters. With a multiplier
+   * as well, the permanent's controller orders them (rule 616.1) — the order
+   * that puts the most counters, or for -1/-1 counters the fewest
+   * (`Game.counterTotal`). */
+  readonly plus?: number;
+  /** "…put on **another** creature you control" (Benevolent Hydra): never
+   * this permanent itself. */
+  readonly other?: true;
   readonly counterKind?: string;
   /** Narrows which of your permanents it applies to — Branching Evolution's
    * "on a **creature** you control" is `{ type: "creature" }`. Matched
@@ -337,6 +347,11 @@ export interface LifeGainReplacement {
    * Reflection) — applied after every `plus`, the order that gains most. */
   readonly multiplier?: number;
   readonly prevent?: boolean;
+  /** "…that player loses that much life instead" (Tainted Remedy). The
+   * player gaining orders it among the others (rule 616.1) and takes the
+   * order best for them: a `prevent` first (nothing happens), else this
+   * first — so no `plus` or `multiplier` changes the gain it becomes. */
+  readonly becomesLoss?: true;
 }
 
 /**

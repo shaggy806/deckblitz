@@ -164,6 +164,7 @@ import _poolJunkWinder from "../pool/junk-winder.js";
 import _poolJwarIsleRefuge from "../pool/jwar-isle-refuge.js";
 import _poolKalonianBehemoth from "../pool/kalonian-behemoth.js";
 import _poolKamahlHeartOfKrosa from "../pool/kamahl-heart-of-krosa.js";
+import _poolKamiOfWhisperedHopes from "../pool/kami-of-whispered-hopes.js";
 import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js";
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
@@ -527,6 +528,7 @@ const shard: CardShard = {
     _poolJwarIsleRefuge,
     _poolKalonianBehemoth,
     _poolKamahlHeartOfKrosa,
+    _poolKamiOfWhisperedHopes,
     _poolKarlovOfTheGhostCouncil,
     _poolKarnsTemporalSundering,
     _poolKasimirTheLoneWolf,

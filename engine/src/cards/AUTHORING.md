@@ -3712,10 +3712,16 @@ clause (section 9):
 - `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.
-- `{ event: "would-add-counter", multiplier, counterKind?, filter? }` — Doubling
-  Season. `filter` narrows which of your permanents it covers (Branching
-  Evolution: `{ type: "creature" }`). Only multipliers: "that many **plus
-  one**" (Hardened Scales) would need replacement ordering.
+- `{ event: "would-add-counter", multiplier?, plus?, counterKind?, filter?, other? }` —
+  Doubling Season (`multiplier: 2`). `filter` narrows which of your permanents
+  it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a
+  creature or Vehicle": `anyOf`). `plus: 1` is "that many plus one" (Hardened
+  Scales, `counterKind: "+1/+1"`), and `other: true` leaves out this
+  permanent itself (Benevolent Hydra's "another creature you control"). Both
+  apply to counters a permanent enters with too (rule 122.6). The order is
+  the one best for the permanent's controller (rule 616.1): each `plus`
+  before the doublers — (n + 1) × 2 — except for -1/-1 counters, where after
+  them gives fewer.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets
@@ -3777,14 +3783,16 @@ clause (section 9):
   Water Crystal's "…they mill that many cards plus four instead" (`plus: 4`).
   Several multiply, then every `plus` adds, as damage's do; a mill of none is
   never replaced.
-- `{ event: "would-gain-life", who, plus?, multiplier?, prevent? }` — Bilbo, Birthday
+- `{ event: "would-gain-life", who, plus?, multiplier?, prevent?, becomesLoss? }` — Bilbo, Birthday
   Celebrant's "if you would gain life, you gain that much life plus 1
   instead" (`who: "you"`, `plus: 1`), or "your opponents can't gain life"
   (The Lord of Pain — `who: "opponent"`, `prevent: true`). Applied to every
   life gain, lifelink's included; one `prevent` beats every `plus`.
   `multiplier: 2` is Rhox Faithmender's "you gain twice that much life
   instead", applied after every `plus` (the order the gaining player would
-  pick, rule 616.1).
+  pick, rule 616.1). `becomesLoss: true` is Tainted Remedy's "if an opponent
+  would gain life, that player loses that much life instead" (`who:
+  "opponent"`): applied before any `plus` or `multiplier`, after a `prevent`.
 - `{ event: "would-deal-damage", multiplier?, plus?, atLeast?, combat?, prevent?, then?, source?, fromSelf?, to?, toFilter? }`
   (`fromSelf: true` — only damage this permanent deals: Wolverine's "double all damage Wolverine would deal")
   — damage about to be dealt, changed. With neither `source` nor `to` it is
@@ -3811,10 +3819,14 @@ clause (section 9):
   source you control would deal an amount of noncombat damage less than Ojer
   Axonil's power to an opponent, that source deals damage equal to Ojer
   Axonil's power instead" (`atLeast: "this-power", combat: false, source:
-  { colors: ["R"], controlledBy: "you" }, to: "opponent"`). Applied in a fixed
-  order — every multiplier, then every `plus`, then every `atLeast`, then the
-  first `prevent`, then prevention shields — where rule 616.1 would let the
-  affected player choose.
+  { colors: ["R"], controlledBy: "you" }, to: "opponent"`). "A red or artifact
+  source" is `source: { anyOf: [{ colors: ["R"] }, { type: "artifact" }],
+  controlledBy: "you" }` (Mechanized Warfare); "sources you control of the
+  chosen type" is `source: { controlledBy: "you", ofChosenType: true }`
+  (Collective Inferno). The affected player orders them (rule 616.1): the
+  engine tries every order of the multipliers, pluses, `atLeast`s, the first
+  `prevent` and the prevention shields, and applies the one dealing the least
+  damage (a Heal's shield before a Furnace of Rath: 3 − 1 = 2, doubled to 4).
 
 ---
 

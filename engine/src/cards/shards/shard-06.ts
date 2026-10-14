@@ -51,6 +51,7 @@ import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
 import _poolCapitalCity from "../pool/capital-city.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
+import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
@@ -432,6 +433,7 @@ const shard: CardShard = {
     _poolCanopySpider,
     _poolCapitalCity,
     _poolCaptureOfJingzhou,
+    _poolCaradoraHeartOfAlacria,
     _poolCasualtiesOfWar,
     _poolCentaurHealer,
     _poolCharcoalDiamond,

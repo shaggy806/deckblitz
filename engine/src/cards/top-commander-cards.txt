@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3603 already implemented / 1397 missing (marks refreshed 2026-10-14)
+3613 already implemented / 1387 missing (marks refreshed 2026-10-14)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -181,7 +181,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   182  Night's Whisper                          {1}{B}           Sorcery
 [x]   183  Command Beacon                           {0}              Land
 [x]   184  Tireless Provisioner                     {2}{G}           Creature — Elf Scout
-[ ]   185  Hardened Scales                          {G}              Enchantment
+[x]   185  Hardened Scales                          {G}              Enchantment
 [x]   186  Stormcarved Coast                        {0}              Land
 [x]   187  Spire Garden                             {0}              Land
 [x]   188  Orzhov Signet                            {2}              Artifact
@@ -397,7 +397,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   398  Spara's Headquarters                     {0}              Land — Forest Plains Island
 [x]   399  Frontier Bivouac                         {0}              Land
 [x]   400  Zagoth Triome                            {0}              Land — Swamp Forest Island
-[ ]   401  Kami of Whispered Hopes                  {2}{G}           Creature — Spirit
+[x]   401  Kami of Whispered Hopes                  {2}{G}           Creature — Spirit
 [x]   402  Silence                                  {W}              Instant
 [x]   403  Evolution Sage                           {2}{G}           Creature — Elf Druid
 [x]   404  Guttersnipe                              {2}{R}           Creature — Goblin Shaman
@@ -638,7 +638,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]   639  Plaguecrafter                            {2}{B}           Creature — Human Shaman
 [x]   640  Altar of Dementia                        {2}              Artifact
 [x]   641  Incubation Druid                         {1}{G}           Creature — Elf Druid
-[ ]   642  Ozolith, the Shattered Spire             {1}{G}           Legendary Artifact
+[x]   642  Ozolith, the Shattered Spire             {1}{G}           Legendary Artifact
 [ ]   643  Borne Upon a Wind                        {1}{U}           Instant
 [ ]   644  Midnight Clock                           {2}{U}           Artifact
 [x]   645  Savage Lands                             {0}              Land
@@ -2353,7 +2353,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2360  Disdainful Stroke                        {1}{U}           Instant
 [x]  2361  Sabotender                               {1}{R}           Creature — Plant
 [x]  2362  Beanstalk Giant // Fertile Footsteps     {6}{G} // {2}{G} Creature — Giant // Sorcery — Adventure
-[ ]  2363  Conclave Mentor                          {G}{W}           Creature — Centaur Cleric
+[x]  2363  Conclave Mentor                          {G}{W}           Creature — Centaur Cleric
 [x]  2364  Toxrill, the Corrosive                   {5}{B}{B}        Legendary Creature — Slug Horror
 [x]  2365  Circle of Power                          {3}{B}           Sorcery
 [ ]  2366  Bow of Nylea                             {1}{G}{G}        Legendary Enchantment Artifact
@@ -2937,7 +2937,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
 [ ]  2945  Umezawa's Jitte                          {2}              Legendary Artifact — Equipment
 [ ]  2946  Maze's End                               {0}              Land
-[ ]  2947  Benevolent Hydra                         {X}{G}{G}        Creature — Hydra
+[x]  2947  Benevolent Hydra                         {X}{G}{G}        Creature — Hydra
 [x]  2948  Cultivator's Caravan                     {3}              Artifact — Vehicle
 [x]  2949  Oakhollow Village                        {0}              Land
 [ ]  2950  Nazgûl                                   {2}{B}           Creature — Wraith Knight
@@ -3162,7 +3162,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3169  Scytheclaw Raptor                        {2}{R}           Creature — Dinosaur
 [x]  3170  Lunar Convocation                        {W}{B}           Enchantment
 [x]  3171  Gemhide Sliver                           {1}{G}           Creature — Sliver
-[ ]  3172  Collective Inferno                       {3}{R}{R}        Enchantment
+[x]  3172  Collective Inferno                       {3}{R}{R}        Enchantment
 [x]  3173  Hallowed Haunting                        {2}{W}{W}        Enchantment
 [x]  3174  Goblin Trashmaster                       {2}{R}{R}        Creature — Goblin Warrior
 [x]  3175  Gríma, Saruman's Footman                 {2}{U}{B}        Legendary Creature — Human Advisor
@@ -4233,7 +4233,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4240  Kykar, Zephyr Awakener                   {2}{W}{U}        Legendary Creature — Bird Wizard
 [ ]  4241  Dance with Calamity                      {7}{R}           Sorcery
 [x]  4242  Revitalize                               {1}{W}           Instant
-[ ]  4243  Mechanized Warfare                       {1}{R}{R}        Enchantment
+[x]  4243  Mechanized Warfare                       {1}{R}{R}        Enchantment
 [ ]  4244  Screeching Scorchbeast                   {4}{B}{B}        Creature — Bat Mutant
 [ ]  4245  Neyith of the Dire Hunt                  {2}{G}{G}        Legendary Creature — Human Warrior
 [x]  4246  Herd Baloth                              {3}{G}{G}        Creature — Beast
@@ -4485,7 +4485,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4492  Éowyn, Shieldmaiden                      {2}{U}{R}{W}     Legendary Creature — Human Knight
 [ ]  4493  Peek                                     {U}              Instant
 [x]  4494  Noxious Ghoul                            {3}{B}{B}        Creature — Zombie
-[ ]  4495  Mauhúr, Uruk-hai Captain                 {B}{R}           Legendary Creature — Orc Soldier
+[x]  4495  Mauhúr, Uruk-hai Captain                 {B}{R}           Legendary Creature — Orc Soldier
 [x]  4496  Akroma, Angel of Wrath                   {5}{W}{W}{W}     Legendary Creature — Angel
 [x]  4497  Raise the Alarm                          {1}{W}           Instant
 [ ]  4498  Price of Fame                            {3}{B}           Instant
@@ -4604,7 +4604,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4611  Entrapment Maneuver                      {3}{W}           Instant
 [x]  4612  Xyris, the Writhing Storm                {2}{G}{U}{R}     Legendary Creature — Snake Leviathan
 [ ]  4613  Solar Array                              {3}              Artifact
-[ ]  4614  Furnace of Rath                          {1}{R}{R}{R}     Enchantment
+[x]  4614  Furnace of Rath                          {1}{R}{R}{R}     Enchantment
 [x]  4615  Witherbloom Apprentice                   {B}{G}           Creature — Human Druid
 [x]  4616  Summon: Fat Chocobo                      {4}{G}           Enchantment Creature — Saga Bird
 [x]  4617  Viridian Longbow                         {1}              Artifact — Equipment
@@ -4966,7 +4966,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4973  Fiendlash                                {1}{R}           Artifact — Equipment
 [x]  4974  Rakdos, the Muscle                       {2}{B}{B}{R}     Legendary Creature — Demon Mercenary
 [ ]  4975  Sorin, Lord of Innistrad                 {2}{W}{B}        Legendary Planeswalker — Sorin
-[ ]  4976  Michelangelo, Weirdness to 11            {1}{G}           Legendary Creature — Mutant Ninja Turtle
+[x]  4976  Michelangelo, Weirdness to 11            {1}{G}           Legendary Creature — Mutant Ninja Turtle
 [x]  4977  Undergrowth Recon                        {1}{G}{G}        Enchantment
 [x]  4978  Storm of Souls                           {4}{W}{W}        Sorcery
 [ ]  4979  Sauron's Ransom                          {1}{U}{B}        Instant

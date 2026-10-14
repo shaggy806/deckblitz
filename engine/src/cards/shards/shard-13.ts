@@ -135,6 +135,7 @@ import _poolFrostboilSnarl from "../pool/frostboil-snarl.js";
 import _poolFrostbridgeGuard from "../pool/frostbridge-guard.js";
 import _poolFrostburnWeird from "../pool/frostburn-weird.js";
 import _poolFungalSprouting from "../pool/fungal-sprouting.js";
+import _poolFurnaceOfRath from "../pool/furnace-of-rath.js";
 import _poolFurnaceWhelp from "../pool/furnace-whelp.js";
 import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
@@ -520,6 +521,7 @@ const shard: CardShard = {
     _poolFrostbridgeGuard,
     _poolFrostburnWeird,
     _poolFungalSprouting,
+    _poolFurnaceOfRath,
     _poolFurnaceWhelp,
     _poolFyndhornBrownie,
     _poolGalewindMoose,

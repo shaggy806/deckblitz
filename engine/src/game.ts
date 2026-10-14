@@ -415,6 +415,80 @@ const LOOP_TRAIL = 512;
 const LOOP_PERIOD_MAX = 32;
 const LOOP_REPEATS = 8;
 
+/** One effect that would change a damage event — see `Game.damageSteps`. */
+type DamageStep =
+  | { readonly kind: "times"; readonly by: number }
+  | { readonly kind: "plus"; readonly by: number }
+  | { readonly kind: "at-least"; readonly power: number }
+  | { readonly kind: "prevent-all"; readonly by: ObjectId; readonly controller: PlayerId; readonly then?: EffectSpec }
+  | { readonly kind: "shield"; readonly shield: PreventionShield };
+
+/**
+ * `amount` damage from each of `sources` identical sources, through `order`
+ * (rules 614, 615, 616.1f): their total dealt, how much the shields took
+ * (each as `left(shield)` says it can), and what a "prevent all" step
+ * prevented, if one did. Changes nothing — `Game.bestDamageOrder` scores
+ * orders with it, and `Game.dealDamage` applies the chosen one by it. A step
+ * that no longer applies — anything once the damage is all prevented —
+ * doesn't. Per-source steps scale with `sources` (Torbran's +2 each).
+ */
+function runDamageSteps(
+  amount: number,
+  sources: number,
+  order: readonly DamageStep[],
+  left: (shield: PreventionShield) => number,
+): {
+  readonly dealt: number;
+  readonly shieldUsed: number;
+  readonly shields: readonly { readonly shield: PreventionShield; readonly prevented: number }[];
+  readonly preventedAll?: { readonly step: Extract<DamageStep, { kind: "prevent-all" }>; readonly amount: number };
+} {
+  let total = amount * sources;
+  let shieldUsed = 0;
+  const shields: { shield: PreventionShield; prevented: number }[] = [];
+  for (const step of order) {
+    if (total <= 0) break;
+    switch (step.kind) {
+      case "times":
+        total *= step.by;
+        break;
+      case "plus":
+        total += step.by * sources;
+        break;
+      case "at-least":
+        total = Math.max(total, step.power * sources);
+        break;
+      case "prevent-all":
+        return { dealt: 0, shieldUsed, shields, preventedAll: { step, amount: total } };
+      case "shield": {
+        // An "all damage this turn" shield takes the whole hit and stays.
+        const prevented = step.shield.all === true ? total : Math.min(total, left(step.shield));
+        if (prevented <= 0) break;
+        total -= prevented;
+        if (step.shield.all !== true) shieldUsed += prevented;
+        shields.push({ shield: step.shield, prevented });
+        break;
+      }
+    }
+  }
+  return { dealt: Math.max(0, total), shieldUsed, shields };
+}
+
+/** Every order of `items` but the one given (few: the effects on one damage
+ * event). */
+function permutationsOf<T>(items: readonly T[]): T[][] {
+  const out: T[][] = [];
+  const walk = (prefix: T[], rest: readonly T[]): void => {
+    if (rest.length === 0) {
+      if (prefix.some((x, i) => x !== items[i])) out.push(prefix);
+      return;
+    }
+    rest.forEach((x, i) => walk([...prefix, x], [...rest.slice(0, i), ...rest.slice(i + 1)]));
+  };
+  walk([], items);
+  return out;
+}
+
 /** Whether the end of `trail` is one cycle of at most `LOOP_PERIOD_MAX`
  * entries repeated `LOOP_REPEATS` times. */
 function repeatsOneCycle(trail: readonly string[]): boolean {
@@ -22394,7 +22468,7 @@ export class Game {
         // (rule 714.3a), as `moveObject` gives a Saga card: before this, a
         // token copy of one sat on no counters and never read chapter I.
         if (this.registry.get(printedName).chapters !== null) {
-          this.addLoreCounter(id, this.counterMultiplier(id, "lore"));
+          this.addLoreCounter(id, this.counterTotal(id, "lore", 1));
         }
       }
       return made;
@@ -24126,7 +24200,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     // Doubling Season (rule 614): "twice that many counters instead".
-    const total = amount * this.counterMultiplier(id, counter);
+    const total = this.counterTotal(id, counter, amount);
     const before = object.counters[counter] ?? 0;
     object.counters[counter] = before + total;
     // Every counter of a kind takes the newest one's timestamp (613.7c); a
@@ -27660,50 +27734,24 @@ export class Game {
     );
   }
 
-  /** Run `amount` damage aimed at `target` through the one-shot prevention
-   * shields (Healing Salve — rule 614.9 / EG-6), shrinking / removing them,
-   * and return the amount that gets through. */
-  private consumePreventionShields(
-    source: ObjectId,
-    target: TargetRef,
-    amount: number,
-    combat: boolean,
-  ): number {
-    let through = amount;
-    for (const shield of this.state.preventionShields) {
-      if (through <= 0) break;
-      if (!this.shieldCovers(shield, target, combat)) continue;
-      // An "all damage this turn" shield takes the whole hit and stays.
-      const prevented = shield.all === true ? through : Math.min(through, shield.amount);
-      if (prevented <= 0) continue;
-      if (shield.all !== true) shield.amount -= prevented;
-      through -= prevented;
-      this.emit({ type: "damage-prevented", source, target, amount: prevented });
-    }
-    this.state.preventionShields = this.state.preventionShields.filter((s) => s.all === true || s.amount > 0);
-    return through;
-  }
-
   /**
-   * `amount` damage from `source` to `target`, as the `would-deal-damage`
-   * replacements on the battlefield change it: every multiplier (Dictate of
-   * the Twin Gods; Neriv's "a creature you control that entered this turn"),
-   * then every `plus` (Torbran), then — if one prevents it instead (The
-   * Mindskinner) — none of it, with that replacement's follow-up. A fixed
-   * order where rule 616.1 would let the affected player choose; see
-   * `DamageMultiplierReplacement`. Nothing applies, the overwhelmingly common
-   * case, costs one scan.
+   * The replacement and prevention effects that would change damage from
+   * `source` to `target` (rules 614, 615): every `would-deal-damage`
+   * replacement's multiplier (Dictate of the Twin Gods; Neriv's "a creature
+   * you control that entered this turn"), `plus` (Torbran), raise to its
+   * power (Ojer Axonil) and "prevent that damage and …" (The Mindskinner); a
+   * player effect's doubling; and each prevention shield that covers it
+   * (Healing Salve). In the order the engine applied them before it ordered
+   * them — which `bestDamageOrder` keeps whenever another order is no
+   * better for the player being dealt the damage. Nothing applies, the
+   * overwhelmingly common case, costs one scan.
    */
-  private replacedDamage(
+  private damageSteps(
     source: ObjectId,
     target: TargetRef,
-    amount: number,
     combat: boolean,
     sourceLastKnown: LastKnownInfo | undefined,
-  ): {
-    readonly amount: number;
-    readonly prevention?: { readonly by: ObjectId; readonly controller: PlayerId; readonly then?: EffectSpec };
-  } {
+  ): DamageStep[] {
     const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
@@ -27729,28 +27777,59 @@ export class Game {
         (d.permanentsToo === true && recipientsController !== undefined && d.players.includes(recipientsController));
       if (hits) playerMultiplier *= d.multiplier;
     }
-    if (applying.length === 0) return { amount: amount * playerMultiplier };
-    let changed = amount * playerMultiplier;
-    for (const { r } of applying) changed *= r.multiplier ?? 1;
-    for (const { r } of applying) changed += r.plus ?? 0;
+    const steps: DamageStep[] = [];
+    if (playerMultiplier !== 1) steps.push({ kind: "times", by: playerMultiplier });
+    for (const { r } of applying) if ((r.multiplier ?? 1) !== 1) steps.push({ kind: "times", by: r.multiplier ?? 1 });
+    for (const { r } of applying) if ((r.plus ?? 0) !== 0) steps.push({ kind: "plus", by: r.plus ?? 0 });
     // "…less than ~'s power …, that source deals damage equal to ~'s power
     // instead": raised, never lowered.
     for (const { by, r } of applying) {
       if (r.atLeast === "this-power") {
-        changed = Math.max(changed, computeCharacteristics(this.state, this.registry, by.id).power);
+        steps.push({ kind: "at-least", power: computeCharacteristics(this.state, this.registry, by.id).power });
       }
     }
-    const prevention = applying.find(({ r }) => r.prevent === true);
-    return prevention === undefined
-      ? { amount: changed }
-      : {
-          amount: changed,
-          prevention: {
-            by: prevention.by.id,
-            controller: prevention.by.controller,
-            ...(prevention.r.then !== undefined ? { then: prevention.r.then } : {}),
-          },
-        };
+    for (const { by, r } of applying) {
+      if (r.prevent !== true) continue;
+      steps.push({ kind: "prevent-all", by: by.id, controller: by.controller, ...(r.then !== undefined ? { then: r.then } : {}) });
+    }
+    // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
+    for (const shield of this.state.preventionShields) {
+      if (this.shieldCovers(shield, target, combat)) steps.push({ kind: "shield", shield });
+    }
+    return steps;
+  }
+
+  /**
+   * The order to apply `steps` to `amount` damage from each of `sources`
+   * identical sources (rule 616.1): the player being dealt the damage, or
+   * the controller of the permanent being dealt it, chooses — and the order
+   * chosen is the one best for them, worked out rather than asked (the
+   * user's call, 2026-10-14): the least damage, then the most of their
+   * prevention shields kept, then the least "prevent that damage and …"
+   * follow-up (The Mindskinner's mill); among equals, the order `damageSteps`
+   * lists them in. A player who wants *more* damage — their own creature's
+   * enrage, their own Phyrexian Unlife — isn't asked; that's a known limit.
+   * Once one applies, those that no longer would — anything after the damage
+   * is all prevented — don't (616.1f).
+   */
+  private bestDamageOrder(amount: number, sources: number, steps: readonly DamageStep[]): readonly DamageStep[] {
+    if (steps.length <= 1) return steps;
+    // A few effects at most in practice; past six, the order they came in.
+    if (steps.length > 6) return steps;
+    const score = (order: readonly DamageStep[]): readonly [number, number, number] => {
+      const outcome = runDamageSteps(amount, sources, order, (shield) => shield.amount);
+      return [outcome.dealt, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
+    };
+    let best = steps;
+    let bestScore = score(steps);
+    for (const order of permutationsOf(steps)) {
+      const s = score(order);
+      if (s[0] < bestScore[0] || (s[0] === bestScore[0] && (s[1] < bestScore[1] || (s[1] === bestScore[1] && s[2] < bestScore[2])))) {
+        best = order;
+        bestScore = s;
+      }
+    }
+    return best;
   }
 
   /** Whether a `would-deal-damage` replacement on `by` reaches damage from
@@ -27798,6 +27877,8 @@ export class Game {
       (sourceLastKnown !== undefined || this.state.objects[source] !== undefined) &&
       matchesFilter(this.state, this.registry, source, r.source, {
         you,
+        // "Of the chosen type" reads this permanent's choice (Collective Inferno).
+        source: by.id,
         ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
       })
     );
@@ -27956,28 +28037,34 @@ export class Game {
       return 0;
     }
 
-    // Damage replacements (rule 614): doubling (Dictate of the Twin Gods),
-    // "plus 2" (Torbran), "prevent that damage and …" (The Mindskinner).
-    // Applied before the prevention shields, so a shield eats the *doubled*
-    // amount, which is the printed interaction: doubling replaces the damage
-    // event, and prevention then applies to what it became.
-    const replaced = this.replacedDamage(source, target, amount, combat, sourceLastKnown);
-    // Each identical source's damage is replaced alike; from here on it's
-    // their total.
-    amount = replaced.amount * sources;
+    // Damage replacements (rule 614) — doubling (Dictate of the Twin Gods),
+    // "plus 2" (Torbran), "prevent that damage and …" (The Mindskinner) —
+    // and prevention shields (615), in the order best for whoever is dealt
+    // the damage (616.1 — `bestDamageOrder`): a shield before a doubler
+    // halves what gets through. Each identical source's damage is changed
+    // alike; from here on it's their total.
+    const steps = this.damageSteps(source, target, combat, sourceLastKnown);
+    if (steps.length === 0) {
+      amount *= sources;
+    } else {
+      const order = this.bestDamageOrder(amount, sources, steps);
+      const outcome = runDamageSteps(amount, sources, order, (shield) => shield.amount);
+      for (const { shield, prevented } of outcome.shields) {
+        if (shield.all !== true) shield.amount -= prevented;
+        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+      }
+      this.state.preventionShields = this.state.preventionShields.filter((s) => s.all === true || s.amount > 0);
+      if (outcome.preventedAll !== undefined) {
+        const { step, amount: prevented } = outcome.preventedAll;
+        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        if (step.then !== undefined) {
+          applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented));
+        }
+        return 0;
+      }
+      amount = outcome.dealt;
+    }
     if (amount <= 0) return 0;
-    if (replaced.prevention !== undefined) {
-      this.emit({ type: "damage-prevented", source, target, amount });
-      const { by, controller, then } = replaced.prevention;
-      if (then !== undefined) applyEffectSpec(then, this.makeResolutionContext(by, controller, [], amount));
-      return 0;
-    }
-
-    // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
-    if (this.state.preventionShields.length > 0) {
-      amount = this.consumePreventionShields(source, target, amount, combat);
-      if (amount <= 0) return 0;
-    }
 
     // The event names how many identical sources dealt it, when several.
     const many = sources > 1 ? { sources } : {};
@@ -28259,6 +28346,12 @@ export class Game {
         (r): r is LifeGainReplacement => r.event === "would-gain-life",
       );
       if (replacements.some((r) => r.prevent === true)) return;
+      // "…loses that much life instead" (Tainted Remedy), before anything
+      // that would add to the gain: the order the player gaining would take.
+      if (replacements.some((r) => r.becomesLoss === true)) {
+        this.changeLife(player, -delta);
+        return;
+      }
       for (const r of replacements) delta += r.plus ?? 0;
       for (const r of replacements) delta *= r.multiplier ?? 1;
     }
@@ -29435,8 +29528,9 @@ export class Game {
     let painIfUntapped = 0;
     let mayPayLife = 0;
     const counters: { kind: string; amount: number }[] = [];
-    const addCounters = (kind: string, base: number): void => {
-      const amount = base * this.counterMultiplier(id, kind, true);
+    // What it enters with, by kind, as the replacements give it; changed by
+    // the counter replacements once each kind is totalled (below).
+    const addCounters = (kind: string, amount: number): void => {
       if (amount <= 0) return;
       // One placement per kind: everything it enters with is put on at once
       // (rule 122.6), so a "whenever counters are put on" trigger fires once.
@@ -29551,10 +29645,15 @@ export class Game {
     // permanents its own controller controls. With nothing left to pay for,
     // a shock land isn't offered its life payment.
     if (untapped) tapped = false;
+    // Each kind it enters with is one placement (rule 122.6), changed once:
+    // Hardened Scales adds one to the total, not to each source of it.
+    const placed = counters
+      .map((c) => ({ kind: c.kind, amount: this.counterTotal(id, c.kind, c.amount, true) }))
+      .filter((c) => c.amount > 0);
     return {
       tapped,
       transformed,
-      counters,
+      counters: placed,
       painIfUntapped: tapped ? 0 : painIfUntapped,
       mayPayLife: tapped || untapped ? 0 : mayPayLife,
       riotHaste,
@@ -29677,10 +29776,22 @@ export class Game {
    * creature you control), but not those it enters with (`entering`): an effect that
    * modifies how a permanent enters comes from the permanent itself only if it
    * affects that permanent alone (rule 614.12 — Orb of Dreams). */
-  private counterMultiplier(target: ObjectId, kind: string, entering = false): number {
+  /**
+   * How many `kind` counters putting `amount` of them on `target` puts, as
+   * the would-add-counter replacements of its controller's permanents change
+   * it: Doubling Season's "twice that many" and Hardened Scales' "that many
+   * plus one" (each applies once to the placement). Its controller orders
+   * them (rule 616.1), and the order taken is the one best for them, worked
+   * out rather than asked (the user's call, 2026-10-14): additions before
+   * doublings, the most counters — or for -1/-1 counters, which they'd want
+   * fewest of, doublings first. `entering`: counters it enters with, which
+   * its own replacements don't see (it isn't on the battlefield yet).
+   */
+  private counterTotal(target: ObjectId, kind: string, amount: number, entering = false): number {
     const targetObject = this.state.objects[target];
-    if (targetObject === undefined) return 1;
+    if (targetObject === undefined || amount <= 0) return amount;
     let mult = 1;
+    let plus = 0;
     for (const id of this.state.zones.shared.battlefield) {
       if (entering && id === target) continue;
       const object = this.state.objects[id];
@@ -29692,15 +29803,20 @@ export class Game {
         if (
           r?.event === "would-add-counter" &&
           (r.counterKind === undefined || r.counterKind === kind) &&
+          !(r.other === true && id === target) &&
           (r.filter === undefined ||
-            matchesFilter(this.state, this.registry, target, r.filter, { you: object.controller })) &&
+            matchesFilter(this.state, this.registry, target, r.filter, { you: object.controller, source: id })) &&
           this.staticActive(object, ability)
         ) {
-          mult *= r.multiplier;
+          // A token stack of them is that many replacements.
+          for (let i = 0; i < (object.stackCount ?? 1); i += 1) {
+            mult *= r.multiplier ?? 1;
+            plus += r.plus ?? 0;
+          }
         }
       }
     }
-    return mult;
+    return kind === "-1/-1" ? amount * mult + plus : (amount + plus) * mult;
   }
 
   /** Whether a battlefield permanent replaces "put `cardId` into a graveyard"
@@ -30730,7 +30846,7 @@ export class Game {
       // A Saga enters with a lore counter (rule 714.3a), firing its chapter I
       // ability — two under Doubling Season, firing chapter II as well.
       if (this.registry.get(rulesTextName(object)).chapters !== null) {
-        this.addLoreCounter(id, this.counterMultiplier(id, "lore"));
+        this.addLoreCounter(id, this.counterTotal(id, "lore", 1));
       }
       // Counters it entered with were *put* on it (rule 122.6), so a
       // "whenever counters are put on" trigger sees them. Announced last, once

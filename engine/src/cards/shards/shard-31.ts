@@ -212,6 +212,7 @@ import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
 import _poolMarkerBeetles from "../pool/marker-beetles.js";
 import _poolMasterOfThePearlTrident from "../pool/master-of-the-pearl-trident.js";
 import _poolMechHangar from "../pool/mech-hangar.js";
+import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMirranCrusader from "../pool/mirran-crusader.js";
@@ -581,6 +582,7 @@ const shard: CardShard = {
     _poolMarkerBeetles,
     _poolMasterOfThePearlTrident,
     _poolMechHangar,
+    _poolMechanizedWarfare,
     _poolMerchantOfTruth,
     _poolMindstatic,
     _poolMirranCrusader,

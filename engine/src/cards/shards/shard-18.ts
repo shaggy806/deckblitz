@@ -187,6 +187,7 @@ import _poolManticoreEternal from "../pool/manticore-eternal.js";
 import _poolMassHysteria from "../pool/mass-hysteria.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
+import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
@@ -208,6 +209,7 @@ import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
+import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
@@ -579,6 +581,7 @@ const shard: CardShard = {
     _poolMassHysteria,
     _poolMemorialToFolly,
     _poolMichelangeloTheHeart,
+    _poolMichelangeloWeirdnessTo11,
     _poolMichikosReignOfTruth,
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
+    _poolOzolithTheShatteredSpire,
     _poolPatchworkAutomaton,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,

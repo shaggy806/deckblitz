@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "decision:replacement-order-choice",
+  "replacement:additive-counter-replacement",
+  "replacement:counter-addend-replacement",
+  "replacement:gain-life-becomes-loss",
   "effect:change-target",
   "keyword:behold",
   "keyword:blight",
