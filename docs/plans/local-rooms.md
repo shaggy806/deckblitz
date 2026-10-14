@@ -1,8 +1,10 @@
 # Local rooms: solo games in the player's browser
 
-Status: **in progress** (planned 2026-10-13). Steps 1-3 are built: `engine/local`; the server's
-room code browser-safe; and **blitz plays in a Web Worker behind `?local=1`** (`client/src/local/`,
-`server/src/local-host.ts`). Next: step 4, tutorials local.
+Status: **in progress** (planned 2026-10-13). Steps 1-5 are built, behind `?local=1`: blitz and
+lessons play in a Web Worker in the tab while lobbies stay on the server, and a local game survives
+a reload. Left: step 6, measuring on the user's low-end laptop (bot decision times, the worker's
+memory, smooth animation), then step 7, turning it on by default. Bug-report uploads (step 5's
+other half) wait: the capture panel only exists on a developer's `--capture` server.
 
 ## Why
 
@@ -142,8 +144,16 @@ to another player, and a room with a second human never goes local.
    `e2e/local-blitz.spec.ts` blitzes locally and watches the bots play, with no socket to the room
    server (red without local mode); the server-path blitz e2e is unchanged. Not yet: a reload ends
    a local game (step 5), and lessons still go to the server (step 4).
-4. **Tutorials local** (the lesson data and `buildScenario` in the shared code).
-5. **Resume after reload** (IndexedDB snapshots), **uploads for bug reports**, the optional ping.
+4. **Built (2026-10-13)**: per-room routing. `?local=1` no longer makes the whole tab local: a
+   `HybridSocket` keeps the server connection and sends a blitz's and a lesson's creates to the
+   tab's worker (`sendLocal`), then every message for a room the worker made goes there; a lobby,
+   joining by code and spectating stay on the server. Lessons needed nothing else — their data and
+   `buildScenario` were already in the browser-safe room code.
+5. **Built (2026-10-13), resume**: the worker saves each running game to IndexedDB
+   (`client/src/local/savedRooms.ts`, `LocalRoomHost.save()`, at most once a second when a frame
+   goes out) and restores them on start (`restore`); the tab remembers its local codes in
+   `sessionStorage`, so a reload's rejoin goes to the worker. Lessons restart. **Not built**: bug-report
+   uploads (only a `--capture` dev server has the panel) and the optional ping.
 6. **Bot budget on a slow machine**: measure bot decisions and the worker's memory on the user's low-end
    laptop, then choose wall clock or a simulation count.
 7. **Default on** for blitz and tutorials, with the fallback rules; the load test confirms the

@@ -37,7 +37,7 @@ import type { EventLogState } from './eventLog.ts'
 import { LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
-import { LocalSocket } from '../local/localSocket.ts'
+import { HybridSocket } from '../local/localSocket.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
 const SERVER_URL =
@@ -457,11 +457,20 @@ export function useNetworkGame(): NetworkGame {
   const send = useCallback((message: ClientMessage) => {
     wsRef.current?.send(JSON.stringify(message))
   }, [])
+  /** A room only this tab will play in — a blitz, a lesson — created in the
+   * tab's own room worker in local mode, on the server otherwise. */
+  const sendSolo = useCallback((message: ClientMessage) => {
+    const ws = wsRef.current
+    if (ws instanceof HybridSocket) ws.sendLocal(JSON.stringify(message))
+    else ws?.send(JSON.stringify(message))
+  }, [])
 
   const openSocket = useCallback(() => {
-    // In local mode the rooms run in a worker in this tab, not on the server
-    // (`local/localSocket.ts`); the messages are the same either way.
-    const ws: RoomSocket = localMode() ? new LocalSocket() : (new WebSocket(SERVER_URL) as RoomSocket)
+    // In local mode a blitz's and a lesson's rooms run in a worker in this
+    // tab instead (`local/localSocket.ts`); the messages are the same either
+    // way, and everything else still goes to the server.
+    const server = new WebSocket(SERVER_URL) as RoomSocket
+    const ws: RoomSocket = localMode() ? new HybridSocket(server) : server
     wsRef.current = ws
     isPlayingRef.current = false
     const isCurrent = () => wsRef.current === ws
@@ -804,9 +813,9 @@ export function useNetworkGame(): NetworkGame {
       }
       setBlitzing(true)
       setBlitzReport(report.substituted.length > 0 || report.dropped.length > 0 ? report : null)
-      send({ type: 'create-room', hostToken, players: BLITZ_PLAYERS })
+      sendSolo({ type: 'create-room', hostToken, players: BLITZ_PLAYERS })
     },
-    [send],
+    [sendSolo],
   )
 
   const dismissBlitzReport = useCallback(() => setBlitzReport(null), [])
@@ -820,9 +829,9 @@ export function useNetworkGame(): NetworkGame {
       pendingTutorialRef.current = { seat: null }
       setBlitzReport(null)
       setTutorialStarting(true)
-      send({ type: 'tutorial-create', lesson, hostToken })
+      sendSolo({ type: 'tutorial-create', lesson, hostToken })
     },
-    [send],
+    [sendSolo],
   )
   useEffect(() => {
     startTutorialRef.current = createTutorial

@@ -6,6 +6,7 @@
 
 import { describe, expect, it } from "vitest";
 import type { ServerMessage } from "protocol";
+import { ALICE } from "../decks.js";
 import { LocalRoomHost } from "../local-host.js";
 
 /** A page's worth of messages: what it was sent, and a way to wait for one. */
@@ -50,6 +51,45 @@ describe("a local room host", () => {
     expect(last("error")?.message).toMatch(/ZZZZZ/);
     host.message({ type: "builder-create", hostToken: "x" });
     expect(last("error")?.message).toMatch(/builder/);
+  });
+
+  it("saves a running game and picks it up again in a fresh host, the player rejoining by token", () => {
+    const first = page();
+    first.host.message({ type: "create-room", players: 4, hostToken: "host-1" });
+    const roomId = first.last("room-created")!.roomId;
+    first.host.message({ type: "join-room", roomId, hostToken: "host-1" });
+    first.host.message({ type: "claim-seat", roomId, seat: "alice" as never, clientToken: "me", ready: true });
+    for (const seat of ["bob", "carol", "dave"]) first.host.message({ type: "add-bot", roomId, seat: seat as never });
+    first.host.message({ type: "start-game", roomId });
+    const before = first.last("state")!;
+    // A waiting room and a lesson aren't kept; the game is.
+    first.host.message({ type: "create-room", hostToken: "other" });
+    first.host.message({ type: "tutorial-create", lesson: "basics-proof", hostToken: "t" });
+    // Through a structured clone, as IndexedDB keeps it.
+    const saved = structuredClone(first.host.save());
+    expect(saved.map((s) => s.id)).toEqual([roomId]);
+
+    const second = page();
+    expect(second.host.restore(saved)).toEqual([roomId]);
+    second.host.message({ type: "event-deltas" });
+    second.host.message({ type: "join-room", roomId });
+    second.host.message({ type: "claim-seat", roomId, seat: "alice" as never, clientToken: "me" });
+    expect(second.received.filter((m) => m.type === "error")).toEqual([]);
+    const after = second.last("state")!;
+    expect(after.seat).toBe("alice");
+    expect(after.game).toBe(before.game);
+    expect(after.seq).toBeGreaterThan(before.seq);
+    expect(after.view.turn).toEqual(before.view.turn);
+    expect(after.view.players[ALICE].life).toBe(before.view.players[ALICE].life);
+    expect(after.actions.length).toBeGreaterThan(0);
+    // Another player's token doesn't get the seat.
+    second.host.message({ type: "claim-seat", roomId, seat: "alice" as never, clientToken: "someone-else" });
+    expect(second.last("error")).toBeDefined();
+  });
+
+  it("restores nothing it can't load, and skips a code already taken", () => {
+    const { host } = page();
+    expect(host.restore([{ id: "BROKE", state: {} } as never])).toEqual([]);
   });
 
   it("opens a lesson", () => {

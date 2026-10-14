@@ -247,7 +247,7 @@ item lands.
 
 ## Code health
 
-- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13: steps 1-3 — `engine/local`, browser-safe room code, and blitz in a Web Worker behind `?local=1`. Next: step 4, tutorials local; then resume after a reload and bug-report uploads (step 5), measuring on the user's low-end laptop (step 6), default on (step 7).
+- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13, behind `?local=1`: steps 1-5 — blitz and lessons in a Web Worker, lobbies on the server, a local game surviving a reload. Next: step 6, measuring on the user's low-end laptop; then step 7, default on.
 - **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop
