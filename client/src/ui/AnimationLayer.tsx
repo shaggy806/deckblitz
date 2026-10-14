@@ -1116,7 +1116,9 @@ interface StackSpot {
  */
 function stackSpotOf(object: ObjectId): StackSpot | null {
   const entry = document.querySelector<HTMLElement>(`.stack-entry[data-stack-id="${CSS.escape(object)}"]`)
-  const card = entry?.querySelector<HTMLElement>('.card-tile')
+  // The card's own box (`.stack-card`, Stack.tsx), the tile's size exactly:
+  // what's placed in the entry, where the tile is placed in it.
+  const card = entry?.querySelector<HTMLElement>('.stack-card')
   if (!entry || !card || card.offsetParent !== entry) return null
   for (const animation of entry.getAnimations()) {
     if (animation instanceof CSSAnimation && animation.animationName === 'stack-arrive') animation.cancel()

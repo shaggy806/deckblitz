@@ -1425,7 +1425,21 @@
      being looked at for a while. It also loops rather than running a fixed
      number of times, because Table remounts on every frame (keyed on
      `shown.revision`) and a finite animation would restart its burst each
-     time the board updated underneath it. */
+     time the board updated underneath it. The pulse is the banner's
+     `::after` (below): an accent ring whose opacity animates, which the
+     compositor runs, where animating the panel's own border and shadow
+     repainted it every frame of every decision (a performance trace,
+     2026-10-13). The banner holds only this panel, so its box is the
+     panel's. */
+}
+.decision-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 55%, transparent);
+  opacity: 0;
   animation: decision-pulse 1.9s ease-in-out infinite;
 }
 /* The prompt sentence takes a whole row to itself, pushing the buttons onto
@@ -1530,22 +1544,15 @@
   width: 3.2em;
 }
 @keyframes decision-pulse {
-  0%,
-  100% {
-    border-color: var(--border);
-    box-shadow: var(--frame-raised), var(--shadow-popover);
-  }
   50% {
-    border-color: var(--accent);
-    box-shadow:
-      var(--frame-raised),
-      var(--shadow-popover),
-      0 0 0 2px color-mix(in srgb, var(--accent) 55%, transparent);
+    opacity: 1;
   }
 }
-:root[data-reduce-motion] .decision-banner .controls {
+/* Still: the accent border, without the glow around it. */
+:root[data-reduce-motion] .decision-banner::after {
   animation: none;
-  border-color: var(--accent);
+  opacity: 1;
+  box-shadow: none;
 }
 
 .board {
@@ -2121,28 +2128,41 @@
 .stack-entry.is-top .card-tile {
   border-color: var(--gold);
   box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--gold) 75%, transparent),
-    0 0 26px 7px color-mix(in srgb, var(--warn) 60%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--gold) 70%, transparent),
+    0 0 22px 5px color-mix(in srgb, var(--warn) 50%, transparent),
     var(--shadow-raised);
+}
+/* The pulse: a brighter glow over the steady one, fading in and out. Its
+   opacity is what animates, which the compositor runs off the main thread;
+   animating the box-shadow itself repainted the card every frame something
+   was on the stack, the page's costliest animation on a slow laptop (a
+   performance trace, 2026-10-13). On the card's own box (`.stack-card`,
+   Stack.tsx), since the tile clips anything of its own drawn outside it. */
+.stack-card {
+  position: relative;
+  display: flex;
+}
+.stack-entry.is-top:not(.is-prompt) .stack-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--gold) 95%, transparent),
+    0 0 34px 10px color-mix(in srgb, var(--warn) 75%, transparent);
+  opacity: 0;
   animation: stack-top-glow 1.9s ease-in-out infinite;
 }
 @keyframes stack-top-glow {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 3px color-mix(in srgb, var(--gold) 70%, transparent),
-      0 0 22px 5px color-mix(in srgb, var(--warn) 50%, transparent),
-      var(--shadow-raised);
-  }
   50% {
-    box-shadow:
-      0 0 0 3px color-mix(in srgb, var(--gold) 95%, transparent),
-      0 0 34px 10px color-mix(in srgb, var(--warn) 75%, transparent),
-      var(--shadow-raised);
+    opacity: 1;
   }
 }
-:root[data-reduce-motion] .stack-entry.is-top .card-tile {
+/* Still, the glow sits between the two. */
+:root[data-reduce-motion] .stack-entry.is-top:not(.is-prompt) .stack-card::after {
   animation: none;
+  opacity: 0.4;
 }
 /* The card that *caused* the decision you're answering, when it isn't on the
    stack any more (an edict's sacrifice is asked after the edict has resolved

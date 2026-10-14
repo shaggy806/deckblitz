@@ -86,14 +86,25 @@ where the decision is raised); bots and the fuzzer answer it already.
 - **The game page's own rendering on a slow laptop** (2026-10-13). The user's i5-6300U laptop ran a blitz at ~42 fps
   with hundreds of 100-250 ms main-thread hitches (`docs/plans/local-rooms.md`, step 6). A CPU
   profile of the same game on the dev PC with the page throttled 4x put 38% of main-thread work
-  in `recomputeBoardMiniW`'s board-fit search, now started from the last width
-  (`game/boardFit.ts`): busy time 66 s → 39 s. Most of what's left (~25 s) is "(program)", the
-  browser's own style recalculation, layout and paint, which a JS profile can't attribute. Next:
-  a `Tracing` capture (CDP `Tracing.start` with the `devtools.timeline` categories) of the same
-  throttled game, to see which of style, layout, paint or compositing it is and what triggers it
-  — candidates are `Table` remounting every frame shown (`usePlayback`), `--mini-w-fit` set on
-  each board (an inherited custom property restyles every tile under it), and the hover
-  carry's `elementFromPoint` on every remount (3-4% of JS time).
+  in `recomputeBoardMiniW`'s board-fit search, started from the last width (`game/boardFit.ts`):
+  busy time 66 s → 39 s. Then two Chrome performance traces (`Tracing`, the devtools.timeline
+  categories, rounds 3-6, 4x throttle) split what was left: the main thread busy 45-54% of the
+  time, rendering about half of that (style 13-16%, layout 7-12%, paint + pre-paint + layerize
+  ~25%), script ~20%; the freezes over 50 ms were script, layout and style, the paint spread
+  over ordinary frames while cards moved (an idle board paints a few times a second). With call
+  stacks: the board-fit search was still half the forced restyles (each probe restyles every
+  tile — `--mini-w-fit` is inherited) and re-ran every frame and render; the hover carry's
+  `elementFromPoint` forced a full layout between boards' writes; and `stack-top-glow` animated
+  `box-shadow` on the main thread most of the game. Fixed the same day: the search is skipped
+  when a board's room and rows are unchanged and the board drawn at its width from the start,
+  each seat's board ref is stable, and the stack glow and the decision banner's pulse animate a
+  pseudo-element's opacity on the compositor. The hover carry's extra layouts came from boards writing between tiles' hit tests, so they should go with the skipped writes — unconfirmed. **Next**: trace again on a quiet machine (the
+  2026-10-13 one was cut short by a game running on the dev PC) and compare with traces A/B; then
+  the rest — the active-seat `background-color` transition on `.app` (~2%), the tile hover
+  `box-shadow` transitions, card flights the compositor refused (`ghost-flight`, reason 4096),
+  `Table` remounting every frame — and only then decide on a Lite setting (Auto/Full/Lite in
+  Settings, auto-switched by measured freezes, not hardware hints: the laptop reports 4 threads
+  and 16 GB).
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
   Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
   Policy): the required notices and attribution, and where on the site they go.

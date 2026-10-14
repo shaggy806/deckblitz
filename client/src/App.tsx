@@ -177,6 +177,9 @@ const MINI_SHRINK_FLOOR = 40
  * every frame shown. Only ever a starting guess — the search checks it — so a
  * width left from another game costs a full search at worst. */
 const boardFitWidths = new Map<PlayerId, number>()
+/** What each seat's board was fitted for (its room and its rows): the same
+ * again, and its width stands without a search. */
+const boardFitKeys = new Map<PlayerId, string>()
 
 // A stable reference (not `[]` inline at each use) so passing it as `Table`'s
 // `actions` prop while `useDelayedView` reports `busy` doesn't itself count
@@ -3340,10 +3343,14 @@ function Table({
     )
     const rows = landsBelow ? [permanentRow, landRow] : [landRow, permanentRow]
 
+    // Drawn at the width it last settled on, so a remounted board's first
+    // layout is already the right one (`recomputeBoardMiniW`).
+    const fitted = boardFitWidths.get(pid)
     return (
       <div
         className={`board ${isOpp ? 'opp' : 'you'} ${seatClassOf(view.turnOrder, pid)}`}
         ref={registerBoardEl(pid)}
+        style={fitted === undefined ? undefined : ({ '--mini-w-fit': `${fitted}px` } as CSSProperties)}
       >
         {rows}
       </div>
@@ -3595,13 +3602,34 @@ function Table({
       boardEl.style.setProperty('--mini-w-fit', `${width}px`)
       return last.offsetTop + last.offsetHeight - first.offsetTop + chrome <= available
     }
+    // What the fit depends on: the room, and how many tiles each row holds
+    // (a land turned creature moves rows) and what's in them (an attachment,
+    // a chip). Unchanged since the last search — the usual case, a frame
+    // that moved something elsewhere — its width stands without a probe.
+    // Each probe restyles every tile under the board (`--mini-w-fit` is
+    // inherited), so this is most of what a frame used to cost a slow
+    // machine (a performance trace, 2026-10-13).
+    const clientWidth = boardEl.clientWidth
+    const rows = Array.from(boardEl.children, (row) => row.childElementCount).join(',')
+    const key = `${available}|${chrome}|${clientWidth}|${rows}|${boardEl.getElementsByTagName('*').length}`
+    const known = boardFitWidths.get(pid)
+    const set = (width: number) => {
+      // Only a change is written: a write restyles the board.
+      if (boardEl.style.getPropertyValue('--mini-w-fit') !== `${width}px`) {
+        boardEl.style.setProperty('--mini-w-fit', `${width}px`)
+      }
+      boardFitWidths.set(pid, width)
+      boardFitKeys.set(pid, key)
+    }
+    if (known !== undefined && boardFitKeys.get(pid) === key) {
+      set(known)
+      return
+    }
     // A tile is never wider than its board, and past App.css's cap every
     // width lays out the same, so the upper bound only has to be big enough.
     // Crowded even at the floor, it stays there and the board scrolls.
-    const width = fitWidth(fits, MINI_SHRINK_FLOOR, boardEl.clientWidth, boardFitWidths.get(pid))
-    // The last probe may have been another width.
-    boardEl.style.setProperty('--mini-w-fit', `${width}px`)
-    boardFitWidths.set(pid, width)
+    // The last probe may have been another width: `set` puts it right.
+    set(fitWidth(fits, MINI_SHRINK_FLOOR, clientWidth, known))
   }
   // Two triggers to recompute a board: its scrollable area resizing (window
   // resize, a layout change) and its own tile count changing (a permanent
@@ -3642,7 +3670,19 @@ function Table({
       mutationObserver.disconnect()
     }
   }, [])
-  const registerBoardEl = useCallback(
+  // One ref callback per seat for this mount: a new function each render
+  // would have React detach and reattach the board — and search its fit —
+  // on every render, a hover's included.
+  const [boardRefs] = useState(() => new Map<PlayerId, (el: HTMLDivElement | null) => void>())
+  const registerBoardEl = (pid: PlayerId) => {
+    let ref = boardRefs.get(pid)
+    if (ref === undefined) {
+      ref = attachBoardEl(pid)
+      boardRefs.set(pid, ref)
+    }
+    return ref
+  }
+  const attachBoardEl = useCallback(
     (pid: PlayerId) => (el: HTMLDivElement | null) => {
       const prev = boardElsRef.current.get(pid)
       if (prev) {

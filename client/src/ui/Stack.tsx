@@ -194,17 +194,23 @@ export function Stack({
                 {!isGhost && label ? ' · ' : null}
                 {label}
               </div>
-              <CardTile
-                // The decision's cause is a card, not an object on the board
-                // here: a creature that tapped to activate the ability asking
-                // you something is drawn untapped, as an ability's entry is.
-                obj={isGhost ? asCardFace(obj) : faceOf(obj)}
-                badge={obj.isCopy ? 'copy' : undefined}
-                highlight={targetable}
-                selected={!isGhost && (pickedIds?.has(id) ?? false)}
-                aimedBy={!isGhost && aimed !== null && aimed.objects.has(id) ? aimed.by : null}
-                onClick={!isGhost && onTargetClick ? () => onTargetClick(id) : undefined}
-              />
+              {/* The card in a box of its own size: the top entry's pulsing
+                  glow is this box's `::after` (App.css), since the tile clips
+                  anything of its own drawn outside it. */}
+              <div className="stack-card">
+                <CardTile
+                  // The decision's cause is a card, not an object on the
+                  // board here: a creature that tapped to activate the
+                  // ability asking you something is drawn untapped, as an
+                  // ability's entry is.
+                  obj={isGhost ? asCardFace(obj) : faceOf(obj)}
+                  badge={obj.isCopy ? 'copy' : undefined}
+                  highlight={targetable}
+                  selected={!isGhost && (pickedIds?.has(id) ?? false)}
+                  aimedBy={!isGhost && aimed !== null && aimed.objects.has(id) ? aimed.by : null}
+                  onClick={!isGhost && onTargetClick ? () => onTargetClick(id) : undefined}
+                />
+              </div>
               {!isGhost && obj.targets && obj.targets.length > 0 ? (
                 <div className="stack-targets">
                   {'→ '}
