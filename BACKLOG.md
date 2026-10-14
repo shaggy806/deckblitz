@@ -182,7 +182,7 @@ haste enablers in the crackback).
   room's wall clock (300 ms). The clock makes strength depend on the CPU — the live box ran a searched
   decision in 152 ms typical against 37 ms on the dev PC — and matters again for solo games in the
   browser (`docs/plans/local-rooms.md` step 6). Try count-only budgets of a few sizes against the clock:
-  strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop, and stalls
+  strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop (measured there 2026-10-13: every bot action p99 433 ms, max 1 s — the clock overshoots, it doesn't starve), and stalls
   (`npm run load-test -w server`).
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield);
@@ -226,6 +226,7 @@ item lands.
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11): analyze what deckblitz.net has to show to comply with WotC's copyright / Fan Content Policy (notices, attribution, where they go).
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12): planned in `docs/plans/tutorials.md` (a coach-mark overlay that blocks other clicks, a production-safe tutorial room with a scripted opponent, Learn Commander as one or two seeded games with the lessons as chapters, a first-visit callout); the user's decisions (2026-10-13) are at its end. Built 2026-10-13: the overlay, the site tour (cut down to the front page, ending on the offer of the board tour), the tutorial room with a scripted opponent, chapter goals and retry, Learn Commander playing a proof lesson (`basics-proof`), and the board tour (`board-tour`, the in-game stops). Next: the seeded decks and game 1's chapters (plan phase 4).
 - **Remove the entrance animation options from the settings panel** (the user, 2026-10-13): the "Card entrance" row (`client/src/ui/MotionControl.tsx`, `castEntrance` in `game/motionPrefs.ts`).
+- **The game page's own rendering on a slow laptop** (2026-10-13): after the board-fit fix, ~25 s of a 290 s game at 4x CPU throttle is still the browser's style, layout and paint — needs a performance trace to break down.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs
@@ -246,7 +247,7 @@ item lands.
 
 ## Code health
 
-- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13, behind `?local=1`: steps 1-5 — blitz and lessons in a Web Worker, lobbies on the server, a local game surviving a reload. Next: step 6, measuring on the user's low-end laptop; then step 7, default on.
+- **Solo games in the player's browser** (the user, 2026-10-13): planned in `docs/plans/local-rooms.md` — blitz and tutorials run the same room code in a Web Worker, freeing the server for games between people. Built 2026-10-13, behind `?local=1`: steps 1-5 — blitz and lessons in a Web Worker, lobbies on the server, a local game surviving a reload — and step 6, measured on the user's low-end laptop (bots and memory fine; the page's main thread was the cost, its biggest piece fixed). Next: step 7, default on.
 - **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): planned in
   `docs/plans/scaling-rooms.md` — everything runs on one Node thread today, so a bigger box adds
   little until rooms are spread across cores. Next: phase 0, measure (a load harness, event-loop

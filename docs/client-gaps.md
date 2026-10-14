@@ -83,6 +83,17 @@ card that must be taken (seen live 2026-10-09). The engine could skip the `choos
 the eligible cards are exactly `min` = `max` and there's no order to pick (`Game`'s look-and-choose,
 where the decision is raised); bots and the fuzzer answer it already.
 
+- **The game page's own rendering on a slow laptop** (2026-10-13). The user's i5-6300U laptop ran a blitz at ~42 fps
+  with hundreds of 100-250 ms main-thread hitches (`docs/plans/local-rooms.md`, step 6). A CPU
+  profile of the same game on the dev PC with the page throttled 4x put 38% of main-thread work
+  in `recomputeBoardMiniW`'s board-fit search, now started from the last width
+  (`game/boardFit.ts`): busy time 66 s → 39 s. Most of what's left (~25 s) is "(program)", the
+  browser's own style recalculation, layout and paint, which a JS profile can't attribute. Next:
+  a `Tracing` capture (CDP `Tracing.start` with the `devtools.timeline` categories) of the same
+  throttled game, to see which of style, layout, paint or compositing it is and what triggers it
+  — candidates are `Table` remounting every frame shown (`usePlayback`), `--mini-w-fit` set on
+  each board (an inherited custom property restyles every tile under it), and the hover
+  carry's `elementFromPoint` on every remount (3-4% of JS time).
 - **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
   Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
   Policy): the required notices and attribution, and where on the site they go.

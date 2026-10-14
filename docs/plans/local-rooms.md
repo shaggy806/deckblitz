@@ -2,8 +2,9 @@
 
 Status: **in progress** (planned 2026-10-13). Steps 1-5 are built, behind `?local=1`: blitz and
 lessons play in a Web Worker in the tab while lobbies stay on the server, and a local game survives
-a reload. Left: step 6, measuring on the user's low-end laptop (bot decision times, the worker's
-memory, smooth animation), then step 7, turning it on by default. Bug-report uploads (step 5's
+a reload. Step 6 measured the user's low-end laptop (2026-10-13): the bots and memory are fine
+there, and the page's own main-thread work was the problem — its biggest piece is fixed. Left:
+step 7, turning it on by default. Bug-report uploads (step 5's
 other half) wait: the capture panel only exists on a developer's `--capture` server.
 
 ## Why
@@ -164,8 +165,40 @@ to another player, and a room with a second human never goes local.
       saved games loaded), decision p50/p90/p99/max, `workerHeapMb`, the page's freezes
       (`pageFreezes`, `pageFreezeMaxMs`) and the core count;
    4. Chrome's Task Manager (Shift+Esc) shows the worker's whole memory as a "Dedicated Worker" row.
-   For comparison: the live box's decisions ran p50 ~150 ms, the dev PC's ~37 ms, against the
-   300 ms budget.
+   (The live box's p50 ~150 ms and the dev PC's ~37 ms in `scaling-rooms.md` are a different
+   measure — real choices only. `stats()` times every bot action, passes included, so its p50 is
+   near 0; compare it only with itself.)
+
+   **Measured 2026-10-13** on the laptop (Core i5-6300U, 2 cores / 4 threads, 16 GB, Chrome 153;
+   a local production build under `vite preview`, the same blitz as `e2e/local-blitz.spec.ts`,
+   Auto-pass, ~9 minutes to round 8), against the same run on the dev PC (i5-13600K):
+
+   | | laptop | dev PC |
+   |---|---|---|
+   | `readyMs` (pool + saved games) | 2.7 s | 0.3 s |
+   | bot actions p50 / p90 / p99 / max | 2 / 65 / 433 / 1031 ms | 0 / 2 / 244 / 332 ms |
+   | page long tasks, worst | 1076 in ~9 min, 762 ms | 113 in 10 min, 117 ms |
+   | tab memory (worker included) | 248 MB | — |
+
+   - **Bots: keep the wall clock.** Bot thinking isn't what a round waits on (rounds ran 30-55 s
+     on both machines: the animations and bot pacing), and most actions end long before the
+     300 ms budget. Its tail overshoots on the laptop (p99 433 ms, one 1 s action) because the
+     budget is checked between simulations; a count budget would make every slow-machine
+     decision slower to keep strength the laptop never showed missing. Revisit if a laptop game
+     plays visibly weaker.
+   - **Memory is no concern**: 248 MB for the whole tab on a 16 GB machine. The worker's own
+     heap can't be read (`performance.memory` is main-thread only, and Chrome's Task Manager
+     folds a dedicated worker into its tab's row).
+   - **The page's main thread was the problem**, local mode or not: ~42 fps, hundreds of
+     100-250 ms hitches, 38% CPU. A CPU profile of the same game on the dev PC, with the page
+     throttled 4x (`Emulation.setCPUThrottlingRate`), put 38% of all main-thread work in one
+     place: the board-fit search (`recomputeBoardMiniW`), a dozen forced layouts per board,
+     re-run on every frame shown and every render. Starting it from the board's last width
+     (`game/boardFit.ts`) cut it from 24.7 s to 1.7 s of a 290 s game: main-thread busy time
+     66 s → 39 s, long tasks 198 → 82, frame gaps over 100 ms 94 → 20. What's left is mostly
+     the browser's own style, layout and paint ("(program)" in a JS profile, ~25 s), which needs
+     a performance trace to break down — a `BACKLOG.md` item, since it slows server games on a
+     slow machine just as much.
 7. **Default on** for blitz and tutorials, with the fallback rules; the load test confirms the
    server no longer sees them; deploy.
 

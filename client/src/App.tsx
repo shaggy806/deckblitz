@@ -42,6 +42,7 @@ import type { BlitzReport, NetworkGame } from './net/useNetworkGame.ts'
 import { rematchOffer } from './net/rematch.ts'
 import type { RematchOffer } from './net/rematch.ts'
 import { stackShowsSomething } from './game/decisionSource.ts'
+import { fitWidth } from './game/boardFit.ts'
 import { waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
@@ -170,6 +171,12 @@ const HAND_GRID_THRESHOLD = 12
 // Below this floor a tile stops shrinking and the board's own scroll
 // (already there regardless -- .quadrant-body's overflow-y:auto) takes over.
 const MINI_SHRINK_FLOOR = 40
+
+/** The tile width each seat's board last settled on: where its next search
+ * starts (`recomputeBoardMiniW`). Kept out here because `Table` remounts with
+ * every frame shown. Only ever a starting guess — the search checks it — so a
+ * width left from another game costs a full search at worst. */
+const boardFitWidths = new Map<PlayerId, number>()
 
 // A stable reference (not `[]` inline at each use) so passing it as `Table`'s
 // `actions` prop while `useDelayedView` reports `busy` doesn't itself count
@@ -3544,15 +3551,19 @@ function Table({
    * `.board` rule caps the result at a card in hand's width, so a lone land
    * on an empty board doesn't balloon to fill it.
    *
-   * A binary search over the width, rather than a step loop or a ratio-based
-   * guess: reflowed wrap counts don't scale linearly with tile size, but a
-   * wider tile never makes the rows any shorter, so "does it fit at w" is
-   * monotonic. That's about a dozen layouts per board, and cheap ones --
-   * `.quadrant-body` is a size container, so nothing outside it relayouts.
-   * Re-searched from scratch every time rather than nudged from wherever it
-   * last landed, so a board grows back as soon as it has room again (a
-   * creature dying, say). */
-  const recomputeBoardMiniW = (boardEl: HTMLDivElement) => {
+   * A binary search over the width (`game/boardFit.ts`'s `fitWidth`), rather
+   * than a step loop or a ratio-based guess: reflowed wrap counts don't scale
+   * linearly with tile size, but a wider tile never makes the rows any
+   * shorter, so "does it fit at w" is monotonic. Each probe is a forced layout
+   * (only of the quadrant — `.quadrant-body` is a size container), and boards
+   * are searched often: on every frame shown (`Table` remounts) and every
+   * change to a board's tiles. A dozen probes each time made this the page's
+   * biggest main-thread cost on a slow laptop (2026-10-13), so the search
+   * starts from the width this seat's board last settled on
+   * (`boardFitWidths`) — two probes when that's still the answer. It lands
+   * where a search from scratch would, so a board still grows back as soon as
+   * it has room again (a creature dying, say). */
+  const recomputeBoardMiniW = (pid: PlayerId, boardEl: HTMLDivElement) => {
     const scrollArea = boardEl.closest<HTMLElement>('.quadrant-body')
     const first = boardEl.firstElementChild
     const last = boardEl.lastElementChild
@@ -3585,19 +3596,12 @@ function Table({
       return last.offsetTop + last.offsetHeight - first.offsetTop + chrome <= available
     }
     // A tile is never wider than its board, and past App.css's cap every
-    // width lays out the same, so this bound only has to be big enough.
-    let lo = MINI_SHRINK_FLOOR
-    let hi = Math.max(lo, boardEl.clientWidth)
-    // Crowded even at the floor: leave it there and let the board scroll.
-    if (!fits(lo)) return
-    if (fits(hi)) return
-    while (hi - lo > 1) {
-      const mid = Math.floor((lo + hi) / 2)
-      if (fits(mid)) lo = mid
-      else hi = mid
-    }
-    // The last probe may have been a miss; settle on the widest fit.
-    fits(lo)
+    // width lays out the same, so the upper bound only has to be big enough.
+    // Crowded even at the floor, it stays there and the board scrolls.
+    const width = fitWidth(fits, MINI_SHRINK_FLOOR, boardEl.clientWidth, boardFitWidths.get(pid))
+    // The last probe may have been another width.
+    boardEl.style.setProperty('--mini-w-fit', `${width}px`)
+    boardFitWidths.set(pid, width)
   }
   // Two triggers to recompute a board: its scrollable area resizing (window
   // resize, a layout change) and its own tile count changing (a permanent
@@ -3610,8 +3614,8 @@ function Table({
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        for (const boardEl of boardElsRef.current.values()) {
-          if (boardEl.closest('.quadrant-body') === entry.target) recomputeBoardMiniW(boardEl)
+        for (const [pid, boardEl] of boardElsRef.current) {
+          if (boardEl.closest('.quadrant-body') === entry.target) recomputeBoardMiniW(pid, boardEl)
         }
       }
     })
@@ -3621,15 +3625,17 @@ function Table({
         const boardEl = (m.target as HTMLElement).closest<HTMLDivElement>('.board')
         if (boardEl) changed.add(boardEl)
       }
-      for (const boardEl of changed) recomputeBoardMiniW(boardEl)
+      for (const [pid, boardEl] of boardElsRef.current) {
+        if (changed.has(boardEl)) recomputeBoardMiniW(pid, boardEl)
+      }
     })
     boardResizeObserverRef.current = resizeObserver
     boardMutationObserverRef.current = mutationObserver
-    for (const el of boardElsRef.current.values()) {
+    for (const [pid, el] of boardElsRef.current) {
       const scrollArea = el.closest('.quadrant-body')
       if (scrollArea) resizeObserver.observe(scrollArea)
       mutationObserver.observe(el, { childList: true, subtree: true })
-      recomputeBoardMiniW(el)
+      recomputeBoardMiniW(pid, el)
     }
     return () => {
       resizeObserver.disconnect()
@@ -3648,7 +3654,7 @@ function Table({
         const scrollArea = el.closest('.quadrant-body')
         if (scrollArea) boardResizeObserverRef.current?.observe(scrollArea)
         boardMutationObserverRef.current?.observe(el, { childList: true, subtree: true })
-        recomputeBoardMiniW(el)
+        recomputeBoardMiniW(pid, el)
       } else {
         boardElsRef.current.delete(pid)
       }
