@@ -215,6 +215,27 @@ describe("the turn number, a commander's tax and damage", () => {
     expect(game.viewFor(BOB).players[ALICE].commanderCastCounts).toEqual({ "Chandra, Acolyte of Flame": 2 });
   });
 
+  it("starts a player with the commander damage a commander has dealt them, and keeps it through a snapshot", () => {
+    const original = spec([
+      card("cmdr", "Chandra, Acolyte of Flame", { owner: BOB, commander: true, commanderDamage: { [ALICE]: 6 } }),
+    ]);
+    const { game, objects } = buildScenario(original);
+    const id = idOf(objects, "cmdr");
+    expect(game.state.players[ALICE].commanderDamageTaken).toEqual({ [id]: 6 });
+    expect(game.state.players[BOB].commanderDamageTaken).toEqual({});
+    // Every seat sees it: the chip on Alice's panel is drawn from it.
+    expect(game.viewFor(BOB).players[ALICE].commanderDamageTaken).toMatchObject([{ commander: id, amount: 6 }]);
+    const back = snapshotScenario(game, original);
+    expect(back.cards.find((c) => c.commander === true)?.commanderDamage).toEqual({ [ALICE]: 6 });
+
+    expect(() => validateScenario(spec([card("b", "Grizzly Bears", { commanderDamage: { [ALICE]: 1 } })]))).toThrow(/commander/);
+    const dealt = (commanderDamage: Record<string, number>) =>
+      validateScenario(spec([card("c", "Chandra, Acolyte of Flame", { commander: true, commanderDamage })]));
+    expect(() => dealt({ [ALICE]: 21 })).toThrow(/0-20/);
+    expect(() => dealt({ [ALICE]: -1 })).toThrow(/0-20/);
+    expect(() => dealt({ nobody: 1 })).toThrow(/at the table/);
+  });
+
   it("marks damage on a creature, which cleanup removes, and refuses damage it couldn't survive", () => {
     const built = buildScenario(spec([card("bears", "Grizzly Bears", { damage: 1 })]));
     const bears = built.game.state.objects[idOf(built.objects, "bears")];

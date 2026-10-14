@@ -53,7 +53,7 @@ export function CommanderDamageChip({
     (left > 0 ? ` — ${left} more loses` : '')
 
   return (
-    <span className={`cmdr-dmg ${ownerClass}${level}`} title={title} aria-label={title}>
+    <span className={`cmdr-dmg ${ownerClass}${level}`} title={title} aria-label={title} data-tour="game-commander-damage">
       <span className="cmdr-dmg-art">
         {showArt ? (
           <img src={artSrc} alt="" loading="lazy" onError={() => recordArtFailure(artSrc)} />

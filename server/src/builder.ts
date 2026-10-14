@@ -30,6 +30,8 @@ const MAX_CARDS = 600;
 const MAX_FILL = 200;
 const MAX_TURN = 999;
 const MAX_CASTS = 99;
+/** One short of losing (rule 903.10a): a board starts with nobody out. */
+const MAX_COMMANDER_DAMAGE = 20;
 
 /** An empty two-player board on alice's first main phase. */
 export function defaultScenario(): ScenarioSpec {
@@ -103,6 +105,13 @@ export function validateScenario(spec: ScenarioSpec, registry: CardRegistry = ca
     if (card.casts !== undefined) {
       if (!isCount(card.casts, MAX_CASTS)) throw new Error(`${card.name}: cast count must be 0-${MAX_CASTS}`);
       if (card.casts > 0 && card.commander !== true) throw new Error(`${card.name}: only a commander has a cast count`);
+    }
+    if (card.commanderDamage !== undefined) {
+      if (card.commander !== true) throw new Error(`${card.name}: only a commander deals commander damage`);
+      for (const [player, n] of Object.entries(card.commanderDamage)) {
+        if (!players.has(player)) throw new Error(`${card.name}: ${player} isn't at the table`);
+        if (!isCount(n, MAX_COMMANDER_DAMAGE)) throw new Error(`${card.name}: commander damage must be 0-${MAX_COMMANDER_DAMAGE}`);
+      }
     }
   }
   for (const card of spec.cards) {
@@ -248,6 +257,11 @@ function layOut(spec: ScenarioSpec, registry: CardRegistry): LaidOut {
     if (card.casts !== undefined && card.casts > 0) {
       s.players[card.owner].commanderCastCounts = { ...s.players[card.owner].commanderCastCounts, [card.name]: card.casts };
     }
+    // Kept by the player dealt it, per commander object (903.10a).
+    for (const [player, n] of Object.entries(card.commanderDamage ?? {})) {
+      const taken = s.players[player as PlayerId];
+      if (taken !== undefined && n !== undefined && n > 0) taken.commanderDamageTaken = { ...taken.commanderDamageTaken, [id]: n };
+    }
   }
   // Libraries are listed top first, and each spawn goes on top: last first.
   const libraryCards = spec.cards.filter((c) => c.commander !== true && c.zone === "library");
@@ -369,8 +383,20 @@ export function snapshotScenario(game: Game, previous: ScenarioSpec): ScenarioSp
     const casts = card.commander === true ? (s.players[card.owner]?.commanderCastCounts[card.name] ?? 0) : 0;
     return casts > 0 ? { ...card, casts } : card;
   });
+  // And the damage each commander has dealt each player (903.10a).
+  const withDamage = withCasts.map((card) => {
+    if (card.commander !== true) return card;
+    const id = [...keyOf].find(([, key]) => key === card.key)?.[0];
+    if (id === undefined) return card;
+    const dealt = Object.fromEntries(
+      previous.seats
+        .map((seat): [PlayerId, number] => [seat.player, s.players[seat.player]?.commanderDamageTaken[id] ?? 0])
+        .filter(([, n]) => n > 0),
+    );
+    return Object.keys(dealt).length > 0 ? { ...card, commanderDamage: dealt } : card;
+  });
   // Attachments, now every permanent has a key.
-  const withAttachments = withCasts.map((card) => {
+  const withAttachments = withDamage.map((card) => {
     const id = [...keyOf].find(([, key]) => key === card.key)?.[0];
     const host = id === undefined ? null : s.objects[id].attachedTo;
     const hostKey = host === null ? undefined : keyOf.get(host);

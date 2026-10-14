@@ -3,7 +3,8 @@
 Status: **in progress** (planned 2026-10-12; the user's answers 2026-10-13). Build order
 phases 1 and 2 are built (2026-10-13): the overlay with the site tour, and the tutorial room with
 Learn Commander playing `basics-proof`, a proof lesson standing in for the real games. Next:
-phase 4's seeded decks and game 1's chapters, and phase 3's in-game stops. The user's decisions
+phase 4's seeded decks and game 1's chapters. Phase 3's in-game stops were built as the board
+tour (2026-10-13), when the site tour was cut down to the front page. The user's decisions
 are recorded at the end and shape everything above them; "As built" below records where the
 build departed from this plan.
 
@@ -231,6 +232,16 @@ detail):
   lethal damage is refused rather than killed at the start.
 - **Not built yet**: frozen look-only steps, a stop message (leaving disconnects and the reaper
   drops the room).
+- **The site tour was cut down, and the in-game stops became the board tour** (the user,
+  2026-10-13: assume players know Scryfall and Moxfield; teach what isn't obvious here). The site
+  tour is the front page only — Blitz, Create/Join, one stop for the deck builder and library
+  (this site's stand-ins), Settings, "?" — and its last card offers *Tour the board*, a lesson
+  (`server/src/tutorials/board-tour.ts`) on a fixed turn-5 board: a player's corner, the
+  commander-damage chip (the spec gained `commanderDamage` for it), the command zone's tax, a
+  permanent's ability menu, casting from the hand, casting Think Twice by flashback through the
+  graveyard's count and the zone viewer (the step players trip on), the phase track's stops,
+  Pass / Pass Turn / Auto-pass, the History, Settings and the Game menu. The anchor grammar
+  gained `zone:<zone>:<who>`. The lobby, deck builder and library stops were dropped.
 
 ## The user's decisions (2026-10-13)
 

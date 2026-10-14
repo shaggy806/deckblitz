@@ -17,6 +17,7 @@ import { RoomManager } from "../room-manager.js";
 import { LESSONS, metAt, validateLesson } from "../tutorials/index.js";
 import type { Lesson } from "../tutorials/index.js";
 import { BASICS_PROOF } from "../tutorials/basics-proof.js";
+import { BOARD_TOUR } from "../tutorials/board-tour.js";
 import { attachRoomServer } from "../ws-server.js";
 
 const ALICE = asPlayerId("alice");
@@ -184,6 +185,44 @@ describe("a tutorial room", () => {
     expect(info().step?.id).toBe("well-done");
     session.next("well-done");
     expect(info()).toMatchObject({ complete: true, step: null, goals: [], canRetry: false });
+  });
+
+  it("tours the board: commander damage and tax on the board, Next cards, and a flashback cast from the graveyard", () => {
+    const { session, info } = openLesson("board-tour");
+    const s = session.room.game.state;
+    // The board says what the cards point at: 6 from Rowan's Krenko, and
+    // Marwyn cast once already.
+    const krenko = s.zones.shared.battlefield.find((id) => s.objects[id].cardName === "Krenko, Mob Boss")!;
+    expect(s.players[ALICE].commanderDamageTaken).toEqual({ [krenko]: 6 });
+    expect(s.players[ALICE].commanderCastCounts).toEqual({ "Marwyn, the Nurturer": 1 });
+    expect(s.turn).toMatchObject({ number: 5, step: "precombat-main" });
+    expect(s.turnOrder[s.turn.activePlayerIndex]).toBe(ALICE);
+
+    const steps = BOARD_TOUR.chapters[0].steps;
+    const nextUntil = (id: string): void => {
+      for (const step of steps.slice(steps.findIndex((s) => s.id === info().step?.id), steps.findIndex((s) => s.id === id))) {
+        expect(info().step).toMatchObject({ id: step.id, advance: "next" });
+        session.next(step.id);
+      }
+    };
+    nextUntil("cast-from-hand");
+    expect(info().step).toMatchObject({ id: "cast-from-hand", advance: "goal", anchor: "card:Grizzly Bears" });
+    const bears = idNamed(session.room.game.state, "Grizzly Bears", "hand");
+    session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: bears, targets: [] });
+    expect(info().step).toMatchObject({ id: "flashback", advance: "goal", anchor: "zone:graveyard:me" });
+    expect(() => session.next("flashback")).toThrow(/goals/);
+    // Cast from the graveyard, as the zone viewer's Cast button does.
+    const thinkTwice = idNamed(session.room.game.state, "Think Twice", "graveyard");
+    session.room.dispatch(connection, { type: "cast-spell", player: ALICE, card: thinkTwice, targets: [], via: "flashback" });
+    expect(info().step?.id).toBe("phase-track");
+    // Paid for out of what the Bears left. Alice kept priority after each
+    // cast (rule 117.3c), so both are on the stack, Think Twice on top.
+    const after = session.room.game.state;
+    expect(after.zones.shared.stack.map((id) => after.objects[id].cardName)).toEqual(["Grizzly Bears", "Think Twice"]);
+
+    nextUntil("done");
+    session.next("done");
+    expect(info()).toMatchObject({ complete: true, step: null });
   });
 
   it("rewinds a chapter gone wrong to its start", () => {

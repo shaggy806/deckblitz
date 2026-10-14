@@ -177,8 +177,6 @@ describe('the site tour', () => {
       expect(s.page, s.id).toBeDefined()
       expect(SITE_TOUR.pages?.[s.page!], s.id).toBeDefined()
     }
-    const via = SITE_TOUR.pages?.lobby?.via
-    expect(via !== undefined && ids.includes(via)).toBe(true)
   })
 
   it('points only through data-tour anchors', () => {
@@ -194,20 +192,10 @@ describe('the site tour', () => {
     }
   })
 
-  it('crosses each page the way the pages allow', () => {
-    const at = (id: string) => ids.indexOf(id)
-    // Into the deck builder by the player's click on its link…
-    const toDeckBuilder = at('landing-deck-builder')
-    expect(SITE_TOUR.steps[toDeckBuilder].advance).toEqual({ click: '[data-tour="landing-deck-builder"]' })
-    expect(moveTo(SITE_TOUR, toDeckBuilder + 1, 'landing', 'click')).toEqual({ kind: 'show', index: toDeckBuilder + 1 })
-    expect(SITE_TOUR.steps[toDeckBuilder + 1].page).toBe('deck-builder')
-    // …on to the library and back to the front page by Next…
-    const firstLibrary = ids.findIndex((_, i) => SITE_TOUR.steps[i].page === 'library')
-    expect(moveTo(SITE_TOUR, firstLibrary, 'deck-builder', 'next')).toMatchObject({ kind: 'navigate', path: '/library' })
-    const backHome = at('landing-create-go')
-    expect(moveTo(SITE_TOUR, backHome, 'library', 'next')).toMatchObject({ kind: 'navigate', path: '/' })
-    // …and into the lobby by creating a room.
-    expect(SITE_TOUR.steps[backHome + 1].page).toBe('lobby')
-    expect(moveTo(SITE_TOUR, backHome + 1, 'landing', 'click')).toEqual({ kind: 'show', index: backHome + 1 })
+  it('stays on the front page and ends on the offer of the board tour', () => {
+    expect(new Set(SITE_TOUR.steps.map((s) => s.page))).toEqual(new Set(['landing']))
+    const last = SITE_TOUR.steps.at(-1)!
+    expect(last.id).toBe('to-the-board')
+    expect(last.buttons?.map((b) => b.label)).toEqual(['Not now', 'Tour the board'])
   })
 })

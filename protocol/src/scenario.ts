@@ -49,6 +49,9 @@ export interface ScenarioCard {
    * zone already, each adding {2} to its next cast from there (rule 903.8).
    * Absent means 0. */
   readonly casts?: number;
+  /** A commander only: the combat damage it has dealt each player this game
+   * (rule 903.10a — 21 from one commander loses the game). Absent means none. */
+  readonly commanderDamage?: Readonly<Partial<Record<PlayerId, number>>>;
 }
 
 export interface ScenarioSeat {

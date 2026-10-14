@@ -84,5 +84,6 @@ about a player who isn't on it.
 ## Not yet
 
 What a scenario can't say yet, and the snapshot so leaves behind: who controls what they don't own,
-a transformed or face-down card, damage marked, effects lasting a turn, and the stack. Play always
+a transformed or face-down card, damage marked, effects lasting a turn, and the stack. (A commander's commander damage dealt, `commanderDamage`, was added for the board tour,
+2026-10-13.) Play always
 starts on turn 1. These are `BACKLOG.md` items.

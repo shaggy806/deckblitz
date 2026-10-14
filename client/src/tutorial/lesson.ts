@@ -19,6 +19,10 @@ import type { Anchor, Step, StepButton, Tour } from './types.ts'
  * now; the real Learn Commander lesson replaces it here. */
 export const LEARN_COMMANDER_LESSON = 'basics-proof'
 
+/** The board tour: the site tour's second half, on a practice table
+ * (`server/src/tutorials/board-tour.ts`). */
+export const BOARD_TOUR_LESSON = 'board-tour'
+
 /** The URL parameter that opens a lesson as the page loads (`lessonUrl`). */
 export const LESSON_PARAM = 'tutorial'
 

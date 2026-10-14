@@ -1,16 +1,17 @@
 import { tourAnchor } from '../anchors.ts'
 import type { Step } from '../types.ts'
 
-/** The site tour on the front page: what each way in does, then on to the
- * deck builder (the player clicks its link, which loads the page). */
+/** The site tour's stops on the front page: the ways into a game, the two
+ * pages a Moxfield and Scryfall user needs no tour of (but for this site's
+ * stand-ins), and the corner's buttons. The board comes after, as a lesson. */
 export const LANDING_STEPS: readonly Step[] = [
   {
     id: 'welcome',
     page: 'landing',
     title: 'Welcome to MTG Deck Blitz!',
     body:
-      "Here's a quick look around: blitzing a deck, playing with friends, building decks and browsing cards. " +
-      'It takes a couple of minutes, and Escape leaves the tour whenever you like.',
+      "A minute on where things are, then a practice table to show how a game works here. " +
+      'Escape leaves the tour whenever you like.',
     advance: 'next',
   },
   {
@@ -28,16 +29,20 @@ export const LANDING_STEPS: readonly Step[] = [
     id: 'landing-create',
     page: 'landing',
     anchor: tourAnchor('landing-create'),
-    title: 'Start a table',
-    body: "Create a game opens a room you can fill with friends, bots or both. We'll pop into one at the end of the tour.",
+    title: 'Play with friends',
+    body:
+      'Create a game opens a room to fill with friends, bots or both; share its code or invite link. ' +
+      "Got a code from someone else? Paste it beside it to join their table.",
     advance: 'next',
   },
   {
-    id: 'landing-join',
+    id: 'landing-deck-builder',
     page: 'landing',
-    anchor: tourAnchor('landing-join'),
-    title: 'Join a friend',
-    body: "Got a room code or an invite link from someone? Type or paste it here and you'll sit down at their table.",
+    anchor: tourAnchor('landing-deck-builder'),
+    title: 'Decks and cards',
+    body:
+      'The deck builder and the card library work much as you would expect. ' +
+      "One thing that's ours: a card the site can't play yet gets a close stand-in, and importing a deck lets you choose each one.",
     advance: 'next',
   },
   {
@@ -46,8 +51,8 @@ export const LANDING_STEPS: readonly Step[] = [
     anchor: tourAnchor('corner-settings'),
     title: 'Settings',
     body:
-      'Animation speed, sound, and when the game stops to let you act all live here. ' +
-      "They're saved on this device, so you only set them once.",
+      'When the game stops to let you act, bot and animation speed, and sound. ' +
+      "They're saved on this device, and they're in every game's top bar too.",
     placement: 'top',
     advance: 'next',
   },
@@ -56,34 +61,8 @@ export const LANDING_STEPS: readonly Step[] = [
     page: 'landing',
     anchor: tourAnchor('corner-help'),
     title: 'Help, any time',
-    body: "This button brings the tour back whenever you want it. It's also where Learn Commander will live once it's ready.",
+    body: 'This tour, the board tour and Learn Commander are all here whenever you want them.',
     placement: 'top',
     advance: 'next',
   },
-  {
-    id: 'landing-library',
-    page: 'landing',
-    anchor: tourAnchor('landing-library'),
-    title: 'Card library',
-    body: "Every card the site can play, with search and filters. We'll have a look inside shortly.",
-    advance: 'next',
-  },
-  {
-    id: 'landing-deck-builder',
-    page: 'landing',
-    anchor: tourAnchor('landing-deck-builder'),
-    title: 'Deck builder',
-    body: 'Your decks live here. Click Deck builder and we\'ll go take a look.',
-    advance: { click: tourAnchor('landing-deck-builder') },
-  },
 ]
-
-/** Back on the front page after the library: into a room's lobby. */
-export const LANDING_TO_LOBBY: Step = {
-  id: 'landing-create-go',
-  page: 'landing',
-  anchor: tourAnchor('landing-create'),
-  title: 'Last stop: a table',
-  body: 'Click Create a game to open a room of your own. Only people you share its code with can join.',
-  advance: { click: tourAnchor('landing-create') },
-}

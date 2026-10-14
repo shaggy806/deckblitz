@@ -1,28 +1,42 @@
-import type { Tour } from '../types.ts'
-import { DECK_BUILDER_STEPS } from './deckBuilder.ts'
-import { LANDING_STEPS, LANDING_TO_LOBBY } from './landing.ts'
-import { LIBRARY_STEPS } from './library.ts'
-import { LOBBY_STEPS } from './lobby.ts'
+import { apply } from '../coach.ts'
+import { BOARD_TOUR_LESSON, lessonUrl } from '../lesson.ts'
+import type { Step, Tour } from '../types.ts'
+import { LANDING_STEPS } from './landing.ts'
+
+/** The site tour's last stop: on to the board tour, a lesson on a practice
+ * table of its own, or not now. Either way the site tour is done. */
+const TO_THE_BOARD: Step = {
+  id: 'to-the-board',
+  page: 'landing',
+  title: 'Now, the board',
+  body:
+    'A game here works a little differently from a paper table: commander damage, looking through zones, the priority buttons, casting from a graveyard. ' +
+    'A practice table shows you each in a few minutes.',
+  advance: 'next',
+  buttons: [
+    { label: 'Not now', link: true, onClick: () => apply(SITE_TOUR, { kind: 'finish' }) },
+    {
+      label: 'Tour the board',
+      primary: true,
+      onClick: () => {
+        apply(SITE_TOUR, { kind: 'finish' })
+        window.location.assign(lessonUrl(BOARD_TOUR_LESSON))
+      },
+    },
+  ],
+}
 
 /**
- * The site tour, for someone who knows Magic but not this site: the front
- * page, the deck builder, the library, then back to the front page to open
- * a room and finish in its lobby — where the player can go straight on to a
- * game. Crossing to the deck builder is the player's own click on its link;
- * the deck builder's and the library's last Next load the next page; the
- * lobby is reached by clicking Create a game. Each page's copy is in its own
- * file beside its steps.
+ * The site tour, for someone who knows Magic — and Moxfield and Scryfall —
+ * but not this site: a few stops on the front page, then the offer of the
+ * board tour, where the real differences are. Short on purpose: the deck
+ * builder and the library get one stop between them, from the front page.
  */
 export const SITE_TOUR: Tour = {
   id: 'site',
   title: 'Tour the site',
   startPath: '/',
   persist: true,
-  pages: {
-    landing: { path: '/' },
-    'deck-builder': { path: '/deck-builder' },
-    library: { path: '/library' },
-    lobby: { via: LANDING_TO_LOBBY.id },
-  },
-  steps: [...LANDING_STEPS, ...DECK_BUILDER_STEPS, ...LIBRARY_STEPS, LANDING_TO_LOBBY, ...LOBBY_STEPS],
+  pages: { landing: { path: '/' } },
+  steps: [...LANDING_STEPS, TO_THE_BOARD],
 }

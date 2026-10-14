@@ -17,16 +17,23 @@
  * - library: `lib-search`, `lib-types`, `lib-colors`, `lib-set`, `lib-grid`,
  *   `lib-card` (every grid card; the first is the one meant),
  *   `lib-printings` (an open card's printings)
- * - game (for the in-game stops to come): `game-settings`, `game-history`,
+ * - game (the board tour's, `server/src/tutorials/board-tour.ts`):
+ *   `game-settings`, `game-history`,
  *   `game-menu` (the top strip's buttons), `game-phase-track`,
  *   `game-priority` (the Pass row) with `game-pass`, `game-pass-turn`,
- *   `game-auto-pass`, `game-resolve-stack`, and `game-decision-banner`
- *   (whose buttons {@link bannerButton} finds by label)
+ *   `game-auto-pass`, `game-resolve-stack`, `game-decision-banner`
+ *   (whose buttons {@link bannerButton} finds by label), and
+ *   `game-commander-damage` (every commander-damage chip; the first is the
+ *   one meant)
+ *
+ * The lobby's, deck builder's and library's are on no tour since the site
+ * tour was cut down to the front page (2026-10-13); they stay for one to use.
  *
  * A tutorial room's coach cards name their anchors in a small grammar of
  * their own ({@link lessonAnchor}, below), which reaches these names
  * (`tour:`), cards' tiles (`data-obj-id` / `data-obj-ids`), players' panels
- * (`data-player-id`) and the phase track's pips (`data-step`).
+ * (`data-player-id`) and their zone counts (`data-graveyard-count-of`…),
+ * and the phase track's pips (`data-step`).
  */
 
 import type { ObjectId, PlayerId, PlayerView } from 'engine/client'
@@ -72,16 +79,32 @@ export const bannerButton =
 /**
  * Where a tutorial room's coach card points (`protocol`'s `TutorialAnchor`),
  * read: `tour:<name>` (a `data-tour` name above), `card:<Card Name>`,
- * `player:<seat | me | opponent>`, `step:<Step>` (a phase-track pip) or
- * `css:<selector>`. Anything else reads as no anchor at all — a centred
+ * `player:<seat | me | opponent>`, `zone:<hand | library | graveyard |
+ * exile>:<seat | me | opponent>` (that count in the player's panel, which
+ * opens the zone), `step:<Step>` (a phase-track pip) or `css:<selector>`. Anything else reads as no anchor at all — a centred
  * card, rather than one waiting forever on a ring it can't place.
  */
 export type LessonAnchor =
   | { readonly kind: 'tour'; readonly name: string }
   | { readonly kind: 'card'; readonly name: string }
   | { readonly kind: 'player'; readonly who: string }
+  | { readonly kind: 'zone'; readonly zone: PanelZone; readonly who: string }
   | { readonly kind: 'step'; readonly step: string }
   | { readonly kind: 'css'; readonly selector: string }
+
+/** The zones a player's panel counts, each a link that opens the zone. */
+export type PanelZone = 'hand' | 'library' | 'graveyard' | 'exile'
+
+const PANEL_ZONES: readonly string[] = ['hand', 'library', 'graveyard', 'exile'] satisfies readonly PanelZone[]
+const isPanelZone = (zone: string | undefined): zone is PanelZone => zone !== undefined && PANEL_ZONES.includes(zone)
+
+/** The attribute `PlayerPanel` marks each zone's count with. */
+const PANEL_ZONE_ATTR: Readonly<Record<PanelZone, string>> = {
+  hand: 'data-hand-of',
+  library: 'data-library-count-of',
+  graveyard: 'data-graveyard-count-of',
+  exile: 'data-exile-count-of',
+}
 
 export function parseLessonAnchor(anchor: string | undefined): LessonAnchor | null {
   if (anchor === undefined) return null
@@ -97,6 +120,10 @@ export function parseLessonAnchor(anchor: string | undefined): LessonAnchor | nu
       return { kind: 'card', name: rest }
     case 'player':
       return { kind: 'player', who: rest }
+    case 'zone': {
+      const [zone, who] = rest.split(':').map((part) => part.trim())
+      return isPanelZone(zone) && who !== undefined && who !== '' ? { kind: 'zone', zone, who } : null
+    }
     case 'step':
       return { kind: 'step', step: rest }
     case 'css':
@@ -196,6 +223,12 @@ export function lessonAnchor(
         const v = view()
         const player = v === null ? null : anchorPlayer(v, seat, parsed.who)
         return player === null ? null : find(`[data-player-id="${attrValue(player)}"]`)
+      }
+    case 'zone':
+      return () => {
+        const v = view()
+        const player = v === null ? null : anchorPlayer(v, seat, parsed.who)
+        return player === null ? null : find(`[${PANEL_ZONE_ATTR[parsed.zone]}="${attrValue(player)}"]`)
       }
     case 'card':
       return () => {

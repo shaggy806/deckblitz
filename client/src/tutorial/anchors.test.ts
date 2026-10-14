@@ -72,6 +72,8 @@ describe('a lesson anchor', () => {
     expect(parseLessonAnchor('card:')).toBeNull()
     expect(parseLessonAnchor('Forest')).toBeNull()
     expect(parseLessonAnchor('zone:hand')).toBeNull()
+    expect(parseLessonAnchor('zone:graveyard:me')).toEqual({ kind: 'zone', zone: 'graveyard', who: 'me' })
+    expect(parseLessonAnchor('zone:sideboard:me')).toBeNull()
     expect(lessonAnchor('zone:hand', () => VIEW, ME)).toBeUndefined()
     expect(lessonAnchor(undefined, () => VIEW, ME)).toBeUndefined()
   })
@@ -117,6 +119,21 @@ describe('a lesson anchor', () => {
     expect(anchorPlayer(VIEW, ME, 'dave')).toBeNull()
     const root = fakeRoot({ '[data-player-id="bob"]': 'bob panel' })
     expect(named(lessonAnchor('player:opponent', () => VIEW, ME, () => root)?.())).toBe('bob panel')
+  })
+
+  it("reaches a player's zone counts, the hand by its link", () => {
+    const root = fakeRoot({
+      '[data-graveyard-count-of="alice"]': 'my graveyard',
+      '[data-exile-count-of="bob"]': 'bob exile',
+      '[data-hand-of="carl"]': 'carl hand',
+      '[data-library-count-of="alice"]': 'my library',
+    })
+    const at = (anchor: string) => named(lessonAnchor(anchor, () => VIEW, ME, () => root)?.())
+    expect(at('zone:graveyard:me')).toBe('my graveyard')
+    expect(at('zone:exile:opponent')).toBe('bob exile')
+    expect(at('zone:hand:carl')).toBe('carl hand')
+    expect(at('zone:library:me')).toBe('my library')
+    expect(at('zone:graveyard:dave')).toBeNull()
   })
 
   it('reaches data-tour names, phase pips and raw selectors, a broken one finding nothing', () => {

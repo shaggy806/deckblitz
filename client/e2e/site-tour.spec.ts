@@ -4,11 +4,10 @@ import { SITE_TOUR } from '../src/tutorial/tours/site.ts'
 import type { Step } from '../src/tutorial/types.ts'
 
 // The site tour (docs/plans/tutorials.md, phase 1): the coach-mark overlay
-// walked end to end over the real pages — the front page, the deck builder,
-// the library (both full page loads, the tour's place carried in
-// localStorage), and a new room's lobby. Every step must find its
-// `data-tour` anchor: a missing one leaves the layer "waiting" instead of
-// "anchored", which fails the walk and names the step.
+// walked end to end over the front page, to its last card's offer of the
+// board tour (taken in `tutorial-board-tour.spec.ts`). Every step must find
+// its `data-tour` anchor: a missing one leaves the layer "waiting" instead
+// of "anchored", which fails the walk and names the step.
 
 function pageErrors(page: Page): string[] {
   const errors: string[] = []
@@ -39,10 +38,15 @@ async function expectStep(page: Page, s: Step): Promise<void> {
   await expectOnScreen(page, s.id)
 }
 
-/** Does what moves step `s` on: its Next (or Done) button, or a real click
- * on its target — which must reach the page through the spotlight. */
+/** Does what moves step `s` on: its Next (or Done) button, a real click on
+ * its target — which must reach the page through the spotlight — or, on a
+ * card with buttons of its own, the quiet one (the last card's Not now). */
 async function advanceStep(page: Page, s: Step): Promise<void> {
-  if (s.advance === 'next') {
+  if (s.buttons !== undefined) {
+    const quiet = s.buttons.find((b) => b.link === true)
+    if (quiet === undefined) throw new Error(`step ${s.id}: no quiet button to leave by`)
+    await cardOf(page, s.id).getByRole('button', { name: quiet.label }).click()
+  } else if (s.advance === 'next') {
     await cardOf(page, s.id).locator('.coach-next').click()
   } else if ('click' in s.advance) {
     await page.locator(s.advance.click).first().click()
@@ -72,16 +76,13 @@ async function walkTour(page: Page, onStep?: (s: Step) => Promise<void>, from: '
 const progress = (page: Page) =>
   page.evaluate(() => JSON.parse(window.localStorage.getItem('mtg.tutorials') ?? 'null'))
 
-test('the site tour walks every page, across the page loads, to the lobby', async ({ page }) => {
+test('the site tour walks the front page to the offer of the board tour, and Not now ends it', async ({ page }) => {
   test.setTimeout(120_000)
   const errors = pageErrors(page)
-  const pages: string[] = []
-  await walkTour(page, async (s) => {
-    if (pages.at(-1) !== s.page) pages.push(s.page ?? '?')
-  })
-  expect(pages).toEqual(['landing', 'deck-builder', 'library', 'landing', 'lobby'])
-  // It ends in the room it opened, recorded as done.
-  await expect(page.locator('[data-tour="lobby-seats"]')).toBeVisible()
+  await walkTour(page)
+  // Not now: still on the front page, the tour recorded as done.
+  expect(new URL(page.url()).pathname).toBe('/')
+  expect(new URL(page.url()).searchParams.get('room')).toBeNull()
   expect(await progress(page)).toMatchObject({ seenIntro: true, tour: { done: true, at: null } })
   await page.locator('[data-tour="corner-help"]').click()
   await expect(page.getByRole('menuitem', { name: /Replay the site tour.*Done ✓/ })).toBeVisible()
@@ -122,29 +123,6 @@ test('clicks outside the spotlight are blocked, and Escape leaves the tour', asy
   expect(errors).toEqual([])
 })
 
-test('a click step lets clicks through its spotlight only', async ({ page }) => {
-  await page.goto('/')
-  await page.locator('[data-tour="corner-help"]').click()
-  await page.getByRole('menuitem', { name: /Tour the site/ }).click()
-  // Next up to the deck builder link, which waits on a click.
-  const toLink = SITE_TOUR.steps.findIndex((s) => s.id === 'landing-deck-builder')
-  for (const s of SITE_TOUR.steps.slice(0, toLink)) {
-    await expectStep(page, s)
-    await advanceStep(page, s)
-  }
-  await expectStep(page, SITE_TOUR.steps[toLink])
-  // The library link beside it is blocked…
-  const lib = await page.locator('[data-tour="landing-library"]').boundingBox()
-  if (lib === null) throw new Error('no library link')
-  await page.mouse.click(lib.x + lib.width / 2, lib.y + lib.height / 2)
-  await page.waitForTimeout(500)
-  expect(new URL(page.url()).pathname).toBe('/')
-  // …and the deck builder link goes through, the tour with it.
-  await page.locator('[data-tour="landing-deck-builder"]').click()
-  await expect(page).toHaveURL(/\/deck-builder/)
-  await expectStep(page, SITE_TOUR.steps[toLink + 1])
-})
-
 test('the first-visit callout shows once, beside the "?" button, and never again once dismissed', async ({ page }) => {
   const errors = pageErrors(page)
   await page.goto('/')
@@ -172,19 +150,25 @@ test('the first-visit callout shows once, beside the "?" button, and never again
   expect(errors).toEqual([])
 })
 
-test('a tour left on another page offers to pick up where it was', async ({ page }) => {
+test('a tour left mid-way picks up where it was, and one left on a stop since removed is dropped', async ({ page }) => {
+  const leftAt = (at: string) =>
+    page.evaluate(
+      (at) => window.localStorage.setItem('mtg.tutorials', JSON.stringify({ seenIntro: true, tour: { done: false, at }, lessons: {} })),
+      at,
+    )
   await page.goto('/')
-  await page.evaluate(() =>
-    window.localStorage.setItem(
-      'mtg.tutorials',
-      JSON.stringify({ seenIntro: true, tour: { done: false, at: 'lib-colors' }, lessons: {} }),
-    ),
-  )
+  await leftAt('corner-settings')
   await page.reload()
-  await expect(page.getByRole('dialog', { name: 'Pick up the tour?' })).toBeVisible()
-  await page.getByRole('button', { name: 'Continue' }).click()
-  await expect(page).toHaveURL(/\/library/)
-  await expectStep(page, SITE_TOUR.steps.find((s) => s.id === 'lib-colors')!)
+  await expectStep(page, SITE_TOUR.steps.find((s) => s.id === 'corner-settings')!)
+
+  // The library's stops went when the tour was cut down (2026-10-13).
+  await leftAt('lib-colors')
+  await page.reload()
+  await expect(page.locator('[data-tour="landing-create"]')).toBeVisible()
+  await page.waitForTimeout(500)
+  await expect(layer(page)).toHaveCount(0)
+  await expect(page.getByRole('dialog', { name: 'Pick up the tour?' })).toHaveCount(0)
+  expect(await progress(page)).toMatchObject({ tour: { at: null } })
 })
 
 // The live check's screenshots (not part of the suite): every page of the
@@ -196,26 +180,7 @@ const SIZES = [
   { width: 1920, height: 1080 },
   { width: 2560, height: 1440 },
 ] as const
-const SHOT_STEPS = new Set([
-  'welcome',
-  'landing-blitz',
-  'landing-join',
-  'corner-settings',
-  'db-import',
-  'db-starters',
-  'db-make-active',
-  'db-stand-ins',
-  'lib-search',
-  'lib-set',
-  'lib-printings',
-  'landing-create-go',
-  'lobby-seats',
-  'lobby-add-bot',
-  'lobby-settings',
-  'lobby-invite',
-  'lobby-start',
-  'done',
-])
+const SHOT_STEPS = new Set(SITE_TOUR.steps.map((s) => s.id))
 
 async function shots(page: Page, name: string): Promise<void> {
   for (const size of SIZES) {
