@@ -19,6 +19,7 @@ import type { CardDefinition, CardRegistry, Keyword } from "../cards.js";
 import {
   computedCacheMemo,
   computeCharacteristics,
+  withComputedCache,
   hasLostAbilities,
   objHasKeyword,
   restrictionsOf,
@@ -74,10 +75,17 @@ export function landTypesControlledBy(
   return types;
 }
 
+/** {@link legalDefendersUncached} inside a computed-value cache region (a pure read
+ * of the board: its characteristics reads share one cache — see
+ * `withComputedCache`). */
+export function legalDefenders(...args: Parameters<typeof legalDefendersUncached>): (PlayerId | ObjectId)[] {
+  return withComputedCache(() => legalDefendersUncached(...args));
+}
+
 /** Everything the active player's attackers may be declared against: each
  * non-eliminated opponent, plus every planeswalker those opponents control
  * (rule 508.1). A planeswalker is identified by its `ObjectId`. */
-export function legalDefenders(
+function legalDefendersUncached(
   state: GameState,
   registry: CardRegistry,
   attacker: PlayerId,
@@ -154,7 +162,14 @@ export interface AttackAsOf {
   readonly nextTurn?: boolean;
 }
 
-export function whyCannotAttack(
+/** {@link whyCannotAttackUncached} inside a computed-value cache region (a pure read
+ * of the board: its characteristics reads share one cache — see
+ * `withComputedCache`). */
+export function whyCannotAttack(...args: Parameters<typeof whyCannotAttackUncached>): string | null {
+  return withComputedCache(() => whyCannotAttackUncached(...args));
+}
+
+function whyCannotAttackUncached(
   state: GameState,
   registry: CardRegistry,
   player: PlayerId,
@@ -231,7 +246,14 @@ export function whyCannotAttack(
   return null;
 }
 
-export function whyCannotBlock(
+/** {@link whyCannotBlockUncached} inside a computed-value cache region (a pure read
+ * of the board: its characteristics reads share one cache — see
+ * `withComputedCache`). */
+export function whyCannotBlock(...args: Parameters<typeof whyCannotBlockUncached>): string | null {
+  return withComputedCache(() => whyCannotBlockUncached(...args));
+}
+
+function whyCannotBlockUncached(
   state: GameState,
   registry: CardRegistry,
   player: PlayerId,
@@ -633,6 +655,13 @@ export function playersAttackableNextTurn(
   );
 }
 
+/** {@link mustAttackUncached} inside a computed-value cache region (a pure read
+ * of the board: its characteristics reads share one cache — see
+ * `withComputedCache`). */
+export function mustAttack(...args: Parameters<typeof mustAttackUncached>): boolean {
+  return withComputedCache(() => mustAttackUncached(...args));
+}
+
 /**
  * Whether `attacker` is under an attack requirement that attacking would
  * obey (rule 508.1d), so it must attack if it can. "Attacks each combat if
@@ -643,7 +672,7 @@ export function playersAttackableNextTurn(
  * it can attack at all is whether it has a legal defender; the
  * `declare-attackers` offer's `mustAttack` asks both.
  */
-export function mustAttack(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
+function mustAttackUncached(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
   const object = state.objects[attacker];
   if (object === undefined) return false;
   if (

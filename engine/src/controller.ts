@@ -29,7 +29,13 @@ import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import type { RandomSource } from "./decisions/contract.js";
-import { assignedCombatDamage, combatDamageOf, computeCharacteristics, staticConditionMet } from "./characteristics.js";
+import {
+  assignedCombatDamage,
+  combatDamageOf,
+  computeCharacteristics,
+  staticConditionMet,
+  withComputedCache,
+} from "./characteristics.js";
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
@@ -3793,7 +3799,14 @@ export class HeuristicBotController extends AutomaticController {
     return state.objects[defender as ObjectId]?.counters.loyalty ?? 0;
   }
 
+  /** v1's attack, read inside a computed-value cache region: it reads every
+   * creature's characteristics many times over (who'd die attacking, who'd
+   * block what) and changes nothing, so the reads share one cache. */
   declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
+    return withComputedCache(() => this.attackersFor(view));
+  }
+
+  private attackersFor(view: ControllerView): readonly AttackerDeclaration[] {
     const legal = view
       .legalActions()
       .find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
@@ -3936,7 +3949,12 @@ export class HeuristicBotController extends AutomaticController {
     return false;
   }
 
+  /** v1's blocks, inside a cache region as its attack is. */
   declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
+    return withComputedCache(() => this.blockersFor(view));
+  }
+
+  private blockersFor(view: ControllerView): readonly BlockerDeclaration[] {
     const legal = view
       .legalActions()
       .find((o): o is DeclareBlockersLegal => o.kind === "declare-blockers");

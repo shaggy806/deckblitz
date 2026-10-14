@@ -7,6 +7,7 @@ import {
   effectiveTypes,
   playerHasHexproof,
   playerHasProtectionFromEverything,
+  withComputedCache,
 } from "./characteristics.js";
 import { filterReadsX, matchesFilter } from "./filter.js";
 import type { Color } from "./mana.js";
@@ -217,7 +218,14 @@ function isLivingPlayer(state: GameState, ref: TargetRef): boolean {
   );
 }
 
-export function isLegalTarget(
+/** {@link isLegalTargetUncached} inside a computed-value cache region (a pure read
+ * of the board: its characteristics reads share one cache — see
+ * `withComputedCache`). */
+export function isLegalTarget(...args: Parameters<typeof isLegalTargetUncached>): boolean {
+  return withComputedCache(() => isLegalTargetUncached(...args));
+}
+
+function isLegalTargetUncached(
   state: GameState,
   registry: CardRegistry,
   spec: TargetSpec,
@@ -634,8 +642,15 @@ export function isLegalTarget(
   }
 }
 
-/** Every currently-legal target for `spec`. */
-export function legalTargets(
+/** Every currently-legal target for `spec` — read inside a computed-value
+ * cache region (a pure read of the board: its characteristics reads share one
+ * cache — see `withComputedCache`). */
+export function legalTargets(...args: Parameters<typeof legalTargetsUncached>): TargetRef[] {
+  return withComputedCache(() => legalTargetsUncached(...args));
+}
+
+/** {@link legalTargets}, outside a region of its own. */
+function legalTargetsUncached(
   state: GameState,
   registry: CardRegistry,
   spec: TargetSpec,
