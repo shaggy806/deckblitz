@@ -1464,6 +1464,12 @@ export type LegalAction =
        * answer slot `slot` — the answer's `division` says how (Dragonlord
        * Atarka). */
       readonly divide?: { readonly total: number; readonly slot: number };
+      /** What's being asked, when it isn't a copy's or a trigger's targets
+       * ("Change the target of Lightning Bolt") — see the decision's. */
+      readonly prompt?: string;
+      /** Exactly one slot's answer must differ from `current` — see the
+       * decision's. */
+      readonly changeOne?: true;
     };
 
 /** A `cast-spell` offer — what a `cast-now` decision lists as its `casts`. */

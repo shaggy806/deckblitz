@@ -30,6 +30,7 @@ import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
+import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
@@ -371,6 +372,7 @@ const shard: CardShard = {
     _poolBlackMarketConnections,
     _poolBlightGrenade,
     _poolBloatedContaminator,
+    _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBoonOfEmrakul,
     _poolBrawnAmadeusCho,

@@ -423,6 +423,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Haven of the Harvest": "https://cards.scryfall.io/art_crop/back/a/7/a7143aa7-b16d-4e63-910c-6ceec55483f3.jpg",
   "Heliod, the Warped Eclipse": "https://cards.scryfall.io/art_crop/back/a/7/a7113c93-6c6d-410f-aeec-abc5ee121cdf.jpg",
   "Hook-Haunt Drifter": "https://cards.scryfall.io/art_crop/back/3/6/36e71d16-0964-489d-bea2-9cec7991fc99.jpg",
+  "Hydroelectric Laboratory": "https://cards.scryfall.io/art_crop/back/8/6/8689ecd7-e9a6-458b-99d2-6dbaca527f00.jpg",
   "Ifrit, Warden of Inferno": "https://cards.scryfall.io/art_crop/back/9/a/9a069e96-2786-493d-aca8-f70611435dbe.jpg",
   "Incited Rabble": "https://cards.scryfall.io/art_crop/back/6/c/6c91ca3b-9d56-48dd-be0e-d3839c7d3d6c.jpg",
   "Infested Werewolf": "https://cards.scryfall.io/art_crop/back/0/9/0936761c-7cdc-49ef-8a0d-ed79219f1056.jpg",

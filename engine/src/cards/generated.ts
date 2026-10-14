@@ -1158,6 +1158,7 @@ import _poolBojukaBog from "./pool/bojuka-bog.js";
 import _poolBoldBiochemist from "./pool/bold-biochemist.js";
 import _poolBoldImpaler from "./pool/bold-impaler.js";
 import _poolBolgsCompany from "./pool/bolgs-company.js";
+import _poolBoltBend from "./pool/bolt-bend.js";
 import _poolBoltHound from "./pool/bolt-hound.js";
 import _poolBoltOfKeranos from "./pool/bolt-of-keranos.js";
 import _poolBoltwave from "./pool/boltwave.js";
@@ -2429,6 +2430,7 @@ import _poolDefile from "./pool/defile.js";
 import _poolDefiledCryptCadaverLab from "./pool/defiled-crypt-cadaver-lab.js";
 import _poolDefiledCrypt from "./pool/defiled-crypt.js";
 import _poolDefilingDaemogoth from "./pool/defiling-daemogoth.js";
+import _poolDeflectingSwat from "./pool/deflecting-swat.js";
 import _poolDeftDuelist from "./pool/deft-duelist.js";
 import _poolDefyGravity from "./pool/defy-gravity.js";
 import _poolDegaDisciple from "./pool/dega-disciple.js";
@@ -4817,6 +4819,8 @@ import _poolHydraAssaultRobot from "./pool/hydra-assault-robot.js";
 import _poolHydraBroodmaster from "./pool/hydra-broodmaster.js";
 import _poolHydraOmnivore from "./pool/hydra-omnivore.js";
 import _poolHydroChanneler from "./pool/hydro-channeler.js";
+import _poolHydroelectricLaboratory from "./pool/hydroelectric-laboratory.js";
+import _poolHydroelectricSpecimen from "./pool/hydroelectric-specimen.js";
 import _poolHydroidKrasis from "./pool/hydroid-krasis.js";
 import _poolHydrosurge from "./pool/hydrosurge.js";
 import _poolHyenaPack from "./pool/hyena-pack.js";
@@ -4899,6 +4903,7 @@ import _poolImprovisedAct from "./pool/improvised-act.js";
 import _poolImprovisedArmor from "./pool/improvised-armor.js";
 import _poolImprovisedArsenal from "./pool/improvised-arsenal.js";
 import _poolImprovisedWeaponry from "./pool/improvised-weaponry.js";
+import _poolImpsMischief from "./pool/imps-mischief.js";
 import _poolImpulse from "./pool/impulse.js";
 import _poolImpulsivePilferer from "./pool/impulsive-pilferer.js";
 import _poolImpulsivity from "./pool/impulsivity.js";
@@ -7778,6 +7783,7 @@ import _poolRedHulk from "./pool/red-hulk.js";
 import _poolRedRoomRecruit from "./pool/red-room-recruit.js";
 import _poolRedXiiiProudWarrior from "./pool/red-xiii-proud-warrior.js";
 import _poolRedcapThief from "./pool/redcap-thief.js";
+import _poolRedirectLightning from "./pool/redirect-lightning.js";
 import _poolRedoubledStormsinger from "./pool/redoubled-stormsinger.js";
 import _poolRedshiftRocketeerChief from "./pool/redshift-rocketeer-chief.js";
 import _poolRedwoodTreefolk from "./pool/redwood-treefolk.js";
@@ -7904,6 +7910,7 @@ import _poolRetrofitterFoundry from "./pool/retrofitter-foundry.js";
 import _poolReturnFromTheWilds from "./pool/return-from-the-wilds.js";
 import _poolReturnOfTheMoleMan from "./pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "./pool/return-of-the-wildspeaker.js";
+import _poolReturnTheFavor from "./pool/return-the-favor.js";
 import _poolReturnToBattle from "./pool/return-to-battle.js";
 import _poolReturnToDust from "./pool/return-to-dust.js";
 import _poolReturnToNature from "./pool/return-to-nature.js";
@@ -9246,6 +9253,7 @@ import _poolSpellrunePainter from "./pool/spellrune-painter.js";
 import _poolSpellscornCoven from "./pool/spellscorn-coven.js";
 import _poolSpellseeker from "./pool/spellseeker.js";
 import _poolSpellshock from "./pool/spellshock.js";
+import _poolSpellskite from "./pool/spellskite.js";
 import _poolSpellstutterSprite from "./pool/spellstutter-sprite.js";
 import _poolSpellweaverEternal from "./pool/spellweaver-eternal.js";
 import _poolSpelunking from "./pool/spelunking.js";
@@ -10757,6 +10765,7 @@ import _poolUnsummon from "./pool/unsummon.js";
 import _poolUnswervingSloth from "./pool/unswerving-sloth.js";
 import _poolUntamedHunger from "./pool/untamed-hunger.js";
 import _poolUntetheredExpress from "./pool/untethered-express.js";
+import _poolUntimelyMalfunction from "./pool/untimely-malfunction.js";
 import _poolUnwantedRemake from "./pool/unwanted-remake.js";
 import _poolUnwelcomeSprite from "./pool/unwelcome-sprite.js";
 import _poolUnwillingIngredient from "./pool/unwilling-ingredient.js";
@@ -11428,6 +11437,7 @@ import _poolWildHunger from "./pool/wild-hunger.js";
 import _poolWildIdea from "./pool/wild-idea.js";
 import _poolWildJhovall from "./pool/wild-jhovall.js";
 import _poolWildOx from "./pool/wild-ox.js";
+import _poolWildRicochet from "./pool/wild-ricochet.js";
 import _poolWildRide from "./pool/wild-ride.js";
 import _poolWildRoads from "./pool/wild-roads.js";
 import _poolWildUnraveling from "./pool/wild-unraveling.js";
@@ -13250,6 +13260,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoldBiochemist,
   _poolBoldImpaler,
   _poolBolgsCompany,
+  _poolBoltBend,
   _poolBoltHound,
   _poolBoltOfKeranos,
   _poolBoltwave,
@@ -14521,6 +14532,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDefiledCryptCadaverLab,
   _poolDefiledCrypt,
   _poolDefilingDaemogoth,
+  _poolDeflectingSwat,
   _poolDeftDuelist,
   _poolDefyGravity,
   _poolDegaDisciple,
@@ -16909,6 +16921,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHydraBroodmaster,
   _poolHydraOmnivore,
   _poolHydroChanneler,
+  _poolHydroelectricLaboratory,
+  _poolHydroelectricSpecimen,
   _poolHydroidKrasis,
   _poolHydrosurge,
   _poolHyenaPack,
@@ -16991,6 +17005,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolImprovisedArmor,
   _poolImprovisedArsenal,
   _poolImprovisedWeaponry,
+  _poolImpsMischief,
   _poolImpulse,
   _poolImpulsivePilferer,
   _poolImpulsivity,
@@ -19870,6 +19885,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRedRoomRecruit,
   _poolRedXiiiProudWarrior,
   _poolRedcapThief,
+  _poolRedirectLightning,
   _poolRedoubledStormsinger,
   _poolRedshiftRocketeerChief,
   _poolRedwoodTreefolk,
@@ -19996,6 +20012,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReturnFromTheWilds,
   _poolReturnOfTheMoleMan,
   _poolReturnOfTheWildspeaker,
+  _poolReturnTheFavor,
   _poolReturnToBattle,
   _poolReturnToDust,
   _poolReturnToNature,
@@ -21338,6 +21355,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpellscornCoven,
   _poolSpellseeker,
   _poolSpellshock,
+  _poolSpellskite,
   _poolSpellstutterSprite,
   _poolSpellweaverEternal,
   _poolSpelunking,
@@ -22849,6 +22867,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnswervingSloth,
   _poolUntamedHunger,
   _poolUntetheredExpress,
+  _poolUntimelyMalfunction,
   _poolUnwantedRemake,
   _poolUnwelcomeSprite,
   _poolUnwillingIngredient,
@@ -23520,6 +23539,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWildIdea,
   _poolWildJhovall,
   _poolWildOx,
+  _poolWildRicochet,
   _poolWildRide,
   _poolWildRoads,
   _poolWildUnraveling,

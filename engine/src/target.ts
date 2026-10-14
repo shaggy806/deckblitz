@@ -220,6 +220,25 @@ export type TargetSpec =
       readonly sourceTypes?: readonly CardType[];
     }
   /**
+   * A spell or an ability on the stack, in one slot — "target spell or
+   * ability" (Deflecting Swat), "target instant spell, sorcery spell,
+   * activated ability, or triggered ability" (Return the Favor), "target
+   * spell or ability **with a single target**" (Bolt Bend). A mana ability
+   * never is one (rule 605.3b); a Saga chapter, a delayed or reflexive trigger
+   * and a ward trigger are triggered abilities.
+   */
+  | {
+      readonly kind: "stack";
+      /** Which spells: every one, only instants and sorceries, or none. */
+      readonly spells: "any" | "instant-or-sorcery" | "none";
+      /** Activated and triggered abilities too. */
+      readonly abilities: boolean;
+      /** "With a single target": exactly one target chosen as it went on the
+       * stack (rule 115.9a — the same object twice is two), however many of
+       * them are still legal. A slot its own rules filled isn't a target. */
+      readonly singleTarget?: true;
+    }
+  /**
    * A slot that may be left empty — "up to one target creature" (Ajani,
    * Caller of the Pride), "up to two target creatures you don't control"
    * (Hate Mirage), "fights up to one target creature" (Primal Might).
@@ -690,6 +709,12 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     const nonland = spec.filter?.notTypes?.includes("land") === true ? "nonland " : "";
     const whose = spec.whose === "you" ? " you control" : spec.whose === "opponent" ? " an opponent controls" : "";
     return `spell or ${nonland}permanent${whose}`;
+  }
+  if (spec.kind === "stack") {
+    const spells =
+      spec.spells === "none" ? null : spec.spells === "instant-or-sorcery" ? "instant or sorcery spell" : "spell";
+    const nouns = [spells, spec.abilities ? "ability" : null].filter((n) => n !== null).join(" or ");
+    return `${nouns}${spec.singleTarget === true ? " with a single target" : ""}`;
   }
   if (spec.kind === "ability") {
     const from = spec.sourceTypes === undefined ? "" : ` from ${spec.sourceTypes.join(" or ")} source`;

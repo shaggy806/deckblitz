@@ -50,10 +50,6 @@ per gap under the same bold title; when a gap closes, delete it in both.
 - **Suspend's time-counter triggers don't use the stack.** Rule 702.62a makes "remove a time
   counter" and "when the last is removed, you may play it" triggered abilities; `upkeepStep` does
   both as the upkeep begins (`castSuspendedCard`), so nobody can respond between them.
-- **Changing a spell or ability's target** (rule 115.7 — Return the Favor's "change the target
-  of target spell or ability with a single target"), and a target slot that takes an instant or
-  sorcery spell *or* an activated or triggered ability (its first mode). Return the Favor waits
-  on both.
 - **"Whenever a creature you control deals combat damage to that player this turn"** — a
   delayed trigger lasting the turn, keyed on a target player (Great Train Heist's third mode),
   and "if it's your combat phase" as a condition (its first). `DelayedCombatDamage` watches one

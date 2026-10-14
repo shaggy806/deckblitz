@@ -362,6 +362,7 @@ import _poolWateryGrave from "../pool/watery-grave.js";
 import _poolWavebreakHippocamp from "../pool/wavebreak-hippocamp.js";
 import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
+import _poolWildRicochet from "../pool/wild-ricochet.js";
 import _poolWildwoodPatrol from "../pool/wildwood-patrol.js";
 import _poolWindStrider from "../pool/wind-strider.js";
 import _poolWindsOfRath from "../pool/winds-of-rath.js";
@@ -742,6 +743,7 @@ const shard: CardShard = {
     _poolWavebreakHippocamp,
     _poolWhiteSunsTwilight,
     _poolWightOfTheReliquary,
+    _poolWildRicochet,
     _poolWildwoodPatrol,
     _poolWindStrider,
     _poolWindsOfRath,

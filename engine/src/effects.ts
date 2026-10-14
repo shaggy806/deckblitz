@@ -3267,6 +3267,32 @@ export type EffectSpec =
     }
   | {
       /**
+       * Change the targets of the spell or ability in target slot `target`
+       * (rule 115.7), this effect's controller choosing, each new target one
+       * that spell or ability could legally have as its controller would
+       * choose it (never itself — rule 115.5), its division of damage or
+       * counters kept slot for slot (115.7f), and each new target "becomes
+       * the target" of it (ward, Phantasmal Image). Nothing happens if it
+       * has left the stack.
+       *
+       * - `"change"` — "change the target(s)" (115.7a): every target to
+       *   another legal one, and if any can't be, none is; it must change if
+       *   it can (Bolt Bend's rulings).
+       * - `"change-one"` — "change a target" (115.7b): one of them.
+       * - `"choose-new"` — "you may choose new targets" (115.7d): any number,
+       *   each kept even if it's no longer legal (Deflecting Swat).
+       */
+      readonly kind: "change-targets";
+      readonly target: number;
+      readonly how: "change" | "change-one" | "choose-new";
+      /** "…to this creature": the one new target there is is this effect's
+       * own permanent (Spellskite, Hydroelectric Specimen). */
+      readonly to?: "source";
+      /** "You may change…" (Hydroelectric Specimen): keeping it is a choice. */
+      readonly optional?: true;
+    }
+  | {
+      /**
        * "Exile that card instead of putting it into your graveyard as it
        * resolves. If you do, return it to your hand at the beginning of the
        * next end step" (Feather, the Redeemed). Marks the spell whose casting
@@ -5494,6 +5520,10 @@ export interface EffectApi {
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
   copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId): void;
+  /** Change the targets of the spell or ability at `TargetRef` on the stack,
+   * this effect's controller choosing — see the `change-targets`
+   * {@link EffectSpec}. */
+  changeTargets(target: TargetRef, how: "change" | "change-one" | "choose-new", toSource: boolean, optional: boolean): void;
   /** The spell whose casting fired this triggered ability, as it is on the
    * stack or as it last was there (rule 608.2h); `null` if nothing cast one. */
   triggerSpell(): SpellSnapshot | null;
@@ -8372,6 +8402,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
       }
       if (!copied && spec.otherwise !== undefined) applyEffectSpec(spec.otherwise, ctx);
+      return;
+    }
+    case "change-targets": {
+      const target = ctx.targets[spec.target];
+      if (target !== undefined) ctx.changeTargets(target, spec.how, spec.to === "source", spec.optional === true);
       return;
     }
     case "copy-ability": {

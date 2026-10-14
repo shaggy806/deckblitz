@@ -75,7 +75,7 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
   if (spec.kind === "optional" || spec.kind === "other" || spec.kind === "any-number") {
     return targetSpecReadsX(spec.of);
   }
-  if (spec.kind === "ability") return false;
+  if (spec.kind === "ability" || spec.kind === "stack") return false;
   return spec.filter !== undefined && filterReadsX(spec.filter);
 }
 
@@ -343,6 +343,29 @@ function isLegalTargetUncached(
       spec.filter === undefined ||
       matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source))
     );
+  }
+  // A spell or an ability on the stack, in one slot.
+  if (typeof spec === "object" && spec.kind === "stack") {
+    if (ref.kind !== "object") return false;
+    const object = state.objects[ref.object];
+    if (object === undefined || object.zone !== "stack") return false;
+    if (object.kind === "ability") {
+      if (!spec.abilities) return false;
+    } else {
+      if (object.kind !== "card" || spec.spells === "none") return false;
+      if (spec.spells === "instant-or-sorcery") {
+        const t = registry.get(printedCardName(object)).types;
+        if (!t.includes("instant") && !t.includes("sorcery")) return false;
+      }
+    }
+    // "With a single target" (rule 115.9a): the targets chosen as it went
+    // on the stack, each instance counted, a slot its rules filled not one.
+    if (spec.singleTarget === true) {
+      const auto = new Set(object.autoTargetSlots ?? []);
+      const chosen = (object.targets ?? []).filter((t, i) => t !== undefined && t !== null && !auto.has(i));
+      if (chosen.length !== 1) return false;
+    }
+    return true;
   }
   // A narrowed activated or triggered ability on the stack.
   if (typeof spec === "object" && spec.kind === "ability") {

@@ -59,7 +59,7 @@ section keeps only what to do next.
   did: 4-5 agents, ~30 cards each, with the leading features built alongside in worktrees (batch
   69: become-copy and move-counter; batch 70: devotion with the Gods' type change, and phasing).
   Leading blockers now: `cards:needs -w engine -- --rank` (attach-extensions first). The nine
-  other starter precons' 30 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals land.
+  other starter precons' 29 stand-ins (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`; the pass of
   2026-10-11 added 22 for casual play — the Moxen, Black Lotus, Mana Crypt, Time Walk, Tinker,
   Griselbrand and more). Balance, Channel, Emrakul, the Aeons Torn, Erayo, Fastbond, Flash,
@@ -130,7 +130,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
-- **Changing a spell or ability's target** (115.7; Return the Favor).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).

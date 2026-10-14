@@ -268,6 +268,7 @@ import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
 import _poolRepulsorRays from "../pool/repulsor-rays.js";
 import _poolRetractionHelix from "../pool/retraction-helix.js";
+import _poolReturnTheFavor from "../pool/return-the-favor.js";
 import _poolReturnedCentaur from "../pool/returned-centaur.js";
 import _poolRevelRuiner from "../pool/revel-ruiner.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
@@ -666,6 +667,7 @@ const shard: CardShard = {
     _poolRepentantBlacksmith,
     _poolRepulsorRays,
     _poolRetractionHelix,
+    _poolReturnTheFavor,
     _poolReturnedCentaur,
     _poolRevelRuiner,
     _poolRicketyGazebo,

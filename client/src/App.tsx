@@ -1862,9 +1862,10 @@ function Table({
             source: chooseTargetsAction.source,
             abilityIndex: 0,
             label:
-              chooseTargetsAction.current !== undefined
+              chooseTargetsAction.prompt ??
+              (chooseTargetsAction.current !== undefined
                 ? `Choose new targets for the copy of ${chooseTargetsAction.cardName}`
-                : `Choose targets for ${chooseTargetsAction.cardName}`,
+                : `Choose targets for ${chooseTargetsAction.cardName}`),
             specs: chooseTargetsAction.specs,
             options: chooseTargetsAction.options,
             picked: ctPicks,
@@ -4437,8 +4438,20 @@ function Table({
     const groupPicked = grouped ? activeTargeting.picked.length - anyNumberSlot(activeTargeting.specs) : 0
     const slotSpec = currentSpec(activeTargeting)
     // A copy's target can always be kept, whether or not it's still there to
-    // click.
-    const keep = activeTargeting.current?.[activeTargeting.picked.length]
+    // click — and so can a spell's whose targets an effect lets its player
+    // choose again, but not one that must change ("change the target of …":
+    // its own target isn't among the slot's options).
+    const slotIndex = activeTargeting.picked.length
+    const nowTarget = activeTargeting.current?.[slotIndex]
+    const keep =
+      nowTarget !== undefined &&
+      (activeTargeting.options?.[slotIndex] ?? []).some((o) =>
+        o.kind === 'player'
+          ? nowTarget.kind === 'player' && o.player === nowTarget.player
+          : nowTarget.kind === 'object' && o.object === nowTarget.object,
+      )
+        ? nowTarget
+        : undefined
     const keepLabel =
       keep === undefined
         ? ''

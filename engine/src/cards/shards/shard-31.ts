@@ -163,6 +163,7 @@ import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
 import _poolHorizonExplorer from "../pool/horizon-explorer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
+import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
@@ -531,6 +532,7 @@ const shard: CardShard = {
     _poolHorizonExplorer,
     _poolHulkingDevil,
     _poolHuntedHorror,
+    _poolHydroelectricLaboratory,
     _poolIcewindElemental,
     _poolIllusoryAmbusher,
     _poolImmersturmRaider,

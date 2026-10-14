@@ -22,7 +22,7 @@
 import type { Action, LegalAction } from "../actions.js";
 import type { PlayerId } from "../primitives.js";
 import { divisionOf, normalizeTargets, otherSlotConflict, sameTargetRef } from "../target.js";
-import type { ResolvedTargets } from "../target.js";
+import type { ResolvedTargets, TargetRef } from "../target.js";
 import { cardSource, invalidTargetReason } from "../targeting.js";
 import type { TargetSource } from "../targeting.js";
 import type { ObjectId } from "../primitives.js";
@@ -57,15 +57,22 @@ function whyNotCopyTargets(
 ): string | null {
   const current = awaiting.current ?? [];
   if (chosen.length !== current.length) {
-    return `the copy has ${current.length} target(s) to keep or change, not ${chosen.length}`;
+    return `there are ${current.length} target(s) to keep or change, not ${chosen.length}`;
   }
   for (let i = 0; i < chosen.length; i += 1) {
     const target = chosen[i];
-    if (target === undefined) return "a copy keeps the same number of targets";
+    if (target === undefined) return "it keeps the same number of targets";
     if (!awaiting.options[i].some((o) => sameTargetRef(o, target))) {
       return `that isn't a legal new target for slot ${i + 1}`;
     }
   }
+  // "Change a target" (rule 115.7b): one of them, no more and no fewer.
+  if (awaiting.changeOne === true && chosen.filter((t, i) => !sameTargetRef(t as TargetRef, current[i])).length !== 1) {
+    return "change exactly one target";
+  }
+  // A spell's targets are judged as its controller would choose them,
+  // whoever is changing them (rule 115.7 — `targetsFor`).
+  player = awaiting.targetsFor ?? player;
   // A copy of an ability targets from that ability's source — its permanent,
   // with what its filters read — which each slot's options were already
   // judged against (`Game.askCopyTargets`); a card's printed
@@ -102,6 +109,8 @@ export const chooseTargets = defineDecision({
       options: awaiting.options.map((o) => [...o]),
       ...(awaiting.current !== undefined ? { current: [...awaiting.current] } : {}),
       ...(awaiting.divide !== undefined ? { divide: awaiting.divide } : {}),
+      ...(awaiting.prompt !== undefined ? { prompt: awaiting.prompt } : {}),
+      ...(awaiting.changeOne === true ? { changeOne: true as const } : {}),
     },
   ],
 

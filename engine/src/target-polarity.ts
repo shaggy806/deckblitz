@@ -335,6 +335,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // An ability you'd want twice is yours: every card copying one says "you
   // control".
   "copy-ability": (n, v) => v.touch(n.target, "help", MAJOR),
+  // Turning a spell or ability aside is done to someone else's — the removal
+  // aimed at your creature (Bolt Bend, Deflecting Swat, Spellskite).
+  "change-targets": (n, v) => v.touch(n.target, "harm", MAJOR),
   "exile-spell-as-it-resolves": none,
   "additional-combat": none,
   "additional-upkeep-steps": none,

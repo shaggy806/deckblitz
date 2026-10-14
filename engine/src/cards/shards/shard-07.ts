@@ -66,6 +66,7 @@ import _poolDawnGryff from "../pool/dawn-gryff.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
+import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
@@ -251,6 +252,7 @@ import _poolRavenousRobots from "../pool/ravenous-robots.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
+import _poolRedirectLightning from "../pool/redirect-lightning.js";
 import _poolReflexes from "../pool/reflexes.js";
 import _poolRefurbish from "../pool/refurbish.js";
 import _poolRegalCaracal from "../pool/regal-caracal.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDefenderOfChaos,
+    _poolDeflectingSwat,
     _poolDescentIntoAvernus,
     _poolDestructiveDigger,
     _poolDevilsPlay,
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolRealmOfKoh,
     _poolReanimate,
     _poolReconnaissanceMission,
+    _poolRedirectLightning,
     _poolReflexes,
     _poolRefurbish,
     _poolRegalCaracal,

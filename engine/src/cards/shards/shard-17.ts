@@ -162,6 +162,7 @@ import _poolHornetNest from "../pool/hornet-nest.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
+import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
@@ -544,6 +545,7 @@ const shard: CardShard = {
     _poolHushwoodVerge,
     _poolHydroidKrasis,
     _poolImodaneThePyrohammer,
+    _poolImpsMischief,
     _poolIndulgentTormentor,
     _poolInfernalGrasp,
     _poolIronManFuturistParagon,

@@ -3316,15 +3316,32 @@ export class HeuristicBotController extends AutomaticController {
             );
             return elsewhere.length > 0 ? elsewhere : slot;
           });
-    return this.aimedTargets(state, options, specs, polarities, damages);
+    const chosen = this.aimedTargets(state, options, specs, polarities, damages);
+    // "Change a target" (rule 115.7b — Spellskite): one slot changes. The
+    // first the aim moved, else the first that can move.
+    if (awaiting?.kind !== "choose-targets" || awaiting.changeOne !== true || current === undefined) return chosen;
+    const moved = chosen.findIndex((t, i) => t !== null && t !== undefined && !sameRef(t, current[i]));
+    const slot = moved >= 0 ? moved : legalOptions.findIndex((o, i) => o.some((t) => !sameRef(t, current[i])));
+    return current.map((now, i) =>
+      i !== slot ? now : moved >= 0 ? chosen[i] : (legalOptions[i].find((t) => !sameRef(t, now)) ?? now),
+    );
   }
 
-  /** A spell copy's slots (`GameState.pendingCopyTargets`), by the copied
-   * spell's own effect — Lightning Bolt's one slot is harm. Null for an
-   * ability's copy or a modal spell, whose slots this doesn't read. */
+  /** A spell copy's slots (`GameState.pendingCopyTargets`), or a spell's
+   * whose targets are being changed (`pendingRetarget` — Bolt Bend on an
+   * opponent's Lightning Bolt), by that spell's own effect — Lightning Bolt's
+   * one slot is harm, aimed then at an opponent of ours whoever cast it. Null
+   * for an ability or a modal spell, whose slots this doesn't read. */
   private copyPolarities(state: GameState, bias: ReturnType<typeof polarityBias>): readonly Polarity[] | null {
-    const pending = state.pendingCopyTargets;
-    if (pending === null || pending === undefined) return null;
+    const retarget = state.pendingRetarget;
+    const copied = state.pendingCopyTargets;
+    const pending =
+      retarget != null
+        ? { copy: retarget.object, slots: retarget.slots }
+        : copied != null
+          ? copied
+          : null;
+    if (pending === null) return null;
     const copy = state.objects[pending.copy];
     if (copy === undefined || copy.kind === "ability" || !this.registry.has(copy.cardName)) return null;
     const def = this.registry.get(copy.cardName);

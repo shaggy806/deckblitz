@@ -2594,6 +2594,16 @@ export type AwaitingDecision =
        * the answer's targets from `slot` on (an index into the answer, not
        * the ability's own slots), split as the answer's `division` says. */
       readonly divide?: { readonly total: number; readonly slot: number };
+      /** What's being asked, when it isn't a copy's or a trigger's targets —
+       * "Change the target of Lightning Bolt" (`GameState.pendingRetarget`). */
+      readonly prompt?: string;
+      /** "Change a target" (rule 115.7b): exactly one slot's answer differs
+       * from `current` (Spellskite). */
+      readonly changeOne?: true;
+      /** Whose targets these are, when not the chooser's: a spell's targets
+       * are legal or not as its controller would choose them, whoever is
+       * changing them (`GameState.pendingRetarget`). */
+      readonly targetsFor?: PlayerId;
     }
   | {
       /**
@@ -3418,6 +3428,13 @@ export interface GameState {
    * answers back onto the copy's target slots. Absent when none is.
    */
   pendingCopyTargets?: { readonly copy: ObjectId; readonly slots: readonly number[] } | null;
+  /**
+   * A spell or ability on the stack whose targets an effect is changing (rule
+   * 115.7 — the `change-targets` effect): the `choose-targets` on `awaiting`
+   * carries `current`, and `slots` maps its answers back onto `object`'s
+   * target slots. Absent when none is.
+   */
+  pendingRetarget?: { readonly object: ObjectId; readonly slots: readonly number[] } | null;
   /** Copies made while another decision was up — storm's several — waiting
    * to be asked about their new targets, oldest first. Drained one at a time
    * in the `prepareForPriority` fixpoint. Absent when empty. */

@@ -335,6 +335,7 @@ import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
@@ -706,6 +707,7 @@ const shard: CardShard = {
     _poolTrystanCallousCultivator,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,
     _poolUrzasWorkshop,

@@ -4616,3 +4616,19 @@ stack count once per token)
   to green 1; at five (Nylea's {G}, the Bears' {G} and the Baloth's three) she becomes a 6/6 creature God.
   Your creatures have trample throughout.
 - **Known limits:** None known.
+
+### Bolt Bend, Wild Ricochet, Spellskite
+
+*A new player decision* — changing a spell's targets (rule 115.7)
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, Spellskite, eight Mountains and two
+  Islands; in hand two Lightning Bolts, Bolt Bend and Wild Ricochet. Bob: Hill Giant and Grizzly Bears.
+- **Do:** Cast Lightning Bolt at Bob's Hill Giant, and with it on the stack cast Bolt Bend at the Bolt; pass
+  until Bolt Bend resolves. Then cast the second Bolt at the Hill Giant and Wild Ricochet at it. Last, with a
+  Bolt at Bob's Bears, activate Spellskite at it (pay 2 life).
+- **Check:** Bolt Bend asks "Change the target of Lightning Bolt" with the Hill Giant not offered and no Keep
+  button; the Bolt then hits what you picked. Wild Ricochet asks "Choose new targets for Lightning Bolt" with
+  a Keep button, then asks the copy's targets; both Bolts resolve at what you chose. Spellskite's ability
+  moves the Bolt to Spellskite without asking (it's the one choice). Check at ~768px tall and at full size, in
+  a 2- and a 4-player room.
+- **Known limits:** Misdirection waits on its "exile a blue card from your hand" alternative cost.

@@ -2747,4 +2747,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'] },
     }),
   ),
+  preset(
+    'Bolt Bend, Wild Ricochet, Spellskite',
+    board({
+      you: {
+        bf: ['Grizzly Bears', 'Spellskite', 'Mountain*8', 'Island*2'],
+        hand: ['Lightning Bolt', 'Lightning Bolt', 'Bolt Bend', 'Wild Ricochet'],
+      },
+      opp: { bf: ['Hill Giant', 'Grizzly Bears'] },
+    }),
+  ),
 ]

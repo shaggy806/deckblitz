@@ -1063,6 +1063,7 @@ delayed trigger's "the next instant or sorcery spell you cast this turn has stor
 of Nature),
 `cascade`, `copy-spell { target, newTargets?, ifTargets?, otherwise?, retargetTo?,
 forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets? }`,
+`change-targets { target, how, to?, optional? }`,
 `exile-spell-as-it-resolves { returnAtNextEndStep? }`,
 `shuffle-library` (the effect's controller shuffles — Ponder's "You may shuffle" inside a `may`).
 
@@ -1098,6 +1099,24 @@ applies: Thousand-Year Storm's `{ triggerValue: true }` off a cast trigger's
 `countCastBefore` (§9), Thunderclap Drake's `{ commanderCasts: "you" }`. With
 `newTargets`, each copy is asked about in turn, as storm's are; 0 copies
 nothing (and applies `otherwise`).
+
+`change-targets { target, how, to?, optional? }` changes the targets of the
+spell or ability in target slot `target` (a `{ kind: "stack" }` target, §7)
+as it resolves, its controller choosing (rule 115.7): `how: "change"` —
+"change the target(s)", every one to another legal target or none, and it
+must change if it can (Bolt Bend, Redirect Lightning, Untimely Malfunction);
+`"change-one"` — "change a target" (115.7b); `"choose-new"` — "you may
+choose new targets", any of them, a kept one even if no longer legal
+(Deflecting Swat, Wild Ricochet). New targets are legal as the spell's own
+controller would choose them, never the spell itself (115.5); a divided
+amount keeps its division (115.7f); each new target "becomes the target"
+(ward, Phantasmal Image). `to: "source"` — "…to this creature": the only
+new target is the effect's own permanent, if it's legal (Spellskite's
+`"change-one"`, Hydroelectric Specimen); `optional: true` — "you may change"
+(Hydroelectric Specimen). Asked as a `choose-targets` decision with `current`
+(`GameState.pendingRetarget`) unless forced, and nothing at all when nothing
+can change. Steps after it in a `sequence` wait for the answer (Imp's
+Mischief's life loss, Wild Ricochet's copy).
 
 `copy-ability` copies an **activated or triggered ability** on the stack (rule
 707.10): the one in target slot `target` — a `{ kind: "ability" }` target
@@ -2061,6 +2080,17 @@ stopped covering:
   object it was as the ability went on the stack, else as it last existed on
   the battlefield (rule 113.7a); an enchantment card's channel ability counts
   (Weaver's ruling). `copy-ability` copies one (§6).
+- `{ kind: "stack", spells: "any" | "instant-or-sorcery" | "none", abilities: boolean, singleTarget?: true }` —
+  a spell or an ability on the stack in one slot: "target spell or ability"
+  (Deflecting Swat, Spellskite), "target instant spell, sorcery spell,
+  activated ability, or triggered ability" (Return the Favor: `spells:
+  "instant-or-sorcery", abilities: true`), "target spell **with a single
+  target**" (Imp's Mischief: `abilities: false, singleTarget: true` — one
+  target chosen as it went on the stack, the same one twice counting as two,
+  however many are still legal: rule 115.9a; a slot its own rules filled
+  isn't a target). Never a mana ability. `copy-spell` copies an ability in
+  such a slot as `copy-ability` does; `change-targets` (§6) changes its
+  targets.
 - `{ kind: "card-in-graveyard", whose?: "any" | "you" | "opponent" | "defending-player" | "trigger-player", filter?: CardFilter }`
   (`"trigger-player"`: "that player's graveyard" of a trigger naming a player — Skullsnatcher, Ink-Eyes)
   — a card in a graveyard (Withered Wretch, Cemetery Reaper, Return to

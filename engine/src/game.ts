@@ -4720,7 +4720,11 @@ export class Game {
 
     const trig = this.state.pendingTargetedTrigger;
     const copy = this.state.pendingCopyTargets;
-    if (copy != null) {
+    const retarget = this.state.pendingRetarget;
+    if (retarget != null) {
+      this.state.pendingRetarget = null;
+      this.retargetStackObject(retarget.object, retarget.slots, chosen);
+    } else if (copy != null) {
       this.state.pendingCopyTargets = null;
       this.retargetCopy(copy.copy, copy.slots, chosen);
     } else if (trig !== null) {
@@ -20023,6 +20027,8 @@ export class Game {
           opts,
         ),
       copySpell: (target, newTargets, by) => this.copySpellByEffect(by ?? controller, target, newTargets),
+      changeTargets: (target, how, toSource, optional) =>
+        this.changeStackTargets(controller, source, target, how, toSource, optional),
       copyAbility: (target, newTargets) => this.copyAbilityByEffect(controller, target, triggerObject, newTargets),
       triggerSpell: () => {
         // The spell whose casting fired this (rule 603.2), as it is if it's
@@ -22736,54 +22742,10 @@ export class Game {
    */
   private askCopyTargets(copyId: ObjectId): boolean {
     const copy = this.state.objects[copyId];
-    const targets = copy.targets ?? [];
-    // A copy of an ability targets as that ability does, from its source,
-    // judged for the copy's controller.
-    const specs =
-      copy.kind === "ability" ? triggerTargetSpecs(this.stackAbilityOf(copy), copy.chosenModes) : this.spellTargetSpecs(copy);
-    if (specs.length === 0) return false;
-    const auto = new Set(copy.autoTargetSlots ?? []);
-    const source =
-      copy.kind === "ability"
-        ? this.abilityTargetSource({
-            sourceObjectId: copy.sourceObjectId ?? copyId,
-            controller: copy.controller,
-            targets,
-            x: copy.xValue ?? 0,
-            triggerValue: copy.triggerValue ?? 0,
-            ...(copy.triggerObject !== undefined ? { triggerObject: copy.triggerObject } : {}),
-            ...(copy.targetZones !== undefined ? { targetZones: copy.targetZones } : {}),
-            ...(copy.lastKnownRefs !== undefined ? { lastKnownRefs: copy.lastKnownRefs } : {}),
-          })
-        : this.cardSource(this.registry.get(copy.cardName), copyId);
-    const slots: number[] = [];
-    const slotSpecs: TargetSpec[] = [];
-    const options: TargetRef[][] = [];
-    const current: TargetRef[] = [];
-    // A copy keeps its number of targets (rule 707.10c), so an "any number
-    // of target …" group is as many single slots as it has members — each
-    // one target of the group's spec, another than the members before it
-    // (rule 601.2c) — never a group again: offered as one, a chooser took it
-    // for a fresh "any number" and answered six for a copy with two.
-    const concrete = concreteTargetSpecs(specs, targets.length);
-    const group = anyNumberSlot(specs);
-    targets.forEach((target, i) => {
-      if (target === undefined || auto.has(i)) return;
-      const spec = concrete[Math.min(i, concrete.length - 1)];
-      // What a group member may be is the group's own spec; the "another
-      // than the ones before it" relation is checked across the answer.
-      const inGroup = group >= 0 && i >= group;
-      const member = inGroup && typeof spec === "object" && spec.kind === "other" ? spec.of : spec;
-      // Never the copy itself: a spell or ability on the stack is an illegal
-      // target for itself (rule 115.5).
-      const legal = legalTargets(this.state, this.registry, member, copy.controller, source).filter(
-        (t) => t.kind !== "object" || t.object !== copyId,
-      );
-      slots.push(i);
-      slotSpecs.push(spec);
-      current.push(target);
-      options.push([target, ...legal.filter((t) => !sameTargetRef(t, target))]);
-    });
+    const found = this.stackTargetSlots(copyId);
+    if (found === null) return false;
+    const { slots, specs: slotSpecs, current } = found;
+    const options = current.map((target, i) => [target, ...found.others[i]]);
     if (options.every((o) => o.length <= 1)) return false;
     // Another copy is being asked about (storm makes several at once): this
     // one waits its turn, its targets unannounced until it's answered.
@@ -22802,6 +22764,163 @@ export class Game {
       current,
     };
     return true;
+  }
+
+  /**
+   * The target slots of the spell or ability `id` on the stack that can be
+   * changed, as a copy's new targets (rule 707.10c) or an effect changing
+   * them (115.7) see them: for each, its spec, the target it has, and every
+   * other target it could legally have — as its controller would choose it,
+   * from its own source (an ability's from that ability's source), never
+   * itself (rule 115.5). A slot left empty or filled automatically isn't a
+   * target (rule 115.1). `null` when it has no target specs.
+   */
+  private stackTargetSlots(id: ObjectId): {
+    readonly slots: readonly number[];
+    readonly specs: readonly TargetSpec[];
+    readonly current: readonly TargetRef[];
+    readonly others: readonly (readonly TargetRef[])[];
+  } | null {
+    const object = this.state.objects[id];
+    const targets = object.targets ?? [];
+    const specs =
+      object.kind === "ability"
+        ? triggerTargetSpecs(this.stackAbilityOf(object), object.chosenModes)
+        : this.spellTargetSpecs(object);
+    if (specs.length === 0) return null;
+    const auto = new Set(object.autoTargetSlots ?? []);
+    const source =
+      object.kind === "ability"
+        ? this.abilityTargetSource({
+            sourceObjectId: object.sourceObjectId ?? id,
+            controller: object.controller,
+            targets,
+            x: object.xValue ?? 0,
+            triggerValue: object.triggerValue ?? 0,
+            ...(object.triggerObject !== undefined ? { triggerObject: object.triggerObject } : {}),
+            ...(object.targetZones !== undefined ? { targetZones: object.targetZones } : {}),
+            ...(object.lastKnownRefs !== undefined ? { lastKnownRefs: object.lastKnownRefs } : {}),
+          })
+        : this.cardSource(this.registry.get(object.cardName), id);
+    const slots: number[] = [];
+    const slotSpecs: TargetSpec[] = [];
+    const current: TargetRef[] = [];
+    const others: TargetRef[][] = [];
+    // It keeps its number of targets (rules 707.10c, 115.7), so an "any
+    // number of target …" group is as many single slots as it has members —
+    // each one target of the group's spec, another than the members before it
+    // (rule 601.2c) — never a group again: offered as one, a chooser took it
+    // for a fresh "any number" and answered six for a copy with two.
+    const concrete = concreteTargetSpecs(specs, targets.length);
+    const group = anyNumberSlot(specs);
+    targets.forEach((target, i) => {
+      if (target === undefined || auto.has(i)) return;
+      const spec = concrete[Math.min(i, concrete.length - 1)];
+      // What a group member may be is the group's own spec; the "another
+      // than the ones before it" relation is checked across the answer.
+      const inGroup = group >= 0 && i >= group;
+      const member = inGroup && typeof spec === "object" && spec.kind === "other" ? spec.of : spec;
+      const legal = legalTargets(this.state, this.registry, member, object.controller, source).filter(
+        (t) => (t.kind !== "object" || t.object !== id) && !sameTargetRef(t, target),
+      );
+      slots.push(i);
+      slotSpecs.push(spec);
+      current.push(target);
+      others.push(legal);
+    });
+    return { slots, specs: slotSpecs, current, others };
+  }
+
+  /**
+   * The `change-targets` effect (rule 115.7): `chooser` changes the targets
+   * of the spell or ability `target` on the stack — see the effect's
+   * `EffectSpec` for `how`. Each target may become only one it could legally
+   * have (`stackTargetSlots`), or with `toSource` only `effectSource` itself
+   * (Spellskite). "Change the target(s)" changes every one or none (115.7a);
+   * "change a target" one (115.7b); "choose new targets" any (115.7d). Asked
+   * as a `choose-targets` decision with `current` (`pendingRetarget`) unless
+   * the answer is forced — one slot, one target it can go to — and then
+   * changed at once; nothing at all when nothing can change.
+   */
+  private changeStackTargets(
+    chooser: PlayerId,
+    effectSource: ObjectId,
+    target: TargetRef,
+    how: "change" | "change-one" | "choose-new",
+    toSource: boolean,
+    optional: boolean,
+  ): void {
+    if (target.kind !== "object") return;
+    const object = this.state.objects[target.object];
+    if (object === undefined || object.zone !== "stack") return;
+    const found = this.stackTargetSlots(target.object);
+    if (found === null || found.slots.length === 0) return;
+    const others = found.others.map((legal) =>
+      toSource ? legal.filter((t) => t.kind === "object" && t.object === effectSource) : legal,
+    );
+    // "Change the target(s)": if any can't go somewhere else, none does
+    // (115.7a). The rest need one slot that can.
+    if (how === "change" ? others.some((o) => o.length === 0) : others.every((o) => o.length === 0)) return;
+    const keepable = how === "choose-new" || optional;
+    const options = found.current.map((now, i) =>
+      how === "change" && !keepable ? [...others[i]] : [now, ...others[i]],
+    );
+    // Forced: a single target with a single other it must change to.
+    if (!keepable) {
+      const changing = others.map((o, i) => (o.length > 0 ? i : -1)).filter((i) => i >= 0);
+      if (changing.length === 1 && others[changing[0]].length === 1 && (how === "change-one" || found.slots.length === 1)) {
+        const answer = found.current.map((now, i) => (i === changing[0] ? others[i][0] : now));
+        this.retargetStackObject(target.object, found.slots, answer);
+        return;
+      }
+    }
+    const what =
+      how === "choose-new" ? "Choose new targets for" : how === "change-one" ? "Change a target of" : "Change the target of";
+    this.state.pendingRetarget = { object: target.object, slots: found.slots };
+    this.state.awaiting = {
+      kind: "choose-targets",
+      player: chooser,
+      source: target.object,
+      cardName: object.cardName,
+      specs: found.specs,
+      options,
+      current: found.current,
+      prompt: `${what} ${object.cardName}${toSource ? ` to ${this.state.objects[effectSource]?.cardName ?? "this"}` : ""}`,
+      ...(how === "change-one" && !optional ? { changeOne: true as const } : {}),
+      ...(object.controller !== chooser ? { targetsFor: object.controller } : {}),
+    };
+  }
+
+  /** Change the spell or ability `id`'s targets in `slots` to `chosen`, one
+   * for one (rule 115.7), and announce each new one as targeted by it — what
+   * "becomes the target of" sees (ward, Phantasmal Image). Its division of
+   * damage or counters stays with its slots (115.7f). Nothing if it has left
+   * the stack. */
+  private retargetStackObject(id: ObjectId, slots: readonly number[], chosen: ResolvedTargets): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "stack") return;
+    const targets = [...(object.targets ?? [])];
+    const zones = object.targetZones === undefined ? undefined : [...object.targetZones];
+    const stints = object.targetStints === undefined ? undefined : [...object.targetStints];
+    const changed: TargetRef[] = [];
+    slots.forEach((slot, i) => {
+      const next = chosen[i];
+      const was = targets[slot];
+      if (next === undefined || was === undefined || sameTargetRef(next, was)) return;
+      targets[slot] = next;
+      changed.push(next);
+      if (zones !== undefined) zones[slot] = this.zonesOfTargets([next])[0] ?? null;
+      if (stints !== undefined) stints[slot] = this.stintsOfTargets([next])[0] ?? null;
+    });
+    if (changed.length === 0) return;
+    object.targets = targets;
+    if (zones !== undefined) object.targetZones = zones;
+    if (stints !== undefined) object.targetStints = stints;
+    if (object.kind === "ability") {
+      this.announceTargeted(changed, object.controller, object.sourceObjectId ?? id, false, id);
+    } else {
+      this.announceTargeted(changed, object.controller, id, true);
+    }
   }
 
   /** Storm (rule 702.40a): copy `sourceId` for each spell cast before it this
@@ -22977,6 +23096,14 @@ export class Game {
   /** Twincast (rule 707.10): copy the spell `target`. */
   private copySpellByEffect(controller: PlayerId, target: TargetRef, newTargets: boolean): void {
     if (target.kind !== "object") return;
+    // A slot that may hold an ability copies the ability (Return the Favor's
+    // "copy target instant spell, sorcery spell, activated ability, or
+    // triggered ability").
+    const live = this.state.objects[target.object];
+    if (live !== undefined && live.zone === "stack" && live.kind === "ability") {
+      this.copyStackAbility(live, controller, newTargets);
+      return;
+    }
     this.copyStackSpell(target.object, controller, newTargets);
   }
 

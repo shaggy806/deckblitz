@@ -170,6 +170,7 @@ import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
 import _poolHulkingOgre from "../pool/hulking-ogre.js";
+import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
 import _poolImpulse from "../pool/impulse.js";
@@ -586,6 +587,7 @@ const shard: CardShard = {
     _poolHowlingGiant,
     _poolHowlingMine,
     _poolHulkingOgre,
+    _poolHydroelectricSpecimen,
     _poolHypnoticSprite,
     _poolIllusionistsBracers,
     _poolImpulse,

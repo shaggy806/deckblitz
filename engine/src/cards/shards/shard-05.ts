@@ -302,6 +302,7 @@ import _poolSovereignsBite from "../pool/sovereigns-bite.js";
 import _poolSparkReaper from "../pool/spark-reaper.js";
 import _poolSpectatorSeating from "../pool/spectator-seating.js";
 import _poolSpellshock from "../pool/spellshock.js";
+import _poolSpellskite from "../pool/spellskite.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
@@ -689,6 +690,7 @@ const shard: CardShard = {
     _poolSparkReaper,
     _poolSpectatorSeating,
     _poolSpellshock,
+    _poolSpellskite,
     _poolSpiritSummoning,
     _poolSpitefulBully,
     _poolStarOfExtinction,
