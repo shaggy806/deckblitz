@@ -402,6 +402,36 @@ export interface SnapshotEnv {
 }
 
 const ADVANCE_BUDGET = 200_000;
+
+/** Resolutions with nobody acting before a repeating cycle of them is a
+ * loop of mandatory actions — a draw (rule 104.4b, `noteMandatoryResolution`).
+ * Far past any real chain: a storm count or a token engine resolves dozens. */
+const LOOP_RESOLUTIONS = 1_000;
+/** How often, past that, the latest resolutions are checked for a cycle. */
+const LOOP_CHECK_EVERY = 50;
+/** How many of the latest resolutions are kept to look for one. */
+const LOOP_TRAIL = 512;
+/** The longest cycle looked for, and how many times over it must repeat. */
+const LOOP_PERIOD_MAX = 32;
+const LOOP_REPEATS = 8;
+
+/** Whether the end of `trail` is one cycle of at most `LOOP_PERIOD_MAX`
+ * entries repeated `LOOP_REPEATS` times. */
+function repeatsOneCycle(trail: readonly string[]): boolean {
+  for (let period = 1; period <= LOOP_PERIOD_MAX; period += 1) {
+    const span = period * LOOP_REPEATS;
+    if (span > trail.length) return false;
+    let cycles = true;
+    for (let i = trail.length - span; i < trail.length - period; i += 1) {
+      if (trail[i] !== trail[i + period]) {
+        cycles = false;
+        break;
+      }
+    }
+    if (cycles) return true;
+  }
+  return false;
+}
 const GENERIC_SPEND_ORDER = ["C", "W", "U", "B", "R", "G"] as const;
 
 /** One battlefield static that grants activated abilities (Chromatic Lantern,
@@ -943,6 +973,11 @@ export class Game {
    * held back until all of its permanents are on the battlefield — see
    * {@link withEnterBatch}. `null` outside one. */
   private enterAnnouncements: GameEventInput[] | null = null;
+  /** Resolutions since a player last did anything but pass priority, and
+   * what the latest of them were — see `noteMandatoryResolution`. Not game
+   * state: a restored game counts afresh. */
+  private mandatoryResolutions = 0;
+  private resolutionTrail: string[] = [];
   /** While a simultaneous entry is being announced: the batched
    * `enters-battlefield` triggers ("whenever one or more … enter") that have
    * already fired for it, keyed `source#ability`, so each fires once per
@@ -1239,6 +1274,12 @@ export class Game {
   }
 
   private dispatchOne(action: Action): void {
+    // Anything a player does but pass priority is a choice a loop of
+    // mandatory actions doesn't contain (`noteMandatoryResolution`).
+    if (action.type !== "pass-priority") {
+      this.mandatoryResolutions = 0;
+      this.resolutionTrail = [];
+    }
     // A decision applies through its module, which calls the same `apply*`
     // this switch used to call directly. What is left below is the seven
     // priority actions — the things a player does when nothing is pending.
@@ -14482,6 +14523,8 @@ export class Game {
   }
 
   private resolveTopOfStack(): void {
+    this.noteMandatoryResolution();
+    if (this.state.result.over) return;
     const parked = this.state.suspendedResolutions.length;
     // Everything from here on is this resolution's doing ("this way") — and
     // what an ability puts onto the battlefield, its source's doing
@@ -14496,6 +14539,31 @@ export class Game {
     this.resolveTopObject();
     this.holdResolutionOpen(parked);
     this.endResolutionIfDone();
+  }
+
+  /**
+   * A loop of mandatory actions (rule 104.4b, 732.4): the game is a draw. Every
+   * resolution since a player last did anything but pass priority is noted
+   * by what resolved — which card's which ability, or which spell — and once
+   * there have been `LOOP_RESOLUTIONS` of them, if the latest repeat one
+   * short cycle over and over, nobody can stop it: passing isn't an action
+   * the loop contains, and no player can be made to act to end it (732.5).
+   * A loop that ends by itself — a drain that kills a player — ends long
+   * before, and one whose every round asks someone to choose isn't caught
+   * here (each answer resets the count). `runUntil`'s budget stays the
+   * backstop for anything else.
+   */
+  private noteMandatoryResolution(): void {
+    const top = this.state.objects[this.state.zones.shared.stack[this.state.zones.shared.stack.length - 1]];
+    if (top === undefined) return;
+    this.mandatoryResolutions += 1;
+    this.resolutionTrail.push(
+      top.kind === "ability" ? `${top.cardName}#${top.abilityKind}${top.abilityIndex ?? ""}` : `${top.cardName}`,
+    );
+    if (this.resolutionTrail.length > LOOP_TRAIL) this.resolutionTrail.splice(0, this.resolutionTrail.length - LOOP_TRAIL);
+    if (this.mandatoryResolutions < LOOP_RESOLUTIONS || this.mandatoryResolutions % LOOP_CHECK_EVERY !== 0) return;
+    if (!repeatsOneCycle(this.resolutionTrail)) return;
+    this.endGame(null, "a loop of mandatory actions with no way to stop it (rule 104.4b)");
   }
 
   /** Once nothing of the resolution is parked any more, it's over — see

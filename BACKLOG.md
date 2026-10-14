@@ -125,7 +125,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. Delete both when a gap closes.
 
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack; attacking was fixed on 2026-10-07 (a counted attacking stack, `attackingStackPart`).
-- **A mandatory loop throws instead of drawing the game** (104.4b, 732.4): the room stops that game rather than the server going down, but it should be a draw.
+- **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): a loop of passes is drawn now; one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).

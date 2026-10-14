@@ -18,18 +18,18 @@ per gap under the same bold title; when a gap closes, delete it in both.
   engine already deals to every token in it. Anything other than one-to-one (two blockers on one
   attacker) still wakes tokens up. Risk: the damage assignment and "blocked by" checks that
   assume one blocker is one object.
-- **A mandatory loop throws instead of drawing the game.** Rule 104.4b (and 732.4): a loop of
-  mandatory actions with no way to stop is a draw; one with an optional action isn't, and its
-  player says how many times to repeat it (732.2, shortcuts). The engine has neither, only crash
-  guards: `Game.runUntil` throws after `ADVANCE_BUDGET` (200,000) ticks, `prepareForPriority`
-  after 1,000 settling rounds, and the server's `Room.settle` stops after `SETTLE_BUDGET`
-  (10,000) hops. The bots cap a non-mana ability at `MAX_ACTIVATIONS_PER_TURN` (4, in
-  `controller.ts`), so they don't run an optional loop forever; a human repeats one a click at a
-  time. The server's safety net is in: `Room.settle` catches a throw from the engine (a bot's
-  move runs from a timer, where it would otherwise have taken every room down) and `Room.stop`
-  ends that room's game alone, publishing why (`state.stopped`, a lasting toast for every
-  seat). What's left is the rules: detecting the loop (the same state and stack recurring with
-  only mandatory choices) and declaring the draw, rather than stopping on an error.
+- **A mandatory loop that asks a choice each round still throws instead of drawing.** Rule 104.4b (and
+  732.4): a loop of mandatory actions with no way to stop is a draw; one with an optional action isn't, and
+  its player says how many times to repeat it (732.2, shortcuts). Built (2026-10-14): a loop that goes
+  round through the stack with every player only passing — `Game.noteMandatoryResolution` counts
+  resolutions since anyone last did anything else and, past `LOOP_RESOLUTIONS` (1,000), draws the game
+  when the latest repeat one short cycle (passing isn't an action the loop contains, 732.5). Left: a
+  loop whose every round asks someone something (a mandatory trigger's target, a "you may") resets the
+  count at each answer and still runs into the crash guards — `Game.runUntil`'s `ADVANCE_BUDGET`
+  (200,000 ticks), `prepareForPriority`'s 1,000 settling rounds, the server's `Room.settle`
+  `SETTLE_BUDGET` (10,000 hops), whose throw `Room.stop` turns into that room's game ending alone; and
+  shortcuts for optional loops (a human repeats one a click at a time, the bots cap a non-mana ability
+  at `MAX_ACTIVATIONS_PER_TURN`).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
