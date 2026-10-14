@@ -32,21 +32,21 @@ export interface ManaOption {
   readonly lifeCost: number;
   /**
    * Generic mana this activation *costs* — a Signet's "{1}, {T}: Add {B}{R}",
-   * a filter land's "{1}, {T}: Add {G}{G}, {G}{U}, or {U}{U}".
+   * an Odyssey filter land's "{1}, {T}: Add {G}{G}, {G}{U}, or {U}{U}",
+   * Prismatic Lens's "{1}, {T}: Add one mana of any color".
    *
-   * These are "converter" sources: net-positive in count but colour-fixing,
-   * and unlike everything else here they can't pay for themselves. Only a
-   * purely *generic* activation cost is admitted — a coloured one would be
-   * genuinely circular (you'd need the colour to make the colour). See
-   * `planManaPayment`, which funds a converter from plain sources only and
-   * orders it after them.
+   * These are "converter" sources: colour-fixing, often net-positive in
+   * count, and unlike everything else here they can't pay for themselves.
+   * See `planManaPayment`, which funds a converter from other sources (never
+   * from itself, so nothing is circular) and activates it after them.
    */
   readonly genericCost: number;
   /**
-   * Hybrid pips of two colours this activation *costs*, each paid with
-   * either of its colours — a Shadowmoor filter land's `{G/U}`. Funded like
-   * `genericCost`, from another source and never this one, so it isn't
-   * circular either; a source with one is a converter too. Absent for none.
+   * The pips of one or two types this activation *costs*, each paid with any
+   * type it lists: a coloured or `{C}` pip is one type (Ceta Disciple's
+   * `{G}`), a two-colour hybrid pip two (a Shadowmoor filter land's `{G/U}`).
+   * Funded like `genericCost`, from another source and never this one; a
+   * source with one is a converter too. Absent for none.
    */
   readonly hybridCost?: readonly (readonly ManaType[])[];
   /**
@@ -626,6 +626,14 @@ const isConverterSource = (s: ManaSource): boolean => s.options.every(costsMana)
  * reaches for first. */
 const hasCostedOption = (s: ManaSource): boolean => s.options.some(costsMana);
 
+/** Whether a paid option makes more mana than it costs: a Signet's two for
+ * one, a filter land's. One that only fixes a colour (Prismatic Lens's one
+ * for one, Celestial Prism's one for two) is reached for after the sources
+ * that make a colour for free, in every order. */
+const gainfulOption = (o: ManaOption): boolean =>
+  costsMana(o) && o.fixed.length + o.anyColor > o.genericCost + (o.hybridCost?.length ?? 0);
+const gainful = (s: ManaSource): boolean => s.options.some(gainfulOption);
+
 /** A source used only when nothing else pays: one sacrificed to make its mana
  * (a Treasure), or one that takes a counter as its cost (Wall of Roots). */
 const isLastResort = (s: ManaSource): boolean =>
@@ -637,8 +645,9 @@ const isLastResort = (s: ManaSource): boolean =>
  * - `"plain-first"`: plain sources, then converters, then the last resorts —
  *   a Treasure after a filter land a land can fund. One was sacrificed for {U}
  *   beside a Flooded Grove a Forest could have fed (a bug report, 2026-10-10).
- * - `"converters-first"`: converters and filter lands (`hasCostedOption`),
- *   then plain sources, then the last resorts (see `planManaPayment`).
+ * - `"converters-first"`: converters and filter lands making more than they
+ *   cost (`gainful`), then plain sources, then converters that only fix a
+ *   colour, then the last resorts (see `planManaPayment`).
  * - `"last-resort-early"`: a last resort among the plain sources, converters
  *   last — the order before converters went ahead of Treasures.
  */
@@ -740,12 +749,15 @@ function planManaPaymentOrdered(
       case "plain-first":
         return converter ? 1 : last ? 2 : 0;
       case "converters-first":
-        return converter || hasCostedOption(s) ? 0 : last ? 2 : 1;
+        // Only one that makes more than it costs goes first; one that only
+        // fixes a colour comes after the plain sources here too.
+        return gainful(s) ? 0 : converter ? 1.5 : last ? 2 : 1;
       case "last-resort-early":
         return converter ? 1 : 0;
     }
   };
-  const sources = [0, 1, 2, 3].flatMap((group) => ordered.filter((s) => groupOf(s) === group));
+  // A stable sort: within a group, the order the sources came in.
+  const sources = [...ordered].sort((a, b) => groupOf(a) - groupOf(b));
 
   /** A unit paying the cost itself: a coloured or `{C}` pip's (repaid in
    * kind), or the generic's (repaid with any unit). */
@@ -900,7 +912,10 @@ function planManaPaymentOrdered(
         if (m === null) funded = false;
         else t.lendable.push({ m, generic: lent.generic });
       }
-      if (funded) return t;
+      // And it must still make what it was opened for: a Celestial Prism
+      // that pays a borrowed unit back has nothing left.
+      const gives = want === null ? t.freeFixed.length > 0 || t.freeAny > 0 : canStillMake(t, want);
+      if (funded && gives) return t;
       // Undone: the sources this opened, and what it took from those
       // already open.
       tapped.length = mark;
@@ -945,6 +960,10 @@ function planManaPaymentOrdered(
     t.producedExtra.push(extra);
     return m;
   };
+  /** Whether `takeSpecific(t, m)` would succeed, taking nothing. */
+  const canStillMake = (t: Tapped, m: ManaType): boolean =>
+    t.freeFixed.includes(m) ||
+    (t.freeAny > 0 && (t.anyColorOf === undefined ? m !== "C" : t.anyColorOf.includes(m)));
   const takeSpecific = (t: Tapped, m: ManaType): boolean => {
     const i = t.freeFixed.indexOf(m);
     if (i >= 0) {
@@ -978,9 +997,14 @@ function planManaPaymentOrdered(
   };
   const coverSpecific = (m: ManaType): boolean => {
     for (const t of tapped) if (payWith(t, m)) return true;
-    const canMake = (s: ManaSource): boolean =>
-      s.options.some((o) => o.fixed.includes(m) || anyUnitMakes(o, m));
-    for (const next of sources) {
+    const makes = (o: ManaOption): boolean => o.fixed.includes(m) || anyUnitMakes(o, m);
+    const canMake = (s: ManaSource): boolean => s.options.some(makes);
+    // Within its group (`SourceOrder` — a Treasure stays a last resort), a
+    // source making the colour for free before one that must be funded to:
+    // an Island pays {U} before Prismatic Lens turns a Swamp blue.
+    const freely = (s: ManaSource): boolean => s.options.some((o) => !costsMana(o) && makes(o));
+    const order = [...sources].sort((a, b) => groupOf(a) - groupOf(b) || Number(!freely(a)) - Number(!freely(b)));
+    for (const next of order) {
       if (isTapped(next.id) || !canMake(next)) continue;
       const t = openFunded(next, m);
       if (t !== null && payWith(t, m)) return true;

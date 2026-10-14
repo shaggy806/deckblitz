@@ -428,3 +428,90 @@ describe("a Shadowmoor filter land beside its free {C}", () => {
     expect(canCast(alone, "Opt")).toBe(false);
   });
 });
+
+describe("a converter that only fixes a colour, or costs a coloured pip", () => {
+  // The user (2026-10-13): Prismatic Lens's "{1}, {T}: Add one mana of any
+  // color" made no more than it cost, and Ceta Disciple's "{G}, {T}: Add one
+  // mana of any color" cost a coloured pip, so the auto-payer used neither.
+  const cast = (game: Game, card: string): void => {
+    const id = game.debugSpawn(card, A, "hand");
+    expect(game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === id), card).toBe(true);
+    game.dispatch({ type: "cast-spell", player: A, card: id, targets: [] });
+    expect(game.state.zones.shared.stack).toContain(id);
+    expect(game.state.players[A].manaPool).toEqual([]);
+  };
+  const tapped = (game: Game, ids: readonly ObjectId[]): boolean[] => ids.map((id) => game.state.objects[id].tapped);
+
+  it("turns a Swamp blue through Prismatic Lens, and two for one through Celestial Prism", () => {
+    const game = makeGame();
+    open(game);
+    const lens = spawn(game, ["Prismatic Lens", "Swamp"]);
+    cast(game, "Opt");
+    expect(tapped(game, lens)).toEqual([true, true]);
+
+    const prism = makeGame();
+    open(prism);
+    spawn(prism, ["Celestial Prism", "Swamp"]);
+    expect(canCast(prism, "Opt")).toBe(false);
+    spawn(prism, ["Swamp"]);
+    expect(canCast(prism, "Opt")).toBe(true);
+  });
+
+  it("taps a land that makes the colour before converting one that doesn't", () => {
+    const game = makeGame();
+    open(game);
+    const [lens, island, swamp] = spawn(game, ["Prismatic Lens", "Island", "Swamp"]);
+    cast(game, "Opt");
+    expect(tapped(game, [lens, island, swamp])).toEqual([false, true, false]);
+    // And its free {C} pays generic like any land: {2}{U} off all three.
+    const more = makeGame();
+    open(more);
+    const all = spawn(more, ["Prismatic Lens", "Island", "Swamp"]);
+    cast(more, "Divination");
+    expect(tapped(more, all)).toEqual([true, true, true]);
+  });
+
+  it("pays a coloured activation cost from another source: Ceta Disciple, Agent of Stromgald, Apprentice Wizard", () => {
+    const disciple = makeGame();
+    open(disciple);
+    const ceta = spawn(disciple, ["Ceta Disciple", "Forest"]);
+    cast(disciple, "Opt");
+    expect(tapped(disciple, ceta)).toEqual([true, true]);
+
+    // "{R}: Add {B}" — no {T}, once per payment.
+    const agent = makeGame();
+    open(agent);
+    spawn(agent, ["Agent of Stromgald", "Mountain"]);
+    cast(agent, "Dark Ritual");
+
+    // "{U}, {T}: Add {C}{C}{C}": two Islands are four mana.
+    const wizard = makeGame();
+    open(wizard);
+    spawn(wizard, ["Apprentice Wizard", "Island"]);
+    expect(canCast(wizard, "Hedron Archive")).toBe(false);
+    spawn(wizard, ["Island"]);
+    expect(canCast(wizard, "Hedron Archive")).toBe(true);
+  });
+
+  it("offers an untapped one once a payment: Llanowar Envoy's {1}{G} wants two Forests", () => {
+    const game = makeGame();
+    open(game);
+    spawn(game, ["Llanowar Envoy", "Forest"]);
+    expect(canCast(game, "Opt")).toBe(false);
+    spawn(game, ["Forest"]);
+    expect(canCast(game, "Opt")).toBe(true);
+  });
+
+  it("never sacrifices a creature or swaps one mana for another by sacrifice", () => {
+    const game = makeGame();
+    open(game);
+    // Crosis's Attendant: "{1}, Sacrifice this creature: Add {U}{B}{R}".
+    spawn(game, ["Crosis's Attendant", "Swamp"]);
+    expect(canCast(game, "Opt")).toBe(false);
+    // Golden Egg: "{1}, {T}, Sacrifice: Add one mana of any color".
+    const egg = makeGame();
+    open(egg);
+    spawn(egg, ["Golden Egg", "Swamp"]);
+    expect(canCast(egg, "Opt")).toBe(false);
+  });
+});

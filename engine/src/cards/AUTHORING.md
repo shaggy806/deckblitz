@@ -2249,7 +2249,7 @@ costs**. These resolve immediately without using the stack. Use the
 `manaTapAbility(color)` / `addManaAbility({...})` helpers from
 `cards/helpers.js`. A cost the auto-payer can't pay by itself — a chosen
 sacrifice (Orcish Lumberjack's "{T}, Sacrifice a Forest: Add …", Ashnod's
-Altar, Phyrexian Tower), counters, energy, a coloured mana cost — keeps the
+Altar, Phyrexian Tower), counters, energy — keeps the
 ability out of `manaSources()`, so it's activated by hand, its mana floating
 for what comes next; it still never uses the stack. needed-cards P20.
 
@@ -4108,24 +4108,31 @@ Delete an entry in the same commit as the feature that retires it.
   Field Researcher, Wrenn and Realmbreaker, Serra the Benevolent, Teferi,
   Temporal Archmage, Liliana of the Dark Realms). Triggered emblems are
   built (§6, `create-emblem`'s `triggered`).
-- **The auto-payer never pays a mana ability whose activation cost contains a
-  *coloured* pip** (it's activated by hand instead — see §8). `manaSources()`
-  admits a "converter" — a mana ability whose own cost is **generic** or
-  **two-colour hybrid** and which produces more than it costs (the ten Signets
-  via the `signet` helper, the Odyssey filter lands' `{1}`, the Shadowmoor
-  filter lands' `{G/U}`: `ManaOption.hybridCost`). The planner reaches for one
-  only after the ordinary sources are spent, funds its cost from floating mana
-  the payment doesn't need, from those sources (preferring one whose colour the
-  cost doesn't want; a source opened to fund one only by a free option), or
-  from another converter's output — even a unit already paying the cost, which
-  it then pays back — and orders converters last so the mana is in the pool
-  when each activates; a Treasure comes after the converters (2026-10-10). A
-  filter land beside its free `{T}: Add {C}` falls back on that `{C}` when its
-  paid option can't be funded (2026-10-13). A *coloured* activation cost stays
-  out, because it is genuinely circular — you'd need the colour to make the
-  colour — and so does an `{X}` one, since nothing is resolving during payment
-  planning, and a hybrid pip with a generic or Phyrexian half. Selvala, Heart
-  of the Wilds is still blocked, on its output rather than its cost.
+- **The auto-payer pays with a mana ability whose activation cost contains
+  mana** — a "converter": `manaSources()` admits one whose own cost is generic,
+  coloured or `{C}` pips, or two-colour hybrid (`ManaOption.genericCost` and
+  `hybridCost`, a pip of one type or two): the ten Signets via the `signet`
+  helper, the Odyssey filter lands' `{1}`, the Shadowmoor filter lands'
+  `{G/U}`, Prismatic Lens's and the Grottos' `{1}` for one mana of any colour,
+  Ceta Disciple's `{G}`, Apprentice Wizard's `{U}` (2026-10-13). A converter is
+  never funded from itself, so a coloured pip isn't circular. One without
+  `{T}` (Llanowar Envoy's `{1}{G}`, Bog Initiate's `{1}`) is offered once per
+  payment; more activations are by hand. The planner reaches for a converter
+  only after the sources that make a colour for free, funds its cost from
+  floating mana the payment doesn't need, from those sources (preferring one
+  whose colour the cost doesn't want; a source opened to fund one only by a
+  free option), or from another converter's output — even a unit already
+  paying the cost, which it then pays back — and orders converters last so the
+  mana is in the pool when each activates; a Treasure comes after the
+  converters (2026-10-10). Only one making more than it costs goes first in
+  the funding-first retry. A filter land beside its free `{T}: Add {C}` falls
+  back on that `{C}` when its paid option can't be funded (2026-10-13).
+  Still out: an `{X}` cost, since nothing is resolving during payment
+  planning; a hybrid pip with a generic or Phyrexian half; one that
+  sacrifices itself without making more than it costs (Golden Egg,
+  Kaleidostone — Implements of Sacrifice is in) or has no `{T}` (Crosis's
+  Attendant): sacrificing to swap mana is the player's call. Selvala, Heart of
+  the Wilds is still blocked, on its output rather than its cost.
 - **A *mana* ability with a `tapOthers` cost is invisible to the auto-payer**
   (Jaspera Sentinel, Holdout Settlement: "{T}, Tap an untapped creature you
   control: Add one mana of any color"). `useManaSource` taps only the source,

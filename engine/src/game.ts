@@ -13079,13 +13079,16 @@ export class Game {
         }
         if (ability.cost.tap) {
           if (!canTap) return;
-        } else if (ability.oncePerTurn !== true) {
+        } else if (ability.oncePerTurn !== true && (ability.cost.mana === null || ability.cost.sacrifice !== undefined)) {
           // Without `{T}` or a once-a-turn limit an ability could be
           // activated any number of times in one payment, which the planner
           // (one activation per source) can't represent: Lord of the
-          // Forsaken's "Pay 1 life: Add {C}" is activated by hand. Nothing in
-          // the pool prints a free, unlimited one; one with a mana cost is a
-          // converter the tap-based sources already cover when it taps.
+          // Forsaken's "Pay 1 life: Add {C}" is activated by hand. One with a
+          // mana cost (Llanowar Envoy's "{1}{G}: Add one mana of any color",
+          // Bog Initiate's "{1}: Add {B}") is offered as one activation per
+          // payment: a colour it can fix, and anything more by hand. Not one
+          // that sacrifices itself (Crosis's Attendant): that's the player's
+          // call, not the auto-payer's.
           return;
         }
         // "Tap an untapped creature you control" as part of the cost
@@ -13119,33 +13122,35 @@ export class Game {
           return;
         }
         // A mana ability whose own activation cost contains mana is a
-        // "converter" (a Signet, a filter land). Only a purely *generic* cost
-        // is admitted: a coloured one would be circular, needing the colour to
-        // make the colour. `{X}` is out for the same reason it is everywhere
-        // else here — nothing is resolving, so there's no X to read.
+        // "converter" (a Signet, a filter land, Prismatic Lens). Its cost is
+        // paid from *other* sources, never from itself, so a coloured pip is
+        // no more circular than a generic one: Ceta Disciple's "{G}, {T}: Add
+        // one mana of any color" turns a Forest's {G} into blue. `{X}` is out
+        // because nothing is resolving, so there's no X to read.
         let genericCost = 0;
-        // A hybrid pip of two colours (a Shadowmoor filter land's `{G/U}`) is
-        // admitted: paid with either colour from *another* source, as the
-        // generic is, never from this one, so it isn't circular
-        // (`ManaOption.hybridCost`). A Treasure was sacrificed for {U} beside
-        // a Flooded Grove a Forest could have fed (a bug report, 2026-10-10).
-        // A pip with a generic or Phyrexian half stays out.
+        // Each coloured or `{C}` pip is a cost pip of one type, and a hybrid
+        // pip of two colours (a Shadowmoor filter land's `{G/U}`) one of
+        // either (`ManaOption.hybridCost`). A Treasure was sacrificed for {U}
+        // beside a Flooded Grove a Forest could have fed (a bug report,
+        // 2026-10-10). A pip with a generic or Phyrexian half stays out.
         let hybridCost: ManaType[][] = [];
         if (ability.cost.mana !== null) {
           const parsed = parseManaCost(ability.cost.mana);
-          const colouredPips =
-            COLORS.reduce((n, c) => n + parsed.colored[c], 0) + parsed.colorless;
           const twoColour = parsed.hybrid.every(
             (pip) => pip.length === 2 && pip.every((half) => half.kind === "color"),
           );
-          if (colouredPips > 0 || parsed.x > 0 || !twoColour) return;
-          hybridCost = parsed.hybrid.map((pip) =>
-            pip.flatMap((half) => (half.kind === "color" ? [half.color as ManaType] : [])),
-          );
+          if (parsed.x > 0 || !twoColour) return;
+          hybridCost = [
+            ...COLORS.flatMap((c) => Array.from({ length: parsed.colored[c] }, (): ManaType[] => [c])),
+            ...Array.from({ length: parsed.colorless }, (): ManaType[] => ["C"]),
+            ...parsed.hybrid.map((pip) =>
+              pip.flatMap((half) => (half.kind === "color" ? [half.color as ManaType] : [])),
+            ),
+          ];
           // A printed `{0}` is a cost of nothing (Vivi Ornitier) — only an
           // untapped once-a-turn ability can get here with one, since a
           // `{0}, {T}` ability is written as a plain tap.
-          if (parsed.generic <= 0 && parsed.hybrid.length === 0 && ability.cost.tap) return;
+          if (parsed.generic <= 0 && hybridCost.length === 0 && ability.cost.tap) return;
           // What activating it costs now — Forensic Gadgeteer's reduction
           // reaches a Signet's `{1}` as it would by hand.
           genericCost = this.activatedAbilityManaCost(player, id, ability).cost.generic;
@@ -13201,13 +13206,21 @@ export class Game {
             : perColor
               ? Math.max(...COLORS.map((c) => this.liveManaAmount(id, player, effectAmount, c)))
               : this.liveManaAmount(id, player, ability.effect.amount);
-        // A converter that doesn't produce more than it costs is never worth
-        // offering, and admitting one would let the planner loop — and a
-        // live amount of 0 makes nothing at all.
+        // A live amount of 0 makes nothing at all. A converter making no more
+        // than it costs is still offered — Prismatic Lens's "{1}, {T}: Add one
+        // mana of any color" is how a Swamp becomes blue — and the planner
+        // reaches for it only after the sources that make a colour for free
+        // (`mana-payment.ts`'s `gainful`); it can't loop, since a converter is
+        // never funded from itself.
         // "Add {W}{U}" makes `amount` of each type it lists.
         const each = typeof mana === "object" && "all" in mana ? mana.all : null;
         const units = each === null ? manaAmount : manaAmount * each.length;
-        if (manaAmount <= 0 || genericCost + hybridCost.length >= units) return;
+        if (manaAmount <= 0) return;
+        // One that sacrifices itself still has to make more than it costs
+        // (Implements of Sacrifice): the auto-payer cracks a Treasure-like
+        // source for value, never to swap one mana for another (Golden Egg,
+        // Kaleidostone, Coal Golem stay by hand).
+        if (ability.cost.sacrifice === "self" && genericCost + hybridCost.length >= units) return;
         const tagOf = this.manaTagFor(object, ability.effect);
         const tag = {
           ...(tagOf === undefined ? {} : { tag: tagOf }),
@@ -13221,7 +13234,7 @@ export class Game {
           perColor
             ? COLORS.flatMap((c) => {
                 const n = this.liveManaAmount(id, player, effectAmount, c);
-                return n <= genericCost
+                return n <= 0
                   ? []
                   : [{ fixed: Array<ManaType>(n).fill(c), anyColor: 0, pain, lifeCost, genericCost, ...tag }];
               })
