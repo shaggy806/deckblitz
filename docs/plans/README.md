@@ -26,7 +26,7 @@ is still unscoped.
 
 `room-shards` (**live**, `SHARDS=1` on the box since 2026-10-13) is phase 2 of `scaling-rooms` in detail: rooms on worker threads, the main thread loading no engine, the main↔shard message protocol, memory per worker, placement and admission, and the commit-by-commit rollout.
 
-`local-rooms` (**planning**) moves solo games — blitz and the tutorials, one human against bots — into the player's browser: the same room code in a Web Worker behind a local transport, the engine's game and bots without the whole card pool, resume after a reload, bug reports uploaded; games with two humans stay on the server.
+`local-rooms` (**built**, on by default on the site since 2026-10-13) moves solo games — blitz and the tutorials, one human against bots — into the player's browser: the same room code in a Web Worker behind a local transport, the engine's game and bots without the whole card pool, resume after a reload, bug reports uploaded; games with two humans stay on the server.
 
 `decision-registry` records how the decision kinds (19 then, 20 with `cast-now`) became one module each under
 `engine/src/decisions/`, and why `game.ts` stays binary to git.

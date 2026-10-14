@@ -168,5 +168,28 @@ test('local mode stays on for the tab, and ?local=0 turns it off', async ({ page
   await page.goto('/')
   expect(await page.evaluate(() => sessionStorage.getItem('mtg.local'))).toBe('1')
   await page.goto('/?local=0')
-  expect(await page.evaluate(() => sessionStorage.getItem('mtg.local'))).toBeNull()
+  expect(await page.evaluate(() => sessionStorage.getItem('mtg.local'))).toBe('0')
+})
+
+test("a blitz whose card pool won't load in the page is played on the server instead", async ({ page, context }) => {
+  test.setTimeout(120_000)
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  await stubImport(page)
+  // The worker's card shards fail: it can't start.
+  await context.route(/\/shard-\d+[^/]*\.js/, (route) => route.abort())
+  const errors: string[] = []
+  page.on('pageerror', (error) => errors.push(error.message))
+  const sent = serverTraffic(page)
+
+  await page.goto('/?local=1')
+  await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
+  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+
+  // Into the game all the same, its room on the server.
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })
+  await expect(page.locator('[data-player-id]')).toHaveCount(4, { timeout: 20_000 })
+  const roomId = await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
+  expect(typesOf(sent)).toContain('create-room')
+  expect(sent.some((s) => s.includes(roomId!))).toBe(true)
+  expect(errors).toEqual([])
 })

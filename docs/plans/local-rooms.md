@@ -1,11 +1,11 @@
 # Local rooms: solo games in the player's browser
 
-Status: **in progress** (planned 2026-10-13). Steps 1-5 are built, behind `?local=1`: blitz and
-lessons play in a Web Worker in the tab while lobbies stay on the server, and a local game survives
-a reload. Step 6 measured the user's low-end laptop (2026-10-13): the bots and memory are fine
-there, and the page's own main-thread work was the problem — its biggest piece is fixed. Left:
-step 7, turning it on by default. Bug-report uploads (step 5's
-other half) wait: the capture panel only exists on a developer's `--capture` server.
+Status: **built** (planned and built 2026-10-13). Blitz and lessons play in a Web Worker in the
+tab while lobbies stay on the server, a local game survives a reload, and it's **on by default on
+the site** (step 7) — `?local=0` turns it off for a tab, and a browser that can't run it falls back
+to the server. Step 6 measured the user's low-end laptop: the bots and memory are fine there, and
+the page's own main-thread work was the problem — its biggest piece is fixed. Bug-report uploads
+(step 5's other half) wait: the capture panel only exists on a developer's `--capture` server.
 
 ## Why
 
@@ -199,8 +199,19 @@ to another player, and a room with a second human never goes local.
      the browser's own style, layout and paint ("(program)" in a JS profile, ~25 s), which needs
      a performance trace to break down — a `BACKLOG.md` item, since it slows server games on a
      slow machine just as much.
-7. **Default on** for blitz and tutorials, with the fallback rules; the load test confirms the
-   server no longer sees them; deploy.
+7. **Built (2026-10-13), default on** for blitz and tutorials in a production build — the site
+   and `vite preview` (`localMode.ts`, `import.meta.env.PROD`). Under `vite dev` it stays opt-in
+   (`?local=1`): a developer's server records captures and answers the e2e suite's control port,
+   both about rooms it holds, and the suite's server-room specs (`tutorial-basics`, `blitz`)
+   would otherwise go local. `?local=0` / `?local=1` choose for the tab, kept in `sessionStorage`.
+   **The fallback rules**: never on where the browser has no module workers (probed once a page:
+   a `Worker` built with an options object whose `type` getter records being read); and a worker
+   that fails while a create waits on it (its card shards wouldn't load) sends that create to the
+   server instead, as every solo game after in the tab (`HybridSocket`'s `workerFailed`) — the
+   player never knows. A worker failing with games running ends them, as a dropped socket.
+   `e2e/local-blitz.spec.ts` blocks the shards and gets a server game; it already checks a local
+   game sends the server nothing, which stands in for the load test (the load test drives the
+   server directly, so it can't see the difference).
 
 ## Risks
 

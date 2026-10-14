@@ -2,9 +2,10 @@
  * Solo games in this tab (`docs/plans/local-rooms.md`): the local room worker
  * (`room-worker.ts`) behind a WebSocket's worth of surface.
  *
- * In local mode (`localMode.ts`) `useNetworkGame` holds a `HybridSocket`: its
- * connection to the room server as ever, plus the tab's room worker, opened the
- * first time a blitz or a lesson creates a room there (`sendLocal`). Every
+ * In local mode (`localMode.ts`, the site's default) `useNetworkGame` holds a
+ * `HybridSocket`: its connection to the room server as ever, plus the tab's
+ * room worker, opened the first time a blitz or a lesson creates a room there
+ * (`sendLocal`) — or the server, if the worker has failed in this tab. Every
  * message for a room the worker made goes to the worker, everything else to
  * the server, and both answer through the one `onmessage` — the same JSON text
  * either way, so the game screen, playback, acks and event slices run
@@ -153,6 +154,10 @@ const localRooms = rememberedRooms()
  * so a reconnect to the server doesn't end a game played here. */
 let tabWorker: LocalSocket | null = null
 
+/** Set once the tab's worker has failed (its card pool wouldn't load, say):
+ * every solo game after that is played on the server. */
+let workerFailed = false
+
 function roomIdOf(data: string): string | null {
   try {
     const roomId = (JSON.parse(data) as { roomId?: unknown }).roomId
@@ -170,6 +175,9 @@ export class HybridSocket implements RoomSocket {
   private readonly server: RoomSocket
   private local: LocalSocket | null = null
   private closed = false
+  /** Creates sent to the worker that it hasn't answered with a room yet:
+   * what goes to the server instead if it fails first. */
+  private unanswered: string[] = []
 
   constructor(server: RoomSocket) {
     this.server = server
@@ -186,8 +194,14 @@ export class HybridSocket implements RoomSocket {
     else this.server.send(data)
   }
 
-  /** To the worker, whatever it is: a blitz's or a lesson's create. */
+  /** To the worker, whatever it is: a blitz's or a lesson's create — or, once
+   * the worker has failed in this tab, to the server. */
   sendLocal(data: string): void {
+    if (workerFailed) {
+      this.server.send(data)
+      return
+    }
+    this.unanswered.push(data)
     this.worker().send(data)
   }
 
@@ -220,17 +234,25 @@ export class HybridSocket implements RoomSocket {
         if (message.type === 'room-created' && typeof message.roomId === 'string') {
           localRooms.add(message.roomId)
           remember(localRooms)
+          this.unanswered = []
         }
       }
       this.onmessage?.(event)
     }
-    // The worker failing ends its games: what a dropped socket does, and the
-    // page reconnects with its usual backoff.
+    // The worker failed. If it was making a game (it couldn't start: the
+    // card pool wouldn't load), that create goes to the server instead, and so
+    // does every solo game after (`workerFailed`) — the player never knows.
+    // Otherwise it ends the games it held: what a dropped socket does, and
+    // the page reconnects with its usual backoff.
     local.onclose = () => {
       if (this.closed) return
+      workerFailed = true
       localRooms.clear()
       remember(localRooms)
-      this.server.close()
+      const unanswered = this.unanswered
+      this.unanswered = []
+      if (unanswered.length > 0) for (const data of unanswered) this.server.send(data)
+      else this.server.close()
     }
     local.send(JSON.stringify({ type: 'event-deltas' }))
     return local
