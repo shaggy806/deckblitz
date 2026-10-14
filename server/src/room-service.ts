@@ -36,6 +36,11 @@ export interface RoomServerOptions {
   /** The scenario builder's messages (`builder.ts`): a developer's server
    * only, since it lets a client put any card anywhere. */
   readonly builder?: boolean;
+  /** Lets a room's host have its bots think for up to a second a decision
+   * (`set-bot-think-long`): a game in the browser (`LocalRoomHost`), or a
+   * developer's server (`--long-bot-thinking`). Never the public server,
+   * where a bot's thinking holds up every room on its thread. */
+  readonly longBotThinking?: boolean;
   /** Reap rooms with nobody connected once idle this long
    * (`RoomManager.reapIdle`), checking every `reapIntervalMs`. Off without
    * both. */
@@ -63,16 +68,29 @@ function requireHost(room: Room | PendingRoom, connection: Connection, what: str
 }
 
 /** A `room-joined` for one connection — `isHost` differs per recipient. */
-function roomJoined(room: Room | PendingRoom, connection: Connection): Extract<ServerMessage, { type: "room-joined" }> {
+function roomJoined(
+  room: Room | PendingRoom,
+  connection: Connection,
+  longBotThinking: boolean,
+): Extract<ServerMessage, { type: "room-joined" }> {
   return {
     type: "room-joined",
     roomId: room.id,
     seats: room.seatStatuses(),
     isHost: room.isHost(connection),
     botSpeed: room.botSpeed,
+    ...thinking(room, longBotThinking),
     ...(room instanceof PendingRoom ? { settings: room.settings } : {}),
     seat: room.seatOf(connection),
     pending: room instanceof PendingRoom,
+  };
+}
+
+/** A room's bot-thinking fields, as `room-joined` and `state` carry them. */
+function thinking(room: Room | PendingRoom, allowed: boolean): { botThinkLong?: true; botThinkLongAllowed?: true } {
+  return {
+    ...(room.botThinkLong ? { botThinkLong: true as const } : {}),
+    ...(allowed ? { botThinkLongAllowed: true as const } : {}),
   };
 }
 
@@ -80,6 +98,7 @@ export class RoomService {
   readonly manager: RoomManager;
   private readonly outbox: ServiceOutbox;
   private readonly builderEnabled: boolean;
+  private readonly longBotThinking: boolean;
 
   /** One stable `Connection` per `ConnId`: rooms tell connections apart by
    * identity. */
@@ -129,6 +148,7 @@ export class RoomService {
     this.manager = manager;
     this.outbox = outbox;
     this.builderEnabled = options.builder === true;
+    this.longBotThinking = options.longBotThinking === true;
     // Every frame a promoted room publishes — whether it came from a message
     // just handled or from a bot the room released on its own clock — goes out
     // through here.
@@ -262,6 +282,7 @@ export class RoomService {
       autoPassPaused: room.isAutoPassPaused(seat),
       isHost: room.isHost(connection),
       botSpeed: room.botSpeed,
+      ...thinking(room, this.longBotThinking),
       botsPaused: room.botsPaused,
       ...(room.firstPlayerChosen ? { firstPlayerChosen: true as const } : {}),
       ...(room.recipe !== null ? { canRematch: true as const } : {}),
@@ -382,10 +403,10 @@ export class RoomService {
     const host = room.unseatedHost();
     if (host !== null) connections.push(host);
     for (const connection of connections) {
-      if (connection !== except) connection.send(roomJoined(room, connection));
+      if (connection !== except) connection.send(roomJoined(room, connection, this.longBotThinking));
     }
     for (const connection of this.spectatorsOf(room.id)) {
-      if (connection !== except) connection.send({ ...roomJoined(room, connection), spectating: true });
+      if (connection !== except) connection.send({ ...roomJoined(room, connection, this.longBotThinking), spectating: true });
     }
   }
 
@@ -492,7 +513,7 @@ export class RoomService {
         this.boundRoom.set(conn, room);
         this.forgetSentEvents(connection, room.id);
         room.bindHost(connection, message.hostToken);
-        connection.send(roomJoined(room, connection));
+        connection.send(roomJoined(room, connection, this.longBotThinking));
         // The host coming back takes the role back from whoever was
         // standing in, which everyone else's seat board shows.
         if (room instanceof PendingRoom) this.broadcastPending(room, connection);
@@ -517,7 +538,7 @@ export class RoomService {
             type: "error",
             message: err instanceof Error ? err.message : String(err),
           });
-          connection.send(roomJoined(room, connection));
+          connection.send(roomJoined(room, connection, this.longBotThinking));
           return;
         }
         this.boundRoom.set(conn, room);
@@ -535,7 +556,7 @@ export class RoomService {
             type: "error",
             message: err instanceof Error ? err.message : String(err),
           });
-          connection.send(roomJoined(room, connection));
+          connection.send(roomJoined(room, connection, this.longBotThinking));
           return;
         }
         this.boundRoom.set(conn, room);
@@ -562,7 +583,7 @@ export class RoomService {
         // never reaches them — refresh their picker directly, same as a
         // rejected `claim-seat` does.
         if (room.seatOf(connection) === null && !(room instanceof PendingRoom && room.unseatedHost() === connection)) {
-          connection.send(roomJoined(room, connection));
+          connection.send(roomJoined(room, connection, this.longBotThinking));
         }
         return;
       }
@@ -584,7 +605,7 @@ export class RoomService {
         // Same as `add-bot` above — a caller still on the seat picker
         // isn't in `connectedSeats()`, so refresh them directly.
         if (room.seatOf(connection) === null && !(room instanceof PendingRoom && room.unseatedHost() === connection)) {
-          connection.send(roomJoined(room, connection));
+          connection.send(roomJoined(room, connection, this.longBotThinking));
         }
         return;
       }
@@ -609,7 +630,7 @@ export class RoomService {
         // seat here yet, so they aren't in `connectedSeats()` and the
         // broadcast above never reaches them.
         if (room.seatOf(connection) === null && room.unseatedHost() !== connection) {
-          connection.send(roomJoined(room, connection));
+          connection.send(roomJoined(room, connection, this.longBotThinking));
         }
         return;
       }
@@ -635,7 +656,7 @@ export class RoomService {
         if (set === undefined) this.spectators.set(room.id, (set = new Set()));
         set.add(connection);
         this.forgetSentEvents(connection, room.id);
-        if (room instanceof PendingRoom) connection.send({ ...roomJoined(room, connection), spectating: true });
+        if (room instanceof PendingRoom) connection.send({ ...roomJoined(room, connection, this.longBotThinking), spectating: true });
         else connection.send(this.spectatorFrame(room, connection));
         return;
       }
@@ -675,6 +696,15 @@ export class RoomService {
           throw new Error(`unknown bot speed: ${String(message.speed)}`);
         }
         room.setBotSpeed(message.speed);
+        if (room instanceof PendingRoom) this.broadcastPending(room);
+        else room.publish();
+        return;
+      }
+      case "set-bot-think-long": {
+        const room = this.requireRoom(message.roomId);
+        requireHost(room, connection, "let the bots think longer");
+        if (!this.longBotThinking) throw new Error("this server doesn't let bots think longer");
+        room.setBotThinkLong(message.long === true);
         if (room instanceof PendingRoom) this.broadcastPending(room);
         else room.publish();
         return;

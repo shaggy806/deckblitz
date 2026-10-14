@@ -223,6 +223,13 @@ export interface NetworkGame {
   readonly botSpeed: BotSpeed
   /** Host only — the server refuses anyone else. */
   setBotSpeed: (speed: BotSpeed) => void
+  /** The bots think for up to a second a decision (a trial setting). */
+  readonly botThinkLong: boolean
+  /** Whether this room's host lets them (a game in the browser, or a
+   * developer's server): the Settings checkbox shows only then. */
+  readonly botThinkLongAllowed: boolean
+  /** Host only, and only where `botThinkLongAllowed`. */
+  setBotThinkLong: (long: boolean) => void
   /** The waiting room's game settings (starting life, who goes first), or
    * `null` once the game exists. */
   readonly roomSettings: RoomSettings | null
@@ -434,6 +441,8 @@ export function useNetworkGame(): NetworkGame {
   const [autoPassPaused, setAutoPassPaused] = useState(false)
   const [isHost, setIsHost] = useState(false)
   const [botSpeed, setBotSpeedState] = useState<BotSpeed>('normal')
+  const [botThinkLong, setBotThinkLongState] = useState(false)
+  const [botThinkLongAllowed, setBotThinkLongAllowed] = useState(false)
   const [roomSettings, setRoomSettingsState] = useState<RoomSettings | null>(null)
   const [firstPlayerChosen, setFirstPlayerChosen] = useState(false)
   const [stopped, setStopped] = useState<string | null>(null)
@@ -529,6 +538,8 @@ export function useNetworkGame(): NetworkGame {
           setSeats(message.seats)
           setIsHost(message.isHost)
           setBotSpeedState(message.botSpeed)
+          setBotThinkLongState(message.botThinkLong === true)
+          setBotThinkLongAllowed(message.botThinkLongAllowed === true)
           setRoomSettingsState(message.settings ?? null)
           setRoomPending(message.pending === true)
           // Watching, not seated: the seat board as it changes, no seat.
@@ -683,6 +694,8 @@ export function useNetworkGame(): NetworkGame {
           setAutoPassPaused(message.autoPassPaused)
           setIsHost(message.isHost)
           setBotSpeedState(message.botSpeed)
+          setBotThinkLongState(message.botThinkLong === true)
+          setBotThinkLongAllowed(message.botThinkLongAllowed === true)
           setRoomSettingsState(null)
           setFirstPlayerChosen(message.firstPlayerChosen === true)
           setStopped(message.stopped ?? null)
@@ -866,6 +879,15 @@ export function useNetworkGame(): NetworkGame {
       const id = roomIdRef.current
       if (id === null) return
       send({ type: 'set-bot-speed', roomId: id, speed })
+    },
+    [send],
+  )
+
+  const setBotThinkLong = useCallback(
+    (long: boolean) => {
+      const id = roomIdRef.current
+      if (id === null) return
+      send({ type: 'set-bot-think-long', roomId: id, long })
     },
     [send],
   )
@@ -1213,6 +1235,9 @@ export function useNetworkGame(): NetworkGame {
     isHost,
     botSpeed,
     setBotSpeed,
+    botThinkLong,
+    botThinkLongAllowed,
+    setBotThinkLong,
     roomSettings,
     setRoomSettings,
     firstPlayerChosen,

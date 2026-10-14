@@ -44,6 +44,7 @@ export function createInProcessHost(
   const { registry, manager } = roomsFor(settings);
   return new InProcessRoomHost(manager, {
     builder: settings.builder,
+    ...(settings.longBotThinking === true ? { longBotThinking: true } : {}),
     ...(settings.reapIdleMs !== undefined ? { reapIdleMs: settings.reapIdleMs } : {}),
     ...(settings.reapIntervalMs !== undefined ? { reapIntervalMs: settings.reapIntervalMs } : {}),
     importDeps: importDeps(registry),

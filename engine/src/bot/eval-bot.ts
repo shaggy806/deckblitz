@@ -587,8 +587,8 @@ export class EvalBotController extends HeuristicBotController {
    * `holdsTapForCombat`): our combat steps keep its mana (`spendsHeldMana`). */
   private heldPlay: { readonly turn: number; readonly action: Action } | null = null;
   private readonly rolloutDecisions: boolean;
-  private readonly maxSimulations: number;
-  private readonly timeBudgetMs: number;
+  private maxSimulations: number;
+  private timeBudgetMs: number;
   private readonly trace: EvalBotOptions["trace"];
   /** The stack this bot last passed on, and on which turn — see
    * `holdPass`. */
@@ -1432,6 +1432,18 @@ export class EvalBotController extends HeuristicBotController {
       return sideOf(state, target, this.playerId) !== (polarity === "harm" ? "opponent" : "own");
     });
     return wrongSide ? null : following;
+  }
+
+  /**
+   * Retunes the search for every decision from now on: a room's "let bots
+   * think longer" (server `room.ts`). A field left out keeps its value. The
+   * search scores each candidate once, so more time and simulations change a
+   * decision only where the old budget ran out before every candidate was
+   * scored — a wide board, a slow machine.
+   */
+  setSearchBudget(budget: { readonly timeBudgetMs?: number; readonly maxSimulations?: number }): void {
+    if (budget.timeBudgetMs !== undefined) this.timeBudgetMs = budget.timeBudgetMs;
+    if (budget.maxSimulations !== undefined) this.maxSimulations = budget.maxSimulations;
   }
 
   /** A fresh budget for one decision. */

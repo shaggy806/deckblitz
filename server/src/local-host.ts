@@ -35,6 +35,8 @@ export interface SavedLocalRoom {
   readonly state: GameState;
   readonly recipe: GameRecipe | null;
   readonly botSpeed: BotSpeed;
+  /** Absent in a save from before the setting existed. */
+  readonly botThinkLong?: boolean;
   readonly firstPlayerChosen: boolean;
   readonly bots: readonly { readonly player: PlayerId; readonly displayName: string | null }[];
   readonly humans: readonly { readonly player: PlayerId; readonly clientToken: string; readonly displayName: string | null }[];
@@ -49,7 +51,9 @@ export class LocalRoomHost {
   /** `send` delivers each message to the page, in order. */
   constructor(send: (message: ServerMessage) => void, options: { readonly pacing?: "realtime" | "immediate" } = {}) {
     const manager = new RoomManager(options.pacing !== undefined ? { pacing: options.pacing } : {});
-    this.service = new RoomService(manager, { send: (_conn, message) => send(message) });
+    // A game in the browser holds up nobody else's, so its bots may think
+    // longer (`set-bot-think-long`).
+    this.service = new RoomService(manager, { send: (_conn, message) => send(message) }, { longBotThinking: true });
   }
 
   /** One message from the page. A create needs no code from here: the
@@ -88,6 +92,7 @@ export class LocalRoomHost {
         state: room.game.snapshot(),
         recipe: room.recipe,
         botSpeed: room.botSpeed,
+        botThinkLong: room.botThinkLong,
         firstPlayerChosen: room.firstPlayerChosen,
         bots: room.botSeats(),
         humans: room.humanClaims().map(({ player, clientToken, displayName }) => ({ player, clientToken, displayName })),
@@ -112,6 +117,7 @@ export class LocalRoomHost {
           gameNumber: s.gameNumber,
           startSeq: s.frameSeq,
           botSpeed: s.botSpeed,
+          botThinkLong: s.botThinkLong === true,
           firstPlayerChosen: s.firstPlayerChosen,
           ...(s.recipe !== null ? { recipe: s.recipe } : {}),
         });

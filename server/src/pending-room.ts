@@ -171,6 +171,8 @@ export class PendingRoom {
   /** Carried onto the promoted `Room` — see `HostRole`. */
   readonly host: HostRole;
   botSpeed: BotSpeed = "normal";
+  /** Carried onto the promoted `Room` — see `Room.setBotThinkLong`. */
+  botThinkLong = false;
   /** The host's choices for the game this room starts — see `RoomSettings`.
    * Starting life defaults to the room's rules (40 for Commander). */
   settings: RoomSettings;
@@ -235,6 +237,11 @@ export class PendingRoom {
 
   setBotSpeed(speed: BotSpeed): void {
     this.botSpeed = speed;
+    this.lastActivityAt = Date.now();
+  }
+
+  setBotThinkLong(long: boolean): void {
+    this.botThinkLong = long;
     this.lastActivityAt = Date.now();
   }
 

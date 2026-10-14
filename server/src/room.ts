@@ -148,6 +148,16 @@ const BOT_MIN_THINK_MS = 350;
  * degrades to v1-quality play rather than to nothing.
  */
 const BOT_DECISION_BUDGET_MS = 300;
+/**
+ * A room's bots told to think longer (`set-bot-think-long`, a trial setting,
+ * 2026-10-14): up to a second a decision, and simulations enough to score
+ * every candidate of the widest board measured (211). The search scores each
+ * candidate once, so this changes only the decisions the normal budget cut
+ * short — on a wide board, or a slow machine. Allowed only where the room's
+ * thinking holds up no one else (`RoomServerOptions.longBotThinking`).
+ */
+const BOT_LONG_BUDGET = { timeBudgetMs: 1000, maxSimulations: 600 } as const;
+const BOT_NORMAL_BUDGET = { timeBudgetMs: BOT_DECISION_BUDGET_MS, maxSimulations: 200 } as const;
 /** Where each bot decision's time goes, in microseconds. */
 export interface DecisionRecorder {
   record(micros: number): void;
@@ -277,6 +287,8 @@ export interface RoomOptions {
   /** The waiting room's host role, carried across promotion. */
   readonly host?: HostRole;
   readonly botSpeed?: BotSpeed;
+  /** The bots think for up to a second a decision (`setBotThinkLong`). */
+  readonly botThinkLong?: boolean;
   /** The waiting room's host picked who goes first (`RoomSettings`), rather
    * than leaving it to the highroll — said on every frame so the client
    * doesn't announce a highroll nobody won. */
@@ -441,6 +453,8 @@ export class Room {
   private readonly settleSliceMs: number;
   readonly host: HostRole;
   botSpeed: BotSpeed;
+  /** See `setBotThinkLong`. */
+  botThinkLong: boolean;
   /** See `RoomOptions.firstPlayerChosen`. */
   readonly firstPlayerChosen: boolean;
   /** The host has paused the bots: the frame gate stays shut, whatever the
@@ -482,6 +496,7 @@ export class Room {
     this.gameNumber = options.gameNumber ?? 1;
     this.host = options.host ?? new HostRole(null);
     this.botSpeed = options.botSpeed ?? "normal";
+    this.botThinkLong = options.botThinkLong === true;
     this.firstPlayerChosen = options.firstPlayerChosen === true;
     this.onUpdate = options.onUpdate ?? (() => {});
     this.onPublish = options.onPublish ?? null;
@@ -578,6 +593,27 @@ export class Room {
     this.lastActivityAt = Date.now();
   }
 
+  /** Lets the bots think for up to a second a decision, or back to 300 ms
+   * (`BOT_LONG_BUDGET`), from each one's next decision. Whether this host
+   * allows it is the service's check. */
+  setBotThinkLong(long: boolean): void {
+    this.botThinkLong = long;
+    for (const bot of this.bots.values()) this.tuneBot(bot);
+    this.lastActivityAt = Date.now();
+  }
+
+  /** A bot for `player`, thinking as long as the room says. */
+  private newBot(player: PlayerId): PlayerController {
+    const bot = this.makeBot(player);
+    this.tuneBot(bot);
+    return bot;
+  }
+
+  /** The room's thinking budget on a v2 bot; a scripted or v1 bot has none. */
+  private tuneBot(bot: PlayerController): void {
+    if (bot instanceof EvalBotController) bot.setSearchBudget(this.botThinkLong ? BOT_LONG_BUDGET : BOT_NORMAL_BUDGET);
+  }
+
   /**
    * Pauses or resumes the bots, by holding the frame gate every bot move (and
    * every resolve-all resolution) already waits behind. A move parked when
@@ -615,7 +651,7 @@ export class Room {
     if (seat.clientToken !== null) throw new Error(`seat ${player} is already claimed`);
     if (this.bots.has(player)) throw new Error(`seat ${player} already has a bot`);
     if (displayName !== undefined) seat.displayName = displayName;
-    this.bots.set(player, this.makeBot(player));
+    this.bots.set(player, this.newBot(player));
     this.lastActivityAt = Date.now();
     this.settle();
   }
@@ -773,7 +809,7 @@ export class Room {
     if (seat === null) throw new Error("claim a seat first");
     if (this.game.state.players[seat]?.hasLost === true) throw new Error(`${seat} has left the game`);
     if (on) {
-      if (!this.bots.has(seat)) this.bots.set(seat, this.makeBot(seat));
+      if (!this.bots.has(seat)) this.bots.set(seat, this.newBot(seat));
     } else {
       this.bots.delete(seat);
     }
