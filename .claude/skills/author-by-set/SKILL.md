@@ -1,28 +1,30 @@
 ---
 name: author-by-set
-description: Add the next batch of cards set by set — newest set first, then backwards — taking each set's own new cards (its Commander-legal first printings) that are popular for their set, so the cards people are seeing in games right now get in even before EDHREC ranks them highly; auto-finish what the scaffolder reads whole, author the rest the engine runs faithfully, record what blocks the others, test, and ship. Use when the user says to author by set, do the next set, work through recent sets, add the new set's cards, or runs this skill with no other instructions.
+description: Add the next batch of cards set by set — newest set first, then backwards — taking each whole set's own new cards (its Commander-legal first printings), most-played first, so the cards people are seeing in games right now get in even before EDHREC ranks them highly; auto-finish what the scaffolder reads whole, author the rest the engine runs faithfully, record what blocks the others, test, and ship. Use when the user says to author by set, do the next set, work through recent sets, add the new set's cards, or runs this skill with no other instructions.
 ---
 
 # Add the next set batch
 
 The goal is **the cards people meet in games now**: a set's new cards are
 played far more than their EDHREC rank says while they're new, so the order
-is **set by set, newest first**, and within a set its top share by EDHREC rank
-(by default the top half — the threshold is relative to the set, not one rank
-for every set). A set is done when every card above its threshold is in the
-pool or triaged; then the next older set. Cards already triaged by any other
-skill (`author-top-cards`, the commander skill) are skipped — their records
-stand.
+is **set by set, newest first**, and **each set whole** — every Commander-legal
+first printing, in EDHREC rank order within the set, the cards EDHREC hasn't
+ranked yet last (the user's call, 2026-10-14; the walk first took each set's
+top half). A set is done when every one of its new cards is in the pool or
+triaged; then the next older set. Cards already triaged by any other skill
+(`author-top-cards`, the commander skill) are skipped — their records stand.
+A set walked before 2026-10-14 had only its top half taken: its bottom half
+is the same walk, picked up by `--next` like any card left.
 
 **The tools** (each prints what you'd otherwise grep for):
 
-- `npm run cards:sets -w engine -- --sets` — the newest sets: new cards,
-  above the threshold, done, triaged, left. `--set FRA` lists one set's cards,
-  each marked done / triaged / todo. `--next 60` — the next untriaged cards,
-  set by set. `--top 50` sets the share kept (percent); `--unranked` keeps the
-  cards EDHREC hasn't ranked yet (a set out this month may have none ranked);
-  `--refresh` refetches Scryfall (cached three days in `engine/.cache/`).
-  Reads `dist/`: build first.
+- `npm run cards:sets -w engine -- --sets [N]` — the newest N sets: new
+  cards, kept, done, triaged, left. `--set FRA` lists one set's cards, each
+  marked done / triaged / todo. `--next 60` — the next untriaged cards, set
+  by set. The whole set is the default; `--top 50` narrows it to that share of
+  the set's ranked cards and `--ranked-only` drops the unranked ones, for a
+  quicker pass when asked. `--refresh` refetches Scryfall (cached three days
+  in `engine/.cache/`). Reads `dist/`: build first.
 - `npm run card:scaffold -w engine -- "A" "B" …` — writes each card from the
   Oracle snapshot; a card whose every line the parser reads goes, finished,
   to `engine/src/cards/review/` (check it, then move it into `pool/`), the rest
@@ -60,10 +62,10 @@ card is a draft like any other — its templates match sentences, not meaning
 1. `npm run cards:sets -w engine -- --sets` — where the walk is: the newest
    set with cards left.
 2. `npm run cards:sets -w engine -- --next 60` — the batch: the next 60
-   untriaged cards, newest set first (the rest of one set, then the next).
-   A brand-new set may have few ranked cards: look at `--set <code>
-   --unranked` and take its unranked cards too when the ranked ones run out —
-   say so in the batch record.
+   untriaged cards, newest set first (the rest of one set, then the next),
+   ranked ones first. A set's bottom half is mostly commons and uncommons:
+   batches there can run larger (100-150 across 4-5 agents), since most
+   cards are short.
 3. **Scaffold first**: `npm run card:scaffold -w engine -- "A" "B" …` over the
    batch. Each card in `review/` is nearly done — read it against its Oracle
    text and rulings (`card:brief`), fix what's wrong or move it back to the
@@ -102,7 +104,9 @@ As `author-top-cards` steps 3–6, with these differences:
   batch number after the highest `B*.json`, with `"ranks"` naming the set and
   the share: `"Reality Fracture (FRA, 2026-10-02): top 50% by EDHREC rank"`.
   Every card of the batch is in it — authored or blocked — so `cards:sets
-  -- --next` and `cards:needs -- --next` skip them from then on.
+  -- --next` and `cards:needs -- --next` skip them from then on. The `"ranks"`
+  line says "whole set" (or "the rest of the set" for a set first walked by
+  its top half).
 - **BACKLOG.md**, "Card backlog": which set is next, on the line for this
   skill; a set finished goes on `COMPLETED.md`'s set-walk line; the batch
   summary goes in `docs/card-blockers.md`.
@@ -112,7 +116,7 @@ As `author-top-cards` steps 3–6, with these differences:
 
 ## 4. Report and offer the next
 
-A few lines: how many of the set's cards are in now (and of the threshold's),
+A few lines: how many of the set's new cards are in now,
 how many blocked and the feature blocking the most, anything built or taught
 to the scaffolder. Then offer the next batch — the rest of the set, or the
 next older set — but don't start it unasked.

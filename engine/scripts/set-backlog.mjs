@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 // The card backlog set by set: each set's own new cards — its Commander-legal
-// first printings — newest set first, keeping the ones popular *for their
-// set*. A card from a set out last month isn't ranked high on EDHREC yet,
-// however often it's played, so the threshold is a share of each set (by
-// default its top half by EDHREC rank), not one rank for every set.
+// first printings — newest set first, the whole set by default, its cards in
+// EDHREC rank order and the ones EDHREC hasn't ranked yet last. A card from a
+// set out last month isn't ranked high on EDHREC yet, however often it's
+// played, so a narrower walk is a share of each set (`--top`), not one rank
+// for every set.
 //
 //   npm run cards:sets -w engine -- --next 60          the next untriaged cards, set by set
 //   npm run cards:sets -w engine -- --sets [N]         the newest N sets (default 12): new cards, done, left
-//   npm run cards:sets -w engine -- --set FRA          one set's cards above the threshold, each marked
-//   … --top 50        the share of each set's ranked new cards kept (percent, default 50)
-//   … --unranked      keep the cards EDHREC hasn't ranked yet too (a brand-new set's)
+//   npm run cards:sets -w engine -- --set FRA          one set's cards, each marked
+//   … --top 50        keep only that share of each set's ranked new cards (percent, default 100)
+//   … --ranked-only   leave out the cards EDHREC hasn't ranked yet (kept by default, last)
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
 //
 // Which sets: Scryfall's paper expansions, core sets, Commander products,
@@ -41,8 +42,8 @@ const option = (name, fallback) => {
 const SET_TYPES = new Set(["expansion", "core", "commander", "draft_innovation", "masters", "starter"]);
 const MAX_AGE_MS = 3 * 24 * 60 * 60 * 1000;
 const HEADERS = { "User-Agent": "MTG-Engine/1.0 (set backlog)", Accept: "application/json" };
-const top = Number(option("--top", "50"));
-const withUnranked = flag("--unranked");
+const top = Number(option("--top", "100"));
+const withUnranked = !flag("--ranked-only");
 const refresh = flag("--refresh");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -114,8 +115,9 @@ for (const line of readFileSync(join(root, "data", "oracle", "cards.jsonl"), "ut
   if (m) snapshot.add(JSON.parse(`"${m[1]}"`));
 }
 
-/** The cards a set keeps: its ranked new cards' top share by EDHREC rank,
- * plus (with `--unranked`) the ones not ranked yet. */
+/** The cards a set keeps: its ranked new cards' top share by EDHREC rank
+ * (all of them by default), then — unless `--ranked-only` — the ones not
+ * ranked yet. */
 function aboveThreshold(cards) {
   const ranked = cards.filter((c) => c.rank !== null).sort((a, b) => a.rank - b.rank);
   const kept = ranked.slice(0, Math.ceil((ranked.length * top) / 100));

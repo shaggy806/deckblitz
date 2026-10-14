@@ -57,11 +57,12 @@ for:
   `top-commander-cards.txt` (the top 5000 Commander cards by EDHREC rank against the pool, fully
   triaged), re-marked in place by `npm run cards:mark -w engine`; new cards now come from the
   Oracle EDHREC ranks past it.
-  **The current authoring priority is simply more cards, in EDHREC rank order** (the
-  `author-top-cards` skill; `npm run cards:needs -w engine -- --next 60` lists the next untriaged
-  cards by rank, `-- --rank` what blocks the most triaged ones), or set by set, newest set first,
-  each set's new cards above a threshold relative to that set (the `author-by-set` skill; `npm run
-  cards:sets -w engine -- --sets | --next 60`). The bots' decks' stand-ins (the
+  **The current authoring priority is set by set, whole sets, newest set first** (the
+  `author-by-set` skill since 2026-10-14; `npm run cards:sets -w engine -- --sets | --next 60`):
+  every set's Commander-legal first printings, going back first over the sets whose top half was
+  walked before. The other order is EDHREC rank across all sets (the `author-top-cards` skill;
+  `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
+  what blocks the most triaged ones). The bots' decks' stand-ins (the
   substitution tables in `engine/src/sample-decks.ts`) go as their originals land. The pool is
   ~5,400 real cards (`npm run card:verify -w engine` prints the current count of definitions,
   which is a little higher: each face of a double-faced card is its own).

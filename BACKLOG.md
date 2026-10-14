@@ -54,8 +54,8 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
-- **Now: more cards, in EDHREC rank order** (the `author-top-cards` skill; the user moved back to
-  it from the set walk on 2026-10-13). `npm run cards:needs -w engine -- --next 60` lists the next
+- **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
+  to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 7181 on. Batches run 4-5 agents, ~30 cards each, with the
   leading features built alongside in worktrees. The nine other starter precons' 29 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
@@ -72,13 +72,12 @@ section keeps only what to do next.
   Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
   Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
-- **Or set by set, newest first** (the `author-by-set` skill, the user's idea 2026-10-11; paused
-  2026-10-13 at the user's call): each set's own new cards (Commander-legal first printings) in
-  its top half by EDHREC rank, since a new card is played far more than its rank says. `npm run
-  cards:sets -w engine -- --sets` shows the walk (the sets done are in `COMPLETED.md`). **Next:
-  Assassin's Creed (ACR, 10 left) and Outlaws of Thunder Junction (OTJ, 44)** together —
-  **whole sets per batch**, several when they're small (the user's call, 2026-10-12: 4-5 agents
-  with more cards each; features build in parallel worktrees). Batch 68's blockers are one or
+- **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
+  2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
+  ranked ones first. **First, the rest of the sets already walked** — Reality Fracture back to
+  Bloomburrow, about 1,660 cards (`npm run cards:sets -w engine -- --sets 30`; DRC, DSC and BLC
+  too) — then Assassin's Creed and Outlaws of Thunder Junction onward. Batches run 4-5 agents
+  with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
   one with two. Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
   reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
