@@ -601,8 +601,11 @@ export function planManaPayment(
   // gets to the Signet, and then there's nothing left to pay the Signet's
   // `{1}`. So a failed plan gets a second try with converters funded first.
   // It only ever runs where the first try found nothing, so it can't change
-  // a payment that already worked.
-  if (!view.sources.some(isConverterSource)) return null;
+  // a payment that already worked. A filter land counts, though its `{C}` is
+  // free: a Plains spent on a {W} pip first leaves nothing for Mystic Gate's
+  // `{W/U}`, and Glorious Anthem off a Gate, a Plains and a Swamp wants the
+  // Plains on the gate (a bug report, 2026-10-13).
+  if (!view.sources.some(hasCostedOption)) return null;
   return (
     planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first") ??
     // And a last try with a Treasure where it went before converters were put
@@ -618,6 +621,11 @@ const costsMana = (o: ManaOption): boolean => o.genericCost > 0 || (o.hybridCost
  * filter land). */
 const isConverterSource = (s: ManaSource): boolean => s.options.every(costsMana);
 
+/** A source with an option that costs mana, whatever its others: a converter,
+ * or a filter land with its free `{C}` beside. What `"converters-first"`
+ * reaches for first. */
+const hasCostedOption = (s: ManaSource): boolean => s.options.some(costsMana);
+
 /** A source used only when nothing else pays: one sacrificed to make its mana
  * (a Treasure), or one that takes a counter as its cost (Wall of Roots). */
 const isLastResort = (s: ManaSource): boolean =>
@@ -629,8 +637,8 @@ const isLastResort = (s: ManaSource): boolean =>
  * - `"plain-first"`: plain sources, then converters, then the last resorts —
  *   a Treasure after a filter land a land can fund. One was sacrificed for {U}
  *   beside a Flooded Grove a Forest could have fed (a bug report, 2026-10-10).
- * - `"converters-first"`: converters, then plain sources, then the last
- *   resorts (see `planManaPayment`).
+ * - `"converters-first"`: converters and filter lands (`hasCostedOption`),
+ *   then plain sources, then the last resorts (see `planManaPayment`).
  * - `"last-resort-early"`: a last resort among the plain sources, converters
  *   last — the order before converters went ahead of Treasures.
  */
@@ -732,13 +740,19 @@ function planManaPaymentOrdered(
       case "plain-first":
         return converter ? 1 : last ? 2 : 0;
       case "converters-first":
-        return converter ? 0 : last ? 2 : 1;
+        return converter || hasCostedOption(s) ? 0 : last ? 2 : 1;
       case "last-resort-early":
         return converter ? 1 : 0;
     }
   };
   const sources = [0, 1, 2, 3].flatMap((group) => ordered.filter((s) => groupOf(s) === group));
 
+  /** A unit paying the cost itself: a coloured or `{C}` pip's (repaid in
+   * kind), or the generic's (repaid with any unit). */
+  interface Lent {
+    readonly m: ManaType;
+    readonly generic: boolean;
+  }
   interface Tapped {
     readonly src: ManaSource;
     readonly produced: ManaType[];
@@ -758,6 +772,10 @@ function planManaPaymentOrdered(
     /** For a converter, the exact mana taken from other sources to pay its
      * own cost — spent back verbatim by `useManaSource`. */
     readonly spends: ManaType[];
+    /** Units of `produced` paying the cost itself (not funding a converter):
+     * what a converter may borrow to fund itself, paying the unit back out of
+     * its own output (`coverGenericFrom`). */
+    readonly lendable: Lent[];
     readonly tag?: Omit<ManaUnit, "type">;
     readonly anyColorOf?: readonly ManaType[];
     readonly untapped?: true;
@@ -778,16 +796,12 @@ function planManaPaymentOrdered(
   // later coloured need. A free option always beats an equally-useful one
   // that costs life (a painland taps for `{C}` for free before it hurts).
   const lifeToll = (o: ManaOption): number => o.pain + o.lifeCost;
-  const chooseOption = (src: ManaSource, want: ManaType | null): ManaOption => {
-    const free = (pred: (o: ManaOption) => boolean): ManaOption | undefined =>
-      src.options.find((o) => lifeToll(o) === 0 && pred(o)) ??
-      src.options.find((o) => pred(o));
-    if (want !== null) {
-      const exact = free((o) => o.fixed.includes(want));
-      if (exact !== undefined) return exact;
-      const any = free((o) => anyUnitMakes(o, want));
-      if (any !== undefined) return any;
-    }
+  /** A source's options in the order to try them: the first is the one to
+   * commit to, and the rest are what `openFunded` falls back on when an
+   * option's own cost can't be funded — a filter land's free `{C}` after its
+   * `{W/U}: Add {W}{W}` (a bug report, 2026-10-13: Mystic Gate and an Island
+   * didn't cast Think Twice, because the gate was given up on whole). */
+  const optionsFor = (src: ManaSource, want: ManaType | null): ManaOption[] => {
     // Among otherwise equal options, the one making the payer's colours.
     const rank = (o: ManaOption): number =>
       Math.min(
@@ -797,16 +811,24 @@ function planManaPaymentOrdered(
           return i < 0 ? view.preferred.length : i;
         }),
       );
-    return [...src.options].sort(
+    const richest = [...src.options].sort(
       (a, b) =>
         lifeToll(a) - lifeToll(b) ||
         b.fixed.length + b.anyColor - (a.fixed.length + a.anyColor) ||
         a.anyColor - b.anyColor ||
         rank(a) - rank(b),
-    )[0];
+    );
+    if (want === null) return richest;
+    // For a specific need, an option that makes that colour directly, else an
+    // "any colour" one — each free of life before one that costs it.
+    const making = (pred: (o: ManaOption) => boolean): ManaOption[] => [
+      ...src.options.filter((o) => lifeToll(o) === 0 && pred(o)),
+      ...src.options.filter((o) => lifeToll(o) !== 0 && pred(o)),
+    ];
+    const first = [...making((o) => o.fixed.includes(want)), ...making((o) => anyUnitMakes(o, want))];
+    return [...new Set([...first, ...richest])];
   };
-  const open = (src: ManaSource, want: ManaType | null): Tapped => {
-    const opt = chooseOption(src, want);
+  const open = (src: ManaSource, opt: ManaOption): Tapped => {
     // The extras' fixed units are the last of `fixed`, in order.
     const extraFixed = (opt.extras ?? []).filter((e) => e.type !== undefined);
     const ownFixed = opt.fixed.length - extraFixed.length;
@@ -823,6 +845,7 @@ function planManaPaymentOrdered(
       genericCost: opt.genericCost,
       hybridCost: opt.hybridCost ?? [],
       spends: [],
+      lendable: [],
       ...(opt.tag !== undefined ? { tag: opt.tag } : {}),
       ...(opt.anyColorOf !== undefined ? { anyColorOf: opt.anyColorOf } : {}),
       ...(opt.untapped !== undefined ? { untapped: opt.untapped } : {}),
@@ -835,38 +858,78 @@ function planManaPaymentOrdered(
   };
 
   /**
-   * Open `src` only if its activation cost can be met — for an ordinary
-   * source that's free, for a converter it means covering `genericCost`
-   * generic from *other* sources first (never from itself, and never from
-   * another converter, which is what keeps this from recursing).
+   * Open `src` with the first of its options (`optionsFor`) whose activation
+   * cost can be met — free for an ordinary option; for a converter's, its
+   * `genericCost` and `hybridCost` covered from *other* sources first (never
+   * from itself, and only from what's already tapped or a source's free
+   * option, which is what keeps this from recursing).
    *
-   * On failure the tentative entry is rolled back, so a converter the board
-   * can't fund leaves no trace and the caller simply moves on.
+   * Each option that can't be funded is rolled back before the next is
+   * tried, and if none can, `src` leaves no trace and the caller moves on.
    */
+  /** While `openFunded` funds a converter, the units it borrowed from the
+   * cost's own (`Tapped.lendable`), to pay back out of its output. */
+  let borrowedFor: Lent[] | null = null;
   const openFunded = (src: ManaSource, want: ManaType | null): Tapped | null => {
-    const mark = tapped.length;
-    const spareBefore = { ...spare };
-    const fundableBefore = { ...fundable };
-    const genericBefore = genericNeed;
-    const t = open(src, want);
-    const fail = (): null => {
+    for (const opt of optionsFor(src, want)) {
+      const mark = tapped.length;
+      const taken = tapped.map((t) => ({ t, ...snapshotOf(t) }));
+      const spareBefore = { ...spare };
+      const fundableBefore = { ...fundable };
+      const genericBefore = genericNeed;
+      const t = open(src, opt);
+      const owed: Lent[] = [];
+      borrowedFor = owed;
+      let funded = true;
+      for (let i = 0; funded && i < t.genericCost; i += 1) {
+        const m = coverGenericFrom(src.id, null);
+        if (m === null) funded = false;
+        else t.spends.push(m);
+      }
+      for (const pip of t.hybridCost) {
+        if (!funded) break;
+        const m = coverGenericFrom(src.id, pip);
+        if (m === null) funded = false;
+        else t.spends.push(m);
+      }
+      borrowedFor = null;
+      // What it borrowed from the cost, paid back out of its own output.
+      for (const lent of owed) {
+        if (!funded) break;
+        const m = lent.generic ? takeGeneric(t) : takeSpecific(t, lent.m) ? lent.m : null;
+        if (m === null) funded = false;
+        else t.lendable.push({ m, generic: lent.generic });
+      }
+      if (funded) return t;
+      // Undone: the sources this opened, and what it took from those
+      // already open.
       tapped.length = mark;
+      for (const { t: before, ...was } of taken) restore(before, was);
       Object.assign(spare, spareBefore);
       Object.assign(fundable, fundableBefore);
       genericNeed = genericBefore;
-      return null;
-    };
-    for (let i = 0; i < t.genericCost; i += 1) {
-      const m = coverGenericFrom(src.id, null);
-      if (m === null) return fail();
-      t.spends.push(m);
     }
-    for (const pip of t.hybridCost) {
-      const m = coverGenericFrom(src.id, pip);
-      if (m === null) return fail();
-      t.spends.push(m);
-    }
-    return t;
+    return null;
+  };
+  /** What funding a converter can take from a source already open — its
+   * free units — so a failed attempt can put them back. */
+  const snapshotOf = (t: Tapped) => ({
+    lendable: [...t.lendable],
+    produced: [...t.produced],
+    producedExtra: [...t.producedExtra],
+    freeFixed: [...t.freeFixed],
+    freeFixedExtra: [...t.freeFixedExtra],
+    freeAny: t.freeAny,
+    freeAnyExtra: [...t.freeAnyExtra],
+  });
+  const restore = (t: Tapped, was: ReturnType<typeof snapshotOf>): void => {
+    t.lendable.splice(0, Infinity, ...was.lendable);
+    t.produced.splice(0, Infinity, ...was.produced);
+    t.producedExtra.splice(0, Infinity, ...was.producedExtra);
+    t.freeFixed.splice(0, Infinity, ...was.freeFixed);
+    t.freeFixedExtra.splice(0, Infinity, ...was.freeFixedExtra);
+    t.freeAny = was.freeAny;
+    t.freeAnyExtra.splice(0, Infinity, ...was.freeAnyExtra);
   };
   /** Take one of `t`'s flexible units as `m` — its own before an extra one. */
   const takeAny = (t: Tapped, m: ManaType): void => {
@@ -907,21 +970,27 @@ function planManaPaymentOrdered(
     }
     return null;
   };
+  /** Take `m` from `t` toward the cost itself, recording it as lendable. */
+  const payWith = (t: Tapped, m: ManaType): boolean => {
+    if (!takeSpecific(t, m)) return false;
+    t.lendable.push({ m, generic: false });
+    return true;
+  };
   const coverSpecific = (m: ManaType): boolean => {
-    for (const t of tapped) if (takeSpecific(t, m)) return true;
+    for (const t of tapped) if (payWith(t, m)) return true;
     const canMake = (s: ManaSource): boolean =>
       s.options.some((o) => o.fixed.includes(m) || anyUnitMakes(o, m));
     for (const next of sources) {
       if (isTapped(next.id) || !canMake(next)) continue;
       const t = openFunded(next, m);
-      if (t !== null && takeSpecific(t, m)) return true;
+      if (t !== null && payWith(t, m)) return true;
     }
     return false;
   };
   /**
    * Cover one unit of a converter's own cost — a generic (`of` null) or a
-   * hybrid pip (`of` its colours) — never drawing on `exclude` or on another
-   * converter. This is what funds a converter.
+   * hybrid pip (`of` its colours) — never drawing on `exclude`, the converter
+   * itself. This is what funds a converter.
    *
    * Floating mana goes first, a unit the cost's own pips don't take: the red
    * left by tapping a Mountain by hand funds Mossfire Valley's `{1}`, whose
@@ -933,8 +1002,8 @@ function planManaPaymentOrdered(
    * that can: the whole point of tapping a Signet is that the board is short
    * on a colour, and funding it with the one land that made that colour
    * defeats the exercise (two Islands and a Signet paying `{W}{U}{U}` — fund
-   * from a Swamp, not from an Island). A Treasure funds one only when nothing
-   * plain can.
+   * from a Swamp, not from an Island). Then a source not yet open, with a
+   * free option only. A Treasure funds one only when nothing plain can.
    */
   const coverGenericFrom = (exclude: ObjectId, of: readonly ManaType[] | null): ManaType | null => {
     // The kinds this unit may be, the payment's least wanted first.
@@ -949,7 +1018,11 @@ function planManaPaymentOrdered(
       if (countedForGeneric) genericNeed += 1;
       return floating;
     }
-    const eligible = (t: Tapped): boolean => t.src.id !== exclude && t.spends.length === 0;
+    // Anything already open but the converter being funded — another
+    // converter's leftover too: a Plains funds one Mystic Gate, whose {U}{U}
+    // funds a second. Everything open was funded before this one, so there's
+    // no cycle, and `steps` below activates funders first.
+    const eligible = (t: Tapped): boolean => t.src.id !== exclude;
     const dull = (src: ManaSource): boolean =>
       src.options.every(
         (o) => o.anyColor === 0 && !o.fixed.some((m) => wantedColors.has(m)),
@@ -969,20 +1042,41 @@ function planManaPaymentOrdered(
       const m = take(t);
       if (m !== null) return m;
     }
+    // A source opened here is never funded itself, so only its free options
+    // count: a filter land funds another with its {C}, or not at all.
+    const freeOptions = (s: ManaSource): ManaOption[] => s.options.filter((o) => !costsMana(o));
     const makesOne = (s: ManaSource): boolean =>
-      of === null || s.options.some((o) => of.some((m) => o.fixed.includes(m) || anyUnitMakes(o, m)));
-    const free = sources.filter(
-      (s) => !isTapped(s.id) && s.id !== exclude && !isConverter(s) && makesOne(s),
-    );
+      freeOptions(s).some((o) => of === null || of.some((m) => o.fixed.includes(m) || anyUnitMakes(o, m)));
+    const free = sources.filter((s) => !isTapped(s.id) && s.id !== exclude && makesOne(s));
     const plainFree = free.filter((s) => !isLastResort(s) && s.reserved !== true);
     const from = plainFree.length > 0 ? plainFree : free;
     const next = from.find(dull) ?? from[0];
-    if (next === undefined) return null;
+    if (next === undefined) return borrow();
     const want =
       of === null
         ? null
-        : (kinds.find((m) => next.options.some((o) => o.fixed.includes(m) || anyUnitMakes(o, m))) ?? null);
-    return take(open(next, want));
+        : (kinds.find((m) => freeOptions(next).some((o) => o.fixed.includes(m) || anyUnitMakes(o, m))) ?? null);
+    const opt = optionsFor({ ...next, options: freeOptions(next) }, want)[0];
+    return take(open(next, opt));
+    // Last, a unit already paying the cost, if the converter being funded
+    // pays it back out of its output (`openFunded`): two Mystic Gates and a
+    // Plains are {W}{W}{W} — the Plains funds the first gate, and one of its
+    // {W}, already counted toward the spell, funds the second, whose {W}{W}
+    // stand in for it.
+    function borrow(): ManaType | null {
+      if (borrowedFor === null) return null;
+      for (const m of kinds) {
+        for (const t of tapped) {
+          if (!eligible(t)) continue;
+          const i = t.lendable.findIndex((lent) => lent.m === m);
+          if (i < 0) continue;
+          const [lent] = t.lendable.splice(i, 1);
+          borrowedFor.push(lent);
+          return m;
+        }
+      }
+      return null;
+    }
   };
   // What a source's colours are worth keeping for the rest of the hand
   // (`ManaPlanningView.keep`): a fresh source for generic mana is the
@@ -1053,11 +1147,19 @@ function planManaPaymentOrdered(
       .map((e) => ({ ...e, keep: keepScore(e.src) }))
       .sort((a, b) => a.group - b.group || a.avoided - b.avoided || a.creature - b.creature || a.keep - b.keep || a.colours - b.colours || a.i - b.i)
       .map((e) => e.src);
+  /** Take one generic from `t` toward the cost itself, recording it as
+   * lendable. */
+  const payGenericWith = (t: Tapped): boolean => {
+    const m = takeGeneric(t);
+    if (m === null) return false;
+    t.lendable.push({ m, generic: true });
+    return true;
+  };
   const coverGeneric = (): boolean => {
-    for (const t of tapped) if (takeGeneric(t) !== null) return true;
+    for (const t of tapped) if (payGenericWith(t)) return true;
     for (const next of byKeep()) {
       const t = openFunded(next, null);
-      if (t !== null && takeGeneric(t) !== null) return true;
+      if (t !== null && payGenericWith(t)) return true;
     }
     return false;
   };
@@ -1068,10 +1170,11 @@ function planManaPaymentOrdered(
   for (let i = 0; i < need.C; i += 1) if (!coverSpecific("C")) return null;
   for (let i = 0; i < genericNeed; i += 1) if (!coverGeneric()) return null;
 
-  // Converters last: each spends from the pool, and everything funding it
-  // is an ordinary source, so putting them after the rest is enough to
-  // guarantee the mana is there when `useManaSource` runs.
-  const steps = [...tapped].sort((a, b) => a.spends.length - b.spends.length);
+  // Converters last, each spending from the pool: every ordinary source
+  // first, then the converters in the order they were opened — one funded by
+  // another's leftover was opened after it (`coverGenericFrom`), so the mana
+  // is there when `useManaSource` runs. A stable sort keeps that order.
+  const steps = [...tapped].sort((a, b) => Number(a.spends.length > 0) - Number(b.spends.length > 0));
   return steps.map((t) => {
     // Everything it makes, used or left floating — its own units first, then
     // the extra ones, which are `extraFrom`'s.

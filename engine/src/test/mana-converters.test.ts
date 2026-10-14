@@ -356,3 +356,75 @@ describe("floating mana funds a converter", () => {
     expect(canCast(game, "Garruk's Uprising")).toBe(false);
   });
 });
+
+describe("a Shadowmoor filter land beside its free {C}", () => {
+  // A bug report (2026-10-13): the filter lands' `{W/U}, {T}: Add {W}{W},
+  // {W}{U}, or {U}{U}` didn't work with the auto-payer. Mystic Gate's free
+  // `{T}: Add {C}` made it no converter, so nothing funded it first, and a
+  // gate whose paid option couldn't be funded was given up on whole.
+  const cast = (game: Game, card: string): ObjectId => {
+    const id = game.debugSpawn(card, A, "hand");
+    expect(game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === id), card).toBe(true);
+    game.dispatch({ type: "cast-spell", player: A, card: id, targets: [] });
+    expect(game.state.zones.shared.stack).toContain(id);
+    return id;
+  };
+
+  it("falls back on its {C} when the paid option can't be funded: Think Twice off it and an Island", () => {
+    const game = makeGame();
+    open(game);
+    const [gate, island] = spawn(game, ["Mystic Gate", "Island"]);
+    cast(game, "Think Twice");
+    expect(game.state.objects[gate].tapped).toBe(true);
+    expect(game.state.objects[island].tapped).toBe(true);
+    expect(game.state.players[A].manaPool).toEqual([]);
+  });
+
+  it("is funded first by the land whose colour it makes: Glorious Anthem off it, a Plains and a Swamp", () => {
+    // The Plains pays {W/U} and the gate makes {W}{W}; the Swamp pays the {1}.
+    // Spending the Plains on a {W} first leaves the gate unfunded.
+    const game = makeGame();
+    open(game);
+    const lands = spawn(game, ["Mystic Gate", "Plains", "Swamp"]);
+    cast(game, "Glorious Anthem");
+    for (const id of lands) expect(game.state.objects[id].tapped).toBe(true);
+    expect(game.state.players[A].manaPool).toEqual([]);
+  });
+
+  it("funds two gates from two Islands: Wrath of God", () => {
+    const game = makeGame();
+    open(game);
+    const lands = spawn(game, ["Mystic Gate", "Mystic Gate", "Island", "Island"]);
+    cast(game, "Wrath of God");
+    for (const id of lands) expect(game.state.objects[id].tapped).toBe(true);
+  });
+
+  it("funds one gate with another's mana: two gates and a Plains are {W}{W}{W}", () => {
+    // The Plains funds the first gate; one of its {W}{W}, already counted
+    // toward the spell, funds the second, whose {W}{W} stand in for it.
+    const game = makeGame();
+    open(game);
+    const lands = spawn(game, ["Mystic Gate", "Mystic Gate", "Plains"]);
+    cast(game, "Healer's Flock");
+    for (const id of lands) expect(game.state.objects[id].tapped).toBe(true);
+    expect(game.state.players[A].manaPool).toEqual([]);
+  });
+
+  it("still can't make what isn't there", () => {
+    const game = makeGame();
+    open(game);
+    // An Island funds the gate, and that's two mana for a three-mana spell.
+    spawn(game, ["Mystic Gate", "Island"]);
+    expect(canCast(game, "Glorious Anthem")).toBe(false);
+    // Colourless can't pay {W/U}, and the gate's own {C} isn't blue.
+    const other = makeGame();
+    open(other);
+    spawn(other, ["Mystic Gate", "Sol Ring"]);
+    expect(canCast(other, "Opt")).toBe(false);
+    // Nor can the gate fund itself.
+    const alone = makeGame();
+    open(alone);
+    spawn(alone, ["Mystic Gate", "Mystic Gate"]);
+    expect(canCast(alone, "Opt")).toBe(false);
+  });
+});

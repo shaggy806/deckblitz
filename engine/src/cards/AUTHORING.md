@@ -4115,10 +4115,13 @@ Delete an entry in the same commit as the feature that retires it.
   via the `signet` helper, the Odyssey filter lands' `{1}`, the Shadowmoor
   filter lands' `{G/U}`: `ManaOption.hybridCost`). The planner reaches for one
   only after the ordinary sources are spent, funds its cost from floating mana
-  the payment doesn't need or from those sources (never from another
-  converter, and preferring a source whose colour the cost doesn't want), and
-  orders it last so the mana is in the pool when it activates; a Treasure
-  comes after the converters (2026-10-10). A *coloured* activation cost stays
+  the payment doesn't need, from those sources (preferring one whose colour the
+  cost doesn't want; a source opened to fund one only by a free option), or
+  from another converter's output — even a unit already paying the cost, which
+  it then pays back — and orders converters last so the mana is in the pool
+  when each activates; a Treasure comes after the converters (2026-10-10). A
+  filter land beside its free `{T}: Add {C}` falls back on that `{C}` when its
+  paid option can't be funded (2026-10-13). A *coloured* activation cost stays
   out, because it is genuinely circular — you'd need the colour to make the
   colour — and so does an `{X}` one, since nothing is resolving during payment
   planning, and a hybrid pip with a generic or Phyrexian half. Selvala, Heart
