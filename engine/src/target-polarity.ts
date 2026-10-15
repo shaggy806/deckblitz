@@ -34,7 +34,7 @@ import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
-import { computeCharacteristics } from "./characteristics.js";
+import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { EffectAmount, EffectSpec } from "./effects.js";
@@ -870,15 +870,29 @@ export function rankTargets(
     if (already > 0 && ref.kind === "object" && damageLands(state, registry, ref, already)) return false;
     return damageLands(state, registry, ref, damage + already);
   };
+  // Damage an opponent's life total meets ends them (rule 704.5a), and their
+  // whole board leaves with them (rule 800.4a): no creature of theirs, nor
+  // anyone else's, is worth more (a live misplay, 2026-10-14: Terror of the
+  // Peaks' 7 at the Avenger of Zendikar of a player on 4).
+  const lethal = (ref: TargetRef): boolean =>
+    damage !== undefined &&
+    polarity === "harm" &&
+    ref.kind === "player" &&
+    ref.player !== me &&
+    (state.players[ref.player]?.life ?? Infinity) <= damage &&
+    !playerCantLoseLife(state, ref.player) &&
+    !playerCantLoseGame(state, registry, ref.player);
   const scored = options.map((ref, index) => ({
     ref,
     index,
     right: polarity === "take" || sideOf(state, ref, me) === want,
+    lethal: lethal(ref),
     lands: lands(ref),
     value: value(state, registry, ref),
   }));
   scored.sort((a, b) => {
     if (a.right !== b.right) return a.right ? -1 : 1;
+    if (a.lethal !== b.lethal) return a.lethal ? -1 : 1;
     if (a.right && a.lands !== b.lands) return a.lands ? -1 : 1;
     const byValue = a.right ? b.value - a.value : a.value - b.value;
     return byValue !== 0 ? byValue : a.index - b.index;

@@ -6,7 +6,7 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-10-14 — Terror of the Peaks' 7 at a creature of a player on 4
 
-Status: open.
+Status: fixed 2026-10-14 (its scenario now gates).
 
 - **Seen:** room NBMGP, round eight, four players, no capture. Tasigur was on 4 life. The bot cast
   Ureni of the Unwritten, whose trigger put Drakuseth, Maw of Flames onto the battlefield.
@@ -27,15 +27,16 @@ Status: open.
   - That is defensible, but the user's blocker isn't in it: the rollouts end at the next player's
     untap, so an untapped Terror is worth nothing to them.
 - **Scenario:** "aims Terror of the Peaks' 7 at a player on 4, not at that player's creature"
-  (training). It replays the stack as it went, with one simulation so v1's aim stands, and reads
-  "aimed at bob's Avenger of Zendikar".
-- **Likely fix:** in `rankTargets`, among a harmful damage slot's landing targets, put first an
-  opponent whose life the damage meets. Elimination takes their whole board with them, so no
-  creature of theirs is worth more.
-  - It could misfire on a player who can't lose (Platinum Angel): the check would need
-    `canLoseGame`, or something like it.
-  - It changes nothing in the full search, so the blocker half stays open. Valuing a held blocker
-    needs the rollouts to see the next turn's attacks.
+  (gate). It replays the stack as it went, with one simulation so v1's aim stands. Before the fix
+  it read "aimed at bob's Avenger of Zendikar".
+- **Fix (built):** `rankTargets` now ranks first an opponent whose life a harmful damage slot's
+  damage meets (rule 704.5a), ahead of every creature it kills. Their whole board leaves with them
+  (800.4a), so no creature of theirs is worth more.
+  - Not a player who can't lose life or can't lose the game (`playerCantLoseLife`,
+    `playerCantLoseGame`: Platinum Angel), pinned in `target-polarity.test.ts`.
+  - The full search is unchanged: there the rollout's attack kills the player anyway. With them
+    dead before combat, whether Terror attacks someone else or stays home is the attack planner's
+    crackback call.
 
 ## 2026-10-14 — Garruk's Uprising before Carnelian Orb of Dragonkind
 

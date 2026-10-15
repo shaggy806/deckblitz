@@ -164,6 +164,23 @@ describe("ranking targets", () => {
     expect(ranked).toEqual([wurm, elves, bears, baloth]);
   });
 
+  it("puts an opponent first when the damage is lethal to them, unless they can't lose", () => {
+    const { game, bears, elves, wurm, baloth } = board();
+    const carol: TargetRef = { kind: "player", player: C };
+    const bob: TargetRef = { kind: "player", player: B };
+    const options = [bears, elves, wurm, baloth, bob, carol];
+    game.state.players[C].life = 4;
+    // 7 kills the Craw Wurm too, but carol's whole board goes with her.
+    expect(rankTargets(game.state, registry, A, options, "harm", undefined, 7)[0]).toEqual(carol);
+    // On 8 she survives it, and the Wurm it kills comes first.
+    game.state.players[C].life = 8;
+    expect(rankTargets(game.state, registry, A, options, "harm", undefined, 7)[0]).toEqual(wurm);
+    // Under Platinum Angel she can't lose the game (rule 104.3).
+    game.state.players[C].life = 4;
+    game.debugSpawn("Platinum Angel", C, "battlefield", { summoningSick: false });
+    expect(rankTargets(game.state, registry, A, options, "harm", undefined, 7)[0]).toEqual(wurm);
+  });
+
   it("puts our own best first for help", () => {
     const { game, bears, elves, wurm, baloth } = board();
     const ranked = rankTargets(game.state, registry, A, [bears, elves, wurm, baloth], "help");

@@ -894,7 +894,6 @@ const SCENARIOS: readonly BotScenario[] = [
   }),
   {
     name: "aims Terror of the Peaks' 7 at a player on 4, not at that player's creature",
-    kind: "training",
     rule: "Damage that kills a player takes all their creatures with them: aim it at the player, not at one creature they'd lose anyway.",
     run(weights, registry) {
       // Reported from a live game (2026-10-14, room NBMGP, no capture): round
@@ -941,6 +940,7 @@ const SCENARIOS: readonly BotScenario[] = [
       // the live clock keeps, as this one likely was on that board. Searched
       // in full, the rollout attacks bob for lethal whatever the trigger hits,
       // so bob dies in every line and the 7 goes at dave's Faeburrow Elder.
+      // `rankTargets` now puts an opponent the damage kills first.
       const action = new EvalBotController(A, registry, { weights, maxSimulations: 1 }).act(viewOf(game, A));
       const aimed = action.type === "choose-targets" ? action.targets[0] : null;
       return {
