@@ -319,6 +319,7 @@ import _poolSummonAnima from "../pool/summon-anima.js";
 import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
 import _poolSunbakedCanyon from "../pool/sunbaked-canyon.js";
 import _poolSunscapeFamiliar from "../pool/sunscape-familiar.js";
+import _poolSunstarLightsmith from "../pool/sunstar-lightsmith.js";
 import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
@@ -715,6 +716,7 @@ const shard: CardShard = {
     _poolSummonedDromedary,
     _poolSunbakedCanyon,
     _poolSunscapeFamiliar,
+    _poolSunstarLightsmith,
     _poolSupernaturalStamina,
     _poolSurrakTheHuntCaller,
     _poolSusurianVoidborn,

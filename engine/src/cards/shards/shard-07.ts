@@ -11,6 +11,7 @@ import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
 import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
+import _poolAlpharaelDreamingAcolyte from "../pool/alpharael-dreaming-acolyte.js";
 import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
@@ -194,6 +195,7 @@ import _poolLotusBloom from "../pool/lotus-bloom.js";
 import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
+import _poolLuxknightBreacher from "../pool/luxknight-breacher.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
@@ -237,6 +239,7 @@ import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
 import _poolOpenFire from "../pool/open-fire.js";
+import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
 import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
 import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
@@ -446,6 +449,7 @@ const shard: CardShard = {
     _poolAgonasaurRex,
     _poolAinokSurvivalist,
     _poolAjanisMantra,
+    _poolAlpharaelDreamingAcolyte,
     _poolAlterFate,
     _poolAlteredEgo,
     _poolAmbushGigapede,
@@ -629,6 +633,7 @@ const shard: CardShard = {
     _poolLounge,
     _poolLure,
     _poolLurkingNightstalker,
+    _poolLuxknightBreacher,
     _poolMagicPot,
     _poolMagnificentEnd,
     _poolMakindiGriffin,
@@ -672,6 +677,7 @@ const shard: CardShard = {
     _poolOnakkeOgre,
     _poolOnduWarCleric,
     _poolOpenFire,
+    _poolOreplatePangolin,
     _poolOrnithopterOfParadise,
     _poolOrzhovGuildgate,
     _poolOverseerOfTheDamned,

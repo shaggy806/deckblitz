@@ -1,0 +1,727 @@
+{
+ "batch": "B81",
+ "status": "complete",
+ "ranks": "Edge of Eternities (EOE, 2025-08-01): the rest of the set",
+ "authored": [
+  {
+   "name": "Alpharael, Dreaming Acolyte",
+   "files": [
+    "engine/src/cards/pool/alpharael-dreaming-acolyte.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atomic Microsizer",
+   "files": [
+    "engine/src/cards/pool/atomic-microsizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auxiliary Boosters",
+   "files": [
+    "engine/src/cards/pool/auxiliary-boosters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biomechan Engineer",
+   "files": [
+    "engine/src/cards/pool/biomechan-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blooming Stinger",
+   "files": [
+    "engine/src/cards/pool/blooming-stinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brightspear Zealot",
+   "files": [
+    "engine/src/cards/pool/brightspear-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cerebral Download",
+   "files": [
+    "engine/src/cards/pool/cerebral-download.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudsculpt Technician",
+   "files": [
+    "engine/src/cards/pool/cloudsculpt-technician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Codecracker Hound",
+   "files": [
+    "engine/src/cards/pool/codecracker-hound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Comet Crawler",
+   "files": [
+    "engine/src/cards/pool/comet-crawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryoshatter",
+   "files": [
+    "engine/src/cards/pool/cryoshatter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Endurance",
+   "files": [
+    "engine/src/cards/pool/dark-endurance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnstrike Vanguard",
+   "files": [
+    "engine/src/cards/pool/dawnstrike-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Debris Field Crusher",
+   "files": [
+    "engine/src/cards/pool/debris-field-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depressurize",
+   "files": [
+    "engine/src/cards/pool/depressurize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desculpting Blast",
+   "files": [
+    "engine/src/cards/pool/desculpting-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diplomatic Relations",
+   "files": [
+    "engine/src/cards/pool/diplomatic-relations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dockworker Drone",
+   "files": [
+    "engine/src/cards/pool/dockworker-drone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dubious Delicacy",
+   "files": [
+    "engine/src/cards/pool/dubious-delicacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Edge Rover",
+   "files": [
+    "engine/src/cards/pool/edge-rover.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exosuit Savior",
+   "files": [
+    "engine/src/cards/pool/exosuit-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fell Gravship",
+   "files": [
+    "engine/src/cards/pool/fell-gravship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flight-Deck Coordinator",
+   "files": [
+    "engine/src/cards/pool/flight-deck-coordinator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Focus Fire",
+   "files": [
+    "engine/src/cards/pool/focus-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frontline War-Rager",
+   "files": [
+    "engine/src/cards/pool/frontline-war-rager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Full Bore",
+   "files": [
+    "engine/src/cards/pool/full-bore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galvanizing Sawship",
+   "files": [
+    "engine/src/cards/pool/galvanizing-sawship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genemorph Imago",
+   "files": [
+    "engine/src/cards/pool/genemorph-imago.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Germinating Wurm",
+   "files": [
+    "engine/src/cards/pool/germinating-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gigastorm Titan",
+   "files": [
+    "engine/src/cards/pool/gigastorm-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravblade Heavy",
+   "files": [
+    "engine/src/cards/pool/gravblade-heavy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravkill",
+   "files": [
+    "engine/src/cards/pool/gravkill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harmonious Grovestrider",
+   "files": [
+    "engine/src/cards/pool/harmonious-grovestrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hemosymbic Mite",
+   "files": [
+    "engine/src/cards/pool/hemosymbic-mite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illvoi Infiltrator",
+   "files": [
+    "engine/src/cards/pool/illvoi-infiltrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illvoi Light Jammer",
+   "files": [
+    "engine/src/cards/pool/illvoi-light-jammer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illvoi Operative",
+   "files": [
+    "engine/src/cards/pool/illvoi-operative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasive Maneuvers",
+   "files": [
+    "engine/src/cards/pool/invasive-maneuvers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kavaron Harrier",
+   "files": [
+    "engine/src/cards/pool/kavaron-harrier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight Luminary",
+   "files": [
+    "engine/src/cards/pool/knight-luminary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lashwhip Predator",
+   "files": [
+    "engine/src/cards/pool/lashwhip-predator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lithobraking",
+   "files": [
+    "engine/src/cards/pool/lithobraking.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luxknight Breacher",
+   "files": [
+    "engine/src/cards/pool/luxknight-breacher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mechan Navigator",
+   "files": [
+    "engine/src/cards/pool/mechan-navigator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mechanozoa",
+   "files": [
+    "engine/src/cards/pool/mechanozoa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meltstrider's Gear",
+   "files": [
+    "engine/src/cards/pool/meltstriders-gear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memorial Team Leader",
+   "files": [
+    "engine/src/cards/pool/memorial-team-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memorial Vault",
+   "files": [
+    "engine/src/cards/pool/memorial-vault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monoist Circuit-Feeder",
+   "files": [
+    "engine/src/cards/pool/monoist-circuit-feeder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mouth of the Storm",
+   "files": [
+    "engine/src/cards/pool/mouth-of-the-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orbital Plunge",
+   "files": [
+    "engine/src/cards/pool/orbital-plunge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oreplate Pangolin",
+   "files": [
+    "engine/src/cards/pool/oreplate-pangolin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perigee Beckoner",
+   "files": [
+    "engine/src/cards/pool/perigee-beckoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possibility Technician",
+   "files": [
+    "engine/src/cards/pool/possibility-technician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiant Strike",
+   "files": [
+    "engine/src/cards/pool/radiant-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rayblade Trooper",
+   "files": [
+    "engine/src/cards/pool/rayblade-trooper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Tiger Mechan",
+   "files": [
+    "engine/src/cards/pool/red-tiger-mechan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruinous Rampage",
+   "files": [
+    "engine/src/cards/pool/ruinous-rampage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rust Harvester",
+   "files": [
+    "engine/src/cards/pool/rust-harvester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seam Rip",
+   "files": [
+    "engine/src/cards/pool/seam-rip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selfcraft Mechan",
+   "files": [
+    "engine/src/cards/pool/selfcraft-mechan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shattered Wings",
+   "files": [
+    "engine/src/cards/pool/shattered-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinister Cryologist",
+   "files": [
+    "engine/src/cards/pool/sinister-cryologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Specimen Freighter",
+   "files": [
+    "engine/src/cards/pool/specimen-freighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squire's Lightblade",
+   "files": [
+    "engine/src/cards/pool/squires-lightblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starbreach Whale",
+   "files": [
+    "engine/src/cards/pool/starbreach-whale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starfighter Pilot",
+   "files": [
+    "engine/src/cards/pool/starfighter-pilot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Station Monitor",
+   "files": [
+    "engine/src/cards/pool/station-monitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunset Saboteur",
+   "files": [
+    "engine/src/cards/pool/sunset-saboteur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunstar Expansionist",
+   "files": [
+    "engine/src/cards/pool/sunstar-expansionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunstar Lightsmith",
+   "files": [
+    "engine/src/cards/pool/sunstar-lightsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Susurian Dirgecraft",
+   "files": [
+    "engine/src/cards/pool/susurian-dirgecraft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarm Culler",
+   "files": [
+    "engine/src/cards/pool/swarm-culler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Systems Override",
+   "files": [
+    "engine/src/cards/pool/systems-override.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terminal Velocity",
+   "files": [
+    "engine/src/cards/pool/terminal-velocity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terrapact Intimidator",
+   "files": [
+    "engine/src/cards/pool/terrapact-intimidator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Territorial Bruntar",
+   "files": [
+    "engine/src/cards/pool/territorial-bruntar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thawbringer",
+   "files": [
+    "engine/src/cards/pool/thawbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unravel",
+   "files": [
+    "engine/src/cards/pool/unravel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uthros Scanship",
+   "files": [
+    "engine/src/cards/pool/uthros-scanship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vaultguard Trooper",
+   "files": [
+    "engine/src/cards/pool/vaultguard-trooper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wedgelight Rammer",
+   "files": [
+    "engine/src/cards/pool/wedgelight-rammer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weftblade Enhancer",
+   "files": [
+    "engine/src/cards/pool/weftblade-enhancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zealous Display",
+   "files": [
+    "engine/src/cards/pool/zealous-display.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Blade of the Swarm",
+   "needs": [
+    "effect:target-card-in-exile",
+    "condition:filter-has-warp"
+   ],
+   "why": "The second mode, 'Put target exiled card with warp on the bottom of its owner's library': there's no target spec for a card in exile, and no CardFilter clause for a card that has warp (warp isn't a Keyword)."
+  },
+  {
+   "name": "Close Encounter",
+   "needs": [
+    "cost:choose-creature-or-warped-card-as-cost"
+   ],
+   "why": "'As an additional cost, choose a creature you control or a warped creature card you own in exile' and damage equal to the chosen one's power: no additional cost that chooses (not sacrifices) an object across the battlefield and exile, nor an amount reading the chosen one."
+  },
+  {
+   "name": "Cosmogoyf",
+   "needs": [
+    "bug:cda-cards-owned-in-exile"
+   ],
+   "why": "Its CDA counts the cards its owner owns in exile (in every zone); setBasePtFromCount has no CountSpec for cards in exile (only battlefield, hand, graveyard, player counters, devotion), and a grantPtPerCount bonus would be layer 7c, not a 7b CDA."
+  },
+  {
+   "name": "Faller's Faithful",
+   "needs": [
+    "effect:draw-controller-of-target"
+   ],
+   "why": "\"Its controller draws two cards\" needs draw to name the (last-known) controller of a target slot; draw takes only a who scope or a player target."
+  },
+  {
+   "name": "Fungal Colossus",
+   "needs": [
+    "effect:distinct-names-count"
+   ],
+   "why": "\"Costs {X} less, where X is the number of differently named lands you control\": selfCostReduction has no differently-named count (only distinctTokenNames exists, as an EffectAmount, for tokens)."
+  },
+  {
+   "name": "Kav Landseeker",
+   "needs": [
+    "effect:delayed-trigger-next-turn-end-step"
+   ],
+   "why": "\"At the beginning of the end step on your next turn, sacrifice that token\": the only own-end-step delayed timing is your-next-end-step, which fires at this turn's end step when the creature enters on your own turn; no timing waits for the end step of your next turn."
+  },
+  {
+   "name": "Lost in Space",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "'Target artifact or creature's owner puts it on their choice of the top or bottom of their library': no effect lets the target's owner choose top or bottom (`each-player-may` reaches only its controller, which differs for a stolen permanent)."
+  },
+  {
+   "name": "Mechan Shieldmate",
+   "needs": [
+    "stat:turn-history-entered-as-it-entered"
+   ],
+   "why": "'As long as an artifact entered the battlefield under your control this turn': the `turn-history` `entered` condition matches each entry's filter as the permanent is now (or last was), but the ruling says it doesn't matter whether that artifact stays an artifact — the engine would turn the ability off if it stopped being one, and on for a nonartifact that later became one."
+  },
+  {
+   "name": "Pinnacle Starcage",
+   "needs": [
+    "effect:exile-all-linked",
+    "effect:exiled-with-source-to-graveyard"
+   ],
+   "why": "\"Exile all artifacts and creatures with mana value 2 or less until this artifact leaves the battlefield\" needs a mass O-Ring (exile-all has no untilSourceLeaves/linked option), and the {6}{W}{W} ability needs to put each card exiled with it into its owner's graveyard and count those for the Robot tokens, which no effect does."
+  },
+  {
+   "name": "Pulsar Squadron Ace",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "'If you didn't put a card into your hand this way, put a +1/+1 counter on this creature': `look-and-choose` has a `then` only for when a card was chosen, and no this-way kind reads 'put into your hand'."
+  },
+  {
+   "name": "Scout for Survivors",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "\"Up to three target creature cards with total mana value 3 or less\" needs a total-mana-value relation across a target group; any-number has only maxTotalPower."
+  },
+  {
+   "name": "Skystinger",
+   "needs": [
+    "trigger:blocks-creature-trigger"
+   ],
+   "why": "'Whenever this creature blocks a creature with flying': the `blocks` trigger has no filter on the creature blocked, and `blocked-by` (filter on the attacker) has no way to say the blocker is this creature."
+  },
+  {
+   "name": "Starport Security",
+   "needs": [
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "\"This ability costs {2} less to activate if you control a creature with a +1/+1 counter on it\": an activated ability's costReduction takes an amount but no condition, so a flat {2} gated on a board condition isn't expressible."
+  },
+  {
+   "name": "Sunstar Chaplain",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "\"Remove a +1/+1 counter from a creature you control\" is a removeCounter cost paid from a chosen permanent other than the source; removeCounter only removes from the source."
+  },
+  {
+   "name": "Tapestry Warden",
+   "needs": [
+    "static:stations-using-toughness"
+   ],
+   "why": "Its second static (combatDamageByToughness) exists, but nothing makes a station ability read the tapped creature's toughness instead of its power (crewsAs covers crew and saddle only)."
+  },
+  {
+   "name": "Thaumaton Torpedo",
+   "needs": [
+    "stat:attacked-with-filter-this-turn",
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "'This ability costs {3} less to activate if you attacked with a Spacecraft this turn': an activated ability's `costReduction` takes no condition, and no turn stat or condition records attacking with a creature matching a filter (Spacecraft)."
+  },
+  {
+   "name": "Tractor Beam",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "static:doesnt-untap-filter"
+   ],
+   "why": "'When this Aura enters, tap enchanted permanent' has no effect target for the enchanted permanent, and 'Enchanted permanent doesn't untap during its controller's untap step' can't be said: the static `doesntUntap` only ever applies to the permanent carrying it."
+  },
+  {
+   "name": "Weftwalking",
+   "needs": [
+    "cost:first-spell-free-each-turn"
+   ],
+   "why": "\"The first spell each player casts during each of their turns may be cast without paying its mana cost\" has no static: alternativeCostForSpells is the controller's only, an unlimited mana alternative, with no each-player or first-spell-each-turn gate."
+  }
+ ]
+}

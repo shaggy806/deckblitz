@@ -38,6 +38,7 @@ import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
+import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBombard from "../pool/bombard.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
@@ -99,6 +100,7 @@ import _poolDesynchronization from "../pool/desynchronization.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
+import _poolDockworkerDrone from "../pool/dockworker-drone.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
@@ -129,6 +131,7 @@ import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
+import _poolGalvanizingSawship from "../pool/galvanizing-sawship.js";
 import _poolGardenize from "../pool/gardenize.js";
 import _poolGatherCourage from "../pool/gather-courage.js";
 import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
@@ -172,6 +175,7 @@ import _poolInklingSummoning from "../pool/inkling-summoning.js";
 import _poolInkshapeDemonstrator from "../pool/inkshape-demonstrator.js";
 import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
 import _poolIntoTheRoil from "../pool/into-the-roil.js";
+import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
@@ -245,6 +249,7 @@ import _poolPutrefax from "../pool/putrefax.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
+import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRaffinesInformant from "../pool/raffines-informant.js";
 import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
@@ -314,6 +319,7 @@ import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
+import _poolSquiresLightblade from "../pool/squires-lightblade.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
@@ -443,6 +449,7 @@ const shard: CardShard = {
     _poolBlightRot,
     _poolBlindCreeper,
     _poolBloodlineBidding,
+    _poolBloomingStinger,
     _poolBombard,
     _poolBoomerangBasics,
     _poolBottomlessPit,
@@ -504,6 +511,7 @@ const shard: CardShard = {
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,
     _poolDjinnOfTheLamp,
+    _poolDockworkerDrone,
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
@@ -534,6 +542,7 @@ const shard: CardShard = {
     _poolFrozenShade,
     _poolFyndhornElves,
     _poolGalvanicBlast,
+    _poolGalvanizingSawship,
     _poolGardenize,
     _poolGatherCourage,
     _poolGatheringOfDarkness,
@@ -577,6 +586,7 @@ const shard: CardShard = {
     _poolInkshapeDemonstrator,
     _poolInsatiableAvarice,
     _poolIntoTheRoil,
+    _poolInvasiveManeuvers,
     _poolIronApprentice,
     _poolJarvisEarthsMightiestButler,
     _poolJinGitaxiasProgressTyrant,
@@ -650,6 +660,7 @@ const shard: CardShard = {
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
+    _poolRadiantStrike,
     _poolRaffinesInformant,
     _poolRaggadraggaGoregutsBoss,
     _poolRagingGoblin,
@@ -719,6 +730,7 @@ const shard: CardShard = {
     _poolSpellseeker,
     _poolSpiketailDrakeling,
     _poolSpiritcallEnthusiast,
+    _poolSquiresLightblade,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
     _poolStoneGiantOfHighPass,

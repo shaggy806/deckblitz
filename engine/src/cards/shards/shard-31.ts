@@ -177,6 +177,7 @@ import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIllusoryAmbusher from "../pool/illusory-ambusher.js";
+import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
@@ -277,6 +278,7 @@ import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
+import _poolRuinousRampage from "../pool/ruinous-rampage.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
@@ -326,6 +328,7 @@ import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
+import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
 import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
@@ -568,6 +571,7 @@ const shard: CardShard = {
     _poolHydroelectricLaboratory,
     _poolIcewindElemental,
     _poolIllusoryAmbusher,
+    _poolIllvoiOperative,
     _poolImmersturmRaider,
     _poolInfestationExpert,
     _poolInheritedEnvelope,
@@ -668,6 +672,7 @@ const shard: CardShard = {
     _poolRollingTemblor,
     _poolRubblebeltMaaka,
     _poolRuggedPrairie,
+    _poolRuinousRampage,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
     _poolSandbarSerpent,
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolTatteredMummy,
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
+    _poolTerrapactIntimidator,
     _poolTheBattleOfBywater,
     _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,

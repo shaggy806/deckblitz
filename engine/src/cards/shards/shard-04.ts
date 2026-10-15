@@ -19,6 +19,7 @@ import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
+import _poolAuxiliaryBoosters from "../pool/auxiliary-boosters.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
 import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
@@ -65,6 +66,7 @@ import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
+import _poolDarkEndurance from "../pool/dark-endurance.js";
 import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
@@ -123,6 +125,7 @@ import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
+import _poolGigastormTitan from "../pool/gigastorm-titan.js";
 import _poolGingerbreadCabin from "../pool/gingerbread-cabin.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
@@ -422,6 +425,7 @@ const shard: CardShard = {
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
     _poolAuroralProcession,
+    _poolAuxiliaryBoosters,
     _poolAvenSkirmisher,
     _poolAviationPioneer,
     _poolAysenBureaucrats,
@@ -468,6 +472,7 @@ const shard: CardShard = {
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
+    _poolDarkEndurance,
     _poolDarklightPhoenix,
     _poolDarksteelMyr,
     _poolDauntlessSurvivor,
@@ -526,6 +531,7 @@ const shard: CardShard = {
     _poolGeodeRager,
     _poolGhostQuarter,
     _poolGiantCrab,
+    _poolGigastormTitan,
     _poolGingerbreadCabin,
     _poolGlenElendraArchmage,
     _poolGoblinAnarchomancer,

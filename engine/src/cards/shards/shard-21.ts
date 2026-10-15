@@ -18,6 +18,7 @@ import _poolArmoryAutomaton from "../pool/armory-automaton.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
+import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
@@ -174,6 +175,7 @@ import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
 import _poolLightningRunner from "../pool/lightning-runner.js";
+import _poolLithobraking from "../pool/lithobraking.js";
 import _poolLoomingShade from "../pool/looming-shade.js";
 import _poolLordOfChange from "../pool/lord-of-change.js";
 import _poolLowlandGiant from "../pool/lowland-giant.js";
@@ -386,6 +388,7 @@ const shard: CardShard = {
     _poolAronBenaliasRuin,
     _poolArrogantVampire,
     _poolAtTheDoor,
+    _poolAtomicMicrosizer,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
     _poolAzoriusCharm,
@@ -542,6 +545,7 @@ const shard: CardShard = {
     _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,
     _poolLightningRunner,
+    _poolLithobraking,
     _poolLoomingShade,
     _poolLordOfChange,
     _poolLowlandGiant,

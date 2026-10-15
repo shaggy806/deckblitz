@@ -106,6 +106,7 @@ import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
 import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
+import _poolDepressurize from "../pool/depressurize.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDispel from "../pool/dispel.js";
 import _poolDistortionStrike from "../pool/distortion-strike.js";
@@ -115,6 +116,7 @@ import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
+import _poolDubiousDelicacy from "../pool/dubious-delicacy.js";
 import _poolDuelistsHeritage from "../pool/duelists-heritage.js";
 import _poolDurkwoodBaloth from "../pool/durkwood-baloth.js";
 import _poolDuskmantleProwler from "../pool/duskmantle-prowler.js";
@@ -289,6 +291,7 @@ import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
+import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
@@ -375,6 +378,7 @@ import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
 import _poolTermagantSwarm from "../pool/termagant-swarm.js";
+import _poolTerminalVelocity from "../pool/terminal-velocity.js";
 import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
 import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
@@ -556,6 +560,7 @@ const shard: CardShard = {
     _poolDeathreapRitual,
     _poolDeathsPresence,
     _poolDelayedBlastFireball,
+    _poolDepressurize,
     _poolDimirLocket,
     _poolDispel,
     _poolDistortionStrike,
@@ -565,6 +570,7 @@ const shard: CardShard = {
     _poolDoublingSeason,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
+    _poolDubiousDelicacy,
     _poolDuelistsHeritage,
     _poolDurkwoodBaloth,
     _poolDuskmantleProwler,
@@ -739,6 +745,7 @@ const shard: CardShard = {
     _poolRatcatcher,
     _poolRavagingHorde,
     _poolRavenousAmulet,
+    _poolRaybladeTrooper,
     _poolRecklessAssault,
     _poolRefresh,
     _poolRenderSpeechless,
@@ -825,6 +832,7 @@ const shard: CardShard = {
     _poolTatyova,
     _poolTavernScoundrel,
     _poolTermagantSwarm,
+    _poolTerminalVelocity,
     _poolTerritorialScythecat,
     _poolTetsukoUmezawaPursuer,
     _poolTezzeretsGambit,

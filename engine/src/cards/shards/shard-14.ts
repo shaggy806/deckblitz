@@ -101,6 +101,7 @@ import _poolDevouringLight from "../pool/devouring-light.js";
 import _poolDevouringSwarm from "../pool/devouring-swarm.js";
 import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
+import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
@@ -149,6 +150,7 @@ import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
 import _poolFreshVolunteers from "../pool/fresh-volunteers.js";
 import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
+import _poolFullBore from "../pool/full-bore.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
@@ -184,6 +186,7 @@ import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
 import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
+import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
 import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
@@ -325,6 +328,7 @@ import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
 import _poolStudy from "../pool/study.js";
+import _poolSunsetSaboteur from "../pool/sunset-saboteur.js";
 import _poolSurgicalSkullbomb from "../pool/surgical-skullbomb.js";
 import _poolSurrakarBanisher from "../pool/surrakar-banisher.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
@@ -355,6 +359,7 @@ import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
+import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
@@ -499,6 +504,7 @@ const shard: CardShard = {
     _poolDevouringSwarm,
     _poolDiabolicTutor,
     _poolDimirSignet,
+    _poolDiplomaticRelations,
     _poolDissentersDeliverance,
     _poolDouseInGloom,
     _poolDragonBellMonk,
@@ -547,6 +553,7 @@ const shard: CardShard = {
     _poolFreshVolunteers,
     _poolFrogtosserBanneret,
     _poolFuelForTheCause,
+    _poolFullBore,
     _poolFuturistForge,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
@@ -582,6 +589,7 @@ const shard: CardShard = {
     _poolHeartOfRamos,
     _poolHeartlessHidetsugu,
     _poolHellsparkElemental,
+    _poolHemosymbicMite,
     _poolHeraldOfThePantheon,
     _poolHexplateWallbreaker,
     _poolHistoryOfBenalia,
@@ -723,6 +731,7 @@ const shard: CardShard = {
     _poolStrafe,
     _poolStrikeItRich,
     _poolStudy,
+    _poolSunsetSaboteur,
     _poolSurgicalSkullbomb,
     _poolSurrakarBanisher,
     _poolSuspiciousShambler,
@@ -753,6 +762,7 @@ const shard: CardShard = {
     _poolUndermine,
     _poolUnexpectedAssistance,
     _poolUnnaturalGrowth,
+    _poolUnravel,
     _poolUpTheBeanstalk,
     _poolUrzasCave,
     _poolUrzasIncubator,

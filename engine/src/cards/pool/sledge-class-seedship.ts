@@ -3,9 +3,9 @@ import { station, stationBand } from "../helpers.js";
 
 // EDHREC rank 8498.
 //
-// Only a creature attacks, so the attack trigger matters from 7+ on; the
-// creature card is put onto the battlefield, not attacking (Elvish Piper's
-// shape).
+// The attack trigger is printed in the 7+ striation (rule 721.2), so it's the
+// band's: an animated Seedship below 7 counters doesn't have it. The creature
+// card is put onto the battlefield, not attacking (Elvish Piper's shape).
 
 const STATION_TEXT =
   "Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. " +
@@ -28,24 +28,24 @@ export default defineCard({
       addTypes: ["creature"],
       setBasePt: { power: 4, toughness: 5 },
       grantKeywords: ["flying"],
-      text: "7+ | Flying",
+      grantsTriggered: [
+        {
+          trigger: { on: "attacks", who: "self" },
+          targets: [],
+          effect: {
+            kind: "look-and-choose",
+            zone: "hand",
+            min: 0,
+            max: 1,
+            destination: "battlefield",
+            leftover: "stay",
+            filter: { type: "creature" },
+          },
+          resolve: null,
+          text: ATTACK_TEXT,
+        },
+      ],
+      text: `7+ | Flying\n${ATTACK_TEXT}`,
     }),
-  ],
-  triggered: [
-    {
-      trigger: { on: "attacks", who: "self" },
-      targets: [],
-      effect: {
-        kind: "look-and-choose",
-        zone: "hand",
-        min: 0,
-        max: 1,
-        destination: "battlefield",
-        leftover: "stay",
-        filter: { type: "creature" },
-      },
-      resolve: null,
-      text: ATTACK_TEXT,
-    },
   ],
 });

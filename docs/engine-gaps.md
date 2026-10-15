@@ -6,6 +6,16 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **"A permanent entered under your control this turn" reads it as it is now.** A `turn-history`
+  condition or amount with `what: "entered"` (`turnHistoryCount`, `characteristics.ts`) matches its
+  `filter` against each permanent that entered as it is now, or as it last existed if it has left —
+  not as it entered. "If an artifact entered the battlefield under your control this turn" asks what
+  entered: an artifact that has since stopped being one still counts, and a permanent that became an
+  artifact after entering doesn't (Mechan Shieldmate's ruling says so outright). In the pool: The
+  Prydwen's Human Knight token (word for word Mechan Shieldmate's clause) and Éowyn, Shieldmaiden.
+  **Fix (outline):** record the entering object's characteristics with the turn-history entry (a
+  snapshot like `lastKnown`, taken as it enters, after its replacement effects) and match `entered`
+  filters against that. Found 2026-10-15 (batch 81).
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the

@@ -117,6 +117,7 @@ import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
+import _poolFellGravship from "../pool/fell-gravship.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
 import _poolFeralProwler from "../pool/feral-prowler.js";
 import _poolFeralRidgewolf from "../pool/feral-ridgewolf.js";
@@ -141,6 +142,7 @@ import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
 import _poolGoForth from "../pool/go-forth.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
+import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
@@ -268,6 +270,7 @@ import _poolScytheLeopard from "../pool/scythe-leopard.js";
 import _poolSeachromeCoast from "../pool/seachrome-coast.js";
 import _poolSeafaringWerewolf from "../pool/seafaring-werewolf.js";
 import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
+import _poolSeamRip from "../pool/seam-rip.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
@@ -500,6 +503,7 @@ const shard: CardShard = {
     _poolExtinguishAllHope,
     _poolEyeOfJace,
     _poolFatefulTempest,
+    _poolFellGravship,
     _poolFellTheProfane,
     _poolFeralProwler,
     _poolFeralRidgewolf,
@@ -524,6 +528,7 @@ const shard: CardShard = {
     _poolGoForth,
     _poolGoblinAssailant,
     _poolGrapeshotCatapult,
+    _poolGravbladeHeavy,
     _poolGreatUglyLookingGoblin,
     _poolGruulLocket,
     _poolHallMonitor,
@@ -651,6 +656,7 @@ const shard: CardShard = {
     _poolSeachromeCoast,
     _poolSeafaringWerewolf,
     _poolSeagrafSkaab,
+    _poolSeamRip,
     _poolSearingSpearAskari,
     _poolSeedshipImpact,
     _poolSelflessPoliceCaptain,

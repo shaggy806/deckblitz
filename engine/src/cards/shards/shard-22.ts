@@ -153,6 +153,7 @@ import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
+import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
@@ -173,6 +174,7 @@ import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
+import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
@@ -564,6 +566,7 @@ const shard: CardShard = {
     _poolHydraOmnivore,
     _poolHydraulicHelper,
     _poolIconOfAncestry,
+    _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
     _poolInexorableTide,
     _poolInfestedWerewolf,
@@ -584,6 +587,7 @@ const shard: CardShard = {
     _poolKnightOfTheWhiteOrchid,
     _poolKonstrariAnnex,
     _poolLaserScrewdriver,
+    _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
     _poolLethalScheme,
     _poolLightningJavelin,

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3624 already implemented / 1376 missing (marks refreshed 2026-10-15)
+3626 already implemented / 1374 missing (marks refreshed 2026-10-15)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2850,7 +2850,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2857  Ratadrabik of Urborg                     {2}{W}{B}        Legendary Creature — Zombie Wizard
 [ ]  2858  Wyll's Reversal                          {2}{R}           Instant
 [ ]  2859  Sunspine Lynx                            {2}{R}{R}        Creature — Elemental Cat
-[ ]  2860  Hell to Pay                              {X}{R}           Sorcery
+[x]  2860  Hell to Pay                              {X}{R}           Sorcery
 [ ]  2861  Ichormoon Gauntlet                       {2}{U}           Artifact
 [x]  2862  Drift of Phantasms                       {2}{U}           Creature — Spirit
 [x]  2863  Sacrifice                                {B}              Instant
@@ -3865,7 +3865,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3872  Karlov of the Ghost Council              {W}{B}           Legendary Creature — Spirit Advisor
 [x]  3873  Expansion // Explosion                   {U/R}{U/R} // {X}{U}{U}{R}{R} Instant // Instant
 [x]  3874  Reya Dawnbringer                         {6}{W}{W}{W}     Legendary Creature — Angel
-[ ]  3875  Windswift Slice                          {2}{G}           Instant
+[x]  3875  Windswift Slice                          {2}{G}           Instant
 [x]  3876  Trash for Treasure                       {2}{R}           Sorcery
 [x]  3877  Star of Extinction                       {5}{R}{R}        Sorcery
 [x]  3878  Genesis Ultimatum                        {G}{G}{U}{U}{U}{R}{R} Sorcery

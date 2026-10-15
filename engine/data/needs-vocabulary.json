@@ -6216,6 +6216,38 @@
   "effect:put-on-library-this-way": {
    "family": "effect:this-way-results",
    "example": "The Spot, Living Portal: A this-way kind (or 'if you do' gate) for a put-on-library that actually moved its object — The Spot, Living Portal's 'put him on the bottom of his owner's library. If you do, return the exiled cards to their owners' hands' (false for a token, or a card no longer in the graveyard)."
+  },
+  "condition:filter-has-warp": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Blade of the Swarm: A CardFilter clause for a card that has warp ('target exiled card with warp' — Blade of the Swarm); warp is a card field, not a Keyword, so `keyword` can't match it."
+  },
+  "cost:choose-creature-or-warped-card-as-cost": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Close Encounter: An additional cost that chooses (without sacrificing) a creature you control or a warped creature card you own in exile, with an amount reading the chosen object's power at resolution, last-known if it left (Close Encounter)."
+  },
+  "bug:cda-cards-owned-in-exile": {
+   "family": "bug:cda-all-zones",
+   "example": "Cosmogoyf: A setBasePtFromCount CountSpec counting the cards the CDA's owner owns in exile, read in every zone (Cosmogoyf: power equal to the number of cards you own in exile, toughness that plus 1)."
+  },
+  "effect:delayed-trigger-next-turn-end-step": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Kav Landseeker: A delayed trigger at the beginning of the end step of the controller's next turn (Kav Landseeker: \"at the beginning of the end step on your next turn, sacrifice that token\"), distinct from your-next-end-step, which can be this turn's."
+  },
+  "stat:turn-history-entered-as-it-entered": {
+   "family": "stat:turn-event-tallies",
+   "example": "Mechan Shieldmate: A `turn-history` `entered` filter matched against the permanent as it entered, not as it is now — 'as long as an artifact entered the battlefield under your control this turn' (Mechan Shieldmate's ruling: it doesn't matter if that artifact stays an artifact)."
+  },
+  "cost:ability-cost-reduction-conditional": {
+   "family": "cost:ability-cost-modification",
+   "example": "Starport Security: An activated ability's own cost reduction gated on a condition ('This ability costs {3} less to activate if you attacked with a Spacecraft this turn' — Thaumaton Torpedo); `ActivatedAbility.costReduction` has no `condition`."
+  },
+  "static:stations-using-toughness": {
+   "family": "mechanic:station",
+   "example": "Tapestry Warden: A static under which creatures you control with toughness greater than power station permanents using their toughness: the station ability's charge count reads the tapped creature's toughness (as it last existed) while the static's controller controls it at resolution (Tapestry Warden)."
+  },
+  "cost:first-spell-free-each-turn": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Weftwalking: A static letting each player cast the first spell they cast during each of their own turns without paying its mana cost (Weftwalking): a free-cast alternative cost for every player, gated to the first spell of the turn."
   }
  }
 }

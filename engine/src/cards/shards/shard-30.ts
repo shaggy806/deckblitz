@@ -87,6 +87,7 @@ import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
 import _poolDeathlessPilot from "../pool/deathless-pilot.js";
+import _poolDebrisFieldCrusher from "../pool/debris-field-crusher.js";
 import _poolDecisiveDenial from "../pool/decisive-denial.js";
 import _poolDefeat from "../pool/defeat.js";
 import _poolDefendTheRider from "../pool/defend-the-rider.js";
@@ -332,6 +333,7 @@ import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
+import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
@@ -495,6 +497,7 @@ const shard: CardShard = {
     _poolDawnbringerCleric,
     _poolDayOfJudgment,
     _poolDeathlessPilot,
+    _poolDebrisFieldCrusher,
     _poolDecisiveDenial,
     _poolDefeat,
     _poolDefendTheRider,
@@ -740,6 +743,7 @@ const shard: CardShard = {
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
     _poolStridingShotcaller,
+    _poolSwarmCuller,
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolTangleMantis,

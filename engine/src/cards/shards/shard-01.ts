@@ -54,6 +54,7 @@ import _poolClaimTheKingdom from "../pool/claim-the-kingdom.js";
 import _poolClarionCathars from "../pool/clarion-cathars.js";
 import _poolClementTheWorrywort from "../pool/clement-the-worrywort.js";
 import _poolCloudheathDrake from "../pool/cloudheath-drake.js";
+import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
 import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
@@ -296,6 +297,7 @@ import _poolSpectralRider from "../pool/spectral-rider.js";
 import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolStab from "../pool/stab.js";
+import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
@@ -366,6 +368,7 @@ import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
+import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
 import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
@@ -439,6 +442,7 @@ const shard: CardShard = {
     _poolClarionCathars,
     _poolClementTheWorrywort,
     _poolCloudheathDrake,
+    _poolCloudsculptTechnician,
     _poolCoastWatcher,
     _poolCodexShredder,
     _poolComeBackWrong,
@@ -681,6 +685,7 @@ const shard: CardShard = {
     _poolSpellSwindle,
     _poolSpewFlame,
     _poolStab,
+    _poolStarbreachWhale,
     _poolStartingColumn,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
@@ -751,6 +756,7 @@ const shard: CardShard = {
     _poolWastewoodVerge,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
+    _poolWeftbladeEnhancer,
     _poolWestWindAvatar,
     _poolWestvaleAbbey,
     _poolWhirlwingStormbrood,

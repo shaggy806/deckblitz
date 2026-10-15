@@ -180,6 +180,7 @@ import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
+import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
 import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
@@ -572,6 +573,7 @@ const shard: CardShard = {
     _poolJundBattlemage,
     _poolKaaliaOfTheVast,
     _poolKaraiFutureOfTheFoot,
+    _poolKavaronHarrier,
     _poolKeepersOfTheFaith,
     _poolKessigRecluse,
     _poolKherKeep,

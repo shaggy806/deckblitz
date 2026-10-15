@@ -105,6 +105,7 @@ import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
+import _poolDesculptingBlast from "../pool/desculpting-blast.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
@@ -141,6 +142,7 @@ import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
+import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
@@ -282,6 +284,7 @@ import _poolRuinationWurm from "../pool/ruination-wurm.js";
 import _poolRuinsRecluse from "../pool/ruins-recluse.js";
 import _poolRumbleweed from "../pool/rumbleweed.js";
 import _poolRuptureSpire from "../pool/rupture-spire.js";
+import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
@@ -515,6 +518,7 @@ const shard: CardShard = {
     _poolDefiantElf,
     _poolDemonsDisciple,
     _poolDemonsGrasp,
+    _poolDesculptingBlast,
     _poolDigsiteEngineer,
     _poolDireStrainDemolisher,
     _poolDismember,
@@ -551,6 +555,7 @@ const shard: CardShard = {
     _poolGaleSwooper,
     _poolGarruksPackleader,
     _poolGatewaySneak,
+    _poolGenemorphImago,
     _poolGenjiGlove,
     _poolGhostlyChangeling,
     _poolGiantOx,
@@ -692,6 +697,7 @@ const shard: CardShard = {
     _poolRuinsRecluse,
     _poolRumbleweed,
     _poolRuptureSpire,
+    _poolRustHarvester,
     _poolSaltFlats,
     _poolSamutsSprint,
     _poolSarkhanUnbroken,

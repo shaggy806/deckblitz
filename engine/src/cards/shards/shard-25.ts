@@ -43,6 +43,7 @@ import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
+import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
@@ -204,6 +205,8 @@ import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
+import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
+import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -434,6 +437,7 @@ const shard: CardShard = {
     _poolBranchOfBoseiju,
     _poolBrazenBorrower,
     _poolBrazenScourge,
+    _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
     _poolBumbleflowersSharepot,
@@ -595,6 +599,8 @@ const shard: CardShard = {
     _poolMantisRider,
     _poolMaryReadAndAnneBonny,
     _poolMasterOfEtherium,
+    _poolMeltstridersGear,
+    _poolMemorialTeamLeader,
     _poolMemoryGuardian,
     _poolMinotaurAbomination,
     _poolMiscalculation,

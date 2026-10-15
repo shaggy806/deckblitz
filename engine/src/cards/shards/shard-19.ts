@@ -237,6 +237,7 @@ import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
 import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
+import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
 import _poolMorlunDevourerOfSpiders from "../pool/morlun-devourer-of-spiders.js";
 import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
@@ -324,6 +325,7 @@ import _poolShadowInTheWarp from "../pool/shadow-in-the-warp.js";
 import _poolShadowTheHedgehog from "../pool/shadow-the-hedgehog.js";
 import _poolShadowmageInfiltrator from "../pool/shadowmage-infiltrator.js";
 import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js";
+import _poolShatteredWings from "../pool/shattered-wings.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
 import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
@@ -389,6 +391,7 @@ import _poolUrborgDrake from "../pool/urborg-drake.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
 import _poolUtopiaMycon from "../pool/utopia-mycon.js";
 import _poolVampiricSpirit from "../pool/vampiric-spirit.js";
+import _poolVaultguardTrooper from "../pool/vaultguard-trooper.js";
 import _poolVectorImperialCapital from "../pool/vector-imperial-capital.js";
 import _poolVengefulVampire from "../pool/vengeful-vampire.js";
 import _poolVigilance from "../pool/vigilance.js";
@@ -670,6 +673,7 @@ const shard: CardShard = {
     _poolMirarisWake,
     _poolMiresGrasp,
     _poolMoldervineReclamation,
+    _poolMonoistCircuitFeeder,
     _poolMorlunDevourerOfSpiders,
     _poolMorophonTheBoundless,
     _poolMuckRats,
@@ -757,6 +761,7 @@ const shard: CardShard = {
     _poolShadowTheHedgehog,
     _poolShadowmageInfiltrator,
     _poolShangChiAndTheTenRings,
+    _poolShatteredWings,
     _poolShefetDunes,
     _poolShortcutToMushrooms,
     _poolShuEliteInfantry,
@@ -822,6 +827,7 @@ const shard: CardShard = {
     _poolUrzaPrinceOfKroog,
     _poolUtopiaMycon,
     _poolVampiricSpirit,
+    _poolVaultguardTrooper,
     _poolVectorImperialCapital,
     _poolVengefulVampire,
     _poolVigilance,

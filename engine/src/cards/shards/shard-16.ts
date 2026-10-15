@@ -104,6 +104,7 @@ import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
+import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
 import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
@@ -128,6 +129,7 @@ import _poolFomoriNomad from "../pool/fomori-nomad.js";
 import _poolFoulOrchard from "../pool/foul-orchard.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
 import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
+import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
 import _poolFrostbitePyromental from "../pool/frostbite-pyromental.js";
 import _poolFurycalmSnarl from "../pool/furycalm-snarl.js";
 import _poolFutureFlight from "../pool/future-flight.js";
@@ -538,6 +540,7 @@ const shard: CardShard = {
     _poolEssenceFlux,
     _poolEternalWarrior,
     _poolEtherealInvestigator,
+    _poolExosuitSavior,
     _poolExtravagantReplication,
     _poolFaerieSeer,
     _poolFalconJoaquinTorres,
@@ -562,6 +565,7 @@ const shard: CardShard = {
     _poolFoulOrchard,
     _poolFrilledOculus,
     _poolFrilledSandwalla,
+    _poolFrontlineWarRager,
     _poolFrostbitePyromental,
     _poolFurycalmSnarl,
     _poolFutureFlight,

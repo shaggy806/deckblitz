@@ -55,6 +55,7 @@ import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
+import _poolCometCrawler from "../pool/comet-crawler.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
 import _poolConcentratedFire from "../pool/concentrated-fire.js";
@@ -448,6 +449,7 @@ const shard: CardShard = {
     _poolCinderbones,
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
+    _poolCometCrawler,
     _poolCompulsiveResearch,
     _poolConcentrate,
     _poolConcentratedFire,

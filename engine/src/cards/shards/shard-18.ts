@@ -147,6 +147,7 @@ import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
+import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
 import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
@@ -195,6 +196,7 @@ import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
 import _poolManticoreEternal from "../pool/manticore-eternal.js";
 import _poolMassHysteria from "../pool/mass-hysteria.js";
+import _poolMechanozoa from "../pool/mechanozoa.js";
 import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
@@ -232,6 +234,7 @@ import _poolPileOn from "../pool/pile-on.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
+import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
@@ -564,6 +567,7 @@ const shard: CardShard = {
     _poolHippoCows,
     _poolHornOfGondor,
     _poolIcetillExplorer,
+    _poolIllvoiInfiltrator,
     _poolIndependentTroops,
     _poolInfernoFist,
     _poolInkEyesServantOfOni,
@@ -612,6 +616,7 @@ const shard: CardShard = {
     _poolManholeCover,
     _poolManticoreEternal,
     _poolMassHysteria,
+    _poolMechanozoa,
     _poolMelancholicPoet,
     _poolMemorialToFolly,
     _poolMichelangeloTheHeart,
@@ -649,6 +654,7 @@ const shard: CardShard = {
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
     _poolPlatedRootwalla,
+    _poolPossibilityTechnician,
     _poolPouncingCheetah,
     _poolPrimalAmulet,
     _poolProftsEideticMemory,

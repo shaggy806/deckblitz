@@ -135,6 +135,7 @@ import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
+import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHeapGate from "../pool/heap-gate.js";
@@ -192,6 +193,7 @@ import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
 import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
+import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
@@ -317,6 +319,7 @@ import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
+import _poolTerritorialBruntar from "../pool/territorial-bruntar.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
@@ -519,6 +522,7 @@ const shard: CardShard = {
     _poolGutterSkulk,
     _poolHaakonStromgaldScourge,
     _poolHarbingerOfTheHunt,
+    _poolHarmoniousGrovestrider,
     _poolHarmonizedTrio,
     _poolHavocSower,
     _poolHeapGate,
@@ -576,6 +580,7 @@ const shard: CardShard = {
     _poolMassiveMight,
     _poolMasterTransmuter,
     _poolMeatLocker,
+    _poolMechanNavigator,
     _poolMetalworkColossus,
     _poolMindMeanderer,
     _poolMistCloakedHerald,
@@ -701,6 +706,7 @@ const shard: CardShard = {
     _poolTemporalTrespass,
     _poolTerminalCriticism,
     _poolTerrianWorldTyrant,
+    _poolTerritorialBruntar,
     _poolThassaGodOfTheSea,
     _poolTheEchoverseFulcrum,
     _poolTheFireCrystal,

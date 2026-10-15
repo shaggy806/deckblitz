@@ -68,7 +68,8 @@ section keeps only what to do next.
   seven of them Lorwyn Eclipsed's) needs the player to choose which counters when there are
   several kinds, so it's a new decision; build the two together. Also at five now:
   `decision:owner-chooses-top-or-bottom` — the target's owner chooses top or bottom of their
-  library (Trickster's Stratagem, Run Behind, Return to the Sewers, Swat Away, Lost Days). Excess
+  library (Trickster's Stratagem, Run Behind, Return to the Sewers, Swat Away, Lost Days, Lost in
+  Space — six). Excess
   damage is built; of its cards, Bolg of the North waits on reading a creature sacrificed as a
   `may` resolves from its reflexive trigger, Violent Echoes on empower, Fall of Cair Andros on an
   excess-damage trigger
@@ -82,9 +83,9 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Edge of Eternities
-  (EOE, 102 left) back to Bloomburrow, about 780 cards (`npm run cards:sets -w engine -- --sets
-  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Marvel's Spider-Man is
+  ranked ones first. **First, the rest of the sets already walked** — Final Fantasy and
+  its Commander set (FIN, FIC, 173 left, in progress) back to Bloomburrow, about 680 cards (`npm run cards:sets -w engine -- --sets
+  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Edge of Eternities is
   whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
@@ -127,6 +128,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **"A permanent entered under your control this turn" reads it as it is now**: a `turn-history` `entered` filter checks each permanent as it is now or last was, not as it entered — wrong once it changes type; The Prydwen's Knight, Éowyn, Shieldmaiden (Mechan Shieldmate waits on it).
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).

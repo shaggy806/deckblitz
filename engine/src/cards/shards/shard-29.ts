@@ -64,6 +64,7 @@ import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
 import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
 import _poolCrushingVines from "../pool/crushing-vines.js";
+import _poolCryoshatter from "../pool/cryoshatter.js";
 import _poolCryptIncursion from "../pool/crypt-incursion.js";
 import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
@@ -74,6 +75,7 @@ import _poolDarkOffering from "../pool/dark-offering.js";
 import _poolDarkProphecy from "../pool/dark-prophecy.js";
 import _poolDarklingStalker from "../pool/darkling-stalker.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
+import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
 import _poolDebrisBeetle from "../pool/debris-beetle.js";
 import _poolDecoctionModule from "../pool/decoction-module.js";
@@ -120,6 +122,7 @@ import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
+import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
@@ -178,6 +181,7 @@ import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
+import _poolKnightLuminary from "../pool/knight-luminary.js";
 import _poolKnightlyValor from "../pool/knightly-valor.js";
 import _poolKraulRaider from "../pool/kraul-raider.js";
 import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
@@ -221,6 +225,7 @@ import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
 import _poolOldGhastbark from "../pool/old-ghastbark.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
+import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
@@ -305,6 +310,7 @@ import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
+import _poolStationMonitor from "../pool/station-monitor.js";
 import _poolStatureSizeShifter from "../pool/stature-size-shifter.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
@@ -458,6 +464,7 @@ const shard: CardShard = {
     _poolCravenKnight,
     _poolCrumblingVestige,
     _poolCrushingVines,
+    _poolCryoshatter,
     _poolCryptIncursion,
     _poolCrypticTrilobite,
     _poolDailyBugleReporters,
@@ -468,6 +475,7 @@ const shard: CardShard = {
     _poolDarkProphecy,
     _poolDarklingStalker,
     _poolDaughterOfTheDeep,
+    _poolDawnstrikeVanguard,
     _poolDazzlingDenial,
     _poolDebrisBeetle,
     _poolDecoctionModule,
@@ -514,6 +522,7 @@ const shard: CardShard = {
     _poolFlamebraider,
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
+    _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForbiddenAlchemy,
     _poolFracturedSanity,
@@ -572,6 +581,7 @@ const shard: CardShard = {
     _poolJwariDisruption,
     _poolKazanduNectarpot,
     _poolKessigWolf,
+    _poolKnightLuminary,
     _poolKnightlyValor,
     _poolKraulRaider,
     _poolKrovikanScoundrel,
@@ -615,6 +625,7 @@ const shard: CardShard = {
     _poolOldGhastbark,
     _poolOminousSeas,
     _poolOnyxMage,
+    _poolOrbitalPlunge,
     _poolOrcishMedicine,
     _poolOtharriSunsGlory,
     _poolOwlinHistorian,
@@ -699,6 +710,7 @@ const shard: CardShard = {
     _poolSpottedGriffin,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,
+    _poolStationMonitor,
     _poolStatureSizeShifter,
     _poolSteadfastness,
     _poolSteelSeraph,

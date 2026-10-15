@@ -334,6 +334,7 @@ import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
+import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
@@ -740,6 +741,7 @@ const shard: CardShard = {
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
+    _poolSunstarExpansionist,
     _poolSurveillancePhantasm,
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,

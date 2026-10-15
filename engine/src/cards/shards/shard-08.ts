@@ -359,6 +359,7 @@ import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolTenuredConcocter from "../pool/tenured-concocter.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
+import _poolThawbringer from "../pool/thawbringer.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
@@ -411,6 +412,7 @@ import _poolWorldlyTutor from "../pool/worldly-tutor.js";
 import _poolWreckingCrew from "../pool/wrecking-crew.js";
 import _poolYavimayaCoast from "../pool/yavimaya-coast.js";
 import _poolYouFindSomePrisoners from "../pool/you-find-some-prisoners.js";
+import _poolZealousDisplay from "../pool/zealous-display.js";
 import _poolZealousStrike from "../pool/zealous-strike.js";
 import _poolZimoneParadoxSculptor from "../pool/zimone-paradox-sculptor.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
@@ -787,6 +789,7 @@ const shard: CardShard = {
     _poolTemurDevotee,
     _poolTenuredConcocter,
     _poolThaliasLancers,
+    _poolThawbringer,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
     _poolThornfistStriker,
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolWreckingCrew,
     _poolYavimayaCoast,
     _poolYouFindSomePrisoners,
+    _poolZealousDisplay,
     _poolZealousStrike,
     _poolZimoneParadoxSculptor,
     _poolZodiacOx,

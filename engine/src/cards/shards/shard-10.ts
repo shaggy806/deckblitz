@@ -327,6 +327,7 @@ import _poolSummonTitan from "../pool/summon-titan.js";
 import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
 import _poolSustenance from "../pool/sustenance.js";
+import _poolSusurianDirgecraft from "../pool/susurian-dirgecraft.js";
 import _poolSwarmIntelligence from "../pool/swarm-intelligence.js";
 import _poolSwirlingTorrent from "../pool/swirling-torrent.js";
 import _poolSwordOfTruthAndJustice from "../pool/sword-of-truth-and-justice.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolSurgicalSuiteHospitalRoom,
     _poolSurveillingSprite,
     _poolSustenance,
+    _poolSusurianDirgecraft,
     _poolSwarmIntelligence,
     _poolSwirlingTorrent,
     _poolSwordOfTruthAndJustice,

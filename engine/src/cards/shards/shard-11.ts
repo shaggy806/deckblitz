@@ -69,6 +69,7 @@ import _poolCivicStalwart from "../pool/civic-stalwart.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
+import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
@@ -209,6 +210,7 @@ import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
+import _poolMemorialVault from "../pool/memorial-vault.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
 import _poolMeteorite from "../pool/meteorite.js";
@@ -416,6 +418,7 @@ import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
 import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
 import _poolWaywardGiant from "../pool/wayward-giant.js";
+import _poolWedgelightRammer from "../pool/wedgelight-rammer.js";
 import _poolWhiptongueHydra from "../pool/whiptongue-hydra.js";
 import _poolWhirlwindTechnique from "../pool/whirlwind-technique.js";
 import _poolWieldingTheGreenDragon from "../pool/wielding-the-green-dragon.js";
@@ -511,6 +514,7 @@ const shard: CardShard = {
     _poolClifftopRetreat,
     _poolClockworkDrawbridge,
     _poolCoatWithVenom,
+    _poolCodecrackerHound,
     _poolCoffinPurge,
     _poolConclaveMentor,
     _poolConduitOfWorlds,
@@ -651,6 +655,7 @@ const shard: CardShard = {
     _poolMaraudingMako,
     _poolMasterPakku,
     _poolMeditationPuzzle,
+    _poolMemorialVault,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,
     _poolMeteorite,
@@ -858,6 +863,7 @@ const shard: CardShard = {
     _poolWaterfallAerialist,
     _poolWayOfTheMentor,
     _poolWaywardGiant,
+    _poolWedgelightRammer,
     _poolWhiptongueHydra,
     _poolWhirlwindTechnique,
     _poolWieldingTheGreenDragon,

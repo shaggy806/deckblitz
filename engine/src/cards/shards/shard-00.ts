@@ -32,6 +32,7 @@ import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
 import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
+import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
 import _poolBladewingTheRisen from "../pool/bladewing-the-risen.js";
@@ -104,6 +105,7 @@ import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
 import _poolEarthshape from "../pool/earthshape.js";
+import _poolEdgeRover from "../pool/edge-rover.js";
 import _poolElfhameWurm from "../pool/elfhame-wurm.js";
 import _poolEliteArchers from "../pool/elite-archers.js";
 import _poolElvishHandservant from "../pool/elvish-handservant.js";
@@ -322,6 +324,7 @@ import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
 import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
+import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
@@ -449,6 +452,7 @@ const shard: CardShard = {
     _poolBeamsawProspector,
     _poolBeastAttack,
     _poolBigfinBouncer,
+    _poolBiomechanEngineer,
     _poolBirthingBoughs,
     _poolBlackWidowAgileAvenger,
     _poolBladewingTheRisen,
@@ -521,6 +525,7 @@ const shard: CardShard = {
     _poolEagerTrufflesnout,
     _poolEarthquake,
     _poolEarthshape,
+    _poolEdgeRover,
     _poolElfhameWurm,
     _poolEliteArchers,
     _poolElvishHandservant,
@@ -739,6 +744,7 @@ const shard: CardShard = {
     _poolSpinedMegalodon,
     _poolStandUpForYourself,
     _poolStarfieldMystic,
+    _poolStarfighterPilot,
     _poolStarkIndustries,
     _poolStitchInTime,
     _poolStoneworkPuma,
