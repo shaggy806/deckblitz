@@ -1,0 +1,1162 @@
+{
+ "batch": "B72",
+ "status": "complete",
+ "ranks": "The Hobbit (HOB, 2026-08-14): the rest of the set; Marvel Super Heroes Commander (MSC, 2026-06-26): the first 78 of its rest (ranks first); with discard-chosen (reveal a hand, you choose, they discard), the powerOfTwo amount and the cards they unblocked (Duress, Thoughtseize, Mathemagics and more)",
+ "authored": [
+  {
+   "name": "Alex Wilder, Runaway",
+   "files": [
+    "engine/src/cards/pool/alex-wilder-runaway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Big Bertha",
+   "files": [
+    "engine/src/cards/pool/big-bertha.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Black Bolt, Inhuman King",
+   "files": [
+    "engine/src/cards/pool/black-bolt-inhuman-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Panther, Claws of Bast",
+   "files": [
+    "engine/src/cards/pool/black-panther-claws-of-bast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Tom Cassidy",
+   "files": [
+    "engine/src/cards/pool/black-tom-cassidy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Widow, Daring Operative",
+   "files": [
+    "engine/src/cards/pool/black-widow-daring-operative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blue Marvel, Adam Brashear",
+   "files": [
+    "engine/src/cards/pool/blue-marvel-adam-brashear.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bob, Reluctant HYDRA Agent",
+   "files": [
+    "engine/src/cards/pool/bob-reluctant-hydra-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boomerang, Blade Flinger",
+   "files": [
+    "engine/src/cards/pool/boomerang-blade-flinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boughside Wanderers",
+   "files": [
+    "engine/src/cards/pool/boughside-wanderers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bucky Barnes, Eager Ally",
+   "files": [
+    "engine/src/cards/pool/bucky-barnes-eager-ally.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burn, Burn, Tree and Fern",
+   "files": [
+    "engine/src/cards/pool/burn-burn-tree-and-fern.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cantankerous Keepers",
+   "files": [
+    "engine/src/cards/pool/cantankerous-keepers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America, Steve Rogers",
+   "files": [
+    "engine/src/cards/pool/captain-america-steve-rogers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chase Stein, Runaway",
+   "files": [
+    "engine/src/cards/pool/chase-stein-runaway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chief Warg's Company",
+   "files": [
+    "engine/src/cards/pool/chief-wargs-company.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Citizen V, Helmut Zemo",
+   "files": [
+    "engine/src/cards/pool/citizen-v-helmut-zemo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coercion",
+   "files": [
+    "engine/src/cards/pool/coercion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Colossal Collision",
+   "files": [
+    "engine/src/cards/pool/colossal-collision.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Colossus, Steel Stalwart",
+   "files": [
+    "engine/src/cards/pool/colossus-steel-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Criminal Enterprise",
+   "files": [
+    "engine/src/cards/pool/criminal-enterprise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crimson Operative",
+   "files": [
+    "engine/src/cards/pool/crimson-operative.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crossover Collaboration",
+   "files": [
+    "engine/src/cards/pool/crossover-collaboration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daredevil's Billy Club",
+   "files": [
+    "engine/src/cards/pool/daredevils-billy-club.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doom's Servo-Guards",
+   "files": [
+    "engine/src/cards/pool/dooms-servo-guards.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Down in the Valley",
+   "files": [
+    "engine/src/cards/pool/down-in-the-valley.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Down, Down to Goblin-town",
+   "files": [
+    "engine/src/cards/pool/down-down-to-goblin-town.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreaded Bat-Cloud",
+   "files": [
+    "engine/src/cards/pool/dreaded-bat-cloud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duress",
+   "files": [
+    "engine/src/cards/pool/duress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskwatch Hunter",
+   "files": [
+    "engine/src/cards/pool/duskwatch-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eagle of the Great Shelf",
+   "files": [
+    "engine/src/cards/pool/eagle-of-the-great-shelf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvenking's Halls",
+   "files": [
+    "engine/src/cards/pool/elvenkings-halls.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Esgaroth Garrison",
+   "files": [
+    "engine/src/cards/pool/esgaroth-garrison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falcon, Joaquin Torres",
+   "files": [
+    "engine/src/cards/pool/falcon-joaquin-torres.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foggy Nelson, On Retainer",
+   "files": [
+    "engine/src/cards/pool/foggy-nelson-on-retainer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Galion, Elvenking's Butler",
+   "files": [
+    "engine/src/cards/pool/galion-elvenkings-butler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gandalf, Spark Starter",
+   "files": [
+    "engine/src/cards/pool/gandalf-spark-starter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gastal Raider",
+   "files": [
+    "engine/src/cards/pool/gastal-raider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gaze in Wonder",
+   "files": [
+    "engine/src/cards/pool/gaze-in-wonder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "General Thunderbolt Ross",
+   "files": [
+    "engine/src/cards/pool/general-thunderbolt-ross.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gert and Old Lace, Runaways",
+   "files": [
+    "engine/src/cards/pool/gert-and-old-lace-runaways.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant-Man, Gargantuan Genius",
+   "files": [
+    "engine/src/cards/pool/giant-man-gargantuan-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gollum the Abandoned",
+   "files": [
+    "engine/src/cards/pool/gollum-the-abandoned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gollum, Silent Slinker",
+   "files": [
+    "engine/src/cards/pool/gollum-silent-slinker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gone Fishing",
+   "files": [
+    "engine/src/cards/pool/gone-fishing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graviton, Fundamental Force",
+   "files": [
+    "engine/src/cards/pool/graviton-fundamental-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Gilded Boat",
+   "files": [
+    "engine/src/cards/pool/great-gilded-boat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gundabad Opportunist",
+   "files": [
+    "engine/src/cards/pool/gundabad-opportunist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hawkeye, Bowslinger",
+   "files": [
+    "engine/src/cards/pool/hawkeye-bowslinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero in Training",
+   "files": [
+    "engine/src/cards/pool/hero-in-training.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hulkling, Young Avenger",
+   "files": [
+    "engine/src/cards/pool/hulkling-young-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iconic Shield",
+   "files": [
+    "engine/src/cards/pool/iconic-shield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impossible Man",
+   "files": [
+    "engine/src/cards/pool/impossible-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Rebirth",
+   "files": [
+    "engine/src/cards/pool/infernal-rebirth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Infinity Formula",
+   "files": [
+    "engine/src/cards/pool/infinity-formula.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inquisition of Kozilek",
+   "files": [
+    "engine/src/cards/pool/inquisition-of-kozilek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Fist, Hero for Hire",
+   "files": [
+    "engine/src/cards/pool/iron-fist-hero-for-hire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Hills Stalwart",
+   "files": [
+    "engine/src/cards/pool/iron-hills-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Suitcase",
+   "files": [
+    "engine/src/cards/pool/iron-suitcase.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lady Spider, Maybelle Reilly",
+   "files": [
+    "engine/src/cards/pool/lady-spider-maybelle-reilly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lake-town",
+   "files": [
+    "engine/src/cards/pool/lake-town.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lake-town Lookout",
+   "files": [
+    "engine/src/cards/pool/lake-town-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lake-town Mariners",
+   "files": [
+    "engine/src/cards/pool/lake-town-mariners.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lake-town Toymaker",
+   "files": [
+    "engine/src/cards/pool/lake-town-toymaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lakeshore Apothecary",
+   "files": [
+    "engine/src/cards/pool/lakeshore-apothecary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Living Lies of Loki",
+   "files": [
+    "engine/src/cards/pool/living-lies-of-loki.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Long Lake Nuisance",
+   "files": [
+    "engine/src/cards/pool/long-lake-nuisance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Madame Hydra, Reanimated",
+   "files": [
+    "engine/src/cards/pool/madame-hydra-reanimated.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mathemagics",
+   "files": [
+    "engine/src/cards/pool/mathemagics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meager Meal",
+   "files": [
+    "engine/src/cards/pool/meager-meal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minotaur, Roxxon CEO",
+   "files": [
+    "engine/src/cards/pool/minotaur-roxxon-ceo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirkwood",
+   "files": [
+    "engine/src/cards/pool/mirkwood.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirkwood Meditator",
+   "files": [
+    "engine/src/cards/pool/mirkwood-meditator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirkwood Nurturer",
+   "files": [
+    "engine/src/cards/pool/mirkwood-nurturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirkwood Pathmaker",
+   "files": [
+    "engine/src/cards/pool/mirkwood-pathmaker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mjölnir's Might",
+   "files": [
+    "engine/src/cards/pool/mjolnirs-might.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moment of Glory",
+   "files": [
+    "engine/src/cards/pool/moment-of-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moon-Boy, Dino Rider",
+   "files": [
+    "engine/src/cards/pool/moon-boy-dino-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Most Decrepit Old Bird",
+   "files": [
+    "engine/src/cards/pool/most-decrepit-old-bird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nasty Little Rabbit",
+   "files": [
+    "engine/src/cards/pool/nasty-little-rabbit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nick Fury, Spymaster",
+   "files": [
+    "engine/src/cards/pool/nick-fury-spymaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nighthowl Pursuer",
+   "files": [
+    "engine/src/cards/pool/nighthowl-pursuer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oildeep Gearhulk",
+   "files": [
+    "engine/src/cards/pool/oildeep-gearhulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old Thrush",
+   "files": [
+    "engine/src/cards/pool/old-thrush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of the Hulk",
+   "files": [
+    "engine/src/cards/pool/origin-of-the-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patient Instructor",
+   "files": [
+    "engine/src/cards/pool/patient-instructor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Photon, Lady of Light",
+   "files": [
+    "engine/src/cards/pool/photon-lady-of-light.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plunder the Trollshaws",
+   "files": [
+    "engine/src/cards/pool/plunder-the-trollshaws.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quarrel",
+   "files": [
+    "engine/src/cards/pool/quarrel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Radioactive Man",
+   "files": [
+    "engine/src/cards/pool/radioactive-man.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravening Warg",
+   "files": [
+    "engine/src/cards/pool/ravening-warg.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Repulsor Bots",
+   "files": [
+    "engine/src/cards/pool/repulsor-bots.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reverent Howl",
+   "files": [
+    "engine/src/cards/pool/reverent-howl.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rhovanion Rampager",
+   "files": [
+    "engine/src/cards/pool/rhovanion-rampager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roll-Roll-Roll-Roll",
+   "files": [
+    "engine/src/cards/pool/roll-roll-roll-roll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "She-Hulk, Jennifer Walters",
+   "files": [
+    "engine/src/cards/pool/she-hulk-jennifer-walters.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sif's Spearmaster",
+   "files": [
+    "engine/src/cards/pool/sifs-spearmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvan Reveler",
+   "files": [
+    "engine/src/cards/pool/silvan-reveler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snowslope Hunter",
+   "files": [
+    "engine/src/cards/pool/snowslope-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solve for Disappointment",
+   "files": [
+    "engine/src/cards/pool/solve-for-disappointment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sound the Trumpets",
+   "files": [
+    "engine/src/cards/pool/sound-the-trumpets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Speak Secrets",
+   "files": [
+    "engine/src/cards/pool/speak-secrets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stick, Fearless Mentor",
+   "files": [
+    "engine/src/cards/pool/stick-fearless-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stinging Vitriol",
+   "files": [
+    "engine/src/cards/pool/stinging-vitriol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stir Up Trouble",
+   "files": [
+    "engine/src/cards/pool/stir-up-trouble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stone by Sunlight",
+   "files": [
+    "engine/src/cards/pool/stone-by-sunlight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stone-Giant of High Pass",
+   "files": [
+    "engine/src/cards/pool/stone-giant-of-high-pass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "T'Chaka, Venerable King",
+   "files": [
+    "engine/src/cards/pool/tchaka-venerable-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Intervention",
+   "files": [
+    "engine/src/cards/pool/temporal-intervention.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Chief Warg",
+   "files": [
+    "engine/src/cards/pool/the-chief-warg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mountain-king's Return",
+   "files": [
+    "engine/src/cards/pool/the-mountain-kings-return.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thoughtseize",
+   "files": [
+    "engine/src/cards/pool/thoughtseize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tiger Shark, Abyssal Hunter",
+   "files": [
+    "engine/src/cards/pool/tiger-shark-abyssal-hunter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Troll Negotiations",
+   "files": [
+    "engine/src/cards/pool/troll-negotiations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultimate Nullification",
+   "files": [
+    "engine/src/cards/pool/ultimate-nullification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valentina Allegra de Fontaine",
+   "files": [
+    "engine/src/cards/pool/valentina-allegra-de-fontaine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Velvetwing Butterflies",
+   "files": [
+    "engine/src/cards/pool/velvetwing-butterflies.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Villainous Syndication",
+   "files": [
+    "engine/src/cards/pool/villainous-syndication.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voltaic Whip",
+   "files": [
+    "engine/src/cards/pool/voltaic-whip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall Off",
+   "files": [
+    "engine/src/cards/pool/wall-off.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warg Tactics",
+   "files": [
+    "engine/src/cards/pool/warg-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wargling",
+   "files": [
+    "engine/src/cards/pool/wargling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wilderland Scrounger",
+   "files": [
+    "engine/src/cards/pool/wilderland-scrounger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wondrous Revival",
+   "files": [
+    "engine/src/cards/pool/wondrous-revival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "X-23, Deadly Weapon",
+   "files": [
+    "engine/src/cards/pool/x-23-deadly-weapon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zarda, the Power Princess",
+   "files": [
+    "engine/src/cards/pool/zarda-the-power-princess.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Roads Go Ever, Ever On",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter IV: 'whenever you attack this turn', targeted, after the Saga is gone."
+  },
+  {
+   "name": "Goblin Plate Mail",
+   "needs": [
+    "effect:amassed-army-power"
+   ],
+   "why": "Attach this Equipment to the amassed Army."
+  },
+  {
+   "name": "Master's Councillors",
+   "needs": [
+    "effect:count-graveyards-with-n-cards"
+   ],
+   "why": "+2/+0 for each graveyard with seven or more cards in it."
+  },
+  {
+   "name": "Part in Friendship",
+   "needs": [
+    "effect:reveal-until"
+   ],
+   "why": "The found card onto the battlefield or, otherwise, into your hand."
+  },
+  {
+   "name": "Gollum, Riddle Master",
+   "needs": [
+    "decision:choose-odd-or-even"
+   ],
+   "why": "A spell's mana value compared as odd or even."
+  },
+  {
+   "name": "Vow to Erebor",
+   "needs": [
+    "effect:attach-extensions"
+   ],
+   "why": "Attach an Equipment you control to it, chosen as it resolves, untargeted."
+  },
+  {
+   "name": "Thranduil's Decree",
+   "needs": [
+    "zone:impulse-permission-options"
+   ],
+   "why": "Cast it for free for as long as it remains exiled."
+  },
+  {
+   "name": "Enchanted River's Grasp",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "effect:remove-all-counters"
+   ],
+   "why": "The enchanted creature from its own enters trigger; remove all counters."
+  },
+  {
+   "name": "Gandalf, Wandering Wizard",
+   "needs": [
+    "effect:player-scope-extensions"
+   ],
+   "why": "Gandalf's owner draws."
+  },
+  {
+   "name": "Bard's Company",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "Cast it as though it had flash if you control a Human."
+  },
+  {
+   "name": "The Black Arrow",
+   "needs": [
+    "effect:damage-dealt-this-way"
+   ],
+   "why": "If a Dragon is dealt damage this way, destroy it."
+  },
+  {
+   "name": "Old Fat Spider Can't See Me",
+   "needs": [
+    "replacement:prevent-damage-by-target-while-source"
+   ],
+   "why": "Prevent all damage dealt by a target for as long as the Saga remains."
+  },
+  {
+   "name": "Pinecone Strike",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "If that creature would die this turn, exile it instead."
+  },
+  {
+   "name": "Getaway Barrel",
+   "needs": [
+    "effect:random-choice"
+   ],
+   "why": "A random creature card from among the revealed cards."
+  },
+  {
+   "name": "Gnashing of Teeth",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "If that creature would die this turn, exile it instead."
+  },
+  {
+   "name": "Great Fierce Bee",
+   "needs": [
+    "trigger:dies-batch-trigger"
+   ],
+   "why": "Whenever one or more other creatures die, without once each turn."
+  },
+  {
+   "name": "Magnificent End",
+   "needs": [
+    "cost:cost-reduction-if-targets"
+   ],
+   "why": "Costs less if it targets a certain permanent."
+  },
+  {
+   "name": "Uneasy Partings",
+   "needs": [
+    "cost:cost-reduction-if-targets",
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "Costs less by its target; the owner chooses top or bottom."
+  },
+  {
+   "name": "Eagle's Rescue",
+   "needs": [
+    "effect:attach-extensions"
+   ],
+   "why": "Returned from the graveyard attached to target creature."
+  },
+  {
+   "name": "Origin of Thor",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter II: whenever you cast a spell this turn."
+  },
+  {
+   "name": "Origin of Iron Man",
+   "needs": [
+    "effect:doesnt-untap-while-you-control-source"
+   ],
+   "why": "Doesn't untap for as long as the Saga remains."
+  },
+  {
+   "name": "Love on the Battlefield",
+   "needs": [
+    "effect:attack-batch-those-creatures",
+    "trigger:attack-with-exactly"
+   ],
+   "why": "Attacking with exactly two creatures; those creatures, this combat."
+  },
+  {
+   "name": "Viper, Cruel Conspirator",
+   "needs": [
+    "condition:attacking-alone-condition"
+   ],
+   "why": "A creature that's attacking alone."
+  },
+  {
+   "name": "Thing Swing",
+   "needs": [
+    "cost:cost-reduction-if-targets"
+   ],
+   "why": "Costs {2} less if it targets a Hero you control."
+  },
+  {
+   "name": "Accelerated Evolution",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "The enchanted creature gains hexproof from the Aura's enters trigger."
+  },
+  {
+   "name": "Loki, God of Lies",
+   "needs": [
+    "effect:cast-spell-trigger-spell-targets"
+   ],
+   "why": "Gain control of the creature that spell targets."
+  },
+  {
+   "name": "Batroc the Leaper",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "Up to X targets, X the times it was kicked."
+  },
+  {
+   "name": "Elektra, Femme Fatale",
+   "needs": [
+    "effect:damage-dealt-this-way"
+   ],
+   "why": "The reflexive trigger only if the damage was dealt (rule 603.12)."
+  },
+  {
+   "name": "Advancing the Spirit",
+   "needs": [
+    "cost:power-up-alternative-cost"
+   ],
+   "why": "Pay {0} rather than the first power-up cost each turn."
+  },
+  {
+   "name": "Victor Mancha, Runaway",
+   "needs": [
+    "zone:impulse-while-you-control-source"
+   ],
+   "why": "Play the exiled card for as long as you control it."
+  },
+  {
+   "name": "Rhino, Terrible Trampler",
+   "needs": [
+    "effect:divide-among-targets"
+   ],
+   "why": "Distribute three +1/+1 counters among up to three targets."
+  },
+  {
+   "name": "Flatman",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "Switch a creature's power and toughness."
+  },
+  {
+   "name": "Quinjet Technician",
+   "needs": [
+    "cost:spend-only-power-up"
+   ],
+   "why": "Spend this mana only to activate power-up abilities."
+  },
+  {
+   "name": "Origin of Black Widow",
+   "needs": [
+    "effect:per-player-count-in-graveyard"
+   ],
+   "why": "For each creature card in their graveyard, per player."
+  },
+  {
+   "name": "Mister Immortal",
+   "needs": [
+    "zone:activate-from-exile"
+   ],
+   "why": "An activated ability that works while its card is in exile."
+  },
+  {
+   "name": "Negative Zone Portal",
+   "needs": [
+    "effect:random-choice",
+    "condition:exiled-with-source-filter"
+   ],
+   "why": "Four or more creature cards exiled with it now; a random one of them."
+  },
+  {
+   "name": "Dragon Man, Reformed Robot",
+   "needs": [
+    "effect:amount-aggregate",
+    "zone:graveyard-self-cast-extra-cost"
+   ],
+   "why": "An aggregate across permanents and graveyard cards; cast from the graveyard by discarding."
+  },
+  {
+   "name": "Fantastic Bounce",
+   "needs": [
+    "cost:cost-reduction-if-targets"
+   ],
+   "why": "Costs less by what it targets."
+  }
+ ]
+}

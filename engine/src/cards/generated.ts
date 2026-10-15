@@ -4403,6 +4403,7 @@ import _poolGrimMonolith from "./pool/grim-monolith.js";
 import _poolGrimPhysician from "./pool/grim-physician.js";
 import _poolGrimReapersScythe from "./pool/grim-reapers-scythe.js";
 import _poolGrimReapersSprint from "./pool/grim-reapers-sprint.js";
+import _poolGrimRepriser from "./pool/grim-repriser.js";
 import _poolGrimServant from "./pool/grim-servant.js";
 import _poolGrimTutor from "./pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "./pool/grima-sarumans-footman.js";
@@ -11627,6 +11628,7 @@ import _poolWhipSergeant from "./pool/whip-sergeant.js";
 import _poolWhipSilk from "./pool/whip-silk.js";
 import _poolWhipSpineDrake from "./pool/whip-spine-drake.js";
 import _poolWhipcorder from "./pool/whipcorder.js";
+import _poolWhiplashWordsmith from "./pool/whiplash-wordsmith.js";
 import _poolWhiptailMoloch from "./pool/whiptail-moloch.js";
 import _poolWhiptailWurm from "./pool/whiptail-wurm.js";
 import _poolWhiptongueFrog from "./pool/whiptongue-frog.js";
@@ -16759,6 +16761,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrimPhysician,
   _poolGrimReapersScythe,
   _poolGrimReapersSprint,
+  _poolGrimRepriser,
   _poolGrimServant,
   _poolGrimTutor,
   _poolGrimaSarumansFootman,
@@ -23983,6 +23986,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhipSilk,
   _poolWhipSpineDrake,
   _poolWhipcorder,
+  _poolWhiplashWordsmith,
   _poolWhiptailMoloch,
   _poolWhiptailWurm,
   _poolWhiptongueFrog,

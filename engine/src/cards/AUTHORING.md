@@ -639,7 +639,10 @@ this turn"),
 `{ turnStat: TurnStat, who?: PlayerScope, target? }` (with `target` a player
 target slot instead of a scope — Astarion's "life **they** lost this turn" — a per-turn running total —
 `"life-lost"`, `"life-gained"`, `"cards-drawn"`, `"spells-cast"`,
-`"damage-taken"`, `"combat-damage-taken"`, `"attacked"` (1 once they've
+`"damage-taken"`, `"combat-damage-taken"`, `"noncombat-damage-taken"` (the
+rest of `"damage-taken"`: Whiplash Wordsmith's and Grim Repriser's "an
+opponent was dealt noncombat damage this turn" is the `turn-stat` condition
+`{ stat: "noncombat-damage-taken", who: "opponent", atLeast: 1 }`), `"attacked"` (1 once they've
 declared an attacker — raid), `"attackers"` (how many different creatures
 they've declared as attackers — one declared in two combats counts once, one
 put onto the battlefield attacking never: Windbrisk Heights' "if you attacked

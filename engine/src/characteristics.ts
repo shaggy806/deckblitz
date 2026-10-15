@@ -1061,6 +1061,8 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.damageTaken ?? 0;
     case "combat-damage-taken":
       return seat.turnHistory?.combatDamageTaken ?? 0;
+    case "noncombat-damage-taken":
+      return (seat.turnHistory?.damageTaken ?? 0) - (seat.turnHistory?.combatDamageTaken ?? 0);
     case "attacked":
       return seat.turnHistory?.attacked === true ? 1 : 0;
     case "attackers":

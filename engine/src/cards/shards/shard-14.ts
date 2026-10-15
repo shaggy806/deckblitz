@@ -166,6 +166,7 @@ import _poolGravecrawler from "../pool/gravecrawler.js";
 import _poolGreatTeachersDecree from "../pool/great-teachers-decree.js";
 import _poolGreataxe from "../pool/greataxe.js";
 import _poolGrimHaruspex from "../pool/grim-haruspex.js";
+import _poolGrimRepriser from "../pool/grim-repriser.js";
 import _poolGriselbrand from "../pool/griselbrand.js";
 import _poolGrislyRitual from "../pool/grisly-ritual.js";
 import _poolGrumgullyTheGenerous from "../pool/grumgully-the-generous.js";
@@ -547,6 +548,7 @@ const shard: CardShard = {
     _poolGreatTeachersDecree,
     _poolGreataxe,
     _poolGrimHaruspex,
+    _poolGrimRepriser,
     _poolGriselbrand,
     _poolGrislyRitual,
     _poolGrumgullyTheGenerous,

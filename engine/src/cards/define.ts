@@ -413,6 +413,10 @@ export type TurnStat =
    * "each-opponent" }`. Damage, not life lost: prevented damage isn't dealt. */
   | "damage-taken"
   | "combat-damage-taken"
+  /** The rest of `"damage-taken"`: damage dealt to the player this turn that
+   * wasn't combat damage — Whiplash Wordsmith's "as long as an opponent was
+   * dealt noncombat damage this turn". */
+  | "noncombat-damage-taken"
   /** 1 once the player has declared an attacker this turn (raid). */
   | "attacked"
   /** How many different creatures the player has declared as attackers

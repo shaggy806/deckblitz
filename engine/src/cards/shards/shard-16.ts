@@ -395,6 +395,7 @@ import _poolWarlordsAxe from "../pool/warlords-axe.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
@@ -818,6 +819,7 @@ const shard: CardShard = {
     _poolWarstormSurge,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
+    _poolWhiplashWordsmith,
     _poolWildGrowth,
     _poolWillOTheWisp,
     _poolWillOfTheTemur,

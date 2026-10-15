@@ -1,0 +1,22 @@
+{
+ "batch": "B73",
+ "status": "complete",
+ "ranks": "Reality Fracture (FRA, 2026-10-02): the noncombat-damage-taken turn stat and the two B71 cards it unblocked. B71's record restored too: c6d30c4f had written B72's over it, which left FRA's and FRC's blocked cards untriaged in cards:sets.",
+ "authored": [
+  {
+   "name": "Whiplash Wordsmith // Vicious Verse",
+   "files": [
+    "engine/src/cards/pool/whiplash-wordsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Repriser",
+   "files": [
+    "engine/src/cards/pool/grim-repriser.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}
