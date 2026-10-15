@@ -117,12 +117,22 @@ function usePinnedColumn(zoom: number): React.RefObject<HTMLDivElement | null> {
  * without drawing, so alt-tabbing back showed the frame from when it was
  * left, then snapped to where the clock had got to (the user, 2026-10-10).
  * Paused instead, it carries on from where it was seen last.
+ *
+ * Paused through the animation itself (`Animation.pause()`), not the
+ * `animation-play-state` style: a hidden tab recalculates no styles, so a
+ * style set as it hid took effect only once it was shown again — together
+ * with the `running` set then, which cancelled it — and the drift never
+ * paused at all (the user, 2026-10-14, "still jumps"). `pause()` holds the
+ * time at once, and a hidden document's timeline stands at its last frame.
  */
 function useHeldWhileHidden(): (el: HTMLElement | null) => void {
   return useCallback((el: HTMLElement | null) => {
     if (el === null) return
     const hold = () => {
-      el.style.animationPlayState = document.hidden ? 'paused' : 'running'
+      for (const animation of el.getAnimations()) {
+        if (document.hidden) animation.pause()
+        else animation.play()
+      }
     }
     hold()
     document.addEventListener('visibilitychange', hold)
