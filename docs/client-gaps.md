@@ -50,7 +50,19 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   is instant), on this same PC. Not reproduced: cold loads in fresh Chrome and Edge profiles and
   Playwright's Chromium on the same PC and network all showed cards in 0.7–0.85 s with no long
   task. Suspects: an extension in their profile, or the CPU pegged by test runs at the time. Next:
-  have them try an incognito window, and time the stall. They read only printed fields, each ability's text (colour identity)
+  have them try an incognito window, and time the stall.
+  **It's a request that never answers, not a freeze (2026-10-14):** the user's next stall sat at
+  94% on the loading bar, which is 30 of the 32 card shards (`PoolLoading.tsx` counts shards), so
+  two shard requests never came back. Not reproduced: the built-in browser on this PC loaded
+  cleanly twice, and 15 rounds of all 32 shards fetched in parallel past Cloudflare's cache
+  (480 requests, through the tunnel to Caddy) all answered 200 within 1.65 s. cloudflared logged
+  QUIC tunnel connections dropping and reconnecting earlier that day (16:10, 17:56, 18:01 UTC),
+  none near the stall; Caddy keeps no access log. Next time: the Network panel's pending rows
+  (which shards, the protocol). A fix on our side: a shard that hasn't arrived in a few seconds
+  is fetched again. A pending `import()` can't be retried under the same URL, so that means
+  loading shards by URL (a cache-busting query on the retry) rather than as static dynamic
+  imports. The bar's 15 s "taking longer than usual" Reload is the stopgap. The pages read only
+  printed fields, each ability's text (colour identity)
   and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
   a fraction of the size. The game page loads no definitions up front.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07).
