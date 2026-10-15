@@ -205,6 +205,7 @@ import _poolMarchesasDecree from "../pool/marchesas-decree.js";
 import _poolMarduHordechief from "../pool/mardu-hordechief.js";
 import _poolMarduWarshrieker from "../pool/mardu-warshrieker.js";
 import _poolMasterDecoy from "../pool/master-decoy.js";
+import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
 import _poolMemoryErosion from "../pool/memory-erosion.js";
 import _poolMesmericGlare from "../pool/mesmeric-glare.js";
@@ -362,6 +363,7 @@ import _poolTrustyMachete from "../pool/trusty-machete.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
+import _poolUltrosObnoxiousOctopus from "../pool/ultros-obnoxious-octopus.js";
 import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
 import _poolUnderworldRageHound from "../pool/underworld-rage-hound.js";
 import _poolUnendingWhisper from "../pool/unending-whisper.js";
@@ -610,6 +612,7 @@ const shard: CardShard = {
     _poolMarduHordechief,
     _poolMarduWarshrieker,
     _poolMasterDecoy,
+    _poolMegaFlare,
     _poolMegatog,
     _poolMemoryErosion,
     _poolMesmericGlare,
@@ -767,6 +770,7 @@ const shard: CardShard = {
     _poolTurtleBlimp,
     _poolTyriteSanctum,
     _poolUltimaWeapon,
+    _poolUltrosObnoxiousOctopus,
     _poolUnderdarkBasilisk,
     _poolUnderworldRageHound,
     _poolUnendingWhisper,

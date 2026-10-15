@@ -264,6 +264,7 @@ import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
+import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
@@ -325,6 +326,7 @@ import _poolStrionicResonator from "../pool/strionic-resonator.js";
 import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
+import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
@@ -346,6 +348,7 @@ import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
+import _poolUltimeciaOmnipotent from "../pool/ultimecia-omnipotent.js";
 import _poolUltimoCivilizationsEnd from "../pool/ultimo-civilizations-end.js";
 import _poolUltronDrone from "../pool/ultron-drone.js";
 import _poolUltronMachineOverlord from "../pool/ultron-machine-overlord.js";
@@ -658,6 +661,7 @@ const shard: CardShard = {
     _poolRehearsedDebater,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
+    _poolRetrieveTheEsper,
     _poolReverentHoplite,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolStunningShot,
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,
+    _poolSummonersSending,
     _poolSunderingVitae,
     _poolSuspiciousStowaway,
     _poolTaintedPeak,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolTreadUpon,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,
+    _poolUltimeciaOmnipotent,
     _poolUltimoCivilizationsEnd,
     _poolUltronDrone,
     _poolUltronMachineOverlord,

@@ -113,6 +113,7 @@ import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
+import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
@@ -190,6 +191,7 @@ import _poolLupinflowerVillage from "../pool/lupinflower-village.js";
 import _poolMaarikaBrutalGladiator from "../pool/maarika-brutal-gladiator.js";
 import _poolMaccreadyLamplightMayor from "../pool/maccready-lamplight-mayor.js";
 import _poolMaelstromNexus from "../pool/maelstrom-nexus.js";
+import _poolMagitekInfantry from "../pool/magitek-infantry.js";
 import _poolMagnigothSentry from "../pool/magnigoth-sentry.js";
 import _poolMagnusTheRed from "../pool/magnus-the-red.js";
 import _poolManaVault from "../pool/mana-vault.js";
@@ -259,6 +261,7 @@ import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
+import _poolRookTurret from "../pool/rook-turret.js";
 import _poolRunewing from "../pool/runewing.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
@@ -326,6 +329,7 @@ import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
+import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
@@ -397,6 +401,8 @@ import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
 import _poolWrathOfGod from "../pool/wrath-of-god.js";
 import _poolXiraArien from "../pool/xira-arien.js";
+import _poolYiazmatUltimateMark from "../pool/yiazmat-ultimate-mark.js";
+import _poolYoureNotAlone from "../pool/youre-not-alone.js";
 import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
@@ -533,6 +539,7 @@ const shard: CardShard = {
     _poolFodderCannon,
     _poolForgottenCave,
     _poolFoulFamiliar,
+    _poolFromFatherToSon,
     _poolFungalPlots,
     _poolGastalRaider,
     _poolGenePollinator,
@@ -610,6 +617,7 @@ const shard: CardShard = {
     _poolMaarikaBrutalGladiator,
     _poolMaccreadyLamplightMayor,
     _poolMaelstromNexus,
+    _poolMagitekInfantry,
     _poolMagnigothSentry,
     _poolMagnusTheRed,
     _poolManaVault,
@@ -679,6 +687,7 @@ const shard: CardShard = {
     _poolRipApart,
     _poolRiskyResearch,
     _poolRiverguardsReflexes,
+    _poolRookTurret,
     _poolRunewing,
     _poolRuthlessWaterbender,
     _poolSalivatingGremlins,
@@ -746,6 +755,7 @@ const shard: CardShard = {
     _poolTerraHeraldOfHope,
     _poolThallidSoothsayer,
     _poolThassaDeepDwelling,
+    _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
     _poolTheMechanistAerialArtisan,
     _poolTheWaspJanetVanDyne,
@@ -817,6 +827,8 @@ const shard: CardShard = {
     _poolWirewoodSavage,
     _poolWrathOfGod,
     _poolXiraArien,
+    _poolYiazmatUltimateMark,
+    _poolYoureNotAlone,
     _poolYshtolaNightsBlessed,
     _poolZaxaraTheExemplary,
     _poolZimoneAndDina,

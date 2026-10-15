@@ -19,6 +19,7 @@ import _poolArmedAssailant from "../pool/armed-assailant.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
 import _poolArtisticRefusal from "../pool/artistic-refusal.js";
+import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
 import _poolAxebaneStag from "../pool/axebane-stag.js";
@@ -80,6 +81,7 @@ import _poolCyclonicRift from "../pool/cyclonic-rift.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
 import _poolDamningVerdict from "../pool/damning-verdict.js";
+import _poolDarkKnightsGreatsword from "../pool/dark-knights-greatsword.js";
 import _poolDarklitGargoyle from "../pool/darklit-gargoyle.js";
 import _poolDarksteelPendant from "../pool/darksteel-pendant.js";
 import _poolDartingMerfolk from "../pool/darting-merfolk.js";
@@ -217,6 +219,7 @@ import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
 import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
+import _poolMinwuWhiteMage from "../pool/minwu-white-mage.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
 import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-richards.js";
@@ -324,6 +327,7 @@ import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
 import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
+import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
@@ -333,6 +337,7 @@ import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
+import _poolThePrimaVista from "../pool/the-prima-vista.js";
 import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js";
 import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
@@ -371,6 +376,7 @@ import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
 import _poolWakedancer from "../pool/wakedancer.js";
 import _poolWallOfEarth from "../pool/wall-of-earth.js";
 import _poolWallOfFaith from "../pool/wall-of-faith.js";
+import _poolWarriorsSword from "../pool/warriors-sword.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
 import _poolWhiteAuracite from "../pool/white-auracite.js";
@@ -412,6 +418,7 @@ const shard: CardShard = {
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,
     _poolArtisticRefusal,
+    _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
     _poolAvenEnvoy,
     _poolAxebaneStag,
@@ -473,6 +480,7 @@ const shard: CardShard = {
     _poolCyclopsOfOneEyedPass,
     _poolDaggermawMegalodon,
     _poolDamningVerdict,
+    _poolDarkKnightsGreatsword,
     _poolDarklitGargoyle,
     _poolDarksteelPendant,
     _poolDartingMerfolk,
@@ -610,6 +618,7 @@ const shard: CardShard = {
     _poolMidnightCharm,
     _poolMightyMutanimals,
     _poolMindSpring,
+    _poolMinwuWhiteMage,
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,
     _poolMisterFantasticReedRichards,
@@ -717,6 +726,7 @@ const shard: CardShard = {
     _poolSubtleStrike,
     _poolSukiKyoshiWarrior,
     _poolSulfurFalls,
+    _poolSummonEsperRamuh,
     _poolSunmanePegasus,
     _poolSurtlandFrostpyre,
     _poolSvellaIceShaper,
@@ -726,6 +736,7 @@ const shard: CardShard = {
     _poolSymbolOfUnsummoning,
     _poolTeferiMasterOfTime,
     _poolTheFantasticar,
+    _poolThePrimaVista,
     _poolTheRestorationOfEiganjo,
     _poolTheSquadronSinister,
     _poolTheSurgicalBay,
@@ -764,6 +775,7 @@ const shard: CardShard = {
     _poolWakedancer,
     _poolWallOfEarth,
     _poolWallOfFaith,
+    _poolWarriorsSword,
     _poolWhipOfErebos,
     _poolWhiptailWurm,
     _poolWhiteAuracite,

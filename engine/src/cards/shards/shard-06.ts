@@ -49,6 +49,7 @@ import _poolBulwarkGiant from "../pool/bulwark-giant.js";
 import _poolBumiEclecticEarthbender from "../pool/bumi-eclectic-earthbender.js";
 import _poolBurrentonShieldBearers from "../pool/burrenton-shield-bearers.js";
 import _poolBurrowing from "../pool/burrowing.js";
+import _poolCactuar from "../pool/cactuar.js";
 import _poolCallToMind from "../pool/call-to-mind.js";
 import _poolCanopySpider from "../pool/canopy-spider.js";
 import _poolCapitalCity from "../pool/capital-city.js";
@@ -115,6 +116,7 @@ import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
 import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
 import _poolEverybodyLives from "../pool/everybody-lives.js";
+import _poolEvilReawakened from "../pool/evil-reawakened.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
@@ -295,6 +297,7 @@ import _poolSeismicSense from "../pool/seismic-sense.js";
 import _poolSelflessSavior from "../pool/selfless-savior.js";
 import _poolSerumSnare from "../pool/serum-snare.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
+import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
@@ -314,6 +317,7 @@ import _poolSleekSchooner from "../pool/sleek-schooner.js";
 import _poolSmokeBomb from "../pool/smoke-bomb.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
+import _poolSnowVilliers from "../pool/snow-villiers.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
@@ -390,6 +394,7 @@ import _poolWolfkinBond from "../pool/wolfkin-bond.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
 import _poolWreakHavoc from "../pool/wreak-havoc.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
+import _poolYunasWhistle from "../pool/yunas-whistle.js";
 import _poolZendikarResurgent from "../pool/zendikar-resurgent.js";
 import _poolZhalfirinVoid from "../pool/zhalfirin-void.js";
 import _poolZhurTaaGoblin from "../pool/zhur-taa-goblin.js";
@@ -460,6 +465,7 @@ const shard: CardShard = {
     _poolBumiEclecticEarthbender,
     _poolBurrentonShieldBearers,
     _poolBurrowing,
+    _poolCactuar,
     _poolCallToMind,
     _poolCanopySpider,
     _poolCapitalCity,
@@ -526,6 +532,7 @@ const shard: CardShard = {
     _poolEternalThirst,
     _poolEtheriumSculptor,
     _poolEverybodyLives,
+    _poolEvilReawakened,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
@@ -706,6 +713,7 @@ const shard: CardShard = {
     _poolSelflessSavior,
     _poolSerumSnare,
     _poolSetessanChampion,
+    _poolSeymourFlux,
     _poolShambleshark,
     _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
@@ -725,6 +733,7 @@ const shard: CardShard = {
     _poolSmokeBomb,
     _poolSmolderingCrater,
     _poolSnappingGnarlid,
+    _poolSnowVilliers,
     _poolSoulboundGuardians,
     _poolSpectralProcession,
     _poolSpellseeker,
@@ -801,6 +810,7 @@ const shard: CardShard = {
     _poolWoodlandMystic,
     _poolWreakHavoc,
     _poolWreckingBallArm,
+    _poolYunasWhistle,
     _poolZendikarResurgent,
     _poolZhalfirinVoid,
     _poolZhurTaaGoblin,

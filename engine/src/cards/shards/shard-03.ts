@@ -44,6 +44,7 @@ import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
+import _poolChocoboCamp from "../pool/chocobo-camp.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCommandTower from "../pool/command-tower.js";
@@ -95,6 +96,7 @@ import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
+import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
 import _poolFeebleness from "../pool/feebleness.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
@@ -109,6 +111,7 @@ import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
 import _poolGalvanicKey from "../pool/galvanic-key.js";
 import _poolGameTrail from "../pool/game-trail.js";
+import _poolGauFeralYouth from "../pool/gau-feral-youth.js";
 import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
 import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
@@ -427,6 +430,7 @@ const shard: CardShard = {
     _poolCavesOfKoilos,
     _poolChitterspitter,
     _poolChivalricAlliance,
+    _poolChocoboCamp,
     _poolCinderBarrens,
     _poolCleverConcealment,
     _poolCommandTower,
@@ -478,6 +482,7 @@ const shard: CardShard = {
     _poolFaerieDuelist,
     _poolFanBearer,
     _poolFanaticalStrength,
+    _poolFateOfTheSunCryst,
     _poolFeebleness,
     _poolFireFieldOgre,
     _poolFireImp,
@@ -492,6 +497,7 @@ const shard: CardShard = {
     _poolGalvanicIteration,
     _poolGalvanicKey,
     _poolGameTrail,
+    _poolGauFeralYouth,
     _poolGeneralsEnforcer,
     _poolGiadaFontOfHope,
     _poolGisaAndGeralf,

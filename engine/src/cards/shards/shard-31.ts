@@ -58,6 +58,7 @@ import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
+import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
@@ -70,6 +71,7 @@ import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
+import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
 import _poolCounterspell from "../pool/counterspell.js";
@@ -153,11 +155,13 @@ import _poolGoldenglowMoth from "../pool/goldenglow-moth.js";
 import _poolGolgariGermination from "../pool/golgari-germination.js";
 import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
+import _poolGrahaTia from "../pool/graha-tia.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
+import _poolGysahlGreens from "../pool/gysahl-greens.js";
 import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
@@ -277,6 +281,7 @@ import _poolRitualOfRestoration from "../pool/ritual-of-restoration.js";
 import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
+import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
@@ -386,6 +391,7 @@ import _poolZulaportChainmage from "../pool/zulaport-chainmage.js";
 import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
+import _tokensAngelo from "../tokens/angelo.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
@@ -452,6 +458,7 @@ const shard: CardShard = {
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
     _poolCaptainsCall,
+    _poolCargoShip,
     _poolCastleSengir,
     _poolCatalystElemental,
     _poolCharityExtractor,
@@ -464,6 +471,7 @@ const shard: CardShard = {
     _poolColossodonYearling,
     _poolCombatMedic,
     _poolCommissarSeverinaRaine,
+    _poolCookingCampsite,
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
     _poolCounterspell,
@@ -547,11 +555,13 @@ const shard: CardShard = {
     _poolGolgariGermination,
     _poolGontisAetherHeart,
     _poolGrabbyGiant,
+    _poolGrahaTia,
     _poolGreatGildedBoat,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
     _poolGrowExtraArms,
     _poolGuidingBolt,
+    _poolGysahlGreens,
     _poolHalberdier,
     _poolHallOfTagsin,
     _poolHammerheadTyrant,
@@ -671,6 +681,7 @@ const shard: CardShard = {
     _poolRockBadger,
     _poolRollingTemblor,
     _poolRubblebeltMaaka,
+    _poolRufusShinra,
     _poolRuggedPrairie,
     _poolRuinousRampage,
     _poolSHIELDFlyingCar,
@@ -782,6 +793,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAlienWarriorToken,
+    _tokensAngelo,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
     _tokensHumanCitizenToken,

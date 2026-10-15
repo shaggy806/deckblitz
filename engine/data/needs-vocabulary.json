@@ -6248,6 +6248,82 @@
   "cost:first-spell-free-each-turn": {
    "family": "cost:cost-modification-extensions",
    "example": "Weftwalking: A static letting each player cast the first spell they cast during each of their own turns without paying its mana cost (Weftwalking): a free-cast alternative cost for every player, gated to the first spell of the turn."
+  },
+  "decision:choose-among-targets": {
+   "family": "decision:choose-permanent",
+   "example": "Aerith Rescue Mission: A resolution-time choice of one (or N) of the resolving spell's or ability's still-legal permanent targets, to apply a further effect to — Aerith Rescue Mission's 'tap up to three target creatures. Put a stun counter on one of them' (chosen as it resolves, per its ruling)."
+  },
+  "trigger:activates-mana-ability": {
+   "family": "trigger:activates-ability",
+   "example": "Avalanche of Sector 7: Avalanche of Sector 7: \"whenever an opponent activates an ability of an artifact they control\" counts mana abilities too (Treasures, mana rocks); activates-ability never fires for a mana ability, which isn't announced when activated to pay a cost."
+  },
+  "effect:attach-chosen-equipment-to-target": {
+   "family": "effect:attach-extensions",
+   "example": "Beatrix, Loyal General: Attach any number of Equipment chosen as the ability resolves (not targeted) to the ability's target creature — choose-permanents' then loses the ability's own targets (Beatrix, Loyal General)."
+  },
+  "effect:cast-now-alternative-mana-cost": {
+   "family": "effect:cast-during-resolution",
+   "example": "Blue Mage's Cane: Blue Mage's Cane: a cast-now (here of a copy) \"by paying {3} rather than paying its mana cost\" — a fixed alternative mana cost for the cast offered during resolution, X 0 and additional costs still payable (the rulings)."
+  },
+  "trigger:deals-damage-once-per-event": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Cecil, Dark Knight // Cecil, Redeemed Paladin: 'Whenever ~ deals damage' (any damage, no recipient named) triggering once per damage event with the total dealt, not once per recipient (Cecil, Dark Knight; Vessel of the All-Consuming's ruling)."
+  },
+  "effect:cost-exiled-cards-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Coin of Fate: An activated ability's effect reading the cards its own cost exiled from a graveyard ('one of the exiled cards' — Coin of Fate)."
+  },
+  "replacement:prevent-damage-to-filter-this-turn": {
+   "family": "replacement:damage-modification",
+   "example": "Crystal Fragments // Summon: Alexander: A one-shot 'prevent all damage that would be dealt to creatures you control this turn' rule over a filter, covering creatures that arrive later (Summon: Alexander)."
+  },
+  "condition:blocked-creature-filter": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Duelist's Flame: A 'blocked creature' CardFilter clause (rule 509.1h: blocked once blockers are declared, even if its blockers leave) — Duelist's Flame's 'target blocked creature you control'."
+  },
+  "mechanic:coin-flip-result-replacement": {
+   "family": "mechanic:coin-flip",
+   "example": "Edgar, King of Figaro: A static that fixes coin-flip results ('the first time you flip one or more coins each turn, those coins come up heads and you win those flips'), winning even flips with no winner (Edgar, King of Figaro; Krark's Thumb-like effects)."
+  },
+  "zone:graveyard-cast-enters-tapped": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Edgar, Master Machinist: Edgar, Master Machinist: \"If you cast a spell this way, that artifact enters tapped\" — a rider on permanents cast through a castFromGraveyard permission, which needs the spell to remember which permission it was cast under."
+  },
+  "effect:control-while-player-is-monarch": {
+   "family": "effect:duration-extensions",
+   "example": "Garland, Royal Kidnapper: gain-control 'for as long as they're the monarch' (Garland, Royal Kidnapper): ends when that player stops being the monarch."
+  },
+  "zone:graveyard-cast-as-adventure": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Hildibrand Manderville // Gentleman's Rise: Hildibrand Manderville: \"When this dies, you may cast it from your graveyard as an Adventure until the end of your next turn\" — a graveyard cast permission for an adventurer card's Adventure face only, lasting until the end of your next turn."
+  },
+  "condition:attached-to-target": {
+   "family": "condition:filter-attachments",
+   "example": "Light of Judgment: A CardFilter clause \"attached to the object in target slot N\" (or a choose-permanents over what is attached to a target), so \"destroy up to one Equipment attached to that creature\" can be chosen as the spell resolves (Light of Judgment)."
+  },
+  "effect:warp-strike-return-attacking": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Noctis, Heir Apparent: Exile, then return tapped and attacking at the beginning of its owner's next declare attackers step, unblockable that combat (Noctis, Heir Apparent's Warp-Strike)."
+  },
+  "keyword:blitz-extensions": {
+   "family": "keyword:blitz",
+   "example": "Sabin, Master Monk: Sabin, Master Monk: a blitz cost with a non-mana part (\"Blitz—{2}{R}{R}, Discard a card\") and \"You may cast this card from your graveyard using its blitz ability\" — blitz is mana-only and offered only from the hand and the command zone."
+  },
+  "trigger:becomes-blocked-by-two-or-more": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Seifer, Balamb Rival: 'Whenever a creature attacking one of your opponents becomes blocked by two or more creatures' — a becomes-blocked trigger with a blocker count and a defender clause (Seifer, Balamb Rival)."
+  },
+  "effect:cast-now-grants-abilities": {
+   "family": "effect:cast-during-resolution",
+   "example": "Strago and Relm: Strago and Relm: \"If you cast a creature spell this way, it gains haste and 'At the beginning of the end step, sacrifice this creature.'\" — abilities granted to the spell a cast-now casts, carried onto the permanent it becomes."
+  },
+  "zone:impulse-during-lore-counter-turns": {
+   "family": "zone:impulse-permission-options",
+   "example": "Summon: Brynhildr: An exile play permission live only during turns a lore counter is put on the exiling Saga (Summon: Brynhildr's 'During any turn you put a lore counter on this Saga, you may play that card')."
+  },
+  "effect:choose-per-opponent-then-destroy": {
+   "family": "decision:choose-permanent",
+   "example": "Ultimate Magic: Meteor: Ultimate Magic: Meteor: \"for each opponent, choose an artifact or land that player controls. Destroy the chosen permanents\" — one untargeted pick from each opponent's permanents, then all destroyed together."
   }
  }
 }

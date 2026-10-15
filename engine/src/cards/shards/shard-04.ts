@@ -279,6 +279,7 @@ import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
 import _poolSanctify from "../pool/sanctify.js";
+import _poolSandworm from "../pool/sandworm.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
@@ -685,6 +686,7 @@ const shard: CardShard = {
     _poolSHIELDSpyKit,
     _poolSaiMasterThopterist,
     _poolSanctify,
+    _poolSandworm,
     _poolSanguineMorass,
     _poolSarkhansTriumph,
     _poolScarbladeScout,

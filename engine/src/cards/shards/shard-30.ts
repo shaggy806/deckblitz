@@ -66,6 +66,7 @@ import _poolChartoothCougar from "../pool/chartooth-cougar.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolCitadelGate from "../pool/citadel-gate.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
+import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
 import _poolCloudOfFaeries from "../pool/cloud-of-faeries.js";
 import _poolCloudshift from "../pool/cloudshift.js";
 import _poolCoastalHornclaw from "../pool/coastal-hornclaw.js";
@@ -144,6 +145,7 @@ import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
 import _poolGalianBeast from "../pool/galian-beast.js";
+import _poolGalufsFinalAct from "../pool/galufs-final-act.js";
 import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
@@ -178,6 +180,7 @@ import _poolHornedTroll from "../pool/horned-troll.js";
 import _poolHorridVigor from "../pool/horrid-vigor.js";
 import _poolHotshotMechanic from "../pool/hotshot-mechanic.js";
 import _poolHowltoothHollow from "../pool/howltooth-hollow.js";
+import _poolHraesvelgrOfTheFirstBrood from "../pool/hraesvelgr-of-the-first-brood.js";
 import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
 import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
 import _poolHurlerCyclops from "../pool/hurler-cyclops.js";
@@ -247,6 +250,7 @@ import _poolMoaningWall from "../pool/moaning-wall.js";
 import _poolMockingSprite from "../pool/mocking-sprite.js";
 import _poolMoggRaider from "../pool/mogg-raider.js";
 import _poolMonasteryFlock from "../pool/monastery-flock.js";
+import _poolMonksFist from "../pool/monks-fist.js";
 import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
@@ -298,6 +302,7 @@ import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
+import _poolRydiasReturn from "../pool/rydias-return.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
@@ -476,6 +481,7 @@ const shard: CardShard = {
     _poolChromaticSphere,
     _poolCitadelGate,
     _poolClockOfOmens,
+    _poolCloudOfDarkness,
     _poolCloudOfFaeries,
     _poolCloudshift,
     _poolCoastalHornclaw,
@@ -554,6 +560,7 @@ const shard: CardShard = {
     _poolFurtiveAnalyst,
     _poolGaladhrimGuide,
     _poolGalianBeast,
+    _poolGalufsFinalAct,
     _poolGandalfSparkStarter,
     _poolGargadon,
     _poolGarrukPrimalHunter,
@@ -588,6 +595,7 @@ const shard: CardShard = {
     _poolHorridVigor,
     _poolHotshotMechanic,
     _poolHowltoothHollow,
+    _poolHraesvelgrOfTheFirstBrood,
     _poolHuatlisRaptor,
     _poolHulkStrongestThereIs,
     _poolHurlerCyclops,
@@ -657,6 +665,7 @@ const shard: CardShard = {
     _poolMockingSprite,
     _poolMoggRaider,
     _poolMonasteryFlock,
+    _poolMonksFist,
     _poolMoonshakerCavalry,
     _poolMoorishCavalry,
     _poolMoriokScavenger,
@@ -708,6 +717,7 @@ const shard: CardShard = {
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,
     _poolRustrazorButcher,
+    _poolRydiasReturn,
     _poolSageOfLatNam,
     _poolSandstormCharger,
     _poolSanguinaryMage,

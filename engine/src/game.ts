@@ -1628,8 +1628,8 @@ export class Game {
             action.delve,
           ),
         );
-      case "activate-ability":
-        return this.withWaterbendChoice(action.source, action.waterbend, () =>
+      case "activate-ability": {
+        const why = this.withWaterbendChoice(action.source, action.waterbend, () =>
           this.whyCannotActivateAbility(
             action.player,
             action.source,
@@ -1638,6 +1638,23 @@ export class Game {
             action.xValue ?? 0,
           ),
         );
+        if (why !== null) return why;
+        // The one permanent a single-sacrifice cost names, as `activateAbility`
+        // checks it: one of the ability's candidates (an "another" cost leaves
+        // the source out).
+        const ability = this.effectiveActivated(action.source)[action.abilityIndex];
+        const sacrifice = ability?.cost.sacrifice;
+        if (
+          sacrifice !== undefined &&
+          sacrifice !== "self" &&
+          sacrificeCostParts(sacrifice, action.xValue ?? 0) === null &&
+          (action.sacrifice === undefined ||
+            !this.sacrificeCandidates(action.player, action.source, ability).includes(action.sacrifice))
+        ) {
+          return "the ability requires sacrificing a permanent you control";
+        }
+        return null;
+      }
       default:
         return `unknown action: ${(action as { type: string }).type}`;
     }
@@ -21582,7 +21599,7 @@ export class Game {
               ? { kind: "end-step-of", player: controller }
               : duration === "while-exiled"
                 ? { kind: "while-exiled" }
-                : { kind: "while-source", source },
+                : { kind: "while-source", source, stint: this.state.objects[source]?.zoneChangeCount ?? 0 },
       ...(castOnly ? { castOnly: true } : {}),
       ...(opts.filter !== undefined ? { filter: opts.filter } : {}),
       ...(opts.free !== undefined ? { free: opts.free } : {}),
@@ -21897,7 +21914,11 @@ export class Game {
     }
     if (impulse.expiry.kind === "while-source") {
       const src = this.state.objects[impulse.expiry.source];
-      return src !== undefined && src.zone === "battlefield";
+      return (
+        src !== undefined &&
+        src.zone === "battlefield" &&
+        (impulse.expiry.stint === undefined || (src.zoneChangeCount ?? 0) === impulse.expiry.stint)
+      );
     }
     return true;
   }

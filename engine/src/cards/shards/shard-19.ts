@@ -71,6 +71,7 @@ import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContractKilling from "../pool/contract-killing.js";
+import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
@@ -130,6 +131,7 @@ import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFugue from "../pool/fugue.js";
+import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
@@ -166,6 +168,7 @@ import _poolHighMarket from "../pool/high-market.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
+import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
@@ -182,6 +185,7 @@ import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
+import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
@@ -284,9 +288,11 @@ import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
+import _poolQiqirnMerchant from "../pool/qiqirn-merchant.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
+import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
@@ -306,6 +312,7 @@ import _poolRovingActuator from "../pool/roving-actuator.js";
 import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
 import _poolRubbleReading from "../pool/rubble-reading.js";
 import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
+import _poolSagesNouliths from "../pool/sages-nouliths.js";
 import _poolSandblast from "../pool/sandblast.js";
 import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
@@ -507,6 +514,7 @@ const shard: CardShard = {
     _poolColorstormStallion,
     _poolConsumingSinkhole,
     _poolContractKilling,
+    _poolCoralSword,
     _poolCourierGriffin,
     _poolCowlProwler,
     _poolCrawlingBarrens,
@@ -566,6 +574,7 @@ const shard: CardShard = {
     _poolFortifiedVillage,
     _poolFractalAnomaly,
     _poolFugue,
+    _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,
     _poolGenerousGift,
@@ -602,6 +611,7 @@ const shard: CardShard = {
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
+    _poolIgnisScientia,
     _poolIgniteTheFuture,
     _poolImpale,
     _poolImplode,
@@ -618,6 +628,7 @@ const shard: CardShard = {
     _poolIrohDragonOfTheWest,
     _poolIronManModernMarvel,
     _poolIronrootTreefolk,
+    _poolItemShopkeep,
     _poolIzzetChronarch,
     _poolJoustThrough,
     _poolJungleTroll,
@@ -720,9 +731,11 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
+    _poolQiqirnMerchant,
     _poolRabarooTroop,
     _poolRagamuffinRaptor,
     _poolRaiseDead,
+    _poolRandomEncounter,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
     _poolRecklessBrute,
@@ -742,6 +755,7 @@ const shard: CardShard = {
     _poolRowanScionOfWar,
     _poolRubbleReading,
     _poolRunawaySteamKin,
+    _poolSagesNouliths,
     _poolSandblast,
     _poolSandwurmConvergence,
     _poolSaruliCaretaker,

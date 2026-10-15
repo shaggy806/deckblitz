@@ -233,6 +233,7 @@ import _poolPaladinClass from "../pool/paladin-class.js";
 import _poolPaladinEnVec from "../pool/paladin-en-vec.js";
 import _poolParadoxEngine from "../pool/paradox-engine.js";
 import _poolPestRescuer from "../pool/pest-rescuer.js";
+import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
@@ -336,6 +337,7 @@ import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
+import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
@@ -391,6 +393,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
+import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
 import _poolZap from "../pool/zap.js";
@@ -640,6 +643,7 @@ const shard: CardShard = {
     _poolPaladinEnVec,
     _poolParadoxEngine,
     _poolPestRescuer,
+    _poolPhantomTrain,
     _poolPhyrexianMetamorph,
     _poolPillarvergePathway,
     _poolPinnacleEmissary,
@@ -743,6 +747,7 @@ const shard: CardShard = {
     _poolSunscapeApprentice,
     _poolSunstarExpansionist,
     _poolSurveillancePhantasm,
+    _poolSwallowedByLeviathan,
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,
     _poolSyrVondamTheLucent,
@@ -798,6 +803,7 @@ const shard: CardShard = {
     _poolWildHunger,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
+    _poolWorldChampionCelestialWeapon,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,
     _poolZap,

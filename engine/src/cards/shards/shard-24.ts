@@ -262,6 +262,7 @@ import _poolSarkhanTheDragonspeaker from "../pool/sarkhan-the-dragonspeaker.js";
 import _poolSatyrGrovedancer from "../pool/satyr-grovedancer.js";
 import _poolSavageLandDinosaur from "../pool/savage-land-dinosaur.js";
 import _poolSavageTwister from "../pool/savage-twister.js";
+import _poolScorpionSentinel from "../pool/scorpion-sentinel.js";
 import _poolScourgeOfValkas from "../pool/scourge-of-valkas.js";
 import _poolScrapworkCohort from "../pool/scrapwork-cohort.js";
 import _poolScreamingFury from "../pool/screaming-fury.js";
@@ -273,7 +274,9 @@ import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSeamRip from "../pool/seam-rip.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
+import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
+import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
@@ -361,6 +364,7 @@ import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWarRoom from "../pool/war-room.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
+import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolSatyrGrovedancer,
     _poolSavageLandDinosaur,
     _poolSavageTwister,
+    _poolScorpionSentinel,
     _poolScourgeOfValkas,
     _poolScrapworkCohort,
     _poolScreamingFury,
@@ -659,7 +664,9 @@ const shard: CardShard = {
     _poolSeamRip,
     _poolSearingSpearAskari,
     _poolSeedshipImpact,
+    _poolSeiferAlmasy,
     _poolSelflessPoliceCaptain,
+    _poolShantottoTacticianMagician,
     _poolShepherdingSpirits,
     _poolShootTheSheriff,
     _poolShrikeForce,
@@ -747,6 +754,7 @@ const shard: CardShard = {
     _poolWallOfSpears,
     _poolWarRoom,
     _poolWarlordsFury,
+    _poolWeaponsVendor,
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,
     _poolWerefoxBodyguard,

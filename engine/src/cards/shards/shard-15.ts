@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolARealmReborn from "../pool/a-realm-reborn.js";
 import _poolAangAirNomad from "../pool/aang-air-nomad.js";
 import _poolAbundantGrowth from "../pool/abundant-growth.js";
 import _poolAbzanFalconer from "../pool/abzan-falconer.js";
@@ -210,6 +211,7 @@ import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
 import _poolLoyalInventor from "../pool/loyal-inventor.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
+import _poolMagitekScythe from "../pool/magitek-scythe.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
@@ -346,6 +348,7 @@ import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
+import _poolTownGreeter from "../pool/town-greeter.js";
 import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
@@ -397,6 +400,7 @@ import _tokensTyranidToken from "../tokens/tyranid-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolARealmReborn,
     _poolAangAirNomad,
     _poolAbundantGrowth,
     _poolAbzanFalconer,
@@ -604,6 +608,7 @@ const shard: CardShard = {
     _poolLoyalInventor,
     _poolMaelstromArtisan,
     _poolMaggotTherapy,
+    _poolMagitekScythe,
     _poolMakeshiftMunitions,
     _poolMarrowBats,
     _poolMarshLurker,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolTidepoolTurtle,
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
+    _poolTownGreeter,
     _poolTranscendentArchaic,
     _poolTreasonousOgre,
     _poolTreasureCruise,

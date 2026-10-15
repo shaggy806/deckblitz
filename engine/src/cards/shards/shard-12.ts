@@ -23,6 +23,7 @@ import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
 import _poolAuratog from "../pool/auratog.js";
+import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
 import _poolAvenFogbringer from "../pool/aven-fogbringer.js";
@@ -77,6 +78,7 @@ import _poolDawntreaderElk from "../pool/dawntreader-elk.js";
 import _poolDeadeyeRigHauler from "../pool/deadeye-rig-hauler.js";
 import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
+import _poolDemonWall from "../pool/demon-wall.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDesertersDisciple from "../pool/deserters-disciple.js";
@@ -92,11 +94,13 @@ import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
+import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
+import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -264,6 +268,7 @@ import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolRevitalize from "../pool/revitalize.js";
+import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
 import _poolRiseAgain from "../pool/rise-again.js";
 import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
@@ -344,6 +349,7 @@ import _poolTillAndTend from "../pool/till-and-tend.js";
 import _poolTormentingVoice from "../pool/tormenting-voice.js";
 import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
+import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
 import _poolTuneUp from "../pool/tune-up.js";
@@ -420,6 +426,7 @@ const shard: CardShard = {
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
     _poolAuratog,
+    _poolAuronsInspiration,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
     _poolAvenFogbringer,
@@ -474,6 +481,7 @@ const shard: CardShard = {
     _poolDeadeyeRigHauler,
     _poolDeadlyBrew,
     _poolDedicatedCommons,
+    _poolDemonWall,
     _poolDemonicTutor,
     _poolDerelictAttic,
     _poolDesertersDisciple,
@@ -489,11 +497,13 @@ const shard: CardShard = {
     _poolDragonHatchling,
     _poolDragonMage,
     _poolDranasEmissary,
+    _poolDreamsOfLaguna,
     _poolDregReaver,
     _poolDrossHopper,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
     _poolEarthshakingSi,
+    _poolEdeaPossessedSorceress,
     _poolEladamrisCall,
     _poolElectrify,
     _poolElvishGuidance,
@@ -661,6 +671,7 @@ const shard: CardShard = {
     _poolResearchThief,
     _poolRestlessDead,
     _poolRevitalize,
+    _poolRinoaHeartilly,
     _poolRiseAgain,
     _poolRorixBladewing,
     _poolRoseRoomTreasurer,
@@ -741,6 +752,7 @@ const shard: CardShard = {
     _poolTormentingVoice,
     _poolTrainingCompound,
     _poolTrainingRegimen,
+    _poolTravelTheOverworld,
     _poolTrevasAttendant,
     _poolTriplicateSpirits,
     _poolTuneUp,

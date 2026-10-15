@@ -28,7 +28,9 @@ import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
+import _poolBarretWallace from "../pool/barret-wallace.js";
 import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
+import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
@@ -245,6 +247,7 @@ import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
 import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
+import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
@@ -289,6 +292,7 @@ import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
+import _poolShamblingCieth from "../pool/shambling-cieth.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
 import _poolShrivel from "../pool/shrivel.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
@@ -365,6 +369,7 @@ import _poolTrollNegotiations from "../pool/troll-negotiations.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
+import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
@@ -374,6 +379,7 @@ import _poolVedalkenOrrery from "../pool/vedalken-orrery.js";
 import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
+import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
 import _poolViralDrake from "../pool/viral-drake.js";
 import _poolVoraciousBrood from "../pool/voracious-brood.js";
@@ -438,7 +444,9 @@ const shard: CardShard = {
     _poolBalduvianBears,
     _poolBalefireDragon,
     _poolBalmorBattlemageCaptain,
+    _poolBarretWallace,
     _poolBasrisSolidarity,
+    _poolBattleMenu,
     _poolBattlefieldForge,
     _poolBenalishVeteran,
     _poolBespokeBattlewagon,
@@ -655,6 +663,7 @@ const shard: CardShard = {
     _poolPippinWardenOfIsengard,
     _poolPlanarBridge,
     _poolPlatedSpider,
+    _poolPoisonTheWaters,
     _poolPowerbalance,
     _poolPravaOfTheSteelLegion,
     _poolPredatorFlagship,
@@ -699,6 +708,7 @@ const shard: CardShard = {
     _poolSeeTheTruth,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
+    _poolShamblingCieth,
     _poolShineshadowSnarl,
     _poolShrivel,
     _poolSiegeRhino,
@@ -775,6 +785,7 @@ const shard: CardShard = {
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,
     _poolTwinflameTyrant,
+    _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUndeadButler,
     _poolUnyaroBeeSting,
@@ -784,6 +795,7 @@ const shard: CardShard = {
     _poolVenomthrope,
     _poolVesselOfEndlessRest,
     _poolVilisBrokerOfBlood,
+    _poolVincentsLimitBreak,
     _poolVindicate,
     _poolViralDrake,
     _poolVoraciousBrood,

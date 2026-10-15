@@ -439,7 +439,10 @@ export interface GameObject {
       | { readonly kind: "end-of-turn"; readonly turn: number }
       | { kind: "your-turns"; remaining: number }
       | { readonly kind: "end-step-of"; readonly player: PlayerId }
-      | { readonly kind: "while-source"; readonly source: ObjectId }
+      /** `stint`: the source's `zoneChangeCount` as it granted this — one that
+       * left and came back is a new object (rule 400.7), and the permission
+       * ended when it left. */
+      | { readonly kind: "while-source"; readonly source: ObjectId; readonly stint?: number }
       | { readonly kind: "while-exiled" };
     readonly castOnly?: boolean;
     /** Which of the exiled cards the permission covers — Narset, Enlightened

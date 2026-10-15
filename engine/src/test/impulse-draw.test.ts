@@ -226,6 +226,23 @@ describe("Theater of Horrors — a gated permission", () => {
   });
 });
 
+describe("a permission for as long as the source is on the battlefield", () => {
+  it("ends when the source leaves, even if it comes back as a new object (rule 400.7)", () => {
+    const game = makeGame();
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    readyMountains(game, 3);
+    const theater = game.debugSpawn("Theater of Horrors", A, "battlefield");
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-source" }, [], { source: theater });
+    const castable = () => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.via === "impulse");
+    expect(castable()).toBe(true);
+    // Flickered: the Theater that returns is a new object, which exiled nothing.
+    game.debugApplyEffect(A, { kind: "flicker", target: 0 }, [{ kind: "object", object: theater }]);
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.pendingTriggers.length === 0 && s.awaiting === null);
+    expect(game.state.objects[theater].zone).toBe("battlefield");
+    expect(castable()).toBe(false);
+  });
+});
+
 describe("impulse options: which cards, and free casts", () => {
   const exiledNamed = (game: Game, name: string) =>
     game.state.zones.shared.exile.find((id) => game.state.objects[id].cardName === name)!;

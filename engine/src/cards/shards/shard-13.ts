@@ -156,6 +156,7 @@ import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatheringPlace from "../pool/gathering-place.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
+import _poolGigantoad from "../pool/gigantoad.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGreatHornKrushok from "../pool/great-horn-krushok.js";
@@ -572,6 +573,7 @@ const shard: CardShard = {
     _poolGatheringPlace,
     _poolGiantsBoulder,
     _poolGiftOfParadise,
+    _poolGigantoad,
     _poolGoblinBalloonBrigade,
     _poolGoblinPiker,
     _poolGreatHornKrushok,

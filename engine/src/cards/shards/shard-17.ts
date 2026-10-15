@@ -84,6 +84,7 @@ import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDeadapult from "../pool/deadapult.js";
+import _poolDeadlyEmbrace from "../pool/deadly-embrace.js";
 import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
@@ -138,6 +139,7 @@ import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
+import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
@@ -257,6 +259,7 @@ import _poolReadTheBones from "../pool/read-the-bones.js";
 import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
+import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRelmsSketching from "../pool/relms-sketching.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
@@ -289,6 +292,7 @@ import _poolShieldsMight from "../pool/shields-might.js";
 import _poolShockBrigade from "../pool/shock-brigade.js";
 import _poolShock from "../pool/shock.js";
 import _poolShoreLurker from "../pool/shore-lurker.js";
+import _poolSidequestHuntTheMark from "../pool/sidequest-hunt-the-mark.js";
 import _poolSigiledPaladin from "../pool/sigiled-paladin.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
@@ -325,6 +329,7 @@ import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
+import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
@@ -392,6 +397,7 @@ import _poolZombify from "../pool/zombify.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
+import _tokensDarkstar from "../tokens/darkstar.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
 import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
 import _tokensGriffinToken from "../tokens/griffin-token.js";
@@ -485,6 +491,7 @@ const shard: CardShard = {
     _poolDarigaazsCharm,
     _poolDarkthicketWolf,
     _poolDeadapult,
+    _poolDeadlyEmbrace,
     _poolDeathBaron,
     _poolDeceptiveLandscape,
     _poolDecoyPloy,
@@ -539,6 +546,7 @@ const shard: CardShard = {
     _poolGiantGrowth,
     _poolGiftOfOrzhova,
     _poolGiftOfStrength,
+    _poolGiottKingOfTheDwarves,
     _poolGlitteringMassif,
     _poolGloomPangolin,
     _poolGoblinRingleader,
@@ -658,6 +666,7 @@ const shard: CardShard = {
     _poolReaperFromTheAbyss,
     _poolRecruiterOfTheGuard,
     _poolRecuperate,
+    _poolRedMagesRapier,
     _poolRelmsSketching,
     _poolResoluteWatchdog,
     _poolRestlessBones,
@@ -690,6 +699,7 @@ const shard: CardShard = {
     _poolShockBrigade,
     _poolShock,
     _poolShoreLurker,
+    _poolSidequestHuntTheMark,
     _poolSigiledPaladin,
     _poolSkylasher,
     _poolSkymarchBloodletter,
@@ -726,6 +736,7 @@ const shard: CardShard = {
     _poolTaintedIsle,
     _poolTatteredApparition,
     _poolThaumaturgesFamiliar,
+    _poolTheFalconAirshipRestored,
     _poolThePrismaticBridge,
     _poolThermalGlider,
     _poolThingSwing,
@@ -795,6 +806,7 @@ const shard: CardShard = {
     _tokensAngelToken33White,
     _tokensBeastToken,
     _tokensCatBeastToken,
+    _tokensDarkstar,
     _tokensEldraziToken,
     _tokensFungusTokenCantBlock,
     _tokensGriffinToken,

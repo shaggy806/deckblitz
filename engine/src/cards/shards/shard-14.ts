@@ -346,6 +346,7 @@ import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
 import _poolTitaniumMan from "../pool/titanium-man.js";
+import _poolTonberry from "../pool/tonberry.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
 import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
@@ -749,6 +750,7 @@ const shard: CardShard = {
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,
     _poolTitaniumMan,
+    _poolTonberry,
     _poolTorporOrb,
     _poolToucanPuffin,
     _poolTrainedJackal,

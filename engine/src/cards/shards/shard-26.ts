@@ -11,6 +11,7 @@ import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
 import _poolAirElemental from "../pool/air-elemental.js";
+import _poolAirshipCrash from "../pool/airship-crash.js";
 import _poolAkoumTeeth from "../pool/akoum-teeth.js";
 import _poolAkromaAngelOfFury from "../pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
@@ -53,6 +54,7 @@ import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justic
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolChandler from "../pool/chandler.js";
+import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
@@ -183,6 +185,7 @@ import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
+import _poolMagickedCard from "../pool/magicked-card.js";
 import _poolMagneticTheft from "../pool/magnetic-theft.js";
 import _poolMahamotiDjinn from "../pool/mahamoti-djinn.js";
 import _poolMalametWarScribe from "../pool/malamet-war-scribe.js";
@@ -282,6 +285,7 @@ import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
+import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
 import _poolSilverErne from "../pool/silver-erne.js";
 import _poolSilverbeakGriffin from "../pool/silverbeak-griffin.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
@@ -344,6 +348,7 @@ import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
+import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
@@ -398,6 +403,7 @@ const shard: CardShard = {
     _poolAetherSpellbomb,
     _poolAetherfluxReservoir,
     _poolAirElemental,
+    _poolAirshipCrash,
     _poolAkoumTeeth,
     _poolAkromaAngelOfFury,
     _poolAkromaAngelOfWrath,
@@ -440,6 +446,7 @@ const shard: CardShard = {
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
     _poolChandler,
+    _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
     _poolCityOfBrass,
@@ -570,6 +577,7 @@ const shard: CardShard = {
     _poolMaddeningCacophony,
     _poolMaelstromColossus,
     _poolMaestrosTheater,
+    _poolMagickedCard,
     _poolMagneticTheft,
     _poolMahamotiDjinn,
     _poolMalametWarScribe,
@@ -669,6 +677,7 @@ const shard: CardShard = {
     _poolShepherdOfTheLost,
     _poolShireiShizosCaretaker,
     _poolShuriWakandanInventor,
+    _poolSidequestPlayBlitzball,
     _poolSilverErne,
     _poolSilverbeakGriffin,
     _poolSilverstrike,
@@ -731,6 +740,7 @@ const shard: CardShard = {
     _poolTritonShorestalker,
     _poolTwistedFates,
     _poolUktabiOrangutan,
+    _poolUltimeciaTemporalThreat,
     _poolUnderworldConnections,
     _poolUnforgivingAim,
     _poolUnholyFiend,

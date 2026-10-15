@@ -142,6 +142,7 @@ import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
 import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
+import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
@@ -235,6 +236,7 @@ import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
+import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
@@ -258,6 +260,7 @@ import _poolPrimevalHerald from "../pool/primeval-herald.js";
 import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
+import _poolPromptoArgentum from "../pool/prompto-argentum.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
@@ -302,6 +305,7 @@ import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
+import _poolSlashOfLight from "../pool/slash-of-light.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
 import _poolSmash from "../pool/smash.js";
@@ -335,6 +339,7 @@ import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
+import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
@@ -540,6 +545,7 @@ const shard: CardShard = {
     _poolGlowingAnemone,
     _poolGoblinEngineer,
     _poolGoblinMatron,
+    _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,
     _poolGreenwoodSentinel,
@@ -633,6 +639,7 @@ const shard: CardShard = {
     _poolMysticPeak,
     _poolNantukoElder,
     _poolNarnamCobra,
+    _poolNeoExdeathDimensionsEnd,
     _poolNewsHelicopter,
     _poolNightMarket,
     _poolNighthowlPursuer,
@@ -656,6 +663,7 @@ const shard: CardShard = {
     _poolPrismaticUndercurrents,
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
+    _poolPromptoArgentum,
     _poolProtectorOfGondor,
     _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,
@@ -700,6 +708,7 @@ const shard: CardShard = {
     _poolSkeletonCrew,
     _poolSkycloudExpanse,
     _poolSkylineDespot,
+    _poolSlashOfLight,
     _poolSlipperyBogbonder,
     _poolSlobadGoblinTinkerer,
     _poolSmash,
@@ -733,6 +742,7 @@ const shard: CardShard = {
     _poolTerraStomper,
     _poolTerrainGenerator,
     _poolTheChaseIsOn,
+    _poolTheFinalDays,
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
     _poolThopterAssembly,

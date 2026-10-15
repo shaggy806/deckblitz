@@ -108,6 +108,7 @@ import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
 import _poolEttercap from "../pool/ettercap.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
+import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
@@ -167,6 +168,7 @@ import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
 import _poolHurloonMinotaur from "../pool/hurloon-minotaur.js";
 import _poolHymnOfTheFaller from "../pool/hymn-of-the-faller.js";
+import _poolIceFlan from "../pool/ice-flan.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
@@ -390,6 +392,7 @@ import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
+import _tokensHorrorTokenTheFinalDays from "../tokens/horror-token-the-final-days.js";
 import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
 import _tokensIcyManalithToken from "../tokens/icy-manalith-token.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
@@ -508,6 +511,7 @@ const shard: CardShard = {
     _poolEtheriumAstrolabe,
     _poolEttercap,
     _poolExcommunicate,
+    _poolExdeathVoidWarlock,
     _poolExtractFromDarkness,
     _poolEyeOfRamos,
     _poolFadeIntoAntiquity,
@@ -567,6 +571,7 @@ const shard: CardShard = {
     _poolHuntersInsight,
     _poolHurloonMinotaur,
     _poolHymnOfTheFaller,
+    _poolIceFlan,
     _poolIcecaveCrasher,
     _poolIdolized,
     _poolImotekhTheStormlord,
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _tokensElementalToken53,
     _tokensFaerieDragonToken,
     _tokensHornetToken,
+    _tokensHorrorTokenTheFinalDays,
     _tokensHumanKnightTokenThePrydwen,
     _tokensIcyManalithToken,
     _tokensImpTokenJudith,

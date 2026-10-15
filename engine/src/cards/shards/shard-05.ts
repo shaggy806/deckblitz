@@ -250,6 +250,7 @@ import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
+import _poolPaladinsArms from "../pool/paladins-arms.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
@@ -663,6 +664,7 @@ const shard: CardShard = {
     _poolOraclesGift,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
+    _poolPaladinsArms,
     _poolPathmakerInitiate,
     _poolPeggyCarterSecretAgent,
     _poolPermissionDenied,

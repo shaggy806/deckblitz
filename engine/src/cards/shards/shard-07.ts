@@ -411,6 +411,7 @@ import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
 import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
+import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
 import _poolYavimayaAncients from "../pool/yavimaya-ancients.js";
 import _poolYavimayaGnats from "../pool/yavimaya-gnats.js";
@@ -849,6 +850,7 @@ const shard: CardShard = {
     _poolWoodlotCrawler,
     _poolWorthyCost,
     _poolWrithingChrysalis,
+    _poolXandeDarkMage,
     _poolXolatoyacTheSmilingFlood,
     _poolYavimayaAncients,
     _poolYavimayaGnats,

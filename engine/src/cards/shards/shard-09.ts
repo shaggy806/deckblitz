@@ -127,6 +127,7 @@ import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
 import _poolFuriousBellow from "../pool/furious-bellow.js";
 import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
+import _poolGaelicat from "../pool/gaelicat.js";
 import _poolGammaGrotesque from "../pool/gamma-grotesque.js";
 import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
@@ -343,6 +344,7 @@ import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
+import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
@@ -538,6 +540,7 @@ const shard: CardShard = {
     _poolFuriousAssault,
     _poolFuriousBellow,
     _poolFurnaceHellkite,
+    _poolGaelicat,
     _poolGammaGrotesque,
     _poolGarenbrigCarver,
     _poolGarruksCompanion,
@@ -754,6 +757,7 @@ const shard: CardShard = {
     _poolTergridGodOfFright,
     _poolTezzeretArtificeMaster,
     _poolThaumatog,
+    _poolTheLunarWhale,
     _poolThermalNavigator,
     _poolThoseWhoServe,
     _poolThrivingIsle,

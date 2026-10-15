@@ -27,6 +27,7 @@ import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
 import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
 import _poolBanesContingency from "../pool/banes-contingency.js";
+import _poolBardsBow from "../pool/bards-bow.js";
 import _poolBasaltMonolith from "../pool/basalt-monolith.js";
 import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
@@ -46,6 +47,7 @@ import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
 import _poolBrigidClachansHeart from "../pool/brigid-clachans-heart.js";
 import _poolBrigidDounsMind from "../pool/brigid-douns-mind.js";
 import _poolBrilliantRestoration from "../pool/brilliant-restoration.js";
+import _poolBrilliantWings from "../pool/brilliant-wings.js";
 import _poolBristlyBillSpineSower from "../pool/bristly-bill-spine-sower.js";
 import _poolBroadsideBombardiers from "../pool/broadside-bombardiers.js";
 import _poolBronzeGuardian from "../pool/bronze-guardian.js";
@@ -57,6 +59,7 @@ import _poolBygoneColossus from "../pool/bygone-colossus.js";
 import _poolCacklingProwler from "../pool/cackling-prowler.js";
 import _poolCageOfHands from "../pool/cage-of-hands.js";
 import _poolCalderaPyremaw from "../pool/caldera-pyremaw.js";
+import _poolCallTheMountainChocobo from "../pool/call-the-mountain-chocobo.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
@@ -125,6 +128,7 @@ import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
+import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
@@ -176,6 +180,7 @@ import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
+import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
 import _poolIvyDancer from "../pool/ivy-dancer.js";
@@ -232,6 +237,7 @@ import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
+import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
@@ -286,6 +292,7 @@ import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
 import _poolSaguArcher from "../pool/sagu-archer.js";
+import _poolSahagin from "../pool/sahagin.js";
 import _poolSalvageScout from "../pool/salvage-scout.js";
 import _poolSamLoyalAttendant from "../pool/sam-loyal-attendant.js";
 import _poolSamisCuriosity from "../pool/samis-curiosity.js";
@@ -333,6 +340,7 @@ import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
 import _poolStuntDouble from "../pool/stunt-double.js";
+import _poolSummonGFCerberus from "../pool/summon-g-f-cerberus.js";
 import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-legion.js";
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
@@ -447,6 +455,7 @@ const shard: CardShard = {
     _poolAzoriusCluestone,
     _poolBalladOfTheBlackFlag,
     _poolBanesContingency,
+    _poolBardsBow,
     _poolBasaltMonolith,
     _poolBatheInGold,
     _poolBeamsawProspector,
@@ -466,6 +475,7 @@ const shard: CardShard = {
     _poolBrigidClachansHeart,
     _poolBrigidDounsMind,
     _poolBrilliantRestoration,
+    _poolBrilliantWings,
     _poolBristlyBillSpineSower,
     _poolBroadsideBombardiers,
     _poolBronzeGuardian,
@@ -477,6 +487,7 @@ const shard: CardShard = {
     _poolCacklingProwler,
     _poolCageOfHands,
     _poolCalderaPyremaw,
+    _poolCallTheMountainChocobo,
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
     _poolCartoucheOfSolidarity,
@@ -545,6 +556,7 @@ const shard: CardShard = {
     _poolFieryInscription,
     _poolFillWithFright,
     _poolFireshrieker,
+    _poolFishingGear,
     _poolFloodpitsDrowner,
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
@@ -596,6 +608,7 @@ const shard: CardShard = {
     _poolImpostorOfTheSixthPride,
     _poolInGarruksWake,
     _poolIncreasingVengeance,
+    _poolInterceptorShadowsHound,
     _poolIronLance,
     _poolIronSuitcase,
     _poolIvyDancer,
@@ -652,6 +665,7 @@ const shard: CardShard = {
     _poolNimblewrightSchematic,
     _poolNyleasForerunner,
     _poolOinTheBrave,
+    _poolOmegaHeartlessEvolution,
     _poolOpenTheGraves,
     _poolOpulentPalace,
     _poolOraxid,
@@ -706,6 +720,7 @@ const shard: CardShard = {
     _poolRumblingSlum,
     _poolSageEyeHarrier,
     _poolSaguArcher,
+    _poolSahagin,
     _poolSalvageScout,
     _poolSamLoyalAttendant,
     _poolSamisCuriosity,
@@ -753,6 +768,7 @@ const shard: CardShard = {
     _poolStrongarmThug,
     _poolStrongholdAssassin,
     _poolStuntDouble,
+    _poolSummonGFCerberus,
     _poolSunhomeFortressOfTheLegion,
     _poolSunlance,
     _poolSunpetalGrove,

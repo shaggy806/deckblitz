@@ -66,6 +66,7 @@ import _poolCityPigeon from "../pool/city-pigeon.js";
 import _poolCloudpost from "../pool/cloudpost.js";
 import _poolCobbledWings from "../pool/cobbled-wings.js";
 import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
+import _poolColiseumBehemoth from "../pool/coliseum-behemoth.js";
 import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
@@ -76,6 +77,7 @@ import _poolCrossbonesMaliciousMercenary from "../pool/crossbones-malicious-merc
 import _poolCruxOfFate from "../pool/crux-of-fate.js";
 import _poolCunningSparkmage from "../pool/cunning-sparkmage.js";
 import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
+import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
@@ -408,6 +410,7 @@ import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
+import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
 import _poolWillOTheWisp from "../pool/will-o-the-wisp.js";
 import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
@@ -430,6 +433,7 @@ import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
 import _tokensPilotToken from "../tokens/pilot-token.js";
 import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
+import _tokensRobotWarriorToken from "../tokens/robot-warrior-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
 import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
@@ -502,6 +506,7 @@ const shard: CardShard = {
     _poolCloudpost,
     _poolCobbledWings,
     _poolColdCaseCracker,
+    _poolColiseumBehemoth,
     _poolCombatProfessor,
     _poolCombineChrysalis,
     _poolContaminantGrafter,
@@ -512,6 +517,7 @@ const shard: CardShard = {
     _poolCruxOfFate,
     _poolCunningSparkmage,
     _poolCurseMarredDemon,
+    _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
     _poolDawnCharm,
     _poolDayOfDestiny,
@@ -844,6 +850,7 @@ const shard: CardShard = {
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
     _poolWhiplashWordsmith,
+    _poolWhiteMagesStaff,
     _poolWildGrowth,
     _poolWillOTheWisp,
     _poolWillOfTheTemur,
@@ -868,6 +875,7 @@ const shard: CardShard = {
     _tokensPhyrexianWurmLifelink,
     _tokensPilotToken,
     _tokensRobotHeroToken,
+    _tokensRobotWarriorToken,
     _tokensShapeshifterToken,
     _tokensSoldierArtifactToken,
     _tokensTyranidToken55,

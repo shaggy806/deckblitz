@@ -288,6 +288,7 @@ import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
+import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
@@ -701,6 +702,7 @@ const shard: CardShard = {
     _poolSentryOfTheUnderworld,
     _poolSharuumTheHegemon,
     _poolShepherdOfRot,
+    _poolShinraReinforcements,
     _poolShireTerrace,
     _poolShockerUnshakable,
     _poolSiegeGangCommander,

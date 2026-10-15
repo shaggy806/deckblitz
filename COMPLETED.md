@@ -28,6 +28,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Final Fantasy and Final Fantasy Commander, both whole** (batch 82): 114 cards, with a "while
+  the source is on the battlefield" play permission ended by the source leaving (rule 400.7) and
+  `canDispatch` checking an activation's sacrifice choice (2026-10-15).
 - **Edge of Eternities, whole** (batch 81): 84 cards, and Sledge-Class Seedship's attack trigger
   moved into its 7+ station band, where it's printed (2026-10-15).
 - **"The excess damage dealt this way"** (`excessDamageThisWay`, rule 120.4a): Hell to Pay,

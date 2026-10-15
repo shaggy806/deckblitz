@@ -140,6 +140,7 @@ import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
+import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
 import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
@@ -244,6 +245,7 @@ import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
+import _poolNinjasBlades from "../pool/ninjas-blades.js";
 import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
@@ -319,6 +321,7 @@ import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
+import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
@@ -426,6 +429,7 @@ import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
+import _tokensTheBlackjack from "../tokens/the-blackjack.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
 import _tokensWolfToken from "../tokens/wolf-token.js";
@@ -570,6 +574,7 @@ const shard: CardShard = {
     _poolFrostOgre,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
+    _poolGeneralLeoCristophe,
     _poolGhoulcallersBell,
     _poolGiltgroveStalker,
     _poolGitaxianSpellstalker,
@@ -674,6 +679,7 @@ const shard: CardShard = {
     _poolNecrogenesis,
     _poolNevinyrralsDisk,
     _poolNightveilPredator,
+    _poolNinjasBlades,
     _poolNorthPolePatrol,
     _poolOakhameRanger,
     _poolOathOfGideon,
@@ -749,6 +755,7 @@ const shard: CardShard = {
     _poolShreddersRevenge,
     _poolShriekOfDread,
     _poolShuriVibraniumTechnologist,
+    _poolSidequestCatchAFish,
     _poolSilentDeparture,
     _poolSilkenfistFighter,
     _poolSilverMyr,
@@ -858,6 +865,7 @@ const shard: CardShard = {
     _tokensJellyfishToken,
     _tokensLeviathanToken,
     _tokensOtterToken,
+    _tokensTheBlackjack,
     _tokensThopterToken,
     _tokensWarriorToken,
     _tokensWolfToken,

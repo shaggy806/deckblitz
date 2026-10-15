@@ -27,6 +27,7 @@ import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
+import _poolBarretAvalancheLeader from "../pool/barret-avalanche-leader.js";
 import _poolBasilicaGuards from "../pool/basilica-guards.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
@@ -109,6 +110,7 @@ import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
+import _poolEther from "../pool/ether.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
@@ -355,6 +357,7 @@ import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
+import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
@@ -472,6 +475,7 @@ const shard: CardShard = {
     _poolBadgermoleCub,
     _poolBarbaryApes,
     _poolBarbedServitor,
+    _poolBarretAvalancheLeader,
     _poolBasilicaGuards,
     _poolBattlemagesBracers,
     _poolBeaconOfUnrest,
@@ -554,6 +558,7 @@ const shard: CardShard = {
     _poolEnduringCourage,
     _poolEnduringVitality,
     _poolEpicureOfBlood,
+    _poolEther,
     _poolExtractPower,
     _poolFacetReader,
     _poolFanaticOfRhonas,
@@ -800,6 +805,7 @@ const shard: CardShard = {
     _poolStreetbreakerWurm,
     _poolStrengthOfTheHarvest,
     _poolSummonPrimalOdin,
+    _poolSummonersGrimoire,
     _poolSunderingGrowth,
     _poolSunfrillImitator,
     _poolSungoldBarrage,

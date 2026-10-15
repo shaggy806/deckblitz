@@ -58,6 +58,7 @@ import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
 import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
+import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
@@ -186,6 +187,7 @@ import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
 import _poolMalakirMire from "../pool/malakir-mire.js";
+import _poolMalboro from "../pool/malboro.js";
 import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
@@ -203,12 +205,14 @@ import _poolMightformHarmonizer from "../pool/mightform-harmonizer.js";
 import _poolMindRavel from "../pool/mind-ravel.js";
 import _poolMinotaurSureshot from "../pool/minotaur-sureshot.js";
 import _poolMirrodinBesieged from "../pool/mirrodin-besieged.js";
+import _poolMogMoogleWarrior from "../pool/mog-moogle-warrior.js";
 import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
+import _poolNamazuTrader from "../pool/namazu-trader.js";
 import _poolNarnamRenegade from "../pool/narnam-renegade.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
@@ -446,6 +450,7 @@ const shard: CardShard = {
     _poolCoastWatcher,
     _poolCodexShredder,
     _poolComeBackWrong,
+    _poolCommuneWithBeavers,
     _poolConformerShuriken,
     _poolControlMagic,
     _poolCosmicSpiderMan,
@@ -574,6 +579,7 @@ const shard: CardShard = {
     _poolMakindiStampede,
     _poolMalakirFamiliar,
     _poolMalakirMire,
+    _poolMalboro,
     _poolManorSkeleton,
     _poolMantaRiders,
     _poolMaraleafPixie,
@@ -591,12 +597,14 @@ const shard: CardShard = {
     _poolMindRavel,
     _poolMinotaurSureshot,
     _poolMirrodinBesieged,
+    _poolMogMoogleWarrior,
     _poolMonkGyatso,
     _poolMoonBlessedCleric,
     _poolMorcantsEyes,
     _poolMountainGoat,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
+    _poolNamazuTrader,
     _poolNarnamRenegade,
     _poolNeglectedManor,
     _poolNestingGrounds,

@@ -1,0 +1,1238 @@
+{
+ "batch": "B82",
+ "status": "complete",
+ "ranks": "Final Fantasy (FIN, 2025-06-13) and Final Fantasy Commander (FIC, 2025-06-13): the rest of the sets",
+ "authored": [
+  {
+   "name": "A Realm Reborn",
+   "files": [
+    "engine/src/cards/pool/a-realm-reborn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airship Crash",
+   "files": [
+    "engine/src/cards/pool/airship-crash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amarant Coral",
+   "files": [
+    "engine/src/cards/pool/amarant-coral.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashe, Princess of Dalmasca",
+   "files": [
+    "engine/src/cards/pool/ashe-princess-of-dalmasca.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auron's Inspiration",
+   "files": [
+    "engine/src/cards/pool/aurons-inspiration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bard's Bow",
+   "files": [
+    "engine/src/cards/pool/bards-bow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barret Wallace",
+   "files": [
+    "engine/src/cards/pool/barret-wallace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barret, Avalanche Leader",
+   "files": [
+    "engine/src/cards/pool/barret-avalanche-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle Menu",
+   "files": [
+    "engine/src/cards/pool/battle-menu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blazing Bomb",
+   "files": [
+    "engine/src/cards/pool/blazing-bomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brilliant Wings",
+   "files": [
+    "engine/src/cards/pool/brilliant-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cactuar",
+   "files": [
+    "engine/src/cards/pool/cactuar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call the Mountain Chocobo",
+   "files": [
+    "engine/src/cards/pool/call-the-mountain-chocobo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cargo Ship",
+   "files": [
+    "engine/src/cards/pool/cargo-ship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choco-Comet",
+   "files": [
+    "engine/src/cards/pool/choco-comet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chocobo Camp",
+   "files": [
+    "engine/src/cards/pool/chocobo-camp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloud of Darkness",
+   "files": [
+    "engine/src/cards/pool/cloud-of-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coliseum Behemoth",
+   "files": [
+    "engine/src/cards/pool/coliseum-behemoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commune with Beavers",
+   "files": [
+    "engine/src/cards/pool/commune-with-beavers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coral Sword",
+   "files": [
+    "engine/src/cards/pool/coral-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyan, Vengeful Samurai",
+   "files": [
+    "engine/src/cards/pool/cyan-vengeful-samurai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dark Knight's Greatsword",
+   "files": [
+    "engine/src/cards/pool/dark-knights-greatsword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadly Embrace",
+   "files": [
+    "engine/src/cards/pool/deadly-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon Wall",
+   "files": [
+    "engine/src/cards/pool/demon-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragoon's Lance",
+   "files": [
+    "engine/src/cards/pool/dragoons-lance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreams of Laguna",
+   "files": [
+    "engine/src/cards/pool/dreams-of-laguna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Edea, Possessed Sorceress",
+   "files": [
+    "engine/src/cards/pool/edea-possessed-sorceress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ether",
+   "files": [
+    "engine/src/cards/pool/ether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evil Reawakened",
+   "files": [
+    "engine/src/cards/pool/evil-reawakened.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exdeath, Void Warlock // Neo Exdeath, Dimension's End",
+   "files": [
+    "engine/src/cards/pool/exdeath-void-warlock.ts",
+    "engine/src/cards/pool/neo-exdeath-dimensions-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fate of the Sun-Cryst",
+   "files": [
+    "engine/src/cards/pool/fate-of-the-sun-cryst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fishing Gear",
+   "files": [
+    "engine/src/cards/pool/fishing-gear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "From Father to Son",
+   "files": [
+    "engine/src/cards/pool/from-father-to-son.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "G'raha Tia",
+   "files": [
+    "engine/src/cards/pool/graha-tia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaelicat",
+   "files": [
+    "engine/src/cards/pool/gaelicat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galuf's Final Act",
+   "files": [
+    "engine/src/cards/pool/galufs-final-act.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garland, Knight of Cornelia // Chaos, the Endless",
+   "files": [
+    "engine/src/cards/pool/garland-knight-of-cornelia.ts",
+    "engine/src/cards/pool/chaos-the-endless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gau, Feral Youth",
+   "files": [
+    "engine/src/cards/pool/gau-feral-youth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "General Leo Cristophe",
+   "files": [
+    "engine/src/cards/pool/general-leo-cristophe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gigantoad",
+   "files": [
+    "engine/src/cards/pool/gigantoad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giott, King of the Dwarves",
+   "files": [
+    "engine/src/cards/pool/giott-king-of-the-dwarves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gran Pulse Ochu",
+   "files": [
+    "engine/src/cards/pool/gran-pulse-ochu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gysahl Greens",
+   "files": [
+    "engine/src/cards/pool/gysahl-greens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hraesvelgr of the First Brood",
+   "files": [
+    "engine/src/cards/pool/hraesvelgr-of-the-first-brood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ice Flan",
+   "files": [
+    "engine/src/cards/pool/ice-flan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ignis Scientia",
+   "files": [
+    "engine/src/cards/pool/ignis-scientia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Interceptor, Shadow's Hound",
+   "files": [
+    "engine/src/cards/pool/interceptor-shadows-hound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Item Shopkeep",
+   "files": [
+    "engine/src/cards/pool/item-shopkeep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Judgment Bolt",
+   "files": [
+    "engine/src/cards/pool/judgment-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magitek Infantry",
+   "files": [
+    "engine/src/cards/pool/magitek-infantry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magitek Scythe",
+   "files": [
+    "engine/src/cards/pool/magitek-scythe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malboro",
+   "files": [
+    "engine/src/cards/pool/malboro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mega Flare",
+   "files": [
+    "engine/src/cards/pool/mega-flare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minwu, White Mage",
+   "files": [
+    "engine/src/cards/pool/minwu-white-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mog, Moogle Warrior",
+   "files": [
+    "engine/src/cards/pool/mog-moogle-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monk's Fist",
+   "files": [
+    "engine/src/cards/pool/monks-fist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Namazu Trader",
+   "files": [
+    "engine/src/cards/pool/namazu-trader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ninja's Blades",
+   "files": [
+    "engine/src/cards/pool/ninjas-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omega, Heartless Evolution",
+   "files": [
+    "engine/src/cards/pool/omega-heartless-evolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin's Arms",
+   "files": [
+    "engine/src/cards/pool/paladins-arms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Train",
+   "files": [
+    "engine/src/cards/pool/phantom-train.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poison the Waters",
+   "files": [
+    "engine/src/cards/pool/poison-the-waters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prompto Argentum",
+   "files": [
+    "engine/src/cards/pool/prompto-argentum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Qiqirn Merchant",
+   "files": [
+    "engine/src/cards/pool/qiqirn-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Random Encounter",
+   "files": [
+    "engine/src/cards/pool/random-encounter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Mage's Rapier",
+   "files": [
+    "engine/src/cards/pool/red-mages-rapier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retrieve the Esper",
+   "files": [
+    "engine/src/cards/pool/retrieve-the-esper.ts",
+    "engine/src/cards/tokens/robot-warrior-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rinoa Heartilly",
+   "files": [
+    "engine/src/cards/pool/rinoa-heartilly.ts",
+    "engine/src/cards/tokens/angelo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rook Turret",
+   "files": [
+    "engine/src/cards/pool/rook-turret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rufus Shinra",
+   "files": [
+    "engine/src/cards/pool/rufus-shinra.ts",
+    "engine/src/cards/tokens/darkstar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rydia's Return",
+   "files": [
+    "engine/src/cards/pool/rydias-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage's Nouliths",
+   "files": [
+    "engine/src/cards/pool/sages-nouliths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sahagin",
+   "files": [
+    "engine/src/cards/pool/sahagin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandworm",
+   "files": [
+    "engine/src/cards/pool/sandworm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorpion Sentinel",
+   "files": [
+    "engine/src/cards/pool/scorpion-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Search for Dagger",
+   "files": [
+    "engine/src/cards/pool/search-for-dagger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seifer Almasy",
+   "files": [
+    "engine/src/cards/pool/seifer-almasy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Setzer, Wandering Gambler",
+   "files": [
+    "engine/src/cards/pool/setzer-wandering-gambler.ts",
+    "engine/src/cards/tokens/the-blackjack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seymour Flux",
+   "files": [
+    "engine/src/cards/pool/seymour-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shambling Cie'th",
+   "files": [
+    "engine/src/cards/pool/shambling-cieth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shantotto, Tactician Magician",
+   "files": [
+    "engine/src/cards/pool/shantotto-tactician-magician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shinra Reinforcements",
+   "files": [
+    "engine/src/cards/pool/shinra-reinforcements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sidequest: Card Collection // Magicked Card",
+   "files": [
+    "engine/src/cards/pool/sidequest-card-collection.ts",
+    "engine/src/cards/pool/magicked-card.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sidequest: Catch a Fish // Cooking Campsite",
+   "files": [
+    "engine/src/cards/pool/sidequest-catch-a-fish.ts",
+    "engine/src/cards/pool/cooking-campsite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sidequest: Hunt the Mark // Yiazmat, Ultimate Mark",
+   "files": [
+    "engine/src/cards/pool/sidequest-hunt-the-mark.ts",
+    "engine/src/cards/pool/yiazmat-ultimate-mark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sidequest: Play Blitzball // World Champion, Celestial Weapon",
+   "files": [
+    "engine/src/cards/pool/sidequest-play-blitzball.ts",
+    "engine/src/cards/pool/world-champion-celestial-weapon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siegfried, Famed Swordsman",
+   "files": [
+    "engine/src/cards/pool/siegfried-famed-swordsman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slash of Light",
+   "files": [
+    "engine/src/cards/pool/slash-of-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snow Villiers",
+   "files": [
+    "engine/src/cards/pool/snow-villiers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: Esper Ramuh",
+   "files": [
+    "engine/src/cards/pool/summon-esper-ramuh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: G.F. Cerberus",
+   "files": [
+    "engine/src/cards/pool/summon-g-f-cerberus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summoner's Grimoire",
+   "files": [
+    "engine/src/cards/pool/summoners-grimoire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summoner's Sending",
+   "files": [
+    "engine/src/cards/pool/summoners-sending.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swallowed by Leviathan",
+   "files": [
+    "engine/src/cards/pool/swallowed-by-leviathan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tellah, Great Sage",
+   "files": [
+    "engine/src/cards/pool/tellah-great-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Crystal's Chosen",
+   "files": [
+    "engine/src/cards/pool/the-crystals-chosen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Falcon, Airship Restored",
+   "files": [
+    "engine/src/cards/pool/the-falcon-airship-restored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Final Days",
+   "files": [
+    "engine/src/cards/pool/the-final-days.ts",
+    "engine/src/cards/tokens/horror-token-the-final-days.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Lunar Whale",
+   "files": [
+    "engine/src/cards/pool/the-lunar-whale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Prima Vista",
+   "files": [
+    "engine/src/cards/pool/the-prima-vista.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thief's Knife",
+   "files": [
+    "engine/src/cards/pool/thiefs-knife.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tonberry",
+   "files": [
+    "engine/src/cards/pool/tonberry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Town Greeter",
+   "files": [
+    "engine/src/cards/pool/town-greeter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Travel the Overworld",
+   "files": [
+    "engine/src/cards/pool/travel-the-overworld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultimecia, Temporal Threat",
+   "files": [
+    "engine/src/cards/pool/ultimecia-temporal-threat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultimecia, Time Sorceress // Ultimecia, Omnipotent",
+   "files": [
+    "engine/src/cards/pool/ultimecia-time-sorceress.ts",
+    "engine/src/cards/pool/ultimecia-omnipotent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultros, Obnoxious Octopus",
+   "files": [
+    "engine/src/cards/pool/ultros-obnoxious-octopus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vincent's Limit Break",
+   "files": [
+    "engine/src/cards/pool/vincents-limit-break.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warrior's Sword",
+   "files": [
+    "engine/src/cards/pool/warriors-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weapons Vendor",
+   "files": [
+    "engine/src/cards/pool/weapons-vendor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Mage's Staff",
+   "files": [
+    "engine/src/cards/pool/white-mages-staff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xande, Dark Mage",
+   "files": [
+    "engine/src/cards/pool/xande-dark-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You're Not Alone",
+   "files": [
+    "engine/src/cards/pool/youre-not-alone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yuna's Whistle",
+   "files": [
+    "engine/src/cards/pool/yunas-whistle.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aerith Rescue Mission",
+   "needs": [
+    "decision:choose-among-targets"
+   ],
+   "why": "Take 59 Flights of Stairs' 'Put a stun counter on one of them' is a choice among the spell's own legal targets made as it resolves (the ruling); choose-permanents can't be limited to the targets, and a resolution-time modal can't drop a mode whose target went illegal."
+  },
+  {
+   "name": "Avalanche of Sector 7",
+   "needs": [
+    "trigger:activates-mana-ability"
+   ],
+   "why": "\"Whenever an opponent activates an ability of an artifact they control\" includes mana abilities (a Treasure, a mana rock — the card doesn't exclude them), but the activates-ability trigger never sees a mana ability."
+  },
+  {
+   "name": "Balthier and Fran",
+   "needs": [
+    "condition:crewed-by-this-turn"
+   ],
+   "why": "\"Whenever a Vehicle crewed by Balthier and Fran this turn attacks\" needs a record of which creatures crewed a Vehicle this turn, which the engine does not keep."
+  },
+  {
+   "name": "Beatrix, Loyal General",
+   "needs": [
+    "effect:attach-chosen-equipment-to-target"
+   ],
+   "why": "\"Attach any number of Equipment you control to target creature you control\" chooses the Equipment (not targets) as it resolves; choose-permanents' then replaces the ability's targets with each chosen permanent, so the targeted creature can't be named, and making the Equipment targets would change fizzling and targeting."
+  },
+  {
+   "name": "Blue Mage's Cane",
+   "needs": [
+    "effect:cast-now-alternative-mana-cost"
+   ],
+   "why": "The granted attack trigger's \"You may cast the copy by paying {3} rather than paying its mana cost\": cast-now offers only the card's own cost or a free cast, never a fixed alternative mana cost (the exile from defending player's graveyard and the copy are expressible — Renegade Bull's shape)."
+  },
+  {
+   "name": "Campsite Cuisine",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "\"You may sacrifice X Foods. When you do, up to X target attacking creatures each get +3/+3 …\": a reflexive ability's target count can't be the number sacrificed (an any-number group's max is a number or the spell's X)."
+  },
+  {
+   "name": "Cecil, Dark Knight // Cecil, Redeemed Paladin",
+   "needs": [
+    "trigger:deals-damage-once-per-event"
+   ],
+   "why": "\"Whenever Cecil deals damage\" triggers once per damage event with the total (Vessel of the All-Consuming's ruling), but deals-damage fires once per recipient — with trample or two blockers Cecil would lose life and check/transform twice, transforming back on the second."
+  },
+  {
+   "name": "Chaos Shrine's Black Crystal",
+   "needs": [
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "The linked exile is fine, but nothing puts a chosen creature card exiled with the source onto the battlefield (with a finality counter)."
+  },
+  {
+   "name": "Cid, Timeless Artificer",
+   "needs": [
+    "mechanic:deck-any-number-copies"
+   ],
+   "why": "'A deck can have any number of cards named Cid, Timeless Artificer': deck validation's singleton exemption is basic lands only (the +1/+1 anthem itself is expressible: two grantPtPerCount statics, battlefield and inGraveyard)."
+  },
+  {
+   "name": "Coin of Fate",
+   "needs": [
+    "effect:cost-exiled-cards-this-way",
+    "effect:opponent-chooses-from-found"
+   ],
+   "why": "The effect reads 'the exiled cards' its cost exiled and has an opponent choose one to go to the library bottom while the other returns tapped; neither the cost-exiled reference nor that opponent choice exists."
+  },
+  {
+   "name": "Crystal Fragments // Summon: Alexander",
+   "needs": [
+    "replacement:prevent-damage-to-filter-this-turn"
+   ],
+   "why": "Chapters I-II 'Prevent all damage that would be dealt to creatures you control this turn' is a rule over a filter (rule 611.2c, so later arrivals are covered too); per-object prevent-damage shields would miss them."
+  },
+  {
+   "name": "Duelist's Flame",
+   "needs": [
+    "condition:blocked-creature-filter"
+   ],
+   "why": "'Target blocked creature you control' has no CardFilter clause (only unblocked; attacking + unblocked:false wrongly matches an attacker before blockers are declared)."
+  },
+  {
+   "name": "Edgar, King of Figaro",
+   "needs": [
+    "mechanic:coin-flip-result-replacement"
+   ],
+   "why": "Two-Headed Coin — \"the first time you flip one or more coins each turn, those coins come up heads and you win those flips\" — needs a static that fixes coin results (and wins flips with no winner), which flip-coin has no hook for."
+  },
+  {
+   "name": "Edgar, Master Machinist",
+   "needs": [
+    "zone:graveyard-cast-enters-tapped"
+   ],
+   "why": "\"If you cast a spell this way, that artifact enters tapped\": castFromGraveyard (Karador's once-per-turn permission) has no enters-tapped rider on spells cast through it."
+  },
+  {
+   "name": "Elixir",
+   "needs": [
+    "effect:shuffle-graveyard-into-library"
+   ],
+   "why": "\"Shuffle all nonland cards from your graveyard into your library\" has no effect kind (shuffle-into-library moves only a battlefield permanent), nor the count of cards shuffled this way for the life gain."
+  },
+  {
+   "name": "Estinien Varlineau",
+   "needs": [
+    "condition:combat-damage-by-filter-this-turn"
+   ],
+   "why": "\"X is the number of your opponents who were dealt combat damage by Estinien Varlineau or a Dragon this turn\": no amount counting players damaged this turn by sources matching a filter (combatDamagedPlayersThisTurn is per object and forgotten when a Dragon leaves the battlefield)."
+  },
+  {
+   "name": "Fated Clash",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "'You may cast this spell as though it had flash if a creature is attacking and a creature is blocking' is a conditional flash printed on the spell itself, which has no vocabulary."
+  },
+  {
+   "name": "Garland, Royal Kidnapper",
+   "needs": [
+    "effect:target-player-becomes-monarch",
+    "trigger:becomes-monarch",
+    "effect:control-while-player-is-monarch"
+   ],
+   "why": "become-monarch takes no target player, there's no 'whenever an opponent becomes the monarch' trigger, and gain-control has no 'for as long as they're the monarch' duration."
+  },
+  {
+   "name": "Heidegger, Shinra Executive",
+   "needs": [
+    "condition:that-player-controls-more"
+   ],
+   "why": "'tokens equal to the number of opponents who control more creatures than you' needs a per-player count; opponent-controls-more only asks whether some opponent does."
+  },
+  {
+   "name": "Helitrooper",
+   "needs": [
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "\"Equip abilities you activate that target this creature cost {2} less to activate\": abilityCostModification can't single out equip abilities, nor read what an ability targets."
+  },
+  {
+   "name": "Hildibrand Manderville // Gentleman's Rise",
+   "needs": [
+    "zone:graveyard-cast-as-adventure"
+   ],
+   "why": "\"When Hildibrand Manderville dies, you may cast it from your graveyard as an Adventure until the end of your next turn\": no graveyard cast permission limited to an adventurer card's Adventure face, lasting until the end of your next turn."
+  },
+  {
+   "name": "Ice Magic",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "Blizzara's 'Target creature's owner puts it on their choice of the top or bottom of their library': put-on-library has a fixed position, and no modal/each-player-may can hand the choice to the target's owner (each-player-may's controllerOfTarget is the controller, which differs for a stolen creature)."
+  },
+  {
+   "name": "Judgment of Alexander",
+   "needs": [
+    "replacement:prevent-all-damage-to-player",
+    "replacement:damage-prevented-trigger"
+   ],
+   "why": "No turn-long 'prevent all damage dealt to you by sources your opponents control' and no 'whenever damage from a creature is prevented this way' trigger for each commander creature to deal damage back."
+  },
+  {
+   "name": "Kain, Traitorous Dragoon",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "\"If they do\" after \"that player gains control of Kain\" needs to know the control change happened; a conditional reads the source from its current controller's side (so 'controlled by an opponent' is false once the player controls it), and the common failure — the player dealt the damage having lost to it before the trigger resolves — can't be told apart from success without a this-way record of the control change."
+  },
+  {
+   "name": "Light of Judgment",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "\"Destroy up to one Equipment attached to that creature\" is a resolution-time choice among the permanents attached to the target, and no CardFilter clause or choose-permanents form names the object in a target slot as the host."
+  },
+  {
+   "name": "Lightning, Security Sergeant",
+   "needs": [
+    "zone:impulse-while-you-control-source"
+   ],
+   "why": "'You may play that card for as long as you control Lightning': impulse-exile's while-source duration checks only that the source is on the battlefield, not that its controller still controls it (the ruling: a change of control ends it for good)."
+  },
+  {
+   "name": "Lord Jyscal Guado",
+   "needs": [
+    "effect:turn-stat-counters-put"
+   ],
+   "why": "The intervening-if \"if you put a counter on a creature this turn\": no turn stat for counters you've put on creatures."
+  },
+  {
+   "name": "Memories Returning",
+   "needs": [
+    "effect:opponent-chooses-from-found"
+   ],
+   "why": "Alternating picks from the five revealed cards — you take one, the chosen opponent bottoms one, you take one, they bottom one, the last goes to hand: look-and-choose's chooser is a public-zone (graveyard) option only, with no revealed pool shared across several picks by different players."
+  },
+  {
+   "name": "Noctis, Heir Apparent",
+   "needs": [
+    "effect:warp-strike-return-attacking"
+   ],
+   "why": "Warp-Strike's 'return it tapped and attacking at the beginning of that player's next declare attackers step; it can't be blocked that combat' has no flicker return timing (returnAt has no declare-attackers option)."
+  },
+  {
+   "name": "Phoenix Down",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "A modal activated ability whose modes bring their own targets (reanimate a creature card with mana value 4 or less / exile target Skeleton, Spirit or Zombie), chosen as it's activated (rule 700.2b), isn't expressible."
+  },
+  {
+   "name": "Quistis Trepe",
+   "needs": [
+    "effect:cast-now-spend-any-mana"
+   ],
+   "why": "cast-now has no spendAs, so \"mana of any type can be spent to cast that spell\" for the card cast from a graveyard as the trigger resolves can't be said."
+  },
+  {
+   "name": "Qutrub Forayer",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "The second mode, \"exile up to two target cards from a single graveyard\", needs a target relation keeping both cards in one graveyard; any-number / other slots can only say different-controller, not same-owner."
+  },
+  {
+   "name": "Ragnarok, Divine Deliverance",
+   "needs": [
+    "mechanic:meld"
+   ],
+   "why": "It is the melded back face of Fang, Fearless l'Cie and Vanille, Cheerful l'Cie; the meld layout is not modeled, so the permanent can never exist."
+  },
+  {
+   "name": "Rejoin the Fight",
+   "needs": [
+    "effect:opponent-chooses-from-graveyard"
+   ],
+   "why": "\"Each opponent chooses a creature card in your graveyard that hasn't been chosen\", starting with the next opponent: no graveyard-card choice made by other players, one after another, excluding earlier picks."
+  },
+  {
+   "name": "Relentless X-ATM092",
+   "needs": [
+    "static:cant-be-blocked-except-by-n"
+   ],
+   "why": "'Can't be blocked except by three or more creatures': only menace's fixed two exists in combat/blocking.ts (the graveyard return with a finality counter is expressible)."
+  },
+  {
+   "name": "Reno and Rude",
+   "needs": [
+    "zone:allow-cast-from-exile-spend-any-type"
+   ],
+   "why": "The top card is exiled first, then a sacrifice is offered, and only if it was made may the exiled card be played this turn with mana of any type: allow-cast-from-exile is cast-only with no spendAs, and impulse-exile can't grant its permission after a later choice without reordering what the player sees."
+  },
+  {
+   "name": "Rinoa, Angel Wing",
+   "needs": [
+    "trigger:dies-batch-trigger"
+   ],
+   "why": "'Whenever one or more attacking creatures you control die, you may return one of them' needs a batched dies trigger whose effect chooses one of the batch."
+  },
+  {
+   "name": "Sabin, Master Monk",
+   "needs": [
+    "keyword:blitz-extensions"
+   ],
+   "why": "\"Blitz—{2}{R}{R}, Discard a card\" (a blitz cost with a discard in it) and \"You may cast this card from your graveyard using its blitz ability\": blitz takes a mana cost only and is offered only from the hand and the command zone."
+  },
+  {
+   "name": "Seifer, Balamb Rival",
+   "needs": [
+    "trigger:becomes-blocked-by-two-or-more"
+   ],
+   "why": "'Whenever a creature attacking one of your opponents becomes blocked by two or more creatures' — becomes-blocked has no blocker count and no 'attacking one of your opponents' clause."
+  },
+  {
+   "name": "Sleep Magic",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "\"Enchanted creature doesn't untap during its controller's untap step\": the doesntUntap static only covers its own permanent, not the enchanted creature."
+  },
+  {
+   "name": "Squall, Gunblade Duelist",
+   "needs": [
+    "trigger:attack-batch-per-defender-those-creatures",
+    "trigger:attack-with-intervening-if"
+   ],
+   "why": "'Whenever one or more creatures attack one of your opponents, if any of those creatures have power or toughness equal to the chosen number' needs a per-defender attack batch with an intervening-if over those creatures."
+  },
+  {
+   "name": "Stolen Uniform",
+   "needs": [
+    "trigger:lose-control-trigger",
+    "effect:unattach-effect"
+   ],
+   "why": "Its reflexive \"When you lose control of that Equipment this turn, if it is attached to a creature you control, unattach it\" needs a lose-control trigger and an unattach effect, neither of which exists."
+  },
+  {
+   "name": "Strago and Relm",
+   "needs": [
+    "effect:cast-now-grants-abilities"
+   ],
+   "why": "\"If you cast a creature spell this way, it gains haste and 'At the beginning of the end step, sacrifice this creature.'\": cast-now can't give the spell it casts (and the permanent it becomes) abilities; the reveal-until and free cast themselves are Chaos Wand's shape."
+  },
+  {
+   "name": "Stuck in Summoner's Sanctum",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "'Its activated abilities can't be activated' on the enchanted permanent: the prohibits static takes a CardFilter, and no filter names the permanent this Aura is attached to."
+  },
+  {
+   "name": "Summon: Brynhildr",
+   "needs": [
+    "zone:impulse-during-lore-counter-turns"
+   ],
+   "why": "Chapter I's \"During any turn you put a lore counter on this Saga, you may play that card\" is a play permission live only on turns a lore counter goes on the Saga; impulse-exile's durations (end-of-turn, your-next-turn, while-source, while-exiled, ...) have no such window."
+  },
+  {
+   "name": "Thancred Waters",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "Royal Guard's indestructible lasts \"for as long as you control Thancred Waters\"; the only source-bound duration, while-source, doesn't end when control of Thancred changes."
+  },
+  {
+   "name": "The Destined Black Mage",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "\"If you have a full party, it deals 3 damage to each opponent instead\": no party count or full-party condition."
+  },
+  {
+   "name": "The Destined Thief",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "'If you have a full party, instead draw three cards' needs the party count (each creature counted for one party type); a Cleric/Rogue/Warrior/Wizard conjunction would count a Cleric Wizard twice."
+  },
+  {
+   "name": "The Destined Warrior",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "'If you have a full party, creatures you control get +3/+0 instead' needs the party count (each creature counted once), not four subtype checks."
+  },
+  {
+   "name": "The Destined White Mage",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "\"If you have a full party, put three +1/+1 counters on that creature instead\": no party count or full-party condition."
+  },
+  {
+   "name": "Ultima",
+   "needs": [
+    "effect:end-the-turn"
+   ],
+   "why": "\"End the turn\" (rule 723.1: exile the stack, remove creatures from combat, go to cleanup) has no effect."
+  },
+  {
+   "name": "Ultimate Magic: Meteor",
+   "needs": [
+    "effect:choose-per-opponent-then-destroy"
+   ],
+   "why": "\"For each opponent, choose an artifact or land that player controls. Destroy the chosen permanents\": choose-permanents has no per-opponent pick from that player's side, and a for-each-player loop would destroy them one opponent at a time rather than together."
+  },
+  {
+   "name": "Umaro, Raging Yeti",
+   "needs": [
+    "effect:random-mode-announced"
+   ],
+   "why": "Its beginning-of-combat mode is chosen at random as the trigger goes on the stack (before its target, per the rulings); modal's random is resolution-time only."
+  },
+  {
+   "name": "Unexpected Request",
+   "needs": [
+    "effect:unattach-effect"
+   ],
+   "why": "\"You may attach an Equipment you control to that creature. If you do, unattach it at the beginning of the next end step\": no unattach effect (nor a delayed trigger running one on the Equipment chosen as it resolves)."
+  },
+  {
+   "name": "Urianger Augurelt",
+   "needs": [
+    "zone:exiled-with-source-play"
+   ],
+   "why": "Draw Arcanum's linked face-down exile and Play Arcanum's \"until end of turn, you may play cards exiled with Urianger Augurelt. Spells you cast this way cost {2} less\": no activated, this-turn play permission over the source's linked exile, nor a cost reduction tied to that permission."
+  },
+  {
+   "name": "Vanille, Cheerful l'Cie",
+   "needs": [
+    "mechanic:meld"
+   ],
+   "why": "Melding with Fang, Fearless l'Cie into Ragnarok, Divine Deliverance (the meld layout) isn't modeled."
+  },
+  {
+   "name": "Vayne's Treachery",
+   "needs": [
+    "cost:kicker-nonmana-cost"
+   ],
+   "why": "\"Kicker—Sacrifice an artifact or creature\": kicker.cost is mana only, with no sacrifice kicker cost to read as kicked."
+  },
+  {
+   "name": "Warrior's Resolve",
+   "needs": [
+    "keyword:training"
+   ],
+   "why": "'Creatures you control have training' — training isn't modeled (its trigger condition is checked as attackers are declared, not as an intervening-if)."
+  },
+  {
+   "name": "Zidane, Tantalus Thief",
+   "needs": [
+    "trigger:lose-control-trigger"
+   ],
+   "why": "\"Whenever an opponent gains control of a permanent from you\" has no trigger event (control changes fire nothing a trigger can watch, once per permanent)."
+  }
+ ]
+}
