@@ -217,6 +217,90 @@ describe("fixed multi-color mana sources (P0)", () => {
     expect(game.state.objects[kf]?.tapped).toBe(false);
   });
 
+  // A bug report (2026-10-15): the payer didn't avoid a source that costs
+  // life when another would do, at least with Mana Confluence. Sources
+  // making a colour were ordered by whether they cost mana, not life, so
+  // battlefield order decided; here the life-costing source comes first.
+  for (const [pain, label] of [
+    ["Mana Confluence", "Mana Confluence ({T}, Pay 1 life)"],
+    ["Karplusan Forest", "a pain land's colour"],
+  ] as const) {
+    it(`a colour comes from a free source before ${label}, whatever the battlefield order`, () => {
+      const game = makeGame(["Raging Goblin"]);
+      const painful = game.debugSpawn(pain, A);
+      game.state.objects[painful]!.tapped = false;
+      const mtn = game.debugSpawn("Mountain", A);
+      const life0 = game.state.players[A].life;
+      game.dispatch({
+        type: "cast-spell",
+        player: A,
+        card: game.handOf(A).find((id) => game.state.objects[id].cardName === "Raging Goblin")!,
+      });
+      game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
+      expect(game.state.players[A].life).toBe(life0);
+      expect(game.state.objects[mtn]?.tapped).toBe(true);
+      expect(game.state.objects[painful]?.tapped).toBe(false);
+    });
+  }
+
+  it("generic mana comes from a free source before Mana Confluence, whatever the battlefield order", () => {
+    const game = makeGame(["Bonesplitter"]);
+    const confluence = game.debugSpawn("Mana Confluence", A);
+    game.state.objects[confluence]!.tapped = false;
+    const swamp = game.debugSpawn("Swamp", A);
+    const life0 = game.state.players[A].life;
+    game.dispatch({
+      type: "cast-spell",
+      player: A,
+      card: game.handOf(A).find((id) => game.state.objects[id].cardName === "Bonesplitter")!,
+    });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
+    expect(game.state.players[A].life).toBe(life0);
+    expect(game.state.objects[swamp]?.tapped).toBe(true);
+    expect(game.state.objects[confluence]?.tapped).toBe(false);
+  });
+
+  // The case behind the report: generic mana went to a source after the
+  // creatures, so with only Mana Confluence and a mana creature, Confluence's
+  // life was paid rather than the creature tapped. Life is weighed first now.
+  it("generic mana taps a mana creature before paying Mana Confluence's life", () => {
+    const game = makeGame(["Bonesplitter"]);
+    const confluence = game.debugSpawn("Mana Confluence", A);
+    game.state.objects[confluence]!.tapped = false;
+    const elves = game.debugSpawn("Llanowar Elves", A, "battlefield", { summoningSick: false });
+    const life0 = game.state.players[A].life;
+    game.dispatch({
+      type: "cast-spell",
+      player: A,
+      card: game.handOf(A).find((id) => game.state.objects[id].cardName === "Bonesplitter")!,
+    });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
+    expect(game.state.players[A].life).toBe(life0);
+    expect(game.state.objects[elves]?.tapped).toBe(true);
+    expect(game.state.objects[confluence]?.tapped).toBe(false);
+  });
+
+  it("a colour comes from a mana creature before Mana Confluence, and generic from a painland's free {C}", () => {
+    // Cultivate ({2}{G}): the Elves make the {G}, the Mountain and Shivan
+    // Reef's {C} the {2}; Confluence, first in battlefield order, stays.
+    const game = makeGame(["Cultivate"]);
+    const confluence = game.debugSpawn("Mana Confluence", A);
+    game.state.objects[confluence]!.tapped = false;
+    const elves = game.debugSpawn("Llanowar Elves", A, "battlefield", { summoningSick: false });
+    game.debugSpawn("Mountain", A);
+    const reef = game.debugSpawn("Shivan Reef", A);
+    game.state.objects[reef]!.tapped = false;
+    const life0 = game.state.players[A].life;
+    game.dispatch({
+      type: "cast-spell",
+      player: A,
+      card: game.handOf(A).find((id) => game.state.objects[id].cardName === "Cultivate")!,
+    });
+    expect(game.state.players[A].life).toBe(life0);
+    expect(game.state.objects[elves]?.tapped).toBe(true);
+    expect(game.state.objects[confluence]?.tapped).toBe(false);
+  });
+
   it("a scry-land's ETB trigger raises a scry decision", () => {
     const game = makeGame([]);
     const id = asObjectId(`hand-${game.state.nextObjectSeq}`);

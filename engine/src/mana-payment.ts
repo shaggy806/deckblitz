@@ -1003,7 +1003,13 @@ function planManaPaymentOrdered(
     // source making the colour for free before one that must be funded to:
     // an Island pays {U} before Prismatic Lens turns a Swamp blue.
     const freely = (s: ManaSource): boolean => s.options.some((o) => !costsMana(o) && makes(o));
-    const order = [...sources].sort((a, b) => groupOf(a) - groupOf(b) || Number(!freely(a)) - Number(!freely(b)));
+    // Then one making it without costing life before one that does: a Forest
+    // or Llanowar Elves pays {G} before Mana Confluence or a painland's {G}
+    // (a bug report, 2026-10-15).
+    const toll = (s: ManaSource): number => Math.min(...s.options.filter(makes).map(lifeToll));
+    const order = [...sources].sort(
+      (a, b) => groupOf(a) - groupOf(b) || Number(!freely(a)) - Number(!freely(b)) || toll(a) - toll(b),
+    );
     for (const next of order) {
       if (isTapped(next.id) || !canMake(next)) continue;
       const t = openFunded(next, m);
@@ -1150,7 +1156,10 @@ function planManaPaymentOrdered(
   // Sorted within each group only: converters and the last resorts stay
   // where `order` put them, which the plan depends on.
   // Then `avoid` last (a man-land paying its own animation stays untapped to
-  // attack), a creature after the rest (its tap costs an attack or a block),
+  // attack), a source that costs life after every one that doesn't — even a
+  // creature (a bug report, 2026-10-15: Mana Confluence paid 1 life beside an
+  // untapped Llanowar Elves; a painland's free {C} costs none), a creature
+  // after the rest (its tap costs an attack or a block),
   // and among the rest the source the hand needs least, then the one making
   // fewest colours:
   // with no other card to weigh, Sol Ring's colourless pays an Arcane Signet
@@ -1162,6 +1171,7 @@ function planManaPaymentOrdered(
     i,
     group: groupOf(src),
     avoided: src.id === avoid ? 1 : 0,
+    toll: Math.min(...src.options.map(lifeToll)),
     creature: src.isCreature === true ? 1 : 0,
     colours: colourCount(src),
   }));
@@ -1169,7 +1179,16 @@ function planManaPaymentOrdered(
     ranked
       .filter((e) => !isTapped(e.src.id))
       .map((e) => ({ ...e, keep: keepScore(e.src) }))
-      .sort((a, b) => a.group - b.group || a.avoided - b.avoided || a.creature - b.creature || a.keep - b.keep || a.colours - b.colours || a.i - b.i)
+      .sort(
+        (a, b) =>
+          a.group - b.group ||
+          a.avoided - b.avoided ||
+          a.toll - b.toll ||
+          a.creature - b.creature ||
+          a.keep - b.keep ||
+          a.colours - b.colours ||
+          a.i - b.i,
+      )
       .map((e) => e.src);
   /** Take one generic from `t` toward the cost itself, recording it as
    * lendable. */
