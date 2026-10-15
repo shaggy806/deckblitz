@@ -779,6 +779,10 @@ in `git log`.
   one or more into an empty library counted (rules 701.22d, 701.25d), and the
   `scried-or-surveilled` turn stat (`scry-triggers.test.ts`). Eight cards;
   Elvish Mariner and Elrond, Master of Healing wait on X targets.
+- **Reveal a hand, you choose, they discard** (`effect:discard-chosen-from-revealed-hand`,
+  2026-10-14, B72) — the `discard-chosen` effect and the `"discard"` zone-choice
+  destination (`discard-chosen.test.ts`). Duress, Thoughtseize, Inquisition of
+  Kozilek, Coercion and six more; Mathemagics with `{ powerOfTwo }` beside it.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

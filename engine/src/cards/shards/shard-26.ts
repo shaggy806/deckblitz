@@ -35,6 +35,7 @@ import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
+import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
@@ -220,6 +221,7 @@ import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
@@ -400,6 +402,7 @@ const shard: CardShard = {
     _poolBatteringKrasis,
     _poolBedlam,
     _poolBefuddle,
+    _poolBlackWidowDaringOperative,
     _poolBlessedWine,
     _poolBogSmugglers,
     _poolBoldImpaler,
@@ -585,6 +588,7 @@ const shard: CardShard = {
     _poolPulseOfMurasa,
     _poolPygmyRazorback,
     _poolQarsiRevenant,
+    _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,
     _poolReassemblingSkeleton,

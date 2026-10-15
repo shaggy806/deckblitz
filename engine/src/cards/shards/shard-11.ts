@@ -61,6 +61,7 @@ import _poolCavePeople from "../pool/cave-people.js";
 import _poolCensor from "../pool/censor.js";
 import _poolChainsOfCustody from "../pool/chains-of-custody.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
+import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
 import _poolChosenByHeliod from "../pool/chosen-by-heliod.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
@@ -171,6 +172,8 @@ import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
 import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
+import _poolInfinityFormula from "../pool/infinity-formula.js";
+import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
@@ -260,6 +263,7 @@ import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
 import _poolPrismariCharm from "../pool/prismari-charm.js";
+import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
@@ -271,6 +275,7 @@ import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
 import _poolRendclawTrow from "../pool/rendclaw-trow.js";
+import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
 import _poolRevengeOfTheRats from "../pool/revenge-of-the-rats.js";
 import _poolRibCageSpider from "../pool/rib-cage-spider.js";
@@ -335,6 +340,7 @@ import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
+import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
@@ -350,6 +356,7 @@ import _poolSyndicateEnforcer from "../pool/syndicate-enforcer.js";
 import _poolTaintedWood from "../pool/tainted-wood.js";
 import _poolTalrandsInvocation from "../pool/talrands-invocation.js";
 import _poolTanglespanBridgeworks from "../pool/tanglespan-bridgeworks.js";
+import _poolTchakaVenerableKing from "../pool/tchaka-venerable-king.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
 import _poolTechnodrome from "../pool/technodrome.js";
 import _poolTeferisProtection from "../pool/teferis-protection.js";
@@ -485,6 +492,7 @@ const shard: CardShard = {
     _poolCensor,
     _poolChainsOfCustody,
     _poolChaosChanneler,
+    _poolChaseSteinRunaway,
     _poolChosenByHeliod,
     _poolCircleOfPower,
     _poolCitanulStalwart,
@@ -595,6 +603,8 @@ const shard: CardShard = {
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
     _poolInevitableDefeat,
+    _poolInfinityFormula,
+    _poolInquisitionOfKozilek,
     _poolInspiringOverseer,
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
@@ -684,6 +694,7 @@ const shard: CardShard = {
     _poolPriestOfIroas,
     _poolPrimalMight,
     _poolPrismariCharm,
+    _poolQuarrel,
     _poolQuilledSlagwurm,
     _poolRadiantGrove,
     _poolRadiantSummit,
@@ -695,6 +706,7 @@ const shard: CardShard = {
     _poolRazorSwine,
     _poolRecumbentBliss,
     _poolRendclawTrow,
+    _poolRepulsorBots,
     _poolRevelsongHorn,
     _poolRevengeOfTheRats,
     _poolRibCageSpider,
@@ -759,6 +771,7 @@ const shard: CardShard = {
     _poolStarryEyedSkyrider,
     _poolSteelshapersGift,
     _poolStomperCub,
+    _poolStoneBySunlight,
     _poolStormfistCrusader,
     _poolStreetbreakerWurm,
     _poolStrengthOfTheHarvest,
@@ -774,6 +787,7 @@ const shard: CardShard = {
     _poolTaintedWood,
     _poolTalrandsInvocation,
     _poolTanglespanBridgeworks,
+    _poolTchakaVenerableKing,
     _poolTearAsunder,
     _poolTechnodrome,
     _poolTeferisProtection,

@@ -33,6 +33,7 @@ import _poolBattleRampart from "../pool/battle-rampart.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
+import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
@@ -212,6 +213,7 @@ import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
+import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
 import _poolManaFlare from "../pool/mana-flare.js";
@@ -263,6 +265,7 @@ import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
+import _poolRadioactiveMan from "../pool/radioactive-man.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
@@ -411,6 +414,7 @@ const shard: CardShard = {
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
     _poolBileUrchin,
+    _poolBlackTomCassidy,
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
     _poolBloodthirstyConqueror,
@@ -590,6 +594,7 @@ const shard: CardShard = {
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
     _poolLuminousPhantom,
+    _poolMadameHydraReanimated,
     _poolMagitekArmor,
     _poolMakeObsolete,
     _poolManaFlare,
@@ -641,6 +646,7 @@ const shard: CardShard = {
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
     _poolRabbleRousing,
+    _poolRadioactiveMan,
     _poolRakdosCharm,
     _poolRancidRats,
     _poolRecklessAbandon,

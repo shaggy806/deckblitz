@@ -150,6 +150,7 @@ import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
+import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
@@ -202,6 +203,7 @@ import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
 import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
+import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
 import _poolNoblesPurse from "../pool/nobles-purse.js";
@@ -300,6 +302,7 @@ import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
+import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
@@ -534,6 +537,7 @@ const shard: CardShard = {
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
     _poolGuidelightOptimizer,
+    _poolHeroInTraining,
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
@@ -586,6 +590,7 @@ const shard: CardShard = {
     _poolNaturalConnection,
     _poolNeedlepeakSpider,
     _poolNettletoothDjinn,
+    _poolNickFurySpymaster,
     _poolNightshadeDryad,
     _poolNightveilSprite,
     _poolNoblesPurse,
@@ -684,6 +689,7 @@ const shard: CardShard = {
     _poolSpiketailDrakeling,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
+    _poolStoneGiantOfHighPass,
     _poolStormKilnArtist,
     _poolSunbirdsInvocation,
     _poolSundownPass,

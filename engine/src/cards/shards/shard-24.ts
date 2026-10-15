@@ -39,6 +39,7 @@ import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
 import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
+import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
@@ -97,6 +98,7 @@ import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
 import _poolDreadwing from "../pool/dreadwing.js";
@@ -201,6 +203,7 @@ import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
+import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
@@ -292,6 +295,7 @@ import _poolTangledVale from "../pool/tangled-vale.js";
 import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
+import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
@@ -404,6 +408,7 @@ const shard: CardShard = {
     _poolBelligerentWhiptail,
     _poolBetorAncestorsVoice,
     _poolBitterbowSharpshooters,
+    _poolBlackBoltInhumanKing,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
     _poolBlinkingSpirit,
@@ -462,6 +467,7 @@ const shard: CardShard = {
     _poolDevotedDuelist,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDownDownToGoblinTown,
     _poolDowsingShaman,
     _poolDragonbackLancer,
     _poolDreadwing,
@@ -566,6 +572,7 @@ const shard: CardShard = {
     _poolMireInMisery,
     _poolMonumentToEndurance,
     _poolMorgueToad,
+    _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
     _poolMyrGalvanizer,
     _poolNarstadScrapper,
@@ -657,6 +664,7 @@ const shard: CardShard = {
     _poolTavernBrawler,
     _poolTeferisProtege,
     _poolTemporalFissure,
+    _poolTemporalIntervention,
     _poolTenuredTethermage,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,

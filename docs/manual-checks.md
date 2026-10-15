@@ -4632,3 +4632,17 @@ stack count once per token)
   moves the Bolt to Spellskite without asking (it's the one choice). Check at ~768px tall and at full size, in
   a 2- and a 4-player room.
 - **Known limits:** Misdirection waits on its "exile a blue card from your hand" alternative cost.
+
+### Duress, Thoughtseize, Oildeep Gearhulk
+
+*A new player decision* — choosing the card another player discards from their hand (rule 701.9a)
+
+- **Setup:** Your precombat main. Your battlefield: six Swamps and three Islands; in hand Duress,
+  Thoughtseize and Oildeep Gearhulk. Bob's hand: Lightning Bolt, Grizzly Bears, Forest and Counterspell.
+- **Do:** Cast Duress at Bob. Then Thoughtseize at Bob. Last, cast Oildeep Gearhulk, target Bob as it
+  enters, and decline.
+- **Check:** Duress shows Bob's whole hand ("Choose a card from Bob's hand for them to discard") with only
+  Lightning Bolt and Counterspell choosable; the one picked goes to Bob's graveyard and the history says Bob
+  discards it, and Bob's hand stays face up for the turn. Thoughtseize can take the Grizzly Bears too, and
+  you lose 2 life. Oildeep Gearhulk lets you look without anything being revealed, and declining leaves
+  Bob's hand as it was (no draw). Check at ~768px tall and at full size, in a 2- and a 4-player room.

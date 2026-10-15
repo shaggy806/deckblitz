@@ -216,6 +216,7 @@ import _poolMidnightBanshee from "../pool/midnight-banshee.js";
 import _poolMigratingKetradon from "../pool/migrating-ketradon.js";
 import _poolMindslicer from "../pool/mindslicer.js";
 import _poolMindstab from "../pool/mindstab.js";
+import _poolMirkwood from "../pool/mirkwood.js";
 import _poolMirrorRoom from "../pool/mirror-room.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
@@ -294,6 +295,7 @@ import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
+import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
 import _poolSoporificSprings from "../pool/soporific-springs.js";
@@ -347,6 +349,7 @@ import _poolTrollHornCameo from "../pool/troll-horn-cameo.js";
 import _poolTrygonPredator from "../pool/trygon-predator.js";
 import _poolTurtleLair from "../pool/turtle-lair.js";
 import _poolUkudCobra from "../pool/ukud-cobra.js";
+import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
@@ -358,6 +361,7 @@ import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
+import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
@@ -606,6 +610,7 @@ const shard: CardShard = {
     _poolMigratingKetradon,
     _poolMindslicer,
     _poolMindstab,
+    _poolMirkwood,
     _poolMirrorRoom,
     _poolMishrasFactory,
     _poolMithrilCoat,
@@ -684,6 +689,7 @@ const shard: CardShard = {
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
+    _poolSnowslopeHunter,
     _poolSoliton,
     _poolSoothingOfSmeagol,
     _poolSoporificSprings,
@@ -737,6 +743,7 @@ const shard: CardShard = {
     _poolTrygonPredator,
     _poolTurtleLair,
     _poolUkudCobra,
+    _poolUltimateNullification,
     _poolUlvenwaldHydra,
     _poolUnhinge,
     _poolUnswervingSloth,
@@ -748,6 +755,7 @@ const shard: CardShard = {
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,
+    _poolVoltaicWhip,
     _poolVulshokMorningstar,
     _poolWarMachineAvengingArsenal,
     _poolWardenOfEvosIsle,

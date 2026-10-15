@@ -219,6 +219,7 @@ import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
+import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartingGust from "../pool/parting-gust.js";
@@ -610,6 +611,7 @@ const shard: CardShard = {
     _poolOctaviaLivingThesis,
     _poolOrderOfLeitbur,
     _poolOreskosSwiftclaw,
+    _poolOriginOfTheHulk,
     _poolOstiaryThrull,
     _poolParch,
     _poolPartingGust,

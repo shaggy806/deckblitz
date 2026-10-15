@@ -96,6 +96,7 @@ import _poolDisorient from "../pool/disorient.js";
 import _poolDisrupt from "../pool/disrupt.js";
 import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
+import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
@@ -122,6 +123,7 @@ import _poolFloodedStrand from "../pool/flooded-strand.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
+import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
 import _poolGenerousStray from "../pool/generous-stray.js";
 import _poolGenesisWave from "../pool/genesis-wave.js";
 import _poolGeralfTheFleshwright from "../pool/geralf-the-fleshwright.js";
@@ -194,6 +196,7 @@ import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
+import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
 import _poolMerfolkSkyscout from "../pool/merfolk-skyscout.js";
@@ -208,6 +211,7 @@ import _poolMoonsilverKey from "../pool/moonsilver-key.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
+import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
 import _poolNecrogenSpellbomb from "../pool/necrogen-spellbomb.js";
 import _poolNecromancersAssistant from "../pool/necromancers-assistant.js";
 import _poolNeedleshotGourna from "../pool/needleshot-gourna.js";
@@ -253,6 +257,7 @@ import _poolRiddlesmith from "../pool/riddlesmith.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
+import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
@@ -341,6 +346,7 @@ import _poolTranquilLandscape from "../pool/tranquil-landscape.js";
 import _poolTreetopSnarespinner from "../pool/treetop-snarespinner.js";
 import _poolTrenchingSteed from "../pool/trenching-steed.js";
 import _poolTriSentinelActOfVengeance from "../pool/tri-sentinel-act-of-vengeance.js";
+import _poolTrollNegotiations from "../pool/troll-negotiations.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
@@ -484,6 +490,7 @@ const shard: CardShard = {
     _poolDisrupt,
     _poolDissolve,
     _poolDivinerOfMist,
+    _poolDownInTheValley,
     _poolDragonbackAssault,
     _poolDreadShade,
     _poolDryadsRevival,
@@ -510,6 +517,7 @@ const shard: CardShard = {
     _poolFoggyBottomSwamp,
     _poolGaeasSkyfolk,
     _poolGavonyUnhallowed,
+    _poolGazeInWonder,
     _poolGenerousStray,
     _poolGenesisWave,
     _poolGeralfTheFleshwright,
@@ -582,6 +590,7 @@ const shard: CardShard = {
     _poolManifoldKey,
     _poolMarduDevotee,
     _poolMarduHateblade,
+    _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMerfolkMesmerist,
     _poolMerfolkSkyscout,
@@ -596,6 +605,7 @@ const shard: CardShard = {
     _poolMoorFiend,
     _poolMulch,
     _poolNantukoShade,
+    _poolNastyLittleRabbit,
     _poolNecrogenSpellbomb,
     _poolNecromancersAssistant,
     _poolNeedleshotGourna,
@@ -641,6 +651,7 @@ const shard: CardShard = {
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiverchurnMonument,
+    _poolRollRollRollRoll,
     _poolRootManipulation,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
@@ -729,6 +740,7 @@ const shard: CardShard = {
     _poolTreetopSnarespinner,
     _poolTrenchingSteed,
     _poolTriSentinelActOfVengeance,
+    _poolTrollNegotiations,
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,
     _poolTwinflameTyrant,

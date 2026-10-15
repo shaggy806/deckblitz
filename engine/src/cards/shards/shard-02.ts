@@ -39,6 +39,7 @@ import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
 import _poolBoostedSloop from "../pool/boosted-sloop.js";
 import _poolBoromirGondorsHope from "../pool/boromir-gondors-hope.js";
+import _poolBoughsideWanderers from "../pool/boughside-wanderers.js";
 import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
@@ -136,6 +137,7 @@ import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
+import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
@@ -415,6 +417,7 @@ const shard: CardShard = {
     _poolBoonOfTheWishGiver,
     _poolBoostedSloop,
     _poolBoromirGondorsHope,
+    _poolBoughsideWanderers,
     _poolBoundlessRealms,
     _poolBrambleCreeper,
     _poolBranchingEvolution,
@@ -512,6 +515,7 @@ const shard: CardShard = {
     _poolGarruksUprising,
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
+    _poolGertAndOldLaceRunaways,
     _poolGiantAnkheg,
     _poolGlaringFleshraker,
     _poolGlimmerburst,

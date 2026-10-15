@@ -1223,7 +1223,9 @@ export type LegalAction =
         | "library-top"
         | "library-bottom"
         | "graveyard"
-        | "behold";
+        | "behold"
+        /** `forPlayer` discards the chosen cards from their hand (Duress). */
+        | "discard";
       /** A behold (rule 701.4a): `ids` are cards in the chooser's hand and
        * permanents they control at once — "reveal a card from your hand or
        * choose a permanent you control". `destination` is `"behold"`, or

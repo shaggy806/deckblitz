@@ -65,6 +65,7 @@ import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
+import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
@@ -119,6 +120,7 @@ import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
 import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
+import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
@@ -134,6 +136,7 @@ import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
+import _poolGoneFishing from "../pool/gone-fishing.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
@@ -149,6 +152,7 @@ import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
 import _poolHulkBruceBanner from "../pool/hulk-bruce-banner.js";
 import _poolIncreasingDevotion from "../pool/increasing-devotion.js";
+import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
 import _poolIronLadYoungAvenger from "../pool/iron-lad-young-avenger.js";
@@ -441,6 +445,7 @@ const shard: CardShard = {
     _poolCloudPirates,
     _poolCloudcrownOak,
     _poolCreepingTarPit,
+    _poolCrossoverCollaboration,
     _poolCrystalSlipper,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
@@ -495,6 +500,7 @@ const shard: CardShard = {
     _poolForumsFavor,
     _poolFoulRoads,
     _poolFrolickingFamiliar,
+    _poolGalionElvenkingsButler,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
     _poolGeralfsMindcrusher,
@@ -510,6 +516,7 @@ const shard: CardShard = {
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCommando,
     _poolGoldForgedThopteryx,
+    _poolGoneFishing,
     _poolGoobbueGardener,
     _poolGorillaChieftain,
     _poolGreaterAuramancy,
@@ -525,6 +532,7 @@ const shard: CardShard = {
     _poolHornetSting,
     _poolHulkBruceBanner,
     _poolIncreasingDevotion,
+    _poolInfernalRebirth,
     _poolIngotChewer,
     _poolInspiringVantage,
     _poolIronLadYoungAvenger,

@@ -1,0 +1,41 @@
+import { defineCard } from "../define.js";
+
+// EDHREC rank 22157.
+// Makes Human Soldier → use "Human Soldier Token".
+//
+// Rulings:
+//   [2026-06-29] Once a spell or ability that causes you to recruit begins to resolve, no player
+//     may take any other actions until it's done. Any responses made to the spell or ability must
+//     be made before you draw, discard, and potentially create a token.
+
+export default defineCard({
+  name: "Patient Instructor",
+  manaCost: "{2}{W/U}",
+  colors: ["W", "U"],
+  types: ["creature"],
+  subtypes: ["Human", "Citizen"],
+  power: 2,
+  toughness: 2,
+  keywords: ["vigilance"],
+  text: "Vigilance\nWhen this creature enters, recruit. (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)",
+  triggered: [
+    {
+      trigger: { on: "enters-battlefield", who: "self" },
+      targets: [],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: 1 },
+          { kind: "discard", target: "you", amount: 1 },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "discarded", filter: { notTypes: ["land"] } },
+            then: { kind: "create-token", token: "Human Soldier Token", count: 1 },
+          },
+        ],
+      },
+      resolve: null,
+      text: "When this creature enters, recruit.",
+    },
+  ],
+});

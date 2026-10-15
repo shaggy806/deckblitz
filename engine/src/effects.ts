@@ -328,6 +328,11 @@ export type EffectAmount =
   /** Half of an amount, rounded up or down (rule 107.1a says which the card
    * must say) — "half their life, rounded up". */
   | { readonly half: EffectAmount; readonly round: "up" | "down" }
+  /** Two to the power of an amount — Mathemagics' "target player draws 2ˣ
+   * cards" (`{ powerOfTwo: "x" }`; 2⁰ = 1). The exponent is at most 52, past
+   * which a number isn't exact any more: every use draws or counts far more
+   * than a game holds by then (a draw stops at an empty library). */
+  | { readonly powerOfTwo: EffectAmount }
   /** How many cards in **graveyards** match a filter — Undergrowth's "for
    * each creature card in your graveyard" (Lotleth Giant). Distinct from
    * `countOf`, which only ever counts battlefield permanents. The filter's
@@ -2409,6 +2414,25 @@ export type EffectSpec =
       readonly position: "top" | "bottom" | { readonly fromTop: number };
     }
   | {
+      /**
+       * "Target opponent reveals their hand. You choose a noncreature,
+       * nonland card from it. That player discards that card" (Duress,
+       * Thoughtseize): the player in slot `target` reveals their whole hand
+       * to everyone (rule 701.20), the effect's controller chooses one card
+       * matching `filter`, and that player discards it (rule 701.9a — so
+       * "whenever a player discards" sees it, and it's `"discarded"` this
+       * way). "You choose" isn't optional: with a matching card there, one is
+       * chosen; with none, nothing happens. `optional` is "you **may**
+       * choose" (Oildeep Gearhulk). `lookOnly` is "look at target player's
+       * hand": nothing is revealed, and only the chooser sees it.
+       */
+      readonly kind: "discard-chosen";
+      readonly target: number;
+      readonly filter?: CardFilter;
+      readonly lookOnly?: true;
+      readonly optional?: true;
+    }
+  | {
       /** Target player discards `amount` cards (their choice, unless it's the
        * effect's own controller). Discards their whole hand if it's smaller.
        * `target: "you"` = the effect's controller, with no target slot
@@ -2638,6 +2662,10 @@ export type EffectSpec =
       /** Spare the effect's own source — "put a +1/+1 counter on each
        * **other** creature you control" (Finneas, Ace Archer). */
       readonly exceptSource?: boolean;
+      /** Spare the object in this target slot — "put a +1/+1 counter on
+       * target creature you control … also put a +1/+1 counter on each
+       * **other** creature you control" (Moment of Glory). */
+      readonly exceptTarget?: number;
       /** As on `modify-pt-all`: the filter is read from the side of the
        * player in this target slot — Requisition Raid's "each creature
        * **target player** controls" is `{ type: "creature", controlledBy:
@@ -5299,6 +5327,10 @@ export interface EffectApi {
   ): boolean;
   /** `target` (a player) discards `amount` cards. */
   discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter): void;
+  /** See the `discard-chosen` {@link EffectSpec}: `target` (a player) reveals
+   * their hand (or the controller looks at it), the controller chooses, and
+   * that player discards the card chosen. */
+  discardChosen(target: TargetRef, filter: CardFilter | undefined, lookOnly: boolean, optional: boolean): void;
   modifyPt(
     target: TargetRef,
     power: number,
@@ -5467,6 +5499,8 @@ export interface EffectApi {
     scopeTo?: PlayerId,
     /** Who puts them — the effect's controller when absent. */
     by?: PlayerId,
+    /** One object spared — see `exceptTarget`. */
+    except?: ObjectId,
   ): void;
   /** See the `"double-counters-all"` {@link EffectSpec}. */
   doubleCountersAll(filter: CardFilter, counterKind: string): void;
@@ -6472,6 +6506,9 @@ function signedAmountValue(
   if ("lifeTotal" in amount) {
     return ctx.lifeTotalOf(amount.lifeTotal === "each" ? (each ?? ctx.controller) : ctx.controller);
   }
+  if ("powerOfTwo" in amount) {
+    return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
+  }
   if ("half" in amount) {
     // Signed, like the rest of this function: `amountValue` clamps the
     // result, and a value setting power keeps its sign (rule 107.1b).
@@ -6865,6 +6902,7 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("attackingPlayer" in amount) return true;
   if ("thisWay" in amount) return amount.who === "each";
   if ("half" in amount) return readsEachPlayer(amount.half);
+  if ("powerOfTwo" in amount) return readsEachPlayer(amount.powerOfTwo);
   if ("product" in amount) return amount.product.some(readsEachPlayer);
   if ("sum" in amount) return amount.sum.some(readsEachPlayer);
   if ("difference" in amount) return amount.difference.some(readsEachPlayer);
@@ -7985,6 +8023,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (asked) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
+    case "discard-chosen": {
+      const target = ctx.targets[spec.target];
+      if (target !== undefined) {
+        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true);
+      }
+      return;
+    }
     case "discard": {
       for (const target of scopedOrTargetedPlayers(spec.target, ctx)) {
         ctx.discardCards(
@@ -8046,6 +8091,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "add-counter-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
       if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
       ctx.addCounterAll(
         spec.filter,
         spec.counter,
@@ -8053,6 +8099,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exceptSource === true,
         scopeTo,
         spec.putByTarget === true ? scopeTo : undefined,
+        spared?.kind === "object" ? spared.object : undefined,
       );
       return;
     }

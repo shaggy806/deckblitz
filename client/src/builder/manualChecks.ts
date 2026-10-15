@@ -2757,4 +2757,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant', 'Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Duress, Thoughtseize, Oildeep Gearhulk',
+    board({
+      you: {
+        bf: ['Swamp*6', 'Island*3'],
+        hand: ['Duress', 'Thoughtseize', 'Oildeep Gearhulk'],
+      },
+      opp: { hand: ['Lightning Bolt', 'Grizzly Bears', 'Forest', 'Counterspell'] },
+    }),
+  ),
 ]

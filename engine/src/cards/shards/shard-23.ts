@@ -92,6 +92,7 @@ import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
+import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
@@ -203,6 +204,7 @@ import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
 import _poolMindsDesire from "../pool/minds-desire.js";
+import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
@@ -214,6 +216,7 @@ import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNightMarket from "../pool/night-market.js";
+import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
@@ -283,6 +286,7 @@ import _poolSorinOfHouseMarkov from "../pool/sorin-of-house-markov.js";
 import _poolSoulOfNewPhyrexia from "../pool/soul-of-new-phyrexia.js";
 import _poolSoulShatter from "../pool/soul-shatter.js";
 import _poolSouldrinker from "../pool/souldrinker.js";
+import _poolSoundTheTrumpets from "../pool/sound-the-trumpets.js";
 import _poolSpawningBed from "../pool/spawning-bed.js";
 import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
@@ -327,6 +331,7 @@ import _poolVandalize from "../pool/vandalize.js";
 import _poolVanishingVerse from "../pool/vanishing-verse.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
+import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
@@ -343,6 +348,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
+import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
 import _poolWingShredder from "../pool/wing-shredder.js";
@@ -452,6 +458,7 @@ const shard: CardShard = {
     _poolDiviningDuelist,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
+    _poolDuskwatchHunter,
     _poolEarthOriginYak,
     _poolEatenAlive,
     _poolEclipsedSteppe,
@@ -563,6 +570,7 @@ const shard: CardShard = {
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
     _poolMindsDesire,
+    _poolMinotaurRoxxonCeo,
     _poolMireShade,
     _poolMnemonicWall,
     _poolMomentaryBlink,
@@ -574,6 +582,7 @@ const shard: CardShard = {
     _poolNantukoElder,
     _poolNarnamCobra,
     _poolNightMarket,
+    _poolNighthowlPursuer,
     _poolNyxLotus,
     _poolObNixilisReignited,
     _poolOhranFrostfang,
@@ -643,6 +652,7 @@ const shard: CardShard = {
     _poolSoulOfNewPhyrexia,
     _poolSoulShatter,
     _poolSouldrinker,
+    _poolSoundTheTrumpets,
     _poolSpawningBed,
     _poolSpiderwigBoggart,
     _poolSporecapSpider,
@@ -687,6 +697,7 @@ const shard: CardShard = {
     _poolVanishingVerse,
     _poolVashtaNerada,
     _poolVeinRipper,
+    _poolVelvetwingButterflies,
     _poolVerdantKraken,
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,
@@ -703,6 +714,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWebWarriors,
+    _poolWilderlandScrounger,
     _poolWindriderEel,
     _poolWindurstFederationCenter,
     _poolWingShredder,

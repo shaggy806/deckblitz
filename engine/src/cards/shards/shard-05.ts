@@ -39,6 +39,7 @@ import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
 import _poolBilbosGambit from "../pool/bilbos-gambit.js";
 import _poolBishopOfWings from "../pool/bishop-of-wings.js";
+import _poolBlackPantherClawsOfBast from "../pool/black-panther-claws-of-bast.js";
 import _poolBladedSentinel from "../pool/bladed-sentinel.js";
 import _poolBlanchwoodArmor from "../pool/blanchwood-armor.js";
 import _poolBlastedLandscape from "../pool/blasted-landscape.js";
@@ -48,6 +49,7 @@ import _poolBlightPile from "../pool/blight-pile.js";
 import _poolBlightning from "../pool/blightning.js";
 import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
+import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
 import _poolBodyDropper from "../pool/body-dropper.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
 import _poolBrassSquire from "../pool/brass-squire.js";
@@ -430,6 +432,7 @@ const shard: CardShard = {
     _poolBellowingCrier,
     _poolBilbosGambit,
     _poolBishopOfWings,
+    _poolBlackPantherClawsOfBast,
     _poolBladedSentinel,
     _poolBlanchwoodArmor,
     _poolBlastedLandscape,
@@ -439,6 +442,7 @@ const shard: CardShard = {
     _poolBlightning,
     _poolBloodlineRecollector,
     _poolBlossomingTortoise,
+    _poolBlueMarvelAdamBrashear,
     _poolBodyDropper,
     _poolBraidsCabalMinion,
     _poolBrassSquire,

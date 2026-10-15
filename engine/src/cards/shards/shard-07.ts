@@ -207,8 +207,10 @@ import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
+import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
 import _poolMonsterMashup from "../pool/monster-mashup.js";
+import _poolMoonBoyDinoRider from "../pool/moon-boy-dino-rider.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
@@ -233,6 +235,7 @@ import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
+import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
 import _poolPrecinctCaptain from "../pool/precinct-captain.js";
 import _poolPreciseRedaction from "../pool/precise-redaction.js";
@@ -625,8 +628,10 @@ const shard: CardShard = {
     _poolMightyLeap,
     _poolMindeyeDrake,
     _poolMoltenFrame,
+    _poolMomentOfGlory,
     _poolMomentumBreaker,
     _poolMonsterMashup,
+    _poolMoonBoyDinoRider,
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,
@@ -651,6 +656,7 @@ const shard: CardShard = {
     _poolOversoldCemetery,
     _poolPassionateArchaeologist,
     _poolPlagueWind,
+    _poolPlunderTheTrollshaws,
     _poolPollenbrightDruid,
     _poolPrecinctCaptain,
     _poolPreciseRedaction,

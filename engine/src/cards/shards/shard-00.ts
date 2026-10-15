@@ -60,6 +60,7 @@ import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
+import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
 import _poolChocoboKnights from "../pool/chocobo-knights.js";
 import _poolChosenOfMarkov from "../pool/chosen-of-markov.js";
@@ -169,6 +170,7 @@ import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
 import _poolIronLance from "../pool/iron-lance.js";
+import _poolIronSuitcase from "../pool/iron-suitcase.js";
 import _poolIvyDancer from "../pool/ivy-dancer.js";
 import _poolIzoniThousandEyed from "../pool/izoni-thousand-eyed.js";
 import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
@@ -206,6 +208,7 @@ import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
 import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
+import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMoltenRavager from "../pool/molten-ravager.js";
 import _poolMongooseLizard from "../pool/mongoose-lizard.js";
@@ -460,6 +463,7 @@ const shard: CardShard = {
     _poolCartoucheOfSolidarity,
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
+    _poolChiefWargsCompany,
     _poolChildOfThorns,
     _poolChocoboKnights,
     _poolChosenOfMarkov,
@@ -569,6 +573,7 @@ const shard: CardShard = {
     _poolInGarruksWake,
     _poolIncreasingVengeance,
     _poolIronLance,
+    _poolIronSuitcase,
     _poolIvyDancer,
     _poolIzoniThousandEyed,
     _poolJacesIngenuity,
@@ -606,6 +611,7 @@ const shard: CardShard = {
     _poolMesaCavalier,
     _poolMidnightGuard,
     _poolMirrormereGuardian,
+    _poolMjolnirsMight,
     _poolMoatPiranhas,
     _poolMoltenRavager,
     _poolMongooseLizard,

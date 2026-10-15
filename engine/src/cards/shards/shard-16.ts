@@ -49,6 +49,7 @@ import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
+import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
@@ -104,6 +105,7 @@ import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
+import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
 import _poolFangSkulkin from "../pool/fang-skulkin.js";
 import _poolFateholdAnnex from "../pool/fatehold-annex.js";
 import _poolFavorableWinds from "../pool/favorable-winds.js";
@@ -131,6 +133,7 @@ import _poolGalestrike from "../pool/galestrike.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
+import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
 import _poolGlacialWall from "../pool/glacial-wall.js";
 import _poolGlimmerBairn from "../pool/glimmer-bairn.js";
 import _poolGlissaTheTraitor from "../pool/glissa-the-traitor.js";
@@ -207,6 +210,7 @@ import _poolMemoryPlunder from "../pool/memory-plunder.js";
 import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
+import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
@@ -241,6 +245,7 @@ import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
+import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
@@ -343,6 +348,7 @@ import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
+import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
 import _poolTimidShieldbearer from "../pool/timid-shieldbearer.js";
 import _poolTitheDrinker from "../pool/tithe-drinker.js";
 import _poolToadstoolAdmirer from "../pool/toadstool-admirer.js";
@@ -396,6 +402,7 @@ import _poolWingCommando from "../pool/wing-commando.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
+import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
 import _tokensAjanisPridemateToken from "../tokens/ajanis-pridemate-token.js";
@@ -465,6 +472,7 @@ const shard: CardShard = {
     _poolBorosRecruit,
     _poolBoulderRush,
     _poolBoundingFelidar,
+    _poolBuckyBarnesEagerAlly,
     _poolCadaverLab,
     _poolCarnivorousMossBeast,
     _poolCartoucheOfKnowledge,
@@ -520,6 +528,7 @@ const shard: CardShard = {
     _poolEtherealInvestigator,
     _poolExtravagantReplication,
     _poolFaerieSeer,
+    _poolFalconJoaquinTorres,
     _poolFangSkulkin,
     _poolFateholdAnnex,
     _poolFavorableWinds,
@@ -547,6 +556,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeosurge,
     _poolGhostlyPilferer,
+    _poolGiantManGargantuanGenius,
     _poolGlacialWall,
     _poolGlimmerBairn,
     _poolGlissaTheTraitor,
@@ -623,6 +633,7 @@ const shard: CardShard = {
     _poolMerfolkSkydiver,
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
+    _poolMirkwoodNurturer,
     _poolMirrorpool,
     _poolMoxAmber,
     _poolMundasVanguard,
@@ -657,6 +668,7 @@ const shard: CardShard = {
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
     _poolPhantomWarrior,
+    _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
     _poolPiratesPillage,
     _poolPitOfOfferings,
@@ -759,6 +771,7 @@ const shard: CardShard = {
     _poolThraxodemon,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,
+    _poolTigerSharkAbyssalHunter,
     _poolTimidShieldbearer,
     _poolTitheDrinker,
     _poolToadstoolAdmirer,
@@ -812,6 +825,7 @@ const shard: CardShard = {
     _poolWitheringBoon,
     _poolWizardsSchool,
     _poolWolverineBestThereIs,
+    _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
     _poolZodiacHorse,
   ],

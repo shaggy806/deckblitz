@@ -4320,7 +4320,9 @@ export class Game {
     }
     const land = this.state.objects[awaiting.source];
     land.enterChoice = { ...land.enterChoice, reveal };
-    if (reveal !== null) this.emit({ type: "cards-revealed", player, objects: [reveal], from: "hand" });
+    // Through `revealCards`, so every player's view shows the card (rule
+    // 701.20a) — history and animation alike, not an unnamed hidden card.
+    if (reveal !== null) this.revealCards(player, [reveal], "hand");
     this.state.awaiting = null;
     this.prepareForPriority(this.activePlayer);
   }
@@ -6188,6 +6190,19 @@ export class Game {
     leftover: readonly ObjectId[],
     toCommandZone: ReadonlySet<ObjectId> = new Set(),
   ): readonly ObjectId[] {
+    // "You choose a card from it. That player discards that card" (Duress —
+    // the `discard-chosen` effect): the hand's owner discards it, whoever
+    // chose (rule 701.9a), so "whenever a player discards" sees them.
+    if (awaiting.destination === "discard") {
+      const owner = awaiting.forPlayer ?? player;
+      const cards = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
+      if (cards.length === 0) return [];
+      this.withGraveyardEnterBatch(() => {
+        for (const id of cards) this.moveObject(id, "graveyard");
+      });
+      this.emit({ type: "cards-discarded", player: owner, objects: cards });
+      return [];
+    }
     // Cards a choice puts from a hand on the bottom of a library (Valakut
     // Awakening), announced together once they're there — what "that many"
     // counts (the `"put-on-bottom"` this-way kind).
@@ -6250,8 +6265,9 @@ export class Game {
         }
         return;
       }
-      // A behold's answer never reaches here (`applyBehold`): it moves nothing.
-      if (to === "behold") return;
+      // A behold's answer never reaches here (`applyBehold`): it moves nothing,
+      // and a discard's was done above, by the hand's owner.
+      if (to === "behold" || to === "discard") return;
       if (to === "library-bottom") {
         // In the order chosen: each goes under the one before it.
         const fromHand = this.state.objects[id]?.zone === "hand";
@@ -16740,6 +16756,11 @@ export class Game {
       // The defending player — the one whose creatures blocked it.
       const attacking = this.state.objects[event.attacker]?.attacking;
       if (attacking !== null && attacking !== undefined) player = this.defendingPlayerOf(attacking);
+    } else if (event.type === "object-targeted") {
+      // Whoever controls the targeting spell or ability — "that player" of a
+      // becomes-target trigger (Black Bolt, Inhuman King: "destroy target
+      // nonland permanent that player controls").
+      player = event.by;
     }
     // A Curse's trigger whose event names nobody: "that player" is the
     // enchanted player as it triggered (Trespasser's Curse: "whenever a
@@ -19625,6 +19646,8 @@ export class Game {
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, opts),
       discardCards: (target, amount, random, unlessOne) =>
         this.discardByEffect(target, amount, random === true, undefined, unlessOne),
+      discardChosen: (target, filter, lookOnly, optional) =>
+        this.beginDiscardChosen(controller, source, target, filter, lookOnly, optional),
       modifyPt: (target, power, toughness, duration) =>
         this.modifyPt(target, power, toughness, lastingHere(duration)),
       modifyPtAll: (filter, power, toughness, duration, exceptSource, scopeTo) =>
@@ -19888,13 +19911,13 @@ export class Game {
         // ceases to exist either way (rule 111.7).
         this.moveObject(id, "library");
       },
-      addCounterAll: (filter, counter, amount, exceptSource, scopeTo, by) => {
+      addCounterAll: (filter, counter, amount, exceptSource, scopeTo, by, except) => {
         // Snapshot first — `addCounter` can kill a permanent (a -1/-1 counter)
         // and mutate the battlefield array underneath the loop. With
         // "equal to that creature's toughness", every count is read before
         // any counter goes on.
         const each = this.battlefieldMatching(scopeTo ?? controller, filter)
-          .filter((id) => exceptSource !== true || id !== source)
+          .filter((id) => (exceptSource !== true || id !== source) && id !== except)
           .map((id) => ({
             id,
             n: amount === "own-toughness" ? this.characteristics(id).toughness : amount,
@@ -20833,6 +20856,43 @@ export class Game {
       // "You may reveal a historic card from among them and put it into your
       // hand": only what's taken is shown, as it's taken.
       ...(reveal === "chosen" && zone === "library" ? { reveal: true } : {}),
+    };
+  }
+
+  /** See the `"discard-chosen"` {@link EffectSpec}: `target`'s hand revealed
+   * (rule 701.20) — or only looked at by `chooser` — and a `choose-from-zone`
+   * over it for `chooser`, whose answer `target` discards. A card the
+   * chooser may pick is one matching `filter` read from the chooser's side
+   * ("a nonland card with mana value 3 or less"). */
+  private beginDiscardChosen(
+    chooser: PlayerId,
+    source: ObjectId,
+    target: TargetRef,
+    filter: CardFilter | undefined,
+    lookOnly: boolean,
+    optional: boolean,
+  ): void {
+    if (target.kind !== "player") return;
+    const player = target.player;
+    if (this.state.players[player]?.hasLost !== false) return;
+    const hand = this.state.zones.perPlayer[player].hand;
+    if (hand.length === 0) return;
+    if (!lookOnly) this.revealCards(player, [...hand], "hand");
+    const eligible = hand.filter(
+      (id) => filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: chooser, source }),
+    );
+    // Nothing it could be: everyone has seen the hand, and nothing is asked.
+    if (eligible.length === 0) return;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player: chooser,
+      ...(chooser !== player ? { forPlayer: player } : {}),
+      ids: [...hand],
+      eligible,
+      min: optional ? 0 : 1,
+      max: 1,
+      destination: "discard",
+      leftover: "stay",
     };
   }
 
@@ -31581,6 +31641,15 @@ export class Game {
     const full = { ...event, seq } as GameEvent;
     this.state.eventLog.push(full);
     this.recordTurnHistory(full);
+    // A token comes into being on the battlefield, and a copy of a spell on
+    // the stack, rather than moving there, so no zone change opened a public
+    // stint for it (see `PublicStint`): one opens as it arrives, so the
+    // history still names it once it has ceased to exist (rule 111.7) or
+    // folded into a token stack.
+    if (full.type === "permanent-entered-battlefield" && this.openStintOf(full.object) === undefined) {
+      this.openStint(full.object, seq);
+    }
+    if (full.type === "spell-copied" && this.openStintOf(full.copy) === undefined) this.openStint(full.copy, seq);
     // "For as long as it has a [kind] counter on it" ends with the last one
     // (rule 611.2b), whatever removed it.
     if (full.type === "counter-removed") this.endCounterDurations(full.object);

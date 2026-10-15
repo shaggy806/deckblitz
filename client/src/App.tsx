@@ -369,6 +369,9 @@ function zoneChoiceTitle(action: ZoneChoiceAction, nameOf: (player: PlayerId) =>
       // Behold (rule 701.4a): nothing moves — a hand card is revealed, a
       // permanent is just pointed at.
       return `Choose ${cards} to behold — reveal it from your hand or pick a permanent you control`
+    case 'discard':
+      // "You choose a card from it. That player discards that card" (Duress).
+      return `Choose ${cards} from ${whose} hand for them to discard`
     case 'manifest':
       // Manifest dread (rule 701.62a): the rest go to the graveyard.
       return `Manifest dread: choose ${cards} to put onto the battlefield face down as a 2/2 — the rest go to your graveyard`

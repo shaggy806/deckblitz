@@ -123,3 +123,22 @@ describe("public stints", () => {
     for (let seq = before; seq < game.state.eventSeq; seq += 1) expect(seenAs(game, behold, seq)).toBeUndefined();
   });
 });
+
+describe("tokens' names in the history", () => {
+  it("a token that has ceased to exist is still named in the lines about it", () => {
+    const game = setUp();
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 1 }, []);
+    game.advanceUntil(quiet);
+    const entered = game.eventsOfType("permanent-entered-battlefield").at(-1)!;
+    const token = entered.object;
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [{ kind: "object", object: token }]);
+    // On to the next step: the state-based check as a player next gets
+    // priority makes it cease to exist (rule 704.5d).
+    game.advanceUntil((s) => s.turn.step === "begin-combat");
+    expect(game.state.objects[token]).toBeUndefined();
+    expect(game.viewFor(B).objects[token]).toBeUndefined();
+    expect(seenAs(game, token, entered.seq)).toBe("Soldier Token");
+    const died = game.eventsOfType("permanent-left-battlefield").find((e) => e.object === token)!;
+    expect(seenAs(game, token, died.seq)).toBe("Soldier Token");
+  });
+});

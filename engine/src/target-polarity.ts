@@ -244,6 +244,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "reflexive-trigger": none,
   "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
   discard: (n, v) => v.touch(n.target, "harm", MAJOR),
+  "discard-chosen": (n, v) => v.touch(n.target, "harm", MAJOR),
   "modify-pt": (n, v) => {
     const power = amountSign(n.power);
     const toughness = amountSign(n.toughness);

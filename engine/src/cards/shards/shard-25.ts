@@ -149,6 +149,7 @@ import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
 import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
+import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
@@ -176,6 +177,7 @@ import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
+import _poolLakeshoreApothecary from "../pool/lakeshore-apothecary.js";
 import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
@@ -361,6 +363,7 @@ import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
 import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
+import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
@@ -525,6 +528,7 @@ const shard: CardShard = {
     _poolGolemsHeart,
     _poolGrahaTiaScionReborn,
     _poolGraspingLongneck,
+    _poolGravitonFundamentalForce,
     _poolGreatHallOfTheBiblioplex,
     _poolHallOfHeliodsGenerosity,
     _poolHarnessedSnubhorn,
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolKnightOfNewBenalia,
     _poolKrileBaldesion,
     _poolKydeleChosenOfKruphix,
+    _poolLakeshoreApothecary,
     _poolLasydProwler,
     _poolLeafkinDruid,
     _poolLeechCollector,
@@ -737,6 +742,7 @@ const shard: CardShard = {
     _poolWindcragSiege,
     _poolWindgracesJudgment,
     _poolWintersGrasp,
+    _poolWondrousRevival,
     _poolWoodedBastion,
   ],
   tokens: [

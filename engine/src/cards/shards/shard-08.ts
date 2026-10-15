@@ -106,6 +106,7 @@ import _poolElegantEdgecrafters from "../pool/elegant-edgecrafters.js";
 import _poolElendasHierophant from "../pool/elendas-hierophant.js";
 import _poolElephantAmbush from "../pool/elephant-ambush.js";
 import _poolElfswornGiant from "../pool/elfsworn-giant.js";
+import _poolElvenkingsHalls from "../pool/elvenkings-halls.js";
 import _poolElvishVanguard from "../pool/elvish-vanguard.js";
 import _poolEmbraceOblivion from "../pool/embrace-oblivion.js";
 import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
@@ -219,6 +220,7 @@ import _poolMeteorCrater from "../pool/meteor-crater.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
+import _poolMirkwoodPathmaker from "../pool/mirkwood-pathmaker.js";
 import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
 import _poolMoonsilverSpear from "../pool/moonsilver-spear.js";
@@ -239,6 +241,7 @@ import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
+import _poolOldThrush from "../pool/old-thrush.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
 import _poolOptimisticScavenger from "../pool/optimistic-scavenger.js";
@@ -318,6 +321,7 @@ import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoulShred from "../pool/soul-shred.js";
+import _poolSpeakSecrets from "../pool/speak-secrets.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
 import _poolSpiderManNewChampion from "../pool/spider-man-new-champion.js";
@@ -345,6 +349,7 @@ import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
+import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
@@ -513,6 +518,7 @@ const shard: CardShard = {
     _poolElendasHierophant,
     _poolElephantAmbush,
     _poolElfswornGiant,
+    _poolElvenkingsHalls,
     _poolElvishVanguard,
     _poolEmbraceOblivion,
     _poolEmbraceTheParadox,
@@ -626,6 +632,7 @@ const shard: CardShard = {
     _poolMidnightReaper,
     _poolMilitantMonk,
     _poolMindStone,
+    _poolMirkwoodPathmaker,
     _poolMirrisGuile,
     _poolMistSyndicateNaga,
     _poolMoonsilverSpear,
@@ -646,6 +653,7 @@ const shard: CardShard = {
     _poolOakhameRanger,
     _poolOathOfGideon,
     _poolObeliskOfEsper,
+    _poolOldThrush,
     _poolOpenTheArmory,
     _poolOphiomancer,
     _poolOptimisticScavenger,
@@ -725,6 +733,7 @@ const shard: CardShard = {
     _poolSmelt,
     _poolSokkasHaiku,
     _poolSoulShred,
+    _poolSpeakSecrets,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,
     _poolSpiderManNewChampion,
@@ -752,6 +761,7 @@ const shard: CardShard = {
     _poolTemurDevotee,
     _poolThaliasLancers,
     _poolTheAutonomousFurnace,
+    _poolTheChiefWarg,
     _poolThroneOfGeth,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,

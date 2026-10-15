@@ -160,6 +160,7 @@ import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
+import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHamatoGuardianStance from "../pool/hamato-guardian-stance.js";
@@ -197,6 +198,7 @@ import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
+import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
@@ -204,6 +206,7 @@ import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
 import _poolLifesLegacy from "../pool/lifes-legacy.js";
 import _poolLochKorrigan from "../pool/loch-korrigan.js";
 import _poolLongGoodbye from "../pool/long-goodbye.js";
+import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
 import _poolLostLeonin from "../pool/lost-leonin.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
 import _poolManaDrain from "../pool/mana-drain.js";
@@ -278,6 +281,7 @@ import _poolRefresh from "../pool/refresh.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
+import _poolReverentHowl from "../pool/reverent-howl.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
@@ -317,6 +321,7 @@ import _poolSmolderingButcher from "../pool/smoldering-butcher.js";
 import _poolSnappingVoidcraw from "../pool/snapping-voidcraw.js";
 import _poolSnowCoveredMountain from "../pool/snow-covered-mountain.js";
 import _poolSocialClimber from "../pool/social-climber.js";
+import _poolSolveForDisappointment from "../pool/solve-for-disappointment.js";
 import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
@@ -388,6 +393,7 @@ import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
+import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
@@ -583,6 +589,7 @@ const shard: CardShard = {
     _poolGrimDiscovery,
     _poolGrizzledOutrider,
     _poolGuideOfSouls,
+    _poolGundabadOpportunist,
     _poolHairStrungKoto,
     _poolHaldanAvidArcanist,
     _poolHamatoGuardianStance,
@@ -620,6 +627,7 @@ const shard: CardShard = {
     _poolKrangUtromWarlord,
     _poolKraulStinger,
     _poolKruinStriker,
+    _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLeeringOnlooker,
     _poolLeonardoTheBalance,
@@ -627,6 +635,7 @@ const shard: CardShard = {
     _poolLifesLegacy,
     _poolLochKorrigan,
     _poolLongGoodbye,
+    _poolLongLakeNuisance,
     _poolLostLeonin,
     _poolLushOasis,
     _poolManaDrain,
@@ -701,6 +710,7 @@ const shard: CardShard = {
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,
+    _poolReverentHowl,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
     _poolRishkarPeemaRenegade,
@@ -740,6 +750,7 @@ const shard: CardShard = {
     _poolSnappingVoidcraw,
     _poolSnowCoveredMountain,
     _poolSocialClimber,
+    _poolSolveForDisappointment,
     _poolSorcererOfTheFang,
     _poolSoulcageFiend,
     _poolSourbreadAuntie,
@@ -811,6 +822,7 @@ const shard: CardShard = {
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
     _poolUtromMonitor,
+    _poolValentinaAllegraDeFontaine,
     _poolVeloheartBike,
     _poolVerdantSunsAvatar,
     _poolVileMutilator,

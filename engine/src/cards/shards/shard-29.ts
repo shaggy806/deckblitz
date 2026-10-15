@@ -173,6 +173,7 @@ import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
+import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
@@ -210,6 +211,7 @@ import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
+import _poolPatientInstructor from "../pool/patient-instructor.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
@@ -539,6 +541,7 @@ const shard: CardShard = {
     _poolKujarSeedsculptor,
     _poolLairOfTheHydra,
     _poolLegolassQuickReflexes,
+    _poolLivingLiesOfLoki,
     _poolLonelySandbar,
     _poolLoxodonAnchorite,
     _poolLyraArchangelOfDawn,
@@ -576,6 +579,7 @@ const shard: CardShard = {
     _poolPain101,
     _poolParhelionIi,
     _poolPathOfAnnihilation,
+    _poolPatientInstructor,
     _poolPetAvengers,
     _poolPhalanxVanguard,
     _poolPlatedSlagwurm,

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3620 already implemented / 1380 missing (marks refreshed 2026-10-15)
+3623 already implemented / 1377 missing (marks refreshed 2026-10-15)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3252,7 +3252,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3259  Tenuous Truce                            {1}{W}           Enchantment — Aura
 [ ]  3260  Thornvault Forager                       {1}{G}           Creature — Squirrel Ranger
 [x]  3261  Tanglepool Bridge                        {0}              Artifact Land
-[ ]  3262  Duress                                   {B}              Sorcery
+[x]  3262  Duress                                   {B}              Sorcery
 [x]  3263  Goblin Instigator                        {1}{R}           Creature — Goblin Rogue
 [x]  3264  Savvy Hunter                             {1}{B}{G}        Creature — Human Warrior
 [x]  3265  Infantry Shield                          {2}{R}           Artifact — Equipment
@@ -4402,7 +4402,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4409  Crypt Incursion                          {2}{B}           Instant
 [ ]  4410  Wild Wasteland                           {2}{R}           Enchantment
 [ ]  4411  Shadowgrange Archfiend                   {6}{B}           Creature — Demon
-[ ]  4412  Thoughtseize                             {B}              Sorcery
+[x]  4412  Thoughtseize                             {B}              Sorcery
 [x]  4413  Moogles' Valor                           {3}{W}{W}        Instant
 [ ]  4414  Urabrask, Heretic Praetor                {3}{R}{R}        Legendary Creature — Phyrexian Praetor
 [x]  4415  High-Society Hunter                      {3}{B}{B}        Creature — Vampire Noble
@@ -4782,7 +4782,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4789  Tithing Blade // Consuming Sepulcher     {2}              Artifact // Artifact
 [x]  4790  Bilbo's Ring                             {3}              Legendary Artifact — Equipment
 [x]  4791  Goldhound                                {R}              Artifact Creature — Treasure Dog
-[ ]  4792  Mathemagics                              {X}{X}{U}{U}     Sorcery
+[x]  4792  Mathemagics                              {X}{X}{U}{U}     Sorcery
 [x]  4793  Ravnica at War                           {3}{W}           Sorcery
 [x]  4794  Machinist's Arsenal                      {4}{W}           Artifact — Equipment
 [x]  4795  Warren Warleader                         {2}{W}{W}        Creature — Rabbit Knight

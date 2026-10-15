@@ -1807,6 +1807,11 @@ function onlyScalesWithX(effect: EffectSpec | null | undefined): boolean {
       return;
     }
     if (node === null || typeof node !== "object") return;
+    // 2ˣ is 1 at X = 0 (Mathemagics): it does something however small X is.
+    if ("powerOfTwo" in node) {
+      fixed += 1;
+      return;
+    }
     if (Array.isArray(node)) {
       for (const child of node) visit(child, key);
       return;
@@ -3437,6 +3442,11 @@ export class HeuristicBotController extends AutomaticController {
   ): readonly ObjectId[] {
     const awaiting = view.state.awaiting;
     const forPlayer = awaiting?.kind === "choose-from-zone" ? awaiting.forPlayer : undefined;
+    // "You choose a card from it. That player discards that card" (Duress):
+    // the card that player would most want to keep.
+    if (forPlayer !== undefined && forPlayer !== this.playerId && awaiting?.kind === "choose-from-zone" && awaiting.destination === "discard") {
+      return this.mostUsefulTo(view.state, forPlayer, eligible, Math.max(min, Math.min(max, 1)));
+    }
     if (forPlayer !== undefined && forPlayer !== this.playerId) {
       return this.leastUsefulTo(view.state, forPlayer, eligible, min);
     }
@@ -3627,6 +3637,19 @@ export class HeuristicBotController extends AutomaticController {
   /** The `count` cards of `eligible` that would do `player` the least good in
    * hand, read as `chooseBottomOfHand` reads a hand mid-game against the
    * lands `player` has out: cheap spells and ones still out of reach first. */
+  /** The `count` cards of `eligible` that `player` would least want to lose:
+   * all but the ones `leastUsefulTo` would give up. */
+  private mostUsefulTo(
+    state: GameState,
+    player: PlayerId,
+    eligible: readonly ObjectId[],
+    count: number,
+  ): readonly ObjectId[] {
+    if (count <= 0) return [];
+    const spare = new Set(this.leastUsefulTo(state, player, eligible, Math.max(0, eligible.length - count)));
+    return eligible.filter((id) => !spare.has(id)).slice(0, count);
+  }
+
   private leastUsefulTo(
     state: GameState,
     player: PlayerId,

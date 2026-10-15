@@ -107,6 +107,7 @@ import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
+import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
@@ -159,6 +160,7 @@ import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
+import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
 import _poolLawRuneEnforcer from "../pool/law-rune-enforcer.js";
 import _poolLeechFanatic from "../pool/leech-fanatic.js";
@@ -347,6 +349,7 @@ import _poolVedalkenDismisser from "../pool/vedalken-dismisser.js";
 import _poolVestigeOfEmrakul from "../pool/vestige-of-emrakul.js";
 import _poolViashinoPyromancer from "../pool/viashino-pyromancer.js";
 import _poolViashinoRunner from "../pool/viashino-runner.js";
+import _poolVillainousSyndication from "../pool/villainous-syndication.js";
 import _poolVillainousWealth from "../pool/villainous-wealth.js";
 import _poolViolentImpact from "../pool/violent-impact.js";
 import _poolViolentOutburst from "../pool/violent-outburst.js";
@@ -356,6 +359,7 @@ import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
 import _poolWargate from "../pool/wargate.js";
+import _poolWargling from "../pool/wargling.js";
 import _poolWarrenElder from "../pool/warren-elder.js";
 import _poolWaryOkapi from "../pool/wary-okapi.js";
 import _poolWastes from "../pool/wastes.js";
@@ -501,6 +505,7 @@ const shard: CardShard = {
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFungalPlots,
+    _poolGastalRaider,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
     _poolGiantSolifuge,
@@ -553,6 +558,7 @@ const shard: CardShard = {
     _poolKrangMasterMind,
     _poolKrenkoMobBoss,
     _poolKynaiosAndTiroOfMeletis,
+    _poolLakeTownMariners,
     _poolLavafumeInvoker,
     _poolLawRuneEnforcer,
     _poolLeechFanatic,
@@ -741,6 +747,7 @@ const shard: CardShard = {
     _poolVestigeOfEmrakul,
     _poolViashinoPyromancer,
     _poolViashinoRunner,
+    _poolVillainousSyndication,
     _poolVillainousWealth,
     _poolViolentImpact,
     _poolViolentOutburst,
@@ -750,6 +757,7 @@ const shard: CardShard = {
     _poolVulshokSorcerer,
     _poolWallOfAir,
     _poolWargate,
+    _poolWargling,
     _poolWarrenElder,
     _poolWaryOkapi,
     _poolWastes,

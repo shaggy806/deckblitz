@@ -45,6 +45,7 @@ import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
 import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
+import _poolBoomerangBladeFlinger from "../pool/boomerang-blade-flinger.js";
 import _poolBorderGuard from "../pool/border-guard.js";
 import _poolBotanicalPlaza from "../pool/botanical-plaza.js";
 import _poolBraveKinDuo from "../pool/brave-kin-duo.js";
@@ -105,6 +106,7 @@ import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
 import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
+import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
 import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
@@ -139,6 +141,7 @@ import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
 import _poolGalianBeast from "../pool/galian-beast.js";
+import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
@@ -146,6 +149,7 @@ import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
 import _poolGoblinSpymaster from "../pool/goblin-spymaster.js";
+import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
 import _poolGoreSwine from "../pool/gore-swine.js";
 import _poolGoringCeratops from "../pool/goring-ceratops.js";
 import _poolGrafMole from "../pool/graf-mole.js";
@@ -183,6 +187,7 @@ import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolIntimidation from "../pool/intimidation.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
+import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
@@ -228,6 +233,7 @@ import _poolMetastaticEvangel from "../pool/metastatic-evangel.js";
 import _poolMetropolisSprite from "../pool/metropolis-sprite.js";
 import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
 import _poolMindsEye from "../pool/minds-eye.js";
+import _poolMirkwoodMeditator from "../pool/mirkwood-meditator.js";
 import _poolMirrex from "../pool/mirrex.js";
 import _poolMoaningWall from "../pool/moaning-wall.js";
 import _poolMockingSprite from "../pool/mocking-sprite.js";
@@ -246,6 +252,7 @@ import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
+import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
@@ -428,6 +435,7 @@ const shard: CardShard = {
     _poolBogwaterLumaret,
     _poolBolgsCompany,
     _poolBonescytheSliver,
+    _poolBoomerangBladeFlinger,
     _poolBorderGuard,
     _poolBotanicalPlaza,
     _poolBraveKinDuo,
@@ -488,6 +496,7 @@ const shard: CardShard = {
     _poolDredgersInsight,
     _poolDrillTooDeep,
     _poolDromokaWarrior,
+    _poolEagleOfTheGreatShelf,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,
     _poolElvishWarmaster,
@@ -522,6 +531,7 @@ const shard: CardShard = {
     _poolFurtiveAnalyst,
     _poolGaladhrimGuide,
     _poolGalianBeast,
+    _poolGandalfSparkStarter,
     _poolGargadon,
     _poolGarrukPrimalHunter,
     _poolGimlisRecklessMight,
@@ -529,6 +539,7 @@ const shard: CardShard = {
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
     _poolGoblinSpymaster,
+    _poolGollumSilentSlinker,
     _poolGoreSwine,
     _poolGoringCeratops,
     _poolGrafMole,
@@ -566,6 +577,7 @@ const shard: CardShard = {
     _poolIntimidation,
     _poolIroassBlessing,
     _poolIrohGrandLotus,
+    _poolIronFistHeroForHire,
     _poolIronManTonyStark,
     _poolIsochronScepter,
     _poolIxallisKeeper,
@@ -611,6 +623,7 @@ const shard: CardShard = {
     _poolMetropolisSprite,
     _poolMikaeusTheLunarch,
     _poolMindsEye,
+    _poolMirkwoodMeditator,
     _poolMirrex,
     _poolMoaningWall,
     _poolMockingSprite,
@@ -629,6 +642,7 @@ const shard: CardShard = {
     _poolOboroBreezecaller,
     _poolOdiousTrow,
     _poolOfferImmortality,
+    _poolOildeepGearhulk,
     _poolOmenOfTheDead,
     _poolOnduInversion,
     _poolOrcishBowmasters,

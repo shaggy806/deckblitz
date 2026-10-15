@@ -35,6 +35,7 @@ import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
+import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
@@ -93,6 +94,7 @@ import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
+import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -118,6 +120,7 @@ import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
+import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGiantFly from "../pool/giant-fly.js";
@@ -151,6 +154,7 @@ import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js"
 import _poolHighMarket from "../pool/high-market.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
+import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
@@ -307,6 +311,7 @@ import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
+import _poolSilvanReveler from "../pool/silvan-reveler.js";
 import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
 import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
@@ -343,6 +348,7 @@ import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
+import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTomakulHonorGuard from "../pool/tomakul-honor-guard.js";
@@ -438,6 +444,7 @@ const shard: CardShard = {
     _poolBlastingStation,
     _poolBloomvineRegent,
     _poolBlurSliver,
+    _poolBobReluctantHydraAgent,
     _poolBogNaughty,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
@@ -496,6 +503,7 @@ const shard: CardShard = {
     _poolElvenRaftSteerer,
     _poolEmrakulsMessenger,
     _poolEnslavedDwarf,
+    _poolEsgarothGarrison,
     _poolEssenceknitScholar,
     _poolEusocialEngineering,
     _poolExploreTheVastlands,
@@ -521,6 +529,7 @@ const shard: CardShard = {
     _poolFortifiedVillage,
     _poolFugue,
     _poolGarrukVeiledButcher,
+    _poolGeneralThunderboltRoss,
     _poolGenerousGift,
     _poolGenesisUltimatum,
     _poolGiantFly,
@@ -554,6 +563,7 @@ const shard: CardShard = {
     _poolHighMarket,
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,
+    _poolHulklingYoungAvenger,
     _poolIgniteTheFuture,
     _poolImpale,
     _poolImplode,
@@ -710,6 +720,7 @@ const shard: CardShard = {
     _poolShuko,
     _poolSift,
     _poolSignInBlood,
+    _poolSilvanReveler,
     _poolSinkholeSurveyor,
     _poolSkarrgGoliath,
     _poolSkeletalWurm,
@@ -746,6 +757,7 @@ const shard: CardShard = {
     _poolTajuruSnarecaster,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
+    _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,
     _poolTomakulHonorGuard,

@@ -5095,6 +5095,44 @@
    "family": "effect:temporary-player-effect",
    "example": "Teferi's Reproach: a player effect on a target player lasting until that player's next turn."
   },
+  "trigger:attack-with-exactly": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Love on the Battlefield: 'whenever you attack with exactly two creatures' (attack-with has only atLeast)."
+  },
+  "cost:power-up-alternative-cost": {
+   "family": "cost:ability-cost-modification",
+   "example": "Advancing the Spirit: pay {0} rather than the power-up cost of the first power-up ability you activate each of your turns."
+  },
+  "cost:spend-only-power-up": {
+   "family": "cost:mana-spending-rules",
+   "example": "Quinjet Technician: 'spend this mana only to activate power-up abilities'."
+  },
+  "effect:per-player-count-in-graveyard": {
+   "family": "effect:amount-new-variants",
+   "example": "Origin of Black Widow: 'for each creature card in their graveyard', read per player."
+  },
+  "zone:activate-from-exile": {
+   "example": "Mister Immortal: an activated ability that works while its card is in exile."
+  },
+  "condition:exiled-with-source-filter": {
+   "example": "Negative Zone Portal: count the cards exiled with the source now, narrowed by a filter ('four or more creature cards exiled with it')."
+  },
+  "zone:graveyard-self-cast-extra-cost": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Dragon Man, Reformed Robot: a card's own cast-from-graveyard permission with an additional cost (discarding a card)."
+  },
+  "effect:self-flash-if-condition": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Bard's Company: 'you may cast this spell as though it had flash if you control a Human' (printed on the spell itself)."
+  },
+  "replacement:prevent-damage-by-target-while-source": {
+   "family": "replacement:damage-modification",
+   "example": "Old Fat Spider Can't See Me: prevent all damage that would be dealt by a target for as long as the source remains on the battlefield."
+  },
+  "replacement:target-exile-if-dies-this-turn": {
+   "family": "replacement:exile-instead",
+   "example": "Pinecone Strike: 'if that creature would die this turn, exile it instead' on a target (not the creatures dealt damage this way)."
+  },
   "replacement:exile-instead-linked": {
    "family": "replacement:new-event-replacements",
    "example": "Gisa, Glorious Resurrector: a would-die exile replacement whose exiled cards are linked to its source ('put all creature cards exiled with Gisa onto the battlefield'), which the would-be-put-into-graveyard replacement doesn't record."

@@ -66,6 +66,7 @@ import _poolCloudKey from "../pool/cloud-key.js";
 import _poolCloudspireCaptain from "../pool/cloudspire-captain.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
+import _poolColossalCollision from "../pool/colossal-collision.js";
 import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
 import _poolContaminatedAquifer from "../pool/contaminated-aquifer.js";
@@ -453,6 +454,7 @@ const shard: CardShard = {
     _poolCloudspireCaptain,
     _poolCogworkWrestler,
     _poolCollateralDamage,
+    _poolColossalCollision,
     _poolComposerOfSpring,
     _poolConcordiaPegasus,
     _poolContaminatedAquifer,

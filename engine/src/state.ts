@@ -2073,7 +2073,10 @@ export type AwaitingDecision =
         | "library-top"
         | "library-bottom"
         | "graveyard"
-        | "behold";
+        | "behold"
+        /** The hand's owner (`forPlayer`) discards the chosen cards — the
+         * `discard-chosen` effect (Duress). */
+        | "discard";
       /**
        * A behold (rule 701.4a — `Game.beginBehold`): `ids` are cards in
        * `player`'s hand and permanents they control, both at once, and the
@@ -3207,7 +3210,9 @@ export interface AttackRequirementRule {
  * A stretch of the game during which every player knew what an object was:
  * from the event it became public (`from`, an `eventSeq`) until knowledge of
  * it was lost (`until`, exclusive — absent while it still holds). It becomes
- * public by entering a public zone or being revealed. It stays known when it
+ * public by entering a public zone or being revealed — a token or a copy of a
+ * spell as it comes into being, so a line still names it after it has ceased
+ * to exist (rule 111.7). It stays known when it
  * goes from there into a hand or library (a bounced card is still known to be
  * that card), and stops being known when it moves on from a hidden zone, when
  * its library is shuffled, or when it's turned face down (foretold). The

@@ -53,6 +53,7 @@ import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
+import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
@@ -87,6 +88,7 @@ import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
+import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
 import _poolDutifulThrull from "../pool/dutiful-thrull.js";
@@ -114,6 +116,7 @@ import _poolFireSnake from "../pool/fire-snake.js";
 import _poolFishliverOil from "../pool/fishliver-oil.js";
 import _poolFlatten from "../pool/flatten.js";
 import _poolFling from "../pool/fling.js";
+import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
@@ -175,6 +178,7 @@ import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
 import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
+import _poolLakeTown from "../pool/lake-town.js";
 import _poolLandLeeches from "../pool/land-leeches.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
@@ -304,6 +308,7 @@ import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
 import _poolStaffOfZegon from "../pool/staff-of-zegon.js";
 import _poolSteadfastCathar from "../pool/steadfast-cathar.js";
 import _poolStealEnchantment from "../pool/steal-enchantment.js";
+import _poolStickFearlessMentor from "../pool/stick-fearless-mentor.js";
 import _poolStillmoonCavalier from "../pool/stillmoon-cavalier.js";
 import _poolStinkweedImp from "../pool/stinkweed-imp.js";
 import _poolStonewoodInvoker from "../pool/stonewood-invoker.js";
@@ -444,6 +449,7 @@ const shard: CardShard = {
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
     _poolBurglarRat,
+    _poolBurnBurnTreeAndFern,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
     _poolCanyonLurkers,
@@ -478,6 +484,7 @@ const shard: CardShard = {
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragonRoost,
+    _poolDreadedBatCloud,
     _poolDreamTrawler,
     _poolDrumbellower,
     _poolDutifulThrull,
@@ -505,6 +512,7 @@ const shard: CardShard = {
     _poolFishliverOil,
     _poolFlatten,
     _poolFling,
+    _poolFoggyNelsonOnRetainer,
     _poolForebodingLandscape,
     _poolForgottenAncient,
     _poolFrilledSeaSerpent,
@@ -566,6 +574,7 @@ const shard: CardShard = {
     _poolKrenkosEnforcer,
     _poolKykarZephyrAwakener,
     _poolLagacLizard,
+    _poolLakeTown,
     _poolLandLeeches,
     _poolLazotepPlating,
     _poolLedgerShredder,
@@ -695,6 +704,7 @@ const shard: CardShard = {
     _poolStaffOfZegon,
     _poolSteadfastCathar,
     _poolStealEnchantment,
+    _poolStickFearlessMentor,
     _poolStillmoonCavalier,
     _poolStinkweedImp,
     _poolStonewoodInvoker,

@@ -36,6 +36,7 @@ import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
+import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
@@ -70,6 +71,7 @@ import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCrackOpen from "../pool/crack-open.js";
+import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
@@ -145,6 +147,7 @@ import _poolGoldenglowMoth from "../pool/goldenglow-moth.js";
 import _poolGolgariGermination from "../pool/golgari-germination.js";
 import _poolGontisAetherHeart from "../pool/gontis-aether-heart.js";
 import _poolGrabbyGiant from "../pool/grabby-giant.js";
+import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
@@ -197,6 +200,7 @@ import _poolKotoriPilotProdigy from "../pool/kotori-pilot-prodigy.js";
 import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
+import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
@@ -272,6 +276,7 @@ import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
+import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
@@ -406,6 +411,7 @@ const shard: CardShard = {
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
     _poolBestowGreatness,
+    _poolBigBertha,
     _poolBindingTheOldGods,
     _poolBlackWidowDeadlyHunter,
     _poolBlightedAgent,
@@ -440,6 +446,7 @@ const shard: CardShard = {
     _poolCopperhornScout,
     _poolCounterspell,
     _poolCrackOpen,
+    _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
     _poolCurseOfOpulence,
     _poolCurseOfVerbosity,
@@ -515,6 +522,7 @@ const shard: CardShard = {
     _poolGolgariGermination,
     _poolGontisAetherHeart,
     _poolGrabbyGiant,
+    _poolGreatGildedBoat,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
     _poolGuidingBolt,
@@ -567,6 +575,7 @@ const shard: CardShard = {
     _poolKrarkClanIronworks,
     _poolKrosanGrip,
     _poolLagomosHandOfHatred,
+    _poolLakeTownToymaker,
     _poolLilysplashMentor,
     _poolLizardWarrior,
     _poolLlanowarReborn,
@@ -642,6 +651,7 @@ const shard: CardShard = {
     _poolScrapMastery,
     _poolSeveredLegion,
     _poolShardlessAgent,
+    _poolSheHulkJenniferWalters,
     _poolShimmeringBarrier,
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,

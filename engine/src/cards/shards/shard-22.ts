@@ -43,6 +43,7 @@ import _poolBurntOffering from "../pool/burnt-offering.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
+import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
@@ -124,6 +125,7 @@ import _poolGoblinRabblemaster from "../pool/goblin-rabblemaster.js";
 import _poolGoblinSkyRaider from "../pool/goblin-sky-raider.js";
 import _poolGoblinStriker from "../pool/goblin-striker.js";
 import _poolGoldveinPick from "../pool/goldvein-pick.js";
+import _poolGollumTheAbandoned from "../pool/gollum-the-abandoned.js";
 import _poolGravestoneStrider from "../pool/gravestone-strider.js";
 import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
@@ -386,6 +388,7 @@ import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
+import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -429,6 +432,7 @@ const shard: CardShard = {
     _poolCaesarLegionsEmperor,
     _poolCalamityOfCinders,
     _poolCanalMonitor,
+    _poolCaptainAmericaSteveRogers,
     _poolCareeningMineCart,
     _poolCartographersHawk,
     _poolCatharticReunion,
@@ -510,6 +514,7 @@ const shard: CardShard = {
     _poolGoblinSkyRaider,
     _poolGoblinStriker,
     _poolGoldveinPick,
+    _poolGollumTheAbandoned,
     _poolGravestoneStrider,
     _poolGriffinAerie,
     _poolGuadosalamFarplaneGateway,
@@ -774,6 +779,7 @@ const shard: CardShard = {
     _tokensLifelinkCatToken,
     _tokensPhobos,
     _tokensSnakeToken,
+    _tokensStoneBoulderToken,
   ],
 };
 

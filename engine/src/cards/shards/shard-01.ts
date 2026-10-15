@@ -132,6 +132,7 @@ import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
+import _poolIconicShield from "../pool/iconic-shield.js";
 import _poolIgnobleHierarch from "../pool/ignoble-hierarch.js";
 import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
@@ -284,6 +285,7 @@ import _poolSpellSwindle from "../pool/spell-swindle.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolStab from "../pool/stab.js";
 import _poolStartingColumn from "../pool/starting-column.js";
+import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStun from "../pool/stun.js";
 import _poolSunderflock from "../pool/sunderflock.js";
@@ -498,6 +500,7 @@ const shard: CardShard = {
     _poolHuntersTalent,
     _poolHylderblade,
     _poolHypnoticSpecter,
+    _poolIconicShield,
     _poolIgnobleHierarch,
     _poolIllustriousHistorian,
     _poolIndulgentAristocrat,
@@ -650,6 +653,7 @@ const shard: CardShard = {
     _poolSpewFlame,
     _poolStab,
     _poolStartingColumn,
+    _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStun,
     _poolSunderflock,

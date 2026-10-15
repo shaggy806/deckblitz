@@ -128,6 +128,9 @@ describe("reveal lands ask before they enter", () => {
     );
     // Revealed, not moved.
     expect(game.state.objects[island].zone).toBe("hand");
+    // Every player sees what it was (rule 701.20a): the other player's view
+    // names it, for the history and the reveal animation.
+    expect(game.viewFor(B).objects[island]?.cardName).toBe("Island");
   });
 
   it("declining has it enter tapped, and reveals nothing", () => {

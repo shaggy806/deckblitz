@@ -77,6 +77,7 @@ import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
@@ -254,6 +255,7 @@ import _poolRetreatToHagra from "../pool/retreat-to-hagra.js";
 import _poolRetrofitterFoundry from "../pool/retrofitter-foundry.js";
 import _poolRevitalizingRepast from "../pool/revitalizing-repast.js";
 import _poolRevivingDose from "../pool/reviving-dose.js";
+import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRootSliver from "../pool/root-sliver.js";
@@ -461,6 +463,7 @@ const shard: CardShard = {
     _poolDictateOfKarametra,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDoomsServoGuards,
     _poolDoubleDown,
     _poolDrakeHatchling,
     _poolDreadPresence,
@@ -638,6 +641,7 @@ const shard: CardShard = {
     _poolRetrofitterFoundry,
     _poolRevitalizingRepast,
     _poolRevivingDose,
+    _poolRhovanionRampager,
     _poolRidgeRannet,
     _poolRitualOfSteel,
     _poolRootSliver,

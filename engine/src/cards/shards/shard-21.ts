@@ -48,7 +48,10 @@ import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
+import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
+import _poolCoercion from "../pool/coercion.js";
+import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
 import _poolCommonBond from "../pool/common-bond.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
@@ -77,6 +80,7 @@ import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
+import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
@@ -145,6 +149,7 @@ import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
+import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
@@ -393,7 +398,10 @@ const shard: CardShard = {
     _poolChartACourse,
     _poolChaseInspiration,
     _poolChromaticLantern,
+    _poolCitizenVHelmutZemo,
     _poolClavilenoFirstOfTheBlessed,
+    _poolCoercion,
+    _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
     _poolCommonBond,
     _poolConclaveTribunal,
@@ -422,6 +430,7 @@ const shard: CardShard = {
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
     _poolDranasChosen,
+    _poolDuress,
     _poolDuskLegionZealot,
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
@@ -490,6 +499,7 @@ const shard: CardShard = {
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
     _poolIridescentBlademaster,
+    _poolIronHillsStalwart,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
     _poolJetmirNexusOfRevels,

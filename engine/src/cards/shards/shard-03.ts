@@ -128,6 +128,7 @@ import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
 import _poolHarvestSeason from "../pool/harvest-season.js";
 import _poolHasteMagic from "../pool/haste-magic.js";
+import _poolHawkeyeBowslinger from "../pool/hawkeye-bowslinger.js";
 import _poolHazelsNocturne from "../pool/hazels-nocturne.js";
 import _poolHealersHawk from "../pool/healers-hawk.js";
 import _poolHengeOfRamos from "../pool/henge-of-ramos.js";
@@ -339,6 +340,7 @@ import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
+import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
@@ -491,6 +493,7 @@ const shard: CardShard = {
     _poolHarrierNaga,
     _poolHarvestSeason,
     _poolHasteMagic,
+    _poolHawkeyeBowslinger,
     _poolHazelsNocturne,
     _poolHealersHawk,
     _poolHengeOfRamos,
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolVraskasContempt,
     _poolWallOfRoots,
     _poolWanderingArchaic,
+    _poolWargTactics,
     _poolWeatherMaker,
     _poolWebShot,
     _poolWhiteKnight,

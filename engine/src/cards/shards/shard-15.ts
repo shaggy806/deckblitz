@@ -11,6 +11,7 @@ import _poolAjaniResolute from "../pool/ajani-resolute.js";
 import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
 import _poolAlabasterKirin from "../pool/alabaster-kirin.js";
+import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
@@ -59,12 +60,14 @@ import _poolConjurersCloset from "../pool/conjurers-closet.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
+import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
 import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
 import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
+import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
@@ -199,6 +202,7 @@ import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
+import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
@@ -295,6 +299,7 @@ import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolStingingVitriol from "../pool/stinging-vitriol.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
 import _poolStrengthOfWill from "../pool/strength-of-will.js";
 import _poolStripedBears from "../pool/striped-bears.js";
@@ -377,6 +382,7 @@ const shard: CardShard = {
     _poolAkkiAvalanchers,
     _poolAkoumHellhound,
     _poolAlabasterKirin,
+    _poolAlexWilderRunaway,
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
@@ -425,12 +431,14 @@ const shard: CardShard = {
     _poolContingencyPlan,
     _poolCopperLonglegs,
     _poolCormelaGlamourThief,
+    _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
     _poolCrystalQuarry,
     _poolCutthroatContender,
     _poolCybermenSquadron,
     _poolCynetteJellyDrover,
+    _poolDaredevilsBillyClub,
     _poolDeathBomb,
     _poolDefiantBloodlord,
     _poolDemonicCounsel,
@@ -565,6 +573,7 @@ const shard: CardShard = {
     _poolMarrowBats,
     _poolMarshLurker,
     _poolMarvelousMelee,
+    _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,
@@ -661,6 +670,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolStingingVitriol,
     _poolStormriderSpirit,
     _poolStrengthOfWill,
     _poolStripedBears,
