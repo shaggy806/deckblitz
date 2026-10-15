@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
+import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
@@ -27,6 +28,7 @@ import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
+import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
@@ -94,10 +96,12 @@ import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
+import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
+import _poolEarthRumbleWrestlers from "../pool/earth-rumble-wrestlers.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
@@ -171,6 +175,8 @@ import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
 import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
+import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
+import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
 import _poolJunktown from "../pool/junktown.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
@@ -186,6 +192,7 @@ import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
+import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
@@ -384,6 +391,7 @@ const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
     _poolAgonyWarp,
+    _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
     _poolAlienInvasion,
     _poolAmbitionsCost,
@@ -406,6 +414,7 @@ const shard: CardShard = {
     _poolAzoriusKnightArbiter,
     _poolBackInTown,
     _poolBarkformHarvester,
+    _poolBarrelsOfBlastingJelly,
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
@@ -473,10 +482,12 @@ const shard: CardShard = {
     _poolDespoil,
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
+    _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
     _poolDuskwatchHunter,
     _poolEarthOriginYak,
+    _poolEarthRumbleWrestlers,
     _poolEatenAlive,
     _poolEclipsedSteppe,
     _poolEiganjoSeatOfTheEmpire,
@@ -550,6 +561,8 @@ const shard: CardShard = {
     _poolItzquinthFirstbornOfGishath,
     _poolIvoryTower,
     _poolJaceBeleren,
+    _poolJetFreedomFighter,
+    _poolJooDeeOneOfMany,
     _poolJunjiTheMidnightSky,
     _poolJunktown,
     _poolKamiOfTheCrescentMoon,
@@ -565,6 +578,7 @@ const shard: CardShard = {
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKuraTheBoundlessSky,
+    _poolKyoshiBattleFan,
     _poolLarvalScoutlander,
     _poolLavaAxe,
     _poolLegionsJudgment,

@@ -231,6 +231,7 @@ import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
 import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
+import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
@@ -395,6 +396,7 @@ import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
+import _poolYipYip from "../pool/yip-yip.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
@@ -637,6 +639,7 @@ const shard: CardShard = {
     _poolPalaceSiege,
     _poolPerilousMyr,
     _poolPesteredWellguard,
+    _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPillarOfLight,
     _poolPillarfieldOx,
@@ -801,6 +804,7 @@ const shard: CardShard = {
     _poolYargleGluttonOfUrborg,
     _poolYavimayaElder,
     _poolYawgmothThranPhysician,
+    _poolYipYip,
     _poolYurikoTheTigersShadow,
     _poolZiatoraTheIncinerator,
   ],

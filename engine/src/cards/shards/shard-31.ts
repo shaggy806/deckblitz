@@ -76,8 +76,10 @@ import _poolCounterspell from "../pool/counterspell.js";
 import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
+import _poolCruelAdministrator from "../pool/cruel-administrator.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
+import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
@@ -137,6 +139,7 @@ import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
+import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
@@ -304,6 +307,7 @@ import _poolSnowfieldSinkhole from "../pool/snowfield-sinkhole.js";
 import _poolSoulManipulation from "../pool/soul-manipulation.js";
 import _poolSowerOfTemptation from "../pool/sower-of-temptation.js";
 import _poolSparkSpray from "../pool/spark-spray.js";
+import _poolSparringDummy from "../pool/sparring-dummy.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
@@ -322,6 +326,7 @@ import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
+import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
@@ -461,8 +466,10 @@ const shard: CardShard = {
     _poolCrackOpen,
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
+    _poolCruelAdministrator,
     _poolCurseOfOpulence,
     _poolCurseOfVerbosity,
+    _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
     _poolDeepwoodGhoul,
     _poolDematerialize,
@@ -522,6 +529,7 @@ const shard: CardShard = {
     _poolFungalInfection,
     _poolGallifreyCouncilChamber,
     _poolGastalThrillseeker,
+    _poolGatherTheWhiteLotus,
     _poolGatheringStone,
     _poolGenesisChamber,
     _poolGhostlyFlicker,
@@ -689,6 +697,7 @@ const shard: CardShard = {
     _poolSoulManipulation,
     _poolSowerOfTemptation,
     _poolSparkSpray,
+    _poolSparringDummy,
     _poolSpelunking,
     _poolSpinelessThug,
     _poolSpriteDragon,
@@ -707,6 +716,7 @@ const shard: CardShard = {
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTheBattleOfBywater,
+    _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,
     _poolTheReaverCleaver,
     _poolTheWatcherInTheWater,

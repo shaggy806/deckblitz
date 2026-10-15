@@ -6188,6 +6188,22 @@
   "effect:grant-keyword-all-target-player": {
    "family": "effect:player-scope-extensions",
    "example": "Sygg's Command: Sygg's Command: 'Creatures target player controls gain lifelink until end of turn' — grant-keyword-all lacks the controlledByTarget scope modify-pt-all and untap-all have."
+  },
+  "static:pt-per-affected-creature-types": {
+   "family": "static:pt-per-amount",
+   "example": "Diligent Zookeeper: A P/T bonus counted from each affected creature's own number of creature types, with a cap — Diligent Zookeeper: 'each non-Human creature you control gets +1/+1 for each of its creature types, to a maximum of 10' (a changeling counts 10). Sibling of static:pt-per-affected-colors."
+  },
+  "effect:delayed-trigger-own-targets": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Fatal Fissure: A delayed triggered ability with targets of its own, chosen as it's put on the stack (rule 603.7c) — Fatal Fissure's 'When that creature dies this turn, you earthbend 4' targets a land then."
+  },
+  "static:has-abilities-of-chosen-exiled-card": {
+   "family": "static:gain-abilities-from-graveyard",
+   "example": "Koh, the Face Stealer: Koh, the Face Stealer: an activated 'choose a creature card exiled with this' that records the choice, and a static giving the source all activated and triggered abilities of the last chosen card."
+  },
+  "effect:granted-activated-refers-to-granter": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Trusty Boomerang: An activated ability a static grants (Equipment's 'Equipped creature has \"…\"') whose effect names the granting permanent rather than the one it's on — Trusty Boomerang's 'Return Trusty Boomerang to its owner's hand'. The activated twin of effect:granted-trigger-refers-to-granter."
   }
  }
 }

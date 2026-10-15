@@ -356,6 +356,7 @@ import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
+import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
@@ -721,6 +722,7 @@ const shard: CardShard = {
     _poolWeldfastMonitor,
     _poolWillOfTheSultai,
     _poolWoodworkProdigy,
+    _poolZhaoRuthlessAdmiral,
   ],
   tokens: [
     _tokensBirdTokenGwaihirGreatestOfTheEagles,

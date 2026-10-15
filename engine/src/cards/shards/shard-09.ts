@@ -154,6 +154,7 @@ import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
+import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
@@ -247,6 +248,7 @@ import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
+import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
@@ -558,6 +560,7 @@ const shard: CardShard = {
     _poolHavocDemon,
     _poolHeavyInfantry,
     _poolHeroOfBladehold,
+    _poolHogMonkey,
     _poolHoldAtBay,
     _poolHollowhengeScavenger,
     _poolHowlingBanshee,
@@ -651,6 +654,7 @@ const shard: CardShard = {
     _poolPricklyBoggart,
     _poolPrimalRage,
     _poolPrimalWitchstalker,
+    _poolProfessorZeiAnthropologist,
     _poolProsperousBandit,
     _poolPunySnack,
     _poolQuilledCharger,

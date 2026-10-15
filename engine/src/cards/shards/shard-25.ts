@@ -198,6 +198,7 @@ import _poolLordOfTheNazgul from "../pool/lord-of-the-nazgul.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
+import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
@@ -586,6 +587,7 @@ const shard: CardShard = {
     _poolLotusCobra,
     _poolLoyalApprentice,
     _poolMachinistsArsenal,
+    _poolMaiJadedEdge,
     _poolMalevolentChandelier,
     _poolMantisRider,
     _poolMaryReadAndAnneBonny,

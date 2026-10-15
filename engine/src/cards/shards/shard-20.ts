@@ -63,6 +63,7 @@ import _poolBrightbladeStoat from "../pool/brightblade-stoat.js";
 import _poolBrightclimbPathway from "../pool/brightclimb-pathway.js";
 import _poolBrotherhoodsEnd from "../pool/brotherhoods-end.js";
 import _poolBullHippo from "../pool/bull-hippo.js";
+import _poolBumiBash from "../pool/bumi-bash.js";
 import _poolBurnBright from "../pool/burn-bright.js";
 import _poolCabalTrainee from "../pool/cabal-trainee.js";
 import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
@@ -99,6 +100,7 @@ import _poolDauthiMercenary from "../pool/dauthi-mercenary.js";
 import _poolDauthiVoidwalker from "../pool/dauthi-voidwalker.js";
 import _poolDaydream from "../pool/daydream.js";
 import _poolDeadlyInsect from "../pool/deadly-insect.js";
+import _poolDeadlyPrecision from "../pool/deadly-precision.js";
 import _poolDeadlyRollick from "../pool/deadly-rollick.js";
 import _poolDeadshotMinotaur from "../pool/deadshot-minotaur.js";
 import _poolDeathreapRitual from "../pool/deathreap-ritual.js";
@@ -138,6 +140,7 @@ import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFissure from "../pool/fissure.js";
 import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
+import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
@@ -298,6 +301,7 @@ import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
 import _poolRottedHystrix from "../pool/rotted-hystrix.js";
 import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
+import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
@@ -389,6 +393,7 @@ import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
 import _poolTitansStrength from "../pool/titans-strength.js";
+import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
 import _poolTrailOfCrumbs from "../pool/trail-of-crumbs.js";
@@ -506,6 +511,7 @@ const shard: CardShard = {
     _poolBrightclimbPathway,
     _poolBrotherhoodsEnd,
     _poolBullHippo,
+    _poolBumiBash,
     _poolBurnBright,
     _poolCabalTrainee,
     _poolCallTheCavalry,
@@ -542,6 +548,7 @@ const shard: CardShard = {
     _poolDauthiVoidwalker,
     _poolDaydream,
     _poolDeadlyInsect,
+    _poolDeadlyPrecision,
     _poolDeadlyRollick,
     _poolDeadshotMinotaur,
     _poolDeathreapRitual,
@@ -581,6 +588,7 @@ const shard: CardShard = {
     _poolFissure,
     _poolFlourishingGrapple,
     _poolFlowstoneStrike,
+    _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
     _poolFugitiveDroid,
     _poolFurnaceSpirit,
@@ -741,6 +749,7 @@ const shard: CardShard = {
     _poolRottedHystrix,
     _poolRubyMedallion,
     _poolSanarUnfinishedGenius,
+    _poolSandbendersStorm,
     _poolSanguineGuard,
     _poolSazhsChocobo,
     _poolScarecrowGuide,
@@ -832,6 +841,7 @@ const shard: CardShard = {
     _poolTimberwatchElf,
     _poolTishanaVoiceOfThunder,
     _poolTitansStrength,
+    _poolTollsOfWar,
     _poolTomeBlast,
     _poolTormodsCrypt,
     _poolTrailOfCrumbs,

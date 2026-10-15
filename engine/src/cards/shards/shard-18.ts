@@ -371,6 +371,7 @@ import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
+import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
 import _poolWarrenElder from "../pool/warren-elder.js";
@@ -784,6 +785,7 @@ const shard: CardShard = {
     _poolVulshokSorcerer,
     _poolWakandanTusker,
     _poolWallOfAir,
+    _poolWarBalloon,
     _poolWargate,
     _poolWargling,
     _poolWarrenElder,

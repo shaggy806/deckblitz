@@ -83,6 +83,7 @@ import _poolCrystalBall from "../pool/crystal-ball.js";
 import _poolCuriousAltisaur from "../pool/curious-altisaur.js";
 import _poolCyberdriveAwakener from "../pool/cyberdrive-awakener.js";
 import _poolCyclopsOfEternalFury from "../pool/cyclops-of-eternal-fury.js";
+import _poolDaiLiAgents from "../pool/dai-li-agents.js";
 import _poolDakmorLancer from "../pool/dakmor-lancer.js";
 import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js";
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
@@ -356,6 +357,7 @@ import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
+import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
@@ -476,6 +478,7 @@ const shard: CardShard = {
     _poolCuriousAltisaur,
     _poolCyberdriveAwakener,
     _poolCyclopsOfEternalFury,
+    _poolDaiLiAgents,
     _poolDakmorLancer,
     _poolDalakosCrafterOfWonders,
     _poolDarkslickDrake,
@@ -749,6 +752,7 @@ const shard: CardShard = {
     _poolUrzasCave,
     _poolUrzasIncubator,
     _poolVampireNighthawk,
+    _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,
     _poolVinereapMentor,

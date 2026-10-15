@@ -233,6 +233,7 @@ import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
@@ -641,6 +642,7 @@ const shard: CardShard = {
     _poolOnduGiant,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOzaisCruelty,
     _poolPatriotYoungAvenger,
     _poolPerchProtection,
     _poolPerimeterPatrol,

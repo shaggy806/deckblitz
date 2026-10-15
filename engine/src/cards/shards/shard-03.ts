@@ -33,6 +33,7 @@ import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
+import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
 import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
@@ -175,6 +176,7 @@ import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
+import _poolLoAndLiTwinTutors from "../pool/lo-and-li-twin-tutors.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
@@ -347,6 +349,7 @@ import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
+import _poolWalltopSentries from "../pool/walltop-sentries.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
 import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
@@ -410,6 +413,7 @@ const shard: CardShard = {
     _poolBoroughBackup,
     _poolBovineIntervention,
     _poolBrotherhoodPatriarch,
+    _poolBuzzardWaspColony,
     _poolCaitSithFortuneTeller,
     _poolCalamityGallopingInferno,
     _poolCandlekeepSage,
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolLivingLibrary,
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
+    _poolLoAndLiTwinTutors,
     _poolLokhustHeavyDestroyer,
     _poolLoxodonMystic,
     _poolLoyalDrake,
@@ -724,6 +729,7 @@ const shard: CardShard = {
     _poolVonaButcherOfMagan,
     _poolVraskasContempt,
     _poolWallOfRoots,
+    _poolWalltopSentries,
     _poolWanderingArchaic,
     _poolWargTactics,
     _poolWaspShrinkingSavior,

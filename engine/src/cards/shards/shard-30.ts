@@ -81,6 +81,7 @@ import _poolCrossroadsVillage from "../pool/crossroads-village.js";
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
+import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
@@ -205,6 +206,7 @@ import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
+import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
@@ -338,6 +340,7 @@ import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
+import _poolTigerSeal from "../pool/tiger-seal.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
 import _poolTocasiasOnulet from "../pool/tocasias-onulet.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
@@ -482,6 +485,7 @@ const shard: CardShard = {
     _poolCruelCelebrant,
     _poolCruelFinality,
     _poolCryptGhast,
+    _poolCuriousFarmAnimals,
     _poolCutADeal,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
@@ -606,6 +610,7 @@ const shard: CardShard = {
     _poolKlothysGodOfDestiny,
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
+    _poolKnowledgeSeeker,
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
     _poolLaeliaTheBladeReforged,
@@ -739,6 +744,7 @@ const shard: CardShard = {
     _poolTheoristsSanctum,
     _poolThousandYearStorm,
     _poolTidingsOfWar,
+    _poolTigerSeal,
     _poolTitansGrave,
     _poolTocasiasOnulet,
     _poolTopazDragon,

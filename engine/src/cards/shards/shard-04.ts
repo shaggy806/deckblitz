@@ -167,6 +167,7 @@ import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
+import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
 import _poolKeenSense from "../pool/keen-sense.js";
@@ -191,6 +192,7 @@ import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
 import _poolLaughingJasperFlint from "../pool/laughing-jasper-flint.js";
 import _poolLavaDart from "../pool/lava-dart.js";
 import _poolLeadersTalent from "../pool/leaders-talent.js";
+import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
@@ -225,6 +227,7 @@ import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
+import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
@@ -388,6 +391,7 @@ import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
+import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
@@ -565,6 +569,7 @@ const shard: CardShard = {
     _poolIroassChampion,
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
+    _poolJeongJeongTheDeserter,
     _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
     _poolKeenSense,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolLaughingJasperFlint,
     _poolLavaDart,
     _poolLeadersTalent,
+    _poolLeavesFromTheVine,
     _poolLichsRelic,
     _poolLightningElemental,
     _poolLongFinnedSkywhale,
@@ -623,6 +629,7 @@ const shard: CardShard = {
     _poolOjutaiInterceptor,
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
+    _poolOtterPenguin,
     _poolOvergrownTomb,
     _poolPastInFlames,
     _poolPathOfAncestry,
@@ -788,6 +795,7 @@ const shard: CardShard = {
     _poolZofBloodbog,
   ],
   tokens: [
+    _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,
     _tokensGremlinToken,
     _tokensPhyrexianMyrToken,

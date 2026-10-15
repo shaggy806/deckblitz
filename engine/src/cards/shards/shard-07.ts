@@ -41,6 +41,7 @@ import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
+import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
@@ -316,6 +317,7 @@ import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
+import _poolSoldOut from "../pool/sold-out.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
@@ -472,6 +474,7 @@ const shard: CardShard = {
     _poolBoldBiochemist,
     _poolBountyAgent,
     _poolBronzebeakMoa,
+    _poolCallousInspector,
     _poolChandrasEmberling,
     _poolChatterstorm,
     _poolChildOfAlara,
@@ -747,6 +750,7 @@ const shard: CardShard = {
     _poolSnowhornRider,
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,
+    _poolSoldOut,
     _poolSoulSnare,
     _poolSouredSprings,
     _poolSpaceshift,

@@ -471,6 +471,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(fab.effect.condition).toEqual({ kind: "source-on-battlefield" });
     expect(fab.effect.then.modes.map((m: { effect: { kind: string } }) => m.effect.kind)).toEqual(["add-counter", "create-token"]);
     expect(fab.effect.else).toEqual({ kind: "create-token", token: "Servo Token", count: 2 });
+    // "Cards exiled with this creature" (rule 607.2a): the card's exile is linked to it.
+    const rioter = parseFace(
+      {
+        name: "Test Card",
+        type_line: "Creature — Human",
+        oracle_text: "{2}: Exile target card from a graveyard.\nWhenever this creature attacks, you gain 1 life for each card exiled with this creature.",
+      },
+      { tokenFor: () => "Servo Token" },
+    );
+    expect(rioter.activated[0].effect).toMatchObject({ kind: "exile", linked: true });
+    expect(face("{2}: Exile target card from a graveyard.").activated[0].effect.linked).toBeUndefined();
     // A keyword the engine doesn't run leaves the line to a person.
     expect(face("Bushido 2").complete).toBe(false);
   });

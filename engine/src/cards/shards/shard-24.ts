@@ -104,6 +104,7 @@ import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
 import _poolDreadwing from "../pool/dreadwing.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
+import _poolEarthKingdomSoldier from "../pool/earth-kingdom-soldier.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
@@ -482,6 +483,7 @@ const shard: CardShard = {
     _poolDragonbackLancer,
     _poolDreadwing,
     _poolDunesOfTheDead,
+    _poolEarthKingdomSoldier,
     _poolEarthbendingLesson,
     _poolEclipsedBoggart,
     _poolElementalSpectacle,

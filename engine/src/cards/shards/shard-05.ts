@@ -134,6 +134,7 @@ import _poolFeralInstinct from "../pool/feral-instinct.js";
 import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
+import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
@@ -188,6 +189,7 @@ import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
+import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
@@ -222,6 +224,7 @@ import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
 import _poolMendingHands from "../pool/mending-hands.js";
+import _poolMerchantOfManyHats from "../pool/merchant-of-many-hats.js";
 import _poolMerfolkOfThePearlTrident from "../pool/merfolk-of-the-pearl-trident.js";
 import _poolMerryEsquireOfRohan from "../pool/merry-esquire-of-rohan.js";
 import _poolMightOfOaks from "../pool/might-of-oaks.js";
@@ -369,6 +372,7 @@ import _poolVatEmergence from "../pool/vat-emergence.js";
 import _poolVelomachusLorehold from "../pool/velomachus-lorehold.js";
 import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
+import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolViridianRevel from "../pool/viridian-revel.js";
 import _poolViridianShaman from "../pool/viridian-shaman.js";
 import _poolVodalianZombie from "../pool/vodalian-zombie.js";
@@ -381,6 +385,7 @@ import _poolWatercourser from "../pool/watercourser.js";
 import _poolWellwisher from "../pool/wellwisher.js";
 import _poolWestfoldRider from "../pool/westfold-rider.js";
 import _poolWhispererOfTheWilds from "../pool/whisperer-of-the-wilds.js";
+import _poolWhiteLotusReinforcements from "../pool/white-lotus-reinforcements.js";
 import _poolWilt from "../pool/wilt.js";
 import _poolWindriderPatrol from "../pool/windrider-patrol.js";
 import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
@@ -537,6 +542,7 @@ const shard: CardShard = {
     _poolFightOn,
     _poolFiligreeSages,
     _poolFinneasAceArcher,
+    _poolFireNavyTrebuchet,
     _poolFlawlessManeuver,
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
@@ -591,6 +597,7 @@ const shard: CardShard = {
     _poolInsectoidExterminator,
     _poolInspiredCharge,
     _poolInvokeTheDivine,
+    _poolIrohTeaMaster,
     _poolJacesSanctum,
     _poolJasmineBoreal,
     _poolJuganDefendsTheTemple,
@@ -625,6 +632,7 @@ const shard: CardShard = {
     _poolMaskOfMemory,
     _poolMaulOfTheSkyclaves,
     _poolMendingHands,
+    _poolMerchantOfManyHats,
     _poolMerfolkOfThePearlTrident,
     _poolMerryEsquireOfRohan,
     _poolMightOfOaks,
@@ -772,6 +780,7 @@ const shard: CardShard = {
     _poolVelomachusLorehold,
     _poolVenomousChangeling,
     _poolVentureDeeper,
+    _poolVindictiveWarden,
     _poolViridianRevel,
     _poolViridianShaman,
     _poolVodalianZombie,
@@ -784,6 +793,7 @@ const shard: CardShard = {
     _poolWellwisher,
     _poolWestfoldRider,
     _poolWhispererOfTheWilds,
+    _poolWhiteLotusReinforcements,
     _poolWilt,
     _poolWindriderPatrol,
     _poolWinterMisanthropicGuide,

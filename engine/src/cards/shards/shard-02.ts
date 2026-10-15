@@ -249,6 +249,7 @@ import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPlacidRottentail from "../pool/placid-rottentail.js";
 import _poolPlasmaElemental from "../pool/plasma-elemental.js";
+import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
@@ -273,6 +274,7 @@ import _poolRiptideTurtle from "../pool/riptide-turtle.js";
 import _poolRivendell from "../pool/rivendell.js";
 import _poolRocksteadyMutantMarauder from "../pool/rocksteady-mutant-marauder.js";
 import _poolRootwaterCommando from "../pool/rootwater-commando.js";
+import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
 import _poolRunAmok from "../pool/run-amok.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
@@ -346,6 +348,8 @@ import _poolTributeToTheWild from "../pool/tribute-to-the-wild.js";
 import _poolTritonShorethief from "../pool/triton-shorethief.js";
 import _poolTropicalIsland from "../pool/tropical-island.js";
 import _poolTrystanCallousCultivator from "../pool/trystan-callous-cultivator.js";
+import _poolTwinBlades from "../pool/twin-blades.js";
+import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
@@ -636,6 +640,7 @@ const shard: CardShard = {
     _poolPiratesPrize,
     _poolPlacidRottentail,
     _poolPlasmaElemental,
+    _poolPlatypusBear,
     _poolPlunderingPredator,
     _poolPrimaryResearch,
     _poolPrimordialSage,
@@ -660,6 +665,7 @@ const shard: CardShard = {
     _poolRivendell,
     _poolRocksteadyMutantMarauder,
     _poolRootwaterCommando,
+    _poolRoughRhinoCavalry,
     _poolRumorGatherer,
     _poolRunAmok,
     _poolRuthlessTechnomancer,
@@ -733,6 +739,8 @@ const shard: CardShard = {
     _poolTritonShorethief,
     _poolTropicalIsland,
     _poolTrystanCallousCultivator,
+    _poolTwinBlades,
+    _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
     _poolUntimelyMalfunction,

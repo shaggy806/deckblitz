@@ -66,7 +66,9 @@ section keeps only what to do next.
   `mechanic:rad-counters` (15, 13), `effect:effect-on-enchanted-permanent` (14, 12). Its
   sibling `cost:remove-counter-any-kind` ("Remove a counter from this creature", any kind — 9,
   seven of them Lorwyn Eclipsed's) needs the player to choose which counters when there are
-  several kinds, so it's a new decision; build the two together
+  several kinds, so it's a new decision; build the two together. Also at five now:
+  `decision:owner-chooses-top-or-bottom` — the target's owner chooses top or bottom of their
+  library (Trickster's Stratagem, Run Behind, Return to the Sewers, Swat Away, Lost Days)
   (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
@@ -77,10 +79,10 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Avatar: The Last
-  Airbender (TLA, 104 left) back to Bloomburrow, about 950 cards (`npm run cards:sets -w engine
-  -- --sets 30`; DRC, DSC and BLC too; every set from Reality Fracture back to Lorwyn Eclipsed
-  and its Commander set is whole) — then
+  ranked ones first. **First, the rest of the sets already walked** — Marvel's Spider-Man
+  (SPM, 72 left) back to Bloomburrow, about 850 cards (`npm run cards:sets -w engine -- --sets
+  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Avatar: The Last Airbender
+  is whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or

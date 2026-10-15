@@ -104,6 +104,7 @@ import _poolDyadrineSynthesisAmalgam from "../pool/dyadrine-synthesis-amalgam.js
 import _poolEagerFirstYear from "../pool/eager-first-year.js";
 import _poolEaglesOfTheNorth from "../pool/eagles-of-the-north.js";
 import _poolEarthKingsLieutenant from "../pool/earth-kings-lieutenant.js";
+import _poolEarthVillageRuffians from "../pool/earth-village-ruffians.js";
 import _poolEasyPrey from "../pool/easy-prey.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
@@ -157,6 +158,7 @@ import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
+import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
@@ -207,6 +209,7 @@ import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
+import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
@@ -499,6 +502,7 @@ const shard: CardShard = {
     _poolEagerFirstYear,
     _poolEaglesOfTheNorth,
     _poolEarthKingsLieutenant,
+    _poolEarthVillageRuffians,
     _poolEasyPrey,
     _poolEatToExtinction,
     _poolEfficientConstruction,
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolHeadlessHorseman,
     _poolHeatedArgument,
     _poolHedgeMaze,
+    _poolHeiBaiSpiritOfBalance,
     _poolHenchbots,
     _poolHeraldOfKozilek,
     _poolHighspireBellRinger,
@@ -602,6 +607,7 @@ const shard: CardShard = {
     _poolMasterworkOfIngenuity,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
+    _poolMessengerHawk,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,

@@ -10,6 +10,7 @@ import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAfflict from "../pool/afflict.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
+import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
 import _poolAmbitiousAetherborn from "../pool/ambitious-aetherborn.js";
 import _poolAncientSpider from "../pool/ancient-spider.js";
@@ -264,6 +265,7 @@ import _poolRallyOfWings from "../pool/rally-of-wings.js";
 import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
 import _poolRapturousMoment from "../pool/rapturous-moment.js";
+import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
 import _poolRecklessReveler from "../pool/reckless-reveler.js";
 import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
@@ -341,6 +343,7 @@ import _poolTectonicHazard from "../pool/tectonic-hazard.js";
 import _poolTempestAngler from "../pool/tempest-angler.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
+import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
@@ -402,6 +405,7 @@ import _poolYouthfulKnight from "../pool/youthful-knight.js";
 import _poolYouthfulValkyrie from "../pool/youthful-valkyrie.js";
 import _poolZhaoTheSeethingFlame from "../pool/zhao-the-seething-flame.js";
 import _poolZukoExiledPrince from "../pool/zuko-exiled-prince.js";
+import _poolZukosConviction from "../pool/zukos-conviction.js";
 import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
 import _poolZurgoThundersDecree from "../pool/zurgo-thunders-decree.js";
 import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
@@ -422,6 +426,7 @@ const shard: CardShard = {
     _poolAfflict,
     _poolAgentOfTheIronThrone,
     _poolAleshaWhoLaughsAtFate,
+    _poolAlliesAtLast,
     _poolAlloyMyr,
     _poolAmbitiousAetherborn,
     _poolAncientSpider,
@@ -676,6 +681,7 @@ const shard: CardShard = {
     _poolRamblingPossum,
     _poolRangerEnVec,
     _poolRapturousMoment,
+    _poolRebelliousCaptives,
     _poolRecklessRansacking,
     _poolRecklessReveler,
     _poolReleaseTheDogs,
@@ -753,6 +759,7 @@ const shard: CardShard = {
     _poolTempestAngler,
     _poolTempestDrake,
     _poolTemporalManipulation,
+    _poolTeoSpiritedGlider,
     _poolTerritorialHellkite,
     _poolTheComingOfGalactus,
     _poolTheImmortalWeapons,
@@ -814,6 +821,7 @@ const shard: CardShard = {
     _poolYouthfulValkyrie,
     _poolZhaoTheSeethingFlame,
     _poolZukoExiledPrince,
+    _poolZukosConviction,
     _poolZurEternalSchemer,
     _poolZurgoThundersDecree,
   ],

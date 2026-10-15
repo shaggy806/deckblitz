@@ -59,6 +59,7 @@ import _poolClaimThePrecious from "../pool/claim-the-precious.js";
 import _poolCoastalPiracy from "../pool/coastal-piracy.js";
 import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
 import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
+import _poolCompassionateHealer from "../pool/compassionate-healer.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
@@ -247,6 +248,7 @@ import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRohirrimLancer from "../pool/rohirrim-lancer.js";
 import _poolRotShambler from "../pool/rot-shambler.js";
 import _poolRovingHarper from "../pool/roving-harper.js";
+import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
 import _poolRubblebeltBoar from "../pool/rubblebelt-boar.js";
 import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
@@ -437,6 +439,7 @@ const shard: CardShard = {
     _poolCoastalPiracy,
     _poolCoerciveImpetus,
     _poolCogworkersPuzzleknot,
+    _poolCompassionateHealer,
     _poolConclaveEquenaut,
     _poolCorpseKnight,
     _poolCountOnLuck,
@@ -625,6 +628,7 @@ const shard: CardShard = {
     _poolRohirrimLancer,
     _poolRotShambler,
     _poolRovingHarper,
+    _poolRowdySnowballers,
     _poolRubblebeltBoar,
     _poolRuinousUltimatum,
     _poolSHIELDHelicarrier,

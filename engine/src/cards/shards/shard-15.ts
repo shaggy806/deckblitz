@@ -24,6 +24,7 @@ import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
 import _poolBayou from "../pool/bayou.js";
+import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBenthicGiant from "../pool/benthic-giant.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
@@ -32,6 +33,7 @@ import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
 import _poolBoggartMischief from "../pool/boggart-mischief.js";
 import _poolBogslithersEmbrace from "../pool/bogslithers-embrace.js";
+import _poolBoilingRockRioter from "../pool/boiling-rock-rioter.js";
 import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
@@ -103,6 +105,7 @@ import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
+import _poolFancyFootwork from "../pool/fancy-footwork.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
 import _poolFeralAppetite from "../pool/feral-appetite.js";
@@ -154,6 +157,7 @@ import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
+import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
 import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
@@ -209,6 +213,7 @@ import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
+import _poolMasterPiandao from "../pool/master-piandao.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
@@ -243,6 +248,7 @@ import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
+import _poolOstrichHorse from "../pool/ostrich-horse.js";
 import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
@@ -411,6 +417,7 @@ const shard: CardShard = {
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,
     _poolBayou,
+    _poolBeetleHeadedMerchants,
     _poolBenthicGiant,
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
@@ -419,6 +426,7 @@ const shard: CardShard = {
     _poolBloodtallowCandle,
     _poolBoggartMischief,
     _poolBogslithersEmbrace,
+    _poolBoilingRockRioter,
     _poolBoltwave,
     _poolBondBeetle,
     _poolBoneMiser,
@@ -490,6 +498,7 @@ const shard: CardShard = {
     _poolExpandTheSphere,
     _poolExtendedAbsence,
     _poolEzuriClawOfProgress,
+    _poolFancyFootwork,
     _poolFatefulEnd,
     _poolFelixFiveBoots,
     _poolFeralAppetite,
@@ -541,6 +550,7 @@ const shard: CardShard = {
     _poolGratuitousViolence,
     _poolGrimoireOfTheDead,
     _poolGruulGuildmage,
+    _poolGuruPathik,
     _poolHamatoNinpo,
     _poolHaruHiddenTalent,
     _poolHavenOfTheSpiritDragon,
@@ -596,6 +606,7 @@ const shard: CardShard = {
     _poolMarrowBats,
     _poolMarshLurker,
     _poolMarvelousMelee,
+    _poolMasterPiandao,
     _poolMeagerMeal,
     _poolMeanderingRiver,
     _poolMeticulousArtisan,
@@ -630,6 +641,7 @@ const shard: CardShard = {
     _poolObscuraInitiate,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
+    _poolOstrichHorse,
     _poolPackAPunch,
     _poolPantherRobot,
     _poolPashalikMons,

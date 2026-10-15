@@ -95,6 +95,7 @@ import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
+import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
@@ -238,6 +239,7 @@ import _poolRabidRats from "../pool/rabid-rats.js";
 import _poolRadstorm from "../pool/radstorm.js";
 import _poolRakdosCarnarium from "../pool/rakdos-carnarium.js";
 import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
+import _poolRavenEagle from "../pool/raven-eagle.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
@@ -476,6 +478,7 @@ const shard: CardShard = {
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
     _poolFarmerCotton,
+    _poolFireNationEngineer,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
     _poolFloodedGrove,
@@ -619,6 +622,7 @@ const shard: CardShard = {
     _poolRadstorm,
     _poolRakdosCarnarium,
     _poolRakdosJoinsUp,
+    _poolRavenEagle,
     _poolReaperKing,
     _poolRecklessStormseeker,
     _poolReconstructHistory,

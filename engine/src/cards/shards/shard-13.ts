@@ -30,6 +30,7 @@ import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
+import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
@@ -110,6 +111,7 @@ import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
 import _poolDualSunAdepts from "../pool/dual-sun-adepts.js";
 import _poolDuskanaTheRageMother from "../pool/duskana-the-rage-mother.js";
 import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
+import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
 import _poolEddieBrock from "../pool/eddie-brock.js";
 import _poolEldraziTemple from "../pool/eldrazi-temple.js";
 import _poolElsha from "../pool/elsha.js";
@@ -342,6 +344,7 @@ import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
+import _poolTeamAvatar from "../pool/team-avatar.js";
 import _poolTectonicGiant from "../pool/tectonic-giant.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
@@ -440,6 +443,7 @@ const shard: CardShard = {
     _poolAsphyxiate,
     _poolAuthorityOfTheConsuls,
     _poolAxegrinderGiant,
+    _poolAzulaOnTheHunt,
     _poolBadgermole,
     _poolBagOfHolding,
     _poolBardHeirOfGirion,
@@ -520,6 +524,7 @@ const shard: CardShard = {
     _poolDualSunAdepts,
     _poolDuskanaTheRageMother,
     _poolDuskriderFalcon,
+    _poolEarthKingdomJailer,
     _poolEddieBrock,
     _poolEldraziTemple,
     _poolElsha,
@@ -752,6 +757,7 @@ const shard: CardShard = {
     _poolSyrGwynHeroOfAshvale,
     _poolTamiyosJournal,
     _poolTarPitcher,
+    _poolTeamAvatar,
     _poolTectonicGiant,
     _poolTempleGarden,
     _poolTevalsJudgment,

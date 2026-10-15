@@ -52,6 +52,7 @@ import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js"
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
 import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.js";
 import _poolCartographer from "../pool/cartographer.js";
+import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
 import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
@@ -86,6 +87,7 @@ import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
+import _poolDestinedConfrontation from "../pool/destined-confrontation.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
@@ -117,6 +119,7 @@ import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
+import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
@@ -279,6 +282,7 @@ import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
+import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
@@ -372,6 +376,7 @@ import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
+import _poolTundraTank from "../pool/tundra-tank.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
@@ -398,6 +403,7 @@ import _poolWallOfReverence from "../pool/wall-of-reverence.js";
 import _poolWanderwineFarewell from "../pool/wanderwine-farewell.js";
 import _poolWarPriestOfThune from "../pool/war-priest-of-thune.js";
 import _poolWarScreecher from "../pool/war-screecher.js";
+import _poolWartimeProtestors from "../pool/wartime-protestors.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
 import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
@@ -477,6 +483,7 @@ const shard: CardShard = {
     _poolCapturedSunlight,
     _poolCarnelianOrbOfDragonkind,
     _poolCartographer,
+    _poolCatGator,
     _poolCatharsCrusade,
     _poolCausticRain,
     _poolCecilyHauntedMage,
@@ -511,6 +518,7 @@ const shard: CardShard = {
     _poolDenyReality,
     _poolDepower,
     _poolDerelictAtticWidowsWalk,
+    _poolDestinedConfrontation,
     _poolDevilthornFox,
     _poolDimensionX,
     _poolDismiss,
@@ -542,6 +550,7 @@ const shard: CardShard = {
     _poolFerventCharge,
     _poolFireLordZuko,
     _poolFireNationRaider,
+    _poolFirstTimeFlyer,
     _poolFissureWizard,
     _poolFlamingFist,
     _poolFlamingTyrannosaurus,
@@ -704,6 +713,7 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
+    _poolRabarooTroop,
     _poolRagamuffinRaptor,
     _poolRaiseDead,
     _poolRaphaelNinjaDestroyer,
@@ -797,6 +807,7 @@ const shard: CardShard = {
     _poolTrashForTreasure,
     _poolTreespringLorian,
     _poolTroyanGutsyExplorer,
+    _poolTundraTank,
     _poolUlamogsDreadsire,
     _poolUltronTheAnnihilator,
     _poolUncoverTheMoonLetters,
@@ -823,6 +834,7 @@ const shard: CardShard = {
     _poolWanderwineFarewell,
     _poolWarPriestOfThune,
     _poolWarScreecher,
+    _poolWartimeProtestors,
     _poolWaterbenderAscension,
     _poolWayOfTheParadox,
     _poolWhelmingWave,

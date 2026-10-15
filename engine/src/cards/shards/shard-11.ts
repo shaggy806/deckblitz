@@ -207,6 +207,7 @@ import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
 import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
+import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
@@ -354,6 +355,7 @@ import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
+import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
 import _poolSwornCompanions from "../pool/sworn-companions.js";
@@ -646,6 +648,7 @@ const shard: CardShard = {
     _poolLoamdraggerGiant,
     _poolManaCylix,
     _poolMaraudingMako,
+    _poolMasterPakku,
     _poolMeditationPuzzle,
     _poolMerchantOfVenom,
     _poolMercilessEnforcers,
@@ -793,6 +796,7 @@ const shard: CardShard = {
     _poolSunderingGrowth,
     _poolSunfrillImitator,
     _poolSungoldBarrage,
+    _poolSwampsnareTrap,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,
     _poolSwornCompanions,

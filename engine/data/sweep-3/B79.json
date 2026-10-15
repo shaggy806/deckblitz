@@ -1,0 +1,739 @@
+{
+ "batch": "B79",
+ "status": "complete",
+ "ranks": "Avatar: The Last Airbender (TLA, 2025-11-21): the rest of the set",
+ "authored": [
+  {
+   "name": "Air Nomad Legacy",
+   "files": [
+    "engine/src/cards/pool/air-nomad-legacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Allies at Last",
+   "files": [
+    "engine/src/cards/pool/allies-at-last.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Azula, On the Hunt",
+   "files": [
+    "engine/src/cards/pool/azula-on-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrels of Blasting Jelly",
+   "files": [
+    "engine/src/cards/pool/barrels-of-blasting-jelly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beetle-Headed Merchants",
+   "files": [
+    "engine/src/cards/pool/beetle-headed-merchants.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boiling Rock Rioter",
+   "files": [
+    "engine/src/cards/pool/boiling-rock-rioter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bumi Bash",
+   "files": [
+    "engine/src/cards/pool/bumi-bash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Buzzard-Wasp Colony",
+   "files": [
+    "engine/src/cards/pool/buzzard-wasp-colony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Callous Inspector",
+   "files": [
+    "engine/src/cards/pool/callous-inspector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cat-Gator",
+   "files": [
+    "engine/src/cards/pool/cat-gator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compassionate Healer",
+   "files": [
+    "engine/src/cards/pool/compassionate-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cruel Administrator",
+   "files": [
+    "engine/src/cards/pool/cruel-administrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Farm Animals",
+   "files": [
+    "engine/src/cards/pool/curious-farm-animals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dai Li Agents",
+   "files": [
+    "engine/src/cards/pool/dai-li-agents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dai Li Indoctrination",
+   "files": [
+    "engine/src/cards/pool/dai-li-indoctrination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadly Precision",
+   "files": [
+    "engine/src/cards/pool/deadly-precision.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deserter's Disciple",
+   "files": [
+    "engine/src/cards/pool/deserters-disciple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Destined Confrontation",
+   "files": [
+    "engine/src/cards/pool/destined-confrontation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonfly Swarm",
+   "files": [
+    "engine/src/cards/pool/dragonfly-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Kingdom Jailer",
+   "files": [
+    "engine/src/cards/pool/earth-kingdom-jailer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Kingdom Protectors",
+   "files": [
+    "engine/src/cards/pool/earth-kingdom-protectors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Kingdom Soldier",
+   "files": [
+    "engine/src/cards/pool/earth-kingdom-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Rumble Wrestlers",
+   "files": [
+    "engine/src/cards/pool/earth-rumble-wrestlers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Village Ruffians",
+   "files": [
+    "engine/src/cards/pool/earth-village-ruffians.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthen Ally",
+   "files": [
+    "engine/src/cards/pool/earthen-ally.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fancy Footwork",
+   "files": [
+    "engine/src/cards/pool/fancy-footwork.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation Cadets",
+   "files": [
+    "engine/src/cards/pool/fire-nation-cadets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Nation Engineer",
+   "files": [
+    "engine/src/cards/pool/fire-nation-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Navy Trebuchet",
+   "files": [
+    "engine/src/cards/pool/fire-navy-trebuchet.ts",
+    "engine/src/cards/tokens/ballistic-boulder-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Sages",
+   "files": [
+    "engine/src/cards/pool/fire-sages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "First-Time Flyer",
+   "files": [
+    "engine/src/cards/pool/first-time-flyer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foggy Swamp Hunters",
+   "files": [
+    "engine/src/cards/pool/foggy-swamp-hunters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foggy Swamp Spirit Keeper",
+   "files": [
+    "engine/src/cards/pool/foggy-swamp-spirit-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gather the White Lotus",
+   "files": [
+    "engine/src/cards/pool/gather-the-white-lotus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guru Pathik",
+   "files": [
+    "engine/src/cards/pool/guru-pathik.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hei Bai, Spirit of Balance",
+   "files": [
+    "engine/src/cards/pool/hei-bai-spirit-of-balance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hog-Monkey",
+   "files": [
+    "engine/src/cards/pool/hog-monkey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iroh, Tea Master",
+   "files": [
+    "engine/src/cards/pool/iroh-tea-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jeong Jeong, the Deserter",
+   "files": [
+    "engine/src/cards/pool/jeong-jeong-the-deserter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jet's Brainwashing",
+   "files": [
+    "engine/src/cards/pool/jets-brainwashing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jet, Freedom Fighter",
+   "files": [
+    "engine/src/cards/pool/jet-freedom-fighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Joo Dee, One of Many",
+   "files": [
+    "engine/src/cards/pool/joo-dee-one-of-many.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "June, Bounty Hunter",
+   "files": [
+    "engine/src/cards/pool/june-bounty-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knowledge Seeker",
+   "files": [
+    "engine/src/cards/pool/knowledge-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kyoshi Battle Fan",
+   "files": [
+    "engine/src/cards/pool/kyoshi-battle-fan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leaves from the Vine",
+   "files": [
+    "engine/src/cards/pool/leaves-from-the-vine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lo and Li, Twin Tutors",
+   "files": [
+    "engine/src/cards/pool/lo-and-li-twin-tutors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Long Feng, Grand Secretariat",
+   "files": [
+    "engine/src/cards/pool/long-feng-grand-secretariat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mai, Jaded Edge",
+   "files": [
+    "engine/src/cards/pool/mai-jaded-edge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Pakku",
+   "files": [
+    "engine/src/cards/pool/master-pakku.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Piandao",
+   "files": [
+    "engine/src/cards/pool/master-piandao.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merchant of Many Hats",
+   "files": [
+    "engine/src/cards/pool/merchant-of-many-hats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Messenger Hawk",
+   "files": [
+    "engine/src/cards/pool/messenger-hawk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ostrich-Horse",
+   "files": [
+    "engine/src/cards/pool/ostrich-horse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Otter-Penguin",
+   "files": [
+    "engine/src/cards/pool/otter-penguin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ozai's Cruelty",
+   "files": [
+    "engine/src/cards/pool/ozais-cruelty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phoenix Fleet Airship",
+   "files": [
+    "engine/src/cards/pool/phoenix-fleet-airship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillar Launch",
+   "files": [
+    "engine/src/cards/pool/pillar-launch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Platypus-Bear",
+   "files": [
+    "engine/src/cards/pool/platypus-bear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Professor Zei, Anthropologist",
+   "files": [
+    "engine/src/cards/pool/professor-zei-anthropologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabaroo Troop",
+   "files": [
+    "engine/src/cards/pool/rabaroo-troop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven Eagle",
+   "files": [
+    "engine/src/cards/pool/raven-eagle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rebellious Captives",
+   "files": [
+    "engine/src/cards/pool/rebellious-captives.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rough Rhino Cavalry",
+   "files": [
+    "engine/src/cards/pool/rough-rhino-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rowdy Snowballers",
+   "files": [
+    "engine/src/cards/pool/rowdy-snowballers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandbender Scavengers",
+   "files": [
+    "engine/src/cards/pool/sandbender-scavengers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandbenders' Storm",
+   "files": [
+    "engine/src/cards/pool/sandbenders-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sold Out",
+   "files": [
+    "engine/src/cards/pool/sold-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sparring Dummy",
+   "files": [
+    "engine/src/cards/pool/sparring-dummy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swampsnare Trap",
+   "files": [
+    "engine/src/cards/pool/swampsnare-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Team Avatar",
+   "files": [
+    "engine/src/cards/pool/team-avatar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teo, Spirited Glider",
+   "files": [
+    "engine/src/cards/pool/teo-spirited-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Cave of Two Lovers",
+   "files": [
+    "engine/src/cards/pool/the-cave-of-two-lovers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Lion-Turtle",
+   "files": [
+    "engine/src/cards/pool/the-lion-turtle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tiger-Dillo",
+   "files": [
+    "engine/src/cards/pool/tiger-dillo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tiger-Seal",
+   "files": [
+    "engine/src/cards/pool/tiger-seal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolls of War",
+   "files": [
+    "engine/src/cards/pool/tolls-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tundra Tank",
+   "files": [
+    "engine/src/cards/pool/tundra-tank.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twin Blades",
+   "files": [
+    "engine/src/cards/pool/twin-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ty Lee, Artful Acrobat",
+   "files": [
+    "engine/src/cards/pool/ty-lee-artful-acrobat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Villagers",
+   "files": [
+    "engine/src/cards/pool/vengeful-villagers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vindictive Warden",
+   "files": [
+    "engine/src/cards/pool/vindictive-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walltop Sentries",
+   "files": [
+    "engine/src/cards/pool/walltop-sentries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War Balloon",
+   "files": [
+    "engine/src/cards/pool/war-balloon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wartime Protestors",
+   "files": [
+    "engine/src/cards/pool/wartime-protestors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Lotus Reinforcements",
+   "files": [
+    "engine/src/cards/pool/white-lotus-reinforcements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wolfbat",
+   "files": [
+    "engine/src/cards/pool/wolfbat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yip Yip!",
+   "files": [
+    "engine/src/cards/pool/yip-yip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhao, Ruthless Admiral",
+   "files": [
+    "engine/src/cards/pool/zhao-ruthless-admiral.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zuko's Conviction",
+   "files": [
+    "engine/src/cards/pool/zukos-conviction.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Avatar Destiny",
+   "needs": [
+    "bug:simultaneous-zone-moves"
+   ],
+   "why": "\"Return this card to its owner's hand and up to one creature card milled this way to the battlefield\" is one instruction (both leave the graveyard as one event), but the creature pick is a look-and-choose decision, which a simultaneous sequence can't hold, so it would be two graveyard-leave events (a 'one or more cards leave your graveyard' trigger such as Teval's would fire twice)."
+  },
+  {
+   "name": "Bumi, King of Three Trials",
+   "needs": [
+    "effect:target-player-scries"
+   ],
+   "why": "Mode \"Target player scries 3\": `scry` has no target slot or player scope, only the effect's controller (the up-to-X modal with X = Lesson cards in your graveyard is expressible via maxModes countInGraveyard)."
+  },
+  {
+   "name": "Diligent Zookeeper",
+   "needs": [
+    "static:pt-per-affected-creature-types"
+   ],
+   "why": "\"Each non-Human creature you control gets +1/+1 for each of its creature types, to a maximum of 10\" needs grantPtPerCount over the affected creature's own creature-type count, capped; nothing counts subtypes."
+  },
+  {
+   "name": "Fatal Fissure",
+   "needs": [
+    "effect:delayed-trigger-own-targets"
+   ],
+   "why": "\"When that creature dies this turn, you earthbend 4\" is a delayed trigger whose earthbend targets a land chosen as the delayed trigger goes on the stack (rule 603.7c); a delayed-trigger effect can only reuse the creating spell's targets, and a reflexive trigger inside it would add a stack object the card doesn't have."
+  },
+  {
+   "name": "Koh, the Face Stealer",
+   "needs": [
+    "static:has-abilities-of-chosen-exiled-card"
+   ],
+   "why": "\"Pay 1 life: Choose a creature card exiled with Koh\" plus \"Koh has all activated and triggered abilities of the last chosen card\" needs a remembered choice among linked-exiled cards and a static granting that card's activated and triggered abilities; only grantsActivatedOfLinkedExile (activated abilities of every linked card) exists."
+  },
+  {
+   "name": "Lost Days",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "The target's OWNER chooses second from the top or the bottom of their library (the ruling); put-on-library has a fixed position, and no chooser shape reaches the owner (each-player-may/unless only reach a target's controller, which differs for a stolen permanent)."
+  },
+  {
+   "name": "Path to Redemption",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"{5}, Sacrifice this Aura: Exile enchanted creature\": no EffectTargetRef names the Aura's enchanted creature (as last attached once the Aura is sacrificed as a cost)."
+  },
+  {
+   "name": "Razor Rings",
+   "needs": [
+    "effect:excess-damage-amount"
+   ],
+   "why": "\"You gain life equal to the excess damage dealt this way\" needs an EffectAmount for the excess damage of a damage step; only excessToController and the excessDamageThisTurn filter exist."
+  },
+  {
+   "name": "Serpent of the Pass",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "\"If there are three or more Lesson cards in your graveyard, you may cast this spell as though it had flash\" printed on the spell itself has no vocabulary (castAsThoughFlash is a battlefield static); the cost reduction (selfCostReduction cardsInGraveyard) is expressible."
+  },
+  {
+   "name": "Sokka, Bold Boomeranger",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "\"Discard up to two cards, then draw that many cards\": `discard` takes a fixed amount; there is no real discard of a player-chosen 0..N cards (two may-discard-one steps would make two discard events)."
+  },
+  {
+   "name": "Trusty Boomerang",
+   "needs": [
+    "effect:granted-activated-refers-to-granter"
+   ],
+   "why": "The granted ability \"{1}, {T}: Tap target creature. Return Trusty Boomerang to its owner's hand\" runs on the equipped creature, and a grantsActivated ability's effect has no way to name the Equipment that granted it (its \"source\" is the creature)."
+  },
+  {
+   "name": "Turtle-Duck",
+   "needs": [
+    "effect:set-base-power-only"
+   ],
+   "why": "\"Has base power 4\" until end of turn sets only base power in layer 7b; animate always sets both base power and toughness, and writing the toughness back as a number is wrong under another toughness-setting effect."
+  },
+  {
+   "name": "Zhao, the Moon Slayer",
+   "needs": [
+    "static:nonbasic-lands-are-type"
+   ],
+   "why": "\"As long as Zhao has a conqueror counter on him, nonbasic lands are Mountains\" is a Blood Moon effect (set land subtype and strip the lands' other abilities, rule 305.7); a static has setSubtypes but no way to remove the lands' abilities."
+  },
+  {
+   "name": "Zuko, Conflicted",
+   "needs": [
+    "effect:flicker-generalized",
+    "effect:enters-under-opponent-control"
+   ],
+   "why": "Mode 4 \"Exile Zuko, then return him to the battlefield under an opponent's control\": flicker can't return under an opponent's control, and the exile + choose-opponent + put-onto-battlefield workaround can't tell the original Zuko from a new object (flickered in response it would give the new Zuko away; only flicker checks the source's timestamp, and a conditional's source-zone/source-on-battlefield don't)."
+  }
+ ]
+}

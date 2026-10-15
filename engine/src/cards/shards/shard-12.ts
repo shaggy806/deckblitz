@@ -79,6 +79,7 @@ import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
 import _poolDerelictAttic from "../pool/derelict-attic.js";
+import _poolDesertersDisciple from "../pool/deserters-disciple.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
@@ -185,6 +186,7 @@ import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
+import _poolLongFengGrandSecretariat from "../pool/long-feng-grand-secretariat.js";
 import _poolLongbowArcher from "../pool/longbow-archer.js";
 import _poolLooterIlKor from "../pool/looter-il-kor.js";
 import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
@@ -237,6 +239,7 @@ import _poolPhyrexianArchivist from "../pool/phyrexian-archivist.js";
 import _poolPhyrexianDigester from "../pool/phyrexian-digester.js";
 import _poolPhyrexianRager from "../pool/phyrexian-rager.js";
 import _poolPhyrexianReclamation from "../pool/phyrexian-reclamation.js";
+import _poolPillarLaunch from "../pool/pillar-launch.js";
 import _poolPinnacleMonk from "../pool/pinnacle-monk.js";
 import _poolPiracyCharm from "../pool/piracy-charm.js";
 import _poolPlagueBelcher from "../pool/plague-belcher.js";
@@ -374,6 +377,7 @@ import _poolWildsize from "../pool/wildsize.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
+import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
@@ -470,6 +474,7 @@ const shard: CardShard = {
     _poolDedicatedCommons,
     _poolDemonicTutor,
     _poolDerelictAttic,
+    _poolDesertersDisciple,
     _poolDestinySpinner,
     _poolDetainedByLegionnaires,
     _poolDimirCluestone,
@@ -576,6 +581,7 @@ const shard: CardShard = {
     _poolLeylineProwler,
     _poolLightshieldParry,
     _poolLodestoneMyr,
+    _poolLongFengGrandSecretariat,
     _poolLongbowArcher,
     _poolLooterIlKor,
     _poolLordDreggInsectInvader,
@@ -628,6 +634,7 @@ const shard: CardShard = {
     _poolPhyrexianDigester,
     _poolPhyrexianRager,
     _poolPhyrexianReclamation,
+    _poolPillarLaunch,
     _poolPinnacleMonk,
     _poolPiracyCharm,
     _poolPlagueBelcher,
@@ -765,6 +772,7 @@ const shard: CardShard = {
     _poolWilheltTheRotcleaver,
     _poolWitchBlessedMeadow,
     _poolWitheringCurse,
+    _poolWolfbat,
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,

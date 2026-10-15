@@ -92,6 +92,7 @@ import _poolDriftingShade from "../pool/drifting-shade.js";
 import _poolDronepackKindred from "../pool/dronepack-kindred.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
+import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
@@ -332,6 +333,7 @@ import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
+import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
@@ -481,6 +483,7 @@ const shard: CardShard = {
     _poolDronepackKindred,
     _poolDrownyardExplorers,
     _poolDwarvenBloodboiler,
+    _poolEarthKingdomProtectors,
     _poolEchoInspector,
     _poolElementalMascot,
     _poolEleshNornMotherOfMachines,
@@ -721,6 +724,7 @@ const shard: CardShard = {
     _poolThoughtCourier,
     _poolThreadbindClique,
     _poolThrottle,
+    _poolTigerDillo,
     _poolTimeWalk,
     _poolTorWauki,
     _poolTormodTheDesecrator,

@@ -1798,6 +1798,21 @@ export function parseFace(face, ctx = {}) {
     delete out.spellLines;
   }
 
+  // "Cards exiled with ~" (rule 607.2a): the card's own exiles are linked to
+  // the abilities that read them — Boiling Rock Rioter's "exile target card
+  // from a graveyard" and "cast an Ally spell from among cards you own exiled
+  // with this creature". An exile until ~ leaves is linked another way.
+  const oracleText = face.oracle_text ?? "";
+  if (/\bexiled with this \w+/.test(oracleText) || (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))) {
+    const linkExiles = (node) => {
+      if (Array.isArray(node)) node.forEach(linkExiles);
+      else if (node !== null && typeof node === "object") {
+        if (node.kind === "exile" && node.untilSourceLeaves !== true) node.linked = true;
+        for (const v of Object.values(node)) linkExiles(v);
+      }
+    };
+    linkExiles([out.activated, out.triggered, out.effect]);
+  }
   out.complete =
     out.todo.length === 0 &&
     [...out.activated, ...out.triggered].every((a) => a.effect !== null && a.__todo === undefined);

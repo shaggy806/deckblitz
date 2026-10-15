@@ -165,6 +165,7 @@ import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
+import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
@@ -337,6 +338,7 @@ import _poolTeysaEnvoyOfGhosts from "../pool/teysa-envoy-of-ghosts.js";
 import _poolTeysaOpulentOligarch from "../pool/teysa-opulent-oligarch.js";
 import _poolTeysaOrzhovScion from "../pool/teysa-orzhov-scion.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
+import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
 import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
@@ -567,6 +569,7 @@ const shard: CardShard = {
     _poolIronManTitanOfInnovation,
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
+    _poolJetsBrainwashing,
     _poolJungleShrine,
     _poolJunkDiver,
     _poolJuvenileGloomwidow,
@@ -739,6 +742,7 @@ const shard: CardShard = {
     _poolTeysaOpulentOligarch,
     _poolTeysaOrzhovScion,
     _poolThantisTheWarweaver,
+    _poolTheLionTurtle,
     _poolTheOddAcornGang,
     _poolTheUnderworldCookbook,
     _poolTheWanderingMinstrel,

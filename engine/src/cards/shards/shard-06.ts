@@ -104,6 +104,7 @@ import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
 import _poolDualSunTechnique from "../pool/dual-sun-technique.js";
 import _poolDutifulServants from "../pool/dutiful-servants.js";
 import _poolDynamiteDiver from "../pool/dynamite-diver.js";
+import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
@@ -115,9 +116,11 @@ import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
+import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlashback from "../pool/flashback.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
+import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
@@ -503,6 +506,7 @@ const shard: CardShard = {
     _poolDualSunTechnique,
     _poolDutifulServants,
     _poolDynamiteDiver,
+    _poolEarthenAlly,
     _poolEmeriaTheSkyRuin,
     _poolEmpyreanEagle,
     _poolEntrustTheSpark,
@@ -514,9 +518,11 @@ const shard: CardShard = {
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
     _poolFelidarSovereign,
+    _poolFireNationCadets,
     _poolFireNationSoldier,
     _poolFlashback,
     _poolFlyingOctobot,
+    _poolFoggySwampSpiritKeeper,
     _poolForgottenCreation,
     _poolFortify,
     _poolFountainOfRenewal,
