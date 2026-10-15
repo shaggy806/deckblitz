@@ -226,6 +226,7 @@ import _poolPlaxcasterFrogling from "../pool/plaxcaster-frogling.js";
 import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
+import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
@@ -613,6 +614,7 @@ const shard: CardShard = {
     _poolPollutedBonds,
     _poolPollywogProdigy,
     _poolPracticedOffense,
+    _poolPriceOfFame,
     _poolPrimalFrenzy,
     _poolPrismaticVista,
     _poolProsperTomeBound,

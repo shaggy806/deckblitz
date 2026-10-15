@@ -775,7 +775,7 @@
   {
    "name": "Belt of Giant Strength",
    "needs": [
-    "cost:cost-reduction-if-targets"
+    "cost:cost-modification-extensions"
    ],
    "why": "Costs {X} less, X the targeted creature's power."
   },

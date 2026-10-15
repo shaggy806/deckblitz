@@ -189,6 +189,7 @@ import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
 import _poolMagicPot from "../pool/magic-pot.js";
+import _poolMagnificentEnd from "../pool/magnificent-end.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
 import _poolManOWar from "../pool/man-o-war.js";
 import _poolManaReflection from "../pool/mana-reflection.js";
@@ -610,6 +611,7 @@ const shard: CardShard = {
     _poolLure,
     _poolLurkingNightstalker,
     _poolMagicPot,
+    _poolMagnificentEnd,
     _poolMakindiGriffin,
     _poolManOWar,
     _poolManaReflection,

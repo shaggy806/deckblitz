@@ -106,6 +106,7 @@ import _poolFaerieDreamthief from "../pool/faerie-dreamthief.js";
 import _poolFailedInspection from "../pool/failed-inspection.js";
 import _poolFallenAngel from "../pool/fallen-angel.js";
 import _poolFangrenHunter from "../pool/fangren-hunter.js";
+import _poolFantasticBounce from "../pool/fantastic-bounce.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
@@ -495,6 +496,7 @@ const shard: CardShard = {
     _poolFailedInspection,
     _poolFallenAngel,
     _poolFangrenHunter,
+    _poolFantasticBounce,
     _poolFarseek,
     _poolFearOfImpostors,
     _poolFightingDrake,

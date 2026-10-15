@@ -3380,6 +3380,7 @@ import _poolFangbladeEviscerator from "./pool/fangblade-eviscerator.js";
 import _poolFangkeepersFamiliar from "./pool/fangkeepers-familiar.js";
 import _poolFangrenHunter from "./pool/fangren-hunter.js";
 import _poolFangrenMarauder from "./pool/fangren-marauder.js";
+import _poolFantasticBounce from "./pool/fantastic-bounce.js";
 import _poolFantasticElasticity from "./pool/fantastic-elasticity.js";
 import _poolFarFortuneEndBoss from "./pool/far-fortune-end-boss.js";
 import _poolFarTraveler from "./pool/far-traveler.js";
@@ -6082,6 +6083,7 @@ import _poolMagmaquake from "./pool/magmaquake.js";
 import _poolMagmaticForce from "./pool/magmatic-force.js";
 import _poolMagmaw from "./pool/magmaw.js";
 import _poolMagneticTheft from "./pool/magnetic-theft.js";
+import _poolMagnificentEnd from "./pool/magnificent-end.js";
 import _poolMagnify from "./pool/magnify.js";
 import _poolMagnifyingGlass from "./pool/magnifying-glass.js";
 import _poolMagnigothSentry from "./pool/magnigoth-sentry.js";
@@ -7516,6 +7518,7 @@ import _poolPressurePoint from "./pool/pressure-point.js";
 import _poolPretendingPoxbearers from "./pool/pretending-poxbearers.js";
 import _poolPreyUpon from "./pool/prey-upon.js";
 import _poolPreysVengeance from "./pool/preys-vengeance.js";
+import _poolPriceOfFame from "./pool/price-of-fame.js";
 import _poolPriceOfFreedom from "./pool/price-of-freedom.js";
 import _poolPricklyBoggart from "./pool/prickly-boggart.js";
 import _poolPrideGuardian from "./pool/pride-guardian.js";
@@ -10383,6 +10386,7 @@ import _poolThickestInTheThicket from "./pool/thickest-in-the-thicket.js";
 import _poolThievingMagpie from "./pool/thieving-magpie.js";
 import _poolThievingVarmint from "./pool/thieving-varmint.js";
 import _poolThingInTheIce from "./pool/thing-in-the-ice.js";
+import _poolThingSwing from "./pool/thing-swing.js";
 import _poolThinkTank from "./pool/think-tank.js";
 import _poolThinkTwice from "./pool/think-twice.js";
 import _poolThirdPathIconoclast from "./pool/third-path-iconoclast.js";
@@ -15732,6 +15736,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFangkeepersFamiliar,
   _poolFangrenHunter,
   _poolFangrenMarauder,
+  _poolFantasticBounce,
   _poolFantasticElasticity,
   _poolFarFortuneEndBoss,
   _poolFarTraveler,
@@ -18434,6 +18439,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagmaticForce,
   _poolMagmaw,
   _poolMagneticTheft,
+  _poolMagnificentEnd,
   _poolMagnify,
   _poolMagnifyingGlass,
   _poolMagnigothSentry,
@@ -19868,6 +19874,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPretendingPoxbearers,
   _poolPreyUpon,
   _poolPreysVengeance,
+  _poolPriceOfFame,
   _poolPriceOfFreedom,
   _poolPricklyBoggart,
   _poolPrideGuardian,
@@ -22735,6 +22742,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThievingMagpie,
   _poolThievingVarmint,
   _poolThingInTheIce,
+  _poolThingSwing,
   _poolThinkTank,
   _poolThinkTwice,
   _poolThirdPathIconoclast,

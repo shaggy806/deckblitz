@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3623 already implemented / 1377 missing (marks refreshed 2026-10-15)
+3624 already implemented / 1376 missing (marks refreshed 2026-10-15)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4488,7 +4488,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4495  Mauhúr, Uruk-hai Captain                 {B}{R}           Legendary Creature — Orc Soldier
 [x]  4496  Akroma, Angel of Wrath                   {5}{W}{W}{W}     Legendary Creature — Angel
 [x]  4497  Raise the Alarm                          {1}{W}           Instant
-[ ]  4498  Price of Fame                            {3}{B}           Instant
+[x]  4498  Price of Fame                            {3}{B}           Instant
 [x]  4499  Seismic Sense                            {G}              Sorcery — Lesson
 [ ]  4500  Teferi, Who Slows the Sunset             {2}{W}{U}        Legendary Planeswalker — Teferi
 [ ]  4501  Ajani, Nacatl Pariah // Ajani, Nacatl Avenger {2}              Legendary Creature — Cat Warrior // Legendary Planeswalker — Ajani

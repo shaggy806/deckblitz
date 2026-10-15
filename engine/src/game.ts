@@ -2857,9 +2857,14 @@ export class Game {
       );
       if (spreeSets !== null && spreeSets.length === 0) continue;
       const specs = this.effectiveTargetSpecs(def, undefined, kicked, overload);
-      const options = this.affordableTargetOptions(
+      // "Costs {N} less if it targets …": offered with only the targets that
+      // earn it when the full price isn't affordable.
+      const options = this.targetReductionOptions(
+        def,
         player,
-        this.targetOptionsFor(specs, player, this.cardSource(def, card)),
+        card,
+        this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card))),
+        () => castableAt(pricedAt).castable,
       );
       // Rule 601.2c — a spell can't be cast without a legal target for every
       // slot that demands one. An *optional* slot ("up to one target
@@ -8513,6 +8518,10 @@ export class Game {
     xValue = 0,
     costString: string | null = def.manaCost,
     targetCount = 0,
+    /** The targets chosen, once they are (rule 601.2c) — what a
+     * `targetCostReduction` reads. Left out, as when a cast is only being
+     * offered, it's assumed whenever some legal target would earn it. */
+    targets?: readonly (TargetRef | null | undefined)[],
   ): ManaCost {
     const printed = parseManaCost(costString);
     // "Costs {1} more to cast for each target beyond the first" (Fireball,
@@ -8540,6 +8549,17 @@ export class Game {
     ) {
       reduction += this.costReductionAmount(def.selfCostReduction.reduceGeneric, player, cardId);
     }
+    // "This spell costs {N} less to cast if it targets …" (Price of Fame).
+    if (def.targetCostReduction !== null) {
+      const earned =
+        targets !== undefined
+          ? this.targetsEarnReduction(def, player, cardId, targets)
+          : !this.targetCostReductionOff &&
+            this.targetOptionsFor(this.effectiveTargetSpecs(def, undefined), player, this.cardSource(def, cardId)).some((slot) =>
+              this.targetsEarnReduction(def, player, cardId, slot),
+            );
+      if (earned) reduction += def.targetCostReduction.reduceGeneric;
+    }
     return reduceManaCost(
       {
         ...base,
@@ -8549,6 +8569,55 @@ export class Game {
       reduction,
       mods.colored,
     );
+  }
+
+  /** While set, a spell offered for casting is priced without its
+   * `targetCostReduction` — whether the full price is affordable. */
+  private targetCostReductionOff = false;
+
+  /** Whether `targets` earn `def`'s `targetCostReduction`: one of them an
+   * object (a permanent, or a spell on the stack) matching its filter from
+   * the caster's side. */
+  private targetsEarnReduction(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): boolean {
+    const reduction = def.targetCostReduction;
+    if (reduction === null) return false;
+    return targets.some(
+      (t) =>
+        t?.kind === "object" &&
+        matchesFilter(this.state, this.registry, t.object, reduction.filter, { you: player, source: cardId }),
+    );
+  }
+
+  /** The target options a spell with a `targetCostReduction` is offered with:
+   * all of them while the full price is affordable (`fullPriceCastable`),
+   * and otherwise, in the one slot whose targets can earn the reduction,
+   * only those — what would be refused for want of mana isn't offered. */
+  private targetReductionOptions(
+    def: CardDefinition,
+    player: PlayerId,
+    cardId: ObjectId,
+    options: readonly (readonly TargetRef[])[],
+    fullPriceCastable: () => boolean,
+  ): TargetRef[][] {
+    const all = options.map((slot) => [...slot]);
+    if (def.targetCostReduction === null) return all;
+    const earning = all.map((slot) => slot.filter((ref) => this.targetsEarnReduction(def, player, cardId, [ref])));
+    const slots = earning.flatMap((slot, i) => (slot.length > 0 ? [i] : []));
+    if (slots.length !== 1) return all;
+    this.targetCostReductionOff = true;
+    let full: boolean;
+    try {
+      full = fullPriceCastable();
+    } finally {
+      this.targetCostReductionOff = false;
+    }
+    if (full) return all;
+    return all.map((slot, i) => (i === slots[0] ? earning[i] : slot));
   }
 
   /** Whether what `player` would pay for `cardId` depends on how many
@@ -10849,7 +10918,7 @@ export class Game {
       throw new Error(`${player} has too little life to pay the ${targetingLife} life targeting costs`);
     }
     const fullCost = this.reduceCostByDelve(
-      this.castingCostOf(player, cardId, def, chosenX, costString, targetCount),
+      this.castingCostOf(player, cardId, def, chosenX, costString, targetCount, targets),
       delve,
     );
     let convoked: PaidConvoke[] = [];

@@ -28,6 +28,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"Costs {N} less if it targets …"** (`targetCostReduction`): Price of Fame, Magnificent End,
+  Thing Swing, Fantastic Bounce (2026-10-14).
 - **The Hobbit, whole, and Marvel Super Heroes Commander's next 78** (batch 72): 111 cards, with
   hand attack (`discard-chosen` — Duress, Thoughtseize and 8 more) and Mathemagics' 2ˣ built
   (2026-10-14).

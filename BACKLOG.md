@@ -77,8 +77,8 @@ section keeps only what to do next.
   ranked ones first. **First, the rest of the sets already walked** — Marvel Super Heroes
   Commander (MSC, 69 left) back to Bloomburrow, about 1,400 cards (`npm run cards:sets -w engine
   -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC and The Hobbit are whole) — then
-  Assassin's Creed and Outlaws of Thunder Junction onward. Leading blocker in the walk's
-  records: "costs less if it targets …" (`cost:cost-reduction-if-targets`). Batches run 4-5 agents
+  Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
+  `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
   one with two. Norman Osborn still waits on granting mayhem and on a graveyard-cast cost

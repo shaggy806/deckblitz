@@ -318,6 +318,7 @@ import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
+import _poolThingSwing from "../pool/thing-swing.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
 import _poolThroughTheForestGate from "../pool/through-the-forest-gate.js";
@@ -706,6 +707,7 @@ const shard: CardShard = {
     _poolThaumaturgesFamiliar,
     _poolThePrismaticBridge,
     _poolThermalGlider,
+    _poolThingSwing,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,
     _poolThroughTheForestGate,

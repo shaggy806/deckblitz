@@ -783,6 +783,12 @@ in `git log`.
   2026-10-14, B72) — the `discard-chosen` effect and the `"discard"` zone-choice
   destination (`discard-chosen.test.ts`). Duress, Thoughtseize, Inquisition of
   Kozilek, Coercion and six more; Mathemagics with `{ powerOfTwo }` beside it.
+- **"Costs {N} less if it targets …"** (`cost:cost-reduction-if-targets`, 2026-10-14) —
+  a card's `targetCostReduction`, priced by the chosen targets (rules 601.2c,
+  601.2f), its offer narrowed to the targets that earn it when only the
+  reduced price is affordable (`target-cost-reduction.test.ts`). Price of Fame,
+  Magnificent End, Thing Swing, Fantastic Bounce; Brush Off waits on a coloured
+  reduction, Uneasy Partings on its owner's top-or-bottom choice.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

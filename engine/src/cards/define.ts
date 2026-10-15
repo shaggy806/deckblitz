@@ -2298,6 +2298,17 @@ export interface CardDefinition {
    */
   readonly costPerExtraTarget: string | null;
   /**
+   * "This spell costs {N} less to cast if it targets [a permanent or spell
+   * matching `filter`]" (Price of Fame: `{ supertype: "legendary", type:
+   * "creature" }`, Magnificent End's tapped creature). The total cost is
+   * fixed once the targets are chosen (rules 601.2c, 601.2f): the reduction
+   * is the cast's when any one of its targets matches, from the caster's
+   * side ("a Hero **you control**"). An offer the caster can only afford with
+   * the reduction offers only the targets that earn it, in the one slot that
+   * can. `null` for none.
+   */
+  readonly targetCostReduction: { readonly filter: CardFilter; readonly reduceGeneric: number } | null;
+  /**
    * Casualty N (rule 702.153a — Cut Your Losses' "Casualty 2"): "As an
    * additional cost to cast this spell, you may sacrifice a creature with
    * power N or greater" and "When you cast this spell, if a casualty cost
@@ -2711,6 +2722,7 @@ const PRINTED_ABILITY: {
   delve: (def) => def.delve,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
+  targetCostReduction: (def) => def.targetCostReduction !== null,
   casualty: (def) => def.casualty !== null,
   effect: (def) => def.effect !== null,
   resolve: (def) => def.resolve !== null,
@@ -2874,6 +2886,8 @@ interface CardDraft {
     readonly reduceGeneric: CostReductionAmount;
   };
   costPerExtraTarget?: string;
+  /** See {@link CardDefinition.targetCostReduction}. */
+  targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number };
   /** See {@link CardDefinition.casualty}. */
   casualty?: number;
   effect?: EffectSpec;
@@ -2981,6 +2995,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     delve: draft.delve ?? false,
     selfCostReduction: draft.selfCostReduction ?? null,
     costPerExtraTarget: draft.costPerExtraTarget ?? null,
+    targetCostReduction: draft.targetCostReduction ?? null,
     casualty: draft.casualty ?? null,
     effect: draft.effect ?? null,
     resolve: draft.resolve ?? null,
