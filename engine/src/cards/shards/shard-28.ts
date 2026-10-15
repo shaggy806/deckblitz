@@ -239,6 +239,7 @@ import _poolPowerDepot from "../pool/power-depot.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
 import _poolProfaneInsight from "../pool/profane-insight.js";
+import _poolProjectDeathlokSoldier from "../pool/project-deathlok-soldier.js";
 import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
@@ -633,6 +634,7 @@ const shard: CardShard = {
     _poolPrimarisChaplain,
     _poolProcrastinate,
     _poolProfaneInsight,
+    _poolProjectDeathlokSoldier,
     _poolPropaganda,
     _poolProtectorOfTheWastes,
     _poolPryingBlade,

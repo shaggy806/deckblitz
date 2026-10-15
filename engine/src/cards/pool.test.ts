@@ -185,6 +185,23 @@ describe("triggered mana abilities", () => {
   });
 });
 
+describe("exile until this leaves the battlefield", () => {
+  // `exile { untilSourceLeaves }` only exiles and marks the card; the return
+  // is the card's own `leaves-battlefield` ability running
+  // `return-exiled-by-source` (rule 610.3). Vault Guardsman shipped without
+  // one, so what it exiled never came back.
+  it("every card that exiles this way carries the return", () => {
+    const untilLeaves = /"kind":"exile"[^{}]*"untilSourceLeaves":true/;
+    const unreturned = [...POOL_CARDS, ...TOKEN_CARDS]
+      .filter((def) => {
+        const json = JSON.stringify(def);
+        return untilLeaves.test(json) && !json.includes('"return-exiled-by-source"');
+      })
+      .map((def) => def.name);
+    expect(unreturned).toEqual([]);
+  });
+});
+
 describe("statics that work from the graveyard", () => {
   // Rule 113.6b: `fromGraveyard` makes a static work only while its card is
   // in a graveyard. Only the layer fold's grants to permanents

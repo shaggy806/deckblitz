@@ -103,6 +103,7 @@ import _poolFemerefArchers from "../pool/femeref-archers.js";
 import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
+import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
@@ -527,6 +528,7 @@ const shard: CardShard = {
     _poolFerrovore,
     _poolFetidHorror,
     _poolFieryIntervention,
+    _poolFinFangFoom,
     _poolFlamebornViron,
     _poolFleshBurrower,
     _poolFloweringOfTheWhiteTree,

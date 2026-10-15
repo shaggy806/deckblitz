@@ -152,6 +152,7 @@ import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
+import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
@@ -204,6 +205,7 @@ import _poolMawcor from "../pool/mawcor.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
+import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
@@ -540,6 +542,7 @@ const shard: CardShard = {
     _poolHornetCobra,
     _poolHulkingGoblin,
     _poolHumongulus,
+    _poolHydraInfiltration,
     _poolImposingVantasaur,
     _poolImskirIronEater,
     _poolIndrikStomphowler,
@@ -592,6 +595,7 @@ const shard: CardShard = {
     _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMindfulBiomancer,
+    _poolMockingbirdAceAgent,
     _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,

@@ -1,0 +1,672 @@
+{
+ "batch": "B75",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes (MSH, 2026-06-26): the rest of the set; Secrets of Strixhaven Commander (SOC, 2026-04-24): the rest of the set",
+ "authored": [
+  {
+   "name": "Agent 13, Sharon Carter",
+   "files": [
+    "engine/src/cards/pool/agent-13-sharon-carter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agents of S.H.I.E.L.D.",
+   "files": [
+    "engine/src/cards/pool/agents-of-s-h-i-e-l-d.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alien Invasion",
+   "files": [
+    "engine/src/cards/pool/alien-invasion.ts",
+    "engine/src/cards/tokens/alien-token-alien-invasion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ant-Man's Army",
+   "files": [
+    "engine/src/cards/pool/ant-mans-army.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arnim Zola, Bio-Fanatic",
+   "files": [
+    "engine/src/cards/pool/arnim-zola-bio-fanatic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atlantean Cavalry",
+   "files": [
+    "engine/src/cards/pool/atlantean-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atlantis Attacks",
+   "files": [
+    "engine/src/cards/pool/atlantis-attacks.ts",
+    "engine/src/cards/tokens/leviathan-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceaseless Conflict",
+   "files": [
+    "engine/src/cards/pool/ceaseless-conflict.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colleen Wing, Street Samurai",
+   "files": [
+    "engine/src/cards/pool/colleen-wing-street-samurai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cruel Alliance",
+   "files": [
+    "engine/src/cards/pool/cruel-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dirgur Focusmage // Braingeyser",
+   "files": [
+    "engine/src/cards/pool/dirgur-focusmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falcon, Winged Wonder",
+   "files": [
+    "engine/src/cards/pool/falcon-winged-wonder.ts",
+    "engine/src/cards/tokens/redwing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fateful Tempest",
+   "files": [
+    "engine/src/cards/pool/fateful-tempest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feral Appetite",
+   "files": [
+    "engine/src/cards/pool/feral-appetite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fin Fang Foom",
+   "files": [
+    "engine/src/cards/pool/fin-fang-foom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant-Sized Flying Ant",
+   "files": [
+    "engine/src/cards/pool/giant-sized-flying-ant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Reaper, Lethal Legionnaire",
+   "files": [
+    "engine/src/cards/pool/grim-reaper-lethal-legionnaire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "HYDRA Infiltration",
+   "files": [
+    "engine/src/cards/pool/hydra-infiltration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "HYDRA Troopers",
+   "files": [
+    "engine/src/cards/pool/hydra-troopers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Helicarrier Strike",
+   "files": [
+    "engine/src/cards/pool/helicarrier-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellcat, Undying Vigilante",
+   "files": [
+    "engine/src/cards/pool/hellcat-undying-vigilante.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hire a Crew",
+   "files": [
+    "engine/src/cards/pool/hire-a-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hulkling, Burgeoning Bruiser",
+   "files": [
+    "engine/src/cards/pool/hulkling-burgeoning-bruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspired Skypainter // Maestro's Gift",
+   "files": [
+    "engine/src/cards/pool/inspired-skypainter.ts",
+    "engine/src/cards/pool/maestros-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Fist, Living Weapon",
+   "files": [
+    "engine/src/cards/pool/iron-fist-living-weapon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jessica Jones, Private Eye",
+   "files": [
+    "engine/src/cards/pool/jessica-jones-private-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Justice, Vance Astrovik",
+   "files": [
+    "engine/src/cards/pool/justice-vance-astrovik.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "K'un-Lun Warrior",
+   "files": [
+    "engine/src/cards/pool/kun-lun-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Killmonger, Scourge of Wakanda",
+   "files": [
+    "engine/src/cards/pool/killmonger-scourge-of-wakanda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lattice Library",
+   "files": [
+    "engine/src/cards/pool/lattice-library.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lorehold Archivist // Restore Relic",
+   "files": [
+    "engine/src/cards/pool/lorehold-archivist.ts",
+    "engine/src/cards/pool/restore-relic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luke Cage, Power Man",
+   "files": [
+    "engine/src/cards/pool/luke-cage-power-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merchant of Venom",
+   "files": [
+    "engine/src/cards/pool/merchant-of-venom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mockingbird, Ace Agent",
+   "files": [
+    "engine/src/cards/pool/mockingbird-ace-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moon Girl and Devil Dinosaur",
+   "files": [
+    "engine/src/cards/pool/moon-girl-and-devil-dinosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muddle, the Ever-Changing",
+   "files": [
+    "engine/src/cards/pool/muddle-the-ever-changing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nev, the Practical Dean",
+   "files": [
+    "engine/src/cards/pool/nev-the-practical-dean.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Panther Pounce",
+   "files": [
+    "engine/src/cards/pool/panther-pounce.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismari Pianist",
+   "files": [
+    "engine/src/cards/pool/prismari-pianist.ts",
+    "engine/src/cards/tokens/elemental-token-prismari-pianist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Project Deathlok Soldier",
+   "files": [
+    "engine/src/cards/pool/project-deathlok-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rapid Rescue",
+   "files": [
+    "engine/src/cards/pool/rapid-rescue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Retriever",
+   "files": [
+    "engine/src/cards/pool/relic-retriever.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Bull",
+   "files": [
+    "engine/src/cards/pool/renegade-bull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reptil, Dinomorpher",
+   "files": [
+    "engine/src/cards/pool/reptil-dinomorpher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repulsor Blast",
+   "files": [
+    "engine/src/cards/pool/repulsor-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rick Jones, Destined Sidekick",
+   "files": [
+    "engine/src/cards/pool/rick-jones-destined-sidekick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roxxon Brutes",
+   "files": [
+    "engine/src/cards/pool/roxxon-brutes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "S.H.I.E.L.D. Flying Car",
+   "files": [
+    "engine/src/cards/pool/s-h-i-e-l-d-flying-car.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Striding Shotcaller // Run the Play",
+   "files": [
+    "engine/src/cards/pool/striding-shotcaller.ts",
+    "engine/src/cards/pool/run-the-play.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Villain Lockup",
+   "files": [
+    "engine/src/cards/pool/super-villain-lockup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swordsman, Sharp Scoundrel",
+   "files": [
+    "engine/src/cards/pool/swordsman-sharp-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Ruinous Wrecking Crew",
+   "files": [
+    "engine/src/cards/pool/the-ruinous-wrecking-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Truck Toss",
+   "files": [
+    "engine/src/cards/pool/truck-toss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.Agent, John Walker",
+   "files": [
+    "engine/src/cards/pool/u-s-agent-john-walker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vanguard of the Restless",
+   "files": [
+    "engine/src/cards/pool/vanguard-of-the-restless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War Machine, Legacy of Iron",
+   "files": [
+    "engine/src/cards/pool/war-machine-legacy-of-iron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Tiger, Ava Ayala",
+   "files": [
+    "engine/src/cards/pool/white-tiger-ava-ayala.ts",
+    "engine/src/cards/tokens/the-tiger-god.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Widow's Bite",
+   "files": [
+    "engine/src/cards/pool/widows-bite.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Abstract Performance",
+   "needs": [
+    "mechanic:face-down-piles-opponent-chooses"
+   ],
+   "why": "A face-down and a face-up exile pile, an opponent choosing one for the graveyard, then a free cast from the other with the rest to hand — no pile vocabulary."
+  },
+  {
+   "name": "Advanced Reconstruction",
+   "needs": [
+    "zone:exile-from-graveyard-play-this-turn"
+   ],
+   "why": "Level 1's \"exile a card from your graveyard at random. You may play the exiled card this turn\": choose-random-card + exile works, but exile's mayCast only permits casting — a land card exiled this way (the ruling names it) couldn't be played; impulse-exile's play permission reaches only a library's top. Level 3's \"spells you cast from anywhere other than your hand cost {2} less\" wasn't checked further."
+  },
+  {
+   "name": "Agent Maria Hill",
+   "needs": [
+    "trigger:becomes-tapped-for-teamwork"
+   ],
+   "why": "\"Whenever Agent Maria Hill becomes tapped to pay a teamwork cost\": becomes-tapped fires for any tapping and has no clause for the cost it paid; nothing marks a creature tapped for a teamwork kicker."
+  },
+  {
+   "name": "Augusta, Order Returned",
+   "needs": [
+    "effect:player-exiles-chosen-from-own-graveyard"
+   ],
+   "why": "\"Each player exiles a card from their graveyard\" (each chooses in turn order, then all at once) has no effect, nor the reflexive \"when one or more nonland cards are exiled this way, put that many counters\" count over it."
+  },
+  {
+   "name": "Beast, Erudite Aerialist",
+   "needs": [
+    "condition:counters-put-by-you-this-turn"
+   ],
+   "why": "\"As long as you've put one or more +1/+1 counters on Beast this turn, he has flying\": no static condition or filter records counters a player put on a permanent this turn."
+  },
+  {
+   "name": "Bullseye, Death Dealer",
+   "needs": [
+    "effect:discard-filtered",
+    "cost:activated-cost-options"
+   ],
+   "why": "\"Discard a nonland card\" as the ETB's optional choice has no filtered discard (each-player-may's discard option is a count only), and the activated ability's cost \"Sacrifice an artifact or discard a nonland card\" is a choice of costs ActivatedAbility.cost can't express."
+  },
+  {
+   "name": "Cloak and Dagger, Entwined",
+   "needs": [
+    "decision:choose-from-zone-extensions",
+    "effect:exile-from-hand-until-source-leaves"
+   ],
+   "why": "The ETB's one choice spans the opponent's revealed hand (a nonland card) and the chosen battlefield creature, and exiling a card from a hand 'until Cloak and Dagger leave the battlefield' has no duration (untilSourceLeaves is permanents only)."
+  },
+  {
+   "name": "Crowd of True Believers",
+   "needs": [
+    "filter:attacking-alone"
+   ],
+   "why": "\"Target creature you control that's attacking alone\": CardFilter has attacking but no attacking-alone clause for a target."
+  },
+  {
+   "name": "Evil's Thrall",
+   "needs": [
+    "effect:until-end-of-your-next-turn"
+   ],
+   "why": "\"Gain control of that creature until the end of your next turn instead\": gain-control has only untilEndOfTurn / whileSource, no until-end-of-your-next-turn duration."
+  },
+  {
+   "name": "Excava, the Risen Past",
+   "needs": [
+    "effect:reanimate-as-animated-creature"
+   ],
+   "why": "\"It's a 1/1 Spirit creature with flying in addition to its other types\": put-onto-battlefield has setTypes/addSubtypes but no added card type, base P/T or keyword for the returned permanent."
+  },
+  {
+   "name": "Forum Filibuster",
+   "needs": [
+    "effect:aura-returns-attached",
+    "effect:reflexive-refers-to-creating-objects"
+   ],
+   "why": "\"When you do, return up to one target Aura or Equipment card to the battlefield attached to that token\": no put-onto-battlefield attached to a chosen object (an Aura must enter attached, rule 303.4f), and the reflexive ability can't name the token its creating ability made."
+  },
+  {
+   "name": "Furygale Flocking",
+   "needs": [
+    "effect:token-attacks-player-this-turn"
+   ],
+   "why": "\"For each opponent, create two tokens that attack that opponent this turn if able\": create-token has only attacksThisCombat (any defender, this combat); a per-opponent attack requirement aimed at that player for the turn exists only inside the encore effect."
+  },
+  {
+   "name": "Herald of Amity",
+   "needs": [
+    "effect:exiled-this-way-to-library-bottom"
+   ],
+   "why": "\"Exile the top eight, cast an Aura from among them, put the rest on the bottom in a random order\": cast-now's rest: bottom-random works only with libraryTop (looked at, not exiled) and nothing moves exiled-this-way cards to the library bottom; looking instead of exiling isn't the same (public cards, exile triggers)."
+  },
+  {
+   "name": "Intermediate Chirography",
+   "needs": [
+    "trigger:loses-life-first-time-each-turn"
+   ],
+   "why": "Level 2's \"Whenever you lose life for the first time each turn\": the loses-life trigger has only firstDuringTheirTurn (Valgavoth), not a first-time-each-turn on any turn (gains-life has firstTimeEachTurn)."
+  },
+  {
+   "name": "Klaw, Sonic Subjugator",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard"
+   ],
+   "why": "\"Target player reveals a number of cards from their hand equal to one plus ...\": discard-chosen always reveals the whole hand; there is no form where the target player picks N cards to reveal and you choose one of those."
+  },
+  {
+   "name": "Knight of Wundagore",
+   "needs": [
+    "trigger:counters-put-other"
+   ],
+   "why": "'Whenever you put a +1/+1 counter on another creature': the counters-put trigger has no otherOnly, and firing on its own counters would also spend the once-each-turn limit."
+  },
+  {
+   "name": "Leitmotif Composer",
+   "needs": [
+    "effect:cant-be-blocked-rule-this-turn"
+   ],
+   "why": "\"Creatures named Leitmotif Composer can't be blocked this turn\" changes no characteristics, so by rule 611.2c it also binds a Composer (its own token copy) that appears later this turn; grant-keyword-all fixes the set as it resolves and restrict has no can't-be-blocked restriction."
+  },
+  {
+   "name": "Nexus Mentality",
+   "needs": [
+    "effect:remove-all-counters"
+   ],
+   "why": "Mode 2 \"Remove all counters from target nonland permanent you control. Draw a card for each counter removed this way\": remove-counter takes one kind, and there's no this-way count of counters removed (mode 1 as move-counters amount all, and castModal maxModesIf, are fine)."
+  },
+  {
+   "name": "Ominous Harvest",
+   "needs": [
+    "keyword:gravestorm"
+   ],
+   "why": "Gravestorm copies once per permanent put into a graveyard from the battlefield this turn; storm counts spells, turn history's left entries don't record the destination, and died is creatures only."
+  },
+  {
+   "name": "Powerful Broker",
+   "needs": [
+    "effect:one-more-of-each-counter-kind"
+   ],
+   "why": "'For each kind of counter on target permanent or player, give that permanent or player another counter of that kind' — a proliferate of one target; double-counters adds one per counter already there, not one per kind, and doesn't reach players."
+  },
+  {
+   "name": "Raft Security Officer",
+   "needs": [
+    "cost:ability-cost-reduction-if-targets"
+   ],
+   "why": "\"This ability costs {1} less to activate if it targets a creature with power 3 or less\": targetCostReduction exists for spells only; an activated ability's costReduction has no target condition, and splitting it into two abilities (Wayta's shape) would wrongly fizzle the cheap one if the target's power rises above 3 in response."
+  },
+  {
+   "name": "Red Guardian, Super-Soldier",
+   "needs": [
+    "stat:filter-dealt-damage-this-turn"
+   ],
+   "why": "\"target creature an opponent controls that dealt damage this turn\": the only damage-dealt record is dealtDamageToCreatureThisTurn (to a creature); nothing tracks a permanent having dealt damage to a player or planeswalker this turn."
+  },
+  {
+   "name": "Rewrite History",
+   "needs": [
+    "trigger:becomes-tapped-batch"
+   ],
+   "why": "'Whenever one or more creatures you control become tapped' must fire once per batch (an attack declaration taps several at once); becomes-tapped fires once per permanent."
+  },
+  {
+   "name": "Ronin, Shadow Stalker",
+   "needs": [
+    "cost:spend-only-equip-abilities"
+   ],
+   "why": "'Spend this mana only to cast Equipment spells or activate equip abilities': ManaSpendOnly.abilityOf can name abilities of Equipment, which would wrongly allow non-equip ones (Batterskull's bounce, Cranial Plating's attach), but not equip abilities alone."
+  },
+  {
+   "name": "Speedball, New Warrior",
+   "needs": [
+    "effect:change-targets-trigger-spell"
+   ],
+   "why": "\"You may choose new targets for that spell\": change-targets only reads a target slot, and the cast trigger's spell isn't targeted — it needs a \"trigger-spell\" target like copy-spell has (the cast-spell trigger's filter targets: { source: true } and the +2/+2 are expressible)."
+  },
+  {
+   "name": "Spider-Woman, Secret Agent",
+   "needs": [
+    "static:cant-become-untapped",
+    "effect:cant-become-untapped-while-you-control-source"
+   ],
+   "why": "'That creature can't become untapped for as long as you control Spider-Woman': tap has only doesntUntapNext (one untap step), nothing stops every untap, and there's no 'for as long as you control [source]' duration."
+  },
+  {
+   "name": "Spirit of Resilience",
+   "needs": [
+    "decision:choose-from-batch"
+   ],
+   "why": "\"Become a copy of an artifact or creature card from among those cards\" needs a choice among the cards of the leaves-graveyard batch (now wherever they went) fed to become-copy ofCard; the trigger's batch isn't choosable."
+  },
+  {
+   "name": "Super Speed",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "'When this Aura enters, enchanted creature gains first strike until end of turn': no EffectTargetRef names the Aura's host for a one-shot grant-keyword (a static while-attached would lose the first strike if the Aura left)."
+  },
+  {
+   "name": "The Super Hero Civil War",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "Chapter I's 'up to two target creatures with total mana value 6 or less': a target group can cap total power (maxTotalPower, Reunion of the House) but not total mana value."
+  },
+  {
+   "name": "Titania, Rugged Rumbler",
+   "needs": [
+    "decision:ward-cost-options"
+   ],
+   "why": "\"Ward—Discard a card or pay {2}\": WardCost is a conjunction of costs (all paid), with no either/or choice; the additional cost \"discard a card or pay {2}\" is expressible (Lightning Axe's additionalCost.options)."
+  },
+  {
+   "name": "Trickster's Stratagem",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"The owner ... puts it into their library second from the top or on the bottom\" is the owner's choice; each-player-may can only name the target's controller ({ controllerOfTarget }), which differs from the owner for a stolen creature."
+  },
+  {
+   "name": "Wakandan Royal Guard",
+   "needs": [
+    "condition:target-is-another"
+   ],
+   "why": "\"If that creature is another Hero, put two counters instead\": the Guard is itself a Hero and may target itself, and no condition or CardFilter clause tells the target apart from the ability's source (the `target` condition's filter has no identity clause)."
+  },
+  {
+   "name": "Winter Soldier, Icy Assassin",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "\"Gets +2/+0 for each Equipment attached to him\": grantPtPerCount can count battlefield permanents by filter but no filter names 'attached to this permanent' (Kor Spiritdancer's need)."
+  },
+  {
+   "name": "Worlds Within Worlds",
+   "needs": [
+    "effect:exiled-this-way-to-hand"
+   ],
+   "why": "\"Then put all cards exiled this way into their owners' hands\": exile-all exists and Living Death's put-exiled-this-way-onto-battlefield goes to the battlefield, but nothing moves the cards exiled this way to their owners' hands (the each-player put-from-hand step, a for-each-player look-and-choose, wasn't checked further)."
+  },
+  {
+   "name": "Yavimaya Bloomsage // Channel",
+   "needs": [
+    "effect:player-mana-ability-until-eot"
+   ],
+   "why": "Its prepare spell Channel (\"until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}\") isn't expressible, and the creature can't go without its spell; the creature half itself would be authorable (sequence add-counter + conditional target power >= 7 then become-prepared)."
+  }
+ ]
+}

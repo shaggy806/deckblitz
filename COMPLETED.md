@@ -28,6 +28,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Marvel Super Heroes and Secrets of Strixhaven Commander, both whole** (batch 75): 58 cards,
+  with a trigger-object condition's mana value read from a countered spell's time on the stack
+  (Prismari Pianist) and Vault Guardsman's missing return fixed, behind a pool-wide guard
+  (2026-10-15).
 - **Marvel Super Heroes Commander, whole, and Marvel Super Heroes' next 30** (batch 74): 82
   cards, with two engine fixes (an attacks-alone trigger's defending player; once a turn shared
   across one ability's entries) (2026-10-15).

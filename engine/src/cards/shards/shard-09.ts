@@ -68,6 +68,7 @@ import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
+import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
 import _poolCorridorMonitor from "../pool/corridor-monitor.js";
 import _poolCorruptedConviction from "../pool/corrupted-conviction.js";
@@ -162,6 +163,7 @@ import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
+import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
 import _poolIronhoofBoar from "../pool/ironhoof-boar.js";
 import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
@@ -466,6 +468,7 @@ const shard: CardShard = {
     _poolClarionConqueror,
     _poolClericClass,
     _poolClingingDarkness,
+    _poolColleenWingStreetSamurai,
     _poolConsumingAberration,
     _poolCorridorMonitor,
     _poolCorruptedConviction,
@@ -560,6 +563,7 @@ const shard: CardShard = {
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
     _poolInsatiableSouleater,
+    _poolInspiredSkypainter,
     _poolIronhoofBoar,
     _poolIrrigatedFarmland,
     _poolJackedRabbit,

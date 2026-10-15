@@ -146,6 +146,7 @@ import _poolHissingQuagmire from "../pool/hissing-quagmire.js";
 import _poolHolyDay from "../pool/holy-day.js";
 import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
+import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
@@ -243,6 +244,7 @@ import _poolReaveSoul from "../pool/reave-soul.js";
 import _poolRedHerring from "../pool/red-herring.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
+import _poolRepulsorBlast from "../pool/repulsor-blast.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
@@ -349,6 +351,7 @@ import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
+import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
@@ -501,6 +504,7 @@ const shard: CardShard = {
     _poolHolyDay,
     _poolHoneyMammoth,
     _poolHugsGrislyGuardian,
+    _poolHydraTroopers,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
     _poolIridescentBlademaster,
@@ -598,6 +602,7 @@ const shard: CardShard = {
     _poolRedHerring,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
+    _poolRepulsorBlast,
     _poolRevengeOfRavens,
     _poolRewriteRegrets,
     _poolRipchainRazorkin,
@@ -706,6 +711,7 @@ const shard: CardShard = {
   tokens: [
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
     _tokensConstructTokenJanJansenChaosCrafter,
+    _tokensElementalTokenPrismariPianist,
     _tokensMoogleToken,
     _tokensPhyrexianGoblinToken,
     _tokensPlantWarriorToken,

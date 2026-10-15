@@ -28,6 +28,7 @@ import _poolArtfulManeuver from "../pool/artful-maneuver.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
 import _poolAssassinsTrophy from "../pool/assassins-trophy.js";
+import _poolAtlantisAttacks from "../pool/atlantis-attacks.js";
 import _poolAuraFracture from "../pool/aura-fracture.js";
 import _poolAutomaticLibrarian from "../pool/automatic-librarian.js";
 import _poolAvenBattlePriest from "../pool/aven-battle-priest.js";
@@ -366,6 +367,7 @@ import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js"
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheGreatMound from "../pool/the-great-mound.js";
+import _poolTheRuinousWreckingCrew from "../pool/the-ruinous-wrecking-crew.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
@@ -458,6 +460,7 @@ const shard: CardShard = {
     _poolAscendedLawmage,
     _poolAshlingRimebound,
     _poolAssassinsTrophy,
+    _poolAtlantisAttacks,
     _poolAuraFracture,
     _poolAutomaticLibrarian,
     _poolAvenBattlePriest,
@@ -796,6 +799,7 @@ const shard: CardShard = {
     _poolTheEmperorOfPalamecia,
     _poolTheGreatGoblin,
     _poolTheGreatMound,
+    _poolTheRuinousWreckingCrew,
     _poolTheTenRings,
     _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,

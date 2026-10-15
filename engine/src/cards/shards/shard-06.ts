@@ -170,6 +170,7 @@ import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
+import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
@@ -249,6 +250,7 @@ import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
+import _poolRelicRetriever from "../pool/relic-retriever.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
 import _poolRighteousness from "../pool/righteousness.js";
@@ -356,6 +358,7 @@ import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
+import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -561,6 +564,7 @@ const shard: CardShard = {
     _poolJarvisEarthsMightiestButler,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
+    _poolJusticeVanceAstrovik,
     _poolKeiTakahashi,
     _poolKelsinkoRanger,
     _poolKindredJudgment,
@@ -640,6 +644,7 @@ const shard: CardShard = {
     _poolRedoubledStormsinger,
     _poolReefWorm,
     _poolReitoSentinel,
+    _poolRelicRetriever,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
     _poolRighteousness,
@@ -747,6 +752,7 @@ const shard: CardShard = {
     _poolVolcanicHammer,
     _poolWallOfBlood,
     _poolWallOfOmens,
+    _poolWarMachineLegacyOfIron,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

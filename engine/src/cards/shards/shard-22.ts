@@ -180,6 +180,7 @@ import _poolLordOfTheAccursed from "../pool/lord-of-the-accursed.js";
 import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
+import _poolMaestrosGift from "../pool/maestros-gift.js";
 import _poolMaggotCarrier from "../pool/maggot-carrier.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
@@ -200,6 +201,7 @@ import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
+import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
 import _poolNissaVoiceOfZendikar from "../pool/nissa-voice-of-zendikar.js";
@@ -238,6 +240,7 @@ import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
+import _poolRapidRescue from "../pool/rapid-rescue.js";
 import _poolRatadrabikOfUrborg from "../pool/ratadrabik-of-urborg.js";
 import _poolRayFilletWaveWarrior from "../pool/ray-fillet-wave-warrior.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
@@ -245,6 +248,7 @@ import _poolRazortipWhip from "../pool/razortip-whip.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
+import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
@@ -385,6 +389,7 @@ import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
+import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
@@ -573,6 +578,7 @@ const shard: CardShard = {
     _poolLoseHope,
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
+    _poolMaestrosGift,
     _poolMaggotCarrier,
     _poolMarangRiverRegent,
     _poolMaskOfAvacyn,
@@ -593,6 +599,7 @@ const shard: CardShard = {
     _poolNavigationOrb,
     _poolNeedlethornDrake,
     _poolNestedShambler,
+    _poolNevThePracticalDean,
     _poolNexusWardens,
     _poolNissaSageAnimist,
     _poolNissaVoiceOfZendikar,
@@ -631,6 +638,7 @@ const shard: CardShard = {
     _poolRancor,
     _poolRangersGuile,
     _poolRaphaelsTechnique,
+    _poolRapidRescue,
     _poolRatadrabikOfUrborg,
     _poolRayFilletWaveWarrior,
     _poolRazorfinHunter,
@@ -638,6 +646,7 @@ const shard: CardShard = {
     _poolRecklessLackey,
     _poolReinforcedRonin,
     _poolRelearn,
+    _poolReptilDinomorpher,
     _poolRepurposedEnforcer,
     _poolResurrection,
     _poolRiotDevils,
@@ -780,6 +789,7 @@ const shard: CardShard = {
     _poolZiatoraTheIncinerator,
   ],
   tokens: [
+    _tokensAlienTokenAlienInvasion,
     _tokensAxeToken,
     _tokensDragonEggToken,
     _tokensDwarfToken,

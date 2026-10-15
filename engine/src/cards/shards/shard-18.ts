@@ -113,6 +113,7 @@ import _poolFungalPlots from "../pool/fungal-plots.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
+import _poolGiantSizedFlyingAnt from "../pool/giant-sized-flying-ant.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
 import _poolGlamermite from "../pool/glamermite.js";
 import _poolGlamorousGrapplers from "../pool/glamorous-grapplers.js";
@@ -518,6 +519,7 @@ const shard: CardShard = {
     _poolGastalRaider,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
+    _poolGiantSizedFlyingAnt,
     _poolGiantSolifuge,
     _poolGlamermite,
     _poolGlamorousGrapplers,

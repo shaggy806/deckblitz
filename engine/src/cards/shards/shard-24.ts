@@ -113,6 +113,7 @@ import _poolExpeditionMap from "../pool/expedition-map.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
+import _poolFatefulTempest from "../pool/fateful-tempest.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
 import _poolFeralProwler from "../pool/feral-prowler.js";
 import _poolFeralRidgewolf from "../pool/feral-ridgewolf.js";
@@ -202,6 +203,7 @@ import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
+import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
@@ -237,6 +239,7 @@ import _poolRankRat from "../pool/rank-rat.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
+import _poolRickJonesDestinedSidekick from "../pool/rick-jones-destined-sidekick.js";
 import _poolRikuOfManyPaths from "../pool/riku-of-many-paths.js";
 import _poolRisenSanctuary from "../pool/risen-sanctuary.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
@@ -244,6 +247,7 @@ import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
+import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
 import _poolSadisticSlash from "../pool/sadistic-slash.js";
 import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
 import _poolSanctumCustodian from "../pool/sanctum-custodian.js";
@@ -484,6 +488,7 @@ const shard: CardShard = {
     _poolExpressiveIteration,
     _poolExtinguishAllHope,
     _poolEyeOfJace,
+    _poolFatefulTempest,
     _poolFellTheProfane,
     _poolFeralProwler,
     _poolFeralRidgewolf,
@@ -573,6 +578,7 @@ const shard: CardShard = {
     _poolMireBoa,
     _poolMireInMisery,
     _poolMonumentToEndurance,
+    _poolMoonGirlAndDevilDinosaur,
     _poolMorgueToad,
     _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
@@ -608,6 +614,7 @@ const shard: CardShard = {
     _poolReknit,
     _poolRenegadeMap,
     _poolRhoxBrute,
+    _poolRickJonesDestinedSidekick,
     _poolRikuOfManyPaths,
     _poolRisenSanctuary,
     _poolRoccoCabarettiCaterer,
@@ -615,6 +622,7 @@ const shard: CardShard = {
     _poolRockslideElemental,
     _poolRootwaterDiver,
     _poolRotcrownGhoul,
+    _poolRoxxonBrutes,
     _poolSadisticSlash,
     _poolSaheeliSublimeArtificer,
     _poolSanctumCustodian,

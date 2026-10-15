@@ -103,6 +103,7 @@ import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
+import _poolFeralAppetite from "../pool/feral-appetite.js";
 import _poolFesteringGulch from "../pool/festering-gulch.js";
 import _poolFetidImp from "../pool/fetid-imp.js";
 import _poolFilterOut from "../pool/filter-out.js";
@@ -162,6 +163,7 @@ import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
+import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
@@ -331,6 +333,7 @@ import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
+import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
@@ -369,6 +372,7 @@ import _tokensGoblinToken from "../tokens/goblin-token.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
 import _tokensRedWarriorToken from "../tokens/red-warrior-token.js";
+import _tokensRedwing from "../tokens/redwing.js";
 import _tokensSlugToken from "../tokens/slug-token.js";
 import _tokensSpiritTokenHeiBai from "../tokens/spirit-token-hei-bai.js";
 import _tokensSquirrelToken from "../tokens/squirrel-token.js";
@@ -476,6 +480,7 @@ const shard: CardShard = {
     _poolEzuriClawOfProgress,
     _poolFatefulEnd,
     _poolFelixFiveBoots,
+    _poolFeralAppetite,
     _poolFesteringGulch,
     _poolFetidImp,
     _poolFilterOut,
@@ -535,6 +540,7 @@ const shard: CardShard = {
     _poolHillGigas,
     _poolHonor,
     _poolHostOfTheHereafter,
+    _poolHulklingBurgeoningBruiser,
     _poolHystrodon,
     _poolIcemanAndFirestar,
     _poolIncandescentSoulstoke,
@@ -704,6 +710,7 @@ const shard: CardShard = {
     _poolTovolarTheMidnightScourge,
     _poolTreasonousOgre,
     _poolTreasureCruise,
+    _poolTruckToss,
     _poolTundraWolves,
     _poolTurbulentCrater,
     _poolTymorasInvoker,
@@ -744,6 +751,7 @@ const shard: CardShard = {
     _tokensHumanClericToken,
     _tokensMonkToken,
     _tokensRedWarriorToken,
+    _tokensRedwing,
     _tokensSlugToken,
     _tokensSpiritTokenHeiBai,
     _tokensSquirrelToken,

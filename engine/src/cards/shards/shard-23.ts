@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
+import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
@@ -378,6 +379,7 @@ const shard: CardShard = {
     _poolAatchikEmeraldRadian,
     _poolAgonyWarp,
     _poolAjaniTheGreathearted,
+    _poolAlienInvasion,
     _poolAmbitionsCost,
     _poolAnaxHardenedInTheForge,
     _poolAndurilFlameOfTheWest,

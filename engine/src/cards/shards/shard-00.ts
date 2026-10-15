@@ -329,6 +329,7 @@ import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-leg
 import _poolSunlance from "../pool/sunlance.js";
 import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
+import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolSunlance,
     _poolSunpetalGrove,
     _poolSunscorchRegent,
+    _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,
     _poolTalonTrooper,
     _poolTaoistHermit,

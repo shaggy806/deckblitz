@@ -6036,6 +6036,90 @@
   "effect:become-copy-while-source": {
    "family": "effect:become-copy",
    "example": "Secret Invasion: become a copy for as long as this Aura remains attached."
+  },
+  "zone:exile-from-graveyard-play-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "example": "Advanced Reconstruction: An exile effect's play permission (lands included, not just mayCast) for a card exiled from a graveyard — Advanced Reconstruction's \"exile a card from your graveyard at random. You may play the exiled card this turn\"."
+  },
+  "trigger:becomes-tapped-for-teamwork": {
+   "family": "keyword:teamwork",
+   "example": "Agent Maria Hill: A becomes-tapped trigger narrowed to being tapped to pay a teamwork cost (rule 702.194) — Agent Maria Hill."
+  },
+  "cost:activated-cost-options": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Bullseye, Death Dealer: An activated ability whose cost is a choice of whole costs (\"Sacrifice an artifact or discard a nonland card: ...\" — Bullseye, Death Dealer), as additionalCost.options is for spells."
+  },
+  "effect:exile-from-hand-until-source-leaves": {
+   "family": "effect:duration-extensions",
+   "example": "Cloak and Dagger, Entwined: Exile a chosen card from a player's hand until the effect's source leaves the battlefield, returning it to its owner's hand then (Tidehollow Sculler shape), here with the alternative of the chosen creature — Cloak and Dagger, Entwined."
+  },
+  "filter:attacking-alone": {
+   "family": "condition:attacking-alone-condition",
+   "example": "Crowd of True Believers: A CardFilter clause for a creature that's attacking alone (the only attacker declared), for targets — Crowd of True Believers."
+  },
+  "effect:token-attacks-player-this-turn": {
+   "family": "effect:token-copy-options",
+   "example": "Furygale Flocking: create-token tokens that 'attack that opponent this turn if able': a per-player loop whose tokens carry an attack requirement aimed at that player for the turn, as encore's copies do internally (Furygale Flocking)."
+  },
+  "effect:exiled-this-way-to-library-bottom": {
+   "family": "effect:look-and-choose-leftover",
+   "example": "Herald of Amity: Put the cards this resolution exiled (still in exile, e.g. not cast) on the bottom of their owner's library in a random order: 'exile the top N, you may cast one, then put the rest on the bottom' (Herald of Amity)."
+  },
+  "trigger:loses-life-first-time-each-turn": {
+   "family": "trigger:life-change-amount",
+   "example": "Intermediate Chirography: 'Whenever you lose life for the first time each turn': a firstTimeEachTurn on the loses-life trigger (any player's turn), as gains-life has (Intermediate Chirography)."
+  },
+  "effect:reveal-n-from-hand-you-choose-discard": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Klaw, Sonic Subjugator: The target player reveals N cards of their choice from their hand (N an amount), and the effect's controller chooses one of those to be discarded — Klaw, Sonic Subjugator."
+  },
+  "trigger:counters-put-other": {
+   "family": "trigger:counters-put",
+   "example": "Knight of Wundagore: otherOnly on the counters-put trigger: 'whenever you put a +1/+1 counter on another creature' — Knight of Wundagore."
+  },
+  "effect:cant-be-blocked-rule-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Leitmotif Composer: A resolving 'creatures [filter] can't be blocked this turn' as a rule over the filter (rule 611.2c), binding a matching creature that appears later in the turn: a can't-be-blocked restriction for the restrict effect's filter form (Leitmotif Composer)."
+  },
+  "keyword:gravestorm": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Ominous Harvest: Gravestorm (rule 702.69): when you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn; needs turn history to record permanents that went to a graveyard, tokens included."
+  },
+  "effect:one-more-of-each-counter-kind": {
+   "family": "effect:double-counters-each-kind",
+   "example": "Powerful Broker: Give one target permanent or player another counter of each kind already on it (a single-target proliferate, Doubling Season applying) — Powerful Broker."
+  },
+  "cost:ability-cost-reduction-if-targets": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Raft Security Officer: An activated ability's cost reduced when a chosen target matches a filter (targetCostReduction for abilities) — Raft Security Officer's \"costs {1} less to activate if it targets a creature with power 3 or less\"."
+  },
+  "stat:filter-dealt-damage-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Red Guardian, Super-Soldier: A CardFilter clause for a permanent that dealt damage (to any creature, player or planeswalker) this turn — Red Guardian's \"creature ... that dealt damage this turn\"; today only dealtDamageToCreatureThisTurn exists."
+  },
+  "cost:spend-only-equip-abilities": {
+   "family": "cost:mana-spending-rules",
+   "example": "Ronin, Shadow Stalker: A spendOnly clause for equip abilities alone ('cast Equipment spells or activate equip abilities'), as spend-only-power-up is for power-up abilities — Ronin, Shadow Stalker."
+  },
+  "effect:change-targets-trigger-spell": {
+   "family": "effect:change-target",
+   "example": "Speedball, New Warrior: change-targets aimed at the spell whose casting fired the trigger (\"trigger-spell\", as copy-spell has), not a target slot — Speedball's \"you may choose new targets for that spell\"."
+  },
+  "effect:cant-become-untapped-while-you-control-source": {
+   "family": "effect:duration-extensions",
+   "example": "Spider-Woman, Secret Agent: A one-shot 'that permanent can't become untapped for as long as you control [this]' mark on another permanent (stops every untap, not just the untap step; ends when the source leaves or changes control) — Spider-Woman, Secret Agent."
+  },
+  "decision:ward-cost-options": {
+   "family": "decision:ward-payment",
+   "example": "Titania, Rugged Rumbler: A ward cost with alternatives the targeting player picks between — \"Ward—Discard a card or pay {2}\" (Titania, Rugged Rumbler)."
+  },
+  "condition:target-is-another": {
+   "family": "effect:target-other-than-source",
+   "example": "Wakandan Royal Guard: A conditional that asks whether a target slot is (or isn't) the effect's own source — \"if that creature is another Hero\" (Wakandan Royal Guard) where the source may target itself."
+  },
+  "effect:exiled-this-way-to-hand": {
+   "family": "effect:this-way-results",
+   "example": "Worlds Within Worlds: Put every card this resolution exiled into its owner's hand — Worlds Within Worlds' \"then put all cards exiled this way into their owners' hands\" (the hand counterpart of put-exiled-this-way-onto-battlefield)."
   }
  }
 }

@@ -7,6 +7,7 @@ import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
+import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
 import _poolAncestralCommunion from "../pool/ancestral-communion.js";
@@ -275,6 +276,7 @@ import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRecklessBrute from "../pool/reckless-brute.js";
 import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
+import _poolRenegadeBull from "../pool/renegade-bull.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
@@ -391,6 +393,7 @@ import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
 import _poolWhiskAway from "../pool/whisk-away.js";
+import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
 import _poolWilsonRefinedGrizzly from "../pool/wilson-refined-grizzly.js";
 import _poolWindScarredCrag from "../pool/wind-scarred-crag.js";
@@ -419,6 +422,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
+    _poolAgentsOfSHIELD,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
     _poolAncestralCommunion,
@@ -687,6 +691,7 @@ const shard: CardShard = {
     _poolRaptorHatchling,
     _poolRecklessBrute,
     _poolRedElementalBlast,
+    _poolRenegadeBull,
     _poolRepulsiveMutation,
     _poolResupply,
     _poolRighteousCharge,
@@ -803,6 +808,7 @@ const shard: CardShard = {
     _poolWhelmingWave,
     _poolWhirlwindOfThought,
     _poolWhiskAway,
+    _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
     _poolWilsonRefinedGrizzly,
     _poolWindScarredCrag,

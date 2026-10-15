@@ -166,6 +166,7 @@ import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
+import _poolIronFistLivingWeapon from "../pool/iron-fist-living-weapon.js";
 import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJadarGhoulcallerOfNephalia from "../pool/jadar-ghoulcaller-of-nephalia.js";
 import _poolJamuraanLion from "../pool/jamuraan-lion.js";
@@ -186,6 +187,7 @@ import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLargeBear from "../pool/large-bear.js";
+import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
@@ -347,6 +349,7 @@ import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
+import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
@@ -545,6 +548,7 @@ const shard: CardShard = {
     _poolInvisibleWoman,
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
+    _poolIronFistLivingWeapon,
     _poolJackdaw,
     _poolJadarGhoulcallerOfNephalia,
     _poolJamuraanLion,
@@ -565,6 +569,7 @@ const shard: CardShard = {
     _poolKrenkosCommand,
     _poolLambholtRavager,
     _poolLargeBear,
+    _poolLatticeLibrary,
     _poolLavaleaper,
     _poolLichsCaress,
     _poolLifespringDruid,
@@ -726,6 +731,7 @@ const shard: CardShard = {
     _poolUrbisProtector,
     _poolUrzasWorkshop,
     _poolValorousStance,
+    _poolVanguardOfTheRestless,
     _poolVassalSoul,
     _poolVerixBladewing,
     _poolViashinoCutthroat,

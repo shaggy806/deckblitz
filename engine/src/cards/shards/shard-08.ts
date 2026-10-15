@@ -150,6 +150,7 @@ import _poolGrandColiseum from "../pool/grand-coliseum.js";
 import _poolGraniticTitan from "../pool/granitic-titan.js";
 import _poolGreaterSandwurm from "../pool/greater-sandwurm.js";
 import _poolGreenweaverDruid from "../pool/greenweaver-druid.js";
+import _poolGrimReaperLethalLegionnaire from "../pool/grim-reaper-lethal-legionnaire.js";
 import _poolGrimgrinCorpseBorn from "../pool/grimgrin-corpse-born.js";
 import _poolGristleGrinner from "../pool/gristle-grinner.js";
 import _poolGrixisSlavedriver from "../pool/grixis-slavedriver.js";
@@ -409,6 +410,7 @@ import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-r
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
+import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensThopterToken from "../tokens/thopter-token.js";
 import _tokensWarriorToken from "../tokens/warrior-token.js";
@@ -564,6 +566,7 @@ const shard: CardShard = {
     _poolGraniticTitan,
     _poolGreaterSandwurm,
     _poolGreenweaverDruid,
+    _poolGrimReaperLethalLegionnaire,
     _poolGrimgrinCorpseBorn,
     _poolGristleGrinner,
     _poolGrixisSlavedriver,
@@ -825,6 +828,7 @@ const shard: CardShard = {
     _tokensFoodToken,
     _tokensHorrorToken,
     _tokensJellyfishToken,
+    _tokensLeviathanToken,
     _tokensOtterToken,
     _tokensThopterToken,
     _tokensWarriorToken,

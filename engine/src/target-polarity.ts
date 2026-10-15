@@ -371,13 +371,19 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A copy goes to the copied permanent's controller unless the card says
   // it's yours (Hate Mirage).
   "create-token-copy": (n, v) => v.touch(n.of, n.who === "you" ? "take" : "help", MAJOR),
-  attach: (n, v) => v.touch(n.target, "help", MINOR),
+  // The Aura or Equipment moved is put to work for whoever it ends up on
+  // (Swordsman, Sharp Scoundrel's "attach target Equipment you control").
+  attach: (n, v) => {
+    v.touch(n.target, "help", MINOR);
+    v.touch(n.attachment, "help", MINOR);
+  },
   transform: (n, v) => v.touch(n.target, "either", MINOR),
   // What becomes the copy, and what it copies: either may be anyone's
-  // (Mirage Mirror copies an opponent's best; Shuri, two of your own).
+  // (Mirage Mirror copies an opponent's best; Shuri, two of your own). What
+  // the source itself becomes a copy of is the best of anyone's (Muddle).
   "become-copy": (n, v) => {
     v.touch(n.target, "either", MINOR);
-    v.touch(n.of, "either", MINOR);
+    v.touch(n.of, n.target === "source" ? "take" : "either", MINOR);
   },
   "day-night": none,
   "become-monarch": none,

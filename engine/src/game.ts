@@ -18648,18 +18648,27 @@ export class Game {
         if (triggerObject === undefined) return false;
         // Opus's "if five or more mana was spent to cast that spell": a spell
         // gone from the stack since (countered in response) is asked what was
-        // spent on it there — the ruling — as `manaSpentOf` reads it.
+        // spent on it there — the ruling — as `manaSpentOf` reads it. Its mana
+        // value the same way, {X} as chosen (Prismari Pianist's "if that
+        // spell's mana value is 5 or greater"), as `manaValueOf` reads it: in
+        // a graveyard an {X} counts as 0 (rule 202.3e).
         const spell = this.state.objects[triggerObject];
-        const { manaSpent, ...rest } = condition.filter;
-        if (
-          manaSpent !== undefined &&
+        const { manaSpent, manaValue: manaValueFilter, ...rest } = condition.filter;
+        const gone =
           spell !== undefined &&
           refs.triggerSpell !== undefined &&
-          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell) &&
-          spell.lastStackManaSpent !== undefined
-        ) {
-          if (!compareNum(spell.lastStackManaSpent, manaSpent, x)) return false;
-          return Object.keys(rest).length === 0 || matchesKnown(triggerObject, rest);
+          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell);
+        const spentThere = gone && manaSpent !== undefined ? spell.lastStackManaSpent : undefined;
+        const valueThere = gone && manaValueFilter !== undefined ? spell.lastStackManaValue : undefined;
+        if (spentThere !== undefined || valueThere !== undefined) {
+          if (spentThere !== undefined && !compareNum(spentThere, manaSpent!, x)) return false;
+          if (valueThere !== undefined && !compareNum(valueThere, manaValueFilter!, x)) return false;
+          const unread: CardFilter = {
+            ...rest,
+            ...(spentThere === undefined && manaSpent !== undefined ? { manaSpent } : {}),
+            ...(valueThere === undefined && manaValueFilter !== undefined ? { manaValue: manaValueFilter } : {}),
+          };
+          return Object.keys(unread).length === 0 || matchesKnown(triggerObject, unread);
         }
         return matchesKnown(triggerObject, condition.filter);
       }

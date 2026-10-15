@@ -18,6 +18,7 @@ import _poolArgentumArmor from "../pool/argentum-armor.js";
 import _poolArgothianOpportunist from "../pool/argothian-opportunist.js";
 import _poolArmageddon from "../pool/armageddon.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
+import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
 import _poolAttendedKnight from "../pool/attended-knight.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
@@ -105,6 +106,7 @@ import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
 import _poolFairgroundsPatrol from "../pool/fairgrounds-patrol.js";
+import _poolFalconWingedWonder from "../pool/falcon-winged-wonder.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
 import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
@@ -143,6 +145,7 @@ import _poolHardenedAcademic from "../pool/hardened-academic.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
+import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
 import _poolHenzieToolboxTorre from "../pool/henzie-toolbox-torre.js";
 import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
 import _poolHiddenHideout from "../pool/hidden-hideout.js";
@@ -324,6 +327,7 @@ import _poolTorturePit from "../pool/torture-pit.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
+import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
@@ -390,6 +394,7 @@ const shard: CardShard = {
     _poolArgothianOpportunist,
     _poolArmageddon,
     _poolAstralWingspan,
+    _poolAtlanteanCavalry,
     _poolAttendedKnight,
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
@@ -477,6 +482,7 @@ const shard: CardShard = {
     _poolEyeOfRamos,
     _poolFadeIntoAntiquity,
     _poolFairgroundsPatrol,
+    _poolFalconWingedWonder,
     _poolFalkenrathMarauders,
     _poolFangrenMarauder,
     _poolFertileGround,
@@ -515,6 +521,7 @@ const shard: CardShard = {
     _poolHavocDevils,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
+    _poolHellcatUndyingVigilante,
     _poolHenzieToolboxTorre,
     _poolHeraldOfSecretStreams,
     _poolHiddenHideout,
@@ -696,6 +703,7 @@ const shard: CardShard = {
     _poolTuknirDeathlock,
     _poolTwinbladeAssassins,
     _poolTymnaTheWeaver,
+    _poolUSAgentJohnWalker,
     _poolUlvenwaldBear,
     _poolUnderseaInvader,
     _poolUndulatingWitness,

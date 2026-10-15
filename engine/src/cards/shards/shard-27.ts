@@ -67,6 +67,7 @@ import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
+import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
 import _poolCultistsStaff from "../pool/cultists-staff.js";
 import _poolDamnablePact from "../pool/damnable-pact.js";
@@ -313,6 +314,7 @@ import _poolStormSpirit from "../pool/storm-spirit.js";
 import _poolStormscapeFamiliar from "../pool/stormscape-familiar.js";
 import _poolStrengthOfThePack from "../pool/strength-of-the-pack.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
+import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSwornGuardian from "../pool/sworn-guardian.js";
 import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
 import _poolTaintedTreats from "../pool/tainted-treats.js";
@@ -460,6 +462,7 @@ const shard: CardShard = {
     _poolCorruptEunuchs,
     _poolCourtOfIre,
     _poolCrosissCharm,
+    _poolCruelAlliance,
     _poolCryptRipper,
     _poolCultistsStaff,
     _poolDamnablePact,
@@ -706,6 +709,7 @@ const shard: CardShard = {
     _poolStormscapeFamiliar,
     _poolStrengthOfThePack,
     _poolSunderFromWithin,
+    _poolSuperVillainLockup,
     _poolSwornGuardian,
     _poolSzarelGenesisShepherd,
     _poolTaintedTreats,

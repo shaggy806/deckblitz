@@ -173,6 +173,7 @@ import _poolHelpfulHunter from "../pool/helpful-hunter.js";
 import _poolHerdHeirloom from "../pool/herd-heirloom.js";
 import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
+import _poolHireACrew from "../pool/hire-a-crew.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
@@ -204,6 +205,7 @@ import _poolLlanowarVisionary from "../pool/llanowar-visionary.js";
 import _poolLocthwainScorn from "../pool/locthwain-scorn.js";
 import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
+import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
@@ -567,6 +569,7 @@ const shard: CardShard = {
     _poolHerdHeirloom,
     _poolHeritageReclamation,
     _poolHinderingLight,
+    _poolHireACrew,
     _poolHorseshoeCrab,
     _poolHowlingGolem,
     _poolHumblingElder,
@@ -598,6 +601,7 @@ const shard: CardShard = {
     _poolLocthwainScorn,
     _poolLokiLordOfMisrule,
     _poolLordOfAtlantis,
+    _poolLoreholdArchivist,
     _poolLoyalGuardian,
     _poolLumraBellowOfTheWoods,
     _poolLyseHext,

@@ -207,6 +207,7 @@ import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
+import _poolMerchantOfVenom from "../pool/merchant-of-venom.js";
 import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
 import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
@@ -641,6 +642,7 @@ const shard: CardShard = {
     _poolManaCylix,
     _poolMaraudingMako,
     _poolMeditationPuzzle,
+    _poolMerchantOfVenom,
     _poolMercilessEnforcers,
     _poolMeteorite,
     _poolMeticulousCommons,

@@ -278,6 +278,7 @@ import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
+import _poolRestoreRelic from "../pool/restore-relic.js";
 import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
@@ -318,6 +319,7 @@ import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
+import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
@@ -669,6 +671,7 @@ const shard: CardShard = {
     _poolReluctantRoleModel,
     _poolRescuePepperPotts,
     _poolResentfulRevelation,
+    _poolRestoreRelic,
     _poolReturnOfTheMoleMan,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
@@ -709,6 +712,7 @@ const shard: CardShard = {
     _poolStalkingDrone,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
+    _poolStridingShotcaller,
     _poolSwelteringSuns,
     _poolSwordOfForgeAndFrontier,
     _poolTangleMantis,

@@ -174,6 +174,7 @@ import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
 import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
+import _poolLukeCagePowerMan from "../pool/luke-cage-power-man.js";
 import _poolLurchingRotbeast from "../pool/lurching-rotbeast.js";
 import _poolMachinesmithAutomaton from "../pool/machinesmith-automaton.js";
 import _poolMahadiEmporiumMaster from "../pool/mahadi-emporium-master.js";
@@ -347,6 +348,7 @@ import _poolWebShot from "../pool/web-shot.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
 import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
+import _poolWidowsBite from "../pool/widows-bite.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
@@ -542,6 +544,7 @@ const shard: CardShard = {
     _poolLokhustHeavyDestroyer,
     _poolLoxodonMystic,
     _poolLoyalDrake,
+    _poolLukeCagePowerMan,
     _poolLurchingRotbeast,
     _poolMachinesmithAutomaton,
     _poolMahadiEmporiumMaster,
@@ -715,6 +718,7 @@ const shard: CardShard = {
     _poolWhiteKnight,
     _poolWhiteWidowFreeAgent,
     _poolWiccanRisingMagician,
+    _poolWidowsBite,
     _poolWittyRoastmaster,
     _poolWoeStrider,
     _poolWondrousCrucible,

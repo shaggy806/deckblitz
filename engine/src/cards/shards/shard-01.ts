@@ -150,6 +150,7 @@ import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
+import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKitsaOtterballElite from "../pool/kitsa-otterball-elite.js";
 import _poolKnightOfAutumn from "../pool/knight-of-autumn.js";
 import _poolKodamaOfTheWestTree from "../pool/kodama-of-the-west-tree.js";
@@ -371,6 +372,7 @@ import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
+import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
 import _tokensVibraniumToken from "../tokens/vibranium-token.js";
 
 const shard: CardShard = {
@@ -522,6 +524,7 @@ const shard: CardShard = {
     _poolKarakas,
     _poolKavuGlider,
     _poolKenrithTheReturnedKing,
+    _poolKillmongerScourgeOfWakanda,
     _poolKitsaOtterballElite,
     _poolKnightOfAutumn,
     _poolKodamaOfTheWestTree,
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensMutavaultToken,
+    _tokensTheTigerGod,
     _tokensVibraniumToken,
   ],
 };

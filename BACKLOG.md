@@ -74,10 +74,10 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Marvel Super Heroes
-  (MSH, 65 left) back to Bloomburrow, about 1,300 cards (`npm run cards:sets -w engine
-  -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit and Marvel Super
-  Heroes Commander are whole) — then
+  ranked ones first. **First, the rest of the sets already walked** — Secrets of Strixhaven
+  (SOS, 104 left) back to Bloomburrow, about 1,200 cards (`npm run cards:sets -w engine
+  -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit, both Marvel Super
+  Heroes sets and Secrets of Strixhaven Commander are whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
@@ -91,6 +91,12 @@ section keeps only what to do next.
 - **Lord of the Nazgûl's "protection from Ring-bearers" is still inert** (found 2026-10-14): it was
   left out because nothing made a Ring-bearer, but the Ring tempts you now (7779cae6), so the card
   runs inaccurately. Author it (`filter.ts` has `ringBearer`) or pull the card.
+- **Wayta, Trainer Prodigy's cheap fight can lose a target it shouldn't** (found 2026-10-15): "costs
+  {2} less if it targets two creatures you control" is split into two abilities, the {G} one
+  requiring its second target be yours, so a creature that changes control in response leaves the
+  fight undone where the printed "another target creature" stays legal. Needs
+  `cost:ability-cost-reduction-if-targets` (spells' `targetCostReduction` for activated abilities;
+  Raft Security Officer waits on it too), or pull the card.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).

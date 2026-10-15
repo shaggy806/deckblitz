@@ -272,6 +272,7 @@ import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
+import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
@@ -670,6 +671,7 @@ const shard: CardShard = {
     _poolRobotDomination,
     _poolRottingMastodon,
     _poolRoyalFalcon,
+    _poolRunThePlay,
     _poolRussetWolves,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,

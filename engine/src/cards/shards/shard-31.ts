@@ -158,6 +158,7 @@ import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
+import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
 import _poolHerosResolve from "../pool/heros-resolve.js";
@@ -230,6 +231,7 @@ import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
+import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
@@ -241,6 +243,7 @@ import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
+import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
@@ -269,6 +272,7 @@ import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
+import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
@@ -537,6 +541,7 @@ const shard: CardShard = {
     _poolHammerheadTyrant,
     _poolHanaKami,
     _poolHedronArchive,
+    _poolHelicarrierStrike,
     _poolHellkiteCharger,
     _poolHellkiteTyrant,
     _poolHerosResolve,
@@ -609,6 +614,7 @@ const shard: CardShard = {
     _poolMomentOfDefiance,
     _poolMortalitySpear,
     _poolMsMarvelElasticAlly,
+    _poolMuddleTheEverChanging,
     _poolNewHorizons,
     _poolNimReplica,
     _poolNoxiousGearhulk,
@@ -620,6 +626,7 @@ const shard: CardShard = {
     _poolOrochiSustainer,
     _poolOverkill,
     _poolPacifism,
+    _poolPantherPounce,
     _poolParadoxicalOutcome,
     _poolPatriarsSeal,
     _poolPeregrineGriffin,
@@ -648,6 +655,7 @@ const shard: CardShard = {
     _poolRollingTemblor,
     _poolRubblebeltMaaka,
     _poolRuggedPrairie,
+    _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
     _poolSandbarSerpent,
     _poolSanguinaryPriest,

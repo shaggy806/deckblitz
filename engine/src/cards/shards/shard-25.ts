@@ -18,6 +18,7 @@ import _poolAquusSteed from "../pool/aquus-steed.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
 import _poolArcboundWorker from "../pool/arcbound-worker.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
+import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
@@ -48,6 +49,7 @@ import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
 import _poolCacophodon from "../pool/cacophodon.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
+import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
@@ -398,6 +400,7 @@ const shard: CardShard = {
     _poolArcaneEncyclopedia,
     _poolArcboundWorker,
     _poolArmoredPegasus,
+    _poolArnimZolaBioFanatic,
     _poolAshenMonstrosity,
     _poolAssaultZeppelid,
     _poolAstralSteel,
@@ -428,6 +431,7 @@ const shard: CardShard = {
     _poolCabalPit,
     _poolCacophodon,
     _poolCaptivatingUnicorn,
+    _poolCeaselessConflict,
     _poolChamberedNautilus,
     _poolChampionOfArashin,
     _poolChargingTroll,

@@ -7,6 +7,7 @@ import _poolAbaddonTheDespoiler from "../pool/abaddon-the-despoiler.js";
 import _poolAbandonedAirTemple from "../pool/abandoned-air-temple.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAethershieldArtificer from "../pool/aethershield-artificer.js";
+import _poolAgent13SharonCarter from "../pool/agent-13-sharon-carter.js";
 import _poolAgentFrankHorrigan from "../pool/agent-frank-horrigan.js";
 import _poolAirResponseUnit from "../pool/air-response-unit.js";
 import _poolAkoumRefuge from "../pool/akoum-refuge.js";
@@ -79,6 +80,7 @@ import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
 import _poolDetainedByLegionnaires from "../pool/detained-by-legionnaires.js";
 import _poolDimirCluestone from "../pool/dimir-cluestone.js";
+import _poolDirgurFocusmage from "../pool/dirgur-focusmage.js";
 import _poolDisaTheRestless from "../pool/disa-the-restless.js";
 import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
@@ -163,6 +165,7 @@ import _poolJaggedBarrens from "../pool/jagged-barrens.js";
 import _poolJaheiraFriendOfTheForest from "../pool/jaheira-friend-of-the-forest.js";
 import _poolJeskaiSage from "../pool/jeskai-sage.js";
 import _poolJeskaiWindscout from "../pool/jeskai-windscout.js";
+import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
@@ -172,6 +175,7 @@ import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
+import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
 import _poolLastGasp from "../pool/last-gasp.js";
 import _poolLaughingMad from "../pool/laughing-mad.js";
 import _poolLeafArrow from "../pool/leaf-arrow.js";
@@ -236,6 +240,7 @@ import _poolPlatedKilnbeast from "../pool/plated-kilnbeast.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
+import _poolPrismariPianist from "../pool/prismari-pianist.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
@@ -388,6 +393,7 @@ const shard: CardShard = {
     _poolAbandonedAirTemple,
     _poolAcademyRaider,
     _poolAethershieldArtificer,
+    _poolAgent13SharonCarter,
     _poolAgentFrankHorrigan,
     _poolAirResponseUnit,
     _poolAkoumRefuge,
@@ -460,6 +466,7 @@ const shard: CardShard = {
     _poolDestinySpinner,
     _poolDetainedByLegionnaires,
     _poolDimirCluestone,
+    _poolDirgurFocusmage,
     _poolDisaTheRestless,
     _poolDisenchant,
     _poolDisorderInTheCourt,
@@ -544,6 +551,7 @@ const shard: CardShard = {
     _poolJaheiraFriendOfTheForest,
     _poolJeskaiSage,
     _poolJeskaiWindscout,
+    _poolJessicaJonesPrivateEye,
     _poolJodahArchmageEternal,
     _poolJolraelMwonvuliRecluse,
     _poolJuriMasterOfTheRevue,
@@ -553,6 +561,7 @@ const shard: CardShard = {
     _poolKeldonNecropolis,
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
+    _poolKunLunWarrior,
     _poolLastGasp,
     _poolLaughingMad,
     _poolLeafArrow,
@@ -617,6 +626,7 @@ const shard: CardShard = {
     _poolPortalToPhyrexia,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
+    _poolPrismariPianist,
     _poolProphetOfThePeak,
     _poolProsperity,
     _poolProtegesAwakening,
