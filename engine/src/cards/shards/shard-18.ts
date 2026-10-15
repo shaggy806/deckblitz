@@ -11,6 +11,7 @@ import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
+import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
@@ -427,6 +428,7 @@ const shard: CardShard = {
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
     _poolAppliedGeometry,
+    _poolArchaicsAgony,
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
     _poolAuntiesSentence,

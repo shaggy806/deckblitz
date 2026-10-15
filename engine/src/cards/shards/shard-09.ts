@@ -153,6 +153,7 @@ import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
 import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
+import _poolHellToPay from "../pool/hell-to-pay.js";
 import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
@@ -563,6 +564,7 @@ const shard: CardShard = {
     _poolHauntedRidge,
     _poolHavocDemon,
     _poolHeavyInfantry,
+    _poolHellToPay,
     _poolHeroOfBladehold,
     _poolHogMonkey,
     _poolHoldAtBay,

@@ -265,6 +265,7 @@ import _poolRetreatToHagra from "../pool/retreat-to-hagra.js";
 import _poolRetrofitterFoundry from "../pool/retrofitter-foundry.js";
 import _poolRevitalizingRepast from "../pool/revitalizing-repast.js";
 import _poolRevivingDose from "../pool/reviving-dose.js";
+import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
@@ -667,6 +668,7 @@ const shard: CardShard = {
     _poolRetrofitterFoundry,
     _poolRevitalizingRepast,
     _poolRevivingDose,
+    _poolRhinosRampage,
     _poolRhovanionRampager,
     _poolRidgeRannet,
     _poolRitualOfSteel,

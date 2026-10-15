@@ -59,6 +59,18 @@ export function lifeLostSince(
   return lost;
 }
 
+/** The excess damage (rule 120.4a) dealt to permanents in the resolution that
+ * began at event `since` — see the `excessDamageThisWay` amount. */
+export function excessDamageSince(state: GameState, since: number, to?: ObjectId): number {
+  let excess = 0;
+  for (const event of eventsSince(state, since)) {
+    if (event.type !== "damage-dealt") continue;
+    if (to !== undefined && (event.target.kind !== "object" || event.target.object !== to)) continue;
+    excess += event.excess ?? 0;
+  }
+  return excess;
+}
+
 /**
  * What the resolution that began at event `since` — by default the one under
  * way, and nothing between resolutions — has done `what` to, each object

@@ -407,6 +407,15 @@ export type EffectAmount =
    * the resolution's own life changes, so an opponent whose loss is changed
    * or who can't lose life counts for what they lost. */
   | { readonly lifeLostThisWay: true; readonly who?: PlayerScope }
+  /** The excess damage dealt so far in the resolution under way (rule
+   * 120.4a): past lethal damage for a creature — its toughness less damage
+   * already marked, or 1 from a deathtouch source — past its loyalty for a
+   * planeswalker. Hell to Pay's "Treasure tokens equal to the amount of
+   * excess damage dealt to that creature this way", Razor Rings' "you gain
+   * life equal to the excess damage dealt this way". `to` counts only what
+   * was dealt to that target slot's object — a fight's "excess damage dealt
+   * to the creature an opponent controls" (Rhino's Rampage). */
+  | { readonly excessDamageThisWay: true; readonly to?: number }
   /**
    * A per-player running total for this turn ({@link TurnStat}), summed over
    * the players `who` names (default `"you"`) — Kydele's "{C} for each card
@@ -4881,6 +4890,9 @@ export interface EffectApi {
   /** How much life `players` (everyone when absent) have lost so far in
    * this resolution — see the `lifeLostThisWay` {@link EffectAmount}. */
   lifeLostThisWay(players?: readonly PlayerId[]): number;
+  /** See the `excessDamageThisWay` {@link EffectAmount}: dealt to `to`'s
+   * object only, when given. */
+  excessDamageThisWay(to?: ObjectId): number;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -6579,6 +6591,11 @@ function signedAmountValue(
   if ("countPlayers" in amount) return ctx.playersInScope(amount.countPlayers).length;
   if ("lifeLostThisWay" in amount) {
     return ctx.lifeLostThisWay(amount.who === undefined ? undefined : ctx.playersInScope(amount.who));
+  }
+  if ("excessDamageThisWay" in amount) {
+    if (amount.to === undefined) return ctx.excessDamageThisWay();
+    const ref = ctx.targets[amount.to];
+    return ref?.kind === "object" ? ctx.excessDamageThisWay(ref.object) : 0;
   }
   if ("turnStat" in amount) {
     if (amount.target !== undefined) {

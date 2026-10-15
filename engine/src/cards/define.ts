@@ -925,6 +925,15 @@ export type StaticCondition =
    * **another** Desert was returned this way, surveil 1" — it returning
    * itself doesn't count.
    */
+  /**
+   * Excess damage (rule 120.4a) has been dealt so far in the resolution under
+   * way — to `to`'s target, when given. Bolg of the North's "if excess damage
+   * was dealt this way, amass Goblins X", Rhino's Rampage's "when excess
+   * damage is dealt to the creature an opponent controls this way". The
+   * amount itself is the `excessDamageThisWay` amount. Only a resolution can
+   * answer it; anywhere else it's false.
+   */
+  | { readonly kind: "excess-damage-this-way"; readonly to?: number }
   | {
       readonly kind: "this-way";
       readonly what: ThisWayKind;

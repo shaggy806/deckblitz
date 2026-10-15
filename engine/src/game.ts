@@ -332,7 +332,7 @@ import {
   targetsFillable,
 } from "./target.js";
 import { distinctTargetCount, targetCountBounds } from "./target-count.js";
-import { eventsSince as eventLogSince, lifeLostSince, thisWayEntries } from "./this-way.js";
+import { eventsSince as eventLogSince, excessDamageSince, lifeLostSince, thisWayEntries } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type { TargetCopies, TargetCountRange } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
@@ -18704,6 +18704,11 @@ export class Game {
       if (condition.kind === "source-on-battlefield") {
         return opts.sourceLost !== true && this.state.objects[source]?.zone === "battlefield";
       }
+      if (condition.kind === "excess-damage-this-way") {
+        if (condition.to === undefined) return excessDamageSince(this.state, since) > 0;
+        const ref = targets[condition.to];
+        return ref?.kind === "object" && excessDamageSince(this.state, since, ref.object) > 0;
+      }
       if (condition.kind === "this-way") {
         const done = thisWayDone(
           condition.what,
@@ -19050,6 +19055,7 @@ export class Game {
         cardTypesInGraveyards(this.state, this.registry, controller, filter),
       thisWay: thisWayDone,
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
+      excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
       opponentsAttacked: () => {
         const attacked = new Set<PlayerId>();
@@ -28197,15 +28203,19 @@ export class Game {
     object: GameObject,
     amount: number,
     sourceLastKnown: LastKnownInfo | undefined,
-  ): void {
+  ): number {
     const turn = this.state.turn.number;
     const c = computeCharacteristics(this.state, this.registry, object.id);
-    let excess = false;
+    // How much is excess (rule 120.4a): the greatest of what each of its
+    // types makes it — past its loyalty, past lethal damage.
+    let excessAmount = 0;
     if (c.types.includes("planeswalker")) {
-      excess = amount > (object.counters.loyalty ?? 0);
-    } else if (c.types.includes("creature")) {
-      excess = amount > this.lethalDamageTo(object, source, sourceLastKnown);
+      excessAmount = Math.max(excessAmount, amount - (object.counters.loyalty ?? 0));
     }
+    if (c.types.includes("creature")) {
+      excessAmount = Math.max(excessAmount, amount - this.lethalDamageTo(object, source, sourceLastKnown));
+    }
+    const excess = excessAmount > 0;
     const live = this.state.objects[source];
     const from =
       sourceLastKnown !== undefined
@@ -28225,6 +28235,7 @@ export class Game {
     if (c.types.includes("creature") && source !== object.id && live?.zone === "battlefield") {
       live.dealtDamageToCreatureOnTurn = turn;
     }
+    return excessAmount;
   }
 
   /** A permanent dealing damage to an opponent of its controller adds to
@@ -28427,7 +28438,8 @@ export class Game {
     }
     // What damaged it this turn, and whether any was excess (rule 120.4a) —
     // read before the damage lands.
-    this.recordDamage(source, object, amount, sourceLastKnown);
+    const excess = this.recordDamage(source, object, amount, sourceLastKnown);
+    const excessField = excess > 0 ? { excess } : {};
     // Damage to a planeswalker removes that many loyalty counters (rule
     // 120.3c / 306.7) — it's not "marked" like a creature's. One that's a
     // creature too (Gideon Jura's 0) gets both: the loyalty goes and the
@@ -28435,7 +28447,7 @@ export class Game {
     const recipientTypes = computeCharacteristics(this.state, this.registry, target.object).types;
     if (recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
       object.counters.loyalty = (object.counters.loyalty ?? 0) - amount;
-      this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
+      this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
       this.emit({
         type: "loyalty-changed",
         object: target.object,
@@ -28465,7 +28477,7 @@ export class Game {
     if (this.sourceHasKeyword(source, "deathtouch", sourceLastKnown)) {
       object.markedByDeathtouch = true;
     }
-    this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
+    this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
     if (asCounters) {
       const by = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
       this.addCounter(target, "-1/-1", amount, false, by);

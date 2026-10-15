@@ -270,6 +270,7 @@ import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
+import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
@@ -703,6 +704,7 @@ const shard: CardShard = {
     _poolRabanastreRoyalCity,
     _poolRagingBull,
     _poolRampartHunter,
+    _poolRazorRings,
     _poolRazorkinNeedlehead,
     _poolReflectingPool,
     _poolRegalUnicorn,

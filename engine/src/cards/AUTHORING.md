@@ -731,6 +731,19 @@ Okaun), which reads a power below 0 as it is, since doubling a -2 power makes
 it -4 (rule 701.10d). "+X/+X, where X is its power" is a plain `{ powerOf }`,
 which adds nothing for a negative power.
 
+**"The excess damage dealt this way."** `{ excessDamageThisWay: true, to? }` is
+the damage the resolution under way has dealt to permanents past what each
+needed (rule 120.4a): past lethal damage for a creature — its toughness less
+damage already marked, or 1 from a deathtouch source — past its loyalty for a
+planeswalker, the greater for one that's both. `to: n` counts only what went
+to target slot `n` ("dealt to that creature this way" in a two-way fight —
+Rhino's Rampage). Hell to Pay's "tapped Treasure tokens equal to the amount of
+excess damage dealt to that creature this way" is a `create-token` counting it
+after the `damage`. The condition `{ kind: "excess-damage-this-way", to? }`
+asks whether there was any ("if excess damage was dealt this way"; "when
+excess damage is dealt … this way", a `conditional` around a
+`reflexive-trigger`).
+
 **"This way."** `{ thisWay, who?, filter?, cardTypes? }` counts what the
 resolving spell or ability has done **so far** — `thisWay` is one of
 `"discarded"`, `"drawn"`, `"milled"`, `"sacrificed"`, `"destroyed"` (a destroy

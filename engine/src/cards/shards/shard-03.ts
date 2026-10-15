@@ -119,6 +119,7 @@ import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
+import _poolGoblinNegotiation from "../pool/goblin-negotiation.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
 import _poolGoldlustTriad from "../pool/goldlust-triad.js";
 import _poolGoldmeadowHarrier from "../pool/goldmeadow-harrier.js";
@@ -500,6 +501,7 @@ const shard: CardShard = {
     _poolGoNinjaGo,
     _poolGoShintaiOfBoundlessVigor,
     _poolGoblinCannon,
+    _poolGoblinNegotiation,
     _poolGoblinTunneler,
     _poolGoldlustTriad,
     _poolGoldmeadowHarrier,

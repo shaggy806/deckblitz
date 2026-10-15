@@ -806,6 +806,10 @@ export type GameEvent =
       readonly amount: number;
       /** True for combat damage (rule 510) — as opposed to burn, abilities, etc. */
       readonly combat: boolean;
+      /** Damage to a permanent beyond what it needed (rule 120.4a): past lethal
+       * for a creature, past its loyalty for a planeswalker, the greater for
+       * one that's both. Absent when there was none. */
+      readonly excess?: number;
       /** Who controlled the source as it dealt the damage (as it last existed,
        * for a source that has left — rule 608.2h), when known: what a client
        * tallies a player's damage dealt by. */

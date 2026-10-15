@@ -388,6 +388,7 @@ import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
+import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
@@ -793,6 +794,7 @@ const shard: CardShard = {
     _poolWhirlermaker,
     _poolWhisperAgent,
     _poolWildHunger,
+    _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,

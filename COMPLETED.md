@@ -28,6 +28,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **"The excess damage dealt this way"** (`excessDamageThisWay`, rule 120.4a): Hell to Pay,
+  Windswift Slice, Goblin Negotiation, Archaic's Agony, Razor Rings, Rhino's Rampage
+  (2026-10-15).
 - **Marvel's Spider-Man, whole** (batch 80): 62 cards (2026-10-15).
 - **Avatar: The Last Airbender, whole** (batch 79): 90 cards, and the scaffolder reads "cards
   exiled with this" as linking the card's exiles (2026-10-15).

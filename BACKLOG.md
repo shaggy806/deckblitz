@@ -68,9 +68,10 @@ section keeps only what to do next.
   seven of them Lorwyn Eclipsed's) needs the player to choose which counters when there are
   several kinds, so it's a new decision; build the two together. Also at five now:
   `decision:owner-chooses-top-or-bottom` — the target's owner chooses top or bottom of their
-  library (Trickster's Stratagem, Run Behind, Return to the Sewers, Swat Away, Lost Days), and
-  `effect:excess-damage-amount` at 11 — "the excess damage dealt this way" as an amount (rule
-  120.4a's lethal damage; Archaic's Agony, Razor Rings, Rhino's Rampage, …)
+  library (Trickster's Stratagem, Run Behind, Return to the Sewers, Swat Away, Lost Days). Excess
+  damage is built; of its cards, Bolg of the North waits on reading a creature sacrificed as a
+  `may` resolves from its reflexive trigger, Violent Echoes on empower, Fall of Cair Andros on an
+  excess-damage trigger
   (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid

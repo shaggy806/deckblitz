@@ -480,6 +480,7 @@ import _poolArcboundWorker from "./pool/arcbound-worker.js";
 import _poolArchaeologicalDig from "./pool/archaeological-dig.js";
 import _poolArchaeomancer from "./pool/archaeomancer.js";
 import _poolArchaeomender from "./pool/archaeomender.js";
+import _poolArchaicsAgony from "./pool/archaics-agony.js";
 import _poolArchangelOfThune from "./pool/archangel-of-thune.js";
 import _poolArchangel from "./pool/archangel.js";
 import _poolArchenemysCharm from "./pool/archenemys-charm.js";
@@ -4336,6 +4337,7 @@ import _poolGoblinLackey from "./pool/goblin-lackey.js";
 import _poolGoblinMatron from "./pool/goblin-matron.js";
 import _poolGoblinMotivator from "./pool/goblin-motivator.js";
 import _poolGoblinMountaineer from "./pool/goblin-mountaineer.js";
+import _poolGoblinNegotiation from "./pool/goblin-negotiation.js";
 import _poolGoblinOffensive from "./pool/goblin-offensive.js";
 import _poolGoblinOutlander from "./pool/goblin-outlander.js";
 import _poolGoblinPiker from "./pool/goblin-piker.js";
@@ -4832,6 +4834,7 @@ import _poolHeliodsPilgrim from "./pool/heliods-pilgrim.js";
 import _poolHelionaut from "./pool/helionaut.js";
 import _poolHelixPinnacle from "./pool/helix-pinnacle.js";
 import _poolHellSwarm from "./pool/hell-swarm.js";
+import _poolHellToPay from "./pool/hell-to-pay.js";
 import _poolHellcatUndyingVigilante from "./pool/hellcat-undying-vigilante.js";
 import _poolHellkiteCharger from "./pool/hellkite-charger.js";
 import _poolHellkiteCourser from "./pool/hellkite-courser.js";
@@ -8220,6 +8223,7 @@ import _poolRayOfRevelation from "./pool/ray-of-revelation.js";
 import _poolRazakethTheFoulblooded from "./pool/razaketh-the-foulblooded.js";
 import _poolRazakethsRite from "./pool/razakeths-rite.js";
 import _poolRazeTheEffigy from "./pool/raze-the-effigy.js";
+import _poolRazorRings from "./pool/razor-rings.js";
 import _poolRazorSwine from "./pool/razor-swine.js";
 import _poolRazorclawBear from "./pool/razorclaw-bear.js";
 import _poolRazorfieldThresher from "./pool/razorfield-thresher.js";
@@ -8462,6 +8466,7 @@ import _poolReyaDawnbringer from "./pool/reya-dawnbringer.js";
 import _poolReyavMasterSmith from "./pool/reyav-master-smith.js";
 import _poolReyhanLastOfTheAbzan from "./pool/reyhan-last-of-the-abzan.js";
 import _poolRhinoBarrelingBrute from "./pool/rhino-barreling-brute.js";
+import _poolRhinosRampage from "./pool/rhinos-rampage.js";
 import _poolRhonasTheIndomitable from "./pool/rhonas-the-indomitable.js";
 import _poolRhonassMonument from "./pool/rhonass-monument.js";
 import _poolRhovanionRampager from "./pool/rhovanion-rampager.js";
@@ -12240,6 +12245,7 @@ import _poolWindriderPatrol from "./pool/windrider-patrol.js";
 import _poolWindsOfRath from "./pool/winds-of-rath.js";
 import _poolWindseekerCentaur from "./pool/windseeker-centaur.js";
 import _poolWindsweptHeath from "./pool/windswept-heath.js";
+import _poolWindswiftSlice from "./pool/windswift-slice.js";
 import _poolWindurstFederationCenter from "./pool/windurst-federation-center.js";
 import _poolWingCommando from "./pool/wing-commando.js";
 import _poolWingShredder from "./pool/wing-shredder.js";
@@ -13366,6 +13372,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchaeologicalDig,
   _poolArchaeomancer,
   _poolArchaeomender,
+  _poolArchaicsAgony,
   _poolArchangelOfThune,
   _poolArchangel,
   _poolArchenemysCharm,
@@ -17222,6 +17229,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoblinMatron,
   _poolGoblinMotivator,
   _poolGoblinMountaineer,
+  _poolGoblinNegotiation,
   _poolGoblinOffensive,
   _poolGoblinOutlander,
   _poolGoblinPiker,
@@ -17718,6 +17726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHelionaut,
   _poolHelixPinnacle,
   _poolHellSwarm,
+  _poolHellToPay,
   _poolHellcatUndyingVigilante,
   _poolHellkiteCharger,
   _poolHellkiteCourser,
@@ -21106,6 +21115,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRazakethTheFoulblooded,
   _poolRazakethsRite,
   _poolRazeTheEffigy,
+  _poolRazorRings,
   _poolRazorSwine,
   _poolRazorclawBear,
   _poolRazorfieldThresher,
@@ -21348,6 +21358,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReyavMasterSmith,
   _poolReyhanLastOfTheAbzan,
   _poolRhinoBarrelingBrute,
+  _poolRhinosRampage,
   _poolRhonasTheIndomitable,
   _poolRhonassMonument,
   _poolRhovanionRampager,
@@ -25126,6 +25137,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWindsOfRath,
   _poolWindseekerCentaur,
   _poolWindsweptHeath,
+  _poolWindswiftSlice,
   _poolWindurstFederationCenter,
   _poolWingCommando,
   _poolWingShredder,
