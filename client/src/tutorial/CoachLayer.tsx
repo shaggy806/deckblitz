@@ -16,7 +16,7 @@ import {
   stopTour,
   useCoach,
 } from './coach.ts'
-import { blockerRects, centerCard, holeRect, placeCard, sameRect } from './placement.ts'
+import { blockerRects, centerCard, holeRect, placeCard, tiltedRing, unionRect } from './placement.ts'
 import type { Rect } from './placement.ts'
 import { progressStore, setTourAt } from './progress.ts'
 import { SITE_TOUR } from './tours/site.ts'
@@ -42,6 +42,17 @@ function guardRects(selector: string | undefined, none: Rect): Rect[] {
   while (rects.length < 4) rects.push(none)
   return rects
 }
+
+/** A hand card's anchor is its stable hit box (`.hand-card`, App.css), but
+ * what the player sees is its tile, which the fan turns and a hover lifts and
+ * grows: the ring follows the tile, `null` for any other anchor. */
+const turnedTile = (el: Element): HTMLElement | null => {
+  if (!el.matches('.hand-card')) return null
+  const tile = el.querySelector(':scope > .card-tile')
+  return tile instanceof HTMLElement ? tile : null
+}
+
+const rectOf = (r: DOMRect): Rect => ({ left: r.left, top: r.top, width: r.width, height: r.height })
 
 /** The viewport without its scrollbar, which the blockers mustn't cover. */
 const viewport = () => ({ width: document.documentElement.clientWidth, height: document.documentElement.clientHeight })
@@ -170,7 +181,9 @@ function StepView({
   // anchor, and write the ring, the click-catchers and the card.
   useLayoutEffect(() => {
     let raf = 0
-    let lastHole: Rect | null = null
+    // What the ring was last drawn as — its rect and any turn — so the DOM is
+    // rewritten only when something moved.
+    let lastRing: string | null = null
     let missingSince = performance.now()
     let scrolled = false
     let done = false
@@ -198,7 +211,10 @@ function StepView({
       const cardSize = { width: card?.offsetWidth ?? 0, height: card?.offsetHeight ?? 0 }
       const el = onPage && step.anchor !== undefined ? resolveAnchor(step.anchor) : null
       const r = el?.getBoundingClientRect()
-      const hole = r !== undefined && r.width > 0 && r.height > 0 ? holeRect(r, view) : null
+      const tile = el === null ? null : turnedTile(el)
+      // The hole spans the card as drawn, grown on hover, so it can be clicked.
+      const shown = r === undefined ? undefined : tile === null ? rectOf(r) : unionRect(rectOf(r), rectOf(tile.getBoundingClientRect()))
+      const hole = shown !== undefined && shown.width > 0 && shown.height > 0 ? holeRect(shown, view) : null
       anchorEl.current = hole !== null ? el : null
 
       if (onPage && step.anchor === undefined) {
@@ -213,14 +229,44 @@ function StepView({
         }
         missingSince = performance.now()
         show('anchored')
-        if (!sameRect(hole, lastHole)) {
-          lastHole = hole
+        // A turned tile's ring is its own box, turned the same way around the
+        // same origin; anything else's is the hole.
+        const turned =
+          tile !== null && r !== undefined
+            ? (() => {
+                const cs = getComputedStyle(tile)
+                const box = {
+                  left: r.left + tile.offsetLeft,
+                  top: r.top + tile.offsetTop,
+                  width: tile.offsetWidth,
+                  height: tile.offsetHeight,
+                }
+                return { ...tiltedRing(box, cs.transformOrigin), rotate: cs.rotate, translate: cs.translate, scale: cs.scale }
+              })()
+            : null
+        const ringRect = turned?.rect ?? hole
+        const key = JSON.stringify([
+          Math.round(ringRect.left),
+          Math.round(ringRect.top),
+          Math.round(ringRect.width),
+          Math.round(ringRect.height),
+          turned?.origin,
+          turned?.rotate,
+          turned?.translate,
+          turned?.scale,
+        ])
+        if (key !== lastRing) {
+          lastRing = key
           const ring = ringRef.current
           if (ring !== null) {
-            ring.style.left = `${hole.left}px`
-            ring.style.top = `${hole.top}px`
-            ring.style.width = `${hole.width}px`
-            ring.style.height = `${hole.height}px`
+            ring.style.left = `${ringRect.left}px`
+            ring.style.top = `${ringRect.top}px`
+            ring.style.width = `${ringRect.width}px`
+            ring.style.height = `${ringRect.height}px`
+            ring.style.transformOrigin = turned?.origin ?? ''
+            ring.style.rotate = turned !== null && turned.rotate !== 'none' ? turned.rotate : ''
+            ring.style.translate = turned !== null && turned.translate !== 'none' ? turned.translate : ''
+            ring.style.scale = turned !== null && turned.scale !== 'none' ? turned.scale : ''
           }
         }
         // Rewritten every frame, not only when the hole moved: a resize
@@ -243,7 +289,7 @@ function StepView({
         })
         placeCardAt(placeCard(hole, cardSize, view, step.placement))
       } else {
-        lastHole = null
+        lastRing = null
         if (performance.now() - missingSince > WAIT_NOTICE_MS) {
           show('waiting')
           placeCardAt(centerCard(cardSize, view))

@@ -145,3 +145,31 @@ export function sameRect(a: Rect | null, b: Rect | null): boolean {
     Math.round(a.height) === Math.round(b.height)
   )
 }
+
+/** The smallest rect holding both. */
+export function unionRect(a: Rect, b: Rect): Rect {
+  const left = Math.min(a.left, b.left)
+  const top = Math.min(a.top, b.top)
+  const right = Math.max(a.left + a.width, b.left + b.width)
+  const bottom = Math.max(a.top + a.height, b.top + b.height)
+  return { left, top, width: right - left, height: bottom - top }
+}
+
+/**
+ * The ring around a turned or grown element — a hand card's tile, which the
+ * fan rotates and a hover lifts and scales (App.css's `.hand-cards
+ * .card-tile`): the element's untransformed `box` padded by `pad`, and the
+ * transform origin to turn it around, `origin` (the element's own computed
+ * `transform-origin`, "60px 168px") moved by the padding, so the same
+ * rotate / translate / scale lays the ring over the card as drawn.
+ */
+export function tiltedRing(box: Rect, origin: string, pad: number = HOLE_PAD): { rect: Rect; origin: string } {
+  const [x = box.width / 2, y = box.height / 2] = origin
+    .split(/\s+/)
+    .map((part) => Number.parseFloat(part))
+    .filter((n) => Number.isFinite(n))
+  return {
+    rect: { left: box.left - pad, top: box.top - pad, width: box.width + 2 * pad, height: box.height + 2 * pad },
+    origin: `${x + pad}px ${y + pad}px`,
+  }
+}

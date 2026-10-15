@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
+  tiltedRing,
+  unionRect,
   CARD_GAP,
   SCREEN_MARGIN,
   blockerRects,
@@ -126,5 +128,28 @@ describe('sameRect', () => {
     expect(sameRect({ left: 1, top: 2, width: 3, height: 4 }, { left: 2, top: 2, width: 3, height: 4 })).toBe(false)
     expect(sameRect(null, null)).toBe(true)
     expect(sameRect(null, { left: 0, top: 0, width: 0, height: 0 })).toBe(false)
+  })
+})
+
+describe('tiltedRing', () => {
+  it('pads the untransformed box and moves the origin by the padding', () => {
+    const ring = tiltedRing({ left: 100, top: 200, width: 120, height: 168 }, '60px 168px', 6)
+    expect(ring.rect).toEqual({ left: 94, top: 194, width: 132, height: 180 })
+    expect(ring.origin).toBe('66px 174px')
+  })
+
+  it('falls back to the centre for an unreadable origin', () => {
+    expect(tiltedRing({ left: 0, top: 0, width: 10, height: 20 }, 'center', 0).origin).toBe('5px 10px')
+  })
+})
+
+describe('unionRect', () => {
+  it('holds both rects', () => {
+    expect(unionRect({ left: 10, top: 20, width: 30, height: 40 }, { left: 0, top: 50, width: 20, height: 30 })).toEqual({
+      left: 0,
+      top: 20,
+      width: 40,
+      height: 60,
+    })
   })
 })
