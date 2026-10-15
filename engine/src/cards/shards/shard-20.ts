@@ -222,6 +222,7 @@ import _poolMentalJourney from "../pool/mental-journey.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
 import _poolMillikin from "../pool/millikin.js";
+import _poolMindTransferProtocol from "../pool/mind-transfer-protocol.js";
 import _poolMindspliceApparatus from "../pool/mindsplice-apparatus.js";
 import _poolMirageMesa from "../pool/mirage-mesa.js";
 import _poolMirriCatWarrior from "../pool/mirri-cat-warrior.js";
@@ -404,6 +405,7 @@ import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
+import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
@@ -661,6 +663,7 @@ const shard: CardShard = {
     _poolMerfolkTraders,
     _poolMerrowCommerce,
     _poolMillikin,
+    _poolMindTransferProtocol,
     _poolMindspliceApparatus,
     _poolMirageMesa,
     _poolMirriCatWarrior,
@@ -843,6 +846,7 @@ const shard: CardShard = {
     _poolUtromMonitor,
     _poolValentinaAllegraDeFontaine,
     _poolVeloheartBike,
+    _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVileMutilator,
     _poolViridianAcolyte,

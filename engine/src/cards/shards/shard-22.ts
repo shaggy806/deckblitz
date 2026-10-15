@@ -117,6 +117,7 @@ import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
+import _poolFootNinjas from "../pool/foot-ninjas.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
@@ -518,6 +519,7 @@ const shard: CardShard = {
     _poolFlickerOfFate,
     _poolFlowstoneShambler,
     _poolFontOfVigor,
+    _poolFootNinjas,
     _poolFountainport,
     _poolFrontlineSage,
     _poolFulminatorMage,

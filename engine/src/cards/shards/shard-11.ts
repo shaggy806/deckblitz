@@ -182,6 +182,7 @@ import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
 import _poolJadeMage from "../pool/jade-mage.js";
 import _poolJayasGreeting from "../pool/jayas-greeting.js";
+import _poolJennikasTechnique from "../pool/jennikas-technique.js";
 import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
 import _poolJinSakaiGhostOfTsushima from "../pool/jin-sakai-ghost-of-tsushima.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
@@ -249,6 +250,7 @@ import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
 import _poolOuroboroid from "../pool/ouroboroid.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
+import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
@@ -371,6 +373,7 @@ import _poolTetsukoUmezawaFugitive from "../pool/tetsuko-umezawa-fugitive.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
+import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
@@ -618,6 +621,7 @@ const shard: CardShard = {
     _poolJacesScrutiny,
     _poolJadeMage,
     _poolJayasGreeting,
+    _poolJennikasTechnique,
     _poolJhoirasFamiliar,
     _poolJinSakaiGhostOfTsushima,
     _poolJusticiarsPortal,
@@ -685,6 +689,7 @@ const shard: CardShard = {
     _poolOuroboroid,
     _poolParadiseMantle,
     _poolParadoxShaper,
+    _poolParameciaColoniex,
     _poolPearlEarImperialAdvisor,
     _poolPelakkaWurm,
     _poolPerennialBehemoth,
@@ -807,6 +812,7 @@ const shard: CardShard = {
     _poolThaliaHereticCathar,
     _poolThatsRoughBuddy,
     _poolTheBeamtownBullies,
+    _poolTheNeutrinos,
     _poolTheThingBenGrimm,
     _poolThornscapeApprentice,
     _poolThunderfootBaloth,

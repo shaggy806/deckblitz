@@ -6136,6 +6136,30 @@
   "zone:impulse-exile-instead": {
    "family": "zone:impulse-permission-options",
    "example": "Nita, Forum Conciliator: Nita, Forum Conciliator: a cast permission (exile mayCast / impulse) whose spell is exiled instead of going to a graveyard ('If that spell would be put into a graveyard, exile it instead'), like cast-now's exileAfter."
+  },
+  "stat:card-types-among-spells-cast-this-turn": {
+   "family": "stat:spells-cast-this-turn-record",
+   "example": "April O'Neil, Hacktivist: An amount counting the card types among the spells a player cast this turn, each type once, read off spellsCastThisTurnAs (April O'Neil, Hacktivist)."
+  },
+  "effect:this-way-gained-control": {
+   "family": "effect:this-way-results",
+   "example": "Broadcast Takeover: A ThisWayKind for the permanents a gain-control / gain-control-all changed control of, so a following 'Untap them. They gain haste' reaches exactly those (Broadcast Takeover)."
+  },
+  "effect:put-into-hand-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Courier of Comestibles: A this-way kind for cards the resolution put into a hand (from a library search), so 'if you don't put a card into your hand this way' covers both declining the search and failing to find (Courier of Comestibles)."
+  },
+  "effect:next-spell-cost-reduction": {
+   "family": "effect:temporary-player-effect",
+   "example": "Don & Raph, Hard Science: 'The next [filter] spell you cast this turn costs less / has affinity for [X]': a cost reduction used up by the next matching spell, instances cumulative (Don & Raph, Hard Science); player-effect reduceSpells covers every spell for the turn."
+  },
+  "effect:aggregate-all-counters-for-target": {
+   "family": "effect:amount-aggregate",
+   "example": "Ferrafor, Young Yew: A sum of every counter of every kind among permanents matching a filter, read from a target player's side — 'the number of counters among creatures target player controls' (Ferrafor, Young Yew): AggregateOf counts one named kind and AggregateSpec has no forTarget."
+  },
+  "effect:mass-bounce-except-source": {
+   "family": "effect:target-other-than-source",
+   "example": "Renet, Temporal Apprentice: return-to-hand-all with an exceptSource ('return each other nonland permanent that entered this turn' — Renet, Temporal Apprentice); the bounce sibling of effect:destroy-all-except-source."
   }
  }
 }

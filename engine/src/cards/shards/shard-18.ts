@@ -21,6 +21,7 @@ import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
+import _poolBelonging from "../pool/belonging.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
@@ -390,6 +391,7 @@ import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
 import _poolZodiacRat from "../pool/zodiac-rat.js";
+import _poolZooEscapees from "../pool/zoo-escapees.js";
 import _tokensAllyToken from "../tokens/ally-token.js";
 import _tokensBloodToken from "../tokens/blood-token.js";
 import _tokensCatTokenJolraelMwonvuliRecluse from "../tokens/cat-token-jolrael-mwonvuli-recluse.js";
@@ -429,6 +431,7 @@ const shard: CardShard = {
     _poolBarbedBattlegear,
     _poolBebopRocksteady,
     _poolBedevil,
+    _poolBelonging,
     _poolBighornerRancher,
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
@@ -798,6 +801,7 @@ const shard: CardShard = {
     _poolZaxaraTheExemplary,
     _poolZimoneAndDina,
     _poolZodiacRat,
+    _poolZooEscapees,
   ],
   tokens: [
     _tokensAllyToken,

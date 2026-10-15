@@ -177,6 +177,7 @@ import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
+import _poolKaraisTechnique from "../pool/karais-technique.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
 import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
@@ -267,6 +268,7 @@ import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
 import _poolRiverBoa from "../pool/river-boa.js";
+import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
@@ -322,6 +324,7 @@ import _poolSyncopate from "../pool/syncopate.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
+import _poolTenderize from "../pool/tenderize.js";
 import _poolTenementCrasher from "../pool/tenement-crasher.js";
 import _poolTenthDistrictGuard from "../pool/tenth-district-guard.js";
 import _poolTerrainElemental from "../pool/terrain-elemental.js";
@@ -558,6 +561,7 @@ const shard: CardShard = {
     _poolJhovallQueen,
     _poolJillShivasDominant,
     _poolJungleHollow,
+    _poolKaraisTechnique,
     _poolKeeperOfFables,
     _poolKetramoseTheNewDawn,
     _poolKetriaTriome,
@@ -648,6 +652,7 @@ const shard: CardShard = {
     _poolRestlessBivouac,
     _poolReunionOfTheHouse,
     _poolRiverBoa,
+    _poolRockSoldiers,
     _poolRoilCartographer,
     _poolRuneboggle,
     _poolRushOfAdrenaline,
@@ -703,6 +708,7 @@ const shard: CardShard = {
     _poolTalismanOfCreativity,
     _poolTangleSpider,
     _poolTemporalEddy,
+    _poolTenderize,
     _poolTenementCrasher,
     _poolTenthDistrictGuard,
     _poolTerrainElemental,

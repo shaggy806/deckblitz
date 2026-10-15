@@ -137,6 +137,7 @@ import _poolFleshToDust from "../pool/flesh-to-dust.js";
 import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
 import _poolFlowstoneWall from "../pool/flowstone-wall.js";
+import _poolFootElite from "../pool/foot-elite.js";
 import _poolForestBear from "../pool/forest-bear.js";
 import _poolFortifiedRampart from "../pool/fortified-rampart.js";
 import _poolFrenziedArynx from "../pool/frenzied-arynx.js";
@@ -237,6 +238,7 @@ import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
+import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
 import _poolMutantTown from "../pool/mutant-town.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
@@ -363,6 +365,7 @@ import _poolWeakness from "../pool/weakness.js";
 import _poolWhirlerRogue from "../pool/whirler-rogue.js";
 import _poolWhisperingWizard from "../pool/whispering-wizard.js";
 import _poolWhitesunsPassage from "../pool/whitesuns-passage.js";
+import _poolWickersmithsTools from "../pool/wickersmiths-tools.js";
 import _poolWindreaderSphinx from "../pool/windreader-sphinx.js";
 import _poolWingedBoots from "../pool/winged-boots.js";
 import _poolWingedShepherd from "../pool/winged-shepherd.js";
@@ -522,6 +525,7 @@ const shard: CardShard = {
     _poolFloraColossus,
     _poolFlowstoneCrusher,
     _poolFlowstoneWall,
+    _poolFootElite,
     _poolForestBear,
     _poolFortifiedRampart,
     _poolFrenziedArynx,
@@ -622,6 +626,7 @@ const shard: CardShard = {
     _poolMonkRealist,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
+    _poolMutantChainReaction,
     _poolMutantTown,
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
@@ -748,6 +753,7 @@ const shard: CardShard = {
     _poolWhirlerRogue,
     _poolWhisperingWizard,
     _poolWhitesunsPassage,
+    _poolWickersmithsTools,
     _poolWindreaderSphinx,
     _poolWingedBoots,
     _poolWingedShepherd,

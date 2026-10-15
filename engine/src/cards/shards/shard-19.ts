@@ -277,6 +277,7 @@ import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
+import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
@@ -698,6 +699,7 @@ const shard: CardShard = {
     _poolProsperousPirates,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
+    _poolRagamuffinRaptor,
     _poolRaiseDead,
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,

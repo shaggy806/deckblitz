@@ -396,6 +396,7 @@ import _poolWhipSilk from "../pool/whip-silk.js";
 import _poolWildOx from "../pool/wild-ox.js";
 import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
+import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
 import _poolWitherbloomApprentice from "../pool/witherbloom-apprentice.js";
 import _poolWorldlyTutor from "../pool/worldly-tutor.js";
@@ -815,6 +816,7 @@ const shard: CardShard = {
     _poolWildOx,
     _poolWildfireEmissary,
     _poolWindSpirit,
+    _poolWingnutBatOnTheBelfry,
     _poolWitchOfTheMoors,
     _poolWitherbloomApprentice,
     _poolWorldlyTutor,

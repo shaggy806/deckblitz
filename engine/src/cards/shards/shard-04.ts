@@ -241,6 +241,7 @@ import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
 import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
+import _poolPucasCovenant from "../pool/pucas-covenant.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
@@ -297,6 +298,7 @@ import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
+import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
@@ -635,6 +637,7 @@ const shard: CardShard = {
     _poolPropheticPrism,
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
+    _poolPucasCovenant,
     _poolPutridLeech,
     _poolPyreticRitual,
     _poolQuandrixCampus,
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolSparringMummy,
     _poolSpectralDenial,
     _poolSpellweaverEternal,
+    _poolSpicyOatmealPizza,
     _poolSpiderBot,
     _poolSpiderManToTheRescue,
     _poolSpitFlame,

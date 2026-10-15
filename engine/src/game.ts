@@ -30475,6 +30475,12 @@ export class Game {
     // A phased-out permanent can't be affected by anything (rule 702.26b):
     // it goes nowhere until it phases in.
     if (object.zone === "phased-out") return false;
+    // A token that has left the battlefield can't move to another zone or
+    // come back onto it (rule 111.8): it stays where it is until state-based
+    // actions end it (111.7). Tokens are minted straight onto the battlefield,
+    // never through here; a copy of a permanent spell is a token on the stack
+    // that has never been on the battlefield, and resolves onto it (707.10f).
+    if (object.isToken && object.zone !== "battlefield" && object.zone !== "stack") return false;
     // An instant or sorcery card that would enter the battlefield stays where
     // it was (rule 400.4a).
     if (to === "battlefield" && object.zone !== "battlefield") {

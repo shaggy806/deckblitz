@@ -105,6 +105,7 @@ import _poolDreadwing from "../pool/dreadwing.js";
 import _poolDunesOfTheDead from "../pool/dunes-of-the-dead.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
+import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolErode from "../pool/erode.js";
@@ -155,6 +156,7 @@ import _poolHexhavenInvigorator from "../pool/hexhaven-invigorator.js";
 import _poolHexingSquelcher from "../pool/hexing-squelcher.js";
 import _poolHiddenGrotto from "../pool/hidden-grotto.js";
 import _poolHiddenHerbalists from "../pool/hidden-herbalists.js";
+import _poolHighFlyingAce from "../pool/high-flying-ace.js";
 import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
@@ -480,6 +482,7 @@ const shard: CardShard = {
     _poolDunesOfTheDead,
     _poolEarthbendingLesson,
     _poolEclipsedBoggart,
+    _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
     _poolElvishVisionary,
     _poolErode,
@@ -530,6 +533,7 @@ const shard: CardShard = {
     _poolHexingSquelcher,
     _poolHiddenGrotto,
     _poolHiddenHerbalists,
+    _poolHighFlyingAce,
     _poolHiveStirrings,
     _poolHollowmurkSiege,
     _poolHondenOfLifesWeb,

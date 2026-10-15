@@ -72,6 +72,7 @@ import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
+import _poolCrustaceanCommando from "../pool/crustacean-commando.js";
 import _poolCrypticCommand from "../pool/cryptic-command.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
@@ -469,6 +470,7 @@ const shard: CardShard = {
     _poolCrackTheEarth,
     _poolCraterclawColossus,
     _poolCrumbAndGetIt,
+    _poolCrustaceanCommando,
     _poolCrypticCommand,
     _poolCultivatorsCaravan,
     _poolCuriosity,

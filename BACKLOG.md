@@ -74,10 +74,11 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Teenage Mutant Ninja
-  Turtles (TMT, 69 left) back to Bloomburrow, about 1,100 cards (`npm run cards:sets -w engine
-  -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit, both Marvel Super
-  Heroes sets and both Secrets of Strixhaven sets are whole) — then
+  ranked ones first. **First, the rest of the sets already walked** — Lorwyn Eclipsed (ECL,
+  100 left) back to Bloomburrow, about 1,050 cards (`npm run cards:sets -w engine -- --sets
+  30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit, both Marvel Super Heroes sets,
+  both Secrets of Strixhaven sets, Teenage Mutant Ninja Turtles and Lorwyn Eclipsed Commander
+  are whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or

@@ -206,6 +206,7 @@ import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
+import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
@@ -231,6 +232,7 @@ import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
 import _poolMessengerFalcons from "../pool/messenger-falcons.js";
+import _poolMetalhead from "../pool/metalhead.js";
 import _poolMetastaticEvangel from "../pool/metastatic-evangel.js";
 import _poolMetropolisSprite from "../pool/metropolis-sprite.js";
 import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
@@ -251,6 +253,7 @@ import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
+import _poolNobody from "../pool/nobody.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
@@ -602,6 +605,7 @@ const shard: CardShard = {
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKonstrariImproviser,
+    _poolKoyaDeathFromAbove,
     _poolLaeliaTheBladeReforged,
     _poolLaunchParty,
     _poolLavaglidePathway,
@@ -627,6 +631,7 @@ const shard: CardShard = {
     _poolMeditationPools,
     _poolMeldedMoxite,
     _poolMessengerFalcons,
+    _poolMetalhead,
     _poolMetastaticEvangel,
     _poolMetropolisSprite,
     _poolMikaeusTheLunarch,
@@ -647,6 +652,7 @@ const shard: CardShard = {
     _poolNayaBattlemage,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
+    _poolNobody,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
     _poolOfferImmortality,

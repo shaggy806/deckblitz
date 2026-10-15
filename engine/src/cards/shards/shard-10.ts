@@ -60,6 +60,7 @@ import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
+import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
@@ -213,6 +214,7 @@ import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
+import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
@@ -464,6 +466,7 @@ const shard: CardShard = {
     _poolBurstOfEnergy,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
+    _poolCaseyJonesVigilante,
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
     _poolChangelingWayfinder,
@@ -617,6 +620,7 @@ const shard: CardShard = {
     _poolMoonHeron,
     _poolMoonsilverKey,
     _poolMoorFiend,
+    _poolMouserMarkIii,
     _poolMulch,
     _poolNantukoShade,
     _poolNastyLittleRabbit,

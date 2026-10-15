@@ -29,6 +29,7 @@ import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
+import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
@@ -328,6 +329,7 @@ import _poolTragicPoet from "../pool/tragic-poet.js";
 import _poolTraumatize from "../pool/traumatize.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
+import _poolTunnelRats from "../pool/tunnel-rats.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
@@ -407,6 +409,7 @@ const shard: CardShard = {
     _poolBattleHymn,
     _poolBeastWhisperer,
     _poolBellowsLizard,
+    _poolBespokeBo,
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBloodtracker,
@@ -706,6 +709,7 @@ const shard: CardShard = {
     _poolTraumatize,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
+    _poolTunnelRats,
     _poolTurbulentShore,
     _poolTwiceTheRage,
     _poolTwilightPanther,

@@ -269,6 +269,7 @@ import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
 import _poolRockalanche from "../pool/rockalanche.js";
+import _poolRocksteadyCrashCourser from "../pool/rocksteady-crash-courser.js";
 import _poolRoostSeek from "../pool/roost-seek.js";
 import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
@@ -668,6 +669,7 @@ const shard: CardShard = {
     _poolRingwardenOwl,
     _poolRobeOfMirrors,
     _poolRockalanche,
+    _poolRocksteadyCrashCourser,
     _poolRoostSeek,
     _poolRootKinAlly,
     _poolRootbreakerWurm,

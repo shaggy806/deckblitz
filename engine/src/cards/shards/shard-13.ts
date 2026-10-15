@@ -21,6 +21,7 @@ import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
 import _poolAngelOfInvention from "../pool/angel-of-invention.js";
 import _poolAngelicSkirmisher from "../pool/angelic-skirmisher.js";
+import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
 import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
@@ -99,6 +100,7 @@ import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
 import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
+import _poolDimensionalExile from "../pool/dimensional-exile.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
@@ -362,6 +364,7 @@ import _poolUltimateNullification from "../pool/ultimate-nullification.js";
 import _poolUlvenwaldHydra from "../pool/ulvenwald-hydra.js";
 import _poolUnhinge from "../pool/unhinge.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
+import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
@@ -426,6 +429,7 @@ const shard: CardShard = {
     _poolAncientGreenwarden,
     _poolAngelOfInvention,
     _poolAngelicSkirmisher,
+    _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArcaneSignet,
     _poolArchghoulOfThraben,
@@ -504,6 +508,7 @@ const shard: CardShard = {
     _poolDesperateLunge,
     _poolDestroyEvil,
     _poolDiabolicEdict,
+    _poolDimensionalExile,
     _poolDivergentEquation,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
@@ -767,6 +772,7 @@ const shard: CardShard = {
     _poolUlvenwaldHydra,
     _poolUnhinge,
     _poolUnswervingSloth,
+    _poolUtromScientists,
     _poolValiantGuard,
     _poolVengeance,
     _poolVengefulRebel,

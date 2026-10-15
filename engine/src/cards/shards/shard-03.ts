@@ -113,6 +113,7 @@ import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
+import _poolGoNinjaGo from "../pool/go-ninja-go.js";
 import _poolGoShintaiOfBoundlessVigor from "../pool/go-shintai-of-boundless-vigor.js";
 import _poolGoblinCannon from "../pool/goblin-cannon.js";
 import _poolGoblinTunneler from "../pool/goblin-tunneler.js";
@@ -271,6 +272,7 @@ import _poolSkullbriarTheWalkingGrave from "../pool/skullbriar-the-walking-grave
 import _poolSkulltap from "../pool/skulltap.js";
 import _poolSkylinePredator from "../pool/skyline-predator.js";
 import _poolSleightOfHand from "../pool/sleight-of-hand.js";
+import _poolSlitheringCryptid from "../pool/slithering-cryptid.js";
 import _poolSmokebraider from "../pool/smokebraider.js";
 import _poolSolemnOffering from "../pool/solemn-offering.js";
 import _poolSoulOfTheRapids from "../pool/soul-of-the-rapids.js";
@@ -485,6 +487,7 @@ const shard: CardShard = {
     _poolGlissasCourier,
     _poolGloinTheMighty,
     _poolGnawingVermin,
+    _poolGoNinjaGo,
     _poolGoShintaiOfBoundlessVigor,
     _poolGoblinCannon,
     _poolGoblinTunneler,
@@ -643,6 +646,7 @@ const shard: CardShard = {
     _poolSkulltap,
     _poolSkylinePredator,
     _poolSleightOfHand,
+    _poolSlitheringCryptid,
     _poolSmokebraider,
     _poolSolemnOffering,
     _poolSoulOfTheRapids,

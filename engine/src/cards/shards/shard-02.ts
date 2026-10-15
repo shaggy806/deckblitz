@@ -211,6 +211,7 @@ import _poolMemorialToWar from "../pool/memorial-to-war.js";
 import _poolMetallurgicSummonings from "../pool/metallurgic-summonings.js";
 import _poolMicaReaderOfRuins from "../pool/mica-reader-of-ruins.js";
 import _poolMidnightCharm from "../pool/midnight-charm.js";
+import _poolMightyMutanimals from "../pool/mighty-mutanimals.js";
 import _poolMindSpring from "../pool/mind-spring.js";
 import _poolMishrasOnslaught from "../pool/mishras-onslaught.js";
 import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
@@ -595,6 +596,7 @@ const shard: CardShard = {
     _poolMetallurgicSummonings,
     _poolMicaReaderOfRuins,
     _poolMidnightCharm,
+    _poolMightyMutanimals,
     _poolMindSpring,
     _poolMishrasOnslaught,
     _poolMistbladeShinobi,

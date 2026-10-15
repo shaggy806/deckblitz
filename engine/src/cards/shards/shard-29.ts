@@ -188,6 +188,7 @@ import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dra
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
 import _poolMalakirBloodwitch from "../pool/malakir-bloodwitch.js";
+import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
@@ -330,6 +331,7 @@ import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
+import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
@@ -569,6 +571,7 @@ const shard: CardShard = {
     _poolMagesGuile,
     _poolMagmaticForce,
     _poolMalakirBloodwitch,
+    _poolManholeMissile,
     _poolManorGate,
     _poolMantisEngine,
     _poolMechanAssembler,
@@ -711,6 +714,7 @@ const shard: CardShard = {
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolTuknirDeathlock,
+    _poolTurtlePower,
     _poolTwinbladeAssassins,
     _poolTymnaTheWeaver,
     _poolUSAgentJohnWalker,

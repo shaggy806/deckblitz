@@ -48,6 +48,7 @@ import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
+import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolChandler from "../pool/chandler.js";
@@ -112,6 +113,7 @@ import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
 import _poolGeistflame from "../pool/geistflame.js";
+import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
@@ -127,6 +129,7 @@ import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
 import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
+import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
@@ -422,6 +425,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCampusComposer,
     _poolCanyonJerboa,
+    _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
     _poolChandler,
@@ -486,6 +490,7 @@ const shard: CardShard = {
     _poolFynnTheFangbearer,
     _poolGearseekerSerpent,
     _poolGeistflame,
+    _poolGeneralTraagHeartOfStone,
     _poolGerrardsBattleCry,
     _poolGetThePoint,
     _poolGhyrsonStarnKelermorph,
@@ -501,6 +506,7 @@ const shard: CardShard = {
     _poolGreatSableStag,
     _poolGreed,
     _poolGriffinProtector,
+    _poolGroundedForLife,
     _poolGutterSkulk,
     _poolHaakonStromgaldScourge,
     _poolHarbingerOfTheHunt,

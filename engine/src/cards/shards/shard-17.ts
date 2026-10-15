@@ -157,6 +157,7 @@ import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
+import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
@@ -390,6 +391,7 @@ import _tokensGriffinToken from "../tokens/griffin-token.js";
 import _tokensKnightToken from "../tokens/knight-token.js";
 import _tokensMoloidToken from "../tokens/moloid-token.js";
 import _tokensRedSpiritTokenMenace from "../tokens/red-spirit-token-menace.js";
+import _tokensScarecrowToken from "../tokens/scarecrow-token.js";
 import _tokensSpiritTokenAnafenzaUnyieldingLineage from "../tokens/spirit-token-anafenza-unyielding-lineage.js";
 import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-flying-haste.js";
 
@@ -549,6 +551,7 @@ const shard: CardShard = {
     _poolHeadlessHorseman,
     _poolHeatedArgument,
     _poolHedgeMaze,
+    _poolHenchbots,
     _poolHeraldOfKozilek,
     _poolHighspireBellRinger,
     _poolHollowDogs,
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _tokensKnightToken,
     _tokensMoloidToken,
     _tokensRedSpiritTokenMenace,
+    _tokensScarecrowToken,
     _tokensSpiritTokenAnafenzaUnyieldingLineage,
     _tokensXXElementalTokenFlyingHaste,
   ],

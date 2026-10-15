@@ -1,0 +1,538 @@
+{
+ "batch": "B77",
+ "status": "complete",
+ "ranks": "Teenage Mutant Ninja Turtles (TMT, 2026-03-06): the rest of the set; Lorwyn Eclipsed Commander (ECC, 2026-01-23): the rest of the set",
+ "authored": [
+  {
+   "name": "April, Reporter of the Weird",
+   "files": [
+    "engine/src/cards/pool/april-reporter-of-the-weird.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bebop, Warthog Warrior",
+   "files": [
+    "engine/src/cards/pool/bebop-warthog-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Belonging",
+   "files": [
+    "engine/src/cards/pool/belonging.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bespoke Bō",
+   "files": [
+    "engine/src/cards/pool/bespoke-bo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Casey Jones, Jury-Rig Justiciar",
+   "files": [
+    "engine/src/cards/pool/casey-jones-jury-rig-justiciar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Casey Jones, Vigilante",
+   "files": [
+    "engine/src/cards/pool/casey-jones-vigilante.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cowabunga!",
+   "files": [
+    "engine/src/cards/pool/cowabunga.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crustacean Commando",
+   "files": [
+    "engine/src/cards/pool/crustacean-commando.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dimensional Exile",
+   "files": [
+    "engine/src/cards/pool/dimensional-exile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Donatello, Turtle Techie",
+   "files": [
+    "engine/src/cards/pool/donatello-turtle-techie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elemental Spectacle",
+   "files": [
+    "engine/src/cards/pool/elemental-spectacle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foot Elite",
+   "files": [
+    "engine/src/cards/pool/foot-elite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foot Ninjas",
+   "files": [
+    "engine/src/cards/pool/foot-ninjas.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "General Traag, Heart of Stone",
+   "files": [
+    "engine/src/cards/pool/general-traag-heart-of-stone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Go Ninja Go",
+   "files": [
+    "engine/src/cards/pool/go-ninja-go.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grounded for Life",
+   "files": [
+    "engine/src/cards/pool/grounded-for-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Henchbots",
+   "files": [
+    "engine/src/cards/pool/henchbots.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High-Flying Ace",
+   "files": [
+    "engine/src/cards/pool/high-flying-ace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ice Cream Kitty",
+   "files": [
+    "engine/src/cards/pool/ice-cream-kitty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jennika's Technique",
+   "files": [
+    "engine/src/cards/pool/jennikas-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jennika, Bad Apple Big Sister",
+   "files": [
+    "engine/src/cards/pool/jennika-bad-apple-big-sister.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Karai's Technique",
+   "files": [
+    "engine/src/cards/pool/karais-technique.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Koya, Death from Above",
+   "files": [
+    "engine/src/cards/pool/koya-death-from-above.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leonardo, Leader in Blue",
+   "files": [
+    "engine/src/cards/pool/leonardo-leader-in-blue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manhole Missile",
+   "files": [
+    "engine/src/cards/pool/manhole-missile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metalhead",
+   "files": [
+    "engine/src/cards/pool/metalhead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mighty Mutanimals",
+   "files": [
+    "engine/src/cards/pool/mighty-mutanimals.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mind Transfer Protocol",
+   "files": [
+    "engine/src/cards/pool/mind-transfer-protocol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mouser Foundry",
+   "files": [
+    "engine/src/cards/pool/mouser-foundry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mouser Mark III",
+   "files": [
+    "engine/src/cards/pool/mouser-mark-iii.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutant Chain Reaction",
+   "files": [
+    "engine/src/cards/pool/mutant-chain-reaction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nobody",
+   "files": [
+    "engine/src/cards/pool/nobody.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old Hob, Alleycat Blues",
+   "files": [
+    "engine/src/cards/pool/old-hob-alleycat-blues.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paramecia Coloniex",
+   "files": [
+    "engine/src/cards/pool/paramecia-coloniex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puca's Covenant",
+   "files": [
+    "engine/src/cards/pool/pucas-covenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purple Dragon Punks",
+   "files": [
+    "engine/src/cards/pool/purple-dragon-punks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ragamuffin Raptor",
+   "files": [
+    "engine/src/cards/pool/ragamuffin-raptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rock Soldiers",
+   "files": [
+    "engine/src/cards/pool/rock-soldiers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rocksteady, Crash Courser",
+   "files": [
+    "engine/src/cards/pool/rocksteady-crash-courser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shredder's Armor",
+   "files": [
+    "engine/src/cards/pool/shredders-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slithering Cryptid",
+   "files": [
+    "engine/src/cards/pool/slithering-cryptid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spicy Oatmeal Pizza",
+   "files": [
+    "engine/src/cards/pool/spicy-oatmeal-pizza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenderize",
+   "files": [
+    "engine/src/cards/pool/tenderize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Neutrinos",
+   "files": [
+    "engine/src/cards/pool/the-neutrinos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tokka & Rahzar, Terrible Twos",
+   "files": [
+    "engine/src/cards/pool/tokka-rahzar-terrible-twos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tunnel Rats",
+   "files": [
+    "engine/src/cards/pool/tunnel-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turtle Blimp",
+   "files": [
+    "engine/src/cards/pool/turtle-blimp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Turtle Power!",
+   "files": [
+    "engine/src/cards/pool/turtle-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Utrom Scientists",
+   "files": [
+    "engine/src/cards/pool/utrom-scientists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venus, Torn Between Worlds",
+   "files": [
+    "engine/src/cards/pool/venus-torn-between-worlds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wickersmith's Tools",
+   "files": [
+    "engine/src/cards/pool/wickersmiths-tools.ts",
+    "engine/src/cards/tokens/scarecrow-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingnut, Bat on the Belfry",
+   "files": [
+    "engine/src/cards/pool/wingnut-bat-on-the-belfry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zoo Escapees",
+   "files": [
+    "engine/src/cards/pool/zoo-escapees.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "April O'Neil, Hacktivist",
+   "needs": [
+    "stat:card-types-among-spells-cast-this-turn"
+   ],
+   "why": "\"Draw a card for each card type among spells you've cast this turn\": the castThisTurn amount counts spells or reads their greatest mana value, but can't count the card types among them."
+  },
+  {
+   "name": "Bot Bashing Time",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\": no effect sets up a this-turn die-to-exile replacement on a target (the ruling: for any reason, not only this damage)."
+  },
+  {
+   "name": "Brilliance Unleashed",
+   "needs": [
+    "effect:reanimate-as-animated-creature"
+   ],
+   "why": "Mode 2's \"return it to the battlefield and it's a 3/3 Robot artifact creature with flying\" must hold as it enters; put-onto-battlefield has setTypes/addSubtypes but no added creature type, base P/T or keyword, and animating after it enters would miss creature-enters triggers."
+  },
+  {
+   "name": "Broadcast Takeover",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "\"Untap them. They gain haste\" must reach exactly the artifacts gain-control-all just took; no ThisWayKind or filter names them (an artifact you already controlled would be untapped too), and untapping before the control change is observable through becomes-untapped triggers."
+  },
+  {
+   "name": "Courier of Comestibles",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "\"If you don't put a card into your hand this way, create a Food token\" has to cover both declining the may-search and searching but finding nothing; may's else covers only declining, and there is no this-way kind for cards put into a hand by a search."
+  },
+  {
+   "name": "Don & Raph, Hard Science",
+   "needs": [
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "\"The next noncreature spell you cast this turn has affinity for artifacts\" — player-effect reduceSpells reduces every matching spell for the turn, not only the next one, and nothing grants affinity to just the next spell (stacking per resolution, the ruling)."
+  },
+  {
+   "name": "Eventide's Shadow",
+   "needs": [
+    "effect:remove-counters-any-kind",
+    "effect:counters-removed-this-way"
+   ],
+   "why": "\"Remove any number of counters from among permanents on the battlefield\" (any kinds, anyone's permanents) has no effect — remove-counter takes one kind on one target — and nothing counts the counters removed this way for the draw and life loss."
+  },
+  {
+   "name": "Ferrafor, Young Yew",
+   "needs": [
+    "effect:aggregate-all-counters-for-target"
+   ],
+   "why": "\"Create Saprolings equal to the number of counters among creatures target player controls\": an aggregate sums one counter kind (AggregateOf.counters) and has no forTarget, so every-kind counters among a target player's creatures can't be counted (its {T} double-counters ability alone is authorable)."
+  },
+  {
+   "name": "Kitsune, Dragon's Daughter",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "\"Exchange control of two other target creatures controlled by different players\": there is no exchange-control effect."
+  },
+  {
+   "name": "Michelangelo's Technique",
+   "needs": [
+    "effect:look-and-choose-total-mana-value"
+   ],
+   "why": "\"Put up to two creature cards with total mana value 6 or less from among them onto the battlefield\": look-and-choose has no total-mana-value cap on its picks."
+  },
+  {
+   "name": "Mondo Gecko",
+   "needs": [
+    "keyword:hexproof-from-colors",
+    "effect:set-color-effect",
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "\"Becomes the color of your choice and gains hexproof from that color\" — no color-setting effect, no color choice on resolution, and hexproof from a color isn't modeled."
+  },
+  {
+   "name": "North Wind Avatar",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "\"You may put a card you own from outside the game into your hand\": no sideboard / outside-the-game zone is modeled."
+  },
+  {
+   "name": "Novel Nunchaku",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "The reflexive \"equipped creature fights up to one target creature an opponent controls\": fight's sides are EffectTargetRefs, and none names the creature the source Equipment is attached to (the reflexive ability's own target is only the opponent's creature)."
+  },
+  {
+   "name": "Raphael, Most Attitude",
+   "needs": [
+    "zone:exiled-with-source-play"
+   ],
+   "why": "\"Whenever Raphael attacks, until end of turn, you may play a card exiled with Raphael\": no effect grants a play permission over the cards linked to the source (the alliance exile would need exile-from-library with a link and no permission of its own)."
+  },
+  {
+   "name": "Ray Fillet, Man Ray",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "\"{2}, Remove a +1/+1 counter from a creature you control: Draw a card\" — the removeCounter cost only removes from the source, not from a chosen creature you control."
+  },
+  {
+   "name": "Renet, Temporal Apprentice",
+   "needs": [
+    "effect:mass-bounce-except-source"
+   ],
+   "why": "\"Return each other nonland permanent that entered this turn\" — return-to-hand-all has no exceptSource and CardFilter can't exclude the source, so Renet (which entered this turn) would bounce itself."
+  },
+  {
+   "name": "Retro-Mutation",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "\"Enchanted creature ... loses all abilities\" is an Aura's static, and losing all abilities exists only as an effect modifier (lose-abilities / animate's loseAbilities), not a StaticAbility field; the Turtle type and 0/1 base P/T would be setSubtypes/setBasePt."
+  },
+  {
+   "name": "Return to the Sewers",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target creature's owner puts it on their choice of the top or bottom of their library\": put-on-library takes a fixed position, and nothing hands the top-or-bottom choice to the target's owner (who may be an opponent)."
+  },
+  {
+   "name": "Stomped by the Foot",
+   "needs": [
+    "cost:kicker-nonmana-cost"
+   ],
+   "why": "\"Kicker—Sacrifice an artifact or creature\" — kicker.cost is mana only; no sacrifice kicker."
+  },
+  {
+   "name": "The Last Ronin",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter III, \"Whenever a creature you control attacks alone this turn, ...\": a delayed triggered ability that repeats for the rest of the turn and reaches creatures that arrive later isn't expressible (grant-triggered-all would lock in the current creatures)."
+  },
+  {
+   "name": "Turtles in Time",
+   "needs": [
+    "effect:shuffle-hand-and-graveyard-into-library"
+   ],
+   "why": "\"Each player may shuffle their hand and graveyard into their library, then each player who does draws seven cards\" fits each-player-may with ifDid draw 7, but no effect shuffles a player's hand and graveyard into their library."
+  },
+  {
+   "name": "Uneasy Alliance",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"{5}, Sacrifice this Aura: Exile enchanted creature\" — no EffectTargetRef names the creature the (sacrificed) Aura enchanted."
+  }
+ ]
+}

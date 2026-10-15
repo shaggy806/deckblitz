@@ -28,6 +28,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Teenage Mutant Ninja Turtles and Lorwyn Eclipsed Commander, both whole** (batch 77): 53
+  cards, with a token that has left the battlefield kept from changing zones again (rule 111.8)
+  (2026-10-15).
 - **Secrets of Strixhaven, whole, and increment** (batch 76): 91 cards — the set's 88 and three
   earlier increment cards (Pensive Professor, Topiary Lecturer, Berta, Wise Extrapolator) — with
   increment built (rule 702.191, `increment()`, the scaffolder reads it) and the colours spent on

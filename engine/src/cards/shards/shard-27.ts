@@ -67,6 +67,7 @@ import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
+import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
 import _poolCruelAlliance from "../pool/cruel-alliance.js";
 import _poolCryptRipper from "../pool/crypt-ripper.js";
@@ -214,6 +215,7 @@ import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
+import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
@@ -237,6 +239,7 @@ import _poolPrimordialWurm from "../pool/primordial-wurm.js";
 import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
+import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
@@ -352,6 +355,7 @@ import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
+import _poolTurtleBlimp from "../pool/turtle-blimp.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUnderdarkBasilisk from "../pool/underdark-basilisk.js";
@@ -464,6 +468,7 @@ const shard: CardShard = {
     _poolConsumptiveGoo,
     _poolCorruptEunuchs,
     _poolCourtOfIre,
+    _poolCowabunga,
     _poolCrosissCharm,
     _poolCruelAlliance,
     _poolCryptRipper,
@@ -611,6 +616,7 @@ const shard: CardShard = {
     _poolMonstrosityOfTheLake,
     _poolMoonlitWake,
     _poolMosscoatGoriak,
+    _poolMouserFoundry,
     _poolMultiversalIncursion,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
@@ -634,6 +640,7 @@ const shard: CardShard = {
     _poolPrinceImrahilTheFair,
     _poolPrivilegedPosition,
     _poolProphetOfKruphix,
+    _poolPurpleDragonPunks,
     _poolPyreticPrankster,
     _poolQasaliSlingers,
     _poolQuakeAgentOfSHIELD,
@@ -749,6 +756,7 @@ const shard: CardShard = {
     _poolTrophyMage,
     _poolTrueConviction,
     _poolTrustyMachete,
+    _poolTurtleBlimp,
     _poolTyriteSanctum,
     _poolUltimaWeapon,
     _poolUnderdarkBasilisk,

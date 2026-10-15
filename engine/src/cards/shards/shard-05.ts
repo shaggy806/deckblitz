@@ -179,6 +179,7 @@ import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
+import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
@@ -350,6 +351,7 @@ import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
+import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolHowlingGolem,
     _poolHumblingElder,
     _poolHuntersBow,
+    _poolIceCreamKitty,
     _poolIncarnationTechnique,
     _poolIncubationDruid,
     _poolInfernalTribute,
@@ -749,6 +752,7 @@ const shard: CardShard = {
     _poolTinderFarm,
     _poolTitanOfLittjara,
     _poolTithebearerGiant,
+    _poolTokkaRahzarTerribleTwos,
     _poolTomeRaider,
     _poolTopiaryLecturer,
     _poolTraxosAcademyGuardian,

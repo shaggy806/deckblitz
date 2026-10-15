@@ -28,6 +28,7 @@ import _poolBandage from "../pool/bandage.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
 import _poolBearDown from "../pool/bear-down.js";
+import _poolBebopWarthogWarrior from "../pool/bebop-warthog-warrior.js";
 import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
 import _poolBendersWaterskin from "../pool/benders-waterskin.js";
 import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
@@ -84,6 +85,7 @@ import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
+import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
@@ -412,6 +414,7 @@ const shard: CardShard = {
     _poolBastionOfRemembrance,
     _poolBastionProtector,
     _poolBearDown,
+    _poolBebopWarthogWarrior,
     _poolBejeweledWarg,
     _poolBendersWaterskin,
     _poolBeornReluctantHost,
@@ -468,6 +471,7 @@ const shard: CardShard = {
     _poolDissectionTools,
     _poolDoggedPursuit,
     _poolDonAndresTheRenegade,
+    _poolDonatelloTurtleTechie,
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,

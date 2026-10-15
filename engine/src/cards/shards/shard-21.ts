@@ -169,6 +169,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLensFlare from "../pool/lens-flare.js";
+import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
 import _poolLightningRunner from "../pool/lightning-runner.js";
 import _poolLoomingShade from "../pool/looming-shade.js";
@@ -212,6 +213,7 @@ import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
+import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
 import _poolOrneryTumblewagg from "../pool/ornery-tumblewagg.js";
@@ -269,6 +271,7 @@ import _poolShieldMate from "../pool/shield-mate.js";
 import _poolShieldSphere from "../pool/shield-sphere.js";
 import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
 import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
+import _poolShreddersArmor from "../pool/shredders-armor.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
@@ -530,6 +533,7 @@ const shard: CardShard = {
     _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLensFlare,
+    _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,
     _poolLightningRunner,
     _poolLoomingShade,
@@ -573,6 +577,7 @@ const shard: CardShard = {
     _poolNoxiousRevival,
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
+    _poolOldHobAlleycatBlues,
     _poolOpposition,
     _poolOrazcaRaptor,
     _poolOrneryTumblewagg,
@@ -630,6 +635,7 @@ const shard: CardShard = {
     _poolShieldSphere,
     _poolShigekiJukaiVisionary,
     _poolShinenOfFlightsWings,
+    _poolShreddersArmor,
     _poolSilentAttendant,
     _poolSkyRuinDrake,
     _poolSlashingTiger,
