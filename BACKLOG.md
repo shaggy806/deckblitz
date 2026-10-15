@@ -83,10 +83,9 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Aetherdrift and
-  its Commander set (DFT, DRC, 76 left, next) back to Bloomburrow, about 415 cards (`npm run cards:sets -w engine -- --sets
-  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Tarkir: Dragonstorm is
-  whole) — then
+  ranked ones first. **First, the rest of the sets already walked** — Foundations
+  Jumpstart (J25, 22 left, next) back to Bloomburrow, about 300 cards (`npm run cards:sets -w engine -- --sets
+  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Foundations is whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or

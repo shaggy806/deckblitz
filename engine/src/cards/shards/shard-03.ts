@@ -13,6 +13,7 @@ import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js"
 import _poolAradaraExpress from "../pool/aradara-express.js";
 import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
 import _poolArboreaPegasus from "../pool/arborea-pegasus.js";
+import _poolArcaneEpiphany from "../pool/arcane-epiphany.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
@@ -404,6 +405,7 @@ const shard: CardShard = {
     _poolAradaraExpress,
     _poolAragornAndArwenWed,
     _poolArboreaPegasus,
+    _poolArcaneEpiphany,
     _poolArcboundSlith,
     _poolArchonOfCruelty,
     _poolArmyOfTheDamned,

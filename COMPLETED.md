@@ -28,6 +28,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Aetherdrift, Aetherdrift Commander and Foundations, all whole** (batch 84): 85 cards, with an
+  "ability of a permanent" trigger seeing one whose cost sacrificed its permanent — a fetchland,
+  a Clue (rule 113.7a) — so Harsh Mentor and Runic Armasaur no longer miss them, and Wizened
+  Mentor unblocked (2026-10-15).
 - **Tarkir: Dragonstorm, whole** (batch 83): 79 cards (2026-10-15).
 - **"The damage dealt this way"** (`damageDealtThisWay`, the `damage-dealt-this-way` condition,
   rule 615.1): Sonic Shrieker, The Black Arrow, Elektra, Femme Fatale, Creeping Bloodsucker, and

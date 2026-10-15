@@ -49,6 +49,7 @@ import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
+import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
 import _poolBramblesnap from "../pool/bramblesnap.js";
 import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
@@ -95,6 +96,7 @@ import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
 import _poolDrowned from "../pool/drowned.js";
+import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
@@ -226,6 +228,7 @@ import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
 import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
+import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
@@ -255,6 +258,7 @@ import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
+import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
@@ -463,6 +467,7 @@ const shard: CardShard = {
     _poolBloodKnight,
     _poolBloodbraidChallenger,
     _poolBoarQPine,
+    _poolBoommobile,
     _poolBountyOfMight,
     _poolBramblesnap,
     _poolBreachingDragonstorm,
@@ -509,6 +514,7 @@ const shard: CardShard = {
     _poolDrossRipper,
     _poolDrownInDreams,
     _poolDrowned,
+    _poolEarthrumbler,
     _poolEiganjoDynastorian,
     _poolElminstersSimulacrum,
     _poolElvishPiper,
@@ -640,6 +646,7 @@ const shard: CardShard = {
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
     _poolOonasBlackguard,
+    _poolOozePatrol,
     _poolOrderOfTheEbonHand,
     _poolOvergrownBattlement,
     _poolPacificationArray,
@@ -669,6 +676,7 @@ const shard: CardShard = {
     _poolProtectorOfTheWastes,
     _poolPryingBlade,
     _poolPygmyPyrosaur,
+    _poolQuagFeast,
     _poolQumulox,
     _poolRagingMinotaur,
     _poolRakdosRagemutt,

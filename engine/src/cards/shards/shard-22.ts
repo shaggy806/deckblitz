@@ -113,6 +113,7 @@ import _poolFangrenHunter from "../pool/fangren-hunter.js";
 import _poolFantasticBounce from "../pool/fantastic-bounce.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
+import _poolFelidarSavior from "../pool/felidar-savior.js";
 import _poolFightingDrake from "../pool/fighting-drake.js";
 import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
@@ -302,6 +303,7 @@ import _poolSkitteringSurveyor from "../pool/skittering-surveyor.js";
 import _poolSkycatSovereign from "../pool/skycat-sovereign.js";
 import _poolSlipperyBogle from "../pool/slippery-bogle.js";
 import _poolSlithAscendant from "../pool/slith-ascendant.js";
+import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolFantasticBounce,
     _poolFarseek,
     _poolFearOfImpostors,
+    _poolFelidarSavior,
     _poolFightingDrake,
     _poolFirebirdBlazingRanger,
     _poolFlickerOfFate,
@@ -718,6 +721,7 @@ const shard: CardShard = {
     _poolSkycatSovereign,
     _poolSlipperyBogle,
     _poolSlithAscendant,
+    _poolSlumberingCerberus,
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
     _poolSnowCoveredForest,

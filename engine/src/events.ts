@@ -476,6 +476,11 @@ export type GameEvent =
       /** The ability object it put on the stack — what an `activates-ability`
        * trigger's "that ability" is. Absent for a mana ability. */
       readonly ability?: ObjectId;
+      /** An ability of a permanent on the battlefield, as it was activated —
+       * true even when paying its costs sacrificed that permanent (a
+       * fetchland, a Clue), which a trigger then reads as it last existed
+       * there. Absent for one from a hand, graveyard or the command zone. */
+      readonly ofPermanent?: true;
     })
   | (Base & {
       /**

@@ -164,6 +164,7 @@ import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
 import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
+import _poolHowlersHeavy from "../pool/howlers-heavy.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
 import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
@@ -251,6 +252,7 @@ import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
 import _poolQilinsBlessing from "../pool/qilins-blessing.js";
 import _poolQuaketuskBoar from "../pool/quaketusk-boar.js";
+import _poolQuickDrawKatana from "../pool/quick-draw-katana.js";
 import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
@@ -570,6 +572,7 @@ const shard: CardShard = {
     _poolHithlainKnots,
     _poolHobbitHole,
     _poolHowToStartARiot,
+    _poolHowlersHeavy,
     _poolHulkingBugbear,
     _poolHungryLynx,
     _poolHuntersInsight,
@@ -657,6 +660,7 @@ const shard: CardShard = {
     _poolPunctureBlast,
     _poolQilinsBlessing,
     _poolQuaketuskBoar,
+    _poolQuickDrawKatana,
     _poolQuietusSpike,
     _poolRaffinesTower,
     _poolRagingPoltergeist,

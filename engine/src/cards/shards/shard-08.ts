@@ -27,6 +27,7 @@ import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
+import _poolAshrootAnimist from "../pool/ashroot-animist.js";
 import _poolAttunedHunter from "../pool/attuned-hunter.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
@@ -117,6 +118,7 @@ import _poolEmbraceTheParadox from "../pool/embrace-the-paradox.js";
 import _poolEndlessRanksOfTheDead from "../pool/endless-ranks-of-the-dead.js";
 import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
+import _poolEruditeWizard from "../pool/erudite-wizard.js";
 import _poolEsperSentinel from "../pool/esper-sentinel.js";
 import _poolEthercasteKnight from "../pool/ethercaste-knight.js";
 import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
@@ -129,6 +131,7 @@ import _poolFaerieConclave from "../pool/faerie-conclave.js";
 import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
 import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
+import _poolFellingBlow from "../pool/felling-blow.js";
 import _poolFemerefKnight from "../pool/femeref-knight.js";
 import _poolFerociousCharge from "../pool/ferocious-charge.js";
 import _poolFinalRevels from "../pool/final-revels.js";
@@ -181,6 +184,7 @@ import _poolImmoralBargain from "../pool/immoral-bargain.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
+import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
@@ -429,6 +433,7 @@ import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-r
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
+import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensTheBlackjack from "../tokens/the-blackjack.js";
@@ -463,6 +468,7 @@ const shard: CardShard = {
     _poolArcanisTheOmnipotent,
     _poolArtificersAssistant,
     _poolAshenRider,
+    _poolAshrootAnimist,
     _poolAttunedHunter,
     _poolAuntMay,
     _poolAuraBlast,
@@ -553,6 +559,7 @@ const shard: CardShard = {
     _poolEndlessRanksOfTheDead,
     _poolEntrapmentManeuver,
     _poolErdwalRipper,
+    _poolEruditeWizard,
     _poolEsperSentinel,
     _poolEthercasteKnight,
     _poolEtherswornSphinx,
@@ -565,6 +572,7 @@ const shard: CardShard = {
     _poolFallajiChaindancer,
     _poolFallajiExcavation,
     _poolFangFearlessLcie,
+    _poolFellingBlow,
     _poolFemerefKnight,
     _poolFerociousCharge,
     _poolFinalRevels,
@@ -617,6 +625,7 @@ const shard: CardShard = {
     _poolIndomitableAncients,
     _poolInfest,
     _poolInformedInkwright,
+    _poolInspirationFromBeyond,
     _poolIorethOfTheHealingHouse,
     _poolJackOfHeartsVolatileHero,
     _poolJanJansenChaosCrafter,
@@ -867,6 +876,7 @@ const shard: CardShard = {
     _tokensFoodToken,
     _tokensHorrorToken,
     _tokensJellyfishToken,
+    _tokensKnightTokenGuardedHeir,
     _tokensLeviathanToken,
     _tokensOtterToken,
     _tokensTheBlackjack,

@@ -244,6 +244,7 @@ import _poolPlatedGeopede from "../pool/plated-geopede.js";
 import _poolPoisonTipArcher from "../pool/poison-tip-archer.js";
 import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
+import _poolPriestOfTheCrossing from "../pool/priest-of-the-crossing.js";
 import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
 import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
@@ -276,6 +277,7 @@ import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
 import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
+import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
@@ -655,6 +657,7 @@ const shard: CardShard = {
     _poolPoisonTipArcher,
     _poolPowerstoneEngineer,
     _poolPrideGuardian,
+    _poolPriestOfTheCrossing,
     _poolPrimalHuntbeast,
     _poolPropheticPrism,
     _poolProsperousInnkeeper,
@@ -687,6 +690,7 @@ const shard: CardShard = {
     _poolRootSliver,
     _poolRubyDaringTracker,
     _poolRugOfSmothering,
+    _poolRunOver,
     _poolRuneSealedWall,
     _poolSHIELDSpyKit,
     _poolSaiMasterThopterist,

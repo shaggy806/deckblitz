@@ -68,6 +68,7 @@ import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
+import _poolCryptFeaster from "../pool/crypt-feaster.js";
 import _poolCrystalQuarry from "../pool/crystal-quarry.js";
 import _poolCutthroatContender from "../pool/cutthroat-contender.js";
 import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
@@ -90,6 +91,7 @@ import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
 import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
+import _poolDuneDrifter from "../pool/dune-drifter.js";
 import _poolDuskriderPeregrine from "../pool/duskrider-peregrine.js";
 import _poolDwarvenMiner from "../pool/dwarven-miner.js";
 import _poolDwarvenNomad from "../pool/dwarven-nomad.js";
@@ -132,6 +134,7 @@ import _poolFuriousResistance from "../pool/furious-resistance.js";
 import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
 import _poolGallantry from "../pool/gallantry.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
+import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
 import _poolGeneratorServant from "../pool/generator-servant.js";
@@ -350,6 +353,7 @@ import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
+import _poolTragicBanshee from "../pool/tragic-banshee.js";
 import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
@@ -467,6 +471,7 @@ const shard: CardShard = {
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
+    _poolCryptFeaster,
     _poolCrystalQuarry,
     _poolCutthroatContender,
     _poolCybermenSquadron,
@@ -489,6 +494,7 @@ const shard: CardShard = {
     _poolDrownInShapelessness,
     _poolDryadOfTheIlysianGrove,
     _poolDundoolinWeaver,
+    _poolDuneDrifter,
     _poolDuskriderPeregrine,
     _poolDwarvenMiner,
     _poolDwarvenNomad,
@@ -531,6 +537,7 @@ const shard: CardShard = {
     _poolFyndhornElder,
     _poolGallantry,
     _poolGanaxAstralHunter,
+    _poolGastalBlockbuster,
     _poolGavonyTownship,
     _poolGazeOfGranite,
     _poolGeneratorServant,
@@ -749,6 +756,7 @@ const shard: CardShard = {
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
     _poolTownGreeter,
+    _poolTragicBanshee,
     _poolTranscendentArchaic,
     _poolTreasonousOgre,
     _poolTreasureCruise,

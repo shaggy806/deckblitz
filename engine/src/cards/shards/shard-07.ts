@@ -20,6 +20,7 @@ import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
 import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
+import _poolArmasaurGuide from "../pool/armasaur-guide.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
@@ -83,6 +84,7 @@ import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
 import _poolDosansOldestChant from "../pool/dosans-oldest-chant.js";
 import _poolDragonstormForecaster from "../pool/dragonstorm-forecaster.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
+import _poolDrakeHatcher from "../pool/drake-hatcher.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
@@ -461,6 +463,7 @@ const shard: CardShard = {
     _poolAprilOneilKunoichiTrainee,
     _poolArcboundPrototype,
     _poolArchonOfFallingStars,
+    _poolArmasaurGuide,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
     _poolAuriokChampion,
@@ -524,6 +527,7 @@ const shard: CardShard = {
     _poolDosansOldestChant,
     _poolDragonstormForecaster,
     _poolDragonstorm,
+    _poolDrakeHatcher,
     _poolDreadmalkin,
     _poolDruidOfTheAnima,
     _poolDwarvenMine,

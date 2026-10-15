@@ -56,12 +56,14 @@ import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
 import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
+import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
 import _poolCharringBite from "../pool/charring-bite.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
+import _poolClawsOut from "../pool/claws-out.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
@@ -73,6 +75,7 @@ import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
+import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
@@ -156,9 +159,11 @@ import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
 import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
+import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
+import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
 import _poolHelmutZemoMastermind from "../pool/helmut-zemo-mastermind.js";
@@ -505,12 +510,14 @@ const shard: CardShard = {
     _poolCatharsCrusade,
     _poolCausticRain,
     _poolCecilyHauntedMage,
+    _poolCephalidInkmage,
     _poolChallengerTroll,
     _poolChandrasIgnition,
     _poolChangelingSentinel,
     _poolChargingMonstrosaur,
     _poolCharringBite,
     _poolChromeMox,
+    _poolClawsOut,
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
     _poolCloakedSiren,
@@ -522,6 +529,7 @@ const shard: CardShard = {
     _poolConsumingSinkhole,
     _poolContractKilling,
     _poolCoralSword,
+    _poolCourageousGoblin,
     _poolCourierGriffin,
     _poolCowlProwler,
     _poolCrawlingBarrens,
@@ -605,9 +613,11 @@ const shard: CardShard = {
     _poolGuardianOfFaith,
     _poolGuardianProject,
     _poolGuardiansOfMeletis,
+    _poolGutlessPlunderer,
     _poolHadanasClimb,
     _poolHallowedFountain,
     _poolHandOfSilumgar,
+    _poolHauntedHellride,
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
     _poolHelmutZemoMastermind,

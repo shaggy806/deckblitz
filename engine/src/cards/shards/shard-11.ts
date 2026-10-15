@@ -117,6 +117,7 @@ import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
 import _poolFiendArtisan from "../pool/fiend-artisan.js";
+import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
@@ -253,6 +254,7 @@ import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
 import _poolOrmendahlProfanePrince from "../pool/ormendahl-profane-prince.js";
 import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
 import _poolOuroboroid from "../pool/ouroboroid.js";
+import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
@@ -565,6 +567,7 @@ const shard: CardShard = {
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
     _poolFiendArtisan,
+    _poolFiendishPanda,
     _poolFieryIslet,
     _poolFissureVent,
     _poolFloodPlain,
@@ -701,6 +704,7 @@ const shard: CardShard = {
     _poolOrmendahlProfanePrince,
     _poolOrzhovBasilica,
     _poolOuroboroid,
+    _poolPacesetterParagon,
     _poolParadiseMantle,
     _poolParadoxShaper,
     _poolParameciaColoniex,

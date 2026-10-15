@@ -13,6 +13,7 @@ import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAndurilFlameOfTheWest from "../pool/anduril-flame-of-the-west.js";
 import _poolAngelOfLight from "../pool/angel-of-light.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
+import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
 import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
 import _poolArcRunner from "../pool/arc-runner.js";
@@ -331,6 +332,7 @@ import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
 import _poolStrongarmMonk from "../pool/strongarm-monk.js";
 import _poolSubmerge from "../pool/submerge.js";
+import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
@@ -347,6 +349,7 @@ import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThorin from "../pool/thorin.js";
+import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
@@ -420,6 +423,7 @@ const shard: CardShard = {
     _poolAndurilFlameOfTheWest,
     _poolAngelOfLight,
     _poolAngrathsRampage,
+    _poolApothecaryStomper,
     _poolAragornTheUniter,
     _poolArastaOfTheEndlessWeb,
     _poolArcRunner,
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolStripedRiverwinder,
     _poolStrongarmMonk,
     _poolSubmerge,
+    _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,
     _poolSyrAlinTheLionsClaw,
@@ -754,6 +759,7 @@ const shard: CardShard = {
     _poolThermoAlchemist,
     _poolThopterAssembly,
     _poolThorin,
+    _poolThunderingBroodwagon,
     _poolTidalKraken,
     _poolTigraFelineFury,
     _poolTimelineInquiry,

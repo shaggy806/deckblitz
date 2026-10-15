@@ -13004,6 +13004,7 @@ export class Game {
       player,
       onStack: true,
       ability: abilityId,
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
     });
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
     // "Sacrifice two artifacts": which ones is chosen now, as the cost is paid
@@ -17484,10 +17485,21 @@ export class Game {
           if ((spec.who === "you") !== (event.player === self.controller)) return false;
           if (spec.source !== undefined) {
             // A permanent's ability, read as it is now that the costs are
-            // paid: a Vehicle being crewed isn't a creature yet.
+            // paid: a Vehicle being crewed isn't a creature yet. One its own
+            // cost sacrificed (a fetchland, a Clue) is still a permanent's
+            // ability (rule 113.7a), read as it last existed on the
+            // battlefield; a card's in a hand or graveyard never is.
+            if (event.ofPermanent !== true) return false;
             const source = this.state.objects[event.source];
-            if (source?.zone !== "battlefield") return false;
-            if (!matchesFilter(this.state, this.registry, source.id, spec.source, { you: self.controller, source: self.id })) {
+            if (source === undefined) return false;
+            const departed = source.zone !== "battlefield";
+            if (
+              !matchesFilter(this.state, this.registry, source.id, spec.source, {
+                you: self.controller,
+                source: self.id,
+                ...(departed ? { lastKnown: true } : {}),
+              })
+            ) {
               return false;
             }
           }

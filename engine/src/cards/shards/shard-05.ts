@@ -169,6 +169,7 @@ import _poolGrimAffliction from "../pool/grim-affliction.js";
 import _poolGrimBackwoods from "../pool/grim-backwoods.js";
 import _poolGrimclimbPathway from "../pool/grimclimb-pathway.js";
 import _poolGrowFromTheAshes from "../pool/grow-from-the-ashes.js";
+import _poolGuardedHeir from "../pool/guarded-heir.js";
 import _poolGuardianLions from "../pool/guardian-lions.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
@@ -256,6 +257,7 @@ import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
+import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
@@ -588,6 +590,7 @@ const shard: CardShard = {
     _poolGrimBackwoods,
     _poolGrimclimbPathway,
     _poolGrowFromTheAshes,
+    _poolGuardedHeir,
     _poolGuardianLions,
     _poolHallwayHeckler,
     _poolHangarbackWalker,
@@ -675,6 +678,7 @@ const shard: CardShard = {
     _poolPactOfNegation,
     _poolPaladinsArms,
     _poolPathmakerInitiate,
+    _poolPeemaTrailblazer,
     _poolPeggyCarterSecretAgent,
     _poolPermissionDenied,
     _poolPillarOfOrigins,

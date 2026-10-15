@@ -247,6 +247,7 @@ import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
+import _poolPotholeMole from "../pool/pothole-mole.js";
 import _poolPotionersTrove from "../pool/potioners-trove.js";
 import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
@@ -316,6 +317,7 @@ import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
+import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
@@ -663,6 +665,7 @@ const shard: CardShard = {
     _poolPlateau,
     _poolPlatedCrusher,
     _poolPlumecreedEscort,
+    _poolPotholeMole,
     _poolPotionersTrove,
     _poolPrakhataClubSecurity,
     _poolPriceOfFreedom,
@@ -732,6 +735,7 @@ const shard: CardShard = {
     _poolSoaringShowOff,
     _poolSparkTrooper,
     _poolSpiderManWebSpinner,
+    _poolSpireMechcycle,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
     _poolSpymastersVault,

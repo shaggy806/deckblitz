@@ -50,6 +50,7 @@ import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
+import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
@@ -68,6 +69,7 @@ import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
 import _poolCracklingDoom from "../pool/crackling-doom.js";
+import _poolCrashAndBurn from "../pool/crash-and-burn.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
@@ -124,6 +126,7 @@ import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
+import _poolGoblinBoarders from "../pool/goblin-boarders.js";
 import _poolGoblinBully from "../pool/goblin-bully.js";
 import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
@@ -271,6 +274,7 @@ import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
 import _poolScepterOfDominance from "../pool/scepter-of-dominance.js";
 import _poolScornfulEgotist from "../pool/scornful-egotist.js";
+import _poolScrapCompactor from "../pool/scrap-compactor.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSealOfDoom from "../pool/seal-of-doom.js";
 import _poolSear from "../pool/sear.js";
@@ -282,6 +286,7 @@ import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
 import _poolShatteredAcolyte from "../pool/shattered-acolyte.js";
 import _poolShatteredLandscape from "../pool/shattered-landscape.js";
+import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
@@ -445,6 +450,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCampusComposer,
     _poolCanyonJerboa,
+    _poolCarrionCruiser,
     _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
@@ -463,6 +469,7 @@ const shard: CardShard = {
     _poolCountOnLuck,
     _poolCrackedEarthTechnique,
     _poolCracklingDoom,
+    _poolCrashAndBurn,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
     _poolCurseOfTheRestlessDead,
@@ -519,6 +526,7 @@ const shard: CardShard = {
     _poolGiantMantis,
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
+    _poolGoblinBoarders,
     _poolGoblinBully,
     _poolGolemFoundry,
     _poolGolgariFindbroker,
@@ -666,6 +674,7 @@ const shard: CardShard = {
     _poolScatheZombies,
     _poolScepterOfDominance,
     _poolScornfulEgotist,
+    _poolScrapCompactor,
     _poolSeahunter,
     _poolSealOfDoom,
     _poolSear,
@@ -677,6 +686,7 @@ const shard: CardShard = {
     _poolShanodinDryads,
     _poolShatteredAcolyte,
     _poolShatteredLandscape,
+    _poolShefetArchfiend,
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
     _poolShireiShizosCaretaker,

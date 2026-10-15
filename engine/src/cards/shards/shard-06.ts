@@ -7,6 +7,7 @@ import _poolAbjure from "../pool/abjure.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
 import _poolAetherize from "../pool/aetherize.js";
+import _poolAetherjacket from "../pool/aetherjacket.js";
 import _poolAlabasterHostSanctifier from "../pool/alabaster-host-sanctifier.js";
 import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
 import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
@@ -87,6 +88,7 @@ import _poolDamageControlCrew from "../pool/damage-control-crew.js";
 import _poolDamnation from "../pool/damnation.js";
 import _poolDancingFromDarkToDawn from "../pool/dancing-from-dark-to-dawn.js";
 import _poolDaringLeap from "../pool/daring-leap.js";
+import _poolDaringMechanic from "../pool/daring-mechanic.js";
 import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
@@ -425,6 +427,7 @@ const shard: CardShard = {
     _poolAdelineResplendentCathar,
     _poolAegisSculptor,
     _poolAetherize,
+    _poolAetherjacket,
     _poolAlabasterHostSanctifier,
     _poolAlexiosDeimosOfKosmos,
     _poolAlibouAncientWitness,
@@ -505,6 +508,7 @@ const shard: CardShard = {
     _poolDamnation,
     _poolDancingFromDarkToDawn,
     _poolDaringLeap,
+    _poolDaringMechanic,
     _poolDarkHeartOfTheWood,
     _poolDauthiSlayer,
     _poolDawnOfHope,

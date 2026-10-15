@@ -285,6 +285,7 @@ import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
 import _poolRhysticStudy from "../pool/rhystic-study.js";
+import _poolRidesEnd from "../pool/rides-end.js";
 import _poolRipTheSeams from "../pool/rip-the-seams.js";
 import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
@@ -420,6 +421,7 @@ import _poolWillOfTheTemur from "../pool/will-of-the-temur.js";
 import _poolWingCommando from "../pool/wing-commando.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
+import _poolWizenedMentor from "../pool/wizened-mentor.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
@@ -728,6 +730,7 @@ const shard: CardShard = {
     _poolRemand,
     _poolReturnToDust,
     _poolRhysticStudy,
+    _poolRidesEnd,
     _poolRipTheSeams,
     _poolRiverglidePathway,
     _poolRoadsideAssistance,
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolWingCommando,
     _poolWitheringBoon,
     _poolWizardsSchool,
+    _poolWizenedMentor,
     _poolWolverineBestThereIs,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,

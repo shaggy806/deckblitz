@@ -125,6 +125,7 @@ import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
+import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
@@ -160,6 +161,7 @@ import _poolGoreSwine from "../pool/gore-swine.js";
 import _poolGoringCeratops from "../pool/goring-ceratops.js";
 import _poolGrafMole from "../pool/graf-mole.js";
 import _poolGravePact from "../pool/grave-pact.js";
+import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
@@ -334,6 +336,7 @@ import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
+import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
@@ -542,6 +545,7 @@ const shard: CardShard = {
     _poolEverythingPizza,
     _poolExecutionersHood,
     _poolFallowEarth,
+    _poolFangGuardian,
     _poolFangOfShigeki,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
@@ -577,6 +581,7 @@ const shard: CardShard = {
     _poolGoringCeratops,
     _poolGrafMole,
     _poolGravePact,
+    _poolGreasewrenchGoblin,
     _poolGreatIntelligencesPlan,
     _poolGreaterForgeling,
     _poolGrixisCharm,
@@ -751,6 +756,7 @@ const shard: CardShard = {
     _poolSpiderSuit,
     _poolSpinedThopter,
     _poolSpireMonitor,
+    _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
     _poolStarfieldShepherd,

@@ -13,6 +13,7 @@ import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
 import _poolAndTheyShallKnowNoFear from "../pool/and-they-shall-know-no-fear.js";
 import _poolAntManScottLang from "../pool/ant-man-scott-lang.js";
+import _poolArbiterOfWoe from "../pool/arbiter-of-woe.js";
 import _poolArborealGrazer from "../pool/arboreal-grazer.js";
 import _poolArchaeomancer from "../pool/archaeomancer.js";
 import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
@@ -417,6 +418,7 @@ const shard: CardShard = {
     _poolAllFatesStalker,
     _poolAndTheyShallKnowNoFear,
     _poolAntManScottLang,
+    _poolArbiterOfWoe,
     _poolArborealGrazer,
     _poolArchaeomancer,
     _poolArchfiendOfIfnir,

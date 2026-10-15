@@ -32,6 +32,7 @@ import _poolBarretWallace from "../pool/barret-wallace.js";
 import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
+import _poolBeastriderVanguard from "../pool/beastrider-vanguard.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
 import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
@@ -330,6 +331,7 @@ import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
 import _poolStonefareCrocodile from "../pool/stonefare-crocodile.js";
 import _poolStormsurgeKraken from "../pool/stormsurge-kraken.js";
 import _poolStriderHarness from "../pool/strider-harness.js";
+import _poolStrongboxRaider from "../pool/strongbox-raider.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
 import _poolSummonTitan from "../pool/summon-titan.js";
 import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room.js";
@@ -404,6 +406,7 @@ import _poolWiccanYoungAvenger from "../pool/wiccan-young-avenger.js";
 import _poolWildwoodRebirth from "../pool/wildwood-rebirth.js";
 import _poolWillowElf from "../pool/willow-elf.js";
 import _poolWindDancer from "../pool/wind-dancer.js";
+import _poolWinterCursedRider from "../pool/winter-cursed-rider.js";
 import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
 import _poolWonder from "../pool/wonder.js";
 import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
@@ -452,6 +455,7 @@ const shard: CardShard = {
     _poolBasrisSolidarity,
     _poolBattleMenu,
     _poolBattlefieldForge,
+    _poolBeastriderVanguard,
     _poolBenalishVeteran,
     _poolBespokeBattlewagon,
     _poolBidentOfThassa,
@@ -750,6 +754,7 @@ const shard: CardShard = {
     _poolStonefareCrocodile,
     _poolStormsurgeKraken,
     _poolStriderHarness,
+    _poolStrongboxRaider,
     _poolSuddenBreakthrough,
     _poolSummonTitan,
     _poolSurgicalSuiteHospitalRoom,
@@ -824,6 +829,7 @@ const shard: CardShard = {
     _poolWildwoodRebirth,
     _poolWillowElf,
     _poolWindDancer,
+    _poolWinterCursedRider,
     _poolWinterTeamPlayer,
     _poolWonder,
     _poolYarokTheDesecrated,

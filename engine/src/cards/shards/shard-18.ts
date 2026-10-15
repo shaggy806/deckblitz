@@ -55,6 +55,7 @@ import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
+import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
 import _poolCollectiveUnconscious from "../pool/collective-unconscious.js";
@@ -237,6 +238,7 @@ import _poolPileOn from "../pool/pile-on.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
+import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
@@ -303,6 +305,7 @@ import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
 import _poolSpellruneHowler from "../pool/spellrune-howler.js";
+import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
 import _poolSpiderManHometownHero from "../pool/spider-man-hometown-hero.js";
 import _poolSpiketailDrake from "../pool/spiketail-drake.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
@@ -341,6 +344,7 @@ import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
 import _poolThrashingWumpus from "../pool/thrashing-wumpus.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
+import _poolThunderheadGunner from "../pool/thunderhead-gunner.js";
 import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
 import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
@@ -483,6 +487,7 @@ const shard: CardShard = {
     _poolChangeOfPlans,
     _poolChillingScreech,
     _poolClamorousIronclad,
+    _poolCloudspireSkycycle,
     _poolCodsworthHandyHelper,
     _poolColdWaterSnapper,
     _poolCollectiveUnconscious,
@@ -665,6 +670,7 @@ const shard: CardShard = {
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
     _poolPlatedRootwalla,
+    _poolPlowThrough,
     _poolPossibilityTechnician,
     _poolPouncingCheetah,
     _poolPrimalAmulet,
@@ -731,6 +737,7 @@ const shard: CardShard = {
     _poolSpectrumSentinel,
     _poolSpellkeeperWeird,
     _poolSpellruneHowler,
+    _poolSphinxOfForgottenLore,
     _poolSpiderManHometownHero,
     _poolSpiketailDrake,
     _poolStalkingVengeance,
@@ -769,6 +776,7 @@ const shard: CardShard = {
     _poolThoughtflare,
     _poolThrashingWumpus,
     _poolThreeBlindMice,
+    _poolThunderheadGunner,
     _poolThunderingCeratok,
     _poolThunderousVelocipede,
     _poolTifaMartialArtist,

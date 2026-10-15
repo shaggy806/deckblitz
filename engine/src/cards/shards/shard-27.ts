@@ -14,6 +14,7 @@ import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
+import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
@@ -83,6 +84,7 @@ import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
 import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
+import _poolDetentionChariot from "../pool/detention-chariot.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
@@ -136,6 +138,7 @@ import _poolGladecoverScout from "../pool/gladecover-scout.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGravelgillAxeshark from "../pool/gravelgill-axeshark.js";
 import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
+import _poolGrimJavelineer from "../pool/grim-javelineer.js";
 import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
@@ -386,6 +389,7 @@ import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
+import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
@@ -424,6 +428,7 @@ const shard: CardShard = {
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
     _poolAltarsReap,
+    _poolAmbushWolf,
     _poolAmuletOfVigor,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
@@ -493,6 +498,7 @@ const shard: CardShard = {
     _poolDereviEmpyrialTactician,
     _poolDescendantOfStorms,
     _poolDesecratedTomb,
+    _poolDetentionChariot,
     _poolDevoutMonk,
     _poolDigThroughTime,
     _poolDisruptiveStudent,
@@ -546,6 +552,7 @@ const shard: CardShard = {
     _poolGoblinMountaineer,
     _poolGravelgillAxeshark,
     _poolGreatDivideGuide,
+    _poolGrimJavelineer,
     _poolGrimclawBats,
     _poolGrixisBattlemage,
     _poolGuidelightSynergist,
@@ -796,6 +803,7 @@ const shard: CardShard = {
     _poolVisceraSeer,
     _poolVodalianMerchant,
     _poolVolcanicFissure,
+    _poolVoyagerGlidecar,
     _poolWallOfStone,
     _poolWarriorsHonor,
     _poolWaxenShapethief,

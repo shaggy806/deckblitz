@@ -183,6 +183,7 @@ import _poolLowlandGiant from "../pool/lowland-giant.js";
 import _poolLoxodonConvert from "../pool/loxodon-convert.js";
 import _poolLoxodonSergeant from "../pool/loxodon-sergeant.js";
 import _poolLukeCageHeroForHire from "../pool/luke-cage-hero-for-hire.js";
+import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
@@ -556,6 +557,7 @@ const shard: CardShard = {
     _poolLoxodonConvert,
     _poolLoxodonSergeant,
     _poolLukeCageHeroForHire,
+    _poolLuminousRebuke,
     _poolLysAlanaHuntmaster,
     _poolMangaraTheDiplomat,
     _poolMarwynTheNurturer,

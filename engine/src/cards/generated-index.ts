@@ -199,6 +199,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Kithkin Token",
   "Knight Token",
   "Knight Token (Chivalric Alliance)",
+  "Knight Token (Guarded Heir)",
   "Koma's Coil",
   "Kor Ally Token",
   "Kraken Token",

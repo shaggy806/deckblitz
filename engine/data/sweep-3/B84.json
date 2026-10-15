@@ -1,0 +1,839 @@
+{
+ "batch": "B84",
+ "status": "complete",
+ "ranks": "Aetherdrift (DFT, 2025-02-14), Aetherdrift Commander (DRC, 2025-02-14) and Foundations (FDN, 2024-11-15): the rest of the sets",
+ "authored": [
+  {
+   "name": "Quag Feast",
+   "files": [
+    "engine/src/cards/pool/quag-feast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boommobile",
+   "files": [
+    "engine/src/cards/pool/boommobile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stall Out",
+   "files": [
+    "engine/src/cards/pool/stall-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherjacket",
+   "files": [
+    "engine/src/cards/pool/aetherjacket.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ticket Tortoise",
+   "files": [
+    "engine/src/cards/pool/ticket-tortoise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Run Over",
+   "files": [
+    "engine/src/cards/pool/run-over.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voyager Glidecar",
+   "files": [
+    "engine/src/cards/pool/voyager-glidecar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earthrumbler",
+   "files": [
+    "engine/src/cards/pool/earthrumbler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beastrider Vanguard",
+   "files": [
+    "engine/src/cards/pool/beastrider-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gastal Thrillroller",
+   "files": [
+    "engine/src/cards/pool/gastal-thrillroller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carrion Cruiser",
+   "files": [
+    "engine/src/cards/pool/carrion-cruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Road Rage",
+   "files": [
+    "engine/src/cards/pool/road-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Detention Chariot",
+   "files": [
+    "engine/src/cards/pool/detention-chariot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spire Mechcycle",
+   "files": [
+    "engine/src/cards/pool/spire-mechcycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pedal to the Metal",
+   "files": [
+    "engine/src/cards/pool/pedal-to-the-metal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderhead Gunner",
+   "files": [
+    "engine/src/cards/pool/thunderhead-gunner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winter, Cursed Rider",
+   "files": [
+    "engine/src/cards/pool/winter-cursed-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Getaway",
+   "files": [
+    "engine/src/cards/pool/explosive-getaway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fang-Druid Summoner",
+   "files": [
+    "engine/src/cards/pool/fang-druid-summoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collision Course",
+   "files": [
+    "engine/src/cards/pool/collision-course.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shefet Archfiend",
+   "files": [
+    "engine/src/cards/pool/shefet-archfiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spin Out",
+   "files": [
+    "engine/src/cards/pool/spin-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ride's End",
+   "files": [
+    "engine/src/cards/pool/rides-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Mangler",
+   "files": [
+    "engine/src/cards/pool/midnight-mangler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wreck Remover",
+   "files": [
+    "engine/src/cards/pool/wreck-remover.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greasewrench Goblin",
+   "files": [
+    "engine/src/cards/pool/greasewrench-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloudspire Skycycle",
+   "files": [
+    "engine/src/cards/pool/cloudspire-skycycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellish Sideswipe",
+   "files": [
+    "engine/src/cards/pool/hellish-sideswipe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plow Through",
+   "files": [
+    "engine/src/cards/pool/plow-through.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise from the Wreck",
+   "files": [
+    "engine/src/cards/pool/rise-from-the-wreck.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dune Drifter",
+   "files": [
+    "engine/src/cards/pool/dune-drifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ooze Patrol",
+   "files": [
+    "engine/src/cards/pool/ooze-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lotusguard Disciple",
+   "files": [
+    "engine/src/cards/pool/lotusguard-disciple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pothole Mole",
+   "files": [
+    "engine/src/cards/pool/pothole-mole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crash and Burn",
+   "files": [
+    "engine/src/cards/pool/crash-and-burn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunted Hellride",
+   "files": [
+    "engine/src/cards/pool/haunted-hellride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apocalypse Runner",
+   "files": [
+    "engine/src/cards/pool/apocalypse-runner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fang Guardian",
+   "files": [
+    "engine/src/cards/pool/fang-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrap Compactor",
+   "files": [
+    "engine/src/cards/pool/scrap-compactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howler's Heavy",
+   "files": [
+    "engine/src/cards/pool/howlers-heavy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gastal Blockbuster",
+   "files": [
+    "engine/src/cards/pool/gastal-blockbuster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roadside Blowout",
+   "files": [
+    "engine/src/cards/pool/roadside-blowout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thundering Broodwagon",
+   "files": [
+    "engine/src/cards/pool/thundering-broodwagon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Mechanic",
+   "files": [
+    "engine/src/cards/pool/daring-mechanic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marshals' Pathcruiser",
+   "files": [
+    "engine/src/cards/pool/marshals-pathcruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pacesetter Paragon",
+   "files": [
+    "engine/src/cards/pool/pacesetter-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Javelineer",
+   "files": [
+    "engine/src/cards/pool/grim-javelineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peema Trailblazer",
+   "files": [
+    "engine/src/cards/pool/peema-trailblazer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Priest of the Crossing",
+   "files": [
+    "engine/src/cards/pool/priest-of-the-crossing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faebloom Trick",
+   "files": [
+    "engine/src/cards/pool/faebloom-trick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampire Gourmand",
+   "files": [
+    "engine/src/cards/pool/vampire-gourmand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of Forgotten Lore",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-forgotten-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quick-Draw Katana",
+   "files": [
+    "engine/src/cards/pool/quick-draw-katana.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fleeting Flight",
+   "files": [
+    "engine/src/cards/pool/fleeting-flight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashroot Animist",
+   "files": [
+    "engine/src/cards/pool/ashroot-animist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspiration from Beyond",
+   "files": [
+    "engine/src/cards/pool/inspiration-from-beyond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arbiter of Woe",
+   "files": [
+    "engine/src/cards/pool/arbiter-of-woe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Claws Out",
+   "files": [
+    "engine/src/cards/pool/claws-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fiendish Panda",
+   "files": [
+    "engine/src/cards/pool/fiendish-panda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vanguard Seraph",
+   "files": [
+    "engine/src/cards/pool/vanguard-seraph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luminous Rebuke",
+   "files": [
+    "engine/src/cards/pool/luminous-rebuke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadwing Scavenger",
+   "files": [
+    "engine/src/cards/pool/dreadwing-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Felidar Savior",
+   "files": [
+    "engine/src/cards/pool/felidar-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Epiphany",
+   "files": [
+    "engine/src/cards/pool/arcane-epiphany.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Felling Blow",
+   "files": [
+    "engine/src/cards/pool/felling-blow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspiring Paladin",
+   "files": [
+    "engine/src/cards/pool/inspiring-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drake Hatcher",
+   "files": [
+    "engine/src/cards/pool/drake-hatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gutless Plunderer",
+   "files": [
+    "engine/src/cards/pool/gutless-plunderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erudite Wizard",
+   "files": [
+    "engine/src/cards/pool/erudite-wizard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Vessel",
+   "files": [
+    "engine/src/cards/pool/infernal-vessel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalid Inkmage",
+   "files": [
+    "engine/src/cards/pool/cephalid-inkmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambush Wolf",
+   "files": [
+    "engine/src/cards/pool/ambush-wolf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apothecary Stomper",
+   "files": [
+    "engine/src/cards/pool/apothecary-stomper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun-Blessed Healer",
+   "files": [
+    "engine/src/cards/pool/sun-blessed-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Boarders",
+   "files": [
+    "engine/src/cards/pool/goblin-boarders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Courageous Goblin",
+   "files": [
+    "engine/src/cards/pool/courageous-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Billowing Shriekmass",
+   "files": [
+    "engine/src/cards/pool/billowing-shriekmass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armasaur Guide",
+   "files": [
+    "engine/src/cards/pool/armasaur-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guarded Heir",
+   "files": [
+    "engine/src/cards/pool/guarded-heir.ts",
+    "engine/src/cards/tokens/knight-token-guarded-heir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tragic Banshee",
+   "files": [
+    "engine/src/cards/pool/tragic-banshee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slumbering Cerberus",
+   "files": [
+    "engine/src/cards/pool/slumbering-cerberus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crypt Feaster",
+   "files": [
+    "engine/src/cards/pool/crypt-feaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strongbox Raider",
+   "files": [
+    "engine/src/cards/pool/strongbox-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squad Rallier",
+   "files": [
+    "engine/src/cards/pool/squad-rallier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wizened Mentor",
+   "files": [
+    "engine/src/cards/pool/wizened-mentor.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Webstrike Elite",
+   "needs": [
+    "cost:cycling-x"
+   ],
+   "why": "Cycling {X}{G}{G} and 'when you cycle this card, destroy up to one target artifact or enchantment with mana value X': CardDefinition.cycling's cost takes no X (cyclingAbilityOf/cycleCard pay a fixed cost) and the this-cycled trigger has no X to read."
+  },
+  {
+   "name": "Mimeoplasm, Revered One",
+   "needs": [
+    "replacement:as-enters-exile-from-graveyard",
+    "effect:target-card-in-exile"
+   ],
+   "why": "'As Mimeoplasm enters, exile up to X creature cards from your graveyard' with three +1/+1 counters per card exiled has no as-enters exile choice, and '{2}: becomes a copy of target creature card exiled with it' needs a target spec over cards exiled with the source (no exile TargetSpec exists)."
+  },
+  {
+   "name": "Canyon Vaulter",
+   "needs": [
+    "trigger:crews-or-saddles"
+   ],
+   "why": "'Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying' needs a trigger on a creature crewing/saddling (with the crewed permanent as the trigger object); no such trigger event exists."
+  },
+  {
+   "name": "Adrenaline Jockey",
+   "needs": [
+    "trigger:activates-exhaust"
+   ],
+   "why": "'Whenever you activate an exhaust ability, put a +1/+1 counter' — the activates-ability trigger narrows by ninjutsu/loyalty/source only, not exhaust (its first ability, the off-turn cast trigger, is expressible with cast-spell offTurn)."
+  },
+  {
+   "name": "The Last Ride",
+   "needs": [
+    "static:pt-per-life-total"
+   ],
+   "why": "'The Last Ride gets -X/-X, where X is your life total' — grantPtPerCount has no life-total count (filters, graveyard, exile, counters, speed, commander casts/mana value only)."
+  },
+  {
+   "name": "Flood the Engine",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "'Enchanted permanent loses all abilities' is a static on the Aura; ability loss exists only as an effect modifier (lose-abilities with a duration), which wouldn't follow the Aura's attachment or apply from the moment it's attached."
+  },
+  {
+   "name": "Trade the Helm",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "Exchange control of two targets (one yours, one an opponent's) has no effect in the vocabulary; only gain-control exists, and the exchange must not happen if either target is illegal (ruling)."
+  },
+  {
+   "name": "Elvish Refueler",
+   "needs": [
+    "static:exhaust-reactivation"
+   ],
+   "why": "\"During your turn, as long as you haven't activated an exhaust ability this turn, you may activate exhaust abilities as though they haven't been activated\" has no static: the exhaust once-only check (exhaustedAbilities) can't be waived, and nothing tracks whether you activated an exhaust ability this turn."
+  },
+  {
+   "name": "Sita Varma, Masked Racer",
+   "needs": [
+    "effect:animate-all-excluding-source"
+   ],
+   "why": "\"Base power and toughness of each other creature you control become equal to Sita Varma's power\" needs animate-all with an exceptSource clause; a notName filter would wrongly spare a nonlegendary copy named Sita Varma."
+  },
+  {
+   "name": "Reckless Velocitaur",
+   "needs": [
+    "trigger:crews-or-saddles"
+   ],
+   "why": "No trigger fires when this creature crews a Vehicle or saddles a Mount (with a reference to that Vehicle/Mount and a during-your-main-phase gate); activates-ability can't see which creatures paid a crew/saddle cost."
+  },
+  {
+   "name": "Skyseer's Chariot",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "\"As this Vehicle enters, choose a nonland card name\" has no decision, and no ability-cost increase keys off a chosen name."
+  },
+  {
+   "name": "Silken Strength",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"When this Aura enters, untap enchanted permanent\" — no EffectTargetRef or untap clause names the permanent the Aura is attached to (only phase-out has attachedToSource)."
+  },
+  {
+   "name": "Rangers' Refueler",
+   "needs": [
+    "trigger:activates-exhaust"
+   ],
+   "why": "\"Whenever you activate an exhaust ability, draw a card\" needs the activates-ability trigger narrowed to exhaust abilities (it has ninjutsu and loyalty narrowings only); unnarrowed it would draw for crew and every other ability."
+  },
+  {
+   "name": "Wickerfolk Indomitable",
+   "needs": [
+    "zone:graveyard-self-cast-extra-cost"
+   ],
+   "why": "The card's own cast-from-graveyard permission with additional costs (pay 2 life and sacrifice an artifact or creature): castFromGraveyardIf takes no extra costs, and castFromGraveyard (which has payLife/sacrifice) is a battlefield permanent's grant."
+  },
+  {
+   "name": "Intimidation Tactics",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "\"You choose an artifact or creature card from it. Exile that card\": discard-chosen only discards the chosen card; there is no exile destination for a card chosen from a revealed hand."
+  },
+  {
+   "name": "Trip Up",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Its owner puts it on their choice of the top or bottom of their library\": put-on-library takes a fixed position, with no choice for the permanent's owner."
+  },
+  {
+   "name": "Afterburner Expert",
+   "needs": [
+    "trigger:activates-exhaust"
+   ],
+   "why": "\"Whenever you activate an exhaust ability, return this card from your graveyard\": activates-ability can't be narrowed to exhaust abilities (only ninjutsu/loyalty), and its matcher requires the trigger's own card to be on the battlefield, so a fromGraveyard version would never fire."
+  },
+  {
+   "name": "Boom Scholar",
+   "needs": [
+    "cost:ability-cost-reduction-exhaust"
+   ],
+   "why": "\"Exhaust abilities of other permanents you control cost {2} less\": abilityCostModification filters the source permanent but can't be narrowed to exhaust abilities (only ninjutsu/unlock)."
+  },
+  {
+   "name": "Rangers' Aetherhive",
+   "needs": [
+    "trigger:activates-exhaust"
+   ],
+   "why": "\"Whenever you activate an exhaust ability, create a Thopter\": activates-ability has no exhaust narrowing; unnarrowed it would fire on every activated ability."
+  },
+  {
+   "name": "Spikeshell Harrier",
+   "needs": [
+    "effect:reduce-player-speed"
+   ],
+   "why": "\"If that opponent's speed is greater than each other player's speed, reduce that opponent's speed by 1 ... not below 1\": there is no effect lowering another player's speed and no condition comparing one player's speed against every other player's."
+  },
+  {
+   "name": "Sabotage Strategist",
+   "needs": [
+    "effect:attack-batch-those-creatures"
+   ],
+   "why": "\"Whenever one or more creatures attack you, those creatures get -1/-0\": attack-with only counts its batch (and its attackingYou includes planeswalkers); a per-attacker `attacks` trigger would fire once per creature instead of once per batch."
+  },
+  {
+   "name": "Ancient Vendetta",
+   "needs": [
+    "decision:name-a-card",
+    "decision:search-hand-and-library"
+   ],
+   "why": "\"Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them\": no choose-a-card-name decision, and search-library can't search a hand and graveyard together with the library."
+  },
+  {
+   "name": "Nissa, Worldsoul Speaker",
+   "needs": [
+    "cost:alternative-cost-for-spells-energy"
+   ],
+   "why": "\"You may pay eight {E} rather than pay the mana cost for permanent spells you cast\": alternativeCostForSpells takes only a mana cost, not an energy payment."
+  },
+  {
+   "name": "Rampaging Aetherhood",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "\"Then you may pay one or more {E}. If you do, put that many +1/+1 counters\": no variable energy payment whose amount the player chooses and the effect reads."
+  },
+  {
+   "name": "Territorial Aetherkite",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "\"Then you may pay one or more {E}. When you do, this creature deals that much damage to each other creature\": a may's costEnergy is a fixed amount, with no way for the player to choose how much energy to pay and no X carrying the amount paid into the reflexive trigger."
+  },
+  {
+   "name": "Pia Nalaar, Chief Mechanic",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "\"You may pay one or more {E}. If you do, create an X/X ... Nalaar Aetherjet ... where X is the amount of {E} paid this way\": no player-chosen energy payment with X = amount paid (the X/X token itself is expressible with create-token's basePt; the first trigger is Thopter Spy Network's shape)."
+  },
+  {
+   "name": "Curator of Destinies",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "\"Separate them into a face-down pile and a face-up pile. An opponent chooses one of those piles\": no pile-separation decision or opponent pile choice in the vocabulary."
+  },
+  {
+   "name": "Fiery Annihilation",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn",
+    "condition:attached-to-target"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\" on a target isn't built, nor a target filter for \"up to one target Equipment attached to that creature\" (attached to the object in another slot)."
+  },
+  {
+   "name": "Kellan, Planar Trailblazer",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "The first ability's \"it becomes a Human Faerie Detective\" overwrites its creature types without touching P/T, but the only one-shot that sets subtypes (animate's setSubtypes) always sets base P/T too, which would wrongly overwrite earlier P/T-setting effects (the first ruling); the second ability (animate 3/2 + double strike, permanent) is expressible."
+  },
+  {
+   "name": "Soul-Shackled Zombie",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"Exile up to two target cards from a single graveyard\": an any-number card-in-graveyard group can't require both targets to share one graveyard."
+  },
+  {
+   "name": "Fishing Pole",
+   "needs": [
+    "effect:granted-activated-refers-to-granter"
+   ],
+   "why": "The granted \"{1}, {T}, Tap Fishing Pole: Put a bait counter on Fishing Pole\" names the granting Equipment in both its cost (tapping the granter, not the creature) and its effect, and a granted ability's cost and effect can only reach the permanent it's on."
+  },
+  {
+   "name": "Uncharted Voyage",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target creature's owner puts it on their choice of the top or bottom of their library\": put-on-library takes a fixed position, and each-player-may's controllerOfTarget asks the controller, not the owner (wrong for a stolen creature)."
+  },
+  {
+   "name": "Starlight Snare",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "\"Enchanted creature doesn't untap during its controller's untap step\": the untap step reads doesntUntap only from a permanent's own statics (Game.hasOwnStatic), so an Aura can't give it to the enchanted creature (the enters tap itself would be fine)."
+  }
+ ]
+}

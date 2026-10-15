@@ -121,8 +121,10 @@ import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
 import _poolExcaliburIi from "../pool/excalibur-ii.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
+import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
+import _poolFangDruidSummoner from "../pool/fang-druid-summoner.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
@@ -365,6 +367,7 @@ import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
+import _poolVampireGourmand from "../pool/vampire-gourmand.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
@@ -521,8 +524,10 @@ const shard: CardShard = {
     _poolEvisceratorsInsight,
     _poolExcaliburIi,
     _poolExiledBoggart,
+    _poolExplosiveGetaway,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
+    _poolFangDruidSummoner,
     _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
@@ -765,6 +770,7 @@ const shard: CardShard = {
     _poolUrbisProtector,
     _poolUrzasWorkshop,
     _poolValorousStance,
+    _poolVampireGourmand,
     _poolVanguardOfTheRestless,
     _poolVassalSoul,
     _poolVerixBladewing,

@@ -166,6 +166,7 @@ import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
+import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
@@ -221,6 +222,7 @@ import _poolMalametBrawler from "../pool/malamet-brawler.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
+import _poolMarshalsPathcruiser from "../pool/marshals-pathcruiser.js";
 import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
@@ -279,6 +281,7 @@ import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
 import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
+import _poolRiseFromTheWreck from "../pool/rise-from-the-wreck.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
@@ -324,9 +327,11 @@ import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
 import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
+import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
+import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
 import _poolSteadfastSentry from "../pool/steadfast-sentry.js";
 import _poolStirge from "../pool/stirge.js";
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolGuidedStrike,
     _poolHaazdaVigilante,
     _poolHajarLoyalBodyguard,
+    _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
     _poolHerosBlade,
     _poolHinataDawnCrowned,
@@ -642,6 +648,7 @@ const shard: CardShard = {
     _poolMaraudingBrinefang,
     _poolMarduAscendancy,
     _poolMarshGas,
+    _poolMarshalsPathcruiser,
     _poolMassacreWurm,
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
@@ -700,6 +707,7 @@ const shard: CardShard = {
     _poolRideTheRails,
     _poolRimewoodFalls,
     _poolRipscalePredator,
+    _poolRiseFromTheWreck,
     _poolRitesOfFlourishing,
     _poolRivenTurnbull,
     _poolRobotDomination,
@@ -745,9 +753,11 @@ const shard: CardShard = {
     _poolSpiderGwenFreeSpirit,
     _poolSpiderSlayerHatredHoned,
     _poolSpikedCorridorTorturePit,
+    _poolSpinOut,
     _poolSpinalCentipede,
     _poolSpontaneousCombustion,
     _poolStaggeringSize,
+    _poolStallOut,
     _poolStampedingRhino,
     _poolSteadfastSentry,
     _poolStirge,

@@ -41,6 +41,7 @@ import _poolBatterskull from "../pool/batterskull.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
+import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
@@ -506,6 +507,7 @@ const shard: CardShard = {
     _poolBeckonApparition,
     _poolBelbesPercher,
     _poolBellowingTanglewurm,
+    _poolBillowingShriekmass,
     _poolBlanchwoodTreefolk,
     _poolBlazingBomb,
     _poolBlazingFiresinger,

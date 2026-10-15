@@ -116,6 +116,7 @@ import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
+import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
@@ -127,6 +128,7 @@ import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
+import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
@@ -214,6 +216,7 @@ import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
+import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
@@ -525,6 +528,7 @@ const shard: CardShard = {
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
     _poolExpelTheInterlopers,
+    _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
@@ -536,6 +540,7 @@ const shard: CardShard = {
     _poolFireNationAttacks,
     _poolFixWhatsBroken,
     _poolFlameSpirit,
+    _poolFleetingFlight,
     _poolForerunnerOfTheLegion,
     _poolForlornFlats,
     _poolFoulmireKnight,
@@ -623,6 +628,7 @@ const shard: CardShard = {
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
     _poolMessengerHawk,
+    _poolMidnightMangler,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,

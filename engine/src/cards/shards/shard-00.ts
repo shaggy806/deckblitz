@@ -17,6 +17,7 @@ import _poolAncientSpider from "../pool/ancient-spider.js";
 import _poolAncientStoneIdol from "../pool/ancient-stone-idol.js";
 import _poolAngelheartProtector from "../pool/angelheart-protector.js";
 import _poolAngelicGift from "../pool/angelic-gift.js";
+import _poolApocalypseRunner from "../pool/apocalypse-runner.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
 import _poolArvadTheCursed from "../pool/arvad-the-cursed.js";
@@ -75,6 +76,7 @@ import _poolCloisteredYouth from "../pool/cloistered-youth.js";
 import _poolCloudExSoldier from "../pool/cloud-ex-soldier.js";
 import _poolCloudblazer from "../pool/cloudblazer.js";
 import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
+import _poolCollisionCourse from "../pool/collision-course.js";
 import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
@@ -289,6 +291,7 @@ import _poolRimefireTorque from "../pool/rimefire-torque.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
+import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
 import _poolRocOfKherRidges from "../pool/roc-of-kher-ridges.js";
 import _poolRoxanneStarfallSavant from "../pool/roxanne-starfall-savant.js";
 import _poolRumblingSlum from "../pool/rumbling-slum.js";
@@ -449,6 +452,7 @@ const shard: CardShard = {
     _poolAncientStoneIdol,
     _poolAngelheartProtector,
     _poolAngelicGift,
+    _poolApocalypseRunner,
     _poolArcaneSanctum,
     _poolArchiveArbiter,
     _poolArvadTheCursed,
@@ -507,6 +511,7 @@ const shard: CardShard = {
     _poolCloudExSoldier,
     _poolCloudblazer,
     _poolCollectiveNightmare,
+    _poolCollisionCourse,
     _poolCommandersSphere,
     _poolCommonCrook,
     _poolConsecratedSphinx,
@@ -721,6 +726,7 @@ const shard: CardShard = {
     _poolRiotPiker,
     _poolRiseOfTheDreadMarn,
     _poolRitualChamber,
+    _poolRoadsideBlowout,
     _poolRocOfKherRidges,
     _poolRoxanneStarfallSavant,
     _poolRumblingSlum,

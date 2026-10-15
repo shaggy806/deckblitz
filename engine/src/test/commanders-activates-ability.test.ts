@@ -162,6 +162,33 @@ describe("an opponent activating an ability of a permanent", () => {
     expect(life(game, A)).toBe(18);
   });
 
+  it("Harsh Mentor sees an ability whose cost sacrificed its permanent — a fetchland, a Clue", () => {
+    const { game } = table();
+    spawn(game, "Harsh Mentor", B);
+    const wilds = spawn(game, "Evolving Wilds");
+    activate(game, wilds, 0);
+    settle(game);
+    expect(zone(game, wilds)).toBe("graveyard");
+    expect(life(game, A)).toBe(18);
+    lands(game, "Plains", 2);
+    game.debugApplyEffect(A, { kind: "create-token", token: "Clue Token", count: 1 }, []);
+    const clue = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Clue Token");
+    expect(clue).toBeDefined();
+    activate(game, clue!, 0);
+    settle(game);
+    expect(life(game, A)).toBe(16);
+  });
+
+  it("Harsh Mentor ignores an ability of a card in hand (cycling)", () => {
+    const { game } = table();
+    spawn(game, "Harsh Mentor", B);
+    lands(game, "Island", 2);
+    const heavy = toHand(game, "Archfiend of Ifnir");
+    game.dispatch({ type: "cycle", player: A, card: heavy });
+    settle(game);
+    expect(life(game, A)).toBe(20);
+  });
+
   it("Harsh Mentor ignores its controller's own abilities", () => {
     const { game } = table();
     spawn(game, "Harsh Mentor", A);
@@ -247,5 +274,26 @@ describe("Rings of Brighthearth", () => {
     settle(game);
     expect(game.state.zones.shared.stack.length).toBe(0);
     expect(game.state.players[A].manaPool.length).toBe(1);
+  });
+});
+
+describe("Wizened Mentor", () => {
+  it("makes a Zombie for an opponent's permanent's ability, once each turn — a fetchland's too", () => {
+    const { game } = table();
+    spawn(game, "Wizened Mentor", B);
+    activate(game, spawn(game, "Evolving Wilds"), 0);
+    settle(game);
+    expect(tokensNamed(game, "Zombie Token (On Wings of Gold)", B)).toBe(1);
+    activate(game, spawn(game, "Oracle of Nectars"), 0, { x: 0 });
+    expect(tokensNamed(game, "Zombie Token (On Wings of Gold)", B)).toBe(1);
+  });
+
+  it("ignores cycling, a card in hand's ability", () => {
+    const { game } = table();
+    spawn(game, "Wizened Mentor", B);
+    lands(game, "Island", 2);
+    game.dispatch({ type: "cycle", player: A, card: toHand(game, "Archfiend of Ifnir") });
+    settle(game);
+    expect(tokensNamed(game, "Zombie Token (On Wings of Gold)", B)).toBe(0);
   });
 });

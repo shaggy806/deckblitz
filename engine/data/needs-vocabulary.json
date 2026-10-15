@@ -6344,6 +6344,38 @@
   "condition:counter-kinds-among-permanents": {
    "family": "condition:player-state-thresholds",
    "example": "A StaticCondition for N or more different kinds of counters among the permanents you control matching a filter (each kind counted once, wherever it sits) — Hundred-Battle Veteran."
+  },
+  "replacement:as-enters-exile-from-graveyard": {
+   "family": "bug:as-enters-choices-any-entry",
+   "example": "An 'as this enters, exile up to X [filter] cards from your graveyard' choice made before the permanent moves, linked to it, with 'enters with N counters for each card exiled this way' (Mimeoplasm, Revered One)."
+  },
+  "trigger:crews-or-saddles": {
+   "family": "keyword:crew",
+   "example": "A trigger when this creature crews a Vehicle or saddles a Mount (rule 702.122b / 702.171), its trigger object the crewed or saddled permanent, optionally only during your main phase (Canyon Vaulter)."
+  },
+  "trigger:activates-exhaust": {
+   "family": "trigger:activates-ability",
+   "example": "The activates-ability trigger narrowed to an exhaust ability ('whenever you activate an exhaust ability' — Adrenaline Jockey), as ninjutsu and loyalty already narrow it."
+  },
+  "static:pt-per-life-total": {
+   "family": "static:pt-per-amount",
+   "example": "A layer-7 P/T modification scaled by the controller's life total ('gets -X/-X, where X is your life total' — The Last Ride); grantPtPerCount has no lifeTotal source."
+  },
+  "static:exhaust-reactivation": {
+   "family": "keyword:exhaust",
+   "example": "Elvish Refueler: during your turn, if you haven't activated an exhaust ability this turn, exhaust abilities may be activated as though they hadn't been (a per-turn exhaust-activation record and a waiver of the once-only check)."
+  },
+  "cost:ability-cost-reduction-exhaust": {
+   "family": "cost:ability-cost-modification",
+   "example": "abilityCostModification narrowed to exhaust abilities: 'Exhaust abilities of other permanents you control cost {2} less to activate' (Boom Scholar), able to take the mana component to {0}."
+  },
+  "effect:reduce-player-speed": {
+   "family": "mechanic:speed",
+   "example": "Lower another player's speed by N with a floor of 1, gated on that player's speed being greater than each other player's (Spikeshell Harrier)."
+  },
+  "cost:alternative-cost-for-spells-energy": {
+   "family": "cost:may-cost-non-mana",
+   "example": "alternativeCostForSpells paid in energy rather than mana: 'You may pay eight {E} rather than pay the mana cost for permanent spells you cast' (Nissa, Worldsoul Speaker)."
   }
  }
 }
