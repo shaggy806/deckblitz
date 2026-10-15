@@ -44,6 +44,7 @@ import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
+import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
@@ -145,6 +146,7 @@ import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
+import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
@@ -304,6 +306,7 @@ import _poolStoneQuarry from "../pool/stone-quarry.js";
 import _poolStoneforgeMystic from "../pool/stoneforge-mystic.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
+import _poolStrategicIntervention from "../pool/strategic-intervention.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
@@ -434,6 +437,7 @@ const shard: CardShard = {
     _poolCalamityOfCinders,
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
+    _poolCaptainAmericasMotorcycle,
     _poolCareeningMineCart,
     _poolCartographersHawk,
     _poolCatharticReunion,
@@ -535,6 +539,7 @@ const shard: CardShard = {
     _poolHoverBarrier,
     _poolHowlingMoon,
     _poolHydraOmnivore,
+    _poolHydraulicHelper,
     _poolIconOfAncestry,
     _poolImpulsivePilferer,
     _poolInexorableTide,
@@ -694,6 +699,7 @@ const shard: CardShard = {
     _poolStoneforgeMystic,
     _poolStormcatchMentor,
     _poolStranglingSpores,
+    _poolStrategicIntervention,
     _poolStrongholdZeppelin,
     _poolSuChi,
     _poolSummonFatChocobo,

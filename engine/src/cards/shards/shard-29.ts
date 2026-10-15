@@ -56,6 +56,7 @@ import _poolCloudDragon from "../pool/cloud-dragon.js";
 import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
 import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
+import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
@@ -161,6 +162,7 @@ import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
+import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
@@ -193,6 +195,7 @@ import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
+import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
@@ -284,6 +287,7 @@ import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
 import _poolStalwartShieldBearers from "../pool/stalwart-shield-bearers.js";
 import _poolStarnheimCourser from "../pool/starnheim-courser.js";
+import _poolStatureSizeShifter from "../pool/stature-size-shifter.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
 import _poolStillnessInMotion from "../pool/stillness-in-motion.js";
@@ -424,6 +428,7 @@ const shard: CardShard = {
     _poolCodieVociferousCodex,
     _poolColorfulFeiyiSparrow,
     _poolColossalDreadmask,
+    _poolContractHero,
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
     _poolCravenKnight,
@@ -529,6 +534,7 @@ const shard: CardShard = {
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
     _poolIngeniousArtillerist,
+    _poolInspiredFire,
     _poolInundatedArchive,
     _poolJirinaDauntlessGeneral,
     _poolJuggernaut,
@@ -561,6 +567,7 @@ const shard: CardShard = {
     _poolMorgueTheft,
     _poolMoxRuby,
     _poolMulldrifter,
+    _poolMurdocksCrusade,
     _poolNaturesSpiral,
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
@@ -652,6 +659,7 @@ const shard: CardShard = {
     _poolSpottedGriffin,
     _poolStalwartShieldBearers,
     _poolStarnheimCourser,
+    _poolStatureSizeShifter,
     _poolSteadfastness,
     _poolSteelSeraph,
     _poolStillnessInMotion,

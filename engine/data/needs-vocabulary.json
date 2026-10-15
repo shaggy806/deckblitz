@@ -6008,6 +6008,34 @@
   },
   "cost:exile-cards-from-hand-cost-reduction": {
    "example": "March of Swirling Mist: as an additional cost, exile any number of blue cards from your hand; this spell costs {2} less for each."
+  },
+  "trigger:activates-power-up": {
+   "family": "trigger:activates-ability",
+   "example": "Marvel Boy, Noh-Varr: 'whenever you activate a power-up ability' — activates-ability narrowed to power-up abilities."
+  },
+  "cost:ability-cost-reduction-conditional-colored": {
+   "family": "cost:ability-cost-modification",
+   "example": "Flying Drone: an activated ability's own conditional cost reduction, coloured mana included ('costs {1}{U} less to activate if ...')."
+  },
+  "static:attached-activated-abilities-prohibited": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Secure Detention: the enchanted permanent's activated abilities can't be activated (Arrest's clause)."
+  },
+  "effect:extra-turn-prohibit-power-up": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Kang the Conqueror: an extra turn during which power-up abilities can't be activated."
+  },
+  "static:power-up-additional-activation": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Wonder Man, Hollywood Hero: each power-up ability of permanents you control can be activated an additional time."
+  },
+  "effect:damage-by-toughness-rule-eot": {
+   "family": "static:combat-damage-by-toughness",
+   "example": "The Kingpin of Crime: until end of turn, creatures you control with toughness greater than power assign combat damage by toughness (a live filter, not a fixed list)."
+  },
+  "effect:become-copy-while-source": {
+   "family": "effect:become-copy",
+   "example": "Secret Invasion: become a copy for as long as this Aura remains attached."
   }
  }
 }

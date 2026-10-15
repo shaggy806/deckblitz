@@ -79,6 +79,7 @@ import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyReality from "../pool/deny-reality.js";
+import _poolDepower from "../pool/depower.js";
 import _poolDerelictAtticWidowsWalk from "../pool/derelict-attic-widows-walk.js";
 import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDimensionX from "../pool/dimension-x.js";
@@ -165,6 +166,7 @@ import _poolInspiration from "../pool/inspiration.js";
 import _poolInspiredSphinx from "../pool/inspired-sphinx.js";
 import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
+import _poolIntrepidAce from "../pool/intrepid-ace.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
@@ -238,6 +240,7 @@ import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
 import _poolNephaliaSeakite from "../pool/nephalia-seakite.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
+import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
@@ -488,6 +491,7 @@ const shard: CardShard = {
     _poolDecanterOfEndlessWater,
     _poolDenyEntry,
     _poolDenyReality,
+    _poolDepower,
     _poolDerelictAtticWidowsWalk,
     _poolDevilthornFox,
     _poolDimensionX,
@@ -574,6 +578,7 @@ const shard: CardShard = {
     _poolInspiredSphinx,
     _poolInspiritFlagshipVessel,
     _poolIntangibleVirtue,
+    _poolIntrepidAce,
     _poolInvisibleForceField,
     _poolIraxxaEmpressOfMars,
     _poolIrohDragonOfTheWest,
@@ -647,6 +652,7 @@ const shard: CardShard = {
     _poolNekusarTheMindrazer,
     _poolNephaliaSeakite,
     _poolNewBenalia,
+    _poolNighthawkDarkDefender,
     _poolNightwingShade,
     _poolNihilSpellbomb,
     _poolNissaResurgentAnimist,

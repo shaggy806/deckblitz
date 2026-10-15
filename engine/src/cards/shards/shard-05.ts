@@ -312,6 +312,7 @@ import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
+import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
 import _poolStonespeakerCrystal from "../pool/stonespeaker-crystal.js";
 import _poolStonySilence from "../pool/stony-silence.js";
 import _poolStormFront from "../pool/storm-front.js";
@@ -705,6 +706,7 @@ const shard: CardShard = {
     _poolStarOfExtinction,
     _poolStealerOfSecrets,
     _poolSteamBlast,
+    _poolStolenStarkTech,
     _poolStonespeakerCrystal,
     _poolStonySilence,
     _poolStormFront,

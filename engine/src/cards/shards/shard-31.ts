@@ -19,6 +19,7 @@ import _poolAngelOfTheRuins from "../pool/angel-of-the-ruins.js";
 import _poolAngelOfVitality from "../pool/angel-of-vitality.js";
 import _poolAnguishedUnmaking from "../pool/anguished-unmaking.js";
 import _poolAnimalSanctuary from "../pool/animal-sanctuary.js";
+import _poolAntManColonyCommander from "../pool/ant-man-colony-commander.js";
 import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js";
 import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
@@ -38,6 +39,7 @@ import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
+import _poolBionicBlow from "../pool/bionic-blow.js";
 import _poolBlackWidowDeadlyHunter from "../pool/black-widow-deadly-hunter.js";
 import _poolBlightedAgent from "../pool/blighted-agent.js";
 import _poolBlinkmothWell from "../pool/blinkmoth-well.js";
@@ -202,6 +204,7 @@ import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
+import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
@@ -226,6 +229,7 @@ import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
+import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
@@ -394,6 +398,7 @@ const shard: CardShard = {
     _poolAngelOfVitality,
     _poolAnguishedUnmaking,
     _poolAnimalSanctuary,
+    _poolAntManColonyCommander,
     _poolApostleOfPurifyingLight,
     _poolAppaSteadfastGuardian,
     _poolArchersParapet,
@@ -413,6 +418,7 @@ const shard: CardShard = {
     _poolBestowGreatness,
     _poolBigBertha,
     _poolBindingTheOldGods,
+    _poolBionicBlow,
     _poolBlackWidowDeadlyHunter,
     _poolBlightedAgent,
     _poolBlinkmothWell,
@@ -577,6 +583,7 @@ const shard: CardShard = {
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
     _poolLilysplashMentor,
+    _poolLivingLightningChargedUp,
     _poolLizardWarrior,
     _poolLlanowarReborn,
     _poolLockjawSlobberingTeleporter,
@@ -601,6 +608,7 @@ const shard: CardShard = {
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
     _poolMortalitySpear,
+    _poolMsMarvelElasticAlly,
     _poolNewHorizons,
     _poolNimReplica,
     _poolNoxiousGearhulk,

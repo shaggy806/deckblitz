@@ -28,6 +28,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Marvel Super Heroes Commander, whole, and Marvel Super Heroes' next 30** (batch 74): 82
+  cards, with two engine fixes (an attacks-alone trigger's defending player; once a turn shared
+  across one ability's entries) (2026-10-15).
+- **The noncombat-damage-taken turn stat**: Whiplash Wordsmith, Grim Repriser (batch 73,
+  2026-10-14, e4951aee).
 - **"Costs {N} less if it targets …"** (`targetCostReduction`): Price of Fame, Magnificent End,
   Thing Swing, Fantastic Bounce (2026-10-14).
 - **The Hobbit, whole, and Marvel Super Heroes Commander's next 78** (batch 72): 111 cards, with

@@ -15,6 +15,7 @@ import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
 import _poolAngelOfIndemnity from "../pool/angel-of-indemnity.js";
 import _poolAngelOfRetribution from "../pool/angel-of-retribution.js";
 import _poolAnowonTheRuinThief from "../pool/anowon-the-ruin-thief.js";
+import _poolAntMansAirForce from "../pool/ant-mans-air-force.js";
 import _poolArabellaAbandonedDoll from "../pool/arabella-abandoned-doll.js";
 import _poolArborAdherent from "../pool/arbor-adherent.js";
 import _poolArchangel from "../pool/archangel.js";
@@ -193,8 +194,10 @@ import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
 import _poolMirkoObsessiveTheorist from "../pool/mirko-obsessive-theorist.js";
 import _poolMistbreathElder from "../pool/mistbreath-elder.js";
 import _poolMisterFantastic from "../pool/mister-fantastic.js";
+import _poolMockingbirdBobbiMorse from "../pool/mockingbird-bobbi-morse.js";
 import _poolMoggSalvage from "../pool/mogg-salvage.js";
 import _poolMoggSentry from "../pool/mogg-sentry.js";
+import _poolMoltenLavamancer from "../pool/molten-lavamancer.js";
 import _poolMrFoxglove from "../pool/mr-foxglove.js";
 import _poolMuxusGoblinGrandee from "../pool/muxus-goblin-grandee.js";
 import _poolMyriadLandscape from "../pool/myriad-landscape.js";
@@ -403,6 +406,7 @@ const shard: CardShard = {
     _poolAngelOfIndemnity,
     _poolAngelOfRetribution,
     _poolAnowonTheRuinThief,
+    _poolAntMansAirForce,
     _poolArabellaAbandonedDoll,
     _poolArborAdherent,
     _poolArchangel,
@@ -581,8 +585,10 @@ const shard: CardShard = {
     _poolMirkoObsessiveTheorist,
     _poolMistbreathElder,
     _poolMisterFantastic,
+    _poolMockingbirdBobbiMorse,
     _poolMoggSalvage,
     _poolMoggSentry,
+    _poolMoltenLavamancer,
     _poolMrFoxglove,
     _poolMuxusGoblinGrandee,
     _poolMyriadLandscape,

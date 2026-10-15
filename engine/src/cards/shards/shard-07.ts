@@ -142,6 +142,7 @@ import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
 import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
+import _poolHeroicTeamwork from "../pool/heroic-teamwork.js";
 import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
@@ -298,6 +299,7 @@ import _poolSerrasBlessing from "../pool/serras-blessing.js";
 import _poolSeshiroTheAnointed from "../pool/seshiro-the-anointed.js";
 import _poolShadowbeastSighting from "../pool/shadowbeast-sighting.js";
 import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
+import _poolShiarSoldier from "../pool/shiar-soldier.js";
 import _poolShimmerDragon from "../pool/shimmer-dragon.js";
 import _poolShinenOfFearsChill from "../pool/shinen-of-fears-chill.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
@@ -564,6 +566,7 @@ const shard: CardShard = {
     _poolHeliodSunCrowned,
     _poolHerculesPrinceOfPower,
     _poolHermiticNautilus,
+    _poolHeroicTeamwork,
     _poolHiddenLair,
     _poolHiddenNecropolis,
     _poolHighlandLake,
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolSeshiroTheAnointed,
     _poolShadowbeastSighting,
     _poolSheHulkJadeDefender,
+    _poolShiarSoldier,
     _poolShimmerDragon,
     _poolShinenOfFearsChill,
     _poolSimicCharm,

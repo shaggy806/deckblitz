@@ -1,0 +1,712 @@
+{
+ "batch": "B74",
+ "status": "complete",
+ "ranks": "Marvel Super Heroes Commander (MSC, 2026-06-26): the rest of the set; Marvel Super Heroes (MSH, 2026-06-26): the first 30 of its rest (ranks first)",
+ "authored": [
+  {
+   "name": "Absorbing Man",
+   "files": [
+    "engine/src/cards/pool/absorbing-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ant-Man, Colony Commander",
+   "files": [
+    "engine/src/cards/pool/ant-man-colony-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ant-Man, Reformed Rogue",
+   "files": [
+    "engine/src/cards/pool/ant-man-reformed-rogue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ant-Man's Air Force",
+   "files": [
+    "engine/src/cards/pool/ant-mans-air-force.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armed Assailant",
+   "files": [
+    "engine/src/cards/pool/armed-assailant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atlas, Sizable Stooge",
+   "files": [
+    "engine/src/cards/pool/atlas-sizable-stooge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beast Mode",
+   "files": [
+    "engine/src/cards/pool/beast-mode.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bionic Blow",
+   "files": [
+    "engine/src/cards/pool/bionic-blow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Widow, Double Agent",
+   "files": [
+    "engine/src/cards/pool/black-widow-double-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blur of Heroism",
+   "files": [
+    "engine/src/cards/pool/blur-of-heroism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America's Motorcycle",
+   "files": [
+    "engine/src/cards/pool/captain-americas-motorcycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collector's Case",
+   "files": [
+    "engine/src/cards/pool/collectors-case.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contract Hero",
+   "files": [
+    "engine/src/cards/pool/contract-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Count Nefaria",
+   "files": [
+    "engine/src/cards/pool/count-nefaria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darwin, Adaptive Mutant",
+   "files": [
+    "engine/src/cards/pool/darwin-adaptive-mutant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depower",
+   "files": [
+    "engine/src/cards/pool/depower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doctor Jane Foster",
+   "files": [
+    "engine/src/cards/pool/doctor-jane-foster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doctor Spectrum",
+   "files": [
+    "engine/src/cards/pool/doctor-spectrum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falcon's Wing Harness",
+   "files": [
+    "engine/src/cards/pool/falcons-wing-harness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fall to Earth",
+   "files": [
+    "engine/src/cards/pool/fall-to-earth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fixer, Techno Terror",
+   "files": [
+    "engine/src/cards/pool/fixer-techno-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flora Colossus",
+   "files": [
+    "engine/src/cards/pool/flora-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guerrilla Gorilla",
+   "files": [
+    "engine/src/cards/pool/guerrilla-gorilla.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hawkeye's Shot",
+   "files": [
+    "engine/src/cards/pool/hawkeyes-shot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heroic Teamwork",
+   "files": [
+    "engine/src/cards/pool/heroic-teamwork.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "HYDRA Disintegrator",
+   "files": [
+    "engine/src/cards/pool/hydra-disintegrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hydraulic Helper",
+   "files": [
+    "engine/src/cards/pool/hydraulic-helper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "I Am Iron Man",
+   "files": [
+    "engine/src/cards/pool/i-am-iron-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iceman and Firestar",
+   "files": [
+    "engine/src/cards/pool/iceman-and-firestar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Cosmographer",
+   "files": [
+    "engine/src/cards/pool/imperial-cosmographer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspired Fire",
+   "files": [
+    "engine/src/cards/pool/inspired-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intrepid Ace",
+   "files": [
+    "engine/src/cards/pool/intrepid-ace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jack of Hearts, Volatile Hero",
+   "files": [
+    "engine/src/cards/pool/jack-of-hearts-volatile-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Lightning, Charged Up",
+   "files": [
+    "engine/src/cards/pool/living-lightning-charged-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "MACH-1, Swooping Scoundrel",
+   "files": [
+    "engine/src/cards/pool/mach-1-swooping-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Machine Man, Model X-51",
+   "files": [
+    "engine/src/cards/pool/machine-man-model-x-51.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Minion Missile",
+   "files": [
+    "engine/src/cards/pool/minion-missile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mockingbird, Bobbi Morse",
+   "files": [
+    "engine/src/cards/pool/mockingbird-bobbi-morse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Lavamancer",
+   "files": [
+    "engine/src/cards/pool/molten-lavamancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ms. Marvel, Elastic Ally",
+   "files": [
+    "engine/src/cards/pool/ms-marvel-elastic-ally.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Murdock's Crusade",
+   "files": [
+    "engine/src/cards/pool/murdocks-crusade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nighthawk, Dark Defender",
+   "files": [
+    "engine/src/cards/pool/nighthawk-dark-defender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okoye, Dora Milaje Leader",
+   "files": [
+    "engine/src/cards/pool/okoye-dora-milaje-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of Captain America",
+   "files": [
+    "engine/src/cards/pool/origin-of-captain-america.ts",
+    "engine/src/cards/tokens/sturdy-shield-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patriot, Shield Wielder",
+   "files": [
+    "engine/src/cards/pool/patriot-shield-wielder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patriot, Young Avenger",
+   "files": [
+    "engine/src/cards/pool/patriot-young-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Photon Blast Barrage",
+   "files": [
+    "engine/src/cards/pool/photon-blast-barrage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pick Up the Pace",
+   "files": [
+    "engine/src/cards/pool/pick-up-the-pace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power Boost",
+   "files": [
+    "engine/src/cards/pool/power-boost.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Punishing Punch",
+   "files": [
+    "engine/src/cards/pool/punishing-punch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "S.H.I.E.L.D. Spy Kit",
+   "files": [
+    "engine/src/cards/pool/s-h-i-e-l-d-spy-kit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scientist Supreme of A.I.M.",
+   "files": [
+    "engine/src/cards/pool/scientist-supreme-of-a-i-m.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shi'ar Soldier",
+   "files": [
+    "engine/src/cards/pool/shiar-soldier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shipwreck Patrol",
+   "files": [
+    "engine/src/cards/pool/shipwreck-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shuri, Vibranium Technologist",
+   "files": [
+    "engine/src/cards/pool/shuri-vibranium-technologist.ts",
+    "engine/src/cards/tokens/robot-hero-token-1-1.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sky Cycle",
+   "files": [
+    "engine/src/cards/pool/sky-cycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldier On",
+   "files": [
+    "engine/src/cards/pool/soldier-on.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Man, To the Rescue",
+   "files": [
+    "engine/src/cards/pool/spider-man-to-the-rescue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stature, Size Shifter",
+   "files": [
+    "engine/src/cards/pool/stature-size-shifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stature, Young Avenger",
+   "files": [
+    "engine/src/cards/pool/stature-young-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stolen Stark Tech",
+   "files": [
+    "engine/src/cards/pool/stolen-stark-tech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm, Shaker of Skies",
+   "files": [
+    "engine/src/cards/pool/storm-shaker-of-skies.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Strategic Intervention",
+   "files": [
+    "engine/src/cards/pool/strategic-intervention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stunning Shot",
+   "files": [
+    "engine/src/cards/pool/stunning-shot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Suit",
+   "files": [
+    "engine/src/cards/pool/super-suit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Team Tactics",
+   "files": [
+    "engine/src/cards/pool/team-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Howling Commandos",
+   "files": [
+    "engine/src/cards/pool/the-howling-commandos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Immortal Weapons",
+   "files": [
+    "engine/src/cards/pool/the-immortal-weapons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Wasp, Janet Van Dyne",
+   "files": [
+    "engine/src/cards/pool/the-wasp-janet-van-dyne.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timeline Inquiry",
+   "files": [
+    "engine/src/cards/pool/timeline-inquiry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titanium Man",
+   "files": [
+    "engine/src/cards/pool/titanium-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "TVA Bureaucrat",
+   "files": [
+    "engine/src/cards/pool/tva-bureaucrat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ultimate Alliance",
+   "files": [
+    "engine/src/cards/pool/ultimate-alliance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vault Guardsman",
+   "files": [
+    "engine/src/cards/pool/vault-guardsman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Victor Timely, Wily Tycoon",
+   "files": [
+    "engine/src/cards/pool/victor-timely-wily-tycoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voracious Brood",
+   "files": [
+    "engine/src/cards/pool/voracious-brood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wakandan Tusker",
+   "files": [
+    "engine/src/cards/pool/wakandan-tusker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War Machine, James Rhodes",
+   "files": [
+    "engine/src/cards/pool/war-machine-james-rhodes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wasp, Shrinking Savior",
+   "files": [
+    "engine/src/cards/pool/wasp-shrinking-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Tiger, Amulet Keeper",
+   "files": [
+    "engine/src/cards/pool/white-tiger-amulet-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Widow, Free Agent",
+   "files": [
+    "engine/src/cards/pool/white-widow-free-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wiccan, Rising Magician",
+   "files": [
+    "engine/src/cards/pool/wiccan-rising-magician.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Quantum Reduction",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "Enchanted creature loses all abilities: losing abilities is only an effect modifier, not a static."
+  },
+  {
+   "name": "Marvel Boy, Noh-Varr",
+   "needs": [
+    "trigger:activates-power-up"
+   ],
+   "why": "'Whenever you activate a power-up ability': activates-ability narrows only to ninjutsu, loyalty or a source filter."
+  },
+  {
+   "name": "Donald Blake, Guise of Thor",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "'He becomes a God Warrior Hero' replaces his creature types with no duration; add-types only adds, animate also sets base P/T."
+  },
+  {
+   "name": "Whirlwind, Killer Cyclone",
+   "needs": [
+    "trigger:attacks-player-filter"
+   ],
+   "why": "'One or more creatures you control that entered this turn attack a player': attacks-player has no attacker filter."
+  },
+  {
+   "name": "Flying Drone",
+   "needs": [
+    "cost:ability-cost-reduction-conditional-colored"
+   ],
+   "why": "An activated ability that 'costs {1}{U} less to activate if ...': ActivatedAbility.costReduction is generic-only and unconditional."
+  },
+  {
+   "name": "Doorman",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "Target creature can't be blocked by power-2-or-less creatures and/or Walls this turn: cantBeBlockedBy is only a static."
+  },
+  {
+   "name": "Secure Detention",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "'Its activated abilities can't be activated' of the enchanted permanent (Arrest's clause): no shape names the host's abilities."
+  },
+  {
+   "name": "Happy Hogan, Bodyguard",
+   "needs": [
+    "effect:choices-by-other-players"
+   ],
+   "why": "The target's owner (not controller) chooses second from the top or the bottom of their library."
+  },
+  {
+   "name": "Virtual Assistant",
+   "needs": [
+    "trigger:cast-spell-clauses"
+   ],
+   "why": "'Whenever you cast a spell using teamwork': the cast-spell trigger has no kicked clause."
+  },
+  {
+   "name": "Mister Hyde, Monster Within",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "Remove a counter of any kind from a creature you choose, with an if-you-do result: remove-counter needs a fixed kind."
+  },
+  {
+   "name": "Hulk, Gamma Goliath",
+   "needs": [
+    "cost:ability-cost-modification"
+   ],
+   "why": "A cost change for other creatures' power-up abilities: abilityCostModification narrows only to ninjutsu or unlock."
+  },
+  {
+   "name": "Thanos, the Mad Titan",
+   "needs": [
+    "condition:filter-card-property-clauses"
+   ],
+   "why": "Choose odd or even, destroy each permanent whose mana value is: no odd/even mana-value filter."
+  },
+  {
+   "name": "Kang the Conqueror",
+   "needs": [
+    "effect:extra-turn-prohibit-power-up"
+   ],
+   "why": "'Take an extra turn ... during that turn, power-up abilities can't be activated': take-extra-turn carries no restriction for that turn."
+  },
+  {
+   "name": "Wonder Man, Hollywood Hero",
+   "needs": [
+    "static:power-up-additional-activation"
+   ],
+   "why": "Power-up abilities of permanents you control can be activated an additional time: power-up's once-only tracking can't grant more."
+  },
+  {
+   "name": "The Kingpin of Crime",
+   "needs": [
+    "effect:damage-by-toughness-rule-eot"
+   ],
+   "why": "Until end of turn, creatures you control with toughness greater than power assign combat damage by toughness: damage-by-toughness covers one target, not a live filter."
+  },
+  {
+   "name": "Secret Invasion",
+   "needs": [
+    "effect:become-copy-while-source"
+   ],
+   "why": "Become a copy 'for as long as this Aura remains attached': become-copy's until has no while-source duration."
+  },
+  {
+   "name": "Speed, Young Avenger",
+   "needs": [
+    "static:blockable-only-by-filter",
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "'Can't be blocked this turn except by creatures with haste': no one-shot blocker restriction."
+  },
+  {
+   "name": "Whiplash, Vengeful Engineer",
+   "needs": [
+    "effect:amount-new-variants"
+   ],
+   "why": "'The number of Equipment attached to him': no amount counts attachments to the source."
+  }
+ ]
+}

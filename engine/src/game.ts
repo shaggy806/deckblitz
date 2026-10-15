@@ -16134,7 +16134,7 @@ export class Game {
           !this.enterBatchAlreadyFired(ability.trigger, `${id}#${index}`) &&
           !(
             ability.oncePerTurn === true &&
-            this.triggeredOnceThisTurn(live, index, lastSeen?.zoneChangeCount)
+            this.triggeredOnceThisTurn(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount)
           ) &&
           this.interveningIfMet(
             ability.condition,
@@ -16476,7 +16476,10 @@ export class Game {
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
           if (ability.oncePerTurn === true) {
-            this.markTriggeredOnce(live, index, lastSeen?.zoneChangeCount);
+            // "When ~ enters and whenever …, triggers only once each turn"
+            // is one ability printed as two entries (`sameAbilityAs`): its
+            // once a turn is shared (MACH-1, Swooping Scoundrel).
+            this.markTriggeredOnce(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount);
           }
           // "Whenever one or more … enter": this firing is the entry's one
           // (see `enterBatchAlreadyFired`), whatever the batch count.
@@ -16821,8 +16824,9 @@ export class Game {
       // The player who activated it (Harsh Mentor: "deals 2 damage to that
       // player").
       player = event.player;
-    } else if (event.type === "attacker-blocked") {
-      // The defending player — the one whose creatures blocked it.
+    } else if (event.type === "attacker-blocked" || event.type === "attacked-alone") {
+      // The defending player — the one whose creatures blocked it, or the
+      // one the lone attacker attacks (Strategic Intervention).
       const attacking = this.state.objects[event.attacker]?.attacking;
       if (attacking !== null && attacking !== undefined) player = this.defendingPlayerOf(attacking);
     } else if (event.type === "object-targeted") {

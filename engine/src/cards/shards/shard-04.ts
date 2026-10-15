@@ -262,6 +262,7 @@ import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
 import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
+import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
 import _poolSanctify from "../pool/sanctify.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
@@ -293,6 +294,7 @@ import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
+import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
@@ -648,6 +650,7 @@ const shard: CardShard = {
     _poolRubyDaringTracker,
     _poolRugOfSmothering,
     _poolRuneSealedWall,
+    _poolSHIELDSpyKit,
     _poolSaiMasterThopterist,
     _poolSanctify,
     _poolSanguineMorass,
@@ -679,6 +682,7 @@ const shard: CardShard = {
     _poolSpectralDenial,
     _poolSpellweaverEternal,
     _poolSpiderBot,
+    _poolSpiderManToTheRescue,
     _poolSpitFlame,
     _poolSplatterTechnique,
     _poolSpringleafDrum,

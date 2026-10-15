@@ -100,6 +100,7 @@ import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
+import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
 import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
@@ -117,6 +118,7 @@ import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
+import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
@@ -240,6 +242,7 @@ import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
 import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
+import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
@@ -357,6 +360,7 @@ import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
+import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
@@ -494,6 +498,7 @@ const shard: CardShard = {
     _poolDiabolicEdict,
     _poolDivergentEquation,
     _poolDoctorDoomUnrivaled,
+    _poolDoctorJaneFoster,
     _poolDragonlordAtarka,
     _poolDriftingMeadow,
     _poolDroverOfTheMighty,
@@ -511,6 +516,7 @@ const shard: CardShard = {
     _poolEtchedFamiliar,
     _poolExperimentalAviator,
     _poolFallOfTheGavel,
+    _poolFallToEarth,
     _poolFatalFumes,
     _poolFatestitcher,
     _poolFelhideMinotaur,
@@ -634,6 +640,7 @@ const shard: CardShard = {
     _poolOverflowingInsight,
     _poolOwlinSpiralmancer,
     _poolPersonalTutor,
+    _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
     _poolPhyrexianVivisector,
     _poolPickYourPoison,
@@ -751,6 +758,7 @@ const shard: CardShard = {
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,
+    _poolVictorTimelyWilyTycoon,
     _poolVillainousWrath,
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,

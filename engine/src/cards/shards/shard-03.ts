@@ -341,9 +341,12 @@ import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
 import _poolWargTactics from "../pool/warg-tactics.js";
+import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
+import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
+import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
@@ -706,9 +709,12 @@ const shard: CardShard = {
     _poolWallOfRoots,
     _poolWanderingArchaic,
     _poolWargTactics,
+    _poolWaspShrinkingSavior,
     _poolWeatherMaker,
     _poolWebShot,
     _poolWhiteKnight,
+    _poolWhiteWidowFreeAgent,
+    _poolWiccanRisingMagician,
     _poolWittyRoastmaster,
     _poolWoeStrider,
     _poolWondrousCrucible,

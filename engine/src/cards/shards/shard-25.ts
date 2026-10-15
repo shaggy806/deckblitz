@@ -309,6 +309,7 @@ import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
+import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
@@ -688,6 +689,7 @@ const shard: CardShard = {
     _poolStormCrow,
     _poolStorySeeker,
     _poolStrionicResonator,
+    _poolStunningShot,
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,
     _poolSunderingVitae,

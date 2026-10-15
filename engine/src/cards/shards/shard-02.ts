@@ -15,6 +15,7 @@ import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
+import _poolArmedAssailant from "../pool/armed-assailant.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
 import _poolArtisticRefusal from "../pool/artistic-refusal.js";
@@ -393,6 +394,7 @@ const shard: CardShard = {
     _poolApexAltisaur,
     _poolApexWitchstalker,
     _poolArcaneDenial,
+    _poolArmedAssailant,
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,
     _poolArtisticRefusal,

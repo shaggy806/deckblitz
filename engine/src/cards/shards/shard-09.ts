@@ -104,6 +104,7 @@ import _poolExpensiveTaste from "../pool/expensive-taste.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
+import _poolFalconsWingHarness from "../pool/falcons-wing-harness.js";
 import _poolFamilyReunion from "../pool/family-reunion.js";
 import _poolFateForgotten from "../pool/fate-forgotten.js";
 import _poolFathomFleetFirebrand from "../pool/fathom-fleet-firebrand.js";
@@ -230,6 +231,7 @@ import _poolPerplexingTest from "../pool/perplexing-test.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
+import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolFaerieInvaders,
     _poolFaerieMastermind,
     _poolFalconAndRedwing,
+    _poolFalconsWingHarness,
     _poolFamilyReunion,
     _poolFateForgotten,
     _poolFathomFleetFirebrand,
@@ -626,6 +629,7 @@ const shard: CardShard = {
     _poolPestilentSyphoner,
     _poolPhyrexianDebaser,
     _poolPhytoburst,
+    _poolPickUpThePace,
     _poolPlagueStinger,
     _poolPlantBeans,
     _poolPlateau,

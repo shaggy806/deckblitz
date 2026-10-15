@@ -23,10 +23,12 @@ import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
+import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
 import _poolBloodlineNecromancer from "../pool/bloodline-necromancer.js";
 import _poolBloodlinePretender from "../pool/bloodline-pretender.js";
 import _poolBloomHulk from "../pool/bloom-hulk.js";
+import _poolBlurOfHeroism from "../pool/blur-of-heroism.js";
 import _poolBodyOfKnowledge from "../pool/body-of-knowledge.js";
 import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
@@ -53,6 +55,7 @@ import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
 import _poolCollectiveUnconscious from "../pool/collective-unconscious.js";
+import _poolCollectorsCase from "../pool/collectors-case.js";
 import _poolColossalMajesty from "../pool/colossal-majesty.js";
 import _poolComingInHot from "../pool/coming-in-hot.js";
 import _poolCommandBeacon from "../pool/command-beacon.js";
@@ -255,6 +258,7 @@ import _poolSavannahLions from "../pool/savannah-lions.js";
 import _poolScarletSpiderBenReilly from "../pool/scarlet-spider-ben-reilly.js";
 import _poolScavengedBrawler from "../pool/scavenged-brawler.js";
 import _poolScepterOfFugue from "../pool/scepter-of-fugue.js";
+import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScrap from "../pool/scrap.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
@@ -312,6 +316,7 @@ import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
+import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
@@ -357,6 +362,7 @@ import _poolViscidLemures from "../pool/viscid-lemures.js";
 import _poolVoidRend from "../pool/void-rend.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
+import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
 import _poolWargate from "../pool/wargate.js";
 import _poolWargling from "../pool/wargling.js";
@@ -396,6 +402,7 @@ import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
 import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
+import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
 import _tokensWhiteDogToken11 from "../tokens/white-dog-token-1-1.js";
 import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
 
@@ -421,10 +428,12 @@ const shard: CardShard = {
     _poolBedevil,
     _poolBighornerRancher,
     _poolBirdMaiden,
+    _poolBlackWidowDoubleAgent,
     _poolBlindingMage,
     _poolBloodlineNecromancer,
     _poolBloodlinePretender,
     _poolBloomHulk,
+    _poolBlurOfHeroism,
     _poolBodyOfKnowledge,
     _poolBomatBazaarBarge,
     _poolBonePitBrute,
@@ -451,6 +460,7 @@ const shard: CardShard = {
     _poolCodsworthHandyHelper,
     _poolColdWaterSnapper,
     _poolCollectiveUnconscious,
+    _poolCollectorsCase,
     _poolColossalMajesty,
     _poolComingInHot,
     _poolCommandBeacon,
@@ -653,6 +663,7 @@ const shard: CardShard = {
     _poolScarletSpiderBenReilly,
     _poolScavengedBrawler,
     _poolScepterOfFugue,
+    _poolScientistSupremeOfAIM,
     _poolScrap,
     _poolSentinelSpider,
     _poolShatteredAngel,
@@ -710,6 +721,7 @@ const shard: CardShard = {
     _poolThassaDeepDwelling,
     _poolTheEarthCrystal,
     _poolTheMechanistAerialArtisan,
+    _poolTheWaspJanetVanDyne,
     _poolThirstingRoots,
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
@@ -755,6 +767,7 @@ const shard: CardShard = {
     _poolVoidRend,
     _poolVraskaGolgariQueen,
     _poolVulshokSorcerer,
+    _poolWakandanTusker,
     _poolWallOfAir,
     _poolWargate,
     _poolWargling,
@@ -796,6 +809,7 @@ const shard: CardShard = {
     _tokensSkeletonPirateToken,
     _tokensSpiritTokenGreatArashinCity,
     _tokensSpiritTokenKuraTheBoundlessSky,
+    _tokensSturdyShieldToken,
     _tokensWhiteDogToken11,
     _tokensZombieDruidToken,
   ],

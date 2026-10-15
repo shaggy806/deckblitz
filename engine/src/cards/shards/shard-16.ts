@@ -197,6 +197,7 @@ import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
 import _poolLynx from "../pool/lynx.js";
 import _poolMaalfeldTwins from "../pool/maalfeld-twins.js";
 import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
+import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
 import _poolMageRingBully from "../pool/mage-ring-bully.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
@@ -621,6 +622,7 @@ const shard: CardShard = {
     _poolLynx,
     _poolMaalfeldTwins,
     _poolMachineGodsEffigy,
+    _poolMachineManModelX51,
     _poolMageRingBully,
     _poolMagmaVein,
     _poolMalakirRebirth,

@@ -118,6 +118,7 @@ import _poolFecundity from "../pool/fecundity.js";
 import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
 import _poolFeralAbomination from "../pool/feral-abomination.js";
 import _poolFinalReward from "../pool/final-reward.js";
+import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
@@ -157,6 +158,7 @@ import _poolHopeEstheim from "../pool/hope-estheim.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
+import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
@@ -225,6 +227,7 @@ import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
 import _poolPersonify from "../pool/personify.js";
@@ -291,6 +294,7 @@ import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
 import _poolSmellFear from "../pool/smell-fear.js";
 import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
+import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
@@ -361,6 +365,7 @@ import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVilisBrokerOfBlood from "../pool/vilis-broker-of-blood.js";
 import _poolVindicate from "../pool/vindicate.js";
 import _poolViralDrake from "../pool/viral-drake.js";
+import _poolVoraciousBrood from "../pool/voracious-brood.js";
 import _poolVoraciousFellBeast from "../pool/voracious-fell-beast.js";
 import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
 import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
@@ -512,6 +517,7 @@ const shard: CardShard = {
     _poolFeedTheSwarm,
     _poolFeralAbomination,
     _poolFinalReward,
+    _poolFixerTechnoTerror,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
     _poolFoggyBottomSwamp,
@@ -551,6 +557,7 @@ const shard: CardShard = {
     _poolHullbreakerHorror,
     _poolHuntedWitness,
     _poolIdolOfOblivion,
+    _poolImperialCosmographer,
     _poolIndathaCrystal,
     _poolInescapableBlaze,
     _poolInspiringRoar,
@@ -619,6 +626,7 @@ const shard: CardShard = {
     _poolOnduGiant,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolPatriotYoungAvenger,
     _poolPerchProtection,
     _poolPerimeterPatrol,
     _poolPersonify,
@@ -685,6 +693,7 @@ const shard: CardShard = {
     _poolSlaughterPact,
     _poolSmellFear,
     _poolSmeltWardMinotaur,
+    _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
     _poolSoulSnuffers,
@@ -755,6 +764,7 @@ const shard: CardShard = {
     _poolVilisBrokerOfBlood,
     _poolVindicate,
     _poolViralDrake,
+    _poolVoraciousBrood,
     _poolVoraciousFellBeast,
     _poolVoyagerQuickwelder,
     _poolVraanExecutionerThane,

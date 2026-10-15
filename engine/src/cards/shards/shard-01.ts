@@ -119,6 +119,7 @@ import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
+import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
@@ -174,6 +175,7 @@ import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
 import _poolLuminousBonds from "../pool/luminous-bonds.js";
+import _poolMach1SwoopingScoundrel from "../pool/mach-1-swooping-scoundrel.js";
 import _poolMakindiAeronaut from "../pool/makindi-aeronaut.js";
 import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
@@ -219,6 +221,7 @@ import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
+import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
@@ -335,6 +338,7 @@ import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.j
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
+import _poolVaultGuardsman from "../pool/vault-guardsman.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
 import _poolVengefulDead from "../pool/vengeful-dead.js";
 import _poolVengefulPossession from "../pool/vengeful-possession.js";
@@ -487,6 +491,7 @@ const shard: CardShard = {
     _poolGuttersnipe,
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,
+    _poolHawkeyesShot,
     _poolHaywireMite,
     _poolHazoretGodseeker,
     _poolHedronCrab,
@@ -542,6 +547,7 @@ const shard: CardShard = {
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,
     _poolLuminousBonds,
+    _poolMach1SwoopingScoundrel,
     _poolMakindiAeronaut,
     _poolMakindiStampede,
     _poolMalakirFamiliar,
@@ -587,6 +593,7 @@ const shard: CardShard = {
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,
+    _poolPowerBoost,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,
@@ -703,6 +710,7 @@ const shard: CardShard = {
     _poolVampireInterloper,
     _poolVampiricFeast,
     _poolVanquishTheHorde,
+    _poolVaultGuardsman,
     _poolVedalkenEntrancer,
     _poolVengefulDead,
     _poolVengefulPossession,

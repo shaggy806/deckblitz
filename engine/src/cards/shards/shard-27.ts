@@ -15,6 +15,7 @@ import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
+import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
@@ -407,6 +408,7 @@ const shard: CardShard = {
     _poolAlabornTrooper,
     _poolAltarsReap,
     _poolAmuletOfVigor,
+    _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
     _poolArcaneFlight,

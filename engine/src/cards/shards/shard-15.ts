@@ -163,6 +163,7 @@ import _poolHillGigas from "../pool/hill-gigas.js";
 import _poolHonor from "../pool/honor.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHystrodon from "../pool/hystrodon.js";
+import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
@@ -299,6 +300,7 @@ import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
 import _poolStrengthOfWill from "../pool/strength-of-will.js";
@@ -534,6 +536,7 @@ const shard: CardShard = {
     _poolHonor,
     _poolHostOfTheHereafter,
     _poolHystrodon,
+    _poolIcemanAndFirestar,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
     _poolIrenicussVileDuplication,
@@ -670,6 +673,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolStatureYoungAvenger,
     _poolStingingVitriol,
     _poolStormriderSpirit,
     _poolStrengthOfWill,

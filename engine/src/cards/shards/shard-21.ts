@@ -220,6 +220,7 @@ import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
+import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPheresBandCentaurs from "../pool/pheres-band-centaurs.js";
@@ -287,12 +288,14 @@ import _poolSubmergedBoneyard from "../pool/submerged-boneyard.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
+import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
 import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
+import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
 import _poolTerramorph from "../pool/terramorph.js";
@@ -303,6 +306,7 @@ import _poolThalakosSentry from "../pool/thalakos-sentry.js";
 import _poolTheDawningArchaic from "../pool/the-dawning-archaic.js";
 import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
+import _poolTheHowlingCommandos from "../pool/the-howling-commandos.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
@@ -349,6 +353,7 @@ import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
 import _tokensRagavanToken from "../tokens/ragavan-token.js";
+import _tokensRobotHeroToken11 from "../tokens/robot-hero-token-1-1.js";
 import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-nation-attacks.js";
 
 const shard: CardShard = {
@@ -570,6 +575,7 @@ const shard: CardShard = {
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPathOfAngersFlame,
+    _poolPatriotShieldWielder,
     _poolPeemaOutrider,
     _poolPhantasmalImage,
     _poolPheresBandCentaurs,
@@ -637,12 +643,14 @@ const shard: CardShard = {
     _poolSukiCourageousRescuer,
     _poolSunastianFalconer,
     _poolSunsetStrikemaster,
+    _poolSuperSuit,
     _poolSwordOfFeastAndFamine,
     _poolSylvokReplica,
     _poolSymbioticBeast,
     _poolTanglebloom,
     _poolTanglepoolBridge,
     _poolTarkirDuneshaper,
+    _poolTeamTactics,
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
     _poolTerramorph,
@@ -653,6 +661,7 @@ const shard: CardShard = {
     _poolTheDawningArchaic,
     _poolTheEldestReborn,
     _poolTheFrightfulFour,
+    _poolTheHowlingCommandos,
     _poolTheInvincibleIronMan,
     _poolTheRegalia,
     _poolTheSibsigCeremony,
@@ -701,6 +710,7 @@ const shard: CardShard = {
     _tokensPhyrexianGoblinToken,
     _tokensPlantWarriorToken,
     _tokensRagavanToken,
+    _tokensRobotHeroToken11,
     _tokensSoldierTokenFireNationAttacks,
   ],
 };

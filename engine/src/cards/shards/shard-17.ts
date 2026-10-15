@@ -91,6 +91,7 @@ import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDiversionaryTactics from "../pool/diversionary-tactics.js";
+import _poolDoctorSpectrum from "../pool/doctor-spectrum.js";
 import _poolDoomwakeGiant from "../pool/doomwake-giant.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
@@ -349,6 +350,7 @@ import _poolVraskaJoinsUp from "../pool/vraska-joins-up.js";
 import _poolWailingGhoul from "../pool/wailing-ghoul.js";
 import _poolWallOfWater from "../pool/wall-of-water.js";
 import _poolWarChariot from "../pool/war-chariot.js";
+import _poolWarMachineJamesRhodes from "../pool/war-machine-james-rhodes.js";
 import _poolWayOfTheNecromancer from "../pool/way-of-the-necromancer.js";
 import _poolWayfarersBauble from "../pool/wayfarers-bauble.js";
 import _poolWeaponcraftEnthusiast from "../pool/weaponcraft-enthusiast.js";
@@ -480,6 +482,7 @@ const shard: CardShard = {
     _poolDiregrafCaptain,
     _poolDisposalMummy,
     _poolDiversionaryTactics,
+    _poolDoctorSpectrum,
     _poolDoomwakeGiant,
     _poolDraugrRecruiter,
     _poolDrogskolReaver,
@@ -738,6 +741,7 @@ const shard: CardShard = {
     _poolWailingGhoul,
     _poolWallOfWater,
     _poolWarChariot,
+    _poolWarMachineJamesRhodes,
     _poolWayOfTheNecromancer,
     _poolWayfarersBauble,
     _poolWeaponcraftEnthusiast,

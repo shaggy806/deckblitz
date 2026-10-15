@@ -239,6 +239,7 @@ import _poolNutrientBlock from "../pool/nutrient-block.js";
 import _poolOakenform from "../pool/oakenform.js";
 import _poolOblivionStrike from "../pool/oblivion-strike.js";
 import _poolOkosAccomplices from "../pool/okos-accomplices.js";
+import _poolOkoyeDoraMilajeLeader from "../pool/okoye-dora-milaje-leader.js";
 import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
@@ -307,6 +308,7 @@ import _poolShaoJun from "../pool/shao-jun.js";
 import _poolShieldOfTheOversoul from "../pool/shield-of-the-oversoul.js";
 import _poolShiftingWoodland from "../pool/shifting-woodland.js";
 import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
+import _poolShipwreckPatrol from "../pool/shipwreck-patrol.js";
 import _poolShoreUp from "../pool/shore-up.js";
 import _poolShowOfValor from "../pool/show-of-valor.js";
 import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
@@ -385,6 +387,7 @@ import _poolTranscendentEnvoy from "../pool/transcendent-envoy.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
+import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
 import _poolUnfriendlyFire from "../pool/unfriendly-fire.js";
@@ -670,6 +673,7 @@ const shard: CardShard = {
     _poolOakenform,
     _poolOblivionStrike,
     _poolOkosAccomplices,
+    _poolOkoyeDoraMilajeLeader,
     _poolOmoQueenOfVesuva,
     _poolOneWithTheMachine,
     _poolOpalineUnicorn,
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolShieldOfTheOversoul,
     _poolShiftingWoodland,
     _poolShiningAerosaur,
+    _poolShipwreckPatrol,
     _poolShoreUp,
     _poolShowOfValor,
     _poolSidarKondoOfJamuraa,
@@ -816,6 +821,7 @@ const shard: CardShard = {
     _poolTundraWall,
     _poolTwoHeadedHunter,
     _poolTyroxSauridTyrant,
+    _poolUltimateAlliance,
     _poolUndeadWarchief,
     _poolUndergroundMortuary,
     _poolUnfriendlyFire,

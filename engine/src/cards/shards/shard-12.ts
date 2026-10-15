@@ -141,6 +141,7 @@ import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
+import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
 import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
@@ -521,6 +522,7 @@ const shard: CardShard = {
     _poolGorillaChieftain,
     _poolGreaterAuramancy,
     _poolGremlinTamer,
+    _poolGuerrillaGorilla,
     _poolGwaihirGreatestOfTheEagles,
     _poolHERBIEScoutUnit,
     _poolHaazdaOfficer,

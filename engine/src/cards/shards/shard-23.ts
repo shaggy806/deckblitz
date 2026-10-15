@@ -18,6 +18,7 @@ import _poolArchaeologicalDig from "../pool/archaeological-dig.js";
 import _poolArchfiendOfSorrows from "../pool/archfiend-of-sorrows.js";
 import _poolAridMesa from "../pool/arid-mesa.js";
 import _poolArmoredSkaab from "../pool/armored-skaab.js";
+import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAuraShards from "../pool/aura-shards.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
@@ -28,6 +29,7 @@ import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
+import _poolBeastMode from "../pool/beast-mode.js";
 import _poolBeifongsBountyHunters from "../pool/beifongs-bounty-hunters.js";
 import _poolBenalishMarshal from "../pool/benalish-marshal.js";
 import _poolBenthicDjinn from "../pool/benthic-djinn.js";
@@ -80,6 +82,7 @@ import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
 import _poolDarksteelIngot from "../pool/darksteel-ingot.js";
 import _poolDarksteelRelic from "../pool/darksteel-relic.js";
+import _poolDarwinAdaptiveMutant from "../pool/darwin-adaptive-mutant.js";
 import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
@@ -204,6 +207,7 @@ import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
 import _poolMindsDesire from "../pool/minds-desire.js";
+import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
@@ -312,6 +316,7 @@ import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThorin from "../pool/thorin.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
+import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
 import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
@@ -348,6 +353,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
+import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
@@ -384,6 +390,7 @@ const shard: CardShard = {
     _poolArchfiendOfSorrows,
     _poolAridMesa,
     _poolArmoredSkaab,
+    _poolAtlasSizableStooge,
     _poolAttercop,
     _poolAuraShards,
     _poolAzizaMageTowerCaptain,
@@ -394,6 +401,7 @@ const shard: CardShard = {
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
+    _poolBeastMode,
     _poolBeifongsBountyHunters,
     _poolBenalishMarshal,
     _poolBenthicDjinn,
@@ -446,6 +454,7 @@ const shard: CardShard = {
     _poolDaringThunderThief,
     _poolDarksteelIngot,
     _poolDarksteelRelic,
+    _poolDarwinAdaptiveMutant,
     _poolDawnhartRejuvenator,
     _poolDazzlingLights,
     _poolDeadlyPlot,
@@ -570,6 +579,7 @@ const shard: CardShard = {
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
     _poolMindsDesire,
+    _poolMinionMissile,
     _poolMinotaurRoxxonCeo,
     _poolMireShade,
     _poolMnemonicWall,
@@ -678,6 +688,7 @@ const shard: CardShard = {
     _poolThorin,
     _poolTidalKraken,
     _poolTigraFelineFury,
+    _poolTimelineInquiry,
     _poolToriDavenantFuryRider,
     _poolTrainedCaracal,
     _poolTrappedInTheScreen,
@@ -714,6 +725,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWebWarriors,
+    _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
     _poolWindriderEel,
     _poolWindurstFederationCenter,

@@ -216,6 +216,7 @@ import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
+import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
@@ -320,6 +321,7 @@ import _poolTotallyLost from "../pool/totally-lost.js";
 import _poolTrainedArynx from "../pool/trained-arynx.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
+import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
@@ -585,6 +587,7 @@ const shard: CardShard = {
     _poolOgreSlumlord,
     _poolOgreWarrior,
     _poolOnTheJob,
+    _poolOriginOfCaptainAmerica,
     _poolParcelMyr,
     _poolPitilessGorgon,
     _poolPoisonArrow,
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolTrainedArynx,
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
+    _poolTvaBureaucrat,
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,
     _poolTwoHandedAxe,

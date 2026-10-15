@@ -884,7 +884,11 @@ export type TriggerSpec =
        * attacked alone this combat — exactly one attacker was declared.
        * `who: "you-control"` = the lone attacker is yours. The attacker isn't
        * a target; an effect reads it via `ResolutionContext.triggerObject`
-       * (a `modify-pt` with `target: "trigger-object"`). */
+       * (a `modify-pt` with `target: "trigger-object"`). The defending
+       * player — the one it attacks, or the controller of the planeswalker
+       * it attacks (rule 506.2) — is `"trigger-player"`: Strategic
+       * Intervention's "tap up to one target creature defending player
+       * controls" (`whose: "trigger-player"`). */
       readonly on: "attacks-alone";
       readonly who: TriggerWho;
     }

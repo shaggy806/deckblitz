@@ -75,6 +75,7 @@ import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
+import _poolCountNefaria from "../pool/count-nefaria.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
 import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
@@ -163,6 +164,7 @@ import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
+import _poolIAmIronMan from "../pool/i-am-iron-man.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
@@ -250,6 +252,7 @@ import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
+import _poolPunishingPunch from "../pool/punishing-punch.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
 import _poolRadiantFountain from "../pool/radiant-fountain.js";
@@ -336,6 +339,7 @@ import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
+import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
@@ -478,6 +482,7 @@ const shard: CardShard = {
     _poolConsecratedSphinx,
     _poolConversionApparatus,
     _poolCosmicCube,
+    _poolCountNefaria,
     _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
     _poolCrescentIslandTemple,
@@ -566,6 +571,7 @@ const shard: CardShard = {
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
     _poolHydraAssaultRobot,
+    _poolIAmIronMan,
     _poolIdentityEcho,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
@@ -653,6 +659,7 @@ const shard: CardShard = {
     _poolProfessorHulk,
     _poolPrudentFateseer,
     _poolPryingEyes,
+    _poolPunishingPunch,
     _poolQuakestriderCeratops,
     _poolQuietPurity,
     _poolRadiantFountain,
@@ -739,6 +746,7 @@ const shard: CardShard = {
     _poolTemporalManipulation,
     _poolTerritorialHellkite,
     _poolTheComingOfGalactus,
+    _poolTheImmortalWeapons,
     _poolTheMightstoneAndWeakstone,
     _poolTheMycotyrant,
     _poolTheSpiritOasis,

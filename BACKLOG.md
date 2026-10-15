@@ -75,8 +75,9 @@ section keeps only what to do next.
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
   ranked ones first. **First, the rest of the sets already walked** — Marvel Super Heroes
-  Commander (MSC, 69 left) back to Bloomburrow, about 1,400 cards (`npm run cards:sets -w engine
-  -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC and The Hobbit are whole) — then
+  (MSH, 65 left) back to Bloomburrow, about 1,300 cards (`npm run cards:sets -w engine
+  -- --sets 30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit and Marvel Super
+  Heroes Commander are whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or

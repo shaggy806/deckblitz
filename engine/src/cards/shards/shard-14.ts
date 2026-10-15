@@ -134,6 +134,7 @@ import _poolFlamekinGildweaver from "../pool/flamekin-gildweaver.js";
 import _poolFledglingDjinn from "../pool/fledgling-djinn.js";
 import _poolFleetfeatherSandals from "../pool/fleetfeather-sandals.js";
 import _poolFleshToDust from "../pool/flesh-to-dust.js";
+import _poolFloraColossus from "../pool/flora-colossus.js";
 import _poolFlowstoneCrusher from "../pool/flowstone-crusher.js";
 import _poolFlowstoneWall from "../pool/flowstone-wall.js";
 import _poolForestBear from "../pool/forest-bear.js";
@@ -310,6 +311,7 @@ import _poolSpidersManHeroicHorde from "../pool/spiders-man-heroic-horde.js";
 import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
+import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
 import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
@@ -330,6 +332,7 @@ import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThunderboltsConspiracy from "../pool/thunderbolts-conspiracy.js";
 import _poolTitaniaProudPummeler from "../pool/titania-proud-pummeler.js";
+import _poolTitaniumMan from "../pool/titanium-man.js";
 import _poolTorporOrb from "../pool/torpor-orb.js";
 import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
@@ -516,6 +519,7 @@ const shard: CardShard = {
     _poolFledglingDjinn,
     _poolFleetfeatherSandals,
     _poolFleshToDust,
+    _poolFloraColossus,
     _poolFlowstoneCrusher,
     _poolFlowstoneWall,
     _poolForestBear,
@@ -692,6 +696,7 @@ const shard: CardShard = {
     _poolSpiteflameWitch,
     _poolSpitefulMotives,
     _poolStitchTogether,
+    _poolStormShakerOfSkies,
     _poolStormchasersTalent,
     _poolStrafe,
     _poolStrikeItRich,
@@ -712,6 +717,7 @@ const shard: CardShard = {
     _poolThickestInTheThicket,
     _poolThunderboltsConspiracy,
     _poolTitaniaProudPummeler,
+    _poolTitaniumMan,
     _poolTorporOrb,
     _poolToucanPuffin,
     _poolTrainedJackal,

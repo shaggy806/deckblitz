@@ -176,6 +176,7 @@ import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
+import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
@@ -309,6 +310,7 @@ import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
 import _poolShriekOfDread from "../pool/shriek-of-dread.js";
+import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
@@ -588,6 +590,7 @@ const shard: CardShard = {
     _poolInfest,
     _poolInformedInkwright,
     _poolIorethOfTheHealingHouse,
+    _poolJackOfHeartsVolatileHero,
     _poolJanJansenChaosCrafter,
     _poolJayemdaeTome,
     _poolJazalGoldmane,
@@ -721,6 +724,7 @@ const shard: CardShard = {
     _poolShoreKeeper,
     _poolShreddersRevenge,
     _poolShriekOfDread,
+    _poolShuriVibraniumTechnologist,
     _poolSilentDeparture,
     _poolSilkenfistFighter,
     _poolSilverMyr,
