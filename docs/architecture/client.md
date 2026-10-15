@@ -35,7 +35,17 @@ the connection status to `landing`, `lobby` or `game`).
   in the lobby needs no definition at all: the engine's generated `PINNED_ART` holds the few
   printings the pool pins, and everything else resolves on Scryfall by name. A shard that fails
   to load (the network, or a deploy replacing the build while a tab is open) reads as not loaded
-  and is asked for again next time. While the pool loads, the lazy pages show
+  and is asked for again next time. One whose request **hangs** without failing (a user's library
+  sat at 30 of 32 shards, 2026-10-14) is asked for again by URL: whenever `SHARD_STALL_MS` (5 s)
+  passes with shards out and none arriving, each still out is requested as its built file with a
+  `?retry=N` query (`cards/shardFiles.ts`), up to `MAX_SHARD_ATTEMPTS` (3) requests a shard, the
+  first answer winning and a shard failing only once every request of it has. A new URL is needed
+  because a browser keeps one module per URL, so importing the same one again waits on the same
+  stuck request. The built file names come from `index.html`, where `vite.config.ts`'s
+  `shardFiles` plugin writes them as a `<script type="application/json" id="card-shard-files">`
+  (index.html is never cached, so the list matches the deployed files); the dev server writes
+  none, and there nothing is retried. On a slow connection shards keep arriving, so nothing is
+  fetched twice. The room worker's shards (`local/room-worker.ts`) have no retry. While the pool loads, the lazy pages show
   `cards/PoolLoading.tsx`: a progress bar (`role="progressbar"`, shards loaded of
   `CARD_SHARD_COUNT`) fed by `usePoolProgress` — `poolProgress()`'s `{loaded, total}`, a snapshot
   replaced as each shard arrives, counting shards a lookup by name fetched first and never a failed

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { CardShard } from 'engine/client'
 
 // The engine's shards are swapped for ones the test answers by hand, so it
@@ -23,6 +23,22 @@ vi.mock('engine/client', () => ({
   CardRegistry: class {
     register(): void {}
   },
+}))
+
+// The shards asked for again by URL, answered by hand the same way: each
+// retry is recorded with its shard and attempt. `listed` is whether the page
+// lists the shard files (a build does, the dev server doesn't).
+const retries = vi.hoisted(() => ({
+  listed: true,
+  calls: [] as { index: number; attempt: number; resolve: (shard: CardShard) => void; reject: (e: Error) => void }[],
+}))
+
+vi.mock('./shardFiles.ts', () => ({
+  shardFile: (index: number) => (retries.listed ? `/assets/shard-${index}.js` : undefined),
+  loadShardFile: (url: string, attempt: number) =>
+    new Promise<CardShard>((resolve, reject) => {
+      retries.calls.push({ index: Number(/shard-(\d+)/.exec(url)?.[1]), attempt, resolve, reject })
+    }),
 }))
 
 /** Answers every outstanding fetch of shard `index`, then lets the module's
@@ -51,6 +67,8 @@ async function freshCardData() {
 beforeEach(() => {
   shardLoads.pending.clear()
   shardLoads.count = 0
+  retries.listed = true
+  retries.calls = []
 })
 
 describe('poolProgress', () => {
@@ -120,5 +138,101 @@ describe('poolProgress', () => {
     await arrive(3)
     expect(poolProgress()).toEqual({ loaded: 4, total: 4 })
     expect((await retry).cards).toHaveLength(4)
+  })
+})
+
+describe('a shard that never answers', () => {
+  const shard = (index: number) => ({ pool: [{ name: `card ${index}` }], tokens: [] }) as unknown as CardShard
+  /** Moves the clock on `ms`, then lets the module's handlers run. */
+  const wait = async (ms: number) => {
+    vi.advanceTimersByTime(ms)
+    await Promise.resolve()
+    await Promise.resolve()
+  }
+  const retried = () => retries.calls.map(({ index, attempt }) => `${index}#${attempt}`)
+
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('is asked for again by URL once the shards stop arriving, and the first answer counts once', async () => {
+    const { loadCardPool, poolProgress, SHARD_STALL_MS } = await freshCardData()
+    const pool = loadCardPool()
+    await arrive(0)
+    await arrive(1)
+    await arrive(2)
+    await wait(SHARD_STALL_MS - 1)
+    expect(retried()).toEqual([])
+    await wait(1)
+    expect(retried()).toEqual(['3#2'])
+    retries.calls[0].resolve(shard(3))
+    await Promise.resolve()
+    expect(poolProgress()).toEqual({ loaded: 4, total: 4 })
+    expect((await pool).cards).toHaveLength(4)
+    // The first request answering late changes nothing.
+    await arrive(3)
+    expect(poolProgress()).toEqual({ loaded: 4, total: 4 })
+  })
+
+  it('waits the full time again after each shard that arrives', async () => {
+    const { loadCardPool, SHARD_STALL_MS } = await freshCardData()
+    void loadCardPool()
+    await wait(SHARD_STALL_MS - 1000)
+    await arrive(0)
+    await wait(SHARD_STALL_MS - 1000)
+    expect(retried()).toEqual([])
+    await wait(1000)
+    expect(retried()).toEqual(['1#2', '2#2', '3#2'])
+  })
+
+  it('stops after three requests of a shard', async () => {
+    const { loadCardPool, SHARD_STALL_MS, MAX_SHARD_ATTEMPTS } = await freshCardData()
+    expect(MAX_SHARD_ATTEMPTS).toBe(3)
+    void loadCardPool()
+    await arrive(0)
+    await arrive(1)
+    await arrive(2)
+    await wait(SHARD_STALL_MS)
+    await wait(SHARD_STALL_MS)
+    await wait(SHARD_STALL_MS)
+    expect(retried()).toEqual(['3#2', '3#3'])
+  })
+
+  it("doesn't fail a shard because a retry failed while another request is still out", async () => {
+    const { loadCardPool, poolProgress, SHARD_STALL_MS } = await freshCardData()
+    const pool = loadCardPool()
+    await arrive(0)
+    await arrive(1)
+    await arrive(2)
+    await wait(SHARD_STALL_MS)
+    retries.calls[0].reject(new Error('404'))
+    await Promise.resolve()
+    await arrive(3)
+    expect(poolProgress()).toEqual({ loaded: 4, total: 4 })
+    expect((await pool).cards).toHaveLength(4)
+  })
+
+  it('fails once every request of it has', async () => {
+    const { loadCardPool, SHARD_STALL_MS } = await freshCardData()
+    const pool = loadCardPool()
+    const failed = expect(pool).rejects.toThrow('offline')
+    await arrive(0)
+    await arrive(1)
+    await arrive(2)
+    await wait(SHARD_STALL_MS)
+    retries.calls[0].reject(new Error('404'))
+    await fail(3)
+    await failed
+  })
+
+  it('is never asked for again where the page lists no shard files (the dev server)', async () => {
+    retries.listed = false
+    const { loadCardPool, SHARD_STALL_MS } = await freshCardData()
+    void loadCardPool()
+    await wait(SHARD_STALL_MS * 3)
+    expect(retried()).toEqual([])
   })
 })

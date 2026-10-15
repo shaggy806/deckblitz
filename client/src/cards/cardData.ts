@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import type { CardDefinition, CardShard } from 'engine/client'
 import { CARD_SHARD_COUNT, CardRegistry, cardShardOf, loadCardShard } from 'engine/client'
+import { loadShardFile, shardFile } from './shardFiles.ts'
 
 /**
  * The card pool, fetched as it's needed.
@@ -55,13 +56,49 @@ export interface PoolProgress {
  * sees the same object until something changed. */
 let progress: PoolProgress = { loaded: 0, total: CARD_SHARD_COUNT }
 
+/** How long shards may be out with none of them arriving before the ones
+ * still out are asked for again. Shards arrive within a second on an
+ * ordinary connection; on a slow one they keep arriving, so this never
+ * fires there. */
+export const SHARD_STALL_MS = 5_000
+
+/** Requests of one shard at most: the engine's own, then two by URL. */
+export const MAX_SHARD_ATTEMPTS = 3
+
+/**
+ * The shards still out, each with how to ask for it again. A request can
+ * hang without failing (a user's library sat at 30 of 32 shards, 2026-10-14),
+ * and nothing then would ever settle it, so whenever `SHARD_STALL_MS` passes
+ * with shards out and none arriving, each is asked for again by URL
+ * (`shardFiles.ts`), and the first answer wins.
+ */
+const outstanding = new Map<number, () => void>()
+let stallTimer: ReturnType<typeof setTimeout> | undefined
+
+/** Starts the stall clock over, if any shard is still out. */
+function watchForStall(): void {
+  clearTimeout(stallTimer)
+  stallTimer = undefined
+  if (outstanding.size === 0) return
+  stallTimer = setTimeout(() => {
+    for (const askAgain of [...outstanding.values()]) askAgain()
+    watchForStall()
+  }, SHARD_STALL_MS)
+}
+
 function fetchShard(index: number): Promise<CardShard> {
   const loaded = shards.get(index)
   if (loaded !== undefined) return Promise.resolve(loaded)
   let pending = inFlight.get(index)
   if (pending === undefined) {
-    pending = loadCardShard(index).then(
-      (shard) => {
+    pending = new Promise<CardShard>((resolve, reject) => {
+      let attempts = 0
+      let failures = 0
+      let settled = false
+      const arrived = (shard: CardShard) => {
+        if (settled) return
+        settled = true
+        outstanding.delete(index)
         for (const def of shard.pool) byName.set(def.name, def)
         for (const def of shard.tokens) byName.set(def.name, def)
         shards.set(index, shard)
@@ -69,14 +106,33 @@ function fetchShard(index: number): Promise<CardShard> {
         version++
         progress = { loaded: shards.size, total: CARD_SHARD_COUNT }
         for (const listener of listeners) listener()
-        return shard
-      },
-      (error: unknown) => {
+        // A shard arriving is progress: the rest get the full wait again.
+        watchForStall()
+        resolve(shard)
+      }
+      // Fails only once every request made has, so a retry that 404s (a
+      // deploy replaced the build) doesn't cut short one still out.
+      const failed = (error: unknown) => {
+        failures++
+        if (settled || failures < attempts) return
+        settled = true
+        outstanding.delete(index)
         inFlight.delete(index)
-        throw error
-      },
-    )
+        reject(error)
+      }
+      const attempt = (request: Promise<CardShard>) => {
+        attempts++
+        request.then(arrived, failed)
+      }
+      attempt(loadCardShard(index))
+      outstanding.set(index, () => {
+        const url = shardFile(index)
+        if (settled || url === undefined || attempts >= MAX_SHARD_ATTEMPTS) return
+        attempt(loadShardFile(url, attempts + 1))
+      })
+    })
     inFlight.set(index, pending)
+    if (stallTimer === undefined) watchForStall()
   }
   return pending
 }

@@ -12,9 +12,38 @@ import { engineLocalPlugin } from 'engine/local-plugin'
 // which serves the worker through them, and in `worker.plugins` for a build.
 const engineLocal = (): Plugin => engineLocalPlugin() as unknown as Plugin
 
+// Writes each card shard's built file into index.html, in shard order, so a
+// shard whose request hangs can be asked for again by URL
+// (`src/cards/shardFiles.ts`, which reads it by this id). index.html is never
+// cached, so the list always names the files deployed beside it.
+const shardFiles = (): Plugin => ({
+  name: 'deckblitz:card-shard-files',
+  apply: 'build',
+  transformIndexHtml: {
+    order: 'post',
+    handler(_html, ctx) {
+      const files: string[] = []
+      for (const output of Object.values(ctx.bundle ?? {})) {
+        if (output.type !== 'chunk') continue
+        const shard = /[\\/]cards[\\/]shards[\\/]shard-(\d+)\.js$/.exec(output.facadeModuleId ?? '')
+        if (shard !== null) files[Number(shard[1])] = output.fileName
+      }
+      if (files.length === 0) throw new Error('card-shard-files: no card shard chunks in the bundle')
+      return [
+        {
+          tag: 'script',
+          attrs: { type: 'application/json', id: 'card-shard-files' },
+          children: JSON.stringify(files),
+          injectTo: 'head',
+        },
+      ]
+    },
+  },
+})
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), engineLocal()],
+  plugins: [react(), engineLocal(), shardFiles()],
   worker: {
     // ES module workers, so the worker can load the card shards as chunks.
     format: 'es',

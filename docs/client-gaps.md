@@ -58,11 +58,10 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   (480 requests, through the tunnel to Caddy) all answered 200 within 1.65 s. cloudflared logged
   QUIC tunnel connections dropping and reconnecting earlier that day (16:10, 17:56, 18:01 UTC),
   none near the stall; Caddy keeps no access log. Next time: the Network panel's pending rows
-  (which shards, the protocol). A fix on our side: a shard that hasn't arrived in a few seconds
-  is fetched again. A pending `import()` can't be retried under the same URL, so that means
-  loading shards by URL (a cache-busting query on the retry) rather than as static dynamic
-  imports. The bar's 15 s "taking longer than usual" Reload is the stopgap. The pages read only
-  printed fields, each ability's text (colour identity)
+  (which shards, the protocol). Built the same day: a shard still out after 5 s with none
+  arriving is asked for again under a `?retry=N` URL (`cards/cardData.ts`, `cards/shardFiles.ts`),
+  so a hung request costs about 5 s rather than a reload. Why a request hangs is still unknown.
+  The pages read only printed fields, each ability's text (colour identity)
   and the tokens a card makes. A generated catalog of just those, sharded the same way, would be
   a fraction of the size. The game page loads no definitions up front.
 - **Copied triggers without targets aren't condensed on the stack** (the user, 2026-10-07).
