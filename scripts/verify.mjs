@@ -165,10 +165,21 @@ if (!skip.has("cardverify")) {
   report(r, grab(r.out, /checked,/));
 }
 
+// Four-player games get CI's 120 s each rather than the fuzzer's default 30:
+// one runs ~25 s alone (2026-10-14), and here they share the machine with
+// the other fuzz runs and the bot gate, so 30 s timed out games that finish.
+const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
 const late = [];
 if (!skip.has("fuzz")) {
   late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
-  late.push(run("fuzz 4p", "node", ["scripts/random-demo.mjs", "--games", String(Math.ceil(games / 2)), "--players", "4"], ENGINE));
+  late.push(
+    run(
+      "fuzz 4p",
+      "node",
+      ["scripts/random-demo.mjs", "--games", String(Math.ceil(games / 2)), "--players", "4", ...FOUR_PLAYER_TIMEOUT],
+      ENGINE,
+    ),
+  );
 }
 if (!skip.has("fuzzwith") && cards.length > 0) {
   late.push(
@@ -181,6 +192,7 @@ if (!skip.has("fuzzwith") && cards.length > 0) {
         "40",
         "--players",
         "4",
+        ...FOUR_PLAYER_TIMEOUT,
         // A long list goes in a file: a command line has a length limit.
         ...(cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c])),
       ],
