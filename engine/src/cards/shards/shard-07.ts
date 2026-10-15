@@ -68,6 +68,7 @@ import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
+import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
 import _poolDictateOfHeliod from "../pool/dictate-of-heliod.js";
@@ -234,6 +235,7 @@ import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
 import _poolPrecinctCaptain from "../pool/precinct-captain.js";
+import _poolPreciseRedaction from "../pool/precise-redaction.js";
 import _poolPresenceOfGond from "../pool/presence-of-gond.js";
 import _poolPriestOfGix from "../pool/priest-of-gix.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
@@ -318,6 +320,7 @@ import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
 import _poolSunshowerDruid from "../pool/sunshower-druid.js";
+import _poolSurgicalPrecision from "../pool/surgical-precision.js";
 import _poolSuspiciousBookcase from "../pool/suspicious-bookcase.js";
 import _poolSwiftResponse from "../pool/swift-response.js";
 import _poolSwordOfFireAndIce from "../pool/sword-of-fire-and-ice.js";
@@ -360,10 +363,12 @@ import _poolVampiresKiss from "../pool/vampires-kiss.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
+import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
 import _poolVolcanicGeyser from "../pool/volcanic-geyser.js";
 import _poolVoldarenEpicure from "../pool/voldaren-epicure.js";
 import _poolVoyageHome from "../pool/voyage-home.js";
+import _poolVraskaTheCuttingGlare from "../pool/vraska-the-cutting-glare.js";
 import _poolWakandanDroneFlock from "../pool/wakandan-drone-flock.js";
 import _poolWallOfLimbs from "../pool/wall-of-limbs.js";
 import _poolWallOfRazors from "../pool/wall-of-razors.js";
@@ -371,6 +376,7 @@ import _poolWallOfVines from "../pool/wall-of-vines.js";
 import _poolWardensOfTheCycle from "../pool/wardens-of-the-cycle.js";
 import _poolWarkiteMarauder from "../pool/warkite-marauder.js";
 import _poolWarthog from "../pool/warthog.js";
+import _poolWayOfTheWildspeaker from "../pool/way-of-the-wildspeaker.js";
 import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
 import _poolWeiAmbushForce from "../pool/wei-ambush-force.js";
 import _poolWelkinGuide from "../pool/welkin-guide.js";
@@ -480,6 +486,7 @@ const shard: CardShard = {
     _poolDefenderOfChaos,
     _poolDeflectingSwat,
     _poolDescentIntoAvernus,
+    _poolDesperateFuturescribe,
     _poolDestructiveDigger,
     _poolDevilsPlay,
     _poolDictateOfHeliod,
@@ -646,6 +653,7 @@ const shard: CardShard = {
     _poolPlagueWind,
     _poolPollenbrightDruid,
     _poolPrecinctCaptain,
+    _poolPreciseRedaction,
     _poolPresenceOfGond,
     _poolPriestOfGix,
     _poolPrimordialPachyderm,
@@ -730,6 +738,7 @@ const shard: CardShard = {
     _poolSunSentinel,
     _poolSungracePegasus,
     _poolSunshowerDruid,
+    _poolSurgicalPrecision,
     _poolSuspiciousBookcase,
     _poolSwiftResponse,
     _poolSwordOfFireAndIce,
@@ -772,10 +781,12 @@ const shard: CardShard = {
     _poolVenomousHierophant,
     _poolVenomsacLagac,
     _poolVigilantBaloth,
+    _poolVindictiveTriumph,
     _poolViviOrnitier,
     _poolVolcanicGeyser,
     _poolVoldarenEpicure,
     _poolVoyageHome,
+    _poolVraskaTheCuttingGlare,
     _poolWakandanDroneFlock,
     _poolWallOfLimbs,
     _poolWallOfRazors,
@@ -783,6 +794,7 @@ const shard: CardShard = {
     _poolWardensOfTheCycle,
     _poolWarkiteMarauder,
     _poolWarthog,
+    _poolWayOfTheWildspeaker,
     _poolWeSayTheeNay,
     _poolWeiAmbushForce,
     _poolWelkinGuide,

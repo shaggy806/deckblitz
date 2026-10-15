@@ -2750,6 +2750,8 @@ export interface TurnHistory {
    * Anchor's "if a card left your graveyard this turn" (`TurnStat`
    * `"cards-left-graveyard"`). */
   leftGraveyard?: number;
+  /** Scries and surveils this turn (`TurnStat` `"scried-or-surveilled"`). */
+  scriedOrSurveilled?: number;
   /** Damage dealt to this player, and the part of it that was combat damage. */
   damageTaken?: number;
   combatDamageTaken?: number;

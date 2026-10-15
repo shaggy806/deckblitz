@@ -293,6 +293,7 @@ import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
+import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
@@ -657,6 +658,7 @@ const shard: CardShard = {
     _poolTeferisProtege,
     _poolTemporalFissure,
     _poolTenuredTethermage,
+    _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,

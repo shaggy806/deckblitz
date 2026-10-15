@@ -64,6 +64,7 @@ import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
 import _poolDakmorScorpion from "../pool/dakmor-scorpion.js";
+import _poolDarklightPhoenix from "../pool/darklight-phoenix.js";
 import _poolDarksteelMyr from "../pool/darksteel-myr.js";
 import _poolDauntlessSurvivor from "../pool/dauntless-survivor.js";
 import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
@@ -309,6 +310,7 @@ import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
 import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
+import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
@@ -368,6 +370,7 @@ import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
+import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
@@ -445,6 +448,7 @@ const shard: CardShard = {
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
     _poolDakmorScorpion,
+    _poolDarklightPhoenix,
     _poolDarksteelMyr,
     _poolDauntlessSurvivor,
     _poolDeadbridgeShaman,
@@ -690,6 +694,7 @@ const shard: CardShard = {
     _poolSwoopingLookout,
     _poolSwordOfBodyAndMind,
     _poolSyphonMind,
+    _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTelJiladJustice,
     _poolTerisianMindbreaker,
@@ -749,6 +754,7 @@ const shard: CardShard = {
     _poolWitherAndBloom,
     _poolWolfirAvenger,
     _poolWorkshopAssistant,
+    _poolWrathOfTheBloodmane,
     _poolYavimayaBarbarian,
     _poolZephyrFalcon,
     _poolZofBloodbog,

@@ -103,8 +103,10 @@ import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
+import _poolFulminousForte from "../pool/fulminous-forte.js";
 import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
 import _poolGalaGreeters from "../pool/gala-greeters.js";
+import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
@@ -446,8 +448,10 @@ const shard: CardShard = {
     _poolFragmentize,
     _poolFrontierBivouac,
     _poolFrostwindInvoker,
+    _poolFulminousForte,
     _poolFurnaceHostCharger,
     _poolGalaGreeters,
+    _poolGalliaTragicHost,
     _poolGevScaledScorch,
     _poolGiganticBigBear,
     _poolGlarbCalamitysAugur,

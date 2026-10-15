@@ -1155,6 +1155,18 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A player scried (rule 701.22) — "whenever you scry"; with
+       * `orSurveil`, "whenever you scry or surveil" (Denzilore Fatehold).
+       * Once per scry, however many cards, and after it's done (701.22d) —
+       * a scry of one or more into an empty library still counts, a scry 0
+       * doesn't (701.22b). `{ triggerValue: true }` is the number of cards
+       * looked at ("where X is the number of cards looked at while scrying
+       * this way"). */
+      readonly on: "scries";
+      readonly who: TriggerWho;
+      readonly orSurveil?: true;
+    }
+  | {
       /** A player won a coin flip (rule 705) — "whenever a player wins a
        * coin flip" (Okaun, Zndrsplt: `who: "any"`), "whenever you win a coin
        * flip" (`"you"`). Once per flip won. */

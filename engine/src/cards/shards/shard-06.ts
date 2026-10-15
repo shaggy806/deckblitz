@@ -111,6 +111,7 @@ import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
 import _poolEverybodyLives from "../pool/everybody-lives.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlashback from "../pool/flashback.js";
@@ -140,6 +141,7 @@ import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
 import _poolGoblinRally from "../pool/goblin-rally.js";
 import _poolGoblinTrashmaster from "../pool/goblin-trashmaster.js";
 import _poolGoblinTurncoat from "../pool/goblin-turncoat.js";
+import _poolGraftSurgeon from "../pool/graft-surgeon.js";
 import _poolGravitationalShift from "../pool/gravitational-shift.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
@@ -493,6 +495,7 @@ const shard: CardShard = {
     _poolEverybodyLives,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFateshaperAspirant,
     _poolFelidarSovereign,
     _poolFireNationSoldier,
     _poolFlashback,
@@ -522,6 +525,7 @@ const shard: CardShard = {
     _poolGoblinRally,
     _poolGoblinTrashmaster,
     _poolGoblinTurncoat,
+    _poolGraftSurgeon,
     _poolGravitationalShift,
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,

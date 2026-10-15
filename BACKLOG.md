@@ -74,9 +74,11 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Reality Fracture back to
-  Bloomburrow, about 1,660 cards (`npm run cards:sets -w engine -- --sets 30`; DRC, DSC and BLC
-  too) — then Assassin's Creed and Outlaws of Thunder Junction onward. Batches run 4-5 agents
+  ranked ones first. **First, the rest of the sets already walked** — The Hobbit (HOB) back to
+  Bloomburrow, about 1,550 cards (`npm run cards:sets -w engine -- --sets 30`; DRC, DSC and BLC
+  too; Reality Fracture and FRC are whole) — then Assassin's Creed and Outlaws of Thunder
+  Junction onward. Leading blocker after batch 71: Duress-style "reveal a hand, you choose
+  the card" (`effect:discard-chosen-from-revealed-hand`, six cards). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
   one with two. Norman Osborn still waits on granting mayhem and on a graveyard-cast cost

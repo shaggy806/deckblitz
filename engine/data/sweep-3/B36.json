@@ -1028,6 +1028,7 @@
     {
       "name": "Elvish Mariner",
       "needs": [
+        "decision:variable-target-count",
         "new:scry-trigger"
       ],
       "why": "no 'whenever you scry' trigger, nor X = cards looked at while scrying"

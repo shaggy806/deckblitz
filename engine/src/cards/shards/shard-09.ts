@@ -59,6 +59,7 @@ import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
+import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
 import _poolChulane from "../pool/chulane.js";
@@ -152,6 +153,7 @@ import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIceStorm from "../pool/ice-storm.js";
+import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
@@ -167,6 +169,7 @@ import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
+import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
@@ -233,6 +236,7 @@ import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
+import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
@@ -332,6 +336,7 @@ import _poolTombTyrant from "../pool/tomb-tyrant.js";
 import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
+import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
@@ -445,6 +450,7 @@ const shard: CardShard = {
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
+    _poolChargeTheSanctum,
     _poolCharmingPrince,
     _poolChromeCompanion,
     _poolChulane,
@@ -538,6 +544,7 @@ const shard: CardShard = {
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolIceStorm,
+    _poolIcyReception,
     _poolIllegitimateBusiness,
     _poolInfectiousInquiry,
     _poolInfernalPlunge,
@@ -553,6 +560,7 @@ const shard: CardShard = {
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKessigFlamebreather,
+    _poolKioraOfFireAndAshes,
     _poolKnightfisher,
     _poolKothOfTheHomestead,
     _poolKrenkosEnforcer,
@@ -619,6 +627,7 @@ const shard: CardShard = {
     _poolPriceOfFreedom,
     _poolPricklyBoggart,
     _poolPrimalRage,
+    _poolPrimalWitchstalker,
     _poolProsperousBandit,
     _poolPunySnack,
     _poolQuilledCharger,
@@ -718,6 +727,7 @@ const shard: CardShard = {
     _poolTorporDust,
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
+    _poolTraxosScourgeEternal,
     _poolTyvarsStand,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,

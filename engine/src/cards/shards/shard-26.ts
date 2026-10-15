@@ -26,6 +26,7 @@ import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAtomize from "../pool/atomize.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
+import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
@@ -181,6 +182,7 @@ import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
+import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
@@ -296,6 +298,7 @@ import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
+import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
@@ -304,6 +307,7 @@ import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
 import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
+import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
@@ -318,6 +322,7 @@ import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
@@ -386,6 +391,7 @@ const shard: CardShard = {
     _poolAshcoatBear,
     _poolAtomize,
     _poolAutonSoldier,
+    _poolAwakenTheInferno,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
     _poolBaralAndKariZev,
@@ -541,6 +547,7 @@ const shard: CardShard = {
     _poolMasterTransmuter,
     _poolMeatLocker,
     _poolMetalworkColossus,
+    _poolMindMeanderer,
     _poolMistCloakedHerald,
     _poolMoorlandInquisitor,
     _poolMossfireValley,
@@ -656,6 +663,7 @@ const shard: CardShard = {
     _poolTakeItBack,
     _poolTalismanOfProgress,
     _poolTemporalTrespass,
+    _poolTerminalCriticism,
     _poolTerrianWorldTyrant,
     _poolThassaGodOfTheSea,
     _poolTheEchoverseFulcrum,
@@ -664,6 +672,7 @@ const shard: CardShard = {
     _poolTheMagicMirror,
     _poolTheSeedcore,
     _poolTheodenKingOfRohan,
+    _poolTheoreticalNecromancer,
     _poolThirstingShade,
     _poolThornhideWolves,
     _poolThrissNantukoPrimus,
@@ -678,6 +687,7 @@ const shard: CardShard = {
     _poolTreebeardGraciousHost,
     _poolTrevasCharm,
     _poolTritonShorestalker,
+    _poolTwistedFates,
     _poolUktabiOrangutan,
     _poolUnderworldConnections,
     _poolUnforgivingAim,

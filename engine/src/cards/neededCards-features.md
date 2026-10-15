@@ -774,6 +774,11 @@ in `git log`.
   Crowded Crypt, Ghoulish Procession, Curse of the Restless Dead, Jadar,
   Ghoulcaller of Nephalia. Gisa waits on a linked exile replacement
   (`replacement:exile-instead-linked`), Rot-Curse Rakshasa on X targets.
+- **Scry triggers** (`trigger:scry-trigger`, `stat:scried-or-surveilled-this-turn`,
+  2026-10-14, B71) — the `scries` trigger (`orSurveil`), a scry or surveil of
+  one or more into an empty library counted (rules 701.22d, 701.25d), and the
+  `scried-or-surveilled` turn stat (`scry-triggers.test.ts`). Eight cards;
+  Elvish Mariner and Elrond, Master of Healing wait on X targets.
 
 ## Completed: `neededCards.txt` passes (P0-P20)
 

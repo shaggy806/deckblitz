@@ -119,6 +119,7 @@ import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
+import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
 import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
@@ -325,6 +326,7 @@ import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
+import _poolVenserFerventForger from "../pool/venser-fervent-forger.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
 import _poolVictimize from "../pool/victimize.js";
 import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
@@ -345,6 +347,7 @@ import _poolWildRide from "../pool/wild-ride.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
+import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
 import _poolYoungWolf from "../pool/young-wolf.js";
 import _poolYuyanArchers from "../pool/yuyan-archers.js";
 import _poolZoanthrope from "../pool/zoanthrope.js";
@@ -482,6 +485,7 @@ const shard: CardShard = {
     _poolFrogTongue,
     _poolFuneralRoomAwakeningHall,
     _poolFurtiveHomunculus,
+    _poolGalliaTheMerrymaker,
     _poolGelectrode,
     _poolGenerousVisitor,
     _poolGhorClanRampager,
@@ -688,6 +692,7 @@ const shard: CardShard = {
     _poolUroTitanOfNaturesWrath,
     _poolVampiricTouch,
     _poolVenomSliver,
+    _poolVenserFerventForger,
     _poolViciousConquistador,
     _poolVictimize,
     _poolVigorbloomAnnex,
@@ -708,6 +713,7 @@ const shard: CardShard = {
     _poolWithstandDeath,
     _poolWortBoggartAuntie,
     _poolYellowScarvesTroops,
+    _poolYoshimaruScrappyStray,
     _poolYoungWolf,
     _poolYuyanArchers,
     _poolZoanthrope,

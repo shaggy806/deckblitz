@@ -60,6 +60,7 @@ import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
+import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
@@ -127,6 +128,7 @@ import _poolHighlandGiant from "../pool/highland-giant.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
 import _poolHorizonChimera from "../pool/horizon-chimera.js";
+import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
@@ -241,6 +243,7 @@ import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
+import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
 import _poolRummagingWizard from "../pool/rummaging-wizard.js";
 import _poolRuthlessDeathfang from "../pool/ruthless-deathfang.js";
@@ -423,6 +426,7 @@ const shard: CardShard = {
     _poolControlMagic,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
+    _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolDailyBugleBuilding,
     _poolDanceOfTheTumbleweeds,
@@ -490,6 +494,7 @@ const shard: CardShard = {
     _poolHomaridShaman,
     _poolHordelingOutburst,
     _poolHorizonChimera,
+    _poolHuntersAxe,
     _poolHuntersTalent,
     _poolHylderblade,
     _poolHypnoticSpecter,
@@ -604,6 +609,7 @@ const shard: CardShard = {
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRockyTarPit,
+    _poolRoomOfRefuge,
     _poolRottingFensnake,
     _poolRummagingWizard,
     _poolRuthlessDeathfang,

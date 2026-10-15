@@ -45,6 +45,7 @@ import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCommandTower from "../pool/command-tower.js";
+import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
@@ -149,6 +150,7 @@ import _poolJoven from "../pool/joven.js";
 import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
 import _poolKarazikarTheEyeTyrant from "../pool/karazikar-the-eye-tyrant.js";
+import _poolKarnGildedGuardian from "../pool/karn-gilded-guardian.js";
 import _poolKataraWaterbendingMaster from "../pool/katara-waterbending-master.js";
 import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
 import _poolKeepWatch from "../pool/keep-watch.js";
@@ -165,6 +167,7 @@ import _poolKravensCats from "../pool/kravens-cats.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
+import _poolLivingLibrary from "../pool/living-library.js";
 import _poolLizardConnorssCurse from "../pool/lizard-connorss-curse.js";
 import _poolLlanowarTribe from "../pool/llanowar-tribe.js";
 import _poolLokhustHeavyDestroyer from "../pool/lokhust-heavy-destroyer.js";
@@ -180,6 +183,7 @@ import _poolMapTheFrontier from "../pool/map-the-frontier.js";
 import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
+import _poolMedicsKitesail from "../pool/medics-kitesail.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
@@ -308,6 +312,8 @@ import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
+import _poolTheorixCharm from "../pool/theorix-charm.js";
+import _poolTheorixMetamage from "../pool/theorix-metamage.js";
 import _poolThrabenGargoyle from "../pool/thraben-gargoyle.js";
 import _poolThrillOfTheHunt from "../pool/thrill-of-the-hunt.js";
 import _poolThrivingBluff from "../pool/thriving-bluff.js";
@@ -402,6 +408,7 @@ const shard: CardShard = {
     _poolCinderBarrens,
     _poolCleverConcealment,
     _poolCommandTower,
+    _poolCompelBrutality,
     _poolCondemn,
     _poolCondescend,
     _poolCorruptedConscience,
@@ -506,6 +513,7 @@ const shard: CardShard = {
     _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,
     _poolKarazikarTheEyeTyrant,
+    _poolKarnGildedGuardian,
     _poolKataraWaterbendingMaster,
     _poolKavaronTurbodrone,
     _poolKeepWatch,
@@ -522,6 +530,7 @@ const shard: CardShard = {
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
     _poolLiberatedDwarf,
+    _poolLivingLibrary,
     _poolLizardConnorssCurse,
     _poolLlanowarTribe,
     _poolLokhustHeavyDestroyer,
@@ -537,6 +546,7 @@ const shard: CardShard = {
     _poolMassMutiny,
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
+    _poolMedicsKitesail,
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMinotaurAggressor,
@@ -665,6 +675,8 @@ const shard: CardShard = {
     _poolTheIncredibleHulk,
     _poolTheScorpionGod,
     _poolTheUnspeakable,
+    _poolTheorixCharm,
+    _poolTheorixMetamage,
     _poolThrabenGargoyle,
     _poolThrillOfTheHunt,
     _poolThrivingBluff,

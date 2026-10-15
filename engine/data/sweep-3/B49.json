@@ -404,6 +404,7 @@
     {
       "name": "Elrond, Master of Healing",
       "needs": [
+        "decision:variable-target-count",
         "trigger:scry-trigger"
       ],
       "why": "No 'whenever you scry' trigger, nor X = the number of cards looked at while scrying."

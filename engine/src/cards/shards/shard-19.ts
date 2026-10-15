@@ -83,6 +83,7 @@ import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
+import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
@@ -103,6 +104,7 @@ import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
 import _poolFeralIncarnation from "../pool/feral-incarnation.js";
+import _poolFerocityOfTheHunt from "../pool/ferocity-of-the-hunt.js";
 import _poolFerventCharge from "../pool/fervent-charge.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
@@ -169,6 +171,7 @@ import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
 import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
+import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
 import _poolKarokWrangler from "../pool/karok-wrangler.js";
 import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
@@ -244,6 +247,7 @@ import _poolOutlawMedic from "../pool/outlaw-medic.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
+import _poolPeerReview from "../pool/peer-review.js";
 import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
@@ -482,6 +486,7 @@ const shard: CardShard = {
     _poolDimensionX,
     _poolDismiss,
     _poolDisruptivePitmage,
+    _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
@@ -502,6 +507,7 @@ const shard: CardShard = {
     _poolFantasticElasticity,
     _poolFellTheMighty,
     _poolFeralIncarnation,
+    _poolFerocityOfTheHunt,
     _poolFerventCharge,
     _poolFireLordZuko,
     _poolFireNationRaider,
@@ -568,6 +574,7 @@ const shard: CardShard = {
     _poolJungleTroll,
     _poolKamiOfFalseHope,
     _poolKardurDoomscourge,
+    _poolKarnArgentDefender,
     _poolKarokWrangler,
     _poolKataraSeekingRevenge,
     _poolKelpieGuide,
@@ -643,6 +650,7 @@ const shard: CardShard = {
     _poolOwlbear,
     _poolPackRat,
     _poolPaleRiderOfTrostad,
+    _poolPeerReview,
     _poolPendulumOfPatterns,
     _poolPerilousLandscape,
     _poolPerilousSnare,

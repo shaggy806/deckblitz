@@ -13,6 +13,7 @@ import _poolAirServant from "../pool/air-servant.js";
 import _poolAlexisCloak from "../pool/alexis-cloak.js";
 import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
+import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
@@ -149,6 +150,7 @@ import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
+import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
@@ -215,6 +217,7 @@ import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
+import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
 import _poolNoviceInspector from "../pool/novice-inspector.js";
@@ -386,6 +389,7 @@ const shard: CardShard = {
     _poolAlexisCloak,
     _poolAngelicWall,
     _poolApexAltisaur,
+    _poolApexWitchstalker,
     _poolArcaneDenial,
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,
@@ -522,6 +526,7 @@ const shard: CardShard = {
     _poolGruulSignet,
     _poolHalvarGodOfBattle,
     _poolHarvesttideInfiltrator,
+    _poolHeartstringPuller,
     _poolHelionaut,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
@@ -588,6 +593,7 @@ const shard: CardShard = {
     _poolNeckSnap,
     _poolNicolBolasTheArisen,
     _poolNightmareSower,
+    _poolNissaLeylineTamer,
     _poolNissaVitalForce,
     _poolNissasExpedition,
     _poolNoviceInspector,

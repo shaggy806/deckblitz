@@ -74,6 +74,7 @@ import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
+import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
 import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
@@ -244,6 +245,7 @@ import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
+import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolQuakestriderCeratops from "../pool/quakestrider-ceratops.js";
 import _poolQuietPurity from "../pool/quiet-purity.js";
@@ -353,6 +355,7 @@ import _poolTwofoldIntent from "../pool/twofold-intent.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
+import _poolUnwindHistory from "../pool/unwind-history.js";
 import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
@@ -471,6 +474,7 @@ const shard: CardShard = {
     _poolConsecratedSphinx,
     _poolConversionApparatus,
     _poolCosmicCube,
+    _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
     _poolCrescentIslandTemple,
     _poolCrosswayVampire,
@@ -641,6 +645,7 @@ const shard: CardShard = {
     _poolPrimalVisitation,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
+    _poolPrudentFateseer,
     _poolPryingEyes,
     _poolQuakestriderCeratops,
     _poolQuietPurity,
@@ -750,6 +755,7 @@ const shard: CardShard = {
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
     _poolUnstoppableSlasher,
+    _poolUnwindHistory,
     _poolUreniOfTheUnwritten,
     _poolUthdenTroll,
     _poolUurgSpawnOfTurg,

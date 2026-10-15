@@ -243,6 +243,7 @@ import _poolOrmendahlProfanePrince from "../pool/ormendahl-profane-prince.js";
 import _poolOrzhovBasilica from "../pool/orzhov-basilica.js";
 import _poolOuroboroid from "../pool/ouroboroid.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
+import _poolParadoxShaper from "../pool/paradox-shaper.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
@@ -290,6 +291,7 @@ import _poolScorchingMissile from "../pool/scorching-missile.js";
 import _poolScorchwalker from "../pool/scorchwalker.js";
 import _poolScourgeOfTheThrone from "../pool/scourge-of-the-throne.js";
 import _poolScrawlingCrawler from "../pool/scrawling-crawler.js";
+import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
 import _poolScuteMob from "../pool/scute-mob.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
@@ -665,6 +667,7 @@ const shard: CardShard = {
     _poolOrzhovBasilica,
     _poolOuroboroid,
     _poolParadiseMantle,
+    _poolParadoxShaper,
     _poolPearlEarImperialAdvisor,
     _poolPelakkaWurm,
     _poolPerennialBehemoth,
@@ -712,6 +715,7 @@ const shard: CardShard = {
     _poolScorchwalker,
     _poolScourgeOfTheThrone,
     _poolScrawlingCrawler,
+    _poolScreechingSoulbreaker,
     _poolScuteMob,
     _poolSearchlightGeist,
     _poolSejiriRefuge,

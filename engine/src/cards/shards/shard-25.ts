@@ -93,6 +93,7 @@ import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
+import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
@@ -314,6 +315,7 @@ import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
+import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
@@ -467,6 +469,7 @@ const shard: CardShard = {
     _poolDromarsCharm,
     _poolDrownInIchor,
     _poolEccentricPestfinder,
+    _poolEdgarAncientBloodlord,
     _poolEldraziDevastator,
     _poolElvenLyre,
     _poolElvishHexhunter,
@@ -688,6 +691,7 @@ const shard: CardShard = {
     _poolTarSnare,
     _poolTatteredDrake,
     _poolTerramorphicExpanse,
+    _poolTetherTechnician,
     _poolThatsMine,
     _poolTheLegendOfRoku,
     _poolThopterSpyNetwork,

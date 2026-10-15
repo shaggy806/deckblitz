@@ -28,6 +28,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Reality Fracture and its Commander set, whole** (batch 71): the rest after the walk's top
+  half — 81 cards, with scry triggers and the scried-or-surveilled turn stat built (8 more)
+  (2026-10-14).
 - **Additive counter replacements** ("that many plus one": Hardened Scales, Conclave Mentor,
   Kami of Whispered Hopes, Ozolith, Benevolent Hydra, Mauhúr, Michelangelo, Yoshimaru,
   Caradora), and Furnace of Rath, Mechanized Warfare, Collective Inferno, Tainted Remedy

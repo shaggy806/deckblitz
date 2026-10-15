@@ -254,6 +254,7 @@ import _poolPiaNalaar from "../pool/pia-nalaar.js";
 import _poolPiercingLight from "../pool/piercing-light.js";
 import _poolPlagueDogs from "../pool/plague-dogs.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
+import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
@@ -267,6 +268,7 @@ import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
+import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
@@ -317,6 +319,7 @@ import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfSilence from "../pool/temple-of-silence.js";
 import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
+import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
@@ -629,6 +632,7 @@ const shard: CardShard = {
     _poolPiercingLight,
     _poolPlagueDogs,
     _poolPlasmaBolt,
+    _poolPredictivePreparations,
     _poolPrimevalBounty,
     _poolPrismite,
     _poolProfessionalFaceBreaker,
@@ -642,6 +646,7 @@ const shard: CardShard = {
     _poolRecklessAbandon,
     _poolRegress,
     _poolRemoteIsle,
+    _poolRescueGirlFirstResponder,
     _poolRestlessPrairie,
     _poolRewind,
     _poolRinAndSeriInseparable,
@@ -692,6 +697,7 @@ const shard: CardShard = {
     _poolTemperedSteel,
     _poolTempleOfSilence,
     _poolTempleOfTriumph,
+    _poolTeyoDiamondbladeMage,
     _poolThalisseReverentMedium,
     _poolTheEternityElevator,
     _poolTheGitrogMonster,

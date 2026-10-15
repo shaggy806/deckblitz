@@ -78,6 +78,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
+import _poolDanithaSwordOfHope from "../pool/danitha-sword-of-hope.js";
 import _poolDarkness from "../pool/darkness.js";
 import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
@@ -465,6 +466,7 @@ const shard: CardShard = {
     _poolCultivate,
     _poolCunningManeuver,
     _poolDaggerdromeImp,
+    _poolDanithaSwordOfHope,
     _poolDarkness,
     _poolDarksteelSplicer,
     _poolDaybreakCharger,

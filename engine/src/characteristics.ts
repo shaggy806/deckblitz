@@ -1069,6 +1069,8 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.toGraveyardFromHandOrLibrary ?? 0;
     case "cards-left-graveyard":
       return seat.turnHistory?.leftGraveyard ?? 0;
+    case "scried-or-surveilled":
+      return seat.turnHistory?.scriedOrSurveilled ?? 0;
   }
 }
 

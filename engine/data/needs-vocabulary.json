@@ -5049,6 +5049,52 @@
    "family": "effect:amount-new-variants",
    "example": "Blitzball Stadium: An EffectAmount for the number of different kinds of counters on an object ('draw a card for each kind of counter on it' — Blitzball Stadium)."
   },
+  "cost:flashback-discard-cost": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Twinned Vision: a flashback cost with a discard (Flashback—{1}{U/R}{U/R}, Discard a card)."
+  },
+  "effect:aggregate-over-graveyard": {
+   "family": "effect:amount-aggregate",
+   "example": "Hapatra, the Desert Fang: the greatest mana value among cards in your graveyard (aggregates read the battlefield only)."
+  },
+  "stat:noncombat-damage-taken-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Grim Repriser: a per-player turn stat for noncombat damage dealt to them ('an opponent has been dealt noncombat damage this turn')."
+  },
+  "condition:cast-restriction-excludes-self": {
+   "family": "condition:player-state-thresholds",
+   "example": "Proft, Sinister Mastermind: a cast restriction's graveyard count that leaves out the card being cast from that graveyard (threshold — seven other cards)."
+  },
+  "effect:amount-count-step": {
+   "family": "effect:amount-new-variants",
+   "example": "Recursive Recruitment: an amount divided by a step and rounded down ('for every three cards in your graveyard')."
+  },
+  "effect:distribute-control-among-opponents": {
+   "family": "effect:control-change-extensions",
+   "example": "Dack Fayden, Helping Hand: each of a set of permanents to a different opponent, each gaining control of the one chosen for them."
+  },
+  "condition:source-hasnt-dealt-combat-damage": {
+   "family": "stat:object-damage-history",
+   "example": "Ruric Thar, Magecrusher: true while this permanent hasn't dealt combat damage since it entered."
+  },
+  "effect:become-unprepared": {
+   "example": "Infinite Coursework: make a prepared permanent stop being prepared, its spell copy leaving exile (rule 722)."
+  },
+  "condition:opponent-dealt-noncombat-damage-last-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Command the Stage: noncombat damage an opponent was dealt during the previous turn (turn history resets each turn)."
+  },
+  "static:assign-combat-damage-as-positive-power": {
+   "example": "Loot, the Anomaly: a creature with negative power assigns combat damage as though its power were positive, without changing its power."
+  },
+  "zone:cast-linked-exiled-card-gated": {
+   "family": "zone:impulse-permission-options",
+   "example": "Null Summoner: cast a card the source exiled from an opponent's hand, gated on a condition (threshold), with mana of any type."
+  },
+  "effect:player-effect-until-target-next-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Teferi's Reproach: a player effect on a target player lasting until that player's next turn."
+  },
   "replacement:exile-instead-linked": {
    "family": "replacement:new-event-replacements",
    "example": "Gisa, Glorious Resurrector: a would-die exile replacement whose exiled cards are linked to its source ('put all creature cards exiled with Gisa onto the battlefield'), which the would-be-put-into-graveyard replacement doesn't record."

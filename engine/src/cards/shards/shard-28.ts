@@ -132,6 +132,7 @@ import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
+import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
@@ -317,6 +318,7 @@ import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
+import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
@@ -357,6 +359,7 @@ import _poolVeneratedStormsinger from "../pool/venerated-stormsinger.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
 import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
+import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
@@ -515,6 +518,7 @@ const shard: CardShard = {
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
     _poolGurmagSwiftwing,
+    _poolHapatraTheDesertFrost,
     _poolHarmonize,
     _poolHeraldOfFaith,
     _poolHermiticHerbalist,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,
+    _poolSurveillancePhantasm,
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,
     _poolSyrVondamTheLucent,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolViashinoSandscout,
     _poolVisceraDragger,
     _poolVodalianSoldiers,
+    _poolVoidExtrapolator,
     _poolVoidforgedTitan,
     _poolVolcanicUpheaval,
     _poolWalkingCorpse,

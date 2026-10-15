@@ -38,6 +38,7 @@ import _poolBelladonnaTook from "../pool/belladonna-took.js";
 import _poolBishopsSoldier from "../pool/bishops-soldier.js";
 import _poolBlackWidowNatashaRomanoff from "../pool/black-widow-natasha-romanoff.js";
 import _poolBladeOfSelves from "../pool/blade-of-selves.js";
+import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
@@ -88,6 +89,7 @@ import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
+import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElvenPalisade from "../pool/elven-palisade.js";
@@ -237,6 +239,7 @@ import _poolPalladiumMyr from "../pool/palladium-myr.js";
 import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
+import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
 import _poolPiratesPillage from "../pool/pirates-pillage.js";
@@ -451,6 +454,7 @@ const shard: CardShard = {
     _poolBishopsSoldier,
     _poolBlackWidowNatashaRomanoff,
     _poolBladeOfSelves,
+    _poolBlessedGhoul,
     _poolBlindPhantasm,
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
@@ -501,6 +505,7 @@ const shard: CardShard = {
     _poolDragonsEyeSentry,
     _poolDuskwielder,
     _poolDwarvenTrader,
+    _poolEdgarMoonlitSovereign,
     _poolEiganjoCastle,
     _poolElectroduplicate,
     _poolElvenPalisade,
@@ -650,6 +655,7 @@ const shard: CardShard = {
     _poolPardicCollaborator,
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
+    _poolPerfectedTheory,
     _poolPhantomWarrior,
     _poolPhyrexianDefiler,
     _poolPiratesPillage,

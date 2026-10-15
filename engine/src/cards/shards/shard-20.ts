@@ -22,6 +22,7 @@ import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
 import _poolArmorOfShadows from "../pool/armor-of-shadows.js";
 import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
+import _poolArniRenownedChampion from "../pool/arni-renowned-champion.js";
 import _poolArtfulManeuver from "../pool/artful-maneuver.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
@@ -131,11 +132,13 @@ import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFissure from "../pool/fissure.js";
+import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
+import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
@@ -301,6 +304,7 @@ import _poolShreddedSails from "../pool/shredded-sails.js";
 import _poolShuDefender from "../pool/shu-defender.js";
 import _poolShuriTheBlackPanther from "../pool/shuri-the-black-panther.js";
 import _poolSigiledBehemoth from "../pool/sigiled-behemoth.js";
+import _poolSilenceTheEcho from "../pool/silence-the-echo.js";
 import _poolSinisterSabotage from "../pool/sinister-sabotage.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
@@ -350,6 +354,7 @@ import _poolTatyova from "../pool/tatyova.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
 import _poolTermagantSwarm from "../pool/termagant-swarm.js";
 import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
+import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
@@ -440,6 +445,7 @@ const shard: CardShard = {
     _poolArborbackStomper,
     _poolArmorOfShadows,
     _poolArmoredWarhorse,
+    _poolArniRenownedChampion,
     _poolArtfulManeuver,
     _poolAscendedLawmage,
     _poolAshlingRimebound,
@@ -549,11 +555,13 @@ const shard: CardShard = {
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
     _poolFissure,
+    _poolFlourishingGrapple,
     _poolFlowstoneStrike,
     _poolFolkOfAnHavva,
     _poolFugitiveDroid,
     _poolFurnaceSpirit,
     _poolGarrisonCat,
+    _poolGenerousRevival,
     _poolGeodeGrotto,
     _poolGerminateRecruits,
     _poolGildedSentinel,
@@ -719,6 +727,7 @@ const shard: CardShard = {
     _poolShuDefender,
     _poolShuriTheBlackPanther,
     _poolSigiledBehemoth,
+    _poolSilenceTheEcho,
     _poolSinisterSabotage,
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
@@ -768,6 +777,7 @@ const shard: CardShard = {
     _poolTavernScoundrel,
     _poolTermagantSwarm,
     _poolTerritorialScythecat,
+    _poolTetsukoUmezawaPursuer,
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
     _poolTheEmperorOfPalamecia,

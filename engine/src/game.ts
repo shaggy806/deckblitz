@@ -12712,6 +12712,11 @@ export class Game {
         delta: ability.loyaltyCost,
         loyalty: source.counters.loyalty,
       });
+      // A plus cost *puts* loyalty counters on it (rules 606.4, 122.6) —
+      // Inspired Tethermage's "whenever you put one or more loyalty counters".
+      if (ability.loyaltyCost > 0) {
+        this.emit({ type: "counter-added", object: sourceId, counter: "loyalty", amount: ability.loyaltyCost, by: player, after: source.counters.loyalty });
+      }
     }
     if (sacrificeVictim !== null) {
       // The chosen victim singles out one — split it off a compacted stack
@@ -16217,6 +16222,9 @@ export class Game {
                     : // "Deals that much damage": how many counters were put.
                     ability.trigger.on === "counters-put" && event.type === "counter-added"
                     ? event.amount
+                    : // "The number of cards looked at while scrying this way".
+                    ability.trigger.on === "scries" && event.type === "scried"
+                    ? event.looked
                     : // The N it became monstrous with (rule 701.37c's X).
                     ability.trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
                     ? event.amount
@@ -17262,6 +17270,14 @@ export class Game {
         const arrived = this.graveyardArrivals(spec, event.arrivals, self);
         return arrived.length > 0 && (spec.firstTimeEachTurn !== true || !this.reachedGraveyardEarlier(spec, event.arrivals, arrived, self));
       }
+      case "scries":
+        return (
+          event.type === "scried" &&
+          (event.mode === "scry" || spec.orSurveil === true) &&
+          (spec.who === "any" ||
+            (spec.who === "you" && event.player === self.controller) ||
+            (spec.who === "opponent" && event.player !== self.controller))
+        );
       case "surveils":
         return (
           event.type === "scried" &&
@@ -20907,7 +20923,10 @@ export class Game {
   ): void {
     const cards = this.state.zones.perPlayer[player].library.slice(0, amount);
     if (cards.length === 0) {
-      // Nothing to look at — skip straight to the follow-up effect.
+      // Nothing to look at — skip straight to the follow-up effect. A scry
+      // or surveil of one or more still happened, and its triggers trigger
+      // (rules 701.22d, 701.25d); one of 0 didn't (701.22b, 701.25c).
+      if (amount > 0) this.emit({ type: "scried", player, mode, looked: 0, movedAway: 0 });
       if (then !== null) {
         applyEffectSpec(then, this.makeResolutionContext(source, player, [], x));
       }
@@ -26519,6 +26538,11 @@ export class Game {
       case "permanent-sacrificed": {
         const history = historyOf(event.player);
         if (history !== undefined) (history.sacrificed ??= []).push({ object: event.object, count: 1 });
+        return;
+      }
+      case "scried": {
+        const history = historyOf(event.player);
+        if (history !== undefined) history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
         return;
       }
       case "cards-left-graveyard": {

@@ -51,6 +51,7 @@ import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBodyDropper from "../pool/body-dropper.js";
 import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
 import _poolBrassSquire from "../pool/brass-squire.js";
+import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
@@ -161,6 +162,7 @@ import _poolGrimBackwoods from "../pool/grim-backwoods.js";
 import _poolGrimclimbPathway from "../pool/grimclimb-pathway.js";
 import _poolGrowFromTheAshes from "../pool/grow-from-the-ashes.js";
 import _poolGuardianLions from "../pool/guardian-lions.js";
+import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
 import _poolHauntedMire from "../pool/haunted-mire.js";
 import _poolHedronCrawler from "../pool/hedron-crawler.js";
@@ -342,6 +344,7 @@ import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
+import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
@@ -439,6 +442,7 @@ const shard: CardShard = {
     _poolBodyDropper,
     _poolBraidsCabalMinion,
     _poolBrassSquire,
+    _poolBreakUnderPressure,
     _poolBreakerOfArmies,
     _poolBrightReprisal,
     _poolBrineShaman,
@@ -549,6 +553,7 @@ const shard: CardShard = {
     _poolGrimclimbPathway,
     _poolGrowFromTheAshes,
     _poolGuardianLions,
+    _poolHallwayHeckler,
     _poolHangarbackWalker,
     _poolHauntedMire,
     _poolHedronCrawler,
@@ -730,6 +735,7 @@ const shard: CardShard = {
     _poolTitanOfLittjara,
     _poolTithebearerGiant,
     _poolTomeRaider,
+    _poolTraxosAcademyGuardian,
     _poolTriskelion,
     _poolTrystansCommand,
     _poolTwentyToedToad,

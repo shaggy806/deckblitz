@@ -282,6 +282,7 @@ import _poolSlithAscendant from "../pool/slith-ascendant.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
+import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
 import _poolSouthernElephant from "../pool/southern-elephant.js";
@@ -667,6 +668,7 @@ const shard: CardShard = {
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
     _poolSnowCoveredForest,
+    _poolSolitaryCell,
     _poolSoltariCrusader,
     _poolSongOfCreation,
     _poolSouthernElephant,

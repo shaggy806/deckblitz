@@ -86,6 +86,7 @@ import _poolDwarvenMiner from "../pool/dwarven-miner.js";
 import _poolDwarvenNomad from "../pool/dwarven-nomad.js";
 import _poolDynamicSoar from "../pool/dynamic-soar.js";
 import _poolEagerGlyphmage from "../pool/eager-glyphmage.js";
+import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
@@ -95,6 +96,7 @@ import _poolEssenceDrain from "../pool/essence-drain.js";
 import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
+import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
@@ -450,6 +452,7 @@ const shard: CardShard = {
     _poolDwarvenNomad,
     _poolDynamicSoar,
     _poolEagerGlyphmage,
+    _poolEardrumRattler,
     _poolEarthbendingStudent,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
@@ -459,6 +462,7 @@ const shard: CardShard = {
     _poolExaltedSunborn,
     _poolExecutionersCapsule,
     _poolExpandTheSphere,
+    _poolExtendedAbsence,
     _poolEzuriClawOfProgress,
     _poolFatefulEnd,
     _poolFelixFiveBoots,

@@ -76,11 +76,13 @@ import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDainsCompany from "../pool/dains-company.js";
+import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
+import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
 import _poolDevastate from "../pool/devastate.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
@@ -156,6 +158,7 @@ import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvesttideAssailant from "../pool/harvesttide-assailant.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
+import _poolHexhavenBattalion from "../pool/hexhaven-battalion.js";
 import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
@@ -264,6 +267,7 @@ import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
 import _poolRefocus from "../pool/refocus.js";
+import _poolRefuteDestiny from "../pool/refute-destiny.js";
 import _poolRemoveSoul from "../pool/remove-soul.js";
 import _poolRenataCalledToTheHunt from "../pool/renata-called-to-the-hunt.js";
 import _poolRepentantBlacksmith from "../pool/repentant-blacksmith.js";
@@ -281,6 +285,7 @@ import _poolRiteOfPassage from "../pool/rite-of-passage.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
+import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
 import _poolScrollshift from "../pool/scrollshift.js";
@@ -292,6 +297,7 @@ import _poolSeersLantern from "../pool/seers-lantern.js";
 import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
 import _poolSellerOfSongbirds from "../pool/seller-of-songbirds.js";
+import _poolSemesterForeseer from "../pool/semester-foreseer.js";
 import _poolSerpentsGift from "../pool/serpents-gift.js";
 import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
 import _poolShakeTheFoundations from "../pool/shake-the-foundations.js";
@@ -477,11 +483,13 @@ const shard: CardShard = {
     _poolCrystalGrotto,
     _poolCursebreak,
     _poolDainsCompany,
+    _poolDanithaSpearOfAgony,
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDeathcurseOgre,
     _poolDeathsprout,
     _poolDeception,
+    _poolDenziloreFatehold,
     _poolDesertCerodon,
     _poolDevastate,
     _poolDevkarinDissident,
@@ -557,6 +565,7 @@ const shard: CardShard = {
     _poolHarshMentor,
     _poolHarvesttideAssailant,
     _poolHeatShimmer,
+    _poolHexhavenBattalion,
     _poolHierophantsChalice,
     _poolHighspireMantis,
     _poolHinterlandHarbor,
@@ -665,6 +674,7 @@ const shard: CardShard = {
     _poolReapersScythe,
     _poolReaverAmbush,
     _poolRefocus,
+    _poolRefuteDestiny,
     _poolRemoveSoul,
     _poolRenataCalledToTheHunt,
     _poolRepentantBlacksmith,
@@ -682,6 +692,7 @@ const shard: CardShard = {
     _poolRockyRoads,
     _poolRoofstalkerWight,
     _poolSageOfTheMaze,
+    _poolSaheeliConsulOfOversight,
     _poolSalvagerOfSecrets,
     _poolSandsOfDelirium,
     _poolScrollshift,
@@ -693,6 +704,7 @@ const shard: CardShard = {
     _poolSegovianAngel,
     _poolSeizeTheInitiative,
     _poolSellerOfSongbirds,
+    _poolSemesterForeseer,
     _poolSerpentsGift,
     _poolShadowGuildmage,
     _poolShakeTheFoundations,

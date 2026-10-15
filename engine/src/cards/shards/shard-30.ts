@@ -254,6 +254,7 @@ import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
+import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
@@ -368,6 +369,7 @@ import _poolWindStrider from "../pool/wind-strider.js";
 import _poolWindsOfRath from "../pool/winds-of-rath.js";
 import _poolWindseekerCentaur from "../pool/windseeker-centaur.js";
 import _poolWindsweptHeath from "../pool/windswept-heath.js";
+import _poolWinterTormentedLoner from "../pool/winter-tormented-loner.js";
 import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
@@ -635,6 +637,7 @@ const shard: CardShard = {
     _poolOverprotect,
     _poolPanharmonicon,
     _poolPantherWarriors,
+    _poolPiaDeterminedRebuilder,
     _poolPiousWayfarer,
     _poolPlazaOfHeroes,
     _poolPollutedDead,
@@ -749,6 +752,7 @@ const shard: CardShard = {
     _poolWindsOfRath,
     _poolWindseekerCentaur,
     _poolWindsweptHeath,
+    _poolWinterTormentedLoner,
     _poolWizardClass,
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,

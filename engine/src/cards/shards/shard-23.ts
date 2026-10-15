@@ -89,6 +89,7 @@ import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
+import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
@@ -105,6 +106,7 @@ import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
+import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
 import _poolFirescreamer from "../pool/firescreamer.js";
@@ -184,6 +186,7 @@ import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
+import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
 import _poolManaPrism from "../pool/mana-prism.js";
@@ -230,6 +233,7 @@ import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
+import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
 import _poolPython from "../pool/python.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
@@ -274,6 +278,7 @@ import _poolSmash from "../pool/smash.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
 import _poolSolemnSimulacrum from "../pool/solemn-simulacrum.js";
 import _poolSolveTheEquation from "../pool/solve-the-equation.js";
+import _poolSomethingWorthSaving from "../pool/something-worth-saving.js";
 import _poolSorinOfHouseMarkov from "../pool/sorin-of-house-markov.js";
 import _poolSoulOfNewPhyrexia from "../pool/soul-of-new-phyrexia.js";
 import _poolSoulShatter from "../pool/soul-shatter.js";
@@ -444,6 +449,7 @@ const shard: CardShard = {
     _poolDesperateMeasures,
     _poolDespoil,
     _poolDistinguishedConjurer,
+    _poolDiviningDuelist,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
     _poolEarthOriginYak,
@@ -460,6 +466,7 @@ const shard: CardShard = {
     _poolEvendoWakingHaven,
     _poolExclusionMage,
     _poolEzioBladeOfVengeance,
+    _poolFateholdChronologist,
     _poolFiendishDuo,
     _poolFiligreeFamiliar,
     _poolFirescreamer,
@@ -539,6 +546,7 @@ const shard: CardShard = {
     _poolLotusGuardian,
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
+    _poolMabelValleyHero,
     _poolMakindiOx,
     _poolMammothSpider,
     _poolManaPrism,
@@ -585,6 +593,7 @@ const shard: CardShard = {
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
     _poolProtectorOfGondor,
+    _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,
     _poolPython,
     _poolRainOfFilth,
@@ -629,6 +638,7 @@ const shard: CardShard = {
     _poolSoddenVerdure,
     _poolSolemnSimulacrum,
     _poolSolveTheEquation,
+    _poolSomethingWorthSaving,
     _poolSorinOfHouseMarkov,
     _poolSoulOfNewPhyrexia,
     _poolSoulShatter,

@@ -428,7 +428,11 @@ export type TurnStat =
   /** Cards that left the player's graveyard this turn, for anywhere — cast
    * or played from it, returned, exiled (Essence Anchor's "if a card left
    * your graveyard this turn"). */
-  | "cards-left-graveyard";
+  | "cards-left-graveyard"
+  /** How many times the player has scried or surveilled this turn (rules
+   * 701.22, 701.25) — "if you've scried or surveilled this turn" (Surveillance
+   * Phantasm). A scry or surveil 0 isn't one. */
+  | "scried-or-surveilled";
 
 /**
  * A condition gating a static ability (rule 604.3 — "as long as …"). Evaluated

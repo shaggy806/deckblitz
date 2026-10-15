@@ -47,6 +47,7 @@ import _poolBondedFetch from "../pool/bonded-fetch.js";
 import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
+import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
@@ -200,6 +201,7 @@ import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
+import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
@@ -230,6 +232,8 @@ import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
 import _poolPrismariCommand from "../pool/prismari-command.js";
+import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
+import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js";
 import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
@@ -430,6 +434,7 @@ const shard: CardShard = {
     _poolBondedHerdbeast,
     _poolBorosCharm,
     _poolBroodguardElite,
+    _poolBuddingInsurgent,
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
@@ -583,6 +588,7 @@ const shard: CardShard = {
     _poolManamorphose,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
+    _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
@@ -613,6 +619,8 @@ const shard: CardShard = {
     _poolPouncingLynx,
     _poolPrimevalShambler,
     _poolPrismariCommand,
+    _poolProctorOfPotential,
+    _poolProftConsultingDetective,
     _poolProsperousThief,
     _poolPullFromTomorrow,
     _poolPyreCharger,

@@ -9,6 +9,7 @@ import _poolAccordersShield from "../pool/accorders-shield.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
+import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
 import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
 import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
@@ -176,6 +177,7 @@ import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
+import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.js";
 import _poolJoinTheDance from "../pool/join-the-dance.js";
 import _poolJourneyersKite from "../pool/journeyers-kite.js";
 import _poolJudgesFamiliar from "../pool/judges-familiar.js";
@@ -230,6 +232,7 @@ import _poolNoviceDissector from "../pool/novice-dissector.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
 import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
+import _poolOmitVariables from "../pool/omit-variables.js";
 import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
@@ -396,6 +399,7 @@ const shard: CardShard = {
     _poolAerialDoombot,
     _poolAerialResponder,
     _poolAfterlifeFromTheLoam,
+    _poolAfterthoughtSentry,
     _poolAgentOfHorizons,
     _poolAgentOfKotis,
     _poolAjaniUnrelenting,
@@ -563,6 +567,7 @@ const shard: CardShard = {
     _poolIzzetLocket,
     _poolJadecraftArtisan,
     _poolJewelEyedCobra,
+    _poolJhoiraWeatherlightCorsair,
     _poolJoinTheDance,
     _poolJourneyersKite,
     _poolJudgesFamiliar,
@@ -617,6 +622,7 @@ const shard: CardShard = {
     _poolOakenBoon,
     _poolOkinaTempleToTheGrandfathers,
     _poolOmenOfTheHunt,
+    _poolOmitVariables,
     _poolOnduSkyruins,
     _poolOrcishLumberjack,
     _poolOrzhovCluestone,

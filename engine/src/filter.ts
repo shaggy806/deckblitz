@@ -576,8 +576,9 @@ export interface SpellTargetsFilter {
    * target that isn't a permanent is neither. */
   readonly source?: boolean;
   /** A target is a player: `"you"`, the filter's side — "a spell that
-   * targets you" (Dawn Charm). */
-  readonly player?: "you" | "any";
+   * targets you" (Dawn Charm); `"opponent"`, one of the filter's side's
+   * opponents — "a spell that targets an opponent" (Danitha, Spear of Agony). */
+  readonly player?: "you" | "opponent" | "any";
 }
 
 /** Whether the spell `spell` meets `clause` (see {@link SpellTargetsFilter}):
@@ -623,7 +624,7 @@ function spellTargetsMatch(
     if (t.kind === "gone") return false;
     if (t.kind === "player") {
       if (clause.player === undefined || clause.permanent !== undefined || clause.source === true) return false;
-      return clause.player === "any" || t.player === ctx.you;
+      return clause.player === "any" || (t.player === ctx.you) === (clause.player === "you");
     }
     if (clause.player !== undefined) return false;
     const object = state.objects[t.object];

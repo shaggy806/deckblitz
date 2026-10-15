@@ -155,6 +155,7 @@ import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
+import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
@@ -545,6 +546,7 @@ const shard: CardShard = {
     _poolHussarPatrol,
     _poolIdyllicGrange,
     _poolIncrementalBlight,
+    _poolInspiredTethermage,
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
     _poolJadeCastSentinel,
