@@ -148,6 +148,7 @@ import _poolGrayOgre from "../pool/gray-ogre.js";
 import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
+import _poolGurmagNightwatch from "../pool/gurmag-nightwatch.js";
 import _poolGyreEngineer from "../pool/gyre-engineer.js";
 import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
@@ -260,6 +261,7 @@ import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
 import _poolRepurposingBay from "../pool/repurposing-bay.js";
+import _poolRescueLeopard from "../pool/rescue-leopard.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
@@ -358,6 +360,7 @@ import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
+import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
@@ -551,6 +554,7 @@ const shard: CardShard = {
     _poolGrazingGladehart,
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
+    _poolGurmagNightwatch,
     _poolGyreEngineer,
     _poolHERBIELovableRobot,
     _poolHardenedAcademic,
@@ -663,6 +667,7 @@ const shard: CardShard = {
     _poolRenegadeDemon,
     _poolReprieve,
     _poolRepurposingBay,
+    _poolRescueLeopard,
     _poolRestlessVinestalk,
     _poolRetchedWretch,
     _poolRevivingMelody,
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolUnderseaInvader,
     _poolUndulatingWitness,
     _poolUnholyAnnexRitualChamber,
+    _poolUnsparingBoltcaster,
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,
     _poolVampiricTouch,

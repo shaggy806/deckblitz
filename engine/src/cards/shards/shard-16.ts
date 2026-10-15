@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
 import _poolAccelerate from "../pool/accelerate.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
@@ -121,6 +122,7 @@ import _poolFireSages from "../pool/fire-sages.js";
 import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
 import _poolFistsOfTheAnvil from "../pool/fists-of-the-anvil.js";
 import _poolFlamebornHellion from "../pool/flameborn-hellion.js";
+import _poolFlameholdGrappler from "../pool/flamehold-grappler.js";
 import _poolFledglingGriffin from "../pool/fledgling-griffin.js";
 import _poolFleetingImage from "../pool/fleeting-image.js";
 import _poolFleetingMemories from "../pool/fleeting-memories.js";
@@ -175,6 +177,7 @@ import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
 import _poolInspiredSprite from "../pool/inspired-sprite.js";
+import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
 import _poolInvasionReinforcements from "../pool/invasion-reinforcements.js";
 import _poolInventorsFair from "../pool/inventors-fair.js";
 import _poolInvisibleStalker from "../pool/invisible-stalker.js";
@@ -443,6 +446,7 @@ import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbzanMonument,
     _poolAcademyRector,
     _poolAccelerate,
     _poolAesiTyrantOfGyreStrait,
@@ -561,6 +565,7 @@ const shard: CardShard = {
     _poolFirespitterWhelp,
     _poolFistsOfTheAnvil,
     _poolFlamebornHellion,
+    _poolFlameholdGrappler,
     _poolFledglingGriffin,
     _poolFleetingImage,
     _poolFleetingMemories,
@@ -615,6 +620,7 @@ const shard: CardShard = {
     _poolIndathaTriome,
     _poolInkmothNexus,
     _poolInspiredSprite,
+    _poolInspiritedVanguard,
     _poolInvasionReinforcements,
     _poolInventorsFair,
     _poolInvisibleStalker,

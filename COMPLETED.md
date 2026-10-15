@@ -28,6 +28,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Tarkir: Dragonstorm, whole** (batch 83): 79 cards (2026-10-15).
+- **"The damage dealt this way"** (`damageDealtThisWay`, the `damage-dealt-this-way` condition,
+  rule 615.1): Sonic Shrieker, The Black Arrow, Elektra, Femme Fatale, Creeping Bloodsucker, and
+  Provoke the Trolls no longer pumps a creature whose damage was prevented (2026-10-15).
 - **Final Fantasy and Final Fantasy Commander, both whole** (batch 82): 114 cards, with a "while
   the source is on the battlefield" play permission ended by the source leaving (rule 400.7) and
   `canDispatch` checking an activation's sacrifice choice (2026-10-15).

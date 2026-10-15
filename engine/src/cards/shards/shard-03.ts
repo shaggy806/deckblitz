@@ -51,6 +51,7 @@ import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
+import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
@@ -90,6 +91,7 @@ import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
+import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
@@ -245,6 +247,7 @@ import _poolResculpt from "../pool/resculpt.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
+import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
 import _poolRocHunter from "../pool/roc-hunter.js";
 import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
@@ -323,6 +326,7 @@ import _poolTarpan from "../pool/tarpan.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
+import _poolTemurMonument from "../pool/temur-monument.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
@@ -365,6 +369,7 @@ import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
 import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWidowsBite from "../pool/widows-bite.js";
+import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
 import _poolWondrousCrucible from "../pool/wondrous-crucible.js";
@@ -437,6 +442,7 @@ const shard: CardShard = {
     _poolCompelBrutality,
     _poolCondemn,
     _poolCondescend,
+    _poolCoriMountainStalwart,
     _poolCorruptedConscience,
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
@@ -476,6 +482,7 @@ const shard: CardShard = {
     _poolEndlessOne,
     _poolEndriderCatalyzer,
     _poolEphemerate,
+    _poolEquilibriumAdept,
     _poolErraticVisionary,
     _poolEtheriumHornSorcerer,
     _poolExhibitionTidecaller,
@@ -631,6 +638,7 @@ const shard: CardShard = {
     _poolRestlessApparition,
     _poolRighteousBlow,
     _poolRithsAttendant,
+    _poolRoarOfEndlessSong,
     _poolRocHunter,
     _poolRubblebeltRecluse,
     _poolRumbleArena,
@@ -709,6 +717,7 @@ const shard: CardShard = {
     _poolTcriBuilding,
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,
+    _poolTemurMonument,
     _poolTesharAncestorsApostle,
     _poolTheFantasticFour,
     _poolTheGaffer,
@@ -751,6 +760,7 @@ const shard: CardShard = {
     _poolWhiteWidowFreeAgent,
     _poolWiccanRisingMagician,
     _poolWidowsBite,
+    _poolWingbladeDisciple,
     _poolWittyRoastmaster,
     _poolWoeStrider,
     _poolWondrousCrucible,

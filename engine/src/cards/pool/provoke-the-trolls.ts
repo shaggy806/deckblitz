@@ -1,9 +1,7 @@
 import { defineCard } from "../define.js";
 
-// The +5/+0 rider reads "if a creature is dealt damage this way". Modelled as
-// a plain second half of the sequence: `modify-pt` on a player target is a
-// no-op, and a creature that died to the damage is gone before it applies —
-// which is the same outcome the real card produces.
+// The +5/+0 only if a creature was dealt the damage — not a player, and not
+// when it was prevented (rule 615.1).
 export default defineCard({
   name: "Provoke the Trolls",
   manaCost: "{3}{R}",
@@ -17,7 +15,17 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 3, target: 0 },
-      { kind: "modify-pt", target: 0, power: 5, toughness: 0, duration: "end-of-turn" },
+      {
+        kind: "conditional",
+        condition: {
+          kind: "all",
+          of: [
+            { kind: "damage-dealt-this-way", to: 0 },
+            { kind: "target", index: 0, filter: { type: "creature" } },
+          ],
+        },
+        then: { kind: "modify-pt", target: 0, power: 5, toughness: 0, duration: "end-of-turn" },
+      },
     ],
   },
 });

@@ -173,6 +173,7 @@ import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
+import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
@@ -308,6 +309,7 @@ import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
 import _poolStaffOfTitania from "../pool/staff-of-titania.js";
+import _poolStaticSnare from "../pool/static-snare.js";
 import _poolStifle from "../pool/stifle.js";
 import _poolStingerflingSpider from "../pool/stingerfling-spider.js";
 import _poolStockUp from "../pool/stock-up.js";
@@ -352,6 +354,7 @@ import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
+import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
@@ -565,6 +568,7 @@ const shard: CardShard = {
     _poolKederektCreeper,
     _poolKefkaCourtMage,
     _poolKhalniAmbush,
+    _poolKinTreeSeverance,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
     _poolLiesaShroudOfDusk,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolSquiresDevotion,
     _poolStaffOfDomination,
     _poolStaffOfTitania,
+    _poolStaticSnare,
     _poolStifle,
     _poolStingerflingSpider,
     _poolStockUp,
@@ -744,6 +749,7 @@ const shard: CardShard = {
     _poolUnderworldConnections,
     _poolUnforgivingAim,
     _poolUnholyFiend,
+    _poolUrenisRebuff,
     _poolUtopiaSprawl,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,

@@ -332,7 +332,13 @@ import {
   targetsFillable,
 } from "./target.js";
 import { distinctTargetCount, targetCountBounds } from "./target-count.js";
-import { eventsSince as eventLogSince, excessDamageSince, lifeLostSince, thisWayEntries } from "./this-way.js";
+import {
+  damageDealtSince,
+  eventsSince as eventLogSince,
+  excessDamageSince,
+  lifeLostSince,
+  thisWayEntries,
+} from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type { TargetCopies, TargetCountRange } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
@@ -18726,6 +18732,11 @@ export class Game {
         const ref = targets[condition.to];
         return ref?.kind === "object" && excessDamageSince(this.state, since, ref.object) > 0;
       }
+      if (condition.kind === "damage-dealt-this-way") {
+        const ref = condition.to === undefined ? undefined : targets[condition.to];
+        if (condition.to !== undefined && ref === undefined) return false;
+        return damageDealtSince(this.state, since, ref, condition.player) > 0;
+      }
       if (condition.kind === "this-way") {
         const done = thisWayDone(
           condition.what,
@@ -19073,6 +19084,7 @@ export class Game {
       thisWay: thisWayDone,
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
+      damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
       opponentsAttacked: () => {
         const attacked = new Set<PlayerId>();

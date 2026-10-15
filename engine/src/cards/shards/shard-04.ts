@@ -255,6 +255,7 @@ import _poolQuandrixCampus from "../pool/quandrix-campus.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
 import _poolRaidBombardment from "../pool/raid-bombardment.js";
 import _poolRaisedByGiants from "../pool/raised-by-giants.js";
+import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
@@ -305,6 +306,7 @@ import _poolSlitherBlade from "../pool/slither-blade.js";
 import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
+import _poolSonicShrieker from "../pool/sonic-shrieker.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralDenial from "../pool/spectral-denial.js";
 import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
@@ -385,6 +387,7 @@ import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
 import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
+import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
@@ -396,6 +399,7 @@ import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
+import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
@@ -662,6 +666,7 @@ const shard: CardShard = {
     _poolRagingRedcap,
     _poolRaidBombardment,
     _poolRaisedByGiants,
+    _poolRallyTheMonastery,
     _poolRangersLongbow,
     _poolRazeTheEffigy,
     _poolReckonersBargain,
@@ -712,6 +717,7 @@ const shard: CardShard = {
     _poolSnowCoveredWastes,
     _poolSongMadRuins,
     _poolSongMadTreachery,
+    _poolSonicShrieker,
     _poolSparringMummy,
     _poolSpectralDenial,
     _poolSpellweaverEternal,
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolWallOfTorches,
     _poolWandasVision,
     _poolWardenOfTheWoods,
+    _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,
     _poolWheelOfFortune,
     _poolWhispersilkCloak,
@@ -805,6 +812,7 @@ const shard: CardShard = {
     _poolZofBloodbog,
   ],
   tokens: [
+    _tokens55ElephantToken,
     _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,
     _tokensGremlinToken,

@@ -934,6 +934,17 @@ export type StaticCondition =
    * answer it; anywhere else it's false.
    */
   | { readonly kind: "excess-damage-this-way"; readonly to?: number }
+  /**
+   * Damage was dealt this way — by the resolution under way, after
+   * prevention (rule 615.1), so a prevented hit doesn't count: Provoke the
+   * Trolls' "if a creature is dealt damage this way", The Black Arrow's "if
+   * a Dragon is dealt damage this way" (with a `target` condition for the
+   * Dragon), Elektra's reflexive "when you do" (rule 603.12). `to` asks
+   * about that target slot's player or object only; `player` about damage
+   * dealt to players only — Sonic Shrieker's "if a player is dealt damage
+   * this way". Only a resolution can answer it; anywhere else it's false.
+   */
+  | { readonly kind: "damage-dealt-this-way"; readonly to?: number; readonly player?: boolean }
   | {
       readonly kind: "this-way";
       readonly what: ThisWayKind;

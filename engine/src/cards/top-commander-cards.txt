@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3626 already implemented / 1374 missing (marks refreshed 2026-10-15)
+3627 already implemented / 1373 missing (marks refreshed 2026-10-15)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1533,7 +1533,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1540  Utvara Hellkite                          {6}{R}{R}        Creature — Dragon
 [x]  1541  Rebuff the Wicked                        {W}              Instant
 [ ]  1542  Eerie Ultimatum                          {W}{W}{B}{B}{B}{G}{G} Sorcery
-[ ]  1543  Creeping Bloodsucker                     {1}{B}           Creature — Vampire
+[x]  1543  Creeping Bloodsucker                     {1}{B}           Creature — Vampire
 [x]  1544  Pawn of Ulamog                           {1}{B}{B}        Creature — Vampire Shaman
 [x]  1545  Hydroid Krasis                           {X}{G}{U}        Creature — Jellyfish Hydra Beast
 [x]  1546  Tortured Existence                       {B}              Enchantment

@@ -123,6 +123,7 @@ import _poolElfhamePalace from "../pool/elfhame-palace.js";
 import _poolEliteJavelineer from "../pool/elite-javelineer.js";
 import _poolElvenChorus from "../pool/elven-chorus.js";
 import _poolElvishAberration from "../pool/elvish-aberration.js";
+import _poolEmbermouthSentinel from "../pool/embermouth-sentinel.js";
 import _poolEmeraldOryx from "../pool/emerald-oryx.js";
 import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
@@ -194,6 +195,7 @@ import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
+import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
 import _poolKavaronMemorialWorld from "../pool/kavaron-memorial-world.js";
 import _poolKederektParasite from "../pool/kederekt-parasite.js";
@@ -222,7 +224,9 @@ import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolManalith from "../pool/manalith.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
+import _poolMarduMonument from "../pool/mardu-monument.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
+import _poolMarshalOfTheLost from "../pool/marshal-of-the-lost.js";
 import _poolMartyrForTheCause from "../pool/martyr-for-the-cause.js";
 import _poolMaskOfMemory from "../pool/mask-of-memory.js";
 import _poolMaulOfTheSkyclaves from "../pool/maul-of-the-skyclaves.js";
@@ -286,6 +290,7 @@ import _poolRuinsRecluse from "../pool/ruins-recluse.js";
 import _poolRumbleweed from "../pool/rumbleweed.js";
 import _poolRuptureSpire from "../pool/rupture-spire.js";
 import _poolRustHarvester from "../pool/rust-harvester.js";
+import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
@@ -537,6 +542,7 @@ const shard: CardShard = {
     _poolEliteJavelineer,
     _poolElvenChorus,
     _poolElvishAberration,
+    _poolEmbermouthSentinel,
     _poolEmeraldOryx,
     _poolEndbringer,
     _poolEnormousBaloth,
@@ -608,6 +614,7 @@ const shard: CardShard = {
     _poolIrohTeaMaster,
     _poolJacesSanctum,
     _poolJasmineBoreal,
+    _poolJeskaiRevelation,
     _poolJuganDefendsTheTemple,
     _poolKavaronMemorialWorld,
     _poolKederektParasite,
@@ -636,7 +643,9 @@ const shard: CardShard = {
     _poolMalachiteGolem,
     _poolManalith,
     _poolMarbleChalice,
+    _poolMarduMonument,
     _poolMarkovBlademaster,
+    _poolMarshalOfTheLost,
     _poolMartyrForTheCause,
     _poolMaskOfMemory,
     _poolMaulOfTheSkyclaves,
@@ -700,6 +709,7 @@ const shard: CardShard = {
     _poolRumbleweed,
     _poolRuptureSpire,
     _poolRustHarvester,
+    _poolSageOfTheFang,
     _poolSaltFlats,
     _poolSamutsSprint,
     _poolSarkhanUnbroken,

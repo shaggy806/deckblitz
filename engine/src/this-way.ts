@@ -12,6 +12,7 @@ import type { ThisWayKind } from "./effects.js";
 import type { GameEvent } from "./events.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
+import type { TargetRef } from "./target.js";
 
 /** One object the resolution did something to. */
 export interface ThisWayEntry {
@@ -69,6 +70,32 @@ export function excessDamageSince(state: GameState, since: number, to?: ObjectId
     excess += event.excess ?? 0;
   }
   return excess;
+}
+
+/** The damage dealt in the resolution that began at event `since` — see the
+ * `damageDealtThisWay` amount: to `to` only when given (an object or a
+ * player), to players only with `playersOnly`. Damage prevented was never
+ * dealt (rule 615.1), so it isn't here. */
+export function damageDealtSince(
+  state: GameState,
+  since: number,
+  to?: TargetRef,
+  playersOnly?: boolean,
+): number {
+  let dealt = 0;
+  for (const event of eventsSince(state, since)) {
+    if (event.type !== "damage-dealt") continue;
+    if (playersOnly === true && event.target.kind !== "player") continue;
+    if (to !== undefined) {
+      const same =
+        to.kind === "player"
+          ? event.target.kind === "player" && event.target.player === to.player
+          : event.target.kind === "object" && event.target.object === to.object;
+      if (!same) continue;
+    }
+    dealt += event.amount;
+  }
+  return dealt;
 }
 
 /**

@@ -271,6 +271,7 @@ import _poolRavenform from "../pool/ravenform.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
+import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
 import _poolReturnFromTheWilds from "../pool/return-from-the-wilds.js";
@@ -671,6 +672,7 @@ const shard: CardShard = {
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,
+    _poolReputableMerchant,
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,
     _poolReturnFromTheWilds,

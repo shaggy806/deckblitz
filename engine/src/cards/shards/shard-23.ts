@@ -79,6 +79,7 @@ import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
+import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
@@ -299,6 +300,7 @@ import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
+import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
@@ -309,6 +311,7 @@ import _poolSlashOfLight from "../pool/slash-of-light.js";
 import _poolSlipperyBogbonder from "../pool/slippery-bogbonder.js";
 import _poolSlobadGoblinTinkerer from "../pool/slobad-goblin-tinkerer.js";
 import _poolSmash from "../pool/smash.js";
+import _poolSnowmeltStag from "../pool/snowmelt-stag.js";
 import _poolSoddenVerdure from "../pool/sodden-verdure.js";
 import _poolSolemnSimulacrum from "../pool/solemn-simulacrum.js";
 import _poolSolveTheEquation from "../pool/solve-the-equation.js";
@@ -351,6 +354,7 @@ import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
 import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
+import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
 import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
@@ -482,6 +486,7 @@ const shard: CardShard = {
     _poolCoolButRude,
     _poolCoordinatedCharge,
     _poolCostumeCloset,
+    _poolCreepingBloodsucker,
     _poolCrossbowAmbush,
     _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
@@ -702,6 +707,7 @@ const shard: CardShard = {
     _poolShelteringLandscape,
     _poolShimmeringGrotto,
     _poolShinyImpetus,
+    _poolSibsigAppraiser,
     _poolSilkNet,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
@@ -712,6 +718,7 @@ const shard: CardShard = {
     _poolSlipperyBogbonder,
     _poolSlobadGoblinTinkerer,
     _poolSmash,
+    _poolSnowmeltStag,
     _poolSoddenVerdure,
     _poolSolemnSimulacrum,
     _poolSolveTheEquation,
@@ -754,6 +761,7 @@ const shard: CardShard = {
     _poolTrainedCaracal,
     _poolTrappedInTheScreen,
     _poolTraumaticCritique,
+    _poolTravelingBotanist,
     _poolTrokinHighGuard,
     _poolTwilightDrover,
     _poolTwoHeadedZombie,

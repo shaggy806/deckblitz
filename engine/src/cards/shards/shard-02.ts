@@ -329,6 +329,7 @@ import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
 import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
+import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
 import _poolSurtlandFrostpyre from "../pool/surtland-frostpyre.js";
 import _poolSvellaIceShaper from "../pool/svella-ice-shaper.js";
 import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
@@ -728,6 +729,7 @@ const shard: CardShard = {
     _poolSulfurFalls,
     _poolSummonEsperRamuh,
     _poolSunmanePegasus,
+    _poolSunpearlKirin,
     _poolSurtlandFrostpyre,
     _poolSvellaIceShaper,
     _poolSwordOfTheSqueak,

@@ -416,6 +416,11 @@ export type EffectAmount =
    * was dealt to that target slot's object — a fight's "excess damage dealt
    * to the creature an opponent controls" (Rhino's Rampage). */
   | { readonly excessDamageThisWay: true; readonly to?: number }
+  /** The damage dealt so far in the resolution under way — "you gain life
+   * equal to the damage dealt this way" (Creeping Bloodsucker). Damage
+   * prevented was never dealt, so it doesn't count. `to` counts only what was
+   * dealt to that target slot's player or object. */
+  | { readonly damageDealtThisWay: true; readonly to?: number }
   /**
    * A per-player running total for this turn ({@link TurnStat}), summed over
    * the players `who` names (default `"you"`) — Kydele's "{C} for each card
@@ -4893,6 +4898,9 @@ export interface EffectApi {
   /** See the `excessDamageThisWay` {@link EffectAmount}: dealt to `to`'s
    * object only, when given. */
   excessDamageThisWay(to?: ObjectId): number;
+  /** See the `damageDealtThisWay` {@link EffectAmount}: dealt to `to` only,
+   * when given. */
+  damageDealtThisWay(to?: TargetRef): number;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -6596,6 +6604,11 @@ function signedAmountValue(
     if (amount.to === undefined) return ctx.excessDamageThisWay();
     const ref = ctx.targets[amount.to];
     return ref?.kind === "object" ? ctx.excessDamageThisWay(ref.object) : 0;
+  }
+  if ("damageDealtThisWay" in amount) {
+    if (amount.to === undefined) return ctx.damageDealtThisWay();
+    const ref = ctx.targets[amount.to];
+    return ref === undefined ? 0 : ctx.damageDealtThisWay(ref);
   }
   if ("turnStat" in amount) {
     if (amount.target !== undefined) {

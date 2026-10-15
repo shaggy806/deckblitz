@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbjure from "../pool/abjure.js";
 import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js";
+import _poolAegisSculptor from "../pool/aegis-sculptor.js";
 import _poolAetherize from "../pool/aetherize.js";
 import _poolAlabasterHostSanctifier from "../pool/alabaster-host-sanctifier.js";
 import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
@@ -339,6 +340,7 @@ import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
+import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
@@ -421,6 +423,7 @@ const shard: CardShard = {
   pool: [
     _poolAbjure,
     _poolAdelineResplendentCathar,
+    _poolAegisSculptor,
     _poolAetherize,
     _poolAlabasterHostSanctifier,
     _poolAlexiosDeimosOfKosmos,
@@ -755,6 +758,7 @@ const shard: CardShard = {
     _poolTanufelRimespeaker,
     _poolTeeterpeakAmbusher,
     _poolTelimtorsDarts,
+    _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
     _poolTheGooseMother,

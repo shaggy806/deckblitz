@@ -89,6 +89,7 @@ import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
+import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
 import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
@@ -110,6 +111,7 @@ import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
 import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
+import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
@@ -140,6 +142,7 @@ import _poolGhaltaAndMavren from "../pool/ghalta-and-mavren.js";
 import _poolGhostShip from "../pool/ghost-ship.js";
 import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
+import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
@@ -267,6 +270,7 @@ import _poolRenegadesGetaway from "../pool/renegades-getaway.js";
 import _poolResplendentAngel from "../pool/resplendent-angel.js";
 import _poolRestlessVents from "../pool/restless-vents.js";
 import _poolRiddlesmith from "../pool/riddlesmith.js";
+import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolDecodeTransmissions,
     _poolDefensiveStance,
     _poolDelete,
+    _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
     _poolDictateOfErebos,
     _poolDigSiteInventory,
@@ -526,6 +531,7 @@ const shard: CardShard = {
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
     _poolElegyAcolyte,
+    _poolElektraFemmeFatale,
     _poolElementalistAdept,
     _poolElvenkingsHarper,
     _poolEnragedFlamecaster,
@@ -556,6 +562,7 @@ const shard: CardShard = {
     _poolGhostShip,
     _poolGiantWarthog,
     _poolGiftOfGranite,
+    _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
     _poolGlittermonger,
     _poolGoblinHero,
@@ -683,6 +690,7 @@ const shard: CardShard = {
     _poolResplendentAngel,
     _poolRestlessVents,
     _poolRiddlesmith,
+    _poolRilingDawnbreaker,
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiverchurnMonument,

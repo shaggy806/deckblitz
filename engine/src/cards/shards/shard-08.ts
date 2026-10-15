@@ -27,6 +27,7 @@ import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
+import _poolAttunedHunter from "../pool/attuned-hunter.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
@@ -295,6 +296,7 @@ import _poolRisenNecroregent from "../pool/risen-necroregent.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
+import _poolRiverwheelSweep from "../pool/riverwheel-sweep.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
@@ -461,6 +463,7 @@ const shard: CardShard = {
     _poolArcanisTheOmnipotent,
     _poolArtificersAssistant,
     _poolAshenRider,
+    _poolAttunedHunter,
     _poolAuntMay,
     _poolAuraBlast,
     _poolAzoriusLocket,
@@ -729,6 +732,7 @@ const shard: CardShard = {
     _poolRishadanPort,
     _poolRisingPopulace,
     _poolRiteOfPassage,
+    _poolRiverwheelSweep,
     _poolRockyRoads,
     _poolRoofstalkerWight,
     _poolSageOfTheMaze,

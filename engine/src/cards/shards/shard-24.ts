@@ -81,6 +81,7 @@ import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
+import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
@@ -145,6 +146,7 @@ import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
+import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
@@ -256,6 +258,7 @@ import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
 import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
 import _poolSadisticSlash from "../pool/sadistic-slash.js";
+import _poolSageOfTheSkies from "../pool/sage-of-the-skies.js";
 import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
 import _poolSanctumCustodian from "../pool/sanctum-custodian.js";
 import _poolSarkhanTheDragonspeaker from "../pool/sarkhan-the-dragonspeaker.js";
@@ -344,6 +347,7 @@ import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
+import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
@@ -471,6 +475,7 @@ const shard: CardShard = {
     _poolConvolute,
     _poolCoralEel,
     _poolCracklingCyclops,
+    _poolCruelTruths,
     _poolCrystacean,
     _poolCullingTheWeak,
     _poolCylianElf,
@@ -535,6 +540,7 @@ const shard: CardShard = {
     _poolGravbladeHeavy,
     _poolGreatUglyLookingGoblin,
     _poolGruulLocket,
+    _poolGurmagRakshasa,
     _poolHallMonitor,
     _poolHammerOfPurphoros,
     _poolHanweirGarrison,
@@ -646,6 +652,7 @@ const shard: CardShard = {
     _poolRotcrownGhoul,
     _poolRoxxonBrutes,
     _poolSadisticSlash,
+    _poolSageOfTheSkies,
     _poolSaheeliSublimeArtificer,
     _poolSanctumCustodian,
     _poolSarkhanTheDragonspeaker,
@@ -734,6 +741,7 @@ const shard: CardShard = {
     _poolTwoHandedAxe,
     _poolUnderdarkRift,
     _poolUnnaturalSpeed,
+    _poolUnrootedAncestor,
     _poolUproot,
     _poolUrGolemsEye,
     _poolUrtetRemnantOfMemnarch,

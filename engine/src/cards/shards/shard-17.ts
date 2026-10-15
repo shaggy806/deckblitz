@@ -181,6 +181,7 @@ import _poolIronWill from "../pool/iron-will.js";
 import _poolIrontreadCrusher from "../pool/irontread-crusher.js";
 import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
+import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
@@ -357,6 +358,7 @@ import _poolUnsummon from "../pool/unsummon.js";
 import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
 import _poolVenomEvilUnleashed from "../pool/venom-evil-unleashed.js";
+import _poolVeteranIceClimber from "../pool/veteran-ice-climber.js";
 import _poolVigilanteJustice from "../pool/vigilante-justice.js";
 import _poolVizierOfTheScorpion from "../pool/vizier-of-the-scorpion.js";
 import _poolVolatileFault from "../pool/volatile-fault.js";
@@ -588,6 +590,7 @@ const shard: CardShard = {
     _poolIrontreadCrusher,
     _poolItlimocCradleOfTheSun,
     _poolIzzetGuildgate,
+    _poolJeskaiMonument,
     _poolJhovallRider,
     _poolKadenaSlinkingSorcerer,
     _poolKamahlPitFighter,
@@ -764,6 +767,7 @@ const shard: CardShard = {
     _poolVeiledShade,
     _poolVeinwitchCoven,
     _poolVenomEvilUnleashed,
+    _poolVeteranIceClimber,
     _poolVigilanteJustice,
     _poolVizierOfTheScorpion,
     _poolVolatileFault,

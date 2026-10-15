@@ -60,6 +60,7 @@ import _poolChallengerTroll from "../pool/challenger-troll.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
+import _poolCharringBite from "../pool/charring-bite.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
@@ -213,6 +214,7 @@ import _poolLifelink from "../pool/lifelink.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
+import _poolLoxodonBattlePriest from "../pool/loxodon-battle-priest.js";
 import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
 import _poolLylaHolographicAssistant from "../pool/lyla-holographic-assistant.js";
@@ -313,6 +315,7 @@ import _poolRowanScionOfWar from "../pool/rowan-scion-of-war.js";
 import _poolRubbleReading from "../pool/rubble-reading.js";
 import _poolRunawaySteamKin from "../pool/runaway-steam-kin.js";
 import _poolSagesNouliths from "../pool/sages-nouliths.js";
+import _poolSaltRoadSkirmish from "../pool/salt-road-skirmish.js";
 import _poolSandblast from "../pool/sandblast.js";
 import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
@@ -383,6 +386,7 @@ import _poolThrabenHeretic from "../pool/thraben-heretic.js";
 import _poolTomakulHonorGuard from "../pool/tomakul-honor-guard.js";
 import _poolTopanAscetic from "../pool/topan-ascetic.js";
 import _poolTowerDrake from "../pool/tower-drake.js";
+import _poolTradeRouteEnvoy from "../pool/trade-route-envoy.js";
 import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
@@ -443,6 +447,8 @@ import _tokensJumblebones from "../tokens/jumblebones.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensServoToken from "../tokens/servo-token.js";
+import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
+import _tokensSpiritTokenDusyutEarthcarver from "../tokens/spirit-token-dusyut-earthcarver.js";
 
 const shard: CardShard = {
   pool: [
@@ -503,6 +509,7 @@ const shard: CardShard = {
     _poolChandrasIgnition,
     _poolChangelingSentinel,
     _poolChargingMonstrosaur,
+    _poolCharringBite,
     _poolChromeMox,
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
@@ -656,6 +663,7 @@ const shard: CardShard = {
     _poolLoreWeaver,
     _poolLoreholdCharm,
     _poolLossarnachCaptain,
+    _poolLoxodonBattlePriest,
     _poolLunarchVeteran,
     _poolLurkingPredators,
     _poolLylaHolographicAssistant,
@@ -756,6 +764,7 @@ const shard: CardShard = {
     _poolRubbleReading,
     _poolRunawaySteamKin,
     _poolSagesNouliths,
+    _poolSaltRoadSkirmish,
     _poolSandblast,
     _poolSandwurmConvergence,
     _poolSaruliCaretaker,
@@ -826,6 +835,7 @@ const shard: CardShard = {
     _poolTomakulHonorGuard,
     _poolTopanAscetic,
     _poolTowerDrake,
+    _poolTradeRouteEnvoy,
     _poolTradewindRider,
     _poolTrashForTreasure,
     _poolTreespringLorian,
@@ -888,6 +898,8 @@ const shard: CardShard = {
     _tokensPhyrexianMiteToken,
     _tokensRedElementalToken11,
     _tokensServoToken,
+    _tokensSpiritTokenAbzanMonument,
+    _tokensSpiritTokenDusyutEarthcarver,
   ],
 };
 

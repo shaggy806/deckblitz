@@ -6324,6 +6324,26 @@
   "effect:choose-per-opponent-then-destroy": {
    "family": "decision:choose-permanent",
    "example": "Ultimate Magic: Meteor: Ultimate Magic: Meteor: \"for each opponent, choose an artifact or land that player controls. Destroy the chosen permanents\" — one untargeted pick from each opponent's permanents, then all destroyed together."
+  },
+  "effect:grant-harmonize": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "A card in your graveyard gains harmonize until end of turn, its harmonize cost equal to its mana cost — grant-flashback's shape for harmonize (Songcrafter Mage)."
+  },
+  "condition:source-hasnt-dealt-damage": {
+   "family": "stat:object-damage-history",
+   "example": "True while this permanent hasn't dealt any damage, combat or noncombat, since it entered the battlefield (Karakyk Guardian); condition:source-hasnt-dealt-combat-damage is the combat-only form."
+  },
+  "effect:exile-chosen-from-revealed-hand": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "example": "Target opponent reveals their hand; you choose a card matching a filter from it and exile it (discard-chosen's choice, moving the card to exile instead of the graveyard) - Aggressive Negotiations."
+  },
+  "cost:cost-increase-if-targets": {
+   "family": "cost:cost-modification-extensions",
+   "example": "\"This spell costs {N} more to cast if it targets [filter]\" - the increase counterpart of targetCostReduction, applied before reductions (rule 601.2f) and only when a chosen target matches - Dragon's Prey."
+  },
+  "condition:counter-kinds-among-permanents": {
+   "family": "condition:player-state-thresholds",
+   "example": "A StaticCondition for N or more different kinds of counters among the permanents you control matching a filter (each kind counted once, wherever it sits) — Hundred-Battle Veteran."
   }
  }
 }

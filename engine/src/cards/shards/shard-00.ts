@@ -104,6 +104,7 @@ import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
 import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
+import _poolDusyutEarthcarver from "../pool/dusyut-earthcarver.js";
 import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
@@ -133,6 +134,7 @@ import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
+import _poolFormationBreaker from "../pool/formation-breaker.js";
 import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
@@ -335,11 +337,13 @@ import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
+import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
 import _poolStrixSerenade from "../pool/strix-serenade.js";
 import _poolStrongarmThug from "../pool/strongarm-thug.js";
 import _poolStrongholdAssassin from "../pool/stronghold-assassin.js";
 import _poolStuntDouble from "../pool/stunt-double.js";
+import _poolSultaiMonument from "../pool/sultai-monument.js";
 import _poolSummonGFCerberus from "../pool/summon-g-f-cerberus.js";
 import _poolSunhomeFortressOfTheLegion from "../pool/sunhome-fortress-of-the-legion.js";
 import _poolSunlance from "../pool/sunlance.js";
@@ -532,6 +536,7 @@ const shard: CardShard = {
     _poolDragonEngine,
     _poolDreamSeizer,
     _poolDrogskolShieldmate,
+    _poolDusyutEarthcarver,
     _poolDyingToServe,
     _poolEagerTrufflesnout,
     _poolEarthquake,
@@ -561,6 +566,7 @@ const shard: CardShard = {
     _poolFlowstoneThopter,
     _poolFootHeadquarters,
     _poolForest,
+    _poolFormationBreaker,
     _poolFormidableCommons,
     _poolFrontlineRush,
     _poolFuneralLongboat,
@@ -763,11 +769,13 @@ const shard: CardShard = {
     _poolStarkIndustries,
     _poolStitchInTime,
     _poolStoneworkPuma,
+    _poolStormbeaconBlade,
     _poolStormkeldVanguard,
     _poolStrixSerenade,
     _poolStrongarmThug,
     _poolStrongholdAssassin,
     _poolStuntDouble,
+    _poolSultaiMonument,
     _poolSummonGFCerberus,
     _poolSunhomeFortressOfTheLegion,
     _poolSunlance,

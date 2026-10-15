@@ -142,6 +142,7 @@ import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
+import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
 import _poolGalianBeast from "../pool/galian-beast.js";
@@ -406,6 +407,7 @@ import _poolWizardClass from "../pool/wizard-class.js";
 import _poolWizardsOfThay from "../pool/wizards-of-thay.js";
 import _poolWkabiShieldOfTheNation from "../pool/wkabi-shield-of-the-nation.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
+import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolZahurGlorysPast from "../pool/zahur-glorys-past.js";
 import _poolZephyrBoots from "../pool/zephyr-boots.js";
 import _poolZodiacTiger from "../pool/zodiac-tiger.js";
@@ -557,6 +559,7 @@ const shard: CardShard = {
     _poolFrogSquirrels,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
+    _poolFuriousForebear,
     _poolFurtiveAnalyst,
     _poolGaladhrimGuide,
     _poolGalianBeast,
@@ -821,6 +824,7 @@ const shard: CardShard = {
     _poolWizardsOfThay,
     _poolWkabiShieldOfTheNation,
     _poolWordsOfWisdom,
+    _poolYathanRoadwatcher,
     _poolZahurGlorysPast,
     _poolZephyrBoots,
     _poolZodiacTiger,

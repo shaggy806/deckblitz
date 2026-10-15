@@ -81,6 +81,7 @@ import _poolDeepAnalysis from "../pool/deep-analysis.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
+import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
 import _poolDesecratedTomb from "../pool/desecrated-tomb.js";
 import _poolDevoutMonk from "../pool/devout-monk.js";
 import _poolDigThroughTime from "../pool/dig-through-time.js";
@@ -234,6 +235,7 @@ import _poolParch from "../pool/parch.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPestilence from "../pool/pestilence.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
+import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
 import _poolPriestOfTitania from "../pool/priest-of-titania.js";
@@ -361,6 +363,7 @@ import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
+import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
 import _poolUltimaWeapon from "../pool/ultima-weapon.js";
 import _poolUltrosObnoxiousOctopus from "../pool/ultros-obnoxious-octopus.js";
@@ -488,6 +491,7 @@ const shard: CardShard = {
     _poolDefilingDaemogoth,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
+    _poolDescendantOfStorms,
     _poolDesecratedTomb,
     _poolDevoutMonk,
     _poolDigThroughTime,
@@ -641,6 +645,7 @@ const shard: CardShard = {
     _poolPartingGust,
     _poolPestilence,
     _poolPhyrexianTriniform,
+    _poolPoisedPractitioner,
     _poolPreordain,
     _poolPreyUpon,
     _poolPriestOfTitania,
@@ -768,6 +773,7 @@ const shard: CardShard = {
     _poolTrueConviction,
     _poolTrustyMachete,
     _poolTurtleBlimp,
+    _poolTwinmawStormbrood,
     _poolTyriteSanctum,
     _poolUltimaWeapon,
     _poolUltrosObnoxiousOctopus,

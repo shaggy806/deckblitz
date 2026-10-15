@@ -1,0 +1,697 @@
+{
+ "batch": "B83",
+ "status": "complete",
+ "ranks": "Tarkir: Dragonstorm (TDM, 2025-04-11): the rest of the set",
+ "authored": [
+  {
+   "name": "Cruel Truths",
+   "files": [
+    "engine/src/cards/pool/cruel-truths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flamehold Grappler",
+   "files": [
+    "engine/src/cards/pool/flamehold-grappler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormbeacon Blade",
+   "files": [
+    "engine/src/cards/pool/stormbeacon-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally the Monastery",
+   "files": [
+    "engine/src/cards/pool/rally-the-monastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marshal of the Lost",
+   "files": [
+    "engine/src/cards/pool/marshal-of-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jeskai Revelation",
+   "files": [
+    "engine/src/cards/pool/jeskai-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of the Skies",
+   "files": [
+    "engine/src/cards/pool/sage-of-the-skies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunpearl Kirin",
+   "files": [
+    "engine/src/cards/pool/sunpearl-kirin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingblade Disciple",
+   "files": [
+    "engine/src/cards/pool/wingblade-disciple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embermouth Sentinel",
+   "files": [
+    "engine/src/cards/pool/embermouth-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lie in Wait",
+   "files": [
+    "engine/src/cards/pool/lie-in-wait.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rainveil Rejuvenator",
+   "files": [
+    "engine/src/cards/pool/rainveil-rejuvenator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roar of Endless Song",
+   "files": [
+    "engine/src/cards/pool/roar-of-endless-song.ts",
+    "engine/src/cards/tokens/5-5-elephant-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glacial Dragonhunt",
+   "files": [
+    "engine/src/cards/pool/glacial-dragonhunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jeskai Shrinekeeper",
+   "files": [
+    "engine/src/cards/pool/jeskai-shrinekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "United Battlefront",
+   "files": [
+    "engine/src/cards/pool/united-battlefront.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kin-Tree Severance",
+   "files": [
+    "engine/src/cards/pool/kin-tree-severance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mardu Monument",
+   "files": [
+    "engine/src/cards/pool/mardu-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambling Stormshell",
+   "files": [
+    "engine/src/cards/pool/ambling-stormshell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twinmaw Stormbrood // Charring Bite",
+   "files": [
+    "engine/src/cards/pool/twinmaw-stormbrood.ts",
+    "engine/src/cards/pool/charring-bite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran Ice Climber",
+   "files": [
+    "engine/src/cards/pool/veteran-ice-climber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wail of War",
+   "files": [
+    "engine/src/cards/pool/wail-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riling Dawnbreaker // Signaling Roar",
+   "files": [
+    "engine/src/cards/pool/riling-dawnbreaker.ts",
+    "engine/src/cards/pool/signaling-roar.ts",
+    "engine/src/cards/tokens/soldier-token-white-2-2.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alchemist's Assistant",
+   "files": [
+    "engine/src/cards/pool/alchemists-assistant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of the Fang",
+   "files": [
+    "engine/src/cards/pool/sage-of-the-fang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormplain Detainment",
+   "files": [
+    "engine/src/cards/pool/stormplain-detainment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Champion of Dusan",
+   "files": [
+    "engine/src/cards/pool/champion-of-dusan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traveling Botanist",
+   "files": [
+    "engine/src/cards/pool/traveling-botanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abzan Monument",
+   "files": [
+    "engine/src/cards/pool/abzan-monument.ts",
+    "engine/src/cards/tokens/spirit-token-abzan-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cori Mountain Stalwart",
+   "files": [
+    "engine/src/cards/pool/cori-mountain-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salt Road Skirmish",
+   "files": [
+    "engine/src/cards/pool/salt-road-skirmish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Channeled Dragonfire",
+   "files": [
+    "engine/src/cards/pool/channeled-dragonfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delta Bloodflies",
+   "files": [
+    "engine/src/cards/pool/delta-bloodflies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Static Snare",
+   "files": [
+    "engine/src/cards/pool/static-snare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortress Kin-Guard",
+   "files": [
+    "engine/src/cards/pool/fortress-kin-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salt Road Packbeast",
+   "files": [
+    "engine/src/cards/pool/salt-road-packbeast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teeming Dragonstorm",
+   "files": [
+    "engine/src/cards/pool/teeming-dragonstorm.ts",
+    "engine/src/cards/tokens/soldier-token-white-2-2.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ureni's Rebuff",
+   "files": [
+    "engine/src/cards/pool/urenis-rebuff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trade Route Envoy",
+   "files": [
+    "engine/src/cards/pool/trade-route-envoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Descendant of Storms",
+   "files": [
+    "engine/src/cards/pool/descendant-of-storms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rescue Leopard",
+   "files": [
+    "engine/src/cards/pool/rescue-leopard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loxodon Battle Priest",
+   "files": [
+    "engine/src/cards/pool/loxodon-battle-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sibsig Appraiser",
+   "files": [
+    "engine/src/cards/pool/sibsig-appraiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jeskai Monument",
+   "files": [
+    "engine/src/cards/pool/jeskai-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poised Practitioner",
+   "files": [
+    "engine/src/cards/pool/poised-practitioner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yathan Roadwatcher",
+   "files": [
+    "engine/src/cards/pool/yathan-roadwatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temur Monument",
+   "files": [
+    "engine/src/cards/pool/temur-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abzan Devotee",
+   "files": [
+    "engine/src/cards/pool/abzan-devotee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonstorm Forecaster",
+   "files": [
+    "engine/src/cards/pool/dragonstorm-forecaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attuned Hunter",
+   "files": [
+    "engine/src/cards/pool/attuned-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sultai Monument",
+   "files": [
+    "engine/src/cards/pool/sultai-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dusyut Earthcarver",
+   "files": [
+    "engine/src/cards/pool/dusyut-earthcarver.ts",
+    "engine/src/cards/tokens/spirit-token-dusyut-earthcarver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonbroods' Relic",
+   "files": [
+    "engine/src/cards/pool/dragonbroods-relic.ts",
+    "engine/src/cards/tokens/reliquary-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sagu Pummeler",
+   "files": [
+    "engine/src/cards/pool/sagu-pummeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kishla Trawlers",
+   "files": [
+    "engine/src/cards/pool/kishla-trawlers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riverwheel Sweep",
+   "files": [
+    "engine/src/cards/pool/riverwheel-sweep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandskitter Outrider",
+   "files": [
+    "engine/src/cards/pool/sandskitter-outrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kin-Tree Nurturer",
+   "files": [
+    "engine/src/cards/pool/kin-tree-nurturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspirited Vanguard",
+   "files": [
+    "engine/src/cards/pool/inspirited-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monastery Messenger",
+   "files": [
+    "engine/src/cards/pool/monastery-messenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Equilibrium Adept",
+   "files": [
+    "engine/src/cards/pool/equilibrium-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iridescent Tiger",
+   "files": [
+    "engine/src/cards/pool/iridescent-tiger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Formation Breaker",
+   "files": [
+    "engine/src/cards/pool/formation-breaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Constrictor Sage",
+   "files": [
+    "engine/src/cards/pool/constrictor-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gurmag Rakshasa",
+   "files": [
+    "engine/src/cards/pool/gurmag-rakshasa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wayspeaker Bodyguard",
+   "files": [
+    "engine/src/cards/pool/wayspeaker-bodyguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gurmag Nightwatch",
+   "files": [
+    "engine/src/cards/pool/gurmag-nightwatch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aegis Sculptor",
+   "files": [
+    "engine/src/cards/pool/aegis-sculptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Effortless Master",
+   "files": [
+    "engine/src/cards/pool/effortless-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jeskai Devotee",
+   "files": [
+    "engine/src/cards/pool/jeskai-devotee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furious Forebear",
+   "files": [
+    "engine/src/cards/pool/furious-forebear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mammoth Bellow",
+   "files": [
+    "engine/src/cards/pool/mammoth-bellow.ts",
+    "engine/src/cards/tokens/5-5-elephant-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krotiq Nestguard",
+   "files": [
+    "engine/src/cards/pool/krotiq-nestguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unsparing Boltcaster",
+   "files": [
+    "engine/src/cards/pool/unsparing-boltcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reverberating Summons",
+   "files": [
+    "engine/src/cards/pool/reverberating-summons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unrooted Ancestor",
+   "files": [
+    "engine/src/cards/pool/unrooted-ancestor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snowmelt Stag",
+   "files": [
+    "engine/src/cards/pool/snowmelt-stag.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reputable Merchant",
+   "files": [
+    "engine/src/cards/pool/reputable-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sonic Shrieker",
+   "files": [
+    "engine/src/cards/pool/sonic-shrieker.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Rediscover the Way",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter III's \"Whenever you cast a noncreature spell this turn, target creature you control gains double strike\" is a turn-long, repeating delayed trigger that outlives the Saga; delayed-trigger's nextSpell fires only once, and granting spells a this-cast trigger would change the ability's source (colour, protection)."
+  },
+  {
+   "name": "Fresh Start",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "\"Enchanted creature gets -5/-0 and loses all abilities\" needs a static (Aura) lose-all-abilities in layer 6; losing abilities exists only as an effect modifier (lose-abilities), not a StaticAbility field."
+  },
+  {
+   "name": "Purging Stormbrood // Absorb Essence",
+   "needs": [
+    "effect:remove-all-counters"
+   ],
+   "why": "The creature face's \"remove all counters from up to one target creature\" has no effect: remove-counter needs one named counter kind, and move-counters' \"all\" moves rather than removes."
+  },
+  {
+   "name": "Songcrafter Mage",
+   "needs": [
+    "effect:grant-harmonize"
+   ],
+   "why": "\"Target instant or sorcery card in your graveyard gains harmonize until end of turn, its harmonize cost equal to its mana cost\" has no grant-harmonize effect (only grant-flashback); harmonize is a printed-only card field."
+  },
+  {
+   "name": "Karakyk Guardian",
+   "needs": [
+    "condition:source-hasnt-dealt-damage"
+   ],
+   "why": "\"Has hexproof as long as it hasn't dealt damage yet\" needs a per-object record of whether it has dealt any damage since it entered; only dealt-damage-to-creature-this-turn is tracked."
+  },
+  {
+   "name": "Stalwart Successor",
+   "needs": [
+    "trigger:counters-put-first-time-each-turn"
+   ],
+   "why": "\"If it's the first time counters have been put on that creature this turn\" is a per-creature first-time-each-turn intervening-if the counters-put trigger can't express (no firstTimeEachTurn, no per-object counter-placement history)."
+  },
+  {
+   "name": "Rite of Renewal",
+   "needs": [
+    "effect:targets-from-target-players-graveyard"
+   ],
+   "why": "\"Target player shuffles up to four target cards from their graveyard into their library\" binds card targets to the graveyard of the player chosen in another target slot; card-in-graveyard's whose can't name a target slot."
+  },
+  {
+   "name": "Ringing Strike Mastery",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "\"Enchanted creature doesn't untap during its controller's untap step\": a static's doesntUntap only ever applies to the permanent carrying it (affects is ignored), so an Aura can't stop its enchanted creature untapping."
+  },
+  {
+   "name": "Aggressive Negotiations",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "\"You choose a nonland card from it and exile that card\": discard-chosen only discards, and look-and-choose's hand zone is the chooser's own hand, so nothing lets you pick a card from an opponent's revealed hand and exile it."
+  },
+  {
+   "name": "Dragon's Prey",
+   "needs": [
+    "cost:cost-increase-if-targets"
+   ],
+   "why": "\"Costs {2} more to cast if it targets a Dragon\": targetCostReduction only reduces, and a negative reduceGeneric would be priced while offering as if a Dragon were always targeted whenever one is on the battlefield."
+  },
+  {
+   "name": "Armament Dragon",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "\"Distribute three +1/+1 counters among one, two, or three target creatures\": with two targets the 2/1 split is the controller's choice as it's put on the stack, which no distributed-counters vocabulary carries (the same need blocks Revival of the Ancestors)."
+  },
+  {
+   "name": "Fire-Rim Form",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "\"When this Aura enters, enchanted creature gains first strike until end of turn\": no EffectTargetRef names the creature the source Aura is attached to (grant-keyword takes a slot, source or trigger-object), and a static grant would have the wrong timing and follow the Aura to a new host."
+  },
+  {
+   "name": "Riverwalk Technique",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "Mode 1 has the permanent's OWNER choose top or bottom of their library; put-on-library takes a fixed position and each-player-may can only ask the target's controller, which differs for a stolen permanent."
+  },
+  {
+   "name": "Krumar Initiate",
+   "needs": [
+    "cost:dynamic-life-cost"
+   ],
+   "why": "\"{X}{B}, {T}, Pay X life\": an activated ability's payLife is a fixed number (or commander-identity-colors) and can't read the announced X."
+  },
+  {
+   "name": "Narset's Rebuke",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\": there is no turn-long die-to-exile replacement on a targeted creature."
+  },
+  {
+   "name": "Arashin Sunshield",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"Exile up to two target cards from a single graveyard\": a multi-target slot has no rule that all its targets share one graveyard, so two cards from two different graveyards would be legal."
+  },
+  {
+   "name": "Severance Priest",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "\"Target opponent reveals their hand. You may choose a nonland card from it. If you do, exile that card\": discard-chosen only discards, and nothing exiles a chosen card from another player's revealed hand linked to the source (exiledWith), which the leaves-the-battlefield token (Skyclave Apparition's shape, otherwise expressible) reads."
+  },
+  {
+   "name": "Hundred-Battle Veteran",
+   "needs": [
+    "condition:counter-kinds-among-permanents"
+   ],
+   "why": "\"As long as there are three or more different kinds of counters among creatures you control\": no StaticCondition counts distinct counter kinds across permanents (the graveyard-cast-with-finality half was not checked further)."
+  }
+ ]
+}

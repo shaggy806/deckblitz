@@ -155,6 +155,7 @@ import _poolInkEyesServantOfOni from "../pool/ink-eyes-servant-of-oni.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
+import _poolIridescentTiger from "../pool/iridescent-tiger.js";
 import _poolIvyLaneDenizen from "../pool/ivy-lane-denizen.js";
 import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
@@ -248,6 +249,7 @@ import _poolRabidBloodsucker from "../pool/rabid-bloodsucker.js";
 import _poolRadiantsJudgment from "../pool/radiants-judgment.js";
 import _poolRaggedPlaymate from "../pool/ragged-playmate.js";
 import _poolRagnar from "../pool/ragnar.js";
+import _poolRainveilRejuvenator from "../pool/rainveil-rejuvenator.js";
 import _poolRammasEchorAncientShield from "../pool/rammas-echor-ancient-shield.js";
 import _poolRavenousBaboons from "../pool/ravenous-baboons.js";
 import _poolRazorclawBear from "../pool/razorclaw-bear.js";
@@ -581,6 +583,7 @@ const shard: CardShard = {
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
     _poolInvigoratingSurge,
+    _poolIridescentTiger,
     _poolIvyLaneDenizen,
     _poolIxallisLorekeeper,
     _poolIzzetCharm,
@@ -674,6 +677,7 @@ const shard: CardShard = {
     _poolRadiantsJudgment,
     _poolRaggedPlaymate,
     _poolRagnar,
+    _poolRainveilRejuvenator,
     _poolRammasEchorAncientShield,
     _poolRavenousBaboons,
     _poolRazorclawBear,

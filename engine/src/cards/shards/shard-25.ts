@@ -63,6 +63,7 @@ import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
+import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCraftyPathmage from "../pool/crafty-pathmage.js";
 import _poolCrestedHerdcaller from "../pool/crested-herdcaller.js";
@@ -90,6 +91,7 @@ import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
+import _poolDragonbroodsRelic from "../pool/dragonbroods-relic.js";
 import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
 import _poolDreadbore from "../pool/dreadbore.js";
@@ -131,6 +133,7 @@ import _poolFlumph from "../pool/flumph.js";
 import _poolFlushOut from "../pool/flush-out.js";
 import _poolFoggySwampVinebender from "../pool/foggy-swamp-vinebender.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
+import _poolFortressKinGuard from "../pool/fortress-kin-guard.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
@@ -265,6 +268,7 @@ import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
+import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
@@ -394,6 +398,7 @@ import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
 import _tokensShapeshifterTokenIrregularCohort from "../tokens/shapeshifter-token-irregular-cohort.js";
 import _tokensSheepToken from "../tokens/sheep-token.js";
+import _tokensSoldierTokenWhite22 from "../tokens/soldier-token-white-2-2.js";
 import _tokensSpiritClericToken from "../tokens/spirit-cleric-token.js";
 import _tokensWizardTokenKuja from "../tokens/wizard-token-kuja.js";
 import _tokensWurmToken from "../tokens/wurm-token.js";
@@ -460,6 +465,7 @@ const shard: CardShard = {
     _poolCloudCrusader,
     _poolCombatCelebrant,
     _poolConcertedCare,
+    _poolConstrictorSage,
     _poolContaminatedLandscape,
     _poolCraftyPathmage,
     _poolCrestedHerdcaller,
@@ -487,6 +493,7 @@ const shard: CardShard = {
     _poolDovinsVeto,
     _poolDraconicDisciple,
     _poolDragUnder,
+    _poolDragonbroodsRelic,
     _poolDragonologist,
     _poolDrakeSkullCameo,
     _poolDreadbore,
@@ -528,6 +535,7 @@ const shard: CardShard = {
     _poolFlushOut,
     _poolFoggySwampVinebender,
     _poolFontOfFortunes,
+    _poolFortressKinGuard,
     _poolFoundryOfTheConsuls,
     _poolFugitiveWizard,
     _poolFumigate,
@@ -662,6 +670,7 @@ const shard: CardShard = {
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolRetrieveTheEsper,
+    _poolReverberatingSummons,
     _poolReverentHoplite,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
@@ -793,6 +802,7 @@ const shard: CardShard = {
     _tokensRobotTokenBigMotherMouser,
     _tokensShapeshifterTokenIrregularCohort,
     _tokensSheepToken,
+    _tokensSoldierTokenWhite22,
     _tokensSpiritClericToken,
     _tokensWizardTokenKuja,
     _tokensWurmToken,

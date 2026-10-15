@@ -13,6 +13,7 @@ import _poolAjanisSunstriker from "../pool/ajanis-sunstriker.js";
 import _poolAkromasMemorial from "../pool/akromas-memorial.js";
 import _poolAkromasVengeance from "../pool/akromas-vengeance.js";
 import _poolAmbassadorLaquatus from "../pool/ambassador-laquatus.js";
+import _poolAmblingStormshell from "../pool/ambling-stormshell.js";
 import _poolAmuletOfKroog from "../pool/amulet-of-kroog.js";
 import _poolAnaDisciple from "../pool/ana-disciple.js";
 import _poolAncestralMask from "../pool/ancestral-mask.js";
@@ -61,6 +62,7 @@ import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
+import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
@@ -205,6 +207,7 @@ import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
+import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
@@ -283,6 +286,7 @@ import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabotender from "../pool/sabotender.js";
+import _poolSaguPummeler from "../pool/sagu-pummeler.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
@@ -423,6 +427,7 @@ const shard: CardShard = {
     _poolAkromasMemorial,
     _poolAkromasVengeance,
     _poolAmbassadorLaquatus,
+    _poolAmblingStormshell,
     _poolAmuletOfKroog,
     _poolAnaDisciple,
     _poolAncestralMask,
@@ -471,6 +476,7 @@ const shard: CardShard = {
     _poolCarrierPigeons,
     _poolCarrionCrow,
     _poolCelestineTheLivingSaint,
+    _poolChanneledDragonfire,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
     _poolCogworkArchivist,
@@ -615,6 +621,7 @@ const shard: CardShard = {
     _poolMistfireAdept,
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
+    _poolMonasteryMessenger,
     _poolMoriaMarauder,
     _poolMortalsArdor,
     _poolMurderousRedcap,
@@ -693,6 +700,7 @@ const shard: CardShard = {
     _poolRunehornHellkite,
     _poolRustedSlasher,
     _poolSabotender,
+    _poolSaguPummeler,
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSavedByTheShell,

@@ -57,6 +57,7 @@ import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
+import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
 import _poolChargingStrifeknight from "../pool/charging-strifeknight.js";
@@ -101,6 +102,7 @@ import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
+import _poolEffortlessMaster from "../pool/effortless-master.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -330,6 +332,7 @@ import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
 import _poolTalonrend from "../pool/talonrend.js";
+import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
 import _poolThassasIntervention from "../pool/thassas-intervention.js";
@@ -460,6 +463,7 @@ const shard: CardShard = {
     _poolBruteSuit,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
+    _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChargingSlateback,
     _poolChargingStrifeknight,
@@ -504,6 +508,7 @@ const shard: CardShard = {
     _poolEagleOfTheWatch,
     _poolEarthshakingSi,
     _poolEdeaPossessedSorceress,
+    _poolEffortlessMaster,
     _poolEladamrisCall,
     _poolElectrify,
     _poolElvishGuidance,
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolSusurianVoidborn,
     _poolSwordOfOnceAndFuture,
     _poolTalonrend,
+    _poolTeemingDragonstorm,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,
     _poolThassasIntervention,

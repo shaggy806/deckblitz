@@ -190,6 +190,7 @@ import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
 import _poolKilliansConfidence from "../pool/killians-confidence.js";
 import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
+import _poolKinTreeNurturer from "../pool/kin-tree-nurturer.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLamentation from "../pool/lamentation.js";
@@ -356,6 +357,7 @@ import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
+import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
 import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
@@ -587,6 +589,7 @@ const shard: CardShard = {
     _poolKetriaTriome,
     _poolKilliansConfidence,
     _poolKiloApogeeMind,
+    _poolKinTreeNurturer,
     _poolKitchen,
     _poolKyoshiIslandPlaza,
     _poolLamentation,
@@ -753,6 +756,7 @@ const shard: CardShard = {
     _poolTundraWolves,
     _poolTurbulentCrater,
     _poolTymorasInvoker,
+    _poolUnitedBattlefront,
     _poolUnmarkedGrave,
     _poolUrzasFactory,
     _poolVampireSoulcaller,

@@ -16,6 +16,7 @@ import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
 import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
+import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
 import _poolAltarsLight from "../pool/altars-light.js";
 import _poolAminatouTheFateshifter from "../pool/aminatou-the-fateshifter.js";
 import _poolAncientGreenwarden from "../pool/ancient-greenwarden.js";
@@ -199,6 +200,7 @@ import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
 import _poolKiorasFollower from "../pool/kioras-follower.js";
+import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
 import _poolKishlaVillage from "../pool/kishla-village.js";
 import _poolKitesailScout from "../pool/kitesail-scout.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
@@ -287,6 +289,7 @@ import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
+import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
 import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
@@ -307,6 +310,7 @@ import _poolShriekRaptor from "../pool/shriek-raptor.js";
 import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
 import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
+import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
@@ -433,6 +437,7 @@ const shard: CardShard = {
     _poolAjanisResponse,
     _poolAkroanMastiff,
     _poolAlandraSkyDreamer,
+    _poolAlchemistsAssistant,
     _poolAltarsLight,
     _poolAminatouTheFateshifter,
     _poolAncientGreenwarden,
@@ -616,6 +621,7 @@ const shard: CardShard = {
     _poolKeeperOfSecrets,
     _poolKiboUktabiPrince,
     _poolKiorasFollower,
+    _poolKishlaTrawlers,
     _poolKishlaVillage,
     _poolKitesailScout,
     _poolKnightOfMeadowgrain,
@@ -704,6 +710,7 @@ const shard: CardShard = {
     _poolRussetWolves,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
+    _poolSandskitterOutrider,
     _poolSanguineSyphoner,
     _poolSarumansTrickery,
     _poolScarwoodGoblins,
@@ -724,6 +731,7 @@ const shard: CardShard = {
     _poolSiegeGangLieutenant,
     _poolSiegeWurm,
     _poolSightedCasteSorcerer,
+    _poolSignalingRoar,
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,

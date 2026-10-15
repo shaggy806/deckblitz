@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbruptDecay from "../pool/abrupt-decay.js";
 import _poolAbstractPaintmage from "../pool/abstract-paintmage.js";
+import _poolAbzanDevotee from "../pool/abzan-devotee.js";
 import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
@@ -189,6 +190,7 @@ import _poolLakeTown from "../pool/lake-town.js";
 import _poolLandLeeches from "../pool/land-leeches.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
+import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
@@ -199,6 +201,7 @@ import _poolMagebaneLizard from "../pool/magebane-lizard.js";
 import _poolMagicDamper from "../pool/magic-damper.js";
 import _poolMagmabloodArchaic from "../pool/magmablood-archaic.js";
 import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
+import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
@@ -418,6 +421,7 @@ const shard: CardShard = {
   pool: [
     _poolAbruptDecay,
     _poolAbstractPaintmage,
+    _poolAbzanDevotee,
     _poolAccomplishedAutomaton,
     _poolAcolyteOfXathrid,
     _poolAdamantWill,
@@ -602,6 +606,7 @@ const shard: CardShard = {
     _poolLandLeeches,
     _poolLazotepPlating,
     _poolLedgerShredder,
+    _poolLieInWait,
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLordOfTheUndead,
@@ -612,6 +617,7 @@ const shard: CardShard = {
     _poolMagicDamper,
     _poolMagmabloodArchaic,
     _poolMagusOfTheWheel,
+    _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
     _poolMerfolkPupil,

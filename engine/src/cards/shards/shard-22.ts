@@ -160,6 +160,7 @@ import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
+import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
@@ -173,6 +174,7 @@ import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
+import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
@@ -574,6 +576,7 @@ const shard: CardShard = {
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolIronwillForger,
+    _poolJeskaiDevotee,
     _poolJukaiNaturalist,
     _poolJungleDelver,
     _poolK9MarkI,
@@ -587,6 +590,7 @@ const shard: CardShard = {
     _poolKlawMasterOfSound,
     _poolKnightOfTheWhiteOrchid,
     _poolKonstrariAnnex,
+    _poolKrotiqNestguard,
     _poolLaserScrewdriver,
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,

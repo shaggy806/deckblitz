@@ -157,6 +157,7 @@ import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
+import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJundPanorama from "../pool/jund-panorama.js";
@@ -295,6 +296,7 @@ import _poolStandingStones from "../pool/standing-stones.js";
 import _poolStoneDocent from "../pool/stone-docent.js";
 import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
+import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
 import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
@@ -528,6 +530,7 @@ const shard: CardShard = {
     _poolIronHillsStalwart,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
+    _poolJeskaiShrinekeeper,
     _poolJetmirNexusOfRevels,
     _poolJumboCactuar,
     _poolJundPanorama,
@@ -666,6 +669,7 @@ const shard: CardShard = {
     _poolStoneDocent,
     _poolStormTheVault,
     _poolStormcallerOfKeranos,
+    _poolStormplainDetainment,
     _poolStudentOfOjutai,
     _poolStumpStomp,
     _poolStymiedHopes,

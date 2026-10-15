@@ -744,6 +744,19 @@ asks whether there was any ("if excess damage was dealt this way"; "when
 excess damage is dealt … this way", a `conditional` around a
 `reflexive-trigger`).
 
+**"The damage dealt this way."** `{ damageDealtThisWay: true, to? }` is all
+the damage the resolution under way has dealt, after prevention — a prevented
+hit was never dealt (rule 615.1): Creeping Bloodsucker's "you gain life equal
+to the damage dealt this way". The condition `{ kind: "damage-dealt-this-way",
+to?, player? }` asks whether any was — to target slot `to`'s player or object,
+to players only with `player: true`. "If a creature is dealt damage this way"
+(Provoke the Trolls) or "if a Dragon is" (The Black Arrow) is it `all` a
+`target` condition on the slot; "if a player is dealt damage this way, they
+discard" (Sonic Shrieker) is `{ to: 0, player: true }`; a "you may have it deal
+2 damage to you. When you do" (Elektra, Femme Fatale) is `{ player: true }`
+around the `reflexive-trigger` (rule 603.12). Never a bare second effect on the
+same slot: that runs even when the damage was prevented.
+
 **"This way."** `{ thisWay, who?, filter?, cardTypes? }` counts what the
 resolving spell or ability has done **so far** — `thisWay` is one of
 `"discarded"`, `"drawn"`, `"milled"`, `"sacrificed"`, `"destroyed"` (a destroy
