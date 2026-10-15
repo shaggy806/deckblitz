@@ -235,6 +235,7 @@ import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
+import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
 import _poolReveredDead from "../pool/revered-dead.js";
@@ -612,6 +613,7 @@ const shard: CardShard = {
     _poolReassemblingSkeleton,
     _poolReclamationSage,
     _poolReconstructedThopter,
+    _poolReluctantDounguard,
     _poolReshapeTheEarth,
     _poolRetrievalAgent,
     _poolReveredDead,

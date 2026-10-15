@@ -190,6 +190,7 @@ import _poolLooterIlKor from "../pool/looter-il-kor.js";
 import _poolLordDreggInsectInvader from "../pool/lord-dregg-insect-invader.js";
 import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
+import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
@@ -580,6 +581,7 @@ const shard: CardShard = {
     _poolLordDreggInsectInvader,
     _poolLorescaleCoatl,
     _poolLosDiablosMissileBase,
+    _poolLysAlanaInformant,
     _poolManaTithe,
     _poolMarbleDiamond,
     _poolMarwynThePreserver,

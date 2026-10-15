@@ -26,6 +26,7 @@ import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
+import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
@@ -42,6 +43,7 @@ import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
 import _poolBoneCairnButcher from "../pool/bone-cairn-butcher.js";
 import _poolBontusMonument from "../pool/bontus-monument.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
+import _poolBoulderDash from "../pool/boulder-dash.js";
 import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreakAsunder from "../pool/break-asunder.js";
 import _poolBriarpackAlpha from "../pool/briarpack-alpha.js";
@@ -86,6 +88,7 @@ import _poolDalakosCrafterOfWonders from "../pool/dalakos-crafter-of-wonders.js"
 import _poolDarkslickDrake from "../pool/darkslick-drake.js";
 import _poolDavenantHealer from "../pool/davenant-healer.js";
 import _poolDawnOfANewAge from "../pool/dawn-of-a-new-age.js";
+import _poolDawnhandEulogist from "../pool/dawnhand-eulogist.js";
 import _poolDawnstrikePaladin from "../pool/dawnstrike-paladin.js";
 import _poolDaybreakCombatants from "../pool/daybreak-combatants.js";
 import _poolDeadeyeDuelist from "../pool/deadeye-duelist.js";
@@ -116,6 +119,7 @@ import _poolElephantRat from "../pool/elephant-rat.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
 import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
+import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
@@ -340,6 +344,7 @@ import _poolToucanPuffin from "../pool/toucan-puffin.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
+import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
@@ -414,6 +419,7 @@ const shard: CardShard = {
     _poolAxebaneGuardian,
     _poolAzureMage,
     _poolBackupAgent,
+    _poolBarkOfDoran,
     _poolBartizanBats,
     _poolBastPantherGoddess,
     _poolBattleMastery,
@@ -430,6 +436,7 @@ const shard: CardShard = {
     _poolBoneCairnButcher,
     _poolBontusMonument,
     _poolBorosSignet,
+    _poolBoulderDash,
     _poolBraveBrawler,
     _poolBreakAsunder,
     _poolBriarpackAlpha,
@@ -474,6 +481,7 @@ const shard: CardShard = {
     _poolDarkslickDrake,
     _poolDavenantHealer,
     _poolDawnOfANewAge,
+    _poolDawnhandEulogist,
     _poolDawnstrikePaladin,
     _poolDaybreakCombatants,
     _poolDeadeyeDuelist,
@@ -504,6 +512,7 @@ const shard: CardShard = {
     _poolElvishScrapper,
     _poolEmergencyPhytomedic,
     _poolEmissaryOfTheSleepless,
+    _poolEncumberedReejerey,
     _poolEntityTracker,
     _poolErrantEphemeron,
     _poolEvendoBrushrazer,
@@ -728,6 +737,7 @@ const shard: CardShard = {
     _poolTrainedJackal,
     _poolTranceKujaFateDefied,
     _poolTreasureTrove,
+    _poolTributaryVaulter,
     _poolTributeMage,
     _poolTunnelSurveyor,
     _poolTwinflame,

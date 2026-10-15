@@ -79,6 +79,7 @@ import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
+import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
@@ -251,6 +252,7 @@ import _poolRaisedByGiants from "../pool/raised-by-giants.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
+import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
 import _poolResourcefulDefense from "../pool/resourceful-defense.js";
 import _poolRestInPeace from "../pool/rest-in-peace.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
     _poolDoomsServoGuards,
+    _poolDoseOfDawnglow,
     _poolDoubleDown,
     _poolDrakeHatchling,
     _poolDreadPresence,
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolRangersLongbow,
     _poolRazeTheEffigy,
     _poolReckonersBargain,
+    _poolRequitingHex,
     _poolResearchAssistant,
     _poolResourcefulDefense,
     _poolRestInPeace,

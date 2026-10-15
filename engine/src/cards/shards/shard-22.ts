@@ -64,6 +64,7 @@ import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
 import _poolCracklingPerimeter from "../pool/crackling-perimeter.js";
 import _poolCradleOfTheAccursed from "../pool/cradle-of-the-accursed.js";
+import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
@@ -137,6 +138,7 @@ import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
+import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
@@ -228,6 +230,7 @@ import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
+import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
@@ -373,6 +376,7 @@ import _poolVulshokBattlegear from "../pool/vulshok-battlegear.js";
 import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
+import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
@@ -466,6 +470,7 @@ const shard: CardShard = {
     _poolCovenantOfBlood,
     _poolCracklingPerimeter,
     _poolCradleOfTheAccursed,
+    _poolCreakwoodSafewright,
     _poolCrimsonManticore,
     _poolCrookedCustodian,
     _poolCryptSliver,
@@ -539,6 +544,7 @@ const shard: CardShard = {
     _poolGuardianOfPilgrims,
     _poolHakodaSelflessCommander,
     _poolHeavyBallista,
+    _poolHeirloomAuntie,
     _poolHeirloomBlade,
     _poolHellSwarm,
     _poolHeronbladeElite,
@@ -630,6 +636,7 @@ const shard: CardShard = {
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolPerilousMyr,
+    _poolPesteredWellguard,
     _poolPhyresis,
     _poolPillarOfLight,
     _poolPillarfieldOx,
@@ -775,6 +782,7 @@ const shard: CardShard = {
     _poolVulshokRefugee,
     _poolWalkingDead,
     _poolWallOfOpposition,
+    _poolWanderbrinePreacher,
     _poolWaterloggedTeachings,
     _poolWebUp,
     _poolWelkinTern,

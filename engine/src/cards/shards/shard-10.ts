@@ -104,11 +104,13 @@ import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
+import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
 import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
+import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
 import _poolEssenceWarden from "../pool/essence-warden.js";
@@ -510,11 +512,13 @@ const shard: CardShard = {
     _poolDryadsRevival,
     _poolDuelTactics,
     _poolDutyBeyondDeath,
+    _poolEclipsedMerrow,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
     _poolElegyAcolyte,
     _poolElementalistAdept,
     _poolElvenkingsHarper,
+    _poolEnragedFlamecaster,
     _poolEntropicCloud,
     _poolEssenceDepleter,
     _poolEssenceWarden,

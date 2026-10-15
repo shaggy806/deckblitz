@@ -90,6 +90,7 @@ import _poolEliteInterceptor from "../pool/elite-interceptor.js";
 import _poolElvishRanger from "../pool/elvish-ranger.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
+import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
@@ -282,6 +283,7 @@ import _poolRoyalTrooper from "../pool/royal-trooper.js";
 import _poolSHIELDDeploymentDrone from "../pool/s-h-i-e-l-d-deployment-drone.js";
 import _poolSacellumArchers from "../pool/sacellum-archers.js";
 import _poolSacredWolf from "../pool/sacred-wolf.js";
+import _poolSafewrightCavalry from "../pool/safewright-cavalry.js";
 import _poolSageOfMysteries from "../pool/sage-of-mysteries.js";
 import _poolSanctumOfStoneFangs from "../pool/sanctum-of-stone-fangs.js";
 import _poolSanctumSeeker from "../pool/sanctum-seeker.js";
@@ -386,6 +388,7 @@ import _poolWallOfVines from "../pool/wall-of-vines.js";
 import _poolWardensOfTheCycle from "../pool/wardens-of-the-cycle.js";
 import _poolWarkiteMarauder from "../pool/warkite-marauder.js";
 import _poolWarthog from "../pool/warthog.js";
+import _poolWaryFarmer from "../pool/wary-farmer.js";
 import _poolWayOfTheWildspeaker from "../pool/way-of-the-wildspeaker.js";
 import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
 import _poolWeiAmbushForce from "../pool/wei-ambush-force.js";
@@ -518,6 +521,7 @@ const shard: CardShard = {
     _poolElvishRanger,
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
+    _poolEndBlazeEpiphany,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,
     _poolExaltedFlamerOfTzeentch,
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolSHIELDDeploymentDrone,
     _poolSacellumArchers,
     _poolSacredWolf,
+    _poolSafewrightCavalry,
     _poolSageOfMysteries,
     _poolSanctumOfStoneFangs,
     _poolSanctumSeeker,
@@ -814,6 +819,7 @@ const shard: CardShard = {
     _poolWardensOfTheCycle,
     _poolWarkiteMarauder,
     _poolWarthog,
+    _poolWaryFarmer,
     _poolWayOfTheWildspeaker,
     _poolWeSayTheeNay,
     _poolWeiAmbushForce,

@@ -39,8 +39,10 @@ import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
+import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
+import _poolBrigidsCommand from "../pool/brigids-command.js";
 import _poolBrigoneSoldierOfMeletis from "../pool/brigone-soldier-of-meletis.js";
 import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
 import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
@@ -393,6 +395,7 @@ import _poolVulshokHeartstoker from "../pool/vulshok-heartstoker.js";
 import _poolWakingNightmare from "../pool/waking-nightmare.js";
 import _poolWallOfMulch from "../pool/wall-of-mulch.js";
 import _poolWallOfReverence from "../pool/wall-of-reverence.js";
+import _poolWanderwineFarewell from "../pool/wanderwine-farewell.js";
 import _poolWarPriestOfThune from "../pool/war-priest-of-thune.js";
 import _poolWarScreecher from "../pool/war-screecher.js";
 import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
@@ -461,8 +464,10 @@ const shard: CardShard = {
     _poolBlurSliver,
     _poolBobReluctantHydraAgent,
     _poolBogNaughty,
+    _poolBoldwyrAggressor,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
+    _poolBrigidsCommand,
     _poolBrigoneSoldierOfMeletis,
     _poolBrimstoneDragon,
     _poolBroodmateDragon,
@@ -815,6 +820,7 @@ const shard: CardShard = {
     _poolWakingNightmare,
     _poolWallOfMulch,
     _poolWallOfReverence,
+    _poolWanderwineFarewell,
     _poolWarPriestOfThune,
     _poolWarScreecher,
     _poolWaterbenderAscension,

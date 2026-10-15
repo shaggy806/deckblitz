@@ -61,9 +61,12 @@ section keeps only what to do next.
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
   (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked):
-  `effect:attach-extensions` (20, 13), `cost:remove-counters-from-chosen` (16, 9),
-  `zone:graveyard-cast-permissions` (16, 10), `mechanic:rad-counters` (15, 13),
-  `decision:variable-target-count` (14, 11), `effect:repeat-process` (13, 12)
+  `effect:attach-extensions` (22, 15), `decision:variable-target-count` (18, 15),
+  `cost:remove-counters-from-chosen` (18, 11), `zone:graveyard-cast-permissions` (16, 10),
+  `mechanic:rad-counters` (15, 13), `effect:effect-on-enchanted-permanent` (14, 12). Its
+  sibling `cost:remove-counter-any-kind` ("Remove a counter from this creature", any kind — 9,
+  seven of them Lorwyn Eclipsed's) needs the player to choose which counters when there are
+  several kinds, so it's a new decision; build the two together
   (`neededCards-features.md`, "Open: the card backlog"; the cheap recurring blockers are in
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
@@ -74,11 +77,10 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Lorwyn Eclipsed (ECL,
-  100 left) back to Bloomburrow, about 1,050 cards (`npm run cards:sets -w engine -- --sets
-  30`; DRC, DSC and BLC too; Reality Fracture, FRC, The Hobbit, both Marvel Super Heroes sets,
-  both Secrets of Strixhaven sets, Teenage Mutant Ninja Turtles and Lorwyn Eclipsed Commander
-  are whole) — then
+  ranked ones first. **First, the rest of the sets already walked** — Avatar: The Last
+  Airbender (TLA, 104 left) back to Bloomburrow, about 950 cards (`npm run cards:sets -w engine
+  -- --sets 30`; DRC, DSC and BLC too; every set from Reality Fracture back to Lorwyn Eclipsed
+  and its Commander set is whole) — then
   Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or

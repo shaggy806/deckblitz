@@ -86,6 +86,7 @@ import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
+import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDiresight from "../pool/diresight.js";
@@ -96,6 +97,7 @@ import _poolDoomedTraveler from "../pool/doomed-traveler.js";
 import _poolDoubleVision from "../pool/double-vision.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
+import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
 import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
@@ -382,6 +384,7 @@ import _poolVrock from "../pool/vrock.js";
 import _poolWallOfBlossoms from "../pool/wall-of-blossoms.js";
 import _poolWallOfBone from "../pool/wall-of-bone.js";
 import _poolWallOfSwords from "../pool/wall-of-swords.js";
+import _poolWanderbrineTrapper from "../pool/wanderbrine-trapper.js";
 import _poolWanderingTombshell from "../pool/wandering-tombshell.js";
 import _poolWarOfTheLastAlliance from "../pool/war-of-the-last-alliance.js";
 import _poolWasteNot from "../pool/waste-not.js";
@@ -495,6 +498,7 @@ const shard: CardShard = {
     _poolDarkTutelage,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
+    _poolDeepchannelDuelist,
     _poolDesertTwister,
     _poolDinaSoulSteeper,
     _poolDiresight,
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolDoubleVision,
     _poolDowsingDagger,
     _poolDragonEngine,
+    _poolDreamSeizer,
     _poolDrogskolShieldmate,
     _poolDyingToServe,
     _poolEagerTrufflesnout,
@@ -791,6 +796,7 @@ const shard: CardShard = {
     _poolWallOfBlossoms,
     _poolWallOfBone,
     _poolWallOfSwords,
+    _poolWanderbrineTrapper,
     _poolWanderingTombshell,
     _poolWarOfTheLastAlliance,
     _poolWasteNot,

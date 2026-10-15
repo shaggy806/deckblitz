@@ -1,0 +1,715 @@
+{
+ "batch": "B78",
+ "status": "complete",
+ "ranks": "Lorwyn Eclipsed (ECL, 2026-01-23): the rest of the set",
+ "authored": [
+  {
+   "name": "Appeal to Eirdu",
+   "files": [
+    "engine/src/cards/pool/appeal-to-eirdu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assert Perfection",
+   "files": [
+    "engine/src/cards/pool/assert-perfection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Auntie's Sentence",
+   "files": [
+    "engine/src/cards/pool/aunties-sentence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbed Bloodletter",
+   "files": [
+    "engine/src/cards/pool/barbed-bloodletter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bark of Doran",
+   "files": [
+    "engine/src/cards/pool/bark-of-doran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blighted Blackthorn",
+   "files": [
+    "engine/src/cards/pool/blighted-blackthorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Prankster",
+   "files": [
+    "engine/src/cards/pool/boggart-prankster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boldwyr Aggressor",
+   "files": [
+    "engine/src/cards/pool/boldwyr-aggressor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boulder Dash",
+   "files": [
+    "engine/src/cards/pool/boulder-dash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brigid's Command",
+   "files": [
+    "engine/src/cards/pool/brigids-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bristlebane Outrider",
+   "files": [
+    "engine/src/cards/pool/bristlebane-outrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Spewer",
+   "files": [
+    "engine/src/cards/pool/chaos-spewer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinder Strike",
+   "files": [
+    "engine/src/cards/pool/cinder-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creakwood Safewright",
+   "files": [
+    "engine/src/cards/pool/creakwood-safewright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnhand Eulogist",
+   "files": [
+    "engine/src/cards/pool/dawnhand-eulogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepchannel Duelist",
+   "files": [
+    "engine/src/cards/pool/deepchannel-duelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dose of Dawnglow",
+   "files": [
+    "engine/src/cards/pool/dose-of-dawnglow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Seizer",
+   "files": [
+    "engine/src/cards/pool/dream-seizer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dundoolin Weaver",
+   "files": [
+    "engine/src/cards/pool/dundoolin-weaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eclipsed Kithkin",
+   "files": [
+    "engine/src/cards/pool/eclipsed-kithkin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eclipsed Merrow",
+   "files": [
+    "engine/src/cards/pool/eclipsed-merrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Auntie",
+   "files": [
+    "engine/src/cards/pool/elder-auntie.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Encumbered Reejerey",
+   "files": [
+    "engine/src/cards/pool/encumbered-reejerey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "End-Blaze Epiphany",
+   "files": [
+    "engine/src/cards/pool/end-blaze-epiphany.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enraged Flamecaster",
+   "files": [
+    "engine/src/cards/pool/enraged-flamecaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evershrike's Gift",
+   "files": [
+    "engine/src/cards/pool/evershrikes-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Prodigy",
+   "files": [
+    "engine/src/cards/pool/explosive-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flaring Cinder",
+   "files": [
+    "engine/src/cards/pool/flaring-cinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gallant Fowlknight",
+   "files": [
+    "engine/src/cards/pool/gallant-fowlknight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glister Bairn",
+   "files": [
+    "engine/src/cards/pool/glister-bairn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gravelgill Scoundrel",
+   "files": [
+    "engine/src/cards/pool/gravelgill-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gutsplitter Gang",
+   "files": [
+    "engine/src/cards/pool/gutsplitter-gang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heirloom Auntie",
+   "files": [
+    "engine/src/cards/pool/heirloom-auntie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkeeper",
+   "files": [
+    "engine/src/cards/pool/kithkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kulrath Mystic",
+   "files": [
+    "engine/src/cards/pool/kulrath-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kulrath Zealot",
+   "files": [
+    "engine/src/cards/pool/kulrath-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liminal Hold",
+   "files": [
+    "engine/src/cards/pool/liminal-hold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luminollusk",
+   "files": [
+    "engine/src/cards/pool/luminollusk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lys Alana Informant",
+   "files": [
+    "engine/src/cards/pool/lys-alana-informant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meanders Guide",
+   "files": [
+    "engine/src/cards/pool/meanders-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merrow Skyswimmer",
+   "files": [
+    "engine/src/cards/pool/merrow-skyswimmer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mistmeadow Council",
+   "files": [
+    "engine/src/cards/pool/mistmeadow-council.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonglove Extractor",
+   "files": [
+    "engine/src/cards/pool/moonglove-extractor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noggle Robber",
+   "files": [
+    "engine/src/cards/pool/noggle-robber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pestered Wellguard",
+   "files": [
+    "engine/src/cards/pool/pestered-wellguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pummeler for Hire",
+   "files": [
+    "engine/src/cards/pool/pummeler-for-hire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyrrhic Strike",
+   "files": [
+    "engine/src/cards/pool/pyrrhic-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reluctant Dounguard",
+   "files": [
+    "engine/src/cards/pool/reluctant-dounguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Requiting Hex",
+   "files": [
+    "engine/src/cards/pool/requiting-hex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retched Wretch",
+   "files": [
+    "engine/src/cards/pool/retched-wretch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rimekin Recluse",
+   "files": [
+    "engine/src/cards/pool/rimekin-recluse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riverguard's Reflexes",
+   "files": [
+    "engine/src/cards/pool/riverguards-reflexes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rooftop Percher",
+   "files": [
+    "engine/src/cards/pool/rooftop-percher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Safewright Cavalry",
+   "files": [
+    "engine/src/cards/pool/safewright-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow Urchin",
+   "files": [
+    "engine/src/cards/pool/shadow-urchin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvergill Peddler",
+   "files": [
+    "engine/src/cards/pool/silvergill-peddler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sizzling Changeling",
+   "files": [
+    "engine/src/cards/pool/sizzling-changeling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sting-Slinger",
+   "files": [
+    "engine/src/cards/pool/sting-slinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stoic Grove-Guide",
+   "files": [
+    "engine/src/cards/pool/stoic-grove-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thoughtweft Charge",
+   "files": [
+    "engine/src/cards/pool/thoughtweft-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thoughtweft Imbuer",
+   "files": [
+    "engine/src/cards/pool/thoughtweft-imbuer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thoughtweft Lieutenant",
+   "files": [
+    "engine/src/cards/pool/thoughtweft-lieutenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tributary Vaulter",
+   "files": [
+    "engine/src/cards/pool/tributary-vaulter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vinebred Brawler",
+   "files": [
+    "engine/src/cards/pool/vinebred-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderbrine Preacher",
+   "files": [
+    "engine/src/cards/pool/wanderbrine-preacher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderbrine Trapper",
+   "files": [
+    "engine/src/cards/pool/wanderbrine-trapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderwine Distracter",
+   "files": [
+    "engine/src/cards/pool/wanderwine-distracter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanderwine Farewell",
+   "files": [
+    "engine/src/cards/pool/wanderwine-farewell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warren Torchmaster",
+   "files": [
+    "engine/src/cards/pool/warren-torchmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wary Farmer",
+   "files": [
+    "engine/src/cards/pool/wary-farmer.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aquitect's Defenses",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "The Aura's enters trigger 'enchanted creature gains hexproof until end of turn' needs an untargeted effect reference to the permanent the source is attached to; grant-keyword takes only a target slot, source or trigger object (only phase-out has attachedToSource)."
+  },
+  {
+   "name": "Blossombind",
+   "needs": [
+    "effect:attached-effect-ref",
+    "static:cant-become-untapped",
+    "static:counters-cant-be-put"
+   ],
+   "why": "'When this Aura enters, tap enchanted creature' has no effect ref for the host, and 'can't become untapped and can't have counters put on it' has no static (doesntUntap covers only its own untap step; nothing stops counters being put)."
+  },
+  {
+   "name": "Brambleback Brute",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'{1}{R}, Remove a counter from this creature' takes a counter of any kind, the player choosing; AbilityCost.removeCounter names one fixed kind."
+  },
+  {
+   "name": "Burdened Stoneback",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'{1}{W}, Remove a counter from this creature' takes a counter of any kind, the player choosing; AbilityCost.removeCounter names one fixed kind."
+  },
+  {
+   "name": "Catharsis",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "\"If {W}{W} was spent to cast it\" / \"if {R}{R} was spent\" need a count of each colour spent; manaSpentColors is only the set of colours (as Vibrance, Wistfulness, Emptiness)."
+  },
+  {
+   "name": "Deceit",
+   "needs": [
+    "stat:mana-color-spent-condition"
+   ],
+   "why": "'If {U}{U} was spent to cast it' / 'if {B}{B} was spent to cast it' need a per-colour count of mana spent (manaSpentColors records only which colours); same blocker as Vibrance, Wistfulness, Emptiness."
+  },
+  {
+   "name": "Deepway Navigator",
+   "needs": [
+    "stat:attacked-with-count"
+   ],
+   "why": "\"As long as you attacked with three or more Merfolk this turn\": the `attackers` turn stat counts every creature declared as an attacker and takes no filter, so it can't count Merfolk."
+  },
+  {
+   "name": "Feed the Flames",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\": no effect sets up a this-turn die-to-exile replacement on a target (for any reason, the ruling — as Bot Bashing Time)."
+  },
+  {
+   "name": "Figure of Fable",
+   "needs": [
+    "keyword:protection-from-opponents"
+   ],
+   "why": "The third ability's 'protection from each of your opponents' (rule 702.16k, protection from a player) isn't expressible: protection is colours, card types and object filters only; the first two abilities would be animate with setSubtypes and permanent duration."
+  },
+  {
+   "name": "Foraging Wickermaw",
+   "needs": [
+    "effect:becomes-color-of-mana-produced"
+   ],
+   "why": "\"Add one mana of any color. This creature becomes that color until end of turn\": add-mana's `also` side effect can't read the colour the player picked, and animate's setColors is a fixed list."
+  },
+  {
+   "name": "Gnarlbark Elm",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'{2}{B}, Remove two counters from this creature' takes counters of any kinds, the player choosing; AbilityCost.removeCounter names one fixed kind."
+  },
+  {
+   "name": "Hovel Hurler",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'{R/W}{R/W}, Remove a counter from this creature' takes a counter of any kind, the player choosing; AbilityCost.removeCounter names one fixed kind."
+  },
+  {
+   "name": "Illusion Spinners",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "'You may cast this spell as though it had flash if you control a Faerie' — no card field gives a spell conditional flash from its own text (only Molten Exhale's behold kicker)."
+  },
+  {
+   "name": "Loch Mare",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'Remove a counter' / 'Remove two counters from this creature' are any kind, the player choosing; the removeCounter cost takes one fixed kind."
+  },
+  {
+   "name": "Meek Attack",
+   "needs": [
+    "condition:filter-total-power-toughness"
+   ],
+   "why": "'A creature card with total power and toughness 5 or less' has no CardFilter clause (power and toughness compare separately only)."
+  },
+  {
+   "name": "Moonlit Lamenter",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'Remove a counter from this creature' is any kind, the player choosing; the removeCounter cost takes one fixed kind."
+  },
+  {
+   "name": "Perfect Intimidation",
+   "needs": [
+    "effect:player-exiles-chosen-from-hand",
+    "effect:remove-all-counters"
+   ],
+   "why": "Mode 1 'target opponent exiles two cards from their hand' needs an effect where that player chooses cards from their own hand to exile, and mode 2 'remove all counters from target creature' needs a remove-every-kind effect (remove-counter takes one named kind)."
+  },
+  {
+   "name": "Pitiless Fists",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "'When this Aura enters, enchanted creature fights up to one target creature' needs the fight's first creature to be the Aura's host, and no EffectTargetRef names the enchanted creature."
+  },
+  {
+   "name": "Prismabasher",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "Vivid's 'up to X target creatures you control' fixes the target count at a live count (colors among your permanents) as it triggers; an any-number group's max is only a number or a spell's X."
+  },
+  {
+   "name": "Puca's Eye",
+   "needs": [
+    "effect:set-color-effect"
+   ],
+   "why": "'Then choose a color. This artifact becomes the chosen color' on its enters trigger's resolution: no effect chooses a colour and sets a permanent's colour (chooseOnEnter is as-enters, a different timing)."
+  },
+  {
+   "name": "Reaping Willow",
+   "needs": [
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "'Remove two counters from this creature' is any kind, the player choosing; the removeCounter cost takes one fixed kind."
+  },
+  {
+   "name": "Rime Chill",
+   "needs": [
+    "cost:cost-reduction-colors-among"
+   ],
+   "why": "Vivid's 'costs {1} less to cast for each color among permanents you control': CostReductionAmount has no colorsAmong count; the rest (Homesickness's tap-and-stun shape, draw) is expressible."
+  },
+  {
+   "name": "Sanar, Innovative First-Year",
+   "needs": [
+    "effect:reveal-until-count",
+    "effect:exile-one-per-color-from-revealed"
+   ],
+   "why": "Vivid's \"reveal until you reveal X nonland cards\" (reveal-until stops at the first match), then \"for each of those colors, you may exile a card of that color from among the revealed cards\" before shuffling, castable this turn."
+  },
+  {
+   "name": "Slumbering Walker",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "\"You may remove a counter from this creature. When you do, ...\": remove-counter takes one fixed kind, and the creature may carry other kinds (+1/+1, shield, ...) whose choice is the player's."
+  },
+  {
+   "name": "Spiral into Solitude",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"{1}{W}, Blight 1, Sacrifice this Aura: Exile enchanted creature\": no EffectTargetRef names the creature the sacrificed Aura enchanted (Uneasy Alliance's blocker)."
+  },
+  {
+   "name": "Squawkroaster",
+   "needs": [
+    "bug:cda-colors-among"
+   ],
+   "why": "'Power is equal to the number of colors among permanents you control' is a CDA working in every zone (the ruling); setBasePtFromCount's CountSpec has no colorsAmong, and grantPtPerCount would be 0 off the battlefield."
+  },
+  {
+   "name": "Swat Away",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom",
+    "condition:creature-attacking-you"
+   ],
+   "why": "\"The owner of target spell or creature puts it on their choice of the top or bottom of their library\" (put-on-library has a fixed position, the owner isn't asked), and the \"{2} less if a creature is attacking you\" condition isn't a StaticCondition."
+  },
+  {
+   "name": "Sygg's Command",
+   "needs": [
+    "effect:grant-keyword-all-target-player"
+   ],
+   "why": "Mode 2 'Creatures target player controls gain lifelink until end of turn': grant-keyword-all has no controlledByTarget (modify-pt-all does) and no filter can name a targeted player."
+  },
+  {
+   "name": "Taster of Wares",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard",
+    "zone:impulse-while-you-control-source"
+   ],
+   "why": "\"Target opponent reveals X cards from their hand ... you choose one ... that player exiles it\" has no effect form, nor does the cast permission \"for as long as you control this creature\" with any-type mana."
+  },
+  {
+   "name": "Wildvine Pummeler",
+   "needs": [
+    "cost:cost-reduction-colors-among"
+   ],
+   "why": "Vivid's 'costs {1} less to cast for each color among permanents you control': CostReductionAmount has no colorsAmong count (selfCostReduction can't read it)."
+  }
+ ]
+}

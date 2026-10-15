@@ -194,6 +194,22 @@ describe("Sneak Attack", () => {
     expect(game.state.delayedTriggers).toHaveLength(0);
   });
 
+  it("the haste has no duration: it outlasts the turn when the sacrifice doesn't happen", () => {
+    const { game, a } = mkGame([]);
+    game.advanceUntil(toPrecombat);
+    const sneak = game.debugSpawn("Sneak Attack", A, "battlefield");
+    game.debugSpawn("Mountain", A, "battlefield");
+    const wurm = game.debugSpawn("Craw Wurm", A, "hand");
+    a.chooseFromZoneFn = (_v, eligible) => eligible.filter((id) => id === wurm);
+    game.dispatch({ type: "activate-ability", player: A, source: sneak, abilityIndex: 0, targets: [] });
+    game.advanceUntil(quiet);
+    // The delayed sacrifice countered (Stifle): nothing takes the haste away.
+    game.state.delayedTriggers = [];
+    game.advanceUntil((s) => s.turn.number === 2);
+    expect(game.state.objects[wurm].zone).toBe("battlefield");
+    expect([...computeCharacteristics(game.state, game.registry, wurm).keywords]).toContain("haste");
+  });
+
   it("declining the choice sets up no delayed sacrifice", () => {
     const { game, a } = mkGame([]);
     game.advanceUntil(toPrecombat);

@@ -131,6 +131,7 @@ import _poolFieryHellhound from "../pool/fiery-hellhound.js";
 import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
+import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
 import _poolFlyingCarpet from "../pool/flying-carpet.js";
@@ -348,6 +349,7 @@ import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
+import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
@@ -539,6 +541,7 @@ const shard: CardShard = {
     _poolFireNationSentinels,
     _poolFireslinger,
     _poolFlamekinBrawler,
+    _poolFlaringCinder,
     _poolFlexibleWaterbender,
     _poolFlowstoneHellion,
     _poolFlyingCarpet,
@@ -756,6 +759,7 @@ const shard: CardShard = {
     _poolTheJollyBalloonMan,
     _poolThespiansStage,
     _poolThornwindFaeries,
+    _poolThoughtweftLieutenant,
     _poolTitanothRex,
     _poolTogetherAsOne,
     _poolTomeOfLegends,

@@ -6160,6 +6160,34 @@
   "effect:mass-bounce-except-source": {
    "family": "effect:target-other-than-source",
    "example": "Renet, Temporal Apprentice: return-to-hand-all with an exceptSource ('return each other nonland permanent that entered this turn' — Renet, Temporal Apprentice); the bounce sibling of effect:destroy-all-except-source."
+  },
+  "keyword:protection-from-opponents": {
+   "family": "keyword:protection-from-everything",
+   "example": "Figure of Fable: Figure of Fable: 'protection from each of your opponents' (rule 702.16k, protection from a player) — protection is colours/types/object filters only, with no player quality relative to the protected permanent's controller."
+  },
+  "effect:becomes-color-of-mana-produced": {
+   "family": "effect:mana-ability-side-effects",
+   "example": "Foraging Wickermaw: Foraging Wickermaw: a mana ability's side effect that makes the source the colour of the mana just produced ('Add one mana of any color. This creature becomes that color until end of turn')."
+  },
+  "effect:player-exiles-chosen-from-hand": {
+   "family": "effect:choices-by-other-players",
+   "example": "Perfect Intimidation: Perfect Intimidation: 'target opponent exiles two cards from their hand' — that player chooses which cards in their own hand are exiled (a discard-like choice moving to exile)."
+  },
+  "cost:cost-reduction-colors-among": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Rime Chill: Wildvine Pummeler: Vivid's 'This spell costs {1} less to cast for each color among permanents you control' — CostReductionAmount has no colorsAmong count."
+  },
+  "effect:exile-one-per-color-from-revealed": {
+   "family": "effect:reveal-until",
+   "example": "Sanar, Innovative First-Year: Sanar, Innovative First-Year: 'for each of those colors, you may exile a card of that color from among the revealed cards' — a per-colour pick from revealed cards, then cast them this turn."
+  },
+  "bug:cda-colors-among": {
+   "family": "bug:cda-all-zones",
+   "example": "Squawkroaster: Squawkroaster: CDA 'power is equal to the number of colors among permanents you control' — setBasePtFromCount's CountSpec has no colorsAmong (colours are layer 5, so no dependency problem)."
+  },
+  "effect:grant-keyword-all-target-player": {
+   "family": "effect:player-scope-extensions",
+   "example": "Sygg's Command: Sygg's Command: 'Creatures target player controls gain lifelink until end of turn' — grant-keyword-all lacks the controlledByTarget scope modify-pt-all and untap-all have."
   }
  }
 }

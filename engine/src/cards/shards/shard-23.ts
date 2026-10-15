@@ -101,6 +101,7 @@ import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
+import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
@@ -180,6 +181,7 @@ import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
+import _poolKithkeeper from "../pool/kithkeeper.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
@@ -478,6 +480,7 @@ const shard: CardShard = {
     _poolEatenAlive,
     _poolEclipsedSteppe,
     _poolEiganjoSeatOfTheEmpire,
+    _poolElderAuntie,
     _poolEldraziConscription,
     _poolEncampmentKeeper,
     _poolEncouragingAviator,
@@ -557,6 +560,7 @@ const shard: CardShard = {
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,
     _poolKirolHistoryBuff,
+    _poolKithkeeper,
     _poolKnightOfObligation,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,

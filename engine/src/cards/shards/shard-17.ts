@@ -257,6 +257,7 @@ import _poolRelmsSketching from "../pool/relms-sketching.js";
 import _poolResoluteWatchdog from "../pool/resolute-watchdog.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
+import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
@@ -651,6 +652,7 @@ const shard: CardShard = {
     _poolResoluteWatchdog,
     _poolRestlessBones,
     _poolReturnToTheLightRealms,
+    _poolRimekinRecluse,
     _poolRishadanDockhand,
     _poolRiverBear,
     _poolRiverKelpie,

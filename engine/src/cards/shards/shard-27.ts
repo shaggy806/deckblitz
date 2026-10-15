@@ -179,6 +179,7 @@ import _poolKoboldTaskmaster from "../pool/kobold-taskmaster.js";
 import _poolKomaWorldEater from "../pool/koma-world-eater.js";
 import _poolKoskunKeep from "../pool/koskun-keep.js";
 import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
+import _poolKulrathMystic from "../pool/kulrath-mystic.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
@@ -580,6 +581,7 @@ const shard: CardShard = {
     _poolKomaWorldEater,
     _poolKoskunKeep,
     _poolKruphixGodOfHorizons,
+    _poolKulrathMystic,
     _poolKyoshiWarriors,
     _poolLathnuSailback,
     _poolLeapingLizard,

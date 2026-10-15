@@ -147,6 +147,7 @@ import _poolGild from "../pool/gild.js";
 import _poolGingerbreadHunter from "../pool/gingerbread-hunter.js";
 import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
+import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
 import _poolGluttonousZombie from "../pool/gluttonous-zombie.js";
 import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
@@ -270,6 +271,7 @@ import _poolRiftBolt from "../pool/rift-bolt.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
 import _poolRodeoPyromancers from "../pool/rodeo-pyromancers.js";
+import _poolRooftopPercher from "../pool/rooftop-percher.js";
 import _poolRoothaMasteringTheMoment from "../pool/rootha-mastering-the-moment.js";
 import _poolRuggedHighlands from "../pool/rugged-highlands.js";
 import _poolRuinationWurm from "../pool/ruination-wurm.js";
@@ -548,6 +550,7 @@ const shard: CardShard = {
     _poolGingerbreadHunter,
     _poolGixianInfiltrator,
     _poolGlimmerbell,
+    _poolGlisterBairn,
     _poolGlorySeeker,
     _poolGluttonousZombie,
     _poolGoblinRoughrider,
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolRingOfTheLucii,
     _poolRisingOfTheDay,
     _poolRodeoPyromancers,
+    _poolRooftopPercher,
     _poolRoothaMasteringTheMoment,
     _poolRuggedHighlands,
     _poolRuinationWurm,

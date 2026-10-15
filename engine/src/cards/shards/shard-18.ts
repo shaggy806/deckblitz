@@ -13,6 +13,7 @@ import _poolAnarchist from "../pool/anarchist.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
+import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
 import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
@@ -201,6 +202,7 @@ import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMistRaven from "../pool/mist-raven.js";
+import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
@@ -251,6 +253,7 @@ import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
+import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
 import _poolRunewing from "../pool/runewing.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
@@ -423,6 +426,7 @@ const shard: CardShard = {
     _poolAppliedGeometry,
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
+    _poolAuntiesSentence,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
     _poolAyaOfAlexandria,
@@ -611,6 +615,7 @@ const shard: CardShard = {
     _poolMindspringMerfolk,
     _poolMirkwoodSpider,
     _poolMistRaven,
+    _poolMistmeadowCouncil,
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMostValuableSlayer,
@@ -661,6 +666,7 @@ const shard: CardShard = {
     _poolRiftSower,
     _poolRipApart,
     _poolRiskyResearch,
+    _poolRiverguardsReflexes,
     _poolRunewing,
     _poolRuthlessWaterbender,
     _poolSalivatingGremlins,

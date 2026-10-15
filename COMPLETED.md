@@ -28,6 +28,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Lorwyn Eclipsed, whole** (batch 78): 70 cards, and Sneak Attack's haste made lasting, as
+  printed (2026-10-15).
 - **Teenage Mutant Ninja Turtles and Lorwyn Eclipsed Commander, both whole** (batch 77): 53
   cards, with a token that has left the battlefield kept from changing zones again (rule 111.8)
   (2026-10-15).

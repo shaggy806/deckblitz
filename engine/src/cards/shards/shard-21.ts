@@ -44,6 +44,7 @@ import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
+import _poolChaosSpewer from "../pool/chaos-spewer.js";
 import _poolChargingPaladin from "../pool/charging-paladin.js";
 import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
@@ -408,6 +409,7 @@ const shard: CardShard = {
     _poolChainReaction,
     _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
+    _poolChaosSpewer,
     _poolChargingPaladin,
     _poolChartACourse,
     _poolChaseInspiration,

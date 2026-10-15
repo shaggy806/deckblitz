@@ -190,6 +190,7 @@ import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
+import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
 import _poolLivingHistory from "../pool/living-history.js";
@@ -262,6 +263,7 @@ import _poolPsionicBlast from "../pool/psionic-blast.js";
 import _poolPurphorosGodOfTheForge from "../pool/purphoros-god-of-the-forge.js";
 import _poolPursueThePast from "../pool/pursue-the-past.js";
 import _poolPyreSpawn from "../pool/pyre-spawn.js";
+import _poolPyrrhicStrike from "../pool/pyrrhic-strike.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRagingBull from "../pool/raging-bull.js";
@@ -288,6 +290,7 @@ import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
+import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
 import _poolShaukusMinion from "../pool/shaukus-minion.js";
@@ -618,6 +621,7 @@ const shard: CardShard = {
     _poolLashOfThorns,
     _poolLibrary,
     _poolLifecreedDuo,
+    _poolLiminalHold,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
     _poolLivingHistory,
@@ -690,6 +694,7 @@ const shard: CardShard = {
     _poolPurphorosGodOfTheForge,
     _poolPursueThePast,
     _poolPyreSpawn,
+    _poolPyrrhicStrike,
     _poolQuandrixTheProof,
     _poolRabanastreRoyalCity,
     _poolRagingBull,
@@ -716,6 +721,7 @@ const shard: CardShard = {
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
     _poolSenateCourier,
+    _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShatteredSanctum,
     _poolShaukusMinion,

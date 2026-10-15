@@ -231,6 +231,7 @@ import _poolPrismaticLens from "../pool/prismatic-lens.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
+import _poolPummelerForHire from "../pool/pummeler-for-hire.js";
 import _poolPyroblast from "../pool/pyroblast.js";
 import _poolQueensBaySoldier from "../pool/queens-bay-soldier.js";
 import _poolRabidRats from "../pool/rabid-rats.js";
@@ -611,6 +612,7 @@ const shard: CardShard = {
     _poolPrizefighterConstruct,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
+    _poolPummelerForHire,
     _poolPyroblast,
     _poolQueensBaySoldier,
     _poolRabidRats,

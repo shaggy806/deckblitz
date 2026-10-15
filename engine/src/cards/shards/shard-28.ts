@@ -31,6 +31,7 @@ import _poolArchfiendOfTheDross from "../pool/archfiend-of-the-dross.js";
 import _poolArgothianSwine from "../pool/argothian-swine.js";
 import _poolArnoDorian from "../pool/arno-dorian.js";
 import _poolAssassinate from "../pool/assassinate.js";
+import _poolAssertPerfection from "../pool/assert-perfection.js";
 import _poolAtalanJackal from "../pool/atalan-jackal.js";
 import _poolAvenSmokeweaver from "../pool/aven-smokeweaver.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
@@ -193,6 +194,7 @@ import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
 import _poolMindControl from "../pool/mind-control.js";
@@ -431,6 +433,7 @@ const shard: CardShard = {
     _poolArgothianSwine,
     _poolArnoDorian,
     _poolAssassinate,
+    _poolAssertPerfection,
     _poolAtalanJackal,
     _poolAvenSmokeweaver,
     _poolAvishkarRaceway,
@@ -593,6 +596,7 @@ const shard: CardShard = {
     _poolMartialGlory,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMerrowSkyswimmer,
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
     _poolMindControl,

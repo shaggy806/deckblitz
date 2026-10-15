@@ -35,6 +35,7 @@ import _poolBeastcallerSavant from "../pool/beastcaller-savant.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBlightMound from "../pool/blight-mound.js";
+import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
@@ -59,6 +60,7 @@ import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
+import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClear from "../pool/clear.js";
 import _poolClone from "../pool/clone.js";
@@ -420,6 +422,7 @@ const shard: CardShard = {
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
     _poolBlightMound,
+    _poolBlightedBlackthorn,
     _poolBloodBurglar,
     _poolBloodhunterBat,
     _poolBogWraith,
@@ -444,6 +447,7 @@ const shard: CardShard = {
     _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
     _poolCharitableLevy,
+    _poolCinderStrike,
     _poolCircleOfTheLandDruid,
     _poolClear,
     _poolClone,

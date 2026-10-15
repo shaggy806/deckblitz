@@ -318,6 +318,7 @@ import _poolStickFearlessMentor from "../pool/stick-fearless-mentor.js";
 import _poolStillmoonCavalier from "../pool/stillmoon-cavalier.js";
 import _poolStinkweedImp from "../pool/stinkweed-imp.js";
 import _poolStirringHonormancer from "../pool/stirring-honormancer.js";
+import _poolStoicGroveGuide from "../pool/stoic-grove-guide.js";
 import _poolStonewoodInvoker from "../pool/stonewood-invoker.js";
 import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
@@ -721,6 +722,7 @@ const shard: CardShard = {
     _poolStillmoonCavalier,
     _poolStinkweedImp,
     _poolStirringHonormancer,
+    _poolStoicGroveGuide,
     _poolStonewoodInvoker,
     _poolStormcarvedCoast,
     _poolStormsplitter,

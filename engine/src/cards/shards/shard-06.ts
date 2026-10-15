@@ -293,6 +293,7 @@ import _poolSiegecraft from "../pool/siegecraft.js";
 import _poolSigardaFontOfBlessings from "../pool/sigarda-font-of-blessings.js";
 import _poolSilentObserver from "../pool/silent-observer.js";
 import _poolSilumgarsCommand from "../pool/silumgars-command.js";
+import _poolSilvergillPeddler from "../pool/silvergill-peddler.js";
 import _poolSilverquillCampus from "../pool/silverquill-campus.js";
 import _poolSizzle from "../pool/sizzle.js";
 import _poolSkillfulLunge from "../pool/skillful-lunge.js";
@@ -691,6 +692,7 @@ const shard: CardShard = {
     _poolSigardaFontOfBlessings,
     _poolSilentObserver,
     _poolSilumgarsCommand,
+    _poolSilvergillPeddler,
     _poolSilverquillCampus,
     _poolSizzle,
     _poolSkillfulLunge,

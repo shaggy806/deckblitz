@@ -53,6 +53,7 @@ import _poolBountifulLandscape from "../pool/bountiful-landscape.js";
 import _poolBraidwoodCup from "../pool/braidwood-cup.js";
 import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
 import _poolBrightfieldMustang from "../pool/brightfield-mustang.js";
+import _poolBristlebaneOutrider from "../pool/bristlebane-outrider.js";
 import _poolBrokenWings from "../pool/broken-wings.js";
 import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
@@ -102,6 +103,7 @@ import _poolDruidOfTheCowl from "../pool/druid-of-the-cowl.js";
 import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
+import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolElderleafMentor from "../pool/elderleaf-mentor.js";
 import _poolElegantEdgecrafters from "../pool/elegant-edgecrafters.js";
 import _poolElendasHierophant from "../pool/elendas-hierophant.js";
@@ -211,6 +213,7 @@ import _poolLotusField from "../pool/lotus-field.js";
 import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
+import _poolLuminollusk from "../pool/luminollusk.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
@@ -356,6 +359,8 @@ import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
+import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
+import _poolThoughtweftImbuer from "../pool/thoughtweft-imbuer.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
@@ -473,6 +478,7 @@ const shard: CardShard = {
     _poolBraidwoodCup,
     _poolBranchloftPathway,
     _poolBrightfieldMustang,
+    _poolBristlebaneOutrider,
     _poolBrokenWings,
     _poolBywayCourier,
     _poolCabalEvangel,
@@ -522,6 +528,7 @@ const shard: CardShard = {
     _poolDuneDiviner,
     _poolDuskUrchins,
     _poolDwarvenProvisioner,
+    _poolEclipsedKithkin,
     _poolElderleafMentor,
     _poolElegantEdgecrafters,
     _poolElendasHierophant,
@@ -631,6 +638,7 @@ const shard: CardShard = {
     _poolLoxodonPartisan,
     _poolLuckyThePizzaDog,
     _poolLumberingFalls,
+    _poolLuminollusk,
     _poolMaelstromArchangel,
     _poolMagetasBoon,
     _poolMalakirCullblade,
@@ -776,6 +784,8 @@ const shard: CardShard = {
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
     _poolThornfistStriker,
+    _poolThoughtweftCharge,
+    _poolThoughtweftImbuer,
     _poolThroneOfGeth,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,

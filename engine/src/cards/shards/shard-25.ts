@@ -106,6 +106,7 @@ import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
+import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
 import _poolExpeditionEnvoy from "../pool/expedition-envoy.js";
 import _poolEyeOfNowhere from "../pool/eye-of-nowhere.js";
@@ -218,6 +219,7 @@ import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
+import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
@@ -492,6 +494,7 @@ const shard: CardShard = {
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
     _poolEscapeToTheWilds,
+    _poolEvershrikesGift,
     _poolExorcise,
     _poolExpeditionEnvoy,
     _poolEyeOfNowhere,
@@ -604,6 +607,7 @@ const shard: CardShard = {
     _poolNeedlevergePathway,
     _poolNeurokCommando,
     _poolNiblisOfTheMist,
+    _poolNoggleRobber,
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
     _poolNyxbornSeaguard,

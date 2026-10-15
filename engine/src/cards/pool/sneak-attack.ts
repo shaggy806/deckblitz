@@ -29,7 +29,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
+            { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
             {
               kind: "delayed-trigger",
               at: "next-end-step",

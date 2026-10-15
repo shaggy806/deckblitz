@@ -24,6 +24,7 @@ import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
+import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
 import _poolBlackChocobo from "../pool/black-chocobo.js";
@@ -135,6 +136,7 @@ import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
+import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
 import _poolGrayOgre from "../pool/gray-ogre.js";
 import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
@@ -178,6 +180,7 @@ import _poolKnightlyValor from "../pool/knightly-valor.js";
 import _poolKraulRaider from "../pool/kraul-raider.js";
 import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
+import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
@@ -198,6 +201,7 @@ import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
+import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
@@ -248,6 +252,7 @@ import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
 import _poolRepurposingBay from "../pool/repurposing-bay.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
+import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
@@ -300,6 +305,7 @@ import _poolStatureSizeShifter from "../pool/stature-size-shifter.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
 import _poolStillnessInMotion from "../pool/stillness-in-motion.js";
+import _poolStingSlinger from "../pool/sting-slinger.js";
 import _poolStingerquillCharm from "../pool/stingerquill-charm.js";
 import _poolStingingBarrier from "../pool/stinging-barrier.js";
 import _poolStolenGrain from "../pool/stolen-grain.js";
@@ -407,6 +413,7 @@ const shard: CardShard = {
     _poolAutochthonWurm,
     _poolBalefulForce,
     _poolBallistaCharger,
+    _poolBarbedBloodletter,
     _poolBargain,
     _poolBetorKinToAll,
     _poolBlackChocobo,
@@ -518,6 +525,7 @@ const shard: CardShard = {
     _poolGlimmeringAngel,
     _poolGoblinOffensive,
     _poolGodPharaohsStatue,
+    _poolGravelgillScoundrel,
     _poolGraveshifter,
     _poolGrayOgre,
     _poolGrazingGladehart,
@@ -561,6 +569,7 @@ const shard: CardShard = {
     _poolKraulRaider,
     _poolKrovikanScoundrel,
     _poolKujarSeedsculptor,
+    _poolKulrathZealot,
     _poolLairOfTheHydra,
     _poolLegolassQuickReflexes,
     _poolLivingLiesOfLoki,
@@ -581,6 +590,7 @@ const shard: CardShard = {
     _poolMistLeopard,
     _poolMistvaultBridge,
     _poolMomentsPeace,
+    _poolMoongloveExtractor,
     _poolMorgueTheft,
     _poolMoxRuby,
     _poolMulldrifter,
@@ -631,6 +641,7 @@ const shard: CardShard = {
     _poolReprieve,
     _poolRepurposingBay,
     _poolRestlessVinestalk,
+    _poolRetchedWretch,
     _poolRevivingMelody,
     _poolRingwraiths,
     _poolRiverSneak,
@@ -683,6 +694,7 @@ const shard: CardShard = {
     _poolSteadfastness,
     _poolSteelSeraph,
     _poolStillnessInMotion,
+    _poolStingSlinger,
     _poolStingerquillCharm,
     _poolStingingBarrier,
     _poolStolenGrain,

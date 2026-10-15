@@ -20,6 +20,7 @@ import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
+import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
@@ -397,6 +398,7 @@ const shard: CardShard = {
     _poolAlchemistsApprentice,
     _poolAncestorsAid,
     _poolAngelsMercy,
+    _poolAppealToEirdu,
     _poolArchersOfQarsi,
     _poolArchfiendOfDepravity,
     _poolArchiveDragon,

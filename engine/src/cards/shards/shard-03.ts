@@ -29,6 +29,7 @@ import _poolBelovedPrincess from "../pool/beloved-princess.js";
 import _poolBenalishCavalry from "../pool/benalish-cavalry.js";
 import _poolBenevolentHydra from "../pool/benevolent-hydra.js";
 import _poolBlightedCataract from "../pool/blighted-cataract.js";
+import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
@@ -103,6 +104,7 @@ import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
+import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
 import _poolGalvanicKey from "../pool/galvanic-key.js";
 import _poolGameTrail from "../pool/game-trail.js";
@@ -124,6 +126,7 @@ import _poolGorgonsHead from "../pool/gorgons-head.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
 import _poolGuardianSunmare from "../pool/guardian-sunmare.js";
+import _poolGutsplitterGang from "../pool/gutsplitter-gang.js";
 import _poolHalimarDepths from "../pool/halimar-depths.js";
 import _poolHaplessResearcher from "../pool/hapless-researcher.js";
 import _poolHarrierNaga from "../pool/harrier-naga.js";
@@ -403,6 +406,7 @@ const shard: CardShard = {
     _poolBenalishCavalry,
     _poolBenevolentHydra,
     _poolBlightedCataract,
+    _poolBoggartPrankster,
     _poolBoroughBackup,
     _poolBovineIntervention,
     _poolBrotherhoodPatriarch,
@@ -477,6 +481,7 @@ const shard: CardShard = {
     _poolFlockImpostor,
     _poolForsakenMonument,
     _poolFyndhornBow,
+    _poolGallantFowlknight,
     _poolGalvanicIteration,
     _poolGalvanicKey,
     _poolGameTrail,
@@ -498,6 +503,7 @@ const shard: CardShard = {
     _poolGrimServant,
     _poolGuardianKirin,
     _poolGuardianSunmare,
+    _poolGutsplitterGang,
     _poolHalimarDepths,
     _poolHaplessResearcher,
     _poolHarrierNaga,

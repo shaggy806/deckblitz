@@ -130,6 +130,7 @@ import _poolEssenceHarvest from "../pool/essence-harvest.js";
 import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
+import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
@@ -218,6 +219,7 @@ import _poolManagorgerHydra from "../pool/managorger-hydra.js";
 import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
 import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
+import _poolMeandersGuide from "../pool/meanders-guide.js";
 import _poolMentalJourney from "../pool/mental-journey.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
@@ -571,6 +573,7 @@ const shard: CardShard = {
     _poolEtaliPrimalStorm,
     _poolEtherealArmor,
     _poolExcavationExplosion,
+    _poolExplosiveProdigy,
     _poolFaultRiders,
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
@@ -659,6 +662,7 @@ const shard: CardShard = {
     _poolMarshFlats,
     _poolMassProduction,
     _poolMassacreGirlMostWanted,
+    _poolMeandersGuide,
     _poolMentalJourney,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
