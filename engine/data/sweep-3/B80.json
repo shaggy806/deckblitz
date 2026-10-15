@@ -1,0 +1,515 @@
+{
+ "batch": "B80",
+ "status": "complete",
+ "ranks": "Marvel's Spider-Man (SPM, 2025-09-26): the rest of the set",
+ "authored": [
+  {
+   "name": "Angry Rabble",
+   "files": [
+    "engine/src/cards/pool/angry-rabble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bagel and Schmear",
+   "files": [
+    "engine/src/cards/pool/bagel-and-schmear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beetle, Legacy Criminal",
+   "files": [
+    "engine/src/cards/pool/beetle-legacy-criminal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cheering Crowd",
+   "files": [
+    "engine/src/cards/pool/cheering-crowd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daily Bugle Reporters",
+   "files": [
+    "engine/src/cards/pool/daily-bugle-reporters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Damage Control Crew",
+   "files": [
+    "engine/src/cards/pool/damage-control-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doc Ock, Sinister Scientist",
+   "files": [
+    "engine/src/cards/pool/doc-ock-sinister-scientist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eerie Gravestone",
+   "files": [
+    "engine/src/cards/pool/eerie-gravestone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezekiel Sims, Spider-Totem",
+   "files": [
+    "engine/src/cards/pool/ezekiel-sims-spider-totem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flash Thompson, Spider-Fan",
+   "files": [
+    "engine/src/cards/pool/flash-thompson-spider-fan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Friendly Neighborhood",
+   "files": [
+    "engine/src/cards/pool/friendly-neighborhood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grow Extra Arms",
+   "files": [
+    "engine/src/cards/pool/grow-extra-arms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guy in the Chair",
+   "files": [
+    "engine/src/cards/pool/guy-in-the-chair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inner Demons Gangsters",
+   "files": [
+    "engine/src/cards/pool/inner-demons-gangsters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kapow!",
+   "files": [
+    "engine/src/cards/pool/kapow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kraven, Proud Predator",
+   "files": [
+    "engine/src/cards/pool/kraven-proud-predator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Brain, Mechanical Marvel",
+   "files": [
+    "engine/src/cards/pool/living-brain-mechanical-marvel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lurking Lizards",
+   "files": [
+    "engine/src/cards/pool/lurking-lizards.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madame Web, Clairvoyant",
+   "files": [
+    "engine/src/cards/pool/madame-web-clairvoyant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Masked Meower",
+   "files": [
+    "engine/src/cards/pool/masked-meower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mechanical Mobster",
+   "files": [
+    "engine/src/cards/pool/mechanical-mobster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mob Lookout",
+   "files": [
+    "engine/src/cards/pool/mob-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Man, Inferno Incarnate",
+   "files": [
+    "engine/src/cards/pool/molten-man-inferno-incarnate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morbius the Living Vampire",
+   "files": [
+    "engine/src/cards/pool/morbius-the-living-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "News Helicopter",
+   "files": [
+    "engine/src/cards/pool/news-helicopter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Passenger Ferry",
+   "files": [
+    "engine/src/cards/pool/passenger-ferry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pictures of Spider-Man",
+   "files": [
+    "engine/src/cards/pool/pictures-of-spider-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prison Break",
+   "files": [
+    "engine/src/cards/pool/prison-break.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Professional Wrestler",
+   "files": [
+    "engine/src/cards/pool/professional-wrestler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pumpkin Bombardment",
+   "files": [
+    "engine/src/cards/pool/pumpkin-bombardment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rent Is Due",
+   "files": [
+    "engine/src/cards/pool/rent-is-due.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhino, Barreling Brute",
+   "files": [
+    "engine/src/cards/pool/rhino-barreling-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Robotics Mastery",
+   "files": [
+    "engine/src/cards/pool/robotics-mastery.ts",
+    "engine/src/cards/tokens/robot-token-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandman's Quicksand",
+   "files": [
+    "engine/src/cards/pool/sandmans-quicksand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarlet Spider, Kaine",
+   "files": [
+    "engine/src/cards/pool/scarlet-spider-kaine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "School Daze",
+   "files": [
+    "engine/src/cards/pool/school-daze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorpion, Seething Striker",
+   "files": [
+    "engine/src/cards/pool/scorpion-seething-striker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scout the City",
+   "files": [
+    "engine/src/cards/pool/scout-the-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Selfless Police Captain",
+   "files": [
+    "engine/src/cards/pool/selfless-police-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shocker, Unshakable",
+   "files": [
+    "engine/src/cards/pool/shocker-unshakable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shriek, Treblemaker",
+   "files": [
+    "engine/src/cards/pool/shriek-treblemaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver Sable, Mercenary Leader",
+   "files": [
+    "engine/src/cards/pool/silver-sable-mercenary-leader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyward Spider",
+   "files": [
+    "engine/src/cards/pool/skyward-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Byte, Web Warden",
+   "files": [
+    "engine/src/cards/pool/spider-byte-web-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Girl, Legacy Hero",
+   "files": [
+    "engine/src/cards/pool/spider-girl-legacy-hero.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spider-Mobile",
+   "files": [
+    "engine/src/cards/pool/spider-mobile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Slayer, Hatred Honed",
+   "files": [
+    "engine/src/cards/pool/spider-slayer-hatred-honed.ts",
+    "engine/src/cards/tokens/robot-token-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Suit",
+   "files": [
+    "engine/src/cards/pool/spider-suit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starling, Aerial Ally",
+   "files": [
+    "engine/src/cards/pool/starling-aerial-ally.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stegron the Dinosaur Man",
+   "files": [
+    "engine/src/cards/pool/stegron-the-dinosaur-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Subway Train",
+   "files": [
+    "engine/src/cards/pool/subway-train.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun-Spider, Nimble Webber",
+   "files": [
+    "engine/src/cards/pool/sun-spider-nimble-webber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terrific Team-Up",
+   "files": [
+    "engine/src/cards/pool/terrific-team-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thwip!",
+   "files": [
+    "engine/src/cards/pool/thwip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venom's Hunger",
+   "files": [
+    "engine/src/cards/pool/venoms-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venom, Evil Unleashed",
+   "files": [
+    "engine/src/cards/pool/venom-evil-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vulture, Scheming Scavenger",
+   "files": [
+    "engine/src/cards/pool/vulture-scheming-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall Crawl",
+   "files": [
+    "engine/src/cards/pool/wall-crawl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Web-Shooters",
+   "files": [
+    "engine/src/cards/pool/web-shooters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whoosh!",
+   "files": [
+    "engine/src/cards/pool/whoosh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Pack Squad",
+   "files": [
+    "engine/src/cards/pool/wild-pack-squad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wisecrack",
+   "files": [
+    "engine/src/cards/pool/wisecrack.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Alien Symbiosis",
+   "needs": [
+    "zone:graveyard-self-cast-extra-cost"
+   ],
+   "why": "\"You may cast this card from your graveyard by discarding a card in addition to paying its other costs\": castFromGraveyardIf takes only a condition and no additional cost, and the castFromGraveyard static (which has sacrifice/payLife/exileOthers, no discard) is a battlefield permission."
+  },
+  {
+   "name": "Hydro-Man, Fluid Felon",
+   "needs": [
+    "effect:set-types-temporary"
+   ],
+   "why": "\"Until your next turn, he becomes a land and gains '{T}: Add {U}.' (He's not a creature)\" needs a one-shot effect that replaces the permanent's card types with land for a duration; animate always sets base P/T and only makes creatures, add-types only adds, and setTypes exists only on statics, put-onto-battlefield and copy exceptions."
+  },
+  {
+   "name": "Jackal, Genius Geneticist",
+   "needs": [
+    "effect:copy-spell-except-nonlegendary"
+   ],
+   "why": "'Copy that spell, except the copy isn't legendary' — copy-spell has no notLegendary exception (create-token-copy does, a spell copy doesn't), so a copied legendary creature spell would die to the legend rule."
+  },
+  {
+   "name": "Kraven the Hunter",
+   "needs": [
+    "trigger:dies-greatest-power-lki"
+   ],
+   "why": "The dies trigger names \"a creature an opponent controls with the greatest power among creatures that player controls\", judged on the board just before the death (rule 603.10a); the greatestAmongItsController filter matches only objects still on the battlefield, so it can never match a creature that died (nor compare a wrath batch against the pre-wrath board)."
+  },
+  {
+   "name": "Kraven's Last Hunt",
+   "needs": [
+    "effect:aggregate-over-graveyard"
+   ],
+   "why": "Chapter I's reflexive damage is 'equal to the greatest power among creature cards in your graveyard'; AggregateSpec (and every max amount) reads battlefield permanents only, so there is no greatest-power amount over graveyard cards."
+  },
+  {
+   "name": "Mysterio, Master of Illusion",
+   "needs": [
+    "effect:tokens-created-with-source"
+   ],
+   "why": "\"Exile those tokens when Mysterio leaves the battlefield\" needs the tokens created by this ability linked to Mysterio (and the link skipped if he left before they were made, per the ruling); create-token has no such link and a leaves-battlefield exile-all by filter would also exile other Illusion Villain tokens."
+  },
+  {
+   "name": "Origin of Spider-Man",
+   "needs": [
+    "effect:animate-add-supertype"
+   ],
+   "why": "Chapter II's \"It becomes a legendary Spider Hero in addition to its other types\" needs a permanent supertype grant, and the add-types effect only adds card types and subtypes (supertypes exist only on copy exceptions)."
+  },
+  {
+   "name": "Rhino's Rampage",
+   "needs": [
+    "effect:excess-damage-amount"
+   ],
+   "why": "\"When excess damage is dealt to the creature an opponent controls this way\" is a reflexive trigger on excess damage from this fight specifically; nothing reads excess damage dealt this way (the excessDamageThisTurn filter would also see excess from earlier in the turn, e.g. on an indestructible creature fought by a 0-power one)."
+  },
+  {
+   "name": "Superior Foes of Spider-Man",
+   "needs": [
+    "zone:impulse-until-next-exile"
+   ],
+   "why": "\"You may play that card until you exile another card with this creature\" has no impulse-exile duration (only end-of-turn, your-next-turn, your-next-end-step, while-source, while-exiled)."
+  },
+  {
+   "name": "The Spot, Living Portal",
+   "needs": [
+    "effect:put-on-library-this-way"
+   ],
+   "why": "The dies trigger's 'put him on the bottom of his owner's library. If you do, return the exiled cards' needs an 'if you do' on put-on-library; nothing records whether that move happened (no this-way kind), and a source-zone 'library' check would wrongly return the cards if he reached the library some other way in response (e.g. Elixir of Immortality) — the linked exile and return-exiled-by-source { linked: 'hand' } themselves exist."
+  }
+ ]
+}

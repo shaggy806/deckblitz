@@ -206,6 +206,7 @@ import _poolMindcrank from "../pool/mindcrank.js";
 import _poolMinisterOfImpediments from "../pool/minister-of-impediments.js";
 import _poolMireBoa from "../pool/mire-boa.js";
 import _poolMireInMisery from "../pool/mire-in-misery.js";
+import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
@@ -269,12 +270,14 @@ import _poolSeafaringWerewolf from "../pool/seafaring-werewolf.js";
 import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
+import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
 import _poolSicken from "../pool/sicken.js";
 import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
+import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSkinrender from "../pool/skinrender.js";
@@ -358,6 +361,7 @@ import _poolWarlordsFury from "../pool/warlords-fury.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
+import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
@@ -585,6 +589,7 @@ const shard: CardShard = {
     _poolMinisterOfImpediments,
     _poolMireBoa,
     _poolMireInMisery,
+    _poolMobLookout,
     _poolMonumentToEndurance,
     _poolMoonGirlAndDevilDinosaur,
     _poolMorgueToad,
@@ -648,12 +653,14 @@ const shard: CardShard = {
     _poolSeagrafSkaab,
     _poolSearingSpearAskari,
     _poolSeedshipImpact,
+    _poolSelflessPoliceCaptain,
     _poolShepherdingSpirits,
     _poolShootTheSheriff,
     _poolShrikeForce,
     _poolSicken,
     _poolSidequestRaiseAChocobo,
     _poolSidisiBroodTyrant,
+    _poolSilverSableMercenaryLeader,
     _poolSimicGuildgate,
     _poolSinkhole,
     _poolSkinrender,
@@ -737,6 +744,7 @@ const shard: CardShard = {
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,
     _poolWerefoxBodyguard,
+    _poolWildPackSquad,
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWirewoodElf,

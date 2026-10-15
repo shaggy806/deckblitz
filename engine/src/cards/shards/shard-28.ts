@@ -204,6 +204,7 @@ import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
+import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
@@ -286,6 +287,7 @@ import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
+import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
@@ -607,6 +609,7 @@ const shard: CardShard = {
     _poolMirrorworks,
     _poolMistfireAdept,
     _poolMoleManMoloidMaster,
+    _poolMoltenManInfernoIncarnate,
     _poolMoriaMarauder,
     _poolMortalsArdor,
     _poolMurderousRedcap,
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolSavedByTheShell,
     _poolScalebanesElite,
     _poolScaledWurm,
+    _poolScarletSpiderKaine,
     _poolScribeOfTheMindful,
     _poolSelesnyaSentry,
     _poolSentinelSliver,

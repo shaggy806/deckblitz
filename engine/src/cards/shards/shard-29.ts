@@ -66,6 +66,7 @@ import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
 import _poolCrushingVines from "../pool/crushing-vines.js";
 import _poolCryptIncursion from "../pool/crypt-incursion.js";
 import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
+import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
 import _poolDarkDeed from "../pool/dark-deed.js";
 import _poolDarkFortress from "../pool/dark-fortress.js";
@@ -271,6 +272,8 @@ import _poolSavaiTriome from "../pool/savai-triome.js";
 import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
+import _poolSchoolDaze from "../pool/school-daze.js";
+import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
@@ -457,6 +460,7 @@ const shard: CardShard = {
     _poolCrushingVines,
     _poolCryptIncursion,
     _poolCrypticTrilobite,
+    _poolDailyBugleReporters,
     _poolDamn,
     _poolDarkDeed,
     _poolDarkFortress,
@@ -662,6 +666,8 @@ const shard: CardShard = {
     _poolSavantiRomeroTimesExile,
     _poolScarlandThrinax,
     _poolScatterArc,
+    _poolSchoolDaze,
+    _poolScorpionSeethingStriker,
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSegmentedKrotiq,

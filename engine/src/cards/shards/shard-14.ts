@@ -221,6 +221,7 @@ import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
+import _poolLurkingLizards from "../pool/lurking-lizards.js";
 import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
@@ -289,6 +290,7 @@ import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
+import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
@@ -364,6 +366,7 @@ import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVoldarenEstate from "../pool/voldaren-estate.js";
 import _poolVoraciousTomeSkimmer from "../pool/voracious-tome-skimmer.js";
+import _poolVultureSchemingScavenger from "../pool/vulture-scheming-scavenger.js";
 import _poolWakestoneGargoyle from "../pool/wakestone-gargoyle.js";
 import _poolWalkingBallista from "../pool/walking-ballista.js";
 import _poolWargRider from "../pool/warg-rider.js";
@@ -616,6 +619,7 @@ const shard: CardShard = {
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
     _poolLuminousPhantom,
+    _poolLurkingLizards,
     _poolMadameHydraReanimated,
     _poolMagitekArmor,
     _poolMakeObsolete,
@@ -684,6 +688,7 @@ const shard: CardShard = {
     _poolRocketVolley,
     _poolRuinousGremlin,
     _poolRunescaleStormbrood,
+    _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
     _poolSazacapsBrew,
@@ -759,6 +764,7 @@ const shard: CardShard = {
     _poolVnwxtVerboseHost,
     _poolVoldarenEstate,
     _poolVoraciousTomeSkimmer,
+    _poolVultureSchemingScavenger,
     _poolWakestoneGargoyle,
     _poolWalkingBallista,
     _poolWargRider,

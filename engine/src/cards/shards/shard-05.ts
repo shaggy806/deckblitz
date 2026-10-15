@@ -200,6 +200,7 @@ import _poolKellanTheKid from "../pool/kellan-the-kid.js";
 import _poolKhenraEternal from "../pool/khenra-eternal.js";
 import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
+import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
@@ -322,6 +323,7 @@ import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
+import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
 import _poolStonespeakerCrystal from "../pool/stonespeaker-crystal.js";
 import _poolStonySilence from "../pool/stony-silence.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolKhenraEternal,
     _poolKioraSovereignOfTheDeep,
     _poolKozileksShrieker,
+    _poolKravenProudPredator,
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLightningStrike,
@@ -730,6 +733,7 @@ const shard: CardShard = {
     _poolStarOfExtinction,
     _poolStealerOfSecrets,
     _poolSteamBlast,
+    _poolStegronTheDinosaurMan,
     _poolStolenStarkTech,
     _poolStonespeakerCrystal,
     _poolStonySilence,

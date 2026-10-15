@@ -278,6 +278,7 @@ import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
+import _poolRoboticsMastery from "../pool/robotics-mastery.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
@@ -315,6 +316,7 @@ import _poolSoulstoneSanctuary from "../pool/soulstone-sanctuary.js";
 import _poolSpawningPit from "../pool/spawning-pit.js";
 import _poolSphinxSummoner from "../pool/sphinx-summoner.js";
 import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
+import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
@@ -691,6 +693,7 @@ const shard: CardShard = {
     _poolRitesOfFlourishing,
     _poolRivenTurnbull,
     _poolRobotDomination,
+    _poolRoboticsMastery,
     _poolRottingMastodon,
     _poolRoyalFalcon,
     _poolRunThePlay,
@@ -728,6 +731,7 @@ const shard: CardShard = {
     _poolSpawningPit,
     _poolSphinxSummoner,
     _poolSpiderGwenFreeSpirit,
+    _poolSpiderSlayerHatredHoned,
     _poolSpikedCorridorTorturePit,
     _poolSpinalCentipede,
     _poolSpontaneousCombustion,

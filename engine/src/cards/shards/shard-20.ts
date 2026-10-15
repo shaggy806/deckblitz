@@ -223,6 +223,7 @@ import _poolMarshFlats from "../pool/marsh-flats.js";
 import _poolMassProduction from "../pool/mass-production.js";
 import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
 import _poolMeandersGuide from "../pool/meanders-guide.js";
+import _poolMechanicalMobster from "../pool/mechanical-mobster.js";
 import _poolMentalJourney from "../pool/mental-journey.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
@@ -291,6 +292,7 @@ import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
+import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
@@ -671,6 +673,7 @@ const shard: CardShard = {
     _poolMassProduction,
     _poolMassacreGirlMostWanted,
     _poolMeandersGuide,
+    _poolMechanicalMobster,
     _poolMentalJourney,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
@@ -739,6 +742,7 @@ const shard: CardShard = {
     _poolRecklessAssault,
     _poolRefresh,
     _poolRenderSpeechless,
+    _poolRentIsDue,
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,

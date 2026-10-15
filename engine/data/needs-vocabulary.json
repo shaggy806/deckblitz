@@ -6204,6 +6204,18 @@
   "effect:granted-activated-refers-to-granter": {
    "family": "effect:modifier-grants-activated",
    "example": "Trusty Boomerang: An activated ability a static grants (Equipment's 'Equipped creature has \"…\"') whose effect names the granting permanent rather than the one it's on — Trusty Boomerang's 'Return Trusty Boomerang to its owner's hand'. The activated twin of effect:granted-trigger-refers-to-granter."
+  },
+  "effect:set-types-temporary": {
+   "family": "effect:add-subtype",
+   "example": "Hydro-Man, Fluid Felon: A one-shot effect that sets a permanent's card types (replacing them, so it stops being a creature) for a duration, optionally granting an ability — Hydro-Man, Fluid Felon's 'until your next turn, he becomes a land and gains {T}: Add {U}'; animate always makes a creature and sets base P/T."
+  },
+  "trigger:dies-greatest-power-lki": {
+   "family": "bug:lki-leaves-battlefield-triggers",
+   "example": "Kraven the Hunter: A dies/leaves trigger filter \"with the greatest power among creatures that player controls\" read from last-known information against the board as it stood just before the event (603.10a), every creature leaving in the same event compared against that board (Kraven the Hunter)."
+  },
+  "effect:put-on-library-this-way": {
+   "family": "effect:this-way-results",
+   "example": "The Spot, Living Portal: A this-way kind (or 'if you do' gate) for a put-on-library that actually moved its object — The Spot, Living Portal's 'put him on the bottom of his owner's library. If you do, return the exiled cards to their owners' hands' (false for a token, or a card no longer in the graveyard)."
   }
  }
 }

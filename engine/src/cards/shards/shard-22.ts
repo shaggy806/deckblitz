@@ -177,6 +177,7 @@ import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
 import _poolLilianasMastery from "../pool/lilianas-mastery.js";
+import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-marvel.js";
 import _poolLivingTempest from "../pool/living-tempest.js";
 import _poolLochDragon from "../pool/loch-dragon.js";
 import _poolLockeCole from "../pool/locke-cole.js";
@@ -286,6 +287,7 @@ import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
+import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
@@ -382,6 +384,7 @@ import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
+import _poolWhoosh from "../pool/whoosh.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
@@ -585,6 +588,7 @@ const shard: CardShard = {
     _poolLethalScheme,
     _poolLightningJavelin,
     _poolLilianasMastery,
+    _poolLivingBrainMechanicalMarvel,
     _poolLivingTempest,
     _poolLochDragon,
     _poolLockeCole,
@@ -694,6 +698,7 @@ const shard: CardShard = {
     _poolSharuumTheHegemon,
     _poolShepherdOfRot,
     _poolShireTerrace,
+    _poolShockerUnshakable,
     _poolSiegeGangCommander,
     _poolSightlessGhoul,
     _poolSilverFurMaster,
@@ -790,6 +795,7 @@ const shard: CardShard = {
     _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,
+    _poolWhoosh,
     _poolWildGriffin,
     _poolWildslayerElves,
     _poolWilyBandar,

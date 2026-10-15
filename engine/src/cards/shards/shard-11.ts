@@ -316,6 +316,7 @@ import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
 import _poolShipwreckPatrol from "../pool/shipwreck-patrol.js";
 import _poolShoreUp from "../pool/shore-up.js";
 import _poolShowOfValor from "../pool/show-of-valor.js";
+import _poolShriekTreblemaker from "../pool/shriek-treblemaker.js";
 import _poolSidarKondoOfJamuraa from "../pool/sidar-kondo-of-jamuraa.js";
 import _poolSiegeMastodon from "../pool/siege-mastodon.js";
 import _poolSiegeVeteran from "../pool/siege-veteran.js";
@@ -757,6 +758,7 @@ const shard: CardShard = {
     _poolShipwreckPatrol,
     _poolShoreUp,
     _poolShowOfValor,
+    _poolShriekTreblemaker,
     _poolSidarKondoOfJamuraa,
     _poolSiegeMastodon,
     _poolSiegeVeteran,

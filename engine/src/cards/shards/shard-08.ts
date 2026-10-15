@@ -189,6 +189,7 @@ import _poolJenniferWalters from "../pool/jennifer-walters.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
+import _poolKapow from "../pool/kapow.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
@@ -266,6 +267,7 @@ import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPreemptiveStrike from "../pool/preemptive-strike.js";
 import _poolPrimalDruid from "../pool/primal-druid.js";
+import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
@@ -615,6 +617,7 @@ const shard: CardShard = {
     _poolJonIrenicusShatteredOne,
     _poolJwariScuttler,
     _poolKabiraTakedown,
+    _poolKapow,
     _poolKarooMeerkat,
     _poolKhalniTerritory,
     _poolKinsbaileSkirmisher,
@@ -692,6 +695,7 @@ const shard: CardShard = {
     _poolPlagonLordOfTheBeach,
     _poolPreemptiveStrike,
     _poolPrimalDruid,
+    _poolProfessionalWrestler,
     _poolProfessorsWarning,
     _poolProfoundJourney,
     _poolPuppeteerClique,

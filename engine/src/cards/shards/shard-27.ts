@@ -259,6 +259,7 @@ import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
+import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRishadanAirship from "../pool/rishadan-airship.js";
@@ -663,6 +664,7 @@ const shard: CardShard = {
     _poolRejoinder,
     _poolRestlessCottage,
     _poolRetreatToKazandu,
+    _poolRhinoBarrelingBrute,
     _poolRipclawWrangler,
     _poolRiseOfTheDeathbringer,
     _poolRishadanAirship,

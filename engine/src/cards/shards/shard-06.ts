@@ -80,6 +80,7 @@ import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
 import _poolDaiLiCensor from "../pool/dai-li-censor.js";
 import _poolDainLordOfTheIronHills from "../pool/dain-lord-of-the-iron-hills.js";
 import _poolDakmorSalvage from "../pool/dakmor-salvage.js";
+import _poolDamageControlCrew from "../pool/damage-control-crew.js";
 import _poolDamnation from "../pool/damnation.js";
 import _poolDancingFromDarkToDawn from "../pool/dancing-from-dark-to-dawn.js";
 import _poolDaringLeap from "../pool/daring-leap.js";
@@ -317,6 +318,7 @@ import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
+import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
@@ -337,6 +339,7 @@ import _poolThrabenValiant from "../pool/thraben-valiant.js";
 import _poolThreaten from "../pool/threaten.js";
 import _poolThunderSpirit from "../pool/thunder-spirit.js";
 import _poolThunderingRaiju from "../pool/thundering-raiju.js";
+import _poolThwip from "../pool/thwip.js";
 import _poolTidechannelPathway from "../pool/tidechannel-pathway.js";
 import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
@@ -482,6 +485,7 @@ const shard: CardShard = {
     _poolDaiLiCensor,
     _poolDainLordOfTheIronHills,
     _poolDakmorSalvage,
+    _poolDamageControlCrew,
     _poolDamnation,
     _poolDancingFromDarkToDawn,
     _poolDaringLeap,
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolStadiumHeadliner,
     _poolStoneGiantOfHighPass,
     _poolStormKilnArtist,
+    _poolSubwayTrain,
     _poolSunbirdsInvocation,
     _poolSundownPass,
     _poolSunkenRuins,
@@ -739,6 +744,7 @@ const shard: CardShard = {
     _poolThreaten,
     _poolThunderSpirit,
     _poolThunderingRaiju,
+    _poolThwip,
     _poolTidechannelPathway,
     _poolTidusYunasGuardian,
     _poolTimeSieve,

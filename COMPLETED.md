@@ -28,6 +28,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Marvel's Spider-Man, whole** (batch 80): 62 cards (2026-10-15).
 - **Avatar: The Last Airbender, whole** (batch 79): 90 cards, and the scaffolder reads "cards
   exiled with this" as linking the card's exiles (2026-10-15).
 - **Lorwyn Eclipsed, whole** (batch 78): 70 cards, and Sneak Attack's haste made lasting, as

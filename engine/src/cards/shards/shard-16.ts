@@ -13,6 +13,7 @@ import _poolAncientLumberknot from "../pool/ancient-lumberknot.js";
 import _poolAncientZiggurat from "../pool/ancient-ziggurat.js";
 import _poolAnger from "../pool/anger.js";
 import _poolAnglerTurtle from "../pool/angler-turtle.js";
+import _poolAngryRabble from "../pool/angry-rabble.js";
 import _poolAnointerOfChampions from "../pool/anointer-of-champions.js";
 import _poolAqueousForm from "../pool/aqueous-form.js";
 import _poolArborElf from "../pool/arbor-elf.js";
@@ -445,6 +446,7 @@ const shard: CardShard = {
     _poolAncientZiggurat,
     _poolAnger,
     _poolAnglerTurtle,
+    _poolAngryRabble,
     _poolAnointerOfChampions,
     _poolAqueousForm,
     _poolArborElf,

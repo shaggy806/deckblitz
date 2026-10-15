@@ -232,6 +232,7 @@ import _poolMurmuringVolume from "../pool/murmuring-volume.js";
 import _poolMysticPeak from "../pool/mystic-peak.js";
 import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
+import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
@@ -241,6 +242,7 @@ import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
+import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
@@ -618,6 +620,7 @@ const shard: CardShard = {
     _poolMysticPeak,
     _poolNantukoElder,
     _poolNarnamCobra,
+    _poolNewsHelicopter,
     _poolNightMarket,
     _poolNighthowlPursuer,
     _poolNyxLotus,
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolOvergrownFarmland,
     _poolOxidize,
     _poolPainfulQuandary,
+    _poolPassengerFerry,
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
     _poolPlasmancer,

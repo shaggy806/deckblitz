@@ -91,6 +91,7 @@ import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExpel from "../pool/expel.js";
+import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
@@ -119,6 +120,7 @@ import _poolGrotesqueDemise from "../pool/grotesque-demise.js";
 import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
+import _poolGuyInTheChair from "../pool/guy-in-the-chair.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
 import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
@@ -474,6 +476,7 @@ const shard: CardShard = {
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,
     _poolExpel,
+    _poolEzekielSimsSpiderTotem,
     _poolFaldornDreadWolfHerald,
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
@@ -502,6 +505,7 @@ const shard: CardShard = {
     _poolGrowingRitesOfItlimoc,
     _poolGuardiansOfAkrasa,
     _poolGuttersnipe,
+    _poolGuyInTheChair,
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,
     _poolHawkeyesShot,

@@ -107,6 +107,7 @@ import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFirebolt from "../pool/firebolt.js";
+import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
@@ -370,6 +371,7 @@ import _poolVoidRend from "../pool/void-rend.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
+import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
 import _poolWarBalloon from "../pool/war-balloon.js";
 import _poolWargate from "../pool/wargate.js";
@@ -521,6 +523,7 @@ const shard: CardShard = {
     _poolFeralMaaka,
     _poolFinaleOfGlory,
     _poolFirebolt,
+    _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
     _poolFodderCannon,
     _poolForgottenCave,
@@ -784,6 +787,7 @@ const shard: CardShard = {
     _poolVraskaGolgariQueen,
     _poolVulshokSorcerer,
     _poolWakandanTusker,
+    _poolWallCrawl,
     _poolWallOfAir,
     _poolWarBalloon,
     _poolWargate,

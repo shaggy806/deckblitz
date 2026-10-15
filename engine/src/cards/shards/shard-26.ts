@@ -30,6 +30,7 @@ import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
+import _poolBagelAndSchmear from "../pool/bagel-and-schmear.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
@@ -177,6 +178,7 @@ import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
+import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
@@ -194,6 +196,7 @@ import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMoorlandInquisitor from "../pool/moorland-inquisitor.js";
+import _poolMorbiusTheLivingVampire from "../pool/morbius-the-living-vampire.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
 import _poolMurder from "../pool/murder.js";
 import _poolMurmuration from "../pool/murmuration.js";
@@ -292,6 +295,7 @@ import _poolSoltariMonk from "../pool/soltari-monk.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
+import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
@@ -410,6 +414,7 @@ const shard: CardShard = {
     _poolAwakenTheInferno,
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
+    _poolBagelAndSchmear,
     _poolBaralAndKariZev,
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
@@ -557,6 +562,7 @@ const shard: CardShard = {
     _poolLivingLightning,
     _poolLothlorienLookout,
     _poolLumengridSentinel,
+    _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
     _poolMaelstromColossus,
     _poolMaestrosTheater,
@@ -574,6 +580,7 @@ const shard: CardShard = {
     _poolMindMeanderer,
     _poolMistCloakedHerald,
     _poolMoorlandInquisitor,
+    _poolMorbiusTheLivingVampire,
     _poolMossfireValley,
     _poolMurder,
     _poolMurmuration,
@@ -672,6 +679,7 @@ const shard: CardShard = {
     _poolSorinsThirst,
     _poolSpearSpewer,
     _poolSpectralReserves,
+    _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSporeSwarm,
     _poolSpringmaneCervin,

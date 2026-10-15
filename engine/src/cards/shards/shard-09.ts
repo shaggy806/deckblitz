@@ -248,6 +248,7 @@ import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
+import _poolPrisonBreak from "../pool/prison-break.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPunySnack from "../pool/puny-snack.js";
@@ -284,6 +285,7 @@ import _poolScaleOfChissGoria from "../pool/scale-of-chiss-goria.js";
 import _poolScourForScrap from "../pool/scour-for-scrap.js";
 import _poolScourFromExistence from "../pool/scour-from-existence.js";
 import _poolScouringSwarm from "../pool/scouring-swarm.js";
+import _poolScoutTheCity from "../pool/scout-the-city.js";
 import _poolScrybRanger from "../pool/scryb-ranger.js";
 import _poolScuzzbackScrounger from "../pool/scuzzback-scrounger.js";
 import _poolSearchlightCompanion from "../pool/searchlight-companion.js";
@@ -374,6 +376,7 @@ import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
 import _poolWatchfulAutomaton from "../pool/watchful-automaton.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
+import _poolWebShooters from "../pool/web-shooters.js";
 import _poolWeiInfantry from "../pool/wei-infantry.js";
 import _poolWhirlingStrike from "../pool/whirling-strike.js";
 import _poolWhiteLotusHideout from "../pool/white-lotus-hideout.js";
@@ -381,6 +384,7 @@ import _poolWickerboughElder from "../pool/wickerbough-elder.js";
 import _poolWildfire from "../pool/wildfire.js";
 import _poolWildheartInvoker from "../pool/wildheart-invoker.js";
 import _poolWilyGoblin from "../pool/wily-goblin.js";
+import _poolWisecrack from "../pool/wisecrack.js";
 import _poolWitnessOfTomorrows from "../pool/witness-of-tomorrows.js";
 import _poolWolverineRiders from "../pool/wolverine-riders.js";
 import _poolWoodElves from "../pool/wood-elves.js";
@@ -654,6 +658,7 @@ const shard: CardShard = {
     _poolPricklyBoggart,
     _poolPrimalRage,
     _poolPrimalWitchstalker,
+    _poolPrisonBreak,
     _poolProfessorZeiAnthropologist,
     _poolProsperousBandit,
     _poolPunySnack,
@@ -690,6 +695,7 @@ const shard: CardShard = {
     _poolScourForScrap,
     _poolScourFromExistence,
     _poolScouringSwarm,
+    _poolScoutTheCity,
     _poolScrybRanger,
     _poolScuzzbackScrounger,
     _poolSearchlightCompanion,
@@ -780,6 +786,7 @@ const shard: CardShard = {
     _poolWarEffort,
     _poolWatchfulAutomaton,
     _poolWaveWingElemental,
+    _poolWebShooters,
     _poolWeiInfantry,
     _poolWhirlingStrike,
     _poolWhiteLotusHideout,
@@ -787,6 +794,7 @@ const shard: CardShard = {
     _poolWildfire,
     _poolWildheartInvoker,
     _poolWilyGoblin,
+    _poolWisecrack,
     _poolWitnessOfTomorrows,
     _poolWolverineRiders,
     _poolWoodElves,

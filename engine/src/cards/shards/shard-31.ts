@@ -156,6 +156,7 @@ import _poolGrabbyGiant from "../pool/grabby-giant.js";
 import _poolGreatGildedBoat from "../pool/great-gilded-boat.js";
 import _poolGreenwheelLiberator from "../pool/greenwheel-liberator.js";
 import _poolGrotesqueMutation from "../pool/grotesque-mutation.js";
+import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
@@ -546,6 +547,7 @@ const shard: CardShard = {
     _poolGreatGildedBoat,
     _poolGreenwheelLiberator,
     _poolGrotesqueMutation,
+    _poolGrowExtraArms,
     _poolGuidingBolt,
     _poolHalberdier,
     _poolHallOfTagsin,

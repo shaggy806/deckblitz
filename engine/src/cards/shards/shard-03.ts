@@ -303,6 +303,7 @@ import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
+import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
@@ -683,6 +684,7 @@ const shard: CardShard = {
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
     _poolSulfurVent,
+    _poolSunSpiderNimbleWebber,
     _poolSunderingArchaic,
     _poolSunspireGriffin,
     _poolSupplyLineCranes,

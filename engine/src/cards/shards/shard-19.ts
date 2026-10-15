@@ -224,6 +224,7 @@ import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
+import _poolMaskedMeower from "../pool/masked-meower.js";
 import _poolMasterOfDarkRites from "../pool/master-of-dark-rites.js";
 import _poolMayaelsAria from "../pool/mayaels-aria.js";
 import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
@@ -347,6 +348,7 @@ import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
 import _poolSramsExpertise from "../pool/srams-expertise.js";
 import _poolStalkingPredator from "../pool/stalking-predator.js";
+import _poolStarlingAerialAlly from "../pool/starling-aerial-ally.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
@@ -655,6 +657,7 @@ const shard: CardShard = {
     _poolManicVandal,
     _poolMarcusMutantMayor,
     _poolMarduHeartPiercer,
+    _poolMaskedMeower,
     _poolMasterOfDarkRites,
     _poolMayaelsAria,
     _poolMazeSkullbomb,
@@ -778,6 +781,7 @@ const shard: CardShard = {
     _poolSramSeniorEdificer,
     _poolSramsExpertise,
     _poolStalkingPredator,
+    _poolStarlingAerialAlly,
     _poolStarnheimMemento,
     _poolStartFromScratch,
     _poolSteelWreckingBall,

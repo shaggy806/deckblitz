@@ -344,6 +344,7 @@ import _poolTempestAngler from "../pool/tempest-angler.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
 import _poolTeoSpiritedGlider from "../pool/teo-spirited-glider.js";
+import _poolTerrificTeamUp from "../pool/terrific-team-up.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
@@ -760,6 +761,7 @@ const shard: CardShard = {
     _poolTempestDrake,
     _poolTemporalManipulation,
     _poolTeoSpiritedGlider,
+    _poolTerrificTeamUp,
     _poolTerritorialHellkite,
     _poolTheComingOfGalactus,
     _poolTheImmortalWeapons,

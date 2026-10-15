@@ -136,6 +136,7 @@ import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
+import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
@@ -277,6 +278,7 @@ import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
+import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
@@ -321,6 +323,8 @@ import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
+import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
+import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSquire from "../pool/squire.js";
@@ -540,6 +544,7 @@ const shard: CardShard = {
     _poolForceVoid,
     _poolFortuitousFind,
     _poolFrenziedRaptor,
+    _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
@@ -681,6 +686,7 @@ const shard: CardShard = {
     _poolPrehistoricPet,
     _poolPropellerPioneer,
     _poolPterafractyl,
+    _poolPumpkinBombardment,
     _poolPurpleCrystalCrab,
     _poolRakdosPatronOfChaos,
     _poolRavnicaAtWar,
@@ -725,6 +731,8 @@ const shard: CardShard = {
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
     _poolSpawningKraken,
+    _poolSpiderGirlLegacyHero,
+    _poolSpiderSuit,
     _poolSpinedThopter,
     _poolSpireMonitor,
     _poolSquire,

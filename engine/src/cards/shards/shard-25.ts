@@ -170,6 +170,7 @@ import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
 import _poolInkwellLeviathan from "../pool/inkwell-leviathan.js";
+import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
@@ -299,6 +300,7 @@ import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
 import _poolSkystreakEngineer from "../pool/skystreak-engineer.js";
+import _poolSkywardSpider from "../pool/skyward-spider.js";
 import _poolSlayersStronghold from "../pool/slayers-stronghold.js";
 import _poolSlingshotGoblin from "../pool/slingshot-goblin.js";
 import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
@@ -559,6 +561,7 @@ const shard: CardShard = {
     _poolInfantryShield,
     _poolIngenuityEngine,
     _poolInkwellLeviathan,
+    _poolInnerDemonsGangsters,
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJudgeMagisterGabranth,
@@ -688,6 +691,7 @@ const shard: CardShard = {
     _poolSirensRuse,
     _poolSkullclamp,
     _poolSkystreakEngineer,
+    _poolSkywardSpider,
     _poolSlayersStronghold,
     _poolSlingshotGoblin,
     _poolSlithBloodletter,

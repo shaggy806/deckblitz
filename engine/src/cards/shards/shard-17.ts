@@ -107,6 +107,7 @@ import _poolEarthKingsLieutenant from "../pool/earth-kings-lieutenant.js";
 import _poolEarthVillageRuffians from "../pool/earth-village-ruffians.js";
 import _poolEasyPrey from "../pool/easy-prey.js";
 import _poolEatToExtinction from "../pool/eat-to-extinction.js";
+import _poolEerieGravestone from "../pool/eerie-gravestone.js";
 import _poolEfficientConstruction from "../pool/efficient-construction.js";
 import _poolElectrolyze from "../pool/electrolyze.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
@@ -302,6 +303,7 @@ import _poolSoulsAttendant from "../pool/souls-attendant.js";
 import _poolSparkJolt from "../pool/spark-jolt.js";
 import _poolSpecterOfTheFens from "../pool/specter-of-the-fens.js";
 import _poolSpectralFlight from "../pool/spectral-flight.js";
+import _poolSpiderMobile from "../pool/spider-mobile.js";
 import _poolSpiderRexDaringDino from "../pool/spider-rex-daring-dino.js";
 import _poolSpinedWurm from "../pool/spined-wurm.js";
 import _poolSpireGarden from "../pool/spire-garden.js";
@@ -349,6 +351,7 @@ import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
 import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
+import _poolVenomEvilUnleashed from "../pool/venom-evil-unleashed.js";
 import _poolVigilanteJustice from "../pool/vigilante-justice.js";
 import _poolVizierOfTheScorpion from "../pool/vizier-of-the-scorpion.js";
 import _poolVolatileFault from "../pool/volatile-fault.js";
@@ -505,6 +508,7 @@ const shard: CardShard = {
     _poolEarthVillageRuffians,
     _poolEasyPrey,
     _poolEatToExtinction,
+    _poolEerieGravestone,
     _poolEfficientConstruction,
     _poolElectrolyze,
     _poolElspethSunsChampion,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolSparkJolt,
     _poolSpecterOfTheFens,
     _poolSpectralFlight,
+    _poolSpiderMobile,
     _poolSpiderRexDaringDino,
     _poolSpinedWurm,
     _poolSpireGarden,
@@ -747,6 +752,7 @@ const shard: CardShard = {
     _poolUnsummon,
     _poolVeiledShade,
     _poolVeinwitchCoven,
+    _poolVenomEvilUnleashed,
     _poolVigilanteJustice,
     _poolVizierOfTheScorpion,
     _poolVolatileFault,

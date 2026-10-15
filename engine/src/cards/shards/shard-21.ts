@@ -80,6 +80,7 @@ import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
+import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
@@ -232,6 +233,7 @@ import _poolPhantasmalImage from "../pool/phantasmal-image.js";
 import _poolPheresBandCentaurs from "../pool/pheres-band-centaurs.js";
 import _poolPhyrexianHulk from "../pool/phyrexian-hulk.js";
 import _poolPhyrexianWalker from "../pool/phyrexian-walker.js";
+import _poolPicturesOfSpiderMan from "../pool/pictures-of-spider-man.js";
 import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
@@ -446,6 +448,7 @@ const shard: CardShard = {
     _poolDesperateBloodseeker,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
+    _poolDocOckSinisterScientist,
     _poolDranasChosen,
     _poolDuress,
     _poolDuskLegionZealot,
@@ -598,6 +601,7 @@ const shard: CardShard = {
     _poolPheresBandCentaurs,
     _poolPhyrexianHulk,
     _poolPhyrexianWalker,
+    _poolPicturesOfSpiderMan,
     _poolPiperOfTheSwarm,
     _poolPiperWrightPublickReporter,
     _poolPotionOfHealing,

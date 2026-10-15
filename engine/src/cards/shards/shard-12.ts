@@ -390,6 +390,7 @@ import _tokensHamsterToken from "../tokens/hamster-token.js";
 import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shredder.js";
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "../tokens/phyrexian-myr-token-myr-sire.js";
+import _tokensRobotTokenFlying from "../tokens/robot-token-flying.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
 import _tokensVampireToken from "../tokens/vampire-token.js";
 import _tokensWurmToken66 from "../tokens/wurm-token-6-6.js";
@@ -787,6 +788,7 @@ const shard: CardShard = {
     _tokensNinjaTokenDarkLeoShredder,
     _tokensPhyrexianGolemToken,
     _tokensPhyrexianMyrTokenMyrSire,
+    _tokensRobotTokenFlying,
     _tokensSoldierTokenFinaleOfGlory,
     _tokensVampireToken,
     _tokensWurmToken66,

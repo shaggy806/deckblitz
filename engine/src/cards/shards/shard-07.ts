@@ -44,6 +44,7 @@ import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
+import _poolCheeringCrowd from "../pool/cheering-crowd.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
@@ -375,6 +376,7 @@ import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
 import _poolVampiresKiss from "../pool/vampires-kiss.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
+import _poolVenomsHunger from "../pool/venoms-hunger.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
@@ -477,6 +479,7 @@ const shard: CardShard = {
     _poolCallousInspector,
     _poolChandrasEmberling,
     _poolChatterstorm,
+    _poolCheeringCrowd,
     _poolChildOfAlara,
     _poolChishiroTheShatteredBlade,
     _poolChitinGravestalker,
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolValleyQuestcaller,
     _poolVampiresKiss,
     _poolVenomousHierophant,
+    _poolVenomsHunger,
     _poolVenomsacLagac,
     _poolVigilantBaloth,
     _poolVindictiveTriumph,
