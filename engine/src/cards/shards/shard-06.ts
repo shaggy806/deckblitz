@@ -164,6 +164,7 @@ import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
 import _poolInitiatesCompanion from "../pool/initiates-companion.js";
 import _poolInklingSummoning from "../pool/inkling-summoning.js";
+import _poolInkshapeDemonstrator from "../pool/inkshape-demonstrator.js";
 import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
 import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
@@ -306,6 +307,7 @@ import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
+import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
@@ -315,6 +317,7 @@ import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
+import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
@@ -558,6 +561,7 @@ const shard: CardShard = {
     _poolInfuriate,
     _poolInitiatesCompanion,
     _poolInklingSummoning,
+    _poolInkshapeDemonstrator,
     _poolInsatiableAvarice,
     _poolIntoTheRoil,
     _poolIronApprentice,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolSpectralProcession,
     _poolSpellseeker,
     _poolSpiketailDrakeling,
+    _poolSpiritcallEnthusiast,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
     _poolStoneGiantOfHighPass,
@@ -709,6 +714,7 @@ const shard: CardShard = {
     _poolSunkenRuins,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,
+    _poolTackleArtist,
     _poolTakenumaAbandonedMire,
     _poolTanufelRimespeaker,
     _poolTeeterpeakAmbusher,

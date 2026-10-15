@@ -18918,6 +18918,17 @@ export class Game {
       },
       colorsSpentOf: (target) => {
         if (target.kind !== "object") return 0;
+        // As `manaSpentOf`: the spell that fired a cast trigger, countered in
+        // response, is read as it last was on the stack (Magmablood Archaic).
+        const spell = target.object === triggerObject ? this.state.objects[target.object] : undefined;
+        if (
+          spell !== undefined &&
+          refs.triggerSpell !== undefined &&
+          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell) &&
+          spell.lastStackManaSpentColors !== undefined
+        ) {
+          return spell.lastStackManaSpentColors.length;
+        }
         const lki = lastKnownOf(target);
         return (
           (lki !== undefined ? lki.manaSpentColors : this.state.objects[target.object]?.manaSpentColors)?.length ?? 0
@@ -30726,6 +30737,7 @@ export class Game {
     if (object.zone === "stack" && object.kind === "card") {
       object.lastStackManaValue = this.manaValueOnStack(object);
       object.lastStackManaSpent = object.manaSpent ?? 0;
+      object.lastStackManaSpentColors = [...(object.manaSpentColors ?? [])];
       // Already taken if its targets were cleared on the way out (see
       // `forgetSpellTargets`).
       if (object.lastOnStack?.zoneChangeCount !== (object.zoneChangeCount ?? 0)) {

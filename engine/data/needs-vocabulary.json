@@ -6120,6 +6120,22 @@
   "effect:exiled-this-way-to-hand": {
    "family": "effect:this-way-results",
    "example": "Worlds Within Worlds: Put every card this resolution exiled into its owner's hand — Worlds Within Worlds' \"then put all cards exiled this way into their owners' hands\" (the hand counterpart of put-exiled-this-way-onto-battlefield)."
+  },
+  "effect:put-counters-of-created": {
+   "family": "effect:this-way-results",
+   "example": "Ambitious Augmenter: put-counters-of onto the token this resolution created: 'create a 0/0 Fractal token, then put this creature's counters on that token' (Ambitious Augmenter)."
+  },
+  "stat:cards-exiled-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Ennis, Debate Moderator: A per-turn count of cards (not tokens or copies) put into exile from any zone by anyone, for 'if one or more cards were put into exile this turn' (Ennis, Debate Moderator)."
+  },
+  "cost:flashback-tap-creatures-cost": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Group Project: Group Project: a flashback cost of tapping untapped creatures you control (Flashback—Tap three untapped creatures you control), paid like a tapOthers cost."
+  },
+  "zone:impulse-exile-instead": {
+   "family": "zone:impulse-permission-options",
+   "example": "Nita, Forum Conciliator: Nita, Forum Conciliator: a cast permission (exile mayCast / impulse) whose spell is exiled instead of going to a graveyard ('If that spell would be put into a graveyard, exile it instead'), like cast-now's exileAfter."
   }
  }
 }

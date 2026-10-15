@@ -103,6 +103,7 @@ import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
+import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
 import _poolEnthusiasticMechanaut from "../pool/enthusiastic-mechanaut.js";
 import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
@@ -120,6 +121,7 @@ import _poolFlare from "../pool/flare.js";
 import _poolFleetSwallower from "../pool/fleet-swallower.js";
 import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
+import _poolFoolishFate from "../pool/foolish-fate.js";
 import _poolFoulPlay from "../pool/foul-play.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
@@ -177,6 +179,7 @@ import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
+import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
@@ -267,6 +270,7 @@ import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
+import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
@@ -476,6 +480,7 @@ const shard: CardShard = {
     _poolEiganjoSeatOfTheEmpire,
     _poolEldraziConscription,
     _poolEncampmentKeeper,
+    _poolEncouragingAviator,
     _poolEnfeeblement,
     _poolEnthusiasticMechanaut,
     _poolErtaiTheCorrupted,
@@ -493,6 +498,7 @@ const shard: CardShard = {
     _poolFleetSwallower,
     _poolFlensermite,
     _poolFomoriVault,
+    _poolFoolishFate,
     _poolFoulPlay,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
@@ -550,6 +556,7 @@ const shard: CardShard = {
     _poolKeldonRaider,
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,
+    _poolKirolHistoryBuff,
     _poolKnightOfObligation,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
@@ -640,6 +647,7 @@ const shard: CardShard = {
     _poolSarkhanFireblood,
     _poolScapeshift,
     _poolScorchedGeyser,
+    _poolScrollboost,
     _poolSelesnyaSignet,
     _poolServoExhibition,
     _poolSetessanTraining,

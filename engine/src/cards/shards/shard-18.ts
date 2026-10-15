@@ -191,6 +191,7 @@ import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
 import _poolManticoreEternal from "../pool/manticore-eternal.js";
 import _poolMassHysteria from "../pool/mass-hysteria.js";
+import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
@@ -200,6 +201,7 @@ import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
+import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
@@ -597,6 +599,7 @@ const shard: CardShard = {
     _poolManholeCover,
     _poolManticoreEternal,
     _poolMassHysteria,
+    _poolMelancholicPoet,
     _poolMemorialToFolly,
     _poolMichelangeloTheHeart,
     _poolMichelangeloWeirdnessTo11,
@@ -606,6 +609,7 @@ const shard: CardShard = {
     _poolMirkwoodSpider,
     _poolMistRaven,
     _poolMolecularModifier,
+    _poolMoltenNote,
     _poolMostValuableSlayer,
     _poolMtendaHerder,
     _poolNacatlOutlander,

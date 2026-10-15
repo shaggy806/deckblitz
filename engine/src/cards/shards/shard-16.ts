@@ -191,6 +191,7 @@ import _poolLibrary from "../pool/library.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
+import _poolLivingHistory from "../pool/living-history.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
@@ -215,6 +216,7 @@ import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
+import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
@@ -616,6 +618,7 @@ const shard: CardShard = {
     _poolLifecreedDuo,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
+    _poolLivingHistory,
     _poolLokisScepter,
     _poolLongtuskCub,
     _poolLoxodonLineBreaker,
@@ -640,6 +643,7 @@ const shard: CardShard = {
     _poolMirrorpool,
     _poolMoxAmber,
     _poolMundasVanguard,
+    _poolMusesEncouragement,
     _poolMyrSire,
     _poolMyrTurbine,
     _poolNajeelaTheBladeBlossom,

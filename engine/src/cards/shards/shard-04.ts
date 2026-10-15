@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAberrantReturn from "../pool/aberrant-return.js";
 import _poolAbzanAscendancy from "../pool/abzan-ascendancy.js";
+import _poolAdditiveEvolution from "../pool/additive-evolution.js";
 import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
 import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
@@ -114,6 +115,7 @@ import _poolFleshformer from "../pool/fleshformer.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
+import _poolFractalize from "../pool/fractalize.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
@@ -306,6 +308,8 @@ import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
+import _poolStreamOfLife from "../pool/stream-of-life.js";
+import _poolStrifeScholar from "../pool/strife-scholar.js";
 import _poolSultaiSkullkeeper from "../pool/sultai-skullkeeper.js";
 import _poolSummitIntimidator from "../pool/summit-intimidator.js";
 import _poolSummonBahamut from "../pool/summon-bahamut.js";
@@ -395,6 +399,7 @@ const shard: CardShard = {
   pool: [
     _poolAberrantReturn,
     _poolAbzanAscendancy,
+    _poolAdditiveEvolution,
     _poolAetherHelix,
     _poolAjanisChosen,
     _poolAlacrianJaguar,
@@ -504,6 +509,7 @@ const shard: CardShard = {
     _poolFlowstoneCharger,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
+    _poolFractalize,
     _poolFromBeyond,
     _poolGaeasCradle,
     _poolGalacticWayfarer,
@@ -696,6 +702,8 @@ const shard: CardShard = {
     _poolSquirrelNest,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
+    _poolStreamOfLife,
+    _poolStrifeScholar,
     _poolSultaiSkullkeeper,
     _poolSummitIntimidator,
     _poolSummonBahamut,

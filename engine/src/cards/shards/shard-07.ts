@@ -15,6 +15,7 @@ import _poolAlterFate from "../pool/alter-fate.js";
 import _poolAlteredEgo from "../pool/altered-ego.js";
 import _poolAmbushGigapede from "../pool/ambush-gigapede.js";
 import _poolAntagonize from "../pool/antagonize.js";
+import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
 import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
@@ -227,6 +228,7 @@ import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
+import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
@@ -323,6 +325,7 @@ import _poolStarvedRusalka from "../pool/starved-rusalka.js";
 import _poolStormcallersBoon from "../pool/stormcallers-boon.js";
 import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolStratozeppelid from "../pool/stratozeppelid.js";
+import _poolStrikingPalette from "../pool/striking-palette.js";
 import _poolSuddenStrength from "../pool/sudden-strength.js";
 import _poolSunSentinel from "../pool/sun-sentinel.js";
 import _poolSungracePegasus from "../pool/sungrace-pegasus.js";
@@ -440,6 +443,7 @@ const shard: CardShard = {
     _poolAlteredEgo,
     _poolAmbushGigapede,
     _poolAntagonize,
+    _poolAntiquitiesOnTheLoose,
     _poolAprilOneilKunoichiTrainee,
     _poolArcboundPrototype,
     _poolArchonOfFallingStars,
@@ -652,6 +656,7 @@ const shard: CardShard = {
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
     _poolNyleaKeenEyed,
+    _poolOldGrowthEducator,
     _poolOldOneEye,
     _poolOnTheTrail,
     _poolOnakkeOgre,
@@ -748,6 +753,7 @@ const shard: CardShard = {
     _poolStormcallersBoon,
     _poolStormscapeApprentice,
     _poolStratozeppelid,
+    _poolStrikingPalette,
     _poolSuddenStrength,
     _poolSunSentinel,
     _poolSungracePegasus,

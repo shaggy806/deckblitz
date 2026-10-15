@@ -22,6 +22,7 @@ import _poolAnimalSanctuary from "../pool/animal-sanctuary.js";
 import _poolAntManColonyCommander from "../pool/ant-man-colony-commander.js";
 import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js";
 import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
+import _poolArcaneOmens from "../pool/arcane-omens.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
@@ -306,6 +307,7 @@ import _poolSparkSpray from "../pool/spark-spray.js";
 import _poolSpelunking from "../pool/spelunking.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
+import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolStoneskin from "../pool/stoneskin.js";
@@ -405,6 +407,7 @@ const shard: CardShard = {
     _poolAntManColonyCommander,
     _poolApostleOfPurifyingLight,
     _poolAppaSteadfastGuardian,
+    _poolArcaneOmens,
     _poolArchersParapet,
     _poolArdentPlea,
     _poolArmoredCancrix,
@@ -689,6 +692,7 @@ const shard: CardShard = {
     _poolSpelunking,
     _poolSpinelessThug,
     _poolSpriteDragon,
+    _poolStartledRelicSloth,
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolStoneskin,

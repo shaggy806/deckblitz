@@ -155,6 +155,7 @@ import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
+import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
@@ -546,6 +547,7 @@ const shard: CardShard = {
     _poolHashepOasis,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
+    _poolHeatedArgument,
     _poolHedgeMaze,
     _poolHeraldOfKozilek,
     _poolHighspireBellRinger,

@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonAttachments from "../pool/abandon-attachments.js";
 import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
+import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
@@ -167,6 +168,7 @@ import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
 import _poolHamatoGuardianStance from "../pool/hamato-guardian-stance.js";
 import _poolHarrow from "../pool/harrow.js";
+import _poolHarshAnnotation from "../pool/harsh-annotation.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
@@ -257,6 +259,7 @@ import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
+import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
@@ -275,11 +278,13 @@ import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
+import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRefresh from "../pool/refresh.js";
+import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
@@ -293,6 +298,7 @@ import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
+import _poolScathingShadelock from "../pool/scathing-shadelock.js";
 import _poolScavengingHarpy from "../pool/scavenging-harpy.js";
 import _poolScragnoth from "../pool/scragnoth.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
@@ -402,6 +408,7 @@ import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
 import _poolViridianZealot from "../pool/viridian-zealot.js";
+import _poolVisionarysDance from "../pool/visionarys-dance.js";
 import _poolVivisPersistence from "../pool/vivis-persistence.js";
 import _poolVodalianHexcatcher from "../pool/vodalian-hexcatcher.js";
 import _poolVoraciousHydra from "../pool/voracious-hydra.js";
@@ -437,6 +444,7 @@ const shard: CardShard = {
   pool: [
     _poolAbandonAttachments,
     _poolAbdelAdrianGorionsWard,
+    _poolAberrantManawurm,
     _poolAbsorbingMan,
     _poolActOfTreason,
     _poolAetherChanneler,
@@ -599,6 +607,7 @@ const shard: CardShard = {
     _poolHaldanAvidArcanist,
     _poolHamatoGuardianStance,
     _poolHarrow,
+    _poolHarshAnnotation,
     _poolHateMirage,
     _poolHawkeyeTrickShot,
     _poolHeliodTheRadiantDawn,
@@ -689,6 +698,7 @@ const shard: CardShard = {
     _poolOverwhelmingInstinct,
     _poolPatronWizard,
     _poolPeacewalkerColossus,
+    _poolPensiveProfessor,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
@@ -707,11 +717,13 @@ const shard: CardShard = {
     _poolRagingCougar,
     _poolRainOfEmbers,
     _poolRaiseThePast,
+    _poolRancorousArchaic,
     _poolRatcatcher,
     _poolRavagingHorde,
     _poolRavenousAmulet,
     _poolRecklessAssault,
     _poolRefresh,
+    _poolRenderSpeechless,
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,
@@ -725,6 +737,7 @@ const shard: CardShard = {
     _poolSanguineGuard,
     _poolSazhsChocobo,
     _poolScarecrowGuide,
+    _poolScathingShadelock,
     _poolScavengingHarpy,
     _poolScragnoth,
     _poolSearingFlesh,
@@ -834,6 +847,7 @@ const shard: CardShard = {
     _poolVileMutilator,
     _poolViridianAcolyte,
     _poolViridianZealot,
+    _poolVisionarysDance,
     _poolVivisPersistence,
     _poolVodalianHexcatcher,
     _poolVoraciousHydra,

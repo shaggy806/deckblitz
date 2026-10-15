@@ -88,6 +88,7 @@ import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
+import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
 import _poolDimirGuildgate from "../pool/dimir-guildgate.js";
 import _poolDimirInfiltrator from "../pool/dimir-infiltrator.js";
 import _poolDimirSpybug from "../pool/dimir-spybug.js";
@@ -100,6 +101,7 @@ import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
+import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
@@ -294,12 +296,14 @@ import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
 import _poolSmellFear from "../pool/smell-fear.js";
 import _poolSmeltWardMinotaur from "../pool/smelt-ward-minotaur.js";
+import _poolSnarlSong from "../pool/snarl-song.js";
 import _poolSoldierOn from "../pool/soldier-on.js";
 import _poolSomberHoverguard from "../pool/somber-hoverguard.js";
 import _poolSootfeatherFlock from "../pool/sootfeather-flock.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
+import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
@@ -307,6 +311,7 @@ import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
+import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
 import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
 import _poolStonefareCrocodile from "../pool/stonefare-crocodile.js";
@@ -487,6 +492,7 @@ const shard: CardShard = {
     _poolDelete,
     _poolDenOfTheBugbear,
     _poolDictateOfErebos,
+    _poolDigSiteInventory,
     _poolDimirGuildgate,
     _poolDimirInfiltrator,
     _poolDimirSpybug,
@@ -499,6 +505,7 @@ const shard: CardShard = {
     _poolDragonbackAssault,
     _poolDreadShade,
     _poolDryadsRevival,
+    _poolDuelTactics,
     _poolDutyBeyondDeath,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
@@ -693,12 +700,14 @@ const shard: CardShard = {
     _poolSlaughterPact,
     _poolSmellFear,
     _poolSmeltWardMinotaur,
+    _poolSnarlSong,
     _poolSoldierOn,
     _poolSomberHoverguard,
     _poolSootfeatherFlock,
     _poolSoulSnuffers,
     _poolSozinsComet,
     _poolSpatialContortion,
+    _poolSpectacularSkywhale,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
     _poolSpiderManMilesMorales,
@@ -706,6 +715,7 @@ const shard: CardShard = {
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
     _poolSquirrelSovereign,
+    _poolStadiumTidalmage,
     _poolStaunchThroneguard,
     _poolSteelPlumeMarshal,
     _poolStonefareCrocodile,

@@ -259,6 +259,7 @@ import _poolPharikasChosen from "../pool/pharikas-chosen.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
 import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
+import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
@@ -694,6 +695,7 @@ const shard: CardShard = {
     _poolPhyrexianJuggernaut,
     _poolPhyrexianRebirth,
     _poolPhyrexianSkyflayer,
+    _poolPigmentWrangler,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
     _poolPridefulFeastling,

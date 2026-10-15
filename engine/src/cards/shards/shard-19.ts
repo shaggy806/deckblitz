@@ -22,6 +22,7 @@ import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
+import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
@@ -73,6 +74,7 @@ import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
 import _poolCryptolithRite from "../pool/cryptolith-rite.js";
 import _poolCrystalSkullIsuSpyglass from "../pool/crystal-skull-isu-spyglass.js";
+import _poolCuboidColony from "../pool/cuboid-colony.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
@@ -86,6 +88,7 @@ import _poolDevilthornFox from "../pool/devilthorn-fox.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
+import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
@@ -120,6 +123,7 @@ import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
+import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
@@ -194,6 +198,7 @@ import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
 import _poolLashOfMalice from "../pool/lash-of-malice.js";
 import _poolLayWaste from "../pool/lay-waste.js";
 import _poolLeap from "../pool/leap.js";
+import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
@@ -265,6 +270,7 @@ import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
 import _poolPlummet from "../pool/plummet.js";
+import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
@@ -437,6 +443,7 @@ const shard: CardShard = {
     _poolArmillarySphere,
     _poolAssaultFormation,
     _poolAvatarEnthusiasts,
+    _poolAwakenTheAges,
     _poolAwakenTheWoods,
     _poolBalemurkLeech,
     _poolBarbarianHorde,
@@ -488,6 +495,7 @@ const shard: CardShard = {
     _poolCreakwoodGhoul,
     _poolCryptolithRite,
     _poolCrystalSkullIsuSpyglass,
+    _poolCuboidColony,
     _poolDaringApprentice,
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
@@ -501,6 +509,7 @@ const shard: CardShard = {
     _poolDimensionX,
     _poolDismiss,
     _poolDisruptivePitmage,
+    _poolDissectionPractice,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
     _poolDrossSkullbomb,
@@ -535,6 +544,7 @@ const shard: CardShard = {
     _poolForerunnerOfTheEmpire,
     _poolFormidableSpeaker,
     _poolFortifiedVillage,
+    _poolFractalAnomaly,
     _poolFugue,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,
@@ -609,6 +619,7 @@ const shard: CardShard = {
     _poolLashOfMalice,
     _poolLayWaste,
     _poolLeap,
+    _poolLecturingScornmage,
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLoreWeaver,
@@ -680,6 +691,7 @@ const shard: CardShard = {
     _poolPlagueMyr,
     _poolPlayfulShove,
     _poolPlummet,
+    _poolPoisonersApprentice,
     _poolPolyraptor,
     _poolPrizedStatue,
     _poolProdigysPrototype,

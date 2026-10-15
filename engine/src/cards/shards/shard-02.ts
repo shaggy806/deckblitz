@@ -32,6 +32,7 @@ import _poolBattlePlan from "../pool/battle-plan.js";
 import _poolBattlefieldPercher from "../pool/battlefield-percher.js";
 import _poolBeaconHawk from "../pool/beacon-hawk.js";
 import _poolBeastcallerSavant from "../pool/beastcaller-savant.js";
+import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
@@ -376,6 +377,7 @@ import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
+import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
@@ -414,6 +416,7 @@ const shard: CardShard = {
     _poolBattlefieldPercher,
     _poolBeaconHawk,
     _poolBeastcallerSavant,
+    _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
     _poolBlightMound,
     _poolBloodBurglar,
@@ -760,6 +763,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens22RedDwarfToken,
+    _tokensElementalToken33BlueRedFlying,
     _tokensGnomeToken,
     _tokensGolemToken,
     _tokensKnightTokenChivalricAlliance,

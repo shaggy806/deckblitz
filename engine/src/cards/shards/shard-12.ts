@@ -58,6 +58,7 @@ import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
+import _poolChargingStrifeknight from "../pool/charging-strifeknight.js";
 import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
 import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
@@ -65,6 +66,7 @@ import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
+import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
@@ -225,6 +227,7 @@ import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
+import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
@@ -309,6 +312,7 @@ import _poolStormchaserMage from "../pool/stormchaser-mage.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
 import _poolSummonAnima from "../pool/summon-anima.js";
+import _poolSummonedDromedary from "../pool/summoned-dromedary.js";
 import _poolSunbakedCanyon from "../pool/sunbaked-canyon.js";
 import _poolSunscapeFamiliar from "../pool/sunscape-familiar.js";
 import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
@@ -444,6 +448,7 @@ const shard: CardShard = {
     _poolCastleLocthwain,
     _poolChampionOfDusk,
     _poolChargingSlateback,
+    _poolChargingStrifeknight,
     _poolChocoSeekerOfParadise,
     _poolChromeProwler,
     _poolCircuitousRoute,
@@ -451,6 +456,7 @@ const shard: CardShard = {
     _poolClickslither,
     _poolCloudPirates,
     _poolCloudcrownOak,
+    _poolConciliatorsDuelist,
     _poolCreepingTarPit,
     _poolCrossoverCollaboration,
     _poolCrystalSlipper,
@@ -611,6 +617,7 @@ const shard: CardShard = {
     _poolOrimsChant,
     _poolOverwhelm,
     _poolOxiddaScrapmelter,
+    _poolPageLooseLeaf,
     _poolPatagiaGolem,
     _poolPathbreakerIbex,
     _poolPendrellDrake,
@@ -695,6 +702,7 @@ const shard: CardShard = {
     _poolStrixLookout,
     _poolSubterraneanSpirit,
     _poolSummonAnima,
+    _poolSummonedDromedary,
     _poolSunbakedCanyon,
     _poolSunscapeFamiliar,
     _poolSupernaturalStamina,

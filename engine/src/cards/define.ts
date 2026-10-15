@@ -824,6 +824,18 @@ export type StaticCondition =
       readonly anyOf: readonly { readonly filter: CardFilter; readonly otherThanSource?: boolean }[];
     }
   /**
+   * Increment's intervening-if (rule 702.191a): "if this permanent is a
+   * creature and the amount of mana spent to cast that spell is greater than
+   * this creature's power or this creature's toughness". The spell is the one
+   * whose casting fired the ability — what was spent on it there, if it has
+   * left the stack (countered in response) — against the source's power and
+   * toughness now: as it triggers, and again as it resolves, when a source
+   * that has left the battlefield (or come back as a new object) is no
+   * longer "this creature". Only a cast trigger's intervening-if can answer
+   * it (the `increment` helper); anywhere else it's false.
+   */
+  | { readonly kind: "increment" }
+  /**
    * You've cast at least `atLeast` spells named `named` this game
    * (`PlayerState.spellNamesCastThisGame` — a copy isn't cast). Approach of
    * the Second Sun's "you've cast **another** spell named Approach of the

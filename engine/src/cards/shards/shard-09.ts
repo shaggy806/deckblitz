@@ -121,6 +121,7 @@ import _poolFling from "../pool/fling.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
+import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
@@ -193,6 +194,7 @@ import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
 import _poolMODOK from "../pool/m-o-d-o-k.js";
 import _poolMagebaneLizard from "../pool/magebane-lizard.js";
 import _poolMagicDamper from "../pool/magic-damper.js";
+import _poolMagmabloodArchaic from "../pool/magmablood-archaic.js";
 import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
@@ -315,6 +317,7 @@ import _poolStealEnchantment from "../pool/steal-enchantment.js";
 import _poolStickFearlessMentor from "../pool/stick-fearless-mentor.js";
 import _poolStillmoonCavalier from "../pool/stillmoon-cavalier.js";
 import _poolStinkweedImp from "../pool/stinkweed-imp.js";
+import _poolStirringHonormancer from "../pool/stirring-honormancer.js";
 import _poolStonewoodInvoker from "../pool/stonewood-invoker.js";
 import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
@@ -521,6 +524,7 @@ const shard: CardShard = {
     _poolFoggyNelsonOnRetainer,
     _poolForebodingLandscape,
     _poolForgottenAncient,
+    _poolForumNecroscribe,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
     _poolFuriousAssault,
@@ -593,6 +597,7 @@ const shard: CardShard = {
     _poolMODOK,
     _poolMagebaneLizard,
     _poolMagicDamper,
+    _poolMagmabloodArchaic,
     _poolMagusOfTheWheel,
     _poolManaGeyser,
     _poolManaLeak,
@@ -715,6 +720,7 @@ const shard: CardShard = {
     _poolStickFearlessMentor,
     _poolStillmoonCavalier,
     _poolStinkweedImp,
+    _poolStirringHonormancer,
     _poolStonewoodInvoker,
     _poolStormcarvedCoast,
     _poolStormsplitter,

@@ -218,6 +218,7 @@ import _poolLoporritScout from "../pool/loporrit-scout.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
+import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -257,6 +258,7 @@ import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
+import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
@@ -269,6 +271,7 @@ import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
+import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
@@ -611,6 +614,7 @@ const shard: CardShard = {
     _poolLoyalTutor,
     _poolLumengridGargoyle,
     _poolMadameMasque,
+    _poolMageTowerReferee,
     _poolManyPartings,
     _poolMarchingDuodrone,
     _poolMarkovPatrician,
@@ -650,6 +654,7 @@ const shard: CardShard = {
     _poolOmenOfTheDead,
     _poolOnduInversion,
     _poolOrcishBowmasters,
+    _poolOrysaTideChoreographer,
     _poolOutlandBoar,
     _poolOutpaceOblivion,
     _poolOverprotect,
@@ -662,6 +667,7 @@ const shard: CardShard = {
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPropellerPioneer,
+    _poolPterafractyl,
     _poolPurpleCrystalCrab,
     _poolRakdosPatronOfChaos,
     _poolRavnicaAtWar,

@@ -186,6 +186,7 @@ import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
+import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
@@ -262,6 +263,7 @@ import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
+import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
@@ -329,6 +331,7 @@ import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
+import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
 import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
@@ -360,6 +363,7 @@ import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
 import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
+import _poolWildHypothesis from "../pool/wild-hypothesis.js";
 import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
@@ -560,6 +564,7 @@ const shard: CardShard = {
     _poolMaraleafPixie,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
+    _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,
     _poolMemorialToGlory,
@@ -636,6 +641,7 @@ const shard: CardShard = {
     _poolScaldingTarn,
     _poolScarbladesMalice,
     _poolScattershot,
+    _poolScoldingAdministrator,
     _poolScreamingPhantom,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
@@ -703,6 +709,7 @@ const shard: CardShard = {
     _poolTurbulentShore,
     _poolTwiceTheRage,
     _poolTwilightPanther,
+    _poolUlnaAlleyShopkeep,
     _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
     _poolUnexpectedWindfall,
@@ -734,6 +741,7 @@ const shard: CardShard = {
     _poolWestvaleAbbey,
     _poolWhirlwingStormbrood,
     _poolWhitemaneLion,
+    _poolWildHypothesis,
     _poolWildgrowthArchaic,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,

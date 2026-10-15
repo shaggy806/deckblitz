@@ -460,6 +460,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(slinger.complete).toBe(true);
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    // Increment (rule 702.191a): the helper's cast trigger and intervening-if.
+    const incremented = face(
+      "Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)",
+    );
+    expect(incremented.complete).toBe(true);
+    expect(incremented.triggered[0].condition).toEqual({ kind: "increment" });
     const fab = face("Fabricate 2").triggered[0];
     // The choice only while it's still there; gone, the Servos (rule 702.123a's ruling).
     expect(fab.effect.condition).toEqual({ kind: "source-on-battlefield" });

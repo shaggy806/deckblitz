@@ -19,6 +19,7 @@ import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
+import _poolArtisticProcess from "../pool/artistic-process.js";
 import _poolAsphodelWanderer from "../pool/asphodel-wanderer.js";
 import _poolAssaultGriffin from "../pool/assault-griffin.js";
 import _poolAstrologiansPlanisphere from "../pool/astrologians-planisphere.js";
@@ -148,6 +149,7 @@ import _poolHengeGuardian from "../pool/henge-guardian.js";
 import _poolHeraldOfTheHost from "../pool/herald-of-the-host.js";
 import _poolHighAlert from "../pool/high-alert.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
+import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
@@ -414,6 +416,7 @@ const shard: CardShard = {
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
     _poolArcaneFlight,
+    _poolArtisticProcess,
     _poolAsphodelWanderer,
     _poolAssaultGriffin,
     _poolAstrologiansPlanisphere,
@@ -543,6 +546,7 @@ const shard: CardShard = {
     _poolHeraldOfTheHost,
     _poolHighAlert,
     _poolHobblefiend,
+    _poolHomesickness,
     _poolHonedKhopesh,
     _poolHoodedKavu,
     _poolHornOfRamos,

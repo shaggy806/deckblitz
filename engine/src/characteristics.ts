@@ -549,6 +549,18 @@ function evalStaticCondition(
       }
       return false;
     }
+    case "increment": {
+      const id = opts.triggerObject;
+      if (id === undefined || source.zone !== "battlefield") return false;
+      if (opts.sourceTimestamp !== undefined && source.timestamp !== opts.sourceTimestamp) return false;
+      const spell = state.objects[id];
+      if (spell === undefined) return false;
+      const stint = opts.triggerSpellStint;
+      const onStack = spell.zone === "stack" && (stint === undefined || (spell.zoneChangeCount ?? 0) === stint);
+      const spent = onStack ? (spell.manaSpent ?? 0) : (spell.lastStackManaSpent ?? 0);
+      const self = computeCharacteristics(state, registry, source.id);
+      return self.types.includes("creature") && (spent > self.power || spent > self.toughness);
+    }
     case "monarch":
       return condition.who === "you"
         ? state.monarch === you

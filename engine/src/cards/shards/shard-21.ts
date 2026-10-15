@@ -85,6 +85,7 @@ import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
+import _poolEfflorescence from "../pool/efflorescence.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
@@ -218,6 +219,7 @@ import _poolOrzhovSignet from "../pool/orzhov-signet.js";
 import _poolOsseousExhale from "../pool/osseous-exhale.js";
 import _poolOvalchaseDragster from "../pool/ovalchase-dragster.js";
 import _poolOverwriteTheMultiverse from "../pool/overwrite-the-multiverse.js";
+import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
@@ -231,6 +233,7 @@ import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
+import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
@@ -443,6 +446,7 @@ const shard: CardShard = {
     _poolDwarvenCastleGuard,
     _poolEarthsMightiestHeroes,
     _poolEclipsedFlamekin,
+    _poolEfflorescence,
     _poolElanorGardner,
     _poolElvenFarsight,
     _poolElvishDoomsayer,
@@ -576,6 +580,7 @@ const shard: CardShard = {
     _poolOsseousExhale,
     _poolOvalchaseDragster,
     _poolOverwriteTheMultiverse,
+    _poolParadoxSurveyor,
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPathOfAngersFlame,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolPiperWrightPublickReporter,
     _poolPotionOfHealing,
     _poolPrimalWellspring,
+    _poolProctorsGaze,
     _poolPromisingVein,
     _poolPyreHound,
     _poolRainOfRevelation,

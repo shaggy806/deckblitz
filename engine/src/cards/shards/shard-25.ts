@@ -252,6 +252,7 @@ import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
+import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
@@ -321,6 +322,7 @@ import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
+import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
@@ -634,6 +636,7 @@ const shard: CardShard = {
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
     _poolReflectionsOfLittjara,
+    _poolRehearsedDebater,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
     _poolReverentHoplite,
@@ -703,6 +706,7 @@ const shard: CardShard = {
     _poolTatteredDrake,
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
+    _poolTextbookTabulator,
     _poolThatsMine,
     _poolTheLegendOfRoku,
     _poolThopterSpyNetwork,

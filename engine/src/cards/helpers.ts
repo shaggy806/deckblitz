@@ -958,6 +958,24 @@ export const evolve = (): TriggeredAbility => {
 };
 
 /**
+ * Increment (rule 702.191a): "Whenever you cast a spell, if this permanent is
+ * a creature and the amount of mana spent to cast that spell is greater than
+ * this creature's power or this creature's toughness, put a +1/+1 counter on
+ * this creature." An intervening-if (the `increment` condition), asked as the
+ * spell is cast and again as the ability resolves. Each instance triggers
+ * separately (702.191b).
+ */
+export const increment = (): TriggeredAbility => ({
+  trigger: { on: "cast-spell", who: "you" },
+  condition: { kind: "increment" },
+  targets: [],
+  effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+  resolve: null,
+  text:
+    "Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)",
+});
+
+/**
  * The Enduring cycle's (Duskmourn) "When [name] dies, if it was a creature,
  * return it to the battlefield under its owner's control. It's an
  * enchantment. (It's not a creature.)" "If it was a creature" is an

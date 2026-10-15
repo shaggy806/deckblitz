@@ -40,6 +40,7 @@ import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
+import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
 import _poolCalamityOfCinders from "../pool/calamity-of-cinders.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
@@ -78,6 +79,7 @@ import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
+import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
@@ -311,6 +313,7 @@ import _poolStoneforgeMystic from "../pool/stoneforge-mystic.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
+import _poolStressDream from "../pool/stress-dream.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
@@ -438,6 +441,7 @@ const shard: CardShard = {
     _poolBroodcallerScourge,
     _poolBuriedRuin,
     _poolBurntOffering,
+    _poolBurrogBarrage,
     _poolCaesarLegionsEmperor,
     _poolCalamityOfCinders,
     _poolCanalMonitor,
@@ -476,6 +480,7 @@ const shard: CardShard = {
     _poolDeathbloomGardener,
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
+    _poolDelugeVirtuoso,
     _poolDireWolfProwler,
     _poolDispellersCapsule,
     _poolDisplace,
@@ -709,6 +714,7 @@ const shard: CardShard = {
     _poolStormcatchMentor,
     _poolStranglingSpores,
     _poolStrategicIntervention,
+    _poolStressDream,
     _poolStrongholdZeppelin,
     _poolSuChi,
     _poolSummonFatChocobo,

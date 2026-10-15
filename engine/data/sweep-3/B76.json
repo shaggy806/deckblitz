@@ -1,0 +1,768 @@
+{
+ "batch": "B76",
+ "status": "complete",
+ "ranks": "Secrets of Strixhaven (SOS, 2026-04-24): the rest of the set; increment built, with Pensive Professor, Topiary Lecturer and Berta, Wise Extrapolator from earlier batches",
+ "authored": [
+  {
+   "name": "Aberrant Manawurm",
+   "files": [
+    "engine/src/cards/pool/aberrant-manawurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Additive Evolution",
+   "files": [
+    "engine/src/cards/pool/additive-evolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani's Response",
+   "files": [
+    "engine/src/cards/pool/ajanis-response.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Antiquities on the Loose",
+   "files": [
+    "engine/src/cards/pool/antiquities-on-the-loose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Omens",
+   "files": [
+    "engine/src/cards/pool/arcane-omens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artistic Process",
+   "files": [
+    "engine/src/cards/pool/artistic-process.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ascendant Dustspeaker",
+   "files": [
+    "engine/src/cards/pool/ascendant-dustspeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Berta, Wise Extrapolator",
+   "files": [
+    "engine/src/cards/pool/berta-wise-extrapolator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burrog Barrage",
+   "files": [
+    "engine/src/cards/pool/burrog-barrage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Campus Composer // Aqueous Aria",
+   "files": [
+    "engine/src/cards/pool/campus-composer.ts",
+    "engine/src/cards/pool/aqueous-aria.ts",
+    "engine/src/cards/tokens/elemental-token-3-3-blue-red-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charging Strifeknight",
+   "files": [
+    "engine/src/cards/pool/charging-strifeknight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chelonian Tackle",
+   "files": [
+    "engine/src/cards/pool/chelonian-tackle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conciliator's Duelist",
+   "files": [
+    "engine/src/cards/pool/conciliators-duelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cuboid Colony",
+   "files": [
+    "engine/src/cards/pool/cuboid-colony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deluge Virtuoso",
+   "files": [
+    "engine/src/cards/pool/deluge-virtuoso.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dig Site Inventory",
+   "files": [
+    "engine/src/cards/pool/dig-site-inventory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dissection Practice",
+   "files": [
+    "engine/src/cards/pool/dissection-practice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duel Tactics",
+   "files": [
+    "engine/src/cards/pool/duel-tactics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Efflorescence",
+   "files": [
+    "engine/src/cards/pool/efflorescence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elemental Mascot",
+   "files": [
+    "engine/src/cards/pool/elemental-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Encouraging Aviator // Jump",
+   "files": [
+    "engine/src/cards/pool/encouraging-aviator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expressive Firedancer",
+   "files": [
+    "engine/src/cards/pool/expressive-firedancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Follow the Lumarets",
+   "files": [
+    "engine/src/cards/pool/follow-the-lumarets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foolish Fate",
+   "files": [
+    "engine/src/cards/pool/foolish-fate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forum Necroscribe",
+   "files": [
+    "engine/src/cards/pool/forum-necroscribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fractal Anomaly",
+   "files": [
+    "engine/src/cards/pool/fractal-anomaly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fractal Mascot",
+   "files": [
+    "engine/src/cards/pool/fractal-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fractalize",
+   "files": [
+    "engine/src/cards/pool/fractalize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garrison Excavator",
+   "files": [
+    "engine/src/cards/pool/garrison-excavator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harsh Annotation",
+   "files": [
+    "engine/src/cards/pool/harsh-annotation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heated Argument",
+   "files": [
+    "engine/src/cards/pool/heated-argument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Homesickness",
+   "files": [
+    "engine/src/cards/pool/homesickness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hungry Graffalon",
+   "files": [
+    "engine/src/cards/pool/hungry-graffalon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infirmary Healer // Stream of Life",
+   "files": [
+    "engine/src/cards/pool/infirmary-healer.ts",
+    "engine/src/cards/pool/stream-of-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inkling Mascot",
+   "files": [
+    "engine/src/cards/pool/inkling-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inkshape Demonstrator",
+   "files": [
+    "engine/src/cards/pool/inkshape-demonstrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Killian's Confidence",
+   "files": [
+    "engine/src/cards/pool/killians-confidence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirol, History Buff // Pack a Punch",
+   "files": [
+    "engine/src/cards/pool/kirol-history-buff.ts",
+    "engine/src/cards/pool/pack-a-punch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lecturing Scornmage",
+   "files": [
+    "engine/src/cards/pool/lecturing-scornmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living History",
+   "files": [
+    "engine/src/cards/pool/living-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lumaret's Favor",
+   "files": [
+    "engine/src/cards/pool/lumarets-favor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mage Tower Referee",
+   "files": [
+    "engine/src/cards/pool/mage-tower-referee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmablood Archaic",
+   "files": [
+    "engine/src/cards/pool/magmablood-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Matterbending Mage",
+   "files": [
+    "engine/src/cards/pool/matterbending-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Melancholic Poet",
+   "files": [
+    "engine/src/cards/pool/melancholic-poet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Roots",
+   "files": [
+    "engine/src/cards/pool/mind-roots.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Note",
+   "files": [
+    "engine/src/cards/pool/molten-note.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muse's Encouragement",
+   "files": [
+    "engine/src/cards/pool/muses-encouragement.ts",
+    "engine/src/cards/tokens/elemental-token-3-3-blue-red-flying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old-Growth Educator",
+   "files": [
+    "engine/src/cards/pool/old-growth-educator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orysa, Tide Choreographer",
+   "files": [
+    "engine/src/cards/pool/orysa-tide-choreographer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Owlin Historian",
+   "files": [
+    "engine/src/cards/pool/owlin-historian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Page, Loose Leaf",
+   "files": [
+    "engine/src/cards/pool/page-loose-leaf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paradox Surveyor",
+   "files": [
+    "engine/src/cards/pool/paradox-surveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pensive Professor",
+   "files": [
+    "engine/src/cards/pool/pensive-professor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pestbrood Sloth",
+   "files": [
+    "engine/src/cards/pool/pestbrood-sloth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pigment Wrangler // Striking Palette",
+   "files": [
+    "engine/src/cards/pool/pigment-wrangler.ts",
+    "engine/src/cards/pool/striking-palette.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poisoner's Apprentice",
+   "files": [
+    "engine/src/cards/pool/poisoners-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Postmortem Professor",
+   "files": [
+    "engine/src/cards/pool/postmortem-professor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Proctor's Gaze",
+   "files": [
+    "engine/src/cards/pool/proctors-gaze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pterafractyl",
+   "files": [
+    "engine/src/cards/pool/pterafractyl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rancorous Archaic",
+   "files": [
+    "engine/src/cards/pool/rancorous-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rapier Wit",
+   "files": [
+    "engine/src/cards/pool/rapier-wit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rehearsed Debater",
+   "files": [
+    "engine/src/cards/pool/rehearsed-debater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Render Speechless",
+   "files": [
+    "engine/src/cards/pool/render-speechless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scathing Shadelock // Venomous Words",
+   "files": [
+    "engine/src/cards/pool/scathing-shadelock.ts",
+    "engine/src/cards/pool/venomous-words.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scolding Administrator",
+   "files": [
+    "engine/src/cards/pool/scolding-administrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snarl Song",
+   "files": [
+    "engine/src/cards/pool/snarl-song.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snooping Page",
+   "files": [
+    "engine/src/cards/pool/snooping-page.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Social Snub",
+   "files": [
+    "engine/src/cards/pool/social-snub.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectacular Skywhale",
+   "files": [
+    "engine/src/cards/pool/spectacular-skywhale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit Mascot",
+   "files": [
+    "engine/src/cards/pool/spirit-mascot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiritcall Enthusiast // Scrollboost",
+   "files": [
+    "engine/src/cards/pool/spiritcall-enthusiast.ts",
+    "engine/src/cards/pool/scrollboost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stadium Tidalmage",
+   "files": [
+    "engine/src/cards/pool/stadium-tidalmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Startled Relic Sloth",
+   "files": [
+    "engine/src/cards/pool/startled-relic-sloth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stirring Honormancer",
+   "files": [
+    "engine/src/cards/pool/stirring-honormancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stress Dream",
+   "files": [
+    "engine/src/cards/pool/stress-dream.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strife Scholar // Awaken the Ages",
+   "files": [
+    "engine/src/cards/pool/strife-scholar.ts",
+    "engine/src/cards/pool/awaken-the-ages.ts",
+    "engine/src/cards/tokens/spirit-token-red-white-2-2.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summoned Dromedary",
+   "files": [
+    "engine/src/cards/pool/summoned-dromedary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sundering Archaic",
+   "files": [
+    "engine/src/cards/pool/sundering-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tackle Artist",
+   "files": [
+    "engine/src/cards/pool/tackle-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenured Concocter",
+   "files": [
+    "engine/src/cards/pool/tenured-concocter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Textbook Tabulator",
+   "files": [
+    "engine/src/cards/pool/textbook-tabulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thornfist Striker",
+   "files": [
+    "engine/src/cards/pool/thornfist-striker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Together as One",
+   "files": [
+    "engine/src/cards/pool/together-as-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Topiary Lecturer",
+   "files": [
+    "engine/src/cards/pool/topiary-lecturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tragedy Feaster",
+   "files": [
+    "engine/src/cards/pool/tragedy-feaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transcendent Archaic",
+   "files": [
+    "engine/src/cards/pool/transcendent-archaic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ulna Alley Shopkeep",
+   "files": [
+    "engine/src/cards/pool/ulna-alley-shopkeep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vibrant Outburst",
+   "files": [
+    "engine/src/cards/pool/vibrant-outburst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visionary's Dance",
+   "files": [
+    "engine/src/cards/pool/visionarys-dance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Hypothesis",
+   "files": [
+    "engine/src/cards/pool/wild-hypothesis.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Ambitious Augmenter",
+   "needs": [
+    "effect:put-counters-of-created"
+   ],
+   "why": "The dies trigger puts the creature's counters (every kind, as it last existed) on the Fractal token it just created: put-counters-of can't name a created token. Increment is built."
+  },
+  {
+   "name": "Archaic's Agony",
+   "needs": [
+    "effect:excess-damage-amount"
+   ],
+   "why": "'Exile cards from the top of your library equal to the excess damage dealt to that creature this way' needs an amount for the excess damage a damage effect dealt (rule 120.4a); the converge damage and impulse-exile parts exist."
+  },
+  {
+   "name": "Biblioplex Tomekeeper",
+   "needs": [
+    "effect:become-unprepared"
+   ],
+   "why": "The second mode, 'Target creature becomes unprepared', has no effect (only `become-prepared` exists)."
+  },
+  {
+   "name": "Colossus of the Blood Age",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "The dies trigger's \"discard any number of cards, then draw that many cards plus one\" needs a discard-any-number choice (a real discard, counted for the draw); look-and-choose from hand has no discard destination."
+  },
+  {
+   "name": "End of the Hunt",
+   "needs": [
+    "effect:each-opponent-exiles-choice"
+   ],
+   "why": "The target opponent chooses which of their tied greatest-mana-value creatures/planeswalkers to exile (the ruling); only `sacrifice` is a victim's-choice edict, and choose-permanents is always the effect controller's choice."
+  },
+  {
+   "name": "Ennis, Debate Moderator",
+   "needs": [
+    "stat:cards-exiled-this-turn"
+   ],
+   "why": "\"If one or more cards were put into exile this turn\" counts cards put into exile from any zone by anyone (not tokens or prepare-spell copies, per the ruling); the only exile tally is turn-history `exiled`, which records permanents exiled from the battlefield under one player's control. The enters flicker itself is S.H.I.E.L.D. Flying Car's shape with an `other` optional target."
+  },
+  {
+   "name": "Fractal Tender",
+   "needs": [
+    "condition:counters-put-by-you-this-turn"
+   ],
+   "why": "'If you put a counter on this creature this turn': nothing records the counters a player put on a permanent this turn. Increment is built."
+  },
+  {
+   "name": "Group Project",
+   "needs": [
+    "cost:flashback-tap-creatures-cost"
+   ],
+   "why": "'Flashback—Tap three untapped creatures you control' needs a non-mana tap-creatures flashback cost; `flashback` only takes a mana cost, payLife, sacrifice or behold."
+  },
+  {
+   "name": "Impractical Joke",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "\"Damage can't be prevented this turn\" — no effect turns off prevention (prevent-damage shields, Fog, protection) for the rest of the turn; the 3 damage half alone would drop a clause."
+  },
+  {
+   "name": "Nita, Forum Conciliator",
+   "needs": [
+    "zone:impulse-exile-instead"
+   ],
+   "why": "The `exile` effect's `mayCast` (end-of-turn, spendAs any type) covers the exile-and-cast-this-turn part, but nothing can say 'If that spell would be put into a graveyard, exile it instead' for a spell cast under that permission."
+  },
+  {
+   "name": "Practiced Scrollsmith",
+   "needs": [
+    "zone:exile-target-play-until-next-turn"
+   ],
+   "why": "\"Until the end of your next turn, you may cast that card\" for a card exiled from the graveyard by target: exile's mayCast has only end-of-turn and while-exiled durations (allow-cast-from-exile is this turn only)."
+  },
+  {
+   "name": "Run Behind",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target creature's owner puts it on their choice of the top or bottom of their library\": the only way to hand the top/bottom choice to another player is each-player-may's `choices` with `who: { controllerOfTarget }`, which asks the controller, not the owner (wrong for a stolen creature); no PlayerScope names a target's owner. The cost reduction (targetCostReduction attacking) is fine."
+  },
+  {
+   "name": "Soaring Stoneglider",
+   "needs": [
+    "cost:exile-from-graveyard-additional"
+   ],
+   "why": "'Exile two cards from your graveyard or pay {1}{W}' needs an exile-from-graveyard branch in AdditionalCostOption (it has sacrifice/discard/payLife/mana/blight/behold only; exileFromGraveyard exists only on ability costs)."
+  },
+  {
+   "name": "Suspend Aggression",
+   "needs": [
+    "zone:exile-owner-may-play"
+   ],
+   "why": "The targeted nonland permanent's owner (often an opponent) may play it until the end of THEIR next turn: exile's mayCast is the effect controller's only, cast-only, and end-of-turn/while-exiled; the library half alone would be impulse-exile duration your-next-turn."
+  },
+  {
+   "name": "Tester of the Tangential",
+   "needs": [
+    "effect:move-counter"
+   ],
+   "why": "'You may pay {X}. When you do, move X +1/+1 counters': move-counters has no X amount and no pay-X reflexive shape. Increment is built."
+  },
+  {
+   "name": "Wilt in the Heat",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "'If that creature would die this turn, exile it instead' needs a turn-long dies-only exile replacement on the targeted creature (exileIfItWouldLeave catches every leave, not just dying); the cost reduction is expressible (selfCostReduction on turn-stat cards-left-graveyard)."
+  }
+ ]
+}

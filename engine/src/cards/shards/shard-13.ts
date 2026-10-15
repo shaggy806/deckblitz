@@ -13,6 +13,7 @@ import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
 import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
 import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
+import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
 import _poolAltarsLight from "../pool/altars-light.js";
@@ -134,6 +135,7 @@ import _poolFlyingCarpet from "../pool/flying-carpet.js";
 import _poolFogOfGnats from "../pool/fog-of-gnats.js";
 import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
+import _poolFractalMascot from "../pool/fractal-mascot.js";
 import _poolFrodoAdventurousHobbit from "../pool/frodo-adventurous-hobbit.js";
 import _poolFrostboilSnarl from "../pool/frostboil-snarl.js";
 import _poolFrostbridgeGuard from "../pool/frostbridge-guard.js";
@@ -144,6 +146,7 @@ import _poolFurnaceWhelp from "../pool/furnace-whelp.js";
 import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
+import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatheringPlace from "../pool/gathering-place.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
@@ -344,9 +347,11 @@ import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
+import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
 import _poolToothOfChissGoria from "../pool/tooth-of-chiss-goria.js";
 import _poolTouchstone from "../pool/touchstone.js";
+import _poolTragedyFeaster from "../pool/tragedy-feaster.js";
 import _poolTrailblazer from "../pool/trailblazer.js";
 import _poolTriumphOfTheHordes from "../pool/triumph-of-the-hordes.js";
 import _poolTrollHornCameo from "../pool/troll-horn-cameo.js";
@@ -361,6 +366,7 @@ import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
+import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
@@ -412,6 +418,7 @@ const shard: CardShard = {
     _poolAgentOfHorizons,
     _poolAgentOfKotis,
     _poolAjaniUnrelenting,
+    _poolAjanisResponse,
     _poolAkroanMastiff,
     _poolAlandraSkyDreamer,
     _poolAltarsLight,
@@ -533,6 +540,7 @@ const shard: CardShard = {
     _poolFogOfGnats,
     _poolFoulImp,
     _poolFountainOfYouth,
+    _poolFractalMascot,
     _poolFrodoAdventurousHobbit,
     _poolFrostboilSnarl,
     _poolFrostbridgeGuard,
@@ -543,6 +551,7 @@ const shard: CardShard = {
     _poolFyndhornBrownie,
     _poolGalewindMoose,
     _poolGarnaBloodfistOfKeld,
+    _poolGarrisonExcavator,
     _poolGatheringPlace,
     _poolGiantsBoulder,
     _poolGiftOfParadise,
@@ -743,9 +752,11 @@ const shard: CardShard = {
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolTitanothRex,
+    _poolTogetherAsOne,
     _poolTomeOfLegends,
     _poolToothOfChissGoria,
     _poolTouchstone,
+    _poolTragedyFeaster,
     _poolTrailblazer,
     _poolTriumphOfTheHordes,
     _poolTrollHornCameo,
@@ -760,6 +771,7 @@ const shard: CardShard = {
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,
+    _poolVibrantOutburst,
     _poolVictorTimelyWilyTycoon,
     _poolVillainousWrath,
     _poolVivVisionTeenSynthezoid,

@@ -46,6 +46,7 @@ import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
+import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
 import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
@@ -92,6 +93,7 @@ import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
+import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
@@ -149,6 +151,7 @@ import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
 import _poolImprovisedWeaponry from "../pool/improvised-weaponry.js";
 import _poolInfectiousBite from "../pool/infectious-bite.js";
+import _poolInklingMascot from "../pool/inkling-mascot.js";
 import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
 import _poolInspiringCleric from "../pool/inspiring-cleric.js";
 import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
@@ -217,6 +220,7 @@ import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPortTown from "../pool/port-town.js";
+import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
@@ -334,6 +338,7 @@ import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
+import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
 import _poolViashinoWarrior from "../pool/viashino-warrior.js";
 import _poolVincentValentine from "../pool/vincent-valentine.js";
@@ -366,6 +371,7 @@ import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
 import _tokensRobotToken from "../tokens/robot-token.js";
+import _tokensSpiritTokenRedWhite22 from "../tokens/spirit-token-red-white-2-2.js";
 import _tokensVampireRogueToken from "../tokens/vampire-rogue-token.js";
 import _tokensZombieToken from "../tokens/zombie-token.js";
 
@@ -414,6 +420,7 @@ const shard: CardShard = {
     _poolByrkeLongEarOfTheLaw,
     _poolCactusPreserve,
     _poolCallToTheFeast,
+    _poolCampusComposer,
     _poolCanyonJerboa,
     _poolCathedralAcolyte,
     _poolCathedralOfWar,
@@ -460,6 +467,7 @@ const shard: CardShard = {
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
     _poolExploration,
+    _poolExpressiveFiredancer,
     _poolFblthpImpossiblyLost,
     _poolFertilid,
     _poolFetidPools,
@@ -517,6 +525,7 @@ const shard: CardShard = {
     _poolImpetuousSunchaser,
     _poolImprovisedWeaponry,
     _poolInfectiousBite,
+    _poolInklingMascot,
     _poolInspiredTinkering,
     _poolInspiringCleric,
     _poolInspiringUnicorn,
@@ -585,6 +594,7 @@ const shard: CardShard = {
     _poolPillarOfTheParuns,
     _poolPixieQueen,
     _poolPortTown,
+    _poolPostmortemProfessor,
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
@@ -702,6 +712,7 @@ const shard: CardShard = {
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
     _poolVedalkenMesmerist,
+    _poolVenomousWords,
     _poolViashinoSlasher,
     _poolViashinoWarrior,
     _poolVincentValentine,
@@ -736,6 +747,7 @@ const shard: CardShard = {
     _tokensPegasusToken,
     _tokensRebelToken,
     _tokensRobotToken,
+    _tokensSpiritTokenRedWhite22,
     _tokensVampireRogueToken,
     _tokensZombieToken,
   ],

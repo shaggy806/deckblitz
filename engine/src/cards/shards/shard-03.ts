@@ -282,6 +282,7 @@ import _poolSpectralSailor from "../pool/spectral-sailor.js";
 import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
+import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolSteamVents from "../pool/steam-vents.js";
@@ -295,6 +296,7 @@ import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
+import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
@@ -652,6 +654,7 @@ const shard: CardShard = {
     _poolSpellSnip,
     _poolSpiderManNoir,
     _poolSpikedCorridor,
+    _poolSpiritMascot,
     _poolSplendidReclamation,
     _poolStarlitAngel,
     _poolSteamVents,
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
     _poolSulfurVent,
+    _poolSunderingArchaic,
     _poolSunspireGriffin,
     _poolSupplyLineCranes,
     _poolSurveillanceRoom,

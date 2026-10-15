@@ -61,6 +61,7 @@ import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
+import _poolChelonianTackle from "../pool/chelonian-tackle.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
@@ -350,9 +351,11 @@ import _poolTeeteringPeaks from "../pool/teetering-peaks.js";
 import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
 import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
+import _poolTenuredConcocter from "../pool/tenured-concocter.js";
 import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
+import _poolThornfistStriker from "../pool/thornfist-striker.js";
 import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
@@ -477,6 +480,7 @@ const shard: CardShard = {
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
     _poolCatharCommando,
+    _poolChelonianTackle,
     _poolChronomancer,
     _poolCloakOfTheBat,
     _poolClownCar,
@@ -766,9 +770,11 @@ const shard: CardShard = {
     _poolTegwyllDukeOfSplendor,
     _poolTemmetNaktamunsWill,
     _poolTemurDevotee,
+    _poolTenuredConcocter,
     _poolThaliasLancers,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
+    _poolThornfistStriker,
     _poolThroneOfGeth,
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,

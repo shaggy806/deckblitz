@@ -28,6 +28,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Secrets of Strixhaven, whole, and increment** (batch 76): 91 cards — the set's 88 and three
+  earlier increment cards (Pensive Professor, Topiary Lecturer, Berta, Wise Extrapolator) — with
+  increment built (rule 702.191, `increment()`, the scaffolder reads it) and the colours spent on
+  a spell countered in response kept for its cast triggers (Magmablood Archaic) (2026-10-15).
 - **Marvel Super Heroes and Secrets of Strixhaven Commander, both whole** (batch 75): 58 cards,
   with a trigger-object condition's mana value read from a countered spell's time on the stack
   (Prismari Pianist) and Vault Guardsman's missing return fixed, behind a pool-wide guard

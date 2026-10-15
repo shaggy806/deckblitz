@@ -23,6 +23,7 @@ import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
+import _poolAscendantDustspeaker from "../pool/ascendant-dustspeaker.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
@@ -207,6 +208,7 @@ import _poolLokiLordOfMisrule from "../pool/loki-lord-of-misrule.js";
 import _poolLordOfAtlantis from "../pool/lord-of-atlantis.js";
 import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
+import _poolLumaretsFavor from "../pool/lumarets-favor.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
@@ -349,6 +351,7 @@ import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
+import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
@@ -419,6 +422,7 @@ const shard: CardShard = {
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
+    _poolAscendantDustspeaker,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
     _poolAudaciousThief,
@@ -603,6 +607,7 @@ const shard: CardShard = {
     _poolLordOfAtlantis,
     _poolLoreholdArchivist,
     _poolLoyalGuardian,
+    _poolLumaretsFavor,
     _poolLumraBellowOfTheWoods,
     _poolLyseHext,
     _poolMadameNullPowerBroker,
@@ -745,6 +750,7 @@ const shard: CardShard = {
     _poolTitanOfLittjara,
     _poolTithebearerGiant,
     _poolTomeRaider,
+    _poolTopiaryLecturer,
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
     _poolTrystansCommand,

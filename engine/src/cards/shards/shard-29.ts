@@ -92,6 +92,7 @@ import _poolDronepackKindred from "../pool/dronepack-kindred.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
+import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
@@ -164,6 +165,7 @@ import _poolIdolized from "../pool/idolized.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
+import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
@@ -214,10 +216,12 @@ import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
+import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPatientInstructor from "../pool/patient-instructor.js";
+import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
@@ -280,6 +284,7 @@ import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
 import _poolSmother from "../pool/smother.js";
 import _poolSnap from "../pool/snap.js";
 import _poolSneakAttack from "../pool/sneak-attack.js";
+import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
@@ -468,6 +473,7 @@ const shard: CardShard = {
     _poolDrownyardExplorers,
     _poolDwarvenBloodboiler,
     _poolEchoInspector,
+    _poolElementalMascot,
     _poolEleshNornMotherOfMachines,
     _poolElvenFortress,
     _poolElvishPromenade,
@@ -540,6 +546,7 @@ const shard: CardShard = {
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
+    _poolInfirmaryHealer,
     _poolIngeniousArtillerist,
     _poolInspiredFire,
     _poolInundatedArchive,
@@ -590,10 +597,12 @@ const shard: CardShard = {
     _poolOnyxMage,
     _poolOrcishMedicine,
     _poolOtharriSunsGlory,
+    _poolOwlinHistorian,
     _poolPain101,
     _poolParhelionIi,
     _poolPathOfAnnihilation,
     _poolPatientInstructor,
+    _poolPestbroodSloth,
     _poolPetAvengers,
     _poolPhalanxVanguard,
     _poolPlatedSlagwurm,
@@ -656,6 +665,7 @@ const shard: CardShard = {
     _poolSmother,
     _poolSnap,
     _poolSneakAttack,
+    _poolSnoopingPage,
     _poolSnortingGahr,
     _poolSolarTransformer,
     _poolSonicScrewdriver,

@@ -117,6 +117,7 @@ import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
+import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
@@ -144,6 +145,7 @@ import _poolHiredPoisoner from "../pool/hired-poisoner.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
+import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
@@ -194,6 +196,7 @@ import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
 import _poolMindControl from "../pool/mind-control.js";
+import _poolMindRoots from "../pool/mind-roots.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
@@ -249,6 +252,7 @@ import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
+import _poolRapierWit from "../pool/rapier-wit.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
@@ -512,6 +516,7 @@ const shard: CardShard = {
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
     _poolFlubsTheFool,
+    _poolFollowTheLumarets,
     _poolFriendlyTeddy,
     _poolFusionElemental,
     _poolGallantCavalry,
@@ -539,6 +544,7 @@ const shard: CardShard = {
     _poolHordewingSkaab,
     _poolHorizonCanopy,
     _poolHulkBrutalBrawler,
+    _poolHungryGraffalon,
     _poolHyperionsAtomicVision,
     _poolImpeccableTiming,
     _poolImpossibleMan,
@@ -589,6 +595,7 @@ const shard: CardShard = {
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
     _poolMindControl,
+    _poolMindRoots,
     _poolMinecartDaredevil,
     _poolMirrorworks,
     _poolMistfireAdept,
@@ -644,6 +651,7 @@ const shard: CardShard = {
     _poolRakdosRagemutt,
     _poolRamunapExcavator,
     _poolRapaciousGuest,
+    _poolRapierWit,
     _poolRazortideBridge,
     _poolRazortrapGorge,
     _poolRazorvergeThicket,

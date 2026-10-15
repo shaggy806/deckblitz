@@ -15,6 +15,7 @@ import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
 import _poolAngelicBlessing from "../pool/angelic-blessing.js";
 import _poolAnglerDrake from "../pool/angler-drake.js";
+import _poolAqueousAria from "../pool/aqueous-aria.js";
 import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
@@ -179,6 +180,7 @@ import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
 import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
+import _poolKilliansConfidence from "../pool/killians-confidence.js";
 import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
@@ -239,6 +241,7 @@ import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
+import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
@@ -331,6 +334,7 @@ import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
+import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
 import _poolTruckToss from "../pool/truck-toss.js";
@@ -392,6 +396,7 @@ const shard: CardShard = {
     _poolAncientCopperDragon,
     _poolAngelicBlessing,
     _poolAnglerDrake,
+    _poolAqueousAria,
     _poolArcboundWhelp,
     _poolAresGodOfWar,
     _poolArgivianFind,
@@ -556,6 +561,7 @@ const shard: CardShard = {
     _poolKeeperOfFables,
     _poolKetramoseTheNewDawn,
     _poolKetriaTriome,
+    _poolKilliansConfidence,
     _poolKiloApogeeMind,
     _poolKitchen,
     _poolKyoshiIslandPlaza,
@@ -616,6 +622,7 @@ const shard: CardShard = {
     _poolObscuraInitiate,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
+    _poolPackAPunch,
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPearlOfWisdom,
@@ -708,6 +715,7 @@ const shard: CardShard = {
     _poolTidepoolTurtle,
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
+    _poolTranscendentArchaic,
     _poolTreasonousOgre,
     _poolTreasureCruise,
     _poolTruckToss,

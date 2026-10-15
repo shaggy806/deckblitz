@@ -31,6 +31,7 @@ import {
   dethrone,
   evolve,
   extort,
+  increment,
   flanking,
   godDevotion,
   livingWeapon,
@@ -230,6 +231,7 @@ function keywordPart(part) {
     myriad: () => ({ triggered: [myriad()] }),
     extort: () => ({ triggered: [extort()] }),
     evolve: () => ({ triggered: [evolve()] }),
+    increment: () => ({ triggered: [increment()] }),
     "living weapon": () => ({ triggered: [livingWeapon()] }),
     exalted: () => ({
       triggered: [
