@@ -892,6 +892,63 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  {
+    name: "aims Terror of the Peaks' 7 at a player on 4, not at that player's creature",
+    kind: "training",
+    rule: "Damage that kills a player takes all their creatures with them: aim it at the player, not at one creature they'd lose anyway.",
+    run(weights, registry) {
+      // Reported from a live game (2026-10-14, room NBMGP, no capture): round
+      // eight, Tasigur on 4 life. The bot cast Ureni of the Unwritten, which
+      // put Drakuseth, Maw of Flames in, and Terror of the Peaks' trigger for
+      // Drakuseth dealt 7 to Tasigur's Avenger of Zendikar. Terror then
+      // attacked Tasigur for the last 5. The user: it "could have just killed
+      // the player before to save a blocker" — the 7 at Tasigur ends them
+      // there, Avenger and all, and Terror stays home. Played as it went:
+      // Ureni enters with Drakuseth on top of the library, Ureni's trigger
+      // goes at Dave's Felothar the Steadfast (as it did live, the walls'
+      // commander), Ureni's own trigger puts Drakuseth in, and Drakuseth's
+      // trigger is the question.
+      const game = table(registry, [A, B, C, D], A);
+      onBoard(game, "Terror of the Peaks", A);
+      game.state.players[B].life = 4;
+      game.state.players[C].life = 31;
+      game.state.players[D].life = 23;
+      onBoard(game, "Avenger of Zendikar", B);
+      for (let i = 0; i < 2; i += 1) game.state.objects[onBoard(game, "Plant Token", B)].isToken = true;
+      const felothar = onBoard(game, "Felothar the Steadfast", D);
+      onBoard(game, "Axebane Guardian", D);
+      onBoard(game, "Faeburrow Elder", D);
+      game.debugSpawn("Drakuseth, Maw of Flames", A, "library");
+      game.debugSpawn("Ureni of the Unwritten", A, "battlefield", { announceEntry: true });
+      const bot = new EvalBotController(A, registry, { weights, maxSimulations: 1 });
+      let aimedFirst = false;
+      for (let i = 0; i < 20; i += 1) {
+        game.advanceUntil((s) => s.awaiting !== null || s.result.over);
+        const awaiting = game.state.awaiting;
+        if (awaiting === null || game.state.result.over) break;
+        if (awaiting.kind === "choose-targets" && aimedFirst) break;
+        if (awaiting.kind === "choose-targets") {
+          game.dispatch({ type: "choose-targets", player: A, targets: [{ kind: "object", object: felothar }] });
+          aimedFirst = true;
+        } else {
+          game.dispatch(bot.act(viewOf(game, A)));
+        }
+      }
+      if (game.state.awaiting?.kind !== "choose-targets" || !aimedFirst) {
+        return { passed: false, detail: "Drakuseth's Terror of the Peaks trigger never asked for a target" };
+      }
+      // One simulation, so v1's aim stands: the answer a search cut short by
+      // the live clock keeps, as this one likely was on that board. Searched
+      // in full, the rollout attacks bob for lethal whatever the trigger hits,
+      // so bob dies in every line and the 7 goes at dave's Faeburrow Elder.
+      const action = new EvalBotController(A, registry, { weights, maxSimulations: 1 }).act(viewOf(game, A));
+      const aimed = action.type === "choose-targets" ? action.targets[0] : null;
+      return {
+        passed: aimed?.kind === "player" && aimed.player === B,
+        detail: aimed?.kind === "object" ? `aimed at ${cardOf(game, aimed.object)}` : `chose ${describeAction(action)}`,
+      };
+    },
+  },
   asked({
     name: "puts its counter on its own creature on a wide board",
     rule: "A +1/+1 counter belongs on our creature, however many of theirs are listed first.",

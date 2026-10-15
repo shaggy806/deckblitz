@@ -4,6 +4,39 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-10-14 — Terror of the Peaks' 7 at a creature of a player on 4
+
+Status: open.
+
+- **Seen:** room NBMGP, round eight, four players, no capture. Tasigur was on 4 life. The bot cast
+  Ureni of the Unwritten, whose trigger put Drakuseth, Maw of Flames onto the battlefield.
+  - Terror of the Peaks' trigger for Ureni went at Ghave's Felothar the Steadfast.
+  - Its trigger for Drakuseth dealt 7 to Tasigur's own Avenger of Zendikar.
+  - Terror then attacked Tasigur for the last 5.
+- **Right:** the 7 at Tasigur. It ends them before combat, Avenger and all, and Terror is free to
+  stay home as a blocker (the user: it "could have just killed the player before to save a
+  blocker").
+- **Why:** the answer is v1's aim, the first one v2 scores and what it keeps when its search is
+  cut short. On that board, with the live clock, the search most likely was. `rankTargets`
+  (`target-polarity.ts`) puts every opponent's target the damage "lands" on first: a player, or a
+  creature it kills. Among those it sorts by `targetValue`, so the most valuable creature it kills
+  beats the player, even when the damage is lethal to that player.
+  - Searched in full, Avenger never wins; it ties with the Plant tokens. The rollout attacks
+    Tasigur for lethal whatever the trigger hits, so Tasigur dies in every line. The search then
+    sends the 7 at Ghave's Faeburrow Elder.
+  - That is defensible, but the user's blocker isn't in it: the rollouts end at the next player's
+    untap, so an untapped Terror is worth nothing to them.
+- **Scenario:** "aims Terror of the Peaks' 7 at a player on 4, not at that player's creature"
+  (training). It replays the stack as it went, with one simulation so v1's aim stands, and reads
+  "aimed at bob's Avenger of Zendikar".
+- **Likely fix:** in `rankTargets`, among a harmful damage slot's landing targets, put first an
+  opponent whose life the damage meets. Elimination takes their whole board with them, so no
+  creature of theirs is worth more.
+  - It could misfire on a player who can't lose (Platinum Angel): the check would need
+    `canLoseGame`, or something like it.
+  - It changes nothing in the full search, so the blocker half stays open. Valuing a held blocker
+    needs the rollouts to see the next turn's attacks.
+
 ## 2026-10-14 — Garruk's Uprising before Carnelian Orb of Dragonkind
 
 Status: fixed by 7ab7dcdd (its scenario gates from the start).
