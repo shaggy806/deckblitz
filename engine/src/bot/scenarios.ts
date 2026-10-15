@@ -2387,6 +2387,38 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "casts Carnelian Orb of Dragonkind before Garruk's Uprising, then has mana for both",
+    rule: "A mana rock that pays for itself the turn it lands is cast first when the other spell is still affordable after it: both, not one.",
+    position(registry) {
+      // Reported from a live game (2026-10-14, no capture; the live site
+      // hadn't yet had the day's follow-up change): round four, five lands
+      // untapped, Garruk's Uprising ({2}{G}) and Carnelian Orb of Dragonkind
+      // ({2}{R}, taps for {R}) in hand with two Dragons too big to cast. The
+      // bot cast the Uprising, leaving two mana and no Orb. The Orb first,
+      // paid with the Mountains and the Forest, leaves Bivouac, Thicket and
+      // the Orb itself: {2}{G}, the Uprising as well. Kept as a gate.
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 13; // alice's fourth turn
+      // Out for turns, so untapped: both enter tapped even when spawned.
+      for (const land of ["Forest", "Mountain", "Mountain", "Frontier Bivouac", "Sheltered Thicket"]) {
+        game.state.objects[onBoard(game, land, A)].tapped = false;
+      }
+      game.state.players[A].landsPlayedThisTurn = 1;
+      const orb = game.debugSpawn("Carnelian Orb of Dragonkind", A, "hand");
+      for (const card of ["Garruk's Uprising", "Balefire Dragon", "Utvara Hellkite"]) {
+        game.debugSpawn(card, A, "hand");
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === orb,
+          detail: `chose ${action.type === "cast-spell" ? cardOf(game, action.card) : describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "plays Glacial Fortress tapped on turn one over a Mountain for nothing it would cast",
     rule: "A land letting you cast a spell is of no value if you wouldn't cast the spell with the mana.",
     position(registry) {

@@ -4,6 +4,25 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-10-14 — Garruk's Uprising before Carnelian Orb of Dragonkind
+
+Status: fixed by 7ab7dcdd (its scenario gates from the start).
+
+- **Seen:** the live site, which was still running e947bf60. Round four, four players. The bot had
+  five untapped lands: Forest, two Mountains, Frontier Bivouac and Sheltered Thicket. In hand were
+  Garruk's Uprising ({2}{G}), Carnelian Orb of Dragonkind ({2}{R}, taps for {R}), Balefire Dragon
+  and Utvara Hellkite. It cast the Uprising, which left two mana and no Orb.
+- **Right:** the Orb first, paid with the Mountains and the Forest. Bivouac, Thicket and the Orb
+  then pay {2}{G} for the Uprising, so the bot casts both rather than one.
+- **Why:** the one-move search scored each move with our own seat passing for the rest of the
+  turn. That way the Orb was worth only a rock on the board, while the Uprising was an enchantment
+  worth something by itself, so the Uprising won. 7ab7dcdd's `followUps` also rolls out each move
+  played to resolution, followed by every move it opens up. Measured that way, the Orb is worth
+  the Uprising cast after it.
+- **Scenario:** "casts Carnelian Orb of Dragonkind before Garruk's Uprising, then has mana for
+  both" (gate). It reproduces at e947bf60 ("chose alice's Garruk's Uprising") and passes at
+  a363d84e.
+
 ## 2026-10-12 — Roiling Dragonstorm on turn two over Rampant Growth
 
 Status: fixed 2026-10-12 (its scenario now gates).
