@@ -217,6 +217,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Remove the entrance animation options from the settings panel** (the user, 2026-10-13): the "Card entrance" row (`client/src/ui/MotionControl.tsx`, `castEntrance` in `game/motionPrefs.ts`).
 - **The site should default to slow bots and slow animations** (the user, 2026-10-14): so people getting used to the site aren't overwhelmed by the speed. The defaults behind Settings' bot speed (`client/src/ui/botSpeeds.ts`, the room's `botSpeed`) and animation speed (`client/src/ui/MotionControl.tsx`, `game/motionPrefs.ts`).
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
+- **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs
