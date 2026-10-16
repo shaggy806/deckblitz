@@ -700,6 +700,10 @@ async function main() {
     writeFileSync(jsonOut, JSON.stringify(results, null, 2), "utf8");
     console.log(`wrote ${jsonOut}`);
   }
+  // A card that disagrees with Scryfall is a defect: fail, so `npm run
+  // verify` (which only reads the exit code) stops on it rather than printing
+  // the count under a tick — Desert Warfare's guessed cost got through that way.
+  if (mismatched > 0) process.exitCode = 1;
 }
 
 main();
