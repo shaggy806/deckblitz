@@ -77,10 +77,6 @@ section keeps only what to do next.
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
   Ground and Doc Samson after the additive counters each need more).
-- **Two pool cards to recheck** (found by batch 90's agents): Archfiend of Depravity keeps
-  exactly two creatures per opponent (`sacrifice-all-but`), where "up to two" lets a player keep
-  fewer; Adeline, Resplendent Cathar makes her per-opponent Humans one at a time rather than as one
-  event, which a "one or more tokens enter" trigger would see as several.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`). Balance, Channel,
   Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
   Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
@@ -126,13 +122,11 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
-- **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
 - **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
-- **`canDispatch` passes an activation whose chosen target is illegal** while some legal one exists; `dispatch` refuses it (casts were fixed 2026-10-16).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).
@@ -150,7 +144,6 @@ there and move this line to `COMPLETED.md`.
 - **The rest of leaving the game** (800.4c, 800.4g–h).
 - **Dividing among targets: what's left** — an X total, distributing counters.
 - **A token copy isn't asked its "as this enters" choice.**
-- **`sacrifice-all-but` always keeps the most it may.**
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.
 - **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.

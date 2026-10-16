@@ -399,8 +399,8 @@ describe("Chulane, Teller of Tales", () => {
       const { game, chulane, bears } = board();
       const theirs = game.debugSpawn("Grizzly Bears", B, "battlefield");
 
-      // `canDispatch` doesn't inspect an activated ability's targets at all —
-      // the slot's options come off `legalActions`, and `dispatch` re-checks.
+      // The slot's options come off `legalActions`; `canDispatch` and
+      // `dispatch` both judge the chosen target.
       const offered = game
         .legalActions(A)
         .filter((la) => la.kind === "activate-ability" && la.source === chulane);
@@ -418,6 +418,15 @@ describe("Chulane, Teller of Tales", () => {
           targets: [{ kind: "object", object: theirs }],
         }),
       ).toThrow();
+      expect(
+        game.canDispatch({
+          type: "activate-ability",
+          player: A,
+          source: chulane,
+          abilityIndex: 0,
+          targets: [{ kind: "object", object: theirs }],
+        }),
+      ).not.toBeNull();
       expect(game.state.objects[theirs].zone).toBe("battlefield");
     });
 

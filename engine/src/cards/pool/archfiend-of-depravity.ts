@@ -23,6 +23,7 @@ export default defineCard({
         who: "active-player",
         keep: 2,
         filter: { type: "creature" },
+        upTo: true,
       },
       resolve: null,
       text: "At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.",

@@ -38,6 +38,8 @@ export default defineCard({
       effect: {
         kind: "for-each-player",
         who: "each-opponent",
+        // One event: the Humans enter together.
+        simultaneous: true,
         effect: {
           kind: "create-token",
           token: "Human Token",

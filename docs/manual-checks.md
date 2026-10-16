@@ -4834,3 +4834,17 @@ Ezio gives Assassin spells freerunning and, on combat damage, asks for {W}{U}{B}
   offers the Forest (declining draws a card). Ezio's damage takes Bob to 10 or less and offers the
   {W}{U}{B}{R}{G} payment; paying, Bob loses the game. After combat Boilerbilges Ripper offers a
   freerunning {B}{B} cast. Check at ~768px tall, in a 2- and a 4-player room.
+
+## Live-game rules fixes (2026-10-16)
+
+### Archfiend of Depravity
+
+*New player decision* — "chooses up to two creatures they control, then sacrifices the rest": the
+creatures to keep, from none to two
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, Hill Giant, Serra Angel and Llanowar
+  Elves. Bob has Archfiend of Depravity.
+- **Do:** Pass to your end step.
+- **Check:** You're asked to choose up to 2 to keep, the rest sacrificed, strongest listed first; Confirm
+  works with none, one or two chosen, and exactly the unchosen ones go to your graveyard. Check at
+  ~768px tall, in a 2- and a 4-player room.

@@ -1302,7 +1302,8 @@ export class Room {
 
   /**
    * The engine threw while advancing the game: an engine bug, or a loop it
-   * gave up on (`ADVANCE_BUDGET` — rule 104.4b's draw isn't implemented). A
+   * gave up on (`ADVANCE_BUDGET` — loops it recognises end in a draw, rule
+   * 104.4b, or are stopped, 732.3). A
    * bot's move runs from a timer, where nothing else would catch this and
    * the whole server — every room — would go down with it. Instead this room
    * alone stops: no more moves, the bots' timers cleared, and one last frame

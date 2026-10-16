@@ -1,9 +1,10 @@
 /**
  * Two more phase-E singles:
  *
- * - **`sacrifice-all-but`** — "that player chooses up to two creatures they
- *   control, then sacrifices the rest" (Archfiend of Depravity). The inverse
- *   of `sacrifice`, which names how many to give up rather than keep.
+ * - **`sacrifice-all-but`** — "each player chooses six lands they control,
+ *   then sacrifices the rest" (Planetary Annihilation); with `upTo`, "that
+ *   player chooses up to two creatures" (Archfiend of Depravity), where fewer
+ *   may be kept. The inverse of `sacrifice`, which names how many to give up.
  * - **Flashback with a life cost** — "Flashback—{1}{U}, Pay 3 life" (Deep
  *   Analysis). Part of the cost, so it gates castability and is paid as the
  *   spell is cast.
@@ -37,10 +38,10 @@ const creaturesOf = (game: Game, player: PlayerId) =>
   );
 
 describe("sacrifice-all-but", () => {
-  it("asks the affected player to give up everything past the keep count", () => {
+  it("asks the affected player which to keep, exactly the keep count, and sacrifices the rest", () => {
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A);
-    for (let i = 0; i < 4; i += 1) game.debugSpawn("Grizzly Bears", B, "battlefield");
+    const bears = Array.from({ length: 4 }, () => game.debugSpawn("Grizzly Bears", B, "battlefield"));
 
     game.debugApplyEffect(A, {
       kind: "sacrifice-all-but",
@@ -48,14 +49,35 @@ describe("sacrifice-all-but", () => {
       keep: 2,
       filter: { type: "creature" },
     });
-    game.advanceUntil((s) => s.awaiting?.kind === "sacrifice" || s.result.over);
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-permanents" || s.result.over);
 
     const awaiting = game.state.awaiting;
-    expect(awaiting?.kind).toBe("sacrifice");
-    if (awaiting?.kind !== "sacrifice") return;
-    // Four creatures, keep two — so two are given up, and it's B's choice.
+    expect(awaiting?.kind).toBe("choose-permanents");
+    if (awaiting?.kind !== "choose-permanents") return;
+    // Four creatures, keep two — B's choice, and exactly two.
     expect(awaiting.player).toBe(B);
-    expect(awaiting.count).toBe(2);
+    expect([awaiting.min, awaiting.max]).toEqual([2, 2]);
+    game.dispatch({ type: "choose-permanents", player: B, permanents: [bears[1], bears[3]] });
+    expect(creaturesOf(game, B).sort()).toEqual([bears[1], bears[3]].sort());
+  });
+
+  it("'up to': the player may keep fewer, even with no more than the limit", () => {
+    const game = makeGame();
+    game.advanceUntil((s) => s.priority.holder === A);
+    const bears = Array.from({ length: 2 }, () => game.debugSpawn("Grizzly Bears", B, "battlefield"));
+
+    game.debugApplyEffect(A, {
+      kind: "sacrifice-all-but",
+      who: "each-opponent",
+      keep: 2,
+      filter: { type: "creature" },
+      upTo: true,
+    });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-permanents" || s.result.over);
+    const awaiting = game.state.awaiting;
+    expect(awaiting?.kind === "choose-permanents" && [awaiting.min, awaiting.max]).toEqual([0, 2]);
+    game.dispatch({ type: "choose-permanents", player: B, permanents: [bears[0]] });
+    expect(creaturesOf(game, B)).toEqual([bears[0]]);
   });
 
   it("does nothing when the player is already at or under the limit", () => {
@@ -99,9 +121,9 @@ describe("Archfiend of Depravity's trigger", () => {
 
     // A's own end step: nothing happens.
     game.advanceUntil((s) => s.turn.step === "end" || s.result.over);
-    game.advanceUntil(
-      (s) => s.awaiting?.kind === "sacrifice" || s.turn.number > game.state.turn.number,
-    );
+    const turn = game.state.turn.number;
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-permanents" || s.turn.number > turn);
+    expect(game.state.awaiting?.kind).not.toBe("choose-permanents");
     expect(creaturesOf(game, B).length).toBe(4);
   });
 });

@@ -501,12 +501,12 @@ function permutationsOf<T>(items: readonly T[]): T[][] {
   return out;
 }
 
-/** Whether the end of `trail` is one cycle of at most `LOOP_PERIOD_MAX`
- * entries repeated `LOOP_REPEATS` times. */
-function repeatsOneCycle(trail: readonly string[]): boolean {
+/** The length of the cycle of at most `LOOP_PERIOD_MAX` entries the end of
+ * `trail` repeats `LOOP_REPEATS` times, or `null` for none. */
+function loopPeriod(trail: readonly string[]): number | null {
   for (let period = 1; period <= LOOP_PERIOD_MAX; period += 1) {
     const span = period * LOOP_REPEATS;
-    if (span > trail.length) return false;
+    if (span > trail.length) return null;
     let cycles = true;
     for (let i = trail.length - span; i < trail.length - period; i += 1) {
       if (trail[i] !== trail[i + period]) {
@@ -514,9 +514,9 @@ function repeatsOneCycle(trail: readonly string[]): boolean {
         break;
       }
     }
-    if (cycles) return true;
+    if (cycles) return period;
   }
-  return false;
+  return null;
 }
 const GENERIC_SPEND_ORDER = ["C", "W", "U", "B", "R", "G"] as const;
 
@@ -1083,6 +1083,10 @@ export class Game {
    * state: a restored game counts afresh. */
   private mandatoryResolutions = 0;
   private resolutionTrail: string[] = [];
+  /** Whether this run of resolutions has already demanded different choices
+   * of the players in its loop (`GameState.loopBreak`) — repeating anyway,
+   * nothing can stop it. */
+  private loopBreakDemanded = false;
   /** While a simultaneous entry is being announced: the batched
    * `enters-battlefield` triggers ("whenever one or more … enter") that have
    * already fired for it, keyed `source#ability`, so each fires once per
@@ -1378,17 +1382,28 @@ export class Game {
     return this.state.eventLog.slice(from);
   }
 
-  private dispatchOne(action: Action): void {
-    // Anything a player does but pass priority is a choice a loop of
-    // mandatory actions doesn't contain (`noteMandatoryResolution`).
-    if (action.type !== "pass-priority") {
-      this.mandatoryResolutions = 0;
-      this.resolutionTrail = [];
-    }
+  private dispatchOne(given: Action): void {
     // A decision applies through its module, which calls the same `apply*`
     // this switch used to call directly. What is left below is the seven
     // priority actions — the things a player does when nothing is pending.
-    const decision = decisionForAction(action);
+    const decision = decisionForAction(given);
+    let action = given;
+    if (action.type !== "pass-priority") {
+      if (decision !== undefined && this.mandatoryResolutions > 0) {
+        // An answer inside a chain of resolutions is part of any loop it's
+        // in (`noteMandatoryResolution`) — and a player that loop is making
+        // choose differently says no to its "you may" (rule 732.3).
+        action = this.loopBreakingAnswer(action);
+        this.resolutionTrail.push(`?${actionPlayer(action)}:${action.type}`);
+      } else {
+        // Anything else a player does is a choice a loop of mandatory
+        // actions doesn't contain.
+        this.mandatoryResolutions = 0;
+        this.resolutionTrail = [];
+        this.loopBreakDemanded = false;
+        delete this.state.loopBreak;
+      }
+    }
     if (decision !== undefined) {
       decision.apply(this.decisionHost, action);
       return;
@@ -1671,6 +1686,20 @@ export class Game {
             !this.sacrificeCandidates(action.player, action.source, ability).includes(action.sacrifice))
         ) {
           return "the ability requires sacrificing a permanent you control";
+        }
+        // The chosen targets, judged as `activateAbility` judges them — not
+        // only that each slot has some legal option (Hotfoot Gnome's "another
+        // target creature" aimed at itself, Pirate Hat's Equip Pirate at a
+        // non-Pirate).
+        if (ability !== undefined) {
+          const xValue = action.xValue ?? 0;
+          return this.whyTargetsInvalid(
+            groupReadsX(ability.targets) ? specsAtX(ability.targets, xValue) : ability.targets,
+            normalizeTargets(action.targets),
+            action.player,
+            `${this.registry.get(printedCardName(this.state.objects[action.source])).name}'s ability`,
+            this.permanentSource(action.source, xValue),
+          );
         }
         return null;
       }
@@ -15267,8 +15296,11 @@ export class Game {
    * short cycle over and over, nobody can stop it: passing isn't an action
    * the loop contains, and no player can be made to act to end it (732.5).
    * A loop that ends by itself — a drain that kills a player — ends long
-   * before, and one whose every round asks someone to choose isn't caught
-   * here (each answer resets the count). `runUntil`'s budget stays the
+   * before. An answer given inside the chain (a trigger's target, a "you
+   * may") is part of the cycle rather than ending the count: the first time
+   * such a cycle repeats, the players answering in it must choose
+   * differently (`GameState.loopBreak` — their "you may" becomes a no), and
+   * if it goes round anyway it is a draw too. `runUntil`'s budget stays the
    * backstop for anything else.
    */
   private noteMandatoryResolution(): void {
@@ -15280,8 +15312,49 @@ export class Game {
     );
     if (this.resolutionTrail.length > LOOP_TRAIL) this.resolutionTrail.splice(0, this.resolutionTrail.length - LOOP_TRAIL);
     if (this.mandatoryResolutions < LOOP_RESOLUTIONS || this.mandatoryResolutions % LOOP_CHECK_EVERY !== 0) return;
-    if (!repeatsOneCycle(this.resolutionTrail)) return;
+    const period = loopPeriod(this.resolutionTrail);
+    if (period === null) return;
+    // The players whose answers the cycle contains: a loop with an optional
+    // action isn't a draw (rule 104.4b) — those players must choose
+    // differently (732.2c, 732.3), once. Going round anyway, it has no way to
+    // stop, and it is one.
+    const choosers = new Set<PlayerId>();
+    for (const entry of this.resolutionTrail.slice(-period)) {
+      if (entry.startsWith("?")) choosers.add(entry.slice(1, entry.indexOf(":")) as PlayerId);
+    }
+    if (choosers.size > 0 && !this.loopBreakDemanded) {
+      this.loopBreakDemanded = true;
+      this.state.loopBreak = [...choosers];
+      // A "same for all" answer is one of the choices it repeats.
+      if (this.state.standingModeAnswers !== undefined) {
+        this.state.standingModeAnswers = this.state.standingModeAnswers.filter((a) => !choosers.has(a.player));
+      }
+      // Counted afresh, but still inside the chain: the answers that follow
+      // are the loop's, not something a player did instead.
+      this.mandatoryResolutions = 1;
+      this.resolutionTrail = [];
+      return;
+    }
     this.endGame(null, "a loop of mandatory actions with no way to stop it (rule 104.4b)");
+  }
+
+  /**
+   * A player in `GameState.loopBreak` answering a "you may" (a `choose-modes`
+   * that allows choosing none) answers no: the loop must not go round again
+   * on their choice (rule 732.3). Any other answer stands.
+   */
+  private loopBreakingAnswer(action: Action): Action {
+    const awaiting = this.state.awaiting;
+    if (
+      action.type !== "choose-modes" ||
+      this.state.loopBreak?.includes(action.player) !== true ||
+      awaiting?.kind !== "choose-modes" ||
+      awaiting.minModes !== 0 ||
+      action.modes.length === 0
+    ) {
+      return action;
+    }
+    return { ...action, modes: [] };
   }
 
   /** Once nothing of the resolution is parked any more, it's over — see
@@ -20470,26 +20543,6 @@ export class Game {
         const n = typeof chosen === "string" ? Number(chosen) : Number.NaN;
         return Number.isInteger(n) ? n : undefined;
       },
-      sacrificeAllBut: (player, keep, filter) => {
-        // "Chooses up to N they control, then sacrifices the rest" — the
-        // existing sacrifice queue already asks the right player; it just
-        // needs the count expressed the other way round.
-        const eligible = this.eligibleSacrifices(player, filter);
-        const total = eligible.reduce(
-          (n, id) => n + (this.state.objects[id].stackCount ?? 1),
-          0,
-        );
-        const give = total - keep;
-        if (give > 0) {
-          const from = this.state.decisionSource;
-          this.state.pendingSacrifices.push({
-            player,
-            filter,
-            count: give,
-            ...(from !== null ? { source: from } : {}),
-          });
-        }
-      },
       askKeepTotalPower: (player, filter, max, prompt) => {
         // "Creatures they control": only the asked player's own.
         const eligible = this.battlefieldMatching(player, filter).filter(
@@ -20508,6 +20561,39 @@ export class Game {
           source,
           x,
           maxTotalPower: max,
+        };
+        return true;
+      },
+      askKeep: (player, filter, keep, upTo) => {
+        // "Creatures they control": only the asked player's own.
+        const eligible = this.battlefieldMatching(player, filter).filter(
+          (id) => this.state.objects[id]?.controller === player,
+        );
+        if (eligible.length === 0 || this.state.players[player]?.hasLost === true) return false;
+        const units = (id: ObjectId): ObjectId[] =>
+          Array<ObjectId>(this.state.objects[id]?.stackCount ?? 1).fill(id);
+        const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        // "Chooses six lands" with six or fewer: nothing to choose.
+        if (!upTo && available <= keep) {
+          this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...eligible.flatMap(units)];
+          return false;
+        }
+        // The strongest first: what a default answer, keeping as many of its
+        // own as it may, keeps.
+        const power = (id: ObjectId): number => computeCharacteristics(this.state, this.registry, id).power;
+        const ordered = [...eligible].sort((a, b) => power(b) - power(a));
+        const most = Math.min(keep, available);
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player,
+          eligible: ordered,
+          min: upTo ? 0 : most,
+          max: most,
+          prompt: `Choose ${upTo ? "up to " : ""}${keep} to keep — the rest are sacrificed`,
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
         };
         return true;
       },
@@ -25960,7 +26046,7 @@ export class Game {
     }
     // Slaughter the Strong's choice: what's kept is collected for the
     // resolving `keep-total-power`, which resumes once it's answered.
-    if (awaiting.maxTotalPower !== undefined) {
+    if (awaiting.maxTotalPower !== undefined || awaiting.keepChoice === true) {
       this.state.awaiting = null;
       this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...chosen];
       if (this.state.awaiting === null) this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);

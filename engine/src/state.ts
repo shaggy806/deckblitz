@@ -2481,6 +2481,10 @@ export type AwaitingDecision =
        * (the ruling) — may be at most this. `then` is unused; the picks are
        * collected in `GameState.keptByChoice`. */
       readonly maxTotalPower?: number;
+      /** Set for a `sacrifice-all-but` choice (Archfiend of Depravity,
+       * Planetary Annihilation): what's picked is kept, collected in
+       * `GameState.keptByChoice` as a `keep-total-power` pick is. */
+      readonly keepChoice?: true;
       /** Set when the choice is an entering permanent's "you may exchange its
        * text box and another creature's" (`CardDefinition
        * .exchangeTextOnEnter`): `source` is the permanent about to enter,
@@ -3417,6 +3421,14 @@ export interface GameState {
    * same one. Dropped once none of its triggers is left. Never in a view.
    */
   standingModeAnswers?: StandingModeAnswer[];
+  /**
+   * Players in a loop that keeps going round through their optional choices
+   * (rules 732.2c, 732.3): they must now choose differently, so their next
+   * "you may" in it is a no, whoever (or whatever bot) answers it. Set by
+   * `Game.noteMandatoryResolution` when the loop's cycle has repeated; gone
+   * once anyone does anything but answer inside the chain.
+   */
+  loopBreak?: PlayerId[];
   /** A declaration the engine is waiting for, or `null`. */
   awaiting: AwaitingDecision | null;
   /**

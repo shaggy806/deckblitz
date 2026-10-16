@@ -19,18 +19,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   engine already deals to every token in it. Anything other than one-to-one (two blockers on one
   attacker) still wakes tokens up. Risk: the damage assignment and "blocked by" checks that
   assume one blocker is one object.
-- **A mandatory loop that asks a choice each round still throws instead of drawing.** Rule 104.4b (and
-  732.4): a loop of mandatory actions with no way to stop is a draw; one with an optional action isn't, and
-  its player says how many times to repeat it (732.2, shortcuts). Built (2026-10-14): a loop that goes
-  round through the stack with every player only passing — `Game.noteMandatoryResolution` counts
-  resolutions since anyone last did anything else and, past `LOOP_RESOLUTIONS` (1,000), draws the game
-  when the latest repeat one short cycle (passing isn't an action the loop contains, 732.5). Left: a
-  loop whose every round asks someone something (a mandatory trigger's target, a "you may") resets the
-  count at each answer and still runs into the crash guards — `Game.runUntil`'s `ADVANCE_BUDGET`
-  (200,000 ticks), `prepareForPriority`'s 1,000 settling rounds, the server's `Room.settle`
-  `SETTLE_BUDGET` (10,000 hops), whose throw `Room.stop` turns into that room's game ending alone; and
-  shortcuts for optional loops (a human repeats one a click at a time, the bots cap a non-mana ability
-  at `MAX_ACTIVATIONS_PER_TURN`).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone.** The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
@@ -44,7 +32,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   one event, one trigger). Nothing in the pool reads that batch yet; Aang, Airbending Master
   (`trigger:leaves-batch-trigger`) will, so fix it with that trigger (found building airbend, batch 65).
 - **A `turn-history` condition's `excludeSelf` compares object ids.** Rule 400.7 makes a permanent that left and came back a new object, but an object keeps its id across zone changes, so a `turn-history` `died` (or `left`) condition with `excludeSelf` skips the source's own earlier stints too: White Glove Gourmand that died and came back the same turn doesn't count its own death as "another Human" (Éowyn and Wary Farmer use the same shape). **Fix (outline):** record the stint (`zoneChangeCount`) with each turn-history entry and exclude only the source's current stint. Found by batch 90's agents (2026-10-16).
-- **`canDispatch` passes an activation whose chosen target is illegal.** `whyCannotActivate` checks that each target slot has *a* legal option, not that the chosen one is legal; `dispatch` then throws "illegal target". Casts were fixed on 2026-10-16 (f570e060 — `canDispatch` checks cast targets). **Fix (outline):** run the same per-target legality check for activations (`activate-ability`) as for casts. Found by batch 90's agents (Butch DeLoria targeting himself).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
   (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast
@@ -142,9 +129,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **A token copy isn't asked its "as this enters" choice** (a token copy of Clone, Morophon or
   Urza's Incubator), though the gaps list marks `bug:as-enters-choices-any-entry` built. See
   AUTHORING §15.
-- **`sacrifice-all-but` always keeps the most it may.** "Choose up to N, then sacrifice the rest"
-  never lets the player keep fewer (to sacrifice more for death triggers). The `choose-permanents`
-  decision could ask it.
 - **Proliferate over a token stack.** A stack is one proliferate entry and every member gets the
   counter; choosing some of them isn't built. See `docs/plans/token-stack-choices.md`.
 - **Distinct targets in one token stack.** An "another target" relation (`distinctTargets`, an

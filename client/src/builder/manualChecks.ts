@@ -2881,4 +2881,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { life: 13 },
     }),
   ),
+  preset(
+    'Archfiend of Depravity',
+    board({
+      you: { bf: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Llanowar Elves'] },
+      opp: { bf: ['Archfiend of Depravity'] },
+    }),
+  ),
 ]

@@ -160,6 +160,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **The live-game rules bugs** (2026-10-16): a loop whose every round asks a choice no longer
+  runs the engine into its crash guards — answers inside a chain are part of the loop's cycle;
+  the first time it repeats, the players choosing in it must choose differently (rules 732.2c,
+  732.3: their "you may" becomes a no, "same for all" answers cleared), and if it goes round
+  anyway it's a draw (104.4b). `canDispatch` judges an activated ability's chosen targets as
+  `dispatch` does. `sacrifice-all-but` asks each player what to keep, choosing in turn and
+  sacrificing together, with `upTo` for Archfiend of Depravity's "up to two" (Planetary
+  Annihilation keeps exactly six). Adeline, Resplendent Cathar's Humans enter as one event
+  (`for-each-player`'s `simultaneous`).
 - **"Its controller may search" is theirs to decline**: Path to Exile, Assassin's Trophy, Erode, Ghost Quarter, Price of Freedom, Boseiju, Volatile Fault, Demolition Field, Sandworm, Sundering Eruption, White Orchid Phantom, every "Partner with" trigger (`partnerWithTrigger` and the nine written inline) and the parser's partner-with template ask that player (`each-player-may` around the search), so a decline neither searches nor shuffles; a v2 bot takes the land (2026-10-16).
 - **A Saga's chapter ability remembers which Saga it came from**: `triggerChapters` records the Saga's stint (`lastKnownRefs.source`), so "the exiled card" is found after the Saga leaves in response (rule 607.2a). The Aesir Escape Valhalla authored on it (2026-10-16).
 - **A "trigger-object" that blinked is lost** (rule 400.7) — already so (the Hero's Blade clause of `triggerObjectLost`); the backlog line was stale. Atarka, World Render's test pins it (2026-10-16).

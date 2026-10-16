@@ -3788,6 +3788,11 @@ export type EffectSpec =
        * Apparition's "the exiled card's owner creates …". Nobody, with none. */
       readonly who: PlayerScope | "owners-of-exiled-with-source";
       readonly effect: EffectSpec;
+      /** One instruction, one event, as a `sequence`'s `simultaneous` is:
+       * Adeline's Humans, one per opponent, enter together, so "whenever one
+       * or more tokens enter" sees them once. Only where nothing in `effect`
+       * stops to ask. */
+      readonly simultaneous?: boolean;
       /** Set by the engine on the copy it parks when one player's `effect`
        * stops to ask something (myriad's "you may"): the players still to
        * go, fixed when it began. */
@@ -4356,18 +4361,23 @@ export type EffectSpec =
     }
   | {
       /**
-       * "That player chooses up to `keep` creatures they control, then
-       * sacrifices the rest" (Archfiend of Depravity) — the inverse of
-       * `sacrifice`, which names how many to *give up* rather than how many
-       * to keep.
-       *
-       * The choice belongs to each affected player, and is raised only when
-       * they control more than `keep` matching permanents.
+       * "Each player chooses six lands they control, then sacrifices the
+       * rest" (Planetary Annihilation) — the inverse of `sacrifice`, which
+       * names how many to *give up* rather than how many to keep. Each
+       * player in `who` chooses in turn from the active player, knowing the
+       * choices before theirs, then every one not chosen is sacrificed at
+       * once. Exactly `keep` (all of them with no more than that, unasked);
+       * `upTo` is "chooses **up to** two creatures" (Archfiend of Depravity),
+       * where fewer may be kept, so it's always asked.
        */
       readonly kind: "sacrifice-all-but";
       readonly who: PlayerScope;
       readonly keep: number;
       readonly filter: CardFilter;
+      readonly upTo?: boolean;
+      /** Set only by the engine: the players still to choose, and what those
+       * before them kept. */
+      readonly progress?: { readonly toAsk: readonly PlayerId[]; readonly kept: readonly ObjectId[] };
     }
   | {
       /**
@@ -5551,12 +5561,15 @@ export interface EffectApi {
   grantPlayerHexproof(who: PlayerScope): void;
   /** See the `"grant-spells-this-turn"` {@link EffectSpec}. */
   grantSpellsThisTurn(castFrom: readonly ZoneType[] | undefined, triggered: readonly TriggeredAbility[]): void;
-  /** See the `"sacrifice-all-but"` {@link EffectSpec}. */
-  sacrificeAllBut(player: PlayerId, keep: number, filter: CardFilter): void;
   /** See the `"keep-total-power"` {@link EffectSpec}: ask `player` which of
    * their permanents matching `filter` to keep, total power at most `max`.
    * `false` when they control none, and nothing was asked. */
   askKeepTotalPower(player: PlayerId, filter: CardFilter, max: number, prompt: string): boolean;
+  /** `sacrifice-all-but`'s choice: `player` keeps `keep` of the permanents
+   * matching `filter` they control (`upTo`: as many as `keep`). `true` when
+   * it asked; otherwise what's kept — all of them, when there's no choice —
+   * is waiting for `takeKept`. */
+  askKeep(player: PlayerId, filter: CardFilter, keep: number, upTo: boolean): boolean;
   /** What the last `askKeepTotalPower` answer kept, taken (and cleared). */
   takeKept(): readonly ObjectId[];
   /** See the `"keep-total-power"` {@link EffectSpec}: each of `players`
@@ -9035,6 +9048,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               new Set(ctx.cardsExiledWithSource().map((id) => ctx.ownerOf({ kind: "object", object: id }))),
             )
           : ctx.playersInScope(spec.who));
+      if (spec.simultaneous === true) {
+        ctx.simultaneously(() => {
+          for (const player of players) applyEffectSpec(spec.effect, ctx.aboutPlayer(player));
+        });
+        return;
+      }
       const pendingBefore = ctx.decisionPending();
       for (let i = 0; i < players.length; i += 1) {
         const parked = ctx.parkedCount();
@@ -9292,11 +9311,24 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     }
-    case "sacrifice-all-but":
-      for (const player of ctx.playersInScope(spec.who)) {
-        ctx.sacrificeAllBut(player, spec.keep, spec.filter);
+    case "sacrifice-all-but": {
+      // One player at a time, as `keep-total-power` asks; the sacrifice waits
+      // for them all.
+      const below = ctx.parkedCount();
+      let toAsk = spec.progress?.toAsk ?? ctx.apnap(ctx.playersInScope(spec.who));
+      let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
+      while (toAsk.length > 0) {
+        const player = toAsk[0];
+        toAsk = toAsk.slice(1);
+        if (ctx.askKeep(player, spec.filter, spec.keep, spec.upTo === true)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { toAsk, kept } }, below);
+          return;
+        }
+        kept = [...kept, ...ctx.takeKept()];
       }
+      ctx.sacrificeAllExcept(ctx.playersInScope(spec.who), spec.filter, kept);
       return;
+    }
     case "keep-total-power": {
       // One player at a time, each answered before the next is asked (the
       // ruling: the active player first, then the rest in turn order,
