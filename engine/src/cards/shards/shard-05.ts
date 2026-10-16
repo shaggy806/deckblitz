@@ -195,6 +195,7 @@ import _poolInfernalTribute from "../pool/infernal-tribute.js";
 import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
+import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
@@ -227,6 +228,7 @@ import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
 import _poolManalith from "../pool/manalith.js";
+import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
 import _poolMarduMonument from "../pool/mardu-monument.js";
 import _poolMarkovBlademaster from "../pool/markov-blademaster.js";
@@ -299,6 +301,7 @@ import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
+import _poolSandstormSalvager from "../pool/sandstorm-salvager.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
@@ -334,6 +337,7 @@ import _poolSparkReaper from "../pool/spark-reaper.js";
 import _poolSpectatorSeating from "../pool/spectator-seating.js";
 import _poolSpellshock from "../pool/spellshock.js";
 import _poolSpellskite from "../pool/spellskite.js";
+import _poolSpinewoodsArmadillo from "../pool/spinewoods-armadillo.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
@@ -372,6 +376,7 @@ import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThinkTank from "../pool/think-tank.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
+import _poolThrowFromTheSaddle from "../pool/throw-from-the-saddle.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
@@ -426,6 +431,7 @@ import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.j
 import _tokensJaceToken from "../tokens/jace-token.js";
 import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
+import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
 
@@ -623,6 +629,7 @@ const shard: CardShard = {
     _poolInquisitivePuppet,
     _poolInsectoidExterminator,
     _poolInspiredCharge,
+    _poolIntrepidStablemaster,
     _poolInvokeTheDivine,
     _poolIrohTeaMaster,
     _poolJacesSanctum,
@@ -655,6 +662,7 @@ const shard: CardShard = {
     _poolMadameNullPowerBroker,
     _poolMalachiteGolem,
     _poolManalith,
+    _poolMaraudingSphinx,
     _poolMarbleChalice,
     _poolMarduMonument,
     _poolMarkovBlademaster,
@@ -727,6 +735,7 @@ const shard: CardShard = {
     _poolSageOfTheFang,
     _poolSaltFlats,
     _poolSamutsSprint,
+    _poolSandstormSalvager,
     _poolSarkhanUnbroken,
     _poolScabClanCharger,
     _poolScoriaElemental,
@@ -762,6 +771,7 @@ const shard: CardShard = {
     _poolSpectatorSeating,
     _poolSpellshock,
     _poolSpellskite,
+    _poolSpinewoodsArmadillo,
     _poolSpiritSummoning,
     _poolSpitefulBully,
     _poolStarOfExtinction,
@@ -800,6 +810,7 @@ const shard: CardShard = {
     _poolTheWaterCrystal,
     _poolThinkTank,
     _poolThranduilsCompany,
+    _poolThrowFromTheSaddle,
     _poolTillerEngine,
     _poolTinderFarm,
     _poolTitanOfLittjara,
@@ -856,6 +867,7 @@ const shard: CardShard = {
     _tokensJaceToken,
     _tokensRatTokenVren,
     _tokensRobotVillainToken,
+    _tokensSpiritTokenPhantomInterference,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,
   ],

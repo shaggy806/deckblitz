@@ -28,6 +28,7 @@ import _poolAtreusImpulsiveSon from "../pool/atreus-impulsive-son.js";
 import _poolAttendedSocialite from "../pool/attended-socialite.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
 import _poolAvengersHangar from "../pool/avengers-hangar.js";
+import _poolBadlandsRevival from "../pool/badlands-revival.js";
 import _poolBalefireLiege from "../pool/balefire-liege.js";
 import _poolBalinLoremaster from "../pool/balin-loremaster.js";
 import _poolBarrensteppeSiege from "../pool/barrensteppe-siege.js";
@@ -189,6 +190,7 @@ import _poolItlimocCradleOfTheSun from "../pool/itlimoc-cradle-of-the-sun.js";
 import _poolIzzetGuildgate from "../pool/izzet-guildgate.js";
 import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
+import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js";
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
@@ -227,6 +229,7 @@ import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
+import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
@@ -243,6 +246,7 @@ import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
+import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
@@ -251,6 +255,7 @@ import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
+import _poolPricklyPair from "../pool/prickly-pair.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
 import _poolPrismariCommand from "../pool/prismari-command.js";
 import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
@@ -448,6 +453,7 @@ const shard: CardShard = {
     _poolAttendedSocialite,
     _poolAvengerOfTheFallen,
     _poolAvengersHangar,
+    _poolBadlandsRevival,
     _poolBalefireLiege,
     _poolBalinLoremaster,
     _poolBarrensteppeSiege,
@@ -609,6 +615,7 @@ const shard: CardShard = {
     _poolIzzetGuildgate,
     _poolJeskaiMonument,
     _poolJhovallRider,
+    _poolJolenePlunderingPugilist,
     _poolKadenaSlinkingSorcerer,
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
@@ -647,6 +654,7 @@ const shard: CardShard = {
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
     _poolMistgatePathway,
+    _poolMobileHomestead,
     _poolMoggMob,
     _poolMollyHayesRunaway,
     _poolMomentOfTriumph,
@@ -663,6 +671,7 @@ const shard: CardShard = {
     _poolOldGnawbone,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
+    _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPatronOfTheVein,
     _poolPeregrineDrake,
@@ -671,6 +680,7 @@ const shard: CardShard = {
     _poolPhyrexianBloodstock,
     _poolPhyrexianVault,
     _poolPouncingLynx,
+    _poolPricklyPair,
     _poolPrimevalShambler,
     _poolPrismariCommand,
     _poolProctorOfPotential,

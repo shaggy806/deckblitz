@@ -1513,6 +1513,22 @@ export type TriggerSpec =
        * resolves before the draw (the rulings). */
       readonly on: "this-cycled";
     }
+  | {
+      /** "Whenever you commit a crime" / "whenever an opponent commits a
+       * crime" (rule 700.13): the ability's controller, or any opponent of
+       * theirs, cast a spell, activated an ability or put a triggered ability
+       * on the stack targeting an opponent of theirs, something that opponent
+       * controls or a card in that opponent's graveyard. "During your turn"
+       * is a `your-turn` condition; "triggers only once each turn" is
+       * `oncePerTurn`. */
+      readonly on: "crime-committed";
+      readonly who: "you" | "opponent";
+    }
+  | {
+      /** "When this card becomes plotted" (rule 702.170) — it triggers from
+       * exile, where plotting put it, and only for this card. */
+      readonly on: "this-plotted";
+    }
   /** Escape hatch: match the raw event yourself. */
   | { readonly on: "predicate"; readonly match: (event: GameEvent) => boolean };
 

@@ -12,6 +12,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Plot and committing a crime** (`keyword:plot`, rule 702.170; `trigger:commit-crime`, rule
+  700.13): the plot special action, a plotted card's free sorcery-speed cast from exile on a later
+  turn, "when this card becomes plotted", effects that plot a card (`become-plotted`,
+  `exile-spell-as-it-resolves`' `plotted`), plotted cards drawn on their owner's board with a
+  Plotted badge (the user's ask); crimes as a spell is cast, an ability activated or a trigger put
+  on the stack, "whenever you / an opponent commit(s) a crime" and "if you've committed a crime
+  this turn". Marchesa, Dealer of Death among 57 cards (2026-10-16).
 - **Decayed** (`keyword:decayed`, rule 702.147): Wilhelt, the Rotcleaver, with Crowded Crypt,
   Ghoulish Procession, Curse of the Restless Dead and Jadar, Ghoulcaller of Nephalia
   (2026-10-14).
@@ -28,6 +35,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The Big Score, Outlaws of Thunder Junction and its Commander set, all whole** (batch 89): 158
+  of 194 cards — the 179 left in the three sets and 15 older plot and crime cards — with plot and
+  crimes built, and an enters-with counter amount's condition now leaving out what enters with it
+  (rule 614.12 — Dust Animus) (2026-10-16).
 - **Wayta, Trainer Prodigy is one ability again**, priced by its targets: an activated ability's `targetCostReduction` (`count: 2` — "{2} less if it targets two creatures you control"), so "another target creature" stays any creature and a fight survives a control change in response. Raft Security Officer authored on it (2026-10-16).
 - **Enter the God-Eternals gains the damage actually dealt** (the `damageDealtThisWay` amount — 8 beside Dictate of the Twin Gods), and its text has its reminder (2026-10-16).
 - **Lord of the Nazgûl's "protection from Ring-bearers" works**: a `protection` static over any player's Ring-bearer (the filter's new `ringBearer: "any"`) (2026-10-16).

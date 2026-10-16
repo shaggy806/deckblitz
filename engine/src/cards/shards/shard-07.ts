@@ -72,6 +72,7 @@ import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
+import _poolDemonicRuckus from "../pool/demonic-ruckus.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
 import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
@@ -251,7 +252,9 @@ import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
 import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
+import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
@@ -310,6 +313,7 @@ import _poolSearingSpear from "../pool/searing-spear.js";
 import _poolSeasonedMarshal from "../pool/seasoned-marshal.js";
 import _poolSeedsOfStrength from "../pool/seeds-of-strength.js";
 import _poolSegovianLeviathan from "../pool/segovian-leviathan.js";
+import _poolSeizeTheSecrets from "../pool/seize-the-secrets.js";
 import _poolSelesnyaCluestone from "../pool/selesnya-cluestone.js";
 import _poolSepulcherGhoul from "../pool/sepulcher-ghoul.js";
 import _poolSerrasBlessing from "../pool/serras-blessing.js";
@@ -523,6 +527,7 @@ const shard: CardShard = {
     _poolDazzlingAngel,
     _poolDefenderOfChaos,
     _poolDeflectingSwat,
+    _poolDemonicRuckus,
     _poolDescentIntoAvernus,
     _poolDesperateFuturescribe,
     _poolDestructiveDigger,
@@ -702,7 +707,9 @@ const shard: CardShard = {
     _poolOrzhovGuildgate,
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
+    _poolOverzealousMuscle,
     _poolPassionateArchaeologist,
+    _poolPitilessCarnage,
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,
     _poolPollenbrightDruid,
@@ -761,6 +768,7 @@ const shard: CardShard = {
     _poolSeasonedMarshal,
     _poolSeedsOfStrength,
     _poolSegovianLeviathan,
+    _poolSeizeTheSecrets,
     _poolSelesnyaCluestone,
     _poolSepulcherGhoul,
     _poolSerrasBlessing,

@@ -116,6 +116,7 @@ import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
 import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
 import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
+import _poolEmergentHaunting from "../pool/emergent-haunting.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
@@ -137,10 +138,12 @@ import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
 import _poolFitOfRage from "../pool/fit-of-rage.js";
 import _poolFleetFootedMonk from "../pool/fleet-footed-monk.js";
+import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
+import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
@@ -202,10 +205,12 @@ import _poolIntimidation from "../pool/intimidation.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
 import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
+import _poolIronFistPulverizer from "../pool/iron-fist-pulverizer.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
+import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
@@ -549,6 +554,7 @@ const shard: CardShard = {
     _poolElvishSkysweeper,
     _poolElvishWarmaster,
     _poolEmeraldMedallion,
+    _poolEmergentHaunting,
     _poolEnergizer,
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
@@ -570,10 +576,12 @@ const shard: CardShard = {
     _poolFirefly,
     _poolFitOfRage,
     _poolFleetFootedMonk,
+    _poolFleetingReflection,
     _poolFloodfarmVerge,
     _poolFogwellsGym,
     _poolForceVoid,
     _poolFortuitousFind,
+    _poolFreestriderCommando,
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
@@ -635,10 +643,12 @@ const shard: CardShard = {
     _poolIroassBlessing,
     _poolIrohGrandLotus,
     _poolIronFistHeroForHire,
+    _poolIronFistPulverizer,
     _poolIronManTonyStark,
     _poolIsochronScepter,
     _poolIxallisKeeper,
     _poolJadziStewardOfFate,
+    _poolJemLightfooteSkyExplorer,
     _poolJeongJeongsDeserters,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,

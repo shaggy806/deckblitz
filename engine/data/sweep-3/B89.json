@@ -1,0 +1,1377 @@
+{
+ "batch": "B89",
+ "status": "complete",
+ "ranks": "The Big Score (BIG), Outlaws of Thunder Junction Commander (OTC) and Outlaws of Thunder Junction (OTJ), all 2024-04-19: the rest of the sets, with plot (rule 702.170) and committing a crime (rule 700.13) built — and the older pool cards that waited on them",
+ "authored": [
+  {
+   "name": "Akul the Unrepentant",
+   "files": [
+    "engine/src/cards/pool/akul-the-unrepentant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aloe Alchemist",
+   "files": [
+    "engine/src/cards/pool/aloe-alchemist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Cornucopia",
+   "files": [
+    "engine/src/cards/pool/ancient-cornucopia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Sell-Sword",
+   "files": [
+    "engine/src/cards/pool/angelic-sell-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Annie Flash, the Veteran",
+   "files": [
+    "engine/src/cards/pool/annie-flash-the-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armored Armadillo",
+   "files": [
+    "engine/src/cards/pool/armored-armadillo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "At Knifepoint",
+   "files": [
+    "engine/src/cards/pool/at-knifepoint.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Badlands Revival",
+   "files": [
+    "engine/src/cards/pool/badlands-revival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bandit's Haul",
+   "files": [
+    "engine/src/cards/pool/bandits-haul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beastbond Outcaster",
+   "files": [
+    "engine/src/cards/pool/beastbond-outcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Betrayal at the Vault",
+   "files": [
+    "engine/src/cards/pool/betrayal-at-the-vault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blacksnag Buzzard",
+   "files": [
+    "engine/src/cards/pool/blacksnag-buzzard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Hustler",
+   "files": [
+    "engine/src/cards/pool/blood-hustler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boneyard Desecrator",
+   "files": [
+    "engine/src/cards/pool/boneyard-desecrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boom Box",
+   "files": [
+    "engine/src/cards/pool/boom-box.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breeches, the Blastmaker",
+   "files": [
+    "engine/src/cards/pool/breeches-the-blastmaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brimstone Roundup",
+   "files": [
+    "engine/src/cards/pool/brimstone-roundup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bristlebud Farmer",
+   "files": [
+    "engine/src/cards/pool/bristlebud-farmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bristlepack Sentry",
+   "files": [
+    "engine/src/cards/pool/bristlepack-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bruse Tarl, Roving Rancher",
+   "files": [
+    "engine/src/cards/pool/bruse-tarl-roving-rancher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bucolic Ranch",
+   "files": [
+    "engine/src/cards/pool/bucolic-ranch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cactarantula",
+   "files": [
+    "engine/src/cards/pool/cactarantula.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canyon Crab",
+   "files": [
+    "engine/src/cards/pool/canyon-crab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caught in the Crossfire",
+   "files": [
+    "engine/src/cards/pool/caught-in-the-crossfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charred Graverobber",
+   "files": [
+    "engine/src/cards/pool/charred-graverobber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consuming Ashes",
+   "files": [
+    "engine/src/cards/pool/consuming-ashes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crackling Spellslinger",
+   "files": [
+    "engine/src/cards/pool/crackling-spellslinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cunning Coyote",
+   "files": [
+    "engine/src/cards/pool/cunning-coyote.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dead Before Sunrise",
+   "files": [
+    "engine/src/cards/pool/dead-before-sunrise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepmuck Desperado",
+   "files": [
+    "engine/src/cards/pool/deepmuck-desperado.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Demonic Ruckus",
+   "files": [
+    "engine/src/cards/pool/demonic-ruckus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desert's Due",
+   "files": [
+    "engine/src/cards/pool/deserts-due.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Discreet Retreat",
+   "files": [
+    "engine/src/cards/pool/discreet-retreat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Djinn of Fool's Fall",
+   "files": [
+    "engine/src/cards/pool/djinn-of-fools-fall.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dust Animus",
+   "files": [
+    "engine/src/cards/pool/dust-animus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emergent Haunting",
+   "files": [
+    "engine/src/cards/pool/emergent-haunting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Derailment",
+   "files": [
+    "engine/src/cards/pool/explosive-derailment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Failed Fording",
+   "files": [
+    "engine/src/cards/pool/failed-fording.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ferocification",
+   "files": [
+    "engine/src/cards/pool/ferocification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fleeting Reflection",
+   "files": [
+    "engine/src/cards/pool/fleeting-reflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Form a Posse",
+   "files": [
+    "engine/src/cards/pool/form-a-posse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forsaken Miner",
+   "files": [
+    "engine/src/cards/pool/forsaken-miner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freestrider Commando",
+   "files": [
+    "engine/src/cards/pool/freestrider-commando.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freestrider Lookout",
+   "files": [
+    "engine/src/cards/pool/freestrider-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frontier Seeker",
+   "files": [
+    "engine/src/cards/pool/frontier-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geyser Drake",
+   "files": [
+    "engine/src/cards/pool/geyser-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghired, Mirror of the Wilds",
+   "files": [
+    "engine/src/cards/pool/ghired-mirror-of-the-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gisa, the Hellraiser",
+   "files": [
+    "engine/src/cards/pool/gisa-the-hellraiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gold Rush",
+   "files": [
+    "engine/src/cards/pool/gold-rush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greed's Gambit",
+   "files": [
+    "engine/src/cards/pool/greeds-gambit.ts",
+    "engine/src/cards/tokens/bat-token-greeds-gambit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hardbristle Bandit",
+   "files": [
+    "engine/src/cards/pool/hardbristle-bandit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Harvester of Misery",
+   "files": [
+    "engine/src/cards/pool/harvester-of-misery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellspur Brute",
+   "files": [
+    "engine/src/cards/pool/hellspur-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellspur Posse Boss",
+   "files": [
+    "engine/src/cards/pool/hellspur-posse-boss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Highway Robbery",
+   "files": [
+    "engine/src/cards/pool/highway-robbery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holy Cow",
+   "files": [
+    "engine/src/cards/pool/holy-cow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hostile Investigator",
+   "files": [
+    "engine/src/cards/pool/hostile-investigator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intimidation Campaign",
+   "files": [
+    "engine/src/cards/pool/intimidation-campaign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intrepid Stablemaster",
+   "files": [
+    "engine/src/cards/pool/intrepid-stablemaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inventive Wingsmith",
+   "files": [
+    "engine/src/cards/pool/inventive-wingsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Irascible Wolverine",
+   "files": [
+    "engine/src/cards/pool/irascible-wolverine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron-Fist Pulverizer",
+   "files": [
+    "engine/src/cards/pool/iron-fist-pulverizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jem Lightfoote, Sky Explorer",
+   "files": [
+    "engine/src/cards/pool/jem-lightfoote-sky-explorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jolene, Plundering Pugilist",
+   "files": [
+    "engine/src/cards/pool/jolene-plundering-pugilist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaervek, the Punisher",
+   "files": [
+    "engine/src/cards/pool/kaervek-the-punisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kellan Joins Up",
+   "files": [
+    "engine/src/cards/pool/kellan-joins-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirri, Talented Sprout",
+   "files": [
+    "engine/src/cards/pool/kirri-talented-sprout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kraum, Violent Cacophony",
+   "files": [
+    "engine/src/cards/pool/kraum-violent-cacophony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lassoed by the Law",
+   "files": [
+    "engine/src/cards/pool/lassoed-by-the-law.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline Dowser",
+   "files": [
+    "engine/src/cards/pool/leyline-dowser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lilah, Undefeated Slickshot",
+   "files": [
+    "engine/src/cards/pool/lilah-undefeated-slickshot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loan Shark",
+   "files": [
+    "engine/src/cards/pool/loan-shark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lock and Load",
+   "files": [
+    "engine/src/cards/pool/lock-and-load.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Longhorn Sharpshooter",
+   "files": [
+    "engine/src/cards/pool/longhorn-sharpshooter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loot, the Key to Everything",
+   "files": [
+    "engine/src/cards/pool/loot-the-key-to-everything.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lotus Ring",
+   "files": [
+    "engine/src/cards/pool/lotus-ring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magda, the Hoardmaster",
+   "files": [
+    "engine/src/cards/pool/magda-the-hoardmaster.ts",
+    "engine/src/cards/tokens/scorpion-dragon-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Make Your Own Luck",
+   "files": [
+    "engine/src/cards/pool/make-your-own-luck.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malcolm, the Eyes",
+   "files": [
+    "engine/src/cards/pool/malcolm-the-eyes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marauding Sphinx",
+   "files": [
+    "engine/src/cards/pool/marauding-sphinx.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Marchesa, Dealer of Death",
+   "files": [
+    "engine/src/cards/pool/marchesa-dealer-of-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metamorphic Blast",
+   "files": [
+    "engine/src/cards/pool/metamorphic-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mine Raider",
+   "files": [
+    "engine/src/cards/pool/mine-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miriam, Herd Whisperer",
+   "files": [
+    "engine/src/cards/pool/miriam-herd-whisperer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mobile Homestead",
+   "files": [
+    "engine/src/cards/pool/mobile-homestead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mourner's Surprise",
+   "files": [
+    "engine/src/cards/pool/mourners-surprise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neutralize the Guards",
+   "files": [
+    "engine/src/cards/pool/neutralize-the-guards.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nezumi Linkbreaker",
+   "files": [
+    "engine/src/cards/pool/nezumi-linkbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimble Brigand",
+   "files": [
+    "engine/src/cards/pool/nimble-brigand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nurturing Pixie",
+   "files": [
+    "engine/src/cards/pool/nurturing-pixie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omenport Vigilante",
+   "files": [
+    "engine/src/cards/pool/omenport-vigilante.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outcaster Greenblade",
+   "files": [
+    "engine/src/cards/pool/outcaster-greenblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outcaster Trailblazer",
+   "files": [
+    "engine/src/cards/pool/outcaster-trailblazer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outlaw Stitcher",
+   "files": [
+    "engine/src/cards/pool/outlaw-stitcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outlaws' Fury",
+   "files": [
+    "engine/src/cards/pool/outlaws-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overzealous Muscle",
+   "files": [
+    "engine/src/cards/pool/overzealous-muscle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patient Naturalist",
+   "files": [
+    "engine/src/cards/pool/patient-naturalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patrolling Peacemaker",
+   "files": [
+    "engine/src/cards/pool/patrolling-peacemaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peerless Ropemaster",
+   "files": [
+    "engine/src/cards/pool/peerless-ropemaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pest Control",
+   "files": [
+    "engine/src/cards/pool/pest-control.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Interference",
+   "files": [
+    "engine/src/cards/pool/phantom-interference.ts",
+    "engine/src/cards/tokens/spirit-token-phantom-interference.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillage the Bog",
+   "files": [
+    "engine/src/cards/pool/pillage-the-bog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pitiless Carnage",
+   "files": [
+    "engine/src/cards/pool/pitiless-carnage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plan the Heist",
+   "files": [
+    "engine/src/cards/pool/plan-the-heist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prickly Pair",
+   "files": [
+    "engine/src/cards/pool/prickly-pair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prosperity Tycoon",
+   "files": [
+    "engine/src/cards/pool/prosperity-tycoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyretic Charge",
+   "files": [
+    "engine/src/cards/pool/pyretic-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Railway Brawler",
+   "files": [
+    "engine/src/cards/pool/railway-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakish Crew",
+   "files": [
+    "engine/src/cards/pool/rakish-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rattleback Apothecary",
+   "files": [
+    "engine/src/cards/pool/rattleback-apothecary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raucous Entertainer",
+   "files": [
+    "engine/src/cards/pool/raucous-entertainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven of Fell Omens",
+   "files": [
+    "engine/src/cards/pool/raven-of-fell-omens.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Razzle-Dazzler",
+   "files": [
+    "engine/src/cards/pool/razzle-dazzler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reach for the Sky",
+   "files": [
+    "engine/src/cards/pool/reach-for-the-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redrock Sentinel",
+   "files": [
+    "engine/src/cards/pool/redrock-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rictus Robber",
+   "files": [
+    "engine/src/cards/pool/rictus-robber.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rise of the Varmints",
+   "files": [
+    "engine/src/cards/pool/rise-of-the-varmints.ts",
+    "engine/src/cards/tokens/varmint-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rooftop Assassin",
+   "files": [
+    "engine/src/cards/pool/rooftop-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rustler Rampage",
+   "files": [
+    "engine/src/cards/pool/rustler-rampage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandstorm Salvager",
+   "files": [
+    "engine/src/cards/pool/sandstorm-salvager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scalestorm Summoner",
+   "files": [
+    "engine/src/cards/pool/scalestorm-summoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seize the Secrets",
+   "files": [
+    "engine/src/cards/pool/seize-the-secrets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Servant of the Stinger",
+   "files": [
+    "engine/src/cards/pool/servant-of-the-stinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shackle Slinger",
+   "files": [
+    "engine/src/cards/pool/shackle-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shepherd of the Clouds",
+   "files": [
+    "engine/src/cards/pool/shepherd-of-the-clouds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sheriff of Safe Passage",
+   "files": [
+    "engine/src/cards/pool/sheriff-of-safe-passage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver Deputy",
+   "files": [
+    "engine/src/cards/pool/silver-deputy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slick Sequence",
+   "files": [
+    "engine/src/cards/pool/slick-sequence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slickshot Lockpicker",
+   "files": [
+    "engine/src/cards/pool/slickshot-lockpicker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slickshot Show-Off",
+   "files": [
+    "engine/src/cards/pool/slickshot-show-off.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slickshot Vault-Buster",
+   "files": [
+    "engine/src/cards/pool/slickshot-vault-buster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinewoods Armadillo",
+   "files": [
+    "engine/src/cards/pool/spinewoods-armadillo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinewoods Paladin",
+   "files": [
+    "engine/src/cards/pool/spinewoods-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spring Splasher",
+   "files": [
+    "engine/src/cards/pool/spring-splasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stagecoach Security",
+   "files": [
+    "engine/src/cards/pool/stagecoach-security.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sterling Keykeeper",
+   "files": [
+    "engine/src/cards/pool/sterling-keykeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sterling Supplier",
+   "files": [
+    "engine/src/cards/pool/sterling-supplier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stoic Sphinx",
+   "files": [
+    "engine/src/cards/pool/stoic-sphinx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take the Fall",
+   "files": [
+    "engine/src/cards/pool/take-the-fall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tarnation Vista",
+   "files": [
+    "engine/src/cards/pool/tarnation-vista.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Territory Forge",
+   "files": [
+    "engine/src/cards/pool/territory-forge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "This Town Ain't Big Enough",
+   "files": [
+    "engine/src/cards/pool/this-town-aint-big-enough.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Throw from the Saddle",
+   "files": [
+    "engine/src/cards/pool/throw-from-the-saddle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunder Lasso",
+   "files": [
+    "engine/src/cards/pool/thunder-lasso.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunder Salvo",
+   "files": [
+    "engine/src/cards/pool/thunder-salvo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomb Trawler",
+   "files": [
+    "engine/src/cards/pool/tomb-trawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trick Shot",
+   "files": [
+    "engine/src/cards/pool/trick-shot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tumbleweed Rising",
+   "files": [
+    "engine/src/cards/pool/tumbleweed-rising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unfortunate Accident",
+   "files": [
+    "engine/src/cards/pool/unfortunate-accident.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unscrupulous Contractor",
+   "files": [
+    "engine/src/cards/pool/unscrupulous-contractor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vadmir, New Blood",
+   "files": [
+    "engine/src/cards/pool/vadmir-new-blood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault Plunderer",
+   "files": [
+    "engine/src/cards/pool/vault-plunderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Regrowth",
+   "files": [
+    "engine/src/cards/pool/vengeful-regrowth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vial Smasher, Gleeful Grenadier",
+   "files": [
+    "engine/src/cards/pool/vial-smasher-gleeful-grenadier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visage Bandit",
+   "files": [
+    "engine/src/cards/pool/visage-bandit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wanted Griffin",
+   "files": [
+    "engine/src/cards/pool/wanted-griffin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wrangler of the Damned",
+   "files": [
+    "engine/src/cards/pool/wrangler-of-the-damned.ts",
+    "engine/src/cards/tokens/spirit-token-wrangler-of-the-damned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wylie Duke, Atiin Hero",
+   "files": [
+    "engine/src/cards/pool/wylie-duke-atiin-hero.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Assimilation Aegis",
+   "needs": [
+    "effect:become-copy-while-source"
+   ],
+   "why": "\"for as long as this Equipment remains attached to it, that creature becomes a copy of a creature card exiled with this Equipment\" needs a become-copy duration tied to the attachment and an \"of\" chosen among the cards linked-exiled by the source."
+  },
+  {
+   "name": "Aven Interrupter",
+   "needs": [
+    "cost:cost-mod-by-cast-zone"
+   ],
+   "why": "\"Spells your opponents cast from graveyards or from exile cost {2} more to cast\": costModification can't select spells by the zone they're cast from (the filter's castFrom is one zone and reads only a spell already on the stack, while the cost is priced with the card still in its graveyard/exile). The ETB half is expressible: a sequence of exile target 0 then become-plotted target 0 on a \"spell\" target exiled a spell and plotted it in a probe."
+  },
+  {
+   "name": "Binding Negotiation",
+   "needs": [
+    "decision:choose-face-up-exiled-card"
+   ],
+   "why": "'Otherwise, you may put a face-up exiled card they own into their graveyard' needs an untargeted choice among exiled cards a player owns; look-and-choose has no exile zone and the only exile target spec is targeted."
+  },
+  {
+   "name": "Cataclysmic Prospecting",
+   "needs": [
+    "stat:treasure-mana-spent-count"
+   ],
+   "why": "\"For each mana from a Desert spent to cast this spell\" needs an amount counting the spent mana whose source matched a filter (manaSpentFrom is recorded, but only the manaFrom filter's at-least test reads it)."
+  },
+  {
+   "name": "Collector's Cage",
+   "needs": [
+    "condition:coven"
+   ],
+   "why": "\"Then if you control three or more creatures with different powers, you may play the exiled card\" needs a coven condition (distinct powers among creatures you control); hideaway and the free play are built."
+  },
+  {
+   "name": "Colossal Rattlewurm",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "\"has flash as long as you control a Desert\" is a characteristic that must work from the hand; a static grantKeywords only applies on the battlefield and nothing grants a card flash conditionally in hand."
+  },
+  {
+   "name": "Doc Aurlock, Grizzled Genius",
+   "needs": [
+    "cost:cost-mod-by-cast-zone",
+    "cost:plot-cost-reduction"
+   ],
+   "why": "\"Spells you cast from your graveyard or from exile cost {2} less\" needs a cast-zone cost modification, and \"Plotting cards from your hand costs {2} less\" needs a static that reduces the plot special action's cost; neither exists."
+  },
+  {
+   "name": "Duelist of the Mind",
+   "needs": [
+    "bug:cda-turn-stat"
+   ],
+   "why": "\"Duelist of the Mind's power is equal to the number of cards you've drawn this turn\" is a CDA (all zones), and setBasePtFromCount's CountSpec has no turn-stat count (cards drawn this turn); the crime loot itself is expressible."
+  },
+  {
+   "name": "Eriette, the Beguiler",
+   "needs": [
+    "trigger:becomes-attached",
+    "effect:control-while-attached"
+   ],
+   "why": "There's no trigger for an Aura becoming attached to a permanent (with the Aura's and the permanent's mana values compared), and gain-control has no \"for as long as that Aura is attached to it\" duration (only whileSource / until end of turn)."
+  },
+  {
+   "name": "Ertha Jo, Frontier Mentor",
+   "needs": [
+    "trigger:activates-ability-targeting"
+   ],
+   "why": "The activates-ability trigger can't be narrowed to abilities that target a creature or player (only ninjutsu/loyalty/source filters exist)."
+  },
+  {
+   "name": "Forger's Foundry",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-linked"
+   ],
+   "why": "The mana's whenSpent rider must let you *choose* to exile the spell as it resolves and link it to this artifact (\"cards exiled with this artifact\" for the {3}{U}{U} free casts); exile-spell-as-it-resolves is mandatory and links nothing."
+  },
+  {
+   "name": "Full Steam Ahead",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "No effect grants \"This creature can't be blocked by more than one creature\" until end of turn (blockedByAtMostOne is a static's field only, and there's no such keyword), so the third grant would be dropped."
+  },
+  {
+   "name": "Graywater's Fixer",
+   "needs": [
+    "static:grant-encore-in-graveyard"
+   ],
+   "why": "\"Each outlaw creature card in your graveyard has encore {X}, where X is its mana value\" grants an activated ability to graveyard cards, with a cost read off each card; no static grants abilities to cards outside the battlefield."
+  },
+  {
+   "name": "High Noon",
+   "needs": [
+    "effect:cast-limit"
+   ],
+   "why": "\"Each player can't cast more than one spell each turn\" needs a per-player cast limit counted against each caster's own spells this turn; prohibits.spells has no count gate."
+  },
+  {
+   "name": "Hollow Marauder",
+   "needs": [
+    "effect:count-target-players-not-done-this-way"
+   ],
+   "why": "\"For each of those opponents who didn't discard a card with mana value 4 or greater, draw a card\" needs a count of the any-number target players for whom a this-way result (a discard matching a filter) didn't happen; a per-target loop instead would discard one opponent at a time, against the ruling that all the chosen cards are discarded together."
+  },
+  {
+   "name": "Jace Reawakened",
+   "needs": [
+    "condition:turn-count-condition",
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"You can't cast Jace Reawakened during your first, second, or third turns of the game\" needs a per-player count of turns taken for castOnlyIf, and the −6's \"until end of turn, whenever you cast a spell, copy it\" needs a delayed trigger that repeats for the rest of the turn (DelayedNextSpell fires only once)."
+  },
+  {
+   "name": "Jailbreak Scheme",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "The {2} mode has the target's owner put it on their choice of the top or bottom of their library; put-on-library takes a fixed position and no effect lets the permanent's owner make that choice."
+  },
+  {
+   "name": "Lazav, Familiar Stranger",
+   "needs": [
+    "effect:look-and-choose-unlinked-exile"
+   ],
+   "why": "The only untargeted \"exile a card from a graveyard\" is look-and-choose (zone \"graveyards\", destination \"exile\"), which always links the exiled card to the source's stint (rule 607.2a); Lazav then becoming a copy of that card (e.g. Fiend Hunter, Banisher Priest, Skyclave Apparition) would have its copied 'the exiled card' abilities find it, when they must refer only to cards their own linked ability exiled."
+  },
+  {
+   "name": "Luxurious Locomotive",
+   "needs": [
+    "keyword:crewed-it-this-turn"
+   ],
+   "why": "\"create a Treasure token for each creature that crewed it this turn\" (counting ones that have since left, per the ruling) needs the engine to record which creatures crewed a Vehicle this turn; nothing tracks it."
+  },
+  {
+   "name": "Memory Vessel",
+   "needs": [
+    "effect:temporary-player-effect",
+    "effect:prohibit-cast-by-zone"
+   ],
+   "why": "\"Until your next turn ... they can't play cards from their hand\" is a player-level prohibition on playing from the hand that outlasts the exiled Vessel; the each-player impulse permission itself exists (Rocco, Street Chef's shape)."
+  },
+  {
+   "name": "Mystical Tether",
+   "needs": [
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "'You may cast this spell as though it had flash if you pay {2} more' has no vocabulary; a kicker {2} with flash: true (Molten Exhale's shape) would make the flash cast a kicked spell to kicker-matters cards (Hallar etc.) and offer the extra {2} at sorcery speed."
+  },
+  {
+   "name": "Oko, the Ringleader",
+   "needs": [
+    "effect:token-copy-each-other"
+   ],
+   "why": "The −5's \"for each other nonland permanent you control, create a token that's a copy of that permanent\": create-token-copy's { each } filter can't leave out the source, and a notName stand-in would wrongly skip a second Oko (a non-legendary copy, Mirror Gallery); the rest of Oko is expressible (Muddle's become-copy until end-of-turn with keywords: [\"hexproof\"])."
+  },
+  {
+   "name": "One Last Job",
+   "needs": [
+    "effect:attach-extensions"
+   ],
+   "why": "The third mode returns an Aura or Equipment card \"attached to a creature you control\", chosen on resolution (Equipment may enter unattached); put-onto-battlefield has no attach-on-entry choice restricted to your creatures."
+  },
+  {
+   "name": "Prairie Dog",
+   "needs": [
+    "effect:temporary-counter-addend"
+   ],
+   "why": "'{4}{W}: Until end of turn, if you would put one or more +1/+1 counters on a creature you control, put that many plus one instead' — the would-add-counter plus-one replacement exists only as a printed static; player-effect has no until-end-of-turn counter addend (stacking per activation, the rulings)."
+  },
+  {
+   "name": "Quick Draw",
+   "needs": [
+    "effect:lose-keyword-until-eot"
+   ],
+   "why": "\"Creatures target opponent controls lose first strike and double strike until end of turn\" needs a keyword-losing effect over a target player's creatures; the engine only has lose-all-abilities."
+  },
+  {
+   "name": "Resilient Roadrunner",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "'{3}: This creature can't be blocked this turn except by creatures with haste' needs cantBeBlockedBy { notKeyword: haste } granted until end of turn by an effect; cantBeBlockedBy is a static only (protection from Coyotes itself is expressible)."
+  },
+  {
+   "name": "Selvala, Eager Trailblazer",
+   "needs": [
+    "effect:count-distinct-powers"
+   ],
+   "why": "\"Add one mana of that color for each different power among creatures you control\" needs an EffectAmount counting distinct powers; none exists."
+  },
+  {
+   "name": "Smoldering Stagecoach",
+   "needs": [
+    "static:grant-cascade-next-spell"
+   ],
+   "why": "\"The next instant spell and the next sorcery spell you cast this turn each have cascade\": the cascade effect reads its own source's mana value and has no of: \"trigger-object\" (storm does), so a delayed nextSpell trigger can't cascade off that spell."
+  },
+  {
+   "name": "Steer Clear",
+   "needs": [
+    "condition:controlled-as-cast"
+   ],
+   "why": "'4 damage instead if you controlled a Mount as you cast this spell' is a board condition fixed as the spell is cast (the ruling: it doesn't matter whether you still control one on resolution); no condition snapshots the board at cast time."
+  },
+  {
+   "name": "Step Between Worlds",
+   "needs": [
+    "effect:shuffle-hand-and-graveyard-into-library"
+   ],
+   "why": "No effect shuffles a player's hand and graveyard into their library; the rest is expressible (an each-player-may whose ifDid shuffles and draws seven for each player who chose to, after everyone has announced, as the ruling orders it, plus exileOnResolve)."
+  },
+  {
+   "name": "Stingerback Terror",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "\"Gets -1/-1 for each card in your hand\" is a layer-7c bonus, and grantPtPerCount has no cards-in-hand count; setBasePtFromCount's \"cards-in-your-hand\" is a CDA that sets base P/T, which is the wrong layer and can't express 7 minus the count."
+  },
+  {
+   "name": "Stop Cold",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "'Enchanted permanent loses all abilities' is an Aura static; losing all abilities exists only as a one-shot lose-abilities effect modifier, which wouldn't follow the Aura (moved or removed) the way a static does."
+  },
+  {
+   "name": "Taii Wakeen, Perfect Shot",
+   "needs": [
+    "trigger:damage-equal-to-toughness",
+    "replacement:damage-plus-x-this-turn"
+   ],
+   "why": "No deals-damage trigger clause for \"noncombat damage to a creature equal to that creature's toughness\", and no effect that creates a turn-long \"+X damage\" replacement (would-deal-damage plus is static-only)."
+  },
+  {
+   "name": "Take for a Ride",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "\"Has flash as long as you've committed a crime this turn\" needs a conditional flash printed on the spell itself; castAsThoughFlash is read only from battlefield permanents' statics and kicker.flash is behold-only, so there's no field for it (the rest is Act of Treason's effect)."
+  },
+  {
+   "name": "Vengeful Townsfolk",
+   "needs": [
+    "trigger:dies-batch-trigger"
+   ],
+   "why": "'Whenever one or more other creatures you control die' fires once per simultaneous batch; the dies trigger has no batched form (put-into-graveyard's batched form misses tokens and goes by owner, not controller)."
+  },
+  {
+   "name": "We Ride at Dawn",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "\"Legendary creature spells you cast have convoke\": convoke is read only from the card's own definition (def.convoke), nothing grants it to spells."
+  }
+ ]
+}

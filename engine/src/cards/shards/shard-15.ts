@@ -51,6 +51,7 @@ import _poolCapashenKnight from "../pool/capashen-knight.js";
 import _poolCarnassid from "../pool/carnassid.js";
 import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
+import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
@@ -154,6 +155,7 @@ import _poolGnottvoldRecluse from "../pool/gnottvold-recluse.js";
 import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
 import _poolGoblinBrigand from "../pool/goblin-brigand.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
+import _poolGoldRush from "../pool/gold-rush.js";
 import _poolGolgariCharm from "../pool/golgari-charm.js";
 import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
@@ -183,6 +185,7 @@ import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
+import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
 import _poolIronMyr from "../pool/iron-myr.js";
@@ -469,6 +472,7 @@ const shard: CardShard = {
     _poolCarnassid,
     _poolCarrionScreecher,
     _poolCarrionWall,
+    _poolCaughtInTheCrossfire,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
     _poolCidFreeflierPilot,
@@ -572,6 +576,7 @@ const shard: CardShard = {
     _poolGoForTheThroat,
     _poolGoblinBrigand,
     _poolGoblinSledder,
+    _poolGoldRush,
     _poolGolgariCharm,
     _poolGolgariGraveTroll,
     _poolGolgariLonglegs,
@@ -601,6 +606,7 @@ const shard: CardShard = {
     _poolImpossibleInferno,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
+    _poolInventiveWingsmith,
     _poolIrenicussVileDuplication,
     _poolIronHillsBlacksmith,
     _poolIronMyr,

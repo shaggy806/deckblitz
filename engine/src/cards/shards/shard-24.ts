@@ -313,6 +313,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpotcycleScouter from "../pool/spotcycle-scouter.js";
+import _poolSpringSplasher from "../pool/spring-splasher.js";
 import _poolStaggeringInsight from "../pool/staggering-insight.js";
 import _poolStarwinder from "../pool/starwinder.js";
 import _poolSteelHellkite from "../pool/steel-hellkite.js";
@@ -394,6 +395,7 @@ import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
 import _poolWorldShaper from "../pool/world-shaper.js";
+import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
 import _poolZodiacGoat from "../pool/zodiac-goat.js";
@@ -722,6 +724,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSplitTailMiko,
     _poolSpotcycleScouter,
+    _poolSpringSplasher,
     _poolStaggeringInsight,
     _poolStarwinder,
     _poolSteelHellkite,
@@ -803,6 +806,7 @@ const shard: CardShard = {
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
     _poolWorldShaper,
+    _poolWranglerOfTheDamned,
     _poolYotianDissident,
     _poolZephyrSprite,
     _poolZodiacGoat,

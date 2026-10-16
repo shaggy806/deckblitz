@@ -83,6 +83,7 @@ import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
+import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
 import _poolDeepwoodTantiv from "../pool/deepwood-tantiv.js";
 import _poolDelightedHalfling from "../pool/delighted-halfling.js";
@@ -229,6 +230,7 @@ import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
+import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
@@ -539,6 +541,7 @@ const shard: CardShard = {
     _poolDawnCharm,
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
+    _poolDeepmuckDesperado,
     _poolDeeprootElite,
     _poolDeepwoodTantiv,
     _poolDelightedHalfling,
@@ -685,6 +688,7 @@ const shard: CardShard = {
     _poolMillstone,
     _poolMirkwoodNurturer,
     _poolMirrorpool,
+    _poolMournersSurprise,
     _poolMoxAmber,
     _poolMundasVanguard,
     _poolMusesEncouragement,

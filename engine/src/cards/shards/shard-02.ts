@@ -16,6 +16,7 @@ import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
 import _poolArmedAssailant from "../pool/armed-assailant.js";
+import _poolArmoredArmadillo from "../pool/armored-armadillo.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
 import _poolArtisticRefusal from "../pool/artistic-refusal.js";
@@ -218,6 +219,7 @@ import _poolLyraTolarianArchangel from "../pool/lyra-tolarian-archangel.js";
 import _poolMadameHydra from "../pool/madame-hydra.js";
 import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
+import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
 import _poolMayhemDevil from "../pool/mayhem-devil.js";
@@ -308,6 +310,7 @@ import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
+import _poolShepherdOfTheClouds from "../pool/shepherd-of-the-clouds.js";
 import _poolSickleRipper from "../pool/sickle-ripper.js";
 import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
@@ -373,6 +376,7 @@ import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
+import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
@@ -431,6 +435,7 @@ const shard: CardShard = {
     _poolApexWitchstalker,
     _poolArcaneDenial,
     _poolArmedAssailant,
+    _poolArmoredArmadillo,
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,
     _poolArtisticRefusal,
@@ -633,6 +638,7 @@ const shard: CardShard = {
     _poolMadameHydra,
     _poolMadrushCyclops,
     _poolMaestrosInitiate,
+    _poolMagdaTheHoardmaster,
     _poolMarangRiverSkeleton,
     _poolMaulfistSquad,
     _poolMayhemDevil,
@@ -723,6 +729,7 @@ const shard: CardShard = {
     _poolSerraSphinx,
     _poolShalaiVoiceOfPlenty,
     _poolShatterskullGiant,
+    _poolShepherdOfTheClouds,
     _poolSickleRipper,
     _poolSilkWebWeaver,
     _poolSimianSimulacrum,
@@ -788,6 +795,7 @@ const shard: CardShard = {
     _poolUmbralCollarZealot,
     _poolUncagedFury,
     _poolUnderwaterTunnel,
+    _poolUnscrupulousContractor,
     _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,

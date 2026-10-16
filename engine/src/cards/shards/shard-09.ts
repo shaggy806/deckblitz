@@ -55,6 +55,7 @@ import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
+import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
 import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
@@ -126,6 +127,7 @@ import _poolFling from "../pool/fling.js";
 import _poolFoggyNelsonOnRetainer from "../pool/foggy-nelson-on-retainer.js";
 import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
+import _poolForsakenMiner from "../pool/forsaken-miner.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
@@ -241,6 +243,7 @@ import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
+import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
@@ -326,6 +329,7 @@ import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
+import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
@@ -484,6 +488,7 @@ const shard: CardShard = {
     _poolBreathOfMalfegor,
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
+    _poolBruseTarlRovingRancher,
     _poolBurglarRat,
     _poolBurnBurnTreeAndFern,
     _poolBurnoutBashtronaut,
@@ -555,6 +560,7 @@ const shard: CardShard = {
     _poolFoggyNelsonOnRetainer,
     _poolForebodingLandscape,
     _poolForgottenAncient,
+    _poolForsakenMiner,
     _poolForumNecroscribe,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
@@ -670,6 +676,7 @@ const shard: CardShard = {
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOtherworldlyGaze,
+    _poolOutlawStitcher,
     _poolOverlordOfTheBalemurk,
     _poolParapetWatchers,
     _poolPawnOfUlamog,
@@ -755,6 +762,7 @@ const shard: CardShard = {
     _poolSoaringShowOff,
     _poolSparkTrooper,
     _poolSpiderManWebSpinner,
+    _poolSpinewoodsPaladin,
     _poolSpireMechcycle,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,

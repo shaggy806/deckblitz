@@ -340,6 +340,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // aimed at your creature (Bolt Bend, Deflecting Swat, Spellskite).
   "change-targets": (n, v) => v.touch(n.target, "harm", MAJOR),
   "exile-spell-as-it-resolves": none,
+  // A plotted card is its owner's to cast free: always one's own card.
+  "become-plotted": (n, v) => v.touch(n.target, "help", MINOR),
   "additional-combat": none,
   "additional-upkeep-steps": none,
   "additional-land-drop": none,

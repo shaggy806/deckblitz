@@ -216,6 +216,7 @@ import _poolKutzilMalametExemplar from "../pool/kutzil-malamet-exemplar.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
+import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
@@ -340,6 +341,7 @@ import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
+import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
 import _poolStampedingRhino from "../pool/stampeding-rhino.js";
@@ -653,6 +655,7 @@ const shard: CardShard = {
     _poolLandscapePainter,
     _poolLargerThanLife,
     _poolLegionLoyalty,
+    _poolLeylineDowser,
     _poolLightningHelix,
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
@@ -777,6 +780,7 @@ const shard: CardShard = {
     _poolSpinalCentipede,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
+    _poolStagecoachSecurity,
     _poolStaggeringSize,
     _poolStallOut,
     _poolStampedingRhino,

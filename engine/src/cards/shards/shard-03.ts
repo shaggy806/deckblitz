@@ -98,6 +98,7 @@ import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
+import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
@@ -237,6 +238,7 @@ import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
 import _poolPsionicPulse from "../pool/psionic-pulse.js";
 import _poolPutridImp from "../pool/putrid-imp.js";
+import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
@@ -362,6 +364,7 @@ import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
+import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
@@ -498,6 +501,7 @@ const shard: CardShard = {
     _poolErraticVisionary,
     _poolEtheriumHornSorcerer,
     _poolExhibitionTidecaller,
+    _poolExplosiveDerailment,
     _poolFaerieDuelist,
     _poolFanBearer,
     _poolFanaticalStrength,
@@ -637,6 +641,7 @@ const shard: CardShard = {
     _poolProwlingSerpopard,
     _poolPsionicPulse,
     _poolPutridImp,
+    _poolPyreticCharge,
     _poolPyroclasticElemental,
     _poolPyrohemia,
     _poolQueenBrahne,
@@ -762,6 +767,7 @@ const shard: CardShard = {
     _poolValakutStoneforge,
     _poolVariableChaser,
     _poolVeneratedRotpriest,
+    _poolVialSmasherGleefulGrenadier,
     _poolViridianLongbow,
     _poolVoiceOfTruth,
     _poolVonaButcherOfMagan,

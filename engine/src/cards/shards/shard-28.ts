@@ -251,6 +251,7 @@ import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
 import _poolPinnacleKillShip from "../pool/pinnacle-kill-ship.js";
 import _poolPlains from "../pool/plains.js";
+import _poolPlanTheHeist from "../pool/plan-the-heist.js";
 import _poolPoisonDartFrog from "../pool/poison-dart-frog.js";
 import _poolPoisonTheBlade from "../pool/poison-the-blade.js";
 import _poolPondProphet from "../pool/pond-prophet.js";
@@ -286,6 +287,7 @@ import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
+import _poolRiseOfTheVarmints from "../pool/rise-of-the-varmints.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
 import _poolRockalanche from "../pool/rockalanche.js";
 import _poolRocksteadyCrashCourser from "../pool/rocksteady-crash-courser.js";
@@ -677,6 +679,7 @@ const shard: CardShard = {
     _poolPinnacleEmissary,
     _poolPinnacleKillShip,
     _poolPlains,
+    _poolPlanTheHeist,
     _poolPoisonDartFrog,
     _poolPoisonTheBlade,
     _poolPondProphet,
@@ -712,6 +715,7 @@ const shard: CardShard = {
     _poolRevokeDemise,
     _poolRimeshieldFrostGiant,
     _poolRingwardenOwl,
+    _poolRiseOfTheVarmints,
     _poolRobeOfMirrors,
     _poolRockalanche,
     _poolRocksteadyCrashCourser,

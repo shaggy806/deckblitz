@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-419 already implemented / 81 missing
+420 already implemented / 80 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -458,7 +458,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  452  Zur, Eternal Schemer                            6717 decks  {W}{U}{B}        Legendary Creature — Human Wizard
 [x]  453  Abaddon the Despoiler                           6708 decks  {2}{U}{B}{R}     Legendary Creature — Astartes Warrior
 [x]  454  Imodane, the Pyrohammer                         6698 decks  {2}{R}{R}        Legendary Creature — Human Knight
-[ ]  455  Marchesa, Dealer of Death                       6692 decks  {U}{B}{R}        Legendary Creature — Human Rogue
+[x]  455  Marchesa, Dealer of Death                       6692 decks  {U}{B}{R}        Legendary Creature — Human Rogue
 [x]  456  Karametra, God of Harvests                      6674 decks  {3}{G}{W}        Legendary Enchantment Creature — God
 [x]  457  Delney, Streetwise Lookout                      6658 decks  {2}{W}           Legendary Creature — Human Scout
 [x]  458  Yusri, Fortune's Flame                          6649 decks  {1}{U}{R}        Legendary Creature — Efreet

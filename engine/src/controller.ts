@@ -561,11 +561,15 @@ export class AutomaticController implements PlayerController {
     // there (on an adventure, foretold, suspended) is where its owner put it
     // on purpose, and casting it from there costs no tax. An airbended one
     // costs {2} from exile, never more than from the command zone (rule
-    // 701.65a), so it stays too.
+    // 701.65a), and a plotted one nothing (702.170d), so they stay too.
     const object = view.state.objects[commander];
     return !(
       object?.zone === "exile" &&
-      (object.onAdventure || object.foretold || object.suspended || object.airbended === true)
+      (object.onAdventure ||
+        object.foretold ||
+        object.suspended ||
+        object.airbended === true ||
+        object.plottedOnTurn !== undefined)
     );
   }
 
@@ -1358,6 +1362,8 @@ export class RandomController extends AutomaticController {
         return { type: "suspend", player, card: legal.card };
       case "foretell":
         return { type: "foretell", player, card: legal.card };
+      case "plot":
+        return { type: "plot", player, card: legal.card };
       case "turn-face-up":
         return { type: "turn-face-up", player, permanent: legal.permanent, ...(legal.morph !== undefined ? { morph: true } : {}) };
       case "unlock-door":

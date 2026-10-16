@@ -160,6 +160,7 @@ import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
 import _poolGreaterGood from "../pool/greater-good.js";
+import _poolGreedsGambit from "../pool/greeds-gambit.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
 import _poolGrowingDread from "../pool/growing-dread.js";
@@ -207,6 +208,7 @@ import _poolLazavDimirMastermind from "../pool/lazav-dimir-mastermind.js";
 import _poolLeoninScimitar from "../pool/leonin-scimitar.js";
 import _poolLightningTalons from "../pool/lightning-talons.js";
 import _poolLikenessLooter from "../pool/likeness-looter.js";
+import _poolLilahUndefeatedSlickshot from "../pool/lilah-undefeated-slickshot.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingDeath from "../pool/living-death.js";
@@ -259,6 +261,7 @@ import _poolPersonify from "../pool/personify.js";
 import _poolPhotonLivingLight from "../pool/photon-living-light.js";
 import _poolPiaAndKiranNalaar from "../pool/pia-and-kiran-nalaar.js";
 import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
+import _poolPillageTheBog from "../pool/pillage-the-bog.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
 import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
@@ -365,11 +368,13 @@ import _poolTaleOfMomo from "../pool/tale-of-momo.js";
 import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTerritoryForge from "../pool/territory-forge.js";
 import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
 import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
+import _poolThisTownAintBigEnough from "../pool/this-town-aint-big-enough.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
 import _poolThoughtScour from "../pool/thought-scour.js";
 import _poolThunderbolt from "../pool/thunderbolt.js";
@@ -602,6 +607,7 @@ const shard: CardShard = {
     _poolGolgariCluestone,
     _poolGracefulAdept,
     _poolGreaterGood,
+    _poolGreedsGambit,
     _poolGrimMonolith,
     _poolGrimPhysician,
     _poolGrowingDread,
@@ -649,6 +655,7 @@ const shard: CardShard = {
     _poolLeoninScimitar,
     _poolLightningTalons,
     _poolLikenessLooter,
+    _poolLilahUndefeatedSlickshot,
     _poolLionheartGlimmer,
     _poolLiveOrDie,
     _poolLivingDeath,
@@ -701,6 +708,7 @@ const shard: CardShard = {
     _poolPhotonLivingLight,
     _poolPiaAndKiranNalaar,
     _poolPilgrimsEye,
+    _poolPillageTheBog,
     _poolPinToTheEarth,
     _poolPippinWardenOfIsengard,
     _poolPlanarBridge,
@@ -807,11 +815,13 @@ const shard: CardShard = {
     _poolTalruumMinotaur,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTerritoryForge,
     _poolTheMastersOfEvil,
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
     _poolTheSeriema,
     _poolTheWondrousWasp,
+    _poolThisTownAintBigEnough,
     _poolThopterArchitect,
     _poolThoughtScour,
     _poolThunderbolt,

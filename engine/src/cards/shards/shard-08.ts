@@ -20,9 +20,11 @@ import _poolAlabasterMage from "../pool/alabaster-mage.js";
 import _poolAlacrianArmory from "../pool/alacrian-armory.js";
 import _poolAlertShuInfantry from "../pool/alert-shu-infantry.js";
 import _poolAllIsDust from "../pool/all-is-dust.js";
+import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
+import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -176,6 +178,7 @@ import _poolHighspireMantis from "../pool/highspire-mantis.js";
 import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
 import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
+import _poolHolyCow from "../pool/holy-cow.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
 import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
@@ -188,6 +191,7 @@ import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
 import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
+import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
@@ -200,6 +204,7 @@ import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
+import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
@@ -284,6 +289,7 @@ import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
+import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
@@ -341,6 +347,8 @@ import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
 import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
 import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
+import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
+import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoulShred from "../pool/soul-shred.js";
@@ -468,9 +476,11 @@ const shard: CardShard = {
     _poolAlacrianArmory,
     _poolAlertShuInfantry,
     _poolAllIsDust,
+    _poolAloeAlchemist,
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
     _poolAnaraWolvidFamiliar,
+    _poolAnnieFlashTheVeteran,
     _poolAnzragTheQuakeMole,
     _poolArcanisTheOmnipotent,
     _poolArtificersAssistant,
@@ -624,6 +634,7 @@ const shard: CardShard = {
     _poolHinterlandHarbor,
     _poolHinterlandSanctifier,
     _poolHitMonkey,
+    _poolHolyCow,
     _poolHolyStrength,
     _poolHondenOfSeeingWinds,
     _poolHorridShadowspinner,
@@ -636,6 +647,7 @@ const shard: CardShard = {
     _poolInfest,
     _poolInformedInkwright,
     _poolInspirationFromBeyond,
+    _poolIntimidationCampaign,
     _poolIorethOfTheHealingHouse,
     _poolJackOfHeartsVolatileHero,
     _poolJanJansenChaosCrafter,
@@ -648,6 +660,7 @@ const shard: CardShard = {
     _poolKabiraTakedown,
     _poolKapow,
     _poolKarooMeerkat,
+    _poolKellanJoinsUp,
     _poolKhalniTerritory,
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
@@ -732,6 +745,7 @@ const shard: CardShard = {
     _poolPuppeteerClique,
     _poolPygmyAllosaurus,
     _poolRagingKavu,
+    _poolRakishCrew,
     _poolRangingRaptors,
     _poolRaucousTheater,
     _poolReapersScythe,
@@ -789,6 +803,8 @@ const shard: CardShard = {
     _poolSkyshroudRanger,
     _poolSkyswirlHarrier,
     _poolSlagwurmArmor,
+    _poolSlickshotLockpicker,
+    _poolSlickshotShowOff,
     _poolSmelt,
     _poolSokkasHaiku,
     _poolSoulShred,

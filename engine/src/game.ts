@@ -1401,6 +1401,9 @@ export class Game {
       case "foretell":
         this.foretellCard(action.player, action.card);
         break;
+      case "plot":
+        this.plotCard(action.player, action.card);
+        break;
       case "turn-face-up":
         this.turnFaceUp(action.player, action.permanent, action.morph === true);
         break;
@@ -1589,6 +1592,8 @@ export class Game {
         return this.whyCannotSuspend(action.player, action.card);
       case "foretell":
         return this.whyCannotForetell(action.player, action.card);
+      case "plot":
+        return this.whyCannotPlot(action.player, action.card);
       case "turn-face-up":
         return this.whyCannotTurnFaceUp(action.player, action.permanent, action.morph === true);
       case "unlock-door":
@@ -1814,6 +1819,10 @@ export class Game {
       if (def.foretell !== null && this.whyCannotForetell(player, card) === null) {
         out.push({ kind: "foretell", card, cardName });
       }
+      // Plot (rule 702.170a) — a special action (116.2k).
+      if (def.plot !== null && this.whyCannotPlot(player, card) === null) {
+        out.push({ kind: "plot", card, cardName, cost: def.plot.cost });
+      }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       if (def.cycling !== null && this.whyCannotCycle(player, card) === null) {
         out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost });
@@ -1835,6 +1844,25 @@ export class Game {
           costString: cost,
         }),
       );
+    }
+
+    // Plot (rule 702.170d) — a card of this player's plotted on an earlier
+    // turn may be cast from exile without paying its mana cost, as either
+    // face of a modal card; never a land, which is played, not cast.
+    for (const card of this.state.zones.shared.exile) {
+      const object = this.state.objects[card];
+      if (object === undefined || object.plottedOnTurn === undefined || object.owner !== player) continue;
+      for (const face of this.modalFaces(card)) {
+        const def = this.faceDef(card, face ?? 0);
+        if (def.types.includes("land")) continue;
+        out.push(
+          ...this.castSpellActions(player, card, def.name, def, {
+            via: "plot",
+            ...(face !== undefined ? { face } : {}),
+            costString: def.manaCost,
+          }),
+        );
+      }
     }
 
     // Airbend (rule 701.65a) — a card of this player's airbended into exile
@@ -2611,7 +2639,9 @@ export class Game {
     // (a free `cast-now`) is the only way it offers the card: that
     // alternative cost and no other (rule 118.9a), with or without kicker
     // paid on top of it (118.9d).
-    if (via === "effect" && this.castNowOffer(player, card)?.free === true) {
+    // So is a plotted card's cast (rule 702.170d): without paying its mana
+    // cost, and no other way.
+    if ((via === "effect" && this.castNowOffer(player, card)?.free === true) || via === "plot") {
       variants.length = 0;
       variants.push({ kicked: false, overload: false, free: true });
       if (def.kicker !== null) variants.push(...kickedVariants(true));
@@ -5393,6 +5423,7 @@ export class Game {
       this.state.players[player].creaturesDiedThisTurn = 0;
       this.state.players[player].createdTokenThisTurn = false;
       this.state.players[player].usedGraveyardThisTurn = false;
+      delete this.state.players[player].crimesThisTurn;
       delete this.state.players[player].turnHistory;
     }
     // Nothing waits on a departed ability across turns: the stack is empty.
@@ -8582,6 +8613,55 @@ export class Game {
     this.afterPlayerAction(player);
   }
 
+  /** Why `player` cannot plot `cardId` from hand right now: rule 702.170a's
+   * "any time you have priority during your main phase while the stack is
+   * empty" (116.2k), and its plot cost paid. */
+  private whyCannotPlot(player: PlayerId, cardId: ObjectId): string | null {
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
+      return `${player} does not have that card in hand`;
+    }
+    const def = this.registry.get(this.state.objects[cardId].cardName);
+    if (def.plot === null) return `${def.name} does not have plot`;
+    const timing = this.whyNotSorcerySpeed(player, "plot a card");
+    if (timing !== null) return timing;
+    if (this.payMana(player, parseManaCost(def.plot.cost)) === null) {
+      return `${player} cannot pay the plot cost of ${def.name}`;
+    }
+    return null;
+  }
+
+  private plotCard(player: PlayerId, cardId: ObjectId): void {
+    const why = this.whyCannotPlot(player, cardId);
+    if (why !== null) throw new Error(why);
+    const cost = this.registry.get(this.state.objects[cardId].cardName).plot!.cost;
+    const payment = this.payMana(player, parseManaCost(cost));
+    if (payment === null) throw new Error(`${player} cannot pay the plot cost`);
+    const before = this.state.objects[cardId].zoneChangeCount ?? 0;
+    this.moveObject(cardId, "exile");
+    this.executePayment(player, payment);
+    this.makePlotted(player, cardId, before);
+    this.afterPlayerAction(player);
+  }
+
+  /** A card just exiled becomes plotted (rule 702.170): its owner may cast
+   * it free on a later turn, and its "when this card becomes plotted"
+   * triggers. Only a card that really did move to exile — `before` is its
+   * `zoneChangeCount` before the move (rule 400.7) — and never a token, which
+   * has ceased to exist there (111.7). `player` plotted it, or controlled the
+   * effect that made it plotted. */
+  private makePlotted(player: PlayerId, cardId: ObjectId, before: number): void {
+    const object = this.state.objects[cardId];
+    if (object?.zone !== "exile" || (object.zoneChangeCount ?? 0) === before || object.isToken) return;
+    this.markPlotted(player, cardId);
+  }
+
+  private markPlotted(player: PlayerId, cardId: ObjectId): void {
+    this.state.objects[cardId].plottedOnTurn = this.state.turn.number;
+    this.emit({ type: "card-plotted", player, object: cardId });
+  }
+
   /**
    * Why `player` cannot cast `cardId` at all right now — ignoring which targets
    * they would pick, but requiring that every target slot has a legal option.
@@ -9549,6 +9629,7 @@ export class Game {
       (def.freeCastIf !== null ||
         (via === undefined && this.freeFromHand(cardId)) ||
         (via === "impulse" && this.impulseFreeCast(cardId) !== null) ||
+        via === "plot" ||
         (via === "effect" &&
           this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.free === true));
     // Overload (rule 702.126b) *replaces* the mana cost entirely, unlike
@@ -9863,6 +9944,17 @@ export class Game {
       if (object.foretoldOnTurn === this.state.turn.number) {
         return `${def.name} was foretold this turn`;
       }
+    } else if (via === "plot") {
+      // Rule 702.170d — its owner, from exile, on a turn after the one it
+      // became plotted, without paying its mana cost: an alternative cost,
+      // so no other one goes with it (118.9a). Timing is checked below.
+      const object = this.state.objects[cardId];
+      if (object?.plottedOnTurn === undefined || object.zone !== "exile") return `${def.name} is not plotted`;
+      if (object.owner !== player) return `only ${def.name}'s owner may cast it as a plotted card`;
+      if (object.plottedOnTurn >= this.state.turn.number) return `${def.name} became plotted this turn`;
+      if (!free || overload || altCost || evoke !== null) {
+        return `a plotted card is cast without paying its mana cost, and no other way`;
+      }
     } else if (via === "airbend") {
       // Rule 701.65a — its owner, while it remains exiled, for {2} rather
       // than its mana cost: an alternative cost, so no other one goes with
@@ -10030,7 +10122,13 @@ export class Game {
     // Instant-speed if it's an instant, has flash (rule 702.8) or may be cast
     // as though it had flash; otherwise sorcery timing applies — unless an
     // effect has it cast now, which ignores timing (rule 608.2g).
-    if (
+    // A plotted card is cast during its owner's main phase while the stack
+    // is empty (rule 702.170d) — a sorcery's timing, even for an instant or
+    // a card with flash.
+    if (via === "plot") {
+      const timing = this.whyNotSorcerySpeed(player, `cast ${def.name} as a plotted card`);
+      if (timing !== null) return timing;
+    } else if (
       via !== "effect" &&
       // Sneak: "any time you could cast an instant during your declare
       // blockers step" (rule 702.190a) — `sneakReturns` checked the step.
@@ -10116,7 +10214,14 @@ export class Game {
     if (impulseFree === "only" && !free) {
       return `${def.name} may be cast from exile only without paying its mana cost`;
     }
-    if (free && !(via === undefined && this.freeFromHand(cardId)) && impulseFree === null && offered?.free !== true) {
+    if (
+      free &&
+      !(via === undefined && this.freeFromHand(cardId)) &&
+      impulseFree === null &&
+      offered?.free !== true &&
+      // A plotted card's cast is free (rule 702.170d), checked above.
+      via !== "plot"
+    ) {
       if (def.freeCastIf === null) return `${def.name} has no free-cast permission`;
       if (!staticConditionMet(this.state, this.registry, this.state.objects[cardId], def.freeCastIf.condition)) {
         return `${def.name}'s free-cast condition isn't met`;
@@ -11457,6 +11562,7 @@ export class Game {
       from: castFrom,
     });
     this.announceTargeted(chosen, player, cardId, true);
+    this.commitCrimeIfAny(chosen, player, cardId);
     if (sortedModes !== undefined) {
       this.emit({ type: "modes-chosen", source: cardId, player, modes: [...sortedModes] });
     }
@@ -13216,6 +13322,7 @@ export class Game {
       ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
     });
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
+    this.commitCrimeIfAny(chosen, player, abilityId);
     // "Sacrifice two artifacts": which ones is chosen now, as the cost is paid
     // (rules 602.2b, 601.2h) — the ability is on the stack and its mana paid,
     // and nobody gets priority until it's done.
@@ -13415,6 +13522,38 @@ export class Game {
         this.state.objects[target.object].targetedThisTurn = { turn, stint, by: [...current, by] };
       }
     }
+  }
+
+  /**
+   * Rule 700.13: `by` commits a crime as they cast a spell, activate an
+   * ability or put a triggered ability on the stack — `stackObject` — that
+   * targets at least one opponent; a permanent, spell or ability an opponent
+   * controls; and/or a card in an opponent's graveyard. Called only from
+   * those three moments, never for a copy (which isn't cast) or new targets
+   * chosen later. One crime per spell or ability, however many such targets
+   * it has. Slots the triggering event filled aren't targets (115.1).
+   */
+  private commitCrimeIfAny(
+    targets: ResolvedTargets,
+    by: PlayerId,
+    stackObject: ObjectId,
+    autoSlots: readonly number[] = [],
+  ): void {
+    const opponent = (p: PlayerId | undefined): boolean => p !== undefined && p !== by;
+    const crime = targets.some((target, slot) => {
+      if (target === undefined || autoSlots.includes(slot)) return false;
+      if (target.kind === "player") return opponent(target.player);
+      const object = this.state.objects[target.object];
+      if (object === undefined) return false;
+      if (object.zone === "battlefield" || object.zone === "stack") return opponent(object.controller);
+      // A graveyard is its owner's (rule 404.1).
+      if (object.zone === "graveyard") return opponent(object.owner);
+      return false;
+    });
+    if (!crime) return;
+    const player = this.state.players[by];
+    player.crimesThisTurn = (player.crimesThisTurn ?? 0) + 1;
+    this.emit({ type: "crime-committed", player: by, object: stackObject });
   }
 
   private mintAbilityObject(
@@ -15584,7 +15723,7 @@ export class Game {
         {
           text: `Apply ${name}'s replacement first: exile it${
             mark.returnAtNextEndStep === true ? " and return it to your hand at the beginning of the next end step" : ""
-          }`,
+          }${mark.plotted === true ? " (it becomes plotted)" : ""}`,
           effect: { kind: "exile-spell-as-it-resolves", applyFirst: { spell: id, feather: true } },
         },
         {
@@ -15633,6 +15772,8 @@ export class Game {
     object.targets = null;
     if (object.zone !== "exile" || (object.zoneChangeCount ?? 0) === before) return;
     this.emit({ type: "graveyard-replaced-with-exile", object: id });
+    // "If you do, it becomes plotted" (Lilah, Undefeated Slickshot).
+    if (mark.plotted === true) this.makePlotted(mark.player, id, before);
     if (mark.returnAtNextEndStep !== true) return;
     this.createDelayedTrigger(
       mark.source,
@@ -16298,9 +16439,11 @@ export class Game {
       event.type === "permanent-sacrificed" ||
       // A spell's own `this-cast` trigger (cascade, storm) lives on the card
       // on the stack, not a permanent; a cycled card's `this-cycled` one on
-      // the card wherever cycling put it (rule 702.29c).
+      // the card wherever cycling put it (rule 702.29c); a plotted card's
+      // `this-plotted` one on the card in exile (702.170).
       event.type === "spell-cast" ||
-      event.type === "card-cycled"
+      event.type === "card-cycled" ||
+      event.type === "card-plotted"
         ? event.object
         : null;
     if (subject !== null) {
@@ -16364,6 +16507,9 @@ export class Game {
         event.type === "spell-cast" && id === event.object && object.zone === "stack";
       // The card just cycled: only its own "when you cycle this card".
       const onlyThisCycled = event.type === "card-cycled" && id === event.object;
+      // The card just plotted, in exile: only its "when this card becomes
+      // plotted".
+      const onlyThisPlotted = event.type === "card-plotted" && id === event.object;
       // An eliminated player's permanents are left on the board to be seen,
       // not to keep playing: their triggers stop firing. They leave play rather
       // than view — see the note in `matchesFilter`.
@@ -16379,6 +16525,7 @@ export class Game {
         if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
         if (onlyThisCast && ability.trigger.on !== "this-cast") return;
         if (onlyThisCycled && ability.trigger.on !== "this-cycled") return;
+        if (onlyThisPlotted && ability.trigger.on !== "this-plotted") return;
         if (onlyLookBack && !LOOK_BACK_TRIGGERS.has(ability.trigger.on)) return;
         if (
           this.triggerMatches(ability.trigger, event, object) &&
@@ -17837,6 +17984,13 @@ export class Game {
         return event.type === "spell-cast" && event.object === self.id;
       case "this-cycled":
         return event.type === "card-cycled" && event.object === self.id;
+      case "this-plotted":
+        return event.type === "card-plotted" && event.object === self.id;
+      case "crime-committed":
+        return (
+          event.type === "crime-committed" &&
+          (spec.who === "you" ? event.player === self.controller : event.player !== self.controller)
+        );
       default:
         return false;
     }
@@ -18690,6 +18844,7 @@ export class Game {
       abilityId,
       autoTargetSlots,
     );
+    this.commitCrimeIfAny(this.state.objects[abilityId].targets ?? [], controller, abilityId, autoTargetSlots);
     return abilityId;
   }
 
@@ -20704,7 +20859,12 @@ export class Game {
       copyTriggerSpellForEach: (spell, each) => {
         if (triggerObject !== undefined) this.copySpellForEachItCouldTarget(spell, triggerObject, controller, source, each);
       },
-      exileTriggerSpellAsItResolves: (returnAtNextEndStep) => {
+      becomePlotted: (card) => {
+        const object = this.state.objects[card];
+        if (object?.zone !== "exile" || object.isToken || object.plottedOnTurn !== undefined) return;
+        this.markPlotted(controller, card);
+      },
+      exileTriggerSpellAsItResolves: (returnAtNextEndStep, plotted) => {
         // "That card" — the spell that fired this, still that spell on the
         // stack (rule 400.7).
         if (triggerObject === undefined || refs.triggerSpell === undefined) return;
@@ -20722,6 +20882,7 @@ export class Game {
           player: controller,
           source,
           ...(returnAtNextEndStep ? { returnAtNextEndStep: true as const } : {}),
+          ...(plotted ? { plotted: true as const } : {}),
         };
       },
       finishExiledAsItResolves: (spell, feather) => this.finishExiledAsItResolves(spell, feather),
@@ -30362,8 +30523,28 @@ export class Game {
       const object = this.state.objects[id];
       return object?.zone === "battlefield" && object.entry?.from === "graveyard" && !object.isToken;
     });
+    // An `ifCondition` in the amount ("if you control five or more untapped
+    // lands, it enters with …" — Dust Animus) asks about what's already
+    // there too, as `tappedUnless` does: not this permanent or anything
+    // entering with it (rule 614.12). The kinds only a resolution answers
+    // (targets, the trigger object) stay the context's.
+    const notYetHere = new Set(notYet);
+    const sourceObject = this.state.objects[source];
+    const conditionMet = (condition: StaticCondition): boolean => {
+      if (condition.kind === "not") return !conditionMet(condition.of);
+      if (condition.kind === "all") return condition.of.every(conditionMet);
+      if (condition.kind === "any") return condition.of.some(conditionMet);
+      if (condition.kind === "target" || condition.kind === "target-chosen" || condition.kind === "trigger-object") {
+        return ctx.conditionMet(condition);
+      }
+      return (
+        sourceObject !== undefined &&
+        staticConditionMet(this.state, this.registry, sourceObject, condition, { includeSelf: true, notYetHere })
+      );
+    };
     const n = amountValue(amount, {
       ...ctx,
+      conditionMet,
       countInGraveyard: (filter) =>
         ctx.countInGraveyard(filter) +
         fromGraveyard.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: controller }))
@@ -31340,6 +31521,8 @@ export class Game {
     object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;
+    // A plotted card stops being one as it leaves exile (rule 702.170).
+    delete object.plottedOnTurn;
     // Airbend's permission lasts "for as long as it remains exiled" (701.65a).
     delete object.airbended;
     object.exiledFaceDown = undefined;

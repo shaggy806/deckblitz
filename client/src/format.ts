@@ -236,6 +236,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} — time counter removed (${event.remaining} left)`
     case 'card-foretold':
       return `${who(event.player)} foretells a card`
+    case 'card-plotted':
+      return `${name(event.object)} becomes plotted`
     case 'card-cycled':
       return `${who(event.player)} cycles ${name(event.object)}`
     case 'escape-cost-paid':

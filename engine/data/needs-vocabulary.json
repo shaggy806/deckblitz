@@ -6630,6 +6630,66 @@
   "effect:grant-instant-speed-loyalty-until-eot": {
    "family": "effect:instant-speed-loyalty",
    "example": "\"Until end of turn, you may activate loyalty abilities of [filter] planeswalkers you control … any time you could cast an instant\" (Jace's Machinations): instant-speed loyalty granted for a duration."
+  },
+  "effect:exile-spell-as-it-resolves-linked": {
+   "family": "replacement:new-event-replacements",
+   "example": "An optional \"you may exile that spell instead of putting it into its owner's graveyard as it resolves\", the card exiled linked to the source (rule 607.2a) so a later \"cards exiled with this\" ability reaches it (Forger's Foundry); exile-spell-as-it-resolves is mandatory and unlinked."
+  },
+  "trigger:activates-ability-targeting": {
+   "family": "trigger:activates-ability",
+   "example": "An activates-ability trigger narrowed to abilities with a target of a given kind (Ertha Jo: \"whenever you activate an ability that targets a creature or player\")."
+  },
+  "trigger:damage-equal-to-toughness": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "A deals-damage trigger clause matching only damage to a creature equal to that creature's toughness (ignoring damage already marked) — Taii Wakeen."
+  },
+  "replacement:damage-plus-x-this-turn": {
+   "family": "replacement:damage-modification",
+   "example": "An effect (from an activated ability) creating a this-turn would-deal-damage +X replacement for sources you control, X fixed at resolution — Taii Wakeen's {X},{T} ability."
+  },
+  "effect:count-target-players-not-done-this-way": {
+   "family": "effect:this-way-results",
+   "example": "An amount counting the players in an any-number target slot for whom a this-way result didn't happen (\"for each of those opponents who didn't discard a card with mana value 4 or greater, draw a card\" — Hollow Marauder), after a simultaneous for-each-target discard."
+  },
+  "trigger:becomes-attached": {
+   "family": "effect:attach-extensions",
+   "example": "A 'whenever an Aura [you control] becomes attached to [filter]' trigger carrying the Aura and the permanent, so an intervening comparison (mana value of the permanent <= the Aura's) and the effect can read both (Eriette, the Beguiler)."
+  },
+  "effect:control-while-attached": {
+   "family": "effect:control-change-extensions",
+   "example": "gain-control 'for as long as that Aura is attached to it': the control effect ends when a named Aura leaves or becomes unattached from the permanent, and does nothing if it already has as the ability resolves (Eriette, the Beguiler's ruling)."
+  },
+  "decision:choose-face-up-exiled-card": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Choose (without targeting) a face-up card in exile that a given player owns as an effect resolves, and move it to another zone — Binding Negotiation's 'you may put a face-up exiled card they own into their graveyard'."
+  },
+  "condition:controlled-as-cast": {
+   "family": "condition:entry-provenance",
+   "example": "'If you controlled a [filter] as you cast this spell' — a board condition snapshotted when the spell finished being cast and read on resolution, not asked again then (Steer Clear)."
+  },
+  "effect:temporary-counter-addend": {
+   "family": "effect:temporary-player-effect",
+   "example": "A player-effect 'until end of turn, if you would put one or more +1/+1 counters on a creature you control, put that many plus one instead', cumulative per resolution and reaching enters-with-counters (Prairie Dog)."
+  },
+  "bug:cda-turn-stat": {
+   "family": "bug:cda-all-zones",
+   "example": "A CDA count (setBasePtFromCount's CountSpec) that reads a per-player turn stat, e.g. cards drawn this turn — Duelist of the Mind's '*/3, power equal to the number of cards you've drawn this turn'."
+  },
+  "effect:look-and-choose-unlinked-exile": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "A look-and-choose exile that isn't a linked ability: destination 'exile' always records exiledWith on the source's stint (rule 607.2a), so a later copied 'the exiled card' ability on the same permanent finds it (Lazav, Familiar Stranger's 'you may exile a card from a graveyard', then becoming a copy of it)."
+  },
+  "effect:token-copy-each-other": {
+   "family": "effect:token-copy-options",
+   "example": "create-token-copy's { each } filter leaving out the effect's source — 'for each other nonland permanent you control, create a token that's a copy of that permanent' (Oko, the Ringleader's −5)."
+  },
+  "cost:plot-cost-reduction": {
+   "family": "cost:cost-modification-extensions",
+   "example": "A static that changes the cost of the plot special action (rule 702.170a) — Doc Aurlock's \"Plotting cards from your hand costs {2} less\" (generic only)."
+  },
+  "static:pt-per-cards-in-hand": {
+   "family": "static:pt-per-amount",
+   "example": "grantPtPerCount counting the cards in a player's hand — Stingerback Terror's \"gets -1/-1 for each card in your hand\" (layer 7c, not a base P/T characteristic-defining ability)."
   }
  }
 }

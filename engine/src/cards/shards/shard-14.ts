@@ -117,6 +117,7 @@ import _poolDrudgeSkeletons from "../pool/drudge-skeletons.js";
 import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
 import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
+import _poolDustAnimus from "../pool/dust-animus.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
@@ -192,6 +193,7 @@ import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
 import _poolHellsparkElemental from "../pool/hellspark-elemental.js";
+import _poolHellspurBrute from "../pool/hellspur-brute.js";
 import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
 import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
@@ -221,12 +223,15 @@ import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
+import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeveler from "../pool/leveler.js";
 import _poolLimDulsHighGuard from "../pool/lim-duls-high-guard.js";
 import _poolLingeringSouls from "../pool/lingering-souls.js";
 import _poolLlanowarElves from "../pool/llanowar-elves.js";
 import _poolLocthwainGargoyle from "../pool/locthwain-gargoyle.js";
+import _poolLonghornSharpshooter from "../pool/longhorn-sharpshooter.js";
+import _poolLotusRing from "../pool/lotus-ring.js";
 import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
@@ -410,6 +415,7 @@ import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-ar
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
+import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
 import _tokensTentacleToken from "../tokens/tentacle-token.js";
 import _tokensTreefolkToken from "../tokens/treefolk-token.js";
@@ -531,6 +537,7 @@ const shard: CardShard = {
     _poolDuergarCaveGuard,
     _poolDukeUlderRavengard,
     _poolDuskImp,
+    _poolDustAnimus,
     _poolEbonDrake,
     _poolEdgarMarkov,
     _poolEivorBattleReady,
@@ -606,6 +613,7 @@ const shard: CardShard = {
     _poolHeartOfRamos,
     _poolHeartlessHidetsugu,
     _poolHellsparkElemental,
+    _poolHellspurBrute,
     _poolHemosymbicMite,
     _poolHeraldOfThePantheon,
     _poolHexplateWallbreaker,
@@ -635,12 +643,15 @@ const shard: CardShard = {
     _poolKonaRescueBeastie,
     _poolKrarkTheThumbless,
     _poolKrosanColossus,
+    _poolLassoedByTheLaw,
     _poolLawbringer,
     _poolLeveler,
     _poolLimDulsHighGuard,
     _poolLingeringSouls,
     _poolLlanowarElves,
     _poolLocthwainGargoyle,
+    _poolLonghornSharpshooter,
+    _poolLotusRing,
     _poolLoxodonStalwart,
     _poolLoyalWarhound,
     _poolLuminousPhantom,
@@ -826,6 +837,7 @@ const shard: CardShard = {
     _tokensGolemVigilanceToken,
     _tokensKrakenToken,
     _tokensNinjaTokenKaitoShizuki,
+    _tokensScorpionDragonToken,
     _tokensSpiritTokenGhostlyDancers,
     _tokensTentacleToken,
     _tokensTreefolkToken,

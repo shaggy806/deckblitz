@@ -143,6 +143,7 @@ import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
+import _poolFerocification from "../pool/ferocification.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
@@ -266,6 +267,7 @@ import _poolNoDachi from "../pool/no-dachi.js";
 import _poolNocturnalHunger from "../pool/nocturnal-hunger.js";
 import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
+import _poolNurturingPixie from "../pool/nurturing-pixie.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
@@ -302,10 +304,12 @@ import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
+import _poolRattlebackApothecary from "../pool/rattleback-apothecary.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenClanWarAxe from "../pool/raven-clan-war-axe.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
+import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
@@ -618,6 +622,7 @@ const shard: CardShard = {
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
     _poolFaultRiders,
+    _poolFerocification,
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
@@ -741,6 +746,7 @@ const shard: CardShard = {
     _poolNocturnalHunger,
     _poolNotOnMyWatch,
     _poolNulldrifter,
+    _poolNurturingPixie,
     _poolOboroPalaceInTheClouds,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
@@ -777,10 +783,12 @@ const shard: CardShard = {
     _poolRaiseThePast,
     _poolRancorousArchaic,
     _poolRatcatcher,
+    _poolRattlebackApothecary,
     _poolRavagingHorde,
     _poolRavenClanWarAxe,
     _poolRavenousAmulet,
     _poolRaybladeTrooper,
+    _poolRazzleDazzler,
     _poolRecklessAssault,
     _poolRefresh,
     _poolRenderSpeechless,

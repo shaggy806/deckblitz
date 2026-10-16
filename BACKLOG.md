@@ -83,12 +83,13 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to Modern Horizons 3 is whole (batch
-  87 finished Modern Horizons 3 and its Commander set); **next, The Big Score, Outlaws of
-  Thunder Junction and its Commander set** (BIG, OTJ, OTC, about 180 left, their bottom halves),
-  then Fallout and Murders at Karlov Manor (`npm run cards:sets -w engine -- --sets 45`). MH3's
-  leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`) and bestow, five cards
-  each. Leading blockers now:
+  ranked ones first. Every set from Reality Fracture back to Outlaws of Thunder Junction is whole
+  (batch 89 finished The Big Score, Outlaws of Thunder Junction and its Commander set, building
+  plot and crimes); **next, Fallout** (PIP, 77 left), then Ravnica: Clue Edition and Murders at
+  Karlov Manor with its Commander set (CLU, MKM, MKC, about 255) (`npm run cards:sets -w engine --
+  --sets 45`). MH3's leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`) and
+  bestow, five cards each; OTJ's are two cards each (a spell's own conditional flash, cost changes
+  by the zone a spell is cast from). Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only

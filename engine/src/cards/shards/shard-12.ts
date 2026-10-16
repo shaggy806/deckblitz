@@ -43,6 +43,7 @@ import _poolBlazingCrescendo from "../pool/blazing-crescendo.js";
 import _poolBlightedShaman from "../pool/blighted-shaman.js";
 import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
 import _poolBloodDivination from "../pool/blood-divination.js";
+import _poolBloodHustler from "../pool/blood-hustler.js";
 import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
@@ -55,6 +56,7 @@ import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
+import _poolBristlepackSentry from "../pool/bristlepack-sentry.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
@@ -92,6 +94,7 @@ import _poolDisaTheRestless from "../pool/disa-the-restless.js";
 import _poolDisenchant from "../pool/disenchant.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
 import _poolDivination from "../pool/divination.js";
+import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
@@ -214,10 +217,12 @@ import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
+import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
 import _poolMindSculpt from "../pool/mind-sculpt.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
+import _poolMiriamHerdWhisperer from "../pool/miriam-herd-whisperer.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
 import _poolMogisGodOfSlaughter from "../pool/mogis-god-of-slaughter.js";
 import _poolMoltenBlast from "../pool/molten-blast.js";
@@ -251,6 +256,7 @@ import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
+import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
 import _poolPhyrexianArchivist from "../pool/phyrexian-archivist.js";
 import _poolPhyrexianDigester from "../pool/phyrexian-digester.js";
@@ -373,6 +379,7 @@ import _poolTrainingCompound from "../pool/training-compound.js";
 import _poolTrainingRegimen from "../pool/training-regimen.js";
 import _poolTravelTheOverworld from "../pool/travel-the-overworld.js";
 import _poolTrevasAttendant from "../pool/trevas-attendant.js";
+import _poolTrickShot from "../pool/trick-shot.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
 import _poolTuneUp from "../pool/tune-up.js";
 import _poolTwincast from "../pool/twincast.js";
@@ -469,6 +476,7 @@ const shard: CardShard = {
     _poolBlightedShaman,
     _poolBlightsoilDruid,
     _poolBloodDivination,
+    _poolBloodHustler,
     _poolBloodMist,
     _poolBoggartCursecrafter,
     _poolBonecacheOverseer,
@@ -481,6 +489,7 @@ const shard: CardShard = {
     _poolBreathOfFire,
     _poolBrightglassGearhulk,
     _poolBristlebaneBattler,
+    _poolBristlepackSentry,
     _poolBruteSuit,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
@@ -518,6 +527,7 @@ const shard: CardShard = {
     _poolDisenchant,
     _poolDisorderInTheCourt,
     _poolDivination,
+    _poolDjinnOfFoolsFall,
     _poolDoriBearerOfFriends,
     _poolDragonHatchling,
     _poolDragonMage,
@@ -640,10 +650,12 @@ const shard: CardShard = {
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMerrowReejerey,
+    _poolMetamorphicBlast,
     _poolMigratoryRoute,
     _poolMindSculpt,
     _poolMinesOfMoria,
     _poolMireTriton,
+    _poolMiriamHerdWhisperer,
     _poolMishrasWorkshop,
     _poolMogisGodOfSlaughter,
     _poolMoltenBlast,
@@ -677,6 +689,7 @@ const shard: CardShard = {
     _poolPatagiaGolem,
     _poolPathbreakerIbex,
     _poolPendrellDrake,
+    _poolPestControl,
     _poolPetrifiedPlating,
     _poolPhyrexianArchivist,
     _poolPhyrexianDigester,
@@ -799,6 +812,7 @@ const shard: CardShard = {
     _poolTrainingRegimen,
     _poolTravelTheOverworld,
     _poolTrevasAttendant,
+    _poolTrickShot,
     _poolTriplicateSpirits,
     _poolTuneUp,
     _poolTwincast,

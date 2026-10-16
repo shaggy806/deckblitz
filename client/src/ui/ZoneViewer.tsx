@@ -233,7 +233,9 @@ export function ZoneViewer({
                       ? `⏳${obj.counters.time ?? 0}`
                       : obj.foretold
                         ? 'Foretold'
-                        : undefined
+                        : obj.plotted
+                          ? 'Plotted'
+                          : undefined
                   }
                   onClick={
                     selection && isEligible

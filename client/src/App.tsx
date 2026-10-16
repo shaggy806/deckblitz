@@ -301,6 +301,7 @@ function sacrificeNoun(
 type LandAction = Extract<LegalAction, { kind: 'play-land' }>
 type SuspendAction = Extract<LegalAction, { kind: 'suspend' }>
 type ForetellAction = Extract<LegalAction, { kind: 'foretell' }>
+type PlotAction = Extract<LegalAction, { kind: 'plot' }>
 type CycleAction = Extract<LegalAction, { kind: 'cycle' }>
 type AttackAction = Extract<LegalAction, { kind: 'declare-attackers' }>
 type EnterAttackingAction = Extract<LegalAction, { kind: 'enter-attacking' }>
@@ -1619,6 +1620,11 @@ function Table({
   const foretellByCard = useMemo(() => {
     const m = new Map<ObjectId, ForetellAction>()
     for (const a of actions) if (a.kind === 'foretell') m.set(a.card, a)
+    return m
+  }, [actions])
+  const plotByCard = useMemo(() => {
+    const m = new Map<ObjectId, PlotAction>()
+    for (const a of actions) if (a.kind === 'plot') m.set(a.card, a)
     return m
   }, [actions])
   // A face-down permanent that can be turned face up (rule 701.40b): the
@@ -3199,6 +3205,15 @@ function Table({
       )
       selected = selectedSource !== null && ids.includes(selectedSource)
     }
+    // A plotted card on its owner's board (rule 702.170): marked, and cast
+    // with a click like a hand card once the free cast is on offer — on a
+    // later turn, in its owner's main phase (`clickHandCard`).
+    const plottedCast = obj.plotted === true && mode === 'priority' && castByCard.has(id)
+    if (obj.plotted === true) {
+      badge ??= 'Plotted'
+      if (plottedCast) highlight = true
+    }
+    const onTileClick = plottedCast ? () => clickHandCard(id) : () => clickPermanent(ids)
 
     // Any of the permanents the tile stands for (a folded land stack).
     const aimedBy = aim !== null && ids.some((i) => aim.objects.has(i)) ? aim.by : null
@@ -3237,7 +3252,7 @@ function Table({
           enchanting={enchanting}
           held={(obj.holding ?? []).map((h) => ({ id: h, obj: view.objects[h] ?? null }))}
           ownerSeat={backSeat}
-          onClick={() => clickPermanent(ids)}
+          onClick={onTileClick}
         />
       )
     }
@@ -3255,7 +3270,7 @@ function Table({
         goaders={goaders}
         enchanting={enchanting}
         ownerSeat={backSeat}
-        onClick={() => clickPermanent(ids)}
+        onClick={onTileClick}
       />
     )
   }
@@ -3287,8 +3302,16 @@ function Table({
           <div
             // A phased-out permanent (rule 702.26) is drawn dimmed: there,
             // but treated as though it doesn't exist until it phases in.
-            className={`board-entry${own ? ' draggable' : ''}${dragged ? ' dragging' : ''}${dropSide}${entry.sample.phasedOut === true ? ' phased-out' : ''}`}
-            title={entry.sample.phasedOut === true ? 'Phased out — treated as though it doesn’t exist until it phases in' : undefined}
+            // A plotted card (rule 702.170) is in exile, not on the
+            // battlefield: drawn apart from the permanents beside it.
+            className={`board-entry${own ? ' draggable' : ''}${dragged ? ' dragging' : ''}${dropSide}${entry.sample.phasedOut === true ? ' phased-out' : ''}${entry.sample.plotted === true ? ' plotted' : ''}`}
+            title={
+              entry.sample.phasedOut === true
+                ? 'Phased out — treated as though it doesn’t exist until it phases in'
+                : entry.sample.plotted === true
+                  ? 'Plotted — in exile; its owner may cast it without paying its mana cost on a later turn, as a sorcery'
+                  : undefined
+            }
             key={entry.ids[0]}
             data-obj-ids={entry.ids.join(' ')}
             // How many permanents the tile stands for, which a leave reads to
@@ -5438,6 +5461,7 @@ function Table({
           }
           const suspend = mode === 'priority' ? suspendByCard.get(id) : undefined
           const foretell = mode === 'priority' ? foretellByCard.get(id) : undefined
+          const plot = mode === 'priority' ? plotByCard.get(id) : undefined
           const cycle = mode === 'priority' ? cycleByCard.get(id) : undefined
           // Abilities that work from the hand (ninjutsu, channel): a button
           // each, as cycling's.
@@ -5451,7 +5475,7 @@ function Table({
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
                 obj={obj}
-                highlight={highlight || Boolean(suspend) || Boolean(foretell) || Boolean(cycle) || handAbilities.length > 0}
+                highlight={highlight || Boolean(suspend) || Boolean(foretell) || Boolean(plot) || Boolean(cycle) || handAbilities.length > 0}
                 selected={selected}
                 layout="art-first"
                 onClick={() => clickHandCard(id)}
@@ -5524,6 +5548,14 @@ function Table({
                   onClick={() => game.dispatch({ type: 'foretell', player: seat, card: id })}
                 >
                   Foretell
+                </button>
+              ) : null}
+              {plot ? (
+                <button
+                  type="button"
+                  onClick={() => game.dispatch({ type: 'plot', player: seat, card: id })}
+                >
+                  Plot <Symbols text={plot.cost} />
                 </button>
               ) : null}
               {cycle ? (

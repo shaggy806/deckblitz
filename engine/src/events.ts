@@ -470,6 +470,24 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** `player` committed a crime (rule 700.13): they cast a spell,
+       * activated an ability or put a triggered ability on the stack — `object`
+       * — targeting at least one opponent, something an opponent controls, or
+       * a card in an opponent's graveyard. Once per spell or ability, however
+       * many of its targets are a crime. */
+      readonly type: "crime-committed";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** A card in exile became plotted (rule 702.170) — `player` plotted it
+       * from hand with its plot special action, or an effect `player`
+       * controlled made it plotted. It's face up: everyone sees it. */
+      readonly type: "card-plotted";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** A card was cycled — its cycling cost paid, discarded, a card drawn
        * (rule 702.29). */
       readonly type: "card-cycled";

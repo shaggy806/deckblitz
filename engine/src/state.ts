@@ -192,6 +192,8 @@ export interface GameObject {
     readonly player: PlayerId;
     readonly source: ObjectId;
     readonly returnAtNextEndStep?: true;
+    /** The exiled card becomes plotted (rule 702.170 — Lilah). */
+    readonly plotted?: true;
   };
   /** True once dealt damage by a deathtouch source since state-based actions
    * were last checked (rule 704.5h): each check clears it, as do regeneration,
@@ -766,6 +768,13 @@ export interface GameObject {
    * turn). Both cleared on any zone change. */
   foretold?: boolean;
   foretoldOnTurn?: number | null;
+  /** Set while this card is **plotted** (rule 702.170): the turn it became
+   * plotted, by its plot special action or an effect ("it becomes
+   * plotted"). Its owner may cast it from exile without paying its mana
+   * cost, as a sorcery, on any later turn (702.170d — the `"plot"` cast),
+   * whether or not it has plot (702.170d). Set only on a card in exile;
+   * cleared on any zone change. */
+  plottedOnTurn?: number;
   /** True while this card is in exile because it was **airbended** (rule
    * 701.65a): for as long as it remains exiled, its *owner* — whoever
    * airbended it — may cast it by paying {2} rather than its mana cost (the
@@ -1750,6 +1759,11 @@ export interface PlayerState {
    * turn" triggers. (Storm counts *all* players' spells — see
    * `GameState.spellsCastThisTurn`.) Reset in `beginTurn`. ROADMAP Phase 8. */
   spellsCastThisTurn: number;
+  /** How many crimes this player has committed this turn (rule 700.13 — a
+   * spell or ability of theirs targeting an opponent, an opponent's
+   * permanent, spell or ability, or a card in an opponent's graveyard).
+   * Absent for none; reset in `beginTurn`. */
+  crimesThisTurn?: number;
   /** True once this player has lost life this turn — Theater of Horrors's
    * "if an opponent lost life this turn". Reset in `beginTurn`. */
   /**

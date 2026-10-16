@@ -666,6 +666,12 @@ export function parseTrigger(clause) {
     return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
   if (/^When you cast (?:~|this spell)$/.test(c)) return [{ on: "this-cast" }];
+  // Plot (rule 702.170): it triggers from exile, for this card alone.
+  if (/^When (?:~|this card) becomes plotted$/.test(c)) return [{ on: "this-plotted" }];
+  // Committing a crime (rule 700.13). "During your turn" is a person's: a
+  // `your-turn` condition beside it.
+  if (/^Whenever you commit a crime$/.test(c)) return [{ on: "crime-committed", who: "you" }];
+  if (/^Whenever an opponent commits a crime$/.test(c)) return [{ on: "crime-committed", who: "opponent" }];
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
   // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
   if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
@@ -1547,6 +1553,8 @@ export function parseFace(face, ctx = {}) {
     }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
+    // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.
+    if ((m = /^Plot ((?:\{[^}]+\})+)$/.exec(line))) { out.plot = { cost: m[1] }; continue; }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
@@ -1936,6 +1944,8 @@ const INTERVENING_IFS = {
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
+  // Rule 700.13 (Outlaws of Thunder Junction).
+  "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the

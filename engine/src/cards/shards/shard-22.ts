@@ -11,6 +11,7 @@ import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
 import _poolAngelOfTheGodPharaoh from "../pool/angel-of-the-god-pharaoh.js";
 import _poolAngelicAccord from "../pool/angelic-accord.js";
+import _poolAngelicSellSword from "../pool/angelic-sell-sword.js";
 import _poolAnkhOfMishra from "../pool/ankh-of-mishra.js";
 import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
@@ -243,11 +244,14 @@ import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
 import _poolOtterballAntics from "../pool/otterball-antics.js";
+import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
+import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
 import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
+import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
@@ -428,6 +432,7 @@ import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
+import _tokensMercenaryToken from "../tokens/mercenary-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
@@ -443,6 +448,7 @@ const shard: CardShard = {
     _poolAngelOfFlightAlabaster,
     _poolAngelOfTheGodPharaoh,
     _poolAngelicAccord,
+    _poolAngelicSellSword,
     _poolAnkhOfMishra,
     _poolAnnoyedAltisaur,
     _poolAnowonTheRuinSage,
@@ -675,11 +681,14 @@ const shard: CardShard = {
     _poolOrcishBloodpainter,
     _poolOtepecHuntmaster,
     _poolOtterballAntics,
+    _poolOutcasterGreenblade,
     _poolOvergrownEstate,
     _poolPainfulTruths,
     _poolPalaceSiege,
+    _poolPeerlessRopemaster,
     _poolPerilousMyr,
     _poolPesteredWellguard,
+    _poolPhantomInterference,
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPillarOfLight,
@@ -862,6 +871,7 @@ const shard: CardShard = {
     _tokensDwarfToken,
     _tokensHarpyToken,
     _tokensLifelinkCatToken,
+    _tokensMercenaryToken,
     _tokensPhobos,
     _tokensRatTokenGenkuFutureShaper,
     _tokensSnakeToken,

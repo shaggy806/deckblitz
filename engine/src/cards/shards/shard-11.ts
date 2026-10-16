@@ -48,6 +48,7 @@ import _poolBorosGuildmage from "../pool/boros-guildmage.js";
 import _poolBraidsArisenNightmare from "../pool/braids-arisen-nightmare.js";
 import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
 import _poolBrazenWolves from "../pool/brazen-wolves.js";
+import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
@@ -114,6 +115,7 @@ import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEther from "../pool/ether.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
+import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
@@ -211,6 +213,7 @@ import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
 import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
 import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
+import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
@@ -284,6 +287,7 @@ import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
 import _poolRaffCapashenShipsMage from "../pool/raff-capashen-ships-mage.js";
+import _poolRailwayBrawler from "../pool/railway-brawler.js";
 import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
 import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
@@ -358,6 +362,8 @@ import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolStarseerMentor from "../pool/starseer-mentor.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
+import _poolSterlingSupplier from "../pool/sterling-supplier.js";
+import _poolStoicSphinx from "../pool/stoic-sphinx.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
@@ -503,6 +509,7 @@ const shard: CardShard = {
     _poolBraidsArisenNightmare,
     _poolBramblewoodParagon,
     _poolBrazenWolves,
+    _poolBreechesTheBlastmaker,
     _poolBreedingPool,
     _poolBrittleEffigy,
     _poolBroodWeaver,
@@ -569,6 +576,7 @@ const shard: CardShard = {
     _poolEther,
     _poolExtractPower,
     _poolFacetReader,
+    _poolFailedFording,
     _poolFanaticOfRhonas,
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
@@ -666,6 +674,7 @@ const shard: CardShard = {
     _poolLionHeart,
     _poolLlanowarVanguard,
     _poolLoamdraggerGiant,
+    _poolLootTheKeyToEverything,
     _poolManaCylix,
     _poolMaraudingMako,
     _poolMasterPakku,
@@ -739,6 +748,7 @@ const shard: CardShard = {
     _poolRadiantGrove,
     _poolRadiantSummit,
     _poolRaffCapashenShipsMage,
+    _poolRailwayBrawler,
     _poolRakdosSignet,
     _poolRallyTheRanks,
     _poolRambunctiousMutt,
@@ -813,6 +823,8 @@ const shard: CardShard = {
     _poolStarryEyedSkyrider,
     _poolStarseerMentor,
     _poolSteelshapersGift,
+    _poolSterlingSupplier,
+    _poolStoicSphinx,
     _poolStomperCub,
     _poolStoneBySunlight,
     _poolStormfistCrusader,

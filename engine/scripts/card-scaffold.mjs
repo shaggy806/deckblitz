@@ -181,6 +181,7 @@ function faceSource(face, ctx) {
     cantBeCountered: parsed.cantBeCountered,
     cycling: parsed.cycling,
     flashback: parsed.flashback,
+    plot: parsed.plot,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
     sneak: parsed.sneak,

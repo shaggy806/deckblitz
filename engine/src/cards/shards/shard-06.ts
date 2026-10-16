@@ -72,6 +72,7 @@ import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsider from "../pool/consider.js";
+import _poolConsumingAshes from "../pool/consuming-ashes.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
@@ -135,6 +136,7 @@ import _poolFlashback from "../pool/flashback.js";
 import _poolFlyingOctobot from "../pool/flying-octobot.js";
 import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
+import _poolFormAPosse from "../pool/form-a-posse.js";
 import _poolFortify from "../pool/fortify.js";
 import _poolFountainOfRenewal from "../pool/fountain-of-renewal.js";
 import _poolFrostMarsh from "../pool/frost-marsh.js";
@@ -150,6 +152,7 @@ import _poolGenerousEnt from "../pool/generous-ent.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
 import _poolGhaltaTheUnstoppable from "../pool/ghalta-the-unstoppable.js";
+import _poolGhiredMirrorOfTheWilds from "../pool/ghired-mirror-of-the-wilds.js";
 import _poolGhostfireSlice from "../pool/ghostfire-slice.js";
 import _poolGhostlyPrison from "../pool/ghostly-prison.js";
 import _poolGlamdring from "../pool/glamdring.js";
@@ -203,6 +206,7 @@ import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
+import _poolLoanShark from "../pool/loan-shark.js";
 import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
@@ -298,6 +302,7 @@ import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
 import _poolScaledNurturer from "../pool/scaled-nurturer.js";
+import _poolScalestormSummoner from "../pool/scalestorm-summoner.js";
 import _poolScepterOfInsight from "../pool/scepter-of-insight.js";
 import _poolScionOfCalamity from "../pool/scion-of-calamity.js";
 import _poolScorchingSpear from "../pool/scorching-spear.js";
@@ -310,9 +315,11 @@ import _poolSecureTheWastes from "../pool/secure-the-wastes.js";
 import _poolSeismicSense from "../pool/seismic-sense.js";
 import _poolSelflessSavior from "../pool/selfless-savior.js";
 import _poolSerumSnare from "../pool/serum-snare.js";
+import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShambleshark from "../pool/shambleshark.js";
+import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
 import _poolSiegecraft from "../pool/siegecraft.js";
@@ -506,6 +513,7 @@ const shard: CardShard = {
     _poolComfortingCounsel,
     _poolConductElectricity,
     _poolConsider,
+    _poolConsumingAshes,
     _poolCopyArtifact,
     _poolCoretapper,
     _poolCorruptCourtOfficial,
@@ -569,6 +577,7 @@ const shard: CardShard = {
     _poolFlyingOctobot,
     _poolFoggySwampSpiritKeeper,
     _poolForgottenCreation,
+    _poolFormAPosse,
     _poolFortify,
     _poolFountainOfRenewal,
     _poolFrostMarsh,
@@ -584,6 +593,7 @@ const shard: CardShard = {
     _poolGenerousPup,
     _poolGeometersArthropod,
     _poolGhaltaTheUnstoppable,
+    _poolGhiredMirrorOfTheWilds,
     _poolGhostfireSlice,
     _poolGhostlyPrison,
     _poolGlamdring,
@@ -637,6 +647,7 @@ const shard: CardShard = {
     _poolLingeringTormentor,
     _poolLivingAirship,
     _poolLoamDryad,
+    _poolLoanShark,
     _poolLongstalkBrawl,
     _poolLoransEscape,
     _poolLotlethGiant,
@@ -732,6 +743,7 @@ const shard: CardShard = {
     _poolSavageGorilla,
     _poolSawInHalf,
     _poolScaledNurturer,
+    _poolScalestormSummoner,
     _poolScepterOfInsight,
     _poolScionOfCalamity,
     _poolScorchingSpear,
@@ -744,9 +756,11 @@ const shard: CardShard = {
     _poolSeismicSense,
     _poolSelflessSavior,
     _poolSerumSnare,
+    _poolServantOfTheStinger,
     _poolSetessanChampion,
     _poolSeymourFlux,
     _poolShambleshark,
+    _poolSheriffOfSafePassage,
     _poolShroudstomper,
     _poolSidarJabariOfZhalfir,
     _poolSiegecraft,

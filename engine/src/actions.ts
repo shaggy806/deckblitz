@@ -97,6 +97,13 @@ export type CastVia =
    * additional costs are paid on top (118.9d) and X is 0 (107.3b). Timing
    * is the card's own. */
   | "airbend"
+  /** Plot (rule 702.170d): a plotted card (`GameObject.plottedOnTurn`),
+   * cast from exile by its owner without paying its mana cost — an
+   * alternative cost, though additional costs are paid on top (118.9d) and X
+   * is 0 (107.3b) — during their main phase while the stack is empty, on a
+   * turn after the one it became plotted: sorcery timing, even for an
+   * instant. */
+  | "plot"
   /** Morph, megamorph or disguise (rules 702.37c, 702.168a) — cast from the
    * hand face down, as a 2/2 creature spell with no name, text, subtypes or
    * mana cost, for {3}: an alternative cost. It resolves into a face-down
@@ -282,6 +289,15 @@ export type Action =
        * turn, pay `{2}`, exile it face-down to be cast later for its foretell
        * cost. */
       readonly type: "foretell";
+      readonly player: PlayerId;
+      readonly card: ObjectId;
+    }
+  | {
+      /** Plot a card from hand (rule 702.170a): a special action (116.2k)
+       * any time you have priority in your main phase with the stack empty —
+       * pay its plot cost and exile it; it becomes plotted, to be cast free
+       * on a later turn. */
+      readonly type: "plot";
       readonly player: PlayerId;
       readonly card: ObjectId;
     }
@@ -756,6 +772,13 @@ export type LegalAction =
       readonly kind: "foretell";
       readonly card: ObjectId;
       readonly cardName: string;
+    }
+  | {
+      /** A card in hand can be plotted (rule 702.170a) for `cost`. */
+      readonly kind: "plot";
+      readonly card: ObjectId;
+      readonly cardName: string;
+      readonly cost: string;
     }
   | {
       /** One of your face-down permanents can be turned face up — its card

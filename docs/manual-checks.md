@@ -4710,3 +4710,36 @@ one a turn), and protection from everything on a player (rule 702.16j) from a pe
   speed, once; on your own turn she's back to sorcery speed. The Ring's {T} puts a burden counter and draws
   that many; your upkeep loses life per counter. Check at ~768px tall and at full size, in a 2- and a
   4-player room.
+
+## Plot and crimes (2026-10-16)
+
+### Aloe Alchemist, Longhorn Sharpshooter
+
+*New player decisions* — plot (rule 702.170): a special action from the hand at sorcery speed, a
+"when this card becomes plotted" trigger from exile, and a free cast from exile on a later turn
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, four Forests and four Mountains; in hand
+  Aloe Alchemist and Longhorn Sharpshooter. Bob has Hill Giant.
+- **Do:** Use the hand card's **Plot** button on Aloe Alchemist ({1}{G}) and target your Grizzly Bears with
+  its trigger; plot Longhorn Sharpshooter ({3}{R}) and point its 2 damage at Bob. Pass the turn; on your next
+  turn, cast both from exile.
+- **Check:** Each Plot button shows its plot cost, and only in your main phase with the stack empty. Plotted,
+  each card sits on your board after your permanents, faded and badged **Plotted** (Bob sees it there too;
+  the exile viewer badges it too), its trigger asks for a target, and the log says it became plotted; Bob's life drops to 18 and the Bears are 5/4 this turn. Neither can be cast from exile that turn
+  or on Bob's turn; on your next turn each plotted tile lights up in your main phase and a click casts it free. Check at
+  ~768px tall and at full size, in a 2- and a 4-player room.
+
+### Patrolling Peacemaker, Slickshot Vault-Buster
+
+*Careful rules calls* — committing a crime (rule 700.13): targeting an opponent, their permanent, spell or
+graveyard card is a crime; targeting yourself or your own things isn't; "an opponent commits a crime" counts
+Bob targeting Carol
+
+- **Setup:** A 3-player table, your precombat main. Your battlefield: Patrolling Peacemaker (two +1/+1
+  counters), Slickshot Vault-Buster and two Mountains; in hand two Lightning Bolts. Bob (sit at his seat) has
+  a Mountain and Lightning Bolt in hand; Carol has Grizzly Bears.
+- **Do:** Bolt yourself, then Bolt Carol's Grizzly Bears. Pass to Bob's
+  turn and, as Bob, Bolt Carol.
+- **Check:** Bolting yourself leaves the Vault-Buster 1/4; Bolting Carol's Bears makes it 3/4 for the rest of
+  the turn (back to 1/4 on Bob's turn). Your own crime doesn't trigger the Peacemaker; Bob's Bolt at Carol
+  does — the Peacemaker proliferates to a third counter. Check at ~768px tall and at full size.

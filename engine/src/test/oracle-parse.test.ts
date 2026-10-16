@@ -452,6 +452,23 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Rebound", "Instant", {}).rebound).toBe(true);
     expect(face("Teamwork 4", "Instant", {}).kicker).toEqual({ cost: "", keyword: "teamwork", teamwork: 4 });
     expect(face("Sneak {1}{R}{R}").sneak).toEqual({ cost: "{1}{R}{R}" });
+    // Plot (rule 702.170a), its reminder text stripped, and "when this card
+    // becomes plotted" (from exile, this card alone).
+    expect(
+      face(
+        "Plot {1}{G} (You may pay {1}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)",
+      ).plot,
+    ).toEqual({ cost: "{1}{G}" });
+    expect(face("When this card becomes plotted, draw a card.").triggered[0].trigger).toEqual({ on: "this-plotted" });
+    // Committing a crime (rule 700.13).
+    expect(face("Whenever you commit a crime, draw a card.").triggered[0].trigger).toEqual({
+      on: "crime-committed",
+      who: "you",
+    });
+    expect(face("Whenever an opponent commits a crime, draw a card.").triggered[0].trigger).toEqual({
+      on: "crime-committed",
+      who: "opponent",
+    });
     // Web-slinging (rule 702.188a): the line, its reminder text stripped.
     const slinger = face(
       "Web-slinging {R}{G} (You may cast this spell for {R}{G} if you also return a tapped creature you control to its owner's hand.)",

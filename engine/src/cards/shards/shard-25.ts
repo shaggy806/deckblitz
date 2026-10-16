@@ -34,6 +34,7 @@ import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
 import _poolBendersWaterskin from "../pool/benders-waterskin.js";
 import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
 import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
+import _poolBetrayalAtTheVault from "../pool/betrayal-at-the-vault.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
@@ -53,6 +54,7 @@ import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
 import _poolCacophodon from "../pool/cacophodon.js";
+import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
@@ -139,6 +141,7 @@ import _poolFoggySwampVinebender from "../pool/foggy-swamp-vinebender.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
 import _poolFortressKinGuard from "../pool/fortress-kin-guard.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
+import _poolFreestriderLookout from "../pool/freestrider-lookout.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
 import _poolGaeasGift from "../pool/gaeas-gift.js";
@@ -167,6 +170,7 @@ import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
+import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
@@ -217,6 +221,7 @@ import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
+import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
@@ -268,6 +273,7 @@ import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
 import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
+import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
@@ -281,6 +287,7 @@ import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
 import _poolRhonasTheIndomitable from "../pool/rhonas-the-indomitable.js";
+import _poolRictusRobber from "../pool/rictus-robber.js";
 import _poolRiptideLaboratory from "../pool/riptide-laboratory.js";
 import _poolRiseOfTheEldrazi from "../pool/rise-of-the-eldrazi.js";
 import _poolRiskyShortcut from "../pool/risky-shortcut.js";
@@ -371,6 +378,7 @@ import _poolUltronMachineOverlord from "../pool/ultron-machine-overlord.js";
 import _poolUndeadHandNinja from "../pool/undead-hand-ninja.js";
 import _poolUndercitySewers from "../pool/undercity-sewers.js";
 import _poolUndergroundSea from "../pool/underground-sea.js";
+import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
 import _poolUnwillingIngredient from "../pool/unwilling-ingredient.js";
 import _poolUrzaChiefArtificer from "../pool/urza-chief-artificer.js";
@@ -450,6 +458,7 @@ const shard: CardShard = {
     _poolBendersWaterskin,
     _poolBeornReluctantHost,
     _poolBerserkersOnslaught,
+    _poolBetrayalAtTheVault,
     _poolBindingMummy,
     _poolBirthingPod,
     _poolBlazingVolley,
@@ -469,6 +478,7 @@ const shard: CardShard = {
     _poolBumpInTheNight,
     _poolCabalPit,
     _poolCacophodon,
+    _poolCanyonCrab,
     _poolCaptivatingUnicorn,
     _poolCeaselessConflict,
     _poolChamberedNautilus,
@@ -555,6 +565,7 @@ const shard: CardShard = {
     _poolFontOfFortunes,
     _poolFortressKinGuard,
     _poolFoundryOfTheConsuls,
+    _poolFreestriderLookout,
     _poolFugitiveWizard,
     _poolFumigate,
     _poolGaeasGift,
@@ -583,6 +594,7 @@ const shard: CardShard = {
     _poolGreatHallOfTheBiblioplex,
     _poolHallOfHeliodsGenerosity,
     _poolHarnessedSnubhorn,
+    _poolHarvesterOfMisery,
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
     _poolHydaelynTheMothercrystal,
@@ -633,6 +645,7 @@ const shard: CardShard = {
     _poolMeltstridersGear,
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,
+    _poolMineRaider,
     _poolMinotaurAbomination,
     _poolMiscalculation,
     _poolMistralSinger,
@@ -684,6 +697,7 @@ const shard: CardShard = {
     _poolRampartArchitect,
     _poolRaphaelToughTurtle,
     _poolRaucousAudience,
+    _poolReachForTheSky,
     _poolRebelliousStrike,
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
@@ -697,6 +711,7 @@ const shard: CardShard = {
     _poolReverentHoplite,
     _poolReyavMasterSmith,
     _poolRhonasTheIndomitable,
+    _poolRictusRobber,
     _poolRiptideLaboratory,
     _poolRiseOfTheEldrazi,
     _poolRiskyShortcut,
@@ -787,6 +802,7 @@ const shard: CardShard = {
     _poolUndeadHandNinja,
     _poolUndercitySewers,
     _poolUndergroundSea,
+    _poolUnfortunateAccident,
     _poolUnleashFury,
     _poolUnwillingIngredient,
     _poolUrzaChiefArtificer,

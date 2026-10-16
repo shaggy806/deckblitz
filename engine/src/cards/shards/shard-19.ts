@@ -8,6 +8,7 @@ import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
+import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
 import _poolAncestralCommunion from "../pool/ancestral-communion.js";
@@ -40,6 +41,7 @@ import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
+import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
 import _poolBrigidsCommand from "../pool/brigids-command.js";
@@ -142,6 +144,7 @@ import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
 import _poolGenerousGift from "../pool/generous-gift.js";
 import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
+import _poolGeyserDrake from "../pool/geyser-drake.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
 import _poolGildedGhoda from "../pool/gilded-ghoda.js";
@@ -165,6 +168,7 @@ import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
+import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
 import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavenwoodWurm from "../pool/havenwood-wurm.js";
 import _poolHawkeaterMoth from "../pool/hawkeater-moth.js";
@@ -352,6 +356,7 @@ import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
 import _poolSilvanReveler from "../pool/silvan-reveler.js";
+import _poolSilverDeputy from "../pool/silver-deputy.js";
 import _poolSilverquillLecturer from "../pool/silverquill-lecturer.js";
 import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
@@ -403,6 +408,7 @@ import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
+import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
@@ -470,6 +476,7 @@ const shard: CardShard = {
     _poolAerialPredation,
     _poolAetherGale,
     _poolAgentsOfSHIELD,
+    _poolAkulTheUnrepentant,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
     _poolAncestralCommunion,
@@ -502,6 +509,7 @@ const shard: CardShard = {
     _poolBobReluctantHydraAgent,
     _poolBogNaughty,
     _poolBoldwyrAggressor,
+    _poolBoneyardDesecrator,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
     _poolBrigidsCommand,
@@ -604,6 +612,7 @@ const shard: CardShard = {
     _poolGeneralThunderboltRoss,
     _poolGenerousGift,
     _poolGenesisUltimatum,
+    _poolGeyserDrake,
     _poolGiantFly,
     _poolGiantSpider,
     _poolGildedGhoda,
@@ -627,6 +636,7 @@ const shard: CardShard = {
     _poolHadanasClimb,
     _poolHallowedFountain,
     _poolHandOfSilumgar,
+    _poolHardbristleBandit,
     _poolHauntedHellride,
     _poolHavenwoodWurm,
     _poolHawkeaterMoth,
@@ -814,6 +824,7 @@ const shard: CardShard = {
     _poolSift,
     _poolSignInBlood,
     _poolSilvanReveler,
+    _poolSilverDeputy,
     _poolSilverquillLecturer,
     _poolSinkholeSurveyor,
     _poolSkarrgGoliath,
@@ -865,6 +876,7 @@ const shard: CardShard = {
     _poolTrashForTreasure,
     _poolTreespringLorian,
     _poolTroyanGutsyExplorer,
+    _poolTumbleweedRising,
     _poolTundraTank,
     _poolUlamogsDreadsire,
     _poolUltronTheAnnihilator,

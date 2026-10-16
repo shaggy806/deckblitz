@@ -39,6 +39,7 @@ import _poolBlossomingBogbeast from "../pool/blossoming-bogbeast.js";
 import _poolBoneSplinters from "../pool/bone-splinters.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
+import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
 import _poolBroadcastRambler from "../pool/broadcast-rambler.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
@@ -53,6 +54,7 @@ import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
+import _poolCharredGraverobber from "../pool/charred-graverobber.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
@@ -143,6 +145,7 @@ import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
 import _poolGideonsMemorial from "../pool/gideons-memorial.js";
 import _poolGigglingSkitterspike from "../pool/giggling-skitterspike.js";
+import _poolGisaTheHellraiser from "../pool/gisa-the-hellraiser.js";
 import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
@@ -229,6 +232,7 @@ import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
 import _poolNephaliaDrownyard from "../pool/nephalia-drownyard.js";
 import _poolNeurokReplica from "../pool/neurok-replica.js";
+import _poolNeutralizeTheGuards from "../pool/neutralize-the-guards.js";
 import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
@@ -240,6 +244,7 @@ import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOrbitalPlunge from "../pool/orbital-plunge.js";
 import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
+import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPain101 from "../pool/pain-101.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
@@ -282,6 +287,7 @@ import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
+import _poolRustlerRampage from "../pool/rustler-rampage.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
 import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
@@ -459,6 +465,7 @@ const shard: CardShard = {
     _poolBoneSplinters,
     _poolBoromirWardenOfTheTower,
     _poolBothersomeNoisemaker,
+    _poolBrimstoneRoundup,
     _poolBroadcastRambler,
     _poolBruseTarlBoorishHerder,
     _poolBurgeoning,
@@ -473,6 +480,7 @@ const shard: CardShard = {
     _poolCelestialAncient,
     _poolChar,
     _poolChargingBadger,
+    _poolCharredGraverobber,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
     _poolCityOfDeath,
@@ -563,6 +571,7 @@ const shard: CardShard = {
     _poolGhostlySentinel,
     _poolGideonsMemorial,
     _poolGigglingSkitterspike,
+    _poolGisaTheHellraiser,
     _poolGlassworksShatteredYard,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
@@ -649,6 +658,7 @@ const shard: CardShard = {
     _poolNecroticSliver,
     _poolNephaliaDrownyard,
     _poolNeurokReplica,
+    _poolNeutralizeTheGuards,
     _poolNezumiInformant,
     _poolNipGwyllion,
     _poolNoxiousDragon,
@@ -660,6 +670,7 @@ const shard: CardShard = {
     _poolOrbitalPlunge,
     _poolOrcishMedicine,
     _poolOtharriSunsGlory,
+    _poolOutcasterTrailblazer,
     _poolOwlinHistorian,
     _poolPain101,
     _poolParhelionIi,
@@ -702,6 +713,7 @@ const shard: CardShard = {
     _poolRobeOfStars,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
+    _poolRustlerRampage,
     _poolSacredArmory,
     _poolSaheeliRadiantCreator,
     _poolSamiWildcatCaptain,

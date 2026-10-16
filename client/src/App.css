@@ -1679,6 +1679,18 @@
   opacity: 0.38;
   filter: grayscale(0.75);
 }
+/* A plotted card (rule 702.170) waits in exile, face up, on its owner's side
+   of the table: drawn a little apart from the permanents (faded, tinted
+   toward the gold of a played card's frame) and badged "Plotted" by its
+   tile. Full strength while it's castable, which highlights it. */
+.board-entry.plotted {
+  opacity: 0.72;
+  filter: sepia(0.45);
+}
+.board-entry.plotted:has(.highlight) {
+  opacity: 1;
+  filter: none;
+}
 /* ...until a strip is hovered or focused, which lifts that attachment out of
    the pile so it can be read in place as well as in its popover */
 .board-entry .attachments > *:hover,

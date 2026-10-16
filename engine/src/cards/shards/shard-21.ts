@@ -17,6 +17,7 @@ import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
 import _poolArmoryAutomaton from "../pool/armory-automaton.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
+import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
@@ -25,7 +26,9 @@ import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.j
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
 import _poolBalaGedSanctuary from "../pool/bala-ged-sanctuary.js";
 import _poolBallistaSquad from "../pool/ballista-squad.js";
+import _poolBanditsHaul from "../pool/bandits-haul.js";
 import _poolBaneOfProgress from "../pool/bane-of-progress.js";
+import _poolBeastbondOutcaster from "../pool/beastbond-outcaster.js";
 import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
 import _poolBeseechTheQueen from "../pool/beseech-the-queen.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
@@ -145,6 +148,7 @@ import _poolHardWonJitte from "../pool/hard-won-jitte.js";
 import _poolHeadwaterSentries from "../pool/headwater-sentries.js";
 import _poolHeartbeatOfSpring from "../pool/heartbeat-of-spring.js";
 import _poolHellkitePunisher from "../pool/hellkite-punisher.js";
+import _poolHellspurPosseBoss from "../pool/hellspur-posse-boss.js";
 import _poolHelmOfTheHost from "../pool/helm-of-the-host.js";
 import _poolHengegatePathway from "../pool/hengegate-pathway.js";
 import _poolHighPriestOfPenance from "../pool/high-priest-of-penance.js";
@@ -220,6 +224,7 @@ import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
+import _poolNimbleBrigand from "../pool/nimble-brigand.js";
 import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
@@ -236,6 +241,7 @@ import _poolParadoxSurveyor from "../pool/paradox-surveyor.js";
 import _poolParallelLives from "../pool/parallel-lives.js";
 import _poolParapetThrasher from "../pool/parapet-thrasher.js";
 import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
+import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPhantasmalImage from "../pool/phantasmal-image.js";
@@ -356,6 +362,7 @@ import _poolValiantKnight from "../pool/valiant-knight.js";
 import _poolValorousSteed from "../pool/valorous-steed.js";
 import _poolVaporkin from "../pool/vaporkin.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
+import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
@@ -373,6 +380,7 @@ import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
+import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
@@ -401,6 +409,7 @@ const shard: CardShard = {
     _poolArmoryAutomaton,
     _poolAronBenaliasRuin,
     _poolArrogantVampire,
+    _poolAtKnifepoint,
     _poolAtTheDoor,
     _poolAtomicMicrosizer,
     _poolAvelineDeGrandpre,
@@ -409,7 +418,9 @@ const shard: CardShard = {
     _poolAzoriusCharm,
     _poolBalaGedSanctuary,
     _poolBallistaSquad,
+    _poolBanditsHaul,
     _poolBaneOfProgress,
+    _poolBeastbondOutcaster,
     _poolBeastmasterAscension,
     _poolBeseechTheQueen,
     _poolBestialIncursion,
@@ -529,6 +540,7 @@ const shard: CardShard = {
     _poolHeadwaterSentries,
     _poolHeartbeatOfSpring,
     _poolHellkitePunisher,
+    _poolHellspurPosseBoss,
     _poolHelmOfTheHost,
     _poolHengegatePathway,
     _poolHighPriestOfPenance,
@@ -604,6 +616,7 @@ const shard: CardShard = {
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
     _poolNightmareShepherd,
+    _poolNimbleBrigand,
     _poolNovaHellkite,
     _poolNoxiousRevival,
     _poolNymrisOonasTrickster,
@@ -620,6 +633,7 @@ const shard: CardShard = {
     _poolParallelLives,
     _poolParapetThrasher,
     _poolPathOfAngersFlame,
+    _poolPatientNaturalist,
     _poolPatriotShieldWielder,
     _poolPeemaOutrider,
     _poolPhantasmalImage,
@@ -740,6 +754,7 @@ const shard: CardShard = {
     _poolValorousSteed,
     _poolVaporkin,
     _poolVedalkenBlademaster,
+    _poolVengefulRegrowth,
     _poolVensersJournal,
     _poolVesperGhoul,
     _poolVesselOfEphemera,
@@ -757,6 +772,7 @@ const shard: CardShard = {
     _poolWhiskerquillScribe,
     _poolWillOfTheSultai,
     _poolWoodworkProdigy,
+    _poolWylieDukeAtiinHero,
     _poolZhaoRuthlessAdmiral,
   ],
   tokens: [

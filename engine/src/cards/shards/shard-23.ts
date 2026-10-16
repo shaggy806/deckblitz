@@ -45,6 +45,7 @@ import _poolBindToLife from "../pool/bind-to-life.js";
 import _poolBirchloreRangers from "../pool/birchlore-rangers.js";
 import _poolBirthdayEscape from "../pool/birthday-escape.js";
 import _poolBlackDragon from "../pool/black-dragon.js";
+import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
@@ -82,6 +83,7 @@ import _poolCongregationGryff from "../pool/congregation-gryff.js";
 import _poolCoolButRude from "../pool/cool-but-rude.js";
 import _poolCoordinatedCharge from "../pool/coordinated-charge.js";
 import _poolCostumeCloset from "../pool/costume-closet.js";
+import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
@@ -190,6 +192,7 @@ import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
 import _poolJunktown from "../pool/junktown.js";
+import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
@@ -247,6 +250,7 @@ import _poolNantukoElder from "../pool/nantuko-elder.js";
 import _poolNarnamCobra from "../pool/narnam-cobra.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
+import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
@@ -281,6 +285,7 @@ import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
+import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
@@ -295,6 +300,7 @@ import _poolReprisal from "../pool/reprisal.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
+import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -360,6 +366,7 @@ import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
 import _poolThorin from "../pool/thorin.js";
+import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
@@ -468,6 +475,7 @@ const shard: CardShard = {
     _poolBirchloreRangers,
     _poolBirthdayEscape,
     _poolBlackDragon,
+    _poolBlacksnagBuzzard,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
     _poolBloodflowConnoisseur,
@@ -505,6 +513,7 @@ const shard: CardShard = {
     _poolCoolButRude,
     _poolCoordinatedCharge,
     _poolCostumeCloset,
+    _poolCracklingSpellslinger,
     _poolCreepingBloodsucker,
     _poolCrossbowAmbush,
     _poolCrowdedCrypt,
@@ -613,6 +622,7 @@ const shard: CardShard = {
     _poolJooDeeOneOfMany,
     _poolJunjiTheMidnightSky,
     _poolJunktown,
+    _poolKaervekThePunisher,
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
     _poolKavaronSkywarden,
@@ -670,6 +680,7 @@ const shard: CardShard = {
     _poolNarnamCobra,
     _poolNeoExdeathDimensionsEnd,
     _poolNewsHelicopter,
+    _poolNezumiLinkbreaker,
     _poolNightMarket,
     _poolNighthowlPursuer,
     _poolNyxLotus,
@@ -704,6 +715,7 @@ const shard: CardShard = {
     _poolRakingClaws,
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
+    _poolRavenOfFellOmens,
     _poolRazakethTheFoulblooded,
     _poolReachThroughMists,
     _poolRecklessAirStrike,
@@ -718,6 +730,7 @@ const shard: CardShard = {
     _poolRile,
     _poolRimefurReindeer,
     _poolRoilingCanopy,
+    _poolRooftopAssassin,
     _poolRottedHulk,
     _poolRuneScarredDemon,
     _poolSarkhanFireblood,
@@ -783,6 +796,7 @@ const shard: CardShard = {
     _poolThermoAlchemist,
     _poolThopterAssembly,
     _poolThorin,
+    _poolThunderLasso,
     _poolThunderingBroodwagon,
     _poolTidalKraken,
     _poolTigraFelineFury,

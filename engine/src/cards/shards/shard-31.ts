@@ -102,6 +102,7 @@ import _poolDimirHouseGuard from "../pool/dimir-house-guard.js";
 import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
+import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
@@ -144,6 +145,7 @@ import _poolFoundryInspector from "../pool/foundry-inspector.js";
 import _poolFountainportBell from "../pool/fountainport-bell.js";
 import _poolFoxfireOak from "../pool/foxfire-oak.js";
 import _poolFreshFacedRecruit from "../pool/fresh-faced-recruit.js";
+import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
@@ -178,6 +180,7 @@ import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
 import _poolHerosResolve from "../pool/heros-resolve.js";
 import _poolHideousVisage from "../pool/hideous-visage.js";
+import _poolHighwayRobbery from "../pool/highway-robbery.js";
 import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
@@ -232,6 +235,7 @@ import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
+import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
 import _poolMarduSkullhunter from "../pool/mardu-skullhunter.js";
 import _poolMarisiBreakerOfTheCoil from "../pool/marisi-breaker-of-the-coil.js";
@@ -519,6 +523,7 @@ const shard: CardShard = {
     _poolDinotomaton,
     _poolDiplomaticImmunity,
     _poolDiscerningPeddler,
+    _poolDiscreetRetreat,
     _poolDivineArrow,
     _poolDizzySpell,
     _poolDrMadisonLi,
@@ -561,6 +566,7 @@ const shard: CardShard = {
     _poolFountainportBell,
     _poolFoxfireOak,
     _poolFreshFacedRecruit,
+    _poolFrontierSeeker,
     _poolFungalInfection,
     _poolGallifreyCouncilChamber,
     _poolGastalThrillseeker,
@@ -595,6 +601,7 @@ const shard: CardShard = {
     _poolHellkiteTyrant,
     _poolHerosResolve,
     _poolHideousVisage,
+    _poolHighwayRobbery,
     _poolHoldoutSettlement,
     _poolHonoredDreyleader,
     _poolHopelessNightmare,
@@ -649,6 +656,7 @@ const shard: CardShard = {
     _poolLoomingHoverguard,
     _poolLuckyOffering,
     _poolMagmaquake,
+    _poolMalcolmTheEyes,
     _poolMalevolentRumble,
     _poolMarduSkullhunter,
     _poolMarisiBreakerOfTheCoil,

@@ -48,6 +48,7 @@ import _poolBraingeyser from "../pool/braingeyser.js";
 import _poolBrainstorm from "../pool/brainstorm.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
+import _poolBucolicRanch from "../pool/bucolic-ranch.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
@@ -169,6 +170,7 @@ import _poolInferno from "../pool/inferno.js";
 import _poolInsurrection from "../pool/insurrection.js";
 import _poolIntrepidHero from "../pool/intrepid-hero.js";
 import _poolIntroductionToProphecy from "../pool/introduction-to-prophecy.js";
+import _poolIrascibleWolverine from "../pool/irascible-wolverine.js";
 import _poolIroassChampion from "../pool/iroass-champion.js";
 import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
@@ -182,6 +184,7 @@ import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
 import _poolKingpinWilsonFisk from "../pool/kingpin-wilson-fisk.js";
 import _poolKinscaerSentry from "../pool/kinscaer-sentry.js";
+import _poolKirriTalentedSprout from "../pool/kirri-talented-sprout.js";
 import _poolKlauthUnrivaledAncient from "../pool/klauth-unrivaled-ancient.js";
 import _poolKnightErrant from "../pool/knight-errant.js";
 import _poolKnightOfTheNewCoalition from "../pool/knight-of-the-new-coalition.js";
@@ -264,6 +267,7 @@ import _poolRaidBombardment from "../pool/raid-bombardment.js";
 import _poolRaisedByGiants from "../pool/raised-by-giants.js";
 import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
+import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
@@ -470,6 +474,7 @@ const shard: CardShard = {
     _poolBrainstorm,
     _poolBristlingBackwoods,
     _poolBruteStrength,
+    _poolBucolicRanch,
     _poolCarnageTyrant,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
@@ -591,6 +596,7 @@ const shard: CardShard = {
     _poolInsurrection,
     _poolIntrepidHero,
     _poolIntroductionToProphecy,
+    _poolIrascibleWolverine,
     _poolIroassChampion,
     _poolIroncladKrovod,
     _poolJenovaAncientCalamity,
@@ -604,6 +610,7 @@ const shard: CardShard = {
     _poolKingCheetah,
     _poolKingpinWilsonFisk,
     _poolKinscaerSentry,
+    _poolKirriTalentedSprout,
     _poolKlauthUnrivaledAncient,
     _poolKnightErrant,
     _poolKnightOfTheNewCoalition,
@@ -686,6 +693,7 @@ const shard: CardShard = {
     _poolRaisedByGiants,
     _poolRallyTheMonastery,
     _poolRangersLongbow,
+    _poolRaucousEntertainer,
     _poolRazeTheEffigy,
     _poolReckonersBargain,
     _poolRequitingHex,

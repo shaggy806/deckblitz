@@ -2800,4 +2800,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears', 'Mountain*2'], hand: ['Lightning Bolt'] },
     }),
   ),
+  preset(
+    'Aloe Alchemist, Longhorn Sharpshooter',
+    board({
+      you: { bf: ['Grizzly Bears', 'Forest*4', 'Mountain*4'], hand: ['Aloe Alchemist', 'Longhorn Sharpshooter'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Patrolling Peacemaker, Slickshot Vault-Buster',
+    board({
+      you: {
+        bf: [{ name: 'Patrolling Peacemaker', counters: { '+1/+1': 2 } }, 'Slickshot Vault-Buster', 'Mountain*2'],
+        hand: ['Lightning Bolt*2'],
+      },
+      opp: [{ bf: ['Mountain'], hand: ['Lightning Bolt'], human: true }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
 ]

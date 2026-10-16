@@ -1712,6 +1712,17 @@ export type EffectSpec =
       readonly exceptTarget?: number;
     }
   | {
+      /** "If you do, it becomes plotted" (rule 702.170c): a card an
+       * instruction just exiled is plotted — its owner may cast it from exile
+       * without paying its mana cost, as a sorcery, on a later turn. The `then`
+       * of a `look-and-choose` that exiles ("you may exile a nonland card …
+       * from your hand", Kellan Joins Up; "… from among them", Make Your Own
+       * Luck), whose chosen card is its target 0. Nothing for a card no
+       * longer in exile, a token, or one already plotted. */
+      readonly kind: "become-plotted";
+      readonly target: EffectTargetRef;
+    }
+  | {
       /** Put a target permanent into exile — or, with `"trigger-object"`,
        * the card a dies trigger is about, only while it's still that object
        * in the graveyard it went to (rule 400.7 — "you may exile it", Myrkul,
@@ -3371,6 +3382,9 @@ export type EffectSpec =
       readonly kind: "exile-spell-as-it-resolves";
       /** "Return it to your hand at the beginning of the next end step." */
       readonly returnAtNextEndStep?: true;
+      /** "If you do, it becomes plotted" (rule 702.170 — Lilah, Undefeated
+       * Slickshot): the card this exiles is plotted. */
+      readonly plotted?: true;
       /** Only the engine sets this: the answer to that rule 616.1 choice,
        * applied to the spell `spell` that has just resolved — `true` to
        * apply this replacement first, `false` to let the other. */
@@ -5637,7 +5651,9 @@ export interface EffectApi {
   ): void;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
-  exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean): void;
+  exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean): void;
+  /** A card in exile becomes plotted — see the `become-plotted` effect. */
+  becomePlotted(card: ObjectId): void;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean): void;
   /** Shuffle the controller's library — see the `shuffle-library`
@@ -7740,6 +7756,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "become-plotted": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined && target.kind === "object") ctx.becomePlotted(target.object);
+      return;
+    }
     case "return-exiled-by-source": {
       if (spec.linked === "hand") {
         for (const card of ctx.cardsExiledWithSource()) ctx.returnToHand({ kind: "object", object: card }, "exile");
@@ -8474,7 +8495,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "exile-spell-as-it-resolves":
       if (spec.applyFirst !== undefined) ctx.finishExiledAsItResolves(spec.applyFirst.spell, spec.applyFirst.feather);
-      else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true);
+      else ctx.exileTriggerSpellAsItResolves(spec.returnAtNextEndStep === true, spec.plotted === true);
       return;
     case "copy-spell": {
       const newTargets = spec.newTargets === true;

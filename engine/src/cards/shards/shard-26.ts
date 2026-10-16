@@ -45,6 +45,7 @@ import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
+import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
@@ -154,6 +155,7 @@ import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
 import _poolHoofSkulkin from "../pool/hoof-skulkin.js";
+import _poolHostileInvestigator from "../pool/hostile-investigator.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
 import _poolHulkSmash from "../pool/hulk-smash.js";
 import _poolHumbleDefector from "../pool/humble-defector.js";
@@ -287,6 +289,7 @@ import _poolSeedSuture from "../pool/seed-suture.js";
 import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
+import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
 import _poolShatteredAcolyte from "../pool/shattered-acolyte.js";
@@ -333,6 +336,7 @@ import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwat from "../pool/swat.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
+import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
@@ -350,6 +354,7 @@ import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
 import _poolThornhideWolves from "../pool/thornhide-wolves.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
+import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
@@ -373,6 +378,7 @@ import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolValleyRally from "../pool/valley-rally.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
+import _poolVaultPlunderer from "../pool/vault-plunderer.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
@@ -380,6 +386,7 @@ import _poolViashinoWarrior from "../pool/viashino-warrior.js";
 import _poolVincentValentine from "../pool/vincent-valentine.js";
 import _poolVindictiveVampire from "../pool/vindictive-vampire.js";
 import _poolVirtueOfPersistence from "../pool/virtue-of-persistence.js";
+import _poolVisageBandit from "../pool/visage-bandit.js";
 import _poolVivisurgeonsInsight from "../pool/vivisurgeons-insight.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
@@ -456,6 +463,7 @@ const shard: CardShard = {
     _poolBoldImpaler,
     _poolBorealShelf,
     _poolBreakneckBerserker,
+    _poolBristlebudFarmer,
     _poolBulwarkOx,
     _poolByrkeLongEarOfTheLaw,
     _poolCactusPreserve,
@@ -565,6 +573,7 @@ const shard: CardShard = {
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
     _poolHoofSkulkin,
+    _poolHostileInvestigator,
     _poolHostileMinotaur,
     _poolHulkSmash,
     _poolHumbleDefector,
@@ -698,6 +707,7 @@ const shard: CardShard = {
     _poolSelesnyaCharm,
     _poolSenateGuildmage,
     _poolSeraphSanctuary,
+    _poolShackleSlinger,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,
     _poolShatteredAcolyte,
@@ -744,6 +754,7 @@ const shard: CardShard = {
     _poolSwat,
     _poolTajuruBlightblade,
     _poolTakeItBack,
+    _poolTakeTheFall,
     _poolTalismanOfProgress,
     _poolTeapotSlinger,
     _poolTemporalTrespass,
@@ -761,6 +772,7 @@ const shard: CardShard = {
     _poolThirstingShade,
     _poolThornhideWolves,
     _poolThrissNantukoPrimus,
+    _poolThunderSalvo,
     _poolTimelessLotus,
     _poolTinker,
     _poolTirelessTracker,
@@ -784,6 +796,7 @@ const shard: CardShard = {
     _poolValleyRally,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
+    _poolVaultPlunderer,
     _poolVedalkenMesmerist,
     _poolVenomousWords,
     _poolViashinoSlasher,
@@ -791,6 +804,7 @@ const shard: CardShard = {
     _poolVincentValentine,
     _poolVindictiveVampire,
     _poolVirtueOfPersistence,
+    _poolVisageBandit,
     _poolVivisurgeonsInsight,
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,

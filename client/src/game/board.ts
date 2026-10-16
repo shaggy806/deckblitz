@@ -83,7 +83,13 @@ export function computeBoardEntries(
   // rest, so the board doesn't shuffle as things phase out and in.
   // (A hand-built view — a test's, the scenario builder's — may leave the
   // phased-out list out.)
-  const all = [...view.zones.battlefield, ...(view.zones.phasedOut ?? [])]
+  // A plotted card (rule 702.170) sits in exile, face up, waiting to be cast:
+  // it's drawn on its owner's side too — last, marked as plotted
+  // (`VisibleObject.plotted`), so the table shows what each player has
+  // waiting (the user's ask, 2026-10-16). An exiled card's controller is its
+  // owner. (A hand-built view may leave the exile list out, as above.)
+  const plotted = (view.zones.exile ?? []).filter((id) => view.objects[id]?.plotted === true)
+  const all = [...view.zones.battlefield, ...(view.zones.phasedOut ?? []), ...plotted]
     .map((id) => view.objects[id])
     .filter((o): o is VisibleObject => Boolean(o))
   const byId = new Map(all.map((o) => [o.id, o]))

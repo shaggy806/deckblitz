@@ -511,6 +511,8 @@ function evalStaticCondition(
       return state.turnOrder[state.turn.activePlayerIndex] === you;
     case "enduring-story":
       return state.players[you]?.enduringStory === true;
+    case "committed-crime-this-turn":
+      return (state.players[you]?.crimesThisTurn ?? 0) > 0;
     case "cast-this-turn": {
       const who = condition.who ?? "you";
       let n = 0;

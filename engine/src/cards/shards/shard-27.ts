@@ -44,6 +44,7 @@ import _poolBloodchiefAscension from "../pool/bloodchief-ascension.js";
 import _poolBogstomper from "../pool/bogstomper.js";
 import _poolBondersEnclave from "../pool/bonders-enclave.js";
 import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
+import _poolBoomBox from "../pool/boom-box.js";
 import _poolBorderlandRanger from "../pool/borderland-ranger.js";
 import _poolBorosGarrison from "../pool/boros-garrison.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
@@ -207,6 +208,7 @@ import _poolLumengridWarden from "../pool/lumengrid-warden.js";
 import _poolLuxCannon from "../pool/lux-cannon.js";
 import _poolMagmaw from "../pool/magmaw.js";
 import _poolMagusLuceaKane from "../pool/magus-lucea-kane.js";
+import _poolMakeYourOwnLuck from "../pool/make-your-own-luck.js";
 import _poolMalachOfTheDawn from "../pool/malach-of-the-dawn.js";
 import _poolMalakirSoothsayer from "../pool/malakir-soothsayer.js";
 import _poolMalleableImpostor from "../pool/malleable-impostor.js";
@@ -242,6 +244,7 @@ import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartingGust from "../pool/parting-gust.js";
+import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
 import _poolPestilence from "../pool/pestilence.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
@@ -268,6 +271,7 @@ import _poolRampagingRendhorn from "../pool/rampaging-rendhorn.js";
 import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
+import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
@@ -306,6 +310,7 @@ import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
 import _poolSkyhunterProwler from "../pool/skyhunter-prowler.js";
 import _poolSlagStrider from "../pool/slag-strider.js";
 import _poolSlagstorm from "../pool/slagstorm.js";
+import _poolSlickshotVaultBuster from "../pool/slickshot-vault-buster.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
 import _poolSokkaLateralStrategist from "../pool/sokka-lateral-strategist.js";
@@ -424,6 +429,7 @@ import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
+import _tokensVarmintToken from "../tokens/varmint-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -468,6 +474,7 @@ const shard: CardShard = {
     _poolBogstomper,
     _poolBondersEnclave,
     _poolBonehoardDracosaur,
+    _poolBoomBox,
     _poolBorderlandRanger,
     _poolBorosGarrison,
     _poolBrambleFamiliar,
@@ -631,6 +638,7 @@ const shard: CardShard = {
     _poolLuxCannon,
     _poolMagmaw,
     _poolMagusLuceaKane,
+    _poolMakeYourOwnLuck,
     _poolMalachOfTheDawn,
     _poolMalakirSoothsayer,
     _poolMalleableImpostor,
@@ -666,6 +674,7 @@ const shard: CardShard = {
     _poolOverlordOfTheBoilerbilges,
     _poolParch,
     _poolPartingGust,
+    _poolPatrollingPeacemaker,
     _poolPestilence,
     _poolPhyrexianTriniform,
     _poolPoisedPractitioner,
@@ -692,6 +701,7 @@ const shard: CardShard = {
     _poolRavenousGiant,
     _poolRazorgrassField,
     _poolRecover,
+    _poolRedrockSentinel,
     _poolRegathanFirecat,
     _poolRejoinder,
     _poolRestlessCottage,
@@ -730,6 +740,7 @@ const shard: CardShard = {
     _poolSkyhunterProwler,
     _poolSlagStrider,
     _poolSlagstorm,
+    _poolSlickshotVaultBuster,
     _poolSlinkingSkirge,
     _poolSnappingCreeper,
     _poolSokkaLateralStrategist,
@@ -850,6 +861,7 @@ const shard: CardShard = {
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
+    _tokensVarmintToken,
   ],
 };
 

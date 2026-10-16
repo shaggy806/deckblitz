@@ -804,6 +804,9 @@ export type StaticCondition =
    * at most `atMost` if given. Eshki Dragonclaw's "both a creature spell and
    * a noncreature spell" is two of these under `all`.
    */
+  /** "If you've committed a crime this turn" (rule 700.13 —
+   * `PlayerState.crimesThisTurn`). */
+  | { readonly kind: "committed-crime-this-turn" }
   | {
       readonly kind: "cast-this-turn";
       readonly who?: "you" | "opponent" | "any";
@@ -2511,6 +2514,13 @@ export interface CardDefinition {
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
   readonly foretell: { readonly cost: string } | null;
+  /** Plot (rule 702.170a) — any time you have priority during your main
+   * phase while the stack is empty, you may pay `cost` and exile this card
+   * from your hand, a special action (116.2k). It becomes plotted
+   * (`GameObject.plottedOnTurn`): on a later turn its owner may cast it from
+   * exile without paying its mana cost, as a sorcery (702.170d — the
+   * `"plot"` cast). `null` for a card without plot. */
+  readonly plot: { readonly cost: string } | null;
   /**
    * Warp (rule 702.185 — Starfield Vocalist): "You may cast this card from
    * your hand for its warp cost. Exile this [permanent] at the beginning of
@@ -2817,6 +2827,7 @@ const PRINTED_ABILITY: {
   webSlinging: (def) => def.webSlinging !== null,
   harmonize: (def) => def.harmonize !== null,
   foretell: (def) => def.foretell !== null,
+  plot: (def) => def.plot !== null,
   warp: (def) => def.warp !== null,
   blitz: (def) => def.blitz !== null,
   impending: (def) => def.impending !== null,
@@ -2991,6 +3002,7 @@ interface CardDraft {
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
   foretell?: { readonly cost: string };
+  plot?: { readonly cost: string };
   warp?: { readonly cost: string };
   blitz?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
@@ -3094,6 +3106,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     webSlinging: draft.webSlinging ?? null,
     harmonize: draft.harmonize ?? null,
     foretell: draft.foretell ?? null,
+    plot: draft.plot ?? null,
     warp: draft.warp ?? null,
     blitz: draft.blitz ?? null,
     impending: draft.impending ?? null,

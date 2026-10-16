@@ -229,6 +229,9 @@ export interface VisibleObject {
    * Only ever `true` in the owner's own view (opponents don't see the id's
    * entry in `objects` at all). */
   readonly foretold: boolean;
+  /** Plotted in exile (rule 702.170), face up: its owner may cast it free,
+   * as a sorcery, on a later turn. Absent when not. */
+  readonly plotted?: true;
   /** A face-down permanent (rule 708 — manifested or cloaked): everything
    * else here is the face-down 2/2's (`cardName` is its internal name, no
    * art), and `card` — the card it really is — is in its controller's view
@@ -589,6 +592,7 @@ function visible(
     isCopy: object.isCopy ?? false,
     suspended: object.suspended ?? false,
     foretold: object.foretold ?? false,
+    ...(zone === "exile" && object.plottedOnTurn !== undefined ? { plotted: true as const } : {}),
     attachedTo: object.attachedTo,
     attachedToPlayer: object.attachedToPlayer ?? null,
     // A face-down commander is a commander only to the one who may look.

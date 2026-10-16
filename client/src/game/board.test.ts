@@ -101,4 +101,18 @@ describe('computeBoardEntries', () => {
   it('still keeps a summoning-sick creature token apart from one that can attack', () => {
     expect(tiles([{ ...plant(1), summoningSick: true }, plant(2)])).toEqual([1, 1])
   })
+
+  it("draws a plotted card from exile last on its owner's side, and no other exiled card", () => {
+    // Rule 702.170: a plotted card waits face up in exile (the user's ask,
+    // 2026-10-16: show it on the board).
+    const plotted: VisibleObject = { ...plant(8), isToken: false, plotted: true }
+    const exiled = plant(9)
+    const view = {
+      ...board([plant(1)]),
+      zones: { battlefield: ['obj-1' as ObjectId], exile: [plotted.id, exiled.id] },
+    } as unknown as PlayerView
+    const withExile = { ...view, objects: { ...view.objects, [plotted.id]: plotted, [exiled.id]: exiled } }
+    expect(computeBoardEntries(withExile, me).map((e) => e.sample.id)).toEqual(['obj-1', 'obj-8'])
+    expect(computeBoardEntries(withExile, 'someone-else' as PlayerId)).toEqual([])
+  })
 })

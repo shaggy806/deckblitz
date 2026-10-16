@@ -10,6 +10,7 @@ import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
 import _poolAnOfferYouCantRefuse from "../pool/an-offer-you-cant-refuse.js";
 import _poolAnarchist from "../pool/anarchist.js";
+import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
@@ -44,6 +45,7 @@ import _poolBrinelinTheMoonKraken from "../pool/brinelin-the-moon-kraken.js";
 import _poolBrotherhoodRegalia from "../pool/brotherhood-regalia.js";
 import _poolBurningTreeEmissary from "../pool/burning-tree-emissary.js";
 import _poolCabalStronghold from "../pool/cabal-stronghold.js";
+import _poolCactarantula from "../pool/cactarantula.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
@@ -176,6 +178,7 @@ import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrangMasterMind from "../pool/krang-master-mind.js";
+import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
@@ -230,6 +233,7 @@ import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
+import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -340,6 +344,7 @@ import _poolSymbioteSpawn from "../pool/symbiote-spawn.js";
 import _poolSyrKonradTheGrim from "../pool/syr-konrad-the-grim.js";
 import _poolTaekoThePatientAvalanche from "../pool/taeko-the-patient-avalanche.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
+import _poolTarnationVista from "../pool/tarnation-vista.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
@@ -363,6 +368,7 @@ import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
 import _poolTolarianWinds from "../pool/tolarian-winds.js";
+import _poolTombTrawler from "../pool/tomb-trawler.js";
 import _poolTomeScour from "../pool/tome-scour.js";
 import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
@@ -382,6 +388,7 @@ import _poolUnholyAnnex from "../pool/unholy-annex.js";
 import _poolUnnervingGrasp from "../pool/unnerving-grasp.js";
 import _poolUnquestionedAuthority from "../pool/unquestioned-authority.js";
 import _poolUtterEnd from "../pool/utter-end.js";
+import _poolVadmirNewBlood from "../pool/vadmir-new-blood.js";
 import _poolValgavothHarrowerOfSouls from "../pool/valgavoth-harrower-of-souls.js";
 import _poolValkyrieHarbinger from "../pool/valkyrie-harbinger.js";
 import _poolVampireSpawn from "../pool/vampire-spawn.js";
@@ -456,6 +463,7 @@ const shard: CardShard = {
     _poolAkkiScrapchomper,
     _poolAnOfferYouCantRefuse,
     _poolAnarchist,
+    _poolAncientCornucopia,
     _poolAppliedGeometry,
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,
@@ -490,6 +498,7 @@ const shard: CardShard = {
     _poolBrotherhoodRegalia,
     _poolBurningTreeEmissary,
     _poolCabalStronghold,
+    _poolCactarantula,
     _poolCallOfTheHerd,
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
@@ -622,6 +631,7 @@ const shard: CardShard = {
     _poolKothsCourier,
     _poolKozileksUnsealing,
     _poolKrangMasterMind,
+    _poolKraumViolentCacophony,
     _poolKrenkoMobBoss,
     _poolKynaiosAndTiroOfMeletis,
     _poolLakeTownMariners,
@@ -676,6 +686,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolOakgnarlWarrior,
     _poolObsessivePursuit,
+    _poolOmenportVigilante,
     _poolOranRiefInvoker,
     _poolOtawaraSoaringCity,
     _poolOutlandLiberator,
@@ -786,6 +797,7 @@ const shard: CardShard = {
     _poolSyrKonradTheGrim,
     _poolTaekoThePatientAvalanche,
     _poolTalismanOfCuriosity,
+    _poolTarnationVista,
     _poolTeferisTimeTwist,
     _poolTerastodon,
     _poolTerraHeraldOfHope,
@@ -809,6 +821,7 @@ const shard: CardShard = {
     _poolTimeWarp,
     _poolTimelessWitness,
     _poolTolarianWinds,
+    _poolTombTrawler,
     _poolTomeScour,
     _poolTorment,
     _poolToughCookie,
@@ -828,6 +841,7 @@ const shard: CardShard = {
     _poolUnnervingGrasp,
     _poolUnquestionedAuthority,
     _poolUtterEnd,
+    _poolVadmirNewBlood,
     _poolValgavothHarrowerOfSouls,
     _poolValkyrieHarbinger,
     _poolVampireSpawn,

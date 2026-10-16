@@ -152,4 +152,30 @@ describe("entering together", () => {
     game.advanceUntil(quiet);
     expect(game.state.players[A].life).toBe(20);
   });
+
+  it("an enters-with condition counts only what's already there (rule 614.12 — Dust Animus)", () => {
+    // Four untapped Plains, and a fifth returned together with Dust Animus:
+    // "if you control five or more untapped lands" sees four.
+    const returnAll = (game: Game) => {
+      game.debugApplyEffect(
+        A,
+        { kind: "return-from-graveyard", filter: { notTypes: ["instant", "sorcery"] }, count: "all", destination: "battlefield" },
+        [],
+      );
+      game.advanceUntil(quiet);
+      return game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Dust Animus")!;
+    };
+    const together = setUp();
+    for (let i = 0; i < 4; i++) together.debugSpawn("Plains", A, "battlefield");
+    together.debugSpawn("Plains", A, "graveyard");
+    together.debugSpawn("Dust Animus", A, "graveyard");
+    expect(together.state.objects[returnAll(together)].counters["+1/+1"] ?? 0).toBe(0);
+    // A fifth already there: it does.
+    const already = setUp();
+    for (let i = 0; i < 5; i++) already.debugSpawn("Plains", A, "battlefield");
+    already.debugSpawn("Dust Animus", A, "graveyard");
+    const animus = returnAll(already);
+    expect(already.state.objects[animus].counters["+1/+1"]).toBe(2);
+    expect(already.state.objects[animus].counters.lifelink).toBe(1);
+  });
 });

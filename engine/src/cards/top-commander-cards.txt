@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3639 already implemented / 1361 missing (marks refreshed 2026-10-16)
+3646 already implemented / 1354 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1991,7 +1991,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1998  Venser's Journal                         {5}              Artifact — Book
 [x]  1999  Starscape Cleric                         {1}{B}           Creature — Bat Cleric
 [x]  2000  Gix, Yawgmoth Praetor                    {1}{B}{B}        Legendary Creature — Phyrexian Praetor
-[ ]  2001  Magda, the Hoardmaster                   {1}{R}           Legendary Creature — Dwarf Berserker
+[x]  2001  Magda, the Hoardmaster                   {1}{R}           Legendary Creature — Dwarf Berserker
 [x]  2002  Ravenform                                {2}{U}           Sorcery
 [x]  2003  Resplendent Angel                        {1}{W}{W}        Creature — Angel
 [x]  2004  Eureka Moment                            {2}{G}{U}        Instant
@@ -2082,7 +2082,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2089  Personal Tutor                           {U}              Sorcery
 [x]  2090  Paradise Druid                           {1}{G}           Creature — Elf Druid
 [x]  2091  Ruthless Technomancer                    {3}{B}           Creature — Human Wizard
-[ ]  2092  Patrolling Peacemaker                    {2}{W}           Artifact Creature — Robot Soldier
+[x]  2092  Patrolling Peacemaker                    {2}{W}           Artifact Creature — Robot Soldier
 [ ]  2093  Hagra Mauling // Hagra Broodpit          {4}              Instant // Land
 [x]  2094  Azorius Guildgate                        {0}              Land — Gate
 [x]  2095  Cold-Eyed Selkie                         {1}{G/U}{G/U}    Creature — Merfolk Rogue
@@ -2424,7 +2424,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2431  Master Transmuter                        {3}{U}           Artifact Creature — Human Artificer
 [x]  2432  Gishath, Sun's Avatar                    {5}{R}{G}{W}     Legendary Creature — Dinosaur Avatar
 [x]  2433  Primordial Hydra                         {X}{G}{G}        Creature — Hydra
-[ ]  2434  Forsaken Miner                           {B}              Creature — Skeleton Rogue
+[x]  2434  Forsaken Miner                           {B}              Creature — Skeleton Rogue
 [x]  2435  Mycosynth Wellspring                     {2}              Artifact
 [ ]  2436  Bruna, the Fading Light                  {5}{W}{W}        Legendary Creature — Angel Horror
 [x]  2437  Consuming Corruption                     {B}{B}           Instant
@@ -2504,7 +2504,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2511  Roiling Vortex                           {1}{R}           Enchantment
 [x]  2512  Alandra, Sky Dreamer                     {2}{U}{U}        Legendary Creature — Merfolk Wizard
 [x]  2513  Scorched Geyser                          {0}              Land — Island Mountain
-[ ]  2514  Railway Brawler                          {3}{G}{G}        Creature — Rhino Warrior
+[x]  2514  Railway Brawler                          {3}{G}{G}        Creature — Rhino Warrior
 [x]  2515  Brightstone Ritual                       {R}              Instant
 [x]  2516  Ancient Ziggurat                         {0}              Land
 [x]  2517  Haughty Djinn                            {1}{U}{U}        Creature — Djinn
@@ -2879,7 +2879,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2886  Silver-Fur Master                        {U}{B}           Creature — Rat Ninja
 [x]  2887  Unholy Annex // Ritual Chamber           {2}{B} // {3}{B}{B} Enchantment — Room // Enchantment — Room
 [x]  2888  Renata, Called to the Hunt               {2}{G}{G}        Legendary Enchantment Creature — Demigod
-[ ]  2889  Outcaster Trailblazer                    {2}{G}           Creature — Human Druid
+[x]  2889  Outcaster Trailblazer                    {2}{G}           Creature — Human Druid
 [x]  2890  Chief of the Foundry                     {3}              Artifact Creature — Construct
 [ ]  2891  Paradox Haze                             {2}{U}           Enchantment — Aura
 [ ]  2892  Fraying Sanity                           {2}{U}           Enchantment — Aura Curse
@@ -3286,7 +3286,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3293  Weapons Manufacturing                    {1}{R}           Enchantment
 [x]  3294  Canoptek Spyder                          {5}              Artifact Creature — Spider
 [x]  3295  Scurry of Squirrels                      {2}{G}           Creature — Squirrel Scout
-[ ]  3296  Gisa, the Hellraiser                     {3}{B}{B}        Legendary Creature — Human Warlock
+[x]  3296  Gisa, the Hellraiser                     {3}{B}{B}        Legendary Creature — Human Warlock
 [ ]  3297  Shelter                                  {1}{W}           Instant
 [x]  3298  Chocobo Racetrack                        {3}{G}{G}        Artifact
 [ ]  3299  Hope of Ghirapur                         {1}              Legendary Artifact Creature — Thopter
@@ -4270,7 +4270,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4277  Kheru Goldkeeper                         {1}{B}{G}{U}     Creature — Dragon
 [x]  4278  Prismari, the Inspiration                {5}{U}{R}        Legendary Creature — Elder Dragon
 [x]  4279  Blue Sun's Twilight                      {X}{U}{U}        Sorcery
-[ ]  4280  Highway Robbery                          {1}{R}           Sorcery
+[x]  4280  Highway Robbery                          {1}{R}           Sorcery
 [x]  4281  Angel of Finality                        {3}{W}           Creature — Angel
 [x]  4282  Vanishing Verse                          {W}{B}           Instant
 [x]  4283  Chittering Dispatcher                    {2}{G}           Creature — Eldrazi Drone

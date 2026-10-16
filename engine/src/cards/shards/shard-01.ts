@@ -70,6 +70,7 @@ import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
+import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
 import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
@@ -182,6 +183,7 @@ import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
 import _poolLittleBear from "../pool/little-bear.js";
+import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLordSkitterSewerKing from "../pool/lord-skitter-sewer-king.js";
 import _poolLoreholdCampus from "../pool/lorehold-campus.js";
 import _poolLoxodonWayfarer from "../pool/loxodon-wayfarer.js";
@@ -195,6 +197,7 @@ import _poolMalboro from "../pool/malboro.js";
 import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
+import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
@@ -381,6 +384,7 @@ import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
+import _poolWantedGriffin from "../pool/wanted-griffin.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
@@ -400,6 +404,7 @@ import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
 import _tokensAlienToken from "../tokens/alien-token.js";
+import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
@@ -475,6 +480,7 @@ const shard: CardShard = {
     _poolDailyBugleBuilding,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
+    _poolDeadBeforeSunrise,
     _poolDeathbellowRaider,
     _poolDefabricate,
     _poolDefiantSalvager,
@@ -587,6 +593,7 @@ const shard: CardShard = {
     _poolLimestoneGolem,
     _poolLindenTheSteadfastQueen,
     _poolLittleBear,
+    _poolLockAndLoad,
     _poolLordSkitterSewerKing,
     _poolLoreholdCampus,
     _poolLoxodonWayfarer,
@@ -600,6 +607,7 @@ const shard: CardShard = {
     _poolManorSkeleton,
     _poolMantaRiders,
     _poolMaraleafPixie,
+    _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
     _poolMarionetteMaster,
     _poolMatterbendingMage,
@@ -786,6 +794,7 @@ const shard: CardShard = {
     _poolVoteOut,
     _poolWanderOff,
     _poolWandertaleMentor,
+    _poolWantedGriffin,
     _poolWarSqueak,
     _poolWastewoodVerge,
     _poolWayOfTheCryomancer,
@@ -807,6 +816,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAlienToken,
+    _tokensBatTokenGreedsGambit,
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensMutavaultToken,

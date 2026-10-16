@@ -90,6 +90,7 @@ import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
 import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
+import _poolCunningCoyote from "../pool/cunning-coyote.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
@@ -97,6 +98,7 @@ import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
+import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDiresight from "../pool/diresight.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
@@ -271,6 +273,7 @@ import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
+import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
 import _poolPrudentFateseer from "../pool/prudent-fateseer.js";
 import _poolPryingEyes from "../pool/prying-eyes.js";
 import _poolPunishingPunch from "../pool/punishing-punch.js";
@@ -331,6 +334,7 @@ import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
+import _poolSlickSequence from "../pool/slick-sequence.js";
 import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
@@ -345,6 +349,7 @@ import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
+import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
@@ -534,6 +539,7 @@ const shard: CardShard = {
     _poolCrosswayVampire,
     _poolCrushingCanopy,
     _poolCryptcallerChariot,
+    _poolCunningCoyote,
     _poolCursedMinotaur,
     _poolCursedRecording,
     _poolDarkTutelage,
@@ -541,6 +547,7 @@ const shard: CardShard = {
     _poolDeadlyDispute,
     _poolDeepchannelDuelist,
     _poolDesertTwister,
+    _poolDesertsDue,
     _poolDinaSoulSteeper,
     _poolDiresight,
     _poolDiscipleOfTheVault,
@@ -715,6 +722,7 @@ const shard: CardShard = {
     _poolPrimalVisitation,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
+    _poolProsperityTycoon,
     _poolPrudentFateseer,
     _poolPryingEyes,
     _poolPunishingPunch,
@@ -775,6 +783,7 @@ const shard: CardShard = {
     _poolSiegeSmash,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
+    _poolSlickSequence,
     _poolSlithPredator,
     _poolSmitingHelix,
     _poolSnappingDrake,
@@ -789,6 +798,7 @@ const shard: CardShard = {
     _poolStarfieldMystic,
     _poolStarfighterPilot,
     _poolStarkIndustries,
+    _poolSterlingKeykeeper,
     _poolStitchInTime,
     _poolStoneworkPuma,
     _poolStormbeaconBlade,
