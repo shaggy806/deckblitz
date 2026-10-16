@@ -97,6 +97,7 @@ import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
+import _poolElegantRotunda from "../pool/elegant-rotunda.js";
 import _poolElvenPalisade from "../pool/elven-palisade.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
 import _poolEncroachingDragonstorm from "../pool/encroaching-dragonstorm.js";
@@ -105,6 +106,7 @@ import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
+import _poolEtchedCornfield from "../pool/etched-cornfield.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExosuitSavior from "../pool/exosuit-savior.js";
@@ -114,6 +116,7 @@ import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
 import _poolFangSkulkin from "../pool/fang-skulkin.js";
 import _poolFateholdAnnex from "../pool/fatehold-annex.js";
 import _poolFavorableWinds from "../pool/favorable-winds.js";
+import _poolFearOfFailedTests from "../pool/fear-of-failed-tests.js";
 import _poolFeastOfSuccession from "../pool/feast-of-succession.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
@@ -390,6 +393,7 @@ import _poolUndyingMalice from "../pool/undying-malice.js";
 import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
 import _poolUnmake from "../pool/unmake.js";
 import _poolUnrulyCatapult from "../pool/unruly-catapult.js";
+import _poolUnwillingVessel from "../pool/unwilling-vessel.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
 import _poolVenerableMonk from "../pool/venerable-monk.js";
@@ -542,6 +546,7 @@ const shard: CardShard = {
     _poolEdgarMoonlitSovereign,
     _poolEiganjoCastle,
     _poolElectroduplicate,
+    _poolElegantRotunda,
     _poolElvenPalisade,
     _poolEmbraalGearSmasher,
     _poolEncroachingDragonstorm,
@@ -550,6 +555,7 @@ const shard: CardShard = {
     _poolEnlightenedTutor,
     _poolErodedCanyon,
     _poolEssenceFlux,
+    _poolEtchedCornfield,
     _poolEternalWarrior,
     _poolEtherealInvestigator,
     _poolExosuitSavior,
@@ -559,6 +565,7 @@ const shard: CardShard = {
     _poolFangSkulkin,
     _poolFateholdAnnex,
     _poolFavorableWinds,
+    _poolFearOfFailedTests,
     _poolFeastOfSuccession,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
@@ -835,6 +842,7 @@ const shard: CardShard = {
     _poolUnlivingLegionnaire,
     _poolUnmake,
     _poolUnrulyCatapult,
+    _poolUnwillingVessel,
     _poolUrzasMine,
     _poolVaultbornTyrant,
     _poolVenerableMonk,

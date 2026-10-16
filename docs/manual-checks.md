@@ -4646,3 +4646,19 @@ stack count once per token)
   discards it, and Bob's hand stays face up for the turn. Thoughtseize can take the Grizzly Bears too, and
   you lose 2 life. Oildeep Gearhulk lets you look without anything being revealed, and declining leaves
   Bob's hand as it was (no draw). Check at ~768px tall and at full size, in a 2- and a 4-player room.
+
+### Overlord of the Mistmoors, Overlord of the Boilerbilges
+
+*A new player decision* — casting a spell for its impending cost, an alternative cost (rule 702.176a)
+
+- **Setup:** Your precombat main. Your battlefield: Soul Warden, four Plains and four Mountains; in hand
+  Overlord of the Mistmoors and Overlord of the Boilerbilges.
+- **Do:** Cast Overlord of the Mistmoors, choosing the impending option. Then cast Overlord of the
+  Boilerbilges for its impending cost and target Bob. Pass to your end step.
+- **Check:** Each Overlord's cast offers "(impending)" for its impending cost ({2}{W}{W}, {2}{R}{R}) beside
+  its full cost. Cast for impending, each enters as an enchantment with four time counters shown on it, not
+  as a creature (no power/toughness, not with your creatures). The Mistmoors makes two 2/1 flying Insects,
+  and Soul Warden gains you 2 life, not 3 (the Overlord didn't enter as a creature). The Boilerbilges deals
+  4 damage to Bob. At your end step each loses one time counter (three left), and the log says so. Hovering
+  "Impending" in the card text shows its reminder. Check at ~768px tall and at full size, in a 2- and a
+  4-player room.

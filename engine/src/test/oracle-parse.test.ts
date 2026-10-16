@@ -458,6 +458,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(slinger.webSlinging).toEqual({ cost: "{R}{G}" });
     expect(slinger.complete).toBe(true);
+    // Impending N—[cost] (rule 702.176a): the cost, and its two abilities — not a
+    // creature while it has a time counter, and the end step's removal.
+    const overlord = face(
+      "Impending 4—{2}{W}{W} (If you cast this spell for its impending cost, it enters with four time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.)",
+    );
+    expect(overlord.impending).toEqual({ count: 4, cost: "{2}{W}{W}" });
+    expect(overlord.static[0]).toMatchObject({ condition: { kind: "impending" }, removeTypes: ["creature"] });
+    expect(overlord.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "end", who: "you" },
+      condition: { kind: "impending" },
+      effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
+    });
+    expect(overlord.complete).toBe(true);
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     // Increment (rule 702.191a): the helper's cast trigger and intervening-if.

@@ -565,6 +565,9 @@ function evalStaticCondition(
       return condition.who === "you"
         ? state.monarch === you
         : state.monarch !== null && state.monarch !== you;
+    case "impending":
+      // Rule 702.176a: cast for its impending cost, and a time counter on it.
+      return source.castVia === "impending" && (source.counters.time ?? 0) > 0;
     case "devotion": {
       // The source's own mana cost counts (the Gods' rulings), so this reads
       // the battlefield itself rather than through `skipsSelf`.

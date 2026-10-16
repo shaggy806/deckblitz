@@ -400,12 +400,14 @@ import _poolWardensOfTheCycle from "../pool/wardens-of-the-cycle.js";
 import _poolWarkiteMarauder from "../pool/warkite-marauder.js";
 import _poolWarthog from "../pool/warthog.js";
 import _poolWaryFarmer from "../pool/wary-farmer.js";
+import _poolWaryWatchdog from "../pool/wary-watchdog.js";
 import _poolWayOfTheWildspeaker from "../pool/way-of-the-wildspeaker.js";
 import _poolWeSayTheeNay from "../pool/we-say-thee-nay.js";
 import _poolWeiAmbushForce from "../pool/wei-ambush-force.js";
 import _poolWelkinGuide from "../pool/welkin-guide.js";
 import _poolWernogRidersChaplain from "../pool/wernog-riders-chaplain.js";
 import _poolWhiptongueFrog from "../pool/whiptongue-frog.js";
+import _poolWickerfolkThresher from "../pool/wickerfolk-thresher.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
 import _poolWoebearer from "../pool/woebearer.js";
@@ -843,12 +845,14 @@ const shard: CardShard = {
     _poolWarkiteMarauder,
     _poolWarthog,
     _poolWaryFarmer,
+    _poolWaryWatchdog,
     _poolWayOfTheWildspeaker,
     _poolWeSayTheeNay,
     _poolWeiAmbushForce,
     _poolWelkinGuide,
     _poolWernogRidersChaplain,
     _poolWhiptongueFrog,
+    _poolWickerfolkThresher,
     _poolWildfireAwakener,
     _poolWillowDryad,
     _poolWoebearer,

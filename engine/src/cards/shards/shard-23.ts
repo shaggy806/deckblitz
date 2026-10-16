@@ -28,6 +28,7 @@ import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
 import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
+import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
@@ -84,6 +85,7 @@ import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
+import _poolCryptidInspector from "../pool/cryptid-inspector.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
 import _poolDarksteelIngot from "../pool/darksteel-ingot.js";
@@ -121,6 +123,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
+import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
 import _poolFirescreamer from "../pool/firescreamer.js";
@@ -154,6 +157,7 @@ import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
+import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
 import _poolHelpingHand from "../pool/helping-hand.js";
@@ -292,6 +296,7 @@ import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
@@ -438,6 +443,7 @@ const shard: CardShard = {
     _poolAzoriusChancery,
     _poolAzoriusKnightArbiter,
     _poolBackInTown,
+    _poolBalustradeWurm,
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
     _poolBattlefieldRaptor,
@@ -494,6 +500,7 @@ const shard: CardShard = {
     _poolCrossbowAmbush,
     _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
+    _poolCryptidInspector,
     _poolDaringEscape,
     _poolDaringThunderThief,
     _poolDarksteelIngot,
@@ -531,6 +538,7 @@ const shard: CardShard = {
     _poolExclusionMage,
     _poolEzioBladeOfVengeance,
     _poolFateholdChronologist,
+    _poolFearOfImmobility,
     _poolFiendishDuo,
     _poolFiligreeFamiliar,
     _poolFirescreamer,
@@ -564,6 +572,7 @@ const shard: CardShard = {
     _poolHaloScarab,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
+    _poolHeartsOnFire,
     _poolHecteyes,
     _poolHeirsOfStromkirk,
     _poolHelpingHand,
@@ -702,6 +711,7 @@ const shard: CardShard = {
     _poolScapeshift,
     _poolScorchedGeyser,
     _poolScrollboost,
+    _poolSeizedFromSlumber,
     _poolSelesnyaSignet,
     _poolSelfcraftMechan,
     _poolServoExhibition,

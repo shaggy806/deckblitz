@@ -79,6 +79,7 @@ import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
 import _poolCollisionCourse from "../pool/collision-course.js";
 import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
+import _poolConductiveMachete from "../pool/conductive-machete.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
@@ -90,6 +91,7 @@ import _poolCrosswayVampire from "../pool/crossway-vampire.js";
 import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
+import _poolCursedRecording from "../pool/cursed-recording.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
@@ -159,6 +161,7 @@ import _poolGoldPan from "../pool/gold-pan.js";
 import _poolGolgariGuildgate from "../pool/golgari-guildgate.js";
 import _poolGossipsTalent from "../pool/gossips-talent.js";
 import _poolGourmandsTalent from "../pool/gourmands-talent.js";
+import _poolGrandEntryway from "../pool/grand-entryway.js";
 import _poolGravelHideGoblin from "../pool/gravel-hide-goblin.js";
 import _poolGravewaker from "../pool/gravewaker.js";
 import _poolGreenhouse from "../pool/greenhouse.js";
@@ -383,6 +386,7 @@ import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
+import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
@@ -514,6 +518,7 @@ const shard: CardShard = {
     _poolCollisionCourse,
     _poolCommandersSphere,
     _poolCommonCrook,
+    _poolConductiveMachete,
     _poolConsecratedSphinx,
     _poolConversionApparatus,
     _poolCosmicCube,
@@ -525,6 +530,7 @@ const shard: CardShard = {
     _poolCrushingCanopy,
     _poolCryptcallerChariot,
     _poolCursedMinotaur,
+    _poolCursedRecording,
     _poolDarkTutelage,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
@@ -594,6 +600,7 @@ const shard: CardShard = {
     _poolGolgariGuildgate,
     _poolGossipsTalent,
     _poolGourmandsTalent,
+    _poolGrandEntryway,
     _poolGravelHideGoblin,
     _poolGravewaker,
     _poolGreenhouse,
@@ -818,6 +825,7 @@ const shard: CardShard = {
     _poolTorchDrake,
     _poolTranspose,
     _poolTrenoDarkCity,
+    _poolTunnelOfHate,
     _poolTwistedLandscape,
     _poolTwofoldIntent,
     _poolUnspeakableSymbol,

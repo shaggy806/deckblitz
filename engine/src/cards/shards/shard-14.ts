@@ -32,6 +32,7 @@ import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
 import _poolBattleMastery from "../pool/battle-mastery.js";
 import _poolBattleRampart from "../pool/battle-rampart.js";
+import _poolBearTrap from "../pool/bear-trap.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
@@ -159,6 +160,7 @@ import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
+import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
 import _poolGoblinAssaultTeam from "../pool/goblin-assault-team.js";
 import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
@@ -437,6 +439,7 @@ const shard: CardShard = {
     _poolBastPantherGoddess,
     _poolBattleMastery,
     _poolBattleRampart,
+    _poolBearTrap,
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
     _poolBileUrchin,
@@ -564,6 +567,7 @@ const shard: CardShard = {
     _poolGliderStaff,
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
+    _poolGlitchInterpreter,
     _poolGobblingOoze,
     _poolGoblinAssaultTeam,
     _poolGoblinChainwhirler,

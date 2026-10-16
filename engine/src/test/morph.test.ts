@@ -254,6 +254,29 @@ describe("manifest dread", () => {
     expect(game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].faceDown !== undefined)).toHaveLength(2);
     expect(game.state.zones.perPlayer[A].library.length).toBe(before - 6);
   });
+
+  it("an instant manifests too: face down it's a 2/2 creature, never turned face up (701.40a-b)", () => {
+    const { game, a } = table();
+    const bolt = toLibrary(game, "Lightning Bolt");
+    const giant = toLibrary(game, "Hill Giant");
+    a.chooseFromZoneFn = () => [bolt];
+    game.debugApplyEffect(A, { kind: "manifest-dread" });
+    settle(game);
+    expect(zone(game, bolt)).toBe("battlefield");
+    expect(game.state.objects[bolt].faceDown?.kind).toBe("manifest");
+    expect(pt(game, bolt)).toEqual({ power: 2, toughness: 2 });
+    expect(zone(game, giant)).toBe("graveyard");
+    // Not a creature card: no special action turns it face up.
+    lands(game, "Mountain", 5);
+    expect(
+      game.legalActions(A).some((action) => action.kind === "turn-face-up" && action.permanent === bolt),
+    ).toBe(false);
+    // Plain manifest of a sorcery off the top.
+    const ritual = toLibrary(game, "Dark Ritual");
+    game.debugApplyEffect(A, { kind: "manifest", who: "you" });
+    settle(game);
+    expect(zone(game, ritual)).toBe("battlefield");
+  });
 });
 
 void pickFromZone;

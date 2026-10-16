@@ -28,6 +28,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Foundations Jumpstart, Duskmourn and Duskmourn Commander, all whole** (batch 85): 104 cards,
+  with two engine fixes found while authoring — an instant or sorcery can be manifested (it enters
+  face down as a 2/2; rule 400.4a doesn't stop it, 701.40a), and a delayed trigger's "sacrifice it"
+  finds nothing once its source was blinked before the creating ability resolved (rule 400.7;
+  Attack-in-the-Box) (2026-10-15).
+- **Impending** (`keyword:impending`, rule 702.176a): the five Overlords of Duskmourn — cast for
+  the impending cost, entering with time counters as a noncreature, one counter off at each of
+  your end steps; the scaffolder reads the line, and the cast menu says "(impending)" (2026-10-15).
 - **Aetherdrift, Aetherdrift Commander and Foundations, all whole** (batch 84): 85 cards, with an
   "ability of a permanent" trigger seeing one whose cost sacrificed its permanent — a fetchland,
   a Clue (rule 113.7a) — so Harsh Mentor and Runic Armasaur no longer miss them, and Wizened

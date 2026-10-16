@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3627 already implemented / 1373 missing (marks refreshed 2026-10-15)
+3632 already implemented / 1368 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1711,7 +1711,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1718  Gala Greeters                            {1}{G}           Creature — Elf Druid
 [ ]  1719  Twinning Staff                           {3}              Artifact
 [x]  1720  Painful Truths                           {2}{B}           Sorcery
-[ ]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
+[x]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
 [x]  1722  Fate Unraveler                           {3}{B}           Enchantment Creature — Hag
 [x]  1723  Impulsive Pilferer                       {R}              Creature — Goblin Pirate
 [ ]  1724  Massacre Girl                            {3}{B}{B}        Legendary Creature — Human Assassin
@@ -2187,7 +2187,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2194  Summon: Knights of Round                 {6}{W}{W}        Enchantment Creature — Saga Knight
 [ ]  2195  Delay                                    {1}{U}           Instant
 [x]  2196  Scourge of Fleets                        {5}{U}{U}        Creature — Kraken
-[ ]  2197  Overlord of the Balemurk                 {3}{B}{B}        Enchantment Creature — Avatar Horror
+[x]  2197  Overlord of the Balemurk                 {3}{B}{B}        Enchantment Creature — Avatar Horror
 [x]  2198  Forge of Heroes                          {0}              Land
 [ ]  2199  Combat Research                          {U}              Enchantment — Aura
 [x]  2200  Swarmyard Massacre                       {3}{B}{B}        Sorcery
@@ -2895,7 +2895,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2902  Magewright's Stone                       {2}              Artifact
 [x]  2903  Undead Warchief                          {2}{B}{B}        Creature — Zombie
 [x]  2904  Hinterland Sanctifier                    {W}              Creature — Rabbit Cleric
-[ ]  2905  Overlord of the Floodpits                {3}{U}{U}        Enchantment Creature — Avatar Horror
+[x]  2905  Overlord of the Floodpits                {3}{U}{U}        Enchantment Creature — Avatar Horror
 [x]  2906  Machine God's Effigy                     {4}              Artifact
 [x]  2907  Gleaming Overseer                        {1}{U}{B}        Creature — Zombie Wizard
 [x]  2908  Rite of the Dragoncaller                 {4}{R}{R}        Enchantment
@@ -4179,7 +4179,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4186  Bygone Colossus                          {9}              Artifact Creature — Robot Giant
 [x]  4187  Kaito, Cunning Infiltrator               {1}{U}{U}        Legendary Planeswalker — Kaito
 [x]  4188  Jace's Sanctum                           {3}{U}           Enchantment
-[ ]  4189  Overlord of the Mistmoors                {5}{W}{W}        Enchantment Creature — Avatar Horror
+[x]  4189  Overlord of the Mistmoors                {5}{W}{W}        Enchantment Creature — Avatar Horror
 [x]  4190  Shivan Devastator                        {X}{R}           Creature — Dragon Hydra
 [x]  4191  Amazing Acrobatics                       {1}{U}{U}        Instant
 [x]  4192  Herald of Eternal Dawn                   {4}{W}{W}{W}     Creature — Angel
@@ -4517,7 +4517,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4524  Dragonlord Atarka                        {5}{R}{G}        Legendary Creature — Elder Dragon
 [x]  4525  Shaman of the Pack                       {1}{B}{G}        Creature — Elf Shaman
 [ ]  4526  Kalain, Reclusive Painter                {B}{R}           Legendary Creature — Human Elf Bard
-[ ]  4527  Overlord of the Boilerbilges             {4}{R}{R}        Enchantment Creature — Avatar Horror
+[x]  4527  Overlord of the Boilerbilges             {4}{R}{R}        Enchantment Creature — Avatar Horror
 [x]  4528  Thornglint Bridge                        {0}              Artifact Land
 [x]  4529  Treno, Dark City                         {0}              Land — Town
 [x]  4530  Shield of the Oversoul                   {2}{G/W}         Enchantment — Aura

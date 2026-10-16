@@ -108,6 +108,40 @@ export const ward = (cost: WardCost): TriggeredAbility => ({
 });
 
 /**
+ * Impending's two abilities on the battlefield (rule 702.176a): "As long as
+ * this permanent's impending cost was paid and it has a time counter on it,
+ * it's not a creature" and "At the beginning of your end step, if this
+ * permanent's impending cost was paid and it has a time counter on it,
+ * remove a time counter from it." Spread into the card beside its
+ * `impending: { count, cost }` (which offers the cast and puts the counters
+ * on): `static: [...impendingAbilities().static]`, `triggered:
+ * [...impendingAbilities().triggered]`.
+ */
+export const impendingAbilities = (): {
+  readonly static: readonly StaticAbility[];
+  readonly triggered: readonly TriggeredAbility[];
+} => ({
+  static: [
+    {
+      affects: { scope: "self" },
+      condition: { kind: "impending" },
+      removeTypes: ["creature"],
+      text: "As long as this permanent's impending cost was paid and it has a time counter on it, it isn't a creature.",
+    },
+  ],
+  triggered: [
+    {
+      trigger: { on: "step-begins", step: "end", who: "you" },
+      condition: { kind: "impending" },
+      targets: [],
+      effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
+      resolve: null,
+      text: "At the beginning of your end step, if this permanent's impending cost was paid and it has a time counter on it, remove a time counter from it.",
+    },
+  ],
+});
+
+/**
  * Undying (rule 702.93): "When this permanent dies, if it had no +1/+1
  * counters on it, return it to the battlefield under its owner's control with
  * a +1/+1 counter on it." A real triggered ability — the "if" is an

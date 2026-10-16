@@ -36,6 +36,7 @@ import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
+import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
@@ -309,6 +310,7 @@ import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
+import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
@@ -360,6 +362,7 @@ import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
 import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
+import _poolUrsineMonstrosity from "../pool/ursine-monstrosity.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
@@ -394,6 +397,7 @@ import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js"
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
+import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
 import _tokensRobotToken from "../tokens/robot-token.js";
@@ -436,6 +440,7 @@ const shard: CardShard = {
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
     _poolBatteringKrasis,
+    _poolBeastieBeatdown,
     _poolBedlam,
     _poolBefuddle,
     _poolBlackWidowDaringOperative,
@@ -709,6 +714,7 @@ const shard: CardShard = {
     _poolSpectralReserves,
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
+    _poolSpineseekerCentipede,
     _poolSporeSwarm,
     _poolSpringmaneCervin,
     _poolSquiresDevotion,
@@ -760,6 +766,7 @@ const shard: CardShard = {
     _poolUnforgivingAim,
     _poolUnholyFiend,
     _poolUrenisRebuff,
+    _poolUrsineMonstrosity,
     _poolUtopiaSprawl,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
@@ -796,6 +803,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensDragonElementalToken,
+    _tokensNymphToken,
     _tokensPegasusToken,
     _tokensRebelToken,
     _tokensRobotToken,

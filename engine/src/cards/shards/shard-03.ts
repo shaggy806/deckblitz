@@ -67,6 +67,7 @@ import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
 import _poolDefendTheCampus from "../pool/defend-the-campus.js";
 import _poolDefenderOfLaw from "../pool/defender-of-law.js";
 import _poolDefenseOfTheHeart from "../pool/defense-of-the-heart.js";
+import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
@@ -119,6 +120,7 @@ import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
 import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
+import _poolGlimmerSeeker from "../pool/glimmer-seeker.js";
 import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
@@ -226,6 +228,7 @@ import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
+import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
@@ -459,6 +462,7 @@ const shard: CardShard = {
     _poolDefendTheCampus,
     _poolDefenderOfLaw,
     _poolDefenseOfTheHeart,
+    _poolDelightfulDiscovery,
     _poolDementiaBat,
     _poolDemonsHorn,
     _poolDesmondMiles,
@@ -511,6 +515,7 @@ const shard: CardShard = {
     _poolGiadaFontOfHope,
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
+    _poolGlimmerSeeker,
     _poolGlissasCourier,
     _poolGloinTheMighty,
     _poolGnawingVermin,
@@ -618,6 +623,7 @@ const shard: CardShard = {
     _poolOrcristGoblinCleaver,
     _poolPersist,
     _poolPiggyBank,
+    _poolPopularEgotist,
     _poolPrismariTheInspiration,
     _poolProsshSkyraiderOfKher,
     _poolProwlingSerpopard,

@@ -98,6 +98,7 @@ import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDismiss from "../pool/dismiss.js";
 import _poolDisruptivePitmage from "../pool/disruptive-pitmage.js";
 import _poolDissectionPractice from "../pool/dissection-practice.js";
+import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
@@ -275,6 +276,7 @@ import _poolOrzhovLocket from "../pool/orzhov-locket.js";
 import _poolOscorpIndustries from "../pool/oscorp-industries.js";
 import _poolOswaldFiddlebender from "../pool/oswald-fiddlebender.js";
 import _poolOutlawMedic from "../pool/outlaw-medic.js";
+import _poolOverlordOfTheMistmoors from "../pool/overlord-of-the-mistmoors.js";
 import _poolOwlbear from "../pool/owlbear.js";
 import _poolPackRat from "../pool/pack-rat.js";
 import _poolPaleRiderOfTrostad from "../pool/pale-rider-of-trostad.js";
@@ -454,6 +456,7 @@ import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensServoToken from "../tokens/servo-token.js";
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
 import _tokensSpiritTokenDusyutEarthcarver from "../tokens/spirit-token-dusyut-earthcarver.js";
+import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-vessel.js";
 
 const shard: CardShard = {
   pool: [
@@ -552,6 +555,7 @@ const shard: CardShard = {
     _poolDismiss,
     _poolDisruptivePitmage,
     _poolDissectionPractice,
+    _poolDiversionSpecialist,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
     _poolDrossSkullbomb,
@@ -729,6 +733,7 @@ const shard: CardShard = {
     _poolOscorpIndustries,
     _poolOswaldFiddlebender,
     _poolOutlawMedic,
+    _poolOverlordOfTheMistmoors,
     _poolOwlbear,
     _poolPackRat,
     _poolPaleRiderOfTrostad,
@@ -910,6 +915,7 @@ const shard: CardShard = {
     _tokensServoToken,
     _tokensSpiritTokenAbzanMonument,
     _tokensSpiritTokenDusyutEarthcarver,
+    _tokensSpiritTokenUnwillingVessel,
   ],
 };
 

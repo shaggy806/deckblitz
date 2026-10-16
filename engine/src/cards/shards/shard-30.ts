@@ -16,6 +16,7 @@ import _poolAltarOfBone from "../pool/altar-of-bone.js";
 import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
+import _poolAnepVizierOfHazoret from "../pool/anep-vizier-of-hazoret.js";
 import _poolAngrathsMarauders from "../pool/angraths-marauders.js";
 import _poolAnkleShanker from "../pool/ankle-shanker.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
@@ -120,6 +121,7 @@ import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
 import _poolEnroot from "../pool/enroot.js";
 import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
+import _poolErraticApparition from "../pool/erratic-apparition.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
@@ -278,6 +280,7 @@ import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
 import _poolOverprotect from "../pool/overprotect.js";
 import _poolPanharmonicon from "../pool/panharmonicon.js";
 import _poolPantherWarriors from "../pool/panther-warriors.js";
+import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
@@ -309,6 +312,7 @@ import _poolRydiasReturn from "../pool/rydias-return.js";
 import _poolSageOfLatNam from "../pool/sage-of-lat-nam.js";
 import _poolSandstormCharger from "../pool/sandstorm-charger.js";
 import _poolSanguinaryMage from "../pool/sanguinary-mage.js";
+import _poolSaurianSymbiote from "../pool/saurian-symbiote.js";
 import _poolSavageLands from "../pool/savage-lands.js";
 import _poolSelflessSafewright from "../pool/selfless-safewright.js";
 import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
@@ -354,6 +358,7 @@ import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js"
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
+import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
 import _poolTitansGrave from "../pool/titans-grave.js";
@@ -436,6 +441,7 @@ const shard: CardShard = {
     _poolAltarOfThePantheon,
     _poolAmprynTactician,
     _poolAnabaShaman,
+    _poolAnepVizierOfHazoret,
     _poolAngrathsMarauders,
     _poolAnkleShanker,
     _poolAragornKingOfGondor,
@@ -540,6 +546,7 @@ const shard: CardShard = {
     _poolEnroot,
     _poolEreborFlamesmith,
     _poolEriettesLullaby,
+    _poolErraticApparition,
     _poolEssenceAnchor,
     _poolEtalisFavor,
     _poolEverythingPizza,
@@ -698,6 +705,7 @@ const shard: CardShard = {
     _poolOverprotect,
     _poolPanharmonicon,
     _poolPantherWarriors,
+    _poolPhantasmalShieldback,
     _poolPiaDeterminedRebuilder,
     _poolPiousWayfarer,
     _poolPlazaOfHeroes,
@@ -729,6 +737,7 @@ const shard: CardShard = {
     _poolSageOfLatNam,
     _poolSandstormCharger,
     _poolSanguinaryMage,
+    _poolSaurianSymbiote,
     _poolSavageLands,
     _poolSelflessSafewright,
     _poolSephirothsIntervention,
@@ -774,6 +783,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThousandYearStorm,
+    _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
     _poolTigerSeal,
     _poolTitansGrave,

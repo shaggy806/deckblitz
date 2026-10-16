@@ -275,6 +275,7 @@ import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
 import _poolPrismariCharm from "../pool/prismari-charm.js";
+import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
 import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
@@ -725,6 +726,7 @@ const shard: CardShard = {
     _poolPriestOfIroas,
     _poolPrimalMight,
     _poolPrismariCharm,
+    _poolPsemillaMeletianPoet,
     _poolQuarrel,
     _poolQuilledSlagwurm,
     _poolRadiantGrove,

@@ -29,6 +29,7 @@ import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
 import _poolBarretWallace from "../pool/barret-wallace.js";
+import _poolBaseballBat from "../pool/baseball-bat.js";
 import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
@@ -155,8 +156,10 @@ import _poolGracefulAdept from "../pool/graceful-adept.js";
 import _poolGreaterGood from "../pool/greater-good.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
+import _poolGrowingDread from "../pool/growing-dread.js";
 import _poolGuardianAugmenter from "../pool/guardian-augmenter.js";
 import _poolHammerOfNazahn from "../pool/hammer-of-nazahn.js";
+import _poolHardenedEscort from "../pool/hardened-escort.js";
 import _poolHarriedArtisan from "../pool/harried-artisan.js";
 import _poolHaveABite from "../pool/have-a-bite.js";
 import _poolHellrider from "../pool/hellrider.js";
@@ -240,6 +243,7 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
+import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
@@ -418,6 +422,7 @@ import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
+import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
 import _tokensSkeletonTokenGutTrueSoulZealot from "../tokens/skeleton-token-gut-true-soul-zealot.js";
@@ -452,6 +457,7 @@ const shard: CardShard = {
     _poolBalefireDragon,
     _poolBalmorBattlemageCaptain,
     _poolBarretWallace,
+    _poolBaseballBat,
     _poolBasrisSolidarity,
     _poolBattleMenu,
     _poolBattlefieldForge,
@@ -578,8 +584,10 @@ const shard: CardShard = {
     _poolGreaterGood,
     _poolGrimMonolith,
     _poolGrimPhysician,
+    _poolGrowingDread,
     _poolGuardianAugmenter,
     _poolHammerOfNazahn,
+    _poolHardenedEscort,
     _poolHarriedArtisan,
     _poolHaveABite,
     _poolHellrider,
@@ -663,6 +671,7 @@ const shard: CardShard = {
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
     _poolOzaisCruelty,
+    _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,
     _poolPerchProtection,
     _poolPerimeterPatrol,
@@ -843,6 +852,7 @@ const shard: CardShard = {
     _tokens11BlueBirdToken,
     _tokensBeastTokenGarrukVeiledButcher,
     _tokensDragonToken66,
+    _tokensEverywhereToken,
     _tokensKomasCoil,
     _tokensPhyrexianInsectToken,
     _tokensSkeletonTokenGutTrueSoulZealot,

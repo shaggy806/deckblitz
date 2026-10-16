@@ -1,0 +1,1022 @@
+{
+ "batch": "B85",
+ "status": "complete",
+ "ranks": "Foundations Jumpstart (J25, 2024-11-15), Duskmourn: House of Horror Commander (DSC, 2024-09-27) and Duskmourn: House of Horror (DSK, 2024-09-27): the rest of the sets",
+ "authored": [
+  {
+   "name": "Psemilla, Meletian Poet",
+   "files": [
+    "engine/src/cards/pool/psemilla-meletian-poet.ts",
+    "engine/src/cards/tokens/nymph-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thurid, Mare of Destiny",
+   "files": [
+    "engine/src/cards/pool/thurid-mare-of-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilded Scuttler",
+   "files": [
+    "engine/src/cards/pool/gilded-scuttler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pol Jamaar, Illusionist",
+   "files": [
+    "engine/src/cards/pool/pol-jamaar-illusionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandstorm Crasher",
+   "files": [
+    "engine/src/cards/pool/sandstorm-crasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anep, Vizier of Hazoret",
+   "files": [
+    "engine/src/cards/pool/anep-vizier-of-hazoret.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurska Sweet-Tooth",
+   "files": [
+    "engine/src/cards/pool/hurska-sweet-tooth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eidolon of Astral Winds",
+   "files": [
+    "engine/src/cards/pool/eidolon-of-astral-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delightful Discovery",
+   "files": [
+    "engine/src/cards/pool/delightful-discovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nazar, the Velvet Fang",
+   "files": [
+    "engine/src/cards/pool/nazar-the-velvet-fang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantasmal Shieldback",
+   "files": [
+    "engine/src/cards/pool/phantasmal-shieldback.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scourge of the Undercity",
+   "files": [
+    "engine/src/cards/pool/scourge-of-the-undercity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleon, Merry Champion",
+   "files": [
+    "engine/src/cards/pool/cleon-merry-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revoke Demise",
+   "files": [
+    "engine/src/cards/pool/revoke-demise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slimy Piper",
+   "files": [
+    "engine/src/cards/pool/slimy-piper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saurian Symbiote",
+   "files": [
+    "engine/src/cards/pool/saurian-symbiote.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spined Tyrranax",
+   "files": [
+    "engine/src/cards/pool/spined-tyrranax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hearts on Fire",
+   "files": [
+    "engine/src/cards/pool/hearts-on-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razorgrass Invoker",
+   "files": [
+    "engine/src/cards/pool/razorgrass-invoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faithful Pikemaster",
+   "files": [
+    "engine/src/cards/pool/faithful-pikemaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etched Cornfield",
+   "files": [
+    "engine/src/cards/pool/etched-cornfield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Lost Teeth",
+   "files": [
+    "engine/src/cards/pool/fear-of-lost-teeth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commune with Evil",
+   "files": [
+    "engine/src/cards/pool/commune-with-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deluge of Doom",
+   "files": [
+    "engine/src/cards/pool/deluge-of-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodspinner",
+   "files": [
+    "engine/src/cards/pool/broodspinner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grand Entryway // Elegant Rotunda",
+   "files": [
+    "engine/src/cards/pool/grand-entryway-elegant-rotunda.ts",
+    "engine/src/cards/pool/grand-entryway.ts",
+    "engine/src/cards/pool/elegant-rotunda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ticket Booth // Tunnel of Hate",
+   "files": [
+    "engine/src/cards/pool/ticket-booth-tunnel-of-hate.ts",
+    "engine/src/cards/pool/ticket-booth.ts",
+    "engine/src/cards/pool/tunnel-of-hate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Painter's Studio // Defaced Gallery",
+   "files": [
+    "engine/src/cards/pool/painters-studio-defaced-gallery.ts",
+    "engine/src/cards/pool/painters-studio.ts",
+    "engine/src/cards/pool/defaced-gallery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keys to the House",
+   "files": [
+    "engine/src/cards/pool/keys-to-the-house.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turn Inside Out",
+   "files": [
+    "engine/src/cards/pool/turn-inside-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wickerfolk Thresher",
+   "files": [
+    "engine/src/cards/pool/wickerfolk-thresher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cursed Recording",
+   "files": [
+    "engine/src/cards/pool/cursed-recording.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glitch Interpreter",
+   "files": [
+    "engine/src/cards/pool/glitch-interpreter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ursine Monstrosity",
+   "files": [
+    "engine/src/cards/pool/ursine-monstrosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Convert to Slime",
+   "files": [
+    "engine/src/cards/pool/convert-to-slime.ts",
+    "engine/src/cards/tokens/ooze-token-convert-to-slime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phenomenon Investigators",
+   "files": [
+    "engine/src/cards/pool/phenomenon-investigators.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Growing Dread",
+   "files": [
+    "engine/src/cards/pool/growing-dread.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrabbling Skullcrab",
+   "files": [
+    "engine/src/cards/pool/scrabbling-skullcrab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clammy Prowler",
+   "files": [
+    "engine/src/cards/pool/clammy-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Underwater Tunnel // Slimy Aquarium",
+   "files": [
+    "engine/src/cards/pool/underwater-tunnel-slimy-aquarium.ts",
+    "engine/src/cards/pool/underwater-tunnel.ts",
+    "engine/src/cards/pool/slimy-aquarium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Innocuous Rat",
+   "files": [
+    "engine/src/cards/pool/innocuous-rat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peer Past the Veil",
+   "files": [
+    "engine/src/cards/pool/peer-past-the-veil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Failed Tests",
+   "files": [
+    "engine/src/cards/pool/fear-of-failed-tests.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Popular Egotist",
+   "files": [
+    "engine/src/cards/pool/popular-egotist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patchwork Beastie",
+   "files": [
+    "engine/src/cards/pool/patchwork-beastie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Infinity",
+   "files": [
+    "engine/src/cards/pool/fear-of-infinity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balustrade Wurm",
+   "files": [
+    "engine/src/cards/pool/balustrade-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "House Cartographer",
+   "files": [
+    "engine/src/cards/pool/house-cartographer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seized from Slumber",
+   "files": [
+    "engine/src/cards/pool/seized-from-slumber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coordinated Clobbering",
+   "files": [
+    "engine/src/cards/pool/coordinated-clobbering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spineseeker Centipede",
+   "files": [
+    "engine/src/cards/pool/spineseeker-centipede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Phone",
+   "files": [
+    "engine/src/cards/pool/living-phone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghostly Keybearer",
+   "files": [
+    "engine/src/cards/pool/ghostly-keybearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Snatcher",
+   "files": [
+    "engine/src/cards/pool/spectral-snatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cracked Skull",
+   "files": [
+    "engine/src/cards/pool/cracked-skull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunted Screen",
+   "files": [
+    "engine/src/cards/pool/haunted-screen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fanatic of the Harrowing",
+   "files": [
+    "engine/src/cards/pool/fanatic-of-the-harrowing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sawblade Skinripper",
+   "files": [
+    "engine/src/cards/pool/sawblade-skinripper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cathartic Parting",
+   "files": [
+    "engine/src/cards/pool/cathartic-parting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beastie Beatdown",
+   "files": [
+    "engine/src/cards/pool/beastie-beatdown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Mayhem",
+   "files": [
+    "engine/src/cards/pool/midnight-mayhem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jump Scare",
+   "files": [
+    "engine/src/cards/pool/jump-scare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manifest Dread",
+   "files": [
+    "engine/src/cards/pool/manifest-dread.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullsnap Nuisance",
+   "files": [
+    "engine/src/cards/pool/skullsnap-nuisance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildfire Wickerfolk",
+   "files": [
+    "engine/src/cards/pool/wildfire-wickerfolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glimmer Seeker",
+   "files": [
+    "engine/src/cards/pool/glimmer-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wary Watchdog",
+   "files": [
+    "engine/src/cards/pool/wary-watchdog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hardened Escort",
+   "files": [
+    "engine/src/cards/pool/hardened-escort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unnerving Grasp",
+   "files": [
+    "engine/src/cards/pool/unnerving-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Violent Urge",
+   "files": [
+    "engine/src/cards/pool/violent-urge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cursed Windbreaker",
+   "files": [
+    "engine/src/cards/pool/cursed-windbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rite of the Moth",
+   "files": [
+    "engine/src/cards/pool/rite-of-the-moth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Being Hunted",
+   "files": [
+    "engine/src/cards/pool/fear-of-being-hunted.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiant Survivor",
+   "files": [
+    "engine/src/cards/pool/defiant-survivor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unwilling Vessel",
+   "files": [
+    "engine/src/cards/pool/unwilling-vessel.ts",
+    "engine/src/cards/tokens/spirit-token-unwilling-vessel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savior of the Small",
+   "files": [
+    "engine/src/cards/pool/savior-of-the-small.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Immobility",
+   "files": [
+    "engine/src/cards/pool/fear-of-immobility.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptid Inspector",
+   "files": [
+    "engine/src/cards/pool/cryptid-inspector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrewd Storyteller",
+   "files": [
+    "engine/src/cards/pool/shrewd-storyteller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bear Trap",
+   "files": [
+    "engine/src/cards/pool/bear-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conductive Machete",
+   "files": [
+    "engine/src/cards/pool/conductive-machete.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attack-in-the-Box",
+   "files": [
+    "engine/src/cards/pool/attack-in-the-box.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unsettling Twins",
+   "files": [
+    "engine/src/cards/pool/unsettling-twins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baseball Bat",
+   "files": [
+    "engine/src/cards/pool/baseball-bat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cautious Survivor",
+   "files": [
+    "engine/src/cards/pool/cautious-survivor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Killer's Mask",
+   "files": [
+    "engine/src/cards/pool/killers-mask.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vicious Clown",
+   "files": [
+    "engine/src/cards/pool/vicious-clown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cackling Slasher",
+   "files": [
+    "engine/src/cards/pool/cackling-slasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impossible Inferno",
+   "files": [
+    "engine/src/cards/pool/impossible-inferno.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patched Plaything",
+   "files": [
+    "engine/src/cards/pool/patched-plaything.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cult Healer",
+   "files": [
+    "engine/src/cards/pool/cult-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boilerbilges Ripper",
+   "files": [
+    "engine/src/cards/pool/boilerbilges-ripper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erratic Apparition",
+   "files": [
+    "engine/src/cards/pool/erratic-apparition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bashful Beastie",
+   "files": [
+    "engine/src/cards/pool/bashful-beastie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Phantom",
+   "files": [
+    "engine/src/cards/pool/infernal-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orphans of the Wheat",
+   "files": [
+    "engine/src/cards/pool/orphans-of-the-wheat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dashing Bloodsucker",
+   "files": [
+    "engine/src/cards/pool/dashing-bloodsucker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diversion Specialist",
+   "files": [
+    "engine/src/cards/pool/diversion-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootwise Survivor",
+   "files": [
+    "engine/src/cards/pool/rootwise-survivor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hand That Feeds",
+   "files": [
+    "engine/src/cards/pool/hand-that-feeds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resurrected Cultist",
+   "files": [
+    "engine/src/cards/pool/resurrected-cultist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalked Researcher",
+   "files": [
+    "engine/src/cards/pool/stalked-researcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anthropede",
+   "files": [
+    "engine/src/cards/pool/anthropede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razorkin Hordecaller",
+   "files": [
+    "engine/src/cards/pool/razorkin-hordecaller.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Scholar of Combustion",
+   "needs": [
+    "zone:exile-target-play-until-next-turn"
+   ],
+   "why": "'Exile up to one target instant or sorcery card from your graveyard. You may cast that card until the end of your next turn': exile's mayCast takes only end-of-turn / while-exiled, and impulse-exile's your-next-turn duration reads only the library top, not a targeted graveyard card."
+  },
+  {
+   "name": "Cramped Vents // Access Maze",
+   "needs": [
+    "cost:alt-cost-pay-life-equal-mana-value"
+   ],
+   "why": "Access Maze's 'once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost' is an alternative cost no static can grant (Cramped Vents' door — 6 damage, life equal to the excess — is expressible with excessDamageThisWay, but the card is one card)."
+  },
+  {
+   "name": "Barbflare Gremlin",
+   "needs": [
+    "effect:tapped-for-mana-condition",
+    "effect:tapped-for-mana-land-deals-damage"
+   ],
+   "why": "'Whenever a player taps a land for mana, if this creature is tapped, that player adds one mana … Then that land deals 1 damage to that player': tappedForManaExtras reads only an add-mana effect, never the trigger's intervening-if, and a triggered mana ability can't do anything else (the land's damage)."
+  },
+  {
+   "name": "Demonic Covenant",
+   "needs": [
+    "condition:milled-share-all-card-types"
+   ],
+   "why": "'If two cards that share all their card types were milled this way, sacrifice this enchantment': the this-way condition can count milled cards (or the card types among them) but can't ask whether two of them have exactly the same set of card types (an artifact creature and a creature don't)."
+  },
+  {
+   "name": "Zimone's Hypothesis",
+   "needs": [
+    "decision:choose-odd-or-even",
+    "condition:power-parity"
+   ],
+   "why": "\"Then choose odd or even\" as it resolves, and a power-parity filter for \"return each creature with power of the chosen quality\", aren't expressible (the untargeted +1/+1 counter would be a choose-permanents and is fine)."
+  },
+  {
+   "name": "Winter, Cynical Opportunist",
+   "needs": [
+    "decision:choose-from-zone-extensions"
+   ],
+   "why": "\"Exile any number of cards from your graveyard with four or more card types among them\" is a set constraint on a graveyard choice, then a permanent card from among the exiled ones goes onto the battlefield with a finality counter; neither the constraint nor the \"from among them\" link exists."
+  },
+  {
+   "name": "Experimental Lab // Staff Room",
+   "needs": [
+    "effect:turn-face-up",
+    "effect:manifested-this-way"
+   ],
+   "why": "Staff Room's \"turn that creature face up or put a +1/+1 counter on it\" needs turning a permanent face up by an effect (and the choice between the two); Experimental Lab's \"then put two +1/+1 counters and a trample counter on that creature\" needs a reference to the creature manifest dread just made."
+  },
+  {
+   "name": "Kianne, Corrupted Memory",
+   "needs": [
+    "condition:power-parity"
+   ],
+   "why": "\"As long as Kianne's power is even/odd\" gates its two castAsThoughFlash statics on the parity of its own power; no StaticCondition or NumCompare reads odd/even."
+  },
+  {
+   "name": "Rip, Spawn Hunter",
+   "needs": [
+    "decision:choose-any-number-different-powers"
+   ],
+   "why": "\"Put any number of creature and/or Vehicle cards with different powers from among them into your hand\" needs a distinct-powers set rule on the look-and-choose; zone-choice-together has only share and one-each."
+  },
+  {
+   "name": "Paranormal Analyst",
+   "needs": [
+    "trigger:manifests-dread"
+   ],
+   "why": "No \"whenever you manifest dread\" trigger exists (it fires even when the manifest dread can't be completed, per the rulings), nor a way for its effect to pick the card that manifest dread put into the graveyard."
+  },
+  {
+   "name": "Smoky Lounge // Misty Salon",
+   "needs": [
+    "cost:spend-only-unlock-door",
+    "effect:amount-unlocked-doors"
+   ],
+   "why": "Smoky Lounge's \"spend this mana only to cast Room spells and unlock doors\" needs a spend restriction admitting the unlock special action, and Misty Salon's X/X Spirit needs an amount counting unlocked doors among Rooms you control."
+  },
+  {
+   "name": "Monstrous Emergence",
+   "needs": [
+    "effect:beheld-object-amount"
+   ],
+   "why": "The additional cost is a behold of a creature (rule 701.4a, built), but the damage equals the power of the chosen creature or revealed card, and nothing lets the spell's effect read the beheld object (on resolution, or last-known if it left the battlefield, per the ruling)."
+  },
+  {
+   "name": "Zimone, All-Questioning",
+   "needs": [
+    "condition:prime-count"
+   ],
+   "why": "The end-step intervening-if 'you control a prime number of lands' has no StaticCondition (controls has atLeast only, no primality test), and 'that many' counters on the legendary Primo token would read the land count."
+  },
+  {
+   "name": "Sporogenic Infection",
+   "needs": [
+    "condition:not-attached-to-source"
+   ],
+   "why": "The enters edict 'sacrifices a creature of their choice other than enchanted creature' needs a sacrifice filter excluding the permanent this Aura enchants; CardFilter has enchanted/enchantedBy/attachedTo but nothing naming the source's own host, and sacrifice's exceptSource only excludes the Aura itself."
+  },
+  {
+   "name": "The Tale of Tamiyo",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "Chapters I-III loop 'mill two; if two cards that share a card type were milled this way, draw a card and repeat this process' until the pair shares no type — no effect repeats a block while a this-way condition holds (chapter IV's exile-copy-cast-paying-costs is unverified on top of that)."
+  },
+  {
+   "name": "Fear of the Dark",
+   "needs": [
+    "condition:filter-controlled-by-trigger-player"
+   ],
+   "why": "The attack trigger's intervening-if 'if defending player controls no Glimmer creatures' needs a condition counting the trigger player's (defending player's) permanents; controls/opponent-controls read you or any opponent, not the attacked player."
+  },
+  {
+   "name": "Oblivious Bookworm",
+   "needs": [
+    "stat:turned-face-up-this-turn"
+   ],
+   "why": "'Discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn' needs a turn tally of face-up turns and of face-down entries as they entered; turn-history 'entered' reads the permanent as it is now, so a manifested creature that died or was turned up this turn reads wrong."
+  },
+  {
+   "name": "Undead Sprinter",
+   "needs": [
+    "zone:graveyard-cast-rider-own-permission"
+   ],
+   "why": "'If you do, this creature enters with a +1/+1 counter' applies only when cast under its own graveyard permission; EntryRecord keeps castVia 'graveyard-permission' but not which grant, so a cast through Gisa and Geralf or Kotis (it's a Zombie) would wrongly get the counter."
+  },
+  {
+   "name": "Omnivorous Flytrap",
+   "needs": [
+    "condition:card-types-in-graveyard-threshold"
+   ],
+   "why": "'Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures' has no condition — delirium is fixed at four and no condition compares the cardTypesInGraveyard amount with another number (the distribute half is expressible, Court of Garenbrig's shape)."
+  },
+  {
+   "name": "Saw",
+   "needs": [
+    "decision:choose-permanents-exclude-trigger-object"
+   ],
+   "why": "\"You may sacrifice a permanent other than that creature or this Equipment\": a sacrifice choice can spare the source (exceptSource) but not the trigger object (the equipped attacker), and no filter clause names it; equipped:false or attacking:false would wrongly spare other permanents."
+  },
+  {
+   "name": "Fear of Isolation",
+   "needs": [
+    "cost:return-permanent-additional-cost"
+   ],
+   "why": "\"As an additional cost to cast this spell, return a permanent you control to its owner's hand\": a spell's additionalCost has sacrifice, discard, life, waterbend, behold and options, but no return-to-hand (only an activated ability's cost has returnToHand)."
+  },
+  {
+   "name": "Trial of Agony",
+   "needs": [
+    "effect:targets-same-controller",
+    "decision:choose-among-targets"
+   ],
+   "why": "\"Two target creatures controlled by the same opponent\" has no slot relation (only differentController exists), and \"that player chooses one of those creatures\" is a resolution-time choice among the spell's own targets made by the targets' controller, which no effect can ask."
+  },
+  {
+   "name": "Creeping Peeper",
+   "needs": [
+    "cost:spend-only-turn-face-up",
+    "cost:spend-only-unlock-door"
+   ],
+   "why": "\"Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up\": ManaSpendOnly covers spells and activated abilities, not the unlock-door or turn-face-up special actions, so the mana would be unspendable on two of its three uses."
+  },
+  {
+   "name": "Say Its Name",
+   "needs": [
+    "decision:search-hand-and-library"
+   ],
+   "why": "The graveyard ability's \"Search your graveyard, hand, and/or library for a card named Altanak\" needs a search whose zones include the hand; search-library's zones are only library and/or graveyard."
+  },
+  {
+   "name": "Stay Hidden, Stay Silent",
+   "needs": [
+    "static:doesnt-untap-filter",
+    "effect:attached-effect-ref"
+   ],
+   "why": "\"Enchanted creature doesn't untap during its controller's untap step\" (doesntUntap only covers the permanent carrying it), and no effect target names the enchanted creature for \"tap enchanted creature\" / \"shuffle enchanted creature into its owner's library\"."
+  },
+  {
+   "name": "Betrayer's Bargain",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\" is a turn-long replacement on the target (from any cause, per its ruling), which no effect sets up."
+  },
+  {
+   "name": "Fear of Exposure",
+   "needs": [
+    "cost:additional-cost-tap-permanents"
+   ],
+   "why": "\"As an additional cost to cast this spell, tap two untapped creatures and/or lands you control\": a spell's additionalCost has no tap-permanents option (only sacrifice, discard, life, behold, blight, waterbend)."
+  },
+  {
+   "name": "Found Footage",
+   "needs": [
+    "zone:visibility-extensions"
+   ],
+   "why": "\"You may look at face-down creatures your opponents control any time\" needs a static that reveals opponents' face-down permanents in that player's view; the view hides them from everyone but their controller."
+  },
+  {
+   "name": "Veteran Survivor",
+   "needs": [
+    "condition:cards-currently-exiled-with-source-condition"
+   ],
+   "why": "\"As long as there are three or more cards exiled with this creature\" counts cards still in exile; the exiled-with-source condition counts cards ever exiled with it, so it stays true after one leaves exile."
+  },
+  {
+   "name": "Fear of Abduction",
+   "needs": [
+    "cost:exile-creature-cost"
+   ],
+   "why": "\"As an additional cost to cast this spell, exile a creature you control\" has no additional-cost form, nor a link from that exiled card to \"put each card exiled with it into its owner's hand\"."
+  },
+  {
+   "name": "Fear of Falling",
+   "needs": [
+    "effect:lose-keyword-until-eot"
+   ],
+   "why": "\"…gets -2/-0 and loses flying until your next turn\": the -2/-0 is expressible, but no effect makes a creature lose a single keyword (here until your next turn)."
+  },
+  {
+   "name": "Disturbing Mirth",
+   "needs": [
+    "trigger:self-sacrifice-trigger"
+   ],
+   "why": "\"When you sacrifice this enchantment, manifest dread\": the sacrifice trigger can't be scoped to its own source (who \"self\" means any sacrifice you make, and no CardFilter names the source)."
+  },
+  {
+   "name": "Miasma Demon",
+   "needs": [
+    "decision:discard-any-number",
+    "decision:variable-target-count"
+   ],
+   "why": "\"You may discard any number of cards. When you do, up to that many target creatures each get -2/-2\": discard takes a fixed amount, and a reflexive trigger can't have a target count set by how many were discarded."
+  },
+  {
+   "name": "Vanish from Sight",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target nonland permanent's owner puts it on their choice of the top or bottom\": each-player-may can hand a choice to the target's controller ({ controllerOfTarget }) but not its owner, who differs for a stolen permanent."
+  },
+  {
+   "name": "Possessed Goat",
+   "needs": [
+    "effect:add-color-until-eot"
+   ],
+   "why": "\"It becomes a black Demon in addition to its other colors and types\" (no duration): add-types adds the Demon type but no colour, and animate's setColors replaces colours rather than adding black (a permanent-duration add-colour is the same gap as the key's until-end-of-turn one). \"Activate only once\" itself would be the existing exhaust tracking."
+  },
+  {
+   "name": "Acrobatic Cheerleader",
+   "needs": [
+    "stat:trigger-only-once-per-object"
+   ],
+   "why": "\"This ability triggers only once\": TriggeredAbility has oncePerTurn but nothing that stops a trigger for the rest of the object's existence; the ruling says it never triggers again even if the flying counter is removed."
+  },
+  {
+   "name": "Duskmourn's Domination",
+   "needs": [
+    "static:static-set-characteristics"
+   ],
+   "why": "\"Enchanted creature gets -3/-0 and loses all abilities\": a static (Aura) can't make the enchanted creature lose all abilities — only one-shot animate/modifiers can (Reprobation's gap); control and -3/-0 alone are expressible."
+  },
+  {
+   "name": "Rampaging Soulrager",
+   "needs": [
+    "condition:unlocked-door-count"
+   ],
+   "why": "\"As long as there are two or more unlocked doors among Rooms you control\": no StaticCondition or filter counts unlocked doors."
+  }
+ ]
+}

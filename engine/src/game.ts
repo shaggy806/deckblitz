@@ -1740,6 +1740,17 @@ export class Game {
               }),
             );
           }
+          // Impending (rule 702.176a) — for its impending cost, an
+          // alternative cost.
+          if (def.impending !== null) {
+            out.push(
+              ...this.castSpellActions(player, card, cardName, def, {
+                ...faceProp,
+                via: "impending",
+                costString: def.impending.cost,
+              }),
+            );
+          }
           // Web-slinging (rule 702.188a) — for its web-slinging cost, one
           // offer per tapped creature that could be returned, which the cast
           // names. Normal timing: `castSpellActions` judges it.
@@ -2554,7 +2565,8 @@ export class Game {
     // Blitz is an alternative cost from the hand too (rule 702.152a), and so
     // is web-slinging (702.188a; its ruling: never with "without paying its
     // mana cost"), and airbend's {2} from exile (701.65a).
-    const warp = via === "warp" || via === "blitz" || via === "web-slinging" || via === "airbend";
+    const warp =
+      via === "warp" || via === "blitz" || via === "impending" || via === "web-slinging" || via === "airbend";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
     }
@@ -8318,6 +8330,10 @@ export class Game {
    * lore counter to each Saga they control. */
   private sagaChapterStep(): void {
     const active = this.activePlayer;
+    // A player who has left the game mid-turn (rule 800.4a) gets no
+    // turn-based actions for the rest of it: their Sagas stay as they were,
+    // and no chapter waits on a player who can't answer.
+    if (this.state.players[active]?.hasLost === true) return;
     for (const id of [...this.state.zones.shared.battlefield]) {
       const object = this.state.objects[id];
       if (
@@ -9424,6 +9440,8 @@ export class Game {
               ? this.warpCostOfCaster(cardId, def, caster)
               : via === "blitz"
               ? this.blitzCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
+              : via === "impending"
+              ? (def.impending?.cost ?? null)
             : // Face down (rules 702.37c, 702.168a): {3}, an alternative cost.
               via === "face-down"
               ? "{3}"
@@ -9806,6 +9824,14 @@ export class Game {
       }
       if (this.blitzCostOf(cardId, def, player) === null) return `${def.name} does not have blitz`;
       if (overload || free || altCost) return `blitz is an alternative cost, and can't be combined with another`;
+    } else if (via === "impending") {
+      // Rule 702.176a — for its impending cost, from the hand or a commander
+      // from the command zone: an alternative cost (118.9a).
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (def.impending === null) return `${def.name} does not have impending`;
+      if (overload || free || altCost) return `impending is an alternative cost, and can't be combined with another`;
     } else if (via === "warp") {
       // Rule 702.185a — from the hand, for its warp cost: an alternative cost,
       // so no other one goes with it (118.9a).
@@ -14927,6 +14953,9 @@ export class Game {
       return;
     }
     const escapedWith = object.castVia === "escape" ? def.escape?.counters : undefined;
+    // "If you chose to pay this permanent's impending cost, it enters with N
+    // time counters on it" (rule 702.176a).
+    const impendingWith = object.castVia === "impending" ? def.impending?.count : undefined;
     const warped = object.castVia === "warp";
     const blitzed = object.castVia === "blitz";
     // "That creature enters with two additional +1/+1 counters" (Yuna).
@@ -15012,6 +15041,10 @@ export class Game {
     // permanent genuinely arrived with (rule 614.1c).
     if (escapedWith !== undefined && this.state.objects[id]?.zone === "battlefield") {
       this.addCounter({ kind: "object", object: id }, escapedWith.kind, escapedWith.amount);
+    }
+    // Before the entry is announced, so nothing sees it arrive as a creature.
+    if (impendingWith !== undefined && this.state.objects[id]?.zone === "battlefield") {
+      this.addCounter({ kind: "object", object: id }, "time", impendingWith);
     }
     this.emit({ type: "permanent-entered-battlefield", object: id });
     // Warp (rule 702.185a): its warp cost was paid, so it's exiled at the
@@ -19201,7 +19234,10 @@ export class Game {
           this.sacrificeByEffect(controller, { player }, filter, count, exceptId);
         }
       },
-      sacrificeSource: () => this.sacrificeSourceByEffect(source, controller, refs.source),
+      // A source that's a new object since (a delayed trigger's "sacrifice
+      // it", its source blinked — `sourceLost`, rule 400.7) isn't "it".
+      sacrificeSource: () =>
+        opts.sourceLost === true ? false : this.sacrificeSourceByEffect(source, controller, refs.source),
       aboutPlayer: (player) =>
         this.makeResolutionContext(
           source,
@@ -26345,6 +26381,23 @@ export class Game {
 
   // --- delayed triggered abilities (rule 603.7) ------------------
 
+  /**
+   * The stint a delayed trigger's "it" (its source) is bound to. Normally
+   * the source as it is now. But a source back on the battlefield as a new
+   * object since its ability triggered or was activated (blinked in
+   * response) isn't "it" any more (rule 400.7): the delayed trigger keeps the
+   * stint the ability knew, and so finds nothing (Attack-in-the-Box's
+   * "sacrifice it"). Not when this resolution itself put it there — "return
+   * it to the battlefield. Exile it at the beginning of the next end step"
+   * means the returned permanent.
+   */
+  private delayedSourceStint(object: GameObject, refs: LastKnownRefs | undefined): number {
+    const now = object.zoneChangeCount ?? 0;
+    if (object.zone !== "battlefield" || refs?.source === undefined || refs.source === now) return now;
+    const putHereNow = thisWayEntries(this.state, "put-onto-battlefield").some((entry) => entry.object === object.id);
+    return putHereNow ? now : refs.source;
+  }
+
   /** Record a delayed triggered ability — see the `delayed-trigger` effect.
    * A leave-keyed one watches the permanent's current battlefield stint, and
    * isn't made at all for something that isn't on the battlefield. */
@@ -26440,7 +26493,7 @@ export class Game {
       // Which object its source is now: one that changes zones before this
       // resolves is a new object (rule 400.7), and "return it" finds nothing.
       ...(object !== undefined && object.zone !== "stack"
-        ? { sourceStint: object.zoneChangeCount ?? 0 }
+        ? { sourceStint: this.delayedSourceStint(object, creator.refs) }
         : {}),
       createdAtSeq: this.state.eventSeq,
       effect,
@@ -30539,8 +30592,10 @@ export class Game {
     // that has never been on the battlefield, and resolves onto it (707.10f).
     if (object.isToken && object.zone !== "battlefield" && object.zone !== "stack") return false;
     // An instant or sorcery card that would enter the battlefield stays where
-    // it was (rule 400.4a).
-    if (to === "battlefield" && object.zone !== "battlefield") {
+    // it was (rule 400.4a) — unless it enters face down, as a 2/2 creature
+    // with no other characteristics (rules 701.40a, 708.2a): manifested,
+    // cloaked or manifested dread, it stays face down for good (701.40b).
+    if (to === "battlefield" && object.zone !== "battlefield" && enter.faceDown === undefined) {
       const types = computeCharacteristics(this.state, this.registry, id).types;
       if (types.includes("instant") || types.includes("sorcery")) return false;
     }

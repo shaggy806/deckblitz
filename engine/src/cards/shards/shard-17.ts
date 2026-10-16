@@ -71,9 +71,11 @@ import _poolComposerOfSpring from "../pool/composer-of-spring.js";
 import _poolConcordiaPegasus from "../pool/concordia-pegasus.js";
 import _poolContaminatedAquifer from "../pool/contaminated-aquifer.js";
 import _poolContrabandKingpin from "../pool/contraband-kingpin.js";
+import _poolConvertToSlime from "../pool/convert-to-slime.js";
 import _poolCorruptedHarvester from "../pool/corrupted-harvester.js";
 import _poolCostlyPlunder from "../pool/costly-plunder.js";
 import _poolCourtOfGrace from "../pool/court-of-grace.js";
+import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCrashThrough from "../pool/crash-through.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
@@ -189,6 +191,7 @@ import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
+import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
 import _poolKilnFiend from "../pool/kiln-fiend.js";
 import _poolKishlaSkimmer from "../pool/kishla-skimmer.js";
@@ -483,9 +486,11 @@ const shard: CardShard = {
     _poolConcordiaPegasus,
     _poolContaminatedAquifer,
     _poolContrabandKingpin,
+    _poolConvertToSlime,
     _poolCorruptedHarvester,
     _poolCostlyPlunder,
     _poolCourtOfGrace,
+    _poolCrackedSkull,
     _poolCraftWithPride,
     _poolCrashThrough,
     _poolCrosissAttendant,
@@ -601,6 +606,7 @@ const shard: CardShard = {
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
     _poolKeyToTheCity,
+    _poolKeysToTheHouse,
     _poolKickoffCelebrations,
     _poolKilnFiend,
     _poolKishlaSkimmer,

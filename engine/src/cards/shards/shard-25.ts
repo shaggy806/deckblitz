@@ -157,6 +157,7 @@ import _poolGoldenEgg from "../pool/golden-egg.js";
 import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
 import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
+import _poolGrandEntrywayElegantRotunda from "../pool/grand-entryway-elegant-rotunda.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
@@ -248,6 +249,7 @@ import _poolPlanarIncision from "../pool/planar-incision.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
+import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
@@ -311,6 +313,7 @@ import _poolSkullclamp from "../pool/skullclamp.js";
 import _poolSkystreakEngineer from "../pool/skystreak-engineer.js";
 import _poolSkywardSpider from "../pool/skyward-spider.js";
 import _poolSlayersStronghold from "../pool/slayers-stronghold.js";
+import _poolSlimyPiper from "../pool/slimy-piper.js";
 import _poolSlingshotGoblin from "../pool/slingshot-goblin.js";
 import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
@@ -323,6 +326,7 @@ import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
+import _poolStalkedResearcher from "../pool/stalked-researcher.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
@@ -560,6 +564,7 @@ const shard: CardShard = {
     _poolGoldnightCommander,
     _poolGolemsHeart,
     _poolGrahaTiaScionReborn,
+    _poolGrandEntrywayElegantRotunda,
     _poolGraspingLongneck,
     _poolGravitonFundamentalForce,
     _poolGreatHallOfTheBiblioplex,
@@ -651,6 +656,7 @@ const shard: CardShard = {
     _poolPloverKnights,
     _poolPlunder,
     _poolPointTheWay,
+    _poolPolJamaarIllusionist,
     _poolPorcelainLegionnaire,
     _poolPrimevalProtector,
     _poolPrimocEscapee,
@@ -714,6 +720,7 @@ const shard: CardShard = {
     _poolSkystreakEngineer,
     _poolSkywardSpider,
     _poolSlayersStronghold,
+    _poolSlimyPiper,
     _poolSlingshotGoblin,
     _poolSlithBloodletter,
     _poolSmotheringTithe,
@@ -726,6 +733,7 @@ const shard: CardShard = {
     _poolSpinedBasher,
     _poolSpireOfIndustry,
     _poolSqueeGoblinNabob,
+    _poolStalkedResearcher,
     _poolStaunchDefenders,
     _poolStingerquillVoxmancer,
     _poolStormCrow,

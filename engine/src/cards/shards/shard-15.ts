@@ -76,6 +76,7 @@ import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
 import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
+import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
@@ -177,6 +178,7 @@ import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
+import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
@@ -361,6 +363,7 @@ import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
+import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
@@ -479,6 +482,7 @@ const shard: CardShard = {
     _poolDaredevilsBillyClub,
     _poolDeathBomb,
     _poolDefiantBloodlord,
+    _poolDelugeOfDoom,
     _poolDemonicCounsel,
     _poolDespark,
     _poolDiaryOfDreams,
@@ -580,6 +584,7 @@ const shard: CardShard = {
     _poolHulklingBurgeoningBruiser,
     _poolHystrodon,
     _poolIcemanAndFirestar,
+    _poolImpossibleInferno,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
     _poolIrenicussVileDuplication,
@@ -764,6 +769,7 @@ const shard: CardShard = {
     _poolTundraWolves,
     _poolTurbulentCrater,
     _poolTymorasInvoker,
+    _poolUnderwaterTunnelSlimyAquarium,
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,
     _poolUrzasFactory,

@@ -127,6 +127,7 @@ import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
+import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFieldCreeper from "../pool/field-creeper.js";
@@ -185,6 +186,7 @@ import _poolImpactTremors from "../pool/impact-tremors.js";
 import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
+import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
@@ -252,6 +254,7 @@ import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
 import _poolOmitVariables from "../pool/omit-variables.js";
 import _poolOnduSkyruins from "../pool/ondu-skyruins.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
+import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
 import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
@@ -276,6 +279,7 @@ import _poolRearingEmbermare from "../pool/rearing-embermare.js";
 import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
+import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolRhoxWarMonk from "../pool/rhox-war-monk.js";
 import _poolRhysTheRedeemed from "../pool/rhys-the-redeemed.js";
 import _poolRideTheRails from "../pool/ride-the-rails.js";
@@ -309,6 +313,7 @@ import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
 import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
+import _poolShrewdStoryteller from "../pool/shrewd-storyteller.js";
 import _poolShriekRaptor from "../pool/shriek-raptor.js";
 import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
@@ -553,6 +558,7 @@ const shard: CardShard = {
     _poolFallToEarth,
     _poolFatalFumes,
     _poolFatestitcher,
+    _poolFearOfBeingHunted,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
     _poolFieldCreeper,
@@ -611,6 +617,7 @@ const shard: CardShard = {
     _poolImperialSeal,
     _poolImprovisedAct,
     _poolInfiltratorIlKor,
+    _poolInnocuousRat,
     _poolInstantRamen,
     _poolInvasionSubmersible,
     _poolIsolatedChapel,
@@ -678,6 +685,7 @@ const shard: CardShard = {
     _poolOmitVariables,
     _poolOnduSkyruins,
     _poolOrcishLumberjack,
+    _poolOrphansOfTheWheat,
     _poolOrzhovCluestone,
     _poolOverflowingInsight,
     _poolOwlinSpiralmancer,
@@ -702,6 +710,7 @@ const shard: CardShard = {
     _poolReconstruction,
     _poolRedGhostIntangibleGenius,
     _poolResurgentBelief,
+    _poolResurrectedCultist,
     _poolRhoxWarMonk,
     _poolRhysTheRedeemed,
     _poolRideTheRails,
@@ -735,6 +744,7 @@ const shard: CardShard = {
     _poolShorikaiGenesisEngine,
     _poolShortBow,
     _poolShredderUnrelenting,
+    _poolShrewdStoryteller,
     _poolShriekRaptor,
     _poolSiegeGangLieutenant,
     _poolSiegeWurm,

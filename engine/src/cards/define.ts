@@ -945,6 +945,15 @@ export type StaticCondition =
    * this way". Only a resolution can answer it; anywhere else it's false.
    */
   | { readonly kind: "damage-dealt-this-way"; readonly to?: number; readonly player?: boolean }
+  /**
+   * "As long as this permanent's impending cost was paid and it has a time
+   * counter on it" (rule 702.176a): the source was cast for its impending
+   * cost (`castVia`, which a zone change or a token copy doesn't carry) and
+   * has a time counter. Read straight off the object, so a static it
+   * conditions (`removeTypes: ["creature"]`) never loops through the layer
+   * fold. See `impendingAbilities()`.
+   */
+  | { readonly kind: "impending" }
   | {
       readonly kind: "this-way";
       readonly what: ThisWayKind;
@@ -2520,6 +2529,18 @@ export interface CardDefinition {
    */
   readonly blitz: { readonly cost: string } | null;
   /**
+   * Impending (rule 702.176a — Overlord of the Mistmoors: "Impending 4—
+   * {2}{W}{W}"): "You may choose to pay [cost] rather than pay this spell's
+   * mana cost" and "If you chose to pay this permanent's impending cost, it
+   * enters with N time counters on it" — offered as its own `cast-spell`
+   * (`via: "impending"`) from the hand, the counters put on as it enters,
+   * before anything sees it arrive. Its other two abilities — "as long as
+   * … it has a time counter on it, it's not a creature" and the end step's
+   * counter removal — are the card's own, `impendingAbilities()` in
+   * helpers.ts, on the `impending` condition. `null` for none.
+   */
+  readonly impending: { readonly count: number; readonly cost: string } | null;
+  /**
    * Evoke (rule 702.74 — Mulldrifter): "You may cast this spell by paying
    * [cost] rather than paying its mana cost" and "When this permanent
    * enters, if its evoke cost was paid, its controller sacrifices it." An
@@ -2784,6 +2805,7 @@ const PRINTED_ABILITY: {
   foretell: (def) => def.foretell !== null,
   warp: (def) => def.warp !== null,
   blitz: (def) => def.blitz !== null,
+  impending: (def) => def.impending !== null,
   evoke: (def) => def.evoke !== null,
   prototype: (def) => def.prototype !== null,
   morph: (def) => def.morph !== null,
@@ -2956,6 +2978,7 @@ interface CardDraft {
   foretell?: { readonly cost: string };
   warp?: { readonly cost: string };
   blitz?: { readonly cost: string };
+  impending?: { readonly count: number; readonly cost: string };
   evoke?: { readonly cost: string };
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: { readonly keyword: "morph" | "megamorph" | "disguise"; readonly cost: string };
@@ -3057,6 +3080,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     foretell: draft.foretell ?? null,
     warp: draft.warp ?? null,
     blitz: draft.blitz ?? null,
+    impending: draft.impending ?? null,
     evoke: draft.evoke ?? null,
     prototype: draft.prototype ?? null,
     morph: draft.morph ?? null,

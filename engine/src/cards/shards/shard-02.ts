@@ -59,6 +59,7 @@ import _poolCastAwayDoubt from "../pool/cast-away-doubt.js";
 import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
+import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
@@ -72,6 +73,7 @@ import _poolCollectorsVault from "../pool/collectors-vault.js";
 import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
+import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
@@ -91,6 +93,7 @@ import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
+import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
 import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
@@ -362,6 +365,7 @@ import _poolTwinBlades from "../pool/twin-blades.js";
 import _poolTyLeeArtfulAcrobat from "../pool/ty-lee-artful-acrobat.js";
 import _poolUmbralCollarZealot from "../pool/umbral-collar-zealot.js";
 import _poolUncagedFury from "../pool/uncaged-fury.js";
+import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
 import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
@@ -462,6 +466,7 @@ const shard: CardShard = {
     _poolCatBurglar,
     _poolCatacombSlug,
     _poolCausticBronco,
+    _poolCautiousSurvivor,
     _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
     _poolCharitableLevy,
@@ -475,6 +480,7 @@ const shard: CardShard = {
     _poolColossalMight,
     _poolCombustionMan,
     _poolConscriptedInfantry,
+    _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
     _poolCremate,
     _poolCribSwap,
@@ -494,6 +500,7 @@ const shard: CardShard = {
     _poolDebilitatingInjury,
     _poolDeerDog,
     _poolDefiantStrike,
+    _poolDefiantSurvivor,
     _poolDenProtector,
     _poolDesertOfTheTrue,
     _poolDevotedHero,
@@ -765,6 +772,7 @@ const shard: CardShard = {
     _poolTyLeeArtfulAcrobat,
     _poolUmbralCollarZealot,
     _poolUncagedFury,
+    _poolUnderwaterTunnel,
     _poolUntimelyMalfunction,
     _poolUrbanEvolution,
     _poolUrbisProtector,

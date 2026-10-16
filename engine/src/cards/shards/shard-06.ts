@@ -41,6 +41,7 @@ import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
 import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
+import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
 import _poolBombard from "../pool/bombard.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
@@ -78,6 +79,7 @@ import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
 import _poolCrustaceanCommando from "../pool/crustacean-commando.js";
 import _poolCrypticCommand from "../pool/cryptic-command.js";
+import _poolCultHealer from "../pool/cult-healer.js";
 import _poolCultivatorsCaravan from "../pool/cultivators-caravan.js";
 import _poolCuriosity from "../pool/curiosity.js";
 import _poolDaggerclawImp from "../pool/daggerclaw-imp.js";
@@ -238,6 +240,7 @@ import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.j
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
 import _poolPeerIntoTheAbyss from "../pool/peer-into-the-abyss.js";
 import _poolPharikasMender from "../pool/pharikas-mender.js";
+import _poolPhenomenonInvestigators from "../pool/phenomenon-investigators.js";
 import _poolPhyrexianArena from "../pool/phyrexian-arena.js";
 import _poolPhyrexianDenouncer from "../pool/phyrexian-denouncer.js";
 import _poolPlagueBeetle from "../pool/plague-beetle.js";
@@ -416,6 +419,7 @@ import _tokensJunkToken from "../tokens/junk-token.js";
 import _tokensLanderToken from "../tokens/lander-token.js";
 import _tokensMeteoriteToken from "../tokens/meteorite-token.js";
 import _tokensNinjaToken from "../tokens/ninja-token.js";
+import _tokensOozeTokenConvertToSlime from "../tokens/ooze-token-convert-to-slime.js";
 import _tokensPowerstoneToken from "../tokens/powerstone-token.js";
 import _tokensShardToken from "../tokens/shard-token.js";
 import _tokensTheVoid from "../tokens/the-void.js";
@@ -461,6 +465,7 @@ const shard: CardShard = {
     _poolBlindCreeper,
     _poolBloodlineBidding,
     _poolBloomingStinger,
+    _poolBoilerbilgesRipper,
     _poolBombard,
     _poolBoomerangBasics,
     _poolBottomlessPit,
@@ -498,6 +503,7 @@ const shard: CardShard = {
     _poolCrumbAndGetIt,
     _poolCrustaceanCommando,
     _poolCrypticCommand,
+    _poolCultHealer,
     _poolCultivatorsCaravan,
     _poolCuriosity,
     _poolDaggerclawImp,
@@ -658,6 +664,7 @@ const shard: CardShard = {
     _poolPardicWanderer,
     _poolPeerIntoTheAbyss,
     _poolPharikasMender,
+    _poolPhenomenonInvestigators,
     _poolPhyrexianArena,
     _poolPhyrexianDenouncer,
     _poolPlagueBeetle,
@@ -838,6 +845,7 @@ const shard: CardShard = {
     _tokensLanderToken,
     _tokensMeteoriteToken,
     _tokensNinjaToken,
+    _tokensOozeTokenConvertToSlime,
     _tokensPowerstoneToken,
     _tokensShardToken,
     _tokensTheVoid,

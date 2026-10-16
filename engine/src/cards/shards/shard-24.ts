@@ -232,6 +232,7 @@ import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
+import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
@@ -297,6 +298,7 @@ import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkullFracture from "../pool/skull-fracture.js";
+import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
@@ -633,6 +635,7 @@ const shard: CardShard = {
     _poolOgreWarrior,
     _poolOnTheJob,
     _poolOriginOfCaptainAmerica,
+    _poolOverlordOfTheFloodpits,
     _poolParcelMyr,
     _poolPedalToTheMetal,
     _poolPitilessGorgon,
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolSinkhole,
     _poolSkinrender,
     _poolSkullFracture,
+    _poolSkullsnapNuisance,
     _poolSlay,
     _poolSmashToDust,
     _poolSojournersCompanion,

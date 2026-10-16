@@ -191,6 +191,12 @@ const TERMS: readonly TextTerm[] = [
     text: 'You may cast this spell for its blitz cost. If you do, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.',
   },
   {
+    key: 'impending',
+    name: 'Impending',
+    pattern: /\bimpending\b/i,
+    text: "You may cast this spell for its impending cost. If you do, it enters with that many time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.",
+  },
+  {
     key: 'mentor',
     name: 'Mentor',
     pattern: /\bmentor\b/i,

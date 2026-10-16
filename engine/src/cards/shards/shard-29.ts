@@ -42,6 +42,7 @@ import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
 import _poolBurgeoning from "../pool/burgeoning.js";
 import _poolBuriedAlive from "../pool/buried-alive.js";
 import _poolBurningFields from "../pool/burning-fields.js";
+import _poolCacklingSlasher from "../pool/cackling-slasher.js";
 import _poolCadaverImp from "../pool/cadaver-imp.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
@@ -311,6 +312,7 @@ import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
+import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
 import _poolSpiritualGuardian from "../pool/spiritual-guardian.js";
 import _poolSpittingGourna from "../pool/spitting-gourna.js";
 import _poolSpottedGriffin from "../pool/spotted-griffin.js";
@@ -362,6 +364,7 @@ import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
+import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
@@ -450,6 +453,7 @@ const shard: CardShard = {
     _poolBurgeoning,
     _poolBuriedAlive,
     _poolBurningFields,
+    _poolCacklingSlasher,
     _poolCadaverImp,
     _poolCanyonCrawler,
     _poolCaretakersTalent,
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolSonicScrewdriver,
     _poolSoulknifeSpy,
     _poolSpiketailHatchling,
+    _poolSpinedTyrranax,
     _poolSpiritualGuardian,
     _poolSpittingGourna,
     _poolSpottedGriffin,
@@ -770,6 +775,7 @@ const shard: CardShard = {
     _poolUnderseaInvader,
     _poolUndulatingWitness,
     _poolUnholyAnnexRitualChamber,
+    _poolUnsettlingTwins,
     _poolUnsparingBoltcaster,
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,

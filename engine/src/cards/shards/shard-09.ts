@@ -26,6 +26,7 @@ import _poolAsgardianCitadel from "../pool/asgardian-citadel.js";
 import _poolAsgardianInspiration from "../pool/asgardian-inspiration.js";
 import _poolAshlingRekindled from "../pool/ashling-rekindled.js";
 import _poolAspiringAeronaut from "../pool/aspiring-aeronaut.js";
+import _poolAttackInTheBox from "../pool/attack-in-the-box.js";
 import _poolAuraMutation from "../pool/aura-mutation.js";
 import _poolAvatarKyoshi from "../pool/avatar-kyoshi.js";
 import _poolAwakeningHall from "../pool/awakening-hall.js";
@@ -235,6 +236,7 @@ import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
+import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
@@ -277,6 +279,7 @@ import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
+import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
@@ -444,6 +447,7 @@ const shard: CardShard = {
     _poolAsgardianInspiration,
     _poolAshlingRekindled,
     _poolAspiringAeronaut,
+    _poolAttackInTheBox,
     _poolAuraMutation,
     _poolAvatarKyoshi,
     _poolAwakeningHall,
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOtherworldlyGaze,
+    _poolOverlordOfTheBalemurk,
     _poolParapetWatchers,
     _poolPawnOfUlamog,
     _poolPerplexingTest,
@@ -695,6 +700,7 @@ const shard: CardShard = {
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
     _poolRockfaceVillage,
+    _poolRootwiseSurvivor,
     _poolRubbleSlinger,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,

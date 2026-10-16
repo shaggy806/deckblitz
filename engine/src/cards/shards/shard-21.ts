@@ -116,6 +116,7 @@ import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
 import _poolGalaGreeters from "../pool/gala-greeters.js";
 import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
+import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
@@ -160,6 +161,7 @@ import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
+import _poolJumpScare from "../pool/jump-scare.js";
 import _poolJundPanorama from "../pool/jund-panorama.js";
 import _poolKayaGeistHunter from "../pool/kaya-geist-hunter.js";
 import _poolKeeperOfTheAccord from "../pool/keeper-of-the-accord.js";
@@ -260,6 +262,7 @@ import _poolRepulsorBlast from "../pool/repulsor-blast.js";
 import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
+import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
@@ -490,6 +493,7 @@ const shard: CardShard = {
     _poolGalaGreeters,
     _poolGalliaTragicHost,
     _poolGevScaledScorch,
+    _poolGhostlyKeybearer,
     _poolGiganticBigBear,
     _poolGlarbCalamitysAugur,
     _poolGliderKids,
@@ -534,6 +538,7 @@ const shard: CardShard = {
     _poolJeskaiShrinekeeper,
     _poolJetmirNexusOfRevels,
     _poolJumboCactuar,
+    _poolJumpScare,
     _poolJundPanorama,
     _poolKayaGeistHunter,
     _poolKeeperOfTheAccord,
@@ -634,6 +639,7 @@ const shard: CardShard = {
     _poolRevengeOfRavens,
     _poolRewriteRegrets,
     _poolRipchainRazorkin,
+    _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
     _poolRunawayBoulder,
     _poolRustwingFalcon,

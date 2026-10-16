@@ -69,6 +69,7 @@ import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCarelessCelebrant from "../pool/careless-celebrant.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
+import _poolCatharticParting from "../pool/cathartic-parting.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
 import _poolCeruleanWyvern from "../pool/cerulean-wyvern.js";
 import _poolChampionOfTheParish from "../pool/champion-of-the-parish.js";
@@ -81,6 +82,7 @@ import _poolChronicleOfVictory from "../pool/chronicle-of-victory.js";
 import _poolChronomaton from "../pool/chronomaton.js";
 import _poolCitywatchSphinx from "../pool/citywatch-sphinx.js";
 import _poolCivicGardener from "../pool/civic-gardener.js";
+import _poolClammyProwler from "../pool/clammy-prowler.js";
 import _poolClapSnap from "../pool/clap-snap.js";
 import _poolCleaverRiot from "../pool/cleaver-riot.js";
 import _poolCliffhavenSellSword from "../pool/cliffhaven-sell-sword.js";
@@ -490,6 +492,7 @@ const shard: CardShard = {
     _poolCaravanHurda,
     _poolCarelessCelebrant,
     _poolCastleArdenvale,
+    _poolCatharticParting,
     _poolCentaurVinecrasher,
     _poolCeruleanWyvern,
     _poolChampionOfTheParish,
@@ -502,6 +505,7 @@ const shard: CardShard = {
     _poolChronomaton,
     _poolCitywatchSphinx,
     _poolCivicGardener,
+    _poolClammyProwler,
     _poolClapSnap,
     _poolCleaverRiot,
     _poolCliffhavenSellSword,

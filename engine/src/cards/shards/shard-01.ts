@@ -17,6 +17,7 @@ import _poolAngelfireIgnition from "../pool/angelfire-ignition.js";
 import _poolAngelicEdict from "../pool/angelic-edict.js";
 import _poolAnnul from "../pool/annul.js";
 import _poolAnthemOfChampions from "../pool/anthem-of-champions.js";
+import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
@@ -65,6 +66,7 @@ import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
+import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
 import _poolDailyBugleBuilding from "../pool/daily-bugle-building.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
@@ -224,6 +226,7 @@ import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
+import _poolPatchworkBeastie from "../pool/patchwork-beastie.js";
 import _poolPatronOfTheArts from "../pool/patron-of-the-arts.js";
 import _poolPegasusCharger from "../pool/pegasus-charger.js";
 import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
@@ -247,6 +250,7 @@ import _poolRadstorm from "../pool/radstorm.js";
 import _poolRakdosCarnarium from "../pool/rakdos-carnarium.js";
 import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
 import _poolRavenEagle from "../pool/raven-eagle.js";
+import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
@@ -276,6 +280,7 @@ import _poolScaldingTarn from "../pool/scalding-tarn.js";
 import _poolScarbladesMalice from "../pool/scarblades-malice.js";
 import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
+import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
@@ -334,6 +339,7 @@ import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.j
 import _poolThreeTragedies from "../pool/three-tragedies.js";
 import _poolThrummingbird from "../pool/thrummingbird.js";
 import _poolThundersteelColossus from "../pool/thundersteel-colossus.js";
+import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
@@ -410,6 +416,7 @@ const shard: CardShard = {
     _poolAngelicEdict,
     _poolAnnul,
     _poolAnthemOfChampions,
+    _poolAnthropede,
     _poolAnticipate,
     _poolArchweaver,
     _poolArtisansSorrow,
@@ -458,6 +465,7 @@ const shard: CardShard = {
     _poolCourierHawk,
     _poolCryotheoryAdept,
     _poolCryptothrall,
+    _poolCursedWindbreaker,
     _poolDailyBugleBuilding,
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
@@ -617,6 +625,7 @@ const shard: CardShard = {
     _poolOminousCemetery,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
+    _poolPatchworkBeastie,
     _poolPatronOfTheArts,
     _poolPegasusCharger,
     _poolPeterParkersCamera,
@@ -640,6 +649,7 @@ const shard: CardShard = {
     _poolRakdosCarnarium,
     _poolRakdosJoinsUp,
     _poolRavenEagle,
+    _poolRazorgrassInvoker,
     _poolReaperKing,
     _poolRecklessStormseeker,
     _poolReconstructHistory,
@@ -669,6 +679,7 @@ const shard: CardShard = {
     _poolScarbladesMalice,
     _poolScattershot,
     _poolScoldingAdministrator,
+    _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
@@ -727,6 +738,7 @@ const shard: CardShard = {
     _poolThreeTragedies,
     _poolThrummingbird,
     _poolThundersteelColossus,
+    _poolTicketBooth,
     _poolTitaniaProtectorOfArgoth,
     _poolTookReaper,
     _poolToxicAbomination,

@@ -146,6 +146,7 @@ import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
+import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
 import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
@@ -413,6 +414,7 @@ import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
 import _poolWhipSilk from "../pool/whip-silk.js";
 import _poolWildOx from "../pool/wild-ox.js";
 import _poolWildfireEmissary from "../pool/wildfire-emissary.js";
+import _poolWildfireWickerfolk from "../pool/wildfire-wickerfolk.js";
 import _poolWindSpirit from "../pool/wind-spirit.js";
 import _poolWingnutBatOnTheBelfry from "../pool/wingnut-bat-on-the-belfry.js";
 import _poolWitchOfTheMoors from "../pool/witch-of-the-moors.js";
@@ -587,6 +589,7 @@ const shard: CardShard = {
     _poolGallantStrike,
     _poolGeneralLeoCristophe,
     _poolGhoulcallersBell,
+    _poolGildedScuttler,
     _poolGiltgroveStalker,
     _poolGitaxianSpellstalker,
     _poolGlacierwoodSiege,
@@ -854,6 +857,7 @@ const shard: CardShard = {
     _poolWhipSilk,
     _poolWildOx,
     _poolWildfireEmissary,
+    _poolWildfireWickerfolk,
     _poolWindSpirit,
     _poolWingnutBatOnTheBelfry,
     _poolWitchOfTheMoors,

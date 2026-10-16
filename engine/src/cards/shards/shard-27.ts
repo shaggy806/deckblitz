@@ -64,6 +64,7 @@ import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
+import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
@@ -79,6 +80,7 @@ import _poolDarkslickShores from "../pool/darkslick-shores.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
+import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
@@ -164,6 +166,7 @@ import _poolHuatliTheSunsHeart from "../pool/huatli-the-suns-heart.js";
 import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
+import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
 import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
@@ -234,6 +237,7 @@ import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
+import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPestilence from "../pool/pestilence.js";
@@ -279,6 +283,7 @@ import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
+import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
@@ -307,6 +312,7 @@ import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
+import _poolSpectralSnatcher from "../pool/spectral-snatcher.js";
 import _poolSpellbookSeeker from "../pool/spellbook-seeker.js";
 import _poolSphinxMindbreaker from "../pool/sphinx-mindbreaker.js";
 import _poolSpiderSense from "../pool/spider-sense.js";
@@ -351,6 +357,7 @@ import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
 import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
+import _poolThuridMareOfDestiny from "../pool/thurid-mare-of-destiny.js";
 import _poolTimberlandAncient from "../pool/timberland-ancient.js";
 import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
@@ -478,6 +485,7 @@ const shard: CardShard = {
     _poolClachanFestival,
     _poolCloudSprite,
     _poolCommercialDistrict,
+    _poolCommuneWithEvil,
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
     _poolCorruptEunuchs,
@@ -493,6 +501,7 @@ const shard: CardShard = {
     _poolDeathHoodCobra,
     _poolDeconstruct,
     _poolDeepAnalysis,
+    _poolDefacedGallery,
     _poolDefilingDaemogoth,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
@@ -578,6 +587,7 @@ const shard: CardShard = {
     _poolHussarPatrol,
     _poolIdyllicGrange,
     _poolIncrementalBlight,
+    _poolInfernalPhantom,
     _poolInspiredTethermage,
     _poolIronLeagueSteed,
     _poolIronManTitanOfInnovation,
@@ -648,6 +658,7 @@ const shard: CardShard = {
     _poolOreskosSwiftclaw,
     _poolOriginOfTheHulk,
     _poolOstiaryThrull,
+    _poolOverlordOfTheBoilerbilges,
     _poolParch,
     _poolPartingGust,
     _poolPestilence,
@@ -693,6 +704,7 @@ const shard: CardShard = {
     _poolSangriteBacklash,
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
+    _poolSawbladeSkinripper,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
     _poolScuzzbackScrapper,
@@ -721,6 +733,7 @@ const shard: CardShard = {
     _poolSoulsMajesty,
     _poolSoulswornJury,
     _poolSparkElemental,
+    _poolSpectralSnatcher,
     _poolSpellbookSeeker,
     _poolSphinxMindbreaker,
     _poolSpiderSense,
@@ -765,6 +778,7 @@ const shard: CardShard = {
     _poolTheWanderingMinstrel,
     _poolThreeTreeRootweaver,
     _poolThunderbreakRegent,
+    _poolThuridMareOfDestiny,
     _poolTimberlandAncient,
     _poolTolarianAcademy,
     _poolTolarianScholar,

@@ -64,6 +64,7 @@ import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
+import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
@@ -217,6 +218,7 @@ import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
+import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
 import _poolNezumiProwler from "../pool/nezumi-prowler.js";
 import _poolNightguardPatrol from "../pool/nightguard-patrol.js";
@@ -277,6 +279,7 @@ import _poolResoluteReinforcements from "../pool/resolute-reinforcements.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolReveillark from "../pool/reveillark.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
+import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingwardenOwl from "../pool/ringwarden-owl.js";
 import _poolRobeOfMirrors from "../pool/robe-of-mirrors.js";
@@ -293,6 +296,7 @@ import _poolSabotender from "../pool/sabotender.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
+import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
@@ -482,6 +486,7 @@ const shard: CardShard = {
     _poolCarrionCrow,
     _poolCelestineTheLivingSaint,
     _poolChanneledDragonfire,
+    _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
     _poolCogworkArchivist,
@@ -635,6 +640,7 @@ const shard: CardShard = {
     _poolMutantTownMusicians,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
+    _poolNazarTheVelvetFang,
     _poolNestingBot,
     _poolNezumiProwler,
     _poolNightguardPatrol,
@@ -695,6 +701,7 @@ const shard: CardShard = {
     _poolRestlessReef,
     _poolReveillark,
     _poolReviveTheShire,
+    _poolRevokeDemise,
     _poolRimeshieldFrostGiant,
     _poolRingwardenOwl,
     _poolRobeOfMirrors,
@@ -711,6 +718,7 @@ const shard: CardShard = {
     _poolSaguPummeler,
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
+    _poolSandstormCrasher,
     _poolSavedByTheShell,
     _poolScalebanesElite,
     _poolScaledWurm,

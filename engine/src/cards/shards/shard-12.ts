@@ -116,6 +116,8 @@ import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
+import _poolFanaticOfTheHarrowing from "../pool/fanatic-of-the-harrowing.js";
+import _poolFearOfInfinity from "../pool/fear-of-infinity.js";
 import _poolFeatherTheRedeemed from "../pool/feather-the-redeemed.js";
 import _poolFeignDeath from "../pool/feign-death.js";
 import _poolFell from "../pool/fell.js";
@@ -158,6 +160,7 @@ import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
 import _poolHaazdaOfficer from "../pool/haazda-officer.js";
 import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
+import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
@@ -182,6 +185,7 @@ import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
 import _poolKeldonNecropolis from "../pool/keldon-necropolis.js";
+import _poolKillersMask from "../pool/killers-mask.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
@@ -200,6 +204,7 @@ import _poolLorescaleCoatl from "../pool/lorescale-coatl.js";
 import _poolLosDiablosMissileBase from "../pool/los-diablos-missile-base.js";
 import _poolLysAlanaInformant from "../pool/lys-alana-informant.js";
 import _poolManaTithe from "../pool/mana-tithe.js";
+import _poolManifestDread from "../pool/manifest-dread.js";
 import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
@@ -234,6 +239,7 @@ import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
+import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
@@ -523,6 +529,8 @@ const shard: CardShard = {
     _poolFadeFromMemory,
     _poolFalkenrathReaver,
     _poolFallenAskari,
+    _poolFanaticOfTheHarrowing,
+    _poolFearOfInfinity,
     _poolFeatherTheRedeemed,
     _poolFeignDeath,
     _poolFell,
@@ -565,6 +573,7 @@ const shard: CardShard = {
     _poolHaazdaOfficer,
     _poolHaliyaGuidedByLight,
     _poolHallOfOracles,
+    _poolHandThatFeeds,
     _poolHarrierStrix,
     _poolHearthhullTheWorldseed,
     _poolHonorboundPage,
@@ -589,6 +598,7 @@ const shard: CardShard = {
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,
     _poolKeldonNecropolis,
+    _poolKillersMask,
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
@@ -607,6 +617,7 @@ const shard: CardShard = {
     _poolLosDiablosMissileBase,
     _poolLysAlanaInformant,
     _poolManaTithe,
+    _poolManifestDread,
     _poolMarbleDiamond,
     _poolMarwynThePreserver,
     _poolMelokuTheCloudedMirror,
@@ -641,6 +652,7 @@ const shard: CardShard = {
     _poolOphidianEye,
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
+    _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,

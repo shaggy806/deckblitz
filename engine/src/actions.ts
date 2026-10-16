@@ -82,6 +82,11 @@ export type CastVia =
   | "warp"
   /** Blitz (rule 702.152a) — cast from the hand for its blitz cost. */
   | "blitz"
+  /** Impending (rule 702.176a) — cast from the hand (or a commander from
+   * the command zone) for its impending cost, an alternative cost: the
+   * permanent enters with N time counters and isn't a creature while it has
+   * one. */
+  | "impending"
   /** Airbend (rule 701.65a): a card airbended into exile (`GameObject
    * .airbended`), cast from there by its owner for {2} rather than its mana
    * cost — an alternative cost, so no other goes with it (118.9a), though

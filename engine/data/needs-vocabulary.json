@@ -6355,7 +6355,7 @@
   },
   "trigger:activates-exhaust": {
    "family": "trigger:activates-ability",
-   "example": "The activates-ability trigger narrowed to an exhaust ability ('whenever you activate an exhaust ability' — Adrenaline Jockey), as ninjutsu and loyalty already narrow it."
+   "example": "The activates-ability trigger narrowed to an exhaust ability ('whenever you activate an exhaust ability' — Adrenaline Jockey), as ninjutsu and loyalty already narrow it. Haunted Screen's plain \"Activate only once\" uses the same `exhaust: true` flag (once per object), so the trigger must check the Exhaust keyword, not that flag."
   },
   "static:pt-per-life-total": {
    "family": "static:pt-per-amount",
@@ -6376,6 +6376,74 @@
   "cost:alternative-cost-for-spells-energy": {
    "family": "cost:may-cost-non-mana",
    "example": "alternativeCostForSpells paid in energy rather than mana: 'You may pay eight {E} rather than pay the mana cost for permanent spells you cast' (Nissa, Worldsoul Speaker)."
+  },
+  "effect:tapped-for-mana-land-deals-damage": {
+   "family": "effect:mana-ability-side-effects",
+   "example": "A triggered mana ability (rule 605.1b) that, besides adding mana, has the tapped land deal damage to the player who tapped it ('then that land deals 1 damage to that player' — Barbflare Gremlin); tappedForManaExtras only adds mana."
+  },
+  "condition:milled-share-all-card-types": {
+   "family": "effect:this-way-results",
+   "example": "A this-way condition true when two of the cards milled this way have exactly the same combination of card types (supertypes and subtypes ignored — Demonic Covenant's 'if two cards that share all their card types were milled this way')."
+  },
+  "condition:power-parity": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Odd/even parity of a power: a source condition (\"as long as ~'s power is even\" — Kianne, Corrupted Memory) and a CardFilter/NumCompare clause (\"each creature with power of the chosen quality\" — Zimone's Hypothesis)."
+  },
+  "decision:choose-any-number-different-powers": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "A look-and-choose set rule that the chosen cards all have different powers (Rip, Spawn Hunter's \"any number of creature and/or Vehicle cards with different powers\")."
+  },
+  "trigger:manifests-dread": {
+   "family": "mechanic:face-down",
+   "example": "\"Whenever you manifest dread\" (fires even when the manifest dread couldn't be completed), with the card that manifest dread put into the graveyard readable by its effect (Paranormal Analyst)."
+  },
+  "effect:amount-unlocked-doors": {
+   "family": "effect:amount-new-variants",
+   "example": "An EffectAmount counting unlocked doors among Rooms you control (Misty Salon's X/X Spirit)."
+  },
+  "effect:beheld-object-amount": {
+   "family": "effect:amount-new-variants",
+   "example": "A spell's effect reading the object beheld for its additional cost: its power on resolution, or last-known if it left the battlefield (Monstrous Emergence)."
+  },
+  "condition:prime-count": {
+   "family": "condition:player-state-thresholds",
+   "example": "A condition that you control a prime number of permanents matching a filter (Zimone, All-Questioning's 'you control a prime number of lands')."
+  },
+  "condition:not-attached-to-source": {
+   "family": "condition:filter-attachments",
+   "example": "A CardFilter clause excluding (or matching) the permanent the filtering source is attached to — Sporogenic Infection's 'sacrifices a creature other than enchanted creature'."
+  },
+  "stat:turned-face-up-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Turn tallies of permanents a player turned face up and of permanents that entered face down under them (judged as they entered) — Oblivious Bookworm's 'unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn'."
+  },
+  "zone:graveyard-cast-rider-own-permission": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Record which grant a graveyard cast used, so a card's own 'you may cast this card from your graveyard … If you do, it enters with a +1/+1 counter' rider (Undead Sprinter) applies only under its own permission, not Gisa and Geralf's or Kotis's."
+  },
+  "condition:card-types-in-graveyard-threshold": {
+   "family": "condition:player-state-thresholds",
+   "example": "A condition 'N or more card types among cards in your graveyard' for N other than delirium's four (Omnivorous Flytrap's six)."
+  },
+  "effect:targets-same-controller": {
+   "family": "effect:target-spec-additions",
+   "example": "A target slot relation requiring a later slot's object to have the same controller as an earlier slot's (Trial of Agony's \"two target creatures controlled by the same opponent\"), the mirror of differentController, rechecked as the spell resolves."
+  },
+  "cost:spend-only-unlock-door": {
+   "family": "cost:mana-spending-rules",
+   "example": "A spend restriction admitting the cost of unlocking a Room's door (the unlock-door special action, rule 709.5e) — Creeping Peeper's \"Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up\"."
+  },
+  "cost:additional-cost-tap-permanents": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "A spell's additional cost of tapping N untapped permanents you control matching a filter ('tap two untapped creatures and/or lands you control' — Fear of Exposure), chosen as the cost is paid; tapOthers exists only on activated abilities and alternativeCost.tapCreatures only as an alternative cost."
+  },
+  "stat:trigger-only-once-per-object": {
+   "family": "stat:per-ability-turn-counters",
+   "example": "'This ability triggers only once' (Acrobatic Cheerleader): a triggered ability that triggers at most once for as long as its object exists — not reset each turn, and spent even if the trigger is countered; a new object (it left and came back) may trigger again."
+  },
+  "condition:unlocked-door-count": {
+   "family": "mechanic:rooms",
+   "example": "A StaticCondition counting unlocked doors among Rooms you control — Rampaging Soulrager's 'two or more unlocked doors among Rooms you control' (a fully unlocked Room counts two)."
   }
  }
 }

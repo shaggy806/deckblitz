@@ -2767,4 +2767,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { hand: ['Lightning Bolt', 'Grizzly Bears', 'Forest', 'Counterspell'] },
     }),
   ),
+  preset(
+    'Overlord of the Mistmoors, Overlord of the Boilerbilges',
+    board({
+      you: {
+        bf: ['Soul Warden', 'Plains*4', 'Mountain*4'],
+        hand: ['Overlord of the Mistmoors', 'Overlord of the Boilerbilges'],
+      },
+    }),
+  ),
 ]

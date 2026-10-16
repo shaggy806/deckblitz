@@ -1,0 +1,12 @@
+import { defineCard } from "../define.js";
+
+// EDHREC rank 15260. Threats Around Every Corner's manifest dread, as a
+// sorcery.
+export default defineCard({
+  name: "Manifest Dread",
+  manaCost: "{1}{G}",
+  colors: ["G"],
+  types: ["sorcery"],
+  text: "Manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)",
+  effect: { kind: "manifest-dread" },
+});

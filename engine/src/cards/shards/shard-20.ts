@@ -274,6 +274,7 @@ import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
 import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
+import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
 import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
@@ -740,6 +741,7 @@ const shard: CardShard = {
     _poolOverwhelmingInstinct,
     _poolPatronWizard,
     _poolPeacewalkerColossus,
+    _poolPeerPastTheVeil,
     _poolPensiveProfessor,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,

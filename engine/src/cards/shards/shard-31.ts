@@ -34,6 +34,7 @@ import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBallroom from "../pool/ballroom.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
+import _poolBashfulBeastie from "../pool/bashful-beastie.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
@@ -118,6 +119,7 @@ import _poolEnchantedCarriage from "../pool/enchanted-carriage.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
 import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
+import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
 import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFellwarStone from "../pool/fellwar-stone.js";
@@ -176,6 +178,7 @@ import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
 import _poolHorizonExplorer from "../pool/horizon-explorer.js";
+import _poolHouseCartographer from "../pool/house-cartographer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
@@ -369,6 +372,7 @@ import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
+import _poolViolentUrge from "../pool/violent-urge.js";
 import _poolVirulentSilencer from "../pool/virulent-silencer.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
@@ -398,6 +402,7 @@ import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
+import _tokensInsectTokenOverlordOfTheMistmoors from "../tokens/insect-token-overlord-of-the-mistmoors.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
@@ -436,6 +441,7 @@ const shard: CardShard = {
     _poolBallroom,
     _poolBaradDur,
     _poolBarbarianRiftcutter,
+    _poolBashfulBeastie,
     _poolBatteringCraghorn,
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
@@ -520,6 +526,7 @@ const shard: CardShard = {
     _poolEnergyRefractor,
     _poolEnlightenedManiac,
     _poolFacevaulter,
+    _poolFaithfulPikemaster,
     _poolFallenShinobi,
     _poolFatalPush,
     _poolFellwarStone,
@@ -578,6 +585,7 @@ const shard: CardShard = {
     _poolHonoredDreyleader,
     _poolHopelessNightmare,
     _poolHorizonExplorer,
+    _poolHouseCartographer,
     _poolHulkingDevil,
     _poolHuntedHorror,
     _poolHydroelectricLaboratory,
@@ -771,6 +779,7 @@ const shard: CardShard = {
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,
+    _poolViolentUrge,
     _poolVirulentSilencer,
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
@@ -802,6 +811,7 @@ const shard: CardShard = {
     _tokensGreenOxToken44,
     _tokensHumanCitizenToken,
     _tokensIllusionTokenPlain,
+    _tokensInsectTokenOverlordOfTheMistmoors,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
     _tokensRedWhiteSoldierHasteToken,

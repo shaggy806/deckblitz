@@ -38,6 +38,7 @@ import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
+import _poolBroodspinner from "../pool/broodspinner.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
 import _poolBurrogBarrage from "../pool/burrog-barrage.js";
@@ -75,6 +76,7 @@ import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
 import _poolCynicalLoner from "../pool/cynical-loner.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
+import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
 import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
@@ -138,6 +140,7 @@ import _poolGriffinAerie from "../pool/griffin-aerie.js";
 import _poolGuadosalamFarplaneGateway from "../pool/guadosalam-farplane-gateway.js";
 import _poolGuardianOfPilgrims from "../pool/guardian-of-pilgrims.js";
 import _poolHakodaSelflessCommander from "../pool/hakoda-selfless-commander.js";
+import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
 import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
@@ -197,6 +200,7 @@ import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
+import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
 import _poolMinotaurWarrior from "../pool/minotaur-warrior.js";
@@ -456,6 +460,7 @@ const shard: CardShard = {
     _poolBrainFreeze,
     _poolBridledBighorn,
     _poolBroodcallerScourge,
+    _poolBroodspinner,
     _poolBuriedRuin,
     _poolBurntOffering,
     _poolBurrogBarrage,
@@ -493,6 +498,7 @@ const shard: CardShard = {
     _poolCursedMirror,
     _poolCynicalLoner,
     _poolDaruLancer,
+    _poolDashingBloodsucker,
     _poolDeadlyTempest,
     _poolDeathGrasp,
     _poolDeathbloomGardener,
@@ -556,6 +562,7 @@ const shard: CardShard = {
     _poolGuadosalamFarplaneGateway,
     _poolGuardianOfPilgrims,
     _poolHakodaSelflessCommander,
+    _poolHauntedScreen,
     _poolHeavyBallista,
     _poolHeirloomAuntie,
     _poolHeirloomBlade,
@@ -615,6 +622,7 @@ const shard: CardShard = {
     _poolMaskOfAvacyn,
     _poolMassManipulation,
     _poolMazirekKraulDeathPriest,
+    _poolMidnightMayhem,
     _poolMindscourDragon,
     _poolMinersBane,
     _poolMinotaurWarrior,

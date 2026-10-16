@@ -1549,6 +1549,13 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
     // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
     if ((m = /^Web-slinging ((?:\{[^}]+\})+)$/.exec(line))) { out.webSlinging = { cost: m[1] }; continue; }
+    // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
+    if ((m = /^Impending (\d+)—((?:\{[^}]+\})+)$/.exec(line))) {
+      out.impending = { count: Number(m[1]), cost: m[2] };
+      out.static.push(IMPENDING_STATIC);
+      out.triggered.push(IMPENDING_TRIGGER);
+      continue;
+    }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.
     if (isSpell && (m = /^Teamwork (\d+)$/.exec(line))) { out.kicker = { cost: "", keyword: "teamwork", teamwork: Number(m[1]) }; continue; }
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
@@ -2203,6 +2210,23 @@ const wardAbility = (cost) => ({
   resolve: null,
   text: cost.mana ? `Ward ${cost.mana}` : `Ward—Pay ${cost.payLife} life.`,
 });
+
+// Impending's two battlefield abilities (rule 702.176a) — helpers.ts's
+// `impendingAbilities()`, written out, since a scaffold is plain data.
+const IMPENDING_STATIC = {
+  affects: { scope: "self" },
+  condition: { kind: "impending" },
+  removeTypes: ["creature"],
+  text: "As long as this permanent's impending cost was paid and it has a time counter on it, it isn't a creature.",
+};
+const IMPENDING_TRIGGER = {
+  trigger: { on: "step-begins", step: "end", who: "you" },
+  condition: { kind: "impending" },
+  targets: [],
+  effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
+  resolve: null,
+  text: "At the beginning of your end step, if this permanent's impending cost was paid and it has a time counter on it, remove a time counter from it.",
+};
 
 // ------------------------------------------------------------- serializer
 

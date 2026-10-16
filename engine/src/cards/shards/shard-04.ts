@@ -92,6 +92,7 @@ import _poolDungeonShade from "../pool/dungeon-shade.js";
 import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
 import _poolEbonyRhino from "../pool/ebony-rhino.js";
+import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
@@ -105,6 +106,7 @@ import _poolFaerieBladecrafter from "../pool/faerie-bladecrafter.js";
 import _poolFalkenrathCelebrants from "../pool/falkenrath-celebrants.js";
 import _poolFangbladeEviscerator from "../pool/fangblade-eviscerator.js";
 import _poolFatefulDiscovery from "../pool/fateful-discovery.js";
+import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
 import _poolFelotharTheSteadfast from "../pool/felothar-the-steadfast.js";
 import _poolFemerefHealer from "../pool/femeref-healer.js";
 import _poolFieldSurgeon from "../pool/field-surgeon.js";
@@ -198,6 +200,7 @@ import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
+import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
@@ -232,6 +235,7 @@ import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
+import _poolPaintersStudio from "../pool/painters-studio.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
@@ -378,6 +382,7 @@ import _poolVergeRangers from "../pool/verge-rangers.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
 import _poolVibrantIdea from "../pool/vibrant-idea.js";
+import _poolViciousClown from "../pool/vicious-clown.js";
 import _poolViciousRivalry from "../pool/vicious-rivalry.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
@@ -505,6 +510,7 @@ const shard: CardShard = {
     _poolEarthRumble,
     _poolEasternPaladin,
     _poolEbonyRhino,
+    _poolEidolonOfAstralWinds,
     _poolElderfangDisciple,
     _poolElvishWarrior,
     _poolEmergeFromTheCocoon,
@@ -518,6 +524,7 @@ const shard: CardShard = {
     _poolFalkenrathCelebrants,
     _poolFangbladeEviscerator,
     _poolFatefulDiscovery,
+    _poolFearOfLostTeeth,
     _poolFelotharTheSteadfast,
     _poolFemerefHealer,
     _poolFieldSurgeon,
@@ -611,6 +618,7 @@ const shard: CardShard = {
     _poolLeavesFromTheVine,
     _poolLichsRelic,
     _poolLightningElemental,
+    _poolLivingPhone,
     _poolLongFinnedSkywhale,
     _poolLoomingSpires,
     _poolLordWindgrace,
@@ -645,6 +653,7 @@ const shard: CardShard = {
     _poolOrimSamiteHealer,
     _poolOtterPenguin,
     _poolOvergrownTomb,
+    _poolPaintersStudio,
     _poolPastInFlames,
     _poolPathOfAncestry,
     _poolPestMascot,
@@ -791,6 +800,7 @@ const shard: CardShard = {
     _poolVexingGull,
     _poolViashinoBladescout,
     _poolVibrantIdea,
+    _poolViciousClown,
     _poolViciousRivalry,
     _poolVillageCannibals,
     _poolVitalizingWind,
