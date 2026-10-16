@@ -110,8 +110,7 @@ html:has(.lib-page) {
   vertical-align: 0;
 }
 
-.lib-sort,
-.lib-toggle {
+.lib-sort {
   display: flex;
   align-items: center;
   gap: 6px;

@@ -304,8 +304,9 @@ export function LibraryPage() {
   const [colorFilter, setColorFilter] = useState<readonly ColorFilter[]>([])
   const [sort, setSort] = useState<Sort>('edhrec')
   const [descending, setDescending] = useState(false)
+  // Tokens aren't cards (they can't go in a deck), so the gallery leaves them
+  // out — but a deep link straight to a token shouldn't land on an empty one.
   const [showTokens, setShowTokens] = useState(() => {
-    // A deep link straight to a token shouldn't land on an empty gallery.
     const param = cardParam()
     const def = param === null ? undefined : cardsByName.get(param)
     return def !== undefined && isTokenCard(def)
@@ -580,15 +581,6 @@ export function LibraryPage() {
                 ))
               )}
             </select>
-          </label>
-
-          <label className="lib-toggle" title="Tokens aren't cards — they can't go in a deck">
-            <input
-              type="checkbox"
-              checked={showTokens}
-              onChange={(e) => setShowTokens(e.target.checked)}
-            />
-            Tokens
           </label>
 
           {anyFilter ? (
