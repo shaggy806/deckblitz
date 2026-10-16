@@ -246,6 +246,7 @@ import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
@@ -656,6 +657,7 @@ const shard: CardShard = {
     _poolPulseOfMurasa,
     _poolPygmyRazorback,
     _poolQarsiRevenant,
+    _poolRaftSecurityOfficer,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,

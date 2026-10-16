@@ -8524,6 +8524,7 @@ import _poolRaffCapashenShipsMage from "./pool/raff-capashen-ships-mage.js";
 import _poolRaffineSchemingSeer from "./pool/raffine-scheming-seer.js";
 import _poolRaffinesInformant from "./pool/raffines-informant.js";
 import _poolRaffinesTower from "./pool/raffines-tower.js";
+import _poolRaftSecurityOfficer from "./pool/raft-security-officer.js";
 import _poolRagamuffinRaptor from "./pool/ragamuffin-raptor.js";
 import _poolRageIntoTheValley from "./pool/rage-into-the-valley.js";
 import _poolRageReflection from "./pool/rage-reflection.js";
@@ -22152,6 +22153,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaffineSchemingSeer,
   _poolRaffinesInformant,
   _poolRaffinesTower,
+  _poolRaftSecurityOfficer,
   _poolRagamuffinRaptor,
   _poolRageIntoTheValley,
   _poolRageReflection,

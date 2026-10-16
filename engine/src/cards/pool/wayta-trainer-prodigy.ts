@@ -3,11 +3,10 @@ import { defineCard } from "../define.js";
 // #427 in top-commanders.txt.
 //
 // "This ability costs {2} less to activate if it targets two creatures you
-// control" splits the one printed ability into the two target cases it can
-// have, each at the cost it actually costs: your creature and an opponent's
-// at {2}{G}, and two of yours at {G}. Every legal choice of targets is
-// exactly one of them, so nothing can be activated at a cost the card
-// wouldn't charge.
+// control" is the ability's `targetCostReduction` (`count: 2`): the cost is
+// fixed as the targets are chosen (rule 601.2f), {G} with two of yours, and
+// "another target creature" stays any other creature — one that changes
+// control in response is still a legal target, and the fight happens.
 const FIGHT_TEXT =
   "{2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} " +
   "less to activate if it targets two creatures you control.";
@@ -29,14 +28,8 @@ export default defineCard({
   activated: [
     {
       cost: { mana: "{2}{G}", tap: true },
-      targets: ["creature-you-control", "creature-an-opponent-controls"],
-      effect: { kind: "fight", a: 0, b: 1 },
-      resolve: null,
-      text: FIGHT_TEXT,
-    },
-    {
-      cost: { mana: "{G}", tap: true },
-      targets: ["creature-you-control", { kind: "other", of: "creature-you-control", than: { slot: 0 } }],
+      targets: ["creature-you-control", { kind: "other", of: "creature", than: { slot: 0 } }],
+      targetCostReduction: { filter: { type: "creature", controlledBy: "you" }, reduceGeneric: 2, count: 2 },
       effect: { kind: "fight", a: 0, b: 1 },
       resolve: null,
       text: FIGHT_TEXT,

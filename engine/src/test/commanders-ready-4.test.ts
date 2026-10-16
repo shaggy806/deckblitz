@@ -425,13 +425,56 @@ describe("Marisi, Breaker of the Coil", () => {
 });
 
 describe("Wayta, Trainer Prodigy", () => {
-  it("fights for {G} between two of your creatures, {2}{G} otherwise", () => {
+  // "{2}{G}, {T}: Target creature you control fights another target
+  // creature. This ability costs {2} less to activate if it targets two
+  // creatures you control" — one ability, priced by its chosen targets.
+  const offerOf = (game: ReturnType<typeof setUp>["game"], wayta: ObjectId) =>
+    game.legalActions(A).find((x) => x.kind === "activate-ability" && x.source === wayta);
+
+  it("fights for {G} between two of your creatures", () => {
     const { game } = setUp();
     const wayta = spawn(game, "Wayta, Trainer Prodigy");
     const bear = spawn(game, "Grizzly Bears");
     const elf = spawn(game, "Llanowar Elves");
     spawn(game, "Forest");
-    activate(game, wayta, 1, [obj(bear), obj(elf)]);
+    activate(game, wayta, 0, [obj(bear), obj(elf)]);
+    expect(game.state.objects[elf].zone).toBe("graveyard");
+  });
+
+  it("costs {2}{G} to fight an opponent's creature, and offers only yours with just {G}", () => {
+    const { game } = setUp();
+    const wayta = spawn(game, "Wayta, Trainer Prodigy");
+    const bear = spawn(game, "Grizzly Bears");
+    const elf = spawn(game, "Llanowar Elves");
+    const theirs = spawn(game, "Llanowar Elves", B);
+    spawn(game, "Forest");
+    // With only {G}, the second target can only be another of yours.
+    const offer = offerOf(game, wayta);
+    expect(offer?.kind === "activate-ability" ? offer.targetOptions?.[1] : undefined).not.toContainEqual(obj(theirs));
+    expect(() =>
+      game.dispatch({ type: "activate-ability", player: A, source: wayta, abilityIndex: 0, targets: [obj(bear), obj(theirs)] }),
+    ).toThrow();
+    // With {2}{G}, an opponent's creature is offered, and fought.
+    spawn(game, "Forest");
+    spawn(game, "Forest");
+    const full = offerOf(game, wayta);
+    expect(full?.kind === "activate-ability" ? full.targetOptions?.[1] : undefined).toContainEqual(obj(theirs));
+    activate(game, wayta, 0, [obj(bear), obj(theirs)]);
+    expect(game.state.objects[theirs].zone).toBe("graveyard");
+    expect(game.state.objects[elf].zone).toBe("battlefield");
+  });
+
+  it("still fights when the second creature changes control in response", () => {
+    // "Another target creature" is any other creature: the discount was fixed
+    // as the targets were chosen (rule 601.2f), and the target stays legal.
+    const { game } = setUp();
+    const wayta = spawn(game, "Wayta, Trainer Prodigy");
+    const bear = spawn(game, "Grizzly Bears");
+    const elf = spawn(game, "Llanowar Elves");
+    spawn(game, "Forest");
+    game.dispatch({ type: "activate-ability", player: A, source: wayta, abilityIndex: 0, targets: [obj(bear), obj(elf)] });
+    game.state.objects[elf].controller = B;
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
     expect(game.state.objects[elf].zone).toBe("graveyard");
   });
 
@@ -440,21 +483,9 @@ describe("Wayta, Trainer Prodigy", () => {
     // once: "another target creature" has to be a different one (601.2c).
     const { game } = setUp();
     const wayta = spawn(game, "Wayta, Trainer Prodigy");
+    spawn(game, "Llanowar Elves", B);
     spawn(game, "Forest");
-    const offered = game
-      .legalActions(A)
-      .filter((x) => x.kind === "activate-ability" && x.source === wayta)
-      .map((x) => (x.kind === "activate-ability" ? x.abilityIndex : -1));
-    expect(offered).not.toContain(1);
-    expect(() =>
-      game.dispatch({
-        type: "activate-ability",
-        player: A,
-        source: wayta,
-        abilityIndex: 1,
-        targets: [obj(wayta), obj(wayta)],
-      }),
-    ).toThrow(/combination of targets/);
+    expect(offerOf(game, wayta)).toBeUndefined();
   });
 });
 

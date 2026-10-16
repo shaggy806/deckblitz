@@ -73,6 +73,13 @@
     "engine/src/cards/pool/the-aesir-escape-valhalla.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Raft Security Officer",
+   "files": [
+    "engine/src/cards/pool/raft-security-officer.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [

@@ -2560,6 +2560,15 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   ability itself (mirrors `CardDefinition.selfCostReduction`, but for an
   activated ability's own cost) — the Kamigawa Channel lands' "This ability
   costs {1} less to activate for each legendary creature you control."
+- `targetCostReduction: { filter, reduceGeneric, count? }` — "This ability
+  costs {N} less to activate if it targets [`count`, default one, objects
+  matching `filter`]" (the spell's `targetCostReduction`, for an ability):
+  Raft Security Officer's "a creature with power 3 or less", Wayta, Trainer
+  Prodigy's "two creatures you control" (`count: 2`). The cost is fixed as
+  the targets are chosen (rule 601.2f): keep the printed targets as printed
+  — never split the ability by target case, which would make a target that
+  stops matching in response illegal. An offer only affordable with it
+  offers only the targets that earn it.
 
 ---
 

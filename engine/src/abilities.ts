@@ -428,6 +428,22 @@ export interface ActivatedAbility {
   readonly costReduction?: {
     readonly reduceGeneric: CostReductionAmount;
   };
+  /**
+   * "This ability costs {N} less to activate if it targets [`count` objects
+   * matching `filter`]" — Wayta, Trainer Prodigy's "{2} less … if it targets
+   * two creatures you control" (`count: 2`; one when absent). The spell's
+   * `CardDefinition.targetCostReduction` for an ability: the total cost is
+   * fixed once the targets are chosen (rules 602.2b, 601.2c, 601.2f), so the
+   * activation pays less when that many distinct chosen targets match, from
+   * the activator's side — and a target that stops matching later changes
+   * nothing. An offer only affordable with it offers only the targets that
+   * earn it.
+   */
+  readonly targetCostReduction?: {
+    readonly filter: CardFilter;
+    readonly reduceGeneric: number;
+    readonly count?: number;
+  };
   /** The least X the ability may be activated with — Ruthless Technomancer's
    * "Sacrifice X artifacts: … X can't be 0." Absent: 0. The offer's
    * `xCost.minX` says it, and an activation below it is refused. */

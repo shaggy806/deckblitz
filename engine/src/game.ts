@@ -1644,6 +1644,7 @@ export class Game {
             action.abilityIndex,
             action.tap,
             action.xValue ?? 0,
+            normalizeTargets(action.targets),
           ),
         );
         if (why !== null) return why;
@@ -2254,7 +2255,15 @@ export class Game {
         return;
       }
       push(
-        this.targetOptionsFor(ability.targets, player, this.permanentSource(source)),
+        // "Costs {N} less if it targets …": only the targets that earn it
+        // when the full price isn't affordable.
+        this.abilityTargetReductionOptions(
+          ability,
+          player,
+          source,
+          this.targetOptionsFor(ability.targets, player, this.permanentSource(source)),
+          () => this.whyCannotActivateAbility(player, source, index) === null,
+        ),
         maxX !== undefined ? { maxX, ...(minX > 0 ? { minX } : {}) } : undefined,
       );
     };
@@ -8705,6 +8714,64 @@ export class Game {
     );
   }
 
+  /** Whether `targets` earn `ability`'s `targetCostReduction`: at least its
+   * `count` distinct objects among them matching its filter from the
+   * activator's side. Given every legal option, whether some choice could. */
+  private abilityTargetsEarnReduction(
+    ability: ActivatedAbility,
+    player: PlayerId,
+    sourceId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[],
+  ): boolean {
+    const reduction = ability.targetCostReduction;
+    if (reduction === undefined) return false;
+    const matching = new Set<ObjectId>();
+    for (const t of targets) {
+      if (
+        t?.kind === "object" &&
+        matchesFilter(this.state, this.registry, t.object, reduction.filter, { you: player, source: sourceId })
+      ) {
+        matching.add(t.object);
+      }
+    }
+    return matching.size >= (reduction.count ?? 1);
+  }
+
+  /** The target options an ability with a `targetCostReduction` is offered
+   * with: all of them while the full price is affordable (`fullPriceOk`),
+   * and otherwise only the targets that earn it, in every slot that can
+   * hold one — when there are no more such slots than it needs (Wayta's two
+   * of two), so what would be refused for want of mana isn't offered. */
+  private abilityTargetReductionOptions(
+    ability: ActivatedAbility,
+    player: PlayerId,
+    sourceId: ObjectId,
+    options: readonly (readonly TargetRef[])[],
+    fullPriceOk: () => boolean,
+  ): TargetRef[][] {
+    const all = options.map((slot) => [...slot]);
+    const reduction = ability.targetCostReduction;
+    if (reduction === undefined) return all;
+    const earning = all.map((slot) =>
+      slot.filter(
+        (ref) =>
+          ref.kind === "object" &&
+          matchesFilter(this.state, this.registry, ref.object, reduction.filter, { you: player, source: sourceId }),
+      ),
+    );
+    const slots = earning.flatMap((slot, i) => (slot.length > 0 ? [i] : []));
+    if (slots.length === 0 || slots.length > (reduction.count ?? 1)) return all;
+    this.targetCostReductionOff = true;
+    let full: boolean;
+    try {
+      full = fullPriceOk();
+    } finally {
+      this.targetCostReductionOff = false;
+    }
+    if (full) return all;
+    return all.map((slot, i) => (slots.includes(i) ? earning[i] : slot));
+  }
+
   /** The target options a spell with a `targetCostReduction` is offered with:
    * all of them while the full price is affordable (`fullPriceCastable`),
    * and otherwise, in the one slot whose targets can earn the reduction,
@@ -12322,6 +12389,10 @@ export class Game {
     sourceId: ObjectId,
     ability: ActivatedAbility,
     xValue = 0,
+    /** The targets chosen, once they are (rule 601.2c) — what a
+     * `targetCostReduction` reads. Left out, as while it's only offered, the
+     * reduction is assumed whenever enough legal targets would earn it. */
+    targets?: readonly (TargetRef | null | undefined)[],
   ): { cost: ManaCost; chosenX: number } {
     const parsed = parseManaCost(ability.cost.mana);
     // "Sacrifice X Treasures", "Discard X cards" announce an X the mana cost
@@ -12345,6 +12416,20 @@ export class Game {
       // Its own source: "costs {1} less for each page counter on this" (Diary
       // of Dreams) reads that permanent's counters.
       generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player, sourceId);
+    }
+    // "Costs {N} less to activate if it targets …" (Wayta, Trainer Prodigy).
+    if (ability.targetCostReduction !== undefined) {
+      const earned =
+        targets !== undefined
+          ? this.abilityTargetsEarnReduction(ability, player, sourceId, targets)
+          : !this.targetCostReductionOff &&
+            this.abilityTargetsEarnReduction(
+              ability,
+              player,
+              sourceId,
+              this.targetOptionsFor(ability.targets, player, this.permanentSource(sourceId)).flat(),
+            );
+      if (earned) generic -= ability.targetCostReduction.reduceGeneric;
     }
     generic -= mod.reduceGeneric;
     const cost: ManaCost = {
@@ -12458,6 +12543,9 @@ export class Game {
     abilityIndex: number,
     tap?: readonly ObjectId[],
     x?: number,
+    /** The targets chosen, when they are — a `targetCostReduction` prices the
+     * activation by them; without them it's assumed earned if it can be. */
+    targets?: readonly (TargetRef | null | undefined)[],
   ): string | null {
     const blocked = this.whyCannotAct(player);
     if (blocked !== null) return blocked;
@@ -12611,7 +12699,7 @@ export class Game {
     } else if (
       this.payMana(
         player,
-        this.activatedAbilityManaCost(player, sourceId, ability).cost,
+        this.activatedAbilityManaCost(player, sourceId, ability, 0, targets).cost,
         undefined,
         // Matches `activateAbility`'s own payment below: a source being tapped
         // to pay `{T}` isn't available to pay the mana half as well.
@@ -12732,7 +12820,7 @@ export class Game {
     // and nothing changes in between. On seed 50's 73 permanents the second
     // `manaSources` was an eighth of a bot's turn.
     const planned = withComputedCache(() => {
-      const why = this.whyCannotActivateAbility(player, sourceId, abilityIndex, tap, xValue);
+      const why = this.whyCannotActivateAbility(player, sourceId, abilityIndex, tap, xValue, targets);
       if (why !== null) throw new Error(why);
 
       const source = this.state.objects[sourceId];
@@ -12787,7 +12875,7 @@ export class Game {
       // ability object below so `ctx.x` reads it at resolution. Also folds in
       // `ability.costReduction` (the Kamigawa Channel lands' per-legendary
       // discount).
-      const { cost: manaCost, chosenX } = this.activatedAbilityManaCost(player, sourceId, ability, xValue);
+      const { cost: manaCost, chosenX } = this.activatedAbilityManaCost(player, sourceId, ability, xValue, targets);
       // A `{T}` in the cost taps the source as part of paying, so it can't also
       // be tapped for mana toward the same activation (rule 602.2a) — that's an
       // exclusion, not a preference. Otherwise merely prefer to leave the source

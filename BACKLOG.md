@@ -98,12 +98,6 @@ section keeps only what to do next.
   that prepare is built (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
-- **Wayta, Trainer Prodigy's cheap fight can lose a target it shouldn't** (found 2026-10-15): "costs
-  {2} less if it targets two creatures you control" is split into two abilities, the {G} one
-  requiring its second target be yours, so a creature that changes control in response leaves the
-  fight undone where the printed "another target creature" stays legal. Needs
-  `cost:ability-cost-reduction-if-targets` (spells' `targetCostReduction` for activated abilities;
-  Raft Security Officer waits on it too), or pull the card.
 - **Features with a family of cards behind them**, each detailed where it points:
   the rest of "enters tapped and attacking" (`docs/card-blockers.md`); modal
   activated abilities with targeted modes, host triggers (28 cards), the EDH-popularity tiers
