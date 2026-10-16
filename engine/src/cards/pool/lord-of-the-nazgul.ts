@@ -1,9 +1,9 @@
 import { defineCard } from "../define.js";
 
-// "Wraiths you control have protection from Ring-bearers" has no field
-// because it can never apply here: a Ring-bearer is chosen only when the
-// Ring tempts you (rule 701.52), and nothing the engine runs does that, so
-// no creature is ever a Ring-bearer to be protected from.
+// "Wraiths you control have protection from Ring-bearers" (rule 702.16):
+// from any player's Ring-bearer (`ringBearer: "any"`), Hungry Lynx's shape —
+// this one included, a Wraith itself. A Ring-bearer is chosen as the Ring
+// tempts its controller (rule 701.54a).
 export default defineCard({
   name: "Lord of the Nazgûl",
   manaCost: "{3}{U}{B}",
@@ -14,6 +14,13 @@ export default defineCard({
   power: 4,
   toughness: 3,
   keywords: ["flying"],
+  static: [
+    {
+      affects: { scope: "creatures-you-control", subtype: "Wraith" },
+      protection: { filter: { ringBearer: "any" } },
+      text: "Wraiths you control have protection from Ring-bearers.",
+    },
+  ],
   text: "Flying\nWraiths you control have protection from Ring-bearers.\nWhenever you cast an instant or sorcery spell, create a 3/3 black Wraith creature token with menace. Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn.",
   triggered: [
     {

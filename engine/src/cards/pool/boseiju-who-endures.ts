@@ -6,11 +6,10 @@ import { manaTapAbility } from "../helpers.js";
  * gains `zone: "hand"`, discarding the source card is an implicit part of
  * the cost) and the model for `ActivatedAbility.costReduction`.
  *
- * The compensating search is made by *the destroyed permanent's controller*,
- * not this ability's — `search-library`'s `who: { controllerOfTarget }`
- * (Path to Exile) is what addresses them, and reads last-known information
+ * The compensating search is *the destroyed permanent's controller's*, not
+ * this ability's, and theirs to decline — an `each-player-may` of `who: {
+ * controllerOfTarget }` (Path to Exile), which reads last-known information
  * (rule 608.2h) so the target's controller is still named after it has gone.
- * `min: 0` is the "**may** search".
  */
 export default defineCard({
   name: "Boseiju, Who Endures",
@@ -32,14 +31,20 @@ export default defineCard({
         effects: [
           { kind: "destroy", target: 0 },
           {
-            kind: "search-library",
+            // "Its controller **may** search": their choice (`each-player-may`),
+            // so declining neither searches nor shuffles their library.
+            kind: "each-player-may",
             who: { controllerOfTarget: 0 },
-            // "a land card with a basic land type" — any of the five, so a
-            // typed dual (Sacred Foundry) qualifies as well as a basic.
-            filter: { type: "land", subtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
-            destination: "battlefield",
-            min: 0,
-            max: 1,
+            prompt: "Search your library for a basic land card?",
+            effect: {
+              kind: "search-library",
+              // "a land card with a basic land type" — any of the five, so a
+              // typed dual (Sacred Foundry) qualifies as well as a basic.
+              filter: { type: "land", subtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
+              destination: "battlefield",
+              min: 0,
+              max: 1,
+            },
           },
         ],
       },

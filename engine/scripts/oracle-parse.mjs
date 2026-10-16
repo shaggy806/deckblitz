@@ -2195,14 +2195,13 @@ function parseStatic(line, text) {
 const partnerWithAbility = (name) => ({
   trigger: { on: "enters-battlefield", who: "self" },
   targets: ["player"],
+  // "Target player **may** search" is that player's choice (the
+  // `partnerWithTrigger` helper's shape).
   effect: {
-    kind: "search-library",
-    filter: { name },
-    destination: "hand",
-    min: 0,
-    max: 1,
-    reveal: true,
+    kind: "each-player-may",
     who: { controllerOfTarget: 0 },
+    prompt: `Search your library for a card named ${name}?`,
+    effect: { kind: "search-library", filter: { name }, destination: "hand", min: 0, max: 1, reveal: true },
   },
   resolve: null,
   text: `When this creature enters, target player may search their library for a card named ${name}, reveal it, put it into their hand, then shuffle.`,

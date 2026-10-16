@@ -11305,6 +11305,7 @@ import _poolThatsRoughBuddy from "./pool/thats-rough-buddy.js";
 import _poolThaumatog from "./pool/thaumatog.js";
 import _poolThaumaturgesFamiliar from "./pool/thaumaturges-familiar.js";
 import _poolThawbringer from "./pool/thawbringer.js";
+import _poolTheAesirEscapeValhalla from "./pool/the-aesir-escape-valhalla.js";
 import _poolTheAncientOne from "./pool/the-ancient-one.js";
 import _poolTheArkenstone from "./pool/the-arkenstone.js";
 import _poolTheAutonomousFurnace from "./pool/the-autonomous-furnace.js";
@@ -24932,6 +24933,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThaumatog,
   _poolThaumaturgesFamiliar,
   _poolThawbringer,
+  _poolTheAesirEscapeValhalla,
   _poolTheAncientOne,
   _poolTheArkenstone,
   _poolTheAutonomousFurnace,

@@ -724,15 +724,13 @@ export const investigate = (times: EffectAmount = 1): EffectSpec => ({
 export const partnerWithTrigger = (name: string): TriggeredAbility => ({
   trigger: { on: "enters-battlefield", who: "self" },
   targets: ["player"],
+  // "Target player **may** search": their choice (`each-player-may`, you
+  // included), so declining neither searches nor shuffles.
   effect: {
-    kind: "search-library",
-    filter: { name },
-    destination: "hand",
-    // "may search": optional for the target, you included.
-    min: 0,
-    max: 1,
-    reveal: true,
+    kind: "each-player-may",
     who: { controllerOfTarget: 0 },
+    prompt: `Search your library for a card named ${name}?`,
+    effect: { kind: "search-library", filter: { name }, destination: "hand", min: 0, max: 1, reveal: true },
   },
   resolve: null,
   text:

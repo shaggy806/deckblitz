@@ -607,6 +607,7 @@ describe("Sundering Eruption", () => {
     const target = spawn(game, "Forest", B);
     const basic = game.debugSpawn("Forest", B, "library");
     b.chooseFromZoneFn = () => [basic];
+    b.chooseModesFn = () => [0];
     const walker = spawn(game, "Grizzly Bears", B);
     const flier = spawn(game, "Vampire Nighthawk", B);
     cast(game, game.debugSpawn("Sundering Eruption", A, "hand"), [target]);
@@ -922,7 +923,9 @@ describe("Ghost Quarter", () => {
     const quarter = spawn(game, "Ghost Quarter");
     const target = spawn(game, "Urborg, Tomb of Yawgmoth", B);
     const basic = game.debugSpawn("Swamp", B, "library");
+    b.chooseModesFn = () => [0];
     b.chooseFromZoneFn = () => [basic];
+    b.chooseModesFn = () => [0];
     game.dispatch({
       type: "activate-ability",
       player: A,

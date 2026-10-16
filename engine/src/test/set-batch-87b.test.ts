@@ -22,6 +22,7 @@ import {
   life,
   named,
   pickFromZone,
+  pickModes,
   pickTargets,
   pt,
   ref,
@@ -50,6 +51,7 @@ describe("White Orchid Phantom", () => {
     const seen = watchTargets(a, () => [tower]);
     const wastes = libraryOf(game, B)[0];
     pickFromZone(b, wastes);
+    pickModes(b, 0); // "Its controller may search": yes
     enter(game, "White Orchid Phantom");
     // A basic land isn't a legal target.
     expect(seen.offered[0]).toContain(tower);
@@ -67,6 +69,7 @@ describe("White Orchid Phantom", () => {
     pickTargets(a, tower);
     const wastes = libraryOf(game, B)[0];
     pickFromZone(b, wastes);
+    pickModes(b, 0); // "Its controller may search": yes
     enter(game, "White Orchid Phantom");
     expect(zone(game, tower)).toBe("battlefield");
     expect(zone(game, wastes)).toBe("battlefield");

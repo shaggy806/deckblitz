@@ -411,8 +411,10 @@ export interface CardFilter {
    * battlefield only: off it (a last-known snapshot) it fails closed. */
   readonly equipmentAttached?: NumCompare;
   /** Is (or isn't) the filtering player's **Ring-bearer** (rule 701.54e) —
-   * "if Frodo is your Ring-bearer", "unless Sauron is your Ring-bearer". */
-  readonly ringBearer?: boolean;
+   * "if Frodo is your Ring-bearer", "unless Sauron is your Ring-bearer".
+   * `"any"` is any player's Ring-bearer — Lord of the Nazgûl's "protection
+   * from **Ring-bearers**". */
+  readonly ringBearer?: boolean | "any";
   /** Is (or isn't) prepared (rule 722.3a) — Woodwork Prodigy's "if this
    * creature isn't prepared". Read on the battlefield only: off it, never. */
   readonly prepared?: boolean;
@@ -1165,8 +1167,13 @@ export function matchesFilter(
     if (milled !== filter.putIntoGraveyardFromLibraryThisTurn) return false;
   }
   // "Your Ring-bearer" (rule 701.54e) — the filtering player's, on the
-  // battlefield now.
-  if (filter.ringBearer !== undefined && (live !== undefined && isRingBearer(state, ctx.you, id)) !== filter.ringBearer) {
+  // battlefield now; "Ring-bearers" (`"any"`), anyone's.
+  if (filter.ringBearer === "any") {
+    if (live === undefined || live.zone !== "battlefield" || !hasRingBearerDesignation(live)) return false;
+  } else if (
+    filter.ringBearer !== undefined &&
+    (live !== undefined && isRingBearer(state, ctx.you, id)) !== filter.ringBearer
+  ) {
     return false;
   }
   if (filter.prepared !== undefined) {

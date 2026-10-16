@@ -22,13 +22,19 @@ export default defineCard({
     effects: [
       { kind: "destroy", target: 0 },
       {
-        kind: "search-library",
-        filter: { type: "land", supertype: "basic" },
-        destination: "battlefield",
-        enterTapped: true,
-        min: 0,
-        max: 1,
+        // "Its controller **may** search": their choice (`each-player-may`),
+        // so declining neither searches nor shuffles their library.
+        kind: "each-player-may",
         who: { controllerOfTarget: 0 },
+        prompt: "Search your library for a basic land card?",
+        effect: {
+          kind: "search-library",
+          filter: { type: "land", supertype: "basic" },
+          destination: "battlefield",
+          enterTapped: true,
+          min: 0,
+          max: 1,
+        },
       },
       { kind: "draw", amount: 1 },
     ],

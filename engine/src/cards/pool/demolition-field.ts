@@ -31,12 +31,18 @@ export default defineCard({
           // "That land's controller" is read as it last existed (Path to
           // Exile's shape): the land is already in the graveyard by now.
           {
-            kind: "search-library",
+            // "Its controller **may** search": their choice (`each-player-may`),
+            // so declining neither searches nor shuffles their library.
+            kind: "each-player-may",
             who: { controllerOfTarget: 0 },
-            filter: BASIC_LAND,
-            destination: "battlefield",
-            min: 0,
-            max: 1,
+            prompt: "Search your library for a basic land card?",
+            effect: {
+              kind: "search-library",
+              filter: BASIC_LAND,
+              destination: "battlefield",
+              min: 0,
+              max: 1,
+            },
           },
           // "You may search": a `may`, so declining doesn't search or shuffle.
           {

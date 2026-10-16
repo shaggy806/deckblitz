@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "bug:chapter-ability-source-stint",
   "stat:turn-history-entered-as-it-entered",
   "bug:delayed-trigger-carries-lost-trigger-object",
   "effect:damage-dealt-this-way",

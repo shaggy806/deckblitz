@@ -276,8 +276,11 @@ describe("Partner with's enters trigger", () => {
     const alice = new ScriptedController(A);
     alice.chooseTargetsFn = () => [{ kind: "player", player: target }];
     alice.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+    // "Target player may search": the target says yes.
+    alice.chooseModesFn = () => [0];
     const bob = new ScriptedController(B);
     bob.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+    bob.chooseModesFn = () => [0];
     const game = Game.create({
       seed: 1,
       shuffle: false,

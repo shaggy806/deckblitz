@@ -151,7 +151,11 @@ describe("Path to Exile", () => {
     game.advanceUntil((s) => s.awaiting !== null || s.result.over);
 
     expect(game.state.objects[victim].zone).toBe("exile");
-    // The search decision belongs to B, not to the caster.
+    // Whether to search, and then the search, belong to B, not the caster.
+    expect(game.state.awaiting?.kind).toBe("choose-modes");
+    expect(game.state.awaiting?.player).toBe(B);
+    game.dispatch({ type: "choose-modes", player: B, modes: [0] });
+    game.advanceUntil((s) => s.awaiting !== null || s.result.over);
     expect(game.state.awaiting?.kind).toBe("choose-from-zone");
     if (game.state.awaiting?.kind !== "choose-from-zone") return;
     expect(game.state.awaiting.player).toBe(B);

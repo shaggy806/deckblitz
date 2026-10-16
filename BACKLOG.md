@@ -98,18 +98,12 @@ section keeps only what to do next.
   that prepare is built (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,
   "Open leads".
-- **Lord of the Nazgûl's "protection from Ring-bearers" is still inert** (found 2026-10-14): it was
-  left out because nothing made a Ring-bearer, but the Ring tempts you now (7779cae6), so the card
-  runs inaccurately. Author it (`filter.ts` has `ringBearer`) or pull the card.
 - **Wayta, Trainer Prodigy's cheap fight can lose a target it shouldn't** (found 2026-10-15): "costs
   {2} less if it targets two creatures you control" is split into two abilities, the {G} one
   requiring its second target be yours, so a creature that changes control in response leaves the
   fight undone where the printed "another target creature" stays legal. Needs
   `cost:ability-cost-reduction-if-targets` (spells' `targetCostReduction` for activated abilities;
   Raft Security Officer waits on it too), or pull the card.
-- **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
-  wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
-  amount (`new:damage-dealt-this-way`).
 - **Features with a family of cards behind them**, each detailed where it points:
   the rest of "enters tapped and attacking" (`docs/card-blockers.md`); modal
   activated abilities with targeted modes, host triggers (28 cards), the EDH-popularity tiers
@@ -155,11 +149,8 @@ there and move this line to `COMPLETED.md`.
 - **`sacrifice-all-but` always keeps the most it may.**
 - **Proliferate over a token stack** gives every member a counter.
 - **Distinct targets in one token stack** can't take two tokens of one stack.
-- **"Its controller may search" always searches** (Path to Exile, Assassin's Trophy, Ghost Quarter, …): a `may` asks the effect's controller, not that player.
-- **A Saga's chapter ability doesn't remember which Saga it came from** (The Aesir Escape Valhalla): once the Saga leaves, "the exiled card" reads nothing.
 - **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
-- **A "trigger-object" that blinks is still found** (400.7): Atarka's double strike lands on a Dragon Cloudshifted in response.
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.

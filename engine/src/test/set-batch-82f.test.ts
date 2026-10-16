@@ -370,6 +370,7 @@ describe("Sandworm", () => {
     const basic = game.state.zones.perPlayer[B].library[0];
     pickTargets(a, forest);
     pickFromZone(b, basic);
+    pickModes(b, 0); // "Its controller may search": yes
     enter(game, "Sandworm");
     expect(zone(game, forest)).toBe("graveyard");
     expect(zone(game, basic)).toBe("battlefield");

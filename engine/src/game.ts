@@ -8459,6 +8459,9 @@ export class Game {
         abilityIndex: index,
         controller: object.controller,
         chapter: true,
+        // The Saga as it triggered (rule 607.2a): "the exiled card" is the
+        // one linked to this stint, though the Saga leaves before it resolves.
+        lastKnownRefs: { source: object.zoneChangeCount ?? 0 },
       });
     }
   }

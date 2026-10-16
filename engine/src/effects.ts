@@ -4518,9 +4518,11 @@ export type EffectSpec =
       readonly restDestination?: "hand" | "battlefield";
       /**
        * Whose library is searched — the effect's controller by default, or
-       * the controller of a target slot (Path to Exile: "**its controller**
-       * may search their library for a basic land card"). The search is
-       * always optional for someone else, which `min: 0` already expresses.
+       * the controller of a target slot, for a search they must make. A
+       * search they **may** make ("its controller may search their library
+       * for a basic land card" — Path to Exile) is theirs to decline: an
+       * `each-player-may` of `who: { controllerOfTarget }` around a search
+       * with no `who`, since `min: 0` alone still searches and shuffles.
        */
       readonly who?: { readonly controllerOfTarget: number };
       /**

@@ -1,7 +1,7 @@
 {
  "batch": "B88",
  "status": "complete",
- "ranks": "Top-5000 recheck (2026-10-16): the cards whose triage needs had all been built since (cards:needs --stale), re-briefed; the ones still blocked re-recorded with the precise need; and Desert Warfare (B87) and Mechan Shieldmate, unblocked the same day by the delayed-trigger and entered-as-it-entered fixes",
+ "ranks": "Top-5000 recheck (2026-10-16): the cards whose triage needs had all been built since (cards:needs --stale), re-briefed; the ones still blocked re-recorded with the precise need; and Desert Warfare (B87), Mechan Shieldmate and The Aesir Escape Valhalla (B48), unblocked the same day by the delayed-trigger, entered-as-it-entered and chapter-source fixes",
  "authored": [
   {
    "name": "The One Ring",
@@ -64,6 +64,13 @@
    "name": "Mechan Shieldmate",
    "files": [
     "engine/src/cards/pool/mechan-shieldmate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Aesir Escape Valhalla",
+   "files": [
+    "engine/src/cards/pool/the-aesir-escape-valhalla.ts"
    ],
    "tested": true
   }

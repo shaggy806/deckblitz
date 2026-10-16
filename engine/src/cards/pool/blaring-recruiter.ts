@@ -24,13 +24,19 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: ["player"],
       effect: {
-        kind: "search-library",
-        filter: { name: "Blaring Captain" },
-        destination: "hand",
-        min: 0,
-        max: 1,
-        reveal: true,
+        // "… **may** search": that player's choice (`each-player-may`), so
+        // declining neither searches nor shuffles their library.
+        kind: "each-player-may",
         who: { controllerOfTarget: 0 },
+        prompt: "Search your library for a card named Blaring Captain?",
+        effect: {
+          kind: "search-library",
+          filter: { name: "Blaring Captain" },
+          destination: "hand",
+          min: 0,
+          max: 1,
+          reveal: true,
+        },
       },
       resolve: null,
       text: "When this creature enters, target player may search their library for a card named Blaring Captain, reveal it, put it into their hand, then shuffle.",

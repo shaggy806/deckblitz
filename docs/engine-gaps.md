@@ -164,36 +164,12 @@ that needs it is authored.
   this turn from anywhere other than your hand") waits on it (`stat:spells-cast-not-from-hand-this-turn`,
   batch 49). Fix: record after `castFrom` is set, and carry it in the snapshot.
 
-- **A Saga's chapter ability doesn't remember which Saga it came from** — `Game.triggerChapters`
-  queues each chapter trigger with no `lastKnownRefs.source` (no stint), so an ability that reads
-  "the exiled card" — the cards linked to its source (rule 607.2a: `exiled-with-source`,
-  `exiledWithSourceManaValue`, `return-exiled-by-source`'s `linked`) — reads the Saga's current
-  stint. If the Saga leaves before the chapter resolves (bounced in response), the chapter finds
-  nothing: The Aesir Escape Valhalla's II put 0 counters instead of the exiled card's mana value,
-  and its III would leave the card in exile (found by batch 48's triage, which blocked the card on
-  `bug:chapter-ability-source-stint`). Fix: record the Saga's stint on the pending trigger, as a
-  permanent's own triggers do.
 
-- **"Its controller may search" always searches** — "its controller may search their library
-  for a basic land card" (Path to Exile, Assassin's Trophy, Erode, Ghost Quarter, Price of
-  Freedom, Boseiju, Who Endures, Volatile Fault, Demolition Field's first search, and the
-  `partnerWithTrigger` helper's "target player may search"). A `may` asks the effect's
-  controller, and `aboutThatPlayer` only names who the question is about, so these keep
-  `min: 0` and a decline still searches and shuffles that player's library — which loses an
-  ordering they made (a scry). Needs a `may` another player answers. `effects.ts`'s `who` doc
-  claims `min: 0` "already expresses" the option; it doesn't for the shuffle. (Found by the
-  2026-10-09 "you may search" sweep, which wrapped the 41 cards whose own controller searches.)
 - **A source's chosen colour or number isn't read from last-known information** (latent). Since
   2026-10-09 `chosenOnEnter` is in `LastKnownInfo` (Outpost Siege's chosen side), but
   `chosenColorOfSource` / `chosenNumberOfSource` (`game.ts`) read only the live object, so an
   effect resolving after its source left doesn't see the chosen value. No pool card is known to
   hit it.
-- **A "trigger-object" that blinks is still found** (rule 400.7). A `"trigger-object"` reference to
-  a permanent still on the battlefield as the ability triggered isn't dropped when it leaves and
-  returns before the ability resolves: `triggerObjectLost` covers only an object that had already
-  left when it triggered. Cloudshift the attacking Dragon in response to Atarka, World Render's
-  trigger and the returned Dragon still gets double strike; Dragon Tempest has the same shape
-  (found in the 2026-10-09 resolve-hatch sweep).
 - **Counters put as a cost skip counter replacements and prohibitions.** `putCostCounters`
   (Wall of Roots' -0/-1, Devoted Druid's -1/-1) puts them straight on. Right for "if an effect
   would put counters" (Doubling Season), wrong for one that isn't worded so (Vizier of Remedies)

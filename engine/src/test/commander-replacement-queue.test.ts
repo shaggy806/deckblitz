@@ -65,6 +65,12 @@ function resolveStack(game: Game, toCommandZone = true): string[] {
       game.dispatch({ type: "choose-from-zone", player: awaiting.player, chosen: [] });
       continue;
     }
+    // "Its controller may search": they do, so the search's own decision
+    // comes before the commander's.
+    if (awaiting?.kind === "choose-modes") {
+      game.dispatch({ type: "choose-modes", player: awaiting.player, modes: [0] });
+      continue;
+    }
     if (awaiting !== null) throw new Error(`unexpected ${awaiting.kind} decision`);
     if (game.state.zones.shared.stack.length === 0) return asked;
     const holder = game.state.priority.holder;

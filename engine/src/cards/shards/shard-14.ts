@@ -349,6 +349,7 @@ import _poolTempleOfSilence from "../pool/temple-of-silence.js";
 import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
 import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
+import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
 import _poolTheEternityElevator from "../pool/the-eternity-elevator.js";
 import _poolTheGitrogMonster from "../pool/the-gitrog-monster.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolTempleOfTriumph,
     _poolTeyoDiamondbladeMage,
     _poolThalisseReverentMedium,
+    _poolTheAesirEscapeValhalla,
     _poolTheEternityElevator,
     _poolTheGitrogMonster,
     _poolThickestInTheThicket,

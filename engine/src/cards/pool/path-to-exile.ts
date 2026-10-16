@@ -17,14 +17,19 @@ export default defineCard({
     effects: [
       { kind: "exile", target: 0 },
       {
-        kind: "search-library",
+        // "Its controller **may** search": their choice (`each-player-may`),
+        // so declining neither searches nor shuffles their library.
+        kind: "each-player-may",
         who: { controllerOfTarget: 0 },
-        filter: { type: "land", supertype: "basic" },
-        destination: "battlefield",
-        // "**May** search" — `min: 0` is what makes it optional.
-        min: 0,
-        max: 1,
-        enterTapped: true,
+        prompt: "Search your library for a basic land card?",
+        effect: {
+          kind: "search-library",
+          filter: { type: "land", supertype: "basic" },
+          destination: "battlefield",
+          min: 0,
+          max: 1,
+          enterTapped: true,
+        },
       },
     ],
   },
