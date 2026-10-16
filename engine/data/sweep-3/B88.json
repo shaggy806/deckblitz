@@ -1,7 +1,7 @@
 {
  "batch": "B88",
  "status": "complete",
- "ranks": "Top-5000 recheck (2026-10-16): the cards whose triage needs had all been built since (cards:needs --stale), re-briefed; the ones still blocked re-recorded with the precise need",
+ "ranks": "Top-5000 recheck (2026-10-16): the cards whose triage needs had all been built since (cards:needs --stale), re-briefed; the ones still blocked re-recorded with the precise need; and Desert Warfare (B87) and Mechan Shieldmate, unblocked the same day by the delayed-trigger and entered-as-it-entered fixes",
  "authored": [
   {
    "name": "The One Ring",
@@ -50,6 +50,20 @@
    "name": "Bolg of the North",
    "files": [
     "engine/src/cards/pool/bolg-of-the-north.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desert Warfare",
+   "files": [
+    "engine/src/cards/pool/desert-warfare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mechan Shieldmate",
+   "files": [
+    "engine/src/cards/pool/mechan-shieldmate.ts"
    ],
    "tested": true
   }

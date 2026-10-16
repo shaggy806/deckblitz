@@ -97,6 +97,7 @@ import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
+import _poolDesertWarfare from "../pool/desert-warfare.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
 import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
 import _poolDimirGuildgate from "../pool/dimir-guildgate.js";
@@ -538,6 +539,7 @@ const shard: CardShard = {
     _poolDelete,
     _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
+    _poolDesertWarfare,
     _poolDictateOfErebos,
     _poolDigSiteInventory,
     _poolDimirGuildgate,

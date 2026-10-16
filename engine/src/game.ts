@@ -1609,30 +1609,32 @@ export class Game {
             return "web-slinging returns a tapped creature you control";
           }
         }
-        return this.withWaterbendChoice(action.card, action.waterbend, () =>
-          this.whyCannotCastSpell(
-            action.player,
-            action.card,
-            action.via,
-            action.face ?? 0,
-            action.modes,
-            action.kicked === true ? (action.kickCount ?? true) : false,
-            action.sacrifice,
-            action.overload === true,
-            action.free === true,
-            action.convoke,
-            action.altCost === true,
-            action.costOption,
-            action.tap,
-            action.graveyardGrant,
-            action.xValue,
-            distinctTargetCount(action.targets, this.targetCopies(action.targets ?? [])),
-            action.escapeExile,
-            action.prototype === true,
-            action.offspring === true,
-            action.evoke === true ? (action.evokeCost ?? "") : null,
-            action.delve,
-          ),
+        return (
+          this.withWaterbendChoice(action.card, action.waterbend, () =>
+            this.whyCannotCastSpell(
+              action.player,
+              action.card,
+              action.via,
+              action.face ?? 0,
+              action.modes,
+              action.kicked === true ? (action.kickCount ?? true) : false,
+              action.sacrifice,
+              action.overload === true,
+              action.free === true,
+              action.convoke,
+              action.altCost === true,
+              action.costOption,
+              action.tap,
+              action.graveyardGrant,
+              action.xValue,
+              distinctTargetCount(action.targets, this.targetCopies(action.targets ?? [])),
+              action.escapeExile,
+              action.prototype === true,
+              action.offspring === true,
+              action.evoke === true ? (action.evokeCost ?? "") : null,
+              action.delve,
+            ),
+          ) ?? this.whyCastTargetsInvalid(action)
         );
       case "activate-ability": {
         const why = this.withWaterbendChoice(action.source, action.waterbend, () =>
@@ -5078,6 +5080,28 @@ export class Game {
     );
   }
 
+
+  /** A cast's targets, judged as `castSpell` judges them — the chosen face's
+   * target specs under its modes, kicker, overload and X — so `canDispatch`
+   * doesn't call a cast dispatchable that `castSpell` would refuse (a player
+   * with protection from everything, rule 702.16j). A face-down spell has no
+   * targets to judge (708.2a). */
+  private whyCastTargetsInvalid(action: Extract<Action, { type: "cast-spell" }>): string | null {
+    if (action.via === "face-down" || this.state.objects[action.card] === undefined) return null;
+    const def = this.faceDef(action.card, action.face ?? 0);
+    if (def.castModal !== null && action.modes === undefined) return null;
+    const modes = def.castModal !== null ? [...(action.modes ?? [])].sort((a, b) => a - b) : undefined;
+    const kicked = action.kicked === true ? (action.kickCount ?? true) : false;
+    const x = Math.max(0, Math.floor(action.xValue ?? 0));
+    const specs = specsAtX(this.effectiveTargetSpecs(def, modes, kicked, action.overload === true), x);
+    return this.whyTargetsInvalid(
+      specs,
+      normalizeTargets(action.targets),
+      action.player,
+      def.name,
+      this.cardSource(def, action.card, x),
+    );
+  }
 
   /** Kept because `applyChooseTargets` validates before applying and
    * throws; the rules live in `decisions/choose-targets.ts`. */
@@ -20699,7 +20723,7 @@ export class Game {
         }
       },
       manifestTop: (player, kind) => this.manifestTop(player, kind),
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords) => {
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
         const goadedBy = goadedForGame === true ? controller : undefined;
@@ -20718,6 +20742,7 @@ export class Game {
             basePt,
             exileAtEndStep === true,
             attacksThisCombat === true,
+            gainKeywords,
           );
           if (thenCounters !== undefined && thenCounters.amount > 0) {
             for (const id of made) {
@@ -22511,6 +22536,9 @@ export class Game {
     /** They attack this combat if able (Legion Warboss) — until end of
      * combat, part of making them like `gainUntilEndOfTurn`. */
     attacksThisCombat = false,
+    /** Keywords they gain with no end — "they gain haste" (Chandra, Acolyte
+     * of Flame): not a copiable value (rule 707.2), unlike a printed one. */
+    gainKeywords: readonly Keyword[] = [],
   ): readonly ObjectId[] {
     let def = this.registry.get(tokenName); // validate the token is a known definition
     // Doubling Season / Parallel Lives (rule 614): "twice that many instead".
@@ -22545,6 +22573,9 @@ export class Game {
               },
             ]),
         ...untilEndOfTurnKeywords(gainUntilEndOfTurn),
+        ...(gainKeywords.length > 0
+          ? [{ power: 0, toughness: 0, keywords: [...gainKeywords], untilEndOfTurn: false }]
+          : []),
         ...(attacksThisCombat
           ? [
               {
@@ -26579,12 +26610,17 @@ export class Game {
             triggerObjectCeased: ceased,
           }
         : {}),
-      // "That card": the creating ability's trigger object, as the object it
-      // is now — it has to still be that object when this resolves.
+      // "That card": the creating ability's trigger object, as the object
+      // that ability found — the stint it arrived in a zone with
+      // (`triggerObjectAfterLeaving`) or was on the battlefield as. One that
+      // has moved again since is a new object (rule 400.7) the delayed
+      // trigger can't find (603.7c): a Desert milled with Desert Warfare out,
+      // then exiled from the graveyard, stays in exile.
       ...(carried !== undefined
         ? {
             triggerObject: carried.id,
-            triggerObjectStint: carried.zoneChangeCount ?? 0,
+            triggerObjectStint:
+              creator.refs?.triggerObjectAfterLeaving ?? creator.refs?.triggerObject ?? carried.zoneChangeCount ?? 0,
             ...(creator.refs?.triggerObject !== undefined
               ? { triggerObjectRefs: { triggerObject: creator.refs.triggerObject } }
               : {}),
@@ -26891,7 +26927,13 @@ export class Game {
         const object = this.state.objects[event.object];
         const history = historyOf(object?.controller);
         if (history !== undefined) {
-          (history.entered ??= []).push({ object: event.object, count: event.count ?? 1 });
+          // What entered, as it entered (Mechan Shieldmate's ruling) — not
+          // as it is when a "this turn" condition is asked later.
+          (history.entered ??= []).push({
+            object: event.object,
+            count: event.count ?? 1,
+            asEntered: this.takeLastKnown(event.object),
+          });
         }
         return;
       }

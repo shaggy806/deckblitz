@@ -2763,6 +2763,7 @@ import _poolDesertOfTheMindful from "./pool/desert-of-the-mindful.js";
 import _poolDesertOfTheTrue from "./pool/desert-of-the-true.js";
 import _poolDesertSandstorm from "./pool/desert-sandstorm.js";
 import _poolDesertTwister from "./pool/desert-twister.js";
+import _poolDesertWarfare from "./pool/desert-warfare.js";
 import _poolDesertedBeach from "./pool/deserted-beach.js";
 import _poolDesertedTemple from "./pool/deserted-temple.js";
 import _poolDesertersDisciple from "./pool/deserters-disciple.js";
@@ -6888,6 +6889,7 @@ import _poolMeatLocker from "./pool/meat-locker.js";
 import _poolMechHangar from "./pool/mech-hangar.js";
 import _poolMechanAssembler from "./pool/mechan-assembler.js";
 import _poolMechanNavigator from "./pool/mechan-navigator.js";
+import _poolMechanShieldmate from "./pool/mechan-shieldmate.js";
 import _poolMechanicalMobster from "./pool/mechanical-mobster.js";
 import _poolMechanizedNinjaCavalry from "./pool/mechanized-ninja-cavalry.js";
 import _poolMechanizedWarfare from "./pool/mechanized-warfare.js";
@@ -16388,6 +16390,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDesertOfTheTrue,
   _poolDesertSandstorm,
   _poolDesertTwister,
+  _poolDesertWarfare,
   _poolDesertedBeach,
   _poolDesertedTemple,
   _poolDesertersDisciple,
@@ -20513,6 +20516,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMechHangar,
   _poolMechanAssembler,
   _poolMechanNavigator,
+  _poolMechanShieldmate,
   _poolMechanicalMobster,
   _poolMechanizedNinjaCavalry,
   _poolMechanizedWarfare,

@@ -110,11 +110,6 @@ section keeps only what to do next.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).
-- **Chandra, Acolyte of Flame's Elementals have haste printed** (found 2026-10-15): her 0 makes
-  the shared "Elemental Token" (Tempt with Vengeance's, which does print haste), but hers "gain
-  haste", which isn't copiable (rule 707.2): a copy of one wrongly has haste. Needs the plain
-  "1/1 Red Elemental Token" with an indefinite gain on creation (`create-token` has only
-  `gainUntilEndOfTurn`), or pull the card.
 - **Features with a family of cards behind them**, each detailed where it points:
   the rest of "enters tapped and attacking" (`docs/card-blockers.md`); modal
   activated abilities with targeted modes, host triggers (28 cards), the EDH-popularity tiers
@@ -134,7 +129,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **"A permanent entered under your control this turn" reads it as it is now**: a `turn-history` `entered` filter checks each permanent as it is now or last was, not as it entered — wrong once it changes type; The Prydwen's Knight, Éowyn, Shieldmaiden (Mechan Shieldmate waits on it).
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **A mandatory loop that asks a choice each round still throws instead of drawing** (104.4b, 732.4): one whose every round asks a target or a "you may" still hits the crash guards (the room stops that game).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
@@ -166,7 +160,6 @@ there and move this line to `COMPLETED.md`.
 - **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
 - **A "trigger-object" that blinks is still found** (400.7): Atarka's double strike lands on a Dragon Cloudshifted in response.
-- **A delayed trigger made by an ability whose trigger object already left still finds it** (400.7, 603.7c): `createDelayedTrigger` takes the object's current stint; Desert Warfare waits.
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
@@ -224,8 +217,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **Remove the "Tokens" checkbox on the library page** (the user's call, 2026-10-15): the
-  `showTokens` toggle and its filter in `client/src/library/LibraryPage.tsx`.
 - **A forced look-and-choose still asks**: Yuriko's and Dark Confidant's "reveal the top card and put it into your hand" open a one-card picker with nothing to choose (`look-and-choose` with `count`, `min` and `max` 1); it could take the card unasked.
 - **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review): with bot speed moved into Settings every step shows at 1366, but at 1024 the track stops at EC.
 - **A gift's opponent is asked one opponent at a time** — one prompt naming every opponent would read better.
@@ -262,10 +253,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Code health
 
-- **`canDispatch` passes a cast whose target is illegal** (found 2026-10-16): `Game.canDispatch`
-  returns null for a `cast-spell` targeting a player with protection from everything, where
-  `dispatch` then throws "illegal target" (`legalActions` leaves that player out correctly). Its
-  contract is "null if it can be dispatched": check the cast's targets the way `dispatch` does.
 - **Solo games in the player's browser: bug reports** (the user, 2026-10-13;
   `docs/plans/local-rooms.md`, built steps in `COMPLETED.md`): bug-report uploads from a local
   game (only a `--capture` dev server has the panel).

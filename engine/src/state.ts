@@ -2724,6 +2724,12 @@ export interface TurnHistoryEntry {
    * it was *then* (rule 603.10a), not as a later stint left it, once it has
    * come back and left again. */
   readonly stint?: number;
+  /** For a permanent that entered (`entered`): what it was as it entered,
+   * after its replacement effects — so "if an artifact entered the
+   * battlefield under your control this turn" asks what entered, not what
+   * it is now (Mechan Shieldmate's ruling): one that has stopped being an
+   * artifact still counts, one that became one later doesn't. */
+  readonly asEntered?: LastKnownInfo;
 }
 
 /** The lists a {@link TurnHistory} keeps. */

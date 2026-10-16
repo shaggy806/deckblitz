@@ -41,8 +41,11 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "create-token",
-        token: "Elemental Token",
+        // The plain 1/1 red Elemental: "they gain haste" isn't copiable
+        // (rule 707.2), so it's gained as they're made, not printed.
+        token: "1/1 Red Elemental Token",
         count: 2,
+        gainKeywords: ["haste"],
         sacrificeAtEndStep: true,
       },
       resolve: null,

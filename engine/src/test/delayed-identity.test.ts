@@ -117,3 +117,32 @@ describe("a permanent that left twice", () => {
     expect(game.state.players[B].life).toBe(15);
   });
 });
+
+describe("a delayed trigger made after its trigger object moved again", () => {
+  // Liesa, Forgotten Archangel: "Whenever another nontoken creature you
+  // control dies, return that card to its owner's hand at the beginning of
+  // the next end step." The card that died is the one it means: put back
+  // into the graveyard after leaving it, it's a new object (rule 400.7), and
+  // the delayed trigger can't find it (603.7c) — Desert Warfare's ruling.
+  const dieAndResolve = (moveAgain: boolean) => {
+    const { game } = setUp();
+    spawn(game, "Liesa, Forgotten Archangel");
+    const bears = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [obj(bears)]);
+    if (moveAgain) {
+      move(game, bears, "exile");
+      move(game, bears, "graveyard");
+    }
+    game.advanceUntil(quiet);
+    game.advanceUntil((s) => s.turn.number === 2);
+    return game.state.objects[bears].zone;
+  };
+
+  it("returns the card that died", () => {
+    expect(dieAndResolve(false)).toBe("hand");
+  });
+
+  it("doesn't return it once it has left the graveyard and come back", () => {
+    expect(dieAndResolve(true)).toBe("graveyard");
+  });
+});

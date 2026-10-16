@@ -219,9 +219,16 @@ describe("loyalty abilities", () => {
     game.advanceUntil(settled);
 
     const tokens = game.battlefield.filter(
-      (id) => game.state.objects[id].cardName === "Elemental Token",
+      (id) => game.state.objects[id].cardName === "1/1 Red Elemental Token",
     );
-    expect(tokens).toHaveLength(2);
+    expect(tokens.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0)).toBe(2);
+    expect(game.characteristics(tokens[0]).keywords).toContain("haste");
+    // "They gain haste" isn't copiable (rule 707.2): a copy of one has none.
+    const before = new Set(game.battlefield);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1 }, [{ kind: "object", object: tokens[0] }]);
+    const copy = game.battlefield.find((id) => !before.has(id));
+    expect(copy).toBeDefined();
+    expect(game.characteristics(copy!).keywords).not.toContain("haste");
   });
 });
 

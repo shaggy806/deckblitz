@@ -317,6 +317,11 @@ describe("Teferi's Protection — a player's life can't change, protection from 
       .filter((o) => o.kind === "cast-spell" && o.card === bolt)
       .flatMap((o) => (o.kind === "cast-spell" ? (o.targetOptions?.[0] ?? []) : []));
     expect(targets.some((t) => t.kind === "player" && t.player === A)).toBe(false);
+    // And `canDispatch` refuses that cast, as `dispatch` would.
+    const atA = { type: "cast-spell", player: B, card: bolt, targets: [ref(A)] } as const;
+    expect(game.canDispatch(atA)).toMatch(/illegal target/);
+    expect(() => game.dispatch(atA)).toThrow(/illegal target/);
+    expect(game.canDispatch({ ...atA, targets: [ref(B)] })).toBeNull();
     void b;
     nextTurn(game); // alice's: everything is back, and the shield is gone.
     expect(zone(game, bears)).toBe("battlefield");

@@ -218,6 +218,7 @@ import _poolMagmaOpus from "../pool/magma-opus.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
 import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
+import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
@@ -637,6 +638,7 @@ const shard: CardShard = {
     _poolManamorphose,
     _poolMasterApothecary,
     _poolMasterworkOfIngenuity,
+    _poolMechanShieldmate,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
     _poolMessengerHawk,

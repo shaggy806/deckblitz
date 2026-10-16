@@ -6,17 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **"A permanent entered under your control this turn" reads it as it is now.** A `turn-history`
-  condition or amount with `what: "entered"` (`turnHistoryCount`, `characteristics.ts`) matches its
-  `filter` against each permanent that entered as it is now, or as it last existed if it has left —
-  not as it entered. "If an artifact entered the battlefield under your control this turn" asks what
-  entered: an artifact that has since stopped being one still counts, and a permanent that became an
-  artifact after entering doesn't (Mechan Shieldmate's ruling says so outright). In the pool: The
-  Prydwen's Human Knight token (word for word Mechan Shieldmate's clause), Éowyn, Shieldmaiden and
-  Waterspout Warden ("if another creature entered the battlefield under your control this turn").
-  **Fix (outline):** record the entering object's characteristics with the turn-history entry (a
-  snapshot like `lastKnown`, taken as it enters, after its replacement effects) and match `entered`
-  filters against that. Found 2026-10-15 (batch 81).
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the
@@ -162,18 +151,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
-- **A delayed trigger made by an ability whose trigger object already left still finds it.**
-  Rule 400.7: an object that changes zones is a new object, and 603.7c: a delayed trigger that
-  refers to an object does nothing once it isn't in the zone it's expected to be in.
-  `Game.createDelayedTrigger` (`game.ts`, the `carried` branch) records the creating ability's
-  trigger object at its *current* `zoneChangeCount`, so when that object moved again before the
-  creating ability resolved, the delayed trigger acts on the new object. Repro (batch 87): with
-  Desert Warfare out, mill a Desert, then exile it from the graveyard while the trigger waits;
-  at the end step the Desert enters the battlefield from exile. Avacyn, Angel of Horror's "return
-  that card at the next end step" goes through the same code. **Fix (outline):** carry the stint
-  the creating ability recorded (`refs.triggerObject`, or its `triggerObjectLost`) instead of
-  the current one, keeping 400.7e's zone-change exception (a dies trigger's "that card" is the
-  card in the graveyard). Blocks Desert Warfare. Found 2026-10-15.
 
 ## Latent
 

@@ -1121,7 +1121,8 @@ export function damageDealtThisTurn(
 /**
  * How many things of one {@link TurnHistory} list `players` have this turn,
  * matching `filter` from `you`'s side — a token stack counting as every
- * token in it. A permanent that has left the battlefield is matched as it
+ * token in it. A permanent that entered is matched as it entered (its
+ * `asEntered` snapshot). A permanent that has left the battlefield is matched as it
  * last existed there — a `left` entry as it was in the stint it left (rule
  * 603.10a), though it has come back and left again since; a card put into a
  * graveyard (`descended`), as it is now. `except` leaves one object out
@@ -1141,7 +1142,8 @@ export function turnHistoryCount(
     for (const entry of state.players[player]?.turnHistory?.[what] ?? []) {
       if (entry.object === except) continue;
       if (filter !== undefined) {
-        const snapshot = entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint);
+        const snapshot =
+          entry.asEntered ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
         const matched = matchesFilter(
           state,
           registry,

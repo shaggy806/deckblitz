@@ -3618,6 +3618,11 @@ export type EffectSpec =
        * tokens just made and no others, since the grant is part of making
        * them (they fold into a token stack only with ones made the same way). */
       readonly gainUntilEndOfTurn?: readonly Keyword[];
+      /** "**They gain haste**" with no duration (Chandra, Acolyte of Flame):
+       * keywords the tokens gain for as long as they last — part of making
+       * them, as `gainUntilEndOfTurn` is, but not copiable (rule 707.2), so
+       * a copy of one doesn't have them, unlike a printed keyword. */
+      readonly gainKeywords?: readonly Keyword[];
       /** "**The tokens are goaded for the rest of the game**" (Rendmaw,
        * Creaking Nest; Nettling Nuisance) — by this effect's controller,
        * whoever creates them: a token of their own must attack each combat
@@ -5726,6 +5731,8 @@ export interface EffectApi {
     exileAtEndStep?: boolean,
     /** They attack this combat if able (until end of combat). */
     attacksThisCombat?: boolean,
+    /** Keywords the new tokens gain with no end (not copiable). */
+    gainKeywords?: readonly Keyword[],
   ): void;
   /** Create `count` token(s) that are copies of the permanent `of` — see the
    * `"create-token-copy"` {@link EffectSpec}. */
@@ -8650,6 +8657,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               spec.separate === true,
               spec.exileAtEndStep === true,
               spec.attacksThisCombat === true,
+              spec.gainKeywords,
             );
         }
         return;
@@ -8672,6 +8680,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.separate === true,
         spec.exileAtEndStep === true,
         spec.attacksThisCombat === true,
+        spec.gainKeywords,
       );
       return;
     case "for-each-player": {
