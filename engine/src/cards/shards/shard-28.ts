@@ -147,6 +147,7 @@ import _poolGreenSunsZenith from "../pool/green-suns-zenith.js";
 import _poolGreenbeltGuardian from "../pool/greenbelt-guardian.js";
 import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
+import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
@@ -252,6 +253,7 @@ import _poolPaladinClass from "../pool/paladin-class.js";
 import _poolPaladinEnVec from "../pool/paladin-en-vec.js";
 import _poolParadoxEngine from "../pool/paradox-engine.js";
 import _poolPestRescuer from "../pool/pest-rescuer.js";
+import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
@@ -585,6 +587,7 @@ const shard: CardShard = {
     _poolGreenbeltGuardian,
     _poolGrendelSpawnOfKnull,
     _poolGurmagSwiftwing,
+    _poolHakbalOfTheSurgingSoul,
     _poolHapatraTheDesertFrost,
     _poolHarmonize,
     _poolHeraldOfFaith,
@@ -690,6 +693,7 @@ const shard: CardShard = {
     _poolPaladinEnVec,
     _poolParadoxEngine,
     _poolPestRescuer,
+    _poolPeterParker,
     _poolPhantomTrain,
     _poolPhyrexianMetamorph,
     _poolPillarvergePathway,

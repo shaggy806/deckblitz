@@ -16,7 +16,7 @@ None open.
 
 ## Commander gap (the current priority)
 
-**419 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**429 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
@@ -101,8 +101,7 @@ section keeps only what to do next.
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
-  one with two. Norman Osborn still waits on granting mayhem and on a graveyard-cast cost
-  reduction, Ojer Pakpatiq on granting rebound, Ninja Teen on granting sneak to graveyard cards.
+  one with two. Ojer Pakpatiq waits on granting rebound, Ninja Teen on granting sneak to graveyard cards.
   About 50 more Secrets of Strixhaven preparation cards below its threshold can be read now
   that prepare is built (`card:scaffold` drafts them).
 - **Cards manifest and cloak may have unblocked** — recheck each: `docs/card-blockers.md`,

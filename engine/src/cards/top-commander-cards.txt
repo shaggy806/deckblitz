@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3662 already implemented / 1338 missing (marks refreshed 2026-10-16)
+3666 already implemented / 1334 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3186,7 +3186,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3193  Yedora, Grave Gardener                   {4}{G}           Legendary Creature — Treefolk Druid
 [ ]  3194  Phyrexian Vindicator                     {W}{W}{W}{W}     Creature — Phyrexian Horror
 [ ]  3195  Eclipsed Realms                          {0}              Land
-[ ]  3196  Sauron, the Dark Lord                    {3}{U}{B}{R}     Legendary Creature — Avatar Horror
+[x]  3196  Sauron, the Dark Lord                    {3}{U}{B}{R}     Legendary Creature — Avatar Horror
 [x]  3197  Pick Your Poison                         {G}              Sorcery
 [x]  3198  Goro-Goro, Disciple of Ryusei            {1}{R}           Legendary Creature — Goblin Samurai
 [x]  3199  Oppression                               {1}{B}{B}        Enchantment
@@ -3739,7 +3739,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3746  Greenwarden of Murasa                    {4}{G}{G}        Creature — Elemental
 [x]  3747  Glarb, Calamity's Augur                  {B}{G}{U}        Legendary Creature — Frog Wizard Noble
 [ ]  3748  Phyresis Outbreak                        {2}{B}           Sorcery
-[ ]  3749  The Necrobloom                           {1}{W}{B}{G}     Legendary Creature — Plant
+[x]  3749  The Necrobloom                           {1}{W}{B}{G}     Legendary Creature — Plant
 [ ]  3750  Another Round                            {X}{X}{2}{W}     Sorcery
 [ ]  3751  Minds Aglow                              {U}              Sorcery
 [ ]  3752  Kor Haven                                {0}              Legendary Land
@@ -3845,7 +3845,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3852  Sarkhan's Triumph                        {2}{R}           Instant
 [ ]  3853  Smothering Abomination                   {2}{B}{B}        Creature — Eldrazi
 [x]  3854  Inherited Envelope                       {3}              Artifact
-[ ]  3855  Hakbal of the Surging Soul               {2}{G}{U}        Legendary Creature — Merfolk Scout
+[x]  3855  Hakbal of the Surging Soul               {2}{G}{U}        Legendary Creature — Merfolk Scout
 [x]  3856  Claim the Precious                       {1}{B}{B}        Sorcery
 [ ]  3857  Maddening Hex                            {1}{R}{R}        Enchantment — Aura Curse
 [ ]  3858  Illusionist's Gambit                     {2}{U}{U}        Instant
@@ -4824,7 +4824,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4831  Flamerush Rider                          {4}{R}           Creature — Human Warrior
 [x]  4832  Brainstone                               {1}              Artifact
 [x]  4833  Short Bow                                {2}              Artifact — Equipment
-[ ]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain
+[x]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain
 [x]  4835  Uchuulon                                 {3}{B}           Creature — Crab Ooze Horror
 [ ]  4836  Taigam, Master Opportunist               {1}{U}           Legendary Creature — Human Monk
 [x]  4837  Sporocyst                                {X}{X}{G}        Creature — Tyranid

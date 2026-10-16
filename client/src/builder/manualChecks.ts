@@ -2861,4 +2861,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Oteclan Landmark', 'Plains*3', 'Treasure Token*2'], gy: ['Ornithopter'] },
     }),
   ),
+  preset(
+    'Hakbal of the Surging Soul, Ezio Auditore da Firenze',
+    board({
+      you: {
+        bf: [
+          'Hakbal of the Surging Soul',
+          'Cenote Scout',
+          'Ezio Auditore da Firenze',
+          'Plains',
+          'Island',
+          'Swamp',
+          'Mountain',
+          'Forest',
+        ],
+        hand: ['Boilerbilges Ripper', 'Forest'],
+        lib: ['Hill Giant', 'Grizzly Bears'],
+      },
+      opp: { life: 13 },
+    }),
+  ),
 ]

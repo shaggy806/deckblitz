@@ -29,6 +29,7 @@ import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAtomize from "../pool/atomize.js";
+import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
@@ -460,6 +461,7 @@ const shard: CardShard = {
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAtomize,
+    _poolAuntieOolCursewretch,
     _poolAutonSoldier,
     _poolAwakenTheInferno,
     _poolAyulaQueenAmongBears,

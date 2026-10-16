@@ -349,6 +349,7 @@ import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
+import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _poolTevalArbiterOfVirtue,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
+    _poolTheNecrobloom,
     _poolTheNotaryHobbits,
     _poolTheSpotsPortal,
     _poolTheTarrasque,

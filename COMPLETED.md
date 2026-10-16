@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Eight top-500 commanders whose blockers had been built since triage**: Sauron, the Dark Lord
+  (#9), Hakbal of the Surging Soul (#40), The Necrobloom (#48), Auntie Ool, Cursewretch (#88),
+  Norman Osborn (#96), Ezio Auditore da Firenze (#102), Sméagol, Helpful Guide (#369) and Peter
+  Parker, with what the last few still lacked: `grantsToSpells` freerunning and web-slinging,
+  `grantsToGraveyard` mayhem and dredge, a cost reduction for spells cast from a zone, "lands with
+  different names", "if that player has 10 or less life", reveal-until "under your control", and
+  "each Merfolk you control explores" (rule 701.44d, one at a time in the order chosen); a craft
+  return now waits for an "as this enters" choice (2026-10-16).
 - **Explore, Map tokens, discover and craft** (`keyword:explore` rule 701.44, `effect:map-token`
   111.10s, `keyword:discover` 701.57, `keyword:craft` 702.167): explore as an effect (once, twice
   or X times, the explorer read as it last was if it left) with "whenever a creature you control

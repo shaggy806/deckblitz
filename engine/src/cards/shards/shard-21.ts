@@ -107,6 +107,7 @@ import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
+import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFarewell from "../pool/farewell.js";
 import _poolFatefulAbsence from "../pool/fateful-absence.js";
@@ -509,6 +510,7 @@ const shard: CardShard = {
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolErase,
+    _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
     _poolFarewell,
     _poolFatefulAbsence,

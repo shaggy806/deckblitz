@@ -116,6 +116,7 @@ import {
   invalidateComputedCache,
   staticConditionMet,
   spellGrantReaches,
+  castGrantReaches,
   staticReaches,
   suspendComputedCache,
   turnStatOf,
@@ -1766,25 +1767,27 @@ export class Game {
           // Freerunning (rule 702.173a) — for its freerunning cost, once an
           // Assassin or a commander of theirs dealt a player combat damage
           // this turn.
-          if (def.freerunning !== null && this.freerunningAllowed(player)) {
+          const freerunning = this.freerunningCostOf(player, card, def);
+          if (freerunning !== null && this.freerunningAllowed(player)) {
             out.push(
               ...this.castSpellActions(player, card, cardName, def, {
                 ...faceProp,
                 via: "freerunning",
-                costString: def.freerunning.cost,
+                costString: freerunning,
               }),
             );
           }
           // Web-slinging (rule 702.188a) — for its web-slinging cost, one
           // offer per tapped creature that could be returned, which the cast
           // names. Normal timing: `castSpellActions` judges it.
-          if (def.webSlinging !== null) {
+          const webSlinging = this.webSlingingCostOf(player, card, def);
+          if (webSlinging !== null) {
             const returnable = this.webSlingingReturns(player);
             if (returnable.length > 0) {
               for (const offer of this.castSpellActions(player, card, cardName, def, {
                 ...faceProp,
                 via: "web-slinging",
-                costString: def.webSlinging.cost,
+                costString: webSlinging,
               })) {
                 if (offer.kind !== "cast-spell") continue;
                 for (const returned of returnable) {
@@ -2029,7 +2032,7 @@ export class Game {
       out.push(
         ...this.castSpellActions(player, card, def.name, def, {
           via: "mayhem",
-          costString: def.mayhem?.cost ?? def.manaCost,
+          costString: this.mayhemCostOf(card) ?? def.manaCost,
         }),
       );
     }
@@ -7753,7 +7756,41 @@ export class Game {
     const object = this.state.objects[cardId];
     if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return false;
     if (object.discardedOnTurn !== this.state.turn.number) return false;
-    return this.registry.get(object.cardName).mayhem !== null;
+    // A land with mayhem has no cost to pay — it's played (rule 702.187c).
+    return this.registry.get(object.cardName).mayhem !== null || this.mayhemCostOf(cardId) !== null;
+  }
+
+  /** A graveyard card's mayhem cost (rule 702.187): its own — its mana cost
+   * when it names none (702.187c) — or one a `grantsToGraveyard` static of a
+   * permanent its owner controls gives it (Green Goblin). `null` for none. */
+  private mayhemCostOf(cardId: ObjectId): string | null {
+    const card = this.state.objects[cardId];
+    if (card === undefined) return null;
+    const def = this.registry.get(card.cardName);
+    if (def.mayhem !== null) return def.mayhem.cost ?? def.manaCost;
+    if (card.zone !== "graveyard") return null;
+    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsToGraveyard?.mayhem !== undefined)) {
+      const grant = ability.grantsToGraveyard!;
+      if (!matchesFilter(this.state, this.registry, cardId, grant.filter, { you: card.owner })) continue;
+      const cost = grant.mayhem!.cost;
+      return cost === "mana-cost" ? def.manaCost : cost;
+    }
+    return null;
+  }
+
+  /** A graveyard card's dredge N (rule 702.52): its own, or one a
+   * `grantsToGraveyard` static of a permanent its owner controls gives it
+   * (The Necrobloom's land cards). 0 for none. */
+  private dredgeOf(cardId: ObjectId): number {
+    const card = this.state.objects[cardId];
+    if (card === undefined || !this.registry.has(card.cardName)) return 0;
+    const own = this.registry.get(card.cardName).dredge;
+    if (own > 0 || card.zone !== "graveyard") return own;
+    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsToGraveyard?.dredge !== undefined)) {
+      const grant = ability.grantsToGraveyard!;
+      if (matchesFilter(this.state, this.registry, cardId, grant.filter, { you: card.owner })) return grant.dredge!;
+    }
+    return 0;
   }
 
   /** While a `playFromLibraryTop` static (Oracle of Mul Daya) is on the
@@ -9120,6 +9157,14 @@ export class Game {
         // caster, whoever the card belongs to.
         if (mod.caster === "you" && player !== source.controller) continue;
         if (mod.caster === "opponent" && player === source.controller) continue;
+        // "Spells you cast from your graveyard" (Green Goblin): where the card
+        // is cast from — where it is now, or, already on the stack, where it
+        // came from.
+        if (mod.castFrom !== undefined) {
+          const card = this.state.objects[cardId];
+          const from = card?.zone === "stack" ? card.castFrom : card?.zone;
+          if (from !== mod.castFrom) continue;
+        }
         // "The first … spell you cast each turn": any matching spell this
         // player has already cast this turn has had it.
         if (
@@ -9656,11 +9701,11 @@ export class Game {
         ? (def.harmonize?.cost ?? null)
         : // Mayhem (rule 702.187b): its cost; with none, its mana cost (702.187c).
           via === "mayhem"
-          ? (def.mayhem?.cost ?? def.manaCost)
+          ? (this.mayhemCostOf(cardId) ?? def.manaCost)
         : via === "sneak"
           ? (def.sneak?.cost ?? null)
         : via === "web-slinging"
-          ? (def.webSlinging?.cost ?? null)
+          ? this.webSlingingCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
         : // Airbend (rule 701.65a): {2} rather than its mana cost.
           via === "airbend"
           ? Game.AIRBEND_COST
@@ -9675,7 +9720,7 @@ export class Game {
               : via === "impending"
               ? (def.impending?.cost ?? null)
               : via === "freerunning"
-              ? (def.freerunning?.cost ?? null)
+              ? this.freerunningCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
             : // Face down (rules 702.37c, 702.168a): {3}, an alternative cost.
               via === "face-down"
               ? "{3}"
@@ -10002,7 +10047,7 @@ export class Game {
       // Rule 702.188a — from the hand (or a commander from the command zone),
       // returning a tapped creature the caster controls: an alternative cost,
       // so no other one goes with it (118.9a). Timing is the spell's own.
-      if (def.webSlinging === null) return `${def.name} doesn't have web-slinging`;
+      if (this.webSlingingCostOf(player, cardId, def) === null) return `${def.name} doesn't have web-slinging`;
       if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
         return `${player} does not have that card in hand`;
       }
@@ -10085,7 +10130,7 @@ export class Game {
       if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
         return `${player} does not have that card in hand`;
       }
-      if (def.freerunning === null) return `${def.name} does not have freerunning`;
+      if (this.freerunningCostOf(player, cardId, def) === null) return `${def.name} does not have freerunning`;
       if (!this.freerunningAllowed(player)) {
         return `no Assassin or commander of ${player}'s has dealt combat damage to a player this turn`;
       }
@@ -19208,6 +19253,15 @@ export class Game {
       // "Each opponent who has three or more poison counters" (Ixhel): the
       // player this effect is about (`"that-player"`), which only the
       // resolution knows.
+      // "If that player has 10 or less life" (Ezio Auditore da Firenze).
+      if (condition.kind === "life-total" && condition.who === "that-player") {
+        const that = refs.player;
+        if (that === undefined || this.state.players[that]?.hasLost !== false) return false;
+        const life = this.state.players[that].life;
+        const atMost =
+          condition.atMost === "half-starting" ? Math.floor(this.state.rules.startingLife / 2) : condition.atMost;
+        return (condition.atLeast === undefined || life >= condition.atLeast) && (atMost === undefined || life <= atMost);
+      }
       if (condition.kind === "player-counters" && condition.who === "that-player") {
         const that = refs.player;
         return (
@@ -19595,12 +19649,21 @@ export class Game {
         // The card its cost exiled, still in exile from that move (rule
         // 400.7): one stint on from the battlefield stint it was activated in.
         const card = this.state.objects[source];
-        if (card === undefined || card.zone !== "exile" || refs.source === undefined) return;
+        if (card === undefined || card.zone !== "exile" || refs.source === undefined) return false;
         const exiled = card.zoneChangeCount ?? 0;
-        if (exiled !== refs.source + 1) return;
-        this.putOntoBattlefieldByEffect({ kind: "object", object: source }, card.owner, false, false, undefined, false, true);
+        if (exiled !== refs.source + 1) return false;
+        const asked = this.putOntoBattlefieldByEffect(
+          { kind: "object", object: source },
+          card.owner,
+          false,
+          false,
+          undefined,
+          false,
+          true,
+        );
+        if (asked) return true;
         const entered = this.state.objects[source];
-        if (entered?.zone !== "battlefield") return;
+        if (entered?.zone !== "battlefield") return false;
         // "The exiled cards used to craft it" (702.167c): the permanent it
         // became, in this new stint.
         for (const object of Object.values(this.state.objects)) {
@@ -19608,6 +19671,7 @@ export class Game {
             object.exiledWith = { source, zoneChangeCount: entered.zoneChangeCount ?? 0 };
           }
         }
+        return false;
       },
       exploreReveal: (explorer) => {
         const player =
@@ -19625,6 +19689,24 @@ export class Game {
         if (object !== undefined && this.state.zones.perPlayer[object.owner]?.library[0] === card) {
           this.moveObject(card, "graveyard");
         }
+      },
+      exploreCandidates: (filter) => {
+        const out: { object: ObjectId; name: string }[] = [];
+        for (const id of [...this.state.zones.shared.battlefield]) {
+          const object = this.state.objects[id];
+          if (object === undefined || object.controller !== controller) continue;
+          if (!matchesFilter(this.state, this.registry, id, filter, { you: controller })) continue;
+          // Each token of a stack explores on its own: split them apart.
+          const split: ObjectId[] = [id];
+          while ((this.state.objects[id]?.stackCount ?? 1) > 1) split.push(this.splitOneFromStack(id));
+          for (const each of split) out.push({ object: each, name: printedCardName(this.state.objects[each]) });
+        }
+        return out;
+      },
+      onBattlefield: (object) => this.state.objects[object]?.zone === "battlefield",
+      objectName: (object) => {
+        const it = this.state.objects[object];
+        return it === undefined ? "That permanent" : printedCardName(it);
       },
       explored: (result) =>
         this.emit({
@@ -20923,7 +21005,8 @@ export class Game {
         return top;
       },
       revealUntil: (owner, spec) => this.revealUntil(owner, controller, spec),
-      placeFound: (hit, put, tapped, attacking) => this.placeFound(hit, put, tapped, attacking),
+      placeFound: (hit, put, tapped, attacking, underYourControl) =>
+        this.placeFound(hit, put, tapped, attacking, underYourControl === true ? controller : undefined),
       placeRevealed: (owner, revealed, rest, exiled) => this.placeRevealed(owner, revealed, rest, exiled),
       votesFor: (option) => {
         // The votes cast in this resolution (rule 701.38): each player's
@@ -24108,12 +24191,29 @@ export class Game {
     put: "battlefield" | "hand" | "graveyard",
     tapped: boolean,
     attacking?: ResolvedEnterAttacking,
+    under?: PlayerId,
   ): boolean {
     const object = this.state.objects[hit];
     if (object === undefined) return false;
     if (put !== "battlefield") {
       this.moveObject(hit, put);
       return false;
+    }
+    // "…under your control": the control effect that keeps it there, as any
+    // effect putting a card onto the battlefield under someone else does.
+    if (under !== undefined) {
+      return this.putOntoBattlefieldByEffect(
+        { kind: "object", object: hit },
+        under,
+        true,
+        tapped,
+        undefined,
+        false,
+        false,
+        undefined,
+        undefined,
+        attacking,
+      );
     }
     if (this.askEnterChoice(hit, object.owner)) return true;
     if (this.moveObject(hit, "battlefield", tapped ? { tapped: true } : {})) {
@@ -27120,6 +27220,33 @@ export class Game {
   }
 
   /** Whether `player` may pay a freerunning cost now (rule 702.173a). */
+  /** The cost of an alternative cost `key` that a `grantsToSpells` static
+   * gives `cardId` as `player` would cast it (Ezio's freerunning {B}{B}, Amazing
+   * Spider-Man's web-slinging {G}{W}{U}) — the first one found — or `null`. */
+  private grantedCastCost(player: PlayerId, cardId: ObjectId, key: "freerunning" | "webSlinging"): string | null {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const cost = ability.grantsToSpells?.[key];
+        if (cost !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) {
+          return cost;
+        }
+      }
+    }
+    return null;
+  }
+
+  /** Its freerunning cost (rule 702.173a): printed on `def`, or granted. */
+  private freerunningCostOf(player: PlayerId, cardId: ObjectId, def: CardDefinition): string | null {
+    return def.freerunning?.cost ?? this.grantedCastCost(player, cardId, "freerunning");
+  }
+
+  /** Its web-slinging cost (rule 702.188a): printed on `def`, or granted. */
+  private webSlingingCostOf(player: PlayerId, cardId: ObjectId, def: CardDefinition): string | null {
+    return def.webSlinging?.cost ?? this.grantedCastCost(player, cardId, "webSlinging");
+  }
+
   private freerunningAllowed(player: PlayerId): boolean {
     return this.state.players[player]?.turnHistory?.freerunning === true;
   }
@@ -30384,7 +30511,7 @@ export class Game {
             { text: "Draw a card", effect: { kind: "sequence", effects: [] } },
             ...cards.map((id) => {
               const card = this.state.objects[id];
-              const n = this.registry.get(card.cardName).dredge;
+              const n = this.dredgeOf(id);
               return {
                 text: `Dredge ${n}: mill ${n}, return ${card.cardName} to your hand`,
                 effect: { kind: "sequence", effects: [] } as EffectSpec,
@@ -30445,9 +30572,7 @@ export class Game {
     const zones = this.state.zones.perPlayer[player];
     if (zones === undefined || this.state.players[player]?.hasLost === true) return [];
     return zones.graveyard.filter((id) => {
-      const card = this.state.objects[id];
-      if (card === undefined || !this.registry.has(card.cardName)) return false;
-      const n = this.registry.get(card.cardName).dredge;
+      const n = this.dredgeOf(id);
       return n > 0 && zones.library.length >= n;
     });
   }
@@ -30487,7 +30612,7 @@ export class Game {
   private dredge(player: PlayerId, card: ObjectId): void {
     const object = this.state.objects[card];
     if (object === undefined || object.zone !== "graveyard" || object.owner !== player) return;
-    const n = this.registry.get(object.cardName).dredge;
+    const n = this.dredgeOf(card);
     if (n <= 0 || this.state.zones.perPlayer[player].library.length < n) return;
     this.millByEffect({ kind: "player", player }, n);
     if (this.state.objects[card]?.zone === "graveyard") this.moveObject(card, "hand");

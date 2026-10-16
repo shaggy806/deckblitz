@@ -605,6 +605,8 @@ function evalStaticCondition(
         );
       };
       if (condition.who === undefined || condition.who === "you") return within(you);
+      // Only a resolution knows "that player" (`Game`'s `conditionMet`).
+      if (condition.who === "that-player") return false;
       const opponents = state.turnOrder.filter((p) => p !== you && state.players[p]?.hasLost !== true);
       return condition.who === "opponent" ? opponents.some(within) : opponents.length > 0 && opponents.every(within);
     }
@@ -677,6 +679,18 @@ function evalStaticCondition(
       }
       if (condition.excludeTriggerObject === true && opts.triggerObject !== undefined) {
         except.push(opts.triggerObject);
+      }
+      if (condition.distinctNames === true) {
+        const names = new Set<string>();
+        for (const { id } of matchesWhere(
+          (id) => state.objects[id].controller === you && matchesFilter(state, registry, id, condition.filter, { you }),
+          except,
+          condition.countsSelf === true,
+        )) {
+          const object = state.objects[id];
+          if (object.faceDown === undefined) names.add(printedCardName(object));
+        }
+        return names.size >= condition.atLeast;
       }
       return reaches(
         condition.atLeast,
@@ -1228,6 +1242,35 @@ export function spellGrantReaches(
     if ((first.spell.zoneChangeCount ?? 0) !== (spell.zoneChangeCount ?? 0)) return false;
   }
   return true;
+}
+
+/**
+ * Whether `ability` — a `grantsToSpells` static of `source` — reaches
+ * `cardId` as `player` would cast it: an alternative cost it grants
+ * (freerunning, web-slinging) is chosen before the card is a spell on the
+ * stack (rule 601.2b), so the card is judged where it is, as the spell it
+ * would become. The same conditions as `spellGrantReaches`, but for "the first
+ * … each turn".
+ */
+export function castGrantReaches(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  ability: StaticAbility,
+  cardId: ObjectId,
+  player: PlayerId,
+): boolean {
+  const grant = ability.grantsToSpells;
+  const card = state.objects[cardId];
+  if (grant === undefined || card === undefined || card.kind !== "card") return false;
+  if (source.zone !== "battlefield" || hasLostAbilities(source)) return false;
+  if (state.players[source.controller]?.hasLost === true) return false;
+  if (grant.allSpells !== true && player !== source.controller) return false;
+  if (grant.castFrom !== undefined && !grant.castFrom.includes(card.zone)) return false;
+  if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) {
+    return false;
+  }
+  return grant.filter === undefined || matchesFilter(state, registry, cardId, grant.filter, { you: source.controller });
 }
 
 /** Whether `spell`, on the stack, has split second (rule 702.61): printed, or

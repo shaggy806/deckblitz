@@ -2640,6 +2640,16 @@ export type EffectSpec =
       readonly kind: "explore";
       readonly target: EffectTargetRef;
       readonly times?: EffectAmount;
+      /** "Each [filter] you control explores" (Hakbal of the Surging Soul's
+       * Merfolk): every permanent of the effect's controller matching it as
+       * this resolves — a token stack's tokens one by one — explores, one at a
+       * time, the controller choosing which goes next (rule 701.44d). `target`
+       * is ignored. */
+      readonly each?: CardFilter;
+      /** Engine-built, never authored: the explorers still to go, and the
+       * one exploring now. */
+      readonly remaining?: readonly ObjectId[];
+      readonly object?: ObjectId;
       /** Engine-built steps, never authored: the revealed card the player
        * chose to put into their graveyard, and the finished exploration. */
       readonly toGraveyard?: ObjectId;
@@ -3307,6 +3317,11 @@ export type EffectSpec =
       readonly put?: "battlefield" | "hand" | "graveyard";
       /** A card put onto the battlefield enters tapped. */
       readonly tapped?: boolean;
+      /** A card put onto the battlefield enters under the effect's
+       * controller's control rather than its owner's — Sméagol, Helpful
+       * Guide's "put that card onto the battlefield tapped **under your
+       * control**" from an opponent's library. */
+      readonly underYourControl?: boolean;
       /** …and attacking (rule 508.4) — Raph & Mikey, Troublemakers' "put
        * that card onto the battlefield tapped and attacking". See
        * {@link EnterAttacking}. */
@@ -5050,6 +5065,13 @@ export interface EffectApi {
   exploreToGraveyard(card: ObjectId): void;
   /** Announce a finished exploration (rule 701.44b). */
   explored(result: ExploreResult): void;
+  /** The permanents `filter` names that "each … explores" sends, the effect
+   * controller's, a token stack split into its tokens, each with its name. */
+  exploreCandidates(filter: CardFilter): readonly { readonly object: ObjectId; readonly name: string }[];
+  /** Whether `object` is on the battlefield. */
+  onBattlefield(object: ObjectId): boolean;
+  /** `object`'s name, as a player sees it (a choice's text). */
+  objectName(object: ObjectId): string;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -5400,6 +5422,7 @@ export interface EffectApi {
     put: "battlefield" | "hand" | "graveyard",
     tapped: boolean,
     attacking?: ResolvedEnterAttacking,
+    underYourControl?: boolean,
   ): boolean;
   /** Place what a `reveal-until` revealed that is still where it was
    * revealed — see its `rest`. */
@@ -5727,8 +5750,10 @@ export interface EffectApi {
   cascade(controller: PlayerId, sourceId: ObjectId): CascadeFound | null;
   /** Cast what cascade found, or not, and put the rest on the bottom. */
   finishCascade(finish: CascadeFinish): void;
-  /** Craft's return (rule 702.167a) — see the `craft-return` effect. */
-  craftReturn(): void;
+  /** Craft's return (rule 702.167a) — see the `craft-return` effect.
+   * `true` when it stopped first to ask an "as this enters" choice, having
+   * moved nothing — try again once that's answered. */
+  craftReturn(): boolean;
   /** Discover's exiling (rule 701.57a): until a nonland card with mana value
    * `amount` or less, or the library runs out. */
   discover(amount: number): DiscoverFound;
@@ -6502,7 +6527,13 @@ function applyRevealUntil(
     const parked = ctx.parkedCount();
     if (
       spec.put !== undefined &&
-      ctx.placeFound(hit, spec.put, spec.tapped === true, resolveEnterAttacking(spec.attacking, ctx))
+      ctx.placeFound(
+        hit,
+        spec.put,
+        spec.tapped === true,
+        resolveEnterAttacking(spec.attacking, ctx),
+        spec.underYourControl === true,
+      )
     ) {
       ctx.resumeAfterDecisions({ ...spec, progress }, parked);
       return;
@@ -8379,6 +8410,46 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.explored(spec.done);
         return;
       }
+      // "Each Merfolk creature you control explores" (rule 701.44d): the
+      // explorers fixed now, then one at a time, its controller choosing which.
+      if (spec.each !== undefined) {
+        const explorers = ctx.exploreCandidates(spec.each);
+        applyEffectSpec({ kind: "explore", target: spec.target, remaining: explorers.map((e) => e.object) }, ctx);
+        return;
+      }
+      if (spec.remaining !== undefined) {
+        const left = spec.remaining;
+        if (left.length === 0) return;
+        if (left.length === 1) {
+          applyEffectSpec({ kind: "explore", target: spec.target, object: left[0] }, ctx);
+          return;
+        }
+        const seen = new Map<string, number>();
+        applyEffectSpec(
+          {
+            kind: "modal",
+            minModes: 1,
+            maxModes: 1,
+            modes: left.map((object) => {
+              const name = ctx.objectName(object);
+              const n = (seen.get(name) ?? 0) + 1;
+              seen.set(name, n);
+              return {
+                text: `${name}${n > 1 ? ` (${n})` : ""} explores next`,
+                effect: {
+                  kind: "sequence",
+                  effects: [
+                    { kind: "explore", target: spec.target, object },
+                    { kind: "explore", target: spec.target, remaining: left.filter((id) => id !== object) },
+                  ],
+                },
+              };
+            }),
+          },
+          ctx,
+        );
+        return;
+      }
       // "Explores X times": one whole exploration after another, each choice
       // made before the next reveal.
       const times = spec.times === undefined ? 1 : amountValue(spec.times, ctx);
@@ -8389,11 +8460,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
         return;
       }
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target =
+        spec.object !== undefined
+          ? ctx.onBattlefield(spec.object)
+            ? { kind: "object" as const, object: spec.object }
+            : undefined
+          : resolveEffectTarget(spec.target, ctx);
       // One that has left — or is back as a new object — still explores as
       // it last existed (rule 701.44c), as a connive is read.
       const read =
         target ??
+        (spec.object !== undefined ? { kind: "object" as const, object: spec.object } : undefined) ??
         (typeof spec.target === "number"
           ? ctx.readTargets?.[spec.target]
           : spec.target === "source"
@@ -8404,7 +8481,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (read?.kind !== "object") return;
       const found = ctx.exploreReveal(read.object);
       if (found === null) return;
-      const done: EffectSpec = { kind: "explore", target: spec.target, done: { explorer: read.object, ...found } };
+      const done: EffectSpec = {
+        kind: "explore",
+        target: spec.target,
+        ...(spec.object !== undefined ? { object: spec.object } : {}),
+        done: { explorer: read.object, ...found },
+      };
       if (found.land) {
         applyEffectSpec(done, ctx);
         return;
@@ -8423,7 +8505,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             {
               kind: "may",
               prompt: `Put ${found.revealedName ?? "the revealed card"} into your graveyard? (Otherwise it stays on top of your library.)`,
-              effect: { kind: "explore", target: spec.target, toGraveyard: found.revealed },
+              effect: { kind: "explore", target: spec.target, toGraveyard: found.revealed! },
             },
             done,
           ],
@@ -8688,9 +8770,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     }
-    case "craft-return":
-      ctx.craftReturn();
+    case "craft-return": {
+      // An "as this enters" choice first (rule 614.12): nothing moved yet,
+      // so it runs again once that's answered.
+      const parked = ctx.parkedCount();
+      if (ctx.craftReturn()) ctx.resumeAfterDecisions(spec, parked);
       return;
+    }
     case "discover": {
       if (spec.offer !== undefined) {
         // "If the resulting spell's mana value is less than or equal to N."

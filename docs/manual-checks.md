@@ -4817,3 +4817,20 @@ graveyard in one choice
   your Treasures and the graveyard's Ornithopter together and takes exactly one; the Landmark comes
   back as Oteclan Levitator, a 1/4 flyer, and the chosen material is in exile. Picking a Treasure leaves
   the other one. Check at ~768px tall, in a 2- and a 4-player room.
+
+## Top-500 commanders: Sauron, Hakbal, Ezio and others (2026-10-16)
+
+### Hakbal of the Surging Soul, Ezio Auditore da Firenze
+
+*New player decisions* — "each Merfolk you control explores" asks which goes next (rule 701.44d);
+Ezio gives Assassin spells freerunning and, on combat damage, asks for {W}{U}{B}{R}{G}
+
+- **Setup:** Your precombat main. Your battlefield: Hakbal of the Surging Soul, Cenote Scout, Ezio
+  Auditore da Firenze and one each of Plains, Island, Swamp, Mountain and Forest; in hand Boilerbilges
+  Ripper and a Forest; your library's top cards Hill Giant, then Grizzly Bears. Bob is at 13 life.
+- **Do:** Go to combat. Pick the explore order, putting both revealed cards into your graveyard. Attack
+  with Ezio and Hakbal; put the Forest onto the battlefield for Hakbal; pay for Ezio's trigger.
+- **Check:** The order choice names Hakbal and Cenote Scout, each getting a +1/+1 counter. Hakbal's attack
+  offers the Forest (declining draws a card). Ezio's damage takes Bob to 10 or less and offers the
+  {W}{U}{B}{R}{G} payment; paying, Bob loses the game. After combat Boilerbilges Ripper offers a
+  freerunning {B}{B} cast. Check at ~768px tall, in a 2- and a 4-player room.

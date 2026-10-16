@@ -484,6 +484,11 @@ export type StaticCondition =
        * Only meaningful as a triggered ability's intervening-if. */
       readonly excludeTriggerObject?: boolean;
       readonly countsSelf?: boolean;
+      /** Count different names, not permanents — The Necrobloom's "if you
+       * control seven or more lands **with different names**": several
+       * permanents of one name count once (the ruling), and a permanent with
+       * no name (face down) not at all. */
+      readonly distinctNames?: boolean;
     }
   /**
    * A sum or maximum over matching battlefield permanents compared against a
@@ -669,11 +674,13 @@ export type StaticCondition =
    * only if you have 111 or more life" is `atLeast: 111`; "if you have at
    * most half your starting life total" is `atMost: "half-starting"`
    * (rounded down). `who` is `"you"` (default), `"opponent"` (some opponent
-   * does) or `"each-opponent"` (every opponent does).
+   * does), `"each-opponent"` (every opponent does) or `"that-player"` — the
+   * player a trigger or a `for-each-player` is about, read as it resolves
+   * (Ezio Auditore da Firenze's "if that player has 10 or less life").
    */
   | {
       readonly kind: "life-total";
-      readonly who?: "you" | "opponent" | "each-opponent";
+      readonly who?: "you" | "opponent" | "each-opponent" | "that-player";
       readonly atLeast?: number;
       readonly atMost?: number | "half-starting";
     }
@@ -1492,6 +1499,14 @@ export interface StaticAbility {
     readonly filter: CardFilter;
     readonly flashback?: { readonly cost: string | "mana-cost" };
     readonly escape?: { readonly cost: string | "mana-cost"; readonly exileCount: number };
+    /** Mayhem (rule 702.187) — Green Goblin's "each nonland card in your
+     * graveyard has mayhem. The mayhem cost is equal to its mana cost": cast
+     * from the graveyard the turn it was discarded, for this cost. A card
+     * with mayhem of its own uses its own. */
+    readonly mayhem?: { readonly cost: string | "mana-cost" };
+    /** Dredge N (rule 702.52) — The Necrobloom's "land cards in your
+     * graveyard have dredge 2". A card with dredge of its own uses its own. */
+    readonly dredge?: number;
   };
   /**
    * An alternative cost (rule 118.9) for the spells this permanent's
@@ -1593,6 +1608,15 @@ export interface StaticAbility {
      * printed one (`CardDefinition.casualty`) or another grant, each paid
      * and copying separately (702.153b). Read as the spell is cast. */
     readonly casualty?: number;
+    /** The spells have freerunning with this cost (rule 702.173) — Ezio
+     * Auditore da Firenze's "Assassin spells you cast have freerunning
+     * {B}{B}": offered beside a printed freerunning, judged against the card
+     * as it would be cast. */
+    readonly freerunning?: string;
+    /** The spells have web-slinging with this cost (rule 702.188) — Amazing
+     * Spider-Man's "each legendary spell you cast that's one or more colors
+     * has web-slinging {G}{W}{U}". */
+    readonly webSlinging?: string;
     /** Only the first spell matching `filter` its controller casts each turn
      * — Anhelo, the Painter's "**the first** instant or sorcery spell you
      * cast each turn has casualty 2". Spells cast earlier this turn count,
@@ -1835,6 +1859,10 @@ export interface StaticAbility {
      * caster, not the card's controller, so a card cast from someone else's
      * graveyard or exile counts as the caster's spell. Omitted = anyone. */
     readonly caster?: "you" | "opponent";
+    /** Only spells cast from this zone — Green Goblin's "spells you cast
+     * from your graveyard cost {2} less": the zone the card is cast from (its
+     * zone as the cost is worked out, rule 601.2f's card on its way). */
+    readonly castFrom?: ZoneType;
     /** "…cost {1} less to cast **for each target**" (Hinata, Dawn-Crowned):
      * `reduceGeneric` / `increaseGeneric` are multiplied by the number of
      * distinct players and objects the spell targets as it's cast (Hinata's

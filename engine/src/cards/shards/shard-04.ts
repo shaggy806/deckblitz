@@ -10,6 +10,7 @@ import _poolAetherHelix from "../pool/aether-helix.js";
 import _poolAjanisChosen from "../pool/ajanis-chosen.js";
 import _poolAlacrianJaguar from "../pool/alacrian-jaguar.js";
 import _poolAlelaCunningConqueror from "../pool/alela-cunning-conqueror.js";
+import _poolAmazingSpiderMan from "../pool/amazing-spider-man.js";
 import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
 import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
@@ -443,6 +444,7 @@ const shard: CardShard = {
     _poolAjanisChosen,
     _poolAlacrianJaguar,
     _poolAlelaCunningConqueror,
+    _poolAmazingSpiderMan,
     _poolAngelicChorus,
     _poolAngelsGrace,
     _poolAnheloThePainter,

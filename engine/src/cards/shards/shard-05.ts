@@ -310,6 +310,7 @@ import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
 import _poolSandstormSalvager from "../pool/sandstorm-salvager.js";
 import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
+import _poolSauronTheDarkLord from "../pool/sauron-the-dark-lord.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
@@ -755,6 +756,7 @@ const shard: CardShard = {
     _poolSamutsSprint,
     _poolSandstormSalvager,
     _poolSarkhanUnbroken,
+    _poolSauronTheDarkLord,
     _poolScabClanCharger,
     _poolScoriaElemental,
     _poolScythecatCub,

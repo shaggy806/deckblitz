@@ -1115,7 +1115,7 @@ Neither goes on the stack yet (§15, "Partial").
 | `reveal-top` | `then`, `of?: { ownerOfTarget }` | "Reveal the top card of your library. If it's a land card, put it onto the battlefield tapped. Otherwise, draw a card" (Thrasios). Reveals to every player, then applies `then` with **that card as target 0**, so a `{ kind: "target", index: 0, filter }` condition and a `put-onto-battlefield { target: 0 }` both reach it. The card doesn't move unless `then` moves it. `of: { ownerOfTarget: n }` is the top of **another** library — that of the owner of target `n`, who reveals it (Chaos Warp's "then reveals the top card of their library"); the owner is known even once the target has moved or a token has ceased to exist, and a `put-onto-battlefield` puts the card under that owner's control. |
 | `shuffle-into-library` | `target` | "The owner of target permanent shuffles it into their library" (Chaos Warp): into its **owner's** library, which is then shuffled (rule 701.24a) — even for a token, which ceases to exist there (rule 111.7), or a commander a replacement sent to the command zone. Nothing happens to one that has left the battlefield. |
 | `reveal-until-count` | `filter`, `count`, `rest: "shuffle" \| "bottom-random"` | "Reveal cards from the top of your library until you reveal **N** creature cards. Put those onto the battlefield, then shuffle the rest into your library" (Selvala's Stampede, `count: { votesFor: 0 }`): every card found enters together, under its owner's control, once each one's "as this enters" choices are made; nothing is revealed for 0; all of the library when there aren't that many. |
-| `reveal-until` | `whose?`, `filter`, `exile?`, `put?: "battlefield" \| "hand" \| "graveyard"`, `tapped?`, `attacking?` (as `create-token`'s — Raph & Mikey), `then?`, `rest: "bottom-random" \| "graveyard" \| "shuffle" \| "stay"`, `keepFound?` | A generalised cascade: reveal cards from the top of a library — the controller's, the player in target slot `whose`, with `whose: { controllerOfTarget: n }` the controller of the permanent in slot `n`, as it last existed (Transforming Flourish, after destroying it), or with `whose: "that-player"` each one a `for-each-player` names (Consuming Aberration's "each opponent reveals cards … until they reveal a land card, then puts those cards into their graveyard": `{ whose: "that-player", filter: { type: "land" }, rest: "graveyard" }`) — until one matches `filter` (an `{ amount }` compare is bound as it applies: "a nonland card with lesser mana value"). The Prismatic Bridge's "…until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order" is `{ filter: { typesAnyOf: ["creature", "planeswalker"] }, put: "battlefield", rest: "bottom-random" }`; Umbris's "target opponent exiles cards from the top of their library until they exile a land card" is `{ whose: 0, filter: { type: "land" }, exile: true, rest: "stay" }` (`exile` exiles each card face up as it goes). `then` is applied with **the card found as target 0** after `put` — "you may put that card onto the battlefield. Then shuffle" is a `then` of `{ kind: "may", effect: { kind: "put-onto-battlefield", target: 0 } }` with `rest: "shuffle"`, and the rest wait for its answer. `rest` places every revealed card still where it was revealed — the card found too, if nothing moved it, unless `keepFound` ("put each **other** card exiled this way on the bottom" — it stays in exile to be cast); with nothing matching, that's all of them. |
+| `reveal-until` | `whose?`, `filter`, `exile?`, `put?: "battlefield" \| "hand" \| "graveyard"`, `tapped?`, `underYourControl?` (Sméagol, Helpful Guide's "put that card onto the battlefield tapped under your control" from an opponent's library), `attacking?` (as `create-token`'s — Raph & Mikey), `then?`, `rest: "bottom-random" \| "graveyard" \| "shuffle" \| "stay"`, `keepFound?` | A generalised cascade: reveal cards from the top of a library — the controller's, the player in target slot `whose`, with `whose: { controllerOfTarget: n }` the controller of the permanent in slot `n`, as it last existed (Transforming Flourish, after destroying it), or with `whose: "that-player"` each one a `for-each-player` names (Consuming Aberration's "each opponent reveals cards … until they reveal a land card, then puts those cards into their graveyard": `{ whose: "that-player", filter: { type: "land" }, rest: "graveyard" }`) — until one matches `filter` (an `{ amount }` compare is bound as it applies: "a nonland card with lesser mana value"). The Prismatic Bridge's "…until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order" is `{ filter: { typesAnyOf: ["creature", "planeswalker"] }, put: "battlefield", rest: "bottom-random" }`; Umbris's "target opponent exiles cards from the top of their library until they exile a land card" is `{ whose: 0, filter: { type: "land" }, exile: true, rest: "stay" }` (`exile` exiles each card face up as it goes). `then` is applied with **the card found as target 0** after `put` — "you may put that card onto the battlefield. Then shuffle" is a `then` of `{ kind: "may", effect: { kind: "put-onto-battlefield", target: 0 } }` with `rest: "shuffle"`, and the rest wait for its answer. `rest` places every revealed card still where it was revealed — the card found too, if nothing moved it, unless `keepFound` ("put each **other** card exiled this way on the bottom" — it stays in exile to be cast); with nothing matching, that's all of them. |
 | `surveil` | `amount`, `then?` | Consider. `amount` may be live, as `scry`'s. The cards kept on top are ordered as a scry's are (rule 701.25a). |
 | `allow-cast-from-exile` | `target`, `free?`, `laterTurns?` | "Until end of turn, you may cast that card [without paying its mana cost]" — a card in exile, usually a `reveal-until`'s find (Codie). Cast only, this turn, by the effect's controller; `free` permits only the free cast. `laterTurns` is warp's instead: the card's owner, from the next turn on, for as long as it stays exiled. |
 | `choose-exiled-to-play` | `filter`, `free?` | Dauthi Voidwalker's "choose an exiled card an opponent owns with a void counter on it. You may play it this turn without paying its mana cost" (`filter: { ownedBy: "opponent", counters: { kind: "void", compare: { op: "gte", n: 1 } } }`, `free: true`): the effect's controller picks one face-up exiled card matching `filter` — not a target; asked only with more than one — and may play it this turn, a land as their land play and a spell at its normal timing; with `free`, only without paying its mana cost. |
@@ -3026,8 +3026,18 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
   nothing). Offered exactly like a printed flashback or escape (`via`); a
   card that has its own may use either, each offered and named by
   `graveyardGrant.source` (the Underworld Breach ruling). The grant ends when this permanent leaves;
-  a spell already cast with it is still exiled as it leaves the stack.
-- `grantsToSpells: { filter?, castFrom?, keywords?, triggered?, splitSecond?, cantBeCountered? }` — keywords
+  a spell already cast with it is still exiled as it leaves the stack. `mayhem: { cost }` is Green
+  Goblin's "each nonland card in your graveyard has mayhem. The mayhem cost is equal to its mana
+  cost" (`{ filter: { notTypes: ["land"] }, mayhem: { cost: "mana-cost" } }`), cast the turn it
+  was discarded; `dredge: N` is The Necrobloom's "land cards in your graveyard have dredge 2". A card
+  with its own mayhem or dredge uses its own.
+- `grantsToSpells: { filter?, castFrom?, keywords?, triggered?, splitSecond?, cantBeCountered?,
+  freerunning?, webSlinging? }` — `freerunning` / `webSlinging` (a cost) give the spells that
+  alternative cost: Ezio Auditore da Firenze's "Assassin spells you cast have freerunning {B}{B}"
+  (`{ filter: { subtype: "Assassin" }, freerunning: "{B}{B}" }`), Amazing Spider-Man's "each
+  legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}" ("one or more
+  colors" is an `anyOf` over the five) — offered as a printed one is, the card judged where it is
+  as it's cast. Keywords
   and abilities the spells you cast have on the stack (rule 113.6): "spells you
   cast have lifelink" is `{ keywords: ["lifelink"] }`; Abaddon the Despoiler's
   "during your turn, spells you cast from your hand with mana value X or less
@@ -3375,6 +3385,9 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
     opponents cast", judged against whoever is actually casting it (not the
     card's controller, so a card cast out of someone else's graveyard is the
     caster's spell). Prefer this over `applies.controlledBy` for new cards.
+  - `castFrom: ZoneType` — only spells cast from that zone: Green Goblin's
+    "spells you cast from your graveyard cost {2} less to cast" is `{ applies:
+    {}, caster: "you", castFrom: "graveyard", reduceGeneric: 2 }`.
   - `perTarget: true` — the amounts are "for each target" (Hinata,
     Dawn-Crowned): multiplied by the number of *distinct* players and objects
     the spell is cast targeting (the card's ruling — one creature named by two
@@ -3533,7 +3546,10 @@ clause (section 9):
   condition do (resolution is outside the layer fold): `excludeSelf` is "if
   you control **another** Wizard" there. `excludeTarget: i` leaves out target
   slot `i` ("a creature other than that creature") and only means anything
-  inside a `conditional` effect, where there are targets. The opposite switch,
+  inside a `conditional` effect, where there are targets. `distinctNames: true`
+  counts names, not permanents — The Necrobloom's "seven or more lands with
+  different names" (`{ filter: { type: "land" }, atLeast: 7, distinctNames:
+  true }`); a face-down permanent has no name. The opposite switch,
   `countsSelf: true`, puts a static's own permanent back into the count when the
   printed count includes it — Jetmir, Nexus of Revels: "as long as you control
   three or more creatures", Jetmir being one — and keep that `filter` to
@@ -3615,7 +3631,9 @@ clause (section 9):
   Bilbo, Birthday Celebrant's "activate only if you have 111 or more life"
   is `atLeast: 111`; "at most half your starting life total" is `atMost:
   "half-starting"` (rounded down). `who` is `"you"` (default), `"opponent"`
-  (some opponent) or `"each-opponent"` (every opponent).
+  (some opponent), `"each-opponent"` (every opponent) or `"that-player"` — the
+  player a trigger or `for-each-player` is about, in a `conditional` (Ezio
+  Auditore da Firenze's "if that player has 10 or less life").
 - `{ kind: "cards-in-exile", atLeast, filter? }` — cards in exile, every
   player's (face-down ones too; tokens aren't cards): Ketramose, the New
   Dawn's "can't attack or block unless there are seven or more cards in
