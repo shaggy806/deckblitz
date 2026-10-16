@@ -30,6 +30,7 @@ import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
+import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
@@ -484,6 +485,7 @@ const shard: CardShard = {
     _poolAtzocanSeer,
     _poolAuriokTransfixer,
     _poolAvenFisher,
+    _poolAwakenTheBloodAvatar,
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
     _poolBalothWoodcrasher,

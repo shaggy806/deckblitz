@@ -767,6 +767,7 @@ import _poolAviationPioneer from "./pool/aviation-pioneer.js";
 import _poolAvishkarRaceway from "./pool/avishkar-raceway.js";
 import _poolAwakenTheAges from "./pool/awaken-the-ages.js";
 import _poolAwakenTheBear from "./pool/awaken-the-bear.js";
+import _poolAwakenTheBloodAvatar from "./pool/awaken-the-blood-avatar.js";
 import _poolAwakenTheInferno from "./pool/awaken-the-inferno.js";
 import _poolAwakenTheWoods from "./pool/awaken-the-woods.js";
 import _poolAwakeningHall from "./pool/awakening-hall.js";
@@ -2608,6 +2609,7 @@ import _poolDaredevilFearlessFighter from "./pool/daredevil-fearless-fighter.js"
 import _poolDaredevilManWithoutFear from "./pool/daredevil-man-without-fear.js";
 import _poolDaredevilsBillyClub from "./pool/daredevils-billy-club.js";
 import _poolDarettiRocketeerEngineer from "./pool/daretti-rocketeer-engineer.js";
+import _poolDargoTheShipwrecker from "./pool/dargo-the-shipwrecker.js";
 import _poolDarigaazsAttendant from "./pool/darigaazs-attendant.js";
 import _poolDarigaazsCharm from "./pool/darigaazs-charm.js";
 import _poolDaringApprentice from "./pool/daring-apprentice.js";
@@ -3783,6 +3785,7 @@ import _poolExtractFromDarkness from "./pool/extract-from-darkness.js";
 import _poolExtractPower from "./pool/extract-power.js";
 import _poolExtravagantReplication from "./pool/extravagant-replication.js";
 import _poolExtremisElite from "./pool/extremis-elite.js";
+import _poolExtusOriqOverlord from "./pool/extus-oriq-overlord.js";
 import _poolExudeToxin from "./pool/exude-toxin.js";
 import _poolExultantCultist from "./pool/exultant-cultist.js";
 import _poolExultantSkymarcher from "./pool/exultant-skymarcher.js";
@@ -13801,6 +13804,7 @@ import _tokensAssassinTokenAyaOfAlexandria from "./tokens/assassin-token-aya-of-
 import _tokensAssassinToken from "./tokens/assassin-token.js";
 import _tokensAssemblyWorkerToken from "./tokens/assembly-worker-token.js";
 import _tokensAstartesWarriorToken from "./tokens/astartes-warrior-token.js";
+import _tokensAvatarTokenAwakenTheBloodAvatar from "./tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensAxeToken from "./tokens/axe-token.js";
 import _tokensBadgerToken from "./tokens/badger-token.js";
 import _tokensBallisticBoulderToken from "./tokens/ballistic-boulder-token.js";
@@ -14935,6 +14939,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvishkarRaceway,
   _poolAwakenTheAges,
   _poolAwakenTheBear,
+  _poolAwakenTheBloodAvatar,
   _poolAwakenTheInferno,
   _poolAwakenTheWoods,
   _poolAwakeningHall,
@@ -16776,6 +16781,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDaredevilManWithoutFear,
   _poolDaredevilsBillyClub,
   _poolDarettiRocketeerEngineer,
+  _poolDargoTheShipwrecker,
   _poolDarigaazsAttendant,
   _poolDarigaazsCharm,
   _poolDaringApprentice,
@@ -17951,6 +17957,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExtractPower,
   _poolExtravagantReplication,
   _poolExtremisElite,
+  _poolExtusOriqOverlord,
   _poolExudeToxin,
   _poolExultantCultist,
   _poolExultantSkymarcher,
@@ -27975,6 +27982,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensAssassinToken,
   _tokensAssemblyWorkerToken,
   _tokensAstartesWarriorToken,
+  _tokensAvatarTokenAwakenTheBloodAvatar,
   _tokensAxeToken,
   _tokensBadgerToken,
   _tokensBallisticBoulderToken,

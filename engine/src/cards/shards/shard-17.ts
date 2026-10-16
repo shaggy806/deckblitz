@@ -421,6 +421,7 @@ import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
 import _poolZodiacPig from "../pool/zodiac-pig.js";
 import _poolZombify from "../pool/zombify.js";
 import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
+import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
 import _tokensDarkstar from "../tokens/darkstar.js";
@@ -856,6 +857,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAngelToken33White,
+    _tokensAvatarTokenAwakenTheBloodAvatar,
     _tokensBeastToken,
     _tokensCatBeastToken,
     _tokensDarkstar,

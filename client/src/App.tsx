@@ -4585,7 +4585,10 @@ function Table({
     controls = (
       <div className="controls">
         <span>
-          {pxVerb} {pendingX.action.cardName} — choose X
+          {pxVerb} {pendingX.action.cardName} —{' '}
+          {pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.sacrifice === true
+            ? 'how many to sacrifice'
+            : 'choose X'}
         </span>
         <input
           type="number"

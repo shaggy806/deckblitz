@@ -124,6 +124,7 @@ import _poolExecute from "../pool/execute.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
+import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
@@ -548,6 +549,7 @@ const shard: CardShard = {
     _poolExpeditionMap,
     _poolExpressiveIteration,
     _poolExtinguishAllHope,
+    _poolExtusOriqOverlord,
     _poolEyeOfJace,
     _poolEzioBrashNovice,
     _poolFatefulTempest,

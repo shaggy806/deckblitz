@@ -2358,7 +2358,13 @@ export class HeuristicBotController extends AutomaticController {
     if (targets === null) return passFor(player);
     // Its largest X with the targets chosen: under Fireball's "{1} more for
     // each target beyond the first", more targets leave less for X.
-    const xValue = legal.xCost === undefined ? undefined : maxXForTargets(legal.xCost, legal.targetCount, targets);
+    // A sacrifice count (Dargo): the fewest that pay.
+    const xValue =
+      legal.xCost === undefined
+        ? undefined
+        : legal.xCost.sacrifice === true
+          ? (legal.xCost.minX ?? 0)
+          : maxXForTargets(legal.xCost, legal.targetCount, targets);
     return {
       type: "cast-spell",
       player,

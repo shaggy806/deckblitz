@@ -2882,6 +2882,15 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Dargo, the Shipwrecker',
+    board({
+      you: {
+        bf: ['Mountain*3', 'Grizzly Bears', 'Llanowar Elves', 'Ornithopter'],
+        hand: ['Dargo, the Shipwrecker'],
+      },
+    }),
+  ),
+  preset(
     'Ardenn, Intrepid Archaeologist',
     board({
       you: {

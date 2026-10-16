@@ -885,6 +885,8 @@ export type LegalAction =
       readonly xCost?: {
         readonly maxX: number;
         readonly minX?: number;
+        /** See `XCostOffer.sacrifice`. */
+        readonly sacrifice?: true;
         readonly maxXByTargetCount?: readonly number[];
         readonly minXByTargetCount?: readonly number[];
       };

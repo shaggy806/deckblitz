@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-433 already implemented / 67 missing
+435 already implemented / 65 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -377,7 +377,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  371  Ultima, Origin of Oblivion                      7742 decks  {5}              Legendary Creature — God
 [x]  372  Yuma, Proud Protector                           7725 decks  {5}{R}{G}{W}     Legendary Creature — Human Ranger
 [ ]  373  Lathiel, the Bounteous Dawn                     7718 decks  {2}{G}{W}        Legendary Creature — Unicorn
-[ ]  374  Extus, Oriq Overlord                            7704 decks  {1}{W}{B}{B}     Legendary Creature — Human Warlock // Sorcery
+[x]  374  Extus, Oriq Overlord                            7704 decks  {1}{W}{B}{B}     Legendary Creature — Human Warlock // Sorcery
 [x]  375  Tifa, Martial Artist                            7684 decks  {1}{R}{G}{W}     Legendary Creature — Human Monk
 [x]  376  Kardur, Doomscourge                             7660 decks  {2}{B}{R}        Legendary Creature — Demon Berserker
 [ ]  377  Nethroi, Apex of Death                          7620 decks  {2}{W}{B}{G}     Legendary Creature — Cat Nightmare Beast
@@ -408,7 +408,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  402  Millicent, Restless Revenant                    7213 decks  {5}{W}{U}        Legendary Creature — Spirit Soldier
 [x]  403  Mabel, Heir to Cragflame                        7206 decks  {1}{R}{W}        Legendary Creature — Mouse Soldier
 [x]  404  Grolnok, the Omnivore                           7204 decks  {2}{G}{U}        Legendary Creature — Frog
-[ ]  405  Dargo, the Shipwrecker                          7192 decks  {6}{R}           Legendary Creature — Giant Pirate
+[x]  405  Dargo, the Shipwrecker                          7192 decks  {6}{R}           Legendary Creature — Giant Pirate
 [ ]  406  Winter, Cynical Opportunist                     7190 decks  {2}{B}{G}        Legendary Creature — Human Warlock
 [ ]  407  Jasmine Boreal of the Seven                     7179 decks  {1}{G}{W}        Legendary Creature — Human Druid
 [x]  408  Jhoira, Weatherlight Captain                    7178 decks  {2}{U}{R}        Legendary Creature — Human Artificer

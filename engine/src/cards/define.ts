@@ -2158,11 +2158,22 @@ export interface CardDefinition {
    * the stack — not on the action — exactly as an ability's sacrifice of
    * several (`AbilityCost.sacrifice`'s `count`).
    *
+   * `sacrificeReduces` (with `sacrificeCount: "x"`): "you **may** sacrifice
+   * **any number** of creatures. This spell costs {2} less to cast for each
+   * creature sacrificed this way" (Awaken the Blood Avatar, Dargo, the
+   * Shipwrecker) — the count is announced as X as the spell is cast (rule
+   * 601.2b), each one taking this much generic off the total cost (601.2f,
+   * never its colored part — the rulings), and they're sacrificed as the
+   * cost is paid (601.2h). X here is only that count: nothing else reads
+   * it, and the spell's mana value is its own. Any number may be
+   * sacrificed, even past what reduces the cost further (the rulings).
+   *
    * More than one may be set, and all of them are paid.
    */
   readonly additionalCost: {
     readonly sacrifice?: CardFilter;
     readonly sacrificeCount?: number | "x";
+    readonly sacrificeReduces?: number;
     readonly discard?: number;
     readonly payLife?: number;
     readonly payLifeX?: boolean;
@@ -2983,6 +2994,7 @@ interface CardDraft {
   additionalCost?: {
     readonly sacrifice?: CardFilter;
     readonly sacrificeCount?: number | "x";
+    readonly sacrificeReduces?: number;
     readonly discard?: number;
     readonly payLife?: number;
     readonly payLifeX?: boolean;

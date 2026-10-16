@@ -2918,6 +2918,13 @@ export class Game {
       const xFilter =
         def.castModal === null && this.effectiveTargetSpecs(def, undefined, kicked, overload).some(targetSpecReadsX);
       let perX: readonly number[] | null = null;
+      // A sacrifice of any number that lowers the cost (Dargo): how many may
+      // be announced, and the filter.
+      const sacrificeReducesFilter =
+        def.additionalCost?.sacrificeReduces !== undefined && def.additionalCost.sacrificeCount === "x"
+          ? def.additionalCost.sacrifice
+          : undefined;
+      let sacrificeRange: { readonly least: number; readonly most: number } | null = null;
       if (this.withFace(card, face ?? 0, () => this.costDependsOnTargets(player, card, def, variantCost))) {
         const bounds = this.withFace(card, face ?? 0, () =>
           this.targetCountBoundsFor(def, player, card, kicked, overload),
@@ -2950,6 +2957,21 @@ export class Game {
         for (let x = 0; x <= most; x += 1) if (castsWith(0, undefined, x)) xs.push(x);
         if (xs.length === 0) continue;
         perX = xs;
+        manaAffordable = true;
+      } else if (sacrificeReducesFilter !== undefined) {
+        // "Sacrifice any number …; {2} less for each" (Dargo): castable if
+        // some number sacrificed pays the rest — the fewest, and the most,
+        // that do (each one more is cheaper in mana, and one fewer to tap).
+        let n = 0;
+        for (const id of this.costSacrificeCandidates(player, [{ filter: sacrificeReducesFilter }], undefined)) {
+          n += this.state.objects[id]?.stackCount ?? 1;
+        }
+        let least = 0;
+        while (least <= n && !castableAt(0, least).castable) least += 1;
+        if (least > n) continue;
+        let most = n;
+        while (most > least && !castableAt(0, most).castable) most -= 1;
+        sacrificeRange = { least, most };
         manaAffordable = true;
       } else {
         const at = castableAt(0);
@@ -3047,7 +3069,9 @@ export class Game {
       const sacrificeXFilter =
         def.additionalCost?.sacrificeCount === "x" ? def.additionalCost.sacrifice : undefined;
       const sacrificeX =
-        xPlan === null && sacrificeXFilter !== undefined
+        sacrificeRange !== null
+          ? sacrificeRange.most
+          : xPlan === null && sacrificeXFilter !== undefined
           ? (() => {
               const candidates = this.costSacrificeCandidates(player, [{ filter: sacrificeXFilter }], undefined);
               const plan = this.payMana(
@@ -3302,7 +3326,13 @@ export class Game {
                           maxXByTargetCount: xGroup.maxXByTargetCount,
                           minXByTargetCount: xGroup.minXByTargetCount,
                         }
-                      : { maxX: sacrificeX },
+                      : sacrificeRange !== null
+                        ? {
+                            maxX: sacrificeX,
+                            ...(sacrificeRange.least > 0 ? { minX: sacrificeRange.least } : {}),
+                            sacrifice: true,
+                          }
+                        : { maxX: sacrificeX },
                 }
               : {}),
         ...(prototype === true && def.prototype !== null
@@ -8842,6 +8872,12 @@ export class Game {
               this.targetsEarnReduction(def, player, cardId, slot),
             );
       if (earned) reduction += def.targetCostReduction.reduceGeneric;
+    }
+    // "{2} less for each creature sacrificed this way" (Dargo): X is how
+    // many, announced as it's cast (rule 601.2b).
+    const perSacrificed = def.additionalCost?.sacrificeReduces;
+    if (perSacrificed !== undefined && def.additionalCost?.sacrificeCount === "x") {
+      reduction += perSacrificed * Math.max(0, Math.floor(xValue));
     }
     return reduceManaCost(
       {
@@ -24944,6 +24980,11 @@ export class Game {
       return this.state.players[player]?.counters[amount.playerCounters] ?? 0;
     }
     if ("speed" in amount) return speedOf(this.state, player);
+    if ("turnHistory" in amount) {
+      return (
+        (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, [player], amount.turnHistory, amount.filter, player)
+      );
+    }
     if ("turnStat" in amount) {
       return this.state.turnOrder
         .filter((p) => amount.who === "any-player" || (amount.who === "you") === (p === player))

@@ -12,7 +12,7 @@
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectSpec, SpellResolver } from "./effects.js";
 import type { GameEvent } from "./events.js";
-import type { GameState, PlayerCounterKind, ZoneType } from "./state.js";
+import type { GameState, PlayerCounterKind, TurnHistoryKind, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
 import type { TargetSpec } from "./target.js";
@@ -523,6 +523,12 @@ export type CostReductionAmount =
    * turnStat: "life-lost", who: "opponent" }`; Heliod, the Warped Eclipse's
    * "for each card your opponents have drawn this turn" `"cards-drawn"`. */
   | { readonly turnStat: TurnStat; readonly who: "you" | "opponent" | "any-player" }
+  /** `times` per thing in one of its controller's this-turn lists matching
+   * `filter` — Dargo, the Shipwrecker's "{2} less to cast for each other
+   * artifact or creature you've sacrificed this turn" is `{ turnHistory:
+   * "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] }, times: 2
+   * }`. See `TurnHistory`. */
+  | { readonly turnHistory: TurnHistoryKind; readonly filter?: CardFilter; readonly times?: number }
   /** A sum or maximum over permanents — Ghalta, Primal Hunger's "costs {X}
    * less to cast, where X is the **total power** of creatures you control".
    * Clamped at 0. See `AggregateSpec`. */

@@ -4835,6 +4835,20 @@ Ezio gives Assassin spells freerunning and, on combat damage, asks for {W}{U}{B}
   {W}{U}{B}{R}{G} payment; paying, Bob loses the game. After combat Boilerbilges Ripper offers a
   freerunning {B}{B} cast. Check at ~768px tall, in a 2- and a 4-player room.
 
+## Sacrifice any number as a cost (2026-10-16)
+
+### Dargo, the Shipwrecker
+
+*New player decision* — "you may sacrifice any number of artifacts and/or creatures", how many
+announced as the spell is cast, each taking {2} off
+
+- **Setup:** Your precombat main. Your battlefield: three Mountains, Grizzly Bears, Llanowar Elves
+  and Ornithopter; in hand Dargo, the Shipwrecker.
+- **Do:** Cast Dargo. Try 1, then 2, then confirm 2; choose Grizzly Bears and Ornithopter.
+- **Check:** The prompt says "how many to sacrifice" (not "choose X"), from 2 to 3. With 2, the cost
+  is {2}{R}, the sacrifice choice asks for exactly two, and Dargo resolves; the chosen two are in your
+  graveyard. Check at ~768px tall, in a 2- and a 4-player room.
+
 ## Attach extensions (2026-10-16)
 
 ### Ardenn, Intrepid Archaeologist

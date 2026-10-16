@@ -105,7 +105,13 @@ function xValueOf(
   legal: CastSpellLegal,
   targets: readonly (TargetRef | null)[],
 ): { xValue?: number; delve?: ObjectId[] } {
-  const xValue = legal.xCost !== undefined ? maxXForTargets(legal.xCost, legal.targetCount, targets) : undefined;
+  // A sacrifice count (Dargo): the fewest that pay.
+  const xValue =
+    legal.xCost === undefined
+      ? undefined
+      : legal.xCost.sacrifice === true
+        ? (legal.xCost.minX ?? 0)
+        : maxXForTargets(legal.xCost, legal.targetCount, targets);
   // Delve as much as the cost at that X allows (`delvePicks`).
   const delve = legal.delve === undefined ? undefined : delvePicks(legal.delve, xValue ?? 0, "most");
   return { ...(xValue !== undefined ? { xValue } : {}), ...(delve !== undefined ? { delve } : {}) };

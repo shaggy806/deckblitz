@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Sacrifice any number as a cost that lowers it** (`cost:sacrifice-multiple`): "you may
+  sacrifice any number of … This spell costs {2} less to cast for each" — the count announced as
+  the spell is cast (`additionalCost.sacrificeReduces`, rule 601.2b), the offer's range the fewest
+  to the most that pay, the client asking "how many to sacrifice" and the bots taking the fewest;
+  and a cost reduction per entry in a this-turn list (`{ turnHistory, times }`). Dargo, the
+  Shipwrecker (#405) and Extus, Oriq Overlord // Awaken the Blood Avatar (#374) (2026-10-16).
 - **Attach extensions, part one** (`effect:attach-extensions`): attaching any number of chosen
   Auras and Equipment (`attach`'s `choose`, `upTo`) to a target permanent or player (the
   `permanent-or-player` slot; a Curse moves between players), and cards put onto the battlefield

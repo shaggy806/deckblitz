@@ -188,6 +188,10 @@ export function fitTargetCount(
 export interface XCostOffer {
   readonly maxX: number;
   readonly minX?: number;
+  /** X is how many permanents to sacrifice, each taking some of the cost
+   * off (`additionalCost.sacrificeReduces` — Dargo): a driver asks "how
+   * many", and the least that pays is the cheapest in permanents. */
+  readonly sacrifice?: true;
   readonly maxXByTargetCount?: readonly number[];
   readonly minXByTargetCount?: readonly number[];
 }

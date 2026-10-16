@@ -10,7 +10,8 @@
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
-import { ScriptedController } from "../controller.js";
+import { EvalBotController } from "../bot/eval-bot.js";
+import { HeuristicBotController, ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -384,5 +385,113 @@ describe("a spell's sacrifice of several", () => {
     expect(zone(game, granter)).toBe("battlefield");
     game.advanceUntil(quiet);
     expect(zone(game, giant)).toBe("battlefield");
+  });
+});
+
+describe("a sacrifice of any number that lowers the cost", () => {
+  type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
+  const castOffers = (game: Game, card: ObjectId): CastOffer[] =>
+    game.legalActions(A).filter((a): a is CastOffer => a.kind === "cast-spell" && a.card === card);
+
+  it("Dargo: the fewest and most creatures that pay, each {2} off the generic part", () => {
+    const game = setUp();
+    for (let i = 0; i < 3; i += 1) spawn(game, "Mountain");
+    const fodder = [spawn(game, "Grizzly Bears"), spawn(game, "Llanowar Elves"), spawn(game, "Ornithopter")];
+    const dargo = game.debugSpawn("Dargo, the Shipwrecker", A, "hand");
+    const [cast] = castOffers(game, dargo);
+    // {6}{R} with three lands: two sacrificed leave {2}{R}; three leave {R}.
+    expect(cast?.xCost).toEqual({ maxX: 3, minX: 2, sacrifice: true });
+    expect(() => game.dispatch({ type: "cast-spell", player: A, card: dargo, xValue: 1, targets: [] })).toThrow(
+      /cannot pay/,
+    );
+    game.dispatch({ type: "cast-spell", player: A, card: dargo, xValue: 2, targets: [] });
+    expect(sacrificeOffer(game)?.count).toBe(2);
+    game.dispatch({ type: "sacrifice", player: A, permanents: [fodder[0], fodder[2]] });
+    game.advanceUntil(quiet);
+    expect(zone(game, dargo)).toBe("battlefield");
+    expect(zone(game, fodder[1])).toBe("battlefield");
+    expect(zone(game, fodder[0])).toBe("graveyard");
+  });
+
+  it("Dargo: {2} less for each artifact or creature sacrificed earlier this turn", () => {
+    const game = setUp();
+    spawn(game, "Swamp");
+    spawn(game, "Mountain");
+    spawn(game, "Mountain");
+    const earlier = [spawn(game, "Grizzly Bears"), spawn(game, "Ornithopter"), spawn(game, "Hill Giant")];
+    const awaken = game.debugSpawn("Extus, Oriq Overlord", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card: awaken, face: 1, xValue: 3, targets: [] });
+    if (game.state.awaiting?.kind === "sacrifice") game.dispatch({ type: "sacrifice", player: A, permanents: earlier });
+    game.advanceUntil(quiet);
+    expect(earlier.map((id) => zone(game, id))).toEqual(["graveyard", "graveyard", "graveyard"]);
+    const dargo = game.debugSpawn("Dargo, the Shipwrecker", A, "hand");
+    const [cast] = castOffers(game, dargo);
+    // Three sacrificed earlier: {R} with nothing sacrificed now — or the
+    // Avatar too, past what lowers it further (the rulings).
+    expect(cast?.xCost).toEqual({ maxX: 1, sacrifice: true });
+    game.dispatch({ type: "cast-spell", player: A, card: dargo, xValue: 0, targets: [] });
+    game.advanceUntil(quiet);
+    expect(zone(game, dargo)).toBe("battlefield");
+  });
+
+  it("Awaken the Blood Avatar: sacrificed as cast; each opponent sacrifices a creature; the Avatar", () => {
+    const game = setUp();
+    spawn(game, "Swamp");
+    spawn(game, "Mountain");
+    const mine = [spawn(game, "Grizzly Bears"), spawn(game, "Hill Giant"), spawn(game, "Llanowar Elves")];
+    const theirs = spawn(game, "Serra Angel", B);
+    const card = game.debugSpawn("Extus, Oriq Overlord", A, "hand");
+    const back = castOffers(game, card).find((o) => o.face === 1);
+    // {6}{B}{R}: three creatures take all six generic off.
+    expect(back?.xCost).toEqual({ maxX: 3, minX: 3, sacrifice: true });
+    game.dispatch({ type: "cast-spell", player: A, card, face: 1, xValue: 3, targets: [] });
+    // All three of three: nothing to choose.
+    if (game.state.awaiting?.kind === "sacrifice") game.dispatch({ type: "sacrifice", player: A, permanents: mine });
+    game.advanceUntil(quiet);
+    expect(mine.map((id) => zone(game, id))).toEqual(["graveyard", "graveyard", "graveyard"]);
+    expect(zone(game, theirs)).toBe("graveyard");
+    expect(named(game, "Avatar Token (Awaken the Blood Avatar)")).toHaveLength(1);
+  });
+  it("v1 casts Dargo sacrificing only as many as it takes", () => {
+    const game = setUp();
+    for (let i = 0; i < 3; i += 1) spawn(game, "Mountain");
+    for (const creature of ["Grizzly Bears", "Llanowar Elves", "Ornithopter"]) spawn(game, creature);
+    const dargo = game.debugSpawn("Dargo, the Shipwrecker", A, "hand");
+    const bot = new HeuristicBotController(A, game.registry);
+    const action = bot.act({ state: game.state, player: A, legalActions: () => game.legalActions(A) });
+    expect(action).toMatchObject({ type: "cast-spell", card: dargo, xValue: 2 });
+  });
+
+  it("v2 weighs Dargo only at the fewest sacrifices that pay", () => {
+    const game = setUp();
+    for (let i = 0; i < 3; i += 1) spawn(game, "Mountain");
+    for (const creature of ["Grizzly Bears", "Llanowar Elves", "Ornithopter"]) spawn(game, creature);
+    const dargo = game.debugSpawn("Dargo, the Shipwrecker", A, "hand");
+    const tried: number[] = [];
+    const bot = new EvalBotController(A, game.registry, {
+      maxSimulations: 8,
+      trace: (action) => {
+        if (action.type === "cast-spell" && action.card === dargo) tried.push(action.xValue ?? 0);
+      },
+    });
+    bot.act({ state: game.state, player: A, legalActions: () => game.legalActions(A) });
+    expect(tried).toEqual([2]);
+  });
+
+  it("Extus: magecraft returns target nonlegendary creature card", () => {
+    const game = setUp();
+    spawn(game, "Mountain");
+    spawn(game, "Extus, Oriq Overlord");
+    const bears = game.debugSpawn("Grizzly Bears", A, "graveyard");
+    game.debugSpawn("Isamaru, Hound of Konda", A, "graveyard");
+    const shock = game.debugSpawn("Shock", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card: shock, targets: [{ kind: "player", player: B }] });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-targets" || quiet(s));
+    const awaiting = game.state.awaiting;
+    if (awaiting?.kind === "choose-targets") {
+      game.dispatch({ type: "choose-targets", player: A, targets: [{ kind: "object", object: bears }] });
+    }
+    game.advanceUntil(quiet);
+    expect(zone(game, bears)).toBe("hand");
   });
 });
