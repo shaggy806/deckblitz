@@ -7014,6 +7014,90 @@
   "static:look-at-top-card-conditional": {
    "family": "static:look-at-top-card-any-time",
    "example": "'You may look at the top card of your library any time' gated on a condition (a Case's solved designation, a Class level) — looksAtOwnLibraryTop is an unconditional card-level flag (Case of the Locked Hothouse)."
+  },
+  "effect:surveil-kept-on-top-count": {
+   "family": "effect:this-way-results",
+   "example": "An EffectAmount for the number of cards a surveil (or scry) just kept on top of the library — Starving Revenant's 'for each card you put on top of your library, you draw a card and you lose 3 life' (looked minus movedAway of the scried event)."
+  },
+  "cost:exile-permanents-total-mana-value-x": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "An activation cost exiling one or more other permanents you control matching a filter, whose total mana value is the ability's X — Fabrication Foundry's 'Exile one or more other artifacts you control with total mana value X: return target artifact card with mana value X or less'."
+  },
+  "effect:target-player-exiles-from-hand": {
+   "family": "effect:choices-by-other-players",
+   "example": "A targeted player exiles a card of their choice from their own hand (Skullcap Snail: \"target opponent exiles a card from their hand\") — a choose-from-zone over the target player's hand, asked of them, the card exiled unlinked."
+  },
+  "replacement:turn-exile-if-dies-filter": {
+   "family": "replacement:exile-instead",
+   "example": "A resolving spell installs a would-die exile-instead replacement over a filter for the rest of the turn, read live so creatures that enter or change control later are covered (Malicious Eclipse: \"If a creature an opponent controls would die this turn, exile it instead\")."
+  },
+  "cost:cost-reduction-sum": {
+   "family": "cost:cost-modification-extensions",
+   "example": "A spell's cost reduction that adds two counts — permanents on the battlefield plus cards in a graveyard ('{1} less for each Cave you control and each Cave card in your graveyard' — Gargantuan Leech); CostReductionAmount has no sum."
+  },
+  "static:look-at-top-card-granted": {
+   "family": "static:look-at-top-card-any-time",
+   "example": "Grant \"you may look at the top card of your library any time\" to another permanent (Glowcap Lantern's equipped creature): looksAtOwnLibraryTop is read only off a permanent's own definition."
+  },
+  "effect:opponents-controlling-count": {
+   "family": "effect:amount-new-variants",
+   "example": "An EffectAmount: the number of opponents (or players) who control a permanent matching a filter — Journey On's \"one plus the number of opponents who control an artifact\"."
+  },
+  "effect:explore-each": {
+   "family": "keyword:explore",
+   "example": "\"Each [creature] explores\" (rule 701.44d): every matching permanent explores in one resolution, the controller choosing the order (APNAP across controllers) — Hakbal of the Surging Soul."
+  },
+  "replacement:explore-replacement": {
+   "family": "keyword:explore",
+   "example": "Replace an exploration: \"if a creature you control would explore, instead …\" — scry 1 first (Twists and Turns), explore twice (Topography Tracker); each copy applies once more (the rulings)."
+  },
+  "stat:cast-using-mana-from-this-source": {
+   "family": "stat:mana-spent-to-cast",
+   "example": "A cast trigger on a permanent keyed to mana that permanent itself produced ('whenever you cast a permanent spell using mana produced by Tecutlan'): record the producing object on each ManaUnit and let a cast-spell trigger filter on 'mana from this source was spent', firing once per spell and only while the source is on the battlefield."
+  },
+  "effect:discover-by-other-player": {
+   "family": "keyword:discover",
+   "example": "Discover performed by a player other than the effect's controller ('that player discovers X' — Zoyowa's Justice): exile from that player's library, their free-cast-or-hand choice, their discovers triggers."
+  },
+  "static:keywords-from-exiled-with-source": {
+   "family": "keyword:craft",
+   "example": "A permanent has a keyword as long as a card exiled with it (one used to craft it, rule 702.167c) has that keyword — Wretched Bonemass's flying, first strike, … protection, reach, trample and vigilance."
+  },
+  "effect:prohibit-abilities-while-tapped": {
+   "family": "effect:duration-extensions",
+   "example": "\"Tap target permanent. Its activated abilities can't be activated for as long as it remains tapped\" (Braided Net): a prohibit on one permanent that ends when it untaps (or leaves), not at end of turn."
+  },
+  "replacement:as-enters-choose-card-type-of-exiled": {
+   "family": "keyword:craft",
+   "example": "As a crafted permanent enters, choose a card type shared among the exiled cards used to craft it, readable by its other abilities (Apex Observatory)."
+  },
+  "effect:next-spell-of-type-free-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "\"The next spell you cast this turn of the chosen type can be cast without paying its mana cost\" (Apex Observatory): a one-use free-cast permission for the controller, lasting this turn."
+  },
+  "effect:attached-becomes-copy-of-chosen-exiled": {
+   "family": "effect:become-copy",
+   "example": "As an Equipment becomes attached, choose an exiled creature card used to craft it; the equipped creature is a copy of the last chosen card (Dinosaur Headdress)."
+  },
+  "condition:filter-double-faced": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "A CardFilter clause for double-faced cards and permanents — Tetzin, Gnome Champion's \"another double-faced artifact you control enters\", The Golden-Gear Colossus's \"target double-faced artifact you control\"."
+  },
+  "effect:choose-per-player-destroy-rest": {
+   "family": "effect:player-scope-extensions",
+   "example": "For each player, the effect's controller chooses a creature matching a filter that player controls, then destroys all creatures except those chosen (Unstable Glyphbridge; must choose one if able, the ruling)."
+  },
+  "effect:player-cant-attack-you-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "\"They can't attack you or planeswalkers you control this turn\" (Sandswirl Wanderglyph, on an opponent casting a spell during their turn): a player-level attack prohibition for the rest of the turn, lasting though the source leaves."
+  },
+  "static:attacked-you-cant-cast-spells": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "\"Each opponent who attacked you or a planeswalker you control this turn can't cast spells\" (Sandswirl Wanderglyph): a static prohibition on players who attacked its controller this turn."
+  },
+  "trigger:exiled-while-crafting": {
+   "family": "keyword:craft",
+   "example": "\"When this creature is exiled from the battlefield while you're activating a craft ability\" (Market Gnome): a leaves-battlefield-to-exile trigger limited to exiles made while its controller activates a craft ability (as a material, or by a mana ability paying for it)."
   }
  }
 }

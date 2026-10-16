@@ -76,6 +76,7 @@ import _poolCloudSpirit from "../pool/cloud-spirit.js";
 import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
+import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
@@ -214,6 +215,7 @@ import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
+import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
@@ -300,6 +302,7 @@ import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
 import _poolPlummet from "../pool/plummet.js";
+import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
 import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
 import _poolPrizedStatue from "../pool/prized-statue.js";
@@ -345,6 +348,7 @@ import _poolScreamPuff from "../pool/scream-puff.js";
 import _poolScreechingDrake from "../pool/screeching-drake.js";
 import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
+import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSerpentsPass from "../pool/serpents-pass.js";
 import _poolSerraPaladin from "../pool/serra-paladin.js";
@@ -549,6 +553,7 @@ const shard: CardShard = {
     _poolCloutOfTheDominus,
     _poolCoastalPeak,
     _poolColorstormStallion,
+    _poolConfoundingRiddle,
     _poolConsumingSinkhole,
     _poolContractKilling,
     _poolCoralSword,
@@ -687,6 +692,7 @@ const shard: CardShard = {
     _poolKelsienThePlague,
     _poolKhenraSpellspear,
     _poolKillerWhale,
+    _poolKinjallisDawnrunner,
     _poolKinsbaileAspirant,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
@@ -773,6 +779,7 @@ const shard: CardShard = {
     _poolPlagueMyr,
     _poolPlayfulShove,
     _poolPlummet,
+    _poolPoeticIngenuity,
     _poolPoisonersApprentice,
     _poolPolyraptor,
     _poolPrizedStatue,
@@ -818,6 +825,7 @@ const shard: CardShard = {
     _poolScreechingDrake,
     _poolScuttlingDoomEngine,
     _poolSecludedSteppe,
+    _poolSeekerOfSunlight,
     _poolSelesnyaSanctuary,
     _poolSerpentsPass,
     _poolSerraPaladin,

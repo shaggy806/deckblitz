@@ -138,6 +138,7 @@ import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
+import _poolGetLost from "../pool/get-lost.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
 import _poolGhirapurOsprey from "../pool/ghirapur-osprey.js";
 import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
@@ -181,6 +182,7 @@ import _poolHovermyr from "../pool/hovermyr.js";
 import _poolHullBreach from "../pool/hull-breach.js";
 import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
+import _poolHuntersBlowgun from "../pool/hunters-blowgun.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
@@ -200,6 +202,7 @@ import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
 import _poolJinSakaiGhostOfTsushima from "../pool/jin-sakai-ghost-of-tsushima.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
+import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
@@ -366,6 +369,7 @@ import _poolSpringsageRitual from "../pool/springsage-ritual.js";
 import _poolSquallDrifter from "../pool/squall-drifter.js";
 import _poolStaffOfNin from "../pool/staff-of-nin.js";
 import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
+import _poolStalactiteStalker from "../pool/stalactite-stalker.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
 import _poolStarseerMentor from "../pool/starseer-mentor.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
@@ -608,6 +612,7 @@ const shard: CardShard = {
     _poolGaiusVanBaelsar,
     _poolGarruksGorehorn,
     _poolGearbaneOrangutan,
+    _poolGetLost,
     _poolGethsGrimoire,
     _poolGhirapurOsprey,
     _poolGhostlyDancers,
@@ -651,6 +656,7 @@ const shard: CardShard = {
     _poolHullBreach,
     _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
+    _poolHuntersBlowgun,
     _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
@@ -670,6 +676,7 @@ const shard: CardShard = {
     _poolJinSakaiGhostOfTsushima,
     _poolJusticiarsPortal,
     _poolKangeesLieutenant,
+    _poolKaslemsStonetree,
     _poolKedissEmberclawFamiliar,
     _poolKetriaCrystal,
     _poolKhalniGarden,
@@ -836,6 +843,7 @@ const shard: CardShard = {
     _poolSquallDrifter,
     _poolStaffOfNin,
     _poolStalactiteDagger,
+    _poolStalactiteStalker,
     _poolStarryEyedSkyrider,
     _poolStarseerMentor,
     _poolSteelshapersGift,

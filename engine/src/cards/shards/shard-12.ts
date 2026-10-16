@@ -41,6 +41,7 @@ import _poolBeholdTheMultiverse from "../pool/behold-the-multiverse.js";
 import _poolBiowasteBlob from "../pool/biowaste-blob.js";
 import _poolBitterblossom from "../pool/bitterblossom.js";
 import _poolBituminousBlast from "../pool/bituminous-blast.js";
+import _poolBladewheelChariot from "../pool/bladewheel-chariot.js";
 import _poolBlazingCrescendo from "../pool/blazing-crescendo.js";
 import _poolBlightedShaman from "../pool/blighted-shaman.js";
 import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
@@ -144,6 +145,7 @@ import _poolFrolickingFamiliar from "../pool/frolicking-familiar.js";
 import _poolGalionElvenkingsButler from "../pool/galion-elvenkings-butler.js";
 import _poolGarrukWildspeaker from "../pool/garruk-wildspeaker.js";
 import _poolGatecreeperVine from "../pool/gatecreeper-vine.js";
+import _poolGeologicalAppraiser from "../pool/geological-appraiser.js";
 import _poolGeralfsMindcrusher from "../pool/geralfs-mindcrusher.js";
 import _poolGhirapurAetherGrid from "../pool/ghirapur-aether-grid.js";
 import _poolGhorClanBloodscale from "../pool/ghor-clan-bloodscale.js";
@@ -255,6 +257,7 @@ import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js"
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
+import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
@@ -407,6 +410,7 @@ import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
+import _poolWaterwindScout from "../pool/waterwind-scout.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
@@ -477,6 +481,7 @@ const shard: CardShard = {
     _poolBiowasteBlob,
     _poolBitterblossom,
     _poolBituminousBlast,
+    _poolBladewheelChariot,
     _poolBlazingCrescendo,
     _poolBlightedShaman,
     _poolBlightsoilDruid,
@@ -580,6 +585,7 @@ const shard: CardShard = {
     _poolGalionElvenkingsButler,
     _poolGarrukWildspeaker,
     _poolGatecreeperVine,
+    _poolGeologicalAppraiser,
     _poolGeralfsMindcrusher,
     _poolGhirapurAetherGrid,
     _poolGhorClanBloodscale,
@@ -691,6 +697,7 @@ const shard: CardShard = {
     _poolOverwhelm,
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,
+    _poolPantlazaSunFavored,
     _poolPatagiaGolem,
     _poolPathbreakerIbex,
     _poolPendrellDrake,
@@ -843,6 +850,7 @@ const shard: CardShard = {
     _poolVowOfDuty,
     _poolWarMammoth,
     _poolWasteland,
+    _poolWaterwindScout,
     _poolWayOfThePyromancer,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,

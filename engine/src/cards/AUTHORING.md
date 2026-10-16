@@ -1304,6 +1304,30 @@ triggers — "whenever you collect evidence". As an activated ability's cost it'
 `cost.collectEvidence: N` — Forensic Researcher; as a spell's "you may collect evidence N"
 additional cost, `kicker: { cost: "", keyword: "collect-evidence", collectEvidence: N }`, with
 "if evidence was collected" the spell being kicked — Crimestopper Sprite),
+`explore { target, times? }` ("it explores", rule 701.44 — Cenote Scout: `target: "source"`;
+"target creature you control explores" a slot — Miner's Guidewing; `times` "explores X times" /
+"explores, then it explores again" — Jadelight Spelunker, Over the Edge. A land card to hand,
+otherwise a +1/+1 counter and "put it into your graveyard?" — the may is the effect
+controller's, so the explorer must be theirs; one that has left still explores, as it last
+was; every exploration fires `explores` triggers — `{ on: "explores", who: "self" | "you",
+filter?, revealed?: "land" | "nonland" }`, the explorer the trigger object, "whenever a
+creature you control explores" — Merfolk Cave-Diver. "Create a Map token" is the `Map Token`.
+"Each [creature] explores" (rule 701.44d's APNAP order) and replacing an exploration
+(Twists and Turns) aren't built),
+`discover { amount }` ("discover N", rule 701.57 — Primordial Gnawer; `amount` any
+`EffectAmount`, `{ triggerValue: true }` "discover again for the same value" — Curator of
+Sun's Creation): the free cast offered, otherwise to hand, the rest to the bottom; every
+discovering fires `discovers` triggers — `{ on: "discovers", who: "you" }`, the value N),
+craft (rule 702.167 — "Craft with [materials] [cost]": `craft(mana, materials, text)` from
+`helpers.ts`, an `activated` ability — Oteclan Landmark; `materials` is `CraftMaterials`
+(`abilities.ts`): `{ count, orMore?, filter?, cardsOnly?, share?: "card-type", oneEach?,
+text }` — "artifact" is `{ count: 1, filter: { type: "artifact" } }`, "one or more Dinosaurs"
+`{ count: 1, orMore: true, filter: { subtype: "Dinosaur" } }`, "two that share a card type"
+`share`, "a Dinosaur, a Merfolk, a Pirate, and a Vampire" `oneEach` with one filter each, "four
+or more red instant and/or sorcery cards" `cardsOnly`. The back face is the DFC's other file
+(`faces`, `transform: true`). "The exiled cards used to craft it" (702.167c) are the cards
+exiled with the permanent it became — `GameObject.exiledWith` its new stint, what
+`cardsExiledWithSource` and the linked-exile vocabulary read),
 `solve` (a **Case**'s "To solve — [condition]", rule 719.3: write it with `caseToSolve(condition,
 text)` from `helpers.ts`; its "Solved — [ability]" is the ability gated on `{ kind: "solved" }` —
 a static's or activated ability's `condition`, a triggered ability's `whileCondition` — Case of

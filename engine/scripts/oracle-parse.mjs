@@ -342,6 +342,29 @@ const singular = (w) => {
  * "Elf", "Zombie creature", "noncreature artifact", "creature token" — as a
  * `CardFilter`. `null` for anything with a word it doesn't know.
  */
+/** Craft's materials (rule 702.167a) — "artifact", "one or more Dinosaurs",
+ * "two creatures", "two that share a card type", a bare "one or more" — as
+ * `AbilityCost.craft`; anything else (a list of kinds, "… cards") is a
+ * person's. A type without "card" is a permanent or a graveyard card
+ * (702.167b), which is what the engine offers. */
+export function craftMaterials(phrase) {
+  const COUNTS = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
+  if (phrase === "one or more") return { count: 1, orMore: true, text: phrase };
+  if (phrase === "two that share a card type") return { count: 2, share: "card-type", text: phrase };
+  let m = /^one or more (.+)$/.exec(phrase);
+  let count = 1;
+  let rest = phrase;
+  if (m) rest = m[1];
+  else if ((m = /^(a|an|two|three|four|five|six) (.+)$/.exec(phrase))) {
+    count = COUNTS[m[1]];
+    rest = m[2];
+  }
+  if (/\bcards?\b|,| and /.test(rest)) return null;
+  const filter = parseTypePhrase(rest);
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return { count, ...(phrase.startsWith("one or more") ? { orMore: true } : {}), filter, text: phrase };
+}
+
 export function parseTypePhrase(phrase, { cards = false } = {}) {
   const words = phrase.trim().split(/\s+/);
   const filter = {};
@@ -674,6 +697,12 @@ export function parseTrigger(clause) {
   if (/^Whenever an opponent commits a crime$/.test(c)) return [{ on: "crime-committed", who: "opponent" }];
   // Collect evidence (rule 701.59).
   if (/^Whenever you collect evidence$/.test(c)) return [{ on: "evidence-collected", who: "you" }];
+  if (/^Whenever you discover$/.test(c)) return [{ on: "discovers", who: "you" }];
+  // Explore (rule 701.44b).
+  if (/^Whenever (?:~|this creature) explores$/.test(c)) return [{ on: "explores", who: "self" }];
+  if ((m = /^Whenever a creature you control explores(?: an? (land|nonland) card)?$/.exec(c))) {
+    return [{ on: "explores", who: "you", filter: { type: "creature" }, ...(m[1] ? { revealed: m[1] } : {}) }];
+  }
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
   // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
   if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
@@ -1250,6 +1279,13 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`(${TARGET}) becomes prepared`).exec(s))) return { kind: "become-prepared", target: slot(m[1]) };
   if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
+  if (re("~ explores").test(s)) return { kind: "explore", target: "source" };
+  // Discover N (rule 701.57a) — a fixed N; "discover X, where X is …" is a person's.
+  if ((m = re("discover (\\d+)").exec(s))) return { kind: "discover", amount: Number(m[1]) };
+  if ((m = re(`(${TARGET}) explores, then it explores again`).exec(s))) {
+    return { kind: "explore", target: slot(m[1]), times: 2 };
+  }
+  if ((m = re(`(${TARGET}) explores`).exec(s))) return { kind: "explore", target: slot(m[1]) };
   if ((m = re(`put (target card from a graveyard) on the bottom of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "bottom" };
   }
@@ -1310,6 +1346,10 @@ export function parseSentence(sentence, ctx) {
     if (re("it becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: it };
     if (re("airbend (?:it|that creature|that permanent)").test(s)) return { kind: "exile", target: it, airbend: true };
     if (re("it connives").test(s)) return { kind: "connive", target: it };
+    // Explore (rule 701.44a), once, twice or X times.
+    if (re("it explores, then it explores again").test(s)) return { kind: "explore", target: it, times: 2 };
+    if ((m = re(`it explores ${N} times`).exec(s))) return { kind: "explore", target: it, times: amount(m[1]) };
+    if (re("it explores").test(s)) return { kind: "explore", target: it };
     // "He phases out" (Kaito Shizuki), "it phases out" (rule 702.26b).
     if (re("(?:it|he|she) phases out").test(s)) return { kind: "phase-out", target: it };
   }
@@ -1595,6 +1635,21 @@ export function parseFace(face, ctx = {}) {
         text: "When this creature enters, if its squad cost was paid, create a token that's a copy of it for each time its squad cost was paid.",
       });
       continue;
+    }
+    // Craft with [materials] [cost] (rule 702.167a): the `craft` helper's ability.
+    if ((m = /^Craft with (.+?) ((?:\{[^}]+\})+)$/.exec(line))) {
+      const materials = craftMaterials(m[1]);
+      if (materials !== null) {
+        out.activated.push({
+          cost: { mana: m[2], tap: false, exileSelf: true, craft: materials },
+          sorcerySpeed: true,
+          targets: [],
+          effect: { kind: "craft-return" },
+          resolve: null,
+          text: printed(raw),
+        });
+        continue;
+      }
     }
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }

@@ -8,6 +8,7 @@ import _poolAdelineResplendentCathar from "../pool/adeline-resplendent-cathar.js
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
 import _poolAetherize from "../pool/aetherize.js";
 import _poolAetherjacket from "../pool/aetherjacket.js";
+import _poolAkawalliTheSeethingTower from "../pool/akawalli-the-seething-tower.js";
 import _poolAlabasterHostSanctifier from "../pool/alabaster-host-sanctifier.js";
 import _poolAlexiosDeimosOfKosmos from "../pool/alexios-deimos-of-kosmos.js";
 import _poolAlibouAncientWitness from "../pool/alibou-ancient-witness.js";
@@ -64,6 +65,7 @@ import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
 import _poolChillingChronicle from "../pool/chilling-chronicle.js";
+import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
@@ -283,6 +285,7 @@ import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
+import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
@@ -296,6 +299,7 @@ import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js
 import _poolRosaResoluteWhiteMage from "../pool/rosa-resolute-white-mage.js";
 import _poolRousingRead from "../pool/rousing-read.js";
 import _poolRowanTreefolk from "../pool/rowan-treefolk.js";
+import _poolRuinLurkerBat from "../pool/ruin-lurker-bat.js";
 import _poolRuinsOfOranRief from "../pool/ruins-of-oran-rief.js";
 import _poolRunAground from "../pool/run-aground.js";
 import _poolRushOfVitality from "../pool/rush-of-vitality.js";
@@ -453,6 +457,7 @@ const shard: CardShard = {
     _poolAegisSculptor,
     _poolAetherize,
     _poolAetherjacket,
+    _poolAkawalliTheSeethingTower,
     _poolAlabasterHostSanctifier,
     _poolAlexiosDeimosOfKosmos,
     _poolAlibouAncientWitness,
@@ -509,6 +514,7 @@ const shard: CardShard = {
     _poolCharcoalDiamond,
     _poolChasmSkulker,
     _poolChillingChronicle,
+    _poolChimilTheInnerSun,
     _poolChimneyRabble,
     _poolChordOfCalling,
     _poolClanDefiance,
@@ -728,6 +734,7 @@ const shard: CardShard = {
     _poolReefWorm,
     _poolReitoSentinel,
     _poolRelicRetriever,
+    _poolRestlessAnchorage,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
@@ -741,6 +748,7 @@ const shard: CardShard = {
     _poolRosaResoluteWhiteMage,
     _poolRousingRead,
     _poolRowanTreefolk,
+    _poolRuinLurkerBat,
     _poolRuinsOfOranRief,
     _poolRunAground,
     _poolRushOfVitality,

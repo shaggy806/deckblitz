@@ -293,6 +293,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       );
     case "untap":
       return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, 0.5, ctx);
+    case "explore":
     case "connive":
       if (typeof effect.target === "number") return 0;
       return onObjectRef(effect.target, 0.5, ctx);
@@ -336,6 +337,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       // A targeted one is read through its slot, with the other targets.
       if (effect.target !== undefined) return 0;
       return onPlayers(playersIn(effect.who ?? "you", ctx), -100, ctx);
+    case "discover":
+      // A card for certain — cast free, or to hand — like a draw.
+      return effect.offer === undefined && effect.finish === undefined ? onPlayers(you, CARD, ctx) : 0;
     case "cascade":
       // Taking cascade's free spell: about a card, like a tutor to hand.
       return effect.finish?.cast === true ? onPlayers(you, CARD, ctx) : 0;

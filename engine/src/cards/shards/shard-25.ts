@@ -65,6 +65,7 @@ import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
 import _poolCinderGlade from "../pool/cinder-glade.js";
 import _poolCindervines from "../pool/cindervines.js";
 import _poolClaimTheFirstborn from "../pool/claim-the-firstborn.js";
+import _poolClayFiredBricks from "../pool/clay-fired-bricks.js";
 import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
@@ -221,6 +222,7 @@ import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
+import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
@@ -230,6 +232,7 @@ import _poolMiscalculation from "../pool/miscalculation.js";
 import _poolMistralSinger from "../pool/mistral-singer.js";
 import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
+import _poolMoltenCollapse from "../pool/molten-collapse.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
@@ -414,6 +417,7 @@ import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
+import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
@@ -494,6 +498,7 @@ const shard: CardShard = {
     _poolCinderGlade,
     _poolCindervines,
     _poolClaimTheFirstborn,
+    _poolClayFiredBricks,
     _poolCliffhavenVampire,
     _poolCloudCrusader,
     _poolCombatCelebrant,
@@ -650,6 +655,7 @@ const shard: CardShard = {
     _poolMantisRider,
     _poolMaryReadAndAnneBonny,
     _poolMasterOfEtherium,
+    _poolMastersGuideMural,
     _poolMeltstridersGear,
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,
@@ -659,6 +665,7 @@ const shard: CardShard = {
     _poolMistralSinger,
     _poolMistveilPlains,
     _poolMoggcatcher,
+    _poolMoltenCollapse,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
     _poolMuYanlingWindRider,
@@ -843,6 +850,7 @@ const shard: CardShard = {
     _poolWondrousRevival,
     _poolWoodedBastion,
     _poolWurmcoilLarva,
+    _poolZoeticGlyph,
   ],
   tokens: [
     _tokensApeVillainToken,

@@ -29,6 +29,7 @@ import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
+import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
@@ -53,6 +54,7 @@ import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
 import _poolBreathstealer from "../pool/breathstealer.js";
 import _poolBredForTheHunt from "../pool/bred-for-the-hunt.js";
+import _poolBroodrageMycoid from "../pool/broodrage-mycoid.js";
 import _poolBurnerRocket from "../pool/burner-rocket.js";
 import _poolBurningCuriosity from "../pool/burning-curiosity.js";
 import _poolBurnishedDunestomper from "../pool/burnished-dunestomper.js";
@@ -78,6 +80,7 @@ import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
+import _poolCoatiScavenger from "../pool/coati-scavenger.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
@@ -228,6 +231,7 @@ import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
 import _poolMalametBrawler from "../pool/malamet-brawler.js";
+import _poolMalametVeteran from "../pool/malamet-veteran.js";
 import _poolMaraudingBrinefang from "../pool/marauding-brinefang.js";
 import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
@@ -305,6 +309,7 @@ import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
+import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
@@ -410,6 +415,7 @@ import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
 import _poolViolentEchoes from "../pool/violent-echoes.js";
+import _poolVisageOfDread from "../pool/visage-of-dread.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
@@ -475,6 +481,7 @@ const shard: CardShard = {
     _poolArmaggonFutureShark,
     _poolArrowsOfJustice,
     _poolAsphyxiate,
+    _poolAstridPeth,
     _poolAuthorityOfTheConsuls,
     _poolAxegrinderGiant,
     _poolAzulaOnTheHunt,
@@ -499,6 +506,7 @@ const shard: CardShard = {
     _poolBrawn,
     _poolBreathstealer,
     _poolBredForTheHunt,
+    _poolBroodrageMycoid,
     _poolBurnerRocket,
     _poolBurningCuriosity,
     _poolBurnishedDunestomper,
@@ -524,6 +532,7 @@ const shard: CardShard = {
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
     _poolCoastalTower,
+    _poolCoatiScavenger,
     _poolCommandersInsignia,
     _poolConcealedWeapon,
     _poolConsumedByGreed,
@@ -674,6 +683,7 @@ const shard: CardShard = {
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
     _poolMalametBrawler,
+    _poolMalametVeteran,
     _poolMaraudingBrinefang,
     _poolMarduAscendancy,
     _poolMarshGas,
@@ -751,6 +761,7 @@ const shard: CardShard = {
     _poolRoyalFalcon,
     _poolRunThePlay,
     _poolRussetWolves,
+    _poolSageOfDays,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
     _poolSalvationSwan,
@@ -856,6 +867,7 @@ const shard: CardShard = {
     _poolVictorTimelyWilyTycoon,
     _poolVillainousWrath,
     _poolViolentEchoes,
+    _poolVisageOfDread,
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,

@@ -1,0 +1,1356 @@
+{
+ "batch": "B92",
+ "status": "complete",
+ "ranks": "The Lost Caverns of Ixalan (LCI) and The Lost Caverns of Ixalan Commander (LCC), both 2023-11-17: whole sets, with explore (rule 701.44), Map tokens, discover (701.57) and craft (702.167) built — and the older cards that waited on them",
+ "authored": [
+  {
+   "name": "Acrobatic Leap",
+   "files": [
+    "engine/src/cards/pool/acrobatic-leap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akal Pakal, First Among Equals",
+   "files": [
+    "engine/src/cards/pool/akal-pakal-first-among-equals.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akawalli, the Seething Tower",
+   "files": [
+    "engine/src/cards/pool/akawalli-the-seething-tower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Another Chance",
+   "files": [
+    "engine/src/cards/pool/another-chance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astrid Peth",
+   "files": [
+    "engine/src/cards/pool/astrid-peth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attentive Sunscribe",
+   "files": [
+    "engine/src/cards/pool/attentive-sunscribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basking Capybara",
+   "files": [
+    "engine/src/cards/pool/basking-capybara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brackish Blunder",
+   "files": [
+    "engine/src/cards/pool/brackish-blunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brazen Blademaster",
+   "files": [
+    "engine/src/cards/pool/brazen-blademaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodrage Mycoid",
+   "files": [
+    "engine/src/cards/pool/broodrage-mycoid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Buried Treasure",
+   "files": [
+    "engine/src/cards/pool/buried-treasure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Sun Cavalry",
+   "files": [
+    "engine/src/cards/pool/burning-sun-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bygone Marvels",
+   "files": [
+    "engine/src/cards/pool/bygone-marvels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calamitous Cave-In",
+   "files": [
+    "engine/src/cards/pool/calamitous-cave-in.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canonized in Blood",
+   "files": [
+    "engine/src/cards/pool/canonized-in-blood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caparocti Sunborn",
+   "files": [
+    "engine/src/cards/pool/caparocti-sunborn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cartographer's Companion",
+   "files": [
+    "engine/src/cards/pool/cartographers-companion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cavernous Maw",
+   "files": [
+    "engine/src/cards/pool/cavernous-maw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cenote Scout",
+   "files": [
+    "engine/src/cards/pool/cenote-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Child of the Volcano",
+   "files": [
+    "engine/src/cards/pool/child-of-the-volcano.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chimil, the Inner Sun",
+   "files": [
+    "engine/src/cards/pool/chimil-the-inner-sun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chupacabra Echo",
+   "files": [
+    "engine/src/cards/pool/chupacabra-echo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clay-Fired Bricks // Cosmium Kiln",
+   "files": [
+    "engine/src/cards/pool/clay-fired-bricks.ts",
+    "engine/src/cards/pool/cosmium-kiln.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coati Scavenger",
+   "files": [
+    "engine/src/cards/pool/coati-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compass Gnome",
+   "files": [
+    "engine/src/cards/pool/compass-gnome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Confounding Riddle",
+   "files": [
+    "engine/src/cards/pool/confounding-riddle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contest of Claws",
+   "files": [
+    "engine/src/cards/pool/contest-of-claws.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corpses of the Lost",
+   "files": [
+    "engine/src/cards/pool/corpses-of-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Council of Echoes",
+   "files": [
+    "engine/src/cards/pool/council-of-echoes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curator of Sun's Creation",
+   "files": [
+    "engine/src/cards/pool/curator-of-suns-creation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Discovery",
+   "files": [
+    "engine/src/cards/pool/daring-discovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep Goblin Skulltaker",
+   "files": [
+    "engine/src/cards/pool/deep-goblin-skulltaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deepfathom Echo",
+   "files": [
+    "engine/src/cards/pool/deepfathom-echo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defossilize",
+   "files": [
+    "engine/src/cards/pool/defossilize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Didact Echo",
+   "files": [
+    "engine/src/cards/pool/didact-echo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disturbed Slumber",
+   "files": [
+    "engine/src/cards/pool/disturbed-slumber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dusk Legion Sergeant",
+   "files": [
+    "engine/src/cards/pool/dusk-legion-sergeant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dusk Rose Reliquary",
+   "files": [
+    "engine/src/cards/pool/dusk-rose-reliquary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Echo of Dusk",
+   "files": [
+    "engine/src/cards/pool/echo-of-dusk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explorer's Cache",
+   "files": [
+    "engine/src/cards/pool/explorers-cache.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fanatical Offering",
+   "files": [
+    "engine/src/cards/pool/fanatical-offering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forgotten Monument",
+   "files": [
+    "engine/src/cards/pool/forgotten-monument.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Francisco, Fowl Marauder",
+   "files": [
+    "engine/src/cards/pool/francisco-fowl-marauder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frilled Cave-Wurm",
+   "files": [
+    "engine/src/cards/pool/frilled-cave-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "From the Rubble",
+   "files": [
+    "engine/src/cards/pool/from-the-rubble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geological Appraiser",
+   "files": [
+    "engine/src/cards/pool/geological-appraiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Get Lost",
+   "files": [
+    "engine/src/cards/pool/get-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glorifier of Suffering",
+   "files": [
+    "engine/src/cards/pool/glorifier-of-suffering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Tomb Raider",
+   "files": [
+    "engine/src/cards/pool/goblin-tomb-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grasping Shadows // Shadows' Lair",
+   "files": [
+    "engine/src/cards/pool/grasping-shadows.ts",
+    "engine/src/cards/pool/shadows-lair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Cataract",
+   "files": [
+    "engine/src/cards/pool/hidden-cataract.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Courtyard",
+   "files": [
+    "engine/src/cards/pool/hidden-courtyard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hotfoot Gnome",
+   "files": [
+    "engine/src/cards/pool/hotfoot-gnome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Huatli's Final Strike",
+   "files": [
+    "engine/src/cards/pool/huatlis-final-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunter's Blowgun",
+   "files": [
+    "engine/src/cards/pool/hunters-blowgun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurl into History",
+   "files": [
+    "engine/src/cards/pool/hurl-into-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Idol of the Deep King // Sovereign's Macuahuitl",
+   "files": [
+    "engine/src/cards/pool/idol-of-the-deep-king.ts",
+    "engine/src/cards/pool/sovereigns-macuahuitl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "In the Presence of Ages",
+   "files": [
+    "engine/src/cards/pool/in-the-presence-of-ages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inverted Iceberg // Iceberg Titan",
+   "files": [
+    "engine/src/cards/pool/inverted-iceberg.ts",
+    "engine/src/cards/pool/iceberg-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jadelight Spelunker",
+   "files": [
+    "engine/src/cards/pool/jadelight-spelunker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Join the Dead",
+   "files": [
+    "engine/src/cards/pool/join-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaslem's Stonetree // Kaslem's Strider",
+   "files": [
+    "engine/src/cards/pool/kaslems-stonetree.ts",
+    "engine/src/cards/pool/kaslems-strider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kinjalli's Dawnrunner",
+   "files": [
+    "engine/src/cards/pool/kinjallis-dawnrunner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lodestone Needle // Guidestone Compass",
+   "files": [
+    "engine/src/cards/pool/lodestone-needle.ts",
+    "engine/src/cards/pool/guidestone-compass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malamet Battle Glyph",
+   "files": [
+    "engine/src/cards/pool/malamet-battle-glyph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malamet Scythe",
+   "files": [
+    "engine/src/cards/pool/malamet-scythe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malamet Veteran",
+   "files": [
+    "engine/src/cards/pool/malamet-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master's Guide-Mural // Master's Manufactory",
+   "files": [
+    "engine/src/cards/pool/masters-guide-mural.ts",
+    "engine/src/cards/pool/masters-manufactory.ts",
+    "engine/src/cards/tokens/golem-token-masters-guide-mural-masters-manufactory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mephitic Draught",
+   "files": [
+    "engine/src/cards/pool/mephitic-draught.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Cave-Diver",
+   "files": [
+    "engine/src/cards/pool/merfolk-cave-diver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miner's Guidewing",
+   "files": [
+    "engine/src/cards/pool/miners-guidewing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mischievous Pup",
+   "files": [
+    "engine/src/cards/pool/mischievous-pup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Collapse",
+   "files": [
+    "engine/src/cards/pool/molten-collapse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monstrous Vortex",
+   "files": [
+    "engine/src/cards/pool/monstrous-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nicanzil, Current Conductor",
+   "files": [
+    "engine/src/cards/pool/nicanzil-current-conductor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nurturing Bristleback",
+   "files": [
+    "engine/src/cards/pool/nurturing-bristleback.ts",
+    "engine/src/cards/tokens/dinosaur-token-nurturing-bristleback.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oaken Siren",
+   "files": [
+    "engine/src/cards/pool/oaken-siren.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oltec Archaeologists",
+   "files": [
+    "engine/src/cards/pool/oltec-archaeologists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orazca Puzzle-Door",
+   "files": [
+    "engine/src/cards/pool/orazca-puzzle-door.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order of Sacred Dusk",
+   "files": [
+    "engine/src/cards/pool/order-of-sacred-dusk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oteclan Landmark // Oteclan Levitator",
+   "files": [
+    "engine/src/cards/pool/oteclan-landmark.ts",
+    "engine/src/cards/pool/oteclan-levitator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Out of Air",
+   "files": [
+    "engine/src/cards/pool/out-of-air.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Over the Edge",
+   "files": [
+    "engine/src/cards/pool/over-the-edge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pantlaza, Sun-Favored",
+   "files": [
+    "engine/src/cards/pool/pantlaza-sun-favored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of Discovery",
+   "files": [
+    "engine/src/cards/pool/path-of-discovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pathfinding Axejaw",
+   "files": [
+    "engine/src/cards/pool/pathfinding-axejaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pirate Hat",
+   "files": [
+    "engine/src/cards/pool/pirate-hat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poetic Ingenuity",
+   "files": [
+    "engine/src/cards/pool/poetic-ingenuity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primordial Gnawer",
+   "files": [
+    "engine/src/cards/pool/primordial-gnawer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Promise of Aclazotz // Foul Rebirth",
+   "files": [
+    "engine/src/cards/pool/promise-of-aclazotz.ts",
+    "engine/src/cards/pool/foul-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Queen's Bay Paladin",
+   "files": [
+    "engine/src/cards/pool/queens-bay-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksand Whirlpool",
+   "files": [
+    "engine/src/cards/pool/quicksand-whirlpool.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ray of Ruin",
+   "files": [
+    "engine/src/cards/pool/ray-of-ruin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic's Roar",
+   "files": [
+    "engine/src/cards/pool/relics-roar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Restless Anchorage",
+   "files": [
+    "engine/src/cards/pool/restless-anchorage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River Herald Guide",
+   "files": [
+    "engine/src/cards/pool/river-herald-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "River Herald Scout",
+   "files": [
+    "engine/src/cards/pool/river-herald-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruin-Lurker Bat",
+   "files": [
+    "engine/src/cards/pool/ruin-lurker-bat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of Days",
+   "files": [
+    "engine/src/cards/pool/sage-of-days.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguine Evangelist",
+   "files": [
+    "engine/src/cards/pool/sanguine-evangelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seeker of Sunlight",
+   "files": [
+    "engine/src/cards/pool/seeker-of-sunlight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Self-Reflection",
+   "files": [
+    "engine/src/cards/pool/self-reflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sentinel of the Nameless City",
+   "files": [
+    "engine/src/cards/pool/sentinel-of-the-nameless-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shipwreck Sentry",
+   "files": [
+    "engine/src/cards/pool/shipwreck-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinuous Benthisaur",
+   "files": [
+    "engine/src/cards/pool/sinuous-benthisaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Song of Stupefaction",
+   "files": [
+    "engine/src/cards/pool/song-of-stupefaction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulcoil Viper",
+   "files": [
+    "engine/src/cards/pool/soulcoil-viper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Souls of the Lost",
+   "files": [
+    "engine/src/cards/pool/souls-of-the-lost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spring-Loaded Sawblades // Bladewheel Chariot",
+   "files": [
+    "engine/src/cards/pool/spring-loaded-sawblades.ts",
+    "engine/src/cards/pool/bladewheel-chariot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spyglass Siren",
+   "files": [
+    "engine/src/cards/pool/spyglass-siren.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalactite Stalker",
+   "files": [
+    "engine/src/cards/pool/stalactite-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Staunch Crewmate",
+   "files": [
+    "engine/src/cards/pool/staunch-crewmate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stinging Cave Crawler",
+   "files": [
+    "engine/src/cards/pool/stinging-cave-crawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swashbuckler's Whip",
+   "files": [
+    "engine/src/cards/pool/swashbucklers-whip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Synapse Necromage",
+   "files": [
+    "engine/src/cards/pool/synapse-necromage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tendril of the Mycotyrant",
+   "files": [
+    "engine/src/cards/pool/tendril-of-the-mycotyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thousand Moons Crackshot",
+   "files": [
+    "engine/src/cards/pool/thousand-moons-crackshot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thousand Moons Infantry",
+   "files": [
+    "engine/src/cards/pool/thousand-moons-infantry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tithing Blade // Consuming Sepulcher",
+   "files": [
+    "engine/src/cards/pool/tithing-blade.ts",
+    "engine/src/cards/pool/consuming-sepulcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tributary Instructor",
+   "files": [
+    "engine/src/cards/pool/tributary-instructor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triumphant Chomp",
+   "files": [
+    "engine/src/cards/pool/triumphant-chomp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trumpeting Carnosaur",
+   "files": [
+    "engine/src/cards/pool/trumpeting-carnosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uchbenbak, the Great Mistake",
+   "files": [
+    "engine/src/cards/pool/uchbenbak-the-great-mistake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vanguard of the Rose",
+   "files": [
+    "engine/src/cards/pool/vanguard-of-the-rose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visage of Dread // Dread Osseosaur",
+   "files": [
+    "engine/src/cards/pool/visage-of-dread.ts",
+    "engine/src/cards/pool/dread-osseosaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vito's Inquisitor",
+   "files": [
+    "engine/src/cards/pool/vitos-inquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vito, Fanatic of Aclazotz",
+   "files": [
+    "engine/src/cards/pool/vito-fanatic-of-aclazotz.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volatile Wanderglyph",
+   "files": [
+    "engine/src/cards/pool/volatile-wanderglyph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wail of the Forgotten",
+   "files": [
+    "engine/src/cards/pool/wail-of-the-forgotten.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walk with the Ancestors",
+   "files": [
+    "engine/src/cards/pool/walk-with-the-ancestors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warden of the Inner Sky",
+   "files": [
+    "engine/src/cards/pool/warden-of-the-inner-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterlogged Hulk // Watertight Gondola",
+   "files": [
+    "engine/src/cards/pool/waterlogged-hulk.ts",
+    "engine/src/cards/pool/watertight-gondola.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterwind Scout",
+   "files": [
+    "engine/src/cards/pool/waterwind-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waylaying Pirates",
+   "files": [
+    "engine/src/cards/pool/waylaying-pirates.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zoetic Glyph",
+   "files": [
+    "engine/src/cards/pool/zoetic-glyph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zoyowa Lava-Tongue",
+   "files": [
+    "engine/src/cards/pool/zoyowa-lava-tongue.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Abuelo's Awakening",
+   "needs": [
+    "effect:put-onto-battlefield-counters-amount"
+   ],
+   "why": "\"Return ... with X additional +1/+1 counters on it\": put-onto-battlefield's withCounters takes a fixed number, not X; an add-counter after it enters is a separate later event (enters triggers and intervening-ifs see no counters; Hardened Scales would apply once it is a creature)."
+  },
+  {
+   "name": "Aloy, Savior of Meridian",
+   "needs": [
+    "effect:attack-batch-aggregates"
+   ],
+   "why": "X is 'the greatest power among them' — the artifact creatures in the attack batch — and no amount reads a max over a trigger's batch; an attacking:true filter at resolution drifts from the batch (AUTHORING §15)."
+  },
+  {
+   "name": "Altar of the Wretched // Wretched Bonemass",
+   "needs": [
+    "bug:cda-cards-exiled-with",
+    "static:keywords-from-exiled-with-source"
+   ],
+   "why": "The back face's P/T is a CDA over the total power of the cards exiled to craft it (no CountSpec reads linked exile), and it has each of thirteen keywords (protection included) as long as one of those exiled cards has it — no static reads the linked cards' keywords; the front face alone would be exact."
+  },
+  {
+   "name": "Amalia Benavides Aguirre",
+   "needs": [
+    "effect:destroy-all-except-source"
+   ],
+   "why": "\"Then destroy all other creatures if its power is exactly 20\": destroy-all has no exceptSource, so Amalia would destroy herself; the explore and the source power-eq-20 condition are expressible."
+  },
+  {
+   "name": "Arm-Mounted Anchor",
+   "needs": [
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "\"Equip {2}. This ability costs {2} less to activate if you have one or fewer cards in hand\": ActivatedAbility.costReduction has no condition (a second Equip {0} gated on hand size would be two abilities, not one)."
+  },
+  {
+   "name": "Armored Kincaller",
+   "needs": [
+    "effect:reveal-cards-from-hand"
+   ],
+   "why": "\"You may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life\": no effect reveals a card from hand as it resolves; behold would also accept a Dinosaur permanent, the Kincaller itself included."
+  },
+  {
+   "name": "Bat Colony",
+   "needs": [
+    "stat:treasure-mana-spent-count"
+   ],
+   "why": "\"create a Bat for each mana from a Cave spent to cast it\" needs a count of the units in manaSpentFrom whose source matched a filter; only the boolean manaFrom filter clause (with atLeast) exists, no EffectAmount counts them."
+  },
+  {
+   "name": "Belligerent Yearling",
+   "needs": [
+    "effect:set-base-power-only"
+   ],
+   "why": "\"You may have this creature's base power become equal to that creature's power until end of turn\": animate sets base power and toughness together; nothing sets base power alone (setting toughness too would wrongly override other toughness-setting effects)."
+  },
+  {
+   "name": "Bloodthorn Flail",
+   "needs": [
+    "cost:equip-alternative-costs"
+   ],
+   "why": "\"Equip—Pay {3} or discard a card\" is one equip ability whose cost is a choice of two whole costs; an activated ability has no cost options, and two separate equip abilities would be a different card."
+  },
+  {
+   "name": "Braided Net // Braided Quipu",
+   "needs": [
+    "effect:prohibit-abilities-while-tapped"
+   ],
+   "why": "\"Its activated abilities can't be activated for as long as it remains tapped\": `prohibit` on a target lasts only this turn; no duration ends when the permanent untaps (Quipu itself is expressible)."
+  },
+  {
+   "name": "Brass's Tunnel-Grinder // Tecutlan, the Searing Rift",
+   "needs": [
+    "decision:discard-any-number",
+    "stat:cast-using-mana-from-this-source"
+   ],
+   "why": "Front: 'discard any number of cards, then draw that many plus one' has no any-number discard; back: 'whenever you cast a permanent spell using mana produced by Tecutlan' needs a cast trigger keyed to mana from this specific permanent — add-mana whenSpent differs (it fires once per unit and even after Tecutlan has left) and manaFrom only matches by type/subtype."
+  },
+  {
+   "name": "Cavern Stomper",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "\"{3}{G}: This creature can't be blocked by creatures with power 2 or less this turn\": cantBeBlockedBy is a printed static only; no effect (restrict, grant-keyword) grants it until end of turn."
+  },
+  {
+   "name": "Contested Game Ball",
+   "needs": [
+    "trigger:combat-damage-to-you-trigger"
+   ],
+   "why": "\"Whenever you're dealt combat damage\" (once per combat damage event): deals-damage-batch narrows the damaged player only to \"player\"/\"opponent\", never to you, and dealt-damage is for permanents. (The attacking player gaining control would be gain-control who: active-player.)"
+  },
+  {
+   "name": "Cosmium Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "\"Choose three. You may choose the same mode more than once\": castModal can't pick a mode twice. (Mode 2 also chooses a Cave you control as it resolves, not a target — possibly the one mode 1 just fetched.)"
+  },
+  {
+   "name": "Deconstruction Hammer",
+   "needs": [
+    "cost:sacrifice-granting-source"
+   ],
+   "why": "The granted \"{3}, {T}, Sacrifice Deconstruction Hammer: ...\" sacrifices the Equipment granting it, not the creature that has the ability; no cost names the granting source."
+  },
+  {
+   "name": "Deep-Cavern Bat",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves"
+   ],
+   "why": "\"Look at target opponent's hand. You may exile a nonland card from it until this creature leaves the battlefield\": discard-chosen only discards and look-and-choose's hand zone is the chooser's own; nothing exiles from a player's hand until the source leaves."
+  },
+  {
+   "name": "Deeproot Historian",
+   "needs": [
+    "static:retrace-grant",
+    "keyword:retrace"
+   ],
+   "why": "\"Merfolk and Druid cards in your graveyard have retrace\": retrace (rule 702.81) isn't modelled, nor a static granting it to graveyard cards."
+  },
+  {
+   "name": "Digsite Conservator",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"Exile up to four target cards from a single graveyard\": no target spec ties several slots to one graveyard."
+  },
+  {
+   "name": "Dire Flail // Dire Blunderbuss",
+   "needs": [
+    "effect:granted-trigger-refers-to-granter"
+   ],
+   "why": "The back face grants 'you may sacrifice an artifact other than Dire Blunderbuss' — a granted trigger whose sacrifice filter must exclude the granting Equipment, which no filter can name (an 'attached to this creature' exclusion would wrongly exclude other Equipment); the front face alone isn't authored since both faces must be exact."
+  },
+  {
+   "name": "Eye of Ojer Taq // Apex Observatory",
+   "needs": [
+    "replacement:as-enters-choose-card-type-of-exiled",
+    "effect:next-spell-of-type-free-this-turn"
+   ],
+   "why": "Apex Observatory's \"as it enters, choose a card type shared among two exiled cards used to craft it\" has no as-enters choice over the linked cards, and \"the next spell you cast this turn of the chosen type can be cast without paying its mana cost\" has no one-shot free-cast permission."
+  },
+  {
+   "name": "Fabrication Foundry",
+   "needs": [
+    "cost:exile-permanents-total-mana-value-x"
+   ],
+   "why": "\"{2}{W}, {T}, Exile one or more other artifacts you control with total mana value X: Return target artifact card with mana value X or less from your graveyard to the battlefield\": no activation cost exiles permanents, let alone a chosen set whose total mana value sets X."
+  },
+  {
+   "name": "Gargantuan Leech",
+   "needs": [
+    "cost:cost-reduction-sum"
+   ],
+   "why": "\"{1} less for each Cave you control and each Cave card in your graveyard\" — CostReductionAmount takes one countOf or one cardsInGraveyard, never their sum (no { sum } amount in selfCostReduction)."
+  },
+  {
+   "name": "Glowcap Lantern",
+   "needs": [
+    "static:look-at-top-card-granted"
+   ],
+   "why": "Equipped creature has \"You may look at the top card of your library any time\": looksAtOwnLibraryTop is a card-level flag read off the permanent's own definition (view.ts), so it can't be granted to the equipped creature; the granted \"whenever this creature attacks, it explores\" half is fine via grantsTriggered."
+  },
+  {
+   "name": "Guardian of the Great Door",
+   "needs": [
+    "cost:additional-cost-tap-permanents"
+   ],
+   "why": "\"As an additional cost to cast this spell, tap four untapped artifacts, creatures, and/or lands you control\" — additionalCost has no tap-N-permanents cost (only alternativeCost.tapCreatures, which replaces the mana cost)."
+  },
+  {
+   "name": "Hakbal of the Surging Soul",
+   "needs": [
+    "effect:explore-each"
+   ],
+   "why": "\"Each Merfolk creature you control explores\" needs every matching creature to explore in one resolution in an order the controller chooses (rule 701.44d, the ruling); explore takes one target only."
+  },
+  {
+   "name": "Huatli, Poet of Unity // Roar of the Fifth People",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "Roar chapter II \"This Saga gains 'Creatures you control have {T}: Add {R}, {G}, or {W}'\": no effect grants a static ability to a permanent (only grant-triggered / grant-activated); a lore-counter-gated static would differ when the chapter ability is countered or lore counters are added another way."
+  },
+  {
+   "name": "Jade Seedstones // Jadeheart Attendant",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "\"Distribute three +1/+1 counters among one, two, or three target creatures\" has no counter division (only damage-divided); a three-slot target-chosen conditional could reach every split only through hidden slot order (slot 0 getting two), which the player isn't told, so it isn't authored. Jadeheart Attendant itself is exact (exiledWithSourceManaValue)."
+  },
+  {
+   "name": "Kellan, Daring Traveler // Journey On",
+   "needs": [
+    "effect:opponents-controlling-count"
+   ],
+   "why": "Journey On's X is one plus the number of opponents who control an artifact; no EffectAmount counts players controlling a matching permanent (only opponentsControllingFewer / countPlayers). Kellan's own attack trigger is writable as Nylea, Keen-Eyed's look-and-choose with a manaValue lte 3 filter and a graveyard secondPick."
+  },
+  {
+   "name": "Magmatic Galleon",
+   "needs": [
+    "trigger:excess-damage-trigger"
+   ],
+   "why": "\"Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token\": no trigger on a permanent being dealt excess damage (batched)."
+  },
+  {
+   "name": "Malicious Eclipse",
+   "needs": [
+    "replacement:turn-exile-if-dies-filter"
+   ],
+   "why": "\"If a creature an opponent controls would die this turn, exile it instead\" is a turn-long replacement over a filter, covering creatures that enter or come under an opponent's control later (the ruling); no player-effect or effect installs one."
+  },
+  {
+   "name": "Market Gnome",
+   "needs": [
+    "keyword:craft"
+   ],
+   "why": "\"When this creature is exiled from the battlefield while you're activating a craft ability, you gain 1 life and draw a card\": craft isn't built (in progress in parallel), so the second trigger can't be expressed."
+  },
+  {
+   "name": "Market Gnome",
+   "needs": [
+    "trigger:exiled-while-crafting"
+   ],
+   "why": "\"When this creature is exiled from the battlefield while you're activating a craft ability\": leaves-battlefield has no clause for an exile made while activating a craft ability (paying its cost or its mana abilities, the rulings)."
+  },
+  {
+   "name": "Ore-Rich Stalactite // Cosmium Catalyst",
+   "needs": [
+    "effect:random-card-from-linked-exile"
+   ],
+   "why": "Cosmium Catalyst's \"choose an exiled card used to craft this artifact at random\": choose-random-card reads only a graveyard; cast-now from exiled-with-source would let the player pick."
+  },
+  {
+   "name": "Paleontologist's Pick-Axe // Dinosaur Headdress",
+   "needs": [
+    "effect:choose-card-exiled-with-source",
+    "effect:attached-becomes-copy-of-chosen-exiled"
+   ],
+   "why": "Dinosaur Headdress's \"as this Equipment becomes attached, choose an exiled creature card used to craft it\" and \"equipped creature is a copy of the last chosen card\" — neither the attach-time choice over linked exile nor a layer-1 copy of an exiled card on the equipped creature exists."
+  },
+  {
+   "name": "Petrify",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "\"Its activated abilities can't be activated\" for the enchanted permanent: StaticAbility.prohibits.abilitiesOf is a CardFilter matched with no source context, so it can't single out the permanent this Aura is attached to."
+  },
+  {
+   "name": "Quintorius Kand",
+   "needs": [
+    "zone:exile-from-graveyard-play-this-turn"
+   ],
+   "why": "−6's 'You may play those cards this turn' needs a play permission (lands included) on targeted cards exiled from the graveyard; exile's mayCast is cast-only and impulse-exile reads only a library. The rest (cast-from-exile trigger, +1, −3 discover 4, {R} per card exiled this way) is expressible."
+  },
+  {
+   "name": "Rampaging Ceratops",
+   "needs": [
+    "static:cant-be-blocked-except-by-n"
+   ],
+   "why": "\"Can't be blocked except by three or more creatures\": only menace's fixed two-blocker minimum exists (combat/blocking.ts); there is no static for an N-blocker minimum."
+  },
+  {
+   "name": "Saheeli's Lattice // Mastercraft Raptor",
+   "needs": [
+    "bug:cda-cards-exiled-with"
+   ],
+   "why": "Mastercraft Raptor's power is a CDA equal to the total power of the cards exiled to craft it; setBasePtFromCount has no count over linked exile."
+  },
+  {
+   "name": "Skullcap Snail",
+   "needs": [
+    "effect:target-player-exiles-from-hand"
+   ],
+   "why": "\"Target opponent exiles a card from their hand\" (their choice): discard-chosen is the controller's choice and a discard, and look-and-choose from a hand runs only for the controller or a for-each-player's that-player, never a target player."
+  },
+  {
+   "name": "Starving Revenant",
+   "needs": [
+    "effect:surveil-kept-on-top-count"
+   ],
+   "why": "\"Surveil 2. Then for each card you put on top of your library, you draw a card and you lose 3 life\": no amount reads how many surveilled cards stayed on top (the scried event's looked minus movedAway isn't exposed to effects)."
+  },
+  {
+   "name": "Storm Fleet Negotiator",
+   "needs": [
+    "keyword:parley"
+   ],
+   "why": "Parley: each player reveals the top card of their library and a Map is created per nonland card revealed this way; no effect reveals each player's top card and counts the nonland ones."
+  },
+  {
+   "name": "Subterranean Schooner",
+   "needs": [
+    "keyword:crewed-it-this-turn"
+   ],
+   "why": "\"Target creature that crewed it this turn\": the engine doesn't record which creatures crewed a Vehicle, so no target filter can say it."
+  },
+  {
+   "name": "Sunbird Standard // Sunbird Effigy",
+   "needs": [
+    "bug:cda-cards-exiled-with",
+    "effect:add-mana-extensions"
+   ],
+   "why": "Sunbird Effigy's P/T is the number of colours among the cards exiled to craft it (no CDA count over linked exile), and its mana ability adds one of each colour among them — `eachColorAmong` reads only battlefield permanents."
+  },
+  {
+   "name": "Sunfire Torch",
+   "needs": [
+    "cost:sacrifice-granting-source"
+   ],
+   "why": "The granted trigger's \"you may sacrifice Sunfire Torch\" must sacrifice the Equipment that granted it, not the creature the trigger is on; no EffectTargetRef reaches the granting permanent (a filter edict like 'an Equipment attached to it' would lose the Torch once it moved and let the player pick another Torch)."
+  },
+  {
+   "name": "Tetzin, Gnome Champion // The Golden-Gear Colossus",
+   "needs": [
+    "condition:filter-double-faced"
+   ],
+   "why": "\"Whenever Tetzin or another double-faced artifact you control enters\" and the Colossus's \"transform up to one other target double-faced artifact you control\" need a CardFilter clause for double-faced cards, which doesn't exist."
+  },
+  {
+   "name": "The Enigma Jewel // Locus of Enlightenment",
+   "needs": [
+    "static:grant-activated-abilities-of-exiled"
+   ],
+   "why": "\"Locus of Enlightenment has each activated ability of the exiled cards used to craft it. You may activate each of those abilities only once each turn\" — no static gives a permanent the activated abilities of its linked cards (its copy trigger exists, Illusionist's Bracers' shape)."
+  },
+  {
+   "name": "The Grim Captain's Locker",
+   "needs": [
+    "effect:grant-escape-until-end-of-turn"
+   ],
+   "why": "Second ability: until end of turn each creature card in your graveyard gains \"Escape—{3}{B}, Exile four other cards from your graveyard\" — no effect grants escape to graveyard cards (here the mass form, every creature card)."
+  },
+  {
+   "name": "Throne of the Grim Captain // The Grim Captain",
+   "needs": [
+    "effect:put-exiled-with-source-onto-battlefield",
+    "effect:enter-attacking"
+   ],
+   "why": "The Grim Captain's \"you may put an exiled creature card used to craft The Grim Captain onto the battlefield under your control tapped and attacking\": nothing chooses a card from the linked exile and puts it onto the battlefield (attacking a chosen defender)."
+  },
+  {
+   "name": "Topography Tracker",
+   "needs": [
+    "replacement:explore-replacement"
+   ],
+   "why": "\"If a creature you control would explore, instead it explores, then it explores again\" is an exploration replacement, which isn't built."
+  },
+  {
+   "name": "Twists and Turns // Mycoid Maze",
+   "needs": [
+    "replacement:explore-replacement"
+   ],
+   "why": "\"If a creature you control would explore, instead you scry 1, then that creature explores\" is a replacement of an exploration (stacking per copy, per the ruling), which isn't built."
+  },
+  {
+   "name": "Unlucky Drop",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target artifact or creature's owner puts it on their choice of the top or bottom of their library\" — the owner's choice; each-player-may can only ask the target's controller ({ controllerOfTarget }), which differs for a stolen permanent."
+  },
+  {
+   "name": "Unstable Glyphbridge // Sandswirl Wanderglyph",
+   "needs": [
+    "effect:choose-per-player-destroy-rest",
+    "effect:player-cant-attack-you-this-turn",
+    "static:attacked-you-cant-cast-spells"
+   ],
+   "why": "\"For each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way\" has no per-player choice-then-destroy-the-rest; Wanderglyph's \"they can't attack you or planeswalkers you control this turn\" (a player-level attack prohibition) and \"each opponent who attacked you … this turn can't cast spells\" aren't expressible."
+  },
+  {
+   "name": "Zoyowa's Justice",
+   "needs": [
+    "effect:discover-by-other-player"
+   ],
+   "why": "'Then that player discovers X' — the target's owner discovers from their own library and makes the cast/hand choice; the discover effect always uses the effect controller (ctx.discover(controller, …))."
+  }
+ ]
+}

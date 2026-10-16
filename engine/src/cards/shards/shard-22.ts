@@ -132,6 +132,7 @@ import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
 import _poolFontOfVigor from "../pool/font-of-vigor.js";
 import _poolFootNinjas from "../pool/foot-ninjas.js";
+import _poolForgottenMonument from "../pool/forgotten-monument.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
@@ -164,6 +165,7 @@ import _poolHospitalRoom from "../pool/hospital-room.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
+import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
@@ -332,6 +334,7 @@ import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
 import _poolSouthernElephant from "../pool/southern-elephant.js";
+import _poolSovereignsMacuahuitl from "../pool/sovereigns-macuahuitl.js";
 import _poolSpeciesSpecialist from "../pool/species-specialist.js";
 import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
@@ -412,6 +415,7 @@ import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
+import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
@@ -576,6 +580,7 @@ const shard: CardShard = {
     _poolFlowstoneShambler,
     _poolFontOfVigor,
     _poolFootNinjas,
+    _poolForgottenMonument,
     _poolFountainport,
     _poolFrontlineSage,
     _poolFulminatorMage,
@@ -608,6 +613,7 @@ const shard: CardShard = {
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
+    _poolHurlIntoHistory,
     _poolHydraOmnivore,
     _poolHydraulicHelper,
     _poolIconOfAncestry,
@@ -776,6 +782,7 @@ const shard: CardShard = {
     _poolSoltariCrusader,
     _poolSongOfCreation,
     _poolSouthernElephant,
+    _poolSovereignsMacuahuitl,
     _poolSpeciesSpecialist,
     _poolSpellgorgerWeird,
     _poolSphinxsRevelation,
@@ -856,6 +863,7 @@ const shard: CardShard = {
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
     _poolWaterloggedTeachings,
+    _poolWatertightGondola,
     _poolWebUp,
     _poolWelkinTern,
     _poolWhisperingShade,

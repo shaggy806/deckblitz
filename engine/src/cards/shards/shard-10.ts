@@ -79,6 +79,7 @@ import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
+import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
@@ -115,6 +116,7 @@ import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
+import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
 import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
@@ -141,6 +143,7 @@ import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
+import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
 import _poolGazeInWonder from "../pool/gaze-in-wonder.js";
@@ -221,6 +224,7 @@ import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
+import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
 import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
@@ -347,6 +351,7 @@ import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSporeCrawler from "../pool/spore-crawler.js";
 import _poolSpringOfEternalPeace from "../pool/spring-of-eternal-peace.js";
+import _poolSpyglassSiren from "../pool/spyglass-siren.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
@@ -446,6 +451,7 @@ import _poolZealousConscripts from "../pool/zealous-conscripts.js";
 import _poolZulaportCutthroat from "../pool/zulaport-cutthroat.js";
 import _tokens11BlueBirdToken from "../tokens/1-1-blue-bird-token.js";
 import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-veiled-butcher.js";
+import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
@@ -532,6 +538,7 @@ const shard: CardShard = {
     _poolCompellingArgument,
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,
+    _poolCorpsesOfTheLost,
     _poolCrawlingChorus,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
@@ -568,6 +575,7 @@ const shard: CardShard = {
     _poolDryadsRevival,
     _poolDuelTactics,
     _poolDutyBeyondDeath,
+    _poolEchoOfDusk,
     _poolEclipsedMerrow,
     _poolEkunduGriffin,
     _poolElectrostaticInfantry,
@@ -594,6 +602,7 @@ const shard: CardShard = {
     _poolFleshbagMarauder,
     _poolFloodedStrand,
     _poolFoggyBottomSwamp,
+    _poolFranciscoFowlMarauder,
     _poolGaeasSkyfolk,
     _poolGavonyUnhallowed,
     _poolGazeInWonder,
@@ -674,6 +683,7 @@ const shard: CardShard = {
     _poolLyraDawnbringer,
     _poolMagistratesScepter,
     _poolMajaBretagardProtector,
+    _poolMalametBattleGlyph,
     _poolManglehorn,
     _poolManifoldKey,
     _poolMarduDevotee,
@@ -800,6 +810,7 @@ const shard: CardShard = {
     _poolSpirebluffCanal,
     _poolSporeCrawler,
     _poolSpringOfEternalPeace,
+    _poolSpyglassSiren,
     _poolSquirrelSovereign,
     _poolStadiumTidalmage,
     _poolStaunchThroneguard,
@@ -901,6 +912,7 @@ const shard: CardShard = {
   tokens: [
     _tokens11BlueBirdToken,
     _tokensBeastTokenGarrukVeiledButcher,
+    _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,
     _tokensKomasCoil,

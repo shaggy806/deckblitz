@@ -86,6 +86,7 @@ import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
+import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
@@ -236,9 +237,11 @@ import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
 import _poolPatchworkBeastie from "../pool/patchwork-beastie.js";
+import _poolPathOfDiscovery from "../pool/path-of-discovery.js";
 import _poolPatronOfTheArts from "../pool/patron-of-the-arts.js";
 import _poolPegasusCharger from "../pool/pegasus-charger.js";
 import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
@@ -276,6 +279,7 @@ import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
+import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
 import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolDragonStyleTwins,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
+    _poolDuskRoseReliquary,
     _poolEagleVision,
     _poolEldraziMonument,
     _poolEldritchEvolution,
@@ -655,9 +660,11 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,
     _poolPatchworkBeastie,
+    _poolPathOfDiscovery,
     _poolPatronOfTheArts,
     _poolPegasusCharger,
     _poolPeterParkersCamera,
@@ -695,6 +702,7 @@ const shard: CardShard = {
     _poolRestorativeTechnique,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
+    _poolRiverHeraldGuide,
     _poolRockyTarPit,
     _poolRoomOfRefuge,
     _poolRottingFensnake,

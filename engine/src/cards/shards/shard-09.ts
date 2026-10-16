@@ -8,6 +8,7 @@ import _poolAbstractPaintmage from "../pool/abstract-paintmage.js";
 import _poolAbzanDevotee from "../pool/abzan-devotee.js";
 import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
+import _poolAcrobaticLeap from "../pool/acrobatic-leap.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
@@ -219,6 +220,7 @@ import _poolManaLeak from "../pool/mana-leak.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
+import _poolMinersGuidewing from "../pool/miners-guidewing.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
@@ -450,6 +452,7 @@ const shard: CardShard = {
     _poolAbzanDevotee,
     _poolAccomplishedAutomaton,
     _poolAcolyteOfXathrid,
+    _poolAcrobaticLeap,
     _poolAdamantWill,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
@@ -661,6 +664,7 @@ const shard: CardShard = {
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
     _poolMindseekerOculus,
+    _poolMinersGuidewing,
     _poolMirageMirror,
     _poolMistralCharger,
     _poolMizzixsMastery,

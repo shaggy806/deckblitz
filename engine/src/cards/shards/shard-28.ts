@@ -70,6 +70,7 @@ import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
+import _poolContestOfClaws from "../pool/contest-of-claws.js";
 import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCourtArchers from "../pool/court-archers.js";
@@ -88,6 +89,7 @@ import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
+import _poolDefossilize from "../pool/defossilize.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
@@ -137,6 +139,7 @@ import _poolGildedPinions from "../pool/gilded-pinions.js";
 import _poolGlasspoolMimic from "../pool/glasspool-mimic.js";
 import _poolGlasswingGrace from "../pool/glasswing-grace.js";
 import _poolGlidediveDuo from "../pool/glidedive-duo.js";
+import _poolGlorifierOfSuffering from "../pool/glorifier-of-suffering.js";
 import _poolGoblinArtillery from "../pool/goblin-artillery.js";
 import _poolGoblinWarPaint from "../pool/goblin-war-paint.js";
 import _poolGodEternalRhonas from "../pool/god-eternal-rhonas.js";
@@ -170,6 +173,7 @@ import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
+import _poolJadelightSpelunker from "../pool/jadelight-spelunker.js";
 import _poolJewelThief from "../pool/jewel-thief.js";
 import _poolJhessianThief from "../pool/jhessian-thief.js";
 import _poolJudithTheScourgeDiva from "../pool/judith-the-scourge-diva.js";
@@ -232,6 +236,7 @@ import _poolNightscapeApprentice from "../pool/nightscape-apprentice.js";
 import _poolNightwindGlider from "../pool/nightwind-glider.js";
 import _poolNissasPilgrimage from "../pool/nissas-pilgrimage.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
+import _poolOakenSiren from "../pool/oaken-siren.js";
 import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
 import _poolOmnathLocusOfCreation from "../pool/omnath-locus-of-creation.js";
@@ -408,6 +413,7 @@ import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
 import _poolWastelandViper from "../pool/wasteland-viper.js";
+import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
@@ -502,6 +508,7 @@ const shard: CardShard = {
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolConcealedCourtyard,
+    _poolContestOfClaws,
     _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
     _poolCourtArchers,
@@ -520,6 +527,7 @@ const shard: CardShard = {
     _poolDawnsTruce,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
+    _poolDefossilize,
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
@@ -569,6 +577,7 @@ const shard: CardShard = {
     _poolGlasspoolMimic,
     _poolGlasswingGrace,
     _poolGlidediveDuo,
+    _poolGlorifierOfSuffering,
     _poolGoblinArtillery,
     _poolGoblinWarPaint,
     _poolGodEternalRhonas,
@@ -602,6 +611,7 @@ const shard: CardShard = {
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,
+    _poolJadelightSpelunker,
     _poolJewelThief,
     _poolJhessianThief,
     _poolJudithTheScourgeDiva,
@@ -664,6 +674,7 @@ const shard: CardShard = {
     _poolNightwindGlider,
     _poolNissasPilgrimage,
     _poolNyamiClassMotherShip,
+    _poolOakenSiren,
     _poolOctomancer,
     _poolOctopusForm,
     _poolOmnathLocusOfCreation,
@@ -840,6 +851,7 @@ const shard: CardShard = {
     _poolWallOff,
     _poolWarclampMastiff,
     _poolWastelandViper,
+    _poolWaterloggedHulk,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
     _poolWhirlermaker,

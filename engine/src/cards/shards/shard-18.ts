@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
+import _poolAkalPakalFirstAmongEquals from "../pool/akal-pakal-first-among-equals.js";
 import _poolAkkiBlizzardHerder from "../pool/akki-blizzard-herder.js";
 import _poolAkkiDrillmaster from "../pool/akki-drillmaster.js";
 import _poolAkkiScrapchomper from "../pool/akki-scrapchomper.js";
@@ -69,6 +70,7 @@ import _poolCommandBeacon from "../pool/command-beacon.js";
 import _poolCommodoreGuff from "../pool/commodore-guff.js";
 import _poolCongregate from "../pool/congregate.js";
 import _poolCopperlineGorge from "../pool/copperline-gorge.js";
+import _poolCosmiumKiln from "../pool/cosmium-kiln.js";
 import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
@@ -78,6 +80,7 @@ import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
+import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
 import _poolDesperateCharge from "../pool/desperate-charge.js";
 import _poolDevotedDruid from "../pool/devoted-druid.js";
@@ -209,6 +212,7 @@ import _poolMaelstromNexus from "../pool/maelstrom-nexus.js";
 import _poolMagitekInfantry from "../pool/magitek-infantry.js";
 import _poolMagnigothSentry from "../pool/magnigoth-sentry.js";
 import _poolMagnusTheRed from "../pool/magnus-the-red.js";
+import _poolMalametScythe from "../pool/malamet-scythe.js";
 import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
 import _poolManticoreEternal from "../pool/manticore-eternal.js";
@@ -277,6 +281,7 @@ import _poolRedHulk from "../pool/red-hulk.js";
 import _poolRegalBunnicorn from "../pool/regal-bunnicorn.js";
 import _poolRegalImperiosaur from "../pool/regal-imperiosaur.js";
 import _poolRelentlessHunter from "../pool/relentless-hunter.js";
+import _poolRelicsRoar from "../pool/relics-roar.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRipApart from "../pool/rip-apart.js";
@@ -447,6 +452,7 @@ import _tokensCatTokenJolraelMwonvuliRecluse from "../tokens/cat-token-jolrael-m
 import _tokensCatToken from "../tokens/cat-token.js";
 import _tokensFaerieRogueToken from "../tokens/faerie-rogue-token.js";
 import _tokensFishTokenReefWorm from "../tokens/fish-token-reef-worm.js";
+import _tokensGolemTokenMastersGuideMuralMastersManufactory from "../tokens/golem-token-masters-guide-mural-masters-manufactory.js";
 import _tokensHumanKnightToken from "../tokens/human-knight-token.js";
 import _tokensInklingToken from "../tokens/inkling-token.js";
 import _tokensInsectWarriorToken from "../tokens/insect-warrior-token.js";
@@ -464,6 +470,7 @@ const shard: CardShard = {
   pool: [
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
+    _poolAkalPakalFirstAmongEquals,
     _poolAkkiBlizzardHerder,
     _poolAkkiDrillmaster,
     _poolAkkiScrapchomper,
@@ -528,6 +535,7 @@ const shard: CardShard = {
     _poolCommodoreGuff,
     _poolCongregate,
     _poolCopperlineGorge,
+    _poolCosmiumKiln,
     _poolCourserOfKruphix,
     _poolCrashingFootfalls,
     _poolCrucibleOfWorlds,
@@ -537,6 +545,7 @@ const shard: CardShard = {
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
     _poolDecadentDragon,
+    _poolDeepGoblinSkulltaker,
     _poolDeeprootChampion,
     _poolDesperateCharge,
     _poolDevotedDruid,
@@ -668,6 +677,7 @@ const shard: CardShard = {
     _poolMagitekInfantry,
     _poolMagnigothSentry,
     _poolMagnusTheRed,
+    _poolMalametScythe,
     _poolManaVault,
     _poolManholeCover,
     _poolManticoreEternal,
@@ -736,6 +746,7 @@ const shard: CardShard = {
     _poolRegalBunnicorn,
     _poolRegalImperiosaur,
     _poolRelentlessHunter,
+    _poolRelicsRoar,
     _poolResoluteRider,
     _poolRiftSower,
     _poolRipApart,
@@ -908,6 +919,7 @@ const shard: CardShard = {
     _tokensCatToken,
     _tokensFaerieRogueToken,
     _tokensFishTokenReefWorm,
+    _tokensGolemTokenMastersGuideMuralMastersManufactory,
     _tokensHumanKnightToken,
     _tokensInklingToken,
     _tokensInsectWarriorToken,

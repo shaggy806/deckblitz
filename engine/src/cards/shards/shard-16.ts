@@ -139,6 +139,7 @@ import _poolFocusTheMind from "../pool/focus-the-mind.js";
 import _poolFolkOfThePines from "../pool/folk-of-the-pines.js";
 import _poolFomoriNomad from "../pool/fomori-nomad.js";
 import _poolFoulOrchard from "../pool/foul-orchard.js";
+import _poolFrilledCaveWurm from "../pool/frilled-cave-wurm.js";
 import _poolFrilledOculus from "../pool/frilled-oculus.js";
 import _poolFrilledSandwalla from "../pool/frilled-sandwalla.js";
 import _poolFrontlineWarRager from "../pool/frontline-war-rager.js";
@@ -289,6 +290,8 @@ import _poolPursueThePast from "../pool/pursue-the-past.js";
 import _poolPyreSpawn from "../pool/pyre-spawn.js";
 import _poolPyrrhicStrike from "../pool/pyrrhic-strike.js";
 import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
+import _poolQueensBayPaladin from "../pool/queens-bay-paladin.js";
+import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
@@ -317,6 +320,7 @@ import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
+import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
@@ -423,6 +427,7 @@ import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
+import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
 import _poolWakeOfVultures from "../pool/wake-of-vultures.js";
 import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
@@ -605,6 +610,7 @@ const shard: CardShard = {
     _poolFolkOfThePines,
     _poolFomoriNomad,
     _poolFoulOrchard,
+    _poolFrilledCaveWurm,
     _poolFrilledOculus,
     _poolFrilledSandwalla,
     _poolFrontlineWarRager,
@@ -755,6 +761,8 @@ const shard: CardShard = {
     _poolPyreSpawn,
     _poolPyrrhicStrike,
     _poolQuandrixTheProof,
+    _poolQueensBayPaladin,
+    _poolQuicksandWhirlpool,
     _poolRabanastreRoyalCity,
     _poolRagingBull,
     _poolRampartHunter,
@@ -783,6 +791,7 @@ const shard: CardShard = {
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
     _poolSenateCourier,
+    _poolSentinelOfTheNamelessCity,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShatteredSanctum,
@@ -889,6 +898,7 @@ const shard: CardShard = {
     _poolVividGrove,
     _poolVivisection,
     _poolVoldarenDuelist,
+    _poolWailOfTheForgotten,
     _poolWakeOfVultures,
     _poolWalkingSarcophagus,
     _poolWallOfGranite,

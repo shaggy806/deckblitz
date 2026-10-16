@@ -34,20 +34,7 @@ export default defineCard({
     {
       cost: { mana: "{4}{G}", tap: true, sacrifice: "self" },
       targets: [],
-      effect: {
-        kind: "reveal-until",
-        filter: { notTypes: ["land"], manaValue: { op: "lte", n: 4 } },
-        exile: true,
-        keepFound: true,
-        rest: "bottom-random",
-        then: {
-          kind: "cast-now",
-          target: 0,
-          free: true,
-          spell: { manaValue: { op: "lte", n: 4 } },
-          else: { kind: "return-to-hand", target: 0, from: "exile" },
-        },
-      },
+      effect: { kind: "discover", amount: 4 },
       resolve: null,
       text: DISCOVER_TEXT,
       sorcerySpeed: true,

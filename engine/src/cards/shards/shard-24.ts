@@ -21,6 +21,7 @@ import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
+import _poolAnotherChance from "../pool/another-chance.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
@@ -155,6 +156,7 @@ import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
 import _poolGruulLocket from "../pool/gruul-locket.js";
+import _poolGuidestoneCompass from "../pool/guidestone-compass.js";
 import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
@@ -176,6 +178,7 @@ import _poolHiveStirrings from "../pool/hive-stirrings.js";
 import _poolHollowmurkSiege from "../pool/hollowmurk-siege.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
+import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
@@ -237,7 +240,9 @@ import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
+import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
+import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
@@ -439,6 +444,7 @@ const shard: CardShard = {
     _poolAlleyAssailant,
     _poolAncestorsAid,
     _poolAngelsMercy,
+    _poolAnotherChance,
     _poolAppealToEirdu,
     _poolArchersOfQarsi,
     _poolArchfiendOfDepravity,
@@ -573,6 +579,7 @@ const shard: CardShard = {
     _poolGravbladeHeavy,
     _poolGreatUglyLookingGoblin,
     _poolGruulLocket,
+    _poolGuidestoneCompass,
     _poolGurmagRakshasa,
     _poolHallMonitor,
     _poolHammerOfPurphoros,
@@ -594,6 +601,7 @@ const shard: CardShard = {
     _poolHollowmurkSiege,
     _poolHondenOfLifesWeb,
     _poolHotDogCart,
+    _poolHotfootGnome,
     _poolHuntersProwess,
     _poolImpoliteEntrance,
     _poolInfernalVessel,
@@ -655,7 +663,9 @@ const shard: CardShard = {
     _poolObscuraStorefront,
     _poolOgreSlumlord,
     _poolOgreWarrior,
+    _poolOltecArchaeologists,
     _poolOnTheJob,
+    _poolOrazcaPuzzleDoor,
     _poolOriginOfCaptainAmerica,
     _poolOverlordOfTheFloodpits,
     _poolParcelMyr,

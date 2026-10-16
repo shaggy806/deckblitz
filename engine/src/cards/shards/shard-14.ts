@@ -66,6 +66,7 @@ import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
+import _poolChupacabraEcho from "../pool/chupacabra-echo.js";
 import _poolCircleOfDreamsDruid from "../pool/circle-of-dreams-druid.js";
 import _poolClarionSpirit from "../pool/clarion-spirit.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
@@ -79,6 +80,7 @@ import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
 import _poolCorpseHauler from "../pool/corpse-hauler.js";
 import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
+import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
 import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
 import _poolCrawlingInfestation from "../pool/crawling-infestation.js";
 import _poolCreativeTechnique from "../pool/creative-technique.js";
@@ -200,12 +202,14 @@ import _poolHellspurBrute from "../pool/hellspur-brute.js";
 import _poolHemosymbicMite from "../pool/hemosymbic-mite.js";
 import _poolHeraldOfThePantheon from "../pool/herald-of-the-pantheon.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
+import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
+import _poolIdolOfTheDeepKing from "../pool/idol-of-the-deep-king.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
@@ -388,6 +392,7 @@ import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
+import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
@@ -494,6 +499,7 @@ const shard: CardShard = {
     _poolChiefOfTheScale,
     _poolChocoboRacetrack,
     _poolChromeDome,
+    _poolChupacabraEcho,
     _poolCircleOfDreamsDruid,
     _poolClarionSpirit,
     _poolClingingAnemones,
@@ -507,6 +513,7 @@ const shard: CardShard = {
     _poolConsultTheNecrosages,
     _poolCorpseHauler,
     _poolCosmograndZenith,
+    _poolCouncilOfEchoes,
     _poolCouriersBriefcase,
     _poolCrawlingInfestation,
     _poolCreativeTechnique,
@@ -628,12 +635,14 @@ const shard: CardShard = {
     _poolHemosymbicMite,
     _poolHeraldOfThePantheon,
     _poolHexplateWallbreaker,
+    _poolHiddenCataract,
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHollowScavenger,
     _poolHomicideInvestigator,
     _poolHulldrifter,
     _poolHumbleBudoka,
+    _poolIdolOfTheDeepKing,
     _poolImpassionedOrator,
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
@@ -816,6 +825,7 @@ const shard: CardShard = {
     _poolUrzasCave,
     _poolUrzasIncubator,
     _poolVampireNighthawk,
+    _poolVanguardOfTheRose,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,
     _poolVillageBellRinger,

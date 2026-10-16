@@ -966,6 +966,26 @@ export interface CascadeFound {
   readonly threshold: number;
 }
 
+/** One exploration (rule 701.44): who explored, whose library revealed what
+ * — `null` from an empty library — and whether it was a land card. */
+export interface ExploreResult {
+  readonly explorer: ObjectId;
+  readonly player: PlayerId;
+  readonly revealed: ObjectId | null;
+  readonly land: boolean;
+  /** The revealed card's name, for the "put it into your graveyard?" question. */
+  readonly revealedName?: string;
+}
+
+/** What discover found and exiled (rule 701.57a): `hit` is the discovered
+ * card (701.57c), `null` when the library ran out first; `exiled` is every
+ * card exiled, the hit included; `amount` is N. */
+export interface DiscoverFound {
+  readonly hit: ObjectId | null;
+  readonly exiled: readonly ObjectId[];
+  readonly amount: number;
+}
+
 /** The answer to cascade's "you may cast it" — see `EffectSpec` `cascade`. */
 export interface CascadeFinish {
   readonly hit: ObjectId;
@@ -2603,6 +2623,29 @@ export type EffectSpec =
       readonly discardsSince?: number;
     }
   | {
+      /**
+       * Explore (rule 701.44): the permanent's controller reveals the top
+       * card of their library. A land card goes to their hand; otherwise the
+       * permanent gets a +1/+1 counter and they may put the revealed card into
+       * their graveyard (it stays on top if not). With an empty library
+       * nothing is revealed and the counter is still put (the rulings). A
+       * permanent that has left still explores as it last existed (701.44c):
+       * its last controller reveals, nothing gets a counter, and the card may
+       * still go to the graveyard. Then it has explored (701.44b — an
+       * `explored` event, whatever was possible). `times` explores again
+       * after each one is done ("explores X times" — Jadelight Spelunker); the
+       * same card is revealed again if it was left on top. The may is the
+       * effect's controller's, so the explorer must be theirs.
+       */
+      readonly kind: "explore";
+      readonly target: EffectTargetRef;
+      readonly times?: EffectAmount;
+      /** Engine-built steps, never authored: the revealed card the player
+       * chose to put into their graveyard, and the finished exploration. */
+      readonly toGraveyard?: ObjectId;
+      readonly done?: ExploreResult;
+    }
+  | {
       readonly kind: "add-counter";
       readonly target: EffectTargetRef;
       readonly counter: string;
@@ -3209,6 +3252,32 @@ export type EffectSpec =
       /** The second half, once the offer is answered: everything it exiled
        * that's still in exile goes to the bottom in a random order. */
       readonly finish?: CascadeFinish;
+    }
+  | {
+      /**
+       * Craft's effect (rule 702.167a): "Return this card to the battlefield
+       * transformed under its owner's control" — the card the ability's
+       * cost exiled, if it's still in exile from that move (rule 400.7). The
+       * cards exiled with it as materials stay linked to it (702.167c). Built
+       * by the `craft` helper.
+       */
+      readonly kind: "craft-return";
+    }
+  | {
+      /**
+       * Discover N (rule 701.57a): exile cards from the top of the
+       * controller's library until a nonland card with mana value N or less
+       * is exiled; they may cast it without paying its mana cost if the
+       * resulting spell's mana value is N or less, and if they don't, it goes
+       * to their hand. The rest go to the bottom in a random order. They have
+       * discovered whatever was possible (701.57b — a `discovered` event).
+       */
+      readonly kind: "discover";
+      readonly amount: EffectAmount;
+      /** Engine-built halves, never authored: the free cast offered, then the
+       * rest once it's answered. */
+      readonly offer?: { readonly hit: ObjectId; readonly amount: number };
+      readonly finish?: DiscoverFound;
     }
   | {
       /**
@@ -4972,6 +5041,15 @@ export interface EffectApi {
   /** Announce that the effect's controller foraged — see the `foraged`
    * {@link EffectSpec}. */
   foraged(): void;
+  /** Explore's reveal (rule 701.44a): `explorer`'s controller — its last,
+   * if it has left — reveals the top card of their library, and a land card
+   * goes to their hand. `null` when there's no such player any more. */
+  exploreReveal(explorer: ObjectId): Omit<ExploreResult, "explorer"> | null;
+  /** The explore's "may put it into your graveyard": `card`, if it's still
+   * on top of its owner's library. */
+  exploreToGraveyard(card: ObjectId): void;
+  /** Announce a finished exploration (rule 701.44b). */
+  explored(result: ExploreResult): void;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -5649,6 +5727,14 @@ export interface EffectApi {
   cascade(controller: PlayerId, sourceId: ObjectId): CascadeFound | null;
   /** Cast what cascade found, or not, and put the rest on the bottom. */
   finishCascade(finish: CascadeFinish): void;
+  /** Craft's return (rule 702.167a) — see the `craft-return` effect. */
+  craftReturn(): void;
+  /** Discover's exiling (rule 701.57a): until a nonland card with mana value
+   * `amount` or less, or the library runs out. */
+  discover(amount: number): DiscoverFound;
+  /** Discover's tail: the discovered card to hand if it wasn't cast, the
+   * rest to the bottom in a random order, then `discovered` (701.57b). */
+  finishDiscover(found: DiscoverFound): void;
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
   copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId): void;
@@ -8284,6 +8370,68 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (amount > 0 && target !== undefined) ctx.addCounter(target, "+1/+1", amount);
       return;
     }
+    case "explore": {
+      if (spec.toGraveyard !== undefined) {
+        ctx.exploreToGraveyard(spec.toGraveyard);
+        return;
+      }
+      if (spec.done !== undefined) {
+        ctx.explored(spec.done);
+        return;
+      }
+      // "Explores X times": one whole exploration after another, each choice
+      // made before the next reveal.
+      const times = spec.times === undefined ? 1 : amountValue(spec.times, ctx);
+      if (times !== 1) {
+        if (times > 1) {
+          const once: EffectSpec = { kind: "explore", target: spec.target };
+          applyEffectSpec({ kind: "sequence", effects: Array.from({ length: times }, () => once) }, ctx);
+        }
+        return;
+      }
+      const target = resolveEffectTarget(spec.target, ctx);
+      // One that has left — or is back as a new object — still explores as
+      // it last existed (rule 701.44c), as a connive is read.
+      const read =
+        target ??
+        (typeof spec.target === "number"
+          ? ctx.readTargets?.[spec.target]
+          : spec.target === "source"
+            ? { kind: "object" as const, object: ctx.source }
+            : ctx.triggerObject !== undefined
+              ? { kind: "object" as const, object: ctx.triggerObject }
+              : undefined);
+      if (read?.kind !== "object") return;
+      const found = ctx.exploreReveal(read.object);
+      if (found === null) return;
+      const done: EffectSpec = { kind: "explore", target: spec.target, done: { explorer: read.object, ...found } };
+      if (found.land) {
+        applyEffectSpec(done, ctx);
+        return;
+      }
+      // Not a land card (or nothing revealed): the counter, on it only if
+      // it's still here, then the choice.
+      if (target !== undefined) ctx.addCounter(target, "+1/+1", 1);
+      if (found.revealed === null) {
+        applyEffectSpec(done, ctx);
+        return;
+      }
+      applyEffectSpec(
+        {
+          kind: "sequence",
+          effects: [
+            {
+              kind: "may",
+              prompt: `Put ${found.revealedName ?? "the revealed card"} into your graveyard? (Otherwise it stays on top of your library.)`,
+              effect: { kind: "explore", target: spec.target, toGraveyard: found.revealed },
+            },
+            done,
+          ],
+        },
+        ctx,
+      );
+      return;
+    }
     case "remove-counter": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.removeCounter(target, spec.counter, amountValue(spec.amount, ctx));
@@ -8534,6 +8682,40 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           effects: [
             { kind: "cascade", offer: { hit: found.hit, threshold: found.threshold } },
             { kind: "cascade", finish: { hit: found.hit, exiled: found.exiled, cast: false } },
+          ],
+        },
+        ctx,
+      );
+      return;
+    }
+    case "craft-return":
+      ctx.craftReturn();
+      return;
+    case "discover": {
+      if (spec.offer !== undefined) {
+        // "If the resulting spell's mana value is less than or equal to N."
+        ctx.castNow([spec.offer.hit], {
+          free: true,
+          exileAfter: false,
+          spell: { manaValue: { op: "lte", n: spec.offer.amount } },
+        });
+        return;
+      }
+      if (spec.finish !== undefined) {
+        ctx.finishDiscover(spec.finish);
+        return;
+      }
+      const found = ctx.discover(Math.max(0, amountValue(spec.amount, ctx)));
+      if (found.hit === null) {
+        ctx.finishDiscover(found);
+        return;
+      }
+      applyEffectSpec(
+        {
+          kind: "sequence",
+          effects: [
+            { kind: "discover", amount: found.amount, offer: { hit: found.hit, amount: found.amount } },
+            { kind: "discover", amount: found.amount, finish: found },
           ],
         },
         ctx,

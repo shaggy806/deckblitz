@@ -36,6 +36,7 @@ import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
+import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBattleDisplay from "../pool/battle-display.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
@@ -59,6 +60,7 @@ import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
+import _poolBuriedTreasure from "../pool/buried-treasure.js";
 import _poolBurlyBreaker from "../pool/burly-breaker.js";
 import _poolBushwhack from "../pool/bushwhack.js";
 import _poolButcherGhoul from "../pool/butcher-ghoul.js";
@@ -119,6 +121,7 @@ import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
 import _poolDryadsFavor from "../pool/dryads-favor.js";
+import _poolDuskLegionSergeant from "../pool/dusk-legion-sergeant.js";
 import _poolDuskdaleWurm from "../pool/duskdale-wurm.js";
 import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
@@ -192,6 +195,7 @@ import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
+import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
@@ -408,6 +412,7 @@ import _poolViridianShaman from "../pool/viridian-shaman.js";
 import _poolVodalianZombie from "../pool/vodalian-zombie.js";
 import _poolVolcanicIsland from "../pool/volcanic-island.js";
 import _poolVoraciousVarmint from "../pool/voracious-varmint.js";
+import _poolWalkWithTheAncestors from "../pool/walk-with-the-ancestors.js";
 import _poolWarrenWarleader from "../pool/warren-warleader.js";
 import _poolWastelandScorpion from "../pool/wasteland-scorpion.js";
 import _poolWatcherOfTheSpheres from "../pool/watcher-of-the-spheres.js";
@@ -476,6 +481,7 @@ const shard: CardShard = {
     _poolBarktoothWarbeard,
     _poolBasalThrull,
     _poolBasilicaScreecher,
+    _poolBaskingCapybara,
     _poolBattleDisplay,
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
@@ -499,6 +505,7 @@ const shard: CardShard = {
     _poolBreakerOfArmies,
     _poolBrightReprisal,
     _poolBrineShaman,
+    _poolBuriedTreasure,
     _poolBurlyBreaker,
     _poolBushwhack,
     _poolButcherGhoul,
@@ -559,6 +566,7 @@ const shard: CardShard = {
     _poolDragonkinBerserker,
     _poolDragonsPresence,
     _poolDryadsFavor,
+    _poolDuskLegionSergeant,
     _poolDuskdaleWurm,
     _poolDwarvenBlastminer,
     _poolDwarvenForgeChanter,
@@ -632,6 +640,7 @@ const shard: CardShard = {
     _poolHumblingElder,
     _poolHuntersBow,
     _poolIceCreamKitty,
+    _poolInThePresenceOfAges,
     _poolIncarnationTechnique,
     _poolIncubationDruid,
     _poolInfernalTribute,
@@ -848,6 +857,7 @@ const shard: CardShard = {
     _poolVodalianZombie,
     _poolVolcanicIsland,
     _poolVoraciousVarmint,
+    _poolWalkWithTheAncestors,
     _poolWarrenWarleader,
     _poolWastelandScorpion,
     _poolWatcherOfTheSpheres,

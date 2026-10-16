@@ -4,7 +4,7 @@
  * under `pool/` and `tokens/`.
  */
 
-import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "../abilities.js";
+import type { ActivatedAbility, CraftMaterials, TriggeredAbility, TriggerSpec } from "../abilities.js";
 import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type WardCost } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
@@ -934,6 +934,23 @@ export const squadTrigger = (): TriggeredAbility => ({
   effect: { kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true },
   resolve: null,
   text: "When this creature enters, if its squad cost was paid, create a token that's a copy of it for each time its squad cost was paid.",
+});
+
+/**
+ * Craft (rule 702.167a): "Craft with [materials] [cost]" means "[Cost], Exile
+ * this permanent, Exile [materials] from among permanents you control and/or
+ * cards in your graveyard: Return this card to the battlefield transformed
+ * under its owner's control. Activate only as a sorcery." `text` is the
+ * printed keyword line ("Craft with artifact {2}{W}"). The materials stay
+ * linked to the permanent it becomes, as cards exiled with it (702.167c).
+ */
+export const craft = (mana: string, materials: CraftMaterials, text: string): ActivatedAbility => ({
+  cost: { mana, tap: false, exileSelf: true, craft: materials },
+  sorcerySpeed: true,
+  targets: [],
+  effect: { kind: "craft-return" },
+  resolve: null,
+  text,
 });
 
 /**

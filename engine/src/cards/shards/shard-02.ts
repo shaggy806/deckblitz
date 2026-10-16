@@ -62,6 +62,7 @@ import _poolCatBurglar from "../pool/cat-burglar.js";
 import _poolCatacombSlug from "../pool/catacomb-slug.js";
 import _poolCausticBronco from "../pool/caustic-bronco.js";
 import _poolCautiousSurvivor from "../pool/cautious-survivor.js";
+import _poolCavernousMaw from "../pool/cavernous-maw.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
@@ -173,6 +174,7 @@ import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
+import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
@@ -226,6 +228,7 @@ import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
+import _poolMastersManufactory from "../pool/masters-manufactory.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
 import _poolMayhemDevil from "../pool/mayhem-devil.js";
 import _poolMelesseSpirit from "../pool/melesse-spirit.js";
@@ -363,6 +366,7 @@ import _poolTheRestorationOfEiganjo from "../pool/the-restoration-of-eiganjo.js"
 import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
+import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
@@ -486,6 +490,7 @@ const shard: CardShard = {
     _poolCatacombSlug,
     _poolCausticBronco,
     _poolCautiousSurvivor,
+    _poolCavernousMaw,
     _poolChampionsOfTheShoal,
     _poolChangelingOutcast,
     _poolCharitableLevy,
@@ -597,6 +602,7 @@ const shard: CardShard = {
     _poolHarvesttideInfiltrator,
     _poolHeartstringPuller,
     _poolHelionaut,
+    _poolHiddenCourtyard,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
     _poolHurloonShaman,
@@ -650,6 +656,7 @@ const shard: CardShard = {
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
     _poolMarangRiverSkeleton,
+    _poolMastersManufactory,
     _poolMaulfistSquad,
     _poolMayhemDevil,
     _poolMelesseSpirit,
@@ -787,6 +794,7 @@ const shard: CardShard = {
     _poolTheSquadronSinister,
     _poolTheSurgicalBay,
     _poolTheThirteenthDoctor,
+    _poolThousandMoonsInfantry,
     _poolThrillingDiscovery,
     _poolThroatSlitter,
     _poolThrummingHivepool,

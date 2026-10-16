@@ -60,11 +60,13 @@ import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCodieRavenousCodex from "../pool/codie-ravenous-codex.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
+import _poolCompassGnome from "../pool/compass-gnome.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
 import _poolConcentratedFire from "../pool/concentrated-fire.js";
 import _poolConfusticateAndBebother from "../pool/confusticate-and-bebother.js";
 import _poolConjurersCloset from "../pool/conjurers-closet.js";
+import _poolConsumingSepulcher from "../pool/consuming-sepulcher.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
@@ -83,6 +85,7 @@ import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
+import _poolDidactEcho from "../pool/didact-echo.js";
 import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
@@ -196,6 +199,7 @@ import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolKaraisTechnique from "../pool/karais-technique.js";
+import _poolKaslemsStrider from "../pool/kaslems-strider.js";
 import _poolKeeperOfFables from "../pool/keeper-of-fables.js";
 import _poolKetramoseTheNewDawn from "../pool/ketramose-the-new-dawn.js";
 import _poolKetriaTriome from "../pool/ketria-triome.js";
@@ -413,6 +417,7 @@ import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
+import _poolZoyowaLavaTongue from "../pool/zoyowa-lava-tongue.js";
 import _poolZuranSpellcaster from "../pool/zuran-spellcaster.js";
 import _tokensBadgerToken from "../tokens/badger-token.js";
 import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
@@ -487,11 +492,13 @@ const shard: CardShard = {
     _poolCliffsideLookout,
     _poolCodieRavenousCodex,
     _poolCometCrawler,
+    _poolCompassGnome,
     _poolCompulsiveResearch,
     _poolConcentrate,
     _poolConcentratedFire,
     _poolConfusticateAndBebother,
     _poolConjurersCloset,
+    _poolConsumingSepulcher,
     _poolContingencyPlan,
     _poolCopperLonglegs,
     _poolCormelaGlamourThief,
@@ -510,6 +517,7 @@ const shard: CardShard = {
     _poolDemonicCounsel,
     _poolDespark,
     _poolDiaryOfDreams,
+    _poolDidactEcho,
     _poolDissipate,
     _poolDivingGriffin,
     _poolDoggedHunter,
@@ -623,6 +631,7 @@ const shard: CardShard = {
     _poolJillShivasDominant,
     _poolJungleHollow,
     _poolKaraisTechnique,
+    _poolKaslemsStrider,
     _poolKeeperOfFables,
     _poolKetramoseTheNewDawn,
     _poolKetriaTriome,
@@ -840,6 +849,7 @@ const shard: CardShard = {
     _poolYoungPyromancer,
     _poolYumaProudProtector,
     _poolZimoneQuandrixProdigy,
+    _poolZoyowaLavaTongue,
     _poolZuranSpellcaster,
   ],
   tokens: [

@@ -2835,4 +2835,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Cenote Scout, Spyglass Siren, Merfolk Cave-Diver',
+    board({
+      you: {
+        bf: ['Merfolk Cave-Diver', 'Forest*4', 'Island*2'],
+        hand: ['Cenote Scout', 'Spyglass Siren'],
+        lib: ['Hill Giant', 'Forest'],
+      },
+    }),
+  ),
+  preset(
+    "Geological Appraiser, Curator of Sun's Creation",
+    board({
+      you: {
+        bf: ["Curator of Sun's Creation", 'Mountain*4'],
+        hand: ['Geological Appraiser'],
+        lib: ['Forest', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'],
+      },
+    }),
+  ),
+  preset(
+    'Oteclan Landmark',
+    board({
+      you: { bf: ['Oteclan Landmark', 'Plains*3', 'Treasure Token*2'], gy: ['Ornithopter'] },
+    }),
+  ),
 ]

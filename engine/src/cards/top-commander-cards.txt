@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3646 already implemented / 1354 missing (marks refreshed 2026-10-16)
+3662 already implemented / 1338 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -751,7 +751,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   752  Idyllic Tutor                            {2}{W}           Sorcery
 [x]   753  Loyal Apprentice                         {1}{R}           Creature — Human Artificer
 [x]   754  Eldritch Evolution                       {1}{G}{G}        Sorcery
-[ ]   755  Chimil, the Inner Sun                    {6}              Legendary Artifact
+[x]   755  Chimil, the Inner Sun                    {6}              Legendary Artifact
 [x]   756  Bloodchief Ascension                     {B}              Enchantment
 [x]   757  Aqueous Form                             {U}              Enchantment — Aura
 [x]   758  Valley Floodcaller                       {2}{U}           Creature — Otter Wizard
@@ -1633,7 +1633,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1640  Druid Class                              {1}{G}           Enchantment — Class
 [x]  1641  Traverse the Outlands                    {4}{G}           Sorcery
 [x]  1642  Felidar Sovereign                        {4}{W}{W}        Creature — Cat Beast
-[ ]  1643  Trumpeting Carnosaur                     {4}{R}{R}        Creature — Dinosaur
+[x]  1643  Trumpeting Carnosaur                     {4}{R}{R}        Creature — Dinosaur
 [ ]  1644  Wild-Magic Sorcerer                      {3}{R}           Creature — Orc Shaman Sorcerer
 [x]  1645  Grenzo, Havoc Raiser                     {R}{R}           Legendary Creature — Goblin Rogue
 [x]  1646  Loyal Warhound                           {1}{W}           Creature — Dog
@@ -1806,7 +1806,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1813  Deepglow Skate                           {4}{U}           Creature — Fish
 [x]  1814  Power Fist                               {1}{G}           Artifact — Equipment
 [x]  1815  Honest Rutstein                          {1}{B}{G}        Legendary Creature — Human Warlock
-[ ]  1816  Get Lost                                 {1}{W}           Instant
+[x]  1816  Get Lost                                 {1}{W}           Instant
 [x]  1817  Jarad, Golgari Lich Lord                 {B}{B}{G}{G}     Legendary Creature — Zombie Elf
 [x]  1818  Mistvault Bridge                         {0}              Artifact Land
 [x]  1819  Dimir Guildgate                          {0}              Land — Gate
@@ -2167,7 +2167,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2174  Prosper, Tome-Bound                      {2}{B}{R}        Legendary Creature — Tiefling Warlock
 [x]  2175  Cemetery Reaper                          {1}{B}{B}        Creature — Zombie
 [ ]  2176  The Key to the Vault                     {1}{U}           Legendary Artifact — Equipment
-[ ]  2177  Monstrous Vortex                         {3}{G}           Enchantment
+[x]  2177  Monstrous Vortex                         {3}{G}           Enchantment
 [x]  2178  Contaminated Aquifer                     {0}              Land — Island Swamp
 [x]  2179  Verdant Sun's Avatar                     {5}{G}{G}        Creature — Dinosaur Avatar
 [x]  2180  Primeval Bounty                          {5}{G}           Enchantment
@@ -2448,7 +2448,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2455  Molten Echoes                            {2}{R}{R}        Enchantment
 [x]  2456  Pyrohemia                                {2}{R}{R}        Enchantment
 [x]  2457  Runic Armasaur                           {1}{G}{G}        Creature — Dinosaur
-[ ]  2458  Pantlaza, Sun-Favored                    {2}{R}{G}{W}     Legendary Creature — Dinosaur
+[x]  2458  Pantlaza, Sun-Favored                    {2}{R}{G}{W}     Legendary Creature — Dinosaur
 [x]  2459  Yarok, the Desecrated                    {2}{B}{G}{U}     Legendary Creature — Elemental Horror
 [x]  2460  Atraxa, Praetors' Voice                  {G}{W}{U}{B}     Legendary Creature — Phyrexian Angel Horror
 [x]  2461  Mirrodin Besieged                        {2}{U}           Enchantment
@@ -2783,7 +2783,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2790  Venerated Rotpriest                      {G}              Creature — Phyrexian Druid
 [ ]  2791  Ethersworn Canonist                      {1}{W}           Artifact Creature — Human Cleric
 [x]  2792  Repulsive Mutation                       {X}{G}{U}        Instant
-[ ]  2793  Case of the Ransacked Lab                {2}{U}           Enchantment — Case
+[x]  2793  Case of the Ransacked Lab                {2}{U}           Enchantment — Case
 [x]  2794  Reyav, Master Smith                      {R}{W}           Legendary Creature — Dwarf Artificer
 [x]  2795  Blightbelly Rat                          {1}{B}           Creature — Phyrexian Rat
 [ ]  2796  Wrenn and Realmbreaker                   {1}{G}{G}        Legendary Planeswalker — Wrenn
@@ -3071,7 +3071,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3078  Blanchwood Armor                         {2}{G}           Enchantment — Aura
 [x]  3079  Stonybrook Banneret                      {1}{U}           Creature — Merfolk Wizard
 [x]  3080  Kuja, Genome Sorcerer // Trance Kuja, Fate Defied {4}              Legendary Creature — Human Mutant Wizard // Legendary Creature — Avatar Wizard
-[ ]  3081  Nuclear Fallout                          {X}{B}{B}        Sorcery
+[x]  3081  Nuclear Fallout                          {X}{B}{B}        Sorcery
 [x]  3082  Desert of the Fervent                    {0}              Land — Desert
 [x]  3083  Elvish Piper                             {3}{G}           Creature — Elf Shaman
 [x]  3084  Lagomos, Hand of Hatred                  {1}{B}{R}        Legendary Creature — Human Shaman
@@ -3628,7 +3628,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3635  Calix, Guided by Fate                    {1}{G}{W}        Legendary Enchantment Creature — Human Druid
 [ ]  3636  Rise and Shine                           {1}{U}           Sorcery
 [ ]  3637  Vexing Puzzlebox                         {3}              Artifact
-[ ]  3638  Path of Discovery                        {3}{G}           Enchantment
+[x]  3638  Path of Discovery                        {3}{G}           Enchantment
 [x]  3639  Ghyrson Starn, Kelermorph                {1}{U}{R}        Legendary Creature — Tyranid Human
 [ ]  3640  Sphinx's Tutelage                        {2}{U}           Enchantment
 [x]  3641  Sozin's Comet                            {3}{R}{R}        Sorcery
@@ -3801,7 +3801,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3808  Whitemane Lion                           {1}{W}           Creature — Cat
 [x]  3809  Lossarnach Captain                       {3}{W}           Creature — Human Soldier
 [x]  3810  Crucible of Fire                         {3}{R}           Enchantment
-[ ]  3811  Galadhrim Brigade                        {2}{G}           Creature — Elf Soldier
+[x]  3811  Galadhrim Brigade                        {2}{G}           Creature — Elf Soldier
 [x]  3812  Curse of Verbosity                       {2}{U}           Enchantment — Aura Curse
 [x]  3813  Reckoner's Bargain                       {1}{B}           Instant
 [x]  3814  Warden of Evos Isle                      {2}{U}           Creature — Bird Wizard
@@ -3913,7 +3913,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3920  Sorin of House Markov // Sorin, Ravenous Neonate {2}              Legendary Creature — Human Noble // Legendary Planeswalker — Sorin
 [x]  3921  Thalia and The Gitrog Monster            {1}{W}{B}{G}     Legendary Creature — Human Frog Horror
 [x]  3922  Eriette of the Charmed Apple             {1}{W}{B}        Legendary Creature — Human Warlock
-[ ]  3923  Restless Anchorage                       {0}              Land
+[x]  3923  Restless Anchorage                       {0}              Land
 [x]  3924  Llanowar Loamspeaker                     {1}{G}           Creature — Elf Druid
 [ ]  3925  Desecrate Reality                        {7}              Instant
 [ ]  3926  Vivien, Champion of the Wilds            {2}{G}           Legendary Planeswalker — Vivien
@@ -4155,7 +4155,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4162  Alphinaud Leveilleur                     {3}{U}           Legendary Creature — Elf Wizard
 [x]  4163  Oliphaunt                                {5}{R}           Creature — Elephant
 [x]  4164  Vision Skeins                            {1}{U}           Instant
-[ ]  4165  Feral Ghoul                              {2}{B}           Creature — Zombie Mutant
+[x]  4165  Feral Ghoul                              {2}{B}           Creature — Zombie Mutant
 [x]  4166  Thrilling Discovery                      {R}{W}           Sorcery
 [x]  4167  Dauntless Dismantler                     {1}{W}           Creature — Human Artificer
 [ ]  4168  Kopala, Warden of Waves                  {1}{U}{U}        Legendary Creature — Merfolk Wizard
@@ -4495,7 +4495,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4502  Yorion, Sky Nomad                        {3}{W/U}{W/U}    Legendary Creature — Bird Serpent
 [ ]  4503  Darien, King of Kjeldor                  {4}{W}{W}        Legendary Creature — Human Soldier
 [x]  4504  Gimli's Reckless Might                   {3}{R}           Enchantment
-[ ]  4505  Securitron Squadron                      {1}{W}           Artifact Creature — Robot
+[x]  4505  Securitron Squadron                      {1}{W}           Artifact Creature — Robot
 [x]  4506  Beacon of Unrest                         {3}{B}{B}        Sorcery
 [ ]  4507  Senu, Keen-Eyed Protector                {1}{W}           Legendary Creature — Bird Scout
 [ ]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
@@ -4542,7 +4542,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4549  Dreadbore                                {B}{R}           Sorcery
 [ ]  4550  Voidslime                                {G}{U}{U}        Instant
 [ ]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
-[ ]  4552  Fanatical Offering                       {1}{B}           Instant
+[x]  4552  Fanatical Offering                       {1}{B}           Instant
 [x]  4553  Tower Winder                             {1}{G}           Creature — Snake
 [ ]  4554  Labyrinth of Skophos                     {0}              Land
 [ ]  4555  Collective Voyage                        {G}              Sorcery
@@ -4754,7 +4754,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4761  Frodo, Adventurous Hobbit                {W}{B}           Legendary Creature — Halfling Scout
 [x]  4762  Alrund's Epiphany                        {5}{U}{U}        Sorcery
 [x]  4763  Kruphix, God of Horizons                 {3}{G}{U}        Legendary Enchantment Creature — God
-[ ]  4764  Vexing Radgull                           {1}{U}           Creature — Bird Mutant
+[x]  4764  Vexing Radgull                           {1}{U}           Creature — Bird Mutant
 [x]  4765  Mandate of Abaddon                       {3}{B}           Sorcery
 [ ]  4766  Dream Devourer                           {1}{B}           Creature — Demon Cleric
 [x]  4767  Traveler's Amulet                        {1}              Artifact
@@ -4779,7 +4779,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4786  Heartless Act                            {1}{B}           Instant
 [x]  4787  Mindless Automaton                       {4}              Artifact Creature — Construct
 [x]  4788  Nullpriest of Oblivion                   {1}{B}           Creature — Vampire Cleric
-[ ]  4789  Tithing Blade // Consuming Sepulcher     {2}              Artifact // Artifact
+[x]  4789  Tithing Blade // Consuming Sepulcher     {2}              Artifact // Artifact
 [x]  4790  Bilbo's Ring                             {3}              Legendary Artifact — Equipment
 [x]  4791  Goldhound                                {R}              Artifact Creature — Treasure Dog
 [x]  4792  Mathemagics                              {X}{X}{U}{U}     Sorcery
@@ -4874,7 +4874,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4881  Overcharged Amalgam                      {2}{U}{U}        Creature — Zombie Horror
 [ ]  4882  Wall of Frost                            {1}{U}{U}        Creature — Wall
 [x]  4883  Sunset Strikemaster                      {1}{R}           Creature — Human Monk
-[ ]  4884  Endless Foot Assault                     {2}{W}           Enchantment
+[x]  4884  Endless Foot Assault                     {2}{W}           Enchantment
 [ ]  4885  Thraben Watcher                          {2}{W}{W}        Creature — Angel
 [x]  4886  Sudden Breakthrough                      {1}{R}           Instant
 [ ]  4887  Elenda, Saint of Dusk                    {2}{W}{B}        Legendary Creature — Vampire Knight

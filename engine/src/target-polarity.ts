@@ -278,6 +278,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "put-counters-of": (n, v) => v.touch(n.target, "help", MAJOR),
   // Card selection and maybe a counter, for the conniving permanent's side.
   connive: (n, v) => v.touch(n.target, "help", MAJOR),
+  // A land to its controller's hand or a +1/+1 counter on it: theirs.
+  explore: (n, v) => v.touch(n.target, "help", MAJOR),
   "grant-player-hexproof": none,
   "grant-spells-this-turn": none,
   populate: none,
@@ -325,6 +327,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "take-extra-turn": (n, v) => v.touch(n.target, "help", MAJOR),
   storm: none,
   cascade: none,
+  discover: none,
+  "craft-return": none,
   // Its `then` sees the card found as target 0, not the enclosing slot 0.
   "reveal-until": (n, v) => v.touch(n.whose, "harm", MINOR),
   // The copy is yours whoever cast the original. A copy aimed at a target

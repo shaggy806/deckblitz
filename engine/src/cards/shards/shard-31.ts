@@ -104,6 +104,7 @@ import _poolDinotomaton from "../pool/dinotomaton.js";
 import _poolDiplomaticImmunity from "../pool/diplomatic-immunity.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
 import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
+import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
@@ -252,6 +253,7 @@ import _poolMischievousMystic from "../pool/mischievous-mystic.js";
 import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
+import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
@@ -274,6 +276,7 @@ import _poolPestFriend from "../pool/pest-friend.js";
 import _poolPetrifiedField from "../pool/petrified-field.js";
 import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
+import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
@@ -530,6 +533,7 @@ const shard: CardShard = {
     _poolDiplomaticImmunity,
     _poolDiscerningPeddler,
     _poolDiscreetRetreat,
+    _poolDisturbedSlumber,
     _poolDivineArrow,
     _poolDizzySpell,
     _poolDrMadisonLi,
@@ -678,6 +682,7 @@ const shard: CardShard = {
     _poolMoanOfTheUnhallowed,
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
+    _poolMonstrousVortex,
     _poolMortalitySpear,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
@@ -700,6 +705,7 @@ const shard: CardShard = {
     _poolPetrifiedField,
     _poolPhyrexianLens,
     _poolPriestsOfNorn,
+    _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
     _poolRabidBite,
     _poolRaidingNightstalker,

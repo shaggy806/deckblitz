@@ -21,6 +21,7 @@ import type {
   AbilityCost,
   ActivatedAbility,
   CostReductionAmount,
+  CraftMaterials,
   DefenderLife,
   SacrificeCost,
   SacrificeCostPart,
@@ -169,6 +170,7 @@ import type {
   BoardManaList,
   CascadeFinish,
   CascadeFound,
+  DiscoverFound,
   CastNowOptions,
   DamageFrom,
   DelayedNextSpell,
@@ -12947,6 +12949,24 @@ export class Game {
         return `${player}'s graveyard can't collect evidence ${ability.cost.collectEvidence} for ${def.name}'s cost`;
       }
     }
+    if (ability.cost.craft !== undefined) {
+      // Chosen once the ability is on the stack, as collected evidence is.
+      if (
+        isManaAbility(ability) ||
+        ability.cost.blight !== undefined ||
+        ability.cost.collectEvidence !== undefined ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        costReturn !== undefined
+      ) {
+        return `${def.name}'s ability can't craft beside that cost`;
+      }
+      // Rules 602.2b, 601.2h: the materials have to be there to pay with.
+      if (!this.canCraft(player, sourceId, ability.cost.craft)) {
+        return `${player} lacks the materials to craft with ${ability.cost.craft.text}`;
+      }
+    }
     return null;
   }
 
@@ -13399,6 +13419,10 @@ export class Game {
         this.beginBlight(player, sourceId, ability.cost.blight as number, { x: chosenX, priorityTo: player }),
       );
     }
+    // Craft's materials (rule 702.167a): which, chosen now too — the card
+    // itself is already in exile (`exileSelf`), and they're linked to it.
+    const craft = ability.cost.craft;
+    if (craft !== undefined) this.withDecisionSource(sourceId, () => this.beginCraft(player, sourceId, craft));
     // "Collect evidence N" (rule 701.59a): which cards, chosen now too.
     if (ability.cost.collectEvidence !== undefined) {
       this.withDecisionSource(sourceId, () =>
@@ -16669,6 +16693,8 @@ export class Game {
             event.type === "became-monstrous" ||
             event.type === "became-saddled" ||
             event.type === "permanent-exerted" ||
+            // "Whenever a creature you control explores, … it" — the explorer.
+            event.type === "explored" ||
             // "Whenever a permanent you control is turned face up … it"
             // (Trail of Mystery).
             event.type === "permanent-turned-face-up"
@@ -16761,6 +16787,9 @@ export class Game {
                     : // "The number of cards looked at while scrying this way".
                     ability.trigger.on === "scries" && event.type === "scried"
                     ? event.looked
+                    : // "Discover again for the same value" (Curator of Sun's Creation).
+                    ability.trigger.on === "discovers" && event.type === "discovered"
+                    ? event.amount
                     : // The N it became monstrous with (rule 701.37c's X).
                     ability.trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
                     ? event.amount
@@ -18041,6 +18070,22 @@ export class Game {
         return event.type === "card-plotted" && event.object === self.id;
       case "evidence-collected":
         return event.type === "evidence-collected" && event.player === self.controller;
+      case "discovers":
+        return event.type === "discovered" && event.player === self.controller;
+      case "explores": {
+        if (event.type !== "explored") return false;
+        if (spec.revealed === "land" && !event.land) return false;
+        if (spec.revealed === "nonland" && (event.land || event.revealed === null)) return false;
+        if (spec.who === "self") return event.object === self.id;
+        if (event.player !== self.controller) return false;
+        if (spec.filter === undefined) return true;
+        // As it explored: one that has left is read as it last was.
+        const here = this.state.objects[event.object]?.zone === "battlefield";
+        return matchesFilter(this.state, this.registry, event.object, spec.filter, {
+          you: self.controller,
+          ...(here ? {} : { lastKnown: true }),
+        });
+      }
       case "crime-committed":
         return (
           event.type === "crime-committed" &&
@@ -19546,6 +19591,49 @@ export class Game {
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
       foraged: () => this.emit({ type: "foraged", player: controller }),
+      craftReturn: () => {
+        // The card its cost exiled, still in exile from that move (rule
+        // 400.7): one stint on from the battlefield stint it was activated in.
+        const card = this.state.objects[source];
+        if (card === undefined || card.zone !== "exile" || refs.source === undefined) return;
+        const exiled = card.zoneChangeCount ?? 0;
+        if (exiled !== refs.source + 1) return;
+        this.putOntoBattlefieldByEffect({ kind: "object", object: source }, card.owner, false, false, undefined, false, true);
+        const entered = this.state.objects[source];
+        if (entered?.zone !== "battlefield") return;
+        // "The exiled cards used to craft it" (702.167c): the permanent it
+        // became, in this new stint.
+        for (const object of Object.values(this.state.objects)) {
+          if (object.exiledWith?.source === source && object.exiledWith.zoneChangeCount === exiled) {
+            object.exiledWith = { source, zoneChangeCount: entered.zoneChangeCount ?? 0 };
+          }
+        }
+      },
+      exploreReveal: (explorer) => {
+        const player =
+          lastKnownOf({ kind: "object", object: explorer })?.controller ?? this.state.objects[explorer]?.controller;
+        if (player === undefined || this.state.players[player]?.hasLost === true) return null;
+        const top = this.state.zones.perPlayer[player]?.library[0];
+        if (top === undefined) return { player, revealed: null, land: false };
+        this.revealCards(player, [top], "library");
+        const land = effectiveTypes(this.state, this.registry, this.state.objects[top]).includes("land");
+        if (land) this.moveObject(top, "hand");
+        return { player, revealed: top, land, revealedName: printedCardName(this.state.objects[top]) };
+      },
+      exploreToGraveyard: (card) => {
+        const object = this.state.objects[card];
+        if (object !== undefined && this.state.zones.perPlayer[object.owner]?.library[0] === card) {
+          this.moveObject(card, "graveyard");
+        }
+      },
+      explored: (result) =>
+        this.emit({
+          type: "explored",
+          object: result.explorer,
+          player: result.player,
+          revealed: result.revealed,
+          land: result.land,
+        }),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
       opponentsAttacked: () => {
         const attacked = new Set<PlayerId>();
@@ -20729,6 +20817,8 @@ export class Game {
       storm: (sourceId) => this.stormCopy(sourceId),
       cascade: (player, sourceId) => this.cascade(player, sourceId),
       finishCascade: (finish) => this.finishCascade(finish),
+      discover: (amount) => this.discover(controller, amount),
+      finishDiscover: (found) => this.finishDiscover(controller, found),
       castNow: (cards, options) => this.raiseCastNow(options.by ?? controller, source, cards, options),
       castSince: (cards, since, by) =>
         eventLogSince(this.state, since).some(
@@ -23932,6 +24022,39 @@ export class Game {
     this.state.rngState = this.rng.seed;
   }
 
+  /** Discover N's exiling (rule 701.57a): from the top of `player`'s
+   * library, one card at a time, until a nonland card with mana value
+   * `amount` or less — the discovered card (701.57c) — or the library runs
+   * out. */
+  private discover(player: PlayerId, amount: number): DiscoverFound {
+    const library = this.state.zones.perPlayer[player].library;
+    const exiled: ObjectId[] = [];
+    let hit: ObjectId | null = null;
+    while (library.length > 0) {
+      const top = library[0];
+      this.moveObject(top, "exile");
+      exiled.push(top);
+      const def = this.registry.get(this.state.objects[top].cardName);
+      if (!def.types.includes("land") && manaValue(parseManaCost(def.manaCost)) <= amount) {
+        hit = top;
+        break;
+      }
+    }
+    return { hit, exiled, amount };
+  }
+
+  /** Discover's tail (rule 701.57a): the discovered card, if it's still in
+   * exile — not cast — goes to its owner's hand; everything else it exiled
+   * that's still there goes to the bottom in a random order. Then `player`
+   * has discovered (701.57b). */
+  private finishDiscover(player: PlayerId, found: DiscoverFound): void {
+    if (found.hit !== null && this.state.objects[found.hit]?.zone === "exile") this.moveObject(found.hit, "hand");
+    const toBottom = found.exiled.filter((id) => id !== found.hit && this.state.objects[id]?.zone === "exile");
+    for (const id of shuffle(toBottom, this.rng)) this.moveObject(id, "library");
+    this.state.rngState = this.rng.seed;
+    this.emit({ type: "discovered", player, amount: found.amount, hit: found.hit });
+  }
+
   /**
    * The finding half of a `reveal-until`: reveal (or exile, face up, one at
    * a time) `owner`'s library from the top until a card matches the spec's
@@ -25176,6 +25299,104 @@ export class Game {
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
+
+  /** The permanents `player` controls and the cards in their graveyard that
+   * could be one of a craft's materials (rule 702.167a): matching its
+   * filter — or one of its `oneEach` filters — other than the card being
+   * crafted (`source`), a permanent only without `cardsOnly` (702.167b). */
+  private craftCandidates(player: PlayerId, source: ObjectId, craft: CraftMaterials): ObjectId[] {
+    const filters = craft.oneEach ?? [craft.filter ?? {}];
+    const fits = (id: ObjectId): boolean =>
+      id !== source && filters.some((filter) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
+    const permanents =
+      craft.cardsOnly === true
+        ? []
+        : this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.controller === player && fits(id));
+    return [...permanents, ...this.state.zones.perPlayer[player].graveyard.filter(fits)];
+  }
+
+  /** Each craft candidate's tags for the choice's `together` rule: its card
+   * types (`share`), or the `oneEach` slots it could fill. */
+  private craftTags(player: PlayerId, craft: CraftMaterials, ids: readonly ObjectId[]): Record<string, string[]> {
+    return Object.fromEntries(
+      ids.map((id) => [
+        id,
+        craft.oneEach !== undefined
+          ? craft.oneEach.flatMap((filter, slot) =>
+              matchesFilter(this.state, this.registry, id, filter, { you: player }) ? [String(slot)] : [],
+            )
+          : [...effectiveTypes(this.state, this.registry, this.state.objects[id])],
+      ]),
+    );
+  }
+
+  /** Whether `player` has the materials for `craft` (rule 702.167a): enough
+   * candidates — a token stack counting each token — that, for `share`, have
+   * a card type in common, or, for `oneEach`, fill a slot apiece. */
+  private canCraft(player: PlayerId, source: ObjectId, craft: CraftMaterials): boolean {
+    const ids = this.craftCandidates(player, source, craft);
+    if (permanentCount(this.state, ids) < craft.count) return false;
+    if (craft.share === undefined && craft.oneEach === undefined) return true;
+    const tags = this.craftTags(player, craft, ids);
+    const units = ids.flatMap((id) =>
+      Array.from({ length: Math.min(this.state.objects[id]?.stackCount ?? 1, craft.count) }, () => tags[id] ?? []),
+    );
+    if (craft.share !== undefined) {
+      const counts = new Map<string, number>();
+      for (const unit of units) for (const tag of unit) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+      return [...counts.values()].some((n) => n >= craft.count);
+    }
+    // One per slot: a matching that fills every slot (four at most).
+    const used = new Set<number>();
+    const fill = (slot: number): boolean => {
+      if (slot === craft.count) return true;
+      for (let i = 0; i < units.length; i += 1) {
+        if (used.has(i) || !units[i].includes(String(slot))) continue;
+        used.add(i);
+        if (fill(slot + 1)) return true;
+        used.delete(i);
+      }
+      return false;
+    };
+    return fill(0);
+  }
+
+  /**
+   * Craft's materials (rule 702.167a), chosen as the cost is paid: `count` of
+   * the candidates (or more, with `orMore`), exiled and linked to the card
+   * being crafted in the stint it's in now, in exile (702.167c) — the
+   * `craft-return` effect carries the link on to the permanent it becomes.
+   * Tokens of one stack are offered one by one, as a behold's are.
+   */
+  private beginCraft(player: PlayerId, source: ObjectId, craft: CraftMaterials): void {
+    const card = this.state.objects[source];
+    if (card === undefined || !this.canCraft(player, source, craft)) return;
+    const most = craft.orMore === true ? Game.MAX_EFFECT_INSTANCES : craft.count;
+    const eligible = this.craftCandidates(player, source, craft).flatMap((id) => {
+      const split: ObjectId[] = [id];
+      while (split.length < most && (this.state.objects[id]?.stackCount ?? 1) > 1) split.push(this.splitOneFromStack(id));
+      return split;
+    });
+    const together: ZoneChoiceTogether | undefined =
+      craft.share !== undefined
+        ? { rule: "share", tags: this.craftTags(player, craft, eligible), text: craft.text }
+        : craft.oneEach !== undefined
+          ? { rule: "one-each", tags: this.craftTags(player, craft, eligible), text: craft.text }
+          : undefined;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: craft.count,
+      max: craft.orMore === true ? eligible.length : craft.count,
+      destination: "exile",
+      leftover: "stay",
+      ...(together !== undefined ? { together } : {}),
+      exileLink: { source, zoneChangeCount: card.zoneChangeCount ?? 0 },
+      priorityTo: player,
+    };
+  }
 
   /** Whether `player` could collect evidence `amount` (rule 701.59b): their
    * graveyard holds cards with that much total mana value. */

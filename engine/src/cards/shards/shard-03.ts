@@ -35,6 +35,7 @@ import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
+import _poolBygoneMarvels from "../pool/bygone-marvels.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
 import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
@@ -79,6 +80,7 @@ import _poolDoctorDoom from "../pool/doctor-doom.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
 import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
 import _poolDracosaurAuxiliary from "../pool/dracosaur-auxiliary.js";
+import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
@@ -207,6 +209,7 @@ import _poolMassMutiny from "../pool/mass-mutiny.js";
 import _poolMassOfMysteries from "../pool/mass-of-mysteries.js";
 import _poolMaximumOverdrive from "../pool/maximum-overdrive.js";
 import _poolMedicsKitesail from "../pool/medics-kitesail.js";
+import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
@@ -221,6 +224,7 @@ import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
+import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
 import _poolNoblePanther from "../pool/noble-panther.js";
 import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
@@ -311,6 +315,7 @@ import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
+import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
 import _poolSteamVents from "../pool/steam-vents.js";
 import _poolSterlingHound from "../pool/sterling-hound.js";
 import _poolStoneKavu from "../pool/stone-kavu.js";
@@ -375,6 +380,7 @@ import _poolVraskasContempt from "../pool/vraskas-contempt.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
 import _poolWalltopSentries from "../pool/walltop-sentries.js";
 import _poolWanderingArchaic from "../pool/wandering-archaic.js";
+import _poolWardenOfTheInnerSky from "../pool/warden-of-the-inner-sky.js";
 import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
@@ -441,6 +447,7 @@ const shard: CardShard = {
     _poolBovineIntervention,
     _poolBrotherhoodPatriarch,
     _poolBuzzardWaspColony,
+    _poolBygoneMarvels,
     _poolCaitSithFortuneTeller,
     _poolCalamityGallopingInferno,
     _poolCandlekeepSage,
@@ -485,6 +492,7 @@ const shard: CardShard = {
     _poolDogmeatEverLoyal,
     _poolDoombotHarbinger,
     _poolDracosaurAuxiliary,
+    _poolDreadOsseosaur,
     _poolDreadhound,
     _poolDreamTwist,
     _poolDustBowl,
@@ -613,6 +621,7 @@ const shard: CardShard = {
     _poolMassOfMysteries,
     _poolMaximumOverdrive,
     _poolMedicsKitesail,
+    _poolMerfolkCaveDiver,
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMinotaurAggressor,
@@ -627,6 +636,7 @@ const shard: CardShard = {
     _poolNecraDisciple,
     _poolNecronDeathmark,
     _poolNettleSwine,
+    _poolNicanzilCurrentConductor,
     _poolNimbusWings,
     _poolNoblePanther,
     _poolNyxbloomAncient,
@@ -717,6 +727,7 @@ const shard: CardShard = {
     _poolSpiritMascot,
     _poolSplendidReclamation,
     _poolStarlitAngel,
+    _poolStaunchCrewmate,
     _poolSteamVents,
     _poolSterlingHound,
     _poolStoneKavu,
@@ -781,6 +792,7 @@ const shard: CardShard = {
     _poolWallOfRoots,
     _poolWalltopSentries,
     _poolWanderingArchaic,
+    _poolWardenOfTheInnerSky,
     _poolWargTactics,
     _poolWaspShrinkingSavior,
     _poolWeatherMaker,

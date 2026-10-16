@@ -61,6 +61,7 @@ import _poolCacklingProwler from "../pool/cackling-prowler.js";
 import _poolCageOfHands from "../pool/cage-of-hands.js";
 import _poolCalderaPyremaw from "../pool/caldera-pyremaw.js";
 import _poolCallTheMountainChocobo from "../pool/call-the-mountain-chocobo.js";
+import _poolCaparoctiSunborn from "../pool/caparocti-sunborn.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
@@ -185,8 +186,10 @@ import _poolHellkiteCourser from "../pool/hellkite-courser.js";
 import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
+import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIAmIronMan from "../pool/i-am-iron-man.js";
+import _poolIcebergTitan from "../pool/iceberg-titan.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
@@ -200,6 +203,7 @@ import _poolIvyDancer from "../pool/ivy-dancer.js";
 import _poolIzoniThousandEyed from "../pool/izoni-thousand-eyed.js";
 import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
 import _poolJayasFirenado from "../pool/jayas-firenado.js";
+import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
@@ -273,6 +277,7 @@ import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
 import _poolPriestOfForgottenGods from "../pool/priest-of-forgotten-gods.js";
 import _poolPrimalVisitation from "../pool/primal-visitation.js";
+import _poolPrimordialGnawer from "../pool/primordial-gnawer.js";
 import _poolProfessorDellianFel from "../pool/professor-dellian-fel.js";
 import _poolProfessorHulk from "../pool/professor-hulk.js";
 import _poolProsperityTycoon from "../pool/prosperity-tycoon.js";
@@ -344,11 +349,13 @@ import _poolSmitingHelix from "../pool/smiting-helix.js";
 import _poolSnappingDrake from "../pool/snapping-drake.js";
 import _poolSocialSnub from "../pool/social-snub.js";
 import _poolSoldierMilitaryProgram from "../pool/soldier-military-program.js";
+import _poolSongOfStupefaction from "../pool/song-of-stupefaction.js";
 import _poolSoulherder from "../pool/soulherder.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
+import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
 import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
@@ -402,6 +409,7 @@ import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
+import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
@@ -451,6 +459,7 @@ import _tokensElementalTokenLagomosHandOfHatred from "../tokens/elemental-token-
 import _tokensFirstMateRagavan from "../tokens/first-mate-ragavan.js";
 import _tokensGreenSpiderTokenReach from "../tokens/green-spider-token-reach.js";
 import _tokensLifelinkSoldierToken from "../tokens/lifelink-soldier-token.js";
+import _tokensMapToken from "../tokens/map-token.js";
 import _tokensMerfolkToken from "../tokens/merfolk-token.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink from "../tokens/phyrexian-wurm-token-wurmcoil-larva-lifelink.js";
 import _tokensSpiritTokenColorless from "../tokens/spirit-token-colorless.js";
@@ -515,6 +524,7 @@ const shard: CardShard = {
     _poolCageOfHands,
     _poolCalderaPyremaw,
     _poolCallTheMountainChocobo,
+    _poolCaparoctiSunborn,
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
     _poolCartoucheOfSolidarity,
@@ -639,8 +649,10 @@ const shard: CardShard = {
     _poolHiredClaw,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
+    _poolHuatlisFinalStrike,
     _poolHydraAssaultRobot,
     _poolIAmIronMan,
+    _poolIcebergTitan,
     _poolIdentityEcho,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
@@ -654,6 +666,7 @@ const shard: CardShard = {
     _poolIzoniThousandEyed,
     _poolJacesIngenuity,
     _poolJayasFirenado,
+    _poolJoinTheDead,
     _poolJubilation,
     _poolJukaiMessenger,
     _poolJuniperOrderDruid,
@@ -727,6 +740,7 @@ const shard: CardShard = {
     _poolPowerFist,
     _poolPriestOfForgottenGods,
     _poolPrimalVisitation,
+    _poolPrimordialGnawer,
     _poolProfessorDellianFel,
     _poolProfessorHulk,
     _poolProsperityTycoon,
@@ -798,11 +812,13 @@ const shard: CardShard = {
     _poolSnappingDrake,
     _poolSocialSnub,
     _poolSoldierMilitaryProgram,
+    _poolSongOfStupefaction,
     _poolSoulherder,
     _poolSowerOfChaos,
     _poolSpectacleSummit,
     _poolSpellStutter,
     _poolSpinedMegalodon,
+    _poolSpringLoadedSawblades,
     _poolStandUpForYourself,
     _poolStarfieldMystic,
     _poolStarfighterPilot,
@@ -856,6 +872,7 @@ const shard: CardShard = {
     _poolTunnelOfHate,
     _poolTwistedLandscape,
     _poolTwofoldIntent,
+    _poolUchbenbakTheGreatMistake,
     _poolUltramarinesHonourGuard,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
@@ -907,6 +924,7 @@ const shard: CardShard = {
     _tokensFirstMateRagavan,
     _tokensGreenSpiderTokenReach,
     _tokensLifelinkSoldierToken,
+    _tokensMapToken,
     _tokensMerfolkToken,
     _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink,
     _tokensSpiritTokenColorless,

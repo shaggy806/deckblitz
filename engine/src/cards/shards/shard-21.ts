@@ -42,11 +42,13 @@ import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
+import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
+import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
 import _poolCarnivorousPlant from "../pool/carnivorous-plant.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
@@ -442,11 +444,13 @@ const shard: CardShard = {
     _poolBoonOfEmrakul,
     _poolBother,
     _poolBrawnAmadeusCho,
+    _poolBrazenBlademaster,
     _poolBronzeWalrus,
     _poolBugenhagenWiseElder,
     _poolBurstOfSpeed,
     _poolCacklingFiend,
     _poolCadricSoulKindler,
+    _poolCanonizedInBlood,
     _poolCarnivorousPlant,
     _poolCephalidFacetaker,
     _poolChainReaction,

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-420 already implemented / 80 missing
+421 already implemented / 79 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -18,7 +18,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   12  Teval, the Balanced Scale                      38826 decks  {1}{B}{G}{U}     Legendary Creature — Spirit Dragon
 [x]   13  Fire Lord Azula                                37711 decks  {1}{U}{B}{R}     Legendary Creature — Human Noble
 [x]   14  Ms. Bumbleflower                               36979 decks  {1}{G}{W}{U}     Legendary Creature — Rabbit Citizen
-[ ]   15  Pantlaza, Sun-Favored                          36786 decks  {2}{R}{G}{W}     Legendary Creature — Dinosaur
+[x]   15  Pantlaza, Sun-Favored                          36786 decks  {2}{R}{G}{W}     Legendary Creature — Dinosaur
 [x]   16  Lathril, Blade of the Elves                    35764 decks  {2}{B}{G}        Legendary Creature — Elf Noble
 [x]   17  Giada, Font of Hope                            34983 decks  {1}{W}           Legendary Creature — Angel
 [ ]   18  The Wise Mothman                               33672 decks  {1}{B}{G}{U}     Legendary Creature — Insect Mutant

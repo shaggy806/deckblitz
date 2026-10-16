@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Explore, Map tokens, discover and craft** (`keyword:explore` rule 701.44, `effect:map-token`
+  111.10s, `keyword:discover` 701.57, `keyword:craft` 702.167): explore as an effect (once, twice
+  or X times, the explorer read as it last was if it left) with "whenever a creature you control
+  explores" and "explores a land / nonland card"; the Map token; discover beside cascade, with
+  "whenever you discover" (five pool cards that had discover hand-built now use it); craft as
+  an activated ability whose materials are chosen from the battlefield and the graveyard together
+  and stay linked to the crafted permanent. The commanders Pantlaza, Sun-Favored and Francisco,
+  Fowl Marauder among 70 cards (2026-10-16).
 - **Rad counters, squad, collect evidence and Cases** (`mechanic:rad-counters` rule 728,
   `keyword:squad` 702.157, `keyword:collect-evidence` 701.59, `mechanic:case` 719.3): rad as a
   player counter with its inherent precombat-main trigger and the ☢ panel count, `remove-player-
@@ -41,6 +49,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The Lost Caverns of Ixalan and its Commander set, both whole** (batch 92): 136 of 189 cards —
+  the 165 left in the two sets and 24 older explore, discover and craft cards — with explore, Map
+  tokens, discover and craft built (2026-10-16).
 - **Murders at Karlov Manor and its Commander set, both whole** (batch 91): 137 of 227 cards —
   the 223 left in the two sets and 4 older Cases — with collect evidence and Cases built; the bots
   now aim an Aura that goads at an opponent even when it also pumps (2026-10-16).

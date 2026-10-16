@@ -4774,3 +4774,46 @@ mana value, as a spell's additional cost and as a "you may" effect; and a Case's
   enables Confirm only once the picks total 6 or more, and the Bears gets a stun counter. Declining the
   Monitor's collect evidence makes no Thopter; collecting would. With no cards in hand at your end step
   the Case shows a **solved** chip, and its upkeep trigger works from then on. Check at ~768px tall.
+
+## Explore, Map tokens, discover and craft (2026-10-16)
+
+### Cenote Scout, Spyglass Siren, Merfolk Cave-Diver
+
+*New player decision* — explore (rule 701.44): a nonland card revealed asks "put it into your
+graveyard?"; Map tokens make a creature you control explore
+
+- **Setup:** Your precombat main. Your battlefield: Merfolk Cave-Diver, four Forests and two Islands; in
+  hand Cenote Scout and Spyglass Siren; your library's top cards Hill Giant, then Forest.
+- **Do:** Cast Cenote Scout and keep the Hill Giant on top. Cast Spyglass Siren, then crack its Map
+  token targeting the Scout and put the Giant into your graveyard this time.
+- **Check:** The Scout's exploration reveals the Giant to everyone, puts a +1/+1 counter on the Scout
+  and asks once whether to put the card into your graveyard; kept, it's revealed again by the Map. The
+  Map is offered only at sorcery speed and needs a creature you control to target. Each exploration
+  gives Merfolk Cave-Diver +1/+0 and makes it unblockable this turn. Check at ~768px tall, in a 2- and
+  a 4-player room.
+
+### Geological Appraiser, Curator of Sun's Creation
+
+*New player decision* — discover (rule 701.57): the discovered card cast free or put into your hand
+
+- **Setup:** Your precombat main. Your battlefield: Curator of Sun's Creation and four Mountains; in hand
+  Geological Appraiser; your library's top cards Forest, Grizzly Bears, Hill Giant, Llanowar Elves.
+- **Do:** Cast Geological Appraiser. Cast the first discovered card free; decline the second.
+- **Check:** The first discover exiles the Forest and finds Grizzly Bears, offered as a free cast; the
+  Curator's trigger then discovers 3 again, skipping the Hill Giant (mana value 4) and offering
+  Llanowar Elves, which goes to your hand when declined. The Forest and the Giant end on the bottom of
+  your library. A second discover the same turn isn't doubled. Check at ~768px tall.
+
+### Oteclan Landmark
+
+*New player decision* — craft (rule 702.167): the materials are chosen from your battlefield and your
+graveyard in one choice
+
+- **Setup:** Your precombat main. Your battlefield: Oteclan Landmark, three Plains and two Treasure
+  tokens; graveyard Ornithopter.
+- **Do:** Activate the Landmark's craft ability and pick the Ornithopter from your graveyard; on a second
+  run pick a Treasure.
+- **Check:** The craft ability is offered only in a main phase with the stack empty. The choice shows
+  your Treasures and the graveyard's Ornithopter together and takes exactly one; the Landmark comes
+  back as Oteclan Levitator, a 1/4 flyer, and the chosen material is in exile. Picking a Treasure leaves
+  the other one. Check at ~768px tall, in a 2- and a 4-player room.

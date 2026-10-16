@@ -155,6 +155,7 @@ import _poolGoldmireBridge from "../pool/goldmire-bridge.js";
 import _poolGongagaReactorTown from "../pool/gongaga-reactor-town.js";
 import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
+import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
@@ -183,6 +184,7 @@ import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
+import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
 import _poolIronTuskElephant from "../pool/iron-tusk-elephant.js";
 import _poolIronWill from "../pool/iron-will.js";
@@ -248,6 +250,7 @@ import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
+import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
@@ -303,6 +306,7 @@ import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
+import _poolShadowsLair from "../pool/shadows-lair.js";
 import _poolShatterwingPegasus from "../pool/shatterwing-pegasus.js";
 import _poolShelldockIsle from "../pool/shelldock-isle.js";
 import _poolShieldWallSentinel from "../pool/shield-wall-sentinel.js";
@@ -584,6 +588,7 @@ const shard: CardShard = {
     _poolGongagaReactorTown,
     _poolGoroGoroAndSatoru,
     _poolGrandArbiterAugustinIv,
+    _poolGraspingShadows,
     _poolGrazingKelpie,
     _poolGrimBounty,
     _poolGrimReapersSprint,
@@ -612,6 +617,7 @@ const shard: CardShard = {
     _poolImpsMischief,
     _poolIndulgentTormentor,
     _poolInfernalGrasp,
+    _poolInvertedIceberg,
     _poolIronManFuturistParagon,
     _poolIronTuskElephant,
     _poolIronWill,
@@ -677,6 +683,7 @@ const shard: CardShard = {
     _poolOldGnawbone,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
+    _poolOrderOfSacredDusk,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPatronOfTheVein,
@@ -732,6 +739,7 @@ const shard: CardShard = {
     _poolSeethingLandscape,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,
+    _poolShadowsLair,
     _poolShatterwingPegasus,
     _poolShelldockIsle,
     _poolShieldWallSentinel,

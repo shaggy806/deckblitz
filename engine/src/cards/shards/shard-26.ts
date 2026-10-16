@@ -51,6 +51,7 @@ import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
+import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
@@ -259,6 +260,7 @@ import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
+import _poolRayOfRuin from "../pool/ray-of-ruin.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
@@ -304,6 +306,7 @@ import _poolShatteredLandscape from "../pool/shattered-landscape.js";
 import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
+import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
@@ -479,6 +482,7 @@ const shard: CardShard = {
     _poolBulwarkOx,
     _poolByrkeLongEarOfTheLaw,
     _poolCactusPreserve,
+    _poolCalamitousCaveIn,
     _poolCallToTheFeast,
     _poolCampusComposer,
     _poolCanyonJerboa,
@@ -687,6 +691,7 @@ const shard: CardShard = {
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
     _poolRavenousLindwurm,
+    _poolRayOfRuin,
     _poolReassemblingSkeleton,
     _poolReclamationSage,
     _poolReconstructedThopter,
@@ -732,6 +737,7 @@ const shard: CardShard = {
     _poolShefetArchfiend,
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
+    _poolShipwreckSentry,
     _poolShireiShizosCaretaker,
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,

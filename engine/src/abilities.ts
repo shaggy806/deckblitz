@@ -163,6 +163,26 @@ export function abilityLifeCostText(life: AbilityLifeCost): string {
     : "Pay life equal to the number of colors in your commanders' color identity";
 }
 
+/**
+ * What a craft ability exiles (rule 702.167a): `count` of them (`orMore`: that
+ * many or more — "one or more creatures"), each matching `filter`. A type or
+ * subtype without "card" means a permanent or a card in the graveyard
+ * (702.167b); `cardsOnly` is "… cards", from the graveyard alone. `share`:
+ * they share a card type ("two that share a card type"); `oneEach`: one per
+ * filter ("a Dinosaur, a Merfolk, a Pirate, and a Vampire"), `count` being
+ * how many filters there are.
+ */
+export interface CraftMaterials {
+  readonly count: number;
+  readonly orMore?: boolean;
+  readonly filter?: CardFilter;
+  readonly cardsOnly?: boolean;
+  readonly share?: "card-type";
+  readonly oneEach?: readonly CardFilter[];
+  /** "two that share a card type" — what the choice tells the player. */
+  readonly text: string;
+}
+
 export interface AbilityCost {
   /** Mana portion of the cost, e.g. `"{2}"`; `null` for no mana. */
   readonly mana: string | null;
@@ -304,6 +324,14 @@ export interface AbilityCost {
    * beside another cost that asks a question.
    */
   readonly collectEvidence?: number;
+  /**
+   * Craft's materials (rule 702.167a — "Craft with [materials] [cost]"): the
+   * other half of the cost beside `exileSelf`, exiled from among permanents
+   * you control and/or cards in your graveyard, chosen as the cost is paid
+   * (the `choose-from-zone` decision, both zones at once) and linked to the
+   * card being crafted (702.167c). Built by the `craft` helper.
+   */
+  readonly craft?: CraftMaterials;
   /**
    * The cost's mana is a **waterbend** cost (rule 701.67a — Geyser Leaper's
    * "Waterbend {4}: Draw a card, then discard a card", Katara, Water Tribe's
@@ -1539,6 +1567,24 @@ export type TriggerSpec =
        * as a cost or an effect. */
       readonly on: "evidence-collected";
       readonly who: "you";
+    }
+  | {
+      /** "Whenever you discover" (rule 701.57b — Curator of Sun's Creation):
+       * the trigger value is the N discovered. */
+      readonly on: "discovers";
+      readonly who: "you";
+    }
+  | {
+      /** "Whenever this creature explores" (`self`) / "whenever a creature
+       * you control explores" (`you`, the explorer matching `filter` as it
+       * explored — Merfolk Cave-Diver) — rule 701.44b: whatever the
+       * exploration could do. `revealed`: "explores a land card" / "a nonland
+       * card" (Nicanzil, Current Conductor). The explorer is the trigger
+       * object. */
+      readonly on: "explores";
+      readonly who: "self" | "you";
+      readonly filter?: CardFilter;
+      readonly revealed?: "land" | "nonland";
     }
   | {
       /** "When this card becomes plotted" (rule 702.170) — it triggers from

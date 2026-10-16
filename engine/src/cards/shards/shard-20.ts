@@ -278,6 +278,7 @@ import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
 import _poolOssification from "../pool/ossification.js";
+import _poolOutOfAir from "../pool/out-of-air.js";
 import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
 import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
@@ -760,6 +761,7 @@ const shard: CardShard = {
     _poolOrcishMechanics,
     _poolOrochiLeafcaller,
     _poolOssification,
+    _poolOutOfAir,
     _poolOvergrownArmasaur,
     _poolOversimplify,
     _poolOverwhelmingInstinct,

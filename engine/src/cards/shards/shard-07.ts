@@ -63,6 +63,7 @@ import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
 import _poolCurate from "../pool/curate.js";
+import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
 import _poolDaggersailAeronaut from "../pool/daggersail-aeronaut.js";
 import _poolDancingScimitar from "../pool/dancing-scimitar.js";
@@ -246,6 +247,7 @@ import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
+import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
@@ -256,6 +258,8 @@ import _poolOpenFire from "../pool/open-fire.js";
 import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
 import _poolOrnithopterOfParadise from "../pool/ornithopter-of-paradise.js";
 import _poolOrzhovGuildgate from "../pool/orzhov-guildgate.js";
+import _poolOteclanLandmark from "../pool/oteclan-landmark.js";
+import _poolOteclanLevitator from "../pool/oteclan-levitator.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
@@ -308,6 +312,7 @@ import _poolSafewrightCavalry from "../pool/safewright-cavalry.js";
 import _poolSageOfMysteries from "../pool/sage-of-mysteries.js";
 import _poolSanctumOfStoneFangs from "../pool/sanctum-of-stone-fangs.js";
 import _poolSanctumSeeker from "../pool/sanctum-seeker.js";
+import _poolSanguineEvangelist from "../pool/sanguine-evangelist.js";
 import _poolSanitationAutomaton from "../pool/sanitation-automaton.js";
 import _poolSarumanTheWhiteHand from "../pool/saruman-the-white-hand.js";
 import _poolScavengerFolk from "../pool/scavenger-folk.js";
@@ -341,6 +346,7 @@ import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoldOut from "../pool/sold-out.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
+import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
@@ -376,6 +382,7 @@ import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
+import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
@@ -525,6 +532,7 @@ const shard: CardShard = {
     _poolCreosoteHeath,
     _poolCrushOfWurms,
     _poolCurate,
+    _poolCuratorOfSunsCreation,
     _poolCuriousPair,
     _poolDaggersailAeronaut,
     _poolDancingScimitar,
@@ -708,6 +716,7 @@ const shard: CardShard = {
     _poolNestOfScarabs,
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
+    _poolNurturingBristleback,
     _poolNyleaKeenEyed,
     _poolOldGrowthEducator,
     _poolOldOneEye,
@@ -718,6 +727,8 @@ const shard: CardShard = {
     _poolOreplatePangolin,
     _poolOrnithopterOfParadise,
     _poolOrzhovGuildgate,
+    _poolOteclanLandmark,
+    _poolOteclanLevitator,
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,
@@ -770,6 +781,7 @@ const shard: CardShard = {
     _poolSageOfMysteries,
     _poolSanctumOfStoneFangs,
     _poolSanctumSeeker,
+    _poolSanguineEvangelist,
     _poolSanitationAutomaton,
     _poolSarumanTheWhiteHand,
     _poolScavengerFolk,
@@ -803,6 +815,7 @@ const shard: CardShard = {
     _poolSokkasSwordTraining,
     _poolSoldOut,
     _poolSoulSnare,
+    _poolSoulsOfTheLost,
     _poolSouredSprings,
     _poolSpaceshift,
     _poolSpitfireLagac,
@@ -838,6 +851,7 @@ const shard: CardShard = {
     _poolTheShire,
     _poolThornMammoth,
     _poolThornglintBridge,
+    _poolThousandMoonsCrackshot,
     _poolThunderWall,
     _poolThundertrapTrainer,
     _poolTimberlandGuide,

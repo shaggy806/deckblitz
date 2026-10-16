@@ -148,6 +148,7 @@ import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
 import _poolForensicGadgeteer from "../pool/forensic-gadgeteer.js";
 import _poolFoundationBreaker from "../pool/foundation-breaker.js";
+import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
@@ -348,6 +349,7 @@ import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
+import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
 import _poolSkinbrandGoblin from "../pool/skinbrand-goblin.js";
 import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
@@ -401,6 +403,7 @@ import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
 import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
+import _poolTributaryInstructor from "../pool/tributary-instructor.js";
 import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
@@ -427,9 +430,12 @@ import _poolVernalFen from "../pool/vernal-fen.js";
 import _poolVeteranGuardmouse from "../pool/veteran-guardmouse.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
+import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
+import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
+import _poolWaylayingPirates from "../pool/waylaying-pirates.js";
 import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
 import _poolWhipSilk from "../pool/whip-silk.js";
 import _poolWildOx from "../pool/wild-ox.js";
@@ -611,6 +617,7 @@ const shard: CardShard = {
     _poolFlickACoin,
     _poolForensicGadgeteer,
     _poolFoundationBreaker,
+    _poolFromTheRubble,
     _poolFrostOgre,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
@@ -811,6 +818,7 @@ const shard: CardShard = {
     _poolSilentDeparture,
     _poolSilkenfistFighter,
     _poolSilverMyr,
+    _poolSinuousBenthisaur,
     _poolSkilledBattlecarver,
     _poolSkinbrandGoblin,
     _poolSkyshroudForest,
@@ -864,6 +872,7 @@ const shard: CardShard = {
     _poolTownSentry,
     _poolToxicNim,
     _poolTragicTrajectory,
+    _poolTributaryInstructor,
     _poolTuktukRubblefort,
     _poolTurbulentWilderness,
     _poolTwistReality,
@@ -890,9 +899,12 @@ const shard: CardShard = {
     _poolVeteranGuardmouse,
     _poolVisionSkeins,
     _poolVithianRenegades,
+    _poolVitosInquisitor,
     _poolVividMarsh,
+    _poolVolatileWanderglyph,
     _poolVronosMaskedInquisitor,
     _poolWatchwolf,
+    _poolWaylayingPirates,
     _poolWellWornSpatula,
     _poolWhipSilk,
     _poolWildOx,

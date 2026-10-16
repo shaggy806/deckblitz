@@ -66,15 +66,18 @@ import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
+import _poolCartographersCompanion from "../pool/cartographers-companion.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
 import _poolCatacombCrocodile from "../pool/catacomb-crocodile.js";
 import _poolCatapultSquad from "../pool/catapult-squad.js";
+import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
 import _poolChaosWarp from "../pool/chaos-warp.js";
 import _poolCharismaBobblehead from "../pool/charisma-bobblehead.js";
 import _poolChatterOfTheSquirrel from "../pool/chatter-of-the-squirrel.js";
+import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
 import _poolChopDown from "../pool/chop-down.js";
 import _poolCloudboundMoogle from "../pool/cloudbound-moogle.js";
 import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
@@ -317,6 +320,7 @@ import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
+import _poolSelfReflection from "../pool/self-reflection.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
 import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
@@ -505,15 +509,18 @@ const shard: CardShard = {
     _poolBushyBodyguard,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
+    _poolCartographersCompanion,
     _poolCastleVantress,
     _poolCatacombCrocodile,
     _poolCatapultSquad,
+    _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
     _poolChaosWand,
     _poolChaosWarp,
     _poolCharismaBobblehead,
     _poolChatterOfTheSquirrel,
+    _poolChildOfTheVolcano,
     _poolChopDown,
     _poolCloudboundMoogle,
     _poolCoalstokeGearhulk,
@@ -756,6 +763,7 @@ const shard: CardShard = {
     _poolScrollboost,
     _poolSeizedFromSlumber,
     _poolSelesnyaSignet,
+    _poolSelfReflection,
     _poolSelfcraftMechan,
     _poolSenatorPeacock,
     _poolServoExhibition,

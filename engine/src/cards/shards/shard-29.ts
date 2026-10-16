@@ -21,6 +21,7 @@ import _poolArmageddon from "../pool/armageddon.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
 import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
 import _poolAttendedKnight from "../pool/attended-knight.js";
+import _poolAttentiveSunscribe from "../pool/attentive-sunscribe.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
@@ -136,6 +137,7 @@ import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
+import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
@@ -260,6 +262,7 @@ import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
+import _poolPirateHat from "../pool/pirate-hat.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
 import _poolPonder from "../pool/ponder.js";
 import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
@@ -330,6 +333,7 @@ import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSonicScrewdriver from "../pool/sonic-screwdriver.js";
+import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSpiketailHatchling from "../pool/spiketail-hatchling.js";
 import _poolSpinedTyrranax from "../pool/spined-tyrranax.js";
@@ -359,6 +363,7 @@ import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
+import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
@@ -455,6 +460,7 @@ const shard: CardShard = {
     _poolAstralWingspan,
     _poolAtlanteanCavalry,
     _poolAttendedKnight,
+    _poolAttentiveSunscribe,
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
     _poolBalefulForce,
@@ -570,6 +576,7 @@ const shard: CardShard = {
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForbiddenAlchemy,
+    _poolFoulRebirth,
     _poolFracturedSanity,
     _poolFrogTongue,
     _poolFuneralRoomAwakeningHall,
@@ -694,6 +701,7 @@ const shard: CardShard = {
     _poolPetAvengers,
     _poolPhalanxVanguard,
     _poolPileatedProvisioner,
+    _poolPirateHat,
     _poolPlatedSlagwurm,
     _poolPonder,
     _poolPortraitOfMichiko,
@@ -764,6 +772,7 @@ const shard: CardShard = {
     _poolSnortingGahr,
     _poolSolarTransformer,
     _poolSonicScrewdriver,
+    _poolSoulcoilViper,
     _poolSoulknifeSpy,
     _poolSpiketailHatchling,
     _poolSpinedTyrranax,
@@ -793,6 +802,7 @@ const shard: CardShard = {
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,
     _poolTempleAcolyte,
+    _poolTendrilOfTheMycotyrant,
     _poolThalakosSeer,
     _poolThaliasLieutenant,
     _poolTheFirstSliver,

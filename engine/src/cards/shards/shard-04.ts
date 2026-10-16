@@ -49,6 +49,7 @@ import _poolBrainstorm from "../pool/brainstorm.js";
 import _poolBristlingBackwoods from "../pool/bristling-backwoods.js";
 import _poolBruteStrength from "../pool/brute-strength.js";
 import _poolBucolicRanch from "../pool/bucolic-ranch.js";
+import _poolBurningSunCavalry from "../pool/burning-sun-cavalry.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
@@ -105,6 +106,7 @@ import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
 import _poolFabricate from "../pool/fabricate.js";
 import _poolFaerieBladecrafter from "../pool/faerie-bladecrafter.js";
 import _poolFalkenrathCelebrants from "../pool/falkenrath-celebrants.js";
+import _poolFanaticalOffering from "../pool/fanatical-offering.js";
 import _poolFangbladeEviscerator from "../pool/fangblade-eviscerator.js";
 import _poolFatefulDiscovery from "../pool/fateful-discovery.js";
 import _poolFearOfLostTeeth from "../pool/fear-of-lost-teeth.js";
@@ -364,6 +366,7 @@ import _poolThrorsMap from "../pool/thrors-map.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
 import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
+import _poolTithingBlade from "../pool/tithing-blade.js";
 import _poolTobiasAndrion from "../pool/tobias-andrion.js";
 import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
@@ -371,8 +374,10 @@ import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
+import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
 import _poolTrollsOfTelJilad from "../pool/trolls-of-tel-jilad.js";
 import _poolTrostaniThreeWhispers from "../pool/trostani-three-whispers.js";
+import _poolTrumpetingCarnosaur from "../pool/trumpeting-carnosaur.js";
 import _poolTrustyPackbeast from "../pool/trusty-packbeast.js";
 import _poolTwilightMire from "../pool/twilight-mire.js";
 import _poolUlamogTheCeaselessHunger from "../pool/ulamog-the-ceaseless-hunger.js";
@@ -477,6 +482,7 @@ const shard: CardShard = {
     _poolBristlingBackwoods,
     _poolBruteStrength,
     _poolBucolicRanch,
+    _poolBurningSunCavalry,
     _poolCarnageTyrant,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
@@ -533,6 +539,7 @@ const shard: CardShard = {
     _poolFabricate,
     _poolFaerieBladecrafter,
     _poolFalkenrathCelebrants,
+    _poolFanaticalOffering,
     _poolFangbladeEviscerator,
     _poolFatefulDiscovery,
     _poolFearOfLostTeeth,
@@ -792,6 +799,7 @@ const shard: CardShard = {
     _poolTigerClaws,
     _poolTipTheScales,
     _poolTitaniasCommand,
+    _poolTithingBlade,
     _poolTobiasAndrion,
     _poolTorturedExistence,
     _poolTouchOfInvisibility,
@@ -799,8 +807,10 @@ const shard: CardShard = {
     _poolToxicDeluge,
     _poolTrelasarraMoonDancer,
     _poolTritonWaverider,
+    _poolTriumphantChomp,
     _poolTrollsOfTelJilad,
     _poolTrostaniThreeWhispers,
+    _poolTrumpetingCarnosaur,
     _poolTrustyPackbeast,
     _poolTwilightMire,
     _poolUlamogTheCeaselessHunger,

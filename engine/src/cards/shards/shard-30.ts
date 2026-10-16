@@ -51,6 +51,7 @@ import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
 import _poolBoomerangBladeFlinger from "../pool/boomerang-blade-flinger.js";
 import _poolBorderGuard from "../pool/border-guard.js";
 import _poolBotanicalPlaza from "../pool/botanical-plaza.js";
+import _poolBrackishBlunder from "../pool/brackish-blunder.js";
 import _poolBraveKinDuo from "../pool/brave-kin-duo.js";
 import _poolBringBack from "../pool/bring-back.js";
 import _poolBrokersCharm from "../pool/brokers-charm.js";
@@ -88,6 +89,7 @@ import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
+import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDayOfJudgment from "../pool/day-of-judgment.js";
@@ -130,6 +132,7 @@ import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
+import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
@@ -411,6 +414,7 @@ import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
 import _poolVineglimmerSnarl from "../pool/vineglimmer-snarl.js";
+import _poolVitoFanaticOfAclazotz from "../pool/vito-fanatic-of-aclazotz.js";
 import _poolVituGhaziTheCityTree from "../pool/vitu-ghazi-the-city-tree.js";
 import _poolVoiceOfReason from "../pool/voice-of-reason.js";
 import _poolVoidSnare from "../pool/void-snare.js";
@@ -501,6 +505,7 @@ const shard: CardShard = {
     _poolBoomerangBladeFlinger,
     _poolBorderGuard,
     _poolBotanicalPlaza,
+    _poolBrackishBlunder,
     _poolBraveKinDuo,
     _poolBringBack,
     _poolBrokersCharm,
@@ -538,6 +543,7 @@ const shard: CardShard = {
     _poolCryptGhast,
     _poolCuriousFarmAnimals,
     _poolCutADeal,
+    _poolDaringDiscovery,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
     _poolDayOfJudgment,
@@ -580,6 +586,7 @@ const shard: CardShard = {
     _poolEtalisFavor,
     _poolEverythingPizza,
     _poolExecutionersHood,
+    _poolExplorersCache,
     _poolFallowEarth,
     _poolFangGuardian,
     _poolFangOfShigeki,
@@ -861,6 +868,7 @@ const shard: CardShard = {
     _poolVialOfPoison,
     _poolVibrantCityscape,
     _poolVineglimmerSnarl,
+    _poolVitoFanaticOfAclazotz,
     _poolVituGhaziTheCityTree,
     _poolVoiceOfReason,
     _poolVoidSnare,

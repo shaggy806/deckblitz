@@ -44,20 +44,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: {
-        kind: "reveal-until",
-        filter: { notTypes: ["land"], manaValue: { op: "lte", n: 3 } },
-        exile: true,
-        keepFound: true,
-        rest: "bottom-random",
-        then: {
-          kind: "cast-now",
-          target: 0,
-          free: true,
-          spell: { manaValue: { op: "lte", n: 3 } },
-          else: { kind: "return-to-hand", target: 0, from: "exile" },
-        },
-      },
+      effect: { kind: "discover", amount: 3 },
       resolve: null,
       text: DISCOVER,
     },

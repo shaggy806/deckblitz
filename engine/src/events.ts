@@ -475,6 +475,24 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** `player` discovered `amount` (rule 701.57b), finding `hit` — the
+       * discovered card — or nothing. */
+      readonly type: "discovered";
+      readonly player: PlayerId;
+      readonly amount: number;
+      readonly hit: ObjectId | null;
+    })
+  | (Base & {
+      /** `object` explored (rule 701.44b), controlled (or last controlled) by
+       * `player`, whose library revealed `revealed` — nothing from an empty
+       * one — a land card or not. */
+      readonly type: "explored";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly revealed: ObjectId | null;
+      readonly land: boolean;
+    })
+  | (Base & {
       /** `player` collected evidence (rule 701.59a): exiled `objects` from
        * their graveyard, total mana value `amount` or more, as a cost or an
        * effect. */
