@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-431 already implemented / 69 missing
+433 already implemented / 67 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -193,14 +193,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  187  Sefris of the Hidden Ways                      12800 decks  {W}{U}{B}        Legendary Creature — Human Wizard
 [x]  188  The Mindskinner                                12796 decks  {U}{U}{U}        Legendary Enchantment Creature — Nightmare
 [x]  189  Tergrid, God of Fright                         12762 decks  {3}{B}{B}        Legendary Creature — God // Legendary Artifact
-[ ]  190  Ardenn, Intrepid Archaeologist                 12745 decks  {2}{W}           Legendary Creature — Kor Scout
+[x]  190  Ardenn, Intrepid Archaeologist                 12745 decks  {2}{W}           Legendary Creature — Kor Scout
 [ ]  191  Yurlok of Scorch Thrash                        12641 decks  {1}{B}{R}{G}     Legendary Creature — Lizard Shaman
 [x]  192  Golbez, Crystal Collector                      12618 decks  {U}{B}           Legendary Creature — Human Wizard
 [ ]  193  Hylda of the Icy Crown                         12582 decks  {2}{W}{U}        Legendary Creature — Human Warlock
 [x]  194  Disa the Restless                              12558 decks  {2}{B}{R}{G}     Legendary Creature — Human Scout
 [x]  195  Wick, the Whorled Mind                         12497 decks  {3}{B}           Legendary Creature — Rat Warlock
 [x]  196  Zedruu the Greathearted                        12468 decks  {1}{U}{R}{W}     Legendary Creature — Minotaur Monk
-[ ]  197  Light-Paws, Emperor's Voice                    12403 decks  {1}{W}           Legendary Creature — Fox Advisor
+[x]  197  Light-Paws, Emperor's Voice                    12403 decks  {1}{W}           Legendary Creature — Fox Advisor
 [ ]  198  Hazel of the Rootbloom                         12374 decks  {2}{B}{G}        Legendary Creature — Squirrel Druid
 [x]  199  Stella Lee, Wild Card                          12366 decks  {1}{U}{R}        Legendary Creature — Human Rogue
 [x]  200  Anti-Venom, Horrifying Healer                  12251 decks  {W}{W}{W}{W}{W}  Legendary Creature — Symbiote Hero

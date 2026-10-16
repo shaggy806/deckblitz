@@ -4835,6 +4835,23 @@ Ezio gives Assassin spells freerunning and, on combat damage, asks for {W}{U}{B}
   {W}{U}{B}{R}{G} payment; paying, Bob loses the game. After combat Boilerbilges Ripper offers a
   freerunning {B}{B} cast. Check at ~768px tall, in a 2- and a 4-player room.
 
+## Attach extensions (2026-10-16)
+
+### Ardenn, Intrepid Archaeologist
+
+*New player decisions* — "target permanent or player" (any permanent or any player, yourself
+included), then which of your Auras and Equipment to attach, from none to all
+
+- **Setup:** Your precombat main, in a 4-player room. Your battlefield: Ardenn, Intrepid
+  Archaeologist, Grizzly Bears, Llanowar Elves with Bonesplitter and Rancor attached, and three
+  Islands; in hand Curse of Verbosity.
+- **Do:** Cast Curse of Verbosity on Bob. Go to combat; target Carol with Ardenn's trigger and
+  choose the Curse, Bonesplitter and Rancor. Next turn, target Grizzly Bears and choose Bonesplitter.
+- **Check:** Ardenn's target offers every permanent and every player, you included. The choice
+  lists all three; the Curse moves under Carol, while Bonesplitter and Rancor stay on the Elves (they
+  can't attach to a player). Next turn Bonesplitter moves to the Bears. Check at ~768px tall, in a
+  2- and a 4-player room.
+
 ## Live-game rules fixes (2026-10-16)
 
 ### Archfiend of Depravity

@@ -205,6 +205,7 @@ import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
 import _poolMagickedCard from "../pool/magicked-card.js";
+import _poolMagneticSnuffler from "../pool/magnetic-snuffler.js";
 import _poolMagneticTheft from "../pool/magnetic-theft.js";
 import _poolMahamotiDjinn from "../pool/mahamoti-djinn.js";
 import _poolMalametWarScribe from "../pool/malamet-war-scribe.js";
@@ -637,6 +638,7 @@ const shard: CardShard = {
     _poolMaelstromColossus,
     _poolMaestrosTheater,
     _poolMagickedCard,
+    _poolMagneticSnuffler,
     _poolMagneticTheft,
     _poolMahamotiDjinn,
     _poolMalametWarScribe,

@@ -375,6 +375,7 @@ import _poolSkyknightVanguard from "../pool/skyknight-vanguard.js";
 import _poolSkyshaper from "../pool/skyshaper.js";
 import _poolSlaughterhorn from "../pool/slaughterhorn.js";
 import _poolSliverConstruct from "../pool/sliver-construct.js";
+import _poolSmokeShroud from "../pool/smoke-shroud.js";
 import _poolSneakySnacker from "../pool/sneaky-snacker.js";
 import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
@@ -852,6 +853,7 @@ const shard: CardShard = {
     _poolSkyshaper,
     _poolSlaughterhorn,
     _poolSliverConstruct,
+    _poolSmokeShroud,
     _poolSneakySnacker,
     _poolSoaringSeacliff,
     _poolSokkaTenaciousTactician,

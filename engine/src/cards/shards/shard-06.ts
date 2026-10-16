@@ -396,6 +396,7 @@ import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
 import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
+import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
@@ -845,6 +846,7 @@ const shard: CardShard = {
     _poolTyrantsFamiliar,
     _poolUchuulon,
     _poolUnbreathingHorde,
+    _poolUnfinishedBusiness,
     _poolUnnerve,
     _poolUnrulyMob,
     _poolUnyieldingGatekeeper,

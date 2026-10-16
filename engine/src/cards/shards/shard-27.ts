@@ -30,6 +30,7 @@ import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
 import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
 import _poolBarbtoothWurm from "../pool/barbtooth-wurm.js";
 import _poolBattleHurda from "../pool/battle-hurda.js";
+import _poolBattlefieldImprovisation from "../pool/battlefield-improvisation.js";
 import _poolBeamingDefiance from "../pool/beaming-defiance.js";
 import _poolBeskirShieldmate from "../pool/beskir-shieldmate.js";
 import _poolBeyeenCoast from "../pool/beyeen-coast.js";
@@ -475,6 +476,7 @@ const shard: CardShard = {
     _poolBakersbaneDuo,
     _poolBarbtoothWurm,
     _poolBattleHurda,
+    _poolBattlefieldImprovisation,
     _poolBeamingDefiance,
     _poolBeskirShieldmate,
     _poolBeyeenCoast,

@@ -121,6 +121,7 @@ import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
 import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolDustAnimus from "../pool/dust-animus.js";
+import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
@@ -554,6 +555,7 @@ const shard: CardShard = {
     _poolDukeUlderRavengard,
     _poolDuskImp,
     _poolDustAnimus,
+    _poolEaglesRescue,
     _poolEbonDrake,
     _poolEdgarMarkov,
     _poolEivorBattleReady,

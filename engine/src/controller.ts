@@ -2088,6 +2088,19 @@ export class HeuristicBotController extends AutomaticController {
     ) {
       return [this.bestRingBearer(view.state, eligible)];
     }
+    // "Attach any number of Auras and Equipment you control to …" (Ardenn):
+    // only the ones not already at work against an opponent — a Pacifism
+    // on their creature or a Curse on them stays where it is.
+    if (cap === undefined && awaiting?.kind === "choose-permanents" && awaiting.then.kind === "attach") {
+      const against = (id: ObjectId): boolean => {
+        const object = view.state.objects[id];
+        if (object?.attachedToPlayer !== undefined) return object.attachedToPlayer !== view.player;
+        const on = object?.attachedTo;
+        const host = on === undefined || on === null ? undefined : view.state.objects[on];
+        return host !== undefined && host.controller !== view.player;
+      };
+      return eligible.filter((id) => !against(id)).slice(0, max);
+    }
     return super.choosePermanents(view, eligible, min, max, cap);
   }
 

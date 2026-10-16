@@ -468,6 +468,7 @@ const TARGET_PHRASES = [
   ["target artifact", "artifact"],
   ["target enchantment", "enchantment"],
   ["target land", "land"],
+  ["target permanent or player", "permanent-or-player"],
   ["target permanent you control", { kind: "permanent", whose: "you", filter: {} }],
   ["target permanent", "permanent"],
   ["target player or planeswalker", "player-or-planeswalker"],

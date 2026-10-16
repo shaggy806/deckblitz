@@ -2882,6 +2882,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Ardenn, Intrepid Archaeologist',
+    board({
+      you: {
+        bf: [
+          'Ardenn, Intrepid Archaeologist',
+          'Grizzly Bears',
+          'Llanowar Elves',
+          { name: 'Bonesplitter', attach: 'Llanowar Elves' },
+          { name: 'Rancor', attach: 'Llanowar Elves' },
+          'Island*3',
+        ],
+        hand: ['Curse of Verbosity'],
+      },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  preset(
     'Archfiend of Depravity',
     board({
       you: { bf: ['Grizzly Bears', 'Hill Giant', 'Serra Angel', 'Llanowar Elves'] },

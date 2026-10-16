@@ -2205,6 +2205,11 @@ export type AwaitingDecision =
       /** Battlefield-bound cards enter under this player's control — a
        * `look-and-choose` over every graveyard (Necromantic Selection). */
       readonly enterUnder?: PlayerId;
+      /** Battlefield-bound cards enter attached to this permanent — a
+       * `search-library`'s `attachedToSource` (Light-Paws, Emperor's Voice).
+       * One that can't be attached to it stays where it is; `null`, nothing
+       * can (the source has left). */
+      readonly enterAttachedTo?: ObjectId | null;
       /** …with these types and colours in addition to their own, in place as
        * they enter (a `look-and-choose`'s `enterAs`). */
       readonly enterAs?: EnterTypes;

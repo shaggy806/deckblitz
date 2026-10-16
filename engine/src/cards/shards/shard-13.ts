@@ -26,6 +26,7 @@ import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
 import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
+import _poolArdennIntrepidArchaeologist from "../pool/ardenn-intrepid-archaeologist.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
@@ -421,6 +422,7 @@ import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js"
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
+import _poolVowToErebor from "../pool/vow-to-erebor.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
 import _poolWarMachineAvengingArsenal from "../pool/war-machine-avenging-arsenal.js";
 import _poolWardenOfEvosIsle from "../pool/warden-of-evos-isle.js";
@@ -479,6 +481,7 @@ const shard: CardShard = {
     _poolAquitectsWill,
     _poolArcaneSignet,
     _poolArchghoulOfThraben,
+    _poolArdennIntrepidArchaeologist,
     _poolArmaggonFutureShark,
     _poolArrowsOfJustice,
     _poolAsphyxiate,
@@ -874,6 +877,7 @@ const shard: CardShard = {
     _poolVoiceOfMany,
     _poolVoidwielder,
     _poolVoltaicWhip,
+    _poolVowToErebor,
     _poolVulshokMorningstar,
     _poolWarMachineAvengingArsenal,
     _poolWardenOfEvosIsle,

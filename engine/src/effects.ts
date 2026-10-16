@@ -1898,6 +1898,14 @@ export type EffectSpec =
        * (Chorale of the Void, rule 508.4) — see {@link EnterAttacking}.
        * Pair it with `enterTapped`. */
       readonly attacking?: EnterAttacking;
+      /** "…onto the battlefield **attached to** this creature / that
+       * creature / target creature" (Magnetic Snuffler, Smoke Shroud,
+       * Unfinished Business): the permanent this names — a slot,
+       * `"source"`, `"trigger-object"` — and it enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
+       * can't legally enchant it — or with nothing there, the permanent
+       * having left (rule 400.7) — stays where it is; an Equipment that
+       * can't equip it, and anything else, enters unattached. */
+      readonly attachedTo?: EffectTargetRef;
     }
   | {
       /** Exile every card in a target *player's* graveyard (rule 406 — Bojuka
@@ -2171,6 +2179,13 @@ export type EffectSpec =
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black
        * Zombies in addition to their other colors and types". */
       readonly enterAs?: EnterTypes;
+      /** "…to the battlefield **attached to** ~" (Danitha, Benalia's Hope's
+       * "an Aura or Equipment card from your hand or graveyard"): the
+       * permanent this names, and each card enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
+       * can't legally enchant it — or with nothing there, the permanent
+       * having left (rule 400.7) — stays where it is; an Equipment that
+       * can't equip it, and anything else, enters unattached. */
+      readonly attachedTo?: EffectTargetRef;
     }
   | {
       /**
@@ -3907,11 +3922,24 @@ export type EffectSpec =
        * in turn, rather than one — Balan, Wandering Knight's "attach all
        * Equipment you control to Balan" (`{ subtype: "Equipment",
        * controlledBy: "you" }`, `target: "source"`). Each one that can't
-       * legally go there stays where it is (rule 701.3b). */
+       * legally go there stays where it is (rule 701.3b).
+       *
+       * `choose` attaches **any number** of the permanents matching its
+       * filter, chosen as this resolves (not targeted) — Ardenn, Intrepid
+       * Archaeologist's "you may attach any number of Auras and Equipment
+       * you control to target permanent or player". A player is enchanted
+       * only by an Aura that can enchant them (a Curse — rule 303.4); one
+       * that can't go there stays where it is (701.3b). */
       readonly kind: "attach";
       readonly target: EffectTargetRef | "created";
       readonly attachment?: EffectTargetRef;
       readonly attachments?: CardFilter;
+      /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
+       * Equipment you control to it" is `upTo: 1`. */
+      readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number };
+      /** Engine-built: where a `choose`'s picks go, carried past the choice
+       * (which rebinds target 0 to each pick). */
+      readonly onto?: TargetRef;
     }
   | {
       /** Transform `target` — turn a transforming double-faced permanent over
@@ -4688,6 +4716,12 @@ export type EffectSpec =
        * Krosan Verge's "a Forest card and a Plains card". The search offers
        * every card `filter` admits and accepts only a set that obeys this. */
       readonly together?: SearchTogether;
+      /** With `destination: "battlefield"`: the find enters attached to the
+       * ability's own permanent — Light-Paws, Emperor's Voice's "put that
+       * card onto the battlefield attached to Light-Paws". One that can't be
+       * attached to it for any reason (not an Aura that can enchant it, or
+       * it has left — rule 400.7) stays in the library (the ruling). */
+      readonly attachedToSource?: boolean;
     }
   | {
       /** Reveal `count` cards from the top of the controller's library (or
@@ -5530,7 +5564,13 @@ export interface EffectApi {
     withCounters?: { readonly kind: string; readonly amount: number },
     /** Every graveyard, and how the cards enter — the spec's `from` and
      * `enterAs`. */
-    opts?: { readonly allGraveyards?: boolean; readonly handToo?: boolean; readonly enterAs?: EnterTypes },
+    opts?: {
+      readonly allGraveyards?: boolean;
+      readonly handToo?: boolean;
+      readonly enterAs?: EnterTypes;
+      /** See the spec's `attachedTo`; `null` for nothing there. */
+      readonly attachTo?: ObjectId | null;
+    },
   ): boolean;
   /** `target` (a player) discards `amount` cards. */
   discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter): void;
@@ -6064,6 +6104,9 @@ export interface EffectApi {
     types?: EnterTypes,
     /** "…tapped and attacking" — see the effect's `attacking`. */
     attacking?: ResolvedEnterAttacking,
+    /** What it enters attached to — see the effect's `attachedTo`; `null`
+     * for nothing there. */
+    attachTo?: ObjectId | null,
   ): boolean;
   /** See the `"search-library"` {@link EffectSpec}. */
   searchLibrary(
@@ -6077,6 +6120,9 @@ export interface EffectApi {
     reveal?: boolean,
     zones?: SearchZones,
     together?: SearchTogether,
+    /** A `search-library`'s `attachedToSource`: the source, or `null` once
+     * it has left (nothing can be attached to it). */
+    attachTo?: ObjectId | null,
   ): void;
   /** See the `"reveal-top"` {@link EffectSpec}. `player` is whose library
    * (the effect's controller's when omitted). */
@@ -6938,6 +6984,16 @@ function scopedController(
   if (slot === undefined) return undefined;
   const ref = ctx.targets[slot];
   return ref === undefined ? undefined : ctx.controllerOf(ref);
+}
+
+/** What an `attachedTo` names, for a card put onto the battlefield attached
+ * to it: the permanent, `null` for none (it has left, or the slot names a
+ * player — rule 303.4i), or `undefined` for no `attachedTo` at all. */
+function attachHost(ref: EffectTargetRef | undefined, ctx: ResolutionContext): ObjectId | null | undefined {
+  if (ref === undefined) return undefined;
+  if (ref === "source" && ctx.sourceLost === true) return null;
+  const target = resolveEffectTarget(ref, ctx);
+  return target?.kind === "object" ? target.object : null;
 }
 
 /** The first token this resolution has created that is still on the
@@ -7987,6 +8043,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               }
             : undefined,
           resolveEnterAttacking(spec.attacking, ctx),
+          attachHost(spec.attachedTo, ctx),
         );
         if (asked) ctx.resumeAfterDecisions(spec, parked);
       }
@@ -8282,6 +8339,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.from === "all-graveyards" ? { allGraveyards: true } : {}),
           ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
+          ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
         },
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
@@ -9119,8 +9177,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "attach": {
-      const target = spec.target === "created" ? createdThisWay(ctx) : resolveEffectTarget(spec.target, ctx);
+      const target =
+        spec.onto ?? (spec.target === "created" ? createdThisWay(ctx) : resolveEffectTarget(spec.target, ctx));
       if (target === undefined) return;
+      if (spec.choose !== undefined) {
+        const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
+        if (count === 0) return;
+        ctx.choosePermanents(
+          spec.choose.filter,
+          0,
+          Math.min(count, spec.choose.upTo ?? count),
+          { kind: "attach", target: 0, attachment: 0, onto: target },
+          spec.choose.prompt,
+        );
+        return;
+      }
       if (spec.attachments !== undefined) {
         ctx.attachAll(target, spec.attachments);
         return;
@@ -9489,6 +9560,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.reveal === true,
         spec.zones,
         spec.together,
+        spec.attachedToSource === true ? attachHost("source", ctx) : undefined,
       );
       return;
     }

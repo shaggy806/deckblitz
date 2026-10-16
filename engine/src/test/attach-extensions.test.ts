@@ -1,12 +1,39 @@
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, attack, enter, hand, keywords, lands, pickModes, pickTargets, pt, spawn, table, tokensNamed } from "./harness.js";
+import { HeuristicBotController } from "../controller.js";
+
+import {
+  A,
+  B,
+  C,
+  activate,
+  attack,
+  cast,
+  enter,
+  hand,
+  keywords,
+  lands,
+  pickFromZone,
+  pickModes,
+  pickPermanents,
+  pickTargets,
+  pt,
+  ref,
+  spawn,
+  table,
+  toHand,
+  toLibrary,
+  tokensNamed,
+  zone,
+} from "./harness.js";
 
 // The `attach` effect's extensions (effects.ts): attaching to the object
 // whose entering fired the trigger or to the ability's own source, rather
 // than to a target, and attaching every matching permanent at once — each
 // only while it is still the object it was (rule 400.7), and only where it
-// can legally go (rule 701.3b).
+// can legally go (rule 701.3b). And attaching any number of chosen Auras
+// and Equipment (`choose`) to a target permanent or player — Ardenn,
+// Intrepid Archaeologist; a player only by a Curse (rule 303.4).
 
 describe("attach to the creature that entered", () => {
   it("Hero's Blade moves onto a legendary creature you control as it enters, if you choose", () => {
@@ -158,5 +185,129 @@ describe("attach every match", () => {
     game.state.objects[sword].attachedTo = balan;
     expect(keywords(game, balan).has("double-strike")).toBe(false);
     expect(keywords(game, balan).has("first-strike")).toBe(true);
+  });
+});
+
+function board() {
+  const t = table({ players: 3 });
+  const { game } = t;
+  spawn(game, "Ardenn, Intrepid Archaeologist");
+  const bears = spawn(game, "Grizzly Bears");
+  const elf = spawn(game, "Llanowar Elves");
+  const splitter = spawn(game, "Bonesplitter");
+  game.state.objects[splitter].attachedTo = elf;
+  const rancor = spawn(game, "Rancor");
+  game.state.objects[rancor].attachedTo = elf;
+  const curse = spawn(game, "Curse of Verbosity");
+  game.state.objects[curse].attachedToPlayer = B;
+  return { ...t, bears, elf, splitter, rancor, curse };
+}
+
+describe("Ardenn, Intrepid Archaeologist", () => {
+  it("attaches the chosen Auras and Equipment to target permanent; a Curse can't go there", () => {
+    const { game, a, bears, elf, splitter, rancor, curse } = board();
+    pickTargets(a, bears);
+    const seen = pickPermanents(a, splitter, curse);
+    attack(game, a, []);
+    expect(seen.offered).toEqual(expect.arrayContaining([splitter, rancor, curse]));
+    expect(game.state.objects[splitter].attachedTo).toBe(bears);
+    // Not chosen: stays.
+    expect(game.state.objects[rancor].attachedTo).toBe(elf);
+    // Can't enchant a creature: stays on its player (rule 701.3b).
+    expect(game.state.objects[curse].attachedToPlayer).toBe(B);
+    expect(game.state.objects[curse].zone).toBe("battlefield");
+  });
+
+  it("moves a Curse to target player; Equipment and a creature Aura can't go there", () => {
+    const { game, a, elf, splitter, rancor, curse } = board();
+    pickTargets(a, C);
+    pickPermanents(a, splitter, rancor, curse);
+    attack(game, a, []);
+    expect(game.state.objects[curse].attachedToPlayer).toBe(C);
+    expect(game.state.objects[curse].attachedTo ?? null).toBe(null);
+    expect(game.state.objects[splitter].attachedTo).toBe(elf);
+    expect(game.state.objects[rancor].attachedTo).toBe(elf);
+  });
+
+  it("may attach none", () => {
+    const { game, a, bears, elf, splitter } = board();
+    pickTargets(a, bears);
+    pickPermanents(a);
+    attack(game, a, []);
+    expect(game.state.objects[splitter].attachedTo).toBe(elf);
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+});
+
+describe("Light-Paws, Emperor's Voice", () => {
+  function setup() {
+    const t = table();
+    const { game, a } = t;
+    lands(game, "Plains", 2);
+    const paws = spawn(game, "Light-Paws, Emperor's Voice");
+    const armor2 = toLibrary(game, "Ethereal Armor");
+    const mantle = toLibrary(game, "Spirit Mantle");
+    const cartouche = toLibrary(game, "Cartouche of Solidarity");
+    const growth = toLibrary(game, "Wild Growth");
+    pickModes(a, 0);
+    return { ...t, paws, armor2, mantle, cartouche, growth };
+  }
+
+  it("finds an Aura with mana value no greater and a new name, and puts it onto the battlefield on Light-Paws", () => {
+    const { game, a, paws, armor2, mantle, cartouche } = setup();
+    const seen = pickFromZone(a, cartouche);
+    cast(game, toHand(game, "Ethereal Armor"), { targets: [ref(paws)] });
+    expect(seen.offered).toContain(cartouche);
+    // Mana value 2 is more than Ethereal Armor's 1; a second Ethereal Armor
+    // shares a name with an Aura you control.
+    expect(seen.offered).not.toContain(mantle);
+    expect(seen.offered).not.toContain(armor2);
+    expect(zone(game, cartouche)).toBe("battlefield");
+    expect(game.state.objects[cartouche].attachedTo).toBe(paws);
+  });
+
+  it("leaves an Aura that can't enchant Light-Paws in the library", () => {
+    const { game, a, paws, growth } = setup();
+    const seen = pickFromZone(a, growth);
+    cast(game, toHand(game, "Ethereal Armor"), { targets: [ref(paws)] });
+    expect(seen.offered).toContain(growth);
+    expect(zone(game, growth)).toBe("library");
+  });
+
+  it("doesn't trigger for an Aura that wasn't cast", () => {
+    const { game, a, paws, cartouche } = setup();
+    let searches = 0;
+    a.chooseFromZoneFn = () => {
+      searches += 1;
+      return [cartouche];
+    };
+    cast(game, toHand(game, "Ethereal Armor"), { targets: [ref(paws)] });
+    // The Cartouche entered attached, not cast: one search only.
+    expect(searches).toBe(1);
+  });
+});
+
+describe("a bot answering Ardenn", () => {
+  it("leaves an Aura at work on an opponent's creature where it is", () => {
+    const { game } = table();
+    const bot = new HeuristicBotController(A);
+    const mine = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    const splitter = spawn(game, "Bonesplitter");
+    const pacifism = spawn(game, "Pacifism");
+    game.state.objects[pacifism].attachedTo = theirs;
+    game.state.awaiting = {
+      kind: "choose-permanents",
+      player: A,
+      eligible: [splitter, pacifism],
+      min: 0,
+      max: 2,
+      prompt: "Attach any number of Auras and Equipment you control",
+      then: { kind: "attach", target: 0, attachment: 0, onto: { kind: "object", object: mine } },
+      source: splitter,
+      x: 0,
+    };
+    const view = { player: A, state: game.state } as unknown as Parameters<typeof bot.choosePermanents>[0];
+    expect(bot.choosePermanents(view, [splitter, pacifism], 0, 2)).toEqual([splitter]);
   });
 });

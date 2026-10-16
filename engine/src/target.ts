@@ -34,6 +34,9 @@ export type TargetSpec =
    * "target player or planeswalker"). A different printed wording from
    * `opponent-or-planeswalker`, not a synonym. */
   | "player-or-planeswalker"
+  /** Any player, yourself included, or any permanent (Ardenn, Intrepid
+   * Archaeologist's "target permanent or player"). */
+  | "permanent-or-player"
   | "permanent"
   | "nonland-permanent"
   | "land"

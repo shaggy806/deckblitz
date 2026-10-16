@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Attach extensions, part one** (`effect:attach-extensions`): attaching any number of chosen
+  Auras and Equipment (`attach`'s `choose`, `upTo`) to a target permanent or player (the
+  `permanent-or-player` slot; a Curse moves between players), and cards put onto the battlefield
+  attached to something — `put-onto-battlefield`'s and `return-from-graveyard`'s `attachedTo`,
+  `search-library`'s `attachedToSource` (an Aura that can't go there stays put, rule 303.4i; an
+  Equipment enters unattached, 301.5e). The bots leave an Aura at work on an opponent's side where
+  it is. Ardenn, Intrepid Archaeologist (#190) and Light-Paws, Emperor's Voice (#197), with
+  Beatrix, Loyal General, Danitha, Benalia's Hope, Magnetic Snuffler, Smoke Shroud, Eagle's Rescue,
+  Unfinished Business, Battlefield Improvisation and Vow to Erebor (2026-10-16).
 - **Choice extensions, part one** (`decision:choose-from-zone-extensions`): a search's finds that
   "each have different names" (`together: { distinctNames: true }` — the zone choice's `distinct`
   rule), "with four or more card types among them" (its `variety` rule, not yet on a card), and a

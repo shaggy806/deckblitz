@@ -644,6 +644,10 @@ function isLegalTargetUncached(
         (ref.kind === "object" &&
           isPermanentOfType(state, registry, ref.object, (t) => t.includes("planeswalker")))
       );
+    case "permanent-or-player":
+      return (
+        isLivingPlayer(state, ref) || (ref.kind === "object" && state.objects[ref.object]?.zone === "battlefield")
+      );
     // `any-target` deliberately falls through — keep them adjacent.
     case "any-target":
       // Rule 115.4: a creature, a player, a planeswalker or a battle.

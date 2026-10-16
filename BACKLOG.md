@@ -32,12 +32,14 @@ that one card is the reason the deck exists. Live numbers for everything below c
   `effect:amount-aggregate`, `effect:repeat-process`, `effect:put-commanders-onto-battlefield`,
   `keyword:freerunning`, `replacement:mana-pool-emptying`, `static:mana-pool-reads`. Lynde, Cheerful
   Tormentor also waits on `effect:curse-attach-player` (a Curse put onto the battlefield
-  attached to a player, or moved to an opponent).
+  attached to a player, or moved to an opponent); attaching one to a player is built
+  (`attachPermanent` takes a player), but `attachedTo` on a card entering names only a
+  permanent so far.
 - **Most-needed features overall** (commanders needing each): `cost:sacrifice-multiple`,
-  `effect:missing-tokens`, `decision:choose-from-zone-extensions`,
-  `effect:cast-during-resolution`, `effect:attach-extensions` (5 each), then
+  `effect:missing-tokens`, `effect:cast-during-resolution` (5 each), then
   `decision:variable-target-count`, `decision:choose-permanent`,
-  `replacement:mana-pool-emptying` (4 each). Orvar needs `decision:choose-permanent` and
+  `replacement:mana-pool-emptying` (4 each), `decision:choose-from-zone-extensions` and
+  `effect:attach-extensions` (3 each, after part one of each — `COMPLETED.md`). Orvar needs `decision:choose-permanent` and
   `trigger:discards-extensions`. Ulalek needs `cost:colorless-hybrid-mana` and `keyword:devoid`.
 - **UI-bound features.** These need a new client decision and a browser check:
   `effect:cast-during-resolution` (what's left after the `cast-now` effect is in its

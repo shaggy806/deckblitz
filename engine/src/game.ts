@@ -6464,6 +6464,10 @@ export class Game {
         if (fromHand && this.state.objects[id]?.zone === "library") bottomedFromHand.push(id);
         return;
       }
+      // "Onto the battlefield attached to Light-Paws": an Aura that can't
+      // be attached to it stays where it is (rule 303.4i, the ruling).
+      const host = to === "battlefield" ? awaiting.enterAttachedTo : undefined;
+      if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) return;
       const under = to === "battlefield" ? awaiting.enterUnder : undefined;
       const enterAs = to === "battlefield" ? awaiting.enterAs : undefined;
       const moved = this.moveObject(id, to, {
@@ -6485,6 +6489,7 @@ export class Game {
         // enters, before anything sees it arrive.
         if (awaiting.enterAttacking !== undefined) this.putIntoAttack([id], player, awaiting.enterAttacking);
         this.enterWithCounters(id, awaiting.enterWithCounters, player);
+        if (host !== undefined) this.attachEntered(id, host);
         this.emit({ type: "permanent-entered-battlefield", object: id });
       }
     }));
@@ -20195,7 +20200,7 @@ export class Game {
         });
         return false;
       },
-      putOntoBattlefield: (target, under, enterTapped, withCounters, exileIfLeaves, transformed, types, attacking) =>
+      putOntoBattlefield: (target, under, enterTapped, withCounters, exileIfLeaves, transformed, types, attacking, attachTo) =>
         this.putOntoBattlefieldByEffect(
           target,
           controller,
@@ -20207,6 +20212,7 @@ export class Game {
           under,
           types,
           attacking,
+          attachTo,
         ),
       exileGraveyard: (target, filter) => {
         if (target.kind !== "player") return;
@@ -21545,6 +21551,7 @@ export class Game {
         reveal,
         zones,
         together,
+        attachTo,
       ) =>
         this.beginLibrarySearch(
           player ?? controller,
@@ -21558,6 +21565,7 @@ export class Game {
           x,
           zones,
           together,
+          attachTo,
         ),
       scry: (amount, surveil, then) =>
         this.beginScry(source, controller, x, amount, surveil ? "surveil" : "scry", then ?? null),
@@ -21784,6 +21792,7 @@ export class Game {
     x = 0,
     zones: SearchZones = "library",
     together?: SearchTogether,
+    enterAttachedTo?: ObjectId | null,
   ): void {
     // `x` is the searching spell's X, for "mana value X or less" (Chord of
     // Calling).
@@ -21814,6 +21823,7 @@ export class Game {
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       ...(restDestination !== undefined ? { restDestination } : {}),
       ...(reveal ? { reveal: true } : {}),
+      ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
     };
   }
 
@@ -24447,9 +24457,22 @@ export class Game {
   /** Attach the Aura or Equipment `source` to `target` (rule 701.3; used by
    * Equip-like effects) — only to something it could enchant or equip,
    * protection included (702.16c–d), or it doesn't move (701.3b). Nor does
-   * anything else, or anything already attached there. */
+   * anything else, or anything already attached there. A player is
+   * enchanted only by an Aura that can enchant them (a Curse — 303.4). */
   private attachPermanent(source: ObjectId, target: TargetRef): void {
-    if (target.kind !== "object") return;
+    if (target.kind === "player") {
+      const aura = this.state.objects[source];
+      if (aura === undefined || aura.zone !== "battlefield" || aura.attachedToPlayer === target.player) return;
+      const auraDef = this.registry.get(printedCardName(aura));
+      if (!auraDef.subtypes.includes("Aura")) return;
+      if (!this.canEnchantPlayer(source, target.player, aura.controller, auraDef)) return;
+      aura.attachedTo = null;
+      aura.attachedToPlayer = target.player;
+      this.state.timestampSeq += 1;
+      aura.timestamp = this.state.timestampSeq;
+      invalidateComputedCache();
+      return;
+    }
     const targetId = this.splitOneFromStack(target.object);
     const sourceObject = this.state.objects[source];
     if (sourceObject === undefined || sourceObject.zone !== "battlefield") return;
@@ -24460,6 +24483,7 @@ export class Game {
       : def.subtypes.includes("Equipment") && this.canEquip(source, targetId);
     if (!legal) return;
     sourceObject.attachedTo = targetId;
+    delete sourceObject.attachedToPlayer;
     // An Aura or Equipment gets a new timestamp as it becomes attached (rule
     // 613.7e) — which is what a control-granting Aura moved onto a creature
     // is weighed against the other control effects on it by.
@@ -26890,6 +26914,7 @@ export class Game {
     underPlayer?: PlayerId,
     types?: EnterTypes,
     attacking?: ResolvedEnterAttacking,
+    attachTo?: ObjectId | null,
   ): boolean {
     const under = underPlayer ?? (underYourControl ? controller : undefined);
     if (target.kind !== "object") return false;
@@ -26900,6 +26925,10 @@ export class Game {
     if (under !== undefined && this.state.players[under]?.hasLost !== false) return false;
     // One that can't enter transformed stays put (rule 712.14a), unasked.
     if (transformed && !this.isDoubleFacedCard(target.object)) return false;
+    // "…attached to that creature": an Aura that can't go there stays.
+    if (attachTo !== undefined && !this.readyToEnterAttached(target.object, attachTo, under ?? object.owner)) {
+      return false;
+    }
     // Its "as this enters" choices first (rule 614.12 — a reanimated Clone
     // copies something): nothing moves until they're made.
     if (this.askEnterChoice(target.object, under ?? object.owner)) return true;
@@ -26929,8 +26958,37 @@ export class Game {
     // "…tapped and attacking" (rule 508.4): as it enters, before anything
     // sees it arrive.
     if (attacking !== undefined) this.putIntoAttack([target.object], entered.controller, attacking);
+    if (attachTo !== undefined) this.attachEntered(target.object, attachTo);
     this.emit({ type: "permanent-entered-battlefield", object: target.object });
     return false;
+  }
+
+  /**
+   * Ready `id` to be put onto the battlefield under `player` attached to
+   * `host` (`null`: nothing there). An Aura enchants it as it enters — or,
+   * if it can't legally enchant it, stays where it is (rule 303.4i):
+   * `false`. Anything else enters, an Equipment attached as it does
+   * (`attachEntered`), anything else unattached (303.4h).
+   */
+  private readyToEnterAttached(id: ObjectId, host: ObjectId | null, player: PlayerId): boolean {
+    const card = this.state.objects[id];
+    if (card === undefined) return false;
+    const def = this.registry.get(printedCardName(card));
+    if (!def.subtypes.includes("Aura")) return true;
+    if (host === null || !this.canEnchant(id, host, player, def)) return false;
+    card.enterChoice = { ...card.enterChoice, enchant: host };
+    return true;
+  }
+
+  /** An Equipment just put onto the battlefield attached to `host`: attached
+   * now, before its entry is announced — or, if it can't equip it, left
+   * unattached (rule 301.5e). An Aura was attached as it entered
+   * (`readyToEnterAttached`). */
+  private attachEntered(id: ObjectId, host: ObjectId | null): void {
+    const entered = this.state.objects[id];
+    if (host === null || entered?.zone !== "battlefield" || entered.attachedTo !== null) return;
+    if (!this.registry.get(printedCardName(entered)).subtypes.includes("Equipment")) return;
+    this.attachPermanent(id, { kind: "object", object: host });
   }
 
   /**
@@ -28770,7 +28828,12 @@ export class Game {
     count: number | "all",
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    opts: { readonly allGraveyards?: boolean; readonly handToo?: boolean; readonly enterAs?: EnterTypes } = {},
+    opts: {
+      readonly allGraveyards?: boolean;
+      readonly handToo?: boolean;
+      readonly enterAs?: EnterTypes;
+      readonly attachTo?: ObjectId | null;
+    } = {},
   ): boolean {
     const graveyards =
       opts.allGraveyards === true
@@ -28792,6 +28855,9 @@ export class Game {
       this.withGraveyardLeaveBatch(() => {
         this.withEnterBatch(() => {
           for (const id of eligible) {
+            // "…attached to ~": an Aura that can't go there stays.
+            const host = destination === "battlefield" ? opts.attachTo : undefined;
+            if (host !== undefined && !this.readyToEnterAttached(id, host, player)) continue;
             // A card someone else owns enters under this player's control
             // ("under your control"), kept there by a control effect as a
             // reanimation's is (`putOntoBattlefieldByEffect`).
@@ -28810,6 +28876,7 @@ export class Game {
             }
             if (moved && destination === "battlefield") {
               this.enterWithCounters(id, withCounters, player);
+              if (host !== undefined) this.attachEntered(id, host);
               this.emit({ type: "permanent-entered-battlefield", object: id });
             }
           }
@@ -28832,6 +28899,7 @@ export class Game {
         : {}),
       ...(opts.allGraveyards === true && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(enterAs !== undefined ? { enterAs } : {}),
+      ...(opts.attachTo !== undefined && destination === "battlefield" ? { enterAttachedTo: opts.attachTo } : {}),
     };
     return false;
   }
