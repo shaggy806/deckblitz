@@ -471,6 +471,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
     });
     expect(overlord.complete).toBe(true);
+    // Freerunning [cost] (rule 702.173a), expend N (700.14), "whenever you forage" (701.61a).
+    expect(
+      face(
+        "Freerunning {1}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)",
+      ).freerunning,
+    ).toEqual({ cost: "{1}{B}" });
+    expect(
+      face(
+        "Whenever you expend 4, this creature gains indestructible until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)",
+      ).triggered[0].trigger,
+    ).toEqual({ on: "expend", who: "you", amount: 4 });
+    expect(face("Whenever you forage, put a +1/+1 counter on this creature.").triggered[0].trigger).toEqual({
+      on: "forages",
+      who: "you",
+    });
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
     expect(face("Undying").triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     // Increment (rule 702.191a): the helper's cast trigger and intervening-if.

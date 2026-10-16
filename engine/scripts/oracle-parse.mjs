@@ -748,6 +748,9 @@ export function parseTrigger(clause) {
     return [{ on: "draws", who: { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]] }];
   }
   if (/^Whenever you gain life$/.test(c)) return [{ on: "gains-life", who: "you" }];
+  // Expend N (rule 700.14) and "whenever you forage" (701.61a).
+  if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
+  if (/^Whenever you forage$/.test(c)) return [{ on: "forages", who: "you" }];
   if ((m = /^Whenever (you lose|an opponent loses) life$/.exec(c))) {
     return [{ on: "loses-life", who: m[1] === "you lose" ? "you" : "opponent" }];
   }
@@ -1549,6 +1552,8 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
     // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
     if ((m = /^Web-slinging ((?:\{[^}]+\})+)$/.exec(line))) { out.webSlinging = { cost: m[1] }; continue; }
+    // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
+    if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.
     if ((m = /^Impending (\d+)—((?:\{[^}]+\})+)$/.exec(line))) {
       out.impending = { count: Number(m[1]), cost: m[2] };

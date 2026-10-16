@@ -98,6 +98,7 @@ import _poolDutifulThrull from "../pool/dutiful-thrull.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
+import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
@@ -211,6 +212,7 @@ import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
 import _poolMirageMirror from "../pool/mirage-mirror.js";
 import _poolMistralCharger from "../pool/mistral-charger.js";
 import _poolMizzixsMastery from "../pool/mizzixs-mastery.js";
+import _poolMonasteryRaid from "../pool/monastery-raid.js";
 import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
 import _poolMouserAttack from "../pool/mouser-attack.js";
@@ -519,6 +521,7 @@ const shard: CardShard = {
     _poolEcstaticElectromancer,
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,
+    _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEshkiDragonclaw,
     _poolEvolutionCharm,
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolMirageMirror,
     _poolMistralCharger,
     _poolMizzixsMastery,
+    _poolMonasteryRaid,
     _poolMonasterySwiftspear,
     _poolMoonSprite,
     _poolMouserAttack,

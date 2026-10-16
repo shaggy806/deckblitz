@@ -135,6 +135,31 @@ describe("an additional combat phase after this one", () => {
     expect(game.state.players[B].life).toBe(14);
   });
 
+  it("made in the main phase after combat: one more combat, then the end step (Grim Reaper's Sprint)", () => {
+    const { game, a } = setUp();
+    const giant = game.debugSpawn("Hill Giant", A, "battlefield", { summoningSick: false });
+    attackEveryCombat(a, giant);
+    game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "postcombat-main");
+    // The Sprint untaps each creature you control; this shape untaps only attackers.
+    game.state.objects[giant].tapped = false;
+    game.debugApplyEffect(A, extraCombat(false), []);
+    toEndStep(game);
+    expect(began(game, "begin-combat")).toBe(2);
+    expect(began(game, "postcombat-main")).toBe(1);
+    expect(game.state.players[B].life).toBe(14);
+  });
+
+  it("…followed by an additional main phase, from the main phase after combat", () => {
+    const { game, a } = setUp();
+    const giant = game.debugSpawn("Hill Giant", A, "battlefield", { summoningSick: false });
+    attackEveryCombat(a, giant);
+    game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "postcombat-main");
+    game.debugApplyEffect(A, extraCombat(true), []);
+    toEndStep(game);
+    expect(began(game, "begin-combat")).toBe(2);
+    expect(began(game, "postcombat-main")).toBe(2);
+  });
+
   it("the phase counts reset as the next turn begins", () => {
     const { game, a } = setUp();
     game.debugSpawn(KARLACH, A, "battlefield");

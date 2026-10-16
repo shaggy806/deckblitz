@@ -12,7 +12,8 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   not as it entered. "If an artifact entered the battlefield under your control this turn" asks what
   entered: an artifact that has since stopped being one still counts, and a permanent that became an
   artifact after entering doesn't (Mechan Shieldmate's ruling says so outright). In the pool: The
-  Prydwen's Human Knight token (word for word Mechan Shieldmate's clause) and Éowyn, Shieldmaiden.
+  Prydwen's Human Knight token (word for word Mechan Shieldmate's clause), Éowyn, Shieldmaiden and
+  Waterspout Warden ("if another creature entered the battlefield under your control this turn").
   **Fix (outline):** record the entering object's characteristics with the turn-history entry (a
   snapshot like `lastKnown`, taken as it enters, after its replacement effects) and match `entered`
   filters against that. Found 2026-10-15 (batch 81).

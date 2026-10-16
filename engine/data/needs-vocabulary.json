@@ -1234,7 +1234,8 @@
   "new:x-targets": "decision:x-targets",
   "new:you-have-most-life-trigger-condition": "condition:you-have-most-life-trigger-condition",
   "new:zone-entry-prohibition": "static:zone-entry-prohibition",
-  "zone:impulse-exile-other-libraries": "effect:impulse-exile-other-libraries"
+  "zone:impulse-exile-other-libraries": "effect:impulse-exile-other-libraries",
+  "trigger:valiant": "keyword:valiant"
  },
  "features": {
   "bug:additional-cost-option-affordability": {
@@ -6444,6 +6445,95 @@
   "condition:unlocked-door-count": {
    "family": "mechanic:rooms",
    "example": "A StaticCondition counting unlocked doors among Rooms you control — Rampaging Soulrager's 'two or more unlocked doors among Rooms you control' (a fully unlocked Room counts two)."
+  },
+  "condition:card-types-among-exiled-with-source": {
+   "family": "condition:source-state",
+   "example": "A static condition on the number of card types among the cards currently exiled with the source (linked exile, rule 607.2a) — Keen-Eyed Curator's \"as long as there are four or more card types among cards exiled with this creature\"."
+  },
+  "condition:equipped-by-filter": {
+   "family": "condition:filter-attachments",
+   "example": "A CardFilter clause for having an attached Equipment that matches a filter — \"a creature you control with a legendary Equipment attached to it\" (Kassandra, Eagle Bearer)."
+  },
+  "condition:target-player-turn-stat": {
+   "family": "condition:player-state-thresholds",
+   "example": "A conditional on a turn stat of the player in a target slot — Thought-Stalker Warlock's 'if they [target opponent] lost life this turn'; turn-stat's who is only you / opponent / any-player."
+  },
+  "cost:ability-tap-creatures-for-mana": {
+   "family": "cost:ability-cost-modification",
+   "example": "An activated ability whose generic mana may each be paid by tapping an untapped creature you control instead (Heirloom Epic) — waterbend's per-generic tapping restricted to creatures, summoning-sick ones included."
+  },
+  "cost:exile-from-graveyard-total-mana-value": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "An activation cost of exiling any number of cards from your graveyard matching a filter whose total mana value is N or greater (The Capitoline Triad's \"with total mana value 30 or greater\"): a chosen set gated on a sum, not a count."
+  },
+  "cost:forage": {
+   "family": "keyword:forage",
+   "example": "Forage as a cost (rule 701.61a): an activated ability's \"Forage:\" cost (mana abilities included) and a spell's \"as an additional cost, forage or pay …\" option — choose exile three graveyard cards or sacrifice a Food while paying, offered only when one is possible, and count as foraging for \"whenever you forage\"."
+  },
+  "cost:freerunning-non-mana": {
+   "family": "keyword:freerunning",
+   "example": "A freerunning cost that isn't mana — Escape Detection's 'Freerunning—Return a blue creature you control to its owner's hand' (rule 702.173a)."
+  },
+  "effect:act-on-discarded-card": {
+   "family": "effect:this-way-results",
+   "example": "An effect target naming the card a resolution discarded — \"if the discarded card was an artifact card, exile it from your graveyard; if you do, create a token copy of it\" (Leonardo da Vinci)."
+  },
+  "effect:choose-add-or-remove-counter": {
+   "example": "Sigurd, Jarl of Ravensthorpe's boast: 'put a lore counter on target Saga you control or remove one from it', the choice made on resolution."
+  },
+  "effect:cloak-exiled-pile": {
+   "family": "mechanic:face-down",
+   "example": "Cloak a shuffled face-down pile of exiled cards — a creature you own plus library cards — entering tapped (Become Anonymous); manifest's cloak reaches only a library's top card."
+  },
+  "effect:delayed-trigger-on-play-this-way": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Until end of turn, a trigger whenever you play a land or cast a spell using this effect's permission (\"its owner draws a card\" — Apple of Eden, Isu Relic)."
+  },
+  "effect:enters-with-counters-if-type": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "put-onto-battlefield withCounters gated on a type judged as the permanent enters (rule 614.12) — \"it enters with two additional +1/+1 counters on it if it's a creature\" (What Must Be Done)."
+  },
+  "effect:search-hand-graveyard-library": {
+   "example": "search-library zones including the hand — \"search your graveyard, hand, and library for a card named X, put it onto the battlefield, then shuffle\" (Kassandra, Eagle Bearer)."
+  },
+  "effect:search-split-count": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "search-library's split with a count for `destination` before `restDestination` takes the rest — 'put two of them onto the battlefield tapped and the other into your hand' (Viewpoint Synchronization), the first N finds (all when N or fewer) going to `destination`."
+  },
+  "effect:search-zones-chosen-by-target-player": {
+   "family": "effect:choices-by-other-players",
+   "example": "A 'target player searches their library and/or graveyard … if they search their library this way, they shuffle' where the searching player, not the effect's controller, chooses which zones (Auditore Ambush); the resolution modal is always answered by the controller."
+  },
+  "effect:temporary-opponent-spell-tax": {
+   "family": "effect:temporary-player-effect",
+   "example": "A player-effect raising the cost of opponents' spells for a duration — \"until your next turn, spells your opponents cast cost {1} more to cast\" (Tax Collector)."
+  },
+  "filter:has-freerunning": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "A CardFilter clause for a card or spell that has freerunning (a non-null `freerunning` field, from any zone) — 'a spell that has freerunning' (Brotherhood Headquarters' spend restriction), 'card with freerunning' (Jacob Frye's target)."
+  },
+  "keyword:detain": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Detain (rule 701.35): until your next turn, the permanent can't attack or block and its activated abilities (mana abilities included) can't be activated (Tax Collector, the RTR detain cards)."
+  },
+  "keyword:valiant": {
+   "example": "Valiant (Bloomburrow): 'whenever this creature becomes the target of a spell or ability you control for the first time each turn' — a becomes-target trigger limited to its controller's spells and abilities (the mirror of byOpponentOnly) and firing only the first time each turn that permanent is so targeted, counting targets changed or copies' targets (the rulings)."
+  },
+  "static:lose-keyword": {
+   "family": "effect:lose-keyword-until-eot",
+   "example": "A static that makes the affected permanents lose a keyword in layer 6, in timestamp order with grants — 'Equipped creature gets +3/+3 and loses flying' (Starforged Sword)."
+  },
+  "trigger:counters-put-each-counter": {
+   "family": "trigger:counters-put",
+   "example": "Sigurd, Jarl of Ravensthorpe: 'whenever you put a lore counter on a Saga' triggers once per counter put (rule 603.2c), not once per permanent per event."
+  },
+  "trigger:gives-gift": {
+   "family": "keyword:gift",
+   "example": "'Whenever you give a gift' (Jolly Gerbils): a trigger on the gift actually being given — as an instant or sorcery with a promised gift resolves, or as a permanent's gift trigger resolves — not on the promise at cast."
+  },
+  "trigger:sacrifice-batch-trigger": {
+   "family": "trigger:sacrifice-filter",
+   "example": "A batched \"whenever you sacrifice one or more [filter]\" trigger, firing once per simultaneous sacrifice event rather than once per permanent (Camellia, the Seedmiser's Foods)."
   }
  }
 }

@@ -61,6 +61,7 @@ import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
 import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
+import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCastleVantress from "../pool/castle-vantress.js";
@@ -157,6 +158,7 @@ import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
+import _poolHazardrootHerbalist from "../pool/hazardroot-herbalist.js";
 import _poolHeartsOnFire from "../pool/hearts-on-fire.js";
 import _poolHecteyes from "../pool/hecteyes.js";
 import _poolHeirsOfStromkirk from "../pool/heirs-of-stromkirk.js";
@@ -258,6 +260,7 @@ import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
+import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
@@ -340,6 +343,7 @@ import _poolSubmerge from "../pool/submerge.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
+import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
@@ -360,6 +364,7 @@ import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
+import _poolTranquilize from "../pool/tranquilize.js";
 import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
@@ -476,6 +481,7 @@ const shard: CardShard = {
     _poolBreenaTheDemagogue,
     _poolBroodheartEngine,
     _poolBurstLightning,
+    _poolBushyBodyguard,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
     _poolCastleVantress,
@@ -572,6 +578,7 @@ const shard: CardShard = {
     _poolHaloScarab,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
+    _poolHazardrootHerbalist,
     _poolHeartsOnFire,
     _poolHecteyes,
     _poolHeirsOfStromkirk,
@@ -673,6 +680,7 @@ const shard: CardShard = {
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
     _poolPlasmancer,
+    _poolPoisonBladeMentor,
     _poolPollutedMire,
     _poolPongify,
     _poolPrimalBeyond,
@@ -755,6 +763,7 @@ const shard: CardShard = {
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,
+    _poolSurtrFieryJotun,
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
     _poolTanglespanLookout,
@@ -775,6 +784,7 @@ const shard: CardShard = {
     _poolTimelineInquiry,
     _poolToriDavenantFuryRider,
     _poolTrainedCaracal,
+    _poolTranquilize,
     _poolTrappedInTheScreen,
     _poolTraumaticCritique,
     _poolTravelingBotanist,

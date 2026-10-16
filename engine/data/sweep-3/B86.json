@@ -1,0 +1,1197 @@
+{
+ "batch": "B86",
+ "status": "complete",
+ "ranks": "Bloomburrow (BLB, 2024-08-02), Bloomburrow Commander (BLC, 2024-08-02), Mystery Booster 2 (MB2, 2024-08-02) and Assassin's Creed (ACR, 2024-07-05): the rest of the sets",
+ "authored": [
+  {
+   "name": "Treeguard Duo",
+   "files": [
+    "engine/src/cards/pool/treeguard-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartfire Hero",
+   "files": [
+    "engine/src/cards/pool/heartfire-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabid Gnaw",
+   "files": [
+    "engine/src/cards/pool/rabid-gnaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spellgyre",
+   "files": [
+    "engine/src/cards/pool/spellgyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salvation Swan",
+   "files": [
+    "engine/src/cards/pool/salvation-swan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polliwallop",
+   "files": [
+    "engine/src/cards/pool/polliwallop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harnesser of Storms",
+   "files": [
+    "engine/src/cards/pool/harnesser-of-storms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindwhisker",
+   "files": [
+    "engine/src/cards/pool/mindwhisker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Forager",
+   "files": [
+    "engine/src/cards/pool/curious-forager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Three Tree Scribe",
+   "files": [
+    "engine/src/cards/pool/three-tree-scribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pawpatch Recruit",
+   "files": [
+    "engine/src/cards/pool/pawpatch-recruit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splash Lasher",
+   "files": [
+    "engine/src/cards/pool/splash-lasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teapot Slinger",
+   "files": [
+    "engine/src/cards/pool/teapot-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emberheart Challenger",
+   "files": [
+    "engine/src/cards/pool/emberheart-challenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Waverider",
+   "files": [
+    "engine/src/cards/pool/daring-waverider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonecache Overseer",
+   "files": [
+    "engine/src/cards/pool/bonecache-overseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valley Flamecaller",
+   "files": [
+    "engine/src/cards/pool/valley-flamecaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agate-Blade Assassin",
+   "files": [
+    "engine/src/cards/pool/agate-blade-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bakersbane Duo",
+   "files": [
+    "engine/src/cards/pool/bakersbane-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stickytongue Sentinel",
+   "files": [
+    "engine/src/cards/pool/stickytongue-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Muerra, Trash Tactician",
+   "files": [
+    "engine/src/cards/pool/muerra-trash-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Otterball Antics",
+   "files": [
+    "engine/src/cards/pool/otterball-antics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whiskervale Forerunner",
+   "files": [
+    "engine/src/cards/pool/whiskervale-forerunner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Longstalk Brawl",
+   "files": [
+    "engine/src/cards/pool/longstalk-brawl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roughshod Duo",
+   "files": [
+    "engine/src/cards/pool/roughshod-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fireglass Mentor",
+   "files": [
+    "engine/src/cards/pool/fireglass-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brazen Collector",
+   "files": [
+    "engine/src/cards/pool/brazen-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyskipper Duo",
+   "files": [
+    "engine/src/cards/pool/skyskipper-duo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Star Charter",
+   "files": [
+    "engine/src/cards/pool/star-charter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bushy Bodyguard",
+   "files": [
+    "engine/src/cards/pool/bushy-bodyguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flamecache Gecko",
+   "files": [
+    "engine/src/cards/pool/flamecache-gecko.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harvestrite Host",
+   "files": [
+    "engine/src/cards/pool/harvestrite-host.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manifold Mouse",
+   "files": [
+    "engine/src/cards/pool/manifold-mouse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Builder's Talent",
+   "files": [
+    "engine/src/cards/pool/builders-talent.ts",
+    "engine/src/cards/tokens/wall-token-builders-talent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starseer Mentor",
+   "files": [
+    "engine/src/cards/pool/starseer-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starlit Soothsayer",
+   "files": [
+    "engine/src/cards/pool/starlit-soothsayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nettle Guard",
+   "files": [
+    "engine/src/cards/pool/nettle-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wishing Well",
+   "files": [
+    "engine/src/cards/pool/wishing-well.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thornplate Intimidator",
+   "files": [
+    "engine/src/cards/pool/thornplate-intimidator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seedglaive Mentor",
+   "files": [
+    "engine/src/cards/pool/seedglaive-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hired Claw",
+   "files": [
+    "engine/src/cards/pool/hired-claw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Byway Barterer",
+   "files": [
+    "engine/src/cards/pool/byway-barterer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brambleguard Captain",
+   "files": [
+    "engine/src/cards/pool/brambleguard-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festival of Embers",
+   "files": [
+    "engine/src/cards/pool/festival-of-embers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High Stride",
+   "files": [
+    "engine/src/cards/pool/high-stride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonstone Harbinger",
+   "files": [
+    "engine/src/cards/pool/moonstone-harbinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treetop Sentries",
+   "files": [
+    "engine/src/cards/pool/treetop-sentries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flowerfoot Swordmaster",
+   "files": [
+    "engine/src/cards/pool/flowerfoot-swordmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corpseberry Cultivator",
+   "files": [
+    "engine/src/cards/pool/corpseberry-cultivator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whiskerquill Scribe",
+   "files": [
+    "engine/src/cards/pool/whiskerquill-scribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonebind Orator",
+   "files": [
+    "engine/src/cards/pool/bonebind-orator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alania's Pathmaker",
+   "files": [
+    "engine/src/cards/pool/alanias-pathmaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steampath Charger",
+   "files": [
+    "engine/src/cards/pool/steampath-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hoarder's Overflow",
+   "files": [
+    "engine/src/cards/pool/hoarders-overflow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eddymurk Crab",
+   "files": [
+    "engine/src/cards/pool/eddymurk-crab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mouse Trapper",
+   "files": [
+    "engine/src/cards/pool/mouse-trapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nocturnal Hunger",
+   "files": [
+    "engine/src/cards/pool/nocturnal-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scales of Shale",
+   "files": [
+    "engine/src/cards/pool/scales-of-shale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intrepid Rabbit",
+   "files": [
+    "engine/src/cards/pool/intrepid-rabbit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hivespine Wolverine",
+   "files": [
+    "engine/src/cards/pool/hivespine-wolverine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cindering Cutthroat",
+   "files": [
+    "engine/src/cards/pool/cindering-cutthroat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rabbit Response",
+   "files": [
+    "engine/src/cards/pool/rabbit-response.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valley Rally",
+   "files": [
+    "engine/src/cards/pool/valley-rally.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidecaller Mentor",
+   "files": [
+    "engine/src/cards/pool/tidecaller-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterspout Warden",
+   "files": [
+    "engine/src/cards/pool/waterspout-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran Guardmouse",
+   "files": [
+    "engine/src/cards/pool/veteran-guardmouse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Spiral",
+   "files": [
+    "engine/src/cards/pool/mind-spiral.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wax-Wane Witness",
+   "files": [
+    "engine/src/cards/pool/wax-wane-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hazardroot Herbalist",
+   "files": [
+    "engine/src/cards/pool/hazardroot-herbalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rust-Shield Rampager",
+   "files": [
+    "engine/src/cards/pool/rust-shield-rampager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bark-Knuckle Boxer",
+   "files": [
+    "engine/src/cards/pool/bark-knuckle-boxer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plumecreed Mentor",
+   "files": [
+    "engine/src/cards/pool/plumecreed-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mabel's Mettle",
+   "files": [
+    "engine/src/cards/pool/mabels-mettle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brambleguard Veteran",
+   "files": [
+    "engine/src/cards/pool/brambleguard-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frilled Sparkshooter",
+   "files": [
+    "engine/src/cards/pool/frilled-sparkshooter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reptilian Recruiter",
+   "files": [
+    "engine/src/cards/pool/reptilian-recruiter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Druid of the Spade",
+   "files": [
+    "engine/src/cards/pool/druid-of-the-spade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sonar Strike",
+   "files": [
+    "engine/src/cards/pool/sonar-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seasoned Warrenguard",
+   "files": [
+    "engine/src/cards/pool/seasoned-warrenguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Junkblade Bruiser",
+   "files": [
+    "engine/src/cards/pool/junkblade-bruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take Out the Trash",
+   "files": [
+    "engine/src/cards/pool/take-out-the-trash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightwhorl Hermit",
+   "files": [
+    "engine/src/cards/pool/nightwhorl-hermit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blooming Blast",
+   "files": [
+    "engine/src/cards/pool/blooming-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Drill Assailant",
+   "files": [
+    "engine/src/cards/pool/mind-drill-assailant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conduct Electricity",
+   "files": [
+    "engine/src/cards/pool/conduct-electricity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calamitous Tide",
+   "files": [
+    "engine/src/cards/pool/calamitous-tide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Whorl",
+   "files": [
+    "engine/src/cards/pool/psychic-whorl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Shucker",
+   "files": [
+    "engine/src/cards/pool/thought-shucker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildfire Howl",
+   "files": [
+    "engine/src/cards/pool/wildfire-howl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tangle Tumbler",
+   "files": [
+    "engine/src/cards/pool/tangle-tumbler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pileated Provisioner",
+   "files": [
+    "engine/src/cards/pool/pileated-provisioner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Finch Formation",
+   "files": [
+    "engine/src/cards/pool/finch-formation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Downwind Ambusher",
+   "files": [
+    "engine/src/cards/pool/downwind-ambusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seedpod Squire",
+   "files": [
+    "engine/src/cards/pool/seedpod-squire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Driftgloom Coyote",
+   "files": [
+    "engine/src/cards/pool/driftgloom-coyote.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonstone Eulogist",
+   "files": [
+    "engine/src/cards/pool/moonstone-eulogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Velukan Dragon",
+   "files": [
+    "engine/src/cards/pool/velukan-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Achilles Davenport",
+   "files": [
+    "engine/src/cards/pool/achilles-davenport.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chain Assassination",
+   "files": [
+    "engine/src/cards/pool/chain-assassination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surtr, Fiery Jötun",
+   "files": [
+    "engine/src/cards/pool/surtr-fiery-jotun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lydia Frye",
+   "files": [
+    "engine/src/cards/pool/lydia-frye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aveline de Grandpré",
+   "files": [
+    "engine/src/cards/pool/aveline-de-grandpre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Havi, the All-Father",
+   "files": [
+    "engine/src/cards/pool/havi-the-all-father.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haytham Kenway",
+   "files": [
+    "engine/src/cards/pool/haytham-kenway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eivor, Battle-Ready",
+   "files": [
+    "engine/src/cards/pool/eivor-battle-ready.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bleeding Effect",
+   "files": [
+    "engine/src/cards/pool/bleeding-effect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleopatra, Exiled Pharaoh",
+   "files": [
+    "engine/src/cards/pool/cleopatra-exiled-pharaoh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantom Blade",
+   "files": [
+    "engine/src/cards/pool/phantom-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Petty Larceny",
+   "files": [
+    "engine/src/cards/pool/petty-larceny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brotherhood Spy",
+   "files": [
+    "engine/src/cards/pool/brotherhood-spy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidden Footblade",
+   "files": [
+    "engine/src/cards/pool/hidden-footblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hookblade",
+   "files": [
+    "engine/src/cards/pool/hookblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poison-Blade Mentor",
+   "files": [
+    "engine/src/cards/pool/poison-blade-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merciless Harlequin",
+   "files": [
+    "engine/src/cards/pool/merciless-harlequin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezio, Brash Novice",
+   "files": [
+    "engine/src/cards/pool/ezio-brash-novice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Distract the Guards",
+   "files": [
+    "engine/src/cards/pool/distract-the-guards.ts",
+    "engine/src/cards/tokens/human-rogue-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tranquilize",
+   "files": [
+    "engine/src/cards/pool/tranquilize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escarpment Fortress",
+   "files": [
+    "engine/src/cards/pool/escarpment-fortress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven Clan War-Axe",
+   "files": [
+    "engine/src/cards/pool/raven-clan-war-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brotherhood Ambushers",
+   "files": [
+    "engine/src/cards/pool/brotherhood-ambushers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assassin Den",
+   "files": [
+    "engine/src/cards/pool/assassin-den.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monastery Raid",
+   "files": [
+    "engine/src/cards/pool/monastery-raid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Headsplitter",
+   "files": [
+    "engine/src/cards/pool/headsplitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Labyrinth Adversary",
+   "files": [
+    "engine/src/cards/pool/labyrinth-adversary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Misthios's Fury",
+   "files": [
+    "engine/src/cards/pool/misthioss-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hemlock Vial",
+   "files": [
+    "engine/src/cards/pool/hemlock-vial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Settlement Blacksmith",
+   "files": [
+    "engine/src/cards/pool/settlement-blacksmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keen-Eyed Raven",
+   "files": [
+    "engine/src/cards/pool/keen-eyed-raven.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Agate Assault",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "Mode 1's \"If that creature would die this turn, exile it instead\" needs a turn-long die-to-exile replacement on the targeted creature (for any reason, the ruling); the modal shape (castModal, 4 damage / exile target artifact) is otherwise plain."
+  },
+  {
+   "name": "Keen-Eyed Curator",
+   "needs": [
+    "condition:card-types-among-exiled-with-source"
+   ],
+   "why": "\"As long as there are four or more card types among cards exiled with this creature\" needs a static condition counting the card types among the cards currently exiled with the source (linked exile, rule 607); the exiled-with-source condition only counts cards ever exiled. The {1} ability is Withered Wretch's exile with `linked: true`."
+  },
+  {
+   "name": "Portent of Calamity",
+   "needs": [
+    "decision:choose-from-zone-extensions"
+   ],
+   "why": "\"For each card type, you may exile a card of that type from among them\" is a per-card-type constrained pick from the revealed cards (Atraxa's shape), followed by a free cast from among the exiled cards only if four or more were exiled, then the rest to hand; look-and-choose has no per-type set rule."
+  },
+  {
+   "name": "Heirloom Epic",
+   "needs": [
+    "cost:ability-tap-creatures-for-mana"
+   ],
+   "why": "\"For each mana in this ability's activation cost, you may tap an untapped creature you control rather than pay that mana\" is waterbend restricted to creatures (waterbend also lets artifacts tap), and AbilityCost has no creature-only version."
+  },
+  {
+   "name": "Kitnap",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "\"When this Aura enters, tap enchanted creature ... put three stun counters on it\" needs an untargeted effect reference to the Aura's host (tap/add-counter take only a slot, source or trigger object); gift a card (GIFT_KICKER + giftTrigger(\"card\")), \"if the gift wasn't promised\" (not self-kicked) and controlEnchanted are all expressible."
+  },
+  {
+   "name": "Thought-Stalker Warlock",
+   "needs": [
+    "condition:target-player-turn-stat"
+   ],
+   "why": "'Choose target opponent. If they lost life this turn, [discard-chosen nonland]. Otherwise, they discard a card' needs a conditional on the targeted player's own life lost this turn: turn-stat only asks you / some opponent / any player, and the { turnStat, target } amount has no condition comparing it."
+  },
+  {
+   "name": "Sugar Coat",
+   "needs": [
+    "static:set-characteristics-aura",
+    "static:static-lose-all-abilities"
+   ],
+   "why": "'Enchanted permanent is a colorless Food artifact with \"{2}, {T}, Sacrifice this artifact: You gain 3 life\" and loses all other card types and abilities': setTypes/setSubtypes/grantsActivated exist on a static, but a static can't set colour (colorless, layer 5) or remove all abilities (layer 6); 'Enchant creature or Food' itself is expressible (Swift Reconfiguration's anyOf target)."
+  },
+  {
+   "name": "Jolly Gerbils",
+   "needs": [
+    "trigger:gives-gift"
+   ],
+   "why": "'Whenever you give a gift' has no trigger: the engine emits gift-promised at cast but no event when the gift is actually given (an instant/sorcery's resolution or a permanent's gift trigger resolving, per the ruling)."
+  },
+  {
+   "name": "Starforged Sword",
+   "needs": [
+    "static:lose-keyword"
+   ],
+   "why": "'Equipped creature gets +3/+3 and loses flying': no static removes a keyword (layer 6); the rest is expressible — GIFT_KICKER + giftTrigger(\"tapped-fish\"), a self-kicked enters trigger attaching it to target creature you control, grantPt [3,3], equip {3} — and the rulings want a later-gained flying to stick and an 'as long as' flying to stay lost (timestamp order)."
+  },
+  {
+   "name": "Wick's Patrol",
+   "needs": [
+    "effect:aggregate-over-graveyard"
+   ],
+   "why": "'-X/-X where X is the greatest mana value among cards in your graveyard': aggregates read only battlefield permanents; the mill 3 then reflexive trigger (a this-way milled atLeast 3 conditional around reflexive-trigger targeting creature-an-opponent-controls, X read as the reflexive ability resolves per the ruling) is otherwise expressible."
+  },
+  {
+   "name": "Early Winter",
+   "needs": [
+    "effect:each-opponent-exiles-choice"
+   ],
+   "why": "Mode 2 'Target opponent exiles an enchantment they control' needs an edict that exiles (the sacrifice effect only sacrifices); mode 1 'Exile target creature' and the castModal are expressible."
+  },
+  {
+   "name": "Dire Downdraft",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"Target creature's owner puts it on their choice of the top or bottom of their library\": put-on-library takes a fixed position and no effect lets the creature's owner (not its controller, not the caster) choose top or bottom; the cost reduction is expressible (targetCostReduction, filter creature with anyOf attacking / tapped, reduceGeneric 1)."
+  },
+  {
+   "name": "Ruthless Negotiation",
+   "needs": [
+    "effect:player-exiles-chosen-from-hand"
+   ],
+   "why": "\"Target opponent exiles a card from their hand\": no effect has a target player choose a card from their own hand and exile it (discard moves to the graveyard, look-and-choose's other-chooser is graveyard-only); the flashback and the castFrom-graveyard draw (Plunder the Trollshaws's source condition) are expressible."
+  },
+  {
+   "name": "Fisher's Talent",
+   "needs": [
+    "replacement:token-creation-substitute-replacement"
+   ],
+   "why": "Levels 2 and 3, \"If you would create a Fish token, create a 3/3 blue Shark creature token instead\" and Shark → 8/8 Octopus (chaining Fish → Shark → Octopus at level 3, any source's tokens, the rest of the creating effect kept — the rulings): would-create-token's creatureTokensInstead matches every creature token, not one subtype, and needs a class-level condition; the level-1 upkeep (look at the top card, may reveal it if it's a land, a Fish only if revealed, then draw) also needs checking against look-and-choose before authoring; Shark Token (3/3 blue Shark) has no tokens/ file yet (the scaffold drafted one), Octopus Token exists."
+  },
+  {
+   "name": "Pyreswipe Hawk",
+   "needs": [
+    "effect:control-while-you-control-source"
+   ],
+   "why": "\"Whenever you expend 6, gain control of up to one target artifact for as long as you control this creature\": expend isn't built, and gain-control's whileSource ends only when the source leaves the battlefield, not when you stop controlling it; the attack trigger (+X/+0, X the greatest mana value among artifacts you control, Orcish Siegemaster/Armor Wars shape) is expressible, and the steal is an optional (up to one) target."
+  },
+  {
+   "name": "Insatiable Frugivore",
+   "needs": [
+    "effect:repeat-process"
+   ],
+   "why": "\"Create a Food token, then you may exile three cards from your graveyard. If you do, repeat this process\": no loop repeats a block while the player keeps choosing to (all within one resolution, triggers waiting until it ends — the rulings); the activated ability is expressible ({3}{B} plus sacrifice { filter Food, count \"x\" }, X may be 0, then modify-pt-all +X/+0 and grant-keyword-all menace on creatures you control until end of turn)."
+  },
+  {
+   "name": "Sigurd, Jarl of Ravensthorpe",
+   "needs": [
+    "trigger:counters-put-each-counter",
+    "effect:choose-add-or-remove-counter"
+   ],
+   "why": "Lore counters now count as counters put on (fixed this batch), but \"whenever you put a lore counter\" triggers once per counter (rule 603.2c: two at once under Doubling Season trigger twice), and the engine's counters-put fires once per permanent per event; the boast's \"put a lore counter on it or remove one from it\" is a choice made on resolution the vocabulary can't say."
+  },
+  {
+   "name": "Fall of the First Civilization",
+   "needs": [
+    "effect:each-player-chooses-destroy-rest"
+   ],
+   "why": "Chapter III, \"Each player chooses three nonland permanents they control. Destroy all other nonland permanents\": sacrifice-all-but chooses and sacrifices, nothing chooses then destroys the rest (indestructible and regeneration matter); chapters I (Secret Rendezvous's you-and-target-opponent draw 2) and II (exile target artifact an opponent controls) are expressible."
+  },
+  {
+   "name": "The Capitoline Triad",
+   "needs": [
+    "effect:emblem-static-abilities",
+    "cost:exile-from-graveyard-total-mana-value"
+   ],
+   "why": "The emblem's \"Creatures you control have base power and toughness 9/9\" is a layer-7b set, and an emblem's static folds only grantPt/keywords (setBase null in characteristics.ts); the cost \"Exile any number of historic cards from your graveyard with total mana value 30 or greater\" has no vocabulary (exileFromGraveyard is a fixed count); the Those Who Came Before reduction is expressible (selfCostReduction reduceGeneric cardsInGraveyard over the historic anyOf filter, counted after the card moves to the stack)."
+  },
+  {
+   "name": "Altaïr Ibn-La'Ahad",
+   "needs": [
+    "effect:token-copy-of-exiled-card"
+   ],
+   "why": "\"For each creature card you own in exile with a memory counter on it, create a tapped and attacking token that's a copy of it\": create-token-copy's { each } matches battlefield permanents only, not cards in exile by a counters filter (the exile of up to one target Assassin creature card with a memory counter, tapped-and-attacking with attacking: \"choose\", and exileAtEndOfCombat all exist; the copies are of the card as printed, asCard)."
+  },
+  {
+   "name": "Kassandra, Eagle Bearer",
+   "needs": [
+    "effect:search-hand-graveyard-library",
+    "condition:equipped-by-filter"
+   ],
+   "why": "search-library's zones reach the library and graveyard but not the hand (\"search your graveyard, hand, and library for a card named The Spear of Leonidas, put it onto the battlefield\"), and no CardFilter clause says \"with a legendary Equipment attached to it\" (only equipped / equipmentAttached counts) for the combat-damage draw trigger."
+  },
+  {
+   "name": "Battlefield Improvisation",
+   "needs": [
+    "effect:attach-chosen-equipment-to-target"
+   ],
+   "why": "\"You may attach any number of Equipment you control to it\": choose-permanents rebinds slot 0 to each chosen Equipment in its then, so nothing can attach the chosen ones to the spell's target creature (the +2/+2 and the \"if that creature is attacking\" target condition are expressible)."
+  },
+  {
+   "name": "Jacob Frye",
+   "needs": [
+    "filter:has-freerunning"
+   ],
+   "why": "The trigger targets 'an Assassin card or card with freerunning' in your graveyard, and no CardFilter clause says 'has freerunning'; the copy-and-cast half is the built cast-from-among `copies` shape."
+  },
+  {
+   "name": "Ratonhnhaké꞉ton",
+   "needs": [
+    "condition:source-hasnt-dealt-damage",
+    "effect:reflexive-refers-to-creating-objects"
+   ],
+   "why": "\"As long as Ratonhnhaké꞉ton hasn't dealt damage yet, it has hexproof and can't be blocked\" needs a damage-history condition on the source's stint, and the reflexive \"return target Equipment card from your graveyard to the battlefield, then attach it to that token\" must name the token the outer trigger created and the card it just returned (which may enter unattached if it can't legally attach — the ruling)."
+  },
+  {
+   "name": "What Must Be Done",
+   "needs": [
+    "effect:enters-with-counters-if-type"
+   ],
+   "why": "Release Juno's \"It enters with two additional +1/+1 counters on it if it's a creature\": put-onto-battlefield's withCounters has no type condition judged as the permanent enters (rule 614.12 — a noncreature artifact or Saga returned under March of the Machines or Starfield of Nyx enters as a creature and gets them); a conditional on the graveyard card's types would miss that. Mode 1 (destroy-all typesAnyOf artifact, creature) and the historic permanent target are fine."
+  },
+  {
+   "name": "Tax Collector",
+   "needs": [
+    "effect:temporary-opponent-spell-tax",
+    "keyword:detain"
+   ],
+   "why": "Tax's \"until your next turn, spells your opponents cast cost {1} more to cast\" has no temporary cost-increase effect (player-effect only reduces your own spells), and detain (rule 701.35: until your next turn, can't attack or block and its activated abilities can't be activated) isn't modelled — prohibit and restrict last only this turn."
+  },
+  {
+   "name": "Adrestia",
+   "needs": [
+    "condition:crewed-by-this-turn"
+   ],
+   "why": "The intervening \"if an Assassin crewed it this turn\" needs a record of which creatures crewed the Vehicle this turn, read as each was when tapped for the crew cost (the rulings); islandwalk, crew 1 and the add-types Assassin until end of turn are expressible."
+  },
+  {
+   "name": "The Revelations of Ezio",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter II's \"Whenever an Assassin you control attacks this turn, put a +1/+1 counter on it\" is a delayed triggered ability for the rest of the turn (Assassins arriving later included), which the engine can't create; chapters I (destroy target tapped creature an opponent controls) and III (return target Assassin creature card with an additional +1/+1 counter) are expressible."
+  },
+  {
+   "name": "The Animus",
+   "needs": [
+    "effect:become-copy-of-card",
+    "effect:become-copy-until-your-next-turn"
+   ],
+   "why": "\"Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it\": become-copy copies a permanent, not a card in exile, and has no until-your-next-turn duration (the end-step exile of up to one legendary creature card with a memory counter from a graveyard is expressible)."
+  },
+  {
+   "name": "Eivor, Wolf-Kissed",
+   "needs": [
+    "effect:look-and-choose-one-per-type"
+   ],
+   "why": "\"You may put a Saga card and/or a land card from among them onto the battlefield\" is a one-per-type set rule over the milled cards (up to one Saga and up to one land, put onto the battlefield together; Urza's Saga can fill either role), which look-and-choose can't say; two sequential picks would move them one after another. The mill-that-many trigger is Nashi's shape."
+  },
+  {
+   "name": "Become Anonymous",
+   "needs": [
+    "effect:cloak-exiled-pile"
+   ],
+   "why": "Cloak here puts a shuffled face-down pile — the exiled target nontoken creature you own plus the top two cards of your library — onto the battlefield tapped; manifest { cloak } only cloaks the top card of a library, untapped."
+  },
+  {
+   "name": "Apple of Eden, Isu Relic",
+   "needs": [
+    "zone:exile-hand-with-play-permission",
+    "effect:exile-hands-face-down-return-later",
+    "effect:delayed-trigger-on-play-this-way"
+   ],
+   "why": "Exiling target opponent's whole hand face down with a play-this-turn, any-mana permission, \"until end of turn, whenever you play a land or cast a spell this way, its owner draws a card\", and returning the cards still exiled at the next end step have no vocabulary."
+  },
+  {
+   "name": "Leonardo da Vinci",
+   "needs": [
+    "effect:act-on-discarded-card"
+   ],
+   "why": "\"If the discarded card was an artifact card, exile it from your graveyard. If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying\" needs an effect target naming the card discarded this way (EffectTargetRef is a slot, the source or the trigger object); the Thopters' base X/X animate-all (Jolrael's shape) and the loot are expressible."
+  },
+  {
+   "name": "Origin of the Hidden Ones",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Chapter III 'Whenever an Assassin you control attacks this turn, create a 1/1 black Assassin creature token with menace that's tapped and attacking' is a delayed trigger lasting the turn that must see Assassins that arrive or become Assassins later (Ezio, Brash Novice); grant-triggered-all fixes its matches as it resolves and the Saga is sacrificed after III, so nothing can carry it. Chapters I (4 damage to any target) and II (two 'Assassin Token (Aya of Alexandria)') are authorable; III's tokens enter attacking a defender of your choice each (`attacking: \"choose\"`) and don't fire attack triggers."
+  },
+  {
+   "name": "Escape Detection",
+   "needs": [
+    "cost:freerunning-non-mana"
+   ],
+   "why": "Its freerunning cost is 'Return a blue creature you control to its owner's hand', and `freerunning` takes only a mana cost."
+  },
+  {
+   "name": "Templar Knight",
+   "needs": [
+    "mechanic:deck-any-number-copies"
+   ],
+   "why": "'A deck can have any number of cards named Templar Knight' needs a singleton exemption in deck-validation.ts (and the deck builder's copy cap); the activated ability looks expressible as cost { mana: '{W}', tapOthers: { count: 5, filter: { name: 'Templar Knight', attacking: true }, includeSelf: true } } with search-library for { type: 'artifact', supertype: 'legendary' } to the battlefield, but check that tapOthers' filter honours `attacking` and that a vigilant attacker it taps stays attacking."
+  },
+  {
+   "name": "Palazzo Archers",
+   "needs": [
+    "effect:damage-to-trigger-object"
+   ],
+   "why": "'deals damage equal to its power to that creature' needs damage to the trigger object (damage takes only a target slot), with the source's last-known power if the Archers have left (its ruling) — a one-sided fight from 'source' to 'trigger-object' deals nothing once the Archers are gone; the trigger itself is { on: 'attacks', who: 'any', filter: { keyword: 'flying' }, attackingYou: true } (Revenge of Ravens' 'you or a planeswalker you control')."
+  },
+  {
+   "name": "Auditore Ambush",
+   "needs": [
+    "effect:search-zones-chosen-by-target-player"
+   ],
+   "why": "Mode 2 'Target player searches their library and/or graveyard … If they search their library this way, they shuffle' needs the target player to choose which zones (Tower Winder's resolution modal is answered by the effect's controller, which would decide for an opponent whether they shuffle); mode 1 is a plain bounce in a castModal of min 1 / max 2, and the search is search-library with who: { controllerOfTarget } — Ezio, Blade of Vengeance is in the pool."
+  },
+  {
+   "name": "Yggdrasil, Rebirth Engine",
+   "needs": [
+    "effect:exile-all-linked",
+    "effect:put-exiled-with-source-onto-battlefield"
+   ],
+   "why": "'Put a creature card exiled with Yggdrasil onto the battlefield' needs both exiles linked to the source — exile-graveyard (creature filter) and exile-from-library (top three) have no linked option — and a choose-one-linked-card put-onto-battlefield under your control with haste until end of turn, which nothing provides."
+  },
+  {
+   "name": "Shaun & Rebecca, Agents",
+   "needs": [
+    "decision:search-hand-and-library"
+   ],
+   "why": "'search your graveyard, hand, and library for a card named The Animus and put it onto the battlefield, then shuffle' needs a search over the hand too (SearchZones stops at library-and-graveyard; The Animus isn't in the pool, which is fine), and '{T}: Add {C}. When you do, mill two cards' is a mana ability with a reflexive trigger that goes on the stack after the payment (its ruling), which no pool mana ability has."
+  }
+ ]
+}

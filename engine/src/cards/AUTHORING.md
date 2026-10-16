@@ -342,6 +342,7 @@ from the same link.
 | `prototype` | `{ cost, power, toughness }` | **Prototype** (rule 718 — Combat Thresher's "Prototype {2}{W} — 1/1"): not an alternative cost, but a variant of every cast (`prototype: true` on the `cast-spell` offer). Cast that way the spell has the prototype mana cost, that cost's colors and that power/toughness — copiable values, so a copy of the spell or the permanent has them too — from the stack onto the battlefield, and is its printed self everywhere else. Its legality and cost are worked out as the prototyped spell (a white {2}{W} spell, mana value 3). |
 | `blitz` | `{ cost }` | **Blitz** (rule 702.152a — Star Athlete, Jaxis, the Troublemaker): an alternative cost from the hand — or a commander from the command zone, its tax added — offered as a `cast-spell` with `via: "blitz"`. The permanent it becomes gets haste and "when this creature dies, draw a card" on a modifier (not copiable, so a copy of it gets neither — the rulings), and a delayed trigger sacrificing it at the beginning of the next end step. Not offered from anywhere else a card may be cast from (an impulse permission, a graveyard). |
 | `impending` | `{ count, cost }` | **Impending N—[cost]** (rule 702.176a — the Overlords of Duskmourn): an alternative cost from the hand, or a commander from the command zone, offered as a `cast-spell` with `via: "impending"`. Cast that way, the permanent enters with `count` time counters, put on before anything sees it arrive, so "whenever a creature enters" doesn't trigger for it. Its other two abilities are the card's own: spread `impendingAbilities()`'s `static` (not a creature while it has a time counter) and `triggered` (your end step removes one) into the card. Both read the `impending` condition, so a copy, which wasn't cast that way, is a creature (the ruling). |
+| `freerunning` | `{ cost }` | **Freerunning [mana cost]** (rule 702.173a — Eagle Vision): an alternative cost from the hand, or a commander from the command zone, offered as a `cast-spell` with `via: "freerunning"` once a player was dealt combat damage this turn by an Assassin creature or a commander you controlled as it dealt it (`TurnHistory.freerunning` — it doesn't matter what happens to that creature after). "If this spell's freerunning cost was paid" is a `source` condition on `{ castVia: "freerunning" }`. Not built: a non-mana freerunning cost (Escape Detection), a static granting freerunning (Ezio). |
 | `harmonize` | `{ cost }` | **Harmonize** (rule 702.180a — Zenith Festival, Nature's Rhythm): cast from its owner's graveyard for `cost`, tapping up to one untapped creature they control, whose power comes off the total cost's generic mana (`{X}` included, never coloured mana); exiled instead of going anywhere else from the stack. Each creature it could tap is its own `via: "harmonize"` variant (offer `harmonizeTap: { object, cardName, power }`, echoed as the cast's `tap: [object]`), plus one tapping none (702.180b). |
 | `warp` | `{ cost }` | **Warp** (rule 702.185 — Starfield Vocalist): an alternative cost from the hand, offered as a `cast-spell` with `via: "warp"`. The permanent it becomes gets a delayed trigger exiling it at the beginning of the next end step (it finds nothing if the permanent left and came back), and its owner may cast the exiled card for its mana cost from the next turn on, for as long as it stays exiled. |
 | `evoke` | `{ cost }` | **Evoke** (rule 702.74 — Mulldrifter): an alternative cost, offered as the cast's `evoke` variant (echoed back with its `evokeCost`) wherever the card may be cast for its mana cost — the hand, the command zone, an impulse or graveyard permission — beside kicker or an additional cost's branch, never beside overload, a free cast or another alternative cost (118.9a). Paid, the permanent it becomes gets "when this permanent enters, its controller sacrifices it" as it enters. That trigger goes on the stack before its controller's other triggers of the moment (`TriggeredAbility.stackFirst`), so the creature's own enters abilities resolve first, while it's still there — the order the rulings describe; the engine doesn't yet ask (`decision:trigger-order`), so don't author an evoke card whose enters ability would want the other order. Mana costs only: the Incarnations' "Evoke—Exile a green card from your hand" isn't expressible. Put the printed evoke line in `text`. |
@@ -744,6 +745,20 @@ after the `damage`. The condition `{ kind: "excess-damage-this-way", to? }`
 asks whether there was any ("if excess damage was dealt this way"; "when
 excess damage is dealt … this way", a `conditional` around a
 `reflexive-trigger`).
+
+**Expend, forage and valiant.** "Whenever you expend N" (rule 700.14) is the
+trigger `{ on: "expend", who: "you", amount: N }`: the payment for a spell that
+takes the mana you've spent on spells this turn from below N to N or more —
+once a turn, counting mana spent before the permanent arrived (the rulings);
+the running total is the `turnStat` `"mana-spent-on-spells"`. Forage (rule
+701.61a) is `forageOptions()`, its two ways as an `each-player-may`'s
+`options` — "you may forage. If you do, …" is `{ kind: "each-player-may",
+who: "you", options: forageOptions(), ifDid: … }`, each way offered only when
+it can be done — and "whenever you forage" is `{ on: "forages", who: "you" }`;
+forage as a cost isn't built. Valiant is `valiant(effect, text)`: the first
+time this turn its controller's spell or ability targets the creature, in
+this battlefield stint (a `becomes-target` trigger with `byControllerOnly`
+and `firstTimeEachTurn`).
 
 **"The damage dealt this way."** `{ damageDealtThisWay: true, to? }` is all
 the damage the resolution under way has dealt, after prevention — a prevented

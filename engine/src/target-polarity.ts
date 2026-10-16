@@ -344,6 +344,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "additional-upkeep-steps": none,
   "additional-land-drop": none,
   "shuffle-library": none,
+  foraged: none,
   // The split's targets take the damage (Inferno Titan, Electrolyze).
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
   "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),

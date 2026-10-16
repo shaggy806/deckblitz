@@ -167,10 +167,12 @@ import _poolGrubNotoriousAuntie from "../pool/grub-notorious-auntie.js";
 import _poolGuidedStrike from "../pool/guided-strike.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
+import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
+import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
 import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
 import _poolHulksThunderclap from "../pool/hulks-thunderclap.js";
@@ -296,6 +298,7 @@ import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
 import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
+import _poolSalvationSwan from "../pool/salvation-swan.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
 import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
@@ -334,6 +337,7 @@ import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js"
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
+import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
@@ -598,10 +602,12 @@ const shard: CardShard = {
     _poolGuidedStrike,
     _poolHaazdaVigilante,
     _poolHajarLoyalBodyguard,
+    _poolHarnesserOfStorms,
     _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
     _poolHerosBlade,
     _poolHinataDawnCrowned,
+    _poolHivespineWolverine,
     _poolHuatlisSnubhorn,
     _poolHulkbusterArmor,
     _poolHulksThunderclap,
@@ -727,6 +733,7 @@ const shard: CardShard = {
     _poolRussetWolves,
     _poolSakashimasProtege,
     _poolSakuraTribeElder,
+    _poolSalvationSwan,
     _poolSandskitterOutrider,
     _poolSanguineSyphoner,
     _poolSarumansTrickery,
@@ -765,6 +772,7 @@ const shard: CardShard = {
     _poolSpikedCorridorTorturePit,
     _poolSpinOut,
     _poolSpinalCentipede,
+    _poolSplashLasher,
     _poolSpontaneousCombustion,
     _poolStaggeringSize,
     _poolStallOut,

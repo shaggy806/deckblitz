@@ -436,7 +436,10 @@ export type TurnStat =
   /** How many times the player has scried or surveilled this turn (rules
    * 701.22, 701.25) — "if you've scried or surveilled this turn" (Surveillance
    * Phantasm). A scry or surveil 0 isn't one. */
-  | "scried-or-surveilled";
+  | "scried-or-surveilled"
+  /** The mana the player has spent to cast spells this turn (rule 700.14,
+   * expend). The "whenever you expend N" trigger is `{ on: "expend" }`. */
+  | "mana-spent-on-spells";
 
 /**
  * A condition gating a static ability (rule 604.3 — "as long as …"). Evaluated
@@ -2541,6 +2544,17 @@ export interface CardDefinition {
    */
   readonly impending: { readonly count: number; readonly cost: string } | null;
   /**
+   * Freerunning (rule 702.173a — Eagle Vision: "Freerunning {1}{U}"): "You
+   * may pay [cost] rather than pay this spell's mana cost if a player was
+   * dealt combat damage this turn by a creature that, at the time it dealt
+   * that damage, was an Assassin creature or a commander under your
+   * control." An alternative cost, offered as its own `cast-spell`
+   * (`via: "freerunning"`) from the hand once that has happened this turn
+   * (`TurnHistory.freerunning`). "If this spell's freerunning cost was paid"
+   * is a `source` condition on `{ castVia: "freerunning" }`. `null` for none.
+   */
+  readonly freerunning: { readonly cost: string } | null;
+  /**
    * Evoke (rule 702.74 — Mulldrifter): "You may cast this spell by paying
    * [cost] rather than paying its mana cost" and "When this permanent
    * enters, if its evoke cost was paid, its controller sacrifices it." An
@@ -2806,6 +2820,7 @@ const PRINTED_ABILITY: {
   warp: (def) => def.warp !== null,
   blitz: (def) => def.blitz !== null,
   impending: (def) => def.impending !== null,
+  freerunning: (def) => def.freerunning !== null,
   evoke: (def) => def.evoke !== null,
   prototype: (def) => def.prototype !== null,
   morph: (def) => def.morph !== null,
@@ -2979,6 +2994,7 @@ interface CardDraft {
   warp?: { readonly cost: string };
   blitz?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };
+  freerunning?: { readonly cost: string };
   evoke?: { readonly cost: string };
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: { readonly keyword: "morph" | "megamorph" | "disguise"; readonly cost: string };
@@ -3081,6 +3097,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     warp: draft.warp ?? null,
     blitz: draft.blitz ?? null,
     impending: draft.impending ?? null,
+    freerunning: draft.freerunning ?? null,
     evoke: draft.evoke ?? null,
     prototype: draft.prototype ?? null,
     morph: draft.morph ?? null,

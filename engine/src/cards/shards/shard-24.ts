@@ -53,6 +53,7 @@ import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBronzeSable from "../pool/bronze-sable.js";
+import _poolBuildersTalent from "../pool/builders-talent.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCaptainSisay from "../pool/captain-sisay.js";
@@ -118,6 +119,7 @@ import _poolExpeditionMap from "../pool/expedition-map.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
+import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
 import _poolFellGravship from "../pool/fell-gravship.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
@@ -237,6 +239,7 @@ import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
+import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
@@ -456,6 +459,7 @@ const shard: CardShard = {
     _poolBrashTaunter,
     _poolBreach,
     _poolBronzeSable,
+    _poolBuildersTalent,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
     _poolCaptainSisay,
@@ -521,6 +525,7 @@ const shard: CardShard = {
     _poolExpressiveIteration,
     _poolExtinguishAllHope,
     _poolEyeOfJace,
+    _poolEzioBrashNovice,
     _poolFatefulTempest,
     _poolFellGravship,
     _poolFellTheProfane,
@@ -640,6 +645,7 @@ const shard: CardShard = {
     _poolPedalToTheMetal,
     _poolPitilessGorgon,
     _poolPoisonArrow,
+    _poolPolliwallop,
     _poolPramikonSkyRampart,
     _poolPressurePoint,
     _poolPrologueToPhyresis,

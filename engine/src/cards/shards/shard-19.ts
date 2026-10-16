@@ -285,6 +285,7 @@ import _poolPendulumOfPatterns from "../pool/pendulum-of-patterns.js";
 import _poolPerilousLandscape from "../pool/perilous-landscape.js";
 import _poolPerilousSnare from "../pool/perilous-snare.js";
 import _poolPestilentWolf from "../pool/pestilent-wolf.js";
+import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
@@ -368,6 +369,7 @@ import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
 import _poolSramsExpertise from "../pool/srams-expertise.js";
 import _poolStalkingPredator from "../pool/stalking-predator.js";
 import _poolStarlingAerialAlly from "../pool/starling-aerial-ally.js";
+import _poolStarlitSoothsayer from "../pool/starlit-soothsayer.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
@@ -742,6 +744,7 @@ const shard: CardShard = {
     _poolPerilousLandscape,
     _poolPerilousSnare,
     _poolPestilentWolf,
+    _poolPettyLarceny,
     _poolPhenaxGodOfDeception,
     _poolPiratePeddlers,
     _poolPlagueMyr,
@@ -825,6 +828,7 @@ const shard: CardShard = {
     _poolSramsExpertise,
     _poolStalkingPredator,
     _poolStarlingAerialAlly,
+    _poolStarlitSoothsayer,
     _poolStarnheimMemento,
     _poolStartFromScratch,
     _poolSteelWreckingBall,

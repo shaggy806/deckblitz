@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3632 already implemented / 1368 missing (marks refreshed 2026-10-16)
+3637 already implemented / 1363 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1959,7 +1959,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1966  Kor Spiritdancer                         {1}{W}           Creature — Kor Wizard
 [x]  1967  Stormfist Crusader                       {B}{R}           Creature — Human Knight
 [x]  1968  Many Partings                            {G}              Sorcery
-[ ]  1969  Overpowering Attack                      {3}{R}{R}        Sorcery
+[x]  1969  Overpowering Attack                      {3}{R}{R}        Sorcery
 [x]  1970  Venser, Shaper Savant                    {2}{U}{U}        Legendary Creature — Human Wizard
 [ ]  1971  Solitude                                 {3}{W}{W}        Creature — Elemental Incarnation
 [ ]  1972  Anticausal Vestige                       {6}              Creature — Eldrazi
@@ -3425,7 +3425,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
 [x]  3433  General's Enforcer                       {W}{B}           Creature — Human Soldier
 [ ]  3434  See Double                               {2}{U}{U}        Instant
-[ ]  3435  Trailtracker Scout                       {1}{G}           Creature — Raccoon Scout
+[x]  3435  Trailtracker Scout                       {1}{G}           Creature — Raccoon Scout
 [x]  3436  Axgard Armory                            {0}              Land
 [ ]  3437  Slicer, Hired Muscle // Slicer, High-Speed Antagonist {5}              Legendary Artifact Creature — Robot // Legendary Artifact — Vehicle
 [x]  3438  Vincent Valentine // Galian Beast        {4}              Legendary Creature — Assassin // Legendary Creature — Werewolf Beast
@@ -4508,7 +4508,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4515  Kaya, Geist Hunter                       {1}{W}{B}        Legendary Planeswalker — Kaya
 [ ]  4516  Rundvelt Hordemaster                     {1}{R}           Creature — Goblin Warrior
 [x]  4517  Zephyr Boots                             {1}              Artifact — Equipment
-[ ]  4518  Eagle Vision                             {4}{U}           Sorcery
+[x]  4518  Eagle Vision                             {4}{U}           Sorcery
 [x]  4519  Boon Reflection                          {4}{W}           Enchantment
 [ ]  4520  Fractured Identity                       {3}{W}{U}        Sorcery
 [x]  4521  Distinguished Conjurer                   {1}{W}           Creature — Human Wizard
@@ -4537,7 +4537,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4544  Desert                                   {0}              Land — Desert
 [ ]  4545  Banquet Guests                           {X}{G}{W}        Creature — Halfling Citizen
 [ ]  4546  Burning-Rune Demon                       {4}{B}{B}        Creature — Demon Berserker
-[ ]  4547  Restart Sequence                         {3}{B}           Sorcery
+[x]  4547  Restart Sequence                         {3}{B}           Sorcery
 [ ]  4548  Sokrates, Athenian Teacher               {1}{W}{U}        Legendary Creature — Human Advisor
 [x]  4549  Dreadbore                                {B}{R}           Sorcery
 [ ]  4550  Voidslime                                {G}{U}{U}        Instant
@@ -4832,7 +4832,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4839  On the Trail                             {1}{G}           Enchantment
 [ ]  4840  Coin of Mastery                          {4}              Artifact
 [x]  4841  Barbarian Ring                           {0}              Land
-[ ]  4842  Wandertale Mentor                        {R}{G}           Creature — Raccoon Bard
+[x]  4842  Wandertale Mentor                        {R}{G}           Creature — Raccoon Bard
 [ ]  4843  Obelisk Spider                           {1}{B}{G}        Creature — Spider
 [x]  4844  Deliberate                               {1}{U}           Instant
 [x]  4845  Thalia's Lieutenant                      {1}{W}           Creature — Human Soldier

@@ -66,9 +66,11 @@ import _poolChillingChronicle from "../pool/chilling-chronicle.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolClanDefiance from "../pool/clan-defiance.js";
+import _poolCleopatraExiledPharaoh from "../pool/cleopatra-exiled-pharaoh.js";
 import _poolCliffgate from "../pool/cliffgate.js";
 import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
+import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsider from "../pool/consider.js";
 import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
@@ -199,10 +201,13 @@ import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
+import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
+import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
+import _poolManifoldMouse from "../pool/manifold-mouse.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
@@ -324,6 +329,7 @@ import _poolSmokeBomb from "../pool/smoke-bomb.js";
 import _poolSmolderingCrater from "../pool/smoldering-crater.js";
 import _poolSnappingGnarlid from "../pool/snapping-gnarlid.js";
 import _poolSnowVilliers from "../pool/snow-villiers.js";
+import _poolSonarStrike from "../pool/sonar-strike.js";
 import _poolSoulboundGuardians from "../pool/soulbound-guardians.js";
 import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
@@ -490,9 +496,11 @@ const shard: CardShard = {
     _poolChimneyRabble,
     _poolChordOfCalling,
     _poolClanDefiance,
+    _poolCleopatraExiledPharaoh,
     _poolCliffgate,
     _poolCloudchaserEagle,
     _poolComfortingCounsel,
+    _poolConductElectricity,
     _poolConsider,
     _poolCopyArtifact,
     _poolCoretapper,
@@ -623,10 +631,13 @@ const shard: CardShard = {
     _poolLingeringTormentor,
     _poolLivingAirship,
     _poolLoamDryad,
+    _poolLongstalkBrawl,
     _poolLoransEscape,
     _poolLotlethGiant,
     _poolLuminousAngel,
+    _poolLydiaFrye,
     _poolManaCrypt,
+    _poolManifoldMouse,
     _poolMarduBanner,
     _poolMaritimeGuard,
     _poolMarkedByHonor,
@@ -748,6 +759,7 @@ const shard: CardShard = {
     _poolSmolderingCrater,
     _poolSnappingGnarlid,
     _poolSnowVilliers,
+    _poolSonarStrike,
     _poolSoulboundGuardians,
     _poolSpectralProcession,
     _poolSpellseeker,

@@ -105,6 +105,7 @@ import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
+import _poolDistractTheGuards from "../pool/distract-the-guards.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
 import _poolDragonBellMonk from "../pool/dragon-bell-monk.js";
 import _poolDrannithRuins from "../pool/drannith-ruins.js";
@@ -118,6 +119,7 @@ import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
+import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
@@ -241,6 +243,7 @@ import _poolMerfolkLooter from "../pool/merfolk-looter.js";
 import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
 import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
+import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
@@ -255,6 +258,7 @@ import _poolMutantTown from "../pool/mutant-town.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
+import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
 import _poolOasis from "../pool/oasis.js";
@@ -300,6 +304,7 @@ import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
+import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
 import _poolScourgemark from "../pool/scourgemark.js";
 import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
@@ -512,6 +517,7 @@ const shard: CardShard = {
     _poolDimirSignet,
     _poolDiplomaticRelations,
     _poolDissentersDeliverance,
+    _poolDistractTheGuards,
     _poolDouseInGloom,
     _poolDragonBellMonk,
     _poolDrannithRuins,
@@ -525,6 +531,7 @@ const shard: CardShard = {
     _poolDuskImp,
     _poolEbonDrake,
     _poolEdgarMarkov,
+    _poolEivorBattleReady,
     _poolElementalEruption,
     _poolElephantRat,
     _poolElvishScrapper,
@@ -648,6 +655,7 @@ const shard: CardShard = {
     _poolMerfolkMistbinder,
     _poolMerrowWitsniper,
     _poolMidnightAssassin,
+    _poolMindSpiral,
     _poolMirranSpy,
     _poolMirrorOfGaladriel,
     _poolMischievousSneakling,
@@ -662,6 +670,7 @@ const shard: CardShard = {
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
     _poolNecrogenScudder,
+    _poolNettleGuard,
     _poolNivMizzetParun,
     _poolNoMercy,
     _poolOasis,
@@ -707,6 +716,7 @@ const shard: CardShard = {
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
     _poolSazacapsBrew,
+    _poolScalesOfShale,
     _poolScavengerRegent,
     _poolScourgemark,
     _poolScrapyardRecombiner,

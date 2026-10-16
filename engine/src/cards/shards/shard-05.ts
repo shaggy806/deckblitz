@@ -8,6 +8,7 @@ import _poolAccorderPaladin from "../pool/accorder-paladin.js";
 import _poolAdaptiveSnapjaw from "../pool/adaptive-snapjaw.js";
 import _poolAetherworksMarvel from "../pool/aetherworks-marvel.js";
 import _poolAftermathAnalyst from "../pool/aftermath-analyst.js";
+import _poolAgateBladeAssassin from "../pool/agate-blade-assassin.js";
 import _poolAgeOfUltron from "../pool/age-of-ultron.js";
 import _poolAinokBondKin from "../pool/ainok-bond-kin.js";
 import _poolAkoumBoulderfoot from "../pool/akoum-boulderfoot.js";
@@ -301,6 +302,7 @@ import _poolSarkhanUnbroken from "../pool/sarkhan-unbroken.js";
 import _poolScabClanCharger from "../pool/scab-clan-charger.js";
 import _poolScoriaElemental from "../pool/scoria-elemental.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
+import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
 import _poolSelesnyaEvangel from "../pool/selesnya-evangel.js";
@@ -431,6 +433,7 @@ const shard: CardShard = {
     _poolAdaptiveSnapjaw,
     _poolAetherworksMarvel,
     _poolAftermathAnalyst,
+    _poolAgateBladeAssassin,
     _poolAgeOfUltron,
     _poolAinokBondKin,
     _poolAkoumBoulderfoot,
@@ -724,6 +727,7 @@ const shard: CardShard = {
     _poolScabClanCharger,
     _poolScoriaElemental,
     _poolScythecatCub,
+    _poolSeasonedWarrenguard,
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,
     _poolSelesnyaEvangel,

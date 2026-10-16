@@ -42,6 +42,7 @@ import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
 import _poolByForce from "../pool/by-force.js";
+import _poolCalamitousTide from "../pool/calamitous-tide.js";
 import _poolCallForUnity from "../pool/call-for-unity.js";
 import _poolCanoptekSpyder from "../pool/canoptek-spyder.js";
 import _poolCanopyBaloth from "../pool/canopy-baloth.js";
@@ -170,6 +171,7 @@ import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
+import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
 import _poolHillGigas from "../pool/hill-gigas.js";
@@ -225,6 +227,7 @@ import _poolMarvelousMelee from "../pool/marvelous-melee.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
+import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
@@ -338,6 +341,7 @@ import _poolSwabGoblin from "../pool/swab-goblin.js";
 import _poolSwamp from "../pool/swamp.js";
 import _poolSymbioticElf from "../pool/symbiotic-elf.js";
 import _poolSyncopate from "../pool/syncopate.js";
+import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
@@ -356,6 +360,7 @@ import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
 import _poolTragicBanshee from "../pool/tragic-banshee.js";
+import _poolTrailtrackerScout from "../pool/trailtracker-scout.js";
 import _poolTranscendentArchaic from "../pool/transcendent-archaic.js";
 import _poolTreasonousOgre from "../pool/treasonous-ogre.js";
 import _poolTreasureCruise from "../pool/treasure-cruise.js";
@@ -448,6 +453,7 @@ const shard: CardShard = {
     _poolBrainWeevil,
     _poolBrenardGingerSculptor,
     _poolByForce,
+    _poolCalamitousTide,
     _poolCallForUnity,
     _poolCanoptekSpyder,
     _poolCanopyBaloth,
@@ -576,6 +582,7 @@ const shard: CardShard = {
     _poolHavengulVampire,
     _poolHawkeyesBow,
     _poolHealersFlock,
+    _poolHiddenFootblade,
     _poolHighlandWeald,
     _poolHillGiant,
     _poolHillGigas,
@@ -631,6 +638,7 @@ const shard: CardShard = {
     _poolMasterPiandao,
     _poolMeagerMeal,
     _poolMeanderingRiver,
+    _poolMercilessHarlequin,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,
     _poolMindbreakTrap,
@@ -744,6 +752,7 @@ const shard: CardShard = {
     _poolSwamp,
     _poolSymbioticElf,
     _poolSyncopate,
+    _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,
     _poolTemporalEddy,
@@ -762,6 +771,7 @@ const shard: CardShard = {
     _poolTovolarTheMidnightScourge,
     _poolTownGreeter,
     _poolTragicBanshee,
+    _poolTrailtrackerScout,
     _poolTranscendentArchaic,
     _poolTreasonousOgre,
     _poolTreasureCruise,

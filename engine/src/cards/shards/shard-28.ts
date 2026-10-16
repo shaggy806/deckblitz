@@ -125,6 +125,7 @@ import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
+import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
 import _poolGallantCavalry from "../pool/gallant-cavalry.js";
 import _poolGalvanicArc from "../pool/galvanic-arc.js";
@@ -161,6 +162,7 @@ import _poolInfiltrationLens from "../pool/infiltration-lens.js";
 import _poolIngaAndEsika from "../pool/inga-and-esika.js";
 import _poolIngeniousInfiltrator from "../pool/ingenious-infiltrator.js";
 import _poolInquisitorialRosette from "../pool/inquisitorial-rosette.js";
+import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
 import _poolIronBarbHellion from "../pool/iron-barb-hellion.js";
@@ -547,6 +549,7 @@ const shard: CardShard = {
     _poolFlubsTheFool,
     _poolFollowTheLumarets,
     _poolFriendlyTeddy,
+    _poolFrilledSparkshooter,
     _poolFusionElemental,
     _poolGallantCavalry,
     _poolGalvanicArc,
@@ -583,6 +586,7 @@ const shard: CardShard = {
     _poolIngaAndEsika,
     _poolIngeniousInfiltrator,
     _poolInquisitorialRosette,
+    _poolIntrepidRabbit,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
     _poolIronBarbHellion,

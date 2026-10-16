@@ -1751,6 +1751,18 @@ export class Game {
               }),
             );
           }
+          // Freerunning (rule 702.173a) — for its freerunning cost, once an
+          // Assassin or a commander of theirs dealt a player combat damage
+          // this turn.
+          if (def.freerunning !== null && this.freerunningAllowed(player)) {
+            out.push(
+              ...this.castSpellActions(player, card, cardName, def, {
+                ...faceProp,
+                via: "freerunning",
+                costString: def.freerunning.cost,
+              }),
+            );
+          }
           // Web-slinging (rule 702.188a) — for its web-slinging cost, one
           // offer per tapped creature that could be returned, which the cast
           // names. Normal timing: `castSpellActions` judges it.
@@ -2566,7 +2578,12 @@ export class Game {
     // is web-slinging (702.188a; its ruling: never with "without paying its
     // mana cost"), and airbend's {2} from exile (701.65a).
     const warp =
-      via === "warp" || via === "blitz" || via === "impending" || via === "web-slinging" || via === "airbend";
+      via === "warp" ||
+      via === "blitz" ||
+      via === "impending" ||
+      via === "freerunning" ||
+      via === "web-slinging" ||
+      via === "airbend";
     if (def.overload !== null && impulseFree !== "only" && !warp) {
       variants.push({ kicked: false, overload: true, free: false });
     }
@@ -5272,6 +5289,7 @@ export class Game {
     delete this.state.turnProhibitions;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
+    delete this.state.turn.endsAfterAddedCombat;
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
@@ -5653,6 +5671,30 @@ export class Game {
       this.emit({ type: "additional-combat-phase" });
       this.enterStep("begin-combat");
       return;
+    }
+    // An additional combat phase made in the main phase after combat ("if
+    // it's your main phase, there is an additional combat phase after this
+    // phase" — Grim Reaper's Sprint): owed straight after this main phase,
+    // with no end of combat left to read it (rule 500.8). Once it's over the
+    // turn goes on to the end step, unless it was "followed by an additional
+    // main phase", which is the main phase the turn reaches next anyway. (One
+    // made in the main phase before combat waits for the end of the combat
+    // after it, as above: the same two combats, then the same main phase.)
+    if (this.state.turn.step === "postcombat-main" && after !== undefined && after[0]?.kind === "combat") {
+      const [next, ...rest] = after;
+      if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
+      else delete this.state.phasesAfterThisCombat;
+      if (next.kind === "combat" && !next.withMain) this.state.turn.endsAfterAddedCombat = true;
+      this.emit({ type: "additional-combat-phase" });
+      this.enterStep("begin-combat");
+      return;
+    }
+    if (this.state.turn.step === "end-combat" && this.state.turn.endsAfterAddedCombat === true) {
+      delete this.state.turn.endsAfterAddedCombat;
+      if (this.state.extraCombats === 0 && (this.state.extraMainPhases ?? 0) === 0) {
+        this.enterStep("end");
+        return;
+      }
     }
     // Then the turn goes on as it would have after that combat phase.
     if (addedUpkeepEnding) {
@@ -8358,6 +8400,10 @@ export class Game {
     const before = object.counters.lore ?? 0;
     object.counters.lore = before + amount;
     this.emit({ type: "lore-counter-added", object: sagaId, lore: before + amount });
+    // They're counters put on a permanent (rule 122.6) — by its controller,
+    // as it enters or at their precombat main (714.3a-b) — so "whenever one
+    // or more counters are put on" sees them (Sigurd, Jarl of Ravensthorpe).
+    this.emit({ type: "counter-added", object: sagaId, counter: "lore", amount, by: object.controller, after: before + amount });
     this.triggerChapters(sagaId, before, before + amount);
   }
 
@@ -9442,6 +9488,8 @@ export class Game {
               ? this.blitzCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
               : via === "impending"
               ? (def.impending?.cost ?? null)
+              : via === "freerunning"
+              ? (def.freerunning?.cost ?? null)
             : // Face down (rules 702.37c, 702.168a): {3}, an alternative cost.
               via === "face-down"
               ? "{3}"
@@ -9832,6 +9880,19 @@ export class Game {
       }
       if (def.impending === null) return `${def.name} does not have impending`;
       if (overload || free || altCost) return `impending is an alternative cost, and can't be combined with another`;
+    } else if (via === "freerunning") {
+      // Rule 702.173a — for its freerunning cost, from the hand or a
+      // commander from the command zone: an alternative cost (118.9a), only
+      // once an Assassin or a commander of theirs dealt combat damage to a
+      // player this turn.
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (def.freerunning === null) return `${def.name} does not have freerunning`;
+      if (!this.freerunningAllowed(player)) {
+        return `no Assassin or commander of ${player}'s has dealt combat damage to a player this turn`;
+      }
+      if (overload || free || altCost) return `freerunning is an alternative cost, and can't be combined with another`;
     } else if (via === "warp") {
       // Rule 702.185a — from the hand, for its warp cost: an alternative cost,
       // so no other one goes with it (118.9a).
@@ -11192,6 +11253,13 @@ export class Game {
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
     // life paid for a Phyrexian pip isn't counted as mana.
     object.manaSpent = manaValue(payment.resolved);
+    // Expend (rule 700.14): the mana this player has spent on spells this
+    // turn, before and after this payment — `turnHistory` counts it as the
+    // event passes.
+    if (object.manaSpent > 0) {
+      const before = this.state.players[player]?.turnHistory?.manaSpentOnSpells ?? 0;
+      this.emit({ type: "mana-expended", player, before, after: before + object.manaSpent });
+    }
     // The commander tax, paid in life rather than mana (Liesa). Part of the
     // total cost, so paid alongside the mana; it isn't mana spent.
     if (taxLife > 0) this.changeLife(player, -taxLife);
@@ -13212,6 +13280,13 @@ export class Game {
       announced.add(target.object);
       const object = this.state.objects[target.object];
       if (object === undefined || object.zone !== "battlefield") continue;
+      // Valiant's "for the first time each turn": by this player, this turn,
+      // as this object (rule 400.7).
+      const turn = this.state.turn.number;
+      const stint = object.zoneChangeCount ?? 0;
+      const record = object.targetedThisTurn;
+      const current = record !== undefined && record.turn === turn && record.stint === stint ? record.by : [];
+      const first = !current.includes(by);
       this.emit({
         type: "object-targeted",
         object: target.object,
@@ -13219,7 +13294,11 @@ export class Game {
         source,
         stackObject,
         bySpell,
+        ...(first ? { firstByPlayerThisTurn: true as const } : {}),
       });
+      if (first && this.state.objects[target.object] !== undefined) {
+        this.state.objects[target.object].targetedThisTurn = { turn, stint, by: [...current, by] };
+      }
     }
   }
 
@@ -17173,6 +17252,15 @@ export class Game {
           this.matchesWho(spec.who, event.object, self, true) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
+      case "forages":
+        return event.type === "foraged" && this.matchesWhoPlayer(spec.who, event.player, self);
+      case "expend":
+        return (
+          event.type === "mana-expended" &&
+          this.matchesWhoPlayer(spec.who, event.player, self) &&
+          event.before < spec.amount &&
+          event.after >= spec.amount
+        );
       case "gains-life":
         return (
           event.type === "life-changed" &&
@@ -17270,6 +17358,8 @@ export class Game {
           // "… an opponent controls" — relative to whoever controls the
           // permanent that's watching, not to the targeted object.
           (spec.byOpponentOnly !== true || event.by !== self.controller) &&
+          (spec.byControllerOnly !== true || event.by === self.controller) &&
+          (spec.firstTimeEachTurn !== true || event.firstByPlayerThisTurn === true) &&
           // "… becomes the target of a spell" — not an ability.
           (spec.spellOnly !== true || event.bySpell)
         );
@@ -19130,6 +19220,7 @@ export class Game {
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
       damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
+      foraged: () => this.emit({ type: "foraged", player: controller }),
       damageDealtThisTurn: (players, combat, colors) => damageDealtThisTurn(this.state, players, combat, colors),
       opponentsAttacked: () => {
         const attacked = new Set<PlayerId>();
@@ -21471,6 +21562,9 @@ export class Game {
           matchesFilter(this.state, this.registry, id, option.putFromHand, { you: player }),
         );
       }
+      if ("exileFromGraveyard" in option) {
+        return this.state.zones.perPlayer[player].graveyard.length >= option.exileFromGraveyard;
+      }
       return (
         this.eligibleSacrifices(player, option.sacrifice, option.exceptSource === true ? source : undefined).length >=
         (option.count ?? 1)
@@ -21478,11 +21572,27 @@ export class Game {
     });
     if (available.length === 0) return null;
     const mana = available.find((o): o is Extract<BoundUnlessOption, { pay: string }> => "pay" in o);
+    // Forage's ways (rule 701.61a) announce it once done, for "whenever you
+    // forage".
+    const withForage = (option: BoundUnlessOption, effect: EffectSpec): EffectSpec =>
+      "forage" in option && option.forage === true
+        ? { kind: "sequence", effects: [effect, { kind: "foraged" }] }
+        : effect;
     const modes = available.map(
       (option): ModeOption => ({
         text: option.text,
-        effect:
-          "payLife" in option
+        effect: withForage(
+          option,
+          "exileFromGraveyard" in option
+            ? {
+                kind: "look-and-choose",
+                zone: "graveyard",
+                min: option.exileFromGraveyard,
+                max: option.exileFromGraveyard,
+                destination: "exile",
+                leftover: "stay",
+              }
+            : "payLife" in option
             ? { kind: "lose-life", amount: option.payLife, who: "you" }
             : "sacrifice" in option
               ? {
@@ -21507,6 +21617,7 @@ export class Game {
                   // The mana option's payment rides on the decision's own
                   // `cost`, so its mode has nothing left to do.
                   : { kind: "sequence", effects: [] },
+        ),
       }),
     );
     return { modes, ...(mana !== undefined ? { cost: mana.pay } : {}) };
@@ -26379,6 +26490,11 @@ export class Game {
     this.emit({ type: "cards-revealed", player, objects: [...real], from });
   }
 
+  /** Whether `player` may pay a freerunning cost now (rule 702.173a). */
+  private freerunningAllowed(player: PlayerId): boolean {
+    return this.state.players[player]?.turnHistory?.freerunning === true;
+  }
+
   // --- delayed triggered abilities (rule 603.7) ------------------
 
   /**
@@ -26802,6 +26918,11 @@ export class Game {
         if (history !== undefined) history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
         return;
       }
+      case "mana-expended": {
+        const history = historyOf(event.player);
+        if (history !== undefined) history.manaSpentOnSpells = event.after;
+        return;
+      }
       case "cards-left-graveyard": {
         for (const id of event.objects) {
           const history = historyOf(this.state.objects[id]?.owner);
@@ -26857,6 +26978,15 @@ export class Game {
           });
         }
         if (event.target.kind !== "player") return;
+        // Freerunning (rule 702.173a): combat damage to a player from a
+        // creature that, as it dealt it, was an Assassin creature or a
+        // commander under its controller's control.
+        if (dealt !== undefined && event.combat && departed === undefined && source !== undefined) {
+          const now = suspendComputedCache(() => computeCharacteristics(this.state, this.registry, source.id));
+          if (now.types.includes("creature") && (source.isCommander || hasSubtype(now.subtypes, "Assassin"))) {
+            dealt.freerunning = true;
+          }
+        }
         const history = historyOf(event.target.player);
         if (history === undefined) return;
         history.damageTaken = (history.damageTaken ?? 0) + event.amount;

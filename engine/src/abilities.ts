@@ -646,6 +646,19 @@ export type TriggerSpec =
       readonly firstTimeEachTurn?: boolean;
     }
   | {
+      /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
+      readonly on: "forages";
+      readonly who: TriggerWho;
+    }
+  | {
+      /** "Whenever you expend N" (rule 700.14): paying for a spell took the
+       * mana the player has spent on spells this turn from below `amount` to
+       * `amount` or more — once a turn, the payment that crosses it. */
+      readonly on: "expend";
+      readonly who: TriggerWho;
+      readonly amount: number;
+    }
+  | {
       /** A player lost life. `who` is whose life, `{ triggerValue: true }`
        * how much (Exquisite Blood). */
       readonly on: "loses-life";
@@ -763,6 +776,13 @@ export type TriggerSpec =
        * permanent's controller — which is how every printed card of this
        * shape words it. */
       readonly byOpponentOnly?: boolean;
+      /** Only a spell or ability this permanent's controller controls —
+       * valiant's "a spell or ability you control" (rule 207.2c). */
+      readonly byControllerOnly?: boolean;
+      /** Valiant's "for the first time each turn": only the first time this
+       * turn the targeting player has targeted it, whether or not this
+       * ability triggered then (the rulings). */
+      readonly firstTimeEachTurn?: boolean;
       /** Only a *spell* targeting it counts, not an activated ability —
        * "becomes the target of a spell" (Gargos, Vicious Watcher; Tectonic
        * Giant). */

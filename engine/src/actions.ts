@@ -87,6 +87,10 @@ export type CastVia =
    * permanent enters with N time counters and isn't a creature while it has
    * one. */
   | "impending"
+  /** Freerunning (rule 702.173a) — cast from the hand for its freerunning
+   * cost, an alternative cost, once a player was dealt combat damage this
+   * turn by an Assassin creature or a commander the caster controlled. */
+  | "freerunning"
   /** Airbend (rule 701.65a): a card airbended into exile (`GameObject
    * .airbended`), cast from there by its owner for {2} rather than its mana
    * cost — an alternative cost, so no other goes with it (118.9a), though

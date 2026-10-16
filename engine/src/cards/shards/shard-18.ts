@@ -144,6 +144,7 @@ import _poolHellkiteOverlord from "../pool/hellkite-overlord.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
+import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
@@ -584,6 +585,7 @@ const shard: CardShard = {
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
     _poolHideOnTheCeiling,
+    _poolHighStride,
     _poolHillGiantHerdgorger,
     _poolHinderingTouch,
     _poolHippoCows,

@@ -693,8 +693,14 @@ export type UnlessOption =
       readonly sacrifice: CardFilter;
       readonly count?: number;
       readonly exceptSource?: boolean;
+      /** One of forage's two ways (rule 701.61a) — see `forageOptions()`. */
+      readonly forage?: true;
       readonly text: string;
     }
+  /** "Exile N cards from your graveyard", the player's choice of which —
+   * forage's other way (rule 701.61a), offered only with that many there.
+   * `forage` marks it as foraging, which "whenever you forage" sees. */
+  | { readonly exileFromGraveyard: number; readonly forage?: true; readonly text: string }
   /** "…or discard a card" (Tergrid's Lantern, Torment of Hailfire). */
   | { readonly discard: number; readonly text: string }
   /** "Put a land card from your hand onto the battlefield" (Kynaios and
@@ -1629,6 +1635,12 @@ export type EffectSpec =
        * battlefield in response does nothing at all. needed-cards P7. */
       readonly kind: "sacrifice-source";
       readonly then?: EffectSpec;
+    }
+  | {
+      /** The player foraged (rule 701.61a) — announced after one of
+       * `forageOptions()`'s ways was done, for "whenever you forage"
+       * (Corpseberry Cultivator). Only as the tail of those options. */
+      readonly kind: "foraged";
     }
   | {
       /** `targets[a]` and `targets[b]` each deal damage equal to their power
@@ -4901,6 +4913,9 @@ export interface EffectApi {
   /** See the `damageDealtThisWay` {@link EffectAmount}: dealt to `to` only,
    * when given. */
   damageDealtThisWay(to?: TargetRef): number;
+  /** Announce that the effect's controller foraged — see the `foraged`
+   * {@link EffectSpec}. */
+  foraged(): void;
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -7615,6 +7630,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "foraged":
+      ctx.foraged();
+      return;
     case "sacrifice-source": {
       // "Sacrifice ~. If you do, …" — the tail only applies when the sacrifice
       // actually happened (rule 603.4-adjacent: the source may have been

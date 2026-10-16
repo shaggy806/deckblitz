@@ -1090,6 +1090,8 @@ export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): 
       return seat.turnHistory?.leftGraveyard ?? 0;
     case "scried-or-surveilled":
       return seat.turnHistory?.scriedOrSurveilled ?? 0;
+    case "mana-spent-on-spells":
+      return seat.turnHistory?.manaSpentOnSpells ?? 0;
   }
 }
 

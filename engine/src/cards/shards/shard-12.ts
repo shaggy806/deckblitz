@@ -45,6 +45,7 @@ import _poolBlightsoilDruid from "../pool/blightsoil-druid.js";
 import _poolBloodDivination from "../pool/blood-divination.js";
 import _poolBloodMist from "../pool/blood-mist.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
+import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBookOfRass from "../pool/book-of-rass.js";
 import _poolBootleggersStash from "../pool/bootleggers-stash.js";
 import _poolBorosCluestone from "../pool/boros-cluestone.js";
@@ -126,6 +127,7 @@ import _poolFesteringThicket from "../pool/festering-thicket.js";
 import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
+import _poolFireglassMentor from "../pool/fireglass-mentor.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
@@ -162,6 +164,7 @@ import _poolHaliyaGuidedByLight from "../pool/haliya-guided-by-light.js";
 import _poolHallOfOracles from "../pool/hall-of-oracles.js";
 import _poolHandThatFeeds from "../pool/hand-that-feeds.js";
 import _poolHarrierStrix from "../pool/harrier-strix.js";
+import _poolHeadsplitter from "../pool/headsplitter.js";
 import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
@@ -231,6 +234,7 @@ import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
+import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
@@ -266,6 +270,7 @@ import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
+import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
@@ -298,6 +303,7 @@ import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
+import _poolSettlementBlacksmith from "../pool/settlement-blacksmith.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
 import _poolShardOfTheNightbringer from "../pool/shard-of-the-nightbringer.js";
 import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
@@ -321,6 +327,7 @@ import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
 import _poolSpellbook from "../pool/spellbook.js";
+import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
@@ -349,6 +356,7 @@ import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
 import _poolThievingMagpie from "../pool/thieving-magpie.js";
 import _poolThirstForDiscovery from "../pool/thirst-for-discovery.js";
+import _poolThornplateIntimidator from "../pool/thornplate-intimidator.js";
 import _poolThornspireVerge from "../pool/thornspire-verge.js";
 import _poolThrasiosTritonHero from "../pool/thrasios-triton-hero.js";
 import _poolThreeTreeMascot from "../pool/three-tree-mascot.js";
@@ -458,6 +466,7 @@ const shard: CardShard = {
     _poolBloodDivination,
     _poolBloodMist,
     _poolBoggartCursecrafter,
+    _poolBonecacheOverseer,
     _poolBookOfRass,
     _poolBootleggersStash,
     _poolBorosCluestone,
@@ -539,6 +548,7 @@ const shard: CardShard = {
     _poolFieldsOfStrife,
     _poolFightRigging,
     _poolFireNationPalace,
+    _poolFireglassMentor,
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
     _poolFlayerOfTheHatebound,
@@ -575,6 +585,7 @@ const shard: CardShard = {
     _poolHallOfOracles,
     _poolHandThatFeeds,
     _poolHarrierStrix,
+    _poolHeadsplitter,
     _poolHearthhullTheWorldseed,
     _poolHonorboundPage,
     _poolHornetSting,
@@ -644,6 +655,7 @@ const shard: CardShard = {
     _poolNecropolisRegent,
     _poolNightMarketAeronaut,
     _poolNightscapeFamiliar,
+    _poolNightwhorlHermit,
     _poolNorthernAirTemple,
     _poolNyxbornMarauder,
     _poolOathOfNissa,
@@ -679,6 +691,7 @@ const shard: CardShard = {
     _poolPugnaciousHammerskull,
     _poolPullUnder,
     _poolPyroceratops,
+    _poolRabbitResponse,
     _poolRageIntoTheValley,
     _poolRaidersWake,
     _poolRamosDragonEngine,
@@ -711,6 +724,7 @@ const shard: CardShard = {
     _poolSeasonOfGrowth,
     _poolSedgeScorpion,
     _poolSelvalasStampede,
+    _poolSettlementBlacksmith,
     _poolShacklegeist,
     _poolShardOfTheNightbringer,
     _poolShardmagesRescue,
@@ -734,6 +748,7 @@ const shard: CardShard = {
     _poolSoltariTrooper,
     _poolSpectacularSpiderMan,
     _poolSpellbook,
+    _poolSpellgyre,
     _poolSpireMangler,
     _poolSteelbaneHydra,
     _poolSternDismissal,
@@ -762,6 +777,7 @@ const shard: CardShard = {
     _poolTheScarabGod,
     _poolThievingMagpie,
     _poolThirstForDiscovery,
+    _poolThornplateIntimidator,
     _poolThornspireVerge,
     _poolThrasiosTritonHero,
     _poolThreeTreeMascot,

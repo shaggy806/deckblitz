@@ -56,6 +56,7 @@ import _poolBoulderloftPathway from "../pool/boulderloft-pathway.js";
 import _poolBoundingWolf from "../pool/bounding-wolf.js";
 import _poolBrainsurge from "../pool/brainsurge.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
+import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
@@ -84,6 +85,7 @@ import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
+import _poolDaringWaverider from "../pool/daring-waverider.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
@@ -202,6 +204,7 @@ import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
 import _poolJhoirasToolbox from "../pool/jhoiras-toolbox.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
+import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
 import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
@@ -346,6 +349,7 @@ import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
+import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
 import _poolTifaLockhart from "../pool/tifa-lockhart.js";
 import _poolTimbercrownPathway from "../pool/timbercrown-pathway.js";
 import _poolTombstoneCareerCriminal from "../pool/tombstone-career-criminal.js";
@@ -463,6 +467,7 @@ const shard: CardShard = {
     _poolBoundingWolf,
     _poolBrainsurge,
     _poolBrindleBoar,
+    _poolBrotherhoodAmbushers,
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
     _poolCaptainsCall,
@@ -491,6 +496,7 @@ const shard: CardShard = {
     _poolCurseOfVerbosity,
     _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
+    _poolDaringWaverider,
     _poolDeepwoodGhoul,
     _poolDematerialize,
     _poolDependableQuinjet,
@@ -609,6 +615,7 @@ const shard: CardShard = {
     _poolJhessianBalmgiver,
     _poolJhoirasToolbox,
     _poolJungleBarrier,
+    _poolJunkbladeBruiser,
     _poolKaitoCunningInfiltrator,
     _poolKarplusanForest,
     _poolKathariScreecher,
@@ -753,6 +760,7 @@ const shard: CardShard = {
     _poolTheyCameFromThePipes,
     _poolThorinsLastStand,
     _poolThunderingChariot,
+    _poolTidecallerMentor,
     _poolTifaLockhart,
     _poolTimbercrownPathway,
     _poolTombstoneCareerCriminal,

@@ -11,6 +11,7 @@ import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
+import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
 import _poolAltarOfBone from "../pool/altar-of-bone.js";
 import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
@@ -179,6 +180,7 @@ import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
 import _poolHeroesHangout from "../pool/heroes-hangout.js";
 import _poolHeroicStanza from "../pool/heroic-stanza.js";
 import _poolHexplateGolem from "../pool/hexplate-golem.js";
+import _poolHoardersOverflow from "../pool/hoarders-overflow.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
 import _poolHornedTroll from "../pool/horned-troll.js";
@@ -305,6 +307,7 @@ import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
+import _poolRoughshodDuo from "../pool/roughshod-duo.js";
 import _poolRoverBlades from "../pool/rover-blades.js";
 import _poolRoyalTalonFighterJet from "../pool/royal-talon-fighter-jet.js";
 import _poolRustrazorButcher from "../pool/rustrazor-butcher.js";
@@ -343,8 +346,10 @@ import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
 import _poolStalkingDrone from "../pool/stalking-drone.js";
+import _poolStarCharter from "../pool/star-charter.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
+import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
@@ -379,6 +384,7 @@ import _poolUnearth from "../pool/unearth.js";
 import _poolUnexplainedDisappearance from "../pool/unexplained-disappearance.js";
 import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
+import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
@@ -436,6 +442,7 @@ const shard: CardShard = {
     _poolAdventurersInn,
     _poolAegisTurtle,
     _poolAlabasterWall,
+    _poolAlaniasPathmaker,
     _poolAlphinaudLeveilleur,
     _poolAltarOfBone,
     _poolAltarOfThePantheon,
@@ -604,6 +611,7 @@ const shard: CardShard = {
     _poolHeroesHangout,
     _poolHeroicStanza,
     _poolHexplateGolem,
+    _poolHoardersOverflow,
     _poolHopToIt,
     _poolHorizonScholar,
     _poolHornedTroll,
@@ -730,6 +738,7 @@ const shard: CardShard = {
     _poolReturnToBattle,
     _poolRiteOfReplication,
     _poolRootwaterHunter,
+    _poolRoughshodDuo,
     _poolRoverBlades,
     _poolRoyalTalonFighterJet,
     _poolRustrazorButcher,
@@ -768,8 +777,10 @@ const shard: CardShard = {
     _poolSquadRallier,
     _poolSquire,
     _poolStalkingDrone,
+    _poolStarCharter,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
+    _poolSteampathCharger,
     _poolStridingShotcaller,
     _poolSwarmCuller,
     _poolSwelteringSuns,
@@ -804,6 +815,7 @@ const shard: CardShard = {
     _poolUnexplainedDisappearance,
     _poolUnfulfilledDesires,
     _poolUniversityCampus,
+    _poolValleyFlamecaller,
     _poolVaporSnag,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,

@@ -355,6 +355,21 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** A player foraged (rule 701.61a): exiled three cards from their
+       * graveyard or sacrificed a Food, as forage. */
+      readonly type: "foraged";
+      readonly player: PlayerId;
+    })
+  | (Base & {
+      /** A player paid mana to cast a spell (rule 700.14): the mana they had
+       * spent on spells this turn went from `before` to `after` — what
+       * "whenever you expend N" watches. Not for a spell cast for no mana. */
+      readonly type: "mana-expended";
+      readonly player: PlayerId;
+      readonly before: number;
+      readonly after: number;
+    })
+  | (Base & {
       /** A scry / surveil resolved: `looked` cards seen, `movedAway` put on
        * the bottom (scry) or into the graveyard (surveil). */
       readonly type: "scried";
@@ -502,6 +517,10 @@ export type GameEvent =
        * for an ability. What ward counters (rule 702.21a). */
       readonly stackObject: ObjectId;
       readonly bySpell: boolean;
+      /** The first time this turn a spell or ability `by` controls has
+       * targeted this permanent (this battlefield stint) — valiant's "for
+       * the first time each turn". */
+      readonly firstByPlayerThisTurn?: true;
     })
   | (Base & {
       readonly type: "ability-resolved";

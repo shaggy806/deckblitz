@@ -5482,6 +5482,7 @@ function Table({
                       ) : null}
                       {a.kind === 'cast-spell' && a.via === 'blitz' ? ' (blitz)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'impending' ? ' (impending)' : ''}
+                      {a.kind === 'cast-spell' && a.via === 'freerunning' ? ' (freerunning)' : ''}
                       {a.kind === 'cast-spell' && a.offspring ? (
                         <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>
                       ) : null}

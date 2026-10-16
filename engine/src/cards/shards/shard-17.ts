@@ -163,6 +163,7 @@ import _poolHangedExecutioner from "../pool/hanged-executioner.js";
 import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
+import _poolHeartfireHero from "../pool/heartfire-hero.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
@@ -340,6 +341,7 @@ import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.j
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
+import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
 import _poolThreeVisits from "../pool/three-visits.js";
 import _poolThroneOfTheGodPharaoh from "../pool/throne-of-the-god-pharaoh.js";
 import _poolThroughTheForestGate from "../pool/through-the-forest-gate.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolHashepOasis,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
+    _poolHeartfireHero,
     _poolHeatedArgument,
     _poolHedgeMaze,
     _poolHeiBaiSpiritOfBalance,
@@ -755,6 +758,7 @@ const shard: CardShard = {
     _poolThePrismaticBridge,
     _poolThermalGlider,
     _poolThingSwing,
+    _poolThreeTreeScribe,
     _poolThreeVisits,
     _poolThroneOfTheGodPharaoh,
     _poolThroughTheForestGate,

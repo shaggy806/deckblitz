@@ -113,6 +113,7 @@ import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
 import _poolEarthquake from "../pool/earthquake.js";
 import _poolEarthshape from "../pool/earthshape.js";
+import _poolEddymurkCrab from "../pool/eddymurk-crab.js";
 import _poolEdgeRover from "../pool/edge-rover.js";
 import _poolElfhameWurm from "../pool/elfhame-wurm.js";
 import _poolEliteArchers from "../pool/elite-archers.js";
@@ -177,6 +178,7 @@ import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
+import _poolHiredClaw from "../pool/hired-claw.js";
 import _poolHornetHarasser from "../pool/hornet-harasser.js";
 import _poolHowlsquadHeavy from "../pool/howlsquad-heavy.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
@@ -226,6 +228,7 @@ import _poolMegrim from "../pool/megrim.js";
 import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
 import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
+import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
@@ -552,6 +555,7 @@ const shard: CardShard = {
     _poolEagerTrufflesnout,
     _poolEarthquake,
     _poolEarthshape,
+    _poolEddymurkCrab,
     _poolEdgeRover,
     _poolElfhameWurm,
     _poolEliteArchers,
@@ -616,6 +620,7 @@ const shard: CardShard = {
     _poolHarmonizedCrescendo,
     _poolHaughtyDjinn,
     _poolHellkiteCourser,
+    _poolHiredClaw,
     _poolHornetHarasser,
     _poolHowlsquadHeavy,
     _poolHydraAssaultRobot,
@@ -665,6 +670,7 @@ const shard: CardShard = {
     _poolMengHuosHorde,
     _poolMesaCavalier,
     _poolMidnightGuard,
+    _poolMindwhisker,
     _poolMirrormereGuardian,
     _poolMjolnirsMight,
     _poolMoatPiranhas,

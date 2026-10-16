@@ -939,6 +939,11 @@ export interface GameObject {
    * creature flickered in response puts none — while a read of it ("its
    * power") uses last-known information. */
   sourceZoneChangeCount?: number;
+  /** The players whose spells or abilities have targeted this permanent
+   * this turn, in this battlefield stint — what valiant's "for the first
+   * time each turn" reads (the `object-targeted` event's
+   * `firstByPlayerThisTurn`). Stale once `turn` or `stint` differ. */
+  targetedThisTurn?: { readonly turn: number; readonly stint: number; readonly by: readonly PlayerId[] };
   /** How many times this object has changed zones — bumped by every
    * `moveObject`. Object ids survive zone changes in this engine (a commander
    * keeps its id), so this is what tells the card an ability was activated
@@ -1972,6 +1977,10 @@ export interface TurnState {
    * `"upkeep"`): when it ends, the turn goes on to whatever followed the
    * combat phase it came after, never to a draw step. */
   addedUpkeep?: boolean;
+  /** The combat phase under way was added after the main phase that follows
+   * combat (Grim Reaper's Sprint cast there): when it ends, the turn goes on
+   * to the end step rather than to another main phase. */
+  endsAfterAddedCombat?: boolean;
   /** True when this turn was taken via an extra-turn effect (Time Warp) rather
    * than the normal rotation — ROADMAP Phase 7. */
   isExtra: boolean;
@@ -2763,6 +2772,13 @@ export interface TurnHistory {
   leftGraveyard?: number;
   /** Scries and surveils this turn (`TurnStat` `"scried-or-surveilled"`). */
   scriedOrSurveilled?: number;
+  /** Mana this player spent to cast spells this turn (rule 700.14 —
+   * expend; `TurnStat` `"mana-spent-on-spells"`). */
+  manaSpentOnSpells?: number;
+  /** A player was dealt combat damage this turn by a creature that, as it
+   * dealt it, was an Assassin creature or a commander this player
+   * controlled — what lets them pay a freerunning cost (rule 702.173a). */
+  freerunning?: boolean;
   /** Damage dealt to this player, and the part of it that was combat damage. */
   damageTaken?: number;
   combatDamageTaken?: number;

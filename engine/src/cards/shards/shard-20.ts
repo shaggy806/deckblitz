@@ -73,6 +73,7 @@ import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
 import _poolCarnifexDemon from "../pool/carnifex-demon.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
+import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
 import _poolChakramSlinger from "../pool/chakram-slinger.js";
 import _poolChocoComet from "../pool/choco-comet.js";
@@ -182,9 +183,11 @@ import _poolHarrow from "../pool/harrow.js";
 import _poolHarshAnnotation from "../pool/harsh-annotation.js";
 import _poolHateMirage from "../pool/hate-mirage.js";
 import _poolHawkeyeTrickShot from "../pool/hawkeye-trick-shot.js";
+import _poolHaythamKenway from "../pool/haytham-kenway.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
 import _poolHeroesForHire from "../pool/heroes-for-hire.js";
+import _poolHookblade from "../pool/hookblade.js";
 import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
 import _poolHowlingMine from "../pool/howling-mine.js";
@@ -259,6 +262,7 @@ import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNivixBarrier from "../pool/nivix-barrier.js";
 import _poolNoDachi from "../pool/no-dachi.js";
+import _poolNocturnalHunger from "../pool/nocturnal-hunger.js";
 import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
@@ -289,6 +293,7 @@ import _poolQuagmireDruid from "../pool/quagmire-druid.js";
 import _poolQuandrixCharm from "../pool/quandrix-charm.js";
 import _poolQueensCommission from "../pool/queens-commission.js";
 import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
+import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
@@ -297,6 +302,7 @@ import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
+import _poolRavenClanWarAxe from "../pool/raven-clan-war-axe.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
@@ -540,6 +546,7 @@ const shard: CardShard = {
     _poolCanopyVista,
     _poolCarnifexDemon,
     _poolCemeteryGate,
+    _poolChainAssassination,
     _poolChainDevil,
     _poolChakramSlinger,
     _poolChocoComet,
@@ -649,9 +656,11 @@ const shard: CardShard = {
     _poolHarshAnnotation,
     _poolHateMirage,
     _poolHawkeyeTrickShot,
+    _poolHaythamKenway,
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
     _poolHeroesForHire,
+    _poolHookblade,
     _poolHoverguardObserver,
     _poolHowlingGiant,
     _poolHowlingMine,
@@ -726,6 +735,7 @@ const shard: CardShard = {
     _poolNinjaOfTheDeepHours,
     _poolNivixBarrier,
     _poolNoDachi,
+    _poolNocturnalHunger,
     _poolNotOnMyWatch,
     _poolNulldrifter,
     _poolOboroPalaceInTheClouds,
@@ -756,6 +766,7 @@ const shard: CardShard = {
     _poolQuandrixCharm,
     _poolQueensCommission,
     _poolQuintoriusHistoryChaser,
+    _poolRabidGnaw,
     _poolRadhaHeirToKeld,
     _poolRageScarredBerserker,
     _poolRagingCougar,
@@ -764,6 +775,7 @@ const shard: CardShard = {
     _poolRancorousArchaic,
     _poolRatcatcher,
     _poolRavagingHorde,
+    _poolRavenClanWarAxe,
     _poolRavenousAmulet,
     _poolRaybladeTrooper,
     _poolRecklessAssault,

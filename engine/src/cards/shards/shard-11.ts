@@ -20,6 +20,7 @@ import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
 import _poolAshenFirebeast from "../pool/ashen-firebeast.js";
+import _poolAssassinDen from "../pool/assassin-den.js";
 import _poolAtmosphericGreenhouse from "../pool/atmospheric-greenhouse.js";
 import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
@@ -227,6 +228,7 @@ import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
+import _poolMoonstoneEulogist from "../pool/moonstone-eulogist.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
@@ -353,6 +355,7 @@ import _poolSquallDrifter from "../pool/squall-drifter.js";
 import _poolStaffOfNin from "../pool/staff-of-nin.js";
 import _poolStalactiteDagger from "../pool/stalactite-dagger.js";
 import _poolStarryEyedSkyrider from "../pool/starry-eyed-skyrider.js";
+import _poolStarseerMentor from "../pool/starseer-mentor.js";
 import _poolSteelshapersGift from "../pool/steelshapers-gift.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
@@ -471,6 +474,7 @@ const shard: CardShard = {
     _poolArchaeomender,
     _poolArmsDealer,
     _poolAshenFirebeast,
+    _poolAssassinDen,
     _poolAtmosphericGreenhouse,
     _poolAttrition,
     _poolAudacity,
@@ -678,6 +682,7 @@ const shard: CardShard = {
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
     _poolMoonriseCleric,
+    _poolMoonstoneEulogist,
     _poolMoriokReaver,
     _poolMossDiamond,
     _poolMossdog,
@@ -804,6 +809,7 @@ const shard: CardShard = {
     _poolStaffOfNin,
     _poolStalactiteDagger,
     _poolStarryEyedSkyrider,
+    _poolStarseerMentor,
     _poolSteelshapersGift,
     _poolStomperCub,
     _poolStoneBySunlight,

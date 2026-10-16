@@ -4662,3 +4662,21 @@ stack count once per token)
   4 damage to Bob. At your end step each loses one time counter (three left), and the log says so. Hovering
   "Impending" in the card text shows its reminder. Check at ~768px tall and at full size, in a 2- and a
   4-player room.
+
+### Eagle Vision, Treetop Sentries, Heartfire Hero
+
+*New player decisions* — casting for freerunning (rule 702.173a), foraging (701.61a), and valiant's
+first-time-each-turn trigger (an ability word, rule 207.2c)
+
+- **Setup:** Your precombat main. Your battlefield: Agate-Blade Assassin, Heartfire Hero, a Food, six Forests
+  and two Islands; in hand two Giant Growths, Treetop Sentries and Eagle Vision; in your graveyard three
+  Grizzly Bears.
+- **Do:** Cast Giant Growth on Heartfire Hero, then the second Giant Growth on it. Attack Bob with Agate-Blade
+  Assassin and let it deal damage. In your postcombat main, cast Eagle Vision, then Treetop Sentries.
+- **Check:** The first Giant Growth puts a +1/+1 counter on Heartfire Hero (valiant), the second doesn't.
+  Before combat damage Eagle Vision offers only its full cost ({4}{U}, more than you have); after the
+  Assassin dealt combat damage to Bob it offers "(freerunning)" for {1}{U}, and you draw three. Treetop
+  Sentries asks whether to forage, offering both ways — exile three cards from your graveyard (you pick
+  which) or sacrifice the Food — and either one draws you a card; declining draws nothing. Hovering
+  "Freerunning" and "forage" in the card text shows their reminders. Check at ~768px tall and at full
+  size, in a 2- and a 4-player room.

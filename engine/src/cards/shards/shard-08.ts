@@ -405,6 +405,7 @@ import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
 import _poolVerdigris from "../pool/verdigris.js";
 import _poolVerduranEnchantress from "../pool/verduran-enchantress.js";
 import _poolVernalFen from "../pool/vernal-fen.js";
+import _poolVeteranGuardmouse from "../pool/veteran-guardmouse.js";
 import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
@@ -848,6 +849,7 @@ const shard: CardShard = {
     _poolVerdigris,
     _poolVerduranEnchantress,
     _poolVernalFen,
+    _poolVeteranGuardmouse,
     _poolVisionSkeins,
     _poolVithianRenegades,
     _poolVividMarsh,

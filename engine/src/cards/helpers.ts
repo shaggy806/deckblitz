@@ -5,7 +5,7 @@
  */
 
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "../abilities.js";
-import { wardCostText, type EffectAmount, type EffectSpec, type GiftKind, type WardCost } from "../effects.js";
+import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type WardCost } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
 import type { TargetSpec } from "../target.js";
@@ -105,6 +105,36 @@ export const ward = (cost: WardCost): TriggeredAbility => ({
   effect: { kind: "ward", cost },
   resolve: null,
   text: `Ward${wardCostText(cost)}`,
+});
+
+/**
+ * Forage (rule 701.61a): "exile three cards from your graveyard or sacrifice
+ * a Food" — the two ways, as an `each-player-may`'s `options`, each offered
+ * only to a player who can do it (a forage they can't complete isn't
+ * offered, the rulings), and each announcing the forage for "whenever you
+ * forage". "You may forage. If you do, …" is `{ kind: "each-player-may", who:
+ * "you", options: forageOptions(), ifDid: … }`; "when you do" puts a
+ * `reflexive-trigger` in `ifDid`.
+ */
+export const forageOptions = (): readonly BoundUnlessOption[] => [
+  { exileFromGraveyard: 3, forage: true, text: "Exile three cards from your graveyard" },
+  { sacrifice: { subtype: "Food" }, forage: true, text: "Sacrifice a Food" },
+];
+
+/**
+ * Valiant (an ability word — Heartfire Hero): "Whenever this creature becomes
+ * the target of a spell or ability you control for the first time each turn,
+ * [effect]." The first time this turn its controller's spell or ability
+ * targets it, in this battlefield stint — a target changed onto it or a copy
+ * targeting it counts too, if it's the first (the rulings). `text` is the
+ * whole printed line, "Valiant — …" included.
+ */
+export const valiant = (effect: EffectSpec, text: string): TriggeredAbility => ({
+  trigger: { on: "becomes-target", who: "self", byControllerOnly: true, firstTimeEachTurn: true },
+  targets: [],
+  effect,
+  resolve: null,
+  text,
 });
 
 /**

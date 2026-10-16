@@ -33,9 +33,12 @@ import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
+import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
+import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
+import _poolBrazenCollector from "../pool/brazen-collector.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBroodspinner from "../pool/broodspinner.js";
@@ -93,6 +96,7 @@ import _poolDraconicMuralists from "../pool/draconic-muralists.js";
 import _poolDragonskullSummit from "../pool/dragonskull-summit.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
+import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEject from "../pool/eject.js";
@@ -208,6 +212,7 @@ import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
+import _poolMouseTrapper from "../pool/mouse-trapper.js";
 import _poolMudflatVillage from "../pool/mudflat-village.js";
 import _poolMyrBattlesphere from "../pool/myr-battlesphere.js";
 import _poolNadiersNightblade from "../pool/nadiers-nightblade.js";
@@ -236,6 +241,7 @@ import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
+import _poolOtterballAntics from "../pool/otterball-antics.js";
 import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
@@ -288,6 +294,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
+import _poolSeedpodSquire from "../pool/seedpod-squire.js";
 import _poolSeekTheHeart from "../pool/seek-the-heart.js";
 import _poolSeekersFolly from "../pool/seekers-folly.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
@@ -367,6 +374,7 @@ import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
+import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
 import _poolTurbulentSprings from "../pool/turbulent-springs.js";
@@ -455,9 +463,12 @@ const shard: CardShard = {
     _poolBlackWidowIntelExpert,
     _poolBlindingDrone,
     _poolBloomTender,
+    _poolBloomingBlast,
     _poolBogInitiate,
     _poolBoneclubBerserker,
     _poolBrainFreeze,
+    _poolBrambleguardVeteran,
+    _poolBrazenCollector,
     _poolBridledBighorn,
     _poolBroodcallerScourge,
     _poolBroodspinner,
@@ -515,6 +526,7 @@ const shard: CardShard = {
     _poolDragonskullSummit,
     _poolDramaticReversal,
     _poolDrogskolCavalry,
+    _poolDruidOfTheSpade,
     _poolDwarvenGrunt,
     _poolEarthRift,
     _poolEject,
@@ -630,6 +642,7 @@ const shard: CardShard = {
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMizziumMortars,
+    _poolMouseTrapper,
     _poolMudflatVillage,
     _poolMyrBattlesphere,
     _poolNadiersNightblade,
@@ -658,6 +671,7 @@ const shard: CardShard = {
     _poolOltecCloudGuard,
     _poolOrcishBloodpainter,
     _poolOtepecHuntmaster,
+    _poolOtterballAntics,
     _poolOvergrownEstate,
     _poolPainfulTruths,
     _poolPalaceSiege,
@@ -710,6 +724,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScreechingHarpy,
     _poolSealOfStrength,
+    _poolSeedpodSquire,
     _poolSeekTheHeart,
     _poolSeekersFolly,
     _poolSeismicSpike,
@@ -789,6 +804,7 @@ const shard: CardShard = {
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,
     _poolTravelersAmulet,
+    _poolTreeguardDuo,
     _poolTresserhornSinks,
     _poolTrinketMage,
     _poolTurbulentSprings,

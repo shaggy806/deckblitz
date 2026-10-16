@@ -175,6 +175,7 @@ import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
 import _poolKariZevsExpertise from "../pool/kari-zevs-expertise.js";
 import _poolKarumonixTheRatKing from "../pool/karumonix-the-rat-king.js";
+import _poolKeenEyedRaven from "../pool/keen-eyed-raven.js";
 import _poolKeenSense from "../pool/keen-sense.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
@@ -235,6 +236,7 @@ import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
+import _poolOverpoweringAttack from "../pool/overpowering-attack.js";
 import _poolPaintersStudio from "../pool/painters-studio.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
@@ -394,6 +396,7 @@ import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
 import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
+import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
@@ -593,6 +596,7 @@ const shard: CardShard = {
     _poolJeongJeongTheDeserter,
     _poolKariZevsExpertise,
     _poolKarumonixTheRatKing,
+    _poolKeenEyedRaven,
     _poolKeenSense,
     _poolKheruGoldkeeper,
     _poolKindleTheInnerFlame,
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolOrimSamiteHealer,
     _poolOtterPenguin,
     _poolOvergrownTomb,
+    _poolOverpoweringAttack,
     _poolPaintersStudio,
     _poolPastInFlames,
     _poolPathOfAncestry,
@@ -812,6 +817,7 @@ const shard: CardShard = {
     _poolWallOfTorches,
     _poolWandasVision,
     _poolWardenOfTheWoods,
+    _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,
     _poolWheelOfFortune,

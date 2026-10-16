@@ -261,6 +261,7 @@ import _poolPardicCollaborator from "../pool/pardic-collaborator.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
+import _poolPhantomBlade from "../pool/phantom-blade.js";
 import _poolPhantomWarrior from "../pool/phantom-warrior.js";
 import _poolPhotonLadyOfLight from "../pool/photon-lady-of-light.js";
 import _poolPhyrexianDefiler from "../pool/phyrexian-defiler.js";
@@ -268,6 +269,7 @@ import _poolPiratesPillage from "../pool/pirates-pillage.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
+import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
@@ -318,6 +320,7 @@ import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
 import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
 import _poolSkyshroudFalcon from "../pool/skyshroud-falcon.js";
+import _poolSkyskipperDuo from "../pool/skyskipper-duo.js";
 import _poolSleddingOtterPenguin from "../pool/sledding-otter-penguin.js";
 import _poolSlimyDualleech from "../pool/slimy-dualleech.js";
 import _poolSlinzaTheSpikedStampede from "../pool/slinza-the-spiked-stampede.js";
@@ -447,6 +450,7 @@ import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
 import _tokensSoldierArtifactToken from "../tokens/soldier-artifact-token.js";
 import _tokensTyranidToken55 from "../tokens/tyranid-token-5-5.js";
 import _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin from "../tokens/vampire-token-edgar-charmed-groom-edgar-markovs-coffin.js";
+import _tokensWallTokenBuildersTalent from "../tokens/wall-token-builders-talent.js";
 import _tokensXXDemonTokenFlying from "../tokens/x-x-demon-token-flying.js";
 import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolPawpatchFormation,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
+    _poolPhantomBlade,
     _poolPhantomWarrior,
     _poolPhotonLadyOfLight,
     _poolPhyrexianDefiler,
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolPitOfOfferings,
     _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
+    _poolPlumecreedMentor,
     _poolPredatorySliver,
     _poolPridefulParent,
     _poolProwcatcherSpecialist,
@@ -767,6 +773,7 @@ const shard: CardShard = {
     _poolSkeletalKathari,
     _poolSkybladeOfTheLegion,
     _poolSkyshroudFalcon,
+    _poolSkyskipperDuo,
     _poolSleddingOtterPenguin,
     _poolSlimyDualleech,
     _poolSlinzaTheSpikedStampede,
@@ -898,6 +905,7 @@ const shard: CardShard = {
     _tokensSoldierArtifactToken,
     _tokensTyranidToken55,
     _tokensVampireTokenEdgarCharmedGroomEdgarMarkovsCoffin,
+    _tokensWallTokenBuildersTalent,
     _tokensXXDemonTokenFlying,
     _tokensZombieWarriorToken,
   ],

@@ -7,6 +7,7 @@ import _poolAbhorrentOverlord from "../pool/abhorrent-overlord.js";
 import _poolAbominationTerrifyingTitan from "../pool/abomination-terrifying-titan.js";
 import _poolAbunaAcolyte from "../pool/abuna-acolyte.js";
 import _poolAbundantCountryside from "../pool/abundant-countryside.js";
+import _poolAchillesDavenport from "../pool/achilles-davenport.js";
 import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
 import _poolAltarOfDementia from "../pool/altar-of-dementia.js";
@@ -40,12 +41,14 @@ import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
+import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
 import _poolBrazenBorrower from "../pool/brazen-borrower.js";
 import _poolBrazenScourge from "../pool/brazen-scourge.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
+import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
@@ -270,6 +273,7 @@ import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
+import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
@@ -301,6 +305,7 @@ import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
+import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
 import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
@@ -386,6 +391,7 @@ import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
+import _poolWildfireHowl from "../pool/wildfire-howl.js";
 import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
 import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
@@ -414,6 +420,7 @@ const shard: CardShard = {
     _poolAbominationTerrifyingTitan,
     _poolAbunaAcolyte,
     _poolAbundantCountryside,
+    _poolAchillesDavenport,
     _poolAlchemistsTalent,
     _poolAlrundsEpiphany,
     _poolAltarOfDementia,
@@ -447,12 +454,14 @@ const shard: CardShard = {
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
     _poolBrambleWurm,
+    _poolBrambleguardCaptain,
     _poolBranchOfBoseiju,
     _poolBrazenBorrower,
     _poolBrazenScourge,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
+    _poolBrotherhoodSpy,
     _poolBumbleflowersSharepot,
     _poolBumpInTheNight,
     _poolCabalPit,
@@ -677,6 +686,7 @@ const shard: CardShard = {
     _poolRehearsedDebater,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
+    _poolRestartSequence,
     _poolRetrieveTheEsper,
     _poolReverberatingSummons,
     _poolReverentHoplite,
@@ -708,6 +718,7 @@ const shard: CardShard = {
     _poolScuteSwarm,
     _poolSeasonOfRenewal,
     _poolSecretPassage,
+    _poolSeedglaiveMentor,
     _poolSelesnyaGuildgate,
     _poolSeraphOfTheSuns,
     _poolShaperGuildmage,
@@ -793,6 +804,7 @@ const shard: CardShard = {
     _poolWanderlightSpirit,
     _poolWeaveFate,
     _poolWickedReward,
+    _poolWildfireHowl,
     _poolWildsearScouringMaw,
     _poolWindcragSiege,
     _poolWindgracesJudgment,

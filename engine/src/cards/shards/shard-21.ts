@@ -19,6 +19,7 @@ import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
+import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
@@ -33,6 +34,7 @@ import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
+import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
@@ -108,6 +110,7 @@ import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
+import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
@@ -312,6 +315,7 @@ import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
 import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
+import _poolTangleTumbler from "../pool/tangle-tumbler.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
@@ -365,12 +369,14 @@ import _poolWaterElemental from "../pool/water-elemental.js";
 import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
+import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
+import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
@@ -396,6 +402,7 @@ const shard: CardShard = {
     _poolArrogantVampire,
     _poolAtTheDoor,
     _poolAtomicMicrosizer,
+    _poolAvelineDeGrandpre,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
     _poolAzoriusCharm,
@@ -410,6 +417,7 @@ const shard: CardShard = {
     _poolBloatedContaminator,
     _poolBoltBend,
     _poolBondOfDiscipline,
+    _poolBonebindOrator,
     _poolBoonOfEmrakul,
     _poolBrawnAmadeusCho,
     _poolBronzeWalrus,
@@ -485,6 +493,7 @@ const shard: CardShard = {
     _poolFlameOfAnor,
     _poolFlameshape,
     _poolFleetingEffigy,
+    _poolFlowerfootSwordmaster,
     _poolFragmentize,
     _poolFrontierBivouac,
     _poolFrostwindInvoker,
@@ -689,6 +698,7 @@ const shard: CardShard = {
     _poolSwordOfFeastAndFamine,
     _poolSylvokReplica,
     _poolSymbioticBeast,
+    _poolTangleTumbler,
     _poolTanglebloom,
     _poolTanglepoolBridge,
     _poolTarkirDuneshaper,
@@ -742,6 +752,7 @@ const shard: CardShard = {
     _poolWaterloggedGrove,
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
+    _poolWhiskerquillScribe,
     _poolWillOfTheSultai,
     _poolWoodworkProdigy,
     _poolZhaoRuthlessAdmiral,
@@ -750,6 +761,7 @@ const shard: CardShard = {
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
     _tokensConstructTokenJanJansenChaosCrafter,
     _tokensElementalTokenPrismariPianist,
+    _tokensHumanRogueToken,
     _tokensMoogleToken,
     _tokensPhyrexianGoblinToken,
     _tokensPlantWarriorToken,

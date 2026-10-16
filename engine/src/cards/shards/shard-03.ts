@@ -346,6 +346,7 @@ import _poolThrivingMoor from "../pool/thriving-moor.js";
 import _poolTidings from "../pool/tidings.js";
 import _poolTitanicBulvox from "../pool/titanic-bulvox.js";
 import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
+import _poolTreetopSentries from "../pool/treetop-sentries.js";
 import _poolTriumphantSurge from "../pool/triumphant-surge.js";
 import _poolTrumpetingHerd from "../pool/trumpeting-herd.js";
 import _poolTurnTheTide from "../pool/turn-the-tide.js";
@@ -741,6 +742,7 @@ const shard: CardShard = {
     _poolTidings,
     _poolTitanicBulvox,
     _poolTitanicUltimatum,
+    _poolTreetopSentries,
     _poolTriumphantSurge,
     _poolTrumpetingHerd,
     _poolTurnTheTide,

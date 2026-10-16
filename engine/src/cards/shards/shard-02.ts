@@ -36,6 +36,7 @@ import _poolBeastcallerSavant from "../pool/beastcaller-savant.js";
 import _poolBeetleLegacyCriminal from "../pool/beetle-legacy-criminal.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
+import _poolBleedingEffect from "../pool/bleeding-effect.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
@@ -132,6 +133,7 @@ import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
+import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
@@ -266,6 +268,7 @@ import _poolPrimordialSage from "../pool/primordial-sage.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
+import _poolPsychicWhorl from "../pool/psychic-whorl.js";
 import _poolPulseTracker from "../pool/pulse-tracker.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
@@ -327,6 +330,7 @@ import _poolSteadyProgress from "../pool/steady-progress.js";
 import _poolSteamClean from "../pool/steam-clean.js";
 import _poolSteamSpitter from "../pool/steam-spitter.js";
 import _poolSteelOfTheGodhead from "../pool/steel-of-the-godhead.js";
+import _poolStickytongueSentinel from "../pool/stickytongue-sentinel.js";
 import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
@@ -374,6 +378,7 @@ import _poolValorousStance from "../pool/valorous-stance.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
+import _poolVelukanDragon from "../pool/velukan-dragon.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
@@ -443,6 +448,7 @@ const shard: CardShard = {
     _poolBeetleLegacyCriminal,
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
+    _poolBleedingEffect,
     _poolBlightMound,
     _poolBlightedBlackthorn,
     _poolBloodBurglar,
@@ -539,6 +545,7 @@ const shard: CardShard = {
     _poolFarfinder,
     _poolFearOfBurningAlive,
     _poolFelineSovereign,
+    _poolFinchFormation,
     _poolFirebendingLesson,
     _poolFistsOfFlame,
     _poolFlamingSword,
@@ -673,6 +680,7 @@ const shard: CardShard = {
     _poolPrizedGriffin,
     _poolPsychicCorrosion,
     _poolPsychicFrog,
+    _poolPsychicWhorl,
     _poolPulseTracker,
     _poolQuantumEntanglement,
     _poolQuillBladeLaureate,
@@ -734,6 +742,7 @@ const shard: CardShard = {
     _poolSteamClean,
     _poolSteamSpitter,
     _poolSteelOfTheGodhead,
+    _poolStickytongueSentinel,
     _poolStonecoilSerpent,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
@@ -781,6 +790,7 @@ const shard: CardShard = {
     _poolVampireGourmand,
     _poolVanguardOfTheRestless,
     _poolVassalSoul,
+    _poolVelukanDragon,
     _poolVerixBladewing,
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,

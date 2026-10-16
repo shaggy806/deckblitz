@@ -99,6 +99,7 @@ import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
+import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
@@ -184,6 +185,7 @@ import _poolKnightsPledge from "../pool/knights-pledge.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
+import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
@@ -223,6 +225,7 @@ import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
 import _poolMonsterMashup from "../pool/monster-mashup.js";
 import _poolMoonBoyDinoRider from "../pool/moon-boy-dino-rider.js";
+import _poolMoonstoneHarbinger from "../pool/moonstone-harbinger.js";
 import _poolMordantDragon from "../pool/mordant-dragon.js";
 import _poolMossbeardAncient from "../pool/mossbeard-ancient.js";
 import _poolMosstodon from "../pool/mosstodon.js";
@@ -544,6 +547,7 @@ const shard: CardShard = {
     _poolEndBlazeEpiphany,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,
+    _poolEscarpmentFortress,
     _poolExaltedFlamerOfTzeentch,
     _poolExultantSkymarcher,
     _poolFaerieHarbinger,
@@ -629,6 +633,7 @@ const shard: CardShard = {
     _poolKrarkClanShaman,
     _poolKumenaTyrantOfOrazca,
     _poolKyoshiWarriorGuard,
+    _poolLabyrinthAdversary,
     _poolLastWord,
     _poolLightningVisionary,
     _poolLightningWolf,
@@ -668,6 +673,7 @@ const shard: CardShard = {
     _poolMomentumBreaker,
     _poolMonsterMashup,
     _poolMoonBoyDinoRider,
+    _poolMoonstoneHarbinger,
     _poolMordantDragon,
     _poolMossbeardAncient,
     _poolMosstodon,

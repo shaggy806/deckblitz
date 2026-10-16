@@ -197,6 +197,30 @@ const TERMS: readonly TextTerm[] = [
     text: "You may cast this spell for its impending cost. If you do, it enters with that many time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.",
   },
   {
+    key: 'freerunning',
+    name: 'Freerunning',
+    pattern: /\bfreerunning\b/i,
+    text: 'You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.',
+  },
+  {
+    key: 'forage',
+    name: 'Forage',
+    pattern: /\bforage\b/i,
+    text: 'To forage, exile three cards from your graveyard or sacrifice a Food.',
+  },
+  {
+    key: 'expend',
+    name: 'Expend',
+    pattern: /\bexpend \d+\b/i,
+    text: 'You expend N as you spend your Nth total mana to cast spells during a turn — once a turn.',
+  },
+  {
+    key: 'valiant',
+    name: 'Valiant',
+    pattern: /\bvaliant\b/i,
+    text: 'Triggers the first time each turn this creature becomes the target of a spell or ability you control.',
+  },
+  {
     key: 'mentor',
     name: 'Mentor',
     pattern: /\bmentor\b/i,

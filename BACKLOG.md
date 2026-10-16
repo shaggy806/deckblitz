@@ -83,10 +83,10 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. **First, the rest of the sets already walked** — Bloomburrow
-  and its Commander set (BLB, BLC, 112 left, next), the last of them (`npm run cards:sets -w engine -- --sets
-  30`; DRC, DSC and BLC too; every set from Reality Fracture back to Duskmourn is whole) — then
-  Assassin's Creed and Outlaws of Thunder Junction onward. Leading blockers now:
+  ranked ones first. Every set from Reality Fracture back to Assassin's Creed is whole (batch
+  86 finished Bloomburrow, its Commander set and Assassin's Creed); **next, Modern Horizons 3
+  and its Commander set** (MH3, M3C, about 130 left, their bottom halves), then The Big Score
+  and Outlaws of Thunder Junction onward (`npm run cards:sets -w engine -- --sets 40`). Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only

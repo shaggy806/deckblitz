@@ -2776,4 +2776,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  preset(
+    'Eagle Vision, Treetop Sentries, Heartfire Hero',
+    board({
+      you: {
+        bf: ['Agate-Blade Assassin', 'Heartfire Hero', 'Food Token', 'Forest*6', 'Island*2'],
+        hand: ['Giant Growth*2', 'Treetop Sentries', 'Eagle Vision'],
+        gy: ['Grizzly Bears*3'],
+      },
+    }),
+  ),
 ]

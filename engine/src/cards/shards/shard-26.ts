@@ -80,6 +80,7 @@ import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
+import _poolDownwindAmbusher from "../pool/downwind-ambusher.js";
 import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
@@ -143,10 +144,12 @@ import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
+import _poolHarvestriteHost from "../pool/harvestrite-host.js";
 import _poolHavocSower from "../pool/havoc-sower.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
 import _poolHellsThunder from "../pool/hells-thunder.js";
+import _poolHemlockVial from "../pool/hemlock-vial.js";
 import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
@@ -329,6 +332,7 @@ import _poolSwat from "../pool/swat.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
@@ -364,6 +368,7 @@ import _poolUnholyFiend from "../pool/unholy-fiend.js";
 import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
 import _poolUrsineMonstrosity from "../pool/ursine-monstrosity.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
+import _poolValleyRally from "../pool/valley-rally.js";
 import _poolVarinaLichQueen from "../pool/varina-lich-queen.js";
 import _poolVaultOfTheArchangel from "../pool/vault-of-the-archangel.js";
 import _poolVedalkenMesmerist from "../pool/vedalken-mesmerist.js";
@@ -484,6 +489,7 @@ const shard: CardShard = {
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
+    _poolDownwindAmbusher,
     _poolDrEggman,
     _poolDragonFodder,
     _poolDragonlordDromoka,
@@ -547,10 +553,12 @@ const shard: CardShard = {
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,
     _poolHarmonizedTrio,
+    _poolHarvestriteHost,
     _poolHavocSower,
     _poolHeapGate,
     _poolHeartSliver,
     _poolHellsThunder,
+    _poolHemlockVial,
     _poolHerbalPoultice,
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
@@ -733,6 +741,7 @@ const shard: CardShard = {
     _poolTajuruBlightblade,
     _poolTakeItBack,
     _poolTalismanOfProgress,
+    _poolTeapotSlinger,
     _poolTemporalTrespass,
     _poolTerminalCriticism,
     _poolTerrianWorldTyrant,
@@ -768,6 +777,7 @@ const shard: CardShard = {
     _poolUrenisRebuff,
     _poolUrsineMonstrosity,
     _poolUtopiaSprawl,
+    _poolValleyRally,
     _poolVarinaLichQueen,
     _poolVaultOfTheArchangel,
     _poolVedalkenMesmerist,

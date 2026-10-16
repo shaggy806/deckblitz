@@ -6,6 +6,7 @@ import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
+import { enter as harnessEnter, nextTurn as harnessNextTurn, table as harnessTable } from "./harness.js";
 
 /**
  * A chapter ability triggers "when one or more lore counters are put onto
@@ -114,5 +115,18 @@ describe("lore counters put on a Saga fire its chapters (rule 714.2b)", () => {
       expect([c.power, c.toughness]).toEqual([4, 3]);
     }
     expect(game.state.objects[saga].zone).toBe("graveyard");
+  });
+});
+
+describe("a Saga's own lore counters are counters put on it (rule 122.6)", () => {
+  it("announces counter-added as it enters and at its controller's precombat main", () => {
+    const { game } = harnessTable();
+    const saga = harnessEnter(game, "The Eldest Reborn");
+    const puts = () =>
+      game.events.filter((e) => e.type === "counter-added" && e.object === saga && e.counter === "lore").length;
+    expect(puts()).toBe(1);
+    harnessNextTurn(game);
+    harnessNextTurn(game);
+    expect(puts()).toBe(2);
   });
 });

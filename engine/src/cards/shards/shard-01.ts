@@ -83,6 +83,7 @@ import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
+import _poolEagleVision from "../pool/eagle-vision.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
 import _poolElectrodominance from "../pool/electrodominance.js";
@@ -212,6 +213,7 @@ import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
+import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
@@ -333,6 +335,7 @@ import _poolThaliaTheSurvivor from "../pool/thalia-the-survivor.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
+import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
 import _poolThranVigil from "../pool/thran-vigil.js";
 import _poolThreatsAroundEveryCorner from "../pool/threats-around-every-corner.js";
@@ -375,6 +378,7 @@ import _poolVolrathsStronghold from "../pool/volraths-stronghold.js";
 import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolWanderOff from "../pool/wander-off.js";
+import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
@@ -482,6 +486,7 @@ const shard: CardShard = {
     _poolDragonStyleTwins,
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
+    _poolEagleVision,
     _poolEldraziMonument,
     _poolEldritchEvolution,
     _poolElectrodominance,
@@ -611,6 +616,7 @@ const shard: CardShard = {
     _poolMoonBlessedCleric,
     _poolMorcantsEyes,
     _poolMountainGoat,
+    _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
     _poolNamazuTrader,
@@ -732,6 +738,7 @@ const shard: CardShard = {
     _poolTheHunterMaze,
     _poolTheMeathookMassacre,
     _poolTheSpearOfLeonidas,
+    _poolThoughtShucker,
     _poolThoughtcast,
     _poolThranVigil,
     _poolThreatsAroundEveryCorner,
@@ -774,6 +781,7 @@ const shard: CardShard = {
     _poolVoraciousBibliophile,
     _poolVoteOut,
     _poolWanderOff,
+    _poolWandertaleMentor,
     _poolWarSqueak,
     _poolWastewoodVerge,
     _poolWayOfTheCryomancer,

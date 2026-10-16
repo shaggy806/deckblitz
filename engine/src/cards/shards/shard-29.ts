@@ -26,6 +26,7 @@ import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
+import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
 import _poolBlackChocobo from "../pool/black-chocobo.js";
 import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
@@ -68,6 +69,7 @@ import _poolCrushingVines from "../pool/crushing-vines.js";
 import _poolCryoshatter from "../pool/cryoshatter.js";
 import _poolCryptIncursion from "../pool/crypt-incursion.js";
 import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
+import _poolCuriousForager from "../pool/curious-forager.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
 import _poolDarkDeed from "../pool/dark-deed.js";
@@ -92,6 +94,7 @@ import _poolDouserOfLights from "../pool/douser-of-lights.js";
 import _poolDrafnaFounderOfLatNam from "../pool/drafna-founder-of-lat-nam.js";
 import _poolDragonsRageChanneler from "../pool/dragons-rage-channeler.js";
 import _poolDramaticRescue from "../pool/dramatic-rescue.js";
+import _poolDriftgloomCoyote from "../pool/driftgloom-coyote.js";
 import _poolDriftingShade from "../pool/drifting-shade.js";
 import _poolDronepackKindred from "../pool/dronepack-kindred.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
@@ -122,6 +125,7 @@ import _poolFiendlash from "../pool/fiendlash.js";
 import _poolFinalDeath from "../pool/final-death.js";
 import _poolFinalVengeance from "../pool/final-vengeance.js";
 import _poolFlamebraider from "../pool/flamebraider.js";
+import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFocusFire from "../pool/focus-fire.js";
@@ -198,6 +202,7 @@ import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
+import _poolMabelsMettle from "../pool/mabels-mettle.js";
 import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dragon.js";
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
@@ -210,6 +215,7 @@ import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
+import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
@@ -238,9 +244,11 @@ import _poolPain101 from "../pool/pain-101.js";
 import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPatientInstructor from "../pool/patient-instructor.js";
+import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
 import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
+import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
 import _poolPonder from "../pool/ponder.js";
 import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
@@ -437,6 +445,7 @@ const shard: CardShard = {
     _poolBallistaCharger,
     _poolBarbedBloodletter,
     _poolBargain,
+    _poolBarkKnuckleBoxer,
     _poolBetorKinToAll,
     _poolBlackChocobo,
     _poolBlacksmithsTalent,
@@ -479,6 +488,7 @@ const shard: CardShard = {
     _poolCryoshatter,
     _poolCryptIncursion,
     _poolCrypticTrilobite,
+    _poolCuriousForager,
     _poolDailyBugleReporters,
     _poolDamn,
     _poolDarkDeed,
@@ -503,6 +513,7 @@ const shard: CardShard = {
     _poolDrafnaFounderOfLatNam,
     _poolDragonsRageChanneler,
     _poolDramaticRescue,
+    _poolDriftgloomCoyote,
     _poolDriftingShade,
     _poolDronepackKindred,
     _poolDrownyardExplorers,
@@ -533,6 +544,7 @@ const shard: CardShard = {
     _poolFinalDeath,
     _poolFinalVengeance,
     _poolFlamebraider,
+    _poolFlamecacheGecko,
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
     _poolFocusFire,
@@ -609,6 +621,7 @@ const shard: CardShard = {
     _poolLonelySandbar,
     _poolLoxodonAnchorite,
     _poolLyraArchangelOfDawn,
+    _poolMabelsMettle,
     _poolMaelstromOfTheSpiritDragon,
     _poolMagesGuile,
     _poolMagmaticForce,
@@ -621,6 +634,7 @@ const shard: CardShard = {
     _poolMessengersSpeed,
     _poolMishrasJuggernaut,
     _poolMistLeopard,
+    _poolMisthiossFury,
     _poolMistvaultBridge,
     _poolMomentsPeace,
     _poolMoongloveExtractor,
@@ -649,9 +663,11 @@ const shard: CardShard = {
     _poolParhelionIi,
     _poolPathOfAnnihilation,
     _poolPatientInstructor,
+    _poolPawpatchRecruit,
     _poolPestbroodSloth,
     _poolPetAvengers,
     _poolPhalanxVanguard,
+    _poolPileatedProvisioner,
     _poolPlatedSlagwurm,
     _poolPonder,
     _poolPortraitOfMichiko,
