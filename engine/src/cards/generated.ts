@@ -6180,6 +6180,7 @@ import _poolKarumonixTheRatKing from "./pool/karumonix-the-rat-king.js";
 import _poolKasimirTheLoneWolf from "./pool/kasimir-the-lone-wolf.js";
 import _poolKaslemsStonetree from "./pool/kaslems-stonetree.js";
 import _poolKaslemsStrider from "./pool/kaslems-strider.js";
+import _poolKastralTheWindcrested from "./pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "./pool/katara-bending-prodigy.js";
 import _poolKataraHeroicHealer from "./pool/katara-heroic-healer.js";
 import _poolKataraSeekingRevenge from "./pool/katara-seeking-revenge.js";
@@ -12045,6 +12046,7 @@ import _poolThundertrapTrainer from "./pool/thundertrap-trainer.js";
 import _poolThunderwolfCavalry from "./pool/thunderwolf-cavalry.js";
 import _poolThuridMareOfDestiny from "./pool/thurid-mare-of-destiny.js";
 import _poolThwip from "./pool/thwip.js";
+import _poolTiamat from "./pool/tiamat.js";
 import _poolTiamatsFanatics from "./pool/tiamats-fanatics.js";
 import _poolTibaltsRager from "./pool/tibalts-rager.js";
 import _poolTickedOff from "./pool/ticked-off.js";
@@ -20336,6 +20338,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKasimirTheLoneWolf,
   _poolKaslemsStonetree,
   _poolKaslemsStrider,
+  _poolKastralTheWindcrested,
   _poolKataraBendingProdigy,
   _poolKataraHeroicHealer,
   _poolKataraSeekingRevenge,
@@ -26201,6 +26204,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThunderwolfCavalry,
   _poolThuridMareOfDestiny,
   _poolThwip,
+  _poolTiamat,
   _poolTiamatsFanatics,
   _poolTibaltsRager,
   _poolTickedOff,

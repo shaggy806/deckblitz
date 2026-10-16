@@ -12,6 +12,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Choice extensions, part one** (`decision:choose-from-zone-extensions`): a search's finds that
+  "each have different names" (`together: { distinctNames: true }` — the zone choice's `distinct`
+  rule), "with four or more card types among them" (its `variety` rule, not yet on a card), and a
+  `return-from-graveyard` over the hand and graveyard together (`from: "hand-or-graveyard"`):
+  Tiamat (#160) and Kastral, the Windcrested (#248) (2026-10-16).
 - **Eight top-500 commanders whose blockers had been built since triage**: Sauron, the Dark Lord
   (#9), Hakbal of the Surging Soul (#40), The Necrobloom (#48), Auntie Ool, Cursewretch (#88),
   Norman Osborn (#96), Ezio Auditore da Firenze (#102), Sméagol, Helpful Guide (#369) and Peter

@@ -214,6 +214,7 @@ import _poolJudgmentBolt from "../pool/judgment-bolt.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
+import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
@@ -697,6 +698,7 @@ const shard: CardShard = {
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
     _poolKarametrasAcolyte,
+    _poolKastralTheWindcrested,
     _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKindlyCustomer,

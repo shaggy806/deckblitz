@@ -16,6 +16,12 @@
  *   value — add up to `atLeast` or more: collect evidence N (rule 701.59a,
  *   "exile any number of cards from your graveyard with total mana value N
  *   or greater"). With `orNone`, choosing nothing passes too (a "you may").
+ * - `"distinct"`: no two chosen cards share a tag — Tiamat's "Dragon cards
+ *   … that each have different names", a card's one tag its name.
+ * - `"variety"`: the chosen cards' tags, all together, number `atLeast` or
+ *   more — Winter, Cynical Opportunist's "any number of cards … with four or
+ *   more card types among them", a card's tags its card types. With
+ *   `orNone`, choosing nothing passes too.
  *
  * The tags are worked out as the decision is raised, so checking a set is
  * pure and needs neither the registry nor the layer fold: the validator
@@ -27,16 +33,17 @@
 import type { ObjectId } from "./primitives.js";
 
 export interface ZoneChoiceTogether {
-  readonly rule: "share" | "one-each" | "total";
+  readonly rule: "share" | "one-each" | "total" | "distinct" | "variety";
   /** Each eligible card's tags: its land types (`share`), or the slots it
    * could fill (`one-each`). */
   readonly tags: Readonly<Record<string, readonly string[]>>;
   /** What a client tells the chooser — "that share a land type", "a Forest
    * card and a Plains card". */
   readonly text: string;
-  /** `"total"`: the sum the chosen cards' tags must reach. */
+  /** `"total"`: the sum the chosen cards' tags must reach; `"variety"`: how
+   * many different tags they must have among them. */
   readonly atLeast?: number;
-  /** `"total"`: choosing no card at all is allowed too. */
+  /** `"total"`, `"variety"`: choosing no card at all is allowed too. */
   readonly orNone?: boolean;
 }
 
@@ -51,8 +58,8 @@ export function togetherViolation(
   chosen: readonly ObjectId[],
 ): string | null {
   if (fitsTogether(together, chosen)) return null;
-  if (together.rule === "total") return `the chosen cards must have ${together.text}`;
-  return `the chosen cards must be ${together.rule === "share" ? "cards " : ""}${together.text}`;
+  if (together.rule === "total" || together.rule === "variety") return `the chosen cards must have ${together.text}`;
+  return `the chosen cards must be ${together.rule === "share" || together.rule === "distinct" ? "cards " : ""}${together.text}`;
 }
 
 /** Whether `chosen` obeys `together`. */
@@ -61,6 +68,20 @@ export function fitsTogether(together: ZoneChoiceTogether, chosen: readonly Obje
   if (together.rule === "total") {
     if (chosen.length === 0) return together.orNone === true;
     return totalOf(together, chosen) >= (together.atLeast ?? 0);
+  }
+  if (together.rule === "variety") {
+    if (chosen.length === 0) return together.orNone === true;
+    return new Set(chosen.flatMap(tagsOf)).size >= (together.atLeast ?? 0);
+  }
+  if (together.rule === "distinct") {
+    const seen = new Set<string>();
+    for (const id of chosen) {
+      for (const tag of tagsOf(id)) {
+        if (seen.has(tag)) return false;
+        seen.add(tag);
+      }
+    }
+    return true;
   }
   if (together.rule === "share") {
     if (chosen.length < 2) return true;
@@ -98,7 +119,7 @@ export function completeTogether(
 ): ObjectId[] {
   // A sum to reach: the preferred cards first, then the rest in order, until
   // it is reached — nothing at all for a "you may" the chooser declined.
-  if (together.rule === "total") {
+  if (together.rule === "total" || together.rule === "variety") {
     if (preferred.length === 0 && together.orNone === true) return [];
     const kept: ObjectId[] = [];
     for (const id of [...preferred, ...eligible]) {

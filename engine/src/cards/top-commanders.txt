@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-429 already implemented / 71 missing
+431 already implemented / 69 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -163,7 +163,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  157  Najeela, the Blade-Blossom                     14034 decks  {2}{R}           Legendary Creature — Human Warrior
 [x]  158  Grand Arbiter Augustin IV                      14006 decks  {2}{W}{U}        Legendary Creature — Human Advisor
 [x]  159  Temmet, Naktamun's Will                        13931 decks  {2}{W}{U}{B}     Legendary Creature — Zombie Wizard
-[ ]  160  Tiamat                                         13863 decks  {2}{W}{U}{B}{R}{G} Legendary Creature — Dragon God
+[x]  160  Tiamat                                         13863 decks  {2}{W}{U}{B}{R}{G} Legendary Creature — Dragon God
 [x]  161  Cosmic Spider-Man                              13825 decks  {W}{U}{B}{R}{G}  Legendary Creature — Spider Human Hero
 [x]  162  Azlask, the Swelling Scourge                   13822 decks  {3}              Legendary Creature — Eldrazi
 [x]  163  Ishai, Ojutai Dragonspeaker                    13791 decks  {2}{W}{U}        Legendary Creature — Bird Monk
@@ -251,7 +251,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  245  Ojer Axonil, Deepest Might                     10413 decks  {2}{R}{R}        Legendary Creature — God // Land
 [x]  246  Trostani, Selesnya's Voice                     10377 decks  {G}{G}{W}{W}     Legendary Creature — Dryad
 [x]  247  Volo, Guide to Monsters                        10359 decks  {2}{G}{U}        Legendary Creature — Human Wizard
-[ ]  248  Kastral, the Windcrested                       10313 decks  {3}{W}{U}        Legendary Creature — Bird Scout
+[x]  248  Kastral, the Windcrested                       10313 decks  {3}{W}{U}        Legendary Creature — Bird Scout
 [x]  249  Saheeli, Radiant Creator                       10286 decks  {1}{G}{U}{R}     Legendary Creature — Human Artificer
 [x]  250  Raffine, Scheming Seer                         10235 decks  {W}{U}{B}        Legendary Creature — Sphinx Demon
 [x]  251  Yidris, Maelstrom Wielder                      10231 decks  {U}{B}{R}{G}     Legendary Creature — Ogre Wizard

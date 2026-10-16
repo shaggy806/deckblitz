@@ -55,6 +55,8 @@ export type SearchZones = "library" | "graveyard" | "library-and-graveyard";
  */
 export type SearchTogether =
   | { readonly share: "land-type" }
+  /** "…that each have different names" (Tiamat): no two finds share a name. */
+  | { readonly distinctNames: true }
   | {
       readonly oneEach: readonly {
         /** How the client names the slot: "a Forest card". */
@@ -2160,8 +2162,11 @@ export type EffectSpec =
        * battlefield under your control": a card someone else owns enters
        * under the effect's controller's control, kept there by a control
        * effect (rule 110.2; it's exiled if they leave the game, 800.4a).
-       * With `count: "all"` and `destination: "battlefield"` only. */
-      readonly from?: "all-graveyards";
+       * With `count: "all"` and `destination: "battlefield"` only.
+       * `"hand-or-graveyard"`: the controller's hand and graveyard together,
+       * one choice over both — Kastral, the Windcrested's "a Bird creature
+       * card from your hand or graveyard". */
+      readonly from?: "all-graveyards" | "hand-or-graveyard";
       /** …with these types and colours in addition to their own, in place
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black
        * Zombies in addition to their other colors and types". */
@@ -5525,7 +5530,7 @@ export interface EffectApi {
     withCounters?: { readonly kind: string; readonly amount: number },
     /** Every graveyard, and how the cards enter — the spec's `from` and
      * `enterAs`. */
-    opts?: { readonly allGraveyards?: boolean; readonly enterAs?: EnterTypes },
+    opts?: { readonly allGraveyards?: boolean; readonly handToo?: boolean; readonly enterAs?: EnterTypes },
   ): boolean;
   /** `target` (a player) discards `amount` cards. */
   discardCards(target: TargetRef, amount: number, random?: boolean, unlessOne?: CardFilter): void;
@@ -8275,6 +8280,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.withCounters,
         {
           ...(spec.from === "all-graveyards" ? { allGraveyards: true } : {}),
+          ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
         },
       );

@@ -21835,6 +21835,10 @@ export class Game {
       }
       return { rule: "share", tags, text: "that share a land type" };
     }
+    if ("distinctNames" in together) {
+      for (const id of eligible) tags[id] = [printedCardName(this.state.objects[id])];
+      return { rule: "distinct", tags, text: "that each have different names" };
+    }
     for (const id of eligible) {
       tags[id] = together.oneEach.flatMap((slot, index) =>
         matchesFilter(this.state, this.registry, id, slot.filter, { you: player, x }) ? [String(index)] : [],
@@ -28766,12 +28770,14 @@ export class Game {
     count: number | "all",
     enterTapped: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    opts: { readonly allGraveyards?: boolean; readonly enterAs?: EnterTypes } = {},
+    opts: { readonly allGraveyards?: boolean; readonly handToo?: boolean; readonly enterAs?: EnterTypes } = {},
   ): boolean {
     const graveyards =
       opts.allGraveyards === true
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
-        : this.state.zones.perPlayer[player].graveyard;
+        : opts.handToo === true
+          ? [...this.state.zones.perPlayer[player].graveyard, ...this.state.zones.perPlayer[player].hand]
+          : this.state.zones.perPlayer[player].graveyard;
     const eligible = graveyards.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     if (eligible.length === 0) return false;
     const enterAs = destination === "battlefield" ? opts.enterAs : undefined;
