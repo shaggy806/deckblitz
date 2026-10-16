@@ -460,6 +460,31 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       ).plot,
     ).toEqual({ cost: "{1}{G}" });
     expect(face("When this card becomes plotted, draw a card.").triggered[0].trigger).toEqual({ on: "this-plotted" });
+    // Squad (rule 702.157a): a multikicker by another name and its trigger.
+    const squad = face(
+      "Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)",
+    );
+    expect(squad.kicker).toEqual({ cost: "{2}", multi: true, keyword: "squad" });
+    expect(squad.triggered[0].effect).toEqual({ kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true });
+    // Rad counters (rule 728).
+    expect(face("When this creature enters, target player gets two rad counters.").triggered[0].effect).toEqual({
+      kind: "add-player-counters",
+      counter: "rad",
+      amount: 2,
+      target: 0,
+    });
+    // Collect evidence (rule 701.59).
+    expect(
+      face(
+        "As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)",
+        "Instant",
+        {},
+      ).kicker,
+    ).toEqual({ cost: "", keyword: "collect-evidence", collectEvidence: 6 });
+    expect(face("Whenever you collect evidence, draw a card.").triggered[0].trigger).toEqual({
+      on: "evidence-collected",
+      who: "you",
+    });
     // Committing a crime (rule 700.13).
     expect(face("Whenever you commit a crime, draw a card.").triggered[0].trigger).toEqual({
       on: "crime-committed",

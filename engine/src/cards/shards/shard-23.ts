@@ -188,6 +188,7 @@ import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
 import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
+import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
@@ -257,6 +258,7 @@ import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
+import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
@@ -310,6 +312,7 @@ import _poolScrollboost from "../pool/scrollboost.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
+import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
 import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
@@ -618,6 +621,7 @@ const shard: CardShard = {
     _poolItzquinthFirstbornOfGishath,
     _poolIvoryTower,
     _poolJaceBeleren,
+    _poolJamesWanderingDad,
     _poolJetFreedomFighter,
     _poolJooDeeOneOfMany,
     _poolJunjiTheMidnightSky,
@@ -687,6 +691,7 @@ const shard: CardShard = {
     _poolObNixilisReignited,
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
+    _poolOrdruunMentor,
     _poolOvergrownFarmland,
     _poolOxidize,
     _poolPainfulQuandary,
@@ -740,6 +745,7 @@ const shard: CardShard = {
     _poolSeizedFromSlumber,
     _poolSelesnyaSignet,
     _poolSelfcraftMechan,
+    _poolSenatorPeacock,
     _poolServoExhibition,
     _poolSetessanTraining,
     _poolShadeOfTrokair,

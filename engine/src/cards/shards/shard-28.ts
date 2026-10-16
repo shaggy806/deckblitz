@@ -308,6 +308,7 @@ import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
+import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
 import _poolSetessanGriffin from "../pool/setessan-griffin.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolScaledWurm,
     _poolScarletSpiderKaine,
     _poolScribeOfTheMindful,
+    _poolSecuritronSquadron,
     _poolSelesnyaSentry,
     _poolSentinelSliver,
     _poolSetessanGriffin,

@@ -20,7 +20,7 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
 /**
  * The small chips along a permanent's bottom-left corner: summoning sickness,
  * and the designations nothing else on the tile shows — goaded (rule 701.15)
- * suspected (701.60), saddled (702.171b) and Ring-bearer (701.54). A designation isn't an ability, so it isn't in the
+ * suspected (701.60), saddled (702.171b), solved (719.3b) and Ring-bearer (701.54). A designation isn't an ability, so it isn't in the
  * keyword icons; suspect's menace and can't-block are, but not the fact that
  * it's suspected. Also how many cards it holds in exile (`holding` — a
  * Banishing Light's), which the hover card shows, and what was chosen as it
@@ -55,6 +55,7 @@ export function CardFlags({
     goaders.length === 0 &&
     !obj.suspected &&
     !obj.saddled &&
+    obj.solved !== true &&
     !obj.ringBearer &&
     obj.preparedSpell === undefined &&
     held === 0 &&
@@ -89,6 +90,11 @@ export function CardFlags({
       {obj.suspected ? (
         <span className="card-flag suspect" title="Suspected: it has menace and can't block">
           {compact ? 'Sus' : 'suspected'}
+        </span>
+      ) : null}
+      {obj.solved === true ? (
+        <span className="card-flag solved" title="Solved (rule 719.3b): its Solved ability works now">
+          {compact ? 'Slv' : 'solved'}
         </span>
       ) : null}
       {obj.saddled ? (

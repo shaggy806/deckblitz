@@ -49,6 +49,7 @@ import _poolCacklingSlasher from "../pool/cackling-slasher.js";
 import _poolCadaverImp from "../pool/cadaver-imp.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
+import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
 import _poolCausticHound from "../pool/caustic-hound.js";
 import _poolCavernThoctar from "../pool/cavern-thoctar.js";
 import _poolCelestialAncient from "../pool/celestial-ancient.js";
@@ -384,6 +385,7 @@ import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolVampiricTouch from "../pool/vampiric-touch.js";
+import _poolVault12TheNecropolis from "../pool/vault-12-the-necropolis.js";
 import _poolVenomSliver from "../pool/venom-sliver.js";
 import _poolVenserFerventForger from "../pool/venser-fervent-forger.js";
 import _poolViciousConquistador from "../pool/vicious-conquistador.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
     _poolCadaverImp,
     _poolCanyonCrawler,
     _poolCaretakersTalent,
+    _poolCaseOfTheCrimsonPulse,
     _poolCausticHound,
     _poolCavernThoctar,
     _poolCelestialAncient,
@@ -810,6 +813,7 @@ const shard: CardShard = {
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,
     _poolVampiricTouch,
+    _poolVault12TheNecropolis,
     _poolVenomSliver,
     _poolVenserFerventForger,
     _poolViciousConquistador,

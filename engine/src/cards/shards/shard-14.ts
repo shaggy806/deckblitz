@@ -158,6 +158,7 @@ import _poolFrogtosserBanneret from "../pool/frogtosser-banneret.js";
 import _poolFuelForTheCause from "../pool/fuel-for-the-cause.js";
 import _poolFullBore from "../pool/full-bore.js";
 import _poolFuturistForge from "../pool/futurist-forge.js";
+import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
@@ -267,12 +268,14 @@ import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
+import _poolNuclearFallout from "../pool/nuclear-fallout.js";
 import _poolOasis from "../pool/oasis.js";
 import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
+import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolFuelForTheCause,
     _poolFullBore,
     _poolFuturistForge,
+    _poolGaladhrimBrigade,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
     _poolGhostsOfTheDamned,
@@ -687,12 +691,14 @@ const shard: CardShard = {
     _poolNettleGuard,
     _poolNivMizzetParun,
     _poolNoMercy,
+    _poolNuclearFallout,
     _poolOasis,
     _poolObeliskOfNaya,
     _poolOldFlitterfang,
     _poolOnyxGoblet,
     _poolOonasGatewarden,
     _poolPactdollTerror,
+    _poolPaladinDanseSteelMaverick,
     _poolPanacea,
     _poolParasiticImpetus,
     _poolPearledUnicorn,

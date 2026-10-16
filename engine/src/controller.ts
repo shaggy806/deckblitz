@@ -732,9 +732,12 @@ function ownedProliferateTargets(
   eligible: readonly TargetRef[],
 ): readonly TargetRef[] {
   // A player's counters are theirs to want or not: yourself unless you're
-  // poisoned, an opponent only if they are.
-  const poisoned = (player: PlayerId): boolean =>
-    (view.state.players[player]?.counters.poison ?? 0) > 0;
+  // poisoned or irradiated, an opponent only if they are — rad counters
+  // mill and drain their player (rule 728.1), as poison kills.
+  const poisoned = (player: PlayerId): boolean => {
+    const counters = view.state.players[player]?.counters;
+    return (counters?.poison ?? 0) > 0 || (counters?.rad ?? 0) > 0;
+  };
   return eligible.filter((target) =>
     target.kind === "player"
       ? target.player === view.player

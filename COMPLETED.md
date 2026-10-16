@@ -12,6 +12,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Rad counters, squad, collect evidence and Cases** (`mechanic:rad-counters` rule 728,
+  `keyword:squad` 702.157, `keyword:collect-evidence` 701.59, `mechanic:case` 719.3): rad as a
+  player counter with its inherent precombat-main trigger and the ☢ panel count, `remove-player-
+  counters`; squad as a multikicker with `squadTrigger()`; collect evidence as an effect, an
+  activated cost and a spell's additional cost, with "whenever you collect evidence"; Cases' "To
+  solve" (`caseToSolve`) and the solved designation with its chip (2026-10-16).
 - **Plot and committing a crime** (`keyword:plot`, rule 702.170; `trigger:commit-crime`, rule
   700.13): the plot special action, a plotted card's free sorcery-speed cast from exile on a later
   turn, "when this card becomes plotted", effects that plot a card (`become-plotted`,
@@ -35,6 +41,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Fallout and Ravnica: Clue Edition, both whole** (batch 90): 56 of 129 cards — the 109 left
+  in the two sets and 20 older rad and squad cards — with rad counters and squad built; the bots no
+  longer proliferate their own rad counters (2026-10-16).
 - **The Big Score, Outlaws of Thunder Junction and its Commander set, all whole** (batch 89): 158
   of 194 cards — the 179 left in the three sets and 15 older plot and crime cards — with plot and
   crimes built, and an enters-with counter amount's condition now leaving out what enters with it

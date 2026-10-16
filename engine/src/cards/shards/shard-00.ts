@@ -332,6 +332,7 @@ import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
+import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
@@ -398,6 +399,7 @@ import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
+import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
@@ -781,6 +783,7 @@ const shard: CardShard = {
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
     _poolSiegeSmash,
+    _poolSierraNukasBiggestFan,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
     _poolSlickSequence,
@@ -847,6 +850,7 @@ const shard: CardShard = {
     _poolTunnelOfHate,
     _poolTwistedLandscape,
     _poolTwofoldIntent,
+    _poolUltramarinesHonourGuard,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
     _poolUnstoppableSlasher,

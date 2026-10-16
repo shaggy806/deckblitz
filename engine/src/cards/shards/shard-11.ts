@@ -74,6 +74,7 @@ import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
 import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
+import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
@@ -226,6 +227,7 @@ import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
+import _poolMisterGutsy from "../pool/mister-gutsy.js";
 import _poolMistyPalmsOasis from "../pool/misty-palms-oasis.js";
 import _poolMmmenonUthrosExile from "../pool/mmmenon-uthros-exile.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
@@ -430,6 +432,7 @@ import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
+import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
 import _poolWayOfTheMentor from "../pool/way-of-the-mentor.js";
@@ -535,6 +538,7 @@ const shard: CardShard = {
     _poolCoatWithVenom,
     _poolCodecrackerHound,
     _poolCoffinPurge,
+    _poolCommanderMustard,
     _poolConclaveMentor,
     _poolConduitOfWorlds,
     _poolCordialVampire,
@@ -687,6 +691,7 @@ const shard: CardShard = {
     _poolMinasMorgulDarkFortress,
     _poolMirrorImage,
     _poolMistcutterHydra,
+    _poolMisterGutsy,
     _poolMistyPalmsOasis,
     _poolMmmenonUthrosExile,
     _poolMondrakGloryDominus,
@@ -891,6 +896,7 @@ const shard: CardShard = {
     _poolVodalianHypnotist,
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
+    _poolWastelandRaider,
     _poolWatcherOfTheWayside,
     _poolWaterfallAerialist,
     _poolWayOfTheMentor,

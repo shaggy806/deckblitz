@@ -672,6 +672,8 @@ export function parseTrigger(clause) {
   // `your-turn` condition beside it.
   if (/^Whenever you commit a crime$/.test(c)) return [{ on: "crime-committed", who: "you" }];
   if (/^Whenever an opponent commits a crime$/.test(c)) return [{ on: "crime-committed", who: "opponent" }];
+  // Collect evidence (rule 701.59).
+  if (/^Whenever you collect evidence$/.test(c)) return [{ on: "evidence-collected", who: "you" }];
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
   // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
   if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
@@ -842,6 +844,16 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`scry ${N}`).exec(s))) return { kind: "scry", amount: amount(m[1]) };
   if ((m = re(`surveil ${N}`).exec(s))) return { kind: "surveil", amount: amount(m[1]) };
+  // "You may collect evidence N" (rule 701.59a): the decision can be declined.
+  if ((m = re(`you may collect evidence (\\d+)`).exec(s))) return { kind: "collect-evidence", amount: Number(m[1]) };
+  // Rad counters (rule 728): a player counter.
+  if ((m = re(`(target player|target opponent) gets ${N} rad counters?`).exec(s))) {
+    return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), target: slot(m[1]) };
+  }
+  if ((m = re(`(you get|each player gets|each opponent gets) ${N} rad counters?`).exec(s))) {
+    const who = { "you get": undefined, "each player gets": "each-player", "each opponent gets": "each-opponent" }[m[1].toLowerCase()];
+    return { kind: "add-player-counters", counter: "rad", amount: amount(m[2]), ...(who !== undefined ? { who } : {}) };
+  }
 
   // Life.
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
@@ -1571,6 +1583,19 @@ export function parseFace(face, ctx = {}) {
     }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.
     if (isSpell && (m = /^Teamwork (\d+)$/.exec(line))) { out.kicker = { cost: "", keyword: "teamwork", teamwork: Number(m[1]) }; continue; }
+    // Squad [cost] (rule 702.157a): a multikicker by another name, and its enters trigger (`squadTrigger`).
+    if ((m = /^Squad ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.kicker = { cost: m[1], multi: true, keyword: "squad" };
+      out.triggered.push({
+        trigger: { on: "enters-battlefield", who: "self" },
+        condition: { kind: "self-kicked" },
+        targets: [],
+        effect: { kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true },
+        resolve: null,
+        text: "When this creature enters, if its squad cost was paid, create a token that's a copy of it for each time its squad cost was paid.",
+      });
+      continue;
+    }
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
@@ -1587,6 +1612,11 @@ export function parseFace(face, ctx = {}) {
     // ("if this spell's additional cost was paid") is the card's own.
     if (isSpell && (m = /^As an additional cost to cast ~, you may blight (\d+)\.$/.exec(line))) {
       out.kicker = { cost: "", keyword: "blight", blight: Number(m[1]) };
+      continue;
+    }
+    // "You may collect evidence N" (rule 701.59a), the same: "if evidence was collected" is the card's own.
+    if ((m = /^As an additional cost to cast ~, you may collect evidence (\d+)\.$/.exec(line))) {
+      out.kicker = { cost: "", keyword: "collect-evidence", collectEvidence: Number(m[1]) };
       continue;
     }
     // Behold (rule 701.4a) as a spell's cost — any spell's, a creature's too:
@@ -1946,6 +1976,8 @@ const INTERVENING_IFS = {
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
   // Rule 700.13 (Outlaws of Thunder Junction).
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
+  // Rule 701.59c: the spell's collect-evidence additional cost was paid.
+  "if evidence was collected,": { kind: "self-kicked" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the

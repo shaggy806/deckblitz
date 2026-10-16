@@ -1712,6 +1712,23 @@ export type EffectSpec =
       readonly exceptTarget?: number;
     }
   | {
+      /** "This Case becomes solved" (rule 719.3a) — a Case's "To solve —"
+       * trigger (the `caseToSolve` helper): the source gets the solved
+       * designation, if it's still the same object on the battlefield. */
+      readonly kind: "solve";
+    }
+  | {
+      /** "You may collect evidence N" (rule 701.59a — Surveillance Monitor,
+       * Izoni): the controller may exile any number of cards from their
+       * graveyard with total mana value N or more — offered only while it
+       * holds that much (701.59b), and declining is choosing none. "If you
+       * do" / "when you do" is `then`, with the exiled cards as its targets,
+       * run only when evidence was collected. */
+      readonly kind: "collect-evidence";
+      readonly amount: number;
+      readonly then?: EffectSpec;
+    }
+  | {
       /** "If you do, it becomes plotted" (rule 702.170c): a card an
        * instruction just exiled is plotted — its owner may cast it from exile
        * without paying its mana cost, as a sorcery, on a later turn. The `then`
@@ -3714,6 +3731,11 @@ export type EffectSpec =
        * Helm's rulings). */
       readonly of: "source" | "trigger-object" | "entered-together" | "equipped" | number | { readonly each: CardFilter };
       readonly count: number;
+      /** `count` copies **for each time its squad cost was paid** (rule
+       * 702.157a — the `squadTrigger` helper): times the number of times
+       * the source's spell paid its squad (a multikicker-style) cost, read
+       * from it as it last existed if it has left. */
+      readonly perTimeKicked?: true;
       /** The token copies have haste — a copy exception ("except it has
        * haste" — Kiki-Jiki), which lasts as long as they do. */
       readonly gainsHaste?: boolean;
@@ -3937,6 +3959,19 @@ export type EffectSpec =
       readonly kind: "add-player-counters";
       readonly counter: PlayerCounterKind;
       readonly amount: EffectAmount;
+      readonly who?: PlayerScope;
+      readonly target?: number;
+    }
+  | {
+      /** A player removes `amount` counters of a kind from themselves (rule
+       * 122.8), or every one with `"all"` — the rad counters' own "removes
+       * one rad counter from themselves" (rule 728.1), Survivor's Med Kit's
+       * "target player loses all rad counters". Never below none. To the
+       * effect's controller by default, a `PlayerScope`, or the player in
+       * target slot `target`. */
+      readonly kind: "remove-player-counters";
+      readonly counter: PlayerCounterKind;
+      readonly amount: EffectAmount | "all";
       readonly who?: PlayerScope;
       readonly target?: number;
     }
@@ -5652,8 +5687,17 @@ export interface EffectApi {
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
   exileTriggerSpellAsItResolves(returnAtNextEndStep: boolean, plotted: boolean): void;
+  /** The controller may collect evidence `amount` — see the
+   * `collect-evidence` effect. */
+  collectEvidence(amount: number, then: EffectSpec | undefined): void;
+  /** The source, a Case, becomes solved — see the `solve` effect. */
+  solveSource(): void;
   /** A card in exile becomes plotted — see the `become-plotted` effect. */
   becomePlotted(card: ObjectId): void;
+  /** How many times the source's spell paid its multikicker or squad cost
+   * (rule 702.157a), as it entered — as it last existed there if it has
+   * left; 0 for one not cast that way. */
+  sourceTimesKicked(): number;
   /** The answer to its rule 616.1 choice — see `applyFirst` there. */
   finishExiledAsItResolves(spell: ObjectId, feather: boolean): void;
   /** Shuffle the controller's library — see the `shuffle-library`
@@ -7756,6 +7800,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
+    case "collect-evidence":
+      ctx.collectEvidence(spec.amount, spec.then);
+      return;
+    case "solve":
+      ctx.solveSource();
+      return;
     case "become-plotted": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined && target.kind === "object") ctx.becomePlotted(target.object);
@@ -8766,7 +8816,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const ref = ctx.targets[spec.of];
         of = ref?.kind === "object" ? ref.object : undefined;
       }
-      if (of !== undefined) copy(of, spec.count * ctx.stackMultiplier);
+      const times = spec.perTimeKicked === true ? ctx.sourceTimesKicked() : 1;
+      if (of !== undefined) copy(of, spec.count * times * ctx.stackMultiplier);
       return;
     }
     case "conditional": {
@@ -8870,6 +8921,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : ctx.playersInScope(spec.who ?? "you");
       for (const player of players) {
         ctx.addPlayerCounters(player, spec.counter, amountValue(spec.amount, ctx, player));
+      }
+      return;
+    }
+    case "remove-player-counters": {
+      const players =
+        spec.target !== undefined
+          ? scopedOrTargetedPlayers(spec.target, ctx).flatMap((ref) =>
+              ref.kind === "player" ? [ref.player] : [],
+            )
+          : ctx.playersInScope(spec.who ?? "you");
+      for (const player of players) {
+        const n =
+          spec.amount === "all" ? ctx.playerCountersOf(player, spec.counter) : amountValue(spec.amount, ctx, player);
+        if (n > 0) ctx.addPlayerCounters(player, spec.counter, -n);
       }
       return;
     }

@@ -1,0 +1,928 @@
+{
+ "batch": "B90",
+ "status": "complete",
+ "ranks": "Fallout (PIP, 2024-03-08) and Ravnica: Clue Edition (CLU, 2024-02-23): the rest of the sets, with rad counters (rule 728) and squad (rule 702.157) built — and the older pool cards that waited on them",
+ "authored": [
+  {
+   "name": "Acquired Mutation",
+   "files": [
+    "engine/src/cards/pool/acquired-mutation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Almost Perfect",
+   "files": [
+    "engine/src/cards/pool/almost-perfect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armory Paladin",
+   "files": [
+    "engine/src/cards/pool/armory-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Automated Assembly Line",
+   "files": [
+    "engine/src/cards/pool/automated-assembly-line.ts",
+    "engine/src/cards/tokens/robot-token-automated-assembly-line.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle of Hoover Dam",
+   "files": [
+    "engine/src/cards/pool/battle-of-hoover-dam.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boomer Scrapper",
+   "files": [
+    "engine/src/cards/pool/boomer-scrapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boros Strike-Captain",
+   "files": [
+    "engine/src/cards/pool/boros-strike-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Butch DeLoria, Tunnel Snake",
+   "files": [
+    "engine/src/cards/pool/butch-deloria-tunnel-snake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carnage Interpreter",
+   "files": [
+    "engine/src/cards/pool/carnage-interpreter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander Mustard",
+   "files": [
+    "engine/src/cards/pool/commander-mustard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander Sofia Daguerre",
+   "files": [
+    "engine/src/cards/pool/commander-sofia-daguerre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conclave Evangelist",
+   "files": [
+    "engine/src/cards/pool/conclave-evangelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contaminated Drink",
+   "files": [
+    "engine/src/cards/pool/contaminated-drink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corporeal Projection",
+   "files": [
+    "engine/src/cards/pool/corporeal-projection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elder Owyn Lyons",
+   "files": [
+    "engine/src/cards/pool/elder-owyn-lyons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emissary Green",
+   "files": [
+    "engine/src/cards/pool/emissary-green.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Foot Assault",
+   "files": [
+    "engine/src/cards/pool/endless-foot-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feral Ghoul",
+   "files": [
+    "engine/src/cards/pool/feral-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furious Spinesplitter",
+   "files": [
+    "engine/src/cards/pool/furious-spinesplitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadhrim Brigade",
+   "files": [
+    "engine/src/cards/pool/galadhrim-brigade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gary Clone",
+   "files": [
+    "engine/src/cards/pool/gary-clone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Ilharg",
+   "files": [
+    "engine/src/cards/pool/herald-of-ilharg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ian the Reckless",
+   "files": [
+    "engine/src/cards/pool/ian-the-reckless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "James, Wandering Dad // Follow Him",
+   "files": [
+    "engine/src/cards/pool/james-wandering-dad.ts",
+    "engine/src/cards/pool/follow-him.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jason Bright, Glowing Prophet",
+   "files": [
+    "engine/src/cards/pool/jason-bright-glowing-prophet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavinia, Foil to Conspiracy",
+   "files": [
+    "engine/src/cards/pool/lavinia-foil-to-conspiracy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liberty Prime, Recharged",
+   "files": [
+    "engine/src/cards/pool/liberty-prime-recharged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lonis, Genetics Expert",
+   "files": [
+    "engine/src/cards/pool/lonis-genetics-expert.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Megaton's Fate",
+   "files": [
+    "engine/src/cards/pool/megatons-fate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mister Gutsy",
+   "files": [
+    "engine/src/cards/pool/mister-gutsy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nick Valentine, Private Eye",
+   "files": [
+    "engine/src/cards/pool/nick-valentine-private-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nuclear Fallout",
+   "files": [
+    "engine/src/cards/pool/nuclear-fallout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ordruun Mentor",
+   "files": [
+    "engine/src/cards/pool/ordruun-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin Danse, Steel Maverick",
+   "files": [
+    "engine/src/cards/pool/paladin-danse-steel-maverick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin Elizabeth Taggerdy",
+   "files": [
+    "engine/src/cards/pool/paladin-elizabeth-taggerdy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Powder Ganger",
+   "files": [
+    "engine/src/cards/pool/powder-ganger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Robobrain War Mind",
+   "files": [
+    "engine/src/cards/pool/robobrain-war-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Securitron Squadron",
+   "files": [
+    "engine/src/cards/pool/securitron-squadron.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Senator Peacock",
+   "files": [
+    "engine/src/cards/pool/senator-peacock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sentinel Sarah Lyons",
+   "files": [
+    "engine/src/cards/pool/sentinel-sarah-lyons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sicarian Infiltrator",
+   "files": [
+    "engine/src/cards/pool/sicarian-infiltrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sierra, Nuka's Biggest Fan",
+   "files": [
+    "engine/src/cards/pool/sierra-nukas-biggest-fan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stampede Surfer",
+   "files": [
+    "engine/src/cards/pool/stampede-surfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sumala Rumblers",
+   "files": [
+    "engine/src/cards/pool/sumala-rumblers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super Mutant Scavenger",
+   "files": [
+    "engine/src/cards/pool/super-mutant-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Syndicate Heavy",
+   "files": [
+    "engine/src/cards/pool/syndicate-heavy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribune of Rot",
+   "files": [
+    "engine/src/cards/pool/tribune-of-rot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultramarines Honour Guard",
+   "files": [
+    "engine/src/cards/pool/ultramarines-honour-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercover Butler",
+   "files": [
+    "engine/src/cards/pool/undercover-butler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unruly Krasis",
+   "files": [
+    "engine/src/cards/pool/unruly-krasis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault 12: The Necropolis",
+   "files": [
+    "engine/src/cards/pool/vault-12-the-necropolis.ts",
+    "engine/src/cards/tokens/zombie-mutant-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault 75: Middle School",
+   "files": [
+    "engine/src/cards/pool/vault-75-middle-school.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vernal Sovereign",
+   "files": [
+    "engine/src/cards/pool/vernal-sovereign.ts",
+    "engine/src/cards/tokens/elemental-token-vernal-sovereign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vexing Radgull",
+   "files": [
+    "engine/src/cards/pool/vexing-radgull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wasteland Raider",
+   "files": [
+    "engine/src/cards/pool/wasteland-raider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "White Glove Gourmand",
+   "files": [
+    "engine/src/cards/pool/white-glove-gourmand.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aegis of the Legion",
+   "needs": [
+    "trigger:mentors"
+   ],
+   "why": "\"Whenever equipped creature mentors a creature\" — no trigger fires on a mentor ability resolving (with its target as the trigger object); the +1/+1 and granted mentor alone would drop the shield-counter clause."
+  },
+  {
+   "name": "Amzu, Swarm's Hunger",
+   "needs": [
+    "effect:amount-aggregate"
+   ],
+   "why": "'+1/+1 counters equal to the greatest mana value among those cards' reads the cards a leaves-graveyard batch moved; that trigger's only amount is how many cards left."
+  },
+  {
+   "name": "Animal Friend",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "The granted attack trigger counts \"each Aura and Equipment attached to this creature other than Animal Friend\" — no EffectAmount counts attachments on the source (a CardFilter's attachedTo can't name the source), let alone excluding the granting Aura."
+  },
+  {
+   "name": "Aradesh, the Founder",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (rule 702.154: tap a nonattacking creature as it attacks, add its power) isn't modeled, nor the 'if it enlisted a creature this combat' intervening-if his second ability reads."
+  },
+  {
+   "name": "Arcade Gannon",
+   "needs": [
+    "static:graveyard-cast-filter-amount"
+   ],
+   "why": "\"Cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon\" — castFromGraveyard's filter is matched with no amount evaluator (FilterContext.amount), so a manaValue compared against counters on the source fails closed; the loot + quest counter ability alone would be expressible."
+  },
+  {
+   "name": "Behemoth of Vault 0",
+   "needs": [
+    "effect:reflexive-refers-to-parent-target"
+   ],
+   "why": "\"When you do, destroy that permanent\" is an untargeted reflexive trigger acting on the dies trigger's own target; a reflexive-trigger can't refer to its creating ability's target slots, and destroying inside the `may` would skip the reflexive trigger players may respond to (ruling)."
+  },
+  {
+   "name": "Bloatfly Swarm",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "The damage replacement's \"give each player a rad counter for each +1/+1 counter removed this way\" needs an amount for the counters actually removed (fewer than the damage when it has fewer counters); the prevent-then's x is the damage."
+  },
+  {
+   "name": "Brotherhood Outcast",
+   "needs": [
+    "mechanic:shield-counters"
+   ],
+   "why": "Its second mode puts a shield counter on target creature; shield counters (prevent damage / replace destruction by removing one) aren't modeled."
+  },
+  {
+   "name": "Brotherhood Scribe",
+   "needs": [
+    "trigger:energy-gained"
+   ],
+   "why": "\"Whenever you get one or more {E} during your turn\" has no trigger on getting energy."
+  },
+  {
+   "name": "C.A.M.P.",
+   "needs": [
+    "keyword:fortify",
+    "trigger:tapped-for-mana-nonmana-trigger"
+   ],
+   "why": "Fortifications and Fortify {3} aren't modeled, and 'whenever fortified land is tapped for mana' is a non-mana stack trigger reading the colours of the mana that land produced."
+  },
+  {
+   "name": "Cait, Cage Brawler",
+   "needs": [
+    "effect:greatest-among-discarded"
+   ],
+   "why": "'Put two +1/+1 counters on Cait if you discarded the card with the greatest mana value among those cards or tied' needs a condition comparing the mana value you discarded with the defending player's discard (and false when you discarded nothing); no condition compares two amounts."
+  },
+  {
+   "name": "Cass, Hand of Vengeance",
+   "needs": [
+    "effect:aura-returns-attached",
+    "effect:attach-equipment-that-was-attached"
+   ],
+   "why": "Returning \"any number of Aura cards that were attached to it\" from the graveyard attached to target creature, then attaching \"any number of Equipment that were attached to it\" — nothing records or reads a dead creature's attachments, nor returns an Aura attached to a chosen target."
+  },
+  {
+   "name": "Colonel Autumn",
+   "needs": [
+    "keyword:exploit"
+   ],
+   "why": "Exploit, granting exploit to other legendary creatures, and \"whenever a creature you control exploits a creature\" are all unmodeled."
+  },
+  {
+   "name": "Covetous Elegy",
+   "needs": [
+    "effect:sacrifice-all-but-up-to-n"
+   ],
+   "why": "sacrifice-all-but always keeps exactly N (asks nothing when a player has N or fewer) and queues each player's sacrifice separately, but the ruling lets each player choose fewer than two (an opponent may sacrifice down to deny Treasures), in APNAP order, all unchosen sacrificed at once."
+  },
+  {
+   "name": "Craig Boone, Novac Guard",
+   "needs": [
+    "effect:reflexive-per-counters-placed"
+   ],
+   "why": "Its ruling has the reflexive \"when you do\" trigger once per two quest counters actually put on it (twice under Doubling Season, which is in the pool, never if fewer than two land); a reflexive-trigger fires once regardless of how many counters were placed."
+  },
+  {
+   "name": "Curie, Emergent Intelligence",
+   "needs": [
+    "cost:exile-creature-cost",
+    "effect:base-power-amount"
+   ],
+   "why": "\"Draw cards equal to its base power\" has no base-power EffectAmount (only a filter operand), and \"Exile another nontoken artifact creature you control\" as a cost, then becoming a copy of that exiled creature, isn't expressible."
+  },
+  {
+   "name": "Desdemona, Freedom's Edge",
+   "needs": [
+    "effect:grant-escape-until-end-of-turn"
+   ],
+   "why": "'Target creature card in your graveyard ... gains escape until end of turn' (mana cost plus exile two other cards): only grant-flashback and grant-graveyard-cast exist as one-shot grants; escape is granted only by a static (grantsToGraveyard)."
+  },
+  {
+   "name": "Dimir Strandcatcher",
+   "needs": [
+    "stat:cards-put-into-graveyard-this-turn"
+   ],
+   "why": "\"if three or more cards were put into your graveyard from anywhere other than the battlefield this turn\" includes the stack and exile; the only turn stat counts hand and library (cards-to-graveyard-from-hand-or-library). The surveil X half is fine ({ opponentsAttacked: true })."
+  },
+  {
+   "name": "Duchess, Wayward Tavernkeep",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "'{1}, Remove a quest counter from a permanent you control': an activation cost's removeCounter comes only from the source."
+  },
+  {
+   "name": "ED-E, Lonesome Eyebot",
+   "needs": [
+    "condition:intervening-if-amounts"
+   ],
+   "why": "\"If the number of attacking creatures is greater than the number of quest counters on ED-E\" is an intervening-if comparing two live amounts; conditions don't evaluate a dynamic NumCompare operand (self-counters / source compares fail closed)."
+  },
+  {
+   "name": "Elder Arthur Maxson",
+   "needs": [
+    "keyword:training"
+   ],
+   "why": "\"Creature tokens you control have training\" — training isn't modeled."
+  },
+  {
+   "name": "Expert-Level Safe",
+   "needs": [
+    "mechanic:secret-choice"
+   ],
+   "why": "'You and target opponent each secretly choose 1, 2, or 3. Then those choices are revealed': no secret simultaneous choice of a number exists (nor putting the linked face-down cards into their owners' hands on a match)."
+  },
+  {
+   "name": "Frenzied Gorespawn",
+   "needs": [
+    "trigger:attack-batch-per-defender-those-creatures"
+   ],
+   "why": "\"Whenever one or more creatures attack one of your opponents, those creatures gain menace\": attacks-player fires once per attacked player but nothing can name the creatures attacking that player (no CardFilter for 'attacking trigger-player' in grant-keyword-all, only a target spec's attacking: \"trigger-player\")."
+  },
+  {
+   "name": "Glowing One",
+   "needs": [
+    "trigger:trigger-mills-nonland-card"
+   ],
+   "why": "\"Whenever a player mills a nonland card, you gain 1 life\" — once per nonland card milled (the ruling); no trigger watches mills."
+  },
+  {
+   "name": "Gunner Conscript",
+   "needs": [
+    "static:count-attached-to-affected"
+   ],
+   "why": "'Gets +1/+1 for each Aura and Equipment attached to it': grantPtPerCount has no filter for objects attached to the affected permanent itself."
+  },
+  {
+   "name": "Harold and Bob, First Numens",
+   "needs": [
+    "effect:return-as-aura-with-granted-ability"
+   ],
+   "why": "The dies trigger returns it as an Aura enchantment with enchant Forest you control, granting the Forest '{T}: Add three mana of any one color. You get two rad counters.' and losing all other abilities; put-onto-battlefield has setTypes but no Aura subtype/enchant restriction, granted ability or ability loss."
+  },
+  {
+   "name": "Headliner Scarlett",
+   "needs": [
+    "effect:restrict-all-target-player"
+   ],
+   "why": "'Creatures target player controls can't block this turn': restrict's filter is read from the effect controller's side and can't name a target player's creatures (controlledBy has no target form)."
+  },
+  {
+   "name": "Incriminating Impetus",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "\"When this Aura enters, suspect enchanted creature\": EffectTargetRef has no 'the permanent this source is attached to', so the suspect can't name the enchanted creature."
+  },
+  {
+   "name": "Infesting Radroach",
+   "needs": [
+    "trigger:trigger-mills-nonland-card"
+   ],
+   "why": "\"Whenever an opponent mills a nonland card, if this creature is in your graveyard, you may return it to your hand\" — no per-card mill trigger (and it must see a mill that puts the Radroach itself there alongside, per the ruling)."
+  },
+  {
+   "name": "Junk Jet",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "\"{3}, Sacrifice another artifact: Double equipped creature's power until end of turn\" — modify-pt's target is a slot, \"source\" or \"trigger-object\"; nothing names the creature the Equipment is attached to (only phase-out has attachedToSource)."
+  },
+  {
+   "name": "Legate Lanius, Caesar's Ace",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "\"Each opponent sacrifices a tenth of the creatures they control of their choice, rounded up\" — the sacrifice effect's count is a fixed number, not a per-player amount (and there's no ceil(n/10) amount)."
+  },
+  {
+   "name": "Lumbering Megasloth",
+   "needs": [
+    "cost:cost-reduction-all-counters"
+   ],
+   "why": "\"This spell costs {1} less to cast for each counter among players and permanents\" — no CostReductionAmount sums every counter of every kind on all permanents and players (playerCounters reads one kind on its controller; countersOnSource only the source)."
+  },
+  {
+   "name": "Mariposa Military Base",
+   "needs": [
+    "replacement:enter-tapped-optional-rider"
+   ],
+   "why": "\"You may have this land enter tapped. If you do, you get two rad counters\" — no optional enter-tapped choice with a follow-up effect (the {1}-less-per-rad-counter draw ability is expressible: costReduction playerCounters)."
+  },
+  {
+   "name": "Memory Vampire",
+   "needs": [
+    "keyword:collect-evidence"
+   ],
+   "why": "Collect evidence 9 (rule 701.59: exile cards with total mana value 9 or more from your graveyard, only if you can) isn't built, nor its reflexive 'When you do, you may cast target nonland card from defending player's graveyard without paying its mana cost'."
+  },
+  {
+   "name": "Mirelurk Queen",
+   "needs": [
+    "trigger:mills-trigger"
+   ],
+   "why": "'Whenever one or more nonland cards are milled, draw a card, then put a +1/+1 counter on this creature' has no trigger: nothing triggers on the cards-milled event (put-into-graveyard from a library also fires on surveil and misses milled cards a replacement exiled)."
+  },
+  {
+   "name": "Moira Brown, Guide Author",
+   "needs": [
+    "static:pt-per-counters-among-permanents"
+   ],
+   "why": "The Wasteland Survival Guide token's 'Equipped creature gets +1/+1 for each quest counter among permanents you control' has no grantPtPerCount form (countersOnSource / countersOnAffected only)."
+  },
+  {
+   "name": "Mysterious Stranger",
+   "needs": [
+    "effect:target-per-graveyard-with-match",
+    "effect:random-card-from-linked-exile"
+   ],
+   "why": "\"For each graveyard with an instant or sorcery card in it, exile target ... from that graveyard\" needs one mandatory target per qualifying graveyard (per-seat optional slots would let it skip one), and \"if two or more were exiled, choose one of them at random and copy it\" needs a random pick among the cards exiled this way."
+  },
+  {
+   "name": "Nightkin Ambusher",
+   "needs": [
+    "static:unblockable-defending-player-condition"
+   ],
+   "why": "'This creature can't be blocked as long as defending player has a rad counter': no static or block restriction reads a condition of the defending player (only landwalk's land types); a player-counters StaticCondition with who 'opponent' would read any opponent, not the defender."
+  },
+  {
+   "name": "Nuka-Nuke Launcher",
+   "needs": [
+    "effect:delayed-cast-trigger-through-player-next-turn"
+   ],
+   "why": "'Until the end of defending player's next turn, that player gets two rad counters whenever they cast a spell': no delayed trigger that fires repeatedly on a named player's spell casts and lasts through the end of that player's next turn (delayed nextSpell is the controller's, once, this turn)."
+  },
+  {
+   "name": "Overencumbered",
+   "needs": [
+    "trigger:attached-controller-step-begins",
+    "effect:pay-or-cant-attack-you"
+   ],
+   "why": "\"At the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat\" — no step trigger keyed to the enchanted player's turn, and no optional variable mana payment by that player gating an attack restriction."
+  },
+  {
+   "name": "Overseer of Vault 76",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "\"You may remove three quest counters from among permanents you control. When you do, …\" — no effect or may-cost removes N counters spread across chosen permanents."
+  },
+  {
+   "name": "Plasma Caster",
+   "needs": [
+    "effect:target-creature-blocking-attached"
+   ],
+   "why": "\"Choose target creature that's blocking equipped creature\" has no target spec or filter clause for a creature blocking the Equipment's host."
+  },
+  {
+   "name": "Portal Manipulator",
+   "needs": [
+    "effect:reselect-attack-target"
+   ],
+   "why": "No effect makes attacking creatures attack a different player (\"Those creatures are now attacking that player\"), and no trigger condition for entering during the declare attackers step."
+  },
+  {
+   "name": "Preston Garvey, Minuteman",
+   "needs": [
+    "effect:attach-extensions"
+   ],
+   "why": "'Create a green Aura enchantment token named Settlement attached to up to one target land you control': no Aura token exists and create-token can't make a token that enters attached to a target (and isn't created at all if it couldn't enchant it, the rulings)."
+  },
+  {
+   "name": "Resonance Technician",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "\"{T}, Tap X untapped artifacts you control: Copy target instant or sorcery spell you control with mana value X\" — tapOthers is a fixed count, not an X that the target's mana value must equal."
+  },
+  {
+   "name": "Rex, Cyber-Hound",
+   "needs": [
+    "static:activated-abilities-of-exiled-with-counter"
+   ],
+   "why": "\"Rex has all activated abilities of all cards in exile with brain counters on them\" — grantsActivatedOfLinkedExile reads only cards linked to this permanent, not every exiled card with a given counter (whoever exiled it, e.g. an earlier Rex); the brain-counter exile itself is expressible (exile-with-counters)."
+  },
+  {
+   "name": "Ruthless Radrat",
+   "needs": [
+    "keyword:squad-nonmana-cost"
+   ],
+   "why": "Squad—Exile four cards from your graveyard: the squad cost isn't mana, and kicker/squad only takes a mana cost."
+  },
+  {
+   "name": "Screeching Scorchbeast",
+   "needs": [
+    "trigger:mills-trigger"
+   ],
+   "why": "\"Whenever one or more nonland cards are milled, you may create that many …\" needs a trigger on a mill (once per mill instruction, across every player milling at once, counting the nonland cards); put-into-graveyard from a library would also fire on surveil."
+  },
+  {
+   "name": "Scuttling Sentinel",
+   "needs": [
+    "effect:set-color-effect"
+   ],
+   "why": "\"that creature becomes a blue Crab in addition to its other types\": no targeted until-end-of-turn colour-setting effect without setting P/T (animate always sets base P/T; add-types has no colours)."
+  },
+  {
+   "name": "Sentry Bot",
+   "needs": [
+    "cost:cost-reduction-creatures-attacking-you"
+   ],
+   "why": "\"This spell costs {1} less to cast for each creature attacking you\" — CostReductionAmount has no attacking-you count ({ attackingPlayer } is an EffectAmount only, and CardFilter has no attacking-you clause); the rest of the card is expressible."
+  },
+  {
+   "name": "Sludge Titan",
+   "needs": [
+    "effect:look-and-choose-one-per-type"
+   ],
+   "why": "\"You may put a creature card and/or a land card from among them into your hand\" is one choice moved at once; look-and-choose has no one-per-type set rule, and secondPick moves its card in a second event (a batched 'one or more cards leave your graveyard' trigger, e.g. Dredger's Insight, would fire twice)."
+  },
+  {
+   "name": "Strong, the Brutish Thespian",
+   "needs": [
+    "replacement:life-loss-from-radiation"
+   ],
+   "why": "\"You gain life rather than lose life from radiation\" — life lost from radiation (rule 728.1a) isn't distinguishable from other life loss, so it can't be replaced."
+  },
+  {
+   "name": "Struggle for Project Purity",
+   "needs": [
+    "trigger:opponent-attacks-you-player-only",
+    "trigger:attack-with-count-amount"
+   ],
+   "why": "Enclave's 'whenever a player attacks you with one or more creatures, that player gets twice that many rad counters': attack-with's attackingYou also counts attacks on your planeswalkers (rule 508.3e excludes them), and the trigger exposes no count of those attackers for 'twice that many'."
+  },
+  {
+   "name": "Suppressor Skyguard",
+   "needs": [
+    "replacement:prevent-combat-damage-to-you",
+    "condition:attacking-player-left-an-opponent-unattacked"
+   ],
+   "why": "Combat-damage prevention is turn-long and for all recipients only (no 'dealt to you this combat'), and no intervening-if asks whether the attacking player has another opponent who isn't being attacked."
+  },
+  {
+   "name": "Survivor's Med Kit",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "A modal activated ability ('choose one that hasn't been chosen') whose RadAway mode targets a player: modal activated abilities can't announce modes with their own targets on activation (rule 700.2b, AUTHORING §15)."
+  },
+  {
+   "name": "Synth Eradicator",
+   "needs": [
+    "zone:play-exiled-this-way-after-choice"
+   ],
+   "why": "\"Exile the top card. You may get {E}{E}. If you don't, you may play that card this turn\": the card is exiled before the choice, and no effect grants a play permission (lands included) to the card an earlier step exiled — impulse-exile exiles and grants at once, allow-cast-from-exile is cast-only."
+  },
+  {
+   "name": "Synth Infiltrator",
+   "needs": [
+    "keyword:improvise"
+   ],
+   "why": "Improvise isn't modeled (the copyOnEnter half with addTypes artifact / addSubtypes Synth would be expressible)."
+  },
+  {
+   "name": "T-45 Power Armor",
+   "needs": [
+    "effect:attached-effect-ref",
+    "static:doesnt-untap-attached"
+   ],
+   "why": "\"Untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it\" needs an effect target naming the Equipment's host, and \"doesn't untap during its controller's untap step\" on the equipped creature (doesntUntap reads only the static's own permanent)."
+  },
+  {
+   "name": "Tato Farmer",
+   "needs": [
+    "stat:milled-this-turn-mill-only"
+   ],
+   "why": "\"Target land card in a graveyard that was milled this turn\": the putIntoGraveyardFromLibraryThisTurn filter also matches surveilled and other library-to-graveyard cards, which the ruling says aren't legal targets."
+  },
+  {
+   "name": "The Master, Transcendent",
+   "needs": [
+    "stat:milled-this-turn-mill-only",
+    "effect:reanimate-as-animated-creature"
+   ],
+   "why": "\"Creature card in a graveyard that was milled this turn\" has only the wider from-library marker, and put-onto-battlefield can't make it \"a green Mutant with base power and toughness 3/3\" (losing its other colours and creature types)."
+  },
+  {
+   "name": "The Motherlode, Excavator",
+   "needs": [
+    "effect:restrict-rule-for-player"
+   ],
+   "why": "\"Creatures that player controls without flying can't block this turn\" (binding ones that arrive later, per its ruling) needs a turn-wide `restrict` rule scoped to the one defending player; a filter rule only reads controlledBy you/opponent, so in multiplayer it would bind every opponent."
+  },
+  {
+   "name": "The Nipton Lottery",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "\"Choose a creature at random\" on the battlefield — choose-random-card reads only a graveyard; no untargeted random pick of a permanent to then steal, untap and spare from the wrath."
+  },
+  {
+   "name": "The Wise Mothman",
+   "needs": [
+    "trigger:mills-trigger",
+    "decision:variable-target-count"
+   ],
+   "why": "'Whenever one or more nonland cards are milled' has no trigger (the cards-milled event exists but nothing triggers on it), and 'up to X target creatures' with X the nonland cards milled this way needs a target count from the trigger's value."
+  },
+  {
+   "name": "Three Dog, Galaxy News DJ",
+   "needs": [
+    "effect:aura-token-copies-attached"
+   ],
+   "why": "\"You may pay {2} and sacrifice an Aura attached to Three Dog. When you sacrifice an Aura this way, for each other attacking creature you control, create a token that's a copy of that Aura attached to that creature\" — no sacrifice-an-attached-Aura may-cost, and no token copy of a (sacrificed) Aura created attached to each of a set of creatures."
+  },
+  {
+   "name": "Thrill-Kill Disciple",
+   "needs": [
+    "keyword:squad-nonmana-cost"
+   ],
+   "why": "Squad—{1}, Discard a card: the squad cost includes a discard, and kicker/squad only takes a mana cost."
+  },
+  {
+   "name": "Vault 101: Birthday Party",
+   "needs": [
+    "decision:choose-from-zone-extensions",
+    "effect:attach-to-chosen-creature"
+   ],
+   "why": "Chapters II–III put an Aura or Equipment card from your hand or graveyard (one choice across two zones) onto the battlefield, then \"you may attach it to a creature you control\" — untargeted, chosen as it resolves; attach takes only a target slot, the trigger object or the source."
+  },
+  {
+   "name": "Vault 112: Sadistic Simulation",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "Chapter III's \"pay any amount of {E}. If you paid one or more {E} this way, shuffle your library, then exile that many cards … you may play one of those cards without paying its mana cost\" — no pay-any-amount energy choice with X = amount paid."
+  },
+  {
+   "name": "Vault 11: Voter's Dilemma",
+   "needs": [
+    "mechanic:voting",
+    "mechanic:secret-choice"
+   ],
+   "why": "Chapters II-III are a secret vote for up to one creature each (destroy the most-voted, or everyone draws if none got votes); the engine's vote is only an open vote between named options, never for objects and never secret."
+  },
+  {
+   "name": "Vault 13: Dweller's Journey",
+   "needs": [
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "Chapter III returns two chosen cards exiled with the Saga and puts the rest on the bottom of their owners' libraries; no effect chooses some of the source's linked exiled cards and sends the rest elsewhere."
+  },
+  {
+   "name": "Vault 21: House Gambit",
+   "needs": [
+    "effect:reveal-cards-from-hand"
+   ],
+   "why": "Chapter III's \"reveal up to five nonland cards from your hand. For each of those cards that has the same mana value as another card revealed this way, create a Treasure\" — no choose-and-reveal from hand with a count over the revealed set."
+  },
+  {
+   "name": "Vault 87: Forced Evolution",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "Chapter I's \"gain control of target non-Mutant creature for as long as you control this Saga\" — gain-control's whileSource ends only when the Saga leaves, not when its control changes."
+  },
+  {
+   "name": "Veronica, Dissident Scribe",
+   "needs": [
+    "trigger:discards-first-time-each-turn"
+   ],
+   "why": "\"Whenever you discard one or more nonland cards for the first time each turn\" needs a firstTimeEachTurn on the discards trigger (oncePerTurn would wrongly fire after an earlier nonland discard that turn, e.g. one before Veronica entered)."
+  },
+  {
+   "name": "Young Deathclaws",
+   "needs": [
+    "keyword:scavenge"
+   ],
+   "why": "\"Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost\" — scavenge isn't modeled, and grantsToGraveyard grants only flashback and escape."
+  }
+ ]
+}

@@ -34,6 +34,7 @@ import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
+import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
 import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
@@ -110,6 +111,7 @@ import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
+import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
@@ -444,6 +446,7 @@ const shard: CardShard = {
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBloodtracker,
+    _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,
     _poolBrallinSkysharkRider,
@@ -520,6 +523,7 @@ const shard: CardShard = {
     _poolFootlightFiend,
     _poolForumOfAmity,
     _poolFranklinRichardsAscendant,
+    _poolGaryClone,
     _poolGhoulcallersAccomplice,
     _poolGiftOfStrands,
     _poolGlareOfSubdual,

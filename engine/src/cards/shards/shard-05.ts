@@ -97,6 +97,7 @@ import _poolContagiousNim from "../pool/contagious-nim.js";
 import _poolContentiousPlan from "../pool/contentious-plan.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
+import _poolCrimestopperSprite from "../pool/crimestopper-sprite.js";
 import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
@@ -310,6 +311,7 @@ import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSeekerOfSkybreak from "../pool/seeker-of-skybreak.js";
 import _poolSeismicMonstrosaur from "../pool/seismic-monstrosaur.js";
 import _poolSelesnyaEvangel from "../pool/selesnya-evangel.js";
+import _poolSentinelSarahLyons from "../pool/sentinel-sarah-lyons.js";
 import _poolSerpentAssassin from "../pool/serpent-assassin.js";
 import _poolSerraAdvocate from "../pool/serra-advocate.js";
 import _poolSerraAngel from "../pool/serra-angel.js";
@@ -531,6 +533,7 @@ const shard: CardShard = {
     _poolContentiousPlan,
     _poolCorpsejackMenace,
     _poolCorsairsOfUmbar,
+    _poolCrimestopperSprite,
     _poolCryptCreeper,
     _poolCryptbreaker,
     _poolCustodianOfTheTrove,
@@ -744,6 +747,7 @@ const shard: CardShard = {
     _poolSeekerOfSkybreak,
     _poolSeismicMonstrosaur,
     _poolSelesnyaEvangel,
+    _poolSentinelSarahLyons,
     _poolSerpentAssassin,
     _poolSerraAdvocate,
     _poolSerraAngel,

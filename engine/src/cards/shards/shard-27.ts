@@ -24,6 +24,7 @@ import _poolArtisticProcess from "../pool/artistic-process.js";
 import _poolAsphodelWanderer from "../pool/asphodel-wanderer.js";
 import _poolAssaultGriffin from "../pool/assault-griffin.js";
 import _poolAstrologiansPlanisphere from "../pool/astrologians-planisphere.js";
+import _poolAutomatedAssemblyLine from "../pool/automated-assembly-line.js";
 import _poolAvatarRoku from "../pool/avatar-roku.js";
 import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
 import _poolBakersbaneDuo from "../pool/bakersbane-duo.js";
@@ -102,6 +103,7 @@ import _poolEbonStronghold from "../pool/ebon-stronghold.js";
 import _poolEchoingAssault from "../pool/echoing-assault.js";
 import _poolEcologistsTerrarium from "../pool/ecologists-terrarium.js";
 import _poolEdwardKenway from "../pool/edward-kenway.js";
+import _poolElderOwynLyons from "../pool/elder-owyn-lyons.js";
 import _poolEldraziDisplacer from "../pool/eldrazi-displacer.js";
 import _poolElementalBond from "../pool/elemental-bond.js";
 import _poolElusiveKrasis from "../pool/elusive-krasis.js";
@@ -330,6 +332,7 @@ import _poolSpiritedCompanion from "../pool/spirited-companion.js";
 import _poolSporocyst from "../pool/sporocyst.js";
 import _poolSpurredWolverine from "../pool/spurred-wolverine.js";
 import _poolStalkerHag from "../pool/stalker-hag.js";
+import _poolStampedeSurfer from "../pool/stampede-surfer.js";
 import _poolStaunchShieldmate from "../pool/staunch-shieldmate.js";
 import _poolSteadfastGuard from "../pool/steadfast-guard.js";
 import _poolSteelLeafChampion from "../pool/steel-leaf-champion.js";
@@ -430,6 +433,7 @@ import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
+import _tokensZombieMutantToken from "../tokens/zombie-mutant-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -454,6 +458,7 @@ const shard: CardShard = {
     _poolAsphodelWanderer,
     _poolAssaultGriffin,
     _poolAstrologiansPlanisphere,
+    _poolAutomatedAssemblyLine,
     _poolAvatarRoku,
     _poolBahamutWardenOfLight,
     _poolBakersbaneDuo,
@@ -532,6 +537,7 @@ const shard: CardShard = {
     _poolEchoingAssault,
     _poolEcologistsTerrarium,
     _poolEdwardKenway,
+    _poolElderOwynLyons,
     _poolEldraziDisplacer,
     _poolElementalBond,
     _poolElusiveKrasis,
@@ -760,6 +766,7 @@ const shard: CardShard = {
     _poolSporocyst,
     _poolSpurredWolverine,
     _poolStalkerHag,
+    _poolStampedeSurfer,
     _poolStaunchShieldmate,
     _poolSteadfastGuard,
     _poolSteelLeafChampion,
@@ -862,6 +869,7 @@ const shard: CardShard = {
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
     _tokensVarmintToken,
+    _tokensZombieMutantToken,
   ],
 };
 

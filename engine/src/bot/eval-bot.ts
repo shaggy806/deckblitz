@@ -434,7 +434,9 @@ function bestDecision(
           me,
           (ids) => byManaValue(view.state, cards, ids, me),
           (id) => view.state.objects[id]?.controller,
-          (player) => view.state.players[player]?.counters.poison ?? 0,
+          // Poison and rad counters are both bad to have (rad mills and
+          // drains its player, rule 728.1): proliferate them only onto opponents.
+          (player) => (view.state.players[player]?.counters.poison ?? 0) + (view.state.players[player]?.counters.rad ?? 0),
         );
   if (candidates === null || candidates.length === 0) return inherited;
 

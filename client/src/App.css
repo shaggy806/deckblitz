@@ -432,6 +432,10 @@
   font-size: var(--text-sm);
   color: #9fb8e6;
 }
+.pp-rad {
+  font-size: var(--text-sm);
+  color: #e0d24a;
+}
 /* Speed (rule 702.179), beside the counters; brighter at max speed, which is
    what the cards ask about. */
 .pp-speed {
@@ -2858,6 +2862,9 @@
 }
 .card-flag.saddled {
   background: #d9a86c;
+}
+.card-flag.solved {
+  background: #8fd0b0;
 }
 .card-flag.holding {
   background: #9fc3e8;

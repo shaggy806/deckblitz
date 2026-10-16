@@ -4743,3 +4743,34 @@ Bob targeting Carol
 - **Check:** Bolting yourself leaves the Vault-Buster 1/4; Bolting Carol's Bears makes it 3/4 for the rest of
   the turn (back to 1/4 on Bob's turn). Your own crime doesn't trigger the Peacemaker; Bob's Bolt at Carol
   does — the Peacemaker proliferates to a third counter. Check at ~768px tall and at full size.
+
+## Rad counters, squad, collect evidence and Cases (2026-10-16)
+
+### Powder Ganger, Contaminated Drink
+
+*New player decisions* — squad's cast offers (one per number of payments the mana covers), and rad
+counters (rule 728): the panel count and the precombat-main mill
+
+- **Setup:** Your precombat main. Your battlefield: seven Mountains, two Islands and two Swamps; in hand
+  Powder Ganger and Contaminated Drink. Bob has a Mind Stone.
+- **Do:** Cast Powder Ganger paying squad twice ({2}{R} + {2} + {2}) and destroy Bob's Mind Stone with one
+  of the enters triggers. Then cast Contaminated Drink with X = 3 and pass to your next turn.
+- **Check:** The cast menu offers Powder Ganger plain, squad ×1 and squad ×2, labelled as squad, and two
+  token copies arrive, each with its own enters trigger. After the Drink you have ☢ 2 on your panel; at
+  your next precombat main the Rad Counters trigger mills two, and for each nonland card milled you lose
+  1 life and a rad counter (the log says so). Check at ~768px tall, in a 2- and a 4-player room.
+
+### Crimestopper Sprite, Surveillance Monitor, Case of the Crimson Pulse
+
+*New player decisions* — collect evidence (rule 701.59): a graveyard choice whose cards must total a
+mana value, as a spell's additional cost and as a "you may" effect; and a Case's solved designation
+
+- **Setup:** Your precombat main. Your battlefield: eight Islands and Case of the Crimson Pulse; in hand
+  Crimestopper Sprite and Surveillance Monitor; graveyard Hill Giant, Grizzly Bears and Grizzly Bears.
+  Bob has Grizzly Bears.
+- **Do:** Cast Crimestopper Sprite collecting evidence, tapping Bob's Bears; then cast Surveillance
+  Monitor and decline its collect evidence. Play out your hand before your end step.
+- **Check:** The Sprite's collecting cast is offered only while your graveyard totals 6; the choice
+  enables Confirm only once the picks total 6 or more, and the Bears gets a stun counter. Declining the
+  Monitor's collect evidence makes no Thopter; collecting would. With no cards in hand at your end step
+  the Case shows a **solved** chip, and its upkeep trigger works from then on. Check at ~768px tall.

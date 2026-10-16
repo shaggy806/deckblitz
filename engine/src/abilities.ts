@@ -296,6 +296,15 @@ export interface AbilityCost {
    */
   readonly blight?: number;
   /**
+   * "Collect evidence N" (rule 701.59a — Forensic Researcher's "{T}, Collect
+   * evidence 3: …"): exile any number of cards from your graveyard with
+   * total mana value N or more, chosen as the cost is paid, once the ability
+   * is on the stack (the `choose-from-zone` decision). Activatable only while
+   * your graveyard holds that much (701.59b). Not on a mana ability, nor
+   * beside another cost that asks a question.
+   */
+  readonly collectEvidence?: number;
+  /**
    * The cost's mana is a **waterbend** cost (rule 701.67a — Geyser Leaper's
    * "Waterbend {4}: Draw a card, then discard a card", Katara, Water Tribe's
    * Hope's "Waterbend {X}: …"): `mana` holds the `{N}` (or `{X}`), and for
@@ -1523,6 +1532,13 @@ export type TriggerSpec =
        * `oncePerTurn`. */
       readonly on: "crime-committed";
       readonly who: "you" | "opponent";
+    }
+  | {
+      /** "Whenever you collect evidence" (rule 701.59 — Evidence Examiner,
+       * Surveillance Monitor): the ability's controller collected evidence,
+       * as a cost or an effect. */
+      readonly on: "evidence-collected";
+      readonly who: "you";
     }
   | {
       /** "When this card becomes plotted" (rule 702.170) — it triggers from

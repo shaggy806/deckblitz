@@ -291,6 +291,7 @@ import _poolReyaDawnbringer from "../pool/reya-dawnbringer.js";
 import _poolRidgelineRager from "../pool/ridgeline-rager.js";
 import _poolRimrockKnight from "../pool/rimrock-knight.js";
 import _poolRitualOfRestoration from "../pool/ritual-of-restoration.js";
+import _poolRobobrainWarMind from "../pool/robobrain-war-mind.js";
 import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
@@ -316,6 +317,7 @@ import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
 import _poolShireScarecrow from "../pool/shire-scarecrow.js";
 import _poolShivanHarvest from "../pool/shivan-harvest.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
+import _poolSicarianInfiltrator from "../pool/sicarian-infiltrator.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
 import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
@@ -712,6 +714,7 @@ const shard: CardShard = {
     _poolRidgelineRager,
     _poolRimrockKnight,
     _poolRitualOfRestoration,
+    _poolRobobrainWarMind,
     _poolRockBadger,
     _poolRollingTemblor,
     _poolRubblebeltMaaka,
@@ -737,6 +740,7 @@ const shard: CardShard = {
     _poolShireScarecrow,
     _poolShivanHarvest,
     _poolShurisFabricator,
+    _poolSicarianInfiltrator,
     _poolSilasRennSeekerAdept,
     _poolSilentClearing,
     _poolSilentHallcreeper,

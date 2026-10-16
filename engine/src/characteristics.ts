@@ -920,6 +920,8 @@ function evalStaticCondition(
         (condition.exactly === undefined || level === condition.exactly)
       );
     }
+    case "solved":
+      return source.zone === "battlefield" && source.solved === true;
     case "self-counters": {
       // Last-known information once the source has left the battlefield
       // (603.10) — `moveObject` clears `counters`, so a dies-trigger asking

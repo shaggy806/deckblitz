@@ -261,6 +261,7 @@ import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
 import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
+import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
@@ -700,6 +701,7 @@ const shard: CardShard = {
     _poolOrzhovCluestone,
     _poolOverflowingInsight,
     _poolOwlinSpiralmancer,
+    _poolPaladinElizabethTaggerdy,
     _poolPersonalTutor,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,

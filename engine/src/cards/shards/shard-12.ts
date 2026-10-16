@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbaddonTheDespoiler from "../pool/abaddon-the-despoiler.js";
 import _poolAbandonedAirTemple from "../pool/abandoned-air-temple.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
+import _poolAcquiredMutation from "../pool/acquired-mutation.js";
 import _poolAethershieldArtificer from "../pool/aethershield-artificer.js";
 import _poolAgent13SharonCarter from "../pool/agent-13-sharon-carter.js";
 import _poolAgentFrankHorrigan from "../pool/agent-frank-horrigan.js";
@@ -18,6 +19,7 @@ import _poolAnointedChorister from "../pool/anointed-chorister.js";
 import _poolAppliedBiomancy from "../pool/applied-biomancy.js";
 import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
+import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
@@ -439,6 +441,7 @@ const shard: CardShard = {
     _poolAbaddonTheDespoiler,
     _poolAbandonedAirTemple,
     _poolAcademyRaider,
+    _poolAcquiredMutation,
     _poolAethershieldArtificer,
     _poolAgent13SharonCarter,
     _poolAgentFrankHorrigan,
@@ -451,6 +454,7 @@ const shard: CardShard = {
     _poolAppliedBiomancy,
     _poolArchonOfJustice,
     _poolArgivianRestoration,
+    _poolArmoryPaladin,
     _poolArtifistAcumen,
     _poolAspectOfLamprey,
     _poolAthreosGodOfPassage,

@@ -99,6 +99,7 @@ export function PlayerPanel({
   const mana = manaString(info.manaPool)
   const poison = info.counters.poison ?? 0
   const experience = info.counters.experience ?? 0
+  const rad = info.counters.rad ?? 0
   const classes = [
     'player-panel',
     seatClass,
@@ -142,7 +143,7 @@ export function PlayerPanel({
         {/* Every counter the player has, beside the name — poison, energy,
             experience — rather than on a row of its own: they're read with
             the player, and a quadrant has no height to spare. */}
-        {poison > 0 || info.energy > 0 || experience > 0 ? (
+        {poison > 0 || info.energy > 0 || experience > 0 || rad > 0 ? (
           <span className="pp-counters">
             {poison > 0 ? (
               <span className="pp-poison" title="Poison counters (ten lose the game — rule 704.5c)">
@@ -157,6 +158,14 @@ export function PlayerPanel({
             {experience > 0 ? (
               <span className="pp-experience" title="Experience counters (rule 122.1)">
                 ✦ {experience} exp
+              </span>
+            ) : null}
+            {rad > 0 ? (
+              <span
+                className="pp-rad"
+                title="Rad counters (rule 728): at the start of their precombat main phase they mill that many, then lose 1 life and a rad counter for each nonland card milled"
+              >
+                ☢ {rad}
               </span>
             ) : null}
           </span>

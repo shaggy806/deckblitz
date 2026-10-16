@@ -384,6 +384,7 @@ import _poolTyphoidRats from "../pool/typhoid-rats.js";
 import _poolUlamogsCrusher from "../pool/ulamogs-crusher.js";
 import _poolUlcerate from "../pool/ulcerate.js";
 import _poolUndeadLeotau from "../pool/undead-leotau.js";
+import _poolUndercoverButler from "../pool/undercover-butler.js";
 import _poolUnholyAnnex from "../pool/unholy-annex.js";
 import _poolUnnervingGrasp from "../pool/unnerving-grasp.js";
 import _poolUnquestionedAuthority from "../pool/unquestioned-authority.js";
@@ -837,6 +838,7 @@ const shard: CardShard = {
     _poolUlamogsCrusher,
     _poolUlcerate,
     _poolUndeadLeotau,
+    _poolUndercoverButler,
     _poolUnholyAnnex,
     _poolUnnervingGrasp,
     _poolUnquestionedAuthority,

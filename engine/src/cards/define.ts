@@ -1019,6 +1019,9 @@ export type StaticCondition =
    * a dies-trigger is checked after the permanent is already in a graveyard,
    * and `moveObject` clears counters on every zone change.
    */
+  /** "Solved —" (rules 702.169, 719.3c): the source has the solved
+   * designation — a Case's abilities that work only once it's solved. */
+  | { readonly kind: "solved" }
   | {
       readonly kind: "self-counters";
       readonly counter?: string;
@@ -2215,8 +2218,13 @@ export interface CardDefinition {
      * its total cost's generic may be paid by tapping untapped artifacts and
      * creatures (701.67b; the `cast-spell` action's `waterbend`). "If this
      * spell's additional cost was paid" is the spell being kicked.
+     *
+     * `"squad"` (rule 702.157a) is "as an additional cost to cast this
+     * spell, you may pay [cost] any number of times": with `multi: true`,
+     * multikicker under another name; its enters trigger is the
+     * `squadTrigger` helper's.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence";
     /**
      * With `keyword: "behold"` and `cost: ""`: "As an additional cost to
      * cast this spell, you may behold a Dragon" (rule 701.4a — Dispelling
@@ -2246,6 +2254,17 @@ export interface CardDefinition {
      * what changes, and `self-kicked` asks it on a permanent.
      */
     readonly blight?: number;
+    /**
+     * With `keyword: "collect-evidence"` and `cost: ""`: "As an additional
+     * cost to cast this spell, you may collect evidence N" (rule 701.59a —
+     * Crimestopper Sprite). The kicked variant collects, offered only while
+     * the caster's graveyard holds that much mana value (701.59b); which
+     * cards, chosen as the cost is paid once the spell is on the stack (the
+     * `choose-from-zone` decision). "If evidence was collected" (701.59c) is
+     * the spell being kicked: `targets` / `effect` say what changes, and
+     * `self-kicked` asks it on a permanent.
+     */
+    readonly collectEvidence?: number;
     /**
      * Teamwork N (rule 702.194a): "as an additional cost to cast this spell,
      * you may tap any number of creatures you control with total power N or
@@ -2947,10 +2966,11 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence";
     readonly behold?: BeholdSpec;
     readonly flash?: boolean;
     readonly blight?: number;
+    readonly collectEvidence?: number;
     readonly teamwork?: number;
     readonly multi?: boolean;
   };

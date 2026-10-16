@@ -121,6 +121,7 @@ import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
 import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
+import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
 import _poolEntropicCloud from "../pool/entropic-cloud.js";
 import _poolEssenceDepleter from "../pool/essence-depleter.js";
@@ -179,6 +180,7 @@ import _poolHoodedHydra from "../pool/hooded-hydra.js";
 import _poolHopeEstheim from "../pool/hope-estheim.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
+import _poolIanTheReckless from "../pool/ian-the-reckless.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
@@ -359,6 +361,7 @@ import _poolSusurianDirgecraft from "../pool/susurian-dirgecraft.js";
 import _poolSwarmIntelligence from "../pool/swarm-intelligence.js";
 import _poolSwirlingTorrent from "../pool/swirling-torrent.js";
 import _poolSwordOfTruthAndJustice from "../pool/sword-of-truth-and-justice.js";
+import _poolSyndicateHeavy from "../pool/syndicate-heavy.js";
 import _poolSyphonFlesh from "../pool/syphon-flesh.js";
 import _poolSyrVondamSunstarExemplar from "../pool/syr-vondam-sunstar-exemplar.js";
 import _poolTaintedRemedy from "../pool/tainted-remedy.js";
@@ -568,6 +571,7 @@ const shard: CardShard = {
     _poolElektraFemmeFatale,
     _poolElementalistAdept,
     _poolElvenkingsHarper,
+    _poolEndlessFootAssault,
     _poolEnragedFlamecaster,
     _poolEntropicCloud,
     _poolEssenceDepleter,
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolHopeEstheim,
     _poolHullbreakerHorror,
     _poolHuntedWitness,
+    _poolIanTheReckless,
     _poolIdolOfOblivion,
     _poolImperialCosmographer,
     _poolIndathaCrystal,
@@ -806,6 +811,7 @@ const shard: CardShard = {
     _poolSwarmIntelligence,
     _poolSwirlingTorrent,
     _poolSwordOfTruthAndJustice,
+    _poolSyndicateHeavy,
     _poolSyphonFlesh,
     _poolSyrVondamSunstarExemplar,
     _poolTaintedRemedy,

@@ -935,7 +935,7 @@ export type LegalAction =
        * `kickerCost` its N), `"behold"` (701.4a: the variant that beholds,
        * with `kickerCost` what — "a Dragon"), `"waterbend"` (701.67a: the
        * variant that waterbends, with `kickerCost` its `{N}`). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend";
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence";
       /** A variant that pays a granted offspring cost as well (Zinnia) —
        * echoed back as the action's `offspring`; `offspringCost` for
        * labelling. */

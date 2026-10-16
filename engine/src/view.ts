@@ -274,6 +274,8 @@ export interface VisibleObject {
   /** Saddled until end of turn (rule 702.171b) — a designation, which
    * "attacks while saddled" abilities read. */
   readonly saddled: boolean;
+  /** A Case with the solved designation (rule 719.3b). Absent when not. */
+  readonly solved?: true;
   /** Its controller's Ring-bearer (rule 701.54) — a designation; the Ring
    * emblem says what that gives it. */
   readonly ringBearer: boolean;
@@ -600,6 +602,7 @@ function visible(
     goadedBy: [...goadersOf(state, registry, id)],
     suspected: zone === "battlefield" && object.suspectedAt !== undefined,
     saddled: zone === "battlefield" && object.saddled === true,
+    ...(zone === "battlefield" && object.solved === true ? { solved: true as const } : {}),
     ringBearer: hasRingBearerDesignation(object),
     ...(zone === "battlefield" && object.prepared !== undefined ? { preparedSpell: object.prepared.copy } : {}),
     ...(object.zone === "exile" && object.preparedFor !== undefined ? { preparedBy: object.preparedFor.permanent } : {}),

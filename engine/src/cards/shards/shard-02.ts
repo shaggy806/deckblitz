@@ -147,6 +147,7 @@ import _poolFrilledMystic from "../pool/frilled-mystic.js";
 import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
+import _poolFuriousSpinesplitter from "../pool/furious-spinesplitter.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
@@ -210,6 +211,7 @@ import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
+import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
 import _poolLorienRevealed from "../pool/lorien-revealed.js";
 import _poolLostInALabyrinth from "../pool/lost-in-a-labyrinth.js";
 import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
@@ -566,6 +568,7 @@ const shard: CardShard = {
     _poolFrogmite,
     _poolFrontlineRebel,
     _poolFungalFortitude,
+    _poolFuriousSpinesplitter,
     _poolGalinasKnight,
     _poolGallantCitizen,
     _poolGarruksUprising,
@@ -629,6 +632,7 @@ const shard: CardShard = {
     _poolLifespringDruid,
     _poolLilianasCaress,
     _poolLokiTheDeceiver,
+    _poolLonisGeneticsExpert,
     _poolLorienRevealed,
     _poolLostInALabyrinth,
     _poolLostInTheMist,

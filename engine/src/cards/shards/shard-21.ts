@@ -98,6 +98,7 @@ import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
 import _poolEmeritusOfAbundance from "../pool/emeritus-of-abundance.js";
+import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
@@ -151,6 +152,7 @@ import _poolHellkitePunisher from "../pool/hellkite-punisher.js";
 import _poolHellspurPosseBoss from "../pool/hellspur-posse-boss.js";
 import _poolHelmOfTheHost from "../pool/helm-of-the-host.js";
 import _poolHengegatePathway from "../pool/hengegate-pathway.js";
+import _poolHeraldOfIlharg from "../pool/herald-of-ilharg.js";
 import _poolHighPriestOfPenance from "../pool/high-priest-of-penance.js";
 import _poolHighlandForest from "../pool/highland-forest.js";
 import _poolHillcomberGiant from "../pool/hillcomber-giant.js";
@@ -364,6 +366,7 @@ import _poolVaporkin from "../pool/vaporkin.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
+import _poolVernalSovereign from "../pool/vernal-sovereign.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
 import _poolVexingBauble from "../pool/vexing-bauble.js";
@@ -490,6 +493,7 @@ const shard: CardShard = {
     _poolElvenFarsight,
     _poolElvishDoomsayer,
     _poolEmeritusOfAbundance,
+    _poolEmissaryGreen,
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolErase,
@@ -543,6 +547,7 @@ const shard: CardShard = {
     _poolHellspurPosseBoss,
     _poolHelmOfTheHost,
     _poolHengegatePathway,
+    _poolHeraldOfIlharg,
     _poolHighPriestOfPenance,
     _poolHighlandForest,
     _poolHillcomberGiant,
@@ -756,6 +761,7 @@ const shard: CardShard = {
     _poolVedalkenBlademaster,
     _poolVengefulRegrowth,
     _poolVensersJournal,
+    _poolVernalSovereign,
     _poolVesperGhoul,
     _poolVesselOfEphemera,
     _poolVexingBauble,

@@ -470,6 +470,20 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** A Case became solved (rule 719.3a). */
+      readonly type: "case-solved";
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** `player` collected evidence (rule 701.59a): exiled `objects` from
+       * their graveyard, total mana value `amount` or more, as a cost or an
+       * effect. */
+      readonly type: "evidence-collected";
+      readonly player: PlayerId;
+      readonly objects: readonly ObjectId[];
+      readonly amount: number;
+    })
+  | (Base & {
       /** `player` committed a crime (rule 700.13): they cast a spell,
        * activated an ability or put a triggered ability on the stack — `object`
        * — targeting at least one opponent, something an opponent controls, or

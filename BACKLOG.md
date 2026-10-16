@@ -77,19 +77,24 @@ section keeps only what to do next.
   `docs/card-blockers.md`, "Open leads"). The recheck list of cards whose recorded needs have
   all been built is `cards:needs -- --stale` (High Score, Winding Constrictor, Pir, Solid
   Ground and Doc Samson after the additive counters each need more).
+- **Two pool cards to recheck** (found by batch 90's agents): Archfiend of Depravity keeps
+  exactly two creatures per opponent (`sacrifice-all-but`), where "up to two" lets a player keep
+  fewer; Adeline, Resplendent Cathar makes her per-opponent Humans one at a time rather than as one
+  event, which a "one or more tokens enter" trigger would see as several.
 - **Cards banned in Commander for power: 16 left, each blocked** (`B52.json`). Balance, Channel,
   Emrakul, the Aeons Torn, Erayo, Fastbond, Flash, Hullbreacher, Iona, Leovold, Limited
   Resources, Nadu, Sundering Titan, Sylvan Primordial, Time Vault, Trade Secrets and Yawgmoth's
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to Outlaws of Thunder Junction is whole
-  (batch 89 finished The Big Score, Outlaws of Thunder Junction and its Commander set, building
-  plot and crimes); **next, Fallout** (PIP, 77 left), then Ravnica: Clue Edition and Murders at
-  Karlov Manor with its Commander set (CLU, MKM, MKC, about 255) (`npm run cards:sets -w engine --
-  --sets 45`). MH3's leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`) and
-  bestow, five cards each; OTJ's are two cards each (a spell's own conditional flash, cost changes
-  by the zone a spell is cast from). Leading blockers now:
+  ranked ones first. Every set from Reality Fracture back to Ravnica: Clue Edition is whole
+  (batch 89 built plot and crimes for Outlaws of Thunder Junction; batch 90 rad counters and squad
+  for Fallout); **next, Murders at Karlov Manor and its Commander set** (MKM, MKC, 223 — batch 91,
+  with collect evidence and Cases built), then The Lost Caverns of Ixalan (`npm run cards:sets -w
+  engine -- --sets 45`). MH3's leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`)
+  and bestow, five cards each; Fallout's a "whenever one or more nonland cards are milled" trigger
+  (`trigger:mills-trigger` 3, its per-card form 2 — the engine already emits `cards-milled`) and
+  naming the equipped or enchanted creature (`effect:attached-effect-ref` 3). Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
@@ -124,6 +129,8 @@ there and move this line to `COMPLETED.md`.
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
+- **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
+- **`canDispatch` passes an activation whose chosen target is illegal** while some legal one exists; `dispatch` refuses it (casts were fixed 2026-10-16).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).

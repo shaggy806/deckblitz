@@ -76,6 +76,7 @@ import _poolCollectiveBlessing from "../pool/collective-blessing.js";
 import _poolColossalGraveReaver from "../pool/colossal-grave-reaver.js";
 import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
+import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
 import _poolCosmiumBlast from "../pool/cosmium-blast.js";
@@ -133,6 +134,7 @@ import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
+import _poolFeralGhoul from "../pool/feral-ghoul.js";
 import _poolFeralKrushok from "../pool/feral-krushok.js";
 import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
@@ -142,6 +144,7 @@ import _poolFleetingReflection from "../pool/fleeting-reflection.js";
 import _poolFloodfarmVerge from "../pool/floodfarm-verge.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceVoid from "../pool/force-void.js";
+import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
@@ -271,6 +274,7 @@ import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
+import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNobody from "../pool/nobody.js";
@@ -393,6 +397,7 @@ import _poolUnfulfilledDesires from "../pool/unfulfilled-desires.js";
 import _poolUniversityCampus from "../pool/university-campus.js";
 import _poolValleyFlamecaller from "../pool/valley-flamecaller.js";
 import _poolVaporSnag from "../pool/vapor-snag.js";
+import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVermiculos from "../pool/vermiculos.js";
@@ -514,6 +519,7 @@ const shard: CardShard = {
     _poolColossalGraveReaver,
     _poolConclaveNaturalists,
     _poolConduitPylons,
+    _poolContaminatedDrink,
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
     _poolCosmiumBlast,
@@ -571,6 +577,7 @@ const shard: CardShard = {
     _poolFangOfShigeki,
     _poolFearsomeGoblinPair,
     _poolFencingAce,
+    _poolFeralGhoul,
     _poolFeralKrushok,
     _poolFireMagic,
     _poolFirefly,
@@ -580,6 +587,7 @@ const shard: CardShard = {
     _poolFloodfarmVerge,
     _poolFogwellsGym,
     _poolForceVoid,
+    _poolForensicResearcher,
     _poolFortuitousFind,
     _poolFreestriderCommando,
     _poolFrenziedRaptor,
@@ -709,6 +717,7 @@ const shard: CardShard = {
     _poolMyrMoonvessel,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,
+    _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
     _poolNobody,
@@ -831,6 +840,7 @@ const shard: CardShard = {
     _poolUniversityCampus,
     _poolValleyFlamecaller,
     _poolVaporSnag,
+    _poolVault75MiddleSchool,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
     _poolVermiculos,

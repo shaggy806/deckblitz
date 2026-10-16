@@ -342,6 +342,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-spell-as-it-resolves": none,
   // A plotted card is its owner's to cast free: always one's own card.
   "become-plotted": (n, v) => v.touch(n.target, "help", MINOR),
+  // Its `then` names the exiled cards, never a target.
+  "collect-evidence": none,
+  solve: none,
   "additional-combat": none,
   "additional-upkeep-steps": none,
   "additional-land-drop": none,
@@ -396,8 +399,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Slot 0 is the creature chosen, not the enclosing ability's target.
   "become-ring-bearer": none,
   "ring-tempted": none,
+  // Poison and rad counters hurt their player (rad mills and drains, rule
+  // 728.1); experience helps.
   "add-player-counters": (n, v) =>
-    n.counter === "poison" ? v.touch(n.target, "harm", MAJOR) : v.touch(n.target, "help", MINOR),
+    n.counter === "poison" || n.counter === "rad"
+      ? v.touch(n.target, "harm", MAJOR)
+      : v.touch(n.target, "help", MINOR),
+  "remove-player-counters": (n, v) =>
+    n.counter === "experience" ? v.touch(n.target, "harm", MINOR) : v.touch(n.target, "help", MINOR),
   "get-energy": none,
   "create-emblem": none,
   "prevent-all-combat-damage": none,

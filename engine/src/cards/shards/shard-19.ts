@@ -42,6 +42,7 @@ import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
+import _poolBoomerScrapper from "../pool/boomer-scrapper.js";
 import _poolBorderlandMarauder from "../pool/borderland-marauder.js";
 import _poolBotanicalSanctum from "../pool/botanical-sanctum.js";
 import _poolBrigidsCommand from "../pool/brigids-command.js";
@@ -49,6 +50,7 @@ import _poolBrigoneSoldierOfMeletis from "../pool/brigone-soldier-of-meletis.js"
 import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
 import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
 import _poolBuoyancy from "../pool/buoyancy.js";
+import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
@@ -510,6 +512,7 @@ const shard: CardShard = {
     _poolBogNaughty,
     _poolBoldwyrAggressor,
     _poolBoneyardDesecrator,
+    _poolBoomerScrapper,
     _poolBorderlandMarauder,
     _poolBotanicalSanctum,
     _poolBrigidsCommand,
@@ -517,6 +520,7 @@ const shard: CardShard = {
     _poolBrimstoneDragon,
     _poolBroodmateDragon,
     _poolBuoyancy,
+    _poolButchDeloriaTunnelSnake,
     _poolCaelornaCoralTyrant,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,

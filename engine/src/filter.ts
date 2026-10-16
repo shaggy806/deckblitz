@@ -792,7 +792,7 @@ export function coloredManaSymbolsIn(cost: ManaCost): number {
  * it (rule 202.3e) — a Fireball cast for 5 is a mana value 6 spell.
  * Everywhere else it's 0, unless the card is being judged as the spell it
  * would be with X announced as `castX` (`FilterContext.castX`). */
-function manaValueOfObject(registry: CardRegistry, object: GameObject, castX?: number): number {
+export function manaValueOfObject(registry: CardRegistry, object: GameObject, castX?: number): number {
   const cost = parseManaCost(printedManaCost(registry, object));
   const x = object.zone === "stack" ? (object.xValue ?? 0) : (castX ?? 0);
   return manaValue(cost) + cost.x * Math.max(0, x);

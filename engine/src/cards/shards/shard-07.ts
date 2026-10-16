@@ -56,6 +56,7 @@ import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolConstrictingTendrils from "../pool/constricting-tendrils.js";
 import _poolContrabandLivestock from "../pool/contraband-livestock.js";
+import _poolCorporealProjection from "../pool/corporeal-projection.js";
 import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
@@ -189,6 +190,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLastWord from "../pool/last-word.js";
+import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
@@ -394,6 +396,7 @@ import _poolVampiresKiss from "../pool/vampires-kiss.js";
 import _poolVenomousHierophant from "../pool/venomous-hierophant.js";
 import _poolVenomsHunger from "../pool/venoms-hunger.js";
 import _poolVenomsacLagac from "../pool/venomsac-lagac.js";
+import _poolVexingRadgull from "../pool/vexing-radgull.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
@@ -511,6 +514,7 @@ const shard: CardShard = {
     _poolColossapede,
     _poolConstrictingTendrils,
     _poolContrabandLivestock,
+    _poolCorporealProjection,
     _poolCourtOfVantress,
     _poolCrazedSkirge,
     _poolCreosoteHeath,
@@ -644,6 +648,7 @@ const shard: CardShard = {
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
     _poolLastWord,
+    _poolLaviniaFoilToConspiracy,
     _poolLightningVisionary,
     _poolLightningWolf,
     _poolLilianaTheRepentant,
@@ -849,6 +854,7 @@ const shard: CardShard = {
     _poolVenomousHierophant,
     _poolVenomsHunger,
     _poolVenomsacLagac,
+    _poolVexingRadgull,
     _poolVigilantBaloth,
     _poolVindictiveTriumph,
     _poolViviOrnitier,

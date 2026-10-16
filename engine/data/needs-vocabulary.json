@@ -6690,6 +6690,146 @@
   "static:pt-per-cards-in-hand": {
    "family": "static:pt-per-amount",
    "example": "grantPtPerCount counting the cards in a player's hand — Stingerback Terror's \"gets -1/-1 for each card in your hand\" (layer 7c, not a base P/T characteristic-defining ability)."
+  },
+  "effect:reflexive-refers-to-parent-target": {
+   "family": "effect:reflexive-trigger",
+   "example": "A reflexive ('When you do, …') trigger's effect acting on the creating ability's own target without targeting it again — Behemoth of Vault 0's 'you may pay {E} equal to target nonland permanent's mana value. When you do, destroy that permanent.'"
+  },
+  "effect:reflexive-per-counters-placed": {
+   "family": "effect:reflexive-trigger",
+   "example": "A reflexive trigger that fires once per N counters actually placed by the step before it (Craig Boone's 'put two quest counters … When you do' — twice under Doubling Season, per its ruling)."
+  },
+  "effect:restrict-rule-for-player": {
+   "family": "static:combat-restriction-extensions",
+   "example": "A turn-wide restrict rule (rule 611.2c, binding later arrivals) over creatures one chosen player controls — 'creatures that player controls without flying can't block this turn' (The Motherlode, Excavator), the defending player or a target's controller."
+  },
+  "effect:target-creature-blocking-attached": {
+   "family": "effect:target-spec-additions",
+   "example": "A target spec / filter clause for a creature blocking the Equipment's (or Aura's) host — Plasma Caster's 'target creature that's blocking equipped creature'."
+  },
+  "static:doesnt-untap-attached": {
+   "family": "static:affect-scope-by-filter",
+   "example": "'Equipped creature doesn't untap during its controller's untap step' — doesntUntap on an attached (or filtered) scope rather than the static's own permanent (T-45 Power Armor)."
+  },
+  "trigger:discards-first-time-each-turn": {
+   "family": "trigger:discards-extensions",
+   "example": "A firstTimeEachTurn on the discards trigger, read off the turn's discards before the source arrived too — 'whenever you discard one or more nonland cards for the first time each turn' (Veronica, Dissident Scribe)."
+  },
+  "zone:play-exiled-this-way-after-choice": {
+   "family": "zone:impulse-permission-options",
+   "example": "Granting a play permission (lands included) this turn to the card an earlier step of the same resolution exiled, after a choice in between — Synth Eradicator's 'exile the top card … You may get {E}{E}. If you don't, you may play that card this turn.'"
+  },
+  "effect:base-power-amount": {
+   "family": "effect:amount-new-variants",
+   "example": "An EffectAmount reading an object's base power (after layer 7b, last-known if gone) — Curie, Emergent Intelligence's 'draw cards equal to its base power'."
+  },
+  "effect:target-per-graveyard-with-match": {
+   "family": "effect:target-spec-additions",
+   "example": "'For each graveyard with an [X] card in it, exile target [X] card from that graveyard' — one mandatory target slot per graveyard that has a match, none for one that doesn't (Mysterious Stranger)."
+  },
+  "static:activated-abilities-of-exiled-with-counter": {
+   "family": "static:gain-abilities-from-graveyard",
+   "example": "Rex, Cyber-Hound: 'has all activated abilities of all cards in exile with brain counters on them' — like grantsActivatedOfLinkedExile, but over every exiled card carrying a counter kind, not just cards linked to this permanent."
+  },
+  "cost:cost-reduction-creatures-attacking-you": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Sentry Bot: 'costs {1} less to cast for each creature attacking you' — a CostReductionAmount counting creatures attacking the caster (the { attackingPlayer } EffectAmount's count)."
+  },
+  "static:graveyard-cast-filter-amount": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Arcade Gannon: a castFromGraveyard permission whose filter compares against an amount ('mana value less than or equal to the number of quest counters on Arcade Gannon') — the permission's filter is matched without FilterContext.amount, so it fails closed."
+  },
+  "effect:random-permanent": {
+   "family": "effect:choices-by-other-players",
+   "example": "The Nipton Lottery: 'choose a creature at random' on the battlefield, untargeted, then act on it (and on all others) — choose-random-card reads only a graveyard."
+  },
+  "effect:reveal-cards-from-hand": {
+   "family": "effect:target-spec-additions",
+   "example": "Vault 21: House Gambit: 'reveal up to five nonland cards from your hand' as an effect, then a count over the revealed set (cards sharing a mana value with another revealed card)."
+  },
+  "effect:attach-to-chosen-creature": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Vault 101: Birthday Party: 'you may attach it to a creature you control' — attach an Equipment just put onto the battlefield to a creature chosen as the effect resolves, without targeting (AUTHORING §6 attach: 'Not yet … to a creature chosen without targeting')."
+  },
+  "keyword:scavenge": {
+   "family": "keyword:crew",
+   "example": "Scavenge (rule 702.97): exile the card from your graveyard and pay its scavenge cost to put +1/+1 counters equal to its power on target creature, sorcery speed — printed, and granted to graveyard cards with the cost equal to their mana cost (Young Deathclaws)."
+  },
+  "cost:cost-reduction-all-counters": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Lumbering Megasloth: 'costs {1} less to cast for each counter among players and permanents' — a CostReductionAmount summing every counter of every kind on every permanent and player."
+  },
+  "effect:aura-token-copies-attached": {
+   "family": "effect:token-copy-options",
+   "example": "Three Dog, Galaxy News DJ: an optional cost of sacrificing an Aura attached to the source, and a reflexive 'for each other attacking creature you control, create a token copy of that Aura attached to that creature' (untargeted, skipped where it couldn't legally attach)."
+  },
+  "mechanic:secret-choice": {
+   "family": "mechanic:voting",
+   "example": "Players choose secretly and reveal simultaneously: a secret vote (for objects or named options) and 'each secretly choose a number' (Vault 11: Voter's Dilemma, Expert-Level Safe)."
+  },
+  "keyword:enlist": {
+   "family": "keyword:enlist",
+   "example": "Enlist (rule 702.154): as it attacks, optionally tap a nonattacking, non-sick creature you control to add its power until end of turn; plus an 'if it enlisted a creature this combat' condition (Aradesh, the Founder)."
+  },
+  "keyword:fortify": {
+   "family": "keyword:fortify",
+   "example": "Fortification artifacts and Fortify [cost] (rule 702.67): attach to a land you control at sorcery speed, with a 'fortified land' scope and triggers (C.A.M.P.)."
+  },
+  "static:pt-per-counters-among-permanents": {
+   "family": "static:pt-per-amount",
+   "example": "grantPtPerCount by the number of counters of one kind among permanents a player controls ('+1/+1 for each quest counter among permanents you control' — Moira Brown's Wasteland Survival Guide)."
+  },
+  "effect:grant-escape-until-end-of-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "A one-shot 'target card in your graveyard gains escape until end of turn', escape cost its mana cost plus exiling N other graveyard cards (Desdemona, Freedom's Edge)."
+  },
+  "effect:restrict-all-target-player": {
+   "family": "effect:player-scope-extensions",
+   "example": "A combat restriction over every creature a target player controls ('creatures target player controls can't block this turn' — Headliner Scarlett): restrict's filter can't point at a target player."
+  },
+  "condition:attacking-player-left-an-opponent-unattacked": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Intervening-if on a 'player attacks you' trigger: the attacking player has another opponent who isn't being attacked (Suppressor Skyguard)."
+  },
+  "trigger:mentors": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Aegis of the Legion: 'Whenever equipped creature mentors a creature' — a trigger on a mentor ability of the attached (or own) creature resolving and putting its counter, with the mentored creature as the trigger object."
+  },
+  "effect:sacrifice-all-but-up-to-n": {
+   "family": "decision:choose-permanent",
+   "example": "Covetous Elegy: 'each player chooses up to N creatures they control, then sacrifices the rest' with fewer allowed (min 0), each player asked in APNAP order knowing earlier choices, every unchosen permanent sacrificed at once — sacrifice-all-but keeps exactly N and sacrifices player by player."
+  },
+  "keyword:collect-evidence": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Collect evidence N (rule 701.59): exile any number of cards from your graveyard with total mana value N or more, possible only if the graveyard can reach N — as an additional cost, an optional 'you may collect evidence N' in an effect, and the reflexive 'when you do' after it (Memory Vampire)."
+  },
+  "static:unblockable-defending-player-condition": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Can't be blocked as long as the defending player meets a player condition (has a rad counter — Nightkin Ambusher), checked as blocks are declared; landwalk is the only defender-condition evasion today."
+  },
+  "effect:delayed-cast-trigger-through-player-next-turn": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "A delayed trigger installed on a named player (the defending player) that fires each time they cast a spell, lasting until the end of that player's next turn (Nuka-Nuke Launcher)."
+  },
+  "effect:return-as-aura-with-granted-ability": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Return a card to the battlefield as an Aura enchantment with a given enchant restriction (Forest you control), choosing what it enchants as it enters, granting the enchanted permanent an ability and losing all its other abilities (Harold and Bob, First Numens)."
+  },
+  "keyword:squad-nonmana-cost": {
+   "family": "keyword:squad",
+   "example": "A squad cost that isn't only mana — exiling cards from your graveyard (Ruthless Radrat) or {1} plus a discard (Thrill-Kill Disciple) — paid any number of times as the spell is cast."
+  },
+  "replacement:life-loss-from-radiation": {
+   "family": "mechanic:rad-counters",
+   "example": "Life lost from the rad-counter trigger (rule 728.1a) marked as 'from radiation' so a replacement can change it — Strong, the Brutish Thespian's 'You gain life rather than lose life from radiation'."
+  },
+  "stat:milled-this-turn-mill-only": {
+   "family": "stat:milled-this-turn",
+   "example": "A per-card 'milled this turn' marker set only by a mill (rule 701.17), not by surveil or other library-to-graveyard moves — Tato Farmer and The Master, Transcendent's 'card in a graveyard that was milled this turn' (their rulings exclude cards put there without the word mill)."
+  },
+  "replacement:enter-tapped-optional-rider": {
+   "family": "replacement:new-event-replacements",
+   "example": "'You may have this permanent enter tapped. If you do, [effect]' — an optional enter-tapped choice asked as it enters (rule 614.12), with an effect when taken — Mariposa Military Base's 'If you do, you get two rad counters'."
   }
  }
 }

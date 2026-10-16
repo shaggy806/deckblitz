@@ -901,6 +901,42 @@ export const offspringTrigger = (): TriggeredAbility => ({
 });
 
 /**
+ * A Case's "To solve — [condition]" (rule 719.3a): "At the beginning of your
+ * end step, if [condition] and this Case is not solved, this Case becomes
+ * solved." Both halves of the "if" are an intervening if, asked as it
+ * triggers and again as it resolves (603.4). Its "Solved — [ability]" is an
+ * ordinary ability gated on `{ kind: "solved" }` (rule 719.3c): a static's
+ * `condition`, an activated ability's `condition`, a triggered ability's
+ * `whileCondition` (it must be solved for it to trigger, not to resolve).
+ * `text` is the card's "To solve — …" line, reminder included.
+ */
+export const caseToSolve = (condition: StaticCondition, text: string): TriggeredAbility => ({
+  trigger: { on: "step-begins", step: "end", who: "you" },
+  condition: { kind: "all", of: [condition, { kind: "not", of: { kind: "solved" } }] },
+  targets: [],
+  effect: { kind: "solve" },
+  resolve: null,
+  text,
+});
+
+/**
+ * Squad's trigger (rule 702.157a — Gary Clone): "When this creature enters,
+ * if its squad cost was paid, create a token that's a copy of it for each
+ * time its squad cost was paid." Pair it with `kicker: { cost, multi: true,
+ * keyword: "squad" }`, the additional cost paid any number of times. The
+ * copies are made even if the creature has left by then, as it last existed;
+ * they weren't cast, so they make no copies of their own.
+ */
+export const squadTrigger = (): TriggeredAbility => ({
+  trigger: { on: "enters-battlefield", who: "self" },
+  condition: { kind: "self-kicked" },
+  targets: [],
+  effect: { kind: "create-token-copy", of: "source", count: 1, perTimeKicked: true },
+  resolve: null,
+  text: "When this creature enters, if its squad cost was paid, create a token that's a copy of it for each time its squad cost was paid.",
+});
+
+/**
  * Gift on a permanent (rule 702.174b): "When this permanent enters, if its
  * gift cost was paid, [the gift]" — the chosen opponent draws a card,
  * creates a Food, … (`GiftKind`). Pair it with `kicker: GIFT_KICKER`, the

@@ -181,6 +181,7 @@ import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
 import _poolJalumTome from "../pool/jalum-tome.js";
 import _poolJasmineDragonTeaShop from "../pool/jasmine-dragon-tea-shop.js";
+import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
@@ -379,6 +380,7 @@ import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
+import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
 import _poolVampireSovereign from "../pool/vampire-sovereign.js";
@@ -430,6 +432,7 @@ import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestatio
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
+import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
@@ -614,6 +617,7 @@ const shard: CardShard = {
     _poolJackedRabbit,
     _poolJalumTome,
     _poolJasmineDragonTeaShop,
+    _poolJasonBrightGlowingProphet,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
     _poolJunglebornPioneer,
@@ -812,6 +816,7 @@ const shard: CardShard = {
     _poolTyvarsStand,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,
+    _poolUnrulyKrasis,
     _poolValleyDasher,
     _poolValleyFloodcaller,
     _poolVampireSovereign,
@@ -865,6 +870,7 @@ const shard: CardShard = {
     _tokensMouseToken,
     _tokensMowu,
     _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,
+    _tokensRobotTokenAutomatedAssemblyLine,
     _tokensTreasureToken,
     _tokensZombieKnightToken,
     _tokensZombieTokenCrowdedCrypt,

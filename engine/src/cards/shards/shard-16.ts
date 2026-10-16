@@ -223,6 +223,7 @@ import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
 import _poolMarketbackWalker from "../pool/marketback-walker.js";
 import _poolMarwynTheClearcutter from "../pool/marwyn-the-clearcutter.js";
 import _poolMawOfKozilek from "../pool/maw-of-kozilek.js";
+import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
 import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
@@ -273,6 +274,7 @@ import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
+import _poolPowderGanger from "../pool/powder-ganger.js";
 import _poolPredatorySliver from "../pool/predatory-sliver.js";
 import _poolPridefulParent from "../pool/prideful-parent.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
@@ -681,6 +683,7 @@ const shard: CardShard = {
     _poolMarketbackWalker,
     _poolMarwynTheClearcutter,
     _poolMawOfKozilek,
+    _poolMegatonsFate,
     _poolMeltstriderEulogist,
     _poolMemoryPlunder,
     _poolMerfolkSkydiver,
@@ -731,6 +734,7 @@ const shard: CardShard = {
     _poolPizzaFaceGastromancer,
     _poolPlatinumAngel,
     _poolPlumecreedMentor,
+    _poolPowderGanger,
     _poolPredatorySliver,
     _poolPridefulParent,
     _poolProwcatcherSpecialist,

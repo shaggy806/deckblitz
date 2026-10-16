@@ -52,6 +52,7 @@ import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
+import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCaseyJonesJuryRigJusticiar from "../pool/casey-jones-jury-rig-justiciar.js";
 import _poolCathedralAcolyte from "../pool/cathedral-acolyte.js";
@@ -116,6 +117,7 @@ import _poolFlopsieBumisBuddy from "../pool/flopsie-bumis-buddy.js";
 import _poolFlowstoneMauler from "../pool/flowstone-mauler.js";
 import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
+import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
@@ -365,6 +367,7 @@ import _poolTransformativeCommons from "../pool/transformative-commons.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
+import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
@@ -411,6 +414,7 @@ import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js"
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
+import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
@@ -470,6 +474,7 @@ const shard: CardShard = {
     _poolCallToTheFeast,
     _poolCampusComposer,
     _poolCanyonJerboa,
+    _poolCarnageInterpreter,
     _poolCarrionCruiser,
     _poolCaseyJonesJuryRigJusticiar,
     _poolCathedralAcolyte,
@@ -534,6 +539,7 @@ const shard: CardShard = {
     _poolFlowstoneMauler,
     _poolFluxChanneler,
     _poolFlyingMen,
+    _poolFollowHim,
     _poolFootMystic,
     _poolFracturedRealm,
     _poolFungusFrolic,
@@ -783,6 +789,7 @@ const shard: CardShard = {
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,
     _poolTrevasCharm,
+    _poolTribuneOfRot,
     _poolTritonShorestalker,
     _poolTwistedFates,
     _poolUktabiOrangutan,
@@ -831,6 +838,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensDragonElementalToken,
+    _tokensElementalTokenVernalSovereign,
     _tokensNymphToken,
     _tokensPegasusToken,
     _tokensRebelToken,

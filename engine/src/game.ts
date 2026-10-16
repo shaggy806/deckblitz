@@ -63,6 +63,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
+import { RAD_CARD } from "./cards/rad.js";
 import { SPEED_CARD } from "./cards/speed.js";
 import type {
   AdditionalCostOption,
@@ -198,6 +199,7 @@ import {
   aggregateOver,
   attachmentsOf,
   compareNum,
+  manaValueOfObject,
   matchesFilter,
   printedManaCost,
   supertypesOf,
@@ -3070,6 +3072,8 @@ export class Game {
               kickerCost:
                 def.kicker.keyword === "blight" && def.kicker.blight !== undefined
                   ? String(def.kicker.blight)
+                  : def.kicker.keyword === "collect-evidence" && def.kicker.collectEvidence !== undefined
+                  ? String(def.kicker.collectEvidence)
                   : def.kicker.keyword === "behold" && def.kicker.behold !== undefined
                     ? def.kicker.behold.text
                     : def.kicker.cost.repeat(kickCount ?? 1),
@@ -6209,6 +6213,11 @@ export class Game {
 
     // An order takes nothing: it only says where each card goes.
     if (awaiting.order !== true) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
+    // it before "if you do" runs.
+    if (awaiting.collectEvidence !== undefined && chosen.length > 0) {
+      this.emit({ type: "evidence-collected", player, objects: [...chosen], amount: awaiting.collectEvidence });
+    }
     this.state.awaiting = null;
     // "…and the rest on the bottom of your library in any order": asked
     // now, before `then` — the instruction that put them there comes first.
@@ -10178,6 +10187,15 @@ export class Game {
     if (kicked && def.kicker?.keyword === "blight" && !this.canBlight(player)) {
       return `${player} controls no creature to blight for ${def.name}`;
     }
+    // "You may collect evidence N" (rule 701.59b): only with that much in
+    // the graveyard — the spell itself, still in the hand, not part of it.
+    if (
+      kicked &&
+      def.kicker?.keyword === "collect-evidence" &&
+      !this.canCollectEvidence(player, def.kicker.collectEvidence ?? 0)
+    ) {
+      return `${player}'s graveyard can't collect evidence ${def.kicker.collectEvidence ?? 0} for ${def.name}`;
+    }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
     // spell itself (on its way to the stack, 601.2a) not among them.
     const kickerBehold = kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined;
@@ -11623,6 +11641,11 @@ export class Game {
     const blightCost =
       chosenOption?.blight ?? (kicked && def.kicker?.keyword === "blight" ? def.kicker.blight : undefined);
     if (blightCost !== undefined) this.beginBlight(player, cardId, blightCost, { x: chosenX, priorityTo });
+    // "You may collect evidence N" taken (rule 701.59a): which cards, chosen
+    // now, as the cost is paid (601.2h).
+    if (kicked && def.kicker?.keyword === "collect-evidence" && def.kicker.collectEvidence !== undefined) {
+      this.beginCollectEvidence(player, cardId, def.kicker.collectEvidence, { x: chosenX, priorityTo });
+    }
     // "Behold an Elf or pay {2}" with the behold chosen, "you may behold a
     // Dragon" taken, "behold an Elemental and exile it", or a flashback
     // cost's "behold three Elementals" (rule 701.4a): which, chosen now as
@@ -12906,6 +12929,24 @@ export class Game {
       // Rule 701.68b: no creature to put the counters on, no blighting.
       if (!this.canBlight(player)) return `${player} controls no creature to blight for ${def.name}'s cost`;
     }
+    if (ability.cost.collectEvidence !== undefined) {
+      // Chosen once the ability is on the stack, as a blight is — so never
+      // on a mana ability, nor beside another cost that asks.
+      if (
+        isManaAbility(ability) ||
+        ability.cost.blight !== undefined ||
+        sacrificeParts !== null ||
+        ability.cost.discard !== undefined ||
+        ability.cost.exileFromGraveyard !== undefined ||
+        costReturn !== undefined
+      ) {
+        return `${def.name}'s ability can't collect evidence as part of that cost`;
+      }
+      // Rule 701.59b: not enough in the graveyard, no collecting.
+      if (!this.canCollectEvidence(player, ability.cost.collectEvidence)) {
+        return `${player}'s graveyard can't collect evidence ${ability.cost.collectEvidence} for ${def.name}'s cost`;
+      }
+    }
     return null;
   }
 
@@ -13356,6 +13397,15 @@ export class Game {
     if (ability.cost.blight !== undefined) {
       this.withDecisionSource(sourceId, () =>
         this.beginBlight(player, sourceId, ability.cost.blight as number, { x: chosenX, priorityTo: player }),
+      );
+    }
+    // "Collect evidence N" (rule 701.59a): which cards, chosen now too.
+    if (ability.cost.collectEvidence !== undefined) {
+      this.withDecisionSource(sourceId, () =>
+        this.beginCollectEvidence(player, sourceId, ability.cost.collectEvidence as number, {
+          x: chosenX,
+          priorityTo: player,
+        }),
       );
     }
     this.afterPlayerAction(player);
@@ -16409,6 +16459,9 @@ export class Game {
     for (const player of this.state.turnOrder) {
       const speedAbility = this.state.players[player]?.speedAbility;
       if (speedAbility !== undefined) candidates.add(speedAbility);
+      // And one who has had rad counters, theirs (rule 728.1).
+      const radAbility = this.state.players[player]?.radAbility;
+      if (radAbility !== undefined) candidates.add(radAbility);
     }
     // Eminence (an ability word, rule 207.2c): a card in the command zone
     // whose triggered ability says it functions there (rule 113.6b). Added to
@@ -17986,6 +18039,8 @@ export class Game {
         return event.type === "card-cycled" && event.object === self.id;
       case "this-plotted":
         return event.type === "card-plotted" && event.object === self.id;
+      case "evidence-collected":
+        return event.type === "evidence-collected" && event.player === self.controller;
       case "crime-committed":
         return (
           event.type === "crime-committed" &&
@@ -20858,6 +20913,20 @@ export class Game {
       },
       copyTriggerSpellForEach: (spell, each) => {
         if (triggerObject !== undefined) this.copySpellForEachItCouldTarget(spell, triggerObject, controller, source, each);
+      },
+      solveSource: () => {
+        const object = this.state.objects[source];
+        if (object?.zone !== "battlefield" || (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) || object.solved === true) return;
+        object.solved = true;
+        invalidateComputedCache();
+        this.emit({ type: "case-solved", object: source });
+      },
+      collectEvidence: (amount, then) =>
+        this.beginCollectEvidence(controller, source, amount, { optional: true, x, ...(then !== undefined ? { then } : {}) }),
+      sourceTimesKicked: () => {
+        const live = this.state.objects[source];
+        if (live?.zone === "battlefield") return live.enteredTimesKicked ?? 0;
+        return departedSource()?.enteredTimesKicked ?? 0;
       },
       becomePlotted: (card) => {
         const object = this.state.objects[card];
@@ -25108,6 +25177,60 @@ export class Game {
   }
 
 
+  /** Whether `player` could collect evidence `amount` (rule 701.59b): their
+   * graveyard holds cards with that much total mana value. */
+  private canCollectEvidence(player: PlayerId, amount: number): boolean {
+    const graveyard = this.state.zones.perPlayer[player]?.graveyard ?? [];
+    let total = 0;
+    for (const id of graveyard) total += manaValueOfObject(this.registry, this.state.objects[id]);
+    return total >= amount;
+  }
+
+  /**
+   * Collect evidence N (rule 701.59a): `player` exiles any number of cards
+   * from their graveyard with total mana value `amount` or more — as a cost
+   * being paid (`priorityTo` set: an activated ability's
+   * `AbilityCost.collectEvidence`, a spell's additional cost, paid once it's
+   * on the stack, 601.2h) or as the `collect-evidence` effect resolves, which
+   * may be declined (`optional`). Which cards is the `choose-from-zone`
+   * decision with a `"total"` rule; nothing happens if they don't hold that
+   * much (701.59b — whatever offers it checks first, `canCollectEvidence`).
+   * Once some are exiled, `evidence-collected`, then `then` with the exiled
+   * cards as its targets.
+   */
+  private beginCollectEvidence(
+    player: PlayerId,
+    source: ObjectId,
+    amount: number,
+    opts: { readonly optional?: boolean; readonly then?: EffectSpec; readonly x?: number; readonly priorityTo?: PlayerId } = {},
+  ): void {
+    if (this.state.players[player]?.hasLost !== false || !this.canCollectEvidence(player, amount)) return;
+    const eligible = [...this.state.zones.perPlayer[player].graveyard];
+    const tags = Object.fromEntries(
+      eligible.map((id) => [id, [String(manaValueOfObject(this.registry, this.state.objects[id]))]]),
+    );
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: eligible,
+      eligible,
+      min: opts.optional === true ? 0 : 1,
+      max: eligible.length,
+      destination: "exile",
+      leftover: "stay",
+      together: {
+        rule: "total",
+        tags,
+        atLeast: amount,
+        ...(opts.optional === true ? { orNone: true } : {}),
+        text: `with total mana value ${amount} or greater (collect evidence ${amount})`,
+      },
+      collectEvidence: amount,
+      ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
+      ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
+    };
+  }
+
   /** Whether `player` could blight (rule 701.68b): they control a creature
    * to put the counters on. */
   private canBlight(player: PlayerId): boolean {
@@ -29292,6 +29415,17 @@ export class Game {
     if (total === before) return;
     if (total === 0) delete ps.counters[counter];
     else ps.counters[counter] = total;
+    // Rad counters bring an inherent triggered ability (rule 728.1), carried
+    // by an object made the first time this player gets one — like speed's
+    // (`setSpeed`): in the command zone but in no zone list, read only by
+    // the trigger scan, kept all game.
+    if (counter === "rad" && total > 0 && ps.radAbility === undefined) {
+      const object = this.makeCardObject(RAD_CARD, player, { zone: "command" });
+      this.state.objects[object].kind = "emblem";
+      this.state.objects[object].timestamp = this.freshTimestamp();
+      ps.radAbility = object;
+      this.openStint(object);
+    }
     this.emit({ type: "player-counters-changed", player, counter, delta: total - before, total });
   }
 
@@ -30840,6 +30974,7 @@ export class Game {
       isCommander: object.isCommander,
       tapped: object.tapped,
       ...(object.enteredKicked === true ? { enteredKicked: true } : {}),
+      ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
@@ -31419,6 +31554,8 @@ export class Game {
     // So does saddled (702.171b); what it saddled was the old object's (400.7).
     delete object.saddled;
     delete object.saddledThisTurn;
+    // And solved (719.3b).
+    delete object.solved;
     delete object.exertedBy;
     delete object.exertedOnTurn;
     delete object.skipsNextUntap;

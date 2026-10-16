@@ -2817,4 +2817,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Mountain'], hand: ['Lightning Bolt'], human: true }, { bf: ['Grizzly Bears'] }],
     }),
   ),
+  preset(
+    'Powder Ganger, Contaminated Drink',
+    board({
+      you: { bf: ['Mountain*7', 'Island*2', 'Swamp*2'], hand: ['Powder Ganger', 'Contaminated Drink'] },
+      opp: { bf: ['Mind Stone'] },
+    }),
+  ),
+  preset(
+    'Crimestopper Sprite, Surveillance Monitor, Case of the Crimson Pulse',
+    board({
+      you: {
+        bf: ['Island*8', 'Case of the Crimson Pulse'],
+        hand: ['Crimestopper Sprite', 'Surveillance Monitor'],
+        gy: ['Hill Giant', 'Grizzly Bears*2'],
+      },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

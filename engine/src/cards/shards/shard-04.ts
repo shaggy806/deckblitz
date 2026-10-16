@@ -405,6 +405,7 @@ import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
+import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
@@ -831,6 +832,7 @@ const shard: CardShard = {
     _poolWeaverOfLightning,
     _poolWheelOfFortune,
     _poolWhispersilkCloak,
+    _poolWhiteGloveGourmand,
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,

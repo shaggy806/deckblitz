@@ -7,6 +7,7 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
+import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
 import _poolAngelOfTheGodPharaoh from "../pool/angel-of-the-god-pharaoh.js";
@@ -65,6 +66,7 @@ import _poolCollectiveResistance from "../pool/collective-resistance.js";
 import _poolColossadactyl from "../pool/colossadactyl.js";
 import _poolColossalSkyturtle from "../pool/colossal-skyturtle.js";
 import _poolCombatCourier from "../pool/combat-courier.js";
+import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolCouncilOfAdvisors from "../pool/council-of-advisors.js";
 import _poolCountryRoads from "../pool/country-roads.js";
 import _poolCovenantOfBlood from "../pool/covenant-of-blood.js";
@@ -189,6 +191,7 @@ import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
+import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLightningJavelin from "../pool/lightning-javelin.js";
 import _poolLilianasMastery from "../pool/lilianas-mastery.js";
 import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-marvel.js";
@@ -346,8 +349,10 @@ import _poolStrategicIntervention from "../pool/strategic-intervention.js";
 import _poolStressDream from "../pool/stress-dream.js";
 import _poolStrongholdZeppelin from "../pool/stronghold-zeppelin.js";
 import _poolSuChi from "../pool/su-chi.js";
+import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
 import _poolSurlyBadgersaur from "../pool/surly-badgersaur.js";
+import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
@@ -444,6 +449,7 @@ const shard: CardShard = {
     _poolAetherTunnel,
     _poolAjaniFellsTheGodsire,
     _poolAkoumWarrior,
+    _poolAlmostPerfect,
     _poolAmateurHero,
     _poolAngelOfFlightAlabaster,
     _poolAngelOfTheGodPharaoh,
@@ -502,6 +508,7 @@ const shard: CardShard = {
     _poolColossadactyl,
     _poolColossalSkyturtle,
     _poolCombatCourier,
+    _poolConclaveEvangelist,
     _poolCouncilOfAdvisors,
     _poolCountryRoads,
     _poolCovenantOfBlood,
@@ -626,6 +633,7 @@ const shard: CardShard = {
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
     _poolLethalScheme,
+    _poolLibertyPrimeRecharged,
     _poolLightningJavelin,
     _poolLilianasMastery,
     _poolLivingBrainMechanicalMarvel,
@@ -783,8 +791,10 @@ const shard: CardShard = {
     _poolStressDream,
     _poolStrongholdZeppelin,
     _poolSuChi,
+    _poolSumalaRumblers,
     _poolSummonFatChocobo,
     _poolSurlyBadgersaur,
+    _poolSurveillanceMonitor,
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
     _poolTaigamsScheming,

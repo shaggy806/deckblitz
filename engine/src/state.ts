@@ -354,6 +354,11 @@ export interface GameObject {
    * battlefield (`moveObject` clears it).
    */
   saddled?: true;
+  /** Solved (rule 719.3b): a Case's "To solve —" trigger made it so. A
+   * designation, neither an ability nor copiable, that "Solved —" abilities
+   * read (the `solved` condition); it lasts until the permanent leaves the
+   * battlefield (`moveObject` clears it). */
+  solved?: true;
   /**
    * The permanents this creature **saddled** this turn (rule 702.171c: it
    * did as it was tapped to pay one's saddle cost), each with the
@@ -1367,6 +1372,10 @@ export interface LastKnownInfo {
   /** Its spell was cast kicked (or its offspring cost paid) — `enteredKicked`,
    * so "if it was kicked" still answers once it has left. */
   readonly enteredKicked?: boolean;
+  /** How many times its spell's multikicker or squad cost was paid —
+   * `enteredTimesKicked`, so squad's copies are still made once it has left
+   * (rule 702.157a). */
+  readonly enteredTimesKicked?: number;
   /** Who its spell's gift was promised to — `enteredGiftTo` — so the gift
    * is still given once it has left. */
   readonly enteredGiftTo?: PlayerId;
@@ -1677,7 +1686,7 @@ export interface ReflexiveTrigger {
 
 /** A kind of counter a player can have (rule 122.1), apart from energy — see
  * `PlayerState.counters`. */
-export type PlayerCounterKind = "poison" | "experience";
+export type PlayerCounterKind = "poison" | "experience" | "rad";
 
 /** How many poison counters make a player lose (rule 704.5c). */
 export const POISON_LETHAL = 10;
@@ -1720,6 +1729,13 @@ export interface PlayerState {
    * read only by the trigger scan. Its definition is `cards/speed.ts`'s.
    */
   speedAbility?: ObjectId;
+  /** The object carrying the inherent triggered ability of this player's
+   * rad counters (rule 728.1: "at the beginning of each player's precombat
+   * main phase, if that player has one or more rad counters, …"), made the
+   * first time they get one and kept all game, like `speedAbility` — no
+   * source in the rules, an object here to trigger from. Its definition is
+   * `cards/rad.ts`'s. */
+  radAbility?: ObjectId;
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's
@@ -2125,6 +2141,10 @@ export type AwaitingDecision =
         readonly then?: EffectSpec;
         readonly enterOf?: ObjectId;
       };
+      /** A collect evidence N (rule 701.59a — `Game.beginCollectEvidence`):
+       * the chosen graveyard cards are exiled by `destination` and, if any
+       * were, an `evidence-collected` event follows (before `then`). */
+      readonly collectEvidence?: number;
       /**
        * Only an **order** is asked: every card in `ids` is picked, and the
        * order picked is where each goes (rule 401.4 — the owner arranges
