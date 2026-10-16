@@ -85,6 +85,9 @@ describe("slot polarity", () => {
     expect(cast("Mind Control")).toEqual(["harm"]);
     expect(cast("Rancor")).toEqual(["help"]);
     expect(cast("Lure")).toEqual(["help"]);
+    // Goading is the point; the pump only sends it at someone else.
+    expect(cast("Psychic Impetus")).toEqual(["harm"]);
+    expect(cast("Acquired Mutation")).toEqual(["harm"]);
   });
 
   it("reads activated and triggered abilities", () => {

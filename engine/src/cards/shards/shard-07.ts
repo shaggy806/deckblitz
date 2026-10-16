@@ -44,6 +44,7 @@ import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
+import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolCheeringCrowd from "../pool/cheering-crowd.js";
@@ -116,8 +117,10 @@ import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
+import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
+import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
 import _poolFloweringOfTheWhiteTree from "../pool/flowering-of-the-white-tree.js";
 import _poolFlowstoneOverseer from "../pool/flowstone-overseer.js";
 import _poolForgeOfHeroes from "../pool/forge-of-heroes.js";
@@ -150,6 +153,7 @@ import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
 import _poolHaloHopper from "../pool/halo-hopper.js";
 import _poolHandOfDeath from "../pool/hand-of-death.js";
 import _poolHapatraVizierOfPoisons from "../pool/hapatra-vizier-of-poisons.js";
+import _poolHavocEater from "../pool/havoc-eater.js";
 import _poolHeartlessSummoning from "../pool/heartless-summoning.js";
 import _poolHeartwoodGiant from "../pool/heartwood-giant.js";
 import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
@@ -502,6 +506,7 @@ const shard: CardShard = {
     _poolBountyAgent,
     _poolBronzebeakMoa,
     _poolCallousInspector,
+    _poolCaseOfTheShatteredPact,
     _poolChandrasEmberling,
     _poolChatterstorm,
     _poolCheeringCrowd,
@@ -574,8 +579,10 @@ const shard: CardShard = {
     _poolFetidHorror,
     _poolFieryIntervention,
     _poolFinFangFoom,
+    _poolFinalWordPhantom,
     _poolFlamebornViron,
     _poolFleshBurrower,
+    _poolFlourishingBloomKin,
     _poolFloweringOfTheWhiteTree,
     _poolFlowstoneOverseer,
     _poolForgeOfHeroes,
@@ -608,6 +615,7 @@ const shard: CardShard = {
     _poolHaloHopper,
     _poolHandOfDeath,
     _poolHapatraVizierOfPoisons,
+    _poolHavocEater,
     _poolHeartlessSummoning,
     _poolHeartwoodGiant,
     _poolHeliodSunCrowned,

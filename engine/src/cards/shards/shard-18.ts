@@ -24,6 +24,7 @@ import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
+import _poolBehindTheMask from "../pool/behind-the-mask.js";
 import _poolBelonging from "../pool/belonging.js";
 import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
@@ -121,6 +122,7 @@ import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
+import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
@@ -154,6 +156,7 @@ import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
+import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
@@ -179,6 +182,7 @@ import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
+import _poolKrenkoBaronOfTinStreet from "../pool/krenko-baron-of-tin-street.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
@@ -254,6 +258,7 @@ import _poolPossibilityTechnician from "../pool/possibility-technician.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
+import _poolProjektorInspector from "../pool/projektor-inspector.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
@@ -478,6 +483,7 @@ const shard: CardShard = {
     _poolBarbedBattlegear,
     _poolBebopRocksteady,
     _poolBedevil,
+    _poolBehindTheMask,
     _poolBelonging,
     _poolBighornerRancher,
     _poolBirdMaiden,
@@ -575,6 +581,7 @@ const shard: CardShard = {
     _poolFoulFamiliar,
     _poolFromFatherToSon,
     _poolFungalPlots,
+    _poolFuss,
     _poolGastalRaider,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
@@ -608,6 +615,7 @@ const shard: CardShard = {
     _poolHinderingTouch,
     _poolHippoCows,
     _poolHornOfGondor,
+    _poolHotshotInvestigators,
     _poolHurskaSweetTooth,
     _poolIcetillExplorer,
     _poolIllvoiInfiltrator,
@@ -633,6 +641,7 @@ const shard: CardShard = {
     _poolKozileksUnsealing,
     _poolKrangMasterMind,
     _poolKraumViolentCacophony,
+    _poolKrenkoBaronOfTinStreet,
     _poolKrenkoMobBoss,
     _poolKynaiosAndTiroOfMeletis,
     _poolLakeTownMariners,
@@ -708,6 +717,7 @@ const shard: CardShard = {
     _poolPouncingCheetah,
     _poolPrimalAmulet,
     _poolProftsEideticMemory,
+    _poolProjektorInspector,
     _poolPsychosisCrawler,
     _poolPutrefy,
     _poolQuandrixPledgemage,

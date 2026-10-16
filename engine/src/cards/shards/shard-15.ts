@@ -51,6 +51,7 @@ import _poolCapashenKnight from "../pool/capashen-knight.js";
 import _poolCarnassid from "../pool/carnassid.js";
 import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
+import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js";
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
@@ -278,6 +279,7 @@ import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
 import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
+import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuench from "../pool/quench.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
@@ -287,10 +289,12 @@ import _poolRayOfDistortion from "../pool/ray-of-distortion.js";
 import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
+import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
 import _poolReunionOfTheHouse from "../pool/reunion-of-the-house.js";
+import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
@@ -298,6 +302,7 @@ import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
+import _poolSanctuaryWall from "../pool/sanctuary-wall.js";
 import _poolSanctumOfEternity from "../pool/sanctum-of-eternity.js";
 import _poolSangromancer from "../pool/sangromancer.js";
 import _poolSaplingNursery from "../pool/sapling-nursery.js";
@@ -473,6 +478,7 @@ const shard: CardShard = {
     _poolCarnassid,
     _poolCarrionScreecher,
     _poolCarrionWall,
+    _poolCaseOfTheTrampledGarden,
     _poolCaughtInTheCrossfire,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
@@ -700,6 +706,7 @@ const shard: CardShard = {
     _poolPrizefight,
     _poolPsionicSnoop,
     _poolPyreticRebirth,
+    _poolPyrotechnicPerformer,
     _poolQuench,
     _poolRagingGoblinoids,
     _poolRakdosTrumpeter,
@@ -709,10 +716,12 @@ const shard: CardShard = {
     _poolRayOfErasure,
     _poolRazakethsRite,
     _poolReapTheSeagraf,
+    _poolReasonableDoubt,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,
     _poolReunionOfTheHouse,
+    _poolRiftburstHellion,
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRoilCartographer,
@@ -720,6 +729,7 @@ const shard: CardShard = {
     _poolRushOfAdrenaline,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,
+    _poolSanctuaryWall,
     _poolSanctumOfEternity,
     _poolSangromancer,
     _poolSaplingNursery,

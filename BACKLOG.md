@@ -87,11 +87,13 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to Ravnica: Clue Edition is whole
+  ranked ones first. Every set from Reality Fracture back to Murders at Karlov Manor is whole
   (batch 89 built plot and crimes for Outlaws of Thunder Junction; batch 90 rad counters and squad
-  for Fallout); **next, Murders at Karlov Manor and its Commander set** (MKM, MKC, 223 — batch 91,
-  with collect evidence and Cases built), then The Lost Caverns of Ixalan (`npm run cards:sets -w
-  engine -- --sets 45`). MH3's leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`)
+  for Fallout; batch 91 collect evidence and Cases); **next, The Lost Caverns of Ixalan and its
+  Commander set** (LCI, LCC, 165 — batch 92, with explore, Map tokens, craft and discover to
+  build), then Doctor Who (`npm run cards:sets -w engine -- --sets 45`). Karlov Manor's leaders:
+  turning a face-down permanent face up as an effect (`effect:turn-face-up` 6) and naming the
+  enchanted permanent (`effect:effect-on-enchanted-permanent` 4). MH3's leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`)
   and bestow, five cards each; Fallout's a "whenever one or more nonland cards are milled" trigger
   (`trigger:mills-trigger` 3, its per-card form 2 — the engine already emits `cards-milled`) and
   naming the equipped or enchanted creature (`effect:attached-effect-ref` 3). Leading blockers now:

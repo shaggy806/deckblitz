@@ -117,6 +117,7 @@ import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEsgarothGarrison from "../pool/esgaroth-garrison.js";
 import _poolEssenceknitScholar from "../pool/essenceknit-scholar.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
+import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
@@ -141,6 +142,7 @@ import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFugue from "../pool/fugue.js";
+import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
@@ -333,6 +335,7 @@ import _poolSagesNouliths from "../pool/sages-nouliths.js";
 import _poolSaltRoadSkirmish from "../pool/salt-road-skirmish.js";
 import _poolSandblast from "../pool/sandblast.js";
 import _poolSandwurmConvergence from "../pool/sandwurm-convergence.js";
+import _poolSanguineSavior from "../pool/sanguine-savior.js";
 import _poolSaruliCaretaker from "../pool/saruli-caretaker.js";
 import _poolScaretiller from "../pool/scaretiller.js";
 import _poolScavengerGrounds from "../pool/scavenger-grounds.js";
@@ -587,6 +590,7 @@ const shard: CardShard = {
     _poolEsgarothGarrison,
     _poolEssenceknitScholar,
     _poolEusocialEngineering,
+    _poolExperimentTwelve,
     _poolExploreTheVastlands,
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
@@ -611,6 +615,7 @@ const shard: CardShard = {
     _poolFortifiedVillage,
     _poolFractalAnomaly,
     _poolFugue,
+    _poolFurtiveCourier,
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,
@@ -803,6 +808,7 @@ const shard: CardShard = {
     _poolSaltRoadSkirmish,
     _poolSandblast,
     _poolSandwurmConvergence,
+    _poolSanguineSavior,
     _poolSaruliCaretaker,
     _poolScaretiller,
     _poolScavengerGrounds,

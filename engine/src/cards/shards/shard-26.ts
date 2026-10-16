@@ -15,7 +15,9 @@ import _poolAirshipCrash from "../pool/airship-crash.js";
 import _poolAkoumTeeth from "../pool/akoum-teeth.js";
 import _poolAkromaAngelOfFury from "../pool/akroma-angel-of-fury.js";
 import _poolAkromaAngelOfWrath from "../pool/akroma-angel-of-wrath.js";
+import _poolAlquistProftMasterSleuth from "../pool/alquist-proft-master-sleuth.js";
 import _poolAmbrosiaWhiteheart from "../pool/ambrosia-whiteheart.js";
+import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
@@ -106,6 +108,7 @@ import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
+import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
 import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
@@ -185,6 +188,7 @@ import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
+import _poolKnife from "../pool/knife.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
@@ -193,6 +197,7 @@ import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
+import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
@@ -372,6 +377,7 @@ import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
+import _poolUndercityEliminator from "../pool/undercity-eliminator.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
@@ -437,7 +443,9 @@ const shard: CardShard = {
     _poolAkoumTeeth,
     _poolAkromaAngelOfFury,
     _poolAkromaAngelOfWrath,
+    _poolAlquistProftMasterSleuth,
     _poolAmbrosiaWhiteheart,
+    _poolAnalyzeThePollen,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
     _poolAntManElusiveAvenger,
@@ -528,6 +536,7 @@ const shard: CardShard = {
     _poolExploration,
     _poolExpressiveFiredancer,
     _poolFblthpImpossiblyLost,
+    _poolFeloniousRage,
     _poolFertilid,
     _poolFetidPools,
     _poolFieryEmancipation,
@@ -607,6 +616,7 @@ const shard: CardShard = {
     _poolKefkaCourtMage,
     _poolKhalniAmbush,
     _poolKinTreeSeverance,
+    _poolKnife,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
     _poolLiesaShroudOfDusk,
@@ -615,6 +625,7 @@ const shard: CardShard = {
     _poolLivingLightning,
     _poolLothlorienLookout,
     _poolLumengridSentinel,
+    _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
     _poolMaelstromColossus,
@@ -794,6 +805,7 @@ const shard: CardShard = {
     _poolTwistedFates,
     _poolUktabiOrangutan,
     _poolUltimeciaTemporalThreat,
+    _poolUndercityEliminator,
     _poolUnderworldConnections,
     _poolUnforgivingAim,
     _poolUnholyFiend,

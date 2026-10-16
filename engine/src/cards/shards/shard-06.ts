@@ -34,6 +34,7 @@ import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
+import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
@@ -143,6 +144,7 @@ import _poolFrostMarsh from "../pool/frost-marsh.js";
 import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
+import _poolGalvanize from "../pool/galvanize.js";
 import _poolGalvanizingSawship from "../pool/galvanizing-sawship.js";
 import _poolGardenize from "../pool/gardenize.js";
 import _poolGatherCourage from "../pool/gather-courage.js";
@@ -392,6 +394,7 @@ import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
+import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
@@ -439,6 +442,7 @@ import _tokensNinjaToken from "../tokens/ninja-token.js";
 import _tokensOozeTokenConvertToSlime from "../tokens/ooze-token-convert-to-slime.js";
 import _tokensPowerstoneToken from "../tokens/powerstone-token.js";
 import _tokensShardToken from "../tokens/shard-token.js";
+import _tokensSpiderToken21MenaceReach from "../tokens/spider-token-2-1-menace-reach.js";
 import _tokensTheVoid from "../tokens/the-void.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 
@@ -475,6 +479,7 @@ const shard: CardShard = {
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
     _poolBenalishKnight,
+    _poolBenthicCriminologists,
     _poolBifurMelodicRider,
     _poolBigApple3AM,
     _poolBlessedOrator,
@@ -584,6 +589,7 @@ const shard: CardShard = {
     _poolFrozenShade,
     _poolFyndhornElves,
     _poolGalvanicBlast,
+    _poolGalvanize,
     _poolGalvanizingSawship,
     _poolGardenize,
     _poolGatherCourage,
@@ -833,6 +839,7 @@ const shard: CardShard = {
     _poolUnbreathingHorde,
     _poolUnnerve,
     _poolUnrulyMob,
+    _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,
     _poolVenomLethalProtector,
     _poolVenomcrawler,
@@ -882,6 +889,7 @@ const shard: CardShard = {
     _tokensOozeTokenConvertToSlime,
     _tokensPowerstoneToken,
     _tokensShardToken,
+    _tokensSpiderToken21MenaceReach,
     _tokensTheVoid,
     _tokensWizardTokenGuff,
   ],

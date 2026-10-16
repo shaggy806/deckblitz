@@ -64,6 +64,7 @@ import _poolBullRush from "../pool/bull-rush.js";
 import _poolBurningShieldAskari from "../pool/burning-shield-askari.js";
 import _poolBurstOfEnergy from "../pool/burst-of-energy.js";
 import _poolBywayBarterer from "../pool/byway-barterer.js";
+import _poolCallASurpriseWitness from "../pool/call-a-surprise-witness.js";
 import _poolCanyonMinotaur from "../pool/canyon-minotaur.js";
 import _poolCapitalGuard from "../pool/capital-guard.js";
 import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
@@ -187,6 +188,7 @@ import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
+import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
@@ -314,6 +316,7 @@ import _poolScrapshooter from "../pool/scrapshooter.js";
 import _poolScrapworkRager from "../pool/scrapwork-rager.js";
 import _poolSeaGateBanneret from "../pool/sea-gate-banneret.js";
 import _poolSearchForAzcanta from "../pool/search-for-azcanta.js";
+import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
@@ -514,6 +517,7 @@ const shard: CardShard = {
     _poolBurningShieldAskari,
     _poolBurstOfEnergy,
     _poolBywayBarterer,
+    _poolCallASurpriseWitness,
     _poolCanyonMinotaur,
     _poolCapitalGuard,
     _poolCaseyJonesVigilante,
@@ -637,6 +641,7 @@ const shard: CardShard = {
     _poolInescapableBlaze,
     _poolInspiringRoar,
     _poolIronwrightsCleansing,
+    _poolItDoesntAddUp,
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,
@@ -764,6 +769,7 @@ const shard: CardShard = {
     _poolScrapworkRager,
     _poolSeaGateBanneret,
     _poolSearchForAzcanta,
+    _poolSeasonedConsultant,
     _poolSeeTheTruth,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,

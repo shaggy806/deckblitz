@@ -11,6 +11,7 @@ import _poolActOfTreason from "../pool/act-of-treason.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
 import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "../pool/affa-guard-hound.js";
+import _poolAgencyCoroner from "../pool/agency-coroner.js";
 import _poolAirbenderAscension from "../pool/airbender-ascension.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
@@ -73,6 +74,7 @@ import _poolCabalTrainee from "../pool/cabal-trainee.js";
 import _poolCallTheCavalry from "../pool/call-the-cavalry.js";
 import _poolCanopyVista from "../pool/canopy-vista.js";
 import _poolCarnifexDemon from "../pool/carnifex-demon.js";
+import _poolCaseOfTheRansackedLab from "../pool/case-of-the-ransacked-lab.js";
 import _poolCemeteryGate from "../pool/cemetery-gate.js";
 import _poolChainAssassination from "../pool/chain-assassination.js";
 import _poolChainDevil from "../pool/chain-devil.js";
@@ -463,6 +465,7 @@ import _poolWillowrushVerge from "../pool/willowrush-verge.js";
 import _poolWirewoodGuardian from "../pool/wirewood-guardian.js";
 import _poolWorldWeary from "../pool/world-weary.js";
 import _poolWreckingBall from "../pool/wrecking-ball.js";
+import _poolWrench from "../pool/wrench.js";
 import _poolWretchedAnurid from "../pool/wretched-anurid.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
@@ -490,6 +493,7 @@ const shard: CardShard = {
     _poolAetherChanneler,
     _poolAeveProgenitorOoze,
     _poolAffaGuardHound,
+    _poolAgencyCoroner,
     _poolAirbenderAscension,
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
@@ -552,6 +556,7 @@ const shard: CardShard = {
     _poolCallTheCavalry,
     _poolCanopyVista,
     _poolCarnifexDemon,
+    _poolCaseOfTheRansackedLab,
     _poolCemeteryGate,
     _poolChainAssassination,
     _poolChainDevil,
@@ -942,6 +947,7 @@ const shard: CardShard = {
     _poolWirewoodGuardian,
     _poolWorldWeary,
     _poolWreckingBall,
+    _poolWrench,
     _poolWretchedAnurid,
     _poolYargleGoliathOfOtaria,
     _poolZagothCrystal,

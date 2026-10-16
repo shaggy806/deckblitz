@@ -92,6 +92,7 @@ import _poolDartingMerfolk from "../pool/darting-merfolk.js";
 import _poolDauntlessAven from "../pool/dauntless-aven.js";
 import _poolDauntlessEscort from "../pool/dauntless-escort.js";
 import _poolDaybreakChaplain from "../pool/daybreak-chaplain.js";
+import _poolDeadlyComplication from "../pool/deadly-complication.js";
 import _poolDebilitatingInjury from "../pool/debilitating-injury.js";
 import _poolDeerDog from "../pool/deer-dog.js";
 import _poolDefiantStrike from "../pool/defiant-strike.js";
@@ -126,6 +127,7 @@ import _poolEstridsInvocation from "../pool/estrids-invocation.js";
 import _poolEvisceratorsInsight from "../pool/eviscerators-insight.js";
 import _poolExcaliburIi from "../pool/excalibur-ii.js";
 import _poolExiledBoggart from "../pool/exiled-boggart.js";
+import _poolExitSpecialist from "../pool/exit-specialist.js";
 import _poolExplosiveGetaway from "../pool/explosive-getaway.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
@@ -179,6 +181,7 @@ import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
+import _poolInsideSource from "../pool/inside-source.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
@@ -513,6 +516,7 @@ const shard: CardShard = {
     _poolDauntlessAven,
     _poolDauntlessEscort,
     _poolDaybreakChaplain,
+    _poolDeadlyComplication,
     _poolDebilitatingInjury,
     _poolDeerDog,
     _poolDefiantStrike,
@@ -547,6 +551,7 @@ const shard: CardShard = {
     _poolEvisceratorsInsight,
     _poolExcaliburIi,
     _poolExiledBoggart,
+    _poolExitSpecialist,
     _poolExplosiveGetaway,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
@@ -600,6 +605,7 @@ const shard: CardShard = {
     _poolIndomitableArchangel,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
+    _poolInsideSource,
     _poolInventorsAxe,
     _poolInvisibleWoman,
     _poolIonasJudgment,

@@ -71,6 +71,7 @@ import _poolClearwaterPathway from "../pool/clearwater-pathway.js";
 import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
+import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
@@ -283,6 +284,7 @@ import _poolRavenform from "../pool/ravenform.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
+import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
@@ -383,6 +385,7 @@ import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
+import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
@@ -494,6 +497,7 @@ const shard: CardShard = {
     _poolClinquantSkymage,
     _poolCloudElemental,
     _poolCloudkinSeer,
+    _poolCoercedToKill,
     _poolColossodonYearling,
     _poolCombatMedic,
     _poolCommissarSeverinaRaine,
@@ -706,6 +710,7 @@ const shard: CardShard = {
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,
+    _poolRepeatOffender,
     _poolReputableMerchant,
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,
@@ -806,6 +811,7 @@ const shard: CardShard = {
     _poolValorSinger,
     _poolVampireCutthroat,
     _poolVaultOfCatlacan,
+    _poolVengefulCreeper,
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,

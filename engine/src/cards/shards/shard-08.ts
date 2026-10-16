@@ -63,6 +63,7 @@ import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
 import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
+import _poolCandlestick from "../pool/candlestick.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
@@ -91,6 +92,7 @@ import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
+import _poolDetectivesSatchel from "../pool/detectives-satchel.js";
 import _poolDevastate from "../pool/devastate.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
@@ -123,11 +125,13 @@ import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
 import _poolEruditeWizard from "../pool/erudite-wizard.js";
 import _poolEsperSentinel from "../pool/esper-sentinel.js";
+import _poolEssenceOfAntiquity from "../pool/essence-of-antiquity.js";
 import _poolEthercasteKnight from "../pool/ethercaste-knight.js";
 import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
 import _poolEvernightShade from "../pool/evernight-shade.js";
 import _poolEviscerator from "../pool/eviscerator.js";
 import _poolExplosiveVegetation from "../pool/explosive-vegetation.js";
+import _poolExtractAConfession from "../pool/extract-a-confession.js";
 import _poolEyeOfVecna from "../pool/eye-of-vecna.js";
 import _poolEzuriRenegadeLeader from "../pool/ezuri-renegade-leader.js";
 import _poolFaerieConclave from "../pool/faerie-conclave.js";
@@ -256,6 +260,7 @@ import _poolNamorScourgeOfTheSeas from "../pool/namor-scourge-of-the-seas.js";
 import _poolNaturesClaim from "../pool/natures-claim.js";
 import _poolNecroduality from "../pool/necroduality.js";
 import _poolNecrogenesis from "../pool/necrogenesis.js";
+import _poolNeighborhoodGuardian from "../pool/neighborhood-guardian.js";
 import _poolNevinyrralsDisk from "../pool/nevinyrrals-disk.js";
 import _poolNightveilPredator from "../pool/nightveil-predator.js";
 import _poolNinjasBlades from "../pool/ninjas-blades.js";
@@ -330,8 +335,10 @@ import _poolSellerOfSongbirds from "../pool/seller-of-songbirds.js";
 import _poolSemesterForeseer from "../pool/semester-foreseer.js";
 import _poolSerpentsGift from "../pool/serpents-gift.js";
 import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
+import _poolShadyInformant from "../pool/shady-informant.js";
 import _poolShakeTheFoundations from "../pool/shake-the-foundations.js";
 import _poolShamblingShell from "../pool/shambling-shell.js";
+import _poolSharpEyedRookie from "../pool/sharp-eyed-rookie.js";
 import _poolShieldmatesBlessing from "../pool/shieldmates-blessing.js";
 import _poolShoreKeeper from "../pool/shore-keeper.js";
 import _poolShreddersRevenge from "../pool/shredders-revenge.js";
@@ -519,6 +526,7 @@ const shard: CardShard = {
     _poolCabalEvangel,
     _poolCalderaLake,
     _poolCallTheGatewatch,
+    _poolCandlestick,
     _poolCarnageAltar,
     _poolCartoucheOfZeal,
     _poolCatharCommando,
@@ -547,6 +555,7 @@ const shard: CardShard = {
     _poolDeception,
     _poolDenziloreFatehold,
     _poolDesertCerodon,
+    _poolDetectivesSatchel,
     _poolDevastate,
     _poolDevkarinDissident,
     _poolDevouringDeep,
@@ -579,11 +588,13 @@ const shard: CardShard = {
     _poolErdwalRipper,
     _poolEruditeWizard,
     _poolEsperSentinel,
+    _poolEssenceOfAntiquity,
     _poolEthercasteKnight,
     _poolEtherswornSphinx,
     _poolEvernightShade,
     _poolEviscerator,
     _poolExplosiveVegetation,
+    _poolExtractAConfession,
     _poolEyeOfVecna,
     _poolEzuriRenegadeLeader,
     _poolFaerieConclave,
@@ -712,6 +723,7 @@ const shard: CardShard = {
     _poolNaturesClaim,
     _poolNecroduality,
     _poolNecrogenesis,
+    _poolNeighborhoodGuardian,
     _poolNevinyrralsDisk,
     _poolNightveilPredator,
     _poolNinjasBlades,
@@ -786,8 +798,10 @@ const shard: CardShard = {
     _poolSemesterForeseer,
     _poolSerpentsGift,
     _poolShadowGuildmage,
+    _poolShadyInformant,
     _poolShakeTheFoundations,
     _poolShamblingShell,
+    _poolSharpEyedRookie,
     _poolShieldmatesBlessing,
     _poolShoreKeeper,
     _poolShreddersRevenge,

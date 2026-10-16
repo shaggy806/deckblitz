@@ -11,6 +11,7 @@ import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
+import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
@@ -74,6 +75,7 @@ import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
+import _poolCopyCatchers from "../pool/copy-catchers.js";
 import _poolCorridorMonitor from "../pool/corridor-monitor.js";
 import _poolCorruptedConviction from "../pool/corrupted-conviction.js";
 import _poolCosmicRebirth from "../pool/cosmic-rebirth.js";
@@ -101,6 +103,7 @@ import _poolDutifulThrull from "../pool/dutiful-thrull.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
+import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
@@ -158,6 +161,7 @@ import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
 import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
+import _poolHarriedDronesmith from "../pool/harried-dronesmith.js";
 import _poolHauntedRidge from "../pool/haunted-ridge.js";
 import _poolHavocDemon from "../pool/havoc-demon.js";
 import _poolHeavyInfantry from "../pool/heavy-infantry.js";
@@ -239,6 +243,7 @@ import _poolNullGroupBiologicalAssets from "../pool/null-group-biological-assets
 import _poolNullmageShepherd from "../pool/nullmage-shepherd.js";
 import _poolObNixilisTheFallen from "../pool/ob-nixilis-the-fallen.js";
 import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
+import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
 import _poolOgreArsonist from "../pool/ogre-arsonist.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
@@ -249,6 +254,7 @@ import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
+import _poolPersuasiveInterrogators from "../pool/persuasive-interrogators.js";
 import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
@@ -447,6 +453,7 @@ const shard: CardShard = {
     _poolAdamantWill,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
+    _poolAgrusKosSpiritOfJustice,
     _poolAlleyEvasion,
     _poolAnUnexpectedParty,
     _poolAngelfireCrusader,
@@ -510,6 +517,7 @@ const shard: CardShard = {
     _poolClingingDarkness,
     _poolColleenWingStreetSamurai,
     _poolConsumingAberration,
+    _poolCopyCatchers,
     _poolCorridorMonitor,
     _poolCorruptedConviction,
     _poolCosmicRebirth,
@@ -537,6 +545,7 @@ const shard: CardShard = {
     _poolEcstaticElectromancer,
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,
+    _poolEliminateTheImpossible,
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEshkiDragonclaw,
@@ -594,6 +603,7 @@ const shard: CardShard = {
     _poolHamperingSnare,
     _poolHardenedScales,
     _poolHarmonicSliver,
+    _poolHarriedDronesmith,
     _poolHauntedRidge,
     _poolHavocDemon,
     _poolHeavyInfantry,
@@ -675,6 +685,7 @@ const shard: CardShard = {
     _poolNullmageShepherd,
     _poolObNixilisTheFallen,
     _poolOdricLunarchMarshal,
+    _poolOfficiousInterrogation,
     _poolOgreArsonist,
     _poolOliphaunt,
     _poolOliviasWrath,
@@ -685,6 +696,7 @@ const shard: CardShard = {
     _poolParapetWatchers,
     _poolPawnOfUlamog,
     _poolPerplexingTest,
+    _poolPersuasiveInterrogators,
     _poolPestilentSyphoner,
     _poolPhyrexianDebaser,
     _poolPhytoburst,

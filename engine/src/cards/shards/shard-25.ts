@@ -50,6 +50,7 @@ import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
+import _poolBubbleSmuggler from "../pool/bubble-smuggler.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
@@ -117,6 +118,7 @@ import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
+import _poolExpeditedInheritance from "../pool/expedited-inheritance.js";
 import _poolExpeditionEnvoy from "../pool/expedition-envoy.js";
 import _poolEyeOfNowhere from "../pool/eye-of-nowhere.js";
 import _poolFaithbearerPaladin from "../pool/faithbearer-paladin.js";
@@ -195,6 +197,7 @@ import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
+import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
 import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLakeshoreApothecary from "../pool/lakeshore-apothecary.js";
@@ -332,6 +335,7 @@ import _poolSlingshotGoblin from "../pool/slingshot-goblin.js";
 import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
 import _poolSolidarity from "../pool/solidarity.js";
+import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulmender from "../pool/soulmender.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
@@ -367,6 +371,7 @@ import _poolTitanHunter from "../pool/titan-hunter.js";
 import _poolTophEarthbendingMaster from "../pool/toph-earthbending-master.js";
 import _poolTopiaryStomper from "../pool/topiary-stomper.js";
 import _poolTorchGauntlet from "../pool/torch-gauntlet.js";
+import _poolTorchTheWitness from "../pool/torch-the-witness.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -474,6 +479,7 @@ const shard: CardShard = {
     _poolBrightstoneRitual,
     _poolBrinebarrowIntruder,
     _poolBrotherhoodSpy,
+    _poolBubbleSmuggler,
     _poolBumbleflowersSharepot,
     _poolBumpInTheNight,
     _poolCabalPit,
@@ -541,6 +547,7 @@ const shard: CardShard = {
     _poolEscapeToTheWilds,
     _poolEvershrikesGift,
     _poolExorcise,
+    _poolExpeditedInheritance,
     _poolExpeditionEnvoy,
     _poolEyeOfNowhere,
     _poolFaithbearerPaladin,
@@ -619,6 +626,7 @@ const shard: CardShard = {
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
     _poolKnightOfNewBenalia,
+    _poolKraulWhipcracker,
     _poolKrileBaldesion,
     _poolKydeleChosenOfKruphix,
     _poolLakeshoreApothecary,
@@ -756,6 +764,7 @@ const shard: CardShard = {
     _poolSlithBloodletter,
     _poolSmotheringTithe,
     _poolSolidarity,
+    _poolSoulEnervation,
     _poolSoulmender,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,
@@ -791,6 +800,7 @@ const shard: CardShard = {
     _poolTophEarthbendingMaster,
     _poolTopiaryStomper,
     _poolTorchGauntlet,
+    _poolTorchTheWitness,
     _poolTrailOfEvidence,
     _poolTreadUpon,
     _poolTuskguardCaptain,

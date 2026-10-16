@@ -1,0 +1,1626 @@
+{
+ "batch": "B91",
+ "status": "complete",
+ "ranks": "Murders at Karlov Manor (MKM) and Murders at Karlov Manor Commander (MKC), both 2024-02-09: the rest of the sets, with collect evidence (rule 701.59) and Cases (rule 719.3) built — and the older pool Cases that waited on them",
+ "authored": [
+  {
+   "name": "Absolving Lammasu",
+   "files": [
+    "engine/src/cards/pool/absolving-lammasu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agency Coroner",
+   "files": [
+    "engine/src/cards/pool/agency-coroner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agrus Kos, Spirit of Justice",
+   "files": [
+    "engine/src/cards/pool/agrus-kos-spirit-of-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alley Assailant",
+   "files": [
+    "engine/src/cards/pool/alley-assailant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alquist Proft, Master Sleuth",
+   "files": [
+    "engine/src/cards/pool/alquist-proft-master-sleuth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Analyze the Pollen",
+   "files": [
+    "engine/src/cards/pool/analyze-the-pollen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Audience with Trostani",
+   "files": [
+    "engine/src/cards/pool/audience-with-trostani.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basilica Stalker",
+   "files": [
+    "engine/src/cards/pool/basilica-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Behind the Mask",
+   "files": [
+    "engine/src/cards/pool/behind-the-mask.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benthic Criminologists",
+   "files": [
+    "engine/src/cards/pool/benthic-criminologists.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bolrac-Clan Basher",
+   "files": [
+    "engine/src/cards/pool/bolrac-clan-basher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Branch of Vitu-Ghazi",
+   "files": [
+    "engine/src/cards/pool/branch-of-vitu-ghazi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bubble Smuggler",
+   "files": [
+    "engine/src/cards/pool/bubble-smuggler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burden of Proof",
+   "files": [
+    "engine/src/cards/pool/burden-of-proof.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call a Surprise Witness",
+   "files": [
+    "engine/src/cards/pool/call-a-surprise-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Candlestick",
+   "files": [
+    "engine/src/cards/pool/candlestick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Crimson Pulse",
+   "files": [
+    "engine/src/cards/pool/case-of-the-crimson-pulse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Filched Falcon",
+   "files": [
+    "engine/src/cards/pool/case-of-the-filched-falcon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Gorgon's Kiss",
+   "files": [
+    "engine/src/cards/pool/case-of-the-gorgons-kiss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Ransacked Lab",
+   "files": [
+    "engine/src/cards/pool/case-of-the-ransacked-lab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Shattered Pact",
+   "files": [
+    "engine/src/cards/pool/case-of-the-shattered-pact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Shifting Visage",
+   "files": [
+    "engine/src/cards/pool/case-of-the-shifting-visage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Trampled Garden",
+   "files": [
+    "engine/src/cards/pool/case-of-the-trampled-garden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caught Red-Handed",
+   "files": [
+    "engine/src/cards/pool/caught-red-handed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cerebral Confiscation",
+   "files": [
+    "engine/src/cards/pool/cerebral-confiscation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chalk Outline",
+   "files": [
+    "engine/src/cards/pool/chalk-outline.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clandestine Meddler",
+   "files": [
+    "engine/src/cards/pool/clandestine-meddler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coerced to Kill",
+   "files": [
+    "engine/src/cards/pool/coerced-to-kill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Concealed Weapon",
+   "files": [
+    "engine/src/cards/pool/concealed-weapon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Copy Catchers",
+   "files": [
+    "engine/src/cards/pool/copy-catchers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cornered Crook",
+   "files": [
+    "engine/src/cards/pool/cornered-crook.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Counterpoint",
+   "files": [
+    "engine/src/cards/pool/counterpoint.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crimestopper Sprite",
+   "files": [
+    "engine/src/cards/pool/crimestopper-sprite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptic Coat",
+   "files": [
+    "engine/src/cards/pool/cryptic-coat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Cadaver",
+   "files": [
+    "engine/src/cards/pool/curious-cadaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curious Inquiry",
+   "files": [
+    "engine/src/cards/pool/curious-inquiry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadly Complication",
+   "files": [
+    "engine/src/cards/pool/deadly-complication.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defenestrated Phantom",
+   "files": [
+    "engine/src/cards/pool/defenestrated-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Detective's Satchel",
+   "files": [
+    "engine/src/cards/pool/detectives-satchel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dog Walker",
+   "files": [
+    "engine/src/cards/pool/dog-walker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doorkeeper Thrull",
+   "files": [
+    "engine/src/cards/pool/doorkeeper-thrull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drag the Canal",
+   "files": [
+    "engine/src/cards/pool/drag-the-canal.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eliminate the Impossible",
+   "files": [
+    "engine/src/cards/pool/eliminate-the-impossible.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence of Antiquity",
+   "files": [
+    "engine/src/cards/pool/essence-of-antiquity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evidence Examiner",
+   "files": [
+    "engine/src/cards/pool/evidence-examiner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Exit Specialist",
+   "files": [
+    "engine/src/cards/pool/exit-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expedited Inheritance",
+   "files": [
+    "engine/src/cards/pool/expedited-inheritance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Experiment Twelve",
+   "files": [
+    "engine/src/cards/pool/experiment-twelve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extract a Confession",
+   "files": [
+    "engine/src/cards/pool/extract-a-confession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezrim, Agency Chief",
+   "files": [
+    "engine/src/cards/pool/ezrim-agency-chief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Snoop",
+   "files": [
+    "engine/src/cards/pool/faerie-snoop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Felonious Rage",
+   "files": [
+    "engine/src/cards/pool/felonious-rage.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Festerleech",
+   "files": [
+    "engine/src/cards/pool/festerleech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Final-Word Phantom",
+   "files": [
+    "engine/src/cards/pool/final-word-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flourishing Bloom-Kin",
+   "files": [
+    "engine/src/cards/pool/flourishing-bloom-kin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forensic Researcher",
+   "files": [
+    "engine/src/cards/pool/forensic-researcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forum Familiar",
+   "files": [
+    "engine/src/cards/pool/forum-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furtive Courier",
+   "files": [
+    "engine/src/cards/pool/furtive-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fuss // Bother",
+   "files": [
+    "engine/src/cards/pool/fuss-bother.ts",
+    "engine/src/cards/pool/fuss.ts",
+    "engine/src/cards/pool/bother.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gadget Technician",
+   "files": [
+    "engine/src/cards/pool/gadget-technician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galvanize",
+   "files": [
+    "engine/src/cards/pool/galvanize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gearbane Orangutan",
+   "files": [
+    "engine/src/cards/pool/gearbane-orangutan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Get a Leg Up",
+   "files": [
+    "engine/src/cards/pool/get-a-leg-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Maskmaker",
+   "files": [
+    "engine/src/cards/pool/goblin-maskmaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Granite Witness",
+   "files": [
+    "engine/src/cards/pool/granite-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greenbelt Radical",
+   "files": [
+    "engine/src/cards/pool/greenbelt-radical.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hard-Hitting Question",
+   "files": [
+    "engine/src/cards/pool/hard-hitting-question.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harried Dronesmith",
+   "files": [
+    "engine/src/cards/pool/harried-dronesmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Havoc Eater",
+   "files": [
+    "engine/src/cards/pool/havoc-eater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Homicide Investigator",
+   "files": [
+    "engine/src/cards/pool/homicide-investigator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hotshot Investigators",
+   "files": [
+    "engine/src/cards/pool/hotshot-investigators.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illicit Masquerade",
+   "files": [
+    "engine/src/cards/pool/illicit-masquerade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inside Source",
+   "files": [
+    "engine/src/cards/pool/inside-source.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "It Doesn't Add Up",
+   "files": [
+    "engine/src/cards/pool/it-doesnt-add-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Izoni, Center of the Web",
+   "files": [
+    "engine/src/cards/pool/izoni-center-of-the-web.ts",
+    "engine/src/cards/tokens/spider-token-2-1-menace-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knife",
+   "files": [
+    "engine/src/cards/pool/knife.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kraul Whipcracker",
+   "files": [
+    "engine/src/cards/pool/kraul-whipcracker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krenko, Baron of Tin Street",
+   "files": [
+    "engine/src/cards/pool/krenko-baron-of-tin-street.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovod Haunch",
+   "files": [
+    "engine/src/cards/pool/krovod-haunch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kylox, Visionary Inventor",
+   "files": [
+    "engine/src/cards/pool/kylox-visionary-inventor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lead Pipe",
+   "files": [
+    "engine/src/cards/pool/lead-pipe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loxodon Eavesdropper",
+   "files": [
+    "engine/src/cards/pool/loxodon-eavesdropper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Macabre Reconstruction",
+   "files": [
+    "engine/src/cards/pool/macabre-reconstruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Makeshift Binding",
+   "files": [
+    "engine/src/cards/pool/makeshift-binding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marketwatch Phantom",
+   "files": [
+    "engine/src/cards/pool/marketwatch-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meddling Youths",
+   "files": [
+    "engine/src/cards/pool/meddling-youths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Museum Nightwatch",
+   "files": [
+    "engine/src/cards/pool/museum-nightwatch.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neighborhood Guardian",
+   "files": [
+    "engine/src/cards/pool/neighborhood-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nervous Gardener",
+   "files": [
+    "engine/src/cards/pool/nervous-gardener.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nightdrinker Moroii",
+   "files": [
+    "engine/src/cards/pool/nightdrinker-moroii.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Offender at Large",
+   "files": [
+    "engine/src/cards/pool/offender-at-large.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Officious Interrogation",
+   "files": [
+    "engine/src/cards/pool/officious-interrogation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Out Cold",
+   "files": [
+    "engine/src/cards/pool/out-cold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perimeter Enforcer",
+   "files": [
+    "engine/src/cards/pool/perimeter-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Person of Interest",
+   "files": [
+    "engine/src/cards/pool/person-of-interest.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Persuasive Interrogators",
+   "files": [
+    "engine/src/cards/pool/persuasive-interrogators.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pompous Gadabout",
+   "files": [
+    "engine/src/cards/pool/pompous-gadabout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Presumed Dead",
+   "files": [
+    "engine/src/cards/pool/presumed-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Private Eye",
+   "files": [
+    "engine/src/cards/pool/private-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Projektor Inspector",
+   "files": [
+    "engine/src/cards/pool/projektor-inspector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Public Thoroughfare",
+   "files": [
+    "engine/src/cards/pool/public-thoroughfare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyrotechnic Performer",
+   "files": [
+    "engine/src/cards/pool/pyrotechnic-performer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakish Scoundrel",
+   "files": [
+    "engine/src/cards/pool/rakish-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reasonable Doubt",
+   "files": [
+    "engine/src/cards/pool/reasonable-doubt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Detective",
+   "files": [
+    "engine/src/cards/pool/reckless-detective.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repeat Offender",
+   "files": [
+    "engine/src/cards/pool/repeat-offender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riftburst Hellion",
+   "files": [
+    "engine/src/cards/pool/riftburst-hellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rope",
+   "files": [
+    "engine/src/cards/pool/rope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rot Farm Mortipede",
+   "files": [
+    "engine/src/cards/pool/rot-farm-mortipede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rubblebelt Braggart",
+   "files": [
+    "engine/src/cards/pool/rubblebelt-braggart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rune-Brand Juggler",
+   "files": [
+    "engine/src/cards/pool/rune-brand-juggler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sample Collector",
+   "files": [
+    "engine/src/cards/pool/sample-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanctuary Wall",
+   "files": [
+    "engine/src/cards/pool/sanctuary-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanguine Savior",
+   "files": [
+    "engine/src/cards/pool/sanguine-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seasoned Consultant",
+   "files": [
+    "engine/src/cards/pool/seasoned-consultant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shady Informant",
+   "files": [
+    "engine/src/cards/pool/shady-informant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sharp-Eyed Rookie",
+   "files": [
+    "engine/src/cards/pool/sharp-eyed-rookie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slice from the Shadows",
+   "files": [
+    "engine/src/cards/pool/slice-from-the-shadows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sophia, Dogged Detective",
+   "files": [
+    "engine/src/cards/pool/sophia-dogged-detective.ts",
+    "engine/src/cards/tokens/tiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Enervation",
+   "files": [
+    "engine/src/cards/pool/soul-enervation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steamcore Scholar",
+   "files": [
+    "engine/src/cards/pool/steamcore-scholar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sumala Sentry",
+   "files": [
+    "engine/src/cards/pool/sumala-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surveillance Monitor",
+   "files": [
+    "engine/src/cards/pool/surveillance-monitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thinking Cap",
+   "files": [
+    "engine/src/cards/pool/thinking-cap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torch the Witness",
+   "files": [
+    "engine/src/cards/pool/torch-the-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "True Identity",
+   "files": [
+    "engine/src/cards/pool/true-identity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tunnel Tipster",
+   "files": [
+    "engine/src/cards/pool/tunnel-tipster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercity Eliminator",
+   "files": [
+    "engine/src/cards/pool/undercity-eliminator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercover Crocodelf",
+   "files": [
+    "engine/src/cards/pool/undercover-crocodelf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unshakable Tail",
+   "files": [
+    "engine/src/cards/pool/unshakable-tail.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unyielding Gatekeeper",
+   "files": [
+    "engine/src/cards/pool/unyielding-gatekeeper.ts",
+    "engine/src/cards/tokens/detective-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veiled Ascension",
+   "files": [
+    "engine/src/cards/pool/veiled-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Creeper",
+   "files": [
+    "engine/src/cards/pool/vengeful-creeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Tracker",
+   "files": [
+    "engine/src/cards/pool/vengeful-tracker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vitu-Ghazi Inspector",
+   "files": [
+    "engine/src/cards/pool/vitu-ghazi-inspector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wispdrinker Vampire",
+   "files": [
+    "engine/src/cards/pool/wispdrinker-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wrench",
+   "files": [
+    "engine/src/cards/pool/wrench.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "A Killer Among Us",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "\"Then secretly choose Human, Merfolk, or Goblin\" is a hidden choice on resolution, and its activation cost \"Reveal the creature type you chose\" can only be paid by the player who chose (the ruling) — neither exists."
+  },
+  {
+   "name": "Agency Outfitter",
+   "needs": [
+    "effect:search-hand-graveyard-library"
+   ],
+   "why": "\"Search your graveyard, hand and/or library for a card named Magnifying Glass and/or a card named Thinking Cap and put them onto the battlefield\": search-library's zones can't include the hand, nor find two differently named cards in one search."
+  },
+  {
+   "name": "Airtight Alibi",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "static:cant-become-suspected"
+   ],
+   "why": "\"Untap enchanted creature ... it's no longer suspected\" needs an effect reference to the enchanted creature, and \"can't become suspected\" has no static (Game.suspect checks nothing)."
+  },
+  {
+   "name": "Anzrag's Rampage",
+   "needs": [
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "'X is the number of artifacts that were put into graveyards from the battlefield this turn' (any artifact, tokens included): no turn count of permanents put into graveyards from the battlefield; TurnHistory's died is creatures only, left counts every zone."
+  },
+  {
+   "name": "Armed with Proof",
+   "needs": [
+    "static:grants-static-ability"
+   ],
+   "why": "'Clues you control ... have \"Equipped creature gets +2/+0\"': a static can add the Equipment subtype and grant equip {2} (grantsActivated), but can't grant a static ability."
+  },
+  {
+   "name": "Aurelia's Vindicator",
+   "needs": [
+    "cost:disguise-x-cost"
+   ],
+   "why": "Disguise {X}{3}{W}: the turn-face-up special action has no {X} (turnFaceUpCost is a fixed string), so neither the X cost nor the turned-face-up trigger's \"up to X other target creatures and/or creature cards\" can be expressed."
+  },
+  {
+   "name": "Axebane Ferox",
+   "needs": [
+    "decision:ward-collect-evidence"
+   ],
+   "why": "'Ward—Collect evidence 4': WardCost has mana, life, sacrifice, discard and blight but no collect-evidence payment by the targeting player."
+  },
+  {
+   "name": "Bite Down on Crime",
+   "needs": [
+    "cost:cost-reduction-if-kicked"
+   ],
+   "why": "'This spell costs {2} less to cast if evidence was collected' — a reduction tied to the optional additional cost being paid; kicker has no reduction, and selfCostReduction's condition is read off the card before the cast knows it is kicked (castingCostOf), so self-kicked can't gate it."
+  },
+  {
+   "name": "Blood Spatter Analysis",
+   "needs": [
+    "trigger:dies-batch-trigger"
+   ],
+   "why": "\"Whenever one or more creatures die\" must trigger once per batch (one counter, one mill); the `dies` trigger has no batched form, and oncePerTurn would wrongly stop a second batch the same turn."
+  },
+  {
+   "name": "Boltbender",
+   "needs": [
+    "effect:choose-new-targets-any-number"
+   ],
+   "why": "'You may choose new targets for any number of other spells and/or abilities': change-targets acts on one targeted spell or ability, not a non-targeted choice of any number on the stack."
+  },
+  {
+   "name": "Break Out",
+   "needs": [
+    "effect:look-and-choose-revealed-card-destination"
+   ],
+   "why": "One revealed creature card goes onto the battlefield with haste if its mana value is 2 or less and the player wants, otherwise into the hand: a first pick (MV<=2 to battlefield) plus `secondPick.ifNoneChosen` to hand comes close, but the second pick isn't revealed under reveal:\"chosen\", so the hand-bound card stays hidden from opponents."
+  },
+  {
+   "name": "Case File Auditor",
+   "needs": [
+    "mechanic:case"
+   ],
+   "why": "\"Whenever you solve a Case\" and \"spend mana as though it were mana of any color to cast Case spells\" need the Case mechanic, not built yet."
+  },
+  {
+   "name": "Case of the Burning Masks",
+   "needs": [
+    "condition:distinct-damage-sources-this-turn"
+   ],
+   "why": "To solve — 'three or more sources you controlled dealt damage this turn' counts distinct sources (a blinked one a new source, one source dealing damage repeatedly once — its rulings); damage-dealt-this-turn sums damage amounts and turnHistory.damageDealt records sources without their stint."
+  },
+  {
+   "name": "Case of the Gateway Express",
+   "needs": [
+    "effect:each-permanent-deals-damage"
+   ],
+   "why": "'Each creature you control deals 1 damage to that creature' is one damage source per creature (deathtouch, lifelink, protection each apply); no effect makes each of several permanents deal damage."
+  },
+  {
+   "name": "Case of the Locked Hothouse",
+   "needs": [
+    "static:look-at-top-card-conditional"
+   ],
+   "why": "Solved — 'You may look at the top card of your library any time' must work only once solved, but looksAtOwnLibraryTop is an unconditional card-level flag (view.ts); the extra land drop, the to-solve check and the play/cast-from-top statics gated on solved are all expressible."
+  },
+  {
+   "name": "Case of the Pilfered Proof",
+   "needs": [
+    "replacement:token-creation-add-extra"
+   ],
+   "why": "Solved: 'those tokens plus a Clue token are created instead' is an additive token replacement adding a different token; would-create-token has only multiplier and creatureTokensInstead."
+  },
+  {
+   "name": "Case of the Stashed Skeleton",
+   "needs": [
+    "effect:created-token-reference"
+   ],
+   "why": "'Create a 2/1 black Skeleton creature token and suspect it' — suspect takes only a target slot, source or trigger object, not the token(s) just created (all of them under a token doubler); the rest (to solve via a not/controls suspected Skeleton, the solved tutor) is expressible."
+  },
+  {
+   "name": "Case of the Uneaten Feast",
+   "needs": [
+    "effect:grant-graveyard-cast-all"
+   ],
+   "why": "Solved — 'Creature cards in your graveyard gain \"You may cast this card from your graveyard\" until end of turn' reaches only the cards there as it resolves (rule 611.2c); grant-graveyard-cast is one target, and player-effect castFromGraveyard also admits cards put there later in the turn."
+  },
+  {
+   "name": "Cease // Desist",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "Cease's \"Exile up to two target cards from a single graveyard\" needs a cross-slot constraint that both targets share one graveyard; Desist alone would be fine but the split card is one card."
+  },
+  {
+   "name": "Charnel Serenade",
+   "needs": [
+    "effect:exile-self-with-time-counters"
+   ],
+   "why": "'Exile Charnel Serenade with three time counters on it' (so it's suspended again) has no vocabulary; exile-spell-as-it-resolves can't add time counters."
+  },
+  {
+   "name": "Connecting the Dots",
+   "needs": [
+    "effect:exile-top-face-down-linked"
+   ],
+   "why": "'Exile the top card of your library face down (you can't look at it)', linked to the enchantment for its 'put all cards exiled with this into their owners' hands' — impulse-exile's faceDown lets the controller look and grants a play permission, and look-and-choose's exile-face-down lets the chooser look."
+  },
+  {
+   "name": "Conspiracy Unraveler",
+   "needs": [
+    "cost:alt-cost-collect-evidence-for-spells"
+   ],
+   "why": "'You may collect evidence 10 rather than pay the mana cost for spells you cast': alternativeCostForSpells takes only a mana cost."
+  },
+  {
+   "name": "Convenient Target",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"When this Aura enters, suspect enchanted creature\": no EffectTargetRef names an Aura's enchanted permanent."
+  },
+  {
+   "name": "Coveted Falcon",
+   "needs": [
+    "effect:this-way-gained-control"
+   ],
+   "why": "Its turned-face-up trigger draws 'a card for each one they gained control of this way' — there is no this-way count of control changes, and counting the chosen targets would still draw when the opponent target turns illegal and nothing changes hands."
+  },
+  {
+   "name": "Crowd-Control Warden",
+   "needs": [
+    "replacement:as-turned-face-up-dynamic-counters"
+   ],
+   "why": "\"As this creature enters or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control\": the enters half is expressible, but `asTurnedFaceUp.counters` is a fixed number, not an amount."
+  },
+  {
+   "name": "Cryptex",
+   "needs": [
+    "effect:mana-ability-graveyard-exile-cost"
+   ],
+   "why": "'{T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on this artifact.' is a mana ability (its ruling) with a collect-evidence cost, which the engine refuses on a mana ability (game.ts: collect evidence is chosen once the ability is on the stack)."
+  },
+  {
+   "name": "Culvert Ambusher",
+   "needs": [
+    "effect:forced-block-this-combat"
+   ],
+   "why": "\"Target creature blocks this turn if able\" — a block requirement placed on one creature by an effect (here for the turn); no effect imposes a must-block on a target."
+  },
+  {
+   "name": "Deadly Cover-Up",
+   "needs": [
+    "effect:extract-same-name",
+    "effect:search-opponent-library"
+   ],
+   "why": "The evidence rider (exile a card from an opponent's graveyard, then search its owner's graveyard, hand and library for any number of cards with that name and exile them, that player shuffles and draws one per card exiled from hand) has no effect."
+  },
+  {
+   "name": "Dramatic Accusation",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "static:doesnt-untap-filter",
+    "effect:shuffle-into-library"
+   ],
+   "why": "\"Tap enchanted creature\" and \"{U}{U}: Shuffle enchanted creature into its owner's library\" need an enchanted-permanent effect reference and a shuffle-a-permanent-into-library effect; doesntUntap is used only with scope self."
+  },
+  {
+   "name": "Due Diligence",
+   "needs": [
+    "condition:not-attached-to-source"
+   ],
+   "why": "\"Target creature you control other than enchanted creature\": no filter clause excludes the permanent the source is attached to."
+  },
+  {
+   "name": "Etrata, Deadly Fugitive",
+   "needs": [
+    "effect:turn-face-up",
+    "effect:manifest-from-other-library"
+   ],
+   "why": "The granted '{2}{U}{B}: Turn this creature face up. If you can't, exile it, then you may cast the exiled card' needs a turn-face-up effect with a can't-fallback, and 'cloak the top card of that player's library' cloaks from another player's library under you."
+  },
+  {
+   "name": "Expose the Culprit",
+   "needs": [
+    "effect:turn-face-up",
+    "effect:cloak-exiled-pile"
+   ],
+   "why": "Neither \"turn target face-down creature face up\" as an effect nor exiling face-up disguise creatures into a shuffled face-down pile and cloaking them exists."
+  },
+  {
+   "name": "Eye of Duskmantle",
+   "needs": [
+    "zone:play-from-graveyard-surveilled-this-turn"
+   ],
+   "why": "'You may play lands and cast spells from among cards in your graveyard you've surveilled this turn ... pay life equal to its mana value rather than its mana cost': no record of which graveyard cards were surveilled this turn, and no pay-life-equal-to-mana-value alternative cost."
+  },
+  {
+   "name": "Fae Flight",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "'When this Aura enters, enchanted creature gains hexproof until end of turn' — no EffectTargetRef names the Aura's enchanted creature for a one-shot effect (a static over 'attached' would apply at once, unrespondable, and end when the Aura leaves)."
+  },
+  {
+   "name": "Feather, Radiant Arbiter",
+   "needs": [
+    "effect:copy-spell-for-each-chosen-paid"
+   ],
+   "why": "'Choose any number of other creatures that spell could target and pay {2} for each ... for each of those creatures, copy that spell': copy-spell's forEachItCouldTarget copies for every legal one, with no player choice of a subset and no per-copy payment."
+  },
+  {
+   "name": "Flotsam // Jetsam",
+   "needs": [
+    "effect:cast-now-from-each-opponent-graveyard",
+    "decision:choose-card-per-graveyard"
+   ],
+   "why": "Jetsam's \"you may cast a spell from each opponent's graveyard without paying its mana cost\" (untargeted, chosen after the mill): cast-now's `from: \"graveyard\"` reaches only the caster's own graveyard and Diluvian Primordial's per-seat slots are targets chosen before the mill; a split card can't ship with one half."
+  },
+  {
+   "name": "Follow the Bodies",
+   "needs": [
+    "keyword:gravestorm",
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "Gravestorm isn't modeled, and nothing counts permanents put into graveyards from the battlefield this turn (TurnHistory's died is creatures only)."
+  },
+  {
+   "name": "Foreboding Steamboat",
+   "needs": [
+    "effect:each-player-chooses-then-all-act",
+    "effect:exiled-with-source-to-graveyard"
+   ],
+   "why": "'Each player chooses two nontoken, non-Vehicle creatures they control. Exile them until this Vehicle leaves' (choices in turn order, then one exile) and 'put a card exiled with it into its owner's graveyard. If you do, investigate' have no vocabulary."
+  },
+  {
+   "name": "Frantic Scapegoat",
+   "needs": [
+    "decision:choose-from-batch"
+   ],
+   "why": "\"You may suspect one of the other creatures\" picks among the creatures that entered together with the batched trigger, untargeted, on resolution; no choose-permanents over a trigger's batch exists."
+  },
+  {
+   "name": "Fugitive Codebreaker",
+   "needs": [
+    "cost:disguise-cost-reduction"
+   ],
+   "why": "\"Disguise {5}{R}. This cost is reduced by {1} for each instant and sorcery card in your graveyard\": `morph.cost` is a fixed mana string and turnFaceUpCost applies no reduction."
+  },
+  {
+   "name": "Glint Weaver",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "Distributing three +1/+1 counters among one, two or three targets: with two targets the player chooses which gets two, and no target spec or prompt can carry that division (only the symmetric two-among-two shape is buildable with target-chosen conditionals)."
+  },
+  {
+   "name": "Griffnaut Tracker",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"Exile up to two target cards from a single graveyard\": an any-number card-in-graveyard group has no same-graveyard constraint, so two cards from different graveyards could be chosen."
+  },
+  {
+   "name": "Hedge Whisperer",
+   "needs": [
+    "static:may-choose-not-to-untap",
+    "effect:duration-while-source-tapped"
+   ],
+   "why": "'You may choose not to untap this creature during your untap step' has no vocabulary, and the land animation lasts 'for as long as this creature remains tapped', a duration PtDuration lacks."
+  },
+  {
+   "name": "Hide in Plain Sight",
+   "needs": [
+    "effect:look-and-choose-cloak"
+   ],
+   "why": "'Look at the top five cards, cloak two of them' — look-and-choose's 'manifest' destination manifests (no ward {2}); there is no cloak destination."
+  },
+  {
+   "name": "Hustle // Bustle",
+   "needs": [
+    "effect:must-block-this-turn",
+    "effect:turn-face-up"
+   ],
+   "why": "Hustle's \"target creature attacks or blocks this turn if able\" needs a block requirement (`restrict` has must-attack but no must-block), and Bustle's \"You may turn a creature you control face up\" needs an effect that turns a permanent face up (only the special action exists)."
+  },
+  {
+   "name": "Ill-Timed Explosion",
+   "needs": [
+    "effect:greatest-among-discarded"
+   ],
+   "why": "'X is the greatest mana value among cards discarded this way': a thisWay amount sums (sumOf mana-value) but has no maximum."
+  },
+  {
+   "name": "Immortal Obligation",
+   "needs": [
+    "effect:goad-while-counter"
+   ],
+   "why": "'For as long as that creature has a duty counter on it, it is goaded, can't attack you or a permanent you control, and can't block creatures you control': goad has no whileCounter duration, and no restriction says 'can't attack you / can't block creatures you control' as a one-shot effect."
+  },
+  {
+   "name": "Incinerator of the Guilty",
+   "needs": [
+    "keyword:collect-evidence-x"
+   ],
+   "why": "'You may collect evidence X. When you do, ... deals X damage' needs X chosen as the trigger resolves and read by the reflexive trigger; the collect-evidence effect takes only a fixed number."
+  },
+  {
+   "name": "Innocent Bystander",
+   "needs": [
+    "trigger:dealt-damage-amount-threshold"
+   ],
+   "why": "\"Whenever this creature is dealt 3 or more damage\" (all at once — the ruling): the `dealt-damage` trigger carries the amount as its trigger value but nothing can gate the trigger on it."
+  },
+  {
+   "name": "Innocuous Researcher",
+   "needs": [
+    "keyword:parley"
+   ],
+   "why": "Parley — each player reveals their top card, investigate per nonland revealed, then each player draws — has no shape (reveal-top reveals one library); also 'you can't cast spells until your next turn' (prohibit is this-turn only)."
+  },
+  {
+   "name": "Intrude on the Mind",
+   "needs": [
+    "mechanic:piles"
+   ],
+   "why": "Separating the revealed cards into two piles for an opponent to choose between isn't modeled."
+  },
+  {
+   "name": "Jaded Analyst",
+   "needs": [
+    "effect:lose-keyword-until-eot"
+   ],
+   "why": "\"This creature loses defender ... until end of turn\": no effect removes a single keyword from a permanent."
+  },
+  {
+   "name": "Karlov Watchdog",
+   "needs": [
+    "static:cant-turn-face-up"
+   ],
+   "why": "\"Permanents your opponents control can't be turned face up during your turn\": whyCannotTurnFaceUp consults no static restriction (the ruling covers disguise/morph costs and a cloaked/manifested creature's mana cost)."
+  },
+  {
+   "name": "Kaust, Eyes of the Glade",
+   "needs": [
+    "stat:turned-face-up-this-turn",
+    "effect:turn-face-up"
+   ],
+   "why": "No filter for 'a creature that was turned face up this turn', and '{T}: Turn target face-down attacking creature you control face up' needs a turn-face-up effect."
+  },
+  {
+   "name": "Kaya, Spirits' Justice",
+   "needs": [
+    "decision:choose-from-batch",
+    "effect:look-and-choose-unlinked-exile"
+   ],
+   "why": "Its static trigger chooses 'a creature card from among them' (the batch of creatures and graveyard creature cards just exiled) for a token to copy, and the +2's 'exile a card from a graveyard' is an untargeted, unlinked exile choice across graveyards."
+  },
+  {
+   "name": "Knowledge Is Power",
+   "needs": [
+    "static:pt-per-turn-stat"
+   ],
+   "why": "'Creatures you control get +X/+X, where X is the number of cards you've drawn this turn': grantPtPerCount has no turn-stat count (cards-drawn exists only as an EffectAmount)."
+  },
+  {
+   "name": "Krenko's Buzzcrusher",
+   "needs": [
+    "effect:choose-per-player-untargeted"
+   ],
+   "why": "'For each player, destroy up to one nonbasic land that player controls' is untargeted (the ruling) — no CardFilter names 'that player' inside a for-each-player, the destroys must happen together, and choose-permanents' then can't ask each destroyed land's controller whether to search."
+  },
+  {
+   "name": "Kylox's Voltstrider",
+   "needs": [
+    "cost:collect-evidence-linked-exile",
+    "effect:cast-now-bottom-of-library-after"
+   ],
+   "why": "'Cast an instant or sorcery spell from among cards exiled with it' needs the cards its collect-evidence cost exiled linked to the Vehicle (the cost's choose-from-zone records no exiledWith), and 'if that spell would be put into a graveyard, put it on the bottom of its owner's library instead' has no cast-now option (only exileAfter)."
+  },
+  {
+   "name": "Lamplight Phoenix",
+   "needs": [
+    "effect:may-exile-self-and-collect-evidence"
+   ],
+   "why": "'You may exile it and collect evidence 4' is one choice, offered only if both can be done (the Phoenix itself not counted as evidence, per the ruling) with collecting then mandatory; a may + exile + collect-evidence sequence lets the player exile it with too little graveyard or decline the (always optional) collect after exiling."
+  },
+  {
+   "name": "Lazav, Wearer of Faces",
+   "needs": [
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "'Become a copy of a creature card exiled with it' needs a choice among the cards linked to Lazav as the ability resolves; become-copy can only copy a slot, the source or the trigger object."
+  },
+  {
+   "name": "Living Conundrum",
+   "needs": [
+    "decision:replacement-order-choice"
+   ],
+   "why": "\"If you would draw a card while your library has no cards in it, skip that draw instead\" is writable (a would-draw `{ draws: 0 }` gated by a library-size static condition), but the drawing player chooses its order against Laboratory Maniac / Jace, Wielder of Mysteries and an opponent's Notion Thief (its ruling); the engine applies those first or never asks, so Conundrum + Jace would skip the winning draw."
+  },
+  {
+   "name": "Lumbering Laundry",
+   "needs": [
+    "effect:look-at-face-down-permanents"
+   ],
+   "why": "\"{2}: Until end of turn, you may look at face-down creatures you don't control any time\": no effect or view permission reveals other players' face-down permanents to a player."
+  },
+  {
+   "name": "Magnetic Snuffler",
+   "needs": [
+    "effect:put-onto-battlefield-attached"
+   ],
+   "why": "\"Return target Equipment card from your graveyard to the battlefield attached to this creature\": put-onto-battlefield has no attach-on-entry, and a following `attach` can't name the returned card (it's a new object after the zone change, rule 400.7)."
+  },
+  {
+   "name": "Melek, Reforged Researcher",
+   "needs": [
+    "bug:cda-count-multiplier"
+   ],
+   "why": "The CDA is 'twice the number of instant and sorcery cards in your graveyard' — setBasePtFromCount has no multiplier, and adding a matching +N/+N static would be layer 7c, wrong once a layer-7b effect sets its base P/T."
+  },
+  {
+   "name": "Mistway Spy",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "Its turned-face-up trigger sets up \"until end of turn, whenever a creature you control deals combat damage to a player, investigate\" — a turn-scoped triggered ability created by a resolving effect; delayed triggers only fire once (a step, a leave, a next spell, one creature's combat damage)."
+  },
+  {
+   "name": "Niv-Mizzet, Guildpact",
+   "needs": [
+    "effect:amount-color-pairs",
+    "keyword:hexproof-from-multicolored"
+   ],
+   "why": "X is 'the number of different color pairs among permanents you control that are exactly two colors' — no such amount; and 'hexproof from multicolored' isn't modeled (only plain hexproof)."
+  },
+  {
+   "name": "No Witnesses",
+   "needs": [
+    "condition:player-controls-most"
+   ],
+   "why": "'Each player who controls the most creatures investigates' — no player scope or that-player condition picks the players with the most (or tied for the most) creatures."
+  },
+  {
+   "name": "Otherworldly Escort",
+   "needs": [
+    "stat:filter-dealt-damage-to-you-this-turn"
+   ],
+   "why": "'Destroy target creature that dealt damage to you this turn': no target filter for a creature that dealt damage to you this turn."
+  },
+  {
+   "name": "Panoptic Projektor",
+   "needs": [
+    "static:trigger-doubler-turned-face-up",
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "doubleTriggers has no 'turning a face-down permanent face up' cause, and '{T}: the next face-down creature spell you cast this turn costs {3} less' has no one-shot next-spell reduction."
+  },
+  {
+   "name": "Polygraph Orb",
+   "needs": [
+    "effect:each-player-chooses-then-all-act"
+   ],
+   "why": "Its ruling: each opponent chooses (discard, sacrifice a creature or lose 3) in turn order, then all the actions happen simultaneously, the discarded card unrevealed until then; each-player-may carries out each player's choice before asking the next (Perforating Artist's blocker)."
+  },
+  {
+   "name": "Printlifter Ooze",
+   "needs": [
+    "effect:create-token-enters-with-counters"
+   ],
+   "why": "'The token enters with X +1/+1 counters on it': create-token's thenCounters puts them on after it entered as a 0/0, so 'whenever a creature with power N or less enters' (Wispdrinker Vampire) sees a 0/0; no enters-with option on a created token."
+  },
+  {
+   "name": "Push // Pull",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "Pull's \"up to two target creature cards from a single graveyard\" needs a cross-slot constraint that both targets share one graveyard; Push alone would be fine but the split card is one card."
+  },
+  {
+   "name": "Ransom Note",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "'{2}, Sacrifice this artifact: Choose one — ... Goad target creature ...': a modal activated ability whose mode brings a target can't be expressed (AUTHORING §15 — modes chosen as activated, rule 700.2b)."
+  },
+  {
+   "name": "Reenact the Crime",
+   "needs": [
+    "condition:put-into-graveyard-this-turn-filter"
+   ],
+   "why": "Its target is 'a nonland card in a graveyard that was put there from anywhere this turn' — CardFilter only has putIntoGraveyardFromLibraryThisTurn (the milled marker), not a from-anywhere one."
+  },
+  {
+   "name": "Relive the Past",
+   "needs": [
+    "effect:reanimate-as-animated-creature"
+   ],
+   "why": "\"They are 5/5 Elemental creatures in addition to their other types\" has to apply as the three cards enter (so creature/Elemental enters triggers see them), but put-onto-battlefield has only addSubtypes/setTypes, no added card type with a set base P/T; an `animate` afterwards would make them creatures only after they've entered."
+  },
+  {
+   "name": "Serene Sleuth",
+   "needs": [
+    "effect:ungoad"
+   ],
+   "why": "'Then each creature you control is no longer goaded': no effect ends goad (the investigate-per-goaded-creature half is expressible)."
+  },
+  {
+   "name": "Showstopping Surprise",
+   "needs": [
+    "effect:turn-face-up"
+   ],
+   "why": "'Turn it face up if it's face down' — no effect turns a permanent face up (only the special action exists)."
+  },
+  {
+   "name": "Soul Search",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "\"Target opponent reveals their hand. You choose a nonland card from it. Exile that card. If the card's mana value is 1 or less, create a Spirit\": discard-chosen discards rather than exiles, and nothing reads the exiled card's mana value."
+  },
+  {
+   "name": "Sudden Setback",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "\"The owner of target spell or nonland permanent puts it on their choice of the top or bottom of their library\": put-on-library takes a fixed position and a modal is always the effect's controller's choice, never the target's owner's."
+  },
+  {
+   "name": "Suspicious Detonation",
+   "needs": [
+    "stat:sacrificed-this-turn"
+   ],
+   "why": "\"This spell costs {3} less to cast if you've sacrificed an artifact this turn\": no TurnStat or condition tracks permanents a player sacrificed this turn (the `sacrificed` condition is a cost's own sacrifice)."
+  },
+  {
+   "name": "Tenth District Hero",
+   "needs": [
+    "static:set-name"
+   ],
+   "why": "The second ability makes it 'a legendary creature named Mileva, the Stalwart' (a name change, which the legend rule reads) and gives it a static ability ('Other creatures you control have indestructible') by a resolving effect; nothing sets a permanent's name, and the first ability's 'becomes a Human Detective' with no duration would also need checking."
+  },
+  {
+   "name": "Tesak, Judith's Hellhound",
+   "needs": [
+    "keyword:unleash"
+   ],
+   "why": "Unleash (rule 702.98) isn't modeled, nor 'Other Dogs you control have unleash' — a granted as-enters choice (the riot-grant problem in AUTHORING §15)."
+  },
+  {
+   "name": "Tin Street Gossip",
+   "needs": [
+    "cost:spend-only-turn-face-up"
+   ],
+   "why": "\"Spend this mana only to cast face-down spells or to turn creatures face up\": spendOnly has no clause admitting the turn-face-up special action's cost (a face-down-spell `spell` filter alone would drop half of it)."
+  },
+  {
+   "name": "Tolsimir, Midnight's Light",
+   "needs": [
+    "effect:forced-block-this-combat"
+   ],
+   "why": "'Target creature an opponent controls blocks that Wolf this combat if able' — no per-combat block requirement tying one creature to one attacker (the Voja Fenstalker token and the rest are expressible)."
+  },
+  {
+   "name": "Treacherous Greed",
+   "needs": [
+    "condition:filter-dealt-damage-this-turn"
+   ],
+   "why": "The additional cost sacrifices 'a creature that dealt damage this turn' (to anything, the ruling) — CardFilter has only dealtDamageToCreatureThisTurn, which misses damage dealt to players and planeswalkers."
+  },
+  {
+   "name": "Unscrupulous Agent",
+   "needs": [
+    "effect:player-exiles-chosen-from-hand"
+   ],
+   "why": "\"Target opponent exiles a card from their hand\" — the opponent's own choice of a card to exile; discard-chosen is the caster choosing and a discard, not an exile."
+  },
+  {
+   "name": "Urgent Necropsy",
+   "needs": [
+    "keyword:collect-evidence-x"
+   ],
+   "why": "Mandatory additional cost 'collect evidence X, where X is the total mana value of the permanents this spell targets', fixed after targets are chosen; the kicker collectEvidence is a fixed optional number."
+  },
+  {
+   "name": "Vannifar, Evolved Enigma",
+   "needs": [
+    "effect:manifest-from-hand"
+   ],
+   "why": "'Cloak a card from your hand': manifest/cloak only take the library's top card; look-and-choose's manifest destination manifests (no ward), never cloaks."
+  },
+  {
+   "name": "Watcher of Hours",
+   "needs": [
+    "trigger:counter-removed-trigger"
+   ],
+   "why": "'Whenever you remove a time counter from this card while it's exiled, surveil 1': no trigger on a counter being removed, and none that works from exile."
+  },
+  {
+   "name": "Yarus, Roar of the Old Gods",
+   "needs": [
+    "effect:return-face-up-or-down",
+    "effect:turn-face-up"
+   ],
+   "why": "'Return it to the battlefield face down ... then turn it face up' — nothing returns a card face down from a graveyard, and no effect turns a permanent face up (only the special action)."
+  }
+ ]
+}

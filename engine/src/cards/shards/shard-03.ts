@@ -97,6 +97,7 @@ import _poolEphemerate from "../pool/ephemerate.js";
 import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
+import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
 import _poolExplosiveDerailment from "../pool/explosive-derailment.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
@@ -232,6 +233,7 @@ import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
+import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
@@ -320,6 +322,7 @@ import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
+import _poolSumalaSentry from "../pool/sumala-sentry.js";
 import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
@@ -500,6 +503,7 @@ const shard: CardShard = {
     _poolEquilibriumAdept,
     _poolErraticVisionary,
     _poolEtheriumHornSorcerer,
+    _poolEvidenceExaminer,
     _poolExhibitionTidecaller,
     _poolExplosiveDerailment,
     _poolFaerieDuelist,
@@ -635,6 +639,7 @@ const shard: CardShard = {
     _poolOrcristGoblinCleaver,
     _poolPersist,
     _poolPiggyBank,
+    _poolPompousGadabout,
     _poolPopularEgotist,
     _poolPrismariTheInspiration,
     _poolProsshSkyraiderOfKher,
@@ -723,6 +728,7 @@ const shard: CardShard = {
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
     _poolSulfurVent,
+    _poolSumalaSentry,
     _poolSunSpiderNimbleWebber,
     _poolSunderingArchaic,
     _poolSunspireGriffin,

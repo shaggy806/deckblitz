@@ -66,8 +66,10 @@ import _poolCaptainMarVellSpaceBorn from "../pool/captain-mar-vell-space-born.js
 import _poolCaptainsDefense from "../pool/captains-defense.js";
 import _poolCaregiver from "../pool/caregiver.js";
 import _poolCarrionAnts from "../pool/carrion-ants.js";
+import _poolCaseOfTheFilchedFalcon from "../pool/case-of-the-filched-falcon.js";
 import _poolCastleEmbereth from "../pool/castle-embereth.js";
 import _poolCatharsShield from "../pool/cathars-shield.js";
+import _poolCaughtRedHanded from "../pool/caught-red-handed.js";
 import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
@@ -77,6 +79,7 @@ import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
+import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
@@ -192,6 +195,7 @@ import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
+import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJadecraftArtisan from "../pool/jadecraft-artisan.js";
 import _poolJewelEyedCobra from "../pool/jewel-eyed-cobra.js";
@@ -247,6 +251,7 @@ import _poolMorphling from "../pool/morphling.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
+import _poolNervousGardener from "../pool/nervous-gardener.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
@@ -295,6 +300,7 @@ import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRoboticsMastery from "../pool/robotics-mastery.js";
+import _poolRope from "../pool/rope.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
@@ -506,8 +512,10 @@ const shard: CardShard = {
     _poolCaptainsDefense,
     _poolCaregiver,
     _poolCarrionAnts,
+    _poolCaseOfTheFilchedFalcon,
     _poolCastleEmbereth,
     _poolCatharsShield,
+    _poolCaughtRedHanded,
     _poolCavalierOfDawn,
     _poolCavernOfSouls,
     _poolCelestialUnicorn,
@@ -517,6 +525,7 @@ const shard: CardShard = {
     _poolCloudreaderSphinx,
     _poolCoastalTower,
     _poolCommandersInsignia,
+    _poolConcealedWeapon,
     _poolConsumedByGreed,
     _poolCopyEnchantment,
     _poolCoreProwler,
@@ -632,6 +641,7 @@ const shard: CardShard = {
     _poolInstantRamen,
     _poolInvasionSubmersible,
     _poolIsolatedChapel,
+    _poolIzoniCenterOfTheWeb,
     _poolIzzetLocket,
     _poolJadecraftArtisan,
     _poolJewelEyedCobra,
@@ -687,6 +697,7 @@ const shard: CardShard = {
     _poolMutantSurveyor,
     _poolNarsetEnlightenedMaster,
     _poolNeedletoothPack,
+    _poolNervousGardener,
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
     _poolNomadicElf,
@@ -735,6 +746,7 @@ const shard: CardShard = {
     _poolRivenTurnbull,
     _poolRobotDomination,
     _poolRoboticsMastery,
+    _poolRope,
     _poolRottingMastodon,
     _poolRoyalFalcon,
     _poolRunThePlay,

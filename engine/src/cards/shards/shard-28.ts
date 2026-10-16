@@ -77,6 +77,7 @@ import _poolCowerInFear from "../pool/cower-in-fear.js";
 import _poolCrimsonMage from "../pool/crimson-mage.js";
 import _poolCultGuildmage from "../pool/cult-guildmage.js";
 import _poolCuratorBeastie from "../pool/curator-beastie.js";
+import _poolCuriousInquiry from "../pool/curious-inquiry.js";
 import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
 import _poolDarkBanishing from "../pool/dark-banishing.js";
@@ -115,6 +116,7 @@ import _poolExplore from "../pool/explore.js";
 import _poolExplosiveShot from "../pool/explosive-shot.js";
 import _poolExudeToxin from "../pool/exude-toxin.js";
 import _poolFaeburrowElder from "../pool/faeburrow-elder.js";
+import _poolFaerieSnoop from "../pool/faerie-snoop.js";
 import _poolFanaticalDevotion from "../pool/fanatical-devotion.js";
 import _poolFanaticalFever from "../pool/fanatical-fever.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
@@ -397,6 +399,7 @@ import _poolVanquish from "../pool/vanquish.js";
 import _poolVeneratedStormsinger from "../pool/venerated-stormsinger.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
+import _poolVituGhaziInspector from "../pool/vitu-ghazi-inspector.js";
 import _poolVodalianSoldiers from "../pool/vodalian-soldiers.js";
 import _poolVoidExtrapolator from "../pool/void-extrapolator.js";
 import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
@@ -506,6 +509,7 @@ const shard: CardShard = {
     _poolCrimsonMage,
     _poolCultGuildmage,
     _poolCuratorBeastie,
+    _poolCuriousInquiry,
     _poolCutthroatCenturion,
     _poolDakmorBat,
     _poolDarkBanishing,
@@ -544,6 +548,7 @@ const shard: CardShard = {
     _poolExplosiveShot,
     _poolExudeToxin,
     _poolFaeburrowElder,
+    _poolFaerieSnoop,
     _poolFanaticalDevotion,
     _poolFanaticalFever,
     _poolFaunaShaman,
@@ -826,6 +831,7 @@ const shard: CardShard = {
     _poolVeneratedStormsinger,
     _poolViashinoSandscout,
     _poolVisceraDragger,
+    _poolVituGhaziInspector,
     _poolVodalianSoldiers,
     _poolVoidExtrapolator,
     _poolVoidforgedTitan,

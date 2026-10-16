@@ -41,6 +41,7 @@ import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
+import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
 import _poolBrazenCollector from "../pool/brazen-collector.js";
 import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
@@ -76,6 +77,7 @@ import _poolCreakwoodSafewright from "../pool/creakwood-safewright.js";
 import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
+import _poolCrypticCoat from "../pool/cryptic-coat.js";
 import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
 import _poolCrystallizedSerah from "../pool/crystallized-serah.js";
 import _poolCullingRitual from "../pool/culling-ritual.js";
@@ -483,6 +485,7 @@ const shard: CardShard = {
     _poolBoneclubBerserker,
     _poolBrainFreeze,
     _poolBrambleguardVeteran,
+    _poolBranchOfVituGhazi,
     _poolBrazenCollector,
     _poolBridledBighorn,
     _poolBroodcallerScourge,
@@ -518,6 +521,7 @@ const shard: CardShard = {
     _poolCrimsonManticore,
     _poolCrookedCustodian,
     _poolCryptSliver,
+    _poolCrypticCoat,
     _poolCrystalInhumanPrincess,
     _poolCrystallizedSerah,
     _poolCullingRitual,

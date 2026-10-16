@@ -61,6 +61,7 @@ import _poolCatharsCompanion from "../pool/cathars-companion.js";
 import _poolCauldronOfEssence from "../pool/cauldron-of-essence.js";
 import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
+import _poolChalkOutline from "../pool/chalk-outline.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
@@ -178,6 +179,7 @@ import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
 import _poolGracefulCat from "../pool/graceful-cat.js";
 import _poolGrandAbolisher from "../pool/grand-abolisher.js";
+import _poolGraniteWitness from "../pool/granite-witness.js";
 import _poolGrappleWithDeath from "../pool/grapple-with-death.js";
 import _poolGravecrawler from "../pool/gravecrawler.js";
 import _poolGreatTeachersDecree from "../pool/great-teachers-decree.js";
@@ -201,6 +203,7 @@ import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
+import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHulldrifter from "../pool/hulldrifter.js";
 import _poolHumbleBudoka from "../pool/humble-budoka.js";
 import _poolImpassionedOrator from "../pool/impassioned-orator.js";
@@ -260,6 +263,7 @@ import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
+import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
 import _poolMutantTown from "../pool/mutant-town.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
@@ -291,6 +295,7 @@ import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
+import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
@@ -484,6 +489,7 @@ const shard: CardShard = {
     _poolCauldronOfEssence,
     _poolCavalryDrillmaster,
     _poolCephalidPathmage,
+    _poolChalkOutline,
     _poolChannelTheSuns,
     _poolChiefOfTheScale,
     _poolChocoboRacetrack,
@@ -601,6 +607,7 @@ const shard: CardShard = {
     _poolGoneMissing,
     _poolGracefulCat,
     _poolGrandAbolisher,
+    _poolGraniteWitness,
     _poolGrappleWithDeath,
     _poolGravecrawler,
     _poolGreatTeachersDecree,
@@ -624,6 +631,7 @@ const shard: CardShard = {
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHollowScavenger,
+    _poolHomicideInvestigator,
     _poolHulldrifter,
     _poolHumbleBudoka,
     _poolImpassionedOrator,
@@ -683,6 +691,7 @@ const shard: CardShard = {
     _poolMonkRealist,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
+    _poolMuseumNightwatch,
     _poolMutantChainReaction,
     _poolMutantTown,
     _poolMyrelShieldOfArgive,
@@ -714,6 +723,7 @@ const shard: CardShard = {
     _poolProfessionalFaceBreaker,
     _poolProwessOfTheFair,
     _poolProwlingCaracal,
+    _poolPublicThoroughfare,
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
     _poolRabbleRousing,

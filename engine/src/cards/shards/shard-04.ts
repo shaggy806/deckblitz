@@ -147,6 +147,7 @@ import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
+import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
@@ -574,6 +575,7 @@ const shard: CardShard = {
     _poolGruffTriplets,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
+    _poolHardHittingQuestion,
     _poolHardlightContainment,
     _poolHazeriderDrake,
     _poolHealerOfThePride,

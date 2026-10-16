@@ -20,6 +20,7 @@ import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
+import _poolAudienceWithTrostani from "../pool/audience-with-trostani.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
@@ -39,6 +40,7 @@ import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
+import _poolBother from "../pool/bother.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
@@ -64,6 +66,7 @@ import _poolCommonBond from "../pool/common-bond.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolConviction from "../pool/conviction.js";
+import _poolCorneredCrook from "../pool/cornered-crook.js";
 import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
@@ -115,6 +118,7 @@ import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
+import _poolForumFamiliar from "../pool/forum-familiar.js";
 import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
@@ -179,6 +183,7 @@ import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
 import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
+import _poolKrovodHaunch from "../pool/krovod-haunch.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
@@ -415,6 +420,7 @@ const shard: CardShard = {
     _poolAtKnifepoint,
     _poolAtTheDoor,
     _poolAtomicMicrosizer,
+    _poolAudienceWithTrostani,
     _poolAvelineDeGrandpre,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
@@ -434,6 +440,7 @@ const shard: CardShard = {
     _poolBondOfDiscipline,
     _poolBonebindOrator,
     _poolBoonOfEmrakul,
+    _poolBother,
     _poolBrawnAmadeusCho,
     _poolBronzeWalrus,
     _poolBugenhagenWiseElder,
@@ -459,6 +466,7 @@ const shard: CardShard = {
     _poolConclaveTribunal,
     _poolConsultTheStarCharts,
     _poolConviction,
+    _poolCorneredCrook,
     _poolCouriersCapsule,
     _poolCourtOfArdenvale,
     _poolCravenGiant,
@@ -510,6 +518,7 @@ const shard: CardShard = {
     _poolFlameshape,
     _poolFleetingEffigy,
     _poolFlowerfootSwordmaster,
+    _poolForumFamiliar,
     _poolFragmentize,
     _poolFrontierBivouac,
     _poolFrostwindInvoker,
@@ -574,6 +583,7 @@ const shard: CardShard = {
     _poolKiorasDambreaker,
     _poolKodamaOfTheNorthTree,
     _poolKreeCommandos,
+    _poolKrovodHaunch,
     _poolKrumarBondKin,
     _poolKutzilsFlanker,
     _poolLakesideShack,

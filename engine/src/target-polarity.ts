@@ -572,6 +572,9 @@ export function auraPolarity(def: CardDefinition): Polarity {
   let help = false;
   for (const ability of def.static ?? []) {
     if (ability.affects.scope !== "attached") continue;
+    // Goad is the point of an Aura that goads: its pump is the consolation
+    // that sends the creature at someone else (Psychic Impetus).
+    if (ability.goads === true) return "harm";
     for (const restriction of ability.restrictions ?? []) {
       if (restriction === "must-be-blocked" || restriction === "must-be-blocked-if-able") help = true;
       else harm = true;
@@ -590,7 +593,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
     if (ability.grantPtPerCount !== undefined) help = true;
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
     if (ability.doesntUntap === true || ability.cantAttackController === true) harm = true;
-    if (ability.goads === true || ability.prohibits !== undefined) harm = true;
+    if (ability.prohibits !== undefined) harm = true;
   }
   return harm === help ? "either" : harm ? "harm" : "help";
 }

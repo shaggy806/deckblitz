@@ -6830,6 +6830,190 @@
   "replacement:enter-tapped-optional-rider": {
    "family": "replacement:new-event-replacements",
    "example": "'You may have this permanent enter tapped. If you do, [effect]' — an optional enter-tapped choice asked as it enters (rule 614.12), with an effect when taken — Mariposa Military Base's 'If you do, you get two rad counters'."
+  },
+  "effect:goad-while-counter": {
+   "family": "mechanic:goad-extensions",
+   "example": "A one-shot effect that makes a creature goaded, unable to attack you or permanents you control, and unable to block creatures you control for as long as it has a counter of a kind (Immortal Obligation's duty counter)."
+  },
+  "static:pt-per-turn-stat": {
+   "family": "static:pt-per-amount",
+   "example": "A static P/T bonus counting a turn stat — 'creatures you control get +X/+X, where X is the number of cards you've drawn this turn' (Knowledge Is Power): grantPtPerCount with a turnStat."
+  },
+  "effect:create-token-enters-with-counters": {
+   "family": "effect:create-token-with-counters",
+   "example": "A created token that enters with N counters (a replacement as it enters, rule 614.1c), not thenCounters' put-after: 'The token enters with X +1/+1 counters on it' (Printlifter Ooze)."
+  },
+  "static:trigger-doubler-turned-face-up": {
+   "family": "static:trigger-count-modifiers",
+   "example": "A doubleTriggers cause for a face-down permanent turning face up (Panoptic Projektor)."
+  },
+  "effect:choose-new-targets-any-number": {
+   "family": "decision:copy-new-targets",
+   "example": "'You may choose new targets for any number of other spells and/or abilities' (Boltbender): an untargeted change-targets over a chosen set of stack objects."
+  },
+  "effect:exile-self-with-time-counters": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "A resolving spell exiles itself with N time counters, becoming suspended again if it has suspend (Charnel Serenade)."
+  },
+  "zone:play-from-graveyard-surveilled-this-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Play lands and cast spells from among graveyard cards you put there by surveilling this turn, paying life equal to mana value instead of the mana cost (Eye of Duskmantle)."
+  },
+  "keyword:unleash": {
+   "family": "static:enters-replacement-for-others",
+   "example": "Unleash (rule 702.98): may enter with a +1/+1 counter; can't block while it has one — printed, and granted to entering creatures by a static (Tesak, Judith's Hellhound)."
+  },
+  "effect:copy-spell-for-each-chosen-paid": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Copy a spell once for each of any number of chosen objects it could target, paying a cost per copy, each copy targeting its object (Feather, Radiant Arbiter)."
+  },
+  "stat:permanents-to-graveyard-from-battlefield-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "A turn count of permanents put into graveyards from the battlefield (any controller, tokens included, filterable by type) — gravestorm, Anzrag's Rampage's artifacts."
+  },
+  "effect:ungoad": {
+   "family": "mechanic:goad-extensions",
+   "example": "'Each creature you control is no longer goaded' (Serene Sleuth): end every goad on matching creatures."
+  },
+  "effect:exile-top-face-down-linked": {
+   "family": "mechanic:face-down",
+   "example": "Exile the top card of a library face down where nobody may look at it ('You can't look at it'), linked to the source (rule 607.2a) with no play permission — Connecting the Dots."
+  },
+  "condition:put-into-graveyard-this-turn-filter": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "A CardFilter clause for a card in a graveyard that was put there from anywhere this turn (not only from a library) — Reenact the Crime."
+  },
+  "effect:look-and-choose-cloak": {
+   "family": "mechanic:face-down",
+   "example": "A look-and-choose destination that cloaks the chosen cards (face-down 2/2s with ward {2}, rule 701.58) rather than manifesting them — Hide in Plain Sight."
+  },
+  "effect:amount-color-pairs": {
+   "family": "effect:amount-new-variants",
+   "example": "An amount counting the different color pairs among permanents matching a filter that are exactly two colors — Niv-Mizzet, Guildpact."
+  },
+  "keyword:hexproof-from-multicolored": {
+   "family": "keyword:hexproof-from-colors",
+   "example": "Hexproof from multicolored (rule 702.11d): can't be the target of multicolored spells or abilities from multicolored sources opponents control — Niv-Mizzet, Guildpact."
+  },
+  "condition:filter-dealt-damage-this-turn": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "A CardFilter clause for a permanent that dealt damage this turn to anything (players, planeswalkers, creatures) — Treacherous Greed's sacrifice cost."
+  },
+  "effect:choose-per-player-untargeted": {
+   "family": "decision:choose-permanent",
+   "example": "For each player, the controller chooses up to one permanent that player controls (untargeted), the chosen ones are acted on together, then each affected permanent's controller may follow up — Krenko's Buzzcrusher."
+  },
+  "bug:cda-count-multiplier": {
+   "family": "bug:cda-all-zones",
+   "example": "A setBasePtFromCount multiplier for a CDA of 'twice the number of …' — Melek, Reforged Researcher."
+  },
+  "condition:player-controls-most": {
+   "family": "condition:player-state-thresholds",
+   "example": "A player scope or that-player condition for 'each player who controls the most [filter]' (ties included) — No Witnesses."
+  },
+  "cost:disguise-x-cost": {
+   "family": "mechanic:face-down",
+   "example": "A morph/disguise cost with {X} (Aurelia's Vindicator's Disguise {X}{3}{W}): the turn-face-up special action announces X, and its turned-face-up trigger reads it (\"up to X targets\")."
+  },
+  "effect:cast-now-from-each-opponent-graveyard": {
+   "family": "effect:cast-during-resolution",
+   "example": "\"You may cast a spell from each opponent's graveyard without paying its mana cost\" (Jetsam): an untargeted cast-now offered once per opponent from that player's graveyard, chosen as the effect resolves (after an earlier step such as a mill)."
+  },
+  "static:cant-become-suspected": {
+   "family": "mechanic:goad-extensions",
+   "example": "A static that stops affected creatures from becoming suspected (Airtight Alibi's \"enchanted creature ... can't become suspected\"), checked by Game.suspect."
+  },
+  "effect:put-onto-battlefield-attached": {
+   "family": "effect:attach-extensions",
+   "example": "Put an Aura/Equipment card onto the battlefield attached to a named permanent (Magnetic Snuffler's \"return target Equipment card from your graveyard to the battlefield attached to this creature\"), entering unattached when it can't legally attach."
+  },
+  "cost:disguise-cost-reduction": {
+   "family": "mechanic:face-down",
+   "example": "A disguise (or morph) cost reduced by a live count as it's paid — Fugitive Codebreaker's \"Disguise {5}{R}. This cost is reduced by {1} for each instant and sorcery card in your graveyard\"."
+  },
+  "static:cant-turn-face-up": {
+   "family": "mechanic:face-down",
+   "example": "A static that stops a set of permanents being turned face up, by any cost — Karlov Watchdog's \"Permanents your opponents control can't be turned face up during your turn\"."
+  },
+  "effect:look-and-choose-revealed-card-destination": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "One revealed card whose destination depends on it and the chooser — Break Out's \"you may reveal a creature card … If that card has mana value 2 or less, you may put it onto the battlefield … If you didn't, put it into your hand\" (a second pick that keeps the first's reveal:\"chosen\")."
+  },
+  "replacement:as-turned-face-up-dynamic-counters": {
+   "family": "mechanic:face-down",
+   "example": "`asTurnedFaceUp` counters as an amount read as it's turned face up — Crowd-Control Warden's \"put X +1/+1 counters on it, where X is the number of other creatures you control\"."
+  },
+  "decision:secret-choice": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "example": "A choice made secretly on resolution (hidden from other players, remembered per permanent) and a \"reveal the [choice]\" activation cost only the chooser can pay — A Killer Among Us."
+  },
+  "stat:sacrificed-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Turn tally of the permanents a player sacrificed, by type — Suspicious Detonation's \"if you've sacrificed an artifact this turn\" as a selfCostReduction condition."
+  },
+  "trigger:dealt-damage-amount-threshold": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "A `dealt-damage` trigger gated on the amount of one damage event — Innocent Bystander's \"Whenever this creature is dealt 3 or more damage\" (all at once, not cumulative)."
+  },
+  "effect:must-block-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "A 'blocks this turn if able' requirement on a target creature (rule 509.1c) — Hustle's 'attacks or blocks this turn if able'; the `restrict` effect has must-attack but no must-block."
+  },
+  "effect:look-at-face-down-permanents": {
+   "family": "mechanic:face-down",
+   "example": "'Until end of turn, you may look at face-down creatures you don't control any time' (Lumbering Laundry): a per-player view permission over other players' face-down permanents (not spells), lasting until end of turn."
+  },
+  "keyword:collect-evidence-x": {
+   "family": "keyword:collect-evidence",
+   "example": "Collect evidence X with a variable X: chosen as an effect resolves and read by what follows ('you may collect evidence X. When you do, ... X damage' — Incinerator of the Guilty), or computed as a mandatory additional cost from the spell's targets' total mana value (Urgent Necropsy)."
+  },
+  "decision:ward-collect-evidence": {
+   "family": "decision:ward-payment",
+   "example": "'Ward—Collect evidence N' (Axebane Ferox): the targeting player may exile cards from their graveyard with total mana value N or more, payable only if their graveyard holds that much; otherwise the spell or ability is countered."
+  },
+  "effect:extract-same-name": {
+   "family": "effect:search-opponent-library",
+   "example": "Exile a chosen card from an opponent's graveyard, then search its owner's graveyard, hand and library for any number of cards with that name and exile them; that player shuffles (Deadly Cover-Up then has them draw a card for each card exiled from their hand)."
+  },
+  "cost:alt-cost-collect-evidence-for-spells": {
+   "family": "cost:alternative-cost-for-all-spells",
+   "example": "'You may collect evidence N rather than pay the mana cost for spells you cast' (Conspiracy Unraveler): a static alternative cost for every spell that is a collect-evidence payment, not mana; it isn't the spell's own 'if evidence was collected' and can't use the card being cast from the graveyard."
+  },
+  "effect:may-exile-self-and-collect-evidence": {
+   "family": "keyword:collect-evidence",
+   "example": "'You may exile it and collect evidence N. If you do, ...' (Lamplight Phoenix) as one optional action: offered only if the dies-trigger's card is still in the graveyard and the rest of the graveyard (not that card) holds N mana value, the collect then mandatory, 'if you do' only when both happened."
+  },
+  "cost:collect-evidence-linked-exile": {
+   "family": "keyword:collect-evidence",
+   "example": "Cards exiled by an activated ability's collect-evidence cost linked to its source (rule 607.2a) so a later ability can read 'cards exiled with it' (Kylox's Voltstrider)."
+  },
+  "effect:cast-now-bottom-of-library-after": {
+   "family": "effect:cast-during-resolution",
+   "example": "cast-now's 'if that spell would be put into a graveyard, put it on the bottom of its owner's library instead' — exileAfter's twin for the library bottom (Kylox's Voltstrider)."
+  },
+  "condition:distinct-damage-sources-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "'N or more sources you controlled dealt damage this turn' — distinct sources, each object-and-stint once however often it dealt damage (Case of the Burning Masks)."
+  },
+  "cost:cost-reduction-if-kicked": {
+   "family": "cost:cost-modification-extensions",
+   "example": "'This spell costs {N} less to cast if [its optional additional cost was paid]' — a reduction on the kicked variant only (Bite Down on Crime: if evidence was collected)."
+  },
+  "static:may-choose-not-to-untap": {
+   "family": "static:doesnt-untap-filter",
+   "example": "'You may choose not to untap this creature during your untap step' — an untap-step choice for its controller (Hedge Whisperer)."
+  },
+  "effect:duration-while-source-tapped": {
+   "family": "effect:duration-extensions",
+   "example": "A modifier lasting 'for as long as [this source] remains tapped', ending when it untaps or leaves (Hedge Whisperer)."
+  },
+  "effect:grant-graveyard-cast-all": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "The mass form of grant-graveyard-cast: each card in your graveyard matching a filter as it resolves gains 'you may cast this card from your graveyard' until end of turn, the set fixed at resolution (rule 611.2c — Case of the Uneaten Feast)."
+  },
+  "static:look-at-top-card-conditional": {
+   "family": "static:look-at-top-card-any-time",
+   "example": "'You may look at the top card of your library any time' gated on a condition (a Case's solved designation, a Class level) — looksAtOwnLibraryTop is an unconditional card-level flag (Case of the Locked Hothouse)."
   }
  }
 }

@@ -97,6 +97,7 @@ import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
+import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
@@ -146,6 +147,7 @@ import _poolFormidableCommons from "../pool/formidable-commons.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
+import _poolFussBother from "../pool/fuss-bother.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
@@ -282,6 +284,7 @@ import _poolQuietPurity from "../pool/quiet-purity.js";
 import _poolRadiantFountain from "../pool/radiant-fountain.js";
 import _poolRagefire from "../pool/ragefire.js";
 import _poolRagostDeftGastronaut from "../pool/ragost-deft-gastronaut.js";
+import _poolRakishScoundrel from "../pool/rakish-scoundrel.js";
 import _poolRalAndTheImplicitMaze from "../pool/ral-and-the-implicit-maze.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
 import _poolRamblingPossum from "../pool/rambling-possum.js";
@@ -548,6 +551,7 @@ const shard: CardShard = {
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
     _poolDeepchannelDuelist,
+    _poolDefenestratedPhantom,
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDinaSoulSteeper,
@@ -597,6 +601,7 @@ const shard: CardShard = {
     _poolFrontlineRush,
     _poolFuneralLongboat,
     _poolFurnaceReins,
+    _poolFussBother,
     _poolGalazethPrismari,
     _poolGatewayShade,
     _poolGempalmIncinerator,
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolRadiantFountain,
     _poolRagefire,
     _poolRagostDeftGastronaut,
+    _poolRakishScoundrel,
     _poolRalAndTheImplicitMaze,
     _poolRallyOfWings,
     _poolRamblingPossum,

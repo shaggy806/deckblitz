@@ -62,6 +62,7 @@ import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCavePeople from "../pool/cave-people.js";
 import _poolCensor from "../pool/censor.js";
+import _poolCerebralConfiscation from "../pool/cerebral-confiscation.js";
 import _poolChainsOfCustody from "../pool/chains-of-custody.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
 import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
@@ -79,6 +80,7 @@ import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
+import _poolCounterpoint from "../pool/counterpoint.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
@@ -135,6 +137,7 @@ import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
+import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
 import _poolGhirapurOsprey from "../pool/ghirapur-osprey.js";
 import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
@@ -155,6 +158,7 @@ import _poolGravpackMonoist from "../pool/gravpack-monoist.js";
 import _poolGraypeltRefuge from "../pool/graypelt-refuge.js";
 import _poolGrazingWhiptail from "../pool/grazing-whiptail.js";
 import _poolGreatsword from "../pool/greatsword.js";
+import _poolGreenbeltRadical from "../pool/greenbelt-radical.js";
 import _poolGrowthSpiral from "../pool/growth-spiral.js";
 import _poolGryffVanguard from "../pool/gryff-vanguard.js";
 import _poolGuildlessCommons from "../pool/guildless-commons.js";
@@ -247,6 +251,7 @@ import _poolMysticForge from "../pool/mystic-forge.js";
 import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
+import _poolNightdrinkerMoroii from "../pool/nightdrinker-moroii.js";
 import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
 import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
@@ -462,6 +467,7 @@ import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
+import _tokensTiny from "../tokens/tiny.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
 import _tokensWolfTokenGarrukCursedHuntsman from "../tokens/wolf-token-garruk-cursed-huntsman.js";
 
@@ -526,6 +532,7 @@ const shard: CardShard = {
     _poolCathedralSanctifier,
     _poolCavePeople,
     _poolCensor,
+    _poolCerebralConfiscation,
     _poolChainsOfCustody,
     _poolChaosChanneler,
     _poolChaseSteinRunaway,
@@ -543,6 +550,7 @@ const shard: CardShard = {
     _poolConduitOfWorlds,
     _poolCordialVampire,
     _poolCorpulentCorpse,
+    _poolCounterpoint,
     _poolCrashTheRamparts,
     _poolCripplingFear,
     _poolCrystallineCrawler,
@@ -599,6 +607,7 @@ const shard: CardShard = {
     _poolFrontlineDevastator,
     _poolGaiusVanBaelsar,
     _poolGarruksGorehorn,
+    _poolGearbaneOrangutan,
     _poolGethsGrimoire,
     _poolGhirapurOsprey,
     _poolGhostlyDancers,
@@ -619,6 +628,7 @@ const shard: CardShard = {
     _poolGraypeltRefuge,
     _poolGrazingWhiptail,
     _poolGreatsword,
+    _poolGreenbeltRadical,
     _poolGrowthSpiral,
     _poolGryffVanguard,
     _poolGuildlessCommons,
@@ -711,6 +721,7 @@ const shard: CardShard = {
     _poolMysticGate,
     _poolNearheathStalker,
     _poolNessianCourser,
+    _poolNightdrinkerMoroii,
     _poolNighthaze,
     _poolNivMizzetTheFiremind,
     _poolNogiDracoZealot,
@@ -928,6 +939,7 @@ const shard: CardShard = {
     _tokensOgreToken,
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
+    _tokensTiny,
     _tokensWarriorTokenVigilance,
     _tokensWolfTokenGarrukCursedHuntsman,
   ],

@@ -46,15 +46,18 @@ import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
 import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
+import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
 import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
+import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
+import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
 import _poolCatOwl from "../pool/cat-owl.js";
 import _poolCausticCaterpillar from "../pool/caustic-caterpillar.js";
 import _poolCelestialColonnade from "../pool/celestial-colonnade.js";
@@ -112,6 +115,7 @@ import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
+import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
 import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
 import _poolFangSkulkin from "../pool/fang-skulkin.js";
@@ -217,6 +221,7 @@ import _poolMachineGodsEffigy from "../pool/machine-gods-effigy.js";
 import _poolMachineManModelX51 from "../pool/machine-man-model-x-51.js";
 import _poolMageRingBully from "../pool/mage-ring-bully.js";
 import _poolMagmaVein from "../pool/magma-vein.js";
+import _poolMakeshiftBinding from "../pool/makeshift-binding.js";
 import _poolMalakirRebirth from "../pool/malakir-rebirth.js";
 import _poolManaformHellkite from "../pool/manaform-hellkite.js";
 import _poolMarchesasEmissary from "../pool/marchesas-emissary.js";
@@ -301,6 +306,7 @@ import _poolRiverglidePathway from "../pool/riverglide-pathway.js";
 import _poolRoadsideAssistance from "../pool/roadside-assistance.js";
 import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
+import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
@@ -506,15 +512,18 @@ const shard: CardShard = {
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
     _poolBofurReliableGuardian,
+    _poolBolracClanBasher,
     _poolBoltHound,
     _poolBoneShards,
     _poolBorosRecruit,
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBuckyBarnesEagerAlly,
+    _poolBurdenOfProof,
     _poolCadaverLab,
     _poolCarnivorousMossBeast,
     _poolCartoucheOfKnowledge,
+    _poolCaseOfTheShiftingVisage,
     _poolCatOwl,
     _poolCausticCaterpillar,
     _poolCelestialColonnade,
@@ -572,6 +581,7 @@ const shard: CardShard = {
     _poolEtherealInvestigator,
     _poolExosuitSavior,
     _poolExtravagantReplication,
+    _poolEzrimAgencyChief,
     _poolFaerieSeer,
     _poolFalconJoaquinTorres,
     _poolFangSkulkin,
@@ -677,6 +687,7 @@ const shard: CardShard = {
     _poolMachineManModelX51,
     _poolMageRingBully,
     _poolMagmaVein,
+    _poolMakeshiftBinding,
     _poolMalakirRebirth,
     _poolManaformHellkite,
     _poolMarchesasEmissary,
@@ -761,6 +772,7 @@ const shard: CardShard = {
     _poolRoadsideAssistance,
     _poolRonomUnicorn,
     _poolRootboundCrag,
+    _poolRubblebeltBraggart,
     _poolRuinRat,
     _poolSacredFoundry,
     _poolSamutTheDrivingForce,

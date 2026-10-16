@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAIMLabs from "../pool/a-i-m-labs.js";
 import _poolAangDestinedSavior from "../pool/aang-destined-savior.js";
 import _poolAangsDefense from "../pool/aangs-defense.js";
+import _poolAbsolvingLammasu from "../pool/absolving-lammasu.js";
 import _poolAbyssalHorror from "../pool/abyssal-horror.js";
 import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
@@ -164,6 +165,7 @@ import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
+import _poolGoblinMaskmaker from "../pool/goblin-maskmaker.js";
 import _poolGoblinSpymaster from "../pool/goblin-spymaster.js";
 import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
 import _poolGoreSwine from "../pool/gore-swine.js";
@@ -238,6 +240,7 @@ import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
 import _poolLoporritScout from "../pool/loporrit-scout.js";
+import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
@@ -280,6 +283,7 @@ import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
+import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
@@ -299,6 +303,7 @@ import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
+import _poolPresumedDead from "../pool/presumed-dead.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
@@ -359,6 +364,7 @@ import _poolStalkingDrone from "../pool/stalking-drone.js";
 import _poolStarCharter from "../pool/star-charter.js";
 import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
+import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
@@ -389,6 +395,7 @@ import _poolTravelingMinister from "../pool/traveling-minister.js";
 import _poolTreatsToShare from "../pool/treats-to-share.js";
 import _poolTributeToTheWorldTree from "../pool/tribute-to-the-world-tree.js";
 import _poolTripNoose from "../pool/trip-noose.js";
+import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
 import _poolUnearth from "../pool/unearth.js";
@@ -449,6 +456,7 @@ const shard: CardShard = {
     _poolAIMLabs,
     _poolAangDestinedSavior,
     _poolAangsDefense,
+    _poolAbsolvingLammasu,
     _poolAbyssalHorror,
     _poolAdarkarWastes,
     _poolAdventurersInn,
@@ -607,6 +615,7 @@ const shard: CardShard = {
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
     _poolGlisteningGoremonger,
+    _poolGoblinMaskmaker,
     _poolGoblinSpymaster,
     _poolGollumSilentSlinker,
     _poolGoreSwine,
@@ -681,6 +690,7 @@ const shard: CardShard = {
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
     _poolLoporritScout,
+    _poolLoxodonEavesdropper,
     _poolLoyalTutor,
     _poolLumengridGargoyle,
     _poolMadameMasque,
@@ -723,6 +733,7 @@ const shard: CardShard = {
     _poolNobody,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
+    _poolOffenderAtLarge,
     _poolOfferImmortality,
     _poolOildeepGearhulk,
     _poolOmenOfTheDead,
@@ -742,6 +753,7 @@ const shard: CardShard = {
     _poolPolygoyf,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
+    _poolPresumedDead,
     _poolPropellerPioneer,
     _poolPterafractyl,
     _poolPumpkinBombardment,
@@ -802,6 +814,7 @@ const shard: CardShard = {
     _poolStarCharter,
     _poolStarfieldShepherd,
     _poolStarfieldVocalist,
+    _poolSteamcoreScholar,
     _poolSteampathCharger,
     _poolStridingShotcaller,
     _poolSwarmCuller,
@@ -832,6 +845,7 @@ const shard: CardShard = {
     _poolTreatsToShare,
     _poolTributeToTheWorldTree,
     _poolTripNoose,
+    _poolTunnelTipster,
     _poolTyrantOfKherRidges,
     _poolUmbrisFearManifest,
     _poolUnearth,

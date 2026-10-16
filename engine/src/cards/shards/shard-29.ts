@@ -73,6 +73,7 @@ import _poolCrushingVines from "../pool/crushing-vines.js";
 import _poolCryoshatter from "../pool/cryoshatter.js";
 import _poolCryptIncursion from "../pool/crypt-incursion.js";
 import _poolCrypticTrilobite from "../pool/cryptic-trilobite.js";
+import _poolCuriousCadaver from "../pool/curious-cadaver.js";
 import _poolCuriousForager from "../pool/curious-forager.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
@@ -142,6 +143,7 @@ import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
 import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
+import _poolGetALegUp from "../pool/get-a-leg-up.js";
 import _poolGhorClanRampager from "../pool/ghor-clan-rampager.js";
 import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
 import _poolGideonsMemorial from "../pool/gideons-memorial.js";
@@ -183,6 +185,7 @@ import _poolHymnOfTheFaller from "../pool/hymn-of-the-faller.js";
 import _poolIceFlan from "../pool/ice-flan.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
 import _poolIdolized from "../pool/idolized.js";
+import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
@@ -252,6 +255,7 @@ import _poolParhelionIi from "../pool/parhelion-ii.js";
 import _poolPathOfAnnihilation from "../pool/path-of-annihilation.js";
 import _poolPatientInstructor from "../pool/patient-instructor.js";
 import _poolPawpatchRecruit from "../pool/pawpatch-recruit.js";
+import _poolPersonOfInterest from "../pool/person-of-interest.js";
 import _poolPestbroodSloth from "../pool/pestbrood-sloth.js";
 import _poolPetAvengers from "../pool/pet-avengers.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
@@ -377,6 +381,7 @@ import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
+import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
@@ -405,6 +410,7 @@ import _poolWharfInfiltrator from "../pool/wharf-infiltrator.js";
 import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
+import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
@@ -501,6 +507,7 @@ const shard: CardShard = {
     _poolCryoshatter,
     _poolCryptIncursion,
     _poolCrypticTrilobite,
+    _poolCuriousCadaver,
     _poolCuriousForager,
     _poolDailyBugleReporters,
     _poolDamn,
@@ -570,6 +577,7 @@ const shard: CardShard = {
     _poolGalliaTheMerrymaker,
     _poolGelectrode,
     _poolGenerousVisitor,
+    _poolGetALegUp,
     _poolGhorClanRampager,
     _poolGhostlySentinel,
     _poolGideonsMemorial,
@@ -611,6 +619,7 @@ const shard: CardShard = {
     _poolIceFlan,
     _poolIcecaveCrasher,
     _poolIdolized,
+    _poolIllicitMasquerade,
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
@@ -680,6 +689,7 @@ const shard: CardShard = {
     _poolPathOfAnnihilation,
     _poolPatientInstructor,
     _poolPawpatchRecruit,
+    _poolPersonOfInterest,
     _poolPestbroodSloth,
     _poolPetAvengers,
     _poolPhalanxVanguard,
@@ -805,6 +815,7 @@ const shard: CardShard = {
     _poolTymnaTheWeaver,
     _poolUSAgentJohnWalker,
     _poolUlvenwaldBear,
+    _poolUndercoverCrocodelf,
     _poolUnderseaInvader,
     _poolUndulatingWitness,
     _poolUnholyAnnexRitualChamber,
@@ -833,6 +844,7 @@ const shard: CardShard = {
     _poolWhirlwindAdept,
     _poolWhiteWidowYelenaBelova,
     _poolWildRide,
+    _poolWispdrinkerVampire,
     _poolWithstandDeath,
     _poolWortBoggartAuntie,
     _poolYellowScarvesTroops,

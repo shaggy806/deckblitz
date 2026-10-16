@@ -400,6 +400,7 @@ import _poolValgavothsLair from "../pool/valgavoths-lair.js";
 import _poolVanquishTheFoul from "../pool/vanquish-the-foul.js";
 import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
 import _poolVectisSilencers from "../pool/vectis-silencers.js";
+import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
@@ -834,6 +835,7 @@ const shard: CardShard = {
     _poolVanquishTheFoul,
     _poolVatOfRebirth,
     _poolVectisSilencers,
+    _poolVeiledAscension,
     _poolVelaTheNightClad,
     _poolVesselOfVolatility,
     _poolVigorbloomVanguard,

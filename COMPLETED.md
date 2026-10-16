@@ -41,6 +41,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Murders at Karlov Manor and its Commander set, both whole** (batch 91): 137 of 227 cards —
+  the 223 left in the two sets and 4 older Cases — with collect evidence and Cases built; the bots
+  now aim an Aura that goads at an opponent even when it also pumps (2026-10-16).
 - **Fallout and Ravnica: Clue Edition, both whole** (batch 90): 56 of 129 cards — the 109 left
   in the two sets and 20 older rad and squad cards — with rad counters and squad built; the bots no
   longer proliferate their own rad counters (2026-10-16).

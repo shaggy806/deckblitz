@@ -18,6 +18,7 @@ import _poolAgoraphobia from "../pool/agoraphobia.js";
 import _poolAirbendingLesson from "../pool/airbending-lesson.js";
 import _poolAlaniaDivergentStorm from "../pool/alania-divergent-storm.js";
 import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
+import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
@@ -71,6 +72,7 @@ import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
+import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
 import _poolCleaveShadows from "../pool/cleave-shadows.js";
@@ -103,6 +105,7 @@ import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
 import _poolDragonbackLancer from "../pool/dragonback-lancer.js";
@@ -239,6 +242,7 @@ import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
+import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
@@ -256,6 +260,7 @@ import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRankRat from "../pool/rank-rat.js";
+import _poolRecklessDetective from "../pool/reckless-detective.js";
 import _poolReknit from "../pool/reknit.js";
 import _poolRenegadeMap from "../pool/renegade-map.js";
 import _poolRhoxBrute from "../pool/rhox-brute.js";
@@ -272,6 +277,7 @@ import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
 import _poolSadisticSlash from "../pool/sadistic-slash.js";
 import _poolSageOfTheSkies from "../pool/sage-of-the-skies.js";
 import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
+import _poolSampleCollector from "../pool/sample-collector.js";
 import _poolSanctumCustodian from "../pool/sanctum-custodian.js";
 import _poolSarkhanTheDragonspeaker from "../pool/sarkhan-the-dragonspeaker.js";
 import _poolSatyrGrovedancer from "../pool/satyr-grovedancer.js";
@@ -430,6 +436,7 @@ const shard: CardShard = {
     _poolAirbendingLesson,
     _poolAlaniaDivergentStorm,
     _poolAlchemistsApprentice,
+    _poolAlleyAssailant,
     _poolAncestorsAid,
     _poolAngelsMercy,
     _poolAppealToEirdu,
@@ -483,6 +490,7 @@ const shard: CardShard = {
     _poolChampionOfThePerished,
     _poolChanceEncounter,
     _poolChandraFlameshaper,
+    _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
     _poolCleaveShadows,
@@ -515,6 +523,7 @@ const shard: CardShard = {
     _poolDevotedDuelist,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
     _poolDragonbackLancer,
@@ -651,6 +660,7 @@ const shard: CardShard = {
     _poolOverlordOfTheFloodpits,
     _poolParcelMyr,
     _poolPedalToTheMetal,
+    _poolPerimeterEnforcer,
     _poolPitilessGorgon,
     _poolPoisonArrow,
     _poolPolliwallop,
@@ -668,6 +678,7 @@ const shard: CardShard = {
     _poolRakdosLordOfRiots,
     _poolRampagingFerocidon,
     _poolRankRat,
+    _poolRecklessDetective,
     _poolReknit,
     _poolRenegadeMap,
     _poolRhoxBrute,
@@ -684,6 +695,7 @@ const shard: CardShard = {
     _poolSadisticSlash,
     _poolSageOfTheSkies,
     _poolSaheeliSublimeArtificer,
+    _poolSampleCollector,
     _poolSanctumCustodian,
     _poolSarkhanTheDragonspeaker,
     _poolSatyrGrovedancer,

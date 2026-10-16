@@ -80,6 +80,7 @@ import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
+import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -104,6 +105,7 @@ import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
+import _poolFesterleech from "../pool/festerleech.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
@@ -174,6 +176,7 @@ import _poolKrenkoTinStreetKingpin from "../pool/krenko-tin-street-kingpin.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
+import _poolLeadPipe from "../pool/lead-pipe.js";
 import _poolLeonardosTechnique from "../pool/leonardos-technique.js";
 import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
@@ -205,6 +208,7 @@ import _poolMarionetteMaster from "../pool/marionette-master.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
 import _poolMawOfTheMire from "../pool/maw-of-the-mire.js";
+import _poolMeddlingYouths from "../pool/meddling-youths.js";
 import _poolMemorialToGlory from "../pool/memorial-to-glory.js";
 import _poolMentalMisstep from "../pool/mental-misstep.js";
 import _poolMerenOfClanNelToth from "../pool/meren-of-clan-nel-toth.js";
@@ -247,6 +251,7 @@ import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
 import _poolPrismaticLens from "../pool/prismatic-lens.js";
+import _poolPrivateEye from "../pool/private-eye.js";
 import _poolPrizefighterConstruct from "../pool/prizefighter-construct.js";
 import _poolProtectiveResponse from "../pool/protective-response.js";
 import _poolPsychicMembrane from "../pool/psychic-membrane.js";
@@ -306,6 +311,7 @@ import _poolSixthSense from "../pool/sixth-sense.js";
 import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
+import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
 import _poolSolemnRecruit from "../pool/solemn-recruit.js";
@@ -366,6 +372,7 @@ import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
+import _poolUnshakableTail from "../pool/unshakable-tail.js";
 import _poolUpheaval from "../pool/upheaval.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
@@ -492,6 +499,7 @@ const shard: CardShard = {
     _poolDiamondWeapon,
     _poolDismalBackwater,
     _poolDisruptiveStormbrood,
+    _poolDogWalker,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
@@ -516,6 +524,7 @@ const shard: CardShard = {
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
     _poolFarmerCotton,
+    _poolFesterleech,
     _poolFireNationEngineer,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
@@ -586,6 +595,7 @@ const shard: CardShard = {
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
     _poolLavaSpike,
+    _poolLeadPipe,
     _poolLeonardosTechnique,
     _poolLetsPlayAGame,
     _poolLeylineTyrant,
@@ -617,6 +627,7 @@ const shard: CardShard = {
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
     _poolMawOfTheMire,
+    _poolMeddlingYouths,
     _poolMemorialToGlory,
     _poolMentalMisstep,
     _poolMerenOfClanNelToth,
@@ -659,6 +670,7 @@ const shard: CardShard = {
     _poolPrimevalTitan,
     _poolPrincessLucrezia,
     _poolPrismaticLens,
+    _poolPrivateEye,
     _poolPrizefighterConstruct,
     _poolProtectiveResponse,
     _poolPsychicMembrane,
@@ -718,6 +730,7 @@ const shard: CardShard = {
     _poolSkirkFireMarshal,
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
+    _poolSliceFromTheShadows,
     _poolSmolderingSpires,
     _poolSnowCoveredSwamp,
     _poolSolemnRecruit,
@@ -778,6 +791,7 @@ const shard: CardShard = {
     _poolUlvenwaldTracker,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,
+    _poolUnshakableTail,
     _poolUpheaval,
     _poolUrzasPowerPlant,
     _poolValakutTheMoltenPinnacle,

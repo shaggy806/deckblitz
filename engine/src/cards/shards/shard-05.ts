@@ -69,6 +69,7 @@ import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
 import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star.js";
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
 import _poolCarelessCelebrant from "../pool/careless-celebrant.js";
+import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
@@ -144,6 +145,7 @@ import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
+import _poolGadgetTechnician from "../pool/gadget-technician.js";
 import _poolGaleSwooper from "../pool/gale-swooper.js";
 import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
@@ -377,6 +379,7 @@ import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThinkTank from "../pool/think-tank.js";
+import _poolThinkingCap from "../pool/thinking-cap.js";
 import _poolThranduilsCompany from "../pool/thranduils-company.js";
 import _poolThrowFromTheSaddle from "../pool/throw-from-the-saddle.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
@@ -425,6 +428,7 @@ import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
 import _tokensAssassinTokenAyaOfAlexandria from "../tokens/assassin-token-aya-of-alexandria.js";
 import _tokensBananaToken from "../tokens/banana-token.js";
 import _tokensDeathtouchSnakeToken from "../tokens/deathtouch-snake-token.js";
+import _tokensDetectiveToken from "../tokens/detective-token.js";
 import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolCaptainMarvelShootingStar,
     _poolCaravanHurda,
     _poolCarelessCelebrant,
+    _poolCaseOfTheGorgonsKiss,
     _poolCastleArdenvale,
     _poolCatharticParting,
     _poolCentaurVinecrasher,
@@ -580,6 +585,7 @@ const shard: CardShard = {
     _poolFlawlessManeuver,
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
+    _poolGadgetTechnician,
     _poolGaleSwooper,
     _poolGarruksPackleader,
     _poolGatewaySneak,
@@ -813,6 +819,7 @@ const shard: CardShard = {
     _poolTheOzolith,
     _poolTheWaterCrystal,
     _poolThinkTank,
+    _poolThinkingCap,
     _poolThranduilsCompany,
     _poolThrowFromTheSaddle,
     _poolTillerEngine,
@@ -863,6 +870,7 @@ const shard: CardShard = {
     _tokensAssassinTokenAyaOfAlexandria,
     _tokensBananaToken,
     _tokensDeathtouchSnakeToken,
+    _tokensDetectiveToken,
     _tokensDinosaurSoldierToken,
     _tokensGalactus,
     _tokensHalflingToken,

@@ -31,6 +31,7 @@ import _poolBackInTown from "../pool/back-in-town.js";
 import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
+import _poolBasilicaStalker from "../pool/basilica-stalker.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
@@ -104,6 +105,7 @@ import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
+import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
@@ -207,6 +209,7 @@ import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
+import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
@@ -259,6 +262,7 @@ import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
+import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
@@ -303,7 +307,9 @@ import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
+import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
+import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
@@ -464,6 +470,7 @@ const shard: CardShard = {
     _poolBalustradeWurm,
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
+    _poolBasilicaStalker,
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
@@ -537,6 +544,7 @@ const shard: CardShard = {
     _poolDespoil,
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
+    _poolDragTheCanal,
     _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
@@ -640,6 +648,7 @@ const shard: CardShard = {
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
     _poolKuraTheBoundlessSky,
+    _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
     _poolLarvalScoutlander,
     _poolLavaAxe,
@@ -692,6 +701,7 @@ const shard: CardShard = {
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
     _poolOrdruunMentor,
+    _poolOutCold,
     _poolOvergrownFarmland,
     _poolOxidize,
     _poolPainfulQuandary,
@@ -736,7 +746,9 @@ const shard: CardShard = {
     _poolRimefurReindeer,
     _poolRoilingCanopy,
     _poolRooftopAssassin,
+    _poolRotFarmMortipede,
     _poolRottedHulk,
+    _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
     _poolSarkhanFireblood,
     _poolScapeshift,
