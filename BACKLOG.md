@@ -262,6 +262,10 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Code health
 
+- **`canDispatch` passes a cast whose target is illegal** (found 2026-10-16): `Game.canDispatch`
+  returns null for a `cast-spell` targeting a player with protection from everything, where
+  `dispatch` then throws "illegal target" (`legalActions` leaves that player out correctly). Its
+  contract is "null if it can be dispatched": check the cast's targets the way `dispatch` does.
 - **Solo games in the player's browser: bug reports** (the user, 2026-10-13;
   `docs/plans/local-rooms.md`, built steps in `COMPLETED.md`): bug-report uploads from a local
   game (only a `--capture` dev server has the panel).

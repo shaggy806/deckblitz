@@ -400,6 +400,7 @@ import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
 import _poolVibrantOutburst from "../pool/vibrant-outburst.js";
 import _poolVictorTimelyWilyTycoon from "../pool/victor-timely-wily-tycoon.js";
 import _poolVillainousWrath from "../pool/villainous-wrath.js";
+import _poolViolentEchoes from "../pool/violent-echoes.js";
 import _poolVivVisionTeenSynthezoid from "../pool/viv-vision-teen-synthezoid.js";
 import _poolVoiceOfMany from "../pool/voice-of-many.js";
 import _poolVoidwielder from "../pool/voidwielder.js";
@@ -836,6 +837,7 @@ const shard: CardShard = {
     _poolVibrantOutburst,
     _poolVictorTimelyWilyTycoon,
     _poolVillainousWrath,
+    _poolViolentEchoes,
     _poolVivVisionTeenSynthezoid,
     _poolVoiceOfMany,
     _poolVoidwielder,

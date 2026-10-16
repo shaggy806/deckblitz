@@ -319,6 +319,7 @@ import _poolSliverOverlord from "../pool/sliver-overlord.js";
 import _poolSlumReaper from "../pool/slum-reaper.js";
 import _poolSnakeBasket from "../pool/snake-basket.js";
 import _poolSokenzanCrucibleOfDefiance from "../pool/sokenzan-crucible-of-defiance.js";
+import _poolSolidGround from "../pool/solid-ground.js";
 import _poolSoltariFootSoldier from "../pool/soltari-foot-soldier.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolSlumReaper,
     _poolSnakeBasket,
     _poolSokenzanCrucibleOfDefiance,
+    _poolSolidGround,
     _poolSoltariFootSoldier,
     _poolSoulGuideLantern,
     _poolSoulWarden,

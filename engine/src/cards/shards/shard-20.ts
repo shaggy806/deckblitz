@@ -50,6 +50,7 @@ import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
 import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
 import _poolBoggartTrawler from "../pool/boggart-trawler.js";
+import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
@@ -470,6 +471,7 @@ import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensReliquaryDragon from "../tokens/reliquary-dragon.js";
+import _tokensSamuraiToken from "../tokens/samurai-token.js";
 import _tokensTarmogoyfToken from "../tokens/tarmogoyf-token.js";
 import _tokensWallTokenInvisibleWoman from "../tokens/wall-token-invisible-woman.js";
 import _tokensZombieTokenJadarGhoulcallerOfNephalia from "../tokens/zombie-token-jadar-ghoulcaller-of-nephalia.js";
@@ -523,6 +525,7 @@ const shard: CardShard = {
     _poolBloombrute,
     _poolBlurredMongoose,
     _poolBoggartTrawler,
+    _poolBolgOfTheNorth,
     _poolBoltOfKeranos,
     _poolBoonReflection,
     _poolBorosLocket,
@@ -945,6 +948,7 @@ const shard: CardShard = {
     _tokensInsectTokenBlackGreen,
     _tokensRabbitToken,
     _tokensReliquaryDragon,
+    _tokensSamuraiToken,
     _tokensTarmogoyfToken,
     _tokensWallTokenInvisibleWoman,
     _tokensZombieTokenJadarGhoulcallerOfNephalia,

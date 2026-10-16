@@ -375,6 +375,7 @@ import _poolThaliasLancers from "../pool/thalias-lancers.js";
 import _poolThawbringer from "../pool/thawbringer.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
+import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
 import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
 import _poolThoughtweftImbuer from "../pool/thoughtweft-imbuer.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolThawbringer,
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
+    _poolTheStasisCoffin,
     _poolThornfistStriker,
     _poolThoughtweftCharge,
     _poolThoughtweftImbuer,

@@ -89,11 +89,27 @@ describe("amass", () => {
     expect(game.state.objects[armiesOf(game, A)[0]].counters["+1/+1"]).toBe(1);
   });
 
-  it("a bare 0/0 Army would die — amass 0 makes nothing", () => {
+  it("amass 0 with no Army still makes the 0/0 Army, of the named type (rule 701.47a)", () => {
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A);
     amass(game, 0);
-    expect(armiesOf(game).length).toBe(0);
+    // State-based actions haven't been checked yet: it's there, a 0/0 that will die.
+    const armies = armiesOf(game);
+    expect(armies.length).toBe(1);
+    expect(game.state.objects[armies[0]].counters["+1/+1"] ?? 0).toBe(0);
+    expect(game.characteristics(armies[0]).toughness).toBe(0);
+    expect(game.characteristics(armies[0]).subtypes).toContain("Zombie");
+  });
+
+  it("amass 0 onto an Army you control adds no counters but still gives it the type", () => {
+    const game = makeGame();
+    game.advanceUntil((s) => s.priority.holder === A);
+    amass(game, 2);
+    const army = armiesOf(game)[0];
+    game.debugApplyEffect(A, { kind: "amass", amount: 0, creatureType: "Orc" });
+    expect(armiesOf(game)).toEqual([army]);
+    expect(game.state.objects[army].counters["+1/+1"]).toBe(2);
+    expect(game.characteristics(army).subtypes).toContain("Orc");
   });
 });
 

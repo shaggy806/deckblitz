@@ -348,6 +348,7 @@ import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
+import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
@@ -793,6 +794,7 @@ const shard: CardShard = {
     _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
     _poolTheMechanistAerialArtisan,
+    _poolTheOneRing,
     _poolTheWaspJanetVanDyne,
     _poolThirstingRoots,
     _poolThistledownPlayers,

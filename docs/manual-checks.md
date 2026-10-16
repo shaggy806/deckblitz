@@ -4694,3 +4694,19 @@ choose both instead"), and demonstrate granted to your creature spells (rule 702
   two copies: Bob's resolves first and becomes a Depth Defiler token Bob controls, then yours, then the
   original — three Defilers, and no cast trigger from either copy (a copy isn't cast, rule 707.10). Check at
   ~768px tall and at full size, in a 2- and a 4-player room.
+
+### The Wandering Emperor, The One Ring
+
+*Careful rules calls* — loyalty abilities at instant speed only on the turn she entered (the ruling: still
+one a turn), and protection from everything on a player (rule 702.16j) from a permanent's "if you cast it"
+
+- **Setup:** Your precombat main. Your battlefield: eight Plains; in hand The Wandering Emperor and The One
+  Ring. Bob has Grizzly Bears and two Mountains, and Lightning Bolt in hand.
+- **Do:** Cast The One Ring. Pass the turn; when Bob attacks with Grizzly Bears, flash in The Wandering
+  Emperor during his combat and use her −2 on the tapped Bears. On your next turn, try her abilities at
+  instant speed (in your upkeep).
+- **Check:** While the Ring's protection lasts (until your next turn), Bob's Lightning Bolt offers you as no
+  target, and any damage to you is prevented. Flashed in on Bob's turn, the Emperor activates at instant
+  speed, once; on your own turn she's back to sorcery speed. The Ring's {T} puts a burden counter and draws
+  that many; your upkeep loses life per counter. Check at ~768px tall and at full size, in a 2- and a
+  4-player room.

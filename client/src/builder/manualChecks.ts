@@ -2793,4 +2793,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'The Wandering Emperor, The One Ring',
+    board({
+      you: { bf: ['Plains*8'], hand: ['The Wandering Emperor', 'The One Ring'] },
+      opp: { bf: ['Grizzly Bears', 'Mountain*2'], hand: ['Lightning Bolt'] },
+    }),
+  ),
 ]

@@ -156,6 +156,7 @@ import _poolHeiBaiForestGuardian from "../pool/hei-bai-forest-guardian.js";
 import _poolHengeGuardian from "../pool/henge-guardian.js";
 import _poolHeraldOfTheHost from "../pool/herald-of-the-host.js";
 import _poolHighAlert from "../pool/high-alert.js";
+import _poolHighScore from "../pool/high-score.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
@@ -579,6 +580,7 @@ const shard: CardShard = {
     _poolHengeGuardian,
     _poolHeraldOfTheHost,
     _poolHighAlert,
+    _poolHighScore,
     _poolHobblefiend,
     _poolHomesickness,
     _poolHonedKhopesh,

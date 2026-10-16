@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3637 already implemented / 1363 missing (marks refreshed 2026-10-16)
+3639 already implemented / 1361 missing (marks refreshed 2026-10-16)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -91,7 +91,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]    92  Isolated Chapel                          {0}              Land
 [x]    93  Talisman of Dominance                    {2}              Artifact
 [x]    94  Smoldering Marsh                         {0}              Land — Swamp Mountain
-[ ]    95  The One Ring                             {4}              Legendary Artifact
+[x]    95  The One Ring                             {4}              Legendary Artifact
 [x]    96  City of Brass                            {0}              Land
 [x]    97  Hinterland Harbor                        {0}              Land
 [x]    98  Faithless Looting                        {R}              Sorcery
@@ -4910,7 +4910,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4917  Behind the Scenes                        {2}{B}           Enchantment
 [x]  4918  Necron Deathmark                         {3}{B}{B}        Artifact Creature — Necron
 [x]  4919  Loyal Subordinate                        {2}{B}           Creature — Zombie
-[ ]  4920  High Score                               {2}{G}           Enchantment
+[x]  4920  High Score                               {2}{G}           Enchantment
 [x]  4921  Song of Creation                         {1}{G}{U}{R}     Enchantment
 [ ]  4922  Cyber Conversion                         {U}{U}           Instant
 [ ]  4923  Doors of Durin                           {3}{R}{G}        Legendary Artifact

@@ -21345,7 +21345,9 @@ export class Game {
     x: number,
     onto?: ObjectId,
   ): void {
-    if (amount <= 0) return;
+    // Amass 0 still makes the Army and its type (rule 701.47a); only the
+    // counters are none — and putting none is no event to replace.
+    if (amount < 0) return;
     // "An Army creature you control": a changeling is one (rule 702.73a).
     const isArmy = (id: ObjectId): boolean => {
       const object = this.state.objects[id];
@@ -21416,7 +21418,7 @@ export class Game {
         untilEndOfTurn: false,
       });
     }
-    this.addCounter({ kind: "object", object: army }, "+1/+1", amount, true, controller);
+    if (amount > 0) this.addCounter({ kind: "object", object: army }, "+1/+1", amount, true, controller);
   }
 
   /**

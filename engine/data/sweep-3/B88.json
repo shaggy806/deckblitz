@@ -1,0 +1,138 @@
+{
+ "batch": "B88",
+ "status": "complete",
+ "ranks": "Top-5000 recheck (2026-10-16): the cards whose triage needs had all been built since (cards:needs --stale), re-briefed; the ones still blocked re-recorded with the precise need",
+ "authored": [
+  {
+   "name": "The One Ring",
+   "files": [
+    "engine/src/cards/pool/the-one-ring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Stasis Coffin",
+   "files": [
+    "engine/src/cards/pool/the-stasis-coffin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Wandering Emperor",
+   "files": [
+    "engine/src/cards/pool/the-wandering-emperor.ts",
+    "engine/src/cards/tokens/samurai-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Violent Echoes",
+   "files": [
+    "engine/src/cards/pool/violent-echoes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High Score",
+   "files": [
+    "engine/src/cards/pool/high-score.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solid Ground",
+   "files": [
+    "engine/src/cards/pool/solid-ground.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bolg of the North",
+   "files": [
+    "engine/src/cards/pool/bolg-of-the-north.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Flare of Fortitude",
+   "needs": [
+    "cost:alt-cost-sacrifice"
+   ],
+   "why": "The lifeCantChange player-effect and the hexproof/indestructible grants are built, but the alternative cost 'You may sacrifice a nontoken white creature rather than pay this spell's mana cost' has no shape: card.alternativeCost is mana plus tapping creatures only (Sephara), and cost:alt-cost-sacrifice is still unbuilt (Flare of Cultivation, Duplication, Malice, Denial wait on it too)."
+  },
+  {
+   "name": "Doc Samson, Super Psychiatrist",
+   "needs": [
+    "replacement:counter-multiplier-on-costs",
+    "replacement:counter-replacement-you-put"
+   ],
+   "why": "'If you would put one or more counters ... that many plus one of each of those kinds' has no 'effect' qualifier, so it applies to counters put as a cost (a planeswalker's +N loyalty cost, Devoted Druid's -1/-1, Wall of Roots' -0/-1, Jessica Jones' stun), which the engine puts without consulting would-add-counter (game.ts loyaltyCost path and putCostCounters); and it only applies when you are the one putting them, while counterTotal adds the plus for any counters put on your permanents, an opponent's -1/-1 counters included."
+  },
+  {
+   "name": "Pir, Imaginative Rascal",
+   "needs": [
+    "replacement:counter-multiplier-on-costs"
+   ],
+   "why": "'If one or more counters would be put on a permanent your team controls, that many plus one' has no 'effect' qualifier (contrast Doubling Season's ruling), so it adds a loyalty counter to a planeswalker's +N loyalty cost and a counter to Devoted Druid's/Wall of Roots' cost counters; the engine puts cost counters (loyaltyCost in activateAbility, putCostCounters) without any would-add-counter replacement."
+  },
+  {
+   "name": "Platinum Emperion",
+   "needs": [
+    "static:your-life-total-cant-change"
+   ],
+   "why": "\"Your life total can't change\" as a permanent's static ability: what's built (2026-10-12) is only the temporary `player-effect` `lifeCantChange` (Teferi's Protection); nothing makes it last while a permanent is on the battlefield."
+  },
+  {
+   "name": "Absolute Virtue",
+   "needs": [
+    "static:player-protection-from-opponents"
+   ],
+   "why": "\"You have protection from each of your opponents\" (rule 702.16k) as a static: what's built is only the temporary `player-effect` `protectionFromEverything`; protection from players (no damage, Auras or targeting from anything an opponent controls) has no form."
+  },
+  {
+   "name": "Winding Constrictor",
+   "needs": [
+    "replacement:player-counter-addend"
+   ],
+   "why": "The permanent half is Hardened Scales' `plus` over any kind on artifacts and creatures, but \"if you would get one or more counters, you get that many plus one\" needs the same replacement over counters a player gets (poison, energy, experience); `would-add-counter` covers permanents only."
+  },
+  {
+   "name": "Jace's Machinations",
+   "needs": [
+    "effect:grant-instant-speed-loyalty-until-eot"
+   ],
+   "why": "\"Until end of turn, you may activate loyalty abilities of Jace planeswalkers you control on any player's turn any time you could cast an instant\": instant-speed loyalty exists only as a permanent's own static (`loyaltyAtInstantSpeed`, Teferi, Master of Time), not as an effect granting it to a set of planeswalkers for a duration."
+  },
+  {
+   "name": "Stensian Sanguinist",
+   "needs": [
+    "effect:delayed-combat-damage-this-combat"
+   ],
+   "why": "Prepare is built, but \"whenever that creature deals combat damage to a player this combat\" needs a watch that ends with the combat: the delayed dealsCombatDamage watch lasts the turn, so an additional combat would prepare it again."
+  },
+  {
+   "name": "Camellia, the Seedmiser",
+   "needs": [
+    "cost:forage",
+    "trigger:sacrifice-batch-trigger"
+   ],
+   "why": "Forage was built as an effect (2026-10-15), not as a cost (\"{2}, Forage: …\"), and \"whenever you sacrifice one or more Foods\" needs a trigger batched per sacrifice event."
+  },
+  {
+   "name": "Feed the Cycle",
+   "needs": [
+    "cost:forage"
+   ],
+   "why": "\"As an additional cost to cast this spell, forage or pay {B}\": forage is built only as an effect, not as a cost (here a choice of additional costs)."
+  },
+  {
+   "name": "Thornvault Forager",
+   "needs": [
+    "cost:forage"
+   ],
+   "why": "\"{T}, Forage: Add two mana in any combination of colors\": forage is built only as an effect, not as a cost; the mana itself has precedent (Orb of Dragonkind's any-combination mana)."
+  }
+ ]
+}

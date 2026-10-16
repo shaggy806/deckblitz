@@ -1275,6 +1275,7 @@ import _poolBojukaBog from "./pool/bojuka-bog.js";
 import _poolBoldBiochemist from "./pool/bold-biochemist.js";
 import _poolBoldImpaler from "./pool/bold-impaler.js";
 import _poolBoldwyrAggressor from "./pool/boldwyr-aggressor.js";
+import _poolBolgOfTheNorth from "./pool/bolg-of-the-north.js";
 import _poolBolgsCompany from "./pool/bolgs-company.js";
 import _poolBoltBend from "./pool/bolt-bend.js";
 import _poolBoltHound from "./pool/bolt-hound.js";
@@ -5204,6 +5205,7 @@ import _poolHighFlyingAce from "./pool/high-flying-ace.js";
 import _poolHighMarket from "./pool/high-market.js";
 import _poolHighPerfectMorcant from "./pool/high-perfect-morcant.js";
 import _poolHighPriestOfPenance from "./pool/high-priest-of-penance.js";
+import _poolHighScore from "./pool/high-score.js";
 import _poolHighSocietyHunter from "./pool/high-society-hunter.js";
 import _poolHighStride from "./pool/high-stride.js";
 import _poolHighbornGhoul from "./pool/highborn-ghoul.js";
@@ -10255,6 +10257,7 @@ import _poolSoldierOn from "./pool/soldier-on.js";
 import _poolSolemnOffering from "./pool/solemn-offering.js";
 import _poolSolemnRecruit from "./pool/solemn-recruit.js";
 import _poolSolemnSimulacrum from "./pool/solemn-simulacrum.js";
+import _poolSolidGround from "./pool/solid-ground.js";
 import _poolSolidarityOfHeroes from "./pool/solidarity-of-heroes.js";
 import _poolSolidarity from "./pool/solidarity.js";
 import _poolSolitaryCell from "./pool/solitary-cell.js";
@@ -11375,6 +11378,7 @@ import _poolTheMycotyrant from "./pool/the-mycotyrant.js";
 import _poolTheNeutrinos from "./pool/the-neutrinos.js";
 import _poolTheNotaryHobbits from "./pool/the-notary-hobbits.js";
 import _poolTheOddAcornGang from "./pool/the-odd-acorn-gang.js";
+import _poolTheOneRing from "./pool/the-one-ring.js";
 import _poolTheOzolith from "./pool/the-ozolith.js";
 import _poolThePrideOfHullClade from "./pool/the-pride-of-hull-clade.js";
 import _poolThePrimaVista from "./pool/the-prima-vista.js";
@@ -11400,6 +11404,7 @@ import _poolTheSpeedDemon from "./pool/the-speed-demon.js";
 import _poolTheSpiritOasis from "./pool/the-spirit-oasis.js";
 import _poolTheSpotsPortal from "./pool/the-spots-portal.js";
 import _poolTheSquadronSinister from "./pool/the-squadron-sinister.js";
+import _poolTheStasisCoffin from "./pool/the-stasis-coffin.js";
 import _poolTheSurgicalBay from "./pool/the-surgical-bay.js";
 import _poolTheSwarmweaver from "./pool/the-swarmweaver.js";
 import _poolTheTarrasque from "./pool/the-tarrasque.js";
@@ -11416,6 +11421,7 @@ import _poolTheUrDragon from "./pool/the-ur-dragon.js";
 import _poolTheVisionAndScarletWitch from "./pool/the-vision-and-scarlet-witch.js";
 import _poolTheVision from "./pool/the-vision.js";
 import _poolTheWallsOfBaSingSe from "./pool/the-walls-of-ba-sing-se.js";
+import _poolTheWanderingEmperor from "./pool/the-wandering-emperor.js";
 import _poolTheWanderingMinstrel from "./pool/the-wandering-minstrel.js";
 import _poolTheWanderingRescuer from "./pool/the-wandering-rescuer.js";
 import _poolTheWaspJanetVanDyne from "./pool/the-wasp-janet-van-dyne.js";
@@ -12413,6 +12419,7 @@ import _poolVineglimmerSnarl from "./pool/vineglimmer-snarl.js";
 import _poolVinelasherAdept from "./pool/vinelasher-adept.js";
 import _poolVinelasherKudzu from "./pool/vinelasher-kudzu.js";
 import _poolVinereapMentor from "./pool/vinereap-mentor.js";
+import _poolViolentEchoes from "./pool/violent-echoes.js";
 import _poolViolentImpact from "./pool/violent-impact.js";
 import _poolViolentOutburst from "./pool/violent-outburst.js";
 import _poolViolentUrge from "./pool/violent-urge.js";
@@ -13516,6 +13523,7 @@ import _tokensRobotToken from "./tokens/robot-token.js";
 import _tokensRobotVillainToken from "./tokens/robot-villain-token.js";
 import _tokensRobotWarriorToken from "./tokens/robot-warrior-token.js";
 import _tokensSalamanderWarriorToken from "./tokens/salamander-warrior-token.js";
+import _tokensSamuraiToken from "./tokens/samurai-token.js";
 import _tokensSandWarriorToken from "./tokens/sand-warrior-token.js";
 import _tokensSaprolingToken from "./tokens/saproling-token.js";
 import _tokensSatyrToken from "./tokens/satyr-token.js";
@@ -14892,6 +14900,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoldBiochemist,
   _poolBoldImpaler,
   _poolBoldwyrAggressor,
+  _poolBolgOfTheNorth,
   _poolBolgsCompany,
   _poolBoltBend,
   _poolBoltHound,
@@ -18821,6 +18830,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHighMarket,
   _poolHighPerfectMorcant,
   _poolHighPriestOfPenance,
+  _poolHighScore,
   _poolHighSocietyHunter,
   _poolHighStride,
   _poolHighbornGhoul,
@@ -23872,6 +23882,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSolemnOffering,
   _poolSolemnRecruit,
   _poolSolemnSimulacrum,
+  _poolSolidGround,
   _poolSolidarityOfHeroes,
   _poolSolidarity,
   _poolSolitaryCell,
@@ -24992,6 +25003,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheNeutrinos,
   _poolTheNotaryHobbits,
   _poolTheOddAcornGang,
+  _poolTheOneRing,
   _poolTheOzolith,
   _poolThePrideOfHullClade,
   _poolThePrimaVista,
@@ -25017,6 +25029,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheSpiritOasis,
   _poolTheSpotsPortal,
   _poolTheSquadronSinister,
+  _poolTheStasisCoffin,
   _poolTheSurgicalBay,
   _poolTheSwarmweaver,
   _poolTheTarrasque,
@@ -25033,6 +25046,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheVisionAndScarletWitch,
   _poolTheVision,
   _poolTheWallsOfBaSingSe,
+  _poolTheWanderingEmperor,
   _poolTheWanderingMinstrel,
   _poolTheWanderingRescuer,
   _poolTheWaspJanetVanDyne,
@@ -26030,6 +26044,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVinelasherAdept,
   _poolVinelasherKudzu,
   _poolVinereapMentor,
+  _poolViolentEchoes,
   _poolViolentImpact,
   _poolViolentOutburst,
   _poolViolentUrge,
@@ -27139,6 +27154,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensRobotVillainToken,
   _tokensRobotWarriorToken,
   _tokensSalamanderWarriorToken,
+  _tokensSamuraiToken,
   _tokensSandWarriorToken,
   _tokensSaprolingToken,
   _tokensSatyrToken,

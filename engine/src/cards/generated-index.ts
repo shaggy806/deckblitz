@@ -286,6 +286,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Robot Villain Token",
   "Robot Warrior Token",
   "Salamander Warrior Token",
+  "Samurai Token",
   "Sand Warrior Token",
   "Saproling Token",
   "Satyr Token",
