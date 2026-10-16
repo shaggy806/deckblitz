@@ -54,6 +54,10 @@ plus a reverse-proxy and certificate setup.
   only. Nothing for HTTP or HTTPS — the tunnel needs no inbound ports.
 - **2 GB of swap** at `/swapfile` (in `/etc/fstab`). The full build (card codegen, a large
   `tsc`, the Vite bundle) peaks above 1 GB, which is why the plan isn't the 1 GB one.
+  `deploy.sh` caps the build's V8 heap at 1.6 GB (`NODE_OPTIONS=--max-old-space-size=1600`):
+  uncapped, the engine's `tsc` grew past RAM and swap together and was OOM-killed
+  (2026-10-15, 13,614 cards), though it needs ~1.45 GB live. If it ever fails on the heap
+  limit instead ("JavaScript heap out of memory"), the pool has outgrown the box.
 - **CPU is burstable.** Lightsail instances run at full speed until a credit balance runs out,
   then get throttled. Each bot decision has a fixed thinking budget (`BOT_DECISION_BUDGET_MS`,
   300 ms, `server/src/room.ts`), so on a throttled CPU the bots play worse, not just slower.

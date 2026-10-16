@@ -13,6 +13,11 @@ git pull --ff-only
 # the `libc` fields npm 11 records), and a dirty lockfile would make the
 # next `git pull --ff-only` refuse once it changed upstream.
 npm ci
+# Cap the build's V8 heap: left to itself the engine's `tsc` grows to ~3.5 GB of
+# address space on this 2 GB box, filling RAM and swap until the kernel kills it
+# (2026-10-15, at 13,614 cards), though it needs ~1.45 GB live. Capped, it
+# collects sooner and fits.
+export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=1600}"
 VITE_SERVER_URL="$VITE_SERVER_URL" npm run build
 sudo systemctl daemon-reload
 sudo systemctl restart mtg-server
