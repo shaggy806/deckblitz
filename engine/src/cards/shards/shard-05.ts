@@ -278,6 +278,7 @@ import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
 import _poolRapidAugmenter from "../pool/rapid-augmenter.js";
 import _poolRavenousIntruder from "../pool/ravenous-intruder.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
+import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
@@ -340,6 +341,7 @@ import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
+import _poolStoneIdolGenerator from "../pool/stone-idol-generator.js";
 import _poolStonespeakerCrystal from "../pool/stonespeaker-crystal.js";
 import _poolStonySilence from "../pool/stony-silence.js";
 import _poolStormFront from "../pool/storm-front.js";
@@ -357,6 +359,7 @@ import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
 import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
+import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
 import _poolTeferisPuzzleBox from "../pool/teferis-puzzle-box.js";
 import _poolTempleBell from "../pool/temple-bell.js";
@@ -703,6 +706,7 @@ const shard: CardShard = {
     _poolRapidAugmenter,
     _poolRavenousIntruder,
     _poolRecklessPangolin,
+    _poolRefurbishedFamiliar,
     _poolRememberTheFallen,
     _poolRepelCalamity,
     _poolReshape,
@@ -765,6 +769,7 @@ const shard: CardShard = {
     _poolSteamBlast,
     _poolStegronTheDinosaurMan,
     _poolStolenStarkTech,
+    _poolStoneIdolGenerator,
     _poolStonespeakerCrystal,
     _poolStonySilence,
     _poolStormFront,
@@ -782,6 +787,7 @@ const shard: CardShard = {
     _poolSyggRiverCutthroat,
     _poolSylvanAnthem,
     _poolTaboraxHopesDemise,
+    _poolTarmogoyfNest,
     _poolTarmogoyf,
     _poolTeferisPuzzleBox,
     _poolTempleBell,

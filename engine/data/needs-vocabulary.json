@@ -6534,6 +6534,82 @@
   "trigger:sacrifice-batch-trigger": {
    "family": "trigger:sacrifice-filter",
    "example": "A batched \"whenever you sacrifice one or more [filter]\" trigger, firing once per simultaneous sacrifice event rather than once per permanent (Camellia, the Seedmiser's Foods)."
+  },
+  "effect:cast-now-pay-life-for-mana-value": {
+   "family": "effect:cast-during-resolution",
+   "example": "cast-now with an alternative cost of life equal to the spell's mana value rather than its mana cost (Bismuth Mindrender)."
+  },
+  "effect:energy-count-amount": {
+   "family": "effect:amount-new-variants",
+   "example": "An EffectAmount for the energy counters a player has ('where X is the amount of {E} you have' - Razorfield Ripper)."
+  },
+  "cost:cost-reduction-energy-paid-this-turn": {
+   "family": "cost:cost-modification-extensions",
+   "example": "A per-turn stat of energy paid or lost, and a spell cost reduction per unit of it (Blaster Hulk)."
+  },
+  "cost:returned-for-cost-lki": {
+   "family": "effect:sacrificed-object-lki",
+   "example": "The permanent returned to hand by a returnToHand cost, readable by the effect as it last existed (its subtypes - Wonderscape Sage's 'unless that land had a nonbasic land type')."
+  },
+  "decision:choose-land-type-on-resolution": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "example": "Choose a (nonbasic) land type as a spell resolves, with a filter reading the chosen land type (March from Velis Vel)."
+  },
+  "effect:copy-spell-retarget-another-opponent": {
+   "family": "effect:copy-spell-extensions",
+   "example": "A cast trigger gated on another opponent controlling a permanent the spell could target, then a copy targeting one such permanent the controller chooses (Exterminator Magmarch)."
+  },
+  "bug:delayed-trigger-carries-lost-trigger-object": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "createDelayedTrigger carries the creating ability's trigger object at its current zoneChangeCount without checking refs.triggerObjectAfterLeaving, so a card that changed zones again before the creating trigger resolved is still followed (Desert Warfare; Avacyn, Angel of Horror and other dies -> delayed-return cards likely share it)."
+  },
+  "keyword:two-kicker-costs": {
+   "family": "keyword:multikicker",
+   "example": "Two different kicker costs on one card ('Kicker {G} and/or {1}{U}', rule 702.33d), each payable once, with conditions that name which kicker was paid (Wastescape Battlemage, the Zendikar Rising-style 'kicked with its {X} kicker' cards)."
+  },
+  "replacement:as-enters-choose-characteristics": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "'As this enters, it becomes your choice of [P/T and keyword sets]' — a choice made as it enters that sets copiable values (layer 1), so copies keep it (Corrupted Shapeshifter, Primal Clay)."
+  },
+  "effect:search-to-linked-exile-face-down": {
+   "family": "mechanic:face-down",
+   "example": "Search a library and exile the found card face down, linked to the source (rule 607.2), for later abilities to turn face up and put onto the battlefield or into a hand (The Creation of Avacyn's chapters)."
+  },
+  "cost:exile-from-graveyard-card-types": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "A cost (escape's, here) exiling any number of cards from your graveyard chosen so they have N or more card types among them, rather than a fixed count — Nethergoyf."
+  },
+  "stat:granted-once-per-turn-per-grantor": {
+   "family": "stat:per-ability-turn-counters",
+   "example": "'This ability triggers only once each turn' on a statically granted triggered ability, tracked per grant instance (per granting object, rule 400.7) instead of by the ability's index in the recipient's trigger list — Cursed Wombat's rulings on two Wombats and a Wombat replaced the same turn."
+  },
+  "effect:aggregate-all-counters": {
+   "family": "effect:amount-aggregate",
+   "example": "A sum of every counter of every kind on permanents matching a filter — 'X is the number of counters on permanents you control' (Hydra Trainer); AggregateOf counts one named kind. The no-target sibling of effect:aggregate-all-counters-for-target."
+  },
+  "effect:grant-ability-to-permanent-spell": {
+   "family": "static:grant-abilities-to-spells",
+   "example": "An effect (a cast trigger's resolution) that grants an ability to a permanent spell on the stack which carries to the permanent it becomes (rule 400.7a) — Thief of Existence's 'If you do, Thief of Existence gains \"When this creature leaves the battlefield, target opponent draws a card.\"'"
+  },
+  "cost:cost-reduction-count-other": {
+   "family": "cost:cost-modification-extensions",
+   "example": "A cost reduction counting \"each OTHER [permanent] you control\" (CostReductionAmount countOf with excludeSelf) — Etherium Pteramander's \"{1} less to activate for each other artifact you control\"."
+  },
+  "condition:additional-cost-option-paid": {
+   "family": "effect:this-way-results",
+   "example": "A condition reading which additionalCost.options branch was paid — Lethal Throwdown's \"sacrifice a creature or sacrifice a modified creature … If the modified creature was sacrificed, draw a card\"."
+  },
+  "effect:owner-chooses-library-position": {
+   "family": "effect:choices-by-other-players",
+   "example": "A permanent's owner chooses where in their library it goes — Deem Inferior's \"second from the top or on the bottom\"."
+  },
+  "mechanic:exalted-counters": {
+   "family": "mechanic:keyword-counters",
+   "example": "Exalted counters (rule 122.1b): each gives the permanent an instance of exalted — needs exalted as a keyword whose instances the attacks-alone pump counts (Emissary of Soulfire)."
+  },
+  "replacement:enters-with-keyword": {
+   "family": "replacement:new-event-replacements",
+   "example": "An enters-battlefield replacement that has the permanent enter with a keyword (haste) as an effect timestamped as it enters, optionally gated on how it was cast (kicked) — Voidpouncer's \"if this creature was kicked, it enters with ... and with haste\"."
   }
  }
 }

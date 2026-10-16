@@ -256,6 +256,7 @@ import _poolPurpleDragonPunks from "../pool/purple-dragon-punks.js";
 import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
+import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
 import _poolRageThrower from "../pool/rage-thrower.js";
@@ -678,6 +679,7 @@ const shard: CardShard = {
     _poolPyreticPrankster,
     _poolQasaliSlingers,
     _poolQuakeAgentOfSHIELD,
+    _poolQuestForTheNecropolis,
     _poolQuirionRanger,
     _poolRadioactiveSpider,
     _poolRageThrower,

@@ -54,6 +54,7 @@ import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
+import _poolCranialRam from "../pool/cranial-ram.js";
 import _poolCrashingDrawbridge from "../pool/crashing-drawbridge.js";
 import _poolCrucibleOfFire from "../pool/crucible-of-fire.js";
 import _poolCruelSomnophage from "../pool/cruel-somnophage.js";
@@ -110,6 +111,7 @@ import _poolFlayerHusk from "../pool/flayer-husk.js";
 import _poolFlight from "../pool/flight.js";
 import _poolFlockImpostor from "../pool/flock-impostor.js";
 import _poolForsakenMonument from "../pool/forsaken-monument.js";
+import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolGallantFowlknight from "../pool/gallant-fowlknight.js";
 import _poolGalvanicIteration from "../pool/galvanic-iteration.js";
@@ -117,6 +119,7 @@ import _poolGalvanicKey from "../pool/galvanic-key.js";
 import _poolGameTrail from "../pool/game-trail.js";
 import _poolGauFeralYouth from "../pool/gau-feral-youth.js";
 import _poolGeneralsEnforcer from "../pool/generals-enforcer.js";
+import _poolGenkuFutureShaper from "../pool/genku-future-shaper.js";
 import _poolGiadaFontOfHope from "../pool/giada-font-of-hope.js";
 import _poolGisaAndGeralf from "../pool/gisa-and-geralf.js";
 import _poolGixianPuppeteer from "../pool/gixian-puppeteer.js";
@@ -374,6 +377,7 @@ import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
 import _poolWiccanRisingMagician from "../pool/wiccan-rising-magician.js";
 import _poolWidowsBite from "../pool/widows-bite.js";
+import _poolWingIt from "../pool/wing-it.js";
 import _poolWingbladeDisciple from "../pool/wingblade-disciple.js";
 import _poolWittyRoastmaster from "../pool/witty-roastmaster.js";
 import _poolWoeStrider from "../pool/woe-strider.js";
@@ -450,6 +454,7 @@ const shard: CardShard = {
     _poolCondescend,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
+    _poolCranialRam,
     _poolCrashingDrawbridge,
     _poolCrucibleOfFire,
     _poolCruelSomnophage,
@@ -506,6 +511,7 @@ const shard: CardShard = {
     _poolFlight,
     _poolFlockImpostor,
     _poolForsakenMonument,
+    _poolFrogmyrEnforcer,
     _poolFyndhornBow,
     _poolGallantFowlknight,
     _poolGalvanicIteration,
@@ -513,6 +519,7 @@ const shard: CardShard = {
     _poolGameTrail,
     _poolGauFeralYouth,
     _poolGeneralsEnforcer,
+    _poolGenkuFutureShaper,
     _poolGiadaFontOfHope,
     _poolGisaAndGeralf,
     _poolGixianPuppeteer,
@@ -770,6 +777,7 @@ const shard: CardShard = {
     _poolWhiteWidowFreeAgent,
     _poolWiccanRisingMagician,
     _poolWidowsBite,
+    _poolWingIt,
     _poolWingbladeDisciple,
     _poolWittyRoastmaster,
     _poolWoeStrider,

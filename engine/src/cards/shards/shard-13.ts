@@ -263,6 +263,7 @@ import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
+import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
@@ -698,6 +699,7 @@ const shard: CardShard = {
     _poolPersonalTutor,
     _poolPhotonBlastBarrage,
     _poolPhyrexianDelver,
+    _poolPhyrexianIronworks,
     _poolPhyrexianVivisector,
     _poolPickYourPoison,
     _poolPillage,

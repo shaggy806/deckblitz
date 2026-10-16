@@ -25,6 +25,7 @@ import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArcaneOmens from "../pool/arcane-omens.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
+import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
@@ -89,6 +90,7 @@ import _poolDaringWaverider from "../pool/daring-waverider.js";
 import _poolDeepwoodGhoul from "../pool/deepwood-ghoul.js";
 import _poolDematerialize from "../pool/dematerialize.js";
 import _poolDependableQuinjet from "../pool/dependable-quinjet.js";
+import _poolDepthDefiler from "../pool/depth-defiler.js";
 import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
@@ -368,6 +370,7 @@ import _poolTweeze from "../pool/tweeze.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
+import _poolUnfathomableTruths from "../pool/unfathomable-truths.js";
 import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
 import _poolValorSinger from "../pool/valor-singer.js";
@@ -402,11 +405,13 @@ import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
+import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
 import _tokensInsectTokenOverlordOfTheMistmoors from "../tokens/insect-token-overlord-of-the-mistmoors.js";
+import _tokensMoonfolkToken from "../tokens/moonfolk-token.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
@@ -436,6 +441,7 @@ const shard: CardShard = {
     _poolArcaneOmens,
     _poolArchersParapet,
     _poolArdentPlea,
+    _poolArgentDais,
     _poolArmoredCancrix,
     _poolAtraxaPraetorsVoice,
     _poolAvatarRokuFirebender,
@@ -500,6 +506,7 @@ const shard: CardShard = {
     _poolDeepwoodGhoul,
     _poolDematerialize,
     _poolDependableQuinjet,
+    _poolDepthDefiler,
     _poolDerangedWhelp,
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
@@ -779,6 +786,7 @@ const shard: CardShard = {
     _poolUmbralJuke,
     _poolUndercityShade,
     _poolUnexplainedAbsence,
+    _poolUnfathomableTruths,
     _poolUnnaturalPredation,
     _poolValeriaRichardsPrecocious,
     _poolValorSinger,
@@ -815,11 +823,13 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienWarriorToken,
     _tokensAngelo,
+    _tokensFoxToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
     _tokensHumanCitizenToken,
     _tokensIllusionTokenPlain,
     _tokensInsectTokenOverlordOfTheMistmoors,
+    _tokensMoonfolkToken,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
     _tokensRedWhiteSoldierHasteToken,

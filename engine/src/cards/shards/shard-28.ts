@@ -70,6 +70,7 @@ import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
+import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCourtArchers from "../pool/court-archers.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
@@ -151,6 +152,7 @@ import _poolHighwayRobber from "../pool/highway-robber.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
 import _poolHordewingSkaab from "../pool/hordewing-skaab.js";
 import _poolHorizonCanopy from "../pool/horizon-canopy.js";
+import _poolHorrificAssault from "../pool/horrific-assault.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
@@ -404,6 +406,7 @@ import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
+import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
@@ -415,7 +418,6 @@ import _poolZardaThePowerPrincess from "../pool/zarda-the-power-princess.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
 import _poolZendikarFarguide from "../pool/zendikar-farguide.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
-import _tokensCouncilOfReeds from "../tokens/council-of-reeds.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
 import _tokensElkToken from "../tokens/elk-token.js";
 import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
@@ -494,6 +496,7 @@ const shard: CardShard = {
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolConcealedCourtyard,
+    _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
     _poolCourtArchers,
     _poolCowerInFear,
@@ -575,6 +578,7 @@ const shard: CardShard = {
     _poolHiredPoisoner,
     _poolHordewingSkaab,
     _poolHorizonCanopy,
+    _poolHorrificAssault,
     _poolHulkBrutalBrawler,
     _poolHungryGraffalon,
     _poolHyperionsAtomicVision,
@@ -828,6 +832,7 @@ const shard: CardShard = {
     _poolWeaverOfHarmony,
     _poolWhirlermaker,
     _poolWhisperAgent,
+    _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
@@ -841,7 +846,6 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensClericToken,
-    _tokensCouncilOfReeds,
     _tokensElementalTokenWildfireAwakener,
     _tokensElkToken,
     _tokensHumanMonkToken,

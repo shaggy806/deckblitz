@@ -179,6 +179,7 @@ import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
+import _poolInspiredInventor from "../pool/inspired-inventor.js";
 import _poolInspiredSprite from "../pool/inspired-sprite.js";
 import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
 import _poolInvasionReinforcements from "../pool/invasion-reinforcements.js";
@@ -370,6 +371,7 @@ import _poolTheirNameIsDeath from "../pool/their-name-is-death.js";
 import _poolThrabenPurebloods from "../pool/thraben-purebloods.js";
 import _poolThrabenSentry from "../pool/thraben-sentry.js";
 import _poolThraxodemon from "../pool/thraxodemon.js";
+import _poolThrivingSkyclaw from "../pool/thriving-skyclaw.js";
 import _poolThunderhawkGunship from "../pool/thunderhawk-gunship.js";
 import _poolThunderingTanadon from "../pool/thundering-tanadon.js";
 import _poolTigerSharkAbyssalHunter from "../pool/tiger-shark-abyssal-hunter.js";
@@ -417,6 +419,7 @@ import _poolWallOfGranite from "../pool/wall-of-granite.js";
 import _poolWallOfHeat from "../pool/wall-of-heat.js";
 import _poolWallOfLava from "../pool/wall-of-lava.js";
 import _poolWarlordsAxe from "../pool/warlords-axe.js";
+import _poolWarpedTusker from "../pool/warped-tusker.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
@@ -632,6 +635,7 @@ const shard: CardShard = {
     _poolImperiousInkmage,
     _poolIndathaTriome,
     _poolInkmothNexus,
+    _poolInspiredInventor,
     _poolInspiredSprite,
     _poolInspiritedVanguard,
     _poolInvasionReinforcements,
@@ -823,6 +827,7 @@ const shard: CardShard = {
     _poolThrabenPurebloods,
     _poolThrabenSentry,
     _poolThraxodemon,
+    _poolThrivingSkyclaw,
     _poolThunderhawkGunship,
     _poolThunderingTanadon,
     _poolTigerSharkAbyssalHunter,
@@ -870,6 +875,7 @@ const shard: CardShard = {
     _poolWallOfHeat,
     _poolWallOfLava,
     _poolWarlordsAxe,
+    _poolWarpedTusker,
     _poolWarstormSurge,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,

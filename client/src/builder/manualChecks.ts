@@ -2786,4 +2786,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  preset(
+    'Depth Defiler, Silverquill Lecturer',
+    board({
+      you: { bf: ['Silverquill Lecturer', 'Island*5', 'Wastes'], hand: ['Depth Defiler'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

@@ -9,6 +9,7 @@ import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
+import _poolAngelicAberration from "../pool/angelic-aberration.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
 import _poolArchitectOfRestoration from "../pool/architect-of-restoration.js";
@@ -428,6 +429,7 @@ const shard: CardShard = {
     _poolAffaProtector,
     _poolAidFromTheCowl,
     _poolAllosaurusShepherd,
+    _poolAngelicAberration,
     _poolApproachOfTheSecondSun,
     _poolArcOfFortune,
     _poolArchitectOfRestoration,

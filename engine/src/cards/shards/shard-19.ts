@@ -105,6 +105,7 @@ import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
+import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
@@ -351,6 +352,7 @@ import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
 import _poolSilvanReveler from "../pool/silvan-reveler.js";
+import _poolSilverquillLecturer from "../pool/silverquill-lecturer.js";
 import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
 import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
@@ -359,6 +361,7 @@ import _poolSkyknightVanguard from "../pool/skyknight-vanguard.js";
 import _poolSkyshaper from "../pool/skyshaper.js";
 import _poolSlaughterhorn from "../pool/slaughterhorn.js";
 import _poolSliverConstruct from "../pool/sliver-construct.js";
+import _poolSneakySnacker from "../pool/sneaky-snacker.js";
 import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
@@ -564,6 +567,7 @@ const shard: CardShard = {
     _poolDualcasterMage,
     _poolDungroveElder,
     _poolEarthcraft,
+    _poolElectrozoa,
     _poolElvenAmbush,
     _poolElvenRaftSteerer,
     _poolEmrakulsMessenger,
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolSift,
     _poolSignInBlood,
     _poolSilvanReveler,
+    _poolSilverquillLecturer,
     _poolSinkholeSurveyor,
     _poolSkarrgGoliath,
     _poolSkeletalWurm,
@@ -818,6 +823,7 @@ const shard: CardShard = {
     _poolSkyshaper,
     _poolSlaughterhorn,
     _poolSliverConstruct,
+    _poolSneakySnacker,
     _poolSoaringSeacliff,
     _poolSokkaTenaciousTactician,
     _poolSomberwaldDryad,

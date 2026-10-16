@@ -83,10 +83,12 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to Assassin's Creed is whole (batch
-  86 finished Bloomburrow, its Commander set and Assassin's Creed); **next, Modern Horizons 3
-  and its Commander set** (MH3, M3C, about 130 left, their bottom halves), then The Big Score
-  and Outlaws of Thunder Junction onward (`npm run cards:sets -w engine -- --sets 40`). Leading blockers now:
+  ranked ones first. Every set from Reality Fracture back to Modern Horizons 3 is whole (batch
+  87 finished Modern Horizons 3 and its Commander set); **next, The Big Score, Outlaws of
+  Thunder Junction and its Commander set** (BIG, OTJ, OTC, about 180 left, their bottom halves),
+  then Fallout and Murders at Karlov Manor (`npm run cards:sets -w engine -- --sets 45`). MH3's
+  leaders: paying any amount of energy (`cost:pay-any-amount-of-energy`) and bestow, five cards
+  each. Leading blockers now:
   `npm run cards:needs -w engine -- --rank` (attach extensions, X targets). Batches run 4-5 agents
   with more cards each; features build in parallel worktrees. Batch 68's blockers are one or
   two cards each; `effect:manifested-this-way` (Valgavoth's Onslaught, Weight Room) is the only
@@ -108,6 +110,11 @@ section keeps only what to do next.
 - **Enter the God-Eternals gains a fixed 4 life**, not "life equal to the damage dealt this way":
   wrong beside Torbran, Gratuitous Violence or prevention. It needs the damage actually dealt as an
   amount (`new:damage-dealt-this-way`).
+- **Chandra, Acolyte of Flame's Elementals have haste printed** (found 2026-10-15): her 0 makes
+  the shared "Elemental Token" (Tempt with Vengeance's, which does print haste), but hers "gain
+  haste", which isn't copiable (rule 707.2): a copy of one wrongly has haste. Needs the plain
+  "1/1 Red Elemental Token" with an indefinite gain on creation (`create-token` has only
+  `gainUntilEndOfTurn`), or pull the card.
 - **Features with a family of cards behind them**, each detailed where it points:
   the rest of "enters tapped and attacking" (`docs/card-blockers.md`); modal
   activated abilities with targeted modes, host triggers (28 cards), the EDH-popularity tiers
@@ -159,6 +166,7 @@ there and move this line to `COMPLETED.md`.
 - **A spell cast this turn forgets where it was cast from** (latent; Surge of Brilliance waits on it): `cast-this-turn` with a `castFrom` filter matches nothing.
 - **A source's chosen colour or number isn't read from last-known information** (latent).
 - **A "trigger-object" that blinks is still found** (400.7): Atarka's double strike lands on a Dragon Cloudshifted in response.
+- **A delayed trigger made by an ability whose trigger object already left still finds it** (400.7, 603.7c): `createDelayedTrigger` takes the object's current stint; Desert Warfare waits.
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.

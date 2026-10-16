@@ -164,6 +164,7 @@ import _poolGrimTutor from "../pool/grim-tutor.js";
 import _poolGrimaSarumansFootman from "../pool/grima-sarumans-footman.js";
 import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
+import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
@@ -176,6 +177,7 @@ import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
+import _poolInventorsAxe from "../pool/inventors-axe.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
@@ -278,6 +280,7 @@ import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
+import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
@@ -576,6 +579,7 @@ const shard: CardShard = {
     _poolGrimaSarumansFootman,
     _poolGrizzledLeotau,
     _poolGruulSignet,
+    _poolGuardianOfTheForgotten,
     _poolHalvarGodOfBattle,
     _poolHarvesttideInfiltrator,
     _poolHeartstringPuller,
@@ -588,6 +592,7 @@ const shard: CardShard = {
     _poolIndomitableArchangel,
     _poolInfectiousHost,
     _poolIngrisStingerquill,
+    _poolInventorsAxe,
     _poolInvisibleWoman,
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
@@ -690,6 +695,7 @@ const shard: CardShard = {
     _poolRavenousBaloth,
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
+    _poolRecklessPyrosurfer,
     _poolRefute,
     _poolReitoLantern,
     _poolRestorationAngel,

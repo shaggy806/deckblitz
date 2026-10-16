@@ -4680,3 +4680,17 @@ first-time-each-turn trigger (an ability word, rule 207.2c)
   which) or sacrifice the Food — and either one draws you a card; declining draws nothing. Hovering
   "Freerunning" and "forage" in the card text shows their reminders. Check at ~768px tall and at full
   size, in a 2- and a 4-player room.
+
+### Depth Defiler, Silverquill Lecturer
+
+*New player decisions* — a cast trigger whose mode count the kicker sets ("choose one. If it was kicked,
+choose both instead"), and demonstrate granted to your creature spells (rule 702.144a)
+
+- **Setup:** Your precombat main. Your battlefield: Silverquill Lecturer, five Islands and a Wastes; in hand
+  Depth Defiler. Bob has Grizzly Bears.
+- **Do:** Cast Depth Defiler paying its kicker {C} (all six lands). Choose both modes — return Grizzly Bears,
+  and Bob draws two then discards one — and answer demonstrate: copy it, and choose Bob to copy it too.
+- **Check:** The kicked cast trigger demands both modes (unkicked, it offers exactly one). Demonstrate makes
+  two copies: Bob's resolves first and becomes a Depth Defiler token Bob controls, then yours, then the
+  original — three Defilers, and no cast trigger from either copy (a copy isn't cast, rule 707.10). Check at
+  ~768px tall and at full size, in a 2- and a 4-player room.

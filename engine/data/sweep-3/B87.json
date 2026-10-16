@@ -1,0 +1,928 @@
+{
+ "batch": "B87",
+ "status": "complete",
+ "ranks": "Modern Horizons 3 (MH3, 2024-06-14) and Modern Horizons 3 Commander (M3C, 2024-06-14): the rest of the sets",
+ "authored": [
+  {
+   "name": "Stone Idol Generator",
+   "files": [
+    "engine/src/cards/pool/stone-idol-generator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Polygoyf",
+   "files": [
+    "engine/src/cards/pool/polygoyf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trenchpost",
+   "files": [
+    "engine/src/cards/pool/trenchpost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Broodmate Tyrant",
+   "files": [
+    "engine/src/cards/pool/broodmate-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tarmogoyf Nest",
+   "files": [
+    "engine/src/cards/pool/tarmogoyf-nest.ts",
+    "engine/src/cards/tokens/tarmogoyf-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Aberration",
+   "files": [
+    "engine/src/cards/pool/angelic-aberration.ts",
+    "engine/src/cards/tokens/eldrazi-angel-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jyoti, Moag Ancient",
+   "files": [
+    "engine/src/cards/pool/jyoti-moag-ancient.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurora Shifter",
+   "files": [
+    "engine/src/cards/pool/aurora-shifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silverquill Lecturer",
+   "files": [
+    "engine/src/cards/pool/silverquill-lecturer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Orchid Phantom",
+   "files": [
+    "engine/src/cards/pool/white-orchid-phantom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cranial Ram",
+   "files": [
+    "engine/src/cards/pool/cranial-ram.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Refurbished Familiar",
+   "files": [
+    "engine/src/cards/pool/refurbished-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spawn-Gang Commander",
+   "files": [
+    "engine/src/cards/pool/spawn-gang-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phlage, Titan of Fire's Fury",
+   "files": [
+    "engine/src/cards/pool/phlage-titan-of-fires-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frogmyr Enforcer",
+   "files": [
+    "engine/src/cards/pool/frogmyr-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titans' Vanguard",
+   "files": [
+    "engine/src/cards/pool/titans-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faithful Watchdog",
+   "files": [
+    "engine/src/cards/pool/faithful-watchdog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argent Dais",
+   "files": [
+    "engine/src/cards/pool/argent-dais.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Propagator Drone",
+   "files": [
+    "engine/src/cards/pool/propagator-drone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Hunger Tide Rises",
+   "files": [
+    "engine/src/cards/pool/the-hunger-tide-rises.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Territory Culler",
+   "files": [
+    "engine/src/cards/pool/territory-culler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eldrazi Repurposer",
+   "files": [
+    "engine/src/cards/pool/eldrazi-repurposer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quest for the Necropolis",
+   "files": [
+    "engine/src/cards/pool/quest-for-the-necropolis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unfathomable Truths",
+   "files": [
+    "engine/src/cards/pool/unfathomable-truths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eldrazi Ravager",
+   "files": [
+    "engine/src/cards/pool/eldrazi-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skittering Precursor",
+   "files": [
+    "engine/src/cards/pool/skittering-precursor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eldrazi Linebreaker",
+   "files": [
+    "engine/src/cards/pool/eldrazi-linebreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temperamental Oozewagg",
+   "files": [
+    "engine/src/cards/pool/temperamental-oozewagg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serum Visionary",
+   "files": [
+    "engine/src/cards/pool/serum-visionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horrific Assault",
+   "files": [
+    "engine/src/cards/pool/horrific-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genku, Future Shaper",
+   "files": [
+    "engine/src/cards/pool/genku-future-shaper.ts",
+    "engine/src/cards/tokens/fox-token.ts",
+    "engine/src/cards/tokens/moonfolk-token.ts",
+    "engine/src/cards/tokens/rat-token-genku-future-shaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riddle Gate Gargoyle",
+   "files": [
+    "engine/src/cards/pool/riddle-gate-gargoyle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retrofitted Transmogrant",
+   "files": [
+    "engine/src/cards/pool/retrofitted-transmogrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani Fells the Godsire",
+   "files": [
+    "engine/src/cards/pool/ajani-fells-the-godsire.ts",
+    "engine/src/cards/tokens/cat-warrior-token-ajani-fells-the-godsire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horrid Shadowspinner",
+   "files": [
+    "engine/src/cards/pool/horrid-shadowspinner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wurmcoil Larva",
+   "files": [
+    "engine/src/cards/pool/wurmcoil-larva.ts",
+    "engine/src/cards/tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.ts",
+    "engine/src/cards/tokens/phyrexian-wurm-token-wurmcoil-larva-lifelink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hope-Ender Coatl",
+   "files": [
+    "engine/src/cards/pool/hope-ender-coatl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Ironworks",
+   "files": [
+    "engine/src/cards/pool/phyrexian-ironworks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindless Conscription",
+   "files": [
+    "engine/src/cards/pool/mindless-conscription.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drownyard Lurker",
+   "files": [
+    "engine/src/cards/pool/drownyard-lurker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scurry of Gremlins",
+   "files": [
+    "engine/src/cards/pool/scurry-of-gremlins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warped Tusker",
+   "files": [
+    "engine/src/cards/pool/warped-tusker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyretic Rebirth",
+   "files": [
+    "engine/src/cards/pool/pyretic-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wing It",
+   "files": [
+    "engine/src/cards/pool/wing-it.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drossclaw",
+   "files": [
+    "engine/src/cards/pool/drossclaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obstinate Gargoyle",
+   "files": [
+    "engine/src/cards/pool/obstinate-gargoyle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sneaky Snacker",
+   "files": [
+    "engine/src/cards/pool/sneaky-snacker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarpadian Simulacrum",
+   "files": [
+    "engine/src/cards/pool/sarpadian-simulacrum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fetid Gargantua",
+   "files": [
+    "engine/src/cards/pool/fetid-gargantua.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mogg Mob",
+   "files": [
+    "engine/src/cards/pool/mogg-mob.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inventor's Axe",
+   "files": [
+    "engine/src/cards/pool/inventors-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempest Harvester",
+   "files": [
+    "engine/src/cards/pool/tempest-harvester.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyclops Superconductor",
+   "files": [
+    "engine/src/cards/pool/cyclops-superconductor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckless Pyrosurfer",
+   "files": [
+    "engine/src/cards/pool/reckless-pyrosurfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspired Inventor",
+   "files": [
+    "engine/src/cards/pool/inspired-inventor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expanding Ooze",
+   "files": [
+    "engine/src/cards/pool/expanding-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamdrinker Vampire",
+   "files": [
+    "engine/src/cards/pool/dreamdrinker-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aerie Auxiliary",
+   "files": [
+    "engine/src/cards/pool/aerie-auxiliary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smelted Chargebug",
+   "files": [
+    "engine/src/cards/pool/smelted-chargebug.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depth Defiler",
+   "files": [
+    "engine/src/cards/pool/depth-defiler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ral and the Implicit Maze",
+   "files": [
+    "engine/src/cards/pool/ral-and-the-implicit-maze.ts",
+    "engine/src/cards/tokens/spellgorger-weird-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conduit Goblin",
+   "files": [
+    "engine/src/cards/pool/conduit-goblin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ondu Knotmaster // Throw a Line",
+   "files": [
+    "engine/src/cards/pool/ondu-knotmaster.ts",
+    "engine/src/cards/pool/throw-a-line.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Petrifying Meddler",
+   "files": [
+    "engine/src/cards/pool/petrifying-meddler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian of the Forgotten",
+   "files": [
+    "engine/src/cards/pool/guardian-of-the-forgotten.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voltstorm Angel",
+   "files": [
+    "engine/src/cards/pool/voltstorm-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of the Unknowable",
+   "files": [
+    "engine/src/cards/pool/sage-of-the-unknowable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fowl Strike",
+   "files": [
+    "engine/src/cards/pool/fowl-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thriving Skyclaw",
+   "files": [
+    "engine/src/cards/pool/thriving-skyclaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skoa, Embermage",
+   "files": [
+    "engine/src/cards/pool/skoa-embermage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solstice Zealot",
+   "files": [
+    "engine/src/cards/pool/solstice-zealot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hexgold Slith",
+   "files": [
+    "engine/src/cards/pool/hexgold-slith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expel the Unworthy",
+   "files": [
+    "engine/src/cards/pool/expel-the-unworthy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Electrozoa",
+   "files": [
+    "engine/src/cards/pool/electrozoa.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Bismuth Mindrender",
+   "needs": [
+    "effect:cast-now-pay-life-for-mana-value"
+   ],
+   "why": "\"You may cast that card by paying life equal to the spell's mana value rather than paying its mana cost\": cast-now offers only a normal cast or `free`, with no alternative cost of life equal to the spell's mana value."
+  },
+  {
+   "name": "Razorfield Ripper",
+   "needs": [
+    "keyword:reconfigure",
+    "effect:energy-count-amount"
+   ],
+   "why": "Reconfigure (with an alternative {E}{E}{E} cost) isn't built, and \"+X/+X where X is the amount of {E} you have\" has no EffectAmount for a player's energy (playerCounters covers only poison and experience)."
+  },
+  {
+   "name": "Blaster Hulk",
+   "needs": [
+    "cost:cost-reduction-energy-paid-this-turn"
+   ],
+   "why": "\"Costs {1} less for each {E} you've paid or lost this turn\": no per-turn record of energy paid or lost, so no cost-reduction amount for it."
+  },
+  {
+   "name": "Localized Destruction",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "\"You may pay one or more {E}\" with the amount paid then read by the indestructible filter (power equal to it): a may's costEnergy is a fixed amount the player can't choose."
+  },
+  {
+   "name": "Mutated Cultist",
+   "needs": [
+    "effect:next-spell-cost-reduction",
+    "effect:remove-all-counters"
+   ],
+   "why": "\"Remove all counters from up to one target permanent or opponent\" (every kind, a player's energy/poison/experience too) has no effect, and \"the next spell you cast this turn costs {1} less for each counter removed this way\" needs a one-use next-spell reduction (player-effect reduceSpells lasts the whole turn)."
+  },
+  {
+   "name": "Inversion Behemoth",
+   "needs": [
+    "effect:switch-pt"
+   ],
+   "why": "\"Switch the power and toughness of each of any number of target creatures until end of turn\": no switch in the layer system (layer 7d)."
+  },
+  {
+   "name": "Wonderscape Sage",
+   "needs": [
+    "cost:returned-for-cost-lki"
+   ],
+   "why": "\"Then discard a card unless that land had a nonbasic land type\": the land returned by the returnToHand cost isn't readable by the effect (AmountRef has \"sacrificed\" and \"tapped\" but nothing for a returned permanent's last-known subtypes)."
+  },
+  {
+   "name": "Gluttonous Hellkite",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "\"Each player sacrifices X creatures\": the sacrifice effect's count is a fixed number, not the spell's X (AUTHORING Â§15)."
+  },
+  {
+   "name": "Overclocked Electromancer",
+   "needs": [
+    "trigger:excess-damage-trigger"
+   ],
+   "why": "\"You get X {E}, where X is that excess damage\": a deals-damage trigger can be gated on excessDamageThisTurn but carries no amount for the excess part of the triggering damage."
+  },
+  {
+   "name": "March from Velis Vel",
+   "needs": [
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "\"Choose a nonbasic land type\" as the spell resolves: choose-creature-type names creature types only, and no filter reads a chosen land type for the mass become-copy."
+  },
+  {
+   "name": "Infested Thrinax",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"Until end of turn, whenever a nontoken creature you control dies, create ...\": no delayed triggered ability that fires on every matching event for the rest of the turn."
+  },
+  {
+   "name": "Exterminator Magmarch",
+   "needs": [
+    "effect:copy-spell-retarget-another-opponent"
+   ],
+   "why": "The cast trigger's \"if another opponent controls one or more nonland permanents that spell could target, choose one of those permanents. Copy that spell. The copy targets the chosen permanent\": no intervening-if over what the spell could target among another opponent's permanents, and no copy retargeted to a chosen (untargeted) permanent."
+  },
+  {
+   "name": "Desert Warfare",
+   "needs": [
+    "bug:delayed-trigger-carries-lost-trigger-object"
+   ],
+   "why": "\"Put that card onto the battlefield ... at the beginning of your next end step\": when the Desert leaves your graveyard before Desert Warfare's trigger resolves (exiled in response), Game.createDelayedTrigger carries the card at its new zone's stint instead of treating it as lost (rule 400.7), so the engine puts it onto the battlefield from exile; authored and tested, it failed exactly that test."
+  },
+  {
+   "name": "Filigree Racer",
+   "needs": [
+    "keyword:jump-start"
+   ],
+   "why": "The attack trigger's reflexive 'target instant or sorcery card in your graveyard gains jump-start until end of turn' needs jump-start (rule 702.133), which isn't built."
+  },
+  {
+   "name": "Consign to Memory",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Replicate {1} (rule 702.56: copy the spell once per replicate payment) isn't built; the counter half alone would drop it."
+  },
+  {
+   "name": "Disruptor Flute",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "'As this artifact enters, choose a card name' has no decision, so neither the {3} tax on spells with that name nor the lock on that source's non-mana activated abilities can be expressed."
+  },
+  {
+   "name": "Wastescape Battlemage",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "'Kicker {G} and/or {1}{U}' is two independent kicker costs with a cast trigger keyed to each; `kicker` holds one cost (or a multikicker), and 'self-kicked' can't say which kicker was paid."
+  },
+  {
+   "name": "Aether Spike",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "'You may pay any amount of {E}' as it resolves, then 'counter unless its controller pays {1} for each {E} paid this way' — no variable energy payment nor an unless-cost scaled by it."
+  },
+  {
+   "name": "Suppression Ray // Orderly Plaza",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "'You may pay any amount of {E}. If you do, choose up to that many creatures tapped this way' needs a variable energy payment whose amount caps a choice among the creatures tapped this way; the land face alone can't be authored without the spell face."
+  },
+  {
+   "name": "Amped Raptor",
+   "needs": [
+    "cost:alternative-cost-for-spells-energy"
+   ],
+   "why": "'You may cast that card by paying an amount of {E} equal to its mana value rather than paying its mana cost' — `cast-now` has `free` but no energy alternative cost."
+  },
+  {
+   "name": "Signature Slam",
+   "needs": [
+    "effect:each-permanent-deals-damage"
+   ],
+   "why": "'Each modified creature you control deals damage equal to its power to target creature you don't control' is one damage source per matching creature; `fight`/`damage` take a single source."
+  },
+  {
+   "name": "Corrupted Shapeshifter",
+   "needs": [
+    "replacement:as-enters-choose-characteristics"
+   ],
+   "why": "'As this creature enters, it becomes your choice of a 3/3 with flying, a 2/5 with vigilance, or a 0/12 with defender' sets copiable values (the copy rulings); a chooseOnEnter word read by layer-7b statics would differ for copies and against other P/T-setting effects."
+  },
+  {
+   "name": "Devourer of Destiny",
+   "needs": [
+    "mechanic:leyline-opening-hand"
+   ],
+   "why": "'You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the top four...' needs an opening-hand action; the cast trigger alone would drop it."
+  },
+  {
+   "name": "Detective's Phoenix",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "Bestow (rule 702.103) isn't modeled, nor a bestow cost with collect evidence 6 or 'cast this card from your graveyard using its bestow ability'."
+  },
+  {
+   "name": "Indebted Spirit",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "Bestow {2}{W} (rule 702.103) isn't modeled; its Aura half ('Enchanted creature gets +1/+1 and has afterlife 1') needs it."
+  },
+  {
+   "name": "The Creation of Avacyn",
+   "needs": [
+    "effect:search-to-linked-exile-face-down"
+   ],
+   "why": "Chapter I searches a card into exile face down linked to the Saga, and chapters II and III turn that linked card face up and act on it; `search-library` has no exile destination and nothing turns a linked exiled card face up."
+  },
+  {
+   "name": "Wrath of the Skies",
+   "needs": [
+    "cost:pay-any-amount-of-energy"
+   ],
+   "why": "'then you may pay any amount of {E}' and the destroy reading the amount paid: a may's costEnergy is a fixed amount and there is no resolution-time choice of how much energy to pay."
+  },
+  {
+   "name": "Wheel of Potential",
+   "needs": [
+    "cost:pay-any-amount-of-energy",
+    "effect:choices-by-other-players"
+   ],
+   "why": "'you may pay any amount of {E}' has no vocabulary, nor 'each player may exile their hand and draw that many' (each player's own choice, announced in turn order) with the 7+ rider letting you play the cards you own exiled this way."
+  },
+  {
+   "name": "Nethergoyf",
+   "needs": [
+    "cost:exile-from-graveyard-card-types"
+   ],
+   "why": "Its escape cost exiles 'any number of other cards from your graveyard with four or more card types among them'; escape's exileCount is a fixed count with no card-type-total constraint (the CDA itself is Tarmogoyf's shape with ownedBy you)."
+  },
+  {
+   "name": "Glyph Elemental",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "Bestow {1}{W} is unmodeled (AUTHORING §15), and with it the Aura's 'enchanted creature gets +1/+1 for each +1/+1 counter on this Aura'."
+  },
+  {
+   "name": "Golden-Tail Trainer",
+   "needs": [
+    "cost:cost-reduction-source-power"
+   ],
+   "why": "'Aura and Equipment spells you cast cost {X} less, where X is this creature's power': CostReductionAmount can't read the source's power (the attack pump is expressible)."
+  },
+  {
+   "name": "Cursed Wombat",
+   "needs": [
+    "stat:granted-once-per-turn-per-grantor"
+   ],
+   "why": "The granted 'triggers only once each turn' ability is tracked by its index in the permanent's trigger list (Game.triggeredOnceThisTurn), not per granting Wombat, so the rulings fail: a new Wombat replacing one that left the same turn grants a fresh ability (engine would treat it as already used), and with two Wombats an earlier one leaving shifts the other's index."
+  },
+  {
+   "name": "Proud Pack-Rhino",
+   "needs": [
+    "mechanic:shield-counters"
+   ],
+   "why": "The first mode puts a shield counter on target permanent; shield counters (remove one instead of damage or destruction) aren't modeled (the proliferate mode is)."
+  },
+  {
+   "name": "Gravedig",
+   "needs": [
+    "keyword:entwine"
+   ],
+   "why": "Entwine {2} (choose both modes for an additional {2}) isn't modeled; a kicker with kickedModes would make the spell 'kicked' for kicker-caring cards, which entwine isn't."
+  },
+  {
+   "name": "Hydra Trainer",
+   "needs": [
+    "effect:aggregate-all-counters"
+   ],
+   "why": "X is 'the number of counters on permanents you control' — every counter of every kind; AggregateOf sums one named counter kind only (exert, the reflexive trigger and adapt are all built)."
+  },
+  {
+   "name": "Nyxborn Unicorn",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "Bestow {3}{W} (cast as an Aura, becomes a creature again unattached) isn't modeled (AUTHORING §15)."
+  },
+  {
+   "name": "Triton Wavebreaker",
+   "needs": [
+    "keyword:bestow"
+   ],
+   "why": "Bestow {1}{U} isn't modeled (AUTHORING §15), and 'as long as this permanent is a creature, it has prowess' only matters with it."
+  },
+  {
+   "name": "Primal Prayers",
+   "needs": [
+    "cost:alternative-cost-for-spells-energy"
+   ],
+   "why": "'You may cast creature spells with mana value 3 or less by paying {E} rather than paying their mana costs' — alternativeCostForSpells is mana only, and has no 'as though it had flash if cast this way' rider."
+  },
+  {
+   "name": "Thief of Existence",
+   "needs": [
+    "effect:grant-ability-to-permanent-spell"
+   ],
+   "why": "The cast trigger's 'If you do, Thief of Existence gains \"When this creature leaves the battlefield, target opponent draws a card\"' grants an ability to the spell on the stack that must carry to the permanent it becomes (rule 400.7a); nothing in the engine carries a stack object's granted ability onto the battlefield."
+  },
+  {
+   "name": "Rosheen, Roaring Prophet",
+   "needs": [
+    "cost:reveal-any-number-from-hand",
+    "cost:mana-spend-only-x-costs"
+   ],
+   "why": "The mana ability reveals any number of {X} cards from hand to scale its mana, and its 'spend this mana only on costs that contain {X}' restriction (any cost — abilities, alternative and resolution costs too) has no ManaSpendOnly form; the enters ability alone would be authorable."
+  },
+  {
+   "name": "Essence Reliquary",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "\"and all Auras you control attached to it\": no CardFilter clause for \"attached to the object in target slot N\", so the Auras can't be returned with the target (one simultaneous move)."
+  },
+  {
+   "name": "Fanged Flames",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature or planeswalker would die this turn, exile it instead\" — a turn-long exile-instead replacement on the target, for any death (the ruling), isn't built."
+  },
+  {
+   "name": "Etherium Pteramander",
+   "needs": [
+    "cost:cost-reduction-count-other"
+   ],
+   "why": "\"costs {1} less to activate for each other artifact you control\": an ability's costReduction countOf has no excludeSelf, and the Pteramander is itself an artifact, so it would count itself."
+  },
+  {
+   "name": "Tamiyo Meets the Story Circle",
+   "needs": [
+    "effect:delayed-trigger-until-your-next-turn",
+    "decision:discard-any-number"
+   ],
+   "why": "Chapter I's \"until your next turn, whenever a creature attacks you or a planeswalker you control\" is a duration-bounded trigger (delayed triggers are one-shot), and chapter II's \"discard any number of cards\" has no decision."
+  },
+  {
+   "name": "Lethal Throwdown",
+   "needs": [
+    "condition:additional-cost-option-paid"
+   ],
+   "why": "\"If the modified creature was sacrificed\" depends on which additional-cost option (\"sacrifice a creature\" or \"sacrifice a modified creature\") was paid; no condition reads the option chosen, and reading the sacrificed creature's LKI instead would force a draw on a player who sacrificed a modified creature under the first option."
+  },
+  {
+   "name": "Infernal Captor",
+   "needs": [
+    "keyword:exploit"
+   ],
+   "why": "Exploit and \"when this creature exploits a creature\" aren't built."
+  },
+  {
+   "name": "Deem Inferior",
+   "needs": [
+    "effect:owner-chooses-library-position"
+   ],
+   "why": "\"The owner … puts it into their library second from the top or on the bottom\": the owner chooses the position (the ruling); put-on-library takes a fixed position and a modal can't be handed to the target's owner."
+  },
+  {
+   "name": "Etched Slith",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "\"remove a counter from another target permanent or opponent\": remove-counter takes one fixed kind (the controller chooses which, the ruling) and reaches no player's counters; the reflexive also triggers once per +1/+1 counter put (the Doubling Season ruling)."
+  },
+  {
+   "name": "Reiterating Bolt",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Replicate (here paid in energy, any number of times) isn't built."
+  },
+  {
+   "name": "Emissary of Soulfire",
+   "needs": [
+    "mechanic:exalted-counters"
+   ],
+   "why": "\"Put an exalted counter on target creature\": exalted isn't a keyword the engine has, so an exalted counter (rule 122.1b) grants nothing (KEYWORD_COUNTERS excludes it)."
+  },
+  {
+   "name": "Twisted Riddlekeeper",
+   "needs": [
+    "keyword:emerge"
+   ],
+   "why": "Emerge {5}{C}{U} (an alternative cost that sacrifices a creature and is reduced by its mana value) isn't built; the cast trigger alone (Homesickness's tap-and-stun of up to two permanents) would be fine."
+  },
+  {
+   "name": "Kami of Jealous Thirst",
+   "needs": [
+    "cost:ability-cost-reduction-conditional-colored"
+   ],
+   "why": "\"This ability costs {4}{B} less to activate if you've drawn three or more cards this turn\": ActivatedAbility.costReduction takes only generic mana and has no condition."
+  },
+  {
+   "name": "Rosecot Knight",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "\"If you didn't put a card into your hand this way, put a +1/+1 counter\": look-and-choose's `then` is skipped when nothing is chosen and has no else, no this-way kind records cards put into a hand, and wrapping the look in a `may` (Nashi's shape) would skip looking at and bottoming the six on a decline."
+  },
+  {
+   "name": "Voidpouncer",
+   "needs": [
+    "condition:if-kicked-enters-with-counters",
+    "replacement:enters-with-keyword"
+   ],
+   "why": "\"If this creature was kicked, it enters with two +1/+1 counters and a trample counter on it and with haste\": no kicked-gated enters-with-counters replacement (an `ifCondition: self-kicked` counter amount might do the counters, unverified), and nothing lets a permanent enter with haste as a replacement effect — a static gated on self-kicked differs under an earlier ability-removing effect (Dress Down), where the real card keeps the haste."
+  },
+  {
+   "name": "Wumpus Aberration",
+   "needs": [
+    "stat:colorless-mana-spent-condition"
+   ],
+   "why": "\"if {C} wasn't spent to cast it\": nothing records colorless mana spent on a spell (manaSpentColors omits colorless, manaFrom filters mana sources, not mana types); the \"target opponent may put a creature card from their hand onto the battlefield\" half also has no look-and-choose run by a target player (not checked further)."
+  }
+ ]
+}

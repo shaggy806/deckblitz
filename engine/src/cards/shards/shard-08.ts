@@ -70,6 +70,7 @@ import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
 import _poolCompositeGolem from "../pool/composite-golem.js";
+import _poolConduitGoblin from "../pool/conduit-goblin.js";
 import _poolConduitOfRuin from "../pool/conduit-of-ruin.js";
 import _poolContemplation from "../pool/contemplation.js";
 import _poolCoralCommando from "../pool/coral-commando.js";
@@ -177,6 +178,7 @@ import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
 import _poolHondenOfSeeingWinds from "../pool/honden-of-seeing-winds.js";
+import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
 import _poolIceridgeSerpent from "../pool/iceridge-serpent.js";
 import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
@@ -256,6 +258,7 @@ import _poolNorthPolePatrol from "../pool/north-pole-patrol.js";
 import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
+import _poolObstinateGargoyle from "../pool/obstinate-gargoyle.js";
 import _poolOldThrush from "../pool/old-thrush.js";
 import _poolOpenTheArmory from "../pool/open-the-armory.js";
 import _poolOphiomancer from "../pool/ophiomancer.js";
@@ -514,6 +517,7 @@ const shard: CardShard = {
     _poolClownCar,
     _poolColdEyedSelkie,
     _poolCompositeGolem,
+    _poolConduitGoblin,
     _poolConduitOfRuin,
     _poolContemplation,
     _poolCoralCommando,
@@ -621,6 +625,7 @@ const shard: CardShard = {
     _poolHitMonkey,
     _poolHolyStrength,
     _poolHondenOfSeeingWinds,
+    _poolHorridShadowspinner,
     _poolHyalopterousLemure,
     _poolIceridgeSerpent,
     _poolIlhargTheRazeBoar,
@@ -700,6 +705,7 @@ const shard: CardShard = {
     _poolOakhameRanger,
     _poolOathOfGideon,
     _poolObeliskOfEsper,
+    _poolObstinateGargoyle,
     _poolOldThrush,
     _poolOpenTheArmory,
     _poolOphiomancer,

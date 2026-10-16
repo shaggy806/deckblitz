@@ -9,6 +9,7 @@ import _poolAbzanDevotee from "../pool/abzan-devotee.js";
 import _poolAccomplishedAutomaton from "../pool/accomplished-automaton.js";
 import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
+import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
@@ -93,6 +94,7 @@ import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
+import _poolDrossclaw from "../pool/drossclaw.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
 import _poolDutifulThrull from "../pool/dutiful-thrull.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
@@ -162,6 +164,7 @@ import _poolHeroOfBladehold from "../pool/hero-of-bladehold.js";
 import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
+import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIceStorm from "../pool/ice-storm.js";
@@ -278,6 +281,7 @@ import _poolReigningVictor from "../pool/reigning-victor.js";
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
+import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
@@ -367,6 +371,7 @@ import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTraxosScourgeEternal from "../pool/traxos-scourge-eternal.js";
+import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
@@ -420,6 +425,7 @@ import _tokensGoblinTokenHaste from "../tokens/goblin-token-haste.js";
 import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestation-sage.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
+import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
@@ -432,6 +438,7 @@ const shard: CardShard = {
     _poolAccomplishedAutomaton,
     _poolAcolyteOfXathrid,
     _poolAdamantWill,
+    _poolAerieAuxiliary,
     _poolAgateInstigator,
     _poolAlleyEvasion,
     _poolAnUnexpectedParty,
@@ -516,6 +523,7 @@ const shard: CardShard = {
     _poolDragonRoost,
     _poolDreadedBatCloud,
     _poolDreamTrawler,
+    _poolDrossclaw,
     _poolDrumbellower,
     _poolDutifulThrull,
     _poolEcstaticElectromancer,
@@ -585,6 +593,7 @@ const shard: CardShard = {
     _poolHogMonkey,
     _poolHoldAtBay,
     _poolHollowhengeScavenger,
+    _poolHopeEnderCoatl,
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolIceStorm,
@@ -701,6 +710,7 @@ const shard: CardShard = {
     _poolRepel,
     _poolReplenish,
     _poolRestorationGearsmith,
+    _poolRetrofittedTransmogrant,
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
     _poolRockfaceVillage,
@@ -790,6 +800,7 @@ const shard: CardShard = {
     _poolTovolarDireOverlord,
     _poolTrailOfMystery,
     _poolTraxosScourgeEternal,
+    _poolTrenchpost,
     _poolTyvarsStand,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,
@@ -845,6 +856,7 @@ const shard: CardShard = {
     _tokensInsectTokenInfestationSage,
     _tokensMouseToken,
     _tokensMowu,
+    _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,
     _tokensTreasureToken,
     _tokensZombieKnightToken,
     _tokensZombieTokenCrowdedCrypt,

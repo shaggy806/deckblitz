@@ -124,6 +124,7 @@ import _poolEternalThirst from "../pool/eternal-thirst.js";
 import _poolEtheriumSculptor from "../pool/etherium-sculptor.js";
 import _poolEverybodyLives from "../pool/everybody-lives.js";
 import _poolEvilReawakened from "../pool/evil-reawakened.js";
+import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
@@ -169,6 +170,7 @@ import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
 import _poolGuidelightOptimizer from "../pool/guidelight-optimizer.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
+import _poolHexgoldSlith from "../pool/hexgold-slith.js";
 import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
@@ -275,6 +277,7 @@ import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
+import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
 import _poolRiftwingCloudskate from "../pool/riftwing-cloudskate.js";
 import _poolRighteousness from "../pool/righteousness.js";
@@ -390,6 +393,7 @@ import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
+import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
@@ -554,6 +558,7 @@ const shard: CardShard = {
     _poolEtheriumSculptor,
     _poolEverybodyLives,
     _poolEvilReawakened,
+    _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
@@ -599,6 +604,7 @@ const shard: CardShard = {
     _poolGuardDuty,
     _poolGuidelightOptimizer,
     _poolHeroInTraining,
+    _poolHexgoldSlith,
     _poolHighFaeTrickster,
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
@@ -705,6 +711,7 @@ const shard: CardShard = {
     _poolReefWorm,
     _poolReitoSentinel,
     _poolRelicRetriever,
+    _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
     _poolRiftwingCloudskate,
     _poolRighteousness,
@@ -820,6 +827,7 @@ const shard: CardShard = {
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,
     _poolVolcanicHammer,
+    _poolVoltstormAngel,
     _poolWallOfBlood,
     _poolWallOfOmens,
     _poolWarMachineLegacyOfIron,

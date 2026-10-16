@@ -120,6 +120,7 @@ import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
+import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
 import _poolElvishScrapper from "../pool/elvish-scrapper.js";
@@ -532,6 +533,7 @@ const shard: CardShard = {
     _poolEbonDrake,
     _poolEdgarMarkov,
     _poolEivorBattleReady,
+    _poolEldraziLinebreaker,
     _poolElementalEruption,
     _poolElephantRat,
     _poolElvishScrapper,

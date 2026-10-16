@@ -412,6 +412,7 @@ import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
+import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
@@ -835,6 +836,7 @@ const shard: CardShard = {
     _tokens55ElephantToken,
     _tokensBallisticBoulderToken,
     _tokensDragonTokenAvatarRoku,
+    _tokensEldraziAngelToken,
     _tokensGremlinToken,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,

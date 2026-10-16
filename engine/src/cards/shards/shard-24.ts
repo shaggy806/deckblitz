@@ -53,6 +53,7 @@ import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBronzeSable from "../pool/bronze-sable.js";
+import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
@@ -300,12 +301,14 @@ import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-lead
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSkinrender from "../pool/skinrender.js";
+import _poolSkoaEmbermage from "../pool/skoa-embermage.js";
 import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
+import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
@@ -459,6 +462,7 @@ const shard: CardShard = {
     _poolBrashTaunter,
     _poolBreach,
     _poolBronzeSable,
+    _poolBroodmateTyrant,
     _poolBuildersTalent,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
@@ -706,12 +710,14 @@ const shard: CardShard = {
     _poolSimicGuildgate,
     _poolSinkhole,
     _poolSkinrender,
+    _poolSkoaEmbermage,
     _poolSkullFracture,
     _poolSkullsnapNuisance,
     _poolSlay,
     _poolSmashToDust,
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
+    _poolSolsticeZealot,
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
     _poolSplitTailMiko,

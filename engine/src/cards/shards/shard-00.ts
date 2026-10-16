@@ -279,6 +279,7 @@ import _poolQuietPurity from "../pool/quiet-purity.js";
 import _poolRadiantFountain from "../pool/radiant-fountain.js";
 import _poolRagefire from "../pool/ragefire.js";
 import _poolRagostDeftGastronaut from "../pool/ragost-deft-gastronaut.js";
+import _poolRalAndTheImplicitMaze from "../pool/ral-and-the-implicit-maze.js";
 import _poolRallyOfWings from "../pool/rally-of-wings.js";
 import _poolRamblingPossum from "../pool/rambling-possum.js";
 import _poolRangerEnVec from "../pool/ranger-en-vec.js";
@@ -441,6 +442,7 @@ import _tokensFirstMateRagavan from "../tokens/first-mate-ragavan.js";
 import _tokensGreenSpiderTokenReach from "../tokens/green-spider-token-reach.js";
 import _tokensLifelinkSoldierToken from "../tokens/lifelink-soldier-token.js";
 import _tokensMerfolkToken from "../tokens/merfolk-token.js";
+import _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink from "../tokens/phyrexian-wurm-token-wurmcoil-larva-lifelink.js";
 import _tokensSpiritTokenColorless from "../tokens/spirit-token-colorless.js";
 
 const shard: CardShard = {
@@ -721,6 +723,7 @@ const shard: CardShard = {
     _poolRadiantFountain,
     _poolRagefire,
     _poolRagostDeftGastronaut,
+    _poolRalAndTheImplicitMaze,
     _poolRallyOfWings,
     _poolRamblingPossum,
     _poolRangerEnVec,
@@ -885,6 +888,7 @@ const shard: CardShard = {
     _tokensGreenSpiderTokenReach,
     _tokensLifelinkSoldierToken,
     _tokensMerfolkToken,
+    _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink,
     _tokensSpiritTokenColorless,
   ],
 };

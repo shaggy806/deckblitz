@@ -86,6 +86,7 @@ import _poolDragonstormForecaster from "../pool/dragonstorm-forecaster.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
 import _poolDrakeHatcher from "../pool/drake-hatcher.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
+import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
 import _poolDwarvenMine from "../pool/dwarven-mine.js";
 import _poolDwarvenRuins from "../pool/dwarven-ruins.js";
@@ -324,6 +325,7 @@ import _poolSkyshroudClaim from "../pool/skyshroud-claim.js";
 import _poolSkyshroudPoacher from "../pool/skyshroud-poacher.js";
 import _poolSkywhalersShot from "../pool/skywhalers-shot.js";
 import _poolSlimefootAndSquee from "../pool/slimefoot-and-squee.js";
+import _poolSmeltedChargebug from "../pool/smelted-chargebug.js";
 import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
@@ -355,6 +357,7 @@ import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
+import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
@@ -534,6 +537,7 @@ const shard: CardShard = {
     _poolDragonstorm,
     _poolDrakeHatcher,
     _poolDreadmalkin,
+    _poolDreamdrinkerVampire,
     _poolDruidOfTheAnima,
     _poolDwarvenMine,
     _poolDwarvenRuins,
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolSkyshroudPoacher,
     _poolSkywhalersShot,
     _poolSlimefootAndSquee,
+    _poolSmeltedChargebug,
     _poolSnowhornRider,
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,
@@ -803,6 +808,7 @@ const shard: CardShard = {
     _poolTalismanOfDominance,
     _poolTatteredHaunter,
     _poolTchallaTheBlackPanther,
+    _poolTempestHarvester,
     _poolTemporalAdept,
     _poolThassasOracle,
     _poolTheBlackBreath,

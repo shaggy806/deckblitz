@@ -287,6 +287,7 @@ import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
+import _poolPolygoyf from "../pool/polygoyf.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
@@ -363,6 +364,7 @@ import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js"
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThousandYearStorm from "../pool/thousand-year-storm.js";
+import _poolThrowALine from "../pool/throw-a-line.js";
 import _poolTicketBoothTunnelOfHate from "../pool/ticket-booth-tunnel-of-hate.js";
 import _poolTidingsOfWar from "../pool/tidings-of-war.js";
 import _poolTigerSeal from "../pool/tiger-seal.js";
@@ -718,6 +720,7 @@ const shard: CardShard = {
     _poolPiousWayfarer,
     _poolPlazaOfHeroes,
     _poolPollutedDead,
+    _poolPolygoyf,
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPropellerPioneer,
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThousandYearStorm,
+    _poolThrowALine,
     _poolTicketBoothTunnelOfHate,
     _poolTidingsOfWar,
     _poolTigerSeal,

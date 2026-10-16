@@ -99,6 +99,7 @@ import _poolDranasEmissary from "../pool/dranas-emissary.js";
 import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
+import _poolDrownyardLurker from "../pool/drownyard-lurker.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
@@ -294,6 +295,7 @@ import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
 import _poolSailorOfMeans from "../pool/sailor-of-means.js";
 import _poolSanctumOfCalmWaters from "../pool/sanctum-of-calm-waters.js";
 import _poolSanctumOfUgin from "../pool/sanctum-of-ugin.js";
+import _poolSarpadianSimulacrum from "../pool/sarpadian-simulacrum.js";
 import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavaiSabertooth from "../pool/savai-sabertooth.js";
 import _poolSavor from "../pool/savor.js";
@@ -320,6 +322,7 @@ import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
+import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
@@ -348,6 +351,7 @@ import _poolTalonrend from "../pool/talonrend.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
+import _poolTerritoryCuller from "../pool/territory-culler.js";
 import _poolThassasIntervention from "../pool/thassas-intervention.js";
 import _poolTheArkenstone from "../pool/the-arkenstone.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
@@ -407,6 +411,7 @@ import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
+import _tokensCatWarriorTokenAjaniFellsTheGodsire from "../tokens/cat-warrior-token-ajani-fells-the-godsire.js";
 import _tokensCentaurToken from "../tokens/centaur-token.js";
 import _tokensChocoboBirdToken from "../tokens/chocobo-bird-token.js";
 import _tokensDragonIllusionToken from "../tokens/dragon-illusion-token.js";
@@ -520,6 +525,7 @@ const shard: CardShard = {
     _poolDreamsOfLaguna,
     _poolDregReaver,
     _poolDrossHopper,
+    _poolDrownyardLurker,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
     _poolEarthshakingSi,
@@ -715,6 +721,7 @@ const shard: CardShard = {
     _poolSailorOfMeans,
     _poolSanctumOfCalmWaters,
     _poolSanctumOfUgin,
+    _poolSarpadianSimulacrum,
     _poolSatyaAetherfluxGenius,
     _poolSavaiSabertooth,
     _poolSavor,
@@ -741,6 +748,7 @@ const shard: CardShard = {
     _poolSinisterHideout,
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
+    _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
@@ -769,6 +777,7 @@ const shard: CardShard = {
     _poolTeemingDragonstorm,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,
+    _poolTerritoryCuller,
     _poolThassasIntervention,
     _poolTheArkenstone,
     _poolTheGreyHavens,
@@ -830,6 +839,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBoarToken,
+    _tokensCatWarriorTokenAjaniFellsTheGodsire,
     _tokensCentaurToken,
     _tokensChocoboBirdToken,
     _tokensDragonIllusionToken,

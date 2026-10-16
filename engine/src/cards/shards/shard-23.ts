@@ -230,6 +230,7 @@ import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
+import _poolMindlessConscription from "../pool/mindless-conscription.js";
 import _poolMindsDesire from "../pool/minds-desire.js";
 import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
@@ -257,6 +258,7 @@ import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
+import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
@@ -418,6 +420,7 @@ import _tokensAssemblyWorkerToken from "../tokens/assembly-worker-token.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
 import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-token-metallurgic-summonings.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
+import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
 
@@ -650,6 +653,7 @@ const shard: CardShard = {
     _poolMetathranSoldier,
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
+    _poolMindlessConscription,
     _poolMindsDesire,
     _poolMinionMissile,
     _poolMinotaurRoxxonCeo,
@@ -677,6 +681,7 @@ const shard: CardShard = {
     _poolPainfulQuandary,
     _poolPassengerFerry,
     _poolPerigeeBeckoner,
+    _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
     _poolPlasmancer,
@@ -840,6 +845,7 @@ const shard: CardShard = {
     _tokensBlueRedElementalToken44,
     _tokensConstructTokenMetallurgicSummonings,
     _tokensPlainKnightToken,
+    _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,
   ],

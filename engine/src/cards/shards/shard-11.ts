@@ -117,6 +117,7 @@ import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
+import _poolFetidGargantua from "../pool/fetid-gargantua.js";
 import _poolFiendArtisan from "../pool/fiend-artisan.js";
 import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
@@ -571,6 +572,7 @@ const shard: CardShard = {
     _poolFanaticOfRhonas,
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
+    _poolFetidGargantua,
     _poolFiendArtisan,
     _poolFiendishPanda,
     _poolFieryIslet,

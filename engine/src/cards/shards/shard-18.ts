@@ -71,6 +71,7 @@ import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
+import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
@@ -93,6 +94,7 @@ import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
+import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
 import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
 import _poolElfReplica from "../pool/elf-replica.js";
 import _poolElgaudInquisitor from "../pool/elgaud-inquisitor.js";
@@ -102,6 +104,7 @@ import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
+import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
@@ -165,6 +168,7 @@ import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
+import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
@@ -512,6 +516,7 @@ const shard: CardShard = {
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
     _poolCrystallineGiant,
+    _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
     _poolDecadentDragon,
@@ -534,6 +539,7 @@ const shard: CardShard = {
     _poolDutyBoundDead,
     _poolEagerCadet,
     _poolElderGargaroth,
+    _poolEldraziRavager,
     _poolElektraDaughterOfTheHand,
     _poolElfReplica,
     _poolElgaudInquisitor,
@@ -543,6 +549,7 @@ const shard: CardShard = {
     _poolEntryDenied,
     _poolEsikasChariot,
     _poolEssenceExtraction,
+    _poolExpandingOoze,
     _poolExpansion,
     _poolExperimentalConfectioner,
     _poolFeastOfTheUnicorn,
@@ -606,6 +613,7 @@ const shard: CardShard = {
     _poolJagwaspSwarm,
     _poolJiangYangguNeverAlone,
     _poolJodahTheUnifier,
+    _poolJyotiMoagAncient,
     _poolKalonianHydra,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,

@@ -162,6 +162,18 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
+- **A delayed trigger made by an ability whose trigger object already left still finds it.**
+  Rule 400.7: an object that changes zones is a new object, and 603.7c: a delayed trigger that
+  refers to an object does nothing once it isn't in the zone it's expected to be in.
+  `Game.createDelayedTrigger` (`game.ts`, the `carried` branch) records the creating ability's
+  trigger object at its *current* `zoneChangeCount`, so when that object moved again before the
+  creating ability resolved, the delayed trigger acts on the new object. Repro (batch 87): with
+  Desert Warfare out, mill a Desert, then exile it from the graveyard while the trigger waits;
+  at the end step the Desert enters the battlefield from exile. Avacyn, Angel of Horror's "return
+  that card at the next end step" goes through the same code. **Fix (outline):** carry the stint
+  the creating ability recorded (`refs.triggerObject`, or its `triggerObjectLost`) instead of
+  the current one, keeping 400.7e's zone-change exception (a dies trigger's "that card" is the
+  card in the graveyard). Blocks Desert Warfare. Found 2026-10-15.
 
 ## Latent
 

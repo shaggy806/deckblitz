@@ -105,6 +105,7 @@ import _poolDrownInIchor from "../pool/drown-in-ichor.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
+import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
@@ -238,6 +239,7 @@ import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
+import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
 import _poolOpportunisticDragon from "../pool/opportunistic-dragon.js";
 import _poolOppression from "../pool/oppression.js";
 import _poolOraclesRestoration from "../pool/oracles-restoration.js";
@@ -398,6 +400,7 @@ import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
+import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
@@ -518,6 +521,7 @@ const shard: CardShard = {
     _poolEccentricPestfinder,
     _poolEdgarAncientBloodlord,
     _poolEldraziDevastator,
+    _poolEldraziRepurposer,
     _poolElvenLyre,
     _poolElvishHexhunter,
     _poolEmptyTheWarrens,
@@ -651,6 +655,7 @@ const shard: CardShard = {
     _poolNyxbornSeaguard,
     _poolOldGrowthGrove,
     _poolOmashuCity,
+    _poolOnduKnotmaster,
     _poolOpportunisticDragon,
     _poolOppression,
     _poolOraclesRestoration,
@@ -811,6 +816,7 @@ const shard: CardShard = {
     _poolWintersGrasp,
     _poolWondrousRevival,
     _poolWoodedBastion,
+    _poolWurmcoilLarva,
   ],
   tokens: [
     _tokensApeVillainToken,

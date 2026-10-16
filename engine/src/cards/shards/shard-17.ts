@@ -134,6 +134,7 @@ import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
+import _poolFowlStrike from "../pool/fowl-strike.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
@@ -225,6 +226,7 @@ import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
+import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
@@ -551,6 +553,7 @@ const shard: CardShard = {
     _poolForerunnerOfTheLegion,
     _poolForlornFlats,
     _poolFoulmireKnight,
+    _poolFowlStrike,
     _poolFriendlyGhost,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
@@ -642,6 +645,7 @@ const shard: CardShard = {
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
     _poolMistgatePathway,
+    _poolMoggMob,
     _poolMollyHayesRunaway,
     _poolMomentOfTriumph,
     _poolMonkIdealist,

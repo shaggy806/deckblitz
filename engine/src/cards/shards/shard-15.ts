@@ -265,6 +265,7 @@ import _poolPackAPunch from "../pool/pack-a-punch.js";
 import _poolPantherRobot from "../pool/panther-robot.js";
 import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
+import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
@@ -273,6 +274,7 @@ import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
 import _poolPsionicSnoop from "../pool/psionic-snoop.js";
+import _poolPyreticRebirth from "../pool/pyretic-rebirth.js";
 import _poolQuench from "../pool/quench.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosTrumpeter from "../pool/rakdos-trumpeter.js";
@@ -291,6 +293,7 @@ import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
+import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
 import _poolSanctumOfEternity from "../pool/sanctum-of-eternity.js";
 import _poolSangromancer from "../pool/sangromancer.js";
@@ -344,6 +347,7 @@ import _poolSyncopate from "../pool/syncopate.js";
 import _poolTakeOutTheTrash from "../pool/take-out-the-trash.js";
 import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
+import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
 import _poolTemporalEddy from "../pool/temporal-eddy.js";
 import _poolTenderize from "../pool/tenderize.js";
 import _poolTenementCrasher from "../pool/tenement-crasher.js";
@@ -351,11 +355,13 @@ import _poolTenthDistrictGuard from "../pool/tenth-district-guard.js";
 import _poolTerrainElemental from "../pool/terrain-elemental.js";
 import _poolTerrasymbiosis from "../pool/terrasymbiosis.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
+import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
+import _poolTitansVanguard from "../pool/titans-vanguard.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
@@ -676,6 +682,7 @@ const shard: CardShard = {
     _poolPantherRobot,
     _poolPashalikMons,
     _poolPearlOfWisdom,
+    _poolPetrifyingMeddler,
     _poolPiercingExhale,
     _poolPiranhaMarsh,
     _poolPitchburnDevils,
@@ -684,6 +691,7 @@ const shard: CardShard = {
     _poolPriestOfFellRites,
     _poolPrizefight,
     _poolPsionicSnoop,
+    _poolPyreticRebirth,
     _poolQuench,
     _poolRagingGoblinoids,
     _poolRakdosTrumpeter,
@@ -702,6 +710,7 @@ const shard: CardShard = {
     _poolRoilCartographer,
     _poolRuneboggle,
     _poolRushOfAdrenaline,
+    _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,
     _poolSanctumOfEternity,
     _poolSangromancer,
@@ -755,6 +764,7 @@ const shard: CardShard = {
     _poolTakeOutTheTrash,
     _poolTalismanOfCreativity,
     _poolTangleSpider,
+    _poolTemperamentalOozewagg,
     _poolTemporalEddy,
     _poolTenderize,
     _poolTenementCrasher,
@@ -762,11 +772,13 @@ const shard: CardShard = {
     _poolTerrainElemental,
     _poolTerrasymbiosis,
     _poolTerritorialHammerskull,
+    _poolTheHungerTideRises,
     _poolTheTerrorOfSerpentsPass,
     _poolThinkTwice,
     _poolThornLieutenant,
     _poolThunderwolfCavalry,
     _poolTidepoolTurtle,
+    _poolTitansVanguard,
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
     _poolTownGreeter,

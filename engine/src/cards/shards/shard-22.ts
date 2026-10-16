@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
+import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
@@ -428,6 +429,7 @@ import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
+import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
 import _tokensSnakeToken from "../tokens/snake-token.js";
 import _tokensStoneBoulderToken from "../tokens/stone-boulder-token.js";
 
@@ -435,6 +437,7 @@ const shard: CardShard = {
   pool: [
     _poolAcademyRuins,
     _poolAetherTunnel,
+    _poolAjaniFellsTheGodsire,
     _poolAkoumWarrior,
     _poolAmateurHero,
     _poolAngelOfFlightAlabaster,
@@ -860,6 +863,7 @@ const shard: CardShard = {
     _tokensHarpyToken,
     _tokensLifelinkCatToken,
     _tokensPhobos,
+    _tokensRatTokenGenkuFutureShaper,
     _tokensSnakeToken,
     _tokensStoneBoulderToken,
   ],

@@ -22,6 +22,7 @@ import _poolArahboRoarOfTheWorld from "../pool/arahbo-roar-of-the-world.js";
 import _poolArchenemysCharm from "../pool/archenemys-charm.js";
 import _poolArmyAnts from "../pool/army-ants.js";
 import _poolAsceticism from "../pool/asceticism.js";
+import _poolAuroraShifter from "../pool/aurora-shifter.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
 import _poolBadlands from "../pool/badlands.js";
@@ -267,6 +268,7 @@ import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
 import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
+import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
@@ -461,6 +463,7 @@ const shard: CardShard = {
     _poolArchenemysCharm,
     _poolArmyAnts,
     _poolAsceticism,
+    _poolAuroraShifter,
     _poolAvengersQuinjet,
     _poolAysenAbbey,
     _poolBadlands,
@@ -706,6 +709,7 @@ const shard: CardShard = {
     _poolPredatorFlagship,
     _poolPriestOfUrabrask,
     _poolPrismaticOmen,
+    _poolPropagatorDrone,
     _poolProwlersHelm,
     _poolPunkFrogs,
     _poolQuantumMisalignment,

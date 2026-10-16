@@ -97,6 +97,7 @@ import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
 import _poolExpel from "../pool/expel.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
+import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
@@ -284,6 +285,7 @@ import _poolScattershot from "../pool/scattershot.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
+import _poolScurryOfGremlins from "../pool/scurry-of-gremlins.js";
 import _poolSearchForTomorrow from "../pool/search-for-tomorrow.js";
 import _poolSeashellCameo from "../pool/seashell-cameo.js";
 import _poolSeismicRupture from "../pool/seismic-rupture.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolEvolutionWitness,
     _poolExpel,
     _poolEzekielSimsSpiderTotem,
+    _poolFaithfulWatchdog,
     _poolFaldornDreadWolfHerald,
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
@@ -687,6 +690,7 @@ const shard: CardShard = {
     _poolScoldingAdministrator,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
+    _poolScurryOfGremlins,
     _poolSearchForTomorrow,
     _poolSeashellCameo,
     _poolSeismicRupture,
