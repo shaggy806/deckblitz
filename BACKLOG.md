@@ -216,6 +216,8 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **Remove the "Tokens" checkbox on the library page** (the user's call, 2026-10-15): the
+  `showTokens` toggle and its filter in `client/src/library/LibraryPage.tsx`.
 - **A forced look-and-choose still asks**: Yuriko's and Dark Confidant's "reveal the top card and put it into your hand" open a one-card picker with nothing to choose (`look-and-choose` with `count`, `min` and `max` 1); it could take the card unasked.
 - **The top strip still clips the phase track at 1024 wide** (2026-10-06 UI review): with bot speed moved into Settings every step shows at 1366, but at 1024 the track stops at EC.
 - **A gift's opponent is asked one opponent at a time** — one prompt naming every opponent would read better.

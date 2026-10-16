@@ -47,7 +47,7 @@ import { waitingLabel } from './game/waitingLabel.ts'
 import { gameStats } from './game/gameStats.ts'
 import { cueLengthMs, playSound } from './game/sound.ts'
 import { useMusic } from './game/music.ts'
-import { tableActions } from './game/tableActions.ts'
+import { mulliganLive, tableActions } from './game/tableActions.ts'
 import { abilitiesBySource as abilitiesBySourceOf } from './game/abilityMenu.ts'
 import type { AbilityAction } from './game/abilityMenu.ts'
 import { useEscape } from './ui/useEscape.ts'
@@ -1049,6 +1049,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
     () => tableActions(shown.actions, latestActions, shown.busy, botPlaying),
     [shown.actions, latestActions, shown.busy, botPlaying],
   )
+  // Its buttons stay live through another player's mulligan, which leaves the
+  // viewer's own decision as it was (`mulliganLive`).
+  const tableLocked = shown.busy && !mulliganLive(shown.actions, latestActions, shown.busy)
   // A tutorial room's lesson on the coach overlay: the card the frame on
   // screen carries (never a newer frame's, which would describe a board
   // that hasn't played out yet), its anchor found on that same board.
@@ -1210,9 +1213,10 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
         // And while a bot plays this seat (the seat menu's "Let a bot play
         // for me"), whose moves the server makes and whose answers it would
         // refuse from here. The mulligan alone stays up, locked (see
-        // `tableActions`).
+        // `tableActions`) — unless the frame is another player's mulligan,
+        // which leaves this seat's own as it was (`mulliganLive`).
         actions={actionsOnTable}
-        locked={shown.busy}
+        locked={tableLocked}
         hand={hand}
         previousView={shown.previousView}
         answered={shown.answered}

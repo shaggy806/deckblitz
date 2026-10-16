@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { LegalAction } from 'engine/client'
-import { tableActions } from './tableActions.ts'
+import { mulliganLive, tableActions } from './tableActions.ts'
 
 const mulligan = (count: number) => ({ kind: 'mulligan', player: 'p1', count }) as unknown as LegalAction
 const pass = { kind: 'pass-priority' } as unknown as LegalAction
@@ -24,5 +24,25 @@ describe('tableActions', () => {
   it("lets an answered mulligan go, though the frame showing it hasn't finished", () => {
     expect(tableActions([mulligan(0)], [pass], true, false)).toEqual([])
     expect(tableActions([mulligan(0)], [], true, false)).toEqual([])
+  })
+})
+
+describe('mulliganLive', () => {
+  it("keeps the mulligan's buttons live through another player's shuffle", () => {
+    // A bot's mulligan: the viewer's own decision is the same in both frames.
+    expect(mulliganLive([mulligan(0)], [mulligan(0)], true)).toBe(true)
+    expect(mulliganLive([mulligan(1), pass], [mulligan(1)], true)).toBe(true)
+  })
+
+  it("locks them while the viewer's own hand is changing, or once answered", () => {
+    // Your own mulligan going back and the new hand dealt: the counts differ.
+    expect(mulliganLive([mulligan(0)], [mulligan(1)], true)).toBe(false)
+    // Kept: the newest frame no longer asks.
+    expect(mulliganLive([mulligan(0)], [pass], true)).toBe(false)
+  })
+
+  it('has nothing to say when no frame is playing, or no mulligan is asked', () => {
+    expect(mulliganLive([mulligan(0)], [mulligan(0)], false)).toBe(false)
+    expect(mulliganLive([pass], [pass], true)).toBe(false)
   })
 })

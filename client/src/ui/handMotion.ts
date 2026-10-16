@@ -205,6 +205,17 @@ function flyHandCard(
 ): void {
   const first = handCardOf(object)
   if (first === null || pile === null) return
+  // The pile as it is on the page now. The one handed in was found as the
+  // cue fired, and the board can remount before the flight is measured (a
+  // frame changing over — your mulligan right after another player's): its
+  // element then is gone, measures nothing, and the card would only blink
+  // out. So it's found again, by whose library it is, once it's detached.
+  const libraryOf = pile.closest<HTMLElement>('[data-library-of]')?.dataset.libraryOf
+  const livePile = (): HTMLElement => {
+    if (pile.isConnected || libraryOf === undefined) return pile
+    const now = document.querySelector<HTMLElement>(`[data-library-of="${CSS.escape(libraryOf)}"]`)
+    return now?.querySelector<HTMLElement>('.card-back, .card-tile') ?? now ?? pile
+  }
   const out = way === 'out'
   // Coming in, the card is hidden until its copy lands; going out, from the
   // moment its copy sets off.
@@ -223,12 +234,12 @@ function flyHandCard(
   requestAnimationFrame(() => {
     const handCard = handCardOf(object)
     const tile = handCard ? realTile(handCard) : null
-    if (!handCard || !tile || tile.offsetWidth === 0 || pile.getBoundingClientRect().width === 0) {
+    if (!handCard || !tile || tile.offsetWidth === 0 || livePile().getBoundingClientRect().width === 0) {
       if (out) window.setTimeout(hide, delay)
       else show()
       return
     }
-    const faceUp = pile.classList.contains('card-tile')
+    const faceUp = livePile().classList.contains('card-tile')
     const box = document.createElement('div')
     box.className = 'hand-draw-ghost'
     // Which card it's flying in, for anyone looking (the e2e spec).
@@ -277,7 +288,7 @@ function flyHandCard(
       // The pile, in the card's own coordinates: the start puts the copy's
       // centre on the pile card's, at its size.
       const at = host.getBoundingClientRect()
-      const from = pile.getBoundingClientRect()
+      const from = livePile().getBoundingClientRect()
       const s0 = from.width / w
       const x0 = from.left + from.width / 2 - at.left - (cardTile.offsetLeft + w / 2)
       const y0 = from.top + from.height / 2 - at.top - (cardTile.offsetTop + h) + (s0 * h) / 2

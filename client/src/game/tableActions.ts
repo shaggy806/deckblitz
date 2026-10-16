@@ -24,3 +24,28 @@ export function tableActions(
   const mulligan = shown.filter((a) => a.kind === 'mulligan')
   return mulligan.length > 0 ? mulligan : NONE
 }
+
+/**
+ * Whether the mulligan popup's buttons can be used while a frame plays out
+ * (`busy`) — they're locked otherwise, as everything is. Mulligans are
+ * decided in parallel, so another player's mulligan (a bot's shuffle) leaves
+ * the viewer's own decision as it was: the frame on screen and the newest
+ * one ask the same mulligan (`count`, the mulligans taken), and answering it
+ * now races nothing. Locked only while the viewer's own hand is changing —
+ * their own mulligan going back and the new hand being dealt — when the
+ * counts differ. (A bug report, 2026-10-15: a table of mulliganing bots kept
+ * the player's buttons locked shuffle after shuffle.)
+ */
+export function mulliganLive(
+  shown: readonly LegalAction[],
+  latest: readonly LegalAction[],
+  busy: boolean,
+): boolean {
+  if (!busy) return false
+  const asked = (actions: readonly LegalAction[]) => {
+    const m = actions.find((a) => a.kind === 'mulligan')
+    return m?.kind === 'mulligan' ? m.count : null
+  }
+  const now = asked(shown)
+  return now !== null && now === asked(latest)
+}
