@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3674 already implemented / 1326 missing (marks refreshed 2026-10-17)
+3681 already implemented / 1319 missing (marks refreshed 2026-10-17)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1191,7 +1191,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1196  Homeward Path                            {0}              Land
 [ ]  1197  Ezuri's Predation                        {5}{G}{G}{G}     Sorcery
 [x]  1198  Dragon's Hoard                           {3}              Artifact
-[ ]  1199  Dreamtide Whale                          {2}{U}           Creature — Whale
+[x]  1199  Dreamtide Whale                          {2}{U}           Creature — Whale
 [x]  1200  Notion Thief                             {2}{U}{B}        Creature — Human Rogue
 [x]  1201  Moonshaker Cavalry                       {5}{W}{W}{W}     Creature — Spirit Knight
 [ ]  1202  Wheel of Misfortune                      {2}{R}           Sorcery
@@ -3004,7 +3004,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3011  Iridescent Vinelasher                    {B}              Creature — Lizard Assassin
 [x]  3012  Syr Ginger, the Meal Ender               {2}              Legendary Artifact Creature — Food Knight
 [x]  3013  Tectonic Giant                           {2}{R}{R}        Creature — Elemental Giant
-[ ]  3014  Royal Treatment                          {G}              Instant
+[x]  3014  Royal Treatment                          {G}              Instant
 [x]  3015  Glittering Massif                        {0}              Land — Mountain Plains
 [x]  3016  Sazh's Chocobo                           {G}              Creature — Bird
 [ ]  3017  Xantcha, Sleeper Agent                   {1}{B}{R}        Legendary Creature — Phyrexian Minion
@@ -3404,7 +3404,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3411  Hermes, Overseer of Elpis                {3}{U}           Legendary Creature — Elder Wizard
 [ ]  3412  Nyxborn Hydra                            {X}{G}           Enchantment Creature — Hydra
 [ ]  3413  Gogo, Master of Mimicry                  {2}{U}           Legendary Creature — Wizard
-[ ]  3414  Monstrous Rage                           {R}              Instant
+[x]  3414  Monstrous Rage                           {R}              Instant
 [x]  3415  Obyra, Dreaming Duelist                  {U}{B}           Legendary Creature — Faerie Warrior
 [ ]  3416  Lembas                                   {2}              Artifact — Food
 [x]  3417  Blood Pact                               {2}{B}           Instant
@@ -3435,7 +3435,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3442  Fear of Sleep Paralysis                  {5}{U}           Enchantment Creature — Nightmare
 [x]  3443  Forgotten Creation                       {3}{U}           Creature — Zombie Horror
 [ ]  3444  Visions of Beyond                        {U}              Instant
-[ ]  3445  Charming Scoundrel                       {1}{R}           Creature — Human Rogue
+[x]  3445  Charming Scoundrel                       {1}{R}           Creature — Human Rogue
 [x]  3446  Restless Cottage                         {0}              Land
 [ ]  3447  Ardyn, the Usurper                       {5}{B}{B}{B}     Legendary Creature — Elder Human Noble
 [ ]  3448  Neyali, Suns' Vanguard                   {2}{R}{W}        Legendary Creature — Human Rebel
@@ -3505,7 +3505,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3512  Lulu, Stern Guardian                     {2}{U}           Legendary Creature — Human Wizard
 [ ]  3513  Invasion of Zendikar // Awakened Skyclave {4}              Battle — Siege // Creature — Elemental
 [x]  3514  Steel of the Godhead                     {2}{W/U}         Enchantment — Aura
-[ ]  3515  Deep Forest Hermit                       {3}{G}{G}        Creature — Elf Druid
+[x]  3515  Deep Forest Hermit                       {3}{G}{G}        Creature — Elf Druid
 [ ]  3516  Nim Deathmantle                          {2}              Artifact — Equipment
 [x]  3517  Agent Frank Horrigan                     {5}{B}{G}        Legendary Creature — Mutant Warrior
 [x]  3518  Karumonix, the Rat King                  {1}{B}{B}        Legendary Creature — Phyrexian Rat
@@ -4197,7 +4197,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4204  Turnabout                                {2}{U}{U}        Instant
 [x]  4205  Koth, Fire of Resistance                 {2}{R}{R}        Legendary Planeswalker — Koth
 [x]  4206  Dismantling Wave                         {2}{W}           Sorcery
-[ ]  4207  Witch's Mark                             {1}{R}           Sorcery
+[x]  4207  Witch's Mark                             {1}{R}           Sorcery
 [x]  4208  Mass Calcify                             {5}{W}{W}        Sorcery
 [x]  4209  Vraska, Golgari Queen                    {2}{B}{G}        Legendary Planeswalker — Vraska
 [x]  4210  Murderous Redcap                         {2}{B/R}{B/R}    Creature — Goblin Assassin
@@ -4826,7 +4826,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4833  Short Bow                                {2}              Artifact — Equipment
 [x]  4834  Norman Osborn // Green Goblin            {2}              Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain
 [x]  4835  Uchuulon                                 {3}{B}           Creature — Crab Ooze Horror
-[ ]  4836  Taigam, Master Opportunist               {1}{U}           Legendary Creature — Human Monk
+[x]  4836  Taigam, Master Opportunist               {1}{U}           Legendary Creature — Human Monk
 [x]  4837  Sporocyst                                {X}{X}{G}        Creature — Tyranid
 [x]  4838  Braids, Cabal Minion                     {2}{B}{B}        Legendary Creature — Human Minion
 [x]  4839  On the Trail                             {1}{G}           Enchantment

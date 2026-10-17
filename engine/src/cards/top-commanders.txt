@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-439 already implemented / 61 missing
+441 already implemented / 59 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -360,7 +360,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  354  Mishra, Eminent One                             7921 decks  {2}{U}{B}{R}     Legendary Creature — Human Artificer
 [x]  355  Shirei, Shizo's Caretaker                       7897 decks  {4}{B}           Legendary Creature — Spirit
 [x]  356  Myrkul, Lord of Bones                           7891 decks  {4}{W}{B}{G}     Legendary Creature — God
-[ ]  357  Ellivere of the Wild Court                      7866 decks  {2}{G}{W}        Legendary Creature — Human Knight
+[x]  357  Ellivere of the Wild Court                      7866 decks  {2}{G}{W}        Legendary Creature — Human Knight
 [ ]  358  Koma, Cosmos Serpent                            7852 decks  {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  359  Kodama of the East Tree                         7851 decks  {4}{G}{G}        Legendary Creature — Spirit
 [ ]  360  Ozai, the Phoenix King                          7838 decks  {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
@@ -384,7 +384,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  378  Lynde, Cheerful Tormentor                       7594 decks  {1}{U}{B}{R}     Legendary Creature — Human Warlock
 [x]  379  Commodore Guff                                  7586 decks  {1}{U}{R}{W}     Legendary Planeswalker — Guff
 [x]  380  Bruce Banner                                    7581 decks  {U}              Legendary Creature — Human Scientist Hero // Legendary Creature — Gamma Berserker Hero
-[ ]  381  The Tenth Doctor                                7554 decks  {3}{U}{R}        Legendary Creature — Time Lord Doctor
+[x]  381  The Tenth Doctor                                7554 decks  {3}{U}{R}        Legendary Creature — Time Lord Doctor
 [x]  382  Bruvac the Grandiloquent                        7536 decks  {2}{U}           Legendary Creature — Human Advisor
 [x]  383  Sigarda, Font of Blessings                      7525 decks  {2}{G}{W}        Legendary Creature — Angel
 [x]  384  Thantis, the Warweaver                          7519 decks  {3}{B}{R}{G}     Legendary Creature — Spider
