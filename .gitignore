@@ -40,3 +40,9 @@ engine/.cache/
 
 # Positions captured from bot games (server --capture) — local training scenarios
 captures/
+
+# deploy.sh on the live box: its working folder, the replaced build kept for --rollback,
+# and which commit is installed
+.deploy-*
+.deploy-prev/
+.deploy-commit

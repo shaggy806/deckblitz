@@ -1,6 +1,6 @@
 ---
 name: deploy
-description: Deploy what's pushed to origin/main to the live site (deckblitz.net, the AWS Lightsail instance) — pull, rebuild and restart over SSH, then check the site from outside. Use when the user asks to deploy, ship to production, update the live site / server / deckblitz.net, or put a fix live.
+description: Deploy what's pushed to origin/main to the live site (deckblitz.net, the AWS Lightsail instance) — once CI has built it, pull, install CI's build and restart over SSH, then check the site from outside. Use when the user asks to deploy, ship to production, update the live site / server / deckblitz.net, or put a fix live.
 ---
 
 # Deploy to the live site
@@ -18,6 +18,20 @@ cd "$(git rev-parse --show-toplevel)" && git fetch -q origin && git status -sb |
 
 `deploy.sh` pulls `origin/main`, so the work must be **pushed** (and verified — the `ship`
 skill). Unpushed commits on `main`: ship them first, or tell the user they won't go out.
+
+**And CI must have built it.** Nothing compiles on the box: it installs the bundle CI publishes
+for each green push to `main` (`deploy-<sha>.tar.gz` on the repo's `deploy` pre-release —
+DEPLOYMENT.md, "Updating the deployed code"). Check it's there for `origin/main`'s commit:
+
+```bash
+sha=$(git rev-parse origin/main)
+curl -s -o /dev/null -w "bundle: %{http_code}\n" -L "https://github.com/shaggy806/deckblitz/releases/download/deploy/deploy-$sha.tar.gz.sha256"
+curl -s "https://api.github.com/repos/shaggy806/deckblitz/actions/runs?head_sha=$sha" | node -e 'const r=JSON.parse(require("fs").readFileSync(0,"utf8")).workflow_runs?.[0]; console.log(r ? `CI: ${r.status} ${r.conclusion ?? ""}` : "CI: no run")'
+```
+
+`bundle: 200` is ready. Otherwise: CI `in_progress`/`queued` — wait for it (a background loop
+re-checking every minute, up to 25 minutes) and say so; CI `completed failure` — there is no
+bundle, so say what failed (the run's page, github.com/shaggy806/deckblitz/actions) and stop.
 
 ## 2. Reach the box, and see who's playing
 
@@ -46,13 +60,12 @@ ssh -o BatchMode=yes -o ConnectTimeout=8 deckblitz 'sudo -n true 2>/dev/null && 
 ssh -o BatchMode=yes deckblitz 'cd /opt/mtg-engine && ./deploy.sh' > "$TEMP/mtg-deploy.log" 2>&1; r=$?; tail -25 "$TEMP/mtg-deploy.log"; exit $r
 ```
 
-Run it in the background (`run_in_background: true`, `timeout: 1800000`): the full build
-(card generation, engine, server, client) takes several minutes, and `deploy.sh` stops the room
-server for it (the box hasn't the memory for both — 2026-10-17), so the game socket is down that
-long. Whatever happens, `deploy.sh` starts the server again on exit: after a failure it serves
-whatever is on disk, which may be part old, part new. Read the log's tail and say which step
-failed; a line `Killed` with `code 137` is the kernel's out-of-memory killer (`sudo dmesg -T |
-grep -i oom` on the box says how big it got).
+Run it in the background (`run_in_background: true`, `timeout: 600000`): a download, `npm ci`
+and a restart, a minute or two; the game socket is down only for the restart. It changes nothing
+until the bundle has been downloaded and checked, so "No build of … on the deploy release" or a
+checksum failure leaves the old build serving. A failure in `npm ci` leaves the old build's files
+in place but its packages changed: read the log's tail and say which step failed. To undo a
+deploy that went out: `ssh deckblitz 'cd /opt/mtg-engine && ./deploy.sh --rollback'`.
 
 ## 4. Check it from outside
 

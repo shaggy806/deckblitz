@@ -12,7 +12,10 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    # `contents: write` only for publishing the deploy bundle (last step).
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -22,7 +25,11 @@ jobs:
       - run: npm ci
       # In workspace order: server and client resolve engine and protocol
       # through their built dist/, so everything below needs this first.
+      # The production server's address goes into the client here, so this
+      # build is the one the live site runs (the deploy bundle, last step).
       - run: npm run build
+        env:
+          VITE_SERVER_URL: wss://ws.deckblitz.net
       # The engine's prebuild regenerates cards/generated.ts, the card shards
       # and their index; a diff or a new file here means a card was added
       # without committing what the codegen wrote for it.
@@ -46,3 +53,26 @@ jobs:
       # hang, not a long game.
       - name: Fuzz, 4 players
         run: node engine/scripts/random-demo.mjs --games 8 --players 4 --timeout 120
+      # The deploy bundle: what this green build of main made, for the live
+      # box to install without compiling anything (the engine's type-check
+      # needs more memory than the 2 GB box has — DEPLOYMENT.md). The four
+      # dist folders, JavaScript only (no declarations or source maps: nothing
+      # compiles there), as `deploy-<sha>.tar.gz` with its checksum on the
+      # rolling `deploy` pre-release, the newest ten kept. Only after every
+      # check above has passed, and only for a push to main.
+      - name: Publish the deploy bundle
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          name="deploy-${GITHUB_SHA}.tar.gz"
+          tar -czf "$name" --exclude='*.d.ts' --exclude='*.map' engine/dist protocol/dist server/dist client/dist
+          sha256sum "$name" > "$name.sha256"
+          ls -l "$name"
+          if ! gh release view deploy >/dev/null 2>&1; then
+            gh release create deploy --prerelease --title "Deploy builds" --notes "Builds of main for the live site (deploy.sh). Not a release."
+          fi
+          gh release upload deploy "$name" "$name.sha256" --clobber
+          # Keep the newest ten builds (twenty files with their checksums).
+          gh release view deploy --json assets --jq '.assets | sort_by(.createdAt) | reverse | .[20:] | .[].name' |
+            while read -r old; do gh release delete-asset deploy "$old" -y; done

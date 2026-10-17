@@ -233,21 +233,35 @@ from outside (`check-live.mjs`: the page, and the game socket opening through th
 compression). The `ubuntu` user's passwordless sudo is what lets `deploy.sh`'s `systemctl`
 commands run unattended.
 
-`deploy.sh` (repo root): `git pull --ff-only` → `npm ci` (the lockfile as committed, never rewritten — the box's npm 10 used to drop npm 11's `libc` fields on every `npm install`, leaving the checkout dirty) → **`sudo systemctl stop mtg-server`** → rebuild engine/server/client with
-`VITE_SERVER_URL=wss://ws.deckblitz.net` baked into the client → `sudo systemctl daemon-reload` →
-`sudo systemctl restart mtg-server`. The server is stopped for the build because the engine's
-`tsc` needs ~1.6 GB resident even with the build's V8 heap capped at 1600 MB, and with the
-server and its room shard (~400 MB) running beside it the kernel killed it (2026-10-17, at 13,789
-cards). So the game socket is down for the build's few minutes, not a few seconds; games end
-either way. An `EXIT` trap starts the server again whatever happens: if the build failed partway
-it comes up on whatever is on disk (the engine's `dist` untouched if its `tsc` was the step that
-died, the server's rebuilt against it), so after a failed deploy check it's serving, then fix and
-deploy again, or roll back as below. The `daemon-reload` is there so a hand-edited unit file is
-never silently stale after a deploy — cheap and harmless even when the unit file didn't change.
-Caddy and cloudflared don't need restarting for an ordinary code change — only `mtg-server`
-actually changes. **A `sudo reboot` does *not* deploy new code** — it just restarts whatever's
-already built on disk; always run `./deploy.sh` instead. To roll back, check out an older commit
-and rebuild, or restore a snapshot.
+**Nothing compiles on the box.** The engine's type-check needs ~1.5 GB and grows with the card
+pool (about 3 GB by 30,000 cards), more than the 2 GB instance can spare: the kernel killed it for
+memory on 2026-10-15 and again on 2026-10-17, when it built only once the server was stopped. So CI
+builds: every push to `main` that passes all of CI (`.github/workflows/ci.yml`) packs the four
+`dist` folders — the client built with `VITE_SERVER_URL=wss://ws.deckblitz.net` baked in, and
+JavaScript only, no declarations or source maps — as `deploy-<sha>.tar.gz` with a `.sha256`
+beside it, on the repo's rolling **`deploy` pre-release** (the newest ten kept). The repo is
+public, so the box downloads it over plain HTTPS: no token is stored anywhere.
+
+`deploy.sh` (repo root): `git pull --ff-only` → download that commit's bundle and its checksum,
+and check it → `npm ci` (the lockfile as committed, never rewritten — the box's npm 10 used to
+drop npm 11's `libc` fields on every `npm install`, leaving the checkout dirty; the server runs on
+these packages) → swap each `dist` folder in by rename, keeping the ones it replaces in
+`.deploy-prev/` → `sudo systemctl daemon-reload` → `sudo systemctl restart mtg-server`. The game
+socket is down only for the restart. **Deploy once CI is green on the commit**: before that
+there's no bundle, and `deploy.sh` stops before changing anything ("No build of … on the deploy
+release"). The whole script is one function, read before it runs, so the `git pull` rewriting it
+is safe. The `daemon-reload` is there so a hand-edited unit file is never silently stale after a
+deploy — cheap and harmless even when the unit file didn't change. Caddy and cloudflared don't
+need restarting for an ordinary code change — only `mtg-server` actually changes. **A `sudo
+reboot` does *not* deploy new code** — it just restarts whatever's installed on disk; always run
+`./deploy.sh` instead.
+
+To roll back, `./deploy.sh --rollback` swaps the previous build's folders back in and restarts
+(`.deploy-commit` says which commit is installed; run it again to return). Further back: an older
+commit's bundle is on the `deploy` release for a while (the newest ten), or restore a snapshot. If
+GitHub can't be reached at all, the same bundle can be made on the dev PC — CI's `tar` line in
+`ci.yml` after a `npm run build` with `VITE_SERVER_URL=wss://ws.deckblitz.net` — copied over with
+`scp` and unpacked into place by hand, then the restart.
 
 The client build is several files, not one: the game's own script, the library and the deck
 builder as lazy chunks, and the card pool in 32 shards (see `docs/architecture/client.md`, "`cards/cardData.ts`").
