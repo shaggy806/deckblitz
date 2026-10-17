@@ -3877,6 +3877,13 @@ clause (section 9):
   size go — while tapped, attacking, "it gains haste", counters put on it
   and its later sacrifice or exile still happen (the ruling). Amass's Army
   made as an Angel isn't an Army, so it gets no counters (rule 701.47a).
+  `{ event: "would-create-token", plusTokens: "<token>" }` is Chatterfang,
+  Squirrel General's "those tokens **plus that many** 1/1 green Squirrel
+  creature tokens are created instead": any kind of token, a token copy too,
+  entering with the others as one event; the extra tokens get what the effect
+  does to the tokens (tapped, attacking, haste, exiled later) and none of what
+  they are (the rulings). With a doubler the totals are the same in either
+  order (rule 616.1); before Divine Visitation, which makes them Angels too.
 - `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.

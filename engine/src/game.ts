@@ -23202,68 +23202,128 @@ export class Game {
       def = this.registry.get(instead);
       basePt = undefined;
     }
-    return this.mintTokenBatch(
-      controller,
-      tokenName,
-      null,
-      total,
-      [
-        // A token named after a real card carries its name as a copiable
-        // value (`CardDefinition.tokenName`, rule 111.3).
-        ...(def.tokenName === undefined
-          ? []
-          : [
-              {
-                power: 0,
-                toughness: 0,
-                keywords: [],
-                copiable: true as const,
-                setName: def.tokenName,
-                untilEndOfTurn: false,
-                timestamp: -1,
-              },
-            ]),
-        ...untilEndOfTurnKeywords(gainUntilEndOfTurn),
-        ...(gainKeywords.length > 0
-          ? [{ power: 0, toughness: 0, keywords: [...gainKeywords], untilEndOfTurn: false }]
-          : []),
-        ...(attacksThisCombat
-          ? [
-              {
-                power: 0,
-                toughness: 0,
-                keywords: [],
-                restrictions: ["must-attack" as const],
-                untilEndOfTurn: true,
-                untilEndOfCombat: true as const,
-              },
-            ]
-          : []),
-        // "An X/X token": what the effect made it (rule 111.3 — its copiable
-        // values, 707.2: a copy of it is X/X too), under every other effect
-        // that sets its P/T.
-        ...(basePt === undefined
-          ? []
-          : [
-              {
-                power: 0,
-                toughness: 0,
-                keywords: [],
-                setPt: [basePt[0], basePt[1]] as [number, number],
-                untilEndOfTurn: false,
-                copiable: true as const,
-                timestamp: -1,
-              },
-            ]),
-      ],
-      exileAtEndStep,
-      false,
-      false,
-      tapped,
-      sacrificeAtEndStep,
-      goadedForGameBy,
-      separate,
-    );
+    // What the effect does to the tokens, not what they are: Chatterfang's
+    // Squirrels get these and nothing else of the tokens' (the ruling).
+    const riders: PtModifier[] = [
+      ...untilEndOfTurnKeywords(gainUntilEndOfTurn),
+      ...(gainKeywords.length > 0
+        ? [{ power: 0, toughness: 0, keywords: [...gainKeywords], untilEndOfTurn: false }]
+        : []),
+      ...(attacksThisCombat
+        ? [
+            {
+              power: 0,
+              toughness: 0,
+              keywords: [],
+              restrictions: ["must-attack" as const],
+              untilEndOfTurn: true,
+              untilEndOfCombat: true as const,
+            },
+          ]
+        : []),
+    ];
+    return this.withEnterBatch(() => [
+      ...this.mintTokenBatch(
+        controller,
+        tokenName,
+        null,
+        total,
+        [
+          // A token named after a real card carries its name as a copiable
+          // value (`CardDefinition.tokenName`, rule 111.3).
+          ...(def.tokenName === undefined
+            ? []
+            : [
+                {
+                  power: 0,
+                  toughness: 0,
+                  keywords: [],
+                  copiable: true as const,
+                  setName: def.tokenName,
+                  untilEndOfTurn: false,
+                  timestamp: -1,
+                },
+              ]),
+          ...riders,
+          // "An X/X token": what the effect made it (rule 111.3 — its copiable
+          // values, 707.2: a copy of it is X/X too), under every other effect
+          // that sets its P/T.
+          ...(basePt === undefined
+            ? []
+            : [
+                {
+                  power: 0,
+                  toughness: 0,
+                  keywords: [],
+                  setPt: [basePt[0], basePt[1]] as [number, number],
+                  untilEndOfTurn: false,
+                  copiable: true as const,
+                  timestamp: -1,
+                },
+              ]),
+        ],
+        exileAtEndStep,
+        false,
+        false,
+        tapped,
+        sacrificeAtEndStep,
+        goadedForGameBy,
+        separate,
+      ),
+      ...this.mintPlusTokens(controller, total, (name, n) =>
+        this.mintTokenBatch(
+          controller,
+          name,
+          null,
+          n,
+          riders.map((m) => ({ ...m })),
+          exileAtEndStep,
+          false,
+          false,
+          tapped,
+          sacrificeAtEndStep,
+          goadedForGameBy,
+          separate,
+        ),
+      ),
+    ]);
+  }
+
+  /**
+   * The tokens `controller`'s "those tokens plus that many …" replacements
+   * add to `total` being created (Chatterfang — `TokenMultiplierReplacement.
+   * plusTokens`), minted by `mint`: each counting every token before it,
+   * and made Angels by Divine Visitation if they're creatures (see
+   * `plusTokens` for the order).
+   */
+  private mintPlusTokens(
+    controller: PlayerId,
+    total: number,
+    mint: (name: string, count: number) => readonly ObjectId[],
+  ): readonly ObjectId[] {
+    if (total <= 0) return [];
+    const names: string[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object.controller !== controller || hasLostAbilities(object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        const r = ability.replacement;
+        if (r?.event === "would-create-token" && r.plusTokens !== undefined && this.staticActive(object, ability)) {
+          names.push(r.plusTokens);
+        }
+      }
+    }
+    if (names.length === 0) return [];
+    const substitute = this.creatureTokenSubstitute(controller);
+    const made: ObjectId[] = [];
+    let soFar = total;
+    for (const name of names) {
+      const count = Math.min(soFar, Game.MAX_EFFECT_INSTANCES);
+      const as = substitute !== undefined && this.registry.get(name).types.includes("creature") ? substitute : name;
+      made.push(...mint(as, count));
+      soFar = Math.min(soFar + count, Game.MAX_EFFECT_INSTANCES);
+    }
+    return made;
   }
 
   /** Create `count` token(s) that are copies of the permanent `ofId` (rule
@@ -23368,8 +23428,8 @@ export class Game {
       if (m.addTypes !== undefined) copiedTypes = [...copiedTypes, ...m.addTypes];
     }
     const instead = copiedTypes.includes("creature") ? this.creatureTokenSubstitute(controller) : undefined;
-    const made =
-      instead !== undefined
+    const made = this.withEnterBatch(() => [
+      ...(instead !== undefined
         ? this.mintTokenBatch(
             controller,
             instead,
@@ -23393,7 +23453,24 @@ export class Game {
             true,
             opts.tapped === true,
             opts.sacrificeAtEndStep === true,
-          );
+          )),
+      // Chatterfang's Squirrels: nothing of what was copied, only what the
+      // effect does to the tokens (the ruling).
+      ...this.mintPlusTokens(controller, total, (name, n) =>
+        this.mintTokenBatch(
+          controller,
+          name,
+          null,
+          n,
+          modifiers.filter((m) => m.copiable !== true),
+          opts.exileAtEndStep,
+          false,
+          false,
+          opts.tapped === true,
+          opts.sacrificeAtEndStep === true,
+        ),
+      ),
+    ]);
     // "…that's tapped and attacking" (rule 508.4).
     if (opts.attacking !== undefined) this.putIntoAttack(made, controller, opts.attacking);
     // "Exile the tokens at end of combat": one delayed triggered ability over

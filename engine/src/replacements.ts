@@ -207,6 +207,20 @@ export interface TokenMultiplierReplacement {
   readonly event: "would-create-token";
   readonly multiplier?: number;
   readonly creatureTokensInstead?: string;
+  /**
+   * "If one or more tokens would be created under your control, **those
+   * tokens plus that many** 1/1 green Squirrel creature tokens are created
+   * instead" (Chatterfang, Squirrel General): this many more of the named
+   * token as well, of any kind of token (the ruling). They have none of
+   * the other tokens' own abilities or values, but everything else the
+   * effect says — tapped, attacking, "they gain haste", exiled at end of
+   * combat — applies to them too (the ruling). Each one counts every token
+   * of the event before it, its own included only once (rule 614.5); with
+   * a multiplier the order is the controller's (616.1) and comes out the
+   * same, and before Divine Visitation, which makes Squirrels Angels too —
+   * the order that gives the most.
+   */
+  readonly plusTokens?: string;
 }
 
 /** "If one or more counters would be put on a permanent you control, twice that

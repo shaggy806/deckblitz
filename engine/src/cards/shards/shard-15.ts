@@ -55,6 +55,7 @@ import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js
 import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
+import _poolChatterfangSquirrelGeneral from "../pool/chatterfang-squirrel-general.js";
 import _poolCidFreeflierPilot from "../pool/cid-freeflier-pilot.js";
 import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
@@ -487,6 +488,7 @@ const shard: CardShard = {
     _poolCaughtInTheCrossfire,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
+    _poolChatterfangSquirrelGeneral,
     _poolCidFreeflierPilot,
     _poolCinderbones,
     _poolCliffsideLookout,

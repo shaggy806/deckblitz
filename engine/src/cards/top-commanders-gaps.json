@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "replacement:token-creation-additive",
   "keyword:explore",
   "effect:explore-each",
   "effect:map-token",
@@ -829,7 +830,7 @@
   "effect:missing-tokens": {
    "size": "small",
    "ui": false,
-   "description": "Blood tokens for Shilgengar, whatever else Chatterfang's and Jaws' triggers need, and a distinct 'whenever you investigate' event (investigate is plain Clue creation today, so nothing can trigger on it). Built so far: the Clue token and an investigate() helper (Tivit, Wernog, Morska), the 1/1 black-green Insect (Grist), and the Blood token (Strefan); Treasure and the 1/1 green Squirrel already existed."
+   "description": "Blood tokens for Shilgengar, whatever else Chatterfang's and Jaws' triggers need, and a distinct 'whenever you investigate' event (investigate is plain Clue creation today, so nothing can trigger on it). Built so far: the Clue token and an investigate() helper (Tivit, Wernog, Morska), the 1/1 black-green Insect (Grist), and the Blood token (Strefan); Treasure and the 1/1 green Squirrel already existed. 2026-10-16: Shilgengar and Chatterfang (with `replacement:token-creation-additive`) implemented; what's left is Jaws's and Tivit's, and the 'whenever you investigate' event."
   },
   "effect:modal-ability-targeted-modes": {
    "size": "medium",

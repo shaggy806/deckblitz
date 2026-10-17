@@ -328,6 +328,7 @@ import _poolSetessanTraining from "../pool/setessan-training.js";
 import _poolShadeOfTrokair from "../pool/shade-of-trokair.js";
 import _poolShamblingGhast from "../pool/shambling-ghast.js";
 import _poolShelteringLandscape from "../pool/sheltering-landscape.js";
+import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
@@ -771,6 +772,7 @@ const shard: CardShard = {
     _poolShadeOfTrokair,
     _poolShamblingGhast,
     _poolShelteringLandscape,
+    _poolShilgengarSireOfFamine,
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolSibsigAppraiser,

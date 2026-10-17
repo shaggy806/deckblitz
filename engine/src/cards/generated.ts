@@ -1946,6 +1946,7 @@ import _poolChaseSteinRunaway from "./pool/chase-stein-runaway.js";
 import _poolChasmDrake from "./pool/chasm-drake.js";
 import _poolChasmSkulker from "./pool/chasm-skulker.js";
 import _poolChatterOfTheSquirrel from "./pool/chatter-of-the-squirrel.js";
+import _poolChatterfangSquirrelGeneral from "./pool/chatterfang-squirrel-general.js";
 import _poolChatterstorm from "./pool/chatterstorm.js";
 import _poolCheckpointOfficer from "./pool/checkpoint-officer.js";
 import _poolCheerfulOsteomancer from "./pool/cheerful-osteomancer.js";
@@ -10226,6 +10227,7 @@ import _poolShiftingWoodland from "./pool/shifting-woodland.js";
 import _poolShigekiJukaiVisionary from "./pool/shigeki-jukai-visionary.js";
 import _poolShikoAndNarsetUnified from "./pool/shiko-and-narset-unified.js";
 import _poolShikoParagonOfTheWay from "./pool/shiko-paragon-of-the-way.js";
+import _poolShilgengarSireOfFamine from "./pool/shilgengar-sire-of-famine.js";
 import _poolShimmerDragon from "./pool/shimmer-dragon.js";
 import _poolShimmerMyr from "./pool/shimmer-myr.js";
 import _poolShimmercreep from "./pool/shimmercreep.js";
@@ -16121,6 +16123,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChasmDrake,
   _poolChasmSkulker,
   _poolChatterOfTheSquirrel,
+  _poolChatterfangSquirrelGeneral,
   _poolChatterstorm,
   _poolCheckpointOfficer,
   _poolCheerfulOsteomancer,
@@ -24401,6 +24404,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShigekiJukaiVisionary,
   _poolShikoAndNarsetUnified,
   _poolShikoParagonOfTheWay,
+  _poolShilgengarSireOfFamine,
   _poolShimmerDragon,
   _poolShimmerMyr,
   _poolShimmercreep,
