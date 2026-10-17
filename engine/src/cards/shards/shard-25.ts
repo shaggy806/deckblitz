@@ -432,6 +432,7 @@ import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
+import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
     _tokensElfWarriorToken,
+    _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
     _tokensInklingTokenEmeritusOfTruce,

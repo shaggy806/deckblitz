@@ -123,6 +123,7 @@ import _poolEssenceScatter from "../pool/essence-scatter.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
+import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
@@ -300,6 +301,7 @@ import _poolRiverwheelAerialists from "../pool/riverwheel-aerialists.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
@@ -577,6 +579,7 @@ const shard: CardShard = {
     _poolExpansionExplosion,
     _poolExpedite,
     _poolExtremisElite,
+    _poolFaerieSlumberParty,
     _poolFalseDefeat,
     _poolFellMire,
     _poolFeralInvocation,
@@ -754,6 +757,7 @@ const shard: CardShard = {
     _poolRmsTitanic,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRotisserieElemental,
     _poolSagesKnowledge,
     _poolSaguMauler,
     _poolSangriteBacklash,

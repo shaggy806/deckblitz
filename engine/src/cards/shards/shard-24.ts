@@ -40,6 +40,7 @@ import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
 import _poolBattlegrowth from "../pool/battlegrowth.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
+import _poolBesottedKnight from "../pool/besotted-knight.js";
 import _poolBetorAncestorsVoice from "../pool/betor-ancestors-voice.js";
 import _poolBitterbowSharpshooters from "../pool/bitterbow-sharpshooters.js";
 import _poolBlackBoltInhumanKing from "../pool/black-bolt-inhuman-king.js";
@@ -164,6 +165,7 @@ import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
+import _poolHaveForDinner from "../pool/have-for-dinner.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
@@ -471,6 +473,7 @@ const shard: CardShard = {
     _poolBattlegrowth,
     _poolBelligerentGuest,
     _poolBelligerentWhiptail,
+    _poolBesottedKnight,
     _poolBetorAncestorsVoice,
     _poolBitterbowSharpshooters,
     _poolBlackBoltInhumanKing,
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolHallMonitor,
     _poolHammerOfPurphoros,
     _poolHanweirGarrison,
+    _poolHaveForDinner,
     _poolHeartWarden,
     _poolHeavenSent,
     _poolHelgaSkittishSeer,

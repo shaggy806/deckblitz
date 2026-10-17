@@ -37,6 +37,7 @@ import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
+import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
@@ -499,6 +500,7 @@ const shard: CardShard = {
     _poolBasimIbnIshaq,
     _poolBazaarTrader,
     _poolBeetleformMage,
+    _poolBelunaGrandsquall,
     _poolBenevolentRiverSpirit,
     _poolBilboBirthdayCelebrant,
     _poolBlackPantherVanguard,

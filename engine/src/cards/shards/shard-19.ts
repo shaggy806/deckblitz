@@ -227,6 +227,7 @@ import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
 import _poolLashOfMalice from "../pool/lash-of-malice.js";
 import _poolLayWaste from "../pool/lay-waste.js";
 import _poolLeap from "../pool/leap.js";
+import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
@@ -313,6 +314,7 @@ import _poolProsperousPirates from "../pool/prosperous-pirates.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
 import _poolQiqirnMerchant from "../pool/qiqirn-merchant.js";
+import _poolQuestingDruid from "../pool/questing-druid.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
 import _poolRaiseDead from "../pool/raise-dead.js";
@@ -708,6 +710,7 @@ const shard: CardShard = {
     _poolLashOfMalice,
     _poolLayWaste,
     _poolLeap,
+    _poolLeapingAmbush,
     _poolLecturingScornmage,
     _poolLifecraftersBestiary,
     _poolLifelink,
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
     _poolQiqirnMerchant,
+    _poolQuestingDruid,
     _poolRabarooTroop,
     _poolRagamuffinRaptor,
     _poolRaiseDead,

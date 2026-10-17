@@ -127,6 +127,7 @@ import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
+import _poolGracefulTakedown from "../pool/graceful-takedown.js";
 import _poolGravelighter from "../pool/gravelighter.js";
 import _poolGrenzoHavocRaiser from "../pool/grenzo-havoc-raiser.js";
 import _poolGrimGuardian from "../pool/grim-guardian.js";
@@ -556,6 +557,7 @@ const shard: CardShard = {
     _poolGodEternalBontu,
     _poolGolgariGuildmage,
     _poolGorgonFlail,
+    _poolGracefulTakedown,
     _poolGravelighter,
     _poolGrenzoHavocRaiser,
     _poolGrimGuardian,

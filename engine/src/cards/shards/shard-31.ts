@@ -96,6 +96,7 @@ import _poolDerangedWhelp from "../pool/deranged-whelp.js";
 import _poolDesertOfTheGlorified from "../pool/desert-of-the-glorified.js";
 import _poolDesertSandstorm from "../pool/desert-sandstorm.js";
 import _poolDesolateMire from "../pool/desolate-mire.js";
+import _poolDevouringSugarmaw from "../pool/devouring-sugarmaw.js";
 import _poolDewdropCure from "../pool/dewdrop-cure.js";
 import _poolDiabolicMachine from "../pool/diabolic-machine.js";
 import _poolDiffusionSliver from "../pool/diffusion-sliver.js";
@@ -112,6 +113,7 @@ import _poolDragonMoose from "../pool/dragon-moose.js";
 import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
+import _poolDreamSpoilers from "../pool/dream-spoilers.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
 import _poolEclipsedElf from "../pool/eclipsed-elf.js";
@@ -357,9 +359,11 @@ import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
+import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
 import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
+import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheWanderingEmperor from "../pool/the-wandering-emperor.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
@@ -531,6 +535,7 @@ const shard: CardShard = {
     _poolDesertOfTheGlorified,
     _poolDesertSandstorm,
     _poolDesolateMire,
+    _poolDevouringSugarmaw,
     _poolDewdropCure,
     _poolDiabolicMachine,
     _poolDiffusionSliver,
@@ -547,6 +552,7 @@ const shard: CardShard = {
     _poolDragonlairSpider,
     _poolDragonspeakerShaman,
     _poolDreadReturn,
+    _poolDreamSpoilers,
     _poolEastWindAvatar,
     _poolEchoPerceptiveProdigy,
     _poolEclipsedElf,
@@ -792,9 +798,11 @@ const shard: CardShard = {
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,
+    _poolTheApprenticesFolly,
     _poolTheBattleOfBywater,
     _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,
+    _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
     _poolTheWanderingEmperor,
     _poolTheWatcherInTheWater,

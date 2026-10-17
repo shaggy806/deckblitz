@@ -42,6 +42,7 @@ import _poolBlossomingBogbeast from "../pool/blossoming-bogbeast.js";
 import _poolBoneSplinters from "../pool/bone-splinters.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
+import _poolBreakTheSpell from "../pool/break-the-spell.js";
 import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
 import _poolBroadcastRambler from "../pool/broadcast-rambler.js";
 import _poolBruseTarlBoorishHerder from "../pool/bruse-tarl-boorish-herder.js";
@@ -315,6 +316,7 @@ import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
+import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
@@ -329,6 +331,7 @@ import _poolSimicSkySwallower from "../pool/simic-sky-swallower.js";
 import _poolSimulacrumSynthesizer from "../pool/simulacrum-synthesizer.js";
 import _poolSingularityRupture from "../pool/singularity-rupture.js";
 import _poolSkaabWrangler from "../pool/skaab-wrangler.js";
+import _poolSkybeastTracker from "../pool/skybeast-tracker.js";
 import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
 import _poolSmother from "../pool/smother.js";
 import _poolSnap from "../pool/snap.js";
@@ -358,6 +361,7 @@ import _poolStolenGrain from "../pool/stolen-grain.js";
 import _poolStormFleetSprinter from "../pool/storm-fleet-sprinter.js";
 import _poolStormForceOfNature from "../pool/storm-force-of-nature.js";
 import _poolStormfrontPegasus from "../pool/stormfront-pegasus.js";
+import _poolStormkeldProwler from "../pool/stormkeld-prowler.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
 import _poolSunscorchedDivide from "../pool/sunscorched-divide.js";
 import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
@@ -487,6 +491,7 @@ const shard: CardShard = {
     _poolBoneSplinters,
     _poolBoromirWardenOfTheTower,
     _poolBothersomeNoisemaker,
+    _poolBreakTheSpell,
     _poolBrimstoneRoundup,
     _poolBroadcastRambler,
     _poolBruseTarlBoorishHerder,
@@ -760,6 +765,7 @@ const shard: CardShard = {
     _poolScorpionSeethingStriker,
     _poolSeaSpirit,
     _poolSeaSprite,
+    _poolSeekTheBeast,
     _poolSegmentedKrotiq,
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
@@ -774,6 +780,7 @@ const shard: CardShard = {
     _poolSimulacrumSynthesizer,
     _poolSingularityRupture,
     _poolSkaabWrangler,
+    _poolSkybeastTracker,
     _poolSlagwoodsBridge,
     _poolSmother,
     _poolSnap,
@@ -803,6 +810,7 @@ const shard: CardShard = {
     _poolStormFleetSprinter,
     _poolStormForceOfNature,
     _poolStormfrontPegasus,
+    _poolStormkeldProwler,
     _poolSummonersPact,
     _poolSunscorchedDivide,
     _poolSurveyTheWreckage,

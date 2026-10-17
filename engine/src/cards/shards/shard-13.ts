@@ -26,6 +26,7 @@ import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArcaneSignet from "../pool/arcane-signet.js";
 import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
+import _poolArchonOfTheWildRose from "../pool/archon-of-the-wild-rose.js";
 import _poolArdennIntrepidArchaeologist from "../pool/ardenn-intrepid-archaeologist.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
@@ -485,6 +486,7 @@ const shard: CardShard = {
     _poolAquitectsWill,
     _poolArcaneSignet,
     _poolArchghoulOfThraben,
+    _poolArchonOfTheWildRose,
     _poolArdennIntrepidArchaeologist,
     _poolArmaggonFutureShark,
     _poolArrowsOfJustice,

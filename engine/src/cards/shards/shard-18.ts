@@ -431,6 +431,7 @@ import _poolWastes from "../pool/wastes.js";
 import _poolWatchfulGiant from "../pool/watchful-giant.js";
 import _poolWaterbendersRestoration from "../pool/waterbenders-restoration.js";
 import _poolWearDown from "../pool/wear-down.js";
+import _poolWelcomeToSweettooth from "../pool/welcome-to-sweettooth.js";
 import _poolWellOfIdeas from "../pool/well-of-ideas.js";
 import _poolWerebear from "../pool/werebear.js";
 import _poolWetlandSambar from "../pool/wetland-sambar.js";
@@ -900,6 +901,7 @@ const shard: CardShard = {
     _poolWatchfulGiant,
     _poolWaterbendersRestoration,
     _poolWearDown,
+    _poolWelcomeToSweettooth,
     _poolWellOfIdeas,
     _poolWerebear,
     _poolWetlandSambar,

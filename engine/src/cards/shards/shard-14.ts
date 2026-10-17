@@ -230,6 +230,7 @@ import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
+import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
@@ -285,6 +286,7 @@ import _poolObeliskOfNaya from "../pool/obelisk-of-naya.js";
 import _poolOldFlitterfang from "../pool/old-flitterfang.js";
 import _poolOnyxGoblet from "../pool/onyx-goblet.js";
 import _poolOonasGatewarden from "../pool/oonas-gatewarden.js";
+import _poolOxDrover from "../pool/ox-drover.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
 import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
 import _poolPanacea from "../pool/panacea.js";
@@ -667,6 +669,7 @@ const shard: CardShard = {
     _poolKaitoShizuki,
     _poolKeenBuccaneer,
     _poolKonaRescueBeastie,
+    _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
     _poolKrosanColossus,
     _poolLassoedByTheLaw,
@@ -722,6 +725,7 @@ const shard: CardShard = {
     _poolOldFlitterfang,
     _poolOnyxGoblet,
     _poolOonasGatewarden,
+    _poolOxDrover,
     _poolPactdollTerror,
     _poolPaladinDanseSteelMaverick,
     _poolPanacea,

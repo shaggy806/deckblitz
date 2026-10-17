@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, enter, keywords, lands, pickModes, pickTargets, pt, ref, settle, spawn, table, toExile, toGraveyard, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, enter, keywords, lands, pickModes, pickTargets, pt, ref, settle, spawn, table, toExile, toGraveyard, toHand, toLibrary, toStep, zone } from "./harness.js";
 
 const rolesOn = (game: Game, host: ObjectId): string[] =>
   game.state.zones.shared.battlefield
@@ -174,6 +174,27 @@ describe("Wilds of Eldraine batch 1: Roles", () => {
       lands(game, "Mountain", 4);
       cast(game, toHand(game, "Hearth Elemental"));
       expect(game.state.zones.shared.battlefield.some((id) => game.state.objects[id].cardName === "Hearth Elemental")).toBe(true);
+    });
+
+    it("Beluna Grandsquall: an adventurer cast as its creature costs {1} less — not as its Adventure", () => {
+      const { game } = table();
+      spawn(game, "Beluna Grandsquall");
+      lands(game, "Forest", 3);
+      cast(game, toHand(game, "Ferocious Werefox"));
+      expect(game.state.zones.shared.battlefield.some((id) => game.state.objects[id].cardName === "Ferocious Werefox")).toBe(true);
+    });
+
+    it("Seek Thrills: of the seven milled, only cards that have an Adventure go to hand", () => {
+      const { game } = table();
+      const bears = toLibrary(game, "Grizzly Bears");
+      const fox = toLibrary(game, "Ferocious Werefox");
+      lands(game, "Forest", 4);
+      lands(game, "Island", 1);
+      lands(game, "Mountain", 1);
+      // Beluna's Adventure, its second face.
+      cast(game, toHand(game, "Beluna Grandsquall"), { face: 1 });
+      expect(zone(game, fox)).toBe("hand");
+      expect(zone(game, bears)).toBe("graveyard");
     });
   });
 });

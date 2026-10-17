@@ -345,6 +345,7 @@ import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
+import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
 import _poolSummitProwler from "../pool/summit-prowler.js";
 import _poolSummoningMateria from "../pool/summoning-materia.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
@@ -355,6 +356,7 @@ import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
+import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
 import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
     _poolSubterraneanScout,
+    _poolSuccumbToTheCold,
     _poolSummitProwler,
     _poolSummoningMateria,
     _poolSuperShredder,
@@ -793,6 +796,7 @@ const shard: CardShard = {
     _poolTatteredApparition,
     _poolThaumaturgesFamiliar,
     _poolTheFalconAirshipRestored,
+    _poolTheHuntsmansRedemption,
     _poolThePrismaticBridge,
     _poolTheTwelfthDoctor,
     _poolThermalGlider,

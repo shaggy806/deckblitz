@@ -99,12 +99,14 @@ import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
+import _poolDeathlyRide from "../pool/deathly-ride.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDiresight from "../pool/diresight.js";
+import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
 import _poolDiversionUnit from "../pool/diversion-unit.js";
 import _poolDoomedDissenter from "../pool/doomed-dissenter.js";
@@ -570,12 +572,14 @@ const shard: CardShard = {
     _poolDarkTutelage,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
+    _poolDeathlyRide,
     _poolDeepchannelDuelist,
     _poolDefenestratedPhantom,
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDinaSoulSteeper,
     _poolDiresight,
+    _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
     _poolDiversionUnit,
     _poolDoomedDissenter,

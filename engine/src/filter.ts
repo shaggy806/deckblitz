@@ -1187,9 +1187,13 @@ export function matchesFilter(
   if (filter.preparedSpell !== undefined && (live?.preparedSpell === true) !== filter.preparedSpell) return false;
   if (filter.hasAdventure !== undefined) {
     // "A card that has an Adventure" (rule 715.2a): an adventurer card, in any
-    // zone, by its printed definition — both its faces carry `adventure`.
+    // zone, by its printed definition — but not a spell cast as the Adventure,
+    // which has only the Adventure's characteristics (715.3b — the rulings: it
+    // "won't find an instant or sorcery spell on the stack that's been cast as
+    // an Adventure"). Both faces carry `adventure`; the Adventure's is subtyped.
     const name = live !== undefined ? printedCardName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).adventure;
+    const def = name !== undefined && registry.has(name) ? registry.get(name) : undefined;
+    const has = def !== undefined && def.adventure && !def.subtypes.includes("Adventure");
     if (has !== filter.hasAdventure) return false;
   }
   if (filter.faceDown !== undefined) {

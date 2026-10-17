@@ -110,6 +110,7 @@ import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
 import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
 import _poolFeebleness from "../pool/feebleness.js";
+import _poolFellHorseman from "../pool/fell-horseman.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
@@ -284,6 +285,7 @@ import _poolSeaGate from "../pool/sea-gate.js";
 import _poolSeacoastDrake from "../pool/seacoast-drake.js";
 import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
+import _poolSeekThrills from "../pool/seek-thrills.js";
 import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolFanaticalStrength,
     _poolFateOfTheSunCryst,
     _poolFeebleness,
+    _poolFellHorseman,
     _poolFireFieldOgre,
     _poolFireImp,
     _poolFireSprites,
@@ -703,6 +706,7 @@ const shard: CardShard = {
     _poolSeacoastDrake,
     _poolSeasideCitadel,
     _poolSeatOfTheSynod,
+    _poolSeekThrills,
     _poolSeleniaDarkAngel,
     _poolSendInThePest,
     _poolSeraphicSteed,
