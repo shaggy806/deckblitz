@@ -610,6 +610,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Spew Flame": "https://cards.scryfall.io/art_crop/back/4/1/419ca9e5-8413-4378-a4ef-eda5a1024218.jpg",
   "Stalking Predator": "https://cards.scryfall.io/art_crop/back/5/5/55f0666a-5c3e-492b-b4ea-42fa7f24661b.jpg",
   "Steam Clean": "58e72bfb-6f64-4647-afb6-b5ad4737121c",
+  "Stoke Genius": "https://cards.scryfall.io/art_crop/back/a/8/a8f5f102-cc75-4cee-a117-4bdaaf86c2e9.jpg",
   "Stonewing Antagonizer": "https://cards.scryfall.io/art_crop/back/f/2/f2687683-2986-4e22-97d9-7820c870475b.jpg",
   "Storm-Charged Slasher": "https://cards.scryfall.io/art_crop/back/a/3/a33af331-0746-4adf-935a-bf61ff9d8d4b.jpg",
   "Stream of Life": "341aa1b2-e600-4580-b0cd-e1582b75dc81",

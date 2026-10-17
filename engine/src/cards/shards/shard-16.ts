@@ -172,6 +172,7 @@ import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHeadstone from "../pool/headstone.js";
+import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
@@ -647,6 +648,7 @@ const shard: CardShard = {
     _poolGuulDrazMucklord,
     _poolHarmlessOffering,
     _poolHeadstone,
+    _poolHearthElemental,
     _poolHeartstone,
     _poolHematiteGolem,
     _poolHighPerfectMorcant,

@@ -404,6 +404,7 @@ import _poolTrainingGrounds from "../pool/training-grounds.js";
 import _poolTranquilThicket from "../pool/tranquil-thicket.js";
 import _poolTranscendentMessage from "../pool/transcendent-message.js";
 import _poolTrostaniSelesnyasVoice from "../pool/trostani-selesnyas-voice.js";
+import _poolTuinvaleGuide from "../pool/tuinvale-guide.js";
 import _poolTuinvaleTreefolk from "../pool/tuinvale-treefolk.js";
 import _poolTwitchingDoll from "../pool/twitching-doll.js";
 import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
@@ -883,6 +884,7 @@ const shard: CardShard = {
     _poolTranquilThicket,
     _poolTranscendentMessage,
     _poolTrostaniSelesnyasVoice,
+    _poolTuinvaleGuide,
     _poolTuinvaleTreefolk,
     _poolTwitchingDoll,
     _poolUlvenwaldCaptive,

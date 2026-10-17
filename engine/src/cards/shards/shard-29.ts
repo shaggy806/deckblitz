@@ -18,6 +18,7 @@ import _poolArdbert from "../pool/ardbert.js";
 import _poolArgentumArmor from "../pool/argentum-armor.js";
 import _poolArgothianOpportunist from "../pool/argothian-opportunist.js";
 import _poolArmageddon from "../pool/armageddon.js";
+import _poolAshPartyCrasher from "../pool/ash-party-crasher.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
 import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
 import _poolAttendedKnight from "../pool/attended-knight.js";
@@ -143,6 +144,7 @@ import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
+import _poolGallantPieWielder from "../pool/gallant-pie-wielder.js";
 import _poolGalliaTheMerrymaker from "../pool/gallia-the-merrymaker.js";
 import _poolGelectrode from "../pool/gelectrode.js";
 import _poolGenerousVisitor from "../pool/generous-visitor.js";
@@ -461,6 +463,7 @@ const shard: CardShard = {
     _poolArgentumArmor,
     _poolArgothianOpportunist,
     _poolArmageddon,
+    _poolAshPartyCrasher,
     _poolAstralWingspan,
     _poolAtlanteanCavalry,
     _poolAttendedKnight,
@@ -586,6 +589,7 @@ const shard: CardShard = {
     _poolFrogTongue,
     _poolFuneralRoomAwakeningHall,
     _poolFurtiveHomunculus,
+    _poolGallantPieWielder,
     _poolGalliaTheMerrymaker,
     _poolGelectrode,
     _poolGenerousVisitor,

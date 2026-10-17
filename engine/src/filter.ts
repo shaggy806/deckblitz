@@ -422,6 +422,10 @@ export interface CardFilter {
    * spell (rule 722.3c, `GameObject.preparedSpell`) — "whenever you cast a
    * prepared spell" (Codie, Ravenous Codex). */
   readonly preparedSpell?: boolean;
+  /** Is (or isn't) a card that has an Adventure (rule 715.2a) — Edgewall
+   * Inn's "target card that has an Adventure", Howling Galefang's "a card in
+   * exile that has an Adventure". */
+  readonly hasAdventure?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1181,6 +1185,13 @@ export function matchesFilter(
     if (prepared !== filter.prepared) return false;
   }
   if (filter.preparedSpell !== undefined && (live?.preparedSpell === true) !== filter.preparedSpell) return false;
+  if (filter.hasAdventure !== undefined) {
+    // "A card that has an Adventure" (rule 715.2a): an adventurer card, in any
+    // zone, by its printed definition — both its faces carry `adventure`.
+    const name = live !== undefined ? printedCardName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).adventure;
+    if (has !== filter.hasAdventure) return false;
+  }
   if (filter.faceDown !== undefined) {
     const down = live !== undefined ? live.faceDown !== undefined : lki?.faceDown === true;
     if (down !== filter.faceDown) return false;

@@ -105,6 +105,7 @@ import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
 import _poolEbonStronghold from "../pool/ebon-stronghold.js";
 import _poolEchoingAssault from "../pool/echoing-assault.js";
 import _poolEcologistsTerrarium from "../pool/ecologists-terrarium.js";
+import _poolEdgewallInn from "../pool/edgewall-inn.js";
 import _poolEdwardKenway from "../pool/edward-kenway.js";
 import _poolElderOwynLyons from "../pool/elder-owyn-lyons.js";
 import _poolEldraziDisplacer from "../pool/eldrazi-displacer.js";
@@ -556,6 +557,7 @@ const shard: CardShard = {
     _poolEbonStronghold,
     _poolEchoingAssault,
     _poolEcologistsTerrarium,
+    _poolEdgewallInn,
     _poolEdwardKenway,
     _poolElderOwynLyons,
     _poolEldraziDisplacer,

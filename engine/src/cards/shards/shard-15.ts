@@ -22,6 +22,7 @@ import _poolArcboundWhelp from "../pool/arcbound-whelp.js";
 import _poolAresGodOfWar from "../pool/ares-god-of-war.js";
 import _poolArgivianFind from "../pool/argivian-find.js";
 import _poolArmorWars from "../pool/armor-wars.js";
+import _poolArmoryMice from "../pool/armory-mice.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
@@ -459,6 +460,7 @@ const shard: CardShard = {
     _poolAresGodOfWar,
     _poolArgivianFind,
     _poolArmorWars,
+    _poolArmoryMice,
     _poolArtisanOfKozilek,
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,

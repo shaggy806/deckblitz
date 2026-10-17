@@ -34,6 +34,7 @@ import _poolBasilicaGuards from "../pool/basilica-guards.js";
 import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
+import _poolBelligerentOfTheBall from "../pool/belligerent-of-the-ball.js";
 import _poolBerserkersOfBloodRidge from "../pool/berserkers-of-blood-ridge.js";
 import _poolBigMotherMouser from "../pool/big-mother-mouser.js";
 import _poolBlackLotus from "../pool/black-lotus.js";
@@ -281,6 +282,7 @@ import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
 import _poolPestInfestation from "../pool/pest-infestation.js";
 import _poolPestilentKathari from "../pool/pestilent-kathari.js";
+import _poolPestsOfHonor from "../pool/pests-of-honor.js";
 import _poolPettyRevenge from "../pool/petty-revenge.js";
 import _poolPharikasChosen from "../pool/pharikas-chosen.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
@@ -512,6 +514,7 @@ const shard: CardShard = {
     _poolBattlemagesBracers,
     _poolBeaconOfUnrest,
     _poolBehindTheScenes,
+    _poolBelligerentOfTheBall,
     _poolBerserkersOfBloodRidge,
     _poolBigMotherMouser,
     _poolBlackLotus,
@@ -759,6 +762,7 @@ const shard: CardShard = {
     _poolPerennialBehemoth,
     _poolPestInfestation,
     _poolPestilentKathari,
+    _poolPestsOfHonor,
     _poolPettyRevenge,
     _poolPharikasChosen,
     _poolPhyrexianJuggernaut,

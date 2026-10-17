@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, enter, lands, pickModes, pickTargets, pt, ref, settle, spawn, table, toGraveyard, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, enter, keywords, lands, pickModes, pickTargets, pt, ref, settle, spawn, table, toExile, toGraveyard, toHand, toStep, zone } from "./harness.js";
 
 const rolesOn = (game: Game, host: ObjectId): string[] =>
   game.state.zones.shared.battlefield
@@ -136,6 +136,44 @@ describe("Wilds of Eldraine batch 1: Roles", () => {
       pickTargets(a, bears);
       enter(game, "Charming Scoundrel");
       expect(rolesOn(game, bears)).toEqual(["Wicked Role Token"]);
+    });
+  });
+
+  describe("'has an Adventure' (rule 715.2a)", () => {
+    it("Edgewall Inn: only a card that has an Adventure can be returned", () => {
+      const { game } = table();
+      const inn = spawn(game, "Edgewall Inn");
+      const adventurer = toGraveyard(game, "Ferocious Werefox");
+      const plain = toGraveyard(game, "Grizzly Bears");
+      lands(game, "Forest", 3);
+      game.state.objects[inn].tapped = false;
+      const activation = (card: ObjectId) =>
+        ({ type: "activate-ability", player: A, source: inn, abilityIndex: 1, targets: [ref(card)] }) as const;
+      expect(game.canDispatch(activation(plain))).not.toBeNull();
+      expect(game.canDispatch(activation(adventurer))).toBeNull();
+      game.dispatch(activation(adventurer));
+      settle(game);
+      expect(zone(game, adventurer)).toBe("hand");
+    });
+
+    it("Howling Galefang: haste only while you own an exiled card that has an Adventure", () => {
+      const { game } = table();
+      const galefang = spawn(game, "Howling Galefang");
+      expect(keywords(game, galefang).has("haste")).toBe(false);
+      toExile(game, "Grizzly Bears");
+      expect(keywords(game, galefang).has("haste")).toBe(false);
+      toExile(game, "Ferocious Werefox");
+      expect(keywords(game, galefang).has("haste")).toBe(true);
+    });
+
+    it("Hearth Elemental: {1} less for each instant, sorcery or adventurer card in your graveyard", () => {
+      const { game } = table();
+      toGraveyard(game, "Opt");
+      toGraveyard(game, "Ferocious Werefox");
+      toGraveyard(game, "Grizzly Bears");
+      lands(game, "Mountain", 4);
+      cast(game, toHand(game, "Hearth Elemental"));
+      expect(game.state.zones.shared.battlefield.some((id) => game.state.objects[id].cardName === "Hearth Elemental")).toBe(true);
     });
   });
 });

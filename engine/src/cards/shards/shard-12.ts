@@ -285,6 +285,7 @@ import _poolPullUnder from "../pool/pull-under.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
+import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
 import _poolRamosDragonEngine from "../pool/ramos-dragon-engine.js";
 import _poolRatOut from "../pool/rat-out.js";
@@ -728,6 +729,7 @@ const shard: CardShard = {
     _poolPyroceratops,
     _poolRabbitResponse,
     _poolRageIntoTheValley,
+    _poolRagingBattleMouse,
     _poolRaidersWake,
     _poolRamosDragonEngine,
     _poolRatOut,
