@@ -35,11 +35,12 @@ that one card is the reason the deck exists. Live numbers for everything below c
   attached to a player, or moved to an opponent); attaching one to a player is built
   (`attachPermanent` takes a player), but `attachedTo` on a card entering names only a
   permanent so far.
-- **Most-needed features overall** (commanders needing each): `cost:sacrifice-multiple`,
-  `effect:missing-tokens`, `effect:cast-during-resolution` (5 each), then
-  `decision:variable-target-count`, `decision:choose-permanent`,
-  `replacement:mana-pool-emptying` (4 each), `decision:choose-from-zone-extensions` and
-  `effect:attach-extensions` (3 each, after part one of each — `COMPLETED.md`). Orvar needs `decision:choose-permanent` and
+- **Most-needed features overall** (commanders needing each, 2026-10-16 after the backlog pass that
+  built parts of the five-commander features — `COMPLETED.md`): `decision:variable-target-count`,
+  `decision:choose-permanent`, `replacement:mana-pool-emptying` (4 each), then
+  `decision:manual-payment-choices`, `decision:choose-from-zone-extensions` (Winter's "a permanent
+  card from among them onto the battlefield with a finality counter"), `zone:visibility-extensions`,
+  `effect:attach-extensions` and `effect:divide-among-targets` (3 each). Orvar needs `decision:choose-permanent` and
   `trigger:discards-extensions`. Ulalek needs `cost:colorless-hybrid-mana` and `keyword:devoid`.
 - **UI-bound features.** These need a new client decision and a browser check:
   `effect:cast-during-resolution` (what's left after the `cast-now` effect is in its
@@ -62,10 +63,10 @@ section keeps only what to do next.
   leading features built alongside in worktrees. The nine other starter precons' 29 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. Leading now
-  (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked):
-  `effect:attach-extensions` (22, 15), `decision:variable-target-count` (18, 15),
-  `cost:remove-counters-from-chosen` (18, 11), `zone:graveyard-cast-permissions` (16, 10),
-  `mechanic:rad-counters` (15, 13), `effect:effect-on-enchanted-permanent` (14, 12). Its
+  (`npm run cards:needs -w engine -- --rank`, cards waiting and fully unblocked, 2026-10-16):
+  `cost:remove-counters-from-chosen` (21, 14), `effect:effect-on-enchanted-permanent` (21, 16),
+  `decision:variable-target-count` (19, 15), `decision:owner-chooses-top-or-bottom` (19, 18),
+  `effect:attach-extensions` (18, 11), `zone:graveyard-cast-permissions` (16, 10). Its
   sibling `cost:remove-counter-any-kind` ("Remove a counter from this creature", any kind — 9,
   seven of them Lorwyn Eclipsed's) needs the player to choose which counters when there are
   several kinds, so it's a new decision; build the two together. Also at five now:

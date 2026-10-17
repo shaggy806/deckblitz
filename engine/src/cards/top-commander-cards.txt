@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3666 already implemented / 1334 missing (marks refreshed 2026-10-16)
+3674 already implemented / 1326 missing (marks refreshed 2026-10-17)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -799,7 +799,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   803  Gilded Goose                             {G}              Creature — Bird
 [ ]   804  Urza, Lord High Artificer                {2}{U}{U}        Legendary Creature — Human Artificer
 [x]   805  Flowering of the White Tree              {W}{W}           Legendary Enchantment
-[ ]   806  Etali, Primal Conqueror // Etali, Primal Sickness {7}              Legendary Creature — Elder Dinosaur // Legendary Creature — Phyrexian Elder Dinosaur
+[x]   806  Etali, Primal Conqueror // Etali, Primal Sickness {7}              Legendary Creature — Elder Dinosaur // Legendary Creature — Phyrexian Elder Dinosaur
 [x]   807  Clearwater Pathway // Murkwater Pathway  {0}              Land // Land
 [x]   808  Sky Diamond                              {2}              Artifact
 [x]   809  Steel Overseer                           {2}              Artifact Creature — Construct
@@ -1040,7 +1040,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1044  Apex Devastator                          {8}{G}{G}        Creature — Chimera Hydra
 [ ]  1045  Charismatic Conqueror                    {1}{W}           Creature — Vampire Soldier
 [ ]  1046  Wayward Swordtooth                       {2}{G}           Creature — Dinosaur
-[ ]  1047  Chatterfang, Squirrel General            {2}{G}           Legendary Creature — Squirrel Warrior
+[x]  1047  Chatterfang, Squirrel General            {2}{G}           Legendary Creature — Squirrel Warrior
 [x]  1048  Willowrush Verge                         {0}              Land
 [x]  1049  Syphon Mind                              {3}{B}           Sorcery
 [x]  1050  Roiling Regrowth                         {2}{G}           Instant
@@ -1679,7 +1679,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1686  Foreboding Landscape                     {0}              Land
 [x]  1687  Talion, the Kindly Lord                  {2}{U}{B}        Legendary Creature — Faerie Noble
 [x]  1688  Shore Up                                 {U}              Instant
-[ ]  1689  Ardenn, Intrepid Archaeologist           {2}{W}           Legendary Creature — Kor Scout
+[x]  1689  Ardenn, Intrepid Archaeologist           {2}{W}           Legendary Creature — Kor Scout
 [x]  1690  Gift of the Viper                        {G}              Instant
 [ ]  1691  Praetor's Grasp                          {1}{B}{B}        Sorcery
 [x]  1692  Felidar Guardian                         {3}{W}           Creature — Cat Beast
@@ -3009,7 +3009,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3016  Sazh's Chocobo                           {G}              Creature — Bird
 [ ]  3017  Xantcha, Sleeper Agent                   {1}{B}{R}        Legendary Creature — Phyrexian Minion
 [x]  3018  Youthful Valkyrie                        {1}{W}           Creature — Angel
-[ ]  3019  Tiamat                                   {2}{W}{U}{B}{R}{G} Legendary Creature — Dragon God
+[x]  3019  Tiamat                                   {2}{W}{U}{B}{R}{G} Legendary Creature — Dragon God
 [x]  3020  Time Stretch                             {8}{U}{U}        Sorcery
 [ ]  3021  Marauding Raptor                         {1}{R}           Creature — Dinosaur
 [x]  3022  Robe of Stars                            {1}{W}           Artifact — Equipment
@@ -3100,7 +3100,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3107  Zombie Apocalypse                        {3}{B}{B}{B}     Sorcery
 [x]  3108  Nesting Dovehawk                         {3}{W}           Creature — Bird
 [ ]  3109  Necrogoyf                                {3}{B}{B}        Creature — Lhurgoyf
-[ ]  3110  Light-Paws, Emperor's Voice              {1}{W}           Legendary Creature — Fox Advisor
+[x]  3110  Light-Paws, Emperor's Voice              {1}{W}           Legendary Creature — Fox Advisor
 [x]  3111  Ziatora, the Incinerator                 {3}{B}{R}{G}     Legendary Creature — Demon Dragon
 [ ]  3112  Iron Spider, Stark Upgrade               {3}              Legendary Artifact Creature — Spider Hero
 [x]  3113  Reshape                                  {X}{U}{U}        Sorcery
@@ -4019,7 +4019,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4026  Tarrian's Journal // The Tomb of Aclazotz {2}              Legendary Artifact — Book // Legendary Land — Cave
 [x]  4027  Contaminant Grafter                      {4}{G}           Creature — Phyrexian Druid
 [x]  4028  Hydra Omnivore                           {4}{G}{G}        Creature — Hydra
-[ ]  4029  Unfinished Business                      {3}{W}{W}        Sorcery
+[x]  4029  Unfinished Business                      {3}{W}{W}        Sorcery
 [ ]  4030  Empowered Autogenerator                  {4}              Artifact
 [x]  4031  Baloth Prime                             {3}{G}           Creature — Beast
 [x]  4032  Virus Beetle                             {1}{B}           Artifact Creature — Insect
@@ -4427,7 +4427,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4434  Light of Promise                         {2}{W}           Enchantment — Aura
 [x]  4435  Caldera Pyremaw                          {3}{R}{R}        Creature — Dragon
 [ ]  4436  Legion Loyalist                          {R}              Creature — Goblin Soldier
-[ ]  4437  Kastral, the Windcrested                 {3}{W}{U}        Legendary Creature — Bird Scout
+[x]  4437  Kastral, the Windcrested                 {3}{W}{U}        Legendary Creature — Bird Scout
 [x]  4438  Desert of the Glorified                  {0}              Land — Desert
 [x]  4439  Queen Brahne                             {2}{R}           Legendary Creature — Human Noble
 [x]  4440  Urza, Prince of Kroog                    {2}{W}{U}        Legendary Creature — Human Artificer
@@ -4746,7 +4746,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4753  Wulfgar of Icewind Dale                  {3}{R}{G}        Legendary Creature — Human Barbarian
 [ ]  4754  Season of Loss                           {3}{B}{B}        Sorcery
 [x]  4755  Quandrix Campus                          {0}              Land
-[ ]  4756  Danitha, Benalia's Hope                  {4}{W}           Legendary Creature — Human Knight
+[x]  4756  Danitha, Benalia's Hope                  {4}{W}           Legendary Creature — Human Knight
 [x]  4757  Saruman's Trickery                       {1}{U}{U}        Instant
 [ ]  4758  Deekah, Fractal Theorist                 {4}{U}           Legendary Creature — Human Wizard
 [ ]  4759  Component Pouch                          {3}              Artifact
