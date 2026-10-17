@@ -3,6 +3,8 @@ import type { CSSProperties } from 'react'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
 import { cssUrl, resolveArtUrl } from '../ui/art.ts'
+import { ArtCredit } from '../ui/ArtCredit.tsx'
+import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { CornerToolbar } from '../ui/CornerToolbar.tsx'
 import { BlitzPanel } from './BlitzPanel.tsx'
 import './landing.css'
@@ -284,6 +286,12 @@ export function LandingScreen({
           </button>
         ) : null}
       </nav>
+
+      {/* The Fan Content Policy notice, and the hero art's credit (an art
+          crop, which Scryfall asks to be credited where it's shown). */}
+      <SiteNotice>
+        {HERO_CARD} art: <ArtCredit art={PINNED_ART[HERO_CARD]} name={HERO_CARD} className="landing-hero-credit" />
+      </SiteNotice>
 
       <BlitzPanel game={game} />
 

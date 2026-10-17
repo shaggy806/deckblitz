@@ -241,6 +241,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **What the site discloses under Wizards' Fan Content Policy** (the user, 2026-10-11): the
+  policy's notice in a footer on the landing page, library and deck builder, an About & legal page
+  (`/about`, linked from the Game menu too), and the artist credit Scryfall asks for beside art
+  crops — "Illus. {artist} · ™ & © Wizards of the Coast" on the hover card, the lobby's commander
+  art and the landing hero (`ui/artistCredit.ts`). The analysis and what's left is
+  `docs/plans/fan-content-policy.md` (2026-10-16).
 - **The library page's "Tokens" checkbox is gone** (the user's call): tokens stay out of the gallery; a `?card=` link to one still shows them, until Clear (2026-10-16).
 - **The game page on a slow laptop, mostly**: the laptop runs a blitz at ~55-57 fps with 2-20
   short freezes a minute (was ~42 fps, ~120, worst 762 ms), the same with the bots in the page

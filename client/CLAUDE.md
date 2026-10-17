@@ -16,8 +16,8 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   or the whole pool (`loadCardPool`/`cardPool()`) for the library and deck builder, which are
   lazy chunks. The game page holds no card definitions: everything it plays comes in the
   server's views.
-- **Three pages branch on path in `main.tsx`**: `/library`, `/deck-builder`, and everything else
-  → `App` (the game). The network-free pages never open the WebSocket.
+- **Four pages branch on path in `main.tsx`**: `/library`, `/deck-builder`, `/about`, and
+  everything else → `App` (the game). The network-free pages never open the WebSocket.
 - **Draw from `usePlayback`'s `shown` view, never `game.view`.** They differ while an animation
   runs. Frames play one at a time (`game/usePlayback.ts`), and `Table` remounts per frame shown,
   so state that must survive a frame lives in `GameScreen`.

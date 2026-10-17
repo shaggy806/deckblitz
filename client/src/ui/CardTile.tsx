@@ -8,6 +8,7 @@ import { stripReminders } from './textKeywords.ts'
 import { CardFlags } from './CardFlags.tsx'
 import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
+import { ArtCredit } from './ArtCredit.tsx'
 import {
   isArtBlocked,
   isArtPending,
@@ -400,6 +401,13 @@ export function CardTile({
             used to land on its second line. */}
         {badge ? <span className="card-badge">{badge}</span> : null}
         {aimedBy !== null ? <TargetedMark by={aimedBy} /> : null}
+        {/* The illustrator and copyright along the foot of the art: the
+            credit Scryfall asks for beside an art crop (artistCredit.ts).
+            Not on the hand's compact cards — hovering one shows this card,
+            credit and all. */}
+        {!artFirst && faceDown === null ? (
+          <ArtCredit art={obj.art} name={face} backFace={obj.faceIsBack} className="ct-credit" />
+        ) : null}
       </span>
 
       {artFirst ? <span className="ct-name-row">{nameNode}</span> : null}

@@ -1,0 +1,55 @@
+/* The Fan Content Policy footer (SiteNotice) and the About page. */
+
+.site-notice {
+  max-width: min(92vw, 56rem);
+  margin: clamp(1rem, 3vh, 2rem) auto 0;
+  padding: 0 clamp(0.75rem, 2vw, 1.25rem);
+  font-size: clamp(0.62rem, 0.55rem + 0.25vw, 0.75rem);
+  line-height: 1.5;
+  color: var(--muted-dim);
+  text-align: center;
+}
+.site-notice p {
+  margin: 0;
+}
+.site-notice-credit {
+  margin-bottom: 0.25em !important;
+}
+.site-notice a {
+  color: var(--muted);
+}
+.site-notice a:hover {
+  color: var(--accent);
+}
+
+.about-page {
+  max-width: min(92vw, 44rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vh, 3rem) clamp(1rem, 3vw, 2rem);
+  color: var(--text);
+  line-height: 1.6;
+}
+.about-page h1 {
+  margin: 0.5em 0 0.75em;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
+  letter-spacing: 0.03em;
+}
+.about-page h2 {
+  margin: 1.5em 0 0.4em;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+  letter-spacing: 0.03em;
+  color: var(--accent);
+}
+.about-page p {
+  margin: 0 0 0.75em;
+  color: var(--muted);
+}
+.about-page a {
+  color: var(--accent);
+}
+.about-home {
+  font-size: 0.9rem;
+  text-decoration: none;
+}

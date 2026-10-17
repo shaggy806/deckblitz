@@ -295,6 +295,16 @@
   border-color: var(--bad);
   color: var(--bad);
 }
+/* "About & legal": a quiet link under the menu's buttons. */
+.seat-menu-link {
+  padding: 2px 4px;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-align: center;
+}
+.seat-menu-link:hover {
+  color: var(--accent);
+}
 /* A history entry can be clicked to point its cards out on the board. */
 .event-log .ev.selectable {
   cursor: pointer;
@@ -2770,6 +2780,24 @@
 .ct-kw {
   color: #cbb26a;
   font-weight: 700;
+}
+/* The illustrator and copyright (`ArtCredit`) along the foot of the art, on
+   a dark fade so it reads over any illustration: the credit Scryfall's
+   guidelines ask for beside an art crop. Under the badges (z-index 2); it
+   wraps rather than cutting the copyright off a narrow card. */
+.ct-credit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: calc(6px * var(--ct-scale, 1)) calc(4px * var(--ct-scale, 1)) calc(2px * var(--ct-scale, 1));
+  font-size: calc(6.5px * var(--ct-scale, 1));
+  line-height: 1.25;
+  color: #ece9e2;
+  text-shadow: 0 0 2px #000;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.72));
+  pointer-events: none;
 }
 /* An Adventure or Omen half (`VisibleObject.spellFace`): its own small block
    at the top of the text box, set off from the creature's text below it. */

@@ -24,6 +24,8 @@
  * rare, one-off overrides, not worth batching).
  */
 
+import { noteArtists } from './artistCredit.ts'
+
 export type ArtVersion = 'art_crop' | 'normal' | 'large' | 'png'
 
 /** `Math.min(1000 * 2 ** attempt, 20000)` — shared backoff curve for both the
@@ -232,6 +234,8 @@ function storeImages(name: string | undefined, images: ScryfallImageUris | undef
 }
 
 function applyCard(card: ScryfallCollectionCard): void {
+  // The same printing's artist, for the art-crop credit (artistCredit.ts).
+  noteArtists(card)
   const primary = card.image_uris ?? card.card_faces?.[0]?.image_uris
   storeImages(card.name, primary)
   storeImages(card.flavor_name, primary)

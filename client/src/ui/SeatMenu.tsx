@@ -154,6 +154,11 @@ export function SeatMenu({
           <button type="button" onClick={() => window.location.assign('/')}>
             Leave the room
           </button>
+          {/* The Fan Content Policy notice and credits, in a tab of its own
+              so the game isn't left. */}
+          <a className="seat-menu-link" href="/about" target="_blank" rel="noreferrer">
+            About &amp; legal
+          </a>
         </div>
       ) : null}
     </div>

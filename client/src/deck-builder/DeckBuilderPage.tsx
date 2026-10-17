@@ -21,6 +21,7 @@ import { ReplacementReview } from './ReplacementReview.tsx'
 import { StableLabel } from '../ui/StableLabel.tsx'
 import { CONFIDENCE_LABEL } from './replacement-labels.ts'
 import './deck-builder.css'
+import { SiteNotice } from '../legal/SiteNotice.tsx'
 
 type Selection = { readonly kind: 'saved'; readonly id: string } | { readonly kind: 'starter'; readonly index: number } | null
 
@@ -258,6 +259,7 @@ export function DeckBuilderPage() {
         ) : (
           <p className="muted db-prompt">Pick a deck on the left, or start a new one.</p>
         )}
+        <SiteNotice />
       </main>
     </div>
   )

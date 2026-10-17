@@ -3,6 +3,7 @@ import type { ComponentType, ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { AboutPage } from './legal/AboutPage.tsx'
 import { loadCardPool } from './cards/cardData.ts'
 import { PoolLoadBoundary, PoolLoading } from './cards/PoolLoading.tsx'
 import { clickButtons } from './game/sound.ts'
@@ -42,8 +43,8 @@ const poolPage = (page: ReactNode, coachPage: PageId) => (
   </PoolLoadBoundary>
 )
 
-// The public card library and the deck builder are both separate, network-
-// free pages (no room/seat/WebSocket at all) -- branching here, before
+// The public card library, the deck builder and the About page are separate,
+// network-free pages (no room/seat/WebSocket at all) -- branching here, before
 // `<App/>` is chosen, means `useNetworkGame`'s eager WebSocket connection
 // (see `client/src/net/useNetworkGame.ts`) never opens for these routes.
 const path = window.location.pathname
@@ -51,7 +52,9 @@ const page = path.startsWith('/library')
   ? poolPage(<LibraryPage />, 'library')
   : path.startsWith('/deck-builder')
     ? poolPage(<DeckBuilderPage />, 'deck-builder')
-    : <App />
+    : path.startsWith('/about')
+      ? <AboutPage />
+      : <App />
 
 // Every button on every page clicks.
 clickButtons()

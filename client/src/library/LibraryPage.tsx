@@ -17,6 +17,7 @@ import { cardPool } from '../cards/cardData.ts'
 import { fetchMorePrintings, fetchPrintings } from '../deck-builder/printings.ts'
 import type { Printing, PrintingPage } from '../deck-builder/printings.ts'
 import { CardImage } from '../ui/CardImage.tsx'
+import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { Symbols } from '../ui/Symbols.tsx'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
 import type { SetCards, SetInfo, SetPrinting } from './setFilter.ts'
@@ -650,6 +651,7 @@ export function LibraryPage() {
             ) : null}
           </>
         )}
+        <SiteNotice />
       </main>
 
       {selected ? (

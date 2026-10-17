@@ -140,9 +140,11 @@ where the decision is raised); bots and the fuzzer answer it already.
   forced-layout call stacks) on a `vite preview` build, mapped through a `vite build
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
-- **What the site must disclose under Wizards' fan content rules** (the user, 2026-10-11).
-  Analyze what deckblitz.net has to display to comply with WotC's copyright rules (the Fan Content
-  Policy): the required notices and attribution, and where on the site they go.
+- **Fan content: two calls for the user** (2026-10-16). The notice and art credits are built
+  (`docs/plans/fan-content-policy.md`). Left: `client/public/menu-backdrop.webp` is a grid of card
+  images Gaussian-blurred at build time, against Scryfall's "do not blur card images" — rebuild it
+  unblurred or replace it; and "MTG" in "MTG Deck Blitz" is a Wizards trademark the policy says not
+  to use without permission.
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12).
   The plan is `docs/plans/tutorials.md`: a coach-mark overlay (`client/src/tutorial/`, `data-tour`
   anchors, progress in `localStorage`, a "?" button in the corner toolbar), and a production-safe
