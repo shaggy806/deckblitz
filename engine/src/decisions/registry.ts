@@ -29,6 +29,7 @@ import { legendRule } from "./legend-rule.js";
 import { orderTriggers } from "./order-triggers.js";
 import { proliferate } from "./proliferate.js";
 import { splitMana } from "./split-mana.js";
+import { timeTravel } from "./time-travel.js";
 import { chooseCreatureType } from "./choose-creature-type.js";
 import { chooseModes } from "./choose-modes.js";
 import { chooseFromZone } from "./choose-from-zone.js";
@@ -57,6 +58,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   "order-triggers": orderTriggers,
   proliferate,
   "split-mana": splitMana,
+  "time-travel": timeTravel,
   "choose-creature-type": chooseCreatureType,
   "choose-modes": chooseModes,
   "choose-from-zone": chooseFromZone,

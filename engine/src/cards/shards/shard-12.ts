@@ -366,6 +366,7 @@ import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
 import _poolTerritoryCuller from "../pool/territory-culler.js";
 import _poolThassasIntervention from "../pool/thassas-intervention.js";
 import _poolTheArkenstone from "../pool/the-arkenstone.js";
+import _poolTheFifthDoctor from "../pool/the-fifth-doctor.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
@@ -806,6 +807,7 @@ const shard: CardShard = {
     _poolTerritoryCuller,
     _poolThassasIntervention,
     _poolTheArkenstone,
+    _poolTheFifthDoctor,
     _poolTheGreyHavens,
     _poolTheLordOfPain,
     _poolTheMycosynthGardens,

@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Doctor Who, whole** (batch 93): 73 of 159 cards — the 144 left in the set and 15 older
+  time-counter cards — with time travel (rule 701.56, a new player decision), vanishing (702.63)
+  and cards gaining suspend (702.62b) built; a suspended card's last time counter coming off by
+  any means now offers its play, land faces included (2026-10-17).
 - **The Lost Caverns of Ixalan and its Commander set, both whole** (batch 92): 136 of 189 cards —
   the 165 left in the two sets and 24 older explore, discover and craft cards — with explore, Map
   tokens, discover and craft built (2026-10-16).

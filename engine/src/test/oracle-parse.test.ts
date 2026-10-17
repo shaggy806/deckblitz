@@ -1041,6 +1041,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(frog.complete).toBe(true);
   });
 
+  it("vanishing N (rule 702.63a) and time travel (rule 701.56a)", () => {
+    const knocks = face(
+      "Vanishing 4 (This enchantment enters with four time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)",
+      "Enchantment",
+    );
+    expect(knocks.static).toMatchObject([
+      { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "time", amount: 4 } } },
+    ]);
+    expect(knocks.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "step-begins", step: "upkeep", who: "you" },
+      { on: "counters-removed", who: "self", counter: "time", last: true },
+    ]);
+    expect(knocks.complete).toBe(true);
+    expect(parseSentence("Time travel.")).toEqual({ kind: "time-travel" });
+  });
+
   it("'put its counters on …' of a permanent that left (rule 122.8), and 'if it had counters on it'", () => {
     // Its own: the source, the intervening if on its counters as it died.
     const apprentice = face(

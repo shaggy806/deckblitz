@@ -174,6 +174,7 @@ import _poolIvyLaneDenizen from "../pool/ivy-lane-denizen.js";
 import _poolIxallisLorekeeper from "../pool/ixallis-lorekeeper.js";
 import _poolIzzetCharm from "../pool/izzet-charm.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
+import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
@@ -364,6 +365,7 @@ import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
+import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
@@ -639,6 +641,7 @@ const shard: CardShard = {
     _poolIxallisLorekeeper,
     _poolIzzetCharm,
     _poolJagwaspSwarm,
+    _poolJamieMccrimmon,
     _poolJiangYangguNeverAlone,
     _poolJodahTheUnifier,
     _poolJyotiMoagAncient,
@@ -829,6 +832,7 @@ const shard: CardShard = {
     _poolTheEarthCrystal,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
+    _poolTheTenthDoctor,
     _poolTheWaspJanetVanDyne,
     _poolThirstingRoots,
     _poolThistledownPlayers,

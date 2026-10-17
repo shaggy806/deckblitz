@@ -197,6 +197,7 @@ import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKamahlPitFighter from "../pool/kamahl-pit-fighter.js";
 import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
+import _poolKangPrime from "../pool/kang-prime.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
 import _poolKickoffCelebrations from "../pool/kickoff-celebrations.js";
@@ -239,6 +240,7 @@ import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
+import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNestRobber from "../pool/nest-robber.js";
@@ -353,6 +355,7 @@ import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
+import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
 import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
@@ -631,6 +634,7 @@ const shard: CardShard = {
     _poolKadenaSlinkingSorcerer,
     _poolKamahlPitFighter,
     _poolKambalProfiteeringMayor,
+    _poolKangPrime,
     _poolKeyToTheCity,
     _poolKeysToTheHouse,
     _poolKickoffCelebrations,
@@ -673,6 +677,7 @@ const shard: CardShard = {
     _poolMomentOfTriumph,
     _poolMonkIdealist,
     _poolMountainValley,
+    _poolNardoleResourcefulCyborg,
     _poolNayaPanorama,
     _poolNemaSiltlurker,
     _poolNestRobber,
@@ -787,6 +792,7 @@ const shard: CardShard = {
     _poolThaumaturgesFamiliar,
     _poolTheFalconAirshipRestored,
     _poolThePrismaticBridge,
+    _poolTheTwelfthDoctor,
     _poolThermalGlider,
     _poolThingSwing,
     _poolThreeTreeScribe,

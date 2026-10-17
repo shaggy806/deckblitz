@@ -287,6 +287,7 @@ import _poolRavenform from "../pool/ravenform.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
+import _poolRenegadeSilent from "../pool/renegade-silent.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
@@ -418,6 +419,7 @@ import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
 import _poolZuranEnchanter from "../pool/zuran-enchanter.js";
 import _tokensAlienWarriorToken from "../tokens/alien-warrior-token.js";
 import _tokensAngelo from "../tokens/angelo.js";
+import _tokensDalekToken from "../tokens/dalek-token.js";
 import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
@@ -716,6 +718,7 @@ const shard: CardShard = {
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,
+    _poolRenegadeSilent,
     _poolRepeatOffender,
     _poolReputableMerchant,
     _poolRestlessRidgeline,
@@ -849,6 +852,7 @@ const shard: CardShard = {
   tokens: [
     _tokensAlienWarriorToken,
     _tokensAngelo,
+    _tokensDalekToken,
     _tokensFoxToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,

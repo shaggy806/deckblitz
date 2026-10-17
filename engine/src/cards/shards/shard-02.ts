@@ -20,6 +20,7 @@ import _poolArmoredArmadillo from "../pool/armored-armadillo.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
 import _poolArtisticRefusal from "../pool/artistic-refusal.js";
+import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAvenEnvoy from "../pool/aven-envoy.js";
@@ -198,6 +199,7 @@ import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
+import _poolKateStewart from "../pool/kate-stewart.js";
 import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
 import _poolKessigRecluse from "../pool/kessig-recluse.js";
@@ -371,6 +373,7 @@ import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
 import _poolTidespoutTyrant from "../pool/tidespout-tyrant.js";
+import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
@@ -448,6 +451,7 @@ const shard: CardShard = {
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,
     _poolArtisticRefusal,
+    _poolAshadTheLoneCyberman,
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
     _poolAvenEnvoy,
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolJundBattlemage,
     _poolKaaliaOfTheVast,
     _poolKaraiFutureOfTheFoot,
+    _poolKateStewart,
     _poolKavaronHarrier,
     _poolKeepersOfTheFaith,
     _poolKessigRecluse,
@@ -799,6 +804,7 @@ const shard: CardShard = {
     _poolThroatSlitter,
     _poolThrummingHivepool,
     _poolTidespoutTyrant,
+    _poolTimeLordRegeneration,
     _poolTomikWielderOfLaw,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,

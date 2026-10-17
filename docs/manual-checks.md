@@ -4894,3 +4894,21 @@ creatures to keep, from none to two
 - **Check:** You're asked to choose up to 2 to keep, the rest sacrificed, strongest listed first; Confirm
   works with none, one or two chosen, and exactly the unchosen ones go to your graveyard. Check at
   ~768px tall, in a 2- and a 4-player room.
+
+## Doctor Who: time travel (2026-10-17)
+
+### Wibbly-wobbly, Timey-wimey (time travel)
+
+*New player decision* — time travel (rule 701.56a): for each permanent you control with a time
+counter and each suspended card you own, add one, remove one, or neither, as one answer
+
+- **Setup:** Your precombat main. Your battlefield: Four Knocks with 2 time counters, Rotating
+  Fireplace with 1, two Islands and a Mountain; in hand Rift Bolt and Wibbly-wobbly, Timey-wimey.
+  Bob has a Four Knocks with 3 time counters.
+- **Do:** Suspend Rift Bolt (its one time counter). Cast Wibbly-wobbly. With the brush on "Add a
+  counter", click Rotating Fireplace; switch to "Remove a counter" and click Four Knocks; set Rift
+  Bolt's row to −1. Confirm.
+- **Check:** Bob's Four Knocks isn't offered; the board marks your two permanents and the bar has a
+  row for the suspended Rift Bolt only. After Confirm: Rotating Fireplace has 2, Four Knocks 1, and
+  — once the draw is done — you're offered Rift Bolt's free cast. Clear and Confirm with nothing
+  picked both work. Check at ~768px tall, in a 2- and a 4-player room.

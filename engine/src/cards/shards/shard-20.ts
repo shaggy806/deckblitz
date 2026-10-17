@@ -16,6 +16,7 @@ import _poolAirbenderAscension from "../pool/airbender-ascension.js";
 import _poolAkroanHorse from "../pool/akroan-horse.js";
 import _poolAlelaArtfulProvocateur from "../pool/alela-artful-provocateur.js";
 import _poolAleshasLegacy from "../pool/aleshas-legacy.js";
+import _poolAlistairTheBrigadier from "../pool/alistair-the-brigadier.js";
 import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
@@ -409,6 +410,7 @@ import _poolTerritorialScythecat from "../pool/territorial-scythecat.js";
 import _poolTetsukoUmezawaPursuer from "../pool/tetsuko-umezawa-pursuer.js";
 import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
+import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheGreatMound from "../pool/the-great-mound.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolAkroanHorse,
     _poolAlelaArtfulProvocateur,
     _poolAleshasLegacy,
+    _poolAlistairTheBrigadier,
     _poolAmarantCoral,
     _poolAnaconda,
     _poolAncestorsProphet,
@@ -893,6 +896,7 @@ const shard: CardShard = {
     _poolTetsukoUmezawaPursuer,
     _poolTezzeretsGambit,
     _poolThaliaGuardianOfThraben,
+    _poolTheEleventhDoctor,
     _poolTheEmperorOfPalamecia,
     _poolTheGreatGoblin,
     _poolTheGreatMound,

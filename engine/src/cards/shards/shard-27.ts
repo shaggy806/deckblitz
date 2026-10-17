@@ -24,6 +24,7 @@ import _poolArtisticProcess from "../pool/artistic-process.js";
 import _poolAsphodelWanderer from "../pool/asphodel-wanderer.js";
 import _poolAssaultGriffin from "../pool/assault-griffin.js";
 import _poolAstrologiansPlanisphere from "../pool/astrologians-planisphere.js";
+import _poolAtraxiWarden from "../pool/atraxi-warden.js";
 import _poolAutomatedAssemblyLine from "../pool/automated-assembly-line.js";
 import _poolAvatarRoku from "../pool/avatar-roku.js";
 import _poolBahamutWardenOfLight from "../pool/bahamut-warden-of-light.js";
@@ -306,6 +307,7 @@ import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
+import _poolSergeantJohnBenton from "../pool/sergeant-john-benton.js";
 import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
@@ -373,6 +375,7 @@ import _poolTeysaEnvoyOfGhosts from "../pool/teysa-envoy-of-ghosts.js";
 import _poolTeysaOpulentOligarch from "../pool/teysa-opulent-oligarch.js";
 import _poolTeysaOrzhovScion from "../pool/teysa-orzhov-scion.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
+import _poolTheFlux from "../pool/the-flux.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
 import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
@@ -470,6 +473,7 @@ const shard: CardShard = {
     _poolAsphodelWanderer,
     _poolAssaultGriffin,
     _poolAstrologiansPlanisphere,
+    _poolAtraxiWarden,
     _poolAutomatedAssemblyLine,
     _poolAvatarRoku,
     _poolBahamutWardenOfLight,
@@ -752,6 +756,7 @@ const shard: CardShard = {
     _poolScuzzbackScrapper,
     _poolSeekerOfTheWay,
     _poolSentinelsEyes,
+    _poolSergeantJohnBenton,
     _poolSerraAscendant,
     _poolShamblingRemains,
     _poolShivanDevastator,
@@ -819,6 +824,7 @@ const shard: CardShard = {
     _poolTeysaOpulentOligarch,
     _poolTeysaOrzhovScion,
     _poolThantisTheWarweaver,
+    _poolTheFlux,
     _poolTheLionTurtle,
     _poolTheOddAcornGang,
     _poolTheUnderworldCookbook,

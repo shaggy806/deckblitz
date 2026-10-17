@@ -36,6 +36,7 @@ import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
+import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
@@ -113,6 +114,7 @@ import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
+import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
@@ -415,6 +417,7 @@ import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
+import _poolWilfredMott from "../pool/wilfred-mott.js";
 import _poolWillScionOfPeace from "../pool/will-scion-of-peace.js";
 import _poolWindDrake from "../pool/wind-drake.js";
 import _poolWindfall from "../pool/windfall.js";
@@ -486,6 +489,7 @@ const shard: CardShard = {
     _poolBecomeTheAvalanche,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
+    _poolBessieTheDoctorsRoadster,
     _poolBifurMelodicRider,
     _poolBigApple3AM,
     _poolBlessedOrator,
@@ -563,6 +567,7 @@ const shard: CardShard = {
     _poolDihadaBinderOfWills,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
+    _poolDoomsTimePlatform,
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
@@ -865,6 +870,7 @@ const shard: CardShard = {
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,
+    _poolWilfredMott,
     _poolWillScionOfPeace,
     _poolWindDrake,
     _poolWindfall,

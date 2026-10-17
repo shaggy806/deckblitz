@@ -7,6 +7,7 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
+import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAngelOfFlightAlabaster from "../pool/angel-of-flight-alabaster.js";
@@ -370,6 +371,7 @@ import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
+import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
 import _poolTheWanderingRescuer from "../pool/the-wandering-rescuer.js";
@@ -455,6 +457,7 @@ const shard: CardShard = {
     _poolAetherTunnel,
     _poolAjaniFellsTheGodsire,
     _poolAkoumWarrior,
+    _poolAllOfHistoryAllAtOnce,
     _poolAlmostPerfect,
     _poolAmateurHero,
     _poolAngelOfFlightAlabaster,
@@ -818,6 +821,7 @@ const shard: CardShard = {
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
+    _poolTheFugitiveDoctor,
     _poolTheSackvilleBagginses,
     _poolTheWallsOfBaSingSe,
     _poolTheWanderingRescuer,

@@ -39,7 +39,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`cost:mana-restriction-at-cast` in the gaps JSON).
 - **Suspend's time-counter triggers don't use the stack.** Rule 702.62a makes "remove a time
   counter" and "when the last is removed, you may play it" triggered abilities; `upkeepStep` does
-  both as the upkeep begins (`castSuspendedCard`), so nobody can respond between them.
+  both as the upkeep begins (`castSuspendedCard`), so nobody can respond between them. The last
+  counter taken off by an effect (time travel) is the same: the play is offered as that effect
+  finishes resolving (`pendingSuspendedCasts`, drained in `prepareForPriority`), not from the
+  stack. It also blocks cards whose own triggers work while suspended (Deep-Sea Kraken, Dinosaurs
+  on a Spaceship — `trigger:functions-while-suspended`).
 - **"Whenever a creature you control deals combat damage to that player this turn"** — a
   delayed trigger lasting the turn, keyed on a target player (Great Train Heist's third mode),
   and "if it's your combat phase" as a condition (its first). `DelayedCombatDamage` watches one

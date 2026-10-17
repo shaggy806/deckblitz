@@ -341,6 +341,16 @@ export interface PlayerController {
     amount: number,
   ): Readonly<Partial<Record<ManaType, number>>>;
   /**
+   * Time travel (rule 701.56a): of `eligible` — permanents you control and
+   * suspended cards you own, each with a time counter — the ones to put a
+   * time counter on and the ones to remove one from (disjoint; either may
+   * be empty).
+   */
+  chooseTimeTravel(
+    view: ControllerView,
+    eligible: readonly ObjectId[],
+  ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
+  /**
    * An effect is resolving that chooses permanents without targeting them
    * ("untap up to two lands"): return from `min` to `max` of `eligible`,
    * a compacted token stack named once per token.
@@ -674,6 +684,13 @@ export class AutomaticController implements PlayerController {
     return colors.length === 0 ? {} : { [colors[0]]: amount };
   }
 
+  chooseTimeTravel(
+    view: ControllerView,
+    eligible: readonly ObjectId[],
+  ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] } {
+    return defaultTimeTravel(view, eligible);
+  }
+
   choosePermanents(
     view: ControllerView,
     eligible: readonly ObjectId[],
@@ -747,6 +764,28 @@ function ownedProliferateTargets(
   );
 }
 
+/**
+ * The default time-travel answer (rule 701.56a): a suspended card one step
+ * nearer its free cast, and an impending permanent nearer to being a
+ * creature (rule 702.176a); every other permanent gets a counter — a
+ * vanishing permanent stays longer, and the cards that count their own time
+ * counters (Rotating Fireplace, Rose Tyler, The Moment) want more.
+ */
+function defaultTimeTravel(
+  view: ControllerView,
+  eligible: readonly ObjectId[],
+): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] } {
+  const add: ObjectId[] = [];
+  const remove: ObjectId[] = [];
+  for (const id of eligible) {
+    const object = view.state.objects[id];
+    if (object === undefined) continue;
+    if (object.zone === "exile" || object.castVia === "impending") remove.push(id);
+    else add.push(id);
+  }
+  return { add, remove };
+}
+
 /** A queued action, optionally gated on a condition being true. */
 export type ScriptEntry =
   | Action
@@ -817,6 +856,10 @@ type ManaSplitChooser = (
   colors: readonly ManaType[],
   amount: number,
 ) => Readonly<Partial<Record<ManaType, number>>>;
+type TimeTravelChooser = (
+  view: ControllerView,
+  eligible: readonly ObjectId[],
+) => { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
 type DamageAssigner = (
   view: ControllerView,
   assignment: {
@@ -886,6 +929,8 @@ export class ScriptedController implements PlayerController {
   /** All of the first colour, as `AutomaticController`'s. */
   chooseManaSplitFn: ManaSplitChooser = (_view, colors, amount) =>
     colors.length === 0 ? {} : { [colors[0]]: amount };
+  /** As `AutomaticController`'s (`defaultTimeTravel`). */
+  chooseTimeTravelFn: TimeTravelChooser = (view, eligible) => defaultTimeTravel(view, eligible);
   /** Your own first, up to `max` — see `ownPermanentsFirst`; under a power
    * cap, the most power that fits (`keepMostPower`). */
   choosePermanentsFn: (
@@ -1086,6 +1131,13 @@ export class ScriptedController implements PlayerController {
     amount: number,
   ): Readonly<Partial<Record<ManaType, number>>> {
     return this.chooseManaSplitFn(view, colors, amount);
+  }
+
+  chooseTimeTravel(
+    view: ControllerView,
+    eligible: readonly ObjectId[],
+  ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] } {
+    return this.chooseTimeTravelFn(view, eligible);
   }
 
   choosePermanents(

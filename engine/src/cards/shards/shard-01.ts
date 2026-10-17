@@ -65,6 +65,7 @@ import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
+import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
@@ -490,6 +491,7 @@ const shard: CardShard = {
     _poolControlMagic,
     _poolCosmicSpiderMan,
     _poolCourierHawk,
+    _poolCrisisOfConscience,
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCursedWindbreaker,

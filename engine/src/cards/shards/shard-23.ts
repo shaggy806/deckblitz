@@ -29,6 +29,7 @@ import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
 import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
+import _poolBanishToAnotherUniverse from "../pool/banish-to-another-universe.js";
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBasilicaStalker from "../pool/basilica-stalker.js";
@@ -310,10 +311,12 @@ import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
+import _poolRoryWilliams from "../pool/rory-williams.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
+import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
@@ -332,6 +335,7 @@ import _poolShilgengarSireOfFamine from "../pool/shilgengar-sire-of-famine.js";
 import _poolShimmeringGrotto from "../pool/shimmering-grotto.js";
 import _poolShinyImpetus from "../pool/shiny-impetus.js";
 import _poolSibsigAppraiser from "../pool/sibsig-appraiser.js";
+import _poolSibyllineSoothsayer from "../pool/sibylline-soothsayer.js";
 import _poolSilkNet from "../pool/silk-net.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
@@ -366,8 +370,10 @@ import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
 import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
+import _poolSusanForeman from "../pool/susan-foreman.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
+import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
 import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
@@ -384,6 +390,7 @@ import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
 import _poolTidalKraken from "../pool/tidal-kraken.js";
 import _poolTigraFelineFury from "../pool/tigra-feline-fury.js";
+import _poolTimeBeetle from "../pool/time-beetle.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolTrainedCaracal from "../pool/trained-caracal.js";
@@ -392,6 +399,7 @@ import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
+import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
 import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
 import _poolTyrranaxRex from "../pool/tyrranax-rex.js";
@@ -473,6 +481,7 @@ const shard: CardShard = {
     _poolAzoriusKnightArbiter,
     _poolBackInTown,
     _poolBalustradeWurm,
+    _poolBanishToAnotherUniverse,
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
     _poolBasilicaStalker,
@@ -754,10 +763,12 @@ const shard: CardShard = {
     _poolRimefurReindeer,
     _poolRoilingCanopy,
     _poolRooftopAssassin,
+    _poolRoryWilliams,
     _poolRotFarmMortipede,
     _poolRottedHulk,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
+    _poolSarahJaneSmith,
     _poolSarkhanFireblood,
     _poolScapeshift,
     _poolScorchedGeyser,
@@ -776,6 +787,7 @@ const shard: CardShard = {
     _poolShimmeringGrotto,
     _poolShinyImpetus,
     _poolSibsigAppraiser,
+    _poolSibyllineSoothsayer,
     _poolSilkNet,
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
@@ -810,8 +822,10 @@ const shard: CardShard = {
     _poolSunTitan,
     _poolSundialDawnTyrant,
     _poolSurtrFieryJotun,
+    _poolSusanForeman,
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
+    _poolTaigamMasterOpportunist,
     _poolTanglespanLookout,
     _poolTasseledDromedary,
     _poolTeamTransmitter,
@@ -828,6 +842,7 @@ const shard: CardShard = {
     _poolThunderingBroodwagon,
     _poolTidalKraken,
     _poolTigraFelineFury,
+    _poolTimeBeetle,
     _poolTimelineInquiry,
     _poolToriDavenantFuryRider,
     _poolTrainedCaracal,
@@ -836,6 +851,7 @@ const shard: CardShard = {
     _poolTraumaticCritique,
     _poolTravelingBotanist,
     _poolTrokinHighGuard,
+    _poolTwiceUponATime,
     _poolTwilightDrover,
     _poolTwoHeadedZombie,
     _poolTyrranaxRex,

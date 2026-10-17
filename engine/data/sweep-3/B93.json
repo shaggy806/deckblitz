@@ -1,0 +1,1136 @@
+{
+ "batch": "B93",
+ "status": "complete",
+ "ranks": "Doctor Who (WHO, 2023-10-13): the rest of the set (its top half was walked before), with time travel (rule 701.56), vanishing (702.63) and cards gaining suspend (702.62b) built — and the older cards that waited on them",
+ "authored": [
+  {
+   "name": "Ace, Fearless Rebel",
+   "files": [
+    "engine/src/cards/pool/ace-fearless-rebel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Adric, Mathematical Genius",
+   "files": [
+    "engine/src/cards/pool/adric-mathematical-genius.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Alistair, the Brigadier",
+   "files": [
+    "engine/src/cards/pool/alistair-the-brigadier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "All of History, All at Once",
+   "files": [
+    "engine/src/cards/pool/all-of-history-all-at-once.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashad, the Lone Cyberman",
+   "files": [
+    "engine/src/cards/pool/ashad-the-lone-cyberman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atraxi Warden",
+   "files": [
+    "engine/src/cards/pool/atraxi-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banish to Another Universe",
+   "files": [
+    "engine/src/cards/pool/banish-to-another-universe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bessie, the Doctor's Roadster",
+   "files": [
+    "engine/src/cards/pool/bessie-the-doctors-roadster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Clockwork Droid",
+   "files": [
+    "engine/src/cards/pool/clockwork-droid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crack in Time",
+   "files": [
+    "engine/src/cards/pool/crack-in-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crisis of Conscience",
+   "files": [
+    "engine/src/cards/pool/crisis-of-conscience.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dalek Drone",
+   "files": [
+    "engine/src/cards/pool/dalek-drone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep Forest Hermit",
+   "files": [
+    "engine/src/cards/pool/deep-forest-hermit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doom's Time Platform",
+   "files": [
+    "engine/src/cards/pool/dooms-time-platform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreamtide Whale",
+   "files": [
+    "engine/src/cards/pool/dreamtide-whale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duggan, Private Detective",
+   "files": [
+    "engine/src/cards/pool/duggan-private-detective.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ecstatic Beauty",
+   "files": [
+    "engine/src/cards/pool/ecstatic-beauty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flatline",
+   "files": [
+    "engine/src/cards/pool/flatline.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Four Knocks",
+   "files": [
+    "engine/src/cards/pool/four-knocks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frost Fair Lure Fish",
+   "files": [
+    "engine/src/cards/pool/frost-fair-lure-fish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gallifrey Stands",
+   "files": [
+    "engine/src/cards/pool/gallifrey-stands.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graham O'Brien",
+   "files": [
+    "engine/src/cards/pool/graham-obrien.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heaven Sent",
+   "files": [
+    "engine/src/cards/pool/heaven-sent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impending Flux",
+   "files": [
+    "engine/src/cards/pool/impending-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jamie McCrimmon",
+   "files": [
+    "engine/src/cards/pool/jamie-mccrimmon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jenny, Generated Anomaly",
+   "files": [
+    "engine/src/cards/pool/jenny-generated-anomaly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kang Prime",
+   "files": [
+    "engine/src/cards/pool/kang-prime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karvanista, Loyal Lupari // Lupari Shield",
+   "files": [
+    "engine/src/cards/pool/karvanista-loyal-lupari.ts",
+    "engine/src/cards/pool/lupari-shield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kate Stewart",
+   "files": [
+    "engine/src/cards/pool/kate-stewart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leela, Sevateem Warrior",
+   "files": [
+    "engine/src/cards/pool/leela-sevateem-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martha Jones",
+   "files": [
+    "engine/src/cards/pool/martha-jones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memory Worm",
+   "files": [
+    "engine/src/cards/pool/memory-worm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nardole, Resourceful Cyborg",
+   "files": [
+    "engine/src/cards/pool/nardole-resourceful-cyborg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Osgood, Operation Double",
+   "files": [
+    "engine/src/cards/pool/osgood-operation-double.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regenerations Restored",
+   "files": [
+    "engine/src/cards/pool/regenerations-restored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Silent",
+   "files": [
+    "engine/src/cards/pool/renegade-silent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Romana II",
+   "files": [
+    "engine/src/cards/pool/romana-ii.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rory Williams",
+   "files": [
+    "engine/src/cards/pool/rory-williams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rose Tyler",
+   "files": [
+    "engine/src/cards/pool/rose-tyler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rotating Fireplace",
+   "files": [
+    "engine/src/cards/pool/rotating-fireplace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ryan Sinclair",
+   "files": [
+    "engine/src/cards/pool/ryan-sinclair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sally Sparrow",
+   "files": [
+    "engine/src/cards/pool/sally-sparrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarah Jane Smith",
+   "files": [
+    "engine/src/cards/pool/sarah-jane-smith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sergeant John Benton",
+   "files": [
+    "engine/src/cards/pool/sergeant-john-benton.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sibylline Soothsayer",
+   "files": [
+    "engine/src/cards/pool/sibylline-soothsayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sisterhood of Karn",
+   "files": [
+    "engine/src/cards/pool/sisterhood-of-karn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sontaran General",
+   "files": [
+    "engine/src/cards/pool/sontaran-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Susan Foreman",
+   "files": [
+    "engine/src/cards/pool/susan-foreman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suspend",
+   "files": [
+    "engine/src/cards/pool/suspend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sycorax Commander",
+   "files": [
+    "engine/src/cards/pool/sycorax-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taigam, Master Opportunist",
+   "files": [
+    "engine/src/cards/pool/taigam-master-opportunist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tegan Jovanka",
+   "files": [
+    "engine/src/cards/pool/tegan-jovanka.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Dalek Emperor",
+   "files": [
+    "engine/src/cards/pool/the-dalek-emperor.ts",
+    "engine/src/cards/tokens/dalek-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Eleventh Doctor",
+   "files": [
+    "engine/src/cards/pool/the-eleventh-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Fifth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-fifth-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Flood of Mars",
+   "files": [
+    "engine/src/cards/pool/the-flood-of-mars.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Flux",
+   "files": [
+    "engine/src/cards/pool/the-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Fugitive Doctor",
+   "files": [
+    "engine/src/cards/pool/the-fugitive-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Master, Mesmerist",
+   "files": [
+    "engine/src/cards/pool/the-master-mesmerist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Moment",
+   "files": [
+    "engine/src/cards/pool/the-moment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Night of the Doctor",
+   "files": [
+    "engine/src/cards/pool/the-night-of-the-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Parting of the Ways",
+   "files": [
+    "engine/src/cards/pool/the-parting-of-the-ways.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Tenth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-tenth-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Third Doctor",
+   "files": [
+    "engine/src/cards/pool/the-third-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Twelfth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-twelfth-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Time Beetle",
+   "files": [
+    "engine/src/cards/pool/time-beetle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Time Lord Regeneration",
+   "files": [
+    "engine/src/cards/pool/time-lord-regeneration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traverse Eternity",
+   "files": [
+    "engine/src/cards/pool/traverse-eternity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twice Upon a Time // Unlikely Meeting",
+   "files": [
+    "engine/src/cards/pool/twice-upon-a-time.ts",
+    "engine/src/cards/pool/unlikely-meeting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wibbly-wobbly, Timey-wimey",
+   "files": [
+    "engine/src/cards/pool/wibbly-wobbly-timey-wimey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wilfred Mott",
+   "files": [
+    "engine/src/cards/pool/wilfred-mott.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wreck and Rebuild",
+   "files": [
+    "engine/src/cards/pool/wreck-and-rebuild.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yasmin Khan",
+   "files": [
+    "engine/src/cards/pool/yasmin-khan.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Ace's Baseball Bat",
+   "needs": [
+    "static:must-be-blocked-by-filter"
+   ],
+   "why": "'must be blocked by a Dalek if able' - only plain must-be-blocked-if-able exists. Also needs a while-attacking condition on the grant."
+  },
+  {
+   "name": "Adipose Offspring",
+   "needs": [
+    "keyword:emerge"
+   ],
+   "why": "Emerge isn't modelled (no pool card has it)"
+  },
+  {
+   "name": "Amy Pond",
+   "needs": [
+    "effect:remove-time-counters-chosen-suspended"
+   ],
+   "why": "\"Choose a suspended card you own and remove that many time counters from it\": a choice among suspended cards in exile, then a removal there."
+  },
+  {
+   "name": "An Unearthly Child",
+   "needs": [
+    "filter:has-doctors-companion"
+   ],
+   "why": "Reveal-until filter 'a card with doctor's companion' — no CardFilter clause reads a card's pairing."
+  },
+  {
+   "name": "Barbara Wright",
+   "needs": [
+    "keyword:read-ahead"
+   ],
+   "why": "Sagas you control have read ahead; read ahead isn't built (nor granting it)."
+  },
+  {
+   "name": "Become the Pilot",
+   "needs": [
+    "static:unblockable-unless-attacking-owner"
+   ],
+   "why": "\"can't be blocked unless it's attacking its owner or a permanent its owner controls\": no conditional unblockability by defender"
+  },
+  {
+   "name": "Bill Potts",
+   "needs": [
+    "trigger:activates-ability-targets-only-source"
+   ],
+   "why": "The activated-ability half ('activate an ability that targets only Bill Potts') — activates-ability has no target filter, and the once-each-turn limit must be shared with the spell half, so two separate triggers won't do."
+  },
+  {
+   "name": "Blink",
+   "needs": [
+    "effect:stops-being-creature"
+   ],
+   "why": "II/IV Alien Angel token's 'this token isn't a creature until end of turn' (and loses its creature types, per ruling) has no vocabulary."
+  },
+  {
+   "name": "Charnel Serenade",
+   "needs": [
+    "effect:exile-self-with-time-counters"
+   ],
+   "why": "\"Exile Charnel Serenade with three time counters on it\" as it resolves."
+  },
+  {
+   "name": "Clara Oswald",
+   "needs": [
+    "mechanic:commander-chosen-color-pregame"
+   ],
+   "why": "'If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color' — no pregame commander color choice (affects color identity too). The Doctor trigger doubler alone is doubleTriggersOf with subtype Doctor."
+  },
+  {
+   "name": "Confession Dial",
+   "needs": [
+    "effect:grant-escape-until-end-of-turn"
+   ],
+   "why": "Target legendary creature card in your graveyard gains escape (mana cost + exile three others) until end of turn — only grant-flashback exists as a one-shot grant."
+  },
+  {
+   "name": "Coward // Killer",
+   "needs": [
+    "filter:shares-creature-type-with-target"
+   ],
+   "why": "Coward's time travel is built; Killer's \"each other creature that shares a creature type with it\" needs sharesCreatureTypeWith keyed to a target slot (it reads only a trigger object)."
+  },
+  {
+   "name": "Cult of Skaro",
+   "needs": [
+    "effect:random-mode-announced"
+   ],
+   "why": "A modal triggered ability's random mode is picked as it goes on the stack (rule 700.2b); modal.random is resolution-time only."
+  },
+  {
+   "name": "Cybermat",
+   "needs": [
+    "trigger:attacks-and-isnt-blocked"
+   ],
+   "why": "No 'whenever this creature attacks and isn't blocked' trigger (only becomes-blocked / blocked-by)."
+  },
+  {
+   "name": "Dan Lewis",
+   "needs": [
+    "static:grants-static-ability"
+   ],
+   "why": "Artifacts become Equipment with 'Equipped creature gets +1/+0' and equip {1}: a static can't grant another static ability (grantsActivated exists, a granted static doesn't)."
+  },
+  {
+   "name": "Davros, Dalek Creator",
+   "needs": [
+    "condition:that-player-turn-stat"
+   ],
+   "why": "'each opponent who lost 3 or more life this turn faces a villainous choice' - turn-stat's who is only you/opponent/any-player, so the choice can't be limited to those opponents."
+  },
+  {
+   "name": "Day of the Moon",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "Choose a creature card name, then goad all creatures with any name chosen for this enchantment (names accumulated across chapters); no name choice or per-source name memory."
+  },
+  {
+   "name": "Death in Heaven",
+   "needs": [
+    "mechanic:face-down"
+   ],
+   "why": "III puts the exiled creature cards onto the battlefield face down as 2/2 Cyberman artifact creatures; nothing puts a card from exile face down with set characteristics (manifest/cloak come only from a library). Also needs the chapters' exile to be linked to the Saga."
+  },
+  {
+   "name": "Deep-Sea Kraken",
+   "needs": [
+    "trigger:functions-while-suspended"
+   ],
+   "why": "\"Whenever an opponent casts a spell, if this card is suspended, remove a time counter from it\": a trigger working from exile."
+  },
+  {
+   "name": "Dinosaurs on a Spaceship",
+   "needs": [
+    "trigger:functions-while-suspended"
+   ],
+   "why": "\"Whenever a time counter is removed from this card while it's exiled\": a trigger working from exile."
+  },
+  {
+   "name": "Don't Blink",
+   "needs": [
+    "replacement:enter-from-exile-shuffle-instead-until-eot"
+   ],
+   "why": "Until end of turn, creatures that would enter from exile or after being cast from exile are shuffled into their owners' libraries instead — no such replacement effect."
+  },
+  {
+   "name": "Donna Noble",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "Soulbond pairing isn't modeled, and the dealt-damage trigger reads 'a creature it's paired with'."
+  },
+  {
+   "name": "Doomsday Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "'Choose X. You may choose the same mode more than once' - castModal has no X mode count and no repeated modes."
+  },
+  {
+   "name": "Exterminate!",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Replicate (with a tap-an-untapped-Dalek cost) isn't modeled."
+  },
+  {
+   "name": "Flesh Duplicate",
+   "needs": [
+    "effect:copy-exceptions"
+   ],
+   "why": "Vanishing is built; the copy exception adding vanishing 3 only if the copied creature lacks vanishing isn't."
+  },
+  {
+   "name": "Fugitive of the Judoon",
+   "needs": [
+    "cost:exile-permanents-may"
+   ],
+   "why": "III: 'You may exile a Human you control and an artifact you control. If you do, ...' — no may-option exiling two distinct chosen permanents, offered only when both can be exiled."
+  },
+  {
+   "name": "Gallifrey Falls // No More",
+   "needs": [
+    "keyword:fuse"
+   ],
+   "why": "Fuse isn't modelled (AUTHORING §12)"
+  },
+  {
+   "name": "Genesis of the Daleks",
+   "needs": [
+    "effect:amount-total-power-died-this-turn"
+   ],
+   "why": "Chapter IV: 'loses life equal to the total power of Daleks that died this turn' - turnHistory counts died entries but can't sum their power."
+  },
+  {
+   "name": "Hunted by The Family",
+   "needs": [
+    "effect:per-target-villainous-choice-turn-order"
+   ],
+   "why": "Per target, its controller faces a villainous choice; the ruling has them asked in turn order, but for-each-target goes in target order (and nesting each-player-may inside for-each-target is untested)."
+  },
+  {
+   "name": "Ian Chesterton",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Saga spells you cast have replicate equal to their mana cost; replicate isn't built (nor granting it, nor Saga spell copies becoming tokens)."
+  },
+  {
+   "name": "Idris, Soul of the TARDIS",
+   "needs": [
+    "static:gains-abilities-of-exiled-card"
+   ],
+   "why": "Vanishing is built; \"Idris has all activated and triggered abilities of the exiled card and gets +X/+X\" isn't."
+  },
+  {
+   "name": "Inspiring Refrain",
+   "needs": [
+    "effect:exile-self-with-time-counters"
+   ],
+   "why": "\"Exile Inspiring Refrain with three time counters on it\" as it resolves."
+  },
+  {
+   "name": "Jenny Flint",
+   "needs": [
+    "keyword:training"
+   ],
+   "why": "Training isn't modeled (no keyword, no helper); the rest (first strike, partner with, Clue/Food sacrifice trigger) is authorable."
+  },
+  {
+   "name": "Jhoira of the Ghitu",
+   "needs": [
+    "cost:exiled-card-ref"
+   ],
+   "why": "\"Exile a nonland card from your hand\" as a cost, then \"put four time counters on the exiled card\": the effect has no reference to the card the cost exiled."
+  },
+  {
+   "name": "Jo Grant",
+   "needs": [
+    "static:grant-cycling-to-cards-in-hand",
+    "trigger:cycle-trigger"
+   ],
+   "why": "'Each historic card in your hand has cycling {2}{W}' has no static to grant cycling in hand; 'whenever you cycle a card' has no trigger (only this-cycled)."
+  },
+  {
+   "name": "Judoon Enforcers",
+   "needs": [
+    "static:attack-limit"
+   ],
+   "why": "\"No more than one creature can attack you each combat\": no attacker-count limit static"
+  },
+  {
+   "name": "Last Night Together",
+   "needs": [
+    "effect:extra-combat-attack-restriction"
+   ],
+   "why": "\"Only the chosen creatures can attack during that combat phase\": additional-combat has no attacker restriction"
+  },
+  {
+   "name": "Lunar Hatchling",
+   "needs": [
+    "cost:escape-exile-permanent"
+   ],
+   "why": "Escape's 'Exile a land you control' part — card.escape is only { cost, exileCount, counters }."
+  },
+  {
+   "name": "Madame Vastra",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "'Whenever a creature dealt damage by Madame Vastra this turn dies' has no trigger; also her partner Jenny Flint is blocked."
+  },
+  {
+   "name": "Me, the Immortal",
+   "needs": [
+    "static:counters-remain-across-zones"
+   ],
+   "why": "Counters remain on it as it moves to any zone but hand or library — no such rule; its graveyard cast with a two-card discard is a secondary gap."
+  },
+  {
+   "name": "Midnight Crusader Shuttle",
+   "needs": [
+    "effect:put-into-combat-attacking"
+   ],
+   "why": "Villainous option 2: gain control of a creature of your choice, tap it, and 'it's attacking that player' - no effect puts a creature already on the battlefield into combat as an attacker."
+  },
+  {
+   "name": "Missy",
+   "needs": [
+    "mechanic:face-down"
+   ],
+   "why": "'return it to the battlefield face down and tapped. It's a 2/2 Cyberman artifact creature' - no face-down entry with set characteristics. (Its 'chaos ensues' would be inert.)"
+  },
+  {
+   "name": "Nyssa of Traken",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "Reflexive 'tap up to that many target creatures' needs a target count fixed by the number sacrificed; any-number max 'x' exists only for a spell's/activated ability's X."
+  },
+  {
+   "name": "Out of Time",
+   "needs": [
+    "effect:phased-out-this-way-count"
+   ],
+   "why": "Vanishing is built; \"a time counter for each creature that phased out this way\" has no this-way count of phasing."
+  },
+  {
+   "name": "Peri Brown",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "'The first historic spell you cast each turn has convoke': convoke is read only from the card definition (def.convoke); grantsToSpells has no convoke grant."
+  },
+  {
+   "name": "Rassilon, the War President",
+   "needs": [
+    "keyword:conspire"
+   ],
+   "why": "'Each noncreature spell you cast from exile has conspire' — conspire isn't modeled (the upkeep impulse half is authorable)."
+  },
+  {
+   "name": "Return the Past",
+   "needs": [
+    "bug:granted-flashback-split-card-cost"
+   ],
+   "why": "Its ruling: a split card that gains flashback pays only the half being cast; grantsToGraveyard flashback 'mana-cost' reads the whole card's combined manaCost (game.ts flashbacksOf), so Expansion // Explosion and Fuss // Bother would be wrong. Iroh, Grand Lotus and Lier share the defect."
+  },
+  {
+   "name": "River Song",
+   "needs": [
+    "replacement:draw-from-bottom",
+    "trigger:search-trigger"
+   ],
+   "why": "'You draw cards from the bottom of your library' has no replacement, and 'whenever an opponent ... searches their library' has no trigger (scry/surveil triggers exist)."
+  },
+  {
+   "name": "Rousing Refrain",
+   "needs": [
+    "effect:exile-self-with-time-counters"
+   ],
+   "why": "\"Exile Rousing Refrain with three time counters on it\": a resolving spell exiling itself suspended, instead of going to the graveyard."
+  },
+  {
+   "name": "Run for Your Life",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "'They can't be blocked this turn except by creatures with haste' — no until-end-of-turn cantBeBlockedBy effect on targets."
+  },
+  {
+   "name": "Start the TARDIS",
+   "needs": [
+    "keyword:jump-start"
+   ],
+   "why": "Jump-start isn't built (surveil/draw and the inert planeswalk would be fine)."
+  },
+  {
+   "name": "Strax, Sontaran Nurse",
+   "needs": [
+    "target:controlled-by-chosen-player"
+   ],
+   "why": "'Choose a player at random. When you do, Strax fights another target creature that player controls': choose-opponent {random, anyPlayer} exists, but a reflexive trigger's target can't be restricted to the player it chose (reflexive pendingTriggers carry no triggerPlayer)."
+  },
+  {
+   "name": "TARDIS",
+   "needs": [
+    "static:grant-cascade-next-spell"
+   ],
+   "why": "\"the next spell you cast this turn has cascade\": grant-spells-this-turn covers every spell this turn, and a nextSpell delayed trigger running cascade uses the source's (TARDIS's) mana value as the threshold and doesn't make the spell have cascade (First Doctor sees it)"
+  },
+  {
+   "name": "The Beast, Deathless Prince",
+   "needs": [
+    "trigger:combat-damage-to-owner"
+   ],
+   "why": "\"Whenever a creature deals combat damage to its owner\": deals-combat-damage-to-player has no damaged-player-is-the-creature's-owner clause"
+  },
+  {
+   "name": "The Caves of Androzani",
+   "needs": [
+    "decision:choose-counter-kind"
+   ],
+   "why": "II/III: for each non-Saga permanent choose one counter kind on it and may add one of that kind — proliferate adds every kind and isn't per-permanent/filtered."
+  },
+  {
+   "name": "The Curse of Fenric",
+   "needs": [
+    "static:set-name",
+    "effect:animate-add-supertype"
+   ],
+   "why": "II: 'becomes a 6/6 legendary Horror creature named Fenric' — animate can't set a name or add legendary; III's 'named Fenric' then can't be matched."
+  },
+  {
+   "name": "The Cyber-Controller",
+   "needs": [
+    "mechanic:face-down"
+   ],
+   "why": "Milled creature cards go onto the battlefield face down as 2/2 Cyberman artifact creatures - only manifest/cloak put things face down, and only from the library top as plain 2/2s."
+  },
+  {
+   "name": "The Day of the Doctor",
+   "needs": [
+    "zone:exiled-with-source-play",
+    "decision:choose-permanents-non-target"
+   ],
+   "why": "I-III: exile until a legendary card, playable 'for as long as this Saga remains' — reveal-until can't grant a while-source play permission; IV: choose up to three Doctors then optionally exile all others with 13 damage only if you do."
+  },
+  {
+   "name": "The Eighth Doctor",
+   "needs": [
+    "zone:graveyard-cast-exile-replacement",
+    "zone:play-from-graveyard-your-turn"
+   ],
+   "why": "One shared once-per-your-turn use over playing a historic land or casting a historic permanent spell from the graveyard, and the permanent gaining 'exile it if it would leave'; castFromGraveyard has neither lands nor the exile replacement."
+  },
+  {
+   "name": "The Eleventh Hour",
+   "needs": [
+    "effect:copy-exceptions"
+   ],
+   "why": "III 'a legendary Alien named Prisoner Zero': the ruling says the token loses every non-Alien subtype, Vehicle included; CopyExceptions.setSubtypes replaces only creature types, so a Vehicle/Dryad Arbor copy would keep Vehicle/Forest."
+  },
+  {
+   "name": "The Face of Boe",
+   "needs": [
+    "effect:cast-paying-suspend-cost"
+   ],
+   "why": "Cast a spell with suspend from your hand paying its suspend cost rather than its mana cost — cast-now has no suspend-cost alternative."
+  },
+  {
+   "name": "The First Doctor",
+   "needs": [
+    "trigger:cast-spell-with-cascade"
+   ],
+   "why": "\"Whenever you cast a spell with cascade\": no cast-trigger filter for a spell having cascade (printed or granted this-cast cascade)"
+  },
+  {
+   "name": "The Five Doctors",
+   "needs": [
+    "effect:search-up-to-public-zone"
+   ],
+   "why": "'Search your library and/or graveyard for up to five Doctor cards': beginLibrarySearch forces min 1 when a graveyard match exists (right for 'a card', wrong for 'up to five'), so 'graveyard only, find none, no shuffle' isn't offered."
+  },
+  {
+   "name": "The Foretold Soldier",
+   "needs": [
+    "effect:exile-becomes-foretold"
+   ],
+   "why": "'Whenever this creature deals damage, exile it face down. It becomes foretold.' — no effect foretells a card from the battlefield."
+  },
+  {
+   "name": "The Fourth Doctor",
+   "needs": [
+    "static:play-from-library-top-once-each-turn"
+   ],
+   "why": "playFromLibraryTop/castFromLibraryTop have no once-each-turn limit shared by a land play and a cast, nor a 'when you do, create a Food' rider on the permission's use."
+  },
+  {
+   "name": "The Girl in the Fireplace",
+   "needs": [
+    "keyword:horsemanship",
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "II's Horse grants horsemanship (not modeled); III is \"whenever a creature you control deals combat damage to a player this turn\" — a delayed trigger over any creature for the rest of the turn."
+  },
+  {
+   "name": "The Master, Formed Anew",
+   "needs": [
+    "replacement:enter-as-copy-of-exiled-card"
+   ],
+   "why": "'enter as a copy of a creature card in exile with a takeover counter on it' - copyOnEnter copies only permanents on the battlefield."
+  },
+  {
+   "name": "The Master, Gallifrey's End",
+   "needs": [
+    "effect:choose-opponent-most-life"
+   ],
+   "why": "'choose an opponent with the most life among your opponents' - choose-opponent can't be limited to the opponents tied for most life."
+  },
+  {
+   "name": "The Pandorica",
+   "needs": [
+    "effect:phase-out-while-source-tapped"
+   ],
+   "why": "\"It can't phase in for as long as The Pandorica remains tapped … When The Pandorica becomes untapped or leaves, that permanent phases in\": phase-out only has untilSourceLeaves"
+  },
+  {
+   "name": "The Rani",
+   "needs": [
+    "effect:create-token-attached-to"
+   ],
+   "why": "'create a red Aura enchantment token named Mark of the Rani attached to another target creature' - create-token has no attachedTo."
+  },
+  {
+   "name": "The Sea Devils",
+   "needs": [
+    "effect:delayed-trigger-own-targets",
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "III: until end of turn, whenever any Salamander deals combat damage to a player, it deals that much damage to target creature that player controls — DelayedCombatDamage watches only one object and delayed triggers choose no targets."
+  },
+  {
+   "name": "The Seventh Doctor",
+   "needs": [
+    "decision:opponent-guesses-mana-value"
+   ],
+   "why": "Choose a hidden card in hand, defending player guesses whether its mana value is greater than your artifact count — no guess decision exists."
+  },
+  {
+   "name": "The Toymaker's Trap",
+   "needs": [
+    "decision:secret-choice"
+   ],
+   "why": "Secretly choose an unused number 1-5, then an opponent guesses it - no secret choice or guess decision."
+  },
+  {
+   "name": "The Valeyard",
+   "needs": [
+    "replacement:villainous-choice-additional-time",
+    "static:extra-vote"
+   ],
+   "why": "Replacement making opponents face a villainous choice twice, and an extra vote (rule 701.38d) - neither is built."
+  },
+  {
+   "name": "The War Doctor",
+   "needs": [
+    "trigger:phases-out"
+   ],
+   "why": "\"Whenever one or more other permanents phase out\": no phase-out trigger (AUTHORING §15, rule 603.10b)"
+  },
+  {
+   "name": "The War Games",
+   "needs": [
+    "effect:goad-extensions"
+   ],
+   "why": "I: tokens 'goaded for as long as this Saga remains on the battlefield'; only goad-until-your-next-turn and goadedForGame exist."
+  },
+  {
+   "name": "The Wedding of River Song",
+   "needs": [
+    "effect:look-and-choose-target-player"
+   ],
+   "why": "\"Then target opponent does the same\": a hand look-and-choose made by the player in a target slot — for-each-player has no target-slot scope."
+  },
+  {
+   "name": "Thijarian Witness",
+   "needs": [
+    "condition:attacking-alone-condition"
+   ],
+   "why": "\"if it was attacking or blocking alone\": no filter/condition for a dying creature that attacked or blocked alone (blocking alone too)"
+  },
+  {
+   "name": "This Is How It Ends",
+   "needs": [
+    "effect:player-shuffles-chosen-permanent-into-library"
+   ],
+   "why": "The target's OWNER (each-player-may has only controllerOfTarget) chooses 'another creature they own' to shuffle in - no owner scope, and no effect where that player picks a permanent to shuffle."
+  },
+  {
+   "name": "Time Reaper",
+   "needs": [
+    "effect:target-card-in-exile"
+   ],
+   "why": "'put target face-up card they own in exile on the bottom of their library' - there's no target spec for a card in exile."
+  },
+  {
+   "name": "Trial of a Time Lord",
+   "needs": [
+    "mechanic:council-voting",
+    "effect:exile-to-library-bottom-linked"
+   ],
+   "why": "IV: no condition comparing two vote tallies (guilty > innocent), and no effect putting every card exiled-until-leaves with this Saga on the bottom of its owner's library."
+  },
+  {
+   "name": "Truth or Consequences",
+   "needs": [
+    "mechanic:secret-choice",
+    "effect:random-choice"
+   ],
+   "why": "Secret council: votes are secret then revealed (engine votes are sequential and open), and 'choose an opponent at random'."
+  },
+  {
+   "name": "Vislor Turlough",
+   "needs": [
+    "effect:goad-while-controlled-by-player"
+   ],
+   "why": "'It's goaded for as long as they control it' — goad lasts until the goader's next turn or forGame; no duration tied to the opponent keeping control (a static goad would make the opponent the goader, which is wrong per 701.15b)."
+  },
+  {
+   "name": "Vrestin, Menoptra Leader",
+   "needs": [
+    "effect:attack-batch-those-creatures"
+   ],
+   "why": "\"Whenever you attack with one or more Insects, put a +1/+1 counter on each of them\": only an attacking:true filter at resolution, the approximation §15 forbids"
+  },
+  {
+   "name": "Weeping Angel",
+   "needs": [
+    "effect:stops-being-creature-until-eot",
+    "replacement:combat-damage-to-creature-prevented-and-shuffle"
+   ],
+   "why": "'isn't a creature until end of turn' (no type-removing effect), and the prevent-combat-damage-and-shuffle replacement isn't built."
+  },
+  {
+   "name": "Zygon Infiltrator",
+   "needs": [
+    "effect:become-copy-while-target-tapped"
+   ],
+   "why": "\"becomes a copy of that creature for as long as that creature remains tapped\": become-copy's until has no while-other-tapped duration"
+  }
+ ]
+}

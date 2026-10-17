@@ -223,6 +223,7 @@ import _poolLavaSerpent from "../pool/lava-serpent.js";
 import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
+import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolMagnify from "../pool/magnify.js";
@@ -261,6 +262,7 @@ import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
+import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
@@ -382,6 +384,7 @@ import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
 import _poolTectonicHazard from "../pool/tectonic-hazard.js";
+import _poolTeganJovanka from "../pool/tegan-jovanka.js";
 import _poolTempestAngler from "../pool/tempest-angler.js";
 import _poolTempestDrake from "../pool/tempest-drake.js";
 import _poolTemporalManipulation from "../pool/temporal-manipulation.js";
@@ -391,6 +394,7 @@ import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
+import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
@@ -441,6 +445,7 @@ import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
 import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
 import _poolWhipcorder from "../pool/whipcorder.js";
 import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
+import _poolWibblyWobblyTimeyWimey from "../pool/wibbly-wobbly-timey-wimey.js";
 import _poolWildCeratok from "../pool/wild-ceratok.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWitchingWell from "../pool/witching-well.js";
@@ -687,6 +692,7 @@ const shard: CardShard = {
     _poolLavastepRaider,
     _poolLazotepBehemoth,
     _poolLedevGuardian,
+    _poolLeelaSevateemWarrior,
     _poolLightningAngel,
     _poolLluwenExchangeStudent,
     _poolMagnify,
@@ -725,6 +731,7 @@ const shard: CardShard = {
     _poolOpulentPalace,
     _poolOraxid,
     _poolOriginOfMetalbending,
+    _poolOsgoodOperationDouble,
     _poolOutrageousRobbery,
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,
@@ -846,6 +853,7 @@ const shard: CardShard = {
     _poolTaoistHermit,
     _poolTavernSmasher,
     _poolTectonicHazard,
+    _poolTeganJovanka,
     _poolTempestAngler,
     _poolTempestDrake,
     _poolTemporalManipulation,
@@ -855,6 +863,7 @@ const shard: CardShard = {
     _poolTheComingOfGalactus,
     _poolTheImmortalWeapons,
     _poolTheMightstoneAndWeakstone,
+    _poolTheMoment,
     _poolTheMycotyrant,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
@@ -905,6 +914,7 @@ const shard: CardShard = {
     _poolWeeDragonauts,
     _poolWhipcorder,
     _poolWhisperOfTheDross,
+    _poolWibblyWobblyTimeyWimey,
     _poolWildCeratok,
     _poolWildUnraveling,
     _poolWitchingWell,

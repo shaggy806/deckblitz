@@ -102,6 +102,7 @@ export const DECISION_ACTIONS = {
   sacrifice: ["sacrifice"],
   proliferate: ["proliferate"],
   "split-mana": ["split-mana"],
+  "time-travel": ["time-travel"],
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
   scry: ["scry"],
@@ -138,6 +139,7 @@ export const DECISION_OFFERS = {
   sacrifice: ["sacrifice"],
   proliferate: ["proliferate"],
   "split-mana": ["split-mana"],
+  "time-travel": ["time-travel"],
   "choose-permanents": ["choose-permanents"],
   "enter-attacking": ["enter-attacking"],
   scry: ["scry"],
@@ -232,6 +234,7 @@ export interface DecisionHost {
   readonly applyTriggerOrder: (player: PlayerId, order: readonly number[]) => void;
   readonly applyProliferate: (player: PlayerId, chosen: readonly TargetRef[]) => void;
   readonly applyManaSplit: (player: PlayerId, counts: Readonly<Partial<Record<ManaType, number>>>) => void;
+  readonly applyTimeTravel: (player: PlayerId, add: readonly ObjectId[], remove: readonly ObjectId[]) => void;
   readonly applyChoosePermanents: (player: PlayerId, chosen: readonly ObjectId[]) => void;
   readonly applyEnterAttacking: (
     player: PlayerId,

@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
+import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
@@ -334,6 +335,7 @@ import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSurveillanceRoom from "../pool/surveillance-room.js";
+import _poolSuspend from "../pool/suspend.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
 import _poolSylvanMight from "../pool/sylvan-might.js";
@@ -417,6 +419,7 @@ import _tokensWormToken from "../tokens/worm-token.js";
 const shard: CardShard = {
   pool: [
     _poolAbyssalGatekeeper,
+    _poolAdricMathematicalGenius,
     _poolAlabornMusketeer,
     _poolAlibansTower,
     _poolAnafenzaTheForemost,
@@ -747,6 +750,7 @@ const shard: CardShard = {
     _poolSunspireGriffin,
     _poolSupplyLineCranes,
     _poolSurveillanceRoom,
+    _poolSuspend,
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,
     _poolSylvanMight,

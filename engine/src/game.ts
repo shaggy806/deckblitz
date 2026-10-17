@@ -155,6 +155,7 @@ import { chooseModes } from "./decisions/choose-modes.js";
 import { chooseCreatureType } from "./decisions/choose-creature-type.js";
 import { proliferate } from "./decisions/proliferate.js";
 import { splitMana } from "./decisions/split-mana.js";
+import { timeTravel } from "./decisions/time-travel.js";
 import { payLifeForUntapped } from "./decisions/pay-life-for-untapped.js";
 import { revealForUntapped } from "./decisions/reveal-for-untapped.js";
 import { scry } from "./decisions/scry.js";
@@ -1175,6 +1176,7 @@ export class Game {
       applyTriggerOrder: (player, order) => this.applyTriggerOrder(player, order),
       applyProliferate: (player, chosen) => this.applyProliferate(player, chosen),
       applyManaSplit: (player, counts) => this.applyManaSplit(player, counts),
+      applyTimeTravel: (player, add, remove) => this.applyTimeTravel(player, add, remove),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
       applyModesChoice: (player, modes, x, forAll) =>
         this.applyModesChoice(player, modes, x, forAll),
@@ -5749,6 +5751,14 @@ export class Game {
         this.resumeSuspendedResolution();
         continue;
       }
+      // Suspended cards whose last time counter an effect removed (time
+      // travel, Amy Pond): "you may play it" once that effect is done
+      // (rule 702.62a) — off the stack, as at the upkeep (see
+      // `castSuspendedCard`).
+      if (this.state.pendingSuspendedCasts.length > 0) {
+        this.drainSuspendedCasts();
+        continue;
+      }
       if (!this.placePendingTriggers()) break;
     }
     // Nothing is waiting on anyone, so whatever resolved last is no longer
@@ -6005,7 +6015,7 @@ export class Game {
       object.counters.stun -= 1;
       if (object.counters.stun <= 0) delete object.counters.stun;
       invalidateComputedCache();
-      this.emit({ type: "counter-removed", object: id, counter: "stun", amount: 1 });
+      this.emit({ type: "counter-removed", object: id, counter: "stun", amount: 1, after: object.counters.stun ?? 0 });
       return false;
     }
     object.tapped = false;
@@ -8664,7 +8674,10 @@ export class Game {
   private castSuspendedCard(cardId: ObjectId): void {
     const object = this.state.objects[cardId];
     if (object === undefined || object.zone !== "exile") return;
-    this.raiseCastNow(object.owner, cardId, [cardId], { free: true, exileAfter: false, freeCastOf: "suspend" });
+    // "Play": a modal double-faced card that gained suspend (The Eleventh
+    // Doctor, Sibylline Soothsayer) may be played as its land face, with a
+    // land play left on its owner's turn (rules 305.2–305.3).
+    this.raiseCastNow(object.owner, cardId, [cardId], { free: true, exileAfter: false, freeCastOf: "suspend", play: true });
     if (this.state.awaiting === null) this.abandonSuspendedCast(cardId, "couldn't be cast");
   }
 
@@ -13287,7 +13300,7 @@ export class Game {
       const { kind, count } = ability.cost.removeCounter;
       source.counters[kind] = (source.counters[kind] ?? 0) - count;
       if (source.counters[kind] <= 0) delete source.counters[kind];
-      this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count });
+      this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0 });
     }
     if (ability.cost.payEnergy !== undefined) {
       this.changeEnergy(player, -ability.cost.payEnergy);
@@ -16964,6 +16977,8 @@ export class Game {
                     : // "Deals that much damage": how many counters were put.
                     ability.trigger.on === "counters-put" && event.type === "counter-added"
                     ? event.amount
+                    : ability.trigger.on === "counters-removed" && event.type === "counter-removed"
+                    ? event.amount
                     : // "The number of cards looked at while scrying this way".
                     ability.trigger.on === "scries" && event.type === "scried"
                     ? event.looked
@@ -17814,6 +17829,16 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self) &&
           (spec.byYou !== true || event.by === self.controller)
         );
+      case "counters-removed":
+        return (
+          event.type === "counter-removed" &&
+          event.amount > 0 &&
+          (spec.counter === undefined || event.counter === spec.counter) &&
+          // Vanishing's "when the last time counter is removed" (702.63a).
+          (spec.last !== true || event.after === 0) &&
+          this.matchesWho(spec.who, event.object, self) &&
+          this.triggerFilterOk(spec.filter, event.object, self)
+        );
       case "rolls-dice":
         return event.type === "dice-rolled" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "class-level-gained":
@@ -18243,7 +18268,11 @@ export class Game {
         return true;
       }
       case "this-cast":
-        return event.type === "spell-cast" && event.object === self.id;
+        return (
+          event.type === "spell-cast" &&
+          event.object === self.id &&
+          (spec.notFrom === undefined || event.from !== spec.notFrom)
+        );
       case "this-cycled":
         return event.type === "card-cycled" && event.object === self.id;
       case "this-plotted":
@@ -20417,7 +20446,7 @@ export class Game {
         const n = Math.min(amount, object.counters[counter] ?? 0);
         object.counters[counter] = (object.counters[counter] ?? 0) - n;
         if (object.counters[counter] <= 0) delete object.counters[counter];
-        this.emit({ type: "counter-removed", object: id, counter, amount: n });
+        this.emit({ type: "counter-removed", object: id, counter, amount: n, after: object.counters[counter] ?? 0 });
       },
       moveCounters: (from, to, counter, amount) => this.moveCounters(from, to, counter, amount, controller),
       countersHere: (target) => {
@@ -20839,6 +20868,13 @@ export class Game {
       },
       proliferate: (then) => this.beginProliferate(source, controller, x, then),
       splitMana: (ask) => this.beginManaSplit(source, controller, x, ask),
+      timeTravel: () => this.beginTimeTravel(source, controller),
+      suspendedCardsYouOwn: () =>
+        this.state.zones.shared.exile.filter((id) => {
+          const object = this.state.objects[id];
+          return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
+        }).length,
+      giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except) =>
         this.beginChoosePermanents(source, controller, x, filter, min, max, then, prompt, exceptSource === true, except),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
@@ -25520,7 +25556,7 @@ export class Game {
     const object = this.state.objects[id];
     object.counters[counter] = have - n;
     if (object.counters[counter] <= 0) delete object.counters[counter];
-    this.emit({ type: "counter-removed", object: id, counter, amount: n });
+    this.emit({ type: "counter-removed", object: id, counter, amount: n, after: object.counters[counter] ?? 0 });
     this.addCounter(to, counter, n, true, by);
     return n;
   }
@@ -25650,6 +25686,135 @@ export class Game {
     }
     if (then !== null) applyEffectSpec(then, context);
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** What `player` may time travel with (rule 701.56a): each permanent they
+   * control with a time counter on it — a token stack woken into its tokens,
+   * since each is a permanent of its own with its own choice — then each
+   * suspended card they own with one. */
+  private timeTravelEligible(player: PlayerId): ObjectId[] {
+    const permanents = this.state.zones.shared.battlefield
+      .filter((id) => {
+        const object = this.state.objects[id];
+        return object !== undefined && object.controller === player && (object.counters.time ?? 0) > 0;
+      })
+      .flatMap((id) => this.materializeStack(id));
+    const suspended = this.state.zones.shared.exile.filter((id) => {
+      const object = this.state.objects[id];
+      return object !== undefined && object.owner === player && object.suspended === true && (object.counters.time ?? 0) > 0;
+    });
+    return [...permanents, ...suspended];
+  }
+
+  /** Raise a `time-travel` decision for `player` (the `"time-travel"`
+   * effect). With nothing eligible there's nothing to choose and nothing
+   * happens. */
+  private beginTimeTravel(source: ObjectId, player: PlayerId): void {
+    const eligible = this.timeTravelEligible(player);
+    if (eligible.length === 0) return;
+    this.state.awaiting = { kind: "time-travel", player, eligible, source };
+  }
+
+  /**
+   * Answers a pending `time-travel` decision: a time counter onto each of
+   * `add` and off each of `remove`, all at once (the rulings). A permanent's
+   * go through `addCounter` (a counter doubler applies; Kate Stewart's
+   * "whenever you put one or more time counters" sees them) and its removal
+   * is a `counter-removed` — the last one fires vanishing's sacrifice. A
+   * suspended card's last one owes its owner the free cast (rule 702.62a),
+   * offered once the resolution is done (`pendingSuspendedCasts`).
+   */
+  private applyTimeTravel(player: PlayerId, add: readonly ObjectId[], remove: readonly ObjectId[]): void {
+    const why = timeTravel.whyCannot(this.decisionCtx, { type: "time-travel", player, add, remove }, player);
+    if (why !== null) throw new Error(why);
+    this.state.awaiting = null;
+    for (const id of add) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      if (object.zone === "battlefield") {
+        this.addCounter({ kind: "object", object: id }, "time", 1, false, player);
+      } else if (object.zone === "exile" && object.suspended === true) {
+        object.counters.time = (object.counters.time ?? 0) + 1;
+        this.emit({ type: "time-counter-added", object: id, now: object.counters.time });
+      }
+    }
+    for (const id of remove) this.removeTimeCounter(id, 1);
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /**
+   * Take up to `amount` time counters off `id` — a permanent or a suspended
+   * card. A permanent's removal is a `counter-removed` (vanishing's "when
+   * the last is removed" reads its `after`); a suspended card whose last
+   * one comes off is queued for its free cast (rule 702.62a — "it doesn't
+   * matter why the last time counter was removed", the rulings), offered
+   * when the effect removing it is done.
+   */
+  private removeTimeCounter(id: ObjectId, amount: number): void {
+    const object = this.state.objects[id];
+    if (object === undefined || amount <= 0) return;
+    const have = object.counters.time ?? 0;
+    if (have <= 0) return;
+    const n = Math.min(amount, have);
+    const after = have - n;
+    if (after > 0) object.counters.time = after;
+    else delete object.counters.time;
+    if (object.zone === "battlefield") {
+      this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after });
+    } else if (object.zone === "exile" && object.suspended === true) {
+      this.emit({ type: "time-counter-removed", object: id, remaining: after });
+      if (after === 0) this.state.pendingSuspendedCasts.push(id);
+    }
+  }
+
+  /**
+   * The `"give-suspend"` effect: time counters on exiled cards, which have
+   * suspend (rule 702.62b). With `target`, that card is first exiled from
+   * wherever it is; otherwise it's every card this resolution exiled that's
+   * still there and matches `filter`. A card that ends with no time counter
+   * (a mana value of 0) stays exiled, not suspended.
+   */
+  private giveSuspend(
+    controller: PlayerId,
+    counters: number | "mana-value",
+    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef },
+  ): void {
+    let cards: ObjectId[];
+    if (options.target !== undefined) {
+      if (options.target.kind !== "object") return;
+      const id = options.target.object;
+      const object = this.state.objects[id];
+      // A card found in a library (Sibylline Soothsayer) or the spell itself
+      // (Rory Williams). A spell countered in response is in the graveyard,
+      // a new object (rule 400.7), and isn't exiled.
+      if (object === undefined || (object.zone !== "library" && object.zone !== "stack")) return;
+      // A spell leaves the stack as "exile target spell" takes it — a copy
+      // ceases to exist, and its targets are forgotten.
+      if (object.zone === "stack") this.exileSpell(id);
+      else this.moveObject(id, "exile");
+      if (this.state.objects[id]?.zone !== "exile") return;
+      cards = [id];
+    } else {
+      cards = thisWayEntries(this.state, "exiled")
+        .map((entry) => entry.object)
+        .filter(
+          (id) =>
+            this.state.objects[id]?.zone === "exile" &&
+            (options.filter === undefined ||
+              matchesFilter(this.state, this.registry, id, options.filter, { you: controller })),
+        );
+    }
+    for (const id of cards) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.zone !== "exile") continue;
+      const def = this.registry.get(printedCardName(object));
+      if (options.onlyWithSuspend === true && def.suspend === null) continue;
+      const n = counters === "mana-value" ? manaValueOfObject(this.registry, object) : counters;
+      if (n <= 0) continue;
+      object.counters.time = (object.counters.time ?? 0) + n;
+      object.suspended = true;
+      this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
+    }
   }
 
 
@@ -30604,7 +30769,7 @@ export class Game {
       for (const kind of ["+1/+1", "-1/-1"]) {
         counters[kind] = (counters[kind] ?? 0) - n;
         if (counters[kind] <= 0) delete counters[kind];
-        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n });
+        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: counters[kind] ?? 0 });
       }
       removed = true;
     }

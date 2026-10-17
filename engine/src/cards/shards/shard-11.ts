@@ -429,6 +429,7 @@ import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
 import _poolUnfriendlyFire from "../pool/unfriendly-fire.js";
+import _poolUnlikelyMeeting from "../pool/unlikely-meeting.js";
 import _poolUnluckyCabbageMerchant from "../pool/unlucky-cabbage-merchant.js";
 import _poolUnwelcomeSprite from "../pool/unwelcome-sprite.js";
 import _poolUrabrasksForge from "../pool/urabrasks-forge.js";
@@ -904,6 +905,7 @@ const shard: CardShard = {
     _poolUndeadWarchief,
     _poolUndergroundMortuary,
     _poolUnfriendlyFire,
+    _poolUnlikelyMeeting,
     _poolUnluckyCabbageMerchant,
     _poolUnwelcomeSprite,
     _poolUrabrasksForge,

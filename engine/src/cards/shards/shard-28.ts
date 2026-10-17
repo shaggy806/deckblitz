@@ -81,6 +81,7 @@ import _poolCuratorBeastie from "../pool/curator-beastie.js";
 import _poolCuriousInquiry from "../pool/curious-inquiry.js";
 import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
+import _poolDalekDrone from "../pool/dalek-drone.js";
 import _poolDarkBanishing from "../pool/dark-banishing.js";
 import _poolDarksteelCitadel from "../pool/darksteel-citadel.js";
 import _poolDarksteelSentinel from "../pool/darksteel-sentinel.js";
@@ -304,6 +305,7 @@ import _poolRoostSeek from "../pool/roost-seek.js";
 import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
 import _poolRootwalla from "../pool/rootwalla.js";
+import _poolRoseTyler from "../pool/rose-tyler.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
@@ -366,6 +368,7 @@ import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
+import _poolSycoraxCommander from "../pool/sycorax-commander.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
@@ -377,6 +380,7 @@ import _poolTeysaKarlov from "../pool/teysa-karlov.js";
 import _poolThanosDeathsConsort from "../pool/thanos-deaths-consort.js";
 import _poolTheAncientOne from "../pool/the-ancient-one.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
+import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
@@ -521,6 +525,7 @@ const shard: CardShard = {
     _poolCuriousInquiry,
     _poolCutthroatCenturion,
     _poolDakmorBat,
+    _poolDalekDrone,
     _poolDarkBanishing,
     _poolDarksteelCitadel,
     _poolDarksteelSentinel,
@@ -744,6 +749,7 @@ const shard: CardShard = {
     _poolRootKinAlly,
     _poolRootbreakerWurm,
     _poolRootwalla,
+    _poolRoseTyler,
     _poolRuneclawBear,
     _poolRunehornHellkite,
     _poolRustedSlasher,
@@ -806,6 +812,7 @@ const shard: CardShard = {
     _poolSunstarExpansionist,
     _poolSurveillancePhantasm,
     _poolSwallowedByLeviathan,
+    _poolSycoraxCommander,
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,
     _poolSyrVondamTheLucent,
@@ -817,6 +824,7 @@ const shard: CardShard = {
     _poolThanosDeathsConsort,
     _poolTheAncientOne,
     _poolTheSwarmweaver,
+    _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
     _poolThoughtseize,
     _poolThreeTreeCity,

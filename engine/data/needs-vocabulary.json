@@ -7098,6 +7098,194 @@
   "trigger:exiled-while-crafting": {
    "family": "keyword:craft",
    "example": "\"When this creature is exiled from the battlefield while you're activating a craft ability\" (Market Gnome): a leaves-battlefield-to-exile trigger limited to exiles made while its controller activates a craft ability (as a material, or by a mana ability paying for it)."
+  },
+  "bug:granted-flashback-split-card-cost": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Return the Past: Granted flashback 'equal to its mana cost' uses the split card's combined cost instead of the cast half's (rule 702.34 rulings; Return the Past, also Iroh, Grand Lotus / Lier / Will of the Jeskai)."
+  },
+  "condition:that-player-turn-stat": {
+   "family": "condition:player-state-thresholds",
+   "example": "Davros, Dalek Creator: turn-stat read for the 'that-player' of a for-each-player / each-player-may - 'each opponent who lost 3 or more life this turn' (Davros); sibling of condition:target-player-turn-stat."
+  },
+  "cost:escape-exile-permanent": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Lunar Hatchling: An escape cost that exiles a permanent you control (Lunar Hatchling)."
+  },
+  "cost:exile-permanents-may": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Fugitive of the Judoon: 'You may exile a [X] you control and a [Y] you control. If you do, …' — two distinct permanents, offered only when both exist (Fugitive of the Judoon)."
+  },
+  "cost:exiled-card-ref": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Jhoira of the Ghitu: \"Exile a nonland card from your hand\" as a cost, then \"put four time counters on the exiled card\": the effect has no reference to the card the cost exiled."
+  },
+  "decision:choose-permanents-non-target": {
+   "family": "decision:choose-permanent",
+   "example": "The Day of the Doctor: 'Choose up to three Doctors' then act on all others (The Day of the Doctor IV) — choose-permanents exists, but the 'all other creatures' exile needs to read the chosen set."
+  },
+  "decision:opponent-guesses-mana-value": {
+   "family": "effect:choices-by-other-players",
+   "example": "The Seventh Doctor: An opponent guesses about a face-down chosen card (The Seventh Doctor)."
+  },
+  "effect:amount-total-power-died-this-turn": {
+   "family": "effect:amount-aggregate",
+   "example": "Genesis of the Daleks: Sum of the power (as last on the battlefield) of creatures matching a filter that died this turn - Genesis of the Daleks IV."
+  },
+  "effect:become-copy-while-target-tapped": {
+   "family": "effect:become-copy",
+   "example": "Zygon Infiltrator: become a copy for as long as another permanent remains tapped (Zygon Infiltrator)"
+  },
+  "effect:cast-paying-suspend-cost": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "The Face of Boe: Cast a card from hand paying its suspend cost as an alternative cost (The Face of Boe)."
+  },
+  "effect:choose-opponent-most-life": {
+   "family": "decision:choose-player",
+   "example": "The Master, Gallifrey's End: choose-opponent limited to the opponents with the most life (ties: you choose) - The Master, Gallifrey's End."
+  },
+  "effect:create-token-attached-to": {
+   "family": "effect:attach-extensions",
+   "example": "The Rani: create-token entering attached to a target permanent (an Aura token with enchant creature) - The Rani's Mark of the Rani."
+  },
+  "effect:exile-becomes-foretold": {
+   "family": "zone:exile-face-down",
+   "example": "The Foretold Soldier: Exile a permanent face down as foretold (The Foretold Soldier)."
+  },
+  "effect:exile-to-library-bottom-linked": {
+   "family": "effect:this-way-results",
+   "example": "Trial of a Time Lord: Put every card exiled with this source (an O-Ring's exiles) on the bottom of its owner's library (Trial of a Time Lord IV)."
+  },
+  "effect:goad-extensions": {
+   "family": "mechanic:goad-extensions",
+   "example": "The War Games: I: tokens 'goaded for as long as this Saga remains on the battlefield'; only goad-until-your-next-turn and goadedForGame exist."
+  },
+  "effect:goad-while-controlled-by-player": {
+   "family": "mechanic:goad-extensions",
+   "example": "Vislor Turlough: A one-shot goad by the effect's controller lasting for as long as a named player controls the creature (Vislor Turlough)."
+  },
+  "effect:per-target-villainous-choice-turn-order": {
+   "family": "effect:choices-by-other-players",
+   "example": "Hunted by The Family: For each of several targets, its controller faces a villainous choice, asked in turn order (the ruling) - Hunted by The Family."
+  },
+  "effect:phase-out-while-source-tapped": {
+   "family": "effect:duration-extensions",
+   "example": "The Pandorica: phased out until the source untaps or leaves (The Pandorica)"
+  },
+  "effect:phased-out-this-way-count": {
+   "family": "effect:this-way-results",
+   "example": "Out of Time: Vanishing is built; \"a time counter for each creature that phased out this way\" has no this-way count of phasing."
+  },
+  "effect:player-shuffles-chosen-permanent-into-library": {
+   "family": "effect:shuffle-library",
+   "example": "This Is How It Ends: A player (the target's owner) chooses a permanent they own and shuffles it into their library; also needs an owner-of-target scope - This Is How It Ends."
+  },
+  "effect:put-into-combat-attacking": {
+   "family": "effect:enter-attacking",
+   "example": "Midnight Crusader Shuttle: Make a permanent already on the battlefield an attacking creature attacking a given player (not declared, so no attack triggers) - Midnight Crusader Shuttle."
+  },
+  "effect:remove-time-counters-chosen-suspended": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Amy Pond: \"Choose a suspended card you own and remove that many time counters from it\": a choice among suspended cards in exile, then a removal there."
+  },
+  "effect:search-up-to-public-zone": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "The Five Doctors: A search for 'up to N' cards including a graveyard must allow finding zero there; the engine forces ≥1 whenever a graveyard match exists (The Five Doctors)."
+  },
+  "effect:stops-being-creature": {
+   "family": "static:self-type-changes",
+   "example": "Blink: 'This permanent isn't a creature until end of turn' — remove the creature type (and creature subtypes) for a duration (Blink's Alien Angel token)."
+  },
+  "effect:stops-being-creature-until-eot": {
+   "family": "static:self-type-changes",
+   "example": "Weeping Angel: 'This creature isn't a creature until end of turn' - removes the creature type and creature subtypes, keeping the other types (Weeping Angel's ruling)."
+  },
+  "filter:has-doctors-companion": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "An Unearthly Child: Match a card with the doctor's companion pairing ability (An Unearthly Child)."
+  },
+  "filter:shares-creature-type-with-target": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Coward // Killer: Coward's time travel is built; Killer's \"each other creature that shares a creature type with it\" needs sharesCreatureTypeWith keyed to a target slot (it reads only a trigger object)."
+  },
+  "keyword:fuse": {
+   "family": "cost:mana-restriction-at-cast",
+   "example": "Gallifrey Falls // No More: fuse (rule 702.102): cast both halves from hand"
+  },
+  "mechanic:commander-chosen-color-pregame": {
+   "family": "mechanic:commander-pairing",
+   "example": "Clara Oswald: If this is your commander, choose a color before the game; it is that color (and its color identity follows) — Clara Oswald."
+  },
+  "replacement:combat-damage-to-creature-prevented-and-shuffle": {
+   "family": "replacement:damage-modification",
+   "example": "Weeping Angel: If this would deal combat damage to a creature, prevent it and that creature's owner shuffles it into their library - Weeping Angel."
+  },
+  "replacement:draw-from-bottom": {
+   "family": "replacement:new-event-replacements",
+   "example": "River Song: A static that makes its controller draw from the bottom of their library (River Song)."
+  },
+  "replacement:enter-as-copy-of-exiled-card": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "The Master, Formed Anew: Enter as a copy of a creature card in exile matching a filter (a takeover counter on it) - The Master, Formed Anew."
+  },
+  "replacement:enter-from-exile-shuffle-instead-until-eot": {
+   "family": "replacement:new-event-replacements",
+   "example": "Don't Blink: Turn-long replacement on creatures entering from exile or cast from exile (Don't Blink)."
+  },
+  "replacement:villainous-choice-additional-time": {
+   "family": "replacement:new-event-replacements",
+   "example": "The Valeyard: If an opponent would face a villainous choice, they face it an additional time - The Valeyard."
+  },
+  "static:counters-remain-across-zones": {
+   "family": "static:counters-persist-across-zones",
+   "example": "Me, the Immortal: Counters stay on the card as it changes zones (Me, the Immortal)."
+  },
+  "static:extra-vote": {
+   "family": "mechanic:voting",
+   "example": "The Valeyard: 'While voting, you may vote an additional time' (rule 701.38d) - The Valeyard."
+  },
+  "static:gains-abilities-of-exiled-card": {
+   "family": "static:gain-abilities-from-graveyard",
+   "example": "Idris, Soul of the TARDIS: Vanishing is built; \"Idris has all activated and triggered abilities of the exiled card and gets +X/+X\" isn't."
+  },
+  "static:must-be-blocked-by-filter": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Ace's Baseball Bat: 'must be blocked by a [Dalek] if able' - only one matching creature is required to block (Ace's Baseball Bat rulings)."
+  },
+  "static:play-from-library-top-once-each-turn": {
+   "family": "zone:cast-from-library-top",
+   "example": "The Fourth Doctor: A once-each-turn play/cast from the library top, with a 'when you do' rider (The Fourth Doctor)."
+  },
+  "static:unblockable-unless-attacking-owner": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Become the Pilot: can't be blocked unless attacking its owner or a permanent its owner controls (Become the Pilot)"
+  },
+  "target:controlled-by-chosen-player": {
+   "family": "decision:choose-player",
+   "example": "Strax, Sontaran Nurse: A reflexive trigger's target filtered to the player the creating effect chose (random or not) — Strax's 'another target creature that player controls'."
+  },
+  "trigger:activates-ability-targets-only-source": {
+   "family": "trigger:activates-ability",
+   "example": "Bill Potts: An activated-ability trigger filtered on the ability's targets (only this permanent), sharing a once-each-turn limit with a spell trigger (Bill Potts)."
+  },
+  "trigger:attacks-and-isnt-blocked": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Cybermat: Per-creature 'whenever this creature attacks and isn't blocked', firing as blockers are declared - Cybermat."
+  },
+  "trigger:cast-spell-with-cascade": {
+   "family": "trigger:cast-spell-clauses",
+   "example": "The First Doctor: cast-spell trigger filter: the spell has cascade (printed or granted)"
+  },
+  "trigger:combat-damage-to-owner": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "The Beast, Deathless Prince: a creature deals combat damage to its owner (The Beast)"
+  },
+  "trigger:functions-while-suspended": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Deep-Sea Kraken: \"Whenever an opponent casts a spell, if this card is suspended, remove a time counter from it\": a trigger working from exile."
+  },
+  "trigger:phases-out": {
+   "family": "trigger:leaves-battlefield-filter",
+   "example": "The War Doctor: \"whenever one or more other permanents phase out\" (rule 603.10b)"
   }
  }
 }

@@ -788,6 +788,25 @@ export type TriggerSpec =
     }
   | {
       /**
+       * One or more counters were removed from a permanent — Regenerations
+       * Restored's "whenever one or more time counters are removed from this
+       * enchantment". Fires once per removal event, whatever was removed by
+       * (an upkeep trigger, a cost, time travel, an effect). `counter`
+       * narrows the kind; `{ triggerValue: true }` is how many.
+       *
+       * `last` is vanishing's "when the **last** time counter is removed
+       * from this permanent" (rule 702.63a): only a removal that leaves it
+       * with none of that kind — not a permanent that never had one, which
+       * no removal reaches.
+       */
+      readonly on: "counters-removed";
+      readonly who: TriggerWho;
+      readonly counter?: string;
+      readonly filter?: CardFilter;
+      readonly last?: boolean;
+    }
+  | {
+      /**
        * A player drew a card (Nekusar, the Mindrazer; Niv-Mizzet, Parun;
        * Consecrated Sphinx; Smothering Tithe). `who` is who drew.
        *
@@ -1546,6 +1565,9 @@ export type TriggerSpec =
        * ability that lives on the card on the stack, not a permanent (cascade,
        * storm — rules 702.85 / 702.40). ROADMAP Phase 8. */
       readonly on: "this-cast";
+      /** Not when it was cast from this zone — Rory Williams' "when you cast
+       * this spell from anywhere other than exile". */
+      readonly notFrom?: ZoneType;
     }
   | {
       /** "When you cycle this card" (rule 702.29c: "when you discard this

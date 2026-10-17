@@ -8,6 +8,7 @@ import _poolAangAirNomad from "../pool/aang-air-nomad.js";
 import _poolAbundantGrowth from "../pool/abundant-growth.js";
 import _poolAbzanFalconer from "../pool/abzan-falconer.js";
 import _poolAccursedDuneyard from "../pool/accursed-duneyard.js";
+import _poolAceFearlessRebel from "../pool/ace-fearless-rebel.js";
 import _poolAjaniResolute from "../pool/ajani-resolute.js";
 import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
@@ -141,6 +142,7 @@ import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
 import _poolFuriousResistance from "../pool/furious-resistance.js";
 import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
 import _poolGallantry from "../pool/gallantry.js";
+import _poolGallifreyStands from "../pool/gallifrey-stands.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
@@ -371,6 +373,7 @@ import _poolTerrainElemental from "../pool/terrain-elemental.js";
 import _poolTerrasymbiosis from "../pool/terrasymbiosis.js";
 import _poolTerritorialHammerskull from "../pool/territorial-hammerskull.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
+import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
@@ -441,6 +444,7 @@ const shard: CardShard = {
     _poolAbundantGrowth,
     _poolAbzanFalconer,
     _poolAccursedDuneyard,
+    _poolAceFearlessRebel,
     _poolAjaniResolute,
     _poolAkkiAvalanchers,
     _poolAkoumHellhound,
@@ -574,6 +578,7 @@ const shard: CardShard = {
     _poolFuriousResistance,
     _poolFyndhornElder,
     _poolGallantry,
+    _poolGallifreyStands,
     _poolGanaxAstralHunter,
     _poolGastalBlockbuster,
     _poolGavonyTownship,
@@ -804,6 +809,7 @@ const shard: CardShard = {
     _poolTerrasymbiosis,
     _poolTerritorialHammerskull,
     _poolTheHungerTideRises,
+    _poolTheNightOfTheDoctor,
     _poolTheTerrorOfSerpentsPass,
     _poolThinkTwice,
     _poolThornLieutenant,

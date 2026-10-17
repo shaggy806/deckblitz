@@ -294,6 +294,7 @@ import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
+import _poolRomanaIi from "../pool/romana-ii.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
@@ -734,6 +735,7 @@ const shard: CardShard = {
     _poolRingwraiths,
     _poolRiverSneak,
     _poolRobeOfStars,
+    _poolRomanaIi,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
     _poolRustlerRampage,

@@ -172,6 +172,50 @@ export const impendingAbilities = (): {
 });
 
 /**
+ * Vanishing N (rule 702.63a): "This permanent enters with N time counters on
+ * it," "At the beginning of your upkeep, if this permanent has a time counter
+ * on it, remove a time counter from it," and "When the last time counter is
+ * removed from this permanent, sacrifice it." Real abilities: the upkeep one
+ * is an intervening if (603.4) on the stack, and the sacrifice triggers on
+ * *any* removal of the last one (`counters-removed`'s `last` — time travel,
+ * Regenerations Restored). Each instance works separately (702.63c). Spread
+ * into the card: `static: [...vanishing(4).static]`, `triggered:
+ * [...vanishing(4).triggered]`. Without N (702.63b) there's no counter to
+ * enter with. Put "Vanishing N" in `text` as well.
+ */
+export const vanishing = (
+  n?: number,
+): { readonly static: readonly StaticAbility[]; readonly triggered: readonly TriggeredAbility[] } => ({
+  static:
+    n === undefined
+      ? []
+      : [
+          {
+            affects: { scope: "self" },
+            replacement: { event: "enters-battlefield", counters: { kind: "time", amount: n } },
+            text: `Vanishing ${n} (This permanent enters with ${n} time counters on it.)`,
+          },
+        ],
+  triggered: [
+    {
+      trigger: { on: "step-begins", step: "upkeep", who: "you" },
+      condition: { kind: "self-counters", counter: "time", compare: { op: "gte", n: 1 } },
+      targets: [],
+      effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
+      resolve: null,
+      text: "At the beginning of your upkeep, if this permanent has a time counter on it, remove a time counter from it.",
+    },
+    {
+      trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
+      targets: [],
+      effect: { kind: "sacrifice-source" },
+      resolve: null,
+      text: "When the last time counter is removed from this permanent, sacrifice it.",
+    },
+  ],
+});
+
+/**
  * Undying (rule 702.93): "When this permanent dies, if it had no +1/+1
  * counters on it, return it to the battlefield under its owner's control with
  * a +1/+1 counter on it." A real triggered ability — the "if" is an

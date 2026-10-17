@@ -2424,6 +2424,21 @@ export type AwaitingDecision =
     }
   | {
       /**
+       * Time travel (rule 701.56a): `player` looks at each permanent they
+       * control with a time counter on it and each suspended card they own
+       * with one, and for each chooses to put a time counter on it, remove
+       * one, or neither — then the changes all happen at once (the
+       * rulings). One decision for all of them, so nothing happens between
+       * the choices. The rest of a resolving instruction ("Time travel.
+       * Draw a card.") waits as a suspended resolution does.
+       */
+      readonly kind: "time-travel";
+      readonly player: PlayerId;
+      readonly eligible: readonly ObjectId[];
+      readonly source: ObjectId;
+    }
+  | {
+      /**
        * "Add N mana in any combination of …" with too many splits to list as
        * modes (Klauth, Unrivaled Ancient's power-sized attack trigger):
        * `player` says how many of each of `colors`, summing to `amount` —

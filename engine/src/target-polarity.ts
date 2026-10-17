@@ -112,7 +112,34 @@ function amountSign(amount: EffectAmount): number {
  * wrong way.
  */
 const RULES: { readonly [K in Kind]: Rule<K> } = {
-  sequence: (n, v) => n.effects.forEach((e) => v.child(e)),
+  // A rummage or a loot — the same player discarding and drawing the same
+  // number, one straight after the other — is card filtering, leaving that
+  // player's hand the size it was: it takes neither side, and what else the
+  // ability does decides the slot (Memory Worm's 2 damage, then "that player
+  // discards a card, then draws a card").
+  sequence: (n, v) => {
+    const filtering = new Set<number>();
+    n.effects.forEach((e, i) => {
+      const next = n.effects[i + 1];
+      if (next === undefined || filtering.has(i)) return;
+      const pair =
+        (e.kind === "discard" && next.kind === "draw") || (e.kind === "draw" && next.kind === "discard");
+      if (
+        pair &&
+        "target" in e &&
+        "target" in next &&
+        e.target !== undefined &&
+        e.target === next.target &&
+        typeof e.amount === "number" &&
+        e.amount === next.amount
+      ) {
+        filtering.add(i).add(i + 1);
+      }
+    });
+    n.effects.forEach((e, i) => {
+      if (!filtering.has(i)) v.child(e);
+    });
+  },
   "for-each-target": (n, v) => v.child(n.effect),
   "for-each-player": (n, v) => v.child(n.effect),
   "for-target": (n, v) => v.child(n.effect),
@@ -288,6 +315,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // It won't untap: a cost when it's your own, a drawback on someone else's.
   exert: (n, v) => v.touch(n.target, "harm", MINOR),
   proliferate: (n, v) => v.child(n.then),
+  "time-travel": none,
+  // Its card is never a target: a card found, the spell itself, or the
+  // cards exiled this way.
+  "give-suspend": none,
   "grant-keyword": (n, v) =>
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)
@@ -436,6 +467,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.otherwise);
   },
   "each-player-may": (n, v) => {
+    // "Target player may …" (partner with's search): the choice is theirs,
+    // so being offered it is help — minor, so a punisher in `ifDidnt`
+    // outranks it.
+    if (typeof n.who === "object") v.touch(n.who.controllerOfTarget, "help", MINOR);
     v.child(n.effect);
     v.child(n.ifDid);
     v.child(n.ifDidnt);

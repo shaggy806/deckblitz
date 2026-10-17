@@ -231,6 +231,7 @@ import _poolLoreholdArchivist from "../pool/lorehold-archivist.js";
 import _poolLoyalGuardian from "../pool/loyal-guardian.js";
 import _poolLumaretsFavor from "../pool/lumarets-favor.js";
 import _poolLumraBellowOfTheWoods from "../pool/lumra-bellow-of-the-woods.js";
+import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
@@ -395,6 +396,7 @@ import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
+import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
@@ -678,6 +680,7 @@ const shard: CardShard = {
     _poolLoyalGuardian,
     _poolLumaretsFavor,
     _poolLumraBellowOfTheWoods,
+    _poolLupariShield,
     _poolLyseHext,
     _poolMadameNullPowerBroker,
     _poolMalachiteGolem,
@@ -842,6 +845,7 @@ const shard: CardShard = {
     _poolTokkaRahzarTerribleTwos,
     _poolTomeRaider,
     _poolTopiaryLecturer,
+    _poolTraverseEternity,
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
     _poolTrystansCommand,

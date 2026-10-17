@@ -658,6 +658,16 @@ export type Action =
       readonly chosen: readonly TargetRef[];
     }
   | {
+      /** Answers a pending `time-travel` decision (rule 701.56a): of
+       * `awaiting.eligible`, the ones to put a time counter on (`add`) and
+       * the ones to remove one from (`remove`) — no object in both, and
+       * either or both may be empty ("for each … you may"). */
+      readonly type: "time-travel";
+      readonly player: PlayerId;
+      readonly add: readonly ObjectId[];
+      readonly remove: readonly ObjectId[];
+    }
+  | {
       /** Answers a pending `split-mana` decision: how many of each offered
        * colour, every count a whole number and their sum the decision's
        * `amount`. A colour left out is none. */
@@ -1419,6 +1429,13 @@ export type LegalAction =
        * including none. No `count`: that is the point of the card. */
       readonly kind: "proliferate";
       readonly eligible: readonly TargetRef[];
+    }
+  | {
+      /** Time travel (rule 701.56a) — for each of `eligible` (a permanent
+       * you control or a suspended card you own, each with a time counter),
+       * put a time counter on it, remove one, or neither. */
+      readonly kind: "time-travel";
+      readonly eligible: readonly ObjectId[];
     }
   | {
       /** "Add N mana in any combination of …": how many of each of `colors`,

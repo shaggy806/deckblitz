@@ -304,7 +304,9 @@
   "effect:instant-speed-loyalty",
   "static:devotion-condition-type",
   "static:slumber-counters-type-change",
-  "static:type-while-counter"
+  "static:type-while-counter",
+  "mechanic:suspend-and-time-counters",
+  "keyword:vanishing"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -93,6 +93,7 @@ import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
+import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
@@ -463,6 +464,7 @@ import _poolWinternightStories from "../pool/winternight-stories.js";
 import _poolWintersIntervention from "../pool/winters-intervention.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
+import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
 import _poolWyluliWolf from "../pool/wyluli-wolf.js";
 import _poolYathanTombguard from "../pool/yathan-tombguard.js";
 import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
@@ -571,6 +573,7 @@ const shard: CardShard = {
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
     _poolDecanterOfEndlessWater,
+    _poolDeepForestHermit,
     _poolDenyEntry,
     _poolDenyReality,
     _poolDepower,
@@ -941,6 +944,7 @@ const shard: CardShard = {
     _poolWintersIntervention,
     _poolWitchsCottage,
     _poolWoodlandChangeling,
+    _poolWreckAndRebuild,
     _poolWyluliWolf,
     _poolYathanTombguard,
     _poolYavimayaWurm,

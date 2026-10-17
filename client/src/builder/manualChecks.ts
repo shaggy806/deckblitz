@@ -2924,4 +2924,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Archfiend of Depravity'] },
     }),
   ),
+  preset(
+    'Wibbly-wobbly, Timey-wimey (time travel)',
+    board({
+      you: {
+        bf: [{ name: 'Four Knocks', counters: { time: 2 } }, { name: 'Rotating Fireplace', counters: { time: 1 } }, 'Island*2', 'Mountain'],
+        hand: ['Rift Bolt', 'Wibbly-wobbly, Timey-wimey'],
+      },
+      opp: { bf: [{ name: 'Four Knocks', counters: { time: 3 } }] },
+    }),
+  ),
 ]

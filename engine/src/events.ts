@@ -456,11 +456,19 @@ export type GameEvent =
       readonly timeCounters: number;
     })
   | (Base & {
-      /** A time counter came off a suspended card at its owner's upkeep;
-       * `remaining` left. At 0 the engine casts it for free. */
+      /** A time counter came off a suspended card — at its owner's upkeep,
+       * or by an effect (time travel); `remaining` left. At 0 its owner may
+       * cast it for free. */
       readonly type: "time-counter-removed";
       readonly object: ObjectId;
       readonly remaining: number;
+    })
+  | (Base & {
+      /** Time travel put a time counter on a suspended card (rule 701.56a);
+       * `now` it has that many. (A permanent's is a `counter-added`.) */
+      readonly type: "time-counter-added";
+      readonly object: ObjectId;
+      readonly now: number;
     })
   | (Base & {
       /** A card was foretold — exiled face-down from hand for `{2}` (ROADMAP
@@ -628,12 +636,16 @@ export type GameEvent =
       readonly after?: number;
     })
   | (Base & {
-      /** Counters removed (from a `removeCounter` ability cost — Walking
-       * Ballista). */
+      /** Counters removed — by an ability's cost (Walking Ballista), an
+       * effect, time travel, a stun counter replacing an untap, or +1/+1 and
+       * -1/-1 counters annihilating. */
       readonly type: "counter-removed";
       readonly object: ObjectId;
       readonly counter: string;
       readonly amount: number;
+      /** How many of that kind it has left — 0 is vanishing's "the last"
+       * (the `counters-removed` trigger's `last`). */
+      readonly after: number;
     })
   | (Base & {
       readonly type: "keyword-granted";

@@ -110,7 +110,13 @@ function parseTypeLine(typeLine) {
     else if (TYPES.has(w)) types.push(w);
     else if (w !== "token") unknown.push(word);
   }
-  return { supertypes, types, subtypes: right.split(" ").filter(Boolean), unknown };
+  return { supertypes, types, subtypes: splitSubtypes(right), unknown };
+}
+
+/** The subtypes after the dash, one per word — except "Time Lord", the one
+ * creature type two words long (rule 205.3m). */
+function splitSubtypes(right) {
+  return right.replace(/\bTime Lord\b/g, "Time Lord").split(" ").filter(Boolean).map((s) => s.replace(" ", " "));
 }
 
 // ------------------------------------------------------- writing a file

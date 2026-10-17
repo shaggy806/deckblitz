@@ -139,6 +139,7 @@ import _poolFinalShowdown from "../pool/final-showdown.js";
 import _poolFireElemental from "../pool/fire-elemental.js";
 import _poolFireball from "../pool/fireball.js";
 import _poolFlameOn from "../pool/flame-on.js";
+import _poolFlatline from "../pool/flatline.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolGadwickTheWizened from "../pool/gadwick-the-wizened.js";
@@ -163,6 +164,7 @@ import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
+import _poolHeavenSent from "../pool/heaven-sent.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
 import _poolHeliodGodOfTheSun from "../pool/heliod-god-of-the-sun.js";
 import _poolHellsKitchen from "../pool/hells-kitchen.js";
@@ -564,6 +566,7 @@ const shard: CardShard = {
     _poolFireElemental,
     _poolFireball,
     _poolFlameOn,
+    _poolFlatline,
     _poolFootSoldiers,
     _poolFrontierGuide,
     _poolGadwickTheWizened,
@@ -588,6 +591,7 @@ const shard: CardShard = {
     _poolHammerOfPurphoros,
     _poolHanweirGarrison,
     _poolHeartWarden,
+    _poolHeavenSent,
     _poolHelgaSkittishSeer,
     _poolHeliodGodOfTheSun,
     _poolHellsKitchen,

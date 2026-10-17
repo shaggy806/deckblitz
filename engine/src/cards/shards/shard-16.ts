@@ -312,6 +312,7 @@ import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
+import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
 import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
@@ -331,6 +332,7 @@ import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
+import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
 import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
     _poolRubblebeltBraggart,
     _poolRuinRat,
     _poolSacredFoundry,
+    _poolSallySparrow,
     _poolSamutTheDrivingForce,
     _poolSavagePackmate,
     _poolScatterTheSeeds,
@@ -802,6 +805,7 @@ const shard: CardShard = {
     _poolShroudedShepherd,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
+    _poolSisterhoodOfKarn,
     _poolSkarrganHellkite,
     _poolSkeletalKathari,
     _poolSkybladeOfTheLegion,

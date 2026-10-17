@@ -156,6 +156,7 @@ import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
 import _poolGoldmeadowNomad from "../pool/goldmeadow-nomad.js";
 import _poolGoldveinHydra from "../pool/goldvein-hydra.js";
 import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.js";
+import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
@@ -187,6 +188,7 @@ import _poolJackedRabbit from "../pool/jacked-rabbit.js";
 import _poolJalumTome from "../pool/jalum-tome.js";
 import _poolJasmineDragonTeaShop from "../pool/jasmine-dragon-tea-shop.js";
 import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet.js";
+import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
@@ -217,6 +219,7 @@ import _poolMagusOfTheWheel from "../pool/magus-of-the-wheel.js";
 import _poolMammothBellow from "../pool/mammoth-bellow.js";
 import _poolManaGeyser from "../pool/mana-geyser.js";
 import _poolManaLeak from "../pool/mana-leak.js";
+import _poolMemoryWorm from "../pool/memory-worm.js";
 import _poolMerfolkPupil from "../pool/merfolk-pupil.js";
 import _poolMinaAndDennWildborn from "../pool/mina-and-denn-wildborn.js";
 import _poolMindseekerOculus from "../pool/mindseeker-oculus.js";
@@ -371,6 +374,7 @@ import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
+import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
@@ -600,6 +604,7 @@ const shard: CardShard = {
     _poolGoldmeadowNomad,
     _poolGoldveinHydra,
     _poolGoreclawTerrorOfQalSisma,
+    _poolGrahamObrien,
     _poolGraspOfPhantoms,
     _poolGriptide,
     _poolGuardianGladewalker,
@@ -631,6 +636,7 @@ const shard: CardShard = {
     _poolJalumTome,
     _poolJasmineDragonTeaShop,
     _poolJasonBrightGlowingProphet,
+    _poolJennyGeneratedAnomaly,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
     _poolJunglebornPioneer,
@@ -661,6 +667,7 @@ const shard: CardShard = {
     _poolMammothBellow,
     _poolManaGeyser,
     _poolManaLeak,
+    _poolMemoryWorm,
     _poolMerfolkPupil,
     _poolMinaAndDennWildborn,
     _poolMindseekerOculus,
@@ -815,6 +822,7 @@ const shard: CardShard = {
     _poolTergridGodOfFright,
     _poolTezzeretArtificeMaster,
     _poolThaumatog,
+    _poolTheDalekEmperor,
     _poolTheLunarWhale,
     _poolThermalNavigator,
     _poolThoseWhoServe,

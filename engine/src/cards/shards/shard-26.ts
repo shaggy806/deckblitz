@@ -67,6 +67,7 @@ import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
 import _poolClaimThePrecious from "../pool/claim-the-precious.js";
+import _poolClockworkDroid from "../pool/clockwork-droid.js";
 import _poolCoastalPiracy from "../pool/coastal-piracy.js";
 import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
 import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
@@ -282,6 +283,7 @@ import _poolRovingHarper from "../pool/roving-harper.js";
 import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
 import _poolRubblebeltBoar from "../pool/rubblebelt-boar.js";
 import _poolRuinousUltimatum from "../pool/ruinous-ultimatum.js";
+import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
@@ -501,6 +503,7 @@ const shard: CardShard = {
     _poolChromaticOrrery,
     _poolCityOfBrass,
     _poolClaimThePrecious,
+    _poolClockworkDroid,
     _poolCoastalPiracy,
     _poolCoerciveImpetus,
     _poolCogworkersPuzzleknot,
@@ -716,6 +719,7 @@ const shard: CardShard = {
     _poolRowdySnowballers,
     _poolRubblebeltBoar,
     _poolRuinousUltimatum,
+    _poolRyanSinclair,
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
     _poolSaltfieldRecluse,

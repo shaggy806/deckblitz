@@ -183,6 +183,7 @@ import _poolJwariRuins from "../pool/jwari-ruins.js";
 import _poolKabiraPlateau from "../pool/kabira-plateau.js";
 import _poolKabutoMoth from "../pool/kabuto-moth.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
+import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
@@ -292,6 +293,7 @@ import _poolRedirectLightning from "../pool/redirect-lightning.js";
 import _poolReflexes from "../pool/reflexes.js";
 import _poolRefurbish from "../pool/refurbish.js";
 import _poolRegalCaracal from "../pool/regal-caracal.js";
+import _poolRegenerationsRestored from "../pool/regenerations-restored.js";
 import _poolRelicOfLegends from "../pool/relic-of-legends.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
 import _poolResurrectionOrb from "../pool/resurrection-orb.js";
@@ -652,6 +654,7 @@ const shard: CardShard = {
     _poolKabiraPlateau,
     _poolKabutoMoth,
     _poolKariZevSkyshipRaider,
+    _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKindercatch,
     _poolKineticOoze,
@@ -761,6 +764,7 @@ const shard: CardShard = {
     _poolReflexes,
     _poolRefurbish,
     _poolRegalCaracal,
+    _poolRegenerationsRestored,
     _poolRelicOfLegends,
     _poolRestoreWithEmpathy,
     _poolResurrectionOrb,

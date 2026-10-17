@@ -42,6 +42,7 @@ import {
   saddle,
   undying,
   unearth,
+  vanishing,
 } from "../dist/cards/helpers.js";
 
 // ------------------------------------------------------------------ text
@@ -277,6 +278,11 @@ function keywordPart(part) {
     return { card: { morph: { keyword: m[1].toLowerCase(), cost: m[2] } } };
   }
   if ((m = new RegExp(`^disturb ${COST}$`, "i").exec(p))) return { card: { disturb: { cost: m[1] } } };
+  // Vanishing N (rule 702.63a): the helper's three abilities.
+  if ((m = /^vanishing (\d+)$/i.exec(p))) {
+    const v = vanishing(Number(m[1]));
+    return { static: [...v.static], triggered: [...v.triggered] };
+  }
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
   // Landcycling and typecycling: cycling that searches (Ash Barrens, Eagles of the North).
   if ((m = new RegExp(`^basic landcycling ${COST}$`, "i").exec(p))) {
@@ -961,6 +967,8 @@ export function parseSentence(sentence, ctx) {
     return { kind: "add-counter", target: slot(m[2]), counter: "+1/+1", amount: n };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
+  // Time travel (rule 701.56a).
+  if (re("time travel").test(s)) return { kind: "time-travel" };
   // Moving counters (rule 122.5): "a [kind] counter from ~ onto …", "all
   // counters from ~ onto …", "a counter" (a kind chosen as it resolves) or
   // "any number of counters" from one target onto a second.

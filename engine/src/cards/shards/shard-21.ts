@@ -309,6 +309,7 @@ import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
+import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
 import _poolSpikedBaloth from "../pool/spiked-baloth.js";
@@ -349,6 +350,7 @@ import _poolTheEldestReborn from "../pool/the-eldest-reborn.js";
 import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheHowlingCommandos from "../pool/the-howling-commandos.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
+import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
@@ -712,6 +714,7 @@ const shard: CardShard = {
     _poolSlinkingSerpent,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,
+    _poolSontaranGeneral,
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
     _poolSpikedBaloth,
@@ -752,6 +755,7 @@ const shard: CardShard = {
     _poolTheFrightfulFour,
     _poolTheHowlingCommandos,
     _poolTheInvincibleIronMan,
+    _poolTheMasterMesmerist,
     _poolTheRegalia,
     _poolTheSibsigCeremony,
     _poolThornwoodFalls,

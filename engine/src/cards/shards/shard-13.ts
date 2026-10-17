@@ -114,6 +114,7 @@ import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
+import _poolDreamtideWhale from "../pool/dreamtide-whale.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
 import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
 import _poolDualSunAdepts from "../pool/dual-sun-adepts.js";
@@ -152,6 +153,7 @@ import _poolFoulImp from "../pool/foul-imp.js";
 import _poolFountainOfYouth from "../pool/fountain-of-youth.js";
 import _poolFractalMascot from "../pool/fractal-mascot.js";
 import _poolFrodoAdventurousHobbit from "../pool/frodo-adventurous-hobbit.js";
+import _poolFrostFairLureFish from "../pool/frost-fair-lure-fish.js";
 import _poolFrostboilSnarl from "../pool/frostboil-snarl.js";
 import _poolFrostbridgeGuard from "../pool/frostbridge-guard.js";
 import _poolFrostburnWeird from "../pool/frostburn-weird.js";
@@ -569,6 +571,7 @@ const shard: CardShard = {
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
     _poolDragonlordAtarka,
+    _poolDreamtideWhale,
     _poolDriftingMeadow,
     _poolDroverOfTheMighty,
     _poolDualSunAdepts,
@@ -607,6 +610,7 @@ const shard: CardShard = {
     _poolFountainOfYouth,
     _poolFractalMascot,
     _poolFrodoAdventurousHobbit,
+    _poolFrostFairLureFish,
     _poolFrostboilSnarl,
     _poolFrostbridgeGuard,
     _poolFrostburnWeird,

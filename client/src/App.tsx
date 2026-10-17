@@ -322,6 +322,7 @@ type ModesChoiceAction = Extract<LegalAction, { kind: 'choose-modes' }>
 type SacrificeAction = Extract<LegalAction, { kind: 'sacrifice' }>
 type ProliferateAction = Extract<LegalAction, { kind: 'proliferate' }>
 type SplitManaAction = Extract<LegalAction, { kind: 'split-mana' }>
+type TimeTravelAction = Extract<LegalAction, { kind: 'time-travel' }>
 type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
@@ -575,6 +576,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   sacrifice: 'choose what to sacrifice',
   proliferate: 'choose what to proliferate',
   'split-mana': 'choose their mana',
+  'time-travel': 'time travel',
   'choose-permanents': 'choose permanents',
   'enter-attacking': 'choose what their creatures attack',
   scry: 'scry',
@@ -1561,6 +1563,10 @@ function Table({
   // "N mana in any combination of …": how many of each colour so far.
   // Cleared once sent, so the next split starts from nothing.
   const [manaSplit, setManaSplit] = useState<Readonly<Record<string, number>>>({})
+  // Time travel's answer as it's built: +1 or -1 per object, absent = neither;
+  // and which way a click on a permanent goes.
+  const [timeTravelPicks, setTimeTravelPicks] = useState<Readonly<Record<string, 1 | -1>>>({})
+  const [timeTravelBrush, setTimeTravelBrush] = useState<1 | -1>(1)
   const [zoneView, setZoneView] = useState<{
     readonly title: string
     readonly ids: readonly ObjectId[]
@@ -1818,6 +1824,7 @@ function Table({
     (a): a is ProliferateAction => a.kind === 'proliferate',
   )
   const splitManaAction = actions.find((a): a is SplitManaAction => a.kind === 'split-mana')
+  const timeTravelAction = actions.find((a): a is TimeTravelAction => a.kind === 'time-travel')
   const scryAction = actions.find((a): a is ScryAction => a.kind === 'scry')
   const castNowAction = actions.find((a): a is CastNowAction => a.kind === 'cast-now')
   // "You may cast a spell from your hand" and the like: more than one card on
@@ -1913,6 +1920,7 @@ function Table({
     | 'sacrifice'
     | 'proliferate'
     | 'split-mana'
+    | 'time-travel'
     | 'choose-permanents'
     | 'scry'
     | 'choose-x'
@@ -1953,6 +1961,8 @@ function Table({
           ? 'proliferate'
         : splitManaAction
           ? 'split-mana'
+        : timeTravelAction
+          ? 'time-travel'
         : choosePermanentsAction
           ? 'choose-permanents'
         : scryAction
@@ -2787,6 +2797,18 @@ function Table({
         )
         return
       }
+      if (mode === 'time-travel' && timeTravelAction) {
+        if (!timeTravelAction.eligible.includes(id)) return
+        // The brush says which way a click goes; clicking the same way again
+        // leaves it be.
+        setTimeTravelPicks((cur) => {
+          const next = { ...cur }
+          if (next[id] === timeTravelBrush) delete next[id]
+          else next[id] = timeTravelBrush
+          return next
+        })
+        return
+      }
       if (mode === 'proliferate' && proliferateAction) {
         if (!eligibleToProliferate(proliferateAction, id)) return
         // A plain toggle, with no cap: "any number" has no count to enforce,
@@ -2877,6 +2899,8 @@ function Table({
       pendingConvoke,
       pendingWaterbend,
       proliferateAction,
+      timeTravelAction,
+      timeTravelBrush,
       activeTargeting,
       defendersFor,
       enchantAction,
@@ -3195,6 +3219,11 @@ function Table({
       highlight = choosePermanentsAction.eligible.includes(id) && taken === 0
       selected = taken > 0
       if (of > 1 && taken > 0) badge = `✓ ${taken}/${of}`
+    } else if (mode === 'time-travel' && timeTravelAction) {
+      const pick = timeTravelPicks[id]
+      highlight = timeTravelAction.eligible.includes(id) && pick === undefined
+      selected = pick !== undefined
+      if (pick !== undefined) badge = pick === 1 ? '+1 time' : '−1 time'
     } else if (mode === 'proliferate' && proliferateAction) {
       const picked = proliferatePicks.some((t) => t.kind === 'object' && t.object === id)
       highlight = eligibleToProliferate(proliferateAction, id) && !picked
@@ -4089,6 +4118,79 @@ function Table({
           }}
         >
           Add mana
+        </button>
+      </div>
+    )
+  } else if (mode === 'time-travel' && timeTravelAction) {
+    // Rule 701.56a: for each permanent you control with a time counter and
+    // each suspended card you own, add one, remove one, or neither — all at
+    // once, so one answer for the lot. Permanents are clicked on the board,
+    // the brush saying which way; a suspended card is in exile, off the
+    // board, so it alone gets a row here.
+    const pickFor = (id: string): 1 | -1 | 0 => timeTravelPicks[id] ?? 0
+    const setPick = (id: string, delta: 1 | -1 | 0) =>
+      setTimeTravelPicks((cur) => {
+        const next = { ...cur }
+        if (delta === 0) delete next[id]
+        else next[id] = delta
+        return next
+      })
+    const suspendedHere = timeTravelAction.eligible.filter((id) => view.objects[id]?.zone === 'exile')
+    const onBoard = timeTravelAction.eligible.length - suspendedHere.length
+    const adding = timeTravelAction.eligible.filter((id) => pickFor(id) === 1).length
+    const removing = timeTravelAction.eligible.filter((id) => pickFor(id) === -1).length
+    controls = (
+      <div className="controls">
+        <span>
+          {view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}
+          Time travel · +{adding} / −{removing}
+          {onBoard > 0 ? ' — click your permanents to add or remove a time counter' : ''}
+        </span>
+        {onBoard > 0 &&
+          ([1, -1] as const).map((brush) => (
+            <button
+              key={brush}
+              type="button"
+              className={timeTravelBrush === brush ? 'selected' : undefined}
+              aria-pressed={timeTravelBrush === brush}
+              onClick={() => setTimeTravelBrush(brush)}
+            >
+              {brush === 1 ? 'Add a counter' : 'Remove a counter'}
+            </button>
+          ))}
+        {suspendedHere.map((id) => (
+          <span key={id} className="stack-counts">
+            <span>
+              {game.nameOf(id)} (suspended, {(view.objects[id]?.counters?.time ?? 0) + pickFor(id)} time)
+            </span>
+            {([-1, 0, 1] as const).map((delta) => (
+              <button
+                key={delta}
+                type="button"
+                className={pickFor(id) === delta ? 'selected' : undefined}
+                aria-pressed={pickFor(id) === delta}
+                onClick={() => setPick(id, delta)}
+              >
+                {delta === -1 ? '−1' : delta === 1 ? '+1' : 'Leave'}
+              </button>
+            ))}
+          </span>
+        ))}
+        <button type="button" disabled={adding + removing === 0} onClick={() => setTimeTravelPicks({})}>
+          Clear
+        </button>
+        {/* Never disabled: leaving everything as it is is an answer too. */}
+        <button
+          type="button"
+          onClick={() => {
+            const ids = timeTravelAction.eligible
+            const add = ids.filter((id) => pickFor(id) === 1)
+            const remove = ids.filter((id) => pickFor(id) === -1)
+            setTimeTravelPicks({})
+            game.dispatch({ type: 'time-travel', player: seat, add, remove } as Action)
+          }}
+        >
+          Confirm
         </button>
       </div>
     )

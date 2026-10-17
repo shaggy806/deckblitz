@@ -72,6 +72,7 @@ import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
+import _poolCrackInTime from "../pool/crack-in-time.js";
 import _poolCraftyPathmage from "../pool/crafty-pathmage.js";
 import _poolCrestedHerdcaller from "../pool/crested-herdcaller.js";
 import _poolCrudeBentBlade from "../pool/crude-bent-blade.js";
@@ -106,7 +107,9 @@ import _poolDreadmobile from "../pool/dreadmobile.js";
 import _poolDreamscapeArtist from "../pool/dreamscape-artist.js";
 import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
+import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
+import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
@@ -181,6 +184,7 @@ import _poolHydrosurge from "../pool/hydrosurge.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
+import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
@@ -220,6 +224,7 @@ import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
 import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
+import _poolMarthaJones from "../pool/martha-jones.js";
 import _poolMaryReadAndAnneBonny from "../pool/mary-read-and-anne-bonny.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
@@ -367,6 +372,7 @@ import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
+import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThreeStepsAhead from "../pool/three-steps-ahead.js";
 import _poolThunderStrike from "../pool/thunder-strike.js";
@@ -505,6 +511,7 @@ const shard: CardShard = {
     _poolConcertedCare,
     _poolConstrictorSage,
     _poolContaminatedLandscape,
+    _poolCrackInTime,
     _poolCraftyPathmage,
     _poolCrestedHerdcaller,
     _poolCrudeBentBlade,
@@ -539,7 +546,9 @@ const shard: CardShard = {
     _poolDreamscapeArtist,
     _poolDromarsCharm,
     _poolDrownInIchor,
+    _poolDugganPrivateDetective,
     _poolEccentricPestfinder,
+    _poolEcstaticBeauty,
     _poolEdgarAncientBloodlord,
     _poolEldraziDevastator,
     _poolEldraziRepurposer,
@@ -614,6 +623,7 @@ const shard: CardShard = {
     _poolIgneousGolem,
     _poolIhsansShade,
     _poolIllvoiGaleblade,
+    _poolImpendingFlux,
     _poolImplementsOfSacrifice,
     _poolIndomitableWill,
     _poolInfantryShield,
@@ -653,6 +663,7 @@ const shard: CardShard = {
     _poolMaiJadedEdge,
     _poolMalevolentChandelier,
     _poolMantisRider,
+    _poolMarthaJones,
     _poolMaryReadAndAnneBonny,
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
@@ -800,6 +811,7 @@ const shard: CardShard = {
     _poolTextbookTabulator,
     _poolThatsMine,
     _poolTheLegendOfRoku,
+    _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
     _poolThreeStepsAhead,
     _poolThunderStrike,

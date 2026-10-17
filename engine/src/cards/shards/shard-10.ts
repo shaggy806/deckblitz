@@ -302,6 +302,7 @@ import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
+import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
@@ -761,6 +762,7 @@ const shard: CardShard = {
     _poolRiverchurnMonument,
     _poolRollRollRollRoll,
     _poolRootManipulation,
+    _poolRotatingFireplace,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
     _poolRushwoodDryad,

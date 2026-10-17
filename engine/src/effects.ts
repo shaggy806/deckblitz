@@ -340,6 +340,10 @@ export type EffectAmount =
    * `countOf`, which only ever counts battlefield permanents. The filter's
    * `ownedBy: "you"` is what restricts it to your own graveyard. */
   | { readonly countInGraveyard: CardFilter }
+  /** How many suspended cards the effect's controller owns (rule 702.62b —
+   * in exile, with suspend, with a time counter): Rose Tyler's "a time
+   * counter on it for each suspended card you own". */
+  | { readonly suspendedCardsYouOwn: true }
   /** The current power of whatever an {@link AmountRef} points at — Unleash
    * Fury's "double the power of target creature" is a `modify-pt` that adds
    * this; "it deals damage equal to its power" from a dies trigger reads the
@@ -2892,6 +2896,49 @@ export type EffectSpec =
       readonly then?: EffectSpec;
     }
   | {
+      /**
+       * Time travel (rule 701.56a — Wibbly-wobbly, Timey-wimey): for each
+       * permanent its controller controls with a time counter on it and each
+       * suspended card they own with one, they may put a time counter on it
+       * or remove one, all at once (the rulings). Raises a `time-travel`
+       * decision; with nothing eligible, nothing happens. A suspended card
+       * whose last time counter comes off is cast as suspend says (rule
+       * 702.62a), and a permanent's last coming off fires its
+       * `counters-removed` triggers (vanishing's sacrifice). The rest of a
+       * `sequence` waits for the answer.
+       */
+      readonly kind: "time-travel";
+    }
+  | {
+      /**
+       * Time counters on exiled cards, which then have suspend (rule
+       * 702.62b — a card is suspended if it's in exile, has suspend, and has
+       * a time counter on it). Two forms:
+       *
+       * - Without `target`, the cards this resolution exiled this way that
+       *   are still in exile and match `filter` each get `timeCounters` —
+       *   "for each nonland card exiled this way, put a number of time
+       *   counters on that card equal to its mana value. If it doesn't have
+       *   suspend, it gains suspend" (The Parting of the Ways).
+       * - With `target`, that one card is exiled from wherever it is (a
+       *   library, the stack) with them — "exile that card with three time
+       *   counters on it. If it doesn't have suspend, it gains suspend"
+       *   (Sibylline Soothsayer's card found; Rory Williams' own spell).
+       *
+       * `"mana-value"` is each card's own mana value. A card given no time
+       * counter (a mana value of 0) isn't suspended — 702.62b wants one —
+       * and stays in exile as an ordinary exiled card. With
+       * `onlyWithSuspend`, only cards with suspend printed get counters and
+       * none gains it (Ecstatic Beauty: "put four time counters on each of
+       * those cards that has suspend").
+       */
+      readonly kind: "give-suspend";
+      readonly timeCounters: EffectAmount | "mana-value";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly onlyWithSuspend?: true;
+    }
+  | {
       readonly kind: "grant-keyword";
       readonly target: EffectTargetRef;
       readonly keyword: Keyword;
@@ -5059,6 +5106,8 @@ export interface EffectApi {
   castThisTurnOf(player: PlayerId, filter: CardFilter, greatest?: "mana-value"): number;
   /** See the `{ countInGraveyard }` {@link EffectAmount}. */
   countInGraveyard(filter: CardFilter): number;
+  /** See the `{ suspendedCardsYouOwn }` {@link EffectAmount}. */
+  suspendedCardsYouOwn?(): number;
   /** How many cards are in `player`'s hand — see `{ cardsInHand }`. */
   handSizeOf(player: PlayerId): number;
   /** How many cards are in `player`'s library. */
@@ -5769,6 +5818,15 @@ export interface EffectApi {
   addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId): void;
   /** Proliferate — see the `"proliferate"` {@link EffectSpec}. */
   proliferate(then: EffectSpec | null): void;
+  /** Time travel — see the `"time-travel"` {@link EffectSpec}. */
+  timeTravel?(): void;
+  /** Time counters on exiled cards, which have suspend — see the
+   * `"give-suspend"` {@link EffectSpec}. `target` is the card the spec's
+   * `target` names, resolved; absent for the "exiled this way" form. */
+  giveSuspend?(
+    counters: number | "mana-value",
+    options: { readonly filter?: CardFilter; readonly onlyWithSuspend?: true; readonly target?: TargetRef },
+  ): void;
   /** "N mana in any combination of …" with too many splits to list as
    * modes: the controller says how many of each colour, as one decision
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
@@ -6813,6 +6871,7 @@ function signedAmountValue(
     return amount.round === "up" ? Math.ceil(n) : Math.floor(n);
   }
   if ("countInGraveyard" in amount) return ctx.countInGraveyard(amount.countInGraveyard);
+  if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
   if ("ifCondition" in amount) {
     return signedAmountValue(ctx.conditionMet(amount.ifCondition) ? amount.then : amount.else, ctx, each);
   }
@@ -8629,6 +8688,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
       ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by);
+      return;
+    }
+    case "time-travel":
+      ctx.timeTravel?.();
+      return;
+    case "give-suspend": {
+      const counters = spec.timeCounters === "mana-value" ? "mana-value" : amountValue(spec.timeCounters, ctx);
+      const options = {
+        ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
+        ...(spec.onlyWithSuspend === true ? { onlyWithSuspend: true as const } : {}),
+      };
+      if (spec.target === undefined) {
+        ctx.giveSuspend?.(counters, options);
+        return;
+      }
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.giveSuspend?.(counters, { ...options, target });
       return;
     }
     case "proliferate":

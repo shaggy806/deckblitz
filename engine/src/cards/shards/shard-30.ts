@@ -152,6 +152,7 @@ import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolForceVoid from "../pool/force-void.js";
 import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
+import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
@@ -378,6 +379,7 @@ import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js
 import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
+import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolForceVoid,
     _poolForensicResearcher,
     _poolFortuitousFind,
+    _poolFourKnocks,
     _poolFreestriderCommando,
     _poolFrenziedRaptor,
     _poolFriendlyNeighborhood,
@@ -834,6 +837,7 @@ const shard: CardShard = {
     _poolTangleMantis,
     _poolTempleOfMalice,
     _poolTheBalrogOfMoria,
+    _poolTheFloodOfMars,
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,
     _poolThePrydwenSteelFlagship,
