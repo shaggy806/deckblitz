@@ -600,6 +600,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toBe(false);
   });
 
+  it("celebration: the `entered` turn history, as an intervening if and as a static's trailing 'as long as'", () => {
+    const celebration = { kind: "turn-history", what: "entered", filter: { notTypes: ["land"] }, atLeast: 2 };
+    const pests = face(
+      "Celebration — At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on this creature.",
+    );
+    expect(pests.triggered[0].condition).toEqual(celebration);
+    expect(pests.complete).toBe(true);
+    const guest = face(
+      "Celebration — ~ gets +1/+1 and has trample as long as two or more nonland permanents entered the battlefield under your control this turn.",
+    );
+    expect(guest.static[0]).toMatchObject({ affects: { scope: "self" }, grantPt: [1, 1], grantKeywords: ["trample"], condition: celebration });
+    expect(guest.complete).toBe(true);
+    const pie = face(
+      "Celebration — ~ has double strike as long as two or more nonland permanents entered the battlefield under your control this turn.",
+    );
+    expect(pie.static[0]).toMatchObject({ grantKeywords: ["double-strike"], condition: celebration });
+    // A static the rest of the line doesn't read stays a person's.
+    expect(
+      face(
+        "Celebration — ~ can't be countered as long as two or more nonland permanents entered the battlefield under your control this turn.",
+      ).complete,
+    ).toBe(false);
+  });
+
   it("web-slinging's returned creature: its mana value, as Scarlet Spider's counters", () => {
     const save = face(
       "Sensational Save — If ~ was cast using web-slinging, he enters with X +1/+1 counters on him, where X is the mana value of the returned creature.",

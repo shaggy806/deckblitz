@@ -88,6 +88,23 @@ export const VOID_CONDITION: StaticCondition = {
 export const REVOLT_CONDITION: StaticCondition = { kind: "turn-history", what: "left" };
 
 /**
+ * Celebration (an ability word, Wilds of Eldraine — rule 207.2c gives it no
+ * meaning of its own): "if / as long as two or more nonland permanents
+ * entered the battlefield under your control this turn". The `entered` turn
+ * history: each one under its controller as it entered, read as it entered
+ * (a land is left out by what it was then), a token stack as every token in
+ * it — counted though it has left or changed control since (the rulings:
+ * "checking for past events, not the current game state"), and a permanent
+ * that left and came back twice, as the two objects it was (rule 400.7).
+ */
+export const CELEBRATION_CONDITION: StaticCondition = {
+  kind: "turn-history",
+  what: "entered",
+  filter: { notTypes: ["land"] },
+  atLeast: 2,
+};
+
+/**
  * Ward (rule 702.21a): "Whenever this permanent becomes the target of a spell
  * or ability an opponent controls, counter that spell or ability unless that
  * player pays [cost]." A real triggered ability, so each instance triggers

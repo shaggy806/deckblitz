@@ -3672,6 +3672,15 @@ clause (section 9):
   permanent its controller controlled as it left (rule 603.10a), for any zone,
   however it left, a token too; Tale of Momo's "if a creature left the
   battlefield under your control" adds `filter: { type: "creature" }`.
+  **Celebration** (Wilds of Eldraine — "if / as long as two or more nonland
+  permanents entered the battlefield under your control this turn") is
+  `CELEBRATION_CONDITION` in `helpers.ts`: `{ what: "entered", filter: {
+  notTypes: ["land"] }, atLeast: 2 }` — each entry under its controller as
+  it entered and read as it entered, counted though it has left or changed
+  control since (the rulings), a token stack as every token in it, and one
+  permanent that left and came back twice (rule 400.7). The same condition
+  goes on a trigger (an intervening if) or a static (Armory Mice's "gets
+  +0/+2 as long as …"); the scaffolder reads both.
   Phasing out isn't leaving (rule 702.26d). `who` is
   `"you"` (default), `"opponent"` or `"any-player"`. The `turn-stat`
   condition covers the running totals, raid (`stat: "attacked"`) and

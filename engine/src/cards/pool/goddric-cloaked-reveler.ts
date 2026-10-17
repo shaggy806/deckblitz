@@ -1,4 +1,5 @@
 import { defineCard } from "../define.js";
+import { CELEBRATION_CONDITION } from "../helpers.js";
 
 // Celebration reads the turn's history, not the board: two nonland
 // permanents that entered under your control this turn count even if they've
@@ -27,7 +28,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "turn-history", what: "entered", filter: { notTypes: ["land"] }, atLeast: 2 },
+      condition: CELEBRATION_CONDITION,
       setSubtypes: ["Dragon"],
       setBasePt: { power: 4, toughness: 4 },
       grantKeywords: ["flying"],

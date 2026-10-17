@@ -2037,16 +2037,27 @@ const VOID_CONDITION = {
 /** Revolt (Aether Revolt), disappear (TMNT): a permanent you controlled as
  * it left left the battlefield this turn. */
 const REVOLT_CONDITION = { kind: "turn-history", what: "left" };
+/** Celebration (Wilds of Eldraine): two or more nonland permanents entered
+ * under your control this turn, read as they entered, though they've left or
+ * changed control since. */
+const CELEBRATION_CONDITION = { kind: "turn-history", what: "entered", filter: { notTypes: ["land"] }, atLeast: 2 };
+
+/** A static's trailing "as long as …" by its words, and the `condition` it
+ * becomes (`parseStatic`). */
+const STATIC_CONDITION_SUFFIXES = [
+  [" as long as two or more nonland permanents entered the battlefield under your control this turn.", CELEBRATION_CONDITION],
+];
 
 /** Intervening-ifs (rule 603.4) by their words, as the pool writes them:
- * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte) and
- * revolt (Hidden Stockpile). */
+ * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
+ * (Hidden Stockpile) and celebration (Pests of Honor). */
 const INTERVENING_IFS = {
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
   "if a nonland permanent left the battlefield this turn or a spell was warped this turn,": VOID_CONDITION,
   "if a permanent left the battlefield under your control this turn,": REVOLT_CONDITION,
   "if a permanent you controlled left the battlefield this turn,": REVOLT_CONDITION,
+  "if two or more nonland permanents entered the battlefield under your control this turn,": CELEBRATION_CONDITION,
   // How its spell was cast (rule 702.188a): the permanent keeps `castVia`.
   "if it was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if they were cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
@@ -2205,6 +2216,15 @@ const devotionColors = (a, b) => [a, b].filter(Boolean).map((w) => COLOR_WORDS[w
 
 function parseStatic(line, text) {
   let m;
+  // "… as long as [condition]." on a static the rest reads whole and that
+  // has no condition of its own: celebration's "~ gets +1/+1 and has
+  // trample as long as two or more nonland permanents entered the
+  // battlefield under your control this turn" (Grand Ball Guest).
+  for (const [suffix, condition] of STATIC_CONDITION_SUFFIXES) {
+    if (!line.endsWith(suffix)) continue;
+    const inner = parseStatic(`${line.slice(0, -suffix.length)}.`, text);
+    if (inner !== null && inner.condition === undefined) return { ...inner, condition };
+  }
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
