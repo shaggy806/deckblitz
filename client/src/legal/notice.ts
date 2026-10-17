@@ -20,4 +20,7 @@ export const POLICY_NAME = 'Fan Content Policy'
 export const NOTICE_REST =
   'Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.'
 
+/** Beside the notice, the user's addition to be safe (2026-10-16). */
+export const ART_RIGHTS = 'All card art and its licenses belong to Wizards of the Coast.'
+
 export const SCRYFALL_URL = 'https://scryfall.com'

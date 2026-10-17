@@ -1,4 +1,12 @@
-import { FAN_CONTENT_POLICY_URL, NOTICE_LEAD, NOTICE_REST, POLICY_NAME, SCRYFALL_URL, SITE_TITLE } from './notice.ts'
+import {
+  ART_RIGHTS,
+  FAN_CONTENT_POLICY_URL,
+  NOTICE_LEAD,
+  NOTICE_REST,
+  POLICY_NAME,
+  SCRYFALL_URL,
+  SITE_TITLE,
+} from './notice.ts'
 import './legal.css'
 
 /**
@@ -25,7 +33,8 @@ export function AboutPage() {
         </p>
         <p>
           Magic: The Gathering, its card names, rules text, mana symbols and card art are property of Wizards of the
-          Coast. Each card&apos;s art is credited to its artist on the card, where the card is shown in full.
+          Coast. {ART_RIGHTS} Each card&apos;s art is credited to its artist on the card, where the card is shown
+          in full.
         </p>
       </section>
 

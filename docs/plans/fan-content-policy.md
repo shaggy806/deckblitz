@@ -1,7 +1,7 @@
 # Fan content: what the site discloses
 
-Status: **shipped** (2026-10-16) — the notice and the art credits; two calls left for the user
-(the landing backdrop, the site's name), and one question no notice settles (a playable game).
+Status: **shipped** (2026-10-16) — the notice and the art credits; one call left for the user
+(the site's name), and one question no notice settles (a playable game).
 
 The backlog asked (the user, 2026-10-11): what does deckblitz.net have to show to comply with
 Wizards of the Coast's Fan Content Policy, and where? This records what the two sets of terms the
@@ -42,8 +42,9 @@ it's a reading of the published terms.
   quiet footer (`SiteNotice`) on the landing page, the library and the deck builder, linking the
   policy and an **About & legal** page (`/about`, `AboutPage`): the notice, that the game's names,
   text, symbols and art are Wizards', that card data and images come from Scryfall without its
-  endorsement, and that the site is free with nothing for sale. The game's Game menu links it
-  (in a new tab, so the game isn't left).
+  endorsement, and that the site is free with nothing for sale. Beside the notice, footer and
+  About page both say "All card art and its licenses belong to Wizards of the Coast." (the user's
+  call, to be safe). The game's Game menu links the page (in a new tab, so the game isn't left).
 - **Art credits.** The board's tiles are art crops, so the full card displays (`CardTile` — the
   hover card, the stack, zone viewers) carry "Illus. {artist} · ™ & © Wizards of the Coast" along
   the foot of their art, on a dark fade (the user's call, over the text box's foot); the lobby's
@@ -52,13 +53,14 @@ it's a reading of the published terms.
   by name, card id, page or API link, as `resolveArtUrl` reads them), seeded free from the art's
   own batched lookup, batched and cached for two weeks like it. The library and deck builder show
   whole card images, which carry their own credit.
+- **The landing backdrop** (`client/public/menu-backdrop.webp`, a blurred grid of commander card
+  images) stays as it is: its images weren't taken from Scryfall (the user, 2026-10-16), so
+  Scryfall's "don't blur" doesn't reach it, and Wizards' policy doesn't forbid altering card images
+  — only removing legal notices from them, which a dim decorative blur doesn't do the way cropping
+  would, with the site-wide notice saying whose they are.
 
 ## Open
 
-- **The landing backdrop** (`client/public/menu-backdrop.webp`) is a 10×10 grid of the top
-  commanders' card images, Gaussian-blurred (`-gaussian-blur 0x3`, `docs/architecture/client.md`)
-  and shown at 24% opacity. Scryfall's image terms say not to blur card images. The user's call:
-  rebuild it unblurred, or replace it with something that isn't card images.
 - **The name "MTG Deck Blitz".** "MTG" stands for Magic: The Gathering, a Wizards trademark, and the
   policy says not to use Wizards' trademarks without permission. Many fan sites carry it in their
   names; the policy doesn't speak to site names. The user's call.
