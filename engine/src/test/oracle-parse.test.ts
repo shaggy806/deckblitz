@@ -1105,6 +1105,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ]);
     expect(knocks.complete).toBe(true);
     expect(parseSentence("Time travel.")).toEqual({ kind: "time-travel" });
+    expect(parseSentence("Amass Orcs 2.")).toEqual({ kind: "amass", amount: 2, creatureType: "Orc" });
+    expect(parseSentence("Amass Zombies 4.")).toEqual({ kind: "amass", amount: 4, creatureType: "Zombie" });
   });
 
   it("a Role token created attached (rule 303.7): to a target, to up to one other target, to it", () => {

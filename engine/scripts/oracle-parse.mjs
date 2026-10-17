@@ -963,6 +963,12 @@ export function parseSentence(sentence, ctx) {
     return { kind: "create-token", token: name, count: amount(m[1]), ...(m[2] ? { tapped: true } : {}) };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
+  // Amass [type] N (rule 701.47): "Amass Orcs 2." — the type singular.
+  if ((m = re(`amass ([A-Z][a-z]+) (\\d+)`).exec(s))) {
+    const plural = m[1];
+    const creatureType = /ves$/.test(plural) ? plural.replace(/ves$/, "f") : plural.replace(/s$/, "");
+    return { kind: "amass", amount: Number(m[2]), creatureType };
+  }
 
   // Counters.
   if ((m = re(`put ${N} \\+1/\\+1 counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
