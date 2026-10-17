@@ -481,6 +481,32 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         {},
       ).kicker,
     ).toEqual({ cost: "", keyword: "collect-evidence", collectEvidence: 6 });
+    // Bargain (rule 702.166): the keyword, its cost reduction, "if this spell
+    // was bargained" closing a spell, and "if it was bargained" on a creature.
+    const BARGAIN = "Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)";
+    expect(
+      face(`${BARGAIN}\nThis spell costs {1} less to cast if it's bargained.\nCounter target spell.`, "Instant", {}).kicker,
+    ).toEqual({ cost: "", keyword: "bargain", reduceGeneric: 1 });
+    const glory = face(
+      `${BARGAIN}\nTarget creature gets +2/+2 until end of turn. If this spell was bargained, you gain 3 life.`,
+      "Instant",
+      {},
+    );
+    expect(glory.effect).toEqual({ kind: "modify-pt", target: 0, power: 2, toughness: 2, duration: "end-of-turn" });
+    expect(glory.kicker).toEqual({
+      cost: "",
+      keyword: "bargain",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "modify-pt", target: 0, power: 2, toughness: 2, duration: "end-of-turn" },
+          { kind: "gain-life", amount: 3 },
+        ],
+      },
+    });
+    const negotiator = face(`${BARGAIN}\nWhen this creature enters, if it was bargained, you gain 3 life.`);
+    expect(negotiator.kicker).toEqual({ cost: "", keyword: "bargain" });
+    expect(negotiator.triggered[0].condition).toEqual({ kind: "self-kicked" });
     expect(face("Whenever you collect evidence, draw a card.").triggered[0].trigger).toEqual({
       on: "evidence-collected",
       who: "you",

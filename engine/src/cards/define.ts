@@ -2262,8 +2262,24 @@ export interface CardDefinition {
      * spell, you may pay [cost] any number of times": with `multi: true`,
      * multikicker under another name; its enters trigger is the
      * `squadTrigger` helper's.
+     *
+     * `"bargain"` (rule 702.166a) is "as an additional cost to cast this
+     * spell, you may sacrifice an artifact, enchantment, or token": `cost`
+     * is `""`, and the kicked variant is the bargained one (702.166b),
+     * offered only while the caster has one to sacrifice once the mana is
+     * paid. Which one is the `sacrifice` decision, asked as the cost is paid
+     * once the spell is on the stack (601.2h); a token stack offers each of
+     * its tokens. "If this spell was bargained" is the spell being kicked —
+     * `targets` / `effect` (its targets chosen only then, 702.166d) — and
+     * "if it was bargained" on a permanent is `self-kicked`.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain";
+    /**
+     * "This spell costs {N} less to cast if it's bargained" (Ice Out,
+     * Hamlet Glutton): N generic off the kicked variant's total cost, after
+     * any increase (rule 601.2f), never below none.
+     */
+    readonly reduceGeneric?: number;
     /**
      * With `keyword: "behold"` and `cost: ""`: "As an additional cost to
      * cast this spell, you may behold a Dragon" (rule 701.4a — Dispelling
@@ -3006,7 +3022,8 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain";
+    readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly flash?: boolean;
     readonly blight?: number;

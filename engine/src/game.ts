@@ -521,6 +521,10 @@ function loopPeriod(trail: readonly string[]): number | null {
 }
 const GENERIC_SPEND_ORDER = ["C", "W", "U", "B", "R", "G"] as const;
 
+/** What a bargain sacrifices (rule 702.166a): "an artifact, enchantment, or
+ * token" — a token of any type. */
+const BARGAIN_FILTER: CardFilter = { anyOf: [{ typesAnyOf: ["artifact", "enchantment"] }, { token: true }] };
+
 /** One battlefield static that grants activated abilities (Chromatic Lantern,
  * Cryptolith Rite) — see `Game.activatedGrantSources`. `abilities` is
  * `ability.grantsActivated`, pulled out so it's known to be defined. */
@@ -2750,6 +2754,8 @@ export class Game {
       const undoPrototype = prototype === true ? this.applyPrototype(card) : () => {};
       // A harmonize variant is priced, X and all, with its creature's power off.
       const undoHarmonize = via === "harmonize" ? this.enterHarmonizeTap(harmonizeTap) : () => {};
+      // A kicked variant's own reduction (a bargained Ice Out's {1}).
+      const undoKickedReduction = this.enterKickedReduction(card, def, kicked);
       try {
       const printedOrPrototype =
         prototype === true && def.prototype !== null && costString === def.manaCost ? def.prototype.cost : costString;
@@ -3359,6 +3365,7 @@ export class Game {
       } finally {
         undoPrototype();
         undoHarmonize();
+        undoKickedReduction();
         if (kickCount !== undefined && out.length === offeredBefore) kickFailed.add(kickKey);
       }
     }
@@ -8888,7 +8895,11 @@ export class Game {
     const tax = this.isCastableCommander(player, cardId) ? this.commanderTax(player, cardId) : 0;
     const mods = this.costModificationFor(player, cardId, targetCount);
     // Harmonize's tapped creature (rule 702.180a), probed by the caller.
-    let reduction = mods.reduceGeneric + this.harmonizePower;
+    // A bargained Ice Out's {1} (`kicker.reduceGeneric`), likewise probed.
+    let reduction =
+      mods.reduceGeneric +
+      this.harmonizePower +
+      (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
     if (
       def.selfCostReduction !== null &&
       staticConditionMet(this.state, this.registry, this.state.objects[cardId], def.selfCostReduction.condition)
@@ -10012,6 +10023,17 @@ export class Game {
         );
       }
     }
+    // A kicked variant's own reduction ("this spell costs {1} less to cast
+    // if it's bargained" — `kicker.reduceGeneric`): priced as that variant.
+    if (this.kickedReductionStale(cardId, face, kicked)) {
+      const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
+      try {
+        return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve);
+      } finally {
+        restore();
+      }
+    }
     // Cast because a resolving spell or ability says so: no priority needed,
     // but only the card it offered, by the player it offered it to.
     const offered = via === "effect" ? this.castNowOffer(player, cardId) : null;
@@ -10355,6 +10377,12 @@ export class Game {
     ) {
       return `${player}'s graveyard can't collect evidence ${def.kicker.collectEvidence ?? 0} for ${def.name}`;
     }
+    // Bargain (rule 702.166a): only with an artifact, enchantment or token
+    // to sacrifice — and one still there once the mana is paid, checked
+    // with the rest of the sacrifice below (`spellSacrificeParts`).
+    if (kicked && def.kicker?.keyword === "bargain" && this.costSacrificeEligible(player, BARGAIN_FILTER, undefined).length === 0) {
+      return `${player} has no artifact, enchantment or token to bargain for ${def.name}`;
+    }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
     // spell itself (on its way to the stack, 601.2a) not among them.
     const kickerBehold = kicked && def.kicker?.keyword === "behold" ? def.kicker.behold : undefined;
@@ -10531,7 +10559,7 @@ export class Game {
     // A creature tapped to convoke is no longer untapped to tap for mana. A
     // sacrifice of several needs what it takes still there once the mana is
     // paid — what could pay it is tried last (`costSacrificeRemaining`).
-    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue);
+    const sacrificeParts = this.spellSacrificeParts(cardId, def, via, graveyardGrant, xValue, kicked);
     const sacrificeCandidates =
       sacrificeParts === null ? undefined : this.costSacrificeCandidates(player, sacrificeParts, undefined);
     // So is an artifact or creature tapped to waterbend (rule 701.67a).
@@ -10995,6 +11023,33 @@ export class Game {
    * `castingCostOf` subtracts it after increases (601.2f). 0 otherwise.
    */
   private harmonizePower = 0;
+  /**
+   * The generic mana a kicked variant's own reduction takes off its total
+   * cost — "this spell costs {1} less to cast if it's bargained" (Ice Out:
+   * `kicker.reduceGeneric`) — while that variant is priced, checked or
+   * paid; `castingCostOf` subtracts it from that card's total cost after
+   * increases (601.2f). `null` otherwise.
+   */
+  private kickedCostReduction: { readonly card: ObjectId; readonly generic: number } | null = null;
+  /** Price whatever runs next for `card` as its variant `kicked` of `def` —
+   * see {@link kickedCostReduction}. Returns the restore. */
+  private enterKickedReduction(card: ObjectId, def: CardDefinition, kicked: boolean | number): () => void {
+    const before = this.kickedCostReduction;
+    const generic = kicked !== false && kicked !== 0 ? (def.kicker?.reduceGeneric ?? 0) : 0;
+    this.kickedCostReduction = generic > 0 ? { card, generic } : null;
+    return () => {
+      this.kickedCostReduction = before;
+    };
+  }
+  /** Whether {@link kickedCostReduction} isn't what casting `card` with
+   * `kicked` should be priced at — the casting check and the cast then set
+   * it and ask again. */
+  private kickedReductionStale(card: ObjectId, face: number, kicked: boolean | number): boolean {
+    if (this.state.objects[card] === undefined) return false;
+    const want = kicked !== false && kicked !== 0 ? (this.faceDef(card, face).kicker?.reduceGeneric ?? 0) : 0;
+    const have = this.kickedCostReduction?.card === card ? this.kickedCostReduction.generic : 0;
+    return want !== have;
+  }
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
   private harmonizeProbed = false;
@@ -11296,6 +11351,18 @@ export class Game {
       );
       return;
     }
+    // A kicked variant's own reduction (a bargained Ice Out's {1}): every
+    // cost below is priced with it off (rule 601.2f).
+    if (this.kickedReductionStale(cardId, face, kicked)) {
+      const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
+      try {
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve);
+      } finally {
+        restore();
+      }
+      return;
+    }
     // "For each target" cost modifications (Hinata) count these: the targets
     // are chosen before the total cost is determined (rule 601.2c, 601.2f).
     const targetCount = distinctTargetCount(targets, this.targetCopies(targets));
@@ -11362,7 +11429,8 @@ export class Game {
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     // "Sacrifice X creatures", "Flashback—Sacrifice three creatures": chosen
     // once the spell is on the stack, below.
-    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX);
+    // A bargain's artifact, enchantment or token too (rule 702.166a).
+    const severalSacrificed = this.spellSacrificeParts(cardId, def, via, graveyardGrant, chosenX, kicked);
 
     if (def.castModal !== null && modes === undefined) {
       throw new Error(`${def.name} is a modal spell — choose modes to cast it`);
@@ -12288,7 +12356,8 @@ export class Game {
    * `GameState.pendingCostSacrifice`): its `additionalCost.sacrificeCount`'s
    * — "sacrifice X creatures" (Eliminate the Competition), at `x` — and,
    * cast with flashback, that flashback's (Dread Return's "Flashback—
-   * Sacrifice three creatures"). `null` for none.
+   * Sacrifice three creatures"), and a bargained spell's artifact,
+   * enchantment or token (rule 702.166a). `null` for none.
    */
   private spellSacrificeParts(
     cardId: ObjectId,
@@ -12296,6 +12365,7 @@ export class Game {
     via: CastVia | undefined,
     grant: GraveyardGrant | undefined,
     x: number,
+    kicked: boolean | number = false,
   ): SacrificeCostPart[] | null {
     const parts: SacrificeCostPart[] = [];
     const extra = def.additionalCost;
@@ -12304,6 +12374,9 @@ export class Game {
         filter: extra.sacrifice,
         count: extra.sacrificeCount === "x" ? Math.max(0, Math.floor(x)) : extra.sacrificeCount,
       });
+    }
+    if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "bargain") {
+      parts.push({ filter: BARGAIN_FILTER, count: 1 });
     }
     if (via === "flashback") {
       const flashback = this.flashbackOf(cardId, grant)?.sacrifice;

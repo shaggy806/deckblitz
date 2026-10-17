@@ -1646,6 +1646,13 @@ export function parseFace(face, ctx = {}) {
     }
     // Teamwork N (rule 702.194): a kicker that taps creatures — what "cast using teamwork" changes is the card's own.
     if (isSpell && (m = /^Teamwork (\d+)$/.exec(line))) { out.kicker = { cost: "", keyword: "teamwork", teamwork: Number(m[1]) }; continue; }
+    // Bargain (rule 702.166a): a kicker that sacrifices an artifact, enchantment or token — what
+    // "if this spell was bargained" changes is the card's own (702.166c) — and its cost reduction.
+    if (line === "Bargain") { out.kicker = { cost: "", keyword: "bargain" }; continue; }
+    if (out.kicker?.keyword === "bargain" && (m = /^~ costs \{(\d+)\} less to cast if it's bargained\.$/.exec(line))) {
+      out.kicker = { ...out.kicker, reduceGeneric: Number(m[1]) };
+      continue;
+    }
     // Squad [cost] (rule 702.157a): a multikicker by another name, and its enters trigger (`squadTrigger`).
     if ((m = /^Squad ((?:\{[^}]+\})+)$/.exec(line))) {
       out.kicker = { cost: m[1], multi: true, keyword: "squad" };
@@ -1893,10 +1900,14 @@ export function parseFace(face, ctx = {}) {
       // this, with any target it adds after the spell's own. Not an
       // "instead", which rewrites the spell's text: that's a person's.
       let kickedTail;
-      if (out.kicker?.keyword === "behold" || out.kicker?.keyword === "waterbend") {
+      if (out.kicker?.keyword === "behold" || out.kicker?.keyword === "waterbend" || out.kicker?.keyword === "bargain") {
         const sentences = sentencesOf(text);
         const last = sentences.at(-1) ?? "";
-        const tail = /^If (?:a|an) .+ was beheld, (.+)$/.exec(last) ?? /^If ~'s additional cost was paid, (.+)$/.exec(last);
+        const tail =
+          /^If (?:a|an) .+ was beheld, (.+)$/.exec(last) ??
+          /^If ~'s additional cost was paid, (.+)$/.exec(last) ??
+          // "If this spell was bargained, …" (rule 702.166b).
+          /^If ~ was bargained, (.+)$/.exec(last);
         if (tail !== null && sentences.length > 1 && !/\binstead\b/.test(last)) {
           text = sentences.slice(0, -1).join(" ");
           kickedTail = { sentence: last, rest: `${tail[1][0].toUpperCase()}${tail[1].slice(1)}` };
@@ -2067,6 +2078,9 @@ const INTERVENING_IFS = {
   "if you've committed a crime this turn,": { kind: "committed-crime-this-turn" },
   // Rule 701.59c: the spell's collect-evidence additional cost was paid.
   "if evidence was collected,": { kind: "self-kicked" },
+  // Rule 702.166b: the permanent's spell was bargained.
+  "if it was bargained,": { kind: "self-kicked" },
+  "if ~ was bargained,": { kind: "self-kicked" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the
