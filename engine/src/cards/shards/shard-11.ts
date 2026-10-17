@@ -132,6 +132,8 @@ import _poolFieryIslet from "../pool/fiery-islet.js";
 import _poolFissureVent from "../pool/fissure-vent.js";
 import _poolFloodPlain from "../pool/flood-plain.js";
 import _poolFontOfFertility from "../pool/font-of-fertility.js";
+import _poolFoodComa from "../pool/food-coma.js";
+import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
 import _poolFracture from "../pool/fracture.js";
@@ -613,6 +615,8 @@ const shard: CardShard = {
     _poolFissureVent,
     _poolFloodPlain,
     _poolFontOfFertility,
+    _poolFoodComa,
+    _poolFoodFight,
     _poolForatog,
     _poolForsakenDrifters,
     _poolFracture,

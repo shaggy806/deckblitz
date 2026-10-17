@@ -346,6 +346,7 @@ import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
+import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
@@ -790,6 +791,7 @@ const shard: CardShard = {
     _poolSpectacularSpiderMan,
     _poolSpellbook,
     _poolSpellgyre,
+    _poolSpiderFood,
     _poolSpireMangler,
     _poolSteelbaneHydra,
     _poolSternDismissal,

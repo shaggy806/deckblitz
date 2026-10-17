@@ -352,6 +352,7 @@ import _poolStockmanMadFlyEntist from "../pool/stockman-mad-fly-entist.js";
 import _poolStoneGolem from "../pool/stone-golem.js";
 import _poolStoneQuarry from "../pool/stone-quarry.js";
 import _poolStoneforgeMystic from "../pool/stoneforge-mystic.js";
+import _poolStormReading from "../pool/storm-reading.js";
 import _poolStormcatchMentor from "../pool/stormcatch-mentor.js";
 import _poolStranglingSpores from "../pool/strangling-spores.js";
 import _poolStrategicIntervention from "../pool/strategic-intervention.js";
@@ -807,6 +808,7 @@ const shard: CardShard = {
     _poolStoneGolem,
     _poolStoneQuarry,
     _poolStoneforgeMystic,
+    _poolStormReading,
     _poolStormcatchMentor,
     _poolStranglingSpores,
     _poolStrategicIntervention,

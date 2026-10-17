@@ -111,6 +111,7 @@ import _poolElderOwynLyons from "../pool/elder-owyn-lyons.js";
 import _poolEldraziDisplacer from "../pool/eldrazi-displacer.js";
 import _poolElementalBond from "../pool/elemental-bond.js";
 import _poolElusiveKrasis from "../pool/elusive-krasis.js";
+import _poolElvishArchivist from "../pool/elvish-archivist.js";
 import _poolElvishLookout from "../pool/elvish-lookout.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
@@ -308,6 +309,7 @@ import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
 import _poolSavraQueenOfTheGolgari from "../pool/savra-queen-of-the-golgari.js";
 import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
+import _poolScanTheClouds from "../pool/scan-the-clouds.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
@@ -567,6 +569,7 @@ const shard: CardShard = {
     _poolEldraziDisplacer,
     _poolElementalBond,
     _poolElusiveKrasis,
+    _poolElvishArchivist,
     _poolElvishLookout,
     _poolEmberethBlaze,
     _poolEpicProportions,
@@ -764,6 +767,7 @@ const shard: CardShard = {
     _poolSavannahSage,
     _poolSavraQueenOfTheGolgari,
     _poolSawbladeSkinripper,
+    _poolScanTheClouds,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
     _poolScuzzbackScrapper,

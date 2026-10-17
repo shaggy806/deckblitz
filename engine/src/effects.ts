@@ -1376,8 +1376,9 @@ export type EffectSpec =
        * `{ oneOf: ["R", "G"] }`, `amount: 3`). During cost payment the planner
        * enumerates every achievable combination as a separate option and
        * picks whichever pays the cost; activated on its own, each unit is
-       * the player's pick, and elsewhere `oneOf[0]`, as "any-color" is
-       * white. needed-cards P20. With `same: true` every unit is the
+       * the player's pick, as it is when a resolving effect adds them
+       * (rule 608.2d — `addManaChoice`: Realm-Scorcher Hellkite, Klauth).
+       * needed-cards P20. With `same: true` every unit is the
        * same one of the listed types — Brigid, Doun's Mind's "Add X {G} or X
        * {W}" — never a mix, as `any-color` is over all five. */
       readonly kind: "add-mana";

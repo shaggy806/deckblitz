@@ -134,6 +134,7 @@ import _poolForebodingLandscape from "../pool/foreboding-landscape.js";
 import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
+import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
@@ -587,6 +588,7 @@ const shard: CardShard = {
     _poolForgottenAncient,
     _poolForsakenMiner,
     _poolForumNecroscribe,
+    _poolFranticFirebolt,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
     _poolFuriousAssault,

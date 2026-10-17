@@ -196,6 +196,67 @@ describe("Wilds of Eldraine batch 1: Roles", () => {
       expect(zone(game, fox)).toBe("hand");
       expect(zone(game, bears)).toBe("graveyard");
     });
+
+    it("Frantic Firebolt: 2 plus your instants, sorceries and adventurers in your graveyard — not an opponent's", () => {
+      const { game } = table();
+      toGraveyard(game, "Opt");
+      toGraveyard(game, "Ferocious Werefox");
+      toGraveyard(game, "Grizzly Bears");
+      toGraveyard(game, "Opt", B);
+      const giant = spawn(game, "Enormous Baloth", B);
+      lands(game, "Mountain", 3);
+      cast(game, toHand(game, "Frantic Firebolt"), { targets: [ref(giant)] });
+      expect(game.state.objects[giant].damageMarked).toBe(4);
+    });
+
+  });
+
+  describe("review follow-ups", () => {
+    it("Gylwain itself entering gets a Role", () => {
+      const { game, a } = table();
+      pickModes(a, 0);
+      const gylwain = enter(game, "Gylwain, Casting Director");
+      expect(rolesOn(game, gylwain)).toEqual(["Royal Role Token"]);
+    });
+
+    it("the Wicked Role a newer Role replaces still drains each opponent as it goes to the graveyard", () => {
+      const { game, a } = table();
+      const bears = spawn(game, "Grizzly Bears");
+      lands(game, "Swamp", 1);
+      pickTargets(a, bears);
+      enter(game, "Lord Skitter's Blessing");
+      expect(rolesOn(game, bears)).toEqual(["Wicked Role Token"]);
+      const before = game.state.players[B].life;
+      pickTargets(a, bears);
+      enter(game, "Spiteful Hexmage");
+      expect(rolesOn(game, bears)).toEqual(["Cursed Role Token"]);
+      expect(game.state.players[B].life).toBe(before - 1);
+    });
+
+    it("Diminisher Witch: a Cursed Role on an opponent's creature only if it was bargained", () => {
+      const { game, a } = table();
+      const theirs = spawn(game, "Hill Giant", B);
+      lands(game, "Island", 6);
+      pickTargets(a, theirs);
+      cast(game, toHand(game, "Diminisher Witch"));
+      expect(rolesOn(game, theirs)).toEqual([]);
+      game.debugApplyEffect(A, { kind: "create-token", token: "Food Token", count: 1 }, []);
+      settle(game);
+      pickTargets(a, theirs);
+      cast(game, toHand(game, "Diminisher Witch"), { kicked: true });
+      expect(rolesOn(game, theirs)).toEqual(["Cursed Role Token"]);
+    });
+
+    it("Seek Thrills under Rest in Peace: the milled adventurers in exile still go to hand (rule 701.17c)", () => {
+      const { game } = table();
+      spawn(game, "Rest in Peace");
+      const fox = toLibrary(game, "Ferocious Werefox");
+      lands(game, "Forest", 4);
+      lands(game, "Island", 1);
+      lands(game, "Mountain", 1);
+      cast(game, toHand(game, "Beluna Grandsquall"), { face: 1 });
+      expect(zone(game, fox)).toBe("hand");
+    });
   });
 });
 

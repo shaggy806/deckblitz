@@ -255,6 +255,7 @@ import _poolMortivore from "../pool/mortivore.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
+import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
 import _poolNightshadeHarvester from "../pool/nightshade-harvester.js";
 import _poolNightshadeStinger from "../pool/nightshade-stinger.js";
 import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
@@ -728,6 +729,7 @@ const shard: CardShard = {
     _poolMourning,
     _poolNaturesLore,
     _poolNettlecyst,
+    _poolNevaStalkedByNightmares,
     _poolNightshadeHarvester,
     _poolNightshadeStinger,
     _poolNimblewrightSchematic,

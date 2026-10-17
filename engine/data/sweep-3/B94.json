@@ -1,0 +1,1314 @@
+{
+ "batch": "B94",
+ "status": "complete",
+ "ranks": "Wilds of Eldraine (WOE) and Wilds of Eldraine Commander (WOC), both 2023-09-08: the rest of both sets (their top halves were walked before), with Roles (rule 303.7), bargain (702.166), celebration and a 'has an Adventure' filter (715.2a) built — and the older cards that waited on them",
+ "authored": [
+  {
+   "name": "A Tale for the Ages",
+   "files": [
+    "engine/src/cards/pool/a-tale-for-the-ages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agatha's Champion",
+   "files": [
+    "engine/src/cards/pool/agathas-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aquatic Alchemist // Bubble Up",
+   "files": [
+    "engine/src/cards/pool/aquatic-alchemist.ts",
+    "engine/src/cards/pool/bubble-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archon of the Wild Rose",
+   "files": [
+    "engine/src/cards/pool/archon-of-the-wild-rose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archon's Glory",
+   "files": [
+    "engine/src/cards/pool/archons-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armory Mice",
+   "files": [
+    "engine/src/cards/pool/armory-mice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ash, Party Crasher",
+   "files": [
+    "engine/src/cards/pool/ash-party-crasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashiok's Reaper",
+   "files": [
+    "engine/src/cards/pool/ashioks-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Back for Seconds",
+   "files": [
+    "engine/src/cards/pool/back-for-seconds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrow Naughty",
+   "files": [
+    "engine/src/cards/pool/barrow-naughty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Become Brutes",
+   "files": [
+    "engine/src/cards/pool/become-brutes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Belligerent of the Ball",
+   "files": [
+    "engine/src/cards/pool/belligerent-of-the-ball.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bellowing Bruiser // Beat a Path",
+   "files": [
+    "engine/src/cards/pool/bellowing-bruiser.ts",
+    "engine/src/cards/pool/beat-a-path.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Beluna Grandsquall // Seek Thrills",
+   "files": [
+    "engine/src/cards/pool/beluna-grandsquall.ts",
+    "engine/src/cards/pool/seek-thrills.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Besotted Knight // Betroth the Beast",
+   "files": [
+    "engine/src/cards/pool/besotted-knight.ts",
+    "engine/src/cards/pool/betroth-the-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bespoke Battlegarb",
+   "files": [
+    "engine/src/cards/pool/bespoke-battlegarb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bestial Bloodline",
+   "files": [
+    "engine/src/cards/pool/bestial-bloodline.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boundary Lands Ranger",
+   "files": [
+    "engine/src/cards/pool/boundary-lands-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brave the Wilds",
+   "files": [
+    "engine/src/cards/pool/brave-the-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Break the Spell",
+   "files": [
+    "engine/src/cards/pool/break-the-spell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Callous Sell-Sword // Burn Together",
+   "files": [
+    "engine/src/cards/pool/callous-sell-sword.ts",
+    "engine/src/cards/pool/burn-together.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Candy Grapple",
+   "files": [
+    "engine/src/cards/pool/candy-grapple.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chancellor of Tales",
+   "files": [
+    "engine/src/cards/pool/chancellor-of-tales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charging Hooligan",
+   "files": [
+    "engine/src/cards/pool/charging-hooligan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charmed Clothier",
+   "files": [
+    "engine/src/cards/pool/charmed-clothier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charming Scoundrel",
+   "files": [
+    "engine/src/cards/pool/charming-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conceited Witch // Price of Beauty",
+   "files": [
+    "engine/src/cards/pool/conceited-witch.ts",
+    "engine/src/cards/pool/price-of-beauty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cursed Courtier",
+   "files": [
+    "engine/src/cards/pool/cursed-courtier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cut In",
+   "files": [
+    "engine/src/cards/pool/cut-in.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devouring Sugarmaw // Have for Dinner",
+   "files": [
+    "engine/src/cards/pool/devouring-sugarmaw.ts",
+    "engine/src/cards/pool/have-for-dinner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diminisher Witch",
+   "files": [
+    "engine/src/cards/pool/diminisher-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Discerning Financier",
+   "files": [
+    "engine/src/cards/pool/discerning-financier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Spoilers",
+   "files": [
+    "engine/src/cards/pool/dream-spoilers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dutiful Griffin",
+   "files": [
+    "engine/src/cards/pool/dutiful-griffin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Edgewall Inn",
+   "files": [
+    "engine/src/cards/pool/edgewall-inn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Edgewall Pack",
+   "files": [
+    "engine/src/cards/pool/edgewall-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ego Drain",
+   "files": [
+    "engine/src/cards/pool/ego-drain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ellivere of the Wild Court",
+   "files": [
+    "engine/src/cards/pool/ellivere-of-the-wild-court.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Archivist",
+   "files": [
+    "engine/src/cards/pool/elvish-archivist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embereth Veteran",
+   "files": [
+    "engine/src/cards/pool/embereth-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eriette's Tempting Apple",
+   "files": [
+    "engine/src/cards/pool/eriettes-tempting-apple.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eriette's Whisper",
+   "files": [
+    "engine/src/cards/pool/eriettes-whisper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faerie Slumber Party",
+   "files": [
+    "engine/src/cards/pool/faerie-slumber-party.ts",
+    "engine/src/cards/tokens/faerie-token-faerie-slumber-party.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farsight Ritual",
+   "files": [
+    "engine/src/cards/pool/farsight-ritual.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feed the Cauldron",
+   "files": [
+    "engine/src/cards/pool/feed-the-cauldron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fell Horseman // Deathly Ride",
+   "files": [
+    "engine/src/cards/pool/fell-horseman.ts",
+    "engine/src/cards/pool/deathly-ride.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ferocious Werefox // Guard Change",
+   "files": [
+    "engine/src/cards/pool/ferocious-werefox.ts",
+    "engine/src/cards/pool/guard-change.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Food Coma",
+   "files": [
+    "engine/src/cards/pool/food-coma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Food Fight",
+   "files": [
+    "engine/src/cards/pool/food-fight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frantic Firebolt",
+   "files": [
+    "engine/src/cards/pool/frantic-firebolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freeze in Place",
+   "files": [
+    "engine/src/cards/pool/freeze-in-place.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gadwick's First Duel",
+   "files": [
+    "engine/src/cards/pool/gadwicks-first-duel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gallant Pie-Wielder",
+   "files": [
+    "engine/src/cards/pool/gallant-pie-wielder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galvanic Giant // Storm Reading",
+   "files": [
+    "engine/src/cards/pool/galvanic-giant.ts",
+    "engine/src/cards/pool/storm-reading.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Inheritance",
+   "files": [
+    "engine/src/cards/pool/giant-inheritance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graceful Takedown",
+   "files": [
+    "engine/src/cards/pool/graceful-takedown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grand Ball Guest",
+   "files": [
+    "engine/src/cards/pool/grand-ball-guest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gumdrop Poisoner // Tempt with Treats",
+   "files": [
+    "engine/src/cards/pool/gumdrop-poisoner.ts",
+    "engine/src/cards/pool/tempt-with-treats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gylwain, Casting Director",
+   "files": [
+    "engine/src/cards/pool/gylwain-casting-director.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hamlet Glutton",
+   "files": [
+    "engine/src/cards/pool/hamlet-glutton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harried Spearguard",
+   "files": [
+    "engine/src/cards/pool/harried-spearguard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Heartflame Duelist // Heartflame Slash",
+   "files": [
+    "engine/src/cards/pool/heartflame-duelist.ts",
+    "engine/src/cards/pool/heartflame-slash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hearth Elemental // Stoke Genius",
+   "files": [
+    "engine/src/cards/pool/hearth-elemental.ts",
+    "engine/src/cards/pool/stoke-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High Fae Negotiator",
+   "files": [
+    "engine/src/cards/pool/high-fae-negotiator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hopeful Vigil",
+   "files": [
+    "engine/src/cards/pool/hopeful-vigil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Howling Galefang",
+   "files": [
+    "engine/src/cards/pool/howling-galefang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ice Out",
+   "files": [
+    "engine/src/cards/pool/ice-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imodane's Recruiter // Train Troops",
+   "files": [
+    "engine/src/cards/pool/imodanes-recruiter.ts",
+    "engine/src/cards/pool/train-troops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Into the Fae Court",
+   "files": [
+    "engine/src/cards/pool/into-the-fae-court.ts",
+    "engine/src/cards/tokens/faerie-token-into-the-fae-court.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Intrepid Trufflesnout // Go Hog Wild",
+   "files": [
+    "engine/src/cards/pool/intrepid-trufflesnout.ts",
+    "engine/src/cards/pool/go-hog-wild.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Johann's Stopgap",
+   "files": [
+    "engine/src/cards/pool/johanns-stopgap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kellan's Lightblades",
+   "files": [
+    "engine/src/cards/pool/kellans-lightblades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Doves",
+   "files": [
+    "engine/src/cards/pool/knight-of-doves.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Korvold and the Noble Thief",
+   "files": [
+    "engine/src/cards/pool/korvold-and-the-noble-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lady of Laughter",
+   "files": [
+    "engine/src/cards/pool/lady-of-laughter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leaping Ambush",
+   "files": [
+    "engine/src/cards/pool/leaping-ambush.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Living Lectern",
+   "files": [
+    "engine/src/cards/pool/living-lectern.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lord Skitter's Blessing",
+   "files": [
+    "engine/src/cards/pool/lord-skitters-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malevolent Witchkite",
+   "files": [
+    "engine/src/cards/pool/malevolent-witchkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merry Bards",
+   "files": [
+    "engine/src/cards/pool/merry-bards.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moment of Valor",
+   "files": [
+    "engine/src/cards/pool/moment-of-valor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monstrous Rage",
+   "files": [
+    "engine/src/cards/pool/monstrous-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nettling Nuisance",
+   "files": [
+    "engine/src/cards/pool/nettling-nuisance.ts",
+    "engine/src/cards/tokens/pirate-token-nettling-nuisance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neva, Stalked by Nightmares",
+   "files": [
+    "engine/src/cards/pool/neva-stalked-by-nightmares.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre Chitterlord",
+   "files": [
+    "engine/src/cards/pool/ogre-chitterlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ox Drover",
+   "files": [
+    "engine/src/cards/pool/ox-drover.ts",
+    "engine/src/cards/tokens/ox-token-ox-drover.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pests of Honor",
+   "files": [
+    "engine/src/cards/pool/pests-of-honor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Picklock Prankster // Free the Fae",
+   "files": [
+    "engine/src/cards/pool/picklock-prankster.ts",
+    "engine/src/cards/pool/free-the-fae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plunge into Winter",
+   "files": [
+    "engine/src/cards/pool/plunge-into-winter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pollen-Shield Hare // Hare Raising",
+   "files": [
+    "engine/src/cards/pool/pollen-shield-hare.ts",
+    "engine/src/cards/pool/hare-raising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protective Parents",
+   "files": [
+    "engine/src/cards/pool/protective-parents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Provisions Merchant",
+   "files": [
+    "engine/src/cards/pool/provisions-merchant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Questing Druid // Seek the Beast",
+   "files": [
+    "engine/src/cards/pool/questing-druid.ts",
+    "engine/src/cards/pool/seek-the-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raging Battle Mouse",
+   "files": [
+    "engine/src/cards/pool/raging-battle-mouse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rat Out",
+   "files": [
+    "engine/src/cards/pool/rat-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ratcatcher Trainee // Pest Problem",
+   "files": [
+    "engine/src/cards/pool/ratcatcher-trainee.ts",
+    "engine/src/cards/pool/pest-problem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Realm-Scorcher Hellkite",
+   "files": [
+    "engine/src/cards/pool/realm-scorcher-hellkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redcap Gutter-Dweller",
+   "files": [
+    "engine/src/cards/pool/redcap-gutter-dweller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redtooth Genealogist",
+   "files": [
+    "engine/src/cards/pool/redtooth-genealogist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redtooth Vanguard",
+   "files": [
+    "engine/src/cards/pool/redtooth-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return Triumphant",
+   "files": [
+    "engine/src/cards/pool/return-triumphant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rotisserie Elemental",
+   "files": [
+    "engine/src/cards/pool/rotisserie-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rowan's Grim Search",
+   "files": [
+    "engine/src/cards/pool/rowans-grim-search.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Royal Treatment",
+   "files": [
+    "engine/src/cards/pool/royal-treatment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savior of the Sleeping",
+   "files": [
+    "engine/src/cards/pool/savior-of-the-sleeping.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatter the Oath",
+   "files": [
+    "engine/src/cards/pool/shatter-the-oath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skybeast Tracker",
+   "files": [
+    "engine/src/cards/pool/skybeast-tracker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sleep-Cursed Faerie",
+   "files": [
+    "engine/src/cards/pool/sleep-cursed-faerie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slumbering Keepguard",
+   "files": [
+    "engine/src/cards/pool/slumbering-keepguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snaremaster Sprite",
+   "files": [
+    "engine/src/cards/pool/snaremaster-sprite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Specter of Mortality",
+   "files": [
+    "engine/src/cards/pool/specter-of-mortality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spellbook Vendor",
+   "files": [
+    "engine/src/cards/pool/spellbook-vendor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider Food",
+   "files": [
+    "engine/src/cards/pool/spider-food.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiteful Hexmage",
+   "files": [
+    "engine/src/cards/pool/spiteful-hexmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splashy Spellcaster",
+   "files": [
+    "engine/src/cards/pool/splashy-spellcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stingblade Assassin",
+   "files": [
+    "engine/src/cards/pool/stingblade-assassin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stockpiling Celebrant",
+   "files": [
+    "engine/src/cards/pool/stockpiling-celebrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonesplitter Bolt",
+   "files": [
+    "engine/src/cards/pool/stonesplitter-bolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormkeld Prowler",
+   "files": [
+    "engine/src/cards/pool/stormkeld-prowler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Succumb to the Cold",
+   "files": [
+    "engine/src/cards/pool/succumb-to-the-cold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Syr Armont, the Redeemer",
+   "files": [
+    "engine/src/cards/pool/syr-armont-the-redeemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taken by Nightmares",
+   "files": [
+    "engine/src/cards/pool/taken-by-nightmares.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talion's Messenger",
+   "files": [
+    "engine/src/cards/pool/talions-messenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tattered Ratter",
+   "files": [
+    "engine/src/cards/pool/tattered-ratter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempest Hart // Scan the Clouds",
+   "files": [
+    "engine/src/cards/pool/tempest-hart.ts",
+    "engine/src/cards/pool/scan-the-clouds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenacious Tomeseeker",
+   "files": [
+    "engine/src/cards/pool/tenacious-tomeseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Territorial Witchstalker",
+   "files": [
+    "engine/src/cards/pool/territorial-witchstalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Apprentice's Folly",
+   "files": [
+    "engine/src/cards/pool/the-apprentices-folly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Huntsman's Redemption",
+   "files": [
+    "engine/src/cards/pool/the-huntsmans-redemption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Princess Takes Flight",
+   "files": [
+    "engine/src/cards/pool/the-princess-takes-flight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Witch's Vanity",
+   "files": [
+    "engine/src/cards/pool/the-witchs-vanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thunderous Debut",
+   "files": [
+    "engine/src/cards/pool/thunderous-debut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Totentanz, Swarm Piper",
+   "files": [
+    "engine/src/cards/pool/totentanz-swarm-piper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Troublemaker Ouphe",
+   "files": [
+    "engine/src/cards/pool/troublemaker-ouphe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tuinvale Guide",
+   "files": [
+    "engine/src/cards/pool/tuinvale-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twining Twins // Swift Spiral",
+   "files": [
+    "engine/src/cards/pool/twining-twins.ts",
+    "engine/src/cards/pool/swift-spiral.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twisted Fealty",
+   "files": [
+    "engine/src/cards/pool/twisted-fealty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unassuming Sage",
+   "files": [
+    "engine/src/cards/pool/unassuming-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vantress Transmuter // Croaking Curse",
+   "files": [
+    "engine/src/cards/pool/vantress-transmuter.ts",
+    "engine/src/cards/pool/croaking-curse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warehouse Tabby",
+   "files": [
+    "engine/src/cards/pool/warehouse-tabby.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Water Wings",
+   "files": [
+    "engine/src/cards/pool/water-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Welcome to Sweettooth",
+   "files": [
+    "engine/src/cards/pool/welcome-to-sweettooth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wicked Visitor",
+   "files": [
+    "engine/src/cards/pool/wicked-visitor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wildwood Mentor",
+   "files": [
+    "engine/src/cards/pool/wildwood-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witch's Mark",
+   "files": [
+    "engine/src/cards/pool/witchs-mark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witchstalker Frenzy",
+   "files": [
+    "engine/src/cards/pool/witchstalker-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woodland Acolyte // Mend the Wilds",
+   "files": [
+    "engine/src/cards/pool/woodland-acolyte.ts",
+    "engine/src/cards/pool/mend-the-wilds.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Ashiok, Wicked Manipulator",
+   "needs": [
+    "replacement:pay-life-exile-library-instead"
+   ],
+   "why": "static 'if you would pay life while your library has at least that many cards, exile that many from the top instead' — no pay-life replacement; −7's 'total mana value of cards you own in exile' and the Nightmare token's 'if a card was put into exile this turn' are probably also missing"
+  },
+  {
+   "name": "Asinine Antics",
+   "needs": [
+    "effect:create-token-attached-each"
+   ],
+   "why": "\"For each creature your opponents control, create a Cursed Role token attached to that creature\": one token per matching permanent, each attached to its own — `attachedTo` names one permanent. (Also its \"flash if you pay {2} more\".)"
+  },
+  {
+   "name": "Beseech the Mirror",
+   "needs": [
+    "effect:search-to-exile-then-cast"
+   ],
+   "why": "Its keyword:bargain need is now built. Still missing: search for a card, exile it face down, and if bargained cast it free when its mana value is 4 or less, otherwise put it into hand."
+  },
+  {
+   "name": "Bitter Chill",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "'Enchanted creature doesn't untap during its controller's untap step': the static doesntUntap only ever applies to the permanent carrying it"
+  },
+  {
+   "name": "Cheeky House-Mouse // Squeak By",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "Squeak By: \"It can't be blocked by creatures with power 3 or greater this turn\" — cantBeBlockedBy exists only as a battlefield static, no temporary grant to a target."
+  },
+  {
+   "name": "Cooped Up",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "'{2}{W}: Exile enchanted creature' — no EffectTargetRef for the Aura's host (only phase-out has attachedToSource)."
+  },
+  {
+   "name": "Curse of the Werefox",
+   "needs": [
+    "effect:reflexive-trigger-outer-target"
+   ],
+   "why": "\"When you do, that creature fights up to one target creature you don't control\": the reflexive trigger's effect names the spell's own target, which a reflexive trigger can't read."
+  },
+  {
+   "name": "Eerie Interference",
+   "needs": [
+    "replacement:prevent-damage-to-filter-this-turn"
+   ],
+   "why": "'Prevent all damage that would be dealt to you and creatures you control this turn by creatures': only prevent-all-combat-damage (by-filter) and per-object prevent-damage shields exist; no turn-long prevention to a player + a group from a source filter"
+  },
+  {
+   "name": "Extraordinary Journey",
+   "needs": [
+    "zone:exile-owner-may-play"
+   ],
+   "why": "exile up to X target creatures, each card's OWNER may PLAY it while exiled — exile's mayCast is the controller's and cast-only (a land creature card couldn't be played); second ability is Kotis's batched enteredFrom/castFrom shape and would be fine"
+  },
+  {
+   "name": "Faerie Fencing",
+   "needs": [
+    "condition:controlled-as-cast"
+   ],
+   "why": "'an additional -3/-3 if you controlled a Faerie as you cast this spell' needs a condition locked in at cast time; no StaticCondition records it"
+  },
+  {
+   "name": "Faunsbane Troll",
+   "needs": [
+    "cost:sacrifice-attached-aura"
+   ],
+   "why": "\"Sacrifice an Aura attached to this creature\" as a cost, and \"if that creature would die this turn, exile it instead\"."
+  },
+  {
+   "name": "Feral Encounter",
+   "needs": [
+    "effect:delayed-trigger-own-targets",
+    "effect:delayed-trigger-next-combat-phase"
+   ],
+   "why": "\"At the beginning of the next combat phase this turn, target creature you control deals damage … to up to one target creature\": delayed triggers can't choose their own targets and have no next-combat-phase timing."
+  },
+  {
+   "name": "Gnawing Crescendo",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "'Whenever a nontoken creature you control dies this turn, create a Rat' — a player-level 'whenever … this turn' delayed trigger from a spell; delayed-trigger only fires once on a step/leave/next spell."
+  },
+  {
+   "name": "Horned Loch-Whale // Lagoon Breach",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "Lagoon Breach: the creature's OWNER chooses top or bottom of their library; put-on-library has a fixed position, and each-player-may only reaches a target's controller, not its owner (differs for a stolen attacker)."
+  },
+  {
+   "name": "Icewrought Sentry",
+   "needs": [
+    "trigger:you-tap-opponents-creature"
+   ],
+   "why": "'Whenever you tap an untapped creature an opponent controls' — becomes-tapped has no 'tapped by an effect you control' (and 'was untapped') qualifier; the ruling excludes an opponent tapping their own via your effect."
+  },
+  {
+   "name": "Johann, Apprentice Sorcerer",
+   "needs": [
+    "zone:cast-from-library-top-once-each-turn"
+   ],
+   "why": "castFromLibraryTop has no oncePerTurn (castFromGraveyard does); \"Once each turn, you may cast an instant or sorcery spell from the top of your library\" would be unlimited."
+  },
+  {
+   "name": "Knickknack Ouphe",
+   "needs": [
+    "bug:look-and-choose-offers-unattachable-aura"
+   ],
+   "why": "authored and probed: look-and-choose to the battlefield offers an Aura that can't legally be attached (Utopia Sprawl with no Forest); choosing it leaves it on TOP of the library instead of going to the bottom with the rest. The ruling says such an Aura can't be chosen at all. Everything else (X counters, X in the enters trigger, mv<=X filter, 303.4f enchant choice) worked"
+  },
+  {
+   "name": "Korvold, Gleeful Glutton",
+   "needs": [
+    "cost:cost-reduction-permanents-sacrificed-this-turn",
+    "effect:permanent-types-in-graveyard"
+   ],
+   "why": "Costs {1} less per card type among permanents you sacrificed this turn (no such history count); X = permanent types among graveyard cards — cardTypesInGraveyard would also count Kindred/instant types on a matching card."
+  },
+  {
+   "name": "Liberated Livestock",
+   "needs": [
+    "effect:put-onto-battlefield-attached",
+    "effect:created-token-reference"
+   ],
+   "why": "'For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it' (ruling: extra tokens from Doubling Season each get one too) — return-from-graveyard's attachedTo names one permanent, not each created token"
+  },
+  {
+   "name": "Misleading Motes",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom"
+   ],
+   "why": "the creature's OWNER chooses top or bottom of their library; put-on-library has a fixed position and each-player-may only reaches the target's controller, which differs from the owner for a stolen creature"
+  },
+  {
+   "name": "Mosswood Dreadknight // Dread Whispers",
+   "needs": [
+    "zone:graveyard-cast-as-adventure"
+   ],
+   "why": "dies trigger: 'you may cast it from your graveyard as an Adventure until the end of your next turn' — no permission to cast only the Adventure half from the graveyard (Dread Whispers itself is trivial, but the card ships whole)"
+  },
+  {
+   "name": "Not Dead After All",
+   "needs": [
+    "effect:return-then-attach-to-returned"
+   ],
+   "why": "The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name."
+  },
+  {
+   "name": "Picnic Ruiner // Stolen Goodies",
+   "needs": [
+    "effect:distribute-counters"
+   ],
+   "why": "Stolen Goodies distributes three +1/+1 counters among any number of targets (2+1 split is the caster's choice); counter distribution isn't built (AUTHORING §15). Picnic Ruiner itself is easy (whileCondition + double strike) but the card is one."
+  },
+  {
+   "name": "Sentinel of Lost Lore",
+   "needs": [
+    "effect:target-card-in-exile",
+    "filter:has-adventure"
+   ],
+   "why": "modes 1-2 target a card in exile that has an Adventure: no exile-zone target spec and no has-an-Adventure filter"
+  },
+  {
+   "name": "Sharae of Numbing Depths",
+   "needs": [
+    "trigger:you-tap-opponent-creature"
+   ],
+   "why": "\"Whenever you tap one or more untapped creatures your opponents control\": becomes-tapped has no by-you / was-untapped / batch filter (ruling: only taps your effects instruct)."
+  },
+  {
+   "name": "Skewer Slinger",
+   "needs": [
+    "trigger:blocks-creature-trigger"
+   ],
+   "why": "'Whenever this creature blocks … a creature, deals 1 damage to that creature' — the blocks trigger's object is the blocker, nothing names the attacker it blocks (the 'becomes blocked by' half is blocked-by and would work)."
+  },
+  {
+   "name": "Solitary Sanctuary",
+   "needs": [
+    "trigger:you-tap-opponent-creature"
+   ],
+   "why": "'Whenever you tap an untapped creature an opponent controls': becomes-tapped has no 'by your effect' / 'was untapped' qualifier"
+  },
+  {
+   "name": "Tegwyll's Scouring",
+   "needs": [
+    "effect:flash-for-extra-cost"
+   ],
+   "why": "'cast as though it had flash by tapping three untapped creatures you control with flying in addition to its other costs': kicker.flash exists only with behold; alternativeCost.tapCreatures replaces the mana cost instead of adding to it"
+  },
+  {
+   "name": "The End",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "'Search its controller's graveyard, hand, and library for any number of cards with the same name as that permanent and exile them … draws a card for each card exiled from their hand this way' — no extract effect"
+  },
+  {
+   "name": "The Rani",
+   "needs": [
+    "mechanic:static-goad"
+   ],
+   "why": "Attaching a token as it's created is built (Roles); Mark of the Rani's \"enchanted creature … is goaded\" is a static goad."
+  },
+  {
+   "name": "Three Bowls of Porridge",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "'{2}, {T}: Choose one that hasn't been chosen —' with targeted modes is a modal ACTIVATED ability; §15: modes would be chosen on resolution, and modes can't bring their own targets (notChosenBefore exists only for triggered modal)"
+  },
+  {
+   "name": "Timber Paladin",
+   "needs": [
+    "condition:source-enchanted-by-n-auras"
+   ],
+   "why": "base P/T 3/3 / 5/5 / 10/10 + keywords by EXACTLY one / two / three-or-more Auras attached — no StaticCondition counting the Auras attached to the source"
+  },
+  {
+   "name": "Torch the Tower",
+   "needs": [
+    "replacement:dealt-damage-this-way-exile-if-dies"
+   ],
+   "why": "\"If a permanent dealt damage by Torch the Tower would die this turn, exile it instead\": a turn-long exile replacement on whatever it damaged. No such effect exists; the pool has neither Lava Coil's target form nor Anger of the Gods' dealt-damage form. Bargain itself is now built."
+  },
+  {
+   "name": "Twisted Sewer-Witch",
+   "needs": [
+    "effect:create-token-attached-each"
+   ],
+   "why": "\"For each Rat you control, create a Wicked Role token attached to that Rat\": one Role per matching permanent."
+  },
+  {
+   "name": "Verdant Outrider",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "'{1}{G}: can't be blocked by creatures with power 2 or less this turn' — cantBeBlockedBy exists only as a static, no until-end-of-turn effect form."
+  }
+ ]
+}

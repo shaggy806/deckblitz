@@ -1193,7 +1193,9 @@ export function matchesFilter(
     // an Adventure"). Both faces carry `adventure`; the Adventure's is subtyped.
     const name = live !== undefined ? printedCardName(live) : lki?.name;
     const def = name !== undefined && registry.has(name) ? registry.get(name) : undefined;
-    const has = def !== undefined && def.adventure && !def.subtypes.includes("Adventure");
+    // A card exiled face down has no characteristics (rule 406.3a).
+    const faceDown = live?.exiledFaceDown !== undefined;
+    const has = !faceDown && def !== undefined && def.adventure && !def.subtypes.includes("Adventure");
     if (has !== filter.hasAdventure) return false;
   }
   if (filter.faceDown !== undefined) {

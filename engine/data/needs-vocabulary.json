@@ -7286,6 +7286,51 @@
   "trigger:phases-out": {
    "family": "trigger:leaves-battlefield-filter",
    "example": "The War Doctor: \"whenever one or more other permanents phase out\" (rule 603.10b)"
+  },
+  "bug:look-and-choose-offers-unattachable-aura": {
+   "example": "Knickknack Ouphe: look-and-choose with destination battlefield offers Auras with nothing they could enchant (rule 303.4g); a chosen one stays where it is in the library and misses the leftover move (bottom/graveyard). Should be left out of the offer, as the Knickknack Ouphe ruling says. Genesis Wave has the same exposure"
+  },
+  "condition:source-enchanted-by-n-auras": {
+   "example": "Timber Paladin: StaticCondition: the source is enchanted by exactly N (or at least N) Auras — Timber Paladin"
+  },
+  "cost:sacrifice-attached-aura": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Faunsbane Troll: \"Sacrifice an Aura attached to this creature\" as a cost, and \"if that creature would die this turn, exile it instead\"."
+  },
+  "effect:create-token-attached-each": {
+   "family": "effect:attach-extensions",
+   "example": "Asinine Antics: \"For each creature your opponents control, create a Cursed Role token attached to that creature\": one token per matching permanent, each attached to its own — `attachedTo` names one permanent. (Also its \"flash if you pay {2} more\".)"
+  },
+  "effect:delayed-trigger-next-combat-phase": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Feral Encounter: Delayed trigger timing \"at the beginning of the next combat phase this turn\" (Feral Encounter); none if no combat follows."
+  },
+  "effect:reflexive-trigger-outer-target": {
+   "family": "effect:reflexive-trigger",
+   "example": "Curse of the Werefox: \"When you do, that creature fights up to one target creature you don't control\": the reflexive trigger's effect names the spell's own target, which a reflexive trigger can't read."
+  },
+  "effect:return-then-attach-to-returned": {
+   "family": "effect:attach-extensions",
+   "example": "Not Dead After All: The granted dies trigger returns the card, \"then create a Wicked Role token attached to it\": the returned permanent is a new object (rule 400.7) the trigger can't name."
+  },
+  "filter:has-adventure": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Sentinel of Lost Lore: CardFilter clause for a card/spell/permanent that has an Adventure (an adventurer card's alternative characteristics), not matching an instant/sorcery cast as an Adventure on the stack (the WOE rulings)"
+  },
+  "mechanic:celebration": {
+   "family": "stat:turn-event-tallies",
+   "example": "Wilds of Eldraine: Celebration's 'two or more nonland permanents entered the battlefield under your control this turn' — now built as CELEBRATION_CONDITION over the existing entered turn history; add the key to the gaps file's built array."
+  },
+  "replacement:pay-life-exile-library-instead": {
+   "example": "Ashiok, Wicked Manipulator: replace paying N life with exiling the top N cards of your library while it holds at least N — Ashiok, Wicked Manipulator"
+  },
+  "trigger:you-tap-opponents-creature": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Icewrought Sentry: Icewrought Sentry: 'whenever you tap an untapped creature an opponent controls' — a becomes-tapped trigger narrowed to a tap caused by an effect/cost the trigger's controller controls, of an opponent's previously untapped creature."
+  },
+  "zone:cast-from-library-top-once-each-turn": {
+   "family": "zone:cast-from-library-top",
+   "example": "Johann, Apprentice Sorcerer: castFromLibraryTop with a once-per-turn allowance per permanent (Johann, Apprentice Sorcerer), like castFromGraveyard.oncePerTurn."
   }
  }
 }

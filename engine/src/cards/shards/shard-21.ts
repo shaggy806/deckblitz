@@ -32,6 +32,7 @@ import _poolBaneOfProgress from "../pool/bane-of-progress.js";
 import _poolBeastbondOutcaster from "../pool/beastbond-outcaster.js";
 import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
 import _poolBeseechTheQueen from "../pool/beseech-the-queen.js";
+import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
@@ -441,6 +442,7 @@ const shard: CardShard = {
     _poolBeastbondOutcaster,
     _poolBeastmasterAscension,
     _poolBeseechTheQueen,
+    _poolBestialBloodline,
     _poolBestialIncursion,
     _poolBlackMarketConnections,
     _poolBlightGrenade,

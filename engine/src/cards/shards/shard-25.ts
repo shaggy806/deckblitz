@@ -154,6 +154,7 @@ import _poolFumigate from "../pool/fumigate.js";
 import _poolGadwicksFirstDuel from "../pool/gadwicks-first-duel.js";
 import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
+import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
 import _poolGenesis from "../pool/genesis.js";
 import _poolGeothermalBog from "../pool/geothermal-bog.js";
@@ -599,6 +600,7 @@ const shard: CardShard = {
     _poolGadwicksFirstDuel,
     _poolGaeasGift,
     _poolGaleriderSliver,
+    _poolGalvanicGiant,
     _poolGamble,
     _poolGenesis,
     _poolGeothermalBog,

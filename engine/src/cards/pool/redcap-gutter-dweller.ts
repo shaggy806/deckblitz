@@ -1,7 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 8563. Foundations (Wilds of Eldraine's Commander-legal first
-// printing list). The upkeep trigger is Vampire Gourmand's "you may sacrifice
+// EDHREC rank 8563. Wilds of Eldraine. The upkeep trigger is Vampire Gourmand's "you may sacrifice
 // another creature. If you do" around Count on Luck's impulse draw. If this
 // creature has left by then, the sacrifice and the exile still happen and only
 // the counter has nowhere to go (its ruling); the exiled card is played with

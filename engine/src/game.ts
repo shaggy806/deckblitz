@@ -23328,6 +23328,9 @@ export class Game {
     let def = this.registry.get(tokenName); // validate the token is a known definition
     if (attachTo !== undefined) {
       if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
+      // One token of a compacted stack is the one it goes on, as an attach
+      // singles it out (`attachPermanent`).
+      attachTo = this.splitOneFromStack(attachTo);
       separate = true;
     }
     // Doubling Season / Parallel Lives (rule 614): "twice that many instead".
@@ -29257,7 +29260,22 @@ export class Game {
         : opts.handToo === true
           ? [...this.state.zones.perPlayer[player].graveyard, ...this.state.zones.perPlayer[player].hand]
           : this.state.zones.perPlayer[player].graveyard;
-    const eligible = graveyards.filter((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
+    // "From among the milled cards": a milled card is found in whatever
+    // public zone it went to (rule 701.17c), so one a replacement exiled
+    // instead (Rest in Peace) is still among them — as `beginZoneChoice`
+    // finds it (Seek Thrills, Random Encounter).
+    const milledElsewhere =
+      filter.thisWay === "milled"
+        ? thisWayEntries(this.state, "milled").flatMap((entry) => {
+            const card = this.state.objects[entry.object];
+            return entry.player === player && card?.zone === "exile" && card.exiledFaceDown === undefined
+              ? [entry.object]
+              : [];
+          })
+        : [];
+    const eligible = [...graveyards, ...milledElsewhere].filter((id) =>
+      matchesFilter(this.state, this.registry, id, filter, { you: player }),
+    );
     if (eligible.length === 0) return false;
     const enterAs = destination === "battlefield" ? opts.enterAs : undefined;
     if (count === "all" || eligible.length <= count) {

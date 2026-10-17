@@ -67,6 +67,7 @@ import _poolControlMagic from "../pool/control-magic.js";
 import _poolCosmicSpiderMan from "../pool/cosmic-spider-man.js";
 import _poolCourierHawk from "../pool/courier-hawk.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
+import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCursedWindbreaker from "../pool/cursed-windbreaker.js";
@@ -333,6 +334,7 @@ import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolStab from "../pool/stab.js";
 import _poolStarbreachWhale from "../pool/starbreach-whale.js";
 import _poolStartingColumn from "../pool/starting-column.js";
+import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStun from "../pool/stun.js";
@@ -497,6 +499,7 @@ const shard: CardShard = {
     _poolCosmicSpiderMan,
     _poolCourierHawk,
     _poolCrisisOfConscience,
+    _poolCroakingCurse,
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCursedWindbreaker,
@@ -763,6 +766,7 @@ const shard: CardShard = {
     _poolStab,
     _poolStarbreachWhale,
     _poolStartingColumn,
+    _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStun,

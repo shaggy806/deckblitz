@@ -280,6 +280,7 @@ import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
+import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
 import _poolResourcefulDefense from "../pool/resourceful-defense.js";
@@ -422,6 +423,7 @@ import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
+import _poolWickedVisitor from "../pool/wicked-visitor.js";
 import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
@@ -723,6 +725,7 @@ const shard: CardShard = {
     _poolRaucousEntertainer,
     _poolRazeTheEffigy,
     _poolReckonersBargain,
+    _poolRedtoothVanguard,
     _poolRequitingHex,
     _poolResearchAssistant,
     _poolResourcefulDefense,
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolWheelOfFortune,
     _poolWhispersilkCloak,
     _poolWhiteGloveGourmand,
+    _poolWickedVisitor,
     _poolWistfulSelkie,
     _poolWitherAndBloom,
     _poolWolfirAvenger,

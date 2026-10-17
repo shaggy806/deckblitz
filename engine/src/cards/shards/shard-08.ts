@@ -111,6 +111,7 @@ import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
+import _poolEgoDrain from "../pool/ego-drain.js";
 import _poolElderleafMentor from "../pool/elderleaf-mentor.js";
 import _poolElegantEdgecrafters from "../pool/elegant-edgecrafters.js";
 import _poolElendasHierophant from "../pool/elendas-hierophant.js";
@@ -424,6 +425,7 @@ import _poolVagrantPlowbeasts from "../pool/vagrant-plowbeasts.js";
 import _poolValakutPredator from "../pool/valakut-predator.js";
 import _poolValkyrieAerialUnit from "../pool/valkyrie-aerial-unit.js";
 import _poolVampireWarlord from "../pool/vampire-warlord.js";
+import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
 import _poolVedalkenAethermage from "../pool/vedalken-aethermage.js";
 import _poolVenatHeartOfHydaelyn from "../pool/venat-heart-of-hydaelyn.js";
@@ -584,6 +586,7 @@ const shard: CardShard = {
     _poolDuskUrchins,
     _poolDwarvenProvisioner,
     _poolEclipsedKithkin,
+    _poolEgoDrain,
     _poolElderleafMentor,
     _poolElegantEdgecrafters,
     _poolElendasHierophant,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolValakutPredator,
     _poolValkyrieAerialUnit,
     _poolVampireWarlord,
+    _poolVantressTransmuter,
     _poolVantressVisions,
     _poolVedalkenAethermage,
     _poolVenatHeartOfHydaelyn,

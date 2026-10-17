@@ -178,6 +178,7 @@ import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
+import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
@@ -617,6 +618,7 @@ const shard: CardShard = {
     _poolHallOfTagsin,
     _poolHammerheadTyrant,
     _poolHanaKami,
+    _poolHeartflameSlash,
     _poolHedronArchive,
     _poolHelicarrierStrike,
     _poolHellkiteCharger,

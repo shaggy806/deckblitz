@@ -306,7 +306,12 @@
   "static:slumber-counters-type-change",
   "static:type-while-counter",
   "mechanic:suspend-and-time-counters",
-  "keyword:vanishing"
+  "keyword:vanishing",
+  "mechanic:role-tokens",
+  "keyword:bargain",
+  "mechanic:celebration",
+  "filter:has-adventure",
+  "effect:create-token-attached-to"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

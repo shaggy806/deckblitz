@@ -130,6 +130,7 @@ import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
 import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
+import _poolFeedTheCauldron from "../pool/feed-the-cauldron.js";
 import _poolFellGravship from "../pool/fell-gravship.js";
 import _poolFellTheProfane from "../pool/fell-the-profane.js";
 import _poolFeralProwler from "../pool/feral-prowler.js";
@@ -406,6 +407,7 @@ import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWarRoom from "../pool/war-room.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
+import _poolWaterWings from "../pool/water-wings.js";
 import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
@@ -563,6 +565,7 @@ const shard: CardShard = {
     _poolEyeOfJace,
     _poolEzioBrashNovice,
     _poolFatefulTempest,
+    _poolFeedTheCauldron,
     _poolFellGravship,
     _poolFellTheProfane,
     _poolFeralProwler,
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolWallOfSpears,
     _poolWarRoom,
     _poolWarlordsFury,
+    _poolWaterWings,
     _poolWeaponsVendor,
     _poolWeaselbackRedcap,
     _poolWeaverOfBlossoms,

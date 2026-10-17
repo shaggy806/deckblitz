@@ -190,6 +190,7 @@ import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
 import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
+import _poolHarriedSpearguard from "../pool/harried-spearguard.js";
 import _poolHarvesterOfSouls from "../pool/harvester-of-souls.js";
 import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
 import _poolHeadlessRider from "../pool/headless-rider.js";
@@ -653,6 +654,7 @@ const shard: CardShard = {
     _poolHagraSharpshooter,
     _poolHammerhand,
     _poolHardenedScaleArmor,
+    _poolHarriedSpearguard,
     _poolHarvesterOfSouls,
     _poolHavenOfTheHarvest,
     _poolHeadlessRider,

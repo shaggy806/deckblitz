@@ -172,6 +172,7 @@ import _poolGuidingHydra from "../pool/guiding-hydra.js";
 import _poolGuulDrazMucklord from "../pool/guul-draz-mucklord.js";
 import _poolHarmlessOffering from "../pool/harmless-offering.js";
 import _poolHeadstone from "../pool/headstone.js";
+import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
@@ -202,6 +203,7 @@ import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKazanduValley from "../pool/kazandu-valley.js";
 import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
+import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
@@ -649,6 +651,7 @@ const shard: CardShard = {
     _poolGuulDrazMucklord,
     _poolHarmlessOffering,
     _poolHeadstone,
+    _poolHeartflameDuelist,
     _poolHearthElemental,
     _poolHeartstone,
     _poolHematiteGolem,
@@ -679,6 +682,7 @@ const shard: CardShard = {
     _poolKazanduValley,
     _poolKinjallisCaller,
     _poolKioraTheRisingTide,
+    _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,
     _poolKorSkyClimber,
