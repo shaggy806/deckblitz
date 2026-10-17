@@ -233,9 +233,16 @@ from outside (`check-live.mjs`: the page, and the game socket opening through th
 compression). The `ubuntu` user's passwordless sudo is what lets `deploy.sh`'s `systemctl`
 commands run unattended.
 
-`deploy.sh` (repo root): `git pull --ff-only` → `npm ci` (the lockfile as committed, never rewritten — the box's npm 10 used to drop npm 11's `libc` fields on every `npm install`, leaving the checkout dirty) → rebuild engine/server/client with
+`deploy.sh` (repo root): `git pull --ff-only` → `npm ci` (the lockfile as committed, never rewritten — the box's npm 10 used to drop npm 11's `libc` fields on every `npm install`, leaving the checkout dirty) → **`sudo systemctl stop mtg-server`** → rebuild engine/server/client with
 `VITE_SERVER_URL=wss://ws.deckblitz.net` baked into the client → `sudo systemctl daemon-reload` →
-`sudo systemctl restart mtg-server`. The `daemon-reload` is there so a hand-edited unit file is
+`sudo systemctl restart mtg-server`. The server is stopped for the build because the engine's
+`tsc` needs ~1.6 GB resident even with the build's V8 heap capped at 1600 MB, and with the
+server and its room shard (~400 MB) running beside it the kernel killed it (2026-10-17, at 13,789
+cards). So the game socket is down for the build's few minutes, not a few seconds; games end
+either way. An `EXIT` trap starts the server again whatever happens: if the build failed partway
+it comes up on whatever is on disk (the engine's `dist` untouched if its `tsc` was the step that
+died, the server's rebuilt against it), so after a failed deploy check it's serving, then fix and
+deploy again, or roll back as below. The `daemon-reload` is there so a hand-edited unit file is
 never silently stale after a deploy — cheap and harmless even when the unit file didn't change.
 Caddy and cloudflared don't need restarting for an ordinary code change — only `mtg-server`
 actually changes. **A `sudo reboot` does *not* deploy new code** — it just restarts whatever's

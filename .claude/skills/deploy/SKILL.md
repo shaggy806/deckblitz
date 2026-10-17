@@ -47,8 +47,12 @@ ssh -o BatchMode=yes deckblitz 'cd /opt/mtg-engine && ./deploy.sh' > "$TEMP/mtg-
 ```
 
 Run it in the background (`run_in_background: true`, `timeout: 1800000`): the full build
-(card generation, engine, server, client) takes several minutes. A failure leaves the old
-server running only if the build failed before the restart — read the log's tail and say which.
+(card generation, engine, server, client) takes several minutes, and `deploy.sh` stops the room
+server for it (the box hasn't the memory for both — 2026-10-17), so the game socket is down that
+long. Whatever happens, `deploy.sh` starts the server again on exit: after a failure it serves
+whatever is on disk, which may be part old, part new. Read the log's tail and say which step
+failed; a line `Killed` with `code 137` is the kernel's out-of-memory killer (`sudo dmesg -T |
+grep -i oom` on the box says how big it got).
 
 ## 4. Check it from outside
 
