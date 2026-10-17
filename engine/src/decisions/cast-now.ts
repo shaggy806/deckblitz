@@ -98,6 +98,7 @@ function offerOf(awaiting: Extract<AwaitingDecision, { kind: "cast-now" }>): Ext
     cards: [...awaiting.cards],
     ...(awaiting.looked !== undefined ? { looked: [...awaiting.looked] } : {}),
     free: awaiting.free,
+    ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
     casts: [...awaiting.offers],
     ...(awaiting.lands !== undefined ? { lands: [...awaiting.lands] } : {}),
   };

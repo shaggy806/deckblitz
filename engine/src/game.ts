@@ -946,6 +946,7 @@ interface CastNowAsk {
   readonly player: PlayerId;
   readonly cards: readonly ObjectId[];
   readonly free: boolean;
+  readonly byDiscarding?: true;
   readonly exileAfter: boolean;
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
@@ -9992,6 +9993,15 @@ export class Game {
     const def = this.faceDef(cardId, face);
     const prohibited = this.whyProhibitedFromCasting(player, cardId, def);
     if (prohibited !== null) return prohibited;
+    // "By discarding a card rather than paying its mana cost" (Cruelclaw):
+    // a card to discard, besides any the spell's own costs take.
+    if (
+      offered?.byDiscarding === true &&
+      this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId).length <
+        1 + (def.additionalCost?.discard ?? 0)
+    ) {
+      return `${player} has no card to discard to cast ${def.name}`;
+    }
     // The offer's own terms: "without paying its mana cost" is the only way
     // it allows — an alternative cost, so no other goes with it (rule
     // 118.9a) — and only a spell its filter matches, judged as the spell it
@@ -11016,6 +11026,7 @@ export class Game {
             player: awaiting.player,
             cards: awaiting.cards,
             free: awaiting.free,
+            ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
             exileAfter: awaiting.exileAfter,
             ...(awaiting.spell !== undefined ? { spell: awaiting.spell } : {}),
             ...(awaiting.freeCastOf !== undefined ? { freeCastOf: awaiting.freeCastOf } : {}),
@@ -11042,6 +11053,7 @@ export class Game {
       player,
       cards,
       free: options.free,
+      ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       exileAfter: options.exileAfter,
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -11095,6 +11107,7 @@ export class Game {
       offers,
       ...(lands.length > 0 ? { lands } : {}),
       free: options.free,
+      ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -11748,6 +11761,14 @@ export class Game {
         this.discardByEffect({ kind: "player", player }, costDiscard);
       });
       this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
+    }
+    // Cast by discarding a card rather than paying its mana cost (the
+    // `cast-now` effect's `byDiscarding`): that card, chosen as it's paid.
+    if (via === "effect" && this.castNowOffer(player, cardId)?.byDiscarding === true) {
+      this.withDecisionSource(cardId, () => {
+        this.discardByEffect({ kind: "player", player }, 1);
+      });
+      this.costDiscardPriorityTo(this.activePlayer);
     }
     // Cast during a resolution: once that resolution finishes, the active
     // player gets priority (rule 117.3b), not necessarily the caster.

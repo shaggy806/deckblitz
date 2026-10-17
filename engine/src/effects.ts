@@ -1000,6 +1000,9 @@ export interface CastNowOptions {
   /** Who is offered the cast — the effect's controller when omitted. */
   readonly by?: PlayerId;
   readonly free: boolean;
+  /** "By discarding a card rather than paying its mana cost" — with `free`;
+   * see the `cast-now` effect's `byDiscarding`. */
+  readonly byDiscarding?: boolean;
   readonly exileAfter: boolean;
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
@@ -2332,6 +2335,14 @@ export type EffectSpec =
        * still be paid, and cost increases apply (118.9d).
        */
       readonly free?: boolean;
+      /**
+       * "You may cast that card **by discarding a card rather than paying
+       * its mana cost**" (The Infamous Cruelclaw): an alternative cost
+       * (rule 118.9) of one card from the caster's hand, so it's `free` with
+       * a discard on top — X is 0, additional costs may still be paid and
+       * cost increases apply (118.9d). Not offered with an empty hand.
+       */
+      readonly byDiscarding?: boolean;
       /** "If that spell would be put into your graveyard, exile it instead." */
       readonly exileAfter?: boolean;
       /**
@@ -6636,7 +6647,8 @@ function offerCastNow(
   if (cards.length > 0) {
     ctx.castNow(cards, {
       ...(by !== undefined ? { by } : {}),
-      free: spec.free === true,
+      free: spec.free === true || spec.byDiscarding === true,
+      ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
       exileAfter: spec.exileAfter === true,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.spell !== undefined ? { spell: spec.spell } : {}),

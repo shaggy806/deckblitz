@@ -96,6 +96,7 @@ import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
+import _poolEtaliPrimalConqueror from "../pool/etali-primal-conqueror.js";
 import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
 import _poolEumidianTerrabotanist from "../pool/eumidian-terrabotanist.js";
 import _poolEvolutionWitness from "../pool/evolution-witness.js";
@@ -520,6 +521,7 @@ const shard: CardShard = {
     _poolEmbodimentOfSpring,
     _poolEnvironmentalScientist,
     _poolEssenceChanneler,
+    _poolEtaliPrimalConqueror,
     _poolEtheriumAbomination,
     _poolEumidianTerrabotanist,
     _poolEvolutionWitness,

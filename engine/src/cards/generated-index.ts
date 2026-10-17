@@ -470,6 +470,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Emeria, Shattered Skyclave": "https://cards.scryfall.io/art_crop/back/c/4/c470539a-9cc7-4175-8f7c-c982b6072b6d.jpg",
   "Entropic Cloud": "https://cards.scryfall.io/art_crop/back/7/8/783adffd-449f-44a6-8faf-3e38a201b05b.jpg",
   "Entry Denied": "https://cards.scryfall.io/art_crop/back/5/c/5c1d410e-4237-4963-b015-54d26730e63d.jpg",
+  "Etali, Primal Sickness": "https://cards.scryfall.io/art_crop/back/9/5/95c14c4d-6c16-4826-8d93-d89ad04aee09.jpg",
   "Expensive Taste": "https://cards.scryfall.io/art_crop/back/3/1/315cbbf7-a2ad-4565-9877-1e903d7fd797.jpg",
   "Explore the Vastlands": "https://cards.scryfall.io/art_crop/back/1/8/18a2bdc8-b705-4eb5-b3a5-ff2e2ab8f312.jpg",
   "Exsanguinate": "f11d7311-4066-4a5d-ba28-9857fa707a0b",

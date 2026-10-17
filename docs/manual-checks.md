@@ -4835,6 +4835,21 @@ Ezio gives Assassin spells freerunning and, on combat damage, asks for {W}{U}{B}
   {W}{U}{B}{R}{G} payment; paying, Bob loses the game. After combat Boilerbilges Ripper offers a
   freerunning {B}{B} cast. Check at ~768px tall, in a 2- and a 4-player room.
 
+## Cast by discarding a card (2026-10-16)
+
+### The Infamous Cruelclaw
+
+*New player decision* — "you may cast that card by discarding a card rather than paying its mana
+cost", then which card to discard
+
+- **Setup:** Your precombat main. Your battlefield: The Infamous Cruelclaw; in hand Grizzly Bears and
+  Llanowar Elves; your library's top cards Wastes, then Hill Giant.
+- **Do:** Attack Bob with Cruelclaw (no blocks). Cast Hill Giant from the offer; discard Llanowar Elves.
+- **Check:** The offer reads "by discarding a card rather than paying its mana cost" with a "(discard
+  a card)" button; Wastes and Hill Giant are exiled first; the discard asks for one card, and Hill
+  Giant resolves onto your battlefield while Grizzly Bears stays in hand. Check at ~768px tall, in a
+  2- and a 4-player room.
+
 ## Sacrifice any number as a cost (2026-10-16)
 
 ### Dargo, the Shipwrecker

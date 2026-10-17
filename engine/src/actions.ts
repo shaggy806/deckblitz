@@ -1479,6 +1479,10 @@ export type LegalAction =
       readonly looked?: readonly ObjectId[];
       /** "Without paying its mana cost": every cast on offer is free. */
       readonly free: boolean;
+      /** …and costs a card discarded instead (The Infamous Cruelclaw's "by
+       * discarding a card rather than paying its mana cost"), chosen as
+       * it's paid. */
+      readonly byDiscarding?: true;
       readonly casts: readonly CastSpellOffer[];
       /** "You may **play**" (hideaway): each land card on offer, as the face
        * it'd be played as — played during the resolution, it uses a land

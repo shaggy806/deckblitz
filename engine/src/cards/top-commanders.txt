@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-435 already implemented / 65 missing
+437 already implemented / 63 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -117,7 +117,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  111  Atraxa, Grand Unifier                          17614 decks  {3}{G}{W}{U}{B}  Legendary Creature — Phyrexian Angel
 [x]  112  Deadpool, Trading Card                         17208 decks  {2}{B}{R}        Legendary Creature — Mutant Mercenary Hero
 [ ]  113  Aminatou, Veil Piercer                         17186 decks  {1}{W}{U}{B}     Legendary Creature — Human Wizard
-[ ]  114  Etali, Primal Conqueror                        17174 decks  {5}{R}{R}        Legendary Creature — Elder Dinosaur // Legendary Creature — Phyrexian Elder Dinosaur
+[x]  114  Etali, Primal Conqueror                        17174 decks  {5}{R}{R}        Legendary Creature — Elder Dinosaur // Legendary Creature — Phyrexian Elder Dinosaur
 [x]  115  Aesi, Tyrant of Gyre Strait                    17143 decks  {4}{G}{U}        Legendary Creature — Serpent
 [x]  116  Witherbloom, the Balancer                      17139 decks  {6}{B}{G}        Legendary Creature — Elder Dragon
 [x]  117  Zur the Enchanter                              17114 decks  {1}{W}{U}{B}     Legendary Creature — Human Wizard
@@ -308,7 +308,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  302  Marvo, Deep Operative                           9069 decks  {3}{U}{B}        Legendary Creature — Octopus Rogue
 [x]  303  Norin the Wary                                  9063 decks  {R}              Legendary Creature — Human Warrior
 [x]  304  Finneas, Ace Archer                             9061 decks  {G}{W}           Legendary Creature — Rabbit Archer
-[ ]  305  The Infamous Cruelclaw                          9048 decks  {1}{B}{R}        Legendary Creature — Weasel Mercenary
+[x]  305  The Infamous Cruelclaw                          9048 decks  {1}{B}{R}        Legendary Creature — Weasel Mercenary
 [x]  306  Toxrill, the Corrosive                          9006 decks  {5}{B}{B}        Legendary Creature — Slug Horror
 [ ]  307  Arna Kennerüd, Skycaptain                       8987 decks  {2}{W}{U}{B}     Legendary Creature — Human Knight
 [x]  308  Raggadragga, Goreguts Boss                      8971 decks  {2}{R}{G}        Legendary Creature — Human Boar

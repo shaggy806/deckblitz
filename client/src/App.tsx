@@ -4344,7 +4344,12 @@ function Table({
       <div className="controls">
         <span>
           {verb} {ways[0]?.cardName ?? landWays[0]?.cardName ?? game.nameOf(card)}
-          {castNowAction.free && ways.length > 0 ? ' without paying its mana cost' : ' now'}?
+          {castNowAction.byDiscarding === true && ways.length > 0
+            ? ' by discarding a card rather than paying its mana cost'
+            : castNowAction.free && ways.length > 0
+              ? ' without paying its mana cost'
+              : ' now'}
+          ?
         </span>
         {landWays.map((l, i) => (
           <button
@@ -4372,7 +4377,7 @@ function Table({
               </>
             ) : null}
             {c.costOptionText ? <> (<Symbols text={c.costOptionText} />)</> : null}
-            {c.free ? ' (free)' : ''}
+            {castNowAction.byDiscarding === true ? ' (discard a card)' : c.free ? ' (free)' : ''}
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
             {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}

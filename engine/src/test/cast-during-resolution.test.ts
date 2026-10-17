@@ -388,3 +388,60 @@ describe("an ability that lets you cast a spell as it resolves", () => {
     expect(zone(game, visions)).toBe("graveyard");
   });
 });
+
+describe("Etali, Primal Conqueror", () => {
+  it("each player exiles until a nonland card; you cast any number of them free, theirs included", () => {
+    const { game, a } = table();
+    const bears = toLibrary(game, "Grizzly Bears");
+    const wastes = toLibrary(game, "Wastes");
+    const giant = toLibrary(game, "Hill Giant", B);
+    const seen = castFromOffers(a, [giant, bears]);
+    const etali = toHand(game, "Etali, Primal Conqueror");
+    lands(game, "Mountain", 7);
+    cast(game, etali);
+    settle(game);
+    expect(zone(game, wastes)).toBe("exile");
+    expect(seen.offered[0]).toEqual(expect.arrayContaining([bears, giant]));
+    expect(seen.offered[0]).not.toContain(wastes);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(controller(game, giant)).toBe(A);
+  });
+});
+
+describe("The Infamous Cruelclaw", () => {
+  it("exiles until a nonland card, cast by discarding a card rather than paying its mana cost", () => {
+    const { game, a } = table();
+    const cruelclaw = spawn(game, "The Infamous Cruelclaw");
+    const giant = toLibrary(game, "Hill Giant");
+    const wastes = toLibrary(game, "Wastes");
+    toHand(game, "Grizzly Bears");
+    const cards = hand(game).length;
+    let byDiscarding: boolean | undefined;
+    const inner = castFromOffers(a, [giant]);
+    const pick = a.chooseCastNowFn;
+    a.chooseCastNowFn = (view, offer) => {
+      byDiscarding = offer.byDiscarding;
+      return pick(view, offer);
+    };
+    attack(game, a, [cruelclaw]);
+    expect(inner.offered[0]).toEqual([giant]);
+    expect(byDiscarding).toBe(true);
+    expect(zone(game, wastes)).toBe("exile");
+    expect(zone(game, giant)).toBe("battlefield");
+    // One card discarded to pay for it.
+    expect(hand(game).length).toBe(cards - 1);
+    expect(game.state.eventLog.some((e) => e.type === "cards-discarded" && e.player === A)).toBe(true);
+  });
+
+  it("offers nothing with no card to discard; the card stays in exile", () => {
+    const { game, a } = table();
+    const cruelclaw = spawn(game, "The Infamous Cruelclaw");
+    const giant = toLibrary(game, "Hill Giant");
+    for (const id of [...hand(game)]) game.debugMove(id, "graveyard");
+    const seen = castFromOffers(a, [giant]);
+    attack(game, a, [cruelclaw]);
+    expect(seen.offered).toHaveLength(0);
+    expect(zone(game, giant)).toBe("exile");
+  });
+});

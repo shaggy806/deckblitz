@@ -2694,6 +2694,8 @@ export type AwaitingDecision =
       readonly lands?: readonly PlayLandOffer[];
       /** "Without paying its mana cost" — the only way it's offered. */
       readonly free: boolean;
+      /** …by discarding a card instead — see the effect's `byDiscarding`. */
+      readonly byDiscarding?: true;
       /** What the spell must be, matched as it's cast — see the effect's
        * `spell`, bound when it was raised. */
       readonly spell?: CardFilter;

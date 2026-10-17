@@ -3673,6 +3673,8 @@ import _poolEssenceScatter from "./pool/essence-scatter.js";
 import _poolEssenceWarden from "./pool/essence-warden.js";
 import _poolEssenceknitScholar from "./pool/essenceknit-scholar.js";
 import _poolEstridsInvocation from "./pool/estrids-invocation.js";
+import _poolEtaliPrimalConqueror from "./pool/etali-primal-conqueror.js";
+import _poolEtaliPrimalSickness from "./pool/etali-primal-sickness.js";
 import _poolEtaliPrimalStorm from "./pool/etali-primal-storm.js";
 import _poolEtalisFavor from "./pool/etalis-favor.js";
 import _poolEtchedCornfield from "./pool/etched-cornfield.js";
@@ -11816,6 +11818,7 @@ import _poolTheHungerTideRises from "./pool/the-hunger-tide-rises.js";
 import _poolTheHunterMaze from "./pool/the-hunter-maze.js";
 import _poolTheImmortalWeapons from "./pool/the-immortal-weapons.js";
 import _poolTheIncredibleHulk from "./pool/the-incredible-hulk.js";
+import _poolTheInfamousCruelclaw from "./pool/the-infamous-cruelclaw.js";
 import _poolTheInvincibleIronMan from "./pool/the-invincible-iron-man.js";
 import _poolTheJollyBalloonMan from "./pool/the-jolly-balloon-man.js";
 import _poolTheLadyOfTheMountain from "./pool/the-lady-of-the-mountain.js";
@@ -17845,6 +17848,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEssenceWarden,
   _poolEssenceknitScholar,
   _poolEstridsInvocation,
+  _poolEtaliPrimalConqueror,
+  _poolEtaliPrimalSickness,
   _poolEtaliPrimalStorm,
   _poolEtalisFavor,
   _poolEtchedCornfield,
@@ -25988,6 +25993,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheHunterMaze,
   _poolTheImmortalWeapons,
   _poolTheIncredibleHulk,
+  _poolTheInfamousCruelclaw,
   _poolTheInvincibleIronMan,
   _poolTheJollyBalloonMan,
   _poolTheLadyOfTheMountain,

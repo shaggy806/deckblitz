@@ -2882,6 +2882,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'The Infamous Cruelclaw',
+    board({
+      you: {
+        bf: ['The Infamous Cruelclaw'],
+        hand: ['Grizzly Bears', 'Llanowar Elves'],
+        lib: ['Wastes', 'Hill Giant'],
+      },
+    }),
+  ),
+  preset(
     'Dargo, the Shipwrecker',
     board({
       you: {

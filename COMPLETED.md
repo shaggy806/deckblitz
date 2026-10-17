@@ -12,6 +12,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Cast during resolution: by discarding a card, and each player's exile** (`effect:cast-during-resolution`):
+  `cast-now`'s `byDiscarding` — "you may cast that card by discarding a card rather than paying its
+  mana cost", an alternative cost paid with the ordinary discard decision — and each player
+  exiling until a nonland card (a `for-each-player` of `reveal-until`) before casting any number of
+  them free. The Infamous Cruelclaw (#305) and Etali, Primal Conqueror (#114) (2026-10-16).
 - **Sacrifice any number as a cost that lowers it** (`cost:sacrifice-multiple`): "you may
   sacrifice any number of … This spell costs {2} less to cast for each" — the count announced as
   the spell is cast (`additionalCost.sacrificeReduces`, rule 601.2b), the offer's range the fewest
