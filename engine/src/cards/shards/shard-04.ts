@@ -58,6 +58,7 @@ import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
+import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
@@ -65,6 +66,7 @@ import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
 import _poolCrimsonKobolds from "../pool/crimson-kobolds.js";
 import _poolCrumblingNecropolis from "../pool/crumbling-necropolis.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
+import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCutPropulsion from "../pool/cut-propulsion.js";
 import _poolDaggerbackBasilisk from "../pool/daggerback-basilisk.js";
 import _poolDailyBugleNewspaper from "../pool/daily-bugle-newspaper.js";
@@ -98,6 +100,7 @@ import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
+import _poolEmberethVeteran from "../pool/embereth-veteran.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
 import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
@@ -125,6 +128,7 @@ import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
+import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
@@ -225,6 +229,7 @@ import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
+import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
@@ -289,6 +294,7 @@ import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRootSliver from "../pool/root-sliver.js";
+import _poolRoyalTreatment from "../pool/royal-treatment.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
 import _poolRugOfSmothering from "../pool/rug-of-smothering.js";
 import _poolRunOver from "../pool/run-over.js";
@@ -350,6 +356,7 @@ import _poolSwarmyardMassacre from "../pool/swarmyard-massacre.js";
 import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
+import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
@@ -492,6 +499,7 @@ const shard: CardShard = {
     _poolChakramRetriever,
     _poolChardalynDragon,
     _poolChasmDrake,
+    _poolConceitedWitch,
     _poolContradict,
     _poolCranialPlating,
     _poolCrawlingSensation,
@@ -499,6 +507,7 @@ const shard: CardShard = {
     _poolCrimsonKobolds,
     _poolCrumblingNecropolis,
     _poolCultistOfTheAbsolute,
+    _poolCursedCourtier,
     _poolCutPropulsion,
     _poolDaggerbackBasilisk,
     _poolDailyBugleNewspaper,
@@ -532,6 +541,7 @@ const shard: CardShard = {
     _poolEidolonOfAstralWinds,
     _poolElderfangDisciple,
     _poolElvishWarrior,
+    _poolEmberethVeteran,
     _poolEmergeFromTheCocoon,
     _poolEmeritusOfConflict,
     _poolEnemyOfTheGuildpact,
@@ -559,6 +569,7 @@ const shard: CardShard = {
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
     _poolFractalize,
+    _poolFreeTheFae,
     _poolFromBeyond,
     _poolGaeasCradle,
     _poolGalacticWayfarer,
@@ -659,6 +670,7 @@ const shard: CardShard = {
     _poolMentalNote,
     _poolMindfulBiomancer,
     _poolMockingbirdAceAgent,
+    _poolMomentOfValor,
     _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,
@@ -723,6 +735,7 @@ const shard: CardShard = {
     _poolRidgeRannet,
     _poolRitualOfSteel,
     _poolRootSliver,
+    _poolRoyalTreatment,
     _poolRubyDaringTracker,
     _poolRugOfSmothering,
     _poolRunOver,
@@ -784,6 +797,7 @@ const shard: CardShard = {
     _poolSwoopingLookout,
     _poolSwordOfBodyAndMind,
     _poolSyphonMind,
+    _poolSyrArmontTheRedeemer,
     _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTelJiladJustice,

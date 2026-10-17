@@ -329,6 +329,7 @@ import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
+import _poolSpellbookVendor from "../pool/spellbook-vendor.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
 import _poolSpellruneHowler from "../pool/spellrune-howler.js";
 import _poolSphinxOfForgottenLore from "../pool/sphinx-of-forgotten-lore.js";
@@ -459,6 +460,7 @@ import _tokensHumanKnightToken from "../tokens/human-knight-token.js";
 import _tokensInklingToken from "../tokens/inkling-token.js";
 import _tokensInsectWarriorToken from "../tokens/insect-warrior-token.js";
 import _tokensKrakenTokenSpawningKraken from "../tokens/kraken-token-spawning-kraken.js";
+import _tokensMonsterRoleToken from "../tokens/monster-role-token.js";
 import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
@@ -796,6 +798,7 @@ const shard: CardShard = {
     _poolSoulTether,
     _poolSpawnbinderMage,
     _poolSpectrumSentinel,
+    _poolSpellbookVendor,
     _poolSpellkeeperWeird,
     _poolSpellruneHowler,
     _poolSphinxOfForgottenLore,
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _tokensInklingToken,
     _tokensInsectWarriorToken,
     _tokensKrakenTokenSpawningKraken,
+    _tokensMonsterRoleToken,
     _tokensPhyrexianHorrorToken,
     _tokensRatTokenCantBlock,
     _tokensSkeletonPirateToken,

@@ -343,6 +343,7 @@ import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
+import _poolSnaremasterSprite from "../pool/snaremaster-sprite.js";
 import _poolSnowslopeHunter from "../pool/snowslope-hunter.js";
 import _poolSoliton from "../pool/soliton.js";
 import _poolSoothingOfSmeagol from "../pool/soothing-of-smeagol.js";
@@ -454,6 +455,7 @@ import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
+import _tokensPirateTokenNettlingNuisance from "../tokens/pirate-token-nettling-nuisance.js";
 import _tokensSatyrToken from "../tokens/satyr-token.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
 import _tokensVillainToken from "../tokens/villain-token.js";
@@ -800,6 +802,7 @@ const shard: CardShard = {
     _poolSilkenfistOrder,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
+    _poolSnaremasterSprite,
     _poolSnowslopeHunter,
     _poolSoliton,
     _poolSoothingOfSmeagol,
@@ -913,6 +916,7 @@ const shard: CardShard = {
     _tokensMerfolkTokenSilvergillMentor,
     _tokensMonkTokenCrescentIslandTemple,
     _tokensPegasusToken22,
+    _tokensPirateTokenNettlingNuisance,
     _tokensSatyrToken,
     _tokensSpiritToken,
     _tokensVillainToken,

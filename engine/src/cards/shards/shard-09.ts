@@ -40,6 +40,7 @@ import _poolBantPanorama from "../pool/bant-panorama.js";
 import _poolBarkhideMauler from "../pool/barkhide-mauler.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
 import _poolBearCub from "../pool/bear-cub.js";
+import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
 import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
@@ -173,6 +174,7 @@ import _poolHogMonkey from "../pool/hog-monkey.js";
 import _poolHoldAtBay from "../pool/hold-at-bay.js";
 import _poolHollowhengeScavenger from "../pool/hollowhenge-scavenger.js";
 import _poolHopeEnderCoatl from "../pool/hope-ender-coatl.js";
+import _poolHopefulVigil from "../pool/hopeful-vigil.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolIceStorm from "../pool/ice-storm.js";
@@ -269,9 +271,11 @@ import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
+import _poolPlungeIntoWinter from "../pool/plunge-into-winter.js";
 import _poolPotholeMole from "../pool/pothole-mole.js";
 import _poolPotionersTrove from "../pool/potioners-trove.js";
 import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
+import _poolPriceOfBeauty from "../pool/price-of-beauty.js";
 import _poolPriceOfFreedom from "../pool/price-of-freedom.js";
 import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
@@ -365,6 +369,7 @@ import _poolSubterfuge from "../pool/subterfuge.js";
 import _poolSummonIxion from "../pool/summon-ixion.js";
 import _poolSurvivorsEncampment from "../pool/survivors-encampment.js";
 import _poolSutinaSpeakerOfTheTajuru from "../pool/sutina-speaker-of-the-tajuru.js";
+import _poolSwiftSpiral from "../pool/swift-spiral.js";
 import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
@@ -488,6 +493,7 @@ const shard: CardShard = {
     _poolBarkhideMauler,
     _poolBatheInDragonfire,
     _poolBearCub,
+    _poolBecomeBrutes,
     _poolBewilderingBlizzard,
     _poolBilbosRing,
     _poolBitterthornNissasAnimus,
@@ -621,6 +627,7 @@ const shard: CardShard = {
     _poolHoldAtBay,
     _poolHollowhengeScavenger,
     _poolHopeEnderCoatl,
+    _poolHopefulVigil,
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolIceStorm,
@@ -717,9 +724,11 @@ const shard: CardShard = {
     _poolPlateau,
     _poolPlatedCrusher,
     _poolPlumecreedEscort,
+    _poolPlungeIntoWinter,
     _poolPotholeMole,
     _poolPotionersTrove,
     _poolPrakhataClubSecurity,
+    _poolPriceOfBeauty,
     _poolPriceOfFreedom,
     _poolPricklyBoggart,
     _poolPrimalRage,
@@ -813,6 +822,7 @@ const shard: CardShard = {
     _poolSummonIxion,
     _poolSurvivorsEncampment,
     _poolSutinaSpeakerOfTheTajuru,
+    _poolSwiftSpiral,
     _poolSylvanAwakening,
     _poolSylvanScrying,
     _poolSythisHarvestsHand,

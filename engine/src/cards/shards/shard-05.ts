@@ -38,6 +38,7 @@ import _poolBasalThrull from "../pool/basal-thrull.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
 import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBattleDisplay from "../pool/battle-display.js";
+import _poolBeatAPath from "../pool/beat-a-path.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
 import _poolBilbosGambit from "../pool/bilbos-gambit.js";
@@ -203,6 +204,7 @@ import _poolInquisitivePuppet from "../pool/inquisitive-puppet.js";
 import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
 import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
+import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
@@ -273,6 +275,7 @@ import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
 import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
+import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
@@ -293,6 +296,7 @@ import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
 import _poolResonatingLute from "../pool/resonating-lute.js";
+import _poolReturnTriumphant from "../pool/return-triumphant.js";
 import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
@@ -446,6 +450,7 @@ import _tokensInsectTokenFlyingHaste from "../tokens/insect-token-flying-haste.j
 import _tokensJaceToken from "../tokens/jace-token.js";
 import _tokensRatTokenVren from "../tokens/rat-token-vren.js";
 import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
+import _tokensSorcererRoleToken from "../tokens/sorcerer-role-token.js";
 import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
@@ -487,6 +492,7 @@ const shard: CardShard = {
     _poolBasilicaScreecher,
     _poolBaskingCapybara,
     _poolBattleDisplay,
+    _poolBeatAPath,
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
     _poolBilbosGambit,
@@ -652,6 +658,7 @@ const shard: CardShard = {
     _poolInsectoidExterminator,
     _poolInspiredCharge,
     _poolIntrepidStablemaster,
+    _poolIntrepidTrufflesnout,
     _poolInvokeTheDivine,
     _poolIrohTeaMaster,
     _poolJacesSanctum,
@@ -722,6 +729,7 @@ const shard: CardShard = {
     _poolPeemaTrailblazer,
     _poolPeggyCarterSecretAgent,
     _poolPermissionDenied,
+    _poolPicklockPrankster,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
     _poolPrimoTheUnbounded,
@@ -742,6 +750,7 @@ const shard: CardShard = {
     _poolRepelCalamity,
     _poolReshape,
     _poolResonatingLute,
+    _poolReturnTriumphant,
     _poolRhonassMonument,
     _poolRiftBolt,
     _poolRingOfTheLucii,
@@ -897,6 +906,7 @@ const shard: CardShard = {
     _tokensJaceToken,
     _tokensRatTokenVren,
     _tokensRobotVillainToken,
+    _tokensSorcererRoleToken,
     _tokensSpiritTokenPhantomInterference,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,

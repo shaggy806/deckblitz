@@ -107,6 +107,7 @@ import _poolEmissaryGreen from "../pool/emissary-green.js";
 import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
+import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFarewell from "../pool/farewell.js";
@@ -307,6 +308,7 @@ import _poolSilentAttendant from "../pool/silent-attendant.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
+import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
@@ -341,6 +343,7 @@ import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
 import _poolTerramorph from "../pool/terramorph.js";
+import _poolTerritorialWitchstalker from "../pool/territorial-witchstalker.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
 import _poolTerrorTide from "../pool/terror-tide.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
@@ -404,6 +407,7 @@ import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
 import _tokensRagavanToken from "../tokens/ragavan-token.js";
 import _tokensRobotHeroToken11 from "../tokens/robot-hero-token-1-1.js";
+import _tokensRoyalRoleToken from "../tokens/royal-role-token.js";
 import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-nation-attacks.js";
 
 const shard: CardShard = {
@@ -512,6 +516,7 @@ const shard: CardShard = {
     _poolEmmessiTome,
     _poolEmperorMihailIi,
     _poolErase,
+    _poolEriettesTemptingApple,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
     _poolFarewell,
@@ -712,6 +717,7 @@ const shard: CardShard = {
     _poolSkyRuinDrake,
     _poolSlashingTiger,
     _poolSlinkingSerpent,
+    _poolSlumberingKeepguard,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,
     _poolSontaranGeneral,
@@ -746,6 +752,7 @@ const shard: CardShard = {
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
     _poolTerramorph,
+    _poolTerritorialWitchstalker,
     _poolTerrorOfTheFairgrounds,
     _poolTerrorTide,
     _poolTezzeretCruelCaptain,
@@ -811,6 +818,7 @@ const shard: CardShard = {
     _tokensPlantWarriorToken,
     _tokensRagavanToken,
     _tokensRobotHeroToken11,
+    _tokensRoyalRoleToken,
     _tokensSoldierTokenFireNationAttacks,
   ],
 };

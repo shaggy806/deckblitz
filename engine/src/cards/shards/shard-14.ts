@@ -257,6 +257,7 @@ import _poolMerchantScroll from "../pool/merchant-scroll.js";
 import _poolMerfolkLooter from "../pool/merfolk-looter.js";
 import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
 import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
+import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
@@ -266,6 +267,7 @@ import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
+import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
@@ -348,6 +350,7 @@ import _poolSpiderIslanders from "../pool/spider-islanders.js";
 import _poolSpiderManWebSlinger from "../pool/spider-man-web-slinger.js";
 import _poolSpidersManHeroicHorde from "../pool/spiders-man-heroic-horde.js";
 import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
+import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
@@ -691,6 +694,7 @@ const shard: CardShard = {
     _poolMerfolkLooter,
     _poolMerfolkMistbinder,
     _poolMerrowWitsniper,
+    _poolMerryBards,
     _poolMidnightAssassin,
     _poolMindSpiral,
     _poolMirranSpy,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolMnemonicSphere,
     _poolMoltenDuplication,
     _poolMonkRealist,
+    _poolMonstrousRage,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
     _poolMuseumNightwatch,
@@ -782,6 +787,7 @@ const shard: CardShard = {
     _poolSpiderManWebSlinger,
     _poolSpidersManHeroicHorde,
     _poolSpiteflameWitch,
+    _poolSpitefulHexmage,
     _poolSpitefulMotives,
     _poolStitchTogether,
     _poolStormShakerOfSkies,

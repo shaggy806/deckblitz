@@ -15,6 +15,7 @@ import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
 import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
+import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
@@ -363,6 +364,7 @@ import _poolSpectralInterference from "../pool/spectral-interference.js";
 import _poolSphinxOfFalseConclusions from "../pool/sphinx-of-false-conclusions.js";
 import _poolSpinnerOfSouls from "../pool/spinner-of-souls.js";
 import _poolSpiritMantle from "../pool/spirit-mantle.js";
+import _poolSplashySpellcaster from "../pool/splashy-spellcaster.js";
 import _poolSplitskinDoll from "../pool/splitskin-doll.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
 import _poolSporemound from "../pool/sporemound.js";
@@ -491,6 +493,7 @@ const shard: CardShard = {
     _poolAncientCrab,
     _poolAngelOfDespair,
     _poolAnuridMurkdiver,
+    _poolAquaticAlchemist,
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
@@ -839,6 +842,7 @@ const shard: CardShard = {
     _poolSphinxOfFalseConclusions,
     _poolSpinnerOfSouls,
     _poolSpiritMantle,
+    _poolSplashySpellcaster,
     _poolSplitskinDoll,
     _poolSporecrownThallid,
     _poolSporemound,

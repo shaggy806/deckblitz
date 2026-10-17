@@ -50,10 +50,12 @@ import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
+import _poolBurnTogether from "../pool/burn-together.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
+import _poolCallousSellSword from "../pool/callous-sell-sword.js";
 import _poolCampusComposer from "../pool/campus-composer.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
@@ -81,6 +83,7 @@ import _poolCrashAndBurn from "../pool/crash-and-burn.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
+import _poolCutIn from "../pool/cut-in.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
@@ -250,6 +253,7 @@ import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
+import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
@@ -290,6 +294,7 @@ import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
 import _poolSapphireDragon from "../pool/sapphire-dragon.js";
 import _poolSarinthGreatwurm from "../pool/sarinth-greatwurm.js";
+import _poolSaviorOfTheSleeping from "../pool/savior-of-the-sleeping.js";
 import _poolScaldingViper from "../pool/scalding-viper.js";
 import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
@@ -486,10 +491,12 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBristlebudFarmer,
     _poolBulwarkOx,
+    _poolBurnTogether,
     _poolByrkeLongEarOfTheLaw,
     _poolCactusPreserve,
     _poolCalamitousCaveIn,
     _poolCallToTheFeast,
+    _poolCallousSellSword,
     _poolCampusComposer,
     _poolCanyonJerboa,
     _poolCarnageInterpreter,
@@ -517,6 +524,7 @@ const shard: CardShard = {
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
     _poolCurseOfTheRestlessDead,
+    _poolCutIn,
     _poolDargoTheShipwrecker,
     _poolDauthiJackal,
     _poolDecreeOfPain,
@@ -686,6 +694,7 @@ const shard: CardShard = {
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
     _poolPearlMedallion,
+    _poolPestProblem,
     _poolPilferedPlans,
     _poolPillarOfTheParuns,
     _poolPixieQueen,
@@ -726,6 +735,7 @@ const shard: CardShard = {
     _poolSaplingOfColfenor,
     _poolSapphireDragon,
     _poolSarinthGreatwurm,
+    _poolSaviorOfTheSleeping,
     _poolScaldingViper,
     _poolScareTactics,
     _poolScatheZombies,

@@ -362,6 +362,7 @@ import _poolSurveyTheWreckage from "../pool/survey-the-wreckage.js";
 import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
+import _poolTalionsMessenger from "../pool/talions-messenger.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
@@ -388,6 +389,7 @@ import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
+import _poolUnassumingSage from "../pool/unassuming-sage.js";
 import _poolUndercoverCrocodelf from "../pool/undercover-crocodelf.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
@@ -803,6 +805,7 @@ const shard: CardShard = {
     _poolSylvanCaryatid,
     _poolTaiga,
     _poolTakeUpTheShield,
+    _poolTalionsMessenger,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,
     _poolTempleAcolyte,
@@ -829,6 +832,7 @@ const shard: CardShard = {
     _poolTymnaTheWeaver,
     _poolUSAgentJohnWalker,
     _poolUlvenwaldBear,
+    _poolUnassumingSage,
     _poolUndercoverCrocodelf,
     _poolUnderseaInvader,
     _poolUndulatingWitness,

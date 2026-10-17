@@ -3816,6 +3816,18 @@ export type EffectSpec =
        * them, as `gainUntilEndOfTurn` is, but not copiable (rule 707.2), so
        * a copy of one doesn't have them, unlike a printed keyword. */
       readonly gainKeywords?: readonly Keyword[];
+      /**
+       * "Create a Monster Role token **attached to target creature**" (rule
+       * 303.7 — the Roles of Wilds of Eldraine; The Rani's Mark of the
+       * Rani): an Aura token created attached to the permanent this names
+       * — a slot, `"source"`, `"trigger-object"` — as it enters. Enchanting
+       * isn't targeting, so hexproof doesn't stop it, but protection does;
+       * one that can't legally enchant that permanent, or with nothing
+       * there, **isn't created** (the Role rulings). Each token is its own
+       * object (never a stack), and two of one player's Roles on one
+       * permanent leave only the newest (rule 704.5z).
+       */
+      readonly attachedTo?: EffectTargetRef;
       /** "**The tokens are goaded for the rest of the game**" (Rendmaw,
        * Creaking Nest; Nettling Nuisance) — by this effect's controller,
        * whoever creates them: a token of their own must attack each combat
@@ -6033,6 +6045,9 @@ export interface EffectApi {
     attacksThisCombat?: boolean,
     /** Keywords the new tokens gain with no end (not copiable). */
     gainKeywords?: readonly Keyword[],
+    /** Each new token is created attached to this permanent — see the
+     * effect's `attachedTo`; `null` for nothing there (none is created). */
+    attachTo?: ObjectId | null,
   ): void;
   /** Create `count` token(s) that are copies of the permanent `of` — see the
    * `"create-token-copy"` {@link EffectSpec}. */
@@ -9187,6 +9202,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.exileAtEndStep === true,
         spec.attacksThisCombat === true,
         spec.gainKeywords,
+        // Attached to a target found illegal as this resolves (rule 608.2b),
+        // or to nothing there, none is created.
+        spec.attachedTo === undefined
+          ? undefined
+          : illegalSlot(spec.attachedTo, ctx)
+            ? null
+            : ((host) => (host?.kind === "object" ? host.object : null))(resolveEffectTarget(spec.attachedTo, ctx)),
       );
       return;
     case "for-each-player": {

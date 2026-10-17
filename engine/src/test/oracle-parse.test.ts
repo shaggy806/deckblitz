@@ -1057,6 +1057,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Time travel.")).toEqual({ kind: "time-travel" });
   });
 
+  it("a Role token created attached (rule 303.7): to a target, to up to one other target, to it", () => {
+    const genealogist = face(
+      "When this creature enters, create a Royal Role token attached to another target creature you control.",
+      "Creature — Elf Advisor",
+    );
+    expect(genealogist.triggered[0]).toMatchObject({
+      targets: [{ kind: "other", of: "creature-you-control" }],
+      effect: { kind: "create-token", token: "Royal Role Token", count: 1, attachedTo: 0 },
+    });
+    const courtier = face("When this creature enters, create a Cursed Role token attached to it.", "Creature — Human Noble");
+    expect(courtier.triggered[0]).toMatchObject({
+      targets: [],
+      effect: { kind: "create-token", token: "Cursed Role Token", count: 1, attachedTo: "source" },
+    });
+    const parents = face(
+      "When this creature dies, create a Young Hero Role token attached to up to one target creature you control.",
+      "Creature — Human Peasant",
+    );
+    expect(parents.triggered[0]).toMatchObject({
+      targets: [{ kind: "optional", of: "creature-you-control" }],
+      effect: { kind: "create-token", token: "Young Hero Role Token", attachedTo: 0 },
+    });
+  });
+
   it("'put its counters on …' of a permanent that left (rule 122.8), and 'if it had counters on it'", () => {
     // Its own: the source, the intervening if on its counters as it died.
     const apprentice = face(

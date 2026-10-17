@@ -436,6 +436,7 @@ import _tokensSlugToken from "../tokens/slug-token.js";
 import _tokensSpiritTokenHeiBai from "../tokens/spirit-token-hei-bai.js";
 import _tokensSquirrelToken from "../tokens/squirrel-token.js";
 import _tokensTyranidToken from "../tokens/tyranid-token.js";
+import _tokensWickedRoleToken from "../tokens/wicked-role-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -874,6 +875,7 @@ const shard: CardShard = {
     _tokensSpiritTokenHeiBai,
     _tokensSquirrelToken,
     _tokensTyranidToken,
+    _tokensWickedRoleToken,
   ],
 };
 

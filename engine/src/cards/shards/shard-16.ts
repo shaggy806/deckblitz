@@ -297,6 +297,7 @@ import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
+import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
@@ -450,6 +451,7 @@ import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
 import _poolWizenedMentor from "../pool/wizened-mentor.js";
 import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
+import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
@@ -770,6 +772,7 @@ const shard: CardShard = {
     _poolRampartHunter,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
+    _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,
     _poolRelicSloth,
@@ -923,6 +926,7 @@ const shard: CardShard = {
     _poolWizardsSchool,
     _poolWizenedMentor,
     _poolWolverineBestThereIs,
+    _poolWoodlandAcolyte,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
     _poolZodiacHorse,

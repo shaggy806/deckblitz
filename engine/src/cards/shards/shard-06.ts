@@ -34,6 +34,7 @@ import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
+import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
 import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.js";
@@ -135,6 +136,7 @@ import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
+import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFlashback from "../pool/flashback.js";
@@ -386,6 +388,7 @@ import _poolTidusYunasGuardian from "../pool/tidus-yunas-guardian.js";
 import _poolTimeSieve from "../pool/time-sieve.js";
 import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
+import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
 import _poolTownGossipmonger from "../pool/town-gossipmonger.js";
 import _poolTrashTheTown from "../pool/trash-the-town.js";
@@ -487,6 +490,7 @@ const shard: CardShard = {
     _poolBaralsExpertise,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
+    _poolBellowingBruiser,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
     _poolBessieTheDoctorsRoadster,
@@ -588,6 +592,7 @@ const shard: CardShard = {
     _poolEyesOfTheBeholder,
     _poolFateshaperAspirant,
     _poolFelidarSovereign,
+    _poolFerociousWerefox,
     _poolFireNationCadets,
     _poolFireNationSoldier,
     _poolFlashback,
@@ -839,6 +844,7 @@ const shard: CardShard = {
     _poolTimeSieve,
     _poolTinybonesPocketNuisance,
     _poolTirelessProvisioner,
+    _poolTotentanzSwarmPiper,
     _poolTouchOfBrilliance,
     _poolTownGossipmonger,
     _poolTrashTheTown,

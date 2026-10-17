@@ -113,6 +113,7 @@ import _poolElusiveKrasis from "../pool/elusive-krasis.js";
 import _poolElvishLookout from "../pool/elvish-lookout.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
+import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
 import _poolErtaiWizardAdept from "../pool/ertai-wizard-adept.js";
 import _poolEsperCharm from "../pool/esper-charm.js";
@@ -322,6 +323,7 @@ import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
 import _poolSkyhunterProwler from "../pool/skyhunter-prowler.js";
 import _poolSlagStrider from "../pool/slag-strider.js";
 import _poolSlagstorm from "../pool/slagstorm.js";
+import _poolSleepCursedFaerie from "../pool/sleep-cursed-faerie.js";
 import _poolSlickshotVaultBuster from "../pool/slickshot-vault-buster.js";
 import _poolSlinkingSkirge from "../pool/slinking-skirge.js";
 import _poolSnappingCreeper from "../pool/snapping-creeper.js";
@@ -562,6 +564,7 @@ const shard: CardShard = {
     _poolElvishLookout,
     _poolEmberethBlaze,
     _poolEpicProportions,
+    _poolEriettesWhisper,
     _poolErrantDoomsayers,
     _poolErtaiWizardAdept,
     _poolEsperCharm,
@@ -771,6 +774,7 @@ const shard: CardShard = {
     _poolSkyhunterProwler,
     _poolSlagStrider,
     _poolSlagstorm,
+    _poolSleepCursedFaerie,
     _poolSlickshotVaultBuster,
     _poolSlinkingSkirge,
     _poolSnappingCreeper,

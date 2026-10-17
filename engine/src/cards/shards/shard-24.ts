@@ -56,6 +56,7 @@ import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBronzeSable from "../pool/bronze-sable.js";
 import _poolBroodmateTyrant from "../pool/broodmate-tyrant.js";
+import _poolBubbleUp from "../pool/bubble-up.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
@@ -347,6 +348,7 @@ import _poolTavernBrawler from "../pool/tavern-brawler.js";
 import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
+import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
@@ -356,6 +358,7 @@ import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
+import _poolTheWitchsVanity from "../pool/the-witchs-vanity.js";
 import _poolTheWorldTree from "../pool/the-world-tree.js";
 import _poolThornado from "../pool/thornado.js";
 import _poolThornwealdArcher from "../pool/thornweald-archer.js";
@@ -483,6 +486,7 @@ const shard: CardShard = {
     _poolBreach,
     _poolBronzeSable,
     _poolBroodmateTyrant,
+    _poolBubbleUp,
     _poolBuildersTalent,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
@@ -774,6 +778,7 @@ const shard: CardShard = {
     _poolTeferisProtege,
     _poolTemporalFissure,
     _poolTemporalIntervention,
+    _poolTemptWithTreats,
     _poolTenuredTethermage,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
@@ -783,6 +788,7 @@ const shard: CardShard = {
     _poolTheNotaryHobbits,
     _poolTheSpotsPortal,
     _poolTheTarrasque,
+    _poolTheWitchsVanity,
     _poolTheWorldTree,
     _poolThornado,
     _poolThornwealdArcher,

@@ -46,6 +46,8 @@ import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
+import _poolChargingHooligan from "../pool/charging-hooligan.js";
+import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolCheeringCrowd from "../pool/cheering-crowd.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
@@ -148,6 +150,7 @@ import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
+import _poolGylwainCastingDirector from "../pool/gylwain-casting-director.js";
 import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
 import _poolHaliyaAscendantCadet from "../pool/haliya-ascendant-cadet.js";
@@ -175,6 +178,7 @@ import _poolInfestationSage from "../pool/infestation-sage.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
 import _poolInterjection from "../pool/interjection.js";
+import _poolIntoTheFaeCourt from "../pool/into-the-fae-court.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
@@ -202,10 +206,12 @@ import _poolLightningWolf from "../pool/lightning-wolf.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
+import _poolLivingLectern from "../pool/living-lectern.js";
 import _poolLlanowarBehemoth from "../pool/llanowar-behemoth.js";
 import _poolLlanowarDead from "../pool/llanowar-dead.js";
 import _poolLocustSwarm from "../pool/locust-swarm.js";
 import _poolLoneMissionary from "../pool/lone-missionary.js";
+import _poolLordSkittersBlessing from "../pool/lord-skitters-blessing.js";
 import _poolLotusBloom from "../pool/lotus-bloom.js";
 import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
@@ -275,6 +281,8 @@ import _poolPresenceOfGond from "../pool/presence-of-gond.js";
 import _poolPriestOfGix from "../pool/priest-of-gix.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
+import _poolProtectiveParents from "../pool/protective-parents.js";
+import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
@@ -517,6 +525,8 @@ const shard: CardShard = {
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
     _poolChandrasEmberling,
+    _poolChargingHooligan,
+    _poolCharmingScoundrel,
     _poolChatterstorm,
     _poolCheeringCrowd,
     _poolChildOfAlara,
@@ -619,6 +629,7 @@ const shard: CardShard = {
     _poolGreenhouseRicketyGazebo,
     _poolGrindingStation,
     _poolGrizzlyBears,
+    _poolGylwainCastingDirector,
     _poolHaldirLorienLieutenant,
     _poolHalfElfMonk,
     _poolHaliyaAscendantCadet,
@@ -646,6 +657,7 @@ const shard: CardShard = {
     _poolInnocentBlood,
     _poolInordinateRage,
     _poolInterjection,
+    _poolIntoTheFaeCourt,
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,
     _poolItsClobberinTime,
@@ -673,10 +685,12 @@ const shard: CardShard = {
     _poolLilianaTheRepentant,
     _poolLionheartMaverick,
     _poolLiquimetalCoating,
+    _poolLivingLectern,
     _poolLlanowarBehemoth,
     _poolLlanowarDead,
     _poolLocustSwarm,
     _poolLoneMissionary,
+    _poolLordSkittersBlessing,
     _poolLotusBloom,
     _poolLounge,
     _poolLure,
@@ -746,6 +760,8 @@ const shard: CardShard = {
     _poolPriestOfGix,
     _poolPrimordialPachyderm,
     _poolPrizePig,
+    _poolProtectiveParents,
+    _poolProvisionsMerchant,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
     _poolRakdosTheMuscle,

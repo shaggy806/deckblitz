@@ -27,6 +27,11 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   fallback, repeated in `CardTile`, `MiniTile`, `CommanderTile`, `CommanderDamageChip`,
   `CardImage` and `deck-builder/ReplacementReview.tsx` (`CommanderArt` only resolves a URL).
   Extract one `ArtCrop` component; and `PrintingPicker`'s raw `<img>` could be a `CardImage`.
+- **The artist credit shows on only some art, on two lines** (the user, 2026-10-17). The
+  "Illus. {artist} · ™ & © Wizards of the Coast" credit (`ui/artistCredit.ts`) renders on some of
+  the places art is displayed and wraps to two lines. Go through all eleven ways a card is drawn
+  (the list above) and check each shows it; its font should shrink or grow to fit all the text
+  on one line.
 - **Large live mana amounts by hand.** "X mana in any combination" offers every split as its
   own menu entry only while the list stays small (two colours up to X = 22). Past that it
   offers all of one type per type, and a count picker would let the player choose any split.

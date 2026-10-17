@@ -942,6 +942,20 @@ export function parseSentence(sentence, ctx) {
   // token or a Treasure token", "…with deathtouch and a 3/3 … with lifelink",
   // two kinds in one sentence ("X Halflings and X Food tokens") and a token
   // with a quoted ability are left to a person.
+  // A Role token created attached (rule 303.7 — Wilds of Eldraine): "create a
+  // Monster Role token attached to target creature you control", "… to up to
+  // one other target creature you control", "… to it" (the source, or the
+  // object the trigger names).
+  if ((m = /^create an? (Cursed|Monster|Royal|Sorcerer|Virtuous|Wicked|Young Hero) Role token attached to (.+)\.$/i.exec(s))) {
+    const token = `${m[1].replace(/\b\w/g, (c) => c.toUpperCase())} Role Token`;
+    if (/^it$/i.test(m[2])) {
+      const it = ctx.targets.length === 0 ? ctx.it : undefined;
+      return it === undefined ? null : { kind: "create-token", token, count: 1, attachedTo: it };
+    }
+    const q = quantifiedSlots(m[2], ctx);
+    const host = q !== undefined ? (q.group || q.slots.length !== 1 ? undefined : q.slots[0]) : slot(m[2]);
+    return host === undefined ? null : { kind: "create-token", token, count: 1, attachedTo: host };
+  }
   const KWS = `${KW}(?:(?:, | and |, and )${KW})*`;
   if ((m = re(`create ${N} (tapped )?([^"“]+?) tokens?(?: with (${KWS}))?`).exec(s)) && !/ or | and an? |\btokens? and /.test(m[3])) {
     const name = ctx.tokenFor?.(`${m[3]}${m[4] ? ` with ${m[4]}` : ""}`) ?? null;

@@ -30,6 +30,7 @@ import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
 import _poolBarretWallace from "../pool/barret-wallace.js";
+import _poolBarrowNaughty from "../pool/barrow-naughty.js";
 import _poolBaseballBat from "../pool/baseball-bat.js";
 import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
@@ -56,6 +57,7 @@ import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
 import _poolBorosGuildgate from "../pool/boros-guildgate.js";
 import _poolBottleGnomes from "../pool/bottle-gnomes.js";
+import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
 import _poolBrazenFreebooter from "../pool/brazen-freebooter.js";
 import _poolBreathOfLife from "../pool/breath-of-life.js";
@@ -123,6 +125,7 @@ import _poolElectrostaticInfantry from "../pool/electrostatic-infantry.js";
 import _poolElegyAcolyte from "../pool/elegy-acolyte.js";
 import _poolElektraFemmeFatale from "../pool/elektra-femme-fatale.js";
 import _poolElementalistAdept from "../pool/elementalist-adept.js";
+import _poolEllivereOfTheWildCourt from "../pool/ellivere-of-the-wild-court.js";
 import _poolElvenkingsHarper from "../pool/elvenkings-harper.js";
 import _poolEndlessFootAssault from "../pool/endless-foot-assault.js";
 import _poolEnragedFlamecaster from "../pool/enraged-flamecaster.js";
@@ -153,6 +156,7 @@ import _poolGeralfTheFleshwright from "../pool/geralf-the-fleshwright.js";
 import _poolGeyserfieldStalker from "../pool/geyserfield-stalker.js";
 import _poolGhaltaAndMavren from "../pool/ghalta-and-mavren.js";
 import _poolGhostShip from "../pool/ghost-ship.js";
+import _poolGiantInheritance from "../pool/giant-inheritance.js";
 import _poolGiantWarthog from "../pool/giant-warthog.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
@@ -407,6 +411,7 @@ import _poolTrollNegotiations from "../pool/troll-negotiations.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
+import _poolTwiningTwins from "../pool/twining-twins.js";
 import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
@@ -490,6 +495,7 @@ const shard: CardShard = {
     _poolBalefireDragon,
     _poolBalmorBattlemageCaptain,
     _poolBarretWallace,
+    _poolBarrowNaughty,
     _poolBaseballBat,
     _poolBasrisSolidarity,
     _poolBattleMenu,
@@ -516,6 +522,7 @@ const shard: CardShard = {
     _poolBorealDruid,
     _poolBorosGuildgate,
     _poolBottleGnomes,
+    _poolBoundaryLandsRanger,
     _poolBrawlersPlate,
     _poolBrazenFreebooter,
     _poolBreathOfLife,
@@ -583,6 +590,7 @@ const shard: CardShard = {
     _poolElegyAcolyte,
     _poolElektraFemmeFatale,
     _poolElementalistAdept,
+    _poolEllivereOfTheWildCourt,
     _poolElvenkingsHarper,
     _poolEndlessFootAssault,
     _poolEnragedFlamecaster,
@@ -613,6 +621,7 @@ const shard: CardShard = {
     _poolGeyserfieldStalker,
     _poolGhaltaAndMavren,
     _poolGhostShip,
+    _poolGiantInheritance,
     _poolGiantWarthog,
     _poolGiftOfGranite,
     _poolGlacialDragonhunt,
@@ -867,6 +876,7 @@ const shard: CardShard = {
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,
     _poolTwinflameTyrant,
+    _poolTwiningTwins,
     _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUndeadButler,

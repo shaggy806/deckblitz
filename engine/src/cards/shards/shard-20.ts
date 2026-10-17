@@ -308,6 +308,7 @@ import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
+import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
 import _poolRattlebackApothecary from "../pool/rattleback-apothecary.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
@@ -441,6 +442,7 @@ import _poolTrenchWurm from "../pool/trench-wurm.js";
 import _poolTrollAscetic from "../pool/troll-ascetic.js";
 import _poolTrostaniDiscordant from "../pool/trostani-discordant.js";
 import _poolTrystanPenitentCuller from "../pool/trystan-penitent-culler.js";
+import _poolTwistedFealty from "../pool/twisted-fealty.js";
 import _poolUndeadAugur from "../pool/undead-augur.js";
 import _poolUrdnanDromokaWarrior from "../pool/urdnan-dromoka-warrior.js";
 import _poolUrukHaiBerserker from "../pool/uruk-hai-berserker.js";
@@ -477,6 +479,7 @@ import _poolZellDincht from "../pool/zell-dincht.js";
 import _poolZephyrNet from "../pool/zephyr-net.js";
 import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
 import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
+import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
@@ -794,6 +797,7 @@ const shard: CardShard = {
     _poolRainOfEmbers,
     _poolRaiseThePast,
     _poolRancorousArchaic,
+    _poolRatcatcherTrainee,
     _poolRatcatcher,
     _poolRattlebackApothecary,
     _poolRavagingHorde,
@@ -927,6 +931,7 @@ const shard: CardShard = {
     _poolTrollAscetic,
     _poolTrostaniDiscordant,
     _poolTrystanPenitentCuller,
+    _poolTwistedFealty,
     _poolUndeadAugur,
     _poolUrdnanDromokaWarrior,
     _poolUrukHaiBerserker,
@@ -965,6 +970,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAngelToken33,
+    _tokensCursedRoleToken,
     _tokensFaerieToken,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,

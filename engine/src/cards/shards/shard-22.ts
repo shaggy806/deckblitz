@@ -231,6 +231,7 @@ import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNestedShambler from "../pool/nested-shambler.js";
+import _poolNettlingNuisance from "../pool/nettling-nuisance.js";
 import _poolNevThePracticalDean from "../pool/nev-the-practical-dean.js";
 import _poolNexusWardens from "../pool/nexus-wardens.js";
 import _poolNissaSageAnimist from "../pool/nissa-sage-animist.js";
@@ -390,6 +391,7 @@ import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
 import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
+import _poolTrainTroops from "../pool/train-troops.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
@@ -416,6 +418,7 @@ import _poolVulshokRefugee from "../pool/vulshok-refugee.js";
 import _poolWalkingDead from "../pool/walking-dead.js";
 import _poolWallOfOpposition from "../pool/wall-of-opposition.js";
 import _poolWanderbrinePreacher from "../pool/wanderbrine-preacher.js";
+import _poolWarehouseTabby from "../pool/warehouse-tabby.js";
 import _poolWaterloggedTeachings from "../pool/waterlogged-teachings.js";
 import _poolWatertightGondola from "../pool/watertight-gondola.js";
 import _poolWebUp from "../pool/web-up.js";
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolNavigationOrb,
     _poolNeedlethornDrake,
     _poolNestedShambler,
+    _poolNettlingNuisance,
     _poolNevThePracticalDean,
     _poolNexusWardens,
     _poolNissaSageAnimist,
@@ -840,6 +844,7 @@ const shard: CardShard = {
     _poolTormentedAngel,
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,
+    _poolTrainTroops,
     _poolTravelersAmulet,
     _poolTreeguardDuo,
     _poolTresserhornSinks,
@@ -866,6 +871,7 @@ const shard: CardShard = {
     _poolWalkingDead,
     _poolWallOfOpposition,
     _poolWanderbrinePreacher,
+    _poolWarehouseTabby,
     _poolWaterloggedTeachings,
     _poolWatertightGondola,
     _poolWebUp,

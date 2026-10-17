@@ -8337,6 +8337,25 @@ export class Game {
   }
 
   /**
+   * Could a token of `def` be created attached to `host` for `controller` —
+   * the `canEnchant` question asked of a token not yet made ("create a
+   * Monster Role token attached to target creature"): an Aura's enchant
+   * ability allows `host`, not by targeting (hexproof doesn't stop it), and
+   * no protection stops it (the Role rulings: otherwise "the Role token
+   * isn't created"). Anything but an Aura can't be created attached.
+   */
+  private canCreateAttached(def: CardDefinition, host: ObjectId, controller: PlayerId): boolean {
+    const target = this.state.objects[host];
+    if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
+    if (!def.subtypes.includes("Aura") || def.types.includes("creature")) return false;
+    const spec = def.targets[0];
+    if (spec === undefined) return false;
+    const ref: TargetRef = { kind: "object", object: host };
+    if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) return false;
+    return !protectionBlocks(this.state, this.registry, host, this.cardSource(def));
+  }
+
+  /**
    * Could the Aura `aura` — as `def`, controlled by `controller` — enchant
    * the player `player` (rule 303.4: "Enchant player", "Enchant opponent" —
    * the Curses)? Its enchant ability is the slot its spell targets (303.4a),
@@ -21402,7 +21421,7 @@ export class Game {
         }
       },
       manifestTop: (player, kind) => this.manifestTop(player, kind),
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo) => {
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
         const goadedBy = goadedForGame === true ? controller : undefined;
@@ -21422,6 +21441,7 @@ export class Game {
             exileAtEndStep === true,
             attacksThisCombat === true,
             gainKeywords,
+            attachTo,
           );
           if (thenCounters !== undefined && thenCounters.amount > 0) {
             for (const id of made) {
@@ -23226,8 +23246,17 @@ export class Game {
     /** Keywords they gain with no end — "they gain haste" (Chandra, Acolyte
      * of Flame): not a copiable value (rule 707.2), unlike a printed one. */
     gainKeywords: readonly Keyword[] = [],
+    /** Created attached to this permanent ("a Monster Role token attached to
+     * target creature"): `null`, or one an Aura of this kind can't legally
+     * enchant, and none is created (the Role rulings). See the effect's
+     * `attachedTo`. */
+    attachTo?: ObjectId | null,
   ): readonly ObjectId[] {
     let def = this.registry.get(tokenName); // validate the token is a known definition
+    if (attachTo !== undefined) {
+      if (attachTo === null || !this.canCreateAttached(def, attachTo, controller)) return [];
+      separate = true;
+    }
     // Doubling Season / Parallel Lives (rule 614): "twice that many instead".
     const total = count * this.tokenCreationMultiplier(controller);
     // Divine Visitation (rule 614.1a): creature tokens are made as its
@@ -23305,6 +23334,7 @@ export class Game {
         sacrificeAtEndStep,
         goadedForGameBy,
         separate,
+        attachTo ?? undefined,
       ),
       ...this.mintPlusTokens(controller, total, (name, n) =>
         this.mintTokenBatch(
@@ -23689,6 +23719,9 @@ export class Game {
     sacrificeAtEndStep = false,
     goadedForGameBy?: PlayerId,
     separate = false,
+    /** Each one attached to this permanent as it enters — `createTokens`'
+     * `attachTo`, already found legal. */
+    attachTo?: ObjectId,
   ): readonly ObjectId[] {
     if (total <= 0) return [];
     this.state.players[controller].createdTokenThisTurn = true;
@@ -23712,6 +23745,12 @@ export class Game {
         );
         made.push(id);
         if (copied) this.emit({ type: "permanent-copied", object: id, copyOf: printedName });
+        // Attached as it enters (a Role), so whatever sees it arrive sees it
+        // on its host.
+        if (attachTo !== undefined) {
+          this.state.objects[id].attachedTo = attachTo;
+          this.emit({ type: "permanent-attached", source: id, target: attachTo });
+        }
         this.emit({ type: "permanent-entered-battlefield", object: id });
         // A Saga token — a copy of a Saga — enters with a lore counter too
         // (rule 714.3a), as `moveObject` gives a Saga card: before this, a
@@ -30879,6 +30918,28 @@ export class Game {
               ? "attached to nothing"
               : "no longer attached to a legal permanent",
       });
+    }
+
+    // Roles (rule 704.5z): of the Roles one player controls on one
+    // permanent, each but the one with the most recent timestamp (an
+    // Aura's is when it became attached, 613.7e) goes to its owner's
+    // graveyard. Roles of different players on it all stay (the rulings).
+    // Two made together (Doubling Season) are the same token from the same
+    // effect, so which one stays changes nothing.
+    const roles = new Map<string, ObjectId[]>();
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      if (object.attachedTo === null) continue;
+      if (!hasSubtype(effectiveSubtypes(this.state, this.registry, object), "Role")) continue;
+      const key = `${object.attachedTo}|${object.controller}`;
+      roles.set(key, [...(roles.get(key) ?? []), id]);
+    }
+    for (const group of roles.values()) {
+      if (group.length < 2) continue;
+      const newest = group.reduce((a, b) => (this.state.objects[b].timestamp >= this.state.objects[a].timestamp ? b : a));
+      for (const id of group) {
+        if (id !== newest) add(id, { type: "permanent-destroyed", object: id, reason: "a newer Role on the same permanent" });
+      }
     }
 
     // The legend rule (704.5j): a player controlling 2+ legendary permanents

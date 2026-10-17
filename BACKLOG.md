@@ -215,6 +215,10 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **A gift's opponent is asked one opponent at a time** — one prompt naming every opponent would read better.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **One art-crop primitive** — the art lookup is repeated in six components.
+- **The artist credit shows on only some art, on two lines** (the user, 2026-10-17): check every
+  way a card is displayed (the eleven listed under "One art-crop primitive" in
+  `docs/client-gaps.md`) and make the credit's font shrink or grow to fit its text on one line
+  (`ui/artistCredit.ts`).
 - **Large live mana amounts by hand** — a count picker past 22 splits; choosing what floats.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).

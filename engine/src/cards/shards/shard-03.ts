@@ -45,6 +45,7 @@ import _poolCaptainOfUmbar from "../pool/captain-of-umbar.js";
 import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
+import _poolCharmedClothier from "../pool/charmed-clothier.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChocoboCamp from "../pool/chocobo-camp.js";
@@ -287,6 +288,7 @@ import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
+import _poolShatterTheOath from "../pool/shatter-the-oath.js";
 import _poolSheHulkAttorneyAtLaw from "../pool/she-hulk-attorney-at-law.js";
 import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
@@ -460,6 +462,7 @@ const shard: CardShard = {
     _poolCaptivatingVampire,
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
+    _poolCharmedClothier,
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolChocoboCamp,
@@ -702,6 +705,7 @@ const shard: CardShard = {
     _poolSerrasEmbrace,
     _poolSewerdreg,
     _poolShamblingGhoul,
+    _poolShatterTheOath,
     _poolSheHulkAttorneyAtLaw,
     _poolShelteredThicket,
     _poolSheoldredWhisperingOne,

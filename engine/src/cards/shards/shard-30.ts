@@ -183,6 +183,7 @@ import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
+import _poolGuardChange from "../pool/guard-change.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
@@ -372,6 +373,7 @@ import _poolStarfieldShepherd from "../pool/starfield-shepherd.js";
 import _poolStarfieldVocalist from "../pool/starfield-vocalist.js";
 import _poolSteamcoreScholar from "../pool/steamcore-scholar.js";
 import _poolSteampathCharger from "../pool/steampath-charger.js";
+import _poolStockpilingCelebrant from "../pool/stockpiling-celebrant.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSwarmCuller from "../pool/swarm-culler.js";
 import _poolSwelteringSuns from "../pool/sweltering-suns.js";
@@ -458,6 +460,7 @@ import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
+import _tokensYoungHeroRoleToken from "../tokens/young-hero-role-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -641,6 +644,7 @@ const shard: CardShard = {
     _poolGreaterForgeling,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
+    _poolGuardChange,
     _poolGwennaEyesOfGaea,
     _poolHagraSharpshooter,
     _poolHammerhand,
@@ -830,6 +834,7 @@ const shard: CardShard = {
     _poolStarfieldVocalist,
     _poolSteamcoreScholar,
     _poolSteampathCharger,
+    _poolStockpilingCelebrant,
     _poolStridingShotcaller,
     _poolSwarmCuller,
     _poolSwelteringSuns,
@@ -918,6 +923,7 @@ const shard: CardShard = {
     _tokensGoldToken,
     _tokensGreenCatToken11,
     _tokensMyrToken,
+    _tokensYoungHeroRoleToken,
   ],
 };
 

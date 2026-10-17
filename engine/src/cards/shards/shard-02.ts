@@ -147,6 +147,7 @@ import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
 import _poolFreewindFalcon from "../pool/freewind-falcon.js";
+import _poolFreezeInPlace from "../pool/freeze-in-place.js";
 import _poolFrilledMystic from "../pool/frilled-mystic.js";
 import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
@@ -229,6 +230,7 @@ import _poolMadameHydra from "../pool/madame-hydra.js";
 import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
 import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
+import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
 import _poolMastersManufactory from "../pool/masters-manufactory.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
@@ -578,6 +580,7 @@ const shard: CardShard = {
     _poolFortressCyclops,
     _poolFranticSearch,
     _poolFreewindFalcon,
+    _poolFreezeInPlace,
     _poolFrilledMystic,
     _poolFrogmite,
     _poolFrontlineRebel,
@@ -660,6 +663,7 @@ const shard: CardShard = {
     _poolMadrushCyclops,
     _poolMaestrosInitiate,
     _poolMagdaTheHoardmaster,
+    _poolMalevolentWitchkite,
     _poolMarangRiverSkeleton,
     _poolMastersManufactory,
     _poolMaulfistSquad,

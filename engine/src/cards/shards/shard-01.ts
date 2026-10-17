@@ -21,6 +21,7 @@ import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
+import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
@@ -339,6 +340,7 @@ import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
 import _poolSuperState from "../pool/super-state.js";
 import _poolTailTheSuspect from "../pool/tail-the-suspect.js";
+import _poolTakenByNightmares from "../pool/taken-by-nightmares.js";
 import _poolTalismanOfConviction from "../pool/talisman-of-conviction.js";
 import _poolTannukSteadfastSecond from "../pool/tannuk-steadfast-second.js";
 import _poolTasteOfBlood from "../pool/taste-of-blood.js";
@@ -412,6 +414,7 @@ import _poolWhirlwingStormbrood from "../pool/whirlwing-stormbrood.js";
 import _poolWhitemaneLion from "../pool/whitemane-lion.js";
 import _poolWildHypothesis from "../pool/wild-hypothesis.js";
 import _poolWildgrowthArchaic from "../pool/wildgrowth-archaic.js";
+import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
@@ -447,6 +450,7 @@ const shard: CardShard = {
     _poolAnticipate,
     _poolArchweaver,
     _poolArtisansSorrow,
+    _poolAshioksReaper,
     _poolAstelliReclaimer,
     _poolAwakenTheBear,
     _poolAzureDrake,
@@ -765,6 +769,7 @@ const shard: CardShard = {
     _poolSunscapeMaster,
     _poolSuperState,
     _poolTailTheSuspect,
+    _poolTakenByNightmares,
     _poolTalismanOfConviction,
     _poolTannukSteadfastSecond,
     _poolTasteOfBlood,
@@ -838,6 +843,7 @@ const shard: CardShard = {
     _poolWhitemaneLion,
     _poolWildHypothesis,
     _poolWildgrowthArchaic,
+    _poolWildwoodMentor,
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
     _poolWrennsResolve,

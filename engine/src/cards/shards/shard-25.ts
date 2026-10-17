@@ -111,6 +111,7 @@ import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
 import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
+import _poolEdgewallPack from "../pool/edgewall-pack.js";
 import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
@@ -150,6 +151,7 @@ import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFreestriderLookout from "../pool/freestrider-lookout.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
+import _poolGadwicksFirstDuel from "../pool/gadwicks-first-duel.js";
 import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGamble from "../pool/gamble.js";
@@ -288,6 +290,7 @@ import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
+import _poolRedcapGutterDweller from "../pool/redcap-gutter-dweller.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
@@ -428,6 +431,7 @@ import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
+import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
@@ -550,6 +554,7 @@ const shard: CardShard = {
     _poolEccentricPestfinder,
     _poolEcstaticBeauty,
     _poolEdgarAncientBloodlord,
+    _poolEdgewallPack,
     _poolEldraziDevastator,
     _poolEldraziRepurposer,
     _poolElvenLyre,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolFreestriderLookout,
     _poolFugitiveWizard,
     _poolFumigate,
+    _poolGadwicksFirstDuel,
     _poolGaeasGift,
     _poolGaleriderSliver,
     _poolGamble,
@@ -727,6 +733,7 @@ const shard: CardShard = {
     _poolRebelliousStrike,
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
+    _poolRedcapGutterDweller,
     _poolReflectionsOfLittjara,
     _poolRehearsedDebater,
     _poolRequiemMonolith,
@@ -869,6 +876,7 @@ const shard: CardShard = {
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
     _tokensElfWarriorToken,
+    _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
     _tokensInklingTokenEmeritusOfTruce,
     _tokensNinjaTurtleSpiritToken,

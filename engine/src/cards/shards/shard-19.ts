@@ -110,6 +110,7 @@ import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
+import _poolDutifulGriffin from "../pool/dutiful-griffin.js";
 import _poolEarthcraft from "../pool/earthcraft.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
@@ -590,6 +591,7 @@ const shard: CardShard = {
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDungroveElder,
+    _poolDutifulGriffin,
     _poolEarthcraft,
     _poolElectrozoa,
     _poolElvenAmbush,

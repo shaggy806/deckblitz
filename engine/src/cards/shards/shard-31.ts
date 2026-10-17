@@ -245,6 +245,7 @@ import _poolMarkerBeetles from "../pool/marker-beetles.js";
 import _poolMasterOfThePearlTrident from "../pool/master-of-the-pearl-trident.js";
 import _poolMechHangar from "../pool/mech-hangar.js";
 import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
+import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMirranCrusader from "../pool/mirran-crusader.js";
@@ -431,6 +432,7 @@ import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
+import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -676,6 +678,7 @@ const shard: CardShard = {
     _poolMasterOfThePearlTrident,
     _poolMechHangar,
     _poolMechanizedWarfare,
+    _poolMendTheWilds,
     _poolMerchantOfTruth,
     _poolMindstatic,
     _poolMirranCrusader,
@@ -864,6 +867,7 @@ const shard: CardShard = {
     _tokensPhyrexianGermToken,
     _tokensRedWhiteSoldierHasteToken,
     _tokensSliverToken,
+    _tokensVirtuousRoleToken,
   ],
 };
 

@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolATaleForTheAges from "../pool/a-tale-for-the-ages.js";
 import _poolAccursedSpirit from "../pool/accursed-spirit.js";
 import _poolAerieBowmasters from "../pool/aerie-bowmasters.js";
 import _poolAgelessGuardian from "../pool/ageless-guardian.js";
@@ -63,6 +64,7 @@ import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
+import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
@@ -150,6 +152,7 @@ import _poolGrendelSpawnOfKnull from "../pool/grendel-spawn-of-knull.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
 import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
+import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
@@ -447,6 +450,7 @@ import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 
 const shard: CardShard = {
   pool: [
+    _poolATaleForTheAges,
     _poolAccursedSpirit,
     _poolAerieBowmasters,
     _poolAgelessGuardian,
@@ -507,6 +511,7 @@ const shard: CardShard = {
     _poolCarrierPigeons,
     _poolCarrionCrow,
     _poolCelestineTheLivingSaint,
+    _poolChancellorOfTales,
     _poolChanneledDragonfire,
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
@@ -594,6 +599,7 @@ const shard: CardShard = {
     _poolGurmagSwiftwing,
     _poolHakbalOfTheSurgingSoul,
     _poolHapatraTheDesertFrost,
+    _poolHareRaising,
     _poolHarmonize,
     _poolHeraldOfFaith,
     _poolHermiticHerbalist,

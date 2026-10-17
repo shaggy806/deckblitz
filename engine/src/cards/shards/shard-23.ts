@@ -154,6 +154,7 @@ import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
 import _poolGiantCockroach from "../pool/giant-cockroach.js";
 import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
 import _poolGlowingAnemone from "../pool/glowing-anemone.js";
+import _poolGoHogWild from "../pool/go-hog-wild.js";
 import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
@@ -277,6 +278,7 @@ import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
+import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
@@ -439,6 +441,7 @@ import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js
 import _poolWingShredder from "../pool/wing-shredder.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
+import _poolWitchsMark from "../pool/witchs-mark.js";
 import _poolWithstand from "../pool/withstand.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
@@ -606,6 +609,7 @@ const shard: CardShard = {
     _poolGiantCockroach,
     _poolGlintHornBuccaneer,
     _poolGlowingAnemone,
+    _poolGoHogWild,
     _poolGoblinEngineer,
     _poolGoblinMatron,
     _poolGranPulseOchu,
@@ -729,6 +733,7 @@ const shard: CardShard = {
     _poolPierceTheSky,
     _poolPlasmancer,
     _poolPoisonBladeMentor,
+    _poolPollenShieldHare,
     _poolPollutedMire,
     _poolPongify,
     _poolPrimalBeyond,
@@ -891,6 +896,7 @@ const shard: CardShard = {
     _poolWingShredder,
     _poolWinterflame,
     _poolWirewoodHivemaster,
+    _poolWitchsMark,
     _poolWithstand,
     _poolYoshimaruBelovedCompanion,
     _poolZaskSkitteringSwarmlord,
