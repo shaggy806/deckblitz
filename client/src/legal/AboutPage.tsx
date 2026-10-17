@@ -5,7 +5,9 @@ import {
   NOTICE_REST,
   POLICY_NAME,
   SCRYFALL_URL,
+  SITE_DESCRIPTOR,
   SITE_TITLE,
+  TRADEMARK_LINE,
 } from './notice.ts'
 import './legal.css'
 
@@ -21,6 +23,9 @@ export function AboutPage() {
         ← {SITE_TITLE}
       </a>
       <h1>About &amp; legal</h1>
+      <p className="about-lead">
+        {SITE_TITLE} — {SITE_DESCRIPTOR}.
+      </p>
 
       <section>
         <h2>Fan content</h2>
@@ -33,7 +38,7 @@ export function AboutPage() {
         </p>
         <p>
           Magic: The Gathering, its card names, rules text, mana symbols and card art are property of Wizards of the
-          Coast. {ART_RIGHTS} Each card&apos;s art is credited to its artist on the card, where the card is shown
+          Coast. {ART_RIGHTS} {TRADEMARK_LINE} Each card&apos;s art is credited to its artist on the card, where the card is shown
           in full.
         </p>
       </section>

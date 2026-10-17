@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { ART_RIGHTS, FAN_CONTENT_POLICY_URL, NOTICE_LEAD, NOTICE_REST, POLICY_NAME } from './notice.ts'
+import { ART_RIGHTS, FAN_CONTENT_POLICY_URL, NOTICE_LEAD, NOTICE_REST, POLICY_NAME, TRADEMARK_LINE } from './notice.ts'
 import './legal.css'
 
 /**
@@ -18,7 +18,7 @@ export function SiteNotice({ children }: { readonly children?: ReactNode }) {
         <a href={FAN_CONTENT_POLICY_URL} target="_blank" rel="noreferrer">
           {POLICY_NAME}
         </a>
-        . {NOTICE_REST} {ART_RIGHTS}{' '}
+        . {NOTICE_REST} {ART_RIGHTS} {TRADEMARK_LINE}{' '}
         <a href="/about">About &amp; legal</a>
       </p>
     </footer>

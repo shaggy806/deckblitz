@@ -241,6 +241,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **The site is "Deck Blitz", not "MTG Deck Blitz"** (the user, 2026-10-16): the brand carries no
+  Wizards trademark; "Magic: The Gathering" names the game only to say what the site is for (the
+  page title, the landing page's descriptor), and the notice gains a trademark line, as Scryfall
+  and Moxfield do (`docs/plans/fan-content-policy.md`).
 - **What the site discloses under Wizards' Fan Content Policy** (the user, 2026-10-11): the
   policy's notice in a footer on the landing page, library and deck builder, an About & legal page
   (`/about`, linked from the Game menu too), and the artist credit Scryfall asks for beside art

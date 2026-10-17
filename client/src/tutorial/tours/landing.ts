@@ -8,7 +8,7 @@ export const LANDING_STEPS: readonly Step[] = [
   {
     id: 'welcome',
     page: 'landing',
-    title: 'Welcome to MTG Deck Blitz!',
+    title: 'Welcome to Deck Blitz!',
     body:
       "A minute on where things are, then a practice table to show how a game works here. " +
       'Escape leaves the tour whenever you like.',

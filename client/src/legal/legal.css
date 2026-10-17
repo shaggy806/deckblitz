@@ -49,6 +49,9 @@
 .about-page a {
   color: var(--accent);
 }
+.about-page .about-lead {
+  color: var(--text);
+}
 .about-home {
   font-size: 0.9rem;
   text-decoration: none;

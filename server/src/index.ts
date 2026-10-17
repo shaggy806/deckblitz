@@ -156,7 +156,7 @@ attachTransport(wss, host);
 const statusServer = startStatusServer(() => host.status(), statusPort, host.decisions);
 
 httpServer.listen(port, () => {
-  console.log(`MTG Deck Blitz room server listening on ws://localhost:${port}`);
+  console.log(`Deck Blitz room server listening on ws://localhost:${port}`);
   console.log(`status (loopback only): curl localhost:${statusPort}/status`);
 });
 

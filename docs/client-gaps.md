@@ -140,10 +140,6 @@ where the decision is raised); bots and the fuzzer answer it already.
   forced-layout call stacks) on a `vite preview` build, mapped through a `vite build
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
-- **Fan content: the "MTG" in the site's name** (2026-10-16). The notice and art credits are built
-  (`docs/plans/fan-content-policy.md`). Left: "MTG" in "MTG Deck Blitz" is a Wizards trademark the
-  policy says not to use without permission — the user's call. (The blurred landing backdrop isn't
-  an issue: its images weren't taken from Scryfall.)
 - **Two tutorials: how to play Commander, and how to use the site** (the user, 2026-10-11/12).
   The plan is `docs/plans/tutorials.md`: a coach-mark overlay (`client/src/tutorial/`, `data-tour`
   anchors, progress in `localStorage`, a "?" button in the corner toolbar), and a production-safe

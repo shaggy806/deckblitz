@@ -1,6 +1,6 @@
 # Deployment
 
-MTG Deck Blitz runs in production on an AWS Lightsail instance, reachable at **deckblitz.net**,
+Deck Blitz runs in production on an AWS Lightsail instance, reachable at **deckblitz.net**,
 with no ports open to the web — a Cloudflare Tunnel carries all traffic in over an outbound-only
 connection instead. This file is the from-scratch runbook: what was set up, why, and what to do
 if the instance needs rebuilding. `docs/plans/lightsail-migration.md` records the move here from
@@ -262,7 +262,7 @@ curl localhost:4010/healthz       # just a 200, for a monitor
 ```
 
 ```
-MTG Deck Blitz server
+Deck Blitz server
   uptime   3h 12m    pid 8123    node v22.23.3
   memory   rss 210 MB, heap 88 MB
   rooms    3 live — 1 waiting, 2 playing, 0 finished   (47 created since start)

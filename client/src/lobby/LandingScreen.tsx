@@ -5,6 +5,7 @@ import { PINNED_ART } from 'engine/client'
 import { cssUrl, resolveArtUrl } from '../ui/art.ts'
 import { ArtCredit } from '../ui/ArtCredit.tsx'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
+import { SITE_DESCRIPTOR, SITE_TITLE } from '../legal/notice.ts'
 import { CornerToolbar } from '../ui/CornerToolbar.tsx'
 import { BlitzPanel } from './BlitzPanel.tsx'
 import './landing.css'
@@ -190,7 +191,10 @@ export function LandingScreen({
       <header className="landing-hero">
         <div className="landing-hero-art" style={{ backgroundImage: cssUrl(heroArt) }} aria-hidden="true" />
         <div className="landing-hero-text">
-          <h1 className="landing-title">MTG Deck Blitz</h1>
+          <h1 className="landing-title">{SITE_TITLE}</h1>
+          {/* What it's for, naming the game — the brand itself carries no
+              Wizards trademark (docs/plans/fan-content-policy.md). */}
+          <p className="landing-kicker">{SITE_DESCRIPTOR}</p>
           <p className="landing-tagline">
             Goldfishing tests a deck against nobody. Blitzing tests it against
             three bots: copy a Commander decklist, hit Blitz, and you're playing.
@@ -287,13 +291,14 @@ export function LandingScreen({
         ) : null}
       </nav>
 
-      {/* The Fan Content Policy notice, and the hero art's credit (an art
-          crop, which Scryfall asks to be credited where it's shown). */}
+      <BlitzPanel game={game} />
+
+      {/* The Fan Content Policy notice under everything, and the hero art's
+          credit (an art crop, which Scryfall asks to be credited where it's
+          shown). */}
       <SiteNotice>
         {HERO_CARD} art: <ArtCredit art={PINNED_ART[HERO_CARD]} name={HERO_CARD} className="landing-hero-credit" />
       </SiteNotice>
-
-      <BlitzPanel game={game} />
 
       {/* The tutorials' first-visit callout shows on this page only. */}
       <CornerToolbar intro onLesson={(lesson) => game.createTutorial(lesson)} />

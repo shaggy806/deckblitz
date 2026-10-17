@@ -189,6 +189,14 @@
   letter-spacing: 0.05em;
   color: var(--gold);
 }
+.landing-kicker {
+  margin: clamp(2px, 0.5vh, 6px) 0 0;
+  font-size: clamp(11px, 0.95vw, 14px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.8;
+}
 .landing-tagline {
   max-width: 56ch;
   margin: clamp(8px, 1.4vh, 14px) auto 0;
@@ -339,6 +347,11 @@
   border-radius: 0;
 }
 
+/* The legal footer (SiteNotice) closes the column: the column's gap spaces
+   it, not a margin of its own. */
+.landing .site-notice {
+  margin-top: 0;
+}
 /* Blitzing (BlitzPanel.tsx): one button across the foot of the page, its
    label the only explanation; under it, when needed, the paste box (the
    clipboard couldn't be read), the import's progress, or an error. */

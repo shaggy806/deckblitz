@@ -1,7 +1,7 @@
 # Fan content: what the site discloses
 
-Status: **shipped** (2026-10-16) — the notice and the art credits; one call left for the user
-(the site's name), and one question no notice settles (a playable game).
+Status: **shipped** (2026-10-16) — the notice, the art credits and the name; one question no
+notice settles (a playable game).
 
 The backlog asked (the user, 2026-10-11): what does deckblitz.net have to show to comply with
 Wizards of the Coast's Fan Content Policy, and where? This records what the two sets of terms the
@@ -53,6 +53,14 @@ it's a reading of the published terms.
   by name, card id, page or API link, as `resolveArtUrl` reads them), seeded free from the art's
   own batched lookup, batched and cached for two weeks like it. The library and deck builder show
   whole card images, which carry their own credit.
+- **The name is "Deck Blitz"** (the user, 2026-10-16), no longer "MTG Deck Blitz": "MTG" stands for
+  Magic: The Gathering, a Wizards trademark the policy says not to use without permission. As
+  Scryfall ("Scryfall Magic: The Gathering Search") and Moxfield ("Moxfield - MTG Deck Builder") do,
+  the brand carries no mark and the game is named only to say what the site is for — the page
+  title "Deck Blitz · Magic: The Gathering Commander deck tester", the landing page's "A Commander
+  deck tester for Magic: The Gathering" (`SITE_DESCRIPTOR`) — and a trademark line, Moxfield's
+  kind, joins the notice: "Magic: The Gathering and its logos are trademarks of Wizards of the
+  Coast LLC." (`TRADEMARK_LINE`).
 - **The landing backdrop** (`client/public/menu-backdrop.webp`, a blurred grid of commander card
   images) stays as it is: its images weren't taken from Scryfall (the user, 2026-10-16), so
   Scryfall's "don't blur" doesn't reach it, and Wizards' policy doesn't forbid altering card images
@@ -61,9 +69,6 @@ it's a reading of the published terms.
 
 ## Open
 
-- **The name "MTG Deck Blitz".** "MTG" stands for Magic: The Gathering, a Wizards trademark, and the
-  policy says not to use Wizards' trademarks without permission. Many fan sites carry it in their
-  names; the policy doesn't speak to site names. The user's call.
 - **A playable game.** The site runs Magic itself: its rules, card text and art, in a game. The
   policy covers fan *content* — websites, videos, streams — and bars Wizards IP "in other games" and
   its "game mechanics"; it says nothing about a digital implementation of Magic as such, and

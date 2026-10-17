@@ -32,8 +32,8 @@ is still unscoped.
 `engine/src/decisions/`, and why `game.ts` stays binary to git.
 
 `fan-content-policy` (**shipped**) records what Wizards' Fan Content Policy and Scryfall's image
-terms ask of the site, the notice and art credits that answer them, and the calls left open: the
-blurred card-image backdrop, the "MTG" in the name, and whether a playable game is fan content.
+terms ask of the site, the notice and art credits that answer them, the name kept free of Wizards'
+trademark ("Deck Blitz"), and the question left open: whether a playable game is fan content.
 
 `lightsail-migration` (**shipped**) moves the live site off the home box onto AWS Lightsail and
 from `mtg.tobyens.com` to deckblitz.net: Cloudflare and the tunnel stay, why the instance needs
