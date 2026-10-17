@@ -8,6 +8,7 @@ import _poolAccursedMarauder from "../pool/accursed-marauder.js";
 import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAfflict from "../pool/afflict.js";
+import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
@@ -403,6 +404,7 @@ import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
 import _poolThragtusk from "../pool/thragtusk.js";
 import _poolThranDynamo from "../pool/thran-dynamo.js";
+import _poolThunderousDebut from "../pool/thunderous-debut.js";
 import _poolTiamatsFanatics from "../pool/tiamats-fanatics.js";
 import _poolTidusBlitzballStar from "../pool/tidus-blitzball-star.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
@@ -477,6 +479,7 @@ const shard: CardShard = {
     _poolAdelbertSteiner,
     _poolAdornedCrocodile,
     _poolAfflict,
+    _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
     _poolAleshaWhoLaughsAtFate,
     _poolAlliesAtLast,
@@ -872,6 +875,7 @@ const shard: CardShard = {
     _poolThirstForIdentity,
     _poolThragtusk,
     _poolThranDynamo,
+    _poolThunderousDebut,
     _poolTiamatsFanatics,
     _poolTidusBlitzballStar,
     _poolTimberlandRuins,

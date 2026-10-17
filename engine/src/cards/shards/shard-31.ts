@@ -216,6 +216,7 @@ import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
+import _poolKellansLightblades from "../pool/kellans-lightblades.js";
 import _poolKiteShield from "../pool/kite-shield.js";
 import _poolKitesail from "../pool/kitesail.js";
 import _poolKithkinDaggerdare from "../pool/kithkin-daggerdare.js";
@@ -378,6 +379,7 @@ import _poolToxinAnalysis from "../pool/toxin-analysis.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
 import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
+import _poolTroublemakerOuphe from "../pool/troublemaker-ouphe.js";
 import _poolTurncoatKunoichi from "../pool/turncoat-kunoichi.js";
 import _poolTuvasaTheSunlit from "../pool/tuvasa-the-sunlit.js";
 import _poolTweeze from "../pool/tweeze.js";
@@ -649,6 +651,7 @@ const shard: CardShard = {
     _poolKarplusanForest,
     _poolKathariScreecher,
     _poolKazanduRefuge,
+    _poolKellansLightblades,
     _poolKiteShield,
     _poolKitesail,
     _poolKithkinDaggerdare,
@@ -811,6 +814,7 @@ const shard: CardShard = {
     _poolTreasureCove,
     _poolTreasureDredger,
     _poolTreeOfRedemption,
+    _poolTroublemakerOuphe,
     _poolTurncoatKunoichi,
     _poolTuvasaTheSunlit,
     _poolTweeze,

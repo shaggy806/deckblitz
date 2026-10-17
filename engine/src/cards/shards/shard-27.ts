@@ -165,6 +165,7 @@ import _poolHeiBaiForestGuardian from "../pool/hei-bai-forest-guardian.js";
 import _poolHengeGuardian from "../pool/henge-guardian.js";
 import _poolHeraldOfTheHost from "../pool/herald-of-the-host.js";
 import _poolHighAlert from "../pool/high-alert.js";
+import _poolHighFaeNegotiator from "../pool/high-fae-negotiator.js";
 import _poolHighScore from "../pool/high-score.js";
 import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
@@ -184,6 +185,7 @@ import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
 import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
+import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
@@ -617,6 +619,7 @@ const shard: CardShard = {
     _poolHengeGuardian,
     _poolHeraldOfTheHost,
     _poolHighAlert,
+    _poolHighFaeNegotiator,
     _poolHighScore,
     _poolHobblefiend,
     _poolHomesickness,
@@ -636,6 +639,7 @@ const shard: CardShard = {
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
     _poolJetsBrainwashing,
+    _poolJohannsStopgap,
     _poolJungleShrine,
     _poolJunkDiver,
     _poolJuvenileGloomwidow,

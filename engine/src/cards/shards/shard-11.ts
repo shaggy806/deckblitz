@@ -49,6 +49,7 @@ import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
 import _poolBraidsArisenNightmare from "../pool/braids-arisen-nightmare.js";
 import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
+import _poolBraveTheWilds from "../pool/brave-the-wilds.js";
 import _poolBrazenWolves from "../pool/brazen-wolves.js";
 import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
@@ -529,6 +530,7 @@ const shard: CardShard = {
     _poolBorosGuildmage,
     _poolBraidsArisenNightmare,
     _poolBramblewoodParagon,
+    _poolBraveTheWilds,
     _poolBrazenWolves,
     _poolBreechesTheBlastmaker,
     _poolBreedingPool,

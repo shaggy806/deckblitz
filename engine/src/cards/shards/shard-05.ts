@@ -68,6 +68,7 @@ import _poolButcherGhoul from "../pool/butcher-ghoul.js";
 import _poolCadaverousKnight from "../pool/cadaverous-knight.js";
 import _poolCadiraCallerOfTheSmall from "../pool/cadira-caller-of-the-small.js";
 import _poolCallerOfThePack from "../pool/caller-of-the-pack.js";
+import _poolCandyGrapple from "../pool/candy-grapple.js";
 import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
 import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star.js";
 import _poolCaravanHurda from "../pool/caravan-hurda.js";
@@ -522,6 +523,7 @@ const shard: CardShard = {
     _poolCadaverousKnight,
     _poolCadiraCallerOfTheSmall,
     _poolCallerOfThePack,
+    _poolCandyGrapple,
     _poolCanyonWildcat,
     _poolCaptainMarvelShootingStar,
     _poolCaravanHurda,

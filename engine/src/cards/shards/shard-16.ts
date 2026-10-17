@@ -356,6 +356,7 @@ import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
+import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
@@ -832,6 +833,7 @@ const shard: CardShard = {
     _poolStoicRebuttal,
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,
+    _poolStonesplitterBolt,
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,
     _poolStormsWrath,

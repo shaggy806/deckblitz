@@ -37,6 +37,7 @@ import _poolAuraFracture from "../pool/aura-fracture.js";
 import _poolAutomaticLibrarian from "../pool/automatic-librarian.js";
 import _poolAvenBattlePriest from "../pool/aven-battle-priest.js";
 import _poolAxebaneBeast from "../pool/axebane-beast.js";
+import _poolBackForSeconds from "../pool/back-for-seconds.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBatterskull from "../pool/batterskull.js";
@@ -526,6 +527,7 @@ const shard: CardShard = {
     _poolAutomaticLibrarian,
     _poolAvenBattlePriest,
     _poolAxebaneBeast,
+    _poolBackForSeconds,
     _poolBalshanCollaborator,
     _poolBarkchannelPathway,
     _poolBatterskull,

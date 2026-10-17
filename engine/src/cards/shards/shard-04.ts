@@ -170,6 +170,7 @@ import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
+import _poolIceOut from "../pool/ice-out.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
 import _poolImskirIronEater from "../pool/imskir-iron-eater.js";
 import _poolIndrikStomphowler from "../pool/indrik-stomphowler.js";
@@ -612,6 +613,7 @@ const shard: CardShard = {
     _poolHulkingGoblin,
     _poolHumongulus,
     _poolHydraInfiltration,
+    _poolIceOut,
     _poolImposingVantasaur,
     _poolImskirIronEater,
     _poolIndrikStomphowler,

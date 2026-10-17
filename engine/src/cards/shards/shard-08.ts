@@ -299,6 +299,7 @@ import _poolRagingKavu from "../pool/raging-kavu.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
+import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
 import _poolReapersScythe from "../pool/reapers-scythe.js";
 import _poolReaverAmbush from "../pool/reaver-ambush.js";
 import _poolRefocus from "../pool/refocus.js";
@@ -771,6 +772,7 @@ const shard: CardShard = {
     _poolRakishCrew,
     _poolRangingRaptors,
     _poolRaucousTheater,
+    _poolRealmScorcherHellkite,
     _poolReapersScythe,
     _poolReaverAmbush,
     _poolRefocus,

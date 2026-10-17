@@ -17,6 +17,7 @@ import _poolArboreaPegasus from "../pool/arborea-pegasus.js";
 import _poolArcaneEpiphany from "../pool/arcane-epiphany.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
+import _poolArchonsGlory from "../pool/archons-glory.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
@@ -266,6 +267,7 @@ import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
 import _poolRocHunter from "../pool/roc-hunter.js";
+import _poolRowansGrimSearch from "../pool/rowans-grim-search.js";
 import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
 import _poolRuneCervinRider from "../pool/rune-cervin-rider.js";
@@ -434,6 +436,7 @@ const shard: CardShard = {
     _poolArcaneEpiphany,
     _poolArcboundSlith,
     _poolArchonOfCruelty,
+    _poolArchonsGlory,
     _poolArmyOfTheDamned,
     _poolAscendingAven,
     _poolAtarkaWorldRender,
@@ -683,6 +686,7 @@ const shard: CardShard = {
     _poolRithsAttendant,
     _poolRoarOfEndlessSong,
     _poolRocHunter,
+    _poolRowansGrimSearch,
     _poolRubblebeltRecluse,
     _poolRumbleArena,
     _poolRuneCervinRider,

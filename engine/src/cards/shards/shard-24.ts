@@ -349,6 +349,7 @@ import _poolTeferisProtege from "../pool/teferis-protege.js";
 import _poolTemporalFissure from "../pool/temporal-fissure.js";
 import _poolTemporalIntervention from "../pool/temporal-intervention.js";
 import _poolTemptWithTreats from "../pool/tempt-with-treats.js";
+import _poolTenaciousTomeseeker from "../pool/tenacious-tomeseeker.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
@@ -779,6 +780,7 @@ const shard: CardShard = {
     _poolTemporalFissure,
     _poolTemporalIntervention,
     _poolTemptWithTreats,
+    _poolTenaciousTomeseeker,
     _poolTenuredTethermage,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
