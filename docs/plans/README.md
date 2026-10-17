@@ -33,7 +33,8 @@ is still unscoped.
 
 `fan-content-policy` (**shipped**) records what Wizards' Fan Content Policy and Scryfall's image
 terms ask of the site, the notice and art credits that answer them, the name kept free of Wizards'
-trademark ("Deck Blitz"), and the question left open: whether a playable game is fan content.
+trademark ("Deck Blitz"), and the user's call on whether a playable game is fine (yes, as a free
+deck tester rather than competitive matchmaking) with what would reopen it.
 
 `lightsail-migration` (**shipped**) moves the live site off the home box onto AWS Lightsail and
 from `mtg.tobyens.com` to deckblitz.net: Cloudflare and the tunnel stay, why the instance needs

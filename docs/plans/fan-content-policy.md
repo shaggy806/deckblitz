@@ -1,7 +1,7 @@
 # Fan content: what the site discloses
 
-Status: **shipped** (2026-10-16) — the notice, the art credits and the name; one question no
-notice settles (a playable game).
+Status: **shipped** (2026-10-16) — the notice, the art credits and the name; the question no
+notice settles (a playable game) decided by the user, with what would reopen it.
 
 The backlog asked (the user, 2026-10-11): what does deckblitz.net have to show to comply with
 Wizards of the Coast's Fan Content Policy, and where? This records what the two sets of terms the
@@ -67,11 +67,20 @@ it's a reading of the published terms.
   — only removing legal notices from them, which a dim decorative blur doesn't do the way cropping
   would, with the site-wide notice saying whose they are.
 
-## Open
+## Decided: a playable game
 
-- **A playable game.** The site runs Magic itself: its rules, card text and art, in a game. The
+- **The question.** The site runs Magic itself: its rules, card text and art, in a game. The
   policy covers fan *content* — websites, videos, streams — and bars Wizards IP "in other games" and
   its "game mechanics"; it says nothing about a digital implementation of Magic as such, and
   Scryfall's terms bar using its data "to create new games". Other free Magic clients run without
   any written permission, at Wizards' tolerance. The notice and credits are what the policy asks of
   fan content; they don't make that question go away. A lawyer's question, if it matters.
+- **The user's call (2026-10-16): fine for now.** Deck Blitz is a free way to test a deck online —
+  a decklist against bots, or a table with friends — not a competitive matchmaking environment.
+  Wizards' own online Commander is Magic: The Gathering Online, a paid client where players own
+  their cards and play in queues and leagues; Deck Blitz has no card ownership, no rankings, no
+  prizes and nothing for sale, so it serves a different need rather than standing in for that.
+- **What would reopen it:** Wizards objecting (a request to change or take down the site); Wizards
+  offering a free way to test or play Commander decks online; or Deck Blitz itself growing toward
+  competition — ranked or public matchmaking, ladders, prizes — or charging for anything. Any of
+  these, and the question is looked at again.
