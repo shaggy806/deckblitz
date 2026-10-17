@@ -1749,6 +1749,7 @@ import _poolCapashenTemplar from "./pool/capashen-templar.js";
 import _poolCapashenUnicorn from "./pool/capashen-unicorn.js";
 import _poolCapitalCity from "./pool/capital-city.js";
 import _poolCapitalGuard from "./pool/capital-guard.js";
+import _poolCapriciousSliver from "./pool/capricious-sliver.js";
 import _poolCapsizingWave from "./pool/capsizing-wave.js";
 import _poolCaptainAmericaSteveRogers from "./pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericaTeamLeader from "./pool/captain-america-team-leader.js";
@@ -4560,6 +4561,7 @@ import _poolGastalRaider from "./pool/gastal-raider.js";
 import _poolGastalThrillroller from "./pool/gastal-thrillroller.js";
 import _poolGastalThrillseeker from "./pool/gastal-thrillseeker.js";
 import _poolGatecreeperVine from "./pool/gatecreeper-vine.js";
+import _poolGatewatchBeacon from "./pool/gatewatch-beacon.js";
 import _poolGatewayPlaza from "./pool/gateway-plaza.js";
 import _poolGatewayShade from "./pool/gateway-shade.js";
 import _poolGatewaySneak from "./pool/gateway-sneak.js";
@@ -6680,6 +6682,7 @@ import _poolLazavDimirMastermind from "./pool/lazav-dimir-mastermind.js";
 import _poolLazotepBehemoth from "./pool/lazotep-behemoth.js";
 import _poolLazotepPlating from "./pool/lazotep-plating.js";
 import _poolLazotepReaver from "./pool/lazotep-reaver.js";
+import _poolLazotepSliver from "./pool/lazotep-sliver.js";
 import _poolLeadPipe from "./pool/lead-pipe.js";
 import _poolLeadenMyr from "./pool/leaden-myr.js";
 import _poolLeadersTalent from "./pool/leaders-talent.js";
@@ -8097,6 +8100,7 @@ import _poolNyxFleeceRam from "./pool/nyx-fleece-ram.js";
 import _poolNyxLotus from "./pool/nyx-lotus.js";
 import _poolNyxWeaver from "./pool/nyx-weaver.js";
 import _poolNyxbloomAncient from "./pool/nyxbloom-ancient.js";
+import _poolNyxbornBehemoth from "./pool/nyxborn-behemoth.js";
 import _poolNyxbornBrute from "./pool/nyxborn-brute.js";
 import _poolNyxbornColossus from "./pool/nyxborn-colossus.js";
 import _poolNyxbornCourser from "./pool/nyxborn-courser.js";
@@ -9306,6 +9310,7 @@ import _poolRegalBunnicorn from "./pool/regal-bunnicorn.js";
 import _poolRegalCaracal from "./pool/regal-caracal.js";
 import _poolRegalForce from "./pool/regal-force.js";
 import _poolRegalImperiosaur from "./pool/regal-imperiosaur.js";
+import _poolRegalSliver from "./pool/regal-sliver.js";
 import _poolRegalUnicorn from "./pool/regal-unicorn.js";
 import _poolRegathanFirecat from "./pool/regathan-firecat.js";
 import _poolRegenerationsRestored from "./pool/regenerations-restored.js";
@@ -11803,6 +11808,7 @@ import _poolTatteredMummy from "./pool/tattered-mummy.js";
 import _poolTatteredRatter from "./pool/tattered-ratter.js";
 import _poolTattermungeManiac from "./pool/tattermunge-maniac.js";
 import _poolTatyova from "./pool/tatyova.js";
+import _poolTauntingSliver from "./pool/taunting-sliver.js";
 import _poolTaureanMauler from "./pool/taurean-mauler.js";
 import _poolTavernBrawler from "./pool/tavern-brawler.js";
 import _poolTavernRuffian from "./pool/tavern-ruffian.js";
@@ -16183,6 +16189,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCapashenUnicorn,
   _poolCapitalCity,
   _poolCapitalGuard,
+  _poolCapriciousSliver,
   _poolCapsizingWave,
   _poolCaptainAmericaSteveRogers,
   _poolCaptainAmericaTeamLeader,
@@ -18994,6 +19001,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGastalThrillroller,
   _poolGastalThrillseeker,
   _poolGatecreeperVine,
+  _poolGatewatchBeacon,
   _poolGatewayPlaza,
   _poolGatewayShade,
   _poolGatewaySneak,
@@ -21114,6 +21122,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLazotepBehemoth,
   _poolLazotepPlating,
   _poolLazotepReaver,
+  _poolLazotepSliver,
   _poolLeadPipe,
   _poolLeadenMyr,
   _poolLeadersTalent,
@@ -22531,6 +22540,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNyxLotus,
   _poolNyxWeaver,
   _poolNyxbloomAncient,
+  _poolNyxbornBehemoth,
   _poolNyxbornBrute,
   _poolNyxbornColossus,
   _poolNyxbornCourser,
@@ -23740,6 +23750,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRegalCaracal,
   _poolRegalForce,
   _poolRegalImperiosaur,
+  _poolRegalSliver,
   _poolRegalUnicorn,
   _poolRegathanFirecat,
   _poolRegenerationsRestored,
@@ -26237,6 +26248,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTatteredRatter,
   _poolTattermungeManiac,
   _poolTatyova,
+  _poolTauntingSliver,
   _poolTaureanMauler,
   _poolTavernBrawler,
   _poolTavernRuffian,

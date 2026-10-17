@@ -193,6 +193,7 @@ import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
+import _poolLazotepSliver from "../pool/lazotep-sliver.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
@@ -603,6 +604,7 @@ const shard: CardShard = {
     _poolKutzilsFlanker,
     _poolLakesideShack,
     _poolLambholtHarrier,
+    _poolLazotepSliver,
     _poolLensFlare,
     _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,

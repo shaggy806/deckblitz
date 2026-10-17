@@ -288,6 +288,7 @@ import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
 import _poolRedrockSentinel from "../pool/redrock-sentinel.js";
+import _poolRegalSliver from "../pool/regal-sliver.js";
 import _poolRegathanFirecat from "../pool/regathan-firecat.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
@@ -746,6 +747,7 @@ const shard: CardShard = {
     _poolRazorgrassField,
     _poolRecover,
     _poolRedrockSentinel,
+    _poolRegalSliver,
     _poolRegathanFirecat,
     _poolRejoinder,
     _poolRestlessCottage,

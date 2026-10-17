@@ -86,6 +86,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander Masters, whole** (batch 95): 6 of its last 12 — four Slivers' granted abilities,
+  Gatewatch Beacon and Nyxborn Behemoth (2026-10-17).
 - **Wilds of Eldraine and its Commander set, both whole** (batch 94): 147 of 182 cards — the 173
   left in the two sets and 9 older ones — with Roles (rule 303.7: tokens created attached, and
   704.5z), bargain (702.166), celebration and a "has an Adventure" filter (715.2a) built

@@ -153,6 +153,7 @@ import _poolFrontierSeeker from "../pool/frontier-seeker.js";
 import _poolFungalInfection from "../pool/fungal-infection.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
+import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
@@ -265,6 +266,7 @@ import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
+import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
@@ -593,6 +595,7 @@ const shard: CardShard = {
     _poolFungalInfection,
     _poolGallifreyCouncilChamber,
     _poolGastalThrillseeker,
+    _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
     _poolGatheringStone,
     _poolGenesisChamber,
@@ -705,6 +708,7 @@ const shard: CardShard = {
     _poolNewHorizons,
     _poolNimReplica,
     _poolNoxiousGearhulk,
+    _poolNyxbornBehemoth,
     _poolOkaunEyeOfChaos,
     _poolOltecMatterweaver,
     _poolOmenspeaker,

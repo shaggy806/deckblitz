@@ -7331,6 +7331,18 @@
   "zone:cast-from-library-top-once-each-turn": {
    "family": "zone:cast-from-library-top",
    "example": "Johann, Apprentice Sorcerer: castFromLibraryTop with a once-per-turn allowance per permanent (Johann, Apprentice Sorcerer), like castFromGraveyard.oncePerTurn."
+  },
+  "effect:copy-next-loyalty-ability": {
+   "family": "effect:copy-ability",
+   "example": "Jaya's Phoenix: \"Copy the next loyalty ability you activate this turn when you activate it\": a delayed copy of an activation."
+  },
+  "effect:manifest-count-amount": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Omarthis, Ghostfire Initiate: \"Manifest a number of cards equal to the number of counters on it\": `manifest`'s count is a fixed number."
+  },
+  "effect:animate-planeswalker-with-trigger": {
+   "family": "static:self-type-changes",
+   "example": "Sparkshaper Visionary: Any number of planeswalkers become 3/3 Bird creatures (no longer planeswalkers) with a granted \"scry 1\" combat-damage trigger until end of turn."
   }
  }
 }

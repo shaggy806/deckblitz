@@ -1,0 +1,93 @@
+{
+ "batch": "B95",
+ "status": "complete",
+ "ranks": "Commander Masters (CMM, 2023-08-04): the rest of the set (its top half was walked before)",
+ "authored": [
+  {
+   "name": "Lazotep Sliver",
+   "files": [
+    "engine/src/cards/pool/lazotep-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Capricious Sliver",
+   "files": [
+    "engine/src/cards/pool/capricious-sliver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Regal Sliver",
+   "files": [
+    "engine/src/cards/pool/regal-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taunting Sliver",
+   "files": [
+    "engine/src/cards/pool/taunting-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gatewatch Beacon",
+   "files": [
+    "engine/src/cards/pool/gatewatch-beacon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nyxborn Behemoth",
+   "files": [
+    "engine/src/cards/pool/nyxborn-behemoth.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "For the Ancestors",
+   "needs": [
+    "decision:choose-creature-type-on-resolution"
+   ],
+   "why": "\"Choose a creature type\" as the spell resolves, then a look at the top six for cards of that type — a spell has nowhere to keep the choice for the filter."
+  },
+  {
+   "name": "Jaya's Phoenix",
+   "needs": [
+    "effect:copy-next-loyalty-ability"
+   ],
+   "why": "\"Copy the next loyalty ability you activate this turn when you activate it\": a delayed copy of an activation."
+  },
+  {
+   "name": "Leori, Sparktouched Hunter",
+   "needs": [
+    "effect:copy-next-loyalty-ability"
+   ],
+   "why": "\"Choose a planeswalker type. Until end of turn, whenever you activate an ability of a planeswalker of that type, copy that ability\"."
+  },
+  {
+   "name": "Omarthis, Ghostfire Initiate",
+   "needs": [
+    "effect:manifest-count-amount"
+   ],
+   "why": "\"Manifest a number of cards equal to the number of counters on it\": `manifest`'s count is a fixed number."
+  },
+  {
+   "name": "Rukarumel, Biologist",
+   "needs": [
+    "static:grant-types-to-others"
+   ],
+   "why": "The chosen creature type added to Slivers and nontoken creatures — and to creature spells and cards you own outside the battlefield."
+  },
+  {
+   "name": "Sparkshaper Visionary",
+   "needs": [
+    "effect:animate-planeswalker-with-trigger"
+   ],
+   "why": "Any number of planeswalkers become 3/3 Bird creatures (no longer planeswalkers) with a granted \"scry 1\" combat-damage trigger until end of turn."
+  }
+ ]
+}

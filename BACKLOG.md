@@ -86,12 +86,13 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to Wilds of Eldraine is whole
+  ranked ones first. Every set from Reality Fracture back to Commander Masters is whole
   (batch 89 built plot and crimes for Outlaws of Thunder Junction; batch 90 rad counters and squad
   for Fallout; batch 91 collect evidence and Cases; batch 92 explore, Map tokens, discover and
   craft; batch 93 time travel, vanishing and gaining suspend; batch 94 Roles, bargain, celebration
-  and "has an Adventure"); **next, Commander Masters** (CMM — `npm run cards:sets -w engine --
-  --sets 48`). Wilds of Eldraine's leaders: one Role per matching permanent
+  and "has an Adventure"; batch 95 Commander Masters' last six); **next, The Lord of the Rings:
+  Tales of Middle-earth and its Commander set** (LTR, LTC — `npm run cards:sets -w engine --
+  --sets 50`). Wilds of Eldraine's leaders: one Role per matching permanent
   (`effect:create-token-attached-each` 2) and tapping an opponent's creature as a trigger
   (`trigger:you-tap-opponent-creature`, 3 across both spellings). Doctor Who's leaders:
   face-down Cybermen (`mechanic:face-down`) and a spell exiling itself suspended
