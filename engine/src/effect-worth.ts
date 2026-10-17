@@ -97,6 +97,10 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       return ctx.triggerPlayer !== undefined ? [ctx.triggerPlayer] : null;
     case "each-other-opponent":
       return opponentsOf(state, controller).filter((p) => p !== ctx.triggerPlayer);
+    case "opponents-who-voted-with-you":
+    case "you-and-opponents-who-voted-with-you":
+      // Not known until the votes are in.
+      return null;
     case "you-and-opponents-attacking-trigger-player":
       // Who'll be attacking isn't known until the attack: the controller's
       // share is the part that's ours for sure.

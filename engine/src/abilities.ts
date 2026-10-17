@@ -603,11 +603,15 @@ export type TriggerSpec =
        * chose a creature other than Gandalf"); with `chosen`, only a
        * temptation that chose one fires it — Call of the Ring's "whenever
        * you choose a creature as your Ring-bearer", the same creature again
-       * included. `who` is the tempted player.
+       * included. `"other"` is "if you chose a creature **other than** ~ as
+       * your Ring-bearer" (Galadriel of Lothlórien): one chosen, and not this
+       * permanent — an intervening "if" (rule 603.4) about a choice already
+       * made, so it reads the same as the ability resolves. `who` is the
+       * tempted player.
        */
       readonly on: "ring-tempts";
       readonly who: TriggerWho;
-      readonly chosen?: boolean;
+      readonly chosen?: boolean | "other";
     }
   | {
       /**
@@ -804,6 +808,16 @@ export type TriggerSpec =
       readonly counter?: string;
       readonly filter?: CardFilter;
       readonly last?: boolean;
+    }
+  | {
+      /**
+       * "Whenever players finish voting" (Erestor of the Council, Model of
+       * Unity — rule 701.38): every player has voted in a vote, whoever's
+       * spell or ability held it. Fires once per vote, off `votes-finished`;
+       * the ability reads that vote's votes (`{ votesFor }`, the
+       * `"opponents-who-voted-with-you"` scope, `{ opponentsVotedOtherwise }`).
+       */
+      readonly on: "players-finish-voting";
     }
   | {
       /**

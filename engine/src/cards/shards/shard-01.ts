@@ -98,6 +98,7 @@ import _poolElectrostaticField from "../pool/electrostatic-field.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
+import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
 import _poolEtaliPrimalConqueror from "../pool/etali-primal-conqueror.js";
 import _poolEtheriumAbomination from "../pool/etherium-abomination.js";
@@ -107,11 +108,13 @@ import _poolExpel from "../pool/expel.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
 import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
+import _poolFallOfGilGalad from "../pool/fall-of-gil-galad.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFesterleech from "../pool/festerleech.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
+import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
@@ -373,6 +376,7 @@ import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
 import _poolTraumatize from "../pool/traumatize.js";
+import _poolTravelThroughCaradhras from "../pool/travel-through-caradhras.js";
 import _poolTraxosScourgeOfKroog from "../pool/traxos-scourge-of-kroog.js";
 import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
@@ -530,6 +534,7 @@ const shard: CardShard = {
     _poolElugeTheShorelessSea,
     _poolEmbodimentOfSpring,
     _poolEnvironmentalScientist,
+    _poolErkenbrandLordOfWestfold,
     _poolEssenceChanneler,
     _poolEtaliPrimalConqueror,
     _poolEtheriumAbomination,
@@ -539,11 +544,13 @@ const shard: CardShard = {
     _poolEzekielSimsSpiderTotem,
     _poolFaithfulWatchdog,
     _poolFaldornDreadWolfHerald,
+    _poolFallOfGilGalad,
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
     _poolFarmerCotton,
     _poolFesterleech,
     _poolFireNationEngineer,
+    _poolFireOfOrthanc,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
     _poolFloodedGrove,
@@ -805,6 +812,7 @@ const shard: CardShard = {
     _poolToxicAbomination,
     _poolTragicPoet,
     _poolTraumatize,
+    _poolTravelThroughCaradhras,
     _poolTraxosScourgeOfKroog,
     _poolTrespassersCurse,
     _poolTunnelRats,

@@ -18,6 +18,7 @@ import _poolArdbert from "../pool/ardbert.js";
 import _poolArgentumArmor from "../pool/argentum-armor.js";
 import _poolArgothianOpportunist from "../pool/argothian-opportunist.js";
 import _poolArmageddon from "../pool/armageddon.js";
+import _poolArwenUndomiel from "../pool/arwen-undomiel.js";
 import _poolAshPartyCrasher from "../pool/ash-party-crasher.js";
 import _poolAstralWingspan from "../pool/astral-wingspan.js";
 import _poolAtlanteanCavalry from "../pool/atlantean-cavalry.js";
@@ -40,6 +41,7 @@ import _poolBlisterBeetle from "../pool/blister-beetle.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
 import _poolBlossomingBogbeast from "../pool/blossoming-bogbeast.js";
 import _poolBoneSplinters from "../pool/bone-splinters.js";
+import _poolBookOfMazarbul from "../pool/book-of-mazarbul.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
 import _poolBreakTheSpell from "../pool/break-the-spell.js";
@@ -211,6 +213,7 @@ import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
+import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
@@ -284,6 +287,7 @@ import _poolQuietusSpike from "../pool/quietus-spike.js";
 import _poolRaffinesTower from "../pool/raffines-tower.js";
 import _poolRagingPoltergeist from "../pool/raging-poltergeist.js";
 import _poolRakishHeir from "../pool/rakish-heir.js";
+import _poolReconnaissance from "../pool/reconnaissance.js";
 import _poolRedshiftRocketeerChief from "../pool/redshift-rocketeer-chief.js";
 import _poolReignOfThePit from "../pool/reign-of-the-pit.js";
 import _poolRelicOfSauron from "../pool/relic-of-sauron.js";
@@ -467,6 +471,7 @@ const shard: CardShard = {
     _poolArgentumArmor,
     _poolArgothianOpportunist,
     _poolArmageddon,
+    _poolArwenUndomiel,
     _poolAshPartyCrasher,
     _poolAstralWingspan,
     _poolAtlanteanCavalry,
@@ -489,6 +494,7 @@ const shard: CardShard = {
     _poolBloodcrusherOfKhorne,
     _poolBlossomingBogbeast,
     _poolBoneSplinters,
+    _poolBookOfMazarbul,
     _poolBoromirWardenOfTheTower,
     _poolBothersomeNoisemaker,
     _poolBreakTheSpell,
@@ -660,6 +666,7 @@ const shard: CardShard = {
     _poolKujarSeedsculptor,
     _poolKulrathZealot,
     _poolLairOfTheHydra,
+    _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
@@ -733,6 +740,7 @@ const shard: CardShard = {
     _poolRaffinesTower,
     _poolRagingPoltergeist,
     _poolRakishHeir,
+    _poolReconnaissance,
     _poolRedshiftRocketeerChief,
     _poolReignOfThePit,
     _poolRelicOfSauron,

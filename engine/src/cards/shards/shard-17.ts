@@ -215,6 +215,8 @@ import _poolLeoninSnarecaster from "../pool/leonin-snarecaster.js";
 import _poolLetterOfAcceptance from "../pool/letter-of-acceptance.js";
 import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
+import _poolLostToLegend from "../pool/lost-to-legend.js";
+import _poolLothlorienBlade from "../pool/lothlorien-blade.js";
 import _poolLoxodonMender from "../pool/loxodon-mender.js";
 import _poolLuminarchAscension from "../pool/luminarch-ascension.js";
 import _poolMacetailHystrodon from "../pool/macetail-hystrodon.js";
@@ -234,6 +236,7 @@ import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
+import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
@@ -262,6 +265,7 @@ import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
+import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
 import _poolPricklyPair from "../pool/prickly-pair.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
@@ -655,6 +659,8 @@ const shard: CardShard = {
     _poolLetterOfAcceptance,
     _poolLifeFromTheLoam,
     _poolLithoformEngine,
+    _poolLostToLegend,
+    _poolLothlorienBlade,
     _poolLoxodonMender,
     _poolLuminarchAscension,
     _poolMacetailHystrodon,
@@ -674,6 +680,7 @@ const shard: CardShard = {
     _poolMilitaryIntelligence,
     _poolMinnWilyIllusionist,
     _poolMinotaurSkullcleaver,
+    _poolMirkwoodChanneler,
     _poolMistgatePathway,
     _poolMobileHomestead,
     _poolMoggMob,
@@ -702,6 +709,7 @@ const shard: CardShard = {
     _poolPharaohRamaTut,
     _poolPhyrexianBloodstock,
     _poolPhyrexianVault,
+    _poolPleaForPower,
     _poolPouncingLynx,
     _poolPricklyPair,
     _poolPrimevalShambler,

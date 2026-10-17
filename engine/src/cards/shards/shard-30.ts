@@ -291,6 +291,7 @@ import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js"
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
 import _poolNobody from "../pool/nobody.js";
+import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
 import _poolOdiousTrow from "../pool/odious-trow.js";
 import _poolOffenderAtLarge from "../pool/offender-at-large.js";
@@ -755,6 +756,7 @@ const shard: CardShard = {
     _poolNimbleInnovator,
     _poolNimbleThopterist,
     _poolNobody,
+    _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
     _poolOdiousTrow,
     _poolOffenderAtLarge,

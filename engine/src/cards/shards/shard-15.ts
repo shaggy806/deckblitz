@@ -110,6 +110,7 @@ import _poolDynamicSoar from "../pool/dynamic-soar.js";
 import _poolEagerGlyphmage from "../pool/eager-glyphmage.js";
 import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
+import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
@@ -121,8 +122,10 @@ import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
+import _poolFangornTreeShepherd from "../pool/fangorn-tree-shepherd.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
+import _poolFellBeastOfMordor from "../pool/fell-beast-of-mordor.js";
 import _poolFeralAppetite from "../pool/feral-appetite.js";
 import _poolFesteringGulch from "../pool/festering-gulch.js";
 import _poolFetidImp from "../pool/fetid-imp.js";
@@ -163,6 +166,7 @@ import _poolGloomwidow from "../pool/gloomwidow.js";
 import _poolGnottvoldRecluse from "../pool/gnottvold-recluse.js";
 import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
 import _poolGoblinBrigand from "../pool/goblin-brigand.js";
+import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
 import _poolGoldRush from "../pool/gold-rush.js";
 import _poolGolgariCharm from "../pool/golgari-charm.js";
@@ -192,6 +196,7 @@ import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
+import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
@@ -271,6 +276,7 @@ import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
 import _poolNyleaGodOfTheHunt from "../pool/nylea-god-of-the-hunt.js";
 import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
+import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
@@ -549,6 +555,7 @@ const shard: CardShard = {
     _poolEagerGlyphmage,
     _poolEardrumRattler,
     _poolEarthbendingStudent,
+    _poolEasterlingVanguard,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolErinisGloomStalker,
@@ -560,8 +567,10 @@ const shard: CardShard = {
     _poolExtendedAbsence,
     _poolEzuriClawOfProgress,
     _poolFancyFootwork,
+    _poolFangornTreeShepherd,
     _poolFatefulEnd,
     _poolFelixFiveBoots,
+    _poolFellBeastOfMordor,
     _poolFeralAppetite,
     _poolFesteringGulch,
     _poolFetidImp,
@@ -602,6 +611,7 @@ const shard: CardShard = {
     _poolGnottvoldRecluse,
     _poolGoForTheThroat,
     _poolGoblinBrigand,
+    _poolGoblinFireleaper,
     _poolGoblinSledder,
     _poolGoldRush,
     _poolGolgariCharm,
@@ -631,6 +641,7 @@ const shard: CardShard = {
     _poolHystrodon,
     _poolIcemanAndFirestar,
     _poolImpossibleInferno,
+    _poolImprovisedClub,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
     _poolInventiveWingsmith,
@@ -710,6 +721,7 @@ const shard: CardShard = {
     _poolNyleaGodOfTheHunt,
     _poolNyxFleeceRam,
     _poolObscuraInitiate,
+    _poolOlogHaiCrusher,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,
     _poolOstrichHorse,

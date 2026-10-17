@@ -120,6 +120,7 @@ import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
 import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
+import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEvershrikesGift from "../pool/evershrikes-gift.js";
 import _poolExorcise from "../pool/exorcise.js";
@@ -253,6 +254,7 @@ import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
+import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
@@ -267,6 +269,7 @@ import _poolOrchardStrider from "../pool/orchard-strider.js";
 import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
+import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
@@ -283,6 +286,7 @@ import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
+import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
 import _poolRakeclawGargantuan from "../pool/rakeclaw-gargantuan.js";
 import _poolRampartArchitect from "../pool/rampart-architect.js";
@@ -335,6 +339,7 @@ import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
 import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
+import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
@@ -352,12 +357,14 @@ import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulmender from "../pool/soulmender.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
+import _poolSpectacularPileup from "../pool/spectacular-pileup.js";
 import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
+import _poolStarforgedSword from "../pool/starforged-sword.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
@@ -414,6 +421,7 @@ import _poolVizierOfTheMenagerie from "../pool/vizier-of-the-menagerie.js";
 import _poolVojaJawsOfTheConclave from "../pool/voja-jaws-of-the-conclave.js";
 import _poolVolcanicAwakening from "../pool/volcanic-awakening.js";
 import _poolVolcanicRambler from "../pool/volcanic-rambler.js";
+import _poolWakeTheDragon from "../pool/wake-the-dragon.js";
 import _poolWallOfDistortion from "../pool/wall-of-distortion.js";
 import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
 import _poolWanderingOnes from "../pool/wandering-ones.js";
@@ -566,6 +574,7 @@ const shard: CardShard = {
     _poolEndlessRanksOfHydra,
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
+    _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEvershrikesGift,
     _poolExorcise,
@@ -699,6 +708,7 @@ const shard: CardShard = {
     _poolNeedlevergePathway,
     _poolNeurokCommando,
     _poolNiblisOfTheMist,
+    _poolNimrodelWatcher,
     _poolNoggleRobber,
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
@@ -713,6 +723,7 @@ const shard: CardShard = {
     _poolOrnithopter,
     _poolOrthionHeroOfLavabrink,
     _poolOscorpResearchTeam,
+    _poolPelargirSurvivor,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
     _poolPitilessPlunderer,
@@ -729,6 +740,7 @@ const shard: CardShard = {
     _poolPymTechnologies,
     _poolPyroclasm,
     _poolQuilledWolf,
+    _poolRadagastWizardOfWilds,
     _poolRakdosLocket,
     _poolRakeclawGargantuan,
     _poolRampartArchitect,
@@ -781,6 +793,7 @@ const shard: CardShard = {
     _poolSeraphOfTheSuns,
     _poolShaperGuildmage,
     _poolShipwreckDowser,
+    _poolShireShirriff,
     _poolShivanDragon,
     _poolSilundiVision,
     _poolSimicRagworm,
@@ -798,12 +811,14 @@ const shard: CardShard = {
     _poolSoulmender,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,
+    _poolSpectacularPileup,
     _poolSpiderManBrooklynVisionary,
     _poolSpineOfIshSah,
     _poolSpinedBasher,
     _poolSpireOfIndustry,
     _poolSqueeGoblinNabob,
     _poolStalkedResearcher,
+    _poolStarforgedSword,
     _poolStaunchDefenders,
     _poolStingerquillVoxmancer,
     _poolStormCrow,
@@ -860,6 +875,7 @@ const shard: CardShard = {
     _poolVojaJawsOfTheConclave,
     _poolVolcanicAwakening,
     _poolVolcanicRambler,
+    _poolWakeTheDragon,
     _poolWallOfDistortion,
     _poolWallOfTanglecord,
     _poolWanderingOnes,

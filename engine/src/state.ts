@@ -28,7 +28,7 @@ import type {
 import type { CardFilter } from "./filter.js";
 import type { Color, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameEvent } from "./events.js";
+import type { GameEvent, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
@@ -635,6 +635,10 @@ export interface GameObject {
      * (`CardDefinition.exchangeTextOnEnter` — Deadpool), or `null` when its
      * controller declined or there was none. */
     readonly exchangeText?: ObjectId | null;
+    /** How many permanents it devoured as it was about to enter (rule
+     * 702.82a — `CardDefinition.devour`): sacrificed then, and counted for
+     * its +1/+1 counters as it enters. */
+    readonly devoured?: number;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -1135,6 +1139,10 @@ export interface PtModifier {
   power: number;
   toughness: number;
   keywords: Keyword[];
+  /** Keywords it takes away, in layer 6 at its timestamp — "target creature
+   * loses flying until end of turn" (rule 613.7): from what had them before,
+   * printed or granted earlier; a later grant gives one back. */
+  loseKeywords?: Keyword[];
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */
@@ -1512,6 +1520,9 @@ export interface LastKnownRefs {
    * `put-into-graveyard` trigger fired on that counted for it, each as the
    * object it became in that graveyard. */
   readonly arrivedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** For a "whenever players finish voting" trigger: the votes of the vote
+   * that fired it (Erestor of the Council). */
+  readonly votes?: readonly Vote[];
   readonly enteredTogether?: readonly {
     readonly object: ObjectId;
     readonly zoneChangeCount: number;
@@ -2511,6 +2522,11 @@ export type AwaitingDecision =
        * and what's picked (or nothing) is what it exchanges with as it
        * enters. `then` is unused. */
       readonly exchangeText?: true;
+      /** Set when the choice is an entering permanent's devour (rule
+       * 702.82a — `CardDefinition.devour`): `source` is the permanent about
+       * to enter, and what's picked is sacrificed now, before it enters with
+       * the counters. `then` is unused. */
+      readonly devour?: true;
       /** Set when the choice pays an activated ability's `returnToHand`
        * cost: that ability on the stack, which records what the returned
        * creature was attacking (`LastKnownRefs.returnedAttacking`). */
@@ -2585,6 +2601,10 @@ export type AwaitingDecision =
        * discards a card") are its controller's, with the chooser as
        * `"that-player"`. Omitted = the chooser's. */
       readonly modesController?: PlayerId;
+      /** A secret vote's question (rule 701.38 — secret council): the answer
+       * is kept out of the event log, so no other player learns it before
+       * the votes are revealed together. */
+      readonly secret?: boolean;
       /** The enclosing ability's own already-chosen targets, forwarded to the
        * modes (and to `onDecline`) — a `may`/`modal` effect doesn't choose
        * new targets itself, so a mode referencing `target: 0` means "the
@@ -3609,6 +3629,11 @@ export interface GameState {
    * chosen to keep so far (a token stack once per member kept), read and
    * cleared as the effect resumes. */
   keptByChoice?: ObjectId[];
+  /** Votes being cast in a resolving `vote` (rule 701.38), by the source
+   * whose spell or ability holds it, until every one is in and the
+   * `votes-finished` event shows them. Not in any player's view, so a secret
+   * vote stays secret until then. */
+  voting?: Record<ObjectId, { readonly secret: boolean; readonly votes: readonly Vote[] }>;
   /** Draws waiting behind a dredge question (rule 702.52): the rest of an
    * instruction's draws, each made — and offered dredge again — one at a
    * time once the question before it is answered (the ruling). */

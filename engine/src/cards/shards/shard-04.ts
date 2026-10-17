@@ -167,6 +167,7 @@ import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
+import _poolHorsesOfTheBruinen from "../pool/horses-of-the-bruinen.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
@@ -236,6 +237,7 @@ import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
+import _poolNimbleHobbit from "../pool/nimble-hobbit.js";
 import _poolNineFingersKeene from "../pool/nine-fingers-keene.js";
 import _poolNirkanaAssassin from "../pool/nirkana-assassin.js";
 import _poolNivMizzetVisionary from "../pool/niv-mizzet-visionary.js";
@@ -612,6 +614,7 @@ const shard: CardShard = {
     _poolHornOfGreed,
     _poolHornOfValhalla,
     _poolHornetCobra,
+    _poolHorsesOfTheBruinen,
     _poolHulkingGoblin,
     _poolHumongulus,
     _poolHydraInfiltration,
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolMoxJet,
     _poolNeverwinterDryad,
     _poolNimbleBladeKhenra,
+    _poolNimbleHobbit,
     _poolNineFingersKeene,
     _poolNirkanaAssassin,
     _poolNivMizzetVisionary,

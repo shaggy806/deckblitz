@@ -104,6 +104,7 @@ import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
 import _poolDrowned from "../pool/drowned.js";
+import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
@@ -195,6 +196,7 @@ import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolLakeTownLookout from "../pool/lake-town-lookout.js";
 import _poolLeechriddenSwamp from "../pool/leechridden-swamp.js";
 import _poolLegionExtruder from "../pool/legion-extruder.js";
+import _poolLegolasCounterOfKills from "../pool/legolas-counter-of-kills.js";
 import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
@@ -228,6 +230,7 @@ import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
+import _poolMotivatedPony from "../pool/motivated-pony.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
@@ -279,6 +282,7 @@ import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
+import _poolQuarrelsEnd from "../pool/quarrels-end.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRagingMinotaur from "../pool/raging-minotaur.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
@@ -314,6 +318,7 @@ import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRustedSlasher from "../pool/rusted-slasher.js";
 import _poolSabotender from "../pool/sabotender.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
+import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
@@ -395,6 +400,7 @@ import _poolTitanicGrowth from "../pool/titanic-growth.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
+import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
@@ -551,6 +557,7 @@ const shard: CardShard = {
     _poolDrossRipper,
     _poolDrownInDreams,
     _poolDrowned,
+    _poolDunedainBlade,
     _poolEarthrumbler,
     _poolEiganjoDynastorian,
     _poolElminstersSimulacrum,
@@ -642,6 +649,7 @@ const shard: CardShard = {
     _poolLakeTownLookout,
     _poolLeechriddenSwamp,
     _poolLegionExtruder,
+    _poolLegolasCounterOfKills,
     _poolLeonardoCuttingEdge,
     _poolLeoninBattlemage,
     _poolLeoninElder,
@@ -675,6 +683,7 @@ const shard: CardShard = {
     _poolMonasteryMessenger,
     _poolMoriaMarauder,
     _poolMortalsArdor,
+    _poolMotivatedPony,
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
@@ -726,6 +735,7 @@ const shard: CardShard = {
     _poolPryingBlade,
     _poolPygmyPyrosaur,
     _poolQuagFeast,
+    _poolQuarrelsEnd,
     _poolQumulox,
     _poolRagingMinotaur,
     _poolRakdosRagemutt,
@@ -761,6 +771,7 @@ const shard: CardShard = {
     _poolRustedSlasher,
     _poolSabotender,
     _poolSaguPummeler,
+    _poolSailIntoTheWest,
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,
@@ -842,6 +853,7 @@ const shard: CardShard = {
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,
+    _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,
     _poolTrynnChampionOfFreedom,

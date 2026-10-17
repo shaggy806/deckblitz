@@ -102,6 +102,7 @@ import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
+import _poolEastMarkCavalier from "../pool/east-mark-cavalier.js";
 import _poolEbonStronghold from "../pool/ebon-stronghold.js";
 import _poolEchoingAssault from "../pool/echoing-assault.js";
 import _poolEcologistsTerrarium from "../pool/ecologists-terrarium.js";
@@ -136,8 +137,10 @@ import _poolForceOfSavagery from "../pool/force-of-savagery.js";
 import _poolForcedRetreat from "../pool/forced-retreat.js";
 import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
 import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
+import _poolFriendlyRivalry from "../pool/friendly-rivalry.js";
 import _poolFumeSpitter from "../pool/fume-spitter.js";
 import _poolFuturistSentinel from "../pool/futurist-sentinel.js";
+import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
@@ -155,6 +158,7 @@ import _poolGreatDivideGuide from "../pool/great-divide-guide.js";
 import _poolGrimJavelineer from "../pool/grim-javelineer.js";
 import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
+import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
@@ -407,6 +411,7 @@ import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
 import _poolTrustyMachete from "../pool/trusty-machete.js";
+import _poolTruthOrConsequences from "../pool/truth-or-consequences.js";
 import _poolTurtleBlimp from "../pool/turtle-blimp.js";
 import _poolTwinmawStormbrood from "../pool/twinmaw-stormbrood.js";
 import _poolTyriteSanctum from "../pool/tyrite-sanctum.js";
@@ -561,6 +566,7 @@ const shard: CardShard = {
     _poolDrumhunter,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
+    _poolEastMarkCavalier,
     _poolEbonStronghold,
     _poolEchoingAssault,
     _poolEcologistsTerrarium,
@@ -595,8 +601,10 @@ const shard: CardShard = {
     _poolForcedRetreat,
     _poolForgottenSentinel,
     _poolFrenziedTrapbreaker,
+    _poolFriendlyRivalry,
     _poolFumeSpitter,
     _poolFuturistSentinel,
+    _poolGaladrielElvenQueen,
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,
     _poolGhaltaTheImmovable,
@@ -614,6 +622,7 @@ const shard: CardShard = {
     _poolGrimJavelineer,
     _poolGrimclawBats,
     _poolGrixisBattlemage,
+    _poolGrondTheGatebreaker,
     _poolGuidelightSynergist,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
@@ -866,6 +875,7 @@ const shard: CardShard = {
     _poolTrophyMage,
     _poolTrueConviction,
     _poolTrustyMachete,
+    _poolTruthOrConsequences,
     _poolTurtleBlimp,
     _poolTwinmawStormbrood,
     _poolTyriteSanctum,

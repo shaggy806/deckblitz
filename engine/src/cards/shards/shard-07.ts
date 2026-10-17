@@ -54,6 +54,7 @@ import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
+import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
@@ -535,6 +536,7 @@ const shard: CardShard = {
     _poolChishiroTheShatteredBlade,
     _poolChitinGravestalker,
     _poolCircuitMender,
+    _poolCirithUngolPatrol,
     _poolClockworkPercussionist,
     _poolCollectorOuphe,
     _poolColossapede,

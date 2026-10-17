@@ -25,6 +25,7 @@ import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
 import _poolAscendantDustspeaker from "../pool/ascendant-dustspeaker.js";
+import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
@@ -480,6 +481,7 @@ const shard: CardShard = {
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
     _poolAscendantDustspeaker,
+    _poolAssaultOnOsgiliath,
     _poolAssaultStrobe,
     _poolAstarionTheDecadent,
     _poolAudaciousThief,

@@ -114,6 +114,7 @@ import _poolDoomedTraveler from "../pool/doomed-traveler.js";
 import _poolDoubleVision from "../pool/double-vision.js";
 import _poolDowsingDagger from "../pool/dowsing-dagger.js";
 import _poolDragonEngine from "../pool/dragon-engine.js";
+import _poolDreadfulAsTheStorm from "../pool/dreadful-as-the-storm.js";
 import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
 import _poolDusyutEarthcarver from "../pool/dusyut-earthcarver.js";
@@ -241,6 +242,7 @@ import _poolMegrim from "../pool/megrim.js";
 import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
 import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
+import _poolMinasTirithGarrison from "../pool/minas-tirith-garrison.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
@@ -251,6 +253,7 @@ import _poolMonstrousGrowth from "../pool/monstrous-growth.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
 import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
 import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
+import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
@@ -279,6 +282,7 @@ import _poolPettyTheft from "../pool/petty-theft.js";
 import _poolPhotonMightyMarvel from "../pool/photon-mighty-marvel.js";
 import _poolPhyrexianBroodlings from "../pool/phyrexian-broodlings.js";
 import _poolPipBoy3000 from "../pool/pip-boy-3000.js";
+import _poolPippinsBravery from "../pool/pippins-bravery.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
 import _poolPowerFist from "../pool/power-fist.js";
@@ -336,6 +340,7 @@ import _poolScreechingBuzzard from "../pool/screeching-buzzard.js";
 import _poolScreechingSkaab from "../pool/screeching-skaab.js";
 import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
 import _poolSearingWind from "../pool/searing-wind.js";
+import _poolSecondBreakfast from "../pool/second-breakfast.js";
 import _poolSeersSundial from "../pool/seers-sundial.js";
 import _poolSeizeTheSpoils from "../pool/seize-the-spoils.js";
 import _poolSenateGriffin from "../pool/senate-griffin.js";
@@ -420,6 +425,7 @@ import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
 import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
+import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
@@ -445,6 +451,7 @@ import _poolWallOfSwords from "../pool/wall-of-swords.js";
 import _poolWanderbrineTrapper from "../pool/wanderbrine-trapper.js";
 import _poolWanderingTombshell from "../pool/wandering-tombshell.js";
 import _poolWarOfTheLastAlliance from "../pool/war-of-the-last-alliance.js";
+import _poolWarbeastOfGorgoroth from "../pool/warbeast-of-gorgoroth.js";
 import _poolWasteNot from "../pool/waste-not.js";
 import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
 import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
@@ -588,6 +595,7 @@ const shard: CardShard = {
     _poolDoubleVision,
     _poolDowsingDagger,
     _poolDragonEngine,
+    _poolDreadfulAsTheStorm,
     _poolDreamSeizer,
     _poolDrogskolShieldmate,
     _poolDusyutEarthcarver,
@@ -715,6 +723,7 @@ const shard: CardShard = {
     _poolMengHuosHorde,
     _poolMesaCavalier,
     _poolMidnightGuard,
+    _poolMinasTirithGarrison,
     _poolMindwhisker,
     _poolMirrormereGuardian,
     _poolMjolnirsMight,
@@ -725,6 +734,7 @@ const shard: CardShard = {
     _poolMoonCircuitHacker,
     _poolMoonVigilAdherents,
     _poolMorcantsLoyalist,
+    _poolMordorTrebuchet,
     _poolMortivore,
     _poolMourning,
     _poolNaturesLore,
@@ -753,6 +763,7 @@ const shard: CardShard = {
     _poolPhotonMightyMarvel,
     _poolPhyrexianBroodlings,
     _poolPipBoy3000,
+    _poolPippinsBravery,
     _poolPlatedOnslaught,
     _poolPlunderingPirate,
     _poolPowerFist,
@@ -810,6 +821,7 @@ const shard: CardShard = {
     _poolScreechingSkaab,
     _poolScroungerOfSouls,
     _poolSearingWind,
+    _poolSecondBreakfast,
     _poolSeersSundial,
     _poolSeizeTheSpoils,
     _poolSenateGriffin,
@@ -894,6 +906,7 @@ const shard: CardShard = {
     _poolTwistedLandscape,
     _poolTwofoldIntent,
     _poolUchbenbakTheGreatMistake,
+    _poolUglukOfTheWhiteHand,
     _poolUltramarinesHonourGuard,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
@@ -919,6 +932,7 @@ const shard: CardShard = {
     _poolWanderbrineTrapper,
     _poolWanderingTombshell,
     _poolWarOfTheLastAlliance,
+    _poolWarbeastOfGorgoroth,
     _poolWasteNot,
     _poolWaveskimmerAven,
     _poolWeeDragonauts,

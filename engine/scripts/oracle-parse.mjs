@@ -284,6 +284,13 @@ function keywordPart(part) {
     return { static: [...v.static], triggered: [...v.triggered] };
   }
   if ((m = new RegExp(`^suspend (\\d+)—${COST}$`, "i").exec(p))) return { card: { suspend: { n: Number(m[1]), cost: m[2] } } };
+  // Devour N, devour land N, devour Food N (rule 702.82): what may be eaten.
+  if ((m = /^devour (?:(land|food) )?(\d+)$/i.exec(p))) {
+    const quality = m[1]?.toLowerCase();
+    const filter =
+      quality === "land" ? { type: "land" } : quality === "food" ? { type: "artifact", subtype: "Food" } : { type: "creature" };
+    return { card: { devour: { multiplier: Number(m[2]), filter } } };
+  }
   // Landcycling and typecycling: cycling that searches (Ash Barrens, Eagles of the North).
   if ((m = new RegExp(`^basic landcycling ${COST}$`, "i").exec(p))) {
     return { card: { cycling: { cost: m[1], search: { supertype: "basic", type: "land" } } } };
@@ -958,9 +965,19 @@ export function parseSentence(sentence, ctx) {
   }
   const KWS = `${KW}(?:(?:, | and |, and )${KW})*`;
   if ((m = re(`create ${N} (tapped )?([^"“]+?) tokens?(?: with (${KWS}))?`).exec(s)) && !/ or | and an? |\btokens? and /.test(m[3])) {
+    // "An X/X green Treefolk": the X the spell was cast with, as its base
+    // P/T. An X defined some other way ("where X is …") isn't read.
+    const xx = /^X\/X /.test(m[3]);
+    if (xx && /where X is/i.test(s)) return null;
     const name = ctx.tokenFor?.(`${m[3]}${m[4] ? ` with ${m[4]}` : ""}`) ?? null;
     if (name === null) return null;
-    return { kind: "create-token", token: name, count: amount(m[1]), ...(m[2] ? { tapped: true } : {}) };
+    return {
+      kind: "create-token",
+      token: name,
+      count: amount(m[1]),
+      ...(m[2] ? { tapped: true } : {}),
+      ...(xx ? { basePt: { power: "x", toughness: "x" } } : {}),
+    };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
   // Amass [type] N (rule 701.47): "Amass Orcs 2." — the type singular.

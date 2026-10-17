@@ -21,6 +21,7 @@ import _poolArchonOfJustice from "../pool/archon-of-justice.js";
 import _poolArgivianRestoration from "../pool/argivian-restoration.js";
 import _poolArmoryPaladin from "../pool/armory-paladin.js";
 import _poolArtifistAcumen from "../pool/artifist-acumen.js";
+import _poolArwensGift from "../pool/arwens-gift.js";
 import _poolAspectOfLamprey from "../pool/aspect-of-lamprey.js";
 import _poolAthreosGodOfPassage from "../pool/athreos-god-of-passage.js";
 import _poolAuguryOwl from "../pool/augury-owl.js";
@@ -106,6 +107,7 @@ import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
 import _poolDrownyardLurker from "../pool/drownyard-lurker.js";
+import _poolDunedainRangers from "../pool/dunedain-rangers.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
@@ -119,6 +121,7 @@ import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
+import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
@@ -342,6 +345,7 @@ import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
 import _poolSnareTheSkies from "../pool/snare-the-skies.js";
 import _poolSoltariTrooper from "../pool/soltari-trooper.js";
+import _poolSongOfEarendil from "../pool/song-of-earendil.js";
 import _poolSophiaDoggedDetective from "../pool/sophia-dogged-detective.js";
 import _poolSpectacularSpiderMan from "../pool/spectacular-spider-man.js";
 import _poolSpellbook from "../pool/spellbook.js";
@@ -351,6 +355,7 @@ import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSteelbaneHydra from "../pool/steelbane-hydra.js";
 import _poolSternDismissal from "../pool/stern-dismissal.js";
 import _poolSternProctor from "../pool/stern-proctor.js";
+import _poolStewTheConeys from "../pool/stew-the-coneys.js";
 import _poolStormchaserMage from "../pool/stormchaser-mage.js";
 import _poolStrixLookout from "../pool/strix-lookout.js";
 import _poolSubterraneanSpirit from "../pool/subterranean-spirit.js";
@@ -466,6 +471,7 @@ const shard: CardShard = {
     _poolArgivianRestoration,
     _poolArmoryPaladin,
     _poolArtifistAcumen,
+    _poolArwensGift,
     _poolAspectOfLamprey,
     _poolAthreosGodOfPassage,
     _poolAuguryOwl,
@@ -551,6 +557,7 @@ const shard: CardShard = {
     _poolDregReaver,
     _poolDrossHopper,
     _poolDrownyardLurker,
+    _poolDunedainRangers,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
     _poolEarthshakingSi,
@@ -564,6 +571,7 @@ const shard: CardShard = {
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
+    _poolErestorOfTheCouncil,
     _poolEviscerate,
     _poolExperimentalArmor,
     _poolFadeFromMemory,
@@ -787,6 +795,7 @@ const shard: CardShard = {
     _poolSlipperyKarst,
     _poolSnareTheSkies,
     _poolSoltariTrooper,
+    _poolSongOfEarendil,
     _poolSophiaDoggedDetective,
     _poolSpectacularSpiderMan,
     _poolSpellbook,
@@ -796,6 +805,7 @@ const shard: CardShard = {
     _poolSteelbaneHydra,
     _poolSternDismissal,
     _poolSternProctor,
+    _poolStewTheConeys,
     _poolStormchaserMage,
     _poolStrixLookout,
     _poolSubterraneanSpirit,

@@ -45,6 +45,7 @@ import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingTanglewurm from "../pool/bellowing-tanglewurm.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
+import _poolBitterDownfall from "../pool/bitter-downfall.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
@@ -156,8 +157,10 @@ import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
+import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
+import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
@@ -224,6 +227,7 @@ import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
+import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
 import _poolLeeringOnlooker from "../pool/leering-onlooker.js";
@@ -536,6 +540,7 @@ const shard: CardShard = {
     _poolBelbesPercher,
     _poolBellowingTanglewurm,
     _poolBillowingShriekmass,
+    _poolBitterDownfall,
     _poolBlanchwoodTreefolk,
     _poolBlazingBomb,
     _poolBlazingFiresinger,
@@ -647,8 +652,10 @@ const shard: CardShard = {
     _poolFlowstoneStrike,
     _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
+    _poolFrodoDeterminedHero,
     _poolFugitiveDroid,
     _poolFurnaceSpirit,
+    _poolGaladrielGiftGiver,
     _poolGarrisonCat,
     _poolGenerousRevival,
     _poolGeodeGrotto,
@@ -715,6 +722,7 @@ const shard: CardShard = {
     _poolKrangUtromWarlord,
     _poolKraulStinger,
     _poolKruinStriker,
+    _poolLabyrinthOfSkophos,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,
     _poolLeeringOnlooker,

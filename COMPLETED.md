@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The Lord of the Rings: Tales of Middle-earth and its Commander set, both whole** (batch 96):
+  124 of 169 cards, and 23 older ones the same features unblocked — with voting (rule 701.38: the
+  `vote` effect over options, permanents and players, open or secret, additional votes, "more
+  votes", "for each vote", and "whenever players finish voting"), keyword loss in layer 6 (613.7),
+  removing a creature from combat (506.4) and devour (702.82) built (2026-10-17).
 - **Commander Masters, whole** (batch 95): 6 of its last 12 — four Slivers' granted abilities,
   Gatewatch Beacon and Nyxborn Behemoth (2026-10-17).
 - **Wilds of Eldraine and its Commander set, both whole** (batch 94): 147 of 182 cards — the 173

@@ -2934,4 +2934,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [{ name: 'Four Knocks', counters: { time: 3 } }] },
     }),
   ),
+  preset(
+    'Trap the Trespassers (secret council — a vote for permanents)',
+    board({
+      you: { bf: ['Island*3'], hand: ['Trap the Trespassers'] },
+      opp: { bf: ['Grizzly Bears', 'Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Plea for Power (will of the council — named options)',
+    board({
+      you: { bf: ['Island*4', 'Tivit, Seller of Secrets'], hand: ['Plea for Power'] },
+    }),
+  ),
 ]

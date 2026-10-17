@@ -1043,6 +1043,7 @@ Neither goes on the stack yet (§15, "Partial").
 | `grant-activated` / `grant-activated-all` | `target` or `filter`, `ability`, `duration` | The activated-ability twins of `grant-triggered` and `grant-triggered-all`: Rain of Filth's "until end of turn, lands you control gain 'Sacrifice this land: Add {B}.'" is `grant-activated-all` over `{ type: "land", controlledBy: "you" }`. A granted mana ability pays for things like a printed one — or, like any mana ability the auto-payer can't plan with (no `{T}`, here), is activated by hand. The ongoing equivalent is `StaticAbility.grantsActivated`. Keep the ability's `resolve: null`: it lives in the game state. |
 | `grant-triggered-all` | `filter`, `ability`, `duration` | The mass form of `grant-triggered`: every permanent matching `filter` gains the ability — Azlask, the Swelling Scourge's "Scions and Spawns you control gain … annihilator 1 until end of turn" (`ability: annihilator(1)`). Matches are fixed as it resolves; a token stack gains it whole. |
 | `grant-keyword-all` | `filter`, `keyword`, `duration`, `exceptSource?` | Overrun's trample. `exceptSource` is "**other** Spiders you control gain …" (Cosmic Spider-Man). Hits what matches as it resolves (rule 611.2c) — a creature arriving later doesn't gain it. |
+| `lose-keywords` | `target` or `filter` (+ `controlledByTarget?`), `keywords`, `duration` | "Target creature **loses flying** until end of turn" (Emerald Charm), "permanents your opponents control lose hexproof and indestructible until end of turn" (Shadowspear — a `filter`, what matches as it resolves, rule 611.2c), "creatures **target opponent** controls lose first strike" (Quick Draw — `controlledByTarget`, the filter read from that player's side). Layer 6 at its timestamp (rule 613.7): it takes away what had the keyword before — printed or granted earlier — and a grant after it gives it back. A static's "equipped creature … loses flying" is `loseKeywords` on the static (Starforged Sword), at the Equipment's timestamp (when it became attached, 613.7e). Ward and protection aren't keywords here (ward is a trigger, protection its own static), so "loses ward"/"loses protection" is not yet. |
 | `connive` | `target`, `amount?` | Connive (rule 701.50): the permanent's controller draws `amount` (1 by default; "connives X" is an amount), discards that many, then puts a +1/+1 counter on it for each nonland card discarded — by its own discards only, so two connives in one resolution don't count each other's. A permanent that has left is connived with by its last controller and gets no counter (701.50b). Ledger Shredder (`target: "source"`), Raffine, Scheming Seer, Spymaster's Vault. |
 | `for-each-convoker` | `effect` | `effect` for each creature that convoked the resolving spell (rule 702.51c) — for a copy of it, the original's (rule 707.10: an effect of a copy that refers to objects used to pay its costs uses the original's) — bound to target 0 — Lethal Scheme's "each creature that convoked this spell connives" is `{ kind: "for-each-convoker", effect: { kind: "connive", target: 0 } }`. One at a time in the order the spell's controller chooses (a `choose-modes` naming each, asked while more than one is left — the ruling), each step done before the next is asked. One that has left the battlefield since — or is back as a new object — is only read, as it last existed: it still connives (its controller draws and discards) with no counter (rule 701.50b). The spell records its convokers as it's cast (`GameObject.convokedBy`), and a copy carries them (`SpellSnapshot.convokedBy`). |
 | `add-counter` | `target`, `counter` (string), `amount`, `by?` | `by` (an `EffectPlayerRef`) is who puts them when the card says someone else does — Alexios's "that player … puts a +1/+1 counter on it" is `by: "active-player"` — which a "whenever you put … counters" trigger reads; the effect's controller otherwise. `counter: "+1/+1"` etc. A **keyword counter** (rule 122.1b) is a counter named for the keyword, spelled as the engine's `Keyword` — `"flying"`, `"first-strike"`, `"double-strike"`, `"deathtouch"`, `"haste"`, `"hexproof"`, `"indestructible"`, `"lifelink"`, `"menace"`, `"reach"`, `"shadow"`, `"trample"`, `"vigilance"` — and the permanent has that keyword while the counter is on it (layer 6; `KEYWORD_COUNTERS` in `characteristics.ts` — Minas Morgul, Dark Fortress's shadow counter). Decayed and exalted counters aren't modeled. A **stun counter** (rule 122.1d) is `"stun"`: whenever a permanent with one would become untapped — in its untap step or by an effect — one is removed instead (`Game.untapUnlessStunned`; Pugnacious Hammerskull, Baloth Prime's entering six by an `enters-battlefield` replacement's `counters`). |
@@ -1690,16 +1691,45 @@ exist (rule 111.7), so neither comes back.
   **villainous choice** (rule 701.56 — "each opponent faces a villainous
   choice — …, or …"): each of them must pick one, and the one picked is the
   **controller's** effect about them ("you draw a card"; "that player
-  discards a card" is `who: "that-player"`). A **vote** (rule 701.38) is
-  `choices` whose effects do nothing, with `startingWithYou: true` — asked in
-  turn order from the effect's controller, each player knowing the votes
-  before theirs, nobody abstaining — and the steps after it read the tally
-  with the `{ votesFor: i }` amount (choice `i`'s votes in this resolution):
-  Selvala's Stampede's "starting with you, each player votes for wild or free.
-  Reveal … a creature card for each wild vote … a permanent card from your
-  hand … for each free vote" (with `reveal-until-count` and a hand
-  `look-and-choose`). Not yet: a vote for objects (Council's Judgment) or a
-  player with extra votes (rule 701.38d).
+  discards a card" is `who: "that-player"`). A vote is its own effect,
+  `vote` (below), not a `choices`.
+- **`vote { for, secret? }`** — a vote (rule 701.38): each player still in
+  the game votes, in turn order from the effect's controller ("will of the
+  council", "council's dilemma" — "starting with you, each player votes …"),
+  each seeing the votes before theirs; `secret: true` is secret council
+  ("each player secretly votes …, then those votes are revealed"): no vote
+  shows until all are revealed together. `for` is `{ options: ["time",
+  "knowledge"] }`, `{ permanent: <filter read from your side>, upToOne? }`
+  (Council's Judgment's "a nonland permanent you don't control" — not a
+  target, so hexproof doesn't stop it; Vault 11's "up to one creature") or
+  `{ player: "any" | "another" }`. A player with a "while voting, you may
+  vote an additional time" (`static: [{ votesAdditionalTime: true }]` — Tivit)
+  may cast one more vote per such permanent (701.38d). The steps after it
+  read the votes:
+  - `{ votesFor: i }` — option `i`'s votes (Selvala's Stampede's "for each
+    wild vote" with `reveal-until-count`);
+  - condition `{ kind: "vote-won", option: i }` — "if time gets **more
+    votes**", more than each other option; "or the vote is tied" is its
+    `else` (Plea for Power, Sail into the West); `{ kind: "votes-cast" }` —
+    any vote at all (Vault 11's "if no creature got votes" under a `not`);
+  - `for-each-vote { option?, effect }` — "for each evidence vote,
+    investigate" (Tivit), once per vote, voters in turn order from the
+    active player, `"that-player"` the voter;
+  - `for-each-voted { which: "most" | "voted" | "unvoted", effect,
+    simultaneous? }` — "exile each permanent with the most votes or tied"
+    (Council's Judgment — target slot 0 is the permanent), "for each creature
+    with one or more votes, put that many stun counters on it" (Trap the
+    Trespassers, with `{ votesReceived: 0 }`), "each player draws a card for
+    each vote they received … each player who received no votes may …"
+    (Círdan the Shipwright — `"that-player"`, `{ votesReceived:
+    "that-player" }`).
+  "Whenever players finish voting" is the `players-finish-voting` trigger,
+  whose ability reads that vote: the `"opponents-who-voted-with-you"` and
+  `"you-and-opponents-who-voted-with-you"` scopes and `{
+  opponentsVotedOtherwise: true }` (Erestor of the Council, Model of Unity).
+  Not yet: a voter's own choice after the vote ("the voter chooses a
+  creature they control" — Elrond of the White Council), "a permanent owned
+  by the voter" (Expropriate).
 - **`choose-creature-type { then }`** — "Choose a creature type. [then …]"
   as a spell resolves (rule 205.3m — Crippling Fear, Distant Melody). The
   controller picks from the full catalog (`engine/src/creature-types.ts`,

@@ -4912,3 +4912,27 @@ counter and each suspended card you own, add one, remove one, or neither, as one
   row for the suspended Rift Bolt only. After Confirm: Rotating Fireplace has 2, Four Knocks 1, and
   — once the draw is done — you're offered Rift Bolt's free cast. Clear and Confirm with nothing
   picked both work. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Trap the Trespassers (secret council — a vote for permanents)
+
+*New player decision* — a vote (rule 701.38): each player votes for a permanent, in turn; in a
+secret vote no one sees a vote until all are revealed together
+
+- **Setup:** Your precombat main. Your battlefield: three Islands; in hand Trap the Trespassers.
+  Bob has Grizzly Bears and Serra Angel.
+- **Do:** Cast Trap the Trespassers. Vote for Serra Angel on the board; let Bob vote.
+- **Check:** The vote is picked on the board, only Bob's creatures offered. The log shows no
+  vote until a single "votes revealed" line lists both; then each creature voted for has that
+  many stun counters and is tapped. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Plea for Power (will of the council — named options)
+
+*New player decision* — an open vote: starting with you, each player votes for "time" or
+"knowledge", each seeing the votes before theirs
+
+- **Setup:** Your precombat main. Your battlefield: four Islands and Tivit, Seller of Secrets; in
+  hand Plea for Power.
+- **Do:** Cast Plea for Power. Vote "time"; take Tivit's additional vote (vote "knowledge").
+- **Check:** You're asked twice, the second time with a way to decline; each vote shows in the
+  log as it's cast. A tie draws three cards; "time" with more votes queues the extra turn. Check
+  at ~768px tall, in a 2- and a 4-player room.

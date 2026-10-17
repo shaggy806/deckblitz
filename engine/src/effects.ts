@@ -23,7 +23,8 @@ import type { AggregateSpec, CardFilter } from "./filter.js";
 import type { Color, ManaType, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, isCreatureType } from "./subtypes.js";
-import type { RandomPick } from "./events.js";
+import { sameVoteChoice } from "./events.js";
+import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
   DelayedTriggerTiming,
@@ -512,10 +513,21 @@ export type EffectAmount =
    * made it gave it, or its subtypes plus "Token" (rule 111.4) — "Elf
    * Token" — whatever its registry key; a copy's is what it copies. */
   | { readonly distinctTokenNames: CardFilter }
-  /** How many votes the option at this index got in this resolution — a
-   * vote is an `each-player-may` with `choices` and `startingWithYou` (rule
-   * 701.38): Selvala's Stampede's "a creature card for each wild vote". */
+  /** How many votes the option at this index got in the `vote` this
+   * resolution held (rule 701.38): Selvala's Stampede's "a creature card for
+   * each wild vote". In a "whenever players finish voting" trigger, the
+   * votes of the vote that fired it. */
   | { readonly votesFor: number }
+  /** How many votes a player or permanent received in the `vote` this
+   * resolution held — `"that-player"` (Círdan the Shipwright's "each player
+   * draws a card for each vote they received", under a `for-each-voted`),
+   * or the permanent in a target slot (Trap the Trespassers' "put that many
+   * stun counters on it"). */
+  | { readonly votesReceived: "that-player" | number }
+  /** "The number of opponents who voted for a choice you didn't vote for"
+   * (Erestor of the Council): each opponent with a vote for a choice none of
+   * the effect's controller's votes was for, counted once. */
+  | { readonly opponentsVotedOtherwise: true }
   /** How many card types there are among cards in graveyards matching a
    * filter — each type once, however many cards have it, and a card with two
    * types gives both (Tarmogoyf's "card types among cards in all graveyards"
@@ -896,6 +908,16 @@ export type PlayerScope =
    * control a creature attacking them (the Curses' ruling), read as it
    * resolves: with none attacking them any more, only the controller. */
   | "you-and-opponents-attacking-trigger-player"
+  /** "Each opponent who voted for a choice you voted for" (Erestor of the
+   * Council): each opponent with a vote for a choice one of the effect's
+   * controller's votes was for, in turn order — read off the `vote` this
+   * resolution held, or the one that fired a "whenever players finish
+   * voting" trigger. Nobody, with no vote. */
+  | "opponents-who-voted-with-you"
+  /** "**You and** each opponent who voted for a choice you voted for" (Model
+   * of Unity): the effect's controller with those opponents, in turn order
+   * from the active player. */
+  | "you-and-opponents-who-voted-with-you"
   /** "That player" in an `"each-player-may"`'s `ifDid` / `ifDidnt`: the
    * player the follow-up is about. Elsewhere, the same as
    * `"trigger-player"`. Not a target. */
@@ -2947,6 +2969,38 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Remove target attacking or blocking creature from combat" (rule
+       * 506.4 — Labyrinth of Skophos): it stops being an attacking,
+       * blocking, blocked or unblocked creature; a creature it was blocking
+       * stays blocked (509.1h). Nothing for one not in combat.
+       */
+      readonly kind: "remove-from-combat";
+      readonly target: EffectTargetRef;
+    }
+  | {
+      /**
+       * "Target creature **loses flying** until end of turn" (Emerald Charm):
+       * the keywords are taken away in layer 6 at this effect's timestamp
+       * (rule 613.7) — from what had them before, printed or granted earlier;
+       * a grant after it gives one back. `target` is one permanent; `filter`
+       * instead is each permanent matching it as this resolves (rule 611.2c
+       * — "permanents your opponents control lose hexproof and
+       * indestructible until end of turn", Shadowspear), all with one
+       * timestamp.
+       */
+      readonly kind: "lose-keywords";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      /** With `filter`: read from the side of the player in this target slot
+       * — Quick Draw's "creatures **target opponent** controls" is `{ type:
+       * "creature", controlledBy: "you" }` here. Nothing when that target
+       * has gone illegal (rule 608.2b). */
+      readonly controlledByTarget?: number;
+      readonly keywords: readonly Keyword[];
+      readonly duration: PtDuration;
+    }
+  | {
+      /**
        * A continuous effect for the controller, for a while — an emblem that
        * expires, at this turn's cleanup (`"end-of-turn"`) or as their next
        * turn begins (`"until-your-next-turn"`). `reduceSpells` is "spells you
@@ -3890,6 +3944,92 @@ export type EffectSpec =
       readonly remaining?: readonly PlayerId[];
     }
   | {
+      /**
+       * A vote (rule 701.38): each player still in the game votes for one of
+       * `for`'s choices, starting with this effect's controller and going on
+       * in turn order (701.38a) — "Will of the council — Starting with you,
+       * each player votes for time or knowledge" (Plea for Power). A player
+       * who controls a "while voting, you may vote an additional time"
+       * (`StaticAbility.votesAdditionalTime`) may cast one more vote for each,
+       * asked straight after their first (701.38d).
+       *
+       * Every vote is in by the time the next step of the effect happens,
+       * which reads them: `{ votesFor }`, `{ votesReceived }`, the `vote-won`
+       * and `votes-cast` conditions, `for-each-vote` and `for-each-voted`.
+       * Once everyone has voted a `votes-finished` event fires "whenever
+       * players finish voting" (Erestor of the Council).
+       *
+       * `secret` is secret council's "each player secretly votes …, then
+       * those votes are revealed" (Mob Verdict): nobody sees a vote until
+       * they're all cast, and then all at once.
+       */
+      readonly kind: "vote";
+      readonly for:
+        /** Named options — "votes for fellowship or aid". */
+        | { readonly options: readonly string[] }
+        /** A permanent matching `permanent`, read from the effect's
+         * controller's side — Council's Judgment's "a nonland permanent you
+         * don't control". `upToOne` is Vault 11's "votes for **up to one**
+         * creature": a player may cast no vote. A player with nothing to
+         * vote for casts none. */
+        | { readonly permanent: CardFilter; readonly upToOne?: boolean }
+        /** A player still in the game — `"another"`: other than the voter
+         * (Mob Verdict's "votes for another player"). */
+        | { readonly player: "any" | "another" };
+      readonly secret?: boolean;
+      /** Set by the engine on the copy it parks between one vote and the
+       * next: the votes still to ask for, each with whether it's an
+       * additional, optional one. */
+      readonly toAsk?: readonly { readonly player: PlayerId; readonly extra: boolean }[];
+    }
+  | {
+      /** One vote being cast — the effect of the option a voter picks. Built
+       * by the engine, never authored. `choice` `"target"` is the permanent
+       * in target slot 0 (a `vote` for a permanent). */
+      readonly kind: "cast-vote";
+      readonly voter: PlayerId;
+      readonly choice: VoteChoice | "target";
+    }
+  | {
+      /**
+       * Do `effect` once for each vote cast in the `vote` this resolution
+       * held — or only each vote for option `option` — in turn order from
+       * the active player, each voter's votes together (rule 101.4), with
+       * `"that-player"` naming the voter: Expropriate's "for each money
+       * vote, choose a permanent owned by the voter and gain control of it",
+       * Tivit's "for each evidence vote, investigate". As `for-each-player`
+       * does, one stopping to ask is answered before the next goes on.
+       */
+      readonly kind: "for-each-vote";
+      readonly option?: number;
+      readonly effect: EffectSpec;
+    }
+  | {
+      /**
+       * Do `effect` for each player or permanent that the `vote` this
+       * resolution held was for: `"most"` — "each permanent with the most
+       * votes or tied for most votes" (Council's Judgment); `"voted"` —
+       * "for each creature with one or more votes" (Trap the Trespassers);
+       * `"unvoted"` — "each player who received no votes" (Círdan the
+       * Shipwright; players only). A player is `"that-player"` in `effect`,
+       * in turn order; a permanent is target slot 0, still on the
+       * battlefield as the object voted for, in the order first voted for.
+       * `{ votesReceived }` reads how many it got.
+       *
+       * `simultaneous` makes it one instruction, as a `sequence`'s does —
+       * Council's Judgment exiles them all at once. Only where nothing in
+       * `effect` stops to ask.
+       */
+      readonly kind: "for-each-voted";
+      readonly which: "most" | "voted" | "unvoted";
+      readonly effect: EffectSpec;
+      /** Players only: just those in this scope — Mob Verdict's "for each
+       * vote **an opponent** received" (`"each-opponent"`) and "for each
+       * vote **you** received" (`"you"`). */
+      readonly who?: PlayerScope;
+      readonly simultaneous?: boolean;
+    }
+  | {
       /** Create `count` token(s) that are copies of a permanent (rule 707.10 —
        * needed-cards P5b). `of` names what to copy: `"source"` (Scute Swarm —
        * the ability's own permanent), `"trigger-object"` (Miirym — the
@@ -4438,10 +4578,8 @@ export type EffectSpec =
        */
       readonly choices?: readonly ModeOption[];
       /** Ask them in turn order **starting with the effect's controller**
-       * rather than the active player — a vote's "starting with you, each
-       * player votes for wild or free" (rule 701.38a; Selvala's Stampede),
-       * a `choices` each of them must make, read back with the `{ votesFor }`
-       * amount. */
+       * rather than the active player. (A vote — "starting with you, each
+       * player votes …" — is the `vote` effect.) */
       readonly startingWithYou?: boolean;
       readonly ifDid?: EffectSpec;
       readonly ifDidnt?: EffectSpec;
@@ -5136,8 +5274,28 @@ export interface EffectApi {
   colorsAmong(filter: CardFilter, except: readonly ObjectId[]): number;
   /** See the `{ distinctTokenNames }` {@link EffectAmount}. */
   distinctTokenNames(filter: CardFilter): number;
-  /** See the `{ votesFor }` {@link EffectAmount}. */
-  votesFor(option: number): number;
+  /** The votes of the `vote` this resolution held, in the order cast — or,
+   * in a "whenever players finish voting" trigger, of the vote that fired
+   * it. None, with neither. */
+  votes(): readonly Vote[];
+  /** A `vote` begins: votes cast from now are kept (out of sight, for a
+   * secret one) until `finishVoting`. */
+  beginVoting(secret: boolean): void;
+  /** Ask `player` for one vote in `spec` — `extra` an additional, optional
+   * one (rule 701.38d). Nothing, for a player out of the game or with
+   * nothing to vote for. */
+  askVote(player: PlayerId, spec: Extract<EffectSpec, { kind: "vote" }>, extra: boolean): void;
+  /** Record `voter`'s vote — a `permanent` being one on the battlefield. */
+  castVote(voter: PlayerId, choice: VoteChoice | { readonly permanent: ObjectId }): void;
+  /** Every vote is in: reveal them (a secret vote's) and fire "whenever
+   * players finish voting". */
+  finishVoting(): void;
+  /** How many additional votes `player` may cast — the
+   * `votesAdditionalTime` statics they control. */
+  additionalVotes(player: PlayerId): number;
+  /** Whether a permanent voted for is still on the battlefield as the same
+   * object (rule 400.7). */
+  votedPermanentHere(object: ObjectId, zoneChangeCount: number): boolean;
   /** Reveal from the top of `owner`'s library until `count` cards matching
    * `filter` are revealed — see `"reveal-until-count"`. */
   revealUntilCount(
@@ -5845,6 +6003,16 @@ export interface EffectApi {
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
   splitMana?(ask: ManaSplitAsk): void;
   grantKeyword(target: TargetRef, keyword: Keyword, duration: PtDuration): void;
+  /** See the `"remove-from-combat"` {@link EffectSpec}. */
+  removeFromCombat(target: TargetRef): void;
+  /** See the `"lose-keywords"` {@link EffectSpec}: one permanent, or every
+   * one matching `filter`. */
+  loseKeywords(
+    on: TargetRef | CardFilter,
+    keywords: readonly Keyword[],
+    duration: PtDuration,
+    scopeTo?: PlayerId,
+  ): void;
   /** See the `"grant-triggered"` {@link EffectSpec}. */
   grantTriggered(
     target: TargetRef,
@@ -6642,6 +6810,100 @@ function applyEachPlayerMay(
 }
 
 /**
+ * A `vote` (rule 701.38): one question per vote, each answered before the
+ * next is asked, in turn order from the effect's controller, a player's
+ * additional votes straight after their first (701.38d). The rest is parked
+ * as a copy carrying `toAsk` whenever a question waits for its answer.
+ */
+function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionContext): void {
+  let toAsk = spec.toAsk;
+  if (toAsk === undefined) {
+    ctx.beginVoting(spec.secret === true);
+    toAsk = eachPlayerMayAsks("each-player", ctx, true).flatMap((player) => [
+      { player, extra: false },
+      ...Array.from({ length: ctx.additionalVotes(player) }, () => ({ player, extra: true })),
+    ]);
+  }
+  while (toAsk.length > 0) {
+    const ask = toAsk[0];
+    toAsk = toAsk.slice(1);
+    const parked = ctx.parkedCount();
+    const pendingBefore = ctx.decisionPending();
+    ctx.askVote(ask.player, spec, ask.extra);
+    if (!pendingBefore && ctx.decisionPending()) {
+      ctx.resumeAfterDecisions({ ...spec, toAsk }, parked);
+      return;
+    }
+  }
+  ctx.finishVoting();
+}
+
+/** A `for-each-voted`: the players or permanents the vote was for, by how
+ * many votes each got. */
+function applyForEachVoted(spec: Extract<EffectSpec, { kind: "for-each-voted" }>, ctx: ResolutionContext): void {
+  const votes = ctx.votes();
+  if (spec.which === "unvoted" || votes.some((v) => "player" in v.choice)) {
+    const inGame = ctx.playersInScope("each-player");
+    const scope = spec.who === undefined ? undefined : ctx.playersInScope(spec.who);
+    const received = (player: PlayerId): number =>
+      votes.filter((v) => "player" in v.choice && v.choice.player === player).length;
+    const most = Math.max(0, ...inGame.map(received));
+    const players = inGame.filter((player) => {
+      if (scope !== undefined && !scope.includes(player)) return false;
+      const n = received(player);
+      return spec.which === "unvoted" ? n === 0 : spec.which === "voted" ? n > 0 : n > 0 && n === most;
+    });
+    applyEffectSpec(
+      {
+        kind: "for-each-player",
+        who: "each-player",
+        effect: spec.effect,
+        remaining: players,
+        ...(spec.simultaneous === true ? { simultaneous: true } : {}),
+      },
+      ctx,
+    );
+    return;
+  }
+  // Permanents, in the order first voted for. "The most votes" is counted
+  // over every vote cast, whether or not what got them is still there.
+  const tally: { object: ObjectId; zoneChangeCount: number; votes: number }[] = [];
+  for (const { choice } of votes) {
+    if (!("object" in choice)) continue;
+    const entry = tally.find((t) => t.object === choice.object && t.zoneChangeCount === choice.zoneChangeCount);
+    if (entry !== undefined) entry.votes += 1;
+    else tally.push({ object: choice.object, zoneChangeCount: choice.zoneChangeCount, votes: 1 });
+  }
+  const most = Math.max(0, ...tally.map((t) => t.votes));
+  const picked = tally.filter(
+    (t) =>
+      (spec.which === "voted" || t.votes === most) && ctx.votedPermanentHere(t.object, t.zoneChangeCount),
+  );
+  const each = (): void => {
+    for (const t of picked) applyEffectSpec(spec.effect, ctx.withTargets([{ kind: "object", object: t.object }]));
+  };
+  if (spec.simultaneous === true) ctx.simultaneously(each);
+  else each();
+}
+
+/** The opponents of `you` who voted for a choice one of `you`'s votes was
+ * for (`withYou`), or for a choice none of them was — Erestor of the
+ * Council. In `opponents`' order, each once. */
+export function opponentsVoting(
+  votes: readonly Vote[],
+  you: PlayerId,
+  opponents: readonly PlayerId[],
+  withYou: boolean,
+): PlayerId[] {
+  const mine = votes.filter((v) => v.voter === you).map((v) => v.choice);
+  return opponents.filter((player) =>
+    votes.some(
+      (v) => v.voter === player && mine.some((choice) => sameVoteChoice(choice, v.choice)) === withYou,
+    ),
+  );
+}
+
+/**
  * A `"reveal-until"`: reveal, place the card found, apply `then` to it, then
  * place the rest. Placing it onto the battlefield may stop to ask its "as
  * this enters" choice, and `then` may stop to ask something; either way the
@@ -6920,7 +7182,24 @@ function signedAmountValue(
     return ctx.colorsAmong(amount.colorsAmong, amount.excludeSelf === true ? [ctx.source] : []);
   }
   if ("distinctTokenNames" in amount) return ctx.distinctTokenNames(amount.distinctTokenNames);
-  if ("votesFor" in amount) return ctx.votesFor(amount.votesFor);
+  if ("votesFor" in amount) {
+    return ctx.votes().filter((v) => "option" in v.choice && v.choice.option === amount.votesFor).length;
+  }
+  if ("votesReceived" in amount) {
+    const of = amount.votesReceived;
+    if (of === "that-player") {
+      const player = ctx.playersInScope("that-player")[0];
+      return player === undefined
+        ? 0
+        : ctx.votes().filter((v) => "player" in v.choice && v.choice.player === player).length;
+    }
+    const ref = ctx.targets[of];
+    if (ref?.kind !== "object") return 0;
+    return ctx.votes().filter((v) => "object" in v.choice && v.choice.object === ref.object).length;
+  }
+  if ("opponentsVotedOtherwise" in amount) {
+    return opponentsVoting(ctx.votes(), ctx.controller, ctx.playersInScope("each-opponent"), false).length;
+  }
   if ("cardTypesInGraveyard" in amount) return ctx.cardTypesInGraveyard(amount.cardTypesInGraveyard);
   if ("opponentsAttacked" in amount) return ctx.opponentsAttacked();
   if ("attackingPlayer" in amount) return ctx.creaturesAttacking(each ?? ctx.controller);
@@ -8523,6 +8802,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "grant-keyword-all":
       ctx.grantKeywordAll(spec.filter, spec.keyword, spec.duration, spec.exceptSource === true);
       return;
+    case "remove-from-combat": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.removeFromCombat(target);
+      return;
+    }
+    case "lose-keywords": {
+      if (spec.filter !== undefined) {
+        const scopeTo = scopedController(spec.controlledByTarget, ctx);
+        if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+        ctx.loseKeywords(spec.filter, spec.keywords, spec.duration, scopeTo);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.loseKeywords(target, spec.keywords, spec.duration);
+      return;
+    }
     case "connive": {
       const target = resolveEffectTarget(spec.target, ctx);
       // One that has left — or is back as a new object — still connives, as
@@ -9211,6 +9506,33 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? null
             : ((host) => (host?.kind === "object" ? host.object : null))(resolveEffectTarget(spec.attachedTo, ctx)),
       );
+      return;
+    case "vote":
+      applyVote(spec, ctx);
+      return;
+    case "cast-vote": {
+      if (spec.choice !== "target") {
+        ctx.castVote(spec.voter, spec.choice);
+        return;
+      }
+      const ref = ctx.targets[0];
+      if (ref?.kind === "object") ctx.castVote(spec.voter, { permanent: ref.object });
+      return;
+    }
+    case "for-each-vote": {
+      // A voter who has left the game since does nothing (rule 800.4a).
+      const inGame = ctx.playersInScope("each-player");
+      // In turn order from the active player (rule 101.4), each voter's votes
+      // together — Elrond of the White Council's ruling.
+      const counted = ctx
+        .votes()
+        .filter((v) => spec.option === undefined || ("option" in v.choice && v.choice.option === spec.option));
+      const voters = inGame.flatMap((player) => counted.filter((v) => v.voter === player).map(() => player));
+      applyEffectSpec({ kind: "for-each-player", who: "each-player", effect: spec.effect, remaining: voters }, ctx);
+      return;
+    }
+    case "for-each-voted":
+      applyForEachVoted(spec, ctx);
       return;
     case "for-each-player": {
       // Player by player, as a `sequence`'s steps: one whose effect stops to

@@ -11,8 +11,6 @@ import { defineCard } from "../define.js";
 const TEXT =
   "Council's dilemma — Starting with you, each player votes for past or present. You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.";
 
-const NOTHING = { kind: "sequence", effects: [] } as const;
-
 export default defineCard({
   name: "Fateful Tempest",
   manaCost: "{2}{R}",
@@ -23,15 +21,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      {
-        kind: "each-player-may",
-        who: "each-player",
-        startingWithYou: true,
-        choices: [
-          { text: "Vote for past", effect: NOTHING },
-          { text: "Vote for present", effect: NOTHING },
-        ],
-      },
+      { kind: "vote", for: { options: ["past", "present"] } },
       { kind: "mill", target: "you", amount: { votesFor: 0 } },
       { kind: "damage", amount: { thisWay: "milled", sumOf: "mana-value" }, who: "each-opponent" },
       { kind: "impulse-exile", amount: { votesFor: 1 }, duration: "your-next-turn" },

@@ -141,6 +141,7 @@ import _poolFranticStrength from "../pool/frantic-strength.js";
 import _poolFrenziedRage from "../pool/frenzied-rage.js";
 import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
+import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
 import _poolGetLost from "../pool/get-lost.js";
@@ -199,6 +200,7 @@ import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
+import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
 import _poolJadeMage from "../pool/jade-mage.js";
@@ -321,6 +323,7 @@ import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
+import _poolRushTheRoom from "../pool/rush-the-room.js";
 import _poolSacredFire from "../pool/sacred-fire.js";
 import _poolSageOfTheInwardEye from "../pool/sage-of-the-inward-eye.js";
 import _poolSamiteArcher from "../pool/samite-archer.js";
@@ -328,6 +331,7 @@ import _poolSanctumOfFruitfulHarvest from "../pool/sanctum-of-fruitful-harvest.j
 import _poolSaprazzanHeir from "../pool/saprazzan-heir.js";
 import _poolSarkhansResolve from "../pool/sarkhans-resolve.js";
 import _poolSatyrWayfinder from "../pool/satyr-wayfinder.js";
+import _poolSauronTheLidlessEye from "../pool/sauron-the-lidless-eye.js";
 import _poolSchoolOfTheUnseen from "../pool/school-of-the-unseen.js";
 import _poolScorchingMissile from "../pool/scorching-missile.js";
 import _poolScorchwalker from "../pool/scorchwalker.js";
@@ -624,6 +628,7 @@ const shard: CardShard = {
     _poolFrenziedRage,
     _poolFrontlineDevastator,
     _poolGaiusVanBaelsar,
+    _poolGandalfsSanction,
     _poolGarruksGorehorn,
     _poolGearbaneOrangutan,
     _poolGetLost,
@@ -682,6 +687,7 @@ const shard: CardShard = {
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
     _poolInvasionTactics,
+    _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
     _poolJadeMage,
@@ -804,6 +810,7 @@ const shard: CardShard = {
     _poolRiverKaijin,
     _poolRootriderFaun,
     _poolRuinCrab,
+    _poolRushTheRoom,
     _poolSacredFire,
     _poolSageOfTheInwardEye,
     _poolSamiteArcher,
@@ -811,6 +818,7 @@ const shard: CardShard = {
     _poolSaprazzanHeir,
     _poolSarkhansResolve,
     _poolSatyrWayfinder,
+    _poolSauronTheLidlessEye,
     _poolSchoolOfTheUnseen,
     _poolScorchingMissile,
     _poolScorchwalker,

@@ -24,6 +24,7 @@ import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
+import _poolArborealAlliance from "../pool/arboreal-alliance.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
@@ -98,6 +99,7 @@ import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
 import _poolDrownerOfSecrets from "../pool/drowner-of-secrets.js";
 import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
+import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
 import _poolEarthElemental from "../pool/earth-elemental.js";
 import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
@@ -110,6 +112,7 @@ import _poolEnduringCuriosity from "../pool/enduring-curiosity.js";
 import _poolEnforcerGriffin from "../pool/enforcer-griffin.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
+import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
 import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
@@ -132,6 +135,7 @@ import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
+import _poolGaladhrimBow from "../pool/galadhrim-bow.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
 import _poolGeistflame from "../pool/geistflame.js";
 import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
@@ -197,12 +201,14 @@ import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKnife from "../pool/knife.js";
+import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
 import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
+import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
@@ -295,6 +301,7 @@ import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
 import _poolSapphireDragon from "../pool/sapphire-dragon.js";
 import _poolSarinthGreatwurm from "../pool/sarinth-greatwurm.js";
+import _poolSarumanTheWhite from "../pool/saruman-the-white.js";
 import _poolSaviorOfTheSleeping from "../pool/savior-of-the-sleeping.js";
 import _poolScaldingViper from "../pool/scalding-viper.js";
 import _poolScareTactics from "../pool/scare-tactics.js";
@@ -434,6 +441,7 @@ import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js"
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
+import _tokensDragonTokenWakeTheDragon from "../tokens/dragon-token-wake-the-dragon.js";
 import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vernal-sovereign.js";
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
@@ -466,6 +474,7 @@ const shard: CardShard = {
     _poolAntMansArmy,
     _poolApexDevastator,
     _poolAranaHeartOfTheSpider,
+    _poolArborealAlliance,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
     _poolArtificerClass,
@@ -540,6 +549,7 @@ const shard: CardShard = {
     _poolDrakewingKrasis,
     _poolDrownerOfSecrets,
     _poolDuskshellCrawler,
+    _poolEagleOfDeliverance,
     _poolEarthElemental,
     _poolEarthshakerDreadmaw,
     _poolEdgarCharmedGroom,
@@ -552,6 +562,7 @@ const shard: CardShard = {
     _poolEnforcerGriffin,
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
+    _poolErrandRiderOfGondor,
     _poolEverWatchingThreshold,
     _poolEvolutionSage,
     _poolExploration,
@@ -574,6 +585,7 @@ const shard: CardShard = {
     _poolFracturedRealm,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
+    _poolGaladhrimBow,
     _poolGearseekerSerpent,
     _poolGeistflame,
     _poolGeneralTraagHeartOfStone,
@@ -639,12 +651,14 @@ const shard: CardShard = {
     _poolKhalniAmbush,
     _poolKinTreeSeverance,
     _poolKnife,
+    _poolKnightsOfDolAmroth,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
     _poolLiesaShroudOfDusk,
     _poolLinvalaKeeperOfSilence,
     _poolLiturgyOfBlood,
     _poolLivingLightning,
+    _poolLostIsleCalling,
     _poolLothlorienLookout,
     _poolLumengridSentinel,
     _poolMacabreReconstruction,
@@ -737,6 +751,7 @@ const shard: CardShard = {
     _poolSaplingOfColfenor,
     _poolSapphireDragon,
     _poolSarinthGreatwurm,
+    _poolSarumanTheWhite,
     _poolSaviorOfTheSleeping,
     _poolScaldingViper,
     _poolScareTactics,
@@ -878,6 +893,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensDragonElementalToken,
+    _tokensDragonTokenWakeTheDragon,
     _tokensElementalTokenVernalSovereign,
     _tokensNymphToken,
     _tokensPegasusToken,

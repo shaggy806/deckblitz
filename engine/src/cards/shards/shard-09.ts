@@ -43,6 +43,7 @@ import _poolBearCub from "../pool/bear-cub.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
+import _poolBillThePony from "../pool/bill-the-pony.js";
 import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlisteringBarrier from "../pool/blistering-barrier.js";
@@ -497,6 +498,7 @@ const shard: CardShard = {
     _poolBecomeBrutes,
     _poolBewilderingBlizzard,
     _poolBilbosRing,
+    _poolBillThePony,
     _poolBitterthornNissasAnimus,
     _poolBlindingSpray,
     _poolBlisteringBarrier,

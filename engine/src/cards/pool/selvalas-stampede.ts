@@ -8,8 +8,6 @@ import { defineCard } from "../define.js";
 const TEXT =
   "Council's dilemma — Starting with you, each player votes for wild or free. Reveal cards from the top of your library until you reveal a creature card for each wild vote. Put those creature cards onto the battlefield, then shuffle the rest into your library. You may put a permanent card from your hand onto the battlefield for each free vote.";
 
-const NOTHING = { kind: "sequence", effects: [] } as const;
-
 export default defineCard({
   name: "Selvala's Stampede",
   manaCost: "{4}{G}{G}",
@@ -19,15 +17,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      {
-        kind: "each-player-may",
-        who: "each-player",
-        startingWithYou: true,
-        choices: [
-          { text: "Vote for wild", effect: NOTHING },
-          { text: "Vote for free", effect: NOTHING },
-        ],
-      },
+      { kind: "vote", for: { options: ["wild", "free"] } },
       { kind: "reveal-until-count", filter: { type: "creature" }, count: { votesFor: 0 }, rest: "shuffle" },
       {
         kind: "look-and-choose",

@@ -164,6 +164,7 @@ import {
   amountValue,
   applyEffectSpec,
   isCountScalableEffect,
+  opponentsVoting,
   substituteChosenCreatureType,
   wardCostText,
 } from "./effects.js";
@@ -220,6 +221,8 @@ import type {
   GameEventInput,
   GameEventType,
   RandomPick,
+  Vote,
+  VoteChoice,
 } from "./events.js";
 import {
   COLORS,
@@ -4723,6 +4726,10 @@ export class Game {
       readonly sourceLost?: boolean;
       /** The colour `cost`'s X is paid in — see `may`'s `xColor`. */
       readonly xColor?: Color;
+      /** A vote's question (rule 701.38): never answered along with
+       * identical triggers', and with `secret`, see the `choose-modes`
+       * decision's `secret`. */
+      readonly vote?: { readonly secret: boolean };
     } = {},
   ): void {
     const key = ability.key;
@@ -4787,7 +4794,7 @@ export class Game {
     // triggers under it can be answered along with this one.
     const resolving = this.resolvingTrigger;
     const trigger =
-      resolving !== null && minModes === 0 && maxModes === 1 && offered.length === 1
+      resolving !== null && ability.vote === undefined && minModes === 0 && maxModes === 1 && offered.length === 1
         ? { ...resolving, ...this.identicalTriggers(resolving.signature, resolving.object) }
         : undefined;
     this.state.awaiting = {
@@ -4822,6 +4829,7 @@ export class Game {
         : {}),
       ...(ability.sourceLost === true ? { sourceLost: true } : {}),
       ...(trigger !== undefined ? { trigger } : {}),
+      ...(ability.vote?.secret === true ? { secret: true } : {}),
     };
   }
 
@@ -4951,7 +4959,9 @@ export class Game {
           : (this.state.modesChosenThisTurn ??= {});
       record[abilityKey] = [...(record[abilityKey] ?? []), ...own];
     }
-    this.emit({ type: "modes-chosen", source, player, modes: own });
+    // A secret vote's answer stays out of the log until the votes are
+    // revealed together (`votes-finished`).
+    if (awaiting.secret !== true) this.emit({ type: "modes-chosen", source, player, modes: own });
     // The X paid for the choice is what the mode's effect reads (Flameblast
     // Dragon's "it deals X damage"), overriding the ability's own X, which is
     // 0 on a trigger. A villainous choice's option is its controller's
@@ -8166,6 +8176,7 @@ export class Game {
     | { readonly kind: "behold"; readonly spec: BeholdSpec }
     | { readonly kind: "riot" }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
+    | { readonly kind: "devour"; readonly filter: CardFilter }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -8181,6 +8192,11 @@ export class Game {
     // printed, or a copy's.
     if (answered?.exchangeText === undefined && becoming.exchangeTextOnEnter !== null) {
       return { kind: "exchange-text", filter: becoming.exchangeTextOnEnter };
+    }
+    // Devour (rule 702.82a): "as this enters, you may sacrifice any number of
+    // creatures" — printed, or a copy's.
+    if (answered?.devoured === undefined && becoming.devour !== null) {
+      return { kind: "devour", filter: becoming.devour.filter };
     }
     // Riot (rule 702.136a): "you may have this permanent enter with an
     // additional +1/+1 counter on it" — a printed (or copied) riot. One
@@ -8251,6 +8267,37 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "devour") {
+        // What it may devour: permanents already on the battlefield under the
+        // player it enters under, matching from their side — not one
+        // entering alongside it, which isn't there yet.
+        const eligible = this.state.zones.shared.battlefield.filter(
+          (other) =>
+            other !== id &&
+            this.enterBatch?.has(other) !== true &&
+            this.state.objects[other]?.controller === chooser &&
+            this.inGame(this.state.objects[other]) &&
+            matchesFilter(this.state, this.registry, other, next.filter, { you: chooser, source: id }),
+        );
+        const available = eligible.reduce((n, other) => n + (this.state.objects[other]?.stackCount ?? 1), 0);
+        if (available > 0) {
+          this.state.awaiting = {
+            kind: "choose-permanents",
+            player: chooser,
+            eligible,
+            min: 0,
+            max: available,
+            prompt: `Devour: sacrifice any number of them as ${nameOf(object)} enters`,
+            then: { kind: "sequence", effects: [] },
+            source: id,
+            x: 0,
+            devour: true,
+          };
+          return true;
+        }
+        object.enterChoice = { ...object.enterChoice, devoured: 0 };
         continue;
       }
       if (next.kind === "riot") {
@@ -17130,7 +17177,10 @@ export class Game {
                       zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
                     })),
                   }
-                : atTrigger;
+                : // "Whenever players finish voting": that vote's votes.
+                  ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
+                  ? { ...(atTrigger ?? {}), votes: event.votes }
+                  : atTrigger;
           // A printed ability its text box came with (rule 612.5) is that
           // card's, which it stays however this permanent changes.
           const textName = lastSeen !== undefined ? lastSeen.textName : object.textFrom;
@@ -17931,6 +17981,8 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "players-finish-voting":
+        return event.type === "votes-finished";
       case "rolls-dice":
         return event.type === "dice-rolled" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "class-level-gained":
@@ -17954,7 +18006,8 @@ export class Game {
         return (
           event.type === "ring-tempted" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.chosen !== true || event.chosen !== null)
+          (spec.chosen !== true || event.chosen !== null) &&
+          (spec.chosen !== "other" || (event.chosen !== null && event.chosen !== self.id))
         );
       case "draws":
         return (
@@ -19413,8 +19466,30 @@ export class Game {
       triggerObject === undefined
         ? undefined
         : lastKnownOf({ kind: "object", object: triggerObject });
-    const scoped = (who: PlayerScope): PlayerId[] =>
-      this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player);
+    // The votes of the `vote` this resolution held (rule 701.38), or of the
+    // one that fired a "whenever players finish voting" trigger.
+    const votes = (): readonly Vote[] => {
+      let held: readonly Vote[] | undefined;
+      for (const event of this.eventsSince(since)) {
+        if (event.type === "votes-finished" && event.source === source) held = event.votes;
+      }
+      return held ?? refs.votes ?? [];
+    };
+    const scoped = (who: PlayerScope): PlayerId[] => {
+      if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
+        return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player);
+      }
+      const withYou = opponentsVoting(
+        votes(),
+        controller,
+        this.scopedPlayers(controller, "each-opponent", triggerObject, triggerLastKnown(), refs.player),
+        true,
+      );
+      if (who === "opponents-who-voted-with-you") return withYou;
+      return this.scopedPlayers(controller, "each-player", triggerObject, triggerLastKnown(), refs.player).filter(
+        (p) => p === controller || withYou.includes(p),
+      );
+    };
     // Who deals an effect's damage: its own source, or — "it deals damage"
     // — the object that fired the trigger, or a target ("target creature
     // you control deals damage"), each as it last existed on the battlefield
@@ -19542,6 +19617,16 @@ export class Game {
       if (condition.kind === "source-on-battlefield") {
         return opts.sourceLost !== true && this.state.objects[source]?.zone === "battlefield";
       }
+      // "If time gets more votes" (rule 701.38): more than each other option.
+      if (condition.kind === "vote-won") {
+        const tally = new Map<number, number>();
+        for (const { choice } of votes()) {
+          if ("option" in choice) tally.set(choice.option, (tally.get(choice.option) ?? 0) + 1);
+        }
+        const mine = tally.get(condition.option) ?? 0;
+        return [...tally].every(([option, n]) => option === condition.option || n < mine) && mine > 0;
+      }
+      if (condition.kind === "votes-cast") return votes().length > 0;
       if (condition.kind === "excess-damage-this-way") {
         if (condition.to === undefined) return excessDamageSince(this.state, since) > 0;
         const ref = targets[condition.to];
@@ -20974,6 +21059,26 @@ export class Game {
       canBehold: (spec) => this.canBehold(controller, spec),
       grantKeyword: (target, keyword, duration) =>
         this.grantKeyword(target, keyword, lastingHere(duration)),
+      removeFromCombat: (target) => {
+        if (target.kind !== "object") return;
+        const object = this.state.objects[target.object];
+        if (object?.zone !== "battlefield" || (object.attacking === null && object.blocking === null)) return;
+        this.removeFromCombat(target.object);
+        invalidateComputedCache();
+        this.emit({ type: "removed-from-combat", object: target.object });
+      },
+      loseKeywords: (on, keywords, duration, scopeTo) => {
+        const lasting = lastingHere(duration);
+        if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
+          this.loseKeywords(on, keywords, lasting);
+          return;
+        }
+        // One effect, one timestamp (rule 613.7b), however many it reaches.
+        const timestamp = this.freshTimestamp();
+        for (const id of this.battlefieldMatching(scopeTo ?? controller, on as CardFilter)) {
+          this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp);
+        }
+      },
       restrict: (target, filter, restrictions, duration) =>
         this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn")),
       attackDespiteDefender: (target, filter) => {
@@ -21285,14 +21390,39 @@ export class Game {
       placeFound: (hit, put, tapped, attacking, underYourControl) =>
         this.placeFound(hit, put, tapped, attacking, underYourControl === true ? controller : undefined),
       placeRevealed: (owner, revealed, rest, exiled) => this.placeRevealed(owner, revealed, rest, exiled),
-      votesFor: (option) => {
-        // The votes cast in this resolution (rule 701.38): each player's
-        // answer to its `choices`, as `modes-chosen` for this source.
-        let votes = 0;
-        for (const event of this.eventsSince(since)) {
-          if (event.type === "modes-chosen" && event.source === source && event.modes.includes(option)) votes += 1;
+      votes,
+      beginVoting: (secret) => {
+        this.state.voting = { ...(this.state.voting ?? {}), [source]: { secret, votes: [] } };
+      },
+      askVote: (player, spec, extra) => this.askVote(source, controller, player, spec, extra, x),
+      castVote: (voter, choice) => {
+        const held = this.state.voting?.[source];
+        if (held === undefined) return;
+        let cast: VoteChoice;
+        if ("permanent" in choice) {
+          if (this.state.objects[choice.permanent]?.zone !== "battlefield") return;
+          // A vote is for one permanent: one token of a stack, singled out.
+          const one = this.splitOneFromStack(choice.permanent);
+          cast = { object: one, zoneChangeCount: this.state.objects[one]?.zoneChangeCount ?? 0 };
+        } else {
+          cast = choice;
         }
-        return votes;
+        const vote: Vote = { voter, choice: cast };
+        this.state.voting = { ...this.state.voting, [source]: { ...held, votes: [...held.votes, vote] } };
+        if (!held.secret) this.emit({ type: "vote-cast", source, vote });
+      },
+      finishVoting: () => {
+        const held = this.state.voting?.[source];
+        if (held === undefined) return;
+        const { [source]: _done, ...rest } = this.state.voting ?? {};
+        if (Object.keys(rest).length > 0) this.state.voting = rest;
+        else delete this.state.voting;
+        this.emit({ type: "votes-finished", source, controller, votes: held.votes, secret: held.secret });
+      },
+      additionalVotes: (player) => this.additionalVotes(player),
+      votedPermanentHere: (object, zoneChangeCount) => {
+        const it = this.state.objects[object];
+        return it?.zone === "battlefield" && (it.zoneChangeCount ?? 0) === zoneChangeCount;
       },
       revealUntilCount: (owner, filter, count) => {
         const library = this.state.zones.perPlayer[owner]?.library ?? [];
@@ -22494,6 +22624,74 @@ export class Game {
       lastKnownRefs,
       targetZones,
     );
+  }
+
+  /**
+   * Ask `player` for one vote in a `vote` (rule 701.38) held by `source`'s
+   * spell or ability under `controller`: named options and players as a
+   * `choose-modes`, a permanent as a `choose-permanents` among those the
+   * effect's controller would see matching. Each answer's effect casts the
+   * vote (`cast-vote`). `extra` is an additional vote (701.38d), which may
+   * be declined. Nothing, for a player out of the game or with nothing to
+   * vote for.
+   */
+  private askVote(
+    source: ObjectId,
+    controller: PlayerId,
+    player: PlayerId,
+    spec: Extract<EffectSpec, { kind: "vote" }>,
+    extra: boolean,
+    x: number,
+  ): void {
+    if (this.state.players[player]?.hasLost !== false) return;
+    const secret = spec.secret === true;
+    const what = spec.for;
+    if ("permanent" in what) {
+      const eligible = this.battlefieldMatching(controller, what.permanent);
+      if (eligible.length === 0) return;
+      this.state.awaiting = {
+        kind: "choose-permanents",
+        player,
+        eligible,
+        min: extra || what.upToOne === true ? 0 : 1,
+        max: 1,
+        prompt: extra ? "Vote an additional time (or choose none)" : "Vote for a permanent",
+        then: { kind: "cast-vote", voter: player, choice: "target" },
+        source,
+        x,
+      };
+      return;
+    }
+    const modes: ModeOption[] =
+      "options" in what
+        ? what.options.map((text, option) => ({
+            text: `Vote for ${text}`,
+            effect: { kind: "cast-vote", voter: player, choice: { option, text } },
+          }))
+        : this.state.turnOrder
+            .filter((p) => this.state.players[p]?.hasLost === false && (what.player === "any" || p !== player))
+            .map((p) => ({
+              text: `Vote for ${p.charAt(0).toUpperCase()}${p.slice(1)}`,
+              effect: { kind: "cast-vote", voter: player, choice: { player: p } },
+            }));
+    if (modes.length === 0) return;
+    this.beginModesChoice(source, player, x, extra ? 0 : 1, 1, modes, undefined, [], undefined, 0, undefined, undefined, undefined, undefined, {
+      vote: { secret },
+    });
+  }
+
+  /** How many additional votes `player` may cast (rule 701.38d): one for
+   * each "while voting, you may vote an additional time" they control. */
+  private additionalVotes(player: PlayerId): number {
+    let n = 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.votesAdditionalTime === true && this.staticActive(source, ability)) n += source.stackCount ?? 1;
+      }
+    }
+    return n;
   }
 
   /** Whether `player` took what an `"each-player-may"` begun at event
@@ -24842,6 +25040,30 @@ export class Game {
     });
   }
 
+  /** See the `"lose-keywords"` {@link EffectSpec}: a modifier that takes the
+   * keywords away in layer 6 at its timestamp (rule 613.7). */
+  private loseKeywords(
+    target: TargetRef,
+    keywords: readonly Keyword[],
+    duration: EffectDuration,
+    split = true,
+    timestamp?: number,
+  ): void {
+    if (target.kind !== "object") return;
+    const id = split ? this.splitOneFromStack(target.object) : target.object;
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
+    object.modifiers.push({
+      timestamp: timestamp ?? this.freshTimestamp(),
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      loseKeywords: [...keywords],
+      ...durationFields(duration),
+    });
+    this.emit({ type: "keywords-lost", object: id, keywords: [...keywords], duration });
+  }
+
   /** See the `"prohibit"` {@link EffectSpec}. */
   private prohibit(
     players: readonly PlayerId[],
@@ -26484,6 +26706,27 @@ export class Game {
     // An entering Deadpool's exchange: asked before it moved
     // (`askEnterChoice`), so the answer waits on it, its entry carries on once
     // priority is next looked at, and `moveObject` exchanges as it enters.
+    // Devour (rule 702.82a): what's picked is sacrificed now, as the
+    // permanent is about to enter — one event — and counted for its counters.
+    if (awaiting.devour === true) {
+      const entering = this.state.objects[awaiting.source];
+      let devoured = 0;
+      this.withLeaveBatch(() => {
+        for (const picked of chosen) {
+          if (this.state.objects[picked]?.zone !== "battlefield") continue;
+          const one = this.splitOneFromStack(picked);
+          if (!this.canBeSacrificed(one)) continue;
+          const sacrificer = this.state.objects[one].controller;
+          this.moveObject(one, "graveyard");
+          this.emit({ type: "permanent-sacrificed", object: one, player: sacrificer });
+          devoured += 1;
+        }
+      });
+      entering.enterChoice = { ...entering.enterChoice, devoured };
+      this.state.awaiting = null;
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     if (awaiting.exchangeText === true) {
       const entering = this.state.objects[awaiting.source];
       entering.enterChoice = { ...entering.enterChoice, exchangeText: chosen[0] ?? null };
@@ -30286,6 +30529,8 @@ export class Game {
     includeDeparted = false,
   ): PlayerId[] {
     if (who === "you") return [controller];
+    // Only a resolution knows a vote's votes (`makeResolutionContext`).
+    if (who === "opponents-who-voted-with-you" || who === "you-and-opponents-who-voted-with-you") return [];
     if (who === "you-and-opponents-attacking-trigger-player") {
       const attacking = new Set<PlayerId>();
       if (triggerPlayer !== undefined) {
@@ -31428,12 +31673,13 @@ export class Game {
     reveal?: ObjectId | null,
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
     riot?: "counter" | "haste",
+    devoured?: number,
   ): EnteringReplacement {
     // It isn't on the battlefield yet as these are judged (rule 614.12), so
     // its mana cost — and what enters with it — doesn't count toward a
     // devotion that decides whether it's a creature (a Theros God's ruling).
     const entering = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot),
+      this.enteringReplacementOf(id, effectTapped, effectTransformed, reveal, copyEnter, riot, devoured),
     );
     this.enterBatch?.add(id);
     return entering;
@@ -31446,6 +31692,7 @@ export class Game {
     reveal?: ObjectId | null,
     copyEnter?: NonNullable<GameObject["enterChoice"]>["copyEnter"],
     riot?: "counter" | "haste",
+    devoured?: number,
   ): EnteringReplacement {
     const object = this.state.objects[id];
     const def = this.registry.get(printedCardName(object));
@@ -31542,6 +31789,9 @@ export class Game {
       if (riot === "counter") addCounters("+1/+1", 1);
       else riotHaste = true;
     }
+    // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
+    // as it was about to enter (`askEnterChoice`).
+    if (def.devour !== null && devoured !== undefined) addCounters("+1/+1", devoured * def.devour.multiplier);
     // Other permanents' replacements (rule 614.12). Never its own — a
     // permanent's ability over a general set of permanents doesn't modify how
     // that permanent itself enters — and never one entering alongside it,
@@ -32763,6 +33013,7 @@ export class Game {
         enterChoice?.reveal,
         enterChoice?.copyOf !== undefined && enterChoice.copyOf !== null ? enterChoice.copyEnter : undefined,
         enterChoice?.riot,
+        enterChoice?.devoured,
       );
       object.tapped = entering.tapped;
       for (const c of entering.counters) {

@@ -42,6 +42,7 @@ import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
 import _poolBeaconBehemoth from "../pool/beacon-behemoth.js";
 import _poolBelunasGatekeeper from "../pool/belunas-gatekeeper.js";
+import _poolBilboRetiredBurglar from "../pool/bilbo-retired-burglar.js";
 import _poolBiorganicCarapace from "../pool/biorganic-carapace.js";
 import _poolBiteDown from "../pool/bite-down.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
@@ -134,6 +135,7 @@ import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
+import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
@@ -320,6 +322,7 @@ import _poolSakuraTribeElder from "../pool/sakura-tribe-elder.js";
 import _poolSalvationSwan from "../pool/salvation-swan.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
 import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
+import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
@@ -372,6 +375,7 @@ import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
+import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
@@ -441,6 +445,7 @@ import _poolWingedHiveTyrant from "../pool/winged-hive-tyrant.js";
 import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
+import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZephid from "../pool/zephid.js";
@@ -502,6 +507,7 @@ const shard: CardShard = {
     _poolBaxterBuilding,
     _poolBeaconBehemoth,
     _poolBelunasGatekeeper,
+    _poolBilboRetiredBurglar,
     _poolBiorganicCarapace,
     _poolBiteDown,
     _poolBlazemireVerge,
@@ -594,6 +600,7 @@ const shard: CardShard = {
     _poolExperimentalAviator,
     _poolFallOfTheGavel,
     _poolFallToEarth,
+    _poolFamishedWorldsire,
     _poolFatalFumes,
     _poolFatestitcher,
     _poolFearOfBeingHunted,
@@ -780,6 +787,7 @@ const shard: CardShard = {
     _poolSalvationSwan,
     _poolSandskitterOutrider,
     _poolSanguineSyphoner,
+    _poolSaradocMasterOfBuckland,
     _poolSarumansTrickery,
     _poolScarwoodGoblins,
     _poolScorchingShot,
@@ -832,6 +840,7 @@ const shard: CardShard = {
     _poolStrefanMaurerProgenitor,
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
+    _poolSubjugateTheHobbits,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
     _poolSurlyFarrier,
@@ -901,6 +910,7 @@ const shard: CardShard = {
     _poolWingedTempleOfOrazca,
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
+    _poolWizardsRockets,
     _poolWoodlandPatrol,
     _poolYouSeeAPairOfGoblins,
     _poolZephid,

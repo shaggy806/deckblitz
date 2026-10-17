@@ -7343,6 +7343,118 @@
   "effect:animate-planeswalker-with-trigger": {
    "family": "static:self-type-changes",
    "example": "Sparkshaper Visionary: Any number of planeswalkers become 3/3 Bird creatures (no longer planeswalkers) with a granted \"scry 1\" combat-damage trigger until end of turn."
+  },
+  "condition:ring-bearer-other-than-source": {
+   "family": "amount:ring-bearer-power",
+   "example": "Galadriel of Lothlórien, Faramir, Field Commander: \"whenever the Ring tempts you, if you chose a creature other than ~ as your Ring-bearer\"."
+  },
+  "effect:exile-graveyard-may-cast": {
+   "family": "zone:impulse-permission-options",
+   "example": "Shadow of the Enemy: exile a graveyard, then you may cast spells from among the cards exiled this way, spending mana as any type."
+  },
+  "trigger:played-card-exiled-this-way": {
+   "family": "zone:impulse-permission-options",
+   "example": "Fires of Mount Doom: a delayed \"when you play a card exiled this way\" trigger tied to an impulse exile."
+  },
+  "target:power-less-than-source": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Rangers of Ithilien: \"target creature with lesser power\" than the source, on targeting and resolution."
+  },
+  "static:monarch-controls-enchanted": {
+   "family": "effect:control-while-player-is-monarch",
+   "example": "Fealty to the Realm: the monarch controls enchanted creature, at the Aura's timestamp."
+  },
+  "condition:revealed-shares-type-with-spell": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Gandalf, Westward Voyager: each opponent reveals the top card; if any shares a card type with the spell."
+  },
+  "filter:least-among-its-controller": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Witch-king, Bringer of Ruin: \"a creature with the least power among creatures they control\"."
+  },
+  "decision:opponent-guesses-card-kind": {
+   "family": "effect:choices-by-other-players",
+   "example": "Gollum, Scheming Guide: an opponent guesses land or nonland for your top card."
+  },
+  "effect:exile-cards-from-hand-chosen": {
+   "family": "zone:impulse-permission-options",
+   "example": "Isildur's Fateful Strike: a player exiles N cards of their choice from their hand."
+  },
+  "effect:note-creature-type-not-yet-noted": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "example": "Long List of the Ents: note a creature type not yet noted, remembered per Saga."
+  },
+  "trigger:reflexive-on-nth-resolution": {
+   "family": "trigger:nth-each-turn",
+   "example": "Gimli, Mournful Avenger: \"when this ability resolves for the third time this turn\"."
+  },
+  "replacement:untap-step-remove-counter-instead": {
+   "family": "replacement:new-event-replacements",
+   "example": "Bewitching Leechcraft: \"if it would untap during your untap step, remove a +1/+1 counter from it instead\"."
+  },
+  "effect:cast-now-from-target-player-graveyard": {
+   "family": "effect:cast-during-resolution",
+   "example": "Sorcerous Squall: cast a card from a target player's graveyard as it resolves."
+  },
+  "effect:exile-spell-as-it-resolves-suspended": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Gandalf of the Secret Fire: the spell is exiled with time counters as it resolves and gains suspend."
+  },
+  "filter:blocked-or-blocked-by-filter-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "You Cannot Pass!: a creature that blocked or was blocked by a legendary creature this turn."
+  },
+  "effect:copy-counter-kinds-just-put": {
+   "family": "effect:move-counter",
+   "example": "Aragorn, Company Leader: put one of each kind of counter just put on it on another target."
+  },
+  "effect:blocked-by-at-most-one-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Glorfindel, Dauntless Rescuer: \"can't be blocked by more than one creature this turn\" as a one-shot."
+  },
+  "trigger:players-finish-voting": {
+   "family": "mechanic:voting",
+   "example": "Erestor of the Council, Model of Unity: \"whenever players finish voting\", reading who voted for what."
+  },
+  "cost:ward-discard-filter": {
+   "family": "decision:ward-cost-options",
+   "example": "Saruman of Many Colors: ward — discard an enchantment, instant, or sorcery card."
+  },
+  "trigger:phases-in": {
+   "family": "mechanic:phasing",
+   "example": "King of the Oathbreakers: a trigger when a permanent phases in, the twin of phases-out."
+  },
+  "effect:damage-each-creature-blocking-source": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Battle-Scarred Goblin: damage to each creature blocking this creature."
+  },
+  "effect:modal-activated-ability": {
+   "family": "effect:modal-activated-targeted-modes",
+   "example": "Lobelia, Defender of Bag End: a modal activated ability, modes chosen as it's activated."
+  },
+  "trigger:player-attacks-not-you": {
+   "family": "condition:attacking-an-opponent-filter",
+   "example": "Mirkwood Trapper: whenever a player attacks, if none of their attackers attack you."
+  },
+  "effect:gain-control-all-target-player": {
+   "family": "effect:control-change-extensions",
+   "example": "Call for Aid: gain control of all creatures target player controls."
+  },
+  "effect:cant-attack-player-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Call for Aid: \"you can't attack that player this turn\"."
+  },
+  "trigger:monarch-end-step": {
+   "family": "condition:no-monarch",
+   "example": "Archivist of Gondor: \"at the beginning of the monarch's end step, that player draws a card\"."
+  },
+  "effect:voter-chooses-permanent": {
+   "family": "mechanic:voting",
+   "example": "Elrond of the White Council: \"for each fellowship vote, the voter chooses a creature they control\" — a choice by the voter after the vote."
+  },
+  "filter:owned-by-voter": {
+   "family": "mechanic:voting",
+   "example": "Expropriate: \"choose a permanent owned by the voter\"."
   }
  }
 }

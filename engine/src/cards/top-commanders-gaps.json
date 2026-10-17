@@ -311,7 +311,14 @@
   "keyword:bargain",
   "mechanic:celebration",
   "filter:has-adventure",
-  "effect:create-token-attached-to"
+  "effect:create-token-attached-to",
+  "mechanic:voting",
+  "mechanic:council-voting",
+  "trigger:players-finish-voting",
+  "effect:lose-keyword-until-eot",
+  "effect:remove-from-combat",
+  "keyword:devour",
+  "condition:ring-bearer-other-than-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

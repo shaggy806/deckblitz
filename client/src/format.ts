@@ -4,7 +4,7 @@
  */
 
 import { MAX_SPEED } from 'engine/client'
-import type { CombatRestriction, GameEvent, ObjectId, PlayerId, Step, TargetRef } from 'engine/client'
+import type { CombatRestriction, GameEvent, ObjectId, PlayerId, Step, TargetRef, VoteChoice } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 
 export type NameOf = (id: ObjectId) => string
@@ -93,6 +93,8 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
   const defender = (id: PlayerId | ObjectId): string =>
     seats.some((s) => s.player === id) ? who(id as PlayerId) : name(id as ObjectId)
   const signed = (n: number): string => (n >= 0 ? `+${n}` : `${n}`)
+  const voteText = (choice: VoteChoice): string =>
+    'option' in choice ? choice.text : 'player' in choice ? who(choice.player) : name(choice.object)
 
   switch (event.type) {
     case 'game-started':
@@ -314,6 +316,14 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return `${name(event.object)} becomes ${[...event.subtypes, ...event.types].join(' ')} in addition to its other types${
         event.duration === 'end-of-turn' ? ' until EOT' : ''
       }`
+    case 'vote-cast':
+      return `${name(event.source)} — ${who(event.vote.voter)} votes for ${voteText(event.vote.choice)}`
+    case 'votes-finished':
+      return event.votes.length === 0
+        ? `${name(event.source)} — nobody voted`
+        : `${name(event.source)} — ${event.secret ? 'votes revealed' : 'voting done'}: ${event.votes
+            .map((v) => `${who(v.voter)} → ${voteText(v.choice)}`)
+            .join(', ')}`
     case 'chosen-at-random':
       return `${name(event.source)} chooses ${
         event.chosen.kind === 'player'

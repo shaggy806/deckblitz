@@ -82,6 +82,7 @@ import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
+import _poolCouncilsJudgment from "../pool/councils-judgment.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
@@ -170,6 +171,7 @@ import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
 import _poolGreaterGood from "../pool/greater-good.js";
 import _poolGreedsGambit from "../pool/greeds-gambit.js";
+import _poolGreyHostReinforcements from "../pool/grey-host-reinforcements.js";
 import _poolGrimMonolith from "../pool/grim-monolith.js";
 import _poolGrimPhysician from "../pool/grim-physician.js";
 import _poolGrowingDread from "../pool/growing-dread.js";
@@ -183,6 +185,7 @@ import _poolHellrider from "../pool/hellrider.js";
 import _poolHeraldOfWar from "../pool/herald-of-war.js";
 import _poolHermitDruid from "../pool/hermit-druid.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
+import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
 import _poolHopeEstheim from "../pool/hope-estheim.js";
@@ -330,8 +333,11 @@ import _poolSeasonedConsultant from "../pool/seasoned-consultant.js";
 import _poolSeeTheTruth from "../pool/see-the-truth.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
+import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
+import _poolShadowspear from "../pool/shadowspear.js";
 import _poolShamblingCieth from "../pool/shambling-cieth.js";
 import _poolShineshadowSnarl from "../pool/shineshadow-snarl.js";
+import _poolShowerOfArrows from "../pool/shower-of-arrows.js";
 import _poolShrivel from "../pool/shrivel.js";
 import _poolSiegeRhino from "../pool/siege-rhino.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
@@ -450,6 +456,7 @@ import _poolWinterCursedRider from "../pool/winter-cursed-rider.js";
 import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
 import _poolWishingWell from "../pool/wishing-well.js";
 import _poolWonder from "../pool/wonder.js";
+import _poolWosePathfinder from "../pool/wose-pathfinder.js";
 import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
@@ -548,6 +555,7 @@ const shard: CardShard = {
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
+    _poolCouncilsJudgment,
     _poolCrawlingChorus,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
@@ -636,6 +644,7 @@ const shard: CardShard = {
     _poolGracefulAdept,
     _poolGreaterGood,
     _poolGreedsGambit,
+    _poolGreyHostReinforcements,
     _poolGrimMonolith,
     _poolGrimPhysician,
     _poolGrowingDread,
@@ -649,6 +658,7 @@ const shard: CardShard = {
     _poolHeraldOfWar,
     _poolHermitDruid,
     _poolHeroicIntervention,
+    _poolHobbitsSting,
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,
     _poolHopeEstheim,
@@ -796,8 +806,11 @@ const shard: CardShard = {
     _poolSeeTheTruth,
     _poolSepharaSkysBlade,
     _poolServantOfNefarox,
+    _poolShadowfaxLordOfHorses,
+    _poolShadowspear,
     _poolShamblingCieth,
     _poolShineshadowSnarl,
+    _poolShowerOfArrows,
     _poolShrivel,
     _poolSiegeRhino,
     _poolSilentArtisan,
@@ -916,6 +929,7 @@ const shard: CardShard = {
     _poolWinterTeamPlayer,
     _poolWishingWell,
     _poolWonder,
+    _poolWosePathfinder,
     _poolYarokTheDesecrated,
     _poolYokedPlowbeast,
     _poolZadaHedronGrinder,

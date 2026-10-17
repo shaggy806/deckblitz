@@ -74,6 +74,7 @@ import _poolColiseumBehemoth from "../pool/coliseum-behemoth.js";
 import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
+import _poolCouncilsDeliberation from "../pool/councils-deliberation.js";
 import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
 import _poolCraterize from "../pool/craterize.js";
 import _poolCreakwoodLiege from "../pool/creakwood-liege.js";
@@ -176,6 +177,7 @@ import _poolHeartflameDuelist from "../pool/heartflame-duelist.js";
 import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
+import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
 import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
 import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
@@ -211,6 +213,7 @@ import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLibrary from "../pool/library.js";
+import _poolLidlessGaze from "../pool/lidless-gaze.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
@@ -240,6 +243,7 @@ import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
+import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
@@ -255,6 +259,7 @@ import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
+import _poolOathOfEorl from "../pool/oath-of-eorl.js";
 import _poolObNixilisTheAscended from "../pool/ob-nixilis-the-ascended.js";
 import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
@@ -553,6 +558,7 @@ const shard: CardShard = {
     _poolCombatProfessor,
     _poolCombineChrysalis,
     _poolContaminantGrafter,
+    _poolCouncilsDeliberation,
     _poolCourtOfGarenbrig,
     _poolCraterize,
     _poolCreakwoodLiege,
@@ -655,6 +661,7 @@ const shard: CardShard = {
     _poolHearthElemental,
     _poolHeartstone,
     _poolHematiteGolem,
+    _poolHewTheEntwood,
     _poolHighPerfectMorcant,
     _poolHomaridExplorer,
     _poolHondenOfCleansingFire,
@@ -690,6 +697,7 @@ const shard: CardShard = {
     _poolLadyCaleria,
     _poolLashOfThorns,
     _poolLibrary,
+    _poolLidlessGaze,
     _poolLifecreedDuo,
     _poolLiminalHold,
     _poolLionsEyeDiamond,
@@ -719,6 +727,7 @@ const shard: CardShard = {
     _poolMillstone,
     _poolMirkwoodNurturer,
     _poolMirrorpool,
+    _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
     _poolMundasVanguard,
@@ -734,6 +743,7 @@ const shard: CardShard = {
     _poolNighthawkScavenger,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
+    _poolOathOfEorl,
     _poolObNixilisTheAscended,
     _poolObekaSplitterOfSeconds,
     _poolOctoprophet,

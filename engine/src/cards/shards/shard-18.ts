@@ -99,6 +99,7 @@ import _poolDroverGrizzly from "../pool/drover-grizzly.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
 import _poolEagerCadet from "../pool/eager-cadet.js";
+import _poolEastfarthingFarmer from "../pool/eastfarthing-farmer.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
 import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
 import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
@@ -121,6 +122,7 @@ import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
 import _poolFlowOfKnowledge from "../pool/flow-of-knowledge.js";
 import _poolFodderCannon from "../pool/fodder-cannon.js";
+import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
@@ -139,6 +141,7 @@ import _poolGleamingOverseer from "../pool/gleaming-overseer.js";
 import _poolGoblinFirebomb from "../pool/goblin-firebomb.js";
 import _poolGoblinSharpshooter from "../pool/goblin-sharpshooter.js";
 import _poolGoldenBear from "../pool/golden-bear.js";
+import _poolGorbagOfMinasMorgul from "../pool/gorbag-of-minas-morgul.js";
 import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
 import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
@@ -229,6 +232,7 @@ import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
+import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
@@ -569,6 +573,7 @@ const shard: CardShard = {
     _poolDuskmantleOperative,
     _poolDutyBoundDead,
     _poolEagerCadet,
+    _poolEastfarthingFarmer,
     _poolElderGargaroth,
     _poolEldraziRavager,
     _poolElektraDaughterOfTheHand,
@@ -591,6 +596,7 @@ const shard: CardShard = {
     _poolFlashThompsonSpiderFan,
     _poolFlowOfKnowledge,
     _poolFodderCannon,
+    _poolFogOnTheBarrowDowns,
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFromFatherToSon,
@@ -609,6 +615,7 @@ const shard: CardShard = {
     _poolGoblinFirebomb,
     _poolGoblinSharpshooter,
     _poolGoldenBear,
+    _poolGorbagOfMinasMorgul,
     _poolGrandmotherSengir,
     _poolGrangerGuildmage,
     _poolGreedyFreebooter,
@@ -699,6 +706,7 @@ const shard: CardShard = {
     _poolMirkwoodSpider,
     _poolMistRaven,
     _poolMistmeadowCouncil,
+    _poolModelOfUnity,
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMostValuableSlayer,

@@ -62,6 +62,7 @@ import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
+import _poolChanceMetElves from "../pool/chance-met-elves.js";
 import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
@@ -94,6 +95,7 @@ import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
+import _poolDenethorRulingSteward from "../pool/denethor-ruling-steward.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyReality from "../pool/deny-reality.js";
 import _poolDepower from "../pool/depower.js";
@@ -146,6 +148,7 @@ import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
+import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
 import _poolGarrukVeiledButcher from "../pool/garruk-veiled-butcher.js";
 import _poolGeneralThunderboltRoss from "../pool/general-thunderbolt-ross.js";
@@ -206,6 +209,7 @@ import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
+import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
 import _poolKamiOfFalseHope from "../pool/kami-of-false-hope.js";
@@ -269,6 +273,7 @@ import _poolMorophonTheBoundless from "../pool/morophon-the-boundless.js";
 import _poolMuckRats from "../pool/muck-rats.js";
 import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
+import _poolMushroomWatchdogs from "../pool/mushroom-watchdogs.js";
 import _poolNagaFleshcrafter from "../pool/naga-fleshcrafter.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
 import _poolNanoformSentinel from "../pool/nanoform-sentinel.js";
@@ -326,6 +331,7 @@ import _poolRedElementalBlast from "../pool/red-elemental-blast.js";
 import _poolRenegadeBull from "../pool/renegade-bull.js";
 import _poolRepulsiveMutation from "../pool/repulsive-mutation.js";
 import _poolResupply from "../pool/resupply.js";
+import _poolRibtrussRoaster from "../pool/ribtruss-roaster.js";
 import _poolRighteousCharge from "../pool/righteous-charge.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
@@ -390,6 +396,7 @@ import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
 import _poolSramsExpertise from "../pool/srams-expertise.js";
 import _poolStalkingPredator from "../pool/stalking-predator.js";
+import _poolStalwartsOfOsgiliath from "../pool/stalwarts-of-osgiliath.js";
 import _poolStarlingAerialAlly from "../pool/starling-aerial-ally.js";
 import _poolStarlitSoothsayer from "../pool/starlit-soothsayer.js";
 import _poolStarnheimMemento from "../pool/starnheim-memento.js";
@@ -411,6 +418,7 @@ import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
+import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
@@ -545,6 +553,7 @@ const shard: CardShard = {
     _poolCecilyHauntedMage,
     _poolCephalidInkmage,
     _poolChallengerTroll,
+    _poolChanceMetElves,
     _poolChandrasIgnition,
     _poolChangelingSentinel,
     _poolChargingMonstrosaur,
@@ -577,6 +586,7 @@ const shard: CardShard = {
     _poolDawngladeRegent,
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
+    _poolDenethorRulingSteward,
     _poolDenyEntry,
     _poolDenyReality,
     _poolDepower,
@@ -629,6 +639,7 @@ const shard: CardShard = {
     _poolFractalAnomaly,
     _poolFugue,
     _poolFurtiveCourier,
+    _poolGaladrielOfLothlorien,
     _poolGarlandKnightOfCornelia,
     _poolGarrukVeiledButcher,
     _poolGeneralThunderboltRoss,
@@ -689,6 +700,7 @@ const shard: CardShard = {
     _poolIronrootTreefolk,
     _poolItemShopkeep,
     _poolIzzetChronarch,
+    _poolJadedAnalyst,
     _poolJoustThrough,
     _poolJungleTroll,
     _poolKamiOfFalseHope,
@@ -752,6 +764,7 @@ const shard: CardShard = {
     _poolMuckRats,
     _poolMuddleTheMixture,
     _poolMuragandaRaceway,
+    _poolMushroomWatchdogs,
     _poolNagaFleshcrafter,
     _poolNaktamunLorespinner,
     _poolNanoformSentinel,
@@ -809,6 +822,7 @@ const shard: CardShard = {
     _poolRenegadeBull,
     _poolRepulsiveMutation,
     _poolResupply,
+    _poolRibtrussRoaster,
     _poolRighteousCharge,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
@@ -873,6 +887,7 @@ const shard: CardShard = {
     _poolSramSeniorEdificer,
     _poolSramsExpertise,
     _poolStalkingPredator,
+    _poolStalwartsOfOsgiliath,
     _poolStarlingAerialAlly,
     _poolStarlitSoothsayer,
     _poolStarnheimMemento,
@@ -894,6 +909,7 @@ const shard: CardShard = {
     _poolTajuruSnarecaster,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
+    _poolTheBalrogFlameOfUdun,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,

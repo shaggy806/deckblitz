@@ -27,6 +27,7 @@ import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
+import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
@@ -68,6 +69,7 @@ import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
 import _poolChupacabraEcho from "../pool/chupacabra-echo.js";
 import _poolCircleOfDreamsDruid from "../pool/circle-of-dreams-druid.js";
+import _poolCirdanTheShipwright from "../pool/cirdan-the-shipwright.js";
 import _poolClarionSpirit from "../pool/clarion-spirit.js";
 import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
@@ -133,6 +135,7 @@ import _poolEmergencyPhytomedic from "../pool/emergency-phytomedic.js";
 import _poolEmissaryOfTheSleepless from "../pool/emissary-of-the-sleepless.js";
 import _poolEncumberedReejerey from "../pool/encumbered-reejerey.js";
 import _poolEntityTracker from "../pool/entity-tracker.js";
+import _poolEomerOfTheRiddermark from "../pool/eomer-of-the-riddermark.js";
 import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
 import _poolEvolvingWilds from "../pool/evolving-wilds.js";
@@ -346,6 +349,7 @@ import _poolSiegeZombie from "../pool/siege-zombie.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
+import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
 import _poolSpiderIslanders from "../pool/spider-islanders.js";
@@ -467,6 +471,7 @@ const shard: CardShard = {
     _poolAxebaneGuardian,
     _poolAzureMage,
     _poolBackupAgent,
+    _poolBanishFromEdoras,
     _poolBarkOfDoran,
     _poolBartizanBats,
     _poolBastPantherGoddess,
@@ -508,6 +513,7 @@ const shard: CardShard = {
     _poolChromeDome,
     _poolChupacabraEcho,
     _poolCircleOfDreamsDruid,
+    _poolCirdanTheShipwright,
     _poolClarionSpirit,
     _poolClingingAnemones,
     _poolCloudshredderSliver,
@@ -573,6 +579,7 @@ const shard: CardShard = {
     _poolEmissaryOfTheSleepless,
     _poolEncumberedReejerey,
     _poolEntityTracker,
+    _poolEomerOfTheRiddermark,
     _poolErrantEphemeron,
     _poolEvendoBrushrazer,
     _poolEvolvingWilds,
@@ -786,6 +793,7 @@ const shard: CardShard = {
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
     _poolSlinnVodaTheRisingDeep,
+    _poolSnarlingWarg,
     _poolSparringConstruct,
     _poolSphinxOfTheSteelWind,
     _poolSpiderIslanders,

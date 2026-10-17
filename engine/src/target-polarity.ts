@@ -142,6 +142,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "for-each-target": (n, v) => v.child(n.effect),
   "for-each-player": (n, v) => v.child(n.effect),
+  // A vote names no target; a `for-each-voted`'s slot 0 is a permanent voted
+  // for, not the spell's target 0.
+  vote: none,
+  "cast-vote": none,
+  "for-each-vote": (n, v) => v.child(n.effect),
+  "for-each-voted": none,
   "for-target": (n, v) => v.child(n.effect),
   // Their slot 0 is a convoking creature, not the spell's target 0.
   "for-each-convoker": none,
@@ -323,6 +329,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)
       : v.touch(n.target, "help", MAJOR),
+  // Out of combat: usually an opponent's attacker or blocker.
+  "remove-from-combat": (n, v) => v.touch(n.target, "harm", MINOR),
+  // Losing a keyword hurts — but losing defender helps (Jaded Analyst).
+  "lose-keywords": (n, v) =>
+    n.target === undefined
+      ? undefined
+      : v.touch(n.target, n.keywords.every((k) => k === "defender") ? "help" : "harm", MINOR),
   "player-effect": none,
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,

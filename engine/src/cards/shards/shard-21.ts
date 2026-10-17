@@ -131,9 +131,11 @@ import _poolFulminousForte from "../pool/fulminous-forte.js";
 import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
 import _poolGalaGreeters from "../pool/gala-greeters.js";
 import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
+import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
+import _poolGimlisAxe from "../pool/gimlis-axe.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
@@ -542,9 +544,11 @@ const shard: CardShard = {
     _poolFurnaceHostCharger,
     _poolGalaGreeters,
     _poolGalliaTragicHost,
+    _poolGandalfWhiteRider,
     _poolGevScaledScorch,
     _poolGhostlyKeybearer,
     _poolGiganticBigBear,
+    _poolGimlisAxe,
     _poolGlarbCalamitysAugur,
     _poolGliderKids,
     _poolGloriousCharge,

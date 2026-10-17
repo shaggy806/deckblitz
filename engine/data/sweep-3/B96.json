@@ -1,0 +1,1388 @@
+{
+ "batch": "B96",
+ "status": "complete",
+ "ranks": "The Lord of the Rings: Tales of Middle-earth (LTR, 2023-06-23) and its Commander set (LTC): whole set",
+ "authored": [
+  {
+   "name": "Lash of the Balrog",
+   "files": [
+    "engine/src/cards/pool/lash-of-the-balrog.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Meneldor, Swift Savior",
+   "files": [
+    "engine/src/cards/pool/meneldor-swift-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erkenbrand, Lord of Westfold",
+   "files": [
+    "engine/src/cards/pool/erkenbrand-lord-of-westfold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riders of the Mark",
+   "files": [
+    "engine/src/cards/pool/riders-of-the-mark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fall of Gil-galad",
+   "files": [
+    "engine/src/cards/pool/fall-of-gil-galad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorbag of Minas Morgul",
+   "files": [
+    "engine/src/cards/pool/gorbag-of-minas-morgul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gríma Wormtongue",
+   "files": [
+    "engine/src/cards/pool/grima-wormtongue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunt of the Dead Marshes",
+   "files": [
+    "engine/src/cards/pool/haunt-of-the-dead-marshes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gandalf, White Rider",
+   "files": [
+    "engine/src/cards/pool/gandalf-white-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quickbeam, Upstart Ent",
+   "files": [
+    "engine/src/cards/pool/quickbeam-upstart-ent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eagle of Deliverance",
+   "files": [
+    "engine/src/cards/pool/eagle-of-deliverance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Now for Wrath, Now for Ruin!",
+   "files": [
+    "engine/src/cards/pool/now-for-wrath-now-for-ruin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Torment of Gollum",
+   "files": [
+    "engine/src/cards/pool/the-torment-of-gollum.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Morgul-Knife Wound",
+   "files": [
+    "engine/src/cards/pool/morgul-knife-wound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escape from Orthanc",
+   "files": [
+    "engine/src/cards/pool/escape-from-orthanc.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pelargir Survivor",
+   "files": [
+    "engine/src/cards/pool/pelargir-survivor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Strider, Ranger of the North",
+   "files": [
+    "engine/src/cards/pool/strider-ranger-of-the-north.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalwarts of Osgiliath",
+   "files": [
+    "engine/src/cards/pool/stalwarts-of-osgiliath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haradrim Spearmaster",
+   "files": [
+    "engine/src/cards/pool/haradrim-spearmaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Song of Eärendil",
+   "files": [
+    "engine/src/cards/pool/song-of-earendil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Subjugate the Hobbits",
+   "files": [
+    "engine/src/cards/pool/subjugate-the-hobbits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lothlórien Blade",
+   "files": [
+    "engine/src/cards/pool/lothlorien-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lidless Gaze",
+   "files": [
+    "engine/src/cards/pool/lidless-gaze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stew the Coneys",
+   "files": [
+    "engine/src/cards/pool/stew-the-coneys.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dunland Crebain",
+   "files": [
+    "engine/src/cards/pool/dunland-crebain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Easterling Vanguard",
+   "files": [
+    "engine/src/cards/pool/easterling-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gimli's Axe",
+   "files": [
+    "engine/src/cards/pool/gimlis-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gimli's Fury",
+   "files": [
+    "engine/src/cards/pool/gimlis-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Friendly Rivalry",
+   "files": [
+    "engine/src/cards/pool/friendly-rivalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stern Scolding",
+   "files": [
+    "engine/src/cards/pool/stern-scolding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old Man Willow",
+   "files": [
+    "engine/src/cards/pool/old-man-willow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadowfax, Lord of Horses",
+   "files": [
+    "engine/src/cards/pool/shadowfax-lord-of-horses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pippin's Bravery",
+   "files": [
+    "engine/src/cards/pool/pippins-bravery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knights of Dol Amroth",
+   "files": [
+    "engine/src/cards/pool/knights-of-dol-amroth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Minas Tirith Garrison",
+   "files": [
+    "engine/src/cards/pool/minas-tirith-garrison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dreadful as the Storm",
+   "files": [
+    "engine/src/cards/pool/dreadful-as-the-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Fireleaper",
+   "files": [
+    "engine/src/cards/pool/goblin-fireleaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fog on the Barrow-Downs",
+   "files": [
+    "engine/src/cards/pool/fog-on-the-barrow-downs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "East-Mark Cavalier",
+   "files": [
+    "engine/src/cards/pool/east-mark-cavalier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Motivated Pony",
+   "files": [
+    "engine/src/cards/pool/motivated-pony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fangorn, Tree Shepherd",
+   "files": [
+    "engine/src/cards/pool/fangorn-tree-shepherd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mordor Muster",
+   "files": [
+    "engine/src/cards/pool/mordor-muster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Assault on Osgiliath",
+   "files": [
+    "engine/src/cards/pool/assault-on-osgiliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uglúk of the White Hand",
+   "files": [
+    "engine/src/cards/pool/ugluk-of-the-white-hand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Book of Mazarbul",
+   "files": [
+    "engine/src/cards/pool/book-of-mazarbul.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Celeborn the Wise",
+   "files": [
+    "engine/src/cards/pool/celeborn-the-wise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost Isle Calling",
+   "files": [
+    "engine/src/cards/pool/lost-isle-calling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saradoc, Master of Buckland",
+   "files": [
+    "engine/src/cards/pool/saradoc-master-of-buckland.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quarrel's End",
+   "files": [
+    "engine/src/cards/pool/quarrels-end.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ent's Fury",
+   "files": [
+    "engine/src/cards/pool/ents-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Butterbur, Bree Innkeeper",
+   "files": [
+    "engine/src/cards/pool/butterbur-bree-innkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eastfarthing Farmer",
+   "files": [
+    "engine/src/cards/pool/eastfarthing-farmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hew the Entwood",
+   "files": [
+    "engine/src/cards/pool/hew-the-entwood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mordor Trebuchet",
+   "files": [
+    "engine/src/cards/pool/mordor-trebuchet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frodo, Determined Hero",
+   "files": [
+    "engine/src/cards/pool/frodo-determined-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dúnedain Blade",
+   "files": [
+    "engine/src/cards/pool/dunedain-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimrodel Watcher",
+   "files": [
+    "engine/src/cards/pool/nimrodel-watcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Improvised Club",
+   "files": [
+    "engine/src/cards/pool/improvised-club.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Isolation at Orthanc",
+   "files": [
+    "engine/src/cards/pool/isolation-at-orthanc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bag End Porter",
+   "files": [
+    "engine/src/cards/pool/bag-end-porter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oath of Eorl",
+   "files": [
+    "engine/src/cards/pool/oath-of-eorl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grey Host Reinforcements",
+   "files": [
+    "engine/src/cards/pool/grey-host-reinforcements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radagast, Wizard of Wilds",
+   "files": [
+    "engine/src/cards/pool/radagast-wizard-of-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mordor on the March",
+   "files": [
+    "engine/src/cards/pool/mordor-on-the-march.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Denethor, Ruling Steward",
+   "files": [
+    "engine/src/cards/pool/denethor-ruling-steward.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bilbo, Retired Burglar",
+   "files": [
+    "engine/src/cards/pool/bilbo-retired-burglar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally at the Hornburg",
+   "files": [
+    "engine/src/cards/pool/rally-at-the-hornburg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shower of Arrows",
+   "files": [
+    "engine/src/cards/pool/shower-of-arrows.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bill the Pony",
+   "files": [
+    "engine/src/cards/pool/bill-the-pony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hobbit's Sting",
+   "files": [
+    "engine/src/cards/pool/hobbits-sting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legolas, Counter of Kills",
+   "files": [
+    "engine/src/cards/pool/legolas-counter-of-kills.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadriel, Gift-Giver",
+   "files": [
+    "engine/src/cards/pool/galadriel-gift-giver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wizard's Rockets",
+   "files": [
+    "engine/src/cards/pool/wizards-rockets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bitter Downfall",
+   "files": [
+    "engine/src/cards/pool/bitter-downfall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sauron, the Lidless Eye",
+   "files": [
+    "engine/src/cards/pool/sauron-the-lidless-eye.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fire of Orthanc",
+   "files": [
+    "engine/src/cards/pool/fire-of-orthanc.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dúnedain Rangers",
+   "files": [
+    "engine/src/cards/pool/dunedain-rangers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deceive the Messenger",
+   "files": [
+    "engine/src/cards/pool/deceive-the-messenger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Horses of the Bruinen",
+   "files": [
+    "engine/src/cards/pool/horses-of-the-bruinen.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cirith Ungol Patrol",
+   "files": [
+    "engine/src/cards/pool/cirith-ungol-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grond, the Gatebreaker",
+   "files": [
+    "engine/src/cards/pool/grond-the-gatebreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Errand-Rider of Gondor",
+   "files": [
+    "engine/src/cards/pool/errand-rider-of-gondor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ent-Draught Basin",
+   "files": [
+    "engine/src/cards/pool/ent-draught-basin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimble Hobbit",
+   "files": [
+    "engine/src/cards/pool/nimble-hobbit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snarling Warg",
+   "files": [
+    "engine/src/cards/pool/snarling-warg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rohirrim Chargers",
+   "files": [
+    "engine/src/cards/pool/rohirrim-chargers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gandalf the Grey",
+   "files": [
+    "engine/src/cards/pool/gandalf-the-grey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arwen Undómiel",
+   "files": [
+    "engine/src/cards/pool/arwen-undomiel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saruman the White",
+   "files": [
+    "engine/src/cards/pool/saruman-the-white.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gandalf's Sanction",
+   "files": [
+    "engine/src/cards/pool/gandalfs-sanction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wose Pathfinder",
+   "files": [
+    "engine/src/cards/pool/wose-pathfinder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frodo Baggins",
+   "files": [
+    "engine/src/cards/pool/frodo-baggins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarming of Moria",
+   "files": [
+    "engine/src/cards/pool/swarming-of-moria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legolas, Master Archer",
+   "files": [
+    "engine/src/cards/pool/legolas-master-archer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arwen's Gift",
+   "files": [
+    "engine/src/cards/pool/arwens-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shire Shirriff",
+   "files": [
+    "engine/src/cards/pool/shire-shirriff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost to Legend",
+   "files": [
+    "engine/src/cards/pool/lost-to-legend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Council's Deliberation",
+   "files": [
+    "engine/src/cards/pool/councils-deliberation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mushroom Watchdogs",
+   "files": [
+    "engine/src/cards/pool/mushroom-watchdogs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oath of the Grey Host",
+   "files": [
+    "engine/src/cards/pool/oath-of-the-grey-host.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brandywine Farmer",
+   "files": [
+    "engine/src/cards/pool/brandywine-farmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadhrim Bow",
+   "files": [
+    "engine/src/cards/pool/galadhrim-bow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirkwood Channeler",
+   "files": [
+    "engine/src/cards/pool/mirkwood-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warbeast of Gorgoroth",
+   "files": [
+    "engine/src/cards/pool/warbeast-of-gorgoroth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Second Breakfast",
+   "files": [
+    "engine/src/cards/pool/second-breakfast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chance-Met Elves",
+   "files": [
+    "engine/src/cards/pool/chance-met-elves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Éomer of the Riddermark",
+   "files": [
+    "engine/src/cards/pool/eomer-of-the-riddermark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rush the Room",
+   "files": [
+    "engine/src/cards/pool/rush-the-room.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banish from Edoras",
+   "files": [
+    "engine/src/cards/pool/banish-from-edoras.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Balrog, Flame of Udûn",
+   "files": [
+    "engine/src/cards/pool/the-balrog-flame-of-udun.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Olog-hai Crusher",
+   "files": [
+    "engine/src/cards/pool/olog-hai-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wake the Dragon",
+   "files": [
+    "engine/src/cards/pool/wake-the-dragon.ts",
+    "engine/src/cards/tokens/dragon-token-wake-the-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirkwood Elk",
+   "files": [
+    "engine/src/cards/pool/mirkwood-elk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Círdan the Shipwright",
+   "files": [
+    "engine/src/cards/pool/cirdan-the-shipwright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Erestor of the Council",
+   "files": [
+    "engine/src/cards/pool/erestor-of-the-council.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Model of Unity",
+   "files": [
+    "engine/src/cards/pool/model-of-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sail into the West",
+   "files": [
+    "engine/src/cards/pool/sail-into-the-west.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadriel, Elven-Queen",
+   "files": [
+    "engine/src/cards/pool/galadriel-elven-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Travel Through Caradhras",
+   "files": [
+    "engine/src/cards/pool/travel-through-caradhras.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trap the Trespassers",
+   "files": [
+    "engine/src/cards/pool/trap-the-trespassers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galadriel of Lothlórien",
+   "files": [
+    "engine/src/cards/pool/galadriel-of-lothlorien.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faramir, Field Commander",
+   "files": [
+    "engine/src/cards/pool/faramir-field-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arboreal Alliance",
+   "files": [
+    "engine/src/cards/pool/arboreal-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fell Beast of Mordor",
+   "files": [
+    "engine/src/cards/pool/fell-beast-of-mordor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Council's Judgment",
+   "files": [
+    "engine/src/cards/pool/councils-judgment.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Plea for Power",
+   "files": [
+    "engine/src/cards/pool/plea-for-power.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Tivit, Seller of Secrets",
+   "files": [
+    "engine/src/cards/pool/tivit-seller-of-secrets.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Truth or Consequences",
+   "files": [
+    "engine/src/cards/pool/truth-or-consequences.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Vault 11: Voter's Dilemma",
+   "files": [
+    "engine/src/cards/pool/vault-11-voters-dilemma.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Mob Verdict",
+   "files": [
+    "engine/src/cards/pool/mob-verdict.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Emerald Charm",
+   "files": [
+    "engine/src/cards/pool/emerald-charm.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Spectacular Pileup",
+   "files": [
+    "engine/src/cards/pool/spectacular-pileup.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Shadowspear",
+   "files": [
+    "engine/src/cards/pool/shadowspear.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "The Fire Nation Drill",
+   "files": [
+    "engine/src/cards/pool/the-fire-nation-drill.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Jaded Analyst",
+   "files": [
+    "engine/src/cards/pool/jaded-analyst.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Fear of Falling",
+   "files": [
+    "engine/src/cards/pool/fear-of-falling.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Starforged Sword",
+   "files": [
+    "engine/src/cards/pool/starforged-sword.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Quick Draw",
+   "files": [
+    "engine/src/cards/pool/quick-draw.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Labyrinth of Skophos",
+   "files": [
+    "engine/src/cards/pool/labyrinth-of-skophos.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Reconnaissance",
+   "files": [
+    "engine/src/cards/pool/reconnaissance.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Shakedown Heavy",
+   "files": [
+    "engine/src/cards/pool/shakedown-heavy.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Thaumatic Compass",
+   "files": [
+    "engine/src/cards/pool/thaumatic-compass.ts",
+    "engine/src/cards/pool/spires-of-orazca.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Mycoloth",
+   "files": [
+    "engine/src/cards/pool/mycoloth.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Ribtruss Roaster",
+   "files": [
+    "engine/src/cards/pool/ribtruss-roaster.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Ravenous Tyrannosaurus",
+   "files": [
+    "engine/src/cards/pool/ravenous-tyrannosaurus.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Feasting Hobbit",
+   "files": [
+    "engine/src/cards/pool/feasting-hobbit.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  },
+  {
+   "name": "Famished Worldsire",
+   "files": [
+    "engine/src/cards/pool/famished-worldsire.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's features (voting, lose-keywords, remove-from-combat, devour)"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Shadow of the Enemy",
+   "needs": [
+    "effect:exile-graveyard-may-cast"
+   ],
+   "why": "exile-graveyard (all creature cards from target player's graveyard) has no mayCast/spendAs permission; only single-target `exile` and impulse-exile carry one"
+  },
+  {
+   "name": "Breaking of the Fellowship",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "second target must be \"another target creature that player controls\" (same controller as slot 0); no target-spec constraint for that"
+  },
+  {
+   "name": "Fires of Mount Doom",
+   "needs": [
+    "trigger:played-card-exiled-this-way"
+   ],
+   "why": "\"When you play a card this way, ~ deals 2 damage to each player\" needs a delayed trigger linked to the impulse-exiled card; plays-card only filters by zone"
+  },
+  {
+   "name": "Esquire of the King",
+   "needs": [
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "activated `costReduction` has no condition — \"costs {2} less to activate if you control a legendary creature\" can't be gated"
+  },
+  {
+   "name": "Bill Ferny, Bree Swindler",
+   "needs": [
+    "effect:remove-from-combat"
+   ],
+   "why": "mode 2 \"remove Bill Ferny from combat\" has no effect kind (and its \"if they do\" after a control change)"
+  },
+  {
+   "name": "Rangers of Ithilien",
+   "needs": [
+    "effect:control-while-you-control-source",
+    "target:power-less-than-source"
+   ],
+   "why": "gain control \"for as long as you control this creature\" (only whileSource = while on battlefield exists) of a creature \"with lesser power\" than the source (no source-relative power target filter)"
+  },
+  {
+   "name": "Fealty to the Realm",
+   "needs": [
+    "static:monarch-controls-enchanted"
+   ],
+   "why": "\"The monarch controls enchanted creature\" — controlEnchanted gives control only to the Aura's controller; also \"can't attack you\" on the enchanted creature"
+  },
+  {
+   "name": "Gandalf, Westward Voyager",
+   "needs": [
+    "condition:revealed-shares-type-with-spell"
+   ],
+   "why": "each opponent reveals their top card; \"if any of those cards shares a card type with that spell\" copy it and each opponent draws, else you draw — no condition over revealed cards vs the trigger spell"
+  },
+  {
+   "name": "Fell Beast's Shriek",
+   "needs": [
+    "keyword:splice"
+   ],
+   "why": "Splice onto instant or sorcery isn't modeled (also \"each opponent chooses a creature they control. Tap and goad the chosen creatures\")"
+  },
+  {
+   "name": "Barrow-Blade",
+   "needs": [
+    "trigger:blocks-creature-trigger"
+   ],
+   "why": "'Whenever equipped creature blocks ... a creature, that creature loses all abilities': the blocks trigger's object is the blocker; the blocked attacker isn't reachable"
+  },
+  {
+   "name": "Witch-king, Bringer of Ruin",
+   "needs": [
+    "filter:least-among-its-controller"
+   ],
+   "why": "'sacrifices a creature with the least power among creatures they control': only greatestAmongItsController exists, no least"
+  },
+  {
+   "name": "Radagast the Brown",
+   "needs": [
+    "condition:filter-shares-creature-type-with-controlled"
+   ],
+   "why": "'a creature card that doesn't share a creature type with a creature you control': sharesCreatureTypeWith reads only the trigger object"
+  },
+  {
+   "name": "Frodo, Sauron's Bane",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "second ability 'becomes a Halfling Rogue' sets creature types without touching P/T; animate always sets base P/T (the granted Ring trigger and ring-tempted condition exist)"
+  },
+  {
+   "name": "Fear, Fire, Foes!",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "'Damage can't be prevented this turn' as a one-shot, turn-long effect has no vocabulary (the X plus 1-to-each-other-creature-of-that-controller part is expressible)"
+  },
+  {
+   "name": "Gollum, Scheming Guide",
+   "needs": [
+    "decision:opponent-guesses-card-kind",
+    "effect:remove-from-combat"
+   ],
+   "why": "an opponent guesses land/nonland for the top card, and 'remove Gollum from combat' has no effect"
+  },
+  {
+   "name": "Isildur's Fateful Strike",
+   "needs": [
+    "effect:exile-cards-from-hand-chosen"
+   ],
+   "why": "'they exile cards from their hand equal to the difference': no effect for the target's controller exiling N cards of their choice from hand (castOnlyIf covers the legendary-instant restriction)"
+  },
+  {
+   "name": "Long List of the Ents",
+   "needs": [
+    "decision:choose-creature-type-on-resolution",
+    "effect:note-creature-type-not-yet-noted"
+   ],
+   "why": "each chapter notes a creature type not yet noted for this Saga, then a delayed 'next creature spell of that type this turn enters with an additional +1/+1 counter'"
+  },
+  {
+   "name": "Gimli, Mournful Avenger",
+   "needs": [
+    "trigger:reflexive-on-nth-resolution"
+   ],
+   "why": "'When this ability resolves for the third time this turn, Gimli fights...': no count of an ability's resolutions per turn"
+  },
+  {
+   "name": "Sharkey, Tyrant of the Shire",
+   "needs": [
+    "static:gain-activated-abilities-of-others",
+    "static:attached-activated-abilities-prohibited",
+    "cost:mana-spending-rules"
+   ],
+   "why": "gains opponents' lands' nonmana activated abilities, stops those being activated, and spends mana as any type for its own: none expressible"
+  },
+  {
+   "name": "Bewitching Leechcraft",
+   "needs": [
+    "replacement:untap-step-remove-counter-instead"
+   ],
+   "why": "granted 'if this creature would untap during your untap step, remove a +1/+1 counter from it instead; if you do, untap it': no such untap replacement"
+  },
+  {
+   "name": "Sorcerous Squall",
+   "needs": [
+    "effect:cast-now-from-target-player-graveyard"
+   ],
+   "why": "'cast an instant or sorcery spell from that player's graveyard' after the mill: cast-now's from 'graveyard' is only the caster's own, and the card isn't a target"
+  },
+  {
+   "name": "Elrond of the White Council",
+   "needs": [
+    "effect:voter-chooses-permanent"
+   ],
+   "why": "\"For each fellowship vote, the voter chooses a creature they control\" — a choice the voter makes after the vote; the secret vote itself is built."
+  },
+  {
+   "name": "Courageous Resolve",
+   "needs": [
+    "keyword:protection-from-opponents",
+    "effect:grant-protection-temporary"
+   ],
+   "why": "'gains protection from each of your opponents until end of turn': protection is a static of colours/types/filters only, no temporary grant and no from-player (the fateful-hour half is expressible via player-effect)"
+  },
+  {
+   "name": "Witch-king, Sky Scourge",
+   "needs": [
+    "effect:attack-batch-those-creatures"
+   ],
+   "why": "X is the total power of the attacking Wraiths (last-known if gone, per its ruling); attack-with exposes no amount over its batch, and an attacking-filter aggregate is the drift AUTHORING section 15 forbids"
+  },
+  {
+   "name": "Gandalf of the Secret Fire",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-suspended"
+   ],
+   "why": "exile the resolving spell with three time counters and give it suspend instead of the graveyard: exile-spell-as-it-resolves has return/plotted variants only"
+  },
+  {
+   "name": "Denethor, Stone Seer",
+   "needs": [
+    "effect:target-player-becomes-monarch"
+   ],
+   "why": "'Target player becomes the monarch': become-monarch takes only a scope"
+  },
+  {
+   "name": "Tale of Tinúviel",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "Chapter I: indestructible 'for as long as you control this Saga'. while-source ends only when the Saga leaves, not when control of it changes"
+  },
+  {
+   "name": "Smite the Deathless",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\" — a replacement on the target for the turn; losing indestructible is built."
+  },
+  {
+   "name": "You Cannot Pass!",
+   "needs": [
+    "filter:blocked-or-blocked-by-filter-this-turn"
+   ],
+   "why": "Target filter 'blocked or was blocked by a legendary creature this turn' needs a per-turn block history, with the partner read as it was when the block happened (the ruling)"
+  },
+  {
+   "name": "Aragorn, Company Leader",
+   "needs": [
+    "effect:copy-counter-kinds-just-put"
+   ],
+   "why": "'Whenever you put one or more counters on Aragorn, put one of each of those kinds on up to one other target creature': nothing gives the trigger the set of kinds just put. The first ability's choice of counter is also made on resolution"
+  },
+  {
+   "name": "Glorfindel, Dauntless Rescuer",
+   "needs": [
+    "effect:blocked-by-at-most-one-this-turn"
+   ],
+   "why": "Mode 2 'can't be blocked by more than one creature each combat this turn' exists only as a static (blockedByAtMostOne), not as a one-shot grant until end of turn. The restrict effect's CombatRestriction union has no such entry"
+  },
+  {
+   "name": "Shagrat, Loot Bearer",
+   "needs": [
+    "effect:count-equipment-attached-to-source"
+   ],
+   "why": "'Amass Orcs X, where X is the number of Equipment attached to Shagrat': no amount or filter counts the Equipment attached to the source"
+  },
+  {
+   "name": "Rally the Galadhrim",
+   "needs": [
+    "keyword:conspire"
+   ],
+   "why": "Conspire (rule 702.78) isn't modelled"
+  },
+  {
+   "name": "Éowyn, Lady of Rohan",
+   "needs": [
+    "cost:equip-ability-cost-reduction"
+   ],
+   "why": "\"Equip abilities you activate cost {1} less\": abilityCostModification has ninjutsu/unlock flags but no equip-only one (the begin-combat trigger itself is expressible)."
+  },
+  {
+   "name": "Saruman of Many Colors",
+   "needs": [
+    "cost:ward-discard-filter"
+   ],
+   "why": "Ward—Discard an enchantment, instant, or sorcery card: WardCost.discard is a count with no card filter; its second-spell trigger's reflexive 'milled this way' exile-and-cast capped by that spell's mana value is unverified too."
+  },
+  {
+   "name": "King of the Oathbreakers",
+   "needs": [
+    "trigger:phases-in"
+   ],
+   "why": "\"Whenever ~ or another Spirit you control phases in\": no phase-in trigger (AUTHORING §15, rule 603.10b)."
+  },
+  {
+   "name": "Landroval, Horizon Witness",
+   "needs": [
+    "trigger:attacks-player-at-least"
+   ],
+   "why": "\"Whenever two or more creatures you control attack a player\": attacks-player fires once per player but has no attacker-count threshold, and attack-with counts the whole declaration, not per player."
+  },
+  {
+   "name": "Battle-Scarred Goblin",
+   "needs": [
+    "effect:damage-each-creature-blocking-source"
+   ],
+   "why": "\"Deals 1 damage to each creature blocking it\": no filter/scope for the creatures blocking a given attacker (only blocking: true, any blocker)."
+  },
+  {
+   "name": "Lobelia, Defender of Bag End",
+   "needs": [
+    "effect:modal-activated-ability"
+   ],
+   "why": "\"{T}, Sacrifice an artifact: Choose one —\": a modal activated ability (modes chosen on activation, rule 602.2b/700.2) isn't built (AUTHORING §15 'Modal abilities')."
+  },
+  {
+   "name": "Mists of Lórien",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "Replicate {U} isn't built (no vocabulary); 'each other nonland permanent with the same mana value as that permanent' would also need a filter keyed to the target's mana value."
+  },
+  {
+   "name": "Mirkwood Trapper",
+   "needs": [
+    "trigger:player-attacks-not-you",
+    "effect:choices-by-other-players"
+   ],
+   "why": "\"Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature\": no per-declaration trigger with a 'not attacking you (planeswalkers aside)' condition, and the attacking player makes an untargeted choice. (The first ability, attacks-player defender you, is expressible.)"
+  },
+  {
+   "name": "Surrounded by Orcs",
+   "needs": [
+    "effect:amassed-army-power"
+   ],
+   "why": "'mills X cards, where X is the amassed Army's power': amass exposes no reference to the Army it chose"
+  },
+  {
+   "name": "Call for Aid",
+   "needs": [
+    "effect:gain-control-all-target-player",
+    "effect:this-way-gained-control",
+    "effect:cant-attack-player-this-turn"
+   ],
+   "why": "gain-control-all can't name a target player's creatures (controlledBy is trigger-player only); 'those creatures' (untap, haste, can't be sacrificed this turn) needs a this-way set of what changed control; and 'you can't attack that player this turn' has no effect"
+  },
+  {
+   "name": "Rampaging War Mammoth",
+   "needs": [
+    "decision:x-targets"
+   ],
+   "why": "'When you cycle this card, destroy up to X target artifacts': a target count of X (from the cycling cost) isn't expressible"
+  },
+  {
+   "name": "Archivist of Gondor",
+   "needs": [
+    "condition:no-monarch",
+    "trigger:monarch-end-step"
+   ],
+   "why": "'if there is no monarch' has no condition (monarch is only who: you | opponent), and 'at the beginning of the monarch's end step, that player draws' has no step trigger keyed to the monarch"
+  }
+ ]
+}

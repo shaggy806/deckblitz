@@ -195,6 +195,7 @@ import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
+import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
@@ -242,6 +243,7 @@ import _poolNivMizzetGhostCounsel from "../pool/niv-mizzet-ghost-counsel.js";
 import _poolNoMoreLies from "../pool/no-more-lies.js";
 import _poolNobleVestige from "../pool/noble-vestige.js";
 import _poolNomadOutpost from "../pool/nomad-outpost.js";
+import _poolNowForWrathNowForRuin from "../pool/now-for-wrath-now-for-ruin.js";
 import _poolNukaColaVendingMachine from "../pool/nuka-cola-vending-machine.js";
 import _poolNyxbornCourser from "../pool/nyxborn-courser.js";
 import _poolObeliskOfUrd from "../pool/obelisk-of-urd.js";
@@ -276,11 +278,14 @@ import _poolPredatorsStrike from "../pool/predators-strike.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
+import _poolQuickDraw from "../pool/quick-draw.js";
+import _poolRallyAtTheHornburg from "../pool/rally-at-the-hornburg.js";
 import _poolRancor from "../pool/rancor.js";
 import _poolRangersGuile from "../pool/rangers-guile.js";
 import _poolRaphaelsTechnique from "../pool/raphaels-technique.js";
 import _poolRapidRescue from "../pool/rapid-rescue.js";
 import _poolRatadrabikOfUrborg from "../pool/ratadrabik-of-urborg.js";
+import _poolRavenousTyrannosaurus from "../pool/ravenous-tyrannosaurus.js";
 import _poolRayFilletWaveWarrior from "../pool/ray-fillet-wave-warrior.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
@@ -348,6 +353,7 @@ import _poolSquall from "../pool/squall.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
 import _poolSterlingGrove from "../pool/sterling-grove.js";
+import _poolSternScolding from "../pool/stern-scolding.js";
 import _poolStockmanMadFlyEntist from "../pool/stockman-mad-fly-entist.js";
 import _poolStoneGolem from "../pool/stone-golem.js";
 import _poolStoneQuarry from "../pool/stone-quarry.js";
@@ -391,6 +397,7 @@ import _poolThunderclapDrake from "../pool/thunderclap-drake.js";
 import _poolThunderingGiant from "../pool/thundering-giant.js";
 import _poolTimberGorge from "../pool/timber-gorge.js";
 import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
+import _poolTivitSellerOfSecrets from "../pool/tivit-seller-of-secrets.js";
 import _poolTormentedAngel from "../pool/tormented-angel.js";
 import _poolTowerOfMurmurs from "../pool/tower-of-murmurs.js";
 import _poolToweringThunderfist from "../pool/towering-thunderfist.js";
@@ -651,6 +658,7 @@ const shard: CardShard = {
     _poolKonstrariAnnex,
     _poolKrotiqNestguard,
     _poolLaserScrewdriver,
+    _poolLashOfTheBalrog,
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
     _poolLethalScheme,
@@ -698,6 +706,7 @@ const shard: CardShard = {
     _poolNoMoreLies,
     _poolNobleVestige,
     _poolNomadOutpost,
+    _poolNowForWrathNowForRuin,
     _poolNukaColaVendingMachine,
     _poolNyxbornCourser,
     _poolObeliskOfUrd,
@@ -732,11 +741,14 @@ const shard: CardShard = {
     _poolPrimordialHydra,
     _poolProudMentor,
     _poolQalaAjanisPridemate,
+    _poolQuickDraw,
+    _poolRallyAtTheHornburg,
     _poolRancor,
     _poolRangersGuile,
     _poolRaphaelsTechnique,
     _poolRapidRescue,
     _poolRatadrabikOfUrborg,
+    _poolRavenousTyrannosaurus,
     _poolRayFilletWaveWarrior,
     _poolRazorfinHunter,
     _poolRazortipWhip,
@@ -804,6 +816,7 @@ const shard: CardShard = {
     _poolStaggershock,
     _poolStarkIndustriesExecutive,
     _poolSterlingGrove,
+    _poolSternScolding,
     _poolStockmanMadFlyEntist,
     _poolStoneGolem,
     _poolStoneQuarry,
@@ -847,6 +860,7 @@ const shard: CardShard = {
     _poolThunderingGiant,
     _poolTimberGorge,
     _poolTinybonesBaubleBurglar,
+    _poolTivitSellerOfSecrets,
     _poolTormentedAngel,
     _poolTowerOfMurmurs,
     _poolToweringThunderfist,

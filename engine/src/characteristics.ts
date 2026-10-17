@@ -963,6 +963,8 @@ function evalStaticCondition(
     case "excess-damage-this-way":
     case "damage-dealt-this-way":
     case "source-on-battlefield":
+    case "vote-won":
+    case "votes-cast":
       // A static ability has no triggering object, no chosen targets and no
       // resolution in progress — these kinds are only meaningful inside a
       // `conditional` effect, where the resolution context answers them
@@ -1443,6 +1445,30 @@ export function abilitiesLostAt(object: GameObject): number | null {
  */
 export function grantOutlastsLoss(lostAt: number | null, timestamp: number | undefined): boolean {
   return lostAt === null || (timestamp !== undefined && timestamp > lostAt);
+}
+
+/** One keyword taken away in layer 6 ("loses flying"), at its timestamp. */
+interface KeywordLoss {
+  readonly keyword: Keyword;
+  readonly timestamp: number;
+}
+
+/** Every keyword loss reaching `object`: from the statics that reach it
+ * (`effects`) and from its own modifiers. */
+function keywordLosses(effects: readonly AppliedEffect[], object: GameObject): readonly KeywordLoss[] {
+  const out: KeywordLoss[] = [];
+  for (const effect of effects) for (const keyword of effect.loseKeywords) out.push({ keyword, timestamp: effect.timestamp });
+  for (const modifier of object.modifiers) {
+    for (const keyword of modifier.loseKeywords ?? []) out.push({ keyword, timestamp: modifier.timestamp ?? Infinity });
+  }
+  return out;
+}
+
+/** Whether a keyword given at `timestamp` (printed: `-Infinity`) is taken
+ * away by a loss after it (rule 613.7 — timestamp order within layer 6). */
+function lostAfter(losses: readonly KeywordLoss[], keyword: Keyword, timestamp: number | undefined): boolean {
+  const at = timestamp ?? Infinity;
+  return losses.some((loss) => loss.keyword === keyword && loss.timestamp > at);
 }
 
 /** {@link grantOutlastsLoss} for what a modifier grants — which, on the
@@ -2532,6 +2558,8 @@ interface AppliedEffect {
   readonly power: number;
   readonly toughness: number;
   readonly keywords: readonly Keyword[];
+  /** Keywords it takes away (`loseKeywords`). */
+  readonly loseKeywords: readonly Keyword[];
   /** Toxic N it grants (`grantToxic`), 0 for none. */
   readonly toxic: number;
   readonly restrictions: readonly CombatRestriction[];
@@ -2605,6 +2633,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.grantPt !== undefined ||
     ability.grantPtPerCount !== undefined ||
     ability.grantKeywords !== undefined ||
+    ability.loseKeywords !== undefined ||
     ability.grantToxic !== undefined ||
     ability.restrictions !== undefined ||
     ability.combatDamageByToughness !== undefined ||
@@ -2807,6 +2836,7 @@ function collectStaticEffects(
       power: (ability.grantPt?.[0] ?? 0) + scaledPower,
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
       keywords: ability.grantKeywords ?? [],
+      loseKeywords: ability.loseKeywords ?? [],
       toxic: ability.grantToxic ?? 0,
       restrictions: ability.restrictions ?? [],
       combatDamageByToughness: ability.combatDamageByToughness,
@@ -2855,6 +2885,7 @@ function collectStaticEffects(
       power: ability.grantPt?.[0] ?? 0,
       toughness: ability.grantPt?.[1] ?? 0,
       keywords: ability.grantKeywords ?? [],
+      loseKeywords: ability.loseKeywords ?? [],
       toxic: ability.grantToxic ?? 0,
       restrictions: ability.restrictions ?? [],
       combatDamageByToughness: ability.combatDamageByToughness,
@@ -2873,16 +2904,22 @@ function collectStaticEffects(
           hasLostAbilities(target) ? [] : registry.get(rulesTextName(target)).keywords,
         );
         const lostAt = target.zone === "battlefield" ? abilitiesLostAt(target) : null;
+        // The same timestamp order as the main fold's (rule 613.7).
+        const losses = keywordLosses(out, target);
+        for (const loss of losses) keywords.delete(loss.keyword);
         for (const effect of out) {
-          if (grantOutlastsLoss(lostAt, effect.timestamp)) for (const k of effect.keywords) keywords.add(k);
+          if (!grantOutlastsLoss(lostAt, effect.timestamp)) continue;
+          for (const k of effect.keywords) if (!lostAfter(losses, k, effect.timestamp)) keywords.add(k);
         }
         for (const modifier of target.modifiers) {
-          if (modifierGrantApplies(modifier, lostAt)) for (const k of modifier.keywords) keywords.add(k);
+          if (!modifierGrantApplies(modifier, lostAt)) continue;
+          for (const k of modifier.keywords) if (!lostAfter(losses, k, modifier.timestamp)) keywords.add(k);
         }
         for (const k of keywordCountersOn(target)) {
-          if (grantOutlastsLoss(lostAt, keywordCounterTimestamp(target, k))) keywords.add(k);
+          const at = keywordCounterTimestamp(target, k);
+          if (grantOutlastsLoss(lostAt, at) && !lostAfter(losses, k, at)) keywords.add(k);
         }
-        if (suspectedGrantsApply(target)) keywords.add("menace");
+        if (suspectedGrantsApply(target) && !lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
       }
       return keywords;
     };
@@ -3029,9 +3066,16 @@ function computeCharacteristicsUncached(
   // merely stop it doing (Pacifism's "can't attack", "can't be sacrificed")
   // isn't an ability it has, and stays.
   const lostAt = onBattlefield ? abilitiesLostAt(object) : null;
+  // A keyword loss ("loses flying") takes away what had the keyword before
+  // it — printed, or granted earlier — and a later grant gives it back (rule
+  // 613.7).
+  const losses = keywordLosses(staticEffects, object);
+  for (const loss of losses) keywords.delete(loss.keyword);
   for (const effect of staticEffects) {
     const granted = grantOutlastsLoss(lostAt, effect.timestamp);
-    if (granted) for (const keyword of effect.keywords) keywords.add(keyword);
+    if (granted) {
+      for (const keyword of effect.keywords) if (!lostAfter(losses, keyword, effect.timestamp)) keywords.add(keyword);
+    }
     // Each grant is one more instance of toxic, and instances add up (rule
     // 702.164b).
     if (granted) toxic += effect.toxic;
@@ -3054,7 +3098,11 @@ function computeCharacteristicsUncached(
   }
   for (const modifier of object.modifiers) {
     const granted = modifierGrantApplies(modifier, lostAt);
-    if (granted) for (const keyword of modifier.keywords) keywords.add(keyword);
+    if (granted) {
+      for (const keyword of modifier.keywords) {
+        if (!lostAfter(losses, keyword, modifier.timestamp)) keywords.add(keyword);
+      }
+    }
     for (const r of modifier.restrictions ?? []) restrictions.add(r);
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
@@ -3065,12 +3113,13 @@ function computeCharacteristicsUncached(
     if (modifier.combatDamageByToughness === true) byToughness = "always";
   }
   for (const keyword of keywordCountersOn(object)) {
-    if (grantOutlastsLoss(lostAt, keywordCounterTimestamp(object, keyword))) keywords.add(keyword);
+    const at = keywordCounterTimestamp(object, keyword);
+    if (grantOutlastsLoss(lostAt, at) && !lostAfter(losses, keyword, at)) keywords.add(keyword);
   }
   // Rule 701.60c — a suspected permanent has menace and "This creature can't
   // block" for as long as it's suspected.
   if (onBattlefield && suspectedGrantsApply(object)) {
-    keywords.add("menace");
+    if (!lostAfter(losses, "menace", -Infinity)) keywords.add("menace");
     restrictions.add("cant-block");
   }
 

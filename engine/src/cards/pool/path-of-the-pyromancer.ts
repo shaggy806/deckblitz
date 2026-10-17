@@ -12,8 +12,6 @@ import { defineCard } from "../define.js";
 // so outside Planechase — every game this engine runs — neither result does
 // anything; the vote itself still happens.
 
-const NOTHING = { kind: "sequence", effects: [] } as const;
-
 export default defineCard({
   name: "Path of the Pyromancer",
   manaCost: "{4}{R}",
@@ -26,15 +24,7 @@ export default defineCard({
       { kind: "discard-hand", who: "you" },
       { kind: "add-mana", mana: "R", amount: { thisWay: "discarded", who: "you" } },
       { kind: "draw", amount: { sum: [{ thisWay: "discarded", who: "you" }, 1] } },
-      {
-        kind: "each-player-may",
-        who: "each-player",
-        startingWithYou: true,
-        choices: [
-          { text: "Vote for planeswalk", effect: NOTHING },
-          { text: "Vote for chaos", effect: NOTHING },
-        ],
-      },
+      { kind: "vote", for: { options: ["planeswalk", "chaos"] } },
     ],
   },
 });

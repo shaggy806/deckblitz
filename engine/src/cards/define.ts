@@ -983,6 +983,19 @@ export type StaticCondition =
    */
   | { readonly kind: "source-on-battlefield" }
   /**
+   * "If time gets **more votes**" (Plea for Power — rule 701.38): option
+   * `option` of the `vote` this resolution held got more votes than each
+   * other option. A tie isn't more, so "if knowledge gets more votes **or
+   * the vote is tied**" is the `else`. Only a resolution can answer it.
+   */
+  | { readonly kind: "vote-won"; readonly option: number }
+  /**
+   * "If **no creature got votes**" (Vault 11: Voter's Dilemma) is this under
+   * a `not`: at least one vote was cast in the `vote` this resolution held.
+   * Only a resolution can answer it.
+   */
+  | { readonly kind: "votes-cast" }
+  /**
    * The ability's own source matches `filter` — "as long as ~ is equipped",
    * "if ~ is attacking", "if ~ is tapped". A triggered ability whose source
    * was a permanent that has since left (its own dies trigger) reads it as it
@@ -1394,6 +1407,11 @@ export interface StaticAbility {
   readonly spellsHaveDelve?: boolean;
   /** Keywords granted in layer 6. */
   readonly grantKeywords?: readonly Keyword[];
+  /** Keywords it takes away in layer 6 — "equipped creature … **loses
+   * flying**" (Starforged Sword). A loss applies at the static's timestamp
+   * (rule 613.7): it removes the keyword from what had it before — printed,
+   * or granted earlier — and a grant after it gives the keyword back. */
+  readonly loseKeywords?: readonly Keyword[];
   /**
    * Toxic N granted in layer 6 (rule 702.164) — Karumonix, the Rat King's
    * "Other Rats you control have toxic 1". One more instance of toxic on each
@@ -1636,6 +1654,12 @@ export interface StaticAbility {
    * mana is lost as the step or phase it left in ends. Like `noMaxHandSize`,
    * a property of the player, read off the battlefield. */
   readonly keepsUnspentMana?: readonly ManaType[];
+  /** "While voting, you may vote an additional time" (Tivit, Seller of
+   * Secrets — rule 701.38d): as its controller votes, they may cast one more
+   * vote for each of these they control, at the same time (the extra vote is
+   * optional, asked after their first). Read off the battlefield like
+   * `keepsUnspentMana`; `affects` is ignored. */
+  readonly votesAdditionalTime?: boolean;
   /** "If you would lose unspent mana, that mana becomes colorless instead"
    * (Kruphix, God of Horizons — a replacement, rule 614): every unit its
    * controller would lose as a step or phase ends (rule 500.4) stays in
@@ -2490,6 +2514,16 @@ export interface CardDefinition {
    * for as long as it stays on the battlefield (`GameObject.textFrom`).
    * `null` for a normal card. */
   readonly exchangeTextOnEnter: CardFilter | null;
+  /**
+   * Devour N (rule 702.82): "As this object enters, you may sacrifice any
+   * number of creatures. This permanent enters with N +1/+1 counters on it
+   * for each creature sacrificed this way." `filter` is what may be devoured
+   * — `{ type: "creature" }`, or "devour land 3" / "devour Food 3"'s quality
+   * (702.82b), read from its controller's side; `multiplier` is N. Asked as
+   * it's about to enter (rule 614.12) and sacrificed then, before it's on the
+   * battlefield. `null` for none.
+   */
+  readonly devour: { readonly multiplier: number; readonly filter: CardFilter } | null;
   /** "As this enters, choose a creature type" (Urza's Incubator — needed-cards
    * P14). The permanent's `chosenCreatureType` is set once its controller
    * answers; a `costModification.matchesChosenCreatureType` reads it back. */
@@ -2891,6 +2925,7 @@ const PRINTED_ABILITY: {
   splitSecond: (def) => def.splitSecond,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
+  devour: (def) => def.devour !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   loyalty: false,
@@ -3063,6 +3098,7 @@ interface CardDraft {
   splitSecond?: boolean;
   copyOnEnter?: CopyOnEnter;
   exchangeTextOnEnter?: CardFilter;
+  devour?: { readonly multiplier: number; readonly filter: CardFilter };
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
@@ -3173,6 +3209,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     splitSecond: draft.splitSecond ?? false,
     copyOnEnter: draft.copyOnEnter ?? null,
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
+    devour: draft.devour ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseOnEnter: draft.chooseOnEnter ?? null,
     loyalty,

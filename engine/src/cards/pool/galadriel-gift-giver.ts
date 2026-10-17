@@ -55,6 +55,6 @@ export default defineCard({
     `• ${TREASURE_MODE} (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")`,
   triggered: [
     { trigger: { on: "enters-battlefield", who: "self" }, targets: [], effect: MODES, resolve: null, text: TEXT },
-    { trigger: { on: "attacks", who: "self" }, targets: [], effect: MODES, resolve: null, text: TEXT },
+    { trigger: { on: "attacks", who: "self" }, sameAbilityAs: 0, targets: [], effect: MODES, resolve: null, text: TEXT },
   ],
 });

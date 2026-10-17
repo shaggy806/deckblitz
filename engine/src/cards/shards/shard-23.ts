@@ -65,6 +65,7 @@ import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
 import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
+import _poolButterburBreeInnkeeper from "../pool/butterbur-bree-innkeeper.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCartographersCompanion from "../pool/cartographers-companion.js";
@@ -131,6 +132,7 @@ import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
+import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
@@ -520,6 +522,7 @@ const shard: CardShard = {
     _poolBroodheartEngine,
     _poolBurstLightning,
     _poolBushyBodyguard,
+    _poolButterburBreeInnkeeper,
     _poolCapashenStandard,
     _poolCarmenCruelSkymarcher,
     _poolCartographersCompanion,
@@ -586,6 +589,7 @@ const shard: CardShard = {
     _poolEvendoWakingHaven,
     _poolExclusionMage,
     _poolEzioBladeOfVengeance,
+    _poolFaramirFieldCommander,
     _poolFateholdChronologist,
     _poolFearOfImmobility,
     _poolFiendishDuo,

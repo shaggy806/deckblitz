@@ -252,6 +252,7 @@ import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
+import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
@@ -674,6 +675,7 @@ const shard: CardShard = {
     _poolPyroclasticElemental,
     _poolPyrohemia,
     _poolQueenBrahne,
+    _poolQuickbeamUpstartEnt,
     _poolRagingRegisaur,
     _poolRampagingHippo,
     _poolRaugrinCrystal,

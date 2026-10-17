@@ -153,6 +153,7 @@ import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGalvanize from "../pool/galvanize.js";
 import _poolGalvanizingSawship from "../pool/galvanizing-sawship.js";
+import _poolGandalfTheGrey from "../pool/gandalf-the-grey.js";
 import _poolGardenize from "../pool/gardenize.js";
 import _poolGatherCourage from "../pool/gather-courage.js";
 import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
@@ -302,6 +303,7 @@ import _poolRiptideCrab from "../pool/riptide-crab.js";
 import _poolRoarOfTheWurm from "../pool/roar-of-the-wurm.js";
 import _poolRocketeerBoostbuggy from "../pool/rocketeer-boostbuggy.js";
 import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js";
+import _poolRohirrimChargers from "../pool/rohirrim-chargers.js";
 import _poolRosaResoluteWhiteMage from "../pool/rosa-resolute-white-mage.js";
 import _poolRousingRead from "../pool/rousing-read.js";
 import _poolRowanTreefolk from "../pool/rowan-treefolk.js";
@@ -409,6 +411,7 @@ import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
 import _poolUpdraftElemental from "../pool/updraft-elemental.js";
+import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
 import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
@@ -613,6 +616,7 @@ const shard: CardShard = {
     _poolGalvanicBlast,
     _poolGalvanize,
     _poolGalvanizingSawship,
+    _poolGandalfTheGrey,
     _poolGardenize,
     _poolGatherCourage,
     _poolGatheringOfDarkness,
@@ -762,6 +766,7 @@ const shard: CardShard = {
     _poolRoarOfTheWurm,
     _poolRocketeerBoostbuggy,
     _poolRofellosLlanowarEmissary,
+    _poolRohirrimChargers,
     _poolRosaResoluteWhiteMage,
     _poolRousingRead,
     _poolRowanTreefolk,
@@ -869,6 +874,7 @@ const shard: CardShard = {
     _poolUnrulyMob,
     _poolUnyieldingGatekeeper,
     _poolUpdraftElemental,
+    _poolVault11VotersDilemma,
     _poolVenomLethalProtector,
     _poolVenomcrawler,
     _poolVerdantEmbrace,

@@ -13,6 +13,30 @@ import type { TargetRef } from "./target.js";
 import type { Phase, Step } from "./turn.js";
 
 /**
+ * What one vote was for (rule 701.38b): one of a vote's named options (its
+ * index and words), a permanent (with its battlefield stint, rule 400.7), or
+ * a player.
+ */
+export type VoteChoice =
+  | { readonly option: number; readonly text: string }
+  | { readonly object: ObjectId; readonly zoneChangeCount: number }
+  | { readonly player: PlayerId };
+
+/** One vote cast: who cast it, and for what. A player with more than one vote
+ * (rule 701.38d) casts more than one of these. */
+export interface Vote {
+  readonly voter: PlayerId;
+  readonly choice: VoteChoice;
+}
+
+/** Whether two votes are for the same choice. */
+export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
+  if ("option" in a) return "option" in b && a.option === b.option;
+  if ("object" in a) return "object" in b && a.object === b.object && a.zoneChangeCount === b.zoneChangeCount;
+  return "player" in b && a.player === b.player;
+}
+
+/**
  * How long an effect on a permanent lasts, as it's kept: until end of turn,
  * for as long as the permanent stays ("permanent"), until a given player's
  * next turn begins (an effect's "until your next turn", resolved to whose),
@@ -654,6 +678,20 @@ export type GameEvent =
       readonly duration: EffectDuration;
     })
   | (Base & {
+      /** A creature was removed from combat by an effect (rule 506.4 —
+       * Labyrinth of Skophos). */
+      readonly type: "removed-from-combat";
+      readonly object: ObjectId;
+    })
+  | (Base & {
+      /** A permanent loses keywords for a while ("loses flying until end of
+       * turn" — the `lose-keywords` effect). */
+      readonly type: "keywords-lost";
+      readonly object: ObjectId;
+      readonly keywords: readonly string[];
+      readonly duration: EffectDuration;
+    })
+  | (Base & {
       readonly type: "pt-modifier-expired";
       readonly objects: readonly ObjectId[];
     })
@@ -1047,6 +1085,27 @@ export type GameEvent =
       readonly source: ObjectId;
       readonly player?: PlayerId;
       readonly modes: readonly number[];
+    })
+  | (Base & {
+      /** A player voted (rule 701.38) in an open vote — "starting with you,
+       * each player votes …", which each later voter sees. A secret vote
+       * ("each player secretly votes") emits none: its votes are only shown
+       * by the `votes-finished` that reveals them all. */
+      readonly type: "vote-cast";
+      readonly source: ObjectId;
+      readonly vote: Vote;
+    })
+  | (Base & {
+      /** Every player has voted in the vote `source`'s spell or ability
+       * held, `controller` that spell's or ability's controller: `votes` is
+       * every vote cast, in the order cast — a secret vote's revealed now.
+       * The hook for "whenever players finish voting" (Erestor of the
+       * Council). */
+      readonly type: "votes-finished";
+      readonly source: ObjectId;
+      readonly controller: PlayerId;
+      readonly votes: readonly Vote[];
+      readonly secret: boolean;
     })
   | (Base & {
       /** Cards were put into graveyards **at the same time** — dying,

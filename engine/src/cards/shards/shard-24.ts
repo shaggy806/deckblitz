@@ -102,6 +102,7 @@ import _poolDeadeyeHarpooner from "../pool/deadeye-harpooner.js";
 import _poolDeadeyeTormentor from "../pool/deadeye-tormentor.js";
 import _poolDeadpoolTradingCard from "../pool/deadpool-trading-card.js";
 import _poolDeathgazeCockatrice from "../pool/deathgaze-cockatrice.js";
+import _poolDeceiveTheMessenger from "../pool/deceive-the-messenger.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDestructiveForce from "../pool/destructive-force.js";
 import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
@@ -121,6 +122,7 @@ import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolExecute from "../pool/execute.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
@@ -166,6 +168,8 @@ import _poolGurmagRakshasa from "../pool/gurmag-rakshasa.js";
 import _poolHallMonitor from "../pool/hall-monitor.js";
 import _poolHammerOfPurphoros from "../pool/hammer-of-purphoros.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
+import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
+import _poolHauntOfTheDeadMarshes from "../pool/haunt-of-the-dead-marshes.js";
 import _poolHaveForDinner from "../pool/have-for-dinner.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
@@ -237,6 +241,7 @@ import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.
 import _poolMorgueToad from "../pool/morgue-toad.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
+import _poolMycoloth from "../pool/mycoloth.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNibelheimAflame from "../pool/nibelheim-aflame.js";
@@ -330,6 +335,7 @@ import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
+import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpotcycleScouter from "../pool/spotcycle-scouter.js";
 import _poolSpringSplasher from "../pool/spring-splasher.js";
@@ -537,6 +543,7 @@ const shard: CardShard = {
     _poolDeadeyeTormentor,
     _poolDeadpoolTradingCard,
     _poolDeathgazeCockatrice,
+    _poolDeceiveTheMessenger,
     _poolDesertOfTheFervent,
     _poolDestructiveForce,
     _poolDevilDinosaur,
@@ -556,6 +563,7 @@ const shard: CardShard = {
     _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
     _poolElvishVisionary,
+    _poolEntsFury,
     _poolErode,
     _poolExecute,
     _poolExpeditionMap,
@@ -601,6 +609,8 @@ const shard: CardShard = {
     _poolHallMonitor,
     _poolHammerOfPurphoros,
     _poolHanweirGarrison,
+    _poolHaradrimSpearmaster,
+    _poolHauntOfTheDeadMarshes,
     _poolHaveForDinner,
     _poolHeartWarden,
     _poolHeavenSent,
@@ -672,6 +682,7 @@ const shard: CardShard = {
     _poolMorgueToad,
     _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
+    _poolMycoloth,
     _poolMyrGalvanizer,
     _poolNarstadScrapper,
     _poolNibelheimAflame,
@@ -765,6 +776,7 @@ const shard: CardShard = {
     _poolSolsticeZealot,
     _poolSoothsayerAdept,
     _poolSorinsVengeance,
+    _poolSpiresOfOrazca,
     _poolSplitTailMiko,
     _poolSpotcycleScouter,
     _poolSpringSplasher,

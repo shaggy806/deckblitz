@@ -1109,6 +1109,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Amass Zombies 4.")).toEqual({ kind: "amass", amount: 4, creatureType: "Zombie" });
   });
 
+  it("devour N, devour land N and devour Food N (rule 702.82)", () => {
+    const myco = face(
+      "Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +1/+1 counters on it.)",
+      "Creature — Fungus",
+    );
+    expect(myco.devour).toEqual({ multiplier: 2, filter: { type: "creature" } });
+    expect(myco.complete).toBe(true);
+    const hobbit = face(
+      "Devour Food 3 (As this creature enters, you may sacrifice any number of Foods. It enters with three times that many +1/+1 counters on it.)",
+      "Creature — Halfling Citizen",
+    );
+    expect(hobbit.devour).toEqual({ multiplier: 3, filter: { type: "artifact", subtype: "Food" } });
+  });
+
   it("a Role token created attached (rule 303.7): to a target, to up to one other target, to it", () => {
     const genealogist = face(
       "When this creature enters, create a Royal Role token attached to another target creature you control.",

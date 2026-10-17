@@ -42,6 +42,7 @@ export default defineCard({
     },
     {
       trigger: { on: "leaves-battlefield", who: "self" },
+      sameAbilityAs: 0,
       targets: [],
       effect: { kind: "the-ring-tempts-you" },
       resolve: null,

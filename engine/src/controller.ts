@@ -702,6 +702,11 @@ export class AutomaticController implements PlayerController {
       const units = eligible.flatMap((id) => Array<ObjectId>(view.state.objects[id]?.stackCount ?? 1).fill(id));
       return keepMostPower(units, cap.powers, cap.maxTotalPower);
     }
+    const awaiting = view.state.awaiting;
+    if (awaiting?.kind === "choose-permanents" && awaiting.devour === true) return devourPicks(view, eligible, max);
+    if (awaiting?.kind === "choose-permanents" && awaiting.then.kind === "cast-vote") {
+      return votePermanent(view, eligible, min);
+    }
     return ownPermanentsFirst(view, eligible, min, max);
   }
 
@@ -731,6 +736,30 @@ function ownPermanentsFirst(
     if (!out.includes(id)) out.push(id);
   }
   return out;
+}
+
+/**
+ * The default devour answer (rule 702.82a): the tokens it may eat — a Food,
+ * a Saproling — each token of a stack, never a card. A searching bot can
+ * weigh the counters against what's given up.
+ */
+function devourPicks(view: ControllerView, eligible: readonly ObjectId[], max: number): readonly ObjectId[] {
+  return eligible
+    .filter((id) => view.state.objects[id]?.isToken === true)
+    .flatMap((id) => Array<ObjectId>(view.state.objects[id]?.stackCount ?? 1).fill(id))
+    .slice(0, max);
+}
+
+/**
+ * The default vote for a permanent (rule 701.38): one an opponent controls —
+ * a card before a token — never one's own while there's another; none at
+ * all, when voting for none is allowed and there's only one's own.
+ */
+function votePermanent(view: ControllerView, eligible: readonly ObjectId[], min: number): readonly ObjectId[] {
+  const theirs = eligible.filter((id) => view.state.objects[id]?.controller !== view.player);
+  const pick = theirs.find((id) => view.state.objects[id]?.isToken !== true) ?? theirs[0];
+  if (pick !== undefined) return [pick];
+  return min > 0 && eligible.length > 0 ? [eligible[0]] : [];
 }
 
 /**

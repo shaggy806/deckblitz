@@ -10,8 +10,6 @@ import { defineCard } from "../define.js";
 const TEXT =
   "Whenever Emissary Green attacks, starting with you, each player votes for profit or security. You create a number of Treasure tokens equal to twice the number of profit votes. Put a number of +1/+1 counters on each creature you control equal to the number of security votes.";
 
-const NOTHING = { kind: "sequence", effects: [] } as const;
-
 export default defineCard({
   name: "Emissary Green",
   manaCost: "{4}{G}",
@@ -29,15 +27,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          {
-            kind: "each-player-may",
-            who: "each-player",
-            startingWithYou: true,
-            choices: [
-              { text: "Vote for profit", effect: NOTHING },
-              { text: "Vote for security", effect: NOTHING },
-            ],
-          },
+          { kind: "vote", for: { options: ["profit", "security"] } },
           { kind: "create-token", token: "Treasure Token", count: { product: [2, { votesFor: 0 }] } },
           {
             kind: "add-counter-all",
