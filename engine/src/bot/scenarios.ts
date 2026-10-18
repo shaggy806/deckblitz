@@ -4460,51 +4460,45 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
 
-  asked({
+  {
     name: "Skullclamps a 1/1 token for two cards",
     rule: "Equipping Skullclamp to a 1/1 token kills it for two cards: a card up.",
-    position(registry) {
+    run(weights, registry, makeBot) {
       // Two cards (+4) against the token's body and its one point of attack:
       // every creature counts `creatures` 2.5 whatever its size, so the body
       // scores about as much as the cards, and the attack tips it to passing.
+      // Judged over the whole turn (2026-10-18): planning its turn, the bot
+      // attacks with the token first and clamps it after combat, which is
+      // better, and a judge of the first move alone called it a pass.
       const game = table(registry, [A, B], A);
       lands(game, "Mountain", A, 2);
       const token = onBoard(game, "Soldier Token", A);
       game.state.objects[token].isToken = true;
       const clamp = onBoard(game, "Skullclamp", A);
-      return {
-        game,
-        player: A,
-        judge: (action) => ({
-          passed: action.type === "activate-ability" && action.source === clamp,
-          detail: `chose ${describeAction(action)}`,
-        }),
-      };
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const equipped = taken.some((a) => a.type === "activate-ability" && a.source === clamp);
+      return { passed: equipped, detail: equipped ? "clamped the token" : `never clamped: ${taken.map(describeAction).join(" | ")}` };
     },
-  }),
-  asked({
+  },
+  {
     name: "sacrifices a 1/1 token to Deadly Dispute",
     rule: "A 1/1 token for two cards and a Treasure is a card up and more.",
-    position(registry) {
+    run(weights, registry, makeBot) {
       // The Skullclamp scenario's root from the other side (probed
       // 2026-10-03): v2 casts Deadly Dispute on a Treasure, or a mobilize
       // token due to die, but not on a Soldier token — the token's flat
-      // `creatures` 2.5 outweighs two cards and a Treasure.
+      // `creatures` 2.5 outweighs two cards and a Treasure. Judged over the
+      // whole turn, as the Skullclamp scenario is, and for the same reason.
       const game = table(registry, [A, B, C, D], A);
       lands(game, "Swamp", A, 3);
       const token = onBoard(game, "Soldier Token", A);
       game.state.objects[token].isToken = true;
       const dispute = game.debugSpawn("Deadly Dispute", A, "hand");
-      return {
-        game,
-        player: A,
-        judge: (action) => ({
-          passed: action.type === "cast-spell" && action.card === dispute,
-          detail: `chose ${describeAction(action)}`,
-        }),
-      };
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const cast = taken.some((a) => a.type === "cast-spell" && a.card === dispute);
+      return { passed: cast, detail: cast ? "cast Deadly Dispute" : `never cast it: ${taken.map(describeAction).join(" | ")}` };
     },
-  }),
+  },
   asked({
     name: "casts Urza's Incubator first so Miirym fits in the same turn",
     rule: "A cost reducer that pays for itself this turn goes first: Incubator naming Dragon, then Miirym, is seven mana for both.",

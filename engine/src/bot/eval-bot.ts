@@ -102,12 +102,14 @@ export interface EvalBotOptions {
   readonly followUps?: boolean;
   /**
    * Plan our own turn (`turn-plan.ts`) in place of `followUps`: lines of
-   * moves across both main phases, the opponents only blocking. `"next-turn"`
-   * also plays our next turn on from the closest few lines, and from each
-   * land when there's a choice of land drop. Off by default: an experiment
-   * measured on the lookahead benchmarks (`benchmarks.ts`).
+   * moves across both main phases, the opponents only blocking. `"turn"` by
+   * default (since 2026-10-18: lookahead benchmarks 7 to 9 of 17, every gate
+   * scenario, 26.9% to 30.5% over 197 four-player games at no cost a
+   * decision); `"next-turn"` also plays our next turn on from the best line
+   * of each of the best few first moves, an experiment; `"off"` searches as
+   * before, with `followUps`.
    */
-  readonly plan?: "turn" | "next-turn";
+  readonly plan?: "turn" | "next-turn" | "off";
   /** Simulations one plan may spend (`TurnPlanLimits.simulations`); 48 by
    * default, and as many again for each next-turn look. */
   readonly planSimulations?: number;
@@ -765,7 +767,9 @@ export class EvalBotController extends HeuristicBotController {
     this.decisionRollout = this.rollout;
     this.rolloutDecisions = options.rolloutDecisions ?? false;
     this.followUpsOn = options.followUps ?? true;
-    this.planMode = options.plan ?? null;
+    // `followUps: false` asks for the one-move search alone: no plan either.
+    const plan = options.plan ?? "turn";
+    this.planMode = plan === "off" || options.followUps === false ? null : plan;
     this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
@@ -1168,7 +1172,7 @@ export class EvalBotController extends HeuristicBotController {
     // only the time every single move, batch and untap plan has left.
     const followed =
       this.planMode !== null
-        ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore)
+        ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore, budget)
         : this.followUps(view, candidates, scored, mustKill, heldForCombat, bestScore, budget);
     if (followed !== null) {
       best = followed.action;
@@ -2509,6 +2513,18 @@ export class EvalBotController extends HeuristicBotController {
         );
       },
       value: (state) => evaluateState(state, this.cards, this.playerId, this.weights),
+      mayAttack: (state) => {
+        const me = this.playerId;
+        const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);
+        return withComputedCache(() =>
+          state.zones.shared.battlefield.some((id) => {
+            const object = state.objects[id];
+            if (object === undefined || object.controller !== me || object.tapped) return false;
+            if (!computeCharacteristics(state, this.cards, id).types.includes("creature")) return false;
+            return opponents.some((p) => whyCannotAttack(state, this.cards, me, id, p) === null);
+          }),
+        );
+      },
     };
   }
 
@@ -2538,6 +2554,7 @@ export class EvalBotController extends HeuristicBotController {
     heldForCombat: ReadonlySet<Action>,
     best: Action,
     bestScore: number,
+    budget: SearchBudget,
   ): { readonly action: Action; readonly score: number } | null {
     this.lastFollowUp = null;
     const state = view.state;
@@ -2553,9 +2570,18 @@ export class EvalBotController extends HeuristicBotController {
     );
     if (firsts.length === 0) return null;
     const hooks = this.planHooks();
-    const limits = this.planLimits();
+    // Under a clock, the plan has what the one-move search left of it:
+    // past the deadline it scores nothing, and the one-move answer stands.
+    const limits = { ...this.planLimits(), until: budget.until, meter: budget };
     const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
-    const lines = planTurn(state, this.cards, me, firsts, hooks, limits, unknown);
+    const lines = planTurn(state, this.cards, me, firsts, hooks, limits, unknown, this.planMode === "turn");
+    // Each line traced as an answer for its first move, as a follow-up pair
+    // is (`scoreFrom`), so `scenario-fit.ts`' replay weighs what the plan
+    // weighed.
+    for (const line of lines) {
+      const step = line.steps[0];
+      if (step !== undefined) this.trace?.(step === "combat" ? { type: "pass-priority", player: me } : step, line.end);
+    }
     const chains = lines.some((line) => line.steps.length > 1);
     let chosen = lines[0];
     if (chosen === undefined) return null;

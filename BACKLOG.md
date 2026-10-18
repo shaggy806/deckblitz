@@ -207,7 +207,6 @@ Shiko or the other spell, and haste enablers in the crackback).
   follow-up at the next window instead of searching again, and retire the shortcuts it makes
   redundant (`reducerFirst`, `hideawayFirst`, untap plans) one at a time against the gate. The v3
   record (`docs/plans/bot-v3-search.md`) is why it stays within our own turn.
-- **The "think longer" checkbox is a trial** (the user, 2026-10-14): Settings' "Think longer — up to 1 s a decision" (`set-bot-think-long`, `room.ts`'s `BOT_LONG_BUDGET`), offered only where a room's thinking holds up no one else — a game in the browser, or a server started with `--long-bot-thinking`. It changes only decisions the 300 ms cut short (wide boards, slow machines). Remove it, or keep it, once tried.
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield); premium removal fired at weak
   targets past the first two rounds.
@@ -231,8 +230,14 @@ Shiko or the other spell, and haste enablers in the crackback).
   too); hand-built gate 178 and 173 of 180, `turn`'s two misses better plays the judge can't see (it attacks
   with the token before Skullclamping or Disputing it). Same seeds, 47 four-player games against
   shipped v2s: plain 25.5% [15, 40], `turn` 34.0% [22, 48], decisions no slower (105 ms average).
-  Next: a bigger bench to confirm, then seat it — its search ignores `timeBudgetMs`, so first give
-  it the clock, and turn those two scenarios into whole-turn judges.
+  `turn` is now v2's default (`COMPLETED.md`); left here: the "sequence" benchmark it misses (Opt,
+  which needs the draw known), `next-turn` (its passive opponents make held answers look idle), and
+  the opponents'-turn benchmarks, which only the (unseated) deep horizons solve.
+- **The live decision budget is a second** (the user, 2026-10-18; `server/src/room.ts`
+  `BOT_DECISION_BUDGET_MS`, was 300 ms). Two follow-ups: retire the "Think longer — up to 1 s"
+  trial (`set-bot-think-long`, protocol to client — it now only raises 200 simulations to 600),
+  and re-measure the box's knee (`npm run load-test -w server`): `MAX_ROOMS_PER_SHARD=8` was set
+  under 300 ms, and a wide board's decision can now hold its shard's other rooms for a second.
 - **Bots and token stacks: divided damage and gang blocks** (the user, 2026-10-18). Neither bot
   ever sets a cast's `division`, so divided damage always splits evenly over distinct targets (v1
   aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno

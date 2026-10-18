@@ -475,7 +475,9 @@ describe("a sacrifice of any number that lowers the cost", () => {
       },
     });
     bot.act({ state: game.state, player: A, legalActions: () => game.legalActions(A) });
-    expect(tried).toEqual([2]);
+    // Which counts were weighed, not how often: the turn plan traces its
+    // line for the same cast again (`plan`).
+    expect([...new Set(tried)]).toEqual([2]);
   });
 
   it("Extus: magecraft returns target nonlegendary creature card", () => {

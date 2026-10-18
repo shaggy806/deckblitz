@@ -58,6 +58,10 @@ export interface TurnPlanHooks {
   moves(view: ControllerView): readonly Action[];
   /** A state, scored for us. */
   value(state: GameState): number;
+  /** Whether a creature of ours could attack this turn on `state`'s board:
+   * without one, passing through combat changes nothing a move after it is
+   * worth, and the step isn't tried. */
+  mayAttack(state: GameState): boolean;
 }
 
 export interface TurnPlanLimits {
@@ -68,6 +72,15 @@ export interface TurnPlanLimits {
   /** Most simulations — a move resolved, a step through combat, a turn
    * passed out — the whole plan may spend. */
   readonly simulations: number;
+  /**
+   * A `Date.now()` stamp the plan stops at, with what it has scored so far:
+   * the deadline of the decision it serves (`EvalBotOptions.timeBudgetMs`).
+   * Absent, there's no clock, and a plan replays identically.
+   */
+  readonly until?: number;
+  /** Counts each simulation the plan spends, for the decision's own tally
+   * (`EvalBotController.lastDecision`). */
+  readonly meter?: { simulations: number };
 }
 
 /** The board a step is played on, as much of it as decides what the step
@@ -169,6 +182,8 @@ function toOurNextTurn(state: GameState, registry: CardRegistry, me: PlayerId): 
 
 interface Node {
   readonly game: Game;
+  /** The moves on this node's board, once asked. */
+  moves?: readonly Action[];
   readonly steps: readonly PlanStep[];
   readonly boards: readonly string[];
   readonly combatDone: boolean;
@@ -190,12 +205,23 @@ export function planTurn(
   limits: TurnPlanLimits,
   /** Cards no line may use: what was in our library when planning began. */
   unknown: ReadonlySet<ObjectId> = new Set(state.zones.perPlayer[me]?.library ?? []),
+  /** Score nothing unless some first move, once resolved, leaves another
+   * to make: then every line is one move the caller already weighed, and
+   * finding that out costs only the moves resolved. Finished games are
+   * still returned. */
+  onlyIfChained = false,
 ): PlannedLine[] {
   let left = limits.simulations;
+  const until = limits.until ?? Infinity;
+  const out = (): boolean => left <= 0 || (until !== Infinity && Date.now() >= until);
+  const spend = (): void => {
+    left -= 1;
+    if (limits.meter !== undefined) limits.meter.simulations += 1;
+  };
   const lines: PlannedLine[] = [];
   const scoreLine = (node: Node): PlannedLine | null => {
-    if (left <= 0) return null;
-    left -= 1;
+    if (out()) return null;
+    spend();
     const end = passOut(node.game.state, registry, me);
     if (end === null) return null;
     const line = { steps: node.steps, boards: node.boards, value: hooks.value(end), end };
@@ -215,14 +241,16 @@ export function planTurn(
       combatDone: state.turn.step !== "precombat-main",
     },
   ];
-  for (let depth = 0; depth < limits.depth && frontier.length > 0 && left > 0; depth += 1) {
-    const children: { node: Node; value: number }[] = [];
+  for (let depth = 0; depth < limits.depth && frontier.length > 0 && !out(); depth += 1) {
+    const pending: Node[] = [];
+    const movesOf = (node: Node): readonly Action[] =>
+      (node.moves ??= hooks.moves(node.game.controllerView(me)).filter(known));
     for (const node of frontier) {
-      const moves = (depth === 0 ? firsts : hooks.moves(node.game.controllerView(me))).filter(known);
+      const moves = depth === 0 ? firsts.filter(known) : movesOf(node);
       const board = boardKey(node.game.state, me);
       for (const move of moves) {
-        if (left <= 0) break;
-        left -= 1;
+        if (out()) break;
+        spend();
         const settled = simulateSettled(node.game.state, registry, me, move);
         // A move that ends the game is a finished line, scored as it ended —
         // a win, never expanded or passed out. `simulateSettled` answers
@@ -240,25 +268,33 @@ export function planTurn(
           boards: [...node.boards, board],
           combatDone: node.combatDone,
         };
-        const line = scoreLine(child);
-        if (line !== null) children.push({ node: child, value: line.value });
+        pending.push(child);
       }
       // Through combat, when something is still to do in the second main
-      // phase: a line that only passes is the caller's own "pass".
-      if (!node.combatDone && left > 0) {
-        left -= 1;
+      // phase and a creature of ours could attack first: a line that only
+      // passes is the caller's own "pass", and with nothing to attack with,
+      // a move after combat is the same move before it.
+      if (!node.combatDone && !out() && hooks.mayAttack(node.game.state)) {
+        spend();
         const after = throughCombat(node.game.state, registry, me);
-        if (after !== null && hooks.moves(after.controllerView(me)).filter(known).length > 0) {
+        if (after !== null) {
           const child: Node = {
             game: after,
             steps: [...node.steps, "combat"],
             boards: [...node.boards, board],
             combatDone: true,
           };
-          const line = scoreLine(child);
-          if (line !== null) children.push({ node: child, value: line.value });
+          if (movesOf(child).length > 0) pending.push(child);
         }
       }
+    }
+    if (depth === 0 && onlyIfChained && !pending.some((n) => n.steps[0] === "combat" || movesOf(n).length > 0)) {
+      return lines.sort((a, b) => b.value - a.value);
+    }
+    const children: { node: Node; value: number }[] = [];
+    for (const child of pending) {
+      const line = scoreLine(child);
+      if (line !== null) children.push({ node: child, value: line.value });
     }
     children.sort((a, b) => b.value - a.value);
     frontier = children.slice(0, limits.beam).map((c) => c.node);
