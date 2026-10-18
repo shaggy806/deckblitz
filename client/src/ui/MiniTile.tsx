@@ -5,6 +5,7 @@ import { CardTile } from './CardTile.tsx'
 import { keywordLabel } from './abilityIcons.ts'
 import { useHoverPopover } from './useHoverPopover.ts'
 import { KeywordTips } from './KeywordTips.tsx'
+import { OtherFace } from './OtherFace.tsx'
 import { KeywordIcon } from './KeywordIcon.tsx'
 import { cardTint } from './symbols.ts'
 import { LoyaltyCounter } from './Symbols.tsx'
@@ -240,6 +241,7 @@ export function MiniTile({
                 enchanting={enchanting}
                 ownerSeat={ownerSeat}
               />
+              <OtherFace obj={obj} />
               <KeywordTips obj={obj} />
               {held.length > 0 ? (
                 <div className={`popover-held held-${Math.min(held.length, 3)}`}>

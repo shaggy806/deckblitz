@@ -3433,6 +3433,12 @@
 .mini-tile-popover .card-tile {
   --ct-scale: calc(var(--card-w) / var(--card-w-max));
 }
+/* A double-faced card's other face (OtherFace), the same size as the card
+   and next to it, before the keyword tips — so on the card's left for a
+   popover that opened leftward (`to-left`). */
+.mini-tile-popover .other-face {
+  flex: none;
+}
 :root[data-reduce-motion] .mini-tile-popover {
   transition: none;
 }
@@ -3820,6 +3826,58 @@
    pattern as .stack-entry/.mini-tile-popover/.zone-viewer-cards below). */
 .hand-card .card-tile:disabled {
   opacity: 1;
+}
+/* A double-faced card's other face (OtherFace), beside the hand card once it
+   has grown: grown the same 1.65x, from its bottom on the same 30px lift, its
+   edge just past the grown card's side, on the side facing the middle of the
+   hand (`to-left`, as the keyword tips are) — so a card at the right end of
+   the hand shows it on the left. The tips move out past it. Hidden, as the
+   tips are, until the card grows, and in the mulligan popup and the grid,
+   where cards don't — by `visibility` in the fan, so it's laid out from the
+   start and its art-first tile can fit its text to the box as the hand
+   card's does (CardTile measures that as it mounts, which it can't in a
+   `display: none` box). Its tile takes none of the hand tile's fan or grow:
+   the box around it does the growing. */
+.hand-other-face {
+  display: none;
+}
+.hand-cards .hand-other-face {
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% + var(--card-w) * 0.825 + 8px);
+  display: block;
+  visibility: hidden;
+  z-index: 1;
+  pointer-events: none;
+  transform-origin: bottom left;
+  scale: 1.65;
+}
+.hand-cards .hand-other-face.to-left {
+  left: auto;
+  right: calc(50% + var(--card-w) * 0.825 + 8px);
+  transform-origin: bottom right;
+}
+.hand-cards .hand-card:hover .hand-other-face,
+.hand-cards .hand-card.hover-carry .hand-other-face {
+  visibility: visible;
+}
+.mulligan-modal .hand-cards .hand-card:hover .hand-other-face,
+.mulligan-modal .hand-cards .hand-card.hover-carry .hand-other-face {
+  visibility: hidden;
+}
+.hand-cards .hand-card .hand-other-face .card-tile {
+  rotate: none;
+  translate: none;
+  scale: none;
+  transition: none;
+}
+/* 0.825 + 1.65 card widths: past the grown card and the other face. */
+.hand-cards .hand-card:has(.hand-other-face) .hand-kw-tips {
+  left: calc(50% + var(--card-w) * 2.475 + 16px);
+}
+.hand-cards .hand-card:has(.hand-other-face) .hand-kw-tips.to-left {
+  left: auto;
+  right: calc(50% + var(--card-w) * 2.475 + 16px);
 }
 
 /* full-screen centered panel: connecting/disconnected/lobby/seat-picker */

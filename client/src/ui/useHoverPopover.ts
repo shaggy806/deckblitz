@@ -122,9 +122,15 @@ export function useHoverPopover<T extends HTMLElement = HTMLDivElement>(dep?: un
     // of the nested scroll boxes between the anchor and the page counts.
     window.addEventListener('scroll', place, { capture: true, passive: true })
     window.addEventListener('resize', place)
+    // And the popover can grow after it's placed: a double-faced card's
+    // other face (`OtherFace`) comes in once its definition's shard does,
+    // which widens the row past where it was clamped.
+    const grown = new ResizeObserver(place)
+    if (popoverRef.current) grown.observe(popoverRef.current)
     return () => {
       window.removeEventListener('scroll', place, { capture: true })
       window.removeEventListener('resize', place)
+      grown.disconnect()
     }
   }, [open, dep])
 

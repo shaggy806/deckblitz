@@ -6,6 +6,7 @@ import { describeEvent, isDetailOnlyEvent } from '../format.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
 import { CardTile } from './CardTile.tsx'
 import { defToVisible } from './defToVisible.ts'
+import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 
 type CardLookup = (name: string) => CardDefinition | null | undefined
@@ -47,6 +48,9 @@ const MARK_END = '\u0002'
  */
 function LogCardName({ name, lookup }: { readonly name: string; readonly lookup: CardLookup }) {
   const def = lookup(name)
+  // Drawn as the face the log names, which for a double-faced card can be
+  // its back (`defToVisible` titles one by its front).
+  const card = def ? { ...defToVisible(def), faceName: def.name } : null
   const { wrapRef, popoverRef, open, handlers } = useHoverPopover<HTMLElement>(def)
   const load = () => requestCards([name])
   return (
@@ -65,10 +69,11 @@ function LogCardName({ name, lookup }: { readonly name: string; readonly lookup:
       }}
     >
       {name}
-      {open && def
+      {open && card
         ? createPortal(
             <div className="mini-tile-popover over-history" ref={popoverRef}>
-              <CardTile obj={defToVisible(def)} />
+              <CardTile obj={card} />
+              <OtherFace obj={card} />
             </div>,
             document.body,
           )

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
 import { KeywordTips } from './KeywordTips.tsx'
+import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 import { motionPrefs } from '../game/motionPrefs.ts'
 import { FLIP_STEP_MS } from '../game/animationSchedule.ts'
@@ -59,6 +60,7 @@ export function LibraryTopCard({ obj, highlight, onClick, flipIn = false }: Libr
         ? createPortal(
             <div className="mini-tile-popover" ref={popoverRef}>
               <CardTile obj={obj} />
+              <OtherFace obj={obj} />
               <KeywordTips obj={obj} />
             </div>,
             document.body,

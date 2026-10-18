@@ -1,34 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useEscape } from './useEscape.ts'
-import type { CardDefinition, ObjectId, VisibleObject } from 'engine/client'
+import type { ObjectId, VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
 import { Symbols } from './Symbols.tsx'
-import { defToVisible } from './defToVisible.ts'
+import { otherFaceOf } from './otherFace.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
 import { StableLabel } from './StableLabel.tsx'
-
-/** The face a double-faced card isn't showing, as a tile of its printed
- * values — `null` for a one-faced card, and for an adventure, whose two
- * halves share one printed face, so there's nothing to turn over to. Also
- * `null` until both faces' definitions have loaded (`lookup` answers
- * `undefined` before then), so the turn-over button appears once they have. */
-function otherFaceOf(
-  obj: VisibleObject,
-  lookup: (name: string) => CardDefinition | null | undefined,
-): VisibleObject | null {
-  if (!obj.faces || obj.faces.length < 2) return null
-  const front = lookup(obj.faces[0])
-  if (front === undefined || front?.adventure || front?.omen) return null
-  const current = obj.faceName ?? obj.cardName
-  const otherName = obj.faces.find((name) => name !== current)
-  const other = otherName === undefined ? null : lookup(otherName)
-  if (!other) return null
-  // `defToVisible` titles a multi-face definition by its front face, so name
-  // the face this is. A chosen printing names the whole card by id, so its
-  // other face is the same id's other image — `faceIsBack` asks for that.
-  const tile = { ...defToVisible(other, obj.art), faceName: other.name }
-  return obj.art ? { ...tile, faceIsBack: !obj.faceIsBack } : tile
-}
 
 /** Where a card in a zone-spanning choice is, under its tile. */
 const ZONE_CAPTION: Partial<Record<VisibleObject['zone'], string>> = {

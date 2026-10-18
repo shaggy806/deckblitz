@@ -4,6 +4,7 @@ import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
 import { CostSymbols } from './Symbols.tsx'
 import { KeywordTips } from './KeywordTips.tsx'
+import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 import { cardTint } from './symbols.ts'
 import {
@@ -109,6 +110,7 @@ export function CommanderTile({
         ? createPortal(
             <div className="mini-tile-popover" ref={popoverRef}>
               <CardTile obj={obj} extraGenericCost={extraGenericCost} badge="Commander" />
+              <OtherFace obj={obj} />
               <KeywordTips obj={obj} />
             </div>,
             document.body,
