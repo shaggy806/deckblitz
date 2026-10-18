@@ -4,6 +4,9 @@ import { defineCard } from "../define.js";
 // from `create-token`'s `basePt` as it's made.
 export default defineCard({
   name: "Illusion Token (Skyclave Apparition)",
+  // ZNR's */* blue Illusion, which Scryfall lists among Skyclave
+  // Apparition's tokens (`token:art` can't match its X/X).
+  art: "2300635e-7771-4676-a5a5-29a9d8f49f1a",
   colors: ["U"],
   types: ["creature"],
   subtypes: ["Illusion"],

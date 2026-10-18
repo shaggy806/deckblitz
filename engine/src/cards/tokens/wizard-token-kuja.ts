@@ -5,6 +5,7 @@ const TEXT = "Whenever you cast a noncreature spell, this token deals 1 damage t
 
 export default defineCard({
   name: "Wizard Token (Kuja)",
+  art: "04ae24bf-0b24-4996-afae-7bf9f9d7471c",
   colors: ["B"],
   types: ["creature"],
   subtypes: ["Wizard"],

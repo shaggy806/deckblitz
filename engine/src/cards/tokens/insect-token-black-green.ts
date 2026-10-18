@@ -5,6 +5,7 @@ import { defineCard } from "../define.js";
 // right colours for protection and colour counts.
 export default defineCard({
   name: "Insect Token (Black-Green)",
+  art: "0436e71b-c1f9-4ca8-a29c-775da858a0cd",
   colors: ["B", "G"],
   types: ["creature"],
   subtypes: ["Insect"],

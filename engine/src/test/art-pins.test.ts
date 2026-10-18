@@ -1,4 +1,9 @@
 /**
+ * Art pins. A token always pins its printing: it's named for the engine's key
+ * ("Wizard Token (Kuja)"), which Scryfall doesn't know, so an unpinned token
+ * draws as a text panel (a bug report, 2026-10-18: Kuja's Wizards had no art).
+ * `npm run token:art -w engine -- --write` finds and pins them.
+ *
  * Art for a card whose name is also another card's second face. The client
  * asks Scryfall for an unpinned card's image by name, and Scryfall answers a
  * name that is also a preparation card's prepare spell or an adventurer's
@@ -11,7 +16,7 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { POOL_CARDS } from "../cards/generated.js";
+import { POOL_CARDS, TOKEN_CARDS } from "../cards/generated.js";
 
 const SNAPSHOT = fileURLToPath(new URL("../../data/oracle/cards.jsonl", import.meta.url));
 
@@ -28,5 +33,32 @@ describe("art pins", () => {
       (def) => !def.prepareSpellOnly && def.art === null && shadowed.has(def.name) && def.faces === null,
     ).map((def) => def.name);
     expect(unpinned).toEqual([]);
+  });
+});
+
+// Tokens Scryfall has no printing of (checked 2026-10-18, a token search by
+// name): nothing to pin, so they draw as a text panel.
+const NO_TOKEN_PRINTING = new Set([
+  "Banana Token",
+  "Jellyfish Token",
+  "Jumblebones",
+  "Nymph Token",
+  // The only Robot Hero printing is a 2/1 flier.
+  "1/1 Robot Hero Token",
+  // The only Spawn printings are 3/3 red.
+  "Spawn Token (Spawning Pit)",
+]);
+
+describe("token art", () => {
+  it("every token pins a printing, unless Scryfall has none", () => {
+    const unpinned = TOKEN_CARDS.filter((def) => def.art === null && !NO_TOKEN_PRINTING.has(def.name)).map(
+      (def) => def.name,
+    );
+    expect(unpinned).toEqual([]);
+  });
+
+  it("the no-printing list names only tokens that exist and are still unpinned", () => {
+    const byName = new Map(TOKEN_CARDS.map((def) => [def.name, def]));
+    for (const name of NO_TOKEN_PRINTING) expect(byName.get(name)?.art, name).toBeNull();
   });
 });
