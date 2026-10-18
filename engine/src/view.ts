@@ -170,6 +170,16 @@ export interface VisibleObject {
    * pips wrong.
    */
   readonly effectiveManaCost?: string;
+  /**
+   * A commander in the command zone: the commander tax (rule 903.8) its
+   * owner still owes on a cast from there now, which a client draws as its
+   * own "+N" beside `effectiveManaCost`. Less than 2 per previous cast when
+   * a reduction outran the printed generic part and came off the tax too
+   * (rule 601.2f — the tax is added, then reductions apply: affinity on a
+   * commander), and 0 once reductions cover it all. Absent when there's no
+   * tax (no previous cast, or it's paid in life — Liesa).
+   */
+  readonly commanderTax?: number;
   readonly text: string;
   readonly types: readonly CardType[];
   /** "Legendary", "Basic", "Snow", "World" as they apply now (rule 205.4):
@@ -377,6 +387,10 @@ export interface ViewOptions {
    * `DecisionReadCtx` and `ManaPlanningView` use.
    */
   readonly effectiveCost?: (cardId: ObjectId, caster: PlayerId) => string | null;
+  /** The commander tax `caster` still owes on casting `cardId` from the
+   * command zone (`VisibleObject.commanderTax`), or `null` for none. From
+   * `Game.viewFor`, as `effectiveCost` is. */
+  readonly commanderTax?: (cardId: ObjectId, caster: PlayerId) => number | null;
   /** How many lands `player` may play this turn. Supplied by `Game.viewFor`
    * for the same reason: an extra land drop is a static whose condition only
    * `Game` can evaluate. Without it, the rules' base limit plus any one-shot
@@ -883,9 +897,14 @@ function viewForUncached(
         options.effectiveCost !== undefined && caster !== undefined
           ? options.effectiveCost(id, caster)
           : null;
+      const tax =
+        options.commanderTax !== undefined && caster !== undefined && state.objects[id].zone === "command"
+          ? options.commanderTax(id, caster)
+          : null;
       const held = holdings.get(id);
       const withHeld = held === undefined ? base : { ...base, holding: held };
-      objects[id] = cost === null ? withHeld : { ...withHeld, effectiveManaCost: cost };
+      const withCost = cost === null ? withHeld : { ...withHeld, effectiveManaCost: cost };
+      objects[id] = tax === null ? withCost : { ...withCost, commanderTax: tax };
     }
   }
 

@@ -9,6 +9,7 @@ import { CardFlags } from './CardFlags.tsx'
 import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { ArtCredit } from './ArtCredit.tsx'
+import { TaxBadge } from './TaxBadge.tsx'
 import {
   isArtBlocked,
   isArtPending,
@@ -45,6 +46,9 @@ export interface CardTileProps {
    * printed cost (the commander tax, rule 903.4) — shown next to the cost
    * pips rather than folded into them, so the printed cost stays legible. */
   readonly extraGenericCost?: number
+  /** The whole commander tax, when cost reductions paid some of it
+   * (`TaxBadge`). */
+  readonly taxReducedFrom?: number
   /** How many identical permanents this tile stands in for (a land stack). */
   readonly stackCount?: number | null
   /** The seat-colour class of whoever this permanent is attacking, or null.
@@ -161,6 +165,7 @@ export function CardTile({
   activatable = false,
   badge = null,
   extraGenericCost = 0,
+  taxReducedFrom,
   stackCount = null,
   attackSeat = null,
   aimedBy = null,
@@ -342,11 +347,7 @@ export function CardTile({
       }
     >
       <CostSymbols shown={shownCost ?? ''} printed={obj.manaCost} />
-      {extraGenericCost > 0 ? (
-        <span className="ct-tax" title="Commander tax">
-          +{extraGenericCost}
-        </span>
-      ) : null}
+      <TaxBadge owed={extraGenericCost} reducedFrom={taxReducedFrom} />
     </span>
   ) : null
 

@@ -1384,6 +1384,7 @@ export class Game {
       // out needs commander tax and the battlefield's cost-modification
       // statics, neither of which it can see.
       effectiveCost: (cardId, caster) => this.displayCostOf(caster, cardId),
+      commanderTax: (cardId, caster) => this.commanderTaxOwed(caster, cardId),
       maxLands: (who) => this.maxLandsFor(who),
       ...options,
     });
@@ -9232,6 +9233,28 @@ export class Game {
       ability.condition === undefined ||
       staticConditionMet(this.state, this.registry, source, ability.condition)
     );
+  }
+
+  /**
+   * The commander tax `player` still owes on casting `cardId` from the
+   * command zone (`VisibleObject.commanderTax`), or `null` when there's none.
+   * A generic reduction comes off the printed generic part first and the
+   * tax after (rule 601.2f adds the tax, then applies reductions, to one
+   * total; the split is only how it's drawn), so a commander with affinity
+   * past its printed generic pays less tax.
+   */
+  private commanderTaxOwed(player: PlayerId, cardId: ObjectId): number | null {
+    if (!this.isCastableCommander(player, cardId)) return null;
+    const tax = this.commanderTax(player, cardId);
+    if (tax === 0) return null;
+    const object = this.state.objects[cardId];
+    const def = this.registry.get(printedCardName(object));
+    // An {X} cost is shown as printed (`displayCostOf`), and so is its tax.
+    if (def.manaCost === null || parseManaCost(def.manaCost).x > 0) return tax;
+    // What `displayCostOf` leaves of the generic part is shown there; the
+    // rest of what's owed is the tax.
+    const generic = this.castingCostOf(player, cardId, def, 0, def.manaCost).generic;
+    return generic - Math.max(0, generic - tax);
   }
 
   /**

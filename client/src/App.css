@@ -2500,6 +2500,11 @@
   font-weight: 700;
   color: var(--warn);
 }
+/* Cost reductions paid some of the tax (affinity on a commander): in the
+   reduced cost's accent, the whole tax on the tooltip. */
+.ct-tax.reduced {
+  color: var(--accent);
+}
 /* art-first layout (the hand -- see CardTile's `layout` prop): the cost bar
    isn't a separate row above the art, it floats on top of the art itself,
    top-right -- same .ct-cost/.pip markup (real mana-symbol SVGs via

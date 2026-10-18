@@ -7,6 +7,7 @@ import { KeywordTips } from './KeywordTips.tsx'
 import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
 import { cardTint } from './symbols.ts'
+import { TaxBadge } from './TaxBadge.tsx'
 import {
   isArtBlocked,
   isArtPending,
@@ -26,6 +27,8 @@ export interface CommanderTileProps {
    * 903.4) — shown as a separate `+N` next to the pips, not folded into
    * them, so the printed cost stays legible. */
   readonly extraGenericCost?: number
+  /** The whole tax, when reductions paid some of it (`TaxBadge`). */
+  readonly taxReducedFrom?: number
   readonly onClick?: () => void
   /** One of two Partners sharing the command slot: the same tile with a
    * shorter art box, so both fit — see `.command-stack` in App.css. */
@@ -55,6 +58,7 @@ export function CommanderTile({
   obj,
   highlight = false,
   extraGenericCost = 0,
+  taxReducedFrom,
   onClick,
   paired = false,
 }: CommanderTileProps) {
@@ -98,18 +102,14 @@ export function CommanderTile({
           title={obj.effectiveManaCost !== undefined ? `Printed cost ${obj.manaCost}` : undefined}
         >
           <CostSymbols shown={obj.effectiveManaCost ?? obj.manaCost ?? ''} printed={obj.manaCost ?? ''} />
-          {extraGenericCost > 0 ? (
-            <span className="ct-tax" title="commander tax">
-              +{extraGenericCost}
-            </span>
-          ) : null}
+          <TaxBadge owed={extraGenericCost} reducedFrom={taxReducedFrom} />
         </span>
       </button>
 
       {open
         ? createPortal(
             <div className="mini-tile-popover" ref={popoverRef}>
-              <CardTile obj={obj} extraGenericCost={extraGenericCost} badge="Commander" />
+              <CardTile obj={obj} extraGenericCost={extraGenericCost} taxReducedFrom={taxReducedFrom} badge="Commander" />
               <OtherFace obj={obj} />
               <KeywordTips obj={obj} />
             </div>,

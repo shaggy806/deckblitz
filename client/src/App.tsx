@@ -3451,14 +3451,18 @@ function Table({
     // An ability that works from the command zone (commander ninjutsu): the
     // tile opens its ability menu, with the cast in it when there is one.
     const usable = mode === 'priority' && (abilitiesBySource.get(obj.id)?.length ?? 0) > 0
-    const commanderTax =
-      2 * (view.players[obj.owner]?.commanderCastCounts?.[obj.cardName] ?? 0)
+    // What's still owed, from the engine: less than 2 per cast once a
+    // reduction has outrun the printed generic part (affinity on a
+    // commander), none for a tax paid in life.
+    const commanderTax = obj.commanderTax ?? 0
+    const fullTax = 2 * (view.players[obj.owner]?.commanderCastCounts?.[obj.cardName] ?? 0)
     return (
       <CommanderTile
         key={obj.id}
         obj={obj}
         highlight={castable || usable}
         extraGenericCost={commanderTax}
+        taxReducedFrom={obj.commanderTax !== undefined && commanderTax < fullTax ? fullTax : undefined}
         onClick={usable ? () => setSelectedSource(obj.id) : castable ? () => clickHandCard(obj.id) : undefined}
         paired={paired}
       />
