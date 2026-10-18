@@ -381,6 +381,7 @@ import _poolThirstingRoots from "../pool/thirsting-roots.js";
 import _poolThistledownPlayers from "../pool/thistledown-players.js";
 import _poolThornOfAmethyst from "../pool/thorn-of-amethyst.js";
 import _poolThoughtflare from "../pool/thoughtflare.js";
+import _poolThrashingFrontliner from "../pool/thrashing-frontliner.js";
 import _poolThrashingWumpus from "../pool/thrashing-wumpus.js";
 import _poolThreeBlindMice from "../pool/three-blind-mice.js";
 import _poolThunderheadGunner from "../pool/thunderhead-gunner.js";
@@ -861,6 +862,7 @@ const shard: CardShard = {
     _poolThistledownPlayers,
     _poolThornOfAmethyst,
     _poolThoughtflare,
+    _poolThrashingFrontliner,
     _poolThrashingWumpus,
     _poolThreeBlindMice,
     _poolThunderheadGunner,

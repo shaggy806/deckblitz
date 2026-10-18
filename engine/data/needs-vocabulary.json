@@ -7483,6 +7483,114 @@
   "effect:distribute-counters-variable-total": {
    "family": "effect:distribute-counters",
    "example": "Undercity Upheaval, Grove's Bounty: distribute X +1/+1 counters, X a count or the spell's X, rather than a fixed number."
+  },
+  "filter:planeswalker-activated-this-turn": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Cut Short: 'target planeswalker that was activated this turn' — the engine tracks only loyaltyActivatedThisTurn, the ruling counts any activated ability of the planeswalker"
+  },
+  "target:planeswalker-or-battle-of-that-player": {
+   "family": "target:target-spec-additions",
+   "example": "Rampaging Raptor: Its damage trigger targets 'planeswalker that player controls or battle that player protects': no single target slot takes either."
+  },
+  "effect:backup-grants-static": {
+   "family": "keyword:backup",
+   "example": "Streetwise Negotiator: backup grants 'assigns combat damage equal to its toughness', a static ability"
+  },
+  "replacement:self-dies-exile-instead": {
+   "family": "replacement:exile-instead",
+   "example": "Wildwood Escort: \"If this creature would die, exile it instead\": the object's own exile replacement (`self: true`) ignores `from: \"battlefield\"` (Game.exilesItselfInstead), so it would also exile the card when countered on the stack; the external dies-only form has no filter for \"this object\"."
+  },
+  "condition:attacked-battle-this-turn": {
+   "family": "condition:turn-history",
+   "example": "War Historian: 'As long as it attacked a battle this turn': no condition records what a creature attacked this turn."
+  },
+  "effect:enter-as-additional-card-type": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Path of the Schemer: 'It's an artifact in addition to its other types' on the creature put onto the battlefield: look-and-choose's enterAs (EnterTypes) has setTypes/addSubtypes/addColors but no added card type; a later add-types would miss 'whenever an artifact enters'."
+  },
+  "static:pt-per-count-affected-controller-graveyard": {
+   "family": "static:pt-per-amount",
+   "example": "Disturbing Conversion: -X/-0 where X is the cards in the enchanted creature's controller's graveyard; grantPtPerCount.inGraveyard counts from the Aura controller's side only."
+  },
+  "trigger:becomes-target-of-backup-ability": {
+   "family": "keyword:backup",
+   "example": "Mirror-Shield Hoplite: becomes-target can't narrow to a backup ability as the targeting source (copy-ability itself is built)."
+  },
+  "bug:turn-history-exclude-self-stint": {
+   "family": "condition:turn-history",
+   "example": "Swordsworn Cavalier: Its ruling: if it enters, leaves and returns the same turn, its earlier self is 'another Knight' and it has first strike. turn-history's excludeSelf skips by object id (characteristics.ts turnHistoryCount), so the earlier stint is excluded too."
+  },
+  "trigger:spell-damage-to-opponent-or-battle-from-graveyard": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Bloodfeather Phoenix: 'Whenever an instant or sorcery spell you control deals damage to an opponent or battle', triggering from the graveyard: no such trigger."
+  },
+  "target:player-or-battle": {
+   "family": "target:target-spec-additions",
+   "example": "Onakke Javelineer: '{T}: deals 2 damage to target player or battle': no single target slot takes a player or a battle."
+  },
+  "effect:incubate-for-player": {
+   "family": "incubate",
+   "example": "Excise the Imperfect: \"Its controller incubates X\": the incubate effect has no who/controllerOfTarget, so it always makes the Incubator for the caster"
+  },
+  "trigger:activates-loyalty-of-attached": {
+   "family": "loyalty abilities",
+   "example": "Elspeth's Talent: activates-ability with who:\"attached\" ignores loyalty:true and doesn't check that you (the Aura's controller) activated it — would fire for any ability, and for an opponent who controls the enchanted planeswalker"
+  },
+  "effect:then-counters-read-after-create": {
+   "family": "tokens",
+   "example": "Gimbal, Gremlin Prodigy: create-token's thenCounters amount is evaluated before the Gremlin token exists, so X (differently named artifact tokens you control) misses the new Gremlin Token itself"
+  },
+  "trigger:enters-transformed": {
+   "family": "transform",
+   "example": "Corruption of Towashi: \"or a permanent you control enters transformed\": no trigger or filter for a permanent entering with its back face up (the transforms trigger is built, this half isn't)"
+  },
+  "static:control-transformed-permanent-condition": {
+   "family": "static:conditions",
+   "example": "Oculus Whelp: 'As long as you control a transformed permanent' — no filter/condition for a transformed (back-face-up TDFC) permanent"
+  },
+  "trigger:activate-loyalty-ability-of-enchanted": {
+   "family": "trigger:activates-ability",
+   "example": "Rowan's Talent: 'Whenever you activate a loyalty ability of enchanted planeswalker': activates-ability who:'attached' ignores both `loyalty` and who activated it, so an opponent's activation on an enchanted opponent's walker (or any non-loyalty ability) would wrongly copy"
+  },
+  "effect:amount-mana-value-exiled-this-way": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Hidetsugu and Kairi: dies trigger: 'Target opponent loses life equal to its mana value' — no EffectAmount for the card exiled this way, and a look-and-choose/reveal-until `then` replaces the outer targets, losing the target opponent"
+  },
+  "mechanic:planechase": {
+   "family": "planechase",
+   "example": "Path of the Ghosthunter: Will of the Planeswalkers: votes to planeswalk or for chaos to ensue, and there are no planar decks"
+  },
+  "replacement:damage-plus-this-turn-to-player-or-battle": {
+   "family": "replacement:damage-modification",
+   "example": "Rankle and Torbran: Mode 3 \"If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead\": no effect creates a turn-long +N damage replacement for any source (player-effect damageTo is a multiplier to named players only), and no would-deal-damage recipient scope is \"player or battle\". Modes 1 and 2 and the any-number modal trigger are fine."
+  },
+  "target:battle-or-opponent": {
+   "family": "target:target-spec-additions",
+   "example": "Ayara, Widow of the Realm: The front face's ability targets 'opponent or battle': no single target slot takes either."
+  },
+  "trigger:batch-damage-player-or-battle": {
+   "family": "trigger:combat-damage-batch",
+   "example": "Zurgo and Ojutai: \"Whenever one or more Dragons you control deal combat damage to a player or battle\" is a batched trigger once per player/battle damaged (the ruling), and \"you may return one of those Dragons\" needs the batch's creatures; deals-damage-batch is player-only with no reference to the batch."
+  },
+  "condition:filter-transformed": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Mutagen Connoisseur: '+1/+0 for each transformed permanent you control' — CardFilter has no transformed (back-face-up) clause"
+  },
+  "effect:mass-effect-except-trigger-object": {
+   "family": "effect:mass-effect-extensions",
+   "example": "Invasion of New Capenna: back: 'put a +1/+1 counter on that creature and each other creature you control that shares a creature type with it' — add-counter-all can't leave out the trigger object (only the source or a target slot), so the equipped creature would get two counters"
+  },
+  "filter:exactly-two-colors": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Invasion of Ravnica: front 'isn't exactly two colors', back 'a spell that's exactly two colors' / 'a card that's exactly two colors' — CardFilter has multicolored (2+) but no colour count"
+  },
+  "condition:that-player-hand-size": {
+   "family": "condition:player-state-thresholds",
+   "example": "Invasion of Eldraine: back: intervening-if 'if that player has two or fewer cards in hand' at each opponent's upkeep — the hand-size condition reads only you or each player"
+  },
+  "filter:transformed": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Invasion of Pyrulea: front: 'if it's a land or double-faced card, draw'; back: 'other transformed permanents you control have trample and ward {2}' — no double-faced or transformed CardFilter clause"
   }
  }
 }

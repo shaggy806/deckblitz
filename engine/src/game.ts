@@ -20265,9 +20265,9 @@ export class Game {
           },
         );
       },
-      convokerCount: () => this.state.objects[source]?.convokedBy?.length ?? 0,
+      convokerCount: () => this.convokersOf(source)?.length ?? 0,
       convokerLabel: (index) => {
-        const record = this.state.objects[source]?.convokedBy?.[index];
+        const record = this.convokersOf(source)?.[index];
         if (record === undefined) return "?";
         const live = this.state.objects[record.object];
         const here = live?.zone === "battlefield" && (live.zoneChangeCount ?? 0) === record.stint;
@@ -20283,7 +20283,7 @@ export class Game {
         // still that object on the battlefield (rule 400.7), read as it last
         // existed otherwise — pinned as the context's "tapped" permanent, a
         // creature tapped to pay this spell's cost.
-        const record = this.state.objects[source]?.convokedBy?.[index];
+        const record = this.convokersOf(source)?.[index];
         const ref: TargetRef | undefined = record === undefined ? undefined : { kind: "object", object: record.object };
         const live = record === undefined ? undefined : this.state.objects[record.object];
         const same =
@@ -22777,6 +22777,13 @@ export class Game {
     return object !== undefined && effectiveTypes(this.state, this.registry, object).includes("battle")
       ? "battle"
       : "planeswalker";
+  }
+
+  /** The creatures that convoked `id`: a spell's own, or - for an ability of
+   * the permanent a spell became - its spell's (`enteredConvokedBy`). */
+  private convokersOf(id: ObjectId): readonly { readonly object: ObjectId; readonly stint: number }[] | undefined {
+    const object = this.state.objects[id];
+    return object?.convokedBy ?? object?.enteredConvokedBy;
   }
 
   private protectorValid(id: ObjectId): boolean {
@@ -32834,6 +32841,9 @@ export class Game {
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
     const enteringTimesKicked = enteringKicked ? object.timesKicked : undefined;
+    // And the creatures that convoked it ("for each creature that convoked
+    // it" - Ancient Imperiosaur).
+    const enteringConvokedBy = object.zone === "stack" && to === "battlefield" ? object.convokedBy : undefined;
     // Its gift's opponent, the same way (rule 702.174b's "if its gift cost
     // was paid" is an ETB trigger).
     const enteringGiftTo = object.zone === "stack" && to === "battlefield" ? object.giftTo : undefined;
@@ -33110,6 +33120,7 @@ export class Game {
     object.lastKnownRefs = undefined;
     object.enteredKicked = enteringKicked;
     object.enteredTimesKicked = enteringTimesKicked;
+    object.enteredConvokedBy = enteringConvokedBy;
     object.enteredGiftTo = enteringGiftTo;
     object.entry = entry;
     object.castFrom = undefined;

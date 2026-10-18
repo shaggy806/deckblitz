@@ -409,6 +409,7 @@ import _poolVirusBeetle from "../pool/virus-beetle.js";
 import _poolVisaraTheDreadful from "../pool/visara-the-dreadful.js";
 import _poolVizkopaVampire from "../pool/vizkopa-vampire.js";
 import _poolVoidmageProdigy from "../pool/voidmage-prodigy.js";
+import _poolVolcanicSpite from "../pool/volcanic-spite.js";
 import _poolVolrathsStronghold from "../pool/volraths-stronghold.js";
 import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
 import _poolVoteOut from "../pool/vote-out.js";
@@ -416,6 +417,7 @@ import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
 import _poolWantedGriffin from "../pool/wanted-griffin.js";
 import _poolWarSqueak from "../pool/war-squeak.js";
+import _poolWarTrainedSlasher from "../pool/war-trained-slasher.js";
 import _poolWastewoodVerge from "../pool/wastewood-verge.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
@@ -850,6 +852,7 @@ const shard: CardShard = {
     _poolVisaraTheDreadful,
     _poolVizkopaVampire,
     _poolVoidmageProdigy,
+    _poolVolcanicSpite,
     _poolVolrathsStronghold,
     _poolVoraciousBibliophile,
     _poolVoteOut,
@@ -857,6 +860,7 @@ const shard: CardShard = {
     _poolWandertaleMentor,
     _poolWantedGriffin,
     _poolWarSqueak,
+    _poolWarTrainedSlasher,
     _poolWastewoodVerge,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,

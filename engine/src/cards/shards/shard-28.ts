@@ -179,6 +179,7 @@ import _poolInfiltrationLens from "../pool/infiltration-lens.js";
 import _poolIngaAndEsika from "../pool/inga-and-esika.js";
 import _poolIngeniousInfiltrator from "../pool/ingenious-infiltrator.js";
 import _poolInquisitorialRosette from "../pool/inquisitorial-rosette.js";
+import _poolIntoTheFire from "../pool/into-the-fire.js";
 import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
@@ -641,6 +642,7 @@ const shard: CardShard = {
     _poolIngaAndEsika,
     _poolIngeniousInfiltrator,
     _poolInquisitorialRosette,
+    _poolIntoTheFire,
     _poolIntrepidRabbit,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,

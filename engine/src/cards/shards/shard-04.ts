@@ -284,6 +284,7 @@ import _poolRagingRedcap from "../pool/raging-redcap.js";
 import _poolRaidBombardment from "../pool/raid-bombardment.js";
 import _poolRaisedByGiants from "../pool/raised-by-giants.js";
 import _poolRallyTheMonastery from "../pool/rally-the-monastery.js";
+import _poolRampagingGeoderm from "../pool/rampaging-geoderm.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
@@ -450,6 +451,7 @@ import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
 import _tokensSoldierToken from "../tokens/soldier-token.js";
 import _tokensSpawnTokenSpawningPit from "../tokens/spawn-token-spawning-pit.js";
+import _tokensSpiritTokenSaintTraftAndRemKarolus from "../tokens/spirit-token-saint-traft-and-rem-karolus.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
 import _tokensZombieRogueToken from "../tokens/zombie-rogue-token.js";
 import _tokensZombieTokenGeralfVisionaryStitcher from "../tokens/zombie-token-geralf-visionary-stitcher.js";
@@ -737,6 +739,7 @@ const shard: CardShard = {
     _poolRaidBombardment,
     _poolRaisedByGiants,
     _poolRallyTheMonastery,
+    _poolRampagingGeoderm,
     _poolRangersLongbow,
     _poolRaucousEntertainer,
     _poolRazeTheEffigy,
@@ -905,6 +908,7 @@ const shard: CardShard = {
     _tokensSculptureTreasureToken,
     _tokensSoldierToken,
     _tokensSpawnTokenSpawningPit,
+    _tokensSpiritTokenSaintTraftAndRemKarolus,
     _tokensWallToken13,
     _tokensZombieRogueToken,
     _tokensZombieTokenGeralfVisionaryStitcher,

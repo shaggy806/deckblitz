@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **March of the Machine and March of the Machine Commander, both whole** (batch 98): 151 of
+  their 218 cards, with **battles and Sieges** (rule 310: defense counters, a protector chosen as
+  it enters and reassigned when it can't protect, attacking a battle, damage removing defense,
+  "when the last defense counter is removed, exile it, then you may cast it transformed"),
+  **incubate** (701.53, the double-faced Incubator token), **backup** (702.165), the hooks cards
+  name battles by ("player or battle" damage, "attacks a battle", "if an opponent protects it",
+  excess damage past defense) and **convoke's convokers on the permanent** ("for each creature
+  that convoked it", "a spell that has convoke") (2026-10-17).
 - **March of the Machine: The Aftermath, whole** (batch 97): 7 of its last 20, and 22 older
   cards unblocked by the two features built for it — distributed counters (rule 601.2d,
   `counters-divided`) and "its owner puts it on their choice of the top or bottom of their

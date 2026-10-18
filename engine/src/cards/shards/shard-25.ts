@@ -22,6 +22,7 @@ import _poolArmoredPegasus from "../pool/armored-pegasus.js";
 import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
+import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAvengersUnderSiege from "../pool/avengers-under-siege.js";
 import _poolBaSingSe from "../pool/ba-sing-se.js";
@@ -482,6 +483,7 @@ const shard: CardShard = {
     _poolArnimZolaBioFanatic,
     _poolAshenMonstrosity,
     _poolAssaultZeppelid,
+    _poolAssimilateEssence,
     _poolAstralSteel,
     _poolAvengersUnderSiege,
     _poolBaSingSe,

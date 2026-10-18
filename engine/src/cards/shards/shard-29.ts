@@ -311,6 +311,7 @@ import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
+import _poolSaintTraftAndRemKarolus from "../pool/saint-traft-and-rem-karolus.js";
 import _poolSamiWildcatCaptain from "../pool/sami-wildcat-captain.js";
 import _poolSanctuaryCat from "../pool/sanctuary-cat.js";
 import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights.js";
@@ -772,6 +773,7 @@ const shard: CardShard = {
     _poolRustlerRampage,
     _poolSacredArmory,
     _poolSaheeliRadiantCreator,
+    _poolSaintTraftAndRemKarolus,
     _poolSamiWildcatCaptain,
     _poolSanctuaryCat,
     _poolSanctumOfShatteredHeights,

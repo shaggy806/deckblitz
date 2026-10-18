@@ -455,6 +455,7 @@ import _poolWoodlandPatrol from "../pool/woodland-patrol.js";
 import _poolYouSeeAPairOfGoblins from "../pool/you-see-a-pair-of-goblins.js";
 import _poolZephid from "../pool/zephid.js";
 import _poolZephyrCharge from "../pool/zephyr-charge.js";
+import _poolZephyrSinger from "../pool/zephyr-singer.js";
 import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
 import _tokensBatToken from "../tokens/bat-token.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolYouSeeAPairOfGoblins,
     _poolZephid,
     _poolZephyrCharge,
+    _poolZephyrSinger,
     _poolZndrspltEyeOfWisdom,
     _poolZombieOutlander,
   ],

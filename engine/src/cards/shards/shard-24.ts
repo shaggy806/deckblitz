@@ -38,6 +38,7 @@ import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
 import _poolBattlegrowth from "../pool/battlegrowth.js";
+import _poolBeginTheInvasion from "../pool/begin-the-invasion.js";
 import _poolBelligerentGuest from "../pool/belligerent-guest.js";
 import _poolBelligerentWhiptail from "../pool/belligerent-whiptail.js";
 import _poolBesottedKnight from "../pool/besotted-knight.js";
@@ -485,6 +486,7 @@ const shard: CardShard = {
     _poolBassaraTowerArcher,
     _poolBattershieldWarrior,
     _poolBattlegrowth,
+    _poolBeginTheInvasion,
     _poolBelligerentGuest,
     _poolBelligerentWhiptail,
     _poolBesottedKnight,

@@ -293,6 +293,14 @@ export type EffectAmount =
    */
   | { readonly colorsSpentOf: AmountRef }
   /**
+   * How many creatures convoked it (rule 702.51a): the resolving spell's, or
+   * — for the permanent a spell became — its spell's: Ancient Imperiosaur's
+   * "enters with two +1/+1 counters on it for each creature that convoked
+   * it", Knight-Errant of Eos's "X is the number of creatures that convoked
+   * this creature". `0` for anything not convoked.
+   */
+  | { readonly convokers: true }
+  /**
    * How many times the commander behind an {@link AmountRef} has been cast
    * from the command zone this game (rule 903.8's count — the same one the
    * commander tax reads), by its owner. Study Hall's "scry X, where X is the
@@ -7369,6 +7377,7 @@ function signedAmountValue(
     const ref = resolveAmountRef(amount.colorsSpentOf, ctx);
     return ref === undefined ? 0 : ctx.colorsSpentOf(ref);
   }
+  if ("convokers" in amount) return ctx.convokerCount();
   if ("commanderCasts" in amount) return ctx.commanderCastsBy(ctx.controller);
   if ("roll" in amount) {
     const last = ctx.lastRoll();

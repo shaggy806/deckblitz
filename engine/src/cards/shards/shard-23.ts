@@ -202,6 +202,7 @@ import _poolJaceBeleren from "../pool/jace-beleren.js";
 import _poolJamesWanderingDad from "../pool/james-wandering-dad.js";
 import _poolJetFreedomFighter from "../pool/jet-freedom-fighter.js";
 import _poolJooDeeOneOfMany from "../pool/joo-dee-one-of-many.js";
+import _poolJoyfulStormsculptor from "../pool/joyful-stormsculptor.js";
 import _poolJunjiTheMidnightSky from "../pool/junji-the-midnight-sky.js";
 import _poolJunktown from "../pool/junktown.js";
 import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
@@ -288,6 +289,7 @@ import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
 import _poolPollutedMire from "../pool/polluted-mire.js";
 import _poolPongify from "../pool/pongify.js";
+import _poolPortentTracker from "../pool/portent-tracker.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
 import _poolPrimevalHerald from "../pool/primeval-herald.js";
@@ -666,6 +668,7 @@ const shard: CardShard = {
     _poolJamesWanderingDad,
     _poolJetFreedomFighter,
     _poolJooDeeOneOfMany,
+    _poolJoyfulStormsculptor,
     _poolJunjiTheMidnightSky,
     _poolJunktown,
     _poolKaervekThePunisher,
@@ -752,6 +755,7 @@ const shard: CardShard = {
     _poolPollenShieldHare,
     _poolPollutedMire,
     _poolPongify,
+    _poolPortentTracker,
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,
     _poolPrimevalHerald,

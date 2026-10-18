@@ -101,6 +101,7 @@ import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeathlyRide from "../pool/deathly-ride.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
+import _poolDeeprootWayfinder from "../pool/deeproot-wayfinder.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
 import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
@@ -161,6 +162,7 @@ import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
 import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
+import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
 import _poolGixsCommand from "../pool/gixs-command.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
@@ -587,6 +589,7 @@ const shard: CardShard = {
     _poolDeadlyDispute,
     _poolDeathlyRide,
     _poolDeepchannelDuelist,
+    _poolDeeprootWayfinder,
     _poolDefenestratedPhantom,
     _poolDeluxeDragster,
     _poolDesertTwister,
@@ -647,6 +650,7 @@ const shard: CardShard = {
     _poolGempalmIncinerator,
     _poolGhaltaPrimalHunger,
     _poolGhituWarCry,
+    _poolGitaxianMindstinger,
     _poolGixsCommand,
     _poolGleamingSplendor,
     _poolGlintSleeveArtisan,

@@ -219,6 +219,7 @@ import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
+import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
 import _poolKavaronMemorialWorld from "../pool/kavaron-memorial-world.js";
 import _poolKederektParasite from "../pool/kederekt-parasite.js";
 import _poolKeepSafe from "../pool/keep-safe.js";
@@ -387,6 +388,7 @@ import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
 import _poolSylvanAnthem from "../pool/sylvan-anthem.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
+import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
 import _poolTeferisPuzzleBox from "../pool/teferis-puzzle-box.js";
@@ -683,6 +685,7 @@ const shard: CardShard = {
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
     _poolJuganDefendsTheTemple,
+    _poolKaslaTheBrokenHalo,
     _poolKavaronMemorialWorld,
     _poolKederektParasite,
     _poolKeepSafe,
@@ -851,6 +854,7 @@ const shard: CardShard = {
     _poolSyggRiverCutthroat,
     _poolSylvanAnthem,
     _poolTaboraxHopesDemise,
+    _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,
     _poolTeferisPuzzleBox,

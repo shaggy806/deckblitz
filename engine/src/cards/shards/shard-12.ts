@@ -123,6 +123,7 @@ import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
+import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
@@ -577,6 +578,7 @@ const shard: CardShard = {
     _poolEntomb,
     _poolEowynShieldmaiden,
     _poolErestorOfTheCouncil,
+    _poolEtchedHostDoombringer,
     _poolEviscerate,
     _poolExperimentalArmor,
     _poolFadeFromMemory,

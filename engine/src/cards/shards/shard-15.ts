@@ -9,6 +9,7 @@ import _poolAbundantGrowth from "../pool/abundant-growth.js";
 import _poolAbzanFalconer from "../pool/abzan-falconer.js";
 import _poolAccursedDuneyard from "../pool/accursed-duneyard.js";
 import _poolAceFearlessRebel from "../pool/ace-fearless-rebel.js";
+import _poolAetherbladeAgent from "../pool/aetherblade-agent.js";
 import _poolAjaniResolute from "../pool/ajani-resolute.js";
 import _poolAkkiAvalanchers from "../pool/akki-avalanchers.js";
 import _poolAkoumHellhound from "../pool/akoum-hellhound.js";
@@ -94,6 +95,7 @@ import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
 import _poolDonatelloGadgetMaster from "../pool/donatello-gadget-master.js";
+import _poolDoomskarWarrior from "../pool/doomskar-warrior.js";
 import _poolDoranBesiegedByTime from "../pool/doran-besieged-by-time.js";
 import _poolDragonTrainer from "../pool/dragon-trainer.js";
 import _poolDragonmasterOutcast from "../pool/dragonmaster-outcast.js";
@@ -458,6 +460,7 @@ const shard: CardShard = {
     _poolAbzanFalconer,
     _poolAccursedDuneyard,
     _poolAceFearlessRebel,
+    _poolAetherbladeAgent,
     _poolAjaniResolute,
     _poolAkkiAvalanchers,
     _poolAkoumHellhound,
@@ -543,6 +546,7 @@ const shard: CardShard = {
     _poolDivingGriffin,
     _poolDoggedHunter,
     _poolDonatelloGadgetMaster,
+    _poolDoomskarWarrior,
     _poolDoranBesiegedByTime,
     _poolDragonTrainer,
     _poolDragonmasterOutcast,

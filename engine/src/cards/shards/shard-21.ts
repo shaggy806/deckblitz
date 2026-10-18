@@ -20,6 +20,8 @@ import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
 import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
+import _poolAtraxasFall from "../pool/atraxas-fall.js";
+import _poolAttentiveSkywarden from "../pool/attentive-skywarden.js";
 import _poolAudienceWithTrostani from "../pool/audience-with-trostani.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
@@ -444,6 +446,8 @@ const shard: CardShard = {
     _poolAtKnifepoint,
     _poolAtTheDoor,
     _poolAtomicMicrosizer,
+    _poolAtraxasFall,
+    _poolAttentiveSkywarden,
     _poolAudienceWithTrostani,
     _poolAvelineDeGrandpre,
     _poolAvenWindMage,

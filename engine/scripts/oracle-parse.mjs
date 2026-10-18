@@ -793,6 +793,10 @@ export function parseTrigger(clause) {
     }
     return [spec];
   }
+  // "A spell that has convoke" (Kasla, the Broken Halo): convoked or not.
+  if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
+    return [{ on: "cast-spell", who: "you", filter: { hasConvoke: true } }];
+  }
   if (/^Whenever you cast or copy an instant or sorcery spell$/.test(c)) {
     return [{ on: "cast-spell", who: "you", orCopy: true, filter: { typesAnyOf: ["instant", "sorcery"] } }];
   }

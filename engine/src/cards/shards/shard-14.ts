@@ -342,6 +342,7 @@ import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
 import _poolShapeTheSands from "../pool/shape-the-sands.js";
+import _poolShatterTheSource from "../pool/shatter-the-source.js";
 import _poolShatter from "../pool/shatter.js";
 import _poolShelteringLight from "../pool/sheltering-light.js";
 import _poolShieldedByFaith from "../pool/shielded-by-faith.js";
@@ -792,6 +793,7 @@ const shard: CardShard = {
     _poolScurryOfSquirrels,
     _poolSerpentOfYawningDepths,
     _poolShapeTheSands,
+    _poolShatterTheSource,
     _poolShatter,
     _poolShelteringLight,
     _poolShieldedByFaith,

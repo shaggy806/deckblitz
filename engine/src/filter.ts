@@ -31,7 +31,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { activePlayerOf, manaCostOverride, nameOf, printedCardName } from "./state.js";
+import { activePlayerOf, manaCostOverride, nameOf, printedCardName, rulesTextName } from "./state.js";
 import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { hasSubtype } from "./subtypes.js";
 import type { TargetRef } from "./target.js";
@@ -433,6 +433,10 @@ export interface CardFilter {
    * Inn's "target card that has an Adventure", Howling Galefang's "a card in
    * exile that has an Adventure". */
   readonly hasAdventure?: boolean;
+  /** Has (or hasn't) convoke (rule 702.51) — "whenever you cast a spell that
+   * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
+   * rules text (`rulesTextName`). */
+  readonly hasConvoke?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1216,6 +1220,11 @@ export function matchesFilter(
     const faceDown = live?.exiledFaceDown !== undefined;
     const has = !faceDown && def !== undefined && def.adventure && !def.subtypes.includes("Adventure");
     if (has !== filter.hasAdventure) return false;
+  }
+  if (filter.hasConvoke !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).convoke;
+    if (has !== filter.hasConvoke) return false;
   }
   if (filter.faceDown !== undefined) {
     const down = live !== undefined ? live.faceDown !== undefined : lki?.faceDown === true;

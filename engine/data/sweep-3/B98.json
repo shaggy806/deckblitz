@@ -1,0 +1,1585 @@
+{
+ "batch": "B98",
+ "status": "complete",
+ "ranks": "March of the Machine (MOM, 2023-04-21) and March of the Machine Commander (MOC): whole sets",
+ "authored": [
+  {
+   "name": "Alabaster Host Intercessor",
+   "files": [
+    "engine/src/cards/pool/alabaster-host-intercessor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloated Processor",
+   "files": [
+    "engine/src/cards/pool/bloated-processor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Sun's Fury",
+   "files": [
+    "engine/src/cards/pool/burning-suns-fury.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deluxe Dragster",
+   "files": [
+    "engine/src/cards/pool/deluxe-dragster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enduring Bondwarden",
+   "files": [
+    "engine/src/cards/pool/enduring-bondwarden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Errant and Giada",
+   "files": [
+    "engine/src/cards/pool/errant-and-giada.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence of Orthodoxy",
+   "files": [
+    "engine/src/cards/pool/essence-of-orthodoxy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Gremlin",
+   "files": [
+    "engine/src/cards/pool/furnace-gremlin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnottvold Hermit // Chrome Host Hulk",
+   "files": [
+    "engine/src/cards/pool/gnottvold-hermit.ts",
+    "engine/src/cards/pool/chrome-host-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grafted Butcher",
+   "files": [
+    "engine/src/cards/pool/grafted-butcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katilda and Lier",
+   "files": [
+    "engine/src/cards/pool/katilda-and-lier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Referee Squad",
+   "files": [
+    "engine/src/cards/pool/referee-squad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sculpted Perfection",
+   "files": [
+    "engine/src/cards/pool/sculpted-perfection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm the Seedcore",
+   "files": [
+    "engine/src/cards/pool/storm-the-seedcore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sun-Blessed Guardian // Furnace-Blessed Conqueror",
+   "files": [
+    "engine/src/cards/pool/sun-blessed-guardian.ts",
+    "engine/src/cards/pool/furnace-blessed-conqueror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tangled Skyline",
+   "files": [
+    "engine/src/cards/pool/tangled-skyline.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elenda and Azor",
+   "files": [
+    "engine/src/cards/pool/elenda-and-azor.ts",
+    "engine/src/cards/tokens/vampire-knight-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Locthwain Lancer",
+   "files": [
+    "engine/src/cards/pool/locthwain-lancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of the Animist",
+   "files": [
+    "engine/src/cards/pool/path-of-the-animist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scorn-Blade Berserker",
+   "files": [
+    "engine/src/cards/pool/scorn-blade-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Redcap Heelslasher",
+   "files": [
+    "engine/src/cards/pool/redcap-heelslasher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Golden-Scale Aeronaut",
+   "files": [
+    "engine/src/cards/pool/golden-scale-aeronaut.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sunder the Gateway",
+   "files": [
+    "engine/src/cards/pool/sunder-the-gateway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Cleansing",
+   "files": [
+    "engine/src/cards/pool/temporal-cleansing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fertilid's Favor",
+   "files": [
+    "engine/src/cards/pool/fertilids-favor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Change the Equation",
+   "files": [
+    "engine/src/cards/pool/change-the-equation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Interdisciplinary Mascot",
+   "files": [
+    "engine/src/cards/pool/interdisciplinary-mascot.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravenous Sailback",
+   "files": [
+    "engine/src/cards/pool/ravenous-sailback.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elvish Vatkeeper",
+   "files": [
+    "engine/src/cards/pool/elvish-vatkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eyes of Gitaxias",
+   "files": [
+    "engine/src/cards/pool/eyes-of-gitaxias.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Preening Champion",
+   "files": [
+    "engine/src/cards/pool/preening-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seraph of New Capenna // Seraph of New Phyrexia",
+   "files": [
+    "engine/src/cards/pool/seraph-of-new-capenna.ts",
+    "engine/src/cards/pool/seraph-of-new-phyrexia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ral's Reinforcements",
+   "files": [
+    "engine/src/cards/pool/rals-reinforcements.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Path of the Enigma",
+   "files": [
+    "engine/src/cards/pool/path-of-the-enigma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crystal Carapace",
+   "files": [
+    "engine/src/cards/pool/crystal-carapace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arachnoid Adaptation",
+   "files": [
+    "engine/src/cards/pool/arachnoid-adaptation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guardian of Ghirapur",
+   "files": [
+    "engine/src/cards/pool/guardian-of-ghirapur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Pegasus",
+   "files": [
+    "engine/src/cards/pool/phyrexian-pegasus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bola Slinger",
+   "files": [
+    "engine/src/cards/pool/bola-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marauding Dreadship",
+   "files": [
+    "engine/src/cards/pool/marauding-dreadship.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blight Titan",
+   "files": [
+    "engine/src/cards/pool/blight-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rashmi and Ragavan",
+   "files": [
+    "engine/src/cards/pool/rashmi-and-ragavan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marshal of Zhalfir",
+   "files": [
+    "engine/src/cards/pool/marshal-of-zhalfir.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Norn's Inquisitor",
+   "files": [
+    "engine/src/cards/pool/norns-inquisitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirrodin Avenged",
+   "files": [
+    "engine/src/cards/pool/mirrodin-avenged.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Compleated Huntmaster",
+   "files": [
+    "engine/src/cards/pool/compleated-huntmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gift of Compleation",
+   "files": [
+    "engine/src/cards/pool/gift-of-compleation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bladed Battle-Fan",
+   "files": [
+    "engine/src/cards/pool/bladed-battle-fan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gloomfang Mauler",
+   "files": [
+    "engine/src/cards/pool/gloomfang-mauler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scrappy Bruiser",
+   "files": [
+    "engine/src/cards/pool/scrappy-bruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lithomantic Barrage",
+   "files": [
+    "engine/src/cards/pool/lithomantic-barrage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infected Defector",
+   "files": [
+    "engine/src/cards/pool/infected-defector.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seedpod Caretaker",
+   "files": [
+    "engine/src/cards/pool/seedpod-caretaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blightreaper Thallid // Blightsower Thallid",
+   "files": [
+    "engine/src/cards/pool/blightreaper-thallid.ts",
+    "engine/src/cards/pool/blightsower-thallid.ts",
+    "engine/src/cards/tokens/phyrexian-saproling-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protocol Knight",
+   "files": [
+    "engine/src/cards/pool/protocol-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Failed Conversion",
+   "files": [
+    "engine/src/cards/pool/failed-conversion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Order of the Mirror // Order of the Alabaster Host",
+   "files": [
+    "engine/src/cards/pool/order-of-the-mirror.ts",
+    "engine/src/cards/pool/order-of-the-alabaster-host.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conclave Sledge-Captain",
+   "files": [
+    "engine/src/cards/pool/conclave-sledge-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saiba Cryptomancer",
+   "files": [
+    "engine/src/cards/pool/saiba-cryptomancer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Serpent-Blade Assailant",
+   "files": [
+    "engine/src/cards/pool/serpent-blade-assailant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fearless Skald",
+   "files": [
+    "engine/src/cards/pool/fearless-skald.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cragsmasher Yeti",
+   "files": [
+    "engine/src/cards/pool/cragsmasher-yeti.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hangar Scrounger",
+   "files": [
+    "engine/src/cards/pool/hangar-scrounger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wary Thespian",
+   "files": [
+    "engine/src/cards/pool/wary-thespian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seal from Existence",
+   "files": [
+    "engine/src/cards/pool/seal-from-existence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ephara's Dispersal",
+   "files": [
+    "engine/src/cards/pool/epharas-dispersal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moment of Truth",
+   "files": [
+    "engine/src/cards/pool/moment-of-truth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unseal the Necropolis",
+   "files": [
+    "engine/src/cards/pool/unseal-the-necropolis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moira and Teshar",
+   "files": [
+    "engine/src/cards/pool/moira-and-teshar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Terror",
+   "files": [
+    "engine/src/cards/pool/tidal-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glistening Dawn",
+   "files": [
+    "engine/src/cards/pool/glistening-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nezumi Freewheeler // Hideous Fleshwheeler",
+   "files": [
+    "engine/src/cards/pool/nezumi-freewheeler.ts",
+    "engine/src/cards/pool/hideous-fleshwheeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captive Weird // Compleated Conjurer",
+   "files": [
+    "engine/src/cards/pool/captive-weird.ts",
+    "engine/src/cards/pool/compleated-conjurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sandstalker Moloch",
+   "files": [
+    "engine/src/cards/pool/sandstalker-moloch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conjurer's Mantle",
+   "files": [
+    "engine/src/cards/pool/conjurers-mantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror-Style Master",
+   "files": [
+    "engine/src/cards/pool/mirror-style-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Awakening",
+   "files": [
+    "engine/src/cards/pool/phyrexian-awakening.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stormclaw Rager",
+   "files": [
+    "engine/src/cards/pool/stormclaw-rager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terror of Towashi",
+   "files": [
+    "engine/src/cards/pool/terror-of-towashi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blighted Burgeoning",
+   "files": [
+    "engine/src/cards/pool/blighted-burgeoning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zhalfirin Shapecraft",
+   "files": [
+    "engine/src/cards/pool/zhalfirin-shapecraft.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tiller of Flesh",
+   "files": [
+    "engine/src/cards/pool/tiller-of-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seed of Hope",
+   "files": [
+    "engine/src/cards/pool/seed-of-hope.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trailblazing Historian",
+   "files": [
+    "engine/src/cards/pool/trailblazing-historian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Merciless Repurposing",
+   "files": [
+    "engine/src/cards/pool/merciless-repurposing.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Consuming Aetherborn",
+   "files": [
+    "engine/src/cards/pool/consuming-aetherborn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sigiled Sentinel",
+   "files": [
+    "engine/src/cards/pool/sigiled-sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Zephyr Winder",
+   "files": [
+    "engine/src/cards/pool/zephyr-winder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herbology Instructor // Malady Invoker",
+   "files": [
+    "engine/src/cards/pool/herbology-instructor.ts",
+    "engine/src/cards/pool/malady-invoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Schema Thief",
+   "files": [
+    "engine/src/cards/pool/schema-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistmeadow Vanisher",
+   "files": [
+    "engine/src/cards/pool/mistmeadow-vanisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flywheel Racer",
+   "files": [
+    "engine/src/cards/pool/flywheel-racer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voldaren Thrillseeker",
+   "files": [
+    "engine/src/cards/pool/voldaren-thrillseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirran Banesplitter",
+   "files": [
+    "engine/src/cards/pool/mirran-banesplitter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Polukranos Reborn // Polukranos, Engine of Ruin",
+   "files": [
+    "engine/src/cards/pool/polukranos-reborn.ts",
+    "engine/src/cards/pool/polukranos-engine-of-ruin.ts",
+    "engine/src/cards/tokens/phyrexian-hydra-token-reach.ts",
+    "engine/src/cards/tokens/phyrexian-hydra-token-lifelink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kroxa and Kunoros",
+   "files": [
+    "engine/src/cards/pool/kroxa-and-kunoros.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xerex Strobe-Knight",
+   "files": [
+    "engine/src/cards/pool/xerex-strobe-knight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ichor Drinker",
+   "files": [
+    "engine/src/cards/pool/ichor-drinker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oracle of Tragedy",
+   "files": [
+    "engine/src/cards/pool/oracle-of-tragedy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Injector Crocodile",
+   "files": [
+    "engine/src/cards/pool/injector-crocodile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glistening Deluge",
+   "files": [
+    "engine/src/cards/pool/glistening-deluge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karsus Depthguard",
+   "files": [
+    "engine/src/cards/pool/karsus-depthguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeant Earth",
+   "files": [
+    "engine/src/cards/pool/vengeant-earth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyclave Aerialist // Skyclave Invader",
+   "files": [
+    "engine/src/cards/pool/skyclave-aerialist.ts",
+    "engine/src/cards/pool/skyclave-invader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Searing Barb",
+   "files": [
+    "engine/src/cards/pool/searing-barb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Theros // Ephara, Ever-Sheltering",
+   "files": [
+    "engine/src/cards/pool/invasion-of-theros.ts",
+    "engine/src/cards/pool/ephara-ever-sheltering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Shandalar // Leyline Surge",
+   "files": [
+    "engine/src/cards/pool/invasion-of-shandalar.ts",
+    "engine/src/cards/pool/leyline-surge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Tolvada // The Broken Sky",
+   "files": [
+    "engine/src/cards/pool/invasion-of-tolvada.ts",
+    "engine/src/cards/pool/the-broken-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Innistrad // Deluge of the Dead",
+   "files": [
+    "engine/src/cards/pool/invasion-of-innistrad.ts",
+    "engine/src/cards/pool/deluge-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Mercadia // Kyren Flamewright",
+   "files": [
+    "engine/src/cards/pool/invasion-of-mercadia.ts",
+    "engine/src/cards/pool/kyren-flamewright.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Ergamon // Truga Cliffcharger",
+   "files": [
+    "engine/src/cards/pool/invasion-of-ergamon.ts",
+    "engine/src/cards/pool/truga-cliffcharger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Ixalan // Belligerent Regisaur",
+   "files": [
+    "engine/src/cards/pool/invasion-of-ixalan.ts",
+    "engine/src/cards/pool/belligerent-regisaur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Karsus // Refraction Elemental",
+   "files": [
+    "engine/src/cards/pool/invasion-of-karsus.ts",
+    "engine/src/cards/pool/refraction-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Kaladesh // Aetherwing, Golden-Scale Flagship",
+   "files": [
+    "engine/src/cards/pool/invasion-of-kaladesh.ts",
+    "engine/src/cards/pool/aetherwing-golden-scale-flagship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Dominaria // Serra Faithkeeper",
+   "files": [
+    "engine/src/cards/pool/invasion-of-dominaria.ts",
+    "engine/src/cards/pool/serra-faithkeeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invasion of Vryn // Overloaded Mage-Ring",
+   "files": [
+    "engine/src/cards/pool/invasion-of-vryn.ts",
+    "engine/src/cards/pool/overloaded-mage-ring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Belenon // Belenon War Anthem",
+   "files": [
+    "engine/src/cards/pool/invasion-of-belenon.ts",
+    "engine/src/cards/pool/belenon-war-anthem.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invasion of Moag // Bloomwielder Dryads",
+   "files": [
+    "engine/src/cards/pool/invasion-of-moag.ts",
+    "engine/src/cards/pool/bloomwielder-dryads.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Invasion of Kamigawa // Rooftop Saboteurs",
+   "files": [
+    "engine/src/cards/pool/invasion-of-kamigawa.ts",
+    "engine/src/cards/pool/rooftop-saboteurs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Ulgrotha // Grandmother Ravi Sengir",
+   "files": [
+    "engine/src/cards/pool/invasion-of-ulgrotha.ts",
+    "engine/src/cards/pool/grandmother-ravi-sengir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Muraganda // Primordial Plasm",
+   "files": [
+    "engine/src/cards/pool/invasion-of-muraganda.ts",
+    "engine/src/cards/pool/primordial-plasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Xerex // Vertex Paladin",
+   "files": [
+    "engine/src/cards/pool/invasion-of-xerex.ts",
+    "engine/src/cards/pool/vertex-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Kylem // Valor's Reach Tag Team",
+   "files": [
+    "engine/src/cards/pool/invasion-of-kylem.ts",
+    "engine/src/cards/pool/valors-reach-tag-team.ts",
+    "engine/src/cards/tokens/warrior-token-valors-reach-tag-team.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Halo-Charged Skaab",
+   "files": [
+    "engine/src/cards/pool/halo-charged-skaab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Portent Tracker",
+   "files": [
+    "engine/src/cards/pool/portent-tracker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Into the Fire",
+   "files": [
+    "engine/src/cards/pool/into-the-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assimilate Essence",
+   "files": [
+    "engine/src/cards/pool/assimilate-essence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deeproot Wayfinder",
+   "files": [
+    "engine/src/cards/pool/deeproot-wayfinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatter the Source",
+   "files": [
+    "engine/src/cards/pool/shatter-the-source.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Traumatic Revelation",
+   "files": [
+    "engine/src/cards/pool/traumatic-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atraxa's Fall",
+   "files": [
+    "engine/src/cards/pool/atraxas-fall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Etched Host Doombringer",
+   "files": [
+    "engine/src/cards/pool/etched-host-doombringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Attentive Skywarden",
+   "files": [
+    "engine/src/cards/pool/attentive-skywarden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War-Trained Slasher",
+   "files": [
+    "engine/src/cards/pool/war-trained-slasher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flitting Guerrilla",
+   "files": [
+    "engine/src/cards/pool/flitting-guerrilla.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Begin the Invasion",
+   "files": [
+    "engine/src/cards/pool/begin-the-invasion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomskar Warrior",
+   "files": [
+    "engine/src/cards/pool/doomskar-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rampaging Geoderm",
+   "files": [
+    "engine/src/cards/pool/rampaging-geoderm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thrashing Frontliner",
+   "files": [
+    "engine/src/cards/pool/thrashing-frontliner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aetherblade Agent // Gitaxian Mindstinger",
+   "files": [
+    "engine/src/cards/pool/aetherblade-agent.ts",
+    "engine/src/cards/pool/gitaxian-mindstinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Volcanic Spite",
+   "files": [
+    "engine/src/cards/pool/volcanic-spite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tandem Takedown",
+   "files": [
+    "engine/src/cards/pool/tandem-takedown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Lorwyn // Winnowing Forces",
+   "files": [
+    "engine/src/cards/pool/invasion-of-lorwyn.ts",
+    "engine/src/cards/pool/winnowing-forces.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's battles and Sieges"
+  },
+  {
+   "name": "Converter Beast",
+   "files": [
+    "engine/src/cards/pool/converter-beast.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's incubate"
+  },
+  {
+   "name": "Boon-Bringer Valkyrie",
+   "files": [
+    "engine/src/cards/pool/boon-bringer-valkyrie.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's backup"
+  },
+  {
+   "name": "Ancient Imperiosaur",
+   "files": [
+    "engine/src/cards/pool/ancient-imperiosaur.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's convokers carried onto the permanent"
+  },
+  {
+   "name": "Knight-Errant of Eos",
+   "files": [
+    "engine/src/cards/pool/knight-errant-of-eos.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's convokers carried onto the permanent"
+  },
+  {
+   "name": "Zephyr Singer",
+   "files": [
+    "engine/src/cards/pool/zephyr-singer.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's convokers carried onto the permanent"
+  },
+  {
+   "name": "Kasla, the Broken Halo",
+   "files": [
+    "engine/src/cards/pool/kasla-the-broken-halo.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasConvoke filter"
+  },
+  {
+   "name": "Joyful Stormsculptor",
+   "files": [
+    "engine/src/cards/pool/joyful-stormsculptor.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasConvoke filter and protectedBy"
+  },
+  {
+   "name": "Saint Traft and Rem Karolus",
+   "files": [
+    "engine/src/cards/pool/saint-traft-and-rem-karolus.ts",
+    "engine/src/cards/tokens/spirit-token-saint-traft-and-rem-karolus.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasConvoke filter"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Cut Short",
+   "needs": [
+    "filter:planeswalker-activated-this-turn"
+   ],
+   "why": "'target planeswalker that was activated this turn' — the engine tracks only loyaltyActivatedThisTurn, the ruling counts any activated ability of the planeswalker"
+  },
+  {
+   "name": "Flockchaser Phantom",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "'the next spell you cast this turn has convoke' — no way to grant convoke to a spell before it's cast"
+  },
+  {
+   "name": "Glissa, Herald of Predation",
+   "needs": [
+    "effect:transform-all"
+   ],
+   "why": "mode 2 'Transform all Incubator tokens you control' — transform takes one target, no mass form"
+  },
+  {
+   "name": "Ichor Elixir",
+   "needs": [
+    "mechanic:planar-die"
+   ],
+   "why": "planar dice replacement; Planechase not modeled"
+  },
+  {
+   "name": "Ichor Shade",
+   "needs": [
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "intervening-if 'an artifact or creature was put into a graveyard from the battlefield this turn' — turn history has died (creatures) and left (any zone), nothing for a noncreature artifact to a graveyard"
+  },
+  {
+   "name": "Rampaging Raptor",
+   "needs": [
+    "target:planeswalker-or-battle-of-that-player"
+   ],
+   "why": "Its damage trigger targets 'planeswalker that player controls or battle that player protects': no single target slot takes either."
+  },
+  {
+   "name": "Streetwise Negotiator",
+   "needs": [
+    "effect:backup-grants-static"
+   ],
+   "why": "backup grants 'assigns combat damage equal to its toughness', a static ability"
+  },
+  {
+   "name": "Vulpine Harvester",
+   "needs": [
+    "effect:attack-batch-aggregates"
+   ],
+   "why": "'their total power' — the total power of the attacking Phyrexians of the batch, LKI at resolution (ruling); no attack-batch amount"
+  },
+  {
+   "name": "Wildwood Escort",
+   "needs": [
+    "replacement:self-dies-exile-instead"
+   ],
+   "why": "\"If this creature would die, exile it instead\": the object's own exile replacement (`self: true`) ignores `from: \"battlefield\"` (Game.exilesItselfInstead), so it would also exile the card when countered on the stack; the external dies-only form has no filter for \"this object\"."
+  },
+  {
+   "name": "War Historian",
+   "needs": [
+    "condition:attacked-battle-this-turn"
+   ],
+   "why": "'As long as it attacked a battle this turn': no condition records what a creature attacked this turn."
+  },
+  {
+   "name": "Angelic Intervention",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "Grants protection from colorless or from a color chosen on resolution until end of turn; protection is only a static field, no temporary chosen-colour grant."
+  },
+  {
+   "name": "Progenitor Exarch",
+   "needs": [
+    "effect:repeat-effect-x-times"
+   ],
+   "why": "'Incubate 3 X times' needs X separate Incubator tokens of 3 counters each; incubate has no times/repeat and there is no generic repeat-N effect."
+  },
+  {
+   "name": "Path of the Schemer",
+   "needs": [
+    "effect:enter-as-additional-card-type"
+   ],
+   "why": "'It's an artifact in addition to its other types' on the creature put onto the battlefield: look-and-choose's enterAs (EnterTypes) has setTypes/addSubtypes/addColors but no added card type; a later add-types would miss 'whenever an artifact enters'."
+  },
+  {
+   "name": "Final Flourish",
+   "needs": [
+    "cost:kicker-nonmana-cost"
+   ],
+   "why": "Kicker is 'Sacrifice an artifact or creature'; kicker.cost is mana only (bargain's fixed sacrifice is artifact/enchantment/token)."
+  },
+  {
+   "name": "Borborygmos and Fblthp",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "'You may discard any number of land cards' then a reflexive trigger for twice that much damage; no filtered discard-any-number."
+  },
+  {
+   "name": "Expedition Lookout",
+   "needs": [
+    "condition:any-graveyard-size-condition"
+   ],
+   "why": "'As long as an opponent has eight or more cards in their graveyard' — cards-in-graveyard only counts your own graveyard."
+  },
+  {
+   "name": "Disturbing Conversion",
+   "needs": [
+    "static:pt-per-count-affected-controller-graveyard"
+   ],
+   "why": "-X/-0 where X is the cards in the enchanted creature's controller's graveyard; grantPtPerCount.inGraveyard counts from the Aura controller's side only."
+  },
+  {
+   "name": "Liliana's Talent",
+   "needs": [
+    "static:grant-loyalty-abilities"
+   ],
+   "why": "An Aura granting the enchanted planeswalker a [-8] loyalty ability: statics can't grant loyalty abilities (the damage-to-enchanted-planeswalker trigger has no 'attached' recipient either)."
+  },
+  {
+   "name": "Bright-Palm, Soul Awakener",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "'That creature can't be blocked by creatures with power 2 or less this turn' on a target: cantBeBlockedBy exists only as a static, no one-shot grant until end of turn."
+  },
+  {
+   "name": "Quintorius, Loremaster",
+   "needs": [
+    "effect:target-card-in-exile",
+    "effect:cast-now-bottom-of-library-after"
+   ],
+   "why": "'Choose target card exiled with Quintorius' has no exile-zone/linked target spec, and the free cast-this-turn permission has no 'put it on the bottom of its owner's library instead' replacement."
+  },
+  {
+   "name": "Axgard Artisan",
+   "needs": [
+    "trigger:counters-put-first-time-each-turn"
+   ],
+   "why": "counters-put has no firstTimeEachTurn; oncePerTurn differs (it would fire on a later placement if the first one didn't trigger)."
+  },
+  {
+   "name": "Wicked Slumber",
+   "needs": [
+    "decision:choose-among-targets"
+   ],
+   "why": "'Put a stun counter on either of them. Then put a stun counter on either of them.' is a resolution-time choice among the targets, twice (both may go on one); counters-divided is chosen at cast with at least one each."
+  },
+  {
+   "name": "Elspeth's Smite",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "'If that creature would die this turn, exile it instead' on the target: no turn-long exile-instead replacement on a target."
+  },
+  {
+   "name": "Seer of Stolen Sight",
+   "needs": [
+    "trigger:dies-batch-trigger"
+   ],
+   "why": "'One or more artifacts and/or creatures you control are put into a graveyard from the battlefield' needs a batched leaves-battlefield trigger that counts tokens and sees Seer dying with them; put-into-graveyard skips tokens and doesn't look back."
+  },
+  {
+   "name": "Mirror-Shield Hoplite",
+   "needs": [
+    "trigger:becomes-target-of-backup-ability"
+   ],
+   "why": "becomes-target can't narrow to a backup ability as the targeting source (copy-ability itself is built)."
+  },
+  {
+   "name": "Chomping Kavu",
+   "needs": [
+    "effect:backup-grants-static"
+   ],
+   "why": "Backup grants the static 'can't be blocked by creatures with power 2 or less'; the backup helper grants only keywords, triggered and activated abilities."
+  },
+  {
+   "name": "Swordsworn Cavalier",
+   "needs": [
+    "bug:turn-history-exclude-self-stint"
+   ],
+   "why": "Its ruling: if it enters, leaves and returns the same turn, its earlier self is 'another Knight' and it has first strike. turn-history's excludeSelf skips by object id (characteristics.ts turnHistoryCount), so the earlier stint is excluded too."
+  },
+  {
+   "name": "Bloodfeather Phoenix",
+   "needs": [
+    "trigger:spell-damage-to-opponent-or-battle-from-graveyard"
+   ],
+   "why": "'Whenever an instant or sorcery spell you control deals damage to an opponent or battle', triggering from the graveyard: no such trigger."
+  },
+  {
+   "name": "Onakke Javelineer",
+   "needs": [
+    "target:player-or-battle"
+   ],
+   "why": "'{T}: deals 2 damage to target player or battle': no single target slot takes a player or a battle."
+  },
+  {
+   "name": "Excise the Imperfect",
+   "needs": [
+    "effect:incubate-for-player"
+   ],
+   "why": "\"Its controller incubates X\": the incubate effect has no who/controllerOfTarget, so it always makes the Incubator for the caster"
+  },
+  {
+   "name": "Elspeth's Talent",
+   "needs": [
+    "trigger:activates-loyalty-of-attached"
+   ],
+   "why": "activates-ability with who:\"attached\" ignores loyalty:true and doesn't check that you (the Aura's controller) activated it — would fire for any ability, and for an opponent who controls the enchanted planeswalker"
+  },
+  {
+   "name": "Gimbal, Gremlin Prodigy",
+   "needs": [
+    "effect:then-counters-read-after-create"
+   ],
+   "why": "create-token's thenCounters amount is evaluated before the Gremlin token exists, so X (differently named artifact tokens you control) misses the new Gremlin Token itself"
+  },
+  {
+   "name": "Vivien's Talent",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"put a loyalty counter on enchanted planeswalker\": no EffectTargetRef or filter names the permanent this Aura is attached to"
+  },
+  {
+   "name": "Stasis Field",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "\"loses all other abilities\" as a static on the enchanted creature; lose-abilities exists only as an effect, not a StaticAbility field"
+  },
+  {
+   "name": "Corruption of Towashi",
+   "needs": [
+    "trigger:enters-transformed"
+   ],
+   "why": "\"or a permanent you control enters transformed\": no trigger or filter for a permanent entering with its back face up (the transforms trigger is built, this half isn't)"
+  },
+  {
+   "name": "Tenured Oilcaster",
+   "needs": [
+    "condition:any-graveyard-size-condition"
+   ],
+   "why": "\"+3/+0 as long as an opponent has eight or more cards in their graveyard\": cards-in-graveyard/threshold read only your own graveyard"
+  },
+  {
+   "name": "Nahiri's Warcrafting",
+   "needs": [
+    "effect:look-and-choose-exile-chosen-playable"
+   ],
+   "why": "Look at the top X (X = excess damage), you may exile one with \"you may play it this turn\" (lands too), rest bottom in random order: look-and-choose's `exile` destination grants no play permission, `allow-cast-from-exile` is cast-only, and `exile-playable` is only a leftover."
+  },
+  {
+   "name": "Infernal Sovereign",
+   "needs": [
+    "static:skip-draw-step"
+   ],
+   "why": "'Skip your draw step.' — no static that skips a player's draw step"
+  },
+  {
+   "name": "Sandsteppe War Riders",
+   "needs": [
+    "keyword:bolster"
+   ],
+   "why": "bolster X (put counters on a creature with the least toughness, chosen on resolution) — no bolster effect in the engine"
+  },
+  {
+   "name": "Oculus Whelp",
+   "needs": [
+    "static:control-transformed-permanent-condition"
+   ],
+   "why": "'As long as you control a transformed permanent' — no filter/condition for a transformed (back-face-up TDFC) permanent"
+  },
+  {
+   "name": "Rowan's Talent",
+   "needs": [
+    "trigger:activate-loyalty-ability-of-enchanted"
+   ],
+   "why": "'Whenever you activate a loyalty ability of enchanted planeswalker': activates-ability who:'attached' ignores both `loyalty` and who activated it, so an opponent's activation on an enchanted opponent's walker (or any non-loyalty ability) would wrongly copy"
+  },
+  {
+   "name": "Hidetsugu and Kairi",
+   "needs": [
+    "effect:amount-mana-value-exiled-this-way"
+   ],
+   "why": "dies trigger: 'Target opponent loses life equal to its mana value' — no EffectAmount for the card exiled this way, and a look-and-choose/reveal-until `then` replaces the outer targets, losing the target opponent"
+  },
+  {
+   "name": "Path of the Ghosthunter",
+   "needs": [
+    "mechanic:planechase"
+   ],
+   "why": "Will of the Planeswalkers: votes to planeswalk or for chaos to ensue, and there are no planar decks"
+  },
+  {
+   "name": "Rankle and Torbran",
+   "needs": [
+    "replacement:damage-plus-this-turn-to-player-or-battle"
+   ],
+   "why": "Mode 3 \"If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead\": no effect creates a turn-long +N damage replacement for any source (player-effect damageTo is a multiplier to named players only), and no would-deal-damage recipient scope is \"player or battle\". Modes 1 and 2 and the any-number modal trigger are fine."
+  },
+  {
+   "name": "Cutthroat Negotiator",
+   "needs": [
+    "keyword:parley"
+   ],
+   "why": "each player reveals their top card and you count the nonland ones; reveal-top only reveals the controller's library or a target owner's"
+  },
+  {
+   "name": "Complete the Circuit",
+   "needs": [
+    "effect:flash-permission-this-turn"
+   ],
+   "why": "'You may cast sorcery spells this turn as though they had flash' is only a static (castAsThoughFlash), with no until-end-of-turn effect form"
+  },
+  {
+   "name": "Realmbreaker's Grasp",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "'its activated abilities can't be activated unless they're mana abilities' on the enchanted permanent: prohibits.abilitiesOf can't pick the attached permanent and includes mana abilities"
+  },
+  {
+   "name": "Teferi's Talent",
+   "needs": [
+    "effect:emblem-instant-speed-loyalty"
+   ],
+   "why": "the granted -12 makes an emblem whose static (loyalty abilities at instant speed on any turn) isn't a creatures-you-control anthem; emblem statics beyond anthems aren't read (AUTHORING §15)"
+  },
+  {
+   "name": "Death-Greeter's Champion",
+   "needs": [
+    "keyword:dash"
+   ],
+   "why": "Dash {3}{R} isn't built (no dash field/alt cost anywhere in the engine); backup + double strike alone would drop it"
+  },
+  {
+   "name": "Ayara, Widow of the Realm // Ayara, Furnace Queen",
+   "needs": [
+    "target:battle-or-opponent"
+   ],
+   "why": "The front face's ability targets 'opponent or battle': no single target slot takes either."
+  },
+  {
+   "name": "Zurgo and Ojutai",
+   "needs": [
+    "trigger:batch-damage-player-or-battle",
+    "effect:damage-batch-those-creatures"
+   ],
+   "why": "\"Whenever one or more Dragons you control deal combat damage to a player or battle\" is a batched trigger once per player/battle damaged (the ruling), and \"you may return one of those Dragons\" needs the batch's creatures; deals-damage-batch is player-only with no reference to the batch."
+  },
+  {
+   "name": "Render Inert",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "'remove up to five counters' of kinds the caster chooses (the ruling); remove-counter needs one named kind"
+  },
+  {
+   "name": "Overgrown Pest",
+   "needs": [
+    "condition:filter-double-faced"
+   ],
+   "why": "'reveal a land or double-faced card' — CardFilter has no double-faced clause"
+  },
+  {
+   "name": "Mutagen Connoisseur",
+   "needs": [
+    "condition:filter-transformed"
+   ],
+   "why": "'+1/+0 for each transformed permanent you control' — CardFilter has no transformed (back-face-up) clause"
+  },
+  {
+   "name": "Invasion of Tarkir // Defiant Thundermaw",
+   "needs": [
+    "effect:reveal-cards-from-hand"
+   ],
+   "why": "front: 'reveal any number of Dragon cards from your hand', then a reflexive trigger dealing X+2 where X is the number revealed — no reveal-any-number-from-hand effect with a count"
+  },
+  {
+   "name": "Invasion of Kaldheim // Pyre of the World Tree",
+   "needs": [
+    "zone:exile-hand-with-play-permission"
+   ],
+   "why": "front: exile your hand, draw that many, play the exiled cards until the end of your next turn — impulse-exile only exiles from a library (the back face is authorable)"
+  },
+  {
+   "name": "Invasion of Amonkhet // Lazotep Convert",
+   "needs": [
+    "replacement:copy-on-enter-options"
+   ],
+   "why": "back: 'enter as a copy of any creature card in a graveyard' — copyOnEnter only copies battlefield permanents"
+  },
+  {
+   "name": "Invasion of Gobakhan // Lightshield Array",
+   "needs": [
+    "zone:exiled-from-hand-play-permission-taxed"
+   ],
+   "why": "front: exile a nonland card from target opponent's hand; its owner may play it while it stays exiled, costing {2} more"
+  },
+  {
+   "name": "Invasion of New Capenna // Holy Frazzle-Cannon",
+   "needs": [
+    "effect:mass-effect-except-trigger-object"
+   ],
+   "why": "back: 'put a +1/+1 counter on that creature and each other creature you control that shares a creature type with it' — add-counter-all can't leave out the trigger object (only the source or a target slot), so the equipped creature would get two counters"
+  },
+  {
+   "name": "Invasion of New Phyrexia // Teferi Akosa of Zhalfir",
+   "needs": [
+    "effect:emblem-static-abilities",
+    "effect:tap-x-then"
+   ],
+   "why": "back: -2 emblem 'Knights you control get +1/+0 and have ward {1}' (emblem statics are a creatures-you-control anthem only); -3 'tap any number of untapped creatures' with X = the number tapped"
+  },
+  {
+   "name": "Invasion of Arcavios // Invocation of the Founders",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "front: search your library, graveyard and/or outside the game"
+  },
+  {
+   "name": "Invasion of Alara // Awaken the Maelstrom",
+   "needs": [
+    "effect:reveal-until-count",
+    "static:all-colors-cda"
+   ],
+   "why": "front: exile until two nonland MV<=4 cards, you may cast one free, one goes to hand (if none is cast, the other stays exiled — the ruling), the rest to the bottom at random; back: 'is all colors', untargeted token copy and distributed counters chosen on resolution"
+  },
+  {
+   "name": "Invasion of Regatha // Disciples of the Inferno",
+   "needs": [
+    "target:battle-or-opponent"
+   ],
+   "why": "front: '4 damage to another target battle or opponent' — no single target slot for a battle or an opponent (the back face's +2 replacement is expressible as two would-deal-damage statics: to 'opponent' and toFilter creature/battle)"
+  },
+  {
+   "name": "Invasion of Ravnica // Guildpact Paragon",
+   "needs": [
+    "filter:exactly-two-colors"
+   ],
+   "why": "front 'isn't exactly two colors', back 'a spell that's exactly two colors' / 'a card that's exactly two colors' — CardFilter has multicolored (2+) but no colour count"
+  },
+  {
+   "name": "Invasion of Eldraine // Prickle Faeries",
+   "needs": [
+    "condition:that-player-hand-size"
+   ],
+   "why": "back: intervening-if 'if that player has two or fewer cards in hand' at each opponent's upkeep — the hand-size condition reads only you or each player"
+  },
+  {
+   "name": "Invasion of Azgol // Ashen Reaper",
+   "needs": [
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "back: 'if a permanent was put into a graveyard from the battlefield this turn' — turn history has 'left' (any destination) and 'died' (creatures), not to-graveyard-from-battlefield"
+  },
+  {
+   "name": "Invasion of Pyrulea // Gargantuan Slabhorn",
+   "needs": [
+    "condition:filter-double-faced",
+    "filter:transformed"
+   ],
+   "why": "front: 'if it's a land or double-faced card, draw'; back: 'other transformed permanents you control have trample and ward {2}' — no double-faced or transformed CardFilter clause"
+  }
+ ]
+}

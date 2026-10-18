@@ -15,6 +15,7 @@ import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
+import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
@@ -207,6 +208,7 @@ import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
+import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
 import _poolKrenkosEnforcer from "../pool/krenkos-enforcer.js";
@@ -479,6 +481,7 @@ const shard: CardShard = {
     _poolAgrusKosSpiritOfJustice,
     _poolAlleyEvasion,
     _poolAnUnexpectedParty,
+    _poolAncientImperiosaur,
     _poolAngelfireCrusader,
     _poolApprenticeWizard,
     _poolArachnoidAdaptation,
@@ -671,6 +674,7 @@ const shard: CardShard = {
     _poolKeeneyeAven,
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
+    _poolKnightErrantOfEos,
     _poolKnightfisher,
     _poolKothOfTheHomestead,
     _poolKrenkosEnforcer,
