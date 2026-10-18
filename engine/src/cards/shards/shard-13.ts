@@ -149,6 +149,7 @@ import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
+import _poolFlensingRaptor from "../pool/flensing-raptor.js";
 import _poolFlexibleWaterbender from "../pool/flexible-waterbender.js";
 import _poolFlightDeckCoordinator from "../pool/flight-deck-coordinator.js";
 import _poolFlowstoneHellion from "../pool/flowstone-hellion.js";
@@ -622,6 +623,7 @@ const shard: CardShard = {
     _poolFireslinger,
     _poolFlamekinBrawler,
     _poolFlaringCinder,
+    _poolFlensingRaptor,
     _poolFlexibleWaterbender,
     _poolFlightDeckCoordinator,
     _poolFlowstoneHellion,

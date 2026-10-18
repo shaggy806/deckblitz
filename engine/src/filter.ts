@@ -437,6 +437,10 @@ export interface CardFilter {
    * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
    * rules text (`rulesTextName`). */
   readonly hasConvoke?: boolean;
+  /** Has (or hasn't) toxic (rule 702.164) — printed or granted: "another
+   * creature you control with toxic" (Slaughter Singer), "if that creature
+   * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
+  readonly hasToxic?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1414,6 +1418,19 @@ export function matchesFilter(
     }
     if (filter.keyword !== undefined && !c.keywords.has(filter.keyword)) return false;
     if (filter.notKeyword !== undefined && c.keywords.has(filter.notKeyword)) return false;
+  }
+
+  if (filter.hasToxic !== undefined) {
+    // Its total toxic value (rule 702.164b) above 0 — printed or granted.
+    // Inside the layer fold, only what it prints (no fold within the fold);
+    // something that has left isn't asked (its snapshot keeps no toxic).
+    const has =
+      live === undefined
+        ? false
+        : layered !== undefined
+          ? !hasLostAbilities(live) && registry.get(rulesTextName(live)).toxic > 0
+          : computeCharacteristics(state, registry, id).toxic > 0;
+    if (has !== filter.hasToxic) return false;
   }
 
   // "With the greatest power among creatures that player controls": none of

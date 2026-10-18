@@ -1165,6 +1165,10 @@ export interface PtModifier {
    * loses flying until end of turn" (rule 613.7): from what had them before,
    * printed or granted earlier; a later grant gives one back. */
   loseKeywords?: Keyword[];
+  /** Toxic N it grants (rule 702.164b — the `grant-toxic` effect): one
+   * more instance, added to the total, gone with a later loss of all
+   * abilities like a granted keyword. */
+  toxic?: number;
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */

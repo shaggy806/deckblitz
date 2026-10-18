@@ -175,6 +175,7 @@ import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
 import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
+import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
@@ -631,6 +632,7 @@ const shard: CardShard = {
     _poolHenchbots,
     _poolHeraldOfKozilek,
     _poolHerbologyInstructor,
+    _poolHexgoldSlash,
     _poolHighspireBellRinger,
     _poolHollowDogs,
     _poolHondenOfNightsReach,

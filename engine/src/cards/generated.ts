@@ -678,6 +678,7 @@ import _poolAspectOfGorgon from "./pool/aspect-of-gorgon.js";
 import _poolAspectOfLamprey from "./pool/aspect-of-lamprey.js";
 import _poolAsphodelWanderer from "./pool/asphodel-wanderer.js";
 import _poolAsphyxiate from "./pool/asphyxiate.js";
+import _poolAspirantsAscent from "./pool/aspirants-ascent.js";
 import _poolAspiringAeronaut from "./pool/aspiring-aeronaut.js";
 import _poolAssassinDen from "./pool/assassin-den.js";
 import _poolAssassinInitiate from "./pool/assassin-initiate.js";
@@ -2319,6 +2320,7 @@ import _poolCompassGnome from "./pool/compass-gnome.js";
 import _poolCompassionateHealer from "./pool/compassionate-healer.js";
 import _poolCompelBrutality from "./pool/compel-brutality.js";
 import _poolCompellingArgument from "./pool/compelling-argument.js";
+import _poolCompleatDevotion from "./pool/compleat-devotion.js";
 import _poolCompleatedConjurer from "./pool/compleated-conjurer.js";
 import _poolCompleatedHuntmaster from "./pool/compleated-huntmaster.js";
 import _poolCompleteDisregard from "./pool/complete-disregard.js";
@@ -4357,6 +4359,7 @@ import _poolFleetingImage from "./pool/fleeting-image.js";
 import _poolFleetingMemories from "./pool/fleeting-memories.js";
 import _poolFleetingReflection from "./pool/fleeting-reflection.js";
 import _poolFlensermite from "./pool/flensermite.js";
+import _poolFlensingRaptor from "./pool/flensing-raptor.js";
 import _poolFleshBurrower from "./pool/flesh-burrower.js";
 import _poolFleshEaterImp from "./pool/flesh-eater-imp.js";
 import _poolFleshToDust from "./pool/flesh-to-dust.js";
@@ -5680,6 +5683,7 @@ import _poolHerosResolve from "./pool/heros-resolve.js";
 import _poolHewTheEntwood from "./pool/hew-the-entwood.js";
 import _poolHexgoldHalberd from "./pool/hexgold-halberd.js";
 import _poolHexgoldHoverwings from "./pool/hexgold-hoverwings.js";
+import _poolHexgoldSlash from "./pool/hexgold-slash.js";
 import _poolHexgoldSlith from "./pool/hexgold-slith.js";
 import _poolHexhavenBattalion from "./pool/hexhaven-battalion.js";
 import _poolHexhavenDuelingArena from "./pool/hexhaven-dueling-arena.js";
@@ -8981,6 +8985,7 @@ import _poolPlagueBeetle from "./pool/plague-beetle.js";
 import _poolPlagueBelcher from "./pool/plague-belcher.js";
 import _poolPlagueDogs from "./pool/plague-dogs.js";
 import _poolPlagueMyr from "./pool/plague-myr.js";
+import _poolPlagueNurse from "./pool/plague-nurse.js";
 import _poolPlagueStinger from "./pool/plague-stinger.js";
 import _poolPlagueWind from "./pool/plague-wind.js";
 import _poolPlaguedRusalka from "./pool/plagued-rusalka.js";
@@ -9057,6 +9062,7 @@ import _poolPongify from "./pool/pongify.js";
 import _poolPontiffOfBlight from "./pool/pontiff-of-blight.js";
 import _poolPopularEgotist from "./pool/popular-egotist.js";
 import _poolPorcelainLegionnaire from "./pool/porcelain-legionnaire.js";
+import _poolPorcelainZealot from "./pool/porcelain-zealot.js";
 import _poolPortOfKarfell from "./pool/port-of-karfell.js";
 import _poolPortTown from "./pool/port-town.js";
 import _poolPortalToPhyrexia from "./pool/portal-to-phyrexia.js";
@@ -11130,6 +11136,7 @@ import _poolSlateOfAncestry from "./pool/slate-of-ancestry.js";
 import _poolSlaughterCry from "./pool/slaughter-cry.js";
 import _poolSlaughterDrone from "./pool/slaughter-drone.js";
 import _poolSlaughterPact from "./pool/slaughter-pact.js";
+import _poolSlaughterSinger from "./pool/slaughter-singer.js";
 import _poolSlaughterSpecialist from "./pool/slaughter-specialist.js";
 import _poolSlaughterTheStrong from "./pool/slaughter-the-strong.js";
 import _poolSlaughterhorn from "./pool/slaughterhorn.js";
@@ -15608,6 +15615,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAspectOfLamprey,
   _poolAsphodelWanderer,
   _poolAsphyxiate,
+  _poolAspirantsAscent,
   _poolAspiringAeronaut,
   _poolAssassinDen,
   _poolAssassinInitiate,
@@ -17249,6 +17257,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCompassionateHealer,
   _poolCompelBrutality,
   _poolCompellingArgument,
+  _poolCompleatDevotion,
   _poolCompleatedConjurer,
   _poolCompleatedHuntmaster,
   _poolCompleteDisregard,
@@ -19287,6 +19296,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFleetingMemories,
   _poolFleetingReflection,
   _poolFlensermite,
+  _poolFlensingRaptor,
   _poolFleshBurrower,
   _poolFleshEaterImp,
   _poolFleshToDust,
@@ -20610,6 +20620,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHewTheEntwood,
   _poolHexgoldHalberd,
   _poolHexgoldHoverwings,
+  _poolHexgoldSlash,
   _poolHexgoldSlith,
   _poolHexhavenBattalion,
   _poolHexhavenDuelingArena,
@@ -23911,6 +23922,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlagueBelcher,
   _poolPlagueDogs,
   _poolPlagueMyr,
+  _poolPlagueNurse,
   _poolPlagueStinger,
   _poolPlagueWind,
   _poolPlaguedRusalka,
@@ -23987,6 +23999,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPontiffOfBlight,
   _poolPopularEgotist,
   _poolPorcelainLegionnaire,
+  _poolPorcelainZealot,
   _poolPortOfKarfell,
   _poolPortTown,
   _poolPortalToPhyrexia,
@@ -26060,6 +26073,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSlaughterCry,
   _poolSlaughterDrone,
   _poolSlaughterPact,
+  _poolSlaughterSinger,
   _poolSlaughterSpecialist,
   _poolSlaughterTheStrong,
   _poolSlaughterhorn,

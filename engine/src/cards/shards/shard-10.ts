@@ -281,6 +281,7 @@ import _poolPilgrimsEye from "../pool/pilgrims-eye.js";
 import _poolPillageTheBog from "../pool/pillage-the-bog.js";
 import _poolPinToTheEarth from "../pool/pin-to-the-earth.js";
 import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
+import _poolPlagueNurse from "../pool/plague-nurse.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
@@ -757,6 +758,7 @@ const shard: CardShard = {
     _poolPillageTheBog,
     _poolPinToTheEarth,
     _poolPippinWardenOfIsengard,
+    _poolPlagueNurse,
     _poolPlanarBridge,
     _poolPlatedSpider,
     _poolPoisonTheWaters,

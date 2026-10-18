@@ -3108,6 +3108,8 @@ function computeCharacteristicsUncached(
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
+    // Granted toxic adds an instance (rule 702.164b), lost the same way.
+    if (granted && modifier.toxic !== undefined) toxic += modifier.toxic;
     // Rules about it rather than abilities it has: no loss of abilities
     // ends them.
     if (modifier.canAttackAsThoughNoDefender === true) canAttackAsThoughNoDefender = true;

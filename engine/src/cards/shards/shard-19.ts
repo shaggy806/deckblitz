@@ -22,6 +22,7 @@ import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
+import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
@@ -522,6 +523,7 @@ const shard: CardShard = {
     _poolArcboundSlasher,
     _poolArgothSanctumOfNature,
     _poolArmillarySphere,
+    _poolAspirantsAscent,
     _poolAssaultFormation,
     _poolAvatarEnthusiasts,
     _poolAwakenTheAges,

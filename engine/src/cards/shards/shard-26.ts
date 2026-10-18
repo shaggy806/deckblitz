@@ -76,6 +76,7 @@ import _poolCoastalPiracy from "../pool/coastal-piracy.js";
 import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
 import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
 import _poolCompassionateHealer from "../pool/compassionate-healer.js";
+import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
@@ -531,6 +532,7 @@ const shard: CardShard = {
     _poolCoerciveImpetus,
     _poolCogworkersPuzzleknot,
     _poolCompassionateHealer,
+    _poolCompleatDevotion,
     _poolConclaveEquenaut,
     _poolCorpseKnight,
     _poolCountOnLuck,

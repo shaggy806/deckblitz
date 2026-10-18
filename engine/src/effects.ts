@@ -2701,6 +2701,23 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Gains toxic N" (rule 702.164): one more instance of toxic, adding N
+       * to its total toxic value (702.164b) for `duration` — the target's
+       * (Aspirant's Ascent: "gains flying and toxic 1 until end of turn"), or
+       * every permanent matching `filter` as it resolves, all with one
+       * timestamp (Plague Nurse: "each other creature you control with toxic
+       * gains toxic 1 until end of turn", `exceptSource`). A loss of all
+       * abilities after it takes it away, like a granted keyword (613.7).
+       */
+      readonly kind: "grant-toxic";
+      readonly target?: EffectTargetRef;
+      readonly filter?: CardFilter;
+      readonly exceptSource?: boolean;
+      readonly amount: number;
+      readonly duration: PtDuration;
+    }
+  | {
+      /**
        * Connive (rule 701.50): the permanent's controller draws `amount`
        * cards (1 by default — "connives X" is an amount), then discards that
        * many, then puts a +1/+1 counter on it for each nonland card
@@ -5880,6 +5897,9 @@ export interface EffectApi {
     toughness: number,
     duration: PtDuration,
   ): void;
+  /** See the `grant-toxic` {@link EffectSpec}: `on` is the target, or a
+   * filter over the battlefield read as it resolves. */
+  grantToxic(on: TargetRef | CardFilter, amount: number, duration: PtDuration, exceptSource?: boolean): void;
   /** +power/+toughness to every battlefield permanent matching `filter`. */
   modifyPtAll(
     filter: CardFilter,
@@ -8902,6 +8922,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "grant-keyword-all":
       ctx.grantKeywordAll(spec.filter, spec.keyword, spec.duration, spec.exceptSource === true);
       return;
+    case "grant-toxic": {
+      if (spec.filter !== undefined) {
+        ctx.grantToxic(spec.filter, spec.amount, spec.duration, spec.exceptSource === true);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.grantToxic(target, spec.amount, spec.duration);
+      return;
+    }
     case "incubate":
       ctx.incubate(amountValue(spec.amount, ctx));
       return;

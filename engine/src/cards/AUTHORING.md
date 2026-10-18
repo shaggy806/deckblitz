@@ -484,7 +484,12 @@ subtype list with `includes`** in engine code — ask `hasSubtype`.
 parameterised and cumulative: `toxic: 1` is "Toxic 1" (Karumonix, the Rat
 King). A static grants more with `grantToxic: N` (Karumonix's "Other Rats you
 control have toxic 1" — `affects: { scope: "creatures-you-control",
-excludeSelf: true, subtype: "Rat" }`). The layer fold sums every instance into
+excludeSelf: true, subtype: "Rat" }`); an effect does with `grant-toxic { target
+| filter, amount, duration }` (Aspirant's Ascent's "gains flying and toxic 1 until
+end of turn"; Plague Nurse's "each other creature you control with toxic gains
+toxic 1", over a filter as it resolves). "With toxic" / "if that creature has
+toxic" is the filter `hasToxic: true` (printed or granted; Slaughter Singer,
+Hexgold Slash). The layer fold sums every instance into
 `Characteristics.toxic`, the creature's total toxic value (702.164b; a
 creature that loses its abilities loses the printed one), and combat damage it
 deals a player gives that player that many poison counters on top of the

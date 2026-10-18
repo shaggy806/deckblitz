@@ -289,6 +289,7 @@ import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
 import _poolPlungeIntoWinter from "../pool/plunge-into-winter.js";
+import _poolPorcelainZealot from "../pool/porcelain-zealot.js";
 import _poolPotholeMole from "../pool/pothole-mole.js";
 import _poolPotionersTrove from "../pool/potioners-trove.js";
 import _poolPrakhataClubSecurity from "../pool/prakhata-club-security.js";
@@ -761,6 +762,7 @@ const shard: CardShard = {
     _poolPlatedCrusher,
     _poolPlumecreedEscort,
     _poolPlungeIntoWinter,
+    _poolPorcelainZealot,
     _poolPotholeMole,
     _poolPotionersTrove,
     _poolPrakhataClubSecurity,

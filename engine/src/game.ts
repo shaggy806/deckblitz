@@ -20829,6 +20829,25 @@ export class Game {
           lastingHere(duration),
           exceptSource === true ? source : undefined,
         ),
+      grantToxic: (on, amount, duration, exceptSource) => {
+        const lasting = lastingHere(duration);
+        const grant = (id: ObjectId, timestamp: number): void => {
+          const object = this.state.objects[id];
+          if (object?.zone !== "battlefield" || !durationBegins(object, lasting)) return;
+          object.modifiers.push({ timestamp, power: 0, toughness: 0, keywords: [], toxic: amount, ...durationFields(lasting) });
+        };
+        if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
+          if (on.kind === "object") grant(this.splitOneFromStack(on.object), this.freshTimestamp());
+        } else {
+          // One effect, one timestamp (rule 613.7b), over what matches now.
+          const timestamp = this.freshTimestamp();
+          for (const id of this.battlefieldMatching(controller, on as CardFilter)) {
+            if (exceptSource === true && id === source) continue;
+            grant(id, timestamp);
+          }
+        }
+        invalidateComputedCache();
+      },
       grantKeywordAll: (filter, keyword, duration, exceptSource) =>
         this.grantKeywordAll(
           controller,
