@@ -213,11 +213,12 @@ Shiko or the other spell, and haste enablers in the crackback).
   targets past the first two rounds.
 - **Deeper lookahead** (the user, 2026-10-18): let the bot look further ahead, a clock off, to see
   whether it finds smarter lines. The yardstick is `bot/benchmarks.ts` (`npm run bot:benchmarks -w
-  engine`): ten hard positions played out over whole turns and judged on the outcome — goals, not a
-  gate. First reading: v2 solves 3/10, v1 5/10; 5,000 simulations a decision solve the same 3, and
-  `--rollout acting` solves 5 (both "sequence" ones), so the limit is how far a rollout plays, not
-  the budget. Still to solve: Bolts to the face over two turns, holding Fog, Murder on the battle
-  cry, keeping the lethal flier back from a trade, and Act of Treason then a sacrifice.
+  engine`): seventeen hard positions played out over whole turns and judged on the outcome — goals,
+  not a gate. Reading on 2026-10-18: v2 7/17, v1 7/17, `--rollout acting` 9/17; 5,000 simulations a
+  decision solve no more than the default, so the limit is how far a rollout plays, not the budget.
+  No configuration holds Fog or Counterspell for the opponent's turn, kills the battle cry creature,
+  or lets a commander die into a reanimation spell (v2 doesn't search 903.9a: the evaluation has no
+  command-zone term, `decisions/commander-replacement.ts`).
 - **More training scenarios.** 120 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which

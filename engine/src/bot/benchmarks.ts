@@ -72,6 +72,8 @@ export interface BotBenchmark {
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
+const C = asPlayerId("carol");
+const D = asPlayerId("dave");
 
 // --- the position ----------------------------------------------------------
 
@@ -79,13 +81,19 @@ const B = asPlayerId("bob");
  * reads the round (`earlyRemoval`, `earlyMana`). */
 const MID_GAME_ROUNDS = 8;
 
-/** A two-player game paused at `active`'s precombat main with every hand
- * empty, both libraries plain Forests unless `library` says otherwise. */
-function table(registry: CardRegistry, active: PlayerId, library: Partial<Record<PlayerId, string>> = {}): Game {
+/** A game paused at `active`'s precombat main with every hand empty: two
+ * players unless `players` says otherwise, every library plain Forests unless
+ * `library` does. */
+function table(
+  registry: CardRegistry,
+  active: PlayerId,
+  library: Partial<Record<PlayerId, string>> = {},
+  players: readonly PlayerId[] = [A, B],
+): Game {
   const game = Game.create({
     seed: 3,
     registry,
-    decks: [A, B].map((player) => ({ player, cards: Array<string>(40).fill(library[player] ?? "Forest") })),
+    decks: players.map((player) => ({ player, cards: Array<string>(40).fill(library[player] ?? "Forest") })),
   });
   game.advanceUntil(
     (s) =>
@@ -94,7 +102,27 @@ function table(registry: CardRegistry, active: PlayerId, library: Partial<Record
       s.turn.step === "precombat-main",
   );
   game.state.turn.number += MID_GAME_ROUNDS * game.state.turnOrder.length;
-  for (const player of [A, B]) game.state.zones.perPlayer[player].hand = [];
+  for (const player of players) game.state.zones.perPlayer[player].hand = [];
+  return game;
+}
+
+/**
+ * Alice's commander, Sheoldred, the Apocalypse — cast twice already, so {4}
+ * of tax and eight mana from the command zone — killed by bob's Murder on his
+ * turn, after `setup`: paused at Alice's choice to move her to the command
+ * zone (rule 903.9a).
+ */
+function commanderMurdered(registry: CardRegistry, setup: (game: Game) => void): Game {
+  const game = table(registry, B);
+  const sheoldred = onBoard(game, "Sheoldred, the Apocalypse", A);
+  game.state.objects[sheoldred].isCommander = true;
+  game.state.players[A].commanderCastCounts["Sheoldred, the Apocalypse"] = 2;
+  lands(game, "Swamp", A, 5);
+  setup(game);
+  lands(game, "Swamp", B, 3);
+  const murder = game.debugSpawn("Murder", B, "hand");
+  game.dispatch({ type: "cast-spell", player: B, card: murder, targets: [{ kind: "object", object: sheoldred }] });
+  game.advanceUntil((s) => s.awaiting?.kind === "commander-replacement" && s.awaiting.player === A);
   return game;
 }
 
@@ -153,6 +181,9 @@ export interface BenchmarkLine {
   readonly steps: readonly LineStep[];
   readonly attack?: (view: ControllerView) => readonly AttackerDeclaration[];
   readonly block?: (view: ControllerView) => readonly BlockerDeclaration[];
+  /** Whether a commander that died goes to the command zone (rule 903.9a);
+   * as `AutomaticController` answers unless said. */
+  readonly toCommandZone?: boolean;
 }
 
 /** Plays a `BenchmarkLine`, and otherwise what `AutomaticController` does:
@@ -185,6 +216,14 @@ export class LineController extends AutomaticController {
   override declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
     return this.line.block?.(view) ?? [];
   }
+
+  override commanderReplacement(
+    view: ControllerView,
+    commander: ObjectId,
+    movedTo: "graveyard" | "exile" | "hand" | "library",
+  ): boolean {
+    return this.line.toCommandZone ?? super.commanderReplacement(view, commander, movedTo);
+  }
 }
 
 /** Whether the engine offers `action` now — a step waits until it can be
@@ -207,6 +246,16 @@ function offered(view: ControllerView, action: Action): boolean {
 
 const handCard = (view: ControllerView, name: string): ObjectId | undefined =>
   view.state.zones.perPlayer[view.player].hand.find((id) => named(view.state, id) === name);
+
+const graveyardCard = (view: ControllerView, name: string): ObjectId | undefined =>
+  view.state.zones.perPlayer[view.player].graveyard.find((id) => named(view.state, id) === name);
+
+/** The spell named `name` on top of the stack, once it's there. */
+const onStack = (view: ControllerView, name: string): ObjectId | undefined => {
+  const stack = view.state.zones.shared.stack;
+  const top = stack[stack.length - 1];
+  return top !== undefined && named(view.state, top) === name ? top : undefined;
+};
 
 const mine = (view: ControllerView, name: string): ObjectId[] => controls(view.state, view.player, name);
 
@@ -253,6 +302,16 @@ function playLand(name: string): LineStep {
     return card === undefined ? null : { type: "play-land", player: view.player, card };
   };
 }
+
+/** Fling, sacrificing Craw Wurm, at Bob once `when` holds. */
+const fling =
+  (when: (view: ControllerView) => boolean): LineStep =>
+  (view) => {
+    const card = handCard(view, "Fling");
+    const wurm = mine(view, "Craw Wurm")[0];
+    if (!when(view) || card === undefined || wurm === undefined) return null;
+    return { type: "cast-spell", player: view.player, card, targets: [{ kind: "player", player: B }], sacrifice: wurm };
+  };
 
 /** Attack `defender` with every creature of ours named in `names`. */
 const attackWith =
@@ -519,6 +578,174 @@ export const BOT_BENCHMARKS: readonly BotBenchmark[] = [
       steps: [cast("Act of Treason", (view) => theirs(view, B, "Craw Wurm"))],
       attack: attackWith("Craw Wurm"),
     },
+  },
+  {
+    name: "lets the commander die into a Zombify",
+    lookahead: "next-turn",
+    rule: "Sheoldred is Alice's commander, eight mana to recast with its tax, and she holds Zombify on five Swamps: leave her in the graveyard and Zombify her back next turn. The command zone keeps her out for turns.",
+    turns: 2,
+    setup: (registry) =>
+      commanderMurdered(registry, (game) => {
+        // A worse target beside her, so Zombify has a choice to make.
+        game.debugSpawn("Grizzly Bears", A, "graveyard");
+        inHand(game, A, "Zombify");
+      }),
+    judge: (state) => ({
+      passed: controls(state, A, "Sheoldred, the Apocalypse").length > 0,
+      detail: controls(state, A, "Sheoldred, the Apocalypse").length > 0 ? "Sheoldred is back" : "no Sheoldred",
+    }),
+    solution: {
+      toCommandZone: false,
+      steps: [cast("Zombify", (view) => graveyardCard(view, "Sheoldred, the Apocalypse"))],
+    },
+    mistake: { toCommandZone: true, steps: [cast("Zombify", (view) => graveyardCard(view, "Grizzly Bears"))] },
+  },
+  {
+    name: "lets the commander die into a Living Death",
+    lookahead: "next-turn",
+    rule: "Alice holds Living Death with Grave Titan, a better creature than her commander, in her graveyard: Sheoldred (eight mana from the command zone) is still worth leaving there, since Living Death returns them both and sacrifices Bob's Craw Wurm.",
+    turns: 2,
+    setup: (registry) =>
+      commanderMurdered(registry, (game) => {
+        game.debugSpawn("Grave Titan", A, "graveyard");
+        inHand(game, A, "Living Death");
+        onBoard(game, "Craw Wurm", B);
+      }),
+    judge(state) {
+      const sheoldred = controls(state, A, "Sheoldred, the Apocalypse").length > 0;
+      const titan = controls(state, A, "Grave Titan").length > 0;
+      return {
+        passed: sheoldred && titan,
+        detail: `${sheoldred ? "Sheoldred" : "no Sheoldred"}, ${titan ? "Grave Titan" : "no Grave Titan"}`,
+      };
+    },
+    solution: { toCommandZone: false, steps: [cast("Living Death")] },
+    mistake: { toCommandZone: true, steps: [cast("Living Death")] },
+  },
+  {
+    name: "holds Counterspell for the Lava Axe",
+    lookahead: "their-turn",
+    rule: "Four players: Alice at 5 on two Islands and a Forest, and Bob, next, holds Lava Axe on five Mountains. Centaur Courser taps her out; Counterspell kept up stops the Axe.",
+    turns: 2,
+    setup(registry) {
+      const game = table(registry, A, {}, [A, B, C, D]);
+      lands(game, "Island", A, 2);
+      onBoard(game, "Forest", A);
+      inHand(game, A, "Counterspell", "Centaur Courser");
+      lands(game, "Mountain", B, 5);
+      inHand(game, B, "Lava Axe");
+      lifeOf(game, A, 5);
+      return game;
+    },
+    judge: aliceAlive,
+    solution: {
+      steps: [
+        cast(
+          "Counterspell",
+          (view) => onStack(view, "Lava Axe"),
+          (view) => onStack(view, "Lava Axe") !== undefined,
+        ),
+      ],
+    },
+    mistake: { steps: [cast("Centaur Courser")] },
+  },
+  {
+    name: "stays home rather than finish Carol into a hasty crackback",
+    lookahead: "their-turn",
+    rule: "Four players: Alice at 4 could kill Carol at 3 with Centaur Courser, but Bob, next, has Hill Giant out and Raging Goblin in hand. Tapped, she takes 4 and dies; kept home, the Courser blocks the Giant.",
+    turns: 2,
+    setup(registry) {
+      const game = table(registry, A, {}, [A, B, C, D]);
+      onBoard(game, "Centaur Courser", A);
+      onBoard(game, "Hill Giant", B);
+      onBoard(game, "Mountain", B);
+      inHand(game, B, "Raging Goblin");
+      lifeOf(game, A, 4);
+      lifeOf(game, C, 3);
+      return game;
+    },
+    judge: aliceAlive,
+    solution: {
+      steps: [],
+      block: (view) => {
+        const courser = mine(view, "Centaur Courser")[0];
+        const giant = theirs(view, B, "Hill Giant");
+        return courser === undefined || giant === undefined ? [] : [{ blocker: courser, attacker: giant }];
+      },
+    },
+    mistake: {
+      steps: [],
+      attack: (view) => mine(view, "Centaur Courser").map((attacker) => ({ attacker, defender: C })),
+    },
+  },
+  {
+    name: "Courser now so both two-drops fit next turn",
+    lookahead: "next-turn",
+    rule: "On two Forests holding a Forest, Grizzly Bears, Kalonian Tusker and Centaur Courser: the Courser takes all three mana now and the two two-drops all four next turn. The Tusker first is the same 3/3 for less, and strands a two-drop.",
+    turns: 3,
+    setup(registry) {
+      const game = table(registry, A);
+      lands(game, "Forest", A, 2);
+      inHand(game, A, "Forest", "Grizzly Bears", "Kalonian Tusker", "Centaur Courser");
+      return game;
+    },
+    judge(state) {
+      const out = ["Grizzly Bears", "Kalonian Tusker", "Centaur Courser"].filter(
+        (name) => controls(state, A, name).length > 0,
+      );
+      return { passed: out.length === 3, detail: out.length === 0 ? "none out" : `${out.join(", ")} out` };
+    },
+    solution: {
+      steps: [playLand("Forest"), cast("Centaur Courser"), playLand("Forest"), cast("Grizzly Bears"), cast("Kalonian Tusker")],
+    },
+    mistake: {
+      steps: [playLand("Forest"), cast("Kalonian Tusker"), playLand("Forest"), cast("Centaur Courser"), cast("Grizzly Bears")],
+    },
+  },
+  {
+    name: "attacks with the Wurm before it Flings",
+    lookahead: "combat",
+    rule: "Bob at 12 has no creatures: Alice's Craw Wurm hits for 6 and then Flings for 6 more. Fling first deals only the 6.",
+    turns: 1,
+    setup(registry) {
+      const game = table(registry, A);
+      lands(game, "Mountain", A, 2);
+      onBoard(game, "Craw Wurm", A);
+      inHand(game, A, "Fling");
+      lifeOf(game, B, 12);
+      return game;
+    },
+    judge: bobDead,
+    solution: { steps: [fling(inStep("postcombat-main"))], attack: attackWith("Craw Wurm") },
+    mistake: { steps: [fling(sorceryTime)], attack: attackWith("Craw Wurm") },
+  },
+  {
+    name: "Pestilence clears the chump blockers for lethal",
+    lookahead: "combat",
+    rule: "Bob at 6 holds off Alice's Craw Wurm with two Raging Goblins: one Pestilence activation kills both and costs him 1, and the Wurm's 6 finishes him.",
+    turns: 1,
+    setup(registry) {
+      const game = table(registry, A);
+      onBoard(game, "Swamp", A);
+      onBoard(game, "Pestilence", A);
+      onBoard(game, "Craw Wurm", A);
+      onBoard(game, "Raging Goblin", B);
+      onBoard(game, "Raging Goblin", B);
+      lifeOf(game, B, 6);
+      return game;
+    },
+    judge: bobDead,
+    solution: {
+      steps: [
+        (view) => {
+          const pestilence = mine(view, "Pestilence")[0];
+          if (!inStep("precombat-main")(view) || !sorceryTime(view) || pestilence === undefined) return null;
+          return { type: "activate-ability", player: view.player, source: pestilence, abilityIndex: 0 };
+        },
+      ],
+      attack: attackWith("Craw Wurm"),
+    },
+    mistake: { steps: [], attack: attackWith("Craw Wurm") },
   },
 ];
 
