@@ -9,7 +9,7 @@ import { wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpe
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
 import type { TargetSpec } from "../target.js";
-import { defineCard, type CardDefinition, type StaticAbility, type StaticCondition } from "./define.js";
+import { defineCard, type CardDefinition, type Keyword, type StaticAbility, type StaticCondition } from "./define.js";
 
 /** The placeholder for "the chosen creature type" inside a
  * `choose-creature-type` effect's `then` — re-exported here because card files
@@ -187,6 +187,57 @@ export const impendingAbilities = (): {
     },
   ],
 });
+
+/**
+ * Backup N (rule 702.165a): "When this creature enters, put N +1/+1 counters
+ * on target creature. If that's another creature, it also gains the
+ * non-backup abilities of this creature printed below this one until end of
+ * turn." `grants` are those abilities as printed below the backup line — the
+ * same ones the card has itself (702.165c: never one only granted to it), so
+ * fixed as the ability goes on the stack (702.165d): keywords, and triggered
+ * and activated abilities. Put "Backup N" in `text` as well.
+ */
+export const backup = (
+  n: number,
+  grants: {
+    readonly keywords?: readonly Keyword[];
+    readonly triggered?: readonly TriggeredAbility[];
+    readonly activated?: readonly ActivatedAbility[];
+  } = {},
+): TriggeredAbility => {
+  const gains: EffectSpec[] = [
+    ...(grants.keywords ?? []).map(
+      (keyword): EffectSpec => ({ kind: "grant-keyword", target: 0, keyword, duration: "end-of-turn" }),
+    ),
+    ...(grants.triggered ?? []).map(
+      (ability): EffectSpec => ({ kind: "grant-triggered", target: 0, ability, duration: "end-of-turn" }),
+    ),
+    ...(grants.activated ?? []).map(
+      (ability): EffectSpec => ({ kind: "grant-activated", target: 0, ability, duration: "end-of-turn" }),
+    ),
+  ];
+  return {
+    trigger: { on: "enters-battlefield", who: "self" },
+    targets: ["creature"],
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "+1/+1", amount: n },
+        ...(gains.length === 0
+          ? []
+          : [
+              {
+                kind: "conditional",
+                condition: { kind: "not", of: { kind: "target-is-source", index: 0 } },
+                then: { kind: "sequence", effects: gains },
+              } satisfies EffectSpec,
+            ]),
+      ],
+    },
+    resolve: null,
+    text: `Backup ${n}`,
+  };
+};
 
 /**
  * Vanishing N (rule 702.63a): "This permanent enters with N time counters on

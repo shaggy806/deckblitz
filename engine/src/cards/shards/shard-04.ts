@@ -60,6 +60,7 @@ import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
+import _poolConverterBeast from "../pool/converter-beast.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
@@ -508,6 +509,7 @@ const shard: CardShard = {
     _poolChasmDrake,
     _poolConceitedWitch,
     _poolContradict,
+    _poolConverterBeast,
     _poolCranialPlating,
     _poolCrawlingSensation,
     _poolCrimsonCaravaneer,

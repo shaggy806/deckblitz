@@ -1109,6 +1109,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Amass Zombies 4.")).toEqual({ kind: "amass", amount: 4, creatureType: "Zombie" });
   });
 
+  it("incubate N (rule 701.53a)", () => {
+    expect(parseSentence("Incubate 5.", ctx())).toEqual({ kind: "incubate", amount: 5 });
+  });
+
   it("the owner's choice of top or bottom of their library", () => {
     expect(parseSentence("Target creature's owner puts it on their choice of the top or bottom of their library.", ctx())).toEqual({
       kind: "put-on-library",

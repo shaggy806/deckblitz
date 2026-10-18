@@ -1403,6 +1403,7 @@ import _poolBoomerangBladeFlinger from "./pool/boomerang-blade-flinger.js";
 import _poolBoomerang from "./pool/boomerang.js";
 import _poolBoommobile from "./pool/boommobile.js";
 import _poolBoompile from "./pool/boompile.js";
+import _poolBoonBringerValkyrie from "./pool/boon-bringer-valkyrie.js";
 import _poolBoonOfEmrakul from "./pool/boon-of-emrakul.js";
 import _poolBoonOfTheSpiritRealm from "./pool/boon-of-the-spirit-realm.js";
 import _poolBoonOfTheWishGiver from "./pool/boon-of-the-wish-giver.js";
@@ -2342,6 +2343,7 @@ import _poolContradict from "./pool/contradict.js";
 import _poolControlMagic from "./pool/control-magic.js";
 import _poolConversionApparatus from "./pool/conversion-apparatus.js";
 import _poolConvertToSlime from "./pool/convert-to-slime.js";
+import _poolConverterBeast from "./pool/converter-beast.js";
 import _poolConviction from "./pool/conviction.js";
 import _poolConvolute from "./pool/convolute.js";
 import _poolCookingCampsite from "./pool/cooking-campsite.js";
@@ -14394,6 +14396,7 @@ import _tokensIllusionTokenPlain from "./tokens/illusion-token-plain.js";
 import _tokensIllusionTokenSkyclave from "./tokens/illusion-token-skyclave.js";
 import _tokensIllusionToken from "./tokens/illusion-token.js";
 import _tokensImpTokenJudith from "./tokens/imp-token-judith.js";
+import _tokensIncubatorToken from "./tokens/incubator-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "./tokens/inkling-token-emeritus-of-truce.js";
 import _tokensInklingToken from "./tokens/inkling-token.js";
 import _tokensInsectTokenBlackFlying from "./tokens/insect-token-black-flying.js";
@@ -14469,6 +14472,7 @@ import _tokensPhyrexianInsectToken from "./tokens/phyrexian-insect-token.js";
 import _tokensPhyrexianMiteToken from "./tokens/phyrexian-mite-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "./tokens/phyrexian-myr-token-myr-sire.js";
 import _tokensPhyrexianMyrToken from "./tokens/phyrexian-myr-token.js";
+import _tokensPhyrexianToken from "./tokens/phyrexian-token.js";
 import _tokensPhyrexianWurmDeathtouch from "./tokens/phyrexian-wurm-deathtouch.js";
 import _tokensPhyrexianWurmLifelink from "./tokens/phyrexian-wurm-lifelink.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "./tokens/phyrexian-wurm-token-wurmcoil-larva-deathtouch.js";
@@ -16022,6 +16026,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoomerang,
   _poolBoommobile,
   _poolBoompile,
+  _poolBoonBringerValkyrie,
   _poolBoonOfEmrakul,
   _poolBoonOfTheSpiritRealm,
   _poolBoonOfTheWishGiver,
@@ -16961,6 +16966,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolControlMagic,
   _poolConversionApparatus,
   _poolConvertToSlime,
+  _poolConverterBeast,
   _poolConviction,
   _poolConvolute,
   _poolCookingCampsite,
@@ -29019,6 +29025,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensIllusionTokenSkyclave,
   _tokensIllusionToken,
   _tokensImpTokenJudith,
+  _tokensIncubatorToken,
   _tokensInklingTokenEmeritusOfTruce,
   _tokensInklingToken,
   _tokensInsectTokenBlackFlying,
@@ -29094,6 +29101,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensPhyrexianMiteToken,
   _tokensPhyrexianMyrTokenMyrSire,
   _tokensPhyrexianMyrToken,
+  _tokensPhyrexianToken,
   _tokensPhyrexianWurmDeathtouch,
   _tokensPhyrexianWurmLifelink,
   _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch,

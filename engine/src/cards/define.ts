@@ -996,6 +996,12 @@ export type StaticCondition =
    */
   | { readonly kind: "votes-cast" }
   /**
+   * The object in target slot `index` is the ability's own source — backup's
+   * "if that's **another** creature" is this under a `not` (rule 702.165a).
+   * Only a resolution can answer it.
+   */
+  | { readonly kind: "target-is-source"; readonly index: number }
+  /**
    * The ability's own source matches `filter` — "as long as ~ is equipped",
    * "if ~ is attacking", "if ~ is tapped". A triggered ability whose source
    * was a permanent that has since left (its own dies trigger) reads it as it

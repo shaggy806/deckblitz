@@ -963,6 +963,12 @@ interface CastNowAsk {
 /** `cost` with `n` less generic mana — "{4}{B}{R}" less 1 is "{3}{B}{R}",
  * never below none. Only the generic number moves; coloured symbols and X
  * stay. */
+/** A double-faced token's faces, front first (the Incubator — rule
+ * 111.10i), or `null` for a token with one face. */
+function tokenFaces(registry: CardRegistry, cardName: string): readonly string[] | null {
+  return registry.get(cardName).faces;
+}
+
 function reduceGenericInCost(cost: string, n: number): string {
   if (n <= 0) return cost;
   const match = /\{(\d+)\}/.exec(cost);
@@ -1083,6 +1089,10 @@ export class Game {
    * See {@link withEnterBatch}. Not game state: it only ever spans one
    * synchronous call. */
   private enterBatch: Set<ObjectId> | null = null;
+  /** The +1/+1 counters an Incubator token being made by `incubate` enters
+   * with (rule 701.53a) — read by `enteringReplacementOf` for that token
+   * only. Not game state: it spans the one `createTokens` call. */
+  private incubating: number | null = null;
   /** The `permanent-entered-battlefield` events of the entry under way,
    * held back until all of its permanents are on the battlefield — see
    * {@link withEnterBatch}. `null` outside one. */
@@ -19629,6 +19639,10 @@ export class Game {
         return [...tally].every(([option, n]) => option === condition.option || n < mine) && mine > 0;
       }
       if (condition.kind === "votes-cast") return votes().length > 0;
+      if (condition.kind === "target-is-source") {
+        const ref = targets[condition.index];
+        return ref?.kind === "object" && ref.object === source;
+      }
       if (condition.kind === "excess-damage-this-way") {
         if (condition.to === undefined) return excessDamageSince(this.state, since) > 0;
         const ref = targets[condition.to];
@@ -21061,6 +21075,15 @@ export class Game {
       canBehold: (spec) => this.canBehold(controller, spec),
       grantKeyword: (target, keyword, duration) =>
         this.grantKeyword(target, keyword, lastingHere(duration)),
+      incubate: (amount) => {
+        // Each Incubator is its own object: one may transform without the rest.
+        this.incubating = amount;
+        try {
+          this.createTokens(controller, "Incubator Token", 1, false, false, [], undefined, true);
+        } finally {
+          this.incubating = null;
+        }
+      },
       removeFromCombat: (target) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
@@ -24152,6 +24175,12 @@ export class Game {
       ...(exileAtEndStep ? { exileAtEndStep: true } : {}),
       ...(notLegendary ? { notLegendary: true } : {}),
       ...(goadedForGameBy !== undefined ? { goadedForGameBy: [goadedForGameBy] } : {}),
+      // A double-faced token (an Incubator, rule 111.10i) has its faces, front
+      // up — a copy of a permanent copies only the face it shows (rule
+      // 707.8a), so only a token made from its own definition.
+      ...(copyOf === null && tokenFaces(this.registry, cardName) !== null
+        ? { faces: tokenFaces(this.registry, cardName) as readonly string[], face: 0 }
+        : {}),
     };
     // Either source of "enters tapped" is enough — the token's own replacement
     // (a Treasure-like) or the effect that created it ("create thirteen
@@ -31800,6 +31829,10 @@ export class Game {
     if (def.keywords.includes("riot")) {
       if (riot === "counter") addCounters("+1/+1", 1);
       else riotHaste = true;
+    }
+    // Incubate (rule 701.53a): the Incubator enters with its counters.
+    if (this.incubating !== null && object.isToken && printedCardName(object) === "Incubator Token") {
+      addCounters("+1/+1", this.incubating);
     }
     // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
     // as it was about to enter (`askEnterChoice`).

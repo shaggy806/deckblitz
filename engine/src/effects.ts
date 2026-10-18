@@ -2975,6 +2975,17 @@ export type EffectSpec =
     }
   | {
       /**
+       * Incubate N (rule 701.53a): create an Incubator token (rule 111.10i —
+       * a double-faced artifact token, "{2}: Transform this token.", whose
+       * back is a 0/0 Phyrexian artifact creature) that **enters with** N
+       * +1/+1 counters — as it enters, so what changes how counters are put
+       * (Doubling Season, Hardened Scales) applies.
+       */
+      readonly kind: "incubate";
+      readonly amount: EffectAmount;
+    }
+  | {
+      /**
        * "Remove target attacking or blocking creature from combat" (rule
        * 506.4 — Labyrinth of Skophos): it stops being an attacking,
        * blocking, blocked or unblocked creature; a creature it was blocking
@@ -6024,6 +6035,8 @@ export interface EffectApi {
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
   splitMana?(ask: ManaSplitAsk): void;
   grantKeyword(target: TargetRef, keyword: Keyword, duration: PtDuration): void;
+  /** See the `"incubate"` {@link EffectSpec}. */
+  incubate(amount: number): void;
   /** See the `"remove-from-combat"` {@link EffectSpec}. */
   removeFromCombat(target: TargetRef): void;
   /** See the `"lose-keywords"` {@link EffectSpec}: one permanent, or every
@@ -8850,6 +8863,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "grant-keyword-all":
       ctx.grantKeywordAll(spec.filter, spec.keyword, spec.duration, spec.exceptSource === true);
+      return;
+    case "incubate":
+      ctx.incubate(amountValue(spec.amount, ctx));
       return;
     case "remove-from-combat": {
       const target = resolveEffectTarget(spec.target, ctx);

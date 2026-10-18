@@ -451,6 +451,7 @@ import _tokensHumanMonkToken from "../tokens/human-monk-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
+import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 
@@ -906,6 +907,7 @@ const shard: CardShard = {
     _tokensKithkinToken,
     _tokensLotus,
     _tokensPestTokenAttacks,
+    _tokensPhyrexianToken,
     _tokensRedHumanToken,
     _tokensSpiderToken21Reach,
   ],

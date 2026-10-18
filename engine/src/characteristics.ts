@@ -965,6 +965,7 @@ function evalStaticCondition(
     case "source-on-battlefield":
     case "vote-won":
     case "votes-cast":
+    case "target-is-source":
       // A static ability has no triggering object, no chosen targets and no
       // resolution in progress — these kinds are only meaningful inside a
       // `conditional` effect, where the resolution context answers them

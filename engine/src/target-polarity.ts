@@ -329,6 +329,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)
       : v.touch(n.target, "help", MAJOR),
+  incubate: none,
   // Out of combat: an opponent's attacker or blocker, or one's own attacker
   // saved from a block — the board's call, or the card's own `whose`.
   "remove-from-combat": none,

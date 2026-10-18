@@ -1326,6 +1326,8 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(${TARGET}) becomes prepared`).exec(s))) return { kind: "become-prepared", target: slot(m[1]) };
   if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
   if (re("~ explores").test(s)) return { kind: "explore", target: "source" };
+  // Incubate N (rule 701.53a) — a fixed N.
+  if ((m = re("incubate (\\d+)").exec(s))) return { kind: "incubate", amount: Number(m[1]) };
   // Discover N (rule 701.57a) — a fixed N; "discover X, where X is …" is a person's.
   if ((m = re("discover (\\d+)").exec(s))) return { kind: "discover", amount: Number(m[1]) };
   if ((m = re(`(${TARGET}) explores, then it explores again`).exec(s))) {
