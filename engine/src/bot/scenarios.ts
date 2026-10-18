@@ -604,6 +604,36 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  asked({
+    name: "leaves a Flickerwisped commander in exile for its return",
+    rule: "A commander blinked with a delayed return comes back at the end step for free; the command zone makes it a new object the return can't find (rule 400.7).",
+    position(registry) {
+      // The user asked (2026-10-18) how bots handle a blinked commander. An
+      // immediate blink (Cloudshift) never asks: it's back before
+      // state-based actions. Bob's Flickerwisp does ask (rule 903.9a), and
+      // v1's answer — which v2 keeps, never searching this decision — sent
+      // Sheoldred to the command zone, to be recast for {4} of tax.
+      const game = table(registry, [A, B], B);
+      const sheoldred = onBoard(game, "Sheoldred, the Apocalypse", A);
+      game.state.objects[sheoldred].isCommander = true;
+      lands(game, "Plains", B, 3);
+      game.dispatch({ type: "cast-spell", player: B, card: game.debugSpawn("Flickerwisp", B, "hand"), targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-targets" && s.awaiting.player === B);
+      game.dispatch({ type: "choose-targets", player: B, targets: [{ kind: "object", object: sheoldred }] });
+      game.advanceUntil((s) => s.awaiting?.kind === "commander-replacement" && s.awaiting.player === A);
+      if (game.state.awaiting?.kind !== "commander-replacement") {
+        return { passed: false, detail: "the 903.9a choice was never asked" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "commander-replacement" && !action.toCommandZone,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   {
     name: "takes lethal on board",
     rule: "A swing that wins the game outranks every positional term.",

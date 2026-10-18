@@ -494,6 +494,21 @@ export interface PowerCap {
 /** The `suggested` creature types on a pending `choose-creature-type` decision,
  * read off the chooser's own legal actions (the only place they exist). */
 
+/**
+ * Whether `object`, in exile, is waiting on a delayed blink's return
+ * (Flickerwisp, Eerie Interlude: `GameObject.flickerLink`, and the
+ * `return-flickered` delayed trigger naming the same link). A commander there
+ * is left in exile: moved to the command zone it's a new object the return
+ * no longer finds (rule 400.7), and the free trip back is gone.
+ */
+function flickerReturnPending(state: GameState, object: GameObject): boolean {
+  const link = object.flickerLink;
+  return (
+    link !== undefined &&
+    state.delayedTriggers.some((d) => d.effect.kind === "return-flickered" && d.effect.link === link)
+  );
+}
+
 export class AutomaticController implements PlayerController {
   readonly playerId: PlayerId;
 
@@ -579,7 +594,8 @@ export class AutomaticController implements PlayerController {
         object.foretold ||
         object.suspended ||
         object.airbended === true ||
-        object.plottedOnTurn !== undefined)
+        object.plottedOnTurn !== undefined ||
+        flickerReturnPending(view.state, object))
     );
   }
 
