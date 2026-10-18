@@ -116,7 +116,7 @@ the shard `up`.
 
 - **How many**: one per core, less one for main — `max(1, cores − 1)`. On the 2-vCPU box that's
   `SHARDS=1`; a 4-vCPU box would take 3. More shards than cores just time-slice the bots'
-  300 ms decision budget.
+  decision budget (a second since 2026-10-18).
 - **Memory**: each shard holds its own copy of the engine — about 160 MB rss idle (measured on the
   dev PC: `--shards 0` 194 MB, `--shards 1` 213 MB, `--shards 2` 370 MB; main alone ~56 MB) —
   plus its rooms, ~15 MB a busy four-player game. Each shard's heap is capped at

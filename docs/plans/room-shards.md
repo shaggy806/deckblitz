@@ -2,8 +2,9 @@
 
 Status: **live** (2026-10-13): built, deployed at 77b43d95 and turned on with `SHARDS=1` in the
 box's service unit (`DEPLOYMENT.md`; the code's default stays 0). The box's knee is measured
-below; `MAX_ROOMS_PER_SHARD=8` on the box (the user's choice, from that knee). Left: the same
-measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
+below; `MAX_ROOMS_PER_SHARD=8` on the box (the user's choice, from that knee, under a 300 ms bot
+budget — "The one-second budget" below recommends 6 since the budget became a second). Left: the
+same measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
 
@@ -279,6 +280,53 @@ cap lifted for the run by a systemd drop-in, removed after (the cap of 6 is live
 - Bot decision p99 280-420 ms in the shard.
 - The load test's byte rate doesn't show event-only frames: it doesn't send `event-deltas`, so it
   gets whole logs (a browser opts in).
+
+## The one-second budget (2026-10-18, dev PC)
+
+The bots' decision budget went from 300 ms to a second (`room.ts` `BOT_DECISION_BUDGET_MS`), after
+the knee above was measured. Same load test on the dev PC, `--shards 1`, stages at 75 s, acks at
+600 ms, `--status`; the 300 ms run is the same build with the constant patched back in `dist/`, so
+the two differ only in the budget. Single runs over different games, so ±10% is noise:
+
+| rooms | budget | frames/s | gap median / p90 | shard busy | shard delay p99 | bot p99 |
+|---|---|---|---|---|---|---|
+| 1 | 300 ms | 0.89 | 1.32 / 1.40 s | 5% | 22 ms | 126 ms |
+| 1 | 1 s | 0.87 | 1.32 / 1.42 s | 4% | 14 ms | 142 ms |
+| 2 | 300 ms | 1.83 | 1.32 / 1.47 s | 10% | 55 ms | 188 ms |
+| 2 | 1 s | 1.64 | 1.32 / 1.61 s | 20% | 355 ms | 752 ms |
+| 4 | 300 ms | 3.32 | 1.33 / 1.55 s | 33% | 327 ms | 317 ms |
+| 4 | 1 s | 3.24 | 1.32 / 1.74 s | 30% | 263 ms | 261 ms |
+| 6 | 300 ms | 4.51 | 1.35 / 1.91 s | 57% | 571 ms | 349 ms |
+| 6 | 1 s | 4.27 | 1.36 / 2.15 s | 48% | 564 ms | 862 ms |
+| 8 | 300 ms | 5.72 | 1.40 / 1.94 s | 66% | 588 ms | 326 ms |
+| 8 | 1 s | 4.44 | 1.50 / 2.47 s | 70% | 1.71 s | 1.05 s |
+| 12 | 300 ms | 6.73 | 1.48 / 2.09 s | 72% | 670 ms | 324 ms |
+| 12 | 1 s | 6.73 | 1.48 / 2.58 s | 72% | 1.21 s | 330 ms |
+| 16 | 300 ms | 6.57 | 1.80 / 2.68 s | 89% | 1.25 s | 349 ms |
+| 16 | 1 s | 7.65 | 1.83 / 3.18 s | 86% | 2.33 s | 1.01 s |
+
+- **The median doesn't move; the tail does.** Most decisions finish well inside 300 ms, so the
+  frame-gap median and the shard's busy share are the same at either budget. The knee by the
+  rule that set the cap (median +20% over one room) is in the same place, between 12 and 16 rooms
+  on this PC, which is faster than the box. What the second changes is how long one wide board can
+  hold its shard: the gap p90 is 10-25% longer from 2 rooms up, and from 8 rooms the shard's
+  event-loop delay p99 roughly doubles (8 rooms: 0.59 → 1.71 s; 16: 1.25 → 2.33 s). That delay is
+  how long every other room on the shard waits for its next frame.
+- **A decision can overrun the second.** In 16 four-player self-play games at a 1 s budget
+  (37,457 decisions), 437 ran out of clock and the slowest took 3.2 s: the search stops before a
+  simulation that the running mean says won't fit, but one wide-board simulation can run far
+  past it.
+- **200 simulations is never the limit.** In the same games no decision came near it: the most
+  was 61 (a priority window), 58 for an attack, 33 for a block, 12 for a decision (which caps at
+  12). The clock always stops a search first, so raising `maxSimulations` would change nothing;
+  it stays at 200.
+- **On the box.** At 300 ms its one shard was already at 1.05 s delay p99 and 93% busy with 8
+  all-bot rooms; doubling the tail there puts a stalled frame at 2-3 s, while at 6 rooms (517 ms,
+  69% busy then) it would land near where 8 rooms were. **Recommendation: lower
+  `MAX_ROOMS_PER_SHARD` from 8 to 6**, then confirm it with this load test on the box with nobody
+  playing (the per-address cap lifted by a drop-in, as before). A real blitz room — three bots
+  and a person thinking — is lighter than an all-bot one, so 6 keeps some margin rather than
+  cutting into ordinary use. Not applied: the box's unit is the user's call.
 
 ## Rollout
 

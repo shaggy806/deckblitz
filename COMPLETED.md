@@ -251,6 +251,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The "Think longer" trial retired, and the one-second budget measured** (2026-10-18): with
+  every room's bots at a second a decision, the host's "Think longer — up to 1 s a decision"
+  setting (`set-bot-think-long`, 2026-10-14) only raised 200 simulations to 600, and no decision
+  in 16 four-player games used more than 61, so it's gone from protocol to client with
+  `EvalBotController.setSearchBudget` and `--long-bot-thinking`; `maxSimulations` stays 200. The
+  load test at 300 ms and 1 s (`docs/plans/room-shards.md`, "The one-second budget"): the same
+  median pace, a shard's stalls about doubled from 8 rooms up; lowering the box's cap to 6 is the
+  user's call (Questions for the user).
 - **Turn planning seated** (the user, 2026-10-18): v2 plans its own turn by default
   (`plan: "turn"`, `bot/turn-plan.ts`) — lines of its moves across both main phases and through
   combat, only where a move opens up another, replayed while the board matches, on the decision's

@@ -12,7 +12,10 @@ built.
 Each waits on a decision only the user can make. Once one is answered, move the work it
 decides into its section below.
 
-None open.
+- **Lower the box's room cap from 8 to 6?** `MAX_ROOMS_PER_SHARD=8` (`DEPLOYMENT.md`) was set from
+  a knee measured under the old 300 ms bot budget. At a second, the median pace is unchanged but
+  a shard's stalls about double from 8 rooms up (`docs/plans/room-shards.md`, "The one-second
+  budget"), so 6 is recommended, then confirmed by the load test on the box with nobody playing.
 
 ## Commander gap (the current priority)
 
@@ -233,11 +236,11 @@ Shiko or the other spell, and haste enablers in the crackback).
   `turn` is now v2's default (`COMPLETED.md`); left here: the "sequence" benchmark it misses (Opt,
   which needs the draw known), `next-turn` (its passive opponents make held answers look idle), and
   the opponents'-turn benchmarks, which only the (unseated) deep horizons solve.
-- **The live decision budget is a second** (the user, 2026-10-18; `server/src/room.ts`
-  `BOT_DECISION_BUDGET_MS`, was 300 ms). Two follow-ups: retire the "Think longer — up to 1 s"
-  trial (`set-bot-think-long`, protocol to client — it now only raises 200 simulations to 600),
-  and re-measure the box's knee (`npm run load-test -w server`): `MAX_ROOMS_PER_SHARD=8` was set
-  under 300 ms, and a wide board's decision can now hold its shard's other rooms for a second.
+- **A decision overruns its second** (found 2026-10-18): in 16 four-player self-play games at
+  the live 1 s budget, 437 of 37,457 decisions ran out of clock and the slowest took 3.2 s — the
+  search's predictive stop (`spent` in `eval-bot.ts`) can't stop one wide-board simulation already
+  under way, nor see whether the turn plan's leftover work fits. Each overrun holds every other
+  room on its shard as long (`docs/plans/room-shards.md`, "The one-second budget").
 - **Bots and token stacks: divided damage and gang blocks** (the user, 2026-10-18). Neither bot
   ever sets a cast's `division`, so divided damage always splits evenly over distinct targets (v1
   aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno
