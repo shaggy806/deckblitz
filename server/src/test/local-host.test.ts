@@ -116,7 +116,7 @@ describe("a local room host", () => {
     expect(budget()).toEqual({ ms: 1000, sims: 600 });
     host.message({ type: "set-bot-think-long", roomId, long: false });
     expect(last("state")?.botThinkLong).toBeUndefined();
-    expect(budget()).toEqual({ ms: 300, sims: 200 });
+    expect(budget()).toEqual({ ms: 1000, sims: 200 });
   });
 
   it("is refused on a server that doesn't allow it, which doesn't offer it", () => {

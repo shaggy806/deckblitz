@@ -140,14 +140,18 @@ const BOT_MIN_THINK_MS = 350;
  * (four) before this existed. Its own `maxSimulations` ceiling counts
  * simulations, which bounds *work* and not *time*.
  *
- * Set a shade under `BOT_MIN_THINK_MS` so a bot's thinking disappears inside
- * the pause the room is already taking for animations: search and pause run
- * concurrently, so as long as the search finishes first it costs nothing
- * visible. The search returns its best candidate so far when the budget runs
- * out, having scored passing and v1's own choice first, so an expired search
- * degrades to v1-quality play rather than to nothing.
+ * A second (the user, 2026-10-18), up from 300 ms, a shade under
+ * `BOT_MIN_THINK_MS` until then: room for the turn planning a seated bot
+ * does (`plan: "turn"`, `bot/turn-plan.ts`) on boards where the one-move
+ * search already took most of 300 ms. Most decisions still finish inside
+ * the room's animation pause, which runs alongside the search; a wide board
+ * can now take up to a second, holding up the other rooms on its thread as
+ * long (`docs/plans/room-shards.md`). The search returns its best candidate
+ * so far when the budget runs out, having scored passing and v1's own choice
+ * first, so an expired search degrades to v1-quality play rather than to
+ * nothing, and a plan past the deadline gives way to the one-move answer.
  */
-const BOT_DECISION_BUDGET_MS = 300;
+const BOT_DECISION_BUDGET_MS = 1000;
 /**
  * A room's bots told to think longer (`set-bot-think-long`, a trial setting,
  * 2026-10-14): up to a second a decision, and simulations enough to score
@@ -593,8 +597,9 @@ export class Room {
     this.lastActivityAt = Date.now();
   }
 
-  /** Lets the bots think for up to a second a decision, or back to 300 ms
-   * (`BOT_LONG_BUDGET`), from each one's next decision. Whether this host
+  /** Lets the bots run up to 600 simulations a decision, or back to 200
+   * (`BOT_LONG_BUDGET`), from each one's next decision — both a second since
+   * that became every room's budget (2026-10-18). Whether this host
    * allows it is the service's check. */
   setBotThinkLong(long: boolean): void {
     this.botThinkLong = long;
