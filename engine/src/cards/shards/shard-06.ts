@@ -212,6 +212,7 @@ import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
+import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
@@ -675,6 +676,7 @@ const shard: CardShard = {
     _poolKingDarienXlviii,
     _poolKreeSentinel,
     _poolKujaGenomeSorcerer,
+    _poolLagoonBreach,
     _poolLathlissDragonQueen,
     _poolLegionsLanding,
     _poolLingeringTormentor,

@@ -403,6 +403,7 @@ import _poolTyrantGuard from "../pool/tyrant-guard.js";
 import _poolUlvenwaldOddity from "../pool/ulvenwald-oddity.js";
 import _poolUnburialRites from "../pool/unburial-rites.js";
 import _poolUncleIroh from "../pool/uncle-iroh.js";
+import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
@@ -853,6 +854,7 @@ const shard: CardShard = {
     _poolUlvenwaldOddity,
     _poolUnburialRites,
     _poolUncleIroh,
+    _poolUneasyPartings,
     _poolUntamedHunger,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,

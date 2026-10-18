@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **March of the Machine: The Aftermath, whole** (batch 97): 7 of its last 20, and 22 older
+  cards unblocked by the two features built for it — distributed counters (rule 601.2d,
+  `counters-divided`) and "its owner puts it on their choice of the top or bottom of their
+  library" (`put-on-library`'s `ownerChooses`) (2026-10-17).
 - **The Lord of the Rings: Tales of Middle-earth and its Commander set, both whole** (batch 96):
   124 of 169 cards, and 23 older ones the same features unblocked — with voting (rule 701.38: the
   `vote` effect over options, permanents and players, open or secret, additional votes, "more

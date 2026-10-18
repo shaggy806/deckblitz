@@ -1,0 +1,351 @@
+{
+ "batch": "B97",
+ "status": "complete",
+ "ranks": "March of the Machine: The Aftermath (MAT, 2023-05-12): whole set (the rest of it)",
+ "authored": [
+  {
+   "name": "Animist's Might",
+   "files": [
+    "engine/src/cards/pool/animists-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jolrael, Voice of Zhalfir",
+   "files": [
+    "engine/src/cards/pool/jolrael-voice-of-zhalfir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Campus Renovation",
+   "files": [
+    "engine/src/cards/pool/campus-renovation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ayara's Oathsworn",
+   "files": [
+    "engine/src/cards/pool/ayaras-oathsworn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vesuvan Drifter",
+   "files": [
+    "engine/src/cards/pool/vesuvan-drifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nashi, Moon's Legacy",
+   "files": [
+    "engine/src/cards/pool/nashi-moons-legacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kolaghan Warmonger",
+   "files": [
+    "engine/src/cards/pool/kolaghan-warmonger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trip Up",
+   "files": [
+    "engine/src/cards/pool/trip-up.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Unlucky Drop",
+   "files": [
+    "engine/src/cards/pool/unlucky-drop.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Vanish from Sight",
+   "files": [
+    "engine/src/cards/pool/vanish-from-sight.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Return to the Sewers",
+   "files": [
+    "engine/src/cards/pool/return-to-the-sewers.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Lost Days",
+   "files": [
+    "engine/src/cards/pool/lost-days.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Trickster's Stratagem",
+   "files": [
+    "engine/src/cards/pool/tricksters-stratagem.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Ice Magic",
+   "files": [
+    "engine/src/cards/pool/ice-magic.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Jailbreak Scheme",
+   "files": [
+    "engine/src/cards/pool/jailbreak-scheme.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Plan for All Outcomes",
+   "files": [
+    "engine/src/cards/pool/plan-for-all-outcomes.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Uneasy Partings",
+   "files": [
+    "engine/src/cards/pool/uneasy-partings.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Run Behind",
+   "files": [
+    "engine/src/cards/pool/run-behind.ts"
+   ],
+   "tested": false,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Lost in Space",
+   "files": [
+    "engine/src/cards/pool/lost-in-space.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Riverwalk Technique",
+   "files": [
+    "engine/src/cards/pool/riverwalk-technique.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Uncharted Voyage",
+   "files": [
+    "engine/src/cards/pool/uncharted-voyage.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Dire Downdraft",
+   "files": [
+    "engine/src/cards/pool/dire-downdraft.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Sudden Setback",
+   "files": [
+    "engine/src/cards/pool/sudden-setback.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Horned Loch-Whale",
+   "files": [
+    "engine/src/cards/pool/horned-loch-whale.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Lagoon Breach",
+   "files": [
+    "engine/src/cards/pool/lagoon-breach.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  },
+  {
+   "name": "Armament Dragon",
+   "files": [
+    "engine/src/cards/pool/armament-dragon.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's distributed counters"
+  },
+  {
+   "name": "Glint Weaver",
+   "files": [
+    "engine/src/cards/pool/glint-weaver.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's distributed counters"
+  },
+  {
+   "name": "Picnic Ruiner // Stolen Goodies",
+   "files": [
+    "engine/src/cards/pool/picnic-ruiner.ts",
+    "engine/src/cards/pool/stolen-goodies.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's distributed counters"
+  },
+  {
+   "name": "Misleading Motes",
+   "files": [
+    "engine/src/cards/pool/misleading-motes.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's owner's top-or-bottom choice"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Feast of the Victorious Dead",
+   "needs": [
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "\"distribute that many +1/+1 counters among any number of creatures you control\" as it resolves (untargeted): no distribute-counters effect exists (AUTHORING §15)"
+  },
+  {
+   "name": "Undercity Upheaval",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "Distributed counters are built for a fixed total; this one's total is the creature cards in your graveyard as it's cast."
+  },
+  {
+   "name": "The Kenriths' Royal Funeral",
+   "needs": [
+    "cost:cost-reduction-per-card-exiled-with-source"
+   ],
+   "why": "\"cost {1} less for each card exiled with\" it, counting only cards still in exile (ruling): CostReductionAmount has no exiled-with-source count; exile `linked` counts for good even after leaving exile"
+  },
+  {
+   "name": "Urborg Scavengers",
+   "needs": [
+    "static:keywords-from-exiled-with-source"
+   ],
+   "why": "\"has flying as long as a card exiled with it has flying\" (and ten more keywords): no static reads keywords off cards exiled with the source"
+  },
+  {
+   "name": "Niv-Mizzet, Supreme",
+   "needs": [
+    "keyword:hexproof-from-monocolored",
+    "keyword:jump-start"
+   ],
+   "why": "hexproof from monocolored isn't a keyword, and jump-start (cast from graveyard + discard, then exile) has no vocabulary, granted or printed"
+  },
+  {
+   "name": "Tazri, Stalwart Survivor",
+   "needs": [
+    "condition:filter-has-nonmana-activated-ability",
+    "effect:granted-mana-ability-own-colors-gated"
+   ],
+   "why": "no CardFilter clause for \"creature cards with activated abilities that aren't mana abilities\" (the mill), and the granted mana ability needs \"any of this creature's colors\" plus \"activate only if this creature has another activated ability\""
+  },
+  {
+   "name": "Rebuild the City",
+   "needs": [
+    "bug:token-copy-as-enters-choices"
+   ],
+   "why": "ruling: the copies' \"as [this land] enters\" abilities work; the engine doesn't ask as-enters choices (Cavern of Souls' type, a Thriving land's colour) for a token copy (§15), so those copies enter with nothing chosen"
+  },
+  {
+   "name": "Deification",
+   "needs": [
+    "static:planeswalker-zero-loyalty-survives",
+    "effect:choose-planeswalker-type"
+   ],
+   "why": "'damage would remove all loyalty counters -> all but one' replacement doesn't exist; no 'choose a planeswalker type' as-enters choice or ofChosenType for planeswalker subtypes"
+  },
+  {
+   "name": "Arni Metalbrow",
+   "needs": [
+    "trigger:attacks-or-enters-attacking"
+   ],
+   "why": "no trigger listens to a creature you control entering attacking (the engine emits 'entered-attacking' but no TriggerSpec reads it); 'attacks' never fires for one put onto the battlefield attacking"
+  },
+  {
+   "name": "Tolarian Contempt",
+   "needs": [
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "The owner's top-or-bottom choice is built; two creatures of one owner going to the same end are ordered by target slot, not by their owner (the ruling)."
+  },
+  {
+   "name": "Blot Out",
+   "needs": [
+    "effect:player-chooses-permanents-to-exile"
+   ],
+   "why": "'target opponent exiles a creature or planeswalker they control with the greatest MV' is an exile edict chosen by the opponent; only sacrifice has an edict shape, choose-permanents is the controller's choice"
+  },
+  {
+   "name": "Death-Rattle Oni",
+   "needs": [
+    "cost:cost-reduction-creatures-died-this-turn"
+   ],
+   "why": "'{2} less for each creature that died this turn' counts every player's creatures; CostReductionAmount's turnHistory only reads the caster's own list and has no who"
+  },
+  {
+   "name": "Spark Rupture",
+   "needs": [
+    "static:planeswalker-becomes-creature"
+   ],
+   "why": "a static making each planeswalker with loyalty a creature that loses all abilities with P/T = loyalty counters is listed as not modeled (§15, Gideon)"
+  },
+  {
+   "name": "Aetherspouts",
+   "needs": [
+    "decision:owner-chooses-top-or-bottom",
+    "decision:owner-orders-library-placements"
+   ],
+   "why": "'For each attacking creature, its owner puts it on…' is untargeted: ownerChooses only works on a target slot. Each owner also has to choose in APNAP order and set the order of their own cards that go to the same end (both rulings)."
+  },
+  {
+   "name": "Clash of Elements",
+   "needs": [
+    "effect:if-they-do-library-move"
+   ],
+   "why": "'If they do, 2 damage': each-player-may's ifDid fires once the owner picks top, even if the card never got there. A commander the owner sends to the command zone instead (903.9b) should take no damage. No this-way or condition checks that a library move actually happened."
+  },
+  {
+   "name": "Swat Away",
+   "needs": [
+    "condition:creature-attacking-you"
+   ],
+   "why": "\"Costs {2} less if a creature is attacking you\": no StaticCondition or CardFilter clause for a creature attacking *you* specifically (opponent-controls + attacking also matches creatures attacking another player or your planeswalker/battle). The top-or-bottom half is fine."
+  }
+ ]
+}

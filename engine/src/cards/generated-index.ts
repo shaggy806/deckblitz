@@ -538,6 +538,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Kazuul's Cliffs": "https://cards.scryfall.io/art_crop/back/7/5/75240bbc-adc7-48ff-9523-c79776d710d3.jpg",
   "Kefka, Ruler of Ruin": "https://cards.scryfall.io/art_crop/back/8/f/8fcf3fbb-1ddd-437e-81c1-f5a3133f5ee8.jpg",
   "Khalni Territory": "https://cards.scryfall.io/art_crop/back/9/9/99535539-aa73-41ed-86ab-21c97b92620d.jpg",
+  "Lagoon Breach": "https://cards.scryfall.io/art_crop/back/9/6/96a05063-0556-42e4-8d4c-8e92be160ef5.jpg",
   "Lambholt Ravager": "https://cards.scryfall.io/art_crop/back/0/c/0cbee24c-9147-46cb-a5f9-8d919c021aa4.jpg",
   "Lavaglide Pathway": "https://cards.scryfall.io/art_crop/back/2/6/2668ac91-6cda-4f81-a08d-4fc5f9cb35b2.jpg",
   "Legion Stronghold": "https://cards.scryfall.io/art_crop/back/7/6/7676abd9-0a3d-4721-b17b-778d2e3c2e25.jpg",

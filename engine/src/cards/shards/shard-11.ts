@@ -205,6 +205,7 @@ import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
 import _poolJadeMage from "../pool/jade-mage.js";
+import _poolJailbreakScheme from "../pool/jailbreak-scheme.js";
 import _poolJayasGreeting from "../pool/jayas-greeting.js";
 import _poolJennikasTechnique from "../pool/jennikas-technique.js";
 import _poolJhoirasFamiliar from "../pool/jhoiras-familiar.js";
@@ -693,6 +694,7 @@ const shard: CardShard = {
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
     _poolJadeMage,
+    _poolJailbreakScheme,
     _poolJayasGreeting,
     _poolJennikasTechnique,
     _poolJhoirasFamiliar,

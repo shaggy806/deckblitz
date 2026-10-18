@@ -2947,4 +2947,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Island*4', 'Tivit, Seller of Secrets'], hand: ['Plea for Power'] },
     }),
   ),
+  preset(
+    "Misleading Motes (the owner's choice of top or bottom)",
+    board({
+      you: { bf: ['Island*4'], hand: ['Misleading Motes'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Armament Dragon (distributed counters)',
+    board({
+      you: { bf: ['Grizzly Bears', 'Llanowar Elves', 'Plains*2', 'Swamp*2', 'Forest*2'], hand: ['Armament Dragon'] },
+    }),
+  ),
 ]

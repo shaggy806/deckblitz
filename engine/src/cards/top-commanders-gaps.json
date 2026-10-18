@@ -318,7 +318,9 @@
   "effect:lose-keyword-until-eot",
   "effect:remove-from-combat",
   "keyword:devour",
-  "condition:ring-bearer-other-than-source"
+  "condition:ring-bearer-other-than-source",
+  "effect:distribute-counters",
+  "decision:owner-chooses-top-or-bottom"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -105,6 +105,7 @@ import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
+import _poolDireDowndraft from "../pool/dire-downdraft.js";
 import _poolDiresight from "../pool/diresight.js";
 import _poolDiscerningFinancier from "../pool/discerning-financier.js";
 import _poolDiscipleOfTheVault from "../pool/disciple-of-the-vault.js";
@@ -230,6 +231,7 @@ import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
+import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
 import _poolMalcatorsWatcher from "../pool/malcators-watcher.js";
@@ -586,6 +588,7 @@ const shard: CardShard = {
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDinaSoulSteeper,
+    _poolDireDowndraft,
     _poolDiresight,
     _poolDiscerningFinancier,
     _poolDiscipleOfTheVault,
@@ -711,6 +714,7 @@ const shard: CardShard = {
     _poolLeelaSevateemWarrior,
     _poolLightningAngel,
     _poolLluwenExchangeStudent,
+    _poolLostInSpace,
     _poolMagnify,
     _poolMahaItsFeathersNight,
     _poolMalcatorsWatcher,

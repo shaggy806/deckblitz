@@ -250,6 +250,7 @@ import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
 import _poolLoporritScout from "../pool/loporrit-scout.js";
+import _poolLostDays from "../pool/lost-days.js";
 import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
@@ -407,6 +408,7 @@ import _poolTrapjawKelpie from "../pool/trapjaw-kelpie.js";
 import _poolTravelingMinister from "../pool/traveling-minister.js";
 import _poolTreatsToShare from "../pool/treats-to-share.js";
 import _poolTributeToTheWorldTree from "../pool/tribute-to-the-world-tree.js";
+import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
@@ -715,6 +717,7 @@ const shard: CardShard = {
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
     _poolLoporritScout,
+    _poolLostDays,
     _poolLoxodonEavesdropper,
     _poolLoyalTutor,
     _poolLumengridGargoyle,
@@ -872,6 +875,7 @@ const shard: CardShard = {
     _poolTravelingMinister,
     _poolTreatsToShare,
     _poolTributeToTheWorldTree,
+    _poolTrickstersStratagem,
     _poolTripNoose,
     _poolTunnelTipster,
     _poolTyrantOfKherRidges,

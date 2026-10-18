@@ -190,6 +190,7 @@ import _poolHighMarket from "../pool/high-market.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
+import _poolIceMagic from "../pool/ice-magic.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolImpale from "../pool/impale.js";
@@ -308,6 +309,7 @@ import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
+import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
 import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
@@ -429,6 +431,7 @@ import _poolTradeRouteEnvoy from "../pool/trade-route-envoy.js";
 import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
+import _poolTripUp from "../pool/trip-up.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolHondenOfInfiniteRage,
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
+    _poolIceMagic,
     _poolIgnisScientia,
     _poolIgniteTheFuture,
     _poolImpale,
@@ -799,6 +803,7 @@ const shard: CardShard = {
     _poolPhenaxGodOfDeception,
     _poolPiratePeddlers,
     _poolPlagueMyr,
+    _poolPlanForAllOutcomes,
     _poolPlayfulShove,
     _poolPlummet,
     _poolPoeticIngenuity,
@@ -920,6 +925,7 @@ const shard: CardShard = {
     _poolTradewindRider,
     _poolTrashForTreasure,
     _poolTreespringLorian,
+    _poolTripUp,
     _poolTroyanGutsyExplorer,
     _poolTumbleweedRising,
     _poolTundraTank,

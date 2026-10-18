@@ -409,6 +409,7 @@ import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
 import _poolTyrranaxRex from "../pool/tyrranax-rex.js";
 import _poolUndergrowthLeopard from "../pool/undergrowth-leopard.js";
 import _poolUnholyGrotto from "../pool/unholy-grotto.js";
+import _poolUnluckyDrop from "../pool/unlucky-drop.js";
 import _poolUnnaturalRestoration from "../pool/unnatural-restoration.js";
 import _poolUrabraskTheHidden from "../pool/urabrask-the-hidden.js";
 import _poolUrzasSaga from "../pool/urzas-saga.js";
@@ -866,6 +867,7 @@ const shard: CardShard = {
     _poolTyrranaxRex,
     _poolUndergrowthLeopard,
     _poolUnholyGrotto,
+    _poolUnluckyDrop,
     _poolUnnaturalRestoration,
     _poolUrabraskTheHidden,
     _poolUrzasSaga,

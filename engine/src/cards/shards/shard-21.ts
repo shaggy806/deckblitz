@@ -333,6 +333,7 @@ import _poolStudentOfOjutai from "../pool/student-of-ojutai.js";
 import _poolStumpStomp from "../pool/stump-stomp.js";
 import _poolStymiedHopes from "../pool/stymied-hopes.js";
 import _poolSubmergedBoneyard from "../pool/submerged-boneyard.js";
+import _poolSuddenSetback from "../pool/sudden-setback.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
@@ -748,6 +749,7 @@ const shard: CardShard = {
     _poolStumpStomp,
     _poolStymiedHopes,
     _poolSubmergedBoneyard,
+    _poolSuddenSetback,
     _poolSukiCourageousRescuer,
     _poolSunastianFalconer,
     _poolSunsetStrikemaster,

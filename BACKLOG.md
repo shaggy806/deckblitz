@@ -86,13 +86,18 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to The Lord of the Rings is whole
+  ranked ones first. Every set from Reality Fracture back to March of the Machine: The Aftermath is whole
   (batch 89 built plot and crimes for Outlaws of Thunder Junction; batch 90 rad counters and squad
   for Fallout; batch 91 collect evidence and Cases; batch 92 explore, Map tokens, discover and
   craft; batch 93 time travel, vanishing and gaining suspend; batch 94 Roles, bargain, celebration
   and "has an Adventure"; batch 95 Commander Masters' last six; batch 96 voting, keyword loss,
-  removal from combat and devour for The Lord of the Rings and its Commander set); **next, March
-  of the Machine: The Aftermath** (MAT — `npm run cards:sets -w engine -- --sets 50`). The Lord
+  removal from combat and devour for The Lord of the Rings and its Commander set; batch 97
+  distributed counters and the owner's top-or-bottom choice for The Aftermath); **next, March of
+  the Machine Commander and March of the Machine** (MOC, MOM — `npm run cards:sets -w engine --
+  --sets 50`). The Aftermath's leaders: a variable total of counters to distribute
+  (`effect:distribute-counters-variable-total`), an owner ordering several cards going to the same
+  end of their library (`decision:owner-orders-library-placements` — Tolarian Contempt,
+  Aetherspouts), and planeswalkers made creatures (`static:planeswalker-becomes-creature`). The Lord
   of the Rings' leaders: a voter's own choice after a vote (`effect:voter-chooses-permanent` —
   Elrond, Expropriate's `filter:owned-by-voter`), "if it would die this turn, exile it instead" on
   a target (Smite the Deathless), and secret choices that aren't votes (`mechanic:secret-choice`). Wilds of Eldraine's leaders: one Role per matching permanent

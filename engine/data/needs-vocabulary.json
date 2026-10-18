@@ -7455,6 +7455,34 @@
   "filter:owned-by-voter": {
    "family": "mechanic:voting",
    "example": "Expropriate: \"choose a permanent owned by the voter\"."
+  },
+  "cost:cost-reduction-per-card-exiled-with-source": {
+   "family": "cost:cost-reduction-cards-in-exile",
+   "example": "The Kenriths' Royal Funeral: legendary spells cost {1} less for each card exiled with it — only those still in exile."
+  },
+  "condition:filter-has-nonmana-activated-ability": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Tazri, Stalwart Survivor: a creature card with an activated ability that isn't a mana ability."
+  },
+  "effect:granted-mana-ability-own-colors-gated": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Tazri, Stalwart Survivor: a granted \"add one mana of any of this creature's colors\" usable only if it has another activated ability."
+  },
+  "trigger:attacks-or-enters-attacking": {
+   "family": "effect:enter-attacking",
+   "example": "Arni Metalbrow: \"whenever a creature you control attacks or enters attacking\"."
+  },
+  "effect:choose-planeswalker-type": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "example": "Deification: \"as this enchantment enters, choose a planeswalker type\"."
+  },
+  "effect:if-they-do-library-move": {
+   "family": "effect:choices-by-other-players",
+   "example": "Clash of Elements: the owner may put it on top; \"if they do\" — only if it actually went there."
+  },
+  "effect:distribute-counters-variable-total": {
+   "family": "effect:distribute-counters",
+   "example": "Undercity Upheaval, Grove's Bounty: distribute X +1/+1 counters, X a count or the spell's X, rather than a fixed number."
   }
  }
 }

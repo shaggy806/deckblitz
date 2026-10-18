@@ -4936,3 +4936,24 @@ secret vote no one sees a vote until all are revealed together
 - **Check:** You're asked twice, the second time with a way to decline; each vote shows in the
   log as it's cast. A tie draws three cards; "time" with more votes queues the extra turn. Check
   at ~768px tall, in a 2- and a 4-player room.
+
+### Misleading Motes (the owner's choice of top or bottom)
+
+*New player decision* — "target creature's owner puts it on their choice of the top or bottom
+of their library": the owner, not the caster, is asked
+
+- **Setup:** Your precombat main. Your battlefield: four Islands; in hand Misleading Motes. Bob
+  has Grizzly Bears.
+- **Do:** Cast Misleading Motes on Bob's Grizzly Bears.
+- **Check:** Bob is asked "Put it on top of your library" / "Put it on the bottom of your library";
+  you aren't. The Bears go where Bob picked. Check at ~768px tall, in a 2- and a 4-player room.
+
+### Armament Dragon (distributed counters)
+
+*Player decision* — the division bar for counters: "Divide 3 +1/+1 counters"
+
+- **Setup:** Your precombat main. Your battlefield: Grizzly Bears, Llanowar Elves, two each of
+  Plains, Swamp and Forest; in hand Armament Dragon.
+- **Do:** Cast Armament Dragon; target the Bears and the Elves; split the three counters 2/1.
+- **Check:** The bar says "Divide 3 +1/+1 counters", not damage; each target needs at least one.
+  The Bears get two counters, the Elves one. Check at ~768px tall.

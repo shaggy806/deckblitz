@@ -195,6 +195,7 @@ import _poolHerdHeirloom from "../pool/herd-heirloom.js";
 import _poolHeritageReclamation from "../pool/heritage-reclamation.js";
 import _poolHinderingLight from "../pool/hindering-light.js";
 import _poolHireACrew from "../pool/hire-a-crew.js";
+import _poolHornedLochWhale from "../pool/horned-loch-whale.js";
 import _poolHorseshoeCrab from "../pool/horseshoe-crab.js";
 import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
@@ -653,6 +654,7 @@ const shard: CardShard = {
     _poolHeritageReclamation,
     _poolHinderingLight,
     _poolHireACrew,
+    _poolHornedLochWhale,
     _poolHorseshoeCrab,
     _poolHowlingGolem,
     _poolHumblingElder,

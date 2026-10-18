@@ -310,6 +310,7 @@ import _poolRootwaterCommando from "../pool/rootwater-commando.js";
 import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
 import _poolRunAmok from "../pool/run-amok.js";
+import _poolRunBehind from "../pool/run-behind.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
@@ -750,6 +751,7 @@ const shard: CardShard = {
     _poolRoughRhinoCavalry,
     _poolRumorGatherer,
     _poolRunAmok,
+    _poolRunBehind,
     _poolRuthlessTechnomancer,
     _poolSagesRowSavant,
     _poolSalvationEngine,

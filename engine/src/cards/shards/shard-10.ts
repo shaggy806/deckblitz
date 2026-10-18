@@ -308,6 +308,7 @@ import _poolRilingDawnbreaker from "../pool/riling-dawnbreaker.js";
 import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
+import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
@@ -781,6 +782,7 @@ const shard: CardShard = {
     _poolRiotSpikes,
     _poolRipjawRaptor,
     _poolRiverchurnMonument,
+    _poolRiverwalkTechnique,
     _poolRollRollRollRoll,
     _poolRootManipulation,
     _poolRotatingFireplace,

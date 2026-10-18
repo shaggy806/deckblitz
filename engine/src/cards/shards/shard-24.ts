@@ -389,6 +389,7 @@ import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
+import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
@@ -830,6 +831,7 @@ const shard: CardShard = {
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,
     _poolTwoHandedAxe,
+    _poolUnchartedVoyage,
     _poolUnderdarkRift,
     _poolUnnaturalSpeed,
     _poolUnrootedAncestor,
