@@ -396,6 +396,7 @@ import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
 import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
+import _poolTransplantTheorist from "../pool/transplant-theorist.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
@@ -855,6 +856,7 @@ const shard: CardShard = {
     _poolTouchOfInvisibility,
     _poolToweringTitan,
     _poolToxicDeluge,
+    _poolTransplantTheorist,
     _poolTrelasarraMoonDancer,
     _poolTritonWaverider,
     _poolTriumphantChomp,

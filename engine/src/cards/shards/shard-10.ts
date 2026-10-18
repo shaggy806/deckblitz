@@ -192,6 +192,7 @@ import _poolHopeEstheim from "../pool/hope-estheim.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
+import _poolIchorplateGolem from "../pool/ichorplate-golem.js";
 import _poolIdolOfOblivion from "../pool/idol-of-oblivion.js";
 import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
@@ -667,6 +668,7 @@ const shard: CardShard = {
     _poolHullbreakerHorror,
     _poolHuntedWitness,
     _poolIanTheReckless,
+    _poolIchorplateGolem,
     _poolIdolOfOblivion,
     _poolImperialCosmographer,
     _poolIndathaCrystal,

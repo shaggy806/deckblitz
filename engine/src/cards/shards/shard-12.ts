@@ -287,6 +287,7 @@ import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
 import _poolPrismariPianist from "../pool/prismari-pianist.js";
 import _poolProphetOfThePeak from "../pool/prophet-of-the-peak.js";
 import _poolProsperity from "../pool/prosperity.js";
+import _poolProstheticInjector from "../pool/prosthetic-injector.js";
 import _poolProtegesAwakening from "../pool/proteges-awakening.js";
 import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
@@ -744,6 +745,7 @@ const shard: CardShard = {
     _poolPrismariPianist,
     _poolProphetOfThePeak,
     _poolProsperity,
+    _poolProstheticInjector,
     _poolProtegesAwakening,
     _poolPugnaciousHammerskull,
     _poolPullUnder,

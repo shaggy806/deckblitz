@@ -48,6 +48,7 @@ import _poolBloodlineBidding from "../pool/bloodline-bidding.js";
 import _poolBloomingStinger from "../pool/blooming-stinger.js";
 import _poolBoilerbilgesRipper from "../pool/boilerbilges-ripper.js";
 import _poolBombard from "../pool/bombard.js";
+import _poolBonepickerSkirge from "../pool/bonepicker-skirge.js";
 import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
@@ -517,6 +518,7 @@ const shard: CardShard = {
     _poolBloomingStinger,
     _poolBoilerbilgesRipper,
     _poolBombard,
+    _poolBonepickerSkirge,
     _poolBoomerangBasics,
     _poolBoonBringerValkyrie,
     _poolBottomlessPit,

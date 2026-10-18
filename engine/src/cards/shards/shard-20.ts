@@ -327,6 +327,7 @@ import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
 import _poolRavenousSailback from "../pool/ravenous-sailback.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
+import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
@@ -830,6 +831,7 @@ const shard: CardShard = {
     _poolRavenousSailback,
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
+    _poolRebelSalvo,
     _poolRecklessAssault,
     _poolRedcapHeelslasher,
     _poolRefresh,

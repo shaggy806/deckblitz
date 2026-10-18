@@ -132,6 +132,7 @@ import _poolErtaiTheCorrupted from "../pool/ertai-the-corrupted.js";
 import _poolEtherealGuidance from "../pool/ethereal-guidance.js";
 import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
+import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
@@ -601,6 +602,7 @@ const shard: CardShard = {
     _poolEtherealGuidance,
     _poolEumidianHatchery,
     _poolEvendoWakingHaven,
+    _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolEzioBladeOfVengeance,
     _poolFaramirFieldCommander,

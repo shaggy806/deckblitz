@@ -277,6 +277,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Phyrexian Myr Token (Myr Sire)",
   "Phyrexian Saproling Token",
   "Phyrexian Token",
+  "Phyrexian Wurm Token",
   "Phyrexian Wurm Token (Deathtouch)",
   "Phyrexian Wurm Token (Lifelink)",
   "Phyrexian Wurm Token (Wurmcoil Larva, Deathtouch)",

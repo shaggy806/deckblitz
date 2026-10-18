@@ -140,6 +140,7 @@ import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
+import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
@@ -614,6 +615,7 @@ const shard: CardShard = {
     _poolEverythingPizza,
     _poolExecutionersHood,
     _poolExplorersCache,
+    _poolExuberantFuseling,
     _poolFallowEarth,
     _poolFangGuardian,
     _poolFangOfShigeki,

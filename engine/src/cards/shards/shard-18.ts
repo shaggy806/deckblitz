@@ -243,6 +243,7 @@ import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
+import _poolMoltenRebuke from "../pool/molten-rebuke.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
@@ -728,6 +729,7 @@ const shard: CardShard = {
     _poolModelOfUnity,
     _poolMolecularModifier,
     _poolMoltenNote,
+    _poolMoltenRebuke,
     _poolMostValuableSlayer,
     _poolMtendaHerder,
     _poolNacatlOutlander,

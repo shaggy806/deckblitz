@@ -18,6 +18,7 @@ import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
+import _poolApostleOfInvasion from "../pool/apostle-of-invasion.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
 import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
@@ -394,6 +395,7 @@ import _poolTangletrap from "../pool/tangletrap.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
+import _poolTestamentBearer from "../pool/testament-bearer.js";
 import _poolTezzeretArtificeMaster from "../pool/tezzeret-artifice-master.js";
 import _poolThaumatog from "../pool/thaumatog.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
@@ -488,6 +490,7 @@ const shard: CardShard = {
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
+    _poolApostleOfInvasion,
     _poolApprenticeWizard,
     _poolArachnoidAdaptation,
     _poolArcadesTheStrategist,
@@ -864,6 +867,7 @@ const shard: CardShard = {
     _poolTaxiDriver,
     _poolTemurBattleRage,
     _poolTergridGodOfFright,
+    _poolTestamentBearer,
     _poolTezzeretArtificeMaster,
     _poolThaumatog,
     _poolTheDalekEmperor,

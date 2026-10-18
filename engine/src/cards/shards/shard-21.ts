@@ -11,6 +11,7 @@ import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
 import _poolArchwingDragon from "../pool/archwing-dragon.js";
+import _poolArgentumMasticore from "../pool/argentum-masticore.js";
 import _poolArlinnsWolf from "../pool/arlinns-wolf.js";
 import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
@@ -417,6 +418,7 @@ import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
+import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
@@ -442,6 +444,7 @@ const shard: CardShard = {
     _poolArachnogenesis,
     _poolArahboTheFirstFang,
     _poolArchwingDragon,
+    _poolArgentumMasticore,
     _poolArlinnsWolf,
     _poolArmorcraftJudge,
     _poolArmoredWhirlTurtle,
@@ -848,6 +851,7 @@ const shard: CardShard = {
     _poolWhiskerquillScribe,
     _poolWillOfTheSultai,
     _poolWoodworkProdigy,
+    _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolZhaoRuthlessAdmiral,
   ],

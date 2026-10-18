@@ -305,6 +305,7 @@ import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
+import _poolResistanceReunited from "../pool/resistance-reunited.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
@@ -754,6 +755,7 @@ const shard: CardShard = {
     _poolRecklessPyrosurfer,
     _poolRefute,
     _poolReitoLantern,
+    _poolResistanceReunited,
     _poolRestorationAngel,
     _poolReverberate,
     _poolRipplesOfUndeath,

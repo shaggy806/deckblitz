@@ -147,6 +147,7 @@ import _poolGiantGrowth from "../pool/giant-growth.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
+import _poolGlistenerSeer from "../pool/glistener-seer.js";
 import _poolGlitteringMassif from "../pool/glittering-massif.js";
 import _poolGloomPangolin from "../pool/gloom-pangolin.js";
 import _poolGoblinRingleader from "../pool/goblin-ringleader.js";
@@ -226,6 +227,7 @@ import _poolMaelstromWanderer from "../pool/maelstrom-wanderer.js";
 import _poolMagdaBrazenOutlaw from "../pool/magda-brazen-outlaw.js";
 import _poolMagmaJet from "../pool/magma-jet.js";
 import _poolMagmaOpus from "../pool/magma-opus.js";
+import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManamorphose from "../pool/manamorphose.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
 import _poolMasterApothecary from "../pool/master-apothecary.js";
@@ -401,6 +403,7 @@ import _poolVeiledShade from "../pool/veiled-shade.js";
 import _poolVeinwitchCoven from "../pool/veinwitch-coven.js";
 import _poolVengefulTracker from "../pool/vengeful-tracker.js";
 import _poolVenomEvilUnleashed from "../pool/venom-evil-unleashed.js";
+import _poolVenomousBrutalizer from "../pool/venomous-brutalizer.js";
 import _poolVeteranIceClimber from "../pool/veteran-ice-climber.js";
 import _poolVigilanteJustice from "../pool/vigilante-justice.js";
 import _poolVizierOfTheScorpion from "../pool/vizier-of-the-scorpion.js";
@@ -600,6 +603,7 @@ const shard: CardShard = {
     _poolGiftOfOrzhova,
     _poolGiftOfStrength,
     _poolGiottKingOfTheDwarves,
+    _poolGlistenerSeer,
     _poolGlitteringMassif,
     _poolGloomPangolin,
     _poolGoblinRingleader,
@@ -679,6 +683,7 @@ const shard: CardShard = {
     _poolMagdaBrazenOutlaw,
     _poolMagmaJet,
     _poolMagmaOpus,
+    _poolMagmaticSprinter,
     _poolManamorphose,
     _poolMarketwatchPhantom,
     _poolMasterApothecary,
@@ -854,6 +859,7 @@ const shard: CardShard = {
     _poolVeinwitchCoven,
     _poolVengefulTracker,
     _poolVenomEvilUnleashed,
+    _poolVenomousBrutalizer,
     _poolVeteranIceClimber,
     _poolVigilanteJustice,
     _poolVizierOfTheScorpion,

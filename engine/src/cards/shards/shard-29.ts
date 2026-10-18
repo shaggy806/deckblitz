@@ -427,6 +427,7 @@ import _poolViciousConquistador from "../pool/vicious-conquistador.js";
 import _poolVictimize from "../pool/victimize.js";
 import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
 import _poolVillainousHideout from "../pool/villainous-hideout.js";
+import _poolVindictiveFlamestoker from "../pool/vindictive-flamestoker.js";
 import _poolVirtueOfCourage from "../pool/virtue-of-courage.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
@@ -893,6 +894,7 @@ const shard: CardShard = {
     _poolVictimize,
     _poolVigorbloomAnnex,
     _poolVillainousHideout,
+    _poolVindictiveFlamestoker,
     _poolVirtueOfCourage,
     _poolVoicelessSpirit,
     _poolVoloGuideToMonsters,

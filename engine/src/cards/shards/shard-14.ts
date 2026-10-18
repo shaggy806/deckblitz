@@ -276,6 +276,7 @@ import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMonkRealist from "../pool/monk-realist.js";
 import _poolMonstrousRage from "../pool/monstrous-rage.js";
+import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
@@ -729,6 +730,7 @@ const shard: CardShard = {
     _poolMoltenDuplication,
     _poolMonkRealist,
     _poolMonstrousRage,
+    _poolMonumentalCorruption,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
     _poolMuseumNightwatch,

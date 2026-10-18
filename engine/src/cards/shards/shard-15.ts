@@ -284,6 +284,7 @@ import _poolNoxiousGroodion from "../pool/noxious-groodion.js";
 import _poolNyleaGodOfTheHunt from "../pool/nylea-god-of-the-hunt.js";
 import _poolNyxFleeceRam from "../pool/nyx-fleece-ram.js";
 import _poolObscuraInitiate from "../pool/obscura-initiate.js";
+import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
@@ -738,6 +739,7 @@ const shard: CardShard = {
     _poolNyleaGodOfTheHunt,
     _poolNyxFleeceRam,
     _poolObscuraInitiate,
+    _poolOilGorgerTroll,
     _poolOlogHaiCrusher,
     _poolOmenOfTheSea,
     _poolOrdinaryBear,

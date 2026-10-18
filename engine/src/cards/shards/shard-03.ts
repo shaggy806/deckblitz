@@ -23,6 +23,7 @@ import _poolAscendingAven from "../pool/ascending-aven.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
+import _poolAxiomEngraver from "../pool/axiom-engraver.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
 import _poolBeastWithin from "../pool/beast-within.js";
@@ -451,6 +452,7 @@ const shard: CardShard = {
     _poolAtarkaWorldRender,
     _poolAvacynAngelOfHope,
     _poolAvatarKyoshiEarthbender,
+    _poolAxiomEngraver,
     _poolBakeIntoAPie,
     _poolBaronStruckerHydraOverlord,
     _poolBeastWithin,

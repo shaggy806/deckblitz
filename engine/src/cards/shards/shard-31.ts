@@ -239,6 +239,7 @@ import _poolKrarkClanIronworks from "../pool/krark-clan-ironworks.js";
 import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
+import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
@@ -456,6 +457,7 @@ import _tokensInsectTokenOverlordOfTheMistmoors from "../tokens/insect-token-ove
 import _tokensMoonfolkToken from "../tokens/moonfolk-token.js";
 import _tokensOctopusToken from "../tokens/octopus-token.js";
 import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
+import _tokensPhyrexianWurmToken from "../tokens/phyrexian-wurm-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
@@ -699,6 +701,7 @@ const shard: CardShard = {
     _poolKrosanGrip,
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
+    _poolLeoninLightbringer,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,
     _poolLivingLightningChargedUp,
@@ -918,6 +921,7 @@ const shard: CardShard = {
     _tokensMoonfolkToken,
     _tokensOctopusToken,
     _tokensPhyrexianGermToken,
+    _tokensPhyrexianWurmToken,
     _tokensRedWhiteSoldierHasteToken,
     _tokensSliverToken,
     _tokensVirtuousRoleToken,
