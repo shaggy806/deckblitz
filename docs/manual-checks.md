@@ -4957,3 +4957,30 @@ of their library": the owner, not the caster, is asked
 - **Do:** Cast Armament Dragon; target the Bears and the Elves; split the three counters 2/1.
 - **Check:** The bar says "Divide 3 +1/+1 counters", not damage; each target needs at least one.
   The Bears get two counters, the Elves one. Check at ~768px tall.
+
+### Invasion of Lorwyn (battles — a Siege's protector, attacking it, defeating it)
+
+*New player decision* — a Siege's controller chooses which opponent protects it as it enters;
+attacking a battle; "when the last defense counter is removed, exile it, then you may cast it
+transformed"
+
+- **Setup:** Your precombat main, in a 4-player room. Your battlefield: three Swamps, three
+  Forests and Craw Wurm; in hand Invasion of Lorwyn. Each opponent has Grizzly Bears.
+- **Do:** Cast Invasion of Lorwyn; choose a protector; destroy a Bears with its enters ability.
+  Attack the battle with Craw Wurm; take the free cast of Winnowing Forces.
+- **Check:** The protector prompt says "choose its protector" and lists your three opponents by
+  name. The battle shows "🛡 <name>" and 5 defense counters; it appears among Craw Wurm's attack
+  targets and only its protector may block. The Wurm's 6 removes all five; the Siege's trigger
+  exiles it and offers the cast; Winnowing Forces enters as a 6/6 (your lands). Check at ~768px
+  tall, and in a 2-player room (no protector prompt: the one opponent protects it).
+
+### Converter Beast and Incubator tokens (incubate)
+
+*New card shape* — a double-faced token: an Incubator with +1/+1 counters and "{2}: Transform
+this token", which turns into a 0/0 Phyrexian artifact creature
+
+- **Setup:** Your precombat main. Your battlefield: six Forests; in hand Converter Beast.
+- **Do:** Cast Converter Beast. Activate the Incubator token's {2} ability.
+- **Check:** The Incubator shows its art and five +1/+1 counters, and isn't a creature until
+  transformed; after the {2} it's a 5/5 Phyrexian artifact creature with the back face's art.
+  Check at ~768px tall.

@@ -203,6 +203,7 @@ import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
+import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
@@ -217,6 +218,7 @@ import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
+import _poolLeylineSurge from "../pool/leyline-surge.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
@@ -662,6 +664,7 @@ const shard: CardShard = {
     _poolInspiredFire,
     _poolInterdisciplinaryMascot,
     _poolInundatedArchive,
+    _poolInvasionOfXerex,
     _poolJirinaDauntlessGeneral,
     _poolJuggernaut,
     _poolJwariDisruption,
@@ -676,6 +679,7 @@ const shard: CardShard = {
     _poolLairOfTheHydra,
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
+    _poolLeylineSurge,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
     _poolLoxodonAnchorite,

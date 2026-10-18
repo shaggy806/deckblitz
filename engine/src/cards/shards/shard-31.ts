@@ -456,6 +456,7 @@ import _tokensPhyrexianGermToken from "../tokens/phyrexian-germ-token.js";
 import _tokensRedWhiteSoldierHasteToken from "../tokens/red-white-soldier-haste-token.js";
 import _tokensSliverToken from "../tokens/sliver-token.js";
 import _tokensVirtuousRoleToken from "../tokens/virtuous-role-token.js";
+import _tokensWarriorTokenValorsReachTagTeam from "../tokens/warrior-token-valors-reach-tag-team.js";
 
 const shard: CardShard = {
   pool: [
@@ -914,6 +915,7 @@ const shard: CardShard = {
     _tokensRedWhiteSoldierHasteToken,
     _tokensSliverToken,
     _tokensVirtuousRoleToken,
+    _tokensWarriorTokenValorsReachTagTeam,
   ],
 };
 

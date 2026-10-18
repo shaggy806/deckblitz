@@ -190,6 +190,7 @@ import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
 import _poolInspiringCleric from "../pool/inspiring-cleric.js";
 import _poolInspiringUnicorn from "../pool/inspiring-unicorn.js";
 import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
+import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
@@ -640,6 +641,7 @@ const shard: CardShard = {
     _poolInspiringCleric,
     _poolInspiringUnicorn,
     _poolInterceptorMechan,
+    _poolInvasionOfKarsus,
     _poolIronGiant,
     _poolJaceUnravelerOfSecrets,
     _poolJeditOjanen,

@@ -365,6 +365,7 @@ import _poolTenaciousTomeseeker from "../pool/tenacious-tomeseeker.js";
 import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
+import _poolTheBrokenSky from "../pool/the-broken-sky.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
@@ -811,6 +812,7 @@ const shard: CardShard = {
     _poolTenuredTethermage,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
+    _poolTheBrokenSky,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
     _poolTheNecrobloom,

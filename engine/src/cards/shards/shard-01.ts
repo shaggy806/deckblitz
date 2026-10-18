@@ -30,12 +30,14 @@ import _poolBantCharm from "../pool/bant-charm.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
 import _poolBeastWhisperer from "../pool/beast-whisperer.js";
+import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
+import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
@@ -469,12 +471,14 @@ const shard: CardShard = {
     _poolBarrageOfExpendables,
     _poolBattleHymn,
     _poolBeastWhisperer,
+    _poolBelenonWarAnthem,
     _poolBellowsLizard,
     _poolBespokeBo,
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBlightTitan,
     _poolBloodtracker,
+    _poolBloomwielderDryads,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,

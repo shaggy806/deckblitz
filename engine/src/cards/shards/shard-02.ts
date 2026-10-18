@@ -189,6 +189,7 @@ import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInsideSource from "../pool/inside-source.js";
+import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
 import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
@@ -327,6 +328,7 @@ import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
+import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
@@ -634,6 +636,7 @@ const shard: CardShard = {
     _poolInfectiousHost,
     _poolIngrisStingerquill,
     _poolInsideSource,
+    _poolInvasionOfKaladesh,
     _poolInventorsAxe,
     _poolInvisibleWoman,
     _poolIonasJudgment,
@@ -772,6 +775,7 @@ const shard: CardShard = {
     _poolScouringSands,
     _poolScrybSprites,
     _poolSeedshipBroodtender,
+    _poolSerraFaithkeeper,
     _poolSerraSphinx,
     _poolShakedownHeavy,
     _poolShalaiVoiceOfPlenty,

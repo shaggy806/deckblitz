@@ -186,6 +186,7 @@ import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
 import _poolGoneMissing from "../pool/gone-missing.js";
 import _poolGracefulCat from "../pool/graceful-cat.js";
 import _poolGrandAbolisher from "../pool/grand-abolisher.js";
+import _poolGrandmotherRaviSengir from "../pool/grandmother-ravi-sengir.js";
 import _poolGraniteWitness from "../pool/granite-witness.js";
 import _poolGrappleWithDeath from "../pool/grapple-with-death.js";
 import _poolGravecrawler from "../pool/gravecrawler.js";
@@ -219,6 +220,7 @@ import _poolImpassionedOrator from "../pool/impassioned-orator.js";
 import _poolImposingVisage from "../pool/imposing-visage.js";
 import _poolInquisitiveGlimmer from "../pool/inquisitive-glimmer.js";
 import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
+import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
 import _poolInvokeTheFiremind from "../pool/invoke-the-firemind.js";
 import _poolIronShieldElf from "../pool/iron-shield-elf.js";
 import _poolIronshellBeetle from "../pool/ironshell-beetle.js";
@@ -325,6 +327,7 @@ import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
 import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
+import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
@@ -633,6 +636,7 @@ const shard: CardShard = {
     _poolGoneMissing,
     _poolGracefulCat,
     _poolGrandAbolisher,
+    _poolGrandmotherRaviSengir,
     _poolGraniteWitness,
     _poolGrappleWithDeath,
     _poolGravecrawler,
@@ -666,6 +670,7 @@ const shard: CardShard = {
     _poolImposingVisage,
     _poolInquisitiveGlimmer,
     _poolInsatiableSkittermaw,
+    _poolInvasionOfIxalan,
     _poolInvokeTheFiremind,
     _poolIronShieldElf,
     _poolIronshellBeetle,
@@ -772,6 +777,7 @@ const shard: CardShard = {
     _poolRiteOfOblivion,
     _poolRoccoStreetChef,
     _poolRocketVolley,
+    _poolRooftopSaboteurs,
     _poolRuinousGremlin,
     _poolRunescaleStormbrood,
     _poolSandmansQuicksand,

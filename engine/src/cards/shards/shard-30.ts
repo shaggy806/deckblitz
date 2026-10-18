@@ -218,6 +218,7 @@ import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolIntimidation from "../pool/intimidation.js";
+import _poolInvasionOfVryn from "../pool/invasion-of-vryn.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
 import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
@@ -686,6 +687,7 @@ const shard: CardShard = {
     _poolInkriseInfiltrator,
     _poolInspiringCall,
     _poolIntimidation,
+    _poolInvasionOfVryn,
     _poolIroassBlessing,
     _poolIrohGrandLotus,
     _poolIronFistHeroForHire,

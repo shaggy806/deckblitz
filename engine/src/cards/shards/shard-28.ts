@@ -423,6 +423,7 @@ import _poolValeronOutlander from "../pool/valeron-outlander.js";
 import _poolVampireRevenant from "../pool/vampire-revenant.js";
 import _poolVanquish from "../pool/vanquish.js";
 import _poolVeneratedStormsinger from "../pool/venerated-stormsinger.js";
+import _poolVertexPaladin from "../pool/vertex-paladin.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
 import _poolVituGhaziInspector from "../pool/vitu-ghazi-inspector.js";
@@ -884,6 +885,7 @@ const shard: CardShard = {
     _poolVampireRevenant,
     _poolVanquish,
     _poolVeneratedStormsinger,
+    _poolVertexPaladin,
     _poolViashinoSandscout,
     _poolVisceraDragger,
     _poolVituGhaziInspector,

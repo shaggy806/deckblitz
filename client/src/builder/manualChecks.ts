@@ -2955,6 +2955,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Invasion of Lorwyn (battles — a Siege's protector, attacking it, defeating it)",
+    board({
+      you: { bf: ['Swamp*3', 'Forest*3', 'Craw Wurm'], hand: ['Invasion of Lorwyn'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Grizzly Bears'] }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Converter Beast and Incubator tokens (incubate)',
+    board({
+      you: { bf: ['Forest*6'], hand: ['Converter Beast'] },
+    }),
+  ),
+  preset(
     'Armament Dragon (distributed counters)',
     board({
       you: { bf: ['Grizzly Bears', 'Llanowar Elves', 'Plains*2', 'Swamp*2', 'Forest*2'], hand: ['Armament Dragon'] },

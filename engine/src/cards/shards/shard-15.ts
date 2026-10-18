@@ -201,6 +201,8 @@ import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
+import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
+import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
 import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
@@ -648,6 +650,8 @@ const shard: CardShard = {
     _poolImprovisedClub,
     _poolIncandescentSoulstoke,
     _poolInsightEngine,
+    _poolInvasionOfMercadia,
+    _poolInvasionOfMuraganda,
     _poolInventiveWingsmith,
     _poolIrenicussVileDuplication,
     _poolIronHillsBlacksmith,

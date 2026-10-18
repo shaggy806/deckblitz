@@ -176,6 +176,7 @@ import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
+import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
@@ -386,6 +387,7 @@ import _poolUnstoppablePlan from "../pool/unstoppable-plan.js";
 import _poolUnworthyDead from "../pool/unworthy-dead.js";
 import _poolValiantKnight from "../pool/valiant-knight.js";
 import _poolValorousSteed from "../pool/valorous-steed.js";
+import _poolValorsReachTagTeam from "../pool/valors-reach-tag-team.js";
 import _poolVaporkin from "../pool/vaporkin.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
@@ -598,6 +600,7 @@ const shard: CardShard = {
     _poolHydraTroopers,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
+    _poolInvasionOfKylem,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
     _poolJaradGolgariLichLord,
@@ -808,6 +811,7 @@ const shard: CardShard = {
     _poolUnworthyDead,
     _poolValiantKnight,
     _poolValorousSteed,
+    _poolValorsReachTagTeam,
     _poolVaporkin,
     _poolVedalkenBlademaster,
     _poolVengefulRegrowth,

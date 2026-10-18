@@ -190,6 +190,8 @@ import _poolInfectiousInquiry from "../pool/infectious-inquiry.js";
 import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
+import _poolInvasionOfDominaria from "../pool/invasion-of-dominaria.js";
+import _poolInvasionOfUlgrotha from "../pool/invasion-of-ulgrotha.js";
 import _poolIronhoofBoar from "../pool/ironhoof-boar.js";
 import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
@@ -652,6 +654,8 @@ const shard: CardShard = {
     _poolInfernalPlunge,
     _poolInsatiableSouleater,
     _poolInspiredSkypainter,
+    _poolInvasionOfDominaria,
+    _poolInvasionOfUlgrotha,
     _poolIronhoofBoar,
     _poolIrrigatedFarmland,
     _poolJackedRabbit,

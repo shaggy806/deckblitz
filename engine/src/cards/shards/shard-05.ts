@@ -115,6 +115,7 @@ import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
 import _poolDeeprootWarrior from "../pool/deeproot-warrior.js";
 import _poolDefiantElf from "../pool/defiant-elf.js";
+import _poolDelugeOfTheDead from "../pool/deluge-of-the-dead.js";
 import _poolDemonsDisciple from "../pool/demons-disciple.js";
 import _poolDemonsGrasp from "../pool/demons-grasp.js";
 import _poolDesculptingBlast from "../pool/desculpting-blast.js";
@@ -210,6 +211,8 @@ import _poolInsectoidExterminator from "../pool/insectoid-exterminator.js";
 import _poolInspiredCharge from "../pool/inspired-charge.js";
 import _poolIntrepidStablemaster from "../pool/intrepid-stablemaster.js";
 import _poolIntrepidTrufflesnout from "../pool/intrepid-trufflesnout.js";
+import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
+import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolJacesSanctum from "../pool/jaces-sanctum.js";
@@ -284,6 +287,7 @@ import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
+import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
 import _poolProtomatterPowder from "../pool/protomatter-powder.js";
 import _poolPuresteelPaladin from "../pool/puresteel-paladin.js";
@@ -575,6 +579,7 @@ const shard: CardShard = {
     _poolDealGoneBad,
     _poolDeeprootWarrior,
     _poolDefiantElf,
+    _poolDelugeOfTheDead,
     _poolDemonsDisciple,
     _poolDemonsGrasp,
     _poolDesculptingBlast,
@@ -670,6 +675,8 @@ const shard: CardShard = {
     _poolInspiredCharge,
     _poolIntrepidStablemaster,
     _poolIntrepidTrufflesnout,
+    _poolInvasionOfMoag,
+    _poolInvasionOfShandalar,
     _poolInvokeTheDivine,
     _poolIrohTeaMaster,
     _poolJacesSanctum,
@@ -744,6 +751,7 @@ const shard: CardShard = {
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
     _poolPrimoTheUnbounded,
+    _poolPrimordialPlasm,
     _poolProphetOfDistortion,
     _poolProtomatterPowder,
     _poolPuresteelPaladin,

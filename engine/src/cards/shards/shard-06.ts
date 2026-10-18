@@ -34,6 +34,7 @@ import _poolBantBattlemage from "../pool/bant-battlemage.js";
 import _poolBaralsExpertise from "../pool/barals-expertise.js";
 import _poolBeamtownBeatstick from "../pool/beamtown-beatstick.js";
 import _poolBecomeTheAvalanche from "../pool/become-the-avalanche.js";
+import _poolBelligerentRegisaur from "../pool/belligerent-regisaur.js";
 import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
@@ -201,6 +202,7 @@ import _poolInklingSummoning from "../pool/inkling-summoning.js";
 import _poolInkshapeDemonstrator from "../pool/inkshape-demonstrator.js";
 import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
 import _poolIntoTheRoil from "../pool/into-the-roil.js";
+import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolBaralsExpertise,
     _poolBeamtownBeatstick,
     _poolBecomeTheAvalanche,
+    _poolBelligerentRegisaur,
     _poolBellowingBruiser,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
@@ -667,6 +670,7 @@ const shard: CardShard = {
     _poolInkshapeDemonstrator,
     _poolInsatiableAvarice,
     _poolIntoTheRoil,
+    _poolInvasionOfBelenon,
     _poolInvasiveManeuvers,
     _poolIronApprentice,
     _poolJarvisEarthsMightiestButler,

@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbbeyMatron from "../pool/abbey-matron.js";
 import _poolAbigalePoetLaureate from "../pool/abigale-poet-laureate.js";
 import _poolAetherHub from "../pool/aether-hub.js";
+import _poolAetherwingGoldenScaleFlagship from "../pool/aetherwing-golden-scale-flagship.js";
 import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
@@ -201,6 +202,8 @@ import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
+import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
+import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
@@ -499,6 +502,7 @@ const shard: CardShard = {
     _poolAbbeyMatron,
     _poolAbigalePoetLaureate,
     _poolAetherHub,
+    _poolAetherwingGoldenScaleFlagship,
     _poolAfterlifeInsurance,
     _poolAkkiRockspeaker,
     _poolAliciaMastersSkilledSculptor,
@@ -694,6 +698,8 @@ const shard: CardShard = {
     _poolInspiringOverseer,
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
+    _poolInvasionOfInnistrad,
+    _poolInvasionOfKamigawa,
     _poolInvasionTactics,
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,

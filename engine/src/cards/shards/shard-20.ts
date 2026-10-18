@@ -227,6 +227,7 @@ import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
+import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
 import _poolLadySpiderMaybelleReilly from "../pool/lady-spider-maybelle-reilly.js";
 import _poolLagorinSoulOfAlacria from "../pool/lagorin-soul-of-alacria.js";
@@ -726,6 +727,7 @@ const shard: CardShard = {
     _poolKrangUtromWarlord,
     _poolKraulStinger,
     _poolKruinStriker,
+    _poolKyrenFlamewright,
     _poolLabyrinthOfSkophos,
     _poolLadySpiderMaybelleReilly,
     _poolLagorinSoulOfAlacria,

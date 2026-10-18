@@ -113,6 +113,7 @@ import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
 import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
+import _poolEpharaEverSheltering from "../pool/ephara-ever-sheltering.js";
 import _poolEpicFight from "../pool/epic-fight.js";
 import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
@@ -179,6 +180,7 @@ import _poolInexorableTide from "../pool/inexorable-tide.js";
 import _poolInfestedWerewolf from "../pool/infested-werewolf.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
+import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
@@ -410,6 +412,7 @@ import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTresserhornSinks from "../pool/tresserhorn-sinks.js";
 import _poolTrinketMage from "../pool/trinket-mage.js";
+import _poolTrugaCliffcharger from "../pool/truga-cliffcharger.js";
 import _poolTurbulentSprings from "../pool/turbulent-springs.js";
 import _poolTwoHeadedCerberus from "../pool/two-headed-cerberus.js";
 import _poolTyrantsMachine from "../pool/tyrants-machine.js";
@@ -580,6 +583,7 @@ const shard: CardShard = {
     _poolEmielTheBlessed,
     _poolEndTheFestivities,
     _poolEnterTheAvatarState,
+    _poolEpharaEverSheltering,
     _poolEpicFight,
     _poolEssenceOfOrthodoxy,
     _poolEtherswornAdjudicator,
@@ -646,6 +650,7 @@ const shard: CardShard = {
     _poolInfestedWerewolf,
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
+    _poolInvasionOfTolvada,
     _poolIronwillForger,
     _poolJeskaiDevotee,
     _poolJukaiNaturalist,
@@ -877,6 +882,7 @@ const shard: CardShard = {
     _poolTreeguardDuo,
     _poolTresserhornSinks,
     _poolTrinketMage,
+    _poolTrugaCliffcharger,
     _poolTurbulentSprings,
     _poolTwoHeadedCerberus,
     _poolTyrantsMachine,
