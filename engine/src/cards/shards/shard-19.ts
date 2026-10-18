@@ -474,6 +474,7 @@ import _poolWilsonRefinedGrizzly from "../pool/wilson-refined-grizzly.js";
 import _poolWindScarredCrag from "../pool/wind-scarred-crag.js";
 import _poolWingSnare from "../pool/wing-snare.js";
 import _poolWingspanStride from "../pool/wingspan-stride.js";
+import _poolWinnowingForces from "../pool/winnowing-forces.js";
 import _poolWinternightStories from "../pool/winternight-stories.js";
 import _poolWintersIntervention from "../pool/winters-intervention.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
@@ -968,6 +969,7 @@ const shard: CardShard = {
     _poolWindScarredCrag,
     _poolWingSnare,
     _poolWingspanStride,
+    _poolWinnowingForces,
     _poolWinternightStories,
     _poolWintersIntervention,
     _poolWitchsCottage,

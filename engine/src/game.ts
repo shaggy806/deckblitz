@@ -4676,10 +4676,18 @@ export class Game {
       // cost check) and the general "as this enters, choose …" (Heraldic
       // Banner, Frontier Siege).
       const source = this.state.objects[awaiting.source];
-      source.enterChoice =
-        awaiting.riot === true
-          ? { ...source.enterChoice, riot: creatureType === RIOT_COUNTER ? "counter" : "haste" }
-          : { ...source.enterChoice, chosen: creatureType };
+      if (awaiting.protector === true && awaiting.protectorFor !== undefined) {
+        // A battle on the battlefield getting a new protector (rule 310.11).
+        const battle = this.state.objects[awaiting.protectorFor];
+        if (battle?.zone === "battlefield") battle.protector = creatureType as PlayerId;
+      } else {
+        source.enterChoice =
+          awaiting.protector === true
+            ? { ...source.enterChoice, protector: creatureType as PlayerId }
+            : awaiting.riot === true
+              ? { ...source.enterChoice, riot: creatureType === RIOT_COUNTER ? "counter" : "haste" }
+              : { ...source.enterChoice, chosen: creatureType };
+      }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
@@ -7165,10 +7173,9 @@ export class Game {
       if (taps) this.emit({ type: "permanent-tapped", object: id });
       this.emit({ type: "attacker-declared", attacker: id, defender, ...(first ? { firstThisTurn: true as const } : {}) });
       // Who attacked whom, for the bots' sense of threat (`PlayerState.
-      // lastAttackedBy`): a planeswalker's controller counts as attacked.
-      const attacked = this.state.players[defender as PlayerId]
-        ? (defender as PlayerId)
-        : this.state.objects[defender as ObjectId]?.controller;
+      // lastAttackedBy`): a planeswalker's controller counts as attacked, and
+      // a battle's protector.
+      const attacked = this.state.players[defender as PlayerId] ? (defender as PlayerId) : this.defendingPlayerOf(defender);
       const attackerController = this.state.objects[id]?.controller;
       if (attacked !== undefined && attackerController !== undefined && attacked !== attackerController) {
         const record = (this.state.players[attacked].lastAttackedBy ??= {});
@@ -8187,6 +8194,7 @@ export class Game {
     | { readonly kind: "riot" }
     | { readonly kind: "exchange-text"; readonly filter: CardFilter }
     | { readonly kind: "devour"; readonly filter: CardFilter }
+    | { readonly kind: "protector"; readonly siege: boolean }
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
@@ -8207,6 +8215,10 @@ export class Game {
     // creatures" — printed, or a copy's.
     if (answered?.devoured === undefined && becoming.devour !== null) {
       return { kind: "devour", filter: becoming.devour.filter };
+    }
+    // A battle's protector (rule 310.9a), chosen as it enters.
+    if (answered?.protector === undefined && becoming.types.includes("battle")) {
+      return { kind: "protector", siege: becoming.subtypes.includes("Siege") };
     }
     // Riot (rule 702.136a): "you may have this permanent enter with an
     // additional +1/+1 counter on it" — a printed (or copied) riot. One
@@ -8277,6 +8289,27 @@ export class Game {
           return true;
         }
         object.enterChoice = { ...object.enterChoice, exchangeText: null };
+        continue;
+      }
+      if (next.kind === "protector") {
+        // A Siege's protector is one of its controller's opponents (rule
+        // 310.12a); any other battle's, its controller (310.9a). With none
+        // to choose it has none, and the state-based check puts it into its
+        // owner's graveyard (310.11).
+        const options = this.protectorOptions(chooser, next.siege);
+        if (options.length > 1) {
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: chooser,
+            source: id,
+            options,
+            catalog: false,
+            protector: true,
+          };
+          return true;
+        }
+        if (options.length === 0) return false;
+        object.enterChoice = { ...object.enterChoice, protector: options[0] as PlayerId };
         continue;
       }
       if (next.kind === "devour") {
@@ -11211,7 +11244,14 @@ export class Game {
         if (object === undefined || object.zone === "stack" || object.zone === "battlefield") continue;
         const ownDef = this.registry.get(object.cardName);
         const before = offers.length + lands.length;
-        const faces = castableFaces(ownDef);
+        // "Cast it transformed" (rule 712.11a): only a transforming
+        // double-faced card, and only its back face.
+        const faces: readonly (number | undefined)[] =
+          options.transformed === true
+            ? ownDef.transform && ownDef.faces !== null && ownDef.faces.length > 1
+              ? [1]
+              : []
+            : castableFaces(ownDef);
         for (const face of faces) {
           const def = this.faceDef(cardId, face ?? 0);
           // A land is played, never cast (rule 305.9) — and only by an
@@ -21324,6 +21364,11 @@ export class Game {
           .filter((e) => !e.departed)
           .map((e) => e.object)
           .filter((id) => this.state.objects[id]?.zone === "exile"),
+      sourceExiledThisWay: () =>
+        thisWayEntries(this.state, "exiled", since).some((e) => e.object === source) &&
+        this.state.objects[source]?.zone === "exile"
+          ? [source]
+          : [],
       cardsExiledWithSource: () => {
         // The stint the resolving spell or ability refers to (rule 607.2a):
         // the one it came from, though the source may have left since.
@@ -22717,6 +22762,29 @@ export class Game {
       }
     }
     return n;
+  }
+
+  /** Whether `id` is a battle with a player who can be its protector (rule
+   * 310.11) — or isn't a battle at all. */
+  private protectorValid(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object?.zone !== "battlefield") return true;
+    // Cheap first: nothing printed as a battle and never given a protector.
+    if (object.protector === undefined && !this.registry.get(printedCardName(object)).types.includes("battle")) {
+      return true;
+    }
+    if (!computeCharacteristics(this.state, this.registry, id).types.includes("battle")) return true;
+    if (object.protector === undefined) return false;
+    const siege = effectiveSubtypes(this.state, this.registry, object).includes("Siege");
+    return this.protectorOptions(object.controller, siege).includes(object.protector);
+  }
+
+  /** Who may protect a battle controlled by `controller` (rule 310.9a): a
+   * Siege, each of their opponents still in the game, in turn order
+   * (310.12a); any other battle, its controller. */
+  private protectorOptions(controller: PlayerId, siege: boolean): PlayerId[] {
+    if (!siege) return this.state.players[controller]?.hasLost === false ? [controller] : [];
+    return this.state.turnOrder.filter((p) => p !== controller && this.state.players[p]?.hasLost === false);
   }
 
   /** Whether `player` took what an `"each-player-may"` begun at event
@@ -30318,6 +30386,26 @@ export class Game {
     // creature too (Gideon Jura's 0) gets both: the loyalty goes and the
     // damage is marked as well (120.3c and 120.3d-e each apply).
     const recipientTypes = computeCharacteristics(this.state, this.registry, target.object).types;
+    // Damage to a battle removes that many defense counters (rule 310.6) —
+    // the last one going fires a Siege's "when the last defense counter is
+    // removed" (310.12b, a `counters-removed` trigger).
+    if (recipientTypes.includes("battle")) {
+      const have = object.counters.defense ?? 0;
+      const removed = Math.min(amount, have);
+      if (!recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
+        this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
+      }
+      if (removed > 0) {
+        const after = have - removed;
+        if (after > 0) object.counters.defense = after;
+        else delete object.counters.defense;
+        this.emit({ type: "counter-removed", object: target.object, counter: "defense", amount: removed, after });
+      }
+      if (!recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
+        this.applyLifelink(source, amount, sourceLastKnown);
+        return amount;
+      }
+    }
     if (recipientTypes.includes("planeswalker") && !recipientTypes.includes("creature")) {
       object.counters.loyalty = (object.counters.loyalty ?? 0) - amount;
       this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
@@ -30817,6 +30905,34 @@ export class Game {
       // (rule 603.10a), and a creature that only dies *because* another one
       // did (its lord) waits for the next check, as it should. A commander
       // among them goes too, and is offered the command zone by the next.
+      // A battle with no protector, or one who can't be (rule 310.11), gets
+      // a new one: the only player who can be, or its controller's choice.
+      // One being attacked keeps its own until combat says otherwise.
+      for (const id of this.state.zones.shared.battlefield) {
+        if (this.protectorValid(id)) continue;
+        const battle = this.state.objects[id];
+        const attacked = this.state.zones.shared.battlefield.some((a) => this.state.objects[a]?.attacking === id);
+        if (attacked) continue;
+        const options = this.protectorOptions(
+          battle.controller,
+          effectiveSubtypes(this.state, this.registry, battle).includes("Siege"),
+        );
+        if (options.length === 1) {
+          battle.protector = options[0];
+          changed = true;
+        } else if (options.length > 1) {
+          this.state.awaiting = {
+            kind: "choose-creature-type",
+            player: battle.controller,
+            source: id,
+            options,
+            catalog: false,
+            protector: true,
+            protectorFor: id,
+          };
+          return;
+        }
+      }
       const { moves: sweep, legend } = this.stateBasedGraveyardMoves();
       // The legend rule is a choice (704.5j): asked before anything moves, so
       // that when every choice is made the check still performs all it found
@@ -31266,6 +31382,33 @@ export class Game {
       }
       if ((this.state.objects[id].counters.loyalty ?? 0) > 0) continue;
       add(id, { type: "permanent-destroyed", object: id, reason: "0 loyalty" });
+    }
+
+    // Battles (rule 704.5v-w, 310.7-310.8, 310.11): one with 0 defense is put
+    // into its owner's graveyard — a Siege only once it isn't the source of a
+    // triggered ability that hasn't left the stack (its "when the last
+    // defense counter is removed" exiles it first) — and so is one with no
+    // player who could protect it.
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      const types = computeCharacteristics(this.state, this.registry, id).types;
+      if (!types.includes("battle")) continue;
+      const siege = effectiveSubtypes(this.state, this.registry, object).includes("Siege");
+      if ((object.counters.defense ?? 0) <= 0) {
+        const waiting =
+          siege &&
+          (this.state.pendingTriggers.some((t) => t.sourceObjectId === id) ||
+            this.state.zones.shared.stack.some(
+              (s) => this.state.objects[s]?.kind === "ability" && this.state.objects[s]?.sourceObjectId === id,
+            ));
+        if (!waiting) {
+          add(id, { type: "permanent-destroyed", object: id, reason: "0 defense" });
+          continue;
+        }
+      }
+      if (!this.protectorValid(id) && this.protectorOptions(object.controller, siege).length === 0) {
+        add(id, { type: "permanent-destroyed", object: id, reason: "no player can protect it" });
+      }
     }
 
     // An Aura attached to an illegal object, or to nothing, is put into its
@@ -32851,6 +32994,8 @@ export class Game {
     // names a colour afresh).
     object.chosenCreatureType = null;
     delete object.chosenOnEnter;
+    // A battle's protector was this stint's (rule 400.7).
+    delete object.protector;
     // The "as this enters" choices made before this move (rule 614.12 —
     // `askEnterChoice`) take effect as it enters: it *is* the copy, or has
     // its creature type or word, before any replacement or trigger looks at
@@ -32875,6 +33020,8 @@ export class Game {
         object.chosenCreatureType = enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;
       }
+      // A battle enters protected by the player chosen for it (rule 310.9a).
+      if (enterChoice.protector !== undefined) object.protector = enterChoice.protector;
       // Deadpool's exchange (rule 612.5): it enters with the other's rules
       // text as that then is, and the other has its own — the copy's, for a
       // Clone that entered as Deadpool. An exchange that can't be completed

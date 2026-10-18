@@ -149,6 +149,8 @@ export interface VisibleObject {
   readonly faceIsBack: boolean;
   readonly owner: PlayerId;
   readonly controller: PlayerId;
+  /** A battle's protector (rule 310.9) — who defends it when it's attacked. */
+  readonly protector?: PlayerId;
   readonly zone: ZoneType;
   readonly manaCost: string | null;
   /**
@@ -547,6 +549,7 @@ function visible(
       : {}),
     owner: object.owner,
     controller: object.controller,
+    ...(object.protector !== undefined ? { protector: object.protector } : {}),
     zone,
     ...(object.zone === "phased-out" ? { phasedOut: true as const } : {}),
     manaCost: manaCostOverride(object) !== undefined ? (manaCostOverride(object) ?? null) : def.manaCost,

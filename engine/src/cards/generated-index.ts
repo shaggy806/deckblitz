@@ -679,6 +679,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Wheel of Fortune": "2597050f-6b1b-474e-aa16-33fd154628ca",
   "Wing Shredder": "https://cards.scryfall.io/art_crop/back/7/1/71ccc444-54c8-4f7c-a425-82bc3eea1eb0.jpg",
   "Winged Temple of Orazca": "https://cards.scryfall.io/art_crop/back/8/e/8e7554bc-8583-4059-8895-c3845bc27ae3.jpg",
+  "Winnowing Forces": "https://cards.scryfall.io/art_crop/back/9/3/93f623da-616e-4067-9ea8-5dfbeef8ce0b.jpg",
   "Witch-Blessed Meadow": "https://cards.scryfall.io/art_crop/back/6/2/62061e7c-cf19-4f03-b8fa-2bdba62d6b0b.jpg",
   "World Champion, Celestial Weapon": "https://cards.scryfall.io/art_crop/back/3/1/31e2ad37-73cf-4858-8a3a-fc1165cd21a7.jpg",
   "Wrathful Jailbreaker": "https://cards.scryfall.io/art_crop/back/e/6/e641467b-ac2e-4d29-aed7-5cc227c3b1ce.jpg",

@@ -83,8 +83,10 @@ export function legalDefenders(...args: Parameters<typeof legalDefendersUncached
 }
 
 /** Everything the active player's attackers may be declared against: each
- * non-eliminated opponent, plus every planeswalker those opponents control
- * (rule 508.1). A planeswalker is identified by its `ObjectId`. */
+ * non-eliminated opponent, every planeswalker those opponents control, and
+ * every battle one of them protects (rule 508.1b; a battle can be attacked
+ * by any player its protector defends against — 310.9b — so a Siege by its
+ * own controller). A planeswalker or battle is identified by its `ObjectId`. */
 function legalDefendersUncached(
   state: GameState,
   registry: CardRegistry,
@@ -95,10 +97,9 @@ function legalDefendersUncached(
   );
   const planeswalkers = state.zones.shared.battlefield.filter((id) => {
     const object = state.objects[id];
-    return (
-      opponents.includes(object.controller) &&
-      computeCharacteristics(state, registry, id).types.includes("planeswalker")
-    );
+    const types = computeCharacteristics(state, registry, id).types;
+    if (types.includes("battle")) return object.protector !== undefined && opponents.includes(object.protector);
+    return opponents.includes(object.controller) && types.includes("planeswalker");
   });
   return [...opponents, ...planeswalkers];
 }
@@ -113,14 +114,15 @@ export function isPlaneswalkerTarget(
 }
 
 /** The player who defends against an attack aimed at `target` — the target
- * itself if it's a player, or the controller of an attacked planeswalker. */
+ * itself if it's a player, the controller of an attacked planeswalker, or an
+ * attacked battle's protector (rule 310.9d). */
 export function defendingPlayerOf(
   state: GameState,
   target: PlayerId | ObjectId,
 ): PlayerId {
-  return isPlaneswalkerTarget(state, target)
-    ? state.objects[target].controller
-    : (target as PlayerId);
+  if (!isPlaneswalkerTarget(state, target)) return target as PlayerId;
+  const object = state.objects[target];
+  return object.protector ?? object.controller;
 }
 
 /** Battlefield creatures currently declared as attackers. */
@@ -184,6 +186,11 @@ function whyCannotAttackUncached(
   }
   if (object.controller !== player) {
     return `${def.name} is not controlled by the active player`;
+  }
+  // A battle can't attack, even one that's a creature too (rule 310's
+  // rulings: battles can't attack or block).
+  if (computeCharacteristics(state, registry, creatureId).types.includes("battle")) {
+    return `${def.name} is a battle and cannot attack`;
   }
   if (object.tapped && asOf.nextTurn !== true) return `${def.name} is tapped and cannot attack`;
   // Defender (rule 702.3b), unless something lets it "attack as though it
@@ -269,6 +276,9 @@ function whyCannotBlockUncached(
     return `${blockerDef.name} is not controlled by the defender`;
   }
   if (blocker.tapped) return `${blockerDef.name} is tapped and cannot block`;
+  if (computeCharacteristics(state, registry, blockerId).types.includes("battle")) {
+    return `${blockerDef.name} is a battle and cannot block`;
+  }
   if (restrictionsOf(state, registry, blockerId).has("cant-block")) {
     return `${blockerDef.name} can't block`;
   }

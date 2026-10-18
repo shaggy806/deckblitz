@@ -52,6 +52,8 @@ export interface MiniTileProps {
   readonly goaders?: readonly Goader[]
   /** The player this Aura is attached to (a Curse), drawn as a flag. */
   readonly enchanting?: Goader | null
+  /** This battle's protector (rule 310.9), or null. */
+  readonly protectedBy?: Goader | null
   /** The cards in exile this permanent holds (`VisibleObject.holding`),
    * each with what this seat can see of it — `null` for one exiled face
    * down (rule 406.3), drawn as a card back. Shown beside the hover card. */
@@ -96,6 +98,7 @@ export function MiniTile({
   aimedBy = null,
   goaders = [],
   enchanting = null,
+  protectedBy = null,
   held = [],
   ownerSeat = null,
   onClick,
@@ -217,7 +220,7 @@ export function MiniTile({
               ) : null}
             </span>
           ) : null}
-          <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} compact />
+          <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} compact />
           {badge ? <span className="mt-badge">{badge}</span> : null}
           {obj.tapped && TAP_ICON_URL ? (
             <img className="tap-icon" src={TAP_ICON_URL} alt="" />

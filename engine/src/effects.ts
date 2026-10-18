@@ -1042,6 +1042,10 @@ export interface CastNowOptions {
    * suspend's creature spell gains haste (`hastyUntilItLeaves`). A suspended
    * card not cast stays exiled, no longer suspended. */
   readonly freeCastOf?: "cascade" | "suspend";
+  /** Cast it **transformed** — a transforming double-faced card with its back
+   * face up on the stack (rule 712.11a); see the `cast-now` effect's
+   * `transformed`. */
+  readonly transformed?: boolean;
 }
 
 /** A `cast-now` parked across its decision: the event it asked at and the
@@ -2317,6 +2321,10 @@ export type EffectSpec =
         | "graveyard"
         | "exiled-with-source"
         | "exiled-this-way"
+        /** The ability's own source, if this resolution exiled it from the
+         * battlefield and it's still in exile — a Siege's "exile it, then
+         * you may cast it transformed" (rule 310.12b). */
+        | "source-exiled-this-way"
         | "targets"
         | {
             readonly libraryTop: EffectAmount;
@@ -2372,6 +2380,11 @@ export type EffectSpec =
       readonly byDiscarding?: boolean;
       /** "If that spell would be put into your graveyard, exile it instead." */
       readonly exileAfter?: boolean;
+      /** "Cast it **transformed**" (rule 712.11a — a Siege's 310.12b): a
+       * transforming double-faced card, cast with its back face up, which
+       * enters the battlefield that way (712.13); a card without a back face
+       * can't be cast this way. */
+      readonly transformed?: true;
       /**
        * Cast **copies** of the card rather than the card (rule 707.12): "copy
        * it, and you may cast the copy" (Narset, Enlightened Exile; Isochron
@@ -5641,6 +5654,9 @@ export interface EffectApi {
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(): readonly ObjectId[];
+  /** The source, if this resolution exiled it (from the battlefield too) and
+   * it's still in exile — a `cast-now`'s `"source-exiled-this-way"`. */
+  sourceExiledThisWay(): readonly ObjectId[];
   /** The cards in exile linked to this effect's source (rule 607.2a — see
    * `GameObject.exiledWith`), in the battlefield stint the resolving spell
    * or ability refers to. */
@@ -7033,6 +7049,7 @@ function offerCastNow(
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.spell !== undefined ? { spell: spec.spell } : {}),
       ...(looked.length > 0 ? { looked } : {}),
+      ...(spec.transformed === true ? { transformed: true } : {}),
     });
   }
   if (pendingBefore || !ctx.decisionPending()) return false;
@@ -7058,6 +7075,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.cardsExiledWithSource();
     } else if (from === "exiled-this-way") {
       cards = ctx.cardsExiledThisWay();
+    } else if (from === "source-exiled-this-way") {
+      cards = ctx.sourceExiledThisWay();
     } else if (from === "targets") {
       // An illegal target's slot is blank (rule 608.2b); one already cast
       // is on the stack now, which the offer passes over.

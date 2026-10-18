@@ -188,6 +188,33 @@ export const impendingAbilities = (): {
   ],
 });
 
+/** A Siege's reminder line (rule 310.12): put it first in the card's `text`. */
+export const SIEGE_REMINDER =
+  "(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)";
+
+/**
+ * A Siege's intrinsic ability (rule 310.12b): "When the last defense counter
+ * is removed from this permanent, exile it, then you may cast it transformed
+ * without paying its mana cost." The battle also needs `defense` (310.4b —
+ * it enters with that many defense counters), `faces` and `transform: true`
+ * with its back face's file; its protector is chosen as it enters (310.12a)
+ * and a 0-defense Siege waits in play for this to resolve (310.7). Spread
+ * into the card: `triggered: [siege(), …]`.
+ */
+export const siege = (): TriggeredAbility => ({
+  trigger: { on: "counters-removed", who: "self", counter: "defense", last: true },
+  targets: [],
+  effect: {
+    kind: "sequence",
+    effects: [
+      { kind: "exile", target: "source" },
+      { kind: "cast-now", from: "source-exiled-this-way", free: true, transformed: true },
+    ],
+  },
+  resolve: null,
+  text: "When the last defense counter is removed from this permanent, exile it, then you may cast it transformed without paying its mana cost.",
+});
+
 /**
  * Backup N (rule 702.165a): "When this creature enters, put N +1/+1 counters
  * on target creature. If that's another creature, it also gains the

@@ -6062,6 +6062,7 @@ import _poolIntrepidTrufflesnout from "./pool/intrepid-trufflesnout.js";
 import _poolIntroductionToProphecy from "./pool/introduction-to-prophecy.js";
 import _poolIntrudingSoulrager from "./pool/intruding-soulrager.js";
 import _poolInundatedArchive from "./pool/inundated-archive.js";
+import _poolInvasionOfLorwyn from "./pool/invasion-of-lorwyn.js";
 import _poolInvasionReinforcements from "./pool/invasion-reinforcements.js";
 import _poolInvasionSubmersible from "./pool/invasion-submersible.js";
 import _poolInvasionTactics from "./pool/invasion-tactics.js";
@@ -13912,6 +13913,7 @@ import _poolWingnutBatOnTheBelfry from "./pool/wingnut-bat-on-the-belfry.js";
 import _poolWingsOfAesthir from "./pool/wings-of-aesthir.js";
 import _poolWingsOfHope from "./pool/wings-of-hope.js";
 import _poolWingspanStride from "./pool/wingspan-stride.js";
+import _poolWinnowingForces from "./pool/winnowing-forces.js";
 import _poolWinotaJoinerOfForces from "./pool/winota-joiner-of-forces.js";
 import _poolWinterCursedRider from "./pool/winter-cursed-rider.js";
 import _poolWinterMisanthropicGuide from "./pool/winter-misanthropic-guide.js";
@@ -20685,6 +20687,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIntroductionToProphecy,
   _poolIntrudingSoulrager,
   _poolInundatedArchive,
+  _poolInvasionOfLorwyn,
   _poolInvasionReinforcements,
   _poolInvasionSubmersible,
   _poolInvasionTactics,
@@ -28535,6 +28538,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWingsOfAesthir,
   _poolWingsOfHope,
   _poolWingspanStride,
+  _poolWinnowingForces,
   _poolWinotaJoinerOfForces,
   _poolWinterCursedRider,
   _poolWinterMisanthropicGuide,

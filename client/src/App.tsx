@@ -3059,7 +3059,8 @@ function Table({
    */
   const attackSeatClass = (t: PlayerId | ObjectId): string | null => {
     const pw = view.objects[t as ObjectId]
-    const pid = pw ? pw.controller : (t as PlayerId)
+    // A battle's attacker is aimed at its protector (rule 310.9d).
+    const pid = pw ? (pw.protector ?? pw.controller) : (t as PlayerId)
     // Turn-order position, not table position — the same rule every other
     // seat colour in the client follows, so the outline matches the panel.
     return view.turnOrder.includes(pid) ? seatClassOf(view.turnOrder, pid) : null
@@ -3265,6 +3266,11 @@ function Table({
       obj.attachedToPlayer !== null && view.turnOrder.includes(obj.attachedToPlayer)
         ? { seat: seatClassOf(view.turnOrder, obj.attachedToPlayer), name: playerLabel(obj.attachedToPlayer, game.seats) }
         : null
+    // A battle's protector (rule 310.9), named on its tile.
+    const protectedBy =
+      obj.protector !== undefined && view.turnOrder.includes(obj.protector)
+        ? { seat: seatClassOf(view.turnOrder, obj.protector), name: playerLabel(obj.protector, game.seats) }
+        : null
     // A face-down permanent wears its owner's card back.
     const backSeat = view.turnOrder.includes(obj.owner) ? seatClassOf(view.turnOrder, obj.owner) : null
     if (opts.mini) {
@@ -3282,6 +3288,7 @@ function Table({
           aimedBy={aimedBy}
           goaders={goaders}
           enchanting={enchanting}
+          protectedBy={protectedBy}
           held={(obj.holding ?? []).map((h) => ({ id: h, obj: view.objects[h] ?? null }))}
           ownerSeat={backSeat}
           onClick={onTileClick}
@@ -3301,6 +3308,7 @@ function Table({
         aimedBy={aimedBy}
         goaders={goaders}
         enchanting={enchanting}
+        protectedBy={protectedBy}
         ownerSeat={backSeat}
         onClick={onTileClick}
       />
@@ -3863,7 +3871,12 @@ function Table({
     // Frontier Siege's Khans/Dragons) — plain buttons still fit.
     controls = (
       <div className="controls">
-        <span>{game.nameOf(creatureTypeChoiceAction.source)} — choose one</span>
+        <span>
+          {game.nameOf(creatureTypeChoiceAction.source)} —{' '}
+          {creatureTypeChoiceAction.options.every((t) => view.turnOrder.includes(t as PlayerId))
+            ? 'choose its protector'
+            : 'choose one'}
+        </span>
         {creatureTypeChoiceAction.options.map((t) => (
           <button
             key={t}
@@ -3872,7 +3885,8 @@ function Table({
               game.dispatch({ type: 'choose-creature-type', player: seat, creatureType: t })
             }
           >
-            {t}
+            {/* A battle's protector is chosen among players (rule 310.9a). */}
+            {view.turnOrder.includes(t as PlayerId) ? playerLabel(t as PlayerId, game.seats) : t}
           </button>
         ))}
       </div>

@@ -593,6 +593,14 @@ export interface GameObject {
    * interprets.
    */
   chosenOnEnter?: string | null;
+  /** A battle's protector (rule 310.9): the player who defends it — chosen
+   * as it entered (310.9a; for a Siege, one of its controller's opponents,
+   * 310.12a). It's the defending player of any creature attacking it, and
+   * the only one who may block those attackers (310.9c-d); it can never
+   * attack it (310.9b). Unchanged by a change of control or of what it is
+   * (310.9g); a protector who can't be one any more is replaced or the
+   * battle goes (310.11). */
+  protector?: PlayerId;
   /**
    * "As this enters" choices (rule 614.12) made while it was still on its way:
    * a Clone's copy (`copyOf`, `null` for none — rule 707.9), a chosen
@@ -639,6 +647,9 @@ export interface GameObject {
      * 702.82a — `CardDefinition.devour`): sacrificed then, and counted for
      * its +1/+1 counters as it enters. */
     readonly devoured?: number;
+    /** The protector its controller chose for it as it was about to enter
+     * (rule 310.9a — a Siege's, among their opponents, 310.12a). */
+    readonly protector?: PlayerId;
   };
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10), by name,
    * front first — copied from `CardDefinition.faces` when the object is
@@ -2377,6 +2388,12 @@ export type AwaitingDecision =
        * 702.136a): the answer is recorded as its riot choice rather than as
        * a chosen word. */
       readonly riot?: true;
+      /** A battle's protector, chosen as `source` is about to enter (rule
+       * 310.9a) — `options` are the players who may be, and the answer is
+       * recorded as its protector (or, with `protectorFor` set, a battle
+       * already on the battlefield gets a new one — 310.11). */
+      readonly protector?: true;
+      readonly protectorFor?: ObjectId;
       readonly then?: EffectSpec;
       readonly targets?: ResolvedTargets;
       readonly x?: number;

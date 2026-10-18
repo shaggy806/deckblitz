@@ -32,19 +32,24 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
  * `compact` is the battlefield tile's short form ("Z", "Goad", "Sus").
  *
  * A Curse names the player it enchants (`enchanting`), in their seat colour:
- * it sits on its controller's board but is attached to someone else.
+ * it sits on its controller's board but is attached to someone else. A
+ * battle names its protector (`protectedBy` — rule 310.9) the same way: a
+ * Siege sits on its controller's board, defended by an opponent.
  */
 export function CardFlags({
   obj,
   goaders,
   compact,
   enchanting = null,
+  protectedBy = null,
 }: {
   readonly obj: VisibleObject
   readonly goaders: readonly Goader[]
   readonly compact: boolean
   /** The player this Aura is attached to (a Curse), or null. */
   readonly enchanting?: Goader | null
+  /** This battle's protector, or null. */
+  readonly protectedBy?: Goader | null
 }) {
   const sick = obj.summoningSick && obj.power !== null && obj.toughness !== null
   const held = obj.holding?.length ?? 0
@@ -61,6 +66,7 @@ export function CardFlags({
     held === 0 &&
     chosen === null &&
     enchanting === null &&
+    protectedBy === null &&
     level === null
   ) {
     return null
@@ -75,6 +81,15 @@ export function CardFlags({
           title={`Enchanting ${enchanting.name}`}
         >
           {compact ? `→ ${enchanting.name}` : `on ${enchanting.name}`}
+        </span>
+      ) : null}
+      {protectedBy !== null ? (
+        <span
+          className="card-flag enchanting"
+          style={{ '--goader': `var(--${protectedBy.seat})` } as CSSProperties}
+          title={`Protected by ${protectedBy.name}: they defend it when it's attacked`}
+        >
+          {compact ? `🛡 ${protectedBy.name}` : `protected by ${protectedBy.name}`}
         </span>
       ) : null}
       {goaders.map((g) => (

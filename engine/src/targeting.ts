@@ -176,9 +176,10 @@ function isLivingCreature(
 function defendingPlayerOf(state: GameState, source: TargetSource | undefined): PlayerId | undefined {
   const attacking = source?.object !== undefined ? state.objects[source.object]?.attacking : undefined;
   if (attacking === null || attacking === undefined) return undefined;
-  return state.players[attacking as PlayerId] !== undefined
-    ? (attacking as PlayerId)
-    : state.objects[attacking as ObjectId]?.controller;
+  if (state.players[attacking as PlayerId] !== undefined) return attacking as PlayerId;
+  // An attacked battle's defending player is its protector (rule 310.9d).
+  const attacked = state.objects[attacking as ObjectId];
+  return attacked?.protector ?? attacked?.controller;
 }
 
 function isSpellOnStack(state: GameState, id: ObjectId): boolean {
@@ -651,13 +652,13 @@ function isLegalTargetUncached(
     // `any-target` deliberately falls through — keep them adjacent.
     case "any-target":
       // Rule 115.4: a creature, a player, a planeswalker or a battle.
-      // Battles aren't modeled; the rest are. `dealDamage` already takes
-      // loyalty off a planeswalker it damages.
+      // `dealDamage` takes loyalty off a planeswalker it damages and defense
+      // counters off a battle (310.6).
       return (
         isLivingPlayer(state, ref) ||
         (ref.kind === "object" &&
           (isLivingCreature(state, registry, ref.object) ||
-            isPermanentOfType(state, registry, ref.object, (t) => t.includes("planeswalker"))))
+            isPermanentOfType(state, registry, ref.object, (t) => t.includes("planeswalker") || t.includes("battle"))))
       );
     case "creature-or-player":
       return (

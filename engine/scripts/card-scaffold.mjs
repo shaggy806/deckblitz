@@ -165,6 +165,22 @@ function faceSource(face, ctx) {
       text: `{T}: Add ${colors.map((c) => `{${c}}`).join(" or ")}.`,
     });
   }
+  // A Siege's intrinsic ability (rule 310.12b) — the `siege()` helper's.
+  if (t.types.includes("battle") && t.subtypes.includes("Siege")) {
+    parsed.triggered.unshift({
+      trigger: { on: "counters-removed", who: "self", counter: "defense", last: true },
+      targets: [],
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "exile", target: "source" },
+          { kind: "cast-now", from: "source-exiled-this-way", free: true, transformed: true },
+        ],
+      },
+      resolve: null,
+      text: "When the last defense counter is removed from this permanent, exile it, then you may cast it transformed without paying its mana cost.",
+    });
+  }
   // An Aura targets what it enchants.
   if (parsed.enchant !== undefined) parsed.targets = [parsed.enchant];
   const done = parsed.complete && notes.length === 0 && (parsed.enchant !== undefined || t.subtypes.includes("Aura") === false);
@@ -181,6 +197,7 @@ function faceSource(face, ctx) {
     power: num(face.power),
     toughness: num(face.toughness),
     loyalty: num(face.loyalty),
+    defense: num(face.defense),
     keywords: parsed.keywords.length ? [...new Set(parsed.keywords)] : undefined,
     pairing: parsed.pairing,
     canBeCommander: parsed.canBeCommander,

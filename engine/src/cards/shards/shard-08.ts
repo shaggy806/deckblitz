@@ -202,6 +202,7 @@ import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
+import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
 import _poolIorethOfTheHealingHouse from "../pool/ioreth-of-the-healing-house.js";
 import _poolJackOfHeartsVolatileHero from "../pool/jack-of-hearts-volatile-hero.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
@@ -686,6 +687,7 @@ const shard: CardShard = {
     _poolInformedInkwright,
     _poolInspirationFromBeyond,
     _poolIntimidationCampaign,
+    _poolInvasionOfLorwyn,
     _poolIorethOfTheHealingHouse,
     _poolJackOfHeartsVolatileHero,
     _poolJanJansenChaosCrafter,

@@ -59,6 +59,8 @@ export interface CardTileProps {
   readonly goaders?: readonly Goader[]
   /** The player this Aura is attached to (a Curse), drawn as a flag. */
   readonly enchanting?: Goader | null
+  /** This battle's protector (rule 310.9), or null. */
+  readonly protectedBy?: Goader | null
   /** 'title' (default): a name+cost bar above the art, like a real card's
    * frame -- used everywhere except the hand. 'art-first': cost pips
    * overlaid on the art itself, with the name below it instead -- the
@@ -164,6 +166,7 @@ export function CardTile({
   aimedBy = null,
   goaders = [],
   enchanting = null,
+  protectedBy = null,
   layout = 'title',
   ownerSeat = null,
   onClick,
@@ -501,7 +504,7 @@ export function CardTile({
       {stackCount !== null && stackCount > 1 ? (
         <span className="card-stack">×{stackCount}</span>
       ) : null}
-      <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} compact={false} />
+      <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} compact={false} />
       {obj.tapped && TAP_ICON_URL ? (
         <img className="tap-icon" src={TAP_ICON_URL} alt="" />
       ) : null}

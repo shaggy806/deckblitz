@@ -2545,6 +2545,11 @@ export interface CardDefinition {
    * many loyalty counters). `null` for a non-planeswalker. `defineCard`
    * synthesizes the enters-with-counters replacement from this. */
   readonly loyalty: number | null;
+  /** A battle's printed defense (rule 310.4): it enters with this many
+   * defense counters (310.4b), and its defense on the battlefield is how many
+   * it has (310.4c). `defineCard` synthesizes the enters-with-counters
+   * replacement from this. `null` for a non-battle. */
+  readonly defense: number | null;
   /**
    * Mayhem (rule 702.187) — while its owner discarded it this turn
    * (`GameObject.discardedOnTurn`), it may be cast from their graveyard for
@@ -2935,6 +2940,7 @@ const PRINTED_ABILITY: {
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
   loyalty: false,
+  defense: false,
   flashback: (def) => def.flashback !== null,
   mayhem: (def) => def.mayhem !== null,
   rebound: (def) => def.rebound,
@@ -3108,6 +3114,7 @@ interface CardDraft {
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
+  defense?: number;
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
   sneak?: { readonly cost: string };
@@ -3175,6 +3182,19 @@ export function defineCard(draft: CardDraft): CardDefinition {
             text: `${draft.name} enters with ${loyalty} loyalty counters.`,
           },
         ];
+  // A battle enters with its printed defense in defense counters (rule
+  // 310.4b), the same way.
+  const defense = draft.defense ?? null;
+  const defenseStatic: readonly StaticAbility[] =
+    defense === null
+      ? []
+      : [
+          {
+            affects: { scope: "self" },
+            replacement: { event: "enters-battlefield", counters: { kind: "defense", amount: defense } },
+            text: `${draft.name} enters with ${defense} defense counters.`,
+          },
+        ];
   return {
     name: draft.name,
     ...(draft.tokenName !== undefined ? { tokenName: draft.tokenName } : {}),
@@ -3207,7 +3227,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     resolve: draft.resolve ?? null,
     activated: draft.activated ?? [],
     triggered: draft.triggered ?? [],
-    static: [...(draft.static ?? []), ...loyaltyStatic],
+    static: [...(draft.static ?? []), ...loyaltyStatic, ...defenseStatic],
     revealsOwnLibraryTop: draft.revealsOwnLibraryTop ?? false,
     looksAtOwnLibraryTop: draft.looksAtOwnLibraryTop ?? false,
     controlEnchanted: draft.controlEnchanted ?? false,
@@ -3219,6 +3239,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseOnEnter: draft.chooseOnEnter ?? null,
     loyalty,
+    defense,
     flashback: draft.flashback ?? null,
     mayhem: draft.mayhem ?? null,
     rebound: draft.rebound ?? false,
