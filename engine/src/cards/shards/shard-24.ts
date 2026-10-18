@@ -86,6 +86,7 @@ import _poolColossalDreadmaw from "../pool/colossal-dreadmaw.js";
 import _poolCommandTheStorm from "../pool/command-the-storm.js";
 import _poolCommanderSofiaDaguerre from "../pool/commander-sofia-daguerre.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
+import _poolConjurersMantle from "../pool/conjurers-mantle.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
@@ -159,6 +160,7 @@ import _poolGlimmerlight from "../pool/glimmerlight.js";
 import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
 import _poolGoForth from "../pool/go-forth.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
+import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
@@ -203,6 +205,7 @@ import _poolKamiOfWhisperedHopes from "../pool/kami-of-whispered-hopes.js";
 import _poolKarlovOfTheGhostCouncil from "../pool/karlov-of-the-ghost-council.js";
 import _poolKarnsTemporalSundering from "../pool/karns-temporal-sundering.js";
 import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
+import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
@@ -407,6 +410,7 @@ import _poolVeteranArmorer from "../pool/veteran-armorer.js";
 import _poolVildinPackOutcast from "../pool/vildin-pack-outcast.js";
 import _poolViridianClaw from "../pool/viridian-claw.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
+import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
 import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
 import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
@@ -528,6 +532,7 @@ const shard: CardShard = {
     _poolCommandTheStorm,
     _poolCommanderSofiaDaguerre,
     _poolConfidenceFromStrength,
+    _poolConjurersMantle,
     _poolConvolute,
     _poolCoralEel,
     _poolCracklingCyclops,
@@ -601,6 +606,7 @@ const shard: CardShard = {
     _poolGloriousSunrise,
     _poolGoForth,
     _poolGoblinAssailant,
+    _poolGoldenScaleAeronaut,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
     _poolGreatUglyLookingGoblin,
@@ -645,6 +651,7 @@ const shard: CardShard = {
     _poolKarlovOfTheGhostCouncil,
     _poolKarnsTemporalSundering,
     _poolKasimirTheLoneWolf,
+    _poolKatildaAndLier,
     _poolKinnanBonderProdigy,
     _poolKnightOfGlory,
     _poolKoglaTheTitanApe,
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolVildinPackOutcast,
     _poolViridianClaw,
     _poolVividMeadow,
+    _poolVoldarenThrillseeker,
     _poolVraskasFall,
     _poolWakandanShieldGuard,
     _poolWakeningSunsAvatar,

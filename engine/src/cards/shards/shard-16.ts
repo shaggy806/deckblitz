@@ -110,6 +110,7 @@ import _poolEndRazeForerunners from "../pool/end-raze-forerunners.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
+import _poolErrantAndGiada from "../pool/errant-and-giada.js";
 import _poolEssenceFlux from "../pool/essence-flux.js";
 import _poolEtchedCornfield from "../pool/etched-cornfield.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
@@ -126,6 +127,7 @@ import _poolFearOfFailedTests from "../pool/fear-of-failed-tests.js";
 import _poolFeastOfSuccession from "../pool/feast-of-succession.js";
 import _poolFelisaFangOfSilverquill from "../pool/felisa-fang-of-silverquill.js";
 import _poolFeralFerocity from "../pool/feral-ferocity.js";
+import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
 import _poolFireSages from "../pool/fire-sages.js";
 import _poolFirespitterWhelp from "../pool/firespitter-whelp.js";
@@ -178,6 +180,7 @@ import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
+import _poolHideousFleshwheeler from "../pool/hideous-fleshwheeler.js";
 import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
 import _poolHomaridExplorer from "../pool/homarid-explorer.js";
 import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
@@ -327,6 +330,7 @@ import _poolSavagePackmate from "../pool/savage-packmate.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
+import _poolSealFromExistence from "../pool/seal-from-existence.js";
 import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
@@ -594,6 +598,7 @@ const shard: CardShard = {
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
     _poolErodedCanyon,
+    _poolErrantAndGiada,
     _poolEssenceFlux,
     _poolEtchedCornfield,
     _poolEternalWarrior,
@@ -610,6 +615,7 @@ const shard: CardShard = {
     _poolFeastOfSuccession,
     _poolFelisaFangOfSilverquill,
     _poolFeralFerocity,
+    _poolFertilidsFavor,
     _poolFerventCathar,
     _poolFireSages,
     _poolFirespitterWhelp,
@@ -662,6 +668,7 @@ const shard: CardShard = {
     _poolHeartstone,
     _poolHematiteGolem,
     _poolHewTheEntwood,
+    _poolHideousFleshwheeler,
     _poolHighPerfectMorcant,
     _poolHomaridExplorer,
     _poolHondenOfCleansingFire,
@@ -811,6 +818,7 @@ const shard: CardShard = {
     _poolScatterTheSeeds,
     _poolScroungeForEternity,
     _poolScurryOak,
+    _poolSealFromExistence,
     _poolSeizeOpportunity,
     _poolSelesnyaGuildmage,
     _poolSenateCourier,

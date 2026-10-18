@@ -286,6 +286,7 @@ import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
 import _poolPredatorFlagship from "../pool/predator-flagship.js";
+import _poolPreeningChampion from "../pool/preening-champion.js";
 import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
@@ -760,6 +761,7 @@ const shard: CardShard = {
     _poolPowerbalance,
     _poolPravaOfTheSteelLegion,
     _poolPredatorFlagship,
+    _poolPreeningChampion,
     _poolPriestOfUrabrask,
     _poolPrismaticOmen,
     _poolPropagatorDrone,

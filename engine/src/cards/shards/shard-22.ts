@@ -114,6 +114,7 @@ import _poolEmielTheBlessed from "../pool/emiel-the-blessed.js";
 import _poolEndTheFestivities from "../pool/end-the-festivities.js";
 import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
 import _poolEpicFight from "../pool/epic-fight.js";
+import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
 import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
@@ -255,6 +256,7 @@ import _poolOldFatSpider from "../pool/old-fat-spider.js";
 import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
+import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
 import _poolOtepecHuntmaster from "../pool/otepec-huntmaster.js";
 import _poolOtterballAntics from "../pool/otterball-antics.js";
 import _poolOutcasterGreenblade from "../pool/outcaster-greenblade.js";
@@ -329,6 +331,7 @@ import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
+import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
 import _poolSkimmingStrike from "../pool/skimming-strike.js";
 import _poolSkirkProspector from "../pool/skirk-prospector.js";
@@ -578,6 +581,7 @@ const shard: CardShard = {
     _poolEndTheFestivities,
     _poolEnterTheAvatarState,
     _poolEpicFight,
+    _poolEssenceOfOrthodoxy,
     _poolEtherswornAdjudicator,
     _poolEvolutionaryLeap,
     _poolExemplarOfLight,
@@ -719,6 +723,7 @@ const shard: CardShard = {
     _poolOliviaOpulentOutlaw,
     _poolOltecCloudGuard,
     _poolOrcishBloodpainter,
+    _poolOrderOfTheMirror,
     _poolOtepecHuntmaster,
     _poolOtterballAntics,
     _poolOutcasterGreenblade,
@@ -793,6 +798,7 @@ const shard: CardShard = {
     _poolShockerUnshakable,
     _poolSiegeGangCommander,
     _poolSightlessGhoul,
+    _poolSigiledSentinel,
     _poolSilverFurMaster,
     _poolSkimmingStrike,
     _poolSkirkProspector,

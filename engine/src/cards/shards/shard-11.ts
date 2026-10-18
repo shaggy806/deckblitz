@@ -170,6 +170,7 @@ import _poolGreenGoblin from "../pool/green-goblin.js";
 import _poolGreenbeltRadical from "../pool/greenbelt-radical.js";
 import _poolGrowthSpiral from "../pool/growth-spiral.js";
 import _poolGryffVanguard from "../pool/gryff-vanguard.js";
+import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
 import _poolGuildlessCommons from "../pool/guildless-commons.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
@@ -284,6 +285,7 @@ import _poolPacesetterParagon from "../pool/pacesetter-paragon.js";
 import _poolParadiseMantle from "../pool/paradise-mantle.js";
 import _poolParadoxShaper from "../pool/paradox-shaper.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
+import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
@@ -298,6 +300,7 @@ import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
+import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
@@ -451,6 +454,7 @@ import _poolUrnOfGodfire from "../pool/urn-of-godfire.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
+import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
@@ -659,6 +663,7 @@ const shard: CardShard = {
     _poolGreenbeltRadical,
     _poolGrowthSpiral,
     _poolGryffVanguard,
+    _poolGuardianOfGhirapur,
     _poolGuildlessCommons,
     _poolGutlessGhoul,
     _poolHallowedHaunting,
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolParadiseMantle,
     _poolParadoxShaper,
     _poolParameciaColoniex,
+    _poolPathOfTheAnimist,
     _poolPearlEarImperialAdvisor,
     _poolPelakkaWurm,
     _poolPerennialBehemoth,
@@ -787,6 +793,7 @@ const shard: CardShard = {
     _poolPigmentWrangler,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
+    _poolPolukranosReborn,
     _poolPridefulFeastling,
     _poolPriestOfIroas,
     _poolPrimalMight,
@@ -940,6 +947,7 @@ const shard: CardShard = {
     _poolUthrosTitanicGodcore,
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,
+    _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,
     _poolVodalianHypnotist,

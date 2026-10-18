@@ -36,6 +36,7 @@ import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
+import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
@@ -67,6 +68,7 @@ import _poolChandrasIgnition from "../pool/chandras-ignition.js";
 import _poolChangelingSentinel from "../pool/changeling-sentinel.js";
 import _poolChargingMonstrosaur from "../pool/charging-monstrosaur.js";
 import _poolCharringBite from "../pool/charring-bite.js";
+import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClawsOut from "../pool/claws-out.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
@@ -191,6 +193,7 @@ import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
 import _poolHorrorOfTheDim from "../pool/horror-of-the-dim.js";
 import _poolHulklingYoungAvenger from "../pool/hulkling-young-avenger.js";
 import _poolIceMagic from "../pool/ice-magic.js";
+import _poolIchorDrinker from "../pool/ichor-drinker.js";
 import _poolIgnisScientia from "../pool/ignis-scientia.js";
 import _poolIgniteTheFuture from "../pool/ignite-the-future.js";
 import _poolImpale from "../pool/impale.js";
@@ -359,6 +362,7 @@ import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
 import _poolScreamPuff from "../pool/scream-puff.js";
 import _poolScreechingDrake from "../pool/screeching-drake.js";
 import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
+import _poolSearingBarb from "../pool/searing-barb.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
@@ -531,6 +535,7 @@ const shard: CardShard = {
     _poolBirninZanaPlaza,
     _poolBitterReunion,
     _poolBlastingStation,
+    _poolBlightsowerThallid,
     _poolBloomvineRegent,
     _poolBlurSliver,
     _poolBobReluctantHydraAgent,
@@ -562,6 +567,7 @@ const shard: CardShard = {
     _poolChangelingSentinel,
     _poolChargingMonstrosaur,
     _poolCharringBite,
+    _poolChromeHostHulk,
     _poolChromeMox,
     _poolClawsOut,
     _poolClergyEnVec,
@@ -686,6 +692,7 @@ const shard: CardShard = {
     _poolHorrorOfTheDim,
     _poolHulklingYoungAvenger,
     _poolIceMagic,
+    _poolIchorDrinker,
     _poolIgnisScientia,
     _poolIgniteTheFuture,
     _poolImpale,
@@ -854,6 +861,7 @@ const shard: CardShard = {
     _poolScreamPuff,
     _poolScreechingDrake,
     _poolScuttlingDoomEngine,
+    _poolSearingBarb,
     _poolSecludedSteppe,
     _poolSeekerOfSunlight,
     _poolSelesnyaSanctuary,

@@ -102,6 +102,7 @@ import _poolDeadlyDispute from "../pool/deadly-dispute.js";
 import _poolDeathlyRide from "../pool/deathly-ride.js";
 import _poolDeepchannelDuelist from "../pool/deepchannel-duelist.js";
 import _poolDefenestratedPhantom from "../pool/defenestrated-phantom.js";
+import _poolDeluxeDragster from "../pool/deluxe-dragster.js";
 import _poolDesertTwister from "../pool/desert-twister.js";
 import _poolDesertsDue from "../pool/deserts-due.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
@@ -242,6 +243,7 @@ import _poolMassacreGirlKnownKiller from "../pool/massacre-girl-known-killer.js"
 import _poolMasterOfTheFeast from "../pool/master-of-the-feast.js";
 import _poolMegrim from "../pool/megrim.js";
 import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
+import _poolMercilessRepurposing from "../pool/merciless-repurposing.js";
 import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
 import _poolMinasTirithGarrison from "../pool/minas-tirith-garrison.js";
@@ -329,6 +331,7 @@ import _poolRumblingSlum from "../pool/rumbling-slum.js";
 import _poolSageEyeHarrier from "../pool/sage-eye-harrier.js";
 import _poolSaguArcher from "../pool/sagu-archer.js";
 import _poolSahagin from "../pool/sahagin.js";
+import _poolSaibaCryptomancer from "../pool/saiba-cryptomancer.js";
 import _poolSalvageScout from "../pool/salvage-scout.js";
 import _poolSamLoyalAttendant from "../pool/sam-loyal-attendant.js";
 import _poolSamisCuriosity from "../pool/samis-curiosity.js";
@@ -585,6 +588,7 @@ const shard: CardShard = {
     _poolDeathlyRide,
     _poolDeepchannelDuelist,
     _poolDefenestratedPhantom,
+    _poolDeluxeDragster,
     _poolDesertTwister,
     _poolDesertsDue,
     _poolDinaSoulSteeper,
@@ -725,6 +729,7 @@ const shard: CardShard = {
     _poolMasterOfTheFeast,
     _poolMegrim,
     _poolMengHuosHorde,
+    _poolMercilessRepurposing,
     _poolMesaCavalier,
     _poolMidnightGuard,
     _poolMinasTirithGarrison,
@@ -812,6 +817,7 @@ const shard: CardShard = {
     _poolSageEyeHarrier,
     _poolSaguArcher,
     _poolSahagin,
+    _poolSaibaCryptomancer,
     _poolSalvageScout,
     _poolSamLoyalAttendant,
     _poolSamisCuriosity,

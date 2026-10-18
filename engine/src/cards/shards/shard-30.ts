@@ -44,6 +44,7 @@ import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackbladeReforged from "../pool/blackblade-reforged.js";
 import _poolBladeHistorian from "../pool/blade-historian.js";
 import _poolBlightedWoodland from "../pool/blighted-woodland.js";
+import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
@@ -511,6 +512,7 @@ const shard: CardShard = {
     _poolBlackbladeReforged,
     _poolBladeHistorian,
     _poolBlightedWoodland,
+    _poolBlightreaperThallid,
     _poolBloodArtist,
     _poolBloodPet,
     _poolBloodbraidElf,

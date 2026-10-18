@@ -9,9 +9,9 @@ import { defineCard } from "../define.js";
 //     ability will trigger. You'll choose the target creature card for that second ability at
 //     that time.
 //
-// "You may exile five cards from your graveyard" is Aegis Sculptor's shape:
-// the five chosen as it resolves, fewer than five exiled isn't having done
-// it. "When you do" is a reflexive trigger (rule 603.12) whose target is
+// "You may exile five cards from your graveyard" is offered only with five
+// there to exile (it can't be done in part), the five chosen as it resolves
+// (Aegis Sculptor's shape). "When you do" is a reflexive trigger (rule 603.12) whose target is
 // chosen only then (the ruling), so it can't be one of the five just exiled.
 
 const TEXT =
@@ -45,6 +45,12 @@ const EXILE_FIVE: EffectSpec = {
   },
 };
 
+const IF_FIVE: EffectSpec = {
+  kind: "conditional",
+  condition: { kind: "cards-in-graveyard", atLeast: 5 },
+  then: EXILE_FIVE,
+};
+
 export default defineCard({
   name: "Kroxa and Kunoros",
   manaCost: "{3}{R}{W}{B}",
@@ -60,14 +66,14 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: EXILE_FIVE,
+      effect: IF_FIVE,
       resolve: null,
       text: TEXT,
     },
     {
       trigger: { on: "attacks", who: "self" },
       targets: [],
-      effect: EXILE_FIVE,
+      effect: IF_FIVE,
       resolve: null,
       text: TEXT,
     },

@@ -511,7 +511,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Saddled only switches on its own Mount's "while saddled" abilities.
   "become-saddled": (n, v) => v.touch(n.target, "help", MINOR),
   "attack-requirement": none,
-  "impulse-exile": none,
+  // Exiling the top of a targeted player's library (Rashmi and Ragavan) is
+  // taken from them.
+  "impulse-exile": (n, v) => v.touch(n.whose, "harm", MINOR),
   scry: (n, v) => v.child(n.then),
   "reveal-top": none,
   surveil: (n, v) => v.child(n.then),

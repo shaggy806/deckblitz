@@ -58,6 +58,7 @@ import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
+import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
@@ -108,8 +109,10 @@ import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
+import _poolEyesOfGitaxias from "../pool/eyes-of-gitaxias.js";
 import _poolFabricate from "../pool/fabricate.js";
 import _poolFaerieBladecrafter from "../pool/faerie-bladecrafter.js";
+import _poolFailedConversion from "../pool/failed-conversion.js";
 import _poolFalkenrathCelebrants from "../pool/falkenrath-celebrants.js";
 import _poolFanaticalOffering from "../pool/fanatical-offering.js";
 import _poolFangbladeEviscerator from "../pool/fangblade-eviscerator.js";
@@ -259,6 +262,7 @@ import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
+import _poolPhyrexianAwakening from "../pool/phyrexian-awakening.js";
 import _poolPhyrexianCrusader from "../pool/phyrexian-crusader.js";
 import _poolPhyrexianGhoul from "../pool/phyrexian-ghoul.js";
 import _poolPiaAetherAscetic from "../pool/pia-aether-ascetic.js";
@@ -507,6 +511,7 @@ const shard: CardShard = {
     _poolChakramRetriever,
     _poolChardalynDragon,
     _poolChasmDrake,
+    _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolContradict,
     _poolConverterBeast,
@@ -557,8 +562,10 @@ const shard: CardShard = {
     _poolEngineRat,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
+    _poolEyesOfGitaxias,
     _poolFabricate,
     _poolFaerieBladecrafter,
+    _poolFailedConversion,
     _poolFalkenrathCelebrants,
     _poolFanaticalOffering,
     _poolFangbladeEviscerator,
@@ -708,6 +715,7 @@ const shard: CardShard = {
     _poolPathOfAncestry,
     _poolPestMascot,
     _poolPestilenceDemon,
+    _poolPhyrexianAwakening,
     _poolPhyrexianCrusader,
     _poolPhyrexianGhoul,
     _poolPiaAetherAscetic,

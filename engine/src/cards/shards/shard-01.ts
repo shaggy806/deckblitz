@@ -34,6 +34,7 @@ import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
+import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
@@ -97,6 +98,7 @@ import _poolElectrodominance from "../pool/electrodominance.js";
 import _poolElectrostaticField from "../pool/electrostatic-field.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
+import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
@@ -340,6 +342,7 @@ import _poolStartingColumn from "../pool/starting-column.js";
 import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
+import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
 import _poolStun from "../pool/stun.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
@@ -470,6 +473,7 @@ const shard: CardShard = {
     _poolBespokeBo,
     _poolBlackKnight,
     _poolBlackMagesRod,
+    _poolBlightTitan,
     _poolBloodtracker,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
@@ -533,6 +537,7 @@ const shard: CardShard = {
     _poolElectrostaticField,
     _poolElugeTheShorelessSea,
     _poolEmbodimentOfSpring,
+    _poolEnduringBondwarden,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
     _poolEssenceChanneler,
@@ -776,6 +781,7 @@ const shard: CardShard = {
     _poolStingbladeAssassin,
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
+    _poolStormTheSeedcore,
     _poolStun,
     _poolSunderflock,
     _poolSungrassPrairie,

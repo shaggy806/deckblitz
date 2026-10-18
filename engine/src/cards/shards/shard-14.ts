@@ -38,6 +38,7 @@ import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
+import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
@@ -332,6 +333,7 @@ import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
 import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
+import _poolScornBladeBerserker from "../pool/scorn-blade-berserker.js";
 import _poolScourgemark from "../pool/scourgemark.js";
 import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
@@ -483,6 +485,7 @@ const shard: CardShard = {
     _poolBenthicBiomancer,
     _poolBileUrchin,
     _poolBlackTomCassidy,
+    _poolBlightedBurgeoning,
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
     _poolBloodthirstyConqueror,
@@ -777,6 +780,7 @@ const shard: CardShard = {
     _poolSazacapsBrew,
     _poolScalesOfShale,
     _poolScavengerRegent,
+    _poolScornBladeBerserker,
     _poolScourgemark,
     _poolScrapyardRecombiner,
     _poolScurryOfSquirrels,

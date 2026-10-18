@@ -15,6 +15,7 @@ import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
 import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
 import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
+import _poolAlabasterHostIntercessor from "../pool/alabaster-host-intercessor.js";
 import _poolAlandraSkyDreamer from "../pool/alandra-sky-dreamer.js";
 import _poolAlchemistsAssistant from "../pool/alchemists-assistant.js";
 import _poolAltarsLight from "../pool/altars-light.js";
@@ -131,6 +132,7 @@ import _poolElvesOfDeepShadow from "../pool/elves-of-deep-shadow.js";
 import _poolElvishChampion from "../pool/elvish-champion.js";
 import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
 import _poolEnslavedScout from "../pool/enslaved-scout.js";
+import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
@@ -327,6 +329,7 @@ import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
+import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
 import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
@@ -376,6 +379,7 @@ import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
+import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
 import _poolSurlyFarrier from "../pool/surly-farrier.js";
@@ -480,6 +484,7 @@ const shard: CardShard = {
     _poolAjaniUnrelenting,
     _poolAjanisResponse,
     _poolAkroanMastiff,
+    _poolAlabasterHostIntercessor,
     _poolAlandraSkyDreamer,
     _poolAlchemistsAssistant,
     _poolAltarsLight,
@@ -596,6 +601,7 @@ const shard: CardShard = {
     _poolElvishChampion,
     _poolEmryLurkerOfTheLoch,
     _poolEnslavedScout,
+    _poolEpharasDispersal,
     _poolEtchedFamiliar,
     _poolExperimentalAviator,
     _poolFallOfTheGavel,
@@ -792,6 +798,7 @@ const shard: CardShard = {
     _poolScarwoodGoblins,
     _poolScorchingShot,
     _poolScourgeDevil,
+    _poolScrappyBruiser,
     _poolScreechingPhoenix,
     _poolSeaOfClouds,
     _poolSealOfRemoval,
@@ -841,6 +848,7 @@ const shard: CardShard = {
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,
+    _poolSunBlessedGuardian,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,
     _poolSurlyFarrier,

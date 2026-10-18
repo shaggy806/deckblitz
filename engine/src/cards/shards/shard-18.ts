@@ -193,6 +193,7 @@ import _poolKrangMasterMind from "../pool/krang-master-mind.js";
 import _poolKraumViolentCacophony from "../pool/kraum-violent-cacophony.js";
 import _poolKrenkoBaronOfTinStreet from "../pool/krenko-baron-of-tin-street.js";
 import _poolKrenkoMobBoss from "../pool/krenko-mob-boss.js";
+import _poolKroxaAndKunoros from "../pool/kroxa-and-kunoros.js";
 import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
 import _poolLavafumeInvoker from "../pool/lavafume-invoker.js";
@@ -271,6 +272,7 @@ import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrimalAmulet from "../pool/primal-amulet.js";
 import _poolProftsEideticMemory from "../pool/profts-eidetic-memory.js";
 import _poolProjektorInspector from "../pool/projektor-inspector.js";
+import _poolProtocolKnight from "../pool/protocol-knight.js";
 import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
@@ -470,6 +472,7 @@ import _tokensInsectWarriorToken from "../tokens/insect-warrior-token.js";
 import _tokensKrakenTokenSpawningKraken from "../tokens/kraken-token-spawning-kraken.js";
 import _tokensMonsterRoleToken from "../tokens/monster-role-token.js";
 import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
+import _tokensPhyrexianHydraTokenReach from "../tokens/phyrexian-hydra-token-reach.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
 import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
@@ -670,6 +673,7 @@ const shard: CardShard = {
     _poolKraumViolentCacophony,
     _poolKrenkoBaronOfTinStreet,
     _poolKrenkoMobBoss,
+    _poolKroxaAndKunoros,
     _poolKynaiosAndTiroOfMeletis,
     _poolLakeTownMariners,
     _poolLavafumeInvoker,
@@ -748,6 +752,7 @@ const shard: CardShard = {
     _poolPrimalAmulet,
     _poolProftsEideticMemory,
     _poolProjektorInspector,
+    _poolProtocolKnight,
     _poolPsychosisCrawler,
     _poolPutrefy,
     _poolQuandrixPledgemage,
@@ -949,6 +954,7 @@ const shard: CardShard = {
     _tokensKrakenTokenSpawningKraken,
     _tokensMonsterRoleToken,
     _tokensPhyrexianHorrorToken,
+    _tokensPhyrexianHydraTokenReach,
     _tokensRatTokenCantBlock,
     _tokensSkeletonPirateToken,
     _tokensSpiritTokenGreatArashinCity,

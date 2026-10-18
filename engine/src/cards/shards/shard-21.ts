@@ -140,6 +140,7 @@ import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
+import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
@@ -301,6 +302,7 @@ import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
 import _poolSelesnyaLocket from "../pool/selesnya-locket.js";
 import _poolSeparatistVoidmage from "../pool/separatist-voidmage.js";
+import _poolSerpentBladeAssailant from "../pool/serpent-blade-assailant.js";
 import _poolSerumVisionary from "../pool/serum-visionary.js";
 import _poolSetzerWanderingGambler from "../pool/setzer-wandering-gambler.js";
 import _poolShamblingVent from "../pool/shambling-vent.js";
@@ -346,11 +348,13 @@ import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
+import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
 import _poolTerramorph from "../pool/terramorph.js";
 import _poolTerritorialWitchstalker from "../pool/territorial-witchstalker.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
+import _poolTerrorOfTowashi from "../pool/terror-of-towashi.js";
 import _poolTerrorTide from "../pool/terror-tide.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolThalakosSentry from "../pool/thalakos-sentry.js";
@@ -368,6 +372,7 @@ import _poolTomBombadil from "../pool/tom-bombadil.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
 import _poolTortoiseFormation from "../pool/tortoise-formation.js";
+import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTundra from "../pool/tundra.js";
@@ -557,6 +562,7 @@ const shard: CardShard = {
     _poolGliderKids,
     _poolGlintWeaver,
     _poolGloriousCharge,
+    _poolGnottvoldHermit,
     _poolGoblinChampion,
     _poolGoblinKing,
     _poolGoblinLackey,
@@ -718,6 +724,7 @@ const shard: CardShard = {
     _poolSeismicShudder,
     _poolSelesnyaLocket,
     _poolSeparatistVoidmage,
+    _poolSerpentBladeAssailant,
     _poolSerumVisionary,
     _poolSetzerWanderingGambler,
     _poolShamblingVent,
@@ -763,11 +770,13 @@ const shard: CardShard = {
     _poolTanglepoolBridge,
     _poolTarkirDuneshaper,
     _poolTeamTactics,
+    _poolTemporalCleansing,
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
     _poolTerramorph,
     _poolTerritorialWitchstalker,
     _poolTerrorOfTheFairgrounds,
+    _poolTerrorOfTowashi,
     _poolTerrorTide,
     _poolTezzeretCruelCaptain,
     _poolThalakosSentry,
@@ -785,6 +794,7 @@ const shard: CardShard = {
     _poolTorgalAFineHound,
     _poolTorstenVonUrsus,
     _poolTortoiseFormation,
+    _poolTrailblazingHistorian,
     _poolTrapmakersSnare,
     _poolTrueLovesKiss,
     _poolTundra,

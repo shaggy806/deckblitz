@@ -17,6 +17,7 @@ import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
+import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
 import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
 import _poolArcboundHybrid from "../pool/arcbound-hybrid.js";
 import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
@@ -86,6 +87,7 @@ import _poolCountersquall from "../pool/countersquall.js";
 import _poolCourtOfCunning from "../pool/court-of-cunning.js";
 import _poolCovertOperative from "../pool/covert-operative.js";
 import _poolCrudeRampart from "../pool/crude-rampart.js";
+import _poolCrystalCarapace from "../pool/crystal-carapace.js";
 import _poolCrystalVein from "../pool/crystal-vein.js";
 import _poolDarkwatchElves from "../pool/darkwatch-elves.js";
 import _poolDauntlessCathar from "../pool/dauntless-cathar.js";
@@ -106,6 +108,7 @@ import _poolDutifulThrull from "../pool/dutiful-thrull.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
+import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
@@ -149,6 +152,7 @@ import _poolGasGuzzler from "../pool/gas-guzzler.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
+import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
 import _poolGloomhunter from "../pool/gloomhunter.js";
 import _poolGloomlakeVerge from "../pool/gloomlake-verge.js";
 import _poolGlorybringer from "../pool/glorybringer.js";
@@ -213,6 +217,7 @@ import _poolLedgerShredder from "../pool/ledger-shredder.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
+import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
 import _poolLushPortico from "../pool/lush-portico.js";
 import _poolLysAlanaDignitary from "../pool/lys-alana-dignitary.js";
@@ -314,6 +319,7 @@ import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
 import _poolSamutHazoretsChampion from "../pool/samut-hazorets-champion.js";
+import _poolSandstalkerMoloch from "../pool/sandstalker-moloch.js";
 import _poolSatyrRambler from "../pool/satyr-rambler.js";
 import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
@@ -473,6 +479,7 @@ const shard: CardShard = {
     _poolAnUnexpectedParty,
     _poolAngelfireCrusader,
     _poolApprenticeWizard,
+    _poolArachnoidAdaptation,
     _poolArcadesTheStrategist,
     _poolArcboundHybrid,
     _poolArchmageOfRunes,
@@ -542,6 +549,7 @@ const shard: CardShard = {
     _poolCourtOfCunning,
     _poolCovertOperative,
     _poolCrudeRampart,
+    _poolCrystalCarapace,
     _poolCrystalVein,
     _poolDarkwatchElves,
     _poolDauntlessCathar,
@@ -562,6 +570,7 @@ const shard: CardShard = {
     _poolEcstaticElectromancer,
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,
+    _poolElendaAndAzor,
     _poolEliminateTheImpossible,
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
@@ -605,6 +614,7 @@ const shard: CardShard = {
     _poolGeistOfTheMoors,
     _poolGiantBadger,
     _poolGiantKiller,
+    _poolGiftOfCompleation,
     _poolGloomhunter,
     _poolGloomlakeVerge,
     _poolGlorybringer,
@@ -669,6 +679,7 @@ const shard: CardShard = {
     _poolLieInWait,
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
+    _poolLocthwainLancer,
     _poolLordOfTheUndead,
     _poolLushPortico,
     _poolLysAlanaDignitary,
@@ -770,6 +781,7 @@ const shard: CardShard = {
     _poolSacredPeaks,
     _poolSakashimaTheImpostor,
     _poolSamutHazoretsChampion,
+    _poolSandstalkerMoloch,
     _poolSatyrRambler,
     _poolSavageKnuckleblade,
     _poolSavaiCrystal,

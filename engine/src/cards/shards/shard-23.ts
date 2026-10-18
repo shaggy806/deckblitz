@@ -48,6 +48,7 @@ import _poolBirchloreRangers from "../pool/birchlore-rangers.js";
 import _poolBirthdayEscape from "../pool/birthday-escape.js";
 import _poolBlackDragon from "../pool/black-dragon.js";
 import _poolBlacksnagBuzzard from "../pool/blacksnag-buzzard.js";
+import _poolBladedBattleFan from "../pool/bladed-battle-fan.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
@@ -56,6 +57,7 @@ import _poolBloodrockCyclops from "../pool/bloodrock-cyclops.js";
 import _poolBloodstoneCameo from "../pool/bloodstone-cameo.js";
 import _poolBloomingMarsh from "../pool/blooming-marsh.js";
 import _poolBoggartRamGang from "../pool/boggart-ram-gang.js";
+import _poolBolaSlinger from "../pool/bola-slinger.js";
 import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
@@ -233,6 +235,7 @@ import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
 import _poolManaPrism from "../pool/mana-prism.js";
 import _poolMandibleJusticiar from "../pool/mandible-justiciar.js";
+import _poolMaraudingDreadship from "../pool/marauding-dreadship.js";
 import _poolMarchFromTheBlackGate from "../pool/march-from-the-black-gate.js";
 import _poolMarkOfFury from "../pool/mark-of-fury.js";
 import _poolMassiveRaid from "../pool/massive-raid.js";
@@ -250,6 +253,8 @@ import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
+import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
+import _poolMomentOfTruth from "../pool/moment-of-truth.js";
 import _poolMomentaryBlink from "../pool/momentary-blink.js";
 import _poolMothdustChangeling from "../pool/mothdust-changeling.js";
 import _poolMountainYeti from "../pool/mountain-yeti.js";
@@ -344,6 +349,7 @@ import _poolSilkNet from "../pool/silk-net.js";
 import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
+import _poolSkyclaveAerialist from "../pool/skyclave-aerialist.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
 import _poolSlashOfLight from "../pool/slash-of-light.js";
@@ -506,6 +512,7 @@ const shard: CardShard = {
     _poolBirthdayEscape,
     _poolBlackDragon,
     _poolBlacksnagBuzzard,
+    _poolBladedBattleFan,
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
     _poolBloodflowConnoisseur,
@@ -514,6 +521,7 @@ const shard: CardShard = {
     _poolBloodstoneCameo,
     _poolBloomingMarsh,
     _poolBoggartRamGang,
+    _poolBolaSlinger,
     _poolBomburGentleDreamer,
     _poolBorderlandMinotaur,
     _poolBorrowing100000Arrows,
@@ -691,6 +699,7 @@ const shard: CardShard = {
     _poolMammothSpider,
     _poolManaPrism,
     _poolMandibleJusticiar,
+    _poolMaraudingDreadship,
     _poolMarchFromTheBlackGate,
     _poolMarkOfFury,
     _poolMassiveRaid,
@@ -708,6 +717,8 @@ const shard: CardShard = {
     _poolMinotaurRoxxonCeo,
     _poolMireShade,
     _poolMnemonicWall,
+    _poolMoiraAndTeshar,
+    _poolMomentOfTruth,
     _poolMomentaryBlink,
     _poolMothdustChangeling,
     _poolMountainYeti,
@@ -802,6 +813,7 @@ const shard: CardShard = {
     _poolSinisterCryologist,
     _poolSinkIntoStupor,
     _poolSkeletonCrew,
+    _poolSkyclaveAerialist,
     _poolSkycloudExpanse,
     _poolSkylineDespot,
     _poolSlashOfLight,

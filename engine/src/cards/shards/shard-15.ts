@@ -162,6 +162,7 @@ import _poolGigantosaurus from "../pool/gigantosaurus.js";
 import _poolGlacierGodmaw from "../pool/glacier-godmaw.js";
 import _poolGlassworks from "../pool/glassworks.js";
 import _poolGlint from "../pool/glint.js";
+import _poolGloomfangMauler from "../pool/gloomfang-mauler.js";
 import _poolGloomwidow from "../pool/gloomwidow.js";
 import _poolGnottvoldRecluse from "../pool/gnottvold-recluse.js";
 import _poolGoForTheThroat from "../pool/go-for-the-throat.js";
@@ -174,6 +175,7 @@ import _poolGolgariGraveTroll from "../pool/golgari-grave-troll.js";
 import _poolGolgariLonglegs from "../pool/golgari-longlegs.js";
 import _poolGolgariRotFarm from "../pool/golgari-rot-farm.js";
 import _poolGraduationDay from "../pool/graduation-day.js";
+import _poolGraftedButcher from "../pool/grafted-butcher.js";
 import _poolGraniteGargoyle from "../pool/granite-gargoyle.js";
 import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
@@ -607,6 +609,7 @@ const shard: CardShard = {
     _poolGlacierGodmaw,
     _poolGlassworks,
     _poolGlint,
+    _poolGloomfangMauler,
     _poolGloomwidow,
     _poolGnottvoldRecluse,
     _poolGoForTheThroat,
@@ -619,6 +622,7 @@ const shard: CardShard = {
     _poolGolgariLonglegs,
     _poolGolgariRotFarm,
     _poolGraduationDay,
+    _poolGraftedButcher,
     _poolGraniteGargoyle,
     _poolGrapplerSpider,
     _poolGratuitousViolence,

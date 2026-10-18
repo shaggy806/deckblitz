@@ -119,6 +119,14 @@ describe("Kroxa and Kunoros", () => {
     expect(zone(game, angel)).toBe("graveyard");
     expect(graveyard(game)).toHaveLength(6);
   });
+
+  it("with fewer than five cards in your graveyard, it isn't offered and nothing is exiled", () => {
+    const { game, a } = table();
+    for (let i = 0; i < 4; i += 1) toGraveyard(game, "Wastes");
+    pickModes(a, 0);
+    enter(game, "Kroxa and Kunoros");
+    expect(graveyard(game)).toHaveLength(4);
+  });
 });
 
 describe("Mistmeadow Vanisher", () => {

@@ -114,6 +114,7 @@ import _poolElementalBond from "../pool/elemental-bond.js";
 import _poolElusiveKrasis from "../pool/elusive-krasis.js";
 import _poolElvishArchivist from "../pool/elvish-archivist.js";
 import _poolElvishLookout from "../pool/elvish-lookout.js";
+import _poolElvishVatkeeper from "../pool/elvish-vatkeeper.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
@@ -460,9 +461,11 @@ import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-f
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
+import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
+import _tokensVampireKnightToken from "../tokens/vampire-knight-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
 import _tokensZombieMutantToken from "../tokens/zombie-mutant-token.js";
 
@@ -579,6 +582,7 @@ const shard: CardShard = {
     _poolElusiveKrasis,
     _poolElvishArchivist,
     _poolElvishLookout,
+    _poolElvishVatkeeper,
     _poolEmberethBlaze,
     _poolEpicProportions,
     _poolEriettesWhisper,
@@ -927,9 +931,11 @@ const shard: CardShard = {
     _tokensDinosaurToken,
     _tokensFractalToken,
     _tokensHumanToken,
+    _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
+    _tokensVampireKnightToken,
     _tokensVarmintToken,
     _tokensZombieMutantToken,
   ],

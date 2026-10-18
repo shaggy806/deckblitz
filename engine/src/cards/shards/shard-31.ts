@@ -164,6 +164,7 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
+import _poolGlisteningDawn from "../pool/glistening-dawn.js";
 import _poolGnathosaur from "../pool/gnathosaur.js";
 import _poolGoblinBerserker from "../pool/goblin-berserker.js";
 import _poolGoblinBombardment from "../pool/goblin-bombardment.js";
@@ -238,6 +239,7 @@ import _poolKrosanGrip from "../pool/krosan-grip.js";
 import _poolLagomosHandOfHatred from "../pool/lagomos-hand-of-hatred.js";
 import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
+import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
@@ -259,9 +261,11 @@ import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMindstatic from "../pool/mindstatic.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
+import _poolMirranBanesplitter from "../pool/mirran-banesplitter.js";
 import _poolMirranCrusader from "../pool/mirran-crusader.js";
 import _poolMiscast from "../pool/miscast.js";
 import _poolMischievousMystic from "../pool/mischievous-mystic.js";
+import _poolMistmeadowVanisher from "../pool/mistmeadow-vanisher.js";
 import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
@@ -329,6 +333,7 @@ import _poolScaledBehemoth from "../pool/scaled-behemoth.js";
 import _poolScavengingOoze from "../pool/scavenging-ooze.js";
 import _poolScornfulAetherLich from "../pool/scornful-aether-lich.js";
 import _poolScrapMastery from "../pool/scrap-mastery.js";
+import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
@@ -615,6 +620,7 @@ const shard: CardShard = {
     _poolGhostlyFlicker,
     _poolGideonsLawkeeper,
     _poolGimlisFury,
+    _poolGlisteningDawn,
     _poolGnathosaur,
     _poolGoblinBerserker,
     _poolGoblinBombardment,
@@ -689,6 +695,7 @@ const shard: CardShard = {
     _poolLagomosHandOfHatred,
     _poolLakeTownToymaker,
     _poolLilysplashMentor,
+    _poolLithomanticBarrage,
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
     _poolLlanowarReborn,
@@ -710,9 +717,11 @@ const shard: CardShard = {
     _poolMerchantOfTruth,
     _poolMindstatic,
     _poolMirkwoodElk,
+    _poolMirranBanesplitter,
     _poolMirranCrusader,
     _poolMiscast,
     _poolMischievousMystic,
+    _poolMistmeadowVanisher,
     _poolMoanOfTheUnhallowed,
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
@@ -780,6 +789,7 @@ const shard: CardShard = {
     _poolScavengingOoze,
     _poolScornfulAetherLich,
     _poolScrapMastery,
+    _poolSeedpodCaretaker,
     _poolSeveredLegion,
     _poolShardlessAgent,
     _poolSheHulkJenniferWalters,

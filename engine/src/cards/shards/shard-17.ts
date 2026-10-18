@@ -173,6 +173,7 @@ import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
 import _poolHenchbots from "../pool/henchbots.js";
 import _poolHeraldOfKozilek from "../pool/herald-of-kozilek.js";
+import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
@@ -185,6 +186,7 @@ import _poolImodanesRecruiter from "../pool/imodanes-recruiter.js";
 import _poolImpsMischief from "../pool/imps-mischief.js";
 import _poolIndulgentTormentor from "../pool/indulgent-tormentor.js";
 import _poolInfernalGrasp from "../pool/infernal-grasp.js";
+import _poolInjectorCrocodile from "../pool/injector-crocodile.js";
 import _poolInvertedIceberg from "../pool/inverted-iceberg.js";
 import _poolIronManFuturistParagon from "../pool/iron-man-futurist-paragon.js";
 import _poolIronTuskElephant from "../pool/iron-tusk-elephant.js";
@@ -250,6 +252,7 @@ import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNestRobber from "../pool/nest-robber.js";
 import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
+import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
@@ -259,11 +262,13 @@ import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
 import _poolPestilentSouleater from "../pool/pestilent-souleater.js";
 import _poolPharaohRamaTut from "../pool/pharaoh-rama-tut.js";
 import _poolPhyrexianBloodstock from "../pool/phyrexian-bloodstock.js";
+import _poolPhyrexianPegasus from "../pool/phyrexian-pegasus.js";
 import _poolPhyrexianVault from "../pool/phyrexian-vault.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
@@ -311,6 +316,7 @@ import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
 import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
+import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
 import _poolShadowsLair from "../pool/shadows-lair.js";
@@ -352,6 +358,7 @@ import _poolSubterraneanScout from "../pool/subterranean-scout.js";
 import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
 import _poolSummitProwler from "../pool/summit-prowler.js";
 import _poolSummoningMateria from "../pool/summoning-materia.js";
+import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
@@ -617,6 +624,7 @@ const shard: CardShard = {
     _poolHeiBaiSpiritOfBalance,
     _poolHenchbots,
     _poolHeraldOfKozilek,
+    _poolHerbologyInstructor,
     _poolHighspireBellRinger,
     _poolHollowDogs,
     _poolHondenOfNightsReach,
@@ -629,6 +637,7 @@ const shard: CardShard = {
     _poolImpsMischief,
     _poolIndulgentTormentor,
     _poolInfernalGrasp,
+    _poolInjectorCrocodile,
     _poolInvertedIceberg,
     _poolIronManFuturistParagon,
     _poolIronTuskElephant,
@@ -694,6 +703,7 @@ const shard: CardShard = {
     _poolNestRobber,
     _poolNightOfTheSweetsRevenge,
     _poolNimanaSkydancer,
+    _poolNornsInquisitor,
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
@@ -703,11 +713,13 @@ const shard: CardShard = {
     _poolOrderOfSacredDusk,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolPathOfTheEnigma,
     _poolPatronOfTheVein,
     _poolPeregrineDrake,
     _poolPestilentSouleater,
     _poolPharaohRamaTut,
     _poolPhyrexianBloodstock,
+    _poolPhyrexianPegasus,
     _poolPhyrexianVault,
     _poolPleaForPower,
     _poolPouncingLynx,
@@ -755,6 +767,7 @@ const shard: CardShard = {
     _poolSecondThoughts,
     _poolSeedshipAgrarian,
     _poolSeethingLandscape,
+    _poolSeraphOfNewPhyrexia,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,
     _poolShadowsLair,
@@ -796,6 +809,7 @@ const shard: CardShard = {
     _poolSuccumbToTheCold,
     _poolSummitProwler,
     _poolSummoningMateria,
+    _poolSunderTheGateway,
     _poolSuperShredder,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,

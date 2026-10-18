@@ -70,6 +70,7 @@ import _poolCloudDragon from "../pool/cloud-dragon.js";
 import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
 import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
+import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
@@ -200,6 +201,7 @@ import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
+import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
@@ -320,6 +322,7 @@ import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
+import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
@@ -373,6 +376,7 @@ import _poolSylvanCaryatid from "../pool/sylvan-caryatid.js";
 import _poolTaiga from "../pool/taiga.js";
 import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTalionsMessenger from "../pool/talions-messenger.js";
+import _poolTangledSkyline from "../pool/tangled-skyline.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
@@ -436,6 +440,7 @@ import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
 import _poolYoungWolf from "../pool/young-wolf.js";
 import _poolYuyanArchers from "../pool/yuyan-archers.js";
+import _poolZhalfirinShapecraft from "../pool/zhalfirin-shapecraft.js";
 import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
@@ -448,6 +453,7 @@ import _tokensIcyManalithToken from "../tokens/icy-manalith-token.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
 import _tokensMerfolkTokenDeeprootWaters from "../tokens/merfolk-token-deeproot-waters.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-horror-token-phyrexian-rebirth.js";
+import _tokensPhyrexianHydraTokenLifelink from "../tokens/phyrexian-hydra-token-lifelink.js";
 import _tokensRatToken from "../tokens/rat-token.js";
 import _tokensSaprolingToken from "../tokens/saproling-token.js";
 import _tokensSpawnToken from "../tokens/spawn-token.js";
@@ -523,6 +529,7 @@ const shard: CardShard = {
     _poolCodieVociferousCodex,
     _poolColorfulFeiyiSparrow,
     _poolColossalDreadmask,
+    _poolCompleatedConjurer,
     _poolContractHero,
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
@@ -653,6 +660,7 @@ const shard: CardShard = {
     _poolInfirmaryHealer,
     _poolIngeniousArtillerist,
     _poolInspiredFire,
+    _poolInterdisciplinaryMascot,
     _poolInundatedArchive,
     _poolJirinaDauntlessGeneral,
     _poolJuggernaut,
@@ -773,6 +781,7 @@ const shard: CardShard = {
     _poolScorpionSeethingStriker,
     _poolSeaSpirit,
     _poolSeaSprite,
+    _poolSeedOfHope,
     _poolSeekTheBeast,
     _poolSegmentedKrotiq,
     _poolSenseisDiviningTop,
@@ -826,6 +835,7 @@ const shard: CardShard = {
     _poolTaiga,
     _poolTakeUpTheShield,
     _poolTalionsMessenger,
+    _poolTangledSkyline,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,
     _poolTempleAcolyte,
@@ -889,6 +899,7 @@ const shard: CardShard = {
     _poolYoshimaruScrappyStray,
     _poolYoungWolf,
     _poolYuyanArchers,
+    _poolZhalfirinShapecraft,
     _poolZoanthrope,
     _poolZookeeperMechan,
   ],
@@ -903,6 +914,7 @@ const shard: CardShard = {
     _tokensImpTokenJudith,
     _tokensMerfolkTokenDeeprootWaters,
     _tokensPhyrexianHorrorTokenPhyrexianRebirth,
+    _tokensPhyrexianHydraTokenLifelink,
     _tokensRatToken,
     _tokensSaprolingToken,
     _tokensSpawnToken,

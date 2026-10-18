@@ -116,6 +116,7 @@ import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
+import _poolFearlessSkald from "../pool/fearless-skald.js";
 import _poolFemerefArchers from "../pool/femeref-archers.js";
 import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
@@ -175,6 +176,7 @@ import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
+import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
@@ -237,6 +239,7 @@ import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
+import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
 import _poolMoltenFrame from "../pool/molten-frame.js";
 import _poolMomentOfGlory from "../pool/moment-of-glory.js";
 import _poolMomentumBreaker from "../pool/momentum-breaker.js";
@@ -396,6 +399,7 @@ import _poolThornglintBridge from "../pool/thornglint-bridge.js";
 import _poolThousandMoonsCrackshot from "../pool/thousand-moons-crackshot.js";
 import _poolThunderWall from "../pool/thunder-wall.js";
 import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
+import _poolTidalTerror from "../pool/tidal-terror.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
@@ -598,6 +602,7 @@ const shard: CardShard = {
     _poolFavoredOfIroas,
     _poolFear,
     _poolFearlessPup,
+    _poolFearlessSkald,
     _poolFemerefArchers,
     _poolFerrovore,
     _poolFetidHorror,
@@ -657,6 +662,7 @@ const shard: CardShard = {
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
     _poolInfantryVeteran,
+    _poolInfectedDefector,
     _poolInfestationSage,
     _poolInnocentBlood,
     _poolInordinateRage,
@@ -719,6 +725,7 @@ const shard: CardShard = {
     _poolMidnightSnack,
     _poolMightyLeap,
     _poolMindeyeDrake,
+    _poolMirrodinAvenged,
     _poolMoltenFrame,
     _poolMomentOfGlory,
     _poolMomentumBreaker,
@@ -878,6 +885,7 @@ const shard: CardShard = {
     _poolThousandMoonsCrackshot,
     _poolThunderWall,
     _poolThundertrapTrainer,
+    _poolTidalTerror,
     _poolTimberlandGuide,
     _poolTimeWipe,
     _poolToothyImaginaryFriend,

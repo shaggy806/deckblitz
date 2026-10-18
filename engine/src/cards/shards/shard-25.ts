@@ -70,6 +70,7 @@ import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
+import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
@@ -152,6 +153,7 @@ import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFreestriderLookout from "../pool/freestrider-lookout.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
+import _poolFurnaceGremlin from "../pool/furnace-gremlin.js";
 import _poolGadwicksFirstDuel from "../pool/gadwicks-first-duel.js";
 import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
@@ -165,6 +167,7 @@ import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
 import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
+import _poolGlisteningDeluge from "../pool/glistening-deluge.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
 import _poolGloryheathLynx from "../pool/gloryheath-lynx.js";
 import _poolGoShintaiOfHiddenCruelty from "../pool/go-shintai-of-hidden-cruelty.js";
@@ -227,6 +230,7 @@ import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
 import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
+import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMarthaJones from "../pool/martha-jones.js";
@@ -253,6 +257,7 @@ import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
+import _poolNezumiFreewheeler from "../pool/nezumi-freewheeler.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
 import _poolNimrodelWatcher from "../pool/nimrodel-watcher.js";
 import _poolNoggleRobber from "../pool/noggle-robber.js";
@@ -297,6 +302,7 @@ import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
 import _poolRedcapGutterDweller from "../pool/redcap-gutter-dweller.js";
+import _poolRefereeSquad from "../pool/referee-squad.js";
 import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
@@ -524,6 +530,7 @@ const shard: CardShard = {
     _poolCloudCrusader,
     _poolCombatCelebrant,
     _poolConcertedCare,
+    _poolConclaveSledgeCaptain,
     _poolConstrictorSage,
     _poolContaminatedLandscape,
     _poolCrackInTime,
@@ -606,6 +613,7 @@ const shard: CardShard = {
     _poolFreestriderLookout,
     _poolFugitiveWizard,
     _poolFumigate,
+    _poolFurnaceGremlin,
     _poolGadwicksFirstDuel,
     _poolGaeasGift,
     _poolGaleriderSliver,
@@ -619,6 +627,7 @@ const shard: CardShard = {
     _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
+    _poolGlisteningDeluge,
     _poolGloriousDecay,
     _poolGloryheathLynx,
     _poolGoShintaiOfHiddenCruelty,
@@ -681,6 +690,7 @@ const shard: CardShard = {
     _poolLoyalApprentice,
     _poolMachinistsArsenal,
     _poolMaiJadedEdge,
+    _poolMaladyInvoker,
     _poolMalevolentChandelier,
     _poolMantisRider,
     _poolMarthaJones,
@@ -707,6 +717,7 @@ const shard: CardShard = {
     _poolNeedForSpeed,
     _poolNeedlevergePathway,
     _poolNeurokCommando,
+    _poolNezumiFreewheeler,
     _poolNiblisOfTheMist,
     _poolNimrodelWatcher,
     _poolNoggleRobber,
@@ -751,6 +762,7 @@ const shard: CardShard = {
     _poolRecklessBarbarian,
     _poolRedRoomRecruit,
     _poolRedcapGutterDweller,
+    _poolRefereeSquad,
     _poolReflectionsOfLittjara,
     _poolRehearsedDebater,
     _poolRequiemMonolith,

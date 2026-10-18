@@ -45,6 +45,7 @@ import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBlackMarket from "../pool/black-market.js";
+import _poolBloatedProcessor from "../pool/bloated-processor.js";
 import _poolBlockadeRunner from "../pool/blockade-runner.js";
 import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
@@ -59,12 +60,14 @@ import _poolBringToTrial from "../pool/bring-to-trial.js";
 import _poolBroadsideBarrage from "../pool/broadside-barrage.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
+import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
+import _poolChangeTheEquation from "../pool/change-the-equation.js";
 import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
@@ -77,6 +80,7 @@ import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCourtArchers from "../pool/court-archers.js";
 import _poolCowerInFear from "../pool/cower-in-fear.js";
+import _poolCragsmasherYeti from "../pool/cragsmasher-yeti.js";
 import _poolCrimsonMage from "../pool/crimson-mage.js";
 import _poolCultGuildmage from "../pool/cult-guildmage.js";
 import _poolCuratorBeastie from "../pool/curator-beastie.js";
@@ -369,6 +373,7 @@ import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
+import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
@@ -396,6 +401,7 @@ import _poolThreefoldThunderhulk from "../pool/threefold-thunderhulk.js";
 import _poolThunderclapWyvern from "../pool/thunderclap-wyvern.js";
 import _poolThundermawHellkite from "../pool/thundermaw-hellkite.js";
 import _poolTickedOff from "../pool/ticked-off.js";
+import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
 import _poolTitanicGrowth from "../pool/titanic-growth.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
@@ -427,6 +433,7 @@ import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
+import _poolWaryThespian from "../pool/wary-thespian.js";
 import _poolWastelandViper from "../pool/wasteland-viper.js";
 import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
@@ -499,6 +506,7 @@ const shard: CardShard = {
     _poolBilbosDeadlySlice,
     _poolBiomassMutation,
     _poolBlackMarket,
+    _poolBloatedProcessor,
     _poolBlockadeRunner,
     _poolBloodGlutton,
     _poolBloodKnight,
@@ -513,12 +521,14 @@ const shard: CardShard = {
     _poolBroadsideBarrage,
     _poolBrushstrider,
     _poolBullCerodon,
+    _poolBurningSunsFury,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
     _poolCarrionCrow,
     _poolCelestineTheLivingSaint,
     _poolChancellorOfTales,
+    _poolChangeTheEquation,
     _poolChanneledDragonfire,
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
@@ -531,6 +541,7 @@ const shard: CardShard = {
     _poolCounselOfTheSoratami,
     _poolCourtArchers,
     _poolCowerInFear,
+    _poolCragsmasherYeti,
     _poolCrimsonMage,
     _poolCultGuildmage,
     _poolCuratorBeastie,
@@ -823,6 +834,7 @@ const shard: CardShard = {
     _poolSteelburrChampion,
     _poolStickyFingers,
     _poolStonybrookBanneret,
+    _poolStormclawRager,
     _poolStrixhavenStadium,
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
@@ -850,6 +862,7 @@ const shard: CardShard = {
     _poolThunderclapWyvern,
     _poolThundermawHellkite,
     _poolTickedOff,
+    _poolTillerOfFlesh,
     _poolTitanicGrowth,
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
@@ -881,6 +894,7 @@ const shard: CardShard = {
     _poolWalkingCorpse,
     _poolWallOff,
     _poolWarclampMastiff,
+    _poolWaryThespian,
     _poolWastelandViper,
     _poolWaterloggedHulk,
     _poolWeaverOfCurrents,

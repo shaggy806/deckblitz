@@ -283,6 +283,7 @@ import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
 import _poolOrcishCannonade from "../pool/orcish-cannonade.js";
 import _poolOrcishMechanics from "../pool/orcish-mechanics.js";
+import _poolOrderOfTheAlabasterHost from "../pool/order-of-the-alabaster-host.js";
 import _poolOrochiLeafcaller from "../pool/orochi-leafcaller.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOutOfAir from "../pool/out-of-air.js";
@@ -312,6 +313,7 @@ import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
+import _poolRalsReinforcements from "../pool/rals-reinforcements.js";
 import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
@@ -319,9 +321,11 @@ import _poolRattlebackApothecary from "../pool/rattleback-apothecary.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenClanWarAxe from "../pool/raven-clan-war-axe.js";
 import _poolRavenousAmulet from "../pool/ravenous-amulet.js";
+import _poolRavenousSailback from "../pool/ravenous-sailback.js";
 import _poolRaybladeTrooper from "../pool/rayblade-trooper.js";
 import _poolRazzleDazzler from "../pool/razzle-dazzler.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
+import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRentIsDue from "../pool/rent-is-due.js";
@@ -778,6 +782,7 @@ const shard: CardShard = {
     _poolOneirophage,
     _poolOrcishCannonade,
     _poolOrcishMechanics,
+    _poolOrderOfTheAlabasterHost,
     _poolOrochiLeafcaller,
     _poolOssification,
     _poolOutOfAir,
@@ -807,6 +812,7 @@ const shard: CardShard = {
     _poolRagingCougar,
     _poolRainOfEmbers,
     _poolRaiseThePast,
+    _poolRalsReinforcements,
     _poolRancorousArchaic,
     _poolRatcatcherTrainee,
     _poolRatcatcher,
@@ -814,9 +820,11 @@ const shard: CardShard = {
     _poolRavagingHorde,
     _poolRavenClanWarAxe,
     _poolRavenousAmulet,
+    _poolRavenousSailback,
     _poolRaybladeTrooper,
     _poolRazzleDazzler,
     _poolRecklessAssault,
+    _poolRedcapHeelslasher,
     _poolRefresh,
     _poolRenderSpeechless,
     _poolRentIsDue,

@@ -175,6 +175,7 @@ import _poolGrizzledLeotau from "../pool/grizzled-leotau.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
+import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
@@ -234,6 +235,7 @@ import _poolMaestrosInitiate from "../pool/maestros-initiate.js";
 import _poolMagdaTheHoardmaster from "../pool/magda-the-hoardmaster.js";
 import _poolMalevolentWitchkite from "../pool/malevolent-witchkite.js";
 import _poolMarangRiverSkeleton from "../pool/marang-river-skeleton.js";
+import _poolMarshalOfZhalfir from "../pool/marshal-of-zhalfir.js";
 import _poolMastersManufactory from "../pool/masters-manufactory.js";
 import _poolMaulfistSquad from "../pool/maulfist-squad.js";
 import _poolMayhemDevil from "../pool/mayhem-devil.js";
@@ -294,6 +296,7 @@ import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
+import _poolRashmiAndRagavan from "../pool/rashmi-and-ragavan.js";
 import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
@@ -319,6 +322,7 @@ import _poolSandstoneWarrior from "../pool/sandstone-warrior.js";
 import _poolSangriteSurge from "../pool/sangrite-surge.js";
 import _poolSapphireMedallion from "../pool/sapphire-medallion.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
+import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
@@ -616,6 +620,7 @@ const shard: CardShard = {
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
     _poolHalvarGodOfBattle,
+    _poolHangarScrounger,
     _poolHarvesttideInfiltrator,
     _poolHeartstringPuller,
     _poolHelionaut,
@@ -675,6 +680,7 @@ const shard: CardShard = {
     _poolMagdaTheHoardmaster,
     _poolMalevolentWitchkite,
     _poolMarangRiverSkeleton,
+    _poolMarshalOfZhalfir,
     _poolMastersManufactory,
     _poolMaulfistSquad,
     _poolMayhemDevil,
@@ -735,6 +741,7 @@ const shard: CardShard = {
     _poolRacersScoreboard,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
+    _poolRashmiAndRagavan,
     _poolRavenousBaloth,
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
@@ -760,6 +767,7 @@ const shard: CardShard = {
     _poolSangriteSurge,
     _poolSapphireMedallion,
     _poolScavengedWeaponry,
+    _poolSchemaThief,
     _poolScionOfGlaciers,
     _poolScouringSands,
     _poolScrybSprites,

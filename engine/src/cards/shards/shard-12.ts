@@ -76,6 +76,7 @@ import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
+import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
@@ -141,6 +142,7 @@ import _poolFireglassMentor from "../pool/fireglass-mentor.js";
 import _poolFistsOfIronwood from "../pool/fists-of-ironwood.js";
 import _poolFlamekinSpitfire from "../pool/flamekin-spitfire.js";
 import _poolFlayerOfTheHatebound from "../pool/flayer-of-the-hatebound.js";
+import _poolFlywheelRacer from "../pool/flywheel-racer.js";
 import _poolForcedFruition from "../pool/forced-fruition.js";
 import _poolForumsFavor from "../pool/forums-favor.js";
 import _poolFoulRoads from "../pool/foul-roads.js";
@@ -276,6 +278,7 @@ import _poolPinnacleMonk from "../pool/pinnacle-monk.js";
 import _poolPiracyCharm from "../pool/piracy-charm.js";
 import _poolPlagueBelcher from "../pool/plague-belcher.js";
 import _poolPlatedKilnbeast from "../pool/plated-kilnbeast.js";
+import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
@@ -527,6 +530,7 @@ const shard: CardShard = {
     _poolCloudPirates,
     _poolCloudcrownOak,
     _poolConciliatorsDuelist,
+    _poolConsumingAetherborn,
     _poolCreepingTarPit,
     _poolCrossoverCollaboration,
     _poolCrystalSlipper,
@@ -592,6 +596,7 @@ const shard: CardShard = {
     _poolFistsOfIronwood,
     _poolFlamekinSpitfire,
     _poolFlayerOfTheHatebound,
+    _poolFlywheelRacer,
     _poolForcedFruition,
     _poolForumsFavor,
     _poolFoulRoads,
@@ -727,6 +732,7 @@ const shard: CardShard = {
     _poolPiracyCharm,
     _poolPlagueBelcher,
     _poolPlatedKilnbeast,
+    _poolPolukranosEngineOfRuin,
     _poolPortalToPhyrexia,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
