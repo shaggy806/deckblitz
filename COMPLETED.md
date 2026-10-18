@@ -86,6 +86,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Phyrexia: All Will Be One and its Commander set, both whole** (batch 99): 126 of their 165
+  cards, with **compleated** (rule 702.150a — loyalty minus two per Phyrexian symbol paid with
+  life), **"has toxic"** (the `hasToxic` filter) and **"gains toxic N"** (`grant-toxic`), and the
+  scaffolder reading Toxic, For Mirrodin! and named counters; then 6 older cards the last three
+  batches' features unblocked (Archpriest of Shadows, Emergent Woodwurm, Guardian Scalelord,
+  Invasion of Zendikar, Necrogen Rotpriest, Jade Seedstones) (2026-10-18).
 - **March of the Machine and March of the Machine Commander, both whole** (batch 98): 151 of
   their 218 cards, with **battles and Sieges** (rule 310: defense counters, a protector chosen as
   it enters and reassigned when it can't protect, attacking a battle, damage removing defense,

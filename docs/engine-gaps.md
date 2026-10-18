@@ -6,6 +6,21 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **Phyrexian mana is paid with life only when mana can't pay it.** Rule 107.4f lets a Phyrexian
+  symbol be paid with one mana of its colour or 2 life, the player's choice. `mana-payment.ts`'s
+  pip resolution (`resolveHybridCost` and `resolveReducedTwobrid`) pays 2 life for a Phyrexian pip only when no mana can
+  pay it, and `Action` has no way to ask for life instead — so a player can't keep mana open by
+  paying life, and a compleated planeswalker (702.150a) is never cast with life while mana could
+  pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
+  to pay with life), honoured by the planner first, offered by the client beside the convoke
+  picker.
+- **A reflexive trigger's target filter reads the creating ability's `triggerValue`.** A
+  reflexive ability's target filter (603.12) is bound when it's created, in the parent's
+  resolution, so `{ amount: { triggerValue: true } }` there reads the parent trigger's value (0
+  for an upkeep trigger), not the reflexive one's. Argentum Masticore reads `{ thisWay:
+  "discarded", sumOf: "mana-value" }` instead, which that resolution knows. Any card that needs
+  the reflexive value in a target filter is silently wrong until the filter is bound in the
+  reflexive ability's own context.
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the

@@ -86,16 +86,20 @@ section keeps only what to do next.
   Bargain each wait on a feature of their own (`docs/card-blockers.md`).
 - **Now: set by set, whole sets, newest first** (the `author-by-set` skill; the user's call
   2026-10-14, after the walk took each set's top half): every Commander-legal first printing,
-  ranked ones first. Every set from Reality Fracture back to March of the Machine is whole
+  ranked ones first. Every set from Reality Fracture back to Phyrexia: All Will Be One is whole
   (batch 89 built plot and crimes for Outlaws of Thunder Junction; batch 90 rad counters and squad
   for Fallout; batch 91 collect evidence and Cases; batch 92 explore, Map tokens, discover and
   craft; batch 93 time travel, vanishing and gaining suspend; batch 94 Roles, bargain, celebration
   and "has an Adventure"; batch 95 Commander Masters' last six; batch 96 voting, keyword loss,
   removal from combat and devour for The Lord of the Rings and its Commander set; batch 97
   distributed counters and the owner's top-or-bottom choice for The Aftermath; batch 98 battles
-  and Sieges, incubate, backup and convokers for March of the Machine and its Commander set);
-  **next, Phyrexia: All Will Be One Commander and Phyrexia: All Will Be One** (ONC, ONE — `npm run
-  cards:sets -w engine -- --sets 50`). March of the Machine's leaders: one target slot for a player
+  and Sieges, incubate, backup and convokers for March of the Machine and its Commander set; batch
+  99 compleated, "has toxic" and "gains toxic N" for Phyrexia: All Will Be One and its Commander
+  set); **next, Jumpstart 2022, then The Brothers' War Commander and The Brothers' War** (J22, BRC,
+  BRO — `npm run cards:sets -w engine -- --sets 60`). Phyrexia: All Will Be One's blocks are
+  nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
+  Venser), a target's controller's poison counters (Bring the Ending, Anoint with Affliction), and
+  a static scoped by "has toxic" (Skrelv's Hive). March of the Machine's leaders: one target slot for a player
   or a battle (`target:battle-or-opponent` — Invasion of Regatha, Ayara; `target:player-or-battle`;
   `target:planeswalker-or-battle-of-that-player`), "transformed permanent" and "double-faced card"
   filters (`filter:transformed`, `condition:filter-double-faced` — Overgrown Pest, Mutagen
@@ -145,6 +149,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
+- **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.
+- **A reflexive trigger's target filter reads the creating ability's `triggerValue`** (603.12): `{ amount: { triggerValue: true } }` inside it sees the parent's value, not the reflexive one (found authoring Argentum Masticore).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
