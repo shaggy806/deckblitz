@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3681 already implemented / 1319 missing (marks refreshed 2026-10-17)
+3694 already implemented / 1306 missing (marks refreshed 2026-10-18)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -305,7 +305,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   306  Seething Song                            {2}{R}           Instant
 [x]   307  Flusterstorm                             {U}              Instant
 [x]   308  Dryad of the Ilysian Grove               {2}{G}           Enchantment Creature — Nymph Dryad
-[ ]   309  Shadowspear                              {1}              Legendary Artifact — Equipment
+[x]   309  Shadowspear                              {1}              Legendary Artifact — Equipment
 [x]   310  Phyrexian Altar                          {3}              Artifact
 [x]   311  Sun Titan                                {4}{W}{W}        Creature — Giant
 [x]   312  Phyrexian Metamorph                      {3}{U/P}         Artifact Creature — Phyrexian Shapeshifter
@@ -891,7 +891,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   895  Rite of Replication                      {2}{U}{U}        Sorcery
 [ ]   896  Xorn                                     {2}{R}           Creature — Elemental
 [x]   897  Forsaken Monument                        {5}              Legendary Artifact
-[ ]   898  Reconnaissance                           {W}              Enchantment
+[x]   898  Reconnaissance                           {W}              Enchantment
 [x]   899  Reconnaissance Mission                   {2}{U}{U}        Enchantment
 [x]   900  Raise the Palisade                       {4}{U}           Sorcery
 [x]   901  Burgeoning                               {G}              Enchantment
@@ -2094,7 +2094,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2101  Flicker of Fate                          {1}{W}           Instant
 [ ]  2102  Grafdigger's Cage                        {1}              Artifact
 [x]  2103  Bruvac the Grandiloquent                 {2}{U}           Legendary Creature — Human Advisor
-[ ]  2104  Mycoloth                                 {3}{G}{G}        Creature — Fungus
+[x]  2104  Mycoloth                                 {3}{G}{G}        Creature — Fungus
 [ ]  2105  Karn, the Great Creator                  {4}              Legendary Planeswalker — Karn
 [ ]  2106  Illustrious Wanderglyph                  {4}{W}           Artifact Creature — Golem
 [x]  2107  Weaver of Harmony                        {1}{G}           Enchantment Creature — Snake Druid
@@ -3231,7 +3231,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3238  Rain-Slicked Copse                       {0}              Land — Forest Island
 [x]  3239  Redoubled Stormsinger                    {2}{R}           Creature — Orc Wizard
 [ ]  3240  Nautiloid Ship                           {4}              Artifact — Vehicle
-[ ]  3241  Archpriest of Shadows                    {3}{B}{B}        Creature — Human Warlock
+[x]  3241  Archpriest of Shadows                    {3}{B}{B}        Creature — Human Warlock
 [ ]  3242  The Warring Triad                        {3}              Legendary Artifact Creature — God
 [ ]  3243  Chain of Smog                            {1}{B}           Sorcery
 [x]  3244  Archenemy's Charm                        {B}{B}{B}        Instant
@@ -3503,7 +3503,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3510  Chrome Host Seedshark                    {2}{U}           Creature — Phyrexian Shark
 [x]  3511  Raid Bombardment                         {2}{R}           Enchantment
 [ ]  3512  Lulu, Stern Guardian                     {2}{U}           Legendary Creature — Human Wizard
-[ ]  3513  Invasion of Zendikar // Awakened Skyclave {4}              Battle — Siege // Creature — Elemental
+[x]  3513  Invasion of Zendikar // Awakened Skyclave {4}              Battle — Siege // Creature — Elemental
 [x]  3514  Steel of the Godhead                     {2}{W/U}         Enchantment — Aura
 [x]  3515  Deep Forest Hermit                       {3}{G}{G}        Creature — Elf Druid
 [ ]  3516  Nim Deathmantle                          {2}              Artifact — Equipment
@@ -3528,7 +3528,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3535  Knight Exemplar                          {1}{W}{W}        Creature — Human Knight
 [x]  3536  Cloudblazer                              {3}{W}{U}        Creature — Human Scout
 [x]  3537  Cori Mountain Monastery                  {0}              Land
-[ ]  3538  Council's Judgment                       {1}{W}{W}        Sorcery
+[x]  3538  Council's Judgment                       {1}{W}{W}        Sorcery
 [x]  3539  Auroral Procession                       {G}{U}           Instant
 [x]  3540  Stroke of Genius                         {X}{2}{U}        Instant
 [x]  3541  Krark, the Thumbless                     {1}{R}           Legendary Creature — Goblin Wizard
@@ -3711,7 +3711,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3718  The Master, Multiplied                   {4}{B}{R}        Legendary Creature — Time Lord Rogue
 [x]  3719  And They Shall Know No Fear              {1}{W}           Instant
 [x]  3720  Whisper of the Dross                     {B}              Instant
-[ ]  3721  Famished Worldsire                       {5}{G}{G}{G}     Creature — Leviathan
+[x]  3721  Famished Worldsire                       {5}{G}{G}{G}     Creature — Leviathan
 [x]  3722  Bloodroot Apothecary                     {2}{G}           Creature — Squirrel Druid
 [x]  3723  Dread Summons                            {X}{B}{B}        Sorcery
 [ ]  3724  Champions from Beyond                    {X}{W}{W}        Enchantment
@@ -3746,7 +3746,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3753  Deceptive Frostkite                      {U}{U}           Creature — Dragon
 [x]  3754  Mishra's Workshop                        {0}              Land
 [x]  3755  Thirst for Discovery                     {2}{U}           Instant
-[ ]  3756  Nissa, Ascended Animist                  {3}{G}{G}{G/P}{G/P} Legendary Planeswalker — Nissa
+[x]  3756  Nissa, Ascended Animist                  {3}{G}{G}{G/P}{G/P} Legendary Planeswalker — Nissa
 [x]  3757  Infiltration Lens                        {1}              Artifact — Equipment
 [x]  3758  Nekusar, the Mindrazer                   {2}{U}{B}{R}     Legendary Creature — Zombie Wizard
 [ ]  3759  Victory Chimes                           {3}              Artifact
@@ -3986,7 +3986,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3993  Arcane Adaptation                        {2}{U}           Enchantment
 [x]  3994  Scavenged Brawler                        {6}              Artifact Creature — Construct
 [x]  3995  Dragon Sniper                            {G}              Creature — Human Archer
-[ ]  3996  Feasting Hobbit                          {1}{G}           Creature — Halfling Citizen
+[x]  3996  Feasting Hobbit                          {1}{G}           Creature — Halfling Citizen
 [x]  3997  Phyrexian Delver                         {3}{B}{B}        Creature — Phyrexian Zombie
 [x]  3998  Woodfall Primus                          {5}{G}{G}{G}     Creature — Treefolk Shaman
 [x]  3999  Sorin, Imperious Bloodlord               {2}{B}           Legendary Planeswalker — Sorin
@@ -4456,7 +4456,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4463  Urza's Factory                           {0}              Land — Urza's
 [ ]  4464  Torens, Fist of the Angels               {1}{G}{W}        Legendary Creature — Human Cleric
 [ ]  4465  Phyrexian Censor                         {2}{W}           Creature — Phyrexian Wizard
-[ ]  4466  Tivit, Seller of Secrets                 {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
+[x]  4466  Tivit, Seller of Secrets                 {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
 [ ]  4467  Waterbending Lesson                      {3}{U}           Sorcery — Lesson
 [ ]  4468  Guff Rewrites History                    {2}{R}           Instant
 [x]  4469  Knollspine Dragon                        {5}{R}{R}        Creature — Dragon
@@ -4544,7 +4544,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4551  Skemfar Shadowsage                       {3}{B}           Creature — Elf Cleric
 [x]  4552  Fanatical Offering                       {1}{B}           Instant
 [x]  4553  Tower Winder                             {1}{G}           Creature — Snake
-[ ]  4554  Labyrinth of Skophos                     {0}              Land
+[x]  4554  Labyrinth of Skophos                     {0}              Land
 [ ]  4555  Collective Voyage                        {G}              Sorcery
 [x]  4556  Finneas, Ace Archer                      {G}{W}           Legendary Creature — Rabbit Archer
 [x]  4557  Katara, the Fearless                     {G}{W}{U}        Legendary Creature — Human Warrior Ally
@@ -4698,7 +4698,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4705  Trenzalore Clocktower                    {0}              Legendary Land
 [x]  4706  Surgehacker Mech                         {4}              Artifact — Vehicle
 [ ]  4707  Marshal's Anthem                         {2}{W}{W}        Enchantment
-[ ]  4708  Guardian Scalelord                       {4}{W}           Creature — Dragon
+[x]  4708  Guardian Scalelord                       {4}{W}           Creature — Dragon
 [x]  4709  Felisa, Fang of Silverquill              {2}{W}{B}        Legendary Creature — Vampire Wizard
 [x]  4710  Raffine, Scheming Seer                   {W}{U}{B}        Legendary Creature — Sphinx Demon
 [ ]  4711  Dina's Guidance                          {1}{B}{G}        Instant
@@ -4997,7 +4997,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  5004  Brass Knuckles                           {4}              Artifact — Equipment
 [x]  5005  Filter Out                               {1}{U}{U}        Instant
 [ ]  5006  Long-Term Plans                          {2}{U}           Instant
-[ ]  5007  Ravenous Tyrannosaurus                   {4}{R}{G}        Creature — Dinosaur
+[x]  5007  Ravenous Tyrannosaurus                   {4}{R}{G}        Creature — Dinosaur
 [ ]  5008  Elspeth Tirel                            {3}{W}{W}        Legendary Planeswalker — Elspeth
 [x]  5009  Fleet Swallower                          {5}{U}{U}        Creature — Fish
 [x]  5010  Oboro, Palace in the Clouds              {0}              Legendary Land

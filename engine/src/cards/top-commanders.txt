@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-441 already implemented / 59 missing
+442 already implemented / 58 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -184,7 +184,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  178  Liesa, Shroud of Dusk                          13056 decks  {2}{W}{W}{B}     Legendary Creature — Angel
 [x]  179  Dr. Eggman                                     13042 decks  {2}{U}{B}{R}     Legendary Creature — Human Scientist
 [x]  180  Ramos, Dragon Engine                           13002 decks  {6}              Legendary Artifact Creature — Dragon
-[ ]  181  Tivit, Seller of Secrets                       12979 decks  {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
+[x]  181  Tivit, Seller of Secrets                       12979 decks  {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
 [x]  182  Shroofus Sproutsire                            12929 decks  {2}{G}           Legendary Creature — Saproling
 [x]  183  Jon Irenicus, Shattered One                    12889 decks  {2}{U}{B}        Legendary Creature — Elf Wizard
 [x]  184  Wolverine, Best There Is                       12856 decks  {1}{R}{G}        Legendary Creature — Mutant Berserker Hero
