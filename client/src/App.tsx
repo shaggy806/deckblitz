@@ -3899,8 +3899,11 @@ function Table({
       const player = modePlayers?.[i] ?? null
       return player !== null ? `Choose ${playerLabel(player, game.seats)}` : <Symbols text={modeTexts[i]} />
     }
-    const optional = minModes === 0 && maxModes === 1
-    const single = minModes === 1 && maxModes === 1
+    // A "may" — one mode, yes or no. Up to one of several (an additional
+    // vote, "time" or "knowledge" or none) is one button each plus none.
+    const optional = minModes === 0 && maxModes === 1 && modeTexts.length === 1
+    const oneOrNone = minModes === 0 && maxModes === 1 && modeTexts.length > 1
+    const single = (minModes === 1 || oneOrNone) && maxModes === 1
     const toggle = (i: number) =>
       setModePicks((prev) =>
         prev.includes(i)
@@ -3915,9 +3918,11 @@ function Table({
           {game.nameOf(source)} —{' '}
           {optional
             ? <Symbols text={modeTexts[0]} />
-            : single
-              ? 'choose one'
-              : `${orNone ? 'you may choose' : 'choose'} ${minModes === maxModes ? minModes : `${minModes}–${maxModes}`}`}
+            : oneOrNone
+              ? 'choose one or none'
+              : single
+                ? 'choose one'
+                : `${orNone ? 'you may choose' : 'choose'} ${minModes === maxModes ? minModes : `${minModes}–${maxModes}`}`}
           {/* The same question once per player (myriad): which one this is. */}
           {about !== undefined ? ` — ${playerLabel(about, game.seats)}` : ''}
         </span>
@@ -3961,15 +3966,25 @@ function Table({
             )}
           </>
         ) : single ? (
-          modeTexts.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [i] })}
-            >
-              {modeLabel(i)}
-            </button>
-          ))
+          <>
+            {modeTexts.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [i] })}
+              >
+                {modeLabel(i)}
+              </button>
+            ))}
+            {oneOrNone && (
+              <button
+                type="button"
+                onClick={() => game.dispatch({ type: 'choose-modes', player: seat, modes: [] })}
+              >
+                Choose none
+              </button>
+            )}
+          </>
         ) : (
           <>
             {modeTexts.map((_, i) => (

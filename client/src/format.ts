@@ -36,6 +36,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   'priority-passed',
   'step-began',
   'mana-added',
+  // Bookkeeping for expend's "whenever you expend N" — the spend's own lines say it.
+  'mana-expended',
   'permanent-tapped',
   'permanent-untapped',
   'damage-cleared',
