@@ -15678,6 +15678,7 @@ export class Game {
       if (next?.leaveStack !== undefined) {
         // Leaving may itself ask something (Feather's rule 616.1 choice).
         const parked = this.state.suspendedResolutions.length;
+        this.announceResolved(next.leaveStack);
         this.leaveStackAfterResolving(next.leaveStack);
         this.holdResolutionOpen(parked);
       }
@@ -16091,9 +16092,8 @@ export class Game {
         }
       }
     });
-    this.emit({ type: "spell-resolved", object: id });
-
     if (this.isPermanentSpell(def)) {
+      this.emit({ type: "spell-resolved", object: id });
       // A copy of a permanent spell becomes a token as it resolves (rule
       // 608.3f) — one that wasn't "created" (the ruling), so nothing that
       // watches for tokens being created sees it.
@@ -16108,12 +16108,32 @@ export class Game {
     // resolution (rule 608.2n): after any of its steps still waiting on a
     // decision. So a spell it lets its controller cast as it resolves is cast
     // with it still on the stack (608.2g) — Baral's Expertise isn't in the
-    // graveyard for its free Regrowth to target.
+    // graveyard for its free Regrowth to target. It's announced resolved as
+    // it leaves (`announceResolved`), not while it still waits.
     if (this.state.suspendedResolutions.length > parked || this.decisionOutstanding()) {
       this.state.suspendedResolutions.splice(parked, 0, { effect: null, leaveStack: id });
       return;
     }
+    this.emit({ type: "spell-resolved", object: id });
     this.leaveStackAfterResolving(id);
+  }
+
+  /**
+   * A spell or ability whose resolution waited on a decision, done now and
+   * about to leave the stack: the `spell-resolved` / `ability-resolved` its
+   * resolution held back. Announced while it still waited, a client played
+   * its exit with the entry still on the stack, then drew it there over the
+   * next entry's resolution (a bug report, 2026-10-18). Nothing for one that
+   * has left already.
+   */
+  private announceResolved(id: ObjectId): void {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "stack") return;
+    if (object.kind === "ability") {
+      this.emit({ type: "ability-resolved", source: object.sourceObjectId ?? id, object: id });
+    } else {
+      this.emit({ type: "spell-resolved", object: id });
+    }
   }
 
   /**
@@ -16689,15 +16709,16 @@ export class Game {
       const final = chapters[object.abilityIndex ?? 0]?.at.includes(last) === true;
       this.emit({ type: "chapter-resolved", saga: source, final });
     }
-    this.emit({ type: "ability-resolved", source, object: id });
     // An ability leaves the stack as the final part of its resolution (rule
     // 608.2n), as a spell does: after any of its steps still waiting on a
     // decision. A spell its controller casts as it resolves (608.2g) sees it
-    // still there — Vantress Visions may target it.
+    // still there — Vantress Visions may target it. It's announced resolved
+    // as it leaves (`announceResolved`), not while it still waits.
     if (this.state.suspendedResolutions.length > parked || this.decisionOutstanding()) {
       this.state.suspendedResolutions.splice(parked, 0, { effect: null, leaveStack: id });
       return;
     }
+    this.emit({ type: "ability-resolved", source, object: id });
     this.removeOneAbilityCopy(id);
   }
 
