@@ -1119,6 +1119,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Incubate 5.", ctx())).toEqual({ kind: "incubate", amount: 5 });
   });
 
+  it("Phyrexia: All Will Be One's lines: toxic, For Mirrodin!, counters of any named kind", () => {
+    const mite = parseFace({ name: "Test Mite", type_line: "Creature — Phyrexian Mite", oracle_text: "Toxic 2\nThis creature enters with two oil counters on it." });
+    expect(mite.toxic).toBe(2);
+    expect(mite.static?.[0]?.replacement).toEqual({ event: "enters-battlefield", counters: { kind: "oil", amount: 2 } });
+    expect(mite.complete).toBe(true);
+    const blade = parseFace({ name: "Test Blade", type_line: "Artifact — Equipment", oracle_text: "For Mirrodin!" });
+    expect(blade.triggered?.[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "create-token", token: "Rebel Token", count: 1 },
+        { kind: "attach", target: "created", attachment: "source" },
+      ],
+    });
+    expect(parseSentence("Put an oil counter on ~.", ctx())).toEqual({ kind: "add-counter", target: "source", counter: "oil", amount: 1 });
+  });
+
   it("the owner's choice of top or bottom of their library", () => {
     expect(parseSentence("Target creature's owner puts it on their choice of the top or bottom of their library.", ctx())).toEqual({
       kind: "put-on-library",

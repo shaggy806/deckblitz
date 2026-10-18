@@ -234,6 +234,25 @@ function keywordPart(part) {
     evolve: () => ({ triggered: [evolve()] }),
     increment: () => ({ triggered: [increment()] }),
     "living weapon": () => ({ triggered: [livingWeapon()] }),
+    // For Mirrodin! (rule 702.163a): a 2/2 red Rebel, then this attaches to it
+    // (Hexplate Wallbreaker's shape).
+    "for mirrodin!": () => ({
+      triggered: [
+        {
+          trigger: { on: "enters-battlefield", who: "self" },
+          targets: [],
+          effect: {
+            kind: "sequence",
+            effects: [
+              { kind: "create-token", token: "Rebel Token", count: 1 },
+              { kind: "attach", target: "created", attachment: "source" },
+            ],
+          },
+          resolve: null,
+          text: "For Mirrodin!",
+        },
+      ],
+    }),
     exalted: () => ({
       triggered: [
         {
@@ -278,6 +297,8 @@ function keywordPart(part) {
     return { card: { morph: { keyword: m[1].toLowerCase(), cost: m[2] } } };
   }
   if ((m = new RegExp(`^disturb ${COST}$`, "i").exec(p))) return { card: { disturb: { cost: m[1] } } };
+  // Toxic N (rule 702.164a): the card's own `toxic` field.
+  if ((m = /^toxic (\d+)$/i.exec(p))) return { card: { toxic: Number(m[1]) } };
   // Vanishing N (rule 702.63a): the helper's three abilities.
   if ((m = /^vanishing (\d+)$/i.exec(p))) {
     const v = vanishing(Number(m[1]));
@@ -995,20 +1016,22 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Counters.
-  if ((m = re(`put ${N} \\+1/\\+1 counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
+  // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on (~|${TARGET}|each creature you control|each other creature you control)`).exec(s))) {
     const n = amount(m[1]);
-    if (m[2] === "~") return { kind: "add-counter", target: "source", counter: "+1/+1", amount: n };
-    if (/^each/.test(m[2])) {
-      if (/other/.test(m[2]) && !otherMeansSource(ctx)) return null;
+    const counter = m[2].toLowerCase();
+    if (m[3] === "~") return { kind: "add-counter", target: "source", counter, amount: n };
+    if (/^each/.test(m[3])) {
+      if (/other/.test(m[3]) && !otherMeansSource(ctx)) return null;
       return {
         kind: "add-counter-all",
         filter: { type: "creature", controlledBy: "you" },
-        counter: "+1/+1",
+        counter,
         amount: n,
-        ...(/other/.test(m[2]) ? { exceptSource: true } : {}),
+        ...(/other/.test(m[3]) ? { exceptSource: true } : {}),
       };
     }
-    return { kind: "add-counter", target: slot(m[2]), counter: "+1/+1", amount: n };
+    return { kind: "add-counter", target: slot(m[3]), counter, amount: n };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
   // Time travel (rule 701.56a).
@@ -1405,8 +1428,8 @@ export function parseSentence(sentence, ctx) {
       const one = (keyword) => ({ kind: "grant-keyword", target: it, keyword, duration: "end-of-turn" });
       return kws.length === 1 ? one(kws[0]) : { kind: "sequence", effects: kws.map(one) };
     }
-    if ((m = re(`put ${N} \\+1/\\+1 counters? on it`).exec(s))) {
-      return { kind: "add-counter", target: it, counter: "+1/+1", amount: amount(m[1]) };
+    if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on it`).exec(s))) {
+      return { kind: "add-counter", target: it, counter: m[2].toLowerCase(), amount: amount(m[1]) };
     }
     if (re("untap it").test(s)) return { kind: "untap", target: it };
     if (re("it becomes saddled until end of turn").test(s)) return { kind: "become-saddled", target: it };
@@ -2285,6 +2308,15 @@ function parseStatic(line, text) {
   // Rule 722.3a — `entersPrepared()`.
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
+  }
+  // "~ enters with two oil counters on it" (rule 614.1c), any named kind.
+  {
+    const w = /^~ enters with (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on it\.$/.exec(line);
+    if (w !== null) {
+      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+      const amount = words[w[1]] ?? Number(w[1]);
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[2], amount } }, text };
+    }
   }
   if (line === "~ enters tapped.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", tapped: true }, text };

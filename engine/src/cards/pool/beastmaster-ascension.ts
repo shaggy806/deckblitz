@@ -10,7 +10,7 @@ export default defineCard({
     "As long as this enchantment has seven or more quest counters on it, creatures you control get +5/+5.",
   triggered: [
     {
-      trigger: { on: "attacks", who: "you-control" },
+      trigger: { on: "attacks", who: "you-control", filter: { type: "creature" } },
       targets: [],
       effect: {
         kind: "may",
