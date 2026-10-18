@@ -112,7 +112,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   answers from the Oracle snapshot instead, where Scryfall is unreachable (a cloud session).
 - `test`, `typecheck`, `build`. The fuzzer and scripts run `dist/`, so **build first**.
 - `play:random -- --games N [--players 4] [--seed S] [--with "Card"]`: the fuzzer.
-- `bot:bench`, `bot:scenarios`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
+- `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
   `bot:replay`: bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
 - `bot:captures`: the positions captured from live games (`captures/`), open and resolved, with
   v2's answer today; `-- resolve <name> --note "…"` moves a fixed one to `captures/resolved/`,
