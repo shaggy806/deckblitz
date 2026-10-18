@@ -22,6 +22,12 @@ export function decisionGhostOf(view: PlayerView, answered = false): ObjectId | 
   const source = view.decisionSource
   if (!source) return null
   if (view.zones.stack.includes(source.object)) return null
+  // A permanent's ability resolving and asking: the ability itself is on top
+  // of the stack (it leaves only once it's done, rule 608.2n) and is drawn
+  // as that permanent's card, so another copy of the card above it would be
+  // a card that isn't on the stack sitting on top of it.
+  const top = view.zones.stack[view.zones.stack.length - 1]
+  if (top !== undefined && view.objects[top]?.sourceObjectId === source.object) return null
   if (!view.objects[source.object]) return null
   return source.object
 }
