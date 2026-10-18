@@ -79,11 +79,6 @@ if (capture) console.log(`capturing bot decisions to ${captureDir}, the last ${k
 // any card anywhere — a developer's server only, never the public site.
 const builder = process.argv.includes("--builder");
 if (builder) console.log("scenario builder on");
-// `--long-bot-thinking`: a room's host may let its bots think for up to a
-// second a decision (`set-bot-think-long`). A developer's server only: on a
-// shared one a bot's thinking holds up every room on its thread.
-const longBotThinking = process.argv.includes("--long-bot-thinking");
-if (longBotThinking) console.log("long bot thinking allowed");
 
 // An operator endpoint for `curl` over SSH, bound to loopback on a port the
 // Cloudflare tunnel does not forward. It carries room codes, which are join
@@ -120,7 +115,6 @@ const admission: AdmissionLimits = {
 
 const settings: ShardSettings = {
   builder,
-  ...(longBotThinking ? { longBotThinking: true } : {}),
   capture: capture ? { dir: captureDir, ...(keep !== undefined ? { keep } : {}) } : null,
   reapIdleMs: IDLE_ROOM_MS,
   reapIntervalMs: REAP_INTERVAL_MS,

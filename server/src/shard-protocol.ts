@@ -20,9 +20,6 @@ export interface ShardConfig {
   readonly index: ShardIndex;
   /** The scenario builder's messages (`--builder`). */
   readonly builder: boolean;
-  /** A room's bots may think longer (`--long-bot-thinking`,
-   * `RoomServerOptions.longBotThinking`): a developer's server only. */
-  readonly longBotThinking?: boolean;
   /** Keep bots' decisions for saving (`--capture`): where, and how many per
    * room (`CAPTURE_KEEP` if absent). Each shard builds its own registry. */
   readonly capture: { readonly dir: string; readonly keep?: number } | null;

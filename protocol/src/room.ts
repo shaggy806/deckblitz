@@ -315,15 +315,6 @@ export type ClientMessage =
       readonly speed: BotSpeed;
     }
   | {
-      /** Lets this room's bots think for up to a second a decision, not
-       * 300 ms (a trial setting, 2026-10-14). Host only, before or during
-       * the game; refused where the host doesn't allow it
-       * (`botThinkLongAllowed`). */
-      readonly type: "set-bot-think-long";
-      readonly roomId: string;
-      readonly long: boolean;
-    }
-  | {
       /** Changes some of the waiting room's `RoomSettings`; what's left out
        * stays as it was. Host only, and only before the game starts. */
       readonly type: "set-room-settings";
@@ -559,14 +550,6 @@ export type ServerMessage =
        * hasn't claimed a seat, which no `SeatStatus.isHost` can say. */
       readonly isHost: boolean;
       readonly botSpeed: BotSpeed;
-      /** The room's bots think for up to a second a decision
-       * (`set-bot-think-long`). */
-      readonly botThinkLong?: true;
-      /** This host lets a room's bots think longer: a game played in the
-       * browser, or a developer's server started with
-       * `--long-bot-thinking`. Never the public server, where a bot's
-       * thinking holds up every room on its thread. */
-      readonly botThinkLongAllowed?: true;
       /** The waiting room's game settings. Absent once the game exists. */
       readonly settings?: RoomSettings;
       /** The seat *this* connection holds, if any — how a `take-seat` learns
@@ -625,14 +608,6 @@ export type ServerMessage =
       /** Whether *this* connection holds the host role. */
       readonly isHost: boolean;
       readonly botSpeed: BotSpeed;
-      /** The room's bots think for up to a second a decision
-       * (`set-bot-think-long`). */
-      readonly botThinkLong?: true;
-      /** This host lets a room's bots think longer: a game played in the
-       * browser, or a developer's server started with
-       * `--long-bot-thinking`. Never the public server, where a bot's
-       * thinking holds up every room on its thread. */
-      readonly botThinkLongAllowed?: true;
       /** The host has paused the bots (`set-bots-paused`): shown to every
        * seat, so nobody wonders why the table stopped. */
       readonly botsPaused: boolean;

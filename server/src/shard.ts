@@ -124,7 +124,6 @@ export function createShard(
     },
     {
       builder: config.builder,
-      ...(config.longBotThinking === true ? { longBotThinking: true } : {}),
       ...(config.reapIdleMs !== undefined ? { reapIdleMs: config.reapIdleMs } : {}),
       ...(config.reapIntervalMs !== undefined ? { reapIntervalMs: config.reapIntervalMs } : {}),
     },

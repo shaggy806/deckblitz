@@ -1151,11 +1151,6 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                 ? { speed: game.botSpeed, onChange: game.setBotSpeed }
                 : undefined
             }
-            botThinkLong={
-              game.isHost && game.botThinkLongAllowed && game.seats.some((s) => s.isBot)
-                ? { on: game.botThinkLong, onChange: game.setBotThinkLong }
-                : undefined
-            }
           />
           <button type="button" data-tour="game-history" onClick={() => setShowHistory(true)}>
             History

@@ -67,7 +67,7 @@ if (SHARDS === 0) {
   const manager = new RoomManager({ capture: captureLogs({ dir: DEFAULT_CAPTURE_DIR, registry }) });
   const rooms = setup({ manager, registry, index: 0, count: 1 });
   // A developer's server: the scenario builder is on too.
-  attachTransport(wss, new InProcessRoomHost(manager, { builder: true, longBotThinking: true }));
+  attachTransport(wss, new InProcessRoomHost(manager, { builder: true }));
   command = async (cmd) => {
     try {
       const out = rooms.control(cmd);
@@ -82,7 +82,7 @@ if (SHARDS === 0) {
   const host = new WorkerRoomHost({
     shards: SHARDS,
     // `capture.dir` empty: `capture.ts`'s `DEFAULT_CAPTURE_DIR`.
-    config: { builder: true, longBotThinking: true, capture: { dir: "" }, loadReportMs: 1_000, setup: SETUP.href },
+    config: { builder: true, capture: { dir: "" }, loadReportMs: 1_000, setup: SETUP.href },
     spawn: (config) => workerChannel(config),
   });
   await host.start();

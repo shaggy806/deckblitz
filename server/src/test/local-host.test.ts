@@ -8,8 +8,6 @@ import { describe, expect, it } from "vitest";
 import type { ServerMessage } from "protocol";
 import { ALICE } from "../decks.js";
 import { LocalRoomHost } from "../local-host.js";
-import { RoomManager } from "../room-manager.js";
-import { RoomService } from "../room-service.js";
 
 /** A page's worth of messages: what it was sent, and a way to wait for one. */
 function page() {
@@ -92,46 +90,6 @@ describe("a local room host", () => {
   it("restores nothing it can't load, and skips a code already taken", () => {
     const { host } = page();
     expect(host.restore([{ id: "BROKE", state: {} } as never])).toEqual([]);
-  });
-
-  it("lets the host's bots think longer — and back — a browser's game holding up no one else", () => {
-    const { host, last } = page();
-    host.message({ type: "create-room", players: 2, hostToken: "h" });
-    const roomId = last("room-created")!.roomId;
-    host.message({ type: "join-room", roomId, hostToken: "h" });
-    expect(last("room-joined")?.botThinkLongAllowed).toBe(true);
-    expect(last("room-joined")?.botThinkLong).toBeUndefined();
-    // Set in the waiting room, carried into the game.
-    host.message({ type: "set-bot-think-long", roomId, long: true });
-    expect(last("room-joined")?.botThinkLong).toBe(true);
-    host.message({ type: "claim-seat", roomId, seat: "alice" as never, clientToken: "me", ready: true });
-    host.message({ type: "add-bot", roomId, seat: "bob" as never });
-    host.message({ type: "start-game", roomId });
-    expect(last("state")).toMatchObject({ botThinkLong: true, botThinkLongAllowed: true });
-    const budget = () => {
-      const room = host.service.manager.get(roomId) as unknown as { bots: Map<string, unknown> };
-      const bot = room.bots.get("bob") as { timeBudgetMs: number; maxSimulations: number };
-      return { ms: bot.timeBudgetMs, sims: bot.maxSimulations };
-    };
-    expect(budget()).toEqual({ ms: 1000, sims: 600 });
-    host.message({ type: "set-bot-think-long", roomId, long: false });
-    expect(last("state")?.botThinkLong).toBeUndefined();
-    expect(budget()).toEqual({ ms: 1000, sims: 200 });
-  });
-
-  it("is refused on a server that doesn't allow it, which doesn't offer it", () => {
-    const received: ServerMessage[] = [];
-    const service = new RoomService(new RoomManager({ pacing: "immediate" }), {
-      send: (_conn, message) => received.push(structuredClone(message)),
-    });
-    const conn = 1;
-    service.handle(conn, { type: "create-room", players: 2, hostToken: "h" });
-    const roomId = (received.find((m) => m.type === "room-created") as { roomId: string }).roomId;
-    service.handle(conn, { type: "join-room", roomId, hostToken: "h" });
-    const joined = received.filter((m) => m.type === "room-joined").at(-1) as { botThinkLongAllowed?: true };
-    expect(joined.botThinkLongAllowed).toBeUndefined();
-    service.handle(conn, { type: "set-bot-think-long", roomId, long: true });
-    expect(received.at(-1)).toMatchObject({ type: "error", message: expect.stringMatching(/think longer/) });
   });
 
   it("opens a lesson", () => {

@@ -11,12 +11,11 @@ the game in the browser. `dev-down` stops them.
 
 ## 1. Which server
 
-- **The real server** (default): `node dist/index.js --capture --builder --long-bot-thinking` —
+- **The real server** (default): `node dist/index.js --capture --builder` —
   the same server the site runs, plus capture, so the game's **Capture** button
   can save a bot's blunder as a training scenario (`server/src/capture.ts`),
-  and the scenario builder (the landing page's dev-only "Scenario builder"),
-  and the host's "Think longer" bot setting in Settings. dev-rooms has all
-  three on too.
+  and the scenario builder (the landing page's dev-only "Scenario builder").
+  dev-rooms has both on too.
 - **dev-rooms**, when the user wants a prepared board ("dev rooms", "test
   board", a room code like `FOURP` or `HORDE`, or checking a client change
   against a known position): `node scripts/dev-rooms.mjs` — the same server
@@ -64,7 +63,7 @@ be read later. When the limit does stop one, its shell goes but the `node`
 underneath can stay, holding the port — `dev-down`'s port sweep clears it.
 
 ```bash
-cd "$(git rev-parse --show-toplevel)/server" && node dist/index.js --capture --builder --long-bot-thinking > "$TEMP/mtg-server.log" 2>&1
+cd "$(git rev-parse --show-toplevel)/server" && node dist/index.js --capture --builder > "$TEMP/mtg-server.log" 2>&1
 ```
 (or, for dev-rooms: `... && node scripts/dev-rooms.mjs > "$TEMP/mtg-server.log" 2>&1`)
 

@@ -47,15 +47,10 @@ const ENTRANCE_LABEL: Record<CastEntrance, string> = {
  */
 export function MotionControl({
   botSpeed,
-  botThinkLong,
   place = 'strip',
 }: {
   /** The room's bot speed, when this viewer may set it. */
   readonly botSpeed?: { readonly speed: BotSpeed; readonly onChange: (speed: BotSpeed) => void }
-  /** Whether the room's bots think for up to a second a decision, when this
-   * viewer may set it (the host, where the room allows it — a trial setting,
-   * 2026-10-14). */
-  readonly botThinkLong?: { readonly on: boolean; readonly onChange: (long: boolean) => void }
   /** The game's top strip (a text button, the panel below it), or a corner
    * toolbar out of a game (a cog, the panel above it). */
   readonly place?: 'strip' | 'corner'
@@ -167,16 +162,6 @@ export function MotionControl({
                   </button>
                 ))}
               </div>
-              {botThinkLong ? (
-                <label className="motion-row">
-                  <input
-                    type="checkbox"
-                    checked={botThinkLong.on}
-                    onChange={(e) => botThinkLong.onChange(e.target.checked)}
-                  />
-                  Think longer — up to 1 s a decision
-                </label>
-              ) : null}
             </>
           ) : null}
           <div className="motion-heading">Animations</div>
