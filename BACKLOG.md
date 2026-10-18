@@ -221,7 +221,10 @@ Shiko or the other spell, and haste enablers in the crackback).
   reanimations included — while passing 168 and 164 of the 178 hand-built gate scenarios v2
   passes. Left: the three "sequence" benchmarks (several moves in our own turn, which only
   `--rollout acting` solves), the ten-odd gate scenarios each horizon fails, and whether it plays
-  better at all: a first four-player bench ran past 15 minutes a game.
+  better at all. First bench (8 four-player games, `next-turn` against three shipped v2s): 1-6 with
+  one 30-minute timeout, 14% [3, 51] — no signal — at 875 ms a decision on average and 208 s at
+  worst, so it needs to be made cheaper (small boards only, or only where holding mana up is in
+  question) before a bench big enough to say anything.
 - **More training scenarios.** 120 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which
