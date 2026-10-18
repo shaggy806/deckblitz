@@ -175,6 +175,7 @@ import _poolHystericalBlindness from "../pool/hysterical-blindness.js";
 import _poolIdyllicBeachfront from "../pool/idyllic-beachfront.js";
 import _poolIfnirDeadlands from "../pool/ifnir-deadlands.js";
 import _poolImmersturmPredator from "../pool/immersturm-predator.js";
+import _poolIncisorGlider from "../pool/incisor-glider.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
@@ -384,7 +385,9 @@ import _poolSymbioteSpiderMan from "../pool/symbiote-spider-man.js";
 import _poolSyphonSliver from "../pool/syphon-sliver.js";
 import _poolSyrGingerTheMealEnder from "../pool/syr-ginger-the-meal-ender.js";
 import _poolTabaxiToucaneers from "../pool/tabaxi-toucaneers.js";
+import _poolTabletOfCompleation from "../pool/tablet-of-compleation.js";
 import _poolTalismanOfDominance from "../pool/talisman-of-dominance.js";
+import _poolTamiyosImmobilizer from "../pool/tamiyos-immobilizer.js";
 import _poolTatteredHaunter from "../pool/tattered-haunter.js";
 import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
@@ -485,6 +488,7 @@ import _tokensPlantTokenDefender from "../tokens/plant-token-defender.js";
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
+import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
 import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
 
 const shard: CardShard = {
@@ -661,6 +665,7 @@ const shard: CardShard = {
     _poolIdyllicBeachfront,
     _poolIfnirDeadlands,
     _poolImmersturmPredator,
+    _poolIncisorGlider,
     _poolInfantryVeteran,
     _poolInfectedDefector,
     _poolInfestationSage,
@@ -870,7 +875,9 @@ const shard: CardShard = {
     _poolSyphonSliver,
     _poolSyrGingerTheMealEnder,
     _poolTabaxiToucaneers,
+    _poolTabletOfCompleation,
     _poolTalismanOfDominance,
+    _poolTamiyosImmobilizer,
     _poolTatteredHaunter,
     _poolTchallaTheBlackPanther,
     _poolTempestHarvester,
@@ -973,6 +980,7 @@ const shard: CardShard = {
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
     _tokensWraithToken,
+    _tokensXXGolemTokenHaste,
     _tokensZombieBerserkerToken,
   ],
 };

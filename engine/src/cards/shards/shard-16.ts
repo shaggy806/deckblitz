@@ -40,6 +40,7 @@ import _poolBelladonnaTook from "../pool/belladonna-took.js";
 import _poolBishopsSoldier from "../pool/bishops-soldier.js";
 import _poolBlackWidowNatashaRomanoff from "../pool/black-widow-natasha-romanoff.js";
 import _poolBladeOfSelves from "../pool/blade-of-selves.js";
+import _poolBladedAmbassador from "../pool/bladed-ambassador.js";
 import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
@@ -187,6 +188,7 @@ import _poolHondenOfCleansingFire from "../pool/honden-of-cleansing-fire.js";
 import _poolHoverstonePilgrim from "../pool/hoverstone-pilgrim.js";
 import _poolHulkingCyclops from "../pool/hulking-cyclops.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
+import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
@@ -245,6 +247,7 @@ import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
+import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
@@ -528,6 +531,7 @@ const shard: CardShard = {
     _poolBishopsSoldier,
     _poolBlackWidowNatashaRomanoff,
     _poolBladeOfSelves,
+    _poolBladedAmbassador,
     _poolBlessedGhoul,
     _poolBlindPhantasm,
     _poolBloodfellCaves,
@@ -675,6 +679,7 @@ const shard: CardShard = {
     _poolHoverstonePilgrim,
     _poolHulkingCyclops,
     _poolHydroChanneler,
+    _poolIchorspitBasilisk,
     _poolIkraShidiqiTheUsurper,
     _poolImmolatingSouleater,
     _poolImperiousInkmage,
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
     _poolMirkwoodNurturer,
+    _poolMirranBardiche,
     _poolMirrorpool,
     _poolMorgulKnifeWound,
     _poolMournersSurprise,

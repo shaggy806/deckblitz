@@ -18,6 +18,7 @@ import _poolAncientSpider from "../pool/ancient-spider.js";
 import _poolAncientStoneIdol from "../pool/ancient-stone-idol.js";
 import _poolAngelheartProtector from "../pool/angelheart-protector.js";
 import _poolAngelicGift from "../pool/angelic-gift.js";
+import _poolAnnexSentry from "../pool/annex-sentry.js";
 import _poolApocalypseRunner from "../pool/apocalypse-runner.js";
 import _poolArcaneSanctum from "../pool/arcane-sanctum.js";
 import _poolArchiveArbiter from "../pool/archive-arbiter.js";
@@ -199,12 +200,14 @@ import _poolHuatlisFinalStrike from "../pool/huatlis-final-strike.js";
 import _poolHydraAssaultRobot from "../pool/hydra-assault-robot.js";
 import _poolIAmIronMan from "../pool/i-am-iron-man.js";
 import _poolIcebergTitan from "../pool/iceberg-titan.js";
+import _poolIchorSynthesizer from "../pool/ichor-synthesizer.js";
 import _poolIdentityEcho from "../pool/identity-echo.js";
 import _poolImperialOutrider from "../pool/imperial-outrider.js";
 import _poolImperviousGreatwurm from "../pool/impervious-greatwurm.js";
 import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js";
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
+import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
@@ -237,6 +240,7 @@ import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
 import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
+import _poolMalcatorPurityOverseer from "../pool/malcator-purity-overseer.js";
 import _poolMalcatorsWatcher from "../pool/malcators-watcher.js";
 import _poolManakin from "../pool/manakin.js";
 import _poolMartyrOfDusk from "../pool/martyr-of-dusk.js";
@@ -360,6 +364,7 @@ import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.j
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
+import _poolSinewDancer from "../pool/sinew-dancer.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
@@ -506,6 +511,7 @@ const shard: CardShard = {
     _poolAncientStoneIdol,
     _poolAngelheartProtector,
     _poolAngelicGift,
+    _poolAnnexSentry,
     _poolApocalypseRunner,
     _poolArcaneSanctum,
     _poolArchiveArbiter,
@@ -687,12 +693,14 @@ const shard: CardShard = {
     _poolHydraAssaultRobot,
     _poolIAmIronMan,
     _poolIcebergTitan,
+    _poolIchorSynthesizer,
     _poolIdentityEcho,
     _poolImperialOutrider,
     _poolImperviousGreatwurm,
     _poolImpostorOfTheSixthPride,
     _poolInGarruksWake,
     _poolIncreasingVengeance,
+    _poolInfestedFleshcutter,
     _poolInterceptorShadowsHound,
     _poolIronLance,
     _poolIronSuitcase,
@@ -725,6 +733,7 @@ const shard: CardShard = {
     _poolLostInSpace,
     _poolMagnify,
     _poolMahaItsFeathersNight,
+    _poolMalcatorPurityOverseer,
     _poolMalcatorsWatcher,
     _poolManakin,
     _poolMartyrOfDusk,
@@ -848,6 +857,7 @@ const shard: CardShard = {
     _poolShreddersTechnique,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
+    _poolSinewDancer,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
     _poolSlickSequence,

@@ -262,6 +262,7 @@ import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
@@ -306,6 +307,7 @@ import _poolRodolfDuskbringer from "../pool/rodolf-duskbringer.js";
 import _poolRollickOfAbandon from "../pool/rollick-of-abandon.js";
 import _poolRootOut from "../pool/root-out.js";
 import _poolRustMonster from "../pool/rust-monster.js";
+import _poolRuthlessPredation from "../pool/ruthless-predation.js";
 import _poolSabertoothWyvern from "../pool/sabertooth-wyvern.js";
 import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
@@ -713,6 +715,7 @@ const shard: CardShard = {
     _poolOrderOfSacredDusk,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolPaladinOfPredation,
     _poolPathOfTheEnigma,
     _poolPatronOfTheVein,
     _poolPeregrineDrake,
@@ -757,6 +760,7 @@ const shard: CardShard = {
     _poolRollickOfAbandon,
     _poolRootOut,
     _poolRustMonster,
+    _poolRuthlessPredation,
     _poolSabertoothWyvern,
     _poolSabretoothTiger,
     _poolSarkhanDragonAscendant,

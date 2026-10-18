@@ -15,6 +15,7 @@ import _poolAkromasMemorial from "../pool/akromas-memorial.js";
 import _poolAkromasVengeance from "../pool/akromas-vengeance.js";
 import _poolAmbassadorLaquatus from "../pool/ambassador-laquatus.js";
 import _poolAmblingStormshell from "../pool/ambling-stormshell.js";
+import _poolAmbulatoryEdifice from "../pool/ambulatory-edifice.js";
 import _poolAmuletOfKroog from "../pool/amulet-of-kroog.js";
 import _poolAnaDisciple from "../pool/ana-disciple.js";
 import _poolAncestralMask from "../pool/ancestral-mask.js";
@@ -137,6 +138,7 @@ import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
 import _poolFlubsTheFool from "../pool/flubs-the-fool.js";
 import _poolFollowTheLumarets from "../pool/follow-the-lumarets.js";
+import _poolFontOfProgress from "../pool/font-of-progress.js";
 import _poolFriendlyTeddy from "../pool/friendly-teddy.js";
 import _poolFrilledSparkshooter from "../pool/frilled-sparkshooter.js";
 import _poolFusionElemental from "../pool/fusion-elemental.js";
@@ -328,6 +330,7 @@ import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
 import _poolSavedByTheShell from "../pool/saved-by-the-shell.js";
+import _poolSawbladeScamp from "../pool/sawblade-scamp.js";
 import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
@@ -478,6 +481,7 @@ const shard: CardShard = {
     _poolAkromasVengeance,
     _poolAmbassadorLaquatus,
     _poolAmblingStormshell,
+    _poolAmbulatoryEdifice,
     _poolAmuletOfKroog,
     _poolAnaDisciple,
     _poolAncestralMask,
@@ -600,6 +604,7 @@ const shard: CardShard = {
     _poolFleshpulperGiant,
     _poolFlubsTheFool,
     _poolFollowTheLumarets,
+    _poolFontOfProgress,
     _poolFriendlyTeddy,
     _poolFrilledSparkshooter,
     _poolFusionElemental,
@@ -791,6 +796,7 @@ const shard: CardShard = {
     _poolSanctumWeaver,
     _poolSandstormCrasher,
     _poolSavedByTheShell,
+    _poolSawbladeScamp,
     _poolScalebanesElite,
     _poolScaledWurm,
     _poolScarletSpiderKaine,

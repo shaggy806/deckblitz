@@ -403,6 +403,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "X/X Demon Token (Flying)",
   "X/X Dinosaur Token (Trample)",
   "X/X Elemental Token (Flying, Haste)",
+  "X/X Golem Token (Haste)",
   "Young Hero Role Token",
   "Zabu",
   "Zombie Berserker Token",

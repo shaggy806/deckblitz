@@ -162,6 +162,7 @@ import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
+import _poolGitaxianAnatomist from "../pool/gitaxian-anatomist.js";
 import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
@@ -221,6 +222,7 @@ import _poolKapow from "../pool/kapow.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
+import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
@@ -456,8 +458,10 @@ import _poolVisionSkeins from "../pool/vision-skeins.js";
 import _poolVithianRenegades from "../pool/vithian-renegades.js";
 import _poolVitosInquisitor from "../pool/vitos-inquisitor.js";
 import _poolVividMarsh from "../pool/vivid-marsh.js";
+import _poolVivisectionEvangelist from "../pool/vivisection-evangelist.js";
 import _poolVolatileWanderglyph from "../pool/volatile-wanderglyph.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
+import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWaylayingPirates from "../pool/waylaying-pirates.js";
 import _poolWellWornSpatula from "../pool/well-worn-spatula.js";
@@ -658,6 +662,7 @@ const shard: CardShard = {
     _poolGhoulcallersBell,
     _poolGildedScuttler,
     _poolGiltgroveStalker,
+    _poolGitaxianAnatomist,
     _poolGitaxianSpellstalker,
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
     _poolKellanJoinsUp,
+    _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
@@ -952,8 +958,10 @@ const shard: CardShard = {
     _poolVithianRenegades,
     _poolVitosInquisitor,
     _poolVividMarsh,
+    _poolVivisectionEvangelist,
     _poolVolatileWanderglyph,
     _poolVronosMaskedInquisitor,
+    _poolVulshokSplitter,
     _poolWatchwolf,
     _poolWaylayingPirates,
     _poolWellWornSpatula,

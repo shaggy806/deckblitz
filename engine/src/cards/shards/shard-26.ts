@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolAbradedBluffs from "../pool/abraded-bluffs.js";
 import _poolAbzanBattlePriest from "../pool/abzan-battle-priest.js";
 import _poolAccessDenied from "../pool/access-denied.js";
+import _poolAdaptiveSporesinger from "../pool/adaptive-sporesinger.js";
 import _poolAdrianaCaptainOfTheGuard from "../pool/adriana-captain-of-the-guard.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
@@ -143,6 +144,7 @@ import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
+import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
 import _poolGlimpseTheUnthinkable from "../pool/glimpse-the-unthinkable.js";
 import _poolGoblinBoarders from "../pool/goblin-boarders.js";
@@ -249,6 +251,7 @@ import _poolNephaliaMoondrakes from "../pool/nephalia-moondrakes.js";
 import _poolNetherTraitor from "../pool/nether-traitor.js";
 import _poolNeurokHoversail from "../pool/neurok-hoversail.js";
 import _poolNeutralize from "../pool/neutralize.js";
+import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
 import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
 import _poolNobleTemplar from "../pool/noble-templar.js";
@@ -327,6 +330,7 @@ import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
+import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
 import _poolShuriWakandanInventor from "../pool/shuri-wakandan-inventor.js";
 import _poolSidequestPlayBlitzball from "../pool/sidequest-play-blitzball.js";
 import _poolSilverErne from "../pool/silver-erne.js";
@@ -457,6 +461,7 @@ const shard: CardShard = {
     _poolAbradedBluffs,
     _poolAbzanBattlePriest,
     _poolAccessDenied,
+    _poolAdaptiveSporesinger,
     _poolAdrianaCaptainOfTheGuard,
     _poolAegisOfTheHeavens,
     _poolAetherSpellbomb,
@@ -594,6 +599,7 @@ const shard: CardShard = {
     _poolGetThePoint,
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
+    _poolGitaxianRaptor,
     _poolGleefulArsonist,
     _poolGlimpseTheUnthinkable,
     _poolGoblinBoarders,
@@ -700,6 +706,7 @@ const shard: CardShard = {
     _poolNetherTraitor,
     _poolNeurokHoversail,
     _poolNeutralize,
+    _poolNimraiserPaladin,
     _poolNirkanaRevenant,
     _poolNoAdmittance,
     _poolNobleTemplar,
@@ -778,6 +785,7 @@ const shard: CardShard = {
     _poolShepherdOfTheLost,
     _poolShipwreckSentry,
     _poolShireiShizosCaretaker,
+    _poolShrapnelSlinger,
     _poolShuriWakandanInventor,
     _poolSidequestPlayBlitzball,
     _poolSilverErne,

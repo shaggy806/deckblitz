@@ -65,6 +65,7 @@ import _poolCavalryDrillmaster from "../pool/cavalry-drillmaster.js";
 import _poolCephalidPathmage from "../pool/cephalid-pathmage.js";
 import _poolChalkOutline from "../pool/chalk-outline.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
+import _poolCharforger from "../pool/charforger.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
@@ -364,6 +365,7 @@ import _poolSpidersManHeroicHorde from "../pool/spiders-man-heroic-horde.js";
 import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
+import _poolStingingHivemaster from "../pool/stinging-hivemaster.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
 import _poolStolenGoodies from "../pool/stolen-goodies.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
@@ -516,6 +518,7 @@ const shard: CardShard = {
     _poolCephalidPathmage,
     _poolChalkOutline,
     _poolChannelTheSuns,
+    _poolCharforger,
     _poolChiefOfTheScale,
     _poolChocoboRacetrack,
     _poolChromeDome,
@@ -815,6 +818,7 @@ const shard: CardShard = {
     _poolSpiteflameWitch,
     _poolSpitefulHexmage,
     _poolSpitefulMotives,
+    _poolStingingHivemaster,
     _poolStitchTogether,
     _poolStolenGoodies,
     _poolStormShakerOfSkies,

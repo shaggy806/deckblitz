@@ -25,6 +25,7 @@ import _poolArkOfBlight from "../pool/ark-of-blight.js";
 import _poolArtifactMutation from "../pool/artifact-mutation.js";
 import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
+import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
 import _poolAugerSpree from "../pool/auger-spree.js";
 import _poolAvenFleetwing from "../pool/aven-fleetwing.js";
 import _poolBaronAirshipKingdom from "../pool/baron-airship-kingdom.js";
@@ -122,6 +123,7 @@ import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
 import _poolExperimentalAugury from "../pool/experimental-augury.js";
 import _poolExquisiteBlood from "../pool/exquisite-blood.js";
+import _poolEyeOfMalcator from "../pool/eye-of-malcator.js";
 import _poolFaerieDreamthief from "../pool/faerie-dreamthief.js";
 import _poolFailedInspection from "../pool/failed-inspection.js";
 import _poolFallenAngel from "../pool/fallen-angel.js";
@@ -220,6 +222,7 @@ import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMassManipulation from "../pool/mass-manipulation.js";
 import _poolMazirekKraulDeathPriest from "../pool/mazirek-kraul-death-priest.js";
+import _poolMeldwebStrider from "../pool/meldweb-strider.js";
 import _poolMidnightMayhem from "../pool/midnight-mayhem.js";
 import _poolMindscourDragon from "../pool/mindscour-dragon.js";
 import _poolMinersBane from "../pool/miners-bane.js";
@@ -271,6 +274,7 @@ import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
 import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
+import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
 import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
@@ -421,6 +425,7 @@ import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
+import _poolUrabrasksAnointer from "../pool/urabrasks-anointer.js";
 import _poolUtvaraScalper from "../pool/utvara-scalper.js";
 import _poolValleyMightcaller from "../pool/valley-mightcaller.js";
 import _poolVectorAsp from "../pool/vector-asp.js";
@@ -496,6 +501,7 @@ const shard: CardShard = {
     _poolArtifactMutation,
     _poolAshenmoorGouger,
     _poolAtlanteanSkirmisher,
+    _poolAtmosphereSurgeon,
     _poolAugerSpree,
     _poolAvenFleetwing,
     _poolBaronAirshipKingdom,
@@ -593,6 +599,7 @@ const shard: CardShard = {
     _poolExorcist,
     _poolExperimentalAugury,
     _poolExquisiteBlood,
+    _poolEyeOfMalcator,
     _poolFaerieDreamthief,
     _poolFailedInspection,
     _poolFallenAngel,
@@ -691,6 +698,7 @@ const shard: CardShard = {
     _poolMaskOfAvacyn,
     _poolMassManipulation,
     _poolMazirekKraulDeathPriest,
+    _poolMeldwebStrider,
     _poolMidnightMayhem,
     _poolMindscourDragon,
     _poolMinersBane,
@@ -742,6 +750,7 @@ const shard: CardShard = {
     _poolPhantomInterference,
     _poolPhoenixFleetAirship,
     _poolPhyresis,
+    _poolPhyrexianAtlas,
     _poolPillarOfLight,
     _poolPillarfieldOx,
     _poolPlatedWurm,
@@ -892,6 +901,7 @@ const shard: CardShard = {
     _poolUnburden,
     _poolUncannySpeed,
     _poolUnwindingClock,
+    _poolUrabrasksAnointer,
     _poolUtvaraScalper,
     _poolValleyMightcaller,
     _poolVectorAsp,

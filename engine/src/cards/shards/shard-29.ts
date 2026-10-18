@@ -204,7 +204,9 @@ import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
+import _poolJawboneDuelist from "../pool/jawbone-duelist.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
+import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
@@ -232,12 +234,14 @@ import _poolManholeMissile from "../pool/manhole-missile.js";
 import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
+import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
+import _poolMiteOverseer from "../pool/mite-overseer.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
@@ -666,7 +670,9 @@ const shard: CardShard = {
     _poolInterdisciplinaryMascot,
     _poolInundatedArchive,
     _poolInvasionOfXerex,
+    _poolJawboneDuelist,
     _poolJirinaDauntlessGeneral,
+    _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
     _poolKazanduNectarpot,
@@ -694,12 +700,14 @@ const shard: CardShard = {
     _poolManorGate,
     _poolMantisEngine,
     _poolMechanAssembler,
+    _poolMeldwebCurator,
     _poolMemorialToGenius,
     _poolMessengersSpeed,
     _poolMishrasJuggernaut,
     _poolMistLeopard,
     _poolMisthiossFury,
     _poolMistvaultBridge,
+    _poolMiteOverseer,
     _poolMomentsPeace,
     _poolMoongloveExtractor,
     _poolMorgueTheft,

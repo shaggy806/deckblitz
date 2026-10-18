@@ -274,6 +274,7 @@ import _poolOraclesRestoration from "../pool/oracles-restoration.js";
 import _poolOrchardStrider from "../pool/orchard-strider.js";
 import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
+import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
@@ -735,6 +736,7 @@ const shard: CardShard = {
     _poolOrchardStrider,
     _poolOrnithopter,
     _poolOrthionHeroOfLavabrink,
+    _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
     _poolPelargirSurvivor,
     _poolPhylathWorldSculptor,

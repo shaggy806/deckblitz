@@ -111,6 +111,7 @@ import _poolEmmessiTome from "../pool/emmessi-tome.js";
 import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
+import _poolEscapedExperiment from "../pool/escaped-experiment.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFarewell from "../pool/farewell.js";
@@ -241,6 +242,7 @@ import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
+import _poolNecrosquito from "../pool/necrosquito.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
@@ -344,6 +346,7 @@ import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
+import _poolSylvokBattleChair from "../pool/sylvok-battle-chair.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
 import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
 import _poolTangleTumbler from "../pool/tangle-tumbler.js";
@@ -382,6 +385,7 @@ import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
+import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
 import _poolUnholyStrength from "../pool/unholy-strength.js";
 import _poolUnitedFront from "../pool/united-front.js";
@@ -392,6 +396,7 @@ import _poolValorousSteed from "../pool/valorous-steed.js";
 import _poolValorsReachTagTeam from "../pool/valors-reach-tag-team.js";
 import _poolVaporkin from "../pool/vaporkin.js";
 import _poolVedalkenBlademaster from "../pool/vedalken-blademaster.js";
+import _poolVeilOfAssimilation from "../pool/veil-of-assimilation.js";
 import _poolVengefulRegrowth from "../pool/vengeful-regrowth.js";
 import _poolVensersJournal from "../pool/vensers-journal.js";
 import _poolVernalSovereign from "../pool/vernal-sovereign.js";
@@ -537,6 +542,7 @@ const shard: CardShard = {
     _poolEmperorMihailIi,
     _poolErase,
     _poolEriettesTemptingApple,
+    _poolEscapedExperiment,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
     _poolFarewell,
@@ -667,6 +673,7 @@ const shard: CardShard = {
     _poolNagaEternal,
     _poolNashiSearcherInTheDark,
     _poolNebulaDragon,
+    _poolNecrosquito,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
     _poolNightmareShepherd,
@@ -770,6 +777,7 @@ const shard: CardShard = {
     _poolSunsetStrikemaster,
     _poolSuperSuit,
     _poolSwordOfFeastAndFamine,
+    _poolSylvokBattleChair,
     _poolSylvokReplica,
     _poolSymbioticBeast,
     _poolTangleTumbler,
@@ -808,6 +816,7 @@ const shard: CardShard = {
     _poolTurbulentFen,
     _poolTurbulentSteppe,
     _poolUmaraEntangler,
+    _poolUnctussRetrofitter,
     _poolUndeadMinotaur,
     _poolUnholyStrength,
     _poolUnitedFront,
@@ -818,6 +827,7 @@ const shard: CardShard = {
     _poolValorsReachTagTeam,
     _poolVaporkin,
     _poolVedalkenBlademaster,
+    _poolVeilOfAssimilation,
     _poolVengefulRegrowth,
     _poolVensersJournal,
     _poolVernalSovereign,

@@ -94,6 +94,7 @@ import _poolDoesMachines from "../pool/does-machines.js";
 import _poolDoomedNecromancer from "../pool/doomed-necromancer.js";
 import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
+import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
@@ -128,6 +129,7 @@ import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFromFatherToSon from "../pool/from-father-to-son.js";
 import _poolFungalPlots from "../pool/fungal-plots.js";
+import _poolFurnaceSkullbomb from "../pool/furnace-skullbomb.js";
 import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
@@ -183,6 +185,7 @@ import _poolJiangYangguNeverAlone from "../pool/jiang-yanggu-never-alone.js";
 import _poolJodahTheUnifier from "../pool/jodah-the-unifier.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
+import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
@@ -230,6 +233,7 @@ import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
+import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
@@ -575,6 +579,7 @@ const shard: CardShard = {
     _poolDoomedNecromancer,
     _poolDragonBlood,
     _poolDragonlordsServant,
+    _poolDragonwingGlider,
     _poolDreadmawsIre,
     _poolDrelnoch,
     _poolDroverGrizzly,
@@ -609,6 +614,7 @@ const shard: CardShard = {
     _poolFoulFamiliar,
     _poolFromFatherToSon,
     _poolFungalPlots,
+    _poolFurnaceSkullbomb,
     _poolFuss,
     _poolGastalRaider,
     _poolGenePollinator,
@@ -664,6 +670,7 @@ const shard: CardShard = {
     _poolJodahTheUnifier,
     _poolJyotiMoagAncient,
     _poolKalonianHydra,
+    _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKinsbaileCavalier,
@@ -711,6 +718,7 @@ const shard: CardShard = {
     _poolMichelangeloTheHeart,
     _poolMichelangeloWeirdnessTo11,
     _poolMichikosReignOfTruth,
+    _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
     _poolMirkwoodSpider,

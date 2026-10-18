@@ -152,6 +152,7 @@ import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
+import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolGadgetTechnician from "../pool/gadget-technician.js";
@@ -419,6 +420,7 @@ import _poolTrystansCommand from "../pool/trystans-command.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
 import _poolTwinbladeSlasher from "../pool/twinblade-slasher.js";
 import _poolTwoHeadedHellkite from "../pool/two-headed-hellkite.js";
+import _poolTyrranaxAtrocity from "../pool/tyrranax-atrocity.js";
 import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
@@ -618,6 +620,7 @@ const shard: CardShard = {
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
     _poolFlawlessManeuver,
+    _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
     _poolFrenziedDevils,
     _poolGadgetTechnician,
@@ -885,6 +888,7 @@ const shard: CardShard = {
     _poolTwentyToedToad,
     _poolTwinbladeSlasher,
     _poolTwoHeadedHellkite,
+    _poolTyrranaxAtrocity,
     _poolUndergrowthRecon,
     _poolUndergrowthStadium,
     _poolVampireNoble,

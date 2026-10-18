@@ -61,6 +61,7 @@ import _poolCarrionCall from "../pool/carrion-call.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
 import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
+import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
@@ -123,6 +124,7 @@ import _poolErtaiWizardAdept from "../pool/ertai-wizard-adept.js";
 import _poolEsperCharm from "../pool/esper-charm.js";
 import _poolEsperPanorama from "../pool/esper-panorama.js";
 import _poolEssenceScatter from "../pool/essence-scatter.js";
+import _poolEvolvedSpinoderm from "../pool/evolved-spinoderm.js";
 import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
@@ -136,6 +138,7 @@ import _poolFlowstoneWyvern from "../pool/flowstone-wyvern.js";
 import _poolFlusterstorm from "../pool/flusterstorm.js";
 import _poolForceOfSavagery from "../pool/force-of-savagery.js";
 import _poolForcedRetreat from "../pool/forced-retreat.js";
+import _poolForgehammerCenturion from "../pool/forgehammer-centurion.js";
 import _poolForgottenSentinel from "../pool/forgotten-sentinel.js";
 import _poolFrenziedTrapbreaker from "../pool/frenzied-trapbreaker.js";
 import _poolFriendlyRivalry from "../pool/friendly-rivalry.js";
@@ -251,6 +254,7 @@ import _poolMoonlitWake from "../pool/moonlit-wake.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
 import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
+import _poolMyrCustodian from "../pool/myr-custodian.js";
 import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNegate from "../pool/negate.js";
@@ -300,6 +304,7 @@ import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
 import _poolRetreatToKazandu from "../pool/retreat-to-kazandu.js";
 import _poolRhinoBarrelingBrute from "../pool/rhino-barreling-brute.js";
+import _poolRibskiff from "../pool/ribskiff.js";
 import _poolRipclawWrangler from "../pool/ripclaw-wrangler.js";
 import _poolRiseOfTheDeathbringer from "../pool/rise-of-the-deathbringer.js";
 import _poolRishadanAirship from "../pool/rishadan-airship.js";
@@ -530,6 +535,7 @@ const shard: CardShard = {
     _poolCavalierOfNight,
     _poolCelebrityFencer,
     _poolCentaurSafeguard,
+    _poolCephalopodSentry,
     _poolChameleonMasterOfDisguise,
     _poolChantOfTheSkifsang,
     _poolChromeCat,
@@ -592,6 +598,7 @@ const shard: CardShard = {
     _poolEsperCharm,
     _poolEsperPanorama,
     _poolEssenceScatter,
+    _poolEvolvedSpinoderm,
     _poolExpansionExplosion,
     _poolExpedite,
     _poolExtremisElite,
@@ -605,6 +612,7 @@ const shard: CardShard = {
     _poolFlusterstorm,
     _poolForceOfSavagery,
     _poolForcedRetreat,
+    _poolForgehammerCenturion,
     _poolForgottenSentinel,
     _poolFrenziedTrapbreaker,
     _poolFriendlyRivalry,
@@ -720,6 +728,7 @@ const shard: CardShard = {
     _poolMosscoatGoriak,
     _poolMouserFoundry,
     _poolMultiversalIncursion,
+    _poolMyrCustodian,
     _poolNakiaWakandanOperative,
     _poolNastyEnd,
     _poolNegate,
@@ -769,6 +778,7 @@ const shard: CardShard = {
     _poolRestlessCottage,
     _poolRetreatToKazandu,
     _poolRhinoBarrelingBrute,
+    _poolRibskiff,
     _poolRipclawWrangler,
     _poolRiseOfTheDeathbringer,
     _poolRishadanAirship,

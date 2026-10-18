@@ -30,6 +30,7 @@ import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
+import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
 import _poolBarretAvalancheLeader from "../pool/barret-avalanche-leader.js";
 import _poolBasilicaGuards from "../pool/basilica-guards.js";
@@ -72,6 +73,7 @@ import _poolChainsOfCustody from "../pool/chains-of-custody.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
 import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
 import _poolChosenByHeliod from "../pool/chosen-by-heliod.js";
+import _poolCinderslashRavager from "../pool/cinderslash-ravager.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
@@ -464,6 +466,7 @@ import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
+import _poolVulshokFactory from "../pool/vulshok-factory.js";
 import _poolWastelandRaider from "../pool/wasteland-raider.js";
 import _poolWatcherOfTheWayside from "../pool/watcher-of-the-wayside.js";
 import _poolWaterfallAerialist from "../pool/waterfall-aerialist.js";
@@ -527,6 +530,7 @@ const shard: CardShard = {
     _poolAuraExtraction,
     _poolBadgermoleCub,
     _poolBarbaryApes,
+    _poolBarbedBatterfist,
     _poolBarbedServitor,
     _poolBarretAvalancheLeader,
     _poolBasilicaGuards,
@@ -569,6 +573,7 @@ const shard: CardShard = {
     _poolChaosChanneler,
     _poolChaseSteinRunaway,
     _poolChosenByHeliod,
+    _poolCinderslashRavager,
     _poolCircleOfPower,
     _poolCitanulStalwart,
     _poolCivicStalwart,
@@ -961,6 +966,7 @@ const shard: CardShard = {
     _poolVodalianHypnotist,
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
+    _poolVulshokFactory,
     _poolWastelandRaider,
     _poolWatcherOfTheWayside,
     _poolWaterfallAerialist,

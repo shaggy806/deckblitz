@@ -35,6 +35,7 @@ import _poolBlightedCataract from "../pool/blighted-cataract.js";
 import _poolBoggartPrankster from "../pool/boggart-prankster.js";
 import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
+import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
@@ -110,6 +111,7 @@ import _poolFanBearer from "../pool/fan-bearer.js";
 import _poolFanaticalStrength from "../pool/fanatical-strength.js";
 import _poolFateOfTheSunCryst from "../pool/fate-of-the-sun-cryst.js";
 import _poolFeebleness from "../pool/feebleness.js";
+import _poolFeedTheInfection from "../pool/feed-the-infection.js";
 import _poolFellHorseman from "../pool/fell-horseman.js";
 import _poolFireFieldOgre from "../pool/fire-field-ogre.js";
 import _poolFireImp from "../pool/fire-imp.js";
@@ -243,6 +245,7 @@ import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
 import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
+import _poolPredationSteward from "../pool/predation-steward.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
@@ -291,12 +294,14 @@ import _poolSeleniaDarkAngel from "../pool/selenia-dark-angel.js";
 import _poolSendInThePest from "../pool/send-in-the-pest.js";
 import _poolSeraphicSteed from "../pool/seraphic-steed.js";
 import _poolSerrasEmbrace from "../pool/serras-embrace.js";
+import _poolSerumSovereign from "../pool/serum-sovereign.js";
 import _poolSewerdreg from "../pool/sewerdreg.js";
 import _poolShamblingGhoul from "../pool/shambling-ghoul.js";
 import _poolShatterTheOath from "../pool/shatter-the-oath.js";
 import _poolSheHulkAttorneyAtLaw from "../pool/she-hulk-attorney-at-law.js";
 import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
+import _poolSheoldredsHeadcleaver from "../pool/sheoldreds-headcleaver.js";
 import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
@@ -458,6 +463,7 @@ const shard: CardShard = {
     _poolBoggartPrankster,
     _poolBoroughBackup,
     _poolBovineIntervention,
+    _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
     _poolBuzzardWaspColony,
     _poolBygoneMarvels,
@@ -533,6 +539,7 @@ const shard: CardShard = {
     _poolFanaticalStrength,
     _poolFateOfTheSunCryst,
     _poolFeebleness,
+    _poolFeedTheInfection,
     _poolFellHorseman,
     _poolFireFieldOgre,
     _poolFireImp,
@@ -666,6 +673,7 @@ const shard: CardShard = {
     _poolPiggyBank,
     _poolPompousGadabout,
     _poolPopularEgotist,
+    _poolPredationSteward,
     _poolPrismariTheInspiration,
     _poolProsshSkyraiderOfKher,
     _poolProwlingSerpopard,
@@ -714,12 +722,14 @@ const shard: CardShard = {
     _poolSendInThePest,
     _poolSeraphicSteed,
     _poolSerrasEmbrace,
+    _poolSerumSovereign,
     _poolSewerdreg,
     _poolShamblingGhoul,
     _poolShatterTheOath,
     _poolSheHulkAttorneyAtLaw,
     _poolShelteredThicket,
     _poolSheoldredWhisperingOne,
+    _poolSheoldredsHeadcleaver,
     _poolShimmerdriftVale,
     _poolShivanBranchBurner,
     _poolShopkeepersBane,

@@ -34,6 +34,7 @@ import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
 import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
+import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
 import _poolBasimIbnIshaq from "../pool/basim-ibn-ishaq.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
@@ -119,6 +120,7 @@ import _poolDreamrootCascade from "../pool/dreamroot-cascade.js";
 import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
+import _poolDuneMover from "../pool/dune-mover.js";
 import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
@@ -198,6 +200,7 @@ import _poolHeadlessRider from "../pool/headless-rider.js";
 import _poolHeliodsPilgrim from "../pool/heliods-pilgrim.js";
 import _poolHeroesHangout from "../pool/heroes-hangout.js";
 import _poolHeroicStanza from "../pool/heroic-stanza.js";
+import _poolHexgoldHalberd from "../pool/hexgold-halberd.js";
 import _poolHexplateGolem from "../pool/hexplate-golem.js";
 import _poolHoardersOverflow from "../pool/hoarders-overflow.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
@@ -244,6 +247,7 @@ import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
+import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
@@ -391,6 +395,7 @@ import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
+import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
@@ -503,6 +508,7 @@ const shard: CardShard = {
     _poolAzoriusGuildgate,
     _poolAzulaAlwaysLies,
     _poolBalothWoodcrasher,
+    _poolBasilicaShepherd,
     _poolBasimIbnIshaq,
     _poolBazaarTrader,
     _poolBeetleformMage,
@@ -588,6 +594,7 @@ const shard: CardShard = {
     _poolDredgersInsight,
     _poolDrillTooDeep,
     _poolDromokaWarrior,
+    _poolDuneMover,
     _poolEagleOfTheGreatShelf,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,
@@ -667,6 +674,7 @@ const shard: CardShard = {
     _poolHeliodsPilgrim,
     _poolHeroesHangout,
     _poolHeroicStanza,
+    _poolHexgoldHalberd,
     _poolHexplateGolem,
     _poolHoardersOverflow,
     _poolHopToIt,
@@ -713,6 +721,7 @@ const shard: CardShard = {
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
     _poolLaeliaTheBladeReforged,
+    _poolLatticeBladeMantis,
     _poolLaunchParty,
     _poolLavaglidePathway,
     _poolLightOfHope,
@@ -860,6 +869,7 @@ const shard: CardShard = {
     _poolTheFloodOfMars,
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,
+    _poolTheMonumentalFacade,
     _poolThePrydwenSteelFlagship,
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,

@@ -67,6 +67,7 @@ import _poolBurglarRat from "../pool/burglar-rat.js";
 import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
+import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
@@ -152,6 +153,7 @@ import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
 import _poolGarruksCompanion from "../pool/garruks-companion.js";
 import _poolGasGuzzler from "../pool/gas-guzzler.js";
 import _poolGeistOfTheMoors from "../pool/geist-of-the-moors.js";
+import _poolGethThaneOfContracts from "../pool/geth-thane-of-contracts.js";
 import _poolGiantBadger from "../pool/giant-badger.js";
 import _poolGiantKiller from "../pool/giant-killer.js";
 import _poolGiftOfCompleation from "../pool/gift-of-compleation.js";
@@ -207,6 +209,7 @@ import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
+import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
 import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
@@ -534,6 +537,7 @@ const shard: CardShard = {
     _poolBurnBurnTreeAndFern,
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
+    _poolCacophonyScamp,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
@@ -619,6 +623,7 @@ const shard: CardShard = {
     _poolGarruksCompanion,
     _poolGasGuzzler,
     _poolGeistOfTheMoors,
+    _poolGethThaneOfContracts,
     _poolGiantBadger,
     _poolGiantKiller,
     _poolGiftOfCompleation,
@@ -674,6 +679,7 @@ const shard: CardShard = {
     _poolJunglebornPioneer,
     _poolKayasWrath,
     _poolKeeneyeAven,
+    _poolKembaKhaEnduring,
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
     _poolKnightErrantOfEos,

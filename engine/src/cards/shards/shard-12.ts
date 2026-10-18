@@ -108,6 +108,7 @@ import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
 import _poolDrownyardLurker from "../pool/drownyard-lurker.js";
+import _poolDuelistOfDeepFaith from "../pool/duelist-of-deep-faith.js";
 import _poolDunedainRangers from "../pool/dunedain-rangers.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
@@ -439,6 +440,7 @@ import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
+import _poolZealotsConviction from "../pool/zealots-conviction.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
 import _tokensCatWarriorTokenAjaniFellsTheGodsire from "../tokens/cat-warrior-token-ajani-fells-the-godsire.js";
 import _tokensCentaurToken from "../tokens/centaur-token.js";
@@ -563,6 +565,7 @@ const shard: CardShard = {
     _poolDregReaver,
     _poolDrossHopper,
     _poolDrownyardLurker,
+    _poolDuelistOfDeepFaith,
     _poolDunedainRangers,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,
+    _poolZealotsConviction,
   ],
   tokens: [
     _tokensBoarToken,

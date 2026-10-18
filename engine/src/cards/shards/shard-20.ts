@@ -173,6 +173,7 @@ import _poolGlamerGifter from "../pool/glamer-gifter.js";
 import _poolGloriousAnthem from "../pool/glorious-anthem.js";
 import _poolGoblinFireslinger from "../pool/goblin-fireslinger.js";
 import _poolGoblinGardener from "../pool/goblin-gardener.js";
+import _poolGoldwardensHelm from "../pool/goldwardens-helm.js";
 import _poolGolgariSignet from "../pool/golgari-signet.js";
 import _poolGoliathSpider from "../pool/goliath-spider.js";
 import _poolGollumPatientPlotter from "../pool/gollum-patient-plotter.js";
@@ -410,6 +411,7 @@ import _poolSurvivorOfKorlis from "../pool/survivor-of-korlis.js";
 import _poolSvyeluniteTemple from "../pool/svyelunite-temple.js";
 import _poolSweettoothWitch from "../pool/sweettooth-witch.js";
 import _poolSylvanTutor from "../pool/sylvan-tutor.js";
+import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
 import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
@@ -674,6 +676,7 @@ const shard: CardShard = {
     _poolGloriousAnthem,
     _poolGoblinFireslinger,
     _poolGoblinGardener,
+    _poolGoldwardensHelm,
     _poolGolgariSignet,
     _poolGoliathSpider,
     _poolGollumPatientPlotter,
@@ -911,6 +914,7 @@ const shard: CardShard = {
     _poolSvyeluniteTemple,
     _poolSweettoothWitch,
     _poolSylvanTutor,
+    _poolTaintedObserver,
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,
     _poolTalonGatesOfMadara,

@@ -7,6 +7,7 @@ import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
+import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
@@ -506,6 +507,7 @@ const shard: CardShard = {
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
+    _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,
     _poolAkulTheUnrepentant,
     _poolAltacBloodseeker,

@@ -156,6 +156,7 @@ import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
 import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
 import _poolGiantCockroach from "../pool/giant-cockroach.js";
+import _poolGleefulDemolition from "../pool/gleeful-demolition.js";
 import _poolGlintHornBuccaneer from "../pool/glint-horn-buccaneer.js";
 import _poolGlowingAnemone from "../pool/glowing-anemone.js";
 import _poolGoHogWild from "../pool/go-hog-wild.js";
@@ -211,6 +212,7 @@ import _poolKarnsBastion from "../pool/karns-bastion.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
+import _poolKembasBanner from "../pool/kembas-banner.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
@@ -307,6 +309,7 @@ import _poolRakingClaws from "../pool/raking-claws.js";
 import _poolRangersFirebrand from "../pool/rangers-firebrand.js";
 import _poolRaphMikeyTroublemakers from "../pool/raph-mikey-troublemakers.js";
 import _poolRavenOfFellOmens from "../pool/raven-of-fell-omens.js";
+import _poolRavenousNecrotitan from "../pool/ravenous-necrotitan.js";
 import _poolRazakethTheFoulblooded from "../pool/razaketh-the-foulblooded.js";
 import _poolReachThroughMists from "../pool/reach-through-mists.js";
 import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
@@ -622,6 +625,7 @@ const shard: CardShard = {
     _poolGhirapurGearcrafter,
     _poolGhostLitRedeemer,
     _poolGiantCockroach,
+    _poolGleefulDemolition,
     _poolGlintHornBuccaneer,
     _poolGlowingAnemone,
     _poolGoHogWild,
@@ -677,6 +681,7 @@ const shard: CardShard = {
     _poolKavaronSkywarden,
     _poolKeeningApparition,
     _poolKeldonRaider,
+    _poolKembasBanner,
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,
     _poolKirolHistoryBuff,
@@ -773,6 +778,7 @@ const shard: CardShard = {
     _poolRangersFirebrand,
     _poolRaphMikeyTroublemakers,
     _poolRavenOfFellOmens,
+    _poolRavenousNecrotitan,
     _poolRazakethTheFoulblooded,
     _poolReachThroughMists,
     _poolRecklessAirStrike,

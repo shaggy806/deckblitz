@@ -21,6 +21,7 @@ import _poolAlchemistsApprentice from "../pool/alchemists-apprentice.js";
 import _poolAlleyAssailant from "../pool/alley-assailant.js";
 import _poolAncestorsAid from "../pool/ancestors-aid.js";
 import _poolAngelsMercy from "../pool/angels-mercy.js";
+import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
@@ -76,6 +77,7 @@ import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
 import _poolChandraFlameshaper from "../pool/chandra-flameshaper.js";
+import _poolChitteringSkitterling from "../pool/chittering-skitterling.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
@@ -174,6 +176,7 @@ import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
 import _poolHauntOfTheDeadMarshes from "../pool/haunt-of-the-dead-marshes.js";
 import _poolHaveForDinner from "../pool/have-for-dinner.js";
+import _poolHazardousBlast from "../pool/hazardous-blast.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
@@ -195,6 +198,7 @@ import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
+import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInfernalVessel from "../pool/infernal-vessel.js";
 import _poolIntelligenceBobblehead from "../pool/intelligence-bobblehead.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
@@ -332,6 +336,7 @@ import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkoaEmbermage from "../pool/skoa-embermage.js";
 import _poolSkullFracture from "../pool/skull-fracture.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
+import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
 import _poolSlay from "../pool/slay.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
@@ -420,6 +425,7 @@ import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfSpears from "../pool/wall-of-spears.js";
 import _poolWarRoom from "../pool/war-room.js";
 import _poolWarlordsFury from "../pool/warlords-fury.js";
+import _poolWatchfulBlisterzoa from "../pool/watchful-blisterzoa.js";
 import _poolWaterWings from "../pool/water-wings.js";
 import _poolWeaponsVendor from "../pool/weapons-vendor.js";
 import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
@@ -469,6 +475,7 @@ const shard: CardShard = {
     _poolAlleyAssailant,
     _poolAncestorsAid,
     _poolAngelsMercy,
+    _poolAnnihilatingGlare,
     _poolAnotherChance,
     _poolAppealToEirdu,
     _poolArchersOfQarsi,
@@ -524,6 +531,7 @@ const shard: CardShard = {
     _poolChampionOfThePerished,
     _poolChanceEncounter,
     _poolChandraFlameshaper,
+    _poolChitteringSkitterling,
     _poolClandestineMeddler,
     _poolClawsOfGix,
     _poolClayStatue,
@@ -622,6 +630,7 @@ const shard: CardShard = {
     _poolHaradrimSpearmaster,
     _poolHauntOfTheDeadMarshes,
     _poolHaveForDinner,
+    _poolHazardousBlast,
     _poolHeartWarden,
     _poolHeavenSent,
     _poolHelgaSkittishSeer,
@@ -643,6 +652,7 @@ const shard: CardShard = {
     _poolHotfootGnome,
     _poolHuntersProwess,
     _poolImpoliteEntrance,
+    _poolIncubationSac,
     _poolInfernalVessel,
     _poolIntelligenceBobblehead,
     _poolJoriEnRuinDiver,
@@ -780,6 +790,7 @@ const shard: CardShard = {
     _poolSkoaEmbermage,
     _poolSkullFracture,
     _poolSkullsnapNuisance,
+    _poolSkyscytheEngulfer,
     _poolSlay,
     _poolSmashToDust,
     _poolSojournersCompanion,
@@ -868,6 +879,7 @@ const shard: CardShard = {
     _poolWallOfSpears,
     _poolWarRoom,
     _poolWarlordsFury,
+    _poolWatchfulBlisterzoa,
     _poolWaterWings,
     _poolWeaponsVendor,
     _poolWeaselbackRedcap,

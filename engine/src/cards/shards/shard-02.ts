@@ -155,6 +155,7 @@ import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
 import _poolFuriousSpinesplitter from "../pool/furious-spinesplitter.js";
+import _poolFurnaceStrider from "../pool/furnace-strider.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
@@ -315,6 +316,7 @@ import _poolRoughRhinoCavalry from "../pool/rough-rhino-cavalry.js";
 import _poolRumorGatherer from "../pool/rumor-gatherer.js";
 import _poolRunAmok from "../pool/run-amok.js";
 import _poolRunBehind from "../pool/run-behind.js";
+import _poolRustvineCultivator from "../pool/rustvine-cultivator.js";
 import _poolRuthlessTechnomancer from "../pool/ruthless-technomancer.js";
 import _poolSagesRowSavant from "../pool/sages-row-savant.js";
 import _poolSalvationEngine from "../pool/salvation-engine.js";
@@ -602,6 +604,7 @@ const shard: CardShard = {
     _poolFrontlineRebel,
     _poolFungalFortitude,
     _poolFuriousSpinesplitter,
+    _poolFurnaceStrider,
     _poolGalinasKnight,
     _poolGallantCitizen,
     _poolGarruksUprising,
@@ -762,6 +765,7 @@ const shard: CardShard = {
     _poolRumorGatherer,
     _poolRunAmok,
     _poolRunBehind,
+    _poolRustvineCultivator,
     _poolRuthlessTechnomancer,
     _poolSagesRowSavant,
     _poolSalvationEngine,

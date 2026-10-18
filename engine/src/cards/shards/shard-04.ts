@@ -19,6 +19,7 @@ import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
+import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAuxiliaryBoosters from "../pool/auxiliary-boosters.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
@@ -87,6 +88,7 @@ import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
 import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
@@ -209,6 +211,7 @@ import _poolKorLineSlinger from "../pool/kor-line-slinger.js";
 import _poolKorvoldFaeCursedKing from "../pool/korvold-fae-cursed-king.js";
 import _poolKozileksChanneler from "../pool/kozileks-channeler.js";
 import _poolKudoKingAmongBears from "../pool/kudo-king-among-bears.js";
+import _poolKuldothaCackler from "../pool/kuldotha-cackler.js";
 import _poolLampadOfDeathsVigil from "../pool/lampad-of-deaths-vigil.js";
 import _poolLance from "../pool/lance.js";
 import _poolLathrilBladeOfTheElves from "../pool/lathril-blade-of-the-elves.js";
@@ -257,6 +260,7 @@ import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
 import _poolOverpoweringAttack from "../pool/overpowering-attack.js";
+import _poolOxiddaFinisher from "../pool/oxidda-finisher.js";
 import _poolPaintersStudio from "../pool/painters-studio.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
@@ -474,6 +478,7 @@ const shard: CardShard = {
     _poolAshnodsHarvester,
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
+    _poolAtraxasSkitterfang,
     _poolAuroralProcession,
     _poolAuxiliaryBoosters,
     _poolAvenSkirmisher,
@@ -542,6 +547,7 @@ const shard: CardShard = {
     _poolDictateOfKarametra,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDistortedCuriosity,
     _poolDoomsServoGuards,
     _poolDoseOfDawnglow,
     _poolDoubleDown,
@@ -664,6 +670,7 @@ const shard: CardShard = {
     _poolKorvoldFaeCursedKing,
     _poolKozileksChanneler,
     _poolKudoKingAmongBears,
+    _poolKuldothaCackler,
     _poolLampadOfDeathsVigil,
     _poolLance,
     _poolLathrilBladeOfTheElves,
@@ -712,6 +719,7 @@ const shard: CardShard = {
     _poolOtterPenguin,
     _poolOvergrownTomb,
     _poolOverpoweringAttack,
+    _poolOxiddaFinisher,
     _poolPaintersStudio,
     _poolPastInFlames,
     _poolPathOfAncestry,

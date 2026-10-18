@@ -144,6 +144,7 @@ import _poolFlowstoneGiant from "../pool/flowstone-giant.js";
 import _poolForebodingRuins from "../pool/foreboding-ruins.js";
 import _poolForecastingFortuneTeller from "../pool/forecasting-fortune-teller.js";
 import _poolFortressCrab from "../pool/fortress-crab.js";
+import _poolFreeFromFlesh from "../pool/free-from-flesh.js";
 import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
 import _poolFuriousResistance from "../pool/furious-resistance.js";
@@ -202,6 +203,7 @@ import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
+import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
@@ -596,6 +598,7 @@ const shard: CardShard = {
     _poolForebodingRuins,
     _poolForecastingFortuneTeller,
     _poolFortressCrab,
+    _poolFreeFromFlesh,
     _poolFuneralRoom,
     _poolFunnelWebRecluse,
     _poolFuriousResistance,
@@ -654,6 +657,7 @@ const shard: CardShard = {
     _poolImpossibleInferno,
     _poolImprovisedClub,
     _poolIncandescentSoulstoke,
+    _poolIndoctrinationAttendant,
     _poolInsightEngine,
     _poolInvasionOfMercadia,
     _poolInvasionOfMuraganda,

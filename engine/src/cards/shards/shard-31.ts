@@ -65,6 +65,7 @@ import _poolCaptainsCall from "../pool/captains-call.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
+import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
 import _poolChromaticStar from "../pool/chromatic-star.js";
@@ -260,6 +261,7 @@ import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMindstatic from "../pool/mindstatic.js";
+import _poolMinorMisstep from "../pool/minor-misstep.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
 import _poolMirranBanesplitter from "../pool/mirran-banesplitter.js";
 import _poolMirranCrusader from "../pool/mirran-crusader.js";
@@ -397,6 +399,7 @@ import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
 import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
 import _poolToxinAnalysis from "../pool/toxin-analysis.js";
+import _poolTrawlerDrake from "../pool/trawler-drake.js";
 import _poolTreasureCove from "../pool/treasure-cove.js";
 import _poolTreasureDredger from "../pool/treasure-dredger.js";
 import _poolTreeOfRedemption from "../pool/tree-of-redemption.js";
@@ -522,6 +525,7 @@ const shard: CardShard = {
     _poolCargoShip,
     _poolCastleSengir,
     _poolCatalystElemental,
+    _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolChitteringDispatcher,
     _poolChromaticStar,
@@ -717,6 +721,7 @@ const shard: CardShard = {
     _poolMendTheWilds,
     _poolMerchantOfTruth,
     _poolMindstatic,
+    _poolMinorMisstep,
     _poolMirkwoodElk,
     _poolMirranBanesplitter,
     _poolMirranCrusader,
@@ -854,6 +859,7 @@ const shard: CardShard = {
     _poolTowerOfChampions,
     _poolToweringIndrik,
     _poolToxinAnalysis,
+    _poolTrawlerDrake,
     _poolTreasureCove,
     _poolTreasureDredger,
     _poolTreeOfRedemption,
