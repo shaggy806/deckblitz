@@ -1124,6 +1124,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(mite.toxic).toBe(2);
     expect(mite.static?.[0]?.replacement).toEqual({ event: "enters-battlefield", counters: { kind: "oil", amount: 2 } });
     expect(mite.complete).toBe(true);
+    const walker = parseFace({ name: "Test Walker", type_line: "Legendary Planeswalker — Test", oracle_text: "Compleated" });
+    expect(walker.compleated).toBe(true);
     const blade = parseFace({ name: "Test Blade", type_line: "Artifact — Equipment", oracle_text: "For Mirrodin!" });
     expect(blade.triggered?.[0]?.effect).toEqual({
       kind: "sequence",

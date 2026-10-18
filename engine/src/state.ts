@@ -130,6 +130,12 @@ export interface GameObject {
    * creature that convoked it" (Ancient Imperiosaur), "each creature that
    * convoked it" (Zephyr Singer). Gone with its next move. */
   enteredConvokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
+  /** How many Phyrexian mana symbols its caster paid life for, set as the
+   * spell is cast (rule 702.150a — compleated). Gone with its next move. */
+  phyrexianPaidWithLife?: number;
+  /** `phyrexianPaidWithLife` carried across the stack-to-battlefield move,
+   * like `enteredConvokedBy`. */
+  enteredPhyrexianPaidWithLife?: number;
   /** How it came onto the battlefield, this stint — see {@link EntryRecord}.
    * Set by the move onto the battlefield, gone with its next move. */
   entry?: EntryRecord;

@@ -3114,6 +3114,10 @@ interface CardDraft {
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
   loyalty?: number;
+  /** Compleated (rule 702.150a): it enters with two fewer loyalty counters
+   * for each Phyrexian mana symbol its caster paid life for (Nahiri, the
+   * Unforgiving). Changes the synthesized loyalty replacement only. */
+  compleated?: true;
   defense?: number;
   mayhem?: { readonly cost?: string };
   rebound?: boolean;
@@ -3177,7 +3181,13 @@ export function defineCard(draft: CardDraft): CardDefinition {
             affects: { scope: "self" },
             replacement: {
               event: "enters-battlefield",
-              counters: { kind: "loyalty", amount: loyalty },
+              counters: {
+                kind: "loyalty",
+                amount:
+                  draft.compleated === true
+                    ? { sum: [loyalty, { product: [{ phyrexianPaidWithLife: true }, -2] }] }
+                    : loyalty,
+              },
             },
             text: `${draft.name} enters with ${loyalty} loyalty counters.`,
           },

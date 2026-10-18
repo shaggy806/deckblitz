@@ -207,6 +207,7 @@ import _poolAjaniCallerOfThePride from "./pool/ajani-caller-of-the-pride.js";
 import _poolAjaniFellsTheGodsire from "./pool/ajani-fells-the-godsire.js";
 import _poolAjaniOutlandChaperone from "./pool/ajani-outland-chaperone.js";
 import _poolAjaniResolute from "./pool/ajani-resolute.js";
+import _poolAjaniSleeperAgent from "./pool/ajani-sleeper-agent.js";
 import _poolAjaniTheGreathearted from "./pool/ajani-the-greathearted.js";
 import _poolAjaniUnrelenting from "./pool/ajani-unrelenting.js";
 import _poolAjanisAnguish from "./pool/ajanis-anguish.js";
@@ -8241,6 +8242,7 @@ import _poolNinjasBlades from "./pool/ninjas-blades.js";
 import _poolNipGwyllion from "./pool/nip-gwyllion.js";
 import _poolNirkanaAssassin from "./pool/nirkana-assassin.js";
 import _poolNirkanaRevenant from "./pool/nirkana-revenant.js";
+import _poolNissaAscendedAnimist from "./pool/nissa-ascended-animist.js";
 import _poolNissaLeylineTamer from "./pool/nissa-leyline-tamer.js";
 import _poolNissaResurgentAnimist from "./pool/nissa-resurgent-animist.js";
 import _poolNissaSageAnimist from "./pool/nissa-sage-animist.js";
@@ -14645,6 +14647,7 @@ import _tokensPhobos from "./tokens/phobos.js";
 import _tokensPhyrexianGermToken from "./tokens/phyrexian-germ-token.js";
 import _tokensPhyrexianGoblinToken from "./tokens/phyrexian-goblin-token.js";
 import _tokensPhyrexianGolemToken from "./tokens/phyrexian-golem-token.js";
+import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "./tokens/phyrexian-horror-token-nissa-ascended-animist.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "./tokens/phyrexian-horror-token-phyrexian-rebirth.js";
 import _tokensPhyrexianHorrorToken from "./tokens/phyrexian-horror-token.js";
 import _tokensPhyrexianHydraTokenLifelink from "./tokens/phyrexian-hydra-token-lifelink.js";
@@ -15015,6 +15018,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAjaniFellsTheGodsire,
   _poolAjaniOutlandChaperone,
   _poolAjaniResolute,
+  _poolAjaniSleeperAgent,
   _poolAjaniTheGreathearted,
   _poolAjaniUnrelenting,
   _poolAjanisAnguish,
@@ -23049,6 +23053,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNipGwyllion,
   _poolNirkanaAssassin,
   _poolNirkanaRevenant,
+  _poolNissaAscendedAnimist,
   _poolNissaLeylineTamer,
   _poolNissaResurgentAnimist,
   _poolNissaSageAnimist,
@@ -29459,6 +29464,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensPhyrexianGermToken,
   _tokensPhyrexianGoblinToken,
   _tokensPhyrexianGolemToken,
+  _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
   _tokensPhyrexianHorrorTokenPhyrexianRebirth,
   _tokensPhyrexianHorrorToken,
   _tokensPhyrexianHydraTokenLifelink,

@@ -287,6 +287,8 @@ function keywordPart(part) {
       triggered: [{ trigger: { on: "this-cast" }, targets: [], effect: { kind: "cascade" }, resolve: null, text: "Cascade" }],
     }),
     convoke: () => ({ card: { convoke: true } }),
+    // Compleated (rule 702.150a): the loyalty it enters with.
+    compleated: () => ({ card: { compleated: true } }),
     // Devoid makes the card colourless (rule 702.114a), which its colours
     // already say.
     devoid: () => ({}),

@@ -13,6 +13,7 @@ import _poolAdamantWill from "../pool/adamant-will.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
+import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
@@ -479,6 +480,7 @@ const shard: CardShard = {
     _poolAerieAuxiliary,
     _poolAgateInstigator,
     _poolAgrusKosSpiritOfJustice,
+    _poolAjaniSleeperAgent,
     _poolAlleyEvasion,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,

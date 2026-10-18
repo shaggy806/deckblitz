@@ -11797,6 +11797,9 @@ export class Game {
     // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
     // life paid for a Phyrexian pip isn't counted as mana.
     object.manaSpent = manaValue(payment.resolved);
+    // Each Phyrexian pip paid with life cost 2 (rule 107.4f) — compleated
+    // (702.150a) reads how many.
+    if (payment.life > 0) object.phyrexianPaidWithLife = payment.life / 2;
     // Expend (rule 700.14): the mana this player has spent on spells this
     // turn, before and after this payment — `turnHistory` counts it as the
     // event passes.
@@ -20266,6 +20269,10 @@ export class Game {
         );
       },
       convokerCount: () => this.convokersOf(source)?.length ?? 0,
+      phyrexianPaidWithLife: () => {
+        const object = this.state.objects[source];
+        return object?.phyrexianPaidWithLife ?? object?.enteredPhyrexianPaidWithLife ?? 0;
+      },
       convokerLabel: (index) => {
         const record = this.convokersOf(source)?.[index];
         if (record === undefined) return "?";
@@ -32844,6 +32851,8 @@ export class Game {
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
     const enteringConvokedBy = object.zone === "stack" && to === "battlefield" ? object.convokedBy : undefined;
+    const enteringPhyrexianLife =
+      object.zone === "stack" && to === "battlefield" ? object.phyrexianPaidWithLife : undefined;
     // Its gift's opponent, the same way (rule 702.174b's "if its gift cost
     // was paid" is an ETB trigger).
     const enteringGiftTo = object.zone === "stack" && to === "battlefield" ? object.giftTo : undefined;
@@ -33121,6 +33130,8 @@ export class Game {
     object.enteredKicked = enteringKicked;
     object.enteredTimesKicked = enteringTimesKicked;
     object.enteredConvokedBy = enteringConvokedBy;
+    object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
+    delete object.phyrexianPaidWithLife;
     object.enteredGiftTo = enteringGiftTo;
     object.entry = entry;
     object.castFrom = undefined;

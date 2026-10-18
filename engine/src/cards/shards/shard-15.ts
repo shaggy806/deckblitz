@@ -444,6 +444,7 @@ import _tokensGoatToken from "../tokens/goat-token.js";
 import _tokensGoblinToken from "../tokens/goblin-token.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
+import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "../tokens/phyrexian-horror-token-nissa-ascended-animist.js";
 import _tokensRedWarriorToken from "../tokens/red-warrior-token.js";
 import _tokensRedwing from "../tokens/redwing.js";
 import _tokensSlugToken from "../tokens/slug-token.js";
@@ -897,6 +898,7 @@ const shard: CardShard = {
     _tokensGoblinToken,
     _tokensHumanClericToken,
     _tokensMonkToken,
+    _tokensPhyrexianHorrorTokenNissaAscendedAnimist,
     _tokensRedWarriorToken,
     _tokensRedwing,
     _tokensSlugToken,

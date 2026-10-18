@@ -301,6 +301,13 @@ export type EffectAmount =
    */
   | { readonly convokers: true }
   /**
+   * How many Phyrexian mana symbols its caster paid life for (rule
+   * 702.150a): the resolving spell's, or — for the permanent a spell
+   * became — its spell's. Compleated's "two fewer loyalty counters for
+   * each" (`CardDraft.compleated`). `0` for anything not cast.
+   */
+  | { readonly phyrexianPaidWithLife: true }
+  /**
    * How many times the commander behind an {@link AmountRef} has been cast
    * from the command zone this game (rule 903.8's count — the same one the
    * commander tax reads), by its owner. Study Hall's "scry X, where X is the
@@ -5548,6 +5555,8 @@ export interface EffectApi {
   withTargetAt(from: number, index: number): ResolutionContext;
   /** How many creatures convoked the resolving spell (its `convokedBy`). */
   convokerCount(): number;
+  /** See the `{ phyrexianPaidWithLife }` {@link EffectAmount}. */
+  phyrexianPaidWithLife(): number;
   /** Convoker `index`, named for a choice among them: its name as it is
    * now, or as it last existed on the battlefield, and when it tapped. */
   convokerLabel(index: number): string;
@@ -7378,6 +7387,7 @@ function signedAmountValue(
     return ref === undefined ? 0 : ctx.colorsSpentOf(ref);
   }
   if ("convokers" in amount) return ctx.convokerCount();
+  if ("phyrexianPaidWithLife" in amount) return ctx.phyrexianPaidWithLife();
   if ("commanderCasts" in amount) return ctx.commanderCastsBy(ctx.controller);
   if ("roll" in amount) {
     const last = ctx.lastRoll();
