@@ -7591,6 +7591,70 @@
   "filter:transformed": {
    "family": "condition:filter-card-property-clauses",
    "example": "Invasion of Pyrulea: front: 'if it's a land or double-faced card, draw'; back: 'other transformed permanents you control have trample and ward {2}' — no double-faced or transformed CardFilter clause"
+  },
+  "effect:attack-requirement-player-only": {
+   "family": "effects",
+   "example": "Nahiri, the Unforgiving: Compleated is built; her +1 \"attacks a player each combat if able\" needs a requirement that excludes planeswalkers and battles, and her 0 a token copy of the card she exiles from a graveyard."
+  },
+  "static:cant-be-targeted-by-filter": {
+   "family": "keyword:hexproof-from-colors",
+   "example": "Thrun, Breaker of Silence: 'Can't be the target of nongreen spells/abilities from nongreen sources your opponents control' — no filtered hexproof (hexproof from colours can't say nongreen, which includes colorless)."
+  },
+  "condition:that-player-controls": {
+   "family": "condition:player-state-thresholds",
+   "example": "Furnace Punisher: 'unless they control two or more basic lands' asks about the active player; the controls condition only counts the effect controller's permanents."
+  },
+  "replacement:poison-counters-capped": {
+   "family": "replacement:new-event-replacements",
+   "example": "Melira, the Living Cure: No replacement capping poison counters at one plus 'can't get more this turn'; the exile ability also needs a this-turn 'when it's put into a graveyard, return it' delayed trigger on a target."
+  },
+  "condition:oil-counter-removed-this-turn": {
+   "family": "condition:turn-history",
+   "example": "Churning Reservoir: Activation gate 'an oil counter was removed from a permanent you controlled this turn or a permanent with an oil counter on it was put into a graveyard this turn' isn't tracked."
+  },
+  "zone:impulse-one-cast-grants-affinity": {
+   "family": "zone:impulse-permission-options",
+   "example": "Chiss-Goria, Forge Tyrant: Impulse exile of five where only one artifact spell may be cast this turn, and that spell gains affinity for artifacts — neither the single-cast limit nor granting affinity to the cast spell exists."
+  },
+  "effect:attach-equipment-to-each-created-token": {
+   "family": "effect:attach-extensions",
+   "example": "Goldwardens' Gambit: 'For each of those tokens, you may attach an Equipment you control to it' (chosen then attached all at once, per the ruling) has no shape."
+  },
+  "effect:amount-total-toxic-value": {
+   "family": "effect:amount-new-variants",
+   "example": "Goliath Hatchery: Upkeep: 'choose a creature you control (untargeted, at resolution), then draw cards equal to its total toxic value' — no resolution-time choose-a-creature, and no EffectAmount reading a creature's total toxic value (702.164b)."
+  },
+  "condition:per-opponent-target-slot-condition": {
+   "family": "targets",
+   "example": "Geth's Summons: Corrupted half: one optional target slot per opponent, each present only if that opponent had 3+ poison as you cast it; the seat slots (Sepulchral Primordial) carry no per-slot condition"
+  },
+  "effect:mana-ability-sacrificed-amount": {
+   "family": "mana",
+   "example": "Slobad, Iron Goblin: add-mana amount { manaValueOf: 'sacrificed' } reads nothing in a mana ability: the mana-ability path in Game (no stack) never sets lastKnownRefs.sacrificed, only the stack path does; authored and tested, it added 0 mana"
+  },
+  "effect:copy-exception-toxic": {
+   "family": "copy",
+   "example": "Kinzu of the Bleak Coven: token copy 'except it's 1/1 and has toxic 1': CopyExceptions has basePt but no toxic grant (toxic isn't a Keyword)"
+  },
+  "cost:exile-spell-you-control": {
+   "family": "cost",
+   "example": "Synthesis Pod: Cost 'Exile a spell you control' (a spell on the stack) has no AbilityCost; the reveal-until also reads the exiled spell's mana value + 1."
+  },
+  "condition:target-controller-player-counters": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Bring the Ending: Corrupted reads the targeted spell's controller's poison counters; player-counters is only you / an opponent / that-player, and nothing scopes 'that-player' to a target's controller."
+  },
+  "cost:sacrifice-mana-value-x": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Nahiri's Sacrifice: X damage divided among any number of targets (dynamic total), with X set by the additional cost 'sacrifice an artifact or creature with mana value X'"
+  },
+  "effect:animate-grants-toxic": {
+   "family": "effect:animate-extensions",
+   "example": "Monument to Perfection: second ability: becomes a 9/9 that 'gains indestructible and toxic 9' — animate can't grant toxic N (no modifier carries toxic). The condition (controls with distinctNames) and the search are expressible"
+  },
+  "keyword:conditional-flashback": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Viral Spawning: 'As long as an opponent has three or more poison counters and this card is in your graveyard, it has flashback {2}{G}' — flashback has no condition field"
   }
  }
 }

@@ -1,0 +1,1182 @@
+{
+ "batch": "B99",
+ "status": "complete",
+ "ranks": "Phyrexia: All Will Be One (ONE, 2023-02-10) and Phyrexia: All Will Be One Commander (ONC): whole sets",
+ "authored": [
+  {
+   "name": "Kethek, Crucible Goliath",
+   "files": [
+    "engine/src/cards/pool/kethek-crucible-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feed the Infection",
+   "files": [
+    "engine/src/cards/pool/feed-the-infection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cacophony Scamp",
+   "files": [
+    "engine/src/cards/pool/cacophony-scamp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambulatory Edifice",
+   "files": [
+    "engine/src/cards/pool/ambulatory-edifice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Watchful Blisterzoa",
+   "files": [
+    "engine/src/cards/pool/watchful-blisterzoa.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Escaped Experiment",
+   "files": [
+    "engine/src/cards/pool/escaped-experiment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinew Dancer",
+   "files": [
+    "engine/src/cards/pool/sinew-dancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin of Predation",
+   "files": [
+    "engine/src/cards/pool/paladin-of-predation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oxidda Finisher",
+   "files": [
+    "engine/src/cards/pool/oxidda-finisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serum Sovereign",
+   "files": [
+    "engine/src/cards/pool/serum-sovereign.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shrapnel Slinger",
+   "files": [
+    "engine/src/cards/pool/shrapnel-slinger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orthodoxy Enforcer",
+   "files": [
+    "engine/src/cards/pool/orthodoxy-enforcer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Monumental Facade",
+   "files": [
+    "engine/src/cards/pool/the-monumental-facade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barbed Batterfist",
+   "files": [
+    "engine/src/cards/pool/barbed-batterfist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rustvine Cultivator",
+   "files": [
+    "engine/src/cards/pool/rustvine-cultivator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tamiyo's Immobilizer",
+   "files": [
+    "engine/src/cards/pool/tamiyos-immobilizer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Monumental Corruption",
+   "files": [
+    "engine/src/cards/pool/monumental-corruption.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wurmquake",
+   "files": [
+    "engine/src/cards/pool/wurmquake.ts",
+    "engine/src/cards/tokens/phyrexian-wurm-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venomous Brutalizer",
+   "files": [
+    "engine/src/cards/pool/venomous-brutalizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prosthetic Injector",
+   "files": [
+    "engine/src/cards/pool/prosthetic-injector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transplant Theorist",
+   "files": [
+    "engine/src/cards/pool/transplant-theorist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argentum Masticore",
+   "files": [
+    "engine/src/cards/pool/argentum-masticore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gulping Scraptrap",
+   "files": [
+    "engine/src/cards/pool/gulping-scraptrap.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vindictive Flamestoker",
+   "files": [
+    "engine/src/cards/pool/vindictive-flamestoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rebel Salvo",
+   "files": [
+    "engine/src/cards/pool/rebel-salvo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exuberant Fuseling",
+   "files": [
+    "engine/src/cards/pool/exuberant-fuseling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resistance Reunited",
+   "files": [
+    "engine/src/cards/pool/resistance-reunited.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolving Adaptive",
+   "files": [
+    "engine/src/cards/pool/evolving-adaptive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonepicker Skirge",
+   "files": [
+    "engine/src/cards/pool/bonepicker-skirge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Apostle of Invasion",
+   "files": [
+    "engine/src/cards/pool/apostle-of-invasion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Glistener Seer",
+   "files": [
+    "engine/src/cards/pool/glistener-seer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ichorplate Golem",
+   "files": [
+    "engine/src/cards/pool/ichorplate-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Axiom Engraver",
+   "files": [
+    "engine/src/cards/pool/axiom-engraver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmatic Sprinter",
+   "files": [
+    "engine/src/cards/pool/magmatic-sprinter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Testament Bearer",
+   "files": [
+    "engine/src/cards/pool/testament-bearer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Leonin Lightbringer",
+   "files": [
+    "engine/src/cards/pool/leonin-lightbringer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Molten Rebuke",
+   "files": [
+    "engine/src/cards/pool/molten-rebuke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Oil-Gorger Troll",
+   "files": [
+    "engine/src/cards/pool/oil-gorger-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Annihilating Glare",
+   "files": [
+    "engine/src/cards/pool/annihilating-glare.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Against All Odds",
+   "files": [
+    "engine/src/cards/pool/against-all-odds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atmosphere Surgeon",
+   "files": [
+    "engine/src/cards/pool/atmosphere-surgeon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Charforger",
+   "files": [
+    "engine/src/cards/pool/charforger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonwing Glider",
+   "files": [
+    "engine/src/cards/pool/dragonwing-glider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dune Mover",
+   "files": [
+    "engine/src/cards/pool/dune-mover.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fleshless Gladiator",
+   "files": [
+    "engine/src/cards/pool/fleshless-gladiator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Font of Progress",
+   "files": [
+    "engine/src/cards/pool/font-of-progress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Skullbomb",
+   "files": [
+    "engine/src/cards/pool/furnace-skullbomb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Strider",
+   "files": [
+    "engine/src/cards/pool/furnace-strider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gitaxian Anatomist",
+   "files": [
+    "engine/src/cards/pool/gitaxian-anatomist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goldwarden's Helm",
+   "files": [
+    "engine/src/cards/pool/goldwardens-helm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Malcator, Purity Overseer",
+   "files": [
+    "engine/src/cards/pool/malcator-purity-overseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mite Overseer",
+   "files": [
+    "engine/src/cards/pool/mite-overseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ribskiff",
+   "files": [
+    "engine/src/cards/pool/ribskiff.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sawblade Scamp",
+   "files": [
+    "engine/src/cards/pool/sawblade-scamp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sheoldred's Headcleaver",
+   "files": [
+    "engine/src/cards/pool/sheoldreds-headcleaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvok Battle-Chair",
+   "files": [
+    "engine/src/cards/pool/sylvok-battle-chair.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Veil of Assimilation",
+   "files": [
+    "engine/src/cards/pool/veil-of-assimilation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vulshok Factory",
+   "files": [
+    "engine/src/cards/pool/vulshok-factory.ts",
+    "engine/src/cards/tokens/x-x-golem-token-haste.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ichorspit Basilisk",
+   "files": [
+    "engine/src/cards/pool/ichorspit-basilisk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jawbone Duelist",
+   "files": [
+    "engine/src/cards/pool/jawbone-duelist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tyrranax Atrocity",
+   "files": [
+    "engine/src/cards/pool/tyrranax-atrocity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Branchblight Stalker",
+   "files": [
+    "engine/src/cards/pool/branchblight-stalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mirran Bardiche",
+   "files": [
+    "engine/src/cards/pool/mirran-bardiche.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gitaxian Raptor",
+   "files": [
+    "engine/src/cards/pool/gitaxian-raptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hexgold Halberd",
+   "files": [
+    "engine/src/cards/pool/hexgold-halberd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zealot's Conviction",
+   "files": [
+    "engine/src/cards/pool/zealots-conviction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chittering Skitterling",
+   "files": [
+    "engine/src/cards/pool/chittering-skitterling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimraiser Paladin",
+   "files": [
+    "engine/src/cards/pool/nimraiser-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Migloz, Maze Crusher",
+   "files": [
+    "engine/src/cards/pool/migloz-maze-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incisor Glider",
+   "files": [
+    "engine/src/cards/pool/incisor-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unctus's Retrofitter",
+   "files": [
+    "engine/src/cards/pool/unctuss-retrofitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolved Spinoderm",
+   "files": [
+    "engine/src/cards/pool/evolved-spinoderm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ichor Synthesizer",
+   "files": [
+    "engine/src/cards/pool/ichor-synthesizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kuldotha Cackler",
+   "files": [
+    "engine/src/cards/pool/kuldotha-cackler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eye of Malcator",
+   "files": [
+    "engine/src/cards/pool/eye-of-malcator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaya, Intangible Slayer",
+   "files": [
+    "engine/src/cards/pool/kaya-intangible-slayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myr Custodian",
+   "files": [
+    "engine/src/cards/pool/myr-custodian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Atlas",
+   "files": [
+    "engine/src/cards/pool/phyrexian-atlas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jor Kadeen, First Goldwarden",
+   "files": [
+    "engine/src/cards/pool/jor-kadeen-first-goldwarden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hexgold Hoverwings",
+   "files": [
+    "engine/src/cards/pool/hexgold-hoverwings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hazardous Blast",
+   "files": [
+    "engine/src/cards/pool/hazardous-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atraxa's Skitterfang",
+   "files": [
+    "engine/src/cards/pool/atraxas-skitterfang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forgehammer Centurion",
+   "files": [
+    "engine/src/cards/pool/forgehammer-centurion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necrosquito",
+   "files": [
+    "engine/src/cards/pool/necrosquito.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urabrask's Anointer",
+   "files": [
+    "engine/src/cards/pool/urabrasks-anointer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Necrotitan",
+   "files": [
+    "engine/src/cards/pool/ravenous-necrotitan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Distorted Curiosity",
+   "files": [
+    "engine/src/cards/pool/distorted-curiosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tablet of Compleation",
+   "files": [
+    "engine/src/cards/pool/tablet-of-compleation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meldweb Strider",
+   "files": [
+    "engine/src/cards/pool/meldweb-strider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tainted Observer",
+   "files": [
+    "engine/src/cards/pool/tainted-observer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infested Fleshcutter",
+   "files": [
+    "engine/src/cards/pool/infested-fleshcutter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duelist of Deep Faith",
+   "files": [
+    "engine/src/cards/pool/duelist-of-deep-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vulshok Splitter",
+   "files": [
+    "engine/src/cards/pool/vulshok-splitter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Incubation Sac",
+   "files": [
+    "engine/src/cards/pool/incubation-sac.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Predation Steward",
+   "files": [
+    "engine/src/cards/pool/predation-steward.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Meldweb Curator",
+   "files": [
+    "engine/src/cards/pool/meldweb-curator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ruthless Predation",
+   "files": [
+    "engine/src/cards/pool/ruthless-predation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kemba's Banner",
+   "files": [
+    "engine/src/cards/pool/kembas-banner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Norn's Wellspring",
+   "files": [
+    "engine/src/cards/pool/norns-wellspring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gleeful Demolition",
+   "files": [
+    "engine/src/cards/pool/gleeful-demolition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Annex Sentry",
+   "files": [
+    "engine/src/cards/pool/annex-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charge of the Mites",
+   "files": [
+    "engine/src/cards/pool/charge-of-the-mites.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basilica Shepherd",
+   "files": [
+    "engine/src/cards/pool/basilica-shepherd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Adaptive Sporesinger",
+   "files": [
+    "engine/src/cards/pool/adaptive-sporesinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kemba, Kha Enduring",
+   "files": [
+    "engine/src/cards/pool/kemba-kha-enduring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cephalopod Sentry",
+   "files": [
+    "engine/src/cards/pool/cephalopod-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Indoctrination Attendant",
+   "files": [
+    "engine/src/cards/pool/indoctrination-attendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minor Misstep",
+   "files": [
+    "engine/src/cards/pool/minor-misstep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stinging Hivemaster",
+   "files": [
+    "engine/src/cards/pool/stinging-hivemaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trawler Drake",
+   "files": [
+    "engine/src/cards/pool/trawler-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Free from Flesh",
+   "files": [
+    "engine/src/cards/pool/free-from-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyscythe Engulfer",
+   "files": [
+    "engine/src/cards/pool/skyscythe-engulfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geth, Thane of Contracts",
+   "files": [
+    "engine/src/cards/pool/geth-thane-of-contracts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bladed Ambassador",
+   "files": [
+    "engine/src/cards/pool/bladed-ambassador.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vivisection Evangelist",
+   "files": [
+    "engine/src/cards/pool/vivisection-evangelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lattice-Blade Mantis",
+   "files": [
+    "engine/src/cards/pool/lattice-blade-mantis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinderslash Ravager",
+   "files": [
+    "engine/src/cards/pool/cinderslash-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa, Ascended Animist",
+   "files": [
+    "engine/src/cards/pool/nissa-ascended-animist.ts",
+    "engine/src/cards/tokens/phyrexian-horror-token-nissa-ascended-animist.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's compleated"
+  },
+  {
+   "name": "Ajani, Sleeper Agent",
+   "files": [
+    "engine/src/cards/pool/ajani-sleeper-agent.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's compleated"
+  },
+  {
+   "name": "Slaughter Singer",
+   "files": [
+    "engine/src/cards/pool/slaughter-singer.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter"
+  },
+  {
+   "name": "Plague Nurse",
+   "files": [
+    "engine/src/cards/pool/plague-nurse.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter and grant-toxic"
+  },
+  {
+   "name": "Porcelain Zealot",
+   "files": [
+    "engine/src/cards/pool/porcelain-zealot.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter"
+  },
+  {
+   "name": "Flensing Raptor",
+   "files": [
+    "engine/src/cards/pool/flensing-raptor.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter"
+  },
+  {
+   "name": "Compleat Devotion",
+   "files": [
+    "engine/src/cards/pool/compleat-devotion.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter"
+  },
+  {
+   "name": "Hexgold Slash",
+   "files": [
+    "engine/src/cards/pool/hexgold-slash.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's hasToxic filter"
+  },
+  {
+   "name": "Aspirant's Ascent",
+   "files": [
+    "engine/src/cards/pool/aspirants-ascent.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "this batch's grant-toxic"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Nahiri, the Unforgiving",
+   "needs": [
+    "effect:attack-requirement-player-only",
+    "effect:token-copy-of-exiled-card"
+   ],
+   "why": "Compleated is built; her +1 \"attacks a player each combat if able\" needs a requirement that excludes planeswalkers and battles, and her 0 a token copy of the card she exiles from a graveyard."
+  },
+  {
+   "name": "Kaito, Dancing Shadow",
+   "needs": [
+    "effect:loyalty-abilities-twice"
+   ],
+   "why": "'you may activate loyalty abilities of Kaito twice this turn' has no shape (and the trigger's 'return one of them' picks from the damage batch)."
+  },
+  {
+   "name": "Bladegraft Aspirant",
+   "needs": [
+    "cost:ability-cost-reduction-if-targets"
+   ],
+   "why": "abilityCostModification can't be limited to Equipment abilities that target this creature."
+  },
+  {
+   "name": "Vanish into Eternity",
+   "needs": [
+    "cost:cost-increase-if-targets"
+   ],
+   "why": "targetCostReduction only reduces; 'costs {3} more if it targets a creature' needs an increase."
+  },
+  {
+   "name": "Contagious Vorrac",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "'If you didn't put a card into your hand this way, proliferate' — no this-way kind or look-and-choose 'if none chosen' tail."
+  },
+  {
+   "name": "Mesmerizing Dose",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "doesntUntap only covers the permanent carrying it, not 'enchanted creature doesn't untap'."
+  },
+  {
+   "name": "Thrun, Breaker of Silence",
+   "needs": [
+    "static:cant-be-targeted-by-filter"
+   ],
+   "why": "'Can't be the target of nongreen spells/abilities from nongreen sources your opponents control' — no filtered hexproof (hexproof from colours can't say nongreen, which includes colorless)."
+  },
+  {
+   "name": "Furnace Punisher",
+   "needs": [
+    "condition:that-player-controls"
+   ],
+   "why": "'unless they control two or more basic lands' asks about the active player; the controls condition only counts the effect controller's permanents."
+  },
+  {
+   "name": "Melira, the Living Cure",
+   "needs": [
+    "replacement:poison-counters-capped",
+    "effect:delayed-trigger-extensions"
+   ],
+   "why": "No replacement capping poison counters at one plus 'can't get more this turn'; the exile ability also needs a this-turn 'when it's put into a graveyard, return it' delayed trigger on a target."
+  },
+  {
+   "name": "Churning Reservoir",
+   "needs": [
+    "condition:oil-counter-removed-this-turn"
+   ],
+   "why": "Activation gate 'an oil counter was removed from a permanent you controlled this turn or a permanent with an oil counter on it was put into a graveyard this turn' isn't tracked."
+  },
+  {
+   "name": "Chiss-Goria, Forge Tyrant",
+   "needs": [
+    "zone:impulse-one-cast-grants-affinity"
+   ],
+   "why": "Impulse exile of five where only one artifact spell may be cast this turn, and that spell gains affinity for artifacts — neither the single-cast limit nor granting affinity to the cast spell exists."
+  },
+  {
+   "name": "Goldwardens' Gambit",
+   "needs": [
+    "effect:attach-equipment-to-each-created-token"
+   ],
+   "why": "'For each of those tokens, you may attach an Equipment you control to it' (chosen then attached all at once, per the ruling) has no shape."
+  },
+  {
+   "name": "Lukka, Bound to Ruin",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "Compleated is built; his −4 divides X damage, X the greatest power among your creatures as it's activated, and a divided total can't be dynamic."
+  },
+  {
+   "name": "Voidwing Hybrid",
+   "needs": [
+    "trigger:proliferate-trigger"
+   ],
+   "why": "'When you proliferate, return this card from your graveyard to your hand': no trigger on a proliferate (the 'proliferated' event exists, no trigger kind reads it)."
+  },
+  {
+   "name": "Blade of Shared Souls",
+   "needs": [
+    "trigger:becomes-attached",
+    "effect:become-copy-while-source"
+   ],
+   "why": "'Whenever this Equipment becomes attached to a creature' has no trigger, and become-copy has no 'for as long as this Equipment remains attached to it' duration (until: end-of-turn / next-end-step / your-next-turn only)."
+  },
+  {
+   "name": "Goliath Hatchery",
+   "needs": [
+    "decision:choose-permanent",
+    "effect:amount-total-toxic-value"
+   ],
+   "why": "Upkeep: 'choose a creature you control (untargeted, at resolution), then draw cards equal to its total toxic value' — no resolution-time choose-a-creature, and no EffectAmount reading a creature's total toxic value (702.164b)."
+  },
+  {
+   "name": "The Filigree Sylex",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "Third ability's cost 'Remove ten oil counters from among permanents you control': removeCounter costs only come off the source."
+  },
+  {
+   "name": "Geth's Summons",
+   "needs": [
+    "effect:target-per-opponent",
+    "condition:per-opponent-target-slot-condition"
+   ],
+   "why": "Corrupted half: one optional target slot per opponent, each present only if that opponent had 3+ poison as you cast it; the seat slots (Sepulchral Primordial) carry no per-slot condition"
+  },
+  {
+   "name": "Slobad, Iron Goblin",
+   "needs": [
+    "effect:mana-ability-sacrificed-amount"
+   ],
+   "why": "add-mana amount { manaValueOf: 'sacrificed' } reads nothing in a mana ability: the mana-ability path in Game (no stack) never sets lastKnownRefs.sacrificed, only the stack path does; authored and tested, it added 0 mana"
+  },
+  {
+   "name": "Venser, Corpse Puppet",
+   "needs": [
+    "trigger:proliferate-trigger"
+   ],
+   "why": "'Whenever you proliferate' has no trigger (a 'proliferated' event exists but no trigger kind reads it)"
+  },
+  {
+   "name": "Kinzu of the Bleak Coven",
+   "needs": [
+    "effect:copy-exception-toxic"
+   ],
+   "why": "token copy 'except it's 1/1 and has toxic 1': CopyExceptions has basePt but no toxic grant (toxic isn't a Keyword)"
+  },
+  {
+   "name": "Rhuk, Hexgold Nabber",
+   "needs": [
+    "effect:attach-equipment-that-was-attached"
+   ],
+   "why": "on 'equipped creature dies' the Equipment is already unattached; needs the trigger object's last-known attachments, all-or-none, plus an 'equipped creature you control other than Rhuk attacks or dies' trigger"
+  },
+  {
+   "name": "Serum-Core Chimera",
+   "needs": [
+    "effect:discard-filtered"
+   ],
+   "why": "'you may discard a nonland card': the discard effect takes no filter, so a land could be chosen (the reflexive damage would correctly not fire, but the choice offered is wrong)"
+  },
+  {
+   "name": "Mirage Mockery",
+   "needs": [
+    "keyword:entwine"
+   ],
+   "why": "Entwine {2}{U} (choose both modes for an extra cost) isn't modeled; no castModal option for it."
+  },
+  {
+   "name": "Synthesis Pod",
+   "needs": [
+    "cost:exile-spell-you-control"
+   ],
+   "why": "Cost 'Exile a spell you control' (a spell on the stack) has no AbilityCost; the reveal-until also reads the exiled spell's mana value + 1."
+  },
+  {
+   "name": "Noxious Assault",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "'Whenever a creature blocks this turn, its controller gets a poison counter' is a repeating delayed trigger for the rest of the turn; delayed-trigger has no such timing."
+  },
+  {
+   "name": "Bring the Ending",
+   "needs": [
+    "condition:target-controller-player-counters"
+   ],
+   "why": "Corrupted reads the targeted spell's controller's poison counters; player-counters is only you / an opponent / that-player, and nothing scopes 'that-player' to a target's controller."
+  },
+  {
+   "name": "Anoint with Affliction",
+   "needs": [
+    "condition:target-controller-player-counters"
+   ],
+   "why": "Corrupted reads the targeted creature's controller's poison counters (the ruling: exiled regardless of MV then); no condition or filter reads a target's controller's counters."
+  },
+  {
+   "name": "Tamiyo's Logbook",
+   "needs": [
+    "cost:cost-reduction-count-other"
+   ],
+   "why": "'{1} less for each OTHER artifact you control': costReduction countOf has no exclude-self, and the Logbook is itself an artifact (would reduce by one too many)."
+  },
+  {
+   "name": "Cruel Grimnarch",
+   "needs": [
+    "effect:each-opponent-who-cant-discard"
+   ],
+   "why": "'For each opponent who can't [discard], you gain 4 life' — no per-player could-not-discard count."
+  },
+  {
+   "name": "Glissa's Retriever",
+   "needs": [
+    "decision:variable-target-count"
+   ],
+   "why": "\"return up to X target cards\", X = opponents with 3+ poison: an any-number group's max is only a number or the spell's X, not an amount read as the reflexive trigger goes on the stack"
+  },
+  {
+   "name": "Capricious Hellraiser",
+   "needs": [
+    "effect:random-choice-among-chosen"
+   ],
+   "why": "\"exile three cards at random from your graveyard. Choose a noncreature, nonland card from among them and copy it\": choose-random-card picks one card only; no N-at-random then choose-among-those"
+  },
+  {
+   "name": "Awaken the Sleeper",
+   "needs": [
+    "condition:attached-to-target"
+   ],
+   "why": "\"you may destroy all Equipment attached to that creature\": no CardFilter clause for 'attached to the object in target slot N'"
+  },
+  {
+   "name": "Mirran Safehouse",
+   "needs": [
+    "static:gain-abilities-from-graveyard"
+   ],
+   "why": "\"has all activated abilities of all land cards in all graveyards\": only linked-exile ability grants exist (Territory Forge, Steward of the Harvest)"
+  },
+  {
+   "name": "Maze's Mantle",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "\"That creature gains hexproof\": no effect can point at the enchanted creature (its intervening-if is `source` with `attachedTo: { hasToxic: true }`, built)."
+  },
+  {
+   "name": "Nahiri's Sacrifice",
+   "needs": [
+    "effect:divided-dynamic-total",
+    "cost:sacrifice-mana-value-x"
+   ],
+   "why": "X damage divided among any number of targets (dynamic total), with X set by the additional cost 'sacrifice an artifact or creature with mana value X'"
+  },
+  {
+   "name": "Ria Ivor, Bane of Bladehold",
+   "needs": [
+    "replacement:prevention-then-per-damage"
+   ],
+   "why": "'the next time target creature would deal combat damage to one or more players this combat, prevent that damage; create that many Mites' — no one-shot next-time prevention by a target creature that counts what it prevented"
+  },
+  {
+   "name": "Monument to Perfection",
+   "needs": [
+    "effect:animate-grants-toxic"
+   ],
+   "why": "second ability: becomes a 9/9 that 'gains indestructible and toxic 9' — animate can't grant toxic N (no modifier carries toxic). The condition (controls with distinctNames) and the search are expressible"
+  },
+  {
+   "name": "Viral Spawning",
+   "needs": [
+    "keyword:conditional-flashback"
+   ],
+   "why": "'As long as an opponent has three or more poison counters and this card is in your graveyard, it has flashback {2}{G}' — flashback has no condition field"
+  }
+ ]
+}
