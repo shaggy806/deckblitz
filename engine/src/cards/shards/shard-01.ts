@@ -167,6 +167,7 @@ import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
+import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
@@ -611,6 +612,7 @@ const shard: CardShard = {
     _poolIndulgentAristocrat,
     _poolInfiltrate,
     _poolInsatiableHarpy,
+    _poolInvasionOfZendikar,
     _poolIronManArmoredAvenger,
     _poolIvoryCharm,
     _poolJaddiOffshoot,

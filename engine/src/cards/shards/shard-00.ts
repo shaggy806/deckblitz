@@ -214,6 +214,7 @@ import _poolIronSuitcase from "../pool/iron-suitcase.js";
 import _poolIvyDancer from "../pool/ivy-dancer.js";
 import _poolIzoniThousandEyed from "../pool/izoni-thousand-eyed.js";
 import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
+import _poolJadeheartAttendant from "../pool/jadeheart-attendant.js";
 import _poolJayasFirenado from "../pool/jayas-firenado.js";
 import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
@@ -707,6 +708,7 @@ const shard: CardShard = {
     _poolIvyDancer,
     _poolIzoniThousandEyed,
     _poolJacesIngenuity,
+    _poolJadeheartAttendant,
     _poolJayasFirenado,
     _poolJoinTheDead,
     _poolJubilation,

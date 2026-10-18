@@ -184,6 +184,7 @@ import _poolGrapplerSpider from "../pool/grappler-spider.js";
 import _poolGratuitousViolence from "../pool/gratuitous-violence.js";
 import _poolGrimoireOfTheDead from "../pool/grimoire-of-the-dead.js";
 import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
+import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHaruHiddenTalent from "../pool/haru-hidden-talent.js";
@@ -639,6 +640,7 @@ const shard: CardShard = {
     _poolGratuitousViolence,
     _poolGrimoireOfTheDead,
     _poolGruulGuildmage,
+    _poolGuardianScalelord,
     _poolGuruPathik,
     _poolHamatoNinpo,
     _poolHaruHiddenTalent,

@@ -16,6 +16,7 @@ import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
+import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
@@ -502,6 +503,7 @@ const shard: CardShard = {
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
+    _poolArchpriestOfShadows,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,

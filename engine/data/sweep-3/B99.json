@@ -1,7 +1,7 @@
 {
  "batch": "B99",
  "status": "complete",
- "ranks": "Phyrexia: All Will Be One (ONE, 2023-02-10) and Phyrexia: All Will Be One Commander (ONC): whole sets",
+ "ranks": "Phyrexia: All Will Be One (ONE, 2023-02-10) and Phyrexia: All Will Be One Commander (ONC): whole sets; and older cards those batches' features unblocked",
  "authored": [
   {
    "name": "Kethek, Crucible Goliath",
@@ -896,6 +896,56 @@
    ],
    "tested": true,
    "unblockedBy": "this batch's grant-toxic"
+  },
+  {
+   "name": "Archpriest of Shadows",
+   "files": [
+    "engine/src/cards/pool/archpriest-of-shadows.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
+  },
+  {
+   "name": "Emergent Woodwurm",
+   "files": [
+    "engine/src/cards/pool/emergent-woodwurm.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
+  },
+  {
+   "name": "Guardian Scalelord",
+   "files": [
+    "engine/src/cards/pool/guardian-scalelord.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
+  },
+  {
+   "name": "Invasion of Zendikar // Awakened Skyclave",
+   "files": [
+    "engine/src/cards/pool/invasion-of-zendikar.ts",
+    "engine/src/cards/pool/awakened-skyclave.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
+  },
+  {
+   "name": "Necrogen Rotpriest",
+   "files": [
+    "engine/src/cards/pool/necrogen-rotpriest.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
+  },
+  {
+   "name": "Jade Seedstones // Jadeheart Attendant",
+   "files": [
+    "engine/src/cards/pool/jade-seedstones.ts",
+    "engine/src/cards/pool/jadeheart-attendant.ts"
+   ],
+   "tested": true,
+   "unblockedBy": "features built in B97–B99"
   }
  ],
  "blocked": [
@@ -1177,6 +1227,77 @@
     "keyword:conditional-flashback"
    ],
    "why": "'As long as an opponent has three or more poison counters and this card is in your graveyard, it has flashback {2}{G}' — flashback has no condition field"
+  },
+  {
+   "name": "Everything Comes to Dust",
+   "needs": [
+    "filter:shares-creature-type-with-convokers"
+   ],
+   "why": "'except those that share a creature type with a creature that convoked this spell': sharesCreatureTypeWith only takes \"trigger-object\"; no filter reads the convokers' creature types."
+  },
+  {
+   "name": "Invasion of Fiora // Marchesa, Resolute Monarch",
+   "needs": [
+    "effect:remove-all-counters",
+    "condition:not-dealt-combat-damage-since-last-turn"
+   ],
+   "why": "Back face: 'remove all counters from up to one target permanent' (remove-counter needs one kind) and the intervening-if 'if you haven't been dealt combat damage since your last turn' has no condition. The front face alone is authorable (modal destroy-all legendary / nonlegendary)."
+  },
+  {
+   "name": "Invasion of Ikoria // Zilortha, Apex of Ikoria",
+   "needs": [
+    "static:assign-damage-as-though-unblocked"
+   ],
+   "why": "Back face: 'for each non-Human creature you control, you may have that creature assign its combat damage as though it weren't blocked' has no static."
+  },
+  {
+   "name": "Invasion of Segovia // Caetus, Sea Tyrant of Segovia",
+   "needs": [
+    "static:grant-convoke"
+   ],
+   "why": "Back face: 'Noncreature spells you cast have convoke' — only spellsHaveDelve exists, no convoke grant."
+  },
+  {
+   "name": "Skrelv's Hive",
+   "needs": [
+    "static:static-scoped-by-has-toxic"
+   ],
+   "why": "Corrupted 'creatures you control with toxic have lifelink': hasToxic inside the layer fold reads only printed toxic, so a creature granted toxic (grant-toxic, grantToxic) wouldn't get lifelink; AUTHORING §5 names this card as not yet expressible."
+  },
+  {
+   "name": "Elusive Otter // Grove's Bounty",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "Adventure: 'Distribute X +1/+1 counters' — divided.total is a fixed number, no X total."
+  },
+  {
+   "name": "Vastwood Hydra",
+   "needs": [
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "Dies trigger: 'you may distribute N counters (N = its +1/+1 counters, LKI) among any number of creatures you control' — untargeted, chosen on resolution, variable total; counters-divided only does targeted fixed totals."
+  },
+  {
+   "name": "Observed Stasis",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "ETB 'remove enchanted creature from combat. Then draw a card for each tapped creature its controller controls': no EffectTargetRef for the Aura's enchanted creature, and no count read from that creature's controller (\"opponent\" would count every opponent in multiplayer)."
+  },
+  {
+   "name": "Shay Cormac",
+   "needs": [
+    "effect:lose-protection-and-ward"
+   ],
+   "why": "'lose hexproof, indestructible, protection, shroud, and ward': lose-keywords takes Keyword strings; protection and ward aren't keywords in that union, so they can't be taken away."
+  },
+  {
+   "name": "Revival of the Ancestors",
+   "needs": [
+    "effect:saga-chapter-divided"
+   ],
+   "why": "Chapter II 'distribute three +1/+1 counters among one, two, or three target creatures you control': SagaChapter has no `divided` field (only spells and activated/triggered abilities do), so the division can't be announced for a chapter."
   }
  ]
 }

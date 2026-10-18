@@ -26,6 +26,7 @@ import _poolAttendedKnight from "../pool/attended-knight.js";
 import _poolAttentiveSunscribe from "../pool/attentive-sunscribe.js";
 import _poolAuspiciousArrival from "../pool/auspicious-arrival.js";
 import _poolAutochthonWurm from "../pool/autochthon-wurm.js";
+import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
@@ -493,6 +494,7 @@ const shard: CardShard = {
     _poolAttentiveSunscribe,
     _poolAuspiciousArrival,
     _poolAutochthonWurm,
+    _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
     _poolBarbedBloodletter,

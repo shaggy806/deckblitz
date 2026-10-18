@@ -7655,6 +7655,26 @@
   "keyword:conditional-flashback": {
    "family": "zone:graveyard-cast-permissions",
    "example": "Viral Spawning: 'As long as an opponent has three or more poison counters and this card is in your graveyard, it has flashback {2}{G}' — flashback has no condition field"
+  },
+  "filter:shares-creature-type-with-convokers": {
+   "family": "effect:convoked-creatures",
+   "example": "Everything Comes to Dust: 'except those that share a creature type with a creature that convoked this spell': sharesCreatureTypeWith only takes \"trigger-object\"; no filter reads the convokers' creature types."
+  },
+  "condition:not-dealt-combat-damage-since-last-turn": {
+   "family": "condition",
+   "example": "Invasion of Fiora: Back face: 'remove all counters from up to one target permanent' (remove-counter needs one kind) and the intervening-if 'if you haven't been dealt combat damage since your last turn' has no condition. The front face alone is authorable (modal destroy-all legendary / nonlegendary)."
+  },
+  "static:static-scoped-by-has-toxic": {
+   "family": "filter:has-toxic",
+   "example": "Skrelv's Hive: Corrupted 'creatures you control with toxic have lifelink': hasToxic inside the layer fold reads only printed toxic, so a creature granted toxic (grant-toxic, grantToxic) wouldn't get lifelink; AUTHORING §5 names this card as not yet expressible."
+  },
+  "effect:lose-protection-and-ward": {
+   "family": "effect:lose-keyword-until-eot",
+   "example": "Shay Cormac: 'lose hexproof, indestructible, protection, shroud, and ward': lose-keywords takes Keyword strings; protection and ward aren't keywords in that union, so they can't be taken away."
+  },
+  "effect:saga-chapter-divided": {
+   "family": "effect:distribute-counters",
+   "example": "Revival of the Ancestors: Chapter II 'distribute three +1/+1 counters among one, two, or three target creatures you control': SagaChapter has no `divided` field (only spells and activated/triggered abilities do), so the division can't be announced for a chapter."
   }
  }
 }

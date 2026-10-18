@@ -110,6 +110,7 @@ import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
 import _poolElvishArchers from "../pool/elvish-archers.js";
 import _poolElvishReclaimer from "../pool/elvish-reclaimer.js";
 import _poolEmergencyWeld from "../pool/emergency-weld.js";
+import _poolEmergentWoodwurm from "../pool/emergent-woodwurm.js";
 import _poolEnduringCuriosity from "../pool/enduring-curiosity.js";
 import _poolEnforcerGriffin from "../pool/enforcer-griffin.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
@@ -566,6 +567,7 @@ const shard: CardShard = {
     _poolElvishArchers,
     _poolElvishReclaimer,
     _poolEmergencyWeld,
+    _poolEmergentWoodwurm,
     _poolEnduringCuriosity,
     _poolEnforcerGriffin,
     _poolEnvironmentalSciences,

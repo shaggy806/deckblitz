@@ -570,6 +570,7 @@ import _poolArchonOfRedemption from "./pool/archon-of-redemption.js";
 import _poolArchonOfSunsGrace from "./pool/archon-of-suns-grace.js";
 import _poolArchonOfTheWildRose from "./pool/archon-of-the-wild-rose.js";
 import _poolArchonsGlory from "./pool/archons-glory.js";
+import _poolArchpriestOfShadows from "./pool/archpriest-of-shadows.js";
 import _poolArchweaver from "./pool/archweaver.js";
 import _poolArchwingDragon from "./pool/archwing-dragon.js";
 import _poolArcticFlats from "./pool/arctic-flats.js";
@@ -809,6 +810,7 @@ import _poolAwakenTheBear from "./pool/awaken-the-bear.js";
 import _poolAwakenTheBloodAvatar from "./pool/awaken-the-blood-avatar.js";
 import _poolAwakenTheInferno from "./pool/awaken-the-inferno.js";
 import _poolAwakenTheWoods from "./pool/awaken-the-woods.js";
+import _poolAwakenedSkyclave from "./pool/awakened-skyclave.js";
 import _poolAwakeningHall from "./pool/awakening-hall.js";
 import _poolAwakeningZone from "./pool/awakening-zone.js";
 import _poolAwokenHorror from "./pool/awoken-horror.js";
@@ -3705,6 +3707,7 @@ import _poolEmergencyEject from "./pool/emergency-eject.js";
 import _poolEmergencyPhytomedic from "./pool/emergency-phytomedic.js";
 import _poolEmergencyWeld from "./pool/emergency-weld.js";
 import _poolEmergentHaunting from "./pool/emergent-haunting.js";
+import _poolEmergentWoodwurm from "./pool/emergent-woodwurm.js";
 import _poolEmeriaAngel from "./pool/emeria-angel.js";
 import _poolEmeriaShatteredSkyclave from "./pool/emeria-shattered-skyclave.js";
 import _poolEmeriaTheSkyRuin from "./pool/emeria-the-sky-ruin.js";
@@ -5371,6 +5374,7 @@ import _poolGuardianOfTheForgotten from "./pool/guardian-of-the-forgotten.js";
 import _poolGuardianOfTheHalls from "./pool/guardian-of-the-halls.js";
 import _poolGuardianOfVituGhazi from "./pool/guardian-of-vitu-ghazi.js";
 import _poolGuardianProject from "./pool/guardian-project.js";
+import _poolGuardianScalelord from "./pool/guardian-scalelord.js";
 import _poolGuardianSunmare from "./pool/guardian-sunmare.js";
 import _poolGuardiansOfAkrasa from "./pool/guardians-of-akrasa.js";
 import _poolGuardiansOfMeletis from "./pool/guardians-of-meletis.js";
@@ -6209,6 +6213,7 @@ import _poolInvasionOfTolvada from "./pool/invasion-of-tolvada.js";
 import _poolInvasionOfUlgrotha from "./pool/invasion-of-ulgrotha.js";
 import _poolInvasionOfVryn from "./pool/invasion-of-vryn.js";
 import _poolInvasionOfXerex from "./pool/invasion-of-xerex.js";
+import _poolInvasionOfZendikar from "./pool/invasion-of-zendikar.js";
 import _poolInvasionReinforcements from "./pool/invasion-reinforcements.js";
 import _poolInvasionSubmersible from "./pool/invasion-submersible.js";
 import _poolInvasionTactics from "./pool/invasion-tactics.js";
@@ -6332,8 +6337,10 @@ import _poolJadarGhoulcallerOfNephalia from "./pool/jadar-ghoulcaller-of-nephali
 import _poolJaddiOffshoot from "./pool/jaddi-offshoot.js";
 import _poolJadeCastSentinel from "./pool/jade-cast-sentinel.js";
 import _poolJadeMage from "./pool/jade-mage.js";
+import _poolJadeSeedstones from "./pool/jade-seedstones.js";
 import _poolJadecraftArtisan from "./pool/jadecraft-artisan.js";
 import _poolJadedAnalyst from "./pool/jaded-analyst.js";
+import _poolJadeheartAttendant from "./pool/jadeheart-attendant.js";
 import _poolJadelightSpelunker from "./pool/jadelight-spelunker.js";
 import _poolJadziStewardOfFate from "./pool/jadzi-steward-of-fate.js";
 import _poolJaggedBarrens from "./pool/jagged-barrens.js";
@@ -8185,6 +8192,7 @@ import _poolNecraDisciple from "./pool/necra-disciple.js";
 import _poolNecroblossomSnarl from "./pool/necroblossom-snarl.js";
 import _poolNecroduality from "./pool/necroduality.js";
 import _poolNecrogenCommunion from "./pool/necrogen-communion.js";
+import _poolNecrogenRotpriest from "./pool/necrogen-rotpriest.js";
 import _poolNecrogenScudder from "./pool/necrogen-scudder.js";
 import _poolNecrogenSpellbomb from "./pool/necrogen-spellbomb.js";
 import _poolNecrogenesis from "./pool/necrogenesis.js";
@@ -15507,6 +15515,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchonOfSunsGrace,
   _poolArchonOfTheWildRose,
   _poolArchonsGlory,
+  _poolArchpriestOfShadows,
   _poolArchweaver,
   _poolArchwingDragon,
   _poolArcticFlats,
@@ -15746,6 +15755,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAwakenTheBloodAvatar,
   _poolAwakenTheInferno,
   _poolAwakenTheWoods,
+  _poolAwakenedSkyclave,
   _poolAwakeningHall,
   _poolAwakeningZone,
   _poolAwokenHorror,
@@ -18642,6 +18652,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmergencyPhytomedic,
   _poolEmergencyWeld,
   _poolEmergentHaunting,
+  _poolEmergentWoodwurm,
   _poolEmeriaAngel,
   _poolEmeriaShatteredSkyclave,
   _poolEmeriaTheSkyRuin,
@@ -20308,6 +20319,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGuardianOfTheHalls,
   _poolGuardianOfVituGhazi,
   _poolGuardianProject,
+  _poolGuardianScalelord,
   _poolGuardianSunmare,
   _poolGuardiansOfAkrasa,
   _poolGuardiansOfMeletis,
@@ -21146,6 +21158,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvasionOfUlgrotha,
   _poolInvasionOfVryn,
   _poolInvasionOfXerex,
+  _poolInvasionOfZendikar,
   _poolInvasionReinforcements,
   _poolInvasionSubmersible,
   _poolInvasionTactics,
@@ -21269,8 +21282,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJaddiOffshoot,
   _poolJadeCastSentinel,
   _poolJadeMage,
+  _poolJadeSeedstones,
   _poolJadecraftArtisan,
   _poolJadedAnalyst,
+  _poolJadeheartAttendant,
   _poolJadelightSpelunker,
   _poolJadziStewardOfFate,
   _poolJaggedBarrens,
@@ -23122,6 +23137,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNecroblossomSnarl,
   _poolNecroduality,
   _poolNecrogenCommunion,
+  _poolNecrogenRotpriest,
   _poolNecrogenScudder,
   _poolNecrogenSpellbomb,
   _poolNecrogenesis,

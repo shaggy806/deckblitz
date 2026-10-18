@@ -207,6 +207,7 @@ import _poolIntoTheRoil from "../pool/into-the-roil.js";
 import _poolInvasionOfBelenon from "../pool/invasion-of-belenon.js";
 import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
+import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
@@ -250,6 +251,7 @@ import _poolMyriadLandscape from "../pool/myriad-landscape.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
+import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
 import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
 import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
@@ -677,6 +679,7 @@ const shard: CardShard = {
     _poolInvasionOfBelenon,
     _poolInvasiveManeuvers,
     _poolIronApprentice,
+    _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
@@ -720,6 +723,7 @@ const shard: CardShard = {
     _poolMysteriousTome,
     _poolMysticMelting,
     _poolNaturalConnection,
+    _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,
     _poolNettletoothDjinn,
     _poolNickFurySpymaster,
