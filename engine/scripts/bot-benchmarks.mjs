@@ -8,7 +8,8 @@
 //   npm run bot:benchmarks -w engine -- --rollout acting     how the rollouts play the turn out
 //   npm run bot:benchmarks -w engine -- --rollout-decisions  search our own decisions inside rollouts
 //   npm run bot:benchmarks -w engine -- --no-follow-ups      the one-move search alone
-//   npm run bot:benchmarks -w engine -- --horizon stack      roll out only until the stack settles
+//   npm run bot:benchmarks -w engine -- --horizon round      roll out through the opponents' turns
+//   npm run bot:benchmarks -w engine -- --horizon next-turn  ...and through our own next turn too
 //   npm run bot:benchmarks -w engine -- --bot v1             v1 in Alice's seat instead
 //   npm run bot:benchmarks -w engine -- --only Bolt          benchmarks whose name contains "Bolt"
 //

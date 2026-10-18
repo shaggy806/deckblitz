@@ -496,7 +496,13 @@ export function outcomeOf(
   landCap: number,
 ): EvalOutcome {
   if (state.result.over) {
-    const decided = state.result.winner === null ? DRAW : state.result.winner === me ? WIN : -WIN;
+    // A win is worth a hair more the sooner it comes, and a loss a hair less
+    // the later: a rollout past this turn (a deep `Horizon`) otherwise scores
+    // killing Bob now the same as killing him next turn, and picks either.
+    // Every rollout to the end of the turn ends on the same turn, so it
+    // changes nothing there.
+    const turn = state.turn.number;
+    const decided = state.result.winner === null ? DRAW : state.result.winner === me ? WIN - turn : turn - WIN;
     return { decided, mine: null, theirs: [] };
   }
   const eliminated = state.turnOrder.filter((player) => player !== me && state.players[player].hasLost).length;

@@ -62,6 +62,7 @@ import { engineScore, lifeCost, withTrackRecordEvidence } from "./features.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
   CombatRolloutController,
+  isDeepHorizon,
   MAX_BATCH,
   simulateAction,
   simulateAfterCombat,
@@ -74,9 +75,14 @@ import type { Horizon, RolloutPolicy } from "./simulate.js";
 
 export interface EvalBotOptions {
   readonly weights?: EvalWeights;
+  /** `"turn"` by default. A deep horizon (`"round"`, `"next-turn"`) is an
+   * experiment measured on the lookahead benchmarks, not something a room
+   * seats. */
   readonly horizon?: Horizon;
   /** How the other seats (and our own, after the candidate move) play a
-   * priority rollout out. See `RolloutPolicy`. */
+   * priority rollout out. See `RolloutPolicy`. `"combat"` by default, and
+   * `"playing"` under a deep horizon, the one policy whose opponents cast
+   * and attack on their own turns. */
   readonly rollout?: RolloutPolicy;
   /**
    * Whether priority rollouts search our own decisions one level deep too
@@ -400,6 +406,11 @@ const FOLLOW_UP_SIMULATIONS = 24;
  */
 const NESTED_DECISION_KINDS: ReadonlySet<string> = new Set(["choose-modes", "cast-now"]);
 
+/** How much better leaving a commander in the graveyard must score than the
+ * command zone (`commanderToGraveyard`): a whole point, against the 0.05 a
+ * graveyard card is worth. */
+const COMMANDER_STAYS_MARGIN = 1;
+
 /**
  * The best answer to the decision pending in `view`, by playing each candidate
  * out to `horizon` and scoring it. Ties keep `inherited` — v1's answer — so a
@@ -611,7 +622,9 @@ class DecisionRolloutController extends CombatRolloutController {
   }
 
   declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
-    return this.rollout === "combat" || this.rollout === "acting" ? super.declareAttackers(view) : [];
+    return this.rollout === "combat" || this.rollout === "acting" || this.rollout === "playing"
+      ? super.declareAttackers(view)
+      : [];
   }
 
   declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
@@ -707,7 +720,7 @@ export class EvalBotController extends HeuristicBotController {
     // rather than depending on each of them to get it right.
     this.weights = normalizeWeights(options.weights ?? DEFAULT_WEIGHTS);
     this.horizon = options.horizon ?? "turn";
-    this.rollout = options.rollout ?? "combat";
+    this.rollout = options.rollout ?? (isDeepHorizon(this.horizon) ? "playing" : "combat");
     this.decisionRollout = this.rollout;
     this.rolloutDecisions = options.rolloutDecisions ?? false;
     this.followUpsOn = options.followUps ?? true;
@@ -959,7 +972,10 @@ export class EvalBotController extends HeuristicBotController {
     // limits a free one: Lightning Greaves' equip {0} moved from creature to
     // creature for ever (capture WAMFR t54). Against each other, candidates
     // still need to be strictly better.
-    const tiesAct = this.decisionRollout === "acting";
+    // A deep horizon's rollouts play our seat through the opponents' turns
+    // (`DeepRolloutController`), so an instant passed on now is cast there
+    // and ties with casting it now: the same tie, the same break.
+    const tiesAct = this.decisionRollout === "acting" || isDeepHorizon(this.horizon);
     this.lastTiesAct = tiesAct;
     let passAlone: number | null | undefined;
     // Each move's own score, for the follow-ups to order by (`followUps`).
@@ -1017,7 +1033,7 @@ export class EvalBotController extends HeuristicBotController {
             action,
             this.horizon,
             this.decisionRollout,
-            this.rolloutDecisions ? this.selfInRollouts() : undefined,
+            this.selfInPriorityRollouts(view.state),
             MAX_BATCH,
             (game, previous) =>
               this.nextInBatch(
@@ -1063,7 +1079,7 @@ export class EvalBotController extends HeuristicBotController {
           },
           this.horizon,
           this.decisionRollout,
-          this.rolloutDecisions ? this.selfInRollouts() : undefined,
+          this.selfInPriorityRollouts(view.state),
         ),
       );
       if (after === null) continue;
@@ -1555,6 +1571,9 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("decision", null, "v1's answer");
       return inherited;
     }
+    if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
+      return this.commanderToGraveyard(view, inherited);
+    }
     const budget = this.budget(Math.min(DECISION_ROLLOUTS, this.maxSimulations));
     const answer = bestDecision(
       view,
@@ -1572,6 +1591,48 @@ export class EvalBotController extends HeuristicBotController {
     // candidates for it, so that record is the one worth keeping.
     this.lastDecision ??= audit("decision", budget);
     return answer;
+  }
+
+  /**
+   * Rule 903.9a under the `"next-turn"` horizon: leave a commander in the
+   * graveyard (or exile) when playing our next turn out shows it back —
+   * Zombify, Living Death — by more than `COMMANDER_STAYS_MARGIN`. Not
+   * searched otherwise (`decisions/commander-replacement.ts` says why: with
+   * no command-zone term, a graveyard card's 0.05 wins every time), and the
+   * margin is that trap's guard here: a commander left in the graveyard for
+   * nothing scores a hair better, never a whole point.
+   */
+  private commanderToGraveyard(view: ControllerView, inherited: Action): Action {
+    const budget = this.budget(2);
+    const me = this.playerId;
+    const score = (toCommandZone: boolean): number | null => {
+      budget.left -= 1;
+      const action: Action = { type: "commander-replacement", player: me, toCommandZone };
+      const after = timed(budget, () =>
+        simulateAction(view.state, this.cards, action, this.horizon, this.rollout, this.selfInPriorityRollouts(view.state)),
+      );
+      return after === null ? null : evaluateState(after, this.cards, me, this.weights);
+    };
+    const commandZone = score(true);
+    const stays = score(false);
+    this.lastDecision = audit("decision", budget);
+    if (stays === null || (commandZone !== null && stays <= commandZone + COMMANDER_STAYS_MARGIN)) {
+      return inherited;
+    }
+    return { type: "commander-replacement", player: me, toCommandZone: false };
+  }
+
+  /**
+   * Our own seat in a priority rollout: under a deep horizon a
+   * {@link DeepRolloutController}, which answers opponents' turns with a
+   * small search of its own; otherwise a {@link DecisionRolloutController}
+   * when `rolloutDecisions` asks for one, and the policy's stand-in when not.
+   */
+  private selfInPriorityRollouts(state: GameState): PlayerController | undefined {
+    if (isDeepHorizon(this.horizon) && this.rollout === "playing") {
+      return new DeepRolloutController(this.playerId, this.cards, this.weights, state.turn.number);
+    }
+    return this.rolloutDecisions ? this.selfInRollouts() : undefined;
   }
 
   private selfInRollouts(): DecisionRolloutController {
@@ -1793,12 +1854,14 @@ export class EvalBotController extends HeuristicBotController {
     const me = this.playerId;
     const w = this.weights;
 
+    // To the end of combat — or, under a deep horizon, on to it: a trade
+    // that looks even when the combat ends can cost the attack that wins
+    // next turn.
     const score = (blocks: readonly BlockerDeclaration[]): number | null => {
-      const after = simulateCombat(state, this.cards, {
-        type: "declare-blockers",
-        player: me,
-        blocks,
-      });
+      const action: Action = { type: "declare-blockers", player: me, blocks };
+      const after = isDeepHorizon(this.horizon)
+        ? simulateAction(state, this.cards, action, this.horizon, this.rollout, this.selfInPriorityRollouts(view.state))
+        : simulateCombat(state, this.cards, action);
       return after === null ? null : evaluateState(after, this.cards, me, w);
     };
 
@@ -2192,7 +2255,7 @@ export class EvalBotController extends HeuristicBotController {
         },
         this.horizon,
         this.decisionRollout,
-        this.rolloutDecisions ? this.selfInRollouts() : undefined,
+        this.selfInPriorityRollouts(view.state),
       ),
     );
     if (after === null) return this.score(view, land, budget);
@@ -2216,7 +2279,7 @@ export class EvalBotController extends HeuristicBotController {
         action,
         this.horizon,
         this.decisionRollout,
-        this.rolloutDecisions ? this.selfInRollouts() : undefined,
+        this.selfInPriorityRollouts(view.state),
       ),
     );
     this.trace?.(action, after);
@@ -2371,7 +2434,7 @@ export class EvalBotController extends HeuristicBotController {
         action,
         this.horizon,
         this.decisionRollout,
-        this.rolloutDecisions ? this.selfInRollouts() : undefined,
+        this.selfInPriorityRollouts(board.state),
       ),
     );
     if (after === null) return null;
@@ -2477,7 +2540,7 @@ export class EvalBotController extends HeuristicBotController {
         action,
         this.horizon,
         this.decisionRollout,
-        this.rolloutDecisions ? this.selfInRollouts() : undefined,
+        this.selfInPriorityRollouts(state),
       ),
     );
     return later !== null && evaluateState(later, this.cards, me, this.weights) >= score;
@@ -2571,4 +2634,51 @@ function sameLand(candidate: Action, inherited: Action): boolean {
     candidate.card === inherited.card &&
     candidate.face === inherited.face
   );
+}
+
+/** Simulations the nested search may spend on one window of an opponent's
+ * turn inside a deep rollout (`DeepRolloutController`). */
+const DEEP_RESPONSE_SIMULATIONS = 8;
+
+/**
+ * Our own seat inside a deep-horizon rollout (`"round"`, `"next-turn"`).
+ *
+ * On an opponent's turn, a small v2 search — the end of the turn its horizon,
+ * a few simulations a window, no follow-ups — so the line a candidate leaves
+ * open is played with the answers we'd really give: the Fog kept up for
+ * their attack, the Counterspell for their Lava Axe, the block. v1 is no
+ * stand-in there: it holds neither.
+ *
+ * For the rest of the turn the candidate is played in, on our own turn, it
+ * passes, attacking and blocking as v1 (the `"combat"` policy's stand-in),
+ * so a candidate is scored as "this, and nothing more this turn" — as every
+ * rollout to the end of the turn scores it. Anything that plays that turn on
+ * undoes what the candidate meant: with v1 there, the Fog we passed to keep
+ * was cast at our own beginning of combat, and with the small search there,
+ * the Courser we passed on was cast in our second main phase, so passing
+ * rolled out the same as tapping out. Each real window of it is searched
+ * again anyway. Our next turn (`"next-turn"`) the small search plays: it's
+ * where the second Bolt and the reanimation spell are cast.
+ *
+ * It can't recurse, the search's own horizon being the turn, and a window
+ * where we have nothing to cast costs it nothing.
+ */
+export class DeepRolloutController extends CombatRolloutController {
+  private readonly responder: EvalBotController;
+  /** The turn the candidate is played in. */
+  private readonly turn: number;
+
+  constructor(playerId: PlayerId, registry: CardRegistry, weights: EvalWeights, turn: number) {
+    super(playerId, registry);
+    this.turn = turn;
+    this.responder = new EvalBotController(playerId, registry, {
+      weights,
+      maxSimulations: DEEP_RESPONSE_SIMULATIONS,
+      followUps: false,
+    });
+  }
+
+  override act(view: ControllerView): Action {
+    return view.state.turn.number === this.turn ? super.act(view) : this.responder.act(view);
+  }
 }

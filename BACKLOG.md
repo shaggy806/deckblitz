@@ -216,9 +216,12 @@ Shiko or the other spell, and haste enablers in the crackback).
   engine`): seventeen hard positions played out over whole turns and judged on the outcome — goals,
   not a gate. Reading on 2026-10-18: v2 7/17, v1 7/17, `--rollout acting` 9/17; 5,000 simulations a
   decision solve no more than the default, so the limit is how far a rollout plays, not the budget.
-  No configuration holds Fog or Counterspell for the opponent's turn, kills the battle cry creature,
-  or lets a commander die into a reanimation spell (v2 doesn't search 903.9a: the evaluation has no
-  command-zone term, `decisions/commander-replacement.ts`).
+  Built since (`--horizon round|next-turn`, `docs/architecture/engine.md` "Deep horizons"): `round`
+  10/17, `next-turn` 14/17 — every combat, opponent's-turn and next-turn benchmark, the commander
+  reanimations included — while passing 168 and 164 of the 178 hand-built gate scenarios v2
+  passes. Left: the three "sequence" benchmarks (several moves in our own turn, which only
+  `--rollout acting` solves), the ten-odd gate scenarios each horizon fails, and whether it plays
+  better at all: a first four-player bench ran past 15 minutes a game.
 - **More training scenarios.** 120 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which

@@ -38,8 +38,60 @@ import { resolveToPriority } from "./untap-plans.js";
  * - `"turn"` — until the turn number changes. Puts every candidate, including
  *   `pass-priority`, on a common footing so they can be compared directly
  *   instead of against a "better than doing nothing" threshold. 2-3x dearer.
+ * - `"round"` — on through every opponent's turn until ours begins again, so
+ *   what they do with the board a candidate leaves them (an attack, a burn
+ *   spell, our Fog in answer) is inside it. Experimental and far dearer —
+ *   the lookahead benchmarks (`benchmarks.ts`) are what it's measured on —
+ *   and meaningful only under the `"playing"` policy, the one where the other
+ *   seats cast and attack on their own turns.
+ * - `"next-turn"` — `"round"`, then our next turn played out too: a setup
+ *   whose payoff is next turn's (a tapped land, a second Bolt, a commander
+ *   left in the graveyard for a reanimation spell).
  */
-export type Horizon = "stack" | "turn";
+export type Horizon = "stack" | "turn" | "round" | "next-turn";
+
+/** Whether a horizon runs past the end of the current turn. */
+export const isDeepHorizon = (horizon: Horizon): boolean => horizon === "round" || horizon === "next-turn";
+
+/**
+ * The test that ends a rollout at `horizon`, for `me`, from `startingTurn`,
+ * with its step ceiling: `MAX_STEPS` within a turn, and as many again for
+ * every player turn a deep horizon may cross. The returned test keeps state
+ * (it counts steps, and for `"next-turn"` remembers our turn starting), so
+ * each rollout makes its own.
+ */
+function horizonTest(
+  horizon: Horizon,
+  state: GameState,
+  me: PlayerId,
+  startingTurn: number,
+): (s: GameState) => boolean {
+  const players = state.turnOrder.length;
+  const ceiling = isDeepHorizon(horizon) ? MAX_STEPS * (2 * players + 1) : MAX_STEPS;
+  let steps = 0;
+  let ourTurn: number | null = null;
+  const activeIsMe = (s: GameState): boolean => s.turnOrder[s.turn.activePlayerIndex] === me;
+  return (s) => {
+    steps += 1;
+    if (steps > ceiling) return true;
+    switch (horizon) {
+      // "stack" also waits out any decision the resolution left open: an
+      // overloaded Cyclonic Rift has resolved with the stack empty while its
+      // bounced commanders still sit on the battlefield, waiting on their
+      // owners' 903.9a answers.
+      case "stack":
+        return s.zones.shared.stack.length === 0 && s.awaiting === null;
+      case "turn":
+        return s.turn.number !== startingTurn;
+      case "round":
+        return s.players[me]?.hasLost === true || (s.turn.number !== startingTurn && activeIsMe(s));
+      case "next-turn":
+        if (s.players[me]?.hasLost === true) return true;
+        if (ourTurn === null && s.turn.number !== startingTurn && activeIsMe(s)) ourTurn = s.turn.number;
+        return ourTurn !== null && s.turn.number !== ourTurn;
+    }
+  };
+}
 
 /**
  * How the stand-in seats play a priority rollout out.
@@ -153,18 +205,7 @@ export function simulateRepeated(
       previous = following;
       times += 1;
     }
-    let steps = 0;
-    sim.advanceUntil((s) => {
-      steps += 1;
-      if (steps > MAX_STEPS) return true;
-      // "stack" also waits out any decision the resolution left open: an
-      // overloaded Cyclonic Rift has resolved with the stack empty while its
-      // bounced commanders still sit on the battlefield, waiting on their
-      // owners' 903.9a answers.
-      return horizon === "stack"
-        ? s.zones.shared.stack.length === 0 && s.awaiting === null
-        : s.turn.number !== startingTurn;
-    });
+    sim.advanceUntil(horizonTest(horizon, state, action.player, startingTurn));
     return { state: sim.state, times };
   } catch {
     return null;
@@ -200,14 +241,7 @@ export function simulatePlan(
     const last = finish(sim);
     if (last === null) return null;
     sim.dispatch(last);
-    let steps = 0;
-    sim.advanceUntil((s) => {
-      steps += 1;
-      if (steps > MAX_STEPS) return true;
-      return horizon === "stack"
-        ? s.zones.shared.stack.length === 0 && s.awaiting === null
-        : s.turn.number !== startingTurn;
-    });
+    sim.advanceUntil(horizonTest(horizon, state, me, startingTurn));
     return sim.state;
   } catch {
     return null;
@@ -302,13 +336,7 @@ export function simulateAfterCombat(
     });
     if (sim.state.turn.number !== startingTurn || sim.state.turn.step !== "postcombat-main") return null;
     sim.dispatch(action);
-    sim.advanceUntil((s) => {
-      steps += 1;
-      if (steps > MAX_STEPS) return true;
-      return horizon === "stack"
-        ? s.zones.shared.stack.length === 0 && s.awaiting === null
-        : s.turn.number !== startingTurn;
-    });
+    sim.advanceUntil(horizonTest(horizon, state, me, startingTurn));
     return sim.state;
   } catch {
     return null;
