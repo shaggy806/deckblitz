@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { legalDefenders } from "../combat/eligibility.js";
+import { matchesFilter } from "../filter.js";
 import type { ObjectId } from "../primitives.js";
 import {
   A,
@@ -99,12 +100,67 @@ describe("attacking a battle", () => {
     expect(game.state.objects[battle].controller).toBe(A);
   });
 
+  it("'deals combat damage to a player or battle' triggers on damage to a battle (Furnace Reins)", () => {
+    const { game, a } = table();
+    const battle = invade(game);
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Furnace Reins"), { targets: [ref(bears)] });
+    a.declareAttackersFn = () => [{ attacker: bears, defender: battle }];
+    game.advanceUntil((s) => s.turn.step === "postcombat-main" && s.zones.shared.stack.length === 0 && s.awaiting === null);
+    expect(counters(game, battle, "defense")).toBe(3);
+    const treasures = Object.values(game.state.objects).filter(
+      (o) => o.zone === "battlefield" && o.cardName === "Treasure Token" && o.controller === A,
+    );
+    expect(treasures.length).toBe(1);
+  });
+
   it("damage from a spell (any target) removes defense counters too", () => {
     const { game } = table();
     const battle = invade(game);
     lands(game, "Mountain", 1);
     cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(battle)] });
     expect(counters(game, battle, "defense")).toBe(2);
+  });
+});
+
+describe("filters and excess damage over battles", () => {
+  it("protectedBy reads the protector from the filtering player's side", () => {
+    const { game } = table();
+    const battle = invade(game);
+    const ok = (you: typeof A, filter: Parameters<typeof matchesFilter>[3]) =>
+      matchesFilter(game.state, game.registry, battle, filter, { you });
+    expect(ok(A, { type: "battle", protectedBy: "opponent" })).toBe(true);
+    expect(ok(A, { type: "battle", protectedBy: "you" })).toBe(false);
+    expect(ok(B, { type: "battle", protectedBy: "you" })).toBe(true);
+    const bears = spawn(game, "Grizzly Bears", B);
+    expect(matchesFilter(game.state, game.registry, bears, { protectedBy: "you" }, { you: B })).toBe(false);
+  });
+
+  it("attackingBattle tells a creature attacking a battle from one attacking a player", () => {
+    const { game, a } = table();
+    const battle = invade(game);
+    const wurm = spawn(game, "Craw Wurm");
+    const bears = spawn(game, "Grizzly Bears");
+    a.declareAttackersFn = () => [
+      { attacker: wurm, defender: battle },
+      { attacker: bears, defender: B },
+    ];
+    game.advanceUntil((s) => s.turn.step === "declare-blockers");
+    expect(matchesFilter(game.state, game.registry, wurm, { attackingBattle: true }, { you: A })).toBe(true);
+    expect(matchesFilter(game.state, game.registry, bears, { attackingBattle: true }, { you: A })).toBe(false);
+  });
+
+  it("damage past a battle's defense is excess (rule 120.4a)", () => {
+    const { game } = table();
+    const battle = invade(game);
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(battle)] });
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(battle)] });
+    const hits = game
+      .eventsOfType("damage-dealt")
+      .filter((e) => e.target.kind === "object" && e.target.object === battle);
+    expect(hits.map((e) => e.excess ?? 0)).toEqual([0, 1]);
   });
 });
 

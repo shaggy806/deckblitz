@@ -18115,8 +18115,7 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.attacker, self) &&
           (spec.attackingYou !== true ||
             this.defendingPlayerOf(event.defender) === self.controller) &&
-          (spec.defender === undefined ||
-            (spec.defender === "player") === (this.state.players[event.defender as PlayerId] !== undefined)) &&
+          (spec.defender === undefined || this.defenderKind(event.defender) === spec.defender) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
           (spec.defenderLife === undefined ||
@@ -18190,14 +18189,18 @@ export class Game {
         return (
           event.type === "damage-dealt" &&
           event.combat &&
-          event.target.kind === "player" &&
+          (event.target.kind === "player" ||
+            (spec.orBattle === true &&
+              this.state.objects[event.target.object] !== undefined &&
+              effectiveTypes(this.state, this.registry, this.state.objects[event.target.object]!).includes("battle"))) &&
           this.matchesWho(spec.who, event.source, self) &&
           !(spec.otherOnly === true && event.source === self.id) &&
           this.triggerFilterOk(spec.filter, event.source, self) &&
-          (spec.toOpponent !== true || event.target.player !== self.controller) &&
+          (spec.toOpponent !== true || (event.target.kind === "player" && event.target.player !== self.controller)) &&
           (spec.toPlayerControlsMore === undefined ||
+            (event.target.kind === "player" &&
             this.countBattlefieldMatching(event.target.player, { ...spec.toPlayerControlsMore, controlledBy: "you" }) >
-              this.countBattlefieldMatching(self.controller, { ...spec.toPlayerControlsMore, controlledBy: "you" }))
+              this.countBattlefieldMatching(self.controller, { ...spec.toPlayerControlsMore, controlledBy: "you" })))
         );
       case "dealt-damage":
         return (
@@ -22766,6 +22769,16 @@ export class Game {
 
   /** Whether `id` is a battle with a player who can be its protector (rule
    * 310.11) — or isn't a battle at all. */
+  /** What an attacker is attacking (rule 506.2): a player, a planeswalker or
+   * a battle. */
+  private defenderKind(defender: PlayerId | ObjectId): "player" | "planeswalker" | "battle" {
+    if (this.state.players[defender as PlayerId] !== undefined) return "player";
+    const object = this.state.objects[defender as ObjectId];
+    return object !== undefined && effectiveTypes(this.state, this.registry, object).includes("battle")
+      ? "battle"
+      : "planeswalker";
+  }
+
   private protectorValid(id: ObjectId): boolean {
     const object = this.state.objects[id];
     if (object?.zone !== "battlefield") return true;
@@ -30148,10 +30161,13 @@ export class Game {
     const turn = this.state.turn.number;
     const c = computeCharacteristics(this.state, this.registry, object.id);
     // How much is excess (rule 120.4a): the greatest of what each of its
-    // types makes it — past its loyalty, past lethal damage.
+    // types makes it — past its loyalty, past its defense, past lethal damage.
     let excessAmount = 0;
     if (c.types.includes("planeswalker")) {
       excessAmount = Math.max(excessAmount, amount - (object.counters.loyalty ?? 0));
+    }
+    if (c.types.includes("battle")) {
+      excessAmount = Math.max(excessAmount, amount - (object.counters.defense ?? 0));
     }
     if (c.types.includes("creature")) {
       excessAmount = Math.max(excessAmount, amount - this.lethalDamageTo(object, source, sourceLastKnown));

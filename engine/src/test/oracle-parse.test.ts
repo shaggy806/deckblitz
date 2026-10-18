@@ -124,6 +124,9 @@ describe("costs and triggers", () => {
   it("triggers", () => {
     expect(parseTrigger("When ~ enters")).toEqual([{ on: "enters-battlefield", who: "self" }]);
     expect(parseTrigger("Whenever ~ enters or attacks")).toHaveLength(2);
+    expect(parseTrigger("Whenever ~ deals combat damage to a player or battle")).toEqual([
+      { on: "deals-combat-damage-to-player", who: "self", orBattle: true },
+    ]);
     expect(parseTrigger("Whenever another Zombie you control enters")).toEqual([
       { on: "enters-battlefield", who: "you-control", filter: { subtype: "Zombie" }, otherOnly: true },
     ]);

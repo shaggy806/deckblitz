@@ -3,7 +3,6 @@ import { equip } from "../helpers.js";
 
 const DAMAGE_TEXT = "Whenever equipped creature deals combat damage to a player or battle, create a Treasure token.";
 
-// Battles aren't part of this engine, so only the player half can happen.
 export default defineCard({
   name: "Beamtown Beatstick",
   manaCost: "{R}",
@@ -23,7 +22,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "deals-combat-damage-to-player", who: "attached" },
+      trigger: { on: "deals-combat-damage-to-player", who: "attached", orBattle: true },
       targets: [],
       effect: { kind: "create-token", token: "Treasure Token", count: 1 },
       resolve: null,

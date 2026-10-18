@@ -945,9 +945,10 @@ export type TriggerSpec =
        * "attacks **an opponent**" (Kaalia of the Vast) — a creature attacking
        * a planeswalker is attacking that planeswalker, not its controller
        * (rule 508.3a), so that doesn't fire it; `"planeswalker"` is the
-       * reverse.
+       * reverse; `"battle"` is "attacks **a battle**" (War-Trained Slasher,
+       * Thrashing Frontliner).
        */
-      readonly defender?: "player" | "planeswalker";
+      readonly defender?: "player" | "planeswalker" | "battle";
       /**
        * "…, **if no other creatures are attacking that player**" — an
        * intervening-if (rule 603.4) over the declaration: no other creature
@@ -1124,6 +1125,11 @@ export type TriggerSpec =
        * Praetor, with `who: "any"`): the player dealt damage is an opponent
        * of this permanent's controller, whoever's creature dealt it. */
       readonly toOpponent?: boolean;
+      /** "…deals combat damage to a player **or battle**" (Furnace Reins,
+       * Beamtown Beatstick): combat damage to a battle triggers it too. A
+       * battle has no "that player" — use it only where the ability doesn't
+       * name one. */
+      readonly orBattle?: boolean;
     }
   | {
       /**

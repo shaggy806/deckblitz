@@ -231,6 +231,9 @@ export interface CardFilter {
   /** Currently attacking (Kangee's Lieutenant: "attacking creatures with
    * flying get +1/+1"). */
   readonly attacking?: boolean;
+  /** Attacking a battle (Rampaging Geoderm's "if it's **attacking a
+   * battle**"). */
+  readonly attackingBattle?: boolean;
   /** Currently blocking — the mirror of `attacking` (Kangee, Sky Warden's
    * "blocking creatures with flying get +0/+2"). */
   readonly blocking?: boolean;
@@ -380,6 +383,10 @@ export interface CardFilter {
    * controls" outside combat). The active player is read off the state, so
    * it is the same answer whoever is asking. */
   readonly controlledBy?: "you" | "opponent" | "active-player";
+  /** A battle protected by the filtering player / anyone else (rule 310.8) —
+   * Portent Tracker's "if **an opponent protects** it". Nothing that has no
+   * protector matches either. */
+  readonly protectedBy?: "you" | "opponent";
   /** Owned by the filtering player / anyone else (zone-agnostic, for graveyards). */
   readonly ownedBy?: "you" | "opponent";
   readonly keyword?: Keyword;
@@ -962,6 +969,13 @@ export function matchesFilter(
     const attacking = live !== undefined ? live.attacking !== null : lki!.attacking;
     if (attacking !== filter.attacking) return false;
   }
+  if (filter.attackingBattle !== undefined) {
+    // Only a battle has a protector (rule 310.8).
+    const defender = live?.attacking;
+    const battle =
+      defender !== null && defender !== undefined && state.objects[defender as ObjectId]?.protector !== undefined;
+    if (battle !== filter.attackingBattle) return false;
+  }
   if (filter.unblocked !== undefined) {
     const step = state.turn.step;
     const unblocked =
@@ -1075,6 +1089,11 @@ export function matchesFilter(
   if (filter.controlledBy === "active-player" && controller !== activePlayerOf(state)) return false;
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;
+  if (filter.protectedBy !== undefined) {
+    // A battle stops having a protector as it leaves the battlefield.
+    const protector = live?.zone === "battlefield" ? live.protector : undefined;
+    if (protector === undefined || (protector === ctx.you) !== (filter.protectedBy === "you")) return false;
+  }
   if (filter.tapped !== undefined) {
     const tapped = live !== undefined ? live.tapped : lki!.tapped;
     if (tapped !== filter.tapped) return false;

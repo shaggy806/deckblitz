@@ -691,6 +691,9 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
+  if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
+    return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
+  }
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
     return [{ on: "becomes-target", who: "self", byOpponentOnly: true }];
