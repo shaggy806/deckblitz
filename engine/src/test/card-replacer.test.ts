@@ -76,12 +76,12 @@ describe("suggestReplacements — the best match", () => {
     expect(bestReplacement({ manaCost: null, typeLine: "Hero" })).toBeNull();
   });
 
-  it("returns null when nothing in the pool shares the target's type at all", () => {
-    // Battle is a real CardType but this pool (per AUTHORING/ROADMAP) has no
-    // implemented Battle cards -- confirms the hard type filter actually
-    // excludes rather than falling back to "closest anything".
-    const name = bestReplacement({ manaCost: "{3}{R}", typeLine: "Battle — Siege" });
-    expect(name).toBeNull();
+  it("keeps to the target's card type rather than falling back to the closest anything", () => {
+    // A battle target gets only battles (the pool has Sieges since 2026-10-17),
+    // and the hard type filter leaves every suggestion a battle.
+    const suggestions = suggestReplacements({ manaCost: "{3}{R}", typeLine: "Battle — Siege" }, { limit: 5 });
+    expect(suggestions.length).toBeGreaterThan(0);
+    for (const s of suggestions) expect(registry.get(s.name).types).toContain("battle");
   });
 
   it("is deterministic across repeated calls", () => {
