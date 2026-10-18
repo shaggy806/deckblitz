@@ -278,6 +278,23 @@ function retryOrGiveUp(names: readonly string[]): void {
   }, backoffMs(maxAttempt))
 }
 
+/**
+ * The name a batch lookup sends for `name`. Scryfall's `/cards/collection`
+ * finds a two-part card — modal or transforming double-faced, split — by its
+ * first face's name but not by its full "A // B" name, which it reports not
+ * found (checked 2026-10-18 with Birgi, God of Storytelling // Harnfel, Horn of
+ * Bounty, and Fire // Ice). The card it returns carries the full name, which
+ * `applyCard` caches along with each face's, so asking by the first face
+ * resolves the full name too. Asked in full, such a card always fell to the
+ * by-name `<img>`: a redirect through the rate-limited API, the request that
+ * gives out on a busy page — a deck import's stand-in review showed the card
+ * being replaced as a blank tile with its name (a bug report, 2026-10-18).
+ */
+export function lookupNameOf(name: string): string {
+  const cut = name.indexOf(' // ')
+  return cut > 0 ? name.slice(0, cut) : name
+}
+
 async function flushPending(): Promise<void> {
   if (pendingNames.size === 0) return
   const names = [...pendingNames]
@@ -293,7 +310,7 @@ async function flushPending(): Promise<void> {
       const res = await fetch(COLLECTION_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifiers: chunk.map((name) => ({ name })) }),
+        body: JSON.stringify({ identifiers: chunk.map((name) => ({ name: lookupNameOf(name) })) }),
       })
       if (res.ok) {
         const data = (await res.json()) as ScryfallCollectionResponse
@@ -305,7 +322,12 @@ async function flushPending(): Promise<void> {
         // token with no `art` override) won't start resolving on a retry —
         // give up on the batch path for it right away.
         for (const nf of data.not_found ?? []) {
-          if (nf.name) batchGaveUp.add(nf.name.toLowerCase())
+          if (!nf.name) continue
+          // Answered by the name sent, which for "A // B" is just "A".
+          const sent = nf.name.toLowerCase()
+          for (const name of chunk) {
+            if (lookupNameOf(name).toLowerCase() === sent) batchGaveUp.add(name.toLowerCase())
+          }
         }
       } else {
         failed = true

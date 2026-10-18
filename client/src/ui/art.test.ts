@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
-import { resolveArtUrl } from './art.ts'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { isArtPending, lookupNameOf, queueArtLookup, resolveArtUrl } from './art.ts'
 
 // A precon's Sol Ring (Tarkir: Dragonstorm Commander), as decks pin it.
 const SOL_RING = '7b0ccfd4-f118-4497-9c5a-54cf12000e16'
@@ -35,5 +35,45 @@ describe('resolveArtUrl', () => {
 
   it('falls back to the name for anything it would not fetch', () => {
     expect(resolveArtUrl('https://evil.example/x.jpg', 'Sol Ring')).toContain('api.scryfall.com/cards/named?exact=Sol%20Ring')
+  })
+})
+
+describe('the batched lookup of a two-part card', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('asks for the first face, which Scryfall finds where the full "A // B" name is not found', () => {
+    expect(lookupNameOf('Birgi, God of Storytelling // Harnfel, Horn of Bounty')).toBe('Birgi, God of Storytelling')
+    expect(lookupNameOf('Fire // Ice')).toBe('Fire')
+    expect(lookupNameOf('Sol Ring')).toBe('Sol Ring')
+  })
+
+  it("caches the full name's image off the first-face answer (a bug report, 2026-10-18)", async () => {
+    const full = 'Birgi, God of Storytelling // Harnfel, Horn of Bounty'
+    const front = 'https://cards.scryfall.io/normal/front/4/4/44657ab1-0a6a-4a5f-9688-86f239083821.jpg'
+    const sent: string[] = []
+    vi.stubGlobal('fetch', async (_url: string, init: { body: string }) => {
+      for (const id of JSON.parse(init.body).identifiers as { name: string }[]) sent.push(id.name)
+      // What /cards/collection answers for the first face: the whole card,
+      // its images on each face (a modal double-faced card has none on top).
+      return new Response(
+        JSON.stringify({
+          data: [
+            {
+              name: full,
+              card_faces: [
+                { name: 'Birgi, God of Storytelling', image_uris: { normal: front } },
+                { name: 'Harnfel, Horn of Bounty', image_uris: { normal: front.replace('/front/', '/back/') } },
+              ],
+            },
+          ],
+          not_found: [],
+        }),
+        { status: 200 },
+      )
+    })
+    queueArtLookup(full)
+    await vi.waitFor(() => expect(isArtPending(full)).toBe(false))
+    expect(sent).toEqual(['Birgi, God of Storytelling'])
+    expect(resolveArtUrl(undefined, full, 'normal')).toBe(front)
   })
 })
