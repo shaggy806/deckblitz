@@ -490,7 +490,7 @@ export interface ActivatedAbility {
    * `total`, split as the ability is activated (rules 602.2b, 601.2d: the
    * `activate-ability` action's `division`, at least 1 each) and dealt by a
    * `damage-divided` effect. A target gone illegal loses its share. */
-  readonly divided?: { readonly total: number; readonly slot: number };
+  readonly divided?: { readonly total: number; readonly slot: number; readonly of?: string };
 }
 
 /**
@@ -1723,7 +1723,7 @@ export interface TriggeredAbility {
    * stack (rule 603.3d: the `choose-targets` answer's `division`, at least 1
    * each) and dealt by a `damage-divided` effect. A target gone illegal loses
    * its share. */
-  readonly divided?: { readonly total: number; readonly slot: number };
+  readonly divided?: { readonly total: number; readonly slot: number; readonly of?: string };
   readonly text: string;
 }
 

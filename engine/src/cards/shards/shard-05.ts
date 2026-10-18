@@ -19,6 +19,7 @@ import _poolAmbassadorOak from "../pool/ambassador-oak.js";
 import _poolAmbushParty from "../pool/ambush-party.js";
 import _poolAnHavvaTownship from "../pool/an-havva-township.js";
 import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
+import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
@@ -69,6 +70,7 @@ import _poolButcherGhoul from "../pool/butcher-ghoul.js";
 import _poolCadaverousKnight from "../pool/cadaverous-knight.js";
 import _poolCadiraCallerOfTheSmall from "../pool/cadira-caller-of-the-small.js";
 import _poolCallerOfThePack from "../pool/caller-of-the-pack.js";
+import _poolCampusRenovation from "../pool/campus-renovation.js";
 import _poolCandyGrapple from "../pool/candy-grapple.js";
 import _poolCanyonWildcat from "../pool/canyon-wildcat.js";
 import _poolCaptainMarvelShootingStar from "../pool/captain-marvel-shooting-star.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
     _poolAmbushParty,
     _poolAnHavvaTownship,
     _poolAnabaBodyguard,
+    _poolAnimistsMight,
     _poolAphettoGrifter,
     _poolArcboundCrusher,
     _poolArchangelOfThune,
@@ -525,6 +528,7 @@ const shard: CardShard = {
     _poolCadaverousKnight,
     _poolCadiraCallerOfTheSmall,
     _poolCallerOfThePack,
+    _poolCampusRenovation,
     _poolCandyGrapple,
     _poolCanyonWildcat,
     _poolCaptainMarvelShootingStar,

@@ -359,6 +359,7 @@ import _poolSpiteflameWitch from "../pool/spiteflame-witch.js";
 import _poolSpitefulHexmage from "../pool/spiteful-hexmage.js";
 import _poolSpitefulMotives from "../pool/spiteful-motives.js";
 import _poolStitchTogether from "../pool/stitch-together.js";
+import _poolStolenGoodies from "../pool/stolen-goodies.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
 import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolSpitefulHexmage,
     _poolSpitefulMotives,
     _poolStitchTogether,
+    _poolStolenGoodies,
     _poolStormShakerOfSkies,
     _poolStormchasersTalent,
     _poolStrafe,

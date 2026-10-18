@@ -19200,7 +19200,9 @@ export class Game {
       cardName: trigger.cardName,
       specs: chooserSlots.map((s) => s.spec),
       options: chooserSlots.map((s) => [...s.options]),
-      ...(divided !== undefined && answerSlot >= 0 ? { divide: { total: divided.total, slot: answerSlot } } : {}),
+      ...(divided !== undefined && answerSlot >= 0
+        ? { divide: { total: divided.total, slot: answerSlot, ...(divided.of !== undefined ? { of: divided.of } : {}) } }
+        : {}),
     };
     return "paused";
   }
@@ -28620,8 +28622,18 @@ export class Game {
     const object = this.state.objects[id];
     if (object === undefined) return;
     // A copy of a spell ceases to exist instead of going anywhere but the
-    // stack (rule 707.10a) — `leaveStackAfterResolving` removes it.
-    if (object.isCopy === true && object.zone === "stack") return;
+    // stack (rule 707.10a): the one resolving (on top of the stack — a copy
+    // of Approach of the Second Sun putting itself there) when
+    // `leaveStackAfterResolving` removes it, any other (Sudden Setback's
+    // target) now.
+    if (object.isCopy === true && object.zone === "stack") {
+      const stack = this.state.zones.shared.stack;
+      if (stack[stack.length - 1] === id) return;
+      const index = stack.indexOf(id);
+      if (index >= 0) stack.splice(index, 1);
+      delete this.state.objects[id];
+      return;
+    }
     // A commander's owner may put it into the command zone instead (rule
     // 903.9b); the move waits for the answer, and goes to `position` then.
     if (object.zone !== "library") this.moveObject(id, "library", { libraryPlacement: position });

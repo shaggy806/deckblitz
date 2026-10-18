@@ -1109,6 +1109,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Amass Zombies 4.")).toEqual({ kind: "amass", amount: 4, creatureType: "Zombie" });
   });
 
+  it("the owner's choice of top or bottom of their library", () => {
+    expect(parseSentence("Target creature's owner puts it on their choice of the top or bottom of their library.", ctx())).toEqual({
+      kind: "put-on-library",
+      target: 0,
+      position: { ownerChooses: ["top", "bottom"] },
+    });
+    expect(
+      parseSentence("The owner of target nonland permanent puts it on their choice of the top or bottom of their library.", ctx()),
+    ).toEqual({ kind: "put-on-library", target: 0, position: { ownerChooses: ["top", "bottom"] } });
+  });
+
   it("devour N, devour land N and devour Food N (rule 702.82)", () => {
     const myco = face(
       "Devour 2 (As this creature enters, you may sacrifice any number of creatures. It enters with twice that many +1/+1 counters on it.)",

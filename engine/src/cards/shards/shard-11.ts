@@ -19,6 +19,7 @@ import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
 import _poolArcboundStinger from "../pool/arcbound-stinger.js";
 import _poolArchaeomender from "../pool/archaeomender.js";
+import _poolArmamentDragon from "../pool/armament-dragon.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
 import _poolAshenFirebeast from "../pool/ashen-firebeast.js";
 import _poolAssassinDen from "../pool/assassin-den.js";
@@ -506,6 +507,7 @@ const shard: CardShard = {
     _poolArcboundRavager,
     _poolArcboundStinger,
     _poolArchaeomender,
+    _poolArmamentDragon,
     _poolArmsDealer,
     _poolAshenFirebeast,
     _poolAssassinDen,

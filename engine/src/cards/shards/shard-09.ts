@@ -195,6 +195,7 @@ import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet
 import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
+import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
@@ -650,6 +651,7 @@ const shard: CardShard = {
     _poolJennyGeneratedAnomaly,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
+    _poolJolraelVoiceOfZhalfir,
     _poolJunglebornPioneer,
     _poolKayasWrath,
     _poolKeeneyeAven,

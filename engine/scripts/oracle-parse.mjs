@@ -1365,6 +1365,17 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`put (${TARGET}) on top of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "top" };
   }
+  // The owner's choice of where (Misleading Motes, Lost Days).
+  if (
+    (m =
+      re(`(${TARGET})'s owner puts it on their choice of the top or bottom of their library`).exec(s) ??
+      re(`the owner of (${TARGET}) puts it on their choice of the top or bottom of their library`).exec(s))
+  ) {
+    return { kind: "put-on-library", target: slot(m[1]), position: { ownerChooses: ["top", "bottom"] } };
+  }
+  if ((m = re(`the owner of (${TARGET}) puts it into their library second from the top or on the bottom`).exec(s))) {
+    return { kind: "put-on-library", target: slot(m[1]), position: { ownerChooses: [{ fromTop: 2 }, "bottom"] } };
+  }
   if (re("exile target card from a graveyard").test(s)) {
     return { kind: "exile", target: ctx.target({ kind: "card-in-graveyard", whose: "any" }) };
   }

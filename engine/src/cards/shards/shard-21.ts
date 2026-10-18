@@ -138,6 +138,7 @@ import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
 import _poolGimlisAxe from "../pool/gimlis-axe.js";
 import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
+import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
@@ -386,6 +387,7 @@ import _poolVensersJournal from "../pool/vensers-journal.js";
 import _poolVernalSovereign from "../pool/vernal-sovereign.js";
 import _poolVesperGhoul from "../pool/vesper-ghoul.js";
 import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
+import _poolVesuvanDrifter from "../pool/vesuvan-drifter.js";
 import _poolVexingBauble from "../pool/vexing-bauble.js";
 import _poolVibraniumMiningMech from "../pool/vibranium-mining-mech.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
@@ -551,6 +553,7 @@ const shard: CardShard = {
     _poolGimlisAxe,
     _poolGlarbCalamitysAugur,
     _poolGliderKids,
+    _poolGlintWeaver,
     _poolGloriousCharge,
     _poolGoblinChampion,
     _poolGoblinKing,
@@ -799,6 +802,7 @@ const shard: CardShard = {
     _poolVernalSovereign,
     _poolVesperGhoul,
     _poolVesselOfEphemera,
+    _poolVesuvanDrifter,
     _poolVexingBauble,
     _poolVibraniumMiningMech,
     _poolVileRebirth,

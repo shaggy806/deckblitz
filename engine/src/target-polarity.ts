@@ -329,13 +329,16 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)
       : v.touch(n.target, "help", MAJOR),
-  // Out of combat: usually an opponent's attacker or blocker.
-  "remove-from-combat": (n, v) => v.touch(n.target, "harm", MINOR),
+  // Out of combat: an opponent's attacker or blocker, or one's own attacker
+  // saved from a block — the board's call, or the card's own `whose`.
+  "remove-from-combat": none,
   // Losing a keyword hurts — but losing defender helps (Jaded Analyst).
-  "lose-keywords": (n, v) =>
-    n.target === undefined
-      ? undefined
-      : v.touch(n.target, n.keywords.every((k) => k === "defender") ? "help" : "harm", MINOR),
+  "lose-keywords": (n, v) => {
+    const side = n.keywords.every((k) => k === "defender") ? "help" : "harm";
+    if (n.target !== undefined) v.touch(n.target, side, MINOR);
+    // "Creatures target opponent controls lose first strike" (Quick Draw).
+    if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, side, MINOR);
+  },
   "player-effect": none,
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,
@@ -400,6 +403,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   foraged: none,
   // The split's targets take the damage (Inferno Titan, Electrolyze).
   "damage-divided": (n, v) => v.touch(n.from, "harm", MAJOR),
+  // +1/+1 counters help; a stun counter (Crashing Wave) harms.
+  "counters-divided": (n, v) => v.touch(n.from, n.counter === "+1/+1" ? "help" : "harm", MAJOR),
   "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),
   "tap-all": none,
   // Phasing out is a blocker gone for a turn when it's theirs (rule
@@ -483,7 +488,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // "Target player may …" (partner with's search): the choice is theirs,
     // so being offered it is help — minor, so a punisher in `ifDidnt`
     // outranks it.
-    if (typeof n.who === "object") v.touch(n.who.controllerOfTarget, "help", MINOR);
+    if (typeof n.who === "object" && "controllerOfTarget" in n.who) v.touch(n.who.controllerOfTarget, "help", MINOR);
     v.child(n.effect);
     v.child(n.ifDid);
     v.child(n.ifDidnt);

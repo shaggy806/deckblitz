@@ -2542,8 +2542,14 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       /** `{ fromTop: 7 }` is "seventh from the top": under the top six, or
        * on the bottom of a library with fewer than six (the Approach of the
-       * Second Sun ruling). */
-      readonly position: "top" | "bottom" | { readonly fromTop: number };
+       * Second Sun ruling). `{ ownerChooses }` is "**its owner** puts it on
+       * their choice of the top or bottom of their library" (Misleading
+       * Motes — `["top", "bottom"]`; Lost Days' "second from the top or on
+       * the bottom" — `[{ fromTop: 2 }, "bottom"]`): the owner of what's in
+       * target slot `target` (a number) picks one as this resolves. */
+      readonly position:
+        | LibraryPosition
+        | { readonly ownerChooses: readonly LibraryPosition[] };
     }
   | {
       /**
@@ -3659,6 +3665,17 @@ export type EffectSpec =
       readonly from: number;
     }
   | {
+      /** "Distribute three +1/+1 counters among one, two, or three target
+       * creatures" (rule 601.2d — Armament Dragon): each target of the group
+       * starting at slot `from` gets its share of the `divided` total as
+       * counters of `counter`, at least one each. A target gone illegal gets
+       * none, and its share goes nowhere (608.2b). The `divided`'s `of` names
+       * them for the division prompt ("+1/+1 counters"). */
+      readonly kind: "counters-divided";
+      readonly from: number;
+      readonly counter: string;
+    }
+  | {
       /** "Shuffle your library" on its own (Ponder's "You may shuffle", inside
        * a `may`): the effect's controller shuffles (rule 701.24). */
       readonly kind: "shuffle-library";
@@ -4562,8 +4579,12 @@ export type EffectSpec =
       /** A scope, or `{ controllerOfTarget }` — "**that permanent's
        * controller** may sacrifice a land" (Chain of Vapor): whoever
        * controls what the target slot points at, as it last existed if it
-       * has left (rule 608.2h). */
-      readonly who: PlayerScope | { readonly controllerOfTarget: number };
+       * has left (rule 608.2h) — or `{ ownerOfTarget }`, whoever owns it
+       * (a `put-on-library`'s "its owner puts it on their choice of …"). */
+      readonly who:
+        | PlayerScope
+        | { readonly controllerOfTarget: number }
+        | { readonly ownerOfTarget: number };
       readonly prompt?: string;
       readonly effect?: EffectSpec;
       readonly options?: readonly BoundUnlessOption[];
@@ -5572,7 +5593,7 @@ export interface EffectApi {
   sacrificeTarget(target: TargetRef, byItsController?: boolean): void;
   /** Put `target` on top of / on the bottom of / Nth from the top of its
    * owner's library — see the `"put-on-library"` {@link EffectSpec}. */
-  putOnLibrary(target: TargetRef, position: "top" | "bottom" | { readonly fromTop: number }): void;
+  putOnLibrary(target: TargetRef, position: LibraryPosition): void;
   /** Set up a delayed triggered ability — see the `"delayed-trigger"`
    * {@link EffectSpec}. `controller` is who will control it when it fires. */
   delayTrigger(
@@ -6555,9 +6576,19 @@ function eachPlayerMayAsks(
     const at = startingWithYou ? players.indexOf(ctx.controller) : -1;
     return at <= 0 ? players : [...players.slice(at), ...players.slice(0, at)];
   }
-  const ref = ctx.targets[who.controllerOfTarget];
-  const player = ref === undefined ? undefined : ctx.controllerOf(ref);
+  const ref = ctx.targets["ownerOfTarget" in who ? who.ownerOfTarget : who.controllerOfTarget];
+  const player = ref === undefined ? undefined : "ownerOfTarget" in who ? ctx.ownerOf(ref) : ctx.controllerOf(ref);
   return player === undefined || !ctx.playersInScope("each-player").includes(player) ? [] : [player];
+}
+
+/** Where a card goes in its owner's library — see `put-on-library`. */
+export type LibraryPosition = "top" | "bottom" | { readonly fromTop: number };
+
+/** The owner's option for one library position. */
+function libraryPositionText(at: LibraryPosition): string {
+  if (at === "top") return "Put it on top of your library";
+  if (at === "bottom") return "Put it on the bottom of your library";
+  return at.fromTop === 2 ? "Put it second from the top of your library" : `Put it ${at.fromTop}th from the top of your library`;
 }
 
 /** "a +1/+1 counter", "2 flying counters". */
@@ -8689,8 +8720,26 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "put-on-library": {
+      const position = spec.position;
+      if (typeof position === "object" && "ownerChooses" in position) {
+        // The owner's choice (rule 608.2d — "its owner puts it …"), asked
+        // of them as this resolves; the move is still this effect's.
+        if (typeof spec.target !== "number" || ctx.targets[spec.target] === undefined) return;
+        applyEffectSpec(
+          {
+            kind: "each-player-may",
+            who: { ownerOfTarget: spec.target },
+            choices: position.ownerChooses.map((at) => ({
+              text: libraryPositionText(at),
+              effect: { kind: "put-on-library", target: spec.target, position: at },
+            })),
+          },
+          ctx,
+        );
+        return;
+      }
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.putOnLibrary(target, spec.position);
+      if (target !== undefined) ctx.putOnLibrary(target, position);
       return;
     }
     case "return-from-graveyard": {
@@ -9370,6 +9419,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.division.forEach((amount, i) => {
         const target = ctx.targets[spec.from + i];
         if (target !== undefined && amount > 0) ctx.dealDamage(target, amount);
+      });
+      return;
+    case "counters-divided":
+      ctx.division.forEach((amount, i) => {
+        const target = ctx.targets[spec.from + i];
+        if (target !== undefined && amount > 0) ctx.addCounter(target, spec.counter, amount);
       });
       return;
     case "untap-all":

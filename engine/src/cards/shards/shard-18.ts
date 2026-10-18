@@ -20,6 +20,7 @@ import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
 import _poolAyaOfAlexandria from "../pool/aya-of-alexandria.js";
+import _poolAyarasOathsworn from "../pool/ayaras-oathsworn.js";
 import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
@@ -185,6 +186,7 @@ import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
 import _poolKefkaRulerOfRuin from "../pool/kefka-ruler-of-ruin.js";
 import _poolKinsbaileCavalier from "../pool/kinsbaile-cavalier.js";
+import _poolKolaghanWarmonger from "../pool/kolaghan-warmonger.js";
 import _poolKothsCourier from "../pool/koths-courier.js";
 import _poolKozileksUnsealing from "../pool/kozileks-unsealing.js";
 import _poolKrangMasterMind from "../pool/krang-master-mind.js";
@@ -230,6 +232,7 @@ import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
+import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
 import _poolModelOfUnity from "../pool/model-of-unity.js";
@@ -494,6 +497,7 @@ const shard: CardShard = {
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
     _poolAyaOfAlexandria,
+    _poolAyarasOathsworn,
     _poolAzoriusSignet,
     _poolBanishingBetrayal,
     _poolBarbedBattlegear,
@@ -659,6 +663,7 @@ const shard: CardShard = {
     _poolKeeningBanshee,
     _poolKefkaRulerOfRuin,
     _poolKinsbaileCavalier,
+    _poolKolaghanWarmonger,
     _poolKothsCourier,
     _poolKozileksUnsealing,
     _poolKrangMasterMind,
@@ -704,6 +709,7 @@ const shard: CardShard = {
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
     _poolMirkwoodSpider,
+    _poolMisleadingMotes,
     _poolMistRaven,
     _poolMistmeadowCouncil,
     _poolModelOfUnity,

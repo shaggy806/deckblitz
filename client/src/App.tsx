@@ -397,7 +397,7 @@ interface Targeting {
   /** The cast or ability divides `total` among the targets from slot `slot`
    * on (rules 601.2d, 603.3d — Magma Opus, Dragonlord Atarka): asked once
    * they're chosen, before it goes out. */
-  readonly divide?: { readonly total: number; readonly slot: number }
+  readonly divide?: { readonly total: number; readonly slot: number; readonly of?: string }
   /** New targets for a copy of a spell (Twincast, Shiko and Narset): the
    * target each slot has now, which a Keep button takes — it may not be on
    * the board to click any more. */
@@ -1526,6 +1526,8 @@ function Table({
   // cast on from there — convoke, a tap cost, or straight out.
   const [pendingDivision, setPendingDivision] = useState<{
     readonly total: number
+    /** What's divided — damage, or "+1/+1 counters" (`divide.of`). */
+    readonly of: string
     readonly targets: readonly TargetRef[]
     readonly shares: readonly number[]
     readonly resume: (division: readonly number[]) => void
@@ -2120,6 +2122,7 @@ function Table({
         const base = Math.floor(total / members.length)
         setPendingDivision({
           total,
+          of: t.divide.of ?? 'damage',
           targets: members,
           shares: members.map((_m, i) => base + (i < total % members.length ? 1 : 0)),
           // Back into this with the split: everything it needs is in the
@@ -4197,12 +4200,12 @@ function Table({
   } else if (mode === 'choose-division' && pendingDivision) {
     // At least 1 each, all of it (rule 601.2d): a share can grow only by what
     // the others can spare (game/divideShares.ts).
-    const { total, targets: divTargets, shares, resume } = pendingDivision
+    const { total, of: dividing, targets: divTargets, shares, resume } = pendingDivision
     const sum = shares.reduce((a, b) => a + b, 0)
     controls = (
       <div className="controls">
         <span>
-          Divide {total} damage — {sum}/{total}
+          Divide {total} {dividing} — {sum}/{total}
         </span>
         <span className="stack-counts">
           {divTargets.map((ref, i) => (

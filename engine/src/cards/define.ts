@@ -2849,7 +2849,7 @@ export interface CardDefinition {
    * `total` of it. Carried on the spell (`GameObject.division`, a copy keeps
    * it) and dealt by a `damage-divided` effect. `null` for every other card.
    */
-  readonly divided: { readonly total: number; readonly slot: number } | null;
+  readonly divided: { readonly total: number; readonly slot: number; readonly of?: string } | null;
   /** The partner-family ability that lets this card be one of *two*
    * commanders (rule 702.124), or `null` for a card that can only command
    * alone. A deckbuilding rule, read by `deck-validation.ts`'s
@@ -3140,7 +3140,7 @@ interface CardDraft {
   countersPersistAcrossZones?: boolean;
   transform?: boolean;
   split?: boolean;
-  divided?: { readonly total: number; readonly slot: number };
+  divided?: { readonly total: number; readonly slot: number; readonly of?: string };
   disturb?: { readonly cost: string };
   adventure?: boolean;
   omen?: boolean;

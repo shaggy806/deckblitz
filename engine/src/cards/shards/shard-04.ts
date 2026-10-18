@@ -235,6 +235,7 @@ import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
+import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
 import _poolNimbleHobbit from "../pool/nimble-hobbit.js";
@@ -682,6 +683,7 @@ const shard: CardShard = {
     _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,
+    _poolNashiMoonsLegacy,
     _poolNeverwinterDryad,
     _poolNimbleBladeKhenra,
     _poolNimbleHobbit,
