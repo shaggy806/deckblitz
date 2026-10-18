@@ -605,6 +605,36 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "feeds the stolen Craw Wurm to Viscera Seer, not the Seer",
+    rule: "A creature borrowed until end of turn is the cheapest sacrifice there is: it goes home anyway.",
+    position(registry) {
+      // Found planning Act of Treason's turn (2026-10-18): a sacrifice cost
+      // was paid with the least valuable permanent (`cheapestPermanents`), a
+      // 1/1 Seer over a 6/4 Wurm, so "sacrifice the stolen Wurm" was never
+      // a move at all.
+      const game = table(registry, [A, B], A);
+      lands(game, "Mountain", A, 3);
+      onBoard(game, "Viscera Seer", A);
+      const wurm = onBoard(game, "Craw Wurm", B);
+      const treason = game.debugSpawn("Act of Treason", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: treason, targets: [{ kind: "object", object: wurm }] });
+      game.advanceUntil(
+        (s) => s.zones.shared.stack.length === 0 && s.priority.holder === A && s.turn.step === "precombat-main",
+      );
+      const notThere = toSecondMain(game);
+      if (notThere !== null) return notThere;
+      if (game.state.objects[wurm]?.controller !== A) return { passed: false, detail: "the Wurm wasn't stolen" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "activate-ability" && action.sacrifice === wurm,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "leaves a Flickerwisped commander in exile for its return",
     rule: "A commander blinked with a delayed return comes back at the end step for free; the command zone makes it a new object the return can't find (rule 400.7).",
     position(registry) {

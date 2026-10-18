@@ -10,6 +10,9 @@
 //   npm run bot:benchmarks -w engine -- --no-follow-ups      the one-move search alone
 //   npm run bot:benchmarks -w engine -- --horizon round      roll out through the opponents' turns
 //   npm run bot:benchmarks -w engine -- --horizon next-turn  ...and through our own next turn too
+//   npm run bot:benchmarks -w engine -- --plan turn          plan our own turn (`turn-plan.ts`)
+//   npm run bot:benchmarks -w engine -- --plan next-turn     ...and our next one, for close calls
+//   npm run bot:benchmarks -w engine -- --plan-sims 200      simulations a plan may spend
 //   npm run bot:benchmarks -w engine -- --bot v1             v1 in Alice's seat instead
 //   npm run bot:benchmarks -w engine -- --only Bolt          benchmarks whose name contains "Bolt"
 //
@@ -40,6 +43,8 @@ const options = {
   ...(flag("horizon", null) !== null ? { horizon: flag("horizon") } : {}),
   ...(has("rollout-decisions") ? { rolloutDecisions: true } : {}),
   ...(has("no-follow-ups") ? { followUps: false } : {}),
+  ...(flag("plan", null) !== null ? { plan: flag("plan") } : {}),
+  ...(flag("plan-sims", null) !== null ? { planSimulations: Number(flag("plan-sims")) } : {}),
 };
 const only = flag("only", null);
 

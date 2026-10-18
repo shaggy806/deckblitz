@@ -72,6 +72,8 @@ import {
   simulateSettled,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
+import { boardKey, nextTurnValue, passLine, planTurn } from "./turn-plan.js";
+import type { PlanStep, PlannedLine, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
 export interface EvalBotOptions {
   readonly weights?: EvalWeights;
@@ -98,6 +100,17 @@ export interface EvalBotOptions {
    * the one-move search alone, for an A/B.
    */
   readonly followUps?: boolean;
+  /**
+   * Plan our own turn (`turn-plan.ts`) in place of `followUps`: lines of
+   * moves across both main phases, the opponents only blocking. `"next-turn"`
+   * also plays our next turn on from the closest few lines, and from each
+   * land when there's a choice of land drop. Off by default: an experiment
+   * measured on the lookahead benchmarks (`benchmarks.ts`).
+   */
+  readonly plan?: "turn" | "next-turn";
+  /** Simulations one plan may spend (`TurnPlanLimits.simulations`); 48 by
+   * default, and as many again for each next-turn look. */
+  readonly planSimulations?: number;
   /**
    * Ceiling on simulations per decision. The action space is small in
    * practice (median 2 concrete actions per window, 99th percentile around 9),
@@ -394,6 +407,26 @@ const NESTED_DECISION_ROLLOUTS = 2;
  */
 const FOLLOW_UP_SIMULATIONS = 24;
 
+/** `TurnPlanLimits` for a plan (`planLines`): moves in a line, lines kept at
+ * each depth, and simulations by default (`EvalBotOptions.planSimulations`). */
+const PLAN_DEPTH = 5;
+const PLAN_BEAM = 3;
+const DEFAULT_PLAN_SIMULATIONS = 48;
+
+/** Under `plan: "next-turn"`, the first moves whose best lines are played on
+ * through our next turn: the best few. A margin on this turn's score was
+ * tried first and was wrong: Bolting the face of a player at 6 scored 15
+ * under Bolting his Grizzly Bears (they still threaten us at 3), and the
+ * second Bolt next turn made it the win. */
+const PLAN_REFINE_LINES = 3;
+
+/** Whether a plan step is `action`. */
+function sameStep(step: PlanStep | undefined, action: Action): boolean {
+  if (step === undefined) return false;
+  if (step === "combat") return action.type === "pass-priority";
+  return JSON.stringify(step) === JSON.stringify(action);
+}
+
 /**
  * The decisions a rollout searches when it meets them (`DecisionRolloutController`):
  * a "you may" — a modal choice, which is how the engine asks one — and a "you
@@ -687,6 +720,14 @@ export class EvalBotController extends HeuristicBotController {
    * no follow-up beat the moves scored alone. Written, never read. */
   lastFollowUp: { readonly action: Action; readonly score: number; readonly then: Action } | null = null;
   private readonly followUpsOn: boolean;
+  private readonly planMode: "turn" | "next-turn" | null;
+  private readonly planSimulations: number;
+  /**
+   * The rest of the line the last plan chose (`planLines`), replayed window
+   * by window (`continueTurnPlan`) while each step's board is the one it was
+   * planned on.
+   */
+  private turnPlan: { readonly turn: number; steps: PlanStep[]; boards: string[] } | null = null;
   /** What the last priority search played in place of passing, when the
    * search's best was to pass (a due cantrip — `isCantripDue`), so a replay
    * of its scores can do the same (`scenario-fit.ts`). Written, never read. */
@@ -724,6 +765,8 @@ export class EvalBotController extends HeuristicBotController {
     this.decisionRollout = this.rollout;
     this.rolloutDecisions = options.rolloutDecisions ?? false;
     this.followUpsOn = options.followUps ?? true;
+    this.planMode = options.plan ?? null;
+    this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.trace = options.trace;
@@ -733,7 +776,31 @@ export class EvalBotController extends HeuristicBotController {
    * front of it, never off a position its own search only simulated — see
    * `withTrackRecordEvidence`. */
   act(view: ControllerView): Action {
-    return withTrackRecordEvidence(view.state, () => this.actSearched(view));
+    return this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view)));
+  }
+
+  /**
+   * Passes instead of `action` when it's a move the turn plan has for later
+   * (`turnPlan`), searched in a window the plan has no step for — one of our
+   * combat steps, between a step through combat and what comes after it.
+   * Act of Treason's plan sacrifices the stolen Craw Wurm in the second main
+   * phase, after it has attacked; the beginning of combat's search, seeing
+   * the Wurm go home at the end of the turn, sacrificed it there.
+   */
+  private deferToPlan(view: ControllerView, action: Action): Action {
+    const plan = this.turnPlan;
+    const state = view.state;
+    if (plan === null || state.turn.number !== plan.turn || state.awaiting !== null) return action;
+    if (state.turn.step === "precombat-main" || state.turn.step === "postcombat-main") return action;
+    const key = (a: Action): string | null =>
+      a.type === "cast-spell" || a.type === "play-land"
+        ? `${a.type}:${a.card}`
+        : a.type === "activate-ability"
+          ? `ability:${a.source}:${a.abilityIndex}`
+          : null;
+    const mine = key(action);
+    if (mine === null || !plan.steps.some((step) => step !== "combat" && key(step) === mine)) return action;
+    return { type: "pass-priority", player: this.playerId };
   }
 
   private actSearched(view: ControllerView): Action {
@@ -741,6 +808,11 @@ export class EvalBotController extends HeuristicBotController {
     this.lastFollowUp = null;
     this.lastPassFallback = null;
     this.lastHeldForCombat = [];
+    const fromTurnPlan = this.continueTurnPlan(view);
+    if (fromTurnPlan !== null) {
+      this.lastDecision = audit("priority", null, "turn plan replay");
+      return this.acted(view, fromTurnPlan);
+    }
     const fromPlan = this.continuePlan(view);
     if (fromPlan !== null) {
       this.lastDecision = audit("priority", null, "plan replay");
@@ -1094,7 +1166,10 @@ export class EvalBotController extends HeuristicBotController {
     // turn (`followUps`) — the cost reducer before what it reduces, the
     // ramp before what it pays for. Last of all, so under a clock they spend
     // only the time every single move, batch and untap plan has left.
-    const followed = this.followUps(view, candidates, scored, mustKill, heldForCombat, bestScore, budget);
+    const followed =
+      this.planMode !== null
+        ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore)
+        : this.followUps(view, candidates, scored, mustKill, heldForCombat, bestScore, budget);
     if (followed !== null) {
       best = followed.action;
       bestScore = followed.score;
@@ -1322,8 +1397,11 @@ export class EvalBotController extends HeuristicBotController {
       // valuable first, a tapped land before an untapped one). A candidate
       // named the last eligible, which could be the commander: Viscera Seer's
       // scry 1 paid with Zurgo Stormrender while Twilight Drover and the Seer
-      // itself sat beside it (capture AN5SU t13).
-      const cheapest = this.cheapestPermanents(state, choices, 1)[0];
+      // itself sat beside it (capture AN5SU t13). Cheapest of all is one we
+      // control but don't own, going back at the end of the turn anyway:
+      // Act of Treason's Craw Wurm, not the Seer.
+      const borrowed = choices.find((id) => (state.objects[id]?.owner ?? this.playerId) !== this.playerId);
+      const cheapest = borrowed ?? this.cheapestPermanents(state, choices, 1)[0];
       return actions.map((action) =>
         (action.type === "cast-spell" || action.type === "activate-ability") && action.sacrifice !== undefined
           ? { ...action, sacrifice: cheapest }
@@ -2418,6 +2496,178 @@ export class EvalBotController extends HeuristicBotController {
     }
     this.lastFollowUp = found;
     return found;
+  }
+
+  /** The hooks `turn-plan.ts` plans with: the moves the search would list on
+   * a board, as `followUps` takes them, and the evaluation. */
+  private planHooks(): TurnPlanHooks {
+    return {
+      moves: (board) => {
+        const listed = this.listCandidates(board);
+        return listed.candidates.filter(
+          (a) => a.type !== "pass-priority" && !listed.mustKill.has(a) && !listed.heldForCombat.has(a),
+        );
+      },
+      value: (state) => evaluateState(state, this.cards, this.playerId, this.weights),
+    };
+  }
+
+  private planLimits(): TurnPlanLimits {
+    return { depth: PLAN_DEPTH, beam: PLAN_BEAM, simulations: this.planSimulations };
+  }
+
+  /**
+   * `followUps` as a whole plan (`plan`): the best line for our turn
+   * (`planTurn`), its first step played if the line beats `bestScore`, the
+   * one-move search's best, and the rest kept for `continueTurnPlan`. Under
+   * `"next-turn"` the best line for each of the best `PLAN_REFINE_LINES`
+   * first moves — and the one-move answer, as a line of its own — are each
+   * played on through our next turn (`nextTurnValue`), and that decides
+   * between them.
+   *
+   * Asked only where a plan could differ from the one-move search: in our
+   * own main phase with nothing on the stack, when some first move, once
+   * resolved, leaves another to make. `null` when the one-move answer
+   * stands.
+   */
+  private planLines(
+    view: ControllerView,
+    candidates: readonly Action[],
+    scored: ReadonlyMap<Action, number>,
+    mustKill: ReadonlyMap<Action, PlayerId>,
+    heldForCombat: ReadonlySet<Action>,
+    best: Action,
+    bestScore: number,
+  ): { readonly action: Action; readonly score: number } | null {
+    this.lastFollowUp = null;
+    const state = view.state;
+    const me = this.playerId;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
+    if (state.zones.shared.stack.length > 0 || state.awaiting !== null) return null;
+    // A window the plan has a step for was replayed (`continueTurnPlan`)
+    // before any search; one searched here plans afresh.
+    this.turnPlan = null;
+    const firsts = candidates.filter(
+      (a) => a.type !== "pass-priority" && scored.has(a) && !mustKill.has(a) && !heldForCombat.has(a),
+    );
+    if (firsts.length === 0) return null;
+    const hooks = this.planHooks();
+    const limits = this.planLimits();
+    const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
+    const lines = planTurn(state, this.cards, me, firsts, hooks, limits, unknown);
+    const chains = lines.some((line) => line.steps.length > 1);
+    let chosen = lines[0];
+    if (chosen === undefined) return null;
+    // The best line for each of the best few first moves, twins (two Bolts
+    // at the same target) counted once.
+    const firstKey = (line: PlannedLine): string => {
+      const step = line.steps[0];
+      if (step === undefined || step === "combat") return "combat";
+      const id = step.type === "cast-spell" || step.type === "play-land" ? step.card : undefined;
+      return JSON.stringify({ ...step, card: id === undefined ? undefined : state.objects[id]?.cardName });
+    };
+    const close: PlannedLine[] = [];
+    const firstsSeen = new Set<string>();
+    for (const line of lines) {
+      if (close.length >= PLAN_REFINE_LINES) break;
+      const key = firstKey(line);
+      if (firstsSeen.has(key)) continue;
+      firstsSeen.add(key);
+      close.push(line);
+    }
+    // The one-move answer as a line: its first step, then the turn passed —
+    // or, for passing, the turn passed with no step at all.
+    const alone =
+      best.type === "pass-priority"
+        ? undefined
+        : lines.find((line) => line.steps.length === 1 && sameStep(line.steps[0], best));
+    // Where a plan can't differ from the one-move search, nothing more is
+    // spent: no line chains, so each is one move it already weighed — unless,
+    // under "next-turn", our next turn might tell the first moves apart:
+    // there are two, it isn't already won, and some line leaves a card in
+    // hand for it (a second Bolt to come).
+    const leavesACard = close.some((line) => (line.end.zones.perPlayer[me]?.hand.length ?? 0) > 0);
+    const nextTurn =
+      this.planMode === "next-turn" && close.length > 1 && leavesACard && !chosen.end.result.over;
+    if (!chains && !nextTurn) return null;
+    if (nextTurn) {
+      // The one-move answer is weighed first and keeps every tie: a line
+      // replaces it only by playing our next turn strictly better.
+      const baseline = alone ?? passLine(state, this.cards, me, hooks);
+      const order = baseline === null ? close : [baseline, ...close.filter((line) => line !== baseline)];
+      let top = -Infinity;
+      for (const line of order) {
+        const value = nextTurnValue(line, this.cards, me, hooks, limits, unknown);
+        if (value > top + (line === order[0] ? 0 : TIE)) {
+          top = value;
+          chosen = line;
+        }
+      }
+      if (chosen.steps.length === 0) return null;
+    } else if (!(chosen.value > bestScore + TIE)) {
+      return null;
+    }
+    const [first, ...rest] = chosen.steps;
+    if (first === undefined) return null;
+    if (sameStep(first, best) && rest.length === 0) return null;
+    this.turnPlan = { turn: state.turn.number, steps: rest, boards: chosen.boards.slice(1) };
+    // A line that passes to combat to make a move after it holds that move's
+    // mana through combat, as a wipe held for combat does (`heldPlay`).
+    const after = rest[0];
+    if (first === "combat" && after !== undefined && after !== "combat") {
+      this.heldPlay = { turn: state.turn.number, action: after };
+    }
+    const action: Action = first === "combat" ? { type: "pass-priority", player: me } : first;
+    const then = rest.find((step): step is Action => step !== "combat");
+    if (then !== undefined) this.lastFollowUp = { action, score: chosen.value, then };
+    return { action, score: Math.max(chosen.value, bestScore) };
+  }
+
+  /**
+   * The next step of the plan `planLines` chose, if this window is the one it
+   * planned for: our own turn, nothing on the stack, nothing asked, the board
+   * the step was planned on (`boardKey`), and the move still on offer.
+   * Anything else drops the plan, and the window is searched as usual.
+   */
+  private continueTurnPlan(view: ControllerView): Action | null {
+    const plan = this.turnPlan;
+    if (plan === null) return null;
+    const state = view.state;
+    const me = this.playerId;
+    if (state.turn.number !== plan.turn || state.turnOrder[state.turn.activePlayerIndex] !== me) {
+      this.turnPlan = null;
+      return null;
+    }
+    // Our own spell resolving, or a decision it raised: not a window the plan
+    // has a step for, and not a reason to drop it.
+    if (state.awaiting !== null || state.zones.shared.stack.length > 0) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
+    const step = plan.steps[0];
+    const board = plan.boards[0];
+    if (step === undefined || board !== boardKey(state, me)) {
+      this.turnPlan = null;
+      return null;
+    }
+    plan.steps.shift();
+    plan.boards.shift();
+    if (step === "combat") {
+      if (state.turn.step === "precombat-main") return { type: "pass-priority", player: me };
+      this.turnPlan = null;
+      return null;
+    }
+    const offered = view.legalActions().some((l) =>
+      step.type === "cast-spell" || step.type === "play-land"
+        ? l.kind === step.type && l.card === step.card
+        : step.type === "activate-ability"
+          ? l.kind === "activate-ability" && l.source === step.source && l.abilityIndex === step.abilityIndex
+          : false,
+    );
+    if (!offered) {
+      this.turnPlan = null;
+      return null;
+    }
+    return step;
   }
 
   /** `score` for a follow-up `action`, on the board `first` left

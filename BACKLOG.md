@@ -225,6 +225,21 @@ Shiko or the other spell, and haste enablers in the crackback).
   one 30-minute timeout, 14% [3, 51] — no signal — at 875 ms a decision on average and 208 s at
   worst, so it needs to be made cheaper (small boards only, or only where holding mana up is in
   question) before a bench big enough to say anything.
+  **Turn planning** (the user's steer: sequence our own turns, opponents barely figuring; only
+  where it could change the answer — `--plan turn|next-turn`, `bot/turn-plan.ts`): `turn` 9/17
+  (Rituals into Grave Titan, Act of Treason then the sacrifice), `next-turn` 10/17 (the two Bolts
+  too); hand-built gate 178 and 173 of 180, `turn`'s two misses better plays the judge can't see (it attacks
+  with the token before Skullclamping or Disputing it). Same seeds, 47 four-player games against
+  shipped v2s: plain 25.5% [15, 40], `turn` 34.0% [22, 48], decisions no slower (105 ms average).
+  Next: a bigger bench to confirm, then seat it — its search ignores `timeBudgetMs`, so first give
+  it the clock, and turn those two scenarios into whole-turn judges.
+- **Bots and token stacks: divided damage and gang blocks** (the user, 2026-10-18). Neither bot
+  ever sets a cast's `division`, so divided damage always splits evenly over distinct targets (v1
+  aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno
+  Titan never goes 1 + 1 + 1 at three 1/1s, which the engine refuses anyway while a stack can't
+  fill two slots of one target group ("Distinct targets in one token stack", Engine rules gaps).
+  And neither gang-blocks with two tokens of one stack, which the engine allows (`count`): v1 keys
+  blocks by blocker id at `count: 1`, v2's block climb drops a blocker once used.
 - **More training scenarios.** 120 hand-built scenarios, all of them gating
   (`bot/scenarios.ts`). Not yet covered: mulligans (`mulligan-policy.test.ts`). More come from
   live games: the in-game Capture button (`--capture`) saves a position to `captures/`, which
