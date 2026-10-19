@@ -98,9 +98,15 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   Run before authoring.
 - `card:brief -- "Name"`: **read this before searching the engine by hand** — Oracle text,
   rulings, the card's triage records (needs built since flagged) and, per Oracle line, the pool's
-  closest authored abilities with their files. Reads `dist/`, so build first.
+  closest authored abilities with their files.
+- `card:find -- "<phrase>" [--kind triggered] [--json "<substring of spec>"] [--limit N]`: the
+  pool's abilities that read most like a phrase (ranked like `card:brief`'s analogs), each with
+  card, file, text and authored shape, in well under a second. The quick way to an example.
 - `card:vocab -- <term>`: what the definition vocabulary can say about a term — the pool's usage
   with small example cards, the engine declarations with their docs, the guide's lines.
+- All three read the **pool index** (`engine/.cache/pool-index.jsonl` and `pool-vocab.json`,
+  gitignored, `scripts/pool-index.mjs`): written by `gen:cards` from the sources, rebuilt by the
+  tools when a card file (or a `src/cards/*.ts`/`src/*.ts` helper) is newer. No build needed.
 - `cards:needs -- --next 60 | --rank | --stale | --feature <key>`: the next untriaged cards by
   EDHREC rank, and the triage records through one need
   vocabulary (`data/needs-vocabulary.json`): what blocks the most cards, what's been built since.

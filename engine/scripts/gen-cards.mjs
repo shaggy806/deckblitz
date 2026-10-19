@@ -24,6 +24,10 @@
  * read against the real definitions, so a file written some other way fails
  * there rather than landing a card in a shard its name doesn't hash to.
  *
+ * Last, it writes the pool index (`pool-index.mjs`: every ability of every
+ * card, in `engine/.cache/`, gitignored) that `card:brief`, `card:find` and
+ * `card:vocab` read instead of loading the whole pool on every run.
+ *
  * Run via `npm run gen:cards -w engine` (also wired as a `prebuild` step so a
  * fresh checkout always has up-to-date output). Every file it writes is
  * checked in so `tsc`, tests, and the demo scripts work without a generate
@@ -36,6 +40,8 @@
 import { mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+
+import { ensurePoolIndex } from "./pool-index.mjs";
 
 const CARDS_DIR = fileURLToPath(new URL("../src/cards/", import.meta.url));
 const OUT_FILE = path.join(CARDS_DIR, "generated.ts");
@@ -289,3 +295,20 @@ console.log(
     ? `cards/generated.ts and ${SHARD_COUNT} shards already up to date (${count} cards)`
     : `wrote ${written.length} and removed ${stale.length} generated card files (${count} cards, ${SHARD_COUNT} shards)`,
 );
+
+// The pool index card:brief, card:find and card:vocab read (`pool-index.mjs`,
+// engine/.cache/), rebuilt when a card file is newer than it. A convenience, so
+// a failure here warns rather than fails the build (the tools rebuild a missing
+// or stale index themselves), and CI, which never runs the tools, skips it.
+if (!process.env.CI) {
+  try {
+    const built = await ensurePoolIndex();
+    console.log(
+      built === undefined
+        ? "pool index already up to date"
+        : `pool index: ${built.definitions} definitions, ${built.abilities} abilities (${built.ms} ms)`,
+    );
+  } catch (err) {
+    console.warn(`pool index not written: ${err.message}`);
+  }
+}

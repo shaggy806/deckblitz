@@ -31,7 +31,8 @@
 //                      next batch to look at
 //
 // The library half (`loadVocabulary`, `loadRecords`, `poolNames`) is what
-// `card-brief.mjs` reads records through.
+// `card-brief.mjs` reads records through (`poolNames` by way of the pool
+// index, `pool-index.mjs`, which stores its answer).
 
 import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";

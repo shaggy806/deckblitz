@@ -117,8 +117,21 @@ authored. Most of a card is something another card already does in other
 words: "When ~ dies or is put into exile from the battlefield, you may put
 her into her owner's library third from the top" finds God-Eternal Oketra's
 trigger, word for word. A high score is a lead — open the analog's file
-before copying its shape. The analogs come from `dist/`, so build first (it
-warns when the pool's sources are newer).
+before copying its shape. The analogs come from the pool index
+(`engine/.cache/pool-index.jsonl`, every ability of every card, written by
+`gen:cards` and rebuilt by the tools themselves when a card file is newer),
+so there's nothing to build first.
+
+**To find examples of one ability,** `npm run card:find -w engine -- "<phrase>"`
+searches that index in well under a second: the abilities whose printed text
+reads most like the phrase (ranked the way the brief's analogs are, one per
+card), each with its card, file, text and authored shape. Write the phrase
+the way Oracle text does — `"{T}: Add {C}{C}."`, `"whenever another creature
+you control dies"` — since symbols and numbers are matched as such. `--kind
+triggered` (or activated, static, spell, keyword, modes …) keeps one kind;
+`--json create-token` keeps abilities whose shape contains a substring, and
+alone lists them smallest shape first (`--json on:dies --kind triggered`:
+the simplest dies-triggers to copy); `--limit N` prints more than ten.
 
 **To ask whether the vocabulary can say something,** `npm run card:vocab -w
 engine -- emblem` searches every term the pool uses (`kind=create-emblem`,

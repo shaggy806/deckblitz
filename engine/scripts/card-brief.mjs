@@ -19,9 +19,11 @@
 // nonland permanents you control". A high score is a lead, not a proof: read
 // the analog's card before copying its shape.
 //
-// The analogs come from the built pool (`dist/cards/pool/`), so they're as
-// current as the last `npm run build -w engine`; a warning says when the pool's
-// sources are newer. Everything else reads sources and data directly.
+// The analogs come from the pool index (`pool-index.mjs`: every ability of
+// every card, read from the sources into `engine/.cache/pool-index.jsonl` by
+// `npm run gen:cards`), rebuilt first when a card file is newer than it — no
+// `npm run build` needed. Everything else reads sources and data directly.
+// `card:find` searches the same index for a phrase of your own.
 //
 // Usage: node scripts/card-brief.mjs "Card Name" ["Another" ...]
 //   --analogs N   analogs per Oracle line (default 3)
@@ -31,153 +33,19 @@
 //   --test        end with a test outline on src/test/harness.ts: one
 //                 it.todo per ability and per ruling, to fill in
 
-import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { findCard, suggest } from "./oracle-snapshot.mjs";
-import { frontName, loadRecords, loadVocabulary, poolNames } from "./needs-vocabulary.mjs";
+import { frontName, loadRecords, loadVocabulary } from "./needs-vocabulary.mjs";
+import { ENGINE, indexCorpus, loadPoolIndex, normalise } from "./pool-index.mjs";
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-const ENGINE = path.join(here, "..");
-const DIST_POOL = path.join(ENGINE, "dist/cards/pool");
-const SRC_POOL = path.join(ENGINE, "src/cards/pool");
-
-// ------------------------------------------------------------------ text
-
-const NUMBER_WORDS =
-  /\b(\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|half)\b/g;
-const SELF_NOUNS =
-  /\bthis (creature|artifact|enchantment|land|permanent|card|spell|equipment|aura|vehicle|saga|planeswalker|class|room|token|battle|siege|case|ability)\b/g;
-const STOP = new Set(["a", "an", "the", "of", "to", "and", "is", "be", "as", "that", "on", "in", "for", "with", "s"]);
-
-/** Comparable words for a rules text written for `name`. */
-function normalise(text, name) {
-  let t = text.toLowerCase().replace(/\([^)]*\)/g, " ");
-  if (name) {
-    const full = name.toLowerCase();
-    const short = full.split(",")[0];
-    for (const n of [full, short]) if (n.length > 2) t = t.split(n).join(" ~ ");
-  }
-  t = t
-    .replace(SELF_NOUNS, " ~ ")
-    .replace(/\{t\}/g, " tapsymbol ")
-    .replace(/\{q\}/g, " untapsymbol ")
-    .replace(/\{[^}]+\}/g, " mana ")
-    .replace(NUMBER_WORDS, " N ")
-    // X stays its own word: "mana value X or less" is a different engine
-    // question from "mana value 3 or less".
-    .replace(/\bx\b/g, " X ")
-    .replace(/\b(his|her|their)\b/g, "its")
-    .replace(/\b(he|she|him)\b/g, "it")
-    .replace(/[−–—]/g, " - ");
-  const words = (t.match(/[a-z~NX+\-']+/g) ?? []).filter((w) => !STOP.has(w) && w !== "-");
-  const grams = [...words];
-  for (let i = 0; i + 1 < words.length; i++) grams.push(`${words[i]}_${words[i + 1]}`);
-  return grams;
-}
-
-// ------------------------------------------------------------------ corpus
-
-/** Every ability of a pool definition with its own rules text: any object
- * under the definition that has a `text` beside other fields (triggered,
- * activated and static abilities, modes, granted abilities), and the spell
- * itself (its `effect`, `targets`, `castModal`) under the card's `text`. */
-function abilitiesOf(def) {
-  const out = [];
-  const walk = (node, where) => {
-    if (Array.isArray(node)) {
-      node.forEach((item) => walk(item, where));
-      return;
-    }
-    if (node === null || typeof node !== "object") return;
-    if (node !== def && typeof node.text === "string" && Object.keys(node).length > 1) {
-      out.push({ text: node.text, shape: node, where });
-    }
-    for (const [key, value] of Object.entries(node)) {
-      if (node === def && key === "faces") continue;
-      if (typeof value === "object") walk(value, key);
-    }
-  };
-  walk(def, "card");
-  // `!= null`: a permanent's definition can carry `castModal: null`.
-  if (def.effect != null || def.castModal != null) {
-    const shape = {};
-    for (const key of ["targets", "effect", "castModal", "additionalCost", "alternativeCost", "kicker", "x"]) {
-      if (def[key] !== undefined) shape[key] = def[key];
-    }
-    out.push({ text: def.text ?? "", shape, where: "spell" });
-  }
-  for (const face of def.faces ?? []) if (face !== def) out.push(...abilitiesOf(face));
-  return out;
-}
-
+/** The analogs' corpus — the pool's abilities with rules text (not tokens',
+ * not bare keywords) — and the pool's card names (`poolNames()`, kept in the
+ * index). */
 async function loadCorpus() {
-  if (!existsSync(DIST_POOL)) return { docs: [], stale: true, missing: true };
-  const files = readdirSync(DIST_POOL).filter((f) => f.endsWith(".js"));
-  const builtAt = statSync(path.join(ENGINE, "dist/cards/generated.js")).mtimeMs;
-  const newest = Math.max(...readdirSync(SRC_POOL).map((f) => statSync(path.join(SRC_POOL, f)).mtimeMs));
-  const defs = await Promise.all(
-    files.map(async (file) => ({
-      file: `src/cards/pool/${file.replace(/\.js$/, ".ts")}`,
-      def: (await import(pathToFileURL(path.join(DIST_POOL, file)).href)).default,
-    })),
-  );
-  const docs = [];
-  for (const { file, def } of defs) {
-    if (def === undefined || typeof def.name !== "string") continue;
-    for (const a of abilitiesOf(def)) {
-      if (a.text.trim() === "") continue;
-      docs.push({ card: def.name, file, text: a.text, shape: a.shape, where: a.where, grams: normalise(a.text, def.name) });
-    }
-  }
-  return { docs, stale: newest > builtAt, missing: false };
-}
-
-/** TF-IDF over the corpus, with an inverted index for scoring a query. */
-function indexCorpus(docs) {
-  const df = new Map();
-  for (const d of docs) for (const g of new Set(d.grams)) df.set(g, (df.get(g) ?? 0) + 1);
-  const n = docs.length;
-  const idf = (g) => Math.log((n + 1) / ((df.get(g) ?? 0) + 1)) + 1;
-  const vector = (grams) => {
-    const tf = new Map();
-    for (const g of grams) tf.set(g, (tf.get(g) ?? 0) + 1);
-    const v = new Map();
-    let norm = 0;
-    for (const [g, c] of tf) {
-      const w = (1 + Math.log(c)) * idf(g);
-      v.set(g, w);
-      norm += w * w;
-    }
-    norm = Math.sqrt(norm) || 1;
-    for (const [g, w] of v) v.set(g, w / norm);
-    return v;
-  };
-  const postings = new Map();
-  docs.forEach((d, i) => {
-    for (const [g, w] of vector(d.grams)) {
-      if (!postings.has(g)) postings.set(g, []);
-      postings.get(g).push([i, w]);
-    }
-  });
-  const search = (grams, k, exclude) => {
-    const scores = new Map();
-    for (const [g, w] of vector(grams)) {
-      for (const [i, dw] of postings.get(g) ?? []) scores.set(i, (scores.get(i) ?? 0) + w * dw);
-    }
-    const hits = [];
-    const seenCards = new Set();
-    for (const [i, s] of [...scores].sort((a, b) => b[1] - a[1])) {
-      const d = docs[i];
-      if (exclude.has(d.card) || seenCards.has(d.card)) continue;
-      seenCards.add(d.card);
-      hits.push({ ...d, score: s });
-      if (hits.length >= k) break;
-    }
-    return hits;
-  };
-  return { search };
+  const { docs, names } = await loadPoolIndex();
+  return { docs: docs.filter((d) => d.kind !== "keyword" && d.file.startsWith("src/cards/pool/")), names };
 }
 
 // ------------------------------------------------------------------ status
@@ -216,8 +84,6 @@ function engineKeywords() {
 // ------------------------------------------------------------------ output
 
 const clip = (s, width) => (width > 0 && s.length > width ? `${s.slice(0, width)}…` : s);
-const shapeOf = (shape) =>
-  JSON.stringify(shape, (key, value) => (key === "text" || value === null ? undefined : value));
 
 function oracleLines(card) {
   const faces = card.faces ?? [card];
@@ -252,13 +118,11 @@ async function main() {
 
   const vocab = loadVocabulary();
   const records = loadRecords();
-  const pool = poolNames();
+  const corpus = await loadCorpus();
+  const pool = corpus.names;
   const subs = standIns();
   const keywords = engineKeywords();
-  const corpus = await loadCorpus();
   const index = indexCorpus(corpus.docs);
-  if (corpus.missing) console.log("(no dist/ build: analogs skipped — run npm run build -w engine)\n");
-  else if (corpus.stale) console.log("(the pool's sources are newer than dist/: analogs miss the newest cards — npm run build -w engine)\n");
 
   for (const asked of names) {
     const card = findCard(asked);
@@ -320,18 +184,16 @@ async function main() {
     }
 
     // Analogs.
-    if (!corpus.missing) {
-      console.log(`\nAnalogs (closest authored abilities per line; score 0–1):`);
-      const exclude = new Set([name, frontName(name)]);
-      for (const { line } of oracleLines(card)) {
-        const grams = normalise(line, name);
-        if (grams.filter((g) => !g.includes("_")).length <= 2) continue; // a bare keyword line
-        console.log(`  ▸ ${clip(line, 160)}`);
-        for (const hit of index.search(grams, k, exclude)) {
-          console.log(`    ${hit.score.toFixed(2)}  ${hit.card} — ${hit.file}`);
-          console.log(`          "${clip(hit.text, 200)}"`);
-          console.log(`          ${clip(shapeOf(hit.shape), width)}`);
-        }
+    console.log(`\nAnalogs (closest authored abilities per line; score 0–1):`);
+    const exclude = new Set([name, frontName(name)]);
+    for (const { line } of oracleLines(card)) {
+      const grams = normalise(line, name);
+      if (grams.filter((g) => !g.includes("_")).length <= 2) continue; // a bare keyword line
+      console.log(`  ▸ ${clip(line, 160)}`);
+      for (const hit of index.search(grams, k, exclude)) {
+        console.log(`    ${hit.score.toFixed(2)}  ${hit.card} — ${hit.file}`);
+        console.log(`          "${clip(hit.text, 200)}"`);
+        console.log(`          ${clip(JSON.stringify(hit.spec), width)}`);
       }
     }
     if (outline) printOutline(card);

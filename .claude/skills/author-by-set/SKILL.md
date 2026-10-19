@@ -31,6 +31,10 @@ is the same walk, picked up by `--next` like any card left.
   to `cards/scaffold/` with a `// TODO(scaffold)` per unread line.
 - `npm run card:brief -w engine -- "A" "B" …` — Oracle text, rulings, triage
   records and the pool's closest authored abilities per line.
+- `npm run card:find -w engine -- "<phrase>" [--kind triggered] [--json
+  "<substring of spec>"] [--limit N]` — the pool's abilities that read most
+  like a phrase, with card, file, text and authored shape, in well under a
+  second: the quick way to find an example to copy.
 - `npm run card:vocab -w engine -- <term>`, `npm run cards:needs -w engine --
   --rank | --feature <key>` — as in `author-top-cards`.
 

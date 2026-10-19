@@ -21,7 +21,12 @@ otherwise grep for — reach for them first):
 - `npm run card:brief -w engine -- "A" "B" …` — Oracle text and rulings, the
   card's triage records (each need flagged if built since), and per Oracle
   line the pool's closest authored abilities with their files. `--test`
-  adds a test outline. Reads `dist/`: build first.
+  adds a test outline. Reads the pool index (`engine/.cache/`), which
+  rebuilds itself when a card changes: no build needed.
+- `npm run card:find -w engine -- "<phrase>" [--kind triggered] [--json
+  "<substring of spec>"] [--limit N]` — the pool's abilities that read most
+  like a phrase, with card, file, text and authored shape, in well under a
+  second: the quick way to find an example to copy.
 - `npm run card:vocab -w engine -- <term>` — whether the vocabulary can say
   something: usage with small example cards, declarations with docs, the
   guide's lines.

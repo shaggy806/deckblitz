@@ -4,10 +4,12 @@
 //
 // Two sources, joined on the term:
 //
-//   - **Usage**: every registered card and token definition (from `dist/`),
-//     walked for its discriminators and fields. An object with a `kind` is
-//     the term `kind=<value>` (an effect, a target spec, a condition, an
-//     amount …); one with an `on` is `on=<value>` (a trigger); every field an
+//   - **Usage**: every registered card and token definition, walked for its
+//     discriminators and fields (`vocabTerms` in `pool-index.mjs`, walked
+//     once into the pool index in `engine/.cache/`, rebuilt when a card file
+//     changes). An object with a `kind` is the term `kind=<value>` (an
+//     effect, a target spec, a condition, an amount …); one with an `on` is
+//     `on=<value>` (a trigger); every field an
 //     object carries is `<owner>.<field>`, where the owner is that `kind=`/
 //     `on=` term or, for an object without one, where it sits (`static[]`,
 //     `activated[].cost`); and an enum-like string value adds
@@ -28,12 +30,11 @@
 //          --unused       declared kinds and triggers no card uses
 //          --list [prefix] every usage term, by cards using it
 
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-const ENGINE = path.join(here, "..");
+import { ENGINE, loadPoolVocab } from "./pool-index.mjs";
+
 const SOURCES = [
   "src/effects.ts",
   "src/abilities.ts",
@@ -47,64 +48,21 @@ const GUIDE = "src/cards/AUTHORING.md";
 
 // ------------------------------------------------------------------ usage
 
-const ENUMISH = /^[a-z][a-z0-9-]{0,40}$/;
-const SKIP_FIELDS = new Set(["text", "name", "prompt", "art", "flavor", "token", "tokenName", "chosen"]);
-
-async function loadDefinitions() {
-  const defs = [];
-  for (const dir of ["pool", "tokens"]) {
-    const abs = path.join(ENGINE, "dist/cards", dir);
-    if (!existsSync(abs)) continue;
-    const files = readdirSync(abs).filter((f) => f.endsWith(".js"));
-    const mods = await Promise.all(files.map((f) => import(pathToFileURL(path.join(abs, f)).href)));
-    mods.forEach((m, i) => {
-      if (m.default && typeof m.default.name === "string") {
-        defs.push({ def: m.default, file: `src/cards/${dir}/${files[i].replace(/\.js$/, ".ts")}` });
-      }
-    });
-  }
-  return defs;
-}
-
+/** Each term's card count and its `perTerm` smallest cards, replaying every
+ * definition's terms (`vocabTerms`, read from the pool index) in pool order. */
 function usageIndex(defs, perTerm) {
-  const terms = new Map(); // term -> { cards: Set, examples: [{size, name, file}] }
-  for (const { def, file } of defs) {
-    const size = JSON.stringify(def).length;
-    const seen = new Set();
-    const note = (term) => {
-      if (seen.has(term)) return;
-      seen.add(term);
+  const terms = new Map(); // term -> { count, examples: [{size, name, file}] }
+  for (const { name, file, size, terms: mine } of defs) {
+    for (const term of mine) {
       let t = terms.get(term);
       if (t === undefined) terms.set(term, (t = { count: 0, examples: [] }));
       t.count += 1;
-      t.examples.push({ size, name: def.name, file });
+      t.examples.push({ size, name, file });
       if (t.examples.length > perTerm * 4) {
         t.examples.sort((a, b) => a.size - b.size);
         t.examples.length = perTerm;
       }
-    };
-    const walk = (node, place) => {
-      if (Array.isArray(node)) {
-        for (const item of node) walk(item, `${place}[]`);
-        return;
-      }
-      if (node === null || typeof node !== "object") return;
-      let owner = place;
-      if (typeof node.kind === "string") owner = `kind=${node.kind}`;
-      else if (typeof node.on === "string") owner = `on=${node.on}`;
-      if (owner !== place) note(owner);
-      for (const [field, value] of Object.entries(node)) {
-        if (value === undefined || value === null) continue;
-        if (field === "kind" && owner.startsWith("kind=")) continue;
-        if (field === "on" && owner.startsWith("on=")) continue;
-        note(`${owner}.${field}`);
-        if (typeof value === "string" && ENUMISH.test(value) && !SKIP_FIELDS.has(field)) {
-          note(`${owner}.${field}=${value}`);
-        }
-        if (typeof value === "object") walk(value, owner === place ? `${place}.${field}` : field);
-      }
-    };
-    walk(def, "card");
+    }
   }
   for (const t of terms.values()) {
     t.examples.sort((a, b) => a.size - b.size);
@@ -167,11 +125,7 @@ async function main() {
     return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
   };
   const perTerm = Number(opt("--examples", 3));
-  if (!existsSync(path.join(ENGINE, "dist/cards/pool"))) {
-    console.error("No dist/ build: run npm run build -w engine first.");
-    process.exit(1);
-  }
-  const usage = usageIndex(await loadDefinitions(), perTerm);
+  const usage = usageIndex(await loadPoolVocab(), perTerm);
   const decls = declarations();
 
   if (args.includes("--unused")) {
