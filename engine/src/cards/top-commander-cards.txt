@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3696 already implemented / 1304 missing (marks refreshed 2026-10-19)
+3697 already implemented / 1303 missing (marks refreshed 2026-10-19)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3295,7 +3295,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3302  Commit // Memory                         {3}{U} // {4}{U}{U} Instant // Sorcery
 [x]  3303  Tiller Engine                            {2}              Artifact Creature — Construct
 [x]  3304  Sunscorched Desert                       {0}              Land — Desert
-[ ]  3305  White Plume Adventurer                   {2}{W}           Creature — Orc Cleric
+[x]  3305  White Plume Adventurer                   {2}{W}           Creature — Orc Cleric
 [x]  3306  Blossoming Tortoise                      {2}{G}{G}        Creature — Turtle
 [x]  3307  Toph, the First Metalbender              {1}{R}{G}{W}     Legendary Creature — Human Warrior Ally
 [ ]  3308  Zirda, the Dawnwaker                     {1}{R/W}{R/W}    Legendary Creature — Elemental Fox

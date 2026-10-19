@@ -4,6 +4,7 @@ import { defineCard } from "../define.js";
  * block." */
 export default defineCard({
   name: "Robot Token (Cybernetica Datasmith)",
+  art: "319aaaae-1efb-412c-8839-c575a2694485",
   colors: [],
   types: ["artifact", "creature"],
   subtypes: ["Robot"],

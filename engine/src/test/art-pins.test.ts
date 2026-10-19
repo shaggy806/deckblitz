@@ -47,6 +47,11 @@ const NO_TOKEN_PRINTING = new Set([
   "1/1 Robot Hero Token",
   // The only Spawn printings are 3/3 red.
   "Spawn Token (Spawning Pit)",
+  // Daring Piracy (J22) and Lita, Mechanical Engineer's tokens were never
+  // printed: the only red 1/1 Pirates can't block, and no Zeppelin token
+  // exists (checked 2026-10-19).
+  "Pirate Token (Daring Piracy)",
+  "Zeppelin",
 ]);
 
 describe("token art", () => {
