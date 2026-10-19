@@ -104,8 +104,8 @@ export interface EvalBotOptions {
    * Plan our own turn (`turn-plan.ts`) in place of `followUps`: lines of
    * moves across both main phases, the opponents only blocking. `"turn"` by
    * default (since 2026-10-18: lookahead benchmarks 7 to 9 of 17, every gate
-   * scenario, 26.9% to 30.5% over 197 four-player games at no cost a
-   * decision); `"next-turn"` also plays our next turn on from the best line
+   * scenario, no cost a decision; head to head with the bot before it, level,
+   * 24.9% [21.3, 28.5] over 546 four-player games); `"next-turn"` also plays our next turn on from the best line
    * of each of the best few first moves, an experiment; `"off"` searches as
    * before, with `followUps`.
    */

@@ -230,7 +230,8 @@ Shiko or the other spell, and haste enablers in the crackback).
   too); hand-built gate 178 and 173 of 180, `turn`'s two misses better plays the judge can't see (it attacks
   with the token before Skullclamping or Disputing it). Same seeds, 47 four-player games against
   shipped v2s: plain 25.5% [15, 40], `turn` 34.0% [22, 48], decisions no slower (105 ms average).
-  `turn` is now v2's default (`COMPLETED.md`); left here: the "sequence" benchmark it misses (Opt,
+  `turn` is now v2's default (`COMPLETED.md`), level in strength head to head (24.9% [21.3,
+  28.5], 546 games): the sequencing it fixes is too rare to move a win rate. Left here: the "sequence" benchmark it misses (Opt,
   which needs the draw known), `next-turn` (its passive opponents make held answers look idle), and
   the opponents'-turn benchmarks, which only the (unseated) deep horizons solve.
 - **A decision overruns its second, what's left** (2026-10-18; the rest is in `COMPLETED.md`): 29

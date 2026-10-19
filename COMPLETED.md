@@ -274,8 +274,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
   (`plan: "turn"`, `bot/turn-plan.ts`) — lines of its moves across both main phases and through
   combat, only where a move opens up another, replayed while the board matches, on the decision's
   clock. Lookahead benchmarks 7 to 9 of 17 (Rituals into Grave Titan; Act of Treason, attack,
-  sacrifice), every gate scenario, 26.9% to 30.5% over 197 four-player games against shipped v2s
-  (inside the noise, ahead in both runs) at no cost a decision; 51 of 12,218 decisions changed
+  sacrifice), every gate scenario, at no cost a decision. No measured strength: head to head
+  (`bot:ab`, one planning seat against three of 7ae6dfe1's, 546 four-player games) it won 24.9%
+  [21.3, 28.5] against an even 25%; an earlier 26.9% to 30.5% against shipped v2s (197 games)
+  was noise. Kept for the sequencing it gets right; 51 of 12,218 decisions changed
   in a `bot:diff`, mostly a move held until after combat. With it: a stolen creature pays a
   sacrifice cost, a commander blinked with a delayed return stays in exile for it, and the live
   decision budget went to a second (2026-10-18).
