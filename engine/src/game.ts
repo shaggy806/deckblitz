@@ -21812,16 +21812,20 @@ export class Game {
         let tokenController = controller;
         if (who === "target-controller") {
           const ref = targets[0];
-          if (ref?.kind === "player") tokenController = ref.player;
+          let found: PlayerId | undefined;
+          if (ref?.kind === "player") found = ref.player;
           else if (ref?.kind === "object") {
             // Rule 111.11 — a destroyed/countered target's *last-known*
             // controller: `moveObject` has already reverted `controller` to
             // `owner` for a permanent that left the battlefield, so read the
             // snapshot. For a spell controller === owner anyway.
-            const who =
-              lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller;
-            if (who !== undefined) tokenController = who;
+            found = lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller;
           }
+          // A target gone illegal names nobody (rule 608.2b): "target player
+          // creates" makes nothing then, rather than falling to the caster
+          // (Ashling's Command's Treasure mode, Cybernetica Datasmith).
+          if (found === undefined) return;
+          tokenController = found;
         }
         make(tokenController);
       },
@@ -21835,12 +21839,17 @@ export class Game {
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
       basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
       opponentsControllingFewer: (filter) => {
-        const mine = this.countBattlefieldMatching(controller, filter);
+        // What each player *controls* (read from their own side), whether or
+        // not the filter says so — Voice of Many's `{ type: "creature" }`
+        // would otherwise count every creature for everyone, and nobody would
+        // ever have fewer.
+        const owned: CardFilter = { ...filter, controlledBy: "you" };
+        const mine = this.countBattlefieldMatching(controller, owned);
         return this.state.turnOrder.filter(
           (p) =>
             p !== controller &&
             !this.state.players[p].hasLost &&
-            this.countBattlefieldMatching(p, filter) < mine,
+            this.countBattlefieldMatching(p, owned) < mine,
         ).length;
       },
       creaturesDiedThisTurn: (anyController) =>
