@@ -21,6 +21,7 @@ import _poolAmarantCoral from "../pool/amarant-coral.js";
 import _poolAnaconda from "../pool/anaconda.js";
 import _poolAncestorsProphet from "../pool/ancestors-prophet.js";
 import _poolAncientSpring from "../pool/ancient-spring.js";
+import _poolAngelicDestiny from "../pool/angelic-destiny.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
@@ -125,6 +126,7 @@ import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.j
 import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
+import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
 import _poolDreamThiefsBandana from "../pool/dream-thiefs-bandana.js";
 import _poolDreamdewEntrancer from "../pool/dreamdew-entrancer.js";
@@ -147,6 +149,7 @@ import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
+import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFerocification from "../pool/ferocification.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
@@ -218,6 +221,7 @@ import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
 import _poolJudgmentBolt from "../pool/judgment-bolt.js";
+import _poolJunkyardGenius from "../pool/junkyard-genius.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
 import _poolKarametrasAcolyte from "../pool/karametras-acolyte.js";
@@ -525,6 +529,7 @@ const shard: CardShard = {
     _poolAnaconda,
     _poolAncestorsProphet,
     _poolAncientSpring,
+    _poolAngelicDestiny,
     _poolAnnihilate,
     _poolAntQueen,
     _poolAphettoAlchemist,
@@ -629,6 +634,7 @@ const shard: CardShard = {
     _poolDoraMilajeElite,
     _poolDoubleCleave,
     _poolDoublingSeason,
+    _poolDraconicDestiny,
     _poolDragoonsLance,
     _poolDreamThiefsBandana,
     _poolDreamdewEntrancer,
@@ -651,6 +657,7 @@ const shard: CardShard = {
     _poolEtherealArmor,
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
+    _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFerocification,
     _poolFierceWitchstalker,
@@ -722,6 +729,7 @@ const shard: CardShard = {
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
     _poolJudgmentBolt,
+    _poolJunkyardGenius,
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
     _poolKarametrasAcolyte,

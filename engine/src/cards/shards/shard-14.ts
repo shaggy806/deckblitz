@@ -409,6 +409,7 @@ import _poolTwinflame from "../pool/twinflame.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
+import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
@@ -865,6 +866,7 @@ const shard: CardShard = {
     _poolUmezawasCharm,
     _poolUndermine,
     _poolUnexpectedAssistance,
+    _poolUnionOfTheThirdPath,
     _poolUnnaturalGrowth,
     _poolUnravel,
     _poolUpTheBeanstalk,

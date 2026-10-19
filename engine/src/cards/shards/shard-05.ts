@@ -170,10 +170,12 @@ import _poolGlimmerbell from "../pool/glimmerbell.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
 import _poolGluttonousZombie from "../pool/gluttonous-zombie.js";
+import _poolGnarlrootPallbearer from "../pool/gnarlroot-pallbearer.js";
 import _poolGoblinRoughrider from "../pool/goblin-roughrider.js";
 import _poolGoblinSettler from "../pool/goblin-settler.js";
 import _poolGodoBanditWarlord from "../pool/godo-bandit-warlord.js";
 import _poolGoldenHind from "../pool/golden-hind.js";
+import _poolGoringWarplow from "../pool/goring-warplow.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
@@ -278,6 +280,7 @@ import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOperaLoveSong from "../pool/opera-love-song.js";
 import _poolOraclesGift from "../pool/oracles-gift.js";
+import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
@@ -383,6 +386,7 @@ import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
 import _poolSuperStrength from "../pool/super-strength.js";
 import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
+import _poolSurgeEngine from "../pool/surge-engine.js";
 import _poolSwanSong from "../pool/swan-song.js";
 import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
@@ -639,10 +643,12 @@ const shard: CardShard = {
     _poolGlisterBairn,
     _poolGlorySeeker,
     _poolGluttonousZombie,
+    _poolGnarlrootPallbearer,
     _poolGoblinRoughrider,
     _poolGoblinSettler,
     _poolGodoBanditWarlord,
     _poolGoldenHind,
+    _poolGoringWarplow,
     _poolGrandCrescendo,
     _poolGrappleWithThePast,
     _poolGrasslands,
@@ -747,6 +753,7 @@ const shard: CardShard = {
     _poolOkoShadowmoorScion,
     _poolOperaLoveSong,
     _poolOraclesGift,
+    _poolOverwhelmingRemorse,
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
     _poolPaladinsArms,
@@ -852,6 +859,7 @@ const shard: CardShard = {
     _poolSuperStrength,
     _poolSupplyRunners,
     _poolSupremeVerdict,
+    _poolSurgeEngine,
     _poolSwanSong,
     _poolSwiftfootBoots,
     _poolSwordDancer,

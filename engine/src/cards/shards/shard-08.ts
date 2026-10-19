@@ -94,10 +94,12 @@ import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
+import _poolDesynchronize from "../pool/desynchronize.js";
 import _poolDetectivesSatchel from "../pool/detectives-satchel.js";
 import _poolDevastate from "../pool/devastate.js";
 import _poolDevkarinDissident from "../pool/devkarin-dissident.js";
 import _poolDevouringDeep from "../pool/devouring-deep.js";
+import _poolDisciplesOfGix from "../pool/disciples-of-gix.js";
 import _poolDispersingOrb from "../pool/dispersing-orb.js";
 import _poolDisruptingScepter from "../pool/disrupting-scepter.js";
 import _poolDivertDisaster from "../pool/divert-disaster.js";
@@ -141,6 +143,7 @@ import _poolEzuriRenegadeLeader from "../pool/ezuri-renegade-leader.js";
 import _poolFaerieConclave from "../pool/faerie-conclave.js";
 import _poolFallajiChaindancer from "../pool/fallaji-chaindancer.js";
 import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
+import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
 import _poolFeastingHobbit from "../pool/feasting-hobbit.js";
 import _poolFellingBlow from "../pool/felling-blow.js";
@@ -185,6 +188,7 @@ import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvesttideAssailant from "../pool/harvesttide-assailant.js";
 import _poolHeatShimmer from "../pool/heat-shimmer.js";
+import _poolHeavyweightDemolisher from "../pool/heavyweight-demolisher.js";
 import _poolHexhavenBattalion from "../pool/hexhaven-battalion.js";
 import _poolHierophantsChalice from "../pool/hierophants-chalice.js";
 import _poolHighspireMantis from "../pool/highspire-mantis.js";
@@ -221,9 +225,11 @@ import _poolKabiraTakedown from "../pool/kabira-takedown.js";
 import _poolKapow from "../pool/kapow.js";
 import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
+import _poolKaylasCommand from "../pool/kaylas-command.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
+import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
@@ -424,6 +430,7 @@ import _poolThroneOfGeth from "../pool/throne-of-geth.js";
 import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
+import _poolTowerWorker from "../pool/tower-worker.js";
 import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
@@ -594,10 +601,12 @@ const shard: CardShard = {
     _poolDeception,
     _poolDenziloreFatehold,
     _poolDesertCerodon,
+    _poolDesynchronize,
     _poolDetectivesSatchel,
     _poolDevastate,
     _poolDevkarinDissident,
     _poolDevouringDeep,
+    _poolDisciplesOfGix,
     _poolDispersingOrb,
     _poolDisruptingScepter,
     _poolDivertDisaster,
@@ -641,6 +650,7 @@ const shard: CardShard = {
     _poolFaerieConclave,
     _poolFallajiChaindancer,
     _poolFallajiExcavation,
+    _poolFallajiVanguard,
     _poolFangFearlessLcie,
     _poolFeastingHobbit,
     _poolFellingBlow,
@@ -685,6 +695,7 @@ const shard: CardShard = {
     _poolHarshMentor,
     _poolHarvesttideAssailant,
     _poolHeatShimmer,
+    _poolHeavyweightDemolisher,
     _poolHexhavenBattalion,
     _poolHierophantsChalice,
     _poolHighspireMantis,
@@ -721,9 +732,11 @@ const shard: CardShard = {
     _poolKapow,
     _poolKarooMeerkat,
     _poolKarsusDepthguard,
+    _poolKaylasCommand,
     _poolKellanJoinsUp,
     _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
+    _poolKillZoneAcrobat,
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
@@ -924,6 +937,7 @@ const shard: CardShard = {
     _poolThunderdrumSoloist,
     _poolTidehollowStrix,
     _poolTocasiasDigSite,
+    _poolTowerWorker,
     _poolTownSentry,
     _poolToxicNim,
     _poolTragicTrajectory,

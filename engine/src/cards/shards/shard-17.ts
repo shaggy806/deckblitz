@@ -17,6 +17,7 @@ import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
 import _poolAncestralRecall from "../pool/ancestral-recall.js";
 import _poolAncientCraving from "../pool/ancient-craving.js";
 import _poolAngelicPage from "../pool/angelic-page.js";
+import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
@@ -53,6 +54,7 @@ import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
+import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
 import _poolChainOfVapor from "../pool/chain-of-vapor.js";
 import _poolCharge from "../pool/charge.js";
@@ -291,6 +293,7 @@ import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
 import _poolRaucousCarnival from "../pool/raucous-carnival.js";
+import _poolRavenousGigamole from "../pool/ravenous-gigamole.js";
 import _poolRavos from "../pool/ravos.js";
 import _poolReadTheBones from "../pool/read-the-bones.js";
 import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
@@ -370,6 +373,7 @@ import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
+import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.js";
 import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
@@ -438,6 +442,7 @@ import _poolWrongTurn from "../pool/wrong-turn.js";
 import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
+import _poolYotianTactician from "../pool/yotian-tactician.js";
 import _poolYourTempleIsUnderAttack from "../pool/your-temple-is-under-attack.js";
 import _poolZealousGuardian from "../pool/zealous-guardian.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
@@ -447,6 +452,7 @@ import _tokensAngelToken33White from "../tokens/angel-token-3-3-white.js";
 import _tokensAvatarTokenAwakenTheBloodAvatar from "../tokens/avatar-token-awaken-the-blood-avatar.js";
 import _tokensBeastToken from "../tokens/beast-token.js";
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
+import _tokensConstructTokenKaylasCommand from "../tokens/construct-token-kaylas-command.js";
 import _tokensDarkstar from "../tokens/darkstar.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
 import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
@@ -474,6 +480,7 @@ const shard: CardShard = {
     _poolAncestralRecall,
     _poolAncientCraving,
     _poolAngelicPage,
+    _poolArbalestEngineers,
     _poolArcadeCabinet,
     _poolArcboundBruiser,
     _poolArcticTreeline,
@@ -510,6 +517,7 @@ const shard: CardShard = {
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
+    _poolCarrionLocust,
     _poolCascadeBluffs,
     _poolChainOfVapor,
     _poolCharge,
@@ -748,6 +756,7 @@ const shard: CardShard = {
     _poolRainOfTears,
     _poolRattleclawMystic,
     _poolRaucousCarnival,
+    _poolRavenousGigamole,
     _poolRavos,
     _poolReadTheBones,
     _poolReaperFromTheAbyss,
@@ -827,6 +836,7 @@ const shard: CardShard = {
     _poolSwordOfVengeance,
     _poolTaintedIsle,
     _poolTatteredApparition,
+    _poolTeethingWurmlet,
     _poolThaumaturgesFamiliar,
     _poolTheFalconAirshipRestored,
     _poolTheHuntsmansRedemption,
@@ -895,6 +905,7 @@ const shard: CardShard = {
     _poolYahenniUndyingPartisan,
     _poolYawningFissure,
     _poolYevasForcemage,
+    _poolYotianTactician,
     _poolYourTempleIsUnderAttack,
     _poolZealousGuardian,
     _poolZinniaValleysVoice,
@@ -906,6 +917,7 @@ const shard: CardShard = {
     _tokensAvatarTokenAwakenTheBloodAvatar,
     _tokensBeastToken,
     _tokensCatBeastToken,
+    _tokensConstructTokenKaylasCommand,
     _tokensDarkstar,
     _tokensEldraziToken,
     _tokensFungusTokenCantBlock,

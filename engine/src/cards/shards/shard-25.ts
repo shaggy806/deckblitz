@@ -134,6 +134,7 @@ import _poolFaithbearerPaladin from "../pool/faithbearer-paladin.js";
 import _poolFanaticOfMogis from "../pool/fanatic-of-mogis.js";
 import _poolFarTraveler from "../pool/far-traveler.js";
 import _poolFeiyiSnake from "../pool/feiyi-snake.js";
+import _poolFeldonRonomExcavator from "../pool/feldon-ronom-excavator.js";
 import _poolFellThePheasant from "../pool/fell-the-pheasant.js";
 import _poolFerociousPup from "../pool/ferocious-pup.js";
 import _poolFerventStrike from "../pool/fervent-strike.js";
@@ -435,6 +436,7 @@ import _poolWallOfDistortion from "../pool/wall-of-distortion.js";
 import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
 import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
+import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
 import _poolWildfireHowl from "../pool/wildfire-howl.js";
@@ -445,6 +447,7 @@ import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
+import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZoeticGlyph from "../pool/zoetic-glyph.js";
 import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
@@ -597,6 +600,7 @@ const shard: CardShard = {
     _poolFanaticOfMogis,
     _poolFarTraveler,
     _poolFeiyiSnake,
+    _poolFeldonRonomExcavator,
     _poolFellThePheasant,
     _poolFerociousPup,
     _poolFerventStrike,
@@ -898,6 +902,7 @@ const shard: CardShard = {
     _poolWallOfTanglecord,
     _poolWanderingOnes,
     _poolWanderlightSpirit,
+    _poolWastefulHarvest,
     _poolWeaveFate,
     _poolWickedReward,
     _poolWildfireHowl,
@@ -908,6 +913,7 @@ const shard: CardShard = {
     _poolWondrousRevival,
     _poolWoodedBastion,
     _poolWurmcoilLarva,
+    _poolZephyrSentinel,
     _poolZoeticGlyph,
   ],
   tokens: [

@@ -173,6 +173,7 @@ import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGriptide from "../pool/griptide.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
+import _poolHarbinVanguardAviator from "../pool/harbin-vanguard-aviator.js";
 import _poolHardenedScales from "../pool/hardened-scales.js";
 import _poolHarmonicSliver from "../pool/harmonic-sliver.js";
 import _poolHarriedDronesmith from "../pool/harried-dronesmith.js";
@@ -402,6 +403,7 @@ import _poolThaumatog from "../pool/thaumatog.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheLunarWhale from "../pool/the-lunar-whale.js";
 import _poolThermalNavigator from "../pool/thermal-navigator.js";
+import _poolThopterMechanic from "../pool/thopter-mechanic.js";
 import _poolThoseWhoServe from "../pool/those-who-serve.js";
 import _poolThrivingIsle from "../pool/thriving-isle.js";
 import _poolThundermaneDragon from "../pool/thundermane-dragon.js";
@@ -417,6 +419,7 @@ import _poolTrenchpost from "../pool/trenchpost.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
+import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
@@ -473,6 +476,7 @@ import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automa
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
 import _tokensZombieTokenCrowdedCrypt from "../tokens/zombie-token-crowded-crypt.js";
+import _tokensZombieTokenTransmograntAltar from "../tokens/zombie-token-transmogrant-altar.js";
 
 const shard: CardShard = {
   pool: [
@@ -646,6 +650,7 @@ const shard: CardShard = {
     _poolGriptide,
     _poolGuardianGladewalker,
     _poolHamperingSnare,
+    _poolHarbinVanguardAviator,
     _poolHardenedScales,
     _poolHarmonicSliver,
     _poolHarriedDronesmith,
@@ -875,6 +880,7 @@ const shard: CardShard = {
     _poolTheDalekEmperor,
     _poolTheLunarWhale,
     _poolThermalNavigator,
+    _poolThopterMechanic,
     _poolThoseWhoServe,
     _poolThrivingIsle,
     _poolThundermaneDragon,
@@ -890,6 +896,7 @@ const shard: CardShard = {
     _poolTyvarsStand,
     _poolUnauthorizedExit,
     _poolUnclaimedTerritory,
+    _poolUnleashShell,
     _poolUnrulyKrasis,
     _poolValleyDasher,
     _poolValleyFloodcaller,
@@ -948,6 +955,7 @@ const shard: CardShard = {
     _tokensTreasureToken,
     _tokensZombieKnightToken,
     _tokensZombieTokenCrowdedCrypt,
+    _tokensZombieTokenTransmograntAltar,
   ],
 };
 

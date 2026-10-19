@@ -25,6 +25,7 @@ import _poolAyarasOathsworn from "../pool/ayaras-oathsworn.js";
 import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
+import _poolBattlefieldButcher from "../pool/battlefield-butcher.js";
 import _poolBebopRocksteady from "../pool/bebop-rocksteady.js";
 import _poolBedevil from "../pool/bedevil.js";
 import _poolBehindTheMask from "../pool/behind-the-mask.js";
@@ -33,6 +34,7 @@ import _poolBighornerRancher from "../pool/bighorner-rancher.js";
 import _poolBirdMaiden from "../pool/bird-maiden.js";
 import _poolBlackWidowDoubleAgent from "../pool/black-widow-double-agent.js";
 import _poolBlindingMage from "../pool/blinding-mage.js";
+import _poolBlitzAutomaton from "../pool/blitz-automaton.js";
 import _poolBloodlineNecromancer from "../pool/bloodline-necromancer.js";
 import _poolBloodlinePretender from "../pool/bloodline-pretender.js";
 import _poolBloomHulk from "../pool/bloom-hulk.js";
@@ -114,6 +116,7 @@ import _poolEntishRestoration from "../pool/entish-restoration.js";
 import _poolEntryDenied from "../pool/entry-denied.js";
 import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
+import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
 import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js";
@@ -135,6 +138,7 @@ import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
+import _poolGiantCindermaw from "../pool/giant-cindermaw.js";
 import _poolGiantSizedFlyingAnt from "../pool/giant-sized-flying-ant.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
 import _poolGlamermite from "../pool/glamermite.js";
@@ -165,6 +169,7 @@ import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
 import _poolHinderingTouch from "../pool/hindering-touch.js";
 import _poolHippoCows from "../pool/hippo-cows.js";
+import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
@@ -267,6 +272,7 @@ import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
 import _poolPhantomNinja from "../pool/phantom-ninja.js";
+import _poolPhyrexianDragonEngine from "../pool/phyrexian-dragon-engine.js";
 import _poolPhyrexiasCore from "../pool/phyrexias-core.js";
 import _poolPileOn from "../pool/pile-on.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
@@ -304,6 +310,7 @@ import _poolRipApart from "../pool/rip-apart.js";
 import _poolRiskyResearch from "../pool/risky-research.js";
 import _poolRiverguardsReflexes from "../pool/riverguards-reflexes.js";
 import _poolRookTurret from "../pool/rook-turret.js";
+import _poolRootwireAmalgam from "../pool/rootwire-amalgam.js";
 import _poolRunewing from "../pool/runewing.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
@@ -513,6 +520,7 @@ const shard: CardShard = {
     _poolAzoriusSignet,
     _poolBanishingBetrayal,
     _poolBarbedBattlegear,
+    _poolBattlefieldButcher,
     _poolBebopRocksteady,
     _poolBedevil,
     _poolBehindTheMask,
@@ -521,6 +529,7 @@ const shard: CardShard = {
     _poolBirdMaiden,
     _poolBlackWidowDoubleAgent,
     _poolBlindingMage,
+    _poolBlitzAutomaton,
     _poolBloodlineNecromancer,
     _poolBloodlinePretender,
     _poolBloomHulk,
@@ -602,6 +611,7 @@ const shard: CardShard = {
     _poolEntryDenied,
     _poolEsikasChariot,
     _poolEssenceExtraction,
+    _poolEvangelOfSynthesis,
     _poolExpandingOoze,
     _poolExpansion,
     _poolExperimentalConfectioner,
@@ -623,6 +633,7 @@ const shard: CardShard = {
     _poolGastalRaider,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
+    _poolGiantCindermaw,
     _poolGiantSizedFlyingAnt,
     _poolGiantSolifuge,
     _poolGlamermite,
@@ -653,6 +664,7 @@ const shard: CardShard = {
     _poolHillGiantHerdgorger,
     _poolHinderingTouch,
     _poolHippoCows,
+    _poolHoardingRecluse,
     _poolHornOfGondor,
     _poolHotshotInvestigators,
     _poolHurskaSweetTooth,
@@ -755,6 +767,7 @@ const shard: CardShard = {
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,
     _poolPhantomNinja,
+    _poolPhyrexianDragonEngine,
     _poolPhyrexiasCore,
     _poolPileOn,
     _poolPitilessPontiff,
@@ -792,6 +805,7 @@ const shard: CardShard = {
     _poolRiskyResearch,
     _poolRiverguardsReflexes,
     _poolRookTurret,
+    _poolRootwireAmalgam,
     _poolRunewing,
     _poolRuthlessWaterbender,
     _poolSalivatingGremlins,

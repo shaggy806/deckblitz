@@ -48,6 +48,7 @@ import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
 import _poolByForce from "../pool/by-force.js";
 import _poolCalamitousTide from "../pool/calamitous-tide.js";
+import _poolCalamitysWake from "../pool/calamitys-wake.js";
 import _poolCallForUnity from "../pool/call-for-unity.js";
 import _poolCanoptekSpyder from "../pool/canoptek-spyder.js";
 import _poolCanopyBaloth from "../pool/canopy-baloth.js";
@@ -299,6 +300,7 @@ import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
+import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
@@ -505,6 +507,7 @@ const shard: CardShard = {
     _poolBrenardGingerSculptor,
     _poolByForce,
     _poolCalamitousTide,
+    _poolCalamitysWake,
     _poolCallForUnity,
     _poolCanoptekSpyder,
     _poolCanopyBaloth,
@@ -756,6 +759,7 @@ const shard: CardShard = {
     _poolPiercingExhale,
     _poolPiranhaMarsh,
     _poolPitchburnDevils,
+    _poolPlatoonDispenser,
     _poolPoliticalTriumph,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,

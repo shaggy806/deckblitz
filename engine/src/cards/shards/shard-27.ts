@@ -20,6 +20,7 @@ import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
 import _poolArcaneFlight from "../pool/arcane-flight.js";
+import _poolArmsRace from "../pool/arms-race.js";
 import _poolArtisticProcess from "../pool/artistic-process.js";
 import _poolAsphodelWanderer from "../pool/asphodel-wanderer.js";
 import _poolAssaultGriffin from "../pool/assault-griffin.js";
@@ -315,6 +316,7 @@ import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
+import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
@@ -415,6 +417,7 @@ import _poolTragicSlip from "../pool/tragic-slip.js";
 import _poolTranscendentDragon from "../pool/transcendent-dragon.js";
 import _poolTransformingFlourish from "../pool/transforming-flourish.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
+import _poolTrenchStalker from "../pool/trench-stalker.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
@@ -495,6 +498,7 @@ const shard: CardShard = {
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
     _poolArcaneFlight,
+    _poolArmsRace,
     _poolArtisticProcess,
     _poolAsphodelWanderer,
     _poolAssaultGriffin,
@@ -790,6 +794,7 @@ const shard: CardShard = {
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
     _poolRotisserieElemental,
+    _poolRustGoliath,
     _poolSagesKnowledge,
     _poolSaguMauler,
     _poolSangriteBacklash,
@@ -890,6 +895,7 @@ const shard: CardShard = {
     _poolTranscendentDragon,
     _poolTransformingFlourish,
     _poolTreeOfTales,
+    _poolTrenchStalker,
     _poolTriskaidekaphile,
     _poolTrophyMage,
     _poolTrueConviction,

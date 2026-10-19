@@ -132,6 +132,7 @@ import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
+import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
 import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
@@ -209,6 +210,7 @@ import _poolInspiritFlagshipVessel from "../pool/inspirit-flagship-vessel.js";
 import _poolIntangibleVirtue from "../pool/intangible-virtue.js";
 import _poolIntrepidAce from "../pool/intrepid-ace.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
+import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
@@ -241,6 +243,7 @@ import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
+import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
 import _poolLossarnachCaptain from "../pool/lossarnach-captain.js";
@@ -633,6 +636,7 @@ const shard: CardShard = {
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
     _poolFalkenrathNoble,
+    _poolFallajiArchaeologist,
     _poolFamine,
     _poolFantasticElasticity,
     _poolFellTheMighty,
@@ -710,6 +714,7 @@ const shard: CardShard = {
     _poolIntangibleVirtue,
     _poolIntrepidAce,
     _poolInvisibleForceField,
+    _poolInvoluntaryCooldown,
     _poolIraxxaEmpressOfMars,
     _poolIrohDragonOfTheWest,
     _poolIronManModernMarvel,
@@ -742,6 +747,7 @@ const shard: CardShard = {
     _poolLecturingScornmage,
     _poolLifecraftersBestiary,
     _poolLifelink,
+    _poolLoranDiscipleOfHistory,
     _poolLoreWeaver,
     _poolLoreholdCharm,
     _poolLossarnachCaptain,

@@ -22,6 +22,7 @@ import _poolArcaneAmphisbaena from "../pool/arcane-amphisbaena.js";
 import _poolArnynDeathbloomBotanist from "../pool/arnyn-deathbloom-botanist.js";
 import _poolArtfulTakedown from "../pool/artful-takedown.js";
 import _poolAshBarrens from "../pool/ash-barrens.js";
+import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
@@ -98,6 +99,7 @@ import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
+import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
@@ -250,6 +252,7 @@ import _poolMillstone from "../pool/millstone.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
+import _poolMiserysShadow from "../pool/miserys-shadow.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
@@ -310,6 +313,7 @@ import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
+import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
 import _poolRazorRings from "../pool/razor-rings.js";
 import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
@@ -367,6 +371,7 @@ import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
+import _poolSteelExemplar from "../pool/steel-exemplar.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
@@ -384,6 +389,8 @@ import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
 import _poolSurviveTheNight from "../pool/survive-the-night.js";
 import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
+import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
+import _poolTakeFlight from "../pool/take-flight.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
@@ -433,6 +440,7 @@ import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
 import _poolUnmake from "../pool/unmake.js";
 import _poolUnrulyCatapult from "../pool/unruly-catapult.js";
 import _poolUnwillingVessel from "../pool/unwilling-vessel.js";
+import _poolUrzasCommand from "../pool/urzas-command.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
 import _poolVenerableMonk from "../pool/venerable-monk.js";
@@ -514,6 +522,7 @@ const shard: CardShard = {
     _poolArnynDeathbloomBotanist,
     _poolArtfulTakedown,
     _poolAshBarrens,
+    _poolAshnodFleshMechanist,
     _poolAssembleTheLegion,
     _poolAtlaPalaniNestTender,
     _poolAuraOfSilence,
@@ -590,6 +599,7 @@ const shard: CardShard = {
     _poolDoorOfDestinies,
     _poolDragonTempest,
     _poolDragonsEyeSentry,
+    _poolDredgingClaw,
     _poolDuskwielder,
     _poolDwarvenTrader,
     _poolEdgarMoonlitSovereign,
@@ -742,6 +752,7 @@ const shard: CardShard = {
     _poolMirkwoodNurturer,
     _poolMirranBardiche,
     _poolMirrorpool,
+    _poolMiserysShadow,
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
@@ -802,6 +813,7 @@ const shard: CardShard = {
     _poolRabanastreRoyalCity,
     _poolRagingBull,
     _poolRampartHunter,
+    _poolRazeToTheGround,
     _poolRazorRings,
     _poolRazorkinNeedlehead,
     _poolRedtoothGenealogist,
@@ -859,6 +871,7 @@ const shard: CardShard = {
     _poolSpitefulVisions,
     _poolSprout,
     _poolStaffOfTheStoryteller,
+    _poolSteelExemplar,
     _poolStiltzkinMoogleMerchant,
     _poolStoicRebuttal,
     _poolStoneHavenMedic,
@@ -876,6 +889,8 @@ const shard: CardShard = {
     _poolSurviveTheNight,
     _poolSutureSpirit,
     _poolSwordsmansSteel,
+    _poolSymmetryMatrix,
+    _poolTakeFlight,
     _poolTakeVengeance,
     _poolTalasScout,
     _poolTalismanOfResilience,
@@ -925,6 +940,7 @@ const shard: CardShard = {
     _poolUnmake,
     _poolUnrulyCatapult,
     _poolUnwillingVessel,
+    _poolUrzasCommand,
     _poolUrzasMine,
     _poolVaultbornTyrant,
     _poolVenerableMonk,

@@ -10,6 +10,7 @@ import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAfflict from "../pool/afflict.js";
 import _poolAgathasChampion from "../pool/agathas-champion.js";
 import _poolAgentOfTheIronThrone from "../pool/agent-of-the-iron-throne.js";
+import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
@@ -78,6 +79,7 @@ import _poolCloakOfFeathers from "../pool/cloak-of-feathers.js";
 import _poolCloisteredYouth from "../pool/cloistered-youth.js";
 import _poolCloudExSoldier from "../pool/cloud-ex-soldier.js";
 import _poolCloudblazer from "../pool/cloudblazer.js";
+import _poolCoastalBulwark from "../pool/coastal-bulwark.js";
 import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
 import _poolCollisionCourse from "../pool/collision-course.js";
 import _poolCommandersSphere from "../pool/commanders-sphere.js";
@@ -87,6 +89,7 @@ import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCountNefaria from "../pool/count-nefaria.js";
+import _poolCradleClearcutter from "../pool/cradle-clearcutter.js";
 import _poolCraftworkCrusher from "../pool/craftwork-crusher.js";
 import _poolCraterhoofBehemoth from "../pool/craterhoof-behemoth.js";
 import _poolCrescentIslandTemple from "../pool/crescent-island-temple.js";
@@ -158,12 +161,14 @@ import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolFussBother from "../pool/fuss-bother.js";
+import _poolGaeasCourser from "../pool/gaeas-courser.js";
 import _poolGalazethPrismari from "../pool/galazeth-prismari.js";
 import _poolGatewayShade from "../pool/gateway-shade.js";
 import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
 import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
 import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
+import _poolGixsCaress from "../pool/gixs-caress.js";
 import _poolGixsCommand from "../pool/gixs-command.js";
 import _poolGleamingSplendor from "../pool/gleaming-splendor.js";
 import _poolGlintSleeveArtisan from "../pool/glint-sleeve-artisan.js";
@@ -180,6 +185,7 @@ import _poolGourmandsTalent from "../pool/gourmands-talent.js";
 import _poolGrandEntryway from "../pool/grand-entryway.js";
 import _poolGravelHideGoblin from "../pool/gravel-hide-goblin.js";
 import _poolGravewaker from "../pool/gravewaker.js";
+import _poolGreatDesertProspector from "../pool/great-desert-prospector.js";
 import _poolGreenhouse from "../pool/greenhouse.js";
 import _poolGristleGlutton from "../pool/gristle-glutton.js";
 import _poolGrixisPanorama from "../pool/grixis-panorama.js";
@@ -222,6 +228,7 @@ import _poolJubilation from "../pool/jubilation.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
+import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
 import _poolKessigWolfRun from "../pool/kessig-wolf-run.js";
 import _poolKindledFury from "../pool/kindled-fury.js";
@@ -495,6 +502,7 @@ import _tokensMapToken from "../tokens/map-token.js";
 import _tokensMerfolkToken from "../tokens/merfolk-token.js";
 import _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink from "../tokens/phyrexian-wurm-token-wurmcoil-larva-lifelink.js";
 import _tokensSpiritTokenColorless from "../tokens/spirit-token-colorless.js";
+import _tokensZombieTokenAshnodFleshMechanist from "../tokens/zombie-token-ashnod-flesh-mechanist.js";
 
 const shard: CardShard = {
   pool: [
@@ -505,6 +513,7 @@ const shard: CardShard = {
     _poolAfflict,
     _poolAgathasChampion,
     _poolAgentOfTheIronThrone,
+    _poolAirliftChaplain,
     _poolAleshaWhoLaughsAtFate,
     _poolAlliesAtLast,
     _poolAlloyMyr,
@@ -573,6 +582,7 @@ const shard: CardShard = {
     _poolCloisteredYouth,
     _poolCloudExSoldier,
     _poolCloudblazer,
+    _poolCoastalBulwark,
     _poolCollectiveNightmare,
     _poolCollisionCourse,
     _poolCommandersSphere,
@@ -582,6 +592,7 @@ const shard: CardShard = {
     _poolConversionApparatus,
     _poolCosmicCube,
     _poolCountNefaria,
+    _poolCradleClearcutter,
     _poolCraftworkCrusher,
     _poolCraterhoofBehemoth,
     _poolCrescentIslandTemple,
@@ -653,12 +664,14 @@ const shard: CardShard = {
     _poolFuneralLongboat,
     _poolFurnaceReins,
     _poolFussBother,
+    _poolGaeasCourser,
     _poolGalazethPrismari,
     _poolGatewayShade,
     _poolGempalmIncinerator,
     _poolGhaltaPrimalHunger,
     _poolGhituWarCry,
     _poolGitaxianMindstinger,
+    _poolGixsCaress,
     _poolGixsCommand,
     _poolGleamingSplendor,
     _poolGlintSleeveArtisan,
@@ -675,6 +688,7 @@ const shard: CardShard = {
     _poolGrandEntryway,
     _poolGravelHideGoblin,
     _poolGravewaker,
+    _poolGreatDesertProspector,
     _poolGreenhouse,
     _poolGristleGlutton,
     _poolGrixisPanorama,
@@ -717,6 +731,7 @@ const shard: CardShard = {
     _poolJukaiMessenger,
     _poolJuniperOrderDruid,
     _poolKabiraCrossroads,
+    _poolKeeperOfTheCadence,
     _poolKellanInquisitiveProdigy,
     _poolKessigWolfRun,
     _poolKindledFury,
@@ -992,6 +1007,7 @@ const shard: CardShard = {
     _tokensMerfolkToken,
     _tokensPhyrexianWurmTokenWurmcoilLarvaLifelink,
     _tokensSpiritTokenColorless,
+    _tokensZombieTokenAshnodFleshMechanist,
   ],
 };
 

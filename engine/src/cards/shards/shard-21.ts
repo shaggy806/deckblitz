@@ -12,6 +12,7 @@ import _poolArachnogenesis from "../pool/arachnogenesis.js";
 import _poolArahboTheFirstFang from "../pool/arahbo-the-first-fang.js";
 import _poolArchwingDragon from "../pool/archwing-dragon.js";
 import _poolArgentumMasticore from "../pool/argentum-masticore.js";
+import _poolArgothianSprite from "../pool/argothian-sprite.js";
 import _poolArlinnsWolf from "../pool/arlinns-wolf.js";
 import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
@@ -146,6 +147,7 @@ import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
+import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
@@ -230,6 +232,7 @@ import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
+import _poolMishrasDomination from "../pool/mishras-domination.js";
 import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
 import _poolMob from "../pool/mob.js";
 import _poolMonaLisaScienceGeek from "../pool/mona-lisa-science-geek.js";
@@ -382,6 +385,7 @@ import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
 import _poolTortoiseFormation from "../pool/tortoise-formation.js";
 import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
+import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
 import _poolTundra from "../pool/tundra.js";
@@ -447,6 +451,7 @@ const shard: CardShard = {
     _poolArahboTheFirstFang,
     _poolArchwingDragon,
     _poolArgentumMasticore,
+    _poolArgothianSprite,
     _poolArlinnsWolf,
     _poolArmorcraftJudge,
     _poolArmoredWhirlTurtle,
@@ -581,6 +586,7 @@ const shard: CardShard = {
     _poolGlintWeaver,
     _poolGloriousCharge,
     _poolGnottvoldHermit,
+    _poolGoblinBlastRunner,
     _poolGoblinChampion,
     _poolGoblinKing,
     _poolGoblinLackey,
@@ -665,6 +671,7 @@ const shard: CardShard = {
     _poolMinionsReturn,
     _poolMirrorEntity,
     _poolMisguidedRage,
+    _poolMishrasDomination,
     _poolMisthoofKirin,
     _poolMob,
     _poolMonaLisaScienceGeek,
@@ -817,6 +824,7 @@ const shard: CardShard = {
     _poolTorstenVonUrsus,
     _poolTortoiseFormation,
     _poolTrailblazingHistorian,
+    _poolTransmograntAltar,
     _poolTrapmakersSnare,
     _poolTrueLovesKiss,
     _poolTundra,

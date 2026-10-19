@@ -42,6 +42,7 @@ import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
+import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
 import _poolBrainFreeze from "../pool/brain-freeze.js";
 import _poolBrambleguardVeteran from "../pool/brambleguard-veteran.js";
 import _poolBranchOfVituGhazi from "../pool/branch-of-vitu-ghazi.js";
@@ -359,6 +360,7 @@ import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
+import _poolSpotterThopter from "../pool/spotter-thopter.js";
 import _poolSquall from "../pool/squall.js";
 import _poolStaggershock from "../pool/staggershock.js";
 import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js";
@@ -518,6 +520,7 @@ const shard: CardShard = {
     _poolBloomingBlast,
     _poolBogInitiate,
     _poolBoneclubBerserker,
+    _poolBoulderbranchGolem,
     _poolBrainFreeze,
     _poolBrambleguardVeteran,
     _poolBranchOfVituGhazi,
@@ -835,6 +838,7 @@ const shard: CardShard = {
     _poolSphinxsRevelation,
     _poolSpiderManifestation,
     _poolSplinterTwin,
+    _poolSpotterThopter,
     _poolSquall,
     _poolStaggershock,
     _poolStarkIndustriesExecutive,

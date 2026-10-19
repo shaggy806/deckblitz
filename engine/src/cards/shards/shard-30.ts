@@ -11,6 +11,7 @@ import _poolAbyssalHorror from "../pool/abyssal-horror.js";
 import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
+import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
 import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
@@ -189,6 +190,7 @@ import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
+import _poolGruesomeRealization from "../pool/gruesome-realization.js";
 import _poolGuardChange from "../pool/guard-change.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
@@ -272,6 +274,7 @@ import _poolMarshBoa from "../pool/marsh-boa.js";
 import _poolMarshHulk from "../pool/marsh-hulk.js";
 import _poolMartyrsTomb from "../pool/martyrs-tomb.js";
 import _poolMaryJaneWatson from "../pool/mary-jane-watson.js";
+import _poolMaskOfTheJadecrafter from "../pool/mask-of-the-jadecrafter.js";
 import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
@@ -334,6 +337,7 @@ import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
+import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
 import _poolRescuePepperPotts from "../pool/rescue-pepper-potts.js";
 import _poolResentfulRevelation from "../pool/resentful-revelation.js";
 import _poolRestoreRelic from "../pool/restore-relic.js";
@@ -488,6 +492,7 @@ const shard: CardShard = {
     _poolAdarkarWastes,
     _poolAdventurersInn,
     _poolAegisTurtle,
+    _poolAeronautCavalry,
     _poolAlabasterWall,
     _poolAlaniasPathmaker,
     _poolAlphinaudLeveilleur,
@@ -666,6 +671,7 @@ const shard: CardShard = {
     _poolGreaterForgeling,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
+    _poolGruesomeRealization,
     _poolGuardChange,
     _poolGwennaEyesOfGaea,
     _poolHagraSharpshooter,
@@ -749,6 +755,7 @@ const shard: CardShard = {
     _poolMarshHulk,
     _poolMartyrsTomb,
     _poolMaryJaneWatson,
+    _poolMaskOfTheJadecrafter,
     _poolMasterfulFlourish,
     _poolMeditationPools,
     _poolMeldedMoxite,
@@ -811,6 +818,7 @@ const shard: CardShard = {
     _poolReadyToRumble,
     _poolRejuvenate,
     _poolReluctantRoleModel,
+    _poolRepairAndRecharge,
     _poolRescuePepperPotts,
     _poolResentfulRevelation,
     _poolRestoreRelic,

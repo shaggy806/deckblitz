@@ -158,6 +158,7 @@ import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
+import _poolGurglingAnointer from "../pool/gurgling-anointer.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
@@ -618,6 +619,7 @@ const shard: CardShard = {
     _poolGrimHireling,
     _poolGrislyTransformation,
     _poolGruffTriplets,
+    _poolGurglingAnointer,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
     _poolHardHittingQuestion,

@@ -27,6 +27,7 @@ import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
+import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
@@ -165,6 +166,7 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
+import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
 import _poolGnathosaur from "../pool/gnathosaur.js";
 import _poolGoblinBerserker from "../pool/goblin-berserker.js";
@@ -198,6 +200,7 @@ import _poolHoldoutSettlement from "../pool/holdout-settlement.js";
 import _poolHonoredDreyleader from "../pool/honored-dreyleader.js";
 import _poolHopelessNightmare from "../pool/hopeless-nightmare.js";
 import _poolHorizonExplorer from "../pool/horizon-explorer.js";
+import _poolHornedStoneseeker from "../pool/horned-stoneseeker.js";
 import _poolHouseCartographer from "../pool/house-cartographer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
@@ -211,6 +214,7 @@ import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIronBully from "../pool/iron-bully.js";
+import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
 import _poolIronHills from "../pool/iron-hills.js";
 import _poolIshaiOjutaiDragonspeaker from "../pool/ishai-ojutai-dragonspeaker.js";
 import _poolItThatBetrays from "../pool/it-that-betrays.js";
@@ -379,6 +383,7 @@ import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
+import _poolTerrorBallista from "../pool/terror-ballista.js";
 import _poolThaumaticCompass from "../pool/thaumatic-compass.js";
 import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
@@ -390,6 +395,7 @@ import _poolTheWanderingEmperor from "../pool/the-wandering-emperor.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
+import _poolThranSpider from "../pool/thran-spider.js";
 import _poolThunderingChariot from "../pool/thundering-chariot.js";
 import _poolTidecallerMentor from "../pool/tidecaller-mentor.js";
 import _poolTifaLockhart from "../pool/tifa-lockhart.js";
@@ -490,6 +496,7 @@ const shard: CardShard = {
     _poolArdentPlea,
     _poolArgentDais,
     _poolArmoredCancrix,
+    _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
     _poolAvatarRokuFirebender,
     _poolAvengersTower,
@@ -628,6 +635,7 @@ const shard: CardShard = {
     _poolGhostlyFlicker,
     _poolGideonsLawkeeper,
     _poolGimlisFury,
+    _poolGixianSkullflayer,
     _poolGlisteningDawn,
     _poolGnathosaur,
     _poolGoblinBerserker,
@@ -661,6 +669,7 @@ const shard: CardShard = {
     _poolHonoredDreyleader,
     _poolHopelessNightmare,
     _poolHorizonExplorer,
+    _poolHornedStoneseeker,
     _poolHouseCartographer,
     _poolHulkingDevil,
     _poolHuntedHorror,
@@ -674,6 +683,7 @@ const shard: CardShard = {
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIronBully,
+    _poolIronCrawCrusher,
     _poolIronHills,
     _poolIshaiOjutaiDragonspeaker,
     _poolItThatBetrays,
@@ -842,6 +852,7 @@ const shard: CardShard = {
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,
+    _poolTerrorBallista,
     _poolThaumaticCompass,
     _poolTheApprenticesFolly,
     _poolTheBattleOfBywater,
@@ -853,6 +864,7 @@ const shard: CardShard = {
     _poolTheWatcherInTheWater,
     _poolTheyCameFromThePipes,
     _poolThorinsLastStand,
+    _poolThranSpider,
     _poolThunderingChariot,
     _poolTidecallerMentor,
     _poolTifaLockhart,

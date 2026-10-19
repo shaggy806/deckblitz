@@ -338,6 +338,7 @@ import _poolShelteredByGhosts from "../pool/sheltered-by-ghosts.js";
 import _poolShelteringBoughs from "../pool/sheltering-boughs.js";
 import _poolShinestriker from "../pool/shinestriker.js";
 import _poolShockingGrasp from "../pool/shocking-grasp.js";
+import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
@@ -797,6 +798,7 @@ const shard: CardShard = {
     _poolShelteringBoughs,
     _poolShinestriker,
     _poolShockingGrasp,
+    _poolSiblingRivalry,
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
     _poolSilvanRally,

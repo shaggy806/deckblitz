@@ -11,6 +11,7 @@ import _poolAfterlifeInsurance from "../pool/afterlife-insurance.js";
 import _poolAkkiRockspeaker from "../pool/akki-rockspeaker.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
+import _poolAlloyAnimist from "../pool/alloy-animist.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
@@ -77,6 +78,7 @@ import _poolCinderslashRavager from "../pool/cinderslash-ravager.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
+import _poolClayRevenant from "../pool/clay-revenant.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
 import _poolCoatWithVenom from "../pool/coat-with-venom.js";
@@ -102,6 +104,7 @@ import _poolDecommission from "../pool/decommission.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
+import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDiningRoom from "../pool/dining-room.js";
@@ -340,6 +343,7 @@ import _poolSageOfTheInwardEye from "../pool/sage-of-the-inward-eye.js";
 import _poolSamiteArcher from "../pool/samite-archer.js";
 import _poolSanctumOfFruitfulHarvest from "../pool/sanctum-of-fruitful-harvest.js";
 import _poolSaprazzanHeir from "../pool/saprazzan-heir.js";
+import _poolSardianCliffstomper from "../pool/sardian-cliffstomper.js";
 import _poolSarkhansResolve from "../pool/sarkhans-resolve.js";
 import _poolSatyrWayfinder from "../pool/satyr-wayfinder.js";
 import _poolSauronTheLidlessEye from "../pool/sauron-the-lidless-eye.js";
@@ -511,6 +515,7 @@ const shard: CardShard = {
     _poolAkkiRockspeaker,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
+    _poolAlloyAnimist,
     _poolAlpineMeadow,
     _poolAncientCarp,
     _poolAncientCrab,
@@ -577,6 +582,7 @@ const shard: CardShard = {
     _poolCircleOfPower,
     _poolCitanulStalwart,
     _poolCivicStalwart,
+    _poolClayRevenant,
     _poolClifftopRetreat,
     _poolClockworkDrawbridge,
     _poolCoatWithVenom,
@@ -602,6 +608,7 @@ const shard: CardShard = {
     _poolDefacingDuskmage,
     _poolDelusionsOfMediocrity,
     _poolDemystify,
+    _poolDepthChargeColossus,
     _poolDevoteeOfStrength,
     _poolDimirGuildmage,
     _poolDiningRoom,
@@ -840,6 +847,7 @@ const shard: CardShard = {
     _poolSamiteArcher,
     _poolSanctumOfFruitfulHarvest,
     _poolSaprazzanHeir,
+    _poolSardianCliffstomper,
     _poolSarkhansResolve,
     _poolSatyrWayfinder,
     _poolSauronTheLidlessEye,

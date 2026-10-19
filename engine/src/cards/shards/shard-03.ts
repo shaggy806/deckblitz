@@ -15,12 +15,15 @@ import _poolAradaraExpress from "../pool/aradara-express.js";
 import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
 import _poolArboreaPegasus from "../pool/arborea-pegasus.js";
 import _poolArcaneEpiphany from "../pool/arcane-epiphany.js";
+import _poolArcaneProxy from "../pool/arcane-proxy.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
+import _poolArtificersDragon from "../pool/artificers-dragon.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
+import _poolAutonomousAssembler from "../pool/autonomous-assembler.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolAxiomEngraver from "../pool/axiom-engraver.js";
@@ -220,6 +223,7 @@ import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
+import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
@@ -242,6 +246,7 @@ import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
 import _poolOrazcaFrillback from "../pool/orazca-frillback.js";
 import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
+import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
 import _poolPompousGadabout from "../pool/pompous-gadabout.js";
@@ -445,12 +450,15 @@ const shard: CardShard = {
     _poolAragornAndArwenWed,
     _poolArboreaPegasus,
     _poolArcaneEpiphany,
+    _poolArcaneProxy,
     _poolArcboundSlith,
     _poolArchonOfCruelty,
     _poolArchonsGlory,
     _poolArmyOfTheDamned,
+    _poolArtificersDragon,
     _poolAscendingAven,
     _poolAtarkaWorldRender,
+    _poolAutonomousAssembler,
     _poolAvacynAngelOfHope,
     _poolAvatarKyoshiEarthbender,
     _poolAxiomEngraver,
@@ -650,6 +658,7 @@ const shard: CardShard = {
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMinotaurAggressor,
+    _poolMishraExcavationProdigy,
     _poolMoltenExhale,
     _poolMorbidHunger,
     _poolMortify,
@@ -672,6 +681,7 @@ const shard: CardShard = {
     _poolOracleOfMulDaya,
     _poolOrazcaFrillback,
     _poolOrcristGoblinCleaver,
+    _poolPenregonStrongbull,
     _poolPersist,
     _poolPiggyBank,
     _poolPompousGadabout,

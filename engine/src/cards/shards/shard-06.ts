@@ -220,6 +220,7 @@ import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
 import _poolLathlissDragonQueen from "../pool/lathliss-dragon-queen.js";
+import _poolLayDownArms from "../pool/lay-down-arms.js";
 import _poolLegionsLanding from "../pool/legions-landing.js";
 import _poolLingeringTormentor from "../pool/lingering-tormentor.js";
 import _poolLivingAirship from "../pool/living-airship.js";
@@ -368,11 +369,13 @@ import _poolSpectralProcession from "../pool/spectral-procession.js";
 import _poolSpellseeker from "../pool/spellseeker.js";
 import _poolSpiketailDrakeling from "../pool/spiketail-drakeling.js";
 import _poolSpiritcallEnthusiast from "../pool/spiritcall-enthusiast.js";
+import _poolSplittingThePowerstone from "../pool/splitting-the-powerstone.js";
 import _poolSquiresLightblade from "../pool/squires-lightblade.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormKilnArtist from "../pool/storm-kiln-artist.js";
+import _poolSuChiCaveGuard from "../pool/su-chi-cave-guard.js";
 import _poolSubwayTrain from "../pool/subway-train.js";
 import _poolSunbirdsInvocation from "../pool/sunbirds-invocation.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
@@ -692,6 +695,7 @@ const shard: CardShard = {
     _poolKujaGenomeSorcerer,
     _poolLagoonBreach,
     _poolLathlissDragonQueen,
+    _poolLayDownArms,
     _poolLegionsLanding,
     _poolLingeringTormentor,
     _poolLivingAirship,
@@ -840,11 +844,13 @@ const shard: CardShard = {
     _poolSpellseeker,
     _poolSpiketailDrakeling,
     _poolSpiritcallEnthusiast,
+    _poolSplittingThePowerstone,
     _poolSquiresLightblade,
     _poolSquirmingMass,
     _poolStadiumHeadliner,
     _poolStoneGiantOfHighPass,
     _poolStormKilnArtist,
+    _poolSuChiCaveGuard,
     _poolSubwayTrain,
     _poolSunbirdsInvocation,
     _poolSundownPass,

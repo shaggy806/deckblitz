@@ -278,6 +278,7 @@ import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
+import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
@@ -732,6 +733,7 @@ const shard: CardShard = {
     _poolPullFromTheGrave,
     _poolPurifyTheGrave,
     _poolPyrogoyf,
+    _poolPyrrhicBlast,
     _poolQuarryBeetle,
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,

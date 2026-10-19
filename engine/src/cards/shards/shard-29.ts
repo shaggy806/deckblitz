@@ -8,6 +8,7 @@ import _poolAdaptiveGemguard from "../pool/adaptive-gemguard.js";
 import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
+import _poolAirMarshal from "../pool/air-marshal.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAngelicAberration from "../pool/angelic-aberration.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
@@ -228,6 +229,7 @@ import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
 import _poolMabelsMettle from "../pool/mabels-mettle.js";
+import _poolMachineOverMatter from "../pool/machine-over-matter.js";
 import _poolMaelstromOfTheSpiritDragon from "../pool/maelstrom-of-the-spirit-dragon.js";
 import _poolMagesGuile from "../pool/mages-guile.js";
 import _poolMagmaticForce from "../pool/magmatic-force.js";
@@ -239,7 +241,9 @@ import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMeldwebCurator from "../pool/meldweb-curator.js";
 import _poolMemorialToGenius from "../pool/memorial-to-genius.js";
 import _poolMessengersSpeed from "../pool/messengers-speed.js";
+import _poolMightstonesAnimation from "../pool/mightstones-animation.js";
 import _poolMishrasJuggernaut from "../pool/mishras-juggernaut.js";
+import _poolMishrasResearchDesk from "../pool/mishras-research-desk.js";
 import _poolMistLeopard from "../pool/mist-leopard.js";
 import _poolMisthiossFury from "../pool/misthioss-fury.js";
 import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
@@ -327,6 +331,7 @@ import _poolSavaiTriome from "../pool/savai-triome.js";
 import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
+import _poolScatterRay from "../pool/scatter-ray.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
@@ -348,6 +353,7 @@ import _poolSimulacrumSynthesizer from "../pool/simulacrum-synthesizer.js";
 import _poolSingularityRupture from "../pool/singularity-rupture.js";
 import _poolSkaabWrangler from "../pool/skaab-wrangler.js";
 import _poolSkybeastTracker from "../pool/skybeast-tracker.js";
+import _poolSlagstoneRefinery from "../pool/slagstone-refinery.js";
 import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
 import _poolSmother from "../pool/smother.js";
 import _poolSnap from "../pool/snap.js";
@@ -446,6 +452,7 @@ import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
+import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
@@ -478,6 +485,7 @@ const shard: CardShard = {
     _poolAetherSyphon,
     _poolAffaProtector,
     _poolAidFromTheCowl,
+    _poolAirMarshal,
     _poolAllosaurusShepherd,
     _poolAngelicAberration,
     _poolApproachOfTheSecondSun,
@@ -698,6 +706,7 @@ const shard: CardShard = {
     _poolLoxodonAnchorite,
     _poolLyraArchangelOfDawn,
     _poolMabelsMettle,
+    _poolMachineOverMatter,
     _poolMaelstromOfTheSpiritDragon,
     _poolMagesGuile,
     _poolMagmaticForce,
@@ -709,7 +718,9 @@ const shard: CardShard = {
     _poolMeldwebCurator,
     _poolMemorialToGenius,
     _poolMessengersSpeed,
+    _poolMightstonesAnimation,
     _poolMishrasJuggernaut,
+    _poolMishrasResearchDesk,
     _poolMistLeopard,
     _poolMisthiossFury,
     _poolMistvaultBridge,
@@ -797,6 +808,7 @@ const shard: CardShard = {
     _poolSavantiRomeroTimesExile,
     _poolScarlandThrinax,
     _poolScatterArc,
+    _poolScatterRay,
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
     _poolSeaSpirit,
@@ -818,6 +830,7 @@ const shard: CardShard = {
     _poolSingularityRupture,
     _poolSkaabWrangler,
     _poolSkybeastTracker,
+    _poolSlagstoneRefinery,
     _poolSlagwoodsBridge,
     _poolSmother,
     _poolSnap,
@@ -916,6 +929,7 @@ const shard: CardShard = {
     _poolWildRide,
     _poolWispdrinkerVampire,
     _poolWithstandDeath,
+    _poolWoodcallerAutomaton,
     _poolWortBoggartAuntie,
     _poolYellowScarvesTroops,
     _poolYoshimaruScrappyStray,

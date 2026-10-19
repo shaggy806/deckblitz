@@ -15,6 +15,7 @@ import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
+import _poolArgivianAvenger from "../pool/argivian-avenger.js";
 import _poolArmedAssailant from "../pool/armed-assailant.js";
 import _poolArmoredArmadillo from "../pool/armored-armadillo.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
@@ -180,6 +181,7 @@ import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
+import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
@@ -465,6 +467,7 @@ const shard: CardShard = {
     _poolApexAltisaur,
     _poolApexWitchstalker,
     _poolArcaneDenial,
+    _poolArgivianAvenger,
     _poolArmedAssailant,
     _poolArmoredArmadillo,
     _poolArmoredWolfRider,
@@ -630,6 +633,7 @@ const shard: CardShard = {
     _poolHarvesttideInfiltrator,
     _poolHeartstringPuller,
     _poolHelionaut,
+    _poolHeroOfTheDunes,
     _poolHiddenCourtyard,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,

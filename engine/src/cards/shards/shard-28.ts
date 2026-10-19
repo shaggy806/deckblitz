@@ -207,6 +207,7 @@ import _poolLegolasCounterOfKills from "../pool/legolas-counter-of-kills.js";
 import _poolLeonardoCuttingEdge from "../pool/leonardo-cutting-edge.js";
 import _poolLeoninBattlemage from "../pool/leonin-battlemage.js";
 import _poolLeoninElder from "../pool/leonin-elder.js";
+import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
@@ -229,6 +230,7 @@ import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
 import _poolMindControl from "../pool/mind-control.js";
 import _poolMindRoots from "../pool/mind-roots.js";
+import _poolMineWorker from "../pool/mine-worker.js";
 import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
@@ -343,6 +345,7 @@ import _poolShadowSummoning from "../pool/shadow-summoning.js";
 import _poolShadowbloodRidge from "../pool/shadowblood-ridge.js";
 import _poolShambleBack from "../pool/shamble-back.js";
 import _poolShivanZombie from "../pool/shivan-zombie.js";
+import _poolShootDown from "../pool/shoot-down.js";
 import _poolShortSword from "../pool/short-sword.js";
 import _poolShroofusSproutsire from "../pool/shroofus-sproutsire.js";
 import _poolSickleslicer from "../pool/sickleslicer.js";
@@ -410,6 +413,7 @@ import _poolTitanicGrowth from "../pool/titanic-growth.js";
 import _poolTraceOfAbundance from "../pool/trace-of-abundance.js";
 import _poolTrainedArmodon from "../pool/trained-armodon.js";
 import _poolTramwayStation from "../pool/tramway-station.js";
+import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
@@ -673,6 +677,7 @@ const shard: CardShard = {
     _poolLeonardoCuttingEdge,
     _poolLeoninBattlemage,
     _poolLeoninElder,
+    _poolLevitatingStatue,
     _poolLivingWall,
     _poolLlanowarKnight,
     _poolLucentLiminid,
@@ -695,6 +700,7 @@ const shard: CardShard = {
     _poolMightOfTheAncestors,
     _poolMindControl,
     _poolMindRoots,
+    _poolMineWorker,
     _poolMinecartDaredevil,
     _poolMirrorworks,
     _poolMistfireAdept,
@@ -809,6 +815,7 @@ const shard: CardShard = {
     _poolShadowbloodRidge,
     _poolShambleBack,
     _poolShivanZombie,
+    _poolShootDown,
     _poolShortSword,
     _poolShroofusSproutsire,
     _poolSickleslicer,
@@ -876,6 +883,7 @@ const shard: CardShard = {
     _poolTraceOfAbundance,
     _poolTrainedArmodon,
     _poolTramwayStation,
+    _poolTransmograntsCrown,
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,

@@ -35,6 +35,7 @@ import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
+import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
@@ -79,6 +80,7 @@ import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
+import _poolDeathbloomRitualist from "../pool/deathbloom-ritualist.js";
 import _poolDefabricate from "../pool/defabricate.js";
 import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDejaVu from "../pool/deja-vu.js";
@@ -114,6 +116,7 @@ import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
 import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFallOfGilGalad from "../pool/fall-of-gil-galad.js";
+import _poolFallajiDragonEngine from "../pool/fallaji-dragon-engine.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
@@ -124,6 +127,7 @@ import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
+import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolGaryClone from "../pool/gary-clone.js";
@@ -249,6 +253,7 @@ import _poolNestingGrounds from "../pool/nesting-grounds.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
+import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -399,6 +404,7 @@ import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
 import _poolUnshakableTail from "../pool/unshakable-tail.js";
 import _poolUpheaval from "../pool/upheaval.js";
+import _poolUrzaPowerstoneProdigy from "../pool/urza-powerstone-prodigy.js";
 import _poolUrzasPowerPlant from "../pool/urzas-power-plant.js";
 import _poolValakutTheMoltenPinnacle from "../pool/valakut-the-molten-pinnacle.js";
 import _poolVampireInterloper from "../pool/vampire-interloper.js";
@@ -447,6 +453,7 @@ import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
 import _tokensVibraniumToken from "../tokens/vibranium-token.js";
+import _tokensXXGolemToken from "../tokens/x-x-golem-token.js";
 
 const shard: CardShard = {
   pool: [
@@ -482,6 +489,7 @@ const shard: CardShard = {
     _poolBespokeBo,
     _poolBlackKnight,
     _poolBlackMagesRod,
+    _poolBlanchwoodProwler,
     _poolBlightTitan,
     _poolBloodtracker,
     _poolBloomwielderDryads,
@@ -526,6 +534,7 @@ const shard: CardShard = {
     _poolDarkDeal,
     _poolDeadBeforeSunrise,
     _poolDeathbellowRaider,
+    _poolDeathbloomRitualist,
     _poolDefabricate,
     _poolDefiantSalvager,
     _poolDejaVu,
@@ -561,6 +570,7 @@ const shard: CardShard = {
     _poolFaithfulWatchdog,
     _poolFaldornDreadWolfHerald,
     _poolFallOfGilGalad,
+    _poolFallajiDragonEngine,
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
     _poolFarmerCotton,
@@ -571,6 +581,7 @@ const shard: CardShard = {
     _poolFlametongueKavu,
     _poolFloodedGrove,
     _poolFootlightFiend,
+    _poolForgingTheAnchor,
     _poolForumOfAmity,
     _poolFranklinRichardsAscendant,
     _poolGaryClone,
@@ -696,6 +707,7 @@ const shard: CardShard = {
     _poolNightscapeMaster,
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
+    _poolNoOneLeftBehind,
     _poolNornsWellspring,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -846,6 +858,7 @@ const shard: CardShard = {
     _poolUnseenWalker,
     _poolUnshakableTail,
     _poolUpheaval,
+    _poolUrzaPowerstoneProdigy,
     _poolUrzasPowerPlant,
     _poolValakutTheMoltenPinnacle,
     _poolVampireInterloper,
@@ -896,6 +909,7 @@ const shard: CardShard = {
     _tokensMutavaultToken,
     _tokensTheTigerGod,
     _tokensVibraniumToken,
+    _tokensXXGolemToken,
   ],
 };
 

@@ -370,10 +370,12 @@ import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolSummitSentinel from "../pool/summit-sentinel.js";
 import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwat from "../pool/swat.js";
+import _poolSwiftgearDrake from "../pool/swiftgear-drake.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
+import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerminalCriticism from "../pool/terminal-criticism.js";
@@ -828,10 +830,12 @@ const shard: CardShard = {
     _poolSummitSentinel,
     _poolSureStrike,
     _poolSwat,
+    _poolSwiftgearDrake,
     _poolTajuruBlightblade,
     _poolTakeItBack,
     _poolTakeTheFall,
     _poolTalismanOfProgress,
+    _poolTawnossTinkering,
     _poolTeapotSlinger,
     _poolTemporalTrespass,
     _poolTerminalCriticism,

@@ -146,7 +146,9 @@ import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
 import _poolFloodedStrand from "../pool/flooded-strand.js";
+import _poolFogOfWar from "../pool/fog-of-war.js";
 import _poolFoggyBottomSwamp from "../pool/foggy-bottom-swamp.js";
+import _poolFortifiedBeachhead from "../pool/fortified-beachhead.js";
 import _poolFranciscoFowlMarauder from "../pool/francisco-fowl-marauder.js";
 import _poolGaeasSkyfolk from "../pool/gaeas-skyfolk.js";
 import _poolGavonyUnhallowed from "../pool/gavony-unhallowed.js";
@@ -248,6 +250,7 @@ import _poolMigrationPath from "../pool/migration-path.js";
 import _poolMindDrillAssailant from "../pool/mind-drill-assailant.js";
 import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
+import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
@@ -412,6 +415,7 @@ import _poolTinkersTote from "../pool/tinkers-tote.js";
 import _poolTirelessMissionaries from "../pool/tireless-missionaries.js";
 import _poolTitaniumGolem from "../pool/titanium-golem.js";
 import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
+import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
 import _poolTorbranThaneOfRedFell from "../pool/torbran-thane-of-red-fell.js";
 import _poolTormentedSoul from "../pool/tormented-soul.js";
 import _poolToxrillTheCorrosive from "../pool/toxrill-the-corrosive.js";
@@ -465,6 +469,7 @@ import _poolWonder from "../pool/wonder.js";
 import _poolWosePathfinder from "../pool/wose-pathfinder.js";
 import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
+import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
@@ -625,7 +630,9 @@ const shard: CardShard = {
     _poolFixerTechnoTerror,
     _poolFleshbagMarauder,
     _poolFloodedStrand,
+    _poolFogOfWar,
     _poolFoggyBottomSwamp,
+    _poolFortifiedBeachhead,
     _poolFranciscoFowlMarauder,
     _poolGaeasSkyfolk,
     _poolGavonyUnhallowed,
@@ -727,6 +734,7 @@ const shard: CardShard = {
     _poolMindDrillAssailant,
     _poolMindIntoMatter,
     _poolMindlessAutomaton,
+    _poolMishrasFoundry,
     _poolMockingbird,
     _poolMoonHeron,
     _poolMoonsilverKey,
@@ -891,6 +899,7 @@ const shard: CardShard = {
     _poolTirelessMissionaries,
     _poolTitaniumGolem,
     _poolTolarianSerpent,
+    _poolTomakulScrapsmith,
     _poolTorbranThaneOfRedFell,
     _poolTormentedSoul,
     _poolToxrillTheCorrosive,
@@ -944,6 +953,7 @@ const shard: CardShard = {
     _poolWosePathfinder,
     _poolYarokTheDesecrated,
     _poolYokedPlowbeast,
+    _poolYotianFrontliner,
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,

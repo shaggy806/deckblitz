@@ -33,6 +33,7 @@ import _poolBanishToAnotherUniverse from "../pool/banish-to-another-universe.js"
 import _poolBarkformHarvester from "../pool/barkform-harvester.js";
 import _poolBarrelsOfBlastingJelly from "../pool/barrels-of-blasting-jelly.js";
 import _poolBasilicaStalker from "../pool/basilica-stalker.js";
+import _poolBatteryBearer from "../pool/battery-bearer.js";
 import _poolBattlefieldRaptor from "../pool/battlefield-raptor.js";
 import _poolBaxterStockman from "../pool/baxter-stockman.js";
 import _poolBayouDragonfly from "../pool/bayou-dragonfly.js";
@@ -153,6 +154,7 @@ import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
+import _poolGeologyEnthusiast from "../pool/geology-enthusiast.js";
 import _poolGerminatingWurm from "../pool/germinating-wurm.js";
 import _poolGhirapurGearcrafter from "../pool/ghirapur-gearcrafter.js";
 import _poolGhostLitRedeemer from "../pool/ghost-lit-redeemer.js";
@@ -211,6 +213,7 @@ import _poolKaervekThePunisher from "../pool/kaervek-the-punisher.js";
 import _poolKamiOfTheCrescentMoon from "../pool/kami-of-the-crescent-moon.js";
 import _poolKarnsBastion from "../pool/karns-bastion.js";
 import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
+import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
 import _poolKembasBanner from "../pool/kembas-banner.js";
@@ -436,6 +439,7 @@ import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
+import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
 import _poolVirtuousVariant from "../pool/virtuous-variant.js";
 import _poolVirulentSliver from "../pool/virulent-sliver.js";
@@ -505,6 +509,7 @@ const shard: CardShard = {
     _poolBarkformHarvester,
     _poolBarrelsOfBlastingJelly,
     _poolBasilicaStalker,
+    _poolBatteryBearer,
     _poolBattlefieldRaptor,
     _poolBaxterStockman,
     _poolBayouDragonfly,
@@ -625,6 +630,7 @@ const shard: CardShard = {
     _poolFrontierSiege,
     _poolFuneralCharm,
     _poolGandalfGoblinsBane,
+    _poolGeologyEnthusiast,
     _poolGerminatingWurm,
     _poolGhirapurGearcrafter,
     _poolGhostLitRedeemer,
@@ -683,6 +689,7 @@ const shard: CardShard = {
     _poolKamiOfTheCrescentMoon,
     _poolKarnsBastion,
     _poolKavaronSkywarden,
+    _poolKaylasReconstruction,
     _poolKeeningApparition,
     _poolKeldonRaider,
     _poolKembasBanner,
@@ -908,6 +915,7 @@ const shard: CardShard = {
     _poolVeinRipper,
     _poolVelvetwingButterflies,
     _poolVerdantKraken,
+    _poolVeteransPowerblade,
     _poolVibraniumEnergyDaggers,
     _poolVirtuousVariant,
     _poolVirulentSliver,

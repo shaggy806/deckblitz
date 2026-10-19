@@ -205,6 +205,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLastWord from "../pool/last-word.js";
+import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
@@ -282,6 +283,8 @@ import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
+import _poolPowerPlantWorker from "../pool/power-plant-worker.js";
+import _poolPowerstoneFracture from "../pool/powerstone-fracture.js";
 import _poolPrecinctCaptain from "../pool/precinct-captain.js";
 import _poolPreciseRedaction from "../pool/precise-redaction.js";
 import _poolPresenceOfGond from "../pool/presence-of-gond.js";
@@ -304,6 +307,7 @@ import _poolRavenousRobots from "../pool/ravenous-robots.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
+import _poolRecruitmentOfficer from "../pool/recruitment-officer.js";
 import _poolRedirectLightning from "../pool/redirect-lightning.js";
 import _poolReflexes from "../pool/reflexes.js";
 import _poolRefurbish from "../pool/refurbish.js";
@@ -422,6 +426,7 @@ import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
 import _poolUndyingEvil from "../pool/undying-evil.js";
 import _poolUnyieldingKrumar from "../pool/unyielding-krumar.js";
+import _poolUrzasRebuff from "../pool/urzas-rebuff.js";
 import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
 import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
@@ -698,6 +703,7 @@ const shard: CardShard = {
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
     _poolLastWord,
+    _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
     _poolLightningVisionary,
     _poolLightningWolf,
@@ -775,6 +781,8 @@ const shard: CardShard = {
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,
     _poolPollenbrightDruid,
+    _poolPowerPlantWorker,
+    _poolPowerstoneFracture,
     _poolPrecinctCaptain,
     _poolPreciseRedaction,
     _poolPresenceOfGond,
@@ -797,6 +805,7 @@ const shard: CardShard = {
     _poolRealmOfKoh,
     _poolReanimate,
     _poolReconnaissanceMission,
+    _poolRecruitmentOfficer,
     _poolRedirectLightning,
     _poolReflexes,
     _poolRefurbish,
@@ -915,6 +924,7 @@ const shard: CardShard = {
     _poolUnchartedHaven,
     _poolUndyingEvil,
     _poolUnyieldingKrumar,
+    _poolUrzasRebuff,
     _poolUthrosResearchCraft,
     _poolValkyriorSkyrider,
     _poolValleyQuestcaller,
