@@ -113,6 +113,7 @@ import _poolDevilDinosaur from "../pool/devil-dinosaur.js";
 import _poolDevotedDuelist from "../pool/devoted-duelist.js";
 import _poolDimirInformant from "../pool/dimir-informant.js";
 import _poolDireStrainBrawler from "../pool/dire-strain-brawler.js";
+import _poolDjinnOfTheFountain from "../pool/djinn-of-the-fountain.js";
 import _poolDoorkeeperThrull from "../pool/doorkeeper-thrull.js";
 import _poolDownDownToGoblinTown from "../pool/down-down-to-goblin-town.js";
 import _poolDowsingShaman from "../pool/dowsing-shaman.js";
@@ -452,6 +453,7 @@ import _tokensBlackGreenElfToken from "../tokens/black-green-elf-token.js";
 import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensHeroToken from "../tokens/hero-token.js";
+import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
 import _tokensRhinoToken from "../tokens/rhino-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
@@ -569,6 +571,7 @@ const shard: CardShard = {
     _poolDevotedDuelist,
     _poolDimirInformant,
     _poolDireStrainBrawler,
+    _poolDjinnOfTheFountain,
     _poolDoorkeeperThrull,
     _poolDownDownToGoblinTown,
     _poolDowsingShaman,
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _tokensDevilToken,
     _tokensFrogLizardToken,
     _tokensHeroToken,
+    _tokensOrnithopterToken,
     _tokensPestToken,
     _tokensRhinoToken,
     _tokensSquidToken,

@@ -120,6 +120,7 @@ import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
+import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
@@ -596,6 +597,7 @@ const shard: CardShard = {
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
     _poolDoomsTimePlatform,
+    _poolDragToTheBottom,
     _poolDragToTheRoots,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,

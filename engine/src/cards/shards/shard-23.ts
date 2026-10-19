@@ -216,6 +216,7 @@ import _poolKavaronSkywarden from "../pool/kavaron-skywarden.js";
 import _poolKaylasReconstruction from "../pool/kaylas-reconstruction.js";
 import _poolKeeningApparition from "../pool/keening-apparition.js";
 import _poolKeldonRaider from "../pool/keldon-raider.js";
+import _poolKeldonStrikeTeam from "../pool/keldon-strike-team.js";
 import _poolKembasBanner from "../pool/kembas-banner.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
@@ -697,6 +698,7 @@ const shard: CardShard = {
     _poolKaylasReconstruction,
     _poolKeeningApparition,
     _poolKeldonRaider,
+    _poolKeldonStrikeTeam,
     _poolKembasBanner,
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,

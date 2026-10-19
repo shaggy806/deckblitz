@@ -274,6 +274,7 @@ import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
 import _poolOakenBoon from "../pool/oaken-boon.js";
+import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
 import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
 import _poolOmitVariables from "../pool/omit-variables.js";
@@ -321,6 +322,7 @@ import _poolRoboticsMastery from "../pool/robotics-mastery.js";
 import _poolRope from "../pool/rope.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
+import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
@@ -406,6 +408,7 @@ import _poolTempleGarden from "../pool/temple-garden.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
+import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolThespiansStage from "../pool/thespians-stage.js";
 import _poolThornwindFaeries from "../pool/thornwind-faeries.js";
 import _poolThoughtweftLieutenant from "../pool/thoughtweft-lieutenant.js";
@@ -749,6 +752,7 @@ const shard: CardShard = {
     _poolNormanOsborn,
     _poolNoviceDissector,
     _poolOakenBoon,
+    _poolOhabiCaleria,
     _poolOkinaTempleToTheGrandfathers,
     _poolOmenOfTheHunt,
     _poolOmitVariables,
@@ -796,6 +800,7 @@ const shard: CardShard = {
     _poolRope,
     _poolRottingMastodon,
     _poolRoyalFalcon,
+    _poolRulikMonsWarrenChief,
     _poolRunThePlay,
     _poolRussetWolves,
     _poolSageOfDays,
@@ -881,6 +886,7 @@ const shard: CardShard = {
     _poolTevalsJudgment,
     _poolTheDrossPits,
     _poolTheJollyBalloonMan,
+    _poolTheManaRig,
     _poolThespiansStage,
     _poolThornwindFaeries,
     _poolThoughtweftLieutenant,

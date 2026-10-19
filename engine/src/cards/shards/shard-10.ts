@@ -90,6 +90,7 @@ import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
 import _poolCryptOfAgadeem from "../pool/crypt-of-agadeem.js";
 import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
+import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
 import _poolDaggerdromeImp from "../pool/daggerdrome-imp.js";
@@ -380,6 +381,7 @@ import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
 import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
 import _poolStonefareCrocodile from "../pool/stonefare-crocodile.js";
 import _poolStormsurgeKraken from "../pool/stormsurge-kraken.js";
+import _poolStrengthOfTheCoalition from "../pool/strength-of-the-coalition.js";
 import _poolStriderHarness from "../pool/strider-harness.js";
 import _poolStrongboxRaider from "../pool/strongbox-raider.js";
 import _poolSuddenBreakthrough from "../pool/sudden-breakthrough.js";
@@ -575,6 +577,7 @@ const shard: CardShard = {
     _poolCrushContraband,
     _poolCryptOfAgadeem,
     _poolCrystallineSliver,
+    _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
     _poolDaggerdromeImp,
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolSteelPlumeMarshal,
     _poolStonefareCrocodile,
     _poolStormsurgeKraken,
+    _poolStrengthOfTheCoalition,
     _poolStriderHarness,
     _poolStrongboxRaider,
     _poolSuddenBreakthrough,

@@ -126,6 +126,7 @@ import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEviscerate from "../pool/eviscerate.js";
+import _poolEvolvedSleeper from "../pool/evolved-sleeper.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolExterminatus from "../pool/exterminatus.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
@@ -197,6 +198,7 @@ import _poolIronManMasterOfMachines from "../pool/iron-man-master-of-machines.js
 import _poolIsland from "../pool/island.js";
 import _poolJaggedBarrens from "../pool/jagged-barrens.js";
 import _poolJaheiraFriendOfTheForest from "../pool/jaheira-friend-of-the-forest.js";
+import _poolJensonCarthalionDruidExile from "../pool/jenson-carthalion-druid-exile.js";
 import _poolJeskaiSage from "../pool/jeskai-sage.js";
 import _poolJeskaiWindscout from "../pool/jeskai-windscout.js";
 import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
@@ -277,6 +279,7 @@ import _poolPestControl from "../pool/pest-control.js";
 import _poolPetrifiedPlating from "../pool/petrified-plating.js";
 import _poolPhyrexianArchivist from "../pool/phyrexian-archivist.js";
 import _poolPhyrexianDigester from "../pool/phyrexian-digester.js";
+import _poolPhyrexianEspionage from "../pool/phyrexian-espionage.js";
 import _poolPhyrexianRager from "../pool/phyrexian-rager.js";
 import _poolPhyrexianReclamation from "../pool/phyrexian-reclamation.js";
 import _poolPillarLaunch from "../pool/pillar-launch.js";
@@ -297,6 +300,7 @@ import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
+import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
@@ -589,6 +593,7 @@ const shard: CardShard = {
     _poolErestorOfTheCouncil,
     _poolEtchedHostDoombringer,
     _poolEviscerate,
+    _poolEvolvedSleeper,
     _poolExperimentalArmor,
     _poolExterminatus,
     _poolFadeFromMemory,
@@ -660,6 +665,7 @@ const shard: CardShard = {
     _poolIsland,
     _poolJaggedBarrens,
     _poolJaheiraFriendOfTheForest,
+    _poolJensonCarthalionDruidExile,
     _poolJeskaiSage,
     _poolJeskaiWindscout,
     _poolJessicaJonesPrivateEye,
@@ -740,6 +746,7 @@ const shard: CardShard = {
     _poolPetrifiedPlating,
     _poolPhyrexianArchivist,
     _poolPhyrexianDigester,
+    _poolPhyrexianEspionage,
     _poolPhyrexianRager,
     _poolPhyrexianReclamation,
     _poolPillarLaunch,
@@ -760,6 +767,7 @@ const shard: CardShard = {
     _poolPullUnder,
     _poolPyroceratops,
     _poolRabbitResponse,
+    _poolRadhaCoalitionWarlord,
     _poolRageIntoTheValley,
     _poolRagingBattleMouse,
     _poolRaidersWake,

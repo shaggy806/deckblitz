@@ -33,6 +33,7 @@ import _poolBalaGedSanctuary from "../pool/bala-ged-sanctuary.js";
 import _poolBallistaSquad from "../pool/ballista-squad.js";
 import _poolBanditsHaul from "../pool/bandits-haul.js";
 import _poolBaneOfProgress from "../pool/bane-of-progress.js";
+import _poolBattlewingMystic from "../pool/battlewing-mystic.js";
 import _poolBeastbondOutcaster from "../pool/beastbond-outcaster.js";
 import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
 import _poolBeseechTheQueen from "../pool/beseech-the-queen.js";
@@ -66,6 +67,7 @@ import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
+import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolCoercion from "../pool/coercion.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
 import _poolCombustibleGearhulk from "../pool/combustible-gearhulk.js";
@@ -229,6 +231,7 @@ import _poolMesmericOrb from "../pool/mesmeric-orb.js";
 import _poolMessengerDrake from "../pool/messenger-drake.js";
 import _poolMetathranZombie from "../pool/metathran-zombie.js";
 import _poolMethodsOfTheMighty from "../pool/methods-of-the-mighty.js";
+import _poolMicromancer from "../pool/micromancer.js";
 import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
@@ -381,6 +384,7 @@ import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
+import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
@@ -399,6 +403,7 @@ import _poolUnholyStrength from "../pool/unholy-strength.js";
 import _poolUnitedFront from "../pool/united-front.js";
 import _poolUnstoppablePlan from "../pool/unstoppable-plan.js";
 import _poolUnworthyDead from "../pool/unworthy-dead.js";
+import _poolUrborgRepossession from "../pool/urborg-repossession.js";
 import _poolValiantKnight from "../pool/valiant-knight.js";
 import _poolValorousSteed from "../pool/valorous-steed.js";
 import _poolValorsReachTagTeam from "../pool/valors-reach-tag-team.js";
@@ -427,6 +432,7 @@ import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
+import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
@@ -474,6 +480,7 @@ const shard: CardShard = {
     _poolBallistaSquad,
     _poolBanditsHaul,
     _poolBaneOfProgress,
+    _poolBattlewingMystic,
     _poolBeastbondOutcaster,
     _poolBeastmasterAscension,
     _poolBeseechTheQueen,
@@ -507,6 +514,7 @@ const shard: CardShard = {
     _poolChromaticLantern,
     _poolCitizenVHelmutZemo,
     _poolClavilenoFirstOfTheBlessed,
+    _poolCleavingSkyrider,
     _poolCoercion,
     _poolColossusSteelStalwart,
     _poolCombustibleGearhulk,
@@ -670,6 +678,7 @@ const shard: CardShard = {
     _poolMessengerDrake,
     _poolMetathranZombie,
     _poolMethodsOfTheMighty,
+    _poolMicromancer,
     _poolMinionsReturn,
     _poolMirrorEntity,
     _poolMisguidedRage,
@@ -822,6 +831,7 @@ const shard: CardShard = {
     _poolTheSibsigCeremony,
     _poolThornwoodFalls,
     _poolThrivingGrove,
+    _poolTobiasDoomedConqueror,
     _poolTomBombadil,
     _poolTorgalAFineHound,
     _poolTorstenVonUrsus,
@@ -840,6 +850,7 @@ const shard: CardShard = {
     _poolUnitedFront,
     _poolUnstoppablePlan,
     _poolUnworthyDead,
+    _poolUrborgRepossession,
     _poolValiantKnight,
     _poolValorousSteed,
     _poolValorsReachTagTeam,
@@ -868,6 +879,7 @@ const shard: CardShard = {
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
+    _poolYavimayaIconoclast,
     _poolZhaoRuthlessAdmiral,
   ],
   tokens: [

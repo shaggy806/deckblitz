@@ -222,6 +222,7 @@ import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
 import _poolJudgmentBolt from "../pool/judgment-bolt.js";
+import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
 import _poolJunkyardGenius from "../pool/junkyard-genius.js";
 import _poolKalastriaNightwatch from "../pool/kalastria-nightwatch.js";
 import _poolKamiOfCelebration from "../pool/kami-of-celebration.js";
@@ -318,6 +319,7 @@ import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
+import _poolRagefireHellkite from "../pool/ragefire-hellkite.js";
 import _poolRagingCougar from "../pool/raging-cougar.js";
 import _poolRainOfEmbers from "../pool/rain-of-embers.js";
 import _poolRaiseThePast from "../pool/raise-the-past.js";
@@ -449,6 +451,7 @@ import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
 import _poolTitansStrength from "../pool/titans-strength.js";
+import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
 import _poolTomeBlast from "../pool/tome-blast.js";
 import _poolTormodsCrypt from "../pool/tormods-crypt.js";
@@ -493,6 +496,7 @@ import _poolWorldWeary from "../pool/world-weary.js";
 import _poolWreckingBall from "../pool/wrecking-ball.js";
 import _poolWrench from "../pool/wrench.js";
 import _poolWretchedAnurid from "../pool/wretched-anurid.js";
+import _poolWrithingNecromass from "../pool/writhing-necromass.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
@@ -731,6 +735,7 @@ const shard: CardShard = {
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
     _poolJudgmentBolt,
+    _poolJuniperOrderRootweaver,
     _poolJunkyardGenius,
     _poolKalastriaNightwatch,
     _poolKamiOfCelebration,
@@ -827,6 +832,7 @@ const shard: CardShard = {
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
     _poolRageScarredBerserker,
+    _poolRagefireHellkite,
     _poolRagingCougar,
     _poolRainOfEmbers,
     _poolRaiseThePast,
@@ -958,6 +964,7 @@ const shard: CardShard = {
     _poolTimberwatchElf,
     _poolTishanaVoiceOfThunder,
     _poolTitansStrength,
+    _poolTolarianGeyser,
     _poolTollsOfWar,
     _poolTomeBlast,
     _poolTormodsCrypt,
@@ -1002,6 +1009,7 @@ const shard: CardShard = {
     _poolWreckingBall,
     _poolWrench,
     _poolWretchedAnurid,
+    _poolWrithingNecromass,
     _poolYargleGoliathOfOtaria,
     _poolZagothCrystal,
     _poolZellDincht,

@@ -262,6 +262,7 @@ import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
 import _poolLoporritScout from "../pool/loporrit-scout.js";
 import _poolLostDays from "../pool/lost-days.js";
+import _poolLoveSongOfNightAndDay from "../pool/love-song-of-night-and-day.js";
 import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
@@ -746,6 +747,7 @@ const shard: CardShard = {
     _poolLootExuberantExplorer,
     _poolLoporritScout,
     _poolLostDays,
+    _poolLoveSongOfNightAndDay,
     _poolLoxodonEavesdropper,
     _poolLoyalTutor,
     _poolLumengridGargoyle,

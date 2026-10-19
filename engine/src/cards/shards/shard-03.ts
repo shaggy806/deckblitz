@@ -225,12 +225,14 @@ import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMishraExcavationProdigy from "../pool/mishra-excavation-prodigy.js";
 import _poolMoltenExhale from "../pool/molten-exhale.js";
+import _poolMoltenMonstrosity from "../pool/molten-monstrosity.js";
 import _poolMorbidHunger from "../pool/morbid-hunger.js";
 import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
+import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
@@ -249,6 +251,7 @@ import _poolOrcristGoblinCleaver from "../pool/orcrist-goblin-cleaver.js";
 import _poolPenregonStrongbull from "../pool/penregon-strongbull.js";
 import _poolPersist from "../pool/persist.js";
 import _poolPiggyBank from "../pool/piggy-bank.js";
+import _poolPilfer from "../pool/pilfer.js";
 import _poolPompousGadabout from "../pool/pompous-gadabout.js";
 import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
@@ -408,6 +411,7 @@ import _poolWardenOfTheInnerSky from "../pool/warden-of-the-inner-sky.js";
 import _poolWargTactics from "../pool/warg-tactics.js";
 import _poolWaspShrinkingSavior from "../pool/wasp-shrinking-savior.js";
 import _poolWeatherMaker from "../pool/weather-maker.js";
+import _poolWeatherlightCompleated from "../pool/weatherlight-compleated.js";
 import _poolWebShot from "../pool/web-shot.js";
 import _poolWhiteKnight from "../pool/white-knight.js";
 import _poolWhiteWidowFreeAgent from "../pool/white-widow-free-agent.js";
@@ -661,12 +665,14 @@ const shard: CardShard = {
     _poolMinotaurAggressor,
     _poolMishraExcavationProdigy,
     _poolMoltenExhale,
+    _poolMoltenMonstrosity,
     _poolMorbidHunger,
     _poolMortify,
     _poolMossKami,
     _poolMossViper,
     _poolMoxPearl,
     _poolNadirKraken,
+    _poolNajalTheStormRunner,
     _poolNaruMehaMasterWizard,
     _poolNecraDisciple,
     _poolNecronDeathmark,
@@ -685,6 +691,7 @@ const shard: CardShard = {
     _poolPenregonStrongbull,
     _poolPersist,
     _poolPiggyBank,
+    _poolPilfer,
     _poolPompousGadabout,
     _poolPopularEgotist,
     _poolPoxwalkers,
@@ -844,6 +851,7 @@ const shard: CardShard = {
     _poolWargTactics,
     _poolWaspShrinkingSavior,
     _poolWeatherMaker,
+    _poolWeatherlightCompleated,
     _poolWebShot,
     _poolWhiteKnight,
     _poolWhiteWidowFreeAgent,

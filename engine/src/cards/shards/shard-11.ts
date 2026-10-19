@@ -57,6 +57,7 @@ import _poolBraveTheWilds from "../pool/brave-the-wilds.js";
 import _poolBrazenWolves from "../pool/brazen-wolves.js";
 import _poolBreechesTheBlastmaker from "../pool/breeches-the-blastmaker.js";
 import _poolBreedingPool from "../pool/breeding-pool.js";
+import _poolBriarHydra from "../pool/briar-hydra.js";
 import _poolBrittleEffigy from "../pool/brittle-effigy.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
@@ -184,12 +185,14 @@ import _poolGuardianOfGhirapur from "../pool/guardian-of-ghirapur.js";
 import _poolGuildlessCommons from "../pool/guildless-commons.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
+import _poolHauntingFigment from "../pool/haunting-figment.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
 import _poolHeatedDebate from "../pool/heated-debate.js";
 import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
 import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
 import _poolHeraldOfSlaanesh from "../pool/herald-of-slaanesh.js";
 import _poolHeraldicBanner from "../pool/heraldic-banner.js";
+import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
 import _poolHitchclawRecluse from "../pool/hitchclaw-recluse.js";
 import _poolHoardRobber from "../pool/hoard-robber.js";
@@ -214,6 +217,7 @@ import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
 import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
+import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
@@ -363,6 +367,7 @@ import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
 import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
+import _poolSheoldredsRestoration from "../pool/sheoldreds-restoration.js";
 import _poolShieldOfTheOversoul from "../pool/shield-of-the-oversoul.js";
 import _poolShiftingWoodland from "../pool/shifting-woodland.js";
 import _poolShiningAerosaur from "../pool/shining-aerosaur.js";
@@ -412,6 +417,7 @@ import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
 import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
+import _poolSunbathingRootwalla from "../pool/sunbathing-rootwalla.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
@@ -424,6 +430,7 @@ import _poolSyndicateEnforcer from "../pool/syndicate-enforcer.js";
 import _poolTaintedWood from "../pool/tainted-wood.js";
 import _poolTalrandsInvocation from "../pool/talrands-invocation.js";
 import _poolTanglespanBridgeworks from "../pool/tanglespan-bridgeworks.js";
+import _poolTatyovaStewardOfTides from "../pool/tatyova-steward-of-tides.js";
 import _poolTchakaVenerableKing from "../pool/tchaka-venerable-king.js";
 import _poolTearAsunder from "../pool/tear-asunder.js";
 import _poolTechnodrome from "../pool/technodrome.js";
@@ -565,6 +572,7 @@ const shard: CardShard = {
     _poolBrazenWolves,
     _poolBreechesTheBlastmaker,
     _poolBreedingPool,
+    _poolBriarHydra,
     _poolBrittleEffigy,
     _poolBroodWeaver,
     _poolBurningTreeVandal,
@@ -692,12 +700,14 @@ const shard: CardShard = {
     _poolGuildlessCommons,
     _poolGutlessGhoul,
     _poolHallowedHaunting,
+    _poolHauntingFigment,
     _poolHearthfireHobgoblin,
     _poolHeatedDebate,
     _poolHedronScrabbler,
     _poolHelmOfAwakening,
     _poolHeraldOfSlaanesh,
     _poolHeraldicBanner,
+    _poolHeroicCharge,
     _poolHexhavenDuelingArena,
     _poolHitchclawRecluse,
     _poolHoardRobber,
@@ -722,6 +732,7 @@ const shard: CardShard = {
     _poolInvasionOfInnistrad,
     _poolInvasionOfKamigawa,
     _poolInvasionTactics,
+    _poolIridianMaelstrom,
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
@@ -871,6 +882,7 @@ const shard: CardShard = {
     _poolSerpentineKavu,
     _poolShamblingStrider,
     _poolShaoJun,
+    _poolSheoldredsRestoration,
     _poolShieldOfTheOversoul,
     _poolShiftingWoodland,
     _poolShiningAerosaur,
@@ -920,6 +932,7 @@ const shard: CardShard = {
     _poolStrengthOfTheHarvest,
     _poolSummonPrimalOdin,
     _poolSummonersGrimoire,
+    _poolSunbathingRootwalla,
     _poolSunderingGrowth,
     _poolSunfrillImitator,
     _poolSungoldBarrage,
@@ -932,6 +945,7 @@ const shard: CardShard = {
     _poolTaintedWood,
     _poolTalrandsInvocation,
     _poolTanglespanBridgeworks,
+    _poolTatyovaStewardOfTides,
     _poolTchakaVenerableKing,
     _poolTearAsunder,
     _poolTechnodrome,

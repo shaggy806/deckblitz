@@ -312,6 +312,7 @@ import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolQueensBayPaladin from "../pool/queens-bay-paladin.js";
 import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
+import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
 import _poolRagingBull from "../pool/raging-bull.js";
 import _poolRampartHunter from "../pool/rampart-hunter.js";
 import _poolRazeToTheGround from "../pool/raze-to-the-ground.js";
@@ -424,6 +425,7 @@ import _poolTogetherForever from "../pool/together-forever.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
+import _poolTorstenFounderOfBenalia from "../pool/torsten-founder-of-benalia.js";
 import _poolTradingPost from "../pool/trading-post.js";
 import _poolTreeOfPerdition from "../pool/tree-of-perdition.js";
 import _poolTriplicateTitan from "../pool/triplicate-titan.js";
@@ -447,6 +449,7 @@ import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
 import _poolVenerableMonk from "../pool/venerable-monk.js";
 import _poolVerminGorger from "../pool/vermin-gorger.js";
 import _poolVeteranSwordsmith from "../pool/veteran-swordsmith.js";
+import _poolViashinoBranchrider from "../pool/viashino-branchrider.js";
 import _poolViashinoFangtail from "../pool/viashino-fangtail.js";
 import _poolViashinoFirstblade from "../pool/viashino-firstblade.js";
 import _poolVictorysEnvoy from "../pool/victorys-envoy.js";
@@ -814,6 +817,7 @@ const shard: CardShard = {
     _poolQueensBayPaladin,
     _poolQuicksandWhirlpool,
     _poolRabanastreRoyalCity,
+    _poolRaffWeatherlightStalwart,
     _poolRagingBull,
     _poolRampartHunter,
     _poolRazeToTheGround,
@@ -926,6 +930,7 @@ const shard: CardShard = {
     _poolTomBertAndWilliam,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,
+    _poolTorstenFounderOfBenalia,
     _poolTradingPost,
     _poolTreeOfPerdition,
     _poolTriplicateTitan,
@@ -949,6 +954,7 @@ const shard: CardShard = {
     _poolVenerableMonk,
     _poolVerminGorger,
     _poolVeteranSwordsmith,
+    _poolViashinoBranchrider,
     _poolViashinoFangtail,
     _poolViashinoFirstblade,
     _poolVictorysEnvoy,

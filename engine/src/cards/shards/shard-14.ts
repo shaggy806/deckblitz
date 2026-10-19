@@ -19,6 +19,7 @@ import _poolArchaeomancer from "../pool/archaeomancer.js";
 import _poolArchfiendOfIfnir from "../pool/archfiend-of-ifnir.js";
 import _poolArchonOfRedemption from "../pool/archon-of-redemption.js";
 import _poolArdentElementalist from "../pool/ardent-elementalist.js";
+import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
 import _poolArniHumbleScribe from "../pool/arni-humble-scribe.js";
 import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
@@ -314,6 +315,7 @@ import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
 import _poolProfessionalFaceBreaker from "../pool/professional-face-breaker.js";
+import _poolProtectTheNegotiators from "../pool/protect-the-negotiators.js";
 import _poolProwessOfTheFair from "../pool/prowess-of-the-fair.js";
 import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
@@ -344,6 +346,7 @@ import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
 import _poolScornBladeBerserker from "../pool/scorn-blade-berserker.js";
 import _poolScourgemark from "../pool/scourgemark.js";
+import _poolScoutTheWilderness from "../pool/scout-the-wilderness.js";
 import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
@@ -480,6 +483,7 @@ const shard: CardShard = {
     _poolArchfiendOfIfnir,
     _poolArchonOfRedemption,
     _poolArdentElementalist,
+    _poolArgivianPhalanx,
     _poolArniHumbleScribe,
     _poolArtistsTalent,
     _poolAshcoatOfTheShadowSwarm,
@@ -775,6 +779,7 @@ const shard: CardShard = {
     _poolPrimevalBounty,
     _poolPrismite,
     _poolProfessionalFaceBreaker,
+    _poolProtectTheNegotiators,
     _poolProwessOfTheFair,
     _poolProwlingCaracal,
     _poolPublicThoroughfare,
@@ -805,6 +810,7 @@ const shard: CardShard = {
     _poolScavengerRegent,
     _poolScornBladeBerserker,
     _poolScourgemark,
+    _poolScoutTheWilderness,
     _poolScrapyardRecombiner,
     _poolScurryOfSquirrels,
     _poolSerpentOfYawningDepths,

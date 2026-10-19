@@ -383,6 +383,7 @@ import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
+import _poolTalasLookout from "../pool/talas-lookout.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
@@ -426,6 +427,7 @@ import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
 import _poolUnfathomableTruths from "../pool/unfathomable-truths.js";
 import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
+import _poolValiantVeteran from "../pool/valiant-veteran.js";
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
@@ -858,6 +860,7 @@ const shard: CardShard = {
     _poolSurrakDragonclaw,
     _poolSwarmyard,
     _poolSylvanSafekeeper,
+    _poolTalasLookout,
     _poolTatteredMummy,
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
@@ -901,6 +904,7 @@ const shard: CardShard = {
     _poolUnfathomableTruths,
     _poolUnnaturalPredation,
     _poolValeriaRichardsPrecocious,
+    _poolValiantVeteran,
     _poolValorSinger,
     _poolVampireCutthroat,
     _poolVanguardSuppressor,

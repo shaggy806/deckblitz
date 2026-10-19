@@ -123,6 +123,7 @@ import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFesterleech from "../pool/festerleech.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
 import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
+import _poolFiresOfVictory from "../pool/fires-of-victory.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
 import _poolFlametongueKavu from "../pool/flametongue-kavu.js";
 import _poolFloodedGrove from "../pool/flooded-grove.js";
@@ -132,6 +133,7 @@ import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
+import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
@@ -328,6 +330,7 @@ import _poolSeashellCameo from "../pool/seashell-cameo.js";
 import _poolSeismicRupture from "../pool/seismic-rupture.js";
 import _poolSensoryDeprivation from "../pool/sensory-deprivation.js";
 import _poolSerrasGuardian from "../pool/serras-guardian.js";
+import _poolShadowRitePriest from "../pool/shadow-rite-priest.js";
 import _poolShadowfeed from "../pool/shadowfeed.js";
 import _poolShadyTraveler from "../pool/shady-traveler.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
@@ -387,6 +390,7 @@ import _poolThrummingbird from "../pool/thrummingbird.js";
 import _poolThundersteelColossus from "../pool/thundersteel-colossus.js";
 import _poolTicketBooth from "../pool/ticket-booth.js";
 import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.js";
+import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
@@ -580,6 +584,7 @@ const shard: CardShard = {
     _poolFesterleech,
     _poolFireNationEngineer,
     _poolFireOfOrthanc,
+    _poolFiresOfVictory,
     _poolFlameblastDragon,
     _poolFlametongueKavu,
     _poolFloodedGrove,
@@ -589,6 +594,7 @@ const shard: CardShard = {
     _poolFranklinRichardsAscendant,
     _poolGaryClone,
     _poolGhoulcallersAccomplice,
+    _poolGibberingBarricade,
     _poolGiftOfStrands,
     _poolGlareOfSubdual,
     _poolGleamingBastion,
@@ -785,6 +791,7 @@ const shard: CardShard = {
     _poolSeismicRupture,
     _poolSensoryDeprivation,
     _poolSerrasGuardian,
+    _poolShadowRitePriest,
     _poolShadowfeed,
     _poolShadyTraveler,
     _poolShatteredYard,
@@ -844,6 +851,7 @@ const shard: CardShard = {
     _poolThundersteelColossus,
     _poolTicketBooth,
     _poolTitaniaProtectorOfArgoth,
+    _poolTolarianTerror,
     _poolTookReaper,
     _poolToxicAbomination,
     _poolTragicPoet,

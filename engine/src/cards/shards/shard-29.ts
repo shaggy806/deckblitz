@@ -142,6 +142,7 @@ import _poolFlamebraider from "../pool/flamebraider.js";
 import _poolFlamecacheGecko from "../pool/flamecache-gecko.js";
 import _poolFlayerOfLoyalties from "../pool/flayer-of-loyalties.js";
 import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
+import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
@@ -264,6 +265,7 @@ import _poolNezumiInformant from "../pool/nezumi-informant.js";
 import _poolNipGwyllion from "../pool/nip-gwyllion.js";
 import _poolNoxiousDragon from "../pool/noxious-dragon.js";
 import _poolNullBrooch from "../pool/null-brooch.js";
+import _poolObsidianObelisk from "../pool/obsidian-obelisk.js";
 import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
 import _poolOldGhastbark from "../pool/old-ghastbark.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
@@ -339,6 +341,7 @@ import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSeedOfHope from "../pool/seed-of-hope.js";
 import _poolSeekTheBeast from "../pool/seek-the-beast.js";
 import _poolSegmentedKrotiq from "../pool/segmented-krotiq.js";
+import _poolSengirConnoisseur from "../pool/sengir-connoisseur.js";
 import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
@@ -355,6 +358,7 @@ import _poolSkaabWrangler from "../pool/skaab-wrangler.js";
 import _poolSkybeastTracker from "../pool/skybeast-tracker.js";
 import _poolSlagstoneRefinery from "../pool/slagstone-refinery.js";
 import _poolSlagwoodsBridge from "../pool/slagwoods-bridge.js";
+import _poolSlimefootsSurvey from "../pool/slimefoots-survey.js";
 import _poolSmother from "../pool/smother.js";
 import _poolSnap from "../pool/snap.js";
 import _poolSneakAttack from "../pool/sneak-attack.js";
@@ -375,6 +379,7 @@ import _poolStationMonitor from "../pool/station-monitor.js";
 import _poolStatureSizeShifter from "../pool/stature-size-shifter.js";
 import _poolSteadfastness from "../pool/steadfastness.js";
 import _poolSteelSeraph from "../pool/steel-seraph.js";
+import _poolStennParanoidPartisan from "../pool/stenn-paranoid-partisan.js";
 import _poolStillnessInMotion from "../pool/stillness-in-motion.js";
 import _poolStingSlinger from "../pool/sting-slinger.js";
 import _poolStingerquillCharm from "../pool/stingerquill-charm.js";
@@ -619,6 +624,7 @@ const shard: CardShard = {
     _poolFlamecacheGecko,
     _poolFlayerOfLoyalties,
     _poolFlightOfFancy,
+    _poolFloriferousVinewall,
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolForbiddenAlchemy,
@@ -741,6 +747,7 @@ const shard: CardShard = {
     _poolNipGwyllion,
     _poolNoxiousDragon,
     _poolNullBrooch,
+    _poolObsidianObelisk,
     _poolOjerAxonilDeepestMight,
     _poolOldGhastbark,
     _poolOminousSeas,
@@ -816,6 +823,7 @@ const shard: CardShard = {
     _poolSeedOfHope,
     _poolSeekTheBeast,
     _poolSegmentedKrotiq,
+    _poolSengirConnoisseur,
     _poolSenseisDiviningTop,
     _poolSerpentSpecialist,
     _poolShadowcloakVampire,
@@ -832,6 +840,7 @@ const shard: CardShard = {
     _poolSkybeastTracker,
     _poolSlagstoneRefinery,
     _poolSlagwoodsBridge,
+    _poolSlimefootsSurvey,
     _poolSmother,
     _poolSnap,
     _poolSneakAttack,
@@ -852,6 +861,7 @@ const shard: CardShard = {
     _poolStatureSizeShifter,
     _poolSteadfastness,
     _poolSteelSeraph,
+    _poolStennParanoidPartisan,
     _poolStillnessInMotion,
     _poolStingSlinger,
     _poolStingerquillCharm,

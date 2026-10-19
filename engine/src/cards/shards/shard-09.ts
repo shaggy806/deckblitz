@@ -42,6 +42,7 @@ import _poolBaithookAngler from "../pool/baithook-angler.js";
 import _poolBanehound from "../pool/banehound.js";
 import _poolBantPanorama from "../pool/bant-panorama.js";
 import _poolBarkhideMauler from "../pool/barkhide-mauler.js";
+import _poolBaruWurmspeaker from "../pool/baru-wurmspeaker.js";
 import _poolBatheInDragonfire from "../pool/bathe-in-dragonfire.js";
 import _poolBearCub from "../pool/bear-cub.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
@@ -519,6 +520,7 @@ const shard: CardShard = {
     _poolBanehound,
     _poolBantPanorama,
     _poolBarkhideMauler,
+    _poolBaruWurmspeaker,
     _poolBatheInDragonfire,
     _poolBearCub,
     _poolBecomeBrutes,

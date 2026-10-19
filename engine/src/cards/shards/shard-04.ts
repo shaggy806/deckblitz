@@ -285,6 +285,7 @@ import _poolPucasCovenant from "../pool/pucas-covenant.js";
 import _poolPutridLeech from "../pool/putrid-leech.js";
 import _poolPyreticRitual from "../pool/pyretic-ritual.js";
 import _poolQuandrixCampus from "../pool/quandrix-campus.js";
+import _poolRadhasFirebrand from "../pool/radhas-firebrand.js";
 import _poolRagingRedcap from "../pool/raging-redcap.js";
 import _poolRaidBombardment from "../pool/raid-bombardment.js";
 import _poolRaisedByGiants from "../pool/raised-by-giants.js";
@@ -309,6 +310,7 @@ import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
+import _poolRohgahhKherKeepOverlord from "../pool/rohgahh-kher-keep-overlord.js";
 import _poolRootSliver from "../pool/root-sliver.js";
 import _poolRoyalTreatment from "../pool/royal-treatment.js";
 import _poolRubyDaringTracker from "../pool/ruby-daring-tracker.js";
@@ -424,6 +426,7 @@ import _poolVibrantIdea from "../pool/vibrant-idea.js";
 import _poolViciousClown from "../pool/vicious-clown.js";
 import _poolViciousRivalry from "../pool/vicious-rivalry.js";
 import _poolVillageCannibals from "../pool/village-cannibals.js";
+import _poolVineshaperProdigy from "../pool/vineshaper-prodigy.js";
 import _poolVitalizingWind from "../pool/vitalizing-wind.js";
 import _poolVoiceOfTheProvinces from "../pool/voice-of-the-provinces.js";
 import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
@@ -747,6 +750,7 @@ const shard: CardShard = {
     _poolPutridLeech,
     _poolPyreticRitual,
     _poolQuandrixCampus,
+    _poolRadhasFirebrand,
     _poolRagingRedcap,
     _poolRaidBombardment,
     _poolRaisedByGiants,
@@ -771,6 +775,7 @@ const shard: CardShard = {
     _poolRhovanionRampager,
     _poolRidgeRannet,
     _poolRitualOfSteel,
+    _poolRohgahhKherKeepOverlord,
     _poolRootSliver,
     _poolRoyalTreatment,
     _poolRubyDaringTracker,
@@ -886,6 +891,7 @@ const shard: CardShard = {
     _poolViciousClown,
     _poolViciousRivalry,
     _poolVillageCannibals,
+    _poolVineshaperProdigy,
     _poolVitalizingWind,
     _poolVoiceOfTheProvinces,
     _poolVoiceOfVictory,

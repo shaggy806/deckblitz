@@ -171,6 +171,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
 import _poolGolgariRotwurm from "../pool/golgari-rotwurm.js";
 import _poolGolgariThug from "../pool/golgari-thug.js";
@@ -234,6 +235,7 @@ import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
 import _poolKinsbaileSkirmisher from "../pool/kinsbaile-skirmisher.js";
 import _poolKirolAttentiveFirstYear from "../pool/kirol-attentive-first-year.js";
 import _poolKitchenFinks from "../pool/kitchen-finks.js";
+import _poolKnightOfDusksShadow from "../pool/knight-of-dusks-shadow.js";
 import _poolKomodoRhino from "../pool/komodo-rhino.js";
 import _poolKwainItinerantMeddler from "../pool/kwain-itinerant-meddler.js";
 import _poolKyrenNegotiations from "../pool/kyren-negotiations.js";
@@ -679,6 +681,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGoblinPicker,
     _poolGoldenTailDisciple,
     _poolGolgariRotwurm,
     _poolGolgariThug,
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolKinsbaileSkirmisher,
     _poolKirolAttentiveFirstYear,
     _poolKitchenFinks,
+    _poolKnightOfDusksShadow,
     _poolKomodoRhino,
     _poolKwainItinerantMeddler,
     _poolKyrenNegotiations,

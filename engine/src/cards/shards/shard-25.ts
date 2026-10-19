@@ -34,6 +34,7 @@ import _poolBastionProtector from "../pool/bastion-protector.js";
 import _poolBearDown from "../pool/bear-down.js";
 import _poolBebopWarthogWarrior from "../pool/bebop-warthog-warrior.js";
 import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
+import _poolBenalishSleeper from "../pool/benalish-sleeper.js";
 import _poolBendersWaterskin from "../pool/benders-waterskin.js";
 import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
 import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
@@ -460,6 +461,7 @@ import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
 import _tokensGlimmerToken from "../tokens/glimmer-token.js";
 import _tokensInklingTokenEmeritusOfTruce from "../tokens/inkling-token-emeritus-of-truce.js";
+import _tokensKavuTokenJaredCarthalion from "../tokens/kavu-token-jared-carthalion.js";
 import _tokensNinjaTurtleSpiritToken from "../tokens/ninja-turtle-spirit-token.js";
 import _tokensPhyrexianWurmDeathtouch from "../tokens/phyrexian-wurm-deathtouch.js";
 import _tokensRobotTokenBigMotherMouser from "../tokens/robot-token-big-mother-mouser.js";
@@ -503,6 +505,7 @@ const shard: CardShard = {
     _poolBearDown,
     _poolBebopWarthogWarrior,
     _poolBejeweledWarg,
+    _poolBenalishSleeper,
     _poolBendersWaterskin,
     _poolBeornReluctantHost,
     _poolBerserkersOnslaught,
@@ -931,6 +934,7 @@ const shard: CardShard = {
     _tokensFaerieTokenIntoTheFaeCourt,
     _tokensGlimmerToken,
     _tokensInklingTokenEmeritusOfTruce,
+    _tokensKavuTokenJaredCarthalion,
     _tokensNinjaTurtleSpiritToken,
     _tokensPhyrexianWurmDeathtouch,
     _tokensRobotTokenBigMotherMouser,

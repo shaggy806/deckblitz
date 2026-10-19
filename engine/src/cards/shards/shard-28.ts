@@ -78,6 +78,7 @@ import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
+import _poolCoralColony from "../pool/coral-colony.js";
 import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCourtArchers from "../pool/court-archers.js";
@@ -163,6 +164,7 @@ import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
+import _poolHerdMigration from "../pool/herd-migration.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
 import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
@@ -217,6 +219,7 @@ import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
 import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
 import _poolMakeAStand from "../pool/make-a-stand.js";
+import _poolManaCannons from "../pool/mana-cannons.js";
 import _poolManaGeode from "../pool/mana-geode.js";
 import _poolMandroidSquadron from "../pool/mandroid-squadron.js";
 import _poolMaralenFaeAscendant from "../pool/maralen-fae-ascendant.js";
@@ -227,6 +230,7 @@ import _poolMarshGoblins from "../pool/marsh-goblins.js";
 import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js";
 import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
@@ -274,6 +278,7 @@ import _poolPestRescuer from "../pool/pest-rescuer.js";
 import _poolPeterParker from "../pool/peter-parker.js";
 import _poolPhantomTrain from "../pool/phantom-train.js";
 import _poolPhyrexianMetamorph from "../pool/phyrexian-metamorph.js";
+import _poolPhyrexianWarhorse from "../pool/phyrexian-warhorse.js";
 import _poolPillarvergePathway from "../pool/pillarverge-pathway.js";
 import _poolPinnacleEmissary from "../pool/pinnacle-emissary.js";
 import _poolPinnacleKillShip from "../pool/pinnacle-kill-ship.js";
@@ -419,6 +424,7 @@ import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
+import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
 import _poolTyrantsScorn from "../pool/tyrants-scorn.js";
@@ -472,6 +478,7 @@ import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
+import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
 
 const shard: CardShard = {
   pool: [
@@ -550,6 +557,7 @@ const shard: CardShard = {
     _poolCoilingRebirth,
     _poolConcealedCourtyard,
     _poolContestOfClaws,
+    _poolCoralColony,
     _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
     _poolCourtArchers,
@@ -635,6 +643,7 @@ const shard: CardShard = {
     _poolHareRaising,
     _poolHarmonize,
     _poolHeraldOfFaith,
+    _poolHerdMigration,
     _poolHermiticHerbalist,
     _poolHighSocietyHunter,
     _poolHighbornVampire,
@@ -689,6 +698,7 @@ const shard: CardShard = {
     _poolMagusOfTheCoffers,
     _poolMaiScornfulStriker,
     _poolMakeAStand,
+    _poolManaCannons,
     _poolManaGeode,
     _poolMandroidSquadron,
     _poolMaralenFaeAscendant,
@@ -699,6 +709,7 @@ const shard: CardShard = {
     _poolMartialGlory,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMeriaScholarOfAntiquity,
     _poolMerrowSkyswimmer,
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
@@ -746,6 +757,7 @@ const shard: CardShard = {
     _poolPeterParker,
     _poolPhantomTrain,
     _poolPhyrexianMetamorph,
+    _poolPhyrexianWarhorse,
     _poolPillarvergePathway,
     _poolPinnacleEmissary,
     _poolPinnacleKillShip,
@@ -891,6 +903,7 @@ const shard: CardShard = {
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,
+    _poolTributeToUrborg,
     _poolTrynnChampionOfFreedom,
     _poolTuskedColossodon,
     _poolTyrantsScorn,
@@ -946,6 +959,7 @@ const shard: CardShard = {
     _tokensPhyrexianToken,
     _tokensRedHumanToken,
     _tokensSpiderToken21Reach,
+    _tokensWurmTokenBaruWurmspeaker,
   ],
 };
 

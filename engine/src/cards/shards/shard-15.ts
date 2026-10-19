@@ -204,6 +204,7 @@ import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
 import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
+import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
@@ -219,6 +220,7 @@ import _poolIrreverentGremlin from "../pool/irreverent-gremlin.js";
 import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
+import _poolJoinForces from "../pool/join-forces.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolKaraisTechnique from "../pool/karais-technique.js";
 import _poolKaslemsStrider from "../pool/kaslems-strider.js";
@@ -345,6 +347,7 @@ import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
+import _poolSerraRedeemer from "../pool/serra-redeemer.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolHulklingBurgeoningBruiser,
     _poolHystrodon,
     _poolIcemanAndFirestar,
+    _poolImpedeMomentum,
     _poolImpossibleInferno,
     _poolImprovisedClub,
     _poolIncandescentSoulstoke,
@@ -680,6 +684,7 @@ const shard: CardShard = {
     _poolIzzetCluestone,
     _poolJhovallQueen,
     _poolJillShivasDominant,
+    _poolJoinForces,
     _poolJungleHollow,
     _poolKaraisTechnique,
     _poolKaslemsStrider,
@@ -806,6 +811,7 @@ const shard: CardShard = {
     _poolSeasideHaven,
     _poolSeedbornMuse,
     _poolSelflessSpirit,
+    _poolSerraRedeemer,
     _poolSheoldredTheApocalypse,
     _poolSilverbackApe,
     _poolSilvercoatLion,

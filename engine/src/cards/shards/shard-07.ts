@@ -324,6 +324,7 @@ import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRingsOfBrighthearth from "../pool/rings-of-brighthearth.js";
 import _poolRoarOfChallenge from "../pool/roar-of-challenge.js";
 import _poolRoguesGloves from "../pool/rogues-gloves.js";
+import _poolRonasVortex from "../pool/ronas-vortex.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
@@ -823,6 +824,7 @@ const shard: CardShard = {
     _poolRingsOfBrighthearth,
     _poolRoarOfChallenge,
     _poolRoguesGloves,
+    _poolRonasVortex,
     _poolRootbornDefenses,
     _poolRosemaneCentaur,
     _poolRoyalTrooper,

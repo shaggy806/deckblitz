@@ -34,6 +34,7 @@ import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvenReedstalker from "../pool/aven-reedstalker.js";
 import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
+import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
@@ -161,6 +162,7 @@ import _poolGarruksPackleader from "../pool/garruks-packleader.js";
 import _poolGatewaySneak from "../pool/gateway-sneak.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
+import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
 import _poolGiantOx from "../pool/giant-ox.js";
 import _poolGild from "../pool/gild.js";
@@ -318,6 +320,7 @@ import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
 import _poolRodeoPyromancers from "../pool/rodeo-pyromancers.js";
 import _poolRooftopPercher from "../pool/rooftop-percher.js";
 import _poolRoothaMasteringTheMoment from "../pool/rootha-mastering-the-moment.js";
+import _poolRosnakhtHeirOfRohgahh from "../pool/rosnakht-heir-of-rohgahh.js";
 import _poolRuggedHighlands from "../pool/rugged-highlands.js";
 import _poolRuinationWurm from "../pool/ruination-wurm.js";
 import _poolRuinsRecluse from "../pool/ruins-recluse.js";
@@ -508,6 +511,7 @@ const shard: CardShard = {
     _poolAvacynsPilgrim,
     _poolAvenReedstalker,
     _poolAvenSunstriker,
+    _poolBairdArgivianRecruiter,
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
     _poolBasalThrull,
@@ -635,6 +639,7 @@ const shard: CardShard = {
     _poolGatewaySneak,
     _poolGenemorphImago,
     _poolGenjiGlove,
+    _poolGhituAmplifier,
     _poolGhostlyChangeling,
     _poolGiantOx,
     _poolGild,
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _poolRodeoPyromancers,
     _poolRooftopPercher,
     _poolRoothaMasteringTheMoment,
+    _poolRosnakhtHeirOfRohgahh,
     _poolRuggedHighlands,
     _poolRuinationWurm,
     _poolRuinsRecluse,

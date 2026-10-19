@@ -45,6 +45,7 @@ import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBootsOfSpeed from "../pool/boots-of-speed.js";
+import _poolBortukBonerattle from "../pool/bortuk-bonerattle.js";
 import _poolBrainstone from "../pool/brainstone.js";
 import _poolBreechesEagerPillager from "../pool/breeches-eager-pillager.js";
 import _poolBrightfieldGlider from "../pool/brightfield-glider.js";
@@ -73,6 +74,7 @@ import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
 import _poolChocoboKnights from "../pool/chocobo-knights.js";
+import _poolChokingMiasma from "../pool/choking-miasma.js";
 import _poolChosenOfMarkov from "../pool/chosen-of-markov.js";
 import _poolCleansingScreech from "../pool/cleansing-screech.js";
 import _poolCloakOfFeathers from "../pool/cloak-of-feathers.js";
@@ -82,6 +84,7 @@ import _poolCloudblazer from "../pool/cloudblazer.js";
 import _poolCoastalBulwark from "../pool/coastal-bulwark.js";
 import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
 import _poolCollisionCourse from "../pool/collision-course.js";
+import _poolColossalGrowth from "../pool/colossal-growth.js";
 import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
 import _poolConductiveMachete from "../pool/conductive-machete.js";
@@ -550,6 +553,7 @@ const shard: CardShard = {
     _poolBloodcrazedNeonate,
     _poolBlowflyInfestation,
     _poolBootsOfSpeed,
+    _poolBortukBonerattle,
     _poolBrainstone,
     _poolBreechesEagerPillager,
     _poolBrightfieldGlider,
@@ -578,6 +582,7 @@ const shard: CardShard = {
     _poolChiefWargsCompany,
     _poolChildOfThorns,
     _poolChocoboKnights,
+    _poolChokingMiasma,
     _poolChosenOfMarkov,
     _poolCleansingScreech,
     _poolCloakOfFeathers,
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolCoastalBulwark,
     _poolCollectiveNightmare,
     _poolCollisionCourse,
+    _poolColossalGrowth,
     _poolCommandersSphere,
     _poolCommonCrook,
     _poolConductiveMachete,

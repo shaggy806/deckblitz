@@ -51,6 +51,7 @@ import _poolBonehoardDracosaur from "../pool/bonehoard-dracosaur.js";
 import _poolBoomBox from "../pool/boom-box.js";
 import _poolBorderlandRanger from "../pool/borderland-ranger.js";
 import _poolBorosGarrison from "../pool/boros-garrison.js";
+import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
@@ -75,6 +76,7 @@ import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
 import _poolConsumptiveGoo from "../pool/consumptive-goo.js";
 import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
+import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
 import _poolCrosissCharm from "../pool/crosiss-charm.js";
@@ -274,6 +276,7 @@ import _poolPartingGust from "../pool/parting-gust.js";
 import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
 import _poolPestilence from "../pool/pestilence.js";
+import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
 import _poolPhyrexianTriniform from "../pool/phyrexian-triniform.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
 import _poolPreordain from "../pool/preordain.js";
@@ -367,6 +370,7 @@ import _poolSpiritedCompanion from "../pool/spirited-companion.js";
 import _poolSporocyst from "../pool/sporocyst.js";
 import _poolSpurredWolverine from "../pool/spurred-wolverine.js";
 import _poolStalkerHag from "../pool/stalker-hag.js";
+import _poolStallForTime from "../pool/stall-for-time.js";
 import _poolStampedeSurfer from "../pool/stampede-surfer.js";
 import _poolStaunchShieldmate from "../pool/staunch-shieldmate.js";
 import _poolSteadfastGuard from "../pool/steadfast-guard.js";
@@ -531,6 +535,7 @@ const shard: CardShard = {
     _poolBoomBox,
     _poolBorderlandRanger,
     _poolBorosGarrison,
+    _poolBraidssFrightfulReturn,
     _poolBrambleFamiliar,
     _poolBrilliantPlan,
     _poolCabarettiInitiate,
@@ -555,6 +560,7 @@ const shard: CardShard = {
     _poolConsumingCorruption,
     _poolConsumptiveGoo,
     _poolCorruptEunuchs,
+    _poolCosmicEpiphany,
     _poolCourtOfIre,
     _poolCowabunga,
     _poolCrosissCharm,
@@ -754,6 +760,7 @@ const shard: CardShard = {
     _poolPathfindingAxejaw,
     _poolPatrollingPeacemaker,
     _poolPestilence,
+    _poolPhyrexianMissionary,
     _poolPhyrexianTriniform,
     _poolPoisedPractitioner,
     _poolPreordain,
@@ -847,6 +854,7 @@ const shard: CardShard = {
     _poolSporocyst,
     _poolSpurredWolverine,
     _poolStalkerHag,
+    _poolStallForTime,
     _poolStampedeSurfer,
     _poolStaunchShieldmate,
     _poolSteadfastGuard,

@@ -4,11 +4,13 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
+import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
 import _poolAerialPredation from "../pool/aerial-predation.js";
 import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
+import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
@@ -22,6 +24,7 @@ import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
+import _poolArtilleryBlast from "../pool/artillery-blast.js";
 import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
@@ -231,6 +234,7 @@ import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
 import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
+import _poolKnightOfDawnsLight from "../pool/knight-of-dawns-light.js";
 import _poolKnightOfInfamy from "../pool/knight-of-infamy.js";
 import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
@@ -509,11 +513,13 @@ import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-
 const shard: CardShard = {
   pool: [
     _poolAbyssalGorestalker,
+    _poolAcademyWall,
     _poolAccessTunnel,
     _poolAerialPredation,
     _poolAetherGale,
     _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,
+    _poolAggressiveSabotage,
     _poolAkulTheUnrepentant,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
@@ -527,6 +533,7 @@ const shard: CardShard = {
     _poolArcboundSlasher,
     _poolArgothSanctumOfNature,
     _poolArmillarySphere,
+    _poolArtilleryBlast,
     _poolAspirantsAscent,
     _poolAssaultFormation,
     _poolAvatarEnthusiasts,
@@ -736,6 +743,7 @@ const shard: CardShard = {
     _poolKillerWhale,
     _poolKinjallisDawnrunner,
     _poolKinsbaileAspirant,
+    _poolKnightOfDawnsLight,
     _poolKnightOfInfamy,
     _poolKnightOfTheKeep,
     _poolKrovikanFetish,

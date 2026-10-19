@@ -65,6 +65,7 @@ import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
 import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
+import _poolCitizensArrest from "../pool/citizens-arrest.js";
 import _poolCoalGolem from "../pool/coal-golem.js";
 import _poolColdsteelHeart from "../pool/coldsteel-heart.js";
 import _poolCollectiveResistance from "../pool/collective-resistance.js";
@@ -143,6 +144,7 @@ import _poolFootNinjas from "../pool/foot-ninjas.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
 import _poolFountainport from "../pool/fountainport.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
+import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
@@ -174,6 +176,7 @@ import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
+import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolIconOfAncestry from "../pool/icon-of-ancestry.js";
@@ -466,6 +469,7 @@ import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
 import _poolYawgmothThranPhysician from "../pool/yawgmoth-thran-physician.js";
 import _poolYipYip from "../pool/yip-yip.js";
+import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
@@ -544,6 +548,7 @@ const shard: CardShard = {
     _poolChitinousGraspling,
     _poolChokedEstuary,
     _poolChompingChangeling,
+    _poolCitizensArrest,
     _poolCoalGolem,
     _poolColdsteelHeart,
     _poolCollectiveResistance,
@@ -622,6 +627,7 @@ const shard: CardShard = {
     _poolForgottenMonument,
     _poolFountainport,
     _poolFrontlineSage,
+    _poolFrostfistStrider,
     _poolFulminatorMage,
     _poolGargosViciousWatcher,
     _poolGlacialFortress,
@@ -653,6 +659,7 @@ const shard: CardShard = {
     _poolHoverBarrier,
     _poolHowlingMoon,
     _poolHurlIntoHistory,
+    _poolHurloonBattleHymn,
     _poolHydraOmnivore,
     _poolHydraulicHelper,
     _poolIconOfAncestry,
@@ -945,6 +952,7 @@ const shard: CardShard = {
     _poolYavimayaElder,
     _poolYawgmothThranPhysician,
     _poolYipYip,
+    _poolYotiaDeclaresWar,
     _poolYurikoTheTigersShadow,
     _poolZiatoraTheIncinerator,
   ],

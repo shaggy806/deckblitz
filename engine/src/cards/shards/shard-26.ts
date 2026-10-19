@@ -37,6 +37,7 @@ import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
 import _poolAyulaQueenAmongBears from "../pool/ayula-queen-among-bears.js";
 import _poolAzamiLadyOfScrolls from "../pool/azami-lady-of-scrolls.js";
 import _poolBagelAndSchmear from "../pool/bagel-and-schmear.js";
+import _poolBalduvianAtrocity from "../pool/balduvian-atrocity.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
@@ -120,6 +121,7 @@ import _poolEverWatchingThreshold from "../pool/ever-watching-threshold.js";
 import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
+import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertilid from "../pool/fertilid.js";
@@ -136,6 +138,7 @@ import _poolFlyingMen from "../pool/flying-men.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
 import _poolForTheEmperor from "../pool/for-the-emperor.js";
+import _poolFoundingTheThirdPath from "../pool/founding-the-third-path.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
@@ -189,6 +192,7 @@ import _poolIdolOfFalseGods from "../pool/idol-of-false-gods.js";
 import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
 import _poolImprovisedWeaponry from "../pool/improvised-weaponry.js";
+import _poolInThrallToThePit from "../pool/in-thrall-to-the-pit.js";
 import _poolInfectiousBite from "../pool/infectious-bite.js";
 import _poolInklingMascot from "../pool/inkling-mascot.js";
 import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
@@ -198,6 +202,7 @@ import _poolInterceptorMechan from "../pool/interceptor-mechan.js";
 import _poolInvasionOfKarsus from "../pool/invasion-of-karsus.js";
 import _poolIronGiant from "../pool/iron-giant.js";
 import _poolJaceUnravelerOfSecrets from "../pool/jace-unraveler-of-secrets.js";
+import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
@@ -274,6 +279,7 @@ import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPlanarAtlas from "../pool/planar-atlas.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
+import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
@@ -389,6 +395,7 @@ import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
+import _poolTheWorldSpell from "../pool/the-world-spell.js";
 import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
 import _poolThirstingShade from "../pool/thirsting-shade.js";
@@ -430,6 +437,7 @@ import _poolVindictiveVampire from "../pool/vindictive-vampire.js";
 import _poolVirtueOfPersistence from "../pool/virtue-of-persistence.js";
 import _poolVisageBandit from "../pool/visage-bandit.js";
 import _poolVivisurgeonsInsight from "../pool/vivisurgeons-insight.js";
+import _poolVodaSeaScavenger from "../pool/voda-sea-scavenger.js";
 import _poolVoiceOfGrace from "../pool/voice-of-grace.js";
 import _poolVoiceOfLaw from "../pool/voice-of-law.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
@@ -499,6 +507,7 @@ const shard: CardShard = {
     _poolAyulaQueenAmongBears,
     _poolAzamiLadyOfScrolls,
     _poolBagelAndSchmear,
+    _poolBalduvianAtrocity,
     _poolBaralAndKariZev,
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
@@ -582,6 +591,7 @@ const shard: CardShard = {
     _poolEvolutionSage,
     _poolExploration,
     _poolExpressiveFiredancer,
+    _poolExtinguishTheLight,
     _poolFblthpImpossiblyLost,
     _poolFeloniousRage,
     _poolFertilid,
@@ -598,6 +608,7 @@ const shard: CardShard = {
     _poolFollowHim,
     _poolFootMystic,
     _poolForTheEmperor,
+    _poolFoundingTheThirdPath,
     _poolFracturedRealm,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
@@ -651,6 +662,7 @@ const shard: CardShard = {
     _poolImmolation,
     _poolImpetuousSunchaser,
     _poolImprovisedWeaponry,
+    _poolInThrallToThePit,
     _poolInfectiousBite,
     _poolInklingMascot,
     _poolInspiredTinkering,
@@ -660,6 +672,7 @@ const shard: CardShard = {
     _poolInvasionOfKarsus,
     _poolIronGiant,
     _poolJaceUnravelerOfSecrets,
+    _poolJaredCarthalion,
     _poolJeditOjanen,
     _poolJosuVessLichKnight,
     _poolKangeeSkyWarden,
@@ -736,6 +749,7 @@ const shard: CardShard = {
     _poolPlanarAtlas,
     _poolPortTown,
     _poolPostmortemProfessor,
+    _poolPrayerOfBinding,
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
@@ -851,6 +865,7 @@ const shard: CardShard = {
     _poolTheGreatHenge,
     _poolTheMagicMirror,
     _poolTheSeedcore,
+    _poolTheWorldSpell,
     _poolTheodenKingOfRohan,
     _poolTheoreticalNecromancer,
     _poolThirstingShade,
@@ -892,6 +907,7 @@ const shard: CardShard = {
     _poolVirtueOfPersistence,
     _poolVisageBandit,
     _poolVivisurgeonsInsight,
+    _poolVodaSeaScavenger,
     _poolVoiceOfGrace,
     _poolVoiceOfLaw,
     _poolVolatileFjord,
