@@ -164,7 +164,12 @@ defending. `bot-effect-knowledge.md` gets an entry; the gate and a decision-diff
 ## Build order
 
 1. **Sourceless triggers** in the engine, and the monarch moved onto them (its own commit, with
-   tests that it now uses the stack — a rules fix on its own).
+   tests that it now uses the stack — a rules fix on its own). **Done 2026-10-19**, on the pattern
+   speed and rad counters already used rather than a new "no source" trigger: an inherent
+   ability rides a pseudo-card object (kind `"emblem"`, in the command zone but in no zone list)
+   that the trigger scan reads — `cards/monarch.ts`, `GameState.monarchAbility`, its controller
+   kept the monarch. The view already hides an emblem-kind source; the ability's name on the
+   stack is the object's ("The Monarch"). The initiative's three abilities take the same shape.
 2. **Dungeons**: the four definitions, the command-zone object, venture, the two decisions,
    completion (the action and the SBA), the conditions and triggers; `dungeons.test.ts`. The
    decisions' wire shapes in `protocol/`.

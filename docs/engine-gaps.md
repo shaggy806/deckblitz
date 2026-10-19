@@ -14,15 +14,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
   to pay with life), honoured by the planner first, offered by the client beside the convoke
   picker.
-- **The monarch's two abilities don't use the stack.** Rule 725.2 makes "at the beginning of
-  the monarch's end step, that player draws a card" and "whenever a creature deals combat damage
-  to the monarch, its controller becomes the monarch" sourceless triggered abilities, controlled
-  by the monarch as they trigger. `Game.endStepActions` draws directly (game.ts ~5957 — "folded
-  in here without the stack, like the draw step"), and the combat-damage path calls `setMonarch`
-  inline (~30461), so neither can be responded to or ordered with other triggers. The comments
-  there cite the old numbers (720.5, 720.6). **Fix (outline):** a pending trigger with no source
-  object, a controller and a label — what the initiative's three abilities (726.2) need too;
-  `docs/plans/initiative-dungeons.md`, step 1.
 - **A reflexive trigger's target filter reads the creating ability's `triggerValue`.** A
   reflexive ability's target filter (603.12) is bound when it's created, in the parent's
   resolution, so `{ amount: { triggerValue: true } }` there reads the parent trigger's value (0

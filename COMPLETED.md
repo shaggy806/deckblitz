@@ -239,6 +239,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **The monarch's two abilities use the stack** (rule 725.2, 2026-10-19): the end-step draw and
+  the combat-damage steal are triggered abilities on a "The Monarch" object (`cards/monarch.ts`,
+  `GameState.monarchAbility`, like speed's and rad counters'), controlled by the monarch as they
+  trigger, so they can be responded to; they had been folded in without the stack. Step 1 of
+  `docs/plans/initiative-dungeons.md`.
 - **The live-game rules bugs** (2026-10-16): a loop whose every round asks a choice no longer
   runs the engine into its crash guards — answers inside a chain are part of the loop's cycle;
   the first time it repeats, the players choosing in it must choose differently (rules 732.2c,

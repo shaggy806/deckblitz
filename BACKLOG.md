@@ -166,7 +166,6 @@ there and move this line to `COMPLETED.md`.
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
-- **The monarch's two abilities don't use the stack** (725.2): the end-step draw and the combat-damage steal are folded in directly; `docs/plans/initiative-dungeons.md` builds sourceless triggers and moves the monarch onto them.
 - **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).

@@ -64,6 +64,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
+import { MONARCH_CARD } from "./cards/monarch.js";
 import { RAD_CARD } from "./cards/rad.js";
 import { SPEED_CARD } from "./cards/speed.js";
 import type {
@@ -5668,6 +5669,10 @@ export class Game {
     this.state.priority.active = false;
     this.state.priority.holder = null;
     this.state.priority.passed = [];
+    // A state with a monarch but not yet the object its abilities ride on (a
+    // game saved before rule 725.2's abilities used the stack, or one set up
+    // directly): make it before anything can trigger.
+    this.ensureMonarchAbility();
     this.emit({ type: "step-began", step, phase: PHASE_OF_STEP[step] });
 
     // Delayed triggered abilities waiting on this step (rule 603.7). Before
@@ -5927,9 +5932,8 @@ export class Game {
     }
   }
 
-  /** Turn-based-ish end-step housekeeping. The monarch draws a card at the
-   * beginning of their end step (rule 720.6 — a triggered ability; folded in
-   * here without the stack, like the draw step). */
+  /** Turn-based-ish end-step housekeeping. (The monarch's end-step draw is a
+   * triggered ability that uses the stack — rule 725.2, `cards/monarch.ts`.) */
   private endStepActions(): void {
     // A copy "until the next end step" (Niko, Light of Hope) ends as it
     // begins: what it was before again, where it is.
@@ -5947,14 +5951,6 @@ export class Game {
       if (impulse?.expiry.kind === "end-step-of" && impulse.expiry.player === active) {
         delete this.state.objects[id].impulse;
       }
-    }
-    const monarch = this.state.monarch;
-    if (
-      monarch !== null &&
-      monarch === this.activePlayer &&
-      !this.state.players[monarch].hasLost
-    ) {
-      this.drawCard(monarch);
     }
     // Token copies made by Miirym-style effects are exiled at the beginning of
     // the next end step (rule 707 / needed-cards P5b). They're tokens, so the
@@ -16923,6 +16919,10 @@ export class Game {
       const radAbility = this.state.players[player]?.radAbility;
       if (radAbility !== undefined) candidates.add(radAbility);
     }
+    // The monarch's two abilities (rule 725.2), while there is a monarch.
+    if (this.state.monarchAbility !== undefined && this.state.monarch !== null) {
+      candidates.add(this.state.monarchAbility);
+    }
     // Eminence (an ability word, rule 207.2c): a card in the command zone
     // whose triggered ability says it functions there (rule 113.6b). Added to
     // the same scan rather than given one of its own, so ordering, APNAP and
@@ -21909,9 +21909,9 @@ export class Game {
         this.transformPermanent(t.object);
       },
       setDayNight: (value) => this.setDayNight(value),
-      becomeMonarch: (who) => {
+      becomeMonarch: (who, via) => {
         for (const p of scoped(who ?? "you")) {
-          this.setMonarch(p, "effect");
+          this.setMonarch(p, via ?? "effect");
         }
       },
       increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
@@ -30458,17 +30458,9 @@ export class Game {
         const toxic = this.toxicOf(source) * sources;
         if (toxic > 0) this.changePlayerCounters(target.player, "poison", toxic);
       }
-      // A creature dealing combat damage to the monarch makes its controller
-      // the monarch (rule 720.5).
-      const src = this.state.objects[source];
-      if (
-        combat &&
-        this.state.monarch === target.player &&
-        src !== undefined &&
-        src.controller !== target.player
-      ) {
-        this.setMonarch(src.controller, "combat-damage");
-      }
+      // (A creature dealing combat damage to the monarch makes its controller
+      // the monarch by a triggered ability that uses the stack — rule 725.2,
+      // `cards/monarch.ts`.)
       return amount;
     }
     const object = this.state.objects[target.object];
@@ -30864,11 +30856,33 @@ export class Game {
     this.emit({ type: "energy-changed", player, delta, energy: ps.energy });
   }
 
-  /** Make `player` the monarch (rule 720). No-op if they already are. */
+  /** Make `player` the monarch (rule 725). No-op if they already are. The
+   * monarch's two triggered abilities (725.2) ride one object, made the first
+   * time anyone becomes the monarch — like speed's and rad counters': in the
+   * command zone but in no zone list, read only by the trigger scan — whose
+   * controller follows the designation, so the abilities are controlled by
+   * whoever is the monarch as they trigger. */
   private setMonarch(player: PlayerId, via: "effect" | "combat-damage" | "monarch-left"): void {
     if (this.state.monarch === player) return;
     this.state.monarch = player;
+    this.ensureMonarchAbility();
     this.emit({ type: "monarch-changed", player, via });
+  }
+
+  /** The monarch's ability object exists and is controlled by the monarch,
+   * whenever there is one (see `setMonarch`). */
+  private ensureMonarchAbility(): void {
+    const monarch = this.state.monarch;
+    if (monarch === null) return;
+    if (this.state.monarchAbility === undefined) {
+      const object = this.makeCardObject(MONARCH_CARD, monarch, { zone: "command" });
+      this.state.objects[object].kind = "emblem";
+      this.state.objects[object].timestamp = this.freshTimestamp();
+      this.state.monarchAbility = object;
+      this.openStint(object);
+    } else if (this.state.objects[this.state.monarchAbility].controller !== monarch) {
+      this.state.objects[this.state.monarchAbility].controller = monarch;
+    }
   }
 
   /**

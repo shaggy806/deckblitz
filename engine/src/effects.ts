@@ -4322,10 +4322,13 @@ export type EffectSpec =
       readonly amount: EffectAmount;
     }
   | {
-      /** A player becomes the monarch (rule 720 — ROADMAP Phase 10). `who`
-       * defaults to the effect's controller. */
+      /** A player becomes the monarch (rule 725 — ROADMAP Phase 10). `who`
+       * defaults to the effect's controller. `via: "combat-damage"` is the
+       * monarch's own steal ability (725.2 — `cards/monarch.ts`), so the
+       * event says how. */
       readonly kind: "become-monarch";
       readonly who?: PlayerScope;
+      readonly via?: "combat-damage";
     }
   | {
       /** The effect's controller's speed increases by `amount` (rule
@@ -6375,7 +6378,7 @@ export interface EffectApi {
   /** The game becomes day or night (rule 726). */
   setDayNight(value: "day" | "night"): void;
   /** `who` becomes the monarch (rule 720). */
-  becomeMonarch(who: PlayerScope | undefined): void;
+  becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** `player`'s speed increases by `amount` — see the `"increase-speed"`
    * {@link EffectSpec}. */
   increaseSpeed(player: PlayerId, amount: number): void;
@@ -9821,7 +9824,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.setDayNight(spec.value);
       return;
     case "become-monarch":
-      ctx.becomeMonarch(spec.who);
+      ctx.becomeMonarch(spec.who, spec.via);
       return;
     case "increase-speed":
       ctx.increaseSpeed(ctx.controller, spec.amount);

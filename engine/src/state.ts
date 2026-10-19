@@ -3962,11 +3962,18 @@ export interface GameState {
    * night → day if they cast two or more). Daybound/nightbound permanents
    * transform when it changes. */
   dayNight: "day" | "night" | null;
-  /** The monarch (rule 720 — ROADMAP Phase 10), or `null` when no player is the
-   * monarch. The monarch draws a card at the beginning of their end step
-   * (720.6); a creature dealing combat damage to the monarch makes its
-   * controller the monarch (720.5). */
+  /** The monarch (rule 725 — ROADMAP Phase 10), or `null` when no player is the
+   * monarch. The monarch draws a card at the beginning of their end step,
+   * and a creature dealing combat damage to the monarch makes its controller
+   * the monarch — triggered abilities that use the stack (725.2), carried by
+   * `monarchAbility`. */
   monarch: PlayerId | null;
+  /** The object the monarch's two inherent triggered abilities ride on (rule
+   * 725.2 — `cards/monarch.ts`): made the first time anyone becomes the
+   * monarch, in the command zone but in no zone list, kind `"emblem"`, its
+   * controller always the current monarch (`Game.setMonarch`). Absent until
+   * then, and in a state saved before it existed. */
+  monarchAbility?: ObjectId;
   /** Emblems in the game (rule 114 — ROADMAP Phase 10). An emblem is a
    * player-owned object with one ability and no other characteristics; it has
    * no zone and can't be removed. Its `ability` is applied by the layer system

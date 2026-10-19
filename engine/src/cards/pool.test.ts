@@ -22,6 +22,7 @@ import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
 import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
 import { SPEED_DEFINITIONS } from "./speed.js";
 import { RAD_DEFINITIONS } from "./rad.js";
+import { MONARCH_DEFINITIONS } from "./monarch.js";
 import { POOL_CARDS, TOKEN_CARDS } from "./generated.js";
 import { PINNED_ART, TOKEN_NAMES } from "./generated-index.js";
 import { createDefaultRegistry } from "./registry.js";
@@ -68,6 +69,7 @@ describe("card pool layout", () => {
       ...EMBLEM_DEFINITIONS,
       ...SPEED_DEFINITIONS,
       ...RAD_DEFINITIONS,
+      ...MONARCH_DEFINITIONS,
     ];
     expect(registry.size).toBe(onDisk.size + internal.length);
     for (const def of internal) {
