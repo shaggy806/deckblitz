@@ -12,10 +12,7 @@ built.
 Each waits on a decision only the user can make. Once one is answered, move the work it
 decides into its section below.
 
-- **Lower the box's room cap from 8 to 6?** `MAX_ROOMS_PER_SHARD=8` (`DEPLOYMENT.md`) was set from
-  a knee measured under the old 300 ms bot budget. At a second, the median pace is unchanged but
-  a shard's stalls about double from 8 rooms up (`docs/plans/room-shards.md`, "The one-second
-  budget"), so 6 is recommended, then confirmed by the load test on the box with nobody playing.
+None open.
 
 ## Commander gap (the current priority)
 
@@ -295,6 +292,10 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **Confirm the box's room cap of 6 with a load test there** (2026-10-18): `MAX_ROOMS_PER_SHARD`
+  went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
+  (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the
+  box with nobody playing, as `DEPLOYMENT.md` describes, and adjust from its knee.
 - **An on-screen progress bar for the long checks** (the user, 2026-10-06): use Claude Code's new mods feature (a plugin's live pane or status line — the `plugin-authoring` skill) to show progress for the runs we do regularly: the engine suite, `bot:scenarios`, `bot:diff`, `bot:ab`, the fuzzer and the Playwright suites.
 - **Refresh the snapshots.** The EDHREC ranking snapshots (`top-commander-cards.txt`,
   `top-commanders.txt`) and `edhrec-rank.ts` are frozen. Re-fetching them moves the roster, so

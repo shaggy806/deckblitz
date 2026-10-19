@@ -60,7 +60,7 @@ plus a reverse-proxy and certificate setup.
   limit instead ("JavaScript heap out of memory"), the pool has outgrown the box.
 - **CPU is burstable.** Lightsail instances run at full speed until a credit balance runs out,
   then get throttled. Each bot decision has a fixed thinking budget (`BOT_DECISION_BUDGET_MS`,
-  300 ms, `server/src/room.ts`), so on a throttled CPU the bots play worse, not just slower.
+  a second, `server/src/room.ts`), so on a throttled CPU the bots play worse, not just slower.
   Watch the instance's "CPU burst capacity" graph; move up a plan if it keeps hitting zero.
 - Login user: Lightsail's default `ubuntu`, which has passwordless sudo. The Node server runs as
   this user (not a dedicated service account) — a simplification acceptable for a single-purpose
@@ -90,8 +90,8 @@ Environment=PORT=4000
 Environment=CLIENT_ORIGIN=https://deckblitz.net
 # Rooms on worker threads (below): one shard on the 2-vCPU box, main on the other core.
 Environment=SHARDS=1
-# "The server is full" past 8 weighted rooms on the shard (below; the box's knee, 2026-10-13).
-Environment=MAX_ROOMS_PER_SHARD=8
+# "The server is full" past 6 weighted rooms on the shard (below; 8 until the bots' 1 s budget).
+Environment=MAX_ROOMS_PER_SHARD=6
 User=ubuntu
 
 [Install]
@@ -140,8 +140,10 @@ the shard `up`.
   lobby 1, a tutorial 0.5, a finished game 0.1). Set the latter from the load test's knee on the
   box (`npm run load-test -w server`, with `--status http://127.0.0.1:4010/status.json`, run
   on the box with nobody playing): the stage where the frame-gap median passes +20% over one
-  room. **Set to 8 on the 2-vCPU box** (2026-10-13): its one shard passed that between 6 and 8
-  all-bot rooms (`docs/plans/room-shards.md`, "Live on the 2-vCPU box"), and a real blitz room,
+  room. **Set to 6 on the 2-vCPU box** (2026-10-18): its one shard passed that between 6 and 8
+  all-bot rooms at a 300 ms bot budget (`docs/plans/room-shards.md`, "Live on the 2-vCPU box"),
+  where it was set to 8 (2026-10-13); at the bots' one-second budget a shard's stalls about
+  double from 8 rooms up ("The one-second budget"), so it came down to 6. A real blitz room,
   three bots and a person thinking, is lighter. The load test needs the per-address cap lifted
   for its run (every room comes from one address): a drop-in
   `/etc/systemd/system/mtg-server.service.d/loadtest.conf` with `Environment=MAX_ROOMS_PER_IP=Infinity`,

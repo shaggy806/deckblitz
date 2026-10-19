@@ -2,8 +2,8 @@
 
 Status: **live** (2026-10-13): built, deployed at 77b43d95 and turned on with `SHARDS=1` in the
 box's service unit (`DEPLOYMENT.md`; the code's default stays 0). The box's knee is measured
-below; `MAX_ROOMS_PER_SHARD=8` on the box (the user's choice, from that knee, under a 300 ms bot
-budget — "The one-second budget" below recommends 6 since the budget became a second). Left: the
+below; `MAX_ROOMS_PER_SHARD=6` on the box since 2026-10-18 (8 from that knee under a 300 ms bot
+budget until "The one-second budget" below; the user's choice both times). Left: the
 same measurement on a bigger box. "As built" below records the departures and the measurements. Phase 2 of `scaling-rooms.md`. The design came
 from reading the server at fa031303; file:line references are from then. Build it in the order
 of "Rollout" below, each commit green on its own.
@@ -322,11 +322,12 @@ the two differ only in the budget. Single runs over different games, so ±10% is
   it stays at 200.
 - **On the box.** At 300 ms its one shard was already at 1.05 s delay p99 and 93% busy with 8
   all-bot rooms; doubling the tail there puts a stalled frame at 2-3 s, while at 6 rooms (517 ms,
-  69% busy then) it would land near where 8 rooms were. **Recommendation: lower
-  `MAX_ROOMS_PER_SHARD` from 8 to 6**, then confirm it with this load test on the box with nobody
-  playing (the per-address cap lifted by a drop-in, as before). A real blitz room — three bots
-  and a person thinking — is lighter than an all-bot one, so 6 keeps some margin rather than
-  cutting into ordinary use. Not applied: the box's unit is the user's call.
+  69% busy then) it would land near where 8 rooms were. **Lowered
+  `MAX_ROOMS_PER_SHARD` from 8 to 6** (the user, 2026-10-18; the box's unit, restarted with no
+  rooms open). Left: confirm it with this load test on the box with nobody playing (the
+  per-address cap lifted by a drop-in, as before). A real blitz room — three bots and a person
+  thinking — is lighter than an all-bot one, so 6 keeps some margin rather than cutting into
+  ordinary use.
 
 ## Rollout
 
