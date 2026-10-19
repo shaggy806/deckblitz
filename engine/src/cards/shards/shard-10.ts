@@ -29,6 +29,8 @@ import _poolBadlands from "../pool/badlands.js";
 import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
+import _poolBaneLordOfDarkness from "../pool/bane-lord-of-darkness.js";
+import _poolBanishingCoils from "../pool/banishing-coils.js";
 import _poolBarretWallace from "../pool/barret-wallace.js";
 import _poolBarrowNaughty from "../pool/barrow-naughty.js";
 import _poolBaseballBat from "../pool/baseball-bat.js";
@@ -255,6 +257,7 @@ import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
+import _poolMoonshaePixie from "../pool/moonshae-pixie.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
@@ -516,6 +519,8 @@ const shard: CardShard = {
     _poolBalduvianBears,
     _poolBalefireDragon,
     _poolBalmorBattlemageCaptain,
+    _poolBaneLordOfDarkness,
+    _poolBanishingCoils,
     _poolBarretWallace,
     _poolBarrowNaughty,
     _poolBaseballBat,
@@ -742,6 +747,7 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMockingbird,
     _poolMoonHeron,
+    _poolMoonshaePixie,
     _poolMoonsilverKey,
     _poolMoorFiend,
     _poolMouserMarkIii,

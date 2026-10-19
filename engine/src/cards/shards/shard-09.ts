@@ -15,6 +15,7 @@ import _poolAgateInstigator from "../pool/agate-instigator.js";
 import _poolAgrusKosSpiritOfJustice from "../pool/agrus-kos-spirit-of-justice.js";
 import _poolAjaniSleeperAgent from "../pool/ajani-sleeper-agent.js";
 import _poolAlleyEvasion from "../pool/alley-evasion.js";
+import _poolAmethystDragon from "../pool/amethyst-dragon.js";
 import _poolAnUnexpectedParty from "../pool/an-unexpected-party.js";
 import _poolAncientImperiosaur from "../pool/ancient-imperiosaur.js";
 import _poolAngelfireCrusader from "../pool/angelfire-crusader.js";
@@ -117,6 +118,7 @@ import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
+import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolExclude from "../pool/exclude.js";
@@ -253,6 +255,7 @@ import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
 import _poolMouserAttack from "../pool/mouser-attack.js";
 import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
+import _poolMysteryKey from "../pool/mystery-key.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
@@ -277,6 +280,7 @@ import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOtherworldlyGaze from "../pool/otherworldly-gaze.js";
 import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
+import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPerplexingTest from "../pool/perplexing-test.js";
@@ -317,6 +321,7 @@ import _poolRebuke from "../pool/rebuke.js";
 import _poolRecklessCharge from "../pool/reckless-charge.js";
 import _poolRecklessFireweaver from "../pool/reckless-fireweaver.js";
 import _poolReigningVictor from "../pool/reigning-victor.js";
+import _poolRenariMerchantOfMarvels from "../pool/renari-merchant-of-marvels.js";
 import _poolRepel from "../pool/repel.js";
 import _poolReplenish from "../pool/replenish.js";
 import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
@@ -494,6 +499,7 @@ const shard: CardShard = {
     _poolAgrusKosSpiritOfJustice,
     _poolAjaniSleeperAgent,
     _poolAlleyEvasion,
+    _poolAmethystDragon,
     _poolAnUnexpectedParty,
     _poolAncientImperiosaur,
     _poolAngelfireCrusader,
@@ -596,6 +602,7 @@ const shard: CardShard = {
     _poolEliminateTheImpossible,
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
+    _poolEntropicDecay,
     _poolEshkiDragonclaw,
     _poolEvolutionCharm,
     _poolExclude,
@@ -732,6 +739,7 @@ const shard: CardShard = {
     _poolMoonSprite,
     _poolMouserAttack,
     _poolMudbuttonTorchrunner,
+    _poolMysteryKey,
     _poolMysticalTutor,
     _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
@@ -756,6 +764,7 @@ const shard: CardShard = {
     _poolOtherworldlyGaze,
     _poolOutlawStitcher,
     _poolOverlordOfTheBalemurk,
+    _poolOverwhelmingEncounter,
     _poolParapetWatchers,
     _poolPawnOfUlamog,
     _poolPerplexingTest,
@@ -796,6 +805,7 @@ const shard: CardShard = {
     _poolRecklessCharge,
     _poolRecklessFireweaver,
     _poolReigningVictor,
+    _poolRenariMerchantOfMarvels,
     _poolRepel,
     _poolReplenish,
     _poolRestorationGearsmith,

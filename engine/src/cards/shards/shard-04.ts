@@ -64,6 +64,7 @@ import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
 import _poolConverterBeast from "../pool/converter-beast.js";
+import _poolCoronationOfChaos from "../pool/coronation-of-chaos.js";
 import _poolCranialPlating from "../pool/cranial-plating.js";
 import _poolCrawlingSensation from "../pool/crawling-sensation.js";
 import _poolCrimsonCaravaneer from "../pool/crimson-caravaneer.js";
@@ -159,6 +160,7 @@ import _poolGriffinSentinel from "../pool/griffin-sentinel.js";
 import _poolGrimHireling from "../pool/grim-hireling.js";
 import _poolGrislyTransformation from "../pool/grisly-transformation.js";
 import _poolGruffTriplets from "../pool/gruff-triplets.js";
+import _poolGuildswornProwler from "../pool/guildsworn-prowler.js";
 import _poolGurglingAnointer from "../pool/gurgling-anointer.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
@@ -332,6 +334,7 @@ import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
+import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
 import _poolShelobsAmbush from "../pool/shelobs-ambush.js";
 import _poolShieldWall from "../pool/shield-wall.js";
 import _poolShimmeringWings from "../pool/shimmering-wings.js";
@@ -437,6 +440,7 @@ import _poolWallOfPineNeedles from "../pool/wall-of-pine-needles.js";
 import _poolWallOfTorches from "../pool/wall-of-torches.js";
 import _poolWandasVision from "../pool/wandas-vision.js";
 import _poolWardenOfTheWoods from "../pool/warden-of-the-woods.js";
+import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
@@ -450,6 +454,7 @@ import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
+import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
@@ -530,6 +535,7 @@ const shard: CardShard = {
     _poolConceitedWitch,
     _poolContradict,
     _poolConverterBeast,
+    _poolCoronationOfChaos,
     _poolCranialPlating,
     _poolCrawlingSensation,
     _poolCrimsonCaravaneer,
@@ -625,6 +631,7 @@ const shard: CardShard = {
     _poolGrimHireling,
     _poolGrislyTransformation,
     _poolGruffTriplets,
+    _poolGuildswornProwler,
     _poolGurglingAnointer,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
@@ -798,6 +805,7 @@ const shard: CardShard = {
     _poolSelfDestruct,
     _poolShadowRift,
     _poolShadowyBackstreet,
+    _poolShamelessCharlatan,
     _poolShelobsAmbush,
     _poolShieldWall,
     _poolShimmeringWings,
@@ -903,6 +911,7 @@ const shard: CardShard = {
     _poolWallOfTorches,
     _poolWandasVision,
     _poolWardenOfTheWoods,
+    _poolWarehouseThief,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
     _poolWeaverOfLightning,
@@ -916,6 +925,7 @@ const shard: CardShard = {
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolYavimayaBarbarian,
+    _poolYoungBlueDragon,
     _poolZephyrFalcon,
     _poolZofBloodbog,
   ],

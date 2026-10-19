@@ -268,6 +268,7 @@ import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
 import _poolOutpostSiege from "../pool/outpost-siege.js";
 import _poolOvikaEnigmaGoliath from "../pool/ovika-enigma-goliath.js";
+import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
 import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
 import _poolPardicWanderer from "../pool/pardic-wanderer.js";
@@ -745,6 +746,7 @@ const shard: CardShard = {
     _poolOracleOfTragedy,
     _poolOutpostSiege,
     _poolOvikaEnigmaGoliath,
+    _poolOwlbearShepherd,
     _poolPacksFavor,
     _poolPaladinOfTheBloodstained,
     _poolPardicWanderer,

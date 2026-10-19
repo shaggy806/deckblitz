@@ -27,6 +27,7 @@ import _poolArmillarySphere from "../pool/armillary-sphere.js";
 import _poolArtilleryBlast from "../pool/artillery-blast.js";
 import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
+import _poolAtrociousExperiment from "../pool/atrocious-experiment.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
@@ -175,6 +176,7 @@ import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraveRobbers from "../pool/grave-robbers.js";
 import _poolGreatForestDruid from "../pool/great-forest-druid.js";
 import _poolGreatHart from "../pool/great-hart.js";
+import _poolGreatswordOfTyr from "../pool/greatsword-of-tyr.js";
 import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
 import _poolGrimBauble from "../pool/grim-bauble.js";
@@ -536,6 +538,7 @@ const shard: CardShard = {
     _poolArtilleryBlast,
     _poolAspirantsAscent,
     _poolAssaultFormation,
+    _poolAtrociousExperiment,
     _poolAvatarEnthusiasts,
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
@@ -684,6 +687,7 @@ const shard: CardShard = {
     _poolGraveRobbers,
     _poolGreatForestDruid,
     _poolGreatHart,
+    _poolGreatswordOfTyr,
     _poolGreelsCaress,
     _poolGriffinDreamfinder,
     _poolGrimBauble,

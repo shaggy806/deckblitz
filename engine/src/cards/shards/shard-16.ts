@@ -275,6 +275,7 @@ import _poolNoxiousNewt from "../pool/noxious-newt.js";
 import _poolOathOfEorl from "../pool/oath-of-eorl.js";
 import _poolObNixilisTheAscended from "../pool/ob-nixilis-the-ascended.js";
 import _poolObekaSplitterOfSeconds from "../pool/obeka-splitter-of-seconds.js";
+import _poolOceanusDragon from "../pool/oceanus-dragon.js";
 import _poolOctoprophet from "../pool/octoprophet.js";
 import _poolOgreMenial from "../pool/ogre-menial.js";
 import _poolOmegaMyr from "../pool/omega-myr.js";
@@ -355,6 +356,7 @@ import _poolShipwreckMarsh from "../pool/shipwreck-marsh.js";
 import _poolShriekingDrake from "../pool/shrieking-drake.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
+import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
@@ -783,6 +785,7 @@ const shard: CardShard = {
     _poolOathOfEorl,
     _poolObNixilisTheAscended,
     _poolObekaSplitterOfSeconds,
+    _poolOceanusDragon,
     _poolOctoprophet,
     _poolOgreMenial,
     _poolOmegaMyr,
@@ -863,6 +866,7 @@ const shard: CardShard = {
     _poolShriekingDrake,
     _poolShrink,
     _poolShroudedShepherd,
+    _poolSigilOfMyrkul,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
     _poolSisterhoodOfKarn,

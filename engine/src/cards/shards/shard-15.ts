@@ -34,6 +34,7 @@ import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
 import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
+import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
 import _poolBlightstepPathway from "../pool/blightstep-pathway.js";
 import _poolBloodMoney from "../pool/blood-money.js";
 import _poolBloodtallowCandle from "../pool/bloodtallow-candle.js";
@@ -306,6 +307,7 @@ import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
 import _poolPoliticalTriumph from "../pool/political-triumph.js";
+import _poolPopularEntertainer from "../pool/popular-entertainer.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrizefight from "../pool/prizefight.js";
@@ -418,6 +420,7 @@ import _poolTruckToss from "../pool/truck-toss.js";
 import _poolTundraWolves from "../pool/tundra-wolves.js";
 import _poolTurbulentCrater from "../pool/turbulent-crater.js";
 import _poolTymorasInvoker from "../pool/tymoras-invoker.js";
+import _poolTyrsBlessing from "../pool/tyrs-blessing.js";
 import _poolUnderwaterTunnelSlimyAquarium from "../pool/underwater-tunnel-slimy-aquarium.js";
 import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
@@ -498,6 +501,7 @@ const shard: CardShard = {
     _poolBiblioplexKraken,
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
+    _poolBlessedHippogriff,
     _poolBlightstepPathway,
     _poolBloodMoney,
     _poolBloodtallowCandle,
@@ -770,6 +774,7 @@ const shard: CardShard = {
     _poolPitchburnDevils,
     _poolPlatoonDispenser,
     _poolPoliticalTriumph,
+    _poolPopularEntertainer,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrizefight,
@@ -882,6 +887,7 @@ const shard: CardShard = {
     _poolTundraWolves,
     _poolTurbulentCrater,
     _poolTymorasInvoker,
+    _poolTyrsBlessing,
     _poolUnderwaterTunnelSlimyAquarium,
     _poolUnitedBattlefront,
     _poolUnmarkedGrave,

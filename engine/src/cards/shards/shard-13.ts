@@ -81,6 +81,7 @@ import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCheerfulOsteomancer from "../pool/cheerful-osteomancer.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
+import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
@@ -560,6 +561,7 @@ const shard: CardShard = {
     _poolCelestialUnicorn,
     _poolCheerfulOsteomancer,
     _poolClamorShaman,
+    _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
     _poolCoastalTower,

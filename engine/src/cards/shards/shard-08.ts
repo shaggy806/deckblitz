@@ -26,6 +26,7 @@ import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnzragTheQuakeMole from "../pool/anzrag-the-quake-mole.js";
+import _poolAquaticIngress from "../pool/aquatic-ingress.js";
 import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
@@ -43,6 +44,7 @@ import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
 import _poolBenthicBehemoth from "../pool/benthic-behemoth.js";
 import _poolBeornTheFierce from "../pool/beorn-the-fierce.js";
+import _poolBhaalLordOfMurder from "../pool/bhaal-lord-of-murder.js";
 import _poolBileVialBoggart from "../pool/bile-vial-boggart.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBladetuskBoar from "../pool/bladetusk-boar.js";
@@ -229,6 +231,7 @@ import _poolKarooMeerkat from "../pool/karoo-meerkat.js";
 import _poolKarsusDepthguard from "../pool/karsus-depthguard.js";
 import _poolKaylasCommand from "../pool/kaylas-command.js";
 import _poolKellanJoinsUp from "../pool/kellan-joins-up.js";
+import _poolKenkuArtificer from "../pool/kenku-artificer.js";
 import _poolKethekCrucibleGoliath from "../pool/kethek-crucible-goliath.js";
 import _poolKhalniTerritory from "../pool/khalni-territory.js";
 import _poolKillZoneAcrobat from "../pool/kill-zone-acrobat.js";
@@ -356,6 +359,7 @@ import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
 import _poolScrollshift from "../pool/scrollshift.js";
 import _poolSculptedPerfection from "../pool/sculpted-perfection.js";
 import _poolSeaEagle from "../pool/sea-eagle.js";
+import _poolSeaHag from "../pool/sea-hag.js";
 import _poolSeaScryer from "../pool/sea-scryer.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
@@ -537,6 +541,7 @@ const shard: CardShard = {
     _poolAnaraWolvidFamiliar,
     _poolAnnieFlashTheVeteran,
     _poolAnzragTheQuakeMole,
+    _poolAquaticIngress,
     _poolArcanisTheOmnipotent,
     _poolArtificersAssistant,
     _poolAshenRider,
@@ -554,6 +559,7 @@ const shard: CardShard = {
     _poolBenevolentAncestor,
     _poolBenthicBehemoth,
     _poolBeornTheFierce,
+    _poolBhaalLordOfMurder,
     _poolBileVialBoggart,
     _poolBitterTriumph,
     _poolBladetuskBoar,
@@ -740,6 +746,7 @@ const shard: CardShard = {
     _poolKarsusDepthguard,
     _poolKaylasCommand,
     _poolKellanJoinsUp,
+    _poolKenkuArtificer,
     _poolKethekCrucibleGoliath,
     _poolKhalniTerritory,
     _poolKillZoneAcrobat,
@@ -867,6 +874,7 @@ const shard: CardShard = {
     _poolScrollshift,
     _poolSculptedPerfection,
     _poolSeaEagle,
+    _poolSeaHag,
     _poolSeaScryer,
     _poolSeasonalRitual,
     _poolSecretRendezvous,

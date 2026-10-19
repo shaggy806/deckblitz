@@ -12,6 +12,7 @@ import _poolAlchemistsTalent from "../pool/alchemists-talent.js";
 import _poolAlrundsEpiphany from "../pool/alrunds-epiphany.js";
 import _poolAltarOfDementia from "../pool/altar-of-dementia.js";
 import _poolAlwaysWatching from "../pool/always-watching.js";
+import _poolAmberGristleOmaul from "../pool/amber-gristle-omaul.js";
 import _poolAmrouKithkin from "../pool/amrou-kithkin.js";
 import _poolAncientGrudge from "../pool/ancient-grudge.js";
 import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
@@ -165,6 +166,7 @@ import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
+import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
 import _poolGenesis from "../pool/genesis.js";
 import _poolGeothermalBog from "../pool/geothermal-bog.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
@@ -259,6 +261,7 @@ import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
 import _poolMurkySewer from "../pool/murky-sewer.js";
 import _poolMutagenicGrowth from "../pool/mutagenic-growth.js";
 import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
+import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
@@ -314,6 +317,7 @@ import _poolReflectionsOfLittjara from "../pool/reflections-of-littjara.js";
 import _poolRehearsedDebater from "../pool/rehearsed-debater.js";
 import _poolRequiemMonolith from "../pool/requiem-monolith.js";
 import _poolRequisitionRaid from "../pool/requisition-raid.js";
+import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
@@ -447,6 +451,7 @@ import _poolWildfireHowl from "../pool/wildfire-howl.js";
 import _poolWildsearScouringMaw from "../pool/wildsear-scouring-maw.js";
 import _poolWindcragSiege from "../pool/windcrag-siege.js";
 import _poolWindgracesJudgment from "../pool/windgraces-judgment.js";
+import _poolWinterEladrin from "../pool/winter-eladrin.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
@@ -483,6 +488,7 @@ const shard: CardShard = {
     _poolAlrundsEpiphany,
     _poolAltarOfDementia,
     _poolAlwaysWatching,
+    _poolAmberGristleOmaul,
     _poolAmrouKithkin,
     _poolAncientGrudge,
     _poolApprenticeNecromancer,
@@ -636,6 +642,7 @@ const shard: CardShard = {
     _poolGaleriderSliver,
     _poolGalvanicGiant,
     _poolGamble,
+    _poolGenasiEnforcers,
     _poolGenesis,
     _poolGeothermalBog,
     _poolGhostWarden,
@@ -730,6 +737,7 @@ const shard: CardShard = {
     _poolMurkySewer,
     _poolMutagenicGrowth,
     _poolMycosynthGolem,
+    _poolMyrkulsInvoker,
     _poolMysticArchaeologist,
     _poolNeedForSpeed,
     _poolNeedlevergePathway,
@@ -785,6 +793,7 @@ const shard: CardShard = {
     _poolRehearsedDebater,
     _poolRequiemMonolith,
     _poolRequisitionRaid,
+    _poolRescuerChwinga,
     _poolRestartSequence,
     _poolRetrieveTheEsper,
     _poolReverberatingSummons,
@@ -918,6 +927,7 @@ const shard: CardShard = {
     _poolWildsearScouringMaw,
     _poolWindcragSiege,
     _poolWindgracesJudgment,
+    _poolWinterEladrin,
     _poolWintersGrasp,
     _poolWondrousRevival,
     _poolWoodedBastion,

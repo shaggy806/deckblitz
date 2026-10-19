@@ -76,6 +76,7 @@ import _poolChildOfThorns from "../pool/child-of-thorns.js";
 import _poolChocoboKnights from "../pool/chocobo-knights.js";
 import _poolChokingMiasma from "../pool/choking-miasma.js";
 import _poolChosenOfMarkov from "../pool/chosen-of-markov.js";
+import _poolClanCrafter from "../pool/clan-crafter.js";
 import _poolCleansingScreech from "../pool/cleansing-screech.js";
 import _poolCloakOfFeathers from "../pool/cloak-of-feathers.js";
 import _poolCloisteredYouth from "../pool/cloistered-youth.js";
@@ -360,6 +361,7 @@ import _poolSanctumGargoyle from "../pool/sanctum-gargoyle.js";
 import _poolSarkhanSoulAflame from "../pool/sarkhan-soul-aflame.js";
 import _poolSatyrHedonist from "../pool/satyr-hedonist.js";
 import _poolScaldingDevil from "../pool/scalding-devil.js";
+import _poolScoutingHawk from "../pool/scouting-hawk.js";
 import _poolScreechingBuzzard from "../pool/screeching-buzzard.js";
 import _poolScreechingSkaab from "../pool/screeching-skaab.js";
 import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
@@ -371,12 +373,14 @@ import _poolSenateGriffin from "../pool/senate-griffin.js";
 import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
+import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
+import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
 import _poolSinewDancer from "../pool/sinew-dancer.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
@@ -584,6 +588,7 @@ const shard: CardShard = {
     _poolChocoboKnights,
     _poolChokingMiasma,
     _poolChosenOfMarkov,
+    _poolClanCrafter,
     _poolCleansingScreech,
     _poolCloakOfFeathers,
     _poolCloisteredYouth,
@@ -868,6 +873,7 @@ const shard: CardShard = {
     _poolSarkhanSoulAflame,
     _poolSatyrHedonist,
     _poolScaldingDevil,
+    _poolScoutingHawk,
     _poolScreechingBuzzard,
     _poolScreechingSkaab,
     _poolScroungerOfSouls,
@@ -879,12 +885,14 @@ const shard: CardShard = {
     _poolSerahFarron,
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
+    _poolSharpshooterElf,
     _poolShiftingSliver,
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
+    _poolSilvanussInvoker,
     _poolSinewDancer,
     _poolSisaysRing,
     _poolSkitterbeamBattalion,

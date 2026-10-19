@@ -1,0 +1,1199 @@
+{
+ "batch": "B104",
+ "status": "complete",
+ "ranks": "Commander Legends: Battle for Baldur's Gate (CLB, 2022-06-10): the rest of the set (the initiative cards, then five agents over the remaining 136)",
+ "authored": [
+  {
+   "name": "Aarakocra Sneak",
+   "files": [
+    "engine/src/cards/pool/aarakocra-sneak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avenging Hunter",
+   "files": [
+    "engine/src/cards/pool/avenging-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goliath Paladin",
+   "files": [
+    "engine/src/cards/pool/goliath-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stirring Bard",
+   "files": [
+    "engine/src/cards/pool/stirring-bard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Underdark Explorer",
+   "files": [
+    "engine/src/cards/pool/underdark-explorer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feywild Caretaker",
+   "files": [
+    "engine/src/cards/pool/feywild-caretaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Passageway Seer",
+   "files": [
+    "engine/src/cards/pool/passageway-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undermountain Adventurer",
+   "files": [
+    "engine/src/cards/pool/undermountain-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rilsa Rael, Kingpin",
+   "files": [
+    "engine/src/cards/pool/rilsa-rael-kingpin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dungeoneer's Pack",
+   "files": [
+    "engine/src/cards/pool/dungeoneers-pack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loot Dispute",
+   "files": [
+    "engine/src/cards/pool/loot-dispute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vicious Battlerager",
+   "files": [
+    "engine/src/cards/pool/vicious-battlerager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodboil Sorcerer",
+   "files": [
+    "engine/src/cards/pool/bloodboil-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caves of Chaos Adventurer",
+   "files": [
+    "engine/src/cards/pool/caves-of-chaos-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarevok's Tome",
+   "files": [
+    "engine/src/cards/pool/sarevoks-tome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explore the Underdark",
+   "files": [
+    "engine/src/cards/pool/explore-the-underdark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "White Plume Adventurer",
+   "files": [
+    "engine/src/cards/pool/white-plume-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomb of Horrors Adventurer",
+   "files": [
+    "engine/src/cards/pool/tomb-of-horrors-adventurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "From the Catacombs",
+   "files": [
+    "engine/src/cards/pool/from-the-catacombs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imoen, Mystic Trickster",
+   "files": [
+    "engine/src/cards/pool/imoen-mystic-trickster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Safana, Calimport Cutthroat",
+   "files": [
+    "engine/src/cards/pool/safana-calimport-cutthroat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorion, Wise Mentor",
+   "files": [
+    "engine/src/cards/pool/gorion-wise-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venture Forth",
+   "files": [
+    "engine/src/cards/pool/venture-forth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renari, Merchant of Marvels",
+   "files": [
+    "engine/src/cards/pool/renari-merchant-of-marvels.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coronation of Chaos",
+   "files": [
+    "engine/src/cards/pool/coronation-of-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloakwood Hermit",
+   "files": [
+    "engine/src/cards/pool/cloakwood-hermit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimbleclaw Adept",
+   "files": [
+    "engine/src/cards/pool/nimbleclaw-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recruitment Drive",
+   "files": [
+    "engine/src/cards/pool/recruitment-drive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Young Blue Dragon",
+   "files": [
+    "engine/src/cards/pool/young-blue-dragon.ts",
+    "engine/src/cards/pool/sand-augury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alora, Merry Thief",
+   "files": [
+    "engine/src/cards/pool/alora-merry-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overwhelming Encounter",
+   "files": [
+    "engine/src/cards/pool/overwhelming-encounter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clan Crafter",
+   "files": [
+    "engine/src/cards/pool/clan-crafter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lantern of Revealing",
+   "files": [
+    "engine/src/cards/pool/lantern-of-revealing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rescuer Chwinga",
+   "files": [
+    "engine/src/cards/pool/rescuer-chwinga.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloakwood Swarmkeeper",
+   "files": [
+    "engine/src/cards/pool/cloakwood-swarmkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gray Harbor Merfolk",
+   "files": [
+    "engine/src/cards/pool/gray-harbor-merfolk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winter Eladrin",
+   "files": [
+    "engine/src/cards/pool/winter-eladrin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steadfast Unicorn",
+   "files": [
+    "engine/src/cards/pool/steadfast-unicorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gray Slaad",
+   "files": [
+    "engine/src/cards/pool/gray-slaad.ts",
+    "engine/src/cards/pool/entropic-decay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea Hag",
+   "files": [
+    "engine/src/cards/pool/sea-hag.ts",
+    "engine/src/cards/pool/aquatic-ingress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oceanus Dragon",
+   "files": [
+    "engine/src/cards/pool/oceanus-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flaming Fist Officer",
+   "files": [
+    "engine/src/cards/pool/flaming-fist-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shameless Charlatan",
+   "files": [
+    "engine/src/cards/pool/shameless-charlatan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carefree Swinemaster",
+   "files": [
+    "engine/src/cards/pool/carefree-swinemaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bane's Invoker",
+   "files": [
+    "engine/src/cards/pool/banes-invoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread Linnorm",
+   "files": [
+    "engine/src/cards/pool/dread-linnorm.ts",
+    "engine/src/cards/pool/scale-deflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Livaan, Cultist of Tiamat",
+   "files": [
+    "engine/src/cards/pool/livaan-cultist-of-tiamat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Githzerai Monk",
+   "files": [
+    "engine/src/cards/pool/githzerai-monk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drillworks Mole",
+   "files": [
+    "engine/src/cards/pool/drillworks-mole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icewind Stalwart",
+   "files": [
+    "engine/src/cards/pool/icewind-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonshae Pixie",
+   "files": [
+    "engine/src/cards/pool/moonshae-pixie.ts",
+    "engine/src/cards/pool/pixie-dust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amethyst Dragon",
+   "files": [
+    "engine/src/cards/pool/amethyst-dragon.ts",
+    "engine/src/cards/pool/explosive-crystal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silvanus's Invoker",
+   "files": [
+    "engine/src/cards/pool/silvanuss-invoker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bhaal, Lord of Murder",
+   "files": [
+    "engine/src/cards/pool/bhaal-lord-of-murder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystery Key",
+   "files": [
+    "engine/src/cards/pool/mystery-key.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Tremor",
+   "files": [
+    "engine/src/cards/pool/earth-tremor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saddle of the Cavalier",
+   "files": [
+    "engine/src/cards/pool/saddle-of-the-cavalier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kenku Artificer",
+   "files": [
+    "engine/src/cards/pool/kenku-artificer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greatsword of Tyr",
+   "files": [
+    "engine/src/cards/pool/greatsword-of-tyr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feywild Visitor",
+   "files": [
+    "engine/src/cards/pool/feywild-visitor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zhentarim Bandit",
+   "files": [
+    "engine/src/cards/pool/zhentarim-bandit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goggles of Night",
+   "files": [
+    "engine/src/cards/pool/goggles-of-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fang Dragon",
+   "files": [
+    "engine/src/cards/pool/fang-dragon.ts",
+    "engine/src/cards/pool/forktail-sweep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossal Badger",
+   "files": [
+    "engine/src/cards/pool/colossal-badger.ts",
+    "engine/src/cards/pool/dig-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon Undead",
+   "files": [
+    "engine/src/cards/pool/summon-undead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arms of Hadar",
+   "files": [
+    "engine/src/cards/pool/arms-of-hadar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amber Gristle O'Maul",
+   "files": [
+    "engine/src/cards/pool/amber-gristle-omaul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pegasus Guardian",
+   "files": [
+    "engine/src/cards/pool/pegasus-guardian.ts",
+    "engine/src/cards/pool/rescue-the-foal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian Naga",
+   "files": [
+    "engine/src/cards/pool/guardian-naga.ts",
+    "engine/src/cards/pool/banishing-coils.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viconia, Drow Apostate",
+   "files": [
+    "engine/src/cards/pool/viconia-drow-apostate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genasi Enforcers",
+   "files": [
+    "engine/src/cards/pool/genasi-enforcers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guildsworn Prowler",
+   "files": [
+    "engine/src/cards/pool/guildsworn-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eldritch Pact",
+   "files": [
+    "engine/src/cards/pool/eldritch-pact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Insufferable Balladeer",
+   "files": [
+    "engine/src/cards/pool/insufferable-balladeer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bane, Lord of Darkness",
+   "files": [
+    "engine/src/cards/pool/bane-lord-of-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juvenile Mist Dragon",
+   "files": [
+    "engine/src/cards/pool/juvenile-mist-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nothic",
+   "files": [
+    "engine/src/cards/pool/nothic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You're Confronted by Robbers",
+   "files": [
+    "engine/src/cards/pool/youre-confronted-by-robbers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigil of Myrkul",
+   "files": [
+    "engine/src/cards/pool/sigil-of-myrkul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dire Mimic",
+   "files": [
+    "engine/src/cards/pool/dire-mimic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warehouse Thief",
+   "files": [
+    "engine/src/cards/pool/warehouse-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oji, the Exquisite Blade",
+   "files": [
+    "engine/src/cards/pool/oji-the-exquisite-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Popular Entertainer",
+   "files": [
+    "engine/src/cards/pool/popular-entertainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Taunting Kobold",
+   "files": [
+    "engine/src/cards/pool/taunting-kobold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scouting Hawk",
+   "files": [
+    "engine/src/cards/pool/scouting-hawk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atrocious Experiment",
+   "files": [
+    "engine/src/cards/pool/atrocious-experiment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Owlbear Shepherd",
+   "files": [
+    "engine/src/cards/pool/owlbear-shepherd.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockwork Fox",
+   "files": [
+    "engine/src/cards/pool/clockwork-fox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crystal Dragon",
+   "files": [
+    "engine/src/cards/pool/crystal-dragon.ts",
+    "engine/src/cards/pool/rob-the-hoard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blessed Hippogriff",
+   "files": [
+    "engine/src/cards/pool/blessed-hippogriff.ts",
+    "engine/src/cards/pool/tyrs-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myconid Spore Tender",
+   "files": [
+    "engine/src/cards/pool/myconid-spore-tender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Javelin of Lightning",
+   "files": [
+    "engine/src/cards/pool/javelin-of-lightning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sharpshooter Elf",
+   "files": [
+    "engine/src/cards/pool/sharpshooter-elf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghastly Death Tyrant",
+   "files": [
+    "engine/src/cards/pool/ghastly-death-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myrkul's Invoker",
+   "files": [
+    "engine/src/cards/pool/myrkuls-invoker.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Seasoned Dungeoneer",
+   "needs": [
+    "effect:grant-protection-temporary"
+   ],
+   "why": "\"gains protection from creatures until end of turn\": no temporary protection grant"
+  },
+  {
+   "name": "Ravenloft Adventurer",
+   "needs": [
+    "replacement:die-exile-with-counter",
+    "amount:count-in-exile"
+   ],
+   "why": "creatures an opponent controls dying are exiled with a hit counter; the attack trigger counts their hit-counter cards in exile"
+  },
+  {
+   "name": "Trailblazer's Torch",
+   "needs": [
+    "filter:blocking-trigger-object"
+   ],
+   "why": "\"deals 2 damage to each creature blocking it\": no filter for the creatures blocking a given attacker"
+  },
+  {
+   "name": "Undercellar Sweep",
+   "needs": [
+    "condition:attacked-player-has-initiative"
+   ],
+   "why": "intervening if \"you or a player you're attacking has the initiative\""
+  },
+  {
+   "name": "Rasaad yn Bashir",
+   "needs": [
+    "effect:double-toughness-each"
+   ],
+   "why": "\"double the toughness of each creature you control until end of turn\""
+  },
+  {
+   "name": "Sailors' Bane",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "cost reduction counts cards you own in exile and graveyard"
+  },
+  {
+   "name": "Candlekeep Inspiration",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "X counts cards you own in exile and graveyard"
+  },
+  {
+   "name": "Dungeon Delver",
+   "needs": [
+    "static:room-abilities-trigger-twice"
+   ],
+   "why": "\"room abilities of dungeons you own trigger an additional time\""
+  },
+  {
+   "name": "Multiclass Baldric",
+   "needs": [
+    "condition:full-party"
+   ],
+   "why": "no party vocabulary (family effect:party-count)"
+  },
+  {
+   "name": "Acolyte of Bahamut",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "a granted static: the first Dragon spell each turn costs less"
+  },
+  {
+   "name": "Criminal Past",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "granted +X/+0 counting the commander's controller's graveyard"
+  },
+  {
+   "name": "Volo, Itinerant Scholar",
+   "needs": [
+    "effect:note-creature-type-not-yet-noted"
+   ],
+   "why": "Volo's Journal notes creature types"
+  },
+  {
+   "name": "Alaundo the Seer",
+   "needs": [
+    "effect:exile-from-hand-with-time-counters-grant-cast",
+    "effect:remove-time-counter-each-exiled-card"
+   ],
+   "why": "exile from hand with time counters equal to MV and a granted free cast (family mechanic:suspend-and-time-counters)"
+  },
+  {
+   "name": "Fraying Line",
+   "needs": [
+    "effect:choices-by-other-players"
+   ],
+   "why": "the active player chooses which creature gets the rope counter"
+  },
+  {
+   "name": "Intellect Devourer",
+   "needs": [
+    "effect:exile-from-hand-until-source-leaves",
+    "zone:exiled-with-source-play"
+   ],
+   "why": "each opponent exiles a card until this leaves; you may play them"
+  },
+  {
+   "name": "Thunderwave",
+   "needs": [
+    "effect:affect-unchosen-permanents"
+   ],
+   "why": "\"each creature not chosen this way\" (family decision:choose-permanent)"
+  },
+  {
+   "name": "Ghost Lantern",
+   "needs": [
+    "effect:add-counter-equipped-creature"
+   ],
+   "why": "add-counter can't name the equipped creature (family effect:attached-host-ref)"
+  },
+  {
+   "name": "Baba Lysaga, Night Witch",
+   "needs": [
+    "cost:sacrifice-multiple",
+    "condition:card-types-among-sacrificed"
+   ],
+   "why": "sacrifice up to three, count card types among them (family effect:this-way-results)"
+  },
+  {
+   "name": "Windshaper Planetar",
+   "needs": [
+    "effect:reselect-attack-target"
+   ],
+   "why": "redirect an attacker"
+  },
+  {
+   "name": "Mirror of Life Trapping",
+   "needs": [
+    "effect:return-other-cards-exiled-with-source"
+   ],
+   "why": "return the others exiled with it, not the one just exiled (family effect:put-onto-battlefield-options)"
+  },
+  {
+   "name": "Veteran Soldier",
+   "needs": [
+    "condition:defending-player-life-rank"
+   ],
+   "why": "no defenderLife for \"no opponent of the attacker has more life\" (family condition:defending-player-life-rank)"
+  },
+  {
+   "name": "Ambitious Dragonborn",
+   "needs": [
+    "effect:aggregate-over-graveyard"
+   ],
+   "why": "greatest power among creature cards in your graveyard"
+  },
+  {
+   "name": "Street Urchin",
+   "needs": [
+    "filter:not-source-clause"
+   ],
+   "why": "\"sacrifice another creature or an artifact\": 'another' on one branch only (family cost:sacrifice-multiple)"
+  },
+  {
+   "name": "Halsin, Emerald Archdruid",
+   "needs": [
+    "effect:animate-add-colors"
+   ],
+   "why": "green in addition to its other colors"
+  },
+  {
+   "name": "Sculpted Sunburst",
+   "needs": [
+    "effect:each-player-keeps-one-exile-rest"
+   ],
+   "why": "each opponent keeps one creature, the rest exiled (family decision:choose-permanent)"
+  },
+  {
+   "name": "Cloudkill",
+   "needs": [
+    "effect:amount-commander-mana-value-battlefield-or-command-zone"
+   ],
+   "why": "commanders on the battlefield or in the command zone only"
+  },
+  {
+   "name": "Nefarious Imp",
+   "needs": [
+    "trigger:leaves-batch-trigger"
+   ],
+   "why": "\"one or more permanents leave\" once per batch"
+  },
+  {
+   "name": "Faceless One",
+   "needs": [
+    "mechanic:commander-chosen-color-pregame"
+   ],
+   "why": "a color chosen as the game begins"
+  },
+  {
+   "name": "You Look Upon the Tarrasque",
+   "needs": [
+    "replacement:prevent-combat-damage-to-you",
+    "replacement:prevent-combat-damage-to-filter"
+   ],
+   "why": "prevent combat damage dealt to you and your creatures"
+  },
+  {
+   "name": "Grell Philosopher",
+   "needs": [
+    "static:gain-activated-abilities-of-others",
+    "cost:spend-mana-as-any-color"
+   ],
+   "why": "gains another artifact's activated abilities"
+  },
+  {
+   "name": "Gale's Redirection",
+   "needs": [
+    "effect:exile-target-spell"
+   ],
+   "why": "exile a spell from the stack without countering (family zone:allow-cast-from-exile-spend-any-type)"
+  },
+  {
+   "name": "Scion of Halaster",
+   "needs": [
+    "replacement:draw-replacement-first-each-turn",
+    "replacement:draw-replacement-look-and-choose"
+   ],
+   "why": "first draw each turn replaced"
+  },
+  {
+   "name": "Sivriss, Nightmare Speaker",
+   "needs": [
+    "effect:unless-that-player"
+   ],
+   "why": "an unless choice by the opponent a for-each loop is on (family effect:unless-target-controller)"
+  },
+  {
+   "name": "Emerald Dragon",
+   "needs": [
+    "filter:ability-source-not-types"
+   ],
+   "why": "\"from a noncreature source\" (family effect:copy-ability)"
+  },
+  {
+   "name": "Dragon Cultist",
+   "needs": [
+    "condition:single-source-dealt-n-damage-this-turn"
+   ],
+   "why": "one source dealt 5+ damage this turn (family condition:filter-dealt-damage-this-turn)"
+  },
+  {
+   "name": "Durnan of the Yawning Portal",
+   "needs": [
+    "keyword:undaunted"
+   ],
+   "why": "undaunted"
+  },
+  {
+   "name": "Druidic Ritual",
+   "needs": [
+    "effect:look-and-choose-second-pick-together"
+   ],
+   "why": "one return of a creature and a land card together"
+  },
+  {
+   "name": "Zevlor, Elturel Exile",
+   "needs": [
+    "effect:copy-spell-retarget-another-opponent"
+   ],
+   "why": "copies retargeted at each other opponent"
+  },
+  {
+   "name": "Dynaheir, Invoker Adept",
+   "needs": [
+    "effect:abilities-as-though-haste",
+    "trigger:next-activated-ability-mana-spent"
+   ],
+   "why": "activate as though haste; copy an ability with 4+ mana spent (family effect:copy-ability)"
+  },
+  {
+   "name": "Druid of the Emerald Grove",
+   "needs": [
+    "effect:search-then-roll-destination"
+   ],
+   "why": "lands found before a d20 decides where they go (family mechanic:d20)"
+  },
+  {
+   "name": "Mazzy, Truesword Paladin",
+   "needs": [
+    "condition:attacking-an-opponent-filter"
+   ],
+   "why": "attacking one of your opponents"
+  },
+  {
+   "name": "Journey to the Lost City",
+   "needs": [
+    "new:exile-top-then-put-from-among-exiled"
+   ],
+   "why": "put a land from among cards just exiled"
+  },
+  {
+   "name": "Banishment",
+   "needs": [
+    "condition:same-name-as-target"
+   ],
+   "why": "permanents with the same name as that one"
+  },
+  {
+   "name": "Nemesis Phoenix",
+   "needs": [
+    "condition:attacking-two-or-more-opponents"
+   ],
+   "why": "attacking two or more opponents (family effect:enter-attacking)"
+  },
+  {
+   "name": "Split the Spoils",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "piles"
+  },
+  {
+   "name": "Stunning Strike",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "enchanted creature doesn't untap"
+  },
+  {
+   "name": "Altar of Bhaal",
+   "needs": [
+    "cost:exile-creature-cost"
+   ],
+   "why": "\"Exile a creature you control\" as an activation cost"
+  },
+  {
+   "name": "Commander Liara Portyr",
+   "needs": [
+    "cost:cost-mod-by-cast-zone"
+   ],
+   "why": "spells cast from exile cost less"
+  },
+  {
+   "name": "Neera, Wild Mage",
+   "needs": [
+    "effect:put-cast-spell-on-library-if-did"
+   ],
+   "why": "put the spell on the bottom; if you do, cast another (family effect:possibility-storm-exile-spell-on-cast)"
+  },
+  {
+   "name": "Stick Together",
+   "needs": [
+    "effect:choose-party-sacrifice-rest"
+   ],
+   "why": "keep a party, sacrifice the rest (family effect:party-count)"
+  },
+  {
+   "name": "Elminster",
+   "needs": [
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "the next instant or sorcery costs X less"
+  },
+  {
+   "name": "Harper Recruiter",
+   "needs": [
+    "effect:look-and-choose-one-each"
+   ],
+   "why": "one of each creature type (family decision:choose-from-zone-extensions)"
+  },
+  {
+   "name": "Skanos Dragonheart",
+   "needs": [
+    "effect:aggregate-over-graveyard"
+   ],
+   "why": "greatest power among Dragons on the battlefield and in your graveyard"
+  },
+  {
+   "name": "Font of Magic",
+   "needs": [
+    "cost:cost-reduction-commander-casts"
+   ],
+   "why": "costs less per commander cast (family cost:cost-modification-extensions)"
+  },
+  {
+   "name": "Gnoll War Band",
+   "needs": [
+    "cost:cost-reduction-opponents-dealt-damage"
+   ],
+   "why": "costs less per opponent dealt damage (family cost:cost-modification-extensions)"
+  },
+  {
+   "name": "Marut",
+   "needs": [
+    "stat:treasure-mana-spent-count"
+   ],
+   "why": "Treasure mana spent to cast it"
+  },
+  {
+   "name": "Pack Attack",
+   "needs": [
+    "effect:players-being-attacked-count"
+   ],
+   "why": "players being attacked on any player's turn"
+  },
+  {
+   "name": "Call to the Void",
+   "needs": [
+    "mechanic:secret-choice"
+   ],
+   "why": "secret choices revealed together"
+  },
+  {
+   "name": "Lurking Green Dragon",
+   "needs": [
+    "static:cant-attack-unless-defender-controls"
+   ],
+   "why": "attack restriction by what the defender controls (family static:combat-restriction-extensions)"
+  },
+  {
+   "name": "Modify Memory",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchange control of two creatures"
+  },
+  {
+   "name": "Nalia de'Arnise",
+   "needs": [
+    "effect:party-count"
+   ],
+   "why": "full party"
+  },
+  {
+   "name": "Psionic Ritual",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "replicate, with a tap-an-untapped-Horror cost"
+  },
+  {
+   "name": "Solemn Doomguide",
+   "needs": [
+    "static:grant-unearth-to-graveyard"
+   ],
+   "why": "grants unearth to graveyard cards"
+  },
+  {
+   "name": "You've Been Caught Stealing",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "\"blocks this turn if able\""
+  },
+  {
+   "name": "Ellyn Harbreeze, Busybody",
+   "needs": [
+    "stat:tokens-created-this-turn"
+   ],
+   "why": "count of tokens created this turn (family stat:turn-event-tallies)"
+  },
+  {
+   "name": "Barroom Brawl",
+   "needs": [
+    "target:controlled-by-opponent-to-your-left"
+   ],
+   "why": "the opponent to your left (family effect:target-spec-additions)"
+  },
+  {
+   "name": "Vhal, Candlekeep Researcher",
+   "needs": [
+    "cost:mana-restriction-not-from-hand"
+   ],
+   "why": "mana that can't be spent on spells cast from hand"
+  },
+  {
+   "name": "Hardy Outlander",
+   "needs": [
+    "condition:defending-player-life-rank"
+   ],
+   "why": "no opponent has more life than that player"
+  },
+  {
+   "name": "Mold Folk",
+   "needs": [
+    "filter:not-source-clause"
+   ],
+   "why": "\"sacrifice another creature or an artifact\" (family condition:filter-combinators)"
+  },
+  {
+   "name": "Beckoning Will-o'-Wisp",
+   "needs": [
+    "static:attacking-chosen-player-anthem"
+   ],
+   "why": "creatures attacking the chosen player (family decision:choose-player)"
+  },
+  {
+   "name": "Hezrou",
+   "needs": [
+    "trigger:one-or-more-become-blocked-batch",
+    "filter:blocked-this-turn"
+   ],
+   "why": "batched becomes-blocked; creatures that blocked this turn (family trigger:combat-trigger-extensions)"
+  },
+  {
+   "name": "Astral Confrontation",
+   "needs": [
+    "cost:cost-reduction-per-opponent-attacked"
+   ],
+   "why": "costs less per opponent attacked (family cost:cost-modification-extensions)"
+  }
+ ]
+}

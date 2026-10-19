@@ -249,6 +249,7 @@ import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
 import _poolLithomanticBarrage from "../pool/lithomantic-barrage.js";
+import _poolLivaanCultistOfTiamat from "../pool/livaan-cultist-of-tiamat.js";
 import _poolLivingLightningChargedUp from "../pool/living-lightning-charged-up.js";
 import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
@@ -319,6 +320,7 @@ import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
 import _poolRenegadeSilent from "../pool/renegade-silent.js";
 import _poolRepeatOffender from "../pool/repeat-offender.js";
 import _poolReputableMerchant from "../pool/reputable-merchant.js";
+import _poolRescueTheFoal from "../pool/rescue-the-foal.js";
 import _poolRestlessRidgeline from "../pool/restless-ridgeline.js";
 import _poolRestrictedOfficeLectureHall from "../pool/restricted-office-lecture-hall.js";
 import _poolReturnFromTheWilds from "../pool/return-from-the-wilds.js";
@@ -379,6 +381,7 @@ import _poolStoneskin from "../pool/stoneskin.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
+import _poolSummonUndead from "../pool/summon-undead.js";
 import _poolSuperAdaptoid from "../pool/super-adaptoid.js";
 import _poolSurrakDragonclaw from "../pool/surrak-dragonclaw.js";
 import _poolSwarmyard from "../pool/swarmyard.js";
@@ -726,6 +729,7 @@ const shard: CardShard = {
     _poolLeoninLightbringer,
     _poolLilysplashMentor,
     _poolLithomanticBarrage,
+    _poolLivaanCultistOfTiamat,
     _poolLivingLightningChargedUp,
     _poolLizardWarrior,
     _poolLlanowarReborn,
@@ -796,6 +800,7 @@ const shard: CardShard = {
     _poolRenegadeSilent,
     _poolRepeatOffender,
     _poolReputableMerchant,
+    _poolRescueTheFoal,
     _poolRestlessRidgeline,
     _poolRestrictedOfficeLectureHall,
     _poolReturnFromTheWilds,
@@ -856,6 +861,7 @@ const shard: CardShard = {
     _poolStranglerootGeist,
     _poolStrokeOfGenius,
     _poolSummerBloom,
+    _poolSummonUndead,
     _poolSuperAdaptoid,
     _poolSurrakDragonclaw,
     _poolSwarmyard,

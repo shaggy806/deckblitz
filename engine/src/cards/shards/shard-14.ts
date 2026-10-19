@@ -185,6 +185,7 @@ import _poolGoblinChainwhirler from "../pool/goblin-chainwhirler.js";
 import _poolGoblinChariot from "../pool/goblin-chariot.js";
 import _poolGoblinInstigator from "../pool/goblin-instigator.js";
 import _poolGoblinWardriver from "../pool/goblin-wardriver.js";
+import _poolGogglesOfNight from "../pool/goggles-of-night.js";
 import _poolGoldfuryStrider from "../pool/goldfury-strider.js";
 import _poolGoldspanDragon from "../pool/goldspan-dragon.js";
 import _poolGolosTirelessPilgrim from "../pool/golos-tireless-pilgrim.js";
@@ -305,6 +306,7 @@ import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick
 import _poolPanacea from "../pool/panacea.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
+import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
 import _poolPhyrexianSwarmlord from "../pool/phyrexian-swarmlord.js";
 import _poolPiaNalaar from "../pool/pia-nalaar.js";
@@ -447,6 +449,7 @@ import _poolWingedShepherd from "../pool/winged-shepherd.js";
 import _poolWitchHunter from "../pool/witch-hunter.js";
 import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
+import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
@@ -649,6 +652,7 @@ const shard: CardShard = {
     _poolGoblinChariot,
     _poolGoblinInstigator,
     _poolGoblinWardriver,
+    _poolGogglesOfNight,
     _poolGoldfuryStrider,
     _poolGoldspanDragon,
     _poolGolosTirelessPilgrim,
@@ -769,6 +773,7 @@ const shard: CardShard = {
     _poolPanacea,
     _poolParasiticImpetus,
     _poolPearledUnicorn,
+    _poolPegasusGuardian,
     _poolPerilousShadow,
     _poolPhyrexianSwarmlord,
     _poolPiaNalaar,
@@ -911,6 +916,7 @@ const shard: CardShard = {
     _poolWitchHunter,
     _poolWitchsClinic,
     _poolWitherbloomCharm,
+    _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolZealousLorecaster,
     _poolZopandrelHungerDominus,

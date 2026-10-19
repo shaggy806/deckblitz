@@ -103,6 +103,7 @@ import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
+import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
@@ -157,6 +158,7 @@ import _poolGiantBeaver from "../pool/giant-beaver.js";
 import _poolGiantScorpion from "../pool/giant-scorpion.js";
 import _poolGiantfall from "../pool/giantfall.js";
 import _poolGiftOfTheFae from "../pool/gift-of-the-fae.js";
+import _poolGithzeraiMonk from "../pool/githzerai-monk.js";
 import _poolGladecoverScout from "../pool/gladecover-scout.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
@@ -166,6 +168,7 @@ import _poolGrimJavelineer from "../pool/grim-javelineer.js";
 import _poolGrimclawBats from "../pool/grimclaw-bats.js";
 import _poolGrixisBattlemage from "../pool/grixis-battlemage.js";
 import _poolGrondTheGatebreaker from "../pool/grond-the-gatebreaker.js";
+import _poolGuardianNaga from "../pool/guardian-naga.js";
 import _poolGuidelightSynergist from "../pool/guidelight-synergist.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHavenwoodBattleground from "../pool/havenwood-battleground.js";
@@ -203,6 +206,7 @@ import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
+import _poolJuvenileMistDragon from "../pool/juvenile-mist-dragon.js";
 import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
@@ -216,6 +220,7 @@ import _poolKoskunKeep from "../pool/koskun-keep.js";
 import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
 import _poolKulrathMystic from "../pool/kulrath-mystic.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
+import _poolLanternOfRevealing from "../pool/lantern-of-revealing.js";
 import _poolLathnuSailback from "../pool/lathnu-sailback.js";
 import _poolLeapingLizard from "../pool/leaping-lizard.js";
 import _poolLeatherbackBaloth from "../pool/leatherback-baloth.js";
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolDocksideChef,
     _poolDonatellosTechnique,
     _poolDragonCursedHalls,
+    _poolDrillworksMole,
     _poolDrumhunter,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
@@ -641,6 +647,7 @@ const shard: CardShard = {
     _poolGiantScorpion,
     _poolGiantfall,
     _poolGiftOfTheFae,
+    _poolGithzeraiMonk,
     _poolGladecoverScout,
     _poolGoblinMountaineer,
     _poolGoblinTombRaider,
@@ -650,6 +657,7 @@ const shard: CardShard = {
     _poolGrimclawBats,
     _poolGrixisBattlemage,
     _poolGrondTheGatebreaker,
+    _poolGuardianNaga,
     _poolGuidelightSynergist,
     _poolHarvestGwyllion,
     _poolHavenwoodBattleground,
@@ -687,6 +695,7 @@ const shard: CardShard = {
     _poolJungleShrine,
     _poolJunkDiver,
     _poolJuvenileGloomwidow,
+    _poolJuvenileMistDragon,
     _poolKalamaxTheStormsire,
     _poolKelinoreBat,
     _poolKillMaimBurn,
@@ -700,6 +709,7 @@ const shard: CardShard = {
     _poolKruphixGodOfHorizons,
     _poolKulrathMystic,
     _poolKyoshiWarriors,
+    _poolLanternOfRevealing,
     _poolLathnuSailback,
     _poolLeapingLizard,
     _poolLeatherbackBaloth,

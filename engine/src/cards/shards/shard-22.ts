@@ -106,6 +106,7 @@ import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
 import _poolDragonskullSummit from "../pool/dragonskull-summit.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
+import _poolDreadLinnorm from "../pool/dread-linnorm.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
 import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
@@ -124,11 +125,13 @@ import _poolEvolutionaryLeap from "../pool/evolutionary-leap.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
 import _poolExperimentalAugury from "../pool/experimental-augury.js";
+import _poolExplosiveCrystal from "../pool/explosive-crystal.js";
 import _poolExquisiteBlood from "../pool/exquisite-blood.js";
 import _poolEyeOfMalcator from "../pool/eye-of-malcator.js";
 import _poolFaerieDreamthief from "../pool/faerie-dreamthief.js";
 import _poolFailedInspection from "../pool/failed-inspection.js";
 import _poolFallenAngel from "../pool/fallen-angel.js";
+import _poolFangDragon from "../pool/fang-dragon.js";
 import _poolFangrenHunter from "../pool/fangren-hunter.js";
 import _poolFantasticBounce from "../pool/fantastic-bounce.js";
 import _poolFarseek from "../pool/farseek.js";
@@ -589,6 +592,7 @@ const shard: CardShard = {
     _poolDraconicMuralists,
     _poolDragonskullSummit,
     _poolDramaticReversal,
+    _poolDreadLinnorm,
     _poolDrogskolCavalry,
     _poolDruidOfTheSpade,
     _poolDwarvenGrunt,
@@ -607,11 +611,13 @@ const shard: CardShard = {
     _poolExemplarOfLight,
     _poolExorcist,
     _poolExperimentalAugury,
+    _poolExplosiveCrystal,
     _poolExquisiteBlood,
     _poolEyeOfMalcator,
     _poolFaerieDreamthief,
     _poolFailedInspection,
     _poolFallenAngel,
+    _poolFangDragon,
     _poolFangrenHunter,
     _poolFantasticBounce,
     _poolFarseek,

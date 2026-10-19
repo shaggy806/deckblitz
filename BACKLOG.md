@@ -98,8 +98,12 @@ section keeps only what to do next.
   set; batch 100 the rest of Jumpstart 2022 and The Brothers' War Commander, no engine change;
   batch 101 the rest of The Brothers' War; batch 102 the rest of Warhammer 40,000 Commander, with
   domain and read ahead built for Dominaria United; batch 103 the rest of Dominaria United and its
-  Commander set); **next, Commander Legends: Battle for Baldur's Gate** (CLB — `npm run cards:sets
-  -w engine -- --sets 60`), whose ~21 initiative cards wait on `docs/plans/initiative-dungeons.md`.
+  Commander set; batch 104 the rest of Commander Legends: Battle for Baldur's Gate, on the
+  initiative, dungeons and venturing — `docs/plans/initiative-dungeons.md`); **next, Double
+  Masters 2022's one card and New Capenna Commander** (NCC — `npm run cards:sets -w engine --
+  --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
+  the Oubliette's three distinct sacrifices) still hold the cards that "venture into the dungeon"
+  (Nadaar, Acererak, Sefris, Radiant Solar — `mechanic:dungeon`).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.

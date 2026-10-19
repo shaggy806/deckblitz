@@ -124,6 +124,7 @@ import _poolFatefulAbsence from "../pool/fateful-absence.js";
 import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
 import _poolFelidarRetreat from "../pool/felidar-retreat.js";
 import _poolFestivalCrasher from "../pool/festival-crasher.js";
+import _poolFeywildVisitor from "../pool/feywild-visitor.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
 import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
@@ -418,6 +419,7 @@ import _poolVesselOfEphemera from "../pool/vessel-of-ephemera.js";
 import _poolVesuvanDrifter from "../pool/vesuvan-drifter.js";
 import _poolVexingBauble from "../pool/vexing-bauble.js";
 import _poolVibraniumMiningMech from "../pool/vibranium-mining-mech.js";
+import _poolViconiaDrowApostate from "../pool/viconia-drow-apostate.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
@@ -434,6 +436,7 @@ import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
+import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
@@ -571,6 +574,7 @@ const shard: CardShard = {
     _poolFecundGreenshell,
     _poolFelidarRetreat,
     _poolFestivalCrasher,
+    _poolFeywildVisitor,
     _poolFireLitThicket,
     _poolFirebendingStudent,
     _poolFiveHundredYearDiary,
@@ -865,6 +869,7 @@ const shard: CardShard = {
     _poolVesuvanDrifter,
     _poolVexingBauble,
     _poolVibraniumMiningMech,
+    _poolViconiaDrowApostate,
     _poolVileRebirth,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
@@ -881,6 +886,7 @@ const shard: CardShard = {
     _poolWylieDukeAtiinHero,
     _poolYavimayaIconoclast,
     _poolZhaoRuthlessAdmiral,
+    _poolZhentarimBandit,
   ],
   tokens: [
     _tokensBirdTokenGwaihirGreatestOfTheEagles,

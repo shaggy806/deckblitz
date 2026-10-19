@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander Legends: Battle for Baldur's Gate, whole** (batch 104): its last 167 cards, 95
+  authored (the initiative's 23 — Aarakocra Sneak, Rilsa Rael, Sarevok's Tome, Tomb of Horrors
+  Adventurer, Loot Dispute, From the Catacombs… — on dungeons, venturing, the initiative and
+  its two conditions; then five agents' 72 and Gorion and Venture Forth) and 72 blocked
+  (2026-10-19).
 - **Dominaria United and Dominaria United Commander, both whole** (batch 103): their last 165
   cards, 104 authored (Jared Carthalion, Torsten, Founder of Benalia, Najal, the Storm Runner,
   Radha, Coalition Warlord and 100 more — the domain and read-ahead cards among them) and 61

@@ -81,6 +81,7 @@ import _poolDelightfulDiscovery from "../pool/delightful-discovery.js";
 import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
+import _poolDigDeep from "../pool/dig-deep.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
@@ -179,6 +180,7 @@ import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
+import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
 import _poolJoven from "../pool/joven.js";
 import _poolKaZarOfTheSavageLand from "../pool/ka-zar-of-the-savage-land.js";
 import _poolKamiOfTwistedReflection from "../pool/kami-of-twisted-reflection.js";
@@ -521,6 +523,7 @@ const shard: CardShard = {
     _poolDementiaBat,
     _poolDemonsHorn,
     _poolDesmondMiles,
+    _poolDigDeep,
     _poolDiscipleOfTheOldWays,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
@@ -619,6 +622,7 @@ const shard: CardShard = {
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
     _poolJandorsSaddlebags,
+    _poolJavelinOfLightning,
     _poolJoven,
     _poolKaZarOfTheSavageLand,
     _poolKamiOfTwistedReflection,

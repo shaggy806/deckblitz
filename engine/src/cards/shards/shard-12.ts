@@ -62,6 +62,7 @@ import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
 import _poolBristlepackSentry from "../pool/bristlepack-sentry.js";
 import _poolBruteSuit from "../pool/brute-suit.js";
+import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
@@ -112,6 +113,7 @@ import _poolDuelistOfDeepFaith from "../pool/duelist-of-deep-faith.js";
 import _poolDunedainRangers from "../pool/dunedain-rangers.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
+import _poolEarthTremor from "../pool/earth-tremor.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
 import _poolEdeaPossessedSorceress from "../pool/edea-possessed-sorceress.js";
 import _poolEffortlessMaster from "../pool/effortless-master.js";
@@ -529,6 +531,7 @@ const shard: CardShard = {
     _poolBristlebaneBattler,
     _poolBristlepackSentry,
     _poolBruteSuit,
+    _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
     _poolChampionOfDusan,
@@ -579,6 +582,7 @@ const shard: CardShard = {
     _poolDunedainRangers,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
+    _poolEarthTremor,
     _poolEarthshakingSi,
     _poolEdeaPossessedSorceress,
     _poolEffortlessMaster,

@@ -155,6 +155,7 @@ import _poolGoldenBear from "../pool/golden-bear.js";
 import _poolGorbagOfMinasMorgul from "../pool/gorbag-of-minas-morgul.js";
 import _poolGrandmotherSengir from "../pool/grandmother-sengir.js";
 import _poolGrangerGuildmage from "../pool/granger-guildmage.js";
+import _poolGrayHarborMerfolk from "../pool/gray-harbor-merfolk.js";
 import _poolGreedyFreebooter from "../pool/greedy-freebooter.js";
 import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
@@ -177,6 +178,7 @@ import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
+import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
 import _poolIndependentTroops from "../pool/independent-troops.js";
 import _poolInfernoFist from "../pool/inferno-fist.js";
@@ -660,6 +662,7 @@ const shard: CardShard = {
     _poolGorbagOfMinasMorgul,
     _poolGrandmotherSengir,
     _poolGrangerGuildmage,
+    _poolGrayHarborMerfolk,
     _poolGreedyFreebooter,
     _poolGrinningDemon,
     _poolGuidelightMatrix,
@@ -682,6 +685,7 @@ const shard: CardShard = {
     _poolHotshotInvestigators,
     _poolHurskaSweetTooth,
     _poolIcetillExplorer,
+    _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
     _poolIndependentTroops,
     _poolInfernoFist,

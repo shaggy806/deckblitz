@@ -263,6 +263,7 @@ import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNightpackAmbusher from "../pool/nightpack-ambusher.js";
 import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
+import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolNestOfScarabs,
     _poolNightpackAmbusher,
     _poolNikoLightOfHope,
+    _poolNimbleclawAdept,
     _poolNurturingBristleback,
     _poolNyleaKeenEyed,
     _poolOldGrowthEducator,

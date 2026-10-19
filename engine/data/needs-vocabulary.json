@@ -7879,6 +7879,142 @@
   "bug:cda-greatest-mana-value-in-graveyard": {
    "family": "bug:cda-all-zones",
    "example": "Monstrous War-Leech: P/T equal to the greatest mana value among cards in your graveyard — greatestManaValueOf reads only the battlefield."
+  },
+  "amount:count-in-exile": {
+   "family": "effect:aggregate-over-graveyard",
+   "example": "Sailors' Bane"
+  },
+  "condition:attacked-player-has-initiative": {
+   "family": "mechanic:dungeon",
+   "example": "Undercellar Sweep"
+  },
+  "condition:attacking-two-or-more-opponents": {
+   "family": "effect:enter-attacking",
+   "example": "Nemesis Phoenix"
+  },
+  "condition:card-types-among-sacrificed": {
+   "family": "effect:this-way-results",
+   "example": "Baba Lysaga, Night Witch"
+  },
+  "condition:full-party": {
+   "family": "effect:party-count",
+   "example": "Multiclass Baldric"
+  },
+  "condition:single-source-dealt-n-damage-this-turn": {
+   "family": "condition:filter-dealt-damage-this-turn",
+   "example": "Dragon Cultist"
+  },
+  "cost:cost-reduction-commander-casts": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Font of Magic"
+  },
+  "cost:cost-reduction-opponents-dealt-damage": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Gnoll War Band"
+  },
+  "cost:cost-reduction-per-opponent-attacked": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Astral Confrontation"
+  },
+  "effect:add-counter-equipped-creature": {
+   "family": "condition:attached-host-condition",
+   "example": "Ghost Lantern"
+  },
+  "effect:affect-unchosen-permanents": {
+   "family": "decision:choose-permanent",
+   "example": "Thunderwave"
+  },
+  "effect:choose-party-sacrifice-rest": {
+   "family": "effect:party-count",
+   "example": "Stick Together"
+  },
+  "effect:each-player-keeps-one-exile-rest": {
+   "family": "decision:choose-permanent",
+   "example": "Sculpted Sunburst"
+  },
+  "effect:exile-from-hand-with-time-counters-grant-cast": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Alaundo the Seer"
+  },
+  "effect:exile-target-spell": {
+   "family": "zone:allow-cast-from-exile-spend-any-type",
+   "example": "Gale's Redirection"
+  },
+  "effect:look-and-choose-one-each": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Harper Recruiter"
+  },
+  "effect:put-cast-spell-on-library-if-did": {
+   "family": "effect:possibility-storm-exile-spell-on-cast",
+   "example": "Neera, Wild Mage"
+  },
+  "effect:remove-time-counter-each-exiled-card": {
+   "family": "mechanic:suspend-and-time-counters",
+   "example": "Alaundo the Seer"
+  },
+  "effect:return-other-cards-exiled-with-source": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Mirror of Life Trapping"
+  },
+  "effect:search-then-roll-destination": {
+   "family": "mechanic:d20",
+   "example": "Druid of the Emerald Grove"
+  },
+  "effect:unless-that-player": {
+   "family": "effect:unless-target-controller",
+   "example": "Sivriss, Nightmare Speaker"
+  },
+  "filter:ability-source-not-types": {
+   "family": "effect:copy-ability",
+   "example": "Emerald Dragon"
+  },
+  "filter:blocked-this-turn": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Hezrou"
+  },
+  "filter:blocking-trigger-object": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Trailblazer's Torch"
+  },
+  "filter:not-source-clause": {
+   "family": "cost:sacrifice-multiple",
+   "example": "Street Urchin"
+  },
+  "replacement:die-exile-with-counter": {
+   "family": "replacement:exile-instead",
+   "example": "Ravenloft Adventurer"
+  },
+  "stat:tokens-created-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Ellyn Harbreeze, Busybody"
+  },
+  "static:attacking-chosen-player-anthem": {
+   "family": "decision:choose-player",
+   "example": "Beckoning Will-o'-Wisp"
+  },
+  "static:cant-attack-unless-defender-controls": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Lurking Green Dragon"
+  },
+  "static:room-abilities-trigger-twice": {
+   "family": "mechanic:dungeon",
+   "example": "Dungeon Delver"
+  },
+  "target:controlled-by-opponent-to-your-left": {
+   "family": "effect:target-spec-additions",
+   "example": "Barroom Brawl"
+  },
+  "trigger:next-activated-ability-mana-spent": {
+   "family": "effect:copy-ability",
+   "example": "Dynaheir, Invoker Adept"
+  },
+  "trigger:one-or-more-become-blocked-batch": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Hezrou"
+  },
+  "effect:double-toughness-each": {
+   "family": "effect:double-power-each",
+   "example": "Rasaad yn Bashir"
   }
  }
 }

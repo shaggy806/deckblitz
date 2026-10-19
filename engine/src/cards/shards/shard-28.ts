@@ -75,6 +75,7 @@ import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
 import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
+import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
@@ -115,6 +116,7 @@ import _poolDrowned from "../pool/drowned.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
+import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
@@ -555,6 +557,7 @@ const shard: CardShard = {
     _poolCleonMerryChampion,
     _poolCliveIfritsDominant,
     _poolClivesHideaway,
+    _poolCloakwoodSwarmkeeper,
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolConcealedCourtyard,
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolDunedainBlade,
     _poolEarthrumbler,
     _poolEiganjoDynastorian,
+    _poolEldritchPact,
     _poolElminstersSimulacrum,
     _poolElvishPiper,
     _poolEmberEyeWolf,

@@ -90,6 +90,7 @@ import _poolCoerciveRecruiter from "../pool/coercive-recruiter.js";
 import _poolCoilAndCatch from "../pool/coil-and-catch.js";
 import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
+import _poolColossalBadger from "../pool/colossal-badger.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
@@ -106,6 +107,7 @@ import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
 import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolCrush from "../pool/crush.js";
+import _poolCrystalDragon from "../pool/crystal-dragon.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
 import _poolDauthiMercenary from "../pool/dauthi-mercenary.js";
@@ -306,6 +308,7 @@ import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
+import _poolPixieDust from "../pool/pixie-dust.js";
 import _poolPontiffOfBlight from "../pool/pontiff-of-blight.js";
 import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolProfaneTutor from "../pool/profane-tutor.js";
@@ -353,6 +356,7 @@ import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
+import _poolScaleDeflection from "../pool/scale-deflection.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
 import _poolScathingShadelock from "../pool/scathing-shadelock.js";
 import _poolScavengingHarpy from "../pool/scavenging-harpy.js";
@@ -603,6 +607,7 @@ const shard: CardShard = {
     _poolCoilAndCatch,
     _poolCoiledTinviper,
     _poolColosYearling,
+    _poolColossalBadger,
     _poolConsulateDreadnought,
     _poolContagionClasp,
     _poolCoordinatedManeuver,
@@ -619,6 +624,7 @@ const shard: CardShard = {
     _poolCrowdsFavor,
     _poolCrumblingAshes,
     _poolCrush,
+    _poolCrystalDragon,
     _poolDanithaNewBenaliasLight,
     _poolDauntlessScrapbot,
     _poolDauthiMercenary,
@@ -819,6 +825,7 @@ const shard: CardShard = {
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
+    _poolPixieDust,
     _poolPontiffOfBlight,
     _poolPristineTalisman,
     _poolProfaneTutor,
@@ -866,6 +873,7 @@ const shard: CardShard = {
     _poolSandbendersStorm,
     _poolSanguineGuard,
     _poolSazhsChocobo,
+    _poolScaleDeflection,
     _poolScarecrowGuide,
     _poolScathingShadelock,
     _poolScavengingHarpy,

@@ -20,12 +20,14 @@ import _poolAnthemOfChampions from "../pool/anthem-of-champions.js";
 import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
 import _poolArchweaver from "../pool/archweaver.js";
+import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
+import _poolBanesInvoker from "../pool/banes-invoker.js";
 import _poolBantCharm from "../pool/bant-charm.js";
 import _poolBarrageOfExpendables from "../pool/barrage-of-expendables.js";
 import _poolBattleHymn from "../pool/battle-hymn.js";
@@ -132,6 +134,7 @@ import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolGaryClone from "../pool/gary-clone.js";
+import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
@@ -174,6 +177,7 @@ import _poolIllustriousHistorian from "../pool/illustrious-historian.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
+import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
@@ -294,6 +298,7 @@ import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
+import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
 import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
@@ -481,12 +486,14 @@ const shard: CardShard = {
     _poolAnthropede,
     _poolAnticipate,
     _poolArchweaver,
+    _poolArmsOfHadar,
     _poolArtisansSorrow,
     _poolAshioksReaper,
     _poolAstelliReclaimer,
     _poolAwakenTheBear,
     _poolAzureDrake,
     _poolBambooGroveArcher,
+    _poolBanesInvoker,
     _poolBantCharm,
     _poolBarrageOfExpendables,
     _poolBattleHymn,
@@ -593,6 +600,7 @@ const shard: CardShard = {
     _poolForumOfAmity,
     _poolFranklinRichardsAscendant,
     _poolGaryClone,
+    _poolGhastlyDeathTyrant,
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
     _poolGiftOfStrands,
@@ -635,6 +643,7 @@ const shard: CardShard = {
     _poolIndulgentAristocrat,
     _poolInfiltrate,
     _poolInsatiableHarpy,
+    _poolInsufferableBalladeer,
     _poolInvasionOfZendikar,
     _poolIronManArmoredAvenger,
     _poolIvoryCharm,
@@ -755,6 +764,7 @@ const shard: CardShard = {
     _poolReaperKing,
     _poolRecklessStormseeker,
     _poolReconstructHistory,
+    _poolRecruitmentDrive,
     _poolRecurringNightmare,
     _poolRedwoodTreefolk,
     _poolRemnantElemental,

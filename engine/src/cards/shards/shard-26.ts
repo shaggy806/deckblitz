@@ -92,6 +92,7 @@ import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
+import _poolDireMimic from "../pool/dire-mimic.js";
 import _poolDismissiveDenial from "../pool/dismissive-denial.js";
 import _poolDisruptorOfCurrents from "../pool/disruptor-of-currents.js";
 import _poolDisruptorWanderglyph from "../pool/disruptor-wanderglyph.js";
@@ -264,6 +265,7 @@ import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
 import _poolNobleTemplar from "../pool/noble-templar.js";
 import _poolNorwoodRanger from "../pool/norwood-ranger.js";
+import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOmnathLocusOfTheRoil from "../pool/omnath-locus-of-the-roil.js";
@@ -312,6 +314,7 @@ import _poolRyanSinclair from "../pool/ryan-sinclair.js";
 import _poolSHIELDHelicarrier from "../pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSafeholdElite from "../pool/safehold-elite.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
+import _poolSandAugury from "../pool/sand-augury.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
 import _poolSapphireDragon from "../pool/sapphire-dragon.js";
 import _poolSarinthGreatwurm from "../pool/sarinth-greatwurm.js";
@@ -562,6 +565,7 @@ const shard: CardShard = {
     _poolDauthiJackal,
     _poolDecreeOfPain,
     _poolDinaEssenceBrewer,
+    _poolDireMimic,
     _poolDismissiveDenial,
     _poolDisruptorOfCurrents,
     _poolDisruptorWanderglyph,
@@ -734,6 +738,7 @@ const shard: CardShard = {
     _poolNoAdmittance,
     _poolNobleTemplar,
     _poolNorwoodRanger,
+    _poolNothic,
     _poolNoxiousToad,
     _poolObyrasAttendants,
     _poolOmnathLocusOfTheRoil,
@@ -782,6 +787,7 @@ const shard: CardShard = {
     _poolSHIELDHelicarrier,
     _poolSafeholdElite,
     _poolSaltfieldRecluse,
+    _poolSandAugury,
     _poolSaplingOfColfenor,
     _poolSapphireDragon,
     _poolSarinthGreatwurm,

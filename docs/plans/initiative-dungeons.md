@@ -1,6 +1,6 @@
 # The initiative and dungeons
 
-**Status:** decided, in progress (2026-10-19). Asked for by the user ("start looking into the
+**Status:** built (2026-10-19), but for the animation (section 6) and the three Forgotten Realms dungeons. Asked for by the user ("start looking into the
 client design for the initiative style cards") while the set walk reached Commander Legends:
 Battle for Baldur's Gate. The user's answers to the open questions are at the end; building
 starts with step 1.
@@ -183,6 +183,9 @@ defending. `bot-effect-knowledge.md` gets an entry; the gate and a decision-diff
    a gate scenario (`bot-effect-knowledge.md`). No decision-diff: no recorded position has the
    initiative.
 6. **Cards**: the 10 waiting and Baldur's Gate's ~21, then the walk carries on.
+   **Done 2026-10-19** (batch 104): 23 initiative cards in, with the `initiative` and
+   `completed-dungeon` conditions; Undercellar Sweep and Dungeon Delver wait on extensions of
+   their own, and the "venture into the dungeon" cards on the Forgotten Realms dungeons.
 
 ## Decisions (the user, 2026-10-19)
 

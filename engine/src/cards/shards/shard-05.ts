@@ -97,6 +97,7 @@ import _poolClapSnap from "../pool/clap-snap.js";
 import _poolCleaverRiot from "../pool/cleaver-riot.js";
 import _poolCliffhavenSellSword from "../pool/cliffhaven-sell-sword.js";
 import _poolClifftopLookout from "../pool/clifftop-lookout.js";
+import _poolClockworkFox from "../pool/clockwork-fox.js";
 import _poolCloudManta from "../pool/cloud-manta.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
@@ -152,6 +153,7 @@ import _poolFightOn from "../pool/fight-on.js";
 import _poolFiligreeSages from "../pool/filigree-sages.js";
 import _poolFinneasAceArcher from "../pool/finneas-ace-archer.js";
 import _poolFireNavyTrebuchet from "../pool/fire-navy-trebuchet.js";
+import _poolFlamingFistOfficer from "../pool/flaming-fist-officer.js";
 import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
@@ -182,6 +184,7 @@ import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
 import _poolGravespawnSovereign from "../pool/gravespawn-sovereign.js";
+import _poolGraySlaad from "../pool/gray-slaad.js";
 import _poolGreasefangOkibaBoss from "../pool/greasefang-okiba-boss.js";
 import _poolGreatHallOfTheCitadel from "../pool/great-hall-of-the-citadel.js";
 import _poolGreenwardenOfMurasa from "../pool/greenwarden-of-murasa.js";
@@ -271,6 +274,7 @@ import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
 import _poolMossMonster from "../pool/moss-monster.js";
+import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
@@ -318,6 +322,7 @@ import _poolRhonassMonument from "../pool/rhonass-monument.js";
 import _poolRiftBolt from "../pool/rift-bolt.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
+import _poolRobTheHoard from "../pool/rob-the-hoard.js";
 import _poolRodeoPyromancers from "../pool/rodeo-pyromancers.js";
 import _poolRooftopPercher from "../pool/rooftop-percher.js";
 import _poolRoothaMasteringTheMoment from "../pool/rootha-mastering-the-moment.js";
@@ -575,6 +580,7 @@ const shard: CardShard = {
     _poolCleaverRiot,
     _poolCliffhavenSellSword,
     _poolClifftopLookout,
+    _poolClockworkFox,
     _poolCloudManta,
     _poolCombatTutorial,
     _poolCompleteDisregard,
@@ -630,6 +636,7 @@ const shard: CardShard = {
     _poolFiligreeSages,
     _poolFinneasAceArcher,
     _poolFireNavyTrebuchet,
+    _poolFlamingFistOfficer,
     _poolFlawlessManeuver,
     _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
@@ -660,6 +667,7 @@ const shard: CardShard = {
     _poolGrappleWithThePast,
     _poolGrasslands,
     _poolGravespawnSovereign,
+    _poolGraySlaad,
     _poolGreasefangOkibaBoss,
     _poolGreatHallOfTheCitadel,
     _poolGreenwardenOfMurasa,
@@ -749,6 +757,7 @@ const shard: CardShard = {
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
     _poolMossMonster,
+    _poolMyconidSporeTender,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
     _poolNicoMinoruRunaway,
@@ -796,6 +805,7 @@ const shard: CardShard = {
     _poolRiftBolt,
     _poolRingOfTheLucii,
     _poolRisingOfTheDay,
+    _poolRobTheHoard,
     _poolRodeoPyromancers,
     _poolRooftopPercher,
     _poolRoothaMasteringTheMoment,

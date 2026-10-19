@@ -148,6 +148,7 @@ import _poolFontOfFertility from "../pool/font-of-fertility.js";
 import _poolFoodComa from "../pool/food-coma.js";
 import _poolFoodFight from "../pool/food-fight.js";
 import _poolForatog from "../pool/foratog.js";
+import _poolForktailSweep from "../pool/forktail-sweep.js";
 import _poolForsakenDrifters from "../pool/forsaken-drifters.js";
 import _poolFracture from "../pool/fracture.js";
 import _poolFranticStrength from "../pool/frantic-strength.js";
@@ -665,6 +666,7 @@ const shard: CardShard = {
     _poolFoodComa,
     _poolFoodFight,
     _poolForatog,
+    _poolForktailSweep,
     _poolForsakenDrifters,
     _poolFracture,
     _poolFranticStrength,

@@ -11,6 +11,7 @@ import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
+import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
 import _poolAmphinPathmage from "../pool/amphin-pathmage.js";
@@ -264,6 +265,7 @@ import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNyleasIntervention from "../pool/nyleas-intervention.js";
 import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
+import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
@@ -485,6 +487,7 @@ const shard: CardShard = {
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,
     _poolAlabornCavalier,
+    _poolAloraMerryThief,
     _poolAmaranthineWall,
     _poolAmbushViper,
     _poolAmphinPathmage,
@@ -738,6 +741,7 @@ const shard: CardShard = {
     _poolNyleasIntervention,
     _poolObyraDreamingDuelist,
     _poolOgreSentry,
+    _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
