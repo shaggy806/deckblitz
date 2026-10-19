@@ -2154,6 +2154,9 @@ const INTERVENING_IFS = {
   // Rule 702.166b: the permanent's spell was bargained.
   "if it was bargained,": { kind: "self-kicked" },
   "if ~ was bargained,": { kind: "self-kicked" },
+  // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
+  "if you have the initiative,": { kind: "initiative", who: "you" },
+  "if you've completed a dungeon,": { kind: "completed-dungeon" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the

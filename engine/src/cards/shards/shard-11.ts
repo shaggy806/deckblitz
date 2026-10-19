@@ -137,6 +137,7 @@ import _poolFanaticOfRhonas from "../pool/fanatic-of-rhonas.js";
 import _poolFaramirStewardOfGondor from "../pool/faramir-steward-of-gondor.js";
 import _poolFarhavenElf from "../pool/farhaven-elf.js";
 import _poolFetidGargantua from "../pool/fetid-gargantua.js";
+import _poolFeywildCaretaker from "../pool/feywild-caretaker.js";
 import _poolFiendArtisan from "../pool/fiend-artisan.js";
 import _poolFiendishPanda from "../pool/fiendish-panda.js";
 import _poolFieryIslet from "../pool/fiery-islet.js";
@@ -248,6 +249,7 @@ import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
 import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
 import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
+import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
@@ -652,6 +654,7 @@ const shard: CardShard = {
     _poolFaramirStewardOfGondor,
     _poolFarhavenElf,
     _poolFetidGargantua,
+    _poolFeywildCaretaker,
     _poolFiendArtisan,
     _poolFiendishPanda,
     _poolFieryIslet,
@@ -763,6 +766,7 @@ const shard: CardShard = {
     _poolLionHeart,
     _poolLlanowarVanguard,
     _poolLoamdraggerGiant,
+    _poolLootDispute,
     _poolLootTheKeyToEverything,
     _poolManaCylix,
     _poolMaraudingMako,

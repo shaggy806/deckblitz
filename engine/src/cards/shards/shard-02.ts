@@ -43,6 +43,7 @@ import _poolBleedingEffect from "../pool/bleeding-effect.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
+import _poolBloodboilSorcerer from "../pool/bloodboil-sorcerer.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
 import _poolBoonOfTheWishGiver from "../pool/boon-of-the-wish-giver.js";
@@ -499,6 +500,7 @@ const shard: CardShard = {
     _poolBlightMound,
     _poolBlightedBlackthorn,
     _poolBloodBurglar,
+    _poolBloodboilSorcerer,
     _poolBloodhunterBat,
     _poolBogWraith,
     _poolBoonOfTheWishGiver,

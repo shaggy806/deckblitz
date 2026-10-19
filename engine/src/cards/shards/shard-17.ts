@@ -140,6 +140,7 @@ import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
 import _poolFriendlyGhost from "../pool/friendly-ghost.js";
+import _poolFromTheCatacombs from "../pool/from-the-catacombs.js";
 import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
@@ -270,6 +271,7 @@ import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
+import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatronOfTheVein from "../pool/patron-of-the-vein.js";
 import _poolPeregrineDrake from "../pool/peregrine-drake.js";
@@ -612,6 +614,7 @@ const shard: CardShard = {
     _poolFoulmireKnight,
     _poolFowlStrike,
     _poolFriendlyGhost,
+    _poolFromTheCatacombs,
     _poolGaladrielsDismissal,
     _poolGallowsWarden,
     _poolGavonyTrapper,
@@ -742,6 +745,7 @@ const shard: CardShard = {
     _poolOutlawsFury,
     _poolOutriderOfJhess,
     _poolPaladinOfPredation,
+    _poolPassagewaySeer,
     _poolPathOfTheEnigma,
     _poolPatronOfTheVein,
     _poolPeregrineDrake,

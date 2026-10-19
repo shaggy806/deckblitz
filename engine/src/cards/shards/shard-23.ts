@@ -443,6 +443,7 @@ import _poolVanishingVerse from "../pool/vanishing-verse.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
+import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantKraken from "../pool/verdant-kraken.js";
 import _poolVeteransPowerblade from "../pool/veterans-powerblade.js";
 import _poolVibraniumEnergyDaggers from "../pool/vibranium-energy-daggers.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolVashtaNerada,
     _poolVeinRipper,
     _poolVelvetwingButterflies,
+    _poolVentureForth,
     _poolVerdantKraken,
     _poolVeteransPowerblade,
     _poolVibraniumEnergyDaggers,

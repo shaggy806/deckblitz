@@ -332,6 +332,7 @@ import _poolSalvationSwan from "../pool/salvation-swan.js";
 import _poolSandskitterOutrider from "../pool/sandskitter-outrider.js";
 import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js";
+import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolScorchingShot from "../pool/scorching-shot.js";
@@ -810,6 +811,7 @@ const shard: CardShard = {
     _poolSandskitterOutrider,
     _poolSanguineSyphoner,
     _poolSaradocMasterOfBuckland,
+    _poolSarevoksTome,
     _poolSarumansTrickery,
     _poolScarwoodGoblins,
     _poolScorchingShot,

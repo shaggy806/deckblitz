@@ -567,6 +567,12 @@ function evalStaticCondition(
       return condition.who === "you"
         ? state.monarch === you
         : state.monarch !== null && state.monarch !== you;
+    case "initiative": {
+      const holder = state.initiative ?? null;
+      return condition.who === "you" ? holder === you : holder !== null && holder !== you;
+    }
+    case "completed-dungeon":
+      return (state.players[you]?.completedDungeons?.length ?? 0) > 0;
     case "impending":
       // Rule 702.176a: cast for its impending cost, and a time counter on it.
       return source.castVia === "impending" && (source.counters.time ?? 0) > 0;

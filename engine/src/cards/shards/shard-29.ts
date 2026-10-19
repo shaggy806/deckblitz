@@ -127,6 +127,7 @@ import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
 import _poolEttercap from "../pool/ettercap.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
 import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
+import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
@@ -609,6 +610,7 @@ const shard: CardShard = {
     _poolEttercap,
     _poolExcommunicate,
     _poolExdeathVoidWarlock,
+    _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
     _poolEyeOfRamos,
     _poolFadeIntoAntiquity,

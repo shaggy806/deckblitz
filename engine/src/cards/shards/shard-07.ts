@@ -460,6 +460,7 @@ import _poolWeiAmbushForce from "../pool/wei-ambush-force.js";
 import _poolWelkinGuide from "../pool/welkin-guide.js";
 import _poolWernogRidersChaplain from "../pool/wernog-riders-chaplain.js";
 import _poolWhiptongueFrog from "../pool/whiptongue-frog.js";
+import _poolWhitePlumeAdventurer from "../pool/white-plume-adventurer.js";
 import _poolWickerfolkThresher from "../pool/wickerfolk-thresher.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolWelkinGuide,
     _poolWernogRidersChaplain,
     _poolWhiptongueFrog,
+    _poolWhitePlumeAdventurer,
     _poolWickerfolkThresher,
     _poolWildfireAwakener,
     _poolWillowDryad,

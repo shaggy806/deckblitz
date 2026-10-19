@@ -63,6 +63,7 @@ import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
 import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
 import _poolCatOwl from "../pool/cat-owl.js";
 import _poolCausticCaterpillar from "../pool/caustic-caterpillar.js";
+import _poolCavesOfChaosAdventurer from "../pool/caves-of-chaos-adventurer.js";
 import _poolCelestialColonnade from "../pool/celestial-colonnade.js";
 import _poolCentaurArcher from "../pool/centaur-archer.js";
 import _poolCentaurCourser from "../pool/centaur-courser.js";
@@ -166,6 +167,7 @@ import _poolGlisteningSphere from "../pool/glistening-sphere.js";
 import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
+import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
 import _poolGraveResearcher from "../pool/grave-researcher.js";
@@ -438,6 +440,7 @@ import _poolTwinSilkSpider from "../pool/twin-silk-spider.js";
 import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
 import _poolTwistedExperiment from "../pool/twisted-experiment.js";
 import _poolUlvenwaldMysteries from "../pool/ulvenwald-mysteries.js";
+import _poolUndermountainAdventurer from "../pool/undermountain-adventurer.js";
 import _poolUndyingMalice from "../pool/undying-malice.js";
 import _poolUnlivingLegionnaire from "../pool/unliving-legionnaire.js";
 import _poolUnmake from "../pool/unmake.js";
@@ -568,6 +571,7 @@ const shard: CardShard = {
     _poolCaseOfTheShiftingVisage,
     _poolCatOwl,
     _poolCausticCaterpillar,
+    _poolCavesOfChaosAdventurer,
     _poolCelestialColonnade,
     _poolCentaurArcher,
     _poolCentaurCourser,
@@ -671,6 +675,7 @@ const shard: CardShard = {
     _poolGlitterfang,
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
+    _poolGorionWiseMentor,
     _poolGrapeshot,
     _poolGraspOfDarkness,
     _poolGraveResearcher,
@@ -943,6 +948,7 @@ const shard: CardShard = {
     _poolTwinscrollShaman,
     _poolTwistedExperiment,
     _poolUlvenwaldMysteries,
+    _poolUndermountainAdventurer,
     _poolUndyingMalice,
     _poolUnlivingLegionnaire,
     _poolUnmake,

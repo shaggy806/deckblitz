@@ -122,6 +122,7 @@ import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
 import _poolDuneMover from "../pool/dune-mover.js";
+import _poolDungeoneersPack from "../pool/dungeoneers-pack.js";
 import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
@@ -348,6 +349,7 @@ import _poolRestoreRelic from "../pool/restore-relic.js";
 import _poolReturnOfTheMoleMan from "../pool/return-of-the-mole-man.js";
 import _poolReturnOfTheWildspeaker from "../pool/return-of-the-wildspeaker.js";
 import _poolReturnToBattle from "../pool/return-to-battle.js";
+import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
 import _poolRootwaterHunter from "../pool/rootwater-hunter.js";
 import _poolRoughshodDuo from "../pool/roughshod-duo.js";
@@ -443,6 +445,7 @@ import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVermiculos from "../pool/vermiculos.js";
 import _poolVialOfPoison from "../pool/vial-of-poison.js";
 import _poolVibrantCityscape from "../pool/vibrant-cityscape.js";
+import _poolViciousBattlerager from "../pool/vicious-battlerager.js";
 import _poolVineglimmerSnarl from "../pool/vineglimmer-snarl.js";
 import _poolVitoFanaticOfAclazotz from "../pool/vito-fanatic-of-aclazotz.js";
 import _poolVituGhaziTheCityTree from "../pool/vitu-ghazi-the-city-tree.js";
@@ -607,6 +610,7 @@ const shard: CardShard = {
     _poolDrillTooDeep,
     _poolDromokaWarrior,
     _poolDuneMover,
+    _poolDungeoneersPack,
     _poolEagleOfTheGreatShelf,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,
@@ -833,6 +837,7 @@ const shard: CardShard = {
     _poolReturnOfTheMoleMan,
     _poolReturnOfTheWildspeaker,
     _poolReturnToBattle,
+    _poolRilsaRaelKingpin,
     _poolRiteOfReplication,
     _poolRootwaterHunter,
     _poolRoughshodDuo,
@@ -928,6 +933,7 @@ const shard: CardShard = {
     _poolVermiculos,
     _poolVialOfPoison,
     _poolVibrantCityscape,
+    _poolViciousBattlerager,
     _poolVineglimmerSnarl,
     _poolVitoFanaticOfAclazotz,
     _poolVituGhaziTheCityTree,

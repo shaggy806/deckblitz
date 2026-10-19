@@ -648,6 +648,12 @@ export type StaticCondition =
   /** Who is the monarch (rule 720): you, or any opponent (Queen Marchesa's
    * "if an opponent is the monarch"). False while nobody is. */
   | { readonly kind: "monarch"; readonly who: "you" | "opponent" }
+  /** Who has the initiative (rule 726): you, or any opponent. False while
+   * nobody does. */
+  | { readonly kind: "initiative"; readonly who: "you" | "opponent" }
+  /** "If you've completed a dungeon" (rule 309.7): you've completed at least
+   * one this game. */
+  | { readonly kind: "completed-dungeon" }
   /** How many cards are in your hand, inclusive bounds (Flubs, the Fool: "if
    * you have no cards in hand" is `atMost: 0`; hellbent the same). */
   | {

@@ -1063,6 +1063,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("intervening ifs: 'if you have the initiative', 'if you've completed a dungeon'", () => {
+    const seer = face(
+      "At the beginning of your end step, if you have the initiative, put a +1/+1 counter on Test Card.",
+      "Creature — Tiefling Warlock",
+    );
+    expect(seer.triggered[0].condition).toEqual({ kind: "initiative", who: "you" });
+    expect(seer.complete).toBe(true);
+    const delver = face("At the beginning of your upkeep, if you've completed a dungeon, draw a card.", "Creature — Human");
+    expect(delver.triggered[0].condition).toEqual({ kind: "completed-dungeon" });
+    expect(delver.complete).toBe(true);
+  });
+
   it("read ahead (rule 702.155): the keyword line", () => {
     const saga = parseFace({
       name: "Test Saga",

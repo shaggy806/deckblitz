@@ -1016,6 +1016,10 @@ export type TriggerSpec =
        * opponent has more life than another of your opponents". See
        * {@link DefenderLife}. */
       readonly defenderLife?: DefenderLife;
+      /** The attacked player has the initiative as the attack is declared
+       * (rule 726) — Loot Dispute's "whenever you attack the player who has
+       * the initiative". Not asked again on resolution. */
+      readonly defenderHasInitiative?: boolean;
     }
   | {
       /** Exalted (rule 702.111a — needed-cards P15): a creature you control

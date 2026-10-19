@@ -18194,6 +18194,7 @@ export class Game {
           event.type === "player-attacked" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           this.matchesWhoPlayer(spec.defender, event.defender, self) &&
+          (spec.defenderHasInitiative !== true || this.state.initiative === event.defender) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
         );
