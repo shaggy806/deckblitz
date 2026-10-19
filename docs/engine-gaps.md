@@ -216,3 +216,24 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
+- **`canDispatch` passes a cast `dispatch` refuses.** For a spell with `targetCostReduction`
+  (Whack, Torch Breath, Knockout Blow, Out of the Way), `canDispatch` accepts a cast whose chosen
+  target doesn't earn the reduction when some other legal target would, and `dispatch` then
+  throws "cannot pay the cost" (rule 601.2f: the cost is locked in with the targets chosen).
+  `legalActions` offers the right targets, so only callers that trust `canDispatch` (the server's
+  pre-check, the harness's `castable`) are misled. Found by two SNC agents, 2026-10-19.
+- **`{ powerOf: n }` reads a target that just left in its new zone.** In a `choose-permanents`
+  `then`, a target returned to hand reads the card's printed power, not as it last existed on
+  the battlefield (608.2h) — First Responder got 3 counters from a Hill Giant with a +1/+1
+  counter. `{ thisWay: "returned-to-hand", sumOf: "power" }` reads it right.
+- **A trigger's top-level `trigger-object` condition is always false.** `characteristics.ts`
+  answers it only inside a `conditional` effect, so a card that puts it on the trigger never
+  triggers. Obscura Ascendancy uses a trigger `filter` plus a resolution `conditional`.
+- **`cast-now`'s `play` plays a land only from exile.** `whyCannotPlayLandNow` refuses a card
+  not in exile, so "you may play a land from the top of your library" (Ziatora's Envoy) can't
+  be written though the doc says any offered land.
+- **A debug entry's enters trigger waits a priority round.** `debugSpawn(..., { announceEntry:
+  true })` (the harness's `enter()`) made while a player holds priority leaves the trigger
+  pending through both players' priority; the step ends and it goes on the stack in the next
+  one. Rule 117.5 puts it on the stack as the next player receives priority. Real entries come
+  through `dispatch`, so this may be the debug path only — tests work around it.

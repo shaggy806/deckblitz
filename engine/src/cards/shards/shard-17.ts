@@ -55,6 +55,7 @@ import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
+import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCarrionLocust from "../pool/carrion-locust.js";
 import _poolCascadeBluffs from "../pool/cascade-bluffs.js";
 import _poolChainOfVapor from "../pool/chain-of-vapor.js";
@@ -122,6 +123,7 @@ import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
+import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
@@ -137,6 +139,7 @@ import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolFleetingFlight from "../pool/fleeting-flight.js";
 import _poolForerunnerOfTheLegion from "../pool/forerunner-of-the-legion.js";
+import _poolForgeBoss from "../pool/forge-boss.js";
 import _poolForlornFlats from "../pool/forlorn-flats.js";
 import _poolFoulmireKnight from "../pool/foulmire-knight.js";
 import _poolFowlStrike from "../pool/fowl-strike.js";
@@ -531,6 +534,7 @@ const shard: CardShard = {
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
+    _poolCapennaExpress,
     _poolCarrionLocust,
     _poolCascadeBluffs,
     _poolChainOfVapor,
@@ -598,6 +602,7 @@ const shard: CardShard = {
     _poolEmblemOfTheWarmind,
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
+    _poolExhibitionMagician,
     _poolExpelTheInterlopers,
     _poolFaebloomTrick,
     _poolFaerieVandal,
@@ -613,6 +618,7 @@ const shard: CardShard = {
     _poolFlameSpirit,
     _poolFleetingFlight,
     _poolForerunnerOfTheLegion,
+    _poolForgeBoss,
     _poolForlornFlats,
     _poolFoulmireKnight,
     _poolFowlStrike,

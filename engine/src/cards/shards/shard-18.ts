@@ -60,6 +60,7 @@ import _poolCastleDoom from "../pool/castle-doom.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
 import _poolCauldronFamiliar from "../pool/cauldron-familiar.js";
 import _poolCelestialArmor from "../pool/celestial-armor.js";
+import _poolCelestialRegulator from "../pool/celestial-regulator.js";
 import _poolChampionsOfThePerfect from "../pool/champions-of-the-perfect.js";
 import _poolChangeOfPlans from "../pool/change-of-plans.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
@@ -235,6 +236,7 @@ import _poolMaelstromNexus from "../pool/maelstrom-nexus.js";
 import _poolMagitekInfantry from "../pool/magitek-infantry.js";
 import _poolMagnigothSentry from "../pool/magnigoth-sentry.js";
 import _poolMagnusTheRed from "../pool/magnus-the-red.js";
+import _poolMakeDisappear from "../pool/make-disappear.js";
 import _poolMalametScythe from "../pool/malamet-scythe.js";
 import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
@@ -361,6 +363,7 @@ import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulTether from "../pool/soul-tether.js";
 import _poolSpawnbinderMage from "../pool/spawnbinder-mage.js";
+import _poolSpeakeasyServer from "../pool/speakeasy-server.js";
 import _poolSpectrumSentinel from "../pool/spectrum-sentinel.js";
 import _poolSpellbookVendor from "../pool/spellbook-vendor.js";
 import _poolSpellkeeperWeird from "../pool/spellkeeper-weird.js";
@@ -443,6 +446,7 @@ import _poolValkyrieHarbinger from "../pool/valkyrie-harbinger.js";
 import _poolVampireSpawn from "../pool/vampire-spawn.js";
 import _poolVastwoodThicket from "../pool/vastwood-thicket.js";
 import _poolVedalkenDismisser from "../pool/vedalken-dismisser.js";
+import _poolVenomConnoisseur from "../pool/venom-connoisseur.js";
 import _poolVestigeOfEmrakul from "../pool/vestige-of-emrakul.js";
 import _poolViashinoPyromancer from "../pool/viashino-pyromancer.js";
 import _poolViashinoRunner from "../pool/viashino-runner.js";
@@ -567,6 +571,7 @@ const shard: CardShard = {
     _poolCatharticAdept,
     _poolCauldronFamiliar,
     _poolCelestialArmor,
+    _poolCelestialRegulator,
     _poolChampionsOfThePerfect,
     _poolChangeOfPlans,
     _poolChillingScreech,
@@ -742,6 +747,7 @@ const shard: CardShard = {
     _poolMagitekInfantry,
     _poolMagnigothSentry,
     _poolMagnusTheRed,
+    _poolMakeDisappear,
     _poolMalametScythe,
     _poolManaVault,
     _poolManholeCover,
@@ -868,6 +874,7 @@ const shard: CardShard = {
     _poolSorinImperiousBloodlord,
     _poolSoulTether,
     _poolSpawnbinderMage,
+    _poolSpeakeasyServer,
     _poolSpectrumSentinel,
     _poolSpellbookVendor,
     _poolSpellkeeperWeird,
@@ -950,6 +957,7 @@ const shard: CardShard = {
     _poolVampireSpawn,
     _poolVastwoodThicket,
     _poolVedalkenDismisser,
+    _poolVenomConnoisseur,
     _poolVestigeOfEmrakul,
     _poolViashinoPyromancer,
     _poolViashinoRunner,

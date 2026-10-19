@@ -58,6 +58,7 @@ import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
 import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
 import _poolBuoyancy from "../pool/buoyancy.js";
 import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
+import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
@@ -457,6 +458,7 @@ import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnderTheSkin from "../pool/under-the-skin.js";
 import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
+import _poolUnleashTheInferno from "../pool/unleash-the-inferno.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
@@ -570,6 +572,7 @@ const shard: CardShard = {
     _poolBroodmateDragon,
     _poolBuoyancy,
     _poolButchDeloriaTunnelSnake,
+    _poolCabarettiCharm,
     _poolCaelornaCoralTyrant,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
@@ -969,6 +972,7 @@ const shard: CardShard = {
     _poolUncoverTheMoonLetters,
     _poolUnderTheSkin,
     _poolUndercoverSkrull,
+    _poolUnleashTheInferno,
     _poolUnsubtleMockery,
     _poolUrborgDrake,
     _poolUrzaPrinceOfKroog,

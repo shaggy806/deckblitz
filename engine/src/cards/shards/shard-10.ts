@@ -239,6 +239,7 @@ import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
+import _poolMajesticMetamorphosis from "../pool/majestic-metamorphosis.js";
 import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
 import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
@@ -321,6 +322,8 @@ import _poolRiotSpikes from "../pool/riot-spikes.js";
 import _poolRipjawRaptor from "../pool/ripjaw-raptor.js";
 import _poolRiverchurnMonument from "../pool/riverchurn-monument.js";
 import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
+import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
+import _poolRobTheArchives from "../pool/rob-the-archives.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
@@ -729,6 +732,7 @@ const shard: CardShard = {
     _poolLyraDawnbringer,
     _poolMagistratesScepter,
     _poolMajaBretagardProtector,
+    _poolMajesticMetamorphosis,
     _poolMalametBattleGlyph,
     _poolManglehorn,
     _poolManifoldKey,
@@ -811,6 +815,8 @@ const shard: CardShard = {
     _poolRipjawRaptor,
     _poolRiverchurnMonument,
     _poolRiverwalkTechnique,
+    _poolRiveteersDecoy,
+    _poolRobTheArchives,
     _poolRollRollRollRoll,
     _poolRootManipulation,
     _poolRotatingFireplace,

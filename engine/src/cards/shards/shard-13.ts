@@ -113,6 +113,7 @@ import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
 import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
+import _poolDigUpTheBody from "../pool/dig-up-the-body.js";
 import _poolDimensionalExile from "../pool/dimensional-exile.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
@@ -594,6 +595,7 @@ const shard: CardShard = {
     _poolDesperateLunge,
     _poolDestroyEvil,
     _poolDiabolicEdict,
+    _poolDigUpTheBody,
     _poolDimensionalExile,
     _poolDivergentEquation,
     _poolDoctorDoomUnrivaled,

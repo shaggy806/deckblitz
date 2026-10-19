@@ -8015,6 +8015,146 @@
   "effect:double-toughness-each": {
    "family": "effect:double-power-each",
    "example": "Rasaad yn Bashir"
+  },
+  "effect:goad-trigger-object": {
+   "family": "effect:goad-extensions",
+   "example": "Kros, Defense Contractor"
+  },
+  "effect:remove-counter-chosen-kind": {
+   "family": "decision:choose-counter-kind",
+   "example": "Sanctuary Warden"
+  },
+  "amount:counter-kinds-among": {
+   "family": "condition:counter-kinds-among-permanents",
+   "example": "Perrie, the Pulverizer"
+  },
+  "effect:control-while-condition": {
+   "family": "effect:control-change-extensions",
+   "example": "Shield Broker"
+  },
+  "trigger:attacks-your-opponent": {
+   "family": "condition:attacking-an-opponent-filter",
+   "example": "Skyboon Evangelist"
+  },
+  "effect:delayed-trigger-next-main-phase-this-turn": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Vivien's Stampede"
+  },
+  "trigger:player-becomes-target": {
+   "family": "trigger:becomes-target-fixes",
+   "example": "Parnesse, the Subtle Brush"
+  },
+  "effect:copy-spell-for-other-player": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Parnesse, the Subtle Brush"
+  },
+  "keyword:casualty-x": {
+   "family": "keyword:casualty",
+   "example": "Ob Nixilis, the Adversary"
+  },
+  "trigger:discards-batch-objects": {
+   "family": "trigger:discards-extensions",
+   "example": "Toluz, Clever Conductor"
+  },
+  "effect:counter-per-kind-among": {
+   "family": "effect:amount-counters-on-object",
+   "example": "Exotic Pets"
+  },
+  "condition:source-dealt-combat-damage-to-player-this-turn": {
+   "family": "condition:combat-damage-by-filter-this-turn",
+   "example": "Wave of Rats"
+  },
+  "effect:exile-may-cast-until-your-next-turn": {
+   "family": "effect:until-end-of-your-next-turn",
+   "example": "Cryptic Pursuit"
+  },
+  "condition:distinct-mana-values-in-graveyard": {
+   "family": "effect:count-distinct-mana-values",
+   "example": "Aven Heartstabber"
+  },
+  "trigger:first-draw-in-your-draw-step": {
+   "family": "mechanic:draw-during-opponents-draw-step",
+   "example": "Wiretapping"
+  },
+  "filter:dealt-noncombat-damage-this-turn": {
+   "family": "stat:noncombat-damage-taken-this-turn",
+   "example": "Grisly Sigil"
+  },
+  "condition:creature-card-left-graveyard-this-turn": {
+   "family": "condition:card-left-graveyard-condition",
+   "example": "Syrix, Carrier of the Flame"
+  },
+  "effect:gain-control-chosen-by-trigger-controller": {
+   "family": "effect:control-change-extensions",
+   "example": "Turf War"
+  },
+  "static:play-from-exile-once-each-turn": {
+   "family": "stat:do-this-once-each-turn",
+   "example": "Evelyn, the Covetous"
+  },
+  "effect:target-creature-blocking-source": {
+   "family": "effect:target-spec-additions",
+   "example": "Arc Spitter"
+  },
+  "zone:impulse-play-only-one": {
+   "family": "zone:impulse-permission-options",
+   "example": "Unlucky Witness"
+  },
+  "effect:must-attack-controllers-next-combat": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Sizzling Soloist"
+  },
+  "effect:grant-until-exiled-card-cast": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Glamorous Outlaw"
+  },
+  "effect:cast-now-play-land-from-library": {
+   "family": "decision:free-cast-choices",
+   "example": "Ziatora's Envoy"
+  },
+  "effect:owner-of-target-player-ref": {
+   "family": "effect:target-spec-additions",
+   "example": "Audacious Swap"
+  },
+  "filter:color-count-amount": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Evolving Door"
+  },
+  "trigger:activates-ability-mana-from": {
+   "family": "trigger:activates-ability",
+   "example": "Vazi, Keen Negotiator"
+  },
+  "amount:colors-spent-to-activate": {
+   "family": "stat:mana-spent-to-cast",
+   "example": "Paragon of Modernity"
+  },
+  "deck:circle-colors-at-deck-construction": {
+   "family": "deck:copy-limit-exception",
+   "example": "Cryptic Spires"
+  },
+  "condition:filter-fought-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "Boxing Ring"
+  },
+  "static:escapes-with-ability": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Skyway Robber"
+  },
+  "effect:return-with-counters-this-way": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "Lagrella, the Magpie"
+  },
+  "cost:graveyard-permission-sacrifice-beside-own": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Maestros Ascendancy"
+  },
+  "stat:mana-spent-to-activate-from": {
+   "family": "stat:mana-spent-to-cast",
+   "example": "Jetmir's Fixer"
+  },
+  "cost:alt-cost-spend-only-treasure-mana": {
+   "family": "cost:mana-spending-rules",
+   "example": "Security Rhox"
   }
  }
 }

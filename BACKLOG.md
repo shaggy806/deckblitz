@@ -99,9 +99,10 @@ section keeps only what to do next.
   batch 101 the rest of The Brothers' War; batch 102 the rest of Warhammer 40,000 Commander, with
   domain and read ahead built for Dominaria United; batch 103 the rest of Dominaria United and its
   Commander set; batch 104 the rest of Commander Legends: Battle for Baldur's Gate, on the
-  initiative, dungeons and venturing — `docs/plans/initiative-dungeons.md`); **next, Double
-  Masters 2022's one card and New Capenna Commander** (NCC — `npm run cards:sets -w engine --
-  --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
+  initiative, dungeons and venturing — `docs/plans/initiative-dungeons.md`; batch 105 Streets of
+  New Capenna and its Commander set, on shield counters); **next, Kamigawa: Neon Dynasty and its
+  Commander set** (NEO, NEC — `npm run cards:sets -w engine -- --next 60`), then Innistrad:
+  Crimson Vow. The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
   the Oubliette's three distinct sacrifices) still hold the cards that "venture into the dungeon"
   (Nadaar, Acererak, Sefris, Radiant Solar — `mechanic:dungeon`).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
@@ -165,6 +166,11 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **`canDispatch` passes a cast `dispatch` refuses** (601.2f): a spell with a target-based cost reduction (Whack, Torch Breath) checks as payable when *another* target would earn the reduction.
+- **`{ powerOf: n }` reads a target that just left in its new zone** (608.2h): a `choose-permanents` `then` target returned to hand reads the card, not last-known (First Responder used `thisWay` + `sumOf`).
+- **A trigger's top-level `trigger-object` condition is always false**: it only works inside a `conditional` (Obscura Ascendancy used a filter plus a resolution check).
+- **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.
+- **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.

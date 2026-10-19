@@ -207,6 +207,7 @@ import _poolLetsPlayAGame from "../pool/lets-play-a-game.js";
 import _poolLeylineTyrant from "../pool/leyline-tyrant.js";
 import _poolLieutenantKirtar from "../pool/lieutenant-kirtar.js";
 import _poolLifegift from "../pool/lifegift.js";
+import _poolLightEmUp from "../pool/light-em-up.js";
 import _poolLightPawsEmperorsVoice from "../pool/light-paws-emperors-voice.js";
 import _poolLightwheelEnhancements from "../pool/lightwheel-enhancements.js";
 import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
@@ -249,6 +250,7 @@ import _poolMonkGyatso from "../pool/monk-gyatso.js";
 import _poolMoonBlessedCleric from "../pool/moon-blessed-cleric.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
+import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
@@ -309,6 +311,7 @@ import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
 import _poolRiverHeraldGuide from "../pool/river-herald-guide.js";
+import _poolRiveteersCharm from "../pool/riveteers-charm.js";
 import _poolRockyTarPit from "../pool/rocky-tar-pit.js";
 import _poolRoomOfRefuge from "../pool/room-of-refuge.js";
 import _poolRottingFensnake from "../pool/rotting-fensnake.js";
@@ -348,6 +351,7 @@ import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
+import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
 import _poolSolemnRecruit from "../pool/solemn-recruit.js";
 import _poolSoulFeast from "../pool/soul-feast.js";
@@ -465,6 +469,7 @@ import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
 import _tokensTyranidWarriorToken from "../tokens/tyranid-warrior-token.js";
 import _tokensVibraniumToken from "../tokens/vibranium-token.js";
+import _tokensWizardTokenMagesAttendant from "../tokens/wizard-token-mages-attendant.js";
 import _tokensXXGolemToken from "../tokens/x-x-golem-token.js";
 
 const shard: CardShard = {
@@ -673,6 +678,7 @@ const shard: CardShard = {
     _poolLeylineTyrant,
     _poolLieutenantKirtar,
     _poolLifegift,
+    _poolLightEmUp,
     _poolLightPawsEmperorsVoice,
     _poolLightwheelEnhancements,
     _poolLilianasDevotee,
@@ -715,6 +721,7 @@ const shard: CardShard = {
     _poolMoonBlessedCleric,
     _poolMorcantsEyes,
     _poolMountainGoat,
+    _poolMrOrfeoTheBoulder,
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
     _poolMysticOfTheHiddenWay,
@@ -775,6 +782,7 @@ const shard: CardShard = {
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
     _poolRiverHeraldGuide,
+    _poolRiveteersCharm,
     _poolRockyTarPit,
     _poolRoomOfRefuge,
     _poolRottingFensnake,
@@ -814,6 +822,7 @@ const shard: CardShard = {
     _poolSkyhunterStrikeForce,
     _poolSliceFromTheShadows,
     _poolSmolderingSpires,
+    _poolSmugglersBuggy,
     _poolSnowCoveredSwamp,
     _poolSolemnRecruit,
     _poolSoulFeast,
@@ -933,6 +942,7 @@ const shard: CardShard = {
     _tokensTheTigerGod,
     _tokensTyranidWarriorToken,
     _tokensVibraniumToken,
+    _tokensWizardTokenMagesAttendant,
     _tokensXXGolemToken,
   ],
 };

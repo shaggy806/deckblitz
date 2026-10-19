@@ -154,6 +154,7 @@ import _poolFerociousCharge from "../pool/ferocious-charge.js";
 import _poolFinalRevels from "../pool/final-revels.js";
 import _poolFireDrake from "../pool/fire-drake.js";
 import _poolFireUrchin from "../pool/fire-urchin.js";
+import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
 import _poolForensicGadgeteer from "../pool/forensic-gadgeteer.js";
@@ -260,6 +261,7 @@ import _poolLuckyThePizzaDog from "../pool/lucky-the-pizza-dog.js";
 import _poolLumberingFalls from "../pool/lumbering-falls.js";
 import _poolLuminollusk from "../pool/luminollusk.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
+import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolMartialCoup from "../pool/martial-coup.js";
@@ -268,6 +270,7 @@ import _poolMemnite from "../pool/memnite.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
 import _poolMeteorCrater from "../pool/meteor-crater.js";
+import _poolMetropolisAngel from "../pool/metropolis-angel.js";
 import _poolMidnightReaper from "../pool/midnight-reaper.js";
 import _poolMilitantMonk from "../pool/militant-monk.js";
 import _poolMindStone from "../pool/mind-stone.js";
@@ -504,6 +507,7 @@ import _poolZuranOrb from "../pool/zuran-orb.js";
 import _tokensAshayaTheAwokenWorld from "../tokens/ashaya-the-awoken-world.js";
 import _tokensCatWarriorToken from "../tokens/cat-warrior-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-rhys-the-redeemed.js";
+import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-lackey.js";
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
@@ -669,6 +673,7 @@ const shard: CardShard = {
     _poolFinalRevels,
     _poolFireDrake,
     _poolFireUrchin,
+    _poolFlawlessForgery,
     _poolFledglingMawcor,
     _poolFlickACoin,
     _poolForensicGadgeteer,
@@ -775,6 +780,7 @@ const shard: CardShard = {
     _poolLumberingFalls,
     _poolLuminollusk,
     _poolMaelstromArchangel,
+    _poolMagesAttendant,
     _poolMagetasBoon,
     _poolMalakirCullblade,
     _poolMartialCoup,
@@ -783,6 +789,7 @@ const shard: CardShard = {
     _poolMercurialGeists,
     _poolMesaFalcon,
     _poolMeteorCrater,
+    _poolMetropolisAngel,
     _poolMidnightReaper,
     _poolMilitantMonk,
     _poolMindStone,
@@ -1021,6 +1028,7 @@ const shard: CardShard = {
     _tokensAshayaTheAwokenWorld,
     _tokensCatWarriorToken,
     _tokensElfWarriorTokenRhysTheRedeemed,
+    _tokensFishTokenExpendableLackey,
     _tokensFoodToken,
     _tokensHorrorToken,
     _tokensJellyfishToken,

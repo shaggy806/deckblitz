@@ -55,6 +55,7 @@ import _poolBuriedAlive from "../pool/buried-alive.js";
 import _poolBurningFields from "../pool/burning-fields.js";
 import _poolCacklingSlasher from "../pool/cackling-slasher.js";
 import _poolCadaverImp from "../pool/cadaver-imp.js";
+import _poolCaldaiaStrongarm from "../pool/caldaia-strongarm.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
 import _poolCaseOfTheCrimsonPulse from "../pool/case-of-the-crimson-pulse.js";
@@ -146,6 +147,7 @@ import _poolFlightOfFancy from "../pool/flight-of-fancy.js";
 import _poolFloriferousVinewall from "../pool/floriferous-vinewall.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
+import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
@@ -214,6 +216,7 @@ import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
+import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKessigWolf from "../pool/kessig-wolf.js";
 import _poolKnightLuminary from "../pool/knight-luminary.js";
@@ -319,6 +322,7 @@ import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
+import _poolRoguesGallery from "../pool/rogues-gallery.js";
 import _poolRomanaIi from "../pool/romana-ii.js";
 import _poolRuinsOfTrokair from "../pool/ruins-of-trokair.js";
 import _poolRunedServitor from "../pool/runed-servitor.js";
@@ -419,6 +423,7 @@ import _poolThrottle from "../pool/throttle.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
+import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
@@ -446,6 +451,7 @@ import _poolVigorbloomAnnex from "../pool/vigorbloom-annex.js";
 import _poolVillainousHideout from "../pool/villainous-hideout.js";
 import _poolVindictiveFlamestoker from "../pool/vindictive-flamestoker.js";
 import _poolVirtueOfCourage from "../pool/virtue-of-courage.js";
+import _poolVivienOnTheHunt from "../pool/vivien-on-the-hunt.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
@@ -478,6 +484,7 @@ import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-
 import _tokensIcyManalithToken from "../tokens/icy-manalith-token.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
 import _tokensMerfolkTokenDeeprootWaters from "../tokens/merfolk-token-deeproot-waters.js";
+import _tokensOgreWarriorToken from "../tokens/ogre-warrior-token.js";
 import _tokensPhyrexianHorrorTokenPhyrexianRebirth from "../tokens/phyrexian-horror-token-phyrexian-rebirth.js";
 import _tokensPhyrexianHydraTokenLifelink from "../tokens/phyrexian-hydra-token-lifelink.js";
 import _tokensRatToken from "../tokens/rat-token.js";
@@ -540,6 +547,7 @@ const shard: CardShard = {
     _poolBurningFields,
     _poolCacklingSlasher,
     _poolCadaverImp,
+    _poolCaldaiaStrongarm,
     _poolCanyonCrawler,
     _poolCaretakersTalent,
     _poolCaseOfTheCrimsonPulse,
@@ -631,6 +639,7 @@ const shard: CardShard = {
     _poolFloriferousVinewall,
     _poolFocusFire,
     _poolFoeRazerRegent,
+    _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolFoulRebirth,
     _poolFracturedSanity,
@@ -699,6 +708,7 @@ const shard: CardShard = {
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
+    _poolKamizObscuraOculus,
     _poolKazanduNectarpot,
     _poolKessigWolf,
     _poolKnightLuminary,
@@ -804,6 +814,7 @@ const shard: CardShard = {
     _poolRingwraiths,
     _poolRiverSneak,
     _poolRobeOfStars,
+    _poolRoguesGallery,
     _poolRomanaIi,
     _poolRuinsOfTrokair,
     _poolRunedServitor,
@@ -904,6 +915,7 @@ const shard: CardShard = {
     _poolTigerDillo,
     _poolTimeWalk,
     _poolTorWauki,
+    _poolTorchBreath,
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolTuknirDeathlock,
@@ -931,6 +943,7 @@ const shard: CardShard = {
     _poolVillainousHideout,
     _poolVindictiveFlamestoker,
     _poolVirtueOfCourage,
+    _poolVivienOnTheHunt,
     _poolVoicelessSpirit,
     _poolVoloGuideToMonsters,
     _poolVotaryOfTheConclave,
@@ -965,6 +978,7 @@ const shard: CardShard = {
     _tokensIcyManalithToken,
     _tokensImpTokenJudith,
     _tokensMerfolkTokenDeeprootWaters,
+    _tokensOgreWarriorToken,
     _tokensPhyrexianHorrorTokenPhyrexianRebirth,
     _tokensPhyrexianHydraTokenLifelink,
     _tokensRatToken,

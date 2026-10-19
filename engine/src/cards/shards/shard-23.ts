@@ -198,6 +198,7 @@ import _poolIcatianPriest from "../pool/icatian-priest.js";
 import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
+import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
@@ -262,6 +263,7 @@ import _poolMindsDesire from "../pool/minds-desire.js";
 import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
+import _poolMisfortuneTeller from "../pool/misfortune-teller.js";
 import _poolMnemonicWall from "../pool/mnemonic-wall.js";
 import _poolMoiraAndTeshar from "../pool/moira-and-teshar.js";
 import _poolMomentOfTruth from "../pool/moment-of-truth.js";
@@ -281,6 +283,7 @@ import _poolNightMarket from "../pool/night-market.js";
 import _poolNighthowlPursuer from "../pool/nighthowl-pursuer.js";
 import _poolNyxLotus from "../pool/nyx-lotus.js";
 import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
+import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOrdruunMentor from "../pool/ordruun-mentor.js";
@@ -288,6 +291,7 @@ import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
+import _poolParkHeightsMaverick from "../pool/park-heights-maverick.js";
 import _poolPassengerFerry from "../pool/passenger-ferry.js";
 import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
@@ -310,6 +314,7 @@ import _poolPromptoArgentum from "../pool/prompto-argentum.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
 import _poolPurphorosBronzeBlooded from "../pool/purphoros-bronze-blooded.js";
+import _poolPyreSledgeArsonist from "../pool/pyre-sledge-arsonist.js";
 import _poolPython from "../pool/python.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
@@ -465,6 +470,7 @@ import _poolWarpedLandscape from "../pool/warped-landscape.js";
 import _poolWatcherForTomorrow from "../pool/watcher-for-tomorrow.js";
 import _poolWaterTribeRallier from "../pool/water-tribe-rallier.js";
 import _poolWebWarriors from "../pool/web-warriors.js";
+import _poolWhack from "../pool/whack.js";
 import _poolWhiteTigerAmuletKeeper from "../pool/white-tiger-amulet-keeper.js";
 import _poolWilderlandScrounger from "../pool/wilderland-scrounger.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
@@ -685,6 +691,7 @@ const shard: CardShard = {
     _poolIdyllicTutor,
     _poolIgneousCur,
     _poolImmolatingGlare,
+    _poolIncandescentAria,
     _poolIncitedRabble,
     _poolIncurableOgre,
     _poolIronLadDivergingDestiny,
@@ -749,6 +756,7 @@ const shard: CardShard = {
     _poolMinionMissile,
     _poolMinotaurRoxxonCeo,
     _poolMireShade,
+    _poolMisfortuneTeller,
     _poolMnemonicWall,
     _poolMoiraAndTeshar,
     _poolMomentOfTruth,
@@ -768,6 +776,7 @@ const shard: CardShard = {
     _poolNighthowlPursuer,
     _poolNyxLotus,
     _poolObNixilisReignited,
+    _poolObscuraCharm,
     _poolOhranFrostfang,
     _poolOmenOfTheForge,
     _poolOrdruunMentor,
@@ -775,6 +784,7 @@ const shard: CardShard = {
     _poolOvergrownFarmland,
     _poolOxidize,
     _poolPainfulQuandary,
+    _poolParkHeightsMaverick,
     _poolPassengerFerry,
     _poolPerigeeBeckoner,
     _poolPhlageTitanOfFiresFury,
@@ -797,6 +807,7 @@ const shard: CardShard = {
     _poolProtectorOfGondor,
     _poolPuppetCrafting,
     _poolPurphorosBronzeBlooded,
+    _poolPyreSledgeArsonist,
     _poolPython,
     _poolRainOfFilth,
     _poolRaiseThePalisade,
@@ -952,6 +963,7 @@ const shard: CardShard = {
     _poolWatcherForTomorrow,
     _poolWaterTribeRallier,
     _poolWebWarriors,
+    _poolWhack,
     _poolWhiteTigerAmuletKeeper,
     _poolWilderlandScrounger,
     _poolWindriderEel,

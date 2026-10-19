@@ -193,6 +193,7 @@ import _poolKeeperOfTheQuietHour from "../pool/keeper-of-the-quiet-hour.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
 import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
+import _poolKnockoutBlow from "../pool/knockout-blow.js";
 import _poolKoalaSheep from "../pool/koala-sheep.js";
 import _poolKolaghansCommand from "../pool/kolaghans-command.js";
 import _poolKonstrariCharm from "../pool/konstrari-charm.js";
@@ -211,6 +212,7 @@ import _poolLoxodonMystic from "../pool/loxodon-mystic.js";
 import _poolLoyalDrake from "../pool/loyal-drake.js";
 import _poolLukeCagePowerMan from "../pool/luke-cage-power-man.js";
 import _poolLurchingRotbeast from "../pool/lurching-rotbeast.js";
+import _poolLuxuriousLibation from "../pool/luxurious-libation.js";
 import _poolMachinesmithAutomaton from "../pool/machinesmith-automaton.js";
 import _poolMahadiEmporiumMaster from "../pool/mahadi-emporium-master.js";
 import _poolMakindiMesas from "../pool/makindi-mesas.js";
@@ -319,6 +321,7 @@ import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
+import _poolSinisterConcierge from "../pool/sinister-concierge.js";
 import _poolSkinwing from "../pool/skinwing.js";
 import _poolSkullOfOrm from "../pool/skull-of-orm.js";
 import _poolSkullbriarTheWalkingGrave from "../pool/skullbriar-the-walking-grave.js";
@@ -635,6 +638,7 @@ const shard: CardShard = {
     _poolKilnWalker,
     _poolKnightOfTheStampede,
     _poolKnightPaladin,
+    _poolKnockoutBlow,
     _poolKoalaSheep,
     _poolKolaghansCommand,
     _poolKonstrariCharm,
@@ -653,6 +657,7 @@ const shard: CardShard = {
     _poolLoyalDrake,
     _poolLukeCagePowerMan,
     _poolLurchingRotbeast,
+    _poolLuxuriousLibation,
     _poolMachinesmithAutomaton,
     _poolMahadiEmporiumMaster,
     _poolMakindiMesas,
@@ -761,6 +766,7 @@ const shard: CardShard = {
     _poolShopkeepersBane,
     _poolSilkweaverElite,
     _poolSilverbackShaman,
+    _poolSinisterConcierge,
     _poolSkinwing,
     _poolSkullOfOrm,
     _poolSkullbriarTheWalkingGrave,

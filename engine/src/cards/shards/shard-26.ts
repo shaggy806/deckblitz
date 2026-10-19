@@ -45,6 +45,7 @@ import _poolBatteringKrasis from "../pool/battering-krasis.js";
 import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
+import _poolBellowingMauler from "../pool/bellowing-mauler.js";
 import _poolBlackWidowDaringOperative from "../pool/black-widow-daring-operative.js";
 import _poolBlessedWine from "../pool/blessed-wine.js";
 import _poolBogSmugglers from "../pool/bog-smugglers.js";
@@ -89,6 +90,7 @@ import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
+import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
@@ -227,6 +229,7 @@ import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
+import _poolMaestrosDiabolist from "../pool/maestros-diabolist.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
 import _poolMagickedCard from "../pool/magicked-card.js";
 import _poolMagneticSnuffler from "../pool/magnetic-snuffler.js";
@@ -519,6 +522,7 @@ const shard: CardShard = {
     _poolBeastieBeatdown,
     _poolBedlam,
     _poolBefuddle,
+    _poolBellowingMauler,
     _poolBlackWidowDaringOperative,
     _poolBlessedWine,
     _poolBogSmugglers,
@@ -563,6 +567,7 @@ const shard: CardShard = {
     _poolCurseOfTheRestlessDead,
     _poolCutIn,
     _poolDargoTheShipwrecker,
+    _poolDarlingOfTheMasses,
     _poolDauthiJackal,
     _poolDecreeOfPain,
     _poolDinaEssenceBrewer,
@@ -701,6 +706,7 @@ const shard: CardShard = {
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
     _poolMaelstromColossus,
+    _poolMaestrosDiabolist,
     _poolMaestrosTheater,
     _poolMagickedCard,
     _poolMagneticSnuffler,

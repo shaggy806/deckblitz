@@ -71,6 +71,7 @@ import _poolBurnBurnTreeAndFern from "../pool/burn-burn-tree-and-fern.js";
 import _poolBurnoutBashtronaut from "../pool/burnout-bashtronaut.js";
 import _poolBushmasterCoiledHenchman from "../pool/bushmaster-coiled-henchman.js";
 import _poolCacophonyScamp from "../pool/cacophony-scamp.js";
+import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
@@ -119,6 +120,7 @@ import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
+import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolEshkiDragonclaw from "../pool/eshki-dragonclaw.js";
 import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolExclude from "../pool/exclude.js";
@@ -146,6 +148,7 @@ import _poolForgottenAncient from "../pool/forgotten-ancient.js";
 import _poolForsakenMiner from "../pool/forsaken-miner.js";
 import _poolForumNecroscribe from "../pool/forum-necroscribe.js";
 import _poolFranticFirebolt from "../pool/frantic-firebolt.js";
+import _poolFreelanceMuscle from "../pool/freelance-muscle.js";
 import _poolFrilledSeaSerpent from "../pool/frilled-sea-serpent.js";
 import _poolFrontPorchSentries from "../pool/front-porch-sentries.js";
 import _poolFuriousAssault from "../pool/furious-assault.js";
@@ -328,6 +331,7 @@ import _poolRestorationGearsmith from "../pool/restoration-gearsmith.js";
 import _poolRetrofittedTransmogrant from "../pool/retrofitted-transmogrant.js";
 import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
+import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
@@ -555,6 +559,7 @@ const shard: CardShard = {
     _poolBurnoutBashtronaut,
     _poolBushmasterCoiledHenchman,
     _poolCacophonyScamp,
+    _poolCaldaiaGuardian,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,
@@ -603,6 +608,7 @@ const shard: CardShard = {
     _poolEmberheartChallenger,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
+    _poolErrantStreetArtist,
     _poolEshkiDragonclaw,
     _poolEvolutionCharm,
     _poolExclude,
@@ -630,6 +636,7 @@ const shard: CardShard = {
     _poolForsakenMiner,
     _poolForumNecroscribe,
     _poolFranticFirebolt,
+    _poolFreelanceMuscle,
     _poolFrilledSeaSerpent,
     _poolFrontPorchSentries,
     _poolFuriousAssault,
@@ -812,6 +819,7 @@ const shard: CardShard = {
     _poolRetrofittedTransmogrant,
     _poolRidgetopRaptor,
     _poolRiteOfTheDragoncaller,
+    _poolRiveteersRequisitioner,
     _poolRockfaceVillage,
     _poolRootwiseSurvivor,
     _poolRubbleSlinger,

@@ -38,6 +38,7 @@ import _poolBelligerentRegisaur from "../pool/belligerent-regisaur.js";
 import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
+import _poolBessSoulNourisher from "../pool/bess-soul-nourisher.js";
 import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
@@ -53,6 +54,7 @@ import _poolBoomerangBasics from "../pool/boomerang-basics.js";
 import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
+import _poolBrazenUpstart from "../pool/brazen-upstart.js";
 import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
 import _poolBruvacTheGrandiloquent from "../pool/bruvac-the-grandiloquent.js";
 import _poolBulwarkGiant from "../pool/bulwark-giant.js";
@@ -194,6 +196,7 @@ import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
+import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
@@ -237,6 +240,7 @@ import _poolManifoldMouse from "../pool/manifold-mouse.js";
 import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
+import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
@@ -330,6 +334,7 @@ import _poolSavageGorilla from "../pool/savage-gorilla.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
 import _poolScaledNurturer from "../pool/scaled-nurturer.js";
 import _poolScalestormSummoner from "../pool/scalestorm-summoner.js";
+import _poolScepterOfCelebration from "../pool/scepter-of-celebration.js";
 import _poolScepterOfInsight from "../pool/scepter-of-insight.js";
 import _poolScionOfCalamity from "../pool/scion-of-calamity.js";
 import _poolScorchingSpear from "../pool/scorching-spear.js";
@@ -517,6 +522,7 @@ const shard: CardShard = {
     _poolBellowingBruiser,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
+    _poolBessSoulNourisher,
     _poolBessieTheDoctorsRoadster,
     _poolBifurMelodicRider,
     _poolBigApple3AM,
@@ -532,6 +538,7 @@ const shard: CardShard = {
     _poolBoonBringerValkyrie,
     _poolBottomlessPit,
     _poolBountifulPromenade,
+    _poolBrazenUpstart,
     _poolBroodbirthViper,
     _poolBruvacTheGrandiloquent,
     _poolBulwarkGiant,
@@ -673,6 +680,7 @@ const shard: CardShard = {
     _poolHigureTheStillWind,
     _poolHoardingOgre,
     _poolHonestRutstein,
+    _poolHostileTakeover,
     _poolHourOfReckoning,
     _poolHowlingGalefang,
     _poolHypnoticGrifter,
@@ -716,6 +724,7 @@ const shard: CardShard = {
     _poolMarduBanner,
     _poolMaritimeGuard,
     _poolMarkedByHonor,
+    _poolMayhemPatrol,
     _poolMeetingOfMinds,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
@@ -809,6 +818,7 @@ const shard: CardShard = {
     _poolSawInHalf,
     _poolScaledNurturer,
     _poolScalestormSummoner,
+    _poolScepterOfCelebration,
     _poolScepterOfInsight,
     _poolScionOfCalamity,
     _poolScorchingSpear,

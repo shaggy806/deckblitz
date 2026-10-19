@@ -68,6 +68,7 @@ import _poolBuriedTreasure from "../pool/buried-treasure.js";
 import _poolBurlyBreaker from "../pool/burly-breaker.js";
 import _poolBushwhack from "../pool/bushwhack.js";
 import _poolButcherGhoul from "../pool/butcher-ghoul.js";
+import _poolCabarettiAscendancy from "../pool/cabaretti-ascendancy.js";
 import _poolCadaverousKnight from "../pool/cadaverous-knight.js";
 import _poolCadiraCallerOfTheSmall from "../pool/cadira-caller-of-the-small.js";
 import _poolCallerOfThePack from "../pool/caller-of-the-pack.js";
@@ -81,6 +82,7 @@ import _poolCaseOfTheGorgonsKiss from "../pool/case-of-the-gorgons-kiss.js";
 import _poolCastleArdenvale from "../pool/castle-ardenvale.js";
 import _poolCatharticParting from "../pool/cathartic-parting.js";
 import _poolCentaurVinecrasher from "../pool/centaur-vinecrasher.js";
+import _poolCeremonialGroundbreaker from "../pool/ceremonial-groundbreaker.js";
 import _poolCeruleanWyvern from "../pool/cerulean-wyvern.js";
 import _poolChampionOfTheParish from "../pool/champion-of-the-parish.js";
 import _poolChargingGriffin from "../pool/charging-griffin.js";
@@ -92,6 +94,7 @@ import _poolChronicleOfVictory from "../pool/chronicle-of-victory.js";
 import _poolChronomaton from "../pool/chronomaton.js";
 import _poolCitywatchSphinx from "../pool/citywatch-sphinx.js";
 import _poolCivicGardener from "../pool/civic-gardener.js";
+import _poolCivilServant from "../pool/civil-servant.js";
 import _poolClammyProwler from "../pool/clammy-prowler.js";
 import _poolClapSnap from "../pool/clap-snap.js";
 import _poolCleaverRiot from "../pool/cleaver-riot.js";
@@ -135,6 +138,7 @@ import _poolDwarvenBlastminer from "../pool/dwarven-blastminer.js";
 import _poolDwarvenForgeChanter from "../pool/dwarven-forge-chanter.js";
 import _poolDwynenGiltLeafDaen from "../pool/dwynen-gilt-leaf-daen.js";
 import _poolEasyPickings from "../pool/easy-pickings.js";
+import _poolElegantEntourage from "../pool/elegant-entourage.js";
 import _poolElfhamePalace from "../pool/elfhame-palace.js";
 import _poolEliteJavelineer from "../pool/elite-javelineer.js";
 import _poolElvenChorus from "../pool/elven-chorus.js";
@@ -274,6 +278,7 @@ import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
 import _poolMossMonster from "../pool/moss-monster.js";
+import _poolMostWanted from "../pool/most-wanted.js";
 import _poolMyconidSporeTender from "../pool/myconid-spore-tender.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
@@ -370,6 +375,7 @@ import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
 import _poolSnapcasterMage from "../pool/snapcaster-mage.js";
 import _poolSolRing from "../pool/sol-ring.js";
 import _poolSongOfTheWorldsoul from "../pool/song-of-the-worldsoul.js";
+import _poolSoulOfEmancipation from "../pool/soul-of-emancipation.js";
 import _poolSoulbrightSeeker from "../pool/soulbright-seeker.js";
 import _poolSovereignsBite from "../pool/sovereigns-bite.js";
 import _poolSparkReaper from "../pool/spark-reaper.js";
@@ -551,6 +557,7 @@ const shard: CardShard = {
     _poolBurlyBreaker,
     _poolBushwhack,
     _poolButcherGhoul,
+    _poolCabarettiAscendancy,
     _poolCadaverousKnight,
     _poolCadiraCallerOfTheSmall,
     _poolCallerOfThePack,
@@ -564,6 +571,7 @@ const shard: CardShard = {
     _poolCastleArdenvale,
     _poolCatharticParting,
     _poolCentaurVinecrasher,
+    _poolCeremonialGroundbreaker,
     _poolCeruleanWyvern,
     _poolChampionOfTheParish,
     _poolChargingGriffin,
@@ -575,6 +583,7 @@ const shard: CardShard = {
     _poolChronomaton,
     _poolCitywatchSphinx,
     _poolCivicGardener,
+    _poolCivilServant,
     _poolClammyProwler,
     _poolClapSnap,
     _poolCleaverRiot,
@@ -618,6 +627,7 @@ const shard: CardShard = {
     _poolDwarvenForgeChanter,
     _poolDwynenGiltLeafDaen,
     _poolEasyPickings,
+    _poolElegantEntourage,
     _poolElfhamePalace,
     _poolEliteJavelineer,
     _poolElvenChorus,
@@ -757,6 +767,7 @@ const shard: CardShard = {
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
     _poolMossMonster,
+    _poolMostWanted,
     _poolMyconidSporeTender,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
@@ -853,6 +864,7 @@ const shard: CardShard = {
     _poolSnapcasterMage,
     _poolSolRing,
     _poolSongOfTheWorldsoul,
+    _poolSoulOfEmancipation,
     _poolSoulbrightSeeker,
     _poolSovereignsBite,
     _poolSparkReaper,

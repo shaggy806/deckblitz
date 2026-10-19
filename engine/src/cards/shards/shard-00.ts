@@ -289,11 +289,13 @@ import _poolNimblewrightSchematic from "../pool/nimblewright-schematic.js";
 import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
+import _poolOminousParcel from "../pool/ominous-parcel.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
+import _poolOutOfTheWay from "../pool/out-of-the-way.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
 import _poolOwlFamiliar from "../pool/owl-familiar.js";
 import _poolOzoxTheClatteringKing from "../pool/ozox-the-clattering-king.js";
@@ -801,11 +803,13 @@ const shard: CardShard = {
     _poolNyleasForerunner,
     _poolOinTheBrave,
     _poolOmegaHeartlessEvolution,
+    _poolOminousParcel,
     _poolOpenTheGraves,
     _poolOpulentPalace,
     _poolOraxid,
     _poolOriginOfMetalbending,
     _poolOsgoodOperationDouble,
+    _poolOutOfTheWay,
     _poolOutrageousRobbery,
     _poolOwlFamiliar,
     _poolOzoxTheClatteringKing,

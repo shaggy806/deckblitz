@@ -190,6 +190,7 @@ import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
 import _poolHyraxTowerScout from "../pool/hyrax-tower-scout.js";
+import _poolIlluminatorVirtuoso from "../pool/illuminator-virtuoso.js";
 import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
@@ -651,6 +652,7 @@ const shard: CardShard = {
     _poolHonorWornShaku,
     _poolHurloonShaman,
     _poolHyraxTowerScout,
+    _poolIlluminatorVirtuoso,
     _poolImpulsivity,
     _poolIndomitableArchangel,
     _poolInfectiousHost,

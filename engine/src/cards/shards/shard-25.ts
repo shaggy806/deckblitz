@@ -46,6 +46,7 @@ import _poolBlazingVolley from "../pool/blazing-volley.js";
 import _poolBlisteringDieflyn from "../pool/blistering-dieflyn.js";
 import _poolBloodlineKeeper from "../pool/bloodline-keeper.js";
 import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
+import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
@@ -200,6 +201,7 @@ import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js
 import _poolHydrosurge from "../pool/hydrosurge.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
+import _poolIllicitShipment from "../pool/illicit-shipment.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
 import _poolImpendingFlux from "../pool/impending-flux.js";
 import _poolImplementsOfSacrifice from "../pool/implements-of-sacrifice.js";
@@ -274,6 +276,7 @@ import _poolNoggleRobber from "../pool/noggle-robber.js";
 import _poolNoriTellerOfTales from "../pool/nori-teller-of-tales.js";
 import _poolNorwoodArchers from "../pool/norwood-archers.js";
 import _poolNyxbornSeaguard from "../pool/nyxborn-seaguard.js";
+import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
@@ -285,6 +288,7 @@ import _poolOrnithopter from "../pool/ornithopter.js";
 import _poolOrthionHeroOfLavabrink from "../pool/orthion-hero-of-lavabrink.js";
 import _poolOrthodoxyEnforcer from "../pool/orthodoxy-enforcer.js";
 import _poolOscorpResearchTeam from "../pool/oscorp-research-team.js";
+import _poolParkHeightsPegasus from "../pool/park-heights-pegasus.js";
 import _poolPelargirSurvivor from "../pool/pelargir-survivor.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
@@ -363,6 +367,7 @@ import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSimicRagworm from "../pool/simic-ragworm.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
+import _poolSkyCrier from "../pool/sky-crier.js";
 import _poolSkystreakEngineer from "../pool/skystreak-engineer.js";
 import _poolSkywardSpider from "../pool/skyward-spider.js";
 import _poolSlayersStronghold from "../pool/slayers-stronghold.js";
@@ -523,6 +528,7 @@ const shard: CardShard = {
     _poolBlisteringDieflyn,
     _poolBloodlineKeeper,
     _poolBloodlustInciter,
+    _poolBodyLaunderer,
     _poolBrambleWurm,
     _poolBrambleguardCaptain,
     _poolBranchOfBoseiju,
@@ -677,6 +683,7 @@ const shard: CardShard = {
     _poolHydrosurge,
     _poolIgneousGolem,
     _poolIhsansShade,
+    _poolIllicitShipment,
     _poolIllvoiGaleblade,
     _poolImpendingFlux,
     _poolImplementsOfSacrifice,
@@ -751,6 +758,7 @@ const shard: CardShard = {
     _poolNoriTellerOfTales,
     _poolNorwoodArchers,
     _poolNyxbornSeaguard,
+    _poolObscuraAscendancy,
     _poolOldGrowthGrove,
     _poolOmashuCity,
     _poolOnduKnotmaster,
@@ -762,6 +770,7 @@ const shard: CardShard = {
     _poolOrthionHeroOfLavabrink,
     _poolOrthodoxyEnforcer,
     _poolOscorpResearchTeam,
+    _poolParkHeightsPegasus,
     _poolPelargirSurvivor,
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
@@ -840,6 +849,7 @@ const shard: CardShard = {
     _poolSimicRagworm,
     _poolSirensRuse,
     _poolSkullclamp,
+    _poolSkyCrier,
     _poolSkystreakEngineer,
     _poolSkywardSpider,
     _poolSlayersStronghold,

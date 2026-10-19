@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolALittleChat from "../pool/a-little-chat.js";
 import _poolAberrant from "../pool/aberrant.js";
 import _poolAbsorbVis from "../pool/absorb-vis.js";
 import _poolAeronautsWings from "../pool/aeronauts-wings.js";
@@ -425,6 +426,7 @@ import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrzasCave from "../pool/urzas-cave.js";
 import _poolUrzasIncubator from "../pool/urzas-incubator.js";
 import _poolVampireNighthawk from "../pool/vampire-nighthawk.js";
+import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
 import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
@@ -470,6 +472,7 @@ import _tokensWallTokenRammasEchorAncientShield from "../tokens/wall-token-ramma
 
 const shard: CardShard = {
   pool: [
+    _poolALittleChat,
     _poolAberrant,
     _poolAbsorbVis,
     _poolAeronautsWings,
@@ -892,6 +895,7 @@ const shard: CardShard = {
     _poolUrzasCave,
     _poolUrzasIncubator,
     _poolVampireNighthawk,
+    _poolVampireScrivener,
     _poolVanguardOfTheRose,
     _poolVengefulVillagers,
     _poolVeteranArmorsmith,

@@ -238,6 +238,7 @@ import _poolKellansLightblades from "../pool/kellans-lightblades.js";
 import _poolKiteShield from "../pool/kite-shield.js";
 import _poolKitesail from "../pool/kitesail.js";
 import _poolKithkinDaggerdare from "../pool/kithkin-daggerdare.js";
+import _poolKittKantoMayhemDiva from "../pool/kitt-kanto-mayhem-diva.js";
 import _poolKjeldoranOutrider from "../pool/kjeldoran-outrider.js";
 import _poolKodamaOfTheEastTree from "../pool/kodama-of-the-east-tree.js";
 import _poolKorlessaScaleSinger from "../pool/korlessa-scale-singer.js";
@@ -289,6 +290,7 @@ import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
+import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
@@ -718,6 +720,7 @@ const shard: CardShard = {
     _poolKiteShield,
     _poolKitesail,
     _poolKithkinDaggerdare,
+    _poolKittKantoMayhemDiva,
     _poolKjeldoranOutrider,
     _poolKodamaOfTheEastTree,
     _poolKorlessaScaleSinger,
@@ -769,6 +772,7 @@ const shard: CardShard = {
     _poolNimReplica,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
+    _poolObscuraInterceptor,
     _poolOkaunEyeOfChaos,
     _poolOltecMatterweaver,
     _poolOmenspeaker,

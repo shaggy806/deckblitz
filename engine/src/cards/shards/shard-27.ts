@@ -16,6 +16,7 @@ import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
+import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnvilwroughtRaptor from "../pool/anvilwrought-raptor.js";
@@ -134,6 +135,7 @@ import _poolExpedite from "../pool/expedite.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
+import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFellMire from "../pool/fell-mire.js";
 import _poolFeralInvocation from "../pool/feral-invocation.js";
 import _poolFieryFall from "../pool/fiery-fall.js";
@@ -505,6 +507,7 @@ const shard: CardShard = {
     _poolAltarsReap,
     _poolAmbushWolf,
     _poolAmuletOfVigor,
+    _poolAngelicSleuth,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
     _poolAnvilwroughtRaptor,
@@ -623,6 +626,7 @@ const shard: CardShard = {
     _poolExtremisElite,
     _poolFaerieSlumberParty,
     _poolFalseDefeat,
+    _poolFatalGrudge,
     _poolFellMire,
     _poolFeralInvocation,
     _poolFieryFall,

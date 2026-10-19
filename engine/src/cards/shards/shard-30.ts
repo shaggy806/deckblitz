@@ -147,6 +147,7 @@ import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExplorersCache from "../pool/explorers-cache.js";
 import _poolExuberantFuseling from "../pool/exuberant-fuseling.js";
 import _poolFallowEarth from "../pool/fallow-earth.js";
+import _poolFalseFloor from "../pool/false-floor.js";
 import _poolFangGuardian from "../pool/fang-guardian.js";
 import _poolFangOfShigeki from "../pool/fang-of-shigeki.js";
 import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
@@ -178,6 +179,7 @@ import _poolGalufsFinalAct from "../pool/galufs-final-act.js";
 import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
+import _poolGatheringThrong from "../pool/gathering-throng.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
@@ -289,6 +291,7 @@ import _poolMessengerFalcons from "../pool/messenger-falcons.js";
 import _poolMetalhead from "../pool/metalhead.js";
 import _poolMetastaticEvangel from "../pool/metastatic-evangel.js";
 import _poolMetropolisSprite from "../pool/metropolis-sprite.js";
+import _poolMezzioMugger from "../pool/mezzio-mugger.js";
 import _poolMikaeusTheLunarch from "../pool/mikaeus-the-lunarch.js";
 import _poolMindsEye from "../pool/minds-eye.js";
 import _poolMirkwoodMeditator from "../pool/mirkwood-meditator.js";
@@ -329,6 +332,7 @@ import _poolPantherWarriors from "../pool/panther-warriors.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
+import _poolPlasmaJockey from "../pool/plasma-jockey.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPollutedDead from "../pool/polluted-dead.js";
 import _poolPolygoyf from "../pool/polygoyf.js";
@@ -337,6 +341,7 @@ import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolPterafractyl from "../pool/pterafractyl.js";
+import _poolPugnaciousPugilist from "../pool/pugnacious-pugilist.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
 import _poolRakdosPatronOfChaos from "../pool/rakdos-patron-of-chaos.js";
@@ -388,6 +393,7 @@ import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
+import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
@@ -638,6 +644,7 @@ const shard: CardShard = {
     _poolExplorersCache,
     _poolExuberantFuseling,
     _poolFallowEarth,
+    _poolFalseFloor,
     _poolFangGuardian,
     _poolFangOfShigeki,
     _poolFearsomeGoblinPair,
@@ -669,6 +676,7 @@ const shard: CardShard = {
     _poolGandalfSparkStarter,
     _poolGargadon,
     _poolGarrukPrimalHunter,
+    _poolGatheringThrong,
     _poolGimlisRecklessMight,
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
@@ -780,6 +788,7 @@ const shard: CardShard = {
     _poolMetalhead,
     _poolMetastaticEvangel,
     _poolMetropolisSprite,
+    _poolMezzioMugger,
     _poolMikaeusTheLunarch,
     _poolMindsEye,
     _poolMirkwoodMeditator,
@@ -820,6 +829,7 @@ const shard: CardShard = {
     _poolPhantasmalShieldback,
     _poolPiaDeterminedRebuilder,
     _poolPiousWayfarer,
+    _poolPlasmaJockey,
     _poolPlazaOfHeroes,
     _poolPollutedDead,
     _poolPolygoyf,
@@ -828,6 +838,7 @@ const shard: CardShard = {
     _poolPresumedDead,
     _poolPropellerPioneer,
     _poolPterafractyl,
+    _poolPugnaciousPugilist,
     _poolPumpkinBombardment,
     _poolPurpleCrystalCrab,
     _poolRakdosPatronOfChaos,
@@ -879,6 +890,7 @@ const shard: CardShard = {
     _poolSouthernAirTemple,
     _poolSpawningKraken,
     _poolSpectralHuntCaller,
+    _poolSpellbindingSoprano,
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,

@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Streets of New Capenna, New Capenna Commander and Double Masters 2022, all whole** (batch
+  105): their last 213 cards, 107 authored, with shield counters built (rule 122.1c) and 17
+  cards on them — 10 in the set and 7 older ones (Captain America, Super-Soldier, Titan of
+  Industry, Diamond City…) — and 96 blocked (2026-10-19).
 - **Commander Legends: Battle for Baldur's Gate, whole** (batch 104): its last 167 cards, 95
   authored (the initiative's 23 — Aarakocra Sneak, Rilsa Rael, Sarevok's Tome, Tomb of Horrors
   Adventurer, Loot Dispute, From the Catacombs… — on dungeons, venturing, the initiative and

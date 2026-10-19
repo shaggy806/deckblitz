@@ -113,6 +113,7 @@ import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
+import _poolExtractTheTruth from "../pool/extract-the-truth.js";
 import _poolEyesOfGitaxias from "../pool/eyes-of-gitaxias.js";
 import _poolFabricate from "../pool/fabricate.js";
 import _poolFaerieBladecrafter from "../pool/faerie-bladecrafter.js";
@@ -238,6 +239,7 @@ import _poolManaConfluence from "../pool/mana-confluence.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMawcor from "../pool/mawcor.js";
+import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
@@ -584,6 +586,7 @@ const shard: CardShard = {
     _poolEngineRat,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
+    _poolExtractTheTruth,
     _poolEyesOfGitaxias,
     _poolFabricate,
     _poolFaerieBladecrafter,
@@ -709,6 +712,7 @@ const shard: CardShard = {
     _poolMarneusCalgar,
     _poolMasterHealer,
     _poolMawcor,
+    _poolMeetingOfTheFive,
     _poolMemnarchTheWarden,
     _poolMentalNote,
     _poolMindfulBiomancer,

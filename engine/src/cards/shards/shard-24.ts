@@ -233,6 +233,7 @@ import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.
 import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLotusguardDisciple from "../pool/lotusguard-disciple.js";
 import _poolLumberknot from "../pool/lumberknot.js";
+import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
@@ -300,6 +301,7 @@ import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
+import _poolRooftopNuisance from "../pool/rooftop-nuisance.js";
 import _poolRootwaterDiver from "../pool/rootwater-diver.js";
 import _poolRotcrownGhoul from "../pool/rotcrown-ghoul.js";
 import _poolRoxxonBrutes from "../pool/roxxon-brutes.js";
@@ -693,6 +695,7 @@ const shard: CardShard = {
     _poolLotusPetal,
     _poolLotusguardDisciple,
     _poolLumberknot,
+    _poolMaestrosCharm,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
     _poolMausoleumGuard,
@@ -760,6 +763,7 @@ const shard: CardShard = {
     _poolRoccoCabarettiCaterer,
     _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
+    _poolRooftopNuisance,
     _poolRootwaterDiver,
     _poolRotcrownGhoul,
     _poolRoxxonBrutes,

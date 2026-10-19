@@ -173,6 +173,7 @@ import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
 import _poolGimliOfTheGlitteringCaves from "../pool/gimli-of-the-glittering-caves.js";
+import _poolGirderGoons from "../pool/girder-goons.js";
 import _poolGlacialFloodplain from "../pool/glacial-floodplain.js";
 import _poolGlacialStalker from "../pool/glacial-stalker.js";
 import _poolGlamerGifter from "../pool/glamer-gifter.js";
@@ -346,6 +347,7 @@ import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
+import _poolRevelationOfPower from "../pool/revelation-of-power.js";
 import _poolReverentHowl from "../pool/reverent-howl.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
@@ -691,6 +693,7 @@ const shard: CardShard = {
     _poolGerminateRecruits,
     _poolGildedSentinel,
     _poolGimliOfTheGlitteringCaves,
+    _poolGirderGoons,
     _poolGlacialFloodplain,
     _poolGlacialStalker,
     _poolGlamerGifter,
@@ -864,6 +867,7 @@ const shard: CardShard = {
     _poolRestrictedOffice,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,
+    _poolRevelationOfPower,
     _poolReverentHowl,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,

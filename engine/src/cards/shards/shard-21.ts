@@ -31,6 +31,7 @@ import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.j
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
 import _poolBalaGedSanctuary from "../pool/bala-ged-sanctuary.js";
 import _poolBallistaSquad from "../pool/ballista-squad.js";
+import _poolBallroomBrawlers from "../pool/ballroom-brawlers.js";
 import _poolBanditsHaul from "../pool/bandits-haul.js";
 import _poolBaneOfProgress from "../pool/bane-of-progress.js";
 import _poolBattlewingMystic from "../pool/battlewing-mystic.js";
@@ -52,6 +53,7 @@ import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
+import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
 import _poolCadricSoulKindler from "../pool/cadric-soul-kindler.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
@@ -288,6 +290,7 @@ import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
+import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
 import _poolRakshasaDebaser from "../pool/rakshasa-debaser.js";
@@ -305,6 +308,7 @@ import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
+import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
@@ -481,6 +485,7 @@ const shard: CardShard = {
     _poolAzoriusCharm,
     _poolBalaGedSanctuary,
     _poolBallistaSquad,
+    _poolBallroomBrawlers,
     _poolBanditsHaul,
     _poolBaneOfProgress,
     _poolBattlewingMystic,
@@ -502,6 +507,7 @@ const shard: CardShard = {
     _poolBronzeWalrus,
     _poolBugenhagenWiseElder,
     _poolBurstOfSpeed,
+    _poolBuyYourSilence,
     _poolCacklingFiend,
     _poolCadricSoulKindler,
     _poolCanonizedInBlood,
@@ -738,6 +744,7 @@ const shard: CardShard = {
     _poolProctorsGaze,
     _poolPromisingVein,
     _poolPyreHound,
+    _poolQuickDrawDagger,
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
     _poolRakshasaDebaser,
@@ -755,6 +762,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
+    _poolRunOutOfTown,
     _poolRunawayBoulder,
     _poolRustwingFalcon,
     _poolSandstoneBridge,

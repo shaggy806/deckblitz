@@ -73,14 +73,17 @@ import _poolChocoSeekerOfParadise from "../pool/choco-seeker-of-paradise.js";
 import _poolChromeProwler from "../pool/chrome-prowler.js";
 import _poolCircuitousRoute from "../pool/circuitous-route.js";
 import _poolCitadelOfPain from "../pool/citadel-of-pain.js";
+import _poolCleanupCrew from "../pool/cleanup-crew.js";
 import _poolClickslither from "../pool/clickslither.js";
 import _poolCloudPirates from "../pool/cloud-pirates.js";
 import _poolCloudcrownOak from "../pool/cloudcrown-oak.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConsumingAetherborn from "../pool/consuming-aetherborn.js";
 import _poolCreepingTarPit from "../pool/creeping-tar-pit.js";
+import _poolCrewCaptain from "../pool/crew-captain.js";
 import _poolCrossoverCollaboration from "../pool/crossover-collaboration.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
+import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
 import _poolDawnrayArcher from "../pool/dawnray-archer.js";
@@ -90,6 +93,7 @@ import _poolDeadlyBrew from "../pool/deadly-brew.js";
 import _poolDedicatedCommons from "../pool/dedicated-commons.js";
 import _poolDemonWall from "../pool/demon-wall.js";
 import _poolDemonicTutor from "../pool/demonic-tutor.js";
+import _poolDemonsDue from "../pool/demons-due.js";
 import _poolDerelictAttic from "../pool/derelict-attic.js";
 import _poolDesertersDisciple from "../pool/deserters-disciple.js";
 import _poolDestinySpinner from "../pool/destiny-spinner.js";
@@ -205,6 +209,7 @@ import _poolJeskaiSage from "../pool/jeskai-sage.js";
 import _poolJeskaiWindscout from "../pool/jeskai-windscout.js";
 import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
+import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
@@ -464,6 +469,7 @@ import _tokensNinjaTokenDarkLeoShredder from "../tokens/ninja-token-dark-leo-shr
 import _tokensPhyrexianGolemToken from "../tokens/phyrexian-golem-token.js";
 import _tokensPhyrexianMyrTokenMyrSire from "../tokens/phyrexian-myr-token-myr-sire.js";
 import _tokensRobotTokenFlying from "../tokens/robot-token-flying.js";
+import _tokensRogueToken from "../tokens/rogue-token.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
 import _tokensVampireToken from "../tokens/vampire-token.js";
 import _tokensWurmToken66 from "../tokens/wurm-token-6-6.js";
@@ -542,14 +548,17 @@ const shard: CardShard = {
     _poolChromeProwler,
     _poolCircuitousRoute,
     _poolCitadelOfPain,
+    _poolCleanupCrew,
     _poolClickslither,
     _poolCloudPirates,
     _poolCloudcrownOak,
     _poolConciliatorsDuelist,
     _poolConsumingAetherborn,
     _poolCreepingTarPit,
+    _poolCrewCaptain,
     _poolCrossoverCollaboration,
     _poolCrystalSlipper,
+    _poolCutOfTheProfits,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
     _poolDawnrayArcher,
@@ -559,6 +568,7 @@ const shard: CardShard = {
     _poolDedicatedCommons,
     _poolDemonWall,
     _poolDemonicTutor,
+    _poolDemonsDue,
     _poolDerelictAttic,
     _poolDesertersDisciple,
     _poolDestinySpinner,
@@ -674,6 +684,7 @@ const shard: CardShard = {
     _poolJeskaiWindscout,
     _poolJessicaJonesPrivateEye,
     _poolJodahArchmageEternal,
+    _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
     _poolJuriMasterOfTheRevue,
     _poolKarlachFuryOfAvernus,
@@ -935,6 +946,7 @@ const shard: CardShard = {
     _tokensPhyrexianGolemToken,
     _tokensPhyrexianMyrTokenMyrSire,
     _tokensRobotTokenFlying,
+    _tokensRogueToken,
     _tokensSoldierTokenFinaleOfGlory,
     _tokensVampireToken,
     _tokensWurmToken66,

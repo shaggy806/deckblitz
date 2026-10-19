@@ -92,6 +92,7 @@ import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
+import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
@@ -330,6 +331,7 @@ import _poolQuilledSlagwurm from "../pool/quilled-slagwurm.js";
 import _poolRadiantGrove from "../pool/radiant-grove.js";
 import _poolRadiantSummit from "../pool/radiant-summit.js";
 import _poolRaffCapashenShipsMage from "../pool/raff-capashen-ships-mage.js";
+import _poolRaffinesSilencer from "../pool/raffines-silencer.js";
 import _poolRailwayBrawler from "../pool/railway-brawler.js";
 import _poolRakdosSignet from "../pool/rakdos-signet.js";
 import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
@@ -337,6 +339,7 @@ import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRazorSwine from "../pool/razor-swine.js";
 import _poolRecumbentBliss from "../pool/recumbent-bliss.js";
+import _poolRefuseToYield from "../pool/refuse-to-yield.js";
 import _poolRendclawTrow from "../pool/rendclaw-trow.js";
 import _poolRepulsorBots from "../pool/repulsor-bots.js";
 import _poolRevelsongHorn from "../pool/revelsong-horn.js";
@@ -610,6 +613,7 @@ const shard: CardShard = {
     _poolCordialVampire,
     _poolCorpulentCorpse,
     _poolCounterpoint,
+    _poolCrashTheParty,
     _poolCrashTheRamparts,
     _poolCripplingFear,
     _poolCrystallineCrawler,
@@ -848,6 +852,7 @@ const shard: CardShard = {
     _poolRadiantGrove,
     _poolRadiantSummit,
     _poolRaffCapashenShipsMage,
+    _poolRaffinesSilencer,
     _poolRailwayBrawler,
     _poolRakdosSignet,
     _poolRallyTheRanks,
@@ -855,6 +860,7 @@ const shard: CardShard = {
     _poolRavineRaider,
     _poolRazorSwine,
     _poolRecumbentBliss,
+    _poolRefuseToYield,
     _poolRendclawTrow,
     _poolRepulsorBots,
     _poolRevelsongHorn,

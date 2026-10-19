@@ -125,6 +125,7 @@ import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
+import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFleshBurrower from "../pool/flesh-burrower.js";
 import _poolFlourishingBloomKin from "../pool/flourishing-bloom-kin.js";
@@ -295,6 +296,7 @@ import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
+import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
 import _poolPyreheartWolf from "../pool/pyreheart-wolf.js";
 import _poolPyromanticPilgrim from "../pool/pyromantic-pilgrim.js";
 import _poolRakdosTheMuscle from "../pool/rakdos-the-muscle.js";
@@ -470,6 +472,7 @@ import _poolWolfwillowHaven from "../pool/wolfwillow-haven.js";
 import _poolWoodfallPrimus from "../pool/woodfall-primus.js";
 import _poolWoodlandStream from "../pool/woodland-stream.js";
 import _poolWoodlotCrawler from "../pool/woodlot-crawler.js";
+import _poolWorkshopWarchief from "../pool/workshop-warchief.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
 import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
 import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
@@ -627,6 +630,7 @@ const shard: CardShard = {
     _poolFieryIntervention,
     _poolFinFangFoom,
     _poolFinalWordPhantom,
+    _poolFirstResponder,
     _poolFlamebornViron,
     _poolFleshBurrower,
     _poolFlourishingBloomKin,
@@ -797,6 +801,7 @@ const shard: CardShard = {
     _poolPrizePig,
     _poolProtectiveParents,
     _poolProvisionsMerchant,
+    _poolPsychicPickpocket,
     _poolPyreheartWolf,
     _poolPyromanticPilgrim,
     _poolRakdosTheMuscle,
@@ -972,6 +977,7 @@ const shard: CardShard = {
     _poolWoodfallPrimus,
     _poolWoodlandStream,
     _poolWoodlotCrawler,
+    _poolWorkshopWarchief,
     _poolWorthyCost,
     _poolWrithingChrysalis,
     _poolXandeDarkMage,

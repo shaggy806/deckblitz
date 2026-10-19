@@ -39,6 +39,7 @@ import _poolBeastKinRanger from "../pool/beast-kin-ranger.js";
 import _poolBeetlebackChief from "../pool/beetleback-chief.js";
 import _poolBelladonnaTook from "../pool/belladonna-took.js";
 import _poolBishopsSoldier from "../pool/bishops-soldier.js";
+import _poolBlackMarketTycoon from "../pool/black-market-tycoon.js";
 import _poolBlackWidowNatashaRomanoff from "../pool/black-widow-natasha-romanoff.js";
 import _poolBladeOfSelves from "../pool/blade-of-selves.js";
 import _poolBladedAmbassador from "../pool/bladed-ambassador.js";
@@ -54,6 +55,7 @@ import _poolBoneShards from "../pool/bone-shards.js";
 import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
+import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
@@ -121,6 +123,7 @@ import _poolEtchedCornfield from "../pool/etched-cornfield.js";
 import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExosuitSavior from "../pool/exosuit-savior.js";
+import _poolExpendableLackey from "../pool/expendable-lackey.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
@@ -269,6 +272,7 @@ import _poolNaturesChant from "../pool/natures-chant.js";
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
 import _poolNestingDragon from "../pool/nesting-dragon.js";
 import _poolNiblisOfDusk from "../pool/niblis-of-dusk.js";
+import _poolNightClubber from "../pool/night-clubber.js";
 import _poolNighthawkScavenger from "../pool/nighthawk-scavenger.js";
 import _poolNocturnalFeeder from "../pool/nocturnal-feeder.js";
 import _poolNoxiousNewt from "../pool/noxious-newt.js";
@@ -397,6 +401,7 @@ import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
 import _poolTakeFlight from "../pool/take-flight.js";
+import _poolTakeToTheStreets from "../pool/take-to-the-streets.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
@@ -550,6 +555,7 @@ const shard: CardShard = {
     _poolBeetlebackChief,
     _poolBelladonnaTook,
     _poolBishopsSoldier,
+    _poolBlackMarketTycoon,
     _poolBlackWidowNatashaRomanoff,
     _poolBladeOfSelves,
     _poolBladedAmbassador,
@@ -565,6 +571,7 @@ const shard: CardShard = {
     _poolBorosRecruit,
     _poolBoulderRush,
     _poolBoundingFelidar,
+    _poolBrokersInitiate,
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
     _poolCadaverLab,
@@ -632,6 +639,7 @@ const shard: CardShard = {
     _poolEternalWarrior,
     _poolEtherealInvestigator,
     _poolExosuitSavior,
+    _poolExpendableLackey,
     _poolExtravagantReplication,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
@@ -780,6 +788,7 @@ const shard: CardShard = {
     _poolNellyBorcaImpulsiveAccuser,
     _poolNestingDragon,
     _poolNiblisOfDusk,
+    _poolNightClubber,
     _poolNighthawkScavenger,
     _poolNocturnalFeeder,
     _poolNoxiousNewt,
@@ -908,6 +917,7 @@ const shard: CardShard = {
     _poolSwordsmansSteel,
     _poolSymmetryMatrix,
     _poolTakeFlight,
+    _poolTakeToTheStreets,
     _poolTakeVengeance,
     _poolTalasScout,
     _poolTalismanOfResilience,

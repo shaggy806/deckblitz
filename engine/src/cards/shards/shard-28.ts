@@ -24,6 +24,7 @@ import _poolAncestralVision from "../pool/ancestral-vision.js";
 import _poolAnchovyBananaPizza from "../pool/anchovy-banana-pizza.js";
 import _poolAncientAnimus from "../pool/ancient-animus.js";
 import _poolAngelicFieldMarshal from "../pool/angelic-field-marshal.js";
+import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
@@ -82,6 +83,7 @@ import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
 import _poolCoralColony from "../pool/coral-colony.js";
+import _poolCorpseAppraiser from "../pool/corpse-appraiser.js";
 import _poolCouncilOfReeds from "../pool/council-of-reeds.js";
 import _poolCounselOfTheSoratami from "../pool/counsel-of-the-soratami.js";
 import _poolCourtArchers from "../pool/court-archers.js";
@@ -103,6 +105,7 @@ import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDefossilize from "../pool/defossilize.js";
+import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
@@ -115,6 +118,7 @@ import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
 import _poolDrowned from "../pool/drowned.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
+import _poolDuskMangler from "../pool/dusk-mangler.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
@@ -348,6 +352,7 @@ import _poolScalebanesElite from "../pool/scalebanes-elite.js";
 import _poolScaledWurm from "../pool/scaled-wurm.js";
 import _poolScarletSpiderKaine from "../pool/scarlet-spider-kaine.js";
 import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
+import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSelesnyaSentry from "../pool/selesnya-sentry.js";
 import _poolSentinelSliver from "../pool/sentinel-sliver.js";
@@ -454,6 +459,7 @@ import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
 import _poolWallOff from "../pool/wall-off.js";
 import _poolWarclampMastiff from "../pool/warclamp-mastiff.js";
+import _poolWarmWelcome from "../pool/warm-welcome.js";
 import _poolWaryThespian from "../pool/wary-thespian.js";
 import _poolWastelandViper from "../pool/wasteland-viper.js";
 import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
@@ -507,6 +513,7 @@ const shard: CardShard = {
     _poolAnchovyBananaPizza,
     _poolAncientAnimus,
     _poolAngelicFieldMarshal,
+    _poolAngelicObserver,
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
@@ -565,6 +572,7 @@ const shard: CardShard = {
     _poolConcealedCourtyard,
     _poolContestOfClaws,
     _poolCoralColony,
+    _poolCorpseAppraiser,
     _poolCouncilOfReeds,
     _poolCounselOfTheSoratami,
     _poolCourtArchers,
@@ -586,6 +594,7 @@ const shard: CardShard = {
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
     _poolDefossilize,
+    _poolDenryKlinEditorInChief,
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
@@ -598,6 +607,7 @@ const shard: CardShard = {
     _poolDrownInDreams,
     _poolDrowned,
     _poolDunedainBlade,
+    _poolDuskMangler,
     _poolEarthrumbler,
     _poolEiganjoDynastorian,
     _poolEldritchPact,
@@ -831,6 +841,7 @@ const shard: CardShard = {
     _poolScaledWurm,
     _poolScarletSpiderKaine,
     _poolScribeOfTheMindful,
+    _poolScuttlingButler,
     _poolSecuritronSquadron,
     _poolSelesnyaSentry,
     _poolSentinelSliver,
@@ -937,6 +948,7 @@ const shard: CardShard = {
     _poolWalkingCorpse,
     _poolWallOff,
     _poolWarclampMastiff,
+    _poolWarmWelcome,
     _poolWaryThespian,
     _poolWastelandViper,
     _poolWaterloggedHulk,

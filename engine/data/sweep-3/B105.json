@@ -1,0 +1,1555 @@
+{
+ "batch": "B105",
+ "status": "complete",
+ "ranks": "Streets of New Capenna and New Capenna Commander (SNC, NCC, 2022-04-29) and Double Masters 2022's one card (2X2): the rest of each set",
+ "authored": [
+  {
+   "name": "Brokers Veteran",
+   "files": [
+    "engine/src/cards/pool/brokers-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciplined Duelist",
+   "files": [
+    "engine/src/cards/pool/disciplined-duelist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swooping Protector",
+   "files": [
+    "engine/src/cards/pool/swooping-protector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dapper Shieldmate",
+   "files": [
+    "engine/src/cards/pool/dapper-shieldmate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhox Pummeler",
+   "files": [
+    "engine/src/cards/pool/rhox-pummeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wingshield Agent",
+   "files": [
+    "engine/src/cards/pool/wingshield-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voice of the Vermin",
+   "files": [
+    "engine/src/cards/pool/voice-of-the-vermin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rigo, Streetwise Mentor",
+   "files": [
+    "engine/src/cards/pool/rigo-streetwise-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Family's Favor",
+   "files": [
+    "engine/src/cards/pool/familys-favor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent's Toolkit",
+   "files": [
+    "engine/src/cards/pool/agents-toolkit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boon of Safety",
+   "files": [
+    "engine/src/cards/pool/boon-of-safety.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protection Magic",
+   "files": [
+    "engine/src/cards/pool/protection-magic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Proud Pack-Rhino",
+   "files": [
+    "engine/src/cards/pool/proud-pack-rhino.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brotherhood Outcast",
+   "files": [
+    "engine/src/cards/pool/brotherhood-outcast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titan of Industry",
+   "files": [
+    "engine/src/cards/pool/titan-of-industry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diamond City",
+   "files": [
+    "engine/src/cards/pool/diamond-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America, Super-Soldier",
+   "files": [
+    "engine/src/cards/pool/captain-america-super-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon's Due",
+   "files": [
+    "engine/src/cards/pool/demons-due.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "A Little Chat",
+   "files": [
+    "engine/src/cards/pool/a-little-chat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cut of the Profits",
+   "files": [
+    "engine/src/cards/pool/cut-of-the-profits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rooftop Nuisance",
+   "files": [
+    "engine/src/cards/pool/rooftop-nuisance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "For the Family",
+   "files": [
+    "engine/src/cards/pool/for-the-family.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plasma Jockey",
+   "files": [
+    "engine/src/cards/pool/plasma-jockey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Buy Your Silence",
+   "files": [
+    "engine/src/cards/pool/buy-your-silence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ballroom Brawlers",
+   "files": [
+    "engine/src/cards/pool/ballroom-brawlers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceremonial Groundbreaker",
+   "files": [
+    "engine/src/cards/pool/ceremonial-groundbreaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Observer",
+   "files": [
+    "engine/src/cards/pool/angelic-observer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elegant Entourage",
+   "files": [
+    "engine/src/cards/pool/elegant-entourage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venom Connoisseur",
+   "files": [
+    "engine/src/cards/pool/venom-connoisseur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bess, Soul Nourisher",
+   "files": [
+    "engine/src/cards/pool/bess-soul-nourisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Errant, Street Artist",
+   "files": [
+    "engine/src/cards/pool/errant-street-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flawless Forgery",
+   "files": [
+    "engine/src/cards/pool/flawless-forgery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obscura Interceptor",
+   "files": [
+    "engine/src/cards/pool/obscura-interceptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Denry Klin, Editor in Chief",
+   "files": [
+    "engine/src/cards/pool/denry-klin-editor-in-chief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kamiz, Obscura Oculus",
+   "files": [
+    "engine/src/cards/pool/kamiz-obscura-oculus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sinister Concierge",
+   "files": [
+    "engine/src/cards/pool/sinister-concierge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Sleuth",
+   "files": [
+    "engine/src/cards/pool/angelic-sleuth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mezzio Mugger",
+   "files": [
+    "engine/src/cards/pool/mezzio-mugger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caldaia Guardian",
+   "files": [
+    "engine/src/cards/pool/caldaia-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riveteers Charm",
+   "files": [
+    "engine/src/cards/pool/riveteers-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maestros Charm",
+   "files": [
+    "engine/src/cards/pool/maestros-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mage's Attendant",
+   "files": [
+    "engine/src/cards/pool/mages-attendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forge Boss",
+   "files": [
+    "engine/src/cards/pool/forge-boss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rogues' Gallery",
+   "files": [
+    "engine/src/cards/pool/rogues-gallery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Metropolis Angel",
+   "files": [
+    "engine/src/cards/pool/metropolis-angel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revelation of Power",
+   "files": [
+    "engine/src/cards/pool/revelation-of-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabaretti Ascendancy",
+   "files": [
+    "engine/src/cards/pool/cabaretti-ascendancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Join the Maestros",
+   "files": [
+    "engine/src/cards/pool/join-the-maestros.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Civil Servant",
+   "files": [
+    "engine/src/cards/pool/civil-servant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take to the Streets",
+   "files": [
+    "engine/src/cards/pool/take-to-the-streets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caldaia Strongarm",
+   "files": [
+    "engine/src/cards/pool/caldaia-strongarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quick-Draw Dagger",
+   "files": [
+    "engine/src/cards/pool/quick-draw-dagger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exhibition Magician",
+   "files": [
+    "engine/src/cards/pool/exhibition-magician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Refuse to Yield",
+   "files": [
+    "engine/src/cards/pool/refuse-to-yield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Luxurious Libation",
+   "files": [
+    "engine/src/cards/pool/luxurious-libation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incandescent Aria",
+   "files": [
+    "engine/src/cards/pool/incandescent-aria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warm Welcome",
+   "files": [
+    "engine/src/cards/pool/warm-welcome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brazen Upstart",
+   "files": [
+    "engine/src/cards/pool/brazen-upstart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Run Out of Town",
+   "files": [
+    "engine/src/cards/pool/run-out-of-town.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleanup Crew",
+   "files": [
+    "engine/src/cards/pool/cleanup-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ominous Parcel",
+   "files": [
+    "engine/src/cards/pool/ominous-parcel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brokers Initiate",
+   "files": [
+    "engine/src/cards/pool/brokers-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bellowing Mauler",
+   "files": [
+    "engine/src/cards/pool/bellowing-mauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dusk Mangler",
+   "files": [
+    "engine/src/cards/pool/dusk-mangler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Body Launderer",
+   "files": [
+    "engine/src/cards/pool/body-launderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "First Responder",
+   "files": [
+    "engine/src/cards/pool/first-responder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Regulator",
+   "files": [
+    "engine/src/cards/pool/celestial-regulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obscura Ascendancy",
+   "files": [
+    "engine/src/cards/pool/obscura-ascendancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitt Kanto, Mayhem Diva",
+   "files": [
+    "engine/src/cards/pool/kitt-kanto-mayhem-diva.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien on the Hunt",
+   "files": [
+    "engine/src/cards/pool/vivien-on-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scepter of Celebration",
+   "files": [
+    "engine/src/cards/pool/scepter-of-celebration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smuggler's Buggy",
+   "files": [
+    "engine/src/cards/pool/smugglers-buggy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mask of the Schemer",
+   "files": [
+    "engine/src/cards/pool/mask-of-the-schemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Misfortune Teller",
+   "files": [
+    "engine/src/cards/pool/misfortune-teller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "False Floor",
+   "files": [
+    "engine/src/cards/pool/false-floor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obscura Charm",
+   "files": [
+    "engine/src/cards/pool/obscura-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illicit Shipment",
+   "files": [
+    "engine/src/cards/pool/illicit-shipment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dig Up the Body",
+   "files": [
+    "engine/src/cards/pool/dig-up-the-body.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Light 'Em Up",
+   "files": [
+    "engine/src/cards/pool/light-em-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Market Tycoon",
+   "files": [
+    "engine/src/cards/pool/black-market-tycoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Widespread Thieving",
+   "files": [
+    "engine/src/cards/pool/widespread-thieving.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampire Scrivener",
+   "files": [
+    "engine/src/cards/pool/vampire-scrivener.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Night Clubber",
+   "files": [
+    "engine/src/cards/pool/night-clubber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riveteers Decoy",
+   "files": [
+    "engine/src/cards/pool/riveteers-decoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Workshop Warchief",
+   "files": [
+    "engine/src/cards/pool/workshop-warchief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pugnacious Pugilist",
+   "files": [
+    "engine/src/cards/pool/pugnacious-pugilist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extract the Truth",
+   "files": [
+    "engine/src/cards/pool/extract-the-truth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freelance Muscle",
+   "files": [
+    "engine/src/cards/pool/freelance-muscle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hostile Takeover",
+   "files": [
+    "engine/src/cards/pool/hostile-takeover.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Park Heights Pegasus",
+   "files": [
+    "engine/src/cards/pool/park-heights-pegasus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyre-Sledge Arsonist",
+   "files": [
+    "engine/src/cards/pool/pyre-sledge-arsonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Pickpocket",
+   "files": [
+    "engine/src/cards/pool/psychic-pickpocket.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Capenna Express",
+   "files": [
+    "engine/src/cards/pool/capenna-express.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knockout Blow",
+   "files": [
+    "engine/src/cards/pool/knockout-blow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gathering Throng",
+   "files": [
+    "engine/src/cards/pool/gathering-throng.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cabaretti Charm",
+   "files": [
+    "engine/src/cards/pool/cabaretti-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rob the Archives",
+   "files": [
+    "engine/src/cards/pool/rob-the-archives.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Make Disappear",
+   "files": [
+    "engine/src/cards/pool/make-disappear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sky Crier",
+   "files": [
+    "engine/src/cards/pool/sky-crier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mayhem Patrol",
+   "files": [
+    "engine/src/cards/pool/mayhem-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Speakeasy Server",
+   "files": [
+    "engine/src/cards/pool/speakeasy-server.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darling of the Masses",
+   "files": [
+    "engine/src/cards/pool/darling-of-the-masses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raffine's Silencer",
+   "files": [
+    "engine/src/cards/pool/raffines-silencer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Most Wanted",
+   "files": [
+    "engine/src/cards/pool/most-wanted.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fatal Grudge",
+   "files": [
+    "engine/src/cards/pool/fatal-grudge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torch Breath",
+   "files": [
+    "engine/src/cards/pool/torch-breath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Majestic Metamorphosis",
+   "files": [
+    "engine/src/cards/pool/majestic-metamorphosis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scuttling Butler",
+   "files": [
+    "engine/src/cards/pool/scuttling-butler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Park Heights Maverick",
+   "files": [
+    "engine/src/cards/pool/park-heights-maverick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crash the Party",
+   "files": [
+    "engine/src/cards/pool/crash-the-party.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spellbinding Soprano",
+   "files": [
+    "engine/src/cards/pool/spellbinding-soprano.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mr. Orfeo, the Boulder",
+   "files": [
+    "engine/src/cards/pool/mr-orfeo-the-boulder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riveteers Requisitioner",
+   "files": [
+    "engine/src/cards/pool/riveteers-requisitioner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Girder Goons",
+   "files": [
+    "engine/src/cards/pool/girder-goons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whack",
+   "files": [
+    "engine/src/cards/pool/whack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Out of the Way",
+   "files": [
+    "engine/src/cards/pool/out-of-the-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crew Captain",
+   "files": [
+    "engine/src/cards/pool/crew-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expendable Lackey",
+   "files": [
+    "engine/src/cards/pool/expendable-lackey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illuminator Virtuoso",
+   "files": [
+    "engine/src/cards/pool/illuminator-virtuoso.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unleash the Inferno",
+   "files": [
+    "engine/src/cards/pool/unleash-the-inferno.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maestros Diabolist",
+   "files": [
+    "engine/src/cards/pool/maestros-diabolist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul of Emancipation",
+   "files": [
+    "engine/src/cards/pool/soul-of-emancipation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corpse Appraiser",
+   "files": [
+    "engine/src/cards/pool/corpse-appraiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meeting of the Five",
+   "files": [
+    "engine/src/cards/pool/meeting-of-the-five.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Kros, Defense Contractor",
+   "needs": [
+    "effect:goad-trigger-object"
+   ],
+   "why": "tap and goad \"that creature\" from a counters-put trigger: goad takes only a target slot"
+  },
+  {
+   "name": "Sanctuary Warden",
+   "needs": [
+    "effect:remove-counter-chosen-kind"
+   ],
+   "why": "remove a counter of a chosen kind from a creature or planeswalker you control"
+  },
+  {
+   "name": "Perrie, the Pulverizer",
+   "needs": [
+    "amount:counter-kinds-among"
+   ],
+   "why": "X is the number of kinds of counters among permanents you control"
+  },
+  {
+   "name": "Contractual Safeguard",
+   "needs": [
+    "decision:choose-counter-kind"
+   ],
+   "why": "choose a kind of counter on a creature you control"
+  },
+  {
+   "name": "Call In a Professional",
+   "needs": [
+    "static:damage-cant-be-prevented"
+   ],
+   "why": "damage can't be prevented this turn; players can't gain life"
+  },
+  {
+   "name": "Shield Broker",
+   "needs": [
+    "effect:control-while-condition"
+   ],
+   "why": "control for as long as it has a shield counter"
+  },
+  {
+   "name": "Protection Racket",
+   "needs": [
+    "cost:dynamic-life-cost"
+   ],
+   "why": "each opponent may pay life equal to the revealed card's mana value"
+  },
+  {
+   "name": "Skyboon Evangelist",
+   "needs": [
+    "trigger:attacks-your-opponent"
+   ],
+   "why": "a creature attacks one of your opponents (family condition:attacking-an-opponent-filter)"
+  },
+  {
+   "name": "Jailbreak",
+   "needs": [
+    "effect:reflexive-refers-to-creating-objects"
+   ],
+   "why": "a reflexive trigger's target filter can't read its own trigger value"
+  },
+  {
+   "name": "Vivien's Stampede",
+   "needs": [
+    "effect:delayed-trigger-next-main-phase-this-turn"
+   ],
+   "why": "at the beginning of your next main phase this turn (family effect:delayed-trigger-extensions)"
+  },
+  {
+   "name": "Parnesse, the Subtle Brush",
+   "needs": [
+    "trigger:player-becomes-target",
+    "effect:copy-spell-for-other-player"
+   ],
+   "why": "you becoming a target; an opponent copying your spell"
+  },
+  {
+   "name": "Endless Detour",
+   "needs": [
+    "decision:mixed-zone-targets"
+   ],
+   "why": "a spell, nonland permanent or graveyard card in one slot"
+  },
+  {
+   "name": "Ob Nixilis, the Adversary",
+   "needs": [
+    "keyword:casualty-x",
+    "effect:copy-spell-except-nonlegendary",
+    "effect:copy-starting-loyalty"
+   ],
+   "why": "casualty X, a nonlegendary copy with starting loyalty X"
+  },
+  {
+   "name": "Next of Kin",
+   "needs": [
+    "effect:aura-returns-attached"
+   ],
+   "why": "put a creature from hand or command zone and attach the Aura to it"
+  },
+  {
+   "name": "Toluz, Clever Conductor",
+   "needs": [
+    "effect:linked-exile-from-discard",
+    "trigger:discards-batch-objects"
+   ],
+   "why": "exile the discarded cards, linked"
+  },
+  {
+   "name": "Exotic Pets",
+   "needs": [
+    "effect:counter-per-kind-among"
+   ],
+   "why": "a counter of each kind among creatures you control on either token (family effect:amount-counters-on-object)"
+  },
+  {
+   "name": "Raffine's Guidance",
+   "needs": [
+    "zone:cast-self-from-graveyard"
+   ],
+   "why": "an alternative cost from the graveyard without exiling"
+  },
+  {
+   "name": "Reservoir Kraken",
+   "needs": [
+    "effect:unless-tap-untapped-permanent"
+   ],
+   "why": "any opponent may tap an untapped creature they control"
+  },
+  {
+   "name": "Sleep with the Fishes",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "enchanted creature doesn't untap"
+  },
+  {
+   "name": "Cement Shoes",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "enchanted creature doesn't untap"
+  },
+  {
+   "name": "Bouncer's Beatdown",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if it would die this turn, exile it instead"
+  },
+  {
+   "name": "Backstreet Bruiser",
+   "needs": [
+    "effect:aggregate-all-counters"
+   ],
+   "why": "the total of all counters among creatures you control"
+  },
+  {
+   "name": "Wave of Rats",
+   "needs": [
+    "condition:source-dealt-combat-damage-to-player-this-turn"
+   ],
+   "why": "if this creature dealt combat damage to a player this turn (family condition:combat-damage-by-filter-this-turn)"
+  },
+  {
+   "name": "Cryptic Pursuit",
+   "needs": [
+    "effect:exile-may-cast-until-your-next-turn"
+   ],
+   "why": "cast an exiled graveyard card until the end of your next turn (family effect:until-end-of-your-next-turn)"
+  },
+  {
+   "name": "Cabaretti Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "the same mode more than once"
+  },
+  {
+   "name": "Bribe Taker",
+   "needs": [
+    "condition:counter-kinds-among-permanents",
+    "decision:choose-counter-kind"
+   ],
+   "why": "for each kind of counter on your permanents, choose +1/+1 or that kind"
+  },
+  {
+   "name": "Even the Score",
+   "needs": [
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "costs {U}{U}{U} less"
+  },
+  {
+   "name": "Aven Heartstabber",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "Structural Assault",
+   "needs": [
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "artifacts and creatures put into graveyards from the battlefield this turn"
+  },
+  {
+   "name": "Wiretapping",
+   "needs": [
+    "trigger:first-draw-in-your-draw-step"
+   ],
+   "why": "the first card drawn in your draw step (family mechanic:draw-during-opponents-draw-step)"
+  },
+  {
+   "name": "Grisly Sigil",
+   "needs": [
+    "filter:dealt-noncombat-damage-this-turn"
+   ],
+   "why": "a creature dealt noncombat damage this turn (family stat:noncombat-damage-taken-this-turn)"
+  },
+  {
+   "name": "Body Count",
+   "needs": [
+    "keyword:spectacle"
+   ],
+   "why": "spectacle"
+  },
+  {
+   "name": "Brokers Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "the same mode more than once"
+  },
+  {
+   "name": "Indulge",
+   "needs": [
+    "keyword:aftermath"
+   ],
+   "why": "aftermath"
+  },
+  {
+   "name": "Spiteful Repossession",
+   "needs": [
+    "effect:per-opponent-count-damage"
+   ],
+   "why": "damage per opponent by the difference in land counts"
+  },
+  {
+   "name": "Syrix, Carrier of the Flame",
+   "needs": [
+    "condition:creature-card-left-graveyard-this-turn"
+   ],
+   "why": "a creature card left your graveyard this turn (family condition:card-left-graveyard-condition)"
+  },
+  {
+   "name": "Turf War",
+   "needs": [
+    "effect:gain-control-chosen-by-trigger-controller"
+   ],
+   "why": "the attacker's controller gains control of a contested land (family effect:control-change-extensions)"
+  },
+  {
+   "name": "Public Enemy",
+   "needs": [
+    "static:must-attack-specific-player"
+   ],
+   "why": "creatures attack the enchanted creature's controller if able"
+  },
+  {
+   "name": "Extraction Specialist",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "for as long as you control this creature"
+  },
+  {
+   "name": "Patch Up",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "targets with total mana value 3 or less"
+  },
+  {
+   "name": "Evelyn, the Covetous",
+   "needs": [
+    "static:play-from-exile-once-each-turn"
+   ],
+   "why": "play from among collection-counter cards once each turn (family stat:do-this-once-each-turn)"
+  },
+  {
+   "name": "Getaway Car",
+   "needs": [
+    "keyword:crewed-it-this-turn"
+   ],
+   "why": "each creature that crewed it this turn"
+  },
+  {
+   "name": "Arc Spitter",
+   "needs": [
+    "effect:target-creature-blocking-source"
+   ],
+   "why": "target creature blocking it (family effect:target-spec-additions)"
+  },
+  {
+   "name": "Unlucky Witness",
+   "needs": [
+    "zone:impulse-play-only-one"
+   ],
+   "why": "play only one of the exiled cards (family zone:impulse-permission-options)"
+  },
+  {
+   "name": "Sizzling Soloist",
+   "needs": [
+    "effect:must-attack-controllers-next-combat"
+   ],
+   "why": "attacks during its controller's next combat if able (family static:combat-restriction-extensions)"
+  },
+  {
+   "name": "Graveyard Shift",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "Sewer Crocodile",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "Glamorous Outlaw",
+   "needs": [
+    "effect:grant-until-exiled-card-cast"
+   ],
+   "why": "a land's ability until this card is cast from exile"
+  },
+  {
+   "name": "Rakish Revelers",
+   "needs": [
+    "effect:grant-until-exiled-card-cast"
+   ],
+   "why": "a land's ability until this card is cast from exile"
+  },
+  {
+   "name": "Spara's Adjudicators",
+   "needs": [
+    "effect:grant-until-exiled-card-cast"
+   ],
+   "why": "a land's ability until this card is cast from exile"
+  },
+  {
+   "name": "Nimble Larcenist",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "exile a chosen card from a revealed hand"
+  },
+  {
+   "name": "Ziatora's Envoy",
+   "needs": [
+    "effect:cast-now-play-land-from-library"
+   ],
+   "why": "play a land from the top of your library: cast-now's play only takes a card in exile (family decision:free-cast-choices)"
+  },
+  {
+   "name": "Lord Xander, the Collector",
+   "needs": [
+    "effect:sacrifice-amount"
+   ],
+   "why": "sacrifice half their nonland permanents"
+  },
+  {
+   "name": "Storm of Forms",
+   "needs": [
+    "amount:counter-kinds-among"
+   ],
+   "why": "each kind of counter among permanents you control"
+  },
+  {
+   "name": "Incriminate",
+   "needs": [
+    "effect:targets-same-controller"
+   ],
+   "why": "two targets one player controls; that player sacrifices one"
+  },
+  {
+   "name": "Audacious Swap",
+   "needs": [
+    "effect:owner-of-target-player-ref"
+   ],
+   "why": "the owner of the target permanent exiles and casts (family effect:target-spec-additions)"
+  },
+  {
+   "name": "Grime Gorger",
+   "needs": [
+    "effect:look-and-choose-one-per-type"
+   ],
+   "why": "up to one card of each card type"
+  },
+  {
+   "name": "High-Rise Sawjack",
+   "needs": [
+    "trigger:blocks-creature-trigger"
+   ],
+   "why": "blocks a creature with flying"
+  },
+  {
+   "name": "Dodgy Jalopy",
+   "needs": [
+    "keyword:scavenge"
+   ],
+   "why": "scavenge"
+  },
+  {
+   "name": "Evolving Door",
+   "needs": [
+    "filter:color-count-amount"
+   ],
+   "why": "exactly N colors for a computed N (family condition:filter-card-property-clauses)"
+  },
+  {
+   "name": "Aven Courier",
+   "needs": [
+    "decision:choose-counter-kind"
+   ],
+   "why": "choose a kind of counter as it resolves"
+  },
+  {
+   "name": "Phabine, Boss's Confidant",
+   "needs": [
+    "keyword:parley"
+   ],
+   "why": "parley"
+  },
+  {
+   "name": "Writ of Return",
+   "needs": [
+    "keyword:cipher"
+   ],
+   "why": "cipher"
+  },
+  {
+   "name": "In Too Deep",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "an Aura's static removes all abilities and sets colorless, granting the Clue ability"
+  },
+  {
+   "name": "Vazi, Keen Negotiator",
+   "needs": [
+    "trigger:activates-ability-mana-from"
+   ],
+   "why": "activates an ability with Treasure mana spent (family trigger:activates-ability)"
+  },
+  {
+   "name": "Xander's Pact",
+   "needs": [
+    "effect:cast-now-pay-life-for-mana-value"
+   ],
+   "why": "cast an exiled card by paying life equal to its mana value"
+  },
+  {
+   "name": "Obscura Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "the same mode more than once"
+  },
+  {
+   "name": "Waste Management",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "targets from a single graveyard; kicked targets replace unkicked"
+  },
+  {
+   "name": "Swindler's Scheme",
+   "needs": [
+    "condition:revealed-shares-type-with-spell"
+   ],
+   "why": "opponent casts the revealed card from your library"
+  },
+  {
+   "name": "Citizen's Crowbar",
+   "needs": [
+    "cost:sacrifice-granting-source"
+   ],
+   "why": "a granted ability's cost sacrifices the Equipment"
+  },
+  {
+   "name": "Hold for Ransom",
+   "needs": [
+    "effect:granted-activated-refers-to-granter"
+   ],
+   "why": "the granted ability refers to the Aura and its controller"
+  },
+  {
+   "name": "Tenacious Underdog",
+   "needs": [
+    "keyword:blitz-extensions"
+   ],
+   "why": "blitz with a life cost, from the graveyard"
+  },
+  {
+   "name": "Mysterious Limousine",
+   "needs": [
+    "effect:return-other-cards-exiled-with-source"
+   ],
+   "why": "return the others exiled with it"
+  },
+  {
+   "name": "Sanguine Spy",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard (family effect:count-distinct-mana-values)"
+  },
+  {
+   "name": "Snooping Newsie",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "Syndicate Infiltrator",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "Shattered Seraph",
+   "needs": [
+    "effect:grant-until-exiled-card-cast"
+   ],
+   "why": "a land's mana ability until this card is cast from exile (family effect:modifier-grants-activated)"
+  },
+  {
+   "name": "Masked Bandits",
+   "needs": [
+    "effect:grant-until-exiled-card-cast"
+   ],
+   "why": "a land's mana ability until this card is cast from exile"
+  },
+  {
+   "name": "Paragon of Modernity",
+   "needs": [
+    "amount:colors-spent-to-activate"
+   ],
+   "why": "colors spent to activate (family stat:mana-spent-to-cast)"
+  },
+  {
+   "name": "Cryptic Spires",
+   "needs": [
+    "deck:circle-colors-at-deck-construction"
+   ],
+   "why": "colors chosen at deck construction (family deck:copy-limit-exception)"
+  },
+  {
+   "name": "Boxing Ring",
+   "needs": [
+    "condition:filter-fought-this-turn"
+   ],
+   "why": "a creature that fought this turn (family condition:filter-this-turn-history)"
+  },
+  {
+   "name": "Oskar, Rubbish Reclaimer",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "different mana values among cards in your graveyard"
+  },
+  {
+   "name": "Tainted Indulgence",
+   "needs": [
+    "condition:distinct-mana-values-in-graveyard"
+   ],
+   "why": "five or more mana values among cards in your graveyard"
+  },
+  {
+   "name": "All-Seeing Arbiter",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "X is the number of different mana values in your graveyard"
+  },
+  {
+   "name": "Maestros Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "the same mode more than once"
+  },
+  {
+   "name": "Riveteers Confluence",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "the same mode more than once"
+  },
+  {
+   "name": "Threefold Signal",
+   "needs": [
+    "keyword:replicate"
+   ],
+   "why": "replicate, granted to spells"
+  },
+  {
+   "name": "Skyway Robber",
+   "needs": [
+    "static:escapes-with-ability"
+   ],
+   "why": "escapes with an ability; cast from cards exiled with it (family zone:graveyard-cast-permissions)"
+  },
+  {
+   "name": "Depopulate",
+   "needs": [
+    "condition:that-player-controls"
+   ],
+   "why": "each player who controls a multicolored creature draws"
+  },
+  {
+   "name": "Scheming Fence",
+   "needs": [
+    "decision:as-enters-choose-permanent",
+    "static:gain-activated-abilities-of-others"
+   ],
+   "why": "choose a permanent as it enters, gain its activated abilities"
+  },
+  {
+   "name": "Lagrella, the Magpie",
+   "needs": [
+    "effect:return-with-counters-this-way"
+   ],
+   "why": "exiled cards return with two +1/+1 counters (family effect:put-onto-battlefield-options)"
+  },
+  {
+   "name": "Corpse Explosion",
+   "needs": [
+    "cost:additional-cost-exile-from-graveyard"
+   ],
+   "why": "exile a creature card from your graveyard as a cost, damage equal to its power"
+  },
+  {
+   "name": "Maestros Ascendancy",
+   "needs": [
+    "cost:graveyard-permission-sacrifice-beside-own"
+   ],
+   "why": "cast from the graveyard by sacrificing beside the card's own sacrifice cost (family zone:graveyard-cast-permissions)"
+  },
+  {
+   "name": "Case the Joint",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "look at the top card of each player's library"
+  },
+  {
+   "name": "Jetmir's Fixer",
+   "needs": [
+    "stat:mana-spent-to-activate-from"
+   ],
+   "why": "Treasure mana spent to activate this ability (family stat:mana-spent-to-cast)"
+  },
+  {
+   "name": "Security Rhox",
+   "needs": [
+    "cost:alt-cost-spend-only-treasure-mana"
+   ],
+   "why": "an alternative cost payable only with Treasure mana (family cost:mana-spending-rules)"
+  }
+ ]
+}
