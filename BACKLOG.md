@@ -297,6 +297,9 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **`client/e2e/put-down.spec.ts` is flaky** (2026-10-18): run twice over, 2 of its 12 runs failed on
+  main and 4 with the lobby change beside it, "card drawn off its flight" at 1920x1080 and 2560x1440 —
+  a timing assertion, by its look, sensitive to a loaded machine. Find what it races and steady it.
 - **Confirm the box's room cap of 6 with a load test there** (2026-10-18): `MAX_ROOMS_PER_SHARD`
   went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
   (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the
