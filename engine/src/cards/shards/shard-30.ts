@@ -12,6 +12,7 @@ import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
 import _poolAegisTurtle from "../pool/aegis-turtle.js";
 import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
+import _poolAgentsToolkit from "../pool/agents-toolkit.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
 import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
@@ -54,12 +55,14 @@ import _poolBogwaterLumaret from "../pool/bogwater-lumaret.js";
 import _poolBolgsCompany from "../pool/bolgs-company.js";
 import _poolBonescytheSliver from "../pool/bonescythe-sliver.js";
 import _poolBoomerangBladeFlinger from "../pool/boomerang-blade-flinger.js";
+import _poolBoonOfSafety from "../pool/boon-of-safety.js";
 import _poolBorderGuard from "../pool/border-guard.js";
 import _poolBotanicalPlaza from "../pool/botanical-plaza.js";
 import _poolBrackishBlunder from "../pool/brackish-blunder.js";
 import _poolBraveKinDuo from "../pool/brave-kin-duo.js";
 import _poolBringBack from "../pool/bring-back.js";
 import _poolBrokersCharm from "../pool/brokers-charm.js";
+import _poolBrokersVeteran from "../pool/brokers-veteran.js";
 import _poolBurdenedAerialist from "../pool/burdened-aerialist.js";
 import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
@@ -500,6 +503,7 @@ const shard: CardShard = {
     _poolAdventurersInn,
     _poolAegisTurtle,
     _poolAeronautCavalry,
+    _poolAgentsToolkit,
     _poolAlabasterWall,
     _poolAlaniasPathmaker,
     _poolAlphinaudLeveilleur,
@@ -542,12 +546,14 @@ const shard: CardShard = {
     _poolBolgsCompany,
     _poolBonescytheSliver,
     _poolBoomerangBladeFlinger,
+    _poolBoonOfSafety,
     _poolBorderGuard,
     _poolBotanicalPlaza,
     _poolBrackishBlunder,
     _poolBraveKinDuo,
     _poolBringBack,
     _poolBrokersCharm,
+    _poolBrokersVeteran,
     _poolBurdenedAerialist,
     _poolBurrogBanemaker,
     _poolCacklingCounterpart,

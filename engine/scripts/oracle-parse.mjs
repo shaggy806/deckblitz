@@ -2319,9 +2319,10 @@ function parseStatic(line, text) {
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
   }
-  // "~ enters with two oil counters on it" (rule 614.1c), any named kind.
+  // "~ enters with two oil counters on it" (rule 614.1c), any named kind —
+  // "on him" / "on her" for a character (Captain America's shield counter).
   {
-    const w = /^~ enters with (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on it\.$/.exec(line);
+    const w = /^~ enters with (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on (?:it|him|her)\.$/.exec(line);
     if (w !== null) {
       const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
       const amount = words[w[1]] ?? Number(w[1]);

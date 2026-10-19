@@ -61,6 +61,7 @@ import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
 import _poolCacophodon from "../pool/cacophodon.js";
 import _poolCanyonCrab from "../pool/canyon-crab.js";
+import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
 import _poolCaptivatingUnicorn from "../pool/captivating-unicorn.js";
 import _poolCeaselessConflict from "../pool/ceaseless-conflict.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
@@ -537,6 +538,7 @@ const shard: CardShard = {
     _poolCabalPit,
     _poolCacophodon,
     _poolCanyonCrab,
+    _poolCaptainAmericaSuperSoldier,
     _poolCaptivatingUnicorn,
     _poolCeaselessConflict,
     _poolChamberedNautilus,

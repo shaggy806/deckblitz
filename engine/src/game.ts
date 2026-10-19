@@ -441,7 +441,11 @@ type DamageStep =
   | { readonly kind: "plus"; readonly by: number }
   | { readonly kind: "at-least"; readonly power: number }
   | { readonly kind: "prevent-all"; readonly by: ObjectId; readonly controller: PlayerId; readonly then?: EffectSpec }
-  | { readonly kind: "shield"; readonly shield: PreventionShield };
+  | { readonly kind: "shield"; readonly shield: PreventionShield }
+  /** A shield counter's "prevent that damage and remove a shield counter"
+   * (rule 122.1c): all of it, one counter however much — none more when
+   * one already went this same simultaneous event (`spent`). */
+  | { readonly kind: "shield-counter"; readonly object: ObjectId; readonly spent: boolean };
 
 /**
  * `amount` damage from each of `sources` identical sources, through `order`
@@ -462,6 +466,7 @@ function runDamageSteps(
   readonly shieldUsed: number;
   readonly shields: readonly { readonly shield: PreventionShield; readonly prevented: number }[];
   readonly preventedAll?: { readonly step: Extract<DamageStep, { kind: "prevent-all" }>; readonly amount: number };
+  readonly shieldCounter?: { readonly step: Extract<DamageStep, { kind: "shield-counter" }>; readonly amount: number };
 } {
   let total = amount * sources;
   let shieldUsed = 0;
@@ -480,6 +485,8 @@ function runDamageSteps(
         break;
       case "prevent-all":
         return { dealt: 0, shieldUsed, shields, preventedAll: { step, amount: total } };
+      case "shield-counter":
+        return { dealt: 0, shieldUsed, shields, shieldCounter: { step, amount: total } };
       case "shield": {
         // An "all damage this turn" shield takes the whole hit and stays.
         const prevented = step.shield.all === true ? total : Math.min(total, left(step.shield));
@@ -1093,6 +1100,12 @@ export class Game {
    * See {@link withEnterBatch}. Not game state: it only ever spans one
    * synchronous call. */
   private enterBatch: Set<ObjectId> | null = null;
+  /** While one simultaneous damage event is dealt source by source (a combat
+   * damage step — rule 510.2), the permanents whose shield counter already
+   * went: the counter's prevention is one replacement on the event (rules
+   * 122.1c, 614.5), so the rest of that damage is prevented with no second
+   * counter. Not game state: it only ever spans one synchronous call. */
+  private shieldCountersSpent: Set<ObjectId> | null = null;
   /** The +1/+1 counters an Incubator token being made by `incubate` enters
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
@@ -7624,7 +7637,19 @@ export class Game {
       }
     }
 
-    // All combat damage in a pass is dealt simultaneously.
+    // All combat damage in a pass is dealt simultaneously: one event, so a
+    // shield counter goes once for all of it (`shieldCountersSpent`).
+    this.shieldCountersSpent = new Set();
+    try {
+      this.dealCombatAssignments(assignments);
+    } finally {
+      this.shieldCountersSpent = null;
+    }
+  }
+
+  private dealCombatAssignments(
+    assignments: readonly { source: ObjectId; target: TargetRef; amount: number; sources?: number }[],
+  ): void {
     for (const { source, target, amount, sources } of assignments) {
       const dealt = this.dealDamage(source, target, amount, true, undefined, sources);
       if (dealt > 0 && target.kind === "player") {
@@ -26318,6 +26343,17 @@ export class Game {
    * matter why the last time counter was removed", the rulings), offered
    * when the effect removing it is done.
    */
+  /** A shield counter used up (rule 122.1c): one, however many it has. */
+  private removeShieldCounter(id: ObjectId): void {
+    const object = this.state.objects[id];
+    const have = object?.counters.shield ?? 0;
+    if (object === undefined || have <= 0) return;
+    const after = have - 1;
+    if (after > 0) object.counters.shield = after;
+    else delete object.counters.shield;
+    this.emit({ type: "counter-removed", object: id, counter: "shield", amount: 1, after });
+  }
+
   private removeTimeCounter(id: ObjectId, amount: number): void {
     const object = this.state.objects[id];
     if (object === undefined || amount <= 0) return;
@@ -27050,6 +27086,17 @@ export class Game {
       return;
     }
     if (!cantBeRegenerated && this.regenerateInstead(id)) return;
+    // A shield counter: "if this permanent would be destroyed as the result of
+    // an effect, instead remove a shield counter from it" (rule 122.1c) — an
+    // effect's destruction only; state-based actions still destroy it (the
+    // rulings). With a regeneration shield too its controller picks which
+    // applies (616.1); the regeneration shield, which ends with the turn,
+    // goes first — docs/engine-gaps.md.
+    if ((object.counters.shield ?? 0) > 0) {
+      this.removeShieldCounter(id);
+      this.emit({ type: "permanent-destroy-prevented", object: id, reason: "a shield counter removed instead" });
+      return;
+    }
     if (!this.moveObject(id, "graveyard")) return;
     this.emit({
       type: "permanent-destroyed",
@@ -30172,6 +30219,17 @@ export class Game {
     for (const shield of this.state.preventionShields) {
       if (this.shieldCovers(shield, target, combat)) steps.push({ kind: "shield", shield });
     }
+    // Shield counters (rule 122.1c): not an ability, so one that lost its
+    // abilities keeps the protection (the rulings).
+    if (target.kind === "object") {
+      const object = this.state.objects[target.object];
+      // One spent earlier in this same event still covers the rest of it, its
+      // last counter gone or not.
+      const spent = this.shieldCountersSpent?.has(target.object) ?? false;
+      if (object !== undefined && object.zone === "battlefield" && (spent || (object.counters.shield ?? 0) > 0)) {
+        steps.push({ kind: "shield-counter", object: target.object, spent });
+      }
+    }
     return steps;
   }
 
@@ -30192,15 +30250,22 @@ export class Game {
     if (steps.length <= 1) return steps;
     // A few effects at most in practice; past six, the order they came in.
     if (steps.length > 6) return steps;
-    const score = (order: readonly DamageStep[]): readonly [number, number, number] => {
+    // A shield counter spent is a lasting loss, so it ranks right after the
+    // damage itself: a one-turn shield (Healing Salve) goes first.
+    const score = (order: readonly DamageStep[]): readonly number[] => {
       const outcome = runDamageSteps(amount, sources, order, (shield) => shield.amount);
-      return [outcome.dealt, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
+      const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
+      return [outcome.dealt, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
+    };
+    const better = (a: readonly number[], b: readonly number[]): boolean => {
+      for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return a[i]! < b[i]!;
+      return false;
     };
     let best = steps;
     let bestScore = score(steps);
     for (const order of permutationsOf(steps)) {
       const s = score(order);
-      if (s[0] < bestScore[0] || (s[0] === bestScore[0] && (s[1] < bestScore[1] || (s[1] === bestScore[1] && s[2] < bestScore[2])))) {
+      if (better(s, bestScore)) {
         best = order;
         bestScore = s;
       }
@@ -30443,6 +30508,15 @@ export class Game {
         this.emit({ type: "damage-prevented", source, target, amount: prevented });
         if (step.then !== undefined) {
           applyEffectSpec(step.then, this.makeResolutionContext(step.by, step.controller, [], prevented));
+        }
+        return 0;
+      }
+      if (outcome.shieldCounter !== undefined) {
+        const { step, amount: prevented } = outcome.shieldCounter;
+        this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        if (!step.spent) {
+          this.shieldCountersSpent?.add(step.object);
+          this.removeShieldCounter(step.object);
         }
         return 0;
       }

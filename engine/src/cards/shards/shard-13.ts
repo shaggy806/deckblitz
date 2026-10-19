@@ -298,6 +298,7 @@ import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
+import _poolProtectionMagic from "../pool/protection-magic.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
@@ -778,6 +779,7 @@ const shard: CardShard = {
     _poolPiranhaFly,
     _poolPrideOfTheRoad,
     _poolPridemalkin,
+    _poolProtectionMagic,
     _poolRabidAttack,
     _poolRakdosGuildgate,
     _poolRampantGrowth,

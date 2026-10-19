@@ -463,6 +463,7 @@ import _poolViridianEmissary from "../pool/viridian-emissary.js";
 import _poolVisceridDeepwalker from "../pool/viscerid-deepwalker.js";
 import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
+import _poolVoiceOfTheVermin from "../pool/voice-of-the-vermin.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
 import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
 import _poolWakeOfVultures from "../pool/wake-of-vultures.js";
@@ -973,6 +974,7 @@ const shard: CardShard = {
     _poolVisceridDeepwalker,
     _poolVividGrove,
     _poolVivisection,
+    _poolVoiceOfTheVermin,
     _poolVoldarenDuelist,
     _poolWailOfTheForgotten,
     _poolWakeOfVultures,

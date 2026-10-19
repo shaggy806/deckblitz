@@ -1063,6 +1063,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("shield counters (rule 122.1c): 'enters with a shield counter on him'", () => {
+    const cap = face("Test Card enters with a shield counter on him.", "Legendary Creature — Human Soldier Hero");
+    expect(cap.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "shield", amount: 1 } });
+    expect(cap.complete).toBe(true);
+  });
+
   it("intervening ifs: 'if you have the initiative', 'if you've completed a dungeon'", () => {
     const seer = face(
       "At the beginning of your end step, if you have the initiative, put a +1/+1 counter on Test Card.",

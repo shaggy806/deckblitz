@@ -469,6 +469,7 @@ import _tokensElementalTokenVernalSovereign from "../tokens/elemental-token-vern
 import _tokensNymphToken from "../tokens/nymph-token.js";
 import _tokensPegasusToken from "../tokens/pegasus-token.js";
 import _tokensRebelToken from "../tokens/rebel-token.js";
+import _tokensRhinoWarriorToken from "../tokens/rhino-warrior-token.js";
 import _tokensRobotToken from "../tokens/robot-token.js";
 import _tokensSpiritTokenRedWhite22 from "../tokens/spirit-token-red-white-2-2.js";
 import _tokensVampireRogueToken from "../tokens/vampire-rogue-token.js";
@@ -944,6 +945,7 @@ const shard: CardShard = {
     _tokensNymphToken,
     _tokensPegasusToken,
     _tokensRebelToken,
+    _tokensRhinoWarriorToken,
     _tokensRobotToken,
     _tokensSpiritTokenRedWhite22,
     _tokensVampireRogueToken,

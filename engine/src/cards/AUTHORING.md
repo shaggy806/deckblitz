@@ -1322,6 +1322,8 @@ atLeast: N }`. The emblem's "legendary and can't be blocked by creatures with
 greater power" is built in. Not yet: "a creature other than ~", "your
 Ring-bearer's power", and Nazgûl's nine-copy deck rule.
 
+**Shield counters** (rule 122.1c — Streets of New Capenna) are ordinary counters named `"shield"`: `add-counter { counter: "shield" }` (Brokers Veteran), an enters replacement `counters: { kind: "shield", amount: 1 }` (Disciplined Duelist), `self-counters` conditions on them (Rhox Pummeler). The engine gives them their meaning: an effect's destroy removes one instead (`destroyByEffect`, after a regeneration shield), and damage to the permanent is prevented and one removed (`damageSteps`' `shield-counter` step, ordered with the other prevention by `bestDamageOrder`, a spent counter weighing more than a one-turn shield) — one counter however many it has, and one for a whole combat damage step (`shieldCountersSpent`). Not an ability, so they still work on a permanent that lost its abilities; state-based actions and sacrifices aren't stopped (the rulings). Not yet: "damage can't be prevented" (Call In a Professional).
+
 **The initiative and dungeons** (rules 726, 309, 701.49 — `docs/plans/initiative-dungeons.md`):
 `take-initiative { who? }` ("you take the initiative" — Rilsa Rael; the initiative's own three
 abilities, `cards/initiative.ts`, then venture into Undercity at once and at each of its holder's

@@ -98,6 +98,7 @@ import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
 import _poolCrowdedCrypt from "../pool/crowded-crypt.js";
 import _poolCryptOfTheEternals from "../pool/crypt-of-the-eternals.js";
 import _poolCryptidInspector from "../pool/cryptid-inspector.js";
+import _poolDapperShieldmate from "../pool/dapper-shieldmate.js";
 import _poolDaringEscape from "../pool/daring-escape.js";
 import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
 import _poolDarksteelIngot from "../pool/darksteel-ingot.js";
@@ -111,6 +112,7 @@ import _poolDeathriteShaman from "../pool/deathrite-shaman.js";
 import _poolDemolitionField from "../pool/demolition-field.js";
 import _poolDesperateMeasures from "../pool/desperate-measures.js";
 import _poolDespoil from "../pool/despoil.js";
+import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
@@ -327,6 +329,7 @@ import _poolRelicBarrier from "../pool/relic-barrier.js";
 import _poolRenegadeTactics from "../pool/renegade-tactics.js";
 import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
+import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
@@ -393,6 +396,7 @@ import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
 import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
 import _poolSusanForeman from "../pool/susan-foreman.js";
+import _poolSwoopingProtector from "../pool/swooping-protector.js";
 import _poolSyrAlinTheLionsClaw from "../pool/syr-alin-the-lions-claw.js";
 import _poolSystemsOverride from "../pool/systems-override.js";
 import _poolTaigamMasterOpportunist from "../pool/taigam-master-opportunist.js";
@@ -581,6 +585,7 @@ const shard: CardShard = {
     _poolCrowdedCrypt,
     _poolCryptOfTheEternals,
     _poolCryptidInspector,
+    _poolDapperShieldmate,
     _poolDaringEscape,
     _poolDaringThunderThief,
     _poolDarksteelIngot,
@@ -594,6 +599,7 @@ const shard: CardShard = {
     _poolDemolitionField,
     _poolDesperateMeasures,
     _poolDespoil,
+    _poolDisciplinedDuelist,
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
     _poolDragTheCanal,
@@ -810,6 +816,7 @@ const shard: CardShard = {
     _poolRenegadeTactics,
     _poolRenegadeTroops,
     _poolReprisal,
+    _poolRhoxPummeler,
     _poolRile,
     _poolRimefurReindeer,
     _poolRoilingCanopy,
@@ -876,6 +883,7 @@ const shard: CardShard = {
     _poolSundialDawnTyrant,
     _poolSurtrFieryJotun,
     _poolSusanForeman,
+    _poolSwoopingProtector,
     _poolSyrAlinTheLionsClaw,
     _poolSystemsOverride,
     _poolTaigamMasterOpportunist,

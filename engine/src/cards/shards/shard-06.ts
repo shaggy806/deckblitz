@@ -447,6 +447,7 @@ import _poolWindDrake from "../pool/wind-drake.js";
 import _poolWindfall from "../pool/windfall.js";
 import _poolWingedCoatl from "../pool/winged-coatl.js";
 import _poolWingedWords from "../pool/winged-words.js";
+import _poolWingshieldAgent from "../pool/wingshield-agent.js";
 import _poolWinterSoldierRebornAvenger from "../pool/winter-soldier-reborn-avenger.js";
 import _poolWitchstalkerFrenzy from "../pool/witchstalker-frenzy.js";
 import _poolWizardReplica from "../pool/wizard-replica.js";
@@ -925,6 +926,7 @@ const shard: CardShard = {
     _poolWindfall,
     _poolWingedCoatl,
     _poolWingedWords,
+    _poolWingshieldAgent,
     _poolWinterSoldierRebornAvenger,
     _poolWitchstalkerFrenzy,
     _poolWizardReplica,

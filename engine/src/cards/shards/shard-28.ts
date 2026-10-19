@@ -61,6 +61,7 @@ import _poolBreachingDragonstorm from "../pool/breaching-dragonstorm.js";
 import _poolBrighthearthBanneret from "../pool/brighthearth-banneret.js";
 import _poolBringToTrial from "../pool/bring-to-trial.js";
 import _poolBroadsideBarrage from "../pool/broadside-barrage.js";
+import _poolBrotherhoodOutcast from "../pool/brotherhood-outcast.js";
 import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
@@ -543,6 +544,7 @@ const shard: CardShard = {
     _poolBrighthearthBanneret,
     _poolBringToTrial,
     _poolBroadsideBarrage,
+    _poolBrotherhoodOutcast,
     _poolBrushstrider,
     _poolBullCerodon,
     _poolBurningSunsFury,

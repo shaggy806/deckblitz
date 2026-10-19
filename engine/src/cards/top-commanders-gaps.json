@@ -326,7 +326,8 @@
   "keyword:devour",
   "condition:ring-bearer-other-than-source",
   "effect:distribute-counters",
-  "decision:owner-chooses-top-or-bottom"
+  "decision:owner-chooses-top-or-bottom",
+  "mechanic:shield-counters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

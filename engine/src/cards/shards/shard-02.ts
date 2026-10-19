@@ -106,6 +106,7 @@ import _poolDefiantSurvivor from "../pool/defiant-survivor.js";
 import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
+import _poolDiamondCity from "../pool/diamond-city.js";
 import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
 import _poolDireFleetHoarder from "../pool/dire-fleet-hoarder.js";
 import _poolDiscordantPiper from "../pool/discordant-piper.js";
@@ -314,6 +315,7 @@ import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolResistanceReunited from "../pool/resistance-reunited.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
+import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
 import _poolRivendell from "../pool/rivendell.js";
@@ -565,6 +567,7 @@ const shard: CardShard = {
     _poolDenProtector,
     _poolDesertOfTheTrue,
     _poolDevotedHero,
+    _poolDiamondCity,
     _poolDiluvianPrimordial,
     _poolDireFleetHoarder,
     _poolDiscordantPiper,
@@ -773,6 +776,7 @@ const shard: CardShard = {
     _poolResistanceReunited,
     _poolRestorationAngel,
     _poolReverberate,
+    _poolRigoStreetwiseMentor,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,
     _poolRivendell,

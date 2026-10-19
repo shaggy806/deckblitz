@@ -309,6 +309,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Redwing",
   "Reliquary Dragon",
   "Rhino Token",
+  "Rhino Warrior Token",
   "Robot Hero Token",
   "Robot Token",
   "Robot Token (Automated Assembly Line)",

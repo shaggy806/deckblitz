@@ -210,3 +210,9 @@ that needs it is authored.
 - **Convoke with a choice of additional costs.** `legalActions`' convoke re-check (`castableAt`)
   passes `costOption: undefined`, so a convoke spell with a choice of additional costs couldn't be
   convoked. No pool card has both (found 2026-10-09, fixing Eaten Alive's priced option).
+- **A regeneration shield goes before a shield counter.** Both replace "this permanent would
+  be destroyed" (rules 701.15a, 122.1c), so with both on it the permanent's controller chooses
+  which applies (616.1); `Game.destroyByEffect` always spends the regeneration shield first,
+  which ends with the turn anyway, keeping the lasting counter — the better choice unless being
+  tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
+  on purpose (found 2026-10-19, building shield counters).

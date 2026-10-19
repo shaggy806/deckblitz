@@ -137,6 +137,7 @@ import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
 import _poolFalkenrathNoble from "../pool/falkenrath-noble.js";
 import _poolFallajiArchaeologist from "../pool/fallaji-archaeologist.js";
+import _poolFamilysFavor from "../pool/familys-favor.js";
 import _poolFamine from "../pool/famine.js";
 import _poolFantasticElasticity from "../pool/fantastic-elasticity.js";
 import _poolFellTheMighty from "../pool/fell-the-mighty.js";
@@ -648,6 +649,7 @@ const shard: CardShard = {
     _poolFabledPassage,
     _poolFalkenrathNoble,
     _poolFallajiArchaeologist,
+    _poolFamilysFavor,
     _poolFamine,
     _poolFantasticElasticity,
     _poolFellTheMighty,

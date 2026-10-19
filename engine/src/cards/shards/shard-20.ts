@@ -454,6 +454,7 @@ import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
+import _poolTitanOfIndustry from "../pool/titan-of-industry.js";
 import _poolTitansStrength from "../pool/titans-strength.js";
 import _poolTolarianGeyser from "../pool/tolarian-geyser.js";
 import _poolTollsOfWar from "../pool/tolls-of-war.js";
@@ -971,6 +972,7 @@ const shard: CardShard = {
     _poolThrivingHeath,
     _poolTimberwatchElf,
     _poolTishanaVoiceOfThunder,
+    _poolTitanOfIndustry,
     _poolTitansStrength,
     _poolTolarianGeyser,
     _poolTollsOfWar,
