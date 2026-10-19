@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAarakocraSneak from "../pool/aarakocra-sneak.js";
 import _poolAberrantReturn from "../pool/aberrant-return.js";
 import _poolAbzanAscendancy from "../pool/abzan-ascendancy.js";
 import _poolAdditiveEvolution from "../pool/additive-evolution.js";
@@ -468,6 +469,7 @@ import _tokensZombieTokenGeralfVisionaryStitcher from "../tokens/zombie-token-ge
 
 const shard: CardShard = {
   pool: [
+    _poolAarakocraSneak,
     _poolAberrantReturn,
     _poolAbzanAscendancy,
     _poolAdditiveEvolution,

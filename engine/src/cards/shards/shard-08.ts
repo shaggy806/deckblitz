@@ -442,6 +442,7 @@ import _poolTuktukRubblefort from "../pool/tuktuk-rubblefort.js";
 import _poolTurbulentWilderness from "../pool/turbulent-wilderness.js";
 import _poolTwistReality from "../pool/twist-reality.js";
 import _poolUltimateGreenGoblin from "../pool/ultimate-green-goblin.js";
+import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
 import _poolUnlikelyAid from "../pool/unlikely-aid.js";
@@ -952,6 +953,7 @@ const shard: CardShard = {
     _poolTurbulentWilderness,
     _poolTwistReality,
     _poolUltimateGreenGoblin,
+    _poolUnderdarkExplorer,
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
     _poolUnlikelyAid,

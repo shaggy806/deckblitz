@@ -1449,6 +1449,9 @@ export function parseSentence(sentence, ctx) {
 
   // Everything else that's a whole instruction by itself.
   if (re("you become the monarch").test(s)) return { kind: "become-monarch" };
+  // The initiative (rule 726) — its abilities venture into Undercity; a plain
+  // "venture into the dungeon" stays a person's until the other dungeons exist.
+  if (re("you take the initiative").test(s)) return { kind: "take-initiative" };
   // Blight N (rule 701.68a): you, or each opponent, each on a creature of theirs.
   if ((m = re("blight (\\d+)").exec(s))) return { kind: "blight", amount: Number(m[1]) };
   if ((m = re("each (opponent|player) blights (\\d+)").exec(s))) {

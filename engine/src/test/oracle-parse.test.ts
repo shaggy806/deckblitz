@@ -1056,6 +1056,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(brawler.complete).toBe(true);
   });
 
+  it("the initiative (rule 726): 'you take the initiative'", () => {
+    expect(parseSentence("You take the initiative.", ctx())).toEqual({ kind: "take-initiative" });
+    const scout = face("When Test Card enters, you take the initiative.", "Creature — Bird Rogue");
+    expect(scout.triggered[0].effect).toEqual({ kind: "take-initiative" });
+    expect(scout.complete).toBe(true);
+  });
+
   it("read ahead (rule 702.155): the keyword line", () => {
     const saga = parseFace({
       name: "Test Saga",

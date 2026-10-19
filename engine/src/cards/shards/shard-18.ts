@@ -374,6 +374,7 @@ import _poolStarstorm from "../pool/starstorm.js";
 import _poolStaticPrison from "../pool/static-prison.js";
 import _poolStepThrough from "../pool/step-through.js";
 import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
+import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
 import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _poolStaticPrison,
     _poolStepThrough,
     _poolStewardOfTheHarvest,
+    _poolStirringBard,
     _poolStormcragElemental,
     _poolStrengthBobblehead,
     _poolSuffocatingFumes,

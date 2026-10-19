@@ -165,6 +165,7 @@ import _poolGloriousSunrise from "../pool/glorious-sunrise.js";
 import _poolGoForth from "../pool/go-forth.js";
 import _poolGoblinAssailant from "../pool/goblin-assailant.js";
 import _poolGoldenScaleAeronaut from "../pool/golden-scale-aeronaut.js";
+import _poolGoliathPaladin from "../pool/goliath-paladin.js";
 import _poolGrapeshotCatapult from "../pool/grapeshot-catapult.js";
 import _poolGravbladeHeavy from "../pool/gravblade-heavy.js";
 import _poolGreatUglyLookingGoblin from "../pool/great-ugly-looking-goblin.js";
@@ -623,6 +624,7 @@ const shard: CardShard = {
     _poolGoForth,
     _poolGoblinAssailant,
     _poolGoldenScaleAeronaut,
+    _poolGoliathPaladin,
     _poolGrapeshotCatapult,
     _poolGravbladeHeavy,
     _poolGreatUglyLookingGoblin,

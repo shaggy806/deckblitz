@@ -17,6 +17,7 @@ import _poolAangTheLastAirbender from "./pool/aang-the-last-airbender.js";
 import _poolAangsDefense from "./pool/aangs-defense.js";
 import _poolAangsIceberg from "./pool/aangs-iceberg.js";
 import _poolAangsJourney from "./pool/aangs-journey.js";
+import _poolAarakocraSneak from "./pool/aarakocra-sneak.js";
 import _poolAardvarkSloth from "./pool/aardvark-sloth.js";
 import _poolAatchikEmeraldRadian from "./pool/aatchik-emerald-radian.js";
 import _poolAbaddonTheDespoiler from "./pool/abaddon-the-despoiler.js";
@@ -825,6 +826,7 @@ import _poolAvengersHangar from "./pool/avengers-hangar.js";
 import _poolAvengersQuinjet from "./pool/avengers-quinjet.js";
 import _poolAvengersTower from "./pool/avengers-tower.js";
 import _poolAvengersUnderSiege from "./pool/avengers-under-siege.js";
+import _poolAvengingHunter from "./pool/avenging-hunter.js";
 import _poolAvianChangeling from "./pool/avian-changeling.js";
 import _poolAviationPioneer from "./pool/aviation-pioneer.js";
 import _poolAvishkarRaceway from "./pool/avishkar-raceway.js";
@@ -5238,6 +5240,7 @@ import _poolGolgariSignet from "./pool/golgari-signet.js";
 import _poolGolgariThug from "./pool/golgari-thug.js";
 import _poolGoliathBeetle from "./pool/goliath-beetle.js";
 import _poolGoliathMassManipulator from "./pool/goliath-mass-manipulator.js";
+import _poolGoliathPaladin from "./pool/goliath-paladin.js";
 import _poolGoliathSphinx from "./pool/goliath-sphinx.js";
 import _poolGoliathSpider from "./pool/goliath-spider.js";
 import _poolGoliathTruck from "./pool/goliath-truck.js";
@@ -11979,6 +11982,7 @@ import _poolStingingVitriol from "./pool/stinging-vitriol.js";
 import _poolStinkweedImp from "./pool/stinkweed-imp.js";
 import _poolStirUpTrouble from "./pool/stir-up-trouble.js";
 import _poolStirge from "./pool/stirge.js";
+import _poolStirringBard from "./pool/stirring-bard.js";
 import _poolStirringHonormancer from "./pool/stirring-honormancer.js";
 import _poolStirringHopesinger from "./pool/stirring-hopesinger.js";
 import _poolStitchInTime from "./pool/stitch-in-time.js";
@@ -13532,6 +13536,7 @@ import _poolUndercoverButler from "./pool/undercover-butler.js";
 import _poolUndercoverCrocodelf from "./pool/undercover-crocodelf.js";
 import _poolUndercoverSkrull from "./pool/undercover-skrull.js";
 import _poolUnderdarkBasilisk from "./pool/underdark-basilisk.js";
+import _poolUnderdarkExplorer from "./pool/underdark-explorer.js";
 import _poolUnderdarkRift from "./pool/underdark-rift.js";
 import _poolUnderfootUnderdogs from "./pool/underfoot-underdogs.js";
 import _poolUndergroundMortuary from "./pool/underground-mortuary.js";
@@ -15292,6 +15297,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAangsDefense,
   _poolAangsIceberg,
   _poolAangsJourney,
+  _poolAarakocraSneak,
   _poolAardvarkSloth,
   _poolAatchikEmeraldRadian,
   _poolAbaddonTheDespoiler,
@@ -16100,6 +16106,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvengersQuinjet,
   _poolAvengersTower,
   _poolAvengersUnderSiege,
+  _poolAvengingHunter,
   _poolAvianChangeling,
   _poolAviationPioneer,
   _poolAvishkarRaceway,
@@ -20513,6 +20520,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGolgariThug,
   _poolGoliathBeetle,
   _poolGoliathMassManipulator,
+  _poolGoliathPaladin,
   _poolGoliathSphinx,
   _poolGoliathSpider,
   _poolGoliathTruck,
@@ -27254,6 +27262,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStinkweedImp,
   _poolStirUpTrouble,
   _poolStirge,
+  _poolStirringBard,
   _poolStirringHonormancer,
   _poolStirringHopesinger,
   _poolStitchInTime,
@@ -28807,6 +28816,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUndercoverCrocodelf,
   _poolUndercoverSkrull,
   _poolUnderdarkBasilisk,
+  _poolUnderdarkExplorer,
   _poolUnderdarkRift,
   _poolUnderfootUnderdogs,
   _poolUndergroundMortuary,
