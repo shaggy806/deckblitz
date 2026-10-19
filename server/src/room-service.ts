@@ -62,8 +62,13 @@ function requireHost(room: Room | PendingRoom, connection: Connection, what: str
   if (!room.isHost(connection)) throw new Error(`only the host can ${what}`);
 }
 
-/** A `room-joined` for one connection — `isHost` differs per recipient. */
-function roomJoined(room: Room | PendingRoom, connection: Connection): Extract<ServerMessage, { type: "room-joined" }> {
+/** A `room-joined` for one connection — `isHost` differs per recipient —
+ * with how many watch a waiting room (`spectators`). */
+function roomJoined(
+  room: Room | PendingRoom,
+  connection: Connection,
+  spectators: number,
+): Extract<ServerMessage, { type: "room-joined" }> {
   return {
     type: "room-joined",
     roomId: room.id,
@@ -71,6 +76,7 @@ function roomJoined(room: Room | PendingRoom, connection: Connection): Extract<S
     isHost: room.isHost(connection),
     botSpeed: room.botSpeed,
     ...(room instanceof PendingRoom ? { settings: room.settings } : {}),
+    ...(room instanceof PendingRoom && spectators > 0 ? { spectators } : {}),
     seat: room.seatOf(connection),
     pending: room instanceof PendingRoom,
   };
@@ -301,6 +307,11 @@ export class RoomService {
     return from === 0 ? { view, eventsFrom: 0 } : { view: { ...view, events: view.events.slice(from) }, eventsFrom: from };
   }
 
+  /** `roomJoined` for `connection`, counting the room's spectators. */
+  private joined(room: Room | PendingRoom, connection: Connection): Extract<ServerMessage, { type: "room-joined" }> {
+    return roomJoined(room, connection, this.spectatorsOf(room.id).length);
+  }
+
   private spectatorsOf(roomId: string): readonly Connection[] {
     return [...(this.spectators.get(roomId) ?? [])];
   }
@@ -309,10 +320,17 @@ export class RoomService {
    * whether it was watching `roomId`. */
   private stopSpectating(connection: Connection, roomId?: string): boolean {
     let was = false;
+    const left: string[] = [];
     for (const [id, set] of this.spectators) {
       if (!set.delete(connection)) continue;
+      left.push(id);
       if (id === roomId) was = true;
       if (set.size === 0) this.spectators.delete(id);
+    }
+    // A waiting room's seats are told how many still watch (`spectators`).
+    for (const id of left) {
+      const room = this.manager.get(id);
+      if (room instanceof PendingRoom) this.broadcastPending(room);
     }
     return was;
   }
@@ -382,10 +400,10 @@ export class RoomService {
     const host = room.unseatedHost();
     if (host !== null) connections.push(host);
     for (const connection of connections) {
-      if (connection !== except) connection.send(roomJoined(room, connection));
+      if (connection !== except) connection.send(this.joined(room, connection));
     }
     for (const connection of this.spectatorsOf(room.id)) {
-      if (connection !== except) connection.send({ ...roomJoined(room, connection), spectating: true });
+      if (connection !== except) connection.send({ ...this.joined(room, connection), spectating: true });
     }
   }
 
@@ -492,7 +510,7 @@ export class RoomService {
         this.boundRoom.set(conn, room);
         this.forgetSentEvents(connection, room.id);
         room.bindHost(connection, message.hostToken);
-        connection.send(roomJoined(room, connection));
+        connection.send(this.joined(room, connection));
         // The host coming back takes the role back from whoever was
         // standing in, which everyone else's seat board shows.
         if (room instanceof PendingRoom) this.broadcastPending(room, connection);
@@ -517,7 +535,7 @@ export class RoomService {
             type: "error",
             message: err instanceof Error ? err.message : String(err),
           });
-          connection.send(roomJoined(room, connection));
+          connection.send(this.joined(room, connection));
           return;
         }
         this.boundRoom.set(conn, room);
@@ -535,7 +553,7 @@ export class RoomService {
             type: "error",
             message: err instanceof Error ? err.message : String(err),
           });
-          connection.send(roomJoined(room, connection));
+          connection.send(this.joined(room, connection));
           return;
         }
         this.boundRoom.set(conn, room);
@@ -562,7 +580,7 @@ export class RoomService {
         // never reaches them — refresh their picker directly, same as a
         // rejected `claim-seat` does.
         if (room.seatOf(connection) === null && !(room instanceof PendingRoom && room.unseatedHost() === connection)) {
-          connection.send(roomJoined(room, connection));
+          connection.send(this.joined(room, connection));
         }
         return;
       }
@@ -584,7 +602,7 @@ export class RoomService {
         // Same as `add-bot` above — a caller still on the seat picker
         // isn't in `connectedSeats()`, so refresh them directly.
         if (room.seatOf(connection) === null && !(room instanceof PendingRoom && room.unseatedHost() === connection)) {
-          connection.send(roomJoined(room, connection));
+          connection.send(this.joined(room, connection));
         }
         return;
       }
@@ -609,7 +627,7 @@ export class RoomService {
         // seat here yet, so they aren't in `connectedSeats()` and the
         // broadcast above never reaches them.
         if (room.seatOf(connection) === null && room.unseatedHost() !== connection) {
-          connection.send(roomJoined(room, connection));
+          connection.send(this.joined(room, connection));
         }
         return;
       }
@@ -635,8 +653,11 @@ export class RoomService {
         if (set === undefined) this.spectators.set(room.id, (set = new Set()));
         set.add(connection);
         this.forgetSentEvents(connection, room.id);
-        if (room instanceof PendingRoom) connection.send({ ...roomJoined(room, connection), spectating: true });
-        else connection.send(this.spectatorFrame(room, connection));
+        if (room instanceof PendingRoom) {
+          connection.send({ ...this.joined(room, connection), spectating: true });
+          // Its seats are told someone is watching now (`spectators`).
+          this.broadcastPending(room, connection);
+        } else connection.send(this.spectatorFrame(room, connection));
         return;
       }
       case "leave-room": {
@@ -647,7 +668,18 @@ export class RoomService {
         const room = this.requirePendingRoom(message.roomId);
         room.leave(connection);
         this.boundRoom.delete(conn);
-        this.broadcastPending(room);
+        // The last person walking out of a waiting room — a host whose game
+        // with bots alone moved into their browser (`client/src/lobby/
+        // localStart.ts`), or who went back to the menu — closes it, with no
+        // seat still held (a dropped player's included) and nobody watching:
+        // left to the idle reaper it held a place under the room caps
+        // (`admission.ts`) for half an hour.
+        const empty =
+          room.seatStatuses().every((s) => !s.claimed) &&
+          room.unseatedHost() === null &&
+          this.spectatorsOf(room.id).length === 0;
+        if (empty) manager.remove(room.id);
+        else this.broadcastPending(room);
         return;
       }
       case "start-game": {

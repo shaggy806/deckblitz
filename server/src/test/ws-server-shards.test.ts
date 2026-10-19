@@ -231,8 +231,12 @@ describe("rooms on two shards (loopback)", () => {
 
     s.send({ type: "spectate-room", roomId: roomA });
     expect(await s.next()).toMatchObject({ type: "room-joined", roomId: roomA, spectating: true });
+    // A waiting room's seats are told how many watch it (`spectators`).
+    expect(await a.next()).toMatchObject({ type: "room-joined", roomId: roomA, spectators: 1 });
     s.send({ type: "spectate-room", roomId: roomB });
     expect(await s.next()).toMatchObject({ type: "room-joined", roomId: roomB, spectating: true });
+    expect(await a.next()).not.toHaveProperty("spectators");
+    expect(await b.next()).toMatchObject({ type: "room-joined", roomId: roomB, spectators: 1 });
 
     // Room A changes: its spectator has moved on, so nothing reaches it.
     a.send({ type: "set-bot-speed", roomId: roomA, speed: "slow" });

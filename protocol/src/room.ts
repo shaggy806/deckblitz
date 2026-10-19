@@ -559,6 +559,12 @@ export type ServerMessage =
       readonly pending?: boolean;
       /** This connection is watching, not seated (`spectate-room`). */
       readonly spectating?: true;
+      /** How many connections are watching this waiting room
+       * (`spectate-room`); a waiting room only, and absent at none. A game
+       * its host starts with every other seat a bot moves into the host's
+       * browser (`client/src/lobby/localStart.ts`) only while nobody is
+       * watching, since a game in a browser can't be watched. */
+      readonly spectators?: number;
     }
   | {
       /** Pushed to every connected seat after a room is created/joined or any dispatch settles. */

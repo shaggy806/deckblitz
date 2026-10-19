@@ -447,6 +447,62 @@ describe("room server (end to end over WebSocket)", () => {
     expect(handCards.filter((id) => frame.type === "state" && frame.view.objects[id] !== undefined)).toEqual([]);
   });
 
+  it("closes a waiting room once the last person walks out, but not while a seat is held", async () => {
+    // A host whose game with bots alone moved into their browser leaves the
+    // lobby behind: it mustn't hold a place under the room caps.
+    const ws = await openSocket();
+    const next = messageQueue(ws);
+    ws.send(JSON.stringify({ type: "create-room", players: 3 }));
+    const created = await next();
+    if (created.type !== "room-created") throw new Error("unreachable");
+    const roomId = created.roomId;
+    ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: ALICE, clientToken: "alice", ready: true }));
+    await next();
+    ws.send(JSON.stringify({ type: "add-bot", roomId, seat: BOB }));
+    await next();
+
+    // Someone else holds the third seat: the host leaving closes nothing.
+    const other = await openSocket();
+    const otherNext = messageQueue(other);
+    other.send(JSON.stringify({ type: "claim-seat", roomId, seat: CAROL, clientToken: "carol" }));
+    await otherNext();
+    ws.send(JSON.stringify({ type: "leave-room", roomId }));
+    await otherNext();
+    expect(manager.get(roomId)).toBeDefined();
+
+    // They leave too, and nobody's left: gone.
+    other.send(JSON.stringify({ type: "leave-room", roomId }));
+    await new Promise((r) => setTimeout(r, 50));
+    expect(manager.get(roomId)).toBeUndefined();
+  });
+
+  it("tells a waiting room's seats how many are watching it", async () => {
+    // What decides whether a host's game with bots alone may move into their
+    // browser (`client/src/lobby/localStart.ts`): not while anyone watches.
+    const ws = await openSocket();
+    const next = messageQueue(ws);
+    ws.send(JSON.stringify({ type: "create-room" }));
+    const created = await next();
+    if (created.type !== "room-created") throw new Error("unreachable");
+    const roomId = created.roomId;
+    ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: ALICE, clientToken: "alice", ready: true }));
+    const seated = await next();
+    expect(seated.type === "room-joined" && seated.spectators).toBeUndefined();
+
+    const watcher = await openSocket();
+    const watcherNext = messageQueue(watcher);
+    watcher.send(JSON.stringify({ type: "spectate-room", roomId }));
+    const watching = await watcherNext();
+    expect(watching.type === "room-joined" && watching.spectators).toBe(1);
+    const told = await next();
+    expect(told.type === "room-joined" && told.spectators).toBe(1);
+
+    watcher.send(JSON.stringify({ type: "leave-room", roomId }));
+    let after = await next();
+    while (after.type === "room-joined" && after.spectators !== undefined) after = await next();
+    expect(after.type === "room-joined" && after.spectators).toBeUndefined();
+  });
+
   it("rate-limits a connection that sends a flood of messages", async () => {
     const ws = await openSocket();
     const nextMsg = messageQueue(ws);
