@@ -223,6 +223,7 @@ import _poolLeafDancer from "../pool/leaf-dancer.js";
 import _poolLeafGilder from "../pool/leaf-gilder.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
+import _poolLictor from "../pool/lictor.js";
 import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
 import _poolLightningHounds from "../pool/lightning-hounds.js";
@@ -678,6 +679,7 @@ const shard: CardShard = {
     _poolLeafGilder,
     _poolLegionLieutenant,
     _poolLibraryOfAlexandria,
+    _poolLictor,
     _poolLiesaForgottenArchangel,
     _poolLightningBolt,
     _poolLightningHounds,

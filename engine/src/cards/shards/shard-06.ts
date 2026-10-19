@@ -282,6 +282,7 @@ import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
+import _poolPrimarisEliminator from "../pool/primaris-eliminator.js";
 import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
@@ -757,6 +758,7 @@ const shard: CardShard = {
     _poolPracticedOffense,
     _poolPriceOfFame,
     _poolPrimalFrenzy,
+    _poolPrimarisEliminator,
     _poolPrismaticVista,
     _poolProsperTomeBound,
     _poolProwlerClawedThief,

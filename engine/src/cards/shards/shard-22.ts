@@ -393,6 +393,7 @@ import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
+import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
 import _poolTheWallsOfBaSingSe from "../pool/the-walls-of-ba-sing-se.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
+    _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
     _poolTheSackvilleBagginses,
     _poolTheWallsOfBaSingSe,

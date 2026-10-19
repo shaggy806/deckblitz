@@ -313,6 +313,7 @@ import _poolSaltRoadPatrol from "../pool/salt-road-patrol.js";
 import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
+import _poolSautekhImmortal from "../pool/sautekh-immortal.js";
 import _poolSavageMansion from "../pool/savage-mansion.js";
 import _poolSavannah from "../pool/savannah.js";
 import _poolScaldingTarn from "../pool/scalding-tarn.js";
@@ -453,6 +454,7 @@ import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-fi
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
+import _tokensTyranidWarriorToken from "../tokens/tyranid-warrior-token.js";
 import _tokensVibraniumToken from "../tokens/vibranium-token.js";
 import _tokensXXGolemToken from "../tokens/x-x-golem-token.js";
 
@@ -768,6 +770,7 @@ const shard: CardShard = {
     _poolSamutTyrantOfNaktamun,
     _poolSanctumOfTranquilLight,
     _poolSarevokDeathbringer,
+    _poolSautekhImmortal,
     _poolSavageMansion,
     _poolSavannah,
     _poolScaldingTarn,
@@ -910,6 +913,7 @@ const shard: CardShard = {
     _tokensEldraziScionToken,
     _tokensMutavaultToken,
     _tokensTheTigerGod,
+    _tokensTyranidWarriorToken,
     _tokensVibraniumToken,
     _tokensXXGolemToken,
   ],

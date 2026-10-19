@@ -73,6 +73,7 @@ import _poolCaseyJonesVigilante from "../pool/casey-jones-vigilante.js";
 import _poolChampionOfTheClachan from "../pool/champion-of-the-clachan.js";
 import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
+import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
@@ -557,6 +558,7 @@ const shard: CardShard = {
     _poolChampionOfTheClachan,
     _poolChandraTorchOfDefiance,
     _poolChangelingWayfinder,
+    _poolChaosMutation,
     _poolChapelGeist,
     _poolChildOfThePack,
     _poolCinderingCutthroat,

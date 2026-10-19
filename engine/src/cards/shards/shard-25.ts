@@ -18,9 +18,11 @@ import _poolApprenticeNecromancer from "../pool/apprentice-necromancer.js";
 import _poolAquusSteed from "../pool/aquus-steed.js";
 import _poolArcaneEncyclopedia from "../pool/arcane-encyclopedia.js";
 import _poolArcboundWorker from "../pool/arcbound-worker.js";
+import _poolArcoFlagellant from "../pool/arco-flagellant.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
 import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
+import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
@@ -485,9 +487,11 @@ const shard: CardShard = {
     _poolAquusSteed,
     _poolArcaneEncyclopedia,
     _poolArcboundWorker,
+    _poolArcoFlagellant,
     _poolArmoredPegasus,
     _poolArnimZolaBioFanatic,
     _poolAshenMonstrosity,
+    _poolAssaultIntercessor,
     _poolAssaultZeppelid,
     _poolAssimilateEssence,
     _poolAstralSteel,

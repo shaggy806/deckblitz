@@ -160,6 +160,7 @@ import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
+import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
@@ -321,6 +322,7 @@ import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
 import _poolScouredBarrens from "../pool/scoured-barrens.js";
+import _poolScreamerKiller from "../pool/screamer-killer.js";
 import _poolSeafloorDebris from "../pool/seafloor-debris.js";
 import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
@@ -396,10 +398,12 @@ import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
+import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
 import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
 import _poolTurbulentMoor from "../pool/turbulent-moor.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
+import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
@@ -627,6 +631,7 @@ const shard: CardShard = {
     _poolGrandArbiterAugustinIv,
     _poolGraspingShadows,
     _poolGrazingKelpie,
+    _poolGreyKnightParagon,
     _poolGrimBounty,
     _poolGrimReapersSprint,
     _poolGroundchuckDirtbag,
@@ -788,6 +793,7 @@ const shard: CardShard = {
     _poolSarkhanDragonAscendant,
     _poolScarwoodTreefolk,
     _poolScouredBarrens,
+    _poolScreamerKiller,
     _poolSeafloorDebris,
     _poolSearslicerGoblin,
     _poolSecondThoughts,
@@ -863,10 +869,12 @@ const shard: CardShard = {
     _poolTransdimensionalBovine,
     _poolTreasonOfIsengard,
     _poolTrestleTroll,
+    _poolTriarchPraetorian,
     _poolTroubledHealer,
     _poolTrueIdentity,
     _poolTurbulentMoor,
     _poolTurntimberAscetic,
+    _poolTyranidInvasion,
     _poolTyranidPrime,
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,

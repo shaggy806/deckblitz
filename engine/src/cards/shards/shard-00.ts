@@ -244,6 +244,7 @@ import _poolLavastepRaider from "../pool/lavastep-raider.js";
 import _poolLazotepBehemoth from "../pool/lazotep-behemoth.js";
 import _poolLedevGuardian from "../pool/ledev-guardian.js";
 import _poolLeelaSevateemWarrior from "../pool/leela-sevateem-warrior.js";
+import _poolLetTheGalaxyBurn from "../pool/let-the-galaxy-burn.js";
 import _poolLightningAngel from "../pool/lightning-angel.js";
 import _poolLluwenExchangeStudent from "../pool/lluwen-exchange-student.js";
 import _poolLostInSpace from "../pool/lost-in-space.js";
@@ -748,6 +749,7 @@ const shard: CardShard = {
     _poolLazotepBehemoth,
     _poolLedevGuardian,
     _poolLeelaSevateemWarrior,
+    _poolLetTheGalaxyBurn,
     _poolLightningAngel,
     _poolLluwenExchangeStudent,
     _poolLostInSpace,

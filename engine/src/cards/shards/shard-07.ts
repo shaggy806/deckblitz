@@ -22,6 +22,7 @@ import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
@@ -520,6 +521,7 @@ const shard: CardShard = {
     _poolArchonOfFallingStars,
     _poolArdozCobblerOfWar,
     _poolArmasaurGuide,
+    _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
     _poolAuriokChampion,

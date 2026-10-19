@@ -78,6 +78,7 @@ import _poolCinderslashRavager from "../pool/cinderslash-ravager.js";
 import _poolCircleOfPower from "../pool/circle-of-power.js";
 import _poolCitanulStalwart from "../pool/citanul-stalwart.js";
 import _poolCivicStalwart from "../pool/civic-stalwart.js";
+import _poolClamavus from "../pool/clamavus.js";
 import _poolClayRevenant from "../pool/clay-revenant.js";
 import _poolClifftopRetreat from "../pool/clifftop-retreat.js";
 import _poolClockworkDrawbridge from "../pool/clockwork-drawbridge.js";
@@ -126,6 +127,7 @@ import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
+import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEther from "../pool/ether.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolFacetReader from "../pool/facet-reader.js";
@@ -503,6 +505,7 @@ import _tokensOgreToken from "../tokens/ogre-token.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
 import _tokensTiny from "../tokens/tiny.js";
+import _tokensTyranidGargoyleToken from "../tokens/tyranid-gargoyle-token.js";
 import _tokensWarriorTokenVigilance from "../tokens/warrior-token-vigilance.js";
 import _tokensWolfTokenGarrukCursedHuntsman from "../tokens/wolf-token-garruk-cursed-huntsman.js";
 
@@ -583,6 +586,7 @@ const shard: CardShard = {
     _poolCircleOfPower,
     _poolCitanulStalwart,
     _poolCivicStalwart,
+    _poolClamavus,
     _poolClayRevenant,
     _poolClifftopRetreat,
     _poolClockworkDrawbridge,
@@ -631,6 +635,7 @@ const shard: CardShard = {
     _poolEnduringCourage,
     _poolEnduringVitality,
     _poolEpicureOfBlood,
+    _poolEpistolaryLibrarian,
     _poolEther,
     _poolExtractPower,
     _poolFacetReader,
@@ -1010,6 +1015,7 @@ const shard: CardShard = {
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
     _tokensTiny,
+    _tokensTyranidGargoyleToken,
     _tokensWarriorTokenVigilance,
     _tokensWolfTokenGarrukCursedHuntsman,
   ],

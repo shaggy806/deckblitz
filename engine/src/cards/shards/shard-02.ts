@@ -259,6 +259,7 @@ import _poolMistbladeShinobi from "../pool/mistblade-shinobi.js";
 import _poolMisterFantasticReedRichards from "../pool/mister-fantastic-reed-richards.js";
 import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMountain from "../pool/mountain.js";
+import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
@@ -391,6 +392,7 @@ import _poolTheSquadronSinister from "../pool/the-squadron-sinister.js";
 import _poolTheSurgicalBay from "../pool/the-surgical-bay.js";
 import _poolTheThirteenthDoctor from "../pool/the-thirteenth-doctor.js";
 import _poolTheTormentOfGollum from "../pool/the-torment-of-gollum.js";
+import _poolTheirNumberIsLegion from "../pool/their-number-is-legion.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
@@ -713,6 +715,7 @@ const shard: CardShard = {
     _poolMisterFantasticReedRichards,
     _poolMolderingKarok,
     _poolMountain,
+    _poolMutalithVortexBeast,
     _poolMycosynthWellspring,
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolTheSurgicalBay,
     _poolTheThirteenthDoctor,
     _poolTheTormentOfGollum,
+    _poolTheirNumberIsLegion,
     _poolThousandMoonsInfantry,
     _poolThrillingDiscovery,
     _poolThroatSlitter,

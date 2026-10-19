@@ -161,6 +161,7 @@ import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
+import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
@@ -668,6 +669,7 @@ const shard: CardShard = {
     _poolFurnaceBlessedConqueror,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
+    _poolGargoyleFlock,
     _poolGeneralLeoCristophe,
     _poolGhoulcallersBell,
     _poolGildedScuttler,

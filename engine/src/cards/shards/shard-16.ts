@@ -57,6 +57,7 @@ import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
+import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
 import _poolCaseOfTheShiftingVisage from "../pool/case-of-the-shifting-visage.js";
@@ -491,6 +492,7 @@ import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
 import _tokensPilotToken from "../tokens/pilot-token.js";
+import _tokensPlaguebearerOfNurgle from "../tokens/plaguebearer-of-nurgle.js";
 import _tokensRobotHeroToken from "../tokens/robot-hero-token.js";
 import _tokensRobotWarriorToken from "../tokens/robot-warrior-token.js";
 import _tokensShapeshifterToken from "../tokens/shapeshifter-token.js";
@@ -557,6 +559,7 @@ const shard: CardShard = {
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
     _poolCadaverLab,
+    _poolCanoptekTombSentinel,
     _poolCarnivorousMossBeast,
     _poolCartoucheOfKnowledge,
     _poolCaseOfTheShiftingVisage,
@@ -993,6 +996,7 @@ const shard: CardShard = {
     _tokensMunitionsToken,
     _tokensPhyrexianWurmLifelink,
     _tokensPilotToken,
+    _tokensPlaguebearerOfNurgle,
     _tokensRobotHeroToken,
     _tokensRobotWarriorToken,
     _tokensShapeshifterToken,

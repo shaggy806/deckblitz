@@ -87,8 +87,10 @@ import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
 import _poolCruelAdministrator from "../pool/cruel-administrator.js";
+import _poolCryptek from "../pool/cryptek.js";
 import _poolCurseOfOpulence from "../pool/curse-of-opulence.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
+import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
@@ -304,6 +306,7 @@ import _poolPhyrexianLens from "../pool/phyrexian-lens.js";
 import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
+import _poolPsychomancer from "../pool/psychomancer.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
 import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
@@ -392,6 +395,7 @@ import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
+import _poolTheSwarmlord from "../pool/the-swarmlord.js";
 import _poolTheWanderingEmperor from "../pool/the-wandering-emperor.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
@@ -424,6 +428,7 @@ import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
+import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
@@ -557,8 +562,10 @@ const shard: CardShard = {
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
     _poolCruelAdministrator,
+    _poolCryptek,
     _poolCurseOfOpulence,
     _poolCurseOfVerbosity,
+    _poolCyberneticaDatasmith,
     _poolDaiLiIndoctrination,
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
@@ -774,6 +781,7 @@ const shard: CardShard = {
     _poolPriestsOfNorn,
     _poolPromiseOfAclazotz,
     _poolPsychicBarrier,
+    _poolPsychomancer,
     _poolRabidBite,
     _poolRaidingNightstalker,
     _poolRamirezDepietroPillager,
@@ -862,6 +870,7 @@ const shard: CardShard = {
     _poolTheCircleOfLoyalty,
     _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
+    _poolTheSwarmlord,
     _poolTheWanderingEmperor,
     _poolTheWatcherInTheWater,
     _poolTheyCameFromThePipes,
@@ -894,6 +903,7 @@ const shard: CardShard = {
     _poolValeriaRichardsPrecocious,
     _poolValorSinger,
     _poolVampireCutthroat,
+    _poolVanguardSuppressor,
     _poolVaultOfCatlacan,
     _poolVengefulCreeper,
     _poolVesselOfParamnesia,

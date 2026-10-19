@@ -350,6 +350,7 @@ import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSoltariEmissary from "../pool/soltari-emissary.js";
 import _poolSoltariMonk from "../pool/soltari-monk.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
+import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
@@ -811,6 +812,7 @@ const shard: CardShard = {
     _poolSoltariEmissary,
     _poolSoltariMonk,
     _poolSorinsThirst,
+    _poolSpaceMarineDevastator,
     _poolSpawnGangCommander,
     _poolSpearSpewer,
     _poolSpectralReserves,

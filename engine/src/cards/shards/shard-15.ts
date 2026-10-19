@@ -90,6 +90,7 @@ import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
+import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDidactEcho from "../pool/didact-echo.js";
@@ -279,6 +280,7 @@ import _poolNearheathChaplain from "../pool/nearheath-chaplain.js";
 import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
 import _poolNecropolisFiend from "../pool/necropolis-fiend.js";
 import _poolNeurokInvisimancer from "../pool/neurok-invisimancer.js";
+import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
 import _poolNourish from "../pool/nourish.js";
@@ -549,6 +551,7 @@ const shard: CardShard = {
     _poolDefiantBloodlord,
     _poolDelugeOfDoom,
     _poolDemonicCounsel,
+    _poolDenyTheWitch,
     _poolDespark,
     _poolDiaryOfDreams,
     _poolDidactEcho,
@@ -738,6 +741,7 @@ const shard: CardShard = {
     _poolNebelgastBeguiler,
     _poolNecropolisFiend,
     _poolNeurokInvisimancer,
+    _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,
     _poolNimbusOfTheIsles,
     _poolNourish,

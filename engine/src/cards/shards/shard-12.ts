@@ -167,6 +167,7 @@ import _poolGoNuts from "../pool/go-nuts.js";
 import _poolGoShintaiOfSharedPurpose from "../pool/go-shintai-of-shared-purpose.js";
 import _poolGoblinCommando from "../pool/goblin-commando.js";
 import _poolGoldForgedThopteryx from "../pool/gold-forged-thopteryx.js";
+import _poolGoliathTruck from "../pool/goliath-truck.js";
 import _poolGoneFishing from "../pool/gone-fishing.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
@@ -629,6 +630,7 @@ const shard: CardShard = {
     _poolGoShintaiOfSharedPurpose,
     _poolGoblinCommando,
     _poolGoldForgedThopteryx,
+    _poolGoliathTruck,
     _poolGoneFishing,
     _poolGoobbueGardener,
     _poolGorillaChieftain,

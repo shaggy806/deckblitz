@@ -37,6 +37,7 @@ import _poolBearTrap from "../pool/bear-trap.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
+import _poolBirthOfTheImperium from "../pool/birth-of-the-imperium.js";
 import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
@@ -143,6 +144,7 @@ import _poolErrantEphemeron from "../pool/errant-ephemeron.js";
 import _poolEvendoBrushrazer from "../pool/evendo-brushrazer.js";
 import _poolEvolvingWilds from "../pool/evolving-wilds.js";
 import _poolExcavationMole from "../pool/excavation-mole.js";
+import _poolExocrine from "../pool/exocrine.js";
 import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
@@ -254,6 +256,7 @@ import _poolLoxodonStalwart from "../pool/loxodon-stalwart.js";
 import _poolLoyalWarhound from "../pool/loyal-warhound.js";
 import _poolLuminousPhantom from "../pool/luminous-phantom.js";
 import _poolLurkingLizards from "../pool/lurking-lizards.js";
+import _poolLychguard from "../pool/lychguard.js";
 import _poolMadameHydraReanimated from "../pool/madame-hydra-reanimated.js";
 import _poolMagitekArmor from "../pool/magitek-armor.js";
 import _poolMakeObsolete from "../pool/make-obsolete.js";
@@ -345,6 +348,7 @@ import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
 import _poolShapeTheSands from "../pool/shape-the-sands.js";
+import _poolShardOfTheVoidDragon from "../pool/shard-of-the-void-dragon.js";
 import _poolShatterTheSource from "../pool/shatter-the-source.js";
 import _poolShatter from "../pool/shatter.js";
 import _poolShelteringLight from "../pool/sheltering-light.js";
@@ -494,6 +498,7 @@ const shard: CardShard = {
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
     _poolBileUrchin,
+    _poolBirthOfTheImperium,
     _poolBlackTomCassidy,
     _poolBlightedBurgeoning,
     _poolBlinkmothNexus,
@@ -600,6 +605,7 @@ const shard: CardShard = {
     _poolEvendoBrushrazer,
     _poolEvolvingWilds,
     _poolExcavationMole,
+    _poolExocrine,
     _poolExplorationBroodship,
     _poolExplosiveImpact,
     _poolFaerieFormation,
@@ -711,6 +717,7 @@ const shard: CardShard = {
     _poolLoyalWarhound,
     _poolLuminousPhantom,
     _poolLurkingLizards,
+    _poolLychguard,
     _poolMadameHydraReanimated,
     _poolMagitekArmor,
     _poolMakeObsolete,
@@ -802,6 +809,7 @@ const shard: CardShard = {
     _poolScurryOfSquirrels,
     _poolSerpentOfYawningDepths,
     _poolShapeTheSands,
+    _poolShardOfTheVoidDragon,
     _poolShatterTheSource,
     _poolShatter,
     _poolShelteringLight,

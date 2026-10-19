@@ -354,6 +354,7 @@ import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
 import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
 import _poolSkeletonArcher from "../pool/skeleton-archer.js";
+import _poolSkorpekhLord from "../pool/skorpekh-lord.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
 import _poolSlagdrillScrapper from "../pool/slagdrill-scrapper.js";
@@ -827,6 +828,7 @@ const shard: CardShard = {
     _poolSilvergillMentor,
     _poolSipOfHemlock,
     _poolSkeletonArcher,
+    _poolSkorpekhLord,
     _poolSkyTheaterStrix,
     _poolSkycoachConductor,
     _poolSlagdrillScrapper,

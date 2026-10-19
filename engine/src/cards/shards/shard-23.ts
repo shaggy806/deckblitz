@@ -425,7 +425,9 @@ import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTwiceUponATime from "../pool/twice-upon-a-time.js";
 import _poolTwilightDrover from "../pool/twilight-drover.js";
 import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
+import _poolTyranidHarridan from "../pool/tyranid-harridan.js";
 import _poolTyrranaxRex from "../pool/tyrranax-rex.js";
+import _poolTzaangorShaman from "../pool/tzaangor-shaman.js";
 import _poolUndergrowthLeopard from "../pool/undergrowth-leopard.js";
 import _poolUnholyGrotto from "../pool/unholy-grotto.js";
 import _poolUnluckyDrop from "../pool/unlucky-drop.js";
@@ -904,7 +906,9 @@ const shard: CardShard = {
     _poolTwiceUponATime,
     _poolTwilightDrover,
     _poolTwoHeadedZombie,
+    _poolTyranidHarridan,
     _poolTyrranaxRex,
+    _poolTzaangorShaman,
     _poolUndergrowthLeopard,
     _poolUnholyGrotto,
     _poolUnluckyDrop,

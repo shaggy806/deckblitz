@@ -269,6 +269,7 @@ import _poolNervousGardener from "../pool/nervous-gardener.js";
 import _poolNewGenerationsTechnique from "../pool/new-generations-technique.js";
 import _poolNezumiBoneReader from "../pool/nezumi-bone-reader.js";
 import _poolNissaAscendedAnimist from "../pool/nissa-ascended-animist.js";
+import _poolNoiseMarine from "../pool/noise-marine.js";
 import _poolNomadicElf from "../pool/nomadic-elf.js";
 import _poolNormanOsborn from "../pool/norman-osborn.js";
 import _poolNoviceDissector from "../pool/novice-dissector.js";
@@ -743,6 +744,7 @@ const shard: CardShard = {
     _poolNewGenerationsTechnique,
     _poolNezumiBoneReader,
     _poolNissaAscendedAnimist,
+    _poolNoiseMarine,
     _poolNomadicElf,
     _poolNormanOsborn,
     _poolNoviceDissector,

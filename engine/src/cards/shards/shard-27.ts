@@ -261,6 +261,7 @@ import _poolNakiaWakandanOperative from "../pool/nakia-wakandan-operative.js";
 import _poolNastyEnd from "../pool/nasty-end.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNightScythe from "../pool/night-scythe.js";
+import _poolNurglesRot from "../pool/nurgles-rot.js";
 import _poolObsianusGolem from "../pool/obsianus-golem.js";
 import _poolOctaviaLivingThesis from "../pool/octavia-living-thesis.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
@@ -740,6 +741,7 @@ const shard: CardShard = {
     _poolNastyEnd,
     _poolNegate,
     _poolNightScythe,
+    _poolNurglesRot,
     _poolObsianusGolem,
     _poolOctaviaLivingThesis,
     _poolOrderOfLeitbur,

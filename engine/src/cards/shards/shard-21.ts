@@ -438,6 +438,7 @@ import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
 import _tokensRagavanToken from "../tokens/ragavan-token.js";
 import _tokensRobotHeroToken11 from "../tokens/robot-hero-token-1-1.js";
+import _tokensRobotTokenCyberneticaDatasmith from "../tokens/robot-token-cybernetica-datasmith.js";
 import _tokensRoyalRoleToken from "../tokens/royal-role-token.js";
 import _tokensSoldierTokenFireNationAttacks from "../tokens/soldier-token-fire-nation-attacks.js";
 
@@ -880,6 +881,7 @@ const shard: CardShard = {
     _tokensPlantWarriorToken,
     _tokensRagavanToken,
     _tokensRobotHeroToken11,
+    _tokensRobotTokenCyberneticaDatasmith,
     _tokensRoyalRoleToken,
     _tokensSoldierTokenFireNationAttacks,
   ],

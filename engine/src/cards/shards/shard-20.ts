@@ -166,6 +166,7 @@ import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
+import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGildedSentinel from "../pool/gilded-sentinel.js";
@@ -674,6 +675,7 @@ const shard: CardShard = {
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
     _poolGenerousRevival,
+    _poolGenestealerPatriarch,
     _poolGeodeGrotto,
     _poolGerminateRecruits,
     _poolGildedSentinel,

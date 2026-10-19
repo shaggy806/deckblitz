@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolATaleForTheAges from "../pool/a-tale-for-the-ages.js";
 import _poolAccursedSpirit from "../pool/accursed-spirit.js";
+import _poolAcolyteHybrid from "../pool/acolyte-hybrid.js";
 import _poolAerieBowmasters from "../pool/aerie-bowmasters.js";
 import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
@@ -211,6 +212,7 @@ import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
+import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
 import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
@@ -475,6 +477,7 @@ const shard: CardShard = {
   pool: [
     _poolATaleForTheAges,
     _poolAccursedSpirit,
+    _poolAcolyteHybrid,
     _poolAerieBowmasters,
     _poolAgelessGuardian,
     _poolAgentsOfHydra,
@@ -681,6 +684,7 @@ const shard: CardShard = {
     _poolLivingWall,
     _poolLlanowarKnight,
     _poolLucentLiminid,
+    _poolLuciusTheEternal,
     _poolLuxurySuite,
     _poolMagusOfTheCoffers,
     _poolMaiScornfulStriker,
