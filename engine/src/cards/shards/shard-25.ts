@@ -72,6 +72,7 @@ import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
+import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
 import _poolConstrictorSage from "../pool/constrictor-sage.js";
 import _poolContaminatedLandscape from "../pool/contaminated-landscape.js";
 import _poolCrackInTime from "../pool/crack-in-time.js";
@@ -534,6 +535,7 @@ const shard: CardShard = {
     _poolCombatCelebrant,
     _poolConcertedCare,
     _poolConclaveSledgeCaptain,
+    _poolConductorOfCacophony,
     _poolConstrictorSage,
     _poolContaminatedLandscape,
     _poolCrackInTime,

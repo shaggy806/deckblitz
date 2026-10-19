@@ -154,6 +154,7 @@ import _poolGalestrike from "../pool/galestrike.js";
 import _poolGenghisFrog from "../pool/genghis-frog.js";
 import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
+import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
 import _poolGlacialWall from "../pool/glacial-wall.js";
 import _poolGlimmerBairn from "../pool/glimmer-bairn.js";
@@ -645,6 +646,7 @@ const shard: CardShard = {
     _poolGenghisFrog,
     _poolGeosurge,
     _poolGhostlyPilferer,
+    _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
     _poolGlacialWall,
     _poolGlimmerBairn,

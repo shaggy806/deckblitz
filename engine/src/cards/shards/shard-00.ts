@@ -208,6 +208,7 @@ import _poolImpostorOfTheSixthPride from "../pool/impostor-of-the-sixth-pride.js
 import _poolInGarruksWake from "../pool/in-garruks-wake.js";
 import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
 import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
+import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
@@ -702,6 +703,7 @@ const shard: CardShard = {
     _poolInGarruksWake,
     _poolIncreasingVengeance,
     _poolInfestedFleshcutter,
+    _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
     _poolIronLance,
     _poolIronSuitcase,

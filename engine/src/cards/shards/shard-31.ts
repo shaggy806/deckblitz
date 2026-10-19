@@ -326,6 +326,7 @@ import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
 import _poolRuinousRampage from "../pool/ruinous-rampage.js";
+import _poolRunadiBehemothCaller from "../pool/runadi-behemoth-caller.js";
 import _poolSHIELDFlyingCar from "../pool/s-h-i-e-l-d-flying-car.js";
 import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
@@ -788,6 +789,7 @@ const shard: CardShard = {
     _poolRufusShinra,
     _poolRuggedPrairie,
     _poolRuinousRampage,
+    _poolRunadiBehemothCaller,
     _poolSHIELDFlyingCar,
     _poolSamuraisKatana,
     _poolSandbarSerpent,

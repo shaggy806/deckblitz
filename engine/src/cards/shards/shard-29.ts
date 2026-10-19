@@ -205,6 +205,7 @@ import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
+import _poolIsuTheAbominable from "../pool/isu-the-abominable.js";
 import _poolJawboneDuelist from "../pool/jawbone-duelist.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
@@ -391,6 +392,7 @@ import _poolTempleAcolyte from "../pool/temple-acolyte.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
+import _poolTheArchimandrite from "../pool/the-archimandrite.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
@@ -673,6 +675,7 @@ const shard: CardShard = {
     _poolInterdisciplinaryMascot,
     _poolInundatedArchive,
     _poolInvasionOfXerex,
+    _poolIsuTheAbominable,
     _poolJawboneDuelist,
     _poolJirinaDauntlessGeneral,
     _poolJorKadeenFirstGoldwarden,
@@ -859,6 +862,7 @@ const shard: CardShard = {
     _poolTendrilOfTheMycotyrant,
     _poolThalakosSeer,
     _poolThaliasLieutenant,
+    _poolTheArchimandrite,
     _poolTheFirstSliver,
     _poolTheMasterOfKeys,
     _poolTheQueenOfDale,

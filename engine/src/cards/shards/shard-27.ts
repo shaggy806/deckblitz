@@ -390,6 +390,7 @@ import _poolTellingTime from "../pool/telling-time.js";
 import _poolTempleOfEnlightenment from "../pool/temple-of-enlightenment.js";
 import _poolTempleOfPlenty from "../pool/temple-of-plenty.js";
 import _poolTenderWildguide from "../pool/tender-wildguide.js";
+import _poolTerisiaresDevastation from "../pool/terisiares-devastation.js";
 import _poolTervigon from "../pool/tervigon.js";
 import _poolTestOfEndurance from "../pool/test-of-endurance.js";
 import _poolTeysaEnvoyOfGhosts from "../pool/teysa-envoy-of-ghosts.js";
@@ -864,6 +865,7 @@ const shard: CardShard = {
     _poolTempleOfEnlightenment,
     _poolTempleOfPlenty,
     _poolTenderWildguide,
+    _poolTerisiaresDevastation,
     _poolTervigon,
     _poolTestOfEndurance,
     _poolTeysaEnvoyOfGhosts,

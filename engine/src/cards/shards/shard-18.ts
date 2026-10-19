@@ -486,6 +486,7 @@ import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-ara
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
 import _tokensWhiteDogToken11 from "../tokens/white-dog-token-1-1.js";
+import _tokensZeppelin from "../tokens/zeppelin.js";
 import _tokensZombieDruidToken from "../tokens/zombie-druid-token.js";
 
 const shard: CardShard = {
@@ -975,6 +976,7 @@ const shard: CardShard = {
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensSturdyShieldToken,
     _tokensWhiteDogToken11,
+    _tokensZeppelin,
     _tokensZombieDruidToken,
   ],
 };

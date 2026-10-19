@@ -20,6 +20,7 @@ import _poolAntiquitiesOnTheLoose from "../pool/antiquities-on-the-loose.js";
 import _poolAprilOneilKunoichiTrainee from "../pool/april-oneil-kunoichi-trainee.js";
 import _poolArcboundPrototype from "../pool/arcbound-prototype.js";
 import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
+import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
@@ -210,6 +211,7 @@ import _poolLightningWolf from "../pool/lightning-wolf.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
 import _poolLionheartMaverick from "../pool/lionheart-maverick.js";
 import _poolLiquimetalCoating from "../pool/liquimetal-coating.js";
+import _poolLitaMechanicalEngineer from "../pool/lita-mechanical-engineer.js";
 import _poolLivingLectern from "../pool/living-lectern.js";
 import _poolLlanowarBehemoth from "../pool/llanowar-behemoth.js";
 import _poolLlanowarDead from "../pool/llanowar-dead.js";
@@ -408,6 +410,7 @@ import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTorGiant from "../pool/tor-giant.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
+import _poolToweringGibbon from "../pool/towering-gibbon.js";
 import _poolTrainingGrounds from "../pool/training-grounds.js";
 import _poolTranquilThicket from "../pool/tranquil-thicket.js";
 import _poolTranscendentMessage from "../pool/transcendent-message.js";
@@ -510,6 +513,7 @@ const shard: CardShard = {
     _poolAprilOneilKunoichiTrainee,
     _poolArcboundPrototype,
     _poolArchonOfFallingStars,
+    _poolArdozCobblerOfWar,
     _poolArmasaurGuide,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
@@ -700,6 +704,7 @@ const shard: CardShard = {
     _poolLilianaTheRepentant,
     _poolLionheartMaverick,
     _poolLiquimetalCoating,
+    _poolLitaMechanicalEngineer,
     _poolLivingLectern,
     _poolLlanowarBehemoth,
     _poolLlanowarDead,
@@ -898,6 +903,7 @@ const shard: CardShard = {
     _poolToothyImaginaryFriend,
     _poolTorGiant,
     _poolTowerOfFortunes,
+    _poolToweringGibbon,
     _poolTrainingGrounds,
     _poolTranquilThicket,
     _poolTranscendentMessage,

@@ -93,6 +93,7 @@ import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
 import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
+import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
@@ -252,6 +253,7 @@ import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
+import _poolOssuaryRats from "../pool/ossuary-rats.js";
 import _poolOverTheEdge from "../pool/over-the-edge.js";
 import _poolOwlinShieldmage from "../pool/owlin-shieldmage.js";
 import _poolPanickedAltisaur from "../pool/panicked-altisaur.js";
@@ -538,6 +540,7 @@ const shard: CardShard = {
     _poolDurkwoodBoars,
     _poolDuskLegionDreadnought,
     _poolDuskRoseReliquary,
+    _poolDutifulReplicator,
     _poolEagleVision,
     _poolEldraziMonument,
     _poolEldritchEvolution,
@@ -697,6 +700,7 @@ const shard: CardShard = {
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,
+    _poolOssuaryRats,
     _poolOverTheEdge,
     _poolOwlinShieldmage,
     _poolPanickedAltisaur,

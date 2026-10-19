@@ -270,6 +270,7 @@ import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
+import _poolPlanarAtlas from "../pool/planar-atlas.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
@@ -727,6 +728,7 @@ const shard: CardShard = {
     _poolPilferedPlans,
     _poolPillarOfTheParuns,
     _poolPixieQueen,
+    _poolPlanarAtlas,
     _poolPortTown,
     _poolPostmortemProfessor,
     _poolProdigalSorcerer,

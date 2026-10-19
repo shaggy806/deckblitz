@@ -361,6 +361,7 @@ import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTemurMonument from "../pool/temur-monument.js";
+import _poolTerminationFacilitator from "../pool/termination-facilitator.js";
 import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
@@ -790,6 +791,7 @@ const shard: CardShard = {
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,
     _poolTemurMonument,
+    _poolTerminationFacilitator,
     _poolTesharAncestorsApostle,
     _poolTheFantasticFour,
     _poolTheGaffer,

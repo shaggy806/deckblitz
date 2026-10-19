@@ -93,6 +93,7 @@ import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
+import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
@@ -180,6 +181,7 @@ import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
+import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
@@ -526,6 +528,7 @@ const shard: CardShard = {
     _poolDegaDisciple,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
+    _poolDiscipleOfPerdition,
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
     _poolDocOckSinisterScientist,
@@ -613,6 +616,7 @@ const shard: CardShard = {
     _poolHydraTroopers,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
+    _poolIngeniousLeonin,
     _poolInvasionOfKylem,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,

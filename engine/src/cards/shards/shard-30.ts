@@ -249,6 +249,7 @@ import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
+import _poolLaunchMishap from "../pool/launch-mishap.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
@@ -373,6 +374,7 @@ import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
+import _poolSpectralHuntCaller from "../pool/spectral-hunt-caller.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
@@ -724,6 +726,7 @@ const shard: CardShard = {
     _poolKoyaDeathFromAbove,
     _poolLaeliaTheBladeReforged,
     _poolLatticeBladeMantis,
+    _poolLaunchMishap,
     _poolLaunchParty,
     _poolLavaglidePathway,
     _poolLightOfHope,
@@ -848,6 +851,7 @@ const shard: CardShard = {
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
     _poolSpawningKraken,
+    _poolSpectralHuntCaller,
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,

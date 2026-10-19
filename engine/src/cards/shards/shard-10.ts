@@ -296,6 +296,7 @@ import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
 import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRacersRing from "../pool/racers-ring.js";
+import _poolRampagingGrowth from "../pool/rampaging-growth.js";
 import _poolRanAndShaw from "../pool/ran-and-shaw.js";
 import _poolRavenousRats from "../pool/ravenous-rats.js";
 import _poolRealmwalker from "../pool/realmwalker.js";
@@ -347,6 +348,7 @@ import _poolSiegeRhino from "../pool/siege-rhino.js";
 import _poolSilentArtisan from "../pool/silent-artisan.js";
 import _poolSilundiIsle from "../pool/silundi-isle.js";
 import _poolSimplify from "../pool/simplify.js";
+import _poolSkullslitherWorm from "../pool/skullslither-worm.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
@@ -773,6 +775,7 @@ const shard: CardShard = {
     _poolPunkFrogs,
     _poolQuantumMisalignment,
     _poolRacersRing,
+    _poolRampagingGrowth,
     _poolRanAndShaw,
     _poolRavenousRats,
     _poolRealmwalker,
@@ -824,6 +827,7 @@ const shard: CardShard = {
     _poolSilentArtisan,
     _poolSilundiIsle,
     _poolSimplify,
+    _poolSkullslitherWorm,
     _poolSkyshroudArcher,
     _poolSkywinderDrake,
     _poolSlashTheRanks,

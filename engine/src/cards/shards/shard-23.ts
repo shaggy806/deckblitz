@@ -332,6 +332,7 @@ import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
+import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolScapeshift from "../pool/scapeshift.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
@@ -401,6 +402,7 @@ import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThopterAssembly from "../pool/thopter-assembly.js";
+import _poolThopterShop from "../pool/thopter-shop.js";
 import _poolThorin from "../pool/thorin.js";
 import _poolThunderLasso from "../pool/thunder-lasso.js";
 import _poolThunderingBroodwagon from "../pool/thundering-broodwagon.js";
@@ -802,6 +804,7 @@ const shard: CardShard = {
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
     _poolSarahJaneSmith,
+    _poolSardianAvenger,
     _poolSarkhanFireblood,
     _poolScapeshift,
     _poolScorchedGeyser,
@@ -871,6 +874,7 @@ const shard: CardShard = {
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
     _poolThopterAssembly,
+    _poolThopterShop,
     _poolThorin,
     _poolThunderLasso,
     _poolThunderingBroodwagon,
