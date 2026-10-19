@@ -28,6 +28,8 @@ import type { CardFilter } from "./filter.js";
 import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
+import { defaultVenture } from "./decisions/venture.js";
+import type { VentureAnswer, VentureOffer } from "./decisions/venture.js";
 import type { RandomSource } from "./decisions/contract.js";
 import {
   assignedCombatDamage,
@@ -350,6 +352,12 @@ export interface PlayerController {
     view: ControllerView,
     eligible: readonly ObjectId[],
   ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
+  /**
+   * A venture's choice (rule 701.49): of `offer.dungeons`, the dungeon to
+   * enter, or of `offer.rooms`, the room to move into at a fork —
+   * `offer.maps` draws them.
+   */
+  chooseVenture(view: ControllerView, offer: VentureOffer): VentureAnswer;
   /**
    * An effect is resolving that chooses permanents without targeting them
    * ("untap up to two lands"): return from `min` to `max` of `eligible`,
@@ -707,6 +715,10 @@ export class AutomaticController implements PlayerController {
     return defaultTimeTravel(view, eligible);
   }
 
+  chooseVenture(_view: ControllerView, offer: VentureOffer): VentureAnswer {
+    return defaultVenture(offer);
+  }
+
   choosePermanents(
     view: ControllerView,
     eligible: readonly ObjectId[],
@@ -976,6 +988,8 @@ export class ScriptedController implements PlayerController {
     colors.length === 0 ? {} : { [colors[0]]: amount };
   /** As `AutomaticController`'s (`defaultTimeTravel`). */
   chooseTimeTravelFn: TimeTravelChooser = (view, eligible) => defaultTimeTravel(view, eligible);
+  /** The first offered dungeon or room (`defaultVenture`). */
+  chooseVentureFn: (view: ControllerView, offer: VentureOffer) => VentureAnswer = (_view, offer) => defaultVenture(offer);
   /** Your own first, up to `max` — see `ownPermanentsFirst`; under a power
    * cap, the most power that fits (`keepMostPower`). */
   choosePermanentsFn: (
@@ -1183,6 +1197,10 @@ export class ScriptedController implements PlayerController {
     eligible: readonly ObjectId[],
   ): { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] } {
     return this.chooseTimeTravelFn(view, eligible);
+  }
+
+  chooseVenture(view: ControllerView, offer: VentureOffer): VentureAnswer {
+    return this.chooseVentureFn(view, offer);
   }
 
   choosePermanents(

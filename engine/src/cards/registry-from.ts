@@ -1,15 +1,17 @@
 /**
  * A registry from a given set of card definitions, plus the engine's own
  * synthetic ones every game needs: face-down cards, the locked Room door,
- * emblems, speed, rad counters and the monarch. `createDefaultRegistry` (`registry.ts`) is this over the
+ * emblems, speed, rad counters, the monarch, the initiative and the dungeons. `createDefaultRegistry` (`registry.ts`) is this over the
  * whole pool; a browser running a game builds one from the card shards it has
  * loaded (`docs/plans/local-rooms.md`), which can't import the pool.
  */
 
 import { CardRegistry } from "./card-registry.js";
 import type { CardDefinition } from "./define.js";
+import { DUNGEON_DEFINITIONS } from "./dungeons.js";
 import { EMBLEM_DEFINITIONS } from "./emblem.js";
 import { FACE_DOWN_DEFINITIONS } from "./face-down.js";
+import { INITIATIVE_DEFINITIONS } from "./initiative.js";
 import { LOCKED_ROOM_DEFINITION } from "./locked-room.js";
 import { MONARCH_DEFINITIONS } from "./monarch.js";
 import { RAD_DEFINITIONS } from "./rad.js";
@@ -24,5 +26,7 @@ export function registryFrom(cards: Iterable<CardDefinition>): CardRegistry {
   for (const card of SPEED_DEFINITIONS) registry.register(card);
   for (const card of RAD_DEFINITIONS) registry.register(card);
   for (const card of MONARCH_DEFINITIONS) registry.register(card);
+  for (const card of INITIATIVE_DEFINITIONS) registry.register(card);
+  for (const card of DUNGEON_DEFINITIONS) registry.register(card);
   return registry;
 }

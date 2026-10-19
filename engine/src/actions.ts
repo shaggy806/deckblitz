@@ -668,6 +668,15 @@ export type Action =
       readonly remove: readonly ObjectId[];
     }
   | {
+      /** Answers a pending `venture` decision (rule 701.49): the dungeon to
+       * enter, or the room (an index into the dungeon's rooms) to move into
+       * at a fork — whichever the offer asks. */
+      readonly type: "venture";
+      readonly player: PlayerId;
+      readonly dungeon?: string;
+      readonly room?: number;
+    }
+  | {
       /** Answers a pending `split-mana` decision: how many of each offered
        * colour, every count a whole number and their sum the decision's
        * `amount`. A colour left out is none. */
@@ -755,6 +764,14 @@ export const actionPlayer = (action: Action): PlayerId => action.player;
  * checks for. A `null` in a non-optional slot is rejected.
  */
 export type ChosenTargets = readonly (TargetRef | null)[];
+
+/** A dungeon as a driver draws it (rule 309.4): its name, and each room's
+ * name, printed effect and the rooms its arrows lead to (by index; none for
+ * the bottommost). Public information — what's printed on the card. */
+export interface DungeonMap {
+  readonly name: string;
+  readonly rooms: readonly { readonly name: string; readonly text: string; readonly next: readonly number[] }[];
+}
 
 export type LegalAction =
   | { readonly kind: "pass-priority" }
@@ -1438,6 +1455,19 @@ export type LegalAction =
        * put a time counter on it, remove one, or neither. */
       readonly kind: "time-travel";
       readonly eligible: readonly ObjectId[];
+    }
+  | {
+      /** A venture's choice (rule 701.49) — which of `dungeons` to enter, or,
+       * at a fork in `maps[0]` (the player's dungeon), which of `rooms` to
+       * move into from `from`. `maps` is every dungeon the choice is about,
+       * rooms and arrows included, so a driver can draw it: the candidates
+       * when entering, the current dungeon at a fork. */
+      readonly kind: "venture";
+      readonly source: ObjectId;
+      readonly dungeons?: readonly string[];
+      readonly from?: number;
+      readonly rooms?: readonly number[];
+      readonly maps: readonly DungeonMap[];
     }
   | {
       /** "Add N mana in any combination of …": how many of each of `colors`,

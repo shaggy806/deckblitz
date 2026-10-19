@@ -1773,6 +1773,15 @@ export interface PlayerState {
    * source in the rules, an object here to trigger from. Its definition is
    * `cards/rad.ts`'s. */
   radAbility?: ObjectId;
+  /** The dungeon this player is in (rule 309): its object in the command
+   * zone (in no zone list, like an emblem's — it can't be cast and never
+   * moves, 309.2c), its name (`cards/dungeons.ts`) and the room their venture
+   * marker is on, by index. Absent while they own no dungeon there. */
+  dungeon?: { readonly object: ObjectId; readonly name: string; readonly room: number };
+  /** The dungeons this player has completed (rule 309.7), oldest first — a
+   * name once per completion. What "if you've completed a dungeon" reads.
+   * Absent until the first. */
+  completedDungeons?: string[];
   /** Mana floating in this player's pool, as individual units rather than a
    * count per colour — a unit may be restricted in what it pays for, may
    * survive the end of a step, or may carry a rider that fires when it's
@@ -2479,6 +2488,23 @@ export type AwaitingDecision =
       readonly player: PlayerId;
       readonly eligible: readonly ObjectId[];
       readonly source: ObjectId;
+    }
+  | {
+      /**
+       * A venture's choice (rule 701.49): which dungeon to enter (`dungeons`
+       * — 701.49a, c), or, at a fork, which room to move into (`rooms`, by
+       * index into `dungeon`'s rooms, from room `from` — 701.49b). Exactly
+       * one of the two is set. `source` is the spell or ability that made
+       * `player` venture. The rest of a resolution waits on it as a
+       * suspended one does.
+       */
+      readonly kind: "venture";
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly dungeons?: readonly string[];
+      readonly dungeon?: string;
+      readonly from?: number;
+      readonly rooms?: readonly number[];
     }
   | {
       /**
@@ -3974,6 +4000,15 @@ export interface GameState {
    * controller always the current monarch (`Game.setMonarch`). Absent until
    * then, and in a state saved before it existed. */
   monarchAbility?: ObjectId;
+  /** The player who has the initiative (rule 726), or `null`/absent when no
+   * player does — there is no initiative until an effect makes someone take
+   * it (726.1). */
+  initiative?: PlayerId | null;
+  /** The object the initiative's three inherent triggered abilities ride on
+   * (rule 726.2 — `cards/initiative.ts`), as `monarchAbility` does the
+   * monarch's: made the first time anyone takes it, its controller always
+   * the player who has it. */
+  initiativeAbility?: ObjectId;
   /** Emblems in the game (rule 114 — ROADMAP Phase 10). An emblem is a
    * player-owned object with one ability and no other characteristics; it has
    * no zone and can't be removed. Its `ability` is applied by the layer system

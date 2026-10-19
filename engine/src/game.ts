@@ -64,6 +64,8 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
+import { DUNGEONS } from "./cards/dungeons.js";
+import { INITIATIVE_CARD } from "./cards/initiative.js";
 import { MONARCH_CARD } from "./cards/monarch.js";
 import { RAD_CARD } from "./cards/rad.js";
 import { SPEED_CARD } from "./cards/speed.js";
@@ -1196,6 +1198,7 @@ export class Game {
       applyProliferate: (player, chosen) => this.applyProliferate(player, chosen),
       applyManaSplit: (player, counts) => this.applyManaSplit(player, counts),
       applyTimeTravel: (player, add, remove) => this.applyTimeTravel(player, add, remove),
+      applyVenture: (player, choice) => this.applyVenture(player, choice),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
       applyModesChoice: (player, modes, x, forAll) =>
         this.applyModesChoice(player, modes, x, forAll),
@@ -5673,6 +5676,7 @@ export class Game {
     // game saved before rule 725.2's abilities used the stack, or one set up
     // directly): make it before anything can trigger.
     this.ensureMonarchAbility();
+    this.ensureInitiativeAbility();
     this.emit({ type: "step-began", step, phase: PHASE_OF_STEP[step] });
 
     // Delayed triggered abilities waiting on this step (rule 603.7). Before
@@ -16923,6 +16927,10 @@ export class Game {
     if (this.state.monarchAbility !== undefined && this.state.monarch !== null) {
       candidates.add(this.state.monarchAbility);
     }
+    // And the initiative's three (rule 726.2), while someone has it.
+    if (this.state.initiativeAbility !== undefined && (this.state.initiative ?? null) !== null) {
+      candidates.add(this.state.initiativeAbility);
+    }
     // Eminence (an ability word, rule 207.2c): a card in the command zone
     // whose triggered ability says it functions there (rule 113.6b). Added to
     // the same scan rather than given one of its own, so ordering, APNAP and
@@ -18105,6 +18113,12 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "takes-initiative":
+        return event.type === "initiative-taken" && this.matchesWhoPlayer(spec.who, event.player, self);
+      case "ventures":
+        return event.type === "ventured" && this.matchesWhoPlayer(spec.who, event.player, self);
+      case "completes-dungeon":
+        return event.type === "dungeon-completed" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "ring-tempts":
         // Rule 701.54d — once the choice is made, or found impossible.
         return (
@@ -18271,7 +18285,8 @@ export class Game {
           event.type !== "damage-dealt" ||
           event.target.kind !== "player" ||
           (spec.combat !== undefined && event.combat !== spec.combat) ||
-          (spec.to === "opponent" && event.target.player === self.controller)
+          (spec.to === "opponent" && event.target.player === self.controller) ||
+          (spec.to === "you" && event.target.player !== self.controller)
         ) {
           return false;
         }
@@ -21914,6 +21929,10 @@ export class Game {
           this.setMonarch(p, via ?? "effect");
         }
       },
+      takeInitiative: (who, via) => {
+        for (const p of scoped(who ?? "you")) this.takeInitiative(p, via ?? "effect");
+      },
+      venture: (undercity) => this.ventureInto(controller, undercity, source),
       increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
       speedOf: (player) => speedOf(this.state, player),
       ringTemptBegin: () => {
@@ -22064,7 +22083,7 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
         // the stint this ability refers to (rule 607.2a).
         const sourceObject = this.state.objects[source];
@@ -22098,6 +22117,7 @@ export class Game {
           exileLink,
           enterAs,
           picker,
+          withCounters,
         );
       },
     };
@@ -22143,6 +22163,8 @@ export class Game {
     /** Who makes the choice when it isn't `player`, whose zone it is — an
      * opponent picking from your graveyard (Tasigur, the Golden Fang). */
     picker?: PlayerId,
+    /** Chosen cards bound for the battlefield enter with these counters. */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): void {
     // Every graveyard, in turn order — all public (Necromantic Selection).
     // Or the resolving ability's own target cards, still in a graveyard
@@ -22198,6 +22220,7 @@ export class Game {
       destination,
       leftover,
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
+      ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
       ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
       // A card from another player's graveyard enters under the chooser's
       // control ("to the battlefield under your control").
@@ -30869,6 +30892,178 @@ export class Game {
     this.emit({ type: "monarch-changed", player, via });
   }
 
+  /** `player` takes the initiative (rule 726) — also when they already have
+   * it (726.5: one designation, but the "whenever a player takes the
+   * initiative" ability triggers again). Its three abilities ride one object,
+   * like the monarch's (`ensureInitiativeAbility`). */
+  private takeInitiative(player: PlayerId, via: "effect" | "combat-damage" | "holder-left"): void {
+    if (this.state.players[player]?.hasLost !== false) return;
+    this.state.initiative = player;
+    this.ensureInitiativeAbility();
+    this.emit({ type: "initiative-taken", player, via });
+  }
+
+  /** The initiative's ability object exists and is controlled by the player
+   * who has it, whenever someone does. */
+  private ensureInitiativeAbility(): void {
+    const holder = this.state.initiative ?? null;
+    if (holder === null) return;
+    if (this.state.initiativeAbility === undefined) {
+      const object = this.makeCardObject(INITIATIVE_CARD, holder, { zone: "command" });
+      this.state.objects[object].kind = "emblem";
+      this.state.objects[object].timestamp = this.freshTimestamp();
+      this.state.initiativeAbility = object;
+      this.openStint(object);
+    } else if (this.state.objects[this.state.initiativeAbility].controller !== holder) {
+      this.state.objects[this.state.initiativeAbility].controller = holder;
+    }
+  }
+
+  /**
+   * `player` ventures into the dungeon (rule 701.49), or into Undercity
+   * (701.49d) when `undercity`. In no dungeon, they enter one (701.49a —
+   * `beginEnterDungeon`); on a room with arrows out, they move along one,
+   * choosing at a fork (701.49b — the `venture` decision); on the bottommost
+   * room, they complete the dungeon and enter another (701.49c). `source`
+   * names the decision's source, if one is asked.
+   */
+  private ventureInto(player: PlayerId, undercity: boolean, source: ObjectId): void {
+    const ps = this.state.players[player];
+    if (ps === undefined || ps.hasLost) return;
+    const current = ps.dungeon;
+    if (current === undefined) {
+      this.beginEnterDungeon(player, undercity, source);
+      return;
+    }
+    const dungeon = DUNGEONS.get(current.name);
+    const room = dungeon?.rooms[current.room];
+    if (dungeon === undefined || room === undefined) return;
+    if (room.next.length === 0) {
+      this.completeDungeon(player);
+      this.beginEnterDungeon(player, undercity, source);
+      return;
+    }
+    if (room.next.length === 1) {
+      this.enterRoom(player, room.next[0]!, false);
+      return;
+    }
+    this.state.awaiting = {
+      kind: "venture",
+      player,
+      source,
+      dungeon: current.name,
+      from: current.room,
+      rooms: [...room.next],
+    };
+  }
+
+  /** Rule 701.49a: put a dungeon into the command zone, the marker on its
+   * topmost room. "Venture into Undercity" enters Undercity; a plain venture
+   * chooses among the others (Undercity's own line: "You can't enter this
+   * dungeon unless you 'venture into Undercity'") — asked when there's more
+   * than one. */
+  private beginEnterDungeon(player: PlayerId, undercity: boolean, source: ObjectId): void {
+    const options = [...DUNGEONS.values()]
+      .filter((d) => (d.undercity === true) === undercity)
+      .map((d) => d.name);
+    if (options.length === 0) return;
+    if (options.length === 1) {
+      this.enterDungeon(player, options[0]!);
+      return;
+    }
+    this.state.awaiting = { kind: "venture", player, source, dungeons: options };
+  }
+
+  /** The dungeon `name` goes into the command zone under `player`'s
+   * ownership (309.2b): an object in no zone list, as an emblem's is — it
+   * can't be cast and never moves (309.2c) — and the marker on its topmost
+   * room (309.4a), whose ability triggers. */
+  private enterDungeon(player: PlayerId, name: string): void {
+    const object = this.makeCardObject(name, player, { zone: "command" });
+    this.state.objects[object].kind = "emblem";
+    this.state.objects[object].timestamp = this.freshTimestamp();
+    this.openStint(object);
+    this.state.players[player].dungeon = { object, name, room: 0 };
+    this.enterRoom(player, 0, true);
+  }
+
+  /** The venture marker moves into `room` of `player`'s dungeon (309.5a), and
+   * the room's ability triggers (309.4c): controlled by the dungeon's owner,
+   * its source the dungeon, choosing its targets as it goes on the stack —
+   * carried as a record of its own, the way a reflexive trigger is, since no
+   * card lists it. */
+  private enterRoom(player: PlayerId, room: number, entered: boolean): void {
+    const ps = this.state.players[player];
+    const current = ps.dungeon;
+    if (current === undefined) return;
+    const def = DUNGEONS.get(current.name)?.rooms[room];
+    if (def === undefined) return;
+    ps.dungeon = { ...current, room };
+    this.emit({ type: "ventured", player, dungeon: current.name, room, roomName: def.name, entered });
+    this.state.pendingTriggers.push({
+      sourceObjectId: current.object,
+      cardName: current.name,
+      abilityIndex: room,
+      controller: player,
+      reflexive: { targets: [...def.targets], effect: def.effect, text: `${def.name} — ${def.text}` },
+    });
+  }
+
+  /** `player` completes their dungeon (rule 309.7): it's removed from the
+   * game — its object is left behind in no zone, unreachable — and recorded
+   * among the dungeons they've completed. */
+  private completeDungeon(player: PlayerId): void {
+    const ps = this.state.players[player];
+    const current = ps.dungeon;
+    if (current === undefined) return;
+    delete ps.dungeon;
+    (ps.completedDungeons ??= []).push(current.name);
+    this.emit({ type: "dungeon-completed", player, dungeon: current.name });
+  }
+
+  /** Answers a `venture` decision: the dungeon to enter (701.49a, c) or the
+   * room to move into at a fork (701.49b). */
+  private applyVenture(player: PlayerId, choice: { readonly dungeon?: string; readonly room?: number }): void {
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "venture" || awaiting.player !== player) {
+      throw new Error(`${player} is not being asked to venture`);
+    }
+    this.state.awaiting = null;
+    if (awaiting.dungeons !== undefined) {
+      if (choice.dungeon === undefined || !awaiting.dungeons.includes(choice.dungeon)) {
+        throw new Error(`${String(choice.dungeon)} is not a dungeon ${player} may enter`);
+      }
+      this.enterDungeon(player, choice.dungeon);
+    } else {
+      if (choice.room === undefined || !(awaiting.rooms ?? []).includes(choice.room)) {
+        throw new Error(`${String(choice.room)} is not a room ${player} may move into`);
+      }
+      this.enterRoom(player, choice.room, false);
+    }
+    // The resolution that asked carries on (and leaves the stack).
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+  }
+
+  /** Rule 309.6: a dungeon whose marker is on its bottommost room, and which
+   * isn't the source of a room ability that has triggered but not yet left
+   * the stack, is removed — completed. Returns whether one was. */
+  private completeFinishedDungeons(): boolean {
+    let any = false;
+    for (const player of this.state.turnOrder) {
+      const current = this.state.players[player]?.dungeon;
+      if (current === undefined) continue;
+      if ((DUNGEONS.get(current.name)?.rooms[current.room]?.next.length ?? 1) !== 0) continue;
+      const pending = this.state.pendingTriggers.some((t) => t.sourceObjectId === current.object);
+      const onStack = this.state.zones.shared.stack.some(
+        (id) => this.state.objects[id]?.kind === "ability" && this.state.objects[id]?.sourceObjectId === current.object,
+      );
+      if (pending || onStack) continue;
+      this.completeDungeon(player);
+      any = true;
+    }
+    return any;
+  }
+
   /** The monarch's ability object exists and is controlled by the monarch,
    * whenever there is one (see `setMonarch`). */
   private ensureMonarchAbility(): void {
@@ -30978,6 +31173,8 @@ export class Game {
       // Rule 702.195c: an enduring story is had before the game looks for
       // what triggered.
       if (this.grantEnduringStories()) changed = true;
+      // A dungeon finished on its bottommost room is completed (rule 309.6).
+      if (this.completeFinishedDungeons()) changed = true;
 
       // Continuous control effects (layer 2), recomputed each pass: a
       // permanent is controlled by its owner unless a control effect
@@ -31384,6 +31581,19 @@ export class Game {
       );
       if (next === undefined) this.state.monarch = null;
       else this.setMonarch(next, "monarch-left");
+    }
+    // The initiative passes the same way (rule 726.4) — and it is *taken*,
+    // so "whenever a player takes the initiative" triggers for whoever gets
+    // it.
+    if (this.state.initiative === player) {
+      const order = this.state.turnOrder;
+      const active = this.activePlayer;
+      const start = active !== player ? order.indexOf(active) : order.indexOf(player) + 1;
+      const next = [...order.slice(start), ...order.slice(0, start)].find(
+        (p) => !this.state.players[p].hasLost,
+      );
+      if (next === undefined) this.state.initiative = null;
+      else this.takeInitiative(next, "holder-left");
     }
 
     this.recomputeControl();

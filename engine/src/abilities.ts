@@ -618,6 +618,27 @@ export type TriggerSpec =
       readonly chosen?: boolean | "other";
     }
   | {
+      /** "Whenever [a player] takes the initiative" (rule 726) — including
+       * one who already had it (726.5). `who` is the player who took it. The
+       * initiative's own "whenever a player takes the initiative, that player
+       * ventures into Undercity" is this, on `cards/initiative.ts`. */
+      readonly on: "takes-initiative";
+      readonly who: TriggerWho;
+    }
+  | {
+      /** "Whenever you venture into the dungeon" (rule 701.49 — Nadaar,
+       * Selfless Paladin): once per venture, as the marker moves. `who` is
+       * the player who ventured. */
+      readonly on: "ventures";
+      readonly who: TriggerWho;
+    }
+  | {
+      /** "Whenever you complete a dungeon" (rule 309.7 — Sefris of the
+       * Hidden Ways). `who` is the player who completed it. */
+      readonly on: "completes-dungeon";
+      readonly who: TriggerWho;
+    }
+  | {
       /**
        * "Whenever you roll one or more dice" (rule 706): once per roll,
        * however many dice it took (Brazen Dwarf). `{ triggerValue: true }`
@@ -1159,7 +1180,10 @@ export type TriggerSpec =
       readonly on: "deals-damage-batch";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
-      readonly to?: "player" | "opponent";
+      /** `"you"`: only damage to the ability's controller — the initiative's
+       * "whenever one or more creatures a player controls deal combat damage
+       * to you" (rule 726.2, `cards/initiative.ts`). */
+      readonly to?: "player" | "opponent" | "you";
       readonly combat?: boolean;
       readonly once?: "per-player" | "per-event";
     }

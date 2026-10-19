@@ -181,6 +181,36 @@ export type GameEvent =
       readonly via: "effect" | "combat-damage" | "monarch-left";
     })
   | (Base & {
+      /** A player took the initiative (rule 726) — also when they already had
+       * it (726.5: the "whenever a player takes the initiative" ability
+       * triggers, but there's still one designation). `via` is how: an
+       * effect, combat damage to the holder, or the holder leaving the game
+       * (726.4). */
+      readonly type: "initiative-taken";
+      readonly player: PlayerId;
+      readonly via: "effect" | "combat-damage" | "holder-left";
+    })
+  | (Base & {
+      /** A player ventured (rule 701.49): their venture marker entered
+       * `room` (an index into the dungeon's rooms — `cards/dungeons.ts`) of
+       * `dungeon`, which `entered` says they've just put into the command
+       * zone (701.49a, c). The room's ability triggers (309.4c). */
+      readonly type: "ventured";
+      readonly player: PlayerId;
+      readonly dungeon: string;
+      readonly room: number;
+      readonly roomName: string;
+      readonly entered: boolean;
+    })
+  | (Base & {
+      /** A player completed a dungeon: it was removed from the game from its
+       * bottommost room (rule 309.7 — by venturing on, 701.49c, or the
+       * state-based action, 309.6). */
+      readonly type: "dungeon-completed";
+      readonly player: PlayerId;
+      readonly dungeon: string;
+    })
+  | (Base & {
       /** A player's energy count changed (rule 122 / {E} — ROADMAP Phase 10). */
       readonly type: "energy-changed";
       readonly player: PlayerId;

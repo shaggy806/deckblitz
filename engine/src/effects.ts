@@ -4331,6 +4331,27 @@ export type EffectSpec =
       readonly via?: "combat-damage";
     }
   | {
+      /** A player takes the initiative (rule 726) — `who` defaults to the
+       * effect's controller ("you take the initiative"). One who already has
+       * it takes it again (726.5: the venture still triggers). `via:
+       * "combat-damage"` is the initiative's own steal ability
+       * (`cards/initiative.ts`), so the event says how. */
+      readonly kind: "take-initiative";
+      readonly who?: PlayerScope;
+      readonly via?: "combat-damage";
+    }
+  | {
+      /** The effect's controller ventures into the dungeon (rule 701.49):
+       * enter a dungeon if they're in none (choosing which, 701.49a), move to
+       * the next room (choosing at a fork, 701.49b), or complete it from the
+       * bottommost room and enter another (701.49c). `into: "undercity"` is
+       * "venture into Undercity" (701.49d — the initiative's): entering, it's
+       * Undercity; already in a dungeon, it advances there as usual.
+       * `cards/dungeons.ts`. */
+      readonly kind: "venture";
+      readonly into?: "undercity";
+    }
+  | {
       /** The effect's controller's speed increases by `amount` (rule
        * 702.179): with no speed, it becomes `amount` (702.179c). What the
        * inherent triggered ability of a player with speed does (702.179d —
@@ -5108,6 +5129,11 @@ export type EffectSpec =
       /** Chosen cards bound for the battlefield enter **tapped** (Terrain
        * Generator). */
       readonly enterTapped?: boolean;
+      /** …and **with these counters** on them (rule 122.6 — Undercity's Throne
+       * of the Dead Three: "put a creature card from among them onto the
+       * battlefield with three +1/+1 counters on it"), as
+       * `put-onto-battlefield`'s `withCounters` are. */
+      readonly withCounters?: { readonly kind: string; readonly amount: number };
       /** …and with these types and colours in addition to their own, in
        * place as they enter (as `put-onto-battlefield`'s are — rule 614.12):
        * Necromantic Selection's "It's a black Zombie in addition to its other
@@ -6379,6 +6405,11 @@ export interface EffectApi {
   setDayNight(value: "day" | "night"): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
+  /** See the `"take-initiative"` {@link EffectSpec}. */
+  takeInitiative(who: PlayerScope | undefined, via?: "combat-damage"): void;
+  /** See the `"venture"` {@link EffectSpec}: the effect's controller
+   * ventures. */
+  venture(undercity: boolean): void;
   /** `player`'s speed increases by `amount` — see the `"increase-speed"`
    * {@link EffectSpec}. */
   increaseSpeed(player: PlayerId, amount: number): void;
@@ -6523,6 +6554,8 @@ export interface EffectApi {
     /** Who chooses instead, the zone still `chooser`'s — see
      * `look-and-choose`'s `chooser`. */
     picker?: PlayerId,
+    /** See `look-and-choose`'s `withCounters`. */
+    withCounters?: { readonly kind: string; readonly amount: number },
   ): void;
 }
 
@@ -9826,6 +9859,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "become-monarch":
       ctx.becomeMonarch(spec.who, spec.via);
       return;
+    case "take-initiative":
+      ctx.takeInitiative(spec.who, spec.via);
+      return;
+    case "venture":
+      ctx.venture(spec.into === "undercity");
+      return;
     case "increase-speed":
       ctx.increaseSpeed(ctx.controller, spec.amount);
       return;
@@ -10188,6 +10227,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.enterAs,
         chooser,
         picker,
+        spec.withCounters,
       );
       return;
     }

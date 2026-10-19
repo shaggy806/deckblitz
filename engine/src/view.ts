@@ -40,6 +40,8 @@ import type {
   ZoneType,
 } from "./state.js";
 import { decisionHasSource } from "./decisions/registry.js";
+import type { DungeonMap } from "./actions.js";
+import { dungeonMap } from "./cards/dungeons.js";
 import { goadersOf } from "./goad.js";
 import { hasRingBearerDesignation } from "./ring.js";
 import {
@@ -87,6 +89,12 @@ export interface PublicPlayerInfo {
   /** Their speed (rule 702.179), 1 to 4 — max speed at 4 — or `null` while
    * they have none (702.179b). Public: each player tracks it openly. */
   readonly speed: number | null;
+  /** The dungeon they're in (rule 309 — public: the command zone), the room
+   * their venture marker is on (an index into `map.rooms`), and the map to
+   * draw it by; `null` in none. */
+  readonly dungeon: { readonly name: string; readonly room: number; readonly map: DungeonMap } | null;
+  /** The dungeons they've completed (rule 309.7), oldest first. */
+  readonly completedDungeons: readonly string[];
 }
 
 /** Combat damage one commander has dealt one player. */
@@ -366,8 +374,10 @@ export interface PlayerView {
   /** The day/night designation (rule 726 — ROADMAP Phase 10b), or `null` until
    * a card first makes it day or night. */
   readonly dayNight: "day" | "night" | null;
-  /** The monarch (rule 720 — ROADMAP Phase 10), or `null`. */
+  /** The monarch (rule 725 — ROADMAP Phase 10), or `null`. */
   readonly monarch: PlayerId | null;
+  /** The player who has the initiative (rule 726), or `null`. */
+  readonly initiative: PlayerId | null;
   /** Emblems in the game (rule 114 — ROADMAP Phase 10), owner + text only. */
   /** `source` is the name of the card that created the emblem, or `null`. */
   readonly emblems: readonly { readonly owner: PlayerId; readonly text: string; readonly source: string | null }[];
@@ -839,6 +849,12 @@ function viewForUncached(
       counters: { ...playerState.counters },
       enduringStory: playerState.enduringStory === true,
       speed: playerState.speed ?? null,
+      dungeon: (() => {
+        const current = playerState.dungeon;
+        const map = current === undefined ? undefined : dungeonMap(current.name);
+        return current === undefined || map === undefined ? null : { name: current.name, room: current.room, map };
+      })(),
+      completedDungeons: [...(playerState.completedDungeons ?? [])],
     };
     graveyards[player] = [...zones.graveyard];
     visibleIds.push(...zones.graveyard);
@@ -967,6 +983,7 @@ function viewForUncached(
     revealedLibraryTop,
     dayNight: state.dayNight,
     monarch: state.monarch,
+    initiative: state.initiative ?? null,
     emblems: state.emblems.map((e) => ({ owner: e.owner, text: e.text, source: e.sourceName ?? null })),
     events: state.eventLog,
     publicStints: state.publicStints ?? {},

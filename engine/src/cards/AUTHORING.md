@@ -1309,6 +1309,19 @@ atLeast: N }`. The emblem's "legendary and can't be blocked by creatures with
 greater power" is built in. Not yet: "a creature other than ~", "your
 Ring-bearer's power", and Nazgûl's nine-copy deck rule.
 
+**The initiative and dungeons** (rules 726, 309, 701.49 — `docs/plans/initiative-dungeons.md`):
+`take-initiative { who? }` ("you take the initiative" — Rilsa Rael; the initiative's own three
+abilities, `cards/initiative.ts`, then venture into Undercity at once and at each of its holder's
+upkeeps, and pass it to whoever deals it combat damage), `venture { into?: "undercity" }` ("venture
+into the dungeon" / "into Undercity"; a fork asks the `venture` decision, the bottommost room
+completes the dungeon). Triggers: `takes-initiative`, `ventures` (Nadaar's "whenever you venture
+into the dungeon"), `completes-dungeon` (Sefris), each with `who`. **Only Undercity is authored**
+(`cards/dungeons.ts`): a plain `venture` offers the three Forgotten Realms dungeons, which wait on
+two effects (the Mad Wizard's Lair's reveal of drawn cards, the Oubliette's three distinct
+sacrifices) — so a card that ventures into the dungeon (not Undercity) stays blocked on
+`mechanic:dungeon` until they're in. Not yet: an "if you have the initiative" or "if you've
+completed a dungeon" condition.
+
 `become-monarch { who? }`, `get-energy { amount, who? }` (`amount` an amount: Aetherflux Conduit's
 "equal to the amount of mana spent to cast that spell" is `{ manaSpentOf: "trigger-object" }`),
 `add-player-counters { counter: "poison" | "experience" | "rad", amount, who?, target? }`
