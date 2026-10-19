@@ -37,6 +37,8 @@ import type { EventLogState } from './eventLog.ts'
 import { LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
+import { localStart } from '../lobby/localStart.ts'
+import { listDecks } from '../deck-builder/decks.ts'
 import { HybridSocket } from '../local/localSocket.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
@@ -400,8 +402,27 @@ export function useNetworkGame(): NetworkGame {
    * its creator at once, with no seat board to choose from. */
   const pendingBuilderRef = useRef(false)
   /** Set by `blitz` until its game's first frame: the deck and bots to seat
-   * once the room is joined, and whether that's been sent. */
-  const pendingBlitzRef = useRef<{ deck: WireDeck; bots: readonly WireDeck[]; sent: boolean } | null>(null)
+   * once the room is joined, and whether that's been sent — and, for a
+   * lobby's game moved into this tab (`startGame`), the seat to keep, the
+   * room's settings and its bot speed. */
+  const pendingBlitzRef = useRef<{
+    deck: WireDeck
+    bots: readonly WireDeck[]
+    sent: boolean
+    seatIndex?: number
+    settings?: RoomSettings | null
+    botSpeed?: BotSpeed
+  } | null>(null)
+  /** The decks this tab sent for each seat of the waiting room it's in
+   * (`claim-seat`, `take-seat`, `add-bot`, `set-bot-deck`): the seat board
+   * names a deck but doesn't carry its list, and a game moved into this tab
+   * needs the lists (`lobby/localStart.ts`). */
+  const sentDecksRef = useRef<{ roomId: string | null; decks: Map<PlayerId, WireDeck> }>({
+    roomId: null,
+    decks: new Map(),
+  })
+  /** The deck a `take-seat` in flight sent, until the server names the seat. */
+  const pendingTakeDeckRef = useRef<WireDeck | null>(null)
   /** Set by `createTutorial` until its seat is claimed: the seat the tutorial
    * room keeps for this tab, once `room-created` names it. */
   const pendingTutorialRef = useRef<{ seat: PlayerId | null } | null>(null)
@@ -428,6 +449,8 @@ export function useNetworkGame(): NetworkGame {
   const [seat, setSeat] = useState<PlayerId | null>(null)
   /** Whether the joined room is still the waiting room (no `Game` yet). */
   const [roomPending, setRoomPending] = useState(false)
+  /** How many watch the waiting room (`room-joined`'s `spectators`). */
+  const [roomSpectators, setRoomSpectators] = useState(0)
   const [spectating, setSpectating] = useState(false)
   const [frame, setFrame] = useState<Frame | null>(null)
   const [autoPassing, setAutoPassing] = useState(false)
@@ -459,6 +482,13 @@ export function useNetworkGame(): NetworkGame {
   }, [])
   /** A room only this tab will play in — a blitz, a lesson — created in the
    * tab's own room worker in local mode, on the server otherwise. */
+  /** Records the deck this tab sent for `seat` of room `roomId`
+   * (`sentDecksRef`), starting afresh for a new room. */
+  const noteSentDeck = useCallback((roomId: string, seat: PlayerId, deck: WireDeck) => {
+    if (sentDecksRef.current.roomId !== roomId) sentDecksRef.current = { roomId, decks: new Map() }
+    sentDecksRef.current.decks.set(seat, deck)
+  }, [])
+
   const sendSolo = useCallback((message: ClientMessage) => {
     const ws = wsRef.current
     if (ws instanceof HybridSocket) ws.sendLocal(JSON.stringify(message))
@@ -531,6 +561,7 @@ export function useNetworkGame(): NetworkGame {
           setBotSpeedState(message.botSpeed)
           setRoomSettingsState(message.settings ?? null)
           setRoomPending(message.pending === true)
+          setRoomSpectators(message.spectators ?? 0)
           // Watching, not seated: the seat board as it changes, no seat.
           if (message.spectating === true) {
             setSpectating(true)
@@ -544,14 +575,20 @@ export function useNetworkGame(): NetworkGame {
           // frame, the landing page stays up saying so, rather than the
           // seat board flashing past.
           const blitz = pendingBlitzRef.current
+          // A lobby's game moved into this tab (`startGame`) goes the same
+          // way, keeping its seat, settings and bot speed.
           if (blitz !== null && message.pending === true) {
             if (!blitz.sent) {
               blitz.sent = true
-              const [mine, ...others] = message.seats
+              const at = Math.min(blitz.seatIndex ?? 0, message.seats.length - 1)
+              const mine = message.seats[at]
+              const others = message.seats.filter((_, i) => i !== at)
+              if (blitz.settings) send({ type: 'set-room-settings', roomId: message.roomId, settings: blitz.settings })
               const clientToken = newClientToken()
               pendingClaimRef.current = { seat: mine.player, clientToken }
               send({ type: 'claim-seat', roomId: message.roomId, seat: mine.player, clientToken, deck: blitz.deck, ready: true })
               others.forEach((s, i) => send({ type: 'add-bot', roomId: message.roomId, seat: s.player, deck: blitz.bots[i] }))
+              if (blitz.botSpeed !== undefined) send({ type: 'set-bot-speed', roomId: message.roomId, speed: blitz.botSpeed })
               send({ type: 'start-game', roomId: message.roomId })
             }
             return
@@ -572,6 +609,8 @@ export function useNetworkGame(): NetworkGame {
             // A board refresh from before it was handled has none yet.
             const given = message.seat ?? null
             if (given === null) return
+            if (pendingTakeDeckRef.current !== null) noteSentDeck(message.roomId, given, pendingTakeDeckRef.current)
+            pendingTakeDeckRef.current = null
             pendingClaimRef.current = { seat: given, clientToken: pending.clientToken }
             storeSeat(message.roomId, given, pending.clientToken)
             setSeat(given)
@@ -774,7 +813,7 @@ export function useNetworkGame(): NetworkGame {
       setError('Could not reach the room server.')
       setErrorSeq((n) => n + 1)
     }
-  }, [send])
+  }, [send, noteSentDeck])
 
   useEffect(() => {
     openSocketRef.current = openSocket
@@ -907,9 +946,10 @@ export function useNetworkGame(): NetworkGame {
       // Not persisted yet — the `room-joined`/`state` handlers store it once
       // the server confirms the claim (see `pendingClaimRef`).
       pendingClaimRef.current = { seat: chosen, clientToken: token }
+      if (deck !== undefined) noteSentDeck(id, chosen, deck)
       send({ type: 'claim-seat', roomId: id, seat: chosen, clientToken: token, displayName, deck, ready })
     },
-    [send],
+    [send, noteSentDeck],
   )
 
   const takeSeat = useCallback(
@@ -920,6 +960,7 @@ export function useNetworkGame(): NetworkGame {
       // back rather than a second one.
       const token = loadStoredSeat(id)?.clientToken ?? newClientToken()
       pendingClaimRef.current = { seat: null, clientToken: token }
+      pendingTakeDeckRef.current = deck ?? null
       send({ type: 'take-seat', roomId: id, clientToken: token, displayName, deck })
     },
     [send],
@@ -978,18 +1019,20 @@ export function useNetworkGame(): NetworkGame {
     (seat: PlayerId, deck?: WireDeck) => {
       const id = roomIdRef.current
       if (id === null) return
+      if (deck !== undefined) noteSentDeck(id, seat, deck)
       send({ type: 'add-bot', roomId: id, seat, deck })
     },
-    [send],
+    [send, noteSentDeck],
   )
 
   const setBotDeck = useCallback(
     (seat: PlayerId, deck: WireDeck) => {
       const id = roomIdRef.current
       if (id === null) return
+      noteSentDeck(id, seat, deck)
       send({ type: 'set-bot-deck', roomId: id, seat, deck })
     },
-    [send],
+    [send, noteSentDeck],
   )
 
   const leaveRoom = useCallback(() => {
@@ -1046,11 +1089,56 @@ export function useNetworkGame(): NetworkGame {
     [send],
   )
 
+  /**
+   * Starts the waiting room's game — in this tab, when it's yours alone: you
+   * host and sit at it, every other seat is a bot, and nobody watches
+   * (`lobby/localStart.ts`). Then, as a blitz does, the same table is built
+   * in this tab's worker and started there, and the server's room is left.
+   * Anything else, or no local rooms in this tab, starts it on the server.
+   */
   const startGame = useCallback(() => {
     const id = roomIdRef.current
     if (id === null) return
-    send({ type: 'start-game', roomId: id })
-  }, [send])
+    const verdict = localMode()
+      ? localStart({
+          seats,
+          seat,
+          isHost,
+          pending: roomPending,
+          spectators: roomSpectators,
+          settings: roomSettings,
+          botSpeed,
+          sent: sentDecksRef.current.roomId === id ? sentDecksRef.current.decks : new Map(),
+          saved: listDecks().map((d) => ({
+            cards: d.cards,
+            commanders: d.commanders,
+            name: d.name,
+            ...(d.printings !== undefined ? { printings: d.printings } : {}),
+          })),
+        })
+      : null
+    if (verdict === null || !('local' in verdict)) {
+      send({ type: 'start-game', roomId: id })
+      return
+    }
+    const plan = verdict.local
+    send({ type: 'leave-room', roomId: id })
+    clearStoredSeat(id)
+    pendingClaimRef.current = null
+    const hostToken = newClientToken()
+    pendingHostTokenRef.current = hostToken
+    pendingBlitzRef.current = {
+      deck: plan.deck,
+      bots: plan.bots,
+      sent: false,
+      seatIndex: plan.seatIndex,
+      settings: plan.settings,
+      botSpeed: plan.botSpeed,
+    }
+    setBlitzing(true)
+    setBlitzReport(null)
+    sendSolo({ type: 'create-room', hostToken, players: seats.length })
+  }, [send, sendSolo, seats, seat, isHost, roomPending, roomSpectators, roomSettings, botSpeed])
 
   const rematch = useCallback(
     (restart = false) => {

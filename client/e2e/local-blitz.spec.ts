@@ -162,6 +162,30 @@ test('a lobby still opens on the room server, for others to join', async ({ page
   expect(typesOf(sent)).toContain('join-room')
 })
 
+test('a lobby game with only bots across the table moves into the page as it starts', async ({ page }) => {
+  // `src/lobby/localStart.ts`: the host seated, every other seat a bot, and
+  // nobody watching — the same table is rebuilt in the worker and started
+  // there, and the server's waiting room is left.
+  test.setTimeout(120_000)
+  const sent = serverTraffic(page)
+  await page.goto('/?local=1')
+  await page.getByRole('button', { name: 'Create a game' }).click()
+  await page.getByRole('button', { name: 'Add bot (random deck)' }).first().click()
+  await expect(page.getByRole('button', { name: 'Add bot (random deck)' })).toHaveCount(0, { timeout: 20_000 })
+  const lobbyId = await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
+  await page.getByRole('button', { name: 'Ready' }).click()
+  await page.getByRole('button', { name: 'Start Game' }).click()
+
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })
+  await expect(page.locator('[data-player-id]')).toHaveCount(2, { timeout: 20_000 })
+  const roomId = await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
+  expect(roomId).not.toBe(lobbyId)
+  // The lobby was left, never started, and the game's room is unknown there.
+  expect(typesOf(sent)).toContain('leave-room')
+  expect(typesOf(sent)).not.toContain('start-game')
+  expect(sent.some((s) => s.includes(roomId!))).toBe(false)
+})
+
 test('local mode stays on for the tab, and ?local=0 turns it off', async ({ page }) => {
   await page.goto('/?local=1')
   expect(await page.evaluate(() => sessionStorage.getItem('mtg.local'))).toBe('1')

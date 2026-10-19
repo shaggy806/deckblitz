@@ -304,6 +304,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **A lobby game with only bots across the table plays in the browser** (the user, 2026-10-18): the
+  host seated, every other seat a bot and nobody watching, Start Game rebuilds the table in the
+  page's worker as a blitz does (`client/src/lobby/localStart.ts`) and leaves the server's room,
+  which now closes when its last person walks out; `room-joined` says how many watch a waiting
+  room (`spectators`). Anything else starts on the server as before.
 - **The site is "Deck Blitz", not "MTG Deck Blitz"** (the user, 2026-10-16): the brand carries no
   Wizards trademark; "Magic: The Gathering" names the game only to say what the site is for (the
   page title, the landing page's descriptor), and the notice gains a trademark line, as Scryfall

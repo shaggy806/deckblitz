@@ -32,9 +32,14 @@ that player the bots' hands).
   `LocalTransport` with the same surface (`send`, `onmessage`, `onopen`, `onclose`) posts to the
   worker instead. Everything above it — the game screen, playback, acks, the event-only frames —
   is unchanged, because the messages are.
-- **Which rooms go local**: a blitz, and a tutorial (`tutorial-create`). Everything made through
-  the lobby (`create-room`, even if the host then fills every other seat with bots) stays on the
-  server, since another person may join. A local room has no code anyone else can join, and no
+- **Which rooms go local**: a blitz, and a tutorial (`tutorial-create`). A lobby (`create-room`)
+  opens on the server, since another person may join; but a lobby game that starts with the host
+  seated, every other seat a bot and nobody watching (`room-joined`'s `spectators`) moves into the
+  host's browser as it starts (the user, 2026-10-18; `client/src/lobby/localStart.ts`): the same
+  seats, decks and settings rebuilt in the worker as a blitz's are, the host keeping their seat,
+  and the server's waiting room left — and closed, since the last person walking out of a waiting
+  room closes it (`room-service.ts`'s `leave-room`), rather than holding a place under the room caps
+  for half an hour. The bots get new names. A local room has no code anyone else can join, and no
   spectating or invite link.
 - **Fallback to the server** when the browser can't (no module workers), the card shards fail to
   load, or a `?local=0` override is set. The site is desktop and laptop only (never phones), so
