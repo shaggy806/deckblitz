@@ -97,10 +97,12 @@ section keeps only what to do next.
   99 compleated, "has toxic" and "gains toxic N" for Phyrexia: All Will Be One and its Commander
   set; batch 100 the rest of Jumpstart 2022 and The Brothers' War Commander, no engine change;
   batch 101 the rest of The Brothers' War; batch 102 the rest of Warhammer 40,000 Commander, with
-  domain and read ahead built for Dominaria United); **next, Dominaria United Commander and
-  Dominaria United** (DMC, DMU — `npm run cards:sets -w engine -- --sets 60`), whose other lead,
-  **enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
-  declared, so a client change with a live check), blocks 11 of its cards and Aradesh.
+  domain and read ahead built for Dominaria United; batch 103 the rest of Dominaria United and its
+  Commander set); **next, Commander Legends: Battle for Baldur's Gate** (CLB — `npm run cards:sets
+  -w engine -- --sets 60`), whose ~21 initiative cards wait on `docs/plans/initiative-dungeons.md`.
+  **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
+  declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
+  Aradesh.
   The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
   Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
@@ -166,6 +168,8 @@ there and move this line to `COMPLETED.md`.
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
+- **A mass effect's filter can't read a dynamic amount**: `battlefieldMatching` gives `{ amount }` operands no context, so they match nothing (Zar Ojanen waits; check existing cards).
+- **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `exileIfItWouldLeave` survives ability loss (Geth, Thane of Contracts; Llanowar Greenwidow waits).
 - **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).

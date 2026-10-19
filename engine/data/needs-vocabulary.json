@@ -7811,6 +7811,74 @@
   "trigger:attacks-your-opponent-per-creature": {
    "family": "trigger:combat-trigger-extensions",
    "example": "Genestealer Locus: 'Whenever a creature attacks one of your opponents, it gets +0/+1 until end of turn.'"
+  },
+  "amount:creatures-blocking-it": {
+   "family": "effect:amount-new-variants",
+   "example": "General Marhault Elsdragon: 'gets +3/+3 for each creature blocking it'."
+  },
+  "replacement:enter-as-copy-of-graveyard-card": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Activated Sleeper: enter as a copy of a creature card in a graveyard put there from the battlefield this turn."
+  },
+  "cost:attack-tax-life": {
+   "family": "cost:attack-tax",
+   "example": "Sivitri, Dragon Master: creatures can't attack you or planeswalkers you control unless their controller pays life."
+  },
+  "decision:cast-now-total-mana-value": {
+   "family": "decision:free-cast-choices",
+   "example": "Primeval Spawn: cast any number of spells from among them with total mana value 10 or less without paying their mana costs."
+  },
+  "amount:life-paid-to-activate": {
+   "family": "effect:amount-new-variants",
+   "example": "Verrak, Warped Sengir: 'if life was paid to activate it, you may pay that much life again'."
+  },
+  "effect:token-copies-of-attachments": {
+   "family": "effect:token-copy-options",
+   "example": "Stangg, Echo Warrior: for each Aura and Equipment attached to Stangg, a token copy attached to the Twin."
+  },
+  "amount:aggregate-over-attached-equipment": {
+   "family": "condition:filter-attachments",
+   "example": "Tetsuo, Imperial Champion: 'the greatest mana value among Equipment attached to Tetsuo'."
+  },
+  "effect:become-copy-of-sacrificed": {
+   "family": "effect:become-copy",
+   "example": "The Ever-Changing 'Dane: 'becomes a copy of the sacrificed creature'."
+  },
+  "condition:land-put-into-graveyard-from-battlefield-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "The Lady of Otaria: 'if a land was put into a graveyard from the battlefield this turn'."
+  },
+  "effect:phase-out-while-you-control-source": {
+   "family": "mechanic:phasing",
+   "example": "The Phasing of Zhalfir: they don't phase in during untap steps while you control the Saga."
+  },
+  "effect:player-spell-tax-this-turn": {
+   "family": "effect:temporary-player-effect",
+   "example": "Academy Loremaster: 'spells they cast this turn cost {2} more' — any player, you included."
+  },
+  "static:cant-pay-life-for-spells-and-abilities": {
+   "family": "static:cant-pay-life-or-sacrifice-creatures-for-costs",
+   "example": "Karn's Sylex: 'Players can't pay life to cast spells or to activate abilities that aren't mana abilities.'"
+  },
+  "cost:spend-only-kicked-spell": {
+   "family": "cost:mana-restriction-at-cast",
+   "example": "Volshe Tideturner: 'Spend this mana only to cast an instant spell, sorcery spell, or kicked spell.'"
+  },
+  "filter:dynamic-amount-in-mass-effect": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Zar Ojanen, Scion of Efrava: a mass effect over 'each creature you control with toughness less than the number of basic land types' — battlefieldMatching gives the filter no amount context."
+  },
+  "decision:as-enters-choose-permanent": {
+   "family": "decision:choose-permanent",
+   "example": "Tyrannical Pitlord: 'As this enters, choose another creature you control.'"
+  },
+  "replacement:as-enters-mill": {
+   "family": "replacement:as-enters-exile-from-graveyard",
+   "example": "Monstrous War-Leech: 'As this enters, if it was kicked, mill four cards.'"
+  },
+  "bug:cda-greatest-mana-value-in-graveyard": {
+   "family": "bug:cda-all-zones",
+   "example": "Monstrous War-Leech: P/T equal to the greatest mana value among cards in your graveyard — greatestManaValueOf reads only the battlefield."
   }
  }
 }

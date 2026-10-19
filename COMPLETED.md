@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Dominaria United and Dominaria United Commander, both whole** (batch 103): their last 165
+  cards, 104 authored (Jared Carthalion, Torsten, Founder of Benalia, Najal, the Storm Runner,
+  Radha, Coalition Warlord and 100 more — the domain and read-ahead cards among them) and 61
+  blocked (11 on enlist, five on two-kicker costs) (2026-10-19).
 - **Warhammer 40,000 Commander, whole** (batch 102): its last 92 cards, 58 authored (Space Marine
   Devastator, Vanguard Suppressor, The Swarmlord, Lucius the Eternal and 54 more) and 34 blocked
   (three on miracle); with **domain** (rule 207.2c — `{ basicLandTypes: "you" }` as an effect

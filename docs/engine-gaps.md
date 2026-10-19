@@ -14,6 +14,20 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   pay. **Fix (outline):** a `phyrexianLife: n` on the cast and activate actions (how many pips
   to pay with life), honoured by the planner first, offered by the client beside the convoke
   picker.
+- **A mass effect's filter can't read a dynamic amount.** `Game.battlefieldMatching(you, filter)`
+  (game.ts ~25585) calls `matchesFilter` with only `{ you }`, so a `NumCompare` whose `n` is `{
+  amount: … }` has no amount resolver (`FilterContext.amount`) and matches nothing — silently.
+  Every `*-all` effect that routes through it is affected (`add-counter-all`, `modify-pt-all`,
+  `destroy-all` …). Zar Ojanen, Scion of Efrava ("each creature you control with toughness less
+  than the number of basic land types among lands you control") waits on it (found 2026-10-19).
+  **Fix (outline):** pass the resolution context's amount evaluator into `battlefieldMatching`
+  from the effect callers, and audit the pool for `{ amount` inside mass-effect filters.
+- **"It gains 'if this would leave the battlefield, exile it instead'" is a flag, not an
+  ability.** `GameObject.exileIfItWouldLeave` is set by effects whose text grants a replacement
+  ability (Geth, Thane of Contracts' returned creature; Llanowar Greenwidow), so an effect that
+  removes all abilities (Humility, rule 613.1f) doesn't remove it. Greenwidow waits; Geth is
+  inaccurate in that corner. **Fix (outline):** grant it as a static on a modifier, as granted
+  triggers ride one, so ability loss in timestamp order applies.
 - **A reflexive trigger's target filter reads the creating ability's `triggerValue`.** A
   reflexive ability's target filter (603.12) is bound when it's created, in the parent's
   resolution, so `{ amount: { triggerValue: true } }` there reads the parent trigger's value (0

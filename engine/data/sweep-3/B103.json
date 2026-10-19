@@ -1,0 +1,1174 @@
+{
+ "batch": "B103",
+ "status": "complete",
+ "ranks": "Dominaria United (DMU, 2022-09-09) and Dominaria United Commander (DMC): the rest of each set",
+ "authored": [
+  {
+   "name": "Academy Wall",
+   "files": [
+    "engine/src/cards/pool/academy-wall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aggressive Sabotage",
+   "files": [
+    "engine/src/cards/pool/aggressive-sabotage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argivian Phalanx",
+   "files": [
+    "engine/src/cards/pool/argivian-phalanx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artillery Blast",
+   "files": [
+    "engine/src/cards/pool/artillery-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baird, Argivian Recruiter",
+   "files": [
+    "engine/src/cards/pool/baird-argivian-recruiter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Atrocity",
+   "files": [
+    "engine/src/cards/pool/balduvian-atrocity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baru, Wurmspeaker",
+   "files": [
+    "engine/src/cards/pool/baru-wurmspeaker.ts",
+    "engine/src/cards/tokens/wurm-token-baru-wurmspeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battlewing Mystic",
+   "files": [
+    "engine/src/cards/pool/battlewing-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benalish Sleeper",
+   "files": [
+    "engine/src/cards/pool/benalish-sleeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bog Badger",
+   "files": [
+    "engine/src/cards/pool/bog-badger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bortuk Bonerattle",
+   "files": [
+    "engine/src/cards/pool/bortuk-bonerattle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Braids's Frightful Return",
+   "files": [
+    "engine/src/cards/pool/braidss-frightful-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briar Hydra",
+   "files": [
+    "engine/src/cards/pool/briar-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choking Miasma",
+   "files": [
+    "engine/src/cards/pool/choking-miasma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Citizen's Arrest",
+   "files": [
+    "engine/src/cards/pool/citizens-arrest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleaving Skyrider",
+   "files": [
+    "engine/src/cards/pool/cleaving-skyrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossal Growth",
+   "files": [
+    "engine/src/cards/pool/colossal-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coral Colony",
+   "files": [
+    "engine/src/cards/pool/coral-colony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cosmic Epiphany",
+   "files": [
+    "engine/src/cards/pool/cosmic-epiphany.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cult Conscript",
+   "files": [
+    "engine/src/cards/pool/cult-conscript.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Djinn of the Fountain",
+   "files": [
+    "engine/src/cards/pool/djinn-of-the-fountain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drag to the Bottom",
+   "files": [
+    "engine/src/cards/pool/drag-to-the-bottom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eerie Soultender",
+   "files": [
+    "engine/src/cards/pool/eerie-soultender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Hydromancer",
+   "files": [
+    "engine/src/cards/pool/elvish-hydromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolved Sleeper",
+   "files": [
+    "engine/src/cards/pool/evolved-sleeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extinguish the Light",
+   "files": [
+    "engine/src/cards/pool/extinguish-the-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fires of Victory",
+   "files": [
+    "engine/src/cards/pool/fires-of-victory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Floriferous Vinewall",
+   "files": [
+    "engine/src/cards/pool/floriferous-vinewall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Founding the Third Path",
+   "files": [
+    "engine/src/cards/pool/founding-the-third-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frostfist Strider",
+   "files": [
+    "engine/src/cards/pool/frostfist-strider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghitu Amplifier",
+   "files": [
+    "engine/src/cards/pool/ghitu-amplifier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gibbering Barricade",
+   "files": [
+    "engine/src/cards/pool/gibbering-barricade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Picker",
+   "files": [
+    "engine/src/cards/pool/goblin-picker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunting Figment",
+   "files": [
+    "engine/src/cards/pool/haunting-figment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herd Migration",
+   "files": [
+    "engine/src/cards/pool/herd-migration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroic Charge",
+   "files": [
+    "engine/src/cards/pool/heroic-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hurloon Battle Hymn",
+   "files": [
+    "engine/src/cards/pool/hurloon-battle-hymn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impede Momentum",
+   "files": [
+    "engine/src/cards/pool/impede-momentum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "In Thrall to the Pit",
+   "files": [
+    "engine/src/cards/pool/in-thrall-to-the-pit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iridian Maelstrom",
+   "files": [
+    "engine/src/cards/pool/iridian-maelstrom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jared Carthalion",
+   "files": [
+    "engine/src/cards/pool/jared-carthalion.ts",
+    "engine/src/cards/tokens/kavu-token-jared-carthalion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jedit Ojanen, Mercenary",
+   "files": [
+    "engine/src/cards/pool/jedit-ojanen-mercenary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jenson Carthalion, Druid Exile",
+   "files": [
+    "engine/src/cards/pool/jenson-carthalion-druid-exile.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jhoira, Ageless Innovator",
+   "files": [
+    "engine/src/cards/pool/jhoira-ageless-innovator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Join Forces",
+   "files": [
+    "engine/src/cards/pool/join-forces.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juniper Order Rootweaver",
+   "files": [
+    "engine/src/cards/pool/juniper-order-rootweaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keldon Strike Team",
+   "files": [
+    "engine/src/cards/pool/keldon-strike-team.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Dawn's Light",
+   "files": [
+    "engine/src/cards/pool/knight-of-dawns-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Dusk's Shadow",
+   "files": [
+    "engine/src/cards/pool/knight-of-dusks-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Love Song of Night and Day",
+   "files": [
+    "engine/src/cards/pool/love-song-of-night-and-day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Cannons",
+   "files": [
+    "engine/src/cards/pool/mana-cannons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meria, Scholar of Antiquity",
+   "files": [
+    "engine/src/cards/pool/meria-scholar-of-antiquity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Micromancer",
+   "files": [
+    "engine/src/cards/pool/micromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Molten Monstrosity",
+   "files": [
+    "engine/src/cards/pool/molten-monstrosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nael, Avizoa Aeronaut",
+   "files": [
+    "engine/src/cards/pool/nael-avizoa-aeronaut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Najal, the Storm Runner",
+   "files": [
+    "engine/src/cards/pool/najal-the-storm-runner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obsidian Obelisk",
+   "files": [
+    "engine/src/cards/pool/obsidian-obelisk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ohabi Caleria",
+   "files": [
+    "engine/src/cards/pool/ohabi-caleria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Espionage",
+   "files": [
+    "engine/src/cards/pool/phyrexian-espionage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Missionary",
+   "files": [
+    "engine/src/cards/pool/phyrexian-missionary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Warhorse",
+   "files": [
+    "engine/src/cards/pool/phyrexian-warhorse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pilfer",
+   "files": [
+    "engine/src/cards/pool/pilfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prayer of Binding",
+   "files": [
+    "engine/src/cards/pool/prayer-of-binding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protect the Negotiators",
+   "files": [
+    "engine/src/cards/pool/protect-the-negotiators.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radha, Coalition Warlord",
+   "files": [
+    "engine/src/cards/pool/radha-coalition-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radha's Firebrand",
+   "files": [
+    "engine/src/cards/pool/radhas-firebrand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raff, Weatherlight Stalwart",
+   "files": [
+    "engine/src/cards/pool/raff-weatherlight-stalwart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ragefire Hellkite",
+   "files": [
+    "engine/src/cards/pool/ragefire-hellkite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rohgahh, Kher Keep Overlord",
+   "files": [
+    "engine/src/cards/pool/rohgahh-kher-keep-overlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rona's Vortex",
+   "files": [
+    "engine/src/cards/pool/ronas-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rosnakht, Heir of Rohgahh",
+   "files": [
+    "engine/src/cards/pool/rosnakht-heir-of-rohgahh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rulik Mons, Warren Chief",
+   "files": [
+    "engine/src/cards/pool/rulik-mons-warren-chief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runic Shot",
+   "files": [
+    "engine/src/cards/pool/runic-shot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samite Herbalist",
+   "files": [
+    "engine/src/cards/pool/samite-herbalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scout the Wilderness",
+   "files": [
+    "engine/src/cards/pool/scout-the-wilderness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sengir Connoisseur",
+   "files": [
+    "engine/src/cards/pool/sengir-connoisseur.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serra Redeemer",
+   "files": [
+    "engine/src/cards/pool/serra-redeemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow Prophecy",
+   "files": [
+    "engine/src/cards/pool/shadow-prophecy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow-Rite Priest",
+   "files": [
+    "engine/src/cards/pool/shadow-rite-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shalai's Acolyte",
+   "files": [
+    "engine/src/cards/pool/shalais-acolyte.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sheoldred's Restoration",
+   "files": [
+    "engine/src/cards/pool/sheoldreds-restoration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slimefoot's Survey",
+   "files": [
+    "engine/src/cards/pool/slimefoots-survey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stall for Time",
+   "files": [
+    "engine/src/cards/pool/stall-for-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stenn, Paranoid Partisan",
+   "files": [
+    "engine/src/cards/pool/stenn-paranoid-partisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength of the Coalition",
+   "files": [
+    "engine/src/cards/pool/strength-of-the-coalition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunbathing Rootwalla",
+   "files": [
+    "engine/src/cards/pool/sunbathing-rootwalla.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talas Lookout",
+   "files": [
+    "engine/src/cards/pool/talas-lookout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tatyova, Steward of Tides",
+   "files": [
+    "engine/src/cards/pool/tatyova-steward-of-tides.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mana Rig",
+   "files": [
+    "engine/src/cards/pool/the-mana-rig.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The World Spell",
+   "files": [
+    "engine/src/cards/pool/the-world-spell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tobias, Doomed Conqueror",
+   "files": [
+    "engine/src/cards/pool/tobias-doomed-conqueror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Geyser",
+   "files": [
+    "engine/src/cards/pool/tolarian-geyser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Terror",
+   "files": [
+    "engine/src/cards/pool/tolarian-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torsten, Founder of Benalia",
+   "files": [
+    "engine/src/cards/pool/torsten-founder-of-benalia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribute to Urborg",
+   "files": [
+    "engine/src/cards/pool/tribute-to-urborg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg Repossession",
+   "files": [
+    "engine/src/cards/pool/urborg-repossession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valiant Veteran",
+   "files": [
+    "engine/src/cards/pool/valiant-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viashino Branchrider",
+   "files": [
+    "engine/src/cards/pool/viashino-branchrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vineshaper Prodigy",
+   "files": [
+    "engine/src/cards/pool/vineshaper-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voda Sea Scavenger",
+   "files": [
+    "engine/src/cards/pool/voda-sea-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Weatherlight Compleated",
+   "files": [
+    "engine/src/cards/pool/weatherlight-compleated.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Writhing Necromass",
+   "files": [
+    "engine/src/cards/pool/writhing-necromass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya Iconoclast",
+   "files": [
+    "engine/src/cards/pool/yavimaya-iconoclast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yotia Declares War",
+   "files": [
+    "engine/src/cards/pool/yotia-declares-war.ts",
+    "engine/src/cards/tokens/ornithopter-token.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Yavimaya Steelcrusher",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154): an optional cost to attack, a new choice as attackers are declared."
+  },
+  {
+   "name": "Guardian of New Benalia",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Keldon Flamesage",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Coalition Warbrute",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Argivian Cavalier",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Hexbane Tortoise",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Balduvian Berserker",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Linebreaker Baloth",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Coalition Skyknight",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Benalish Faithbonder",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Barkweave Crusher",
+   "needs": [
+    "keyword:enlist"
+   ],
+   "why": "Enlist (702.154)."
+  },
+  {
+   "name": "Gerrard's Hourglass Pendant",
+   "needs": [
+    "replacement:skip-extra-turns",
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "Extra turns are skipped; and the cards put into your graveyard from the battlefield this turn."
+  },
+  {
+   "name": "General Marhault Elsdragon",
+   "needs": [
+    "amount:creatures-blocking-it"
+   ],
+   "why": "+3/+3 for each creature blocking it."
+  },
+  {
+   "name": "Unite the Coalition",
+   "needs": [
+    "effect:modal-repeat-modes"
+   ],
+   "why": "\"You may choose the same mode more than once.\""
+  },
+  {
+   "name": "Activated Sleeper",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn",
+    "replacement:enter-as-copy-of-graveyard-card"
+   ],
+   "why": "Enters as a copy of a creature card in a graveyard that was put there from the battlefield this turn."
+  },
+  {
+   "name": "Sivitri, Dragon Master",
+   "needs": [
+    "cost:attack-tax-planeswalkers",
+    "cost:attack-tax-life"
+   ],
+   "why": "Attacking you or your planeswalkers costs life, until your next turn."
+  },
+  {
+   "name": "Primeval Spawn",
+   "needs": [
+    "decision:cast-now-total-mana-value"
+   ],
+   "why": "Cast any number of the exiled spells free with total mana value 10 or less."
+  },
+  {
+   "name": "Verrak, Warped Sengir",
+   "needs": [
+    "amount:life-paid-to-activate"
+   ],
+   "why": "Copy an ability if life was paid to activate it, and pay that much again."
+  },
+  {
+   "name": "Jasmine Boreal of the Seven",
+   "needs": [
+    "condition:no-abilities-filter",
+    "cost:mana-restriction-at-cast"
+   ],
+   "why": "Mana spendable only on creature spells with no abilities."
+  },
+  {
+   "name": "Xira, the Golden Sting",
+   "needs": [
+    "effect:delayed-trigger-intervening-if"
+   ],
+   "why": "\"When that creature dies, if it has an egg counter on it\" — an intervening-if on a delayed trigger."
+  },
+  {
+   "name": "Orca, Siege Demon",
+   "needs": [
+    "effect:divided-dynamic-total"
+   ],
+   "why": "Damage equal to its power divided among any number of targets."
+  },
+  {
+   "name": "Moira, Urborg Haunt",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "Creature cards put into your graveyard from the battlefield this turn."
+  },
+  {
+   "name": "Stangg, Echo Warrior",
+   "needs": [
+    "effect:token-copies-of-attachments"
+   ],
+   "why": "Token copies of each Aura and Equipment attached to Stangg, attached to the Twin."
+  },
+  {
+   "name": "Tetsuo, Imperial Champion",
+   "needs": [
+    "amount:aggregate-over-attached-equipment"
+   ],
+   "why": "The greatest mana value among Equipment attached to it."
+  },
+  {
+   "name": "Robaran Mercenaries",
+   "needs": [
+    "static:gain-activated-abilities-of-others"
+   ],
+   "why": "Has all activated abilities of legendary creatures you control."
+  },
+  {
+   "name": "The Ever-Changing 'Dane",
+   "needs": [
+    "effect:become-copy-of-sacrificed"
+   ],
+   "why": "Becomes a copy of the creature sacrificed as the cost."
+  },
+  {
+   "name": "Ayesha Tanaka, Armorer",
+   "needs": [
+    "static:unblockable-defending-player-condition"
+   ],
+   "why": "Can't be blocked as long as defending player controls three or more artifacts."
+  },
+  {
+   "name": "Rasputin, the Oneiromancer",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "Remove one or more dream counters as a cost."
+  },
+  {
+   "name": "The Lady of Otaria",
+   "needs": [
+    "condition:land-put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "\"If a land was put into a graveyard from the battlefield this turn.\""
+  },
+  {
+   "name": "Threats Undetected",
+   "needs": [
+    "decision:choose-any-number-different-powers",
+    "effect:opponent-chooses-from-found"
+   ],
+   "why": "Search for creature cards with different powers; an opponent picks among them."
+  },
+  {
+   "name": "Quirion Beastcaller",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "Distribute X +1/+1 counters, X the counters it had."
+  },
+  {
+   "name": "Ertai's Scorn",
+   "needs": [
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "Costs {U} less if an opponent cast two or more spells this turn."
+  },
+  {
+   "name": "Silver Scrutiny",
+   "needs": [
+    "effect:self-flash-if-condition"
+   ],
+   "why": "Flash as long as X is 3 or less."
+  },
+  {
+   "name": "Leyline Binding",
+   "needs": [
+    "bug:oring-one-shot-return"
+   ],
+   "why": "Its exile-until return is a one-shot effect (the ruling)."
+  },
+  {
+   "name": "The Phasing of Zhalfir",
+   "needs": [
+    "effect:phase-out-while-you-control-source"
+   ],
+   "why": "Phased-out permanents don't phase in while you control the Saga."
+  },
+  {
+   "name": "Chaotic Transformation",
+   "needs": [
+    "effect:reveal-until-shares-type"
+   ],
+   "why": "Reveal until a card that shares a card type with the exiled permanent."
+  },
+  {
+   "name": "Jaya, Fiery Negotiator",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "−2: \"Whenever you attack this turn\" — a repeating delayed trigger."
+  },
+  {
+   "name": "Urza Assembles the Titans",
+   "needs": [
+    "effect:loyalty-abilities-twice"
+   ],
+   "why": "Chapter III: activate loyalty abilities twice this turn."
+  },
+  {
+   "name": "Academy Loremaster",
+   "needs": [
+    "effect:player-spell-tax-this-turn"
+   ],
+   "why": "\"Spells they cast this turn cost {2} more\" on whichever player drew — you included."
+  },
+  {
+   "name": "Llanowar Greenwidow",
+   "needs": [
+    "effect:grant-static-to-permanent"
+   ],
+   "why": "It gains a replacement ability (\"if this permanent would leave, exile it\") that ability loss can strip."
+  },
+  {
+   "name": "Karn's Sylex",
+   "needs": [
+    "static:cant-pay-life-for-spells-and-abilities"
+   ],
+   "why": "\"Players can't pay life to cast spells or to activate abilities that aren't mana abilities.\""
+  },
+  {
+   "name": "Rona, Sheoldred's Faithful",
+   "needs": [
+    "zone:graveyard-self-cast-extra-cost"
+   ],
+   "why": "Cast from your graveyard by discarding two cards in addition."
+  },
+  {
+   "name": "Sphinx of Clear Skies",
+   "needs": [
+    "decision:separate-into-piles"
+   ],
+   "why": "An opponent separates the revealed cards into two piles."
+  },
+  {
+   "name": "Volshe Tideturner",
+   "needs": [
+    "cost:spend-only-kicked-spell"
+   ],
+   "why": "Mana spendable only on instants, sorceries or kicked spells."
+  },
+  {
+   "name": "Urborg Lhurgoyf",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Kicker {U} and/or {B}."
+  },
+  {
+   "name": "Shanna, Purifying Blade",
+   "needs": [
+    "effect:may-pay-x-capped"
+   ],
+   "why": "\"You may pay {X}\" capped at life gained this turn."
+  },
+  {
+   "name": "Stronghold Arena",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Kicker {G} and/or {W}."
+  },
+  {
+   "name": "Temporary Lockdown",
+   "needs": [
+    "bug:oring-one-shot-return"
+   ],
+   "why": "Its exile-until return is a one-shot effect (the ruling)."
+  },
+  {
+   "name": "Zar Ojanen, Scion of Efrava",
+   "needs": [
+    "filter:dynamic-amount-in-mass-effect"
+   ],
+   "why": "A mass effect's filter can't read a dynamic amount (toughness less than domain): `battlefieldMatching` passes no amount context, so it matches nothing."
+  },
+  {
+   "name": "Anointed Peacekeeper",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "Choose a card name as it enters."
+  },
+  {
+   "name": "Inscribed Tablet",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "\"If you didn't put a card into your hand this way.\""
+  },
+  {
+   "name": "Tyrannical Pitlord",
+   "needs": [
+    "decision:as-enters-choose-permanent"
+   ],
+   "why": "\"As this enters, choose another creature you control\" and the statics about it."
+  },
+  {
+   "name": "Warhost's Frenzy",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"Whenever a creature you control dies this turn, draw a card.\""
+  },
+  {
+   "name": "Sol'Kanar the Tainted",
+   "needs": [
+    "effect:enters-under-opponent-control"
+   ],
+   "why": "Exile it, then return it under an opponent's control."
+  },
+  {
+   "name": "Archangel of Wrath",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Kicker {B} and/or {R}."
+  },
+  {
+   "name": "Pixie Illusionist",
+   "needs": [
+    "static:land-type-setting",
+    "decision:choose-land-type-on-resolution"
+   ],
+   "why": "Target land becomes the basic land type of your choice until end of turn."
+  },
+  {
+   "name": "Timely Interference",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "A creature blocks this turn if able."
+  },
+  {
+   "name": "Temporal Firestorm",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Kicker {1}{W} and/or {1}{U}, and X times kicked."
+  },
+  {
+   "name": "Vodalian Mindsinger",
+   "needs": [
+    "keyword:two-kicker-costs"
+   ],
+   "why": "Two different kicker costs."
+  },
+  {
+   "name": "Territorial Maro",
+   "needs": [
+    "bug:cda-count-multiplier"
+   ],
+   "why": "\"Twice the number of basic land types\": setBasePtFromCount has no multiplier."
+  },
+  {
+   "name": "Monstrous War-Leech",
+   "needs": [
+    "replacement:as-enters-mill",
+    "bug:cda-greatest-mana-value-in-graveyard"
+   ],
+   "why": "\"As this enters, if kicked, mill four\", and P/T from the greatest mana value in your graveyard."
+  }
+ ]
+}
