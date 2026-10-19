@@ -24,6 +24,12 @@ is still unscoped.
 
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
+`initiative-dungeons` (**proposed**, 2026-10-19) designs venture into the dungeon and the
+initiative — the largest engine feature left in the set walk (Baldur's Gate's ~21 initiative cards,
+Forgotten Realms' venture cards): dungeons as command-zone objects with hand-authored rooms, two
+new decisions, sourceless triggers (with the monarch moved onto them — today it skips the stack),
+and the client's initiative chip, dungeon progress chip and map, and room picker on the map.
+
 `room-shards` (**live**, `SHARDS=1` on the box since 2026-10-13) is phase 2 of `scaling-rooms` in detail: rooms on worker threads, the main thread loading no engine, the main↔shard message protocol, memory per worker, placement and admission, and the commit-by-commit rollout.
 
 `local-rooms` (**built**, on by default on the site since 2026-10-13) moves solo games — blitz and the tutorials, one human against bots — into the player's browser: the same room code in a Web Worker behind a local transport, the engine's game and bots without the whole card pool, resume after a reload, bug reports uploaded; games with two humans stay on the server.

@@ -104,7 +104,10 @@ section keeps only what to do next.
   The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
   Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
-  Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …). Phyrexia: All Will Be One's blocks are
+  Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …),
+  both behind **dungeons and the initiative** (rules 309, 701.49, 726 — `mechanic:dungeon`: 10
+  triaged and ~21 of Baldur's Gate's rest, more in Forgotten Realms), designed in
+  `docs/plans/initiative-dungeons.md` (proposed, with open questions). Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
   Venser), a target's controller's poison counters (Bring the Ending, Anoint with Affliction), and
   a static scoped by "has toxic" (Skrelv's Hive). March of the Machine's leaders: one target slot for a player
@@ -163,6 +166,7 @@ there and move this line to `COMPLETED.md`.
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
+- **The monarch's two abilities don't use the stack** (725.2): the end-step draw and the combat-damage steal are folded in directly; `docs/plans/initiative-dungeons.md` builds sourceless triggers and moves the monarch onto them.
 - **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
