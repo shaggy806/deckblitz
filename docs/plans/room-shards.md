@@ -315,7 +315,11 @@ the two differ only in the budget. Single runs over different games, so ±10% is
 - **A decision can overrun the second.** In 16 four-player self-play games at a 1 s budget
   (37,457 decisions), 437 ran out of clock and the slowest took 3.2 s: the search stops before a
   simulation that the running mean says won't fit, but one wide-board simulation can run far
-  past it.
+  past it. **Mostly bounded the same day**: the clock had started only after v1's own pick (up to
+  1.9 s for a land with Ramunap Excavator's 26 graveyard lands), the mean was dragged down by
+  cheap crackback checks, and the turn plan checked the clock only after the deadline. Fixed,
+  the same games ran 29 of 36,466 decisions past the second, the slowest 1.6 s (the load test
+  above predates the fix); `BACKLOG.md` has what's left ("A decision overruns its second").
 - **200 simulations is never the limit.** In the same games no decision came near it: the most
   was 61 (a priority window), 58 for an attack, 33 for a block, 12 for a decision (which caps at
   12). The clock always stops a search first, so raising `maxSimulations` would change nothing;

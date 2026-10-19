@@ -233,11 +233,15 @@ Shiko or the other spell, and haste enablers in the crackback).
   `turn` is now v2's default (`COMPLETED.md`); left here: the "sequence" benchmark it misses (Opt,
   which needs the draw known), `next-turn` (its passive opponents make held answers look idle), and
   the opponents'-turn benchmarks, which only the (unseated) deep horizons solve.
-- **A decision overruns its second** (found 2026-10-18): in 16 four-player self-play games at
-  the live 1 s budget, 437 of 37,457 decisions ran out of clock and the slowest took 3.2 s — the
-  search's predictive stop (`spent` in `eval-bot.ts`) can't stop one wide-board simulation already
-  under way, nor see whether the turn plan's leftover work fits. Each overrun holds every other
-  room on its shard as long (`docs/plans/room-shards.md`, "The one-second budget").
+- **A decision overruns its second, what's left** (2026-10-18; the rest is in `COMPLETED.md`): 29
+  of 36,466 decisions in 16 four-player self-play games at the live 1 s still ran past it, the
+  slowest 1.6 s, each on a 55–90-permanent board, in three ways the clock can't cut short: one
+  rollout that alone takes 0.6–1.3 s (only a rollout that could stop part-way, in `simulate.ts`,
+  bounds it); a priority search's second baseline, v1's move, which only the deadline itself
+  stops by design (`outOfTime`), with its tie-break against passing (two passive rollouts,
+  `scoreAlone`); and v1's own land pick, up to 1.1 s with Ramunap Excavator offering 26 graveyard
+  lands, each look ~90 ms (`lookAfterPlay`). Each overrun holds every other room on its shard as
+  long (`docs/plans/room-shards.md`, "The one-second budget").
 - **Bots and token stacks: divided damage and gang blocks** (the user, 2026-10-18). Neither bot
   ever sets a cast's `division`, so divided damage always splits evenly over distinct targets (v1
   aims a group at one target; v2's `targetCombos` spreads over 1, 2, 3 distinct ones) — Inferno

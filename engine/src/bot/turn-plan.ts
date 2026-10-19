@@ -73,14 +73,18 @@ export interface TurnPlanLimits {
    * passed out — the whole plan may spend. */
   readonly simulations: number;
   /**
-   * A `Date.now()` stamp the plan stops at, with what it has scored so far:
-   * the deadline of the decision it serves (`EvalBotOptions.timeBudgetMs`).
-   * Absent, there's no clock, and a plan replays identically.
+   * The clock of the decision the plan serves (`EvalBotOptions.timeBudgetMs`):
+   * the plan stops with what it has scored so far once `out` says no other
+   * simulation fits, and runs each one through `timed`, which charges it to
+   * the decision's own tally (`EvalBotController.lastDecision`) and its
+   * prediction. Absent, there's no clock, and a plan replays identically.
    */
-  readonly until?: number;
-  /** Counts each simulation the plan spends, for the decision's own tally
-   * (`EvalBotController.lastDecision`). */
-  readonly meter?: { simulations: number };
+  readonly clock?: PlanClock;
+}
+
+export interface PlanClock {
+  out(): boolean;
+  timed<T>(simulate: () => T): T;
 }
 
 /** The board a step is played on, as much of it as decides what the step
@@ -212,17 +216,17 @@ export function planTurn(
   onlyIfChained = false,
 ): PlannedLine[] {
   let left = limits.simulations;
-  const until = limits.until ?? Infinity;
-  const out = (): boolean => left <= 0 || (until !== Infinity && Date.now() >= until);
-  const spend = (): void => {
+  const clock = limits.clock;
+  const out = (): boolean => left <= 0 || (clock?.out() ?? false);
+  // One simulation, counted against the plan's own ceiling and the clock's.
+  const spend = <T>(simulate: () => T): T => {
     left -= 1;
-    if (limits.meter !== undefined) limits.meter.simulations += 1;
+    return clock === undefined ? simulate() : clock.timed(simulate);
   };
   const lines: PlannedLine[] = [];
   const scoreLine = (node: Node): PlannedLine | null => {
     if (out()) return null;
-    spend();
-    const end = passOut(node.game.state, registry, me);
+    const end = spend(() => passOut(node.game.state, registry, me));
     if (end === null) return null;
     const line = { steps: node.steps, boards: node.boards, value: hooks.value(end), end };
     lines.push(line);
@@ -250,13 +254,14 @@ export function planTurn(
       const board = boardKey(node.game.state, me);
       for (const move of moves) {
         if (out()) break;
-        spend();
-        const settled = simulateSettled(node.game.state, registry, me, move);
         // A move that ends the game is a finished line, scored as it ended —
         // a win, never expanded or passed out. `simulateSettled` answers
         // `null` for it, priority never coming back, so a `null` is asked
         // once more how the move resolves.
-        const ended = settled === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : settled.state;
+        const [settled, ended] = spend(() => {
+          const s = simulateSettled(node.game.state, registry, me, move);
+          return [s, s === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : s.state] as const;
+        });
         if (ended?.result.over === true) {
           lines.push({ steps: [...node.steps, move], boards: [...node.boards, board], value: hooks.value(ended), end: ended });
           continue;
@@ -275,8 +280,7 @@ export function planTurn(
       // passes is the caller's own "pass", and with nothing to attack with,
       // a move after combat is the same move before it.
       if (!node.combatDone && !out() && hooks.mayAttack(node.game.state)) {
-        spend();
-        const after = throughCombat(node.game.state, registry, me);
+        const after = spend(() => throughCombat(node.game.state, registry, me));
         if (after !== null) {
           const child: Node = {
             game: after,

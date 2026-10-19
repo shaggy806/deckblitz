@@ -251,6 +251,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **A decision overruns its second, mostly fixed** (2026-10-18): in 16 four-player self-play
+  games at the live 1 s, decisions past it went from 381 of 37,136 to 29 of 36,466 and the
+  slowest from 3.05 s to 1.58 s. The clock now starts when the decision is asked (`onClock`), not
+  after v1's own pick, which took up to 1.9 s before a land search spent its whole second too; the
+  predictive stop reads the longest simulation so far, not the mean that cheap crackback checks
+  dragged down (`outOfTime`); only a search's real baselines start past it (one for a land
+  search, blocks or a decision); the turn plan stops on the same prediction with its simulations
+  charged (`PlanClock`); `holdsTapForCombat` checks the clock; and v1's land looks are remembered
+  by name and zone, not card (six graveyard Forests are one look). Without a clock nothing changes
+  but speed: the gate 200/200, and `bot:diff` 0 disagreements in 12,697 v2 and 82,220 v1
+  decisions. What's left is in `BACKLOG.md`.
 - **The "Think longer" trial retired, and the one-second budget measured** (2026-10-18): with
   every room's bots at a second a decision, the host's "Think longer — up to 1 s a decision"
   setting (`set-bot-think-long`, 2026-10-14) only raised 200 simulations to 600, and no decision

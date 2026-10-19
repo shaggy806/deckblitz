@@ -167,22 +167,30 @@ export interface EvalBotOptions {
  * `simulations` and `ms` are what it has spent so far, every simulation
  * counted whether or not it came out of `left` (the passing baseline and v1's
  * attack are scored outside the count, so that count-bounded searches replay
- * exactly as they always have). They feed the predictive stop in {@link spent}.
+ * exactly as they always have). `simulations` and `longest` feed the
+ * predictive stop in {@link outOfTime}.
  */
 interface SearchBudget {
   left: number;
   readonly until: number;
+  /** Simulations the clock lets start whatever they're predicted to cost —
+   * the search's baselines ({@link outOfTime}). */
+  readonly baselines: number;
   simulations: number;
   ms: number;
+  /** The longest single simulation so far, in milliseconds. */
+  longest: number;
   /** {@link spent} said stop at least once: something was left unscored. */
   cut: boolean;
 }
 
-const newBudget = (left: number, until: number): SearchBudget => ({
+const newBudget = (left: number, until: number, baselines = 2): SearchBudget => ({
   left,
   until,
+  baselines,
   simulations: 0,
   ms: 0,
+  longest: 0,
   cut: false,
 });
 
@@ -198,26 +206,37 @@ const newBudget = (left: number, until: number): SearchBudget => ({
  * worst at 640ms). Stopping once the running mean no longer fits keeps the
  * overshoot to the variance of one simulation instead of its whole length.
  *
- * **Except for the first two.** Every search scores its two baselines first —
- * passing and v1's move, or v1's swing and the empty attack — so that an
- * expired search degrades to v1's play rather than to doing nothing. Predicted
- * from one expensive baseline, the second never ran: measured, 79 windows in
- * 24 four-player games passed where v1 would have acted in 65 of them. So the
- * prediction waits for both, and only the deadline itself can stop the second.
+ * Predicted from the longest simulation so far, not the mean: a search mixes
+ * full rollouts with crackback checks a fraction of their length
+ * (`tapsIntoCrackback`, resolving one spell), so the mean undersold the next
+ * rollout, and on wide boards a 300ms one started 120ms before the deadline
+ * (16 four-player games at the live 1s, 2026-10-18). A search cut a
+ * simulation early this way only ever loses its last candidate.
+ *
+ * **Except for its baselines.** A priority search scores two first — passing
+ * and v1's move, as an attack declaration scores v1's swing and the empty
+ * attack — so that an expired search degrades to v1's play rather than to
+ * doing nothing. Predicted from one expensive baseline, the second never ran:
+ * measured, 79 windows in 24 four-player games passed where v1 would have
+ * acted in 65 of them. So the prediction waits for both, and only the
+ * deadline itself can stop the second. A search with one baseline — v1's
+ * land, blocks or answer, the rest compared with it — waits for that one only.
  */
 const spent = (budget: SearchBudget): boolean => {
-  const stop = mustStop(budget);
+  const stop = budget.left <= 0 || outOfTime(budget);
   if (stop) budget.cut = true;
   return stop;
 };
 
-const mustStop = (budget: SearchBudget): boolean => {
-  if (budget.left <= 0) return true;
+/** {@link spent}'s clock alone: past the deadline, or predicted not to fit
+ * another simulation before it. Never true without a clock, so a check on it
+ * leaves count-bounded searches exactly as they were. */
+const outOfTime = (budget: SearchBudget): boolean => {
   if (budget.until === Infinity) return false;
   const now = Date.now();
   if (now >= budget.until) return true;
-  if (budget.simulations < 2) return false;
-  return now + budget.ms / budget.simulations >= budget.until;
+  if (budget.simulations < budget.baselines) return false;
+  return now + budget.longest >= budget.until;
 };
 
 /** Run one simulation, charging its time to `budget`. */
@@ -226,8 +245,10 @@ function timed<T>(budget: SearchBudget, simulate: () => T): T {
   try {
     return simulate();
   } finally {
+    const ms = Date.now() - started;
     budget.simulations += 1;
-    budget.ms += Date.now() - started;
+    budget.ms += ms;
+    if (ms > budget.longest) budget.longest = ms;
   }
 }
 
@@ -684,6 +705,8 @@ export class EvalBotController extends HeuristicBotController {
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
   private readonly timeBudgetMs: number;
+  /** When the decision under way was asked, under a clock (`onClock`). */
+  private askedAt: number | null = null;
   private readonly trace: EvalBotOptions["trace"];
   /** The stack this bot last passed on, and on which turn — see
    * `holdPass`. */
@@ -780,7 +803,30 @@ export class EvalBotController extends HeuristicBotController {
    * front of it, never off a position its own search only simulated — see
    * `withTrackRecordEvidence`. */
   act(view: ControllerView): Action {
-    return this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view)));
+    return this.onClock(() =>
+      this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view))),
+    );
+  }
+
+  /**
+   * Runs one decision with its clock (`timeBudgetMs`) started as it's asked:
+   * every search it makes (`budget`) shares the one deadline, counted from
+   * here — an attack declaration reached through `act` included — and not
+   * from whenever the search itself begins. A priority search starts after
+   * v1's own pick (`super.act`), its baseline, and v1 looking at each land
+   * on offer took up to 1.9s on a wide board with Ramunap Excavator's 26 —
+   * after which the land search spent its whole second as well, 3s in all
+   * (2026-10-18). Counted from the ask, that search is out of time already
+   * and plays v1's land.
+   */
+  private onClock<T>(decide: () => T): T {
+    if (this.timeBudgetMs === Infinity || this.askedAt !== null) return decide();
+    this.askedAt = Date.now();
+    try {
+      return decide();
+    } finally {
+      this.askedAt = null;
+    }
   }
 
   /**
@@ -871,7 +917,6 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("priority", null, "no candidates");
       return pass;
     }
-    const budget = this.budget();
 
     // **A land drop is not weighed against passing.** Playing a land costs
     // nothing but the card, doesn't use the turn, and leaves another priority
@@ -996,18 +1041,20 @@ export class EvalBotController extends HeuristicBotController {
         seen.add(name);
         return true;
       });
+      // v1's land, first, is the one baseline: the rest are compared with it.
+      const landBudget = this.budget(this.maxSimulations, 1);
       let bestLand = order[0];
       let bestLandScore = -Infinity;
       for (const land of order) {
-        if (spent(budget)) break;
-        budget.left -= 1;
-        const score = this.scoreLandDrop(view, land, budget);
+        if (spent(landBudget)) break;
+        landBudget.left -= 1;
+        const score = this.scoreLandDrop(view, land, landBudget);
         if (score !== null && score > bestLandScore) {
           bestLandScore = score;
           bestLand = land;
         }
       }
-      this.lastDecision = audit("priority", budget, "land search");
+      this.lastDecision = audit("priority", landBudget, "land search");
       return bestLand;
     }
 
@@ -1015,6 +1062,7 @@ export class EvalBotController extends HeuristicBotController {
     // Scoring against "is this better than the current state" instead would
     // make the bot inactive-by-default and turn the zero point into an extra
     // implicit weight — a land drop sits almost exactly on it.
+    const budget = this.budget();
     let best: Action = pass;
     // Passing is always legal at a priority window, so a `null` here means the
     // simulation itself fell over; treat it as "no baseline" rather than
@@ -1620,11 +1668,13 @@ export class EvalBotController extends HeuristicBotController {
     return wrongSide ? null : following;
   }
 
-  /** A fresh budget for one decision. */
-  private budget(left: number = this.maxSimulations): SearchBudget {
+  /** A fresh budget for one search, on the clock of the decision it serves
+   * (`onClock`), with `baselines` simulations started whatever they cost. */
+  private budget(left: number = this.maxSimulations, baselines = 2): SearchBudget {
     return newBudget(
       left,
-      this.timeBudgetMs === Infinity ? Infinity : Date.now() + this.timeBudgetMs,
+      this.timeBudgetMs === Infinity ? Infinity : (this.askedAt ?? Date.now()) + this.timeBudgetMs,
+      baselines,
     );
   }
 
@@ -1644,7 +1694,8 @@ export class EvalBotController extends HeuristicBotController {
     if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
       return this.commanderToGraveyard(view, inherited);
     }
-    const budget = this.budget(Math.min(DECISION_ROLLOUTS, this.maxSimulations));
+    // One baseline: v1's answer, which every other is compared with.
+    const budget = this.budget(Math.min(DECISION_ROLLOUTS, this.maxSimulations), 1);
     const answer = bestDecision(
       view,
       inherited,
@@ -1718,7 +1769,7 @@ export class EvalBotController extends HeuristicBotController {
   // --- combat -------------------------------------------------------------
 
   declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
-    return withTrackRecordEvidence(view.state, () => this.declareAttackersSearched(view));
+    return this.onClock(() => withTrackRecordEvidence(view.state, () => this.declareAttackersSearched(view)));
   }
 
   private declareAttackersSearched(view: ControllerView): readonly AttackerDeclaration[] {
@@ -1911,7 +1962,7 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   declareBlockers(view: ControllerView): readonly BlockerDeclaration[] {
-    return withTrackRecordEvidence(view.state, () => this.declareBlockersSearched(view));
+    return this.onClock(() => withTrackRecordEvidence(view.state, () => this.declareBlockersSearched(view)));
   }
 
   private declareBlockersSearched(view: ControllerView): readonly BlockerDeclaration[] {
@@ -2065,8 +2116,9 @@ export class EvalBotController extends HeuristicBotController {
 
     // Starting from v1's blocks matters: v1 already chump-blocks when facing
     // lethal, a position a one-blocker-at-a-time climb from nothing can't get
-    // out of when no single chump is enough by itself.
-    const budget = this.budget();
+    // out of when no single chump is enough by itself. They're its one
+    // baseline.
+    const budget = this.budget(this.maxSimulations, 1);
     const [best] = hillClimb(fallback, neighbours, score, budget);
     this.lastDecision = audit("blockers", budget);
     return best;
@@ -2558,9 +2610,13 @@ export class EvalBotController extends HeuristicBotController {
     );
     if (firsts.length === 0) return null;
     const hooks = this.planHooks();
-    // Under a clock, the plan has what the one-move search left of it:
-    // past the deadline it scores nothing, and the one-move answer stands.
-    const limits = { ...this.planLimits(), until: budget.until, meter: budget };
+    // Under a clock, the plan has what the one-move search left of it, on
+    // the search's own predictive stop: past the deadline it scores nothing,
+    // and the one-move answer stands.
+    const limits = {
+      ...this.planLimits(),
+      clock: { out: () => outOfTime(budget), timed: <T>(simulate: () => T): T => timed(budget, simulate) },
+    };
     const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
     const lines = planTurn(state, this.cards, me, firsts, hooks, limits, unknown, this.planMode === "turn");
     // Each line traced as an answer for its first move, as a follow-up pair
@@ -2793,6 +2849,9 @@ export class EvalBotController extends HeuristicBotController {
       }),
     );
     if (attackers.length === 0) return false;
+    // Out of time, the search's play stands: this is a second rollout of it,
+    // which ran 120ms past the deadline unchecked (2026-10-18).
+    if (outOfTime(budget)) return false;
     const resolved = timed(budget, () => simulateAction(state, this.cards, action, "stack", "passive"));
     if (resolved === null || !attackers.some((id) => resolved.objects[id]?.tapped === true)) return false;
     budget.left -= 1;

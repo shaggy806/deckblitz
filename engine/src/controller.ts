@@ -1967,7 +1967,7 @@ export class HeuristicBotController extends AutomaticController {
   /** `source:abilityIndex` -> activations so far, for `activationTurn`. */
   private activations = new Map<string, number>();
   private activationTurn = -1;
-  /** `castableAfterPlay`'s answers on one board, by the land card played: v1's
+  /** `castableAfterPlay`'s answers on one board, by the land played: v1's
    * `bestLand` looks at every land in hand, then v2's land search asked the
    * same of each land again on the same board — the same copies and steps
    * twice (2026-10-14). Dropped as each `act` starts, since a game changes
@@ -2087,10 +2087,23 @@ export class HeuristicBotController extends AutomaticController {
     let bestFetch = false;
     let bestTapped = false;
     let bestScore = -1;
+    // Whether a land is a fetch we'd crack, once per name and zone, as
+    // `castableAfterPlay` remembers its reach.
+    const fetchByName = new Map<string, boolean>();
+    const cracked = (land: PlayLandLegal): boolean => {
+      const object = state.objects[land.card];
+      const key = object === undefined ? land.card : `${land.cardName}:${object.owner}:${object.zone}`;
+      let known = fetchByName.get(key);
+      if (known === undefined) {
+        known = this.crackedOnPlay(view, land);
+        fetchByName.set(key, known);
+      }
+      return known;
+    };
     for (const land of lands) {
       const reach = this.castableAfter(view, land);
       const castable = compareReach(reach, bestCastable);
-      const fetch = landfallOut && this.crackedOnPlay(view, land);
+      const fetch = landfallOut && cracked(land);
       const tapped = this.entersTapped(state, land.card, land.cardName);
       let score = 0;
       for (const color of new Set(this.colorsProducedBy(land.cardName, identity))) {
@@ -2247,8 +2260,18 @@ export class HeuristicBotController extends AutomaticController {
   protected castableAfterPlay(view: ControllerView, play: Action): LandReach {
     if (play.type !== "play-land") return this.lookAfterPlay(view, play);
     if (this.reachMemo?.state !== view.state) this.reachMemo = { state: view.state, byCard: new Map() };
-    // The face too: a modal double-faced card is a different land either way up.
-    const key = `${play.card}:${play.face ?? ""}`;
+    // By name, owner and zone, not by card: two Forests in the same zone
+    // reach the same spells, and Ramunap Excavator offered 26 lands from a
+    // graveyard holding six Forests and four Swamps, each look ~75ms on a
+    // wide board — 1.9s for v1's land pick alone (2026-10-18). The zone
+    // counts (a land played from the graveyard leaves the hand whole), and so
+    // does the face: a modal double-faced card is a different land either
+    // way up.
+    const object = view.state.objects[play.card];
+    const key =
+      object === undefined
+        ? `${play.card}:${play.face ?? ""}`
+        : `${object.cardName}:${object.owner}:${object.zone}:${play.face ?? ""}`;
     const known = this.reachMemo.byCard.get(key);
     if (known !== undefined) return known;
     const reach = this.lookAfterPlay(view, play);
