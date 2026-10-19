@@ -267,6 +267,7 @@ import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
+import _poolMalanthrope from "../pool/malanthrope.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -750,6 +751,7 @@ const shard: CardShard = {
     _poolLumengridGargoyle,
     _poolMadameMasque,
     _poolMageTowerReferee,
+    _poolMalanthrope,
     _poolManyPartings,
     _poolMarchingDuodrone,
     _poolMarkovPatrician,

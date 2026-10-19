@@ -401,6 +401,7 @@ import _poolSneakySnacker from "../pool/sneaky-snacker.js";
 import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
+import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
 import _poolSpellPierce from "../pool/spell-pierce.js";
 import _poolSpiderWomanStunningSavior from "../pool/spider-woman-stunning-savior.js";
 import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
@@ -905,6 +906,7 @@ const shard: CardShard = {
     _poolSoaringSeacliff,
     _poolSokkaTenaciousTactician,
     _poolSomberwaldDryad,
+    _poolSpaceMarineScout,
     _poolSpellPierce,
     _poolSpiderWomanStunningSavior,
     _poolSquirmingEmergence,

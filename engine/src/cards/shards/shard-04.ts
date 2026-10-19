@@ -374,6 +374,7 @@ import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
+import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
 import _poolTangledFlorahedron from "../pool/tangled-florahedron.js";
 import _poolTelJiladJustice from "../pool/tel-jilad-justice.js";
@@ -835,6 +836,7 @@ const shard: CardShard = {
     _poolSwordOfBodyAndMind,
     _poolSyphonMind,
     _poolSyrArmontTheRedeemer,
+    _poolSzarekhTheSilentKing,
     _poolTamsResistance,
     _poolTangledFlorahedron,
     _poolTelJiladJustice,

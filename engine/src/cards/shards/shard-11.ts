@@ -102,6 +102,7 @@ import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
+import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
@@ -606,6 +607,7 @@ const shard: CardShard = {
     _poolDawnsireSunstarDreadnought,
     _poolDecommission,
     _poolDefacingDuskmage,
+    _poolDefendersOfHumanity,
     _poolDelusionsOfMediocrity,
     _poolDemystify,
     _poolDepthChargeColossus,

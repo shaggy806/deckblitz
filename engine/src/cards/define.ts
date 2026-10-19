@@ -2772,6 +2772,14 @@ export interface CardDefinition {
    * its `at`. After the final chapter's ability leaves the stack the Saga is
    * sacrificed (an SBA). `null` for a non-Saga. */
   readonly chapters: readonly SagaChapter[] | null;
+  /** Read ahead (rule 702.155): "as this Saga enters, choose a number between
+   * one and its final chapter number"; it enters with that many lore counters
+   * instead of one (714.3b), and the turn it entered a chapter ability
+   * triggers only if the Saga has exactly that chapter's number of lore
+   * counters (702.155a) — so the chapters it skipped never trigger. The choice
+   * is the card's `chooseOnEnter` ("1" to the final chapter), which
+   * `defineCard` fills in. */
+  readonly readAhead: boolean;
   /** The faces of a multi-face card (rule 712 — ROADMAP Phase 10a/10b), by
    * name, front face first. Each name is registered under its own
    * `CardDefinition` like any card. A card with `faces` is cast/played by
@@ -2967,6 +2975,7 @@ const PRINTED_ABILITY: {
   cycling: (def) => def.cycling !== null,
   castFromGraveyardIf: (def) => def.castFromGraveyardIf !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
+  readAhead: (def) => def.readAhead,
   faces: false,
   cantBeCountered: (def) => def.cantBeCountered,
   commanderTaxAsLife: (def) => def.commanderTaxAsLife,
@@ -3154,6 +3163,8 @@ interface CardDraft {
     readonly counters?: { readonly kind: string; readonly amount: number };
   };
   chapters?: readonly SagaChapter[];
+  /** See {@link CardDefinition.readAhead}. */
+  readAhead?: true;
   faces?: readonly string[];
   cantBeCountered?: boolean;
   commanderTaxAsLife?: boolean;
@@ -3173,6 +3184,16 @@ interface CardDraft {
 }
 
 /** Build a {@link CardDefinition} from a partial draft, filling in defaults. */
+/** A read-ahead Saga's "choose a number between one and this Saga's final
+ * chapter number" (rule 714.3b) as `chooseOnEnter` options; `null` for any
+ * other card. The final chapter number is the greatest in any chapter's `at`
+ * (714.2d). */
+function readAheadChoices(draft: CardDraft): readonly string[] | null {
+  if (draft.readAhead !== true) return null;
+  const final = Math.max(0, ...(draft.chapters ?? []).flatMap((chapter) => chapter.at));
+  return Array.from({ length: final }, (_, i) => String(i + 1));
+}
+
 export function defineCard(draft: CardDraft): CardDefinition {
   const loyalty = draft.loyalty ?? null;
   // A planeswalker enters with `loyalty` loyalty counters (rule 306.5b) —
@@ -3252,7 +3273,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
     devour: draft.devour ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
-    chooseOnEnter: draft.chooseOnEnter ?? null,
+    chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),
     loyalty,
     defense,
     flashback: draft.flashback ?? null,
@@ -3276,6 +3297,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
     escape: draft.escape ?? null,
     chapters: draft.chapters ?? null,
+    readAhead: draft.readAhead === true,
     faces: draft.faces ?? null,
     cantBeCountered: draft.cantBeCountered ?? false,
     commanderTaxAsLife: draft.commanderTaxAsLife ?? false,

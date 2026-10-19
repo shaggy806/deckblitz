@@ -1056,6 +1056,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(brawler.complete).toBe(true);
   });
 
+  it("read ahead (rule 702.155): the keyword line", () => {
+    const saga = parseFace({
+      name: "Test Saga",
+      type_line: "Enchantment — Saga",
+      oracle_text:
+        "Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)",
+    });
+    expect(saga.readAhead).toBe(true);
+  });
+
   it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
     const titan = face(
       "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",

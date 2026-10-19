@@ -216,6 +216,7 @@ function faceSource(face, ctx) {
     toxic: parsed.toxic,
     devour: parsed.devour,
     compleated: parsed.compleated,
+    readAhead: parsed.readAhead,
     castFromGraveyardIf: parsed.castFromGraveyardIf,
     morph: parsed.morph,
     disturb: parsed.disturb,

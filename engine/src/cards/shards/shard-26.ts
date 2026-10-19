@@ -135,6 +135,7 @@ import _poolFluxChanneler from "../pool/flux-channeler.js";
 import _poolFlyingMen from "../pool/flying-men.js";
 import _poolFollowHim from "../pool/follow-him.js";
 import _poolFootMystic from "../pool/foot-mystic.js";
+import _poolForTheEmperor from "../pool/for-the-emperor.js";
 import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
@@ -595,6 +596,7 @@ const shard: CardShard = {
     _poolFlyingMen,
     _poolFollowHim,
     _poolFootMystic,
+    _poolForTheEmperor,
     _poolFracturedRealm,
     _poolFungusFrolic,
     _poolFynnTheFangbearer,

@@ -127,6 +127,7 @@ import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEviscerate from "../pool/eviscerate.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
+import _poolExterminatus from "../pool/exterminatus.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFalkenrathReaver from "../pool/falkenrath-reaver.js";
 import _poolFallenAskari from "../pool/fallen-askari.js";
@@ -250,6 +251,7 @@ import _poolMyrKinsmith from "../pool/myr-kinsmith.js";
 import _poolNantukoHusk from "../pool/nantuko-husk.js";
 import _poolNarciFableSinger from "../pool/narci-fable-singer.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
+import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
 import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNightscapeFamiliar from "../pool/nightscape-familiar.js";
@@ -587,6 +589,7 @@ const shard: CardShard = {
     _poolEtchedHostDoombringer,
     _poolEviscerate,
     _poolExperimentalArmor,
+    _poolExterminatus,
     _poolFadeFromMemory,
     _poolFalkenrathReaver,
     _poolFallenAskari,
@@ -710,6 +713,7 @@ const shard: CardShard = {
     _poolNantukoHusk,
     _poolNarciFableSinger,
     _poolNecromanticSelection,
+    _poolNecronMonolith,
     _poolNecropolisRegent,
     _poolNightMarketAeronaut,
     _poolNightscapeFamiliar,

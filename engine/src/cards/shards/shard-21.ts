@@ -323,6 +323,7 @@ import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
 import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
 import _poolShreddersArmor from "../pool/shredders-armor.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
+import _poolSisterOfSilence from "../pool/sister-of-silence.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
 import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolShinenOfFlightsWings,
     _poolShreddersArmor,
     _poolSilentAttendant,
+    _poolSisterOfSilence,
     _poolSkyRuinDrake,
     _poolSlashingTiger,
     _poolSlinkingSerpent,

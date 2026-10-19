@@ -290,6 +290,7 @@ import _poolPerigeeBeckoner from "../pool/perigee-beckoner.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
+import _poolPinkHorror from "../pool/pink-horror.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
@@ -401,6 +402,7 @@ import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
+import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
@@ -470,6 +472,7 @@ import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZimoneInfiniteAnalyst from "../pool/zimone-infinite-analyst.js";
 import _poolZofConsumption from "../pool/zof-consumption.js";
 import _tokensAssemblyWorkerToken from "../tokens/assembly-worker-token.js";
+import _tokensBlueHorror from "../tokens/blue-horror.js";
 import _tokensBlueRedElementalToken44 from "../tokens/blue-red-elemental-token-4-4.js";
 import _tokensConstructTokenMetallurgicSummonings from "../tokens/construct-token-metallurgic-summonings.js";
 import _tokensPlainKnightToken from "../tokens/plain-knight-token.js";
@@ -766,6 +769,7 @@ const shard: CardShard = {
     _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,
     _poolPierceTheSky,
+    _poolPinkHorror,
     _poolPlasmancer,
     _poolPoisonBladeMentor,
     _poolPollenShieldHare,
@@ -877,6 +881,7 @@ const shard: CardShard = {
     _poolTerraStomper,
     _poolTerrainGenerator,
     _poolTheChaseIsOn,
+    _poolTheCrueltyOfGix,
     _poolTheFinalDays,
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
@@ -948,6 +953,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAssemblyWorkerToken,
+    _tokensBlueHorror,
     _tokensBlueRedElementalToken44,
     _tokensConstructTokenMetallurgicSummonings,
     _tokensPlainKnightToken,

@@ -286,6 +286,7 @@ import _poolProctorOfPotential from "../pool/proctor-of-potential.js";
 import _poolProftConsultingDetective from "../pool/proft-consulting-detective.js";
 import _poolProsperousThief from "../pool/prosperous-thief.js";
 import _poolPullFromTomorrow from "../pool/pull-from-tomorrow.js";
+import _poolPurestrainGenestealer from "../pool/purestrain-genestealer.js";
 import _poolPyreCharger from "../pool/pyre-charger.js";
 import _poolPyromancersGoggles from "../pool/pyromancers-goggles.js";
 import _poolQueenMarchesa from "../pool/queen-marchesa.js";
@@ -373,6 +374,7 @@ import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
+import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
@@ -398,6 +400,7 @@ import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
 import _poolTurbulentMoor from "../pool/turbulent-moor.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
+import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUndercellarMyconid from "../pool/undercellar-myconid.js";
@@ -750,6 +753,7 @@ const shard: CardShard = {
     _poolProftConsultingDetective,
     _poolProsperousThief,
     _poolPullFromTomorrow,
+    _poolPurestrainGenestealer,
     _poolPyreCharger,
     _poolPyromancersGoggles,
     _poolQueenMarchesa,
@@ -837,6 +841,7 @@ const shard: CardShard = {
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
     _poolTaintedIsle,
+    _poolTallymanOfNurgle,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
     _poolThaumaturgesFamiliar,
@@ -862,6 +867,7 @@ const shard: CardShard = {
     _poolTrueIdentity,
     _poolTurbulentMoor,
     _poolTurntimberAscetic,
+    _poolTyranidPrime,
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,
     _poolUndercellarMyconid,

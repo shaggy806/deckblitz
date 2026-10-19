@@ -8726,11 +8726,17 @@ export class Game {
    */
   private triggerChapters(sagaId: ObjectId, before: number, after: number): void {
     const object = this.state.objects[sagaId];
-    const chapters = this.registry.get(rulesTextName(object)).chapters;
+    const def = this.registry.get(rulesTextName(object));
+    const chapters = def.chapters;
     if (chapters === null) return;
+    // Read ahead (rule 702.155a): the turn the Saga entered, a chapter ability
+    // triggers only if the Saga has exactly that chapter's number of lore
+    // counters — the chapters a read-ahead Saga skipped by entering past them
+    // never trigger.
+    const exactOnly = def.readAhead && object.enteredBattlefieldOnTurn === this.state.turn.number;
     const reached = chapters
       .flatMap((chapter, index) =>
-        chapter.at.filter((n) => n > before && n <= after).map((n) => ({ index, n })),
+        chapter.at.filter((n) => n > before && n <= after && (!exactOnly || n === after)).map((n) => ({ index, n })),
       )
       .sort((a, b) => b.n - a.n);
     for (const { index } of reached) {
@@ -33354,9 +33360,14 @@ export class Game {
         }
       }
       // A Saga enters with a lore counter (rule 714.3a), firing its chapter I
-      // ability — two under Doubling Season, firing chapter II as well.
-      if (this.registry.get(rulesTextName(object)).chapters !== null) {
-        this.addLoreCounter(id, this.counterTotal(id, "lore", 1));
+      // ability — two under Doubling Season, firing chapter II as well. A
+      // read-ahead Saga enters with the number chosen as it entered instead
+      // (714.3b), and `triggerChapters` lets only the chapter it landed on
+      // trigger this turn (702.155a).
+      const sagaDef = this.registry.get(rulesTextName(object));
+      if (sagaDef.chapters !== null) {
+        const chosen = sagaDef.readAhead ? Number(object.chosenOnEnter) : 1;
+        this.addLoreCounter(id, this.counterTotal(id, "lore", Number.isInteger(chosen) && chosen > 0 ? chosen : 1));
       }
       // Counters it entered with were *put* on it (rule 122.6), so a
       // "whenever counters are put on" trigger sees them. Announced last, once

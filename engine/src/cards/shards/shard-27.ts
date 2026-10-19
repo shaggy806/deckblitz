@@ -182,6 +182,7 @@ import _poolHobblefiend from "../pool/hobblefiend.js";
 import _poolHomesickness from "../pool/homesickness.js";
 import _poolHonedKhopesh from "../pool/honed-khopesh.js";
 import _poolHoodedKavu from "../pool/hooded-kavu.js";
+import _poolHormagauntHorde from "../pool/hormagaunt-horde.js";
 import _poolHornOfRamos from "../pool/horn-of-ramos.js";
 import _poolHorrorOfHorrors from "../pool/horror-of-horrors.js";
 import _poolHoundOfGriselbrand from "../pool/hound-of-griselbrand.js";
@@ -660,6 +661,7 @@ const shard: CardShard = {
     _poolHomesickness,
     _poolHonedKhopesh,
     _poolHoodedKavu,
+    _poolHormagauntHorde,
     _poolHornOfRamos,
     _poolHorrorOfHorrors,
     _poolHoundOfGriselbrand,

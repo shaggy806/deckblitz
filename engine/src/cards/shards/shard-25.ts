@@ -405,6 +405,7 @@ import _poolTorchGauntlet from "../pool/torch-gauntlet.js";
 import _poolTorchTheWitness from "../pool/torch-the-witness.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
+import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
 import _poolUltimeciaOmnipotent from "../pool/ultimecia-omnipotent.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolTorchTheWitness,
     _poolTrailOfEvidence,
     _poolTreadUpon,
+    _poolTrygonPrime,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,
     _poolUltimeciaOmnipotent,

@@ -428,6 +428,7 @@ import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
+import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
@@ -931,6 +932,7 @@ const shard: CardShard = {
     _poolTheMycotyrant,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
+    _poolTheWeatherseedTreaty,
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThirstForIdentity,

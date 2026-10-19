@@ -66,6 +66,7 @@ import _poolCaptainsCall from "../pool/captains-call.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
+import _poolChaosTerminatorLord from "../pool/chaos-terminator-lord.js";
 import _poolChargeOfTheMites from "../pool/charge-of-the-mites.js";
 import _poolCharityExtractor from "../pool/charity-extractor.js";
 import _poolChitteringDispatcher from "../pool/chittering-dispatcher.js";
@@ -535,6 +536,7 @@ const shard: CardShard = {
     _poolCargoShip,
     _poolCastleSengir,
     _poolCatalystElemental,
+    _poolChaosTerminatorLord,
     _poolChargeOfTheMites,
     _poolCharityExtractor,
     _poolChitteringDispatcher,

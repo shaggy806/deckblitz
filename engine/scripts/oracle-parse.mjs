@@ -289,6 +289,8 @@ function keywordPart(part) {
     convoke: () => ({ card: { convoke: true } }),
     // Compleated (rule 702.150a): the loyalty it enters with.
     compleated: () => ({ card: { compleated: true } }),
+    // Read ahead (rule 702.155): its chapter choice comes from `defineCard`.
+    "read ahead": () => ({ card: { readAhead: true } }),
     // Devoid makes the card colourless (rule 702.114a), which its colours
     // already say.
     devoid: () => ({}),
