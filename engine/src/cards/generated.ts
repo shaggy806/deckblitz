@@ -6488,6 +6488,7 @@ import _poolJinSakaiGhostOfTsushima from "./pool/jin-sakai-ghost-of-tsushima.js"
 import _poolJirinaDauntlessGeneral from "./pool/jirina-dauntless-general.js";
 import _poolJodahArchmageEternal from "./pool/jodah-archmage-eternal.js";
 import _poolJodahTheUnifier from "./pool/jodah-the-unifier.js";
+import _poolJodahsCodex from "./pool/jodahs-codex.js";
 import _poolJohannsStopgap from "./pool/johanns-stopgap.js";
 import _poolJoinTheDance from "./pool/join-the-dance.js";
 import _poolJoinTheDead from "./pool/join-the-dead.js";
@@ -7739,6 +7740,7 @@ import _poolMerfolkSkydiver from "./pool/merfolk-skydiver.js";
 import _poolMerfolkSkyscout from "./pool/merfolk-skyscout.js";
 import _poolMerfolkSovereign from "./pool/merfolk-sovereign.js";
 import _poolMerfolkTraders from "./pool/merfolk-traders.js";
+import _poolMeriasOutrider from "./pool/merias-outrider.js";
 import _poolMerrowCommerce from "./pool/merrow-commerce.js";
 import _poolMerrowReejerey from "./pool/merrow-reejerey.js";
 import _poolMerrowSkyswimmer from "./pool/merrow-skyswimmer.js";
@@ -8418,6 +8420,7 @@ import _poolNinjasBlades from "./pool/ninjas-blades.js";
 import _poolNipGwyllion from "./pool/nip-gwyllion.js";
 import _poolNirkanaAssassin from "./pool/nirkana-assassin.js";
 import _poolNirkanaRevenant from "./pool/nirkana-revenant.js";
+import _poolNishobaBrawler from "./pool/nishoba-brawler.js";
 import _poolNissaAscendedAnimist from "./pool/nissa-ascended-animist.js";
 import _poolNissaLeylineTamer from "./pool/nissa-leyline-tamer.js";
 import _poolNissaResurgentAnimist from "./pool/nissa-resurgent-animist.js";
@@ -14529,6 +14532,7 @@ import _poolYavimayaElder from "./pool/yavimaya-elder.js";
 import _poolYavimayaGnats from "./pool/yavimaya-gnats.js";
 import _poolYavimayaHollow from "./pool/yavimaya-hollow.js";
 import _poolYavimayaSapherd from "./pool/yavimaya-sapherd.js";
+import _poolYavimayaSojourner from "./pool/yavimaya-sojourner.js";
 import _poolYavimayaWurm from "./pool/yavimaya-wurm.js";
 import _poolYawgmothThranPhysician from "./pool/yawgmoth-thran-physician.js";
 import _poolYawgmothsVileOffering from "./pool/yawgmoths-vile-offering.js";
@@ -21587,6 +21591,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJirinaDauntlessGeneral,
   _poolJodahArchmageEternal,
   _poolJodahTheUnifier,
+  _poolJodahsCodex,
   _poolJohannsStopgap,
   _poolJoinTheDance,
   _poolJoinTheDead,
@@ -22838,6 +22843,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMerfolkSkyscout,
   _poolMerfolkSovereign,
   _poolMerfolkTraders,
+  _poolMeriasOutrider,
   _poolMerrowCommerce,
   _poolMerrowReejerey,
   _poolMerrowSkyswimmer,
@@ -23517,6 +23523,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNipGwyllion,
   _poolNirkanaAssassin,
   _poolNirkanaRevenant,
+  _poolNishobaBrawler,
   _poolNissaAscendedAnimist,
   _poolNissaLeylineTamer,
   _poolNissaResurgentAnimist,
@@ -29628,6 +29635,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYavimayaGnats,
   _poolYavimayaHollow,
   _poolYavimayaSapherd,
+  _poolYavimayaSojourner,
   _poolYavimayaWurm,
   _poolYawgmothThranPhysician,
   _poolYawgmothsVileOffering,

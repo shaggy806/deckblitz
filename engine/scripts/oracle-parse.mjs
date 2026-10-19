@@ -2384,6 +2384,15 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Domain (an ability word, rule 207.2c): Nishoba Brawler's "~'s power is
+  // equal to the number of basic land types among lands you control" (a CDA).
+  if (line === "~'s power is equal to the number of basic land types among lands you control.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { basicLandTypes: "you" }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
   // Arixmethes' "as long as ~ has a slumber counter on it, it's a land" — its
   // card types replaced while it does (rule 205.1a).
   if ((m = new RegExp(`^As long as ~ has an? ([a-z]+) counter on it, it's an? (${CARD_TYPES.join("|")})\\.$`).exec(line))) {

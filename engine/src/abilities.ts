@@ -529,6 +529,10 @@ export type CostReductionAmount =
    * "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] }, times: 2
    * }`. See `TurnHistory`. */
   | { readonly turnHistory: TurnHistoryKind; readonly filter?: CardFilter; readonly times?: number }
+  /** Domain — {1} less for each basic land type among lands its controller
+   * controls (Leyline Binding, Jodah's Codex). `characteristics.ts`'s
+   * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */
+  | { readonly basicLandTypes: "you" }
   /** A sum or maximum over permanents — Ghalta, Primal Hunger's "costs {X}
    * less to cast, where X is the **total power** of creatures you control".
    * Clamped at 0. See `AggregateSpec`. */

@@ -1923,6 +1923,24 @@ export function cardTypesInGraveyards(
   return types.size;
 }
 
+/**
+ * How many basic land types (rule 205.3i — Plains, Island, Swamp, Mountain,
+ * Forest) there are among the lands `player` controls, each once: 0 to 5.
+ * Domain's count (an ability word, rule 207.2c — "the number of basic land
+ * types among lands you control"). A land's types are its current ones (a
+ * Blood Moon'd dual is only a Mountain). Read through `matchesFilter`, as a
+ * `countOf` is, so a characteristic-defining ability may read it (Nishoba
+ * Brawler).
+ */
+export function basicLandTypesAmong(state: GameState, registry: CardRegistry, player: PlayerId): number {
+  let n = 0;
+  for (const [type] of BASIC_LAND_TYPE_COLORS) {
+    const filter: CardFilter = { type: "land", subtype: type, controlledBy: "you" };
+    if (state.zones.shared.battlefield.some((id) => matchesFilter(state, registry, id, filter, { you: player }))) n += 1;
+  }
+  return n;
+}
+
 /** The current value of a CDA's dynamic count (rule 604.3). */
 export function countValue(
   spec: CountSpec,
@@ -1959,6 +1977,7 @@ export function countValue(
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
+    if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
     return allGraveyards().filter((id) =>
       matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller }),
     ).length;

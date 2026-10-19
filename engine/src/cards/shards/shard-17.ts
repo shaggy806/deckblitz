@@ -238,6 +238,7 @@ import _poolMasterworkOfIngenuity from "../pool/masterwork-of-ingenuity.js";
 import _poolMechanShieldmate from "../pool/mechan-shieldmate.js";
 import _poolMemoryTrap from "../pool/memory-trap.js";
 import _poolMendicantCoreGuidelight from "../pool/mendicant-core-guidelight.js";
+import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
@@ -701,6 +702,7 @@ const shard: CardShard = {
     _poolMechanShieldmate,
     _poolMemoryTrap,
     _poolMendicantCoreGuidelight,
+    _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMidnightMangler,
     _poolMilitaryIntelligence,

@@ -378,7 +378,12 @@ export type CountSpec =
    * [one] and [the other]": a symbol of either counts once. Devotion reads
    * mana costs, which no later layer changes (700.5a), so a CDA can read it
    * without a dependency problem; the CDA's own permanent counts. */
-  | { readonly devotionTo: readonly Color[] };
+  | { readonly devotionTo: readonly Color[] }
+  /** Domain — the number of basic land types among lands its controller
+   * controls, 0 to 5 (Nishoba Brawler's "power is equal to the number of
+   * basic land types among lands you control"). `characteristics.ts`'s
+   * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */
+  | { readonly basicLandTypes: "you" };
 
 /**
  * A per-player running total the engine keeps for the current turn, readable

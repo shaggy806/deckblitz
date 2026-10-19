@@ -444,6 +444,7 @@ import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWrennsResolve from "../pool/wrenns-resolve.js";
 import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
+import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
 import _tokensAlienToken from "../tokens/alien-token.js";
@@ -898,6 +899,7 @@ const shard: CardShard = {
     _poolWrennsResolve,
     _poolXandersLounge,
     _poolYavimayaHollow,
+    _poolYavimayaSojourner,
     _poolYgraEaterOfAll,
     _poolZadasCommando,
   ],

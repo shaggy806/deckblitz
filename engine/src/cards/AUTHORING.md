@@ -638,7 +638,11 @@ Asphodel; a hybrid pip counts for each colour it contains, `{X}` and generic
 for nothing; `"that-color"` is the colour an `"any-color"` `add-mana` is
 making — Nykthos, Shrine to Nyx; a list is "your devotion to [one] and
 [other]", a `{W/B}` counted once; Altar of the Pantheon's `devotionBonus`
-adds to every one), `{ greatestCommanderManaValue: true }`
+adds to every one), `{ basicLandTypes: "you" }` (domain, an ability word —
+rule 207.2c: the basic land types among lands you control, each once, 0 to 5 —
+Meria's Outrider; the same form is a `costReduction`/`selfCostReduction`
+amount, Jodah's Codex and Yavimaya Sojourner, and a CDA count, Nishoba
+Brawler), `{ greatestCommanderManaValue: true }`
 (the greatest mana value among your commanders, wherever they are — Cactus
 Preserve's X/X), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard
@@ -3318,6 +3322,8 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
     own pips included: Anax, Hardened in the Forge's and Renata, Called to
     the Hunt's "power is equal to your devotion to red / green" (`only:
     "power"`, printed power 0).
+  - `{ basicLandTypes: "you" }` — domain: the basic land types among lands
+    its controller controls (Nishoba Brawler, `only: "power"`).
 
   It applies in every zone (rule 604.3), so the card has that size in a
   library, hand, graveyard or the command zone too; "you" is its controller,

@@ -403,6 +403,13 @@ export type EffectAmount =
    * is the greatest mana value among your commanders" — its ruling); 0 with
    * none. `characteristics.ts`'s `greatestCommanderManaValue`. */
   | { readonly greatestCommanderManaValue: true }
+  /** Domain (an ability word, rule 207.2c): the number of basic land types
+   * among lands the effect's controller controls, 0 to 5, as it resolves —
+   * Meria's Outrider, Herd Migration, Shadow Prophecy's "look at the top X
+   * cards … where X is the number of basic land types among lands you
+   * control". `characteristics.ts`'s `basicLandTypesAmong`; a cost reduction
+   * and a CDA count have the same form. */
+  | { readonly basicLandTypes: "you" }
   /** How many creatures died under the effect controller's control this turn
    * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
    * `anyController`: every creature that died this turn, whoever controlled
@@ -5464,6 +5471,8 @@ export interface EffectApi {
   devotionTo(colors: readonly Color[]): number;
   /** See the `{ greatestCommanderManaValue }` {@link EffectAmount}. */
   greatestCommanderManaValue(): number;
+  /** See the `{ basicLandTypes }` {@link EffectAmount}. */
+  basicLandTypes(): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
@@ -7381,6 +7390,7 @@ function signedAmountValue(
     return color === undefined || color === "C" ? 0 : ctx.devotionTo([color as Color]);
   }
   if ("greatestCommanderManaValue" in amount) return ctx.greatestCommanderManaValue();
+  if ("basicLandTypes" in amount) return ctx.basicLandTypes();
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = resolveAmountRef(amount.powerOf, ctx);

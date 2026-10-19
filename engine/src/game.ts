@@ -83,6 +83,7 @@ import {
   damageDealtThisTurn,
   turnHistoryCount,
   cardTypesInGraveyards,
+  basicLandTypesAmong,
   colorsAmongPermanents,
   computeCharacteristics,
   computedCacheMemo,
@@ -21826,6 +21827,7 @@ export class Game {
           : (lastKnownOf(ref)?.controller ?? this.state.objects[ref.object]?.controller),
       devotionTo: (colors) => devotionOf(this.state, this.registry, controller, colors),
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
+      basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
       opponentsControllingFewer: (filter) => {
         const mine = this.countBattlefieldMatching(controller, filter);
         return this.state.turnOrder.filter(
@@ -25640,6 +25642,7 @@ export class Game {
       return this.state.players[player]?.counters[amount.playerCounters] ?? 0;
     }
     if ("speed" in amount) return speedOf(this.state, player);
+    if ("basicLandTypes" in amount) return basicLandTypesAmong(this.state, this.registry, player);
     if ("turnHistory" in amount) {
       return (
         (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, [player], amount.turnHistory, amount.filter, player)

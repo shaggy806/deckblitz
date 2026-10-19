@@ -1042,6 +1042,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("As long as your devotion to blue is five or more, Test Card has flying.").complete).toBe(false);
   });
 
+  it("domain (an ability word, rule 207.2c): Nishoba Brawler's power is the basic land types among your lands", () => {
+    const brawler = face(
+      "Trample\nDomain — Test Card's power is equal to the number of basic land types among lands you control.",
+      "Creature — Cat Warrior",
+    );
+    expect(brawler.static[0].setBasePtFromCount).toEqual({
+      countOf: { basicLandTypes: "you" },
+      plusPower: 0,
+      plusToughness: 0,
+      only: "power",
+    });
+    expect(brawler.complete).toBe(true);
+  });
+
   it("Titan of Littjara's chosen creature type (static:self-type-changes)", () => {
     const titan = face(
       "As this creature enters, choose a creature type.\nThis creature is the chosen type in addition to its other types.",

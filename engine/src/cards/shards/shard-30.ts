@@ -235,6 +235,7 @@ import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
 import _poolJemLightfooteSkyExplorer from "../pool/jem-lightfoote-sky-explorer.js";
 import _poolJeongJeongsDeserters from "../pool/jeong-jeongs-deserters.js";
+import _poolJodahsCodex from "../pool/jodahs-codex.js";
 import _poolKambalConsulOfAllocation from "../pool/kambal-consul-of-allocation.js";
 import _poolKavuClimber from "../pool/kavu-climber.js";
 import _poolKazuulsCliffs from "../pool/kazuuls-cliffs.js";
@@ -302,6 +303,7 @@ import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleThopterist from "../pool/nimble-thopterist.js";
+import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolOathOfTheGreyHost from "../pool/oath-of-the-grey-host.js";
 import _poolOboroBreezecaller from "../pool/oboro-breezecaller.js";
@@ -716,6 +718,7 @@ const shard: CardShard = {
     _poolJadziStewardOfFate,
     _poolJemLightfooteSkyExplorer,
     _poolJeongJeongsDeserters,
+    _poolJodahsCodex,
     _poolKambalConsulOfAllocation,
     _poolKavuClimber,
     _poolKazuulsCliffs,
@@ -783,6 +786,7 @@ const shard: CardShard = {
     _poolNickValentinePrivateEye,
     _poolNimbleInnovator,
     _poolNimbleThopterist,
+    _poolNishobaBrawler,
     _poolNobody,
     _poolOathOfTheGreyHost,
     _poolOboroBreezecaller,
