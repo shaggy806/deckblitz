@@ -231,6 +231,19 @@ describe("Airlift Chaplain", () => {
     const chaplain = enter(game, "Airlift Chaplain");
     expect(counters(game, chaplain)).toBe(1);
   });
+
+  it("can still take a milled card a Rest in Peace exiled (rule 701.17c)", () => {
+    const { game, a } = table();
+    spawn(game, "Rest in Peace", B);
+    const plains = toLibrary(game, "Plains");
+    toLibrary(game, "Craw Wurm");
+    toLibrary(game, "Craw Wurm");
+    pickModes(a, 0);
+    pickFromZone(a, plains);
+    const chaplain = enter(game, "Airlift Chaplain");
+    expect(zone(game, plains)).toBe("hand");
+    expect(counters(game, chaplain)).toBe(0);
+  });
 });
 
 describe("Levitating Statue", () => {

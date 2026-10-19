@@ -33,7 +33,7 @@ export default defineCard({
           { kind: "mill", target: "you", amount: 3 },
           {
             kind: "conditional",
-            condition: { kind: "cards-in-graveyard", atLeast: 1, filter: MILLED },
+            condition: { kind: "this-way", what: "milled", filter: MILLED },
             then: {
               kind: "may",
               prompt: "Put a Plains card or a creature card with mana value 3 or less from among the milled cards into your hand?",

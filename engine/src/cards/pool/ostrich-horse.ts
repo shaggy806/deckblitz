@@ -27,7 +27,7 @@ export default defineCard({
           { kind: "mill", target: "you", amount: 3 },
           {
             kind: "conditional",
-            condition: { kind: "cards-in-graveyard", atLeast: 1, filter: { thisWay: "milled", type: "land" } },
+            condition: { kind: "this-way", what: "milled", filter: { thisWay: "milled", type: "land" } },
             then: {
               kind: "may",
               prompt: "Put a land card from among the milled cards into your hand?",
