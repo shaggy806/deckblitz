@@ -1,0 +1,380 @@
+{
+ "batch": "B100",
+ "status": "complete",
+ "ranks": "Jumpstart 2022 (J22, 2022-12-02) and The Brothers' War Commander (BRC, 2022-11-18): the rest of each set",
+ "authored": [
+  {
+   "name": "Runadi, Behemoth Caller",
+   "files": [
+    "engine/src/cards/pool/runadi-behemoth-caller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lita, Mechanical Engineer",
+   "files": [
+    "engine/src/cards/pool/lita-mechanical-engineer.ts",
+    "engine/src/cards/tokens/zeppelin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Termination Facilitator",
+   "files": [
+    "engine/src/cards/pool/termination-facilitator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Atlas",
+   "files": [
+    "engine/src/cards/pool/planar-atlas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Piracy",
+   "files": [
+    "engine/src/cards/pool/daring-piracy.ts",
+    "engine/src/cards/tokens/pirate-token-daring-piracy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ardoz, Cobbler of War",
+   "files": [
+    "engine/src/cards/pool/ardoz-cobbler-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Towering Gibbon",
+   "files": [
+    "engine/src/cards/pool/towering-gibbon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Launch Mishap",
+   "files": [
+    "engine/src/cards/pool/launch-mishap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dutiful Replicator",
+   "files": [
+    "engine/src/cards/pool/dutiful-replicator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Instruments of War",
+   "files": [
+    "engine/src/cards/pool/instruments-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biblioplex Kraken",
+   "files": [
+    "engine/src/cards/pool/biblioplex-kraken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciple of Perdition",
+   "files": [
+    "engine/src/cards/pool/disciple-of-perdition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Idol",
+   "files": [
+    "engine/src/cards/pool/infernal-idol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rampaging Growth",
+   "files": [
+    "engine/src/cards/pool/rampaging-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Isu the Abominable",
+   "files": [
+    "engine/src/cards/pool/isu-the-abominable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Ladybug",
+   "files": [
+    "engine/src/cards/pool/giant-ladybug.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ossuary Rats",
+   "files": [
+    "engine/src/cards/pool/ossuary-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Hunt-Caller",
+   "files": [
+    "engine/src/cards/pool/spectral-hunt-caller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Conductor of Cacophony",
+   "files": [
+    "engine/src/cards/pool/conductor-of-cacophony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullslither Worm",
+   "files": [
+    "engine/src/cards/pool/skullslither-worm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ingenious Leonin",
+   "files": [
+    "engine/src/cards/pool/ingenious-leonin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sardian Avenger",
+   "files": [
+    "engine/src/cards/pool/sardian-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thopter Shop",
+   "files": [
+    "engine/src/cards/pool/thopter-shop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terisiare's Devastation",
+   "files": [
+    "engine/src/cards/pool/terisiares-devastation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Archimandrite",
+   "files": [
+    "engine/src/cards/pool/the-archimandrite.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Pirated Copy",
+   "needs": [
+    "condition:filter-same-name-as-source"
+   ],
+   "why": "\"Another creature with the same name\" has no filter, and copyOnEnter's addSubtypes can't add Pirate only when it copies a creature (the ruling)."
+  },
+  {
+   "name": "Kenessos, Priest of Thassa",
+   "needs": [
+    "replacement:would-scry-plus"
+   ],
+   "why": "\"If you would scry a number of cards, scry that many plus one instead\": no scry replacement event exists (they stop at would-mill and would-draw)."
+  },
+  {
+   "name": "Brazen Cannonade",
+   "needs": [
+    "zone:impulse-until-end-of-combat-next-turn"
+   ],
+   "why": "Its raid impulse lasts \"until end of combat on your next turn\"; impulse-exile has no such duration."
+  },
+  {
+   "name": "Mizzix, Replica Rider",
+   "needs": [
+    "effect:copy-spell-grants"
+   ],
+   "why": "The copy of a permanent spell gains haste and \"sacrifice it at your end step\"; copy-spell can't grant abilities to the copy."
+  },
+  {
+   "name": "Auntie Blyte, Bad Influence",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "\"Remove X +1/+1 counters\" as a cost: removeCounter.count is fixed."
+  },
+  {
+   "name": "Agrus Kos, Eternal Soldier",
+   "needs": [
+    "trigger:becomes-target-of-ability-targeting-only-it",
+    "effect:copy-ability-for-each-it-could-target"
+   ],
+   "why": "becomes-target can't narrow to \"an ability that targets only it\", and copy-ability has no copy-for-each-other-creature-it-could-target fan-out."
+  },
+  {
+   "name": "Angelic Cub",
+   "needs": [
+    "trigger:becomes-target-first-time-by-anyone"
+   ],
+   "why": "firstTimeEachTurn counts per targeting player (valiant); the Cub's \"for the first time each turn\" is by anyone."
+  },
+  {
+   "name": "Synchronized Eviction",
+   "needs": [
+    "effect:amount-greatest-shared-creature-type"
+   ],
+   "why": "The cost reduction needs \"two creatures that share a creature type\"."
+  },
+  {
+   "name": "Hold for Questioning",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "\"Its activated abilities can't be activated\" for the enchanted permanent: prohibits.abilitiesOf takes a filter, not the attached permanent."
+  },
+  {
+   "name": "Mild-Mannered Librarian",
+   "needs": [
+    "effect:set-creature-type"
+   ],
+   "why": "\"Becomes a Werewolf\" replaces its creature types without setting P/T; animate forces base P/T and add-types only adds."
+  },
+  {
+   "name": "Magnanimous Magistrate",
+   "needs": [
+    "effect:counters-removed-this-way"
+   ],
+   "why": "\"You may remove that many reprieve counters. If you do\" compares the counters it holds with the dead card's mana value; no cost or condition says that."
+  },
+  {
+   "name": "Ogre Battlecaster",
+   "needs": [
+    "effect:cast-now-additional-cost",
+    "effect:cast-now-then-reads-cast-spell"
+   ],
+   "why": "cast-now has no \"by paying {R}{R} in addition to its other costs\", and nothing reads the cast spell's mana value back for the +X/+0."
+  },
+  {
+   "name": "Goblin Researcher",
+   "needs": [
+    "zone:impulse-gated-source-attacked-this-turn"
+   ],
+   "why": "\"During any turn you attacked with this creature\": an impulse permission's gate reads the exiled card, not the Researcher."
+  },
+  {
+   "name": "Coalborn Entity",
+   "needs": [
+    "target:creature-token-player-or-planeswalker"
+   ],
+   "why": "\"Target creature token, player, or planeswalker\": no target spec mixes players with a filtered set of permanents."
+  },
+  {
+   "name": "Hexavus",
+   "needs": [
+    "cost:remove-counters-from-chosen",
+    "cost:remove-counter-any-kind"
+   ],
+   "why": "\"Remove a counter from another creature you control\" as a cost — a chosen creature, any kind of counter."
+  },
+  {
+   "name": "Rootpath Purifier",
+   "needs": [
+    "static:static-grant-supertype",
+    "static:characteristics-of-library-cards"
+   ],
+   "why": "Makes lands you control basic, and land cards in your library basic."
+  },
+  {
+   "name": "Sanwell, Avenger Ace",
+   "needs": [
+    "effect:exile-top-cast-from-among-rest-bottom"
+   ],
+   "why": "Exiles the top six, may cast a Vehicle or artifact creature from among them, the rest to the bottom: cast-now's libraryTop looks rather than exiles."
+  },
+  {
+   "name": "Farid, Enterprising Salvager",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "Its modal activated ability's goad mode needs a target of its own."
+  },
+  {
+   "name": "The Brothers' War",
+   "needs": [
+    "static:must-attack-specific-player"
+   ],
+   "why": "Chapter II: each creature two chosen players control attacks the other chosen player each combat if able."
+  },
+  {
+   "name": "Ashnod the Uncaring",
+   "needs": [
+    "condition:trigger-ability-sacrificed-to-activate"
+   ],
+   "why": "\"If one or more permanents were sacrificed to activate it\" reads the triggering ability's cost; the sacrificed condition sees only the resolving ability's own."
+  },
+  {
+   "name": "Smelting Vat",
+   "needs": [
+    "effect:look-and-choose-total-mana-value"
+   ],
+   "why": "Up to two noncreature artifact cards with total mana value at most the sacrificed artifact's."
+  },
+  {
+   "name": "Tawnos, Solemn Survivor",
+   "needs": [
+    "effect:token-copy-of-exiled-card"
+   ],
+   "why": "A token copy of the card exiled as a cost (an artifact in addition); exileFromGraveyard also can't sit beside the sacrifice-two cost."
+  },
+  {
+   "name": "Wreck Hunter",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "Counts nonland cards in a graveyard put there from the battlefield this turn; only the from-library version exists."
+  },
+  {
+   "name": "Kayla's Music Box",
+   "needs": [
+    "zone:exiled-with-source-play"
+   ],
+   "why": "\"{T}: Until end of turn, you may play cards you own exiled with Kayla's Music Box\" — a granted play permission over the cards it exiled."
+  },
+  {
+   "name": "Glint Raker",
+   "needs": [
+    "static:pt-bonus-greatest-mana-value"
+   ],
+   "why": "+X/+0 where X is the greatest mana value among artifacts you control: greatestManaValueOf exists only as a layer-7a characteristic-defining ability."
+  },
+  {
+   "name": "Wire Surgeons",
+   "needs": [
+    "static:grant-encore-in-graveyard"
+   ],
+   "why": "grantsToGraveyard covers flashback, escape, mayhem and dredge, not encore."
+  },
+  {
+   "name": "Disciple of Caelus Nin",
+   "needs": [
+    "effect:each-player-chooses-permanents-rest-phase-out",
+    "static:permanents-cant-phase-in"
+   ],
+   "why": "Each player keeps up to five permanents and the rest phase out; then \"permanents can't phase in\"."
+  }
+ ]
+}

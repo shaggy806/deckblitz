@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Jumpstart 2022 and The Brothers' War Commander, both whole** (batch 100): the 52 cards their
+  top halves left, 25 authored (Runadi, Behemoth Caller, Lita, Mechanical Engineer, The
+  Archimandrite, Sardian Avenger and 21 more) and 27 blocked, nearly each on a need of its own;
+  no engine change (2026-10-19).
 - **Phyrexia: All Will Be One and its Commander set, both whole** (batch 99): 126 of their 165
   cards, with **compleated** (rule 702.150a — loyalty minus two per Phyrexian symbol paid with
   life), **"has toxic"** (the `hasToxic` filter) and **"gains toxic N"** (`grant-toxic`), and the

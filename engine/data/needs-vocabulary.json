@@ -7655,6 +7655,70 @@
   "effect:saga-chapter-divided": {
    "family": "effect:distribute-counters",
    "example": "Revival of the Ancestors: Chapter II 'distribute three +1/+1 counters among one, two, or three target creatures you control': SagaChapter has no `divided` field (only spells and activated/triggered abilities do), so the division can't be announced for a chapter."
+  },
+  "effect:cast-now-additional-cost": {
+   "family": "effect:cast-during-resolution",
+   "example": "Ogre Battlecaster: 'cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs': cast-now has no additional cost."
+  },
+  "effect:cast-now-then-reads-cast-spell": {
+   "family": "effect:cast-during-resolution",
+   "example": "Ogre Battlecaster: 'When you cast that spell, this creature gets +X/+0 … where X is that spell's mana value': nothing reads the spell cast-now cast."
+  },
+  "zone:impulse-gated-source-attacked-this-turn": {
+   "family": "zone:impulse-permission-options",
+   "example": "Goblin Researcher: 'During any turn you attacked with this creature, you may play that card': the permission's gate reads the exiled card, not its source."
+  },
+  "target:creature-token-player-or-planeswalker": {
+   "family": "effect:target-spec-additions",
+   "example": "Coalborn Entity: 'target creature token, player, or planeswalker': no target spec mixes players with a filtered set of permanents."
+  },
+  "static:characteristics-of-library-cards": {
+   "family": "static:affect-scope-by-filter",
+   "example": "Rootpath Purifier: 'land cards in your library are basic': statics reach permanents, not cards in a library."
+  },
+  "effect:exile-top-cast-from-among-rest-bottom": {
+   "family": "effect:cast-during-resolution",
+   "example": "Sanwell, Avenger Ace: 'exile the top six cards … You may cast a Vehicle or artifact creature spell from among them. Then put the rest on the bottom': cast-now's libraryTop looks rather than exiles."
+  },
+  "condition:trigger-ability-sacrificed-to-activate": {
+   "family": "trigger:sacrifice-filter",
+   "example": "Ashnod the Uncaring: 'if one or more permanents were sacrificed to activate it': the sacrificed condition reads only the resolving ability's own cost."
+  },
+  "filter:put-into-graveyard-from-battlefield-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "Wreck Hunter: 'each nonland card in that player's graveyard that was put there from the battlefield this turn': only the from-library history exists."
+  },
+  "static:pt-bonus-greatest-mana-value": {
+   "family": "static:pt-per-amount",
+   "example": "Glint Raker: 'gets +X/+0, where X is the greatest mana value among artifacts you control': greatestManaValueOf is a layer-7a characteristic-defining ability only."
+  },
+  "static:permanents-cant-phase-in": {
+   "family": "mechanic:phasing",
+   "example": "Disciple of Caelus Nin: 'Permanents can't phase in.'"
+  },
+  "effect:each-player-chooses-permanents-rest-phase-out": {
+   "family": "mechanic:phasing",
+   "example": "Disciple of Caelus Nin: 'each player chooses up to five permanents they control. All permanents other than this creature that weren't chosen this way phase out.'"
+  },
+  "replacement:would-scry-plus": {
+   "family": "replacement:new-event-replacements",
+   "example": "Kenessos, Priest of Thassa: 'If you would scry a number of cards, scry that many cards plus one instead': no scry replacement event."
+  },
+  "zone:impulse-until-end-of-combat-next-turn": {
+   "family": "zone:impulse-permission-options",
+   "example": "Brazen Cannonade: 'Until end of combat on your next turn, you may play that card': impulse-exile has no such duration."
+  },
+  "trigger:becomes-target-of-ability-targeting-only-it": {
+   "family": "trigger:becomes-target-fixes",
+   "example": "Agrus Kos, Eternal Soldier: 'becomes the target of an ability that targets only it'."
+  },
+  "effect:copy-ability-for-each-it-could-target": {
+   "family": "effect:copy-ability",
+   "example": "Agrus Kos, Eternal Soldier: 'copy that ability for each other creature you control that ability could target. Each copy targets a different one': copy-ability has no forEachItCouldTarget like copy-spell's."
+  },
+  "trigger:becomes-target-first-time-by-anyone": {
+   "family": "trigger:becomes-target-fixes",
+   "example": "Angelic Cub: 'becomes the target of a spell or ability for the first time each turn': firstTimeEachTurn counts per targeting player (valiant), the Cub's is by anyone."
   }
  }
 }
