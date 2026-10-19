@@ -32,7 +32,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "create-token",
-        token: "Golem Token (Rootwire Amalgam)",
+        token: "X/X Golem Token",
         count: 1,
         basePt: { power: X, toughness: X },
         gainUntilEndOfTurn: ["haste"],

@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// An X/X colorless Golem artifact creature — Mask of the Jadecrafter's token. Its X is set by
+// An X/X colorless Golem artifact creature — Mask of the Jadecrafter's and Rootwire Amalgam's token. Its X is set by
 // the effect that makes it (`create-token`'s `basePt`); printed, it's 0/0.
 export default defineCard({
   name: "X/X Golem Token",

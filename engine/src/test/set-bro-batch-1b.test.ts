@@ -273,7 +273,7 @@ describe("Rootwire Amalgam", () => {
     game.state.objects[amalgam].summoningSick = false;
     activate(game, amalgam, 0);
     expect(zone(game, amalgam)).toBe("graveyard");
-    const [golem] = tokens(game, "Golem Token (Rootwire Amalgam)");
+    const [golem] = tokens(game, "X/X Golem Token");
     expect(pt(game, golem)).toEqual({ power: 6, toughness: 6 });
     expect(keywords(game, golem).has("haste")).toBe(true);
     nextTurn(game);
