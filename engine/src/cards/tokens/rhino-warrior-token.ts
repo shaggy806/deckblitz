@@ -1,7 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Titan of Industry's Rhino Warrior token.
-
+/** 4/4 green Rhino Warrior — Titan of Industry's and Workshop Warchief's token. */
 export default defineCard({
   name: "Rhino Warrior Token",
   art: "8f4188d4-a371-49be-ad33-ad87801ba99d",
