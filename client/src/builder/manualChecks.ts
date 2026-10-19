@@ -2973,4 +2973,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Grizzly Bears', 'Llanowar Elves', 'Plains*2', 'Swamp*2', 'Forest*2'], hand: ['Armament Dragon'] },
     }),
   ),
+  preset(
+    'Aarakocra Sneak (the initiative and Undercity)',
+    board({
+      you: { bf: ['Island*4'], hand: ['Aarakocra Sneak'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Forest'] },
+    }),
+  ),
 ]

@@ -143,6 +143,18 @@ export function describeEvent(event: GameEvent, nameOf: NameOf, seats: readonly 
       return event.via === 'monarch-left'
         ? `${who(event.player)} becomes the monarch (the monarch left the game)`
         : `${who(event.player)} becomes the monarch (${event.via})`
+    case 'initiative-taken':
+      return event.via === 'holder-left'
+        ? `${who(event.player)} takes the initiative (its holder left the game)`
+        : event.via === 'combat-damage'
+          ? `${who(event.player)} takes the initiative (combat damage)`
+          : `${who(event.player)} takes the initiative`
+    case 'ventured':
+      return event.entered
+        ? `${who(event.player)} enters ${event.dungeon}: ${event.roomName}`
+        : `${who(event.player)} ventures into ${event.roomName} (${event.dungeon})`
+    case 'dungeon-completed':
+      return `${who(event.player)} completes ${event.dungeon}`
     case 'energy-changed':
       return `${who(event.player)} ${event.delta >= 0 ? '+' : ''}${event.delta} energy (now ${event.energy})`
     case 'player-counters-changed':

@@ -419,8 +419,29 @@
   font-weight: 600;
 }
 .pp-monarch,
+.pp-initiative,
 .pp-story {
   margin-left: 4px;
+}
+/* Where a player is in a dungeon (rule 309): "Undercity 3/5", and a count of
+   those completed — a button that opens the map. */
+.pp-dungeon {
+  margin-left: 4px;
+  padding: 0 clamp(3px, 0.4vw, 6px);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.pp-dungeon:not(:disabled):hover {
+  color: var(--text);
+  border-color: var(--accent-dim);
+}
+.pp-dungeon-done {
+  margin-left: 4px;
+  color: var(--gold);
 }
 /* A player's counters — poison, energy, experience — in the header row beside
    the name, kept together on one line. */
@@ -4950,6 +4971,113 @@
 .ctype-result--active {
   border-color: var(--accent);
   background: var(--accent-bg);
+}
+
+/* --- dungeons (rule 309) ------------------------------------------------ */
+/* A player's dungeon, opened from their progress chip, and the venture
+   decision's popup (a room at a fork, picked on the map; or which dungeon to
+   enter). Reuses the zone-viewer overlay/box, the decision-popup layer. The
+   map is laid out in percentages (DungeonMap.tsx), so its box only needs a
+   size: rows tall, capped against viewport height so five rows and the
+   header still fit a 768px-tall window. */
+.dungeon-box {
+  width: min(clamp(360px, 58vw, 860px), 100%);
+  gap: clamp(8px, 1.4vh, 14px);
+}
+.dungeon-box--wide {
+  width: min(clamp(560px, 86vw, 1400px), 100%);
+}
+.dungeon-map {
+  position: relative;
+  width: 100%;
+  height: calc(var(--dm-rows) * clamp(56px, 11vh, 112px));
+  flex-shrink: 0;
+}
+.dungeon-map--compact {
+  height: calc(var(--dm-rows) * clamp(36px, 7vh, 72px));
+}
+.dungeon-map-arrows {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.dungeon-map-arrow {
+  stroke: var(--muted-dim);
+  stroke-width: 2;
+}
+.dungeon-map-arrow--live {
+  stroke: var(--accent);
+}
+.dungeon-room {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(4px, 0.5vw, 8px);
+  overflow: hidden;
+  text-align: left;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text);
+  font: inherit;
+}
+.dungeon-room-name {
+  font-weight: 600;
+  font-size: clamp(11px, 0.9vw, 14px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dungeon-room-text {
+  font-size: clamp(10px, 0.78vw, 12.5px);
+  color: var(--muted);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.dungeon-map--compact .dungeon-room-text {
+  -webkit-line-clamp: 2;
+}
+.dungeon-room--here {
+  border-color: var(--gold);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+.dungeon-room-marker {
+  color: var(--gold);
+}
+.dungeon-room--next {
+  border-color: var(--accent-dim);
+}
+.dungeon-room--pick {
+  cursor: pointer;
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+.dungeon-room--pick:hover {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.dungeon-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-auto-flow: column;
+  gap: clamp(8px, 1vw, 16px);
+}
+.dungeon-choice {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.7vh, 8px);
+  min-width: 0;
+}
+.dungeon-completed,
+.dungeon-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(11px, 0.85vw, 13px);
 }
 
 /* --- the whole hand, as a grid ----------------------------------------- */

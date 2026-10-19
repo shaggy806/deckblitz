@@ -507,6 +507,16 @@ function visible(
     object.sourceObjectId !== null &&
     state.objects[object.sourceObjectId]?.kind === "emblem";
   if (fromEmblem && object.grantedAbility?.kind === "modifier") text = object.grantedAbility.ability.text;
+  // The same for the inherent abilities that ride an emblem-kind object of
+  // their own (the monarch's, the initiative's, speed's, rad counters') and a
+  // dungeon's room abilities: the one ability's text — a room's record, or
+  // the definition's ability by index — not the whole object's.
+  else if (fromEmblem && object.reflexiveTrigger !== undefined) text = object.reflexiveTrigger.text;
+  else if (fromEmblem && object.delayedTrigger !== undefined) text = object.delayedTrigger.text;
+  else if (fromEmblem && object.abilityKind === "triggered" && object.abilityIndex !== null) {
+    const own = registry.get(printedCardName(object)).triggered[object.abilityIndex];
+    if (own !== undefined) text = own.text;
+  }
   // Abilities an effect gave it read with its own: a copy exception's "and
   // it has '…'" (rule 707.9b — Brenard's Food Golems), a one-shot's
   // granted trigger. Only those it still has (rule 613.7).

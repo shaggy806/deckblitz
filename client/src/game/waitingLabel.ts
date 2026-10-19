@@ -27,6 +27,7 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'choose-permanents': 'choosing permanents',
   'enter-attacking': 'choosing what to attack',
   scry: 'scrying',
+  venture: 'choosing a room',
 }
 
 /**

@@ -4984,3 +4984,24 @@ this token", which turns into a 0/0 Phyrexian artifact creature
 - **Check:** The Incubator shows its art and five +1/+1 counters, and isn't a creature until
   transformed; after the {2} it's a 5/5 Phyrexian artifact creature with the back face's art.
   Check at ~768px tall.
+
+## The initiative and Undercity (2026-10-19)
+
+### Aarakocra Sneak (the initiative and Undercity)
+
+*New player decision* — the initiative (rule 726): taking it ventures into Undercity (rule
+701.49d); at a fork in the dungeon, the next room is picked on the dungeon's map
+
+- **Setup:** Your precombat main. Your battlefield: four Islands; in hand Aarakocra Sneak. Bob
+  (played by you — "Sit" at his seat) has Grizzly Bears and a Forest.
+- **Do:** Cast Aarakocra Sneak; let its trigger and Secret Entrance resolve (take a basic land).
+  Pass the turn. As Bob, attack you with the Bears; don't block. Pass Bob's turn. As yourself,
+  attack Bob with the Sneak. At the fork choose Forge, targeting the Sneak.
+- **Check:** The 🗝️ chip sits on your panel, then moves to Bob's after the Bears' damage, then back.
+  Each panel's dungeon button reads "Undercity 1/5" (then 2/5) and opens the map, the marker on
+  the current room. The room abilities show on the stack as Undercity's, with the room's own
+  text. At the fork the map opens beside the banner, "Venture into Undercity: choose the next
+  room", with Forge and Lost Well outlined and clickable; "View board" hides it and "Show
+  choices" brings it back. The log reads "takes the initiative" and "ventures into Forge
+  (Undercity)". Your upkeep with the initiative ventures again. Check at ~768px tall, in a 2- and
+  a 4-player room.

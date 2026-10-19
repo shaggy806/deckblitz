@@ -5,6 +5,7 @@ import type { SeatClass } from '../format.ts'
 import type { SeatStatus } from 'protocol'
 import { CommanderDamageChip } from './CommanderDamageChip.tsx'
 import { CurseChip, type CurseOnPlayer } from './CurseChip.tsx'
+import { dungeonProgress } from './dungeon.ts'
 import { Symbols } from './Symbols.tsx'
 import { TargetedMark } from './TargetedMark.tsx'
 
@@ -32,8 +33,12 @@ export interface PlayerPanelProps {
   readonly exileSize?: number
   /** Went first this game: won the highroll, or the host picked them. */
   readonly wentFirst?: boolean
-  /** This player is the monarch (rule 720). */
+  /** This player is the monarch (rule 725). */
   readonly isMonarch?: boolean
+  /** This player has the initiative (rule 726). */
+  readonly hasInitiative?: boolean
+  /** Opens this player's dungeon map (`info.dungeon`, `info.completedDungeons`). */
+  readonly onOpenDungeon?: () => void
   /** How many emblems (rule 114) this player has. */
   readonly emblemCount?: number
   /** The Auras attached to this player — Curses (rule 303.4). */
@@ -85,6 +90,8 @@ export function PlayerPanel({
   exileSize = 0,
   wentFirst = false,
   isMonarch = false,
+  hasInitiative = false,
+  onOpenDungeon,
   emblemCount = 0,
   curses = [],
   onOpenGraveyard,
@@ -185,7 +192,44 @@ export function PlayerPanel({
           </span>
         ) : null}
         {wentFirst ? <span className="pp-went-first" title="Went first this game">🎲</span> : null}
-        {isMonarch ? <span className="pp-monarch" title="The monarch (rule 720)">👑</span> : null}
+        {isMonarch ? <span className="pp-monarch" title="The monarch (rule 725)">👑</span> : null}
+        {hasInitiative ? (
+          <span
+            className="pp-initiative"
+            title="The initiative (rule 726): ventures into Undercity at their upkeep; combat damage to them takes it"
+          >
+            {'\u{1F5DD}\u{FE0F}'}
+          </span>
+        ) : null}
+        {/* Where they are in a dungeon (rule 309 — public), and how many
+            they've completed; opens the map. */}
+        {info.dungeon !== null || info.completedDungeons.length > 0 ? (
+          <button
+            type="button"
+            className="pp-dungeon"
+            title={
+              info.dungeon !== null
+                ? `In ${info.dungeon.name}, room ${info.dungeon.map.rooms[info.dungeon.room]?.name ?? ''}` +
+                  (info.completedDungeons.length > 0 ? ` — completed ${info.completedDungeons.length}` : '')
+                : `Completed ${info.completedDungeons.length} dungeon${info.completedDungeons.length === 1 ? '' : 's'}`
+            }
+            disabled={!onOpenDungeon}
+            onClick={(e) => {
+              e.stopPropagation()
+              onOpenDungeon?.()
+            }}
+          >
+            {info.dungeon !== null
+              ? (() => {
+                  const p = dungeonProgress(info.dungeon.map, info.dungeon.room)
+                  return `${info.dungeon.name} ${p.at}/${p.of}`
+                })()
+              : null}
+            {info.completedDungeons.length > 0 ? (
+              <span className="pp-dungeon-done">✓{info.completedDungeons.length}</span>
+            ) : null}
+          </button>
+        ) : null}
         {info.enduringStory ? (
           <span className="pp-story" title="An enduring story (storied, rule 702.195), for the rest of the game">
             📜

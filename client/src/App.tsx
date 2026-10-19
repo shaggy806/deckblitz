@@ -107,6 +107,7 @@ import { Stack } from './ui/Stack.tsx'
 import { EventLog } from './ui/EventLog.tsx'
 import { CapturePanel } from './ui/CapturePanel.tsx'
 import { ZoneViewer } from './ui/ZoneViewer.tsx'
+import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
@@ -324,6 +325,7 @@ type SacrificeAction = Extract<LegalAction, { kind: 'sacrifice' }>
 type ProliferateAction = Extract<LegalAction, { kind: 'proliferate' }>
 type SplitManaAction = Extract<LegalAction, { kind: 'split-mana' }>
 type TimeTravelAction = Extract<LegalAction, { kind: 'time-travel' }>
+type VentureAction = Extract<LegalAction, { kind: 'venture' }>
 type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
@@ -581,6 +583,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'choose-permanents': 'choose permanents',
   'enter-attacking': 'choose what their creatures attack',
   scry: 'scry',
+  venture: 'venture into the dungeon',
 }
 /** A hand ability's button: its text up to its reminder or its effect —
  * "Ninjutsu {1}{U}", "Channel — {1}{G}, Discard this card". */
@@ -1565,6 +1568,8 @@ function Table({
   // and which way a click on a permanent goes.
   const [timeTravelPicks, setTimeTravelPicks] = useState<Readonly<Record<string, 1 | -1>>>({})
   const [timeTravelBrush, setTimeTravelBrush] = useState<1 | -1>(1)
+  // Whose dungeon map is open (their progress chip), or nobody's.
+  const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
   const [zoneView, setZoneView] = useState<{
     readonly title: string
     readonly ids: readonly ObjectId[]
@@ -1823,6 +1828,7 @@ function Table({
   )
   const splitManaAction = actions.find((a): a is SplitManaAction => a.kind === 'split-mana')
   const timeTravelAction = actions.find((a): a is TimeTravelAction => a.kind === 'time-travel')
+  const ventureAction = actions.find((a): a is VentureAction => a.kind === 'venture')
   const scryAction = actions.find((a): a is ScryAction => a.kind === 'scry')
   const castNowAction = actions.find((a): a is CastNowAction => a.kind === 'cast-now')
   // "You may cast a spell from your hand" and the like: more than one card on
@@ -1919,6 +1925,7 @@ function Table({
     | 'proliferate'
     | 'split-mana'
     | 'time-travel'
+    | 'venture'
     | 'choose-permanents'
     | 'scry'
     | 'choose-x'
@@ -1961,6 +1968,8 @@ function Table({
           ? 'split-mana'
         : timeTravelAction
           ? 'time-travel'
+        : ventureAction
+          ? 'venture'
         : choosePermanentsAction
           ? 'choose-permanents'
         : scryAction
@@ -4153,6 +4162,29 @@ function Table({
         </button>
       </div>
     )
+  } else if (mode === 'venture' && ventureAction) {
+    // Rule 701.49: the room at a fork (or the dungeon to enter) is picked on
+    // the map, in the popup below; the strip only says so, with the way back
+    // to it once "View board" has hidden it. The initiative's venture comes
+    // from no card (rule 726.2), so its source isn't in the view: no prefix.
+    const what =
+      ventureAction.dungeons !== undefined
+        ? 'venture into the dungeon: choose a dungeon'
+        : `venture into ${ventureAction.maps[0]?.name ?? 'the dungeon'}: choose the next room`
+    controls = (
+      <div className="controls">
+        <span>
+          {view.objects[ventureAction.source] !== undefined
+            ? `${game.nameOf(ventureAction.source)} — ${what}`
+            : what.charAt(0).toUpperCase() + what.slice(1)}
+        </span>
+        {decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
+      </div>
+    )
   } else if (mode === 'time-travel' && timeTravelAction) {
     // Rule 701.56a: for each permanent you control with a time counter and
     // each suspended card you own, add one, remove one, or neither — all at
@@ -5223,6 +5255,8 @@ function Table({
       exileSize={exileOf(pid).length}
       wentFirst={pid === view.startingPlayer}
       isMonarch={view.monarch === pid}
+      hasInitiative={view.initiative === pid}
+      onOpenDungeon={() => setDungeonViewOf(pid)}
       emblemCount={view.emblems.filter((e) => e.owner === pid).length}
       curses={view.zones.battlefield.flatMap((id) => {
         const o = view.objects[id]
@@ -6130,6 +6164,43 @@ function Table({
             noneLabel: 'Exile none',
             onCancel: () => setPendingDelve(null),
           }}
+        />
+      ) : null}
+
+      {mode === 'venture' && ventureAction ? (
+        ventureAction.dungeons !== undefined ? (
+          <DungeonViewer
+            kind="dungeon"
+            title="Venture into the dungeon — choose a dungeon"
+            maps={ventureAction.maps}
+            onPick={(dungeon) => game.dispatch({ type: 'venture', player: seat, dungeon } as Action)}
+            collapsed={decisionCollapsed}
+            onCollapse={() => setDecisionCollapsed(true)}
+          />
+        ) : ventureAction.maps[0] !== undefined ? (
+          <DungeonViewer
+            kind="room"
+            title={`Venture into ${ventureAction.maps[0].name} — choose the next room`}
+            map={ventureAction.maps[0]}
+            marker={ventureAction.from ?? 0}
+            rooms={ventureAction.rooms ?? []}
+            onPick={(room) => game.dispatch({ type: 'venture', player: seat, room } as Action)}
+            collapsed={decisionCollapsed}
+            onCollapse={() => setDecisionCollapsed(true)}
+          />
+        ) : null
+      ) : null}
+
+      {dungeonViewOf !== null ? (
+        <DungeonViewer
+          kind="view"
+          title={`${playerLabel(dungeonViewOf, game.seats)}'s dungeon${
+            view.players[dungeonViewOf]?.dungeon ? ` — ${view.players[dungeonViewOf]?.dungeon?.name}` : ''
+          }`}
+          map={view.players[dungeonViewOf]?.dungeon?.map ?? null}
+          marker={view.players[dungeonViewOf]?.dungeon?.room ?? null}
+          completed={view.players[dungeonViewOf]?.completedDungeons ?? []}
+          onClose={() => setDungeonViewOf(null)}
         />
       ) : null}
 
