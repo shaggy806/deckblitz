@@ -107,7 +107,7 @@ section keeps only what to do next.
   Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …),
   both behind **dungeons and the initiative** (rules 309, 701.49, 726 — `mechanic:dungeon`: 10
   triaged and ~21 of Baldur's Gate's rest, more in Forgotten Realms), designed in
-  `docs/plans/initiative-dungeons.md` (proposed, with open questions). Phyrexia: All Will Be One's blocks are
+  `docs/plans/initiative-dungeons.md` (decided 2026-10-19, being built). Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
   Venser), a target's controller's poison counters (Bring the Ending, Anoint with Affliction), and
   a static scoped by "has toxic" (Skrelv's Hive). March of the Machine's leaders: one target slot for a player

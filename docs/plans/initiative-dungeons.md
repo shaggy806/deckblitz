@@ -1,8 +1,9 @@
 # The initiative and dungeons
 
-**Status:** proposed (2026-10-19). Asked for by the user ("start looking into the client design
-for the initiative style cards") while the set walk reached Commander Legends: Battle for
-Baldur's Gate. Nothing is built. Open questions for the user are at the end.
+**Status:** decided, in progress (2026-10-19). Asked for by the user ("start looking into the
+client design for the initiative style cards") while the set walk reached Commander Legends:
+Battle for Baldur's Gate. The user's answers to the open questions are at the end; building
+starts with step 1.
 
 ## Why now
 
@@ -173,14 +174,9 @@ defending. `bot-effect-knowledge.md` gets an entry; the gate and a decision-diff
 5. **Bots**: the two decisions, combat value; gate + decision-diff.
 6. **Cards**: the 10 waiting and Baldur's Gate's ~21, then the walk carries on.
 
-## Open questions for the user
+## Decisions (the user, 2026-10-19)
 
-1. **Initiative chip art** — the Initiative card's art cropped small, or a plain glyph (a key 🗝️
-   or a torch) for legibility at chip size?
-2. **Dungeon map look** — our own drawn graph (proposed: readable, consistent with the board's
-   design system), or the official dungeon card image with a marker on it (authentic, but fragile
-   and small)?
-3. **The map at a fork** — a popup beside the banner (proposed), or a larger centred modal that
-   dims the board while choosing?
-4. **The monarch fix** — fold it into this work as step 1 (proposed), or do it first on its own
-   as a rules fix?
+1. **Initiative chip** — a plain glyph, not the card's art.
+2. **Dungeon map** — our own drawn graph, not the card image with a marker.
+3. **The map at a fork** — a popup beside the banner (the `CreatureTypePicker` pattern).
+4. **The monarch fix** — step 1 of this work.
