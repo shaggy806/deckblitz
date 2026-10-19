@@ -60,7 +60,9 @@ import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } f
 import { activePlayerOf, printedCardName } from "./state.js";
 import { anyNumberSlot, groupBounds, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
 import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
-import { stateTargetFacts } from "./targeting.js";
+import { legalTargets, stateTargetFacts } from "./targeting.js";
+import { DUNGEONS } from "./cards/dungeons.js";
+import type { DungeonDefinition, DungeonRoom } from "./cards/dungeons.js";
 import { fitTargetCount, maxXForTargets, minXForTargets } from "./target-count.js";
 import {
   auraPolarity,
@@ -3582,6 +3584,69 @@ export class HeuristicBotController extends AutomaticController {
     mode: "scry" | "surveil",
   ): readonly ObjectId[] {
     return scryAway(view.state, this.registry, this.playerId, cards, mode);
+  }
+
+  /**
+   * A venture's choice (rule 701.49), by the rooms ahead: each room's ability
+   * as `effectWorth` reads it, plus half the best path on from there, so a
+   * weak room that leads somewhere strong can still win. Which dungeon to
+   * enter is the same sum from each one's top room.
+   */
+  chooseVenture(view: ControllerView, offer: VentureOffer): VentureAnswer {
+    const state = view.state;
+    const pathWorth = (dungeon: DungeonDefinition, start: number): number => {
+      const memo = new Map<number, number>();
+      const walk = (index: number): number => {
+        const known = memo.get(index);
+        if (known !== undefined) return known;
+        const room = dungeon.rooms[index];
+        if (room === undefined) return 0;
+        const ahead = room.next.length > 0 ? Math.max(...room.next.map(walk)) : 0;
+        const worth = this.roomWorth(state, room) + 0.5 * ahead;
+        memo.set(index, worth);
+        return worth;
+      };
+      return walk(start);
+    };
+    const best = <T>(options: readonly T[], worth: (option: T) => number): T | undefined => {
+      let pick: T | undefined;
+      let top = -Infinity;
+      for (const option of options) {
+        const w = worth(option);
+        if (w > top) {
+          pick = option;
+          top = w;
+        }
+      }
+      return pick;
+    };
+    if (offer.dungeons !== undefined) {
+      const dungeon = best(offer.dungeons, (name) => {
+        const definition = DUNGEONS.get(name);
+        return definition === undefined ? -Infinity : pathWorth(definition, 0);
+      });
+      return dungeon !== undefined ? { dungeon } : defaultVenture(offer);
+    }
+    const definition = DUNGEONS.get(offer.maps[0]?.name ?? "");
+    const room = definition === undefined ? undefined : best(offer.rooms ?? [], (i) => pathWorth(definition, i));
+    return room !== undefined ? { room } : defaultVenture(offer);
+  }
+
+  /** What a dungeon room's ability is worth to us, its targets the best legal
+   * ones; nothing when a slot has none, as the ability is then removed from
+   * the stack (rule 603.3d). */
+  private roomWorth(state: GameState, room: DungeonRoom): number {
+    const ctx = { state, me: this.playerId, controller: this.playerId };
+    const targets: TargetRef[] = [];
+    for (const spec of room.targets) {
+      const pick = legalTargets(state, this.registry, spec, this.playerId)
+        .slice(0, 40)
+        .map((option) => ({ option, worth: effectWorth(room.effect, { ...ctx, targets: [...targets, option] }) }))
+        .sort((a, b) => b.worth - a.worth)[0];
+      if (pick === undefined) return 0;
+      targets.push(pick.option);
+    }
+    return effectWorth(room.effect, { ...ctx, targets });
   }
 
   /**

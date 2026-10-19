@@ -113,6 +113,10 @@ export interface EvalWeights {
   readonly energy: number;
   /** Being the monarch — a card every end step until someone takes it. */
   readonly monarch: number;
+  /** Having the initiative (rule 726) — a room of Undercity every upkeep
+   * until combat damage takes it; what makes attacking its holder worth
+   * more than the damage, and holding it worth defending. */
+  readonly initiative: number;
   readonly emblems: number;
   /** Subtracted: commander casts from the command zone so far, each of which
    * makes the next cast {2} dearer (rule 903.8). */
@@ -295,6 +299,7 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   graveyardCastable: 1,
   energy: 0.3,
   monarch: 3,
+  initiative: 3,
   emblems: 3,
   commanderTax: 0.5,
   // At 1 and 2 (with `commanderOnBoard` 2 and `idlePower` 0.5) it benched

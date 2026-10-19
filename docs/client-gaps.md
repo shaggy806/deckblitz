@@ -157,3 +157,13 @@ where the decision is raised); bots and the fuzzer answer it already.
   proof lesson (`LEARN_COMMANDER_LESSON` in `client/src/tutorial/lesson.ts` names it). Left: the
   seeded decks and the real chapters, the in-game tour stops, raising the hand tray while a hand
   card is spotlit, pausing the opponent under a Next card mid-game.
+
+**The initiative and the venture marker have no animation**
+
+The plan (`docs/plans/initiative-dungeons.md`, section 6) asks for two small cues through
+`animationSchedule.ts`. One is the designation flying from panel to panel, which the monarch's
+crown could share. The other is the marker stepping room to room while a map is open. Today the
+chip just moves and the panel's "Undercity 2/5" ticks over. Separately, the scenario builder's
+`ScenarioSpec` (`protocol/src/scenario.ts`) has no field for the initiative or a dungeon
+position. "Edit from here" drops both, so a manual check has to reach them in play: cast an
+initiative card.

@@ -41,6 +41,7 @@ export const DEFENSIVE: Champion = {
     graveyardCastable: 1,
     energy: 0.3,
     monarch: 2,
+    initiative: 0,
     emblems: 3,
     commanderTax: 0.5,
     nonlandMana: 0,

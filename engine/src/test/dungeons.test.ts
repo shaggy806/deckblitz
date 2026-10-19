@@ -9,7 +9,8 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-import { DUNGEONS, UNDERCITY } from "../cards/dungeons.js";
+import { DUNGEONS, UNDERCITY, dungeonMap } from "../cards/dungeons.js";
+import { HeuristicBotController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
 
@@ -147,5 +148,22 @@ describe("completing a dungeon (rules 309.6, 309.7, 701.49c)", () => {
     expect(roomOf(game, A)).toBe("Secret Entrance");
     expect(hand(game, A).length).toBeGreaterThanOrEqual(0);
     expect(life(game, A)).toBe(20);
+  });
+});
+
+describe("a bot's venture (rule 701.49)", () => {
+  const fork = { from: 0, rooms: [1, 2], maps: [dungeonMap(UNDERCITY)!] };
+  const choose = (game: Game, offer: Parameters<HeuristicBotController["chooseVenture"]>[1]) =>
+    new HeuristicBotController(A).chooseVenture({ state: game.state, player: A, legalActions: () => [] }, offer);
+
+  it("takes Forge when it has a creature to grow", () => {
+    const { game } = table();
+    spawn(game, "Grizzly Bears");
+    expect(choose(game, fork)).toEqual({ room: 1 });
+  });
+
+  it("takes Lost Well when Forge would have no target", () => {
+    const { game } = table();
+    expect(choose(game, fork)).toEqual({ room: 2 });
   });
 });

@@ -49,6 +49,7 @@ export const SHIPPED_2026_09_26: Champion = {
     graveyardCastable: 1,
     energy: 0.3,
     monarch: 3,
+    initiative: 0,
     emblems: 3,
     commanderTax: 0.5,
     nonlandMana: 0,

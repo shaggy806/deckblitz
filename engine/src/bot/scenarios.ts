@@ -733,6 +733,24 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "attacks the initiative's holder",
+    rule: "Combat damage to the holder takes the initiative (rule 726.2): a room now and every upkeep.",
+    run(weights, registry, makeBot) {
+      // Two open opponents, Bob the lower on life: the damage alone says
+      // Bob, but the same two damage to Carol takes the initiative from her.
+      const game = table(registry, [A, B, C], A);
+      onBoard(game, "Grizzly Bears", A);
+      game.state.initiative = C;
+      game.state.players[B].life = game.state.players[C].life - 4;
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.length === 1 && attackers[0]!.defender === C,
+        detail: `attacked ${attackers.map((d) => d.defender).join(", ") || "no one"}`,
+      };
+    },
+  },
+  {
     name: "does not swing into a lethal crackback",
     rule: "Two free damage isn't worth dying to the swing back.",
     run(weights, registry, makeBot) {

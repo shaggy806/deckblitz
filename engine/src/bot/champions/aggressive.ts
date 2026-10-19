@@ -44,6 +44,7 @@ export const AGGRESSIVE: Champion = {
     graveyardCastable: 0.75,
     energy: 0.3,
     monarch: 3,
+    initiative: 0,
     emblems: 3,
     commanderTax: 0.25,
     nonlandMana: 0,

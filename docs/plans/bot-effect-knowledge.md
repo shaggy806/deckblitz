@@ -628,6 +628,19 @@ showed Necropolis Fiend shrinking its own creatures on both builds: `amountSign`
 the three fixes: 19 of 14,310 decisions, the Fiend now aimed at opponents, the rest attack splits
 and spell order; the X=0 activation it still makes is in BACKLOG.
 
+**The initiative and dungeons (2026-10-19).** Two new things for the bots (`docs/plans/
+initiative-dungeons.md`). The venture decision: v1's `chooseVenture`, which v2 inherits, scores
+each room's ability with `effectWorth`, aiming any targets at the best legal ones (`roomWorth`;
+a room with no legal target is worth 0, since the ability is removed, 603.3d). It adds half the
+best path on from that room, and picks a dungeon to enter the same way from its top room. Before
+this the bot took the first room offered. With no creature it now takes Lost Well over Forge
+(`dungeons.test.ts`). In combat, a new feature `initiative` (weight 3, the same as `monarch`;
+every champion snapshot carries 0) values holding it. The new gate scenario "attacks the
+initiative's holder" has two open opponents: without the initiative v2 swings at the one lower
+on life, and with it at the holder. It passes at weight 0 too, because the rollout already sees
+the steal and Secret Entrance's land, so the weight is for defending it. The gate passes 201/201.
+No `bot:diff`: the feature is 0 in every recorded position, since none has the initiative.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

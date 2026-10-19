@@ -175,8 +175,13 @@ defending. `bot-effect-knowledge.md` gets an entry; the gate and a decision-diff
    decisions' wire shapes in `protocol/`.
 3. **The initiative** on top: the designation, its three triggers, leaving the game; tests.
 4. **Client**: the chips, the map modal, the two pickers, the stack and log text, the animation.
-   Checked live in a 2- and a 4-player room at ~768px tall and at 1920×1080.
-5. **Bots**: the two decisions, combat value; gate + decision-diff.
+   Checked live in a 2- and a 4-player room at ~768px tall and at 1920×1080. **Done
+   2026-10-19**, but without the animation (section 6): the chip and the marker change with no
+   cue. The animation is still open, on `BACKLOG.md`'s client list.
+5. **Bots**: the two decisions, combat value; gate + decision-diff. **Done 2026-10-19.** The
+   room or dungeon is chosen by path worth, the `initiative` eval feature weighs 3, and there is
+   a gate scenario (`bot-effect-knowledge.md`). No decision-diff: no recorded position has the
+   initiative.
 6. **Cards**: the 10 waiting and Baldur's Gate's ~21, then the walk carries on.
 
 ## Decisions (the user, 2026-10-19)
