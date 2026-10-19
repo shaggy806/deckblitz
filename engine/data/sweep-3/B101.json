@@ -1,0 +1,1108 @@
+{
+ "batch": "B101",
+ "status": "complete",
+ "ranks": "The Brothers' War (BRO, 2022-11-18): the rest of the set; and Angelic Destiny, which Draconic Destiny's return unblocked",
+ "authored": [
+  {
+   "name": "Aeronaut Cavalry",
+   "files": [
+    "engine/src/cards/pool/aeronaut-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Air Marshal",
+   "files": [
+    "engine/src/cards/pool/air-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Airlift Chaplain",
+   "files": [
+    "engine/src/cards/pool/airlift-chaplain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alloy Animist",
+   "files": [
+    "engine/src/cards/pool/alloy-animist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Destiny",
+   "files": [
+    "engine/src/cards/pool/angelic-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arbalest Engineers",
+   "files": [
+    "engine/src/cards/pool/arbalest-engineers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Proxy",
+   "files": [
+    "engine/src/cards/pool/arcane-proxy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argivian Avenger",
+   "files": [
+    "engine/src/cards/pool/argivian-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Argothian Sprite",
+   "files": [
+    "engine/src/cards/pool/argothian-sprite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arms Race",
+   "files": [
+    "engine/src/cards/pool/arms-race.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artificer's Dragon",
+   "files": [
+    "engine/src/cards/pool/artificers-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashnod, Flesh Mechanist",
+   "files": [
+    "engine/src/cards/pool/ashnod-flesh-mechanist.ts",
+    "engine/src/cards/tokens/zombie-token-ashnod-flesh-mechanist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashnod's Intervention",
+   "files": [
+    "engine/src/cards/pool/ashnods-intervention.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Autonomous Assembler",
+   "files": [
+    "engine/src/cards/pool/autonomous-assembler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battery Bearer",
+   "files": [
+    "engine/src/cards/pool/battery-bearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battlefield Butcher",
+   "files": [
+    "engine/src/cards/pool/battlefield-butcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blanchwood Prowler",
+   "files": [
+    "engine/src/cards/pool/blanchwood-prowler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blitz Automaton",
+   "files": [
+    "engine/src/cards/pool/blitz-automaton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boulderbranch Golem",
+   "files": [
+    "engine/src/cards/pool/boulderbranch-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calamity's Wake",
+   "files": [
+    "engine/src/cards/pool/calamitys-wake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Carrion Locust",
+   "files": [
+    "engine/src/cards/pool/carrion-locust.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clay Revenant",
+   "files": [
+    "engine/src/cards/pool/clay-revenant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coastal Bulwark",
+   "files": [
+    "engine/src/cards/pool/coastal-bulwark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cradle Clearcutter",
+   "files": [
+    "engine/src/cards/pool/cradle-clearcutter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathbloom Ritualist",
+   "files": [
+    "engine/src/cards/pool/deathbloom-ritualist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depth Charge Colossus",
+   "files": [
+    "engine/src/cards/pool/depth-charge-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Desynchronize",
+   "files": [
+    "engine/src/cards/pool/desynchronize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciples of Gix",
+   "files": [
+    "engine/src/cards/pool/disciples-of-gix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Draconic Destiny",
+   "files": [
+    "engine/src/cards/pool/draconic-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dredging Claw",
+   "files": [
+    "engine/src/cards/pool/dredging-claw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evangel of Synthesis",
+   "files": [
+    "engine/src/cards/pool/evangel-of-synthesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fallaji Archaeologist",
+   "files": [
+    "engine/src/cards/pool/fallaji-archaeologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fallaji Dragon Engine",
+   "files": [
+    "engine/src/cards/pool/fallaji-dragon-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fallaji Vanguard",
+   "files": [
+    "engine/src/cards/pool/fallaji-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fateful Handoff",
+   "files": [
+    "engine/src/cards/pool/fateful-handoff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feldon, Ronom Excavator",
+   "files": [
+    "engine/src/cards/pool/feldon-ronom-excavator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fog of War",
+   "files": [
+    "engine/src/cards/pool/fog-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forging the Anchor",
+   "files": [
+    "engine/src/cards/pool/forging-the-anchor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortified Beachhead",
+   "files": [
+    "engine/src/cards/pool/fortified-beachhead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Courser",
+   "files": [
+    "engine/src/cards/pool/gaeas-courser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geology Enthusiast",
+   "files": [
+    "engine/src/cards/pool/geology-enthusiast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Cindermaw",
+   "files": [
+    "engine/src/cards/pool/giant-cindermaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gixian Skullflayer",
+   "files": [
+    "engine/src/cards/pool/gixian-skullflayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gix's Caress",
+   "files": [
+    "engine/src/cards/pool/gixs-caress.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnarlroot Pallbearer",
+   "files": [
+    "engine/src/cards/pool/gnarlroot-pallbearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Blast-Runner",
+   "files": [
+    "engine/src/cards/pool/goblin-blast-runner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goring Warplow",
+   "files": [
+    "engine/src/cards/pool/goring-warplow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Great Desert Prospector",
+   "files": [
+    "engine/src/cards/pool/great-desert-prospector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruesome Realization",
+   "files": [
+    "engine/src/cards/pool/gruesome-realization.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gurgling Anointer",
+   "files": [
+    "engine/src/cards/pool/gurgling-anointer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harbin, Vanguard Aviator",
+   "files": [
+    "engine/src/cards/pool/harbin-vanguard-aviator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heavyweight Demolisher",
+   "files": [
+    "engine/src/cards/pool/heavyweight-demolisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hero of the Dunes",
+   "files": [
+    "engine/src/cards/pool/hero-of-the-dunes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hoarding Recluse",
+   "files": [
+    "engine/src/cards/pool/hoarding-recluse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horned Stoneseeker",
+   "files": [
+    "engine/src/cards/pool/horned-stoneseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Involuntary Cooldown",
+   "files": [
+    "engine/src/cards/pool/involuntary-cooldown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron-Craw Crusher",
+   "files": [
+    "engine/src/cards/pool/iron-craw-crusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Junkyard Genius",
+   "files": [
+    "engine/src/cards/pool/junkyard-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kayla's Command",
+   "files": [
+    "engine/src/cards/pool/kaylas-command.ts",
+    "engine/src/cards/tokens/construct-token-kaylas-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kayla's Reconstruction",
+   "files": [
+    "engine/src/cards/pool/kaylas-reconstruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keeper of the Cadence",
+   "files": [
+    "engine/src/cards/pool/keeper-of-the-cadence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kill-Zone Acrobat",
+   "files": [
+    "engine/src/cards/pool/kill-zone-acrobat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lat-Nam Adept",
+   "files": [
+    "engine/src/cards/pool/lat-nam-adept.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lay Down Arms",
+   "files": [
+    "engine/src/cards/pool/lay-down-arms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Levitating Statue",
+   "files": [
+    "engine/src/cards/pool/levitating-statue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loran, Disciple of History",
+   "files": [
+    "engine/src/cards/pool/loran-disciple-of-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Machine Over Matter",
+   "files": [
+    "engine/src/cards/pool/machine-over-matter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mask of the Jadecrafter",
+   "files": [
+    "engine/src/cards/pool/mask-of-the-jadecrafter.ts",
+    "engine/src/cards/tokens/x-x-golem-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mightstone's Animation",
+   "files": [
+    "engine/src/cards/pool/mightstones-animation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mine Worker",
+   "files": [
+    "engine/src/cards/pool/mine-worker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Misery's Shadow",
+   "files": [
+    "engine/src/cards/pool/miserys-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mishra, Excavation Prodigy",
+   "files": [
+    "engine/src/cards/pool/mishra-excavation-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mishra's Domination",
+   "files": [
+    "engine/src/cards/pool/mishras-domination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mishra's Foundry",
+   "files": [
+    "engine/src/cards/pool/mishras-foundry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mishra's Research Desk",
+   "files": [
+    "engine/src/cards/pool/mishras-research-desk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "No One Left Behind",
+   "files": [
+    "engine/src/cards/pool/no-one-left-behind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overwhelming Remorse",
+   "files": [
+    "engine/src/cards/pool/overwhelming-remorse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penregon Strongbull",
+   "files": [
+    "engine/src/cards/pool/penregon-strongbull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Dragon Engine",
+   "files": [
+    "engine/src/cards/pool/phyrexian-dragon-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Platoon Dispenser",
+   "files": [
+    "engine/src/cards/pool/platoon-dispenser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power Plant Worker",
+   "files": [
+    "engine/src/cards/pool/power-plant-worker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Powerstone Fracture",
+   "files": [
+    "engine/src/cards/pool/powerstone-fracture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pyrrhic Blast",
+   "files": [
+    "engine/src/cards/pool/pyrrhic-blast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Gigamole",
+   "files": [
+    "engine/src/cards/pool/ravenous-gigamole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raze to the Ground",
+   "files": [
+    "engine/src/cards/pool/raze-to-the-ground.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recruitment Officer",
+   "files": [
+    "engine/src/cards/pool/recruitment-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Repair and Recharge",
+   "files": [
+    "engine/src/cards/pool/repair-and-recharge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootwire Amalgam",
+   "files": [
+    "engine/src/cards/pool/rootwire-amalgam.ts",
+    "engine/src/cards/tokens/x-x-golem-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rust Goliath",
+   "files": [
+    "engine/src/cards/pool/rust-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sardian Cliffstomper",
+   "files": [
+    "engine/src/cards/pool/sardian-cliffstomper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scatter Ray",
+   "files": [
+    "engine/src/cards/pool/scatter-ray.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shoot Down",
+   "files": [
+    "engine/src/cards/pool/shoot-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sibling Rivalry",
+   "files": [
+    "engine/src/cards/pool/sibling-rivalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slagstone Refinery",
+   "files": [
+    "engine/src/cards/pool/slagstone-refinery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Splitting the Powerstone",
+   "files": [
+    "engine/src/cards/pool/splitting-the-powerstone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spotter Thopter",
+   "files": [
+    "engine/src/cards/pool/spotter-thopter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steel Exemplar",
+   "files": [
+    "engine/src/cards/pool/steel-exemplar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Su-Chi Cave Guard",
+   "files": [
+    "engine/src/cards/pool/su-chi-cave-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surge Engine",
+   "files": [
+    "engine/src/cards/pool/surge-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swiftgear Drake",
+   "files": [
+    "engine/src/cards/pool/swiftgear-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Symmetry Matrix",
+   "files": [
+    "engine/src/cards/pool/symmetry-matrix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Take Flight",
+   "files": [
+    "engine/src/cards/pool/take-flight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tawnos's Tinkering",
+   "files": [
+    "engine/src/cards/pool/tawnoss-tinkering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teething Wurmlet",
+   "files": [
+    "engine/src/cards/pool/teething-wurmlet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terror Ballista",
+   "files": [
+    "engine/src/cards/pool/terror-ballista.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thopter Mechanic",
+   "files": [
+    "engine/src/cards/pool/thopter-mechanic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Spider",
+   "files": [
+    "engine/src/cards/pool/thran-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomakul Scrapsmith",
+   "files": [
+    "engine/src/cards/pool/tomakul-scrapsmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tower Worker",
+   "files": [
+    "engine/src/cards/pool/tower-worker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmogrant Altar",
+   "files": [
+    "engine/src/cards/pool/transmogrant-altar.ts",
+    "engine/src/cards/tokens/zombie-token-transmogrant-altar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmogrant's Crown",
+   "files": [
+    "engine/src/cards/pool/transmogrants-crown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trench Stalker",
+   "files": [
+    "engine/src/cards/pool/trench-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Union of the Third Path",
+   "files": [
+    "engine/src/cards/pool/union-of-the-third-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unleash Shell",
+   "files": [
+    "engine/src/cards/pool/unleash-shell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza, Powerstone Prodigy",
+   "files": [
+    "engine/src/cards/pool/urza-powerstone-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza's Command",
+   "files": [
+    "engine/src/cards/pool/urzas-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza's Rebuff",
+   "files": [
+    "engine/src/cards/pool/urzas-rebuff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran's Powerblade",
+   "files": [
+    "engine/src/cards/pool/veterans-powerblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wasteful Harvest",
+   "files": [
+    "engine/src/cards/pool/wasteful-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Woodcaller Automaton",
+   "files": [
+    "engine/src/cards/pool/woodcaller-automaton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yotian Frontliner",
+   "files": [
+    "engine/src/cards/pool/yotian-frontliner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yotian Tactician",
+   "files": [
+    "engine/src/cards/pool/yotian-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zephyr Sentinel",
+   "files": [
+    "engine/src/cards/pool/zephyr-sentinel.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Recommission",
+   "needs": [
+    "effect:enters-with-counters-if-type"
+   ],
+   "why": "\"If a creature enters this way, it enters with an additional +1/+1 counter\" is judged as it enters (a copy effect can make it a creature); a check of the graveyard card misses that."
+  },
+  {
+   "name": "Hulking Metamorph",
+   "needs": [
+    "replacement:copy-on-enter-own-pt"
+   ],
+   "why": "The copy keeps this creature's own power and toughness (7/7, or 3/3 prototyped); CopyExceptions.basePt takes only fixed numbers."
+  },
+  {
+   "name": "The Temporal Anchor",
+   "needs": [
+    "trigger:scry-bottom-count"
+   ],
+   "why": "\"Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many\": no trigger on the scry choice, nor its count."
+  },
+  {
+   "name": "Tawnos, the Toymaker",
+   "needs": [
+    "effect:copy-spell-add-types"
+   ],
+   "why": "The spell copy is an artifact in addition to its other types; copy-spell takes no exceptions."
+  },
+  {
+   "name": "Visions of Phyrexia",
+   "needs": [
+    "condition:played-card-from-exile-this-turn"
+   ],
+   "why": "\"If you didn't play a card from exile this turn\": no this-turn condition covers lands played from exile."
+  },
+  {
+   "name": "Rescue Retriever",
+   "needs": [
+    "replacement:damage-prevented-to-filter"
+   ],
+   "why": "\"Prevent all damage that would be dealt to other attacking Soldiers you control\": the prevention's toFilter can't leave out the Retriever, itself a Soldier."
+  },
+  {
+   "name": "Saheeli, Filigree Master",
+   "needs": [
+    "effect:emblem-static-abilities"
+   ],
+   "why": "The -4 emblem's artifact-creature anthem and artifact-spell cost reduction."
+  },
+  {
+   "name": "Mishra, Tamer of Mak Fawa",
+   "needs": [
+    "static:grant-unearth-to-graveyard"
+   ],
+   "why": "\"Each artifact card in your graveyard has unearth {1}{B}{R}\": grantsToGraveyard has no unearth."
+  },
+  {
+   "name": "Phyrexian Fleshgorger",
+   "needs": [
+    "decision:ward-pay-life-dynamic"
+   ],
+   "why": "\"Ward—Pay life equal to this creature's power\": WardCost.payLife is a fixed number."
+  },
+  {
+   "name": "Mishra's Command",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "Mode one's \"they may discard up to X cards\" is the target player's choice of how many."
+  },
+  {
+   "name": "In the Trenches",
+   "needs": [
+    "bug:oring-one-shot-return"
+   ],
+   "why": "\"Exile … until this enchantment leaves the battlefield\" returns as a one-shot effect (its ruling), not a leaves-the-battlefield trigger."
+  },
+  {
+   "name": "Razorlash Transmogrant",
+   "needs": [
+    "cost:ability-cost-reduction-conditional"
+   ],
+   "why": "The graveyard ability costs {4} less \"if an opponent controls four or more nonbasic lands\": an activated ability's reduction can't be conditional."
+  },
+  {
+   "name": "Queen Kayla bin-Kroog",
+   "needs": [
+    "effect:choose-one-per-mana-value-from-discarded"
+   ],
+   "why": "Up to one discarded artifact or creature card at each of mana value 1, 2 and 3, returned together."
+  },
+  {
+   "name": "Over the Top",
+   "needs": [
+    "effect:reveal-x-put-all-matching"
+   ],
+   "why": "Each player reveals cards equal to their own nonland permanents and puts every permanent card revealed onto the battlefield."
+  },
+  {
+   "name": "Meticulous Excavation",
+   "needs": [
+    "filter:has-unearth"
+   ],
+   "why": "\"If it has unearth\": unearth is an activated ability nothing can ask about."
+  },
+  {
+   "name": "Obliterating Bolt",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature or planeswalker would die this turn, exile it instead\" on its target."
+  },
+  {
+   "name": "Hurkyl, Master Wizard",
+   "needs": [
+    "effect:look-and-choose-one-per-type"
+   ],
+   "why": "One revealed card per card type among the noncreature spells you cast this turn."
+  },
+  {
+   "name": "Urza's Sylex",
+   "needs": [
+    "effect:each-player-chooses-destroy-rest"
+   ],
+   "why": "Each player chooses six lands they control; destroy all other permanents."
+  },
+  {
+   "name": "Prison Sentence",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "\"Its activated abilities can't be activated\" for the enchanted creature."
+  },
+  {
+   "name": "Hurkyl's Final Meditation",
+   "needs": [
+    "effect:end-the-turn"
+   ],
+   "why": "\"End the turn.\""
+  },
+  {
+   "name": "Military Discipline",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "The Aura's enters trigger gives the enchanted creature first strike until end of turn: no effect reference to the enchanted permanent."
+  },
+  {
+   "name": "Tocasia, Dig Site Mentor",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "\"Any number of target artifact cards with total mana value 10 or less\"."
+  },
+  {
+   "name": "Dreams of Steel and Oil",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand",
+    "decision:choose-from-opponent-graveyard-untargeted"
+   ],
+   "why": "Choose an artifact or creature card from the revealed hand and one from that player's graveyard, then exile both."
+  },
+  {
+   "name": "Clay Champion",
+   "needs": [
+    "stat:mana-color-spent-count"
+   ],
+   "why": "\"For each {G}{G} / {W}{W} spent to cast it\" needs how much mana of one color was spent."
+  },
+  {
+   "name": "Static Net",
+   "needs": [
+    "bug:oring-one-shot-return"
+   ],
+   "why": "Its exile-until return is a one-shot effect (the ruling), not a trigger."
+  },
+  {
+   "name": "The Stone Brain",
+   "needs": [
+    "decision:name-a-card",
+    "effect:search-hand-graveyard-library"
+   ],
+   "why": "Choose a card name; search an opponent's graveyard, hand and library for up to four cards with it."
+  },
+  {
+   "name": "The Fall of Kroog",
+   "needs": [
+    "target:controlled-by-target-player"
+   ],
+   "why": "\"Target land that player controls\" tied to the chosen target opponent."
+  },
+  {
+   "name": "Weakstone's Subjugation",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "\"Enchanted permanent doesn't untap during its controller's untap step\"."
+  },
+  {
+   "name": "Bladecoil Serpent",
+   "needs": [
+    "stat:mana-color-spent-count"
+   ],
+   "why": "\"For each {U}{U} / {B}{B} / {R}{R} spent to cast it\"."
+  },
+  {
+   "name": "Warlord's Elite",
+   "needs": [
+    "cost:additional-cost-tap-permanents"
+   ],
+   "why": "A spell's additional cost of tapping two untapped artifacts, creatures and/or lands you control."
+  },
+  {
+   "name": "Mishra, Lost to Phyrexia",
+   "needs": [
+    "mechanic:meld"
+   ],
+   "why": "The melded face of Mishra, Claimed by Gix and Phyrexian Dragon Engine: meld (rule 712) isn't built."
+  },
+  {
+   "name": "Titania, Gaea Incarnate",
+   "needs": [
+    "mechanic:meld"
+   ],
+   "why": "The melded face of Titania, Voice of Gaea and Argoth, Sanctum of Nature."
+  },
+  {
+   "name": "Urza, Planeswalker",
+   "needs": [
+    "mechanic:meld"
+   ],
+   "why": "The melded face of Urza, Lord Protector and The Mightstone and Weakstone."
+  }
+ ]
+}

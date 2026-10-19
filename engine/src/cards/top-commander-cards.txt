@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3694 already implemented / 1306 missing (marks refreshed 2026-10-19)
+3695 already implemented / 1305 missing (marks refreshed 2026-10-19)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2591,7 +2591,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2598  Scene of the Crime                       {0}              Artifact Land — Clue
 [ ]  2599  Arch of Orazca                           {0}              Land
 [x]  2600  Linvala, Keeper of Silence               {2}{W}{W}        Legendary Creature — Angel
-[ ]  2601  Angelic Destiny                          {2}{W}{W}        Enchantment — Aura
+[x]  2601  Angelic Destiny                          {2}{W}{W}        Enchantment — Aura
 [x]  2602  Black Mage's Rod                         {1}{B}           Artifact — Equipment
 [ ]  2603  Ghirapur Orrery                          {4}              Artifact
 [x]  2604  Inquisitive Glimmer                      {W}{U}           Enchantment Creature — Fox Glimmer

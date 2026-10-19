@@ -95,8 +95,13 @@ section keeps only what to do next.
   distributed counters and the owner's top-or-bottom choice for The Aftermath; batch 98 battles
   and Sieges, incubate, backup and convokers for March of the Machine and its Commander set; batch
   99 compleated, "has toxic" and "gains toxic N" for Phyrexia: All Will Be One and its Commander
-  set; batch 100 the rest of Jumpstart 2022 and The Brothers' War Commander, no engine change);
-  **next, The Brothers' War** (BRO, 155 left — `npm run cards:sets -w engine -- --sets 60`). Phyrexia: All Will Be One's blocks are
+  set; batch 100 the rest of Jumpstart 2022 and The Brothers' War Commander, no engine change;
+  batch 101 the rest of The Brothers' War); **next, Warhammer 40,000 Commander, then Dominaria
+  United Commander and Dominaria United** (40K, DMC, DMU — `npm run cards:sets -w engine -- --sets 60`).
+  The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
+  the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
+  Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
+  Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …). Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
   Venser), a target's controller's poison counters (Bring the Ending, Anoint with Affliction), and
   a static scoped by "has toxic" (Skrelv's Hive). March of the Machine's leaders: one target slot for a player

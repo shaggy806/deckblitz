@@ -7719,6 +7719,50 @@
   "trigger:becomes-target-first-time-by-anyone": {
    "family": "trigger:becomes-target-fixes",
    "example": "Angelic Cub: 'becomes the target of a spell or ability for the first time each turn': firstTimeEachTurn counts per targeting player (valiant), the Cub's is by anyone."
+  },
+  "replacement:copy-on-enter-own-pt": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Hulking Metamorph: 'its power and toughness are equal to this creature's power and toughness': CopyExceptions.basePt takes fixed numbers only."
+  },
+  "trigger:scry-bottom-count": {
+   "family": "trigger:scry-trigger",
+   "example": "The Temporal Anchor: 'Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom'."
+  },
+  "effect:copy-spell-add-types": {
+   "family": "effect:copy-spell-extensions",
+   "example": "Tawnos, the Toymaker: 'copy it, except the copy is an artifact in addition to its other types'."
+  },
+  "condition:played-card-from-exile-this-turn": {
+   "family": "trigger:cast-or-play-origin-zone",
+   "example": "Visions of Phyrexia: 'if you didn't play a card from exile this turn' — lands played from exile count."
+  },
+  "static:grant-unearth-to-graveyard": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Mishra, Tamer of Mak Fawa: 'Each artifact card in your graveyard has unearth {1}{B}{R}'."
+  },
+  "decision:ward-pay-life-dynamic": {
+   "family": "decision:ward-payment",
+   "example": "Phyrexian Fleshgorger: 'Ward—Pay life equal to this creature's power'."
+  },
+  "effect:choose-one-per-mana-value-from-discarded": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "Queen Kayla bin-Kroog: 'choose an artifact or creature card with mana value 1 you discarded this way, then do the same for … 2 and 3. Return those cards to the battlefield'."
+  },
+  "filter:has-unearth": {
+   "family": "keyword:unearth",
+   "example": "Meticulous Excavation: 'If it has unearth, instead exile it, then return that card'."
+  },
+  "decision:choose-from-opponent-graveyard-untargeted": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Dreams of Steel and Oil: 'then choose an artifact or creature card from their graveyard': an untargeted pick from an opponent's graveyard."
+  },
+  "stat:mana-color-spent-count": {
+   "family": "stat:mana-spent-to-cast",
+   "example": "Clay Champion: 'three +1/+1 counters on it for each {G}{G} spent to cast it': the amount of mana of one color spent, not just which colors."
+  },
+  "target:controlled-by-target-player": {
+   "family": "effect:player-scope-extensions",
+   "example": "The Fall of Kroog: 'Choose target opponent. Destroy target land that player controls.'"
   }
  }
 }

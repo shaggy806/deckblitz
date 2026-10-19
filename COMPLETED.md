@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **The Brothers' War, whole** (batch 101): its last 155 cards, 122 authored (Urza, Powerstone
+  Prodigy, Mishra, Excavation Prodigy, Loran, Disciple of History, Arcane Proxy and 118 more) and
+  33 blocked (three on meld); plus Angelic Destiny, Mishra's Factory's missing third ability, and
+  Ainok Wayfarer and Ostrich-Horse taking a milled card Rest in Peace exiled (rule 701.17c)
+  (2026-10-19).
 - **Jumpstart 2022 and The Brothers' War Commander, both whole** (batch 100): the 52 cards their
   top halves left, 25 authored (Runadi, Behemoth Caller, Lita, Mechanical Engineer, The
   Archimandrite, Sardian Avenger and 21 more) and 27 blocked, nearly each on a need of its own;
