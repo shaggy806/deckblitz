@@ -86,6 +86,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Warhammer 40,000 Commander, whole** (batch 102): its last 92 cards, 58 authored (Space Marine
+  Devastator, Vanguard Suppressor, The Swarmlord, Lucius the Eternal and 54 more) and 34 blocked
+  (three on miracle); with **domain** (rule 207.2c — `{ basicLandTypes: "you" }` as an effect
+  amount, a cost reduction and a CDA count: Nishoba Brawler, Yavimaya Sojourner, Meria's Outrider,
+  Jodah's Codex) and **read ahead** (702.155 — The Weatherseed Treaty, The Cruelty of Gix) built for
+  Dominaria United; and two engine fixes the agents found — "target player creates" with an
+  illegal target now makes nothing (rule 608.2b — Ashling's Command; unblocks Cybernetica
+  Datasmith), and "opponents who control fewer" compares control (Voice of Many) (2026-10-19).
 - **The Brothers' War, whole** (batch 101): its last 155 cards, 122 authored (Urza, Powerstone
   Prodigy, Mishra, Excavation Prodigy, Loran, Disciple of History, Arcane Proxy and 118 more) and
   33 blocked (three on meld); plus Angelic Destiny, Mishra's Factory's missing third ability, and

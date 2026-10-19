@@ -7763,6 +7763,54 @@
   "target:controlled-by-target-player": {
    "family": "effect:player-scope-extensions",
    "example": "The Fall of Kroog: 'Choose target opponent. Destroy target land that player controls.'"
+  },
+  "effect:return-from-graveyard-total-mana-value": {
+   "family": "effect:look-and-choose-second-pick",
+   "example": "Technomancer: 'return any number of artifact creature cards with total mana value 6 or less from your graveyard to the battlefield' — chosen as it resolves."
+  },
+  "effect:target-attacks-target-player-this-turn": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Ravener: 'target creature attacks target opponent this turn if able'."
+  },
+  "effect:enters-with-counters-if-x-cost": {
+   "family": "effect:put-onto-battlefield-options",
+   "example": "The First Tyrannic War: 'If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.'"
+  },
+  "static:graveyard-ability-cost-reduction": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Convergence of Dominion: 'activated abilities of cards in your graveyard cost {2} less to activate'."
+  },
+  "effect:may-pay-x-capped": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Mortarion, Daemon Primarch: 'you may pay {X} … X can't be greater than the amount of life you lost this turn'."
+  },
+  "effect:exile-graveyard-of-target-card-owner": {
+   "family": "effect:target-spec-additions",
+   "example": "Nurgle's Conscription: 'then exile that player's graveyard' — the owner of the target card."
+  },
+  "static:pt-bonus-from-linked-exile-power": {
+   "family": "static:imprint-exiled-card-pt-and-types",
+   "example": "Drach'Nyen: 'Equipped creature has menace and gets +X/+0, where X is the exiled card's power.'"
+  },
+  "decision:may-reveal-first-draw": {
+   "family": "replacement:new-event-replacements",
+   "example": "Inquisitor Eisenhorn: 'You may reveal the first card you draw each turn as you draw it.'"
+  },
+  "effect:grant-unearth-to-graveyard-until-eot": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "example": "Ghost Ark: 'each artifact creature card in your graveyard gains unearth {3} until end of turn'."
+  },
+  "static:player-must-attack-with-a-creature": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Seeker of Slaanesh: 'Each opponent must attack with at least one creature each combat if able.'"
+  },
+  "cost:additional-cost-exile-from-graveyard": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "Redemptor Dreadnought: 'As an additional cost to cast this spell, you may exile a creature card from your graveyard.'"
+  },
+  "trigger:attacks-your-opponent-per-creature": {
+   "family": "trigger:combat-trigger-extensions",
+   "example": "Genestealer Locus: 'Whenever a creature attacks one of your opponents, it gets +0/+1 until end of turn.'"
   }
  }
 }

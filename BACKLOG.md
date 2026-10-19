@@ -96,8 +96,11 @@ section keeps only what to do next.
   and Sieges, incubate, backup and convokers for March of the Machine and its Commander set; batch
   99 compleated, "has toxic" and "gains toxic N" for Phyrexia: All Will Be One and its Commander
   set; batch 100 the rest of Jumpstart 2022 and The Brothers' War Commander, no engine change;
-  batch 101 the rest of The Brothers' War); **next, Warhammer 40,000 Commander, then Dominaria
-  United Commander and Dominaria United** (40K, DMC, DMU — `npm run cards:sets -w engine -- --sets 60`).
+  batch 101 the rest of The Brothers' War; batch 102 the rest of Warhammer 40,000 Commander, with
+  domain and read ahead built for Dominaria United); **next, Dominaria United Commander and
+  Dominaria United** (DMC, DMU — `npm run cards:sets -w engine -- --sets 60`), whose other lead,
+  **enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
+  declared, so a client change with a live check), blocks 11 of its cards and Aradesh.
   The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
   Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,

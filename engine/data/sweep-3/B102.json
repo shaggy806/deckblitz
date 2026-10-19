@@ -1,0 +1,705 @@
+{
+ "batch": "B102",
+ "status": "complete",
+ "ranks": "Warhammer 40,000 Commander (40K, 2022-10-07): the rest of the set; and the cards the domain and read-ahead features unblocked before Dominaria United's batch (Nishoba Brawler, Yavimaya Sojourner, Meria's Outrider, Jodah's Codex, The Weatherseed Treaty, The Cruelty of Gix)",
+ "authored": [
+  {
+   "name": "Acolyte Hybrid",
+   "files": [
+    "engine/src/cards/pool/acolyte-hybrid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arco-Flagellant",
+   "files": [
+    "engine/src/cards/pool/arco-flagellant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aspiring Champion",
+   "files": [
+    "engine/src/cards/pool/aspiring-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assault Intercessor",
+   "files": [
+    "engine/src/cards/pool/assault-intercessor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Birth of the Imperium",
+   "files": [
+    "engine/src/cards/pool/birth-of-the-imperium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canoptek Tomb Sentinel",
+   "files": [
+    "engine/src/cards/pool/canoptek-tomb-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Mutation",
+   "files": [
+    "engine/src/cards/pool/chaos-mutation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Terminator Lord",
+   "files": [
+    "engine/src/cards/pool/chaos-terminator-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clamavus",
+   "files": [
+    "engine/src/cards/pool/clamavus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryptek",
+   "files": [
+    "engine/src/cards/pool/cryptek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cybernetica Datasmith",
+   "files": [
+    "engine/src/cards/pool/cybernetica-datasmith.ts",
+    "engine/src/cards/tokens/robot-token-cybernetica-datasmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathleaper, Terror Weapon",
+   "files": [
+    "engine/src/cards/pool/deathleaper-terror-weapon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defenders of Humanity",
+   "files": [
+    "engine/src/cards/pool/defenders-of-humanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deny the Witch",
+   "files": [
+    "engine/src/cards/pool/deny-the-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epistolary Librarian",
+   "files": [
+    "engine/src/cards/pool/epistolary-librarian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exocrine",
+   "files": [
+    "engine/src/cards/pool/exocrine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exterminatus",
+   "files": [
+    "engine/src/cards/pool/exterminatus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "For the Emperor!",
+   "files": [
+    "engine/src/cards/pool/for-the-emperor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gargoyle Flock",
+   "files": [
+    "engine/src/cards/pool/gargoyle-flock.ts",
+    "engine/src/cards/tokens/tyranid-gargoyle-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genestealer Patriarch",
+   "files": [
+    "engine/src/cards/pool/genestealer-patriarch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goliath Truck",
+   "files": [
+    "engine/src/cards/pool/goliath-truck.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grey Knight Paragon",
+   "files": [
+    "engine/src/cards/pool/grey-knight-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hormagaunt Horde",
+   "files": [
+    "engine/src/cards/pool/hormagaunt-horde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inquisitor Greyfax",
+   "files": [
+    "engine/src/cards/pool/inquisitor-greyfax.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jodah's Codex",
+   "files": [
+    "engine/src/cards/pool/jodahs-codex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Let the Galaxy Burn",
+   "files": [
+    "engine/src/cards/pool/let-the-galaxy-burn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lictor",
+   "files": [
+    "engine/src/cards/pool/lictor.ts",
+    "engine/src/cards/tokens/tyranid-warrior-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lucius the Eternal",
+   "files": [
+    "engine/src/cards/pool/lucius-the-eternal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lychguard",
+   "files": [
+    "engine/src/cards/pool/lychguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malanthrope",
+   "files": [
+    "engine/src/cards/pool/malanthrope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meria's Outrider",
+   "files": [
+    "engine/src/cards/pool/merias-outrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutalith Vortex Beast",
+   "files": [
+    "engine/src/cards/pool/mutalith-vortex-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necron Monolith",
+   "files": [
+    "engine/src/cards/pool/necron-monolith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neyam Shai Murad",
+   "files": [
+    "engine/src/cards/pool/neyam-shai-murad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nishoba Brawler",
+   "files": [
+    "engine/src/cards/pool/nishoba-brawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Noise Marine",
+   "files": [
+    "engine/src/cards/pool/noise-marine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nurgle's Rot",
+   "files": [
+    "engine/src/cards/pool/nurgles-rot.ts",
+    "engine/src/cards/tokens/plaguebearer-of-nurgle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pink Horror",
+   "files": [
+    "engine/src/cards/pool/pink-horror.ts",
+    "engine/src/cards/tokens/blue-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poxwalkers",
+   "files": [
+    "engine/src/cards/pool/poxwalkers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primaris Eliminator",
+   "files": [
+    "engine/src/cards/pool/primaris-eliminator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychomancer",
+   "files": [
+    "engine/src/cards/pool/psychomancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purestrain Genestealer",
+   "files": [
+    "engine/src/cards/pool/purestrain-genestealer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sautekh Immortal",
+   "files": [
+    "engine/src/cards/pool/sautekh-immortal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screamer-Killer",
+   "files": [
+    "engine/src/cards/pool/screamer-killer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shard of the Void Dragon",
+   "files": [
+    "engine/src/cards/pool/shard-of-the-void-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sister of Silence",
+   "files": [
+    "engine/src/cards/pool/sister-of-silence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skorpekh Lord",
+   "files": [
+    "engine/src/cards/pool/skorpekh-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Space Marine Devastator",
+   "files": [
+    "engine/src/cards/pool/space-marine-devastator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Space Marine Scout",
+   "files": [
+    "engine/src/cards/pool/space-marine-scout.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Szarekh, the Silent King",
+   "files": [
+    "engine/src/cards/pool/szarekh-the-silent-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tallyman of Nurgle",
+   "files": [
+    "engine/src/cards/pool/tallyman-of-nurgle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Cruelty of Gix",
+   "files": [
+    "engine/src/cards/pool/the-cruelty-of-gix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Flesh Is Weak",
+   "files": [
+    "engine/src/cards/pool/the-flesh-is-weak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Swarmlord",
+   "files": [
+    "engine/src/cards/pool/the-swarmlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Weatherseed Treaty",
+   "files": [
+    "engine/src/cards/pool/the-weatherseed-treaty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Their Number Is Legion",
+   "files": [
+    "engine/src/cards/pool/their-number-is-legion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triarch Praetorian",
+   "files": [
+    "engine/src/cards/pool/triarch-praetorian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trygon Prime",
+   "files": [
+    "engine/src/cards/pool/trygon-prime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyranid Harridan",
+   "files": [
+    "engine/src/cards/pool/tyranid-harridan.ts",
+    "engine/src/cards/tokens/tyranid-gargoyle-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyranid Invasion",
+   "files": [
+    "engine/src/cards/pool/tyranid-invasion.ts",
+    "engine/src/cards/tokens/tyranid-warrior-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyranid Prime",
+   "files": [
+    "engine/src/cards/pool/tyranid-prime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tzaangor Shaman",
+   "files": [
+    "engine/src/cards/pool/tzaangor-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vanguard Suppressor",
+   "files": [
+    "engine/src/cards/pool/vanguard-suppressor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yavimaya Sojourner",
+   "files": [
+    "engine/src/cards/pool/yavimaya-sojourner.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Mawloc",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "\"If that creature would die this turn, exile it instead\" on the fought creature, from any cause, even after Mawloc is gone."
+  },
+  {
+   "name": "The Red Terror",
+   "needs": [
+    "trigger:deals-damage-once-per-event"
+   ],
+   "why": "One trigger per red source per damage event, to permanents and/or players."
+  },
+  {
+   "name": "Hierophant Bio-Titan",
+   "needs": [
+    "cost:remove-counters-from-chosen"
+   ],
+   "why": "A spell's optional additional cost of removing any number of +1/+1 counters from among your creatures, {2} less per counter."
+  },
+  {
+   "name": "The Ruinous Powers",
+   "needs": [
+    "effect:random-choice",
+    "effect:cast-this-way-owner-loses-life"
+   ],
+   "why": "An opponent chosen at random, and \"when you cast a spell this way, its owner loses life equal to its mana value\"."
+  },
+  {
+   "name": "Broodlord",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "Distribute X +1/+1 counters: divided.total is fixed."
+  },
+  {
+   "name": "The Horus Heresy",
+   "needs": [
+    "effect:each-player-chooses-in-turn-order"
+   ],
+   "why": "Chapter III: starting with you, each player chooses a creature, then destroy each one chosen."
+  },
+  {
+   "name": "Technomancer",
+   "needs": [
+    "effect:return-from-graveyard-total-mana-value"
+   ],
+   "why": "Return any number of artifact creature cards with total mana value 6 or less, chosen as it resolves."
+  },
+  {
+   "name": "Zephyrim",
+   "needs": [
+    "keyword:miracle"
+   ],
+   "why": "Miracle {1}{W} (702.94)."
+  },
+  {
+   "name": "Triumph of Saint Katherine",
+   "needs": [
+    "keyword:miracle"
+   ],
+   "why": "Miracle {1}{W} (702.94)."
+  },
+  {
+   "name": "Sister Repentia",
+   "needs": [
+    "keyword:miracle"
+   ],
+   "why": "Miracle {W}{B} (702.94)."
+  },
+  {
+   "name": "Trazyn the Infinite",
+   "needs": [
+    "static:gain-abilities-from-graveyard"
+   ],
+   "why": "It has all activated abilities of artifact cards in your graveyard."
+  },
+  {
+   "name": "Ravener",
+   "needs": [
+    "effect:target-attacks-target-player-this-turn"
+   ],
+   "why": "\"Target creature attacks target opponent this turn if able.\""
+  },
+  {
+   "name": "The War in Heaven",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "Chapter III: up to three target creature cards with total mana value 8 or less."
+  },
+  {
+   "name": "The First Tyrannic War",
+   "needs": [
+    "effect:enters-with-counters-if-x-cost"
+   ],
+   "why": "Chapter I: \"if its mana cost contains {X}, it enters with +1/+1 counters equal to the lands you control\"."
+  },
+  {
+   "name": "Convergence of Dominion",
+   "needs": [
+    "static:graveyard-ability-cost-reduction"
+   ],
+   "why": "\"Activated abilities of cards in your graveyard cost {2} less\" while you control your commander."
+  },
+  {
+   "name": "Dark Apostle",
+   "needs": [
+    "static:grant-cascade-next-spell"
+   ],
+   "why": "\"The next noncreature spell you cast this turn has cascade.\""
+  },
+  {
+   "name": "Sloppity Bilepiper",
+   "needs": [
+    "static:grant-cascade-next-spell"
+   ],
+   "why": "\"The next creature spell you cast this turn has cascade.\""
+  },
+  {
+   "name": "Haruspex",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "\"Remove X +1/+1 counters\" as a cost, X also the mana made."
+  },
+  {
+   "name": "Mortarion, Daemon Primarch",
+   "needs": [
+    "effect:may-pay-x-capped"
+   ],
+   "why": "\"You may pay {X} … X can't be greater than the amount of life you lost this turn.\""
+  },
+  {
+   "name": "Necron Overlord",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "\"Tap X untapped artifacts you control\" as a cost."
+  },
+  {
+   "name": "Belisarius Cawl",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "\"Tap X untapped creatures you control\" as a cost."
+  },
+  {
+   "name": "Nurgle's Conscription",
+   "needs": [
+    "effect:exile-graveyard-of-target-card-owner"
+   ],
+   "why": "\"Then exile that player's graveyard\" — the owner of the target card."
+  },
+  {
+   "name": "Drach'Nyen",
+   "needs": [
+    "static:pt-bonus-from-linked-exile-power"
+   ],
+   "why": "\"+X/+0, where X is the exiled card's power\" as a static."
+  },
+  {
+   "name": "Inquisitor Eisenhorn",
+   "needs": [
+    "decision:may-reveal-first-draw"
+   ],
+   "why": "\"You may reveal the first card you draw each turn as you draw it\" — optional, every turn."
+  },
+  {
+   "name": "Ghost Ark",
+   "needs": [
+    "effect:grant-unearth-to-graveyard-until-eot"
+   ],
+   "why": "\"Each artifact creature card in your graveyard gains unearth {3} until end of turn.\""
+  },
+  {
+   "name": "Toxicrene",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "All lands \"lose all other abilities\" as a static."
+  },
+  {
+   "name": "Seeker of Slaanesh",
+   "needs": [
+    "static:player-must-attack-with-a-creature"
+   ],
+   "why": "\"Each opponent must attack with at least one creature each combat if able.\""
+  },
+  {
+   "name": "Hexmark Destroyer",
+   "needs": [
+    "static:cant-be-blocked-except-by-n"
+   ],
+   "why": "\"Can't be blocked except by six or more creatures.\""
+  },
+  {
+   "name": "Triarch Stalker",
+   "needs": [
+    "decision:choose-player",
+    "target:controlled-by-chosen-player"
+   ],
+   "why": "Choose an opponent each combat; creatures attacking the last chosen player have menace."
+  },
+  {
+   "name": "Redemptor Dreadnought",
+   "needs": [
+    "cost:additional-cost-exile-from-graveyard",
+    "condition:exiled-with-source-filter"
+   ],
+   "why": "An optional exile-from-graveyard additional cost, and the exiled card's power read later."
+  },
+  {
+   "name": "Knight Rampager",
+   "needs": [
+    "effect:random-target"
+   ],
+   "why": "The dies trigger's \"target opponent chosen at random\"."
+  },
+  {
+   "name": "Helbrute",
+   "needs": [
+    "zone:graveyard-cast-exile-cost"
+   ],
+   "why": "\"Cast this card from your graveyard by exiling another creature card from your graveyard in addition to its other costs.\""
+  },
+  {
+   "name": "Genestealer Locus",
+   "needs": [
+    "trigger:attacks-your-opponent-per-creature"
+   ],
+   "why": "\"Whenever a creature attacks one of your opponents, it gets +0/+1.\""
+  },
+  {
+   "name": "Tomb Blade",
+   "needs": [
+    "amount:count-for-trigger-player"
+   ],
+   "why": "\"Loses life equal to the number of creatures they control\": a count from the damaged player's side."
+  }
+ ]
+}
