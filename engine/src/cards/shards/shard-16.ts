@@ -56,6 +56,7 @@ import _poolBorosRecruit from "../pool/boros-recruit.js";
 import _poolBoulderRush from "../pool/boulder-rush.js";
 import _poolBoundingFelidar from "../pool/bounding-felidar.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
+import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
@@ -104,6 +105,7 @@ import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
+import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
@@ -393,6 +395,7 @@ import _poolStaffOfTheStoryteller from "../pool/staff-of-the-storyteller.js";
 import _poolSteelExemplar from "../pool/steel-exemplar.js";
 import _poolStiltzkinMoogleMerchant from "../pool/stiltzkin-moogle-merchant.js";
 import _poolStoicRebuttal from "../pool/stoic-rebuttal.js";
+import _poolStolenVitality from "../pool/stolen-vitality.js";
 import _poolStoneHavenMedic from "../pool/stone-haven-medic.js";
 import _poolStoneRetrievalUnit from "../pool/stone-retrieval-unit.js";
 import _poolStonesplitterBolt from "../pool/stonesplitter-bolt.js";
@@ -479,7 +482,9 @@ import _poolVividGrove from "../pool/vivid-grove.js";
 import _poolVivisection from "../pool/vivisection.js";
 import _poolVoiceOfTheVermin from "../pool/voice-of-the-vermin.js";
 import _poolVoldarenDuelist from "../pool/voldaren-duelist.js";
+import _poolVoldarenStinger from "../pool/voldaren-stinger.js";
 import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
+import _poolWaildrifter from "../pool/waildrifter.js";
 import _poolWakeOfVultures from "../pool/wake-of-vultures.js";
 import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
@@ -514,6 +519,7 @@ import _tokensBlackDeathtouchSnakeToken from "../tokens/black-deathtouch-snake-t
 import _tokensBlueBlackFaerieToken from "../tokens/blue-black-faerie-token.js";
 import _tokensDinosaurToken31 from "../tokens/dinosaur-token-3-1.js";
 import _tokensGoblinTokenBoggartMischief from "../tokens/goblin-token-boggart-mischief.js";
+import _tokensInsectTokenRiseOfTheAnts from "../tokens/insect-token-rise-of-the-ants.js";
 import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
@@ -585,6 +591,7 @@ const shard: CardShard = {
     _poolBoulderRush,
     _poolBoundingFelidar,
     _poolBrokersInitiate,
+    _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
     _poolCadaverLab,
@@ -633,6 +640,7 @@ const shard: CardShard = {
     _poolDragonTempest,
     _poolDragonsEyeSentry,
     _poolDredgingClaw,
+    _poolDuelForDominance,
     _poolDuskwielder,
     _poolDwarvenTrader,
     _poolEdgarMoonlitSovereign,
@@ -922,6 +930,7 @@ const shard: CardShard = {
     _poolSteelExemplar,
     _poolStiltzkinMoogleMerchant,
     _poolStoicRebuttal,
+    _poolStolenVitality,
     _poolStoneHavenMedic,
     _poolStoneRetrievalUnit,
     _poolStonesplitterBolt,
@@ -1008,7 +1017,9 @@ const shard: CardShard = {
     _poolVivisection,
     _poolVoiceOfTheVermin,
     _poolVoldarenDuelist,
+    _poolVoldarenStinger,
     _poolWailOfTheForgotten,
+    _poolWaildrifter,
     _poolWakeOfVultures,
     _poolWalkingSarcophagus,
     _poolWallOfGranite,
@@ -1045,6 +1056,7 @@ const shard: CardShard = {
     _tokensBlueBlackFaerieToken,
     _tokensDinosaurToken31,
     _tokensGoblinTokenBoggartMischief,
+    _tokensInsectTokenRiseOfTheAnts,
     _tokensInsectToken,
     _tokensLifelinkVampireToken,
     _tokensMunitionsToken,

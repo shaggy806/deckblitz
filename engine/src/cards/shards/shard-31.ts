@@ -58,6 +58,7 @@ import _poolBottomlessPool from "../pool/bottomless-pool.js";
 import _poolBoulderloftPathway from "../pool/boulderloft-pathway.js";
 import _poolBoundingWolf from "../pool/bounding-wolf.js";
 import _poolBrainsurge from "../pool/brainsurge.js";
+import _poolBrambleArmor from "../pool/bramble-armor.js";
 import _poolBrandywineFarmer from "../pool/brandywine-farmer.js";
 import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
@@ -83,10 +84,12 @@ import _poolCoercedToKill from "../pool/coerced-to-kill.js";
 import _poolColossodonYearling from "../pool/colossodon-yearling.js";
 import _poolCombatMedic from "../pool/combat-medic.js";
 import _poolCommissarSeverinaRaine from "../pool/commissar-severina-raine.js";
+import _poolComponentCollector from "../pool/component-collector.js";
 import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
 import _poolCounterspell from "../pool/counterspell.js";
+import _poolCovetousGeist from "../pool/covetous-geist.js";
 import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
@@ -142,6 +145,7 @@ import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
 import _poolFaithfulPikemaster from "../pool/faithful-pikemaster.js";
+import _poolFalkenrathPitFighter from "../pool/falkenrath-pit-fighter.js";
 import _poolFallenShinobi from "../pool/fallen-shinobi.js";
 import _poolFatalPush from "../pool/fatal-push.js";
 import _poolFearOfFalling from "../pool/fear-of-falling.js";
@@ -223,6 +227,7 @@ import _poolIllvoiOperative from "../pool/illvoi-operative.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
+import _poolInheritedFiend from "../pool/inherited-fiend.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIronBully from "../pool/iron-bully.js";
@@ -294,11 +299,13 @@ import _poolMoanOfTheUnhallowed from "../pool/moan-of-the-unhallowed.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
+import _poolMoonveilRegent from "../pool/moonveil-regent.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
+import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
@@ -397,6 +404,7 @@ import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolStoneskin from "../pool/stoneskin.js";
+import _poolStormTheFestival from "../pool/storm-the-festival.js";
 import _poolStranglerootGeist from "../pool/strangleroot-geist.js";
 import _poolStrokeOfGenius from "../pool/stroke-of-genius.js";
 import _poolSummerBloom from "../pool/summer-bloom.js";
@@ -559,6 +567,7 @@ const shard: CardShard = {
     _poolBoulderloftPathway,
     _poolBoundingWolf,
     _poolBrainsurge,
+    _poolBrambleArmor,
     _poolBrandywineFarmer,
     _poolBrindleBoar,
     _poolBrotherhoodAmbushers,
@@ -584,10 +593,12 @@ const shard: CardShard = {
     _poolColossodonYearling,
     _poolCombatMedic,
     _poolCommissarSeverinaRaine,
+    _poolComponentCollector,
     _poolCookingCampsite,
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
     _poolCounterspell,
+    _poolCovetousGeist,
     _poolCrackOpen,
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
@@ -643,6 +654,7 @@ const shard: CardShard = {
     _poolEntDraughtBasin,
     _poolFacevaulter,
     _poolFaithfulPikemaster,
+    _poolFalkenrathPitFighter,
     _poolFallenShinobi,
     _poolFatalPush,
     _poolFearOfFalling,
@@ -724,6 +736,7 @@ const shard: CardShard = {
     _poolImmersturmRaider,
     _poolInfestationExpert,
     _poolInheritedEnvelope,
+    _poolInheritedFiend,
     _poolInterfaceAce,
     _poolIntoTheMawOfHell,
     _poolIronBully,
@@ -795,11 +808,13 @@ const shard: CardShard = {
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
     _poolMonstrousVortex,
+    _poolMoonveilRegent,
     _poolMordorOnTheMarch,
     _poolMortalitySpear,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
     _poolMyojinOfBloomingDawn,
+    _poolNebelgastIntruder,
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,
@@ -898,6 +913,7 @@ const shard: CardShard = {
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolStoneskin,
+    _poolStormTheFestival,
     _poolStranglerootGeist,
     _poolStrokeOfGenius,
     _poolSummerBloom,

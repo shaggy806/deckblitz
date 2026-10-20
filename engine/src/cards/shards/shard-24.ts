@@ -96,6 +96,7 @@ import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
+import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
 import _poolDarkRitual from "../pool/dark-ritual.js";
@@ -419,6 +420,7 @@ import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
 import _poolUnrootedAncestor from "../pool/unrooted-ancestor.js";
+import _poolUntamedPup from "../pool/untamed-pup.js";
 import _poolUproot from "../pool/uproot.js";
 import _poolUrGolemsEye from "../pool/ur-golems-eye.js";
 import _poolUrtetRemnantOfMemnarch from "../pool/urtet-remnant-of-memnarch.js";
@@ -567,6 +569,7 @@ const shard: CardShard = {
     _poolCruelTruths,
     _poolCrystacean,
     _poolCullingTheWeak,
+    _poolCurseOfClingingWebs,
     _poolCylianElf,
     _poolDarkLeoShredder,
     _poolDarkRitual,
@@ -890,6 +893,7 @@ const shard: CardShard = {
     _poolUnderdarkRift,
     _poolUnnaturalSpeed,
     _poolUnrootedAncestor,
+    _poolUntamedPup,
     _poolUproot,
     _poolUrGolemsEye,
     _poolUrtetRemnantOfMemnarch,

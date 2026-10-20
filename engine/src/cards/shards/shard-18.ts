@@ -145,6 +145,7 @@ import _poolFuss from "../pool/fuss.js";
 import _poolGastalRaider from "../pool/gastal-raider.js";
 import _poolGenePollinator from "../pool/gene-pollinator.js";
 import _poolGhenArcanumWeaver from "../pool/ghen-arcanum-weaver.js";
+import _poolGhostlyCastigator from "../pool/ghostly-castigator.js";
 import _poolGiantCindermaw from "../pool/giant-cindermaw.js";
 import _poolGiantSizedFlyingAnt from "../pool/giant-sized-flying-ant.js";
 import _poolGiantSolifuge from "../pool/giant-solifuge.js";
@@ -391,6 +392,7 @@ import _poolStewardOfTheHarvest from "../pool/steward-of-the-harvest.js";
 import _poolStirringBard from "../pool/stirring-bard.js";
 import _poolStormcragElemental from "../pool/stormcrag-elemental.js";
 import _poolStrengthBobblehead from "../pool/strength-bobblehead.js";
+import _poolStuffedBear from "../pool/stuffed-bear.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
@@ -666,6 +668,7 @@ const shard: CardShard = {
     _poolGastalRaider,
     _poolGenePollinator,
     _poolGhenArcanumWeaver,
+    _poolGhostlyCastigator,
     _poolGiantCindermaw,
     _poolGiantSizedFlyingAnt,
     _poolGiantSolifuge,
@@ -912,6 +915,7 @@ const shard: CardShard = {
     _poolStirringBard,
     _poolStormcragElemental,
     _poolStrengthBobblehead,
+    _poolStuffedBear,
     _poolSuffocatingFumes,
     _poolSummonKujata,
     _poolSuqataLancer,

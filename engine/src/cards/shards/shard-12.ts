@@ -274,16 +274,19 @@ import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
+import _poolOminousRoost from "../pool/ominous-roost.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
+import _poolOverwhelmedArchivist from "../pool/overwhelmed-archivist.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
+import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPendrellDrake from "../pool/pendrell-drake.js";
 import _poolPestControl from "../pool/pest-control.js";
@@ -396,6 +399,7 @@ import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwordOfOnceAndFuture from "../pool/sword-of-once-and-future.js";
 import _poolTalonrend from "../pool/talonrend.js";
+import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
 import _poolTeemingDragonstorm from "../pool/teeming-dragonstorm.js";
 import _poolTempleOfAbandon from "../pool/temple-of-abandon.js";
 import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
@@ -756,16 +760,19 @@ const shard: CardShard = {
     _poolOathOfNissa,
     _poolOllenbockEscort,
     _poolOmenHawker,
+    _poolOminousRoost,
     _poolOozeSpill,
     _poolOphidianEye,
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,
+    _poolOverwhelmedArchivist,
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,
     _poolPantlazaSunFavored,
     _poolPatagiaGolem,
+    _poolPathToTheFestival,
     _poolPathbreakerIbex,
     _poolPendrellDrake,
     _poolPestControl,
@@ -878,6 +885,7 @@ const shard: CardShard = {
     _poolSusurianVoidborn,
     _poolSwordOfOnceAndFuture,
     _poolTalonrend,
+    _poolTappingAtTheWindow,
     _poolTeemingDragonstorm,
     _poolTempleOfAbandon,
     _poolTerritorialBaloth,

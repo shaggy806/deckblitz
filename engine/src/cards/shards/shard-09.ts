@@ -79,6 +79,7 @@ import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
 import _poolCaptainNghathrod from "../pool/captain-nghathrod.js";
 import _poolCatlikeCuriosity from "../pool/catlike-curiosity.js";
+import _poolChaplainOfAlms from "../pool/chaplain-of-alms.js";
 import _poolChargeTheSanctum from "../pool/charge-the-sanctum.js";
 import _poolCharmingPrince from "../pool/charming-prince.js";
 import _poolChromeCompanion from "../pool/chrome-companion.js";
@@ -401,6 +402,7 @@ import _poolStinkweedImp from "../pool/stinkweed-imp.js";
 import _poolStirringHonormancer from "../pool/stirring-honormancer.js";
 import _poolStoicGroveGuide from "../pool/stoic-grove-guide.js";
 import _poolStonewoodInvoker from "../pool/stonewood-invoker.js";
+import _poolStormSkreelix from "../pool/storm-skreelix.js";
 import _poolStormcarvedCoast from "../pool/stormcarved-coast.js";
 import _poolStormsplitter from "../pool/stormsplitter.js";
 import _poolStormwatchEagle from "../pool/stormwatch-eagle.js";
@@ -455,10 +457,12 @@ import _poolVenerableLammasu from "../pool/venerable-lammasu.js";
 import _poolVeteranBeastrider from "../pool/veteran-beastrider.js";
 import _poolVeteransSidearm from "../pool/veterans-sidearm.js";
 import _poolVibraniumStrikeGauntlets from "../pool/vibranium-strike-gauntlets.js";
+import _poolVillageReavers from "../pool/village-reavers.js";
 import _poolVioletPall from "../pool/violet-pall.js";
 import _poolVitalize from "../pool/vitalize.js";
 import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
+import _poolVoldarenAmbusher from "../pool/voldaren-ambusher.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
@@ -580,6 +584,7 @@ const shard: CardShard = {
     _poolCaptainLanneryStorm,
     _poolCaptainNghathrod,
     _poolCatlikeCuriosity,
+    _poolChaplainOfAlms,
     _poolChargeTheSanctum,
     _poolCharmingPrince,
     _poolChromeCompanion,
@@ -902,6 +907,7 @@ const shard: CardShard = {
     _poolStirringHonormancer,
     _poolStoicGroveGuide,
     _poolStonewoodInvoker,
+    _poolStormSkreelix,
     _poolStormcarvedCoast,
     _poolStormsplitter,
     _poolStormwatchEagle,
@@ -956,10 +962,12 @@ const shard: CardShard = {
     _poolVeteranBeastrider,
     _poolVeteransSidearm,
     _poolVibraniumStrikeGauntlets,
+    _poolVillageReavers,
     _poolVioletPall,
     _poolVitalize,
     _poolVodalianMage,
     _poolVolcanicStrength,
+    _poolVoldarenAmbusher,
     _poolWallOfDenial,
     _poolWarBehemoth,
     _poolWarEffort,

@@ -1,0 +1,1342 @@
+{
+ "batch": "B108",
+ "status": "complete",
+ "ranks": "Innistrad: Midnight Hunt and Midnight Hunt Commander (MID, MIC, 2021-09-24): the rest of each set",
+ "authored": [
+  {
+   "name": "Ambitious Farmhand",
+   "files": [
+    "engine/src/cards/pool/ambitious-farmhand.ts",
+    "engine/src/cards/pool/seasoned-cathar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Odric's Outrider",
+   "files": [
+    "engine/src/cards/pool/odrics-outrider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnhart Wardens",
+   "files": [
+    "engine/src/cards/pool/dawnhart-wardens.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dawnhart Mentor",
+   "files": [
+    "engine/src/cards/pool/dawnhart-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brimstone Vandal",
+   "files": [
+    "engine/src/cards/pool/brimstone-vandal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duelcraft Trainer",
+   "files": [
+    "engine/src/cards/pool/duelcraft-trainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Candlegrove Witch",
+   "files": [
+    "engine/src/cards/pool/candlegrove-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firmament Sage",
+   "files": [
+    "engine/src/cards/pool/firmament-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunrise Cavalier",
+   "files": [
+    "engine/src/cards/pool/sunrise-cavalier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Candlelit Cavalry",
+   "files": [
+    "engine/src/cards/pool/candlelit-cavalry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ritual Guardian",
+   "files": [
+    "engine/src/cards/pool/ritual-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalwart Pathlighter",
+   "files": [
+    "engine/src/cards/pool/stalwart-pathlighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fading Hope",
+   "files": [
+    "engine/src/cards/pool/fading-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geistwave",
+   "files": [
+    "engine/src/cards/pool/geistwave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Play with Fire",
+   "files": [
+    "engine/src/cards/pool/play-with-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crawl from the Cellar",
+   "files": [
+    "engine/src/cards/pool/crawl-from-the-cellar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slogurk, the Overslime",
+   "files": [
+    "engine/src/cards/pool/slogurk-the-overslime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borrowed Time",
+   "files": [
+    "engine/src/cards/pool/borrowed-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arrogant Outlaw",
+   "files": [
+    "engine/src/cards/pool/arrogant-outlaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falcon Abomination",
+   "files": [
+    "engine/src/cards/pool/falcon-abomination.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briarbridge Tracker",
+   "files": [
+    "engine/src/cards/pool/briarbridge-tracker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overwhelmed Archivist",
+   "files": [
+    "engine/src/cards/pool/overwhelmed-archivist.ts",
+    "engine/src/cards/pool/archive-haunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beloved Beggar",
+   "files": [
+    "engine/src/cards/pool/beloved-beggar.ts",
+    "engine/src/cards/pool/generous-soul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Covert Cutpurse",
+   "files": [
+    "engine/src/cards/pool/covert-cutpurse.ts",
+    "engine/src/cards/pool/covetous-geist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaplain of Alms",
+   "files": [
+    "engine/src/cards/pool/chaplain-of-alms.ts",
+    "engine/src/cards/pool/chapel-shieldgeist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonrager's Slash",
+   "files": [
+    "engine/src/cards/pool/moonragers-slash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathbonnet Sprout",
+   "files": [
+    "engine/src/cards/pool/deathbonnet-sprout.ts",
+    "engine/src/cards/pool/deathbonnet-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diregraf Horde",
+   "files": [
+    "engine/src/cards/pool/diregraf-horde.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghoulcaller's Harvest",
+   "files": [
+    "engine/src/cards/pool/ghoulcallers-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Clinging Webs",
+   "files": [
+    "engine/src/cards/pool/curse-of-clinging-webs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burn Down the House",
+   "files": [
+    "engine/src/cards/pool/burn-down-the-house.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodline Culling",
+   "files": [
+    "engine/src/cards/pool/bloodline-culling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abandon the Post",
+   "files": [
+    "engine/src/cards/pool/abandon-the-post.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defenestrate",
+   "files": [
+    "engine/src/cards/pool/defenestrate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crossroads Candleguide",
+   "files": [
+    "engine/src/cards/pool/crossroads-candleguide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lunar Frenzy",
+   "files": [
+    "engine/src/cards/pool/lunar-frenzy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patrician Geist",
+   "files": [
+    "engine/src/cards/pool/patrician-geist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avacyn's Memorial",
+   "files": [
+    "engine/src/cards/pool/avacyns-memorial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Winterthorn Blessing",
+   "files": [
+    "engine/src/cards/pool/winterthorn-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mystic Skull",
+   "files": [
+    "engine/src/cards/pool/mystic-skull.ts",
+    "engine/src/cards/pool/mystic-monstrosity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hound Tamer",
+   "files": [
+    "engine/src/cards/pool/hound-tamer.ts",
+    "engine/src/cards/pool/untamed-pup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Covetous Castaway",
+   "files": [
+    "engine/src/cards/pool/covetous-castaway.ts",
+    "engine/src/cards/pool/ghostly-castigator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grizzly Ghoul",
+   "files": [
+    "engine/src/cards/pool/grizzly-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bereaved Survivor",
+   "files": [
+    "engine/src/cards/pool/bereaved-survivor.ts",
+    "engine/src/cards/pool/dauntless-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gavony Dawnguard",
+   "files": [
+    "engine/src/cards/pool/gavony-dawnguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tovolar's Huntmaster",
+   "files": [
+    "engine/src/cards/pool/tovolars-huntmaster.ts",
+    "engine/src/cards/pool/tovolars-packleader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falkenrath Pit Fighter",
+   "files": [
+    "engine/src/cards/pool/falkenrath-pit-fighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dire-Strain Rampage",
+   "files": [
+    "engine/src/cards/pool/dire-strain-rampage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unnatural Moonrise",
+   "files": [
+    "engine/src/cards/pool/unnatural-moonrise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consuming Blob",
+   "files": [
+    "engine/src/cards/pool/consuming-blob.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jerren, Corrupted Bishop",
+   "files": [
+    "engine/src/cards/pool/jerren-corrupted-bishop.ts",
+    "engine/src/cards/pool/ormendahl-the-corrupter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stolen Vitality",
+   "files": [
+    "engine/src/cards/pool/stolen-vitality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pack's Betrayal",
+   "files": [
+    "engine/src/cards/pool/packs-betrayal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graveyard Trespasser",
+   "files": [
+    "engine/src/cards/pool/graveyard-trespasser.ts",
+    "engine/src/cards/pool/graveyard-glutton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contortionist Troupe",
+   "files": [
+    "engine/src/cards/pool/contortionist-troupe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neonate's Rush",
+   "files": [
+    "engine/src/cards/pool/neonates-rush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heirloom Mirror",
+   "files": [
+    "engine/src/cards/pool/heirloom-mirror.ts",
+    "engine/src/cards/pool/inherited-fiend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Search Party Captain",
+   "files": [
+    "engine/src/cards/pool/search-party-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voldaren Stinger",
+   "files": [
+    "engine/src/cards/pool/voldaren-stinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stuffed Bear",
+   "files": [
+    "engine/src/cards/pool/stuffed-bear.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Falkenrath Perforator",
+   "files": [
+    "engine/src/cards/pool/falkenrath-perforator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loyal Gryff",
+   "files": [
+    "engine/src/cards/pool/loyal-gryff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mounted Dreadknight",
+   "files": [
+    "engine/src/cards/pool/mounted-dreadknight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purifying Dragon",
+   "files": [
+    "engine/src/cards/pool/purifying-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ritual of Hope",
+   "files": [
+    "engine/src/cards/pool/ritual-of-hope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mourning Patrol",
+   "files": [
+    "engine/src/cards/pool/mourning-patrol.ts",
+    "engine/src/cards/pool/morning-apparition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galedrifter",
+   "files": [
+    "engine/src/cards/pool/galedrifter.ts",
+    "engine/src/cards/pool/waildrifter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Somberwald Beastmaster",
+   "files": [
+    "engine/src/cards/pool/somberwald-beastmaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blessed Defiance",
+   "files": [
+    "engine/src/cards/pool/blessed-defiance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bramble Armor",
+   "files": [
+    "engine/src/cards/pool/bramble-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devoted Grafkeeper",
+   "files": [
+    "engine/src/cards/pool/devoted-grafkeeper.ts",
+    "engine/src/cards/pool/departed-soulkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Famished Foragers",
+   "files": [
+    "engine/src/cards/pool/famished-foragers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flare of Faith",
+   "files": [
+    "engine/src/cards/pool/flare-of-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fleshtaker",
+   "files": [
+    "engine/src/cards/pool/fleshtaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gavony Silversmith",
+   "files": [
+    "engine/src/cards/pool/gavony-silversmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hedgewitch's Mask",
+   "files": [
+    "engine/src/cards/pool/hedgewitchs-mask.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Homestead Courage",
+   "files": [
+    "engine/src/cards/pool/homestead-courage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kurbis, Harvest Celebrant",
+   "files": [
+    "engine/src/cards/pool/kurbis-harvest-celebrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nebelgast Intruder",
+   "files": [
+    "engine/src/cards/pool/nebelgast-intruder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ominous Roost",
+   "files": [
+    "engine/src/cards/pool/ominous-roost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Organ Hoarder",
+   "files": [
+    "engine/src/cards/pool/organ-hoarder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path to the Festival",
+   "files": [
+    "engine/src/cards/pool/path-to-the-festival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Rotbelly",
+   "files": [
+    "engine/src/cards/pool/ravenous-rotbelly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secrets of the Key",
+   "files": [
+    "engine/src/cards/pool/secrets-of-the-key.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul-Guide Gryff",
+   "files": [
+    "engine/src/cards/pool/soul-guide-gryff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm the Festival",
+   "files": [
+    "engine/src/cards/pool/storm-the-festival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tapping at the Window",
+   "files": [
+    "engine/src/cards/pool/tapping-at-the-window.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bladestitched Skaab",
+   "files": [
+    "engine/src/cards/pool/bladestitched-skaab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cathar's Call",
+   "files": [
+    "engine/src/cards/pool/cathars-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smoldering Egg",
+   "files": [
+    "engine/src/cards/pool/smoldering-egg.ts",
+    "engine/src/cards/pool/ashmouth-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Village Watch",
+   "files": [
+    "engine/src/cards/pool/village-watch.ts",
+    "engine/src/cards/pool/village-reavers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigarda, Champion of Light",
+   "files": [
+    "engine/src/cards/pool/sigarda-champion-of-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flip the Switch",
+   "files": [
+    "engine/src/cards/pool/flip-the-switch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duel for Dominance",
+   "files": [
+    "engine/src/cards/pool/duel-for-dominance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Startle",
+   "files": [
+    "engine/src/cards/pool/startle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hobbling Zombie",
+   "files": [
+    "engine/src/cards/pool/hobbling-zombie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "No Way Out",
+   "files": [
+    "engine/src/cards/pool/no-way-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonveil Regent",
+   "files": [
+    "engine/src/cards/pool/moonveil-regent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brutal Cathar",
+   "files": [
+    "engine/src/cards/pool/brutal-cathar.ts",
+    "engine/src/cards/pool/moonrage-brute.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grafted Identity",
+   "files": [
+    "engine/src/cards/pool/grafted-identity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defend the Celestus",
+   "files": [
+    "engine/src/cards/pool/defend-the-celestus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Morkrut Behemoth",
+   "files": [
+    "engine/src/cards/pool/morkrut-behemoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigardian Savior",
+   "files": [
+    "engine/src/cards/pool/sigardian-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise of the Ants",
+   "files": [
+    "engine/src/cards/pool/rise-of-the-ants.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Obsessive Astronomer",
+   "files": [
+    "engine/src/cards/pool/obsessive-astronomer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Olivia's Midnight Ambush",
+   "files": [
+    "engine/src/cards/pool/olivias-midnight-ambush.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestus Sanctifier",
+   "files": [
+    "engine/src/cards/pool/celestus-sanctifier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow Kin",
+   "files": [
+    "engine/src/cards/pool/shadow-kin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kessig Naturalist",
+   "files": [
+    "engine/src/cards/pool/kessig-naturalist.ts",
+    "engine/src/cards/pool/lord-of-the-ulvenwald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necrosynthesis",
+   "files": [
+    "engine/src/cards/pool/necrosynthesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Willow Geist",
+   "files": [
+    "engine/src/cards/pool/willow-geist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stromkirk Bloodthief",
+   "files": [
+    "engine/src/cards/pool/stromkirk-bloodthief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Infusion",
+   "files": [
+    "engine/src/cards/pool/arcane-infusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eccentric Farmer",
+   "files": [
+    "engine/src/cards/pool/eccentric-farmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rotten Reunion",
+   "files": [
+    "engine/src/cards/pool/rotten-reunion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voldaren Ambusher",
+   "files": [
+    "engine/src/cards/pool/voldaren-ambusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ecstatic Awakener",
+   "files": [
+    "engine/src/cards/pool/ecstatic-awakener.ts",
+    "engine/src/cards/pool/awoken-demon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm Skreelix",
+   "files": [
+    "engine/src/cards/pool/storm-skreelix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hungry for More",
+   "files": [
+    "engine/src/cards/pool/hungry-for-more.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodtithe Collector",
+   "files": [
+    "engine/src/cards/pool/bloodtithe-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bat Whisperer",
+   "files": [
+    "engine/src/cards/pool/bat-whisperer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunstreak Phoenix",
+   "files": [
+    "engine/src/cards/pool/sunstreak-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Component Collector",
+   "files": [
+    "engine/src/cards/pool/component-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revenge of the Drowned",
+   "files": [
+    "engine/src/cards/pool/revenge-of-the-drowned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Might of the Old Ways",
+   "files": [
+    "engine/src/cards/pool/might-of-the-old-ways.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver Bolt",
+   "files": [
+    "engine/src/cards/pool/silver-bolt.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Sunset Revelry",
+   "needs": [
+    "condition:opponent-more-cards-in-hand",
+    "condition:opponent-more-life"
+   ],
+   "why": "if an opponent has more life / more creatures / more cards in hand than you (family condition:opponent-more-cards-in-hand)"
+  },
+  {
+   "name": "Primal Adversary",
+   "needs": [
+    "decision:pay-cost-up-to-n-times"
+   ],
+   "why": "pay {1}{G} any number of times"
+  },
+  {
+   "name": "Diregraf Rebirth",
+   "needs": [
+    "cost:cost-reduction-creatures-died-this-turn"
+   ],
+   "why": "costs {1} less for each creature that died this turn (any controller)"
+  },
+  {
+   "name": "Curse of Leeches",
+   "needs": [
+    "replacement:as-transforms",
+    "effect:curse-attach-player"
+   ],
+   "why": "as this transforms into Curse of Leeches, attach it to a player"
+  },
+  {
+   "name": "Candletrap",
+   "needs": [
+    "replacement:prevent-combat-damage-by-filter"
+   ],
+   "why": "prevent all combat damage that would be dealt by enchanted creature"
+  },
+  {
+   "name": "Ludevic, Necrogenius",
+   "needs": [
+    "cost:exile-x-cards-cost",
+    "effect:become-copy-of-card",
+    "replacement:as-transforms"
+   ],
+   "why": "exile X creature cards as a cost; as it transforms, it becomes a copy of a creature card exiled with it"
+  },
+  {
+   "name": "Flame Channeler",
+   "needs": [
+    "trigger:deals-damage-once-per-event",
+    "effect:spell-as-damage-source"
+   ],
+   "why": "when a spell you control deals damage, once per event"
+  },
+  {
+   "name": "Thraben Exorcism",
+   "needs": [
+    "filter:has-disturb"
+   ],
+   "why": "exile target creature with disturb or a Spirit (family filter:transformed)"
+  },
+  {
+   "name": "Sigarda's Vanguard",
+   "needs": [
+    "decision:choose-any-number-different-powers"
+   ],
+   "why": "any number of creatures with different powers"
+  },
+  {
+   "name": "Celebrate the Harvest",
+   "needs": [
+    "effect:count-distinct-powers"
+   ],
+   "why": "costs {1} less for each different power among creatures you control"
+  },
+  {
+   "name": "Visions of Duplicity",
+   "needs": [
+    "effect:exchange-control",
+    "cost:flashback-cost-reduction"
+   ],
+   "why": "exchange control of two target creatures; flashback costs less by commander mana value"
+  },
+  {
+   "name": "Enduring Angel",
+   "needs": [
+    "replacement:new-event-replacements",
+    "static:pt-per-life-total",
+    "effect:double-life-total"
+   ],
+   "why": "if your life total would be reduced to 0, transform it instead and your life becomes 3; P/T equal to life; double your life total"
+  },
+  {
+   "name": "Tainted Adversary",
+   "needs": [
+    "decision:pay-cost-up-to-n-times"
+   ],
+   "why": "pay {2}{B} any number of times, then a reflexive trigger scaled by it"
+  },
+  {
+   "name": "Turn the Earth",
+   "needs": [
+    "effect:shuffle-graveyard-targets-into-library"
+   ],
+   "why": "shuffle up to three target cards from graveyards into their owners' libraries"
+  },
+  {
+   "name": "Seize the Storm",
+   "needs": [
+    "amount:count-in-exile",
+    "bug:cda-sum-of-counts"
+   ],
+   "why": "a token with P/T equal to instants and sorceries in your graveyard plus cards you own in exile with flashback"
+  },
+  {
+   "name": "Jack-o'-Lantern",
+   "needs": [
+    "effect:mana-ability-graveyard-exile-cost"
+   ],
+   "why": "{1}, exile this card from your graveyard: add one mana — a mana ability from the graveyard"
+  },
+  {
+   "name": "Hallowed Respite",
+   "needs": [
+    "effect:flicker-return-then"
+   ],
+   "why": "if it entered under your control, a counter; otherwise tap it"
+  },
+  {
+   "name": "Corpse Cobble",
+   "needs": [
+    "effect:sacrifice-any-number",
+    "amount:total-power-sacrificed-as-cost"
+   ],
+   "why": "sacrifice any number of creatures as a cost; a token with their total power (family effect:sacrifice-any-number)"
+  },
+  {
+   "name": "Wake to Slaughter",
+   "needs": [
+    "effect:opponent-chooses-among-targets"
+   ],
+   "why": "an opponent chooses one of the targets; it goes to hand, the other to the battlefield (family effect:choices-by-other-players)"
+  },
+  {
+   "name": "Burn the Accursed",
+   "needs": [
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "if that creature would die this turn, exile it instead"
+  },
+  {
+   "name": "Baneblade Scoundrel",
+   "needs": [
+    "filter:blocking-trigger-object"
+   ],
+   "why": "each creature blocking it gets -1/-1; a creature blocking it dies"
+  },
+  {
+   "name": "Harvesttide Sentry",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "can't be blocked by creatures with power 2 or less this turn"
+  },
+  {
+   "name": "Ghouls' Night Out",
+   "needs": [
+    "effect:choose-per-player-untargeted"
+   ],
+   "why": "for each player, choose a creature card in that player's graveyard"
+  },
+  {
+   "name": "Lynde, Cheerful Tormentor",
+   "needs": [
+    "effect:curse-attach-player"
+   ],
+   "why": "return a Curse attached to you; attach a Curse to an opponent"
+  },
+  {
+   "name": "Visions of Dread",
+   "needs": [
+    "effect:opponent-chooses-from-graveyard",
+    "cost:flashback-cost-reduction",
+    "effect:amount-commander-mana-value-battlefield-or-command-zone"
+   ],
+   "why": "target opponent puts a creature or planeswalker card of their choice from their graveyard onto the battlefield; flashback costs less by commander mana value"
+  },
+  {
+   "name": "Arlinn, the Pack's Hope",
+   "needs": [
+    "effect:flash-permission-this-turn",
+    "effect:enters-with-counter-until-your-next-turn"
+   ],
+   "why": "until your next turn, cast creatures as though they had flash and they enter with an extra counter (family effect:delayed-trigger-until-your-next-turn)"
+  },
+  {
+   "name": "Vadrik, Astral Archmage",
+   "needs": [
+    "cost:cost-reduction-source-power"
+   ],
+   "why": "instant and sorcery spells cost {X} less, X this creature's power"
+  },
+  {
+   "name": "Bloodthirsty Adversary",
+   "needs": [
+    "decision:pay-cost-up-to-n-times",
+    "effect:reflexive-target-count-from-payments"
+   ],
+   "why": "pay {2}{R} any number of times; that many targets (family effect:reflexive-per-counters-placed)"
+  },
+  {
+   "name": "Visions of Dominance",
+   "needs": [
+    "cost:flashback-cost-reduction",
+    "effect:amount-commander-mana-value-battlefield-or-command-zone"
+   ],
+   "why": "flashback costs {X} less, X a commander's mana value"
+  },
+  {
+   "name": "Curse of Obsession",
+   "needs": [
+    "trigger:enchanted-player-step-begins"
+   ],
+   "why": "at the beginning of enchanted player's draw step / end step (family static:static-over-enchanted-player)"
+  },
+  {
+   "name": "Wall of Mourning",
+   "needs": [
+    "effect:exile-top-face-down-linked"
+   ],
+   "why": "exile the top card face down, unlooked at; return one at random"
+  },
+  {
+   "name": "Rem Karolus, Stalwart Slayer",
+   "needs": [
+    "filter:damage-source-is-spell",
+    "replacement:prevent-damage-to-you-and-your-other-permanents"
+   ],
+   "why": "if a spell would deal damage to you or another permanent you control, prevent it (family replacement:damage-modification)"
+  },
+  {
+   "name": "Curse of Shaken Faith",
+   "needs": [
+    "trigger:enchanted-player-casts",
+    "trigger:nth-spell-of-turn-any-player",
+    "trigger:copy-spell-trigger"
+   ],
+   "why": "whenever enchanted player casts a spell other than their first each turn (family mechanic:curses)"
+  },
+  {
+   "name": "Hostile Hostel",
+   "needs": [
+    "amount:exiled-with-source-count"
+   ],
+   "why": "+1/+1 for each card exiled with it (family condition:exiled-with-source-count)"
+  },
+  {
+   "name": "Intrepid Adversary",
+   "needs": [
+    "decision:pay-cost-up-to-n-times"
+   ],
+   "why": "pay {1}{W} any number of times"
+  },
+  {
+   "name": "Curse of Silence",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "as it enters, choose a card name"
+  },
+  {
+   "name": "Geistflame Reservoir",
+   "needs": [
+    "cost:remove-x-counters-cost"
+   ],
+   "why": "remove X charge counters as a cost"
+  },
+  {
+   "name": "Sungold Sentinel",
+   "needs": [
+    "keyword:hexproof-from-colors",
+    "decision:choose-color-on-resolution"
+   ],
+   "why": "gains hexproof from the color of your choice"
+  },
+  {
+   "name": "Locked in the Cemetery",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "enchanted creature doesn't untap"
+  },
+  {
+   "name": "Moorland Rescuer",
+   "needs": [
+    "decision:choose-total-power-subset"
+   ],
+   "why": "return any number of creature cards with total power X or less"
+  },
+  {
+   "name": "Celestial Judgment",
+   "needs": [
+    "decision:choose-any-number-different-powers"
+   ],
+   "why": "for each different power, choose a creature with that power"
+  },
+  {
+   "name": "Rootcoil Creeper",
+   "needs": [
+    "target:card-in-exile",
+    "condition:filter-has-flashback"
+   ],
+   "why": "return target card with flashback you own from exile (family effect:linked-exiled-card)"
+  },
+  {
+   "name": "Phantom Carriage",
+   "needs": [
+    "condition:filter-has-flashback-or-disturb"
+   ],
+   "why": "search for a card with flashback or disturb (family condition:filter-has-tap-activated-ability)"
+  },
+  {
+   "name": "Spectral Adversary",
+   "needs": [
+    "decision:pay-cost-up-to-n-times"
+   ],
+   "why": "pay {1}{U} any number of times; that many counters and targets"
+  },
+  {
+   "name": "Can't Stay Away",
+   "needs": [
+    "replacement:grant-exile-if-would-die"
+   ],
+   "why": "if it would die, exile it instead (family replacement:target-exile-if-dies-this-turn)"
+  },
+  {
+   "name": "Light Up the Night",
+   "needs": [
+    "cost:flashback-remove-x-loyalty-among"
+   ],
+   "why": "flashback by removing X loyalty counters from among planeswalkers you control (family cost:flashback-exile-x-cost)"
+  },
+  {
+   "name": "Prowling Geistcatcher",
+   "needs": [
+    "effect:return-linked-under-your-control"
+   ],
+   "why": "return the exiled cards under your control (family effect:linked-exile-return)"
+  },
+  {
+   "name": "Sigardian Zealot",
+   "needs": [
+    "decision:choose-any-number-different-powers"
+   ],
+   "why": "any number of creatures with different powers (family decision:choose-any-number-different-names)"
+  },
+  {
+   "name": "Curse of Surveillance",
+   "needs": [
+    "trigger:enchanted-player-step-begins",
+    "amount:curses-attached-to-player"
+   ],
+   "why": "at the beginning of enchanted player's upkeep; Curses attached to that player (family trigger:attached-controller-step-begins)"
+  },
+  {
+   "name": "Curse of Unbinding",
+   "needs": [
+    "trigger:enchanted-player-step-begins"
+   ],
+   "why": "at the beginning of enchanted player's upkeep (family trigger:attached-controller-step-begins)"
+  },
+  {
+   "name": "Curse of Conformity",
+   "needs": [
+    "static:static-over-enchanted-player"
+   ],
+   "why": "nonland, nontoken permanents enchanted player controls"
+  },
+  {
+   "name": "Dennick, Pious Apprentice",
+   "needs": [
+    "static:graveyard-cards-untargetable"
+   ],
+   "why": "cards in graveyards can't be the targets of spells or abilities (family static:cant-be-targeted-by-filter)"
+  },
+  {
+   "name": "Howl of the Hunt",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "untap that creature (the enchanted one)"
+  },
+  {
+   "name": "Vengeful Strangler",
+   "needs": [
+    "effect:effect-on-enchanted-permanent",
+    "effect:attached-controller-player-scope"
+   ],
+   "why": "enchanted permanent's controller sacrifices a nonland permanent, then loses 1 life (family effect:player-scope-extensions)"
+  },
+  {
+   "name": "Unblinking Observer",
+   "needs": [
+    "cost:spend-only-disturb-cost"
+   ],
+   "why": "spend this mana only to pay a disturb cost (family cost:mana-spending-rules)"
+  },
+  {
+   "name": "Shipwreck Sifters",
+   "needs": [
+    "filter:has-disturb"
+   ],
+   "why": "whenever you discard a Spirit card or a card with disturb (family condition:filter-card-property-clauses)"
+  },
+  {
+   "name": "Visions of Ruin",
+   "needs": [
+    "cost:flashback-cost-reduction"
+   ],
+   "why": "flashback costs less by your commander's mana value"
+  },
+  {
+   "name": "Gorex, the Tombshell",
+   "needs": [
+    "cost:exile-from-graveyard-additional",
+    "effect:random-card-from-linked-exile"
+   ],
+   "why": "exile any number of graveyard cards for {2} less each; return a random card exiled with it"
+  }
+ ]
+}

@@ -15,6 +15,7 @@ import _poolAngelicWall from "../pool/angelic-wall.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
 import _poolArcaneDenial from "../pool/arcane-denial.js";
+import _poolArcaneInfusion from "../pool/arcane-infusion.js";
 import _poolArgivianAvenger from "../pool/argivian-avenger.js";
 import _poolArmedAssailant from "../pool/armed-assailant.js";
 import _poolArmoredArmadillo from "../pool/armored-armadillo.js";
@@ -41,6 +42,7 @@ import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBleedingEffect from "../pool/bleeding-effect.js";
+import _poolBlessedDefiance from "../pool/blessed-defiance.js";
 import _poolBlightMound from "../pool/blight-mound.js";
 import _poolBlightedBlackthorn from "../pool/blighted-blackthorn.js";
 import _poolBloodBurglar from "../pool/blood-burglar.js";
@@ -166,9 +168,11 @@ import _poolFurnaceStrider from "../pool/furnace-strider.js";
 import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
+import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
+import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
 import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
@@ -189,6 +193,7 @@ import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
 import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
+import _poolHobblingZombie from "../pool/hobbling-zombie.js";
 import _poolHollowhengeBeast from "../pool/hollowhenge-beast.js";
 import _poolHonorWornShaku from "../pool/honor-worn-shaku.js";
 import _poolHurloonShaman from "../pool/hurloon-shaman.js";
@@ -366,6 +371,7 @@ import _poolSlitherborePathway from "../pool/slitherbore-pathway.js";
 import _poolSmileAtDeath from "../pool/smile-at-death.js";
 import _poolSnowCoveredIsland from "../pool/snow-covered-island.js";
 import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
+import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
 import _poolSorinTheMirthless from "../pool/sorin-the-mirthless.js";
 import _poolSoulRead from "../pool/soul-read.js";
@@ -453,6 +459,7 @@ import _poolWhiteAuracite from "../pool/white-auracite.js";
 import _poolWhiteShieldCrusader from "../pool/white-shield-crusader.js";
 import _poolWildCelebrants from "../pool/wild-celebrants.js";
 import _poolWildElephant from "../pool/wild-elephant.js";
+import _poolWinterthornBlessing from "../pool/winterthorn-blessing.js";
 import _poolWitherbloomCampus from "../pool/witherbloom-campus.js";
 import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
 import _poolWitheredWretch from "../pool/withered-wretch.js";
@@ -484,6 +491,7 @@ const shard: CardShard = {
     _poolApexAltisaur,
     _poolApexWitchstalker,
     _poolArcaneDenial,
+    _poolArcaneInfusion,
     _poolArgivianAvenger,
     _poolArmedAssailant,
     _poolArmoredArmadillo,
@@ -510,6 +518,7 @@ const shard: CardShard = {
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
     _poolBleedingEffect,
+    _poolBlessedDefiance,
     _poolBlightMound,
     _poolBlightedBlackthorn,
     _poolBloodBurglar,
@@ -635,9 +644,11 @@ const shard: CardShard = {
     _poolGalinasKnight,
     _poolGallantCitizen,
     _poolGarruksUprising,
+    _poolGenerousSoul,
     _poolGeralfVisionaryStitcher,
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
+    _poolGhoulcallersHarvest,
     _poolGiantAnkheg,
     _poolGlaringFleshraker,
     _poolGlimmerburst,
@@ -658,6 +669,7 @@ const shard: CardShard = {
     _poolHelionaut,
     _poolHeroOfTheDunes,
     _poolHiddenCourtyard,
+    _poolHobblingZombie,
     _poolHollowhengeBeast,
     _poolHonorWornShaku,
     _poolHurloonShaman,
@@ -835,6 +847,7 @@ const shard: CardShard = {
     _poolSmileAtDeath,
     _poolSnowCoveredIsland,
     _poolSoldierOfTheGreyHost,
+    _poolSomberwaldBeastmaster,
     _poolSongOfTotentanz,
     _poolSorinTheMirthless,
     _poolSoulRead,
@@ -922,6 +935,7 @@ const shard: CardShard = {
     _poolWhiteShieldCrusader,
     _poolWildCelebrants,
     _poolWildElephant,
+    _poolWinterthornBlessing,
     _poolWitherbloomCampus,
     _poolWitherbloomTheBalancer,
     _poolWitheredWretch,

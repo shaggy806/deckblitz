@@ -101,6 +101,7 @@ import _poolCosmicCrucible from "../pool/cosmic-crucible.js";
 import _poolCountersculpt from "../pool/countersculpt.js";
 import _poolCountlessGearsRenegade from "../pool/countless-gears-renegade.js";
 import _poolCoverOfDarkness from "../pool/cover-of-darkness.js";
+import _poolCovetousCastaway from "../pool/covetous-castaway.js";
 import _poolCrashOfRhinos from "../pool/crash-of-rhinos.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
@@ -109,6 +110,7 @@ import _poolCrumblingAshes from "../pool/crumbling-ashes.js";
 import _poolCrush from "../pool/crush.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
+import _poolDauntlessAvenger from "../pool/dauntless-avenger.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
 import _poolDauthiMercenary from "../pool/dauthi-mercenary.js";
 import _poolDauthiVoidwalker from "../pool/dauthi-voidwalker.js";
@@ -162,6 +164,8 @@ import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFirmamentSage from "../pool/firmament-sage.js";
 import _poolFissure from "../pool/fissure.js";
+import _poolFlareOfFaith from "../pool/flare-of-faith.js";
+import _poolFleshtaker from "../pool/fleshtaker.js";
 import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
@@ -171,6 +175,7 @@ import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
+import _poolGavonyDawnguard from "../pool/gavony-dawnguard.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
@@ -279,6 +284,7 @@ import _poolMoltensteelDragon from "../pool/moltensteel-dragon.js";
 import _poolMomentOfCraving from "../pool/moment-of-craving.js";
 import _poolMonasteryMentor from "../pool/monastery-mentor.js";
 import _poolMooglesValor from "../pool/moogles-valor.js";
+import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMysticSnake from "../pool/mystic-snake.js";
@@ -426,6 +432,7 @@ import _poolSuddenStrike from "../pool/sudden-strike.js";
 import _poolSultaiAscendancy from "../pool/sultai-ascendancy.js";
 import _poolSunCollaredRaptor from "../pool/sun-collared-raptor.js";
 import _poolSunkenHollow from "../pool/sunken-hollow.js";
+import _poolSunstreakPhoenix from "../pool/sunstreak-phoenix.js";
 import _poolSuperSkrull from "../pool/super-skrull.js";
 import _poolSureshotSower from "../pool/sureshot-sower.js";
 import _poolSurvivorOfKorlis from "../pool/survivor-of-korlis.js";
@@ -491,6 +498,7 @@ import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
 import _poolVerdantSunsAvatar from "../pool/verdant-suns-avatar.js";
 import _poolVileMutilator from "../pool/vile-mutilator.js";
+import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
 import _poolViridianZealot from "../pool/viridian-zealot.js";
 import _poolVisionarysDance from "../pool/visionarys-dance.js";
@@ -630,6 +638,7 @@ const shard: CardShard = {
     _poolCountersculpt,
     _poolCountlessGearsRenegade,
     _poolCoverOfDarkness,
+    _poolCovetousCastaway,
     _poolCrashOfRhinos,
     _poolCrestedSunmare,
     _poolCrosswayTroublemakers,
@@ -638,6 +647,7 @@ const shard: CardShard = {
     _poolCrush,
     _poolCrystalDragon,
     _poolDanithaNewBenaliasLight,
+    _poolDauntlessAvenger,
     _poolDauntlessScrapbot,
     _poolDauthiMercenary,
     _poolDauthiVoidwalker,
@@ -691,6 +701,8 @@ const shard: CardShard = {
     _poolFiresOfUndeath,
     _poolFirmamentSage,
     _poolFissure,
+    _poolFlareOfFaith,
+    _poolFleshtaker,
     _poolFlourishingGrapple,
     _poolFlowstoneStrike,
     _poolFoggySwampHunters,
@@ -700,6 +712,7 @@ const shard: CardShard = {
     _poolFurnaceSpirit,
     _poolGaladrielGiftGiver,
     _poolGarrisonCat,
+    _poolGavonyDawnguard,
     _poolGenerousRevival,
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
@@ -808,6 +821,7 @@ const shard: CardShard = {
     _poolMomentOfCraving,
     _poolMonasteryMentor,
     _poolMooglesValor,
+    _poolMorningApparition,
     _poolMoroii,
     _poolMoxJasper,
     _poolMysticSnake,
@@ -955,6 +969,7 @@ const shard: CardShard = {
     _poolSultaiAscendancy,
     _poolSunCollaredRaptor,
     _poolSunkenHollow,
+    _poolSunstreakPhoenix,
     _poolSuperSkrull,
     _poolSureshotSower,
     _poolSurvivorOfKorlis,
@@ -1020,6 +1035,7 @@ const shard: CardShard = {
     _poolVenusTornBetweenWorlds,
     _poolVerdantSunsAvatar,
     _poolVileMutilator,
+    _poolVillageWatch,
     _poolViridianAcolyte,
     _poolViridianZealot,
     _poolVisionarysDance,

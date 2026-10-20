@@ -355,6 +355,7 @@ import _poolScurrilousSentry from "../pool/scurrilous-sentry.js";
 import _poolScuzzbackMarauders from "../pool/scuzzback-marauders.js";
 import _poolSearingSpear from "../pool/searing-spear.js";
 import _poolSeasonedMarshal from "../pool/seasoned-marshal.js";
+import _poolSecretsOfTheKey from "../pool/secrets-of-the-key.js";
 import _poolSeedsOfStrength from "../pool/seeds-of-strength.js";
 import _poolSegovianLeviathan from "../pool/segovian-leviathan.js";
 import _poolSeizeTheSecrets from "../pool/seize-the-secrets.js";
@@ -362,6 +363,7 @@ import _poolSelesnyaCluestone from "../pool/selesnya-cluestone.js";
 import _poolSepulcherGhoul from "../pool/sepulcher-ghoul.js";
 import _poolSerrasBlessing from "../pool/serras-blessing.js";
 import _poolSeshiroTheAnointed from "../pool/seshiro-the-anointed.js";
+import _poolShadowKin from "../pool/shadow-kin.js";
 import _poolShadowbeastSighting from "../pool/shadowbeast-sighting.js";
 import _poolSheHulkJadeDefender from "../pool/she-hulk-jade-defender.js";
 import _poolShiarSoldier from "../pool/shiar-soldier.js";
@@ -378,6 +380,7 @@ import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoldOut from "../pool/sold-out.js";
+import _poolSoulGuideGryff from "../pool/soul-guide-gryff.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
 import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
@@ -867,6 +870,7 @@ const shard: CardShard = {
     _poolScuzzbackMarauders,
     _poolSearingSpear,
     _poolSeasonedMarshal,
+    _poolSecretsOfTheKey,
     _poolSeedsOfStrength,
     _poolSegovianLeviathan,
     _poolSeizeTheSecrets,
@@ -874,6 +878,7 @@ const shard: CardShard = {
     _poolSepulcherGhoul,
     _poolSerrasBlessing,
     _poolSeshiroTheAnointed,
+    _poolShadowKin,
     _poolShadowbeastSighting,
     _poolSheHulkJadeDefender,
     _poolShiarSoldier,
@@ -890,6 +895,7 @@ const shard: CardShard = {
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,
     _poolSoldOut,
+    _poolSoulGuideGryff,
     _poolSoulSnare,
     _poolSoulsOfTheLost,
     _poolSouredSprings,

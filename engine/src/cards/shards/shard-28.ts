@@ -46,6 +46,7 @@ import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
 import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
 import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
+import _poolBelovedBeggar from "../pool/beloved-beggar.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
@@ -55,6 +56,7 @@ import _poolBlockadeRunner from "../pool/blockade-runner.js";
 import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
+import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBoommobile from "../pool/boommobile.js";
 import _poolBountyOfMight from "../pool/bounty-of-might.js";
@@ -72,6 +74,7 @@ import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
 import _poolCarrionCrow from "../pool/carrion-crow.js";
+import _poolCatharsCall from "../pool/cathars-call.js";
 import _poolCelestineTheLivingSaint from "../pool/celestine-the-living-saint.js";
 import _poolChancellorOfTales from "../pool/chancellor-of-tales.js";
 import _poolChangeTheEquation from "../pool/change-the-equation.js";
@@ -105,6 +108,7 @@ import _poolDarksteelSentinel from "../pool/darksteel-sentinel.js";
 import _poolDaruHealer from "../pool/daru-healer.js";
 import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
+import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDefossilize from "../pool/defossilize.js";
@@ -547,6 +551,7 @@ const shard: CardShard = {
     _poolBazaarOfBaghdad,
     _poolBearerOfMemory,
     _poolBelloBardOfTheBrambles,
+    _poolBelovedBeggar,
     _poolBeneathTheSands,
     _poolBilbosDeadlySlice,
     _poolBiomassMutation,
@@ -556,6 +561,7 @@ const shard: CardShard = {
     _poolBloodGlutton,
     _poolBloodKnight,
     _poolBloodbraidChallenger,
+    _poolBloodtitheCollector,
     _poolBoarQPine,
     _poolBoommobile,
     _poolBountyOfMight,
@@ -573,6 +579,7 @@ const shard: CardShard = {
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
     _poolCarrionCrow,
+    _poolCatharsCall,
     _poolCelestineTheLivingSaint,
     _poolChancellorOfTales,
     _poolChangeTheEquation,
@@ -606,6 +613,7 @@ const shard: CardShard = {
     _poolDaruHealer,
     _poolDawningAngel,
     _poolDawnsTruce,
+    _poolDeathbonnetSprout,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
     _poolDefossilize,

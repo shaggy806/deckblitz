@@ -215,6 +215,7 @@ import _poolInvasiveManeuvers from "../pool/invasive-maneuvers.js";
 import _poolIronApprentice from "../pool/iron-apprentice.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
+import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
@@ -713,6 +714,7 @@ const shard: CardShard = {
     _poolIronApprentice,
     _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
+    _poolJerrenCorruptedBishop,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
     _poolJusticeVanceAstrovik,

@@ -270,6 +270,7 @@ import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNissaVastwoodSeer from "../pool/nissa-vastwood-seer.js";
 import _poolNissaWhoShakesTheWorld from "../pool/nissa-who-shakes-the-world.js";
 import _poolNoOneLeftBehind from "../pool/no-one-left-behind.js";
+import _poolNoWayOut from "../pool/no-way-out.js";
 import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -304,6 +305,7 @@ import _poolRadstorm from "../pool/radstorm.js";
 import _poolRakdosCarnarium from "../pool/rakdos-carnarium.js";
 import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
 import _poolRavenEagle from "../pool/raven-eagle.js";
+import _poolRavenousRotbelly from "../pool/ravenous-rotbelly.js";
 import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolReaperKing from "../pool/reaper-king.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
@@ -359,6 +361,7 @@ import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
+import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
@@ -751,6 +754,7 @@ const shard: CardShard = {
     _poolNissaVastwoodSeer,
     _poolNissaWhoShakesTheWorld,
     _poolNoOneLeftBehind,
+    _poolNoWayOut,
     _poolNornsWellspring,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -785,6 +789,7 @@ const shard: CardShard = {
     _poolRakdosCarnarium,
     _poolRakdosJoinsUp,
     _poolRavenEagle,
+    _poolRavenousRotbelly,
     _poolRazorgrassInvoker,
     _poolReaperKing,
     _poolRecklessStormseeker,
@@ -840,6 +845,7 @@ const shard: CardShard = {
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
     _poolSliceFromTheShadows,
+    _poolSlogurkTheOverslime,
     _poolSmolderingSpires,
     _poolSmugglersBuggy,
     _poolSnowCoveredSwamp,

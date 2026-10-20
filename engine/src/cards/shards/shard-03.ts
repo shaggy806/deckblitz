@@ -42,6 +42,7 @@ import _poolBoroughBackup from "../pool/borough-backup.js";
 import _poolBovineIntervention from "../pool/bovine-intervention.js";
 import _poolBranchblightStalker from "../pool/branchblight-stalker.js";
 import _poolBrotherhoodPatriarch from "../pool/brotherhood-patriarch.js";
+import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
 import _poolBygoneMarvels from "../pool/bygone-marvels.js";
@@ -74,6 +75,7 @@ import _poolDalekSquadron from "../pool/dalek-squadron.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
 import _poolDeathBegetsLife from "../pool/death-begets-life.js";
+import _poolDeathbonnetHulk from "../pool/deathbonnet-hulk.js";
 import _poolDecimate from "../pool/decimate.js";
 import _poolDeeptreadMerrow from "../pool/deeptread-merrow.js";
 import _poolDefendTheCampus from "../pool/defend-the-campus.js";
@@ -326,6 +328,7 @@ import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
+import _poolSilverBolt from "../pool/silver-bolt.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSinisterConcierge from "../pool/sinister-concierge.js";
 import _poolSkinwing from "../pool/skinwing.js";
@@ -494,6 +497,7 @@ const shard: CardShard = {
     _poolBovineIntervention,
     _poolBranchblightStalker,
     _poolBrotherhoodPatriarch,
+    _poolBurnDownTheHouse,
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
     _poolBygoneMarvels,
@@ -526,6 +530,7 @@ const shard: CardShard = {
     _poolDeadlyDerision,
     _poolDeadlyVisit,
     _poolDeathBegetsLife,
+    _poolDeathbonnetHulk,
     _poolDecimate,
     _poolDeeptreadMerrow,
     _poolDefendTheCampus,
@@ -778,6 +783,7 @@ const shard: CardShard = {
     _poolShivanBranchBurner,
     _poolShopkeepersBane,
     _poolSilkweaverElite,
+    _poolSilverBolt,
     _poolSilverbackShaman,
     _poolSinisterConcierge,
     _poolSkinwing,

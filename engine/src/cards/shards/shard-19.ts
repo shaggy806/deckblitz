@@ -43,6 +43,7 @@ import _poolBhaalsInvoker from "../pool/bhaals-invoker.js";
 import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
+import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
@@ -154,6 +155,7 @@ import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlamingFist from "../pool/flaming-fist.js";
 import _poolFlamingTyrannosaurus from "../pool/flaming-tyrannosaurus.js";
+import _poolFlipTheSwitch from "../pool/flip-the-switch.js";
 import _poolFlowstoneKavu from "../pool/flowstone-kavu.js";
 import _poolFlyingDolphinFish from "../pool/flying-dolphin-fish.js";
 import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
@@ -313,6 +315,7 @@ import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
 import _poolOrderOfTheWhiteShield from "../pool/order-of-the-white-shield.js";
+import _poolOrganHoarder from "../pool/organ-hoarder.js";
 import _poolOrzhovLocket from "../pool/orzhov-locket.js";
 import _poolOscorpIndustries from "../pool/oscorp-industries.js";
 import _poolOswaldFiddlebender from "../pool/oswald-fiddlebender.js";
@@ -331,6 +334,7 @@ import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
+import _poolPlayWithFire from "../pool/play-with-fire.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
 import _poolPlummet from "../pool/plummet.js";
 import _poolPoeticIngenuity from "../pool/poetic-ingenuity.js";
@@ -566,6 +570,7 @@ const shard: CardShard = {
     _poolBiosynthicBurst,
     _poolBirninZanaPlaza,
     _poolBitterReunion,
+    _poolBladestitchedSkaab,
     _poolBlastingStation,
     _poolBlightsowerThallid,
     _poolBloomvineRegent,
@@ -677,6 +682,7 @@ const shard: CardShard = {
     _poolFissureWizard,
     _poolFlamingFist,
     _poolFlamingTyrannosaurus,
+    _poolFlipTheSwitch,
     _poolFlowstoneKavu,
     _poolFlyingDolphinFish,
     _poolForerunnerOfTheEmpire,
@@ -836,6 +842,7 @@ const shard: CardShard = {
     _poolNorwoodWarrior,
     _poolOgreBerserker,
     _poolOrderOfTheWhiteShield,
+    _poolOrganHoarder,
     _poolOrzhovLocket,
     _poolOscorpIndustries,
     _poolOswaldFiddlebender,
@@ -854,6 +861,7 @@ const shard: CardShard = {
     _poolPiratePeddlers,
     _poolPlagueMyr,
     _poolPlanForAllOutcomes,
+    _poolPlayWithFire,
     _poolPlayfulShove,
     _poolPlummet,
     _poolPoeticIngenuity,

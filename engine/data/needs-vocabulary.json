@@ -8299,6 +8299,86 @@
   "effect:player-max-hand-size-adjust-for-game": {
    "family": "effect:player-no-max-hand-size-for-game",
    "example": "Inspired Idea"
+  },
+  "condition:opponent-more-life": {
+   "family": "condition:opponent-more-cards-in-hand",
+   "example": "Sunset Revelry"
+  },
+  "filter:has-disturb": {
+   "family": "filter:transformed",
+   "example": "Thraben Exorcism"
+  },
+  "amount:total-power-sacrificed-as-cost": {
+   "family": "effect:sacrifice-any-number",
+   "example": "Corpse Cobble"
+  },
+  "effect:opponent-chooses-among-targets": {
+   "family": "effect:choices-by-other-players",
+   "example": "Wake to Slaughter"
+  },
+  "effect:enters-with-counter-until-your-next-turn": {
+   "family": "effect:delayed-trigger-until-your-next-turn",
+   "example": "Arlinn, the Pack's Hope // Arlinn, the Moon's Fury"
+  },
+  "effect:reflexive-target-count-from-payments": {
+   "family": "effect:reflexive-per-counters-placed",
+   "example": "Bloodthirsty Adversary"
+  },
+  "trigger:enchanted-player-step-begins": {
+   "family": "static:static-over-enchanted-player",
+   "example": "Curse of Obsession"
+  },
+  "filter:damage-source-is-spell": {
+   "family": "replacement:damage-modification",
+   "example": "Rem Karolus, Stalwart Slayer"
+  },
+  "trigger:enchanted-player-casts": {
+   "family": "mechanic:curses",
+   "example": "Curse of Shaken Faith"
+  },
+  "amount:exiled-with-source-count": {
+   "family": "condition:exiled-with-source-count",
+   "example": "Hostile Hostel // Creeping Inn"
+  },
+  "target:card-in-exile": {
+   "family": "effect:linked-exiled-card",
+   "example": "Rootcoil Creeper"
+  },
+  "condition:filter-has-flashback": {
+   "family": "effect:linked-exiled-card",
+   "example": "Rootcoil Creeper"
+  },
+  "condition:filter-has-flashback-or-disturb": {
+   "family": "condition:filter-has-tap-activated-ability",
+   "example": "Phantom Carriage"
+  },
+  "replacement:grant-exile-if-would-die": {
+   "family": "replacement:target-exile-if-dies-this-turn",
+   "example": "Can't Stay Away"
+  },
+  "cost:flashback-remove-x-loyalty-among": {
+   "family": "cost:flashback-exile-x-cost",
+   "example": "Light Up the Night"
+  },
+  "effect:return-linked-under-your-control": {
+   "family": "effect:linked-exile-return",
+   "example": "Prowling Geistcatcher"
+  },
+  "amount:curses-attached-to-player": {
+   "family": "trigger:attached-controller-step-begins",
+   "example": "Curse of Surveillance"
+  },
+  "static:graveyard-cards-untargetable": {
+   "family": "static:cant-be-targeted-by-filter",
+   "example": "Dennick, Pious Apprentice // Dennick, Pious Apparition"
+  },
+  "effect:attached-controller-player-scope": {
+   "family": "effect:player-scope-extensions",
+   "example": "Vengeful Strangler // Strangling Grasp"
+  },
+  "cost:spend-only-disturb-cost": {
+   "family": "cost:mana-spending-rules",
+   "example": "Unblinking Observer"
   }
  }
 }

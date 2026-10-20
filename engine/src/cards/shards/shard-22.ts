@@ -203,6 +203,7 @@ import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
 import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
 import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
+import _poolKessigNaturalist from "../pool/kessig-naturalist.js";
 import _poolKikiJikiMirrorBreaker from "../pool/kiki-jiki-mirror-breaker.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
@@ -225,6 +226,7 @@ import _poolLochDragon from "../pool/loch-dragon.js";
 import _poolLockeCole from "../pool/locke-cole.js";
 import _poolLordOfLineage from "../pool/lord-of-lineage.js";
 import _poolLordOfTheAccursed from "../pool/lord-of-the-accursed.js";
+import _poolLordOfTheUlvenwald from "../pool/lord-of-the-ulvenwald.js";
 import _poolLoseHope from "../pool/lose-hope.js";
 import _poolLotusEyeMystics from "../pool/lotus-eye-mystics.js";
 import _poolLotusPathDjinn from "../pool/lotus-path-djinn.js";
@@ -244,6 +246,7 @@ import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
+import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
 import _poolMudflatVillage from "../pool/mudflat-village.js";
 import _poolMyrBattlesphere from "../pool/myr-battlesphere.js";
@@ -365,6 +368,7 @@ import _poolSlithAscendant from "../pool/slith-ascendant.js";
 import _poolSlumberingCerberus from "../pool/slumbering-cerberus.js";
 import _poolSmaugWickedWorm from "../pool/smaug-wicked-worm.js";
 import _poolSmaugsFury from "../pool/smaugs-fury.js";
+import _poolSmolderingEgg from "../pool/smoldering-egg.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
 import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
@@ -701,6 +705,7 @@ const shard: CardShard = {
     _poolKarametraGodOfHarvests,
     _poolKelethSunmaneFamiliar,
     _poolKessDissidentMage,
+    _poolKessigNaturalist,
     _poolKikiJikiMirrorBreaker,
     _poolKindredDominance,
     _poolKithkinHealer,
@@ -723,6 +728,7 @@ const shard: CardShard = {
     _poolLockeCole,
     _poolLordOfLineage,
     _poolLordOfTheAccursed,
+    _poolLordOfTheUlvenwald,
     _poolLoseHope,
     _poolLotusEyeMystics,
     _poolLotusPathDjinn,
@@ -742,6 +748,7 @@ const shard: CardShard = {
     _poolMistyMountainsRaider,
     _poolMistyRainforest,
     _poolMizziumMortars,
+    _poolMourningPatrol,
     _poolMouseTrapper,
     _poolMudflatVillage,
     _poolMyrBattlesphere,
@@ -863,6 +870,7 @@ const shard: CardShard = {
     _poolSlumberingCerberus,
     _poolSmaugWickedWorm,
     _poolSmaugsFury,
+    _poolSmolderingEgg,
     _poolSnowCoveredForest,
     _poolSolitaryCell,
     _poolSoltariCrusader,

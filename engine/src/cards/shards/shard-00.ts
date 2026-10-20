@@ -297,6 +297,7 @@ import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
+import _poolOrmendahlTheCorrupter from "../pool/ormendahl-the-corrupter.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
 import _poolOutOfTheWay from "../pool/out-of-the-way.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
@@ -347,6 +348,7 @@ import _poolRideTheShoopuf from "../pool/ride-the-shoopuf.js";
 import _poolRigForWar from "../pool/rig-for-war.js";
 import _poolRimefireTorque from "../pool/rimefire-torque.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
+import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
 import _poolRoadsideBlowout from "../pool/roadside-blowout.js";
@@ -815,6 +817,7 @@ const shard: CardShard = {
     _poolOpulentPalace,
     _poolOraxid,
     _poolOriginOfMetalbending,
+    _poolOrmendahlTheCorrupter,
     _poolOsgoodOperationDouble,
     _poolOutOfTheWay,
     _poolOutrageousRobbery,
@@ -865,6 +868,7 @@ const shard: CardShard = {
     _poolRigForWar,
     _poolRimefireTorque,
     _poolRiotPiker,
+    _poolRiseOfTheAnts,
     _poolRiseOfTheDreadMarn,
     _poolRitualChamber,
     _poolRoadsideBlowout,

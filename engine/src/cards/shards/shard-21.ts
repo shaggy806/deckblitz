@@ -20,6 +20,7 @@ import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
 import _poolArmoryAutomaton from "../pool/armory-automaton.js";
 import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
+import _poolArrogantOutlaw from "../pool/arrogant-outlaw.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
@@ -46,6 +47,7 @@ import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
+import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -130,6 +132,7 @@ import _poolEstwaldShieldbasher from "../pool/estwald-shieldbasher.js";
 import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
+import _poolFamishedForagers from "../pool/famished-foragers.js";
 import _poolFarewell from "../pool/farewell.js";
 import _poolFatefulAbsence from "../pool/fateful-absence.js";
 import _poolFecundGreenshell from "../pool/fecund-greenshell.js";
@@ -171,6 +174,7 @@ import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
 import _poolGravebornMuse from "../pool/graveborn-muse.js";
+import _poolGraveyardGlutton from "../pool/graveyard-glutton.js";
 import _poolGreaterTanuki from "../pool/greater-tanuki.js";
 import _poolGreenhousePropagator from "../pool/greenhouse-propagator.js";
 import _poolGrowingRanks from "../pool/growing-ranks.js";
@@ -221,6 +225,7 @@ import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
+import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
@@ -488,6 +493,7 @@ const shard: CardShard = {
     _poolArmoredWhirlTurtle,
     _poolArmoryAutomaton,
     _poolAronBenaliasRuin,
+    _poolArrogantOutlaw,
     _poolArrogantVampire,
     _poolAtKnifepoint,
     _poolAtTheDoor,
@@ -514,6 +520,7 @@ const shard: CardShard = {
     _poolBlightGrenade,
     _poolBloatedContaminator,
     _poolBloodFountain,
+    _poolBloodlineCulling,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -598,6 +605,7 @@ const shard: CardShard = {
     _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
+    _poolFamishedForagers,
     _poolFarewell,
     _poolFatefulAbsence,
     _poolFecundGreenshell,
@@ -639,6 +647,7 @@ const shard: CardShard = {
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
     _poolGravebornMuse,
+    _poolGraveyardGlutton,
     _poolGreaterTanuki,
     _poolGreenhousePropagator,
     _poolGrowingRanks,
@@ -689,6 +698,7 @@ const shard: CardShard = {
     _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLazotepSliver,
+    _poolLeinoreAutumnSovereign,
     _poolLensFlare,
     _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,

@@ -59,6 +59,7 @@ import _poolBoggartBirthRite from "../pool/boggart-birth-rite.js";
 import _poolBoompile from "../pool/boompile.js";
 import _poolBorealDruid from "../pool/boreal-druid.js";
 import _poolBorosGuildgate from "../pool/boros-guildgate.js";
+import _poolBorrowedTime from "../pool/borrowed-time.js";
 import _poolBottleGnomes from "../pool/bottle-gnomes.js";
 import _poolBoundaryLandsRanger from "../pool/boundary-lands-ranger.js";
 import _poolBrawlersPlate from "../pool/brawlers-plate.js";
@@ -104,6 +105,7 @@ import _poolDarksteelSplicer from "../pool/darksteel-splicer.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
+import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
 import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
@@ -126,6 +128,7 @@ import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
+import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
 import _poolEkunduGriffin from "../pool/ekundu-griffin.js";
@@ -496,9 +499,11 @@ import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
+import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
 import _tokensSkeletonTokenGutTrueSoulZealot from "../tokens/skeleton-token-gut-true-soul-zealot.js";
 import _tokensTreefolkTokenSylvanOffering from "../tokens/treefolk-token-sylvan-offering.js";
+import _tokensVampireTokenHungryForMore from "../tokens/vampire-token-hungry-for-more.js";
 import _tokensVehicleToken from "../tokens/vehicle-token.js";
 
 const shard: CardShard = {
@@ -559,6 +564,7 @@ const shard: CardShard = {
     _poolBoompile,
     _poolBorealDruid,
     _poolBorosGuildgate,
+    _poolBorrowedTime,
     _poolBottleGnomes,
     _poolBoundaryLandsRanger,
     _poolBrawlersPlate,
@@ -604,6 +610,7 @@ const shard: CardShard = {
     _poolDaybreakCharger,
     _poolDeadbridgeChant,
     _poolDecodeTransmissions,
+    _poolDefendTheCelestus,
     _poolDefensiveStance,
     _poolDelete,
     _poolDeltaBloodflies,
@@ -626,6 +633,7 @@ const shard: CardShard = {
     _poolDuelTactics,
     _poolDuelcraftTrainer,
     _poolDutyBeyondDeath,
+    _poolEccentricFarmer,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,
     _poolEkunduGriffin,
@@ -998,9 +1006,11 @@ const shard: CardShard = {
     _tokensDragonToken66,
     _tokensEverywhereToken,
     _tokensKomasCoil,
+    _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,
     _tokensSkeletonTokenGutTrueSoulZealot,
     _tokensTreefolkTokenSylvanOffering,
+    _tokensVampireTokenHungryForMore,
     _tokensVehicleToken,
   ],
 };

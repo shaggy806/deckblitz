@@ -90,6 +90,7 @@ import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
+import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
@@ -185,9 +186,11 @@ import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
 import _poolHornetCobra from "../pool/hornet-cobra.js";
 import _poolHorsesOfTheBruinen from "../pool/horses-of-the-bruinen.js";
+import _poolHoundTamer from "../pool/hound-tamer.js";
 import _poolHowlpackPiper from "../pool/howlpack-piper.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
+import _poolHungryForMore from "../pool/hungry-for-more.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
@@ -258,6 +261,7 @@ import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
 import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
+import _poolNecrosynthesis from "../pool/necrosynthesis.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
 import _poolNimbleHobbit from "../pool/nimble-hobbit.js";
@@ -268,6 +272,7 @@ import _poolNotionThief from "../pool/notion-thief.js";
 import _poolNyxWeaver from "../pool/nyx-weaver.js";
 import _poolNyxbornColossus from "../pool/nyxborn-colossus.js";
 import _poolOasisGardener from "../pool/oasis-gardener.js";
+import _poolObsessiveAstronomer from "../pool/obsessive-astronomer.js";
 import _poolOdunosRiverTrawler from "../pool/odunos-river-trawler.js";
 import _poolOjutaiInterceptor from "../pool/ojutai-interceptor.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
@@ -281,6 +286,7 @@ import _poolPaintersStudio from "../pool/painters-studio.js";
 import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPatchworkCrawler from "../pool/patchwork-crawler.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
+import _poolPatricianGeist from "../pool/patrician-geist.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
 import _poolPhyrexianAwakening from "../pool/phyrexian-awakening.js";
@@ -379,6 +385,7 @@ import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
+import _poolStartle from "../pool/startle.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
 import _poolStokeGenius from "../pool/stoke-genius.js";
@@ -417,6 +424,7 @@ import _poolTithingBlade from "../pool/tithing-blade.js";
 import _poolTobiasAndrion from "../pool/tobias-andrion.js";
 import _poolTorturedExistence from "../pool/tortured-existence.js";
 import _poolTouchOfInvisibility from "../pool/touch-of-invisibility.js";
+import _poolTovolarsPackleader from "../pool/tovolars-packleader.js";
 import _poolToweringTitan from "../pool/towering-titan.js";
 import _poolToxicDeluge from "../pool/toxic-deluge.js";
 import _poolTransplantTheorist from "../pool/transplant-theorist.js";
@@ -576,6 +584,7 @@ const shard: CardShard = {
     _poolDesperateParry,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,
+    _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
     _poolDistortedCuriosity,
@@ -671,9 +680,11 @@ const shard: CardShard = {
     _poolHornOfValhalla,
     _poolHornetCobra,
     _poolHorsesOfTheBruinen,
+    _poolHoundTamer,
     _poolHowlpackPiper,
     _poolHulkingGoblin,
     _poolHumongulus,
+    _poolHungryForMore,
     _poolHydraInfiltration,
     _poolIceOut,
     _poolImposingVantasaur,
@@ -744,6 +755,7 @@ const shard: CardShard = {
     _poolMoxJet,
     _poolMukotaiAmbusher,
     _poolNashiMoonsLegacy,
+    _poolNecrosynthesis,
     _poolNeverwinterDryad,
     _poolNimbleBladeKhenra,
     _poolNimbleHobbit,
@@ -754,6 +766,7 @@ const shard: CardShard = {
     _poolNyxWeaver,
     _poolNyxbornColossus,
     _poolOasisGardener,
+    _poolObsessiveAstronomer,
     _poolOdunosRiverTrawler,
     _poolOjutaiInterceptor,
     _poolOrderOfMidnight,
@@ -767,6 +780,7 @@ const shard: CardShard = {
     _poolPastInFlames,
     _poolPatchworkCrawler,
     _poolPathOfAncestry,
+    _poolPatricianGeist,
     _poolPestMascot,
     _poolPestilenceDemon,
     _poolPhyrexianAwakening,
@@ -865,6 +879,7 @@ const shard: CardShard = {
     _poolSqueesToy,
     _poolSquirrelMob,
     _poolSquirrelNest,
+    _poolStartle,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,
     _poolStokeGenius,
@@ -903,6 +918,7 @@ const shard: CardShard = {
     _poolTobiasAndrion,
     _poolTorturedExistence,
     _poolTouchOfInvisibility,
+    _poolTovolarsPackleader,
     _poolToweringTitan,
     _poolToxicDeluge,
     _poolTransplantTheorist,

@@ -80,6 +80,7 @@ import _poolClingingAnemones from "../pool/clinging-anemones.js";
 import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
 import _poolCobaltGolem from "../pool/cobalt-golem.js";
 import _poolCollectiveInferno from "../pool/collective-inferno.js";
+import _poolCollectorsCage from "../pool/collectors-cage.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
@@ -178,6 +179,7 @@ import _poolFuturistForge from "../pool/futurist-forge.js";
 import _poolGaladhrimBrigade from "../pool/galadhrim-brigade.js";
 import _poolGaladrielLightOfValinor from "../pool/galadriel-light-of-valinor.js";
 import _poolGameTrailChangeling from "../pool/game-trail-changeling.js";
+import _poolGeistwave from "../pool/geistwave.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
@@ -200,6 +202,7 @@ import _poolGrandmotherRaviSengir from "../pool/grandmother-ravi-sengir.js";
 import _poolGraniteWitness from "../pool/granite-witness.js";
 import _poolGrappleWithDeath from "../pool/grapple-with-death.js";
 import _poolGravecrawler from "../pool/gravecrawler.js";
+import _poolGraveyardTrespasser from "../pool/graveyard-trespasser.js";
 import _poolGreatTeachersDecree from "../pool/great-teachers-decree.js";
 import _poolGreataxe from "../pool/greataxe.js";
 import _poolGrimHaruspex from "../pool/grim-haruspex.js";
@@ -251,6 +254,7 @@ import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
 import _poolKrosanColossus from "../pool/krosan-colossus.js";
+import _poolKurbisHarvestCelebrant from "../pool/kurbis-harvest-celebrant.js";
 import _poolLassoedByTheLaw from "../pool/lassoed-by-the-law.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLeveler from "../pool/leveler.js";
@@ -292,6 +296,7 @@ import _poolMonstrousRage from "../pool/monstrous-rage.js";
 import _poolMonumentalCorruption from "../pool/monumental-corruption.js";
 import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
+import _poolMountedDreadknight from "../pool/mounted-dreadknight.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
 import _poolMutantTown from "../pool/mutant-town.js";
@@ -376,6 +381,7 @@ import _poolShriekmaw from "../pool/shriekmaw.js";
 import _poolShrineSteward from "../pool/shrine-steward.js";
 import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
 import _poolSiegeZombie from "../pool/siege-zombie.js";
+import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
 import _poolSlaughterSinger from "../pool/slaughter-singer.js";
@@ -561,6 +567,7 @@ const shard: CardShard = {
     _poolCloudshredderSliver,
     _poolCobaltGolem,
     _poolCollectiveInferno,
+    _poolCollectorsCage,
     _poolCombatThresher,
     _poolCompanyCommander,
     _poolConiferStrider,
@@ -659,6 +666,7 @@ const shard: CardShard = {
     _poolGaladhrimBrigade,
     _poolGaladrielLightOfValinor,
     _poolGameTrailChangeling,
+    _poolGeistwave,
     _poolGhostsOfTheDamned,
     _poolGliderStaff,
     _poolGlimpseTheCore,
@@ -681,6 +689,7 @@ const shard: CardShard = {
     _poolGraniteWitness,
     _poolGrappleWithDeath,
     _poolGravecrawler,
+    _poolGraveyardTrespasser,
     _poolGreatTeachersDecree,
     _poolGreataxe,
     _poolGrimHaruspex,
@@ -732,6 +741,7 @@ const shard: CardShard = {
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
     _poolKrosanColossus,
+    _poolKurbisHarvestCelebrant,
     _poolLassoedByTheLaw,
     _poolLawbringer,
     _poolLeveler,
@@ -773,6 +783,7 @@ const shard: CardShard = {
     _poolMonumentalCorruption,
     _poolMonumentalHenge,
     _poolMoongloveWinnower,
+    _poolMountedDreadknight,
     _poolMuseumNightwatch,
     _poolMutantChainReaction,
     _poolMutantTown,
@@ -857,6 +868,7 @@ const shard: CardShard = {
     _poolShrineSteward,
     _poolShuFootSoldiers,
     _poolSiegeZombie,
+    _poolSigardaChampionOfLight,
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
     _poolSlaughterSinger,

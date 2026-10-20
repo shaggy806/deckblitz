@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3706 already implemented / 1294 missing (marks refreshed 2026-10-20)
+3707 already implemented / 1293 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1132,7 +1132,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1137  Gisela, Blade of Goldnight               {4}{R}{W}{W}     Legendary Creature — Angel
 [ ]  1138  Teferi, Time Raveler                     {1}{W}{U}        Legendary Planeswalker — Teferi
 [x]  1139  Spore Frog                               {G}              Creature — Frog
-[ ]  1140  Augur of Autumn                          {1}{G}{G}        Creature — Human Druid
+[x]  1140  Augur of Autumn                          {1}{G}{G}        Creature — Human Druid
 [x]  1141  Lonely Sandbar                           {0}              Land
 [x]  1142  Grim Haruspex                            {2}{B}           Creature — Human Wizard
 [x]  1143  Spymaster's Vault                        {0}              Land

@@ -101,6 +101,7 @@ import _poolCrawWurm from "../pool/craw-wurm.js";
 import _poolCrazedGoblin from "../pool/crazed-goblin.js";
 import _poolCreamOfTheCrop from "../pool/cream-of-the-crop.js";
 import _poolCrocanura from "../pool/crocanura.js";
+import _poolCrossroadsCandleguide from "../pool/crossroads-candleguide.js";
 import _poolCruelRevival from "../pool/cruel-revival.js";
 import _poolCrushingDisappointment from "../pool/crushing-disappointment.js";
 import _poolCrypticCaves from "../pool/cryptic-caves.js";
@@ -271,8 +272,10 @@ import _poolMishrasFactory from "../pool/mishras-factory.js";
 import _poolMithrilCoat from "../pool/mithril-coat.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
+import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
 import _poolMutantSurveyor from "../pool/mutant-surveyor.js";
+import _poolMysticMonstrosity from "../pool/mystic-monstrosity.js";
 import _poolNarsetEnlightenedMaster from "../pool/narset-enlightened-master.js";
 import _poolNaturesEmbrace from "../pool/natures-embrace.js";
 import _poolNeedletoothPack from "../pool/needletooth-pack.js";
@@ -401,6 +404,7 @@ import _poolStormFleetArsonist from "../pool/storm-fleet-arsonist.js";
 import _poolStrandsOfNight from "../pool/strands-of-night.js";
 import _poolStranglingSoot from "../pool/strangling-soot.js";
 import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
+import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
@@ -599,6 +603,7 @@ const shard: CardShard = {
     _poolCrazedGoblin,
     _poolCreamOfTheCrop,
     _poolCrocanura,
+    _poolCrossroadsCandleguide,
     _poolCruelRevival,
     _poolCrushingDisappointment,
     _poolCrypticCaves,
@@ -769,8 +774,10 @@ const shard: CardShard = {
     _poolMithrilCoat,
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
+    _poolMoonrageBrute,
     _poolMorphling,
     _poolMutantSurveyor,
+    _poolMysticMonstrosity,
     _poolNarsetEnlightenedMaster,
     _poolNaturesEmbrace,
     _poolNeedletoothPack,
@@ -899,6 +906,7 @@ const shard: CardShard = {
     _poolStrandsOfNight,
     _poolStranglingSoot,
     _poolStrefanMaurerProgenitor,
+    _poolStromkirkBloodthief,
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,

@@ -119,6 +119,7 @@ import _poolDromarsCharm from "../pool/dromars-charm.js";
 import _poolDrownInIchor from "../pool/drown-in-ichor.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
+import _poolEcstaticAwakener from "../pool/ecstatic-awakener.js";
 import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
 import _poolEdgewallPack from "../pool/edgewall-pack.js";
@@ -272,6 +273,7 @@ import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
 import _poolNeedForSpeed from "../pool/need-for-speed.js";
 import _poolNeedlevergePathway from "../pool/needleverge-pathway.js";
+import _poolNeonatesRush from "../pool/neonates-rush.js";
 import _poolNeurokCommando from "../pool/neurok-commando.js";
 import _poolNezumiFreewheeler from "../pool/nezumi-freewheeler.js";
 import _poolNiblisOfTheMist from "../pool/niblis-of-the-mist.js";
@@ -308,6 +310,7 @@ import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
 import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
+import _poolPurifyingDragon from "../pool/purifying-dragon.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
@@ -359,6 +362,7 @@ import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
+import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
 import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
@@ -609,6 +613,7 @@ const shard: CardShard = {
     _poolDrownInIchor,
     _poolDugganPrivateDetective,
     _poolEccentricPestfinder,
+    _poolEcstaticAwakener,
     _poolEcstaticBeauty,
     _poolEdgarAncientBloodlord,
     _poolEdgewallPack,
@@ -762,6 +767,7 @@ const shard: CardShard = {
     _poolMysticArchaeologist,
     _poolNeedForSpeed,
     _poolNeedlevergePathway,
+    _poolNeonatesRush,
     _poolNeurokCommando,
     _poolNezumiFreewheeler,
     _poolNiblisOfTheMist,
@@ -798,6 +804,7 @@ const shard: CardShard = {
     _poolPrimocEscapee,
     _poolPrismariCampus,
     _poolProdigalPyromancer,
+    _poolPurifyingDragon,
     _poolPymTechnologies,
     _poolPyroclasm,
     _poolQuilledWolf,
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolSauronDinoDevotee,
     _poolScourgeOfFleets,
     _poolScuteSwarm,
+    _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,
     _poolSecretPassage,
     _poolSeedglaiveMentor,

@@ -99,6 +99,7 @@ import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
 import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
 import _poolDefacedGallery from "../pool/defaced-gallery.js";
+import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
@@ -141,6 +142,7 @@ import _poolExpansionExplosion from "../pool/expansion-explosion.js";
 import _poolExpedite from "../pool/expedite.js";
 import _poolExtremisElite from "../pool/extremis-elite.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
+import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFellMire from "../pool/fell-mire.js";
@@ -354,6 +356,7 @@ import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
+import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
 import _poolSilverchaseFox from "../pool/silverchase-fox.js";
@@ -478,6 +481,7 @@ import _poolWaxenShapethief from "../pool/waxen-shapethief.js";
 import _poolWayOfTheWarlord from "../pool/way-of-the-warlord.js";
 import _poolWaywardServant from "../pool/wayward-servant.js";
 import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
+import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWitheringTorment from "../pool/withering-torment.js";
 import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
@@ -599,6 +603,7 @@ const shard: CardShard = {
     _poolDeepAnalysis,
     _poolDeepfathomEcho,
     _poolDefacedGallery,
+    _poolDefenestrate,
     _poolDefilingDaemogoth,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
@@ -641,6 +646,7 @@ const shard: CardShard = {
     _poolExpedite,
     _poolExtremisElite,
     _poolFaerieSlumberParty,
+    _poolFalkenrathPerforator,
     _poolFalseDefeat,
     _poolFatalGrudge,
     _poolFellMire,
@@ -854,6 +860,7 @@ const shard: CardShard = {
     _poolShamblingRemains,
     _poolShivanDevastator,
     _poolShivanOasis,
+    _poolSigardianSavior,
     _poolSilverShroudCostume,
     _poolSilverbackElder,
     _poolSilverchaseFox,
@@ -978,6 +985,7 @@ const shard: CardShard = {
     _poolWayOfTheWarlord,
     _poolWaywardServant,
     _poolWeatheredSentinels,
+    _poolWillowGeist,
     _poolWitheringTorment,
     _poolWoodlandCemetery,
     _poolWorldBreaker,

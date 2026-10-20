@@ -21,6 +21,7 @@ import _poolAngelicPage from "../pool/angelic-page.js";
 import _poolArbalestEngineers from "../pool/arbalest-engineers.js";
 import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
+import _poolArchiveHaunt from "../pool/archive-haunt.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
@@ -172,6 +173,7 @@ import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
 import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
+import _poolGrizzlyGhoul from "../pool/grizzly-ghoul.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
@@ -190,6 +192,7 @@ import _poolHerbologyInstructor from "../pool/herbology-instructor.js";
 import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
+import _poolHomesteadCourage from "../pool/homestead-courage.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
 import _poolHornedTurtle from "../pool/horned-turtle.js";
 import _poolHornetNest from "../pool/hornet-nest.js";
@@ -509,6 +512,7 @@ const shard: CardShard = {
     _poolArbalestEngineers,
     _poolArcadeCabinet,
     _poolArcboundBruiser,
+    _poolArchiveHaunt,
     _poolArcticTreeline,
     _poolArdentRecruit,
     _poolAscendantAcolyte,
@@ -660,6 +664,7 @@ const shard: CardShard = {
     _poolGreyKnightParagon,
     _poolGrimBounty,
     _poolGrimReapersSprint,
+    _poolGrizzlyGhoul,
     _poolGroundchuckDirtbag,
     _poolGroundskeeper,
     _poolGutTrueSoulZealot,
@@ -678,6 +683,7 @@ const shard: CardShard = {
     _poolHexgoldSlash,
     _poolHighspireBellRinger,
     _poolHollowDogs,
+    _poolHomesteadCourage,
     _poolHondenOfNightsReach,
     _poolHornedTurtle,
     _poolHornetNest,

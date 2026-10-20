@@ -79,6 +79,7 @@ import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolConcealingCurtains from "../pool/concealing-curtains.js";
+import _poolConsumingBlob from "../pool/consuming-blob.js";
 import _poolContractHero from "../pool/contract-hero.js";
 import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
@@ -138,6 +139,7 @@ import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
 import _poolFadeIntoAntiquity from "../pool/fade-into-antiquity.js";
 import _poolFairgroundsPatrol from "../pool/fairgrounds-patrol.js";
+import _poolFalconAbomination from "../pool/falcon-abomination.js";
 import _poolFalconWingedWonder from "../pool/falcon-winged-wonder.js";
 import _poolFalkenrathForebear from "../pool/falkenrath-forebear.js";
 import _poolFalkenrathMarauders from "../pool/falkenrath-marauders.js";
@@ -263,6 +265,7 @@ import _poolMiteOverseer from "../pool/mite-overseer.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorgueTheft from "../pool/morgue-theft.js";
+import _poolMorkrutBehemoth from "../pool/morkrut-behemoth.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
@@ -583,6 +586,7 @@ const shard: CardShard = {
     _poolColossalDreadmask,
     _poolCompleatedConjurer,
     _poolConcealingCurtains,
+    _poolConsumingBlob,
     _poolContractHero,
     _poolCoralBarrier,
     _poolCoriMountainMonastery,
@@ -642,6 +646,7 @@ const shard: CardShard = {
     _poolEyeOfRamos,
     _poolFadeIntoAntiquity,
     _poolFairgroundsPatrol,
+    _poolFalconAbomination,
     _poolFalconWingedWonder,
     _poolFalkenrathForebear,
     _poolFalkenrathMarauders,
@@ -767,6 +772,7 @@ const shard: CardShard = {
     _poolMomentsPeace,
     _poolMoongloveExtractor,
     _poolMorgueTheft,
+    _poolMorkrutBehemoth,
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,

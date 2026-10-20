@@ -53,6 +53,7 @@ import _poolBogSmugglers from "../pool/bog-smugglers.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
+import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolBurnTogether from "../pool/burn-together.js";
@@ -128,6 +129,7 @@ import _poolEvolutionSage from "../pool/evolution-sage.js";
 import _poolExploration from "../pool/exploration.js";
 import _poolExpressiveFiredancer from "../pool/expressive-firedancer.js";
 import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
+import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
@@ -150,6 +152,7 @@ import _poolFracturedRealm from "../pool/fractured-realm.js";
 import _poolFungusFrolic from "../pool/fungus-frolic.js";
 import _poolFynnTheFangbearer from "../pool/fynn-the-fangbearer.js";
 import _poolGaladhrimBow from "../pool/galadhrim-bow.js";
+import _poolGaledrifter from "../pool/galedrifter.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
 import _poolGeistflame from "../pool/geistflame.js";
 import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
@@ -229,6 +232,7 @@ import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
+import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
@@ -281,6 +285,7 @@ import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
+import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
@@ -308,6 +313,7 @@ import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
 import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
+import _poolRevengeOfTheDrowned from "../pool/revenge-of-the-drowned.js";
 import _poolReveredDead from "../pool/revered-dead.js";
 import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
@@ -541,6 +547,7 @@ const shard: CardShard = {
     _poolBoldImpaler,
     _poolBorealShelf,
     _poolBreakneckBerserker,
+    _poolBriarbridgeTracker,
     _poolBristlebudFarmer,
     _poolBulwarkOx,
     _poolBurnTogether,
@@ -616,6 +623,7 @@ const shard: CardShard = {
     _poolExploration,
     _poolExpressiveFiredancer,
     _poolExtinguishTheLight,
+    _poolFadingHope,
     _poolFblthpImpossiblyLost,
     _poolFearOfDeath,
     _poolFeloniousRage,
@@ -638,6 +646,7 @@ const shard: CardShard = {
     _poolFungusFrolic,
     _poolFynnTheFangbearer,
     _poolGaladhrimBow,
+    _poolGaledrifter,
     _poolGearseekerSerpent,
     _poolGeistflame,
     _poolGeneralTraagHeartOfStone,
@@ -717,6 +726,7 @@ const shard: CardShard = {
     _poolLivingLightning,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
+    _poolLoyalGryff,
     _poolLumengridSentinel,
     _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
@@ -769,6 +779,7 @@ const shard: CardShard = {
     _poolOpt,
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
+    _poolPacksBetrayal,
     _poolPearlMedallion,
     _poolPestProblem,
     _poolPilferedPlans,
@@ -796,6 +807,7 @@ const shard: CardShard = {
     _poolReluctantDounguard,
     _poolReshapeTheEarth,
     _poolRetrievalAgent,
+    _poolRevengeOfTheDrowned,
     _poolReveredDead,
     _poolRhoxCharger,
     _poolRhoxOracle,

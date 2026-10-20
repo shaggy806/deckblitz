@@ -30,6 +30,7 @@ import _poolArgothianEnchantress from "../pool/argothian-enchantress.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
+import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
 import _poolAwakenTheBloodAvatar from "../pool/awaken-the-blood-avatar.js";
@@ -90,6 +91,7 @@ import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
 import _poolCosmicHunger from "../pool/cosmic-hunger.js";
 import _poolCosmiumBlast from "../pool/cosmium-blast.js";
+import _poolCrawlFromTheCellar from "../pool/crawl-from-the-cellar.js";
 import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
@@ -112,6 +114,7 @@ import _poolDemolish from "../pool/demolish.js";
 import _poolDemonicBargain from "../pool/demonic-bargain.js";
 import _poolDerangedOutcast from "../pool/deranged-outcast.js";
 import _poolDesolationProwler from "../pool/desolation-prowler.js";
+import _poolDevotedGrafkeeper from "../pool/devoted-grafkeeper.js";
 import _poolDiminisherWitch from "../pool/diminisher-witch.js";
 import _poolDimirAqueduct from "../pool/dimir-aqueduct.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
@@ -191,6 +194,7 @@ import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
 import _poolGoreSwine from "../pool/gore-swine.js";
 import _poolGoringCeratops from "../pool/goring-ceratops.js";
 import _poolGrafMole from "../pool/graf-mole.js";
+import _poolGraftedIdentity from "../pool/grafted-identity.js";
 import _poolGravePact from "../pool/grave-pact.js";
 import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
@@ -302,6 +306,7 @@ import _poolMockingSprite from "../pool/mocking-sprite.js";
 import _poolMoggRaider from "../pool/mogg-raider.js";
 import _poolMonasteryFlock from "../pool/monastery-flock.js";
 import _poolMonksFist from "../pool/monks-fist.js";
+import _poolMoonragersSlash from "../pool/moonragers-slash.js";
 import _poolMoonshakerCavalry from "../pool/moonshaker-cavalry.js";
 import _poolMoorishCavalry from "../pool/moorish-cavalry.js";
 import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
@@ -531,6 +536,7 @@ const shard: CardShard = {
     _poolArtfulDodge,
     _poolAspectOfGorgon,
     _poolAtzocanSeer,
+    _poolAugurOfAutumn,
     _poolAuriokTransfixer,
     _poolAvenFisher,
     _poolAwakenTheBloodAvatar,
@@ -591,6 +597,7 @@ const shard: CardShard = {
     _poolCorneredByBlackMages,
     _poolCosmicHunger,
     _poolCosmiumBlast,
+    _poolCrawlFromTheCellar,
     _poolCrossbowInfantry,
     _poolCrossroadsVillage,
     _poolCruelCelebrant,
@@ -613,6 +620,7 @@ const shard: CardShard = {
     _poolDemonicBargain,
     _poolDerangedOutcast,
     _poolDesolationProwler,
+    _poolDevotedGrafkeeper,
     _poolDiminisherWitch,
     _poolDimirAqueduct,
     _poolDiregrafColossus,
@@ -692,6 +700,7 @@ const shard: CardShard = {
     _poolGoreSwine,
     _poolGoringCeratops,
     _poolGrafMole,
+    _poolGraftedIdentity,
     _poolGravePact,
     _poolGreasewrenchGoblin,
     _poolGreatIntelligencesPlan,
@@ -803,6 +812,7 @@ const shard: CardShard = {
     _poolMoggRaider,
     _poolMonasteryFlock,
     _poolMonksFist,
+    _poolMoonragersSlash,
     _poolMoonshakerCavalry,
     _poolMoorishCavalry,
     _poolMoriokScavenger,

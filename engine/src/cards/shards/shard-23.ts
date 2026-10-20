@@ -25,6 +25,7 @@ import _poolArmoredSkaab from "../pool/armored-skaab.js";
 import _poolAtlasSizableStooge from "../pool/atlas-sizable-stooge.js";
 import _poolAttercop from "../pool/attercop.js";
 import _poolAuraShards from "../pool/aura-shards.js";
+import _poolAwokenDemon from "../pool/awoken-demon.js";
 import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
 import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
@@ -334,6 +335,7 @@ import _poolRecklessAirStrike from "../pool/reckless-air-strike.js";
 import _poolReckonerBankbuster from "../pool/reckoner-bankbuster.js";
 import _poolRedTigerMechan from "../pool/red-tiger-mechan.js";
 import _poolRedXiiiProudWarrior from "../pool/red-xiii-proud-warrior.js";
+import _poolRedemptionChoir from "../pool/redemption-choir.js";
 import _poolRegisaurAlpha from "../pool/regisaur-alpha.js";
 import _poolRelicBarrier from "../pool/relic-barrier.js";
 import _poolRenegadeTactics from "../pool/renegade-tactics.js";
@@ -342,6 +344,7 @@ import _poolReprisal from "../pool/reprisal.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
+import _poolRitualOfHope from "../pool/ritual-of-hope.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
@@ -524,6 +527,7 @@ const shard: CardShard = {
     _poolAtlasSizableStooge,
     _poolAttercop,
     _poolAuraShards,
+    _poolAwokenDemon,
     _poolAzizaMageTowerCaptain,
     _poolAzoriusChancery,
     _poolAzoriusKnightArbiter,
@@ -833,6 +837,7 @@ const shard: CardShard = {
     _poolReckonerBankbuster,
     _poolRedTigerMechan,
     _poolRedXiiiProudWarrior,
+    _poolRedemptionChoir,
     _poolRegisaurAlpha,
     _poolRelicBarrier,
     _poolRenegadeTactics,
@@ -841,6 +846,7 @@ const shard: CardShard = {
     _poolRhoxPummeler,
     _poolRile,
     _poolRimefurReindeer,
+    _poolRitualOfHope,
     _poolRoilingCanopy,
     _poolRooftopAssassin,
     _poolRoryWilliams,

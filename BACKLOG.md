@@ -102,8 +102,9 @@ section keeps only what to do next.
   initiative, dungeons and venturing — `docs/plans/initiative-dungeons.md`; batch 105 Streets of
   New Capenna and its Commander set, on shield counters; batch 106 Kamigawa: Neon Dynasty, its
   Commander set and Crimson Vow Commander, on reconfigure; batch 107 Innistrad: Crimson Vow, on
-  training, exploit and cleave); **next, Innistrad: Midnight Hunt and its Commander set** (MID, MIC
-  — `npm run cards:sets -w engine -- --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
+  training, exploit and cleave; batch 108 Innistrad: Midnight Hunt and its Commander set, on coven
+  and day/night); **next, Adventures in the Forgotten Realms and its Commander set** (AFR, AFC —
+  `npm run cards:sets -w engine -- --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
   the Oubliette's three distinct sacrifices) still hold the cards that "venture into the dungeon"
   (Nadaar, Acererak, Sefris, Radiant Solar — `mechanic:dungeon`).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
@@ -172,6 +173,9 @@ there and move this line to `COMPLETED.md`.
 - **A trigger's top-level `trigger-object` condition is always false**: it only works inside a `conditional` (Obscura Ascendancy used a filter plus a resolution check).
 - **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
+- **"Exile … until this leaves the battlefield" returns through a trigger** (610.3): the return should be an immediate one-shot effect, not a leaves-the-battlefield ability on the stack (48 cards — Banishing Light, Borrowed Time…).
+- **"Cast from your graveyard" checks the zone, not whose graveyard** (Patrician Geist, Green Goblin): a spell cast from an opponent's graveyard also gets the discount.
+- **`look-and-choose` to exile always links the card to its source** (607.2a): Shadow Kin's exile is linked, so a copied "return the linked card" ability could return it.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.

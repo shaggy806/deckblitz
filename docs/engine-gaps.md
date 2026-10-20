@@ -237,3 +237,18 @@ that needs it is authored.
   pending through both players' priority; the step ends and it goes on the stack in the next
   one. Rule 117.5 puts it on the stack as the next player receives priority. Real entries come
   through `dispatch`, so this may be the debug path only — tests work around it.
+- **"Exile … until this leaves the battlefield" returns through a trigger.** Rule 610.3: an
+  object exiled "until" an event returns as a second one-shot effect created immediately after the
+  event — not a triggered ability, so it can't be responded to and returns even if the source's
+  abilities are gone. The pool writes these as `exile { untilSourceLeaves }` plus a `leaves-battlefield`
+  trigger with `return-exiled-by-source` (48 cards — Banishing Light, Borrowed Time, Brutal Cathar…).
+  Cards worded as two abilities (Oblivion Ring) really do trigger. Fix: return `untilSourceLeaves`
+  exiles as the source leaves (the way `phase-out` already does for Oubliette, 610.4) and drop the
+  triggers from the "until" cards. Noted by a Midnight Hunt agent, 2026-10-20.
+- **"Cast from your graveyard" checks the zone, not whose graveyard.** A `costModification` with
+  `castFrom: "graveyard"` (Patrician Geist, Green Goblin) reads only the zone a spell was cast from,
+  so a spell cast from an opponent's graveyard (Memory Plunder) gets the discount too.
+- **`look-and-choose` to exile always links the card to its source** (rule 607.2a): `destination:
+  "exile"` sets `exiledWith`, so Shadow Kin's milled-and-exiled card is linked to it, and a copied
+  "return the linked card" leaves ability (Watcher for Tomorrow) would return it. Needs a
+  `link: false` option.

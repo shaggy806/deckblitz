@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Innistrad: Midnight Hunt and Midnight Hunt Commander, whole** (batch 108): their last 184
+  cards, 126 authored, with coven (the `coven` condition) and the day/night trigger, condition and
+  "it becomes day as this enters" built and 12 cards on them, plus 4 older coven cards (Leinore,
+  Redemption Choir, Collector's Cage, Augur of Autumn); 58 blocked (2026-10-20).
 - **Innistrad: Crimson Vow, whole** (batch 107): its last 167 cards, 118 authored, with training
   (702.149), exploit (702.110) and cleave (702.148) built and 31 cards on them — 23 in the set and 8
   older ones (Torens, Fist of the Angels, Warrior's Resolve, Colonel Autumn, Fell Stinger…) plus Dig

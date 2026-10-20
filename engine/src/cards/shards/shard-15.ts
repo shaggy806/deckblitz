@@ -79,6 +79,7 @@ import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
 import _poolCormelaGlamourThief from "../pool/cormela-glamour-thief.js";
 import _poolCourierBat from "../pool/courier-bat.js";
+import _poolCovertCutpurse from "../pool/covert-cutpurse.js";
 import _poolCrimsonOperative from "../pool/crimson-operative.js";
 import _poolCropRotation from "../pool/crop-rotation.js";
 import _poolCrowdFavorites from "../pool/crowd-favorites.js";
@@ -96,6 +97,7 @@ import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
 import _poolDidactEcho from "../pool/didact-echo.js";
+import _poolDiregrafHorde from "../pool/diregraf-horde.js";
 import _poolDissipate from "../pool/dissipate.js";
 import _poolDivingGriffin from "../pool/diving-griffin.js";
 import _poolDoggedHunter from "../pool/dogged-hunter.js";
@@ -198,6 +200,7 @@ import _poolHavenOfTheSpiritDragon from "../pool/haven-of-the-spirit-dragon.js";
 import _poolHavengulVampire from "../pool/havengul-vampire.js";
 import _poolHawkeyesBow from "../pool/hawkeyes-bow.js";
 import _poolHealersFlock from "../pool/healers-flock.js";
+import _poolHeirloomMirror from "../pool/heirloom-mirror.js";
 import _poolHiddenFootblade from "../pool/hidden-footblade.js";
 import _poolHighlandWeald from "../pool/highland-weald.js";
 import _poolHillGiant from "../pool/hill-giant.js";
@@ -254,6 +257,7 @@ import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
 import _poolLostVale from "../pool/lost-vale.js";
 import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
 import _poolLoyalInventor from "../pool/loyal-inventor.js";
+import _poolLunarFrenzy from "../pool/lunar-frenzy.js";
 import _poolMaelstromArtisan from "../pool/maelstrom-artisan.js";
 import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
@@ -417,6 +421,7 @@ import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
 import _poolTouchOfDeath from "../pool/touch-of-death.js";
 import _poolTovolarTheMidnightScourge from "../pool/tovolar-the-midnight-scourge.js";
+import _poolTovolarsHuntmaster from "../pool/tovolars-huntmaster.js";
 import _poolTownGreeter from "../pool/town-greeter.js";
 import _poolTragicBanshee from "../pool/tragic-banshee.js";
 import _poolTrailtrackerScout from "../pool/trailtracker-scout.js";
@@ -558,6 +563,7 @@ const shard: CardShard = {
     _poolCopperLonglegs,
     _poolCormelaGlamourThief,
     _poolCourierBat,
+    _poolCovertCutpurse,
     _poolCrimsonOperative,
     _poolCropRotation,
     _poolCrowdFavorites,
@@ -575,6 +581,7 @@ const shard: CardShard = {
     _poolDespark,
     _poolDiaryOfDreams,
     _poolDidactEcho,
+    _poolDiregrafHorde,
     _poolDissipate,
     _poolDivingGriffin,
     _poolDoggedHunter,
@@ -677,6 +684,7 @@ const shard: CardShard = {
     _poolHavengulVampire,
     _poolHawkeyesBow,
     _poolHealersFlock,
+    _poolHeirloomMirror,
     _poolHiddenFootblade,
     _poolHighlandWeald,
     _poolHillGiant,
@@ -733,6 +741,7 @@ const shard: CardShard = {
     _poolLostVale,
     _poolLothoCorruptShirriff,
     _poolLoyalInventor,
+    _poolLunarFrenzy,
     _poolMaelstromArtisan,
     _poolMaggotTherapy,
     _poolMagitekScythe,
@@ -896,6 +905,7 @@ const shard: CardShard = {
     _poolTitansVanguard,
     _poolTouchOfDeath,
     _poolTovolarTheMidnightScourge,
+    _poolTovolarsHuntmaster,
     _poolTownGreeter,
     _poolTragicBanshee,
     _poolTrailtrackerScout,

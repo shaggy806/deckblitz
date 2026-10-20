@@ -29,6 +29,7 @@ import _poolAtmosphericGreenhouse from "../pool/atmospheric-greenhouse.js";
 import _poolAttrition from "../pool/attrition.js";
 import _poolAudacity from "../pool/audacity.js";
 import _poolAuraExtraction from "../pool/aura-extraction.js";
+import _poolAvacynsMemorial from "../pool/avacyns-memorial.js";
 import _poolBadgermoleCub from "../pool/badgermole-cub.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
@@ -39,6 +40,7 @@ import _poolBattlemagesBracers from "../pool/battlemages-bracers.js";
 import _poolBeaconOfUnrest from "../pool/beacon-of-unrest.js";
 import _poolBehindTheScenes from "../pool/behind-the-scenes.js";
 import _poolBelligerentOfTheBall from "../pool/belligerent-of-the-ball.js";
+import _poolBereavedSurvivor from "../pool/bereaved-survivor.js";
 import _poolBerserkersOfBloodRidge from "../pool/berserkers-of-blood-ridge.js";
 import _poolBigMotherMouser from "../pool/big-mother-mouser.js";
 import _poolBlackLotus from "../pool/black-lotus.js";
@@ -91,6 +93,7 @@ import _poolCoffinPurge from "../pool/coffin-purge.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
 import _poolConduitOfWorlds from "../pool/conduit-of-worlds.js";
+import _poolContortionistTroupe from "../pool/contortionist-troupe.js";
 import _poolCordialVampire from "../pool/cordial-vampire.js";
 import _poolCorpulentCorpse from "../pool/corpulent-corpse.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
@@ -111,6 +114,7 @@ import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
 import _poolDemystify from "../pool/demystify.js";
+import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
@@ -161,6 +165,7 @@ import _poolFrontlineDevastator from "../pool/frontline-devastator.js";
 import _poolGaiusVanBaelsar from "../pool/gaius-van-baelsar.js";
 import _poolGandalfsSanction from "../pool/gandalfs-sanction.js";
 import _poolGarruksGorehorn from "../pool/garruks-gorehorn.js";
+import _poolGavonySilversmith from "../pool/gavony-silversmith.js";
 import _poolGearbaneOrangutan from "../pool/gearbane-orangutan.js";
 import _poolGetLost from "../pool/get-lost.js";
 import _poolGethsGrimoire from "../pool/geths-grimoire.js";
@@ -559,6 +564,7 @@ const shard: CardShard = {
     _poolAttrition,
     _poolAudacity,
     _poolAuraExtraction,
+    _poolAvacynsMemorial,
     _poolBadgermoleCub,
     _poolBarbaryApes,
     _poolBarbedBatterfist,
@@ -569,6 +575,7 @@ const shard: CardShard = {
     _poolBeaconOfUnrest,
     _poolBehindTheScenes,
     _poolBelligerentOfTheBall,
+    _poolBereavedSurvivor,
     _poolBerserkersOfBloodRidge,
     _poolBigMotherMouser,
     _poolBlackLotus,
@@ -621,6 +628,7 @@ const shard: CardShard = {
     _poolCommanderMustard,
     _poolConclaveMentor,
     _poolConduitOfWorlds,
+    _poolContortionistTroupe,
     _poolCordialVampire,
     _poolCorpulentCorpse,
     _poolCounterpoint,
@@ -641,6 +649,7 @@ const shard: CardShard = {
     _poolDefendersOfHumanity,
     _poolDelusionsOfMediocrity,
     _poolDemystify,
+    _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
     _poolDevoteeOfStrength,
     _poolDimirGuildmage,
@@ -691,6 +700,7 @@ const shard: CardShard = {
     _poolGaiusVanBaelsar,
     _poolGandalfsSanction,
     _poolGarruksGorehorn,
+    _poolGavonySilversmith,
     _poolGearbaneOrangutan,
     _poolGetLost,
     _poolGethsGrimoire,
