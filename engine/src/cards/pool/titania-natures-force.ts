@@ -27,7 +27,7 @@ export default defineCard({
       text: "Whenever a Forest you control enters, create a 5/3 green Elemental creature token.",
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Elemental" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Elemental" } },
       targets: [],
       effect: {
         kind: "may",

@@ -35,7 +35,7 @@ export default defineCard({
       text: DIES_TEXT,
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Goblin" }, otherOnly: true },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Goblin" }, otherOnly: true },
       targets: ["any-target"],
       effect: { kind: "damage", amount: 1, target: 0 },
       resolve: null,

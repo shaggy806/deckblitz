@@ -34,7 +34,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Vampire" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Vampire" } },
       targets: [],
       effect: {
         kind: "may",

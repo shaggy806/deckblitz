@@ -24,7 +24,7 @@ export default defineCard({
   text: `Menace\n${TEXT}`,
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { token: false, subtype: "Knight" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", token: false, subtype: "Knight" } },
       targets: [],
       effect: {
         kind: "sequence",

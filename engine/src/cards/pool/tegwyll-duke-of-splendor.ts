@@ -19,7 +19,7 @@ export default defineCard({
   text: "Flying, deathtouch\nOther Faeries you control get +1/+1.\nWhenever another Faerie you control dies, you draw a card and you lose 1 life.",
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Faerie" }, otherOnly: true },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Faerie" }, otherOnly: true },
       targets: [],
       effect: {
         kind: "sequence",

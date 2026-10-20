@@ -42,7 +42,7 @@ export default defineCard({
       text: DAMAGE_TEXT,
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtypes: ["Goblin", "Orc", "Army"] }, otherOnly: true },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtypes: ["Goblin", "Orc", "Army"] }, otherOnly: true },
       targets: [],
       effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
       resolve: null,

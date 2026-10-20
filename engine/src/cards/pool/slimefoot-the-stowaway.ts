@@ -20,7 +20,7 @@ export default defineCard({
     "{4}: Create a 1/1 green Saproling creature token.",
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Saproling" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Saproling" } },
       targets: [],
       effect: {
         kind: "sequence",

@@ -21,7 +21,7 @@ export default defineCard({
       text: ETB_TEXT,
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Villain" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Villain" } },
       targets: [],
       effect: {
         kind: "sequence",

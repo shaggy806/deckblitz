@@ -18,7 +18,7 @@ export default defineCard({
       text: "Whenever an Angel you control enters, you gain 4 life.",
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Angel" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Angel" } },
       targets: [],
       effect: { kind: "create-token", token: "Spirit Token", count: 1 },
       resolve: null,

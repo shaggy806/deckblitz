@@ -33,7 +33,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Sliver", token: false } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Sliver", token: false } },
       targets: [],
       effect: { kind: "amass", amount: 2, creatureType: "Sliver" },
       resolve: null,

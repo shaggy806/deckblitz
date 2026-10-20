@@ -19,7 +19,7 @@ export default defineCard({
   text: `Flash\n${TEXT}`,
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Villain" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Villain" } },
       targets: [],
       effect: {
         kind: "put-onto-battlefield",

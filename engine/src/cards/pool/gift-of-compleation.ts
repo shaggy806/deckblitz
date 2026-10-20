@@ -20,7 +20,7 @@ export default defineCard({
       text: INCUBATE_TEXT,
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Phyrexian" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Phyrexian" } },
       targets: [],
       effect: { kind: "surveil", amount: 1 },
       resolve: null,

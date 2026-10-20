@@ -30,7 +30,7 @@ export default defineCard({
       trigger: {
         on: "dies",
         who: "you-control",
-        filter: { subtype: "Zombie", notKeyword: "decayed" },
+        filter: { type: "creature", subtype: "Zombie", notKeyword: "decayed" },
         otherOnly: true,
       },
       targets: [],

@@ -33,7 +33,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Insect" }, otherOnly: true },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Insect" }, otherOnly: true },
       targets: [],
       effect: {
         kind: "sequence",

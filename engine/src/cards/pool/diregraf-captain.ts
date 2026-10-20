@@ -25,7 +25,7 @@ export default defineCard({
       trigger: {
         on: "dies",
         who: "you-control",
-        filter: { subtype: "Zombie" },
+        filter: { type: "creature", subtype: "Zombie" },
         otherOnly: true,
       },
       targets: ["opponent"],

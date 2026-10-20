@@ -29,7 +29,7 @@ export default defineCard({
       // "That creature's power" is the power it died with, read by
       // last-known information (rule 608.2h) — counters and the other
       // Illusions' bonus included.
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Illusion" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Illusion" } },
       targets: [],
       effect: {
         kind: "look-and-choose",

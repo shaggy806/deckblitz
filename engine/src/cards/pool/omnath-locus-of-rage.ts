@@ -31,7 +31,7 @@ export default defineCard({
       text: LANDFALL_TEXT,
     },
     ...thisOrAnother({
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Elemental" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Elemental" } },
       targets: ["any-target"],
       effect: { kind: "damage", target: 0, amount: 3 },
       resolve: null,

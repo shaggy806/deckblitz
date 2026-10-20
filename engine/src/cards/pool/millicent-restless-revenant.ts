@@ -9,7 +9,7 @@ import { affinity, thisOrAnother } from "../helpers.js";
 const TEXT =
   "Whenever Millicent or another nontoken Spirit you control dies or deals combat damage to a player, " +
   "create a 1/1 white Spirit creature token with flying.";
-const spirit = { subtype: "Spirit", token: false } as const;
+const spirit = { type: "creature", subtype: "Spirit", token: false } as const;
 const token = { kind: "create-token", token: "Spirit Token", count: 1 } as const;
 
 export default defineCard({

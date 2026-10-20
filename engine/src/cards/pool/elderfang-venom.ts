@@ -22,7 +22,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Elf" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Elf" } },
       targets: [],
       effect: {
         kind: "sequence",

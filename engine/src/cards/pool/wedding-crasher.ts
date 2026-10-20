@@ -15,7 +15,7 @@ export default defineCard({
   text: `${DIES_TEXT}\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)`,
   triggered: [
     ...thisOrAnother({
-      trigger: { on: "dies", who: "you-control", filter: { subtypes: ["Wolf", "Werewolf"] } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtypes: ["Wolf", "Werewolf"] } },
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

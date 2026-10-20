@@ -43,7 +43,7 @@ export default defineCard({
       text: END_TEXT,
     },
     {
-      trigger: { on: "dies", who: "any", filter: { subtype: "Rat" } },
+      trigger: { on: "dies", who: "any", filter: { type: "creature", subtype: "Rat" } },
       targets: [],
       effect: {
         kind: "add-counter-all",

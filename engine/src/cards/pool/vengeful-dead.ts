@@ -14,7 +14,7 @@ export default defineCard({
     ...thisOrAnother({
       // "**or another Zombie**" — anyone's, so not `you-control`; and
       // Vengeful Dead itself whatever it is by then.
-      trigger: { on: "dies", who: "any", filter: { subtype: "Zombie" } },
+      trigger: { on: "dies", who: "any", filter: { type: "creature", subtype: "Zombie" } },
       targets: [],
       effect: { kind: "lose-life", amount: 1, who: "each-opponent" },
       resolve: null,

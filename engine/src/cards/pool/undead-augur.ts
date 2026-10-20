@@ -14,7 +14,7 @@ export default defineCard({
     "you lose 1 life.",
   triggered: [
     ...thisOrAnother({
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Zombie" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Zombie" } },
       targets: [],
       effect: {
         kind: "sequence",

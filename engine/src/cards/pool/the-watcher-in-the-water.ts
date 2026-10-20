@@ -44,7 +44,7 @@ export default defineCard({
       text: DRAW_TEXT,
     },
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Tentacle" } },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Tentacle" } },
       targets: [
         { kind: "optional", of: { kind: "permanent", filter: { subtype: "Kraken" } } },
         { kind: "optional", of: "nonland-permanent" },

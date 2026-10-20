@@ -32,7 +32,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "dies", who: "you-control", filter: { subtype: "Eldrazi" }, otherOnly: true },
+      trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtype: "Eldrazi" }, otherOnly: true },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

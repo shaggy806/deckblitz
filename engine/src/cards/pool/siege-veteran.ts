@@ -21,7 +21,7 @@ export default defineCard({
       trigger: {
         on: "dies",
         who: "you-control",
-        filter: { token: false, subtype: "Soldier" },
+        filter: { type: "creature", token: false, subtype: "Soldier" },
         otherOnly: true,
       },
       targets: [],

@@ -806,8 +806,14 @@ export function parseTrigger(clause) {
         c,
       ))
   ) {
-    const filter = parseTypePhrase(m[2]);
+    let filter = parseTypePhrase(m[2]);
     if (filter === null) return null;
+    // Only a creature dies (rule 700.4): the `dies` trigger is any trip from
+    // the battlefield to a graveyard, so "a Human you control dies" says so —
+    // or a noncreature changeling going there would count.
+    if (m[4] === "dies" && filter.type === undefined && filter.types === undefined && filter.typesAnyOf === undefined) {
+      filter = { type: "creature", ...filter };
+    }
     const on = {
       enters: "enters-battlefield",
       dies: "dies",
