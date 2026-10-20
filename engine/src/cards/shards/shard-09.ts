@@ -115,6 +115,7 @@ import _poolDragonRoost from "../pool/dragon-roost.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
 import _poolDreadfeastDemon from "../pool/dreadfeast-demon.js";
 import _poolDreamTrawler from "../pool/dream-trawler.js";
+import _poolDrider from "../pool/drider.js";
 import _poolDrossclaw from "../pool/drossclaw.js";
 import _poolDrumbellower from "../pool/drumbellower.js";
 import _poolDutifulThrull from "../pool/dutiful-thrull.js";
@@ -360,6 +361,7 @@ import _poolSavageKnuckleblade from "../pool/savage-knuckleblade.js";
 import _poolSavaiCrystal from "../pool/savai-crystal.js";
 import _poolScabland from "../pool/scabland.js";
 import _poolScaleOfChissGoria from "../pool/scale-of-chiss-goria.js";
+import _poolScionOfStygia from "../pool/scion-of-stygia.js";
 import _poolScourForScrap from "../pool/scour-for-scrap.js";
 import _poolScourFromExistence from "../pool/scour-from-existence.js";
 import _poolScouringSwarm from "../pool/scouring-swarm.js";
@@ -389,6 +391,7 @@ import _poolSoaringDrake from "../pool/soaring-drake.js";
 import _poolSoaringShowOff from "../pool/soaring-show-off.js";
 import _poolSparkTrooper from "../pool/spark-trooper.js";
 import _poolSpiderManWebSpinner from "../pool/spider-man-web-spinner.js";
+import _poolSpikedPitTrap from "../pool/spiked-pit-trap.js";
 import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
@@ -624,6 +627,7 @@ const shard: CardShard = {
     _poolDreadedBatCloud,
     _poolDreadfeastDemon,
     _poolDreamTrawler,
+    _poolDrider,
     _poolDrossclaw,
     _poolDrumbellower,
     _poolDutifulThrull,
@@ -869,6 +873,7 @@ const shard: CardShard = {
     _poolSavaiCrystal,
     _poolScabland,
     _poolScaleOfChissGoria,
+    _poolScionOfStygia,
     _poolScourForScrap,
     _poolScourFromExistence,
     _poolScouringSwarm,
@@ -898,6 +903,7 @@ const shard: CardShard = {
     _poolSoaringShowOff,
     _poolSparkTrooper,
     _poolSpiderManWebSpinner,
+    _poolSpikedPitTrap,
     _poolSpinewoodsPaladin,
     _poolSpireMechcycle,
     _poolSplatterGoblin,

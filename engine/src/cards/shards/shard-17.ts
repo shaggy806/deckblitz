@@ -101,6 +101,7 @@ import _poolDeathBaron from "../pool/death-baron.js";
 import _poolDeceptiveLandscape from "../pool/deceptive-landscape.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
+import _poolDevotedPaladin from "../pool/devoted-paladin.js";
 import _poolDiregrafCaptain from "../pool/diregraf-captain.js";
 import _poolDisposalMummy from "../pool/disposal-mummy.js";
 import _poolDistractingGeist from "../pool/distracting-geist.js";
@@ -136,6 +137,7 @@ import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFandanielTelophoroiAscian from "../pool/fandaniel-telophoroi-ascian.js";
 import _poolFarFortuneEndBoss from "../pool/far-fortune-end-boss.js";
 import _poolFarbogRevenant from "../pool/farbog-revenant.js";
+import _poolFatesReversal from "../pool/fates-reversal.js";
 import _poolFearOfSurveillance from "../pool/fear-of-surveillance.js";
 import _poolFeatherOfFlight from "../pool/feather-of-flight.js";
 import _poolFervor from "../pool/fervor.js";
@@ -172,6 +174,7 @@ import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
+import _poolGretchenTitchwillow from "../pool/gretchen-titchwillow.js";
 import _poolGreyKnightParagon from "../pool/grey-knight-paragon.js";
 import _poolGrimBounty from "../pool/grim-bounty.js";
 import _poolGrimReapersSprint from "../pool/grim-reapers-sprint.js";
@@ -473,6 +476,7 @@ import _poolYahenniUndyingPartisan from "../pool/yahenni-undying-partisan.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
 import _poolYotianTactician from "../pool/yotian-tactician.js";
+import _poolYouMeetInATavern from "../pool/you-meet-in-a-tavern.js";
 import _poolYourTempleIsUnderAttack from "../pool/your-temple-is-under-attack.js";
 import _poolZealousGuardian from "../pool/zealous-guardian.js";
 import _poolZinniaValleysVoice from "../pool/zinnia-valleys-voice.js";
@@ -594,6 +598,7 @@ const shard: CardShard = {
     _poolDeceptiveLandscape,
     _poolDecoyPloy,
     _poolDeepfathomSkulker,
+    _poolDevotedPaladin,
     _poolDiregrafCaptain,
     _poolDisposalMummy,
     _poolDistractingGeist,
@@ -629,6 +634,7 @@ const shard: CardShard = {
     _poolFandanielTelophoroiAscian,
     _poolFarFortuneEndBoss,
     _poolFarbogRevenant,
+    _poolFatesReversal,
     _poolFearOfSurveillance,
     _poolFeatherOfFlight,
     _poolFervor,
@@ -665,6 +671,7 @@ const shard: CardShard = {
     _poolGrandArbiterAugustinIv,
     _poolGraspingShadows,
     _poolGrazingKelpie,
+    _poolGretchenTitchwillow,
     _poolGreyKnightParagon,
     _poolGrimBounty,
     _poolGrimReapersSprint,
@@ -966,6 +973,7 @@ const shard: CardShard = {
     _poolYawningFissure,
     _poolYevasForcemage,
     _poolYotianTactician,
+    _poolYouMeetInATavern,
     _poolYourTempleIsUnderAttack,
     _poolZealousGuardian,
     _poolZinniaValleysVoice,

@@ -8379,6 +8379,74 @@
   "cost:spend-only-disturb-cost": {
    "family": "cost:mana-spending-rules",
    "example": "Unblinking Observer"
+  },
+  "effect:roll-two-keep-higher": {
+   "family": "mechanic:dice-rolling",
+   "example": "Berserker's Frenzy"
+  },
+  "effect:exchange-hand-and-library": {
+   "family": "effect:amount-new-variants",
+   "example": "Mordenkainen"
+  },
+  "trigger:rolls-natural-result": {
+   "family": "mechanic:dice-rolling",
+   "example": "Critical Hit"
+  },
+  "amount:differently-named-dungeons-completed": {
+   "family": "mechanic:dungeon",
+   "example": "Ellywick Tumblestrum"
+  },
+  "static:venture-limit-once-per-turn": {
+   "family": "mechanic:dungeon",
+   "example": "Keen-Eared Sentry"
+  },
+  "effect:opponent-chooses-cards-from-hand": {
+   "family": "effect:choices-by-other-players",
+   "example": "Extract Brain"
+  },
+  "condition:trigger-roll-results": {
+   "family": "mechanic:dice-rolling",
+   "example": "Farideh, Devil's Chosen"
+  },
+  "static:must-block-each-combat": {
+   "family": "static:combat-restriction-extensions",
+   "example": "Iron Golem"
+  },
+  "replacement:reveal-from-hand-enters-with-counters": {
+   "family": "static:enters-replacement-for-others",
+   "example": "Dragon's Disciple"
+  },
+  "effect:targets-different-mana-values": {
+   "family": "condition:filter-combinators",
+   "example": "Long Rest"
+  },
+  "filter:mass-effect-amount-operand": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Sphere of Annihilation"
+  },
+  "effect:damage-source-itself": {
+   "family": "replacement:damage-modification",
+   "example": "Vrondiss, Rage of Ancients"
+  },
+  "cost:roll-die-as-cost": {
+   "family": "mechanic:dice-rolling",
+   "example": "Clay Golem"
+  },
+  "zone:cast-from-library-top-grants-trigger": {
+   "family": "zone:cast-from-library-top",
+   "example": "Galea, Kindler of Hope"
+  },
+  "cost:exile-named-artifacts": {
+   "family": "cost:choose-cards-as-cost",
+   "example": "The Book of Vile Darkness"
+  },
+  "effect:token-gains-exiled-triggers": {
+   "family": "effect:token-copy-options",
+   "example": "The Book of Vile Darkness"
+  },
+  "effect:choose-half-of-permanents": {
+   "family": "decision:choose-from-zone-extensions",
+   "example": "Split the Party"
   }
  }
 }

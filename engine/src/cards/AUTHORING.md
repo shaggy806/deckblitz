@@ -4632,10 +4632,10 @@ not an ability that triggers when a permanent phases in or out (rule 603.10b —
 no pool card has one yet), nor "phases out until …" with any event other than
 its source leaving the battlefield.
 
-**Not modeled at all:** Battles, dungeons / the Initiative,
+**Not modeled at all:**
 banding, "day/night"-independent double-faced tokens, a static ability that
 makes a planeswalker a creature (Gideon), ability-dependency ordering (rule
-613.8), companions, Cases,
+613.8), companions,
 a −X loyalty cost (Ugin, the
 Spirit Dragon).
 

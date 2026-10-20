@@ -69,6 +69,7 @@ import _poolCelestialAncient from "../pool/celestial-ancient.js";
 import _poolChar from "../pool/char.js";
 import _poolChargingBadger from "../pool/charging-badger.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
+import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
@@ -240,9 +241,11 @@ import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
 import _poolLegolassQuickReflexes from "../pool/legolass-quick-reflexes.js";
 import _poolLeylineSurge from "../pool/leyline-surge.js";
+import _poolLightfootRogue from "../pool/lightfoot-rogue.js";
 import _poolLivingLiesOfLoki from "../pool/living-lies-of-loki.js";
 import _poolLonelySandbar from "../pool/lonely-sandbar.js";
 import _poolLoxodonAnchorite from "../pool/loxodon-anchorite.js";
+import _poolLurkingRoper from "../pool/lurking-roper.js";
 import _poolLyraArchangelOfDawn from "../pool/lyra-archangel-of-dawn.js";
 import _poolMabelsMettle from "../pool/mabels-mettle.js";
 import _poolMachineOverMatter from "../pool/machine-over-matter.js";
@@ -502,6 +505,7 @@ import _tokensFaerieDragonToken from "../tokens/faerie-dragon-token.js";
 import _tokensHornetToken from "../tokens/hornet-token.js";
 import _tokensHorrorTokenTheFinalDays from "../tokens/horror-token-the-final-days.js";
 import _tokensHumanKnightTokenThePrydwen from "../tokens/human-knight-token-the-prydwen.js";
+import _tokensIcingdeathFrostTongue from "../tokens/icingdeath-frost-tongue.js";
 import _tokensIcyManalithToken from "../tokens/icy-manalith-token.js";
 import _tokensImpTokenJudith from "../tokens/imp-token-judith.js";
 import _tokensMerfolkTokenDeeprootWaters from "../tokens/merfolk-token-deeproot-waters.js";
@@ -582,6 +586,7 @@ const shard: CardShard = {
     _poolChar,
     _poolChargingBadger,
     _poolCharredGraverobber,
+    _poolChooseYourWeapon,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
     _poolCityOfDeath,
@@ -753,9 +758,11 @@ const shard: CardShard = {
     _poolLegolasMasterArcher,
     _poolLegolassQuickReflexes,
     _poolLeylineSurge,
+    _poolLightfootRogue,
     _poolLivingLiesOfLoki,
     _poolLonelySandbar,
     _poolLoxodonAnchorite,
+    _poolLurkingRoper,
     _poolLyraArchangelOfDawn,
     _poolMabelsMettle,
     _poolMachineOverMatter,
@@ -1017,6 +1024,7 @@ const shard: CardShard = {
     _tokensHornetToken,
     _tokensHorrorTokenTheFinalDays,
     _tokensHumanKnightTokenThePrydwen,
+    _tokensIcingdeathFrostTongue,
     _tokensIcyManalithToken,
     _tokensImpTokenJudith,
     _tokensMerfolkTokenDeeprootWaters,

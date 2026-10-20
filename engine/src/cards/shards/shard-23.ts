@@ -127,6 +127,7 @@ import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
 import _poolEarthRumbleWrestlers from "../pool/earth-rumble-wrestlers.js";
 import _poolEatenAlive from "../pool/eaten-alive.js";
+import _poolEbonyFly from "../pool/ebony-fly.js";
 import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
@@ -252,6 +253,7 @@ import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
 import _poolManaPrism from "../pool/mana-prism.js";
 import _poolMandibleJusticiar from "../pool/mandible-justiciar.js";
+import _poolManticore from "../pool/manticore.js";
 import _poolMaraudingDreadship from "../pool/marauding-dreadship.js";
 import _poolMarchFromTheBlackGate from "../pool/march-from-the-black-gate.js";
 import _poolMarkOfFury from "../pool/mark-of-fury.js";
@@ -633,6 +635,7 @@ const shard: CardShard = {
     _poolEarthOriginYak,
     _poolEarthRumbleWrestlers,
     _poolEatenAlive,
+    _poolEbonyFly,
     _poolEclipsedSteppe,
     _poolEiganjoSeatOfTheEmpire,
     _poolElderAuntie,
@@ -758,6 +761,7 @@ const shard: CardShard = {
     _poolMammothSpider,
     _poolManaPrism,
     _poolMandibleJusticiar,
+    _poolManticore,
     _poolMaraudingDreadship,
     _poolMarchFromTheBlackGate,
     _poolMarkOfFury,

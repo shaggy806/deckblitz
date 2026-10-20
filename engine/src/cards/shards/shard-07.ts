@@ -47,6 +47,7 @@ import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
+import _poolBullsStrength from "../pool/bulls-strength.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
@@ -148,6 +149,7 @@ import _poolGilaCourser from "../pool/gila-courser.js";
 import _poolGlissasScorn from "../pool/glissas-scorn.js";
 import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
+import _poolGloomStalker from "../pool/gloom-stalker.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoldMyr from "../pool/gold-myr.js";
 import _poolGoldhound from "../pool/goldhound.js";
@@ -512,6 +514,7 @@ import _tokensInsectTokenNestOfScarabs from "../tokens/insect-token-nest-of-scar
 import _tokensKaroxBladewingToken from "../tokens/karox-bladewing-token.js";
 import _tokensOxTokenOxDrover from "../tokens/ox-token-ox-drover.js";
 import _tokensPlantTokenDefender from "../tokens/plant-token-defender.js";
+import _tokensSpiderToken21BlackMenaceReach from "../tokens/spider-token-2-1-black-menace-reach.js";
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
@@ -565,6 +568,7 @@ const shard: CardShard = {
     _poolBoonOfBoseiju,
     _poolBountyAgent,
     _poolBronzebeakMoa,
+    _poolBullsStrength,
     _poolCallousInspector,
     _poolCaseOfTheShatteredPact,
     _poolChandrasEmberling,
@@ -666,6 +670,7 @@ const shard: CardShard = {
     _poolGlissasScorn,
     _poolGloinDwarfEmissary,
     _poolGloomRipper,
+    _poolGloomStalker,
     _poolGoblinShortcutter,
     _poolGoldMyr,
     _poolGoldhound,
@@ -1032,6 +1037,7 @@ const shard: CardShard = {
     _tokensKaroxBladewingToken,
     _tokensOxTokenOxDrover,
     _tokensPlantTokenDefender,
+    _tokensSpiderToken21BlackMenaceReach,
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
     _tokensWraithToken,

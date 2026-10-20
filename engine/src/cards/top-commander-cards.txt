@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3721 already implemented / 1279 missing (marks refreshed 2026-10-20)
+3722 already implemented / 1278 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3245,7 +3245,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3252  Wakening Sun's Avatar                    {5}{W}{W}{W}     Creature — Dinosaur Avatar
 [x]  3253  Rain of Filth                            {B}              Instant
 [ ]  3254  The Endstone                             {7}              Legendary Artifact
-[ ]  3255  Fandaniel, Telophoroi Ascian             {4}{B}           Legendary Creature — Elder Wizard
+[x]  3255  Fandaniel, Telophoroi Ascian             {4}{B}           Legendary Creature — Elder Wizard
 [x]  3256  Angel of Indemnity                       {5}{W}           Creature — Angel Warrior
 [ ]  3257  Misleading Signpost                      {2}{U}           Artifact
 [ ]  3258  Hour of Promise                          {4}{G}           Sorcery

@@ -317,6 +317,7 @@ import _poolRakaDisciple from "../pool/raka-disciple.js";
 import _poolRakdosCluestone from "../pool/rakdos-cluestone.js";
 import _poolRamirezDepietro from "../pool/ramirez-depietro.js";
 import _poolRampagingRendhorn from "../pool/rampaging-rendhorn.js";
+import _poolRangersHawk from "../pool/rangers-hawk.js";
 import _poolRavenousGiant from "../pool/ravenous-giant.js";
 import _poolRazorgrassField from "../pool/razorgrass-field.js";
 import _poolRecover from "../pool/recover.js";
@@ -823,6 +824,7 @@ const shard: CardShard = {
     _poolRakdosCluestone,
     _poolRamirezDepietro,
     _poolRampagingRendhorn,
+    _poolRangersHawk,
     _poolRavenousGiant,
     _poolRazorgrassField,
     _poolRecover,

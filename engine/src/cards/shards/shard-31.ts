@@ -6,8 +6,10 @@ import type { CardShard } from "../card-shards.js";
 import _poolAangsIceberg from "../pool/aangs-iceberg.js";
 import _poolAardvarkSloth from "../pool/aardvark-sloth.js";
 import _poolAbbeyGargoyles from "../pool/abbey-gargoyles.js";
+import _poolAberrantMindSorcerer from "../pool/aberrant-mind-sorcerer.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
+import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
@@ -130,6 +132,7 @@ import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
 import _poolDungeonDescent from "../pool/dungeon-descent.js";
 import _poolDunlandCrebain from "../pool/dunland-crebain.js";
+import _poolEarthCultElemental from "../pool/earth-cult-elemental.js";
 import _poolEastWindAvatar from "../pool/east-wind-avatar.js";
 import _poolEchoPerceptiveProdigy from "../pool/echo-perceptive-prodigy.js";
 import _poolEclipsedElf from "../pool/eclipsed-elf.js";
@@ -322,6 +325,7 @@ import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolPacifism from "../pool/pacifism.js";
+import _poolPaladinsShield from "../pool/paladins-shield.js";
 import _poolPantherPounce from "../pool/panther-pounce.js";
 import _poolParadoxicalOutcome from "../pool/paradoxical-outcome.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
@@ -339,6 +343,7 @@ import _poolRamirezDepietroPillager from "../pool/ramirez-depietro-pillager.js";
 import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
 import _poolRavenform from "../pool/ravenform.js";
+import _poolReapersTalisman from "../pool/reapers-talisman.js";
 import _poolRedDragon from "../pool/red-dragon.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
@@ -517,8 +522,10 @@ const shard: CardShard = {
     _poolAangsIceberg,
     _poolAardvarkSloth,
     _poolAbbeyGargoyles,
+    _poolAberrantMindSorcerer,
     _poolAbzanBanner,
     _poolAcolyteOfAclazotz,
+    _poolAirCultElemental,
     _poolAkkiBattleSquad,
     _poolAlongTheCrookedWay,
     _poolAlphaMyr,
@@ -641,6 +648,7 @@ const shard: CardShard = {
     _poolDreamSpoilers,
     _poolDungeonDescent,
     _poolDunlandCrebain,
+    _poolEarthCultElemental,
     _poolEastWindAvatar,
     _poolEchoPerceptiveProdigy,
     _poolEclipsedElf,
@@ -833,6 +841,7 @@ const shard: CardShard = {
     _poolOrochiSustainer,
     _poolOverkill,
     _poolPacifism,
+    _poolPaladinsShield,
     _poolPantherPounce,
     _poolParadoxicalOutcome,
     _poolPatriarsSeal,
@@ -850,6 +859,7 @@ const shard: CardShard = {
     _poolRamosianGreatsword,
     _poolRangerCaptainOfEos,
     _poolRavenform,
+    _poolReapersTalisman,
     _poolRedDragon,
     _poolRegrowth,
     _poolRemorsefulCleric,

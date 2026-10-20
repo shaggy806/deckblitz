@@ -40,6 +40,7 @@ import _poolAzusaLostButSeeking from "../pool/azusa-lost-but-seeking.js";
 import _poolBagEndPorter from "../pool/bag-end-porter.js";
 import _poolBaldursGate from "../pool/baldurs-gate.js";
 import _poolBalduvianBarbarians from "../pool/balduvian-barbarians.js";
+import _poolBarTheGate from "../pool/bar-the-gate.js";
 import _poolBarrenMoor from "../pool/barren-moor.js";
 import _poolBattleflySwarm from "../pool/battlefly-swarm.js";
 import _poolBenevolentAncestor from "../pool/benevolent-ancestor.js";
@@ -94,6 +95,7 @@ import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
+import _poolDeathPriestOfMyrkul from "../pool/death-priest-of-myrkul.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
@@ -155,6 +157,7 @@ import _poolFellingBlow from "../pool/felling-blow.js";
 import _poolFemerefKnight from "../pool/femeref-knight.js";
 import _poolFerociousCharge from "../pool/ferocious-charge.js";
 import _poolFinalRevels from "../pool/final-revels.js";
+import _poolFindThePath from "../pool/find-the-path.js";
 import _poolFireDrake from "../pool/fire-drake.js";
 import _poolFireUrchin from "../pool/fire-urchin.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
@@ -572,6 +575,7 @@ const shard: CardShard = {
     _poolBagEndPorter,
     _poolBaldursGate,
     _poolBalduvianBarbarians,
+    _poolBarTheGate,
     _poolBarrenMoor,
     _poolBattleflySwarm,
     _poolBenevolentAncestor,
@@ -626,6 +630,7 @@ const shard: CardShard = {
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDawnhartWardens,
+    _poolDeathPriestOfMyrkul,
     _poolDeathcurseOgre,
     _poolDeathsprout,
     _poolDeception,
@@ -687,6 +692,7 @@ const shard: CardShard = {
     _poolFemerefKnight,
     _poolFerociousCharge,
     _poolFinalRevels,
+    _poolFindThePath,
     _poolFireDrake,
     _poolFireUrchin,
     _poolFlawlessForgery,

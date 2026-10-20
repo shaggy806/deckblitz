@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-442 already implemented / 58 missing
+443 already implemented / 57 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -190,7 +190,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  184  Wolverine, Best There Is                       12856 decks  {1}{R}{G}        Legendary Creature — Mutant Berserker Hero
 [x]  185  Vren, the Relentless                           12840 decks  {2}{U}{B}        Legendary Creature — Rat Rogue
 [x]  186  Blech, Loafing Pest                            12836 decks  {1}{B}{G}        Legendary Creature — Pest
-[ ]  187  Sefris of the Hidden Ways                      12800 decks  {W}{U}{B}        Legendary Creature — Human Wizard
+[x]  187  Sefris of the Hidden Ways                      12800 decks  {W}{U}{B}        Legendary Creature — Human Wizard
 [x]  188  The Mindskinner                                12796 decks  {U}{U}{U}        Legendary Enchantment Creature — Nightmare
 [x]  189  Tergrid, God of Fright                         12762 decks  {3}{B}{B}        Legendary Creature — God // Legendary Artifact
 [x]  190  Ardenn, Intrepid Archaeologist                 12745 decks  {2}{W}           Legendary Creature — Kor Scout

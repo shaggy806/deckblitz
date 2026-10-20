@@ -122,6 +122,7 @@ import _poolDesertedTemple from "../pool/deserted-temple.js";
 import _poolDesynchronization from "../pool/desynchronization.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
+import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
@@ -295,6 +296,7 @@ import _poolPlagueBeetle from "../pool/plague-beetle.js";
 import _poolPlaxcasterFrogling from "../pool/plaxcaster-frogling.js";
 import _poolPollutedBonds from "../pool/polluted-bonds.js";
 import _poolPollywogProdigy from "../pool/pollywog-prodigy.js";
+import _poolPowerWordKill from "../pool/power-word-kill.js";
 import _poolPracticedOffense from "../pool/practiced-offense.js";
 import _poolPriceOfFame from "../pool/price-of-fame.js";
 import _poolPrimalFrenzy from "../pool/primal-frenzy.js";
@@ -311,6 +313,7 @@ import _poolRaffinesInformant from "../pool/raffines-informant.js";
 import _poolRaggadraggaGoregutsBoss from "../pool/raggadragga-goreguts-boss.js";
 import _poolRagingGoblin from "../pool/raging-goblin.js";
 import _poolRainOfThorns from "../pool/rain-of-thorns.js";
+import _poolRallyManeuver from "../pool/rally-maneuver.js";
 import _poolRamThrough from "../pool/ram-through.js";
 import _poolRampagingBrontodon from "../pool/rampaging-brontodon.js";
 import _poolRamunapRuins from "../pool/ramunap-ruins.js";
@@ -460,6 +463,7 @@ import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
 import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
+import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
@@ -624,6 +628,7 @@ const shard: CardShard = {
     _poolDesynchronization,
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,
+    _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
     _poolDoomsTimePlatform,
@@ -797,6 +802,7 @@ const shard: CardShard = {
     _poolPlaxcasterFrogling,
     _poolPollutedBonds,
     _poolPollywogProdigy,
+    _poolPowerWordKill,
     _poolPracticedOffense,
     _poolPriceOfFame,
     _poolPrimalFrenzy,
@@ -813,6 +819,7 @@ const shard: CardShard = {
     _poolRaggadraggaGoregutsBoss,
     _poolRagingGoblin,
     _poolRainOfThorns,
+    _poolRallyManeuver,
     _poolRamThrough,
     _poolRampagingBrontodon,
     _poolRamunapRuins,
@@ -962,6 +969,7 @@ const shard: CardShard = {
     _poolWallOfBlood,
     _poolWallOfOmens,
     _poolWarMachineLegacyOfIron,
+    _poolWarlockClass,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
     _poolWhipSergeant,

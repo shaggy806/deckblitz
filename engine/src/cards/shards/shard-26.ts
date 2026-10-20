@@ -107,6 +107,7 @@ import _poolDrEggman from "../pool/dr-eggman.js";
 import _poolDragonFodder from "../pool/dragon-fodder.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
+import _poolDrizztDourden from "../pool/drizzt-dourden.js";
 import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDrownerOfSecrets from "../pool/drowner-of-secrets.js";
 import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
@@ -302,6 +303,7 @@ import _poolPredatorsHour from "../pool/predators-hour.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
+import _poolPurpleWorm from "../pool/purple-worm.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
 import _poolRaftSecurityOfficer from "../pool/raft-security-officer.js";
@@ -604,6 +606,7 @@ const shard: CardShard = {
     _poolDragonFodder,
     _poolDragonlordDromoka,
     _poolDrakewingKrasis,
+    _poolDrizztDourden,
     _poolDrogskolArmaments,
     _poolDrownerOfSecrets,
     _poolDuskshellCrawler,
@@ -799,6 +802,7 @@ const shard: CardShard = {
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
+    _poolPurpleWorm,
     _poolPygmyRazorback,
     _poolQarsiRevenant,
     _poolRaftSecurityOfficer,

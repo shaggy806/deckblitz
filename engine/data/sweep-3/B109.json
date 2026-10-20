@@ -1,0 +1,1378 @@
+{
+ "batch": "B109",
+ "status": "complete",
+ "ranks": "Adventures in the Forgotten Realms and Forgotten Realms Commander (AFR, AFC, 2021-07-23): the rest of each set; with the three Forgotten Realms dungeons, the older dungeon cards they unblocked, and four cards rule 101.4's each-player hold unblocked",
+ "authored": [
+  {
+   "name": "Aberrant Mind Sorcerer",
+   "files": [
+    "engine/src/cards/pool/aberrant-mind-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acererak the Archlich",
+   "files": [
+    "engine/src/cards/pool/acererak-the-archlich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Air-Cult Elemental",
+   "files": [
+    "engine/src/cards/pool/air-cult-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcane Investigator",
+   "files": [
+    "engine/src/cards/pool/arcane-investigator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armory Veteran",
+   "files": [
+    "engine/src/cards/pool/armory-veteran.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bag of Tricks",
+   "files": [
+    "engine/src/cards/pool/bag-of-tricks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baleful Beholder",
+   "files": [
+    "engine/src/cards/pool/baleful-beholder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bar the Gate",
+   "files": [
+    "engine/src/cards/pool/bar-the-gate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bard Class",
+   "files": [
+    "engine/src/cards/pool/bard-class.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barrowin of Clan Undurr",
+   "files": [
+    "engine/src/cards/pool/barrowin-of-clan-undurr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blink Dog",
+   "files": [
+    "engine/src/cards/pool/blink-dog.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blue Dragon",
+   "files": [
+    "engine/src/cards/pool/blue-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bull's Strength",
+   "files": [
+    "engine/src/cards/pool/bulls-strength.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning Hands",
+   "files": [
+    "engine/src/cards/pool/burning-hands.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cave of the Frost Dragon",
+   "files": [
+    "engine/src/cards/pool/cave-of-the-frost-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choose Your Weapon",
+   "files": [
+    "engine/src/cards/pool/choose-your-weapon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of the Moon Druid",
+   "files": [
+    "engine/src/cards/pool/circle-of-the-moon-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clattering Skeletons",
+   "files": [
+    "engine/src/cards/pool/clattering-skeletons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Clever Conjurer",
+   "files": [
+    "engine/src/cards/pool/clever-conjurer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloister Gargoyle",
+   "files": [
+    "engine/src/cards/pool/cloister-gargoyle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Compelled Duel",
+   "files": [
+    "engine/src/cards/pool/compelled-duel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Contact Other Plane",
+   "files": [
+    "engine/src/cards/pool/contact-other-plane.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Danse Macabre",
+   "files": [
+    "engine/src/cards/pool/danse-macabre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death-Priest of Myrkul",
+   "files": [
+    "engine/src/cards/pool/death-priest-of-myrkul.ts",
+    "engine/src/cards/tokens/skeleton-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Tyrant",
+   "files": [
+    "engine/src/cards/pool/death-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Delver's Torch",
+   "files": [
+    "engine/src/cards/pool/delvers-torch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demogorgon's Clutches",
+   "files": [
+    "engine/src/cards/pool/demogorgons-clutches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devoted Paladin",
+   "files": [
+    "engine/src/cards/pool/devoted-paladin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Devour Intellect",
+   "files": [
+    "engine/src/cards/pool/devour-intellect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Displacer Beast",
+   "files": [
+    "engine/src/cards/pool/displacer-beast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divine Smite",
+   "files": [
+    "engine/src/cards/pool/divine-smite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diviner's Portent",
+   "files": [
+    "engine/src/cards/pool/diviners-portent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Djinni Windseer",
+   "files": [
+    "engine/src/cards/pool/djinni-windseer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Turtle",
+   "files": [
+    "engine/src/cards/pool/dragon-turtle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drider",
+   "files": [
+    "engine/src/cards/pool/drider.ts",
+    "engine/src/cards/tokens/spider-token-2-1-black-menace-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drizzt Do'Urden",
+   "files": [
+    "engine/src/cards/pool/drizzt-dourden.ts",
+    "engine/src/cards/tokens/guenhwyvar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dueling Rapier",
+   "files": [
+    "engine/src/cards/pool/dueling-rapier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dungeon Crawler",
+   "files": [
+    "engine/src/cards/pool/dungeon-crawler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dungeon Descent",
+   "files": [
+    "engine/src/cards/pool/dungeon-descent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dungeon Map",
+   "files": [
+    "engine/src/cards/pool/dungeon-map.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dwarfhold Champion",
+   "files": [
+    "engine/src/cards/pool/dwarfhold-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Earth-Cult Elemental",
+   "files": [
+    "engine/src/cards/pool/earth-cult-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ebony Fly",
+   "files": [
+    "engine/src/cards/pool/ebony-fly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eccentric Apprentice",
+   "files": [
+    "engine/src/cards/pool/eccentric-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fandaniel, Telophoroi Ascian",
+   "files": [
+    "engine/src/cards/pool/fandaniel-telophoroi-ascian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farideh's Fireball",
+   "files": [
+    "engine/src/cards/pool/faridehs-fireball.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fates' Reversal",
+   "files": [
+    "engine/src/cards/pool/fates-reversal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fey Steed",
+   "files": [
+    "engine/src/cards/pool/fey-steed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feywild Trickster",
+   "files": [
+    "engine/src/cards/pool/feywild-trickster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fifty Feet of Rope",
+   "files": [
+    "engine/src/cards/pool/fifty-feet-of-rope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Find the Path",
+   "files": [
+    "engine/src/cards/pool/find-the-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fly",
+   "files": [
+    "engine/src/cards/pool/fly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloom Stalker",
+   "files": [
+    "engine/src/cards/pool/gloom-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Morningstar",
+   "files": [
+    "engine/src/cards/pool/goblin-morningstar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gretchen Titchwillow",
+   "files": [
+    "engine/src/cards/pool/gretchen-titchwillow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grim Wanderer",
+   "files": [
+    "engine/src/cards/pool/grim-wanderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Hadar",
+   "files": [
+    "engine/src/cards/pool/herald-of-hadar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hired Hexblade",
+   "files": [
+    "engine/src/cards/pool/hired-hexblade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hive of the Eye Tyrant",
+   "files": [
+    "engine/src/cards/pool/hive-of-the-eye-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunter's Mark",
+   "files": [
+    "engine/src/cards/pool/hunters-mark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icingdeath, Frost Tyrant",
+   "files": [
+    "engine/src/cards/pool/icingdeath-frost-tyrant.ts",
+    "engine/src/cards/tokens/icingdeath-frost-tongue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ingenious Smith",
+   "files": [
+    "engine/src/cards/pool/ingenious-smith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Inspiring Bard",
+   "files": [
+    "engine/src/cards/pool/inspiring-bard.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jaded Sell-Sword",
+   "files": [
+    "engine/src/cards/pool/jaded-sell-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krydle of Baldur's Gate",
+   "files": [
+    "engine/src/cards/pool/krydle-of-baldurs-gate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leather Armor",
+   "files": [
+    "engine/src/cards/pool/leather-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightfoot Rogue",
+   "files": [
+    "engine/src/cards/pool/lightfoot-rogue.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loathsome Troll",
+   "files": [
+    "engine/src/cards/pool/loathsome-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lorcan, Warlock Collector",
+   "files": [
+    "engine/src/cards/pool/lorcan-warlock-collector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lurking Roper",
+   "files": [
+    "engine/src/cards/pool/lurking-roper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magic Missile",
+   "files": [
+    "engine/src/cards/pool/magic-missile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Manticore",
+   "files": [
+    "engine/src/cards/pool/manticore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Meteor Swarm",
+   "files": [
+    "engine/src/cards/pool/meteor-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Midnight Pathlighter",
+   "files": [
+    "engine/src/cards/pool/midnight-pathlighter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mimic",
+   "files": [
+    "engine/src/cards/pool/mimic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minsc, Beloved Ranger",
+   "files": [
+    "engine/src/cards/pool/minsc-beloved-ranger.ts",
+    "engine/src/cards/tokens/boo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monk Class",
+   "files": [
+    "engine/src/cards/pool/monk-class.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Monk of the Open Hand",
+   "files": [
+    "engine/src/cards/pool/monk-of-the-open-hand.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mordenkainen's Polymorph",
+   "files": [
+    "engine/src/cards/pool/mordenkainens-polymorph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nadaar, Selfless Paladin",
+   "files": [
+    "engine/src/cards/pool/nadaar-selfless-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Osseous Sticktwister",
+   "files": [
+    "engine/src/cards/pool/osseous-sticktwister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin's Shield",
+   "files": [
+    "engine/src/cards/pool/paladins-shield.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Perforating Artist",
+   "files": [
+    "engine/src/cards/pool/perforating-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Ally",
+   "files": [
+    "engine/src/cards/pool/planar-ally.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Polygraph Orb",
+   "files": [
+    "engine/src/cards/pool/polygraph-orb.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Portable Hole",
+   "files": [
+    "engine/src/cards/pool/portable-hole.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Power Word Kill",
+   "files": [
+    "engine/src/cards/pool/power-word-kill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Precipitous Drop",
+   "files": [
+    "engine/src/cards/pool/precipitous-drop.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Price of Loyalty",
+   "files": [
+    "engine/src/cards/pool/price-of-loyalty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purple Worm",
+   "files": [
+    "engine/src/cards/pool/purple-worm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiant Solar",
+   "files": [
+    "engine/src/cards/pool/radiant-solar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rally Maneuver",
+   "files": [
+    "engine/src/cards/pool/rally-maneuver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ranger's Hawk",
+   "files": [
+    "engine/src/cards/pool/rangers-hawk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ray of Enfeeblement",
+   "files": [
+    "engine/src/cards/pool/ray-of-enfeeblement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reaper's Talisman",
+   "files": [
+    "engine/src/cards/pool/reapers-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scaled Herbalist",
+   "files": [
+    "engine/src/cards/pool/scaled-herbalist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scion of Stygia",
+   "files": [
+    "engine/src/cards/pool/scion-of-stygia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secret Door",
+   "files": [
+    "engine/src/cards/pool/secret-door.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sefris of the Hidden Ways",
+   "files": [
+    "engine/src/cards/pool/sefris-of-the-hidden-ways.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shortcut Seeker",
+   "files": [
+    "engine/src/cards/pool/shortcut-seeker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Song of Inspiration",
+   "files": [
+    "engine/src/cards/pool/song-of-inspiration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiked Pit Trap",
+   "files": [
+    "engine/src/cards/pool/spiked-pit-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storvald, Frost Giant Jarl",
+   "files": [
+    "engine/src/cards/pool/storvald-frost-giant-jarl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarming Goblins",
+   "files": [
+    "engine/src/cards/pool/swarming-goblins.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sylvan Shepherd",
+   "files": [
+    "engine/src/cards/pool/sylvan-shepherd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thorough Investigation",
+   "files": [
+    "engine/src/cards/pool/thorough-investigation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triumphant Adventurer",
+   "files": [
+    "engine/src/cards/pool/triumphant-adventurer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "True Polymorph",
+   "files": [
+    "engine/src/cards/pool/true-polymorph.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Varis, Silverymoon Ranger",
+   "files": [
+    "engine/src/cards/pool/varis-silverymoon-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran Dungeoneer",
+   "files": [
+    "engine/src/cards/pool/veteran-dungeoneer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wandering Troubadour",
+   "files": [
+    "engine/src/cards/pool/wandering-troubadour.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warlock Class",
+   "files": [
+    "engine/src/cards/pool/warlock-class.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Westgate Regent",
+   "files": [
+    "engine/src/cards/pool/westgate-regent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "White Dragon",
+   "files": [
+    "engine/src/cards/pool/white-dragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wild Shape",
+   "files": [
+    "engine/src/cards/pool/wild-shape.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You Come to a River",
+   "files": [
+    "engine/src/cards/pool/you-come-to-a-river.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You Come to the Gnoll Camp",
+   "files": [
+    "engine/src/cards/pool/you-come-to-the-gnoll-camp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You Find a Cursed Idol",
+   "files": [
+    "engine/src/cards/pool/you-find-a-cursed-idol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You Happen On a Glade",
+   "files": [
+    "engine/src/cards/pool/you-happen-on-a-glade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You Hear Something on Watch",
+   "files": [
+    "engine/src/cards/pool/you-hear-something-on-watch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You Meet in a Tavern",
+   "files": [
+    "engine/src/cards/pool/you-meet-in-a-tavern.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You See a Guard Approach",
+   "files": [
+    "engine/src/cards/pool/you-see-a-guard-approach.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You're Ambushed on the Road",
+   "files": [
+    "engine/src/cards/pool/youre-ambushed-on-the-road.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yuan-Ti Fang-Blade",
+   "files": [
+    "engine/src/cards/pool/yuan-ti-fang-blade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Yuan-Ti Malison",
+   "files": [
+    "engine/src/cards/pool/yuan-ti-malison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zalto, Fire Giant Duke",
+   "files": [
+    "engine/src/cards/pool/zalto-fire-giant-duke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Ogre",
+   "files": [
+    "engine/src/cards/pool/zombie-ogre.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Berserker's Frenzy",
+   "needs": [
+    "effect:roll-two-keep-higher",
+    "effect:must-block-this-turn",
+    "decision:attacker-chooses-blocks"
+   ],
+   "why": "rolls two d20 and ignores the lower; chosen creatures block this turn if able, and the caster chooses how"
+  },
+  {
+   "name": "Mordenkainen",
+   "needs": [
+    "effect:exchange-hand-and-library",
+    "effect:emblem-no-max-hand-size"
+   ],
+   "why": "the −10 exchanges hand and library; an emblem can't carry \"no maximum hand size\""
+  },
+  {
+   "name": "Plate Armor",
+   "needs": [
+    "cost:cost-reduction-count-other"
+   ],
+   "why": "\"{1} less for each other Equipment you control\": the reduction's count can't leave the source out"
+  },
+  {
+   "name": "Orcus, Prince of Undeath",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "up to X target creature cards with total mana value X or less"
+  },
+  {
+   "name": "Critical Hit",
+   "needs": [
+    "trigger:rolls-natural-result"
+   ],
+   "why": "\"when you roll a natural 20\": rolls-dice fires on the total, not on one die's natural result"
+  },
+  {
+   "name": "Arcane Endeavor",
+   "needs": [
+    "decision:choose-roll-result"
+   ],
+   "why": "roll two d8 and choose one result for each half"
+  },
+  {
+   "name": "Instrument of the Bards",
+   "needs": [
+    "effect:search-then-act-on-found"
+   ],
+   "why": "search for a creature card, then \"if it's legendary, create a Treasure\""
+  },
+  {
+   "name": "Immovable Rod",
+   "needs": [
+    "static:may-choose-not-to-untap",
+    "effect:duration-while-source-tapped"
+   ],
+   "why": "\"you may choose not to untap\" and an effect lasting while the Rod stays tapped"
+  },
+  {
+   "name": "Goblin Javelineer",
+   "needs": [
+    "effect:target-creature-blocking-source"
+   ],
+   "why": "\"target creature blocking it\""
+  },
+  {
+   "name": "Ellywick Tumblestrum",
+   "needs": [
+    "amount:differently-named-dungeons-completed",
+    "effect:emblem-static-abilities"
+   ],
+   "why": "the −7 emblem's +2/+2 for each differently named dungeon completed"
+  },
+  {
+   "name": "Catti-brie of Mithral Hall",
+   "needs": [
+    "effect:count-equipment-attached-to-source",
+    "effect:remove-all-counters",
+    "effect:counters-removed-this-way"
+   ],
+   "why": "counters per Equipment attached; removing all its counters as a cost and dealing that much damage split"
+  },
+  {
+   "name": "Keen-Eared Sentry",
+   "needs": [
+    "static:venture-limit-once-per-turn"
+   ],
+   "why": "\"each opponent can't venture into the dungeon more than once each turn\""
+  },
+  {
+   "name": "Dancing Sword",
+   "needs": [
+    "effect:animate-grants-triggered"
+   ],
+   "why": "becoming a creature with ward {1} that isn't an Equipment"
+  },
+  {
+   "name": "Intrepid Outlander",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics: the attackers' total power as they were declared"
+  },
+  {
+   "name": "Gnoll Hunter",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics"
+  },
+  {
+   "name": "Minimus Containment",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "the enchanted permanent loses all other abilities (a static)"
+  },
+  {
+   "name": "Extract Brain",
+   "needs": [
+    "effect:opponent-chooses-cards-from-hand"
+   ],
+   "why": "the opponent chooses X cards from their hand; you may cast one free"
+  },
+  {
+   "name": "Kick in the Door",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "\"can't be blocked by Walls this turn\" as a one-turn effect"
+  },
+  {
+   "name": "Farideh, Devil's Chosen",
+   "needs": [
+    "condition:trigger-roll-results"
+   ],
+   "why": "\"if any of those results was 10 or higher\" reads each die of the triggering roll"
+  },
+  {
+   "name": "Ride the Avalanche",
+   "needs": [
+    "effect:next-sorcery-as-though-flash",
+    "effect:delayed-trigger-own-targets"
+   ],
+   "why": "the next spell cast as though it had flash; a next-spell delayed trigger choosing its own target"
+  },
+  {
+   "name": "Nihiloor",
+   "needs": [
+    "effect:control-while-you-control-source"
+   ],
+   "why": "gain control for as long as you control Nihiloor, the tapped creature's power capping the target"
+  },
+  {
+   "name": "Hobgoblin Captain",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics"
+  },
+  {
+   "name": "Tiger-Tribe Hunter",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics"
+  },
+  {
+   "name": "Iron Golem",
+   "needs": [
+    "static:must-block-each-combat"
+   ],
+   "why": "\"blocks each combat if able\""
+  },
+  {
+   "name": "Grave Endeavor",
+   "needs": [
+    "decision:choose-roll-result"
+   ],
+   "why": "roll two d10 and choose one result for each half"
+  },
+  {
+   "name": "Gelatinous Cube",
+   "needs": [
+    "target:card-in-exile"
+   ],
+   "why": "Dissolve targets a card exiled with the Cube"
+  },
+  {
+   "name": "Power of Persuasion",
+   "needs": [
+    "effect:until-end-of-your-next-turn"
+   ],
+   "why": "gain control until the end of your next turn"
+  },
+  {
+   "name": "Rod of Absorption",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-linked",
+    "decision:cast-now-total-mana-value"
+   ],
+   "why": "exiles resolving spells linked to the Rod; casts any number with total mana value X or less"
+  },
+  {
+   "name": "Grand Master of Flowers",
+   "needs": [
+    "static:planeswalker-becomes-creature"
+   ],
+   "why": "a static that makes the planeswalker a creature (§15)"
+  },
+  {
+   "name": "Dragon's Disciple",
+   "needs": [
+    "replacement:reveal-from-hand-enters-with-counters"
+   ],
+   "why": "\"you may reveal a Dragon card or control a Dragon\" decides an enters-with-counters replacement"
+  },
+  {
+   "name": "The Blackstaff of Waterdeep",
+   "needs": [
+    "static:may-choose-not-to-untap",
+    "effect:duration-while-source-tapped"
+   ],
+   "why": "\"you may choose not to untap\" and \"for as long as this remains tapped\""
+  },
+  {
+   "name": "Flameskull",
+   "needs": [
+    "zone:impulse-play-only-one"
+   ],
+   "why": "\"you may play one of those cards\": playing one ends the other's permission"
+  },
+  {
+   "name": "Spoils of the Hunt",
+   "needs": [
+    "stat:treasure-mana-spent-count"
+   ],
+   "why": "an amount counting the Treasure mana spent on the spell"
+  },
+  {
+   "name": "Netherese Puzzle-Ward",
+   "needs": [
+    "trigger:rolls-natural-result"
+   ],
+   "why": "\"whenever you roll a die's highest natural result\""
+  },
+  {
+   "name": "Pixie Guide",
+   "needs": [
+    "replacement:roll-extra-ignore-lowest"
+   ],
+   "why": "roll one extra die and ignore the lowest"
+  },
+  {
+   "name": "Hand of Vecna",
+   "needs": [
+    "cost:dynamic-life-cost"
+   ],
+   "why": "equip — pay 1 life for each card in your hand; \"equipped creature or a creature named Vecna\""
+  },
+  {
+   "name": "Phantom Steed",
+   "needs": [
+    "effect:token-copy-of-exiled-card"
+   ],
+   "why": "a token copy of the card exiled with it"
+  },
+  {
+   "name": "Long Rest",
+   "needs": [
+    "effect:targets-different-mana-values"
+   ],
+   "why": "X target cards with different mana values"
+  },
+  {
+   "name": "Skeletal Swarming",
+   "needs": [
+    "static:pt-per-count-excluding-affected"
+   ],
+   "why": "+X/+0 where X is the number of other Skeletons (other than the affected one)"
+  },
+  {
+   "name": "Bag of Devouring",
+   "needs": [
+    "effect:choose-card-exiled-with-source"
+   ],
+   "why": "return up to X of the cards exiled with it, X the roll"
+  },
+  {
+   "name": "Wight",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "\"whenever a creature dealt damage by this creature this turn dies\""
+  },
+  {
+   "name": "Sphere of Annihilation",
+   "needs": [
+    "filter:mass-effect-amount-operand"
+   ],
+   "why": "a mass exile's filter can't compare against an amount (its void counters): it would match nothing"
+  },
+  {
+   "name": "Sudden Insight",
+   "needs": [
+    "effect:count-distinct-mana-values"
+   ],
+   "why": "the number of different mana values among cards in your graveyard"
+  },
+  {
+   "name": "Ray of Frost",
+   "needs": [
+    "static:doesnt-untap-attached",
+    "static:static-lose-all-abilities"
+   ],
+   "why": "the enchanted creature doesn't untap and, if red, loses all abilities (statics)"
+  },
+  {
+   "name": "Ranger Class",
+   "needs": [
+    "static:look-at-top-card-conditional"
+   ],
+   "why": "level 3's \"look at the top card any time\" gated on the level"
+  },
+  {
+   "name": "Revivify",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "creature cards put into your graveyard from the battlefield this turn"
+  },
+  {
+   "name": "Hama Pashar, Ruin Seeker",
+   "needs": [
+    "static:room-abilities-trigger-twice"
+   ],
+   "why": "room abilities of your dungeons trigger an additional time"
+  },
+  {
+   "name": "Wizard's Spellbook",
+   "needs": [
+    "effect:cast-now-alternative-mana-cost"
+   ],
+   "why": "cast the copy by paying {1} rather than its mana cost"
+  },
+  {
+   "name": "Vrondiss, Rage of Ancients",
+   "needs": [
+    "effect:damage-source-itself"
+   ],
+   "why": "\"Vrondiss deals 1 damage to itself\""
+  },
+  {
+   "name": "Clay Golem",
+   "needs": [
+    "cost:roll-die-as-cost",
+    "keyword:monstrosity"
+   ],
+   "why": "roll a d8 as part of the cost; monstrosity X equal to the roll"
+  },
+  {
+   "name": "Galea, Kindler of Hope",
+   "needs": [
+    "zone:cast-from-library-top-grants-trigger"
+   ],
+   "why": "an Equipment cast from the top of the library gains \"attach it as it enters\""
+  },
+  {
+   "name": "Green Dragon",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"until end of turn, whenever a creature an opponent controls is dealt damage\""
+  },
+  {
+   "name": "The Book of Vile Darkness",
+   "needs": [
+    "cost:exile-named-artifacts",
+    "effect:token-gains-exiled-triggers"
+   ],
+   "why": "exile Eye and Hand of Vecna as a cost; the Vecna token gains their triggered abilities"
+  },
+  {
+   "name": "Demilich",
+   "needs": [
+    "cost:self-cost-reduction-colored"
+   ],
+   "why": "{U} less for each instant and sorcery cast this turn (coloured)"
+  },
+  {
+   "name": "Spare Dagger",
+   "needs": [
+    "effect:granted-trigger-refers-to-granter"
+   ],
+   "why": "the granted trigger sacrifices the Equipment that granted it"
+  },
+  {
+   "name": "Wish",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "play a card you own from outside the game"
+  },
+  {
+   "name": "Check for Traps",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "exile a chosen nonland card from the opponent's revealed hand"
+  },
+  {
+   "name": "Werewolf Pack Leader",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics"
+  },
+  {
+   "name": "Targ Nar, Demon-Fang Gnoll",
+   "needs": [
+    "keyword:pack-tactics"
+   ],
+   "why": "pack tactics"
+  },
+  {
+   "name": "Forsworn Paladin",
+   "needs": [
+    "stat:mana-spent-to-activate-from"
+   ],
+   "why": "\"if mana from a Treasure was spent to activate this ability\""
+  },
+  {
+   "name": "Holy Avenger",
+   "needs": [
+    "effect:attach-extensions"
+   ],
+   "why": "put an Aura card from your hand onto the battlefield attached to the creature"
+  },
+  {
+   "name": "Valiant Endeavor",
+   "needs": [
+    "decision:choose-roll-result"
+   ],
+   "why": "roll two d6 and choose one result for each half"
+  },
+  {
+   "name": "Wild Endeavor",
+   "needs": [
+    "decision:choose-roll-result"
+   ],
+   "why": "roll two d4 and choose one result for each half"
+  },
+  {
+   "name": "Trickster's Talisman",
+   "needs": [
+    "effect:granted-trigger-refers-to-granter"
+   ],
+   "why": "the granted trigger sacrifices the Talisman that granted it"
+  },
+  {
+   "name": "Shessra, Death's Whisper",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "\"target creature blocks this turn if able\""
+  },
+  {
+   "name": "Split the Party",
+   "needs": [
+    "effect:choose-half-of-permanents"
+   ],
+   "why": "return half the creatures they control, rounded up, chosen and returned at once"
+  }
+ ]
+}

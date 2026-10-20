@@ -104,6 +104,7 @@ import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
 import _poolDeduce from "../pool/deduce.js";
 import _poolDeeprootWaters from "../pool/deeproot-waters.js";
 import _poolDegaDisciple from "../pool/dega-disciple.js";
+import _poolDemogorgonsClutches from "../pool/demogorgons-clutches.js";
 import _poolDesolationOfSmaug from "../pool/desolation-of-smaug.js";
 import _poolDesperateBloodseeker from "../pool/desperate-bloodseeker.js";
 import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
@@ -303,6 +304,7 @@ import _poolPicturesOfSpiderMan from "../pool/pictures-of-spider-man.js";
 import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
+import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
@@ -330,6 +332,7 @@ import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
 import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
+import _poolScaledHerbalist from "../pool/scaled-herbalist.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
 import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
@@ -357,6 +360,7 @@ import _poolSlinkingSerpent from "../pool/slinking-serpent.js";
 import _poolSlumberingKeepguard from "../pool/slumbering-keepguard.js";
 import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
+import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSpectacularTactics from "../pool/spectacular-tactics.js";
@@ -418,6 +422,7 @@ import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
 import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
 import _poolTrueLovesKiss from "../pool/true-loves-kiss.js";
+import _poolTruePolymorph from "../pool/true-polymorph.js";
 import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
@@ -454,11 +459,13 @@ import _poolWaterloggedGrove from "../pool/waterlogged-grove.js";
 import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
+import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
+import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
@@ -580,6 +587,7 @@ const shard: CardShard = {
     _poolDeduce,
     _poolDeeprootWaters,
     _poolDegaDisciple,
+    _poolDemogorgonsClutches,
     _poolDesolationOfSmaug,
     _poolDesperateBloodseeker,
     _poolDiscipleOfPerdition,
@@ -779,6 +787,7 @@ const shard: CardShard = {
     _poolPiperOfTheSwarm,
     _poolPiperWrightPublickReporter,
     _poolPotionOfHealing,
+    _poolPrecipitousDrop,
     _poolPrimalWellspring,
     _poolProctorsGaze,
     _poolPromisingVein,
@@ -806,6 +815,7 @@ const shard: CardShard = {
     _poolRustwingFalcon,
     _poolSandstoneBridge,
     _poolSatoruUmezawa,
+    _poolScaledHerbalist,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
     _poolScionOfOpulence,
@@ -833,6 +843,7 @@ const shard: CardShard = {
     _poolSlumberingKeepguard,
     _poolSolphimMayhemDominus,
     _poolSomberwaldSage,
+    _poolSongOfInspiration,
     _poolSontaranGeneral,
     _poolSouthWindAvatar,
     _poolSpectacularTactics,
@@ -894,6 +905,7 @@ const shard: CardShard = {
     _poolTransmograntAltar,
     _poolTrapmakersSnare,
     _poolTrueLovesKiss,
+    _poolTruePolymorph,
     _poolTundra,
     _poolTurbulentFen,
     _poolTurbulentSteppe,
@@ -930,11 +942,13 @@ const shard: CardShard = {
     _poolWeightOfMemory,
     _poolWeldfastMonitor,
     _poolWhiskerquillScribe,
+    _poolWhiteDragon,
     _poolWillOfTheSultai,
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolYavimayaIconoclast,
+    _poolYouComeToTheGnollCamp,
     _poolYuanTiFangBlade,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,

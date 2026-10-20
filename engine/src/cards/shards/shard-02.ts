@@ -30,6 +30,7 @@ import _poolAxebaneStag from "../pool/axebane-stag.js";
 import _poolBadRiver from "../pool/bad-river.js";
 import _poolBalaGedRecovery from "../pool/bala-ged-recovery.js";
 import _poolBanishingLight from "../pool/banishing-light.js";
+import _poolBarrowinOfClanUndurr from "../pool/barrowin-of-clan-undurr.js";
 import _poolBaskingBroodscale from "../pool/basking-broodscale.js";
 import _poolBastionMastodon from "../pool/bastion-mastodon.js";
 import _poolBatterhorn from "../pool/batterhorn.js";
@@ -77,6 +78,7 @@ import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClear from "../pool/clear.js";
+import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
 import _poolClone from "../pool/clone.js";
 import _poolCloudMidgarMercenary from "../pool/cloud-midgar-mercenary.js";
 import _poolColfenorsUrn from "../pool/colfenors-urn.js";
@@ -119,6 +121,7 @@ import _poolDiseaseCarriers from "../pool/disease-carriers.js";
 import _poolDisentomb from "../pool/disentomb.js";
 import _poolDivineFavor from "../pool/divine-favor.js";
 import _poolDivineVisitation from "../pool/divine-visitation.js";
+import _poolDivinersPortent from "../pool/diviners-portent.js";
 import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
@@ -130,6 +133,7 @@ import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
 import _poolEarthblighter from "../pool/earthblighter.js";
 import _poolEbondeathDracolich from "../pool/ebondeath-dracolich.js";
+import _poolEccentricApprentice from "../pool/eccentric-apprentice.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
@@ -152,6 +156,7 @@ import _poolFinchFormation from "../pool/finch-formation.js";
 import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
+import _poolFly from "../pool/fly.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
@@ -191,6 +196,7 @@ import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHeartstringPuller from "../pool/heartstring-puller.js";
 import _poolHelionaut from "../pool/helionaut.js";
+import _poolHeraldOfHadar from "../pool/herald-of-hadar.js";
 import _poolHeroOfTheDunes from "../pool/hero-of-the-dunes.js";
 import _poolHiddenCourtyard from "../pool/hidden-courtyard.js";
 import _poolHobblingZombie from "../pool/hobbling-zombie.js";
@@ -509,6 +515,7 @@ const shard: CardShard = {
     _poolBadRiver,
     _poolBalaGedRecovery,
     _poolBanishingLight,
+    _poolBarrowinOfClanUndurr,
     _poolBaskingBroodscale,
     _poolBastionMastodon,
     _poolBatterhorn,
@@ -556,6 +563,7 @@ const shard: CardShard = {
     _poolCinderStrike,
     _poolCircleOfTheLandDruid,
     _poolClear,
+    _poolCloisterGargoyle,
     _poolClone,
     _poolCloudMidgarMercenary,
     _poolColfenorsUrn,
@@ -598,6 +606,7 @@ const shard: CardShard = {
     _poolDisentomb,
     _poolDivineFavor,
     _poolDivineVisitation,
+    _poolDivinersPortent,
     _poolDoranTheSiegeTower,
     _poolDragonbornLooter,
     _poolDragonsHoard,
@@ -609,6 +618,7 @@ const shard: CardShard = {
     _poolDuskmantleHouseOfShadow,
     _poolEarthblighter,
     _poolEbondeathDracolich,
+    _poolEccentricApprentice,
     _poolEidolonOfBlossoms,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
@@ -631,6 +641,7 @@ const shard: CardShard = {
     _poolFirebendingLesson,
     _poolFistsOfFlame,
     _poolFlamingSword,
+    _poolFly,
     _poolForceSpike,
     _poolForcefulDenial,
     _poolFortressCyclops,
@@ -670,6 +681,7 @@ const shard: CardShard = {
     _poolHarvesttideInfiltrator,
     _poolHeartstringPuller,
     _poolHelionaut,
+    _poolHeraldOfHadar,
     _poolHeroOfTheDunes,
     _poolHiddenCourtyard,
     _poolHobblingZombie,

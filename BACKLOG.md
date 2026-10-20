@@ -103,20 +103,20 @@ section keeps only what to do next.
   New Capenna and its Commander set, on shield counters; batch 106 Kamigawa: Neon Dynasty, its
   Commander set and Crimson Vow Commander, on reconfigure; batch 107 Innistrad: Crimson Vow, on
   training, exploit and cleave; batch 108 Innistrad: Midnight Hunt and its Commander set, on coven
-  and day/night); **next, Adventures in the Forgotten Realms and its Commander set** (AFR, AFC —
-  `npm run cards:sets -w engine -- --next 60`). The three Forgotten Realms dungeons (the Mad Wizard's Lair's reveal of drawn cards,
-  the Oubliette's three distinct sacrifices) still hold the cards that "venture into the dungeon"
-  (Nadaar, Acererak, Sefris, Radiant Solar — `mechanic:dungeon`).
+  and day/night; batch 109 Adventures in the Forgotten Realms and its Commander set, on the three
+  Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"); **next, Modern
+  Horizons 2 and Commander 2021** (MH2, C21 — `npm run cards:sets -w engine -- --next 60`).
+  Forgotten Realms' most shared blocks: pack tactics (`keyword:pack-tactics`, 6 — the attackers'
+  total power as declared) and "roll two dice and choose a result" (`decision:choose-roll-result`,
+  4 — the Endeavors).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.
   The two features blocking the most of what's left: **meld** (rule 712 — `mechanic:meld`, 11 cards:
   the three BRO melded faces, Urza, Lord Protector, Mishra, Claimed by Gix, Titania, Voice of Gaea,
   Hanweir Battlements, Bruna, Gisela …) and **miracle** (702.94 — `keyword:miracle`, 12: Terminus,
-  Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …),
-  both behind **dungeons and the initiative** (rules 309, 701.49, 726 — `mechanic:dungeon`: 10
-  triaged and ~21 of Baldur's Gate's rest, more in Forgotten Realms), designed in
-  `docs/plans/initiative-dungeons.md` (decided 2026-10-19, being built). Phyrexia: All Will Be One's blocks are
+  Entreat the Angels, Temporal Mastery, 40K's Triumph of Saint Katherine and Sister Repentia …).
+  Phyrexia: All Will Be One's blocks are
   nearly all one card each — the most shared: "whenever you proliferate" (Voidwing Hybrid,
   Venser), a target's controller's poison counters (Bring the Ending, Anoint with Affliction), and
   a static scoped by "has toxic" (Skrelv's Hive). March of the Machine's leaders: one target slot for a player
@@ -168,6 +168,8 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A mass effect's filter can't compare against an amount**: it matches nothing, silently (Sphere of Annihilation).
+- **`deals-damage` fires once per recipient**, where an unqualified "whenever ~ deals damage" fires once per event (603.2c).
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.

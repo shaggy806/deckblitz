@@ -53,6 +53,7 @@ import _poolBridledBighorn from "../pool/bridled-bighorn.js";
 import _poolBroodcallerScourge from "../pool/broodcaller-scourge.js";
 import _poolBroodspinner from "../pool/broodspinner.js";
 import _poolBuriedRuin from "../pool/buried-ruin.js";
+import _poolBurningHands from "../pool/burning-hands.js";
 import _poolBurntOffering from "../pool/burnt-offering.js";
 import _poolBurrogBarrage from "../pool/burrog-barrage.js";
 import _poolCaesarLegionsEmperor from "../pool/caesar-legions-emperor.js";
@@ -67,6 +68,7 @@ import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
 import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
+import _poolCircleOfTheMoonDruid from "../pool/circle-of-the-moon-druid.js";
 import _poolCitizensArrest from "../pool/citizens-arrest.js";
 import _poolClericOfChillDepths from "../pool/cleric-of-chill-depths.js";
 import _poolCoalGolem from "../pool/coal-golem.js";
@@ -105,6 +107,7 @@ import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
 import _poolDispellersCapsule from "../pool/dispellers-capsule.js";
 import _poolDisplace from "../pool/displace.js";
 import _poolDistantMelody from "../pool/distant-melody.js";
+import _poolDjinniWindseer from "../pool/djinni-windseer.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
@@ -113,6 +116,7 @@ import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDreadLinnorm from "../pool/dread-linnorm.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
 import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
+import _poolDuelingRapier from "../pool/dueling-rapier.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEject from "../pool/eject.js";
@@ -176,6 +180,7 @@ import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
 import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHighlandGame from "../pool/highland-game.js";
+import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
 import _poolHonorGuard from "../pool/honor-guard.js";
 import _poolHoppingAutomaton from "../pool/hopping-automaton.js";
@@ -225,6 +230,7 @@ import _poolLivingBrainMechanicalMarvel from "../pool/living-brain-mechanical-ma
 import _poolLivingTempest from "../pool/living-tempest.js";
 import _poolLochDragon from "../pool/loch-dragon.js";
 import _poolLockeCole from "../pool/locke-cole.js";
+import _poolLorcanWarlockCollector from "../pool/lorcan-warlock-collector.js";
 import _poolLordOfLineage from "../pool/lord-of-lineage.js";
 import _poolLordOfTheAccursed from "../pool/lord-of-the-accursed.js";
 import _poolLordOfTheUlvenwald from "../pool/lord-of-the-ulvenwald.js";
@@ -556,6 +562,7 @@ const shard: CardShard = {
     _poolBroodcallerScourge,
     _poolBroodspinner,
     _poolBuriedRuin,
+    _poolBurningHands,
     _poolBurntOffering,
     _poolBurrogBarrage,
     _poolCaesarLegionsEmperor,
@@ -570,6 +577,7 @@ const shard: CardShard = {
     _poolChitinousGraspling,
     _poolChokedEstuary,
     _poolChompingChangeling,
+    _poolCircleOfTheMoonDruid,
     _poolCitizensArrest,
     _poolClericOfChillDepths,
     _poolCoalGolem,
@@ -608,6 +616,7 @@ const shard: CardShard = {
     _poolDispellersCapsule,
     _poolDisplace,
     _poolDistantMelody,
+    _poolDjinniWindseer,
     _poolDoomBlade,
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
@@ -616,6 +625,7 @@ const shard: CardShard = {
     _poolDreadLinnorm,
     _poolDrogskolCavalry,
     _poolDruidOfTheSpade,
+    _poolDuelingRapier,
     _poolDwarvenGrunt,
     _poolEarthRift,
     _poolEject,
@@ -679,6 +689,7 @@ const shard: CardShard = {
     _poolHellSwarm,
     _poolHeronbladeElite,
     _poolHighlandGame,
+    _poolHiveOfTheEyeTyrant,
     _poolHomunculusHorde,
     _poolHonorGuard,
     _poolHoppingAutomaton,
@@ -728,6 +739,7 @@ const shard: CardShard = {
     _poolLivingTempest,
     _poolLochDragon,
     _poolLockeCole,
+    _poolLorcanWarlockCollector,
     _poolLordOfLineage,
     _poolLordOfTheAccursed,
     _poolLordOfTheUlvenwald,

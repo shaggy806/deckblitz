@@ -113,6 +113,17 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
+- **A mass effect's filter can't compare against an amount.** `battlefieldMatching` (behind
+  `exile-all` and the other `*-all` effects) and `exileGraveyard` call `matchesFilter` with no
+  `amount` evaluator, so a filter clause like `manaValue: { op: "lte", n: { amount: … } }` fails
+  closed and matches nothing — silently, not refused when the card is authored. Sphere of
+  Annihilation ("exile each creature and planeswalker with mana value less than or equal to the
+  number of void counters on it") is blocked on it (`filter:mass-effect-amount-operand`, batch 109).
+- **`deals-damage` fires once per recipient.** Its docs say so on purpose, but an unqualified
+  "whenever ~ deals damage" triggers once per simultaneous damage event, however many things it hit
+  (Armadillo Cloak's ruling — rule 603.2c): a trampler or a creature dealing damage to several
+  things at once would draw or gain life twice. Check each pool card on `deals-damage` without a
+  `to` clause (raised by batch 109's review of Vrondiss).
 
 ## Latent
 

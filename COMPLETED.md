@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Adventures in the Forgotten Realms and Forgotten Realms Commander, whole** (batch 109): their
+  last 185 cards, 119 authored, with the three Forgotten Realms dungeons built (Lost Mine of
+  Phandelver, Dungeon of the Mad Mage, Tomb of Annihilation — `sacrifice`'s `andEach`,
+  `reveal-drawn`, `cast-now` from the cards drawn) and rule 101.4 for `each-player-may` (each
+  player chooses, then the discards and sacrifices happen at once), plus 8 older cards they
+  unblocked (Acererak, Sefris, Nadaar, Radiant Solar, Perforating Artist, Osseous Sticktwister,
+  Polygraph Orb, Fandaniel); 66 blocked (2026-10-20, adc08546).
 - **Innistrad: Midnight Hunt and Midnight Hunt Commander, whole** (batch 108): their last 184
   cards, 126 authored, with coven (the `coven` condition) and the day/night trigger, condition and
   "it becomes day as this enters" built and 12 cards on them, plus 4 older coven cards (Leinore,

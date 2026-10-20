@@ -71,6 +71,7 @@ import _poolCartographer from "../pool/cartographer.js";
 import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
 import _poolCausticRain from "../pool/caustic-rain.js";
+import _poolCaveOfTheFrostDragon from "../pool/cave-of-the-frost-dragon.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolChallengerTroll from "../pool/challenger-troll.js";
@@ -92,6 +93,7 @@ import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
+import _poolContactOtherPlane from "../pool/contact-other-plane.js";
 import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
@@ -108,6 +110,7 @@ import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
+import _poolDelversTorch from "../pool/delvers-torch.js";
 import _poolDenethorRulingSteward from "../pool/denethor-ruling-steward.js";
 import _poolDenyEntry from "../pool/deny-entry.js";
 import _poolDenyReality from "../pool/deny-reality.js";
@@ -518,6 +521,7 @@ import _poolWyluliWolf from "../pool/wyluli-wolf.js";
 import _poolYathanTombguard from "../pool/yathan-tombguard.js";
 import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
+import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
@@ -600,6 +604,7 @@ const shard: CardShard = {
     _poolCatGator,
     _poolCatharsCrusade,
     _poolCausticRain,
+    _poolCaveOfTheFrostDragon,
     _poolCecilyHauntedMage,
     _poolCephalidInkmage,
     _poolChallengerTroll,
@@ -621,6 +626,7 @@ const shard: CardShard = {
     _poolColorstormStallion,
     _poolConfoundingRiddle,
     _poolConsumingSinkhole,
+    _poolContactOtherPlane,
     _poolContractKilling,
     _poolCoralSword,
     _poolCourageousGoblin,
@@ -637,6 +643,7 @@ const shard: CardShard = {
     _poolDawngladeRegent,
     _poolDecanterOfEndlessWater,
     _poolDeepForestHermit,
+    _poolDelversTorch,
     _poolDenethorRulingSteward,
     _poolDenyEntry,
     _poolDenyReality,
@@ -1047,6 +1054,7 @@ const shard: CardShard = {
     _poolYathanTombguard,
     _poolYavimayaWurm,
     _poolYawgmothsVileOffering,
+    _poolYouHappenOnAGlade,
     _poolZenithFestival,
     _poolZombieGoliath,
     _poolZukosExile,

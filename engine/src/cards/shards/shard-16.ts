@@ -48,6 +48,7 @@ import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBloodfellCaves from "../pool/bloodfell-caves.js";
 import _poolBloodthirstyAerialist from "../pool/bloodthirsty-aerialist.js";
 import _poolBlossomCladWerewolf from "../pool/blossom-clad-werewolf.js";
+import _poolBlueDragon from "../pool/blue-dragon.js";
 import _poolBofurReliableGuardian from "../pool/bofur-reliable-guardian.js";
 import _poolBolracClanBasher from "../pool/bolrac-clan-basher.js";
 import _poolBoltHound from "../pool/bolt-hound.js";
@@ -104,6 +105,7 @@ import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
+import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonsEyeSentry from "../pool/dragons-eye-sentry.js";
 import _poolDredgingClaw from "../pool/dredging-claw.js";
 import _poolDuelForDominance from "../pool/duel-for-dominance.js";
@@ -233,6 +235,7 @@ import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
 import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
 import _poolKraulWarrior from "../pool/kraul-warrior.js";
+import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLibrary from "../pool/library.js";
@@ -514,6 +517,7 @@ import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
 import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
+import _poolYouComeToARiver from "../pool/you-come-to-a-river.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
 import _tokensAjanisPridemateToken from "../tokens/ajanis-pridemate-token.js";
 import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
@@ -585,6 +589,7 @@ const shard: CardShard = {
     _poolBloodfellCaves,
     _poolBloodthirstyAerialist,
     _poolBlossomCladWerewolf,
+    _poolBlueDragon,
     _poolBofurReliableGuardian,
     _poolBolracClanBasher,
     _poolBoltHound,
@@ -641,6 +646,7 @@ const shard: CardShard = {
     _poolDiscipleOfMalice,
     _poolDoorOfDestinies,
     _poolDragonTempest,
+    _poolDragonTurtle,
     _poolDragonsEyeSentry,
     _poolDredgingClaw,
     _poolDuelForDominance,
@@ -770,6 +776,7 @@ const shard: CardShard = {
     _poolKorSkyClimber,
     _poolKoseiPenitentWarlord,
     _poolKraulWarrior,
+    _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLashOfThorns,
     _poolLibrary,
@@ -1051,6 +1058,7 @@ const shard: CardShard = {
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
     _poolYouAreAlreadyDead,
+    _poolYouComeToARiver,
     _poolZodiacHorse,
   ],
   tokens: [

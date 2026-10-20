@@ -90,6 +90,7 @@ import _poolCruelEdict from "../pool/cruel-edict.js";
 import _poolCruelWitness from "../pool/cruel-witness.js";
 import _poolCryogenRelic from "../pool/cryogen-relic.js";
 import _poolDanithaCapashenParagon from "../pool/danitha-capashen-paragon.js";
+import _poolDanseMacabre from "../pool/danse-macabre.js";
 import _poolDarkblast from "../pool/darkblast.js";
 import _poolDarkborePathway from "../pool/darkbore-pathway.js";
 import _poolDauntlessVeteran from "../pool/dauntless-veteran.js";
@@ -233,6 +234,7 @@ import _poolKydeleChosenOfKruphix from "../pool/kydele-chosen-of-kruphix.js";
 import _poolLakeshoreApothecary from "../pool/lakeshore-apothecary.js";
 import _poolLasydProwler from "../pool/lasyd-prowler.js";
 import _poolLeafkinDruid from "../pool/leafkin-druid.js";
+import _poolLeatherArmor from "../pool/leather-armor.js";
 import _poolLeechCollector from "../pool/leech-collector.js";
 import _poolLifecraftCavalry from "../pool/lifecraft-cavalry.js";
 import _poolLightOfPromise from "../pool/light-of-promise.js";
@@ -265,6 +267,7 @@ import _poolMistveilPlains from "../pool/mistveil-plains.js";
 import _poolMoggInfestation from "../pool/mogg-infestation.js";
 import _poolMoggcatcher from "../pool/moggcatcher.js";
 import _poolMoltenCollapse from "../pool/molten-collapse.js";
+import _poolMonkOfTheOpenHand from "../pool/monk-of-the-open-hand.js";
 import _poolMorbidOpportunist from "../pool/morbid-opportunist.js";
 import _poolMorgueThrull from "../pool/morgue-thrull.js";
 import _poolMuYanlingWindRider from "../pool/mu-yanling-wind-rider.js";
@@ -308,6 +311,7 @@ import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
+import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
@@ -462,6 +466,7 @@ import _poolWakeTheDragon from "../pool/wake-the-dragon.js";
 import _poolWallOfDistortion from "../pool/wall-of-distortion.js";
 import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
 import _poolWanderingOnes from "../pool/wandering-ones.js";
+import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
@@ -587,6 +592,7 @@ const shard: CardShard = {
     _poolCruelWitness,
     _poolCryogenRelic,
     _poolDanithaCapashenParagon,
+    _poolDanseMacabre,
     _poolDarkblast,
     _poolDarkborePathway,
     _poolDauntlessVeteran,
@@ -730,6 +736,7 @@ const shard: CardShard = {
     _poolLakeshoreApothecary,
     _poolLasydProwler,
     _poolLeafkinDruid,
+    _poolLeatherArmor,
     _poolLeechCollector,
     _poolLifecraftCavalry,
     _poolLightOfPromise,
@@ -762,6 +769,7 @@ const shard: CardShard = {
     _poolMoggInfestation,
     _poolMoggcatcher,
     _poolMoltenCollapse,
+    _poolMonkOfTheOpenHand,
     _poolMorbidOpportunist,
     _poolMorgueThrull,
     _poolMuYanlingWindRider,
@@ -805,6 +813,7 @@ const shard: CardShard = {
     _poolPointTheWay,
     _poolPolJamaarIllusionist,
     _poolPorcelainLegionnaire,
+    _poolPriceOfLoyalty,
     _poolPrimevalProtector,
     _poolPrimocEscapee,
     _poolPrismariCampus,
@@ -959,6 +968,7 @@ const shard: CardShard = {
     _poolWallOfDistortion,
     _poolWallOfTanglecord,
     _poolWanderingOnes,
+    _poolWanderingTroubadour,
     _poolWanderlightSpirit,
     _poolWastefulHarvest,
     _poolWeaveFate,

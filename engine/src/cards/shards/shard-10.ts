@@ -177,6 +177,7 @@ import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGoblinHero from "../pool/goblin-hero.js";
+import _poolGoblinMorningstar from "../pool/goblin-morningstar.js";
 import _poolGoblinReplica from "../pool/goblin-replica.js";
 import _poolGoblinTownFlunkies from "../pool/goblin-town-flunkies.js";
 import _poolGoblinWarStrike from "../pool/goblin-war-strike.js";
@@ -266,6 +267,7 @@ import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMockingbird from "../pool/mockingbird.js";
+import _poolMonkClass from "../pool/monk-class.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
 import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
 import _poolMoonshaePixie from "../pool/moonshae-pixie.js";
@@ -492,6 +494,7 @@ import _poolWosePathfinder from "../pool/wose-pathfinder.js";
 import _poolYarokTheDesecrated from "../pool/yarok-the-desecrated.js";
 import _poolYokedPlowbeast from "../pool/yoked-plowbeast.js";
 import _poolYotianFrontliner from "../pool/yotian-frontliner.js";
+import _poolYouHearSomethingOnWatch from "../pool/you-hear-something-on-watch.js";
 import _poolZadaHedronGrinder from "../pool/zada-hedron-grinder.js";
 import _poolZarichiTiger from "../pool/zarichi-tiger.js";
 import _poolZealousConscripts from "../pool/zealous-conscripts.js";
@@ -685,6 +688,7 @@ const shard: CardShard = {
     _poolGladiolusAmicitia,
     _poolGlittermonger,
     _poolGoblinHero,
+    _poolGoblinMorningstar,
     _poolGoblinReplica,
     _poolGoblinTownFlunkies,
     _poolGoblinWarStrike,
@@ -774,6 +778,7 @@ const shard: CardShard = {
     _poolMindlessAutomaton,
     _poolMishrasFoundry,
     _poolMockingbird,
+    _poolMonkClass,
     _poolMoonHeron,
     _poolMoonfolkPuzzlemaker,
     _poolMoonshaePixie,
@@ -1000,6 +1005,7 @@ const shard: CardShard = {
     _poolYarokTheDesecrated,
     _poolYokedPlowbeast,
     _poolYotianFrontliner,
+    _poolYouHearSomethingOnWatch,
     _poolZadaHedronGrinder,
     _poolZarichiTiger,
     _poolZealousConscripts,

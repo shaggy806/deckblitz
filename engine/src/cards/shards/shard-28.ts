@@ -150,6 +150,7 @@ import _poolFanaticalFever from "../pool/fanatical-fever.js";
 import _poolFaunaShaman from "../pool/fauna-shaman.js";
 import _poolFearOfMissingOut from "../pool/fear-of-missing-out.js";
 import _poolFelidarCub from "../pool/felidar-cub.js";
+import _poolFeySteed from "../pool/fey-steed.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFlameChainMauler from "../pool/flame-chain-mauler.js";
 import _poolFleshpulperGiant from "../pool/fleshpulper-giant.js";
@@ -235,6 +236,7 @@ import _poolLlanowarKnight from "../pool/llanowar-knight.js";
 import _poolLucentLiminid from "../pool/lucent-liminid.js";
 import _poolLuciusTheEternal from "../pool/lucius-the-eternal.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
+import _poolMagicMissile from "../pool/magic-missile.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
 import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
 import _poolMakeAStand from "../pool/make-a-stand.js";
@@ -483,6 +485,7 @@ import _poolWastelandViper from "../pool/wasteland-viper.js";
 import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
+import _poolWestgateRegent from "../pool/westgate-regent.js";
 import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
@@ -490,6 +493,7 @@ import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
+import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
 import _poolZap from "../pool/zap.js";
@@ -657,6 +661,7 @@ const shard: CardShard = {
     _poolFaunaShaman,
     _poolFearOfMissingOut,
     _poolFelidarCub,
+    _poolFeySteed,
     _poolFireNationWarship,
     _poolFlameChainMauler,
     _poolFleshpulperGiant,
@@ -742,6 +747,7 @@ const shard: CardShard = {
     _poolLucentLiminid,
     _poolLuciusTheEternal,
     _poolLuxurySuite,
+    _poolMagicMissile,
     _poolMagusOfTheCoffers,
     _poolMaiScornfulStriker,
     _poolMakeAStand,
@@ -990,6 +996,7 @@ const shard: CardShard = {
     _poolWaterloggedHulk,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
+    _poolWestgateRegent,
     _poolWhirlermaker,
     _poolWhisperAgent,
     _poolWhiteOrchidPhantom,
@@ -997,6 +1004,7 @@ const shard: CardShard = {
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,
+    _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,
     _poolZap,

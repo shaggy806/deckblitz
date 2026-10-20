@@ -16,6 +16,7 @@ import _poolAngelicChorus from "../pool/angelic-chorus.js";
 import _poolAngelsGrace from "../pool/angels-grace.js";
 import _poolAnheloThePainter from "../pool/anhelo-the-painter.js";
 import _poolAnkleBiter from "../pool/ankle-biter.js";
+import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
@@ -63,6 +64,7 @@ import _poolChakramRetriever from "../pool/chakram-retriever.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
 import _poolChasmDrake from "../pool/chasm-drake.js";
 import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
+import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolCompleatedHuntmaster from "../pool/compleated-huntmaster.js";
 import _poolConceitedWitch from "../pool/conceited-witch.js";
 import _poolContradict from "../pool/contradict.js";
@@ -238,6 +240,7 @@ import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLivingPhone from "../pool/living-phone.js";
+import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
@@ -511,6 +514,7 @@ const shard: CardShard = {
     _poolAngelsGrace,
     _poolAnheloThePainter,
     _poolAnkleBiter,
+    _poolArmoryVeteran,
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
     _poolAtarkaMonument,
@@ -558,6 +562,7 @@ const shard: CardShard = {
     _poolChardalynDragon,
     _poolChasmDrake,
     _poolChillOfTheGrave,
+    _poolCleverConjurer,
     _poolCompleatedHuntmaster,
     _poolConceitedWitch,
     _poolContradict,
@@ -733,6 +738,7 @@ const shard: CardShard = {
     _poolLichsRelic,
     _poolLightningElemental,
     _poolLivingPhone,
+    _poolLoathsomeTroll,
     _poolLongFinnedSkywhale,
     _poolLoomingSpires,
     _poolLordWindgrace,

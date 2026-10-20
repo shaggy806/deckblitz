@@ -90,6 +90,7 @@ import _poolCybermenSquadron from "../pool/cybermen-squadron.js";
 import _poolCynetteJellyDrover from "../pool/cynette-jelly-drover.js";
 import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
+import _poolDeathTyrant from "../pool/death-tyrant.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
@@ -215,6 +216,7 @@ import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
+import _poolIngeniousSmith from "../pool/ingenious-smith.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
@@ -271,6 +273,7 @@ import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
+import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMirrormade from "../pool/mirrormade.js";
@@ -466,6 +469,7 @@ import _poolWorthyKnight from "../pool/worthy-knight.js";
 import _poolWurmcoilEngine from "../pool/wurmcoil-engine.js";
 import _poolWurmwallSweeper from "../pool/wurmwall-sweeper.js";
 import _poolYoungPyromancer from "../pool/young-pyromancer.js";
+import _poolYuanTiMalison from "../pool/yuan-ti-malison.js";
 import _poolYumaProudProtector from "../pool/yuma-proud-protector.js";
 import _poolZaltoFireGiantDuke from "../pool/zalto-fire-giant-duke.js";
 import _poolZimoneQuandrixProdigy from "../pool/zimone-quandrix-prodigy.js";
@@ -476,6 +480,7 @@ import _tokensDragonToken55 from "../tokens/dragon-token-5-5.js";
 import _tokensForestTentacleToken from "../tokens/forest-tentacle-token.js";
 import _tokensGoatToken from "../tokens/goat-token.js";
 import _tokensGoblinToken from "../tokens/goblin-token.js";
+import _tokensGuenhwyvar from "../tokens/guenhwyvar.js";
 import _tokensHumanClericToken from "../tokens/human-cleric-token.js";
 import _tokensMonkToken from "../tokens/monk-token.js";
 import _tokensPhyrexianHorrorTokenNissaAscendedAnimist from "../tokens/phyrexian-horror-token-nissa-ascended-animist.js";
@@ -576,6 +581,7 @@ const shard: CardShard = {
     _poolCynetteJellyDrover,
     _poolDaredevilsBillyClub,
     _poolDeathBomb,
+    _poolDeathTyrant,
     _poolDefiantBloodlord,
     _poolDelugeOfDoom,
     _poolDemonicCounsel,
@@ -701,6 +707,7 @@ const shard: CardShard = {
     _poolImprovisedClub,
     _poolIncandescentSoulstoke,
     _poolIndoctrinationAttendant,
+    _poolIngeniousSmith,
     _poolInsightEngine,
     _poolInvasionOfMercadia,
     _poolInvasionOfMuraganda,
@@ -757,6 +764,7 @@ const shard: CardShard = {
     _poolMercilessHarlequin,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,
+    _poolMidnightPathlighter,
     _poolMindbreakTrap,
     _poolMineBearer,
     _poolMirrormade,
@@ -952,6 +960,7 @@ const shard: CardShard = {
     _poolWurmcoilEngine,
     _poolWurmwallSweeper,
     _poolYoungPyromancer,
+    _poolYuanTiMalison,
     _poolYumaProudProtector,
     _poolZaltoFireGiantDuke,
     _poolZimoneQuandrixProdigy,
@@ -964,6 +973,7 @@ const shard: CardShard = {
     _tokensForestTentacleToken,
     _tokensGoatToken,
     _tokensGoblinToken,
+    _tokensGuenhwyvar,
     _tokensHumanClericToken,
     _tokensMonkToken,
     _tokensPhyrexianHorrorTokenNissaAscendedAnimist,

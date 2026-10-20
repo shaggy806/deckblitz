@@ -101,6 +101,7 @@ import _poolDurkwoodBoars from "../pool/durkwood-boars.js";
 import _poolDuskLegionDreadnought from "../pool/dusk-legion-dreadnought.js";
 import _poolDuskRoseReliquary from "../pool/dusk-rose-reliquary.js";
 import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
+import _poolDwarfholdChampion from "../pool/dwarfhold-champion.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
 import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
@@ -124,6 +125,7 @@ import _poolFallOfGilGalad from "../pool/fall-of-gil-galad.js";
 import _poolFallajiDragonEngine from "../pool/fallaji-dragon-engine.js";
 import _poolFarbogBoneflinger from "../pool/farbog-boneflinger.js";
 import _poolFarbogExplorer from "../pool/farbog-explorer.js";
+import _poolFaridehsFireball from "../pool/faridehs-fireball.js";
 import _poolFarmerCotton from "../pool/farmer-cotton.js";
 import _poolFesterleech from "../pool/festerleech.js";
 import _poolFireNationEngineer from "../pool/fire-nation-engineer.js";
@@ -473,6 +475,7 @@ import _poolXandersLounge from "../pool/xanders-lounge.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
+import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
 import _poolZadasCommando from "../pool/zadas-commando.js";
 import _tokensAlienToken from "../tokens/alien-token.js";
 import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
@@ -586,6 +589,7 @@ const shard: CardShard = {
     _poolDuskLegionDreadnought,
     _poolDuskRoseReliquary,
     _poolDutifulReplicator,
+    _poolDwarfholdChampion,
     _poolEagleVision,
     _poolEldraziMonument,
     _poolEldritchEvolution,
@@ -609,6 +613,7 @@ const shard: CardShard = {
     _poolFallajiDragonEngine,
     _poolFarbogBoneflinger,
     _poolFarbogExplorer,
+    _poolFaridehsFireball,
     _poolFarmerCotton,
     _poolFesterleech,
     _poolFireNationEngineer,
@@ -958,6 +963,7 @@ const shard: CardShard = {
     _poolYavimayaHollow,
     _poolYavimayaSojourner,
     _poolYgraEaterOfAll,
+    _poolYoureAmbushedOnTheRoad,
     _poolZadasCommando,
   ],
   tokens: [

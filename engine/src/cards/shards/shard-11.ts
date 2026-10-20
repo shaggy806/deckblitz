@@ -520,6 +520,7 @@ import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWormholeSerpent from "../pool/wormhole-serpent.js";
 import _poolYevaNaturesHerald from "../pool/yeva-natures-herald.js";
 import _poolYouFindTheVillainsLair from "../pool/you-find-the-villains-lair.js";
+import _poolYouSeeAGuardApproach from "../pool/you-see-a-guard-approach.js";
 import _poolZetalpaPrimalDawn from "../pool/zetalpa-primal-dawn.js";
 import _poolZogTriceratonCastaway from "../pool/zog-triceraton-castaway.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
@@ -1058,6 +1059,7 @@ const shard: CardShard = {
     _poolWormholeSerpent,
     _poolYevaNaturesHerald,
     _poolYouFindTheVillainsLair,
+    _poolYouSeeAGuardApproach,
     _poolZetalpaPrimalDawn,
     _poolZogTriceratonCastaway,
     _poolZombieMaster,

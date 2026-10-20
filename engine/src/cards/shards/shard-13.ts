@@ -40,6 +40,7 @@ import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
 import _poolBadgermole from "../pool/badgermole.js";
 import _poolBagOfHolding from "../pool/bag-of-holding.js";
+import _poolBalefulBeholder from "../pool/baleful-beholder.js";
 import _poolBardHeirOfGirion from "../pool/bard-heir-of-girion.js";
 import _poolBarrowWitches from "../pool/barrow-witches.js";
 import _poolBaxterBuilding from "../pool/baxter-building.js";
@@ -129,6 +130,7 @@ import _poolDreamtideWhale from "../pool/dreamtide-whale.js";
 import _poolDriftingMeadow from "../pool/drifting-meadow.js";
 import _poolDroverOfTheMighty from "../pool/drover-of-the-mighty.js";
 import _poolDualSunAdepts from "../pool/dual-sun-adepts.js";
+import _poolDungeonCrawler from "../pool/dungeon-crawler.js";
 import _poolDuskanaTheRageMother from "../pool/duskana-the-rage-mother.js";
 import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
 import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
@@ -214,6 +216,7 @@ import _poolImperialSeal from "../pool/imperial-seal.js";
 import _poolImprovisedAct from "../pool/improvised-act.js";
 import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
+import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
 import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
@@ -263,11 +266,13 @@ import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
+import _poolMeteorSwarm from "../pool/meteor-swarm.js";
 import _poolMichelangeloGameMaster from "../pool/michelangelo-game-master.js";
 import _poolMidnightBanshee from "../pool/midnight-banshee.js";
 import _poolMigratingKetradon from "../pool/migrating-ketradon.js";
 import _poolMindslicer from "../pool/mindslicer.js";
 import _poolMindstab from "../pool/mindstab.js";
+import _poolMinscBelovedRanger from "../pool/minsc-beloved-ranger.js";
 import _poolMirkwood from "../pool/mirkwood.js";
 import _poolMirrorRoom from "../pool/mirror-room.js";
 import _poolMishrasFactory from "../pool/mishras-factory.js";
@@ -546,6 +551,7 @@ const shard: CardShard = {
     _poolAzulaOnTheHunt,
     _poolBadgermole,
     _poolBagOfHolding,
+    _poolBalefulBeholder,
     _poolBardHeirOfGirion,
     _poolBarrowWitches,
     _poolBaxterBuilding,
@@ -635,6 +641,7 @@ const shard: CardShard = {
     _poolDriftingMeadow,
     _poolDroverOfTheMighty,
     _poolDualSunAdepts,
+    _poolDungeonCrawler,
     _poolDuskanaTheRageMother,
     _poolDuskriderFalcon,
     _poolEarthKingdomJailer,
@@ -720,6 +727,7 @@ const shard: CardShard = {
     _poolImprovisedAct,
     _poolInfiltratorIlKor,
     _poolInnocuousRat,
+    _poolInspiringBard,
     _poolInstantRamen,
     _poolInvasionSubmersible,
     _poolInvokeTheWinds,
@@ -769,11 +777,13 @@ const shard: CardShard = {
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
+    _poolMeteorSwarm,
     _poolMichelangeloGameMaster,
     _poolMidnightBanshee,
     _poolMigratingKetradon,
     _poolMindslicer,
     _poolMindstab,
+    _poolMinscBelovedRanger,
     _poolMirkwood,
     _poolMirrorRoom,
     _poolMishrasFactory,

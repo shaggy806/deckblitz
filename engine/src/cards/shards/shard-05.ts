@@ -223,6 +223,7 @@ import _poolHowlingGolem from "../pool/howling-golem.js";
 import _poolHumblingElder from "../pool/humbling-elder.js";
 import _poolHuntersBow from "../pool/hunters-bow.js";
 import _poolIceCreamKitty from "../pool/ice-cream-kitty.js";
+import _poolIcingdeathFrostTyrant from "../pool/icingdeath-frost-tyrant.js";
 import _poolImoenMysticTrickster from "../pool/imoen-mystic-trickster.js";
 import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
@@ -422,6 +423,7 @@ import _poolSupplyRunners from "../pool/supply-runners.js";
 import _poolSupremeVerdict from "../pool/supreme-verdict.js";
 import _poolSurgeEngine from "../pool/surge-engine.js";
 import _poolSwanSong from "../pool/swan-song.js";
+import _poolSwarmingGoblins from "../pool/swarming-goblins.js";
 import _poolSwiftfootBoots from "../pool/swiftfoot-boots.js";
 import _poolSwordDancer from "../pool/sword-dancer.js";
 import _poolSyggRiverCutthroat from "../pool/sygg-river-cutthroat.js";
@@ -736,6 +738,7 @@ const shard: CardShard = {
     _poolHumblingElder,
     _poolHuntersBow,
     _poolIceCreamKitty,
+    _poolIcingdeathFrostTyrant,
     _poolImoenMysticTrickster,
     _poolInThePresenceOfAges,
     _poolIncarnationTechnique,
@@ -935,6 +938,7 @@ const shard: CardShard = {
     _poolSupremeVerdict,
     _poolSurgeEngine,
     _poolSwanSong,
+    _poolSwarmingGoblins,
     _poolSwiftfootBoots,
     _poolSwordDancer,
     _poolSyggRiverCutthroat,

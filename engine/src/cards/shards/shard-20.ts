@@ -159,6 +159,7 @@ import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
 import _poolFerocification from "../pool/ferocification.js";
+import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
@@ -199,6 +200,7 @@ import _poolGranGran from "../pool/gran-gran.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
+import _poolGrimWanderer from "../pool/grim-wanderer.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
@@ -427,6 +429,7 @@ import _poolStonehornChanter from "../pool/stonehorn-chanter.js";
 import _poolStormShaman from "../pool/storm-shaman.js";
 import _poolStormcloudSpirit from "../pool/stormcloud-spirit.js";
 import _poolStormscaleScion from "../pool/stormscale-scion.js";
+import _poolStorvaldFrostGiantJarl from "../pool/storvald-frost-giant-jarl.js";
 import _poolStrixhavenSkycoach from "../pool/strixhaven-skycoach.js";
 import _poolSubterraneanCavern from "../pool/subterranean-cavern.js";
 import _poolSuddenStrike from "../pool/sudden-strike.js";
@@ -698,6 +701,7 @@ const shard: CardShard = {
     _poolFaultRiders,
     _poolFavorOfJukai,
     _poolFerocification,
+    _poolFeywildTrickster,
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
@@ -738,6 +742,7 @@ const shard: CardShard = {
     _poolGravedigger,
     _poolGrazilaxxIllithidScholar,
     _poolGrimDiscovery,
+    _poolGrimWanderer,
     _poolGrizzledOutrider,
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
@@ -966,6 +971,7 @@ const shard: CardShard = {
     _poolStormShaman,
     _poolStormcloudSpirit,
     _poolStormscaleScion,
+    _poolStorvaldFrostGiantJarl,
     _poolStrixhavenSkycoach,
     _poolSubterraneanCavern,
     _poolSuddenStrike,

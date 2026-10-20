@@ -29,7 +29,9 @@ import _poolAvenOfEnduringHope from "../pool/aven-of-enduring-hope.js";
 import _poolAxebaneGuardian from "../pool/axebane-guardian.js";
 import _poolAzureMage from "../pool/azure-mage.js";
 import _poolBackupAgent from "../pool/backup-agent.js";
+import _poolBagOfTricks from "../pool/bag-of-tricks.js";
 import _poolBanishFromEdoras from "../pool/banish-from-edoras.js";
+import _poolBardClass from "../pool/bard-class.js";
 import _poolBarkOfDoran from "../pool/bark-of-doran.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
@@ -83,6 +85,7 @@ import _poolCollectiveInferno from "../pool/collective-inferno.js";
 import _poolCollectorsCage from "../pool/collectors-cage.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCompanyCommander from "../pool/company-commander.js";
+import _poolCompelledDuel from "../pool/compelled-duel.js";
 import _poolConiferStrider from "../pool/conifer-strider.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
@@ -111,6 +114,7 @@ import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
+import _poolDevourIntellect from "../pool/devour-intellect.js";
 import _poolDevouringLight from "../pool/devouring-light.js";
 import _poolDevouringSwarm from "../pool/devouring-swarm.js";
 import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
@@ -283,6 +287,7 @@ import _poolMerfolkMistbinder from "../pool/merfolk-mistbinder.js";
 import _poolMerrowWitsniper from "../pool/merrow-witsniper.js";
 import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
+import _poolMimic from "../pool/mimic.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
 import _poolMirranSpy from "../pool/mirran-spy.js";
 import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
@@ -341,6 +346,7 @@ import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRadioactiveMan from "../pool/radioactive-man.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
+import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
@@ -517,7 +523,9 @@ const shard: CardShard = {
     _poolAxebaneGuardian,
     _poolAzureMage,
     _poolBackupAgent,
+    _poolBagOfTricks,
     _poolBanishFromEdoras,
+    _poolBardClass,
     _poolBarkOfDoran,
     _poolBartizanBats,
     _poolBastPantherGoddess,
@@ -571,6 +579,7 @@ const shard: CardShard = {
     _poolCollectorsCage,
     _poolCombatThresher,
     _poolCompanyCommander,
+    _poolCompelledDuel,
     _poolConiferStrider,
     _poolConservatory,
     _poolConsultTheNecrosages,
@@ -599,6 +608,7 @@ const shard: CardShard = {
     _poolDemolisherSpawn,
     _poolDesecrationPlague,
     _poolDesertOfTheIndomitable,
+    _poolDevourIntellect,
     _poolDevouringLight,
     _poolDevouringSwarm,
     _poolDiabolicTutor,
@@ -771,6 +781,7 @@ const shard: CardShard = {
     _poolMerrowWitsniper,
     _poolMerryBards,
     _poolMidnightAssassin,
+    _poolMimic,
     _poolMindSpiral,
     _poolMirranSpy,
     _poolMirrorOfGaladriel,
@@ -829,6 +840,7 @@ const shard: CardShard = {
     _poolRadioactiveMan,
     _poolRakdosCharm,
     _poolRancidRats,
+    _poolRayOfEnfeeblement,
     _poolRecklessAbandon,
     _poolRegress,
     _poolRemoteIsle,

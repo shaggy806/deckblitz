@@ -183,6 +183,7 @@ import _poolHippoCows from "../pool/hippo-cows.js";
 import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
+import _poolHuntersMark from "../pool/hunters-mark.js";
 import _poolHurskaSweetTooth from "../pool/hurska-sweet-tooth.js";
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
@@ -270,6 +271,7 @@ import _poolModelOfUnity from "../pool/model-of-unity.js";
 import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
+import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
@@ -708,6 +710,7 @@ const shard: CardShard = {
     _poolHoardingRecluse,
     _poolHornOfGondor,
     _poolHotshotInvestigators,
+    _poolHuntersMark,
     _poolHurskaSweetTooth,
     _poolIcetillExplorer,
     _poolIcewindStalwart,
@@ -795,6 +798,7 @@ const shard: CardShard = {
     _poolMolecularModifier,
     _poolMoltenNote,
     _poolMoltenRebuke,
+    _poolMordenkainensPolymorph,
     _poolMostValuableSlayer,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,

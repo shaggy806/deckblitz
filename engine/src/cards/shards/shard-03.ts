@@ -187,6 +187,7 @@ import _poolIrrigationDitch from "../pool/irrigation-ditch.js";
 import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
+import _poolJadedSellSword from "../pool/jaded-sell-sword.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
 import _poolJavelinOfLightning from "../pool/javelin-of-lightning.js";
 import _poolJoven from "../pool/joven.js";
@@ -380,6 +381,7 @@ import _poolSuspend from "../pool/suspend.js";
 import _poolSwiftManeuver from "../pool/swift-maneuver.js";
 import _poolSwordCoastSerpent from "../pool/sword-coast-serpent.js";
 import _poolSylvanMight from "../pool/sylvan-might.js";
+import _poolSylvanShepherd from "../pool/sylvan-shepherd.js";
 import _poolSymbioticWurm from "../pool/symbiotic-wurm.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
@@ -449,6 +451,7 @@ import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
+import _tokensBoo from "../tokens/boo.js";
 import _tokensCatBirdToken from "../tokens/cat-bird-token.js";
 import _tokensConstructTokenArtifactCount from "../tokens/construct-token-artifact-count.js";
 import _tokensElfDruidToken from "../tokens/elf-druid-token.js";
@@ -646,6 +649,7 @@ const shard: CardShard = {
     _poolIsshinTwoHeavensAsOne,
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
+    _poolJadedSellSword,
     _poolJandorsSaddlebags,
     _poolJavelinOfLightning,
     _poolJoven,
@@ -839,6 +843,7 @@ const shard: CardShard = {
     _poolSwiftManeuver,
     _poolSwordCoastSerpent,
     _poolSylvanMight,
+    _poolSylvanShepherd,
     _poolSymbioticWurm,
     _poolTakeAGlance,
     _poolTangledIslet,
@@ -910,6 +915,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBirdToken,
+    _tokensBoo,
     _tokensCatBirdToken,
     _tokensConstructTokenArtifactCount,
     _tokensElfDruidToken,

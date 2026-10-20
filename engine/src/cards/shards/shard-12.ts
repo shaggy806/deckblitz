@@ -147,6 +147,7 @@ import _poolFell from "../pool/fell.js";
 import _poolFerventDenial from "../pool/fervent-denial.js";
 import _poolFesteringThicket from "../pool/festering-thicket.js";
 import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
+import _poolFiftyFeetOfRope from "../pool/fifty-feet-of-rope.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
 import _poolFireglassMentor from "../pool/fireglass-mentor.js";
@@ -305,6 +306,7 @@ import _poolPiracyCharm from "../pool/piracy-charm.js";
 import _poolPlagueBelcher from "../pool/plague-belcher.js";
 import _poolPlatedKilnbeast from "../pool/plated-kilnbeast.js";
 import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
+import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
@@ -441,6 +443,7 @@ import _poolUneasyPartings from "../pool/uneasy-partings.js";
 import _poolUntamedHunger from "../pool/untamed-hunger.js";
 import _poolValgavothsFaithful from "../pool/valgavoths-faithful.js";
 import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
+import _poolVarisSilverymoonRanger from "../pool/varis-silverymoon-ranger.js";
 import _poolVaultOfChampions from "../pool/vault-of-champions.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
@@ -636,6 +639,7 @@ const shard: CardShard = {
     _poolFerventDenial,
     _poolFesteringThicket,
     _poolFieldsOfStrife,
+    _poolFiftyFeetOfRope,
     _poolFightRigging,
     _poolFireNationPalace,
     _poolFireglassMentor,
@@ -794,6 +798,7 @@ const shard: CardShard = {
     _poolPlagueBelcher,
     _poolPlatedKilnbeast,
     _poolPolukranosEngineOfRuin,
+    _poolPortableHole,
     _poolPortalToPhyrexia,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
@@ -930,6 +935,7 @@ const shard: CardShard = {
     _poolUntamedHunger,
     _poolValgavothsFaithful,
     _poolValleyRotcaller,
+    _poolVarisSilverymoonRanger,
     _poolVaultOfChampions,
     _poolVengefulBloodwitch,
     _poolVenserShaperSavant,

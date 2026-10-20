@@ -24,6 +24,7 @@ import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
+import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
 import _poolArchersOfQarsi from "../pool/archers-of-qarsi.js";
 import _poolArchfiendOfDepravity from "../pool/archfiend-of-depravity.js";
 import _poolArchiveDragon from "../pool/archive-dragon.js";
@@ -452,6 +453,7 @@ import _poolWeaselbackRedcap from "../pool/weaselback-redcap.js";
 import _poolWeaverOfBlossoms from "../pool/weaver-of-blossoms.js";
 import _poolWerefoxBodyguard from "../pool/werefox-bodyguard.js";
 import _poolWildPackSquad from "../pool/wild-pack-squad.js";
+import _poolWildShape from "../pool/wild-shape.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWirewoodElf from "../pool/wirewood-elf.js";
@@ -500,6 +502,7 @@ const shard: CardShard = {
     _poolAnnihilatingGlare,
     _poolAnotherChance,
     _poolAppealToEirdu,
+    _poolArcaneInvestigator,
     _poolArchersOfQarsi,
     _poolArchfiendOfDepravity,
     _poolArchiveDragon,
@@ -928,6 +931,7 @@ const shard: CardShard = {
     _poolWeaverOfBlossoms,
     _poolWerefoxBodyguard,
     _poolWildPackSquad,
+    _poolWildShape,
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWirewoodElf,

@@ -217,6 +217,7 @@ import _poolHeroesHangout from "../pool/heroes-hangout.js";
 import _poolHeroicStanza from "../pool/heroic-stanza.js";
 import _poolHexgoldHalberd from "../pool/hexgold-halberd.js";
 import _poolHexplateGolem from "../pool/hexplate-golem.js";
+import _poolHiredHexblade from "../pool/hired-hexblade.js";
 import _poolHoardersOverflow from "../pool/hoarders-overflow.js";
 import _poolHopToIt from "../pool/hop-to-it.js";
 import _poolHorizonScholar from "../pool/horizon-scholar.js";
@@ -726,6 +727,7 @@ const shard: CardShard = {
     _poolHeroicStanza,
     _poolHexgoldHalberd,
     _poolHexplateGolem,
+    _poolHiredHexblade,
     _poolHoardersOverflow,
     _poolHopToIt,
     _poolHorizonScholar,
