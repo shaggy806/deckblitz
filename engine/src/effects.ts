@@ -7695,6 +7695,19 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const operand = record["n"] as { readonly amount: EffectAmount };
       return { ...record, n: amountValue(operand.amount, ctx) };
     }
+    // A reflexive ability's targets are bound here, in the creating
+    // resolution, but they're its own (rule 603.12): `{ triggerValue: true }`
+    // in one reads the value it triggers with (`value`), not the creating
+    // ability's.
+    if (record["kind"] === "reflexive-trigger" && record["value"] !== undefined) {
+      const own = Object.create(ctx, {
+        triggerValue: { value: amountValue(record["value"] as EffectAmount, ctx) },
+      }) as ResolutionContext;
+      const { targets } = bindDynamicCompares({ targets: record["targets"] } as unknown as EffectSpec, own) as unknown as {
+        readonly targets: unknown;
+      };
+      return { ...record, targets };
+    }
     // A `whileSource` impulse permission's filter is its source's static
     // ability, read as the card is cast (Maralen's "the number of Elves and
     // Faeries you control"), so it stays unbound — `impulsePlayable` counts it.

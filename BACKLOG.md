@@ -173,7 +173,6 @@ there and move this line to `COMPLETED.md`.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.
-- **A reflexive trigger's target filter reads the creating ability's `triggerValue`** (603.12): `{ amount: { triggerValue: true } }` inside it sees the parent's value, not the reflexive one (found authoring Argentum Masticore).
 - **Blitz, sneak and web-slinging are offered only from the hand and the command zone** (702.152a, 702.190a, 702.188a).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).

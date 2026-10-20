@@ -20,13 +20,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   removes all abilities (Humility, rule 613.1f) doesn't remove it. Greenwidow waits; Geth is
   inaccurate in that corner. **Fix (outline):** grant it as a static on a modifier, as granted
   triggers ride one, so ability loss in timestamp order applies.
-- **A reflexive trigger's target filter reads the creating ability's `triggerValue`.** A
-  reflexive ability's target filter (603.12) is bound when it's created, in the parent's
-  resolution, so `{ amount: { triggerValue: true } }` there reads the parent trigger's value (0
-  for an upkeep trigger), not the reflexive one's. Argentum Masticore reads `{ thisWay:
-  "discarded", sumOf: "mana-value" }` instead, which that resolution knows. Any card that needs
-  the reflexive value in a target filter is silently wrong until the filter is bound in the
-  reflexive ability's own context.
 - **At most 100 tokens of one stack can block.** Rule 509.1a lets the defending player block
   with any of their untapped creatures; `Game.materializeStack` wakes at most `MAX_MATERIALIZED`
   (100) tokens of a blocking stack, and the rest stay out of the combat whatever was declared (the
