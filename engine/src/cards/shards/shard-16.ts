@@ -124,6 +124,7 @@ import _poolEternalWarrior from "../pool/eternal-warrior.js";
 import _poolEtherealInvestigator from "../pool/ethereal-investigator.js";
 import _poolExosuitSavior from "../pool/exosuit-savior.js";
 import _poolExpendableLackey from "../pool/expendable-lackey.js";
+import _poolExplosiveEntry from "../pool/explosive-entry.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
@@ -163,6 +164,7 @@ import _poolGeosurge from "../pool/geosurge.js";
 import _poolGhostlyPilferer from "../pool/ghostly-pilferer.js";
 import _poolGiantLadybug from "../pool/giant-ladybug.js";
 import _poolGiantManGargantuanGenius from "../pool/giant-man-gargantuan-genius.js";
+import _poolGiftOfWrath from "../pool/gift-of-wrath.js";
 import _poolGlacialWall from "../pool/glacial-wall.js";
 import _poolGlimmerBairn from "../pool/glimmer-bairn.js";
 import _poolGlissaTheTraitor from "../pool/glissa-the-traitor.js";
@@ -200,6 +202,7 @@ import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
+import _poolImperialMoth from "../pool/imperial-moth.js";
 import _poolImperiousInkmage from "../pool/imperious-inkmage.js";
 import _poolIndathaTriome from "../pool/indatha-triome.js";
 import _poolInkmothNexus from "../pool/inkmoth-nexus.js";
@@ -223,6 +226,7 @@ import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
 import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
+import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
 import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
@@ -267,6 +271,7 @@ import _poolMusesEncouragement from "../pool/muses-encouragement.js";
 import _poolMyrSire from "../pool/myr-sire.js";
 import _poolMyrTurbine from "../pool/myr-turbine.js";
 import _poolNajeelaTheBladeBlossom from "../pool/najeela-the-blade-blossom.js";
+import _poolNaomiPillarOfOrder from "../pool/naomi-pillar-of-order.js";
 import _poolNaturalize from "../pool/naturalize.js";
 import _poolNaturesChant from "../pool/natures-chant.js";
 import _poolNellyBorcaImpulsiveAccuser from "../pool/nelly-borca-impulsive-accuser.js";
@@ -352,6 +357,7 @@ import _poolSeizeOpportunity from "../pool/seize-opportunity.js";
 import _poolSelesnyaGuildmage from "../pool/selesnya-guildmage.js";
 import _poolSenateCourier from "../pool/senate-courier.js";
 import _poolSentinelOfTheNamelessCity from "../pool/sentinel-of-the-nameless-city.js";
+import _poolSeshirosLivingLegacy from "../pool/seshiros-living-legacy.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
@@ -481,6 +487,7 @@ import _poolWarpedTusker from "../pool/warped-tusker.js";
 import _poolWarstormSurge from "../pool/warstorm-surge.js";
 import _poolWaterTribeCaptain from "../pool/water-tribe-captain.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
+import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
 import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
@@ -494,6 +501,7 @@ import _poolWolverineBestThereIs from "../pool/wolverine-best-there-is.js";
 import _poolWoodlandAcolyte from "../pool/woodland-acolyte.js";
 import _poolX23DeadlyWeapon from "../pool/x-23-deadly-weapon.js";
 import _poolXyrisTheWrithingStorm from "../pool/xyris-the-writhing-storm.js";
+import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
 import _tokensAjanisPridemateToken from "../tokens/ajanis-pridemate-token.js";
 import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
@@ -640,6 +648,7 @@ const shard: CardShard = {
     _poolEtherealInvestigator,
     _poolExosuitSavior,
     _poolExpendableLackey,
+    _poolExplosiveEntry,
     _poolExtravagantReplication,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
@@ -679,6 +688,7 @@ const shard: CardShard = {
     _poolGhostlyPilferer,
     _poolGiantLadybug,
     _poolGiantManGargantuanGenius,
+    _poolGiftOfWrath,
     _poolGlacialWall,
     _poolGlimmerBairn,
     _poolGlissaTheTraitor,
@@ -716,6 +726,7 @@ const shard: CardShard = {
     _poolIchorspitBasilisk,
     _poolIkraShidiqiTheUsurper,
     _poolImmolatingSouleater,
+    _poolImperialMoth,
     _poolImperiousInkmage,
     _poolIndathaTriome,
     _poolInkmothNexus,
@@ -739,6 +750,7 @@ const shard: CardShard = {
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,
     _poolKorSkyClimber,
+    _poolKoseiPenitentWarlord,
     _poolKraulWarrior,
     _poolLadyCaleria,
     _poolLashOfThorns,
@@ -783,6 +795,7 @@ const shard: CardShard = {
     _poolMyrSire,
     _poolMyrTurbine,
     _poolNajeelaTheBladeBlossom,
+    _poolNaomiPillarOfOrder,
     _poolNaturalize,
     _poolNaturesChant,
     _poolNellyBorcaImpulsiveAccuser,
@@ -868,6 +881,7 @@ const shard: CardShard = {
     _poolSelesnyaGuildmage,
     _poolSenateCourier,
     _poolSentinelOfTheNamelessCity,
+    _poolSeshirosLivingLegacy,
     _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShatteredSanctum,
@@ -997,6 +1011,7 @@ const shard: CardShard = {
     _poolWarstormSurge,
     _poolWaterTribeCaptain,
     _poolWeaponsManufacturing,
+    _poolWhenWeWereYoung,
     _poolWhiplashWordsmith,
     _poolWhiteMagesStaff,
     _poolWildGrowth,
@@ -1010,6 +1025,7 @@ const shard: CardShard = {
     _poolWoodlandAcolyte,
     _poolX23DeadlyWeapon,
     _poolXyrisTheWrithingStorm,
+    _poolYouAreAlreadyDead,
     _poolZodiacHorse,
   ],
   tokens: [

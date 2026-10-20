@@ -1565,7 +1565,9 @@ exist (rule 111.7), so neither comes back.
   whoever controls it (Nelly Borca's "goad all suspected creatures" — `{
   type: "creature", suspected: true }`). `forGame: true` is "it's goaded for
   the rest of the game" (Jon Irenicus). A player goading a creature twice adds
-  nothing (701.15d). Which defenders a goaded creature may then be sent at is
+  nothing (701.15d), so "for each creature goaded this way" counts first, with
+  the filter `goadedByYou: false` (Kaima, the Fractured Calm — a creature under
+  your goad Aura isn't goaded again). Which defenders a goaded creature may then be sent at is
   worked out as rule 508.1d says — the most requirements obeyed — so it
   attacks a *player* other than its goader rather than a planeswalker while it
   can, and one goaded by every opponent attacks one of them. A goad is a

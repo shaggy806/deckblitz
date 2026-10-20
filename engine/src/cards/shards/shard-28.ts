@@ -44,6 +44,7 @@ import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
 import _poolBazaarOfBaghdad from "../pool/bazaar-of-baghdad.js";
+import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
 import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
@@ -81,6 +82,7 @@ import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
+import _poolConcordWithTheKami from "../pool/concord-with-the-kami.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
 import _poolCoralColony from "../pool/coral-colony.js";
 import _poolCorpseAppraiser from "../pool/corpse-appraiser.js";
@@ -185,6 +187,7 @@ import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHyperionsAtomicVision from "../pool/hyperions-atomic-vision.js";
 import _poolImpeccableTiming from "../pool/impeccable-timing.js";
+import _poolImperialOath from "../pool/imperial-oath.js";
 import _poolImpossibleMan from "../pool/impossible-man.js";
 import _poolIncineratingBlast from "../pool/incinerating-blast.js";
 import _poolIndustrialAdvancement from "../pool/industrial-advancement.js";
@@ -211,6 +214,7 @@ import _poolKingCrab from "../pool/king-crab.js";
 import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
+import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
 import _poolLakeTownLookout from "../pool/lake-town-lookout.js";
 import _poolLeechriddenSwamp from "../pool/leechridden-swamp.js";
 import _poolLegionExtruder from "../pool/legion-extruder.js";
@@ -433,6 +437,7 @@ import _poolTransmograntsCrown from "../pool/transmogrants-crown.js";
 import _poolTrapTheTrespassers from "../pool/trap-the-trespassers.js";
 import _poolTravelingPhilosopher from "../pool/traveling-philosopher.js";
 import _poolTremor from "../pool/tremor.js";
+import _poolTributeToHorobi from "../pool/tribute-to-horobi.js";
 import _poolTributeToUrborg from "../pool/tribute-to-urborg.js";
 import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
@@ -533,6 +538,7 @@ const shard: CardShard = {
     _poolAxgardCavalry,
     _poolBartolomeDelPresidio,
     _poolBazaarOfBaghdad,
+    _poolBearerOfMemory,
     _poolBelloBardOfTheBrambles,
     _poolBeneathTheSands,
     _poolBilbosDeadlySlice,
@@ -570,6 +576,7 @@ const shard: CardShard = {
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolConcealedCourtyard,
+    _poolConcordWithTheKami,
     _poolContestOfClaws,
     _poolCoralColony,
     _poolCorpseAppraiser,
@@ -674,6 +681,7 @@ const shard: CardShard = {
     _poolHungryGraffalon,
     _poolHyperionsAtomicVision,
     _poolImpeccableTiming,
+    _poolImperialOath,
     _poolImpossibleMan,
     _poolIncineratingBlast,
     _poolIndustrialAdvancement,
@@ -700,6 +708,7 @@ const shard: CardShard = {
     _poolKinjallisSunwing,
     _poolKithkinSpellduster,
     _poolKnotvineMystic,
+    _poolKumanoFacesKakkazan,
     _poolLakeTownLookout,
     _poolLeechriddenSwamp,
     _poolLegionExtruder,
@@ -922,6 +931,7 @@ const shard: CardShard = {
     _poolTrapTheTrespassers,
     _poolTravelingPhilosopher,
     _poolTremor,
+    _poolTributeToHorobi,
     _poolTributeToUrborg,
     _poolTrynnChampionOfFreedom,
     _poolTuskedColossodon,

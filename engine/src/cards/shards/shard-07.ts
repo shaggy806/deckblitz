@@ -34,6 +34,7 @@ import _poolBattlesongBerserker from "../pool/battlesong-berserker.js";
 import _poolBelakorTheDarkMaster from "../pool/belakor-the-dark-master.js";
 import _poolBlackcleaveCliffs from "../pool/blackcleave-cliffs.js";
 import _poolBlackcleaveGoblin from "../pool/blackcleave-goblin.js";
+import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
 import _poolBlightedFen from "../pool/blighted-fen.js";
@@ -43,6 +44,7 @@ import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
+import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBronzebeakMoa from "../pool/bronzebeak-moa.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
@@ -539,6 +541,7 @@ const shard: CardShard = {
     _poolBelakorTheDarkMaster,
     _poolBlackcleaveCliffs,
     _poolBlackcleaveGoblin,
+    _poolBladeBlizzardKitsune,
     _poolBlazingHellhound,
     _poolBlightKeeper,
     _poolBlightedFen,
@@ -548,6 +551,7 @@ const shard: CardShard = {
     _poolBlueSunsTwilight,
     _poolBojukaBog,
     _poolBoldBiochemist,
+    _poolBoonOfBoseiju,
     _poolBountyAgent,
     _poolBronzebeakMoa,
     _poolCallousInspector,

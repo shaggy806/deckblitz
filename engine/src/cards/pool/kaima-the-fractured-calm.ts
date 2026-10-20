@@ -7,9 +7,11 @@ import { defineCard } from "../define.js";
 //     resolves. A creature becoming enchanted later or an Aura being removed from a creature later
 //     won't change whether it is goaded.
 //
-// Both steps read the same set as the ability resolves — goading changes
-// nothing about which creatures are enchanted — so the counters count the
-// creatures just goaded. "Your opponents control" in a free-for-all is every
+// "Goaded this way" leaves out a creature you'd already goaded (a goad Aura
+// like Shiny Impetus): goading it again has no effect (rule 701.15d). So the
+// counters are counted first, over the ones not yet goaded by you — nothing
+// in between can change which those are, and the counters and the goad land
+// in the same resolution. "Your opponents control" in a free-for-all is every
 // other player's.
 
 const TEXT =
@@ -33,8 +35,13 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
+          {
+            kind: "add-counter",
+            target: "source",
+            counter: "+1/+1",
+            amount: { countOf: { ...GOADED, goadedByYou: false } },
+          },
           { kind: "goad", filter: GOADED },
-          { kind: "add-counter", target: "source", counter: "+1/+1", amount: { countOf: GOADED } },
         ],
       },
       resolve: null,

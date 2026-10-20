@@ -265,6 +265,7 @@ import _poolOakhameAdversary from "../pool/oakhame-adversary.js";
 import _poolObscuraStorefront from "../pool/obscura-storefront.js";
 import _poolOgreSlumlord from "../pool/ogre-slumlord.js";
 import _poolOgreWarrior from "../pool/ogre-warrior.js";
+import _poolOkibaReckonerRaid from "../pool/okiba-reckoner-raid.js";
 import _poolOltecArchaeologists from "../pool/oltec-archaeologists.js";
 import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
@@ -728,6 +729,7 @@ const shard: CardShard = {
     _poolObscuraStorefront,
     _poolOgreSlumlord,
     _poolOgreWarrior,
+    _poolOkibaReckonerRaid,
     _poolOltecArchaeologists,
     _poolOnTheJob,
     _poolOrazcaPuzzleDoor,

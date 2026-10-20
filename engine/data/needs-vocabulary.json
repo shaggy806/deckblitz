@@ -8155,6 +8155,82 @@
   "cost:alt-cost-spend-only-treasure-mana": {
    "family": "cost:mana-spending-rules",
    "example": "Security Rhox"
+  },
+  "effect:look-and-choose-exile-with-counter": {
+   "family": "effect:cast-during-resolution",
+   "example": "The Dragon-Kami Reborn // Dragon-Kami's Egg"
+  },
+  "effect:amount-counted-as-cast": {
+   "family": "condition:entry-provenance",
+   "example": "Lethal Exploit"
+  },
+  "static:add-color-to-attached": {
+   "family": "effect:animate-add-colors",
+   "example": "Blade of the Oni"
+  },
+  "effect:mass-shuffle-into-library-reveal-until": {
+   "family": "effect:shuffle-into-library",
+   "example": "Collision of Realms"
+  },
+  "static:keywords-of-linked-exile": {
+   "family": "condition:linked-exile-currently-exiled",
+   "example": "Eater of Virtue"
+  },
+  "effect:modal-chapter-targeted-modes": {
+   "family": "effect:modal-ability-targeted-modes",
+   "example": "Life of Toshiro Umezawa // Memory of Toshiro"
+  },
+  "effect:add-or-remove-each-counter-kind": {
+   "family": "effect:double-counters-each-kind",
+   "example": "Dramatist's Puppet"
+  },
+  "effect:amount-times-resolved-this-turn": {
+   "family": "trigger:reflexive-on-nth-resolution",
+   "example": "Bronze Cudgels"
+  },
+  "replacement:next-enter-with-counters": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Storyweave"
+  },
+  "effect:counter-choice-each-created-token": {
+   "family": "effect:attach-extensions",
+   "example": "Invoke the Ancients"
+  },
+  "effect:token-trigger-returns-linked-exiled-card": {
+   "family": "effect:linked-token-leaves",
+   "example": "Timothar, Baron of Bats"
+  },
+  "cost:self-cost-reduction-multiple-conditions": {
+   "family": "cost:cost-modification-extensions",
+   "example": "Assassin's Ink"
+  },
+  "cost:optional-sacrifice-additional-cost": {
+   "family": "keyword:bargain",
+   "example": "Voltage Surge"
+  },
+  "cost:granted-ability-sacrifice-granter": {
+   "family": "effect:modifier-grants-activated",
+   "example": "Ninja's Kunai"
+  },
+  "filter:shares-card-type-with-target": {
+   "family": "condition:filter-dynamic-compare",
+   "example": "Spirit-Sister's Call"
+  },
+  "condition:source-damage-to-player-this-turn": {
+   "family": "stat:object-damage-history",
+   "example": "Hidetsugu Consumes All // Vessel of the All-Consuming"
+  },
+  "static:cant-crew": {
+   "family": "keyword:crew",
+   "example": "Intercessor's Arrest"
+  },
+  "replacement:attached-destroy-sacrifice-aura": {
+   "family": "replacement:new-event-replacements",
+   "example": "Harmonious Emergence"
+  },
+  "effect:token-copy-of-revealed-cards": {
+   "family": "effect:token-copy-options",
+   "example": "Haunting Imitation"
   }
  }
 }

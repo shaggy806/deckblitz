@@ -63,6 +63,7 @@ import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolCampusCrier from "../pool/campus-crier.js";
 import _poolCandelabraOfTawnos from "../pool/candelabra-of-tawnos.js";
 import _poolCaptainsCall from "../pool/captains-call.js";
+import _poolCarefulCultivation from "../pool/careful-cultivation.js";
 import _poolCargoShip from "../pool/cargo-ship.js";
 import _poolCastleSengir from "../pool/castle-sengir.js";
 import _poolCatalystElemental from "../pool/catalyst-elemental.js";
@@ -191,6 +192,7 @@ import _poolHalberdier from "../pool/halberdier.js";
 import _poolHallOfTagsin from "../pool/hall-of-tagsin.js";
 import _poolHammerheadTyrant from "../pool/hammerhead-tyrant.js";
 import _poolHanaKami from "../pool/hana-kami.js";
+import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
@@ -228,6 +230,7 @@ import _poolJerrardOfTheClosedFist from "../pool/jerrard-of-the-closed-fist.js";
 import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
 import _poolJhoirasToolbox from "../pool/jhoiras-toolbox.js";
+import _poolJukaiTrainee from "../pool/jukai-trainee.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
 import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
 import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
@@ -286,11 +289,14 @@ import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
 import _poolMortalitySpear from "../pool/mortality-spear.js";
 import _poolMsMarvelElasticAlly from "../pool/ms-marvel-elastic-ally.js";
 import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
+import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
+import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
+import _poolOccultEpiphany from "../pool/occult-epiphany.js";
 import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
@@ -365,8 +371,10 @@ import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
+import _poolSkyswimmerKoi from "../pool/skyswimmer-koi.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
 import _poolSliceInTwain from "../pool/slice-in-twain.js";
+import _poolSmokeSpiritsAid from "../pool/smoke-spirits-aid.js";
 import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
 import _poolSnowfieldSinkhole from "../pool/snowfield-sinkhole.js";
 import _poolSoulManipulation from "../pool/soul-manipulation.js";
@@ -545,6 +553,7 @@ const shard: CardShard = {
     _poolCampusCrier,
     _poolCandelabraOfTawnos,
     _poolCaptainsCall,
+    _poolCarefulCultivation,
     _poolCargoShip,
     _poolCastleSengir,
     _poolCatalystElemental,
@@ -673,6 +682,7 @@ const shard: CardShard = {
     _poolHallOfTagsin,
     _poolHammerheadTyrant,
     _poolHanaKami,
+    _poolHandOfEnlightenment,
     _poolHeartflameSlash,
     _poolHedronArchive,
     _poolHelicarrierStrike,
@@ -710,6 +720,7 @@ const shard: CardShard = {
     _poolJeskaiStudent,
     _poolJhessianBalmgiver,
     _poolJhoirasToolbox,
+    _poolJukaiTrainee,
     _poolJungleBarrier,
     _poolJunkbladeBruiser,
     _poolKaitoCunningInfiltrator,
@@ -768,11 +779,14 @@ const shard: CardShard = {
     _poolMortalitySpear,
     _poolMsMarvelElasticAlly,
     _poolMuddleTheEverChanging,
+    _poolMyojinOfBloomingDawn,
     _poolNewHorizons,
+    _poolNezumiBladeblesser,
     _poolNimReplica,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
     _poolObscuraInterceptor,
+    _poolOccultEpiphany,
     _poolOkaunEyeOfChaos,
     _poolOltecMatterweaver,
     _poolOmenspeaker,
@@ -847,8 +861,10 @@ const shard: CardShard = {
     _poolSilentHallcreeper,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
+    _poolSkyswimmerKoi,
     _poolSlaughterSpecialist,
     _poolSliceInTwain,
+    _poolSmokeSpiritsAid,
     _poolSmokespewInvoker,
     _poolSnowfieldSinkhole,
     _poolSoulManipulation,

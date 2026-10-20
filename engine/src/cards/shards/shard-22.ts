@@ -305,12 +305,15 @@ import _poolRavenousTyrannosaurus from "../pool/ravenous-tyrannosaurus.js";
 import _poolRayFilletWaveWarrior from "../pool/ray-fillet-wave-warrior.js";
 import _poolRazorfinHunter from "../pool/razorfin-hunter.js";
 import _poolRazortipWhip from "../pool/razortip-whip.js";
+import _poolRealityHeist from "../pool/reality-heist.js";
 import _poolRecklessLackey from "../pool/reckless-lackey.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
+import _poolReleaseToMemory from "../pool/release-to-memory.js";
 import _poolReptilDinomorpher from "../pool/reptil-dinomorpher.js";
 import _poolRepurposedEnforcer from "../pool/repurposed-enforcer.js";
 import _poolResurrection from "../pool/resurrection.js";
+import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
@@ -392,6 +395,7 @@ import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
+import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
@@ -792,12 +796,15 @@ const shard: CardShard = {
     _poolRayFilletWaveWarrior,
     _poolRazorfinHunter,
     _poolRazortipWhip,
+    _poolRealityHeist,
     _poolRecklessLackey,
     _poolReinforcedRonin,
     _poolRelearn,
+    _poolReleaseToMemory,
     _poolReptilDinomorpher,
     _poolRepurposedEnforcer,
     _poolResurrection,
+    _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRiotDevils,
     _poolRishkarsExpertise,
@@ -879,6 +886,7 @@ const shard: CardShard = {
     _poolSwordOfWarAndPeace,
     _poolTaigamsScheming,
     _poolTaintedField,
+    _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
     _poolTattermungeManiac,
     _poolTelJiladExile,

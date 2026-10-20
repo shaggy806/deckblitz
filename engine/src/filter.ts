@@ -26,7 +26,7 @@ import {
 import type { CastVia } from "./actions.js";
 import type { CardRegistry, CardType, Keyword, Supertype } from "./cards.js";
 import type { EffectAmount, ThisWayKind } from "./effects.js";
-import { isGoaded } from "./goad.js";
+import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
@@ -256,6 +256,11 @@ export interface CardFilter {
    * goad whose own scope reads power or toughness can't be seen.
    */
   readonly goaded?: boolean;
+  /** Is (or isn't) goaded **by you**, whichever way (`goadersOf`). Goading
+   * a creature you've already goaded has no effect (rule 701.15d), so this is
+   * how "each creature goaded this way" leaves those out — Kaima, the
+   * Fractured Calm counts the ones not yet goaded by you before it goads. */
+  readonly goadedByYou?: boolean;
   /** Is (or isn't) **suspected** (rule 701.60 — `GameObject.suspectedAt`):
    * Nelly Borca's "goad all suspected creatures". One that has left the
    * battlefield is asked as it last was. */
@@ -1026,6 +1031,10 @@ export function matchesFilter(
           )
         : (lki!.goaders?.length ?? 0) > 0;
     if (goaded !== filter.goaded) return false;
+  }
+  if (filter.goadedByYou !== undefined) {
+    const goaders = live !== undefined ? goadersOf(state, registry, id) : (lki!.goaders ?? []);
+    if (goaders.includes(ctx.you) !== filter.goadedByYou) return false;
   }
   // A `NumCompare` operand read off the game: `{ own }` from this object,
   // `{ amount }` from whoever is applying the filter.

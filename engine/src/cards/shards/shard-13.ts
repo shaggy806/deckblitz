@@ -88,6 +88,7 @@ import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCoastalTower from "../pool/coastal-tower.js";
 import _poolCoatiScavenger from "../pool/coati-scavenger.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
+import _poolCommuneWithSpirits from "../pool/commune-with-spirits.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
@@ -187,6 +188,7 @@ import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
+import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHerosBlade from "../pool/heros-blade.js";
@@ -210,6 +212,7 @@ import _poolInfiltratorIlKor from "../pool/infiltrator-il-kor.js";
 import _poolInnocuousRat from "../pool/innocuous-rat.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
+import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
@@ -219,6 +222,7 @@ import _poolJhoiraWeatherlightCorsair from "../pool/jhoira-weatherlight-corsair.
 import _poolJoinTheDance from "../pool/join-the-dance.js";
 import _poolJourneyersKite from "../pool/journeyers-kite.js";
 import _poolJudgesFamiliar from "../pool/judges-familiar.js";
+import _poolJukaiPreserver from "../pool/jukai-preserver.js";
 import _poolJump from "../pool/jump.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
@@ -391,6 +395,7 @@ import _poolStrefanMaurerProgenitor from "../pool/strefan-maurer-progenitor.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
+import _poolSuitUp from "../pool/suit-up.js";
 import _poolSunBlessedGuardian from "../pool/sun-blessed-guardian.js";
 import _poolSunBlessedPeak from "../pool/sun-blessed-peak.js";
 import _poolSunlitMarsh from "../pool/sunlit-marsh.js";
@@ -571,6 +576,7 @@ const shard: CardShard = {
     _poolCoastalTower,
     _poolCoatiScavenger,
     _poolCommandersInsignia,
+    _poolCommuneWithSpirits,
     _poolConcealedWeapon,
     _poolConsumedByGreed,
     _poolCopyEnchantment,
@@ -670,6 +676,7 @@ const shard: CardShard = {
     _poolHaazdaVigilante,
     _poolHajarLoyalBodyguard,
     _poolHarnesserOfStorms,
+    _poolHauntedLibrary,
     _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
     _poolHerosBlade,
@@ -693,6 +700,7 @@ const shard: CardShard = {
     _poolInnocuousRat,
     _poolInstantRamen,
     _poolInvasionSubmersible,
+    _poolInvokeTheWinds,
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
     _poolIzzetLocket,
@@ -702,6 +710,7 @@ const shard: CardShard = {
     _poolJoinTheDance,
     _poolJourneyersKite,
     _poolJudgesFamiliar,
+    _poolJukaiPreserver,
     _poolJump,
     _poolKamahlsDruidicVow,
     _poolKeenGlidemaster,
@@ -874,6 +883,7 @@ const shard: CardShard = {
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,
+    _poolSuitUp,
     _poolSunBlessedGuardian,
     _poolSunBlessedPeak,
     _poolSunlitMarsh,

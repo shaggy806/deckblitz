@@ -215,6 +215,7 @@ import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
 import _poolJolraelVoiceOfZhalfir from "../pool/jolrael-voice-of-zhalfir.js";
 import _poolJunglebornPioneer from "../pool/jungleborn-pioneer.js";
+import _poolKamisFlare from "../pool/kamis-flare.js";
 import _poolKayasWrath from "../pool/kayas-wrath.js";
 import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
@@ -228,6 +229,7 @@ import _poolKykarZephyrAwakener from "../pool/kykar-zephyr-awakener.js";
 import _poolLagacLizard from "../pool/lagac-lizard.js";
 import _poolLakeTown from "../pool/lake-town.js";
 import _poolLandLeeches from "../pool/land-leeches.js";
+import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
 import _poolLieInWait from "../pool/lie-in-wait.js";
@@ -258,6 +260,7 @@ import _poolMonasterySwiftspear from "../pool/monastery-swiftspear.js";
 import _poolMoonSprite from "../pool/moon-sprite.js";
 import _poolMouserAttack from "../pool/mouser-attack.js";
 import _poolMudbuttonTorchrunner from "../pool/mudbutton-torchrunner.js";
+import _poolMyojinOfRoaringBlades from "../pool/myojin-of-roaring-blades.js";
 import _poolMysteryKey from "../pool/mystery-key.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
@@ -379,6 +382,7 @@ import _poolSpinewoodsPaladin from "../pool/spinewoods-paladin.js";
 import _poolSpireMechcycle from "../pool/spire-mechcycle.js";
 import _poolSplatterGoblin from "../pool/splatter-goblin.js";
 import _poolSplinterRadicalRat from "../pool/splinter-radical-rat.js";
+import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
 import _poolStaffOfZegon from "../pool/staff-of-zegon.js";
@@ -704,6 +708,7 @@ const shard: CardShard = {
     _poolJeskaiAscendancy,
     _poolJolraelVoiceOfZhalfir,
     _poolJunglebornPioneer,
+    _poolKamisFlare,
     _poolKayasWrath,
     _poolKeeneyeAven,
     _poolKembaKhaEnduring,
@@ -717,6 +722,7 @@ const shard: CardShard = {
     _poolLagacLizard,
     _poolLakeTown,
     _poolLandLeeches,
+    _poolLaurineTheDiversion,
     _poolLazotepPlating,
     _poolLedgerShredder,
     _poolLieInWait,
@@ -747,6 +753,7 @@ const shard: CardShard = {
     _poolMoonSprite,
     _poolMouserAttack,
     _poolMudbuttonTorchrunner,
+    _poolMyojinOfRoaringBlades,
     _poolMysteryKey,
     _poolMysticalTutor,
     _poolMystifyingMaze,
@@ -868,6 +875,7 @@ const shard: CardShard = {
     _poolSpireMechcycle,
     _poolSplatterGoblin,
     _poolSplinterRadicalRat,
+    _poolSpringLeafAvenger,
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,
     _poolStaffOfZegon,

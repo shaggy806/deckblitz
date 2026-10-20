@@ -86,6 +86,7 @@ import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
 import _poolCorpsesOfTheLost from "../pool/corpses-of-the-lost.js";
 import _poolCouncilsJudgment from "../pool/councils-judgment.js";
+import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
@@ -258,8 +259,10 @@ import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMockingbird from "../pool/mockingbird.js";
 import _poolMoonHeron from "../pool/moon-heron.js";
+import _poolMoonfolkPuzzlemaker from "../pool/moonfolk-puzzlemaker.js";
 import _poolMoonshaePixie from "../pool/moonshae-pixie.js";
 import _poolMoonsilverKey from "../pool/moonsilver-key.js";
+import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMulch from "../pool/mulch.js";
@@ -579,6 +582,7 @@ const shard: CardShard = {
     _poolCorpseberryCultivator,
     _poolCorpsesOfTheLost,
     _poolCouncilsJudgment,
+    _poolCovertTechnician,
     _poolCrawlingChorus,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,
@@ -751,8 +755,10 @@ const shard: CardShard = {
     _poolMishrasFoundry,
     _poolMockingbird,
     _poolMoonHeron,
+    _poolMoonfolkPuzzlemaker,
     _poolMoonshaePixie,
     _poolMoonsilverKey,
+    _poolMoonsnareSpecialist,
     _poolMoorFiend,
     _poolMouserMarkIii,
     _poolMulch,

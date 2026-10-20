@@ -216,6 +216,7 @@ import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-bu
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
+import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
@@ -267,6 +268,7 @@ import _poolNoblesPurse from "../pool/nobles-purse.js";
 import _poolObeliskOfAlara from "../pool/obelisk-of-alara.js";
 import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
 import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
+import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOracleOfNectars from "../pool/oracle-of-nectars.js";
 import _poolOracleOfTragedy from "../pool/oracle-of-tragedy.js";
@@ -309,6 +311,7 @@ import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
+import _poolReplicationSpecialist from "../pool/replication-specialist.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
 import _poolRiddleGateGargoyle from "../pool/riddle-gate-gargoyle.js";
 import _poolRienneAngelOfRebirth from "../pool/rienne-angel-of-rebirth.js";
@@ -393,12 +396,14 @@ import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
+import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
+import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
@@ -415,6 +420,7 @@ import _poolTinybonesPocketNuisance from "../pool/tinybones-pocket-nuisance.js";
 import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
+import _poolTowashiGuideBot from "../pool/towashi-guide-bot.js";
 import _poolTownGossipmonger from "../pool/town-gossipmonger.js";
 import _poolTrashTheTown from "../pool/trash-the-town.js";
 import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
@@ -426,6 +432,7 @@ import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
 import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
+import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
@@ -700,6 +707,7 @@ const shard: CardShard = {
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
     _poolJusticeVanceAstrovik,
+    _poolKamiOfTerribleSecrets,
     _poolKeiTakahashi,
     _poolKelsinkoRanger,
     _poolKindredJudgment,
@@ -751,6 +759,7 @@ const shard: CardShard = {
     _poolObeliskOfAlara,
     _poolObeliskOfBant,
     _poolObsessiveStitcher,
+    _poolOkibaSalvage,
     _poolOminousAsylum,
     _poolOracleOfNectars,
     _poolOracleOfTragedy,
@@ -793,6 +802,7 @@ const shard: CardShard = {
     _poolReefWorm,
     _poolReitoSentinel,
     _poolRelicRetriever,
+    _poolReplicationSpecialist,
     _poolRestlessAnchorage,
     _poolRiddleGateGargoyle,
     _poolRienneAngelOfRebirth,
@@ -877,12 +887,14 @@ const shard: CardShard = {
     _poolTackleArtist,
     _poolTakenumaAbandonedMire,
     _poolTanufelRimespeaker,
+    _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
     _poolTelimtorsDarts,
     _poolTempestHart,
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
+    _poolTheFallOfLordKonda,
     _poolTheGooseMother,
     _poolThopterEngineer,
     _poolThopterFabricator,
@@ -899,6 +911,7 @@ const shard: CardShard = {
     _poolTirelessProvisioner,
     _poolTotentanzSwarmPiper,
     _poolTouchOfBrilliance,
+    _poolTowashiGuideBot,
     _poolTownGossipmonger,
     _poolTrashTheTown,
     _poolTraverseTheOutlands,
@@ -910,6 +923,7 @@ const shard: CardShard = {
     _poolTyrantsFamiliar,
     _poolUchuulon,
     _poolUnbreathingHorde,
+    _poolUndercityScrounger,
     _poolUnfinishedBusiness,
     _poolUnnerve,
     _poolUnrulyMob,

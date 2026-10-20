@@ -212,6 +212,7 @@ import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
+import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
@@ -345,6 +346,7 @@ import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
 import _poolSelvalasStampede from "../pool/selvalas-stampede.js";
 import _poolSettlementBlacksmith from "../pool/settlement-blacksmith.js";
+import _poolSevenTailMentor from "../pool/seven-tail-mentor.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
 import _poolShardOfTheNightbringer from "../pool/shard-of-the-nightbringer.js";
 import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
@@ -688,6 +690,7 @@ const shard: CardShard = {
     _poolJoinTheMaestros,
     _poolJolraelMwonvuliRecluse,
     _poolJuriMasterOfTheRevue,
+    _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,
@@ -821,6 +824,7 @@ const shard: CardShard = {
     _poolSedgeScorpion,
     _poolSelvalasStampede,
     _poolSettlementBlacksmith,
+    _poolSevenTailMentor,
     _poolShacklegeist,
     _poolShardOfTheNightbringer,
     _poolShardmagesRescue,

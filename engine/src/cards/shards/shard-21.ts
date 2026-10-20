@@ -51,6 +51,7 @@ import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
+import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
@@ -104,6 +105,7 @@ import _poolDiscipleOfPerdition from "../pool/disciple-of-perdition.js";
 import _poolDisruptDecorum from "../pool/disrupt-decorum.js";
 import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
+import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
@@ -121,6 +123,7 @@ import _poolEmperorMihailIi from "../pool/emperor-mihail-ii.js";
 import _poolErase from "../pool/erase.js";
 import _poolEriettesTemptingApple from "../pool/eriettes-tempting-apple.js";
 import _poolEscapedExperiment from "../pool/escaped-experiment.js";
+import _poolExperimentalSynthesizer from "../pool/experimental-synthesizer.js";
 import _poolEzioAuditoreDaFirenze from "../pool/ezio-auditore-da-firenze.js";
 import _poolFalseSummoning from "../pool/false-summoning.js";
 import _poolFarewell from "../pool/farewell.js";
@@ -318,6 +321,7 @@ import _poolSandstoneBridge from "../pool/sandstone-bridge.js";
 import _poolSatoruUmezawa from "../pool/satoru-umezawa.js";
 import _poolScarletWitchChaoticAvenger from "../pool/scarlet-witch-chaotic-avenger.js";
 import _poolSceneOfTheCrime from "../pool/scene-of-the-crime.js";
+import _poolScionOfOpulence from "../pool/scion-of-opulence.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
 import _poolSeethingSong from "../pool/seething-song.js";
@@ -509,6 +513,7 @@ const shard: CardShard = {
     _poolBother,
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
+    _poolBreathOfTheSleepless,
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBugenhagenWiseElder,
@@ -562,6 +567,7 @@ const shard: CardShard = {
     _poolDisruptDecorum,
     _poolDjeruAndHazoret,
     _poolDocOckSinisterScientist,
+    _poolDragonsparkReactor,
     _poolDranasChosen,
     _poolDuress,
     _poolDuskLegionZealot,
@@ -579,6 +585,7 @@ const shard: CardShard = {
     _poolErase,
     _poolEriettesTemptingApple,
     _poolEscapedExperiment,
+    _poolExperimentalSynthesizer,
     _poolEzioAuditoreDaFirenze,
     _poolFalseSummoning,
     _poolFarewell,
@@ -776,6 +783,7 @@ const shard: CardShard = {
     _poolSatoruUmezawa,
     _poolScarletWitchChaoticAvenger,
     _poolSceneOfTheCrime,
+    _poolScionOfOpulence,
     _poolScrubland,
     _poolSculptingSteel,
     _poolSeethingSong,

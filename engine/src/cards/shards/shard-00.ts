@@ -290,6 +290,7 @@ import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
 import _poolOminousParcel from "../pool/ominous-parcel.js";
+import _poolOneWithTheKami from "../pool/one-with-the-kami.js";
 import _poolOpenTheGraves from "../pool/open-the-graves.js";
 import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
@@ -454,6 +455,7 @@ import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
+import _poolTwistedEmbrace from "../pool/twisted-embrace.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
 import _poolUchbenbakTheGreatMistake from "../pool/uchbenbak-the-great-mistake.js";
@@ -804,6 +806,7 @@ const shard: CardShard = {
     _poolOinTheBrave,
     _poolOmegaHeartlessEvolution,
     _poolOminousParcel,
+    _poolOneWithTheKami,
     _poolOpenTheGraves,
     _poolOpulentPalace,
     _poolOraxid,
@@ -968,6 +971,7 @@ const shard: CardShard = {
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTunnelOfHate,
+    _poolTwistedEmbrace,
     _poolTwistedLandscape,
     _poolTwofoldIntent,
     _poolUchbenbakTheGreatMistake,

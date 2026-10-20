@@ -1,0 +1,1401 @@
+{
+ "batch": "B106",
+ "status": "complete",
+ "ranks": "Kamigawa: Neon Dynasty and Neon Dynasty Commander (NEO, NEC, 2022-02-18): the rest of each set; Crimson Vow Commander (VOC, 2021-11-19): its first cards by EDHREC rank",
+ "authored": [
+  {
+   "name": "Release to Memory",
+   "files": [
+    "engine/src/cards/pool/release-to-memory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smoke Spirits' Aid",
+   "files": [
+    "engine/src/cards/pool/smoke-spirits-aid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kosei, Penitent Warlord",
+   "files": [
+    "engine/src/cards/pool/kosei-penitent-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invoke Despair",
+   "files": [
+    "engine/src/cards/pool/invoke-despair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reality Heist",
+   "files": [
+    "engine/src/cards/pool/reality-heist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "High-Speed Hoverbike",
+   "files": [
+    "engine/src/cards/pool/high-speed-hoverbike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tameshi, Reality Architect",
+   "files": [
+    "engine/src/cards/pool/tameshi-reality-architect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrine Steward",
+   "files": [
+    "engine/src/cards/pool/shrine-steward.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Light the Way",
+   "files": [
+    "engine/src/cards/pool/light-the-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitsune Ace",
+   "files": [
+    "engine/src/cards/pool/kitsune-ace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akki War Paint",
+   "files": [
+    "engine/src/cards/pool/akki-war-paint.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Modern Age",
+   "files": [
+    "engine/src/cards/pool/the-modern-age.ts",
+    "engine/src/cards/pool/vector-glider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Papercraft Decoy",
+   "files": [
+    "engine/src/cards/pool/papercraft-decoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blade-Blizzard Kitsune",
+   "files": [
+    "engine/src/cards/pool/blade-blizzard-kitsune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coiling Stalker",
+   "files": [
+    "engine/src/cards/pool/coiling-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akki Ember-Keeper",
+   "files": [
+    "engine/src/cards/pool/akki-ember-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runaway Trash-Bot",
+   "files": [
+    "engine/src/cards/pool/runaway-trash-bot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saiba Trespassers",
+   "files": [
+    "engine/src/cards/pool/saiba-trespassers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kami of Terrible Secrets",
+   "files": [
+    "engine/src/cards/pool/kami-of-terrible-secrets.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jukai Trainee",
+   "files": [
+    "engine/src/cards/pool/jukai-trainee.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myojin of Cryptic Dreams",
+   "files": [
+    "engine/src/cards/pool/myojin-of-cryptic-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myojin of Blooming Dawn",
+   "files": [
+    "engine/src/cards/pool/myojin-of-blooming-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spring-Leaf Avenger",
+   "files": [
+    "engine/src/cards/pool/spring-leaf-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonspark Reactor",
+   "files": [
+    "engine/src/cards/pool/dragonspark-reactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinning Wheel Kick",
+   "files": [
+    "engine/src/cards/pool/spinning-wheel-kick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Entry",
+   "files": [
+    "engine/src/cards/pool/explosive-entry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Recovery Unit",
+   "files": [
+    "engine/src/cards/pool/imperial-recovery-unit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Replication Specialist",
+   "files": [
+    "engine/src/cards/pool/replication-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commune with Spirits",
+   "files": [
+    "engine/src/cards/pool/commune-with-spirits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambitious Assault",
+   "files": [
+    "engine/src/cards/pool/ambitious-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mukotai Soulripper",
+   "files": [
+    "engine/src/cards/pool/mukotai-soulripper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Discover the Impossible",
+   "files": [
+    "engine/src/cards/pool/discover-the-impossible.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suit Up",
+   "files": [
+    "engine/src/cards/pool/suit-up.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Naomi, Pillar of Order",
+   "files": [
+    "engine/src/cards/pool/naomi-pillar-of-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "When We Were Young",
+   "files": [
+    "engine/src/cards/pool/when-we-were-young.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Predators' Hour",
+   "files": [
+    "engine/src/cards/pool/predators-hour.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acquisition Octopus",
+   "files": [
+    "engine/src/cards/pool/acquisition-octopus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Simian Sling",
+   "files": [
+    "engine/src/cards/pool/simian-sling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bronzeplate Boar",
+   "files": [
+    "engine/src/cards/pool/bronzeplate-boar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ogre-Head Helm",
+   "files": [
+    "engine/src/cards/pool/ogre-head-helm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leech Gauntlet",
+   "files": [
+    "engine/src/cards/pool/leech-gauntlet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armguard Familiar",
+   "files": [
+    "engine/src/cards/pool/armguard-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Webspinner Cuff",
+   "files": [
+    "engine/src/cards/pool/webspinner-cuff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainflail Centipede",
+   "files": [
+    "engine/src/cards/pool/chainflail-centipede.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katsumasa, the Animator",
+   "files": [
+    "engine/src/cards/pool/katsumasa-the-animator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ascendant Acolyte",
+   "files": [
+    "engine/src/cards/pool/ascendant-acolyte.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaima, the Fractured Calm",
+   "files": [
+    "engine/src/cards/pool/kaima-the-fractured-calm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Towashi Guide-Bot",
+   "files": [
+    "engine/src/cards/pool/towashi-guide-bot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master's Rebuke",
+   "files": [
+    "engine/src/cards/pool/masters-rebuke.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Network Terminal",
+   "files": [
+    "engine/src/cards/pool/network-terminal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Covert Technician",
+   "files": [
+    "engine/src/cards/pool/covert-technician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hidetsugu, Devouring Chaos",
+   "files": [
+    "engine/src/cards/pool/hidetsugu-devouring-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okiba Reckoner Raid",
+   "files": [
+    "engine/src/cards/pool/okiba-reckoner-raid.ts",
+    "engine/src/cards/pool/nezumi-road-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kumano Faces Kakkazan",
+   "files": [
+    "engine/src/cards/pool/kumano-faces-kakkazan.ts",
+    "engine/src/cards/pool/etching-of-kumano.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Era of Enlightenment",
+   "files": [
+    "engine/src/cards/pool/era-of-enlightenment.ts",
+    "engine/src/cards/pool/hand-of-enlightenment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Befriending the Moths",
+   "files": [
+    "engine/src/cards/pool/befriending-the-moths.ts",
+    "engine/src/cards/pool/imperial-moth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempered in Solitude",
+   "files": [
+    "engine/src/cards/pool/tempered-in-solitude.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eiganjo Uprising",
+   "files": [
+    "engine/src/cards/pool/eiganjo-uprising.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonfolk Puzzlemaker",
+   "files": [
+    "engine/src/cards/pool/moonfolk-puzzlemaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seven-Tail Mentor",
+   "files": [
+    "engine/src/cards/pool/seven-tail-mentor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okiba Salvage",
+   "files": [
+    "engine/src/cards/pool/okiba-salvage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Favor of Jukai",
+   "files": [
+    "engine/src/cards/pool/favor-of-jukai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kami's Flare",
+   "files": [
+    "engine/src/cards/pool/kamis-flare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jukai Preserver",
+   "files": [
+    "engine/src/cards/pool/jukai-preserver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Short Circuit",
+   "files": [
+    "engine/src/cards/pool/short-circuit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drogskol Reinforcements",
+   "files": [
+    "engine/src/cards/pool/drogskol-reinforcements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunted Library",
+   "files": [
+    "engine/src/cards/pool/haunted-library.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scion of Opulence",
+   "files": [
+    "engine/src/cards/pool/scion-of-opulence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unquenchable Fury",
+   "files": [
+    "engine/src/cards/pool/unquenchable-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myojin of Towering Might",
+   "files": [
+    "engine/src/cards/pool/myojin-of-towering-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonsnare Prototype",
+   "files": [
+    "engine/src/cards/pool/moonsnare-prototype.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirrorshell Crab",
+   "files": [
+    "engine/src/cards/pool/mirrorshell-crab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Experimental Synthesizer",
+   "files": [
+    "engine/src/cards/pool/experimental-synthesizer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kappa Tech-Wrecker",
+   "files": [
+    "engine/src/cards/pool/kappa-tech-wrecker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mukotai Ambusher",
+   "files": [
+    "engine/src/cards/pool/mukotai-ambusher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grafted Growth",
+   "files": [
+    "engine/src/cards/pool/grafted-growth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Fall of Lord Konda",
+   "files": [
+    "engine/src/cards/pool/the-fall-of-lord-konda.ts",
+    "engine/src/cards/pool/fragment-of-konda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Transfer",
+   "files": [
+    "engine/src/cards/pool/soul-transfer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teachings of the Kirin",
+   "files": [
+    "engine/src/cards/pool/teachings-of-the-kirin.ts",
+    "engine/src/cards/pool/kirin-touched-orochi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twisted Embrace",
+   "files": [
+    "engine/src/cards/pool/twisted-embrace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tales of Master Seshiro",
+   "files": [
+    "engine/src/cards/pool/tales-of-master-seshiro.ts",
+    "engine/src/cards/pool/seshiros-living-legacy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Oath",
+   "files": [
+    "engine/src/cards/pool/imperial-oath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Futurist Operative",
+   "files": [
+    "engine/src/cards/pool/futurist-operative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regent's Authority",
+   "files": [
+    "engine/src/cards/pool/regents-authority.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reckoner Shakedown",
+   "files": [
+    "engine/src/cards/pool/reckoner-shakedown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kami of Industry",
+   "files": [
+    "engine/src/cards/pool/kami-of-industry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Occult Epiphany",
+   "files": [
+    "engine/src/cards/pool/occult-epiphany.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myojin of Roaring Blades",
+   "files": [
+    "engine/src/cards/pool/myojin-of-roaring-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moonsnare Specialist",
+   "files": [
+    "engine/src/cards/pool/moonsnare-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anchor to Reality",
+   "files": [
+    "engine/src/cards/pool/anchor-to-reality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Automated Artificer",
+   "files": [
+    "engine/src/cards/pool/automated-artificer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invoke the Winds",
+   "files": [
+    "engine/src/cards/pool/invoke-the-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undercity Scrounger",
+   "files": [
+    "engine/src/cards/pool/undercity-scrounger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nezumi Bladeblesser",
+   "files": [
+    "engine/src/cards/pool/nezumi-bladeblesser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Risona, Asari Commander",
+   "files": [
+    "engine/src/cards/pool/risona-asari-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Shattered States Era",
+   "files": [
+    "engine/src/cards/pool/the-shattered-states-era.ts",
+    "engine/src/cards/pool/nameless-conqueror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sky-Blessed Samurai",
+   "files": [
+    "engine/src/cards/pool/sky-blessed-samurai.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unforgiving One",
+   "files": [
+    "engine/src/cards/pool/unforgiving-one.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kami of Restless Shadows",
+   "files": [
+    "engine/src/cards/pool/kami-of-restless-shadows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardians of Oboro",
+   "files": [
+    "engine/src/cards/pool/guardians-of-oboro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bearer of Memory",
+   "files": [
+    "engine/src/cards/pool/bearer-of-memory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breath of the Sleepless",
+   "files": [
+    "engine/src/cards/pool/breath-of-the-sleepless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One with the Kami",
+   "files": [
+    "engine/src/cards/pool/one-with-the-kami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Concord with the Kami",
+   "files": [
+    "engine/src/cards/pool/concord-with-the-kami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You Are Already Dead",
+   "files": [
+    "engine/src/cards/pool/you-are-already-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return to Action",
+   "files": [
+    "engine/src/cards/pool/return-to-action.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clawing Torment",
+   "files": [
+    "engine/src/cards/pool/clawing-torment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribute to Horobi",
+   "files": [
+    "engine/src/cards/pool/tribute-to-horobi.ts",
+    "engine/src/cards/pool/echo-of-deaths-wail.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orochi Merge-Keeper",
+   "files": [
+    "engine/src/cards/pool/orochi-merge-keeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twinshot Sniper",
+   "files": [
+    "engine/src/cards/pool/twinshot-sniper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Careful Cultivation",
+   "files": [
+    "engine/src/cards/pool/careful-cultivation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Banishing Slash",
+   "files": [
+    "engine/src/cards/pool/banishing-slash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boon of Boseiju",
+   "files": [
+    "engine/src/cards/pool/boon-of-boseiju.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walking Skyscraper",
+   "files": [
+    "engine/src/cards/pool/walking-skyscraper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaito's Pursuit",
+   "files": [
+    "engine/src/cards/pool/kaitos-pursuit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Upriser Renegade",
+   "files": [
+    "engine/src/cards/pool/upriser-renegade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dokuchi Shadow-Walker",
+   "files": [
+    "engine/src/cards/pool/dokuchi-shadow-walker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyswimmer Koi",
+   "files": [
+    "engine/src/cards/pool/skyswimmer-koi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gift of Wrath",
+   "files": [
+    "engine/src/cards/pool/gift-of-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seismic Wave",
+   "files": [
+    "engine/src/cards/pool/seismic-wave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heir of the Ancient Fang",
+   "files": [
+    "engine/src/cards/pool/heir-of-the-ancient-fang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geothermal Kami",
+   "files": [
+    "engine/src/cards/pool/geothermal-kami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kamber, the Plunderer",
+   "files": [
+    "engine/src/cards/pool/kamber-the-plunderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timin, Youthful Geist",
+   "files": [
+    "engine/src/cards/pool/timin-youthful-geist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Laurine, the Diversion",
+   "files": [
+    "engine/src/cards/pool/laurine-the-diversion.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Kairi, the Swirling Sky",
+   "needs": [
+    "decision:target-total-mana-value"
+   ],
+   "why": "any number of target nonland permanents with total mana value 6 or less"
+  },
+  {
+   "name": "March of Reckless Joy",
+   "needs": [
+    "cost:exile-cards-from-hand-cost-reduction",
+    "zone:impulse-play-only-one"
+   ],
+   "why": "exile red cards from hand for {2} less each; play up to two of the exiled cards"
+  },
+  {
+   "name": "Kami of Transience",
+   "needs": [
+    "stat:permanents-to-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "if an enchantment was put into your graveyard from the battlefield this turn"
+  },
+  {
+   "name": "Peerless Samurai",
+   "needs": [
+    "trigger:attacks-alone-filter",
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "a Samurai or Warrior attacks alone; the next spell you cast this turn costs {1} less"
+  },
+  {
+   "name": "Ancestral Katana",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "The Dragon-Kami Reborn",
+   "needs": [
+    "effect:cast-now-exiled-with-counter",
+    "effect:look-and-choose-exile-with-counter"
+   ],
+   "why": "exile a card with a hatching counter; cast any exiled cards with hatching counters (family effect:cast-during-resolution)"
+  },
+  {
+   "name": "Blossom Prancer",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "if you put a card into your hand this way"
+  },
+  {
+   "name": "Lethal Exploit",
+   "needs": [
+    "effect:amount-counted-as-cast"
+   ],
+   "why": "the number of modified creatures you controlled as you cast it (family condition:entry-provenance)"
+  },
+  {
+   "name": "Doom Weaver",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "soulbond"
+  },
+  {
+   "name": "Arterial Alchemy",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "Blood tokens have \"Equipped creature gets +2/+0\""
+  },
+  {
+   "name": "Spectral Arcanist",
+   "needs": [
+    "zone:cast-from-any-graveyard"
+   ],
+   "why": "cast an instant or sorcery from a graveyard (any player's)"
+  },
+  {
+   "name": "Sudden Salvation",
+   "needs": [
+    "filter:put-into-graveyard-from-battlefield-this-turn"
+   ],
+   "why": "permanent cards put into graveyards from the battlefield this turn"
+  },
+  {
+   "name": "Blade of the Oni",
+   "needs": [
+    "static:add-color-to-attached"
+   ],
+   "why": "equipped creature has base power and toughness 5/5, has menace, and is a black Demon in addition to its other colors and types"
+  },
+  {
+   "name": "Collision of Realms",
+   "needs": [
+    "effect:mass-shuffle-into-library-reveal-until"
+   ],
+   "why": "each player shuffles every creature they own into their library, then reveals until a creature (family effect:shuffle-into-library)"
+  },
+  {
+   "name": "Gloomshrieker",
+   "needs": [
+    "replacement:self-dies-exile-instead"
+   ],
+   "why": "if it would die, exile it instead (the self form ignores from: battlefield)"
+  },
+  {
+   "name": "Eater of Virtue",
+   "needs": [
+    "static:keywords-of-linked-exile"
+   ],
+   "why": "equipped creature has the keywords of cards exiled with it (family condition:linked-exile-currently-exiled)"
+  },
+  {
+   "name": "Scrap Welder",
+   "needs": [
+    "cost:sacrifice-mana-value-x"
+   ],
+   "why": "sacrifice an artifact with mana value X; target filter reads X"
+  },
+  {
+   "name": "Kyodai, Soul of Kamigawa",
+   "needs": [
+    "effect:duration-while-you-control-source"
+   ],
+   "why": "for as long as you control Kyodai"
+  },
+  {
+   "name": "Akki Ronin",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Eiganjo Exemplar",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Tamiyo's Compleation",
+   "needs": [
+    "effect:unattach-effect",
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "unattach Equipment from the enchanted permanent; an ETB acting on it"
+  },
+  {
+   "name": "Life of Toshiro Umezawa",
+   "needs": [
+    "effect:modal-chapter-targeted-modes"
+   ],
+   "why": "a Choose one chapter with targeted modes (family effect:modal-ability-targeted-modes)"
+  },
+  {
+   "name": "Dramatist's Puppet",
+   "needs": [
+    "effect:add-or-remove-each-counter-kind"
+   ],
+   "why": "for each kind of counter, add or remove one (family effect:double-counters-each-kind)"
+  },
+  {
+   "name": "Awakened Awareness",
+   "needs": [
+    "effect:effect-on-enchanted-permanent"
+   ],
+   "why": "put X +1/+1 counters on enchanted permanent"
+  },
+  {
+   "name": "Enormous Energy Blade",
+   "needs": [
+    "trigger:becomes-attached"
+   ],
+   "why": "whenever this Equipment becomes attached to a creature"
+  },
+  {
+   "name": "Markov Enforcer",
+   "needs": [
+    "trigger:dies-after-dealt-damage-by-source"
+   ],
+   "why": "a creature dealt damage by this creature this turn dies"
+  },
+  {
+   "name": "Rhoda, Geist Avenger",
+   "needs": [
+    "trigger:becomes-tapped-not-attacking"
+   ],
+   "why": "a creature becomes tapped for a reason other than attacking"
+  },
+  {
+   "name": "Priest of the Blessed Graf",
+   "needs": [
+    "effect:players-controlling-more-amount"
+   ],
+   "why": "each opponent who controls more lands than you"
+  },
+  {
+   "name": "Biting-Palm Ninja",
+   "needs": [
+    "effect:exile-chosen-from-revealed-hand"
+   ],
+   "why": "exile a nonland card from the revealed hand"
+  },
+  {
+   "name": "Inventive Iteration",
+   "needs": [
+    "effect:cast-restriction-until-your-next-turn"
+   ],
+   "why": "opponents can't cast spells with the same mana value until your next turn"
+  },
+  {
+   "name": "The Long Reach of Night",
+   "needs": [
+    "effect:count-in-target-player-graveyard"
+   ],
+   "why": "creature cards in defending player's graveyard"
+  },
+  {
+   "name": "Behold the Unspeakable",
+   "needs": [
+    "static:pt-per-cards-in-hand"
+   ],
+   "why": "+1/+1 for each card in your hand"
+  },
+  {
+   "name": "Kotose, the Silent Spider",
+   "needs": [
+    "effect:search-hand-graveyard-library",
+    "zone:choose-one-of-exiled"
+   ],
+   "why": "search graveyard, hand and library for same-named cards; play one for as long as you control Kotose"
+  },
+  {
+   "name": "Bronze Cudgels",
+   "needs": [
+    "effect:amount-times-resolved-this-turn"
+   ],
+   "why": "+X/+0 where X is the number of times this ability has resolved this turn (family trigger:reflexive-on-nth-resolution)"
+  },
+  {
+   "name": "Imperious Mindbreaker",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "soulbond"
+  },
+  {
+   "name": "Selfless Samurai",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Norika Yamazaki, the Poet",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Imperial Subduer",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Asari Captain",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Tamiyo, Compleated Sage",
+   "needs": [
+    "cost:loyalty-x"
+   ],
+   "why": "-X loyalty cost"
+  },
+  {
+   "name": "Storyweave",
+   "needs": [
+    "replacement:next-enter-with-counters"
+   ],
+   "why": "the next time enchantment creatures you control enter this turn, each enters with two additional counters (family replacement:copy-on-enter-options)"
+  },
+  {
+   "name": "Invoke the Ancients",
+   "needs": [
+    "effect:counter-choice-each-created-token"
+   ],
+   "why": "a counter choice for each token actually created (family effect:attach-extensions)"
+  },
+  {
+   "name": "Flame Discharge",
+   "needs": [
+    "condition:controlled-as-cast"
+   ],
+   "why": "if you controlled a modified creature as you cast this spell"
+  },
+  {
+   "name": "March of Burgeoning Life",
+   "needs": [
+    "cost:exile-cards-from-hand-cost-reduction",
+    "condition:same-name-as-target"
+   ],
+   "why": "exile green cards from hand for {2} less each; search for a card with the same name"
+  },
+  {
+   "name": "Timothar, Baron of Bats",
+   "needs": [
+    "effect:token-trigger-returns-linked-exiled-card"
+   ],
+   "why": "the Bat token's trigger returns the card Timothar exiled (family effect:linked-token-leaves)"
+  },
+  {
+   "name": "Thundering Mightmare",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "soulbond"
+  },
+  {
+   "name": "Midnight Arsonist",
+   "needs": [
+    "decision:target-count-amount"
+   ],
+   "why": "up to X targets, X the number of Vampires you control"
+  },
+  {
+   "name": "Myojin of Grim Betrayal",
+   "needs": [
+    "condition:put-into-graveyard-this-turn-filter"
+   ],
+   "why": "creature cards put into graveyards from anywhere this turn"
+  },
+  {
+   "name": "March of Otherworldly Light",
+   "needs": [
+    "cost:exile-cards-from-hand-cost-reduction"
+   ],
+   "why": "exile white cards from hand for {2} less each"
+  },
+  {
+   "name": "March of Wretched Sorrow",
+   "needs": [
+    "cost:exile-cards-from-hand-cost-reduction"
+   ],
+   "why": "exile black cards from hand for {2} less each"
+  },
+  {
+   "name": "Heiko Yamazaki, the General",
+   "needs": [
+    "trigger:attacks-alone-filter"
+   ],
+   "why": "a Samurai or Warrior you control attacks alone"
+  },
+  {
+   "name": "Invoke Justice",
+   "needs": [
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "distribute counters among creatures chosen on resolution"
+  },
+  {
+   "name": "Mindlink Mech",
+   "needs": [
+    "trigger:becomes-crewed-trigger",
+    "condition:crewed-by-this-turn"
+   ],
+   "why": "whenever it becomes crewed for the first time each turn; a creature that crewed it"
+  },
+  {
+   "name": "Tatsunari, Toad Rider",
+   "needs": [
+    "effect:cant-be-blocked-by-filter-until-eot"
+   ],
+   "why": "can't be blocked this turn except by creatures with flying or reach"
+  },
+  {
+   "name": "Debt to the Kami",
+   "needs": [
+    "effect:each-opponent-exiles-choice"
+   ],
+   "why": "target opponent exiles a creature they control"
+  },
+  {
+   "name": "Assassin's Ink",
+   "needs": [
+    "cost:self-cost-reduction-multiple-conditions"
+   ],
+   "why": "two independent {1} cost reductions (family cost:cost-modification-extensions)"
+  },
+  {
+   "name": "Sokenzan Smelter",
+   "needs": [
+    "effect:may-pay-mana-and-sacrifice"
+   ],
+   "why": "you may pay {1} and sacrifice an artifact"
+  },
+  {
+   "name": "Voltage Surge",
+   "needs": [
+    "cost:optional-sacrifice-additional-cost"
+   ],
+   "why": "as an additional cost, you may sacrifice an artifact (family keyword:bargain)"
+  },
+  {
+   "name": "Ninja's Kunai",
+   "needs": [
+    "cost:granted-ability-sacrifice-granter"
+   ],
+   "why": "the equipped creature's granted ability sacrifices the Equipment (family effect:modifier-grants-activated)"
+  },
+  {
+   "name": "Malicious Malfunction",
+   "needs": [
+    "replacement:turn-exile-if-dies-filter"
+   ],
+   "why": "a creature that would die this turn is exiled instead"
+  },
+  {
+   "name": "Breathkeeper Seraph",
+   "needs": [
+    "keyword:soulbond"
+   ],
+   "why": "soulbond"
+  },
+  {
+   "name": "Donal, Herald of Wings",
+   "needs": [
+    "effect:copy-spell-add-types"
+   ],
+   "why": "copy the spell, except it's a 1/1 Spirit in addition"
+  },
+  {
+   "name": "Sinister Waltz",
+   "needs": [
+    "effect:random-choice-among-chosen"
+   ],
+   "why": "return two of them at random"
+  },
+  {
+   "name": "Explosive Singularity",
+   "needs": [
+    "cost:additional-cost-tap-permanents"
+   ],
+   "why": "tap any number of untapped creatures for {1} less each (family decision:choose-tap-costs)"
+  },
+  {
+   "name": "Spirit-Sister's Call",
+   "needs": [
+    "filter:shares-card-type-with-target"
+   ],
+   "why": "a permanent card that shares a card type with the sacrificed permanent (family condition:filter-dynamic-compare)"
+  },
+  {
+   "name": "Hidetsugu Consumes All",
+   "needs": [
+    "trigger:deals-damage-once-per-event",
+    "condition:source-damage-to-player-this-turn"
+   ],
+   "why": "whenever it deals damage, once per event; if it has dealt 10 or more damage to that player this turn (family stat:object-damage-history)"
+  },
+  {
+   "name": "Intercessor's Arrest",
+   "needs": [
+    "static:attached-activated-abilities-prohibited",
+    "static:cant-crew"
+   ],
+   "why": "its activated abilities can't be activated unless mana abilities; can't crew (family keyword:crew)"
+  },
+  {
+   "name": "Harmonious Emergence",
+   "needs": [
+    "replacement:attached-destroy-sacrifice-aura"
+   ],
+   "why": "if enchanted land would be destroyed, sacrifice this Aura instead (family replacement:new-event-replacements)"
+  },
+  {
+   "name": "Crackling Emergence",
+   "needs": [
+    "replacement:attached-destroy-sacrifice-aura"
+   ],
+   "why": "if enchanted land would be destroyed, sacrifice this Aura instead (family replacement:new-event-replacements)"
+  },
+  {
+   "name": "Historian's Wisdom",
+   "needs": [
+    "condition:greatest-power-condition"
+   ],
+   "why": "if enchanted permanent is a creature with the greatest power among creatures on the battlefield"
+  },
+  {
+   "name": "Haunting Imitation",
+   "needs": [
+    "effect:reveal-top-any-library",
+    "effect:token-copy-of-revealed-cards"
+   ],
+   "why": "each player reveals the top card; a token copy of each creature card revealed (family effect:token-copy-options)"
+  }
+ ]
+}

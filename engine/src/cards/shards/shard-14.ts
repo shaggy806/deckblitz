@@ -115,6 +115,7 @@ import _poolDevouringSwarm from "../pool/devouring-swarm.js";
 import _poolDiabolicTutor from "../pool/diabolic-tutor.js";
 import _poolDimirSignet from "../pool/dimir-signet.js";
 import _poolDiplomaticRelations from "../pool/diplomatic-relations.js";
+import _poolDiscoverTheImpossible from "../pool/discover-the-impossible.js";
 import _poolDissentersDeliverance from "../pool/dissenters-deliverance.js";
 import _poolDistractTheGuards from "../pool/distract-the-guards.js";
 import _poolDouseInGloom from "../pool/douse-in-gloom.js";
@@ -131,6 +132,7 @@ import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolDustAnimus from "../pool/dust-animus.js";
 import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
+import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
@@ -241,6 +243,8 @@ import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
 import _poolJoragaWarcaller from "../pool/joraga-warcaller.js";
 import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
+import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
+import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
@@ -289,6 +293,7 @@ import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
 import _poolMutantTown from "../pool/mutant-town.js";
+import _poolMyojinOfCrypticDreams from "../pool/myojin-of-cryptic-dreams.js";
 import _poolMyrelShieldOfArgive from "../pool/myrel-shield-of-argive.js";
 import _poolNanogeneConversion from "../pool/nanogene-conversion.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
@@ -340,6 +345,7 @@ import _poolRoccoStreetChef from "../pool/rocco-street-chef.js";
 import _poolRocketVolley from "../pool/rocket-volley.js";
 import _poolRooftopSaboteurs from "../pool/rooftop-saboteurs.js";
 import _poolRuinousGremlin from "../pool/ruinous-gremlin.js";
+import _poolRunawayTrashBot from "../pool/runaway-trash-bot.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
@@ -362,7 +368,9 @@ import _poolShieldedByFaith from "../pool/shielded-by-faith.js";
 import _poolShivanGorge from "../pool/shivan-gorge.js";
 import _poolShivanMeteor from "../pool/shivan-meteor.js";
 import _poolShorecomberCrab from "../pool/shorecomber-crab.js";
+import _poolShortCircuit from "../pool/short-circuit.js";
 import _poolShriekmaw from "../pool/shriekmaw.js";
+import _poolShrineSteward from "../pool/shrine-steward.js";
 import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
 import _poolSiegeZombie from "../pool/siege-zombie.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
@@ -584,6 +592,7 @@ const shard: CardShard = {
     _poolDiabolicTutor,
     _poolDimirSignet,
     _poolDiplomaticRelations,
+    _poolDiscoverTheImpossible,
     _poolDissentersDeliverance,
     _poolDistractTheGuards,
     _poolDouseInGloom,
@@ -600,6 +609,7 @@ const shard: CardShard = {
     _poolDustAnimus,
     _poolEaglesRescue,
     _poolEbonDrake,
+    _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
     _poolEivorBattleReady,
     _poolEldraziLinebreaker,
@@ -710,6 +720,8 @@ const shard: CardShard = {
     _poolJoragaWarcaller,
     _poolJoustingDummy,
     _poolKaitoShizuki,
+    _poolKamiOfIndustry,
+    _poolKamiOfRestlessShadows,
     _poolKeenBuccaneer,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
@@ -758,6 +770,7 @@ const shard: CardShard = {
     _poolMuseumNightwatch,
     _poolMutantChainReaction,
     _poolMutantTown,
+    _poolMyojinOfCrypticDreams,
     _poolMyrelShieldOfArgive,
     _poolNanogeneConversion,
     _poolNecrogenScudder,
@@ -809,6 +822,7 @@ const shard: CardShard = {
     _poolRocketVolley,
     _poolRooftopSaboteurs,
     _poolRuinousGremlin,
+    _poolRunawayTrashBot,
     _poolRunescaleStormbrood,
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
@@ -831,7 +845,9 @@ const shard: CardShard = {
     _poolShivanGorge,
     _poolShivanMeteor,
     _poolShorecomberCrab,
+    _poolShortCircuit,
     _poolShriekmaw,
+    _poolShrineSteward,
     _poolShuFootSoldiers,
     _poolSiegeZombie,
     _poolSilverRaven,

@@ -67,6 +67,7 @@ import _poolChillingScreech from "../pool/chilling-screech.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolCloudspireSkycycle from "../pool/cloudspire-skycycle.js";
 import _poolCodsworthHandyHelper from "../pool/codsworth-handy-helper.js";
+import _poolCoilingStalker from "../pool/coiling-stalker.js";
 import _poolColdWaterSnapper from "../pool/cold-water-snapper.js";
 import _poolCollectiveUnconscious from "../pool/collective-unconscious.js";
 import _poolCollectorsCase from "../pool/collectors-case.js";
@@ -253,6 +254,7 @@ import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMirkwoodSpider from "../pool/mirkwood-spider.js";
+import _poolMirrorshellCrab from "../pool/mirrorshell-crab.js";
 import _poolMisleadingMotes from "../pool/misleading-motes.js";
 import _poolMistRaven from "../pool/mist-raven.js";
 import _poolMistmeadowCouncil from "../pool/mistmeadow-council.js";
@@ -262,6 +264,7 @@ import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
+import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
 import _poolNacatlOutlander from "../pool/nacatl-outlander.js";
 import _poolNaelAvizoaAeronaut from "../pool/nael-avizoa-aeronaut.js";
 import _poolNahiriForgedInFury from "../pool/nahiri-forged-in-fury.js";
@@ -506,6 +509,7 @@ import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
 import _tokensPhyrexianHydraTokenReach from "../tokens/phyrexian-hydra-token-reach.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
+import _tokensSmokeBlessingToken from "../tokens/smoke-blessing-token.js";
 import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
@@ -579,6 +583,7 @@ const shard: CardShard = {
     _poolClamorousIronclad,
     _poolCloudspireSkycycle,
     _poolCodsworthHandyHelper,
+    _poolCoilingStalker,
     _poolColdWaterSnapper,
     _poolCollectiveUnconscious,
     _poolCollectorsCase,
@@ -765,6 +770,7 @@ const shard: CardShard = {
     _poolMillicentRestlessRevenant,
     _poolMindspringMerfolk,
     _poolMirkwoodSpider,
+    _poolMirrorshellCrab,
     _poolMisleadingMotes,
     _poolMistRaven,
     _poolMistmeadowCouncil,
@@ -774,6 +780,7 @@ const shard: CardShard = {
     _poolMoltenRebuke,
     _poolMostValuableSlayer,
     _poolMtendaHerder,
+    _poolMukotaiSoulripper,
     _poolNacatlOutlander,
     _poolNaelAvizoaAeronaut,
     _poolNahiriForgedInFury,
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _tokensPhyrexianHydraTokenReach,
     _tokensRatTokenCantBlock,
     _tokensSkeletonPirateToken,
+    _tokensSmokeBlessingToken,
     _tokensSpiritTokenGreatArashinCity,
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensSturdyShieldToken,

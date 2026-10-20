@@ -22,6 +22,7 @@ import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
+import _poolAutomatedArtificer from "../pool/automated-artificer.js";
 import _poolAuxiliaryBoosters from "../pool/auxiliary-boosters.js";
 import _poolAvenSkirmisher from "../pool/aven-skirmisher.js";
 import _poolAviationPioneer from "../pool/aviation-pioneer.js";
@@ -111,6 +112,7 @@ import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
 import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
+import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
 import _poolExtractTheTruth from "../pool/extract-the-truth.js";
@@ -174,6 +176,8 @@ import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
 import _poolHerosDemise from "../pool/heros-demise.js";
 import _poolHerosDownfall from "../pool/heros-downfall.js";
+import _poolHidetsuguDevouringChaos from "../pool/hidetsugu-devouring-chaos.js";
+import _poolHighSpeedHoverbike from "../pool/high-speed-hoverbike.js";
 import _poolHorizonOfProgress from "../pool/horizon-of-progress.js";
 import _poolHornOfGreed from "../pool/horn-of-greed.js";
 import _poolHornOfValhalla from "../pool/horn-of-valhalla.js";
@@ -248,6 +252,7 @@ import _poolMomentOfValor from "../pool/moment-of-valor.js";
 import _poolMoonshadow from "../pool/moonshadow.js";
 import _poolMortalsResolve from "../pool/mortals-resolve.js";
 import _poolMoxJet from "../pool/mox-jet.js";
+import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
@@ -324,6 +329,7 @@ import _poolRunOver from "../pool/run-over.js";
 import _poolRuneSealedWall from "../pool/rune-sealed-wall.js";
 import _poolSHIELDSpyKit from "../pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSaiMasterThopterist from "../pool/sai-master-thopterist.js";
+import _poolSaibaTrespassers from "../pool/saiba-trespassers.js";
 import _poolSanctify from "../pool/sanctify.js";
 import _poolSandworm from "../pool/sandworm.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
@@ -495,6 +501,7 @@ const shard: CardShard = {
     _poolAthreosShroudVeiled,
     _poolAtraxasSkitterfang,
     _poolAuroralProcession,
+    _poolAutomatedArtificer,
     _poolAuxiliaryBoosters,
     _poolAvenSkirmisher,
     _poolAviationPioneer,
@@ -584,6 +591,7 @@ const shard: CardShard = {
     _poolEmeritusOfConflict,
     _poolEnemyOfTheGuildpact,
     _poolEngineRat,
+    _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
     _poolExcaliburSwordOfEden,
     _poolExtractTheTruth,
@@ -647,6 +655,8 @@ const shard: CardShard = {
     _poolHerdGnarr,
     _poolHerosDemise,
     _poolHerosDownfall,
+    _poolHidetsuguDevouringChaos,
+    _poolHighSpeedHoverbike,
     _poolHorizonOfProgress,
     _poolHornOfGreed,
     _poolHornOfValhalla,
@@ -721,6 +731,7 @@ const shard: CardShard = {
     _poolMoonshadow,
     _poolMortalsResolve,
     _poolMoxJet,
+    _poolMukotaiAmbusher,
     _poolNashiMoonsLegacy,
     _poolNeverwinterDryad,
     _poolNimbleBladeKhenra,
@@ -797,6 +808,7 @@ const shard: CardShard = {
     _poolRuneSealedWall,
     _poolSHIELDSpyKit,
     _poolSaiMasterThopterist,
+    _poolSaibaTrespassers,
     _poolSanctify,
     _poolSandworm,
     _poolSanguineMorass,

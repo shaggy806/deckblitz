@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbyssalGatekeeper from "../pool/abyssal-gatekeeper.js";
 import _poolAdricMathematicalGenius from "../pool/adric-mathematical-genius.js";
+import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
@@ -107,6 +108,7 @@ import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
 import _poolEphemerate from "../pool/ephemerate.js";
 import _poolEquilibriumAdept from "../pool/equilibrium-adept.js";
 import _poolErraticVisionary from "../pool/erratic-visionary.js";
+import _poolEtchingOfKumano from "../pool/etching-of-kumano.js";
 import _poolEtheriumHornSorcerer from "../pool/etherium-horn-sorcerer.js";
 import _poolEvidenceExaminer from "../pool/evidence-examiner.js";
 import _poolExhibitionTidecaller from "../pool/exhibition-tidecaller.js";
@@ -151,6 +153,7 @@ import _poolGoldlustTriad from "../pool/goldlust-triad.js";
 import _poolGoldmeadowHarrier from "../pool/goldmeadow-harrier.js";
 import _poolGontiCannyAcquisitor from "../pool/gonti-canny-acquisitor.js";
 import _poolGorgonsHead from "../pool/gorgons-head.js";
+import _poolGraftedGrowth from "../pool/grafted-growth.js";
 import _poolGravkill from "../pool/gravkill.js";
 import _poolGrimServant from "../pool/grim-servant.js";
 import _poolGuardianKirin from "../pool/guardian-kirin.js";
@@ -241,6 +244,7 @@ import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
+import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
 import _poolNoblePanther from "../pool/noble-panther.js";
@@ -450,6 +454,7 @@ const shard: CardShard = {
   pool: [
     _poolAbyssalGatekeeper,
     _poolAdricMathematicalGenius,
+    _poolAkkiWarPaint,
     _poolAlabornMusketeer,
     _poolAlibansTower,
     _poolAnafenzaTheForemost,
@@ -552,6 +557,7 @@ const shard: CardShard = {
     _poolEphemerate,
     _poolEquilibriumAdept,
     _poolErraticVisionary,
+    _poolEtchingOfKumano,
     _poolEtheriumHornSorcerer,
     _poolEvidenceExaminer,
     _poolExhibitionTidecaller,
@@ -596,6 +602,7 @@ const shard: CardShard = {
     _poolGoldmeadowHarrier,
     _poolGontiCannyAcquisitor,
     _poolGorgonsHead,
+    _poolGraftedGrowth,
     _poolGravkill,
     _poolGrimServant,
     _poolGuardianKirin,
@@ -686,6 +693,7 @@ const shard: CardShard = {
     _poolNecraDisciple,
     _poolNecronDeathmark,
     _poolNettleSwine,
+    _poolNezumiRoadCaptain,
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,
     _poolNoblePanther,

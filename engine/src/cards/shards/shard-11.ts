@@ -208,6 +208,7 @@ import _poolHullBreach from "../pool/hull-breach.js";
 import _poolHungeringPuppetbeast from "../pool/hungering-puppetbeast.js";
 import _poolHuntedBonebrute from "../pool/hunted-bonebrute.js";
 import _poolHuntersBlowgun from "../pool/hunters-blowgun.js";
+import _poolImperialRecoveryUnit from "../pool/imperial-recovery-unit.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
@@ -247,6 +248,7 @@ import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
 import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
+import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
 import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
@@ -272,6 +274,7 @@ import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
+import _poolMoonsnarePrototype from "../pool/moonsnare-prototype.js";
 import _poolMoonstoneEulogist from "../pool/moonstone-eulogist.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
@@ -729,6 +732,7 @@ const shard: CardShard = {
     _poolHungeringPuppetbeast,
     _poolHuntedBonebrute,
     _poolHuntersBlowgun,
+    _poolImperialRecoveryUnit,
     _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
@@ -768,6 +772,7 @@ const shard: CardShard = {
     _poolLeonardoBigBrother,
     _poolLeoninSkyhunter,
     _poolLeshracsRite,
+    _poolLightTheWay,
     _poolLilianasSteward,
     _poolLionHeart,
     _poolLlanowarVanguard,
@@ -793,6 +798,7 @@ const shard: CardShard = {
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
     _poolMoonriseCleric,
+    _poolMoonsnarePrototype,
     _poolMoonstoneEulogist,
     _poolMoriokReaver,
     _poolMossDiamond,

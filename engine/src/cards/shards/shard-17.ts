@@ -23,6 +23,7 @@ import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
+import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
 import _poolAshioksSkulker from "../pool/ashioks-skulker.js";
 import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
@@ -335,6 +336,7 @@ import _poolSearslicerGoblin from "../pool/searslicer-goblin.js";
 import _poolSecondThoughts from "../pool/second-thoughts.js";
 import _poolSeedshipAgrarian from "../pool/seedship-agrarian.js";
 import _poolSeethingLandscape from "../pool/seething-landscape.js";
+import _poolSeismicWave from "../pool/seismic-wave.js";
 import _poolSeraphOfNewPhyrexia from "../pool/seraph-of-new-phyrexia.js";
 import _poolSewnEyeDrake from "../pool/sewn-eye-drake.js";
 import _poolShabrazTheSkyshark from "../pool/shabraz-the-skyshark.js";
@@ -357,6 +359,7 @@ import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
 import _poolSoulOfTheHarvest from "../pool/soul-of-the-harvest.js";
+import _poolSoulTransfer from "../pool/soul-transfer.js";
 import _poolSoulbladeDjinn from "../pool/soulblade-djinn.js";
 import _poolSoulsAttendant from "../pool/souls-attendant.js";
 import _poolSparkJolt from "../pool/spark-jolt.js";
@@ -502,6 +505,7 @@ const shard: CardShard = {
     _poolArcboundBruiser,
     _poolArcticTreeline,
     _poolArdentRecruit,
+    _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,
     _poolAshioksSkulker,
     _poolAstralCornucopia,
@@ -814,6 +818,7 @@ const shard: CardShard = {
     _poolSecondThoughts,
     _poolSeedshipAgrarian,
     _poolSeethingLandscape,
+    _poolSeismicWave,
     _poolSeraphOfNewPhyrexia,
     _poolSewnEyeDrake,
     _poolShabrazTheSkyshark,
@@ -836,6 +841,7 @@ const shard: CardShard = {
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
     _poolSoulOfTheHarvest,
+    _poolSoulTransfer,
     _poolSoulbladeDjinn,
     _poolSoulsAttendant,
     _poolSparkJolt,

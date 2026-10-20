@@ -10,6 +10,8 @@ import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAirMarshal from "../pool/air-marshal.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
+import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
+import _poolAnchorToReality from "../pool/anchor-to-reality.js";
 import _poolAngelicAberration from "../pool/angelic-aberration.js";
 import _poolApproachOfTheSecondSun from "../pool/approach-of-the-second-sun.js";
 import _poolArcOfFortune from "../pool/arc-of-fortune.js";
@@ -320,6 +322,7 @@ import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
 import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
+import _poolRisonaAsariCommander from "../pool/risona-asari-commander.js";
 import _poolRiverSneak from "../pool/river-sneak.js";
 import _poolRobeOfStars from "../pool/robe-of-stars.js";
 import _poolRoguesGallery from "../pool/rogues-gallery.js";
@@ -406,6 +409,7 @@ import _poolTalionsMessenger from "../pool/talions-messenger.js";
 import _poolTangledSkyline from "../pool/tangled-skyline.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
+import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
@@ -502,6 +506,8 @@ const shard: CardShard = {
     _poolAidFromTheCowl,
     _poolAirMarshal,
     _poolAllosaurusShepherd,
+    _poolAmbitiousAssault,
+    _poolAnchorToReality,
     _poolAngelicAberration,
     _poolApproachOfTheSecondSun,
     _poolArcOfFortune,
@@ -812,6 +818,7 @@ const shard: CardShard = {
     _poolRetchedWretch,
     _poolRevivingMelody,
     _poolRingwraiths,
+    _poolRisonaAsariCommander,
     _poolRiverSneak,
     _poolRobeOfStars,
     _poolRoguesGallery,
@@ -898,6 +905,7 @@ const shard: CardShard = {
     _poolTangledSkyline,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,
+    _poolTemperedInSolitude,
     _poolTempleAcolyte,
     _poolTendrilOfTheMycotyrant,
     _poolThalakosSeer,

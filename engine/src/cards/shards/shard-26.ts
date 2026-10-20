@@ -286,6 +286,7 @@ import _poolPlanarAtlas from "../pool/planar-atlas.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
+import _poolPredatorsHour from "../pool/predators-hour.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
@@ -297,6 +298,7 @@ import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
 import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
 import _poolRayOfRuin from "../pool/ray-of-ruin.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
+import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
 import _poolReconstructedThopter from "../pool/reconstructed-thopter.js";
 import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
@@ -421,6 +423,7 @@ import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
 import _poolTrevasCharm from "../pool/trevas-charm.js";
 import _poolTribuneOfRot from "../pool/tribune-of-rot.js";
 import _poolTritonShorestalker from "../pool/triton-shorestalker.js";
+import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUltimeciaTemporalThreat from "../pool/ultimecia-temporal-threat.js";
@@ -765,6 +768,7 @@ const shard: CardShard = {
     _poolPortTown,
     _poolPostmortemProfessor,
     _poolPrayerOfBinding,
+    _poolPredatorsHour,
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
@@ -776,6 +780,7 @@ const shard: CardShard = {
     _poolRavenousLindwurm,
     _poolRayOfRuin,
     _poolReassemblingSkeleton,
+    _poolReckonerShakedown,
     _poolReclamationSage,
     _poolReconstructedThopter,
     _poolReluctantDounguard,
@@ -900,6 +905,7 @@ const shard: CardShard = {
     _poolTrevasCharm,
     _poolTribuneOfRot,
     _poolTritonShorestalker,
+    _poolTwinshotSniper,
     _poolTwistedFates,
     _poolUktabiOrangutan,
     _poolUltimeciaTemporalThreat,

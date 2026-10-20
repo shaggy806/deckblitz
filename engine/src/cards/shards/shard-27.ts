@@ -72,6 +72,7 @@ import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
 import _poolCityOfTraitors from "../pool/city-of-traitors.js";
 import _poolClachanFestival from "../pool/clachan-festival.js";
+import _poolClawingTorment from "../pool/clawing-torment.js";
 import _poolCloudSprite from "../pool/cloud-sprite.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
@@ -564,6 +565,7 @@ const shard: CardShard = {
     _poolCinderHellion,
     _poolCityOfTraitors,
     _poolClachanFestival,
+    _poolClawingTorment,
     _poolCloudSprite,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,

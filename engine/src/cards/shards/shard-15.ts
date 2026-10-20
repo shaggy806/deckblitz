@@ -117,6 +117,7 @@ import _poolEagerGlyphmage from "../pool/eager-glyphmage.js";
 import _poolEardrumRattler from "../pool/eardrum-rattler.js";
 import _poolEarthbendingStudent from "../pool/earthbending-student.js";
 import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
+import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
@@ -231,6 +232,7 @@ import _poolKetriaTriome from "../pool/ketria-triome.js";
 import _poolKilliansConfidence from "../pool/killians-confidence.js";
 import _poolKiloApogeeMind from "../pool/kilo-apogee-mind.js";
 import _poolKinTreeNurturer from "../pool/kin-tree-nurturer.js";
+import _poolKirinTouchedOrochi from "../pool/kirin-touched-orochi.js";
 import _poolKitchen from "../pool/kitchen.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
 import _poolLamentation from "../pool/lamentation.js";
@@ -278,6 +280,7 @@ import _poolMoxEmerald from "../pool/mox-emerald.js";
 import _poolMuldrothaTheGravetide from "../pool/muldrotha-the-gravetide.js";
 import _poolMultiversalRecruitment from "../pool/multiversal-recruitment.js";
 import _poolMysteriosPhantasm from "../pool/mysterios-phantasm.js";
+import _poolNamelessConqueror from "../pool/nameless-conqueror.js";
 import _poolNaturalEnd from "../pool/natural-end.js";
 import _poolNearheathChaplain from "../pool/nearheath-chaplain.js";
 import _poolNebelgastBeguiler from "../pool/nebelgast-beguiler.js";
@@ -428,6 +431,7 @@ import _poolUrzasFactory from "../pool/urzas-factory.js";
 import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
+import _poolVectorGlider from "../pool/vector-glider.js";
 import _poolVegaTheWatcher from "../pool/vega-the-watcher.js";
 import _poolViashinoGrappler from "../pool/viashino-grappler.js";
 import _poolViashivanDragon from "../pool/viashivan-dragon.js";
@@ -585,6 +589,7 @@ const shard: CardShard = {
     _poolEardrumRattler,
     _poolEarthbendingStudent,
     _poolEasterlingVanguard,
+    _poolEiganjoUprising,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
     _poolErinisGloomStalker,
@@ -699,6 +704,7 @@ const shard: CardShard = {
     _poolKilliansConfidence,
     _poolKiloApogeeMind,
     _poolKinTreeNurturer,
+    _poolKirinTouchedOrochi,
     _poolKitchen,
     _poolKyoshiIslandPlaza,
     _poolLamentation,
@@ -746,6 +752,7 @@ const shard: CardShard = {
     _poolMuldrothaTheGravetide,
     _poolMultiversalRecruitment,
     _poolMysteriosPhantasm,
+    _poolNamelessConqueror,
     _poolNaturalEnd,
     _poolNearheathChaplain,
     _poolNebelgastBeguiler,
@@ -896,6 +903,7 @@ const shard: CardShard = {
     _poolVampireSoulcaller,
     _poolVandalsEdit,
     _poolVastlandsScavenger,
+    _poolVectorGlider,
     _poolVegaTheWatcher,
     _poolViashinoGrappler,
     _poolViashivanDragon,

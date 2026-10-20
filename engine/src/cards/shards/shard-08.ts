@@ -162,6 +162,7 @@ import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolFurnaceBlessedConqueror from "../pool/furnace-blessed-conqueror.js";
+import _poolFuturistOperative from "../pool/futurist-operative.js";
 import _poolGadrakTheCrownScourge from "../pool/gadrak-the-crown-scourge.js";
 import _poolGallantStrike from "../pool/gallant-strike.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
@@ -432,6 +433,7 @@ import _poolThawbringer from "../pool/thawbringer.js";
 import _poolTheAutonomousFurnace from "../pool/the-autonomous-furnace.js";
 import _poolTheChiefWarg from "../pool/the-chief-warg.js";
 import _poolTheInfamousCruelclaw from "../pool/the-infamous-cruelclaw.js";
+import _poolTheModernAge from "../pool/the-modern-age.js";
 import _poolTheStasisCoffin from "../pool/the-stasis-coffin.js";
 import _poolThornfistStriker from "../pool/thornfist-striker.js";
 import _poolThoughtweftCharge from "../pool/thoughtweft-charge.js";
@@ -453,10 +455,12 @@ import _poolUnderdarkExplorer from "../pool/underdark-explorer.js";
 import _poolUnflinchingCourage from "../pool/unflinching-courage.js";
 import _poolUnhallowedPhalanx from "../pool/unhallowed-phalanx.js";
 import _poolUnlikelyAid from "../pool/unlikely-aid.js";
+import _poolUnquenchableFury from "../pool/unquenchable-fury.js";
 import _poolUnsealTheNecropolis from "../pool/unseal-the-necropolis.js";
 import _poolUnstableMoleculeSuit from "../pool/unstable-molecule-suit.js";
 import _poolUnwantedRemake from "../pool/unwanted-remake.js";
 import _poolUnwind from "../pool/unwind.js";
+import _poolUpriserRenegade from "../pool/upriser-renegade.js";
 import _poolUrborgVolcano from "../pool/urborg-volcano.js";
 import _poolUsherOfTheFallen from "../pool/usher-of-the-fallen.js";
 import _poolUtvaraHellkite from "../pool/utvara-hellkite.js";
@@ -681,6 +685,7 @@ const shard: CardShard = {
     _poolFromTheRubble,
     _poolFrostOgre,
     _poolFurnaceBlessedConqueror,
+    _poolFuturistOperative,
     _poolGadrakTheCrownScourge,
     _poolGallantStrike,
     _poolGargoyleFlock,
@@ -951,6 +956,7 @@ const shard: CardShard = {
     _poolTheAutonomousFurnace,
     _poolTheChiefWarg,
     _poolTheInfamousCruelclaw,
+    _poolTheModernAge,
     _poolTheStasisCoffin,
     _poolThornfistStriker,
     _poolThoughtweftCharge,
@@ -972,10 +978,12 @@ const shard: CardShard = {
     _poolUnflinchingCourage,
     _poolUnhallowedPhalanx,
     _poolUnlikelyAid,
+    _poolUnquenchableFury,
     _poolUnsealTheNecropolis,
     _poolUnstableMoleculeSuit,
     _poolUnwantedRemake,
     _poolUnwind,
+    _poolUpriserRenegade,
     _poolUrborgVolcano,
     _poolUsherOfTheFallen,
     _poolUtvaraHellkite,

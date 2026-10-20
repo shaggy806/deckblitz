@@ -117,6 +117,22 @@ describe("Kaima, the Fractured Calm", () => {
     expect(game.state.objects[plain].goadedBy).toBeUndefined();
     expect(counters(game, kaima)).toBe(1);
   });
+
+  it("doesn't count a creature you'd already goaded (rule 701.15d)", () => {
+    const { game } = table();
+    lands(game, "Plains", 2);
+    lands(game, "Mountain", 3);
+    const kaima = spawn(game, "Kaima, the Fractured Calm");
+    const impetus = spawn(game, "Grizzly Bears", B);
+    const pacified = spawn(game, "Grizzly Bears", B);
+    // Shiny Impetus: "enchanted creature … is goaded" — goaded by you already.
+    cast(game, toHand(game, "Pacifism"), { targets: [ref(pacified)] });
+    cast(game, toHand(game, "Shiny Impetus"), { targets: [ref(impetus)] });
+    toStep(game, "end");
+    settle(game);
+    expect(game.state.objects[pacified].goadedBy).toContain(A);
+    expect(counters(game, kaima)).toBe(1);
+  });
 });
 
 describe("Towashi Guide-Bot", () => {

@@ -115,6 +115,7 @@ import _poolDespoil from "../pool/despoil.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
+import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
@@ -252,6 +253,7 @@ import _poolMarkOfFury from "../pool/mark-of-fury.js";
 import _poolMassiveRaid from "../pool/massive-raid.js";
 import _poolMastermindPlum from "../pool/mastermind-plum.js";
 import _poolMastersCall from "../pool/masters-call.js";
+import _poolMastersRebuke from "../pool/masters-rebuke.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
@@ -608,6 +610,7 @@ const shard: CardShard = {
     _poolDisciplinedDuelist,
     _poolDistinguishedConjurer,
     _poolDiviningDuelist,
+    _poolDokuchiShadowWalker,
     _poolDragTheCanal,
     _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _poolMassiveRaid,
     _poolMastermindPlum,
     _poolMastersCall,
+    _poolMastersRebuke,
     _poolMeatLockerDrownedDiner,
     _poolMercilessEviction,
     _poolMesaUnicorn,

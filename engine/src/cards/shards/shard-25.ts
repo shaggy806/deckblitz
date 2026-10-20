@@ -191,6 +191,7 @@ import _poolGrandEntrywayElegantRotunda from "../pool/grand-entryway-elegant-rot
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
 import _poolGravitonFundamentalForce from "../pool/graviton-fundamental-force.js";
 import _poolGreatHallOfTheBiblioplex from "../pool/great-hall-of-the-biblioplex.js";
+import _poolGuardiansOfOboro from "../pool/guardians-of-oboro.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
@@ -220,6 +221,7 @@ import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
 import _poolKazuulsFury from "../pool/kazuuls-fury.js";
 import _poolKinTreeWarden from "../pool/kin-tree-warden.js";
 import _poolKindlesparkDuo from "../pool/kindlespark-duo.js";
+import _poolKitsuneAce from "../pool/kitsune-ace.js";
 import _poolKnightOfNewBenalia from "../pool/knight-of-new-benalia.js";
 import _poolKraulWhipcracker from "../pool/kraul-whipcracker.js";
 import _poolKrileBaldesion from "../pool/krile-baldesion.js";
@@ -400,6 +402,7 @@ import _poolSummonersSending from "../pool/summoners-sending.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
+import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
@@ -673,6 +676,7 @@ const shard: CardShard = {
     _poolGraspingLongneck,
     _poolGravitonFundamentalForce,
     _poolGreatHallOfTheBiblioplex,
+    _poolGuardiansOfOboro,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
     _poolHarnessedSnubhorn,
@@ -702,6 +706,7 @@ const shard: CardShard = {
     _poolKazuulsFury,
     _poolKinTreeWarden,
     _poolKindlesparkDuo,
+    _poolKitsuneAce,
     _poolKnightOfNewBenalia,
     _poolKraulWhipcracker,
     _poolKrileBaldesion,
@@ -882,6 +887,7 @@ const shard: CardShard = {
     _poolSunderingVitae,
     _poolSuspiciousStowaway,
     _poolTaintedPeak,
+    _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,
     _poolTerramorphicExpanse,

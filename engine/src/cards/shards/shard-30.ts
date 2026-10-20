@@ -323,6 +323,7 @@ import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
+import _poolOrochiMergeKeeper from "../pool/orochi-merge-keeper.js";
 import _poolOrysaTideChoreographer from "../pool/orysa-tide-choreographer.js";
 import _poolOutlandBoar from "../pool/outland-boar.js";
 import _poolOutpaceOblivion from "../pool/outpace-oblivion.js";
@@ -397,6 +398,7 @@ import _poolSpellbindingSoprano from "../pool/spellbinding-soprano.js";
 import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
+import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSquadRallier from "../pool/squad-rallier.js";
 import _poolSquire from "../pool/squire.js";
@@ -820,6 +822,7 @@ const shard: CardShard = {
     _poolOmenOfTheDead,
     _poolOnduInversion,
     _poolOrcishBowmasters,
+    _poolOrochiMergeKeeper,
     _poolOrysaTideChoreographer,
     _poolOutlandBoar,
     _poolOutpaceOblivion,
@@ -894,6 +897,7 @@ const shard: CardShard = {
     _poolSpiderGirlLegacyHero,
     _poolSpiderSuit,
     _poolSpinedThopter,
+    _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSquadRallier,
     _poolSquire,

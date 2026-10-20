@@ -11,6 +11,7 @@ import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
+import _poolAkkiEmberKeeper from "../pool/akki-ember-keeper.js";
 import _poolAkulTheUnrepentant from "../pool/akul-the-unrepentant.js";
 import _poolAltacBloodseeker from "../pool/altac-bloodseeker.js";
 import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
@@ -32,6 +33,7 @@ import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
+import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
 import _poolBedheadBeastie from "../pool/bedhead-beastie.js";
 import _poolBenalishTrapper from "../pool/benalish-trapper.js";
@@ -300,6 +302,7 @@ import _poolNecrogenCommunion from "../pool/necrogen-communion.js";
 import _poolNehebTheEternal from "../pool/neheb-the-eternal.js";
 import _poolNekusarTheMindrazer from "../pool/nekusar-the-mindrazer.js";
 import _poolNephaliaSeakite from "../pool/nephalia-seakite.js";
+import _poolNetworkTerminal from "../pool/network-terminal.js";
 import _poolNewBenalia from "../pool/new-benalia.js";
 import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
@@ -400,6 +403,7 @@ import _poolSinkholeSurveyor from "../pool/sinkhole-surveyor.js";
 import _poolSkarrgGoliath from "../pool/skarrg-goliath.js";
 import _poolSkeletalWurm from "../pool/skeletal-wurm.js";
 import _poolSkirmishRhino from "../pool/skirmish-rhino.js";
+import _poolSkyBlessedSamurai from "../pool/sky-blessed-samurai.js";
 import _poolSkyknightVanguard from "../pool/skyknight-vanguard.js";
 import _poolSkyshaper from "../pool/skyshaper.js";
 import _poolSlaughterhorn from "../pool/slaughterhorn.js";
@@ -458,6 +462,7 @@ import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnderTheSkin from "../pool/under-the-skin.js";
 import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
+import _poolUnforgivingOne from "../pool/unforgiving-one.js";
 import _poolUnleashTheInferno from "../pool/unleash-the-inferno.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
@@ -525,6 +530,7 @@ const shard: CardShard = {
     _poolAgainstAllOdds,
     _poolAgentsOfSHIELD,
     _poolAggressiveSabotage,
+    _poolAkkiEmberKeeper,
     _poolAkulTheUnrepentant,
     _poolAltacBloodseeker,
     _poolAmphinMutineer,
@@ -546,6 +552,7 @@ const shard: CardShard = {
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
     _poolBalemurkLeech,
+    _poolBanishingSlash,
     _poolBarbarianHorde,
     _poolBedheadBeastie,
     _poolBenalishTrapper,
@@ -814,6 +821,7 @@ const shard: CardShard = {
     _poolNehebTheEternal,
     _poolNekusarTheMindrazer,
     _poolNephaliaSeakite,
+    _poolNetworkTerminal,
     _poolNewBenalia,
     _poolNighthawkDarkDefender,
     _poolNightwingShade,
@@ -914,6 +922,7 @@ const shard: CardShard = {
     _poolSkarrgGoliath,
     _poolSkeletalWurm,
     _poolSkirmishRhino,
+    _poolSkyBlessedSamurai,
     _poolSkyknightVanguard,
     _poolSkyshaper,
     _poolSlaughterhorn,
@@ -972,6 +981,7 @@ const shard: CardShard = {
     _poolUncoverTheMoonLetters,
     _poolUnderTheSkin,
     _poolUndercoverSkrull,
+    _poolUnforgivingOne,
     _poolUnleashTheInferno,
     _poolUnsubtleMockery,
     _poolUrborgDrake,

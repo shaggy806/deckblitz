@@ -153,6 +153,7 @@ import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
+import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
 import _poolFerocification from "../pool/ferocification.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
@@ -445,6 +446,7 @@ import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheGreatMound from "../pool/the-great-mound.js";
 import _poolTheRuinousWreckingCrew from "../pool/the-ruinous-wrecking-crew.js";
+import _poolTheShatteredStatesEra from "../pool/the-shattered-states-era.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
@@ -456,6 +458,7 @@ import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
+import _poolTiminYouthfulGeist from "../pool/timin-youthful-geist.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
 import _poolTitanOfIndustry from "../pool/titan-of-industry.js";
 import _poolTitansStrength from "../pool/titans-strength.js";
@@ -674,6 +677,7 @@ const shard: CardShard = {
     _poolExplosiveProdigy,
     _poolFatefulHandoff,
     _poolFaultRiders,
+    _poolFavorOfJukai,
     _poolFerocification,
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
@@ -966,6 +970,7 @@ const shard: CardShard = {
     _poolTheGreatGoblin,
     _poolTheGreatMound,
     _poolTheRuinousWreckingCrew,
+    _poolTheShatteredStatesEra,
     _poolTheTenRings,
     _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,
@@ -977,6 +982,7 @@ const shard: CardShard = {
     _poolThrashingBrontodon,
     _poolThrivingHeath,
     _poolTimberwatchElf,
+    _poolTiminYouthfulGeist,
     _poolTishanaVoiceOfThunder,
     _poolTitanOfIndustry,
     _poolTitansStrength,

@@ -37,6 +37,7 @@ import _poolBattlefieldPercher from "../pool/battlefield-percher.js";
 import _poolBeaconHawk from "../pool/beacon-hawk.js";
 import _poolBeastcallerSavant from "../pool/beastcaller-savant.js";
 import _poolBeetleLegacyCriminal from "../pool/beetle-legacy-criminal.js";
+import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
 import _poolBlackDragonGate from "../pool/black-dragon-gate.js";
 import _poolBleedingEffect from "../pool/bleeding-effect.js";
@@ -120,6 +121,7 @@ import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
 import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
+import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDuskmantleHouseOfShadow from "../pool/duskmantle-house-of-shadow.js";
@@ -211,6 +213,7 @@ import _poolJeskaiBrushmaster from "../pool/jeskai-brushmaster.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
+import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
 import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
@@ -264,6 +267,7 @@ import _poolMolderingKarok from "../pool/moldering-karok.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
+import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolNarsetsReversal from "../pool/narsets-reversal.js";
 import _poolNavigatorsRuin from "../pool/navigators-ruin.js";
 import _poolNeckSnap from "../pool/neck-snap.js";
@@ -499,6 +503,7 @@ const shard: CardShard = {
     _poolBeaconHawk,
     _poolBeastcallerSavant,
     _poolBeetleLegacyCriminal,
+    _poolBefriendingTheMoths,
     _poolBertaWiseExtrapolator,
     _poolBlackDragonGate,
     _poolBleedingEffect,
@@ -582,6 +587,7 @@ const shard: CardShard = {
     _poolDragonsHoard,
     _poolDragonstormGlobe,
     _poolDreadReaper,
+    _poolDrogskolReinforcements,
     _poolDrownyardTemple,
     _poolDuneBeetle,
     _poolDuskmantleHouseOfShadow,
@@ -673,6 +679,7 @@ const shard: CardShard = {
     _poolJibbirikOmnivore,
     _poolJundBattlemage,
     _poolKaaliaOfTheVast,
+    _poolKaimaTheFracturedCalm,
     _poolKaraiFutureOfTheFoot,
     _poolKateStewart,
     _poolKavaronHarrier,
@@ -726,6 +733,7 @@ const shard: CardShard = {
     _poolMountain,
     _poolMutalithVortexBeast,
     _poolMycosynthWellspring,
+    _poolMyojinOfToweringMight,
     _poolNarsetsReversal,
     _poolNavigatorsRuin,
     _poolNeckSnap,

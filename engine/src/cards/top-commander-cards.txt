@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3697 already implemented / 1303 missing (marks refreshed 2026-10-19)
+3703 already implemented / 1297 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1449,7 +1449,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1456  Fling                                    {1}{R}           Instant
 [x]  1457  Miirym, Sentinel Wyrm                    {3}{G}{U}{R}     Legendary Creature — Dragon Spirit
 [x]  1458  Iroas, God of Victory                    {2}{R}{W}        Legendary Enchantment Creature — God
-[ ]  1459  Lizard Blades                            {1}{R}           Artifact Creature — Equipment Lizard
+[x]  1459  Lizard Blades                            {1}{R}           Artifact Creature — Equipment Lizard
 [x]  1460  No Mercy                                 {2}{B}{B}        Enchantment
 [x]  1461  Dark Deal                                {2}{B}           Sorcery
 [x]  1462  Eldrazi Monument                         {5}              Artifact
@@ -1772,7 +1772,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1779  Ilysian Caryatid                         {1}{G}           Creature — Plant
 [x]  1780  Urabrask the Hidden                      {3}{R}{R}        Legendary Creature — Phyrexian Praetor
 [ ]  1781  Battle Angels of Tyr                     {2}{W}{W}        Creature — Angel Knight
-[ ]  1782  Lion Sash                                {1}{W}           Artifact Creature — Equipment Cat
+[x]  1782  Lion Sash                                {1}{W}           Artifact Creature — Equipment Cat
 [x]  1783  Psychic Corrosion                        {2}{U}           Enchantment
 [x]  1784  Aurelia, the Law Above                   {3}{R}{W}        Legendary Creature — Angel
 [x]  1785  Horizon Explorer                         {2}{G}           Creature — Insect Scout
@@ -2545,7 +2545,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2552  Merchant Scroll                          {1}{U}           Sorcery
 [x]  2553  Glóin, Dwarf Emissary                    {2}{R}           Legendary Creature — Dwarf Advisor
 [x]  2554  Chomping Changeling                      {2}{G}           Creature — Shapeshifter
-[ ]  2555  Titan of Industry                        {4}{G}{G}{G}     Creature — Elemental
+[x]  2555  Titan of Industry                        {4}{G}{G}{G}     Creature — Elemental
 [x]  2556  Tamiyo's Journal                         {5}              Legendary Artifact — Book
 [x]  2557  Saheeli, Sublime Artificer               {1}{U/R}{U/R}    Legendary Planeswalker — Saheeli
 [ ]  2558  PuPu UFO                                 {2}              Artifact Creature — Construct Alien
@@ -3118,7 +3118,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3125  Toph, the Blind Bandit                   {2}{G}           Legendary Creature — Human Warrior Ally
 [ ]  3126  Power Conduit                            {2}              Artifact
 [x]  3127  Stinkweed Imp                            {2}{B}           Creature — Imp
-[ ]  3128  Diamond City                             {0}              Land
+[x]  3128  Diamond City                             {0}              Land
 [ ]  3129  Render Silent                            {W}{U}{U}        Instant
 [x]  3130  Mountain Valley                          {0}              Land
 [x]  3131  Starnheim Aspirant                       {2}{W}           Creature — Human Cleric
@@ -3559,7 +3559,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3566  Stone of Erech                           {1}              Legendary Artifact
 [x]  3567  Yuna, Grand Summoner                     {1}{G}{W}{U}     Legendary Creature — Human Cleric
 [x]  3568  Thundermane Dragon                       {3}{R}           Creature — Dragon
-[ ]  3569  Komainu Battle Armor                     {2}{R}           Artifact Creature — Equipment Dog
+[x]  3569  Komainu Battle Armor                     {2}{R}           Artifact Creature — Equipment Dog
 [ ]  3570  Redress Fate                             {6}{W}{W}        Sorcery
 [x]  3571  Hoarding Ogre                            {3}{R}           Creature — Ogre
 [x]  3572  Incarnation Technique                    {4}{B}           Sorcery
@@ -4167,7 +4167,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4174  Erebos, Bleak-Hearted                    {3}{B}           Legendary Enchantment Creature — God
 [x]  4175  Yuna, Hope of Spira                      {3}{G}{W}        Legendary Creature — Human Cleric
 [x]  4176  Thundering Raiju                         {2}{R}{R}        Creature — Spirit
-[ ]  4177  Protection Magic                         {1}{W}           Instant
+[x]  4177  Protection Magic                         {1}{W}           Instant
 [x]  4178  The Queen of Dale                        {1}{W}           Legendary Creature — Human Noble
 [x]  4179  Omnath, Locus of Creation                {R}{G}{W}{U}     Legendary Creature — Elemental
 [ ]  4180  Blast-Furnace Hellkite                   {7}{R}{R}        Creature — Dragon

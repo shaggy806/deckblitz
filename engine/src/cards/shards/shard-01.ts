@@ -132,8 +132,10 @@ import _poolFloodedGrove from "../pool/flooded-grove.js";
 import _poolFootlightFiend from "../pool/footlight-fiend.js";
 import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
+import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
 import _poolGaryClone from "../pool/gary-clone.js";
+import _poolGeothermalKami from "../pool/geothermal-kami.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
@@ -162,6 +164,7 @@ import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
+import _poolHeirOfTheAncientFang from "../pool/heir-of-the-ancient-fang.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
@@ -179,6 +182,7 @@ import _poolInfiltrate from "../pool/infiltrate.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
+import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
@@ -186,6 +190,7 @@ import _poolJenaraAsuraOfWar from "../pool/jenara-asura-of-war.js";
 import _poolJhessianLookout from "../pool/jhessian-lookout.js";
 import _poolJunktroller from "../pool/junktroller.js";
 import _poolJuzamDjinn from "../pool/juzam-djinn.js";
+import _poolKaitosPursuit from "../pool/kaitos-pursuit.js";
 import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
@@ -303,6 +308,7 @@ import _poolReconstructHistory from "../pool/reconstruct-history.js";
 import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
 import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
 import _poolRedwoodTreefolk from "../pool/redwood-treefolk.js";
+import _poolRegentsAuthority from "../pool/regents-authority.js";
 import _poolRemnantElemental from "../pool/remnant-elemental.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
@@ -466,6 +472,7 @@ import _tokensBatTokenGreedsGambit from "../tokens/bat-token-greeds-gambit.js";
 import _tokensCatTokenArahboTheFirstFang from "../tokens/cat-token-arahbo-the-first-fang.js";
 import _tokensEldraziScionToken from "../tokens/eldrazi-scion-token.js";
 import _tokensMutavaultToken from "../tokens/mutavault-token.js";
+import _tokensRatRogueTokenTributeToHorobi from "../tokens/rat-rogue-token-tribute-to-horobi.js";
 import _tokensTheTigerGod from "../tokens/the-tiger-god.js";
 import _tokensTyranidWarriorToken from "../tokens/tyranid-warrior-token.js";
 import _tokensVibraniumToken from "../tokens/vibranium-token.js";
@@ -603,8 +610,10 @@ const shard: CardShard = {
     _poolFootlightFiend,
     _poolForgingTheAnchor,
     _poolForumOfAmity,
+    _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
     _poolGaryClone,
+    _poolGeothermalKami,
     _poolGhastlyDeathTyrant,
     _poolGhoulcallersAccomplice,
     _poolGibberingBarricade,
@@ -633,6 +642,7 @@ const shard: CardShard = {
     _poolHazoretGodseeker,
     _poolHedronCrab,
     _poolHedronDetonator,
+    _poolHeirOfTheAncientFang,
     _poolHeroesRemembered,
     _poolHighlandGiant,
     _poolHomaridShaman,
@@ -650,6 +660,7 @@ const shard: CardShard = {
     _poolInsatiableHarpy,
     _poolInsufferableBalladeer,
     _poolInvasionOfZendikar,
+    _poolInvokeDespair,
     _poolIronManArmoredAvenger,
     _poolIvoryCharm,
     _poolJaddiOffshoot,
@@ -657,6 +668,7 @@ const shard: CardShard = {
     _poolJhessianLookout,
     _poolJunktroller,
     _poolJuzamDjinn,
+    _poolKaitosPursuit,
     _poolKaradorGhostChieftain,
     _poolKarakas,
     _poolKavuGlider,
@@ -774,6 +786,7 @@ const shard: CardShard = {
     _poolRecruitmentDrive,
     _poolRecurringNightmare,
     _poolRedwoodTreefolk,
+    _poolRegentsAuthority,
     _poolRemnantElemental,
     _poolRepercussion,
     _poolRepulse,
@@ -939,6 +952,7 @@ const shard: CardShard = {
     _tokensCatTokenArahboTheFirstFang,
     _tokensEldraziScionToken,
     _tokensMutavaultToken,
+    _tokensRatRogueTokenTributeToHorobi,
     _tokensTheTigerGod,
     _tokensTyranidWarriorToken,
     _tokensVibraniumToken,

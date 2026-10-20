@@ -232,7 +232,9 @@ import _poolJacesSanctum from "../pool/jaces-sanctum.js";
 import _poolJasmineBoreal from "../pool/jasmine-boreal.js";
 import _poolJeskaiRevelation from "../pool/jeskai-revelation.js";
 import _poolJuganDefendsTheTemple from "../pool/jugan-defends-the-temple.js";
+import _poolKamberThePlunderer from "../pool/kamber-the-plunderer.js";
 import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
+import _poolKatsumasaTheAnimator from "../pool/katsumasa-the-animator.js";
 import _poolKavaronMemorialWorld from "../pool/kavaron-memorial-world.js";
 import _poolKederektParasite from "../pool/kederekt-parasite.js";
 import _poolKeepSafe from "../pool/keep-safe.js";
@@ -296,6 +298,7 @@ import _poolOverwhelmingRemorse from "../pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "../pool/overwhelming-stampede.js";
 import _poolPactOfNegation from "../pool/pact-of-negation.js";
 import _poolPaladinsArms from "../pool/paladins-arms.js";
+import _poolPapercraftDecoy from "../pool/papercraft-decoy.js";
 import _poolPathmakerInitiate from "../pool/pathmaker-initiate.js";
 import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
@@ -455,6 +458,7 @@ import _poolVodalianZombie from "../pool/vodalian-zombie.js";
 import _poolVolcanicIsland from "../pool/volcanic-island.js";
 import _poolVoraciousVarmint from "../pool/voracious-varmint.js";
 import _poolWalkWithTheAncestors from "../pool/walk-with-the-ancestors.js";
+import _poolWalkingSkyscraper from "../pool/walking-skyscraper.js";
 import _poolWarrenWarleader from "../pool/warren-warleader.js";
 import _poolWastelandScorpion from "../pool/wasteland-scorpion.js";
 import _poolWatcherOfTheSpheres from "../pool/watcher-of-the-spheres.js";
@@ -721,7 +725,9 @@ const shard: CardShard = {
     _poolJasmineBoreal,
     _poolJeskaiRevelation,
     _poolJuganDefendsTheTemple,
+    _poolKamberThePlunderer,
     _poolKaslaTheBrokenHalo,
+    _poolKatsumasaTheAnimator,
     _poolKavaronMemorialWorld,
     _poolKederektParasite,
     _poolKeepSafe,
@@ -785,6 +791,7 @@ const shard: CardShard = {
     _poolOverwhelmingStampede,
     _poolPactOfNegation,
     _poolPaladinsArms,
+    _poolPapercraftDecoy,
     _poolPathmakerInitiate,
     _poolPeemaTrailblazer,
     _poolPeggyCarterSecretAgent,
@@ -944,6 +951,7 @@ const shard: CardShard = {
     _poolVolcanicIsland,
     _poolVoraciousVarmint,
     _poolWalkWithTheAncestors,
+    _poolWalkingSkyscraper,
     _poolWarrenWarleader,
     _poolWastelandScorpion,
     _poolWatcherOfTheSpheres,
