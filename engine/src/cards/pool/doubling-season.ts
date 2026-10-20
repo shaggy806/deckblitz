@@ -16,7 +16,8 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", multiplier: 2 },
+      // "An effect would put": not counters put as a cost (Devoted Druid).
+      replacement: { event: "would-add-counter", multiplier: 2, byEffectOnly: true },
       text: "If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.",
     },
   ],

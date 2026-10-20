@@ -14675,6 +14675,7 @@ import _poolVivisPersistence from "./pool/vivis-persistence.js";
 import _poolVivisectionEvangelist from "./pool/vivisection-evangelist.js";
 import _poolVivisection from "./pool/vivisection.js";
 import _poolVivisurgeonsInsight from "./pool/vivisurgeons-insight.js";
+import _poolVizierOfRemedies from "./pool/vizier-of-remedies.js";
 import _poolVizierOfTheMenagerie from "./pool/vizier-of-the-menagerie.js";
 import _poolVizierOfTheScorpion from "./pool/vizier-of-the-scorpion.js";
 import _poolVizierOfTumblingSands from "./pool/vizier-of-tumbling-sands.js";
@@ -30663,6 +30664,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVivisectionEvangelist,
   _poolVivisection,
   _poolVivisurgeonsInsight,
+  _poolVizierOfRemedies,
   _poolVizierOfTheMenagerie,
   _poolVizierOfTheScorpion,
   _poolVizierOfTumblingSands,

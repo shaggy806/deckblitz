@@ -4010,7 +4010,7 @@ clause (section 9):
 - `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.
-- `{ event: "would-add-counter", multiplier?, plus?, counterKind?, filter?, other? }` —
+- `{ event: "would-add-counter", multiplier?, plus?, counterKind?, filter?, other?, byEffectOnly? }` —
   Doubling Season (`multiplier: 2`). `filter` narrows which of your permanents
   it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a
   creature or Vehicle": `anyOf`). `plus: 1` is "that many plus one" (Hardened
@@ -4019,7 +4019,11 @@ clause (section 9):
   apply to counters a permanent enters with too (rule 122.6). The order is
   the one best for the permanent's controller (rule 616.1): each `plus`
   before the doublers — (n + 1) × 2 — except for -1/-1 counters, where after
-  them gives fewer.
+  them gives fewer. A negative `plus` is "that many minus one" (Vizier of Remedies'
+  -1/-1 counters: `plus: -1`), applied the other way round and never below
+  none. They reach counters put as a **cost** too (Devoted Druid's -1/-1, Wall of
+  Roots' -0/-1), except one worded "if **an effect** would put" (Doubling
+  Season): `byEffectOnly: true`.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets

@@ -14815,9 +14815,14 @@ export class Game {
    * any other, with no "if an effect would put counters" replacement
    * (a cost isn't an effect — see `AbilityCost.addCounter`).
    */
-  private putCostCounters(id: ObjectId, kind: string, count: number, by: PlayerId): void {
+  private putCostCounters(id: ObjectId, kind: string, amount: number, by: PlayerId): void {
     const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield" || count <= 0) return;
+    if (object === undefined || object.zone !== "battlefield" || amount <= 0) return;
+    // Counter replacements reach a cost's counters too, unless worded "if an
+    // effect would put" (Doubling Season): Vizier of Remedies leaves Devoted
+    // Druid's untap costing no -1/-1 counter at all (its ruling).
+    const count = this.counterTotal(id, kind, amount, false, true);
+    if (count <= 0) return;
     object.counters[kind] = (object.counters[kind] ?? 0) + count;
     invalidateComputedCache();
     this.emit({ type: "counter-added", object: id, counter: kind, amount: count, by, after: object.counters[kind] });
@@ -32912,11 +32917,12 @@ export class Game {
    * fewest of, doublings first. `entering`: counters it enters with, which
    * its own replacements don't see (it isn't on the battlefield yet).
    */
-  private counterTotal(target: ObjectId, kind: string, amount: number, entering = false): number {
+  private counterTotal(target: ObjectId, kind: string, amount: number, entering = false, asCost = false): number {
     const targetObject = this.state.objects[target];
     if (targetObject === undefined || amount <= 0) return amount;
     let mult = 1;
-    let plus = 0;
+    let plusUp = 0;
+    let plusDown = 0;
     for (const id of this.state.zones.shared.battlefield) {
       if (entering && id === target) continue;
       const object = this.state.objects[id];
@@ -32927,6 +32933,7 @@ export class Game {
         const r = ability.replacement;
         if (
           r?.event === "would-add-counter" &&
+          !(asCost && r.byEffectOnly === true) &&
           (r.counterKind === undefined || r.counterKind === kind) &&
           !(r.other === true && id === target) &&
           (r.filter === undefined ||
@@ -32936,12 +32943,21 @@ export class Game {
           // A token stack of them is that many replacements.
           for (let i = 0; i < (object.stackCount ?? 1); i += 1) {
             mult *= r.multiplier ?? 1;
-            plus += r.plus ?? 0;
+            if ((r.plus ?? 0) >= 0) plusUp += r.plus ?? 0;
+            else plusDown += r.plus ?? 0;
           }
         }
       }
     }
-    return kind === "-1/-1" ? amount * mult + plus : (amount + plus) * mult;
+    // The order its controller would pick (rule 616.1): -1/-1 counters as
+    // few as can be — "minus one" before a doubler, "plus one" after it —
+    // and any other kind as many. Once none would be put, nothing more
+    // applies.
+    if (kind === "-1/-1") {
+      const base = Math.max(0, amount + plusDown);
+      return base === 0 ? 0 : base * mult + plusUp;
+    }
+    return Math.max(0, (amount + plusUp) * mult + plusDown);
   }
 
   /** Whether a battlefield permanent replaces "put `cardId` into a graveyard"

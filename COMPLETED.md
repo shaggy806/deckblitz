@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Counters put as a cost skip counter replacements** (616.1): `putCostCounters` goes through `counterTotal` (a negative `plus` is "that many minus one", fewest first for -1/-1; `byEffectOnly` keeps Doubling Season off costs); Vizier of Remedies authored — Devoted Druid's untap costs it no counter, a persisting creature returns with none (2026-10-20). The prohibition half (Solemnity) stays open.
 - **A source's chosen colour or number isn't read from last-known information** (608.2h): `chosenColorOfSource` / `chosenNumberOfSource` read the departed source's `LastKnownInfo.chosenOnEnter` in the stint the ability refers to (2026-10-20).
 - **A spell cast this turn forgets where it was cast from** — already fixed: `castRecordOf` writes the cast's zone into the record's `entry.cast`; pinned by `cast-record-from.test.ts`, and Surge of Brilliance authored (2026-10-20).
 - **Suspend's time-counter triggers don't use the stack** (702.62a): the upkeep's "remove a time counter" and "when the last is removed, you may play it" are the owner's triggers on the stack (`suspendTrigger`), however the last counter came off (time travel too), so players can respond to each; `pendingSuspendedCasts` is gone. Cards whose own triggers work while suspended (Deep-Sea Kraken) still wait on `trigger:functions-while-suspended` (2026-10-20).

@@ -233,11 +233,17 @@ export interface CounterMultiplierReplacement {
   /** "Twice that many … instead" (Doubling Season). */
   readonly multiplier?: number;
   /** "That many plus one … instead" (Hardened Scales, Winding Constrictor):
-   * added once to each placement of one or more counters. With a multiplier
-   * as well, the permanent's controller orders them (rule 616.1) — the order
-   * that puts the most counters, or for -1/-1 counters the fewest
-   * (`Game.counterTotal`). */
+   * added once to each placement of one or more counters; negative is "that
+   * many minus one" (Vizier of Remedies' -1/-1 counters), never below none.
+   * With a multiplier as well, the permanent's controller orders them (rule
+   * 616.1) — the order that puts the most counters, or for -1/-1 counters
+   * the fewest (`Game.counterTotal`). */
   readonly plus?: number;
+  /** "If **an effect** would put one or more counters" (Doubling Season):
+   * not counters put as a cost (Devoted Druid's -1/-1, Wall of Roots'
+   * -0/-1), which every other wording ("if one or more counters would be
+   * put") reaches too. */
+  readonly byEffectOnly?: true;
   /** "…put on **another** creature you control" (Benevolent Hydra): never
    * this permanent itself. */
   readonly other?: true;
