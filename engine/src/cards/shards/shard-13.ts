@@ -456,6 +456,7 @@ import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
 import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVampiresVengeance from "../pool/vampires-vengeance.js";
+import _poolVarragothBloodskySire from "../pool/varragoth-bloodsky-sire.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
@@ -960,6 +961,7 @@ const shard: CardShard = {
     _poolUtromScientists,
     _poolValiantGuard,
     _poolVampiresVengeance,
+    _poolVarragothBloodskySire,
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,

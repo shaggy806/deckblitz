@@ -179,6 +179,13 @@
         "engine/src/cards/pool/aura-of-silence.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Cityscape Leveler",
+      "files": [
+        "engine/src/cards/pool/cityscape-leveler.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -195,14 +202,6 @@
         "cost:choose-cards-as-cost"
       ],
       "why": "'Exile three cards from your graveyard' as a cost (its discard cost is built)."
-    },
-    {
-      "name": "Cityscape Leveler",
-      "needs": [
-        "new:unearth",
-        "new:powerstone-token"
-      ],
-      "why": "Unearth, and Powerstone tokens for the destroyed permanent's controller."
     },
     {
       "name": "Kozilek's Command",

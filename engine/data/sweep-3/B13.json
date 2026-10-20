@@ -178,6 +178,13 @@
         "engine/src/cards/pool/bitterthorn-nissas-animus.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Varragoth, Bloodsky Sire",
+      "files": [
+        "engine/src/cards/pool/varragoth-bloodsky-sire.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -416,14 +423,6 @@
         "new:tempting-offer"
       ],
       "why": "Tempting offer."
-    },
-    {
-      "name": "Varragoth, Bloodsky Sire",
-      "needs": [
-        "new:boast",
-        "new:target-player-searches"
-      ],
-      "why": "Boast, and a target player's search to the top of their library."
     },
     {
       "name": "Witness Protection",

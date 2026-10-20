@@ -75,6 +75,7 @@ import _poolChartACourse from "../pool/chart-a-course.js";
 import _poolChaseInspiration from "../pool/chase-inspiration.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
+import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolCoercion from "../pool/coercion.js";
@@ -549,6 +550,7 @@ const shard: CardShard = {
     _poolChaseInspiration,
     _poolChromaticLantern,
     _poolCitizenVHelmutZemo,
+    _poolCityscapeLeveler,
     _poolClavilenoFirstOfTheBlessed,
     _poolCleavingSkyrider,
     _poolCoercion,

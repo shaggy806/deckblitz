@@ -2304,6 +2304,7 @@ import _poolCityOfDeath from "./pool/city-of-death.js";
 import _poolCityOfTraitors from "./pool/city-of-traitors.js";
 import _poolCityOnFire from "./pool/city-on-fire.js";
 import _poolCityPigeon from "./pool/city-pigeon.js";
+import _poolCityscapeLeveler from "./pool/cityscape-leveler.js";
 import _poolCitywatchSphinx from "./pool/citywatch-sphinx.js";
 import _poolCitywideBust from "./pool/citywide-bust.js";
 import _poolCivicGardener from "./pool/civic-gardener.js";
@@ -14451,6 +14452,7 @@ import _poolVaporSnag from "./pool/vapor-snag.js";
 import _poolVaporkin from "./pool/vaporkin.js";
 import _poolVariableChaser from "./pool/variable-chaser.js";
 import _poolVarinaLichQueen from "./pool/varina-lich-queen.js";
+import _poolVarragothBloodskySire from "./pool/varragoth-bloodsky-sire.js";
 import _poolVashtaNerada from "./pool/vashta-nerada.js";
 import _poolVassalSoul from "./pool/vassal-soul.js";
 import _poolVastlandsScavenger from "./pool/vastlands-scavenger.js";
@@ -18334,6 +18336,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCityOfTraitors,
   _poolCityOnFire,
   _poolCityPigeon,
+  _poolCityscapeLeveler,
   _poolCitywatchSphinx,
   _poolCitywideBust,
   _poolCivicGardener,
@@ -30481,6 +30484,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVaporkin,
   _poolVariableChaser,
   _poolVarinaLichQueen,
+  _poolVarragothBloodskySire,
   _poolVashtaNerada,
   _poolVassalSoul,
   _poolVastlandsScavenger,
