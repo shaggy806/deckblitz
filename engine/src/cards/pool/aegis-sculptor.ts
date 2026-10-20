@@ -27,26 +27,32 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
+      // With fewer cards in your graveyard than it exiles, "exile them" is an
+      // impossible option, so it isn't offered (rule 608.2d): nothing is exiled.
       effect: {
-        kind: "may",
-        prompt: "Exile two cards from your graveyard?",
-        effect: {
-          kind: "sequence",
-          effects: [
-            {
-              kind: "look-and-choose",
-              zone: "graveyard",
-              min: 2,
-              max: 2,
-              destination: "exile",
-              leftover: "stay",
-            },
-            {
-              kind: "conditional",
-              condition: { kind: "this-way", what: "exiled", atLeast: 2 },
-              then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
-            },
-          ],
+        kind: "conditional",
+        condition: { kind: "cards-in-graveyard", atLeast: 2 },
+        then: {
+          kind: "may",
+          prompt: "Exile two cards from your graveyard?",
+          effect: {
+            kind: "sequence",
+            effects: [
+              {
+                kind: "look-and-choose",
+                zone: "graveyard",
+                min: 2,
+                max: 2,
+                destination: "exile",
+                leftover: "stay",
+              },
+              {
+                kind: "conditional",
+                condition: { kind: "this-way", what: "exiled", atLeast: 2 },
+                then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+              },
+            ],
+          },
         },
       },
       resolve: null,

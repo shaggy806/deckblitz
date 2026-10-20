@@ -26,26 +26,32 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "self" },
       targets: [],
+      // With fewer cards in your graveyard than it exiles, "exile them" is an
+      // impossible option, so it isn't offered (rule 608.2d): nothing is exiled.
       effect: {
-        kind: "may",
-        prompt: "Exile eight cards from your graveyard?",
-        effect: {
-          kind: "sequence",
-          effects: [
-            {
-              kind: "look-and-choose",
-              zone: "graveyard",
-              min: 8,
-              max: 8,
-              destination: "exile",
-              leftover: "stay",
-            },
-            {
-              kind: "conditional",
-              condition: { kind: "this-way", what: "exiled", atLeast: 8 },
-              then: { kind: "become-prepared", target: "source" },
-            },
-          ],
+        kind: "conditional",
+        condition: { kind: "cards-in-graveyard", atLeast: 8 },
+        then: {
+          kind: "may",
+          prompt: "Exile eight cards from your graveyard?",
+          effect: {
+            kind: "sequence",
+            effects: [
+              {
+                kind: "look-and-choose",
+                zone: "graveyard",
+                min: 8,
+                max: 8,
+                destination: "exile",
+                leftover: "stay",
+              },
+              {
+                kind: "conditional",
+                condition: { kind: "this-way", what: "exiled", atLeast: 8 },
+                then: { kind: "become-prepared", target: "source" },
+              },
+            ],
+          },
         },
       },
       resolve: null,

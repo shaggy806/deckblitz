@@ -329,14 +329,15 @@ describe("Skywarp Skaab", () => {
     expect(hand(game).length).toBe(before + 1);
   });
 
-  it("with one creature card there, no draw", () => {
+  it("with one creature card there, nothing is exiled and no draw (rule 608.2d)", () => {
     const { game, a } = table();
-    toGraveyard(game, "Grizzly Bears");
+    const bears = toGraveyard(game, "Grizzly Bears");
     toGraveyard(game, "Lightning Bolt");
     pickModes(a, 0);
     const before = hand(game).length;
     enter(game, "Skywarp Skaab");
     expect(hand(game).length).toBe(before);
+    expect(zone(game, bears)).toBe("graveyard");
   });
 });
 

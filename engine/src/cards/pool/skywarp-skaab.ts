@@ -21,27 +21,33 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
+      // With fewer cards in your graveyard than it exiles, "exile them" is an
+      // impossible option, so it isn't offered (rule 608.2d): nothing is exiled.
       effect: {
-        kind: "may",
-        prompt: "Exile two creature cards from your graveyard?",
-        effect: {
-          kind: "sequence",
-          effects: [
-            {
-              kind: "look-and-choose",
-              zone: "graveyard",
-              filter: { type: "creature" },
-              min: 2,
-              max: 2,
-              destination: "exile",
-              leftover: "stay",
-            },
-            {
-              kind: "conditional",
-              condition: { kind: "this-way", what: "exiled", atLeast: 2 },
-              then: { kind: "draw", amount: 1 },
-            },
-          ],
+        kind: "conditional",
+        condition: { kind: "cards-in-graveyard", atLeast: 2, filter: { type: "creature" } },
+        then: {
+          kind: "may",
+          prompt: "Exile two creature cards from your graveyard?",
+          effect: {
+            kind: "sequence",
+            effects: [
+              {
+                kind: "look-and-choose",
+                zone: "graveyard",
+                filter: { type: "creature" },
+                min: 2,
+                max: 2,
+                destination: "exile",
+                leftover: "stay",
+              },
+              {
+                kind: "conditional",
+                condition: { kind: "this-way", what: "exiled", atLeast: 2 },
+                then: { kind: "draw", amount: 1 },
+              },
+            ],
+          },
         },
       },
       resolve: null,
