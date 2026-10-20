@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3725 already implemented / 1275 missing (marks refreshed 2026-10-20)
+3726 already implemented / 1274 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4145,7 +4145,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4152  Queen Allenal of Ruadach                 {G}{W}{W}        Legendary Creature — Elf Noble
 [x]  4153  Azami, Lady of Scrolls                   {2}{U}{U}{U}     Legendary Creature — Human Wizard
 [ ]  4154  Norn's Decree                            {2}{W}           Enchantment
-[ ]  4155  Search for Glory                         {2}{W}           Snow Sorcery
+[x]  4155  Search for Glory                         {2}{W}           Snow Sorcery
 [x]  4156  Lumbering Worldwagon                     {2}{G}           Artifact — Vehicle
 [ ]  4157  Elesh Norn // The Argent Etchings        {4}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [ ]  4158  Benthic Anomaly                          {6}{U}           Creature — Eldrazi Serpent
