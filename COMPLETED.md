@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **"Cast from your graveyard" checks the zone, not whose graveyard** (Patrician Geist, Green Goblin): a cost modification's `castFrom` of a player's own zone now needs the card to be the static's controller's (latent: nothing yet casts a paid spell from an opponent's graveyard) (2026-10-20).
 - **A trigger's top-level `trigger-object` condition is always false**: it now works as an intervening-if, asked about the object whose event fired the trigger (`eventTriggerObject`, the same object the resolution-time recheck reads), last-known if it has left (2026-10-20).
 - **`{ powerOf: n }` reads a target that just left in its new zone** (608.2h): a `choose-permanents` `then` now reads each chosen permanent as it last existed on the battlefield (its target zone is the battlefield), so "return it, then counters equal to its power" counts its counters (2026-10-20).
 - **"Exile … until this leaves the battlefield" returns at once** (610.3): the engine returns the card as a one-shot effect right after the source leaves — no trigger, before state-based actions, though the source lost its abilities (`GameObject.exiledUntil`, `returnUntilLeft`); the 47 cards' return triggers removed. Grasp of Fate, which waited on it, can be authored (2026-10-20).

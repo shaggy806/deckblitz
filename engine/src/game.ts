@@ -9490,6 +9490,9 @@ export class Game {
           const card = this.state.objects[cardId];
           const from = card?.zone === "stack" ? card.castFrom : card?.zone;
           if (from !== mod.castFrom) continue;
+          // "Your graveyard": a card is in its owner's graveyard (hand,
+          // library), so one cast from an opponent's (Memory Plunder) isn't.
+          if ((from === "graveyard" || from === "hand" || from === "library") && card?.owner !== source.controller) continue;
         }
         // "The first … spell you cast each turn": any matching spell this
         // player has already cast this turn has had it.

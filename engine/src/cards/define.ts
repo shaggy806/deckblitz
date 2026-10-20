@@ -1913,7 +1913,9 @@ export interface StaticAbility {
     readonly caster?: "you" | "opponent";
     /** Only spells cast from this zone — Green Goblin's "spells you cast
      * from your graveyard cost {2} less": the zone the card is cast from (its
-     * zone as the cost is worked out, rule 601.2f's card on its way). */
+     * zone as the cost is worked out, rule 601.2f's card on its way). A
+     * player's own zone (graveyard, hand, library) is the static's
+     * controller's: a card cast from an opponent's graveyard isn't one. */
     readonly castFrom?: ZoneType;
     /** "…cost {1} less to cast **for each target**" (Hinata, Dawn-Crowned):
      * `reduceGeneric` / `increaseGeneric` are multiplied by the number of
