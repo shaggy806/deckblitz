@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest";
 
 import { printedCardName } from "../state.js";
-import { A, B, activate, cast, counters, keywords, lands, named, pt, ref, spawn, table, toHand, types } from "./harness.js";
+import { A, B, activate, cast, counters, destroy, keywords, lands, named, pt, ref, settle, spawn, table, toHand, types } from "./harness.js";
 
 describe("incubate", () => {
   it("makes an Incubator token with N +1/+1 counters that {2} transforms into an N/N Phyrexian artifact creature", () => {
@@ -20,6 +20,18 @@ describe("incubate", () => {
     expect(types(game, incubator)).toEqual(["artifact", "creature"]);
     expect(pt(game, incubator)).toEqual({ power: 5, toughness: 5 });
     expect(printedCardName(game.state.objects[incubator])).toBe("Phyrexian Token");
+  });
+
+  it("an Incubator that's gone when its transform resolves does nothing (rule 701.27a — the fuzzer's seed 28)", () => {
+    const { game } = table();
+    lands(game, "Forest", 6);
+    cast(game, toHand(game, "Converter Beast"));
+    const [incubator] = named(game, "Incubator Token", A);
+    activate(game, incubator, 0, { settle: false });
+    destroy(game, incubator);
+    settle(game);
+    expect(game.state.objects[incubator]).toBeUndefined();
+    expect(game.state.zones.shared.stack).toHaveLength(0);
   });
 
   it("enters with its counters, so a counter replacement applies (Doubling Season: two Incubators, ten counters each)", () => {

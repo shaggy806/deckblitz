@@ -22213,7 +22213,11 @@ export class Game {
       transform: (target) => {
         const t = this.splitTargetRef(target);
         if (t.kind !== "object") return;
-        // Rule 701.28f: an ability of a permanent that has transformed since
+        // Only a permanent transforms (rule 701.27a): one that has left the
+        // battlefield — an Incubator token that died with its "{2}: Transform
+        // this artifact" on the stack has ceased to exist — does nothing.
+        if (this.state.objects[t.object]?.zone !== "battlefield") return;
+        // Rule 701.27f: an ability of a permanent that has transformed since
         // the ability was put on the stack (a delayed one: was created)
         // doesn't transform it again.
         const since = opts.transformSince;
