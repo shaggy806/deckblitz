@@ -1555,6 +1555,11 @@ export interface LastKnownRefs {
    * response), "that spell's mana value" is read as it last was there, its
    * {X} included (`GameObject.lastStackManaValue` — rule 608.2h). */
   readonly triggerSpell?: number;
+  /** With `triggerSpell`: who controlled that spell as the ability triggered
+   * — "that player" of "whenever a player casts a spell" (`trigger-controller`
+   * — Forced Fruition, Spellshock), still them once the spell is countered
+   * and its card is in its owner's graveyard. */
+  readonly triggerSpellController?: PlayerId;
   /** "For each of them" (Kambal, Profiteering Mayor): the permanents of the
    * simultaneous entry a batched `enters-battlefield` trigger fired on, each
    * with its battlefield stint and how many tokens it stood for (a

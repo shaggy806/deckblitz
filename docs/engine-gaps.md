@@ -93,9 +93,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   - `each-player-may` asks one player at a time where the ruling has every player choose first,
     then all act at once: Will of the Jeskai's wheel mode, Kwain, Itinerant Meddler. Perforating
     Artist (batch 36) and Osseous Sticktwister (batch 68) are blocked on it.
-  - `trigger-controller` for "that player" on a spell-cast trigger reads the spell's controller as
-    the trigger resolves, so a stolen-library spell countered first points at its owner: Forced
-    Fruition, Ruric Thar, Spellshock, Magebane Lizard.
   - `attach` to a "created" token picks one when a doubler makes two (Black Mage's Rod).
 - **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
   type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies

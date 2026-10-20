@@ -17715,14 +17715,16 @@ export class Game {
     let triggerStint: number | undefined;
     let afterLeaving: number | undefined;
     let triggerSpell: number | undefined;
+    let triggerSpellController: PlayerId | undefined;
     if (triggerObject !== undefined) {
       const t = this.state.objects[triggerObject];
       if (t?.zone === "battlefield") {
         triggerStint = t.zoneChangeCount ?? 0;
       } else if (t?.zone === "stack" && t.kind === "card") {
         // A spell — the one whose casting fired this: which stint of it on
-        // the stack "that spell" means.
+        // the stack "that spell" means, and who cast it ("that player").
         triggerSpell = t.zoneChangeCount ?? 0;
+        triggerSpellController = t.controller;
       } else if (
         t?.lastKnown !== undefined &&
         isLeaveEvent(event) &&
@@ -17825,6 +17827,7 @@ export class Game {
       ...(sourceStint !== undefined ? { source: sourceStint } : {}),
       ...(triggerStint !== undefined ? { triggerObject: triggerStint } : {}),
       ...(triggerSpell !== undefined ? { triggerSpell } : {}),
+      ...(triggerSpellController !== undefined ? { triggerSpellController } : {}),
       ...(afterLeaving !== undefined ? { triggerObjectAfterLeaving: afterLeaving } : {}),
       ...(recipient !== undefined ? { recipient } : {}),
       ...(player !== undefined ? { player } : {}),
@@ -19743,7 +19746,7 @@ export class Game {
     };
     const scoped = (who: PlayerScope): PlayerId[] => {
       if (who !== "opponents-who-voted-with-you" && who !== "you-and-opponents-who-voted-with-you") {
-        return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player);
+        return this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, false, refs.triggerSpellController);
       }
       const withYou = opponentsVoting(
         votes(),
@@ -20079,7 +20082,7 @@ export class Game {
       },
       playersInScope: (who) => scoped(who),
       playersCountedInScope: (who) =>
-        this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true),
+        this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
       discardHand: (player) => this.discardWholeHand(player),
       // The object whose entering, dying, attacking… fired a trigger is read
       // as it last existed on the battlefield once it has left (rule 608.2h):
@@ -21279,7 +21282,7 @@ export class Game {
         this.beginUnless(source, controller, x, targets, triggerObject, chooser, options, otherwise, {
           lastKnownRefs: refs,
           targetZones,
-          triggerController: triggerLastKnown()?.controller,
+          triggerController: refs.triggerSpellController ?? triggerLastKnown()?.controller,
         }),
       askEachPlayerMay: (player, spec) =>
         this.askEachPlayerMay(
@@ -22231,7 +22234,7 @@ export class Game {
           },
         ),
       changeLifeScoped: (who, delta) =>
-        this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player),
+        this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
       searchLibrary: (
         player,
         filter,
@@ -31235,6 +31238,8 @@ export class Game {
      * lost life and then lost the game still counts (Tymna the Weaver's and
      * Teysa, Opulent Oligarch's rulings). */
     includeDeparted = false,
+    /** Who cast the spell a cast trigger is about (`LastKnownRefs.triggerSpellController`). */
+    triggerSpellController?: PlayerId,
   ): PlayerId[] {
     if (who === "you") return [controller];
     // Only a resolution knows a vote's votes (`makeResolutionContext`).
@@ -31259,6 +31264,7 @@ export class Game {
     }
     if (who === "trigger-controller") {
       const p =
+        triggerSpellController ??
         triggerLastKnown?.controller ??
         (triggerObject === undefined ? undefined : this.state.objects[triggerObject]?.controller);
       return p === undefined || this.state.players[p]?.hasLost === true ? [] : [p];
@@ -31291,9 +31297,10 @@ export class Game {
     triggerObject?: ObjectId,
     triggerLastKnown?: LastKnownInfo,
     triggerPlayer?: PlayerId,
+    triggerSpellController?: PlayerId,
   ): void {
     if (delta === 0) return;
-    for (const p of this.scopedPlayers(controller, who, triggerObject, triggerLastKnown, triggerPlayer)) {
+    for (const p of this.scopedPlayers(controller, who, triggerObject, triggerLastKnown, triggerPlayer, false, triggerSpellController)) {
       if (delta < 0) this.loseLifeTallied(p, -delta);
       else this.changeLife(p, delta);
     }
