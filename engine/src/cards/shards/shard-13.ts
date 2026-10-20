@@ -35,6 +35,7 @@ import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsariCaptain from "../pool/asari-captain.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
+import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAuthorityOfTheConsuls from "../pool/authority-of-the-consuls.js";
 import _poolAxegrinderGiant from "../pool/axegrinder-giant.js";
 import _poolAzulaOnTheHunt from "../pool/azula-on-the-hunt.js";
@@ -381,6 +382,7 @@ import _poolSecretIdentity from "../pool/secret-identity.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
+import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
 import _poolShorikaiGenesisEngine from "../pool/shorikai-genesis-engine.js";
 import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
@@ -409,6 +411,7 @@ import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSplashLasher from "../pool/splash-lasher.js";
 import _poolSpontaneousCombustion from "../pool/spontaneous-combustion.js";
+import _poolSpringmantleCleric from "../pool/springmantle-cleric.js";
 import _poolStagecoachSecurity from "../pool/stagecoach-security.js";
 import _poolStaggeringSize from "../pool/staggering-size.js";
 import _poolStallOut from "../pool/stall-out.js";
@@ -556,6 +559,7 @@ const shard: CardShard = {
     _poolAsariCaptain,
     _poolAsphyxiate,
     _poolAstridPeth,
+    _poolAttendedHealer,
     _poolAuthorityOfTheConsuls,
     _poolAxegrinderGiant,
     _poolAzulaOnTheHunt,
@@ -902,6 +906,7 @@ const shard: CardShard = {
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSharedRoots,
+    _poolShepherdOfHeroes,
     _poolShorikaiGenesisEngine,
     _poolShortBow,
     _poolShredderUnrelenting,
@@ -930,6 +935,7 @@ const shard: CardShard = {
     _poolSpinalCentipede,
     _poolSplashLasher,
     _poolSpontaneousCombustion,
+    _poolSpringmantleCleric,
     _poolStagecoachSecurity,
     _poolStaggeringSize,
     _poolStallOut,

@@ -13737,9 +13737,10 @@ export class Game {
     }
 
     if (ability.zone === "hand" && ability.staysInZone === true) {
-      // Ninjutsu (rule 702.49a, b): the card is revealed as part of the cost
-      // and stays in the hand, revealed, until the ability leaves the stack.
-      if (ability.ninjutsu === true) this.revealCards(player, [sourceId], "hand");
+      // An ability activated from a hidden zone reveals its card (rule 602.2a)
+      // — ninjutsu's (702.49a, b), Zareth San's: it stays in the hand,
+      // revealed, until the ability leaves the stack.
+      this.revealCards(player, [sourceId], "hand");
     } else if (ability.zone === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.

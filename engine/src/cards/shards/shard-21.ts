@@ -38,6 +38,7 @@ import _poolBallistaSquad from "../pool/ballista-squad.js";
 import _poolBallroomBrawlers from "../pool/ballroom-brawlers.js";
 import _poolBanditsHaul from "../pool/bandits-haul.js";
 import _poolBaneOfProgress from "../pool/bane-of-progress.js";
+import _poolBaseCamp from "../pool/base-camp.js";
 import _poolBattlewingMystic from "../pool/battlewing-mystic.js";
 import _poolBeastbondOutcaster from "../pool/beastbond-outcaster.js";
 import _poolBeastmasterAscension from "../pool/beastmaster-ascension.js";
@@ -61,6 +62,7 @@ import _poolBreathOfTheSleepless from "../pool/breath-of-the-sleepless.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
 import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
+import _poolBurakosPartyLeader from "../pool/burakos-party-leader.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolBuyYourSilence from "../pool/buy-your-silence.js";
 import _poolCacklingFiend from "../pool/cackling-fiend.js";
@@ -251,12 +253,14 @@ import _poolLowlandGiant from "../pool/lowland-giant.js";
 import _poolLoxodonConvert from "../pool/loxodon-convert.js";
 import _poolLoxodonSergeant from "../pool/loxodon-sergeant.js";
 import _poolLukeCageHeroForHire from "../pool/luke-cage-hero-for-hire.js";
+import _poolLullmagesFamiliar from "../pool/lullmages-familiar.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
+import _poolMerfolkWindrobber from "../pool/merfolk-windrobber.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
 import _poolMesaEnchantress from "../pool/mesa-enchantress.js";
 import _poolMesmericOrb from "../pool/mesmeric-orb.js";
@@ -323,6 +327,7 @@ import _poolPrimalWellspring from "../pool/primal-wellspring.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
+import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
 import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
 import _poolRainOfRevelation from "../pool/rain-of-revelation.js";
 import _poolRaiseTheAlarm from "../pool/raise-the-alarm.js";
@@ -341,6 +346,7 @@ import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
+import _poolRoostOfDrakes from "../pool/roost-of-drakes.js";
 import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
@@ -543,6 +549,7 @@ const shard: CardShard = {
     _poolBallroomBrawlers,
     _poolBanditsHaul,
     _poolBaneOfProgress,
+    _poolBaseCamp,
     _poolBattlewingMystic,
     _poolBeastbondOutcaster,
     _poolBeastmasterAscension,
@@ -566,6 +573,7 @@ const shard: CardShard = {
     _poolBronzeWalrus,
     _poolBronzeplateBoar,
     _poolBugenhagenWiseElder,
+    _poolBurakosPartyLeader,
     _poolBurstOfSpeed,
     _poolBuyYourSilence,
     _poolCacklingFiend,
@@ -756,12 +764,14 @@ const shard: CardShard = {
     _poolLoxodonConvert,
     _poolLoxodonSergeant,
     _poolLukeCageHeroForHire,
+    _poolLullmagesFamiliar,
     _poolLuminousRebuke,
     _poolLysAlanaHuntmaster,
     _poolMangaraTheDiplomat,
     _poolMarkovBaron,
     _poolMarwynTheNurturer,
     _poolMerfolkSecretkeeper,
+    _poolMerfolkWindrobber,
     _poolMerryWardenOfIsengard,
     _poolMesaEnchantress,
     _poolMesmericOrb,
@@ -828,6 +838,7 @@ const shard: CardShard = {
     _poolProctorsGaze,
     _poolPromisingVein,
     _poolPyreHound,
+    _poolPyroclasticHellion,
     _poolQuickDrawDagger,
     _poolRainOfRevelation,
     _poolRaiseTheAlarm,
@@ -846,6 +857,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
+    _poolRoostOfDrakes,
     _poolRoothaMercurialArtist,
     _poolRunOutOfTown,
     _poolRunawayBoulder,

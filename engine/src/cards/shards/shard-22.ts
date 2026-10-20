@@ -207,6 +207,7 @@ import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
 import _poolJeskaiDevotee from "../pool/jeskai-devotee.js";
+import _poolJourneyToOblivion from "../pool/journey-to-oblivion.js";
 import _poolJukaiNaturalist from "../pool/jukai-naturalist.js";
 import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
@@ -299,6 +300,7 @@ import _poolOvergrownEstate from "../pool/overgrown-estate.js";
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
 import _poolPeerlessRopemaster from "../pool/peerless-ropemaster.js";
+import _poolPelakkaPredation from "../pool/pelakka-predation.js";
 import _poolPerilousMyr from "../pool/perilous-myr.js";
 import _poolPesteredWellguard from "../pool/pestered-wellguard.js";
 import _poolPhantomInterference from "../pool/phantom-interference.js";
@@ -342,6 +344,7 @@ import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
+import _poolRockslideSorcerer from "../pool/rockslide-sorcerer.js";
 import _poolRooftopBypass from "../pool/rooftop-bypass.js";
 import _poolRootsOfWisdom from "../pool/roots-of-wisdom.js";
 import _poolRosethornAcolyte from "../pool/rosethorn-acolyte.js";
@@ -362,6 +365,7 @@ import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
 import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
+import _poolSeafloorStalker from "../pool/seafloor-stalker.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
 import _poolSeedpodSquire from "../pool/seedpod-squire.js";
@@ -733,6 +737,7 @@ const shard: CardShard = {
     _poolInvasionOfTolvada,
     _poolIronwillForger,
     _poolJeskaiDevotee,
+    _poolJourneyToOblivion,
     _poolJukaiNaturalist,
     _poolJungleDelver,
     _poolK9MarkI,
@@ -825,6 +830,7 @@ const shard: CardShard = {
     _poolPainfulTruths,
     _poolPalaceSiege,
     _poolPeerlessRopemaster,
+    _poolPelakkaPredation,
     _poolPerilousMyr,
     _poolPesteredWellguard,
     _poolPhantomInterference,
@@ -868,6 +874,7 @@ const shard: CardShard = {
     _poolRiotDevils,
     _poolRiseOfExtus,
     _poolRishkarsExpertise,
+    _poolRockslideSorcerer,
     _poolRooftopBypass,
     _poolRootsOfWisdom,
     _poolRosethornAcolyte,
@@ -888,6 +895,7 @@ const shard: CardShard = {
     _poolSchemingSilvertongue,
     _poolScornEffigy,
     _poolScreechingHarpy,
+    _poolSeafloorStalker,
     _poolSealOfStrength,
     _poolSearchThePremises,
     _poolSeedpodSquire,

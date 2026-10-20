@@ -219,6 +219,7 @@ function faceSource(face, ctx) {
     disturb: parsed.disturb,
     suspend: parsed.suspend,
     selfCostReduction: parsed.selfCostReduction,
+    alsoSubtypes: parsed.alsoSubtypes,
     additionalCost: parsed.additionalCost,
     chooseCreatureTypeOnEnter: parsed.chooseCreatureTypeOnEnter,
     text: face.oracle_text ?? "",

@@ -168,6 +168,7 @@ import _poolGaladrielElvenQueen from "../pool/galadriel-elven-queen.js";
 import _poolGarrukCursedHuntsman from "../pool/garruk-cursed-huntsman.js";
 import _poolGatewayPlaza from "../pool/gateway-plaza.js";
 import _poolGhaltaTheImmovable from "../pool/ghalta-the-immovable.js";
+import _poolGhastlyGloomhunter from "../pool/ghastly-gloomhunter.js";
 import _poolGhostSpectralSaboteur from "../pool/ghost-spectral-saboteur.js";
 import _poolGhoulcallerGisa from "../pool/ghoulcaller-gisa.js";
 import _poolGiantBeaver from "../pool/giant-beaver.js";
@@ -224,6 +225,7 @@ import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
 import _poolJuvenileMistDragon from "../pool/juvenile-mist-dragon.js";
+import _poolKabiraOutrider from "../pool/kabira-outrider.js";
 import _poolKaijinOfTheVanishingTouch from "../pool/kaijin-of-the-vanishing-touch.js";
 import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
@@ -376,6 +378,7 @@ import _poolSkullportMerchant from "../pool/skullport-merchant.js";
 import _poolSkySkiff from "../pool/sky-skiff.js";
 import _poolSkySpirit from "../pool/sky-spirit.js";
 import _poolSkybridgeTowers from "../pool/skybridge-towers.js";
+import _poolSkyclaveSentinel from "../pool/skyclave-sentinel.js";
 import _poolSkyhunterProwler from "../pool/skyhunter-prowler.js";
 import _poolSlagStrider from "../pool/slag-strider.js";
 import _poolSlagstorm from "../pool/slagstorm.js";
@@ -687,6 +690,7 @@ const shard: CardShard = {
     _poolGarrukCursedHuntsman,
     _poolGatewayPlaza,
     _poolGhaltaTheImmovable,
+    _poolGhastlyGloomhunter,
     _poolGhostSpectralSaboteur,
     _poolGhoulcallerGisa,
     _poolGiantBeaver,
@@ -743,6 +747,7 @@ const shard: CardShard = {
     _poolJunkDiver,
     _poolJuvenileGloomwidow,
     _poolJuvenileMistDragon,
+    _poolKabiraOutrider,
     _poolKaijinOfTheVanishingTouch,
     _poolKalamaxTheStormsire,
     _poolKelinoreBat,
@@ -895,6 +900,7 @@ const shard: CardShard = {
     _poolSkySkiff,
     _poolSkySpirit,
     _poolSkybridgeTowers,
+    _poolSkyclaveSentinel,
     _poolSkyhunterProwler,
     _poolSlagStrider,
     _poolSlagstorm,

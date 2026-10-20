@@ -139,6 +139,7 @@ import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
 import _poolElvishWarmaster from "../pool/elvish-warmaster.js";
 import _poolEmeraldMedallion from "../pool/emerald-medallion.js";
 import _poolEmergentHaunting from "../pool/emergent-haunting.js";
+import _poolEmeriaCaptain from "../pool/emeria-captain.js";
 import _poolEnergizer from "../pool/energizer.js";
 import _poolEngulfTheShore from "../pool/engulf-the-shore.js";
 import _poolEnhancedAwareness from "../pool/enhanced-awareness.js";
@@ -321,6 +322,7 @@ import _poolMoriokScavenger from "../pool/moriok-scavenger.js";
 import _poolMurasaBrute from "../pool/murasa-brute.js";
 import _poolMuseSeeker from "../pool/muse-seeker.js";
 import _poolMyrMoonvessel from "../pool/myr-moonvessel.js";
+import _poolMyriadConstruct from "../pool/myriad-construct.js";
 import _poolNarsetEnlightenedExile from "../pool/narset-enlightened-exile.js";
 import _poolNayaBattlemage from "../pool/naya-battlemage.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
@@ -656,6 +658,7 @@ const shard: CardShard = {
     _poolElvishWarmaster,
     _poolEmeraldMedallion,
     _poolEmergentHaunting,
+    _poolEmeriaCaptain,
     _poolEnergizer,
     _poolEngulfTheShore,
     _poolEnhancedAwareness,
@@ -838,6 +841,7 @@ const shard: CardShard = {
     _poolMurasaBrute,
     _poolMuseSeeker,
     _poolMyrMoonvessel,
+    _poolMyriadConstruct,
     _poolNarsetEnlightenedExile,
     _poolNayaBattlemage,
     _poolNickValentinePrivateEye,

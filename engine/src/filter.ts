@@ -442,6 +442,15 @@ export interface CardFilter {
    * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
    * rules text (`rulesTextName`). */
   readonly hasConvoke?: boolean;
+  /** Has (or hasn't) a kicker or multikicker ability (rule 702.33) — "a card
+   * with a kicker ability" (Murasa Sproutling, Coralhelm Chronicler). Read off
+   * its rules text (`rulesTextName`), in any zone. */
+  readonly hasKicker?: boolean;
+  /** A spell on the stack that was kicked (rule 702.33d — its kicker cost was
+   * paid as it was cast; a copy of it is kicked too, 707.10): "whenever you
+   * cast a kicked spell" (Roost of Drakes). Nothing off the stack is a kicked
+   * spell. */
+  readonly kicked?: boolean;
   /** Has (or hasn't) toxic (rule 702.164) — printed or granted: "another
    * creature you control with toxic" (Slaughter Singer), "if that creature
    * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
@@ -1238,6 +1247,15 @@ export function matchesFilter(
     const name = live !== undefined ? rulesTextName(live) : lki?.name;
     const has = name !== undefined && registry.has(name) && registry.get(name).convoke;
     if (has !== filter.hasConvoke) return false;
+  }
+  if (filter.hasKicker !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : lki?.name;
+    const has = name !== undefined && registry.has(name) && registry.get(name).kicker !== null;
+    if (has !== filter.hasKicker) return false;
+  }
+  if (filter.kicked !== undefined) {
+    const kicked = live !== undefined && live.zone === "stack" && live.kicked === true;
+    if (kicked !== filter.kicked) return false;
   }
   if (filter.faceDown !== undefined) {
     const down = live !== undefined ? live.faceDown !== undefined : lki?.faceDown === true;

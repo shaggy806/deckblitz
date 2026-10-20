@@ -258,6 +258,7 @@ import _poolMeriaScholarOfAntiquity from "../pool/meria-scholar-of-antiquity.js"
 import _poolMerrowSkyswimmer from "../pool/merrow-skyswimmer.js";
 import _poolMidnightTilling from "../pool/midnight-tilling.js";
 import _poolMightOfTheAncestors from "../pool/might-of-the-ancestors.js";
+import _poolMindCarver from "../pool/mind-carver.js";
 import _poolMindControl from "../pool/mind-control.js";
 import _poolMindRoots from "../pool/mind-roots.js";
 import _poolMineWorker from "../pool/mine-worker.js";
@@ -414,6 +415,7 @@ import _poolSpecimenCollector from "../pool/specimen-collector.js";
 import _poolSpitefulSliver from "../pool/spiteful-sliver.js";
 import _poolSplinterfright from "../pool/splinterfright.js";
 import _poolSplitUp from "../pool/split-up.js";
+import _poolSpoilsOfAdventure from "../pool/spoils-of-adventure.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
@@ -464,6 +466,7 @@ import _poolTrynnChampionOfFreedom from "../pool/trynn-champion-of-freedom.js";
 import _poolTuskedColossodon from "../pool/tusked-colossodon.js";
 import _poolTyrantsScorn from "../pool/tyrants-scorn.js";
 import _poolTyrranax from "../pool/tyrranax.js";
+import _poolUmaraSkyfalls from "../pool/umara-skyfalls.js";
 import _poolUndergroundRiver from "../pool/underground-river.js";
 import _poolUnderworldBreach from "../pool/underworld-breach.js";
 import _poolUniversalAutomaton from "../pool/universal-automaton.js";
@@ -776,6 +779,7 @@ const shard: CardShard = {
     _poolMerrowSkyswimmer,
     _poolMidnightTilling,
     _poolMightOfTheAncestors,
+    _poolMindCarver,
     _poolMindControl,
     _poolMindRoots,
     _poolMineWorker,
@@ -932,6 +936,7 @@ const shard: CardShard = {
     _poolSpitefulSliver,
     _poolSplinterfright,
     _poolSplitUp,
+    _poolSpoilsOfAdventure,
     _poolSporeFrog,
     _poolStarWhale,
     _poolSteelburrChampion,
@@ -982,6 +987,7 @@ const shard: CardShard = {
     _poolTuskedColossodon,
     _poolTyrantsScorn,
     _poolTyrranax,
+    _poolUmaraSkyfalls,
     _poolUndergroundRiver,
     _poolUnderworldBreach,
     _poolUniversalAutomaton,

@@ -8709,6 +8709,39 @@
   },
   "keyword:hexproof-from-card-types": {
    "example": "Nevinyrral, Urborg Tyrant"
+  },
+  "trigger:conditional-grant-look-back": {
+   "family": "bug:lki-leaves-battlefield-triggers",
+   "example": "Relic Vial"
+  },
+  "replacement:prevent-damage-to-attached": {
+   "family": "replacement:damage-modification",
+   "example": "Multiclass Baldric"
+  },
+  "effect:mill-controller-of-target": {
+   "example": "Glacial Grasp"
+  },
+  "condition:turn-history-that-player": {
+   "example": "Confounding Conundrum"
+  },
+  "effect:that-player-returns-land": {
+   "example": "Confounding Conundrum"
+  },
+  "amount:highest-life-total": {
+   "example": "Scourge of the Skyclaves"
+  },
+  "effect:prohibit-abilities-until-your-next-turn": {
+   "family": "effect:restrict-until-your-next-turn",
+   "example": "Linvala, Shield of Sea Gate"
+  },
+  "mana:spend-only-kicked-spells": {
+   "example": "Throne of Makindi"
+  },
+  "cost:target-controller-graveyard-reduction": {
+   "example": "Lullmage's Domination"
+  },
+  "filter:kicked-spell": {
+   "example": "Roost of Drakes (built 2026-10-20)"
   }
  }
 }

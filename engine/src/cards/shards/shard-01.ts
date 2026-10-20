@@ -372,6 +372,7 @@ import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
 import _poolSixthSense from "../pool/sixth-sense.js";
 import _poolSkemfarElderhall from "../pool/skemfar-elderhall.js";
 import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
+import _poolSkyclaveShadowcat from "../pool/skyclave-shadowcat.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
@@ -398,6 +399,7 @@ import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
 import _poolSuperState from "../pool/super-state.js";
+import _poolSwarmShambler from "../pool/swarm-shambler.js";
 import _poolTailTheSuspect from "../pool/tail-the-suspect.js";
 import _poolTakenByNightmares from "../pool/taken-by-nightmares.js";
 import _poolTalismanOfConviction from "../pool/talisman-of-conviction.js";
@@ -873,6 +875,7 @@ const shard: CardShard = {
     _poolSixthSense,
     _poolSkemfarElderhall,
     _poolSkirkFireMarshal,
+    _poolSkyclaveShadowcat,
     _poolSkycrash,
     _poolSkyhunterStrikeForce,
     _poolSliceFromTheShadows,
@@ -899,6 +902,7 @@ const shard: CardShard = {
     _poolSungrassPrairie,
     _poolSunscapeMaster,
     _poolSuperState,
+    _poolSwarmShambler,
     _poolTailTheSuspect,
     _poolTakenByNightmares,
     _poolTalismanOfConviction,

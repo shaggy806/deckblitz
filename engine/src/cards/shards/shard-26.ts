@@ -190,6 +190,7 @@ import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
+import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
 import _poolHarbingerOfTheHunt from "../pool/harbinger-of-the-hunt.js";
 import _poolHarmoniousGrovestrider from "../pool/harmonious-grovestrider.js";
 import _poolHarmonizedTrio from "../pool/harmonized-trio.js";
@@ -379,6 +380,7 @@ import _poolShanodinDryads from "../pool/shanodin-dryads.js";
 import _poolShatteredAcolyte from "../pool/shattered-acolyte.js";
 import _poolShatteredLandscape from "../pool/shattered-landscape.js";
 import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
+import _poolShellShield from "../pool/shell-shield.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
@@ -708,6 +710,7 @@ const shard: CardShard = {
     _poolGroundedForLife,
     _poolGutterSkulk,
     _poolHaakonStromgaldScourge,
+    _poolHagraConstrictor,
     _poolHarbingerOfTheHunt,
     _poolHarmoniousGrovestrider,
     _poolHarmonizedTrio,
@@ -897,6 +900,7 @@ const shard: CardShard = {
     _poolShatteredAcolyte,
     _poolShatteredLandscape,
     _poolShefetArchfiend,
+    _poolShellShield,
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
     _poolShipwreckSentry,

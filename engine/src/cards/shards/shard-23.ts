@@ -111,6 +111,7 @@ import _poolDaringThunderThief from "../pool/daring-thunder-thief.js";
 import _poolDarksteelIngot from "../pool/darksteel-ingot.js";
 import _poolDarksteelRelic from "../pool/darksteel-relic.js";
 import _poolDarwinAdaptiveMutant from "../pool/darwin-adaptive-mutant.js";
+import _poolDauntlessUnity from "../pool/dauntless-unity.js";
 import _poolDawnhartRejuvenator from "../pool/dawnhart-rejuvenator.js";
 import _poolDazzlingLights from "../pool/dazzling-lights.js";
 import _poolDeadlyPlot from "../pool/deadly-plot.js";
@@ -148,6 +149,7 @@ import _poolEumidianHatchery from "../pool/eumidian-hatchery.js";
 import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
+import _poolExpeditionHealer from "../pool/expedition-healer.js";
 import _poolEzioBladeOfVengeance from "../pool/ezio-blade-of-vengeance.js";
 import _poolFaramirFieldCommander from "../pool/faramir-field-commander.js";
 import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
@@ -244,6 +246,7 @@ import _poolKithkeeper from "../pool/kithkeeper.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
 import _poolKongmingSleepingDragon from "../pool/kongming-sleeping-dragon.js";
+import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
@@ -421,6 +424,7 @@ import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolSteelDromedary from "../pool/steel-dromedary.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
+import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -636,6 +640,7 @@ const shard: CardShard = {
     _poolDarksteelIngot,
     _poolDarksteelRelic,
     _poolDarwinAdaptiveMutant,
+    _poolDauntlessUnity,
     _poolDawnhartRejuvenator,
     _poolDazzlingLights,
     _poolDeadlyPlot,
@@ -673,6 +678,7 @@ const shard: CardShard = {
     _poolEvendoWakingHaven,
     _poolEvolvingAdaptive,
     _poolExclusionMage,
+    _poolExpeditionHealer,
     _poolEzioBladeOfVengeance,
     _poolFaramirFieldCommander,
     _poolFateholdChronologist,
@@ -769,6 +775,7 @@ const shard: CardShard = {
     _poolKnightOfObligation,
     _poolKodamasReach,
     _poolKongmingSleepingDragon,
+    _poolKorCelebrant,
     _poolKuraTheBoundlessSky,
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
@@ -946,6 +953,7 @@ const shard: CardShard = {
     _poolSteelDromedary,
     _poolStensiaUprising,
     _poolStitchersGraft,
+    _poolStoneworkPackbeast,
     _poolStormHerd,
     _poolStrawSoldiers,
     _poolStripedRiverwinder,

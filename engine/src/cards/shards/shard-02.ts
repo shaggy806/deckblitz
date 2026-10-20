@@ -337,6 +337,7 @@ import _poolRavenousBaloth from "../pool/ravenous-baloth.js";
 import _poolRavenousChupacabra from "../pool/ravenous-chupacabra.js";
 import _poolRavenousHarpy from "../pool/ravenous-harpy.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
+import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
 import _poolResistanceReunited from "../pool/resistance-reunited.js";
@@ -370,6 +371,7 @@ import _poolScrybSprites from "../pool/scryb-sprites.js";
 import _poolSeedshipBroodtender from "../pool/seedship-broodtender.js";
 import _poolSerraFaithkeeper from "../pool/serra-faithkeeper.js";
 import _poolSerraSphinx from "../pool/serra-sphinx.js";
+import _poolShadowsVerdict from "../pool/shadows-verdict.js";
 import _poolShakedownHeavy from "../pool/shakedown-heavy.js";
 import _poolShalaiVoiceOfPlenty from "../pool/shalai-voice-of-plenty.js";
 import _poolShatterskullGiant from "../pool/shatterskull-giant.js";
@@ -456,6 +458,7 @@ import _poolUntimelyMalfunction from "../pool/untimely-malfunction.js";
 import _poolUrbanEvolution from "../pool/urban-evolution.js";
 import _poolUrbisProtector from "../pool/urbis-protector.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
+import _poolUtilityKnife from "../pool/utility-knife.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
 import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
@@ -466,6 +469,7 @@ import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
+import _poolVisionsOfBeyond from "../pool/visions-of-beyond.js";
 import _poolVivienReid from "../pool/vivien-reid.js";
 import _poolVrenTheRelentless from "../pool/vren-the-relentless.js";
 import _poolWakedancer from "../pool/wakedancer.js";
@@ -834,6 +838,7 @@ const shard: CardShard = {
     _poolRavenousChupacabra,
     _poolRavenousHarpy,
     _poolRecklessPyrosurfer,
+    _poolReclaimTheWastes,
     _poolRefute,
     _poolReitoLantern,
     _poolResistanceReunited,
@@ -867,6 +872,7 @@ const shard: CardShard = {
     _poolSeedshipBroodtender,
     _poolSerraFaithkeeper,
     _poolSerraSphinx,
+    _poolShadowsVerdict,
     _poolShakedownHeavy,
     _poolShalaiVoiceOfPlenty,
     _poolShatterskullGiant,
@@ -953,6 +959,7 @@ const shard: CardShard = {
     _poolUrbanEvolution,
     _poolUrbisProtector,
     _poolUrzasWorkshop,
+    _poolUtilityKnife,
     _poolValorousStance,
     _poolVampireGourmand,
     _poolVanguardOfTheRestless,
@@ -963,6 +970,7 @@ const shard: CardShard = {
     _poolViashinoSandstalker,
     _poolVinelasherAdept,
     _poolVisionOfLove,
+    _poolVisionsOfBeyond,
     _poolVivienReid,
     _poolVrenTheRelentless,
     _poolWakedancer,

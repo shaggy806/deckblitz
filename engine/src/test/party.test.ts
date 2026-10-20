@@ -9,7 +9,8 @@ import { describe, expect, it } from "vitest";
 import { partySizeOf } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
-import { A, B, registryOf, spawn, table } from "./harness.js";
+import { matchesFilter } from "../filter.js";
+import { A, B, registryOf, spawn, table, toHand } from "./harness.js";
 
 const party = (game: Game, player: PlayerId = A): number => partySizeOf(game.state, registryOf(game), player);
 
@@ -62,5 +63,19 @@ describe("party size", () => {
     game.debugApplyEffect(A, { kind: "create-token", token: "Shapeshifter Token (Blue)", count: 10 });
     expect(game.state.zones.shared.battlefield).toHaveLength(1);
     expect(party(game)).toBe(4);
+  });
+});
+
+describe("\"is also a Cleric, Rogue, Warrior, and Wizard\" (a CDA, rule 604.3)", () => {
+  it("fills any one role, in every zone — and still only one", () => {
+    const { game } = table();
+    const card = toHand(game, "Veteran Adventurer");
+    for (const t of ["Cleric", "Rogue", "Warrior", "Wizard"]) {
+      expect(matchesFilter(game.state, registryOf(game), card, { subtype: t }, { you: A })).toBe(true);
+    }
+    spawn(game, "Veteran Adventurer");
+    expect(party(game)).toBe(1);
+    spawn(game, "Abbey Matron");
+    expect(party(game)).toBe(2);
   });
 });

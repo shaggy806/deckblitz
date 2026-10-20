@@ -91,6 +91,7 @@ import _poolCoilAndCatch from "../pool/coil-and-catch.js";
 import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolColossalBadger from "../pool/colossal-badger.js";
+import _poolConcertedDefense from "../pool/concerted-defense.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCoordinatedManeuver from "../pool/coordinated-maneuver.js";
@@ -280,6 +281,7 @@ import _poolMentalJourney from "../pool/mental-journey.js";
 import _poolMercurialTransformation from "../pool/mercurial-transformation.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
+import _poolMightOfMurasa from "../pool/might-of-murasa.js";
 import _poolMillikin from "../pool/millikin.js";
 import _poolMindTransferProtocol from "../pool/mind-transfer-protocol.js";
 import _poolMindspliceApparatus from "../pool/mindsplice-apparatus.js";
@@ -311,6 +313,7 @@ import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
 import _poolOboroPalaceInTheClouds from "../pool/oboro-palace-in-the-clouds.js";
+import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneirophage from "../pool/oneirophage.js";
@@ -649,6 +652,7 @@ const shard: CardShard = {
     _poolCoiledTinviper,
     _poolColosYearling,
     _poolColossalBadger,
+    _poolConcertedDefense,
     _poolConsulateDreadnought,
     _poolContagionClasp,
     _poolCoordinatedManeuver,
@@ -838,6 +842,7 @@ const shard: CardShard = {
     _poolMercurialTransformation,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
+    _poolMightOfMurasa,
     _poolMillikin,
     _poolMindTransferProtocol,
     _poolMindspliceApparatus,
@@ -869,6 +874,7 @@ const shard: CardShard = {
     _poolNulldrifter,
     _poolNurturingPixie,
     _poolOboroPalaceInTheClouds,
+    _poolObuunMulDayaAncestor,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneirophage,

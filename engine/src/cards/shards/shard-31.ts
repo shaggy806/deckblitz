@@ -93,6 +93,7 @@ import _poolComponentCollector from "../pool/component-collector.js";
 import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
+import _poolCoralhelmChronicler from "../pool/coralhelm-chronicler.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCovetousGeist from "../pool/covetous-geist.js";
 import _poolCrackOpen from "../pool/crack-open.js";
@@ -261,6 +262,7 @@ import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
+import _poolKazanduStomper from "../pool/kazandu-stomper.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
 import _poolKessigWolfrider from "../pool/kessig-wolfrider.js";
 import _poolKiteShield from "../pool/kite-shield.js";
@@ -322,6 +324,7 @@ import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNimReplica from "../pool/nim-replica.js";
+import _poolNissasZendikon from "../pool/nissas-zendikon.js";
 import _poolNoxiousGearhulk from "../pool/noxious-gearhulk.js";
 import _poolNyxbornBehemoth from "../pool/nyxborn-behemoth.js";
 import _poolObscuraInterceptor from "../pool/obscura-interceptor.js";
@@ -330,6 +333,7 @@ import _poolOkaunEyeOfChaos from "../pool/okaun-eye-of-chaos.js";
 import _poolOltecMatterweaver from "../pool/oltec-matterweaver.js";
 import _poolOmenspeaker from "../pool/omenspeaker.js";
 import _poolOnduGreathorn from "../pool/ondu-greathorn.js";
+import _poolOranRiefOoze from "../pool/oran-rief-ooze.js";
 import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
 import _poolOverkill from "../pool/overkill.js";
@@ -403,6 +407,7 @@ import _poolSilentClearing from "../pool/silent-clearing.js";
 import _poolSilentHallcreeper from "../pool/silent-hallcreeper.js";
 import _poolSireOfStagnation from "../pool/sire-of-stagnation.js";
 import _poolSkirsdagCultist from "../pool/skirsdag-cultist.js";
+import _poolSkyclavePlunder from "../pool/skyclave-plunder.js";
 import _poolSkyswimmerKoi from "../pool/skyswimmer-koi.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
 import _poolSliceInTwain from "../pool/slice-in-twain.js";
@@ -432,6 +437,7 @@ import _poolSwarmyard from "../pool/swarmyard.js";
 import _poolSylvanSafekeeper from "../pool/sylvan-safekeeper.js";
 import _poolTalasLookout from "../pool/talas-lookout.js";
 import _poolTatteredMummy from "../pool/tattered-mummy.js";
+import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
@@ -622,6 +628,7 @@ const shard: CardShard = {
     _poolCookingCampsite,
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
+    _poolCoralhelmChronicler,
     _poolCounterspell,
     _poolCovetousGeist,
     _poolCrackOpen,
@@ -790,6 +797,7 @@ const shard: CardShard = {
     _poolKarplusanForest,
     _poolKathariScreecher,
     _poolKazanduRefuge,
+    _poolKazanduStomper,
     _poolKellansLightblades,
     _poolKessigWolfrider,
     _poolKiteShield,
@@ -851,6 +859,7 @@ const shard: CardShard = {
     _poolNewHorizons,
     _poolNezumiBladeblesser,
     _poolNimReplica,
+    _poolNissasZendikon,
     _poolNoxiousGearhulk,
     _poolNyxbornBehemoth,
     _poolObscuraInterceptor,
@@ -859,6 +868,7 @@ const shard: CardShard = {
     _poolOltecMatterweaver,
     _poolOmenspeaker,
     _poolOnduGreathorn,
+    _poolOranRiefOoze,
     _poolOrcishVandal,
     _poolOrochiSustainer,
     _poolOverkill,
@@ -932,6 +942,7 @@ const shard: CardShard = {
     _poolSilentHallcreeper,
     _poolSireOfStagnation,
     _poolSkirsdagCultist,
+    _poolSkyclavePlunder,
     _poolSkyswimmerKoi,
     _poolSlaughterSpecialist,
     _poolSliceInTwain,
@@ -961,6 +972,7 @@ const shard: CardShard = {
     _poolSylvanSafekeeper,
     _poolTalasLookout,
     _poolTatteredMummy,
+    _poolTazriBeaconOfUnity,
     _poolTeferisTutelage,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,

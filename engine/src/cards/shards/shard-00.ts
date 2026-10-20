@@ -73,6 +73,7 @@ import _poolCaparoctiSunborn from "../pool/caparocti-sunborn.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
 import _poolCartoucheOfSolidarity from "../pool/cartouche-of-solidarity.js";
+import _poolCascadeSeer from "../pool/cascade-seer.js";
 import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
@@ -287,6 +288,7 @@ import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
 import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
 import _poolMourning from "../pool/mourning.js";
+import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
 import _poolNettlecyst from "../pool/nettlecyst.js";
 import _poolNevaStalkedByNightmares from "../pool/neva-stalked-by-nightmares.js";
@@ -345,6 +347,7 @@ import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
 import _poolRecklessReveler from "../pool/reckless-reveler.js";
 import _poolReleaseTheDogs from "../pool/release-the-dogs.js";
+import _poolRelicAxe from "../pool/relic-axe.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
@@ -434,6 +437,7 @@ import _poolSunpetalGrove from "../pool/sunpetal-grove.js";
 import _poolSunscorchRegent from "../pool/sunscorch-regent.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
+import _poolTajuruParagon from "../pool/tajuru-paragon.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
@@ -485,6 +489,7 @@ import _poolUreniOfTheUnwritten from "../pool/ureni-of-the-unwritten.js";
 import _poolUthdenTroll from "../pool/uthden-troll.js";
 import _poolUurgSpawnOfTurg from "../pool/uurg-spawn-of-turg.js";
 import _poolValorInAkros from "../pool/valor-in-akros.js";
+import _poolVerazolTheSplitCurrent from "../pool/verazol-the-split-current.js";
 import _poolViciousHunger from "../pool/vicious-hunger.js";
 import _poolViciousVerse from "../pool/vicious-verse.js";
 import _poolVigilantDrake from "../pool/vigilant-drake.js";
@@ -510,6 +515,7 @@ import _poolWhisperOfTheDross from "../pool/whisper-of-the-dross.js";
 import _poolWibblyWobblyTimeyWimey from "../pool/wibbly-wobbly-timey-wimey.js";
 import _poolWildCeratok from "../pool/wild-ceratok.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
+import _poolWindriderWizard from "../pool/windrider-wizard.js";
 import _poolWitchingWell from "../pool/witching-well.js";
 import _poolWoodedRidgeline from "../pool/wooded-ridgeline.js";
 import _poolWreckingGecko from "../pool/wrecking-gecko.js";
@@ -606,6 +612,7 @@ const shard: CardShard = {
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
     _poolCartoucheOfSolidarity,
+    _poolCascadeSeer,
     _poolCastleGarenbrig,
     _poolCaveOfTemptation,
     _poolChiefWargsCompany,
@@ -820,6 +827,7 @@ const shard: CardShard = {
     _poolMordorTrebuchet,
     _poolMortivore,
     _poolMourning,
+    _poolNaliaDearnise,
     _poolNaturesLore,
     _poolNettlecyst,
     _poolNevaStalkedByNightmares,
@@ -878,6 +886,7 @@ const shard: CardShard = {
     _poolRecklessRansacking,
     _poolRecklessReveler,
     _poolReleaseTheDogs,
+    _poolRelicAxe,
     _poolReliquaryMonk,
     _poolReliquaryTower,
     _poolRestlessFortress,
@@ -967,6 +976,7 @@ const shard: CardShard = {
     _poolSunscorchRegent,
     _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,
+    _poolTajuruParagon,
     _poolTalonTrooper,
     _poolTaoistHermit,
     _poolTavernSmasher,
@@ -1018,6 +1028,7 @@ const shard: CardShard = {
     _poolUthdenTroll,
     _poolUurgSpawnOfTurg,
     _poolValorInAkros,
+    _poolVerazolTheSplitCurrent,
     _poolViciousHunger,
     _poolViciousVerse,
     _poolVigilantDrake,
@@ -1043,6 +1054,7 @@ const shard: CardShard = {
     _poolWibblyWobblyTimeyWimey,
     _poolWildCeratok,
     _poolWildUnraveling,
+    _poolWindriderWizard,
     _poolWitchingWell,
     _poolWoodedRidgeline,
     _poolWreckingGecko,

@@ -161,6 +161,7 @@ import _poolEndbringer from "../pool/endbringer.js";
 import _poolEnormousBaloth from "../pool/enormous-baloth.js";
 import _poolEpicDownfall from "../pool/epic-downfall.js";
 import _poolEternalWitness from "../pool/eternal-witness.js";
+import _poolExpeditionSkulker from "../pool/expedition-skulker.js";
 import _poolEyeblightAssassin from "../pool/eyeblight-assassin.js";
 import _poolFakeYourOwnDeath from "../pool/fake-your-own-death.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
@@ -257,6 +258,7 @@ import _poolKeepSafe from "../pool/keep-safe.js";
 import _poolKellanTheKid from "../pool/kellan-the-kid.js";
 import _poolKhenraEternal from "../pool/khenra-eternal.js";
 import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js";
+import _poolKitesailCleric from "../pool/kitesail-cleric.js";
 import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
@@ -328,6 +330,7 @@ import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
 import _poolPracticalResearch from "../pool/practical-research.js";
+import _poolPracticedTactics from "../pool/practiced-tactics.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
@@ -390,6 +393,7 @@ import _poolShamanOfSpring from "../pool/shaman-of-spring.js";
 import _poolShamblingGoblin from "../pool/shambling-goblin.js";
 import _poolSharkShredderKillerClone from "../pool/shark-shredder-killer-clone.js";
 import _poolSharlayanNationOfScholars from "../pool/sharlayan-nation-of-scholars.js";
+import _poolShatterskullCharger from "../pool/shatterskull-charger.js";
 import _poolShatterskullRecruit from "../pool/shatterskull-recruit.js";
 import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
@@ -444,6 +448,7 @@ import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
+import _poolTauntingArbormage from "../pool/taunting-arbormage.js";
 import _poolTeferisPuzzleBox from "../pool/teferis-puzzle-box.js";
 import _poolTempleBell from "../pool/temple-bell.js";
 import _poolTempleOfDeceit from "../pool/temple-of-deceit.js";
@@ -505,6 +510,7 @@ import _poolWinterMisanthropicGuide from "../pool/winter-misanthropic-guide.js";
 import _poolWorldMap from "../pool/world-map.js";
 import _poolYoshimaru from "../pool/yoshimaru.js";
 import _poolYouthfulScholar from "../pool/youthful-scholar.js";
+import _poolZagrasThiefOfHeartbeats from "../pool/zagras-thief-of-heartbeats.js";
 import _poolZodiacRooster from "../pool/zodiac-rooster.js";
 import _poolZodiacSnake from "../pool/zodiac-snake.js";
 import _poolZurgoStormrender from "../pool/zurgo-stormrender.js";
@@ -689,6 +695,7 @@ const shard: CardShard = {
     _poolEnormousBaloth,
     _poolEpicDownfall,
     _poolEternalWitness,
+    _poolExpeditionSkulker,
     _poolEyeblightAssassin,
     _poolFakeYourOwnDeath,
     _poolFateUnraveler,
@@ -785,6 +792,7 @@ const shard: CardShard = {
     _poolKellanTheKid,
     _poolKhenraEternal,
     _poolKioraSovereignOfTheDeep,
+    _poolKitesailCleric,
     _poolKnightedMyr,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
@@ -856,6 +864,7 @@ const shard: CardShard = {
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
     _poolPracticalResearch,
+    _poolPracticedTactics,
     _poolPrimoTheUnbounded,
     _poolPrimordialPlasm,
     _poolProphetOfDistortion,
@@ -918,6 +927,7 @@ const shard: CardShard = {
     _poolShamblingGoblin,
     _poolSharkShredderKillerClone,
     _poolSharlayanNationOfScholars,
+    _poolShatterskullCharger,
     _poolShatterskullRecruit,
     _poolShivaWardenOfIce,
     _poolShorelineRanger,
@@ -972,6 +982,7 @@ const shard: CardShard = {
     _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,
+    _poolTauntingArbormage,
     _poolTeferisPuzzleBox,
     _poolTempleBell,
     _poolTempleOfDeceit,
@@ -1033,6 +1044,7 @@ const shard: CardShard = {
     _poolWorldMap,
     _poolYoshimaru,
     _poolYouthfulScholar,
+    _poolZagrasThiefOfHeartbeats,
     _poolZodiacRooster,
     _poolZodiacSnake,
     _poolZurgoStormrender,

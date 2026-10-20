@@ -273,6 +273,7 @@ import _poolMegatonsFate from "../pool/megatons-fate.js";
 import _poolMeltstriderEulogist from "../pool/meltstrider-eulogist.js";
 import _poolMemoryPlunder from "../pool/memory-plunder.js";
 import _poolMerfolkSkydiver from "../pool/merfolk-skydiver.js";
+import _poolMesaLynx from "../pool/mesa-lynx.js";
 import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
@@ -350,6 +351,7 @@ import _poolRazorkinNeedlehead from "../pool/razorkin-needlehead.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
+import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
 import _poolRemand from "../pool/remand.js";
 import _poolReturnToDust from "../pool/return-to-dust.js";
@@ -826,6 +828,7 @@ const shard: CardShard = {
     _poolMeltstriderEulogist,
     _poolMemoryPlunder,
     _poolMerfolkSkydiver,
+    _poolMesaLynx,
     _poolMikaeusTheUnhallowed,
     _poolMillstone,
     _poolMirkwoodNurturer,
@@ -903,6 +906,7 @@ const shard: CardShard = {
     _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,
+    _poolRelicGolem,
     _poolRelicSloth,
     _poolRemand,
     _poolReturnToDust,

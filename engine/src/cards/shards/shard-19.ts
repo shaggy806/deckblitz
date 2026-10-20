@@ -86,6 +86,7 @@ import _poolCharringBite from "../pool/charring-bite.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
 import _poolClawsOut from "../pool/claws-out.js";
+import _poolCleansingWildfire from "../pool/cleansing-wildfire.js";
 import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
@@ -101,6 +102,7 @@ import _poolContractKilling from "../pool/contract-killing.js";
 import _poolCoralSword from "../pool/coral-sword.js";
 import _poolCourageousGoblin from "../pool/courageous-goblin.js";
 import _poolCourierGriffin from "../pool/courier-griffin.js";
+import _poolCovetedPrize from "../pool/coveted-prize.js";
 import _poolCowlProwler from "../pool/cowl-prowler.js";
 import _poolCrawlingBarrens from "../pool/crawling-barrens.js";
 import _poolCreakwoodGhoul from "../pool/creakwood-ghoul.js";
@@ -324,6 +326,7 @@ import _poolNewBenalia from "../pool/new-benalia.js";
 import _poolNighthawkDarkDefender from "../pool/nighthawk-dark-defender.js";
 import _poolNightwingShade from "../pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "../pool/nihil-spellbomb.js";
+import _poolNimbleTrapfinder from "../pool/nimble-trapfinder.js";
 import _poolNissaResurgentAnimist from "../pool/nissa-resurgent-animist.js";
 import _poolNorwoodWarrior from "../pool/norwood-warrior.js";
 import _poolOgreBerserker from "../pool/ogre-berserker.js";
@@ -464,7 +467,9 @@ import _poolSynapseSliver from "../pool/synapse-sliver.js";
 import _poolTajuruSnarecaster from "../pool/tajuru-snarecaster.js";
 import _poolTangleweaveArmor from "../pool/tangleweave-armor.js";
 import _poolTarnishedCitadel from "../pool/tarnished-citadel.js";
+import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
+import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
 import _poolThrabenHeretic from "../pool/thraben-heretic.js";
@@ -631,6 +636,7 @@ const shard: CardShard = {
     _poolChromeHostHulk,
     _poolChromeMox,
     _poolClawsOut,
+    _poolCleansingWildfire,
     _poolClergyEnVec,
     _poolCliffhavenKitesail,
     _poolCloakedSiren,
@@ -646,6 +652,7 @@ const shard: CardShard = {
     _poolCoralSword,
     _poolCourageousGoblin,
     _poolCourierGriffin,
+    _poolCovetedPrize,
     _poolCowlProwler,
     _poolCrawlingBarrens,
     _poolCreakwoodGhoul,
@@ -869,6 +876,7 @@ const shard: CardShard = {
     _poolNighthawkDarkDefender,
     _poolNightwingShade,
     _poolNihilSpellbomb,
+    _poolNimbleTrapfinder,
     _poolNissaResurgentAnimist,
     _poolNorwoodWarrior,
     _poolOgreBerserker,
@@ -1009,7 +1017,9 @@ const shard: CardShard = {
     _poolTajuruSnarecaster,
     _poolTangleweaveArmor,
     _poolTarnishedCitadel,
+    _poolTazeemRoilmage,
     _poolTheBalrogFlameOfUdun,
+    _poolTheDestinedWhiteMage,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
     _poolThrabenHeretic,

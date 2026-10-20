@@ -9,6 +9,7 @@ import _poolAetherSyphon from "../pool/aether-syphon.js";
 import _poolAffaProtector from "../pool/affa-protector.js";
 import _poolAidFromTheCowl from "../pool/aid-from-the-cowl.js";
 import _poolAirMarshal from "../pool/air-marshal.js";
+import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
 import _poolAnchorToReality from "../pool/anchor-to-reality.js";
@@ -38,6 +39,7 @@ import _poolBarkKnuckleBoxer from "../pool/bark-knuckle-boxer.js";
 import _poolBeatrixLoyalGeneral from "../pool/beatrix-loyal-general.js";
 import _poolBetorKinToAll from "../pool/betor-kin-to-all.js";
 import _poolBlackChocobo from "../pool/black-chocobo.js";
+import _poolBlackbloomRogue from "../pool/blackbloom-rogue.js";
 import _poolBlacksmithsTalent from "../pool/blacksmiths-talent.js";
 import _poolBlaringRecruiter from "../pool/blaring-recruiter.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
@@ -139,6 +141,7 @@ import _poolExcavationTechnique from "../pool/excavation-technique.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
 import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
 import _poolExpandedAnatomy from "../pool/expanded-anatomy.js";
+import _poolExpeditionDiviner from "../pool/expedition-diviner.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
@@ -284,6 +287,7 @@ import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
+import _poolNahiriHeirOfTheAncients from "../pool/nahiri-heir-of-the-ancients.js";
 import _poolNaturesSpiral from "../pool/natures-spiral.js";
 import _poolNecroblossomSnarl from "../pool/necroblossom-snarl.js";
 import _poolNecroticSliver from "../pool/necrotic-sliver.js";
@@ -451,6 +455,7 @@ import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThreadbindClique from "../pool/threadbind-clique.js";
 import _poolThrottle from "../pool/throttle.js";
+import _poolThwartTheGrave from "../pool/thwart-the-grave.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimeWalk from "../pool/time-walk.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
@@ -538,6 +543,7 @@ const shard: CardShard = {
     _poolAffaProtector,
     _poolAidFromTheCowl,
     _poolAirMarshal,
+    _poolAlliedAssault,
     _poolAllosaurusShepherd,
     _poolAmbitiousAssault,
     _poolAnchorToReality,
@@ -567,6 +573,7 @@ const shard: CardShard = {
     _poolBeatrixLoyalGeneral,
     _poolBetorKinToAll,
     _poolBlackChocobo,
+    _poolBlackbloomRogue,
     _poolBlacksmithsTalent,
     _poolBlaringRecruiter,
     _poolBlightedBat,
@@ -668,6 +675,7 @@ const shard: CardShard = {
     _poolExcommunicate,
     _poolExdeathVoidWarlock,
     _poolExpandedAnatomy,
+    _poolExpeditionDiviner,
     _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
     _poolEyeOfRamos,
@@ -813,6 +821,7 @@ const shard: CardShard = {
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMurdocksCrusade,
+    _poolNahiriHeirOfTheAncients,
     _poolNaturesSpiral,
     _poolNecroblossomSnarl,
     _poolNecroticSliver,
@@ -980,6 +989,7 @@ const shard: CardShard = {
     _poolThoughtCourier,
     _poolThreadbindClique,
     _poolThrottle,
+    _poolThwartTheGrave,
     _poolTigerDillo,
     _poolTimeWalk,
     _poolTorWauki,

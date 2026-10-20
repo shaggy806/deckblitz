@@ -148,6 +148,7 @@ import _poolFeignDeath from "../pool/feign-death.js";
 import _poolFell from "../pool/fell.js";
 import _poolFerventDenial from "../pool/fervent-denial.js";
 import _poolFesteringThicket from "../pool/festering-thicket.js";
+import _poolFieldResearch from "../pool/field-research.js";
 import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
 import _poolFiftyFeetOfRope from "../pool/fifty-feet-of-rope.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
@@ -185,6 +186,7 @@ import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
+import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
 import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
 import _poolGumdropPoisoner from "../pool/gumdrop-poisoner.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
@@ -281,6 +283,7 @@ import _poolNightwhorlHermit from "../pool/nightwhorl-hermit.js";
 import _poolNorthernAirTemple from "../pool/northern-air-temple.js";
 import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
+import _poolOblivionsHunger from "../pool/oblivions-hunger.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOminousRoost from "../pool/ominous-roost.js";
@@ -335,6 +338,7 @@ import _poolRavingVisionary from "../pool/raving-visionary.js";
 import _poolRazorfootGriffin from "../pool/razorfoot-griffin.js";
 import _poolRecklessHandling from "../pool/reckless-handling.js";
 import _poolReclaim from "../pool/reclaim.js";
+import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
@@ -420,6 +424,7 @@ import _poolTerritorialBaloth from "../pool/territorial-baloth.js";
 import _poolTerritoryCuller from "../pool/territory-culler.js";
 import _poolThassasIntervention from "../pool/thassas-intervention.js";
 import _poolTheArkenstone from "../pool/the-arkenstone.js";
+import _poolTheDestinedWarrior from "../pool/the-destined-warrior.js";
 import _poolTheFifthDoctor from "../pool/the-fifth-doctor.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
@@ -471,6 +476,7 @@ import _poolWarMammoth from "../pool/war-mammoth.js";
 import _poolWasteland from "../pool/wasteland.js";
 import _poolWaterwindScout from "../pool/waterwind-scout.js";
 import _poolWayOfThePyromancer from "../pool/way-of-the-pyromancer.js";
+import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
 import _poolWildIdea from "../pool/wild-idea.js";
@@ -651,6 +657,7 @@ const shard: CardShard = {
     _poolFell,
     _poolFerventDenial,
     _poolFesteringThicket,
+    _poolFieldResearch,
     _poolFieldsOfStrife,
     _poolFiftyFeetOfRope,
     _poolFightRigging,
@@ -688,6 +695,7 @@ const shard: CardShard = {
     _poolGorillaChieftain,
     _poolGreaterAuramancy,
     _poolGremlinTamer,
+    _poolGrotagBugCatcher,
     _poolGuerrillaGorilla,
     _poolGumdropPoisoner,
     _poolGwaihirGreatestOfTheEagles,
@@ -784,6 +792,7 @@ const shard: CardShard = {
     _poolNorthernAirTemple,
     _poolNyxbornMarauder,
     _poolOathOfNissa,
+    _poolOblivionsHunger,
     _poolOllenbockEscort,
     _poolOmenHawker,
     _poolOminousRoost,
@@ -838,6 +847,7 @@ const shard: CardShard = {
     _poolRazorfootGriffin,
     _poolRecklessHandling,
     _poolReclaim,
+    _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
     _poolResearchThief,
     _poolRestlessDead,
@@ -923,6 +933,7 @@ const shard: CardShard = {
     _poolTerritoryCuller,
     _poolThassasIntervention,
     _poolTheArkenstone,
+    _poolTheDestinedWarrior,
     _poolTheFifthDoctor,
     _poolTheGreyHavens,
     _poolTheLordOfPain,
@@ -974,6 +985,7 @@ const shard: CardShard = {
     _poolWasteland,
     _poolWaterwindScout,
     _poolWayOfThePyromancer,
+    _poolWaywardGuideBeast,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
     _poolWildIdea,

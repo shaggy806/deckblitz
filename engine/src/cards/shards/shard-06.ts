@@ -79,6 +79,7 @@ import _poolCentaurHealer from "../pool/centaur-healer.js";
 import _poolCharcoalDiamond from "../pool/charcoal-diamond.js";
 import _poolChasmSkulker from "../pool/chasm-skulker.js";
 import _poolChillingChronicle from "../pool/chilling-chronicle.js";
+import _poolChillingTrap from "../pool/chilling-trap.js";
 import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
@@ -192,6 +193,7 @@ import _poolGravitationalShift from "../pool/gravitational-shift.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
+import _poolGrotagNightRunner from "../pool/grotag-night-runner.js";
 import _poolGroundbreaker from "../pool/groundbreaker.js";
 import _poolGuacMarshmallowPizza from "../pool/guac-marshmallow-pizza.js";
 import _poolGuardDuty from "../pool/guard-duty.js";
@@ -421,6 +423,7 @@ import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
+import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
@@ -464,6 +467,7 @@ import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
 import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
+import _poolVeteranAdventurer from "../pool/veteran-adventurer.js";
 import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
@@ -594,6 +598,7 @@ const shard: CardShard = {
     _poolCharcoalDiamond,
     _poolChasmSkulker,
     _poolChillingChronicle,
+    _poolChillingTrap,
     _poolChimilTheInnerSun,
     _poolChimneyRabble,
     _poolChordOfCalling,
@@ -707,6 +712,7 @@ const shard: CardShard = {
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
     _poolGrislySalvage,
+    _poolGrotagNightRunner,
     _poolGroundbreaker,
     _poolGuacMarshmallowPizza,
     _poolGuardDuty,
@@ -936,6 +942,7 @@ const shard: CardShard = {
     _poolTeeterpeakAmbusher,
     _poolTelimtorsDarts,
     _poolTempestHart,
+    _poolTenuredOilcaster,
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
@@ -979,6 +986,7 @@ const shard: CardShard = {
     _poolVenomLethalProtector,
     _poolVenomcrawler,
     _poolVerdantEmbrace,
+    _poolVeteranAdventurer,
     _poolVictoriousDestruction,
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,

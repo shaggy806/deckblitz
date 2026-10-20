@@ -1805,6 +1805,12 @@ export function parseFace(face, ctx = {}) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };
       continue;
     }
+    // "~ is also a Cleric, Rogue, Warrior, and Wizard" — a CDA adding
+    // creature types in every zone (rule 604.3), the card's `alsoSubtypes`.
+    if ((m = /^~ is also an? ((?:[A-Z][a-z]+, )*[A-Z][a-z]+,? and [A-Z][a-z]+|[A-Z][a-z]+)\.$/.exec(line)) && /\bCreature\b/.test(face.type_line ?? "")) {
+      out.alsoSubtypes = m[1].split(/,? and |, /);
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }

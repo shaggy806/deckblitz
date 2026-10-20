@@ -55,6 +55,7 @@ import _poolBillThePony from "../pool/bill-the-pony.js";
 import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlisteringBarrier from "../pool/blistering-barrier.js";
+import _poolBloodBeckoning from "../pool/blood-beckoning.js";
 import _poolBloodbriar from "../pool/bloodbriar.js";
 import _poolBloodcrazedSocialite from "../pool/bloodcrazed-socialite.js";
 import _poolBloodrageBrawler from "../pool/bloodrage-brawler.js";
@@ -362,6 +363,7 @@ import _poolRidgetopRaptor from "../pool/ridgetop-raptor.js";
 import _poolRiteOfTheDragoncaller from "../pool/rite-of-the-dragoncaller.js";
 import _poolRiveteersRequisitioner from "../pool/riveteers-requisitioner.js";
 import _poolRockfaceVillage from "../pool/rockface-village.js";
+import _poolRoilEruption from "../pool/roil-eruption.js";
 import _poolRootwiseSurvivor from "../pool/rootwise-survivor.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
@@ -511,6 +513,7 @@ import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolYavimayaCradleOfGrowth from "../pool/yavimaya-cradle-of-growth.js";
 import _poolYellowjacketHeartlessMarauder from "../pool/yellowjacket-heartless-marauder.js";
 import _poolYidrisMaelstromWielder from "../pool/yidris-maelstrom-wielder.js";
+import _poolZarethSanTheTrickster from "../pool/zareth-san-the-trickster.js";
 import _poolZhalfirinKnight from "../pool/zhalfirin-knight.js";
 import _poolZhulodokVoidGorger from "../pool/zhulodok-void-gorger.js";
 import _poolZofShade from "../pool/zof-shade.js";
@@ -586,6 +589,7 @@ const shard: CardShard = {
     _poolBitterthornNissasAnimus,
     _poolBlindingSpray,
     _poolBlisteringBarrier,
+    _poolBloodBeckoning,
     _poolBloodbriar,
     _poolBloodcrazedSocialite,
     _poolBloodrageBrawler,
@@ -893,6 +897,7 @@ const shard: CardShard = {
     _poolRiteOfTheDragoncaller,
     _poolRiveteersRequisitioner,
     _poolRockfaceVillage,
+    _poolRoilEruption,
     _poolRootwiseSurvivor,
     _poolRubbleSlinger,
     _poolSaberToothMooseLion,
@@ -1042,6 +1047,7 @@ const shard: CardShard = {
     _poolYavimayaCradleOfGrowth,
     _poolYellowjacketHeartlessMarauder,
     _poolYidrisMaelstromWielder,
+    _poolZarethSanTheTrickster,
     _poolZhalfirinKnight,
     _poolZhulodokVoidGorger,
     _poolZofShade,

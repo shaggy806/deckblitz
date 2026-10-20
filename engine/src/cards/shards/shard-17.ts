@@ -24,6 +24,7 @@ import _poolArcadeCabinet from "../pool/arcade-cabinet.js";
 import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
+import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
@@ -134,6 +135,7 @@ import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
 import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
+import _poolExpeditionChampion from "../pool/expedition-champion.js";
 import _poolExpelTheInterlopers from "../pool/expel-the-interlopers.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
@@ -175,6 +177,7 @@ import _poolGoblinSurveyor from "../pool/goblin-surveyor.js";
 import _poolGoldmireBridge from "../pool/goldmire-bridge.js";
 import _poolGongagaReactorTown from "../pool/gongaga-reactor-town.js";
 import _poolGoroGoroAndSatoru from "../pool/goro-goro-and-satoru.js";
+import _poolGrakmawSkyclaveRavager from "../pool/grakmaw-skyclave-ravager.js";
 import _poolGrandArbiterAugustinIv from "../pool/grand-arbiter-augustin-iv.js";
 import _poolGraspingShadows from "../pool/grasping-shadows.js";
 import _poolGrazingKelpie from "../pool/grazing-kelpie.js";
@@ -288,6 +291,7 @@ import _poolObyraDreamingDuelist from "../pool/obyra-dreaming-duelist.js";
 import _poolOgreSentry from "../pool/ogre-sentry.js";
 import _poolOjiTheExquisiteBlade from "../pool/oji-the-exquisite-blade.js";
 import _poolOldGnawbone from "../pool/old-gnawbone.js";
+import _poolOrahSkyclaveHierophant from "../pool/orah-skyclave-hierophant.js";
 import _poolOrcishArtillery from "../pool/orcish-artillery.js";
 import _poolOrcishCannoneers from "../pool/orcish-cannoneers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
@@ -335,6 +339,7 @@ import _poolRestlessBloodseeker from "../pool/restless-bloodseeker.js";
 import _poolRestlessBones from "../pool/restless-bones.js";
 import _poolReturnToTheLightRealms from "../pool/return-to-the-light-realms.js";
 import _poolRimekinRecluse from "../pool/rimekin-recluse.js";
+import _poolRisenRiptide from "../pool/risen-riptide.js";
 import _poolRishadanDockhand from "../pool/rishadan-dockhand.js";
 import _poolRiverBear from "../pool/river-bear.js";
 import _poolRiverKelpie from "../pool/river-kelpie.js";
@@ -408,6 +413,7 @@ import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
 import _poolSwordOfVengeance from "../pool/sword-of-vengeance.js";
+import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
@@ -530,6 +536,7 @@ const shard: CardShard = {
     _poolArcboundBruiser,
     _poolArchiveHaunt,
     _poolArcticTreeline,
+    _poolArdentElectromancer,
     _poolArdentRecruit,
     _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,
@@ -640,6 +647,7 @@ const shard: CardShard = {
     _poolEnterTheGodEternals,
     _poolEpharasWarden,
     _poolExhibitionMagician,
+    _poolExpeditionChampion,
     _poolExpelTheInterlopers,
     _poolFaebloomTrick,
     _poolFaerieVandal,
@@ -681,6 +689,7 @@ const shard: CardShard = {
     _poolGoldmireBridge,
     _poolGongagaReactorTown,
     _poolGoroGoroAndSatoru,
+    _poolGrakmawSkyclaveRavager,
     _poolGrandArbiterAugustinIv,
     _poolGraspingShadows,
     _poolGrazingKelpie,
@@ -794,6 +803,7 @@ const shard: CardShard = {
     _poolOgreSentry,
     _poolOjiTheExquisiteBlade,
     _poolOldGnawbone,
+    _poolOrahSkyclaveHierophant,
     _poolOrcishArtillery,
     _poolOrcishCannoneers,
     _poolOrderOfSacredDusk,
@@ -841,6 +851,7 @@ const shard: CardShard = {
     _poolRestlessBones,
     _poolReturnToTheLightRealms,
     _poolRimekinRecluse,
+    _poolRisenRiptide,
     _poolRishadanDockhand,
     _poolRiverBear,
     _poolRiverKelpie,
@@ -914,6 +925,7 @@ const shard: CardShard = {
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,
     _poolSwordOfVengeance,
+    _poolSynchronizedSpellcraft,
     _poolTaintedIsle,
     _poolTallymanOfNurgle,
     _poolTatteredApparition,

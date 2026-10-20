@@ -720,7 +720,18 @@ export type StaticCondition =
   /** At least `atLeast` cards in your graveyard matching `filter` — Oversold
    * Cemetery's "if you have four or more creature cards in your graveyard".
    * Threshold is this with seven and no filter. */
-  | { readonly kind: "cards-in-graveyard"; readonly atLeast: number; readonly filter?: CardFilter }
+  | {
+      readonly kind: "cards-in-graveyard";
+      readonly atLeast: number;
+      readonly filter?: CardFilter;
+      /** Whose graveyard: yours (omitted); `"an-opponent"` — at least one
+       * opponent still in the game has that many in theirs, each graveyard
+       * counted on its own (Zendikar Rising's "if an opponent has eight or
+       * more cards in their graveyard" — Blackbloom Rogue); `"any-player"` —
+       * any one graveyard, yours included (Visions of Beyond's "if a
+       * graveyard has twenty or more cards in it"). */
+      readonly whose?: "an-opponent" | "any-player";
+    }
   /** Delirium (rule 702.120) — four or more *card types* among the cards in
    * your graveyard. Counts distinct types, not cards: one artifact creature
    * is two of the four. A card's printed types are what count — layer
@@ -2183,6 +2194,15 @@ export interface CardDefinition {
   readonly supertypes: readonly Supertype[];
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
+  /**
+   * Creature types a characteristic-defining ability adds (rule 604.3) —
+   * Veteran Adventurer's "is also a Cleric, Rogue, Warrior, and Wizard". Like
+   * changeling, it applies first in layer 4, in every zone, from the copiable
+   * values, and a loss of abilities (layer 6) doesn't undo it — see
+   * `characteristics.ts`'s `withChangeling`. Its line is an ability, so it's
+   * in the card's `text` but not its printed type line.
+   */
+  readonly alsoSubtypes?: readonly string[];
   readonly power: number | null;
   readonly toughness: number | null;
   readonly keywords: readonly Keyword[];
@@ -3005,6 +3025,7 @@ const PRINTED_ABILITY: {
   supertypes: false,
   types: false,
   subtypes: false,
+  alsoSubtypes: (def) => (def.alsoSubtypes?.length ?? 0) > 0,
   power: false,
   toughness: false,
   keywords: (def) => def.keywords.length > 0,
@@ -3148,6 +3169,8 @@ interface CardDraft {
   supertypes?: readonly Supertype[];
   types: readonly CardType[];
   subtypes?: readonly string[];
+  /** See {@link CardDefinition.alsoSubtypes}. */
+  alsoSubtypes?: readonly string[];
   power?: number;
   toughness?: number;
   keywords?: readonly Keyword[];
@@ -3340,6 +3363,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     supertypes: draft.supertypes ?? [],
     types: draft.types,
     subtypes: draft.subtypes ?? [],
+    ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
     power: draft.power ?? null,
     toughness: draft.toughness ?? null,
     keywords: draft.keywords ?? [],

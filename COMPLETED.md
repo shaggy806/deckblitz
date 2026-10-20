@@ -86,6 +86,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Zendikar Rising and Zendikar Rising Commander, whole** (batch 114): their 146 cards, 121
+  authored, 25 blocked, with **party** built (rule 700.8 — the count, the cost reduction, the
+  CDA, "if you have a full party"), "is also a Cleric, Rogue, Warrior, and Wizard" (a CDA in
+  every zone), "an opponent has eight or more cards in their graveyard", and "a kicked spell" /
+  "a card with a kicker ability" as filters — plus ten cards triaged earlier that those
+  unblocked (Burakos, Nalia de'Arnise, the four Destined cards, Coveted Prize, Expedition
+  Lookout, Tenured Oilcaster, Visions of Beyond). 0.41M tokens per card handled (2026-10-20).
 - **Commander Legends, whole** (batch 113): its last 62 cards, 30 authored, 32 blocked — the set's
   long tail of one-off commanders. No engine change. The first batch on the lean `card-author`
   agent type: 19K of fixed context a turn against the general-purpose agent's 57K (2026-10-20).

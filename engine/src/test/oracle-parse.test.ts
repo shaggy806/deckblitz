@@ -1077,6 +1077,9 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(linvala.triggered[0].condition).toEqual({ kind: "full-party" });
     expect(linvala.complete).toBe(true);
+    const veteran = face("Test Card is also a Cleric, Rogue, Warrior, and Wizard.\nVigilance", "Creature — Human");
+    expect(veteran.alsoSubtypes).toEqual(["Cleric", "Rogue", "Warrior", "Wizard"]);
+    expect(veteran.complete).toBe(true);
   });
 
   it("the initiative (rule 726): 'you take the initiative'", () => {

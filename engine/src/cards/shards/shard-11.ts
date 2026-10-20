@@ -16,6 +16,7 @@ import _poolAlpineMeadow from "../pool/alpine-meadow.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
 import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
+import _poolAnticognition from "../pool/anticognition.js";
 import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolAquaticAlchemist from "../pool/aquatic-alchemist.js";
 import _poolArcboundRavager from "../pool/arcbound-ravager.js";
@@ -44,6 +45,7 @@ import _poolBereavedSurvivor from "../pool/bereaved-survivor.js";
 import _poolBerserkersOfBloodRidge from "../pool/berserkers-of-blood-ridge.js";
 import _poolBigMotherMouser from "../pool/big-mother-mouser.js";
 import _poolBlackLotus from "../pool/black-lotus.js";
+import _poolBlackbloomBog from "../pool/blackbloom-bog.js";
 import _poolBladeSplicer from "../pool/blade-splicer.js";
 import _poolBlaze from "../pool/blaze.js";
 import _poolBlitzballShot from "../pool/blitzball-shot.js";
@@ -276,6 +278,7 @@ import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
+import _poolMasterOfWinds from "../pool/master-of-winds.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
 import _poolMemorialVault from "../pool/memorial-vault.js";
@@ -284,6 +287,7 @@ import _poolMercilessEnforcers from "../pool/merciless-enforcers.js";
 import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
+import _poolMindDrain from "../pool/mind-drain.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMisterGutsy from "../pool/mister-gutsy.js";
@@ -300,6 +304,7 @@ import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
+import _poolMurasaRootgrazer from "../pool/murasa-rootgrazer.js";
 import _poolMusterTheDeparted from "../pool/muster-the-departed.js";
 import _poolMyPrecious from "../pool/my-precious.js";
 import _poolMysidianElder from "../pool/mysidian-elder.js";
@@ -393,6 +398,7 @@ import _poolSearchlightGeist from "../pool/searchlight-geist.js";
 import _poolSejiriRefuge from "../pool/sejiri-refuge.js";
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
+import _poolShadowStinger from "../pool/shadow-stinger.js";
 import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
 import _poolSheoldredsRestoration from "../pool/sheoldreds-restoration.js";
@@ -411,6 +417,7 @@ import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
 import _poolSkyEelSchool from "../pool/sky-eel-school.js";
 import _poolSkyclaveCleric from "../pool/skyclave-cleric.js";
+import _poolSkyclaveSquid from "../pool/skyclave-squid.js";
 import _poolSkyhunterSkirmisher from "../pool/skyhunter-skirmisher.js";
 import _poolSlingGangLieutenant from "../pool/sling-gang-lieutenant.js";
 import _poolSlipOnTheRing from "../pool/slip-on-the-ring.js";
@@ -564,6 +571,7 @@ const shard: CardShard = {
     _poolAncientCarp,
     _poolAncientCrab,
     _poolAngelOfDespair,
+    _poolAnticognition,
     _poolAnuridMurkdiver,
     _poolAquaticAlchemist,
     _poolArcboundRavager,
@@ -592,6 +600,7 @@ const shard: CardShard = {
     _poolBerserkersOfBloodRidge,
     _poolBigMotherMouser,
     _poolBlackLotus,
+    _poolBlackbloomBog,
     _poolBladeSplicer,
     _poolBlaze,
     _poolBlitzballShot,
@@ -824,6 +833,7 @@ const shard: CardShard = {
     _poolManaCylix,
     _poolManifestationSage,
     _poolMaraudingMako,
+    _poolMasterOfWinds,
     _poolMasterPakku,
     _poolMeditationPuzzle,
     _poolMemorialVault,
@@ -832,6 +842,7 @@ const shard: CardShard = {
     _poolMeteorite,
     _poolMeticulousCommons,
     _poolMinasMorgulDarkFortress,
+    _poolMindDrain,
     _poolMirrorImage,
     _poolMistcutterHydra,
     _poolMisterGutsy,
@@ -848,6 +859,7 @@ const shard: CardShard = {
     _poolMossdog,
     _poolMoxSapphire,
     _poolMoxTantalite,
+    _poolMurasaRootgrazer,
     _poolMusterTheDeparted,
     _poolMyPrecious,
     _poolMysidianElder,
@@ -941,6 +953,7 @@ const shard: CardShard = {
     _poolSejiriRefuge,
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
+    _poolShadowStinger,
     _poolShamblingStrider,
     _poolShaoJun,
     _poolSheoldredsRestoration,
@@ -959,6 +972,7 @@ const shard: CardShard = {
     _poolSistersOfTheFlame,
     _poolSkyEelSchool,
     _poolSkyclaveCleric,
+    _poolSkyclaveSquid,
     _poolSkyhunterSkirmisher,
     _poolSlingGangLieutenant,
     _poolSlipOnTheRing,

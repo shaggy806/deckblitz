@@ -250,6 +250,7 @@ import _poolMortify from "../pool/mortify.js";
 import _poolMossKami from "../pool/moss-kami.js";
 import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
+import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
@@ -318,6 +319,7 @@ import _poolSaguWildling from "../pool/sagu-wildling.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
+import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolSeaGate from "../pool/sea-gate.js";
 import _poolSeacoastDrake from "../pool/seacoast-drake.js";
@@ -379,6 +381,7 @@ import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
 import _poolStrangle from "../pool/strangle.js";
 import _poolStrangledCemetery from "../pool/strangled-cemetery.js";
+import _poolStrengthOfSolidarity from "../pool/strength-of-solidarity.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
@@ -398,6 +401,7 @@ import _poolSymbioticWurm from "../pool/symbiotic-wurm.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
 import _poolTarpan from "../pool/tarpan.js";
+import _poolTazeemRaptor from "../pool/tazeem-raptor.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
@@ -724,6 +728,7 @@ const shard: CardShard = {
     _poolMossKami,
     _poolMossViper,
     _poolMoxPearl,
+    _poolMurasaSproutling,
     _poolNadirKraken,
     _poolNajalTheStormRunner,
     _poolNaruMehaMasterWizard,
@@ -792,6 +797,7 @@ const shard: CardShard = {
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
     _poolScamperingSurveyor,
+    _poolScavengedBlade,
     _poolScrapTrawler,
     _poolSeaGate,
     _poolSeacoastDrake,
@@ -853,6 +859,7 @@ const shard: CardShard = {
     _poolStrandwalker,
     _poolStrangle,
     _poolStrangledCemetery,
+    _poolStrengthOfSolidarity,
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
@@ -872,6 +879,7 @@ const shard: CardShard = {
     _poolTakeAGlance,
     _poolTangledIslet,
     _poolTarpan,
+    _poolTazeemRaptor,
     _poolTcriBuilding,
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,

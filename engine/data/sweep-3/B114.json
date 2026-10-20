@@ -1,0 +1,1122 @@
+{
+ "batch": "B114",
+ "status": "complete",
+ "ranks": "Zendikar Rising and its Commander decks (ZNR, ZNC, 2020-09-25): whole set, with twelve cards triaged earlier that party and the graveyard condition were built for (ten authored)",
+ "authored": [
+  {
+   "name": "Obuun, Mul Daya Ancestor",
+   "files": [
+    "engine/src/cards/pool/obuun-mul-daya-ancestor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trove Warden",
+   "files": [
+    "engine/src/cards/pool/trove-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleansing Wildfire",
+   "files": [
+    "engine/src/cards/pool/cleansing-wildfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oran-Rief Ooze",
+   "files": [
+    "engine/src/cards/pool/oran-rief-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blackbloom Rogue // Blackbloom Bog",
+   "files": [
+    "engine/src/cards/pool/blackbloom-rogue.ts",
+    "engine/src/cards/pool/blackbloom-bog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Golem",
+   "files": [
+    "engine/src/cards/pool/relic-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thwart the Grave",
+   "files": [
+    "engine/src/cards/pool/thwart-the-grave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hagra Constrictor",
+   "files": [
+    "engine/src/cards/pool/hagra-constrictor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Windrobber",
+   "files": [
+    "engine/src/cards/pool/merfolk-windrobber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pelakka Predation // Pelakka Caverns",
+   "files": [
+    "engine/src/cards/pool/pelakka-predation.ts",
+    "engine/src/cards/pool/pelakka-caverns.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squad Commander",
+   "files": [
+    "engine/src/cards/pool/squad-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grakmaw, Skyclave Ravager",
+   "files": [
+    "engine/src/cards/pool/grakmaw-skyclave-ravager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zagras, Thief of Heartbeats",
+   "files": [
+    "engine/src/cards/pool/zagras-thief-of-heartbeats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oblivion's Hunger",
+   "files": [
+    "engine/src/cards/pool/oblivions-hunger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nahiri, Heir of the Ancients",
+   "files": [
+    "engine/src/cards/pool/nahiri-heir-of-the-ancients.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archpriest of Iona",
+   "files": [
+    "engine/src/cards/pool/archpriest-of-iona.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zareth San, the Trickster",
+   "files": [
+    "engine/src/cards/pool/zareth-san-the-trickster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soaring Thought-Thief",
+   "files": [
+    "engine/src/cards/pool/soaring-thought-thief.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Base Camp",
+   "files": [
+    "engine/src/cards/pool/base-camp.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Myriad Construct",
+   "files": [
+    "engine/src/cards/pool/myriad-construct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Windrider Wizard",
+   "files": [
+    "engine/src/cards/pool/windrider-wizard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimble Trapfinder",
+   "files": [
+    "engine/src/cards/pool/nimble-trapfinder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Murasa Rootgrazer",
+   "files": [
+    "engine/src/cards/pool/murasa-rootgrazer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rockslide Sorcerer",
+   "files": [
+    "engine/src/cards/pool/rockslide-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Concerted Defense",
+   "files": [
+    "engine/src/cards/pool/concerted-defense.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malakir Blood-Priest",
+   "files": [
+    "engine/src/cards/pool/malakir-blood-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kor Celebrant",
+   "files": [
+    "engine/src/cards/pool/kor-celebrant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kargan Warleader",
+   "files": [
+    "engine/src/cards/pool/kargan-warleader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cinderclasm",
+   "files": [
+    "engine/src/cards/pool/cinderclasm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spoils of Adventure",
+   "files": [
+    "engine/src/cards/pool/spoils-of-adventure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Attended Healer",
+   "files": [
+    "engine/src/cards/pool/attended-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anticognition",
+   "files": [
+    "engine/src/cards/pool/anticognition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deadly Alliance",
+   "files": [
+    "engine/src/cards/pool/deadly-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reclaim the Wastes",
+   "files": [
+    "engine/src/cards/pool/reclaim-the-wastes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cragplate Baloth",
+   "files": [
+    "engine/src/cards/pool/cragplate-baloth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Beckoning",
+   "files": [
+    "engine/src/cards/pool/blood-beckoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleric of Life's Bond",
+   "files": [
+    "engine/src/cards/pool/cleric-of-lifes-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orah, Skyclave Hierophant",
+   "files": [
+    "engine/src/cards/pool/orah-skyclave-hierophant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghastly Gloomhunter",
+   "files": [
+    "engine/src/cards/pool/ghastly-gloomhunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodchief's Thirst",
+   "files": [
+    "engine/src/cards/pool/bloodchiefs-thirst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magmatic Channeler",
+   "files": [
+    "engine/src/cards/pool/magmatic-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Umara Wizard // Umara Skyfalls",
+   "files": [
+    "engine/src/cards/pool/umara-wizard.ts",
+    "engine/src/cards/pool/umara-skyfalls.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stonework Packbeast",
+   "files": [
+    "engine/src/cards/pool/stonework-packbeast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Relic Robber",
+   "files": [
+    "engine/src/cards/pool/relic-robber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyclave Shadowcat",
+   "files": [
+    "engine/src/cards/pool/skyclave-shadowcat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chilling Trap",
+   "files": [
+    "engine/src/cards/pool/chilling-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swarm Shambler",
+   "files": [
+    "engine/src/cards/pool/swarm-shambler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fearless Fledgling",
+   "files": [
+    "engine/src/cards/pool/fearless-fledgling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goma Fada Vanguard",
+   "files": [
+    "engine/src/cards/pool/goma-fada-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tazri, Beacon of Unity",
+   "files": [
+    "engine/src/cards/pool/tazri-beacon-of-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Journey to Oblivion",
+   "files": [
+    "engine/src/cards/pool/journey-to-oblivion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shell Shield",
+   "files": [
+    "engine/src/cards/pool/shell-shield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fireblade Charger",
+   "files": [
+    "engine/src/cards/pool/fireblade-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Field Research",
+   "files": [
+    "engine/src/cards/pool/field-research.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sure-Footed Infiltrator",
+   "files": [
+    "engine/src/cards/pool/sure-footed-infiltrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kor Blademaster",
+   "files": [
+    "engine/src/cards/pool/kor-blademaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatterskull Charger",
+   "files": [
+    "engine/src/cards/pool/shatterskull-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Drain",
+   "files": [
+    "engine/src/cards/pool/mind-drain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Utility Knife",
+   "files": [
+    "engine/src/cards/pool/utility-knife.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Murasa Sproutling",
+   "files": [
+    "engine/src/cards/pool/murasa-sproutling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Practiced Tactics",
+   "files": [
+    "engine/src/cards/pool/practiced-tactics.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sea Gate Stormcaller",
+   "files": [
+    "engine/src/cards/pool/sea-gate-stormcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyclave Plunder",
+   "files": [
+    "engine/src/cards/pool/skyclave-plunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Axe",
+   "files": [
+    "engine/src/cards/pool/relic-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tajuru Paragon",
+   "files": [
+    "engine/src/cards/pool/tajuru-paragon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Verazol, the Split Current",
+   "files": [
+    "engine/src/cards/pool/verazol-the-split-current.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scavenged Blade",
+   "files": [
+    "engine/src/cards/pool/scavenged-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Price",
+   "files": [
+    "engine/src/cards/pool/blood-price.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sea Gate Colossus",
+   "files": [
+    "engine/src/cards/pool/sea-gate-colossus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master of Winds",
+   "files": [
+    "engine/src/cards/pool/master-of-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Umara Mystic",
+   "files": [
+    "engine/src/cards/pool/umara-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farsight Adept",
+   "files": [
+    "engine/src/cards/pool/farsight-adept.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Might of Murasa",
+   "files": [
+    "engine/src/cards/pool/might-of-murasa.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nissa's Zendikon",
+   "files": [
+    "engine/src/cards/pool/nissas-zendikon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lullmage's Familiar",
+   "files": [
+    "engine/src/cards/pool/lullmages-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grotag Night-Runner",
+   "files": [
+    "engine/src/cards/pool/grotag-night-runner.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Roil Eruption",
+   "files": [
+    "engine/src/cards/pool/roil-eruption.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moss-Pit Skeleton",
+   "files": [
+    "engine/src/cards/pool/moss-pit-skeleton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ardent Electromancer",
+   "files": [
+    "engine/src/cards/pool/ardent-electromancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tazeem Roilmage",
+   "files": [
+    "engine/src/cards/pool/tazeem-roilmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shepherd of Heroes",
+   "files": [
+    "engine/src/cards/pool/shepherd-of-heroes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitesail Cleric",
+   "files": [
+    "engine/src/cards/pool/kitesail-cleric.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resolute Strike",
+   "files": [
+    "engine/src/cards/pool/resolute-strike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emeria Captain",
+   "files": [
+    "engine/src/cards/pool/emeria-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roost of Drakes",
+   "files": [
+    "engine/src/cards/pool/roost-of-drakes.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Allied Assault",
+   "files": [
+    "engine/src/cards/pool/allied-assault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Carver",
+   "files": [
+    "engine/src/cards/pool/mind-carver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Expedition Skulker",
+   "files": [
+    "engine/src/cards/pool/expedition-skulker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadows' Verdict",
+   "files": [
+    "engine/src/cards/pool/shadows-verdict.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran Adventurer",
+   "files": [
+    "engine/src/cards/pool/veteran-adventurer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shadow Stinger",
+   "files": [
+    "engine/src/cards/pool/shadow-stinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coralhelm Chronicler",
+   "files": [
+    "engine/src/cards/pool/coralhelm-chronicler.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wayward Guide-Beast",
+   "files": [
+    "engine/src/cards/pool/wayward-guide-beast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Taunting Arbormage",
+   "files": [
+    "engine/src/cards/pool/taunting-arbormage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyclave Sentinel",
+   "files": [
+    "engine/src/cards/pool/skyclave-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kazandu Stomper",
+   "files": [
+    "engine/src/cards/pool/kazandu-stomper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grotag Bug-Catcher",
+   "files": [
+    "engine/src/cards/pool/grotag-bug-catcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravager's Mace",
+   "files": [
+    "engine/src/cards/pool/ravagers-mace.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cascade Seer",
+   "files": [
+    "engine/src/cards/pool/cascade-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Drana's Silencer",
+   "files": [
+    "engine/src/cards/pool/dranas-silencer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expedition Champion",
+   "files": [
+    "engine/src/cards/pool/expedition-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dauntless Unity",
+   "files": [
+    "engine/src/cards/pool/dauntless-unity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skyclave Squid",
+   "files": [
+    "engine/src/cards/pool/skyclave-squid.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Seafloor Stalker",
+   "files": [
+    "engine/src/cards/pool/seafloor-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strength of Solidarity",
+   "files": [
+    "engine/src/cards/pool/strength-of-solidarity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Expedition Healer",
+   "files": [
+    "engine/src/cards/pool/expedition-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mesa Lynx",
+   "files": [
+    "engine/src/cards/pool/mesa-lynx.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Expedition Diviner",
+   "files": [
+    "engine/src/cards/pool/expedition-diviner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cunning Geysermage",
+   "files": [
+    "engine/src/cards/pool/cunning-geysermage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pyroclastic Hellion",
+   "files": [
+    "engine/src/cards/pool/pyroclastic-hellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatterskull Minotaur",
+   "files": [
+    "engine/src/cards/pool/shatterskull-minotaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thundering Sparkmage",
+   "files": [
+    "engine/src/cards/pool/thundering-sparkmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Falconer",
+   "files": [
+    "engine/src/cards/pool/merfolk-falconer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tazeem Raptor",
+   "files": [
+    "engine/src/cards/pool/tazeem-raptor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kabira Outrider",
+   "files": [
+    "engine/src/cards/pool/kabira-outrider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Synchronized Spellcraft",
+   "files": [
+    "engine/src/cards/pool/synchronized-spellcraft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paired Tactician",
+   "files": [
+    "engine/src/cards/pool/paired-tactician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Springmantle Cleric",
+   "files": [
+    "engine/src/cards/pool/springmantle-cleric.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nimana Skitter-Sneak",
+   "files": [
+    "engine/src/cards/pool/nimana-skitter-sneak.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Risen Riptide",
+   "files": [
+    "engine/src/cards/pool/risen-riptide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scorch Rider",
+   "files": [
+    "engine/src/cards/pool/scorch-rider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nalia de'Arnise",
+   "files": [
+    "engine/src/cards/pool/nalia-dearnise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burakos, Party Leader",
+   "files": [
+    "engine/src/cards/pool/burakos-party-leader.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Coveted Prize",
+   "files": [
+    "engine/src/cards/pool/coveted-prize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Destined Black Mage",
+   "files": [
+    "engine/src/cards/pool/the-destined-black-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Destined Thief",
+   "files": [
+    "engine/src/cards/pool/the-destined-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Destined Warrior",
+   "files": [
+    "engine/src/cards/pool/the-destined-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Destined White Mage",
+   "files": [
+    "engine/src/cards/pool/the-destined-white-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visions of Beyond",
+   "files": [
+    "engine/src/cards/pool/visions-of-beyond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expedition Lookout",
+   "files": [
+    "engine/src/cards/pool/expedition-lookout.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tenured Oilcaster",
+   "files": [
+    "engine/src/cards/pool/tenured-oilcaster.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Acquisitions Expert",
+   "needs": [
+    "effect:reveal-n-from-hand-you-choose-discard"
+   ],
+   "why": "target opponent reveals a number of cards of their choice; you choose one to discard"
+  },
+  {
+   "name": "Adventure Awaits",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "\"if you didn't put a card into your hand this way, draw a card\": look-and-choose has no branch for none chosen"
+  },
+  {
+   "name": "Bubble Snare",
+   "needs": [
+    "static:doesnt-untap-filter"
+   ],
+   "why": "enchanted creature doesn't untap"
+  },
+  {
+   "name": "Confounding Conundrum",
+   "needs": [
+    "condition:turn-history-that-player",
+    "effect:that-player-returns-land"
+   ],
+   "why": "whenever a land enters under an opponent's control, if that player had another land enter this turn, they return a land they control"
+  },
+  {
+   "name": "Enigma Thief",
+   "needs": [
+    "keyword:prowl"
+   ],
+   "why": "prowl"
+  },
+  {
+   "name": "Glacial Grasp",
+   "needs": [
+    "effect:mill-controller-of-target"
+   ],
+   "why": "its controller mills two cards"
+  },
+  {
+   "name": "Inscription of Insight",
+   "needs": [
+    "keyword:kicker-any-number-of-modes"
+   ],
+   "why": "if kicked, choose any number of modes"
+  },
+  {
+   "name": "Inscription of Ruin",
+   "needs": [
+    "keyword:kicker-any-number-of-modes"
+   ],
+   "why": "if kicked, choose any number of modes"
+  },
+  {
+   "name": "Kargan Intimidator",
+   "needs": [
+    "effect:modal-activated-ability",
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "{1}: choose one that hasn't been chosen this turn, a mode with a target"
+  },
+  {
+   "name": "Kaza, Roil Chaser",
+   "needs": [
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "the next instant or sorcery spell you cast this turn costs less"
+  },
+  {
+   "name": "Legion Angel",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "a card named Legion Angel from outside the game"
+  },
+  {
+   "name": "Linvala, Shield of Sea Gate",
+   "needs": [
+    "effect:restrict-until-your-next-turn",
+    "effect:prohibit-abilities-until-your-next-turn"
+   ],
+   "why": "until your next turn it can't attack or block and its activated abilities can't be activated"
+  },
+  {
+   "name": "Lithoform Blight",
+   "needs": [
+    "static:static-lose-all-abilities"
+   ],
+   "why": "enchanted land loses all land types and abilities, as a static"
+  },
+  {
+   "name": "Lullmage's Domination",
+   "needs": [
+    "cost:target-controller-graveyard-reduction"
+   ],
+   "why": "costs {3} less if it targets a creature whose controller has eight or more cards in their graveyard"
+  },
+  {
+   "name": "Multiclass Baldric",
+   "needs": [
+    "replacement:prevent-damage-to-attached"
+   ],
+   "why": "full party: prevent all damage that would be dealt to the equipped creature"
+  },
+  {
+   "name": "Nahiri's Binding",
+   "needs": [
+    "static:attached-activated-abilities-prohibited"
+   ],
+   "why": "enchanted permanent's activated abilities can't be activated"
+  },
+  {
+   "name": "Relic Amulet",
+   "needs": [
+    "effect:remove-all-counters"
+   ],
+   "why": "remove all charge counters; that much damage"
+  },
+  {
+   "name": "Relic Vial",
+   "needs": [
+    "trigger:conditional-grant-look-back"
+   ],
+   "why": "a granted dies trigger behind \"as long as you control a Cleric\" must look back in time when the Cleric itself dies (603.10a); the condition is read after it left"
+  },
+  {
+   "name": "Scourge of the Skyclaves",
+   "needs": [
+    "amount:highest-life-total",
+    "bug:cda-all-zones"
+   ],
+   "why": "P/T from the highest life total among players, can go negative"
+  },
+  {
+   "name": "Sizzling Barrage",
+   "needs": [
+    "filter:blocked-this-turn"
+   ],
+   "why": "target creature that blocked this turn"
+  },
+  {
+   "name": "Skyclave Pick-Axe",
+   "needs": [
+    "effect:attached-effect-ref"
+   ],
+   "why": "landfall pump on the equipped creature"
+  },
+  {
+   "name": "Skyclave Shade",
+   "needs": [
+    "new:cast-self-from-graveyard"
+   ],
+   "why": "landfall: you may cast it from your graveyard this turn"
+  },
+  {
+   "name": "Stick Together",
+   "needs": [
+    "effect:choose-party-sacrifice-rest"
+   ],
+   "why": "each player chooses a party and sacrifices the rest"
+  },
+  {
+   "name": "Throne of Makindi",
+   "needs": [
+    "mana:spend-only-kicked-spells"
+   ],
+   "why": "spend this mana only to cast kicked spells: a spell's kicked state isn't known while its cost is paid"
+  },
+  {
+   "name": "Vine Gecko",
+   "needs": [
+    "cost:cost-reduction-if-kicked"
+   ],
+   "why": "the first kicked spell you cast each turn costs {1} less"
+  },
+  {
+   "name": "Whispersteel Dagger",
+   "needs": [
+    "new:cast-from-any-graveyard"
+   ],
+   "why": "cast a creature spell from that player's graveyard this turn"
+  },
+  {
+   "name": "Zulaport Duelist",
+   "needs": [
+    "effect:mill-controller-of-target"
+   ],
+   "why": "fights, then the target's controller mills"
+  }
+ ]
+}

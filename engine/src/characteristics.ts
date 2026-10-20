@@ -669,13 +669,25 @@ function evalStaticCondition(
       return false;
     }
     case "cards-in-graveyard": {
-      let n = 0;
-      for (const id of state.zones.perPlayer[you].graveyard) {
-        if (state.objects[id] === undefined) continue;
-        if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) continue;
-        n += 1;
+      const countIn = (player: PlayerId): number => {
+        let n = 0;
+        for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
+          if (state.objects[id] === undefined) continue;
+          if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) continue;
+          n += 1;
+        }
+        return n;
+      };
+      if (condition.whose !== undefined) {
+        // A player who has left the game took their graveyard with them (800.4a).
+        return state.turnOrder.some(
+          (p) =>
+            (condition.whose === "any-player" || p !== you) &&
+            state.players[p]?.hasLost !== true &&
+            countIn(p) >= condition.atLeast,
+        );
       }
-      return n >= condition.atLeast;
+      return countIn(you) >= condition.atLeast;
     }
     case "delirium": {
       // Distinct card *types*, not cards — one artifact creature is two of
@@ -1567,6 +1579,8 @@ function printedSubtypes(registry: CardRegistry, object: GameObject): readonly s
  * changeling rulings). Only a creature or a kindred takes it: no other
  * object can have creature types (rules 205.3d, 205.3m) — Crib Swap, a
  * "Kindred Instant — Shapeshifter", is every creature type as a spell.
+ * A card's `alsoSubtypes` (Veteran Adventurer's "is also a Cleric, Rogue,
+ * Warrior, and Wizard") is the same kind of CDA and joins here too.
  */
 export function withChangeling(
   def: CardDefinition,
@@ -1575,9 +1589,10 @@ export function withChangeling(
    * of text boxes gave it that card's text (rule 612.5). */
   text: CardDefinition = def,
 ): readonly string[] {
-  return text.keywords.includes("changeling") && (def.types.includes("creature") || def.types.includes("kindred"))
-    ? union(subtypes, [EVERY_CREATURE_TYPE])
-    : subtypes;
+  if (!def.types.includes("creature") && !def.types.includes("kindred")) return subtypes;
+  // "~ is also a Cleric, Rogue, Warrior, and Wizard" — the same kind of CDA.
+  const also = text.alsoSubtypes !== undefined ? union(subtypes, text.alsoSubtypes) : subtypes;
+  return text.keywords.includes("changeling") ? union(also, [EVERY_CREATURE_TYPE]) : also;
 }
 
 /**

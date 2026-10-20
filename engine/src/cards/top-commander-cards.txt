@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3726 already implemented / 1274 missing (marks refreshed 2026-10-20)
+3727 already implemented / 1273 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3434,7 +3434,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3441  Necromantic Selection                    {4}{B}{B}{B}     Sorcery
 [ ]  3442  Fear of Sleep Paralysis                  {5}{U}           Enchantment Creature — Nightmare
 [x]  3443  Forgotten Creation                       {3}{U}           Creature — Zombie Horror
-[ ]  3444  Visions of Beyond                        {U}              Instant
+[x]  3444  Visions of Beyond                        {U}              Instant
 [x]  3445  Charming Scoundrel                       {1}{R}           Creature — Human Rogue
 [x]  3446  Restless Cottage                         {0}              Land
 [ ]  3447  Ardyn, the Usurper                       {5}{B}{B}{B}     Legendary Creature — Elder Human Noble

@@ -101,6 +101,7 @@ import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrystacean from "../pool/crystacean.js";
 import _poolCullingTheWeak from "../pool/culling-the-weak.js";
+import _poolCunningGeysermage from "../pool/cunning-geysermage.js";
 import _poolCurseOfClingingWebs from "../pool/curse-of-clinging-webs.js";
 import _poolCylianElf from "../pool/cylian-elf.js";
 import _poolDarkLeoShredder from "../pool/dark-leo-shredder.js";
@@ -284,6 +285,7 @@ import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
 import _poolOverlordOfTheFloodpits from "../pool/overlord-of-the-floodpits.js";
+import _poolPairedTactician from "../pool/paired-tactician.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
@@ -427,6 +429,7 @@ import _poolTvaBureaucrat from "../pool/tva-bureaucrat.js";
 import _poolTwinbladeBlessing from "../pool/twinblade-blessing.js";
 import _poolTwistedAbomination from "../pool/twisted-abomination.js";
 import _poolTwoHandedAxe from "../pool/two-handed-axe.js";
+import _poolUmaraMystic from "../pool/umara-mystic.js";
 import _poolUnchartedVoyage from "../pool/uncharted-voyage.js";
 import _poolUnderdarkRift from "../pool/underdark-rift.js";
 import _poolUnnaturalSpeed from "../pool/unnatural-speed.js";
@@ -589,6 +592,7 @@ const shard: CardShard = {
     _poolCruelTruths,
     _poolCrystacean,
     _poolCullingTheWeak,
+    _poolCunningGeysermage,
     _poolCurseOfClingingWebs,
     _poolCylianElf,
     _poolDarkLeoShredder,
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolOrazcaPuzzleDoor,
     _poolOriginOfCaptainAmerica,
     _poolOverlordOfTheFloodpits,
+    _poolPairedTactician,
     _poolParcelMyr,
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
@@ -915,6 +920,7 @@ const shard: CardShard = {
     _poolTwinbladeBlessing,
     _poolTwistedAbomination,
     _poolTwoHandedAxe,
+    _poolUmaraMystic,
     _poolUnchartedVoyage,
     _poolUnderdarkRift,
     _poolUnnaturalSpeed,

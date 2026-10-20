@@ -46,6 +46,7 @@ import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
+import _poolBloodchiefsThirst from "../pool/bloodchiefs-thirst.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
 import _poolBlossomDryad from "../pool/blossom-dryad.js";
 import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
@@ -255,6 +256,7 @@ import _poolJoustingDummy from "../pool/jousting-dummy.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
+import _poolKarganWarleader from "../pool/kargan-warleader.js";
 import _poolKeenBuccaneer from "../pool/keen-buccaneer.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
@@ -445,8 +447,10 @@ import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTributaryVaulter from "../pool/tributary-vaulter.js";
 import _poolTributeMage from "../pool/tribute-mage.js";
+import _poolTroveWarden from "../pool/trove-warden.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
+import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
 import _poolUndermine from "../pool/undermine.js";
 import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
@@ -493,6 +497,7 @@ import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
 import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
 import _tokensFishToken from "../tokens/fish-token.js";
+import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
@@ -548,6 +553,7 @@ const shard: CardShard = {
     _poolBlightedBurgeoning,
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
+    _poolBloodchiefsThirst,
     _poolBloodthirstyConqueror,
     _poolBlossomDryad,
     _poolBoltwingMarauder,
@@ -757,6 +763,7 @@ const shard: CardShard = {
     _poolKaitoShizuki,
     _poolKamiOfIndustry,
     _poolKamiOfRestlessShadows,
+    _poolKarganWarleader,
     _poolKeenBuccaneer,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
@@ -947,8 +954,10 @@ const shard: CardShard = {
     _poolTreasureTrove,
     _poolTributaryVaulter,
     _poolTributeMage,
+    _poolTroveWarden,
     _poolTunnelSurveyor,
     _poolTwinflame,
+    _poolUmaraWizard,
     _poolUmezawasCharm,
     _poolUndermine,
     _poolUnexpectedAssistance,
@@ -997,6 +1006,7 @@ const shard: CardShard = {
     _tokensDeathtouchRatToken,
     _tokensElementalTokenDanceOfTheTumbleweeds,
     _tokensFishToken,
+    _tokensGoblinConstructToken,
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
     _tokensKrakenToken,

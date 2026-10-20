@@ -61,6 +61,7 @@ import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
 import _poolCircuitMender from "../pool/circuit-mender.js";
 import _poolCirithUngolPatrol from "../pool/cirith-ungol-patrol.js";
+import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
@@ -130,6 +131,7 @@ import _poolFetidHorror from "../pool/fetid-horror.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFinalWordPhantom from "../pool/final-word-phantom.js";
+import _poolFirebladeCharger from "../pool/fireblade-charger.js";
 import _poolFirstResponder from "../pool/first-responder.js";
 import _poolFlamebornViron from "../pool/flameborn-viron.js";
 import _poolFlayEssence from "../pool/flay-essence.js";
@@ -211,6 +213,7 @@ import _poolKingfisher from "../pool/kingfisher.js";
 import _poolKnightOfTheTusk from "../pool/knight-of-the-tusk.js";
 import _poolKnightWatch from "../pool/knight-watch.js";
 import _poolKnightsPledge from "../pool/knights-pledge.js";
+import _poolKorBlademaster from "../pool/kor-blademaster.js";
 import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
@@ -595,6 +598,7 @@ const shard: CardShard = {
     _poolChitinGravestalker,
     _poolCircuitMender,
     _poolCirithUngolPatrol,
+    _poolClericOfLifesBond,
     _poolClockworkPercussionist,
     _poolCollectorOuphe,
     _poolColossapede,
@@ -664,6 +668,7 @@ const shard: CardShard = {
     _poolFieryIntervention,
     _poolFinFangFoom,
     _poolFinalWordPhantom,
+    _poolFirebladeCharger,
     _poolFirstResponder,
     _poolFlamebornViron,
     _poolFlayEssence,
@@ -745,6 +750,7 @@ const shard: CardShard = {
     _poolKnightOfTheTusk,
     _poolKnightWatch,
     _poolKnightsPledge,
+    _poolKorBlademaster,
     _poolKrarkClanShaman,
     _poolKumenaTyrantOfOrazca,
     _poolKyoshiWarriorGuard,

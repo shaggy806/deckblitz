@@ -88,6 +88,7 @@ import _poolCoralCommando from "../pool/coral-commando.js";
 import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
+import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
 import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
@@ -327,6 +328,7 @@ import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
 import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
+import _poolPelakkaCaverns from "../pool/pelakka-caverns.js";
 import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
@@ -413,6 +415,7 @@ import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
+import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoulShred from "../pool/soul-shred.js";
 import _poolSparringRegimen from "../pool/sparring-regimen.js";
@@ -629,6 +632,7 @@ const shard: CardShard = {
     _poolCorpseBlockade,
     _poolCorrodingDragonstorm,
     _poolCourtOfBounty,
+    _poolCragplateBaloth,
     _poolCrookclawElder,
     _poolCrownOfSkemfar,
     _poolCrystalGrotto,
@@ -868,6 +872,7 @@ const shard: CardShard = {
     _poolOxiddaDaredevil,
     _poolPathToExile,
     _poolPathToTheWorldTree,
+    _poolPelakkaCaverns,
     _poolPerimeterCaptain,
     _poolPerniciousDeed,
     _poolPhantomMonster,
@@ -954,6 +959,7 @@ const shard: CardShard = {
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
     _poolSmelt,
+    _poolSoaringThoughtThief,
     _poolSokkasHaiku,
     _poolSoulShred,
     _poolSparringRegimen,

@@ -104,6 +104,7 @@ import _poolDoomsServoGuards from "../pool/dooms-servo-guards.js";
 import _poolDoseOfDawnglow from "../pool/dose-of-dawnglow.js";
 import _poolDoubleDown from "../pool/double-down.js";
 import _poolDrakeHatchling from "../pool/drake-hatchling.js";
+import _poolDranasSilencer from "../pool/dranas-silencer.js";
 import _poolDreadPresence from "../pool/dread-presence.js";
 import _poolDrossHarvester from "../pool/dross-harvester.js";
 import _poolDrownedDiner from "../pool/drowned-diner.js";
@@ -275,6 +276,7 @@ import _poolMukotaiAmbusher from "../pool/mukotai-ambusher.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
+import _poolNimanaSkitterSneak from "../pool/nimana-skitter-sneak.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
 import _poolNimbleHobbit from "../pool/nimble-hobbit.js";
 import _poolNineFingersKeene from "../pool/nine-fingers-keene.js";
@@ -335,6 +337,7 @@ import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
+import _poolResoluteStrike from "../pool/resolute-strike.js";
 import _poolResourcefulDefense from "../pool/resourceful-defense.js";
 import _poolRestInPeace from "../pool/rest-in-peace.js";
 import _poolRestorationMagic from "../pool/restoration-magic.js";
@@ -435,6 +438,7 @@ import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
 import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
 import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
+import _poolThunderingSparkmage from "../pool/thundering-sparkmage.js";
 import _poolTigerClaws from "../pool/tiger-claws.js";
 import _poolTipTheScales from "../pool/tip-the-scales.js";
 import _poolTitaniasCommand from "../pool/titanias-command.js";
@@ -618,6 +622,7 @@ const shard: CardShard = {
     _poolDoseOfDawnglow,
     _poolDoubleDown,
     _poolDrakeHatchling,
+    _poolDranasSilencer,
     _poolDreadPresence,
     _poolDrossHarvester,
     _poolDrownedDiner,
@@ -789,6 +794,7 @@ const shard: CardShard = {
     _poolNashiMoonsLegacy,
     _poolNecrosynthesis,
     _poolNeverwinterDryad,
+    _poolNimanaSkitterSneak,
     _poolNimbleBladeKhenra,
     _poolNimbleHobbit,
     _poolNineFingersKeene,
@@ -849,6 +855,7 @@ const shard: CardShard = {
     _poolReflectiveGolem,
     _poolRequitingHex,
     _poolResearchAssistant,
+    _poolResoluteStrike,
     _poolResourcefulDefense,
     _poolRestInPeace,
     _poolRestorationMagic,
@@ -949,6 +956,7 @@ const shard: CardShard = {
     _poolThorGuardianOfMidgard,
     _poolThorinOakenshield,
     _poolThrorsMap,
+    _poolThunderingSparkmage,
     _poolTigerClaws,
     _poolTipTheScales,
     _poolTitaniasCommand,

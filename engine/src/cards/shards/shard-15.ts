@@ -133,11 +133,13 @@ import _poolEssenceDrain from "../pool/essence-drain.js";
 import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
+import _poolExpeditionLookout from "../pool/expedition-lookout.js";
 import _poolExtendedAbsence from "../pool/extended-absence.js";
 import _poolEzuriClawOfProgress from "../pool/ezuri-claw-of-progress.js";
 import _poolEzzarootChanneler from "../pool/ezzaroot-channeler.js";
 import _poolFancyFootwork from "../pool/fancy-footwork.js";
 import _poolFangornTreeShepherd from "../pool/fangorn-tree-shepherd.js";
+import _poolFarsightAdept from "../pool/farsight-adept.js";
 import _poolFast from "../pool/fast.js";
 import _poolFatefulEnd from "../pool/fateful-end.js";
 import _poolFelixFiveBoots from "../pool/felix-five-boots.js";
@@ -641,11 +643,13 @@ const shard: CardShard = {
     _poolExaltedSunborn,
     _poolExecutionersCapsule,
     _poolExpandTheSphere,
+    _poolExpeditionLookout,
     _poolExtendedAbsence,
     _poolEzuriClawOfProgress,
     _poolEzzarootChanneler,
     _poolFancyFootwork,
     _poolFangornTreeShepherd,
+    _poolFarsightAdept,
     _poolFast,
     _poolFatefulEnd,
     _poolFelixFiveBoots,

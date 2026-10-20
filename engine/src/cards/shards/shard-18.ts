@@ -278,6 +278,7 @@ import _poolMolecularModifier from "../pool/molecular-modifier.js";
 import _poolMoltenNote from "../pool/molten-note.js";
 import _poolMoltenRebuke from "../pool/molten-rebuke.js";
 import _poolMordenkainensPolymorph from "../pool/mordenkainens-polymorph.js";
+import _poolMossPitSkeleton from "../pool/moss-pit-skeleton.js";
 import _poolMostValuableSlayer from "../pool/most-valuable-slayer.js";
 import _poolMtendaHerder from "../pool/mtenda-herder.js";
 import _poolMukotaiSoulripper from "../pool/mukotai-soulripper.js";
@@ -407,6 +408,7 @@ import _poolStuffedBear from "../pool/stuffed-bear.js";
 import _poolSuffocatingFumes from "../pool/suffocating-fumes.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
+import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
 import _poolSustainerOfTheRealm from "../pool/sustainer-of-the-realm.js";
 import _poolSusurSecundiVoidAltar from "../pool/susur-secundi-void-altar.js";
 import _poolSuturePriest from "../pool/suture-priest.js";
@@ -813,6 +815,7 @@ const shard: CardShard = {
     _poolMoltenNote,
     _poolMoltenRebuke,
     _poolMordenkainensPolymorph,
+    _poolMossPitSkeleton,
     _poolMostValuableSlayer,
     _poolMtendaHerder,
     _poolMukotaiSoulripper,
@@ -942,6 +945,7 @@ const shard: CardShard = {
     _poolSuffocatingFumes,
     _poolSummonKujata,
     _poolSuqataLancer,
+    _poolSureFootedInfiltrator,
     _poolSustainerOfTheRealm,
     _poolSusurSecundiVoidAltar,
     _poolSuturePriest,

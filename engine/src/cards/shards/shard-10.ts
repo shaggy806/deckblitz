@@ -52,6 +52,7 @@ import _poolBlasphemousAct from "../pool/blasphemous-act.js";
 import _poolBlightbellyRat from "../pool/blightbelly-rat.js";
 import _poolBlisteringFirecat from "../pool/blistering-firecat.js";
 import _poolBlizzardElemental from "../pool/blizzard-elemental.js";
+import _poolBloodPrice from "../pool/blood-price.js";
 import _poolBloodSeeker from "../pool/blood-seeker.js";
 import _poolBloodgiftDemon from "../pool/bloodgift-demon.js";
 import _poolBlossomingDefense from "../pool/blossoming-defense.js";
@@ -82,6 +83,7 @@ import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
+import _poolCinderclasm from "../pool/cinderclasm.js";
 import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
@@ -150,6 +152,7 @@ import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
+import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
 import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
 import _poolFeralAbomination from "../pool/feral-abomination.js";
@@ -254,6 +257,7 @@ import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLuminarchAspirant from "../pool/luminarch-aspirant.js";
 import _poolLyraDawnbringer from "../pool/lyra-dawnbringer.js";
 import _poolMagistratesScepter from "../pool/magistrates-scepter.js";
+import _poolMagmaticChanneler from "../pool/magmatic-channeler.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
 import _poolMajesticMetamorphosis from "../pool/majestic-metamorphosis.js";
 import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
@@ -435,6 +439,7 @@ import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
 import _poolTerritoryForge from "../pool/territory-forge.js";
+import _poolTheDestinedThief from "../pool/the-destined-thief.js";
 import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
@@ -516,6 +521,7 @@ import _tokensBeastTokenGarrukVeiledButcher from "../tokens/beast-token-garruk-v
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
+import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
@@ -575,6 +581,7 @@ const shard: CardShard = {
     _poolBlightbellyRat,
     _poolBlisteringFirecat,
     _poolBlizzardElemental,
+    _poolBloodPrice,
     _poolBloodSeeker,
     _poolBloodgiftDemon,
     _poolBlossomingDefense,
@@ -605,6 +612,7 @@ const shard: CardShard = {
     _poolChaosMutation,
     _poolChapelGeist,
     _poolChildOfThePack,
+    _poolCinderclasm,
     _poolCinderingCutthroat,
     _poolCitanulHierophants,
     _poolCivicWayfinder,
@@ -673,6 +681,7 @@ const shard: CardShard = {
     _poolEverflowingChalice,
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
+    _poolFearlessFledgling,
     _poolFecundity,
     _poolFeedTheSwarm,
     _poolFeralAbomination,
@@ -777,6 +786,7 @@ const shard: CardShard = {
     _poolLuminarchAspirant,
     _poolLyraDawnbringer,
     _poolMagistratesScepter,
+    _poolMagmaticChanneler,
     _poolMajaBretagardProtector,
     _poolMajesticMetamorphosis,
     _poolMalametBattleGlyph,
@@ -958,6 +968,7 @@ const shard: CardShard = {
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
     _poolTerritoryForge,
+    _poolTheDestinedThief,
     _poolTheMastersOfEvil,
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
@@ -1041,6 +1052,7 @@ const shard: CardShard = {
     _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,
+    _tokensHydraTokenBlackGreen,
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,

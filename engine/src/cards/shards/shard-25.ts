@@ -196,6 +196,7 @@ import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
 import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
+import _poolGomaFadaVanguard from "../pool/goma-fada-vanguard.js";
 import _poolGraftedExoskeleton from "../pool/grafted-exoskeleton.js";
 import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGrandEntrywayElegantRotunda from "../pool/grand-entryway-elegant-rotunda.js";
@@ -268,6 +269,7 @@ import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
+import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -379,8 +381,10 @@ import _poolSandScout from "../pool/sand-scout.js";
 import _poolSandsower from "../pool/sandsower.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
+import _poolScorchRider from "../pool/scorch-rider.js";
 import _poolScourgeOfFleets from "../pool/scourge-of-fleets.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
+import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
 import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
@@ -440,6 +444,7 @@ import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
 import _poolThatsMine from "../pool/thats-mine.js";
+import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
@@ -716,6 +721,7 @@ const shard: CardShard = {
     _poolGoldenEgg,
     _poolGoldnightCommander,
     _poolGolemsHeart,
+    _poolGomaFadaVanguard,
     _poolGraftedExoskeleton,
     _poolGrahaTiaScionReborn,
     _poolGrandEntrywayElegantRotunda,
@@ -788,6 +794,7 @@ const shard: CardShard = {
     _poolMeltstridersGear,
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,
+    _poolMerfolkFalconer,
     _poolMineRaider,
     _poolMinotaurAbomination,
     _poolMiscalculation,
@@ -899,8 +906,10 @@ const shard: CardShard = {
     _poolSandsower,
     _poolSarkhansUnsealing,
     _poolSauronDinoDevotee,
+    _poolScorchRider,
     _poolScourgeOfFleets,
     _poolScuteSwarm,
+    _poolSeaGateStormcaller,
     _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,
     _poolSecretPassage,
@@ -960,6 +969,7 @@ const shard: CardShard = {
     _poolTetherTechnician,
     _poolTextbookTabulator,
     _poolThatsMine,
+    _poolTheDestinedBlackMage,
     _poolTheLegendOfRoku,
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
