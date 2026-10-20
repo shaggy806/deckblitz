@@ -5022,3 +5022,21 @@ creature you control, after which it isn't a creature, or unattaches it
   own first ability. The Octopus, unattached, attacks as a 2/2 and draws a card on hitting. After the
   unattach the Boar is a 3/2 creature again, untapped, able to block. Check at ~768px tall, in a 2- and
   a 4-player room.
+
+## Cleave (2026-10-19)
+
+### Alchemist's Retrieval and Lantern Flare (cleave)
+
+*New cast choice* — cleave (rule 702.148): an alternative cost that removes the bracketed text, offered
+as a second "Cast" beside the normal one
+
+- **Setup:** Your precombat main. Your battlefield: Memnite, Grizzly Bears and five Plains, two
+  Islands and two Mountains; in hand Alchemist's Retrieval and Lantern Flare. The opponent has a Hill
+  Giant.
+- **Do:** Click Alchemist's Retrieval: the menu offers "Cast Alchemist's Retrieval" and "… (cleave
+  {1}{U})". Cast the cleave one at the Hill Giant. Then cast Lantern Flare's cleave with X = 3 at
+  something, and next turn its normal cast.
+- **Check:** The normal Retrieval offers only your own nonland permanents; the cleaved one any nonland
+  permanent, and the Giant goes to its owner's hand for {1}{U}. Lantern Flare cleaved asks for X and
+  deals and gains X; cast normally it deals and gains 2 (your two creatures) without asking. Check at
+  ~768px tall, in a 2- and a 4-player room.

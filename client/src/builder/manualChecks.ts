@@ -2986,4 +2986,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Bronzeplate Boar', 'Acquisition Octopus', 'Grizzly Bears', 'Mountain*7'] },
     }),
   ),
+  preset(
+    "Alchemist's Retrieval and Lantern Flare (cleave)",
+    board({
+      you: {
+        bf: ['Memnite', 'Grizzly Bears', 'Plains*5', 'Island*2', 'Mountain*2'],
+        hand: ["Alchemist's Retrieval", 'Lantern Flare'],
+      },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]
