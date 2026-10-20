@@ -254,6 +254,7 @@ import _poolMassiveMight from "../pool/massive-might.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
+import _poolMeglonoth from "../pool/meglonoth.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
@@ -749,6 +750,7 @@ const shard: CardShard = {
     _poolMasterTransmuter,
     _poolMeatLocker,
     _poolMechanNavigator,
+    _poolMeglonoth,
     _poolMetalworkColossus,
     _poolMindMeanderer,
     _poolMistCloakedHerald,

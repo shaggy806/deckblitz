@@ -222,6 +222,7 @@ import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
 import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
+import _poolInfernalMedusa from "../pool/infernal-medusa.js";
 import _poolInfinityFormula from "../pool/infinity-formula.js";
 import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
@@ -757,6 +758,7 @@ const shard: CardShard = {
     _poolInallaArchmageRitualist,
     _poolIndulgingPatrician,
     _poolInevitableDefeat,
+    _poolInfernalMedusa,
     _poolInfinityFormula,
     _poolInquisitionOfKozilek,
     _poolInspiringOverseer,

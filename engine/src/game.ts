@@ -18748,9 +18748,12 @@ export class Game {
             event.type === "attacker-blocked"
           ? event.attacker
           : // The blocker: "whenever a creature you control blocks, it
-            // gets +X/+X" (Doran, Besieged by Time).
+            // gets +X/+X" (Doran, Besieged by Time) — or the creature it
+            // blocks, for "blocks a creature, … that creature" (Wall of Frost).
             event.type === "blocker-declared"
-            ? event.blocker
+            ? trigger.on === "blocks" && trigger.object === "blocked"
+              ? event.attacker
+              : event.blocker
             : event.type === "object-targeted"
             ? event.object
             : // The ability just activated: "copy that ability".

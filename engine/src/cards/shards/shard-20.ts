@@ -509,6 +509,7 @@ import _poolVoraciousHydra from "../pool/voracious-hydra.js";
 import _poolVorpalSword from "../pool/vorpal-sword.js";
 import _poolVoyagingSatyr from "../pool/voyaging-satyr.js";
 import _poolVulshokBerserker from "../pool/vulshok-berserker.js";
+import _poolWallOfFrost from "../pool/wall-of-frost.js";
 import _poolWaytaTrainerProdigy from "../pool/wayta-trainer-prodigy.js";
 import _poolWeddingFestivity from "../pool/wedding-festivity.js";
 import _poolWeldfastEngineer from "../pool/weldfast-engineer.js";
@@ -1047,6 +1048,7 @@ const shard: CardShard = {
     _poolVorpalSword,
     _poolVoyagingSatyr,
     _poolVulshokBerserker,
+    _poolWallOfFrost,
     _poolWaytaTrainerProdigy,
     _poolWeddingFestivity,
     _poolWeldfastEngineer,

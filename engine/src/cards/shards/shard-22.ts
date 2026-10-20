@@ -68,6 +68,7 @@ import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
 import _poolChokedEstuary from "../pool/choked-estuary.js";
 import _poolChompingChangeling from "../pool/chomping-changeling.js";
 import _poolCitizensArrest from "../pool/citizens-arrest.js";
+import _poolClericOfChillDepths from "../pool/cleric-of-chill-depths.js";
 import _poolCoalGolem from "../pool/coal-golem.js";
 import _poolColdsteelHeart from "../pool/coldsteel-heart.js";
 import _poolCollectiveResistance from "../pool/collective-resistance.js";
@@ -570,6 +571,7 @@ const shard: CardShard = {
     _poolChokedEstuary,
     _poolChompingChangeling,
     _poolCitizensArrest,
+    _poolClericOfChillDepths,
     _poolCoalGolem,
     _poolColdsteelHeart,
     _poolCollectiveResistance,

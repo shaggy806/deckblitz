@@ -7,6 +7,7 @@ import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAdeptWatershaper from "../pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "../pool/adewale-breaker-of-chains.js";
+import _poolAetherMembrane from "../pool/aether-membrane.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
@@ -498,6 +499,7 @@ const shard: CardShard = {
     _poolAbandonedOutpost,
     _poolAdeptWatershaper,
     _poolAdewaleBreakerOfChains,
+    _poolAetherMembrane,
     _poolAirbendersReversal,
     _poolAjaniCallerOfThePride,
     _poolAkrasanSquire,

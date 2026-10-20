@@ -144,6 +144,7 @@ import _poolAetherChanneler from "./pool/aether-channeler.js";
 import _poolAetherGale from "./pool/aether-gale.js";
 import _poolAetherHelix from "./pool/aether-helix.js";
 import _poolAetherHub from "./pool/aether-hub.js";
+import _poolAetherMembrane from "./pool/aether-membrane.js";
 import _poolAetherSpellbomb from "./pool/aether-spellbomb.js";
 import _poolAetherSyphon from "./pool/aether-syphon.js";
 import _poolAetherTunnel from "./pool/aether-tunnel.js";
@@ -2344,6 +2345,7 @@ import _poolCleonMerryChampion from "./pool/cleon-merry-champion.js";
 import _poolCleopatraExiledPharaoh from "./pool/cleopatra-exiled-pharaoh.js";
 import _poolClergyEnVec from "./pool/clergy-en-vec.js";
 import _poolClericClass from "./pool/cleric-class.js";
+import _poolClericOfChillDepths from "./pool/cleric-of-chill-depths.js";
 import _poolCleverConcealment from "./pool/clever-concealment.js";
 import _poolCleverDistraction from "./pool/clever-distraction.js";
 import _poolCleverImpersonator from "./pool/clever-impersonator.js";
@@ -6543,6 +6545,7 @@ import _poolInfectiousInquiry from "./pool/infectious-inquiry.js";
 import _poolInfernalCaptor from "./pool/infernal-captor.js";
 import _poolInfernalGrasp from "./pool/infernal-grasp.js";
 import _poolInfernalIdol from "./pool/infernal-idol.js";
+import _poolInfernalMedusa from "./pool/infernal-medusa.js";
 import _poolInfernalPhantom from "./pool/infernal-phantom.js";
 import _poolInfernalPlunge from "./pool/infernal-plunge.js";
 import _poolInfernalRebirth from "./pool/infernal-rebirth.js";
@@ -6973,6 +6976,7 @@ import _poolKabutoMoth from "./pool/kabuto-moth.js";
 import _poolKadenaSlinkingSorcerer from "./pool/kadena-slinking-sorcerer.js";
 import _poolKaervekTheMerciless from "./pool/kaervek-the-merciless.js";
 import _poolKaervekThePunisher from "./pool/kaervek-the-punisher.js";
+import _poolKaijinOfTheVanishingTouch from "./pool/kaijin-of-the-vanishing-touch.js";
 import _poolKaimaTheFracturedCalm from "./pool/kaima-the-fractured-calm.js";
 import _poolKaitoCunningInfiltrator from "./pool/kaito-cunning-infiltrator.js";
 import _poolKaitoShizuki from "./pool/kaito-shizuki.js";
@@ -7370,6 +7374,7 @@ import _poolLaboratoryBrute from "./pool/laboratory-brute.js";
 import _poolLaboratoryDrudge from "./pool/laboratory-drudge.js";
 import _poolLaboratoryManiac from "./pool/laboratory-maniac.js";
 import _poolLabyrinthAdversary from "./pool/labyrinth-adversary.js";
+import _poolLabyrinthMinotaur from "./pool/labyrinth-minotaur.js";
 import _poolLabyrinthOfSkophos from "./pool/labyrinth-of-skophos.js";
 import _poolLaceWithMoonglove from "./pool/lace-with-moonglove.js";
 import _poolLacerateFlesh from "./pool/lacerate-flesh.js";
@@ -8160,6 +8165,7 @@ import _poolMegaFlare from "./pool/mega-flare.js";
 import _poolMeganticSliver from "./pool/megantic-sliver.js";
 import _poolMegatog from "./pool/megatog.js";
 import _poolMegatonsFate from "./pool/megatons-fate.js";
+import _poolMeglonoth from "./pool/meglonoth.js";
 import _poolMegrim from "./pool/megrim.js";
 import _poolMelancholicPoet from "./pool/melancholic-poet.js";
 import _poolMeldedMoxite from "./pool/melded-moxite.js";
@@ -14532,6 +14538,7 @@ import _poolVernadiShieldmate from "./pool/vernadi-shieldmate.js";
 import _poolVernalFen from "./pool/vernal-fen.js";
 import _poolVernalSovereign from "./pool/vernal-sovereign.js";
 import _poolVertexPaladin from "./pool/vertex-paladin.js";
+import _poolVertigoSpawn from "./pool/vertigo-spawn.js";
 import _poolVesperGhoul from "./pool/vesper-ghoul.js";
 import _poolVesselOfEndlessRest from "./pool/vessel-of-endless-rest.js";
 import _poolVesselOfEphemera from "./pool/vessel-of-ephemera.js";
@@ -14840,6 +14847,7 @@ import _poolWallOfDistortion from "./pool/wall-of-distortion.js";
 import _poolWallOfEarth from "./pool/wall-of-earth.js";
 import _poolWallOfFaith from "./pool/wall-of-faith.js";
 import _poolWallOfFire from "./pool/wall-of-fire.js";
+import _poolWallOfFrost from "./pool/wall-of-frost.js";
 import _poolWallOfGranite from "./pool/wall-of-granite.js";
 import _poolWallOfHeat from "./pool/wall-of-heat.js";
 import _poolWallOfIce from "./pool/wall-of-ice.js";
@@ -14861,6 +14869,7 @@ import _poolWallOfSpears from "./pool/wall-of-spears.js";
 import _poolWallOfStone from "./pool/wall-of-stone.js";
 import _poolWallOfSwords from "./pool/wall-of-swords.js";
 import _poolWallOfTanglecord from "./pool/wall-of-tanglecord.js";
+import _poolWallOfTears from "./pool/wall-of-tears.js";
 import _poolWallOfTorches from "./pool/wall-of-torches.js";
 import _poolWallOfVines from "./pool/wall-of-vines.js";
 import _poolWallOfWater from "./pool/wall-of-water.js";
@@ -16154,6 +16163,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAetherGale,
   _poolAetherHelix,
   _poolAetherHub,
+  _poolAetherMembrane,
   _poolAetherSpellbomb,
   _poolAetherSyphon,
   _poolAetherTunnel,
@@ -18354,6 +18364,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCleopatraExiledPharaoh,
   _poolClergyEnVec,
   _poolClericClass,
+  _poolClericOfChillDepths,
   _poolCleverConcealment,
   _poolCleverDistraction,
   _poolCleverImpersonator,
@@ -22553,6 +22564,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfernalCaptor,
   _poolInfernalGrasp,
   _poolInfernalIdol,
+  _poolInfernalMedusa,
   _poolInfernalPhantom,
   _poolInfernalPlunge,
   _poolInfernalRebirth,
@@ -22983,6 +22995,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKadenaSlinkingSorcerer,
   _poolKaervekTheMerciless,
   _poolKaervekThePunisher,
+  _poolKaijinOfTheVanishingTouch,
   _poolKaimaTheFracturedCalm,
   _poolKaitoCunningInfiltrator,
   _poolKaitoShizuki,
@@ -23380,6 +23393,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLaboratoryDrudge,
   _poolLaboratoryManiac,
   _poolLabyrinthAdversary,
+  _poolLabyrinthMinotaur,
   _poolLabyrinthOfSkophos,
   _poolLaceWithMoonglove,
   _poolLacerateFlesh,
@@ -24170,6 +24184,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeganticSliver,
   _poolMegatog,
   _poolMegatonsFate,
+  _poolMeglonoth,
   _poolMegrim,
   _poolMelancholicPoet,
   _poolMeldedMoxite,
@@ -30542,6 +30557,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVernalFen,
   _poolVernalSovereign,
   _poolVertexPaladin,
+  _poolVertigoSpawn,
   _poolVesperGhoul,
   _poolVesselOfEndlessRest,
   _poolVesselOfEphemera,
@@ -30850,6 +30866,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallOfEarth,
   _poolWallOfFaith,
   _poolWallOfFire,
+  _poolWallOfFrost,
   _poolWallOfGranite,
   _poolWallOfHeat,
   _poolWallOfIce,
@@ -30871,6 +30888,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallOfStone,
   _poolWallOfSwords,
   _poolWallOfTanglecord,
+  _poolWallOfTears,
   _poolWallOfTorches,
   _poolWallOfVines,
   _poolWallOfWater,

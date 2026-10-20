@@ -218,6 +218,7 @@ import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
 import _poolJuvenileMistDragon from "../pool/juvenile-mist-dragon.js";
+import _poolKaijinOfTheVanishingTouch from "../pool/kaijin-of-the-vanishing-touch.js";
 import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
@@ -722,6 +723,7 @@ const shard: CardShard = {
     _poolJunkDiver,
     _poolJuvenileGloomwidow,
     _poolJuvenileMistDragon,
+    _poolKaijinOfTheVanishingTouch,
     _poolKalamaxTheStormsire,
     _poolKelinoreBat,
     _poolKillMaimBurn,

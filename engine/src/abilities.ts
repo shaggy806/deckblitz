@@ -1259,6 +1259,10 @@ export type TriggerSpec =
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
+      /** `"blocked"`: "whenever this creature blocks **a creature**, … **that
+       * creature**" (Wall of Frost, Wall of Tears) — the trigger object is
+       * the creature it blocks, not the blocker. */
+      readonly object?: "blocked";
     }
   | {
       /**

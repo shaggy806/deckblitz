@@ -242,6 +242,7 @@ import _poolKotisSibsigChampion from "../pool/kotis-sibsig-champion.js";
 import _poolKrakenHatchling from "../pool/kraken-hatchling.js";
 import _poolKranioceros from "../pool/kranioceros.js";
 import _poolKutzilMalametExemplar from "../pool/kutzil-malamet-exemplar.js";
+import _poolLabyrinthMinotaur from "../pool/labyrinth-minotaur.js";
 import _poolLandscapePainter from "../pool/landscape-painter.js";
 import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
@@ -745,6 +746,7 @@ const shard: CardShard = {
     _poolKrakenHatchling,
     _poolKranioceros,
     _poolKutzilMalametExemplar,
+    _poolLabyrinthMinotaur,
     _poolLandscapePainter,
     _poolLargerThanLife,
     _poolLegionLoyalty,

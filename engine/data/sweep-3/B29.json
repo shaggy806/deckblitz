@@ -410,6 +410,13 @@
         "engine/src/cards/pool/hammers-of-moradin.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Wall of Frost",
+      "files": [
+        "engine/src/cards/pool/wall-of-frost.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -552,13 +559,6 @@
         "new:exploit"
       ],
       "why": "exploit and its 'when this exploits' trigger unmodeled; no spell-or-ability counter target"
-    },
-    {
-      "name": "Wall of Frost",
-      "needs": [
-        "new:doesnt-untap-without-tapping"
-      ],
-      "why": "doesntUntapNext exists only on the tap effect, which would wrongly tap a vigilant attacker"
     },
     {
       "name": "Endless Foot Assault",
