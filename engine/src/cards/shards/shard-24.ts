@@ -457,6 +457,7 @@ import _poolWirewoodElf from "../pool/wirewood-elf.js";
 import _poolWitchsOven from "../pool/witchs-oven.js";
 import _poolWitherbloomPledgemage from "../pool/witherbloom-pledgemage.js";
 import _poolWorldShaper from "../pool/world-shaper.js";
+import _poolWorldgorgerDragon from "../pool/worldgorger-dragon.js";
 import _poolWranglerOfTheDamned from "../pool/wrangler-of-the-damned.js";
 import _poolYotianDissident from "../pool/yotian-dissident.js";
 import _poolZephyrSprite from "../pool/zephyr-sprite.js";
@@ -931,6 +932,7 @@ const shard: CardShard = {
     _poolWitchsOven,
     _poolWitherbloomPledgemage,
     _poolWorldShaper,
+    _poolWorldgorgerDragon,
     _poolWranglerOfTheDamned,
     _poolYotianDissident,
     _poolZephyrSprite,

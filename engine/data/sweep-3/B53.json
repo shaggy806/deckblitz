@@ -322,6 +322,13 @@
         "engine/src/cards/pool/the-notary-hobbits.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Darksteel Angel",
+      "files": [
+        "engine/src/cards/pool/darksteel-angel.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -381,13 +388,6 @@
         "trigger:attacks-alone-player"
       ],
       "why": "prohibits.abilitiesOf covers only permanents' abilities, mana abilities included (not 'abilities that aren't mana abilities' from any zone); attacks-alone can't require that the lone attacker attacks a player"
-    },
-    {
-      "name": "Darksteel Angel",
-      "needs": [
-        "static:counters-cant-be-put"
-      ],
-      "why": "no 'creatures you control can't have -1/-1 counters put on them' static (Platinum Angel's half is built)"
     },
     {
       "name": "Jace, Multiverse Architect",

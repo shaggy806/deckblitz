@@ -98,6 +98,7 @@ import _poolDarkFortress from "../pool/dark-fortress.js";
 import _poolDarkOffering from "../pool/dark-offering.js";
 import _poolDarkProphecy from "../pool/dark-prophecy.js";
 import _poolDarklingStalker from "../pool/darkling-stalker.js";
+import _poolDarksteelAngel from "../pool/darksteel-angel.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
 import _poolDawnstrikeVanguard from "../pool/dawnstrike-vanguard.js";
 import _poolDazzlingDenial from "../pool/dazzling-denial.js";
@@ -608,6 +609,7 @@ const shard: CardShard = {
     _poolDarkOffering,
     _poolDarkProphecy,
     _poolDarklingStalker,
+    _poolDarksteelAngel,
     _poolDaughterOfTheDeep,
     _poolDawnstrikeVanguard,
     _poolDazzlingDenial,

@@ -1797,6 +1797,14 @@ export type EffectSpec =
        * `exile`'s `untilSourceLeaves` (rule 610.3), for every card this
        * exiles — nothing at all if the source has already left (610.3a). */
       readonly untilSourceLeaves?: boolean;
+      /** "Exile all **other** permanents you control" (Worldgorger Dragon):
+       * never the effect's own source. */
+      readonly exceptSource?: boolean;
+      /** Exile them **with this source** (rule 607.2a), as `exile`'s
+       * `linked`: a later ability of it reaches "the exiled cards" —
+       * Worldgorger Dragon's leaves trigger, a `return-exiled-by-source` of
+       * `linked: "battlefield"`. */
+      readonly linked?: boolean;
     }
   | {
       /** "This Case becomes solved" (rule 719.3a) — a Case's "To solve —"
@@ -5614,7 +5622,7 @@ export interface EffectApi {
   /** Exile every battlefield permanent matching `filter` but `except` — see
    * `exile-all`; `airbend` airbends them (rule 701.65a), `untilSourceLeaves`
    * exiles them until the source leaves the battlefield (610.3). */
-  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId, untilSourceLeaves?: boolean): void;
+  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId, untilSourceLeaves?: boolean, linked?: boolean): void;
   /** Deal `amount` damage to every battlefield permanent matching `filter`. */
   damageAll(
     filter: CardFilter,
@@ -8440,8 +8448,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.exileAll(
         spec.filter,
         spec.airbend === true,
-        spared?.kind === "object" ? spared.object : undefined,
+        spec.exceptSource === true ? ctx.source : spared?.kind === "object" ? spared.object : undefined,
         spec.untilSourceLeaves === true,
+        spec.linked === true,
       );
       return;
     }

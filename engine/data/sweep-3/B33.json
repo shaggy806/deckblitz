@@ -779,6 +779,13 @@
         "engine/src/cards/pool/cosmic-hunger.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Worldgorger Dragon",
+      "files": [
+        "engine/src/cards/pool/worldgorger-dragon.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1317,13 +1324,6 @@
         "effect:mana-ability-dynamic-amount"
       ],
       "why": "a mana ability's resolution context has no 'sacrificed' ref, so manaValueOf sacrificed reads nothing"
-    },
-    {
-      "name": "Worldgorger Dragon",
-      "needs": [
-        "new:exile-all-linked"
-      ],
-      "why": "exile-all has no linked/exiledWith option for 'return the exiled cards' (and must exile even if the Dragon already left)"
     },
     {
       "name": "Pre-War Formalwear",

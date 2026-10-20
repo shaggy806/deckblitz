@@ -20443,9 +20443,20 @@ export class Game {
         }
       },
       returnToHandAll: (filter) => this.returnToHandAllByEffect(controller, filter),
-      exileAll: (filter, airbend, except, untilSourceLeaves) => {
+      exileAll: (filter, airbend, except, untilSourceLeaves, linked) => {
         if (untilSourceLeaves !== true) {
-          this.exileAllByEffect(controller, filter, airbend === true, except);
+          // "Exile … with this" (rule 607.2a): linked to the stint the
+          // resolving ability refers to.
+          const src = this.state.objects[source];
+          const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+          this.exileAllByEffect(
+            controller,
+            filter,
+            airbend === true,
+            except,
+            undefined,
+            linked === true && stint !== undefined ? { source, zoneChangeCount: stint } : undefined,
+          );
           return;
         }
         // Rule 610.3a, as `exileObject`'s: a source already gone, or back as
@@ -27672,6 +27683,9 @@ export class Game {
     /** "Until [the source] leaves the battlefield" (rule 610.3): the source
      * and the stint each card comes back with, and who exiled it. */
     until?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly by: PlayerId },
+    /** "Exile … with this" (rule 607.2a): the source stint each card is
+     * linked to, counted on the source as `exile`'s `linked` does. */
+    linkedTo?: { readonly source: ObjectId; readonly zoneChangeCount: number },
   ): void {
     this.withLeaveBatch(() => {
       const victims = this.battlefieldMatching(you, filter).filter((id) => id !== except);
@@ -27683,6 +27697,14 @@ export class Game {
         if (until !== undefined && exiled?.zone === "exile" && exiled.zoneChangeCount !== before) {
           exiled.exiledUntil = { source: until.source, zoneChangeCount: until.zoneChangeCount };
           exiled.exiledByPlayer = until.by;
+        }
+        if (linkedTo !== undefined && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
+          exiled.exiledWith = { source: linkedTo.source, zoneChangeCount: linkedTo.zoneChangeCount };
+          const src = this.state.objects[linkedTo.source];
+          if (src !== undefined) {
+            const sofar = src.exiledWithCount?.stint === linkedTo.zoneChangeCount ? src.exiledWithCount.count : 0;
+            src.exiledWithCount = { stint: linkedTo.zoneChangeCount, count: sofar + 1 };
+          }
         }
         // "Airbend all other creatures" (rule 701.65a): each card exiled
         // this way may be cast by its owner for {2}; a token is gone (111.7).

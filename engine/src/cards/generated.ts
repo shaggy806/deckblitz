@@ -2988,6 +2988,7 @@ import _poolDarkness from "./pool/darkness.js";
 import _poolDarkslickDrake from "./pool/darkslick-drake.js";
 import _poolDarkslickShores from "./pool/darkslick-shores.js";
 import _poolDarkstarAugur from "./pool/darkstar-augur.js";
+import _poolDarksteelAngel from "./pool/darksteel-angel.js";
 import _poolDarksteelAxe from "./pool/darksteel-axe.js";
 import _poolDarksteelCitadel from "./pool/darksteel-citadel.js";
 import _poolDarksteelColossus from "./pool/darksteel-colossus.js";
@@ -15330,6 +15331,7 @@ import _poolWorldChampionCelestialWeapon from "./pool/world-champion-celestial-w
 import _poolWorldMap from "./pool/world-map.js";
 import _poolWorldShaper from "./pool/world-shaper.js";
 import _poolWorldWeary from "./pool/world-weary.js";
+import _poolWorldgorgerDragon from "./pool/worldgorger-dragon.js";
 import _poolWorldlyTutor from "./pool/worldly-tutor.js";
 import _poolWormholeSerpent from "./pool/wormhole-serpent.js";
 import _poolWornPowerstone from "./pool/worn-powerstone.js";
@@ -18987,6 +18989,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDarkslickDrake,
   _poolDarkslickShores,
   _poolDarkstarAugur,
+  _poolDarksteelAngel,
   _poolDarksteelAxe,
   _poolDarksteelCitadel,
   _poolDarksteelColossus,
@@ -31329,6 +31332,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorldMap,
   _poolWorldShaper,
   _poolWorldWeary,
+  _poolWorldgorgerDragon,
   _poolWorldlyTutor,
   _poolWormholeSerpent,
   _poolWornPowerstone,
