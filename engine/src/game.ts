@@ -19695,6 +19695,12 @@ export class Game {
     };
     const departedSource = (): LastKnownInfo | undefined =>
       refs.source === undefined ? undefined : this.lastKnownOfStint(source, refs.source);
+    // What the source chose as it entered, in the stint this refers to: as it
+    // last existed once it has left (rule 608.2h), else as it is now.
+    const chosenOfSource = (): string | null | undefined => {
+      const departed = departedSource();
+      return departed !== undefined ? departed.chosenOnEnter : this.state.objects[source]?.chosenOnEnter;
+    };
     // "For as long as [this] remains on the battlefield": the source in the
     // stint this refers to, or nothing if it has left (rule 611.2b).
     const lastingHere = (duration: PtDuration): EffectDuration => {
@@ -21111,12 +21117,12 @@ export class Game {
       populate: () => this.populate(controller, source, x),
       encore: () => this.encore(controller, source),
       chosenColorOfSource: () => {
-        const chosen = this.state.objects[source]?.chosenOnEnter;
+        const chosen = chosenOfSource();
         return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
       },
       commanderColors: () => this.state.players[controller]?.commanderIdentity ?? [],
       chosenNumberOfSource: () => {
-        const chosen = this.state.objects[source]?.chosenOnEnter;
+        const chosen = chosenOfSource();
         const n = typeof chosen === "string" ? Number(chosen) : Number.NaN;
         return Number.isInteger(n) ? n : undefined;
       },

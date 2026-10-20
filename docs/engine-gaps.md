@@ -129,11 +129,6 @@ that needs it is authored.
 
 
 
-- **A source's chosen colour or number isn't read from last-known information** (latent). Since
-  2026-10-09 `chosenOnEnter` is in `LastKnownInfo` (Outpost Siege's chosen side), but
-  `chosenColorOfSource` / `chosenNumberOfSource` (`game.ts`) read only the live object, so an
-  effect resolving after its source left doesn't see the chosen value. No pool card is known to
-  hit it.
 - **Counters put as a cost skip counter replacements and prohibitions.** `putCostCounters`
   (Wall of Roots' -0/-1, Devoted Druid's -1/-1) puts them straight on. Right for "if an effect
   would put counters" (Doubling Season), wrong for one that isn't worded so (Vizier of Remedies)
