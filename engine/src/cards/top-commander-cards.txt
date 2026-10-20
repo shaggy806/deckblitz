@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3719 already implemented / 1281 missing (marks refreshed 2026-10-20)
+3720 already implemented / 1280 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2357,7 +2357,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2364  Toxrill, the Corrosive                   {5}{B}{B}        Legendary Creature — Slug Horror
 [x]  2365  Circle of Power                          {3}{B}           Sorcery
 [ ]  2366  Bow of Nylea                             {1}{G}{G}        Legendary Enchantment Artifact
-[ ]  2367  Worldspine Wurm                          {8}{G}{G}{G}     Creature — Wurm
+[x]  2367  Worldspine Wurm                          {8}{G}{G}{G}     Creature — Wurm
 [ ]  2368  Bruenor Battlehammer                     {2}{R}{W}        Legendary Creature — Dwarf Warrior
 [x]  2369  Dictate of the Twin Gods                 {3}{R}{R}        Enchantment
 [x]  2370  Kona, Rescue Beastie                     {3}{G}           Legendary Creature — Beast Survivor
