@@ -42,6 +42,7 @@
     "card:brief": "node scripts/card-brief.mjs",
     "card:vocab": "node scripts/card-vocab.mjs",
     "card:find": "node scripts/card-find.mjs",
+    "card:digest": "node scripts/card-digest.mjs",
     "cards:mark": "npm run build && node scripts/top-commander-cards.mjs --refresh",
     "cmdrs:top": "npm run build && node scripts/top-commanders.mjs",
     "cmdrs:mark": "npm run build && node scripts/top-commanders.mjs --refresh",

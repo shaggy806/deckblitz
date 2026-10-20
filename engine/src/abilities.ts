@@ -651,6 +651,12 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** "When this Class becomes level `level`" (rule 716.2a): `who: "self"`. */
+      readonly on: "class-level-gained";
+      readonly who: TriggerWho;
+      readonly level: number;
+    }
+  | {
       /**
        * A Room's door was unlocked (rule 709.5h) — the `door-unlocked` event.
        * "When you unlock this door" is `who: "self"` with `door` the half
@@ -660,12 +666,6 @@ export type TriggerSpec =
        * a Room" (Entity Tracker's eerie) is `fully: true` (709.5i), `who` the
        * Room's controller. `filter` narrows the Room.
        */
-      readonly on: "class-level-gained";
-      /** "When this Class becomes level `level`" (rule 716.2a): `who: "self"`. */
-      readonly who: TriggerWho;
-      readonly level: number;
-    }
-  | {
       readonly on: "door-unlocked";
       readonly who: TriggerWho;
       readonly door?: "left" | "right";

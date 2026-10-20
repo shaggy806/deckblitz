@@ -104,6 +104,8 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `card:find -- "<phrase>" [--kind triggered] [--json "<substring of spec>"] [--limit N]`: the
   pool's abilities that read most like a phrase (ranked like `card:brief`'s analogs), each with
   card, file, text and authored shape, in well under a second. The quick way to an example.
+- `card:digest`: the whole definition vocabulary on one page (`.cache/authoring-digest.md`) — every
+  effect, amount, target, trigger, condition and ability field, with its fields, doc and an example.
 - `card:vocab -- <term>`: what the definition vocabulary can say about a term — the pool's usage
   with small example cards, the engine declarations with their docs, the guide's lines.
 - All three read the **pool index** (`engine/.cache/pool-index.jsonl` and `pool-vocab.json`,

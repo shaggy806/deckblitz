@@ -100,6 +100,10 @@ contention — so the lead does the shared work once, before dispatching:
    brief's paths use forward slashes (Git Bash's `cp` eats backslashes).
 3. **Deal the cards out** in rank order snaking across the groups, so each
    gets a mix of long and short cards.
+4. **Stage the digest** once for all of them: `npm run card:digest -w engine
+   -- --out <staging>/digest.md` (the brief's `DIGEST_PATH`) — the whole
+   definition vocabulary on one page, after the batch's feature has landed so
+   it lists it.
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
 only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it

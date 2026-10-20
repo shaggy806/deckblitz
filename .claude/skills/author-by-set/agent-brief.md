@@ -13,7 +13,8 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 
 ## Read before authoring
 
-- `engine/CLAUDE.md`, then `engine/src/cards/AUTHORING.md` §0 (rule zero), §1, §15 (what the engine can't express). Use the rest of AUTHORING.md as a reference per card.
+- `engine/CLAUDE.md`, then `engine/src/cards/AUTHORING.md` §0 (rule zero), §1, §15 (what the engine can't express).
+- **`DIGEST_PATH`** — the whole definition vocabulary on one page: every effect, amount, target, trigger, condition, cost and static field, each with its fields, the first sentence of its doc, how many cards use it and the smallest one to copy. Read it through once (it's ~125 KB: three or four `Read`s), then **triage every card against it before authoring any** — authorable, or blocked and why. Reach for `card:find`, `card:vocab` or a grep of the engine sources only for what the digest leaves open (a field's exact type, an option's full doc); past agents spent most of their first ten minutes grepping `effects.ts` for options the digest lists. Use the rest of AUTHORING.md as a reference per card.
 - **Rule zero**: never author a card the engine can't run exactly — no dropped clause, no hardcoded number, no choice made for the player, no "close enough". A missing card costs nothing; a wrong one lies at the table. When in doubt, BLOCK it. Every card's **rulings** are in the briefs — a ruling often decides it, and the ruling beats a precedent.
 
 ## Working rules (each cost past agents minutes)
