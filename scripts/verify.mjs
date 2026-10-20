@@ -4,19 +4,27 @@
 // lists, run for you. Node, not bash: a CRLF checkout breaks a shell script.
 //
 //   1. gen:cards (the card barrel and shards)
-//   2. build (every workspace), then the backlog lists re-marked against it
-//      and any sample-deck stand-in for a card now in the pool dropped
-//   3. typecheck (the engine's tests included — vitest never type-checks a
+//   2. build (every workspace) — and, from here on, in the background beside
+//      everything below (they need only the build): the fuzzer at 2 and 4
+//      players, the fuzzer with every card this change adds (or `--with`
+//      names) forced in — each 4-player run as two processes over halves of
+//      its seeds — and the bot gate
+//   3. the backlog lists re-marked against the build and any sample-deck
+//      stand-in for a card now in the pool dropped
+//   4. typecheck (the engine's tests included — vitest never type-checks a
 //      test, so a wrong chooser signature or a cast could make one pass
 //      without testing) + lint, side by side
-//   4. the engine suite (8 workers), then server + client side by side
-//   5. card:verify against the Oracle snapshot (offline)
-//   6. side by side: the fuzzer at 2 and 4 players, the fuzzer with every
-//      card this change adds (or `--with` names) forced in, the bot gate
+//   5. the engine suite (8 workers), then server + client side by side
+//   6. card:verify against the Oracle snapshot (offline)
 //
-// Steps 1-4 stop the run on failure (later results would mean nothing);
-// 5-6 all run, and the exit code is 1 if anything failed. Logs go to the OS
-// temp dir, one per step, named in the output.
+// Steps 1, 2, 4 and 5 stop the run on failure (later results would mean
+// nothing), stopping the background runs too; the rest all run, and the exit
+// code is 1 if anything failed. Logs go to the OS temp dir, one per step,
+// named in the output.
+//
+// "Cards this change adds" are the pool files not yet on the upstream branch
+// — committed since it, or not committed at all — so a batch committed
+// locally before verifying is still forced into the fuzzer.
 //
 // Usage: node scripts/verify.mjs [--with "Card Name"]... [--skip step,step]
 //   steps for --skip: marks, lint, server, client, cardverify,
@@ -53,6 +61,19 @@ const failures = [];
 const started = Date.now();
 const secs = (t) => `${Math.round((Date.now() - t) / 1000)}s`;
 
+/** Every step still running — the background ones, when a failure stops
+ * the run. */
+const live = new Set();
+function stopLive() {
+  for (const child of live) {
+    // npm and npx run through a shell, whose children `kill` would leave
+    // running on Windows: take the whole tree.
+    if (process.platform === "win32") spawnSync("taskkill", ["/pid", String(child.pid), "/T", "/F"]);
+    else child.kill();
+  }
+  live.clear();
+}
+
 /** Run `cmd args` (a shell only for npm/npx, whose Windows shims need one),
  * logging to a temp file. Resolves to { ok, log, out }. */
 function run(name, cmd, cmdArgs, cwd = ROOT) {
@@ -66,10 +87,12 @@ function run(name, cmd, cmdArgs, cwd = ROOT) {
     const child = useShell
       ? spawn(line, { cwd, shell: true, env: process.env })
       : spawn(cmd, cmdArgs, { cwd, env: process.env });
+    live.add(child);
     let out = "";
     child.stdout.on("data", (d) => (out += d));
     child.stderr.on("data", (d) => (out += d));
     child.on("close", (code) => {
+      live.delete(child);
       writeFileSync(log, out);
       resolve({ name, ok: code === 0, log, out, time: secs(t) });
     });
@@ -88,19 +111,31 @@ const grab = (out, re) => out.split("\n").filter((l) => re.test(l)).map((l) => l
 
 async function stopOnFailure(...results) {
   for (const r of results) report(r);
-  if (results.some((r) => !r.ok)) {
-    console.log(`\nStopped: ${failures.join(", ")} failed (${secs(started)}).`);
-    process.exit(1);
-  }
+  if (results.some((r) => !r.ok)) stop();
 }
 
-/** Pool cards this change adds: new files under engine/src/cards/pool. */
+function stop() {
+  stopLive();
+  console.log(`\nStopped: ${failures.join(", ")} failed (${secs(started)}).`);
+  process.exit(1);
+}
+
+/** Pool cards this change adds: files under engine/src/cards/pool not on the
+ * upstream branch — added in a commit since it, or not committed yet. */
 function addedCards() {
-  const status = spawnSync("git", ["status", "--porcelain", "--", "engine/src/cards/pool"], { cwd: ROOT, encoding: "utf8" }).stdout;
+  const git = (...a) => spawnSync("git", a, { cwd: ROOT, encoding: "utf8" });
+  const pool = "engine/src/cards/pool";
+  const files = git("status", "--porcelain", "--", pool)
+    .stdout.split("\n")
+    .filter((line) => /^(\?\?|A )/.test(line))
+    .map((line) => line.slice(3).trim());
+  const upstream = git("rev-parse", "--verify", "--quiet", "@{upstream}");
+  if (upstream.status === 0) {
+    files.push(...git("diff", "--name-only", "--diff-filter=A", "@{upstream}", "HEAD", "--", pool).stdout.split("\n"));
+  }
   const names = [];
-  for (const line of status.split("\n")) {
-    if (!/^(\?\?|A )/.test(line)) continue;
-    const file = path.join(ROOT, line.slice(3).trim());
+  for (const rel of new Set(files.map((f) => f.trim()).filter(Boolean))) {
+    const file = path.join(ROOT, rel);
     if (!file.endsWith(".ts") || !existsSync(file)) continue;
     const source = readFileSync(file, "utf8");
     // A Room's whole card is `roomCard("Name", left, right)`, with no `name:`.
@@ -126,6 +161,50 @@ console.log(`verify: ${cards.length ? `new/forced cards: ${cards.join(", ")}` : 
 
 await stopOnFailure(await run("gen:cards", "npm", ["run", "-s", "gen:cards", "-w", "engine"]));
 await stopOnFailure(await run("build", "npm", ["run", "build"]));
+
+// The fuzzers and the bot gate need only the build: they run in the
+// background beside everything from here on, and report at the end.
+// Four-player games get CI's 120 s each rather than the fuzzer's default 30:
+// one runs ~25 s alone (2026-10-14), and here they share the machine with
+// the test suites, the other fuzz runs and the bot gate, so 30 s timed out
+// games that finish.
+const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
+const late = [];
+/** A 4-player run of `count` games, as two processes over halves of its
+ * seeds (`--start`): the same games, in about half the time — it's the
+ * longest step, and the machine has the cores. */
+const fourPlayer = (name, count, extra) => {
+  const half = Math.ceil(count / 2);
+  return [
+    [1, half],
+    [half + 1, count - half],
+  ]
+    .filter(([, n]) => n > 0)
+    .map(([start, n], i) =>
+      run(
+        `${name} (${i + 1} of 2)`,
+        "node",
+        ["scripts/random-demo.mjs", "--games", String(n), "--start", String(start), "--players", "4", ...FOUR_PLAYER_TIMEOUT, ...extra],
+        ENGINE,
+      ),
+    );
+};
+if (!skip.has("fuzz")) {
+  late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
+  late.push(...fourPlayer("fuzz 4p", Math.ceil(games / 2), []));
+}
+if (!skip.has("fuzzwith") && cards.length > 0) {
+  late.push(
+    ...fourPlayer(
+      "fuzz with new cards",
+      40,
+      // A long list goes in a file: a command line has a length limit.
+      cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c]),
+    ),
+  );
+}
+if (!skip.has("gate")) late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"]));
+
 if (!skip.has("marks")) {
   const marks = await Promise.all([
     run("cards:mark", "node", ["scripts/top-commander-cards.mjs", "--refresh"], ENGINE),
@@ -146,62 +225,22 @@ await stopOnFailure(
 
 const engineTests = await run("engine tests", "npx", ["vitest", "run", "--maxWorkers=8"], ENGINE);
 report(engineTests, grab(engineTests.out, /^\s*Tests\s/));
-if (!engineTests.ok) {
-  console.log(`\nStopped: engine tests failed (${secs(started)}).`);
-  process.exit(1);
-}
+if (!engineTests.ok) stop();
 const others = await Promise.all([
   ...(skip.has("server") ? [] : [run("server tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "server"))]),
   ...(skip.has("client") ? [] : [run("client tests", "npx", ["vitest", "run", "--maxWorkers=4"], path.join(ROOT, "client"))]),
 ]);
 for (const r of others) report(r, grab(r.out, /^\s*Tests\s/));
-if (others.some((r) => !r.ok)) {
-  console.log(`\nStopped: ${failures.join(", ")} failed (${secs(started)}).`);
-  process.exit(1);
-}
+if (others.some((r) => !r.ok)) stop();
 
 if (!skip.has("cardverify")) {
   const r = await run("card:verify", "node", ["scripts/verify-cards.mjs", "--offline"], ENGINE);
   report(r, grab(r.out, /checked,/));
 }
 
-// Four-player games get CI's 120 s each rather than the fuzzer's default 30:
-// one runs ~25 s alone (2026-10-14), and here they share the machine with
-// the other fuzz runs and the bot gate, so 30 s timed out games that finish.
-const FOUR_PLAYER_TIMEOUT = ["--timeout", "120"];
-const late = [];
-if (!skip.has("fuzz")) {
-  late.push(run("fuzz 2p", "node", ["scripts/random-demo.mjs", "--games", String(games)], ENGINE));
-  late.push(
-    run(
-      "fuzz 4p",
-      "node",
-      ["scripts/random-demo.mjs", "--games", String(Math.ceil(games / 2)), "--players", "4", ...FOUR_PLAYER_TIMEOUT],
-      ENGINE,
-    ),
-  );
-}
-if (!skip.has("fuzzwith") && cards.length > 0) {
-  late.push(
-    run(
-      "fuzz with new cards",
-      "node",
-      [
-        "scripts/random-demo.mjs",
-        "--games",
-        "40",
-        "--players",
-        "4",
-        ...FOUR_PLAYER_TIMEOUT,
-        // A long list goes in a file: a command line has a length limit.
-        ...(cards.length > 40 ? ["--with-file", withFile(cards)] : cards.flatMap((c) => ["--with", c])),
-      ],
-      ENGINE,
-    ),
-  );
-}
-if (!skip.has("gate")) late.push(run("bot gate", "npm", ["run", "-s", "bot:scenarios", "-w", "engine"]));
 for (const r of await Promise.all(late)) report(r, grab(r.out, /games —|avg turns|\d+\/\d+ passed/));
 
-console.log(failures.length === 0 ? `\nAll green (${secs(started)}).` : `\nFailed: ${failures.join(", ")} (${secs(started)}).`);
+console.log(failures.length === 0 ? `
+All green (${secs(started)}).` : `
+Failed: ${failures.join(", ")} (${secs(started)}).`);
 process.exit(failures.length === 0 ? 0 : 1);

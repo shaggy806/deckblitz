@@ -79,11 +79,32 @@ card is a draft like any other — its templates match sentences, not meaning
    `engine/data/needs-vocabulary.json`; add a new one with its `family` when
    none fits), exactly as `author-top-cards` step 1.
 
-Parallel agents work here as in `author-top-cards`: three or four agents of
-~20 cards each writing to a scratchpad staging dir, each checking its files in
-a scratch copy of `engine/` (gen:cards, both typechecks, its test file,
-`pool.test`, `oracle-parse`, `card:verify --offline --text`), you reviewing
-every file against Oracle before integrating.
+**Parallel agents** (sized by the `feedback_agents_only_over_15_cards`
+memory: ≤15 authorable cards yourself, 16–39 one agent, 40+ split into
+~25–30-card agents), each in `isolation: "worktree"`, briefed from
+**`agent-brief.md`** beside this file (fill in its placeholders). B109's six
+agents spent half their ~44 minutes before their first card — a stale base,
+a refused junction, their own build, scaffold and briefs under six-way
+contention — so the lead does the shared work once, before dispatching:
+
+1. **Commit** whatever the batch needs (a feature, the lead's own cards)
+   first. Agents fast-forward to local `main` (their worktree starts from
+   `origin/main`).
+2. **Stage each group** in the scratchpad: `group-<x>/scaffold/` (and
+   `review/`) — that group's drafts from your `card:scaffold` run, moved out
+   of the repo (untracked; `scaffold/winter-cynical-opportunist.ts` is
+   tracked — never delete it) — and `group-<x>/briefs.txt`, `npm run -s
+   card:brief -w engine -- <the group's cards> > …/briefs.txt`.
+3. **Deal the cards out** in rank order snaking across the groups, so each
+   gets a mix of long and short cards.
+
+Agents run gen:cards, the typecheck and their own test file with `pool.test`
+and `oracle-parse` only — no build, no `card:scaffold`, no `card:verify` (you
+run `card:verify --offline --text` and the suites after integrating).
+Integrate by cherry-picking each branch, read **every** file against its
+Oracle text and rulings, squash the group commits into the batch commit, then
+remove the worktrees the `feedback_worktree_agents` memory's way (unlink
+each `node_modules` junction by absolute path first).
 
 ## 2. Build a feature, if one leads
 

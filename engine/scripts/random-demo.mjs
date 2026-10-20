@@ -7,6 +7,7 @@
 //   npm run play:random -w engine -- --log        # print the last game's log
 //   npm run play:random -w engine -- --players 3  # or 4 — exercises multi-opponent combat
 //   npm run play:random -w engine -- --seed 19    # replay exactly one seed
+//   npm run play:random -w engine -- --games 15 --start 16  # seeds 16-30 (a run split across processes)
 //   npm run play:random -w engine -- --timeout 60 # per-game limit, seconds (default 30)
 //   npm run play:random -w engine -- --with "Card Name"  # in every seat's deck
 //   npm run play:random -w engine -- --games 100 --coverage  # how much of the pool the decks reach
@@ -43,6 +44,9 @@ const numPlayers = Number(flag("players", "2"));
 // on stderr *before* playing it — the last line printed names the culprit.
 const showProgress = args.includes("--progress");
 const onlySeed = flag("seed", null);
+// The first seed: `npm run verify` splits the 4-player run across two
+// processes this way, the same seeds as one run of them all.
+const firstSeed = Number(flag("start", "1"));
 const timeoutMs = Number(flag("timeout", "30")) * 1000;
 
 const A = asPlayerId("alice");
@@ -99,7 +103,7 @@ const play = (seed) =>
 const seedsToPlay =
   onlySeed !== null
     ? [Number(onlySeed)]
-    : Array.from({ length: games }, (_, k) => k + 1);
+    : Array.from({ length: games }, (_, k) => firstSeed + k);
 
 // `--coverage`: play nothing; say how much of the pool these seeds' decks hold.
 if (args.includes("--coverage")) {
