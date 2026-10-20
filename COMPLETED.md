@@ -266,6 +266,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Convoke with a choice of additional costs** (latent): `legalActions`' convoke re-check prices the variant's `costOption` (and `altCost`) instead of none, so such a spell is offered on convoke alone (2026-10-20).
 - **"Whenever this Equipment becomes unattached from a permanent"**: the `becomes-unattached` trigger over a new `permanent-unattached` event (re-equip, an unattach effect, 704.5n, what it was on leaving) and the Equipment's own leave while attached (603.10a); Grafted Exoskeleton, Grafted Wargear and Captain's Hook authored. Stitcher's Graft also needs "it doesn't untap" without tapping (2026-10-20).
 - **A card's own "if this would be put into a graveyard from anywhere, reveal it and shuffle it into its owner's library instead"** (614): `CardDefinition.shufflesIntoLibraryInstead`, from every zone, ahead of Rest in Peace, a commander still offered the command zone (903.9b); Blightsteel Colossus, Darksteel Colossus, Nexus of Fate, Progenitus and Legacy Weapon authored (2026-10-20).
 - **A cast trigger's "that player" read the spell's controller as it resolved** (`trigger-controller`): the caster is recorded as the ability triggers (`LastKnownRefs.triggerSpellController`), so a spell taken from someone else's cards and countered in response still points at its caster — Forced Fruition, Ruric Thar, Spellshock, Magebane Lizard (2026-10-20).

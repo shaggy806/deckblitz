@@ -197,7 +197,6 @@ when a card that needs it is authored.
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
 - **A `{T}` ability granted to a token stack taps the whole stack** without splitting one off.
-- **Convoke with a choice of additional costs** (`castableAt` passes no `costOption`).
 
 ## Bots
 

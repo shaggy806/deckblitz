@@ -132,9 +132,6 @@ that needs it is authored.
   activated `{T}` ability on a compacted stack (`stackCount`) taps every token rather than
   splitting one off first. Ordinary token stacks have no activated abilities; it needs a static
   that grants one, and no pool card is known to (found 2026-10-09 with the becomes-tapped fix).
-- **Convoke with a choice of additional costs.** `legalActions`' convoke re-check (`castableAt`)
-  passes `costOption: undefined`, so a convoke spell with a choice of additional costs couldn't be
-  convoked. No pool card has both (found 2026-10-09, fixing Eaten Alive's priced option).
 - **A regeneration shield goes before a shield counter.** Both replace "this permanent would
   be destroyed" (rules 701.15a, 122.1c), so with both on it the permanent's controller chooses
   which applies (616.1); `Game.destroyByEffect` always spends the regeneration shield first,
