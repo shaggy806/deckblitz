@@ -8503,15 +8503,30 @@ export class Game {
 
   /** Could the Equipment `equipment` equip `host` (rule 301.5): a creature
    * on the battlefield other than itself, without protection from it
-   * (702.16d), while it isn't a creature itself (301.5c — reconfigure isn't
-   * modeled). */
-  private canEquip(equipment: ObjectId, host: ObjectId): boolean {
+   * (702.16d), while it isn't a creature itself (301.5c). One with
+   * reconfigure may be attached while it's a creature (`attaching` — it stops
+   * being one as it attaches, 702.151b); one still a creature once attached
+   * (March of the Machines) becomes unattached (its rulings). */
+  private canEquip(equipment: ObjectId, host: ObjectId, attaching = false): boolean {
     if (host === equipment) return false;
     const target = this.state.objects[host];
     if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
     if (!effectiveTypes(this.state, this.registry, target).includes("creature")) return false;
-    if (computeCharacteristics(this.state, this.registry, equipment).types.includes("creature")) return false;
+    if (
+      computeCharacteristics(this.state, this.registry, equipment).types.includes("creature") &&
+      !(attaching && this.hasReconfigure(equipment))
+    ) {
+      return false;
+    }
     return !protectionBlocks(this.state, this.registry, host, this.permanentSource(equipment));
+  }
+
+  /** Whether `id` has reconfigure (rule 702.151a) — one of its two abilities,
+   * printed or granted, and not lost. */
+  private hasReconfigure(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || hasLostAbilities(object)) return false;
+    return this.effectiveActivated(id).some((a) => a.reconfigure !== undefined);
   }
 
   /** What a Clone entering under `chooser` may copy (rule 707.9): a
@@ -21913,6 +21928,13 @@ export class Game {
               : lastKnownOf({ kind: "object", object: of }),
         ),
       conditionMet,
+      unattach: (target) => {
+        if (target.kind !== "object") return;
+        const object = this.state.objects[target.object];
+        if (object === undefined || object.zone !== "battlefield" || object.attachedTo === null) return;
+        object.attachedTo = null;
+        invalidateComputedCache();
+      },
       attach: (target, attachment) => {
         if (attachment === undefined) {
           this.attachPermanent(source, target);
@@ -25218,8 +25240,12 @@ export class Game {
     const def = this.registry.get(printedCardName(sourceObject));
     const legal = def.subtypes.includes("Aura")
       ? this.canEnchant(source, targetId, sourceObject.controller, def)
-      : def.subtypes.includes("Equipment") && this.canEquip(source, targetId);
+      : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true);
     if (!legal) return;
+    // Attaching an Equipment with reconfigure stops it being a creature until
+    // it's unattached from that creature (rule 702.151b) — however it was
+    // attached, reconfigure or not.
+    const reconfigured = def.subtypes.includes("Equipment") && this.hasReconfigure(source);
     sourceObject.attachedTo = targetId;
     delete sourceObject.attachedToPlayer;
     // An Aura or Equipment gets a new timestamp as it becomes attached (rule
@@ -25227,6 +25253,13 @@ export class Game {
     // is weighed against the other control effects on it by.
     this.state.timestampSeq += 1;
     sourceObject.timestamp = this.state.timestampSeq;
+    if (reconfigured) {
+      sourceObject.reconfiguredOnto = targetId;
+      sourceObject.reconfiguredAt = this.state.timestampSeq;
+    } else {
+      delete sourceObject.reconfiguredOnto;
+      delete sourceObject.reconfiguredAt;
+    }
     invalidateComputedCache();
     this.emit({ type: "permanent-attached", source, target: targetId });
   }

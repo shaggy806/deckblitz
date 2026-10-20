@@ -65,6 +65,7 @@ import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
 import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
 import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
+import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
 import _poolChameleonMasterOfDisguise from "../pool/chameleon-master-of-disguise.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
@@ -556,6 +557,7 @@ const shard: CardShard = {
     _poolCelebrityFencer,
     _poolCentaurSafeguard,
     _poolCephalopodSentry,
+    _poolChainflailCentipede,
     _poolChameleonMasterOfDisguise,
     _poolChantOfTheSkifsang,
     _poolChromeCat,

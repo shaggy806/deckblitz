@@ -1563,6 +1563,33 @@ type LayerFourStep =
 /** The order key of a modifier's layer-4 / 7b part (see
  * `PtModifier.timestamp`): just after a static whose source has the same
  * timestamp, and after every static when it has none. */
+/**
+ * Reconfigure's "while attached, this isn't a creature" (rule 702.151b): an
+ * effect of the attaching, not an ability, so it lasts while the Equipment is
+ * still attached to the creature it was reconfigured onto, abilities lost or
+ * not, at the timestamp it was attached (613.7). With the creature type go its
+ * creature types (205.1a) and its power and toughness (208.3).
+ */
+function reconfiguredModifier(object: GameObject): PtModifier | null {
+  if (object.reconfiguredOnto === undefined || object.attachedTo !== object.reconfiguredOnto) return null;
+  const at = object.reconfiguredAt;
+  return {
+    power: 0,
+    toughness: 0,
+    keywords: [],
+    untilEndOfTurn: false,
+    removeTypes: ["creature"],
+    ...(at !== undefined ? { timestamp: at } : {}),
+  };
+}
+
+/** The object's layer-4 modifiers, reconfigure's among them, in timestamp order. */
+function typeModifiers(object: GameObject): readonly PtModifier[] {
+  const reconfigured = reconfiguredModifier(object);
+  if (reconfigured === null) return object.modifiers;
+  return [...object.modifiers, reconfigured].sort((a, b) => modifierKey(a) - modifierKey(b));
+}
+
 function modifierKey(modifier: PtModifier): number {
   return modifier.timestamp !== undefined ? modifier.timestamp + 0.5 : Infinity;
 }
@@ -1579,6 +1606,12 @@ function applyModifierTypes(
     const set = [...modifier.setTypes];
     t = set;
     st = st.filter((s) => subtypeFitsTypes(s, set));
+  }
+  if (modifier.removeTypes) {
+    const removed = modifier.removeTypes;
+    const kept = t.filter((x) => !removed.includes(x));
+    t = kept;
+    st = st.filter((s) => subtypeFitsTypes(s, kept));
   }
   if (modifier.setSubtypes) {
     // Rule 205.1a: the new subtypes replace the existing ones of their own
@@ -1653,7 +1686,7 @@ export function layerFour(
 function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
   let types: readonly CardType[] = registry.get(printedCardName(object)).types;
   let subtypes = printedSubtypes(registry, object);
-  for (const modifier of object.modifiers) {
+  for (const modifier of typeModifiers(object)) {
     ({ types, subtypes } = applyModifierTypes(modifier, types, subtypes));
   }
   return { types, subtypes, applied: NO_STATICS };
@@ -1678,7 +1711,7 @@ function foldLayerFour(
 ): LayerFour {
   const steps: LayerFourStep[] = [];
   for (const grant of sources) steps.push({ key: grant.source.timestamp, grant });
-  for (const modifier of object.modifiers) steps.push({ key: modifierKey(modifier), modifier });
+  for (const modifier of typeModifiers(object)) steps.push({ key: modifierKey(modifier), modifier });
   steps.sort((a, b) => a.key - b.key);
   layer4InProgress.add(object.id);
   try {

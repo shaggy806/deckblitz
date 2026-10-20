@@ -4233,6 +4233,14 @@ export type EffectSpec =
       readonly onto?: TargetRef;
     }
   | {
+      /** Unattach `target` (an Aura or Equipment) from whatever it's attached
+       * to — reconfigure's second ability (rule 702.151a), "Unattach this
+       * permanent"; it stays on the battlefield. Nothing for one that isn't
+       * attached or has left (rule 400.7). */
+      readonly kind: "unattach";
+      readonly target: EffectTargetRef;
+    }
+  | {
       /** Transform `target` — turn a transforming double-faced permanent over
        * to its other face (rule 701.28 / 712.10 — ROADMAP Phase 10b). No-op
        * for a permanent that isn't a transforming DFC. `"source"` transforms
@@ -6378,6 +6386,8 @@ export interface EffectApi {
   /** Attach `attachment` (an Aura/Equipment) to `target` — `ctx.source`
    * when it's omitted. See the `"attach"` {@link EffectSpec}. */
   attach(target: TargetRef, attachment?: TargetRef): void;
+  /** Unattach `target` — see the `"unattach"` {@link EffectSpec}. */
+  unattach(target: TargetRef): void;
   /** Attach every permanent matching `filter` (from the source's
    * controller's view) to `target`, each in turn — the `"attach"`
    * {@link EffectSpec}'s `attachments`. */
@@ -9791,6 +9801,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "conditional": {
       const branch = ctx.conditionMet(spec.condition) ? spec.then : spec.else;
       if (branch !== undefined) applyEffectSpec(branch, ctx);
+      return;
+    }
+    case "unattach": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target !== undefined) ctx.unattach(target);
       return;
     }
     case "attach": {

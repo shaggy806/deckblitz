@@ -1085,6 +1085,12 @@ export interface GameObject {
   stormCount?: number;
   /** The permanent this Aura/Equipment is attached to, or `null`. */
   attachedTo: ObjectId | null;
+  /** An Equipment with reconfigure attached to this creature at this
+   * timestamp (rule 702.151b): it isn't a creature until it becomes
+   * unattached from that creature — for as long as `attachedTo` is still
+   * `reconfiguredOnto`, whatever happens to its abilities meanwhile. */
+  reconfiguredOnto?: ObjectId;
+  reconfiguredAt?: number;
   /** The player this Aura is attached to — a Curse's "Enchant player" (rule
    * 303.4: an Aura can be attached to a player). Set instead of
    * `attachedTo`, never with it; cleared on any zone change. */
@@ -1184,6 +1190,11 @@ export interface PtModifier {
    * A subtype tied to a card type it no longer has goes too (rule 205.1a).
    * Applied before `addTypes`. */
   setTypes?: CardType[];
+  /** Layer 4 — card types taken away, with every subtype that went only with
+   * them (rule 205.1a). Never stored: reconfigure's "while attached, this
+   * isn't a creature" is folded in as one at its attachment's timestamp
+   * (`reconfiguredModifier`). */
+  removeTypes?: CardType[];
   /** Layer 4 — subtypes this modifier adds (e.g. `["Blinkmoth"]`). */
   addSubtypes?: string[];
   /** Layer 4 — subtypes this modifier *replaces* them with (Turn to Frog:

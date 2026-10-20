@@ -1063,6 +1063,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("reconfigure (rule 702.151): the keyword line's two abilities", () => {
+    const boar = face("Equipped creature gets +3/+2.\nReconfigure {5}", "Artifact Creature — Equipment Boar");
+    expect([boar.activated[0].reconfigure, boar.activated[1].reconfigure]).toEqual(["attach", "unattach"]);
+    expect(boar.activated[0].targets).toEqual([{ kind: "other", of: "creature-you-control" }]);
+    expect(boar.activated[1].effect).toEqual({ kind: "unattach", target: "source" });
+    expect(boar.complete).toBe(true);
+  });
+
   it("shield counters (rule 122.1c): 'enters with a shield counter on him'", () => {
     const cap = face("Test Card enters with a shield counter on him.", "Legendary Creature — Human Soldier Hero");
     expect(cap.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "shield", amount: 1 } });

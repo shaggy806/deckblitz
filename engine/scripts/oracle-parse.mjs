@@ -1699,6 +1699,33 @@ export function parseFace(face, ctx = {}) {
       });
       continue;
     }
+    // Reconfigure [cost] (rule 702.151a): the `reconfigure` helper's two
+    // abilities — attach to another creature you control, or unattach.
+    if ((m = /^Reconfigure ((?:\{[^}]+\})+)$/.exec(line))) {
+      const text = `Reconfigure ${m[1]}`;
+      out.activated.push(
+        {
+          cost: { mana: m[1], tap: false },
+          targets: [{ kind: "other", of: "creature-you-control" }],
+          effect: { kind: "attach", target: 0 },
+          resolve: null,
+          text,
+          sorcerySpeed: true,
+          reconfigure: "attach",
+        },
+        {
+          cost: { mana: m[1], tap: false },
+          targets: [],
+          condition: { kind: "source", filter: { attachedTo: { type: "creature" } } },
+          effect: { kind: "unattach", target: "source" },
+          resolve: null,
+          text,
+          sorcerySpeed: true,
+          reconfigure: "unattach",
+        },
+      );
+      continue;
+    }
     if ((m = /^Cycling ((?:\{[^}]+\})+)$/.exec(line))) { out.cycling = { cost: m[1] }; continue; }
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
     // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.

@@ -320,6 +320,7 @@ import _poolQuagmireDruid from "../pool/quagmire-druid.js";
 import _poolQuandrixCharm from "../pool/quandrix-charm.js";
 import _poolQueensCommission from "../pool/queens-commission.js";
 import _poolQuintoriusHistoryChaser from "../pool/quintorius-history-chaser.js";
+import _poolRabbitBattery from "../pool/rabbit-battery.js";
 import _poolRabidGnaw from "../pool/rabid-gnaw.js";
 import _poolRadhaHeirToKeld from "../pool/radha-heir-to-keld.js";
 import _poolRageScarredBerserker from "../pool/rage-scarred-berserker.js";
@@ -840,6 +841,7 @@ const shard: CardShard = {
     _poolQuandrixCharm,
     _poolQueensCommission,
     _poolQuintoriusHistoryChaser,
+    _poolRabbitBattery,
     _poolRabidGnaw,
     _poolRadhaHeirToKeld,
     _poolRageScarredBerserker,

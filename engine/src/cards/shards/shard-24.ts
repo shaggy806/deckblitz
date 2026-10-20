@@ -223,6 +223,7 @@ import _poolLaboratoryBrute from "../pool/laboratory-brute.js";
 import _poolLeadenMyr from "../pool/leaden-myr.js";
 import _poolLeafDancer from "../pool/leaf-dancer.js";
 import _poolLeafGilder from "../pool/leaf-gilder.js";
+import _poolLeechGauntlet from "../pool/leech-gauntlet.js";
 import _poolLegionLieutenant from "../pool/legion-lieutenant.js";
 import _poolLibraryOfAlexandria from "../pool/library-of-alexandria.js";
 import _poolLictor from "../pool/lictor.js";
@@ -685,6 +686,7 @@ const shard: CardShard = {
     _poolLeadenMyr,
     _poolLeafDancer,
     _poolLeafGilder,
+    _poolLeechGauntlet,
     _poolLegionLieutenant,
     _poolLibraryOfAlexandria,
     _poolLictor,

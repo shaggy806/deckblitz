@@ -226,6 +226,7 @@ import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
+import _poolLizardBlades from "../pool/lizard-blades.js";
 import _poolLodestoneMyr from "../pool/lodestone-myr.js";
 import _poolLongFengGrandSecretariat from "../pool/long-feng-grand-secretariat.js";
 import _poolLongbowArcher from "../pool/longbow-archer.js";
@@ -701,6 +702,7 @@ const shard: CardShard = {
     _poolLeafCrownedVisionary,
     _poolLeylineProwler,
     _poolLightshieldParry,
+    _poolLizardBlades,
     _poolLodestoneMyr,
     _poolLongFengGrandSecretariat,
     _poolLongbowArcher,

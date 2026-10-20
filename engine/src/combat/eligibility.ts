@@ -19,6 +19,7 @@ import type { CardDefinition, CardRegistry, Keyword } from "../cards.js";
 import {
   computedCacheMemo,
   computeCharacteristics,
+  effectiveTypes,
   withComputedCache,
   hasLostAbilities,
   objHasKeyword,
@@ -140,14 +141,13 @@ export function creatureDef(
   const object = state.objects[id];
   if (object === undefined || object.zone !== "battlefield") return null;
   const def = registry.get(printedCardName(object));
-  // Printed OR currently a creature by a layer-4 type-change (a man-land
-  // animated this turn). The returned def is still the printed one — it's
-  // used for the permanent's name and ability list, while its live P/T /
-  // keywords come from `computeCharacteristics`.
-  if (def.types.includes("creature")) return def;
-  return computeCharacteristics(state, registry, id).types.includes("creature")
-    ? def
-    : null;
+  // Currently a creature after layer 4: a man-land animated this turn is one,
+  // and a reconfigured Equipment creature attached to a creature isn't
+  // (702.151b), nor is anything a type-setting effect made noncreature. The
+  // returned def is still the printed one — it's used for the permanent's
+  // name and ability list, while its live P/T / keywords come from
+  // `computeCharacteristics`.
+  return effectiveTypes(state, registry, object).includes("creature") ? def : null;
 }
 
 export function hasSummoningSickness(object: GameObject): boolean {

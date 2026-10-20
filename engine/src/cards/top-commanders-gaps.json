@@ -327,7 +327,8 @@
   "condition:ring-bearer-other-than-source",
   "effect:distribute-counters",
   "decision:owner-chooses-top-or-bottom",
-  "mechanic:shield-counters"
+  "mechanic:shield-counters",
+  "keyword:reconfigure"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

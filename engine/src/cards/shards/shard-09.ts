@@ -404,6 +404,7 @@ import _poolSylvanAwakening from "../pool/sylvan-awakening.js";
 import _poolSylvanScrying from "../pool/sylvan-scrying.js";
 import _poolSythisHarvestsHand from "../pool/sythis-harvests-hand.js";
 import _poolTangletrap from "../pool/tangletrap.js";
+import _poolTanukiTransplanter from "../pool/tanuki-transplanter.js";
 import _poolTaxiDriver from "../pool/taxi-driver.js";
 import _poolTemurBattleRage from "../pool/temur-battle-rage.js";
 import _poolTergridGodOfFright from "../pool/tergrid-god-of-fright.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolSylvanScrying,
     _poolSythisHarvestsHand,
     _poolTangletrap,
+    _poolTanukiTransplanter,
     _poolTaxiDriver,
     _poolTemurBattleRage,
     _poolTergridGodOfFright,

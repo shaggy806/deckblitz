@@ -2980,4 +2980,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Grizzly Bears', 'Forest'] },
     }),
   ),
+  preset(
+    'Bronzeplate Boar and Acquisition Octopus (reconfigure)',
+    board({
+      you: { bf: ['Bronzeplate Boar', 'Acquisition Octopus', 'Grizzly Bears', 'Mountain*7'] },
+    }),
+  ),
 ]

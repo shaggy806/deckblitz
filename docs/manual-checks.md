@@ -5005,3 +5005,20 @@ this token", which turns into a 0/0 Phyrexian artifact creature
   choices" brings it back. The log reads "takes the initiative" and "ventures into Forge
   (Undercity)". Your upkeep with the initiative ventures again. Check at ~768px tall, in a 2- and
   a 4-player room.
+
+## Reconfigure (2026-10-19)
+
+### Bronzeplate Boar and Acquisition Octopus (reconfigure)
+
+*New card shape* — an Equipment creature (rule 702.151): its reconfigure attaches it to another
+creature you control, after which it isn't a creature, or unattaches it
+
+- **Setup:** Your precombat main. Your battlefield: Bronzeplate Boar, Acquisition Octopus, Grizzly
+  Bears and seven Mountains.
+- **Do:** Activate the Boar's first "Reconfigure {5}" targeting the Bears. Attack with the Bears.
+  Next turn, activate the Boar's second "Reconfigure {5}".
+- **Check:** Once attached, the Boar draws under the Bears as an attachment (no P/T, no Boar type,
+  still an artifact Equipment) and the Bears are 5/4 with trample; the Boar can't be targeted by its
+  own first ability. The Octopus, unattached, attacks as a 2/2 and draws a card on hitting. After the
+  unattach the Boar is a 3/2 creature again, untapped, able to block. Check at ~768px tall, in a 2- and
+  a 4-player room.

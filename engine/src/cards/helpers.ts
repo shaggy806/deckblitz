@@ -892,6 +892,38 @@ export const equip = (cost: string): ActivatedAbility => ({
 });
 
 /**
+ * Reconfigure (rule 702.151a): "[Cost]: Attach this permanent to another
+ * target creature you control. Activate only as a sorcery" and "[Cost]:
+ * Unattach this permanent. Activate only if this permanent is attached to a
+ * creature and only as a sorcery." Spread into `activated`. Having it is what
+ * lets an Equipment that's a creature equip (301.5c), and attaching one stops
+ * it being a creature until it's unattached from that creature (702.151b —
+ * the engine's `reconfiguredOnto`, so a reconfigured Equipment that loses its
+ * abilities stays attached and not a creature).
+ */
+export const reconfigure = (cost: string): ActivatedAbility[] => [
+  {
+    cost: { mana: cost, tap: false },
+    targets: [{ kind: "other", of: "creature-you-control" }],
+    effect: { kind: "attach", target: 0 },
+    resolve: null,
+    text: `Reconfigure ${cost}`,
+    sorcerySpeed: true,
+    reconfigure: "attach",
+  },
+  {
+    cost: { mana: cost, tap: false },
+    targets: [],
+    condition: { kind: "source", filter: { attachedTo: { type: "creature" } } },
+    effect: { kind: "unattach", target: "source" },
+    resolve: null,
+    text: `Reconfigure ${cost}`,
+    sorcerySpeed: true,
+    reconfigure: "unattach",
+  },
+];
+
+/**
  * Living weapon (rule 702.92a): "When this Equipment enters, create a 0/0
  * black Phyrexian Germ creature token, then attach this to it." The Germ is
  * attached before state-based actions look at a 0/0 (the rulings); with two

@@ -438,6 +438,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "help", MINOR);
     v.touch(n.attachment, "help", MINOR);
   },
+  // Reconfigure's unattach is its own source: no target to place.
+  unattach: none,
   transform: (n, v) => v.touch(n.target, "either", MINOR),
   // What becomes the copy, and what it copies: either may be anyone's
   // (Mirage Mirror copies an opponent's best; Shuri, two of your own). What

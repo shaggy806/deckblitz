@@ -220,6 +220,7 @@ import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
+import _poolLionSash from "../pool/lion-sash.js";
 import _poolLiturgyOfBlood from "../pool/liturgy-of-blood.js";
 import _poolLivingLightning from "../pool/living-lightning.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
@@ -454,6 +455,7 @@ import _poolWanderersTwig from "../pool/wanderers-twig.js";
 import _poolWarSpikeChangeling from "../pool/war-spike-changeling.js";
 import _poolWarpingWail from "../pool/warping-wail.js";
 import _poolWarriorsOfWakanda from "../pool/warriors-of-wakanda.js";
+import _poolWebspinnerCuff from "../pool/webspinner-cuff.js";
 import _poolWeldingJar from "../pool/welding-jar.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
@@ -697,6 +699,7 @@ const shard: CardShard = {
     _poolLeoninOfTheLostPride,
     _poolLiesaShroudOfDusk,
     _poolLinvalaKeeperOfSilence,
+    _poolLionSash,
     _poolLiturgyOfBlood,
     _poolLivingLightning,
     _poolLostIsleCalling,
@@ -931,6 +934,7 @@ const shard: CardShard = {
     _poolWarSpikeChangeling,
     _poolWarpingWail,
     _poolWarriorsOfWakanda,
+    _poolWebspinnerCuff,
     _poolWeldingJar,
     _poolWildRoads,
     _poolWingsOfHope,

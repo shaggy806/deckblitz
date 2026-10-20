@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
+import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
@@ -51,6 +52,7 @@ import _poolBother from "../pool/bother.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
 import _poolBrazenBlademaster from "../pool/brazen-blademaster.js";
 import _poolBronzeWalrus from "../pool/bronze-walrus.js";
+import _poolBronzeplateBoar from "../pool/bronzeplate-boar.js";
 import _poolBugenhagenWiseElder from "../pool/bugenhagen-wise-elder.js";
 import _poolBurstOfSpeed from "../pool/burst-of-speed.js";
 import _poolBuyYourSilence from "../pool/buy-your-silence.js";
@@ -263,6 +265,7 @@ import _poolNovaHellkite from "../pool/nova-hellkite.js";
 import _poolNoxiousRevival from "../pool/noxious-revival.js";
 import _poolNymrisOonasTrickster from "../pool/nymris-oonas-trickster.js";
 import _poolObeliskOfGrixis from "../pool/obelisk-of-grixis.js";
+import _poolOgreHeadHelm from "../pool/ogre-head-helm.js";
 import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
@@ -331,6 +334,7 @@ import _poolShigekiJukaiVisionary from "../pool/shigeki-jukai-visionary.js";
 import _poolShinenOfFlightsWings from "../pool/shinen-of-flights-wings.js";
 import _poolShreddersArmor from "../pool/shredders-armor.js";
 import _poolSilentAttendant from "../pool/silent-attendant.js";
+import _poolSimianSling from "../pool/simian-sling.js";
 import _poolSisterOfSilence from "../pool/sister-of-silence.js";
 import _poolSkyRuinDrake from "../pool/sky-ruin-drake.js";
 import _poolSlashingTiger from "../pool/slashing-tiger.js";
@@ -459,6 +463,7 @@ const shard: CardShard = {
   pool: [
     _poolAangAtTheCrossroads,
     _poolAbueloAncestralEcho,
+    _poolAcquisitionOctopus,
     _poolAeridKonstrari,
     _poolAllAboard,
     _poolAlpineWatchdog,
@@ -505,6 +510,7 @@ const shard: CardShard = {
     _poolBrawnAmadeusCho,
     _poolBrazenBlademaster,
     _poolBronzeWalrus,
+    _poolBronzeplateBoar,
     _poolBugenhagenWiseElder,
     _poolBurstOfSpeed,
     _poolBuyYourSilence,
@@ -717,6 +723,7 @@ const shard: CardShard = {
     _poolNoxiousRevival,
     _poolNymrisOonasTrickster,
     _poolObeliskOfGrixis,
+    _poolOgreHeadHelm,
     _poolOldHobAlleycatBlues,
     _poolOpposition,
     _poolOrazcaRaptor,
@@ -785,6 +792,7 @@ const shard: CardShard = {
     _poolShinenOfFlightsWings,
     _poolShreddersArmor,
     _poolSilentAttendant,
+    _poolSimianSling,
     _poolSisterOfSilence,
     _poolSkyRuinDrake,
     _poolSlashingTiger,

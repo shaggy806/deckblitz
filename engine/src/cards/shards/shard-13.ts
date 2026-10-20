@@ -30,6 +30,7 @@ import _poolArchghoulOfThraben from "../pool/archghoul-of-thraben.js";
 import _poolArchonOfTheWildRose from "../pool/archon-of-the-wild-rose.js";
 import _poolArdennIntrepidArchaeologist from "../pool/ardenn-intrepid-archaeologist.js";
 import _poolArmaggonFutureShark from "../pool/armaggon-future-shark.js";
+import _poolArmguardFamiliar from "../pool/armguard-familiar.js";
 import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
@@ -512,6 +513,7 @@ const shard: CardShard = {
     _poolArchonOfTheWildRose,
     _poolArdennIntrepidArchaeologist,
     _poolArmaggonFutureShark,
+    _poolArmguardFamiliar,
     _poolArrowsOfJustice,
     _poolAsphyxiate,
     _poolAstridPeth,
