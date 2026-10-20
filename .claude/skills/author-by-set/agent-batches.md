@@ -1,0 +1,106 @@
+# Authoring a batch with parallel agents
+
+The procedure every authoring skill uses once a batch has more cards than the
+lead should author alone — `author-by-set`, `author-top-cards` and
+`author-top-commanders` alike. The agents author **cards only**; the lead
+builds every engine feature the batch needs (and authors the cards that test
+it), then hands out the rest.
+
+## Sizing
+
+By the `feedback_agents_only_over_15_cards` memory: ≤15 authorable cards the
+lead does alone; 16–39 one agent; 40+ split into ~25–30-card agents (a set's
+tail of commons can run 100–150 cards across 4–5 agents, since most are
+short). Each is a **`card-author`** agent (`subagent_type`;
+`.claude/agents/card-author.md`: only the file and shell tools, so a smaller
+fixed context on every turn than the general-purpose agent's) in
+`isolation: "worktree"`, started in the background, all in one message.
+
+## The lead's shared work, before dispatching
+
+B109's six agents spent half their ~44 minutes before their first card — a
+stale base, a refused junction, their own build, scaffold and briefs under
+six-way contention — so the lead does this once:
+
+1. **Commit** whatever the batch needs first — a feature, the lead's own
+   cards, a token several cards share. Agents fast-forward to local `main`
+   (their worktree starts from `origin/main`).
+2. **Scaffold the whole batch** in one `npm run card:scaffold -w engine --
+   …` run, after the feature's scaffolder templates landed (so its lines come
+   pre-drafted). Move the finished `review/` cards you've checked into `pool/`.
+3. **Make the tokens once**: `card:scaffold` writes one token draft per card
+   that makes one, so two cards making the same 1/1 come out as two files.
+   Keep one, named by what it is (`"Kor Warrior Token"`, not `"Kor Warrior
+   Token (Nahiri)"`), point the other drafts at it, and commit it with the
+   feature — or put it in the one group that makes it.
+4. **Stage each group** in the scratchpad: `group-<x>/scaffold/` (and
+   `review/`) — that group's drafts, **moved** out of the repo, not copied
+   (they're untracked, and a `git add -A` would sweep them into your commit;
+   `scaffold/winter-cynical-opportunist.ts` is tracked — never delete it). A
+   double-faced card scaffolds as one file per face: keep both in one group
+   (they're named by face, so check none are left behind in `scaffold/`).
+   **Deal the cards out** in rank order snaking across the groups, so each
+   gets a mix of long and short cards. Then `group-<x>/briefs.txt`: `npm run
+   -s card:brief -w engine -- <the group's cards> --analogs 2 --width 300 >
+   …/briefs.txt` (two analogs a line, their shapes clipped: an agent carries
+   the briefs in every turn's context, and asks `card:find` for more). Paths
+   use forward slashes (Git Bash's `cp` eats backslashes).
+5. **Stage the digest** once for all of them: `npm run card:digest -w engine
+   -- --out <staging>/digest.md` — the whole definition vocabulary on one
+   page, after the batch's feature has landed so it lists it.
+6. **Brief each agent** from **`agent-brief.md`** beside this file, its
+   placeholders filled: `GROUP_LETTER`, `SET_NAMES` (the set, or "EDHREC
+   ranks 5001–5060", or "commanders unblocked by <feature>"), `STAGING_DIR`,
+   `TEST_FILE_PREFIX` (`set-<code>-batch-<N>`, `top10000-batch-<N>`,
+   `commanders-<feature>-`; the agent appends its letter), `SET_CODE` (the
+   commit's label: the set code, `batch <N>`), `DIGEST_PATH`, `CARD_LIST`.
+   Before `## Your cards`, add a short **notes** section: the feature just
+   built and its shapes (with a pool card to copy), the batch's other
+   mechanics and where the pool already has them, the tokens already made.
+   Agent prompt: just the brief's path and its letter.
+
+Agents run gen:cards, the typecheck and their own test file with `pool.test`
+only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
+reads `dist/`); the lead runs those and the suites after integrating.
+
+## While they run
+
+The lead's own work that doesn't touch their files: records, docs, the next
+feature's reading. Don't poll them; each one's completion arrives as a
+notification.
+
+## Integrating
+
+1. **Cherry-pick** each branch onto `main` (after checking each commit
+   touches only `cards/pool/`, `cards/tokens/` and its own test file).
+2. **Read every file** against its Oracle text and rulings — `card:brief`
+   and the scratchpad's review script; a rulings line often decides a card.
+   Fix or drop what's wrong. Check each agent's BLOCKED list too: a card
+   blocked for a reason the digest answers is authorable, and its need key
+   must exist in `needs-vocabulary.json` (add proposed ones with a `family`).
+3. **Check `tokens/`** for two files making the same token (merge them into
+   one and repoint the cards).
+4. `gen:cards`, the whole engine suite, `card:verify -- --offline`,
+   `card:parse-check`, then the skill's own record, docs and `npm run
+   verify`. **Squash** the group commits into the batch commit.
+5. **Remove the worktrees** the `feedback_worktree_agents` memory's way:
+   unlink each `node_modules` junction by absolute path first and check for
+   zero reparse points before `git worktree remove --force`; delete the
+   branches.
+
+**A stopped agent can't be resumed** (SendMessage refuses it). Its worktree
+and files stay: start a fresh agent in that worktree with a short
+`continue.md` — the original brief, plus "the previous agent left these
+files; re-read each one against its Oracle text, finish what's unfinished,
+judge the deleted drafts again from the staging dir, then run the checks and
+commit". MH2's six took ~8–10 minutes each that way.
+
+## Measuring the cost
+
+Tokens per card are the batch's cost: measure them as the
+`feedback_agent_token_counting` memory says (usage once per message id), per
+card handled (authored + blocked) as well as per authored card, since a
+batch's tail blocks more. B111 0.78M per card handled, B112 0.41M (the
+brief's "batch your tool calls"), B113 0.35M (the `card-author` agent: 19K
+fixed context a turn against 57K). The levers: fewer turns, a smaller fixed
+context, smaller groups.

@@ -79,56 +79,15 @@ card is a draft like any other — its templates match sentences, not meaning
    `engine/data/needs-vocabulary.json`; add a new one with its `family` when
    none fits), exactly as `author-top-cards` step 1.
 
-**Parallel agents** (sized by the `feedback_agents_only_over_15_cards`
-memory: ≤15 authorable cards yourself, 16–39 one agent, 40+ split into
-~25–30-card agents), each a **`card-author`** agent (`subagent_type`,
-`.claude/agents/card-author.md`: only the file and shell tools, so a smaller
-fixed context on every turn than the general-purpose agent's) in
-`isolation: "worktree"`, briefed from **`agent-brief.md`** beside this file
-(fill in its placeholders). Tokens per card are the batch's cost — measure
-them as the `feedback_agent_token_counting` memory says, per card handled
-(authored + blocked) as well as per authored card, since a set's tail blocks
-more: B111 0.78M handled, B112 0.41M (batched tool calls), B113 0.35M (the
-`card-author` agent: 19K fixed context a turn against 57K). B109's six
-agents spent half their ~44 minutes before their first card — a stale base,
-a refused junction, their own build, scaffold and briefs under six-way
-contention — so the lead does the shared work once, before dispatching:
-
-1. **Commit** whatever the batch needs (a feature, the lead's own cards)
-   first. Agents fast-forward to local `main` (their worktree starts from
-   `origin/main`).
-2. **Stage each group** in the scratchpad: `group-<x>/scaffold/` (and
-   `review/`) — that group's drafts from your `card:scaffold` run, **moved**
-   out of the repo, not copied (they're untracked, and a `git add -A` would
-   sweep them into your commit; `scaffold/winter-cynical-opportunist.ts` is
-   tracked — never delete it) — and `group-<x>/briefs.txt`, `npm run -s
-   card:brief -w engine -- <the group's cards> --analogs 2 --width 300 >
-   …/briefs.txt` (two analogs a line, their shapes clipped: an agent carries
-   the briefs in every turn's context, and asks `card:find` for more). A split
-   card scaffolds as one file per half: keep both halves in one group. The
-   brief's paths use forward slashes (Git Bash's `cp` eats backslashes).
-3. **Deal the cards out** in rank order snaking across the groups, so each
-   gets a mix of long and short cards.
-4. **Stage the digest** once for all of them: `npm run card:digest -w engine
-   -- --out <staging>/digest.md` (the brief's `DIGEST_PATH`) — the whole
-   definition vocabulary on one page, after the batch's feature has landed so
-   it lists it.
-
-Agents run gen:cards, the typecheck and their own test file with `pool.test`
-only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
-reads `dist/`); you run those and the suites after integrating.
-Integrate by cherry-picking each branch, read **every** file against its
-Oracle text and rulings, check `tokens/` for two files making the same token
-(merge them into one), squash the group commits into the batch commit, then
-remove the worktrees the `feedback_worktree_agents` memory's way (unlink
-each `node_modules` junction by absolute path first).
-
-**A stopped agent can't be resumed** (SendMessage refuses it). Its worktree
-and files stay: start a fresh agent in that worktree with a short
-`continue.md` — the original brief, plus "the previous agent left these
-files; re-read each one against its Oracle text, finish what's unfinished,
-judge the deleted drafts again from the staging dir, then run the checks and
-commit". MH2's six took ~8–10 minutes each that way.
+**Parallel agents**: a batch past ~15 authorable cards goes to `card-author`
+agents in their own worktrees, the lead doing the shared work once (the
+feature and its cards first, one scaffold run, tokens made once, drafts
+moved into staged groups, briefs with `--analogs 2 --width 300`, the digest)
+and reading every file the agents write. **`agent-batches.md`** beside this
+file is the whole procedure — sizing, staging, the brief (`agent-brief.md`),
+integrating, a stopped agent, and measuring tokens per card. Use the set's
+code for the brief's `SET_CODE` and `set-<code>-batch-<N>` for its test
+prefix.
 
 ## 2. Build a feature, if one leads
 

@@ -49,14 +49,25 @@ Engine change + its own `engine/src/test/<feature>.test.ts` + its entry in
 AUTHORING.md's vocabulary (and `neededCards-features.md`'s index). Follow
 `engine/CLAUDE.md`'s rules: every decision is a dispatched action with a
 `decisions/` module; `Game` is the only writer of state; cite the rule
-numbers. Add its key to `top-commanders-gaps.json`'s `built`.
+numbers. Add its key to `top-commanders-gaps.json`'s `built`. **Teach the
+scaffolder too**: a template for its line in `scripts/oracle-parse.mjs`,
+checked by `npm run card:parse-check -w engine` and pinned in
+`test/oracle-parse.test.ts`.
 
 ## 3. Author
 
 Every commander it unblocks, plus the top-5000 cards, in `cards/pool/`
 (scaffold with `npm run card:scaffold -w engine -- "Name"` and read what it
 filled in against the Oracle text). Partners and backgrounds: the declarative
-`pairing`. `npm run gen:cards -w engine`.
+`pairing`. `npm run gen:cards -w engine`. `card:brief` first (Oracle text, rulings, the
+pool's closest analogs per line), `card:find` for an example to copy.
+
+A feature that unblocks more than ~15 cards (with the top-5000 ones it
+brings): author the commanders and the cards that test the feature yourself,
+then hand the rest to `card-author` agents —
+**`.claude/skills/author-by-set/agent-batches.md`** is the whole procedure,
+with `agent-brief.md` beside it (`SET_NAMES` "cards unblocked by <feature>",
+`SET_CODE` "<feature>", `TEST_FILE_PREFIX` `commanders-<feature>-`).
 
 ## 4. Test
 

@@ -90,12 +90,24 @@ rules (every decision is a dispatched action; `Game` is the only writer;
 rules accuracy with rule numbers). Then author every card it unblocks —
 `cards:needs -- --feature <key>` lists them, batch or not. A feature needing a
 new player decision is also a client change — check it live in a 2- and a
-4-player room (`dev-up`, `dev-down`) at ~768px tall. Otherwise, skip feature
-work this run and note the leader for the next.
+4-player room (`dev-up`, `dev-down`) at ~768px tall. **Teach the scaffolder
+too**: a template for the feature's keyword line or sentence in
+`scripts/oracle-parse.mjs`, checked by `npm run card:parse-check -w engine`
+(zero disagreements) and pinned in `test/oracle-parse.test.ts`, so its cards
+come pre-drafted. Otherwise, skip feature work this run and note the leader
+for the next.
 
 ## 3. Author
 
-Target 30-50 cards. For each:
+Target 30-50 cards. **Past ~15 authorable cards, use parallel agents**:
+`card-author` agents in their own worktrees, the lead doing the shared work
+once (the feature and the cards that test it first, one scaffold run, tokens
+made once, drafts moved into staged groups, briefs with `--analogs 2 --width
+300`, the digest) and reading every file they write —
+**`.claude/skills/author-by-set/agent-batches.md`** is the whole procedure,
+with `agent-brief.md` beside it (`SET_NAMES` "EDHREC ranks <a>–<b>",
+`SET_CODE` "batch <N>", `TEST_FILE_PREFIX` `top10000-batch-<N>`). Each card,
+whoever writes it:
 
 - File in `engine/src/cards/pool/` (kebab-case name); tokens in `tokens/`,
   reusing an existing token file when one matches exactly. `text` stays close
@@ -108,7 +120,7 @@ Target 30-50 cards. For each:
 ## 4. Test
 
 - `engine/src/test/top10000-batch-<N>.test.ts` (next N after the existing
-  ones), written on `src/test/harness.ts` — `card:brief -- "Name" --test`
+  ones; an agent's is `top10000-batch-<N><letter>`), written on `src/test/harness.ts` — `card:brief -- "Name" --test`
   prints an outline: one focused test per card whose behaviour is more than a
   stat line or a copy of a tested pattern — the clause most likely to be
   wrong. For a test that could pass by accident, break the card and watch it
