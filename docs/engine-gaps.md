@@ -180,9 +180,6 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
-- **`cast-now`'s `play` plays a land only from exile.** `whyCannotPlayLandNow` refuses a card
-  not in exile, so "you may play a land from the top of your library" (Ziatora's Envoy) can't
-  be written though the doc says any offered land.
 - **A debug entry's enters trigger waits a priority round.** `debugSpawn(..., { announceEntry:
   true })` (the harness's `enter()`) made while a player holds priority leaves the trigger
   pending through both players' priority; the step ends and it goes on the stack in the next

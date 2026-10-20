@@ -11438,8 +11438,13 @@ export class Game {
     if (this.activePlayer !== player) return `${player} can't play a land during another player's turn`;
     const landDrop = this.landDropReason(player);
     if (landDrop !== null) return landDrop;
+    // From wherever the effect offers it — exile (hideaway), the top of a
+    // library (Ziatora's Envoy), a hand or a graveyard — but not a card
+    // that's on the battlefield or the stack, or gone.
     const object = this.state.objects[cardId];
-    if (object === undefined || object.zone !== "exile") return "that card is no longer in exile";
+    if (object === undefined || !["exile", "library", "hand", "graveyard"].includes(object.zone)) {
+      return "that card is no longer where it was offered";
+    }
     const def = this.faceDef(cardId, face);
     return def.types.includes("land") ? null : `${def.name} is not a land`;
   }

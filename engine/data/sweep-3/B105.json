@@ -870,6 +870,13 @@
     "engine/src/cards/pool/meeting-of-the-five.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Ziatora's Envoy",
+   "files": [
+    "engine/src/cards/pool/ziatoras-envoy.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -1234,13 +1241,6 @@
     "effect:exile-chosen-from-revealed-hand"
    ],
    "why": "exile a chosen card from a revealed hand"
-  },
-  {
-   "name": "Ziatora's Envoy",
-   "needs": [
-    "effect:cast-now-play-land-from-library"
-   ],
-   "why": "play a land from the top of your library: cast-now's play only takes a card in exile (family decision:free-cast-choices)"
   },
   {
    "name": "Lord Xander, the Collector",

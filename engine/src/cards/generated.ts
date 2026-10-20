@@ -15487,6 +15487,7 @@ import _poolZhulodokVoidGorger from "./pool/zhulodok-void-gorger.js";
 import _poolZhurTaaGoblin from "./pool/zhur-taa-goblin.js";
 import _poolZhurTaaSwine from "./pool/zhur-taa-swine.js";
 import _poolZiatoraTheIncinerator from "./pool/ziatora-the-incinerator.js";
+import _poolZiatorasEnvoy from "./pool/ziatoras-envoy.js";
 import _poolZiatorasProvingGround from "./pool/ziatoras-proving-ground.js";
 import _poolZimoneAndDina from "./pool/zimone-and-dina.js";
 import _poolZimoneInfiniteAnalyst from "./pool/zimone-infinite-analyst.js";
@@ -31472,6 +31473,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZhurTaaGoblin,
   _poolZhurTaaSwine,
   _poolZiatoraTheIncinerator,
+  _poolZiatorasEnvoy,
   _poolZiatorasProvingGround,
   _poolZimoneAndDina,
   _poolZimoneInfiniteAnalyst,
