@@ -624,6 +624,7 @@ import _poolArchonOfRedemption from "./pool/archon-of-redemption.js";
 import _poolArchonOfSunsGrace from "./pool/archon-of-suns-grace.js";
 import _poolArchonOfTheWildRose from "./pool/archon-of-the-wild-rose.js";
 import _poolArchonsGlory from "./pool/archons-glory.js";
+import _poolArchpriestOfIona from "./pool/archpriest-of-iona.js";
 import _poolArchpriestOfShadows from "./pool/archpriest-of-shadows.js";
 import _poolArchwayCommons from "./pool/archway-commons.js";
 import _poolArchweaver from "./pool/archweaver.js";
@@ -3180,6 +3181,7 @@ import _poolDeadeyeDuelist from "./pool/deadeye-duelist.js";
 import _poolDeadeyeHarpooner from "./pool/deadeye-harpooner.js";
 import _poolDeadeyeRigHauler from "./pool/deadeye-rig-hauler.js";
 import _poolDeadeyeTormentor from "./pool/deadeye-tormentor.js";
+import _poolDeadlyAlliance from "./pool/deadly-alliance.js";
 import _poolDeadlyBrew from "./pool/deadly-brew.js";
 import _poolDeadlyComplication from "./pool/deadly-complication.js";
 import _poolDeadlyDerision from "./pool/deadly-derision.js";
@@ -8232,6 +8234,7 @@ import _poolMakindiStampede from "./pool/makindi-stampede.js";
 import _poolMalachOfTheDawn from "./pool/malach-of-the-dawn.js";
 import _poolMalachiteGolem from "./pool/malachite-golem.js";
 import _poolMaladyInvoker from "./pool/malady-invoker.js";
+import _poolMalakirBloodPriest from "./pool/malakir-blood-priest.js";
 import _poolMalakirBloodwitch from "./pool/malakir-bloodwitch.js";
 import _poolMalakirCullblade from "./pool/malakir-cullblade.js";
 import _poolMalakirFamiliar from "./pool/malakir-familiar.js";
@@ -10613,6 +10616,7 @@ import _poolRaucousTheater from "./pool/raucous-theater.js";
 import _poolRaugrinCrystal from "./pool/raugrin-crystal.js";
 import _poolRaugrinTriome from "./pool/raugrin-triome.js";
 import _poolRavagedHighlands from "./pool/ravaged-highlands.js";
+import _poolRavagersMace from "./pool/ravagers-mace.js";
 import _poolRavagingHorde from "./pool/ravaging-horde.js";
 import _poolRavenClanWarAxe from "./pool/raven-clan-war-axe.js";
 import _poolRavenEagle from "./pool/raven-eagle.js";
@@ -11701,6 +11705,7 @@ import _poolScytheLeopard from "./pool/scythe-leopard.js";
 import _poolScythecatCub from "./pool/scythecat-cub.js";
 import _poolSeaEagle from "./pool/sea-eagle.js";
 import _poolSeaGateBanneret from "./pool/sea-gate-banneret.js";
+import _poolSeaGateColossus from "./pool/sea-gate-colossus.js";
 import _poolSeaGateWreckage from "./pool/sea-gate-wreckage.js";
 import _poolSeaGate from "./pool/sea-gate.js";
 import _poolSeaHag from "./pool/sea-hag.js";
@@ -11987,6 +11992,7 @@ import _poolShatteredWings from "./pool/shattered-wings.js";
 import _poolShatteredYard from "./pool/shattered-yard.js";
 import _poolShatteringBlow from "./pool/shattering-blow.js";
 import _poolShatterskullGiant from "./pool/shatterskull-giant.js";
+import _poolShatterskullMinotaur from "./pool/shatterskull-minotaur.js";
 import _poolShatterskullRecruit from "./pool/shatterskull-recruit.js";
 import _poolShatterwingPegasus from "./pool/shatterwing-pegasus.js";
 import _poolShaukusMinion from "./pool/shaukus-minion.js";
@@ -12876,6 +12882,7 @@ import _poolSproutingThrinax from "./pool/sprouting-thrinax.js";
 import _poolSpurredWolverine from "./pool/spurred-wolverine.js";
 import _poolSpyglassSiren from "./pool/spyglass-siren.js";
 import _poolSpymastersVault from "./pool/spymasters-vault.js";
+import _poolSquadCommander from "./pool/squad-commander.js";
 import _poolSquadRallier from "./pool/squad-rallier.js";
 import _poolSquallDrifter from "./pool/squall-drifter.js";
 import _poolSquall from "./pool/squall.js";
@@ -16322,6 +16329,7 @@ import _tokensKnightTokenGuardedHeir from "./tokens/knight-token-guarded-heir.js
 import _tokensKnightToken from "./tokens/knight-token.js";
 import _tokensKomasCoil from "./tokens/komas-coil.js";
 import _tokensKorAllyToken from "./tokens/kor-ally-token.js";
+import _tokensKorWarriorToken from "./tokens/kor-warrior-token.js";
 import _tokensKrakenTokenSpawningKraken from "./tokens/kraken-token-spawning-kraken.js";
 import _tokensKrakenToken from "./tokens/kraken-token.js";
 import _tokensLanderToken from "./tokens/lander-token.js";
@@ -17187,6 +17195,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchonOfSunsGrace,
   _poolArchonOfTheWildRose,
   _poolArchonsGlory,
+  _poolArchpriestOfIona,
   _poolArchpriestOfShadows,
   _poolArchwayCommons,
   _poolArchweaver,
@@ -19743,6 +19752,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeadeyeHarpooner,
   _poolDeadeyeRigHauler,
   _poolDeadeyeTormentor,
+  _poolDeadlyAlliance,
   _poolDeadlyBrew,
   _poolDeadlyComplication,
   _poolDeadlyDerision,
@@ -24795,6 +24805,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMalachOfTheDawn,
   _poolMalachiteGolem,
   _poolMaladyInvoker,
+  _poolMalakirBloodPriest,
   _poolMalakirBloodwitch,
   _poolMalakirCullblade,
   _poolMalakirFamiliar,
@@ -27176,6 +27187,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaugrinCrystal,
   _poolRaugrinTriome,
   _poolRavagedHighlands,
+  _poolRavagersMace,
   _poolRavagingHorde,
   _poolRavenClanWarAxe,
   _poolRavenEagle,
@@ -28264,6 +28276,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScythecatCub,
   _poolSeaEagle,
   _poolSeaGateBanneret,
+  _poolSeaGateColossus,
   _poolSeaGateWreckage,
   _poolSeaGate,
   _poolSeaHag,
@@ -28550,6 +28563,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShatteredYard,
   _poolShatteringBlow,
   _poolShatterskullGiant,
+  _poolShatterskullMinotaur,
   _poolShatterskullRecruit,
   _poolShatterwingPegasus,
   _poolShaukusMinion,
@@ -29439,6 +29453,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpurredWolverine,
   _poolSpyglassSiren,
   _poolSpymastersVault,
+  _poolSquadCommander,
   _poolSquadRallier,
   _poolSquallDrifter,
   _poolSquall,
@@ -32891,6 +32906,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensKnightToken,
   _tokensKomasCoil,
   _tokensKorAllyToken,
+  _tokensKorWarriorToken,
   _tokensKrakenTokenSpawningKraken,
   _tokensKrakenToken,
   _tokensLanderToken,
@@ -33763,6 +33779,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archon-of-suns-grace": _poolArchonOfSunsGrace,
   "pool/archon-of-the-wild-rose": _poolArchonOfTheWildRose,
   "pool/archons-glory": _poolArchonsGlory,
+  "pool/archpriest-of-iona": _poolArchpriestOfIona,
   "pool/archpriest-of-shadows": _poolArchpriestOfShadows,
   "pool/archway-commons": _poolArchwayCommons,
   "pool/archweaver": _poolArchweaver,
@@ -36319,6 +36336,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deadeye-harpooner": _poolDeadeyeHarpooner,
   "pool/deadeye-rig-hauler": _poolDeadeyeRigHauler,
   "pool/deadeye-tormentor": _poolDeadeyeTormentor,
+  "pool/deadly-alliance": _poolDeadlyAlliance,
   "pool/deadly-brew": _poolDeadlyBrew,
   "pool/deadly-complication": _poolDeadlyComplication,
   "pool/deadly-derision": _poolDeadlyDerision,
@@ -41371,6 +41389,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/malach-of-the-dawn": _poolMalachOfTheDawn,
   "pool/malachite-golem": _poolMalachiteGolem,
   "pool/malady-invoker": _poolMaladyInvoker,
+  "pool/malakir-blood-priest": _poolMalakirBloodPriest,
   "pool/malakir-bloodwitch": _poolMalakirBloodwitch,
   "pool/malakir-cullblade": _poolMalakirCullblade,
   "pool/malakir-familiar": _poolMalakirFamiliar,
@@ -43752,6 +43771,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/raugrin-crystal": _poolRaugrinCrystal,
   "pool/raugrin-triome": _poolRaugrinTriome,
   "pool/ravaged-highlands": _poolRavagedHighlands,
+  "pool/ravagers-mace": _poolRavagersMace,
   "pool/ravaging-horde": _poolRavagingHorde,
   "pool/raven-clan-war-axe": _poolRavenClanWarAxe,
   "pool/raven-eagle": _poolRavenEagle,
@@ -44840,6 +44860,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scythecat-cub": _poolScythecatCub,
   "pool/sea-eagle": _poolSeaEagle,
   "pool/sea-gate-banneret": _poolSeaGateBanneret,
+  "pool/sea-gate-colossus": _poolSeaGateColossus,
   "pool/sea-gate-wreckage": _poolSeaGateWreckage,
   "pool/sea-gate": _poolSeaGate,
   "pool/sea-hag": _poolSeaHag,
@@ -45126,6 +45147,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shattered-yard": _poolShatteredYard,
   "pool/shattering-blow": _poolShatteringBlow,
   "pool/shatterskull-giant": _poolShatterskullGiant,
+  "pool/shatterskull-minotaur": _poolShatterskullMinotaur,
   "pool/shatterskull-recruit": _poolShatterskullRecruit,
   "pool/shatterwing-pegasus": _poolShatterwingPegasus,
   "pool/shaukus-minion": _poolShaukusMinion,
@@ -46015,6 +46037,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spurred-wolverine": _poolSpurredWolverine,
   "pool/spyglass-siren": _poolSpyglassSiren,
   "pool/spymasters-vault": _poolSpymastersVault,
+  "pool/squad-commander": _poolSquadCommander,
   "pool/squad-rallier": _poolSquadRallier,
   "pool/squall-drifter": _poolSquallDrifter,
   "pool/squall": _poolSquall,
@@ -49461,6 +49484,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/knight-token": _tokensKnightToken,
   "tokens/komas-coil": _tokensKomasCoil,
   "tokens/kor-ally-token": _tokensKorAllyToken,
+  "tokens/kor-warrior-token": _tokensKorWarriorToken,
   "tokens/kraken-token-spawning-kraken": _tokensKrakenTokenSpawningKraken,
   "tokens/kraken-token": _tokensKrakenToken,
   "tokens/lander-token": _tokensLanderToken,

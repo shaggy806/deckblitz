@@ -1057,6 +1057,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(brawler.complete).toBe(true);
   });
 
+  it("party (rule 700.8): Archpriest of Iona's power, and {1} less for each creature in your party", () => {
+    const reminder = "(Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)";
+    const archpriest = face(`Test Card's power is equal to the number of creatures in your party. ${reminder}`, "Creature — Human Cleric");
+    expect(archpriest.static[0].setBasePtFromCount).toEqual({ countOf: { partySize: "you" }, plusPower: 0, plusToughness: 0, only: "power" });
+    expect(archpriest.complete).toBe(true);
+    const always = { kind: "controls", filter: {}, atLeast: 0 };
+    const alliance = face(
+      `This spell costs {1} less to cast for each creature in your party. ${reminder}\nDestroy target creature or planeswalker.`,
+      "Instant",
+    );
+    expect(alliance.selfCostReduction).toEqual({ condition: always, reduceGeneric: { partySize: "you" } });
+    expect(alliance.complete).toBe(true);
+    const domain = face("This spell costs {1} less to cast for each basic land type among lands you control.", "Sorcery");
+    expect(domain.selfCostReduction).toEqual({ condition: always, reduceGeneric: { basicLandTypes: "you" } });
+    const linvala = face(
+      "At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.",
+      "Creature — Human Cleric",
+    );
+    expect(linvala.triggered[0].condition).toEqual({ kind: "full-party" });
+    expect(linvala.complete).toBe(true);
+  });
+
   it("the initiative (rule 726): 'you take the initiative'", () => {
     expect(parseSentence("You take the initiative.", ctx())).toEqual({ kind: "take-initiative" });
     const scout = face("When Test Card enters, you take the initiative.", "Creature — Bird Rogue");

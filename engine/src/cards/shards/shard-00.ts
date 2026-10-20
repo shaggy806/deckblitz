@@ -378,6 +378,7 @@ import _poolScoutingHawk from "../pool/scouting-hawk.js";
 import _poolScreechingBuzzard from "../pool/screeching-buzzard.js";
 import _poolScreechingSkaab from "../pool/screeching-skaab.js";
 import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
+import _poolSeaGateColossus from "../pool/sea-gate-colossus.js";
 import _poolSearingWind from "../pool/searing-wind.js";
 import _poolSecondBreakfast from "../pool/second-breakfast.js";
 import _poolSeersSundial from "../pool/seers-sundial.js";
@@ -387,6 +388,7 @@ import _poolSerahFarron from "../pool/serah-farron.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
+import _poolShatterskullMinotaur from "../pool/shatterskull-minotaur.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
@@ -909,6 +911,7 @@ const shard: CardShard = {
     _poolScreechingBuzzard,
     _poolScreechingSkaab,
     _poolScroungerOfSouls,
+    _poolSeaGateColossus,
     _poolSearingWind,
     _poolSecondBreakfast,
     _poolSeersSundial,
@@ -918,6 +921,7 @@ const shard: CardShard = {
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
     _poolSharpshooterElf,
+    _poolShatterskullMinotaur,
     _poolShiftingSliver,
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,

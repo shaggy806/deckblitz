@@ -291,6 +291,7 @@ import _poolRagingRegisaur from "../pool/raging-regisaur.js";
 import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
+import _poolRavagersMace from "../pool/ravagers-mace.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
 import _poolRayOfDissolution from "../pool/ray-of-dissolution.js";
 import _poolRealityShift from "../pool/reality-shift.js";
@@ -764,6 +765,7 @@ const shard: CardShard = {
     _poolRaidersKarve,
     _poolRampagingHippo,
     _poolRaugrinCrystal,
+    _poolRavagersMace,
     _poolRavenousSkirge,
     _poolRayOfDissolution,
     _poolRealityShift,

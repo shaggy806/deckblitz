@@ -1795,6 +1795,16 @@ export function parseFace(face, ctx = {}) {
     // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
     // life" isn't read).
     if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
+    // Party (rule 700.8) and domain (207.2c) cost reductions: {1} less for
+    // each, unconditionally — the always-true gate Leyline Binding uses.
+    const perEach = {
+      "~ costs {1} less to cast for each creature in your party.": { partySize: "you" },
+      "~ costs {1} less to cast for each basic land type among lands you control.": { basicLandTypes: "you" },
+    }[line];
+    if (perEach !== undefined) {
+      out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };
+      continue;
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }
@@ -2261,6 +2271,8 @@ const INTERVENING_IFS = {
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },
+  // Rule 700.8c (Zendikar Rising).
+  "if you have a full party,": { kind: "full-party" },
 };
 
 /** "If your devotion to white and black is seven or greater," (March of the
@@ -2503,6 +2515,14 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       setBasePtFromCount: { countOf: { basicLandTypes: "you" }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
+  // Party (rule 700.8): Archpriest of Iona's CDA.
+  if (line === "~'s power is equal to the number of creatures in your party.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { partySize: "you" }, plusPower: 0, plusToughness: 0, only: "power" },
       text,
     };
   }

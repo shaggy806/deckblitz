@@ -19,6 +19,7 @@ import _poolAnointerOfChampions from "../pool/anointer-of-champions.js";
 import _poolAqueousForm from "../pool/aqueous-form.js";
 import _poolArborElf from "../pool/arbor-elf.js";
 import _poolArcaneAmphisbaena from "../pool/arcane-amphisbaena.js";
+import _poolArchpriestOfIona from "../pool/archpriest-of-iona.js";
 import _poolArnynDeathbloomBotanist from "../pool/arnyn-deathbloom-botanist.js";
 import _poolArtfulTakedown from "../pool/artful-takedown.js";
 import _poolAshBarrens from "../pool/ash-barrens.js";
@@ -571,6 +572,7 @@ const shard: CardShard = {
     _poolAqueousForm,
     _poolArborElf,
     _poolArcaneAmphisbaena,
+    _poolArchpriestOfIona,
     _poolArnynDeathbloomBotanist,
     _poolArtfulTakedown,
     _poolAshBarrens,

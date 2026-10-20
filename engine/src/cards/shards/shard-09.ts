@@ -107,6 +107,7 @@ import _poolCrystalVein from "../pool/crystal-vein.js";
 import _poolDakkonShadowSlayer from "../pool/dakkon-shadow-slayer.js";
 import _poolDarkwatchElves from "../pool/darkwatch-elves.js";
 import _poolDauntlessCathar from "../pool/dauntless-cathar.js";
+import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
@@ -637,6 +638,7 @@ const shard: CardShard = {
     _poolDakkonShadowSlayer,
     _poolDarkwatchElves,
     _poolDauntlessCathar,
+    _poolDeadlyAlliance,
     _poolDeadlyRecluse,
     _poolDeathInTheFamily,
     _poolDefiantKhenra,

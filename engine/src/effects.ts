@@ -414,6 +414,13 @@ export type EffectAmount =
    * control". `characteristics.ts`'s `basicLandTypesAmong`; a cost reduction
    * and a CDA count have the same form. */
   | { readonly basicLandTypes: "you" }
+  /** The number of creatures in the effect's controller's party, 0 to 4 (rule
+   * 700.8), as it resolves — Malakir Blood-Priest's "each opponent loses X
+   * life and you gain X life, where X is the number of creatures in your
+   * party".
+   * `characteristics.ts`'s `partySizeOf`; a cost reduction and a CDA count
+   * have the same form. */
+  | { readonly partySize: "you" }
   /** How many creatures died under the effect controller's control this turn
    * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
    * `anyController`: every creature that died this turn, whoever controlled
@@ -5632,6 +5639,8 @@ export interface EffectApi {
   greatestCommanderManaValue(): number;
   /** See the `{ basicLandTypes }` {@link EffectAmount}. */
   basicLandTypes(): number;
+  /** See the `{ partySize }` {@link EffectAmount}. */
+  partySize(): number;
   /** See the `{ opponentsControllingFewer }` {@link EffectAmount}. */
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
@@ -7602,6 +7611,7 @@ function signedAmountValue(
   }
   if ("greatestCommanderManaValue" in amount) return ctx.greatestCommanderManaValue();
   if ("basicLandTypes" in amount) return ctx.basicLandTypes();
+  if ("partySize" in amount) return ctx.partySize();
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
     const ref = resolveAmountRef(amount.powerOf, ctx);

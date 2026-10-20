@@ -383,7 +383,12 @@ export type CountSpec =
    * controls, 0 to 5 (Nishoba Brawler's "power is equal to the number of
    * basic land types among lands you control"). `characteristics.ts`'s
    * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */
-  | { readonly basicLandTypes: "you" };
+  | { readonly basicLandTypes: "you" }
+  /** The number of creatures in its controller's party, 0 to 4 (rule 700.8 —
+   * Archpriest of Iona's "power is equal to the number of creatures in your
+   * party"). `characteristics.ts`'s `partySizeOf`; see the `EffectAmount` of
+   * the same name. */
+  | { readonly partySize: "you" };
 
 /**
  * A per-player running total the engine keeps for the current turn, readable
@@ -721,6 +726,10 @@ export type StaticCondition =
    * is two of the four. A card's printed types are what count — layer
    * effects don't reach a graveyard. */
   | { readonly kind: "delirium" }
+  /** You have a full party (rule 700.8c) — a Cleric, a Rogue, a Warrior and a
+   * Wizard among the creatures you control, each a different creature (a
+   * changeling fills any one role). `characteristics.ts`'s `partySizeOf`. */
+  | { readonly kind: "full-party" }
   /** Metalcraft (rule 702.44) — you control three or more artifacts. */
   | { readonly kind: "metalcraft" }
   /**
@@ -1258,6 +1267,11 @@ export interface StaticAbility {
      * 702.179f) — Samut, the Driving Force's "other creatures you control get
      * +X/+0, where X is your speed" is `{ speed: true, pt: [1, 0] }`. */
     readonly speed?: true;
+    /** The number of creatures in this permanent's controller's party (rule
+     * 700.8) — Ravager's Mace's "equipped creature gets +1/+0 for each
+     * creature in your party" is `{ partySize: true, pt: [1, 0] }`. Reads only
+     * types and controllers (layers 2 and 4), so the P/T fold doesn't recurse. */
+    readonly partySize?: true;
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };

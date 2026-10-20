@@ -536,6 +536,11 @@ export type CostReductionAmount =
    * controls (Leyline Binding, Jodah's Codex). `characteristics.ts`'s
    * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */
   | { readonly basicLandTypes: "you" }
+  /** Party — {1} less for each creature in its controller's party (rule
+   * 700.8) — Deadly Alliance's "This spell costs {1} less to cast for each
+   * creature in your party". `characteristics.ts`'s
+   * `partySizeOf`; see the `EffectAmount` of the same name. */
+  | { readonly partySize: "you" }
   /** A sum or maximum over permanents — Ghalta, Primal Hunger's "costs {X}
    * less to cast, where X is the **total power** of creatures you control".
    * Clamped at 0. See `AggregateSpec`. */

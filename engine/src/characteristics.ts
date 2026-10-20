@@ -688,6 +688,9 @@ function evalStaticCondition(
       }
       return types.size >= 4;
     }
+    case "full-party":
+      // Rule 700.8c: a party of four.
+      return partySizeOf(state, registry, you) === 4;
     case "metalcraft":
       return reaches(3, (id) => {
         const o = state.objects[id];
@@ -2021,6 +2024,50 @@ export function basicLandTypesAmong(state: GameState, registry: CardRegistry, pl
   return n;
 }
 
+/** The four roles of a party (rule 700.8), in the order its bits are kept. */
+const PARTY_ROLES = ["Cleric", "Rogue", "Warrior", "Wizard"] as const;
+
+/**
+ * The number of creatures in `player`'s party, 0 to 4 (rule 700.8): up to one
+ * Cleric, one Rogue, one Warrior and one Wizard they control. A creature with
+ * more than one of those types fills only one role, chosen to make the count
+ * as large as possible (700.8b) — a Cleric Wizard and a Wizard are a party of
+ * two — so this is a maximum matching of creatures to the four roles, kept as
+ * the set of reachable role masks. A creature's types are its current ones,
+ * read through `matchesFilter` (a changeling fills any role). A compacted
+ * token stack is that many creatures (`permanentCount`); more than four of
+ * one can't add anything.
+ */
+export function partySizeOf(state: GameState, registry: CardRegistry, player: PlayerId): number {
+  let reachable = new Set<number>([0]);
+  for (const id of state.zones.shared.battlefield) {
+    let roles = 0;
+    PARTY_ROLES.forEach((subtype, bit) => {
+      const filter: CardFilter = { type: "creature", subtype, controlledBy: "you" };
+      if (matchesFilter(state, registry, id, filter, { you: player })) roles |= 1 << bit;
+    });
+    if (roles === 0) continue;
+    const copies = Math.min(4, state.objects[id]?.stackCount ?? 1);
+    for (let i = 0; i < copies; i++) {
+      const next = new Set(reachable);
+      for (const mask of reachable) {
+        for (let bit = 0; bit < PARTY_ROLES.length; bit++) {
+          if ((roles & (1 << bit)) !== 0 && (mask & (1 << bit)) === 0) next.add(mask | (1 << bit));
+        }
+      }
+      reachable = next;
+    }
+    if (reachable.has(0b1111)) return 4;
+  }
+  let best = 0;
+  for (const mask of reachable) {
+    let n = 0;
+    for (let m = mask; m !== 0; m &= m - 1) n += 1;
+    best = Math.max(best, n);
+  }
+  return best;
+}
+
 /** The current value of a CDA's dynamic count (rule 604.3). */
 export function countValue(
   spec: CountSpec,
@@ -2058,6 +2105,7 @@ export function countValue(
     }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
+    if ("partySize" in spec) return partySizeOf(state, registry, controller);
     return allGraveyards().filter((id) =>
       matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller }),
     ).length;
@@ -2907,6 +2955,8 @@ function collectStaticEffects(
             ? (state.players[source.controller]?.counters[per.playerCounters] ?? 0)
             : per.speed === true
             ? speedOf(state, source.controller)
+            : per.partySize === true
+            ? partySizeOf(state, registry, source.controller)
             : per.countersOnAffected !== undefined
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined

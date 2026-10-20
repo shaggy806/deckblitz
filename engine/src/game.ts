@@ -88,6 +88,7 @@ import {
   turnHistoryCount,
   cardTypesInGraveyards,
   basicLandTypesAmong,
+  partySizeOf,
   colorsAmongPermanents,
   computeCharacteristics,
   computedCacheMemo,
@@ -22178,6 +22179,7 @@ export class Game {
       devotionTo: (colors) => devotionOf(this.state, this.registry, controller, colors),
       greatestCommanderManaValue: () => greatestCommanderManaValue(this.state, this.registry, controller),
       basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
+      partySize: () => partySizeOf(this.state, this.registry, controller),
       opponentsControllingFewer: (filter) => {
         // What each player *controls* (read from their own side), whether or
         // not the filter says so — Voice of Many's `{ type: "creature" }`
@@ -26084,6 +26086,7 @@ export class Game {
     }
     if ("speed" in amount) return speedOf(this.state, player);
     if ("basicLandTypes" in amount) return basicLandTypesAmong(this.state, this.registry, player);
+    if ("partySize" in amount) return partySizeOf(this.state, this.registry, player);
     if ("turnHistory" in amount) {
       return (
         (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, [player], amount.turnHistory, amount.filter, player)

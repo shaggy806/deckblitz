@@ -238,6 +238,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Knight Token (Guarded Heir)",
   "Koma's Coil",
   "Kor Ally Token",
+  "Kor Warrior Token",
   "Kraken Token",
   "Kraken Token (Spawning Kraken)",
   "Lander Token",

@@ -657,7 +657,15 @@ adds to every one), `{ basicLandTypes: "you" }` (domain, an ability word —
 rule 207.2c: the basic land types among lands you control, each once, 0 to 5 —
 Meria's Outrider; the same form is a `costReduction`/`selfCostReduction`
 amount, Jodah's Codex and Yavimaya Sojourner, and a CDA count, Nishoba
-Brawler), `{ greatestCommanderManaValue: true }`
+Brawler), `{ partySize: "you" }` (party, rule 700.8: the creatures in your
+party, 0 to 4 — up to one each of Cleric, Rogue, Warrior and Wizard you
+control, a creature of two of them counted in whichever role makes the party
+largest, 700.8b — Malakir Blood-Priest; the same form is a
+`selfCostReduction` amount, Deadly Alliance, and a CDA count, Archpriest of
+Iona; `grantPtPerCount: { partySize: true }` is Ravager's Mace's "+1/+0 for
+each creature in your party"; "if you have a full party" (700.8c) is the
+condition `{ kind: "full-party" }`, Linvala, Shield of Sea Gate's
+intervening if), `{ greatestCommanderManaValue: true }`
 (the greatest mana value among your commanders, wherever they are — Cactus
 Preserve's X/X), `{ creaturesDiedThisTurn: true }`
 (per *player*, unlike `GameState`'s global counter — Liliana's Standard
@@ -3392,6 +3400,8 @@ their declarations to it (`withinAttackTax`), and the client shows the running c
     "power"`, printed power 0).
   - `{ basicLandTypes: "you" }` — domain: the basic land types among lands
     its controller controls (Nishoba Brawler, `only: "power"`).
+  - `{ partySize: "you" }` — party: the creatures in its controller's party,
+    0 to 4 (rule 700.8 — Archpriest of Iona, `only: "power"`).
 
   It applies in every zone (rule 604.3), so the card has that size in a
   library, hand, graveyard or the command zone too; "you" is its controller,

@@ -397,6 +397,7 @@ import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
 import _poolSpitfireLagac from "../pool/spitfire-lagac.js";
 import _poolSpreadingRot from "../pool/spreading-rot.js";
+import _poolSquadCommander from "../pool/squad-commander.js";
 import _poolStaffOfCompleation from "../pool/staff-of-compleation.js";
 import _poolStarscapeCleric from "../pool/starscape-cleric.js";
 import _poolStarvedRusalka from "../pool/starved-rusalka.js";
@@ -930,6 +931,7 @@ const shard: CardShard = {
     _poolSpaceshift,
     _poolSpitfireLagac,
     _poolSpreadingRot,
+    _poolSquadCommander,
     _poolStaffOfCompleation,
     _poolStarscapeCleric,
     _poolStarvedRusalka,
