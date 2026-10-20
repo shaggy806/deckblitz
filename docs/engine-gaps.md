@@ -128,10 +128,6 @@ that needs it is authored.
   its snapshot (`DelayedTrigger.triggerObjectCeased` — Esoteric Duplicator copying a Clue
   sacrificed in an end step, at the next turn's end step), but anything else reading a ceased
   token on a later turn still loses it. Latent: no other pool card is known to.
-- **A `{T}` ability granted to a token stack taps the whole stack.** Activating a granted
-  activated `{T}` ability on a compacted stack (`stackCount`) taps every token rather than
-  splitting one off first. Ordinary token stacks have no activated abilities; it needs a static
-  that grants one, and no pool card is known to (found 2026-10-09 with the becomes-tapped fix).
 - **A regeneration shield goes before a shield counter.** Both replace "this permanent would
   be destroyed" (rules 701.15a, 122.1c), so with both on it the permanent's controller chooses
   which applies (616.1); `Game.destroyByEffect` always spends the regeneration shield first,

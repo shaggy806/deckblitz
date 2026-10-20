@@ -1507,11 +1507,21 @@ export class Game {
           this.webSlingingReturnChoice = undefined;
         }
         break;
-      case "activate-ability":
-        this.withWaterbendChoice(action.source, action.waterbend, () =>
+      case "activate-ability": {
+        // A {T} cost taps one token of a stack, not every token in it: that
+        // one is split off first and activates (a stack is a representation
+        // — it may not change a result).
+        let source = action.source;
+        if ((this.state.objects[source]?.stackCount ?? 1) > 1) {
+          const ability = this.effectiveActivated(source)[action.abilityIndex];
+          if (ability?.cost.tap === true && this.whyCannotActivateAbility(action.player, source, action.abilityIndex, action.tap, action.xValue ?? 0, normalizeTargets(action.targets)) === null) {
+            source = this.splitOneFromStack(source);
+          }
+        }
+        this.withWaterbendChoice(source, action.waterbend, () =>
           this.activateAbility(
             action.player,
-            action.source,
+            source,
             action.abilityIndex,
             normalizeTargets(action.targets),
             action.sacrifice,
@@ -1522,6 +1532,7 @@ export class Game {
           ),
         );
         break;
+      }
       default:
         throw new Error(
           `unhandled action: ${(action as { type: string }).type}`,
