@@ -5065,3 +5065,24 @@ as a second "Cast" beside the normal one
 - **Check:** The Bears are a 4/4 with infect while equipped; when the Exoskeleton moves, its trigger
   goes on the stack naming the Bears and, as it resolves, the Bears are sacrificed. The Giant is a 5/5
   with infect. The log reads sensibly. Check at ~768px tall.
+
+## The Forgotten Realms dungeons (2026-10-20)
+
+### Secret Door (venture into the dungeon)
+
+*New player decision* — "venture into the dungeon" chooses among Lost Mine of Phandelver, Dungeon
+of the Mad Mage and Tomb of Annihilation (rule 701.49a); Tomb's Veils of Fear asks every player in
+turn, then all discard at once (rule 101.4), a chosen card hidden until then (101.4a)
+
+- **Setup:** Your precombat main. Your battlefield: Secret Door and ten Islands; in hand Grizzly
+  Bears and Hill Giant. Bob (played by you — "Sit" at his seat) has a Forest and, in hand, Lightning
+  Bolt and Shock.
+- **Do:** Activate Secret Door ({4}{U}). Choose Tomb of Annihilation. Let Trapped Entry resolve.
+  Activate it again; at the fork choose Veils of Fear. Discard Hill Giant; then, as Bob, discard
+  Shock.
+- **Check:** The first venture's popup shows the three dungeons side by side as small maps, each a
+  button, and no Undercity. Trapped Entry costs each player 1 life. At the fork the Tomb's map opens
+  with Veils of Fear and Oubliette outlined. While Bob chooses, Hill Giant is still in your hand
+  and Bob's view doesn't show it discarded; once he has chosen, both cards reach the graveyards
+  together and nobody loses 2. The panel's chip reads "Tomb of Annihilation 2/4" and opens the
+  map. Check at ~768px tall, in a 2- and a 4-player room.

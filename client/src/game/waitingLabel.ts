@@ -27,7 +27,8 @@ const DOING: Record<NonNullable<PlayerView['awaiting']>['kind'], string> = {
   'choose-permanents': 'choosing permanents',
   'enter-attacking': 'choosing what to attack',
   scry: 'scrying',
-  venture: 'choosing a room',
+  // A room at a fork, or which dungeon to enter (rule 701.49).
+  venture: 'venturing into the dungeon',
 }
 
 /**

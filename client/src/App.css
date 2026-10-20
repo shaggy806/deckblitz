@@ -4986,6 +4986,9 @@
 }
 .dungeon-box--wide {
   width: min(clamp(560px, 86vw, 1400px), 100%);
+  /* The three side by side need more than a popup's usual 900px cap: at
+     900px a three-room row of Lost Mine of Phandelver was 83px wide. */
+  max-width: 100%;
 }
 .dungeon-map {
   position: relative;
@@ -4994,7 +4997,7 @@
   flex-shrink: 0;
 }
 .dungeon-map--compact {
-  height: calc(var(--dm-rows) * clamp(36px, 7vh, 72px));
+  height: calc(var(--dm-rows) * clamp(40px, 8vh, 76px));
 }
 .dungeon-map-arrows {
   position: absolute;

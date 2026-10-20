@@ -1257,7 +1257,12 @@ export function useNetworkGame(): NetworkGame {
       // A member id (`<id>#<k>`, one token of a compacted stack while a
       // combat declaration is built — game/stackMembers.ts) is its stack.
       const o = view?.objects[realId(id)]
-      return o ? (o.faceName ?? o.cardName) : id
+      if (o) return o.faceName ?? o.cardName
+      // The pending decision's source when it's no object this seat is
+      // shown — a dungeon in the command zone, whose room ability is asking
+      // (Tomb of Annihilation's Veils of Fear): the view names it.
+      const source = view?.decisionSource
+      return source && source.object === id ? source.cardName : id
     },
     [view],
   )

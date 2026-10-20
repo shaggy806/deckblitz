@@ -3008,4 +3008,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Grafted Exoskeleton',
     board({ you: { bf: ['Grafted Exoskeleton', 'Grizzly Bears', 'Hill Giant', 'Wastes*4'] } }),
   ),
+  // --- The Forgotten Realms dungeons (2026-10-20) ----------------------------
+  preset(
+    'Secret Door (venture into the dungeon)',
+    board({
+      you: { bf: ['Secret Door', 'Island*10'], hand: ['Grizzly Bears', 'Hill Giant'] },
+      opp: { human: true, bf: ['Forest'], hand: ['Lightning Bolt', 'Shock'] },
+    }),
+  ),
 ]

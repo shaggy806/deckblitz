@@ -36,8 +36,9 @@ export function DungeonMap({ map, marker, choices = [], onPick, compact = false 
     const row = byRow[depth[i]]
     return { x: ((row.indexOf(i) + 0.5) / row.length) * 100, y: ((depth[i] + 0.5) / rows) * 100 }
   })
-  // A room's half-height in percent: rooms fill most of their row.
-  const halfH = (100 / rows) * 0.38
+  // A room's half-height in percent: rooms fill most of their row — more of
+  // a compact one, whose rows are short, so a name and two lines still fit.
+  const halfH = (100 / rows) * (compact ? 0.42 : 0.38)
   const next = new Set(marker === null ? [] : map.rooms[marker].next)
   const pickable = new Set(choices)
 
