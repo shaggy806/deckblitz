@@ -444,6 +444,7 @@ import _poolTruePolymorph from "../pool/true-polymorph.js";
 import _poolTundra from "../pool/tundra.js";
 import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
+import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadMinotaur from "../pool/undead-minotaur.js";
@@ -948,6 +949,7 @@ const shard: CardShard = {
     _poolTundra,
     _poolTurbulentFen,
     _poolTurbulentSteppe,
+    _poolTuyaBearclaw,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,
     _poolUndeadMinotaur,

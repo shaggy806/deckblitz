@@ -113,6 +113,15 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
+- **"Enters untapped" always beats "enters tapped".** When an enters-the-battlefield replacement
+  that makes a permanent enter untapped meets one that makes it enter tapped, the engine applies
+  the untapped one last, so the permanent enters untapped (`game.ts`, where the enters
+  replacements fold — the comment there assumes the untapped effect is the entering permanent's
+  own controller's). Rule 616.1 gives the entering permanent's controller the order. Archelos,
+  Lagoon Mystic (batch 113) reaches every player's permanents, so on an opponent's permanent with
+  its own "enters tapped" the engine makes that player's choice for them — the one they'd make
+  almost always, which is why the card is authored. A choice asked of the controller would close
+  it.
 - **A granted ability's dynamic filter is fixed when it's granted.** `bindDynamicCompares`
   (`effects.ts`) binds every `{ amount }` operand in an effect as it applies, skipping only the
   keys under which an effect nests another (`NESTED_EFFECT_KEYS`) — and `ability` (a

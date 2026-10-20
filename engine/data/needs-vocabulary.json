@@ -8655,6 +8655,60 @@
   },
   "effect:spend-snow-as-any-color": {
    "example": "Draugr Necromancer"
+  },
+  "effect:delayed-trigger-target-player-next-upkeep": {
+   "example": "Plague Reaver"
+  },
+  "effect:sacrifice-all-except-source": {
+   "example": "Plague Reaver"
+  },
+  "filter:discarded-this-turn": {
+   "family": "stat:cards-discarded-this-turn",
+   "example": "Ghost of Ramirez DePietro"
+  },
+  "static:protection-from-mana-values": {
+   "example": "Rebbec, Architect of Ascension"
+  },
+  "amount:life-total-at-turn-start": {
+   "example": "Sengir, the Dark Baron"
+  },
+  "replacement:would-scry-draw-instead": {
+   "family": "replacement:new-event-replacements",
+   "example": "Eligeth, Crossroads Augur"
+  },
+  "effect:cant-become-monarch-this-turn": {
+   "example": "Jared Carthalion, True Heir"
+  },
+  "condition:enchanted-controller-is-monarch": {
+   "example": "Fall from Favor"
+  },
+  "mechanic:note-exiled-mana-value": {
+   "example": "Bell Borca, Spectral Sergeant"
+  },
+  "effect:search-split-control": {
+   "example": "Rootweaver Druid"
+  },
+  "amount:exiled-card-mana-value": {
+   "family": "effect:this-way-results",
+   "example": "Soulfire Eruption"
+  },
+  "filter:controlled-by-monarch": {
+   "example": "Azure Fleet Admiral"
+  },
+  "effect:return-exiled-with-counter-kind": {
+   "example": "Livio, Oathsworn Sentinel"
+  },
+  "static:cda-life-total": {
+   "example": "Soul of Eternity"
+  },
+  "amount:count-per-player": {
+   "example": "Blim, Comedic Genius"
+  },
+  "filter:player-controls-fewest": {
+   "example": "Gor Muldrak, Amphinologist"
+  },
+  "keyword:hexproof-from-card-types": {
+   "example": "Nevinyrral, Urborg Tyrant"
   }
  }
 }

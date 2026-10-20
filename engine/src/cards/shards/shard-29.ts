@@ -217,6 +217,7 @@ import _poolHurloonMinotaur from "../pool/hurloon-minotaur.js";
 import _poolHymnOfTheFaller from "../pool/hymn-of-the-faller.js";
 import _poolIceFlan from "../pool/ice-flan.js";
 import _poolIcecaveCrasher from "../pool/icecave-crasher.js";
+import _poolIchTekikSalvageSplicer from "../pool/ich-tekik-salvage-splicer.js";
 import _poolIdolized from "../pool/idolized.js";
 import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
@@ -457,6 +458,7 @@ import _poolTorchBreath from "../pool/torch-breath.js";
 import _poolTormodTheDesecrator from "../pool/tormod-the-desecrator.js";
 import _poolTorturePit from "../pool/torture-pit.js";
 import _poolTriumphantAdventurer from "../pool/triumphant-adventurer.js";
+import _poolTroveTracker from "../pool/trove-tracker.js";
 import _poolTuknirDeathlock from "../pool/tuknir-deathlock.js";
 import _poolTurtlePower from "../pool/turtle-power.js";
 import _poolTwinbladeAssassins from "../pool/twinblade-assassins.js";
@@ -744,6 +746,7 @@ const shard: CardShard = {
     _poolHymnOfTheFaller,
     _poolIceFlan,
     _poolIcecaveCrasher,
+    _poolIchTekikSalvageSplicer,
     _poolIdolized,
     _poolIllicitMasquerade,
     _poolImotekhTheStormlord,
@@ -984,6 +987,7 @@ const shard: CardShard = {
     _poolTormodTheDesecrator,
     _poolTorturePit,
     _poolTriumphantAdventurer,
+    _poolTroveTracker,
     _poolTuknirDeathlock,
     _poolTurtlePower,
     _poolTwinbladeAssassins,

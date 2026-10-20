@@ -155,6 +155,7 @@ import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
 import _poolFeralAbomination from "../pool/feral-abomination.js";
 import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
 import _poolFieldTrip from "../pool/field-trip.js";
+import _poolFinCladeFugitives from "../pool/fin-clade-fugitives.js";
 import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
@@ -677,6 +678,7 @@ const shard: CardShard = {
     _poolFeralAbomination,
     _poolFestivalOfEmbers,
     _poolFieldTrip,
+    _poolFinCladeFugitives,
     _poolFinalReward,
     _poolFixerTechnoTerror,
     _poolFleshbagMarauder,

@@ -203,6 +203,7 @@ import _poolGuardianProject from "../pool/guardian-project.js";
 import _poolGuardiansOfMeletis from "../pool/guardians-of-meletis.js";
 import _poolGutlessPlunderer from "../pool/gutless-plunderer.js";
 import _poolHadanasClimb from "../pool/hadanas-climb.js";
+import _poolHalanaKessigRanger from "../pool/halana-kessig-ranger.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
 import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
@@ -295,6 +296,7 @@ import _poolMazeSkullbomb from "../pool/maze-skullbomb.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
 import _poolMeticulousArchive from "../pool/meticulous-archive.js";
+import _poolMiaraThornOfTheGlade from "../pool/miara-thorn-of-the-glade.js";
 import _poolMidnightAngelArmor from "../pool/midnight-angel-armor.js";
 import _poolMindbladeRender from "../pool/mindblade-render.js";
 import _poolMineshaftSpider from "../pool/mineshaft-spider.js";
@@ -474,6 +476,7 @@ import _poolTradewindRider from "../pool/tradewind-rider.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
 import _poolTripUp from "../pool/trip-up.js";
+import _poolTriumphantReckoning from "../pool/triumphant-reckoning.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
 import _poolTumbleweedRising from "../pool/tumbleweed-rising.js";
 import _poolTundraTank from "../pool/tundra-tank.js";
@@ -745,6 +748,7 @@ const shard: CardShard = {
     _poolGuardiansOfMeletis,
     _poolGutlessPlunderer,
     _poolHadanasClimb,
+    _poolHalanaKessigRanger,
     _poolHallowedFountain,
     _poolHandOfSilumgar,
     _poolHardbristleBandit,
@@ -837,6 +841,7 @@ const shard: CardShard = {
     _poolMercilessExecutioner,
     _poolMetalspinnersPuzzleknot,
     _poolMeticulousArchive,
+    _poolMiaraThornOfTheGlade,
     _poolMidnightAngelArmor,
     _poolMindbladeRender,
     _poolMineshaftSpider,
@@ -1016,6 +1021,7 @@ const shard: CardShard = {
     _poolTrashForTreasure,
     _poolTreespringLorian,
     _poolTripUp,
+    _poolTriumphantReckoning,
     _poolTroyanGutsyExplorer,
     _poolTumbleweedRising,
     _poolTundraTank,

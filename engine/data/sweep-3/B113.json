@@ -1,0 +1,449 @@
+{
+ "batch": "B113",
+ "status": "complete",
+ "ranks": "Commander Legends (CMR, 2020-11-20): the rest of the set",
+ "authored": [
+  {
+   "name": "Colfenor, the Last Yew",
+   "files": [
+    "engine/src/cards/pool/colfenor-the-last-yew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alena, Kessig Trapper",
+   "files": [
+    "engine/src/cards/pool/alena-kessig-trapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Miara, Thorn of the Glade",
+   "files": [
+    "engine/src/cards/pool/miara-thorn-of-the-glade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Belbe, Corrupted Observer",
+   "files": [
+    "engine/src/cards/pool/belbe-corrupted-observer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flamekin Herald",
+   "files": [
+    "engine/src/cards/pool/flamekin-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archelos, Lagoon Mystic",
+   "files": [
+    "engine/src/cards/pool/archelos-lagoon-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fathom Fleet Swordjack",
+   "files": [
+    "engine/src/cards/pool/fathom-fleet-swordjack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vow of Torment",
+   "files": [
+    "engine/src/cards/pool/vow-of-torment.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Slurrk, All-Ingesting",
+   "files": [
+    "engine/src/cards/pool/slurrk-all-ingesting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Halana, Kessig Ranger",
+   "files": [
+    "engine/src/cards/pool/halana-kessig-ranger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tuya Bearclaw",
+   "files": [
+    "engine/src/cards/pool/tuya-bearclaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Triumphant Reckoning",
+   "files": [
+    "engine/src/cards/pool/triumphant-reckoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ich-Tekik, Salvage Splicer",
+   "files": [
+    "engine/src/cards/pool/ich-tekik-salvage-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Lore",
+   "files": [
+    "engine/src/cards/pool/demonic-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pride of the Perfect",
+   "files": [
+    "engine/src/cards/pool/pride-of-the-perfect.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nadier, Agent of the Duskenel",
+   "files": [
+    "engine/src/cards/pool/nadier-agent-of-the-duskenel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amareth, the Lustrous",
+   "files": [
+    "engine/src/cards/pool/amareth-the-lustrous.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Dreadlord",
+   "files": [
+    "engine/src/cards/pool/elvish-dreadlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Vargus Wrath",
+   "files": [
+    "engine/src/cards/pool/captain-vargus-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keskit, the Flesh Sculptor",
+   "files": [
+    "engine/src/cards/pool/keskit-the-flesh-sculptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seraphic Greatsword",
+   "files": [
+    "engine/src/cards/pool/seraphic-greatsword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siani, Eye of the Storm",
+   "files": [
+    "engine/src/cards/pool/siani-eye-of-the-storm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Alharu, Solemn Ritualist",
+   "files": [
+    "engine/src/cards/pool/alharu-solemn-ritualist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eyeblight Cullers",
+   "files": [
+    "engine/src/cards/pool/eyeblight-cullers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exquisite Huntmaster",
+   "files": [
+    "engine/src/cards/pool/exquisite-huntmaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Anointer of Valor",
+   "files": [
+    "engine/src/cards/pool/anointer-of-valor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Briarblade Adept",
+   "files": [
+    "engine/src/cards/pool/briarblade-adept.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trove Tracker",
+   "files": [
+    "engine/src/cards/pool/trove-tracker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fin-Clade Fugitives",
+   "files": [
+    "engine/src/cards/pool/fin-clade-fugitives.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kinsbaile Courier",
+   "files": [
+    "engine/src/cards/pool/kinsbaile-courier.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Araumi of the Dead Tide",
+   "needs": [
+    "static:grant-encore-in-graveyard",
+    "cost:exile-x-cards-cost"
+   ],
+   "why": "granting encore to a graveyard card, with a cost exiling cards equal to your opponents"
+  },
+  {
+   "name": "Azure Fleet Admiral",
+   "needs": [
+    "filter:controlled-by-monarch"
+   ],
+   "why": "can't be blocked by creatures the monarch controls"
+  },
+  {
+   "name": "Bell Borca, Spectral Sergeant",
+   "needs": [
+    "mechanic:note-exiled-mana-value"
+   ],
+   "why": "noting the mana values of exiled cards; power set from them"
+  },
+  {
+   "name": "Blim, Comedic Genius",
+   "needs": [
+    "amount:count-per-player"
+   ],
+   "why": "each player loses life and discards for the permanents they control but don't own"
+  },
+  {
+   "name": "Coastline Marauders",
+   "needs": [
+    "effect:count-defending-player-controls"
+   ],
+   "why": "a count from the defending player's side in an attack trigger"
+  },
+  {
+   "name": "Eligeth, Crossroads Augur",
+   "needs": [
+    "replacement:would-scry-draw-instead"
+   ],
+   "why": "\"if you would scry a number of cards, draw that many instead\""
+  },
+  {
+   "name": "Fall from Favor",
+   "needs": [
+    "condition:enchanted-controller-is-monarch"
+   ],
+   "why": "the enchanted creature's controller being the monarch"
+  },
+  {
+   "name": "Frenzied Saddlebrute",
+   "needs": [
+    "static:attack-as-though-haste"
+   ],
+   "why": "creatures can attack your opponents as though they had haste"
+  },
+  {
+   "name": "Ghost of Ramirez DePietro",
+   "needs": [
+    "filter:discarded-this-turn"
+   ],
+   "why": "a card discarded this turn"
+  },
+  {
+   "name": "Glacian, Powerstone Engineer",
+   "needs": [
+    "cost:tap-x-untapped-cost"
+   ],
+   "why": "tapping X untapped artifacts as a cost"
+  },
+  {
+   "name": "Gnostro, Voice of the Crags",
+   "needs": [
+    "effect:modal-activated-targeted-modes"
+   ],
+   "why": "a modal activated ability with a targeted mode"
+  },
+  {
+   "name": "Gor Muldrak, Amphinologist",
+   "needs": [
+    "effect:player-protection",
+    "filter:player-controls-fewest"
+   ],
+   "why": "you have protection from Salamanders; each player with the fewest creatures"
+  },
+  {
+   "name": "Hans Eriksson",
+   "needs": [
+    "effect:reflexive-refers-to-creating-objects"
+   ],
+   "why": "the reflexive \"it fights Hans\" can't name the card put onto the battlefield"
+  },
+  {
+   "name": "Jared Carthalion, True Heir",
+   "needs": [
+    "effect:target-player-becomes-monarch",
+    "effect:cant-become-monarch-this-turn"
+   ],
+   "why": "target opponent becomes the monarch, and you can't become it this turn"
+  },
+  {
+   "name": "Kamahl's Will",
+   "needs": [
+    "effect:each-permanent-deals-damage"
+   ],
+   "why": "each creature you control deals damage equal to its power to the target"
+  },
+  {
+   "name": "Kitesail Skirmisher",
+   "needs": [
+    "condition:filter-attacking-same-player"
+   ],
+   "why": "a target attacking the same player or planeswalker as the source"
+  },
+  {
+   "name": "Livio, Oathsworn Sentinel",
+   "needs": [
+    "effect:return-exiled-with-counter-kind"
+   ],
+   "why": "returning all exiled cards with an aegis counter, whichever Livio exiled them"
+  },
+  {
+   "name": "Magus of the Order",
+   "needs": [
+    "cost:sacrifice-self-and-another"
+   ],
+   "why": "sacrifice this creature and another green creature"
+  },
+  {
+   "name": "Nevinyrral, Urborg Tyrant",
+   "needs": [
+    "keyword:hexproof-from-card-types"
+   ],
+   "why": "hexproof from artifacts, creatures and enchantments"
+  },
+  {
+   "name": "Numa, Joraga Chieftain",
+   "needs": [
+    "effect:distribute-counters-variable-total"
+   ],
+   "why": "X counters divided from a reflexive trigger"
+  },
+  {
+   "name": "Plague Reaver",
+   "needs": [
+    "effect:delayed-trigger-target-player-next-upkeep",
+    "effect:sacrifice-all-except-source"
+   ],
+   "why": "\"at the beginning of that player's next upkeep\" for a trigger you still control; sacrifice-all can't spare its source"
+  },
+  {
+   "name": "Promise of Tomorrow",
+   "needs": [
+    "effect:return-linked-under-your-control"
+   ],
+   "why": "returning the exiled cards under your control, not their owners'"
+  },
+  {
+   "name": "Radiant, Serra Archangel",
+   "needs": [
+    "effect:grant-protection-choice"
+   ],
+   "why": "protection from the color of your choice until end of turn, granted by an effect"
+  },
+  {
+   "name": "Rebbec, Architect of Ascension",
+   "needs": [
+    "static:protection-from-mana-values"
+   ],
+   "why": "protection from mana values; protection covers only colors and card types"
+  },
+  {
+   "name": "Rootweaver Druid",
+   "needs": [
+    "effect:search-split-control"
+   ],
+   "why": "each opponent's search puts one card under your control and the rest under theirs"
+  },
+  {
+   "name": "Sakashima's Will",
+   "needs": [
+    "effect:target-opponent-chooses"
+   ],
+   "why": "a target opponent chooses a creature they control for you to gain control of"
+  },
+  {
+   "name": "Sengir, the Dark Baron",
+   "needs": [
+    "trigger:player-loses-game-trigger",
+    "amount:life-total-at-turn-start"
+   ],
+   "why": "another player losing the game; a life total as the turn began"
+  },
+  {
+   "name": "Soul of Eternity",
+   "needs": [
+    "static:cda-life-total"
+   ],
+   "why": "power and toughness equal to your life total"
+  },
+  {
+   "name": "Soulfire Eruption",
+   "needs": [
+    "amount:exiled-card-mana-value"
+   ],
+   "why": "per target, damage equal to the mana value of the card just exiled"
+  },
+  {
+   "name": "Stumpsquall Hydra",
+   "needs": [
+    "effect:distribute-counters-variable-total",
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "X counters distributed untargeted among itself and commanders"
+  },
+  {
+   "name": "The Prismatic Piper",
+   "needs": [
+    "mechanic:commander-chosen-color-pregame"
+   ],
+   "why": "a color chosen before the game begins"
+  },
+  {
+   "name": "Trench Behemoth",
+   "needs": [
+    "effect:must-attack-controllers-next-combat"
+   ],
+   "why": "attacks during its controller's next combat if able"
+  }
+ ]
+}

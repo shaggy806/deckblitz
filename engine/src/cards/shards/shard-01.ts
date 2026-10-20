@@ -12,6 +12,7 @@ import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAlabornGrenadier from "../pool/alaborn-grenadier.js";
 import _poolAlgaeGharial from "../pool/algae-gharial.js";
 import _poolAltarOfTheBrood from "../pool/altar-of-the-brood.js";
+import _poolAmarethTheLustrous from "../pool/amareth-the-lustrous.js";
 import _poolAngelOfFinality from "../pool/angel-of-finality.js";
 import _poolAngelfireIgnition from "../pool/angelfire-ignition.js";
 import _poolAngelicEdict from "../pool/angelic-edict.js";
@@ -110,6 +111,7 @@ import _poolEldritchEvolution from "../pool/eldritch-evolution.js";
 import _poolElectrodominance from "../pool/electrodominance.js";
 import _poolElectrostaticField from "../pool/electrostatic-field.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
+import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
@@ -511,6 +513,7 @@ const shard: CardShard = {
     _poolAlabornGrenadier,
     _poolAlgaeGharial,
     _poolAltarOfTheBrood,
+    _poolAmarethTheLustrous,
     _poolAngelOfFinality,
     _poolAngelfireIgnition,
     _poolAngelicEdict,
@@ -609,6 +612,7 @@ const shard: CardShard = {
     _poolElectrodominance,
     _poolElectrostaticField,
     _poolElugeTheShorelessSea,
+    _poolElvishDreadlord,
     _poolEmbodimentOfSpring,
     _poolEnduringBondwarden,
     _poolEnvironmentalScientist,

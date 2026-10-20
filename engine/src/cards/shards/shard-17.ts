@@ -75,6 +75,7 @@ import _poolClockworkGnomes from "../pool/clockwork-gnomes.js";
 import _poolCloudKey from "../pool/cloud-key.js";
 import _poolCloudspireCaptain from "../pool/cloudspire-captain.js";
 import _poolCogworkWrestler from "../pool/cogwork-wrestler.js";
+import _poolColfenorTheLastYew from "../pool/colfenor-the-last-yew.js";
 import _poolCollateralDamage from "../pool/collateral-damage.js";
 import _poolColonelAutumn from "../pool/colonel-autumn.js";
 import _poolColossalCollision from "../pool/colossal-collision.js";
@@ -580,6 +581,7 @@ const shard: CardShard = {
     _poolCloudKey,
     _poolCloudspireCaptain,
     _poolCogworkWrestler,
+    _poolColfenorTheLastYew,
     _poolCollateralDamage,
     _poolColonelAutumn,
     _poolColossalCollision,

@@ -85,9 +85,11 @@ memory: ≤15 authorable cards yourself, 16–39 one agent, 40+ split into
 `.claude/agents/card-author.md`: only the file and shell tools, so a smaller
 fixed context on every turn than the general-purpose agent's) in
 `isolation: "worktree"`, briefed from **`agent-brief.md`** beside this file
-(fill in its placeholders). Tokens per authored card are the batch's cost —
-measure them as the `feedback_agent_token_counting` memory says (B111:
-1.11M). B109's six
+(fill in its placeholders). Tokens per card are the batch's cost — measure
+them as the `feedback_agent_token_counting` memory says, per card handled
+(authored + blocked) as well as per authored card, since a set's tail blocks
+more: B111 0.78M handled, B112 0.41M (batched tool calls), B113 0.35M (the
+`card-author` agent: 19K fixed context a turn against 57K). B109's six
 agents spent half their ~44 minutes before their first card — a stale base,
 a refused junction, their own build, scaffold and briefs under six-way
 contention — so the lead does the shared work once, before dispatching:

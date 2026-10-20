@@ -203,6 +203,7 @@ import _poolKavaronTurbodrone from "../pool/kavaron-turbodrone.js";
 import _poolKeepWatch from "../pool/keep-watch.js";
 import _poolKeeperOfTheQuietHour from "../pool/keeper-of-the-quiet-hour.js";
 import _poolKefnetsMonument from "../pool/kefnets-monument.js";
+import _poolKeskitTheFleshSculptor from "../pool/keskit-the-flesh-sculptor.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
 import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
@@ -675,6 +676,7 @@ const shard: CardShard = {
     _poolKeepWatch,
     _poolKeeperOfTheQuietHour,
     _poolKefnetsMonument,
+    _poolKeskitTheFleshSculptor,
     _poolKilnWalker,
     _poolKnightOfTheStampede,
     _poolKnightPaladin,

@@ -146,6 +146,7 @@ import _poolEnslavedScout from "../pool/enslaved-scout.js";
 import _poolEpharasDispersal from "../pool/epharas-dispersal.js";
 import _poolEtchedFamiliar from "../pool/etched-familiar.js";
 import _poolExperimentalAviator from "../pool/experimental-aviator.js";
+import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
@@ -385,6 +386,7 @@ import _poolShortBow from "../pool/short-bow.js";
 import _poolShredderUnrelenting from "../pool/shredder-unrelenting.js";
 import _poolShrewdStoryteller from "../pool/shrewd-storyteller.js";
 import _poolShriekRaptor from "../pool/shriek-raptor.js";
+import _poolSianiEyeOfTheStorm from "../pool/siani-eye-of-the-storm.js";
 import _poolSiegeGangLieutenant from "../pool/siege-gang-lieutenant.js";
 import _poolSiegeWurm from "../pool/siege-wurm.js";
 import _poolSightedCasteSorcerer from "../pool/sighted-caste-sorcerer.js";
@@ -665,6 +667,7 @@ const shard: CardShard = {
     _poolEpharasDispersal,
     _poolEtchedFamiliar,
     _poolExperimentalAviator,
+    _poolExquisiteHuntmaster,
     _poolFallOfTheGavel,
     _poolFallToEarth,
     _poolFamishedWorldsire,
@@ -904,6 +907,7 @@ const shard: CardShard = {
     _poolShredderUnrelenting,
     _poolShrewdStoryteller,
     _poolShriekRaptor,
+    _poolSianiEyeOfTheStorm,
     _poolSiegeGangLieutenant,
     _poolSiegeWurm,
     _poolSightedCasteSorcerer,

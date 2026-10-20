@@ -92,6 +92,7 @@ import _poolDeafeningClarion from "../pool/deafening-clarion.js";
 import _poolDefile from "../pool/defile.js";
 import _poolDefiledCrypt from "../pool/defiled-crypt.js";
 import _poolDelneyStreetwiseLookout from "../pool/delney-streetwise-lookout.js";
+import _poolDemonicLore from "../pool/demonic-lore.js";
 import _poolDesperateParry from "../pool/desperate-parry.js";
 import _poolDiabolicIntent from "../pool/diabolic-intent.js";
 import _poolDictateOfKarametra from "../pool/dictate-of-karametra.js";
@@ -605,6 +606,7 @@ const shard: CardShard = {
     _poolDefile,
     _poolDefiledCrypt,
     _poolDelneyStreetwiseLookout,
+    _poolDemonicLore,
     _poolDesperateParry,
     _poolDiabolicIntent,
     _poolDictateOfKarametra,

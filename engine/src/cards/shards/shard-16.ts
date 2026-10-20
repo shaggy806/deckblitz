@@ -398,6 +398,7 @@ import _poolSleeperDart from "../pool/sleeper-dart.js";
 import _poolSlimyDualleech from "../pool/slimy-dualleech.js";
 import _poolSlinzaTheSpikedStampede from "../pool/slinza-the-spiked-stampede.js";
 import _poolSlithStrider from "../pool/slith-strider.js";
+import _poolSlurrkAllIngesting from "../pool/slurrk-all-ingesting.js";
 import _poolSmaugTheGreatCalamity from "../pool/smaug-the-great-calamity.js";
 import _poolSmolderingMarsh from "../pool/smoldering-marsh.js";
 import _poolSnarlingGorehound from "../pool/snarling-gorehound.js";
@@ -949,6 +950,7 @@ const shard: CardShard = {
     _poolSlimyDualleech,
     _poolSlinzaTheSpikedStampede,
     _poolSlithStrider,
+    _poolSlurrkAllIngesting,
     _poolSmaugTheGreatCalamity,
     _poolSmolderingMarsh,
     _poolSnarlingGorehound,

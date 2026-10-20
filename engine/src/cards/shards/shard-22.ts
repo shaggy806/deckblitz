@@ -7,6 +7,7 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAkoumWarrior from "../pool/akoum-warrior.js";
+import _poolAlenaKessigTrapper from "../pool/alena-kessig-trapper.js";
 import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
@@ -531,6 +532,7 @@ const shard: CardShard = {
     _poolAetherTunnel,
     _poolAjaniFellsTheGodsire,
     _poolAkoumWarrior,
+    _poolAlenaKessigTrapper,
     _poolAllOfHistoryAllAtOnce,
     _poolAlmostPerfect,
     _poolAmateurHero,

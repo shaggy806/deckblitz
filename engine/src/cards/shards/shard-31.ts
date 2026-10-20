@@ -25,6 +25,7 @@ import _poolAntManColonyCommander from "../pool/ant-man-colony-commander.js";
 import _poolApostleOfPurifyingLight from "../pool/apostle-of-purifying-light.js";
 import _poolAppaSteadfastGuardian from "../pool/appa-steadfast-guardian.js";
 import _poolArcaneOmens from "../pool/arcane-omens.js";
+import _poolArchelosLagoonMystic from "../pool/archelos-lagoon-mystic.js";
 import _poolArchersParapet from "../pool/archers-parapet.js";
 import _poolArdentPlea from "../pool/ardent-plea.js";
 import _poolArgentDais from "../pool/argent-dais.js";
@@ -553,6 +554,7 @@ const shard: CardShard = {
     _poolApostleOfPurifyingLight,
     _poolAppaSteadfastGuardian,
     _poolArcaneOmens,
+    _poolArchelosLagoonMystic,
     _poolArchersParapet,
     _poolArdentPlea,
     _poolArgentDais,

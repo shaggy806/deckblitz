@@ -293,6 +293,7 @@ import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
 import _poolPramikonSkyRampart from "../pool/pramikon-sky-rampart.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
+import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
@@ -779,6 +780,7 @@ const shard: CardShard = {
     _poolPolliwallop,
     _poolPramikonSkyRampart,
     _poolPressurePoint,
+    _poolPrideOfThePerfect,
     _poolPrologueToPhyresis,
     _poolProwlingFelidar,
     _poolPullFromTheGrave,

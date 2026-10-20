@@ -155,6 +155,7 @@ import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
+import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
@@ -165,6 +166,7 @@ import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFirmamentSage from "../pool/firmament-sage.js";
 import _poolFissure from "../pool/fissure.js";
+import _poolFlamekinHerald from "../pool/flamekin-herald.js";
 import _poolFlareOfFaith from "../pool/flare-of-faith.js";
 import _poolFleshtaker from "../pool/fleshtaker.js";
 import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
@@ -711,6 +713,7 @@ const shard: CardShard = {
     _poolEtherealArmor,
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
+    _poolEyeblightCullers,
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,
@@ -721,6 +724,7 @@ const shard: CardShard = {
     _poolFiresOfUndeath,
     _poolFirmamentSage,
     _poolFissure,
+    _poolFlamekinHerald,
     _poolFlareOfFaith,
     _poolFleshtaker,
     _poolFlourishingGrapple,

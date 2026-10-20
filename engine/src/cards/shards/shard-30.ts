@@ -260,6 +260,7 @@ import _poolKeenEyedArchers from "../pool/keen-eyed-archers.js";
 import _poolKeldonHalberdier from "../pool/keldon-halberdier.js";
 import _poolKingpinsEnforcers from "../pool/kingpins-enforcers.js";
 import _poolKingpinsPet from "../pool/kingpins-pet.js";
+import _poolKinsbaileCourier from "../pool/kinsbaile-courier.js";
 import _poolKitsunesTechnique from "../pool/kitsunes-technique.js";
 import _poolKlothysGodOfDestiny from "../pool/klothys-god-of-destiny.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
@@ -776,6 +777,7 @@ const shard: CardShard = {
     _poolKeldonHalberdier,
     _poolKingpinsEnforcers,
     _poolKingpinsPet,
+    _poolKinsbaileCourier,
     _poolKitsunesTechnique,
     _poolKlothysGodOfDestiny,
     _poolKnightOfOldBenalia,

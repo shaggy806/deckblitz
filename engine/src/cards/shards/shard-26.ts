@@ -23,6 +23,7 @@ import _poolAnalyzeThePollen from "../pool/analyze-the-pollen.js";
 import _poolAncestralKatana from "../pool/ancestral-katana.js";
 import _poolAncientBrontodon from "../pool/ancient-brontodon.js";
 import _poolAncientGoldDragon from "../pool/ancient-gold-dragon.js";
+import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolApexDevastator from "../pool/apex-devastator.js";
@@ -370,6 +371,7 @@ import _poolSelesnyaCharm from "../pool/selesnya-charm.js";
 import _poolSenateGuildmage from "../pool/senate-guildmage.js";
 import _poolSequenceEngine from "../pool/sequence-engine.js";
 import _poolSeraphSanctuary from "../pool/seraph-sanctuary.js";
+import _poolSeraphicGreatsword from "../pool/seraphic-greatsword.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
@@ -539,6 +541,7 @@ const shard: CardShard = {
     _poolAncestralKatana,
     _poolAncientBrontodon,
     _poolAncientGoldDragon,
+    _poolAnointerOfValor,
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
     _poolApexDevastator,
@@ -886,6 +889,7 @@ const shard: CardShard = {
     _poolSenateGuildmage,
     _poolSequenceEngine,
     _poolSeraphSanctuary,
+    _poolSeraphicGreatsword,
     _poolSerpentineAmbush,
     _poolShackleSlinger,
     _poolShangChiMartialMentor,

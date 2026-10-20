@@ -106,8 +106,9 @@ section keeps only what to do next.
   and day/night; batch 109 Adventures in the Forgotten Realms and its Commander set, on the three
   Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"; batch 110 Modern
   Horizons 2 and Commander 2021, on madness; batch 111 Strixhaven, on learn as the rummage
-  alone; batch 112 Kaldheim and its Commander set, on snow mana); **next, Commander Legends**
-  (CMR — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
+  alone; batch 112 Kaldheim and its Commander set, on snow mana; batch 113 the rest of Commander
+  Legends, no engine change); **next, Zendikar Rising and its Commander set** (ZNR, ZNC —
+  `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
   sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
   6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
   Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
@@ -173,6 +174,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).
 - **`deals-damage` fires once per recipient**, where an unqualified "whenever ~ deals damage" fires once per event (603.2c).
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.

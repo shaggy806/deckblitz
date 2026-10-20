@@ -86,6 +86,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Commander Legends, whole** (batch 113): its last 62 cards, 30 authored, 32 blocked — the set's
+  long tail of one-off commanders. No engine change. The first batch on the lean `card-author`
+  agent type: 19K of fixed context a turn against the general-purpose agent's 57K (2026-10-20).
 - **Kaldheim and Kaldheim Commander, whole** (batch 112): their last 182 cards, 116 authored, with
   snow mana built (rule 107.4h — an `{S}` pip paid only with mana from a snow source, and "the
   amount of {S} spent"), plus Search for Glory, which it unblocked; 66 blocked. The batch's

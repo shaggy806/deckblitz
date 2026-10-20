@@ -487,6 +487,7 @@ import _poolVitalize from "../pool/vitalize.js";
 import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
 import _poolVoldarenAmbusher from "../pool/voldaren-ambusher.js";
+import _poolVowOfTorment from "../pool/vow-of-torment.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
@@ -1016,6 +1017,7 @@ const shard: CardShard = {
     _poolVodalianMage,
     _poolVolcanicStrength,
     _poolVoldarenAmbusher,
+    _poolVowOfTorment,
     _poolWallOfDenial,
     _poolWarBehemoth,
     _poolWarEffort,
