@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3717 already implemented / 1283 missing (marks refreshed 2026-10-20)
+3719 already implemented / 1281 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1942,7 +1942,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1949  Nasty End                                {1}{B}           Instant
 [ ]  1950  Norn's Annex                             {3}{W/P}{W/P}    Artifact
 [ ]  1951  Tempt with Bunnies                       {2}{W}           Sorcery
-[ ]  1952  Varragoth, Bloodsky Sire                 {2}{B}           Legendary Creature — Demon Rogue
+[x]  1952  Varragoth, Bloodsky Sire                 {2}{B}           Legendary Creature — Demon Rogue
 [x]  1953  Bitterthorn, Nissa's Animus              {3}              Legendary Artifact — Equipment
 [x]  1954  Dragon Fodder                            {1}{R}           Sorcery
 [x]  1955  Ob Nixilis, the Fallen                   {3}{B}{B}        Legendary Creature — Demon
@@ -2104,7 +2104,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2111  Coldsteel Heart                          {2}              Snow Artifact
 [ ]  2112  Archon of Emeria                         {2}{W}           Creature — Archon
 [x]  2113  Psychic Frog                             {U}{B}           Creature — Frog
-[ ]  2114  Cityscape Leveler                        {8}              Artifact Creature — Construct
+[x]  2114  Cityscape Leveler                        {8}              Artifact Creature — Construct
 [ ]  2115  Kozilek's Command                        {X}{C}{C}        Kindred Instant — Eldrazi
 [ ]  2116  Oko, Thief of Crowns                     {1}{G}{U}        Legendary Planeswalker — Oko
 [x]  2117  Perplexing Test                          {3}{U}{U}        Instant
