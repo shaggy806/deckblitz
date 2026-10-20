@@ -186,7 +186,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   destroy: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "put-on-bottom-of-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
-  "destroy-all": none,
+  // "… target player controls": that player is the one hurt.
+  "destroy-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
   regenerate: (n, v) => v.touch(n.target, "help", MINOR),
   "regenerate-all": none,
   "damage-all": (n, v) => {
@@ -213,8 +214,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (from === "battlefield" || from === "stack") v.touch(n.target, "harm", DECISIVE);
     else v.touch(n.target, "help", MAJOR);
   },
-  "return-to-hand-all": none,
-  "exile-all": none,
+  "return-to-hand-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
+  "exile-all": (n, v) => v.touch(n.controlledByTarget, "harm", MAJOR),
   exile: (n, v) => v.touch(n.target, "harm", DECISIVE),
   "choose-creature-type": (n, v) => v.child(n.then),
   "return-exiled-by-source": none,
@@ -408,7 +409,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // +1/+1 counters help; a stun counter (Crashing Wave) harms.
   "counters-divided": (n, v) => v.touch(n.from, n.counter === "+1/+1" ? "help" : "harm", MAJOR),
   "untap-all": (n, v) => v.touch(n.controlledByTarget, "help", MINOR),
-  "tap-all": none,
+  "tap-all": (n, v) => v.touch(n.controlledByTarget, "harm", MINOR),
   // Phasing out is a blocker gone for a turn when it's theirs (rule
   // 702.26b) — read as that, a minor harm; one that can only be yours says
   // so in its spec (Guardian of Faith, Haystack), and a counter put on first

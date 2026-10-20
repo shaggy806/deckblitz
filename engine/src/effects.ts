@@ -1634,6 +1634,11 @@ export type EffectSpec =
        * downstream. */
       readonly kind: "destroy-all";
       readonly filter: CardFilter;
+      /** "… **target player** controls" (Sleep, Ajani Vengeant's −7, Settle
+       * the Wreckage): `filter` read from the side of whoever the permanent
+       * or player in this target slot is — its `controlledBy: "you"` is
+       * them. Nothing happens once that target is illegal. */
+      readonly controlledByTarget?: number;
       /** Narrow to permanents whose *controller* was dealt combat damage by
        * this effect's source this turn — Steel Hellkite. Not a `CardFilter`
        * clause because it's a fact about the source, not about the permanent
@@ -1780,6 +1785,11 @@ export type EffectSpec =
        * don't control to its owner's hand"). Mirrors `destroy-all`. */
       readonly kind: "return-to-hand-all";
       readonly filter: CardFilter;
+      /** "… **target player** controls" (Sleep, Ajani Vengeant's −7, Settle
+       * the Wreckage): `filter` read from the side of whoever the permanent
+       * or player in this target slot is — its `controlledBy: "you"` is
+       * them. Nothing happens once that target is illegal. */
+      readonly controlledByTarget?: number;
     }
   | {
       /** Exile every battlefield permanent matching `filter`, as one event
@@ -1788,6 +1798,11 @@ export type EffectSpec =
        * whole. The mass form of `exile`, as `destroy-all` is of `destroy`. */
       readonly kind: "exile-all";
       readonly filter: CardFilter;
+      /** "… **target player** controls" (Sleep, Ajani Vengeant's −7, Settle
+       * the Wreckage): `filter` read from the side of whoever the permanent
+       * or player in this target slot is — its `controlledBy: "you"` is
+       * them. Nothing happens once that target is illegal. */
+      readonly controlledByTarget?: number;
       /** "Airbend all other creatures" (rule 701.65a — Avatar's Wrath): each
        * card exiled this way may be cast by its owner for {2}, as the
        * `exile` effect's `airbend`. */
@@ -3828,6 +3843,11 @@ export type EffectSpec =
        * single chosen target. */
       readonly kind: "tap-all";
       readonly filter: CardFilter;
+      /** "… **target player** controls" (Sleep, Ajani Vengeant's −7, Settle
+       * the Wreckage): `filter` read from the side of whoever the permanent
+       * or player in this target slot is — its `controlledBy: "you"` is
+       * them. Nothing happens once that target is illegal. */
+      readonly controlledByTarget?: number;
       /** As `tap`'s: "they don't untap during their controller's next untap
        * step" — and with `onlyDoesntUntap` only that, none tapped (Tangle's
        * "each attacking creature doesn't untap …"). */
@@ -5622,17 +5642,25 @@ export interface EffectApi {
     filter: CardFilter,
     onlyControllersDamagedBySource?: boolean,
     cantBeRegenerated?: boolean,
+    scopeTo?: PlayerId,
   ): void;
   /** Give a permanent a regeneration shield (rule 701.15a). */
   regenerate(target: TargetRef): void;
   /** Give every battlefield permanent matching `filter` one. */
   regenerateAll(filter: CardFilter): void;
   /** Return every battlefield permanent matching `filter` to its owner's hand. */
-  returnToHandAll(filter: CardFilter): void;
+  returnToHandAll(filter: CardFilter, scopeTo?: PlayerId): void;
   /** Exile every battlefield permanent matching `filter` but `except` — see
    * `exile-all`; `airbend` airbends them (rule 701.65a), `untilSourceLeaves`
    * exiles them until the source leaves the battlefield (610.3). */
-  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId, untilSourceLeaves?: boolean, linked?: boolean): void;
+  exileAll(
+    filter: CardFilter,
+    airbend?: boolean,
+    except?: ObjectId,
+    untilSourceLeaves?: boolean,
+    linked?: boolean,
+    scopeTo?: PlayerId,
+  ): void;
   /** Deal `amount` damage to every battlefield permanent matching `filter`. */
   damageAll(
     filter: CardFilter,
@@ -6322,7 +6350,7 @@ export interface EffectApi {
   untapAll(filter: CardFilter, scopeTo?: PlayerId, exceptSource?: boolean): void;
   /** See the `"exert"` {@link EffectSpec}. */
   exert(target: TargetRef, asItAttacks: boolean): void;
-  tapAll(filter: CardFilter, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean): void;
+  tapAll(filter: CardFilter, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean, scopeTo?: PlayerId): void;
   /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
    * the permanent the source is attached to, or every permanent matching
    * `filter` — at once. */
@@ -8439,9 +8467,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
       return;
     }
-    case "destroy-all":
-      ctx.destroyAll(spec.filter, spec.onlyControllersDamagedBySource, spec.cantBeRegenerated === true);
+    case "destroy-all": {
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      ctx.destroyAll(spec.filter, spec.onlyControllersDamagedBySource, spec.cantBeRegenerated === true, scopeTo);
       return;
+    }
     case "regenerate": {
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.regenerate(target);
@@ -8450,17 +8481,23 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "regenerate-all":
       ctx.regenerateAll(spec.filter);
       return;
-    case "return-to-hand-all":
-      ctx.returnToHandAll(spec.filter);
+    case "return-to-hand-all": {
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      ctx.returnToHandAll(spec.filter, scopeTo);
       return;
+    }
     case "exile-all": {
       const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
       ctx.exileAll(
         spec.filter,
         spec.airbend === true,
         spec.exceptSource === true ? ctx.source : spared?.kind === "object" ? spared.object : undefined,
         spec.untilSourceLeaves === true,
         spec.linked === true,
+        scopeTo,
       );
       return;
     }
@@ -9653,9 +9690,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.exert(target, spec.asItAttacks === true);
       return;
     }
-    case "tap-all":
-      ctx.tapAll(spec.filter, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
+    case "tap-all": {
+      const scopeTo = scopedController(spec.controlledByTarget, ctx);
+      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
+      ctx.tapAll(spec.filter, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true, scopeTo);
       return;
+    }
     case "phase-out": {
       const until = {
         ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),

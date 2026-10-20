@@ -686,6 +686,20 @@
         "engine/src/cards/pool/gathering-stone.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Naya Charm",
+      "files": [
+        "engine/src/cards/pool/naya-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "River's Rebuke",
+      "files": [
+        "engine/src/cards/pool/rivers-rebuke.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1060,13 +1074,6 @@
       "why": "prohibit can't name the controller of a target spell"
     },
     {
-      "name": "Naya Charm",
-      "needs": [
-        "new:tap-all-target-player"
-      ],
-      "why": "tap-all has no 'creatures target player controls' scope"
-    },
-    {
       "name": "Overmaster",
       "needs": [
         "new:next-spell-uncounterable"
@@ -1094,13 +1101,6 @@
         "new:life-above-starting"
       ],
       "why": "No condition for 'at least 15 life more than your starting life total'"
-    },
-    {
-      "name": "River's Rebuke",
-      "needs": [
-        "new:bounce-all-controlled-by-target-player"
-      ],
-      "why": "return-to-hand-all has no controlledByTarget; no filter reads a target player's side"
     },
     {
       "name": "Demon of Fate's Design",

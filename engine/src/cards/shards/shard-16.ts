@@ -92,6 +92,7 @@ import _poolCurseMarredDemon from "../pool/curse-marred-demon.js";
 import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
+import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
 import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
@@ -628,6 +629,7 @@ const shard: CardShard = {
     _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
     _poolDawnCharm,
+    _poolDawnglareInvoker,
     _poolDayOfDestiny,
     _poolDazzlingRamparts,
     _poolDeepmuckDesperado,

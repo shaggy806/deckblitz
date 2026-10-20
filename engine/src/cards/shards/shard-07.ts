@@ -297,6 +297,7 @@ import _poolPrecinctCaptain from "../pool/precinct-captain.js";
 import _poolPreciseRedaction from "../pool/precise-redaction.js";
 import _poolPresenceOfGond from "../pool/presence-of-gond.js";
 import _poolPriestOfGix from "../pool/priest-of-gix.js";
+import _poolPrimevalLight from "../pool/primeval-light.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
@@ -813,6 +814,7 @@ const shard: CardShard = {
     _poolPreciseRedaction,
     _poolPresenceOfGond,
     _poolPriestOfGix,
+    _poolPrimevalLight,
     _poolPrimordialPachyderm,
     _poolPrizePig,
     _poolProtectiveParents,

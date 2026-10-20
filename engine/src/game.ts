@@ -20432,9 +20432,9 @@ export class Game {
       },
       destroyPermanent: (target, cantBeRegenerated) =>
         this.destroyByEffect(target, true, cantBeRegenerated === true),
-      destroyAll: (filter, onlyDamaged, cantBeRegenerated) =>
+      destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo) =>
         this.destroyAllByEffect(
-          controller,
+          scopeTo ?? controller,
           filter,
           onlyDamaged === true ? source : undefined,
           x,
@@ -20446,15 +20446,15 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter) => this.returnToHandAllByEffect(controller, filter),
-      exileAll: (filter, airbend, except, untilSourceLeaves, linked) => {
+      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter),
+      exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
           // resolving ability refers to.
           const src = this.state.objects[source];
           const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
           this.exileAllByEffect(
-            controller,
+            scopeTo ?? controller,
             filter,
             airbend === true,
             except,
@@ -20473,7 +20473,7 @@ export class Game {
         ) {
           return;
         }
-        this.exileAllByEffect(controller, filter, airbend === true, except, {
+        this.exileAllByEffect(scopeTo ?? controller, filter, airbend === true, except, {
           source,
           zoneChangeCount: src.zoneChangeCount ?? 0,
           by: controller,
@@ -21961,8 +21961,8 @@ export class Game {
           this.untapUnlessStunned(id);
         }
       },
-      tapAll: (filter, doesntUntapNext, onlyDoesntUntap) => {
-        for (const id of this.battlefieldMatching(controller, filter)) {
+      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo) => {
+        for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
             object.tapped = true;

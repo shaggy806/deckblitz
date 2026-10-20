@@ -272,6 +272,7 @@ import _poolMysteryKey from "../pool/mystery-key.js";
 import _poolMysticalTutor from "../pool/mystical-tutor.js";
 import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
+import _poolNayaCharm from "../pool/naya-charm.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
 import _poolNetherHorror from "../pool/nether-horror.js";
 import _poolNezumiCutthroat from "../pool/nezumi-cutthroat.js";
@@ -778,6 +779,7 @@ const shard: CardShard = {
     _poolMysticalTutor,
     _poolMystifyingMaze,
     _poolNamoraTheSeaQueen,
+    _poolNayaCharm,
     _poolNemesisMask,
     _poolNetherHorror,
     _poolNezumiCutthroat,

@@ -3040,6 +3040,7 @@ import _poolDawnOfHope from "./pool/dawn-of-hope.js";
 import _poolDawnToDusk from "./pool/dawn-to-dusk.js";
 import _poolDawnbringerCleric from "./pool/dawnbringer-cleric.js";
 import _poolDawngladeRegent from "./pool/dawnglade-regent.js";
+import _poolDawnglareInvoker from "./pool/dawnglare-invoker.js";
 import _poolDawnhandEulogist from "./pool/dawnhand-eulogist.js";
 import _poolDawnhartDisciple from "./pool/dawnhart-disciple.js";
 import _poolDawnhartGeist from "./pool/dawnhart-geist.js";
@@ -8800,6 +8801,7 @@ import _poolNausea from "./pool/nausea.js";
 import _poolNavigationOrb from "./pool/navigation-orb.js";
 import _poolNavigatorsRuin from "./pool/navigators-ruin.js";
 import _poolNayaBattlemage from "./pool/naya-battlemage.js";
+import _poolNayaCharm from "./pool/naya-charm.js";
 import _poolNayaPanorama from "./pool/naya-panorama.js";
 import _poolNazarTheVelvetFang from "./pool/nazar-the-velvet-fang.js";
 import _poolNearheathChaplain from "./pool/nearheath-chaplain.js";
@@ -9357,6 +9359,7 @@ import _poolOversoldCemetery from "./pool/oversold-cemetery.js";
 import _poolOverwhelm from "./pool/overwhelm.js";
 import _poolOverwhelmedArchivist from "./pool/overwhelmed-archivist.js";
 import _poolOverwhelmingEncounter from "./pool/overwhelming-encounter.js";
+import _poolOverwhelmingForces from "./pool/overwhelming-forces.js";
 import _poolOverwhelmingInstinct from "./pool/overwhelming-instinct.js";
 import _poolOverwhelmingRemorse from "./pool/overwhelming-remorse.js";
 import _poolOverwhelmingStampede from "./pool/overwhelming-stampede.js";
@@ -9852,6 +9855,7 @@ import _poolPrimaryResearch from "./pool/primary-research.js";
 import _poolPrimeSpeakerZegana from "./pool/prime-speaker-zegana.js";
 import _poolPrimevalBounty from "./pool/primeval-bounty.js";
 import _poolPrimevalHerald from "./pool/primeval-herald.js";
+import _poolPrimevalLight from "./pool/primeval-light.js";
 import _poolPrimevalProtector from "./pool/primeval-protector.js";
 import _poolPrimevalShambler from "./pool/primeval-shambler.js";
 import _poolPrimevalTitan from "./pool/primeval-titan.js";
@@ -10138,6 +10142,7 @@ import _poolRaidBombardment from "./pool/raid-bombardment.js";
 import _poolRaidersWake from "./pool/raiders-wake.js";
 import _poolRaidingNightstalker from "./pool/raiding-nightstalker.js";
 import _poolRailwayBrawler from "./pool/railway-brawler.js";
+import _poolRainOfDaggers from "./pool/rain-of-daggers.js";
 import _poolRainOfEmbers from "./pool/rain-of-embers.js";
 import _poolRainOfFilth from "./pool/rain-of-filth.js";
 import _poolRainOfRevelation from "./pool/rain-of-revelation.js";
@@ -10715,6 +10720,7 @@ import _poolRiverchurnMonument from "./pool/riverchurn-monument.js";
 import _poolRiverglidePathway from "./pool/riverglide-pathway.js";
 import _poolRiverguardsReflexes from "./pool/riverguards-reflexes.js";
 import _poolRiverpyreVerge from "./pool/riverpyre-verge.js";
+import _poolRiversRebuke from "./pool/rivers-rebuke.js";
 import _poolRiverwalkTechnique from "./pool/riverwalk-technique.js";
 import _poolRiverwheelAerialists from "./pool/riverwheel-aerialists.js";
 import _poolRiverwheelSweep from "./pool/riverwheel-sweep.js";
@@ -19059,6 +19065,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDawnToDusk,
   _poolDawnbringerCleric,
   _poolDawngladeRegent,
+  _poolDawnglareInvoker,
   _poolDawnhandEulogist,
   _poolDawnhartDisciple,
   _poolDawnhartGeist,
@@ -24819,6 +24826,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNavigationOrb,
   _poolNavigatorsRuin,
   _poolNayaBattlemage,
+  _poolNayaCharm,
   _poolNayaPanorama,
   _poolNazarTheVelvetFang,
   _poolNearheathChaplain,
@@ -25376,6 +25384,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOverwhelm,
   _poolOverwhelmedArchivist,
   _poolOverwhelmingEncounter,
+  _poolOverwhelmingForces,
   _poolOverwhelmingInstinct,
   _poolOverwhelmingRemorse,
   _poolOverwhelmingStampede,
@@ -25871,6 +25880,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrimeSpeakerZegana,
   _poolPrimevalBounty,
   _poolPrimevalHerald,
+  _poolPrimevalLight,
   _poolPrimevalProtector,
   _poolPrimevalShambler,
   _poolPrimevalTitan,
@@ -26157,6 +26167,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaidersWake,
   _poolRaidingNightstalker,
   _poolRailwayBrawler,
+  _poolRainOfDaggers,
   _poolRainOfEmbers,
   _poolRainOfFilth,
   _poolRainOfRevelation,
@@ -26734,6 +26745,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiverglidePathway,
   _poolRiverguardsReflexes,
   _poolRiverpyreVerge,
+  _poolRiversRebuke,
   _poolRiverwalkTechnique,
   _poolRiverwheelAerialists,
   _poolRiverwheelSweep,

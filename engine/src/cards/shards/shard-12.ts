@@ -283,6 +283,7 @@ import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
 import _poolOverwhelm from "../pool/overwhelm.js";
 import _poolOverwhelmedArchivist from "../pool/overwhelmed-archivist.js";
+import _poolOverwhelmingForces from "../pool/overwhelming-forces.js";
 import _poolOxiddaScrapmelter from "../pool/oxidda-scrapmelter.js";
 import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
@@ -770,6 +771,7 @@ const shard: CardShard = {
     _poolOverlordOfTheHauntwoods,
     _poolOverwhelm,
     _poolOverwhelmedArchivist,
+    _poolOverwhelmingForces,
     _poolOxiddaScrapmelter,
     _poolPageLooseLeaf,
     _poolPantlazaSunFavored,
