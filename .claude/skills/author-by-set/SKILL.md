@@ -91,20 +91,31 @@ contention — so the lead does the shared work once, before dispatching:
    first. Agents fast-forward to local `main` (their worktree starts from
    `origin/main`).
 2. **Stage each group** in the scratchpad: `group-<x>/scaffold/` (and
-   `review/`) — that group's drafts from your `card:scaffold` run, moved out
-   of the repo (untracked; `scaffold/winter-cynical-opportunist.ts` is
+   `review/`) — that group's drafts from your `card:scaffold` run, **moved**
+   out of the repo, not copied (they're untracked, and a `git add -A` would
+   sweep them into your commit; `scaffold/winter-cynical-opportunist.ts` is
    tracked — never delete it) — and `group-<x>/briefs.txt`, `npm run -s
-   card:brief -w engine -- <the group's cards> > …/briefs.txt`.
+   card:brief -w engine -- <the group's cards> > …/briefs.txt`. A split
+   card scaffolds as one file per half: keep both halves in one group. The
+   brief's paths use forward slashes (Git Bash's `cp` eats backslashes).
 3. **Deal the cards out** in rank order snaking across the groups, so each
    gets a mix of long and short cards.
 
 Agents run gen:cards, the typecheck and their own test file with `pool.test`
-and `oracle-parse` only — no build, no `card:scaffold`, no `card:verify` (you
-run `card:verify --offline --text` and the suites after integrating).
+only — no build, no `card:scaffold`, no `card:verify`, no `oracle-parse` (it
+reads `dist/`); you run those and the suites after integrating.
 Integrate by cherry-picking each branch, read **every** file against its
-Oracle text and rulings, squash the group commits into the batch commit, then
+Oracle text and rulings, check `tokens/` for two files making the same token
+(merge them into one), squash the group commits into the batch commit, then
 remove the worktrees the `feedback_worktree_agents` memory's way (unlink
 each `node_modules` junction by absolute path first).
+
+**A stopped agent can't be resumed** (SendMessage refuses it). Its worktree
+and files stay: start a fresh agent in that worktree with a short
+`continue.md` — the original brief, plus "the previous agent left these
+files; re-read each one against its Oracle text, finish what's unfinished,
+judge the deleted drafts again from the staging dir, then run the checks and
+commit". MH2's six took ~8–10 minutes each that way.
 
 ## 2. Build a feature, if one leads
 

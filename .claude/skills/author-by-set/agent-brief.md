@@ -30,7 +30,7 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 
 ## Files
 
-- Each authored card: move its draft from `scaffold/` (or `review/`) to `engine/src/cards/pool/<kebab-name>.ts`, finish every `TODO(scaffold)`, and remove the SCAFFOLD/REVIEW header comment. Tokens go in `engine/src/cards/tokens/`, reusing an existing token file when one matches exactly (`Glob engine/src/cards/tokens/*<word>*`).
+- Each authored card: move its draft from `scaffold/` (or `review/`) to `engine/src/cards/pool/<kebab-name>.ts`, finish every `TODO(scaffold)`, and remove the SCAFFOLD/REVIEW header comment. Tokens go in `engine/src/cards/tokens/`, reusing an existing token file when one matches exactly (`Glob engine/src/cards/tokens/*<word>*`). Name a new one by what it is, never by your card — `"Crab Token"` in `tokens/crab-token.ts`, not `"Crab Token (Scuttletide)"` — since another agent may be making the same token right now, and the same name is how the lead merges the two.
 - A card's `text` stays close to its Oracle text.
 - Tests: `engine/src/test/TEST_FILE_PREFIXGROUP_LETTER.test.ts`, on `engine/src/test/harness.ts` (read it; `table()` deals each player an 8-card hand, so count hands relative to a "before"; `enter()` then `settle()` can leave the game past main phase — `toStep` back for a sorcery-speed activation). One focused test per card whose behaviour is more than a stat line or an exact copy of an already-tested pattern; test the clause most likely to be wrong.
 - Delete the drafts of the cards you BLOCK (and anything left in `scaffold/` or `review/` that's yours) before committing. `scaffold/winter-cynical-opportunist.ts` is tracked and not yours — leave it.
@@ -40,9 +40,9 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 From the worktree root:
 1. `npm run gen:cards -w engine`
 2. `npm run typecheck -w engine` (type-checks your test file too)
-3. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test oracle-parse --maxWorkers=2` from `engine/`
+3. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/`
 
-The lead runs `card:verify`, the fuzzer and the full suites after integrating — don't.
+The lead runs `oracle-parse` (it reads the engine build, which your worktree doesn't have), `card:verify`, the fuzzer and the full suites after integrating — don't.
 
 A card you can't make pass in reasonable time: drop it (delete its file, regenerate) and report it as BLOCKED with the reason, rather than debugging the engine.
 
