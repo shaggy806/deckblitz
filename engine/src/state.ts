@@ -2456,6 +2456,9 @@ export type AwaitingDecision =
       readonly player: PlayerId;
       readonly count: number;
       readonly eligible: readonly ObjectId[];
+      /** The creature whose exploit ability asked (rule 702.110b) — see
+       * `pendingSacrifices`. */
+      readonly exploitedBy?: ObjectId;
     }
   | {
       /**
@@ -3729,6 +3732,10 @@ export interface GameState {
      * GameState.decisionSource}. The spell has usually left the stack by the
      * time the prompt is raised. */
     readonly source?: DecisionSource;
+    /** An exploit ability's sacrifice (rule 702.110b): the creature with
+     * exploit "exploits" what's sacrificed — `permanent-sacrificed`'s
+     * `exploitedBy`, which an `exploits` trigger watches. */
+    readonly exploitedBy?: ObjectId;
   }[];
   /**
    * Specific permanents (chosen, or auto-selected when there was no choice)
@@ -3737,7 +3744,7 @@ export interface GameState {
    * leave batch (rule 101.4 — the players choose in turn, then sacrifice
    * simultaneously; rule 603.10a) — `drainPendingSacrificeVictims`.
    */
-  pendingSacrificeVictims: { readonly player: PlayerId; readonly object: ObjectId }[];
+  pendingSacrificeVictims: { readonly player: PlayerId; readonly object: ObjectId; readonly exploitedBy?: ObjectId }[];
   /**
    * A sacrifice *cost* of several permanents being paid (rules 601.2h, 602.2b
    * — Sai, Master Thopterist's "Sacrifice two artifacts", Jarad, Golgari Lich

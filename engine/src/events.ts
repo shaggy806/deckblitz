@@ -688,6 +688,9 @@ export type GameEvent =
        * the Nth counter is put on" reads (the placement crossing N). Absent
        * for a token stack's arrivals. */
       readonly after?: number;
+      /** Put by a resolving training ability: the creature trained (rule
+       * 702.149c — a `trains` trigger). */
+      readonly training?: true;
     })
   | (Base & {
       /** Counters removed — by an ability's cost (Walking Ballista), an
@@ -999,6 +1002,9 @@ export type GameEvent =
       /** Who sacrificed it: its controller as it left, not its owner (rule
        * 701.21a) — "whenever you sacrifice" counts a stolen permanent. */
       readonly player: PlayerId;
+      /** Sacrificed to this creature's exploit ability as it resolved: it
+       * "exploited" it (rule 702.110b — an `exploits` trigger). */
+      readonly exploitedBy?: ObjectId;
     })
   | (Base & {
       /** `reason` "regenerated": a regeneration shield used up (rule 701.15a). */

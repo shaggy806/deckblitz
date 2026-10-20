@@ -994,6 +994,36 @@ export type TriggerSpec =
        * hadn't been declared one earlier this turn — a later combat's
        * attack doesn't fire it. */
       readonly firstTimeEachTurn?: boolean;
+      /** Training (rule 702.149a — the `training()` helper): "whenever this
+       * creature **and at least one other creature with power greater than
+       * this creature's power** attack" — another attacker of the
+       * declaration has greater power as it triggers. */
+      readonly withGreaterPower?: true;
+    }
+  | {
+      /**
+       * "Whenever this creature trains" (rule 702.149c): a resolving
+       * training ability put one or more +1/+1 counters on it — the
+       * `add-counter` with `training: true` that `training()` writes. Savior
+       * of Ollenbock.
+       */
+      readonly on: "trains";
+      readonly who: TriggerWho;
+    }
+  | {
+      /**
+       * "When this creature exploits a creature" (rule 702.110b): its
+       * exploit ability's controller sacrificed a creature as that ability
+       * resolved (the `sacrifice` with `exploit: true` that `exploit()`
+       * writes). `who` names the creature that exploited — `"self"`, or
+       * `"you-control"` for Skull Skaab's "whenever a creature you control
+       * exploits a nontoken creature" — and `filter` the creature exploited,
+       * as it last existed. A creature that exploits itself still triggers
+       * its own (it's the sacrifice's subject, rule 603.10a).
+       */
+      readonly on: "exploits";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
     }
   | {
       /**

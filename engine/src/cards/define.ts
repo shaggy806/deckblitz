@@ -2389,10 +2389,19 @@ export interface CardDefinition {
    * therefore always the whole-battlefield ("each ...") version of the
    * card's effect (typically a `-all` `EffectSpec` variant), applied with no
    * targets chosen. `null` for no overload cost.
+   *
+   * Cleave (rule 702.148) is the same thing with targets: an alternative cost
+   * that rewrites the spell's text — "remove all text found within square
+   * brackets" — written `cleave: { cost, targets, effect }` (the bracketless
+   * version) and held here with `keyword: "cleave"`. Its `targets` are chosen
+   * in place of the printed ones; a copy of a cleaved spell is cleaved too
+   * (707.10 — it copies the alternative cost paid), as an overloaded one is.
    */
   readonly overload: {
     readonly cost: string;
     readonly effect: EffectSpec;
+    readonly targets?: readonly TargetSpec[];
+    readonly keyword?: "cleave";
   } | null;
   /**
    * A conditional free-cast permission printed on the spell itself (the CMM
@@ -3102,6 +3111,13 @@ interface CardDraft {
     readonly cost: string;
     readonly effect: EffectSpec;
   };
+  /** Cleave (rule 702.148): `targets` and `effect` are the spell with its
+   * bracketed text removed, cast for `cost` — see `CardDefinition.overload`. */
+  cleave?: {
+    readonly cost: string;
+    readonly targets: readonly TargetSpec[];
+    readonly effect: EffectSpec;
+  };
   freeCastIf?: { readonly condition: StaticCondition };
   alternativeCost?: {
     readonly mana: string;
@@ -3256,7 +3272,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     castModal: draft.castModal ?? null,
     additionalCost: draft.additionalCost ?? null,
     kicker: draft.kicker ?? null,
-    overload: draft.overload ?? null,
+    overload: draft.overload ?? (draft.cleave !== undefined ? { ...draft.cleave, keyword: "cleave" } : null),
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,

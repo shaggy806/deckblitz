@@ -1071,6 +1071,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(boar.complete).toBe(true);
   });
 
+  it("training (702.149) and exploit (702.110): the keyword lines and their 'trains' / 'exploits' triggers", () => {
+    const rider = face("Flying\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)", "Creature — Human Knight");
+    expect(rider.triggered[0].trigger).toEqual({ on: "attacks", who: "self", withGreaterPower: true });
+    expect(rider.complete).toBe(true);
+    const skaab = face(
+      "Exploit (When this creature enters, you may sacrifice a creature.)\nWhenever a creature you control exploits a nontoken creature, create a 2/2 black Zombie creature token.",
+      "Creature — Zombie",
+    );
+    expect(skaab.triggered[0].trigger).toEqual({ on: "enters-battlefield", who: "self" });
+    expect(skaab.triggered[1].trigger).toEqual({ on: "exploits", who: "you-control", filter: { type: "creature", token: false } });
+    expect(skaab.complete).toBe(true);
+  });
+
   it("shield counters (rule 122.1c): 'enters with a shield counter on him'", () => {
     const cap = face("Test Card enters with a shield counter on him.", "Legendary Creature — Human Soldier Hero");
     expect(cap.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "shield", amount: 1 } });

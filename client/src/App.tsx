@@ -5676,7 +5676,7 @@ function Table({
                         </>
                       ) : null}
                       {a.kind === 'cast-spell' && a.overload ? (
-                        <> (overload <Symbols text={a.overloadCost ?? ''} />)</>
+                        <> ({a.overloadKeyword ?? 'overload'} <Symbols text={a.overloadCost ?? ''} />)</>
                       ) : null}
                       {a.kind === 'cast-spell' && a.free ? ' (free)' : ''}
                       {a.kind === 'cast-spell' && a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX

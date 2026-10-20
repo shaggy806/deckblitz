@@ -329,6 +329,7 @@ import _poolRiverwheelAerialists from "../pool/riverwheel-aerialists.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRobeOfTheArchmagi from "../pool/robe-of-the-archmagi.js";
 import _poolRodOfRuin from "../pool/rod-of-ruin.js";
+import _poolRotTideGargantua from "../pool/rot-tide-gargantua.js";
 import _poolRotisserieElemental from "../pool/rotisserie-elemental.js";
 import _poolRustGoliath from "../pool/rust-goliath.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolRmsTitanic,
     _poolRobeOfTheArchmagi,
     _poolRodOfRuin,
+    _poolRotTideGargantua,
     _poolRotisserieElemental,
     _poolRustGoliath,
     _poolSagesKnowledge,

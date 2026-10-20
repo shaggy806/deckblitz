@@ -173,6 +173,7 @@ import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
+import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
 import _poolGraspOfDarkness from "../pool/grasp-of-darkness.js";
 import _poolGraveResearcher from "../pool/grave-researcher.js";
@@ -697,6 +698,7 @@ const shard: CardShard = {
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
     _poolGorionWiseMentor,
+    _poolGrafReaver,
     _poolGrapeshot,
     _poolGraspOfDarkness,
     _poolGraveResearcher,

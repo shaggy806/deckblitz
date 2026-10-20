@@ -7,6 +7,7 @@ import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
+import _poolAlchemistsRetrieval from "../pool/alchemists-retrieval.js";
 import _poolAllAboard from "../pool/all-aboard.js";
 import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolArachnogenesis from "../pool/arachnogenesis.js";
@@ -450,6 +451,7 @@ import _poolYavimayaIconoclast from "../pool/yavimaya-iconoclast.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _tokensBirdTokenGwaihirGreatestOfTheEagles from "../tokens/bird-token-gwaihir-greatest-of-the-eagles.js";
+import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js";
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
 import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
@@ -469,6 +471,7 @@ const shard: CardShard = {
     _poolAbueloAncestralEcho,
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
+    _poolAlchemistsRetrieval,
     _poolAllAboard,
     _poolAlpineWatchdog,
     _poolArachnogenesis,
@@ -914,6 +917,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensBirdTokenGwaihirGreatestOfTheEagles,
+    _tokensBoarTokenRuralRecruit,
     _tokensConstructTokenJanJansenChaosCrafter,
     _tokensElementalTokenPrismariPianist,
     _tokensHumanRogueToken,

@@ -1686,6 +1686,10 @@ export type EffectSpec =
       /** Exclude the effect's own source ("sacrifice **another** permanent" —
        * Korvold). needed-cards P6. */
       readonly exceptSource?: boolean;
+      /** Exploit's sacrifice (rule 702.110 — the `exploit()` helper): the
+       * effect's source "exploits" what's sacrificed (702.110b), which an
+       * `exploits` trigger watches (`permanent-sacrificed`'s `exploitedBy`). */
+      readonly exploit?: true;
     }
   | {
       /**
@@ -2784,6 +2788,10 @@ export type EffectSpec =
        * `"active-player"`). What a "whenever you put … counters" trigger
        * asks (`counter-added`'s `by`). The effect's controller by default. */
       readonly by?: EffectPlayerRef;
+      /** The training ability's counter (rule 702.149 — the `training()`
+       * helper): putting one or more makes the creature "train" (702.149c),
+       * which a `trains` trigger watches for (`counter-added`'s `training`). */
+      readonly training?: true;
     }
   | {
       /**
@@ -5601,6 +5609,7 @@ export interface EffectApi {
     filter: CardFilter,
     count: number,
     exceptId?: ObjectId,
+    exploit?: boolean,
   ): void;
   /** Sacrifice this effect's own source. Returns whether it actually happened
    * (false if the source has already left the battlefield) — the "if you do"
@@ -6116,8 +6125,9 @@ export interface EffectApi {
   ): void;
   /** See the `"double-counters-all"` {@link EffectSpec}. */
   doubleCountersAll(filter: CardFilter, counterKind: string): void;
-  /** `by` is who puts them — the effect's controller when absent. */
-  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId): void;
+  /** `by` is who puts them — the effect's controller when absent;
+   * `training` marks training's counter (702.149c). */
+  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, training?: boolean): void;
   /** Proliferate — see the `"proliferate"` {@link EffectSpec}. */
   proliferate(then: EffectSpec | null): void;
   /** Time travel — see the `"time-travel"` {@link EffectSpec}. */
@@ -8407,10 +8417,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.who === "target") {
         const target = ctx.targets[0];
         if (target?.kind === "player") {
-          ctx.sacrificePermanents({ player: target.player }, spec.filter, spec.count, exceptId);
+          ctx.sacrificePermanents({ player: target.player }, spec.filter, spec.count, exceptId, spec.exploit === true);
         }
       } else {
-        ctx.sacrificePermanents(spec.who, spec.filter, spec.count, exceptId);
+        ctx.sacrificePermanents(spec.who, spec.filter, spec.count, exceptId, spec.exploit === true);
       }
       return;
     }
@@ -9186,7 +9196,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "That player puts a counter on it": no such player, no counter.
       const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
-      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by);
+      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, spec.training === true);
       return;
     }
     case "time-travel":

@@ -128,6 +128,7 @@ import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
+import _poolDiverSkaab from "../pool/diver-skaab.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
 import _poolDragonsPresence from "../pool/dragons-presence.js";
@@ -621,6 +622,7 @@ const shard: CardShard = {
     _poolDireStrainDemolisher,
     _poolDismember,
     _poolDiveDown,
+    _poolDiverSkaab,
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
     _poolDragonsPresence,

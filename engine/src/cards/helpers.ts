@@ -892,6 +892,41 @@ export const equip = (cost: string): ActivatedAbility => ({
 });
 
 /**
+ * Exploit (rule 702.110a): "When this creature enters, you may sacrifice a
+ * creature." Goes in `triggered`. The sacrifice is marked, so "when this
+ * creature exploits a creature" (702.110b) is an `{ on: "exploits", who:
+ * "self" }` trigger — one that fires even when it sacrificed itself.
+ */
+export const exploit = (): TriggeredAbility => ({
+  trigger: { on: "enters-battlefield", who: "self" },
+  targets: [],
+  effect: {
+    kind: "may",
+    prompt: "Exploit: sacrifice a creature?",
+    effect: { kind: "sacrifice", who: "you", filter: { type: "creature" }, count: 1, exploit: true },
+  },
+  resolve: null,
+  text: "Exploit",
+});
+
+/**
+ * Training (rule 702.149a): "Whenever this creature and at least one other
+ * creature with power greater than this creature's power attack, put a +1/+1
+ * counter on this creature." Goes in `triggered` (or a `grantsTriggered` /
+ * `grant-triggered` for "creatures you control have training" — each
+ * instance triggers separately, 702.149b). Its counter is marked, so "whenever
+ * this creature trains" (702.149c) is a `{ on: "trains", who: "self" }`
+ * trigger.
+ */
+export const training = (): TriggeredAbility => ({
+  trigger: { on: "attacks", who: "self", withGreaterPower: true },
+  targets: [],
+  effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, training: true },
+  resolve: null,
+  text: "Training",
+});
+
+/**
  * Reconfigure (rule 702.151a): "[Cost]: Attach this permanent to another
  * target creature you control. Activate only as a sorcery" and "[Cost]:
  * Unattach this permanent. Activate only if this permanent is attached to a

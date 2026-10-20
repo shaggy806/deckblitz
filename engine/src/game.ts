@@ -3181,7 +3181,11 @@ export class Game {
             }
           : {}),
         ...(overload && def.overload !== null
-          ? { overload: true, overloadCost: def.overload.cost }
+          ? {
+              overload: true,
+              overloadCost: def.overload.cost,
+              ...(def.overload.keyword !== undefined ? { overloadKeyword: def.overload.keyword } : {}),
+            }
           : {}),
         ...(offspring === true && offspringCost !== null ? { offspring: true, offspringCost } : {}),
         ...(evoke !== undefined ? { evoke: true, evokeCost: evoke } : {}),
@@ -6997,6 +7001,19 @@ export class Game {
     );
   }
 
+  /** Training's "this creature and at least one other creature with power
+   * greater than this creature's power attack" (rule 702.149a): some other
+   * attacker of the declaration has greater power, as it triggers. */
+  private attacksWithGreaterPower(attacker: ObjectId): boolean {
+    const power = computeCharacteristics(this.state, this.registry, attacker).power;
+    return this.state.zones.shared.battlefield.some(
+      (id) =>
+        id !== attacker &&
+        this.state.objects[id].attacking != null &&
+        computeCharacteristics(this.state, this.registry, id).power > power,
+    );
+  }
+
   private creatureDef(id: ObjectId): CardDefinition | null {
     return creatureDef(this.state, this.registry, id);
   }
@@ -10032,8 +10049,9 @@ export class Game {
     kicked: boolean | number = false,
     overload = false,
   ): readonly TargetSpec[] {
-    // Overload (rule 702.126a): "you can't choose targets for it".
-    if (overload) return [];
+    // Overload (rule 702.126a): "you can't choose targets for it". Cleave
+    // (702.148a) chooses the targets of its rewritten text instead.
+    if (overload) return def.overload?.targets ?? [];
     if (kicked && def.kicker?.targets !== undefined) return def.kicker.targets;
     if (def.castModal === null || modes === undefined) return def.targets;
     return [...modes]
@@ -18226,8 +18244,23 @@ export class Game {
           (spec.defender === undefined || this.defenderKind(event.defender) === spec.defender) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
+          (spec.withGreaterPower !== true || this.attacksWithGreaterPower(event.attacker)) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
+        );
+      case "trains":
+        return (
+          event.type === "counter-added" &&
+          event.training === true &&
+          this.matchesWho(spec.who, event.object, self)
+        );
+      case "exploits":
+        return (
+          event.type === "permanent-sacrificed" &&
+          event.exploitedBy !== undefined &&
+          // One that exploited itself is matched as it last existed.
+          this.matchesWho(spec.who, event.exploitedBy, self, true) &&
+          this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "attacks-player":
         return (
@@ -20321,15 +20354,18 @@ export class Game {
       },
       creaturesDamageControllers: (filter, amount) =>
         this.creaturesDamageControllersByEffect(controller, filter, amount),
-      sacrificePermanents: (who, filter, count, exceptId) => {
+      sacrificePermanents: (who, filter, count, exceptId, exploit) => {
+        // An exploit ability's sacrifice: its source exploits what's
+        // sacrificed (rule 702.110b).
+        const exploitedBy = exploit === true ? source : undefined;
         // A scope that names players by the triggering event ("that player
         // sacrifices a creature") is resolved here, where the event is known.
         if (typeof who === "object" || who === "you" || who === "each-player" || who === "each-opponent") {
-          this.sacrificeByEffect(controller, who, filter, count, exceptId);
+          this.sacrificeByEffect(controller, who, filter, count, exceptId, exploitedBy);
           return;
         }
         for (const player of scoped(who)) {
-          this.sacrificeByEffect(controller, { player }, filter, count, exceptId);
+          this.sacrificeByEffect(controller, { player }, filter, count, exceptId, exploitedBy);
         }
       },
       // A source that's a new object since (a delayed trigger's "sacrifice
@@ -20969,8 +21005,8 @@ export class Game {
         this.doublePtAll(controller, filter, lastingHere(duration), powerOnly, exceptSource ? source : undefined),
       doubleCountersAll: (filter, counterKind) =>
         this.doubleCountersAll(controller, filter, counterKind),
-      addCounter: (target, counter, amount, by) =>
-        this.addCounter(target, counter, amount, true, by ?? controller),
+      addCounter: (target, counter, amount, by, training) =>
+        this.addCounter(target, counter, amount, true, by ?? controller, training),
       amass: (amount, creatureType, onto) => this.amass(controller, amount, creatureType, source, x, onto),
       exert: (target, asItAttacks) => {
         // Rule 701.43: only a permanent can be exerted (701.43c), tapped or
@@ -26138,6 +26174,7 @@ export class Game {
     amount: number,
     split = true,
     by?: PlayerId,
+    training = false,
   ): void {
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
@@ -26154,7 +26191,15 @@ export class Game {
     if (total > 0 && KEYWORD_COUNTERS.has(counter as Keyword)) {
       object.counterTimestamps = { ...object.counterTimestamps, [counter]: this.freshTimestamp() };
     }
-    this.emit({ type: "counter-added", object: id, counter, amount: total, by: by ?? object.controller, after: before + total });
+    this.emit({
+      type: "counter-added",
+      object: id,
+      counter,
+      amount: total,
+      by: by ?? object.controller,
+      after: before + total,
+      ...(training && total > 0 ? { training: true as const } : {}),
+    });
     if (counter === "lore" && total > 0) this.triggerChapters(id, before, before + total);
   }
 
@@ -27510,6 +27555,7 @@ export class Game {
     filter: CardFilter,
     count: number,
     exceptId?: ObjectId,
+    exploitedBy?: ObjectId,
   ): void {
     if (count <= 0) return;
     let players: PlayerId[];
@@ -27543,6 +27589,7 @@ export class Game {
           count,
           ...(exceptId !== undefined ? { exceptId } : {}),
           ...(source !== null ? { source } : {}),
+          ...(exploitedBy !== undefined ? { exploitedBy } : {}),
         });
       }
     }
@@ -27615,7 +27662,11 @@ export class Game {
       );
       if (totalEligible <= next.count) {
         for (const id of eligible) {
-          this.state.pendingSacrificeVictims.push({ player: next.player, object: id });
+          this.state.pendingSacrificeVictims.push({
+            player: next.player,
+            object: id,
+            ...(next.exploitedBy !== undefined ? { exploitedBy: next.exploitedBy } : {}),
+          });
         }
         this.state.pendingSacrifices = this.state.pendingSacrifices.slice(1);
         continue;
@@ -27625,6 +27676,7 @@ export class Game {
         player: next.player,
         count: next.count,
         eligible,
+        ...(next.exploitedBy !== undefined ? { exploitedBy: next.exploitedBy } : {}),
       };
       this.state.decisionSource = next.source ?? null;
       this.state.pendingSacrifices = this.state.pendingSacrifices.slice(1);
@@ -27651,7 +27703,12 @@ export class Game {
         if (object === undefined || object.zone !== "battlefield") continue;
         this.moveObject(next.object, "graveyard");
         // Sacrificed either way (rule 701.21a) — see `sacrificeTarget`.
-        this.emit({ type: "permanent-sacrificed", object: next.object, player: next.player });
+        this.emit({
+          type: "permanent-sacrificed",
+          object: next.object,
+          player: next.player,
+          ...(next.exploitedBy !== undefined ? { exploitedBy: next.exploitedBy } : {}),
+        });
       }
     });
   }
@@ -27756,6 +27813,8 @@ export class Game {
   private applySacrifice(player: PlayerId, permanents: readonly ObjectId[]): void {
     const why = this.whyCannotSacrifice(player, permanents);
     if (why !== null) throw new Error(why);
+    const asked = this.state.awaiting;
+    const exploitedBy = asked?.kind === "sacrifice" ? asked.exploitedBy : undefined;
     this.state.awaiting = null;
     const cost = this.state.pendingCostSacrifice;
     if (cost !== undefined) {
@@ -27775,7 +27834,11 @@ export class Game {
       // A specific chosen sacrifice singles out one — split it off a
       // compacted stack (the "sacrifice everything eligible, no choice" path
       // in `promptNextSacrifice` sacrifices a whole matched stack directly).
-      this.state.pendingSacrificeVictims.push({ player, object: this.splitOneFromStack(id) });
+      this.state.pendingSacrificeVictims.push({
+        player,
+        object: this.splitOneFromStack(id),
+        ...(exploitedBy !== undefined ? { exploitedBy } : {}),
+      });
     }
     this.prepareForPriority(this.activePlayer);
   }

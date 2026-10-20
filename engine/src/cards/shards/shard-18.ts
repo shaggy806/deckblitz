@@ -128,6 +128,7 @@ import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js"
 import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
+import _poolFierceRetribution from "../pool/fierce-retribution.js";
 import _poolFinaleOfGlory from "../pool/finale-of-glory.js";
 import _poolFirebolt from "../pool/firebolt.js";
 import _poolFlashThompsonSpiderFan from "../pool/flash-thompson-spider-fan.js";
@@ -645,6 +646,7 @@ const shard: CardShard = {
     _poolFeastOfTheUnicorn,
     _poolFellSpecter,
     _poolFeralMaaka,
+    _poolFierceRetribution,
     _poolFinaleOfGlory,
     _poolFirebolt,
     _poolFlashThompsonSpiderFan,

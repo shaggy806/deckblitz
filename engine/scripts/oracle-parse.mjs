@@ -253,6 +253,34 @@ function keywordPart(part) {
         },
       ],
     }),
+    // Training (rule 702.149a) — the `training()` helper's ability.
+    training: () => ({
+      triggered: [
+        {
+          trigger: { on: "attacks", who: "self", withGreaterPower: true },
+          targets: [],
+          effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1, training: true },
+          resolve: null,
+          text: "Training",
+        },
+      ],
+    }),
+    // Exploit (rule 702.110a) — the `exploit()` helper's ability.
+    exploit: () => ({
+      triggered: [
+        {
+          trigger: { on: "enters-battlefield", who: "self" },
+          targets: [],
+          effect: {
+            kind: "may",
+            prompt: "Exploit: sacrifice a creature?",
+            effect: { kind: "sacrifice", who: "you", filter: { type: "creature" }, count: 1, exploit: true },
+          },
+          resolve: null,
+          text: "Exploit",
+        },
+      ],
+    }),
     exalted: () => ({
       triggered: [
         {
@@ -742,6 +770,12 @@ export function parseTrigger(clause) {
   if (/^Whenever you discover$/.test(c)) return [{ on: "discovers", who: "you" }];
   // Explore (rule 701.44b).
   if (/^Whenever (?:~|this creature) explores$/.test(c)) return [{ on: "explores", who: "self" }];
+  // Training's "trains" (rule 702.149c) and exploit's "exploits" (702.110b).
+  if (/^Whenever (?:~|this creature) trains$/.test(c)) return [{ on: "trains", who: "self" }];
+  if (/^When (?:~|this creature) exploits a creature$/.test(c)) return [{ on: "exploits", who: "self" }];
+  if ((m = /^Whenever a creature you control exploits a (nontoken )?creature$/.exec(c))) {
+    return [{ on: "exploits", who: "you-control", ...(m[1] ? { filter: { type: "creature", token: false } } : {}) }];
+  }
   if ((m = /^Whenever a creature you control explores(?: an? (land|nonland) card)?$/.exec(c))) {
     return [{ on: "explores", who: "you", filter: { type: "creature" }, ...(m[1] ? { revealed: m[1] } : {}) }];
   }

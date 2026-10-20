@@ -19,6 +19,7 @@ import _poolAngelOfIndemnity from "../pool/angel-of-indemnity.js";
 import _poolAngelOfRetribution from "../pool/angel-of-retribution.js";
 import _poolAnowonTheRuinThief from "../pool/anowon-the-ruin-thief.js";
 import _poolAntMansAirForce from "../pool/ant-mans-air-force.js";
+import _poolApprenticeSharpshooter from "../pool/apprentice-sharpshooter.js";
 import _poolArabellaAbandonedDoll from "../pool/arabella-abandoned-doll.js";
 import _poolArborAdherent from "../pool/arbor-adherent.js";
 import _poolArchangel from "../pool/archangel.js";
@@ -510,6 +511,7 @@ const shard: CardShard = {
     _poolAngelOfRetribution,
     _poolAnowonTheRuinThief,
     _poolAntMansAirForce,
+    _poolApprenticeSharpshooter,
     _poolArabellaAbandonedDoll,
     _poolArborAdherent,
     _poolArchangel,

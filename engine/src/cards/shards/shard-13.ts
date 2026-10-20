@@ -333,6 +333,7 @@ import _poolRottingMastodon from "../pool/rotting-mastodon.js";
 import _poolRoyalFalcon from "../pool/royal-falcon.js";
 import _poolRulikMonsWarrenChief from "../pool/rulik-mons-warren-chief.js";
 import _poolRunThePlay from "../pool/run-the-play.js";
+import _poolRuralRecruit from "../pool/rural-recruit.js";
 import _poolRussetWolves from "../pool/russet-wolves.js";
 import _poolSageOfDays from "../pool/sage-of-days.js";
 import _poolSakashimasProtege from "../pool/sakashimas-protege.js";
@@ -822,6 +823,7 @@ const shard: CardShard = {
     _poolRoyalFalcon,
     _poolRulikMonsWarrenChief,
     _poolRunThePlay,
+    _poolRuralRecruit,
     _poolRussetWolves,
     _poolSageOfDays,
     _poolSakashimasProtege,

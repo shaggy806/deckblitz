@@ -345,6 +345,7 @@ import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkoaEmbermage from "../pool/skoa-embermage.js";
 import _poolSkullFracture from "../pool/skull-fracture.js";
+import _poolSkullSkaab from "../pool/skull-skaab.js";
 import _poolSkullsnapNuisance from "../pool/skullsnap-nuisance.js";
 import _poolSkyscytheEngulfer from "../pool/skyscythe-engulfer.js";
 import _poolSlay from "../pool/slay.js";
@@ -810,6 +811,7 @@ const shard: CardShard = {
     _poolSkinrender,
     _poolSkoaEmbermage,
     _poolSkullFracture,
+    _poolSkullSkaab,
     _poolSkullsnapNuisance,
     _poolSkyscytheEngulfer,
     _poolSlay,

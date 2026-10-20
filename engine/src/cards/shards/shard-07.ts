@@ -157,6 +157,7 @@ import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
 import _poolGrizzlyBears from "../pool/grizzly-bears.js";
+import _poolGryffRider from "../pool/gryff-rider.js";
 import _poolGylwainCastingDirector from "../pool/gylwain-casting-director.js";
 import _poolHaldirLorienLieutenant from "../pool/haldir-lorien-lieutenant.js";
 import _poolHalfElfMonk from "../pool/half-elf-monk.js";
@@ -284,6 +285,7 @@ import _poolOteclanLevitator from "../pool/oteclan-levitator.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
+import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
@@ -321,6 +323,7 @@ import _poolRefurbish from "../pool/refurbish.js";
 import _poolRegalCaracal from "../pool/regal-caracal.js";
 import _poolRegenerationsRestored from "../pool/regenerations-restored.js";
 import _poolRelicOfLegends from "../pool/relic-of-legends.js";
+import _poolRepositorySkaab from "../pool/repository-skaab.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
 import _poolResurrectionOrb from "../pool/resurrection-orb.js";
 import _poolReturnToNature from "../pool/return-to-nature.js";
@@ -665,6 +668,7 @@ const shard: CardShard = {
     _poolGreenhouseRicketyGazebo,
     _poolGrindingStation,
     _poolGrizzlyBears,
+    _poolGryffRider,
     _poolGylwainCastingDirector,
     _poolHaldirLorienLieutenant,
     _poolHalfElfMonk,
@@ -792,6 +796,7 @@ const shard: CardShard = {
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,
+    _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
     _poolPitilessCarnage,
     _poolPlagueWind,
@@ -829,6 +834,7 @@ const shard: CardShard = {
     _poolRegalCaracal,
     _poolRegenerationsRestored,
     _poolRelicOfLegends,
+    _poolRepositorySkaab,
     _poolRestoreWithEmpathy,
     _poolResurrectionOrb,
     _poolReturnToNature,

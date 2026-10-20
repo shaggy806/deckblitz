@@ -74,6 +74,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Blue Horror",
   "Blue-Black Faerie Token",
   "Boar Token",
+  "Boar Token (Rural Recruit)",
   "Cadet",
   "Cat Beast Token",
   "Cat Bird Token",
