@@ -178,7 +178,6 @@ there and move this line to `COMPLETED.md`.
 - **A multi-target flicker's leaves aren't one batch** (603.2c; Brago, Eerie Interlude) — matters once a batched leave trigger exists (Aang, Airbending Master).
 - **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
-- **A mass effect's filter can't read a dynamic amount**: `battlefieldMatching` gives `{ amount }` operands no context, so they match nothing (Zar Ojanen waits; check existing cards).
 - **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `exileIfItWouldLeave` survives ability loss (Geth, Thane of Contracts; Llanowar Greenwidow waits).
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
