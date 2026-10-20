@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3713 already implemented / 1287 missing (marks refreshed 2026-10-20)
+3717 already implemented / 1283 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2950,7 +2950,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2957  Yenna, Redtooth Regent                   {2}{G}{W}        Legendary Creature — Elf Noble
 [x]  2958  Crossroads Village                       {0}              Land — Town
 [x]  2959  Unsummon                                 {U}              Instant
-[ ]  2960  Settle the Wreckage                      {2}{W}{W}        Instant
+[x]  2960  Settle the Wreckage                      {2}{W}{W}        Instant
 [x]  2961  Tower Defense                            {1}{G}           Instant
 [ ]  2962  Rampaging Yao Guai                       {X}{G}{G}{G}     Creature — Bear Mutant
 [ ]  2963  The Unagi of Kyoshi Island               {3}{U}{U}        Legendary Creature — Serpent
@@ -3129,7 +3129,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3136  Tolarian Winds                           {1}{U}           Instant
 [ ]  3137  Hazel of the Rootbloom                   {2}{B}{G}        Legendary Creature — Squirrel Druid
 [x]  3138  Marrow-Gnawer                            {3}{B}{B}        Legendary Creature — Rat Rogue
-[ ]  3139  Naya Charm                               {R}{G}{W}        Instant
+[x]  3139  Naya Charm                               {R}{G}{W}        Instant
 [x]  3140  Mask of Griselbrand                      {1}{B}{B}        Legendary Artifact — Equipment
 [x]  3141  Mightform Harmonizer                     {2}{G}{G}        Creature — Insect Druid
 [ ]  3142  Overmaster                               {R}              Sorcery
@@ -3146,7 +3146,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3153  Ajani, Strength of the Pride             {2}{W}{W}        Legendary Planeswalker — Ajani
 [x]  3154  Basim Ibn Ishaq                          {U}{B}           Legendary Creature — Human Assassin
 [x]  3155  Kess, Dissident Mage                     {1}{U}{B}{R}     Legendary Creature — Human Wizard
-[ ]  3156  River's Rebuke                           {4}{U}{U}        Sorcery
+[x]  3156  River's Rebuke                           {4}{U}{U}        Sorcery
 [x]  3157  Edgar Markov                             {3}{R}{W}{B}     Legendary Creature — Vampire Knight
 [ ]  3158  Demon of Fate's Design                   {4}{B}{B}        Enchantment Creature — Demon
 [x]  3159  Malcolm, Keen-Eyed Navigator             {2}{U}           Legendary Creature — Siren Pirate
@@ -4872,7 +4872,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4879  Izzet Generatorium                       {U}{R}           Artifact
 [x]  4880  Biomass Mutation                         {X}{G/U}{G/U}    Instant
 [x]  4881  Overcharged Amalgam                      {2}{U}{U}        Creature — Zombie Horror
-[ ]  4882  Wall of Frost                            {1}{U}{U}        Creature — Wall
+[x]  4882  Wall of Frost                            {1}{U}{U}        Creature — Wall
 [x]  4883  Sunset Strikemaster                      {1}{R}           Creature — Human Monk
 [x]  4884  Endless Foot Assault                     {2}{W}           Enchantment
 [ ]  4885  Thraben Watcher                          {2}{W}{W}        Creature — Angel
