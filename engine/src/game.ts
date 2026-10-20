@@ -65,6 +65,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { ninjutsu } from "./cards/helpers.js";
 import { DUNGEONS } from "./cards/dungeons.js";
+import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { INITIATIVE_CARD } from "./cards/initiative.js";
 import { MONARCH_CARD } from "./cards/monarch.js";
 import { RAD_CARD } from "./cards/rad.js";
@@ -967,6 +968,8 @@ interface CastNowAsk {
   readonly cards: readonly ObjectId[];
   readonly free: boolean;
   readonly byDiscarding?: true;
+  /** The madness cost paid rather than the mana cost (rule 702.35a). */
+  readonly madness?: string;
   readonly exileAfter: boolean;
   readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
@@ -2732,6 +2735,13 @@ export class Game {
       variants.length = 0;
       variants.push({ kicked: false, overload: false, free: true });
       if (def.kicker !== null) variants.push(...kickedVariants(true));
+    }
+    // Madness's cast (rule 702.35a, b): for the madness cost, an alternative
+    // cost and so the only one, with kicker on top if it has one.
+    if (via === "effect" && this.castNowOffer(player, card)?.madness !== undefined) {
+      variants.length = 0;
+      variants.push({ kicked: false, overload: false, free: false });
+      if (def.kicker !== null) variants.push(...kickedVariants(false));
     }
     // Prototype (rule 718) isn't an alternative cost: every way to cast it
     // may be done prototyped too.
@@ -6240,10 +6250,7 @@ export class Game {
       // Chosen now, discarded once every player has chosen (rule 101.4).
       this.holdDiscard(player, cards);
     } else {
-      this.withGraveyardEnterBatch(() => {
-        for (const id of cards) this.moveObject(id, "graveyard");
-      });
-      this.emit({ type: "cards-discarded", player, objects: [...cards] });
+      this.discardCards(player, cards);
     }
     this.state.awaiting = null;
 
@@ -6504,10 +6511,7 @@ export class Game {
       const owner = awaiting.forPlayer ?? player;
       const cards = chosen.filter((id) => this.state.objects[id]?.zone === "hand");
       if (cards.length === 0) return [];
-      this.withGraveyardEnterBatch(() => {
-        for (const id of cards) this.moveObject(id, "graveyard");
-      });
-      this.emit({ type: "cards-discarded", player: owner, objects: cards });
+      this.discardCards(owner, cards);
       return [];
     }
     // Cards a choice puts from a hand on the bottom of a library (Valakut
@@ -8687,11 +8691,11 @@ export class Game {
     const payment = this.payMana(player, parseManaCost(cycling.cost));
     if (payment === null) throw new Error(`${player} cannot pay the cycling cost of ${def.name}`);
     this.executePayment(player, payment);
-    this.moveObject(cardId, "graveyard");
     // Cycling's cost discards the card (rule 702.29a: "[Cost], Discard this
     // card"), so it is a discard to everything watching for one — Archfiend
-    // of Ifnir's "whenever you cycle or discard another card", Waste Not.
-    this.emit({ type: "cards-discarded", player, objects: [cardId] });
+    // of Ifnir's "whenever you cycle or discard another card", Waste Not —
+    // and a card with madness is exiled instead (702.35a).
+    this.discardCards(player, [cardId]);
     this.emit({ type: "card-cycled", player, object: cardId });
     // The ability itself, its costs paid (rule 602.2): the draw — or
     // landcycling's search, `min: 0` so an empty library isn't a hard
@@ -10038,8 +10042,13 @@ export class Game {
     // Overload (rule 702.126b) *replaces* the mana cost entirely, unlike
     // kicker's additive cost.
     if (!freeCast && overload && def.overload !== null) return def.overload.cost;
+    // Madness's cast (rule 702.35a): the madness cost rather than the mana cost.
+    const madnessCost =
+      via === "effect" ? this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.madness : undefined;
     const base = freeCast
       ? "{0}"
+      : madnessCost !== undefined
+        ? madnessCost
       : evoke !== null
         ? this.evokeCostOf(cardId, def, via, caster ?? this.state.objects[cardId]?.owner, evoke)
         : via === "flashback"
@@ -10300,6 +10309,9 @@ export class Game {
     if (offered !== null) {
       if (offered.free && (!free || altCost || overload || evoke !== null)) {
         return `${def.name} may only be cast without paying its mana cost`;
+      }
+      if (offered.madness !== undefined && (free || altCost || overload || evoke !== null)) {
+        return `${def.name} may only be cast for its madness cost`;
       }
       const spell = offered.spell;
       if (
@@ -11351,6 +11363,7 @@ export class Game {
             cards: awaiting.cards,
             free: awaiting.free,
             ...(awaiting.byDiscarding === true ? { byDiscarding: true as const } : {}),
+            ...(awaiting.madness !== undefined ? { madness: awaiting.madness } : {}),
             exileAfter: awaiting.exileAfter,
             ...(awaiting.spell !== undefined ? { spell: awaiting.spell } : {}),
             ...(awaiting.freeCastOf !== undefined ? { freeCastOf: awaiting.freeCastOf } : {}),
@@ -11373,11 +11386,18 @@ export class Game {
     cards: readonly ObjectId[],
     options: CastNowOptions,
   ): void {
+    // Madness's cast (rule 702.35a): its one card, for its madness cost.
+    const madness =
+      options.madness === true && cards.length === 1
+        ? this.registry.get(this.state.objects[cards[0]]?.cardName ?? "").madness?.cost
+        : undefined;
+    if (options.madness === true && madness === undefined) return;
     this.castNowProbe = {
       player,
       cards,
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
+      ...(madness !== undefined ? { madness } : {}),
       exileAfter: options.exileAfter,
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -11439,6 +11459,7 @@ export class Game {
       ...(lands.length > 0 ? { lands } : {}),
       free: options.free,
       ...(options.byDiscarding === true ? { byDiscarding: true as const } : {}),
+      ...(madness !== undefined ? { madness } : {}),
       ...(options.spell !== undefined ? { spell: options.spell } : {}),
       exileAfter: options.exileAfter,
       ...(options.freeCastOf !== undefined ? { freeCastOf: options.freeCastOf } : {}),
@@ -13714,8 +13735,7 @@ export class Game {
     } else if (ability.zone === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
-      this.moveObject(sourceId, "graveyard");
-      this.emit({ type: "cards-discarded", player, objects: [sourceId] });
+      this.discardCards(player, [sourceId]);
     } else if (ability.zone === "graveyard") {
       this.state.players[player].usedGraveyardThisTurn = true;
       // The graveyard equivalent — "Exile this card from your graveyard" is
@@ -21706,6 +21726,7 @@ export class Game {
             cards.includes(event.object),
         ),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
+      putExiledIntoGraveyard: (card) => this.putExiledIntoGraveyard(card),
       cardsExiledThisWay: () =>
         thisWayEntries(this.state, "exiled", since)
           .filter((e) => !e.departed)
@@ -30459,10 +30480,7 @@ export class Game {
       const picked = shuffle(this.state.zones.perPlayer[player].hand, this.rng).slice(0, amount);
       this.state.rngState = this.rng.seed;
       if (picked.length === 0) return;
-      this.withGraveyardEnterBatch(() => {
-        for (const id of picked) this.moveObject(id, "graveyard");
-      });
-      this.emit({ type: "cards-discarded", player, objects: picked });
+      this.discardCards(player, picked);
       return;
     }
     // Someone is already being asked — "each opponent discards a card"
@@ -30482,6 +30500,63 @@ export class Game {
       return;
     }
     this.discardNow(player, amount, filter, unlessOne);
+  }
+
+  /**
+   * `player` discards `ids` from their hand (rule 701.9a): into the
+   * graveyard as one batch, then one `cards-discarded` event — the single
+   * way every discard moves its cards, so madness sees them all.
+   */
+  private discardCards(player: PlayerId, ids: readonly ObjectId[]): void {
+    if (ids.length === 0) return;
+    const mad: ObjectId[] = [];
+    this.withGraveyardEnterBatch(() => {
+      for (const id of ids) if (this.moveDiscarded(id)) mad.push(id);
+    });
+    this.emit({ type: "cards-discarded", player, objects: [...ids] });
+    this.queueMadness(mad);
+  }
+
+  /**
+   * Move one discarded card out of its owner's hand: into their graveyard —
+   * or, a card with madness, into exile instead (rule 702.35a: "If a player
+   * would discard this card, that player discards it, but exiles it instead
+   * of putting it into their graveyard"). Returns whether madness exiled it.
+   */
+  private moveDiscarded(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined) return false;
+    const madness =
+      object.zone === "hand" && this.registry.has(object.cardName)
+        ? this.registry.get(object.cardName).madness
+        : null;
+    if (madness !== null && this.moveObject(id, "exile")) return true;
+    this.moveObject(id, "graveyard");
+    return false;
+  }
+
+  /** Madness's trigger for each card it exiled (rule 702.35a): "When this
+   * card is exiled this way, its owner may cast it …", controlled by the
+   * card's owner, its source the card in exile (`cards/madness.ts`). */
+  private queueMadness(ids: readonly ObjectId[]): void {
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "exile") continue;
+      this.state.pendingTriggers.push({
+        sourceObjectId: id,
+        cardName: object.cardName,
+        abilityIndex: 0,
+        controller: object.owner,
+        reflexive: { targets: [], effect: MADNESS_EFFECT, text: MADNESS_TEXT },
+      });
+    }
+  }
+
+  /** `card`, still in exile, into its owner's graveyard (rule 702.35a —
+   * the madness card not cast). */
+  private putExiledIntoGraveyard(card: ObjectId): void {
+    if (this.state.objects[card]?.zone !== "exile") return;
+    this.withGraveyardEnterBatch(() => this.moveObject(card, "graveyard"));
   }
 
   /** A discard chosen while an `each-player-may` holds its players' actions
@@ -30510,10 +30585,12 @@ export class Game {
       }))
       .filter((d) => d.objects.length > 0);
     if (discards.length > 0) {
+      const mad: ObjectId[] = [];
       this.withGraveyardEnterBatch(() => {
-        for (const { objects } of discards) for (const id of objects) this.moveObject(id, "graveyard");
+        for (const { objects } of discards) for (const id of objects) if (this.moveDiscarded(id)) mad.push(id);
       });
       for (const { player, objects } of discards) this.emit({ type: "cards-discarded", player, objects });
+      this.queueMadness(mad);
     }
     if (this.state.pendingSacrificeVictims.length > 0 && this.state.awaiting === null) {
       this.drainPendingSacrificeVictims();
@@ -30551,11 +30628,8 @@ export class Game {
         this.holdDiscard(player, all);
         return;
       }
-      this.withGraveyardEnterBatch(() => {
-        for (const id of all) this.moveObject(id, "graveyard");
-      });
       if (all.length > 0) {
-        this.emit({ type: "cards-discarded", player, objects: all });
+        this.discardCards(player, all);
       }
       return;
     }
@@ -30727,10 +30801,7 @@ export class Game {
     if (this.state.players[player] === undefined) return;
     const all = [...this.state.zones.perPlayer[player].hand];
     if (all.length === 0) return;
-    this.withGraveyardEnterBatch(() => {
-      for (const id of all) this.moveObject(id, "graveyard");
-    });
-    this.emit({ type: "cards-discarded", player, objects: all });
+    this.discardCards(player, all);
   }
 
   /** Deal `amount` damage from `source` to `target`. Returns the amount

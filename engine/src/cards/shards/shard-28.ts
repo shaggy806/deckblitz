@@ -181,6 +181,7 @@ import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHareRaising from "../pool/hare-raising.js";
 import _poolHarmonize from "../pool/harmonize.js";
+import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
@@ -692,6 +693,7 @@ const shard: CardShard = {
     _poolHapatraTheDesertFrost,
     _poolHareRaising,
     _poolHarmonize,
+    _poolHellMongrel,
     _poolHeraldOfFaith,
     _poolHerdMigration,
     _poolHermiticHerbalist,

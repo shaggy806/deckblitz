@@ -1063,6 +1063,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(scout.complete).toBe(true);
   });
 
+  it("madness (rule 702.35): the keyword line's cost, a mana cost only", () => {
+    const imp = face(
+      "Flying, haste\nMadness {B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)",
+      "Creature — Imp",
+    );
+    expect(imp.madness).toEqual({ cost: "{B}" });
+    expect(imp.complete).toBe(true);
+    const fiend = face("Madness—{2}{B}, Pay 8 life.", "Creature — Demon");
+    expect(fiend.madness).toBeUndefined();
+    expect(fiend.complete).toBe(false);
+  });
+
   it("venturing (rule 701.49): 'venture into the dungeon' and 'into Undercity'", () => {
     expect(parseSentence("Venture into the dungeon.", ctx())).toEqual({ kind: "venture" });
     expect(parseSentence("Venture into Undercity.", ctx())).toEqual({ kind: "venture", into: "undercity" });

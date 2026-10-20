@@ -5086,3 +5086,21 @@ turn, then all discard at once (rule 101.4), a chosen card hidden until then (10
   and Bob's view doesn't show it discarded; once he has chosen, both cards reach the graveyards
   together and nobody loses 2. The panel's chip reads "Tomb of Annihilation 2/4" and opens the
   map. Check at ~768px tall, in a 2- and a 4-player room.
+
+## Madness (2026-10-20)
+
+### Hell Mongrel and Kitchen Imp (madness)
+
+*Rules call* — madness (rule 702.35): a discarded card with madness is exiled instead, and its
+owner may cast it for its madness cost as the trigger resolves
+
+- **Setup:** Your precombat main. Your battlefield: Hell Mongrel and two Swamps; in hand Kitchen
+  Imp and Terminal Agony. The opponent has Hill Giant.
+- **Do:** Activate Hell Mongrel's "Discard a card" and discard Kitchen Imp. Let the madness
+  trigger resolve and cast the Imp. Then activate the Mongrel again, discarding Terminal Agony, and
+  decline its cast.
+- **Check:** Each discarded card goes to exile, not the graveyard, and a "Madness" trigger from
+  it goes on the stack. As it resolves the banner reads "Cast Kitchen Imp for its madness cost,
+  {B}?", the button "Cast Kitchen Imp (madness {B})"; the Imp costs one Swamp and comes in with
+  haste. Declined, Terminal Agony goes to the graveyard. The Mongrel is 6/5 after both. Check at
+  ~768px tall.

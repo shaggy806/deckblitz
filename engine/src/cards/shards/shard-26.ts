@@ -395,6 +395,7 @@ import _poolSquiresDevotion from "../pool/squires-devotion.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
 import _poolStaffOfTitania from "../pool/staff-of-titania.js";
 import _poolStaticSnare from "../pool/static-snare.js";
+import _poolStensiaMasquerade from "../pool/stensia-masquerade.js";
 import _poolStifle from "../pool/stifle.js";
 import _poolStingerflingSpider from "../pool/stingerfling-spider.js";
 import _poolStockUp from "../pool/stock-up.js";
@@ -894,6 +895,7 @@ const shard: CardShard = {
     _poolStaffOfDomination,
     _poolStaffOfTitania,
     _poolStaticSnare,
+    _poolStensiaMasquerade,
     _poolStifle,
     _poolStingerflingSpider,
     _poolStockUp,

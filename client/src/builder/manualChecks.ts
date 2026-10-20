@@ -3016,4 +3016,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Forest'], hand: ['Lightning Bolt', 'Shock'] },
     }),
   ),
+  // --- Madness (2026-10-20) --------------------------------------------------
+  preset(
+    'Hell Mongrel and Kitchen Imp (madness)',
+    board({
+      you: { bf: ['Hell Mongrel', 'Swamp*2'], hand: ['Kitchen Imp', 'Terminal Agony'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
 ]

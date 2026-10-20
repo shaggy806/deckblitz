@@ -229,6 +229,7 @@ import _poolKeeneyeAven from "../pool/keeneye-aven.js";
 import _poolKembaKhaEnduring from "../pool/kemba-kha-enduring.js";
 import _poolKessigFlamebreather from "../pool/kessig-flamebreather.js";
 import _poolKioraOfFireAndAshes from "../pool/kiora-of-fire-and-ashes.js";
+import _poolKitchenImp from "../pool/kitchen-imp.js";
 import _poolKnightErrantOfEos from "../pool/knight-errant-of-eos.js";
 import _poolKnightfisher from "../pool/knightfisher.js";
 import _poolKothOfTheHomestead from "../pool/koth-of-the-homestead.js";
@@ -741,6 +742,7 @@ const shard: CardShard = {
     _poolKembaKhaEnduring,
     _poolKessigFlamebreather,
     _poolKioraOfFireAndAshes,
+    _poolKitchenImp,
     _poolKnightErrantOfEos,
     _poolKnightfisher,
     _poolKothOfTheHomestead,

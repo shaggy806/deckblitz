@@ -333,6 +333,7 @@ import _poolResistanceReunited from "../pool/resistance-reunited.js";
 import _poolResistanceSquad from "../pool/resistance-squad.js";
 import _poolRestorationAngel from "../pool/restoration-angel.js";
 import _poolReverberate from "../pool/reverberate.js";
+import _poolRevolutionist from "../pool/revolutionist.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
@@ -818,6 +819,7 @@ const shard: CardShard = {
     _poolResistanceSquad,
     _poolRestorationAngel,
     _poolReverberate,
+    _poolRevolutionist,
     _poolRigoStreetwiseMentor,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,

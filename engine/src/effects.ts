@@ -1051,6 +1051,9 @@ export interface CastNowOptions {
   /** "By discarding a card rather than paying its mana cost" — with `free`;
    * see the `cast-now` effect's `byDiscarding`. */
   readonly byDiscarding?: boolean;
+  /** Paying the card's madness cost rather than its mana cost — see the
+   * `cast-now` effect's `madness`. */
+  readonly madness?: boolean;
   readonly exileAfter: boolean;
   readonly spell?: CardFilter;
   /** The library cards the player looks at to choose among, shown to them
@@ -1708,6 +1711,16 @@ export type EffectSpec =
        * leaves the most of the rest still sacrificeable, and then all of them
        * are sacrificed at once (rule 603.10a). `count` stays 1 with these. */
       readonly andEach?: readonly CardFilter[];
+    }
+  | {
+      /**
+       * "They put this card into their graveyard" (rule 702.35a — the
+       * madness trigger's card, not cast): `target`, a card in exile, is put
+       * into its owner's graveyard — only while it's still the object the
+       * ability refers to (rule 400.7), never a permanent or a spell.
+       */
+      readonly kind: "put-into-graveyard";
+      readonly target: EffectTargetRef;
     }
   | {
       /**
@@ -2473,6 +2486,11 @@ export type EffectSpec =
        * cost increases apply (118.9d). Not offered with an empty hand.
        */
       readonly byDiscarding?: boolean;
+      /** "Its owner may cast it **by paying [its madness cost]** rather
+       * than paying its mana cost" (rule 702.35a): the card's own madness
+       * cost as an alternative cost (702.35b), the only way offered — the
+       * madness trigger's cast (`cards/madness.ts`). */
+      readonly madness?: boolean;
       /** "If that spell would be put into your graveyard, exile it instead." */
       readonly exileAfter?: boolean;
       /** "Cast it **transformed**" (rule 712.11a — a Siege's 310.12b): a
@@ -5848,6 +5866,9 @@ export interface EffectApi {
   /** Show every player the cards this resolution has had each player draw,
    * those still in their hand — the `reveal-drawn` effect. */
   revealDrawn(): void;
+  /** Put `card`, if it's in exile, into its owner's graveyard — the
+   * `put-into-graveyard` effect. */
+  putExiledIntoGraveyard(card: ObjectId): void;
   /** The source, if this resolution exiled it (from the battlefield too) and
    * it's still in exile — a `cast-now`'s `"source-exiled-this-way"`. */
   sourceExiledThisWay(): readonly ObjectId[];
@@ -7270,6 +7291,7 @@ function offerCastNow(
       ...(by !== undefined ? { by } : {}),
       free: spec.free === true || spec.byDiscarding === true,
       ...(spec.byDiscarding === true ? { byDiscarding: true } : {}),
+      ...(spec.madness === true ? { madness: true } : {}),
       exileAfter: spec.exileAfter === true,
       ...(spec.play === true ? { play: true } : {}),
       ...(spec.suspend === true ? { freeCastOf: "suspend" as const } : {}),
@@ -8588,6 +8610,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "reveal-drawn":
       ctx.revealDrawn();
       return;
+    case "put-into-graveyard": {
+      const target = resolveEffectTarget(spec.target, ctx);
+      if (target?.kind === "object") ctx.putExiledIntoGraveyard(target.object);
+      return;
+    }
     case "foraged":
       ctx.foraged();
       return;

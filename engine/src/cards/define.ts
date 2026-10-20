@@ -2688,6 +2688,13 @@ export interface CardDefinition {
    * could tap is its own cast variant (`harmonizeTap`), chosen as the cost is
    * (702.180b). `null` for a card without harmonize. */
   readonly harmonize: { readonly cost: string } | null;
+  /** Madness (rule 702.35a) — "If a player would discard this card, that
+   * player discards it, but exiles it instead of putting it into their
+   * graveyard", and "When this card is exiled this way, its owner may cast it
+   * by paying [cost] rather than paying its mana cost. If that player
+   * doesn't, they put this card into their graveyard." `cost` is the madness
+   * cost. `null` for a card without madness. */
+  readonly madness: { readonly cost: string } | null;
   /**
    * "You may cast this card from your graveyard as long as [condition]"
    * (Gravecrawler: "as long as you control a Zombie") — an ability that
@@ -3028,6 +3035,7 @@ const PRINTED_ABILITY: {
   sneak: (def) => def.sneak !== null,
   webSlinging: (def) => def.webSlinging !== null,
   harmonize: (def) => def.harmonize !== null,
+  madness: (def) => def.madness !== null,
   foretell: (def) => def.foretell !== null,
   plot: (def) => def.plot !== null,
   warp: (def) => def.warp !== null,
@@ -3222,6 +3230,7 @@ interface CardDraft {
   };
   castFromGraveyardIf?: StaticCondition;
   harmonize?: { readonly cost: string };
+  madness?: { readonly cost: string };
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
   warp?: { readonly cost: string };
@@ -3361,6 +3370,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     sneak: draft.sneak ?? null,
     webSlinging: draft.webSlinging ?? null,
     harmonize: draft.harmonize ?? null,
+    madness: draft.madness ?? null,
     foretell: draft.foretell ?? null,
     plot: draft.plot ?? null,
     warp: draft.warp ?? null,

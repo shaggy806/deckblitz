@@ -1777,6 +1777,9 @@ export function parseFace(face, ctx = {}) {
     if ((m = /^Flashback ((?:\{[^}]+\})+)$/.exec(line))) { out.flashback = { cost: m[1] }; continue; }
     // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.
     if ((m = /^Plot ((?:\{[^}]+\})+)$/.exec(line))) { out.plot = { cost: m[1] }; continue; }
+    // Madness [cost] (rule 702.35a) — a mana cost only ("Madness—{2}{B}, Pay 8
+    // life" isn't read).
+    if ((m = /^Madness ((?:\{[^}]+\})+)$/.exec(line))) { out.madness = { cost: m[1] }; continue; }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }

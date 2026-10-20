@@ -1539,6 +1539,9 @@ export type LegalAction =
        * discarding a card rather than paying its mana cost"), chosen as
        * it's paid. */
       readonly byDiscarding?: true;
+      /** …for its madness cost rather than its mana cost (rule 702.35a): the
+       * madness cost, the only way offered. */
+      readonly madness?: string;
       readonly casts: readonly CastSpellOffer[];
       /** "You may **play**" (hideaway): each land card on offer, as the face
        * it'd be played as — played during the resolution, it uses a land

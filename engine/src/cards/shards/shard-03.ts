@@ -249,6 +249,7 @@ import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
+import _poolNecrogoyf from "../pool/necrogoyf.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
 import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
@@ -336,6 +337,7 @@ import _poolSilverBolt from "../pool/silver-bolt.js";
 import _poolSilverbackShaman from "../pool/silverback-shaman.js";
 import _poolSinisterConcierge from "../pool/sinister-concierge.js";
 import _poolSkinwing from "../pool/skinwing.js";
+import _poolSkophosReaver from "../pool/skophos-reaver.js";
 import _poolSkullOfOrm from "../pool/skull-of-orm.js";
 import _poolSkullbriarTheWalkingGrave from "../pool/skullbriar-the-walking-grave.js";
 import _poolSkulltap from "../pool/skulltap.js";
@@ -711,6 +713,7 @@ const shard: CardShard = {
     _poolNajalTheStormRunner,
     _poolNaruMehaMasterWizard,
     _poolNecraDisciple,
+    _poolNecrogoyf,
     _poolNecronDeathmark,
     _poolNettleSwine,
     _poolNezumiRoadCaptain,
@@ -798,6 +801,7 @@ const shard: CardShard = {
     _poolSilverbackShaman,
     _poolSinisterConcierge,
     _poolSkinwing,
+    _poolSkophosReaver,
     _poolSkullOfOrm,
     _poolSkullbriarTheWalkingGrave,
     _poolSkulltap,

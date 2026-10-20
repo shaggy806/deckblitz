@@ -4510,7 +4510,9 @@ function Table({
       <div className="controls">
         <span>
           {verb} {ways[0]?.cardName ?? landWays[0]?.cardName ?? game.nameOf(card)}
-          {castNowAction.byDiscarding === true && ways.length > 0
+          {castNowAction.madness !== undefined && ways.length > 0 ? (
+            <> for its madness cost, <Symbols text={castNowAction.madness} /></>
+          ) : castNowAction.byDiscarding === true && ways.length > 0
             ? ' by discarding a card rather than paying its mana cost'
             : castNowAction.free && ways.length > 0
               ? ' without paying its mana cost'
@@ -4543,7 +4545,9 @@ function Table({
               </>
             ) : null}
             {c.costOptionText ? <> (<Symbols text={c.costOptionText} />)</> : null}
-            {castNowAction.byDiscarding === true ? ' (discard a card)' : c.free ? ' (free)' : ''}
+            {castNowAction.madness !== undefined ? (
+              <> (madness <Symbols text={castNowAction.madness} />)</>
+            ) : castNowAction.byDiscarding === true ? ' (discard a card)' : c.free ? ' (free)' : ''}
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
             {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}

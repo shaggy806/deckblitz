@@ -205,6 +205,7 @@ function faceSource(face, ctx) {
     cycling: parsed.cycling,
     flashback: parsed.flashback,
     plot: parsed.plot,
+    madness: parsed.madness,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
     becomesDayAsEnters: parsed.becomesDayAsEnters,

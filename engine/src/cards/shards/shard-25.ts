@@ -40,6 +40,7 @@ import _poolBendersWaterskin from "../pool/benders-waterskin.js";
 import _poolBeornReluctantHost from "../pool/beorn-reluctant-host.js";
 import _poolBerserkersOnslaught from "../pool/berserkers-onslaught.js";
 import _poolBetrayalAtTheVault from "../pool/betrayal-at-the-vault.js";
+import _poolBigGameHunter from "../pool/big-game-hunter.js";
 import _poolBindingMummy from "../pool/binding-mummy.js";
 import _poolBirthingPod from "../pool/birthing-pod.js";
 import _poolBlazingVolley from "../pool/blazing-volley.js";
@@ -542,6 +543,7 @@ const shard: CardShard = {
     _poolBeornReluctantHost,
     _poolBerserkersOnslaught,
     _poolBetrayalAtTheVault,
+    _poolBigGameHunter,
     _poolBindingMummy,
     _poolBirthingPod,
     _poolBlazingVolley,

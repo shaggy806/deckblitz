@@ -251,6 +251,7 @@ import _poolLargerThanLife from "../pool/larger-than-life.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
+import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
@@ -762,6 +763,7 @@ const shard: CardShard = {
     _poolLegionLoyalty,
     _poolLeylineDowser,
     _poolLightningHelix,
+    _poolLoathsomeCurator,
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,

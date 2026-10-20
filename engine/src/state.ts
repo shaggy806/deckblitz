@@ -2831,6 +2831,8 @@ export type AwaitingDecision =
       readonly free: boolean;
       /** …by discarding a card instead — see the effect's `byDiscarding`. */
       readonly byDiscarding?: true;
+      /** …for its madness cost instead (rule 702.35a) — the cost. */
+      readonly madness?: string;
       /** What the spell must be, matched as it's cast — see the effect's
        * `spell`, bound when it was raised. */
       readonly spell?: CardFilter;

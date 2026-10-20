@@ -242,6 +242,7 @@ import _poolLukeCageHeroForHire from "../pool/luke-cage-hero-for-hire.js";
 import _poolLuminousRebuke from "../pool/luminous-rebuke.js";
 import _poolLysAlanaHuntmaster from "../pool/lys-alana-huntmaster.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
+import _poolMarkovBaron from "../pool/markov-baron.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMerfolkSecretkeeper from "../pool/merfolk-secretkeeper.js";
 import _poolMerryWardenOfIsengard from "../pool/merry-warden-of-isengard.js";
@@ -396,6 +397,7 @@ import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
+import _poolTerminalAgony from "../pool/terminal-agony.js";
 import _poolTerramorph from "../pool/terramorph.js";
 import _poolTerritorialWitchstalker from "../pool/territorial-witchstalker.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
@@ -725,6 +727,7 @@ const shard: CardShard = {
     _poolLuminousRebuke,
     _poolLysAlanaHuntmaster,
     _poolMangaraTheDiplomat,
+    _poolMarkovBaron,
     _poolMarwynTheNurturer,
     _poolMerfolkSecretkeeper,
     _poolMerryWardenOfIsengard,
@@ -879,6 +882,7 @@ const shard: CardShard = {
     _poolTemporalCleansing,
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
+    _poolTerminalAgony,
     _poolTerramorph,
     _poolTerritorialWitchstalker,
     _poolTerrorOfTheFairgrounds,

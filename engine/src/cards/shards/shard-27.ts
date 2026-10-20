@@ -60,6 +60,7 @@ import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
 import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
+import _poolCallToTheNetherworld from "../pool/call-to-the-netherworld.js";
 import _poolCancel from "../pool/cancel.js";
 import _poolCandlelightVigil from "../pool/candlelight-vigil.js";
 import _poolCandlelitCavalry from "../pool/candlelit-cavalry.js";
@@ -567,6 +568,7 @@ const shard: CardShard = {
     _poolBrambleFamiliar,
     _poolBrilliantPlan,
     _poolCabarettiInitiate,
+    _poolCallToTheNetherworld,
     _poolCancel,
     _poolCandlelightVigil,
     _poolCandlelitCavalry,

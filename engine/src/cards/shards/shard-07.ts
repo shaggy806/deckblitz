@@ -215,6 +215,7 @@ import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLaviniaFoilToConspiracy from "../pool/lavinia-foil-to-conspiracy.js";
+import _poolLegionVanguard from "../pool/legion-vanguard.js";
 import _poolLightningVisionary from "../pool/lightning-visionary.js";
 import _poolLightningWolf from "../pool/lightning-wolf.js";
 import _poolLilianaTheRepentant from "../pool/liliana-the-repentant.js";
@@ -736,6 +737,7 @@ const shard: CardShard = {
     _poolLastWord,
     _poolLatNamAdept,
     _poolLaviniaFoilToConspiracy,
+    _poolLegionVanguard,
     _poolLightningVisionary,
     _poolLightningWolf,
     _poolLilianaTheRepentant,
