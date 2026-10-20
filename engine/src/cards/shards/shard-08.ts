@@ -401,6 +401,7 @@ import _poolSkyshroudForest from "../pool/skyshroud-forest.js";
 import _poolSkyshroudRanger from "../pool/skyshroud-ranger.js";
 import _poolSkyswirlHarrier from "../pool/skyswirl-harrier.js";
 import _poolSlagwurmArmor from "../pool/slagwurm-armor.js";
+import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
@@ -932,6 +933,7 @@ const shard: CardShard = {
     _poolSkyshroudRanger,
     _poolSkyswirlHarrier,
     _poolSlagwurmArmor,
+    _poolSleep,
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
     _poolSmelt,

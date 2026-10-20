@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, enter, hand, lands, life, loyalty, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, enter, hand, lands, life, loyalty, nextTurn, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 describe("mass effects over a target player's permanents", () => {
   it("River's Rebuke returns only that player's nonland permanents", () => {
@@ -107,5 +107,35 @@ describe("Assassin Gauntlet", () => {
     expect(game.state.objects[gauntlet].attachedTo).toBe(bears);
     expect(game.state.objects[theirs].tapped).toBe(true);
     expect(game.state.objects[bears].tapped).toBe(false);
+  });
+});
+
+describe("Sleep", () => {
+  it("taps that player's creatures, which stay tapped through that player's next untap step", () => {
+    const { game } = table();
+    lands(game, "Island", 4);
+    const giant = spawn(game, "Hill Giant", B);
+    const mine = spawn(game, "Grizzly Bears");
+    cast(game, toHand(game, "Sleep"), { targets: [ref(B)] });
+    expect(game.state.objects[giant].tapped).toBe(true);
+    expect(game.state.objects[mine].tapped).toBe(false);
+    nextTurn(game);
+    expect(game.state.objects[giant].tapped).toBe(true);
+    nextTurn(game);
+    nextTurn(game);
+    // Bob's following untap step untaps it.
+    expect(game.state.objects[giant].tapped).toBe(false);
+  });
+
+  it("one that changes hands first untaps in its new controller's untap step", () => {
+    const { game } = table();
+    lands(game, "Island", 4);
+    const giant = spawn(game, "Hill Giant", B);
+    cast(game, toHand(game, "Sleep"), { targets: [ref(B)] });
+    game.debugApplyEffect(A, { kind: "gain-control", target: 0, untilEndOfTurn: false }, [ref(giant)]);
+    nextTurn(game);
+    nextTurn(game);
+    expect(game.state.objects[giant].controller).toBe(A);
+    expect(game.state.objects[giant].tapped).toBe(false);
   });
 });

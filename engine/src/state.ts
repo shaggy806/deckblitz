@@ -410,6 +410,14 @@ export interface GameObject {
    * not it was tapped, and by any change of zone.
    */
   skipsNextUntap?: true;
+  /**
+   * "Those creatures don't untap during **that player's** next untap step"
+   * (Sleep): the skip is tied to that player's untap step, not to whoever
+   * controls the permanent then — one that changes hands first untaps in its
+   * new controller's untap step as usual. Cleared as that player's untap step
+   * happens, and by any change of zone.
+   */
+  skipsUntapOf?: PlayerId;
   /** This creature must attack this specific player if able — Encore's
    * "create a token copy that attacks that opponent this turn if able". */
   mustAttackPlayer?: PlayerId;
@@ -4333,6 +4341,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.exertedBy ?? null,
     o.exertedOnTurn ?? null,
     o.skipsNextUntap ?? false,
+    o.skipsUntapOf ?? null,
     o.mustAttackPlayer ?? null,
     o.controlEffects ?? null,
     o.controlEndsAtCleanup,

@@ -719,6 +719,13 @@
         "engine/src/cards/pool/tangle.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Sleep",
+      "files": [
+        "engine/src/cards/pool/sleep.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1177,13 +1184,6 @@
         "new:defending-player-after-removal"
       ],
       "why": "Reflexive target 'creature defending player controls' reads live attacking; rule 508.5 keeps the defending player if Armix left combat."
-    },
-    {
-      "name": "Sleep",
-      "needs": [
-        "new:tap-all-target-player-doesnt-untap"
-      ],
-      "why": "tap-all has no target-player scope nor 'don't untap during next untap step'."
     },
     {
       "name": "Eternal Scourge",

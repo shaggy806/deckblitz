@@ -3853,6 +3853,11 @@ export type EffectSpec =
        * "each attacking creature doesn't untap …"). */
       readonly doesntUntapNext?: boolean;
       readonly onlyDoesntUntap?: boolean;
+      /** With `doesntUntapNext` and `controlledByTarget`: "during **that
+       * player's** next untap step" (Sleep), tied to that player's untap step
+       * rather than to whoever controls each permanent then
+       * (`GameObject.skipsUntapOf`). */
+      readonly untapStepOfTarget?: boolean;
     }
   | {
       /**
@@ -6350,7 +6355,13 @@ export interface EffectApi {
   untapAll(filter: CardFilter, scopeTo?: PlayerId, exceptSource?: boolean): void;
   /** See the `"exert"` {@link EffectSpec}. */
   exert(target: TargetRef, asItAttacks: boolean): void;
-  tapAll(filter: CardFilter, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean, scopeTo?: PlayerId): void;
+  tapAll(
+    filter: CardFilter,
+    doesntUntapNext?: boolean,
+    onlyDoesntUntap?: boolean,
+    scopeTo?: PlayerId,
+    untapStepOfScope?: boolean,
+  ): void;
   /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
    * the permanent the source is attached to, or every permanent matching
    * `filter` — at once. */
@@ -9693,7 +9704,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "tap-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
       if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-      ctx.tapAll(spec.filter, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true, scopeTo);
+      ctx.tapAll(
+        spec.filter,
+        spec.doesntUntapNext === true,
+        spec.onlyDoesntUntap === true,
+        scopeTo,
+        spec.untapStepOfTarget === true,
+      );
       return;
     }
     case "phase-out": {

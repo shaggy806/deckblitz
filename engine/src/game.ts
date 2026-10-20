@@ -6039,6 +6039,7 @@ export class Game {
         object.tapped &&
         object.exertedBy !== active &&
         object.skipsNextUntap !== true &&
+        object.skipsUntapOf !== active &&
         !this.hasOwnStatic(object, (a) => a.doesntUntap === true)
       ) {
         this.untapUnlessStunned(id);
@@ -6050,7 +6051,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object === undefined || object.controller === active || !object.tapped) continue;
       if (this.state.players[object.controller]?.hasLost === true) continue;
-      if (object.exertedBy !== active && this.untapsDuringOthersUntap(object)) {
+      if (object.exertedBy !== active && object.skipsUntapOf !== active && this.untapsDuringOthersUntap(object)) {
         this.untapUnlessStunned(id);
       }
     }
@@ -6061,6 +6062,7 @@ export class Game {
       const object = this.state.objects[id];
       if (object?.exertedBy === active) delete object.exertedBy;
       if (object?.controller === active) delete object.skipsNextUntap;
+      if (object?.skipsUntapOf === active) delete object.skipsUntapOf;
     }
   }
 
@@ -21961,7 +21963,7 @@ export class Game {
           this.untapUnlessStunned(id);
         }
       },
-      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo) => {
+      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope) => {
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
@@ -21969,7 +21971,11 @@ export class Game {
             this.emit({ type: "permanent-tapped", object: id });
           }
           // A stack matched whole: every token in it skips the untap.
-          if (doesntUntapNext === true) object.skipsNextUntap = true;
+          if (doesntUntapNext === true && untapStepOfScope === true && scopeTo !== undefined) {
+            object.skipsUntapOf = scopeTo;
+          } else if (doesntUntapNext === true) {
+            object.skipsNextUntap = true;
+          }
         }
       },
       phaseOut: (what) => {
@@ -33881,6 +33887,7 @@ export class Game {
     delete object.exertedBy;
     delete object.exertedOnTurn;
     delete object.skipsNextUntap;
+    delete object.skipsUntapOf;
     object.blocking = null;
     object.blockedBy = [];
     object.blocked = false;

@@ -12003,6 +12003,7 @@ import _poolSleddingOtterPenguin from "./pool/sledding-otter-penguin.js";
 import _poolSledgeClassSeedship from "./pool/sledge-class-seedship.js";
 import _poolSleekSchooner from "./pool/sleek-schooner.js";
 import _poolSleepCursedFaerie from "./pool/sleep-cursed-faerie.js";
+import _poolSleep from "./pool/sleep.js";
 import _poolSleeperDart from "./pool/sleeper-dart.js";
 import _poolSleightOfHand from "./pool/sleight-of-hand.js";
 import _poolSliceFromTheShadows from "./pool/slice-from-the-shadows.js";
@@ -28031,6 +28032,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSledgeClassSeedship,
   _poolSleekSchooner,
   _poolSleepCursedFaerie,
+  _poolSleep,
   _poolSleeperDart,
   _poolSleightOfHand,
   _poolSliceFromTheShadows,
