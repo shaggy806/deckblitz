@@ -712,6 +712,13 @@
         "engine/src/cards/pool/viridian-corrupter.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Tangle",
+      "files": [
+        "engine/src/cards/pool/tangle.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1247,13 +1254,6 @@
         "new:coven"
       ],
       "why": "no condition for three creatures with different powers (AUTHORING §15)"
-    },
-    {
-      "name": "Tangle",
-      "needs": [
-        "new:doesnt-untap-next-all"
-      ],
-      "why": "doesntUntapNext exists only on single-target tap; nothing marks every attacking creature without tapping it"
     },
     {
       "name": "Blightwing Bandit",

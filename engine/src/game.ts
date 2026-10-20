@@ -21958,13 +21958,15 @@ export class Game {
           this.untapUnlessStunned(id);
         }
       },
-      tapAll: (filter) => {
+      tapAll: (filter, doesntUntapNext, onlyDoesntUntap) => {
         for (const id of this.battlefieldMatching(controller, filter)) {
           const object = this.state.objects[id];
-          if (!object.tapped) {
+          if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
             object.tapped = true;
             this.emit({ type: "permanent-tapped", object: id });
           }
+          // A stack matched whole: every token in it skips the untap.
+          if (doesntUntapNext === true) object.skipsNextUntap = true;
         }
       },
       phaseOut: (what) => {

@@ -13105,6 +13105,7 @@ import _poolTangleHulk from "./pool/tangle-hulk.js";
 import _poolTangleMantis from "./pool/tangle-mantis.js";
 import _poolTangleSpider from "./pool/tangle-spider.js";
 import _poolTangleTumbler from "./pool/tangle-tumbler.js";
+import _poolTangle from "./pool/tangle.js";
 import _poolTanglebloom from "./pool/tanglebloom.js";
 import _poolTangledFlorahedron from "./pool/tangled-florahedron.js";
 import _poolTangledIslet from "./pool/tangled-islet.js";
@@ -29114,6 +29115,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTangleMantis,
   _poolTangleSpider,
   _poolTangleTumbler,
+  _poolTangle,
   _poolTanglebloom,
   _poolTangledFlorahedron,
   _poolTangledIslet,

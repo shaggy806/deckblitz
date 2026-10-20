@@ -3828,6 +3828,11 @@ export type EffectSpec =
        * single chosen target. */
       readonly kind: "tap-all";
       readonly filter: CardFilter;
+      /** As `tap`'s: "they don't untap during their controller's next untap
+       * step" — and with `onlyDoesntUntap` only that, none tapped (Tangle's
+       * "each attacking creature doesn't untap …"). */
+      readonly doesntUntapNext?: boolean;
+      readonly onlyDoesntUntap?: boolean;
     }
   | {
       /**
@@ -6317,7 +6322,7 @@ export interface EffectApi {
   untapAll(filter: CardFilter, scopeTo?: PlayerId, exceptSource?: boolean): void;
   /** See the `"exert"` {@link EffectSpec}. */
   exert(target: TargetRef, asItAttacks: boolean): void;
-  tapAll(filter: CardFilter): void;
+  tapAll(filter: CardFilter, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean): void;
   /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
    * the permanent the source is attached to, or every permanent matching
    * `filter` — at once. */
@@ -9649,7 +9654,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "tap-all":
-      ctx.tapAll(spec.filter);
+      ctx.tapAll(spec.filter, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
       return;
     case "phase-out": {
       const until = {

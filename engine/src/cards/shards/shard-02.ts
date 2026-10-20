@@ -401,6 +401,7 @@ import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
+import _poolTangle from "../pool/tangle.js";
 import _poolTauntingKobold from "../pool/taunting-kobold.js";
 import _poolTeferiMasterOfTime from "../pool/teferi-master-of-time.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
@@ -878,6 +879,7 @@ const shard: CardShard = {
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
+    _poolTangle,
     _poolTauntingKobold,
     _poolTeferiMasterOfTime,
     _poolTheFantasticar,
