@@ -38,7 +38,7 @@ const SECTIONS = [
   ["Conditions", "src/cards/define.ts", "StaticCondition", "`condition:` on statics, triggers (intervening if), effects — `kind`"],
 ];
 
-const DOC_MAX = 150;
+const DOC_MAX = 100;
 
 // ------------------------------------------------------------------ scanning
 

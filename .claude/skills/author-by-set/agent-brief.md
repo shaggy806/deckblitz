@@ -14,10 +14,12 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 ## Read before authoring
 
 - `engine/CLAUDE.md`, then `engine/src/cards/AUTHORING.md` §0 (rule zero), §1, §15 (what the engine can't express).
-- **`DIGEST_PATH`** — the whole definition vocabulary on one page: every effect, amount, target, trigger, condition, cost and static field, each with its fields, the first sentence of its doc, how many cards use it and the smallest one to copy. Read it through once (it's ~125 KB: three or four `Read`s), then **triage every card against it before authoring any** — authorable, or blocked and why. Reach for `card:find`, `card:vocab` or a grep of the engine sources only for what the digest leaves open (a field's exact type, an option's full doc); past agents spent most of their first ten minutes grepping `effects.ts` for options the digest lists. Use the rest of AUTHORING.md as a reference per card.
+- **`DIGEST_PATH`** — the whole definition vocabulary on one page: every effect, amount, target, trigger, condition, cost and static field, each with its fields, the first sentence of its doc, how many cards use it and the smallest one to copy. Read it through once (it's ~100 KB: three `Read`s in one message), then **triage every card against it before authoring any** — authorable, or blocked and why. Reach for `card:find`, `card:vocab` or a grep of the engine sources only for what the digest leaves open (a field's exact type, an option's full doc); past agents spent most of their first ten minutes grepping `effects.ts` for options the digest lists. Use the rest of AUTHORING.md as a reference per card.
 - **Rule zero**: never author a card the engine can't run exactly — no dropped clause, no hardcoded number, no choice made for the player, no "close enough". A missing card costs nothing; a wrong one lies at the table. When in doubt, BLOCK it. Every card's **rulings** are in the briefs — a ruling often decides it, and the ruling beats a precedent.
 
 ## Working rules (each cost past agents minutes)
+
+- **Batch your tool calls.** Every turn re-reads your whole context (~200K tokens), so the number of turns is most of what your work costs. Put independent calls in one message: the setup's reads together; one `card:find`/`card:vocab`/Grep per open question, all at once; **write three or four finished card files in one message**; run gen:cards and the typecheck in one Bash call (`npm run gen:cards -w engine && npm run typecheck -w engine`). Past agents batched one turn in ten.
 
 - **Read files with the Read tool and search with Grep/Glob** — not `cat | grep | sed | awk` pipelines or `cd … && …` chains, which the worktree guard refuses. Keep shell commands to single npm/npx/git commands run from the worktree root.
 - Keep tool output small: pipe test output through `| tail -40`, and grep the parts you need from long files rather than printing them whole.
@@ -39,9 +41,8 @@ From the worktree root (Git Bash is fine for git; the junction needs PowerShell)
 ## Checks (all must pass before you commit)
 
 From the worktree root:
-1. `npm run gen:cards -w engine`
-2. `npm run typecheck -w engine` (type-checks your test file too)
-3. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/`
+1. `npm run gen:cards -w engine && npm run typecheck -w engine` — one call (the typecheck covers your test file too)
+2. `npx vitest run TEST_FILE_PREFIXGROUP_LETTER pool.test --maxWorkers=2` from `engine/`
 
 The lead runs `oracle-parse` (it reads the engine build, which your worktree doesn't have), `card:verify`, the fuzzer and the full suites after integrating — don't.
 

@@ -516,6 +516,7 @@ import _poolZukoExiledPrince from "../pool/zuko-exiled-prince.js";
 import _poolZukosConviction from "../pool/zukos-conviction.js";
 import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
 import _poolZurgoThundersDecree from "../pool/zurgo-thunders-decree.js";
+import _tokensDemonBerserkerToken from "../tokens/demon-berserker-token.js";
 import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
 import _tokensDroneToken from "../tokens/drone-token.js";
 import _tokensElementalTokenLagomosHandOfHatred from "../tokens/elemental-token-lagomos-hand-of-hatred.js";
@@ -1045,6 +1046,7 @@ const shard: CardShard = {
     _poolZurgoThundersDecree,
   ],
   tokens: [
+    _tokensDemonBerserkerToken,
     _tokensDinosaurDragonToken,
     _tokensDroneToken,
     _tokensElementalTokenLagomosHandOfHatred,

@@ -15968,6 +15968,7 @@ import _tokensAngelToken33White from "./tokens/angel-token-3-3-white.js";
 import _tokensAngelToken33 from "./tokens/angel-token-3-3.js";
 import _tokensAngelToken44 from "./tokens/angel-token-4-4.js";
 import _tokensAngelVigilanceToken from "./tokens/angel-vigilance-token.js";
+import _tokensAngelWarriorTokenFlyingVigilance from "./tokens/angel-warrior-token-flying-vigilance.js";
 import _tokensAngelWarriorToken from "./tokens/angel-warrior-token.js";
 import _tokensAngelo from "./tokens/angelo.js";
 import _tokensApeToken from "./tokens/ape-token.js";
@@ -16032,6 +16033,7 @@ import _tokensDalekToken from "./tokens/dalek-token.js";
 import _tokensDarkstar from "./tokens/darkstar.js";
 import _tokensDeathtouchRatToken from "./tokens/deathtouch-rat-token.js";
 import _tokensDeathtouchSnakeToken from "./tokens/deathtouch-snake-token.js";
+import _tokensDemonBerserkerToken from "./tokens/demon-berserker-token.js";
 import _tokensDemonToken from "./tokens/demon-token.js";
 import _tokensDetectiveToken from "./tokens/detective-token.js";
 import _tokensDevilToken from "./tokens/devil-token.js";
@@ -16053,6 +16055,7 @@ import _tokensDragonTokenFirebreathing from "./tokens/dragon-token-firebreathing
 import _tokensDragonTokenWakeTheDragon from "./tokens/dragon-token-wake-the-dragon.js";
 import _tokensDrakeToken from "./tokens/drake-token.js";
 import _tokensDroneToken from "./tokens/drone-token.js";
+import _tokensDwarfBerserkerToken from "./tokens/dwarf-berserker-token.js";
 import _tokensDwarfToken from "./tokens/dwarf-token.js";
 import _tokensEggToken from "./tokens/egg-token.js";
 import _tokensEldraziAngelToken from "./tokens/eldrazi-angel-token.js";
@@ -16095,6 +16098,7 @@ import _tokensFrogLizardToken from "./tokens/frog-lizard-token.js";
 import _tokensFungusBeastToken from "./tokens/fungus-beast-token.js";
 import _tokensFungusTokenCantBlock from "./tokens/fungus-token-cant-block.js";
 import _tokensGalactus from "./tokens/galactus.js";
+import _tokensGiantWizardToken from "./tokens/giant-wizard-token.js";
 import _tokensGlimmerToken from "./tokens/glimmer-token.js";
 import _tokensGnomeToken from "./tokens/gnome-token.js";
 import _tokensGoatToken from "./tokens/goat-token.js";
@@ -16285,6 +16289,7 @@ import _tokensScionOfTheDeepToken from "./tokens/scion-of-the-deep-token.js";
 import _tokensScorpionDragonToken from "./tokens/scorpion-dragon-token.js";
 import _tokensSculptureTreasureToken from "./tokens/sculpture-treasure-token.js";
 import _tokensServoToken from "./tokens/servo-token.js";
+import _tokensShapeshifterTokenBlue from "./tokens/shapeshifter-token-blue.js";
 import _tokensShapeshifterTokenIrregularCohort from "./tokens/shapeshifter-token-irregular-cohort.js";
 import _tokensShapeshifterToken from "./tokens/shapeshifter-token.js";
 import _tokensShardToken from "./tokens/shard-token.js";
@@ -16345,6 +16350,7 @@ import _tokensTiny from "./tokens/tiny.js";
 import _tokensTreasureToken from "./tokens/treasure-token.js";
 import _tokensTreefolkTokenSylvanOffering from "./tokens/treefolk-token-sylvan-offering.js";
 import _tokensTreefolkToken from "./tokens/treefolk-token.js";
+import _tokensTrollWarriorToken from "./tokens/troll-warrior-token.js";
 import _tokensTyranidGargoyleToken from "./tokens/tyranid-gargoyle-token.js";
 import _tokensTyranidToken55 from "./tokens/tyranid-token-5-5.js";
 import _tokensTyranidToken from "./tokens/tyranid-token.js";
@@ -32383,6 +32389,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensAngelToken33,
   _tokensAngelToken44,
   _tokensAngelVigilanceToken,
+  _tokensAngelWarriorTokenFlyingVigilance,
   _tokensAngelWarriorToken,
   _tokensAngelo,
   _tokensApeToken,
@@ -32447,6 +32454,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDarkstar,
   _tokensDeathtouchRatToken,
   _tokensDeathtouchSnakeToken,
+  _tokensDemonBerserkerToken,
   _tokensDemonToken,
   _tokensDetectiveToken,
   _tokensDevilToken,
@@ -32468,6 +32476,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensDragonTokenWakeTheDragon,
   _tokensDrakeToken,
   _tokensDroneToken,
+  _tokensDwarfBerserkerToken,
   _tokensDwarfToken,
   _tokensEggToken,
   _tokensEldraziAngelToken,
@@ -32510,6 +32519,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensFungusBeastToken,
   _tokensFungusTokenCantBlock,
   _tokensGalactus,
+  _tokensGiantWizardToken,
   _tokensGlimmerToken,
   _tokensGnomeToken,
   _tokensGoatToken,
@@ -32700,6 +32710,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensScorpionDragonToken,
   _tokensSculptureTreasureToken,
   _tokensServoToken,
+  _tokensShapeshifterTokenBlue,
   _tokensShapeshifterTokenIrregularCohort,
   _tokensShapeshifterToken,
   _tokensShardToken,
@@ -32760,6 +32771,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensTreasureToken,
   _tokensTreefolkTokenSylvanOffering,
   _tokensTreefolkToken,
+  _tokensTrollWarriorToken,
   _tokensTyranidGargoyleToken,
   _tokensTyranidToken55,
   _tokensTyranidToken,
@@ -48799,6 +48811,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/angel-token-3-3": _tokensAngelToken33,
   "tokens/angel-token-4-4": _tokensAngelToken44,
   "tokens/angel-vigilance-token": _tokensAngelVigilanceToken,
+  "tokens/angel-warrior-token-flying-vigilance": _tokensAngelWarriorTokenFlyingVigilance,
   "tokens/angel-warrior-token": _tokensAngelWarriorToken,
   "tokens/angelo": _tokensAngelo,
   "tokens/ape-token": _tokensApeToken,
@@ -48863,6 +48876,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/darkstar": _tokensDarkstar,
   "tokens/deathtouch-rat-token": _tokensDeathtouchRatToken,
   "tokens/deathtouch-snake-token": _tokensDeathtouchSnakeToken,
+  "tokens/demon-berserker-token": _tokensDemonBerserkerToken,
   "tokens/demon-token": _tokensDemonToken,
   "tokens/detective-token": _tokensDetectiveToken,
   "tokens/devil-token": _tokensDevilToken,
@@ -48884,6 +48898,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/dragon-token-wake-the-dragon": _tokensDragonTokenWakeTheDragon,
   "tokens/drake-token": _tokensDrakeToken,
   "tokens/drone-token": _tokensDroneToken,
+  "tokens/dwarf-berserker-token": _tokensDwarfBerserkerToken,
   "tokens/dwarf-token": _tokensDwarfToken,
   "tokens/egg-token": _tokensEggToken,
   "tokens/eldrazi-angel-token": _tokensEldraziAngelToken,
@@ -48926,6 +48941,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/fungus-beast-token": _tokensFungusBeastToken,
   "tokens/fungus-token-cant-block": _tokensFungusTokenCantBlock,
   "tokens/galactus": _tokensGalactus,
+  "tokens/giant-wizard-token": _tokensGiantWizardToken,
   "tokens/glimmer-token": _tokensGlimmerToken,
   "tokens/gnome-token": _tokensGnomeToken,
   "tokens/goat-token": _tokensGoatToken,
@@ -49116,6 +49132,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/scorpion-dragon-token": _tokensScorpionDragonToken,
   "tokens/sculpture-treasure-token": _tokensSculptureTreasureToken,
   "tokens/servo-token": _tokensServoToken,
+  "tokens/shapeshifter-token-blue": _tokensShapeshifterTokenBlue,
   "tokens/shapeshifter-token-irregular-cohort": _tokensShapeshifterTokenIrregularCohort,
   "tokens/shapeshifter-token": _tokensShapeshifterToken,
   "tokens/shard-token": _tokensShardToken,
@@ -49176,6 +49193,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/treasure-token": _tokensTreasureToken,
   "tokens/treefolk-token-sylvan-offering": _tokensTreefolkTokenSylvanOffering,
   "tokens/treefolk-token": _tokensTreefolkToken,
+  "tokens/troll-warrior-token": _tokensTrollWarriorToken,
   "tokens/tyranid-gargoyle-token": _tokensTyranidGargoyleToken,
   "tokens/tyranid-token-5-5": _tokensTyranidToken55,
   "tokens/tyranid-token": _tokensTyranidToken,

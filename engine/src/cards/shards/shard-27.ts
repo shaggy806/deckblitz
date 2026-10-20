@@ -506,6 +506,7 @@ import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
 import _tokensDinosaurToken from "../tokens/dinosaur-token.js";
+import _tokensDwarfBerserkerToken from "../tokens/dwarf-berserker-token.js";
 import _tokensFractalToken from "../tokens/fractal-token.js";
 import _tokensHumanToken from "../tokens/human-token.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
@@ -1023,6 +1024,7 @@ const shard: CardShard = {
     _tokensClownRobotToken,
     _tokensConstructTokenTheFantasticar,
     _tokensDinosaurToken,
+    _tokensDwarfBerserkerToken,
     _tokensFractalToken,
     _tokensHumanToken,
     _tokensPhyrexianSaprolingToken,

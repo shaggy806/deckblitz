@@ -81,8 +81,13 @@ card is a draft like any other — its templates match sentences, not meaning
 
 **Parallel agents** (sized by the `feedback_agents_only_over_15_cards`
 memory: ≤15 authorable cards yourself, 16–39 one agent, 40+ split into
-~25–30-card agents), each in `isolation: "worktree"`, briefed from
-**`agent-brief.md`** beside this file (fill in its placeholders). B109's six
+~25–30-card agents), each a **`card-author`** agent (`subagent_type`,
+`.claude/agents/card-author.md`: only the file and shell tools, so a smaller
+fixed context on every turn than the general-purpose agent's) in
+`isolation: "worktree"`, briefed from **`agent-brief.md`** beside this file
+(fill in its placeholders). Tokens per authored card are the batch's cost —
+measure them as the `feedback_agent_token_counting` memory says (B111:
+1.11M). B109's six
 agents spent half their ~44 minutes before their first card — a stale base,
 a refused junction, their own build, scaffold and briefs under six-way
 contention — so the lead does the shared work once, before dispatching:
@@ -95,7 +100,9 @@ contention — so the lead does the shared work once, before dispatching:
    out of the repo, not copied (they're untracked, and a `git add -A` would
    sweep them into your commit; `scaffold/winter-cynical-opportunist.ts` is
    tracked — never delete it) — and `group-<x>/briefs.txt`, `npm run -s
-   card:brief -w engine -- <the group's cards> > …/briefs.txt`. A split
+   card:brief -w engine -- <the group's cards> --analogs 2 --width 300 >
+   …/briefs.txt` (two analogs a line, their shapes clipped: an agent carries
+   the briefs in every turn's context, and asks `card:find` for more). A split
    card scaffolds as one file per half: keep both halves in one group. The
    brief's paths use forward slashes (Git Bash's `cp` eats backslashes).
 3. **Deal the cards out** in rank order snaking across the groups, so each

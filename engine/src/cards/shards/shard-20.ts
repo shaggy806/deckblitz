@@ -542,6 +542,7 @@ import _poolZeriamGoldenWind from "../pool/zeriam-golden-wind.js";
 import _tokensAngelToken33 from "../tokens/angel-token-3-3.js";
 import _tokensCursedRoleToken from "../tokens/cursed-role-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
+import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
 import _tokensIllusionTokenMinn from "../tokens/illusion-token-minn.js";
 import _tokensInsectTokenBlackGreen from "../tokens/insect-token-black-green.js";
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _tokensAngelToken33,
     _tokensCursedRoleToken,
     _tokensFaerieToken,
+    _tokensGiantWizardToken,
     _tokensIllusionTokenMinn,
     _tokensInsectTokenBlackGreen,
     _tokensRabbitToken,
