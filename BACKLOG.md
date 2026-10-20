@@ -170,7 +170,6 @@ there and move this line to `COMPLETED.md`.
 
 - **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
-- **`look-and-choose` to exile always links the card to its source** (607.2a): Shadow Kin's exile is linked, so a copied "return the linked card" ability could return it.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **At most 100 tokens of one stack can block** (509.1a): `Game.MAX_MATERIALIZED` still caps a *blocking* stack.
 - **Phyrexian mana is paid with life only when mana can't pay it** (107.4f): the player can't choose life over mana — which matters for compleated (702.150a) and for keeping mana open.

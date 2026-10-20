@@ -37,6 +37,8 @@ export default defineCard({
             min: 0,
             max: 1,
             destination: "exile",
+            // Not linked (rule 607.2a): no "the exiled card" refers to it.
+            unlinked: true,
             leftover: "stay",
             filter: { type: "creature", thisWay: "milled" },
             then: {

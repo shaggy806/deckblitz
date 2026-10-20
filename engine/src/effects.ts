@@ -5142,6 +5142,11 @@ export type EffectSpec =
        * nonartifact, nonland card from your hand" (Chrome Mox), whose "the
        * exiled card" is every player's to see. */
       readonly destination: "battlefield" | "hand" | "library-top" | "library-bottom" | "exile-face-down" | "exile" | "manifest";
+      /** `"exile"` without the link (rule 607.2a): a card exiled by an effect
+       * that isn't one of a linked pair — Shadow Kin's "you may exile a
+       * creature card from among them", which no "the exiled card" of its
+       * (or of a creature it copies) refers to. */
+      readonly unlinked?: true;
       /** Chosen cards bound for the battlefield enter **tapped** (Terrain
        * Generator). */
       readonly enterTapped?: boolean;
@@ -6576,6 +6581,8 @@ export interface EffectApi {
     picker?: PlayerId,
     /** See `look-and-choose`'s `withCounters`. */
     withCounters?: { readonly kind: string; readonly amount: number },
+    /** See `look-and-choose`'s `unlinked`. */
+    unlinked?: boolean,
   ): void;
 }
 
@@ -10253,6 +10260,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         chooser,
         picker,
         spec.withCounters,
+        spec.unlinked === true,
       );
       return;
     }

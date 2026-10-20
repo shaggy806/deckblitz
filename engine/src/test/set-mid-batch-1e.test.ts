@@ -551,6 +551,9 @@ describe("Shadow Kin", () => {
     settle(game);
     expect([...seen.offered].sort()).toEqual([giant, memnite].sort());
     expect(zone(game, giant)).toBe("exile");
+    // Not linked to Shadow Kin (rule 607.2a): a copied "return the exiled
+    // card" ability has nothing of its to return.
+    expect(game.state.objects[giant].exiledWith).toBeUndefined();
     expect(printedCardName(game.state.objects[kin])).toBe("Hill Giant");
     expect(pt(game, kin)).toEqual({ power: 3, toughness: 3 });
     expect(graveyard(game, A)).toHaveLength(3);

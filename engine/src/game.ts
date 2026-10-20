@@ -22230,14 +22230,14 @@ export class Game {
           ),
         );
       },
-      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters) => {
+      lookAndChoose: (zone, count, min, max, destination, leftover, filter, enterTapped, then, reveal, leftoverIf, secondPick, attacking, enterAs, chooser, picker, withCounters, unlinked) => {
         // "Exile one of them face down" (hideaway): linked to the source, in
-        // the stint this ability refers to (rule 607.2a).
+        // the stint this ability refers to (rule 607.2a) — unless `unlinked`.
         const sourceObject = this.state.objects[source];
         const stint =
           refs.source ?? (sourceObject?.zone === "battlefield" ? (sourceObject.zoneChangeCount ?? 0) : undefined);
         const exileLink =
-          (destination === "exile-face-down" || destination === "exile") && stint !== undefined
+          (destination === "exile-face-down" || destination === "exile") && stint !== undefined && unlinked !== true
             ? { source, zoneChangeCount: stint }
             : undefined;
         this.beginZoneChoice(
