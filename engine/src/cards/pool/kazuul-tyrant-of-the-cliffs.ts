@@ -12,11 +12,12 @@ export default defineCard({
   text: "Whenever a creature an opponent controls attacks, if you're the defending player, create a 3/3 red Ogre creature token unless that creature's controller pays {3}.",
   triggered: [
     {
-      // `attackingYou` is both halves of the wording at once: "if you're the
-      // defending player", and "a creature an opponent controls" — nobody can
-      // attack themselves, so an attacker aimed at you is always an
-      // opponent's.
-      trigger: { on: "attacks", who: "any", attackingYou: true },
+      // `youDefend` is both halves of the wording at once: "if you're the
+      // defending player" (attacked yourself, or a planeswalker you control,
+      // or a battle you protect — rule 508.5), and "a creature an opponent
+      // controls" — nobody can attack themselves, so an attacker aimed at you
+      // is always an opponent's.
+      trigger: { on: "attacks", who: "any", youDefend: true },
       targets: [],
       effect: {
         kind: "unless",

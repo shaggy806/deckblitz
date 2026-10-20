@@ -971,14 +971,25 @@ export type TriggerSpec =
        * World) — this permanent attacking doesn't count. */
       readonly otherOnly?: boolean;
       /**
-       * Only when the attack is aimed at *this* permanent's controller —
-       * Kazuul's "if you're the defending player".
+       * Only when the attack is aimed at *this* permanent's controller or a
+       * planeswalker they control — Isperia, Supreme Judge's "Whenever a
+       * creature attacks you or a planeswalker you control". Not a battle
+       * they protect, though that makes them the defending player (rule
+       * 508.5): that's `youDefend`. With `defender: "player"`, "attacks
+       * **you**" alone (MacCready, Lamplight Mayor).
+       */
+      readonly attackingYou?: boolean;
+      /**
+       * Only when this permanent's controller is the attack's defending
+       * player — Kazuul, Tyrant of the Cliffs' "if you're the defending
+       * player": attacked themselves, or a planeswalker they control, or a
+       * battle they protect (rule 508.5).
        *
        * This also covers "a creature an opponent controls", the other half of
        * that card's wording: nobody can attack themselves, so an attacker
        * pointed at you is necessarily an opponent's.
        */
-      readonly attackingYou?: boolean;
+      readonly youDefend?: boolean;
       /**
        * What it must be attacking: `"player"` is "attacks **a player**" /
        * "attacks **an opponent**" (Kaalia of the Vast) — a creature attacking
@@ -1444,7 +1455,7 @@ export type TriggerSpec =
       /** Only count attackers aimed at *this* permanent's controller or a
        * planeswalker they control — Ever-Watching Threshold's "whenever an
        * opponent attacks, **if they attacked you and/or a planeswalker you
-       * control**". */
+       * control**". Not a battle, whether they control it or protect it. */
       readonly attackingYou?: boolean;
       /**
        * The count is an intervening if in the present tense — Mangara, the

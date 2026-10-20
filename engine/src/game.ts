@@ -18282,8 +18282,8 @@ export class Game {
           this.matchesWho(spec.who, event.attacker, self) &&
           !(spec.otherOnly === true && event.attacker === self.id) &&
           this.triggerFilterOk(spec.filter, event.attacker, self) &&
-          (spec.attackingYou !== true ||
-            this.defendingPlayerOf(event.defender) === self.controller) &&
+          (spec.attackingYou !== true || this.attacksYouOrYourPlaneswalker(event.defender, self.controller)) &&
+          (spec.youDefend !== true || this.defendingPlayerOf(event.defender) === self.controller) &&
           (spec.defender === undefined || this.defenderKind(event.defender) === spec.defender) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
@@ -18511,10 +18511,7 @@ export class Game {
           if (spec.attackingYou !== true) return true;
           const at = this.state.objects[id]?.attacking;
           if (at === null || at === undefined) return false;
-          return (
-            at === self.controller ||
-            this.state.objects[at as ObjectId]?.controller === self.controller
-          );
+          return this.attacksYouOrYourPlaneswalker(at, self.controller);
         });
         return counted.length >= spec.atLeast;
       }
@@ -23187,6 +23184,20 @@ export class Game {
    * 310.11) — or isn't a battle at all. */
   /** What an attacker is attacking (rule 506.2): a player, a planeswalker or
    * a battle. */
+  /** "Attacks you or a planeswalker you control" (`attackingYou`): an attack
+   * on `player`, or on a planeswalker they control — not a battle, though
+   * protecting one makes them its defending player (rule 508.5). */
+  private attacksYouOrYourPlaneswalker(defender: PlayerId | ObjectId, player: PlayerId): boolean {
+    switch (this.defenderKind(defender)) {
+      case "player":
+        return defender === player;
+      case "planeswalker":
+        return this.state.objects[defender as ObjectId]?.controller === player;
+      case "battle":
+        return false;
+    }
+  }
+
   private defenderKind(defender: PlayerId | ObjectId): "player" | "planeswalker" | "battle" {
     if (this.state.players[defender as PlayerId] !== undefined) return "player";
     const object = this.state.objects[defender as ObjectId];

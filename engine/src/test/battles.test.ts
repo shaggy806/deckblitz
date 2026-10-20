@@ -14,9 +14,13 @@ import {
   A,
   B,
   C,
+  attack,
   cast,
   counters,
+  hand,
   lands,
+  life,
+  tokensNamed,
   pickModes,
   pt,
   ref,
@@ -60,6 +64,35 @@ describe("a Siege entering", () => {
     a.chooseTargetsFn = () => [ref(bears)];
     invade(game);
     expect(zone(game, bears)).toBe("graveyard");
+  });
+});
+
+describe("attacking a battle you protect", () => {
+  // Its protector is the defending player (rule 508.5), so Kazuul's "if
+  // you're the defending player" fires — but the battle is neither "you" nor
+  // "a planeswalker you control", so those triggers don't.
+  function board(at: "battle" | "player") {
+    const { game, a } = table();
+    const battle = invade(game);
+    spawn(game, "Kazuul, Tyrant of the Cliffs", B);
+    spawn(game, "Marchesa's Decree", B);
+    spawn(game, "Ever-Watching Threshold", B);
+    const wurm = spawn(game, "Craw Wurm");
+    const before = { life: life(game, A), hand: hand(game, B).length };
+    attack(game, a, [wurm], at === "battle" ? battle : B);
+    return {
+      ogres: tokensNamed(game, "Ogre Token", B),
+      lifeLost: before.life - life(game, A),
+      drawn: hand(game, B).length - before.hand,
+    };
+  }
+
+  it("fires Kazuul, but not Marchesa's Decree or Ever-Watching Threshold", () => {
+    expect(board("battle")).toEqual({ ogres: 1, lifeLost: 0, drawn: 0 });
+  });
+
+  it("attacking its protector instead fires all three", () => {
+    expect(board("player")).toEqual({ ogres: 1, lifeLost: 1, drawn: 1 });
   });
 });
 
