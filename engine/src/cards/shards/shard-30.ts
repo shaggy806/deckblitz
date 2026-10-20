@@ -70,6 +70,7 @@ import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
+import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCelestialForce from "../pool/celestial-force.js";
 import _poolCemeteryTampering from "../pool/cemetery-tampering.js";
@@ -266,6 +267,7 @@ import _poolLatticeBladeMantis from "../pool/lattice-blade-mantis.js";
 import _poolLaunchMishap from "../pool/launch-mishap.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
+import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
@@ -576,6 +578,7 @@ const shard: CardShard = {
     _poolCameraLauncher,
     _poolCandyTrail,
     _poolCapsizingWave,
+    _poolCastOut,
     _poolCaveSense,
     _poolCelestialForce,
     _poolCemeteryTampering,
@@ -772,6 +775,7 @@ const shard: CardShard = {
     _poolLaunchMishap,
     _poolLaunchParty,
     _poolLavaglidePathway,
+    _poolLeylineBinding,
     _poolLightOfHope,
     _poolLitaLittleOrphanAmphibian,
     _poolLonelyArroyo,

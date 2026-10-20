@@ -92,6 +92,7 @@ import _poolCoatiScavenger from "../pool/coati-scavenger.js";
 import _poolCommandersInsignia from "../pool/commanders-insignia.js";
 import _poolCommuneWithSpirits from "../pool/commune-with-spirits.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
+import _poolConstrictingSliver from "../pool/constricting-sliver.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
 import _poolCoreProwler from "../pool/core-prowler.js";
@@ -594,6 +595,7 @@ const shard: CardShard = {
     _poolCommandersInsignia,
     _poolCommuneWithSpirits,
     _poolConcealedWeapon,
+    _poolConstrictingSliver,
     _poolConsumedByGreed,
     _poolCopyEnchantment,
     _poolCoreProwler,

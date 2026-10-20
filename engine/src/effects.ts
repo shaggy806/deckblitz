@@ -1792,6 +1792,11 @@ export type EffectSpec =
        * empty slot spares nothing; a lone target gone illegal has the spell
        * not resolve at all (608.2b). */
       readonly exceptTarget?: number;
+      /** "Exile each nonland permanent with mana value 2 or less **until
+       * this enchantment leaves the battlefield**" (Temporary Lockdown): as
+       * `exile`'s `untilSourceLeaves` (rule 610.3), for every card this
+       * exiles — nothing at all if the source has already left (610.3a). */
+      readonly untilSourceLeaves?: boolean;
     }
   | {
       /** "This Case becomes solved" (rule 719.3a) — a Case's "To solve —"
@@ -5593,8 +5598,9 @@ export interface EffectApi {
   /** Return every battlefield permanent matching `filter` to its owner's hand. */
   returnToHandAll(filter: CardFilter): void;
   /** Exile every battlefield permanent matching `filter` but `except` — see
-   * `exile-all`; `airbend` airbends them (rule 701.65a). */
-  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId): void;
+   * `exile-all`; `airbend` airbends them (rule 701.65a), `untilSourceLeaves`
+   * exiles them until the source leaves the battlefield (610.3). */
+  exileAll(filter: CardFilter, airbend?: boolean, except?: ObjectId, untilSourceLeaves?: boolean): void;
   /** Deal `amount` damage to every battlefield permanent matching `filter`. */
   damageAll(
     filter: CardFilter,
@@ -8403,7 +8409,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "exile-all": {
       const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
-      ctx.exileAll(spec.filter, spec.airbend === true, spared?.kind === "object" ? spared.object : undefined);
+      ctx.exileAll(
+        spec.filter,
+        spec.airbend === true,
+        spared?.kind === "object" ? spared.object : undefined,
+        spec.untilSourceLeaves === true,
+      );
       return;
     }
     case "damage-all": {

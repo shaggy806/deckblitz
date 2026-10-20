@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
-// Rule 720.2: one printed ability that exiles *and* sets up a linked delayed
-// trigger, modelled as the two halves the rule describes.
+// Rule 610.3: the exile is a one-shot effect, and so is the return the engine
+// makes right after Banishing Light leaves (`untilSourceLeaves`).
 export default defineCard({
   name: "Banishing Light",
   manaCost: "{2}{W}",

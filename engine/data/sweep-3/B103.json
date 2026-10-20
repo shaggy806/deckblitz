@@ -733,6 +733,27 @@
     "engine/src/cards/tokens/ornithopter-token.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Zar Ojanen, Scion of Efrava",
+   "files": [
+    "engine/src/cards/pool/zar-ojanen-scion-of-efrava.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline Binding",
+   "files": [
+    "engine/src/cards/pool/leyline-binding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporary Lockdown",
+   "files": [
+    "engine/src/cards/pool/temporary-lockdown.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -973,13 +994,6 @@
    "why": "Flash as long as X is 3 or less."
   },
   {
-   "name": "Leyline Binding",
-   "needs": [
-    "bug:oring-one-shot-return"
-   ],
-   "why": "Its exile-until return is a one-shot effect (the ruling)."
-  },
-  {
    "name": "The Phasing of Zhalfir",
    "needs": [
     "effect:phase-out-while-you-control-source"
@@ -1069,20 +1083,6 @@
     "keyword:two-kicker-costs"
    ],
    "why": "Kicker {G} and/or {W}."
-  },
-  {
-   "name": "Temporary Lockdown",
-   "needs": [
-    "bug:oring-one-shot-return"
-   ],
-   "why": "Its exile-until return is a one-shot effect (the ruling)."
-  },
-  {
-   "name": "Zar Ojanen, Scion of Efrava",
-   "needs": [
-    "filter:dynamic-amount-in-mass-effect"
-   ],
-   "why": "A mass effect's filter can't read a dynamic amount (toughness less than domain): `battlefieldMatching` passes no amount context, so it matches nothing."
   },
   {
    "name": "Anointed Peacekeeper",

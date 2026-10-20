@@ -418,6 +418,7 @@ import _poolTanglespanLookout from "../pool/tanglespan-lookout.js";
 import _poolTasseledDromedary from "../pool/tasseled-dromedary.js";
 import _poolTeamTransmitter from "../pool/team-transmitter.js";
 import _poolTempleOfTheDragonQueen from "../pool/temple-of-the-dragon-queen.js";
+import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
@@ -920,6 +921,7 @@ const shard: CardShard = {
     _poolTasseledDromedary,
     _poolTeamTransmitter,
     _poolTempleOfTheDragonQueen,
+    _poolTemporaryLockdown,
     _poolTerraStomper,
     _poolTerrainGenerator,
     _poolTheChaseIsOn,

@@ -695,6 +695,13 @@
         "engine/src/cards/pool/kellan-the-kid.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Cast Out",
+      "files": [
+        "engine/src/cards/pool/cast-out.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -727,13 +734,6 @@
         "new:pay-x-energy-cost"
       ],
       "why": "AbilityCost.payEnergy is a fixed number, no 'Pay X {E}' feeding a target's mana value"
-    },
-    {
-      "name": "Cast Out",
-      "needs": [
-        "new:oring-one-shot-return"
-      ],
-      "why": "its ruling: the card returns immediately as Cast Out leaves, nothing in between; the engine's O-Ring return is a leaves-battlefield trigger on the stack"
     },
     {
       "name": "Trinisphere",

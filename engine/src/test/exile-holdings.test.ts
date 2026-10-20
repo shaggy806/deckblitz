@@ -5,7 +5,7 @@ import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 
 // `VisibleObject.holding`: the cards in exile linked to a permanent, so a
-// client can show what a Banishing Light is holding (rule 720.2) or what a
+// client can show what a Banishing Light is holding (rule 610.3) or what a
 // Theater of Horrors has exiled to be played — a face-down one by id only.
 
 const A = asPlayerId("alice");

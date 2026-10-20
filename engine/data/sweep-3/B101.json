@@ -868,6 +868,20 @@
     "engine/src/cards/pool/zephyr-sentinel.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "In the Trenches",
+   "files": [
+    "engine/src/cards/pool/in-the-trenches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Static Net",
+   "files": [
+    "engine/src/cards/pool/static-net.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -940,13 +954,6 @@
     "decision:discard-any-number"
    ],
    "why": "Mode one's \"they may discard up to X cards\" is the target player's choice of how many."
-  },
-  {
-   "name": "In the Trenches",
-   "needs": [
-    "bug:oring-one-shot-return"
-   ],
-   "why": "\"Exile … until this enchantment leaves the battlefield\" returns as a one-shot effect (its ruling), not a leaves-the-battlefield trigger."
   },
   {
    "name": "Razorlash Transmogrant",
@@ -1039,13 +1046,6 @@
     "stat:mana-color-spent-count"
    ],
    "why": "\"For each {G}{G} / {W}{W} spent to cast it\" needs how much mana of one color was spent."
-  },
-  {
-   "name": "Static Net",
-   "needs": [
-    "bug:oring-one-shot-return"
-   ],
-   "why": "Its exile-until return is a one-shot effect (the ruling), not a trigger."
   },
   {
    "name": "The Stone Brain",

@@ -213,6 +213,7 @@ import _poolIllicitMasquerade from "../pool/illicit-masquerade.js";
 import _poolImotekhTheStormlord from "../pool/imotekh-the-stormlord.js";
 import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
+import _poolInTheTrenches from "../pool/in-the-trenches.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
@@ -487,6 +488,7 @@ import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
 import _poolYoungWolf from "../pool/young-wolf.js";
 import _poolYuyanArchers from "../pool/yuyan-archers.js";
+import _poolZarOjanenScionOfEfrava from "../pool/zar-ojanen-scion-of-efrava.js";
 import _poolZhalfirinShapecraft from "../pool/zhalfirin-shapecraft.js";
 import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
@@ -720,6 +722,7 @@ const shard: CardShard = {
     _poolImotekhTheStormlord,
     _poolImotiCelebrantOfBounty,
     _poolImperialCeratops,
+    _poolInTheTrenches,
     _poolInfirmaryHealer,
     _poolIngeniousArtillerist,
     _poolInspiredFire,
@@ -994,6 +997,7 @@ const shard: CardShard = {
     _poolYoshimaruScrappyStray,
     _poolYoungWolf,
     _poolYuyanArchers,
+    _poolZarOjanenScionOfEfrava,
     _poolZhalfirinShapecraft,
     _poolZoanthrope,
     _poolZookeeperMechan,

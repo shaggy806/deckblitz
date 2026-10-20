@@ -418,6 +418,7 @@ import _poolSplintersTechnique from "../pool/splinters-technique.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
+import _poolStaticNet from "../pool/static-net.js";
 import _poolSteelfinWhale from "../pool/steelfin-whale.js";
 import _poolStoicBuilder from "../pool/stoic-builder.js";
 import _poolStolenByTheFae from "../pool/stolen-by-the-fae.js";
@@ -955,6 +956,7 @@ const shard: CardShard = {
     _poolSquirrelanoids,
     _poolStargaze,
     _poolStarnheimAspirant,
+    _poolStaticNet,
     _poolSteelfinWhale,
     _poolStoicBuilder,
     _poolStolenByTheFae,

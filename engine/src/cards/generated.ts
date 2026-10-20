@@ -2022,6 +2022,7 @@ import _poolCaseyJonesJuryRigJusticiar from "./pool/casey-jones-jury-rig-justici
 import _poolCaseyJonesVigilante from "./pool/casey-jones-vigilante.js";
 import _poolCastAwayDoubt from "./pool/cast-away-doubt.js";
 import _poolCastIntoTheFire from "./pool/cast-into-the-fire.js";
+import _poolCastOut from "./pool/cast-out.js";
 import _poolCastleArdenvale from "./pool/castle-ardenvale.js";
 import _poolCastleDoom from "./pool/castle-doom.js";
 import _poolCastleEmbereth from "./pool/castle-embereth.js";
@@ -2082,6 +2083,7 @@ import _poolCavesOfKoilos from "./pool/caves-of-koilos.js";
 import _poolCeaselessConflict from "./pool/ceaseless-conflict.js";
 import _poolCecilyHauntedMage from "./pool/cecily-haunted-mage.js";
 import _poolCelebornTheWise from "./pool/celeborn-the-wise.js";
+import _poolCelebrateTheMountainKing from "./pool/celebrate-the-mountain-king.js";
 import _poolCelebrityFencer from "./pool/celebrity-fencer.js";
 import _poolCelestialAncient from "./pool/celestial-ancient.js";
 import _poolCelestialArmor from "./pool/celestial-armor.js";
@@ -2548,6 +2550,7 @@ import _poolConscriptedInfantry from "./pool/conscripted-infantry.js";
 import _poolConsecratedSphinx from "./pool/consecrated-sphinx.js";
 import _poolConservatory from "./pool/conservatory.js";
 import _poolConsider from "./pool/consider.js";
+import _poolConstrictingSliver from "./pool/constricting-sliver.js";
 import _poolConstrictingTendrils from "./pool/constricting-tendrils.js";
 import _poolConstrictorSage from "./pool/constrictor-sage.js";
 import _poolConsulateDreadnought from "./pool/consulate-dreadnought.js";
@@ -6490,6 +6493,7 @@ import _poolImpulsivity from "./pool/impulsivity.js";
 import _poolImskirIronEater from "./pool/imskir-iron-eater.js";
 import _poolInGarruksWake from "./pool/in-garruks-wake.js";
 import _poolInThePresenceOfAges from "./pool/in-the-presence-of-ages.js";
+import _poolInTheTrenches from "./pool/in-the-trenches.js";
 import _poolInThrallToThePit from "./pool/in-thrall-to-the-pit.js";
 import _poolInallaArchmageRitualist from "./pool/inalla-archmage-ritualist.js";
 import _poolIncandescentAria from "./pool/incandescent-aria.js";
@@ -7516,6 +7520,7 @@ import _poolLeveler from "./pool/leveler.js";
 import _poolLevitatingStatue from "./pool/levitating-statue.js";
 import _poolLevitation from "./pool/levitation.js";
 import _poolLeyDruid from "./pool/ley-druid.js";
+import _poolLeylineBinding from "./pool/leyline-binding.js";
 import _poolLeylineDowser from "./pool/leyline-dowser.js";
 import _poolLeylineProwler from "./pool/leyline-prowler.js";
 import _poolLeylineSurge from "./pool/leyline-surge.js";
@@ -12489,6 +12494,7 @@ import _poolStartle from "./pool/startle.js";
 import _poolStartledRelicSloth from "./pool/startled-relic-sloth.js";
 import _poolStarvedRusalka from "./pool/starved-rusalka.js";
 import _poolStarwinder from "./pool/starwinder.js";
+import _poolStaticNet from "./pool/static-net.js";
 import _poolStaticPrison from "./pool/static-prison.js";
 import _poolStaticSnare from "./pool/static-snare.js";
 import _poolStationMonitor from "./pool/station-monitor.js";
@@ -13193,6 +13199,7 @@ import _poolTemporalIntervention from "./pool/temporal-intervention.js";
 import _poolTemporalManipulation from "./pool/temporal-manipulation.js";
 import _poolTemporalSpring from "./pool/temporal-spring.js";
 import _poolTemporalTrespass from "./pool/temporal-trespass.js";
+import _poolTemporaryLockdown from "./pool/temporary-lockdown.js";
 import _poolTemptWithTreats from "./pool/tempt-with-treats.js";
 import _poolTemptWithVengeance from "./pool/tempt-with-vengeance.js";
 import _poolTemptingWitch from "./pool/tempting-witch.js";
@@ -15435,6 +15442,7 @@ import _poolZagothCrystal from "./pool/zagoth-crystal.js";
 import _poolZagothTriome from "./pool/zagoth-triome.js";
 import _poolZahurGlorysPast from "./pool/zahur-glorys-past.js";
 import _poolZap from "./pool/zap.js";
+import _poolZarOjanenScionOfEfrava from "./pool/zar-ojanen-scion-of-efrava.js";
 import _poolZardaThePowerPrincess from "./pool/zarda-the-power-princess.js";
 import _poolZarichiTiger from "./pool/zarichi-tiger.js";
 import _poolZarielArchdukeOfAvernus from "./pool/zariel-archduke-of-avernus.js";
@@ -17999,6 +18007,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaseyJonesVigilante,
   _poolCastAwayDoubt,
   _poolCastIntoTheFire,
+  _poolCastOut,
   _poolCastleArdenvale,
   _poolCastleDoom,
   _poolCastleEmbereth,
@@ -18059,6 +18068,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCeaselessConflict,
   _poolCecilyHauntedMage,
   _poolCelebornTheWise,
+  _poolCelebrateTheMountainKing,
   _poolCelebrityFencer,
   _poolCelestialAncient,
   _poolCelestialArmor,
@@ -18525,6 +18535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolConsecratedSphinx,
   _poolConservatory,
   _poolConsider,
+  _poolConstrictingSliver,
   _poolConstrictingTendrils,
   _poolConstrictorSage,
   _poolConsulateDreadnought,
@@ -22467,6 +22478,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolImskirIronEater,
   _poolInGarruksWake,
   _poolInThePresenceOfAges,
+  _poolInTheTrenches,
   _poolInThrallToThePit,
   _poolInallaArchmageRitualist,
   _poolIncandescentAria,
@@ -23493,6 +23505,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLevitatingStatue,
   _poolLevitation,
   _poolLeyDruid,
+  _poolLeylineBinding,
   _poolLeylineDowser,
   _poolLeylineProwler,
   _poolLeylineSurge,
@@ -28466,6 +28479,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStartledRelicSloth,
   _poolStarvedRusalka,
   _poolStarwinder,
+  _poolStaticNet,
   _poolStaticPrison,
   _poolStaticSnare,
   _poolStationMonitor,
@@ -29170,6 +29184,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTemporalManipulation,
   _poolTemporalSpring,
   _poolTemporalTrespass,
+  _poolTemporaryLockdown,
   _poolTemptWithTreats,
   _poolTemptWithVengeance,
   _poolTemptingWitch,
@@ -31412,6 +31427,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZagothTriome,
   _poolZahurGlorysPast,
   _poolZap,
+  _poolZarOjanenScionOfEfrava,
   _poolZardaThePowerPrincess,
   _poolZarichiTiger,
   _poolZarielArchdukeOfAvernus,

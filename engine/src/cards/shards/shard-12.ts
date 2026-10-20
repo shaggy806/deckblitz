@@ -65,6 +65,7 @@ import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
+import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChargingSlateback from "../pool/charging-slateback.js";
@@ -551,6 +552,7 @@ const shard: CardShard = {
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
     _poolCastleLocthwain,
+    _poolCelebrateTheMountainKing,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChargingSlateback,

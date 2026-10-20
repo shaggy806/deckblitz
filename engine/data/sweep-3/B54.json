@@ -292,6 +292,13 @@
         "engine/src/cards/pool/valeria-richards-precocious.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Celebrate the Mountain-king",
+      "files": [
+        "engine/src/cards/pool/celebrate-the-mountain-king.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -386,13 +393,6 @@
         "replacement:exile-instead-when-you-do"
       ],
       "why": "the would-be-put-into-graveyard exile replacement (Liesa's) has no \"When you do, create a 2/2 Wolf\" reflexive trigger per replaced death"
-    },
-    {
-      "name": "Celebrate the Mountain-king",
-      "needs": [
-        "bug:oring-one-shot-return"
-      ],
-      "why": "its ruling returns the exiled cards immediately with nothing in between (rule 610.3); the engine's O-Ring return is a leaves-battlefield trigger on the stack (Grasp of Fate stays out on the same). Per-opponent { seat } targets and recruit (draw, discard, this-way discarded nonland) are expressible"
     },
     {
       "name": "Last Light of Durin's Day",

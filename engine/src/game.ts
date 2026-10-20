@@ -20402,7 +20402,27 @@ export class Game {
         }
       },
       returnToHandAll: (filter) => this.returnToHandAllByEffect(controller, filter),
-      exileAll: (filter, airbend, except) => this.exileAllByEffect(controller, filter, airbend === true, except),
+      exileAll: (filter, airbend, except, untilSourceLeaves) => {
+        if (untilSourceLeaves !== true) {
+          this.exileAllByEffect(controller, filter, airbend === true, except);
+          return;
+        }
+        // Rule 610.3a, as `exileObject`'s: a source already gone, or back as
+        // a new object, exiles nothing.
+        const src = this.state.objects[source];
+        if (
+          src === undefined ||
+          (src.zone !== "battlefield" && src.zone !== "phased-out") ||
+          (refs.source !== undefined && (src.zoneChangeCount ?? 0) !== refs.source)
+        ) {
+          return;
+        }
+        this.exileAllByEffect(controller, filter, airbend === true, except, {
+          source,
+          zoneChangeCount: src.zoneChangeCount ?? 0,
+          by: controller,
+        });
+      },
       damageAll: (filter, amount, exceptSource, whose, from) => {
         const by = damageSource(from);
         if (by === undefined) return;
@@ -27563,16 +27583,28 @@ export class Game {
 
   /** `exile-all` — the mass form of `exileByEffect`, as one event (rule
    * 603.10a), a token stack exiled whole rather than one token of it. */
-  private exileAllByEffect(you: PlayerId, filter: CardFilter, airbend = false, except?: ObjectId): void {
+  private exileAllByEffect(
+    you: PlayerId,
+    filter: CardFilter,
+    airbend = false,
+    except?: ObjectId,
+    /** "Until [the source] leaves the battlefield" (rule 610.3): the source
+     * and the stint each card comes back with, and who exiled it. */
+    until?: { readonly source: ObjectId; readonly zoneChangeCount: number; readonly by: PlayerId },
+  ): void {
     this.withLeaveBatch(() => {
       const victims = this.battlefieldMatching(you, filter).filter((id) => id !== except);
       this.snapshotLeaving(victims);
       for (const id of victims) {
         const before = this.state.objects[id]?.zoneChangeCount;
-        this.exileByEffect({ kind: "object", object: id }, undefined, false);
+        this.exileByEffect({ kind: "object", object: id }, until?.source, false);
+        const exiled = this.state.objects[id];
+        if (until !== undefined && exiled?.zone === "exile" && exiled.zoneChangeCount !== before) {
+          exiled.exiledUntil = { source: until.source, zoneChangeCount: until.zoneChangeCount };
+          exiled.exiledByPlayer = until.by;
+        }
         // "Airbend all other creatures" (rule 701.65a): each card exiled
         // this way may be cast by its owner for {2}; a token is gone (111.7).
-        const exiled = this.state.objects[id];
         if (airbend && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
           exiled.airbended = true;
         }

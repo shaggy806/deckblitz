@@ -342,6 +342,13 @@
         "engine/src/cards/pool/werefox-bodyguard.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Constricting Sliver",
+      "files": [
+        "engine/src/cards/pool/constricting-sliver.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -443,13 +450,6 @@
         "effect:granted-trigger-refers-to-granter"
       ],
       "why": "grant-triggered-all can grant the ability, but the granted trigger must fire only on damage to the player who cast Hellish Rebuke; a granted ability can't remember who granted it."
-    },
-    {
-      "name": "Constricting Sliver",
-      "needs": [
-        "bug:oring-one-shot-return"
-      ],
-      "why": "The O-Ring return is a leaves-battlefield trigger; a granted one is lost if Constricting Sliver leaves first (stranding another Sliver's card, against the ruling), and the ruling returns the card immediately with nothing in between."
     },
     {
       "name": "Slime Against Humanity",
