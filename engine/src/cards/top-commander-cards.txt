@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3720 already implemented / 1280 missing (marks refreshed 2026-10-20)
+3721 already implemented / 1279 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4194,7 +4194,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4201  Grave Venerations                        {3}{B}           Enchantment
 [ ]  4202  Nahiri's Lithoforming                    {X}{R}{R}        Sorcery
 [x]  4203  Jenova, Ancient Calamity                 {2}{B}{G}        Legendary Creature — Alien
-[ ]  4204  Turnabout                                {2}{U}{U}        Instant
+[x]  4204  Turnabout                                {2}{U}{U}        Instant
 [x]  4205  Koth, Fire of Resistance                 {2}{R}{R}        Legendary Planeswalker — Koth
 [x]  4206  Dismantling Wave                         {2}{W}           Sorcery
 [x]  4207  Witch's Mark                             {1}{R}           Sorcery
