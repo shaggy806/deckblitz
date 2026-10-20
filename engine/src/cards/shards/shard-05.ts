@@ -27,6 +27,7 @@ import _poolArcboundTracker from "../pool/arcbound-tracker.js";
 import _poolArchangelOfThune from "../pool/archangel-of-thune.js";
 import _poolArchmageEmeritus from "../pool/archmage-emeritus.js";
 import _poolArchmagesNewt from "../pool/archmages-newt.js";
+import _poolArniSlaysTheTroll from "../pool/arni-slays-the-troll.js";
 import _poolAscendantDustspeaker from "../pool/ascendant-dustspeaker.js";
 import _poolAshmouthDragon from "../pool/ashmouth-dragon.js";
 import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
@@ -66,6 +67,7 @@ import _poolBraidsCabalMinion from "../pool/braids-cabal-minion.js";
 import _poolBrassSquire from "../pool/brass-squire.js";
 import _poolBreakUnderPressure from "../pool/break-under-pressure.js";
 import _poolBreakerOfArmies from "../pool/breaker-of-armies.js";
+import _poolBretagardStronghold from "../pool/bretagard-stronghold.js";
 import _poolBrightReprisal from "../pool/bright-reprisal.js";
 import _poolBrineShaman from "../pool/brine-shaman.js";
 import _poolBuriedTreasure from "../pool/buried-treasure.js";
@@ -276,6 +278,7 @@ import _poolLupariShield from "../pool/lupari-shield.js";
 import _poolLyseHext from "../pool/lyse-hext.js";
 import _poolMadameNullPowerBroker from "../pool/madame-null-power-broker.js";
 import _poolMalachiteGolem from "../pool/malachite-golem.js";
+import _poolMammothGrowth from "../pool/mammoth-growth.js";
 import _poolManalith from "../pool/manalith.js";
 import _poolMaraudingSphinx from "../pool/marauding-sphinx.js";
 import _poolMarbleChalice from "../pool/marble-chalice.js";
@@ -342,6 +345,7 @@ import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
 import _poolReinterpret from "../pool/reinterpret.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
+import _poolRenegadeReaper from "../pool/renegade-reaper.js";
 import _poolRepelCalamity from "../pool/repel-calamity.js";
 import _poolReshape from "../pool/reshape.js";
 import _poolResonatingLute from "../pool/resonating-lute.js";
@@ -551,6 +555,7 @@ const shard: CardShard = {
     _poolArchangelOfThune,
     _poolArchmageEmeritus,
     _poolArchmagesNewt,
+    _poolArniSlaysTheTroll,
     _poolAscendantDustspeaker,
     _poolAshmouthDragon,
     _poolAssaultOnOsgiliath,
@@ -590,6 +595,7 @@ const shard: CardShard = {
     _poolBrassSquire,
     _poolBreakUnderPressure,
     _poolBreakerOfArmies,
+    _poolBretagardStronghold,
     _poolBrightReprisal,
     _poolBrineShaman,
     _poolBuriedTreasure,
@@ -800,6 +806,7 @@ const shard: CardShard = {
     _poolLyseHext,
     _poolMadameNullPowerBroker,
     _poolMalachiteGolem,
+    _poolMammothGrowth,
     _poolManalith,
     _poolMaraudingSphinx,
     _poolMarbleChalice,
@@ -866,6 +873,7 @@ const shard: CardShard = {
     _poolRefurbishedFamiliar,
     _poolReinterpret,
     _poolRememberTheFallen,
+    _poolRenegadeReaper,
     _poolRepelCalamity,
     _poolReshape,
     _poolResonatingLute,

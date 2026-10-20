@@ -45,6 +45,7 @@ import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
 import _poolBatteringKrasis from "../pool/battering-krasis.js";
+import _poolBattleMammoth from "../pool/battle-mammoth.js";
 import _poolBeastieBeatdown from "../pool/beastie-beatdown.js";
 import _poolBedlam from "../pool/bedlam.js";
 import _poolBefuddle from "../pool/befuddle.js";
@@ -114,6 +115,8 @@ import _poolDrizztDourden from "../pool/drizzt-dourden.js";
 import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDrownerOfSecrets from "../pool/drowner-of-secrets.js";
 import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
+import _poolDwarvenHammer from "../pool/dwarven-hammer.js";
+import _poolDwarvenReinforcements from "../pool/dwarven-reinforcements.js";
 import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
 import _poolEarthElemental from "../pool/earth-elemental.js";
 import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
@@ -138,6 +141,7 @@ import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFearOfDeath from "../pool/fear-of-death.js";
+import _poolFearlessLiberator from "../pool/fearless-liberator.js";
 import _poolFeloniousRage from "../pool/felonious-rage.js";
 import _poolFertilid from "../pool/fertilid.js";
 import _poolFetidPools from "../pool/fetid-pools.js";
@@ -224,6 +228,7 @@ import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
+import _poolKardursViciousReturn from "../pool/kardurs-vicious-return.js";
 import _poolKataraWaterTribesHope from "../pool/katara-water-tribes-hope.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
@@ -308,6 +313,7 @@ import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
+import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPullThroughTheWeft from "../pool/pull-through-the-weft.js";
 import _poolPulseOfMurasa from "../pool/pulse-of-murasa.js";
@@ -395,6 +401,7 @@ import _poolSpaceMarineDevastator from "../pool/space-marine-devastator.js";
 import _poolSpawnGangCommander from "../pool/spawn-gang-commander.js";
 import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
+import _poolSpectralSteel from "../pool/spectral-steel.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
 import _poolSpiderManIndia from "../pool/spider-man-india.js";
 import _poolSpineseekerCentipede from "../pool/spineseeker-centipede.js";
@@ -554,6 +561,7 @@ const shard: CardShard = {
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
     _poolBatteringKrasis,
+    _poolBattleMammoth,
     _poolBeastieBeatdown,
     _poolBedlam,
     _poolBefuddle,
@@ -623,6 +631,8 @@ const shard: CardShard = {
     _poolDrogskolArmaments,
     _poolDrownerOfSecrets,
     _poolDuskshellCrawler,
+    _poolDwarvenHammer,
+    _poolDwarvenReinforcements,
     _poolEagleOfDeliverance,
     _poolEarthElemental,
     _poolEarthshakerDreadmaw,
@@ -647,6 +657,7 @@ const shard: CardShard = {
     _poolFadingHope,
     _poolFblthpImpossiblyLost,
     _poolFearOfDeath,
+    _poolFearlessLiberator,
     _poolFeloniousRage,
     _poolFertilid,
     _poolFetidPools,
@@ -733,6 +744,7 @@ const shard: CardShard = {
     _poolJeditOjanen,
     _poolJosuVessLichKnight,
     _poolKangeeSkyWarden,
+    _poolKardursViciousReturn,
     _poolKataraWaterTribesHope,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
@@ -817,6 +829,7 @@ const shard: CardShard = {
     _poolPostmortemProfessor,
     _poolPrayerOfBinding,
     _poolPredatorsHour,
+    _poolPriestOfTheHauntedEdge,
     _poolProdigalSorcerer,
     _poolPullThroughTheWeft,
     _poolPulseOfMurasa,
@@ -904,6 +917,7 @@ const shard: CardShard = {
     _poolSpawnGangCommander,
     _poolSpearSpewer,
     _poolSpectralReserves,
+    _poolSpectralSteel,
     _poolSpiderByteWebWarden,
     _poolSpiderManIndia,
     _poolSpineseekerCentipede,

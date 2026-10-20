@@ -71,6 +71,7 @@ import _poolBrushstrider from "../pool/brushstrider.js";
 import _poolBullCerodon from "../pool/bull-cerodon.js";
 import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
+import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCanoptekScarabSwarm from "../pool/canoptek-scarab-swarm.js";
 import _poolCantankerousKeepers from "../pool/cantankerous-keepers.js";
 import _poolCarrierPigeons from "../pool/carrier-pigeons.js";
@@ -420,6 +421,7 @@ import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
 import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStrixhavenStadium from "../pool/strixhaven-stadium.js";
+import _poolStruggleForSkemfar from "../pool/struggle-for-skemfar.js";
 import _poolSunWarriors from "../pool/sun-warriors.js";
 import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
@@ -587,6 +589,7 @@ const shard: CardShard = {
     _poolBullCerodon,
     _poolBurningSunsFury,
     _poolCacklingCulprit,
+    _poolCalamityBearer,
     _poolCanoptekScarabSwarm,
     _poolCantankerousKeepers,
     _poolCarrierPigeons,
@@ -936,6 +939,7 @@ const shard: CardShard = {
     _poolStonybrookBanneret,
     _poolStormclawRager,
     _poolStrixhavenStadium,
+    _poolStruggleForSkemfar,
     _poolSunWarriors,
     _poolSunbeamSpellbomb,
     _poolSunscapeApprentice,

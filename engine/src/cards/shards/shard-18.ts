@@ -89,6 +89,7 @@ import _poolCrystallineGiant from "../pool/crystalline-giant.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
+import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
@@ -257,6 +258,7 @@ import _poolManaVault from "../pool/mana-vault.js";
 import _poolManholeCover from "../pool/manhole-cover.js";
 import _poolManticoreEternal from "../pool/manticore-eternal.js";
 import _poolMassHysteria from "../pool/mass-hysteria.js";
+import _poolMasterSkald from "../pool/master-skald.js";
 import _poolMechanozoa from "../pool/mechanozoa.js";
 import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
@@ -370,6 +372,7 @@ import _poolSivitriScarzam from "../pool/sivitri-scarzam.js";
 import _poolSkeletalCrocodile from "../pool/skeletal-crocodile.js";
 import _poolSkitteringHeartstopper from "../pool/skittering-heartstopper.js";
 import _poolSkullCatapult from "../pool/skull-catapult.js";
+import _poolSkullRaid from "../pool/skull-raid.js";
 import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
 import _poolSkystrikeOfficer from "../pool/skystrike-officer.js";
 import _poolSlimyAquarium from "../pool/slimy-aquarium.js";
@@ -621,6 +624,7 @@ const shard: CardShard = {
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
+    _poolDeathknellBerserker,
     _poolDecadentDragon,
     _poolDeepGoblinSkulltaker,
     _poolDeeprootChampion,
@@ -789,6 +793,7 @@ const shard: CardShard = {
     _poolManholeCover,
     _poolManticoreEternal,
     _poolMassHysteria,
+    _poolMasterSkald,
     _poolMechanozoa,
     _poolMelancholicPoet,
     _poolMemorialToFolly,
@@ -902,6 +907,7 @@ const shard: CardShard = {
     _poolSkeletalCrocodile,
     _poolSkitteringHeartstopper,
     _poolSkullCatapult,
+    _poolSkullRaid,
     _poolSkyclaveApparition,
     _poolSkystrikeOfficer,
     _poolSlimyAquarium,

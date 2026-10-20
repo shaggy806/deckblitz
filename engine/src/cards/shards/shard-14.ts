@@ -355,6 +355,7 @@ import _poolRegress from "../pool/regress.js";
 import _poolRemoteIsle from "../pool/remote-isle.js";
 import _poolRescueGirlFirstResponder from "../pool/rescue-girl-first-responder.js";
 import _poolRestlessPrairie from "../pool/restless-prairie.js";
+import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
 import _poolRiteOfOblivion from "../pool/rite-of-oblivion.js";
@@ -396,6 +397,7 @@ import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.j
 import _poolSkylineCascade from "../pool/skyline-cascade.js";
 import _poolSlaughterSinger from "../pool/slaughter-singer.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
+import _poolSmashingSuccess from "../pool/smashing-success.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
 import _poolSphinxOfTheSteelWind from "../pool/sphinx-of-the-steel-wind.js";
@@ -854,6 +856,7 @@ const shard: CardShard = {
     _poolRemoteIsle,
     _poolRescueGirlFirstResponder,
     _poolRestlessPrairie,
+    _poolReturnUponTheTide,
     _poolRewind,
     _poolRinAndSeriInseparable,
     _poolRiteOfOblivion,
@@ -895,6 +898,7 @@ const shard: CardShard = {
     _poolSkylineCascade,
     _poolSlaughterSinger,
     _poolSlinnVodaTheRisingDeep,
+    _poolSmashingSuccess,
     _poolSnarlingWarg,
     _poolSparringConstruct,
     _poolSphinxOfTheSteelWind,

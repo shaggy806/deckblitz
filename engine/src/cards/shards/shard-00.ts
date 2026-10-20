@@ -238,6 +238,7 @@ import _poolJubilation from "../pool/jubilation.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
 import _poolJuniperOrderDruid from "../pool/juniper-order-druid.js";
 import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
+import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
 import _poolKeeperOfTheCadence from "../pool/keeper-of-the-cadence.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
 import _poolKessigWolfRun from "../pool/kessig-wolf-run.js";
@@ -370,6 +371,7 @@ import _poolSamsDesperateRescue from "../pool/sams-desperate-rescue.js";
 import _poolSamutVoiceOfDissent from "../pool/samut-voice-of-dissent.js";
 import _poolSanctumGargoyle from "../pool/sanctum-gargoyle.js";
 import _poolSarkhanSoulAflame from "../pool/sarkhan-soul-aflame.js";
+import _poolSarulfsPackmate from "../pool/sarulfs-packmate.js";
 import _poolSatyrHedonist from "../pool/satyr-hedonist.js";
 import _poolScaldingDevil from "../pool/scalding-devil.js";
 import _poolScoutingHawk from "../pool/scouting-hawk.js";
@@ -466,6 +468,7 @@ import _poolTorchDrake from "../pool/torch-drake.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTrenoDarkCity from "../pool/treno-dark-city.js";
 import _poolTunnelOfHate from "../pool/tunnel-of-hate.js";
+import _poolTuskeriFirewalker from "../pool/tuskeri-firewalker.js";
 import _poolTwistedEmbrace from "../pool/twisted-embrace.js";
 import _poolTwistedLandscape from "../pool/twisted-landscape.js";
 import _poolTwofoldIntent from "../pool/twofold-intent.js";
@@ -766,6 +769,7 @@ const shard: CardShard = {
     _poolJukaiMessenger,
     _poolJuniperOrderDruid,
     _poolKabiraCrossroads,
+    _poolKayasOnslaught,
     _poolKeeperOfTheCadence,
     _poolKellanInquisitiveProdigy,
     _poolKessigWolfRun,
@@ -898,6 +902,7 @@ const shard: CardShard = {
     _poolSamutVoiceOfDissent,
     _poolSanctumGargoyle,
     _poolSarkhanSoulAflame,
+    _poolSarulfsPackmate,
     _poolSatyrHedonist,
     _poolScaldingDevil,
     _poolScoutingHawk,
@@ -994,6 +999,7 @@ const shard: CardShard = {
     _poolTranspose,
     _poolTrenoDarkCity,
     _poolTunnelOfHate,
+    _poolTuskeriFirewalker,
     _poolTwistedEmbrace,
     _poolTwistedLandscape,
     _poolTwofoldIntent,

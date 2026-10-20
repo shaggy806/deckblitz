@@ -308,6 +308,7 @@ import _poolPillarfieldOx from "../pool/pillarfield-ox.js";
 import _poolPiruTheVolatile from "../pool/piru-the-volatile.js";
 import _poolPlatedWurm from "../pool/plated-wurm.js";
 import _poolPlumeveil from "../pool/plumeveil.js";
+import _poolPoisonTheCup from "../pool/poison-the-cup.js";
 import _poolPollutedDelta from "../pool/polluted-delta.js";
 import _poolPompousBattlemage from "../pool/pompous-battlemage.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
@@ -340,6 +341,7 @@ import _poolRiotDevils from "../pool/riot-devils.js";
 import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
 import _poolRooftopBypass from "../pool/rooftop-bypass.js";
+import _poolRootsOfWisdom from "../pool/roots-of-wisdom.js";
 import _poolRosethornAcolyte from "../pool/rosethorn-acolyte.js";
 import _poolRubblebackRhino from "../pool/rubbleback-rhino.js";
 import _poolRubblebeltMaverick from "../pool/rubblebelt-maverick.js";
@@ -356,6 +358,7 @@ import _poolScaleTheHeights from "../pool/scale-the-heights.js";
 import _poolScarecrone from "../pool/scarecrone.js";
 import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
+import _poolScornEffigy from "../pool/scorn-effigy.js";
 import _poolScreechingHarpy from "../pool/screeching-harpy.js";
 import _poolSealOfStrength from "../pool/seal-of-strength.js";
 import _poolSearchThePremises from "../pool/search-the-premises.js";
@@ -427,6 +430,7 @@ import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
 import _poolTattermungeManiac from "../pool/tattermunge-maniac.js";
 import _poolTelJiladExile from "../pool/tel-jilad-exile.js";
 import _poolTergridsLantern from "../pool/tergrids-lantern.js";
+import _poolTergridsShadow from "../pool/tergrids-shadow.js";
 import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
@@ -444,6 +448,7 @@ import _poolThornOfTheBlackRose from "../pool/thorn-of-the-black-rose.js";
 import _poolThornling from "../pool/thornling.js";
 import _poolThrabenCharm from "../pool/thraben-charm.js";
 import _poolThrillOfPossibility from "../pool/thrill-of-possibility.js";
+import _poolThroneOfDeath from "../pool/throne-of-death.js";
 import _poolThunderMagic from "../pool/thunder-magic.js";
 import _poolThunderclapDrake from "../pool/thunderclap-drake.js";
 import _poolThunderingGiant from "../pool/thundering-giant.js";
@@ -827,6 +832,7 @@ const shard: CardShard = {
     _poolPiruTheVolatile,
     _poolPlatedWurm,
     _poolPlumeveil,
+    _poolPoisonTheCup,
     _poolPollutedDelta,
     _poolPompousBattlemage,
     _poolPrecisionBolt,
@@ -859,6 +865,7 @@ const shard: CardShard = {
     _poolRiseOfExtus,
     _poolRishkarsExpertise,
     _poolRooftopBypass,
+    _poolRootsOfWisdom,
     _poolRosethornAcolyte,
     _poolRubblebackRhino,
     _poolRubblebeltMaverick,
@@ -875,6 +882,7 @@ const shard: CardShard = {
     _poolScarecrone,
     _poolScavengingScarab,
     _poolSchemingSilvertongue,
+    _poolScornEffigy,
     _poolScreechingHarpy,
     _poolSealOfStrength,
     _poolSearchThePremises,
@@ -946,6 +954,7 @@ const shard: CardShard = {
     _poolTattermungeManiac,
     _poolTelJiladExile,
     _poolTergridsLantern,
+    _poolTergridsShadow,
     _poolTerrorOfMountVelus,
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
@@ -963,6 +972,7 @@ const shard: CardShard = {
     _poolThornling,
     _poolThrabenCharm,
     _poolThrillOfPossibility,
+    _poolThroneOfDeath,
     _poolThunderMagic,
     _poolThunderclapDrake,
     _poolThunderingGiant,

@@ -57,6 +57,7 @@ import _poolBoostedSloop from "../pool/boosted-sloop.js";
 import _poolBoromirGondorsHope from "../pool/boromir-gondors-hope.js";
 import _poolBoughsideWanderers from "../pool/boughside-wanderers.js";
 import _poolBoundlessRealms from "../pool/boundless-realms.js";
+import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
 import _poolBrotherhoodVertibird from "../pool/brotherhood-vertibird.js";
@@ -95,6 +96,7 @@ import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
+import _poolCycloneSummoner from "../pool/cyclone-summoner.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
 import _poolDaggermawMegalodon from "../pool/daggermaw-megalodon.js";
@@ -129,6 +131,7 @@ import _poolDoranTheSiegeTower from "../pool/doran-the-siege-tower.js";
 import _poolDragonbornLooter from "../pool/dragonborn-looter.js";
 import _poolDragonsHoard from "../pool/dragons-hoard.js";
 import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
+import _poolDraugrsHelm from "../pool/draugrs-helm.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
@@ -231,6 +234,7 @@ import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKaraiFutureOfTheFoot from "../pool/karai-future-of-the-foot.js";
+import _poolKarfellKennelMaster from "../pool/karfell-kennel-master.js";
 import _poolKateStewart from "../pool/kate-stewart.js";
 import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
@@ -240,6 +244,7 @@ import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
 import _poolKnighthood from "../pool/knighthood.js";
+import _poolKomasFaithful from "../pool/komas-faithful.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
@@ -549,6 +554,7 @@ const shard: CardShard = {
     _poolBoromirGondorsHope,
     _poolBoughsideWanderers,
     _poolBoundlessRealms,
+    _poolBountyOfSkemfar,
     _poolBrambleCreeper,
     _poolBranchingEvolution,
     _poolBrotherhoodVertibird,
@@ -587,6 +593,7 @@ const shard: CardShard = {
     _poolCudgelTroll,
     _poolCulminationOfStudies,
     _poolCycleOfRenewal,
+    _poolCycloneSummoner,
     _poolCyclonicRift,
     _poolCyclopsOfOneEyedPass,
     _poolDaggermawMegalodon,
@@ -621,6 +628,7 @@ const shard: CardShard = {
     _poolDragonbornLooter,
     _poolDragonsHoard,
     _poolDragonstormGlobe,
+    _poolDraugrsHelm,
     _poolDreadReaper,
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
@@ -723,6 +731,7 @@ const shard: CardShard = {
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
     _poolKaraiFutureOfTheFoot,
+    _poolKarfellKennelMaster,
     _poolKateStewart,
     _poolKavaronHarrier,
     _poolKeepersOfTheFaith,
@@ -732,6 +741,7 @@ const shard: CardShard = {
     _poolKingOfThePride,
     _poolKnightOfStromgald,
     _poolKnighthood,
+    _poolKomasFaithful,
     _poolKozileksTranslator,
     _poolKrenkosCommand,
     _poolLambholtRavager,

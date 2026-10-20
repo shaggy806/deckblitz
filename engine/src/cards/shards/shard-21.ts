@@ -28,6 +28,7 @@ import _poolAtomicMicrosizer from "../pool/atomic-microsizer.js";
 import _poolAtraxasFall from "../pool/atraxas-fall.js";
 import _poolAttentiveSkywarden from "../pool/attentive-skywarden.js";
 import _poolAudienceWithTrostani from "../pool/audience-with-trostani.js";
+import _poolAvalancheCaller from "../pool/avalanche-caller.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
@@ -48,6 +49,7 @@ import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
+import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
 import _poolBoltBend from "../pool/bolt-bend.js";
 import _poolBondOfDiscipline from "../pool/bond-of-discipline.js";
 import _poolBonebindOrator from "../pool/bonebind-orator.js";
@@ -78,6 +80,7 @@ import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
 import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
+import _poolCleavingReaper from "../pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolCoercion from "../pool/coercion.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
@@ -121,6 +124,7 @@ import _poolDwarvenCastleGuard from "../pool/dwarven-castle-guard.js";
 import _poolEarthsMightiestHeroes from "../pool/earths-mightiest-heroes.js";
 import _poolEclipsedFlamekin from "../pool/eclipsed-flamekin.js";
 import _poolEfflorescence from "../pool/efflorescence.js";
+import _poolEgonGodOfDeath from "../pool/egon-god-of-death.js";
 import _poolElanorGardner from "../pool/elanor-gardner.js";
 import _poolElvenFarsight from "../pool/elven-farsight.js";
 import _poolElvishDoomsayer from "../pool/elvish-doomsayer.js";
@@ -154,6 +158,7 @@ import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolForumFamiliar from "../pool/forum-familiar.js";
 import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
+import _poolFrostBite from "../pool/frost-bite.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
 import _poolFulminousForte from "../pool/fulminous-forte.js";
 import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
@@ -177,6 +182,7 @@ import _poolGoblinKing from "../pool/goblin-king.js";
 import _poolGoblinLackey from "../pool/goblin-lackey.js";
 import _poolGoblinSurprise from "../pool/goblin-surprise.js";
 import _poolGoblinWarchief from "../pool/goblin-warchief.js";
+import _poolGodsHallGuardian from "../pool/gods-hall-guardian.js";
 import _poolGoldmeadowDodger from "../pool/goldmeadow-dodger.js";
 import _poolGormaTheGullet from "../pool/gorma-the-gullet.js";
 import _poolGoroGoroDiscipleOfRyusei from "../pool/goro-goro-disciple-of-ryusei.js";
@@ -208,6 +214,7 @@ import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
+import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
@@ -472,6 +479,7 @@ import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
+import _poolWithercrown from "../pool/withercrown.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
@@ -524,6 +532,7 @@ const shard: CardShard = {
     _poolAtraxasFall,
     _poolAttentiveSkywarden,
     _poolAudienceWithTrostani,
+    _poolAvalancheCaller,
     _poolAvelineDeGrandpre,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
@@ -544,6 +553,7 @@ const shard: CardShard = {
     _poolBloatedContaminator,
     _poolBloodFountain,
     _poolBloodlineCulling,
+    _poolBloodskyBerserker,
     _poolBoltBend,
     _poolBondOfDiscipline,
     _poolBonebindOrator,
@@ -574,6 +584,7 @@ const shard: CardShard = {
     _poolCitizenVHelmutZemo,
     _poolCityscapeLeveler,
     _poolClavilenoFirstOfTheBlessed,
+    _poolCleavingReaper,
     _poolCleavingSkyrider,
     _poolCoercion,
     _poolColossusSteelStalwart,
@@ -617,6 +628,7 @@ const shard: CardShard = {
     _poolEarthsMightiestHeroes,
     _poolEclipsedFlamekin,
     _poolEfflorescence,
+    _poolEgonGodOfDeath,
     _poolElanorGardner,
     _poolElvenFarsight,
     _poolElvishDoomsayer,
@@ -650,6 +662,7 @@ const shard: CardShard = {
     _poolForumFamiliar,
     _poolFragmentize,
     _poolFrontierBivouac,
+    _poolFrostBite,
     _poolFrostwindInvoker,
     _poolFulminousForte,
     _poolFurnaceHostCharger,
@@ -673,6 +686,7 @@ const shard: CardShard = {
     _poolGoblinLackey,
     _poolGoblinSurprise,
     _poolGoblinWarchief,
+    _poolGodsHallGuardian,
     _poolGoldmeadowDodger,
     _poolGormaTheGullet,
     _poolGoroGoroDiscipleOfRyusei,
@@ -704,6 +718,7 @@ const shard: CardShard = {
     _poolHydraTroopers,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
+    _poolInSearchOfGreatness,
     _poolIngeniousLeonin,
     _poolInvasionOfKylem,
     _poolIridescentBlademaster,
@@ -968,6 +983,7 @@ const shard: CardShard = {
     _poolWhiskerquillScribe,
     _poolWhiteDragon,
     _poolWillOfTheSultai,
+    _poolWithercrown,
     _poolWoodworkProdigy,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,

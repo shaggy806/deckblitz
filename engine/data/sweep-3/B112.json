@@ -1,0 +1,1301 @@
+{
+ "batch": "B112",
+ "status": "complete",
+ "ranks": "Kaldheim and Kaldheim Commander (KHM, KHC, 2021-02-05): the rest of each set; with snow mana, and the older card it unblocked (Search for Glory)",
+ "authored": [
+  {
+   "name": "Absorb Identity",
+   "files": [
+    "engine/src/cards/pool/absorb-identity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arachnoform",
+   "files": [
+    "engine/src/cards/pool/arachnoform.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arni Slays the Troll",
+   "files": [
+    "engine/src/cards/pool/arni-slays-the-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ascendant Spirit",
+   "files": [
+    "engine/src/cards/pool/ascendant-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Augury Raven",
+   "files": [
+    "engine/src/cards/pool/augury-raven.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Avalanche Caller",
+   "files": [
+    "engine/src/cards/pool/avalanche-caller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Axgard Braggart",
+   "files": [
+    "engine/src/cards/pool/axgard-braggart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle Mammoth",
+   "files": [
+    "engine/src/cards/pool/battle-mammoth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bearded Axe",
+   "files": [
+    "engine/src/cards/pool/bearded-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Berg Strider",
+   "files": [
+    "engine/src/cards/pool/berg-strider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blizzard Brawl",
+   "files": [
+    "engine/src/cards/pool/blizzard-brawl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood on the Snow",
+   "files": [
+    "engine/src/cards/pool/blood-on-the-snow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodsky Berserker",
+   "files": [
+    "engine/src/cards/pool/bloodsky-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bounty of Skemfar",
+   "files": [
+    "engine/src/cards/pool/bounty-of-skemfar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bretagard Stronghold",
+   "files": [
+    "engine/src/cards/pool/bretagard-stronghold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calamity Bearer",
+   "files": [
+    "engine/src/cards/pool/calamity-bearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleaving Reaper",
+   "files": [
+    "engine/src/cards/pool/cleaving-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossal Plow",
+   "files": [
+    "engine/src/cards/pool/colossal-plow.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crown of Skemfar",
+   "files": [
+    "engine/src/cards/pool/crown-of-skemfar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cyclone Summoner",
+   "files": [
+    "engine/src/cards/pool/cyclone-summoner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathknell Berserker",
+   "files": [
+    "engine/src/cards/pool/deathknell-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demon Bolt",
+   "files": [
+    "engine/src/cards/pool/demon-bolt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Demonic Gifts",
+   "files": [
+    "engine/src/cards/pool/demonic-gifts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Depart the Realm",
+   "files": [
+    "engine/src/cards/pool/depart-the-realm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divine Gambit",
+   "files": [
+    "engine/src/cards/pool/divine-gambit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomskar Oracle",
+   "files": [
+    "engine/src/cards/pool/doomskar-oracle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomskar Titan",
+   "files": [
+    "engine/src/cards/pool/doomskar-titan.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Draugr's Helm",
+   "files": [
+    "engine/src/cards/pool/draugrs-helm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dread Rider",
+   "files": [
+    "engine/src/cards/pool/dread-rider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dual Strike",
+   "files": [
+    "engine/src/cards/pool/dual-strike.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dwarven Hammer",
+   "files": [
+    "engine/src/cards/pool/dwarven-hammer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Reinforcements",
+   "files": [
+    "engine/src/cards/pool/dwarven-reinforcements.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Egon, God of Death // Throne of Death",
+   "files": [
+    "engine/src/cards/pool/egon-god-of-death.ts",
+    "engine/src/cards/pool/throne-of-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elderfang Ritualist",
+   "files": [
+    "engine/src/cards/pool/elderfang-ritualist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elven Bow",
+   "files": [
+    "engine/src/cards/pool/elven-bow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faceless Haven",
+   "files": [
+    "engine/src/cards/pool/faceless-haven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fearless Liberator",
+   "files": [
+    "engine/src/cards/pool/fearless-liberator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Firja, Judge of Valor",
+   "files": [
+    "engine/src/cards/pool/firja-judge-of-valor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forging the Tyrite Sword",
+   "files": [
+    "engine/src/cards/pool/forging-the-tyrite-sword.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frost Augur",
+   "files": [
+    "engine/src/cards/pool/frost-augur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frost Bite",
+   "files": [
+    "engine/src/cards/pool/frost-bite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frostpeak Yeti",
+   "files": [
+    "engine/src/cards/pool/frostpeak-yeti.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gates of Istfell",
+   "files": [
+    "engine/src/cards/pool/gates-of-istfell.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Giant's Amulet",
+   "files": [
+    "engine/src/cards/pool/giants-amulet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant's Grasp",
+   "files": [
+    "engine/src/cards/pool/giants-grasp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gilded Assault Cart",
+   "files": [
+    "engine/src/cards/pool/gilded-assault-cart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gladewalker Ritualist",
+   "files": [
+    "engine/src/cards/pool/gladewalker-ritualist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnottvold Slumbermound",
+   "files": [
+    "engine/src/cards/pool/gnottvold-slumbermound.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gods' Hall Guardian",
+   "files": [
+    "engine/src/cards/pool/gods-hall-guardian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Graven Lore",
+   "files": [
+    "engine/src/cards/pool/graven-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grim Draugr",
+   "files": [
+    "engine/src/cards/pool/grim-draugr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hailstorm Valkyrie",
+   "files": [
+    "engine/src/cards/pool/hailstorm-valkyrie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harald, King of Skemfar",
+   "files": [
+    "engine/src/cards/pool/harald-king-of-skemfar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Icebind Pillar",
+   "files": [
+    "engine/src/cards/pool/icebind-pillar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Icehide Troll",
+   "files": [
+    "engine/src/cards/pool/icehide-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Immersturm Skullcairn",
+   "files": [
+    "engine/src/cards/pool/immersturm-skullcairn.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "In Search of Greatness",
+   "files": [
+    "engine/src/cards/pool/in-search-of-greatness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Pet",
+   "files": [
+    "engine/src/cards/pool/infernal-pet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inga Rune-Eyes",
+   "files": [
+    "engine/src/cards/pool/inga-rune-eyes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Verdict",
+   "files": [
+    "engine/src/cards/pool/iron-verdict.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jarl of the Forsaken",
+   "files": [
+    "engine/src/cards/pool/jarl-of-the-forsaken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kardur's Vicious Return",
+   "files": [
+    "engine/src/cards/pool/kardurs-vicious-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Karfell Kennel-Master",
+   "files": [
+    "engine/src/cards/pool/karfell-kennel-master.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kaya's Onslaught",
+   "files": [
+    "engine/src/cards/pool/kayas-onslaught.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "King Harald's Revenge",
+   "files": [
+    "engine/src/cards/pool/king-haralds-revenge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Koma's Faithful",
+   "files": [
+    "engine/src/cards/pool/komas-faithful.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Littjara Glade-Warden",
+   "files": [
+    "engine/src/cards/pool/littjara-glade-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mammoth Growth",
+   "files": [
+    "engine/src/cards/pool/mammoth-growth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Master Skald",
+   "files": [
+    "engine/src/cards/pool/master-skald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mists of Littjara",
+   "files": [
+    "engine/src/cards/pool/mists-of-littjara.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Narfi, Betrayer King",
+   "files": [
+    "engine/src/cards/pool/narfi-betrayer-king.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Path to the World Tree",
+   "files": [
+    "engine/src/cards/pool/path-to-the-world-tree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pilfering Hawk",
+   "files": [
+    "engine/src/cards/pool/pilfering-hawk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Poison the Cup",
+   "files": [
+    "engine/src/cards/pool/poison-the-cup.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Priest of the Haunted Edge",
+   "files": [
+    "engine/src/cards/pool/priest-of-the-haunted-edge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quakebringer",
+   "files": [
+    "engine/src/cards/pool/quakebringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raiders' Karve",
+   "files": [
+    "engine/src/cards/pool/raiders-karve.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rampage of the Valkyries",
+   "files": [
+    "engine/src/cards/pool/rampage-of-the-valkyries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Raven Wings",
+   "files": [
+    "engine/src/cards/pool/raven-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Renegade Reaper",
+   "files": [
+    "engine/src/cards/pool/renegade-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return Upon the Tide",
+   "files": [
+    "engine/src/cards/pool/return-upon-the-tide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootless Yew",
+   "files": [
+    "engine/src/cards/pool/rootless-yew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roots of Wisdom",
+   "files": [
+    "engine/src/cards/pool/roots-of-wisdom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Run Ashore",
+   "files": [
+    "engine/src/cards/pool/run-ashore.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Runeforge Champion",
+   "files": [
+    "engine/src/cards/pool/runeforge-champion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ruthless Winnower",
+   "files": [
+    "engine/src/cards/pool/ruthless-winnower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarulf, Realm Eater",
+   "files": [
+    "engine/src/cards/pool/sarulf-realm-eater.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarulf's Packmate",
+   "files": [
+    "engine/src/cards/pool/sarulfs-packmate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scorn Effigy",
+   "files": [
+    "engine/src/cards/pool/scorn-effigy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sculptor of Winter",
+   "files": [
+    "engine/src/cards/pool/sculptor-of-winter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Search for Glory",
+   "files": [
+    "engine/src/cards/pool/search-for-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shepherd of the Cosmos",
+   "files": [
+    "engine/src/cards/pool/shepherd-of-the-cosmos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigrid, God-Favored",
+   "files": [
+    "engine/src/cards/pool/sigrid-god-favored.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skemfar Avenger",
+   "files": [
+    "engine/src/cards/pool/skemfar-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skemfar Elderhall",
+   "files": [
+    "engine/src/cards/pool/skemfar-elderhall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skull Raid",
+   "files": [
+    "engine/src/cards/pool/skull-raid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Smashing Success",
+   "files": [
+    "engine/src/cards/pool/smashing-success.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Steel",
+   "files": [
+    "engine/src/cards/pool/spectral-steel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit of the Aldergard",
+   "files": [
+    "engine/src/cards/pool/spirit-of-the-aldergard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squash",
+   "files": [
+    "engine/src/cards/pool/squash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starnheim Unleashed",
+   "files": [
+    "engine/src/cards/pool/starnheim-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stoic Farmer",
+   "files": [
+    "engine/src/cards/pool/stoic-farmer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Struggle for Skemfar",
+   "files": [
+    "engine/src/cards/pool/struggle-for-skemfar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Surtland Flinger",
+   "files": [
+    "engine/src/cards/pool/surtland-flinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tergrid's Shadow",
+   "files": [
+    "engine/src/cards/pool/tergrids-shadow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tormentor's Helm",
+   "files": [
+    "engine/src/cards/pool/tormentors-helm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tundra Fumarole",
+   "files": [
+    "engine/src/cards/pool/tundra-fumarole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tuskeri Firewalker",
+   "files": [
+    "engine/src/cards/pool/tuskeri-firewalker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Valkyrie's Sword",
+   "files": [
+    "engine/src/cards/pool/valkyries-sword.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valor of the Worthy",
+   "files": [
+    "engine/src/cards/pool/valor-of-the-worthy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault Robber",
+   "files": [
+    "engine/src/cards/pool/vault-robber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Reaper",
+   "files": [
+    "engine/src/cards/pool/vengeful-reaper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Waking the Trolls",
+   "files": [
+    "engine/src/cards/pool/waking-the-trolls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warchanter Skald",
+   "files": [
+    "engine/src/cards/pool/warchanter-skald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warhorn Blast",
+   "files": [
+    "engine/src/cards/pool/warhorn-blast.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wings of the Cosmos",
+   "files": [
+    "engine/src/cards/pool/wings-of-the-cosmos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Withercrown",
+   "files": [
+    "engine/src/cards/pool/withercrown.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Aegar, the Freezing Flame",
+   "needs": [
+    "trigger:excess-damage-trigger"
+   ],
+   "why": "\"is dealt excess damage\" as an event"
+  },
+  {
+   "name": "Alrund, God of the Cosmos // Hakka, Whispering Raven",
+   "needs": [
+    "static:pt-per-cards-in-hand",
+    "filter:foretold"
+   ],
+   "why": "+1/+1 for each card in hand and each foretold card you own in exile"
+  },
+  {
+   "name": "Armed and Armored",
+   "needs": [
+    "effect:add-types-all"
+   ],
+   "why": "Vehicles you control become artifact creatures (add-types takes one target)"
+  },
+  {
+   "name": "Arni Brokenbrow",
+   "needs": [
+    "effect:base-power-amount"
+   ],
+   "why": "setting base power alone, to an amount"
+  },
+  {
+   "name": "Ascent of the Worthy",
+   "needs": [
+    "replacement:damage-redirection"
+   ],
+   "why": "chapters I and II redirect damage to a chosen creature"
+  },
+  {
+   "name": "Basalt Ravager",
+   "needs": [
+    "effect:amount-greatest-shared-creature-type"
+   ],
+   "why": "the greatest number of creatures you control that share a creature type"
+  },
+  {
+   "name": "Battle for Bretagard",
+   "needs": [
+    "decision:choose-any-number-different-names"
+   ],
+   "why": "choosing any number of tokens with different names"
+  },
+  {
+   "name": "Battle of Frost and Fire",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "chapter III's trigger lasting the rest of the turn"
+  },
+  {
+   "name": "Bind the Monster",
+   "needs": [
+    "static:doesnt-untap-attached"
+   ],
+   "why": "an Aura stopping the enchanted creature untapping"
+  },
+  {
+   "name": "Blessing of Frost",
+   "needs": [
+    "effect:distribute-counters-among-chosen"
+   ],
+   "why": "distributing counters among creatures you control, untargeted"
+  },
+  {
+   "name": "Boreal Outrider",
+   "needs": [
+    "condition:snow-mana-of-spell-colors"
+   ],
+   "why": "\"if {S} of any of that spell's colors was spent\": a spell records where its mana came from, not each unit's color"
+  },
+  {
+   "name": "Bound in Gold",
+   "needs": [
+    "static:cant-crew",
+    "effect:prohibit-non-mana-abilities"
+   ],
+   "why": "can't crew Vehicles, and activated abilities other than mana abilities can't be activated"
+  },
+  {
+   "name": "Cinderheart Giant",
+   "needs": [
+    "effect:random-permanent"
+   ],
+   "why": "a creature chosen at random on the battlefield"
+  },
+  {
+   "name": "Codespell Cleric",
+   "needs": [
+    "condition:was-nth-spell-cast-this-turn"
+   ],
+   "why": "\"if it was the second spell you cast this turn\""
+  },
+  {
+   "name": "Cosmos Charger",
+   "needs": [
+    "static:foretell-cost-reduction-any-turn"
+   ],
+   "why": "foretelling for {1} less, on any player's turn"
+  },
+  {
+   "name": "Craven Hulk",
+   "needs": [
+    "static:cant-block-alone"
+   ],
+   "why": "\"can't block alone\""
+  },
+  {
+   "name": "Crush the Weak",
+   "needs": [
+    "replacement:dealt-damage-this-way-exile-if-dies"
+   ],
+   "why": "a creature dealt damage this way that would die this turn is exiled instead"
+  },
+  {
+   "name": "Draugr Necromancer",
+   "needs": [
+    "zone:cast-from-linked-exile",
+    "effect:spend-snow-as-any-color"
+   ],
+   "why": "cast from exile with ice counters, snow mana spent as any color"
+  },
+  {
+   "name": "Draugr Thought-Thief",
+   "needs": [
+    "effect:look-and-choose-target-opponent-library"
+   ],
+   "why": "looking at the top of a target player's library"
+  },
+  {
+   "name": "Eradicator Valkyrie",
+   "needs": [
+    "keyword:hexproof-from-planeswalkers"
+   ],
+   "why": "hexproof from planeswalkers"
+  },
+  {
+   "name": "Ethereal Valkyrie",
+   "needs": [
+    "static:grant-foretell"
+   ],
+   "why": "foretelling a card from hand with a cost from its own mana cost"
+  },
+  {
+   "name": "Fall of the Impostor",
+   "needs": [
+    "target:controlled-by-target-player"
+   ],
+   "why": "a creature with the greatest power among those target opponent controls, chosen, not targeted"
+  },
+  {
+   "name": "Fire Giant's Fury",
+   "needs": [
+    "effect:delayed-combat-damage-that-much"
+   ],
+   "why": "\"exile that many\" cards for the combat damage dealt"
+  },
+  {
+   "name": "Firja's Retribution",
+   "needs": [
+    "effect:grant-activated-dynamic-target-filter"
+   ],
+   "why": "chapter II's granted target filter (power less than this creature's) is read at grant time against the Saga, not the Angel"
+  },
+  {
+   "name": "Frenzied Raider",
+   "needs": [
+    "trigger:activates-boast"
+   ],
+   "why": "\"whenever you activate a boast ability\""
+  },
+  {
+   "name": "Frostpyre Arcanist",
+   "needs": [
+    "filter:same-name-as-card-in-your-graveyard"
+   ],
+   "why": "a card with the same name as a card in your graveyard"
+  },
+  {
+   "name": "Glimpse the Cosmos",
+   "needs": [
+    "keyword:conditional-flashback",
+    "zone:graveyard-cast-exile-replacement"
+   ],
+   "why": "cast from the graveyard for {U} with a Giant, exiled after"
+  },
+  {
+   "name": "Glittering Frost",
+   "needs": [
+    "static:static-grant-supertype"
+   ],
+   "why": "\"enchanted land is snow\": a static can't add a supertype"
+  },
+  {
+   "name": "Great Hall of Starnheim",
+   "needs": [
+    "cost:sacrifice-self-and-another"
+   ],
+   "why": "sacrifice this land and a creature you control"
+  },
+  {
+   "name": "Harald Unites the Elves",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"whenever an Elf you control attacks this turn\""
+  },
+  {
+   "name": "Hero of Bretagard",
+   "needs": [
+    "trigger:exiled-by-your-spell-or-ability"
+   ],
+   "why": "cards exiled from your hand, or permanents exiled by your spells and abilities"
+  },
+  {
+   "name": "Icebreaker Kraken",
+   "needs": [
+    "effect:player-next-untap-step-skip-filter"
+   ],
+   "why": "no artifact or creature that player controls at their next untap step untaps, even ones they gain later (the ruling)"
+  },
+  {
+   "name": "Invasion of the Giants",
+   "needs": [
+    "effect:reveal-cards-from-hand",
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "revealing a Giant card from hand; only the next Giant spell this turn costs less"
+  },
+  {
+   "name": "Jorn, God of Winter // Kaldring, the Rimestaff",
+   "needs": [
+    "zone:graveyard-cast-permissions",
+    "replacement:enters-modifier-via-permission"
+   ],
+   "why": "Kaldring plays a snow permanent card from the graveyard, entering tapped"
+  },
+  {
+   "name": "Karfell Harbinger",
+   "needs": [
+    "cost:spend-only-foretell"
+   ],
+   "why": "mana spent only to foretell or on instant/sorcery spells"
+  },
+  {
+   "name": "King Narfi's Betrayal",
+   "needs": [
+    "zone:cast-from-linked-exile",
+    "effect:linked-exiled-card"
+   ],
+   "why": "cards exiled from each graveyard, later cast from exile with mana as any color"
+  },
+  {
+   "name": "Kolvori, God of Kinship // The Ringhart Crest",
+   "needs": [
+    "cost:spend-only-chosen-type-or-filter"
+   ],
+   "why": "the Crest's mana: a creature of the chosen type OR a legendary creature"
+  },
+  {
+   "name": "Littjara Kinseekers",
+   "needs": [
+    "static:shares-creature-type-count"
+   ],
+   "why": "three or more creatures that share a creature type"
+  },
+  {
+   "name": "Littjara Mirrorlake",
+   "needs": [
+    "effect:token-copy-enters-with-counters"
+   ],
+   "why": "a token copy that enters with an additional +1/+1 counter"
+  },
+  {
+   "name": "Niko Aris",
+   "needs": [
+    "effect:delayed-trigger-on-targeted-creature-damage"
+   ],
+   "why": "\"whenever that creature deals damage this turn\""
+  },
+  {
+   "name": "Niko Defies Destiny",
+   "needs": [
+    "amount:foretold-cards-you-own-in-exile",
+    "effect:mana-spend-only-foretell"
+   ],
+   "why": "counting foretold cards; mana spent only to foretell or on foretell spells"
+  },
+  {
+   "name": "Old-Growth Troll",
+   "needs": [
+    "effect:return-as-aura-with-granted-ability"
+   ],
+   "why": "returns as an Aura enchanting a Forest, granting it abilities"
+  },
+  {
+   "name": "Open the Omenpaths",
+   "needs": [
+    "effect:add-mana-two-different-colors"
+   ],
+   "why": "one mana of a color and one of a different color"
+  },
+  {
+   "name": "Raise the Draugr",
+   "needs": [
+    "filter:shares-creature-type-with-target"
+   ],
+   "why": "mode 2's two targets must share a creature type"
+  },
+  {
+   "name": "Ranar the Ever-Watchful",
+   "needs": [
+    "static:foretell-cost-zero-first-each-turn",
+    "trigger:exiled-from-hand-or-by-your-effect"
+   ],
+   "why": "the first foretell each turn costs {0}; exiling from hand or by your effects"
+  },
+  {
+   "name": "Reckless Crew",
+   "needs": [
+    "effect:attach-equipment-to-each-created-token"
+   ],
+   "why": "one Equipment attached to each created token, all at once"
+  },
+  {
+   "name": "Resplendent Marshal",
+   "needs": [
+    "filter:shares-creature-type-with-this-way"
+   ],
+   "why": "sharesCreatureTypeWith can't mean the card just exiled"
+  },
+  {
+   "name": "Rune of Flight",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "the Rune gives the Equipment it enchants a static ability"
+  },
+  {
+   "name": "Rune of Might",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "the Rune gives the Equipment it enchants a static ability"
+  },
+  {
+   "name": "Rune of Mortality",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "the Rune gives the Equipment it enchants a static ability"
+  },
+  {
+   "name": "Rune of Speed",
+   "needs": [
+    "static:grant-static-ability"
+   ],
+   "why": "the Rune gives the Equipment it enchants a static ability"
+  },
+  {
+   "name": "Runed Crown",
+   "needs": [
+    "effect:search-hand-graveyard-library"
+   ],
+   "why": "searching the library, hand and/or graveyard"
+  },
+  {
+   "name": "Serpent's Soul-Jar",
+   "needs": [
+    "zone:cast-from-linked-exile"
+   ],
+   "why": "casting a creature spell from among cards exiled with it, until end of turn"
+  },
+  {
+   "name": "Shackles of Treachery",
+   "needs": [
+    "filter:attached-to-source"
+   ],
+   "why": "the granted trigger targets \"Equipment attached to it\""
+  },
+  {
+   "name": "Showdown of the Skalds",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"whenever you cast a spell this turn\" outliving the Saga"
+  },
+  {
+   "name": "Stalwart Valkyrie",
+   "needs": [
+    "cost:alternative-cost-exile-from-graveyard"
+   ],
+   "why": "an alternative cost of exiling a creature card from your graveyard"
+  },
+  {
+   "name": "Surtland Elementalist",
+   "needs": [
+    "cost:reveal-card-as-additional-cost"
+   ],
+   "why": "reveal a Giant card from your hand or pay {2}"
+  },
+  {
+   "name": "Tales of the Ancestors",
+   "needs": [
+    "amount:most-cards-in-hand-among-players"
+   ],
+   "why": "the largest hand among the players"
+  },
+  {
+   "name": "The Bears of Littjara",
+   "needs": [
+    "effect:each-permanent-deals-damage"
+   ],
+   "why": "each creature with power 4 or more deals damage equal to its power to one target"
+  },
+  {
+   "name": "The Bloodsky Massacre",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"whenever a Berserker attacks this turn\""
+  },
+  {
+   "name": "The Raven's Warning",
+   "needs": [
+    "mechanic:outside-the-game"
+   ],
+   "why": "chapter III puts a card from outside the game on top of the library"
+  },
+  {
+   "name": "The Three Seasons",
+   "needs": [
+    "effect:shuffle-chosen-graveyard-cards-into-libraries"
+   ],
+   "why": "three cards chosen in each graveyard, shuffled into their owners' libraries"
+  },
+  {
+   "name": "The Trickster-God's Heist",
+   "needs": [
+    "effect:exchange-control"
+   ],
+   "why": "exchanging control of two creatures"
+  },
+  {
+   "name": "Thornmantle Striker",
+   "needs": [
+    "effect:remove-counters-any-kind"
+   ],
+   "why": "removing X counters of whatever kinds the player chooses"
+  },
+  {
+   "name": "Weathered Runestone",
+   "needs": [
+    "static:graveyard-enter-prohibition",
+    "static:prohibit-cast-from-graveyard-or-library"
+   ],
+   "why": "cards in graveyards and libraries can't enter, and players can't cast spells from them"
+  },
+  {
+   "name": "Weigh Down",
+   "needs": [
+    "cost:additional-cost-exile-from-graveyard"
+   ],
+   "why": "a spell's additional cost exiling a creature card from your graveyard"
+  }
+ ]
+}

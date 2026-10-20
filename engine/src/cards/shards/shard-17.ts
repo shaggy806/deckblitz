@@ -268,6 +268,7 @@ import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
+import _poolMistsOfLittjara from "../pool/mists-of-littjara.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
@@ -319,6 +320,7 @@ import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
 import _poolRaucousCarnival from "../pool/raucous-carnival.js";
+import _poolRavenWings from "../pool/raven-wings.js";
 import _poolRavenousGigamole from "../pool/ravenous-gigamole.js";
 import _poolRavos from "../pool/ravos.js";
 import _poolReadTheBones from "../pool/read-the-bones.js";
@@ -771,6 +773,7 @@ const shard: CardShard = {
     _poolMinotaurSkullcleaver,
     _poolMirkwoodChanneler,
     _poolMistgatePathway,
+    _poolMistsOfLittjara,
     _poolMobileHomestead,
     _poolMoggMob,
     _poolMollyHayesRunaway,
@@ -822,6 +825,7 @@ const shard: CardShard = {
     _poolRainOfTears,
     _poolRattleclawMystic,
     _poolRaucousCarnival,
+    _poolRavenWings,
     _poolRavenousGigamole,
     _poolRavos,
     _poolReadTheBones,

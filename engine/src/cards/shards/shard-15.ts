@@ -95,6 +95,7 @@ import _poolDeathTyrant from "../pool/death-tyrant.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
 import _poolDemonicCounsel from "../pool/demonic-counsel.js";
+import _poolDemonicGifts from "../pool/demonic-gifts.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
@@ -222,6 +223,7 @@ import _poolImpossibleInferno from "../pool/impossible-inferno.js";
 import _poolImprovisedClub from "../pool/improvised-club.js";
 import _poolIncandescentSoulstoke from "../pool/incandescent-soulstoke.js";
 import _poolIndoctrinationAttendant from "../pool/indoctrination-attendant.js";
+import _poolInfernalPet from "../pool/infernal-pet.js";
 import _poolIngeniousSmith from "../pool/ingenious-smith.js";
 import _poolInsightEngine from "../pool/insight-engine.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
@@ -356,6 +358,7 @@ import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRoilCartographer from "../pool/roil-cartographer.js";
 import _poolRuneboggle from "../pool/runeboggle.js";
+import _poolRuneforgeChampion from "../pool/runeforge-champion.js";
 import _poolRushOfAdrenaline from "../pool/rush-of-adrenaline.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
@@ -599,6 +602,7 @@ const shard: CardShard = {
     _poolDefiantBloodlord,
     _poolDelugeOfDoom,
     _poolDemonicCounsel,
+    _poolDemonicGifts,
     _poolDenyTheWitch,
     _poolDespark,
     _poolDiaryOfDreams,
@@ -726,6 +730,7 @@ const shard: CardShard = {
     _poolImprovisedClub,
     _poolIncandescentSoulstoke,
     _poolIndoctrinationAttendant,
+    _poolInfernalPet,
     _poolIngeniousSmith,
     _poolInsightEngine,
     _poolInvasionOfMercadia,
@@ -860,6 +865,7 @@ const shard: CardShard = {
     _poolRockSoldiers,
     _poolRoilCartographer,
     _poolRuneboggle,
+    _poolRuneforgeChampion,
     _poolRushOfAdrenaline,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,

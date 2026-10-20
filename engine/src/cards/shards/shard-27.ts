@@ -102,6 +102,8 @@ import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
 import _poolDefacedGallery from "../pool/defaced-gallery.js";
 import _poolDefenestrate from "../pool/defenestrate.js";
 import _poolDefilingDaemogoth from "../pool/defiling-daemogoth.js";
+import _poolDemonBolt from "../pool/demon-bolt.js";
+import _poolDepartTheRealm from "../pool/depart-the-realm.js";
 import _poolDeployToTheFront from "../pool/deploy-to-the-front.js";
 import _poolDereviEmpyrialTactician from "../pool/derevi-empyrial-tactician.js";
 import _poolDescendantOfStorms from "../pool/descendant-of-storms.js";
@@ -215,6 +217,7 @@ import _poolIronLeagueSteed from "../pool/iron-league-steed.js";
 import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
+import _poolJarlOfTheForsaken from "../pool/jarl-of-the-forsaken.js";
 import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
 import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
@@ -618,6 +621,8 @@ const shard: CardShard = {
     _poolDefacedGallery,
     _poolDefenestrate,
     _poolDefilingDaemogoth,
+    _poolDemonBolt,
+    _poolDepartTheRealm,
     _poolDeployToTheFront,
     _poolDereviEmpyrialTactician,
     _poolDescendantOfStorms,
@@ -731,6 +736,7 @@ const shard: CardShard = {
     _poolIronManTitanOfInnovation,
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
+    _poolJarlOfTheForsaken,
     _poolJetsBrainwashing,
     _poolJohannsStopgap,
     _poolJungleShrine,

@@ -178,6 +178,7 @@ import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
 import _poolGhoulishProcession from "../pool/ghoulish-procession.js";
 import _poolGiantStrength from "../pool/giant-strength.js";
 import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
+import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
@@ -228,6 +229,7 @@ import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
 import _poolInevitableDefeat from "../pool/inevitable-defeat.js";
 import _poolInfernalMedusa from "../pool/infernal-medusa.js";
 import _poolInfinityFormula from "../pool/infinity-formula.js";
+import _poolIngaRuneEyes from "../pool/inga-rune-eyes.js";
 import _poolInquisitionOfKozilek from "../pool/inquisition-of-kozilek.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
@@ -265,6 +267,7 @@ import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
+import _poolLittjaraGladeWarden from "../pool/littjara-glade-warden.js";
 import _poolLlanowarVanguard from "../pool/llanowar-vanguard.js";
 import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolLootDispute from "../pool/loot-dispute.js";
@@ -722,6 +725,7 @@ const shard: CardShard = {
     _poolGhoulishProcession,
     _poolGiantStrength,
     _poolGiftOfTheViper,
+    _poolGildedAssaultCart,
     _poolGildedGoose,
     _poolGimliCounterOfKills,
     _poolGoShintaiOfLifesOrigin,
@@ -772,6 +776,7 @@ const shard: CardShard = {
     _poolInevitableDefeat,
     _poolInfernalMedusa,
     _poolInfinityFormula,
+    _poolIngaRuneEyes,
     _poolInquisitionOfKozilek,
     _poolInspiringOverseer,
     _poolIntoTheNorth,
@@ -809,6 +814,7 @@ const shard: CardShard = {
     _poolLightTheWay,
     _poolLilianasSteward,
     _poolLionHeart,
+    _poolLittjaraGladeWarden,
     _poolLlanowarVanguard,
     _poolLoamdraggerGiant,
     _poolLootDispute,

@@ -12,6 +12,7 @@ import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
+import _poolArachnoform from "../pool/arachnoform.js";
 import _poolAradaraExpress from "../pool/aradara-express.js";
 import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
 import _poolArboreaPegasus from "../pool/arborea-pegasus.js";
@@ -286,6 +287,7 @@ import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolRagingRegisaur from "../pool/raging-regisaur.js";
+import _poolRaidersKarve from "../pool/raiders-karve.js";
 import _poolRampagingHippo from "../pool/rampaging-hippo.js";
 import _poolRaugrinCrystal from "../pool/raugrin-crystal.js";
 import _poolRavenousSkirge from "../pool/ravenous-skirge.js";
@@ -317,6 +319,7 @@ import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolSeaGate from "../pool/sea-gate.js";
 import _poolSeacoastDrake from "../pool/seacoast-drake.js";
+import _poolSearchForGlory from "../pool/search-for-glory.js";
 import _poolSeasideCitadel from "../pool/seaside-citadel.js";
 import _poolSeatOfTheSynod from "../pool/seat-of-the-synod.js";
 import _poolSecretDoor from "../pool/secret-door.js";
@@ -481,6 +484,7 @@ const shard: CardShard = {
     _poolAncestralAnger,
     _poolAnodetLurker,
     _poolAppetiteForTheUnnatural,
+    _poolArachnoform,
     _poolAradaraExpress,
     _poolAragornAndArwenWed,
     _poolArboreaPegasus,
@@ -755,6 +759,7 @@ const shard: CardShard = {
     _poolQueenBrahne,
     _poolQuickbeamUpstartEnt,
     _poolRagingRegisaur,
+    _poolRaidersKarve,
     _poolRampagingHippo,
     _poolRaugrinCrystal,
     _poolRavenousSkirge,
@@ -786,6 +791,7 @@ const shard: CardShard = {
     _poolScrapTrawler,
     _poolSeaGate,
     _poolSeacoastDrake,
+    _poolSearchForGlory,
     _poolSeasideCitadel,
     _poolSeatOfTheSynod,
     _poolSecretDoor,

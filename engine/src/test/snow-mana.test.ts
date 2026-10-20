@@ -146,3 +146,15 @@ describe("the amount of {S} spent to cast a spell", () => {
     expect(hand(game, A).length).toBe(before + 3);
   });
 });
+
+describe("Search for Glory", () => {
+  it("finds a snow permanent, legendary or Saga card, and gains 1 life per snow mana spent", () => {
+    const { game, a } = table();
+    lands(game, "Snow-Covered Plains", 2);
+    lands(game, "Plains", 1);
+    const before = game.state.players[A].life;
+    a.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+    cast(game, toHand(game, "Search for Glory"));
+    expect(game.state.players[A].life).toBe(before + 2);
+  });
+});

@@ -225,6 +225,7 @@ import _poolHulkingOgre from "../pool/hulking-ogre.js";
 import _poolHydroelectricSpecimen from "../pool/hydroelectric-specimen.js";
 import _poolHypnoticSprite from "../pool/hypnotic-sprite.js";
 import _poolIllusionistsBracers from "../pool/illusionists-bracers.js";
+import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
 import _poolInvigoratingHotSpring from "../pool/invigorating-hot-spring.js";
@@ -246,6 +247,7 @@ import _poolKastralTheWindcrested from "../pool/kastral-the-windcrested.js";
 import _poolKataraBendingProdigy from "../pool/katara-bending-prodigy.js";
 import _poolKazanduMammoth from "../pool/kazandu-mammoth.js";
 import _poolKindlyCustomer from "../pool/kindly-customer.js";
+import _poolKingHaraldsRevenge from "../pool/king-haralds-revenge.js";
 import _poolKolodinTriumphCaster from "../pool/kolodin-triumph-caster.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
@@ -377,6 +379,7 @@ import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
 import _poolSanguineGuard from "../pool/sanguine-guard.js";
+import _poolSarulfRealmEater from "../pool/sarulf-realm-eater.js";
 import _poolSazhsChocobo from "../pool/sazhs-chocobo.js";
 import _poolScaleDeflection from "../pool/scale-deflection.js";
 import _poolScarecrowGuide from "../pool/scarecrow-guide.js";
@@ -422,6 +425,7 @@ import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
 import _poolSpitefulBanditry from "../pool/spiteful-banditry.js";
 import _poolSplintersTechnique from "../pool/splinters-technique.js";
+import _poolSquash from "../pool/squash.js";
 import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStargaze from "../pool/stargaze.js";
@@ -777,6 +781,7 @@ const shard: CardShard = {
     _poolHydroelectricSpecimen,
     _poolHypnoticSprite,
     _poolIllusionistsBracers,
+    _poolImmersturmSkullcairn,
     _poolImpulse,
     _poolInnovativeCommons,
     _poolInvigoratingHotSpring,
@@ -798,6 +803,7 @@ const shard: CardShard = {
     _poolKataraBendingProdigy,
     _poolKazanduMammoth,
     _poolKindlyCustomer,
+    _poolKingHaraldsRevenge,
     _poolKolodinTriumphCaster,
     _poolKrangUtromWarlord,
     _poolKraulStinger,
@@ -929,6 +935,7 @@ const shard: CardShard = {
     _poolSanarUnfinishedGenius,
     _poolSandbendersStorm,
     _poolSanguineGuard,
+    _poolSarulfRealmEater,
     _poolSazhsChocobo,
     _poolScaleDeflection,
     _poolScarecrowGuide,
@@ -974,6 +981,7 @@ const shard: CardShard = {
     _poolSpearbreakerBehemoth,
     _poolSpitefulBanditry,
     _poolSplintersTechnique,
+    _poolSquash,
     _poolSquirrelSanctuary,
     _poolSquirrelanoids,
     _poolStargaze,

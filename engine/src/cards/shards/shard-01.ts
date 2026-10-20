@@ -95,6 +95,7 @@ import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDogWalker from "../pool/dog-walker.js";
 import _poolDominatingVampire from "../pool/dominating-vampire.js";
+import _poolDoomskarOracle from "../pool/doomskar-oracle.js";
 import _poolDragonMantle from "../pool/dragon-mantle.js";
 import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
@@ -365,7 +366,9 @@ import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
+import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
 import _poolSixthSense from "../pool/sixth-sense.js";
+import _poolSkemfarElderhall from "../pool/skemfar-elderhall.js";
 import _poolSkirkFireMarshal from "../pool/skirk-fire-marshal.js";
 import _poolSkycrash from "../pool/skycrash.js";
 import _poolSkyhunterStrikeForce from "../pool/skyhunter-strike-force.js";
@@ -591,6 +594,7 @@ const shard: CardShard = {
     _poolDisruptiveStormbrood,
     _poolDogWalker,
     _poolDominatingVampire,
+    _poolDoomskarOracle,
     _poolDragonMantle,
     _poolDragonSniper,
     _poolDragonStyleTwins,
@@ -861,7 +865,9 @@ const shard: CardShard = {
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
     _poolSignpostScarecrow,
+    _poolSigridGodFavored,
     _poolSixthSense,
+    _poolSkemfarElderhall,
     _poolSkirkFireMarshal,
     _poolSkycrash,
     _poolSkyhunterStrikeForce,

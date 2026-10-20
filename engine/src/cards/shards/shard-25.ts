@@ -329,6 +329,7 @@ import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
 import _poolPurifyingDragon from "../pool/purifying-dragon.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
+import _poolQuakebringer from "../pool/quakebringer.js";
 import _poolQuilledWolf from "../pool/quilled-wolf.js";
 import _poolRadagastWizardOfWilds from "../pool/radagast-wizard-of-wilds.js";
 import _poolRakdosLocket from "../pool/rakdos-locket.js";
@@ -416,6 +417,7 @@ import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
 import _poolStarforgedSword from "../pool/starforged-sword.js";
+import _poolStarnheimUnleashed from "../pool/starnheim-unleashed.js";
 import _poolStaunchDefenders from "../pool/staunch-defenders.js";
 import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
@@ -482,6 +484,7 @@ import _poolWallOfTanglecord from "../pool/wall-of-tanglecord.js";
 import _poolWanderingOnes from "../pool/wandering-ones.js";
 import _poolWanderingTroubadour from "../pool/wandering-troubadour.js";
 import _poolWanderlightSpirit from "../pool/wanderlight-spirit.js";
+import _poolWarchanterSkald from "../pool/warchanter-skald.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
@@ -845,6 +848,7 @@ const shard: CardShard = {
     _poolPurifyingDragon,
     _poolPymTechnologies,
     _poolPyroclasm,
+    _poolQuakebringer,
     _poolQuilledWolf,
     _poolRadagastWizardOfWilds,
     _poolRakdosLocket,
@@ -932,6 +936,7 @@ const shard: CardShard = {
     _poolSqueeGoblinNabob,
     _poolStalkedResearcher,
     _poolStarforgedSword,
+    _poolStarnheimUnleashed,
     _poolStaunchDefenders,
     _poolStingerquillVoxmancer,
     _poolStormCrow,
@@ -998,6 +1003,7 @@ const shard: CardShard = {
     _poolWanderingOnes,
     _poolWanderingTroubadour,
     _poolWanderlightSpirit,
+    _poolWarchanterSkald,
     _poolWastefulHarvest,
     _poolWeaveFate,
     _poolWickedReward,

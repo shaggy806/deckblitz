@@ -796,6 +796,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "The Prismatic Bridge": "https://cards.scryfall.io/art_crop/back/f/6/f6cd7465-9dd0-473c-ac5e-dd9e2f22f5f6.jpg",
   "The Sensational She-Hulk": "https://cards.scryfall.io/art_crop/back/6/1/61237530-ad49-469c-a952-67c92315708e.jpg",
   "Thraben Militia": "https://cards.scryfall.io/art_crop/back/5/8/58ae9cbc-d88d-42df-ab76-63ab5d05c023.jpg",
+  "Throne of Death": "https://cards.scryfall.io/art_crop/back/9/d/9dfdb73d-b001-4a59-b79e-8c8c1baea116.jpg",
   "Throw a Line": "https://cards.scryfall.io/art_crop/back/2/7/27912e61-97ef-406b-bb88-4fe89a54726e.jpg",
   "Tidechannel Pathway": "https://cards.scryfall.io/art_crop/back/b/6/b6de14ae-0132-4261-af00-630bf15918cd.jpg",
   "Till and Tend": "https://cards.scryfall.io/art_crop/back/8/0/804589b7-3ef9-473d-97cc-c61a2d41f70d.jpg",

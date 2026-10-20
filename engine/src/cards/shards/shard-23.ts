@@ -126,6 +126,7 @@ import _poolDragTheCanal from "../pool/drag-the-canal.js";
 import _poolDragonflySwarm from "../pool/dragonfly-swarm.js";
 import _poolDrivnodCarnageDominus from "../pool/drivnod-carnage-dominus.js";
 import _poolDrownyardAmalgam from "../pool/drownyard-amalgam.js";
+import _poolDualStrike from "../pool/dual-strike.js";
 import _poolDungeonMap from "../pool/dungeon-map.js";
 import _poolDuskwatchHunter from "../pool/duskwatch-hunter.js";
 import _poolEarthOriginYak from "../pool/earth-origin-yak.js";
@@ -427,6 +428,7 @@ import _poolSubmerge from "../pool/submerge.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSundialDawnTyrant from "../pool/sundial-dawn-tyrant.js";
+import _poolSurtlandFlinger from "../pool/surtland-flinger.js";
 import _poolSurtrFieryJotun from "../pool/surtr-fiery-jotun.js";
 import _poolSusanForeman from "../pool/susan-foreman.js";
 import _poolSwoopingProtector from "../pool/swooping-protector.js";
@@ -648,6 +650,7 @@ const shard: CardShard = {
     _poolDragonflySwarm,
     _poolDrivnodCarnageDominus,
     _poolDrownyardAmalgam,
+    _poolDualStrike,
     _poolDungeonMap,
     _poolDuskwatchHunter,
     _poolEarthOriginYak,
@@ -949,6 +952,7 @@ const shard: CardShard = {
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSundialDawnTyrant,
+    _poolSurtlandFlinger,
     _poolSurtrFieryJotun,
     _poolSusanForeman,
     _poolSwoopingProtector,

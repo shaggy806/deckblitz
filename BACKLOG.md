@@ -106,11 +106,14 @@ section keeps only what to do next.
   and day/night; batch 109 Adventures in the Forgotten Realms and its Commander set, on the three
   Forgotten Realms dungeons and rule 101.4's "each player chooses, then all act"; batch 110 Modern
   Horizons 2 and Commander 2021, on madness; batch 111 Strixhaven, on learn as the rummage
-  alone); **next, Kaldheim and Kaldheim Commander** (KHM, KHC — `npm run cards:sets -w engine --
-  --next 60`). Strixhaven's most shared block: the Mastery cycle's "if the alternative cost was
-  paid" (`condition:alternative-cost-paid`, 4 — a printed mana-only alternative cost and a record
-  of paying it); Modern Horizons 2's, "you've discarded a card this turn"
-  (`stat:cards-discarded-this-turn`, 4).
+  alone; batch 112 Kaldheim and its Commander set, on snow mana); **next, Commander Legends**
+  (CMR — `npm run cards:sets -w engine -- --next 60`). The most shared blocks of the last three
+  sets: a triggered ability that lasts the rest of the turn (`effect:delayed-trigger-rest-of-turn`,
+  6 — Battle of Frost and Fire, The Bloodsky Massacre, Harald Unites the Elves, Showdown of the
+  Skalds, First Day of Class, Mage Hunters' Onslaught), the Mastery cycle's "if the alternative
+  cost was paid" (`condition:alternative-cost-paid`, 4), "you've discarded a card this turn"
+  (`stat:cards-discarded-this-turn`, 4) and an Aura granting the Equipment it enchants a static
+  (`static:grant-static-ability`, 3 — the Runes).
   **Enlist** (702.154 — an optional cost to attack, 508.1g: a new choice while attackers are
   declared, so a client change with a live check) blocks 11 of Dominaria United's cards and
   Aradesh.
@@ -170,7 +173,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
-- **A mass effect's filter can't compare against an amount**: it matches nothing, silently (Sphere of Annihilation).
+- **A granted ability's dynamic filter is fixed when it's granted**: an `{ amount }` in its target filter reads the granter, not the creature that has it (Firja's Retribution).
 - **`deals-damage` fires once per recipient**, where an unqualified "whenever ~ deals damage" fires once per event (603.2c).
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.

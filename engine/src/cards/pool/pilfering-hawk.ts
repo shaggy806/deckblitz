@@ -11,7 +11,7 @@ export default defineCard({
   types: ["creature"],
   subtypes: ["Bird"],
   power: 1,
-  toughness: 1,
+  toughness: 2,
   keywords: ["flying"],
   text: `Flying\n${TEXT} ({S} can be paid with one mana from a snow source.)`,
   activated: [

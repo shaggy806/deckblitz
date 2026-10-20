@@ -113,6 +113,7 @@ import _poolEasternPaladin from "../pool/eastern-paladin.js";
 import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
+import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
 import _poolElvishWarrior from "../pool/elvish-warrior.js";
 import _poolEmberethVeteran from "../pool/embereth-veteran.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
@@ -143,6 +144,7 @@ import _poolFlankingTroops from "../pool/flanking-troops.js";
 import _poolFlayedOne from "../pool/flayed-one.js";
 import _poolFleshformer from "../pool/fleshformer.js";
 import _poolFlowstoneCharger from "../pool/flowstone-charger.js";
+import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
 import _poolFractalize from "../pool/fractalize.js";
@@ -175,6 +177,7 @@ import _poolGurglingAnointer from "../pool/gurgling-anointer.js";
 import _poolHamletVanguard from "../pool/hamlet-vanguard.js";
 import _poolHammerheadMaggiaBoss from "../pool/hammerhead-maggia-boss.js";
 import _poolHarabazDruid from "../pool/harabaz-druid.js";
+import _poolHaraldKingOfSkemfar from "../pool/harald-king-of-skemfar.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
@@ -391,6 +394,7 @@ import _poolSpellweaverEternal from "../pool/spellweaver-eternal.js";
 import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
+import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
@@ -457,6 +461,7 @@ import _poolUncomfortableChill from "../pool/uncomfortable-chill.js";
 import _poolUnderfootUnderdogs from "../pool/underfoot-underdogs.js";
 import _poolUnflinchingHortimancer from "../pool/unflinching-hortimancer.js";
 import _poolUnstableExperiment from "../pool/unstable-experiment.js";
+import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
@@ -621,6 +626,7 @@ const shard: CardShard = {
     _poolEbonyRhino,
     _poolEidolonOfAstralWinds,
     _poolElderfangDisciple,
+    _poolElderfangRitualist,
     _poolElvishWarrior,
     _poolEmberethVeteran,
     _poolEmergeFromTheCocoon,
@@ -651,6 +657,7 @@ const shard: CardShard = {
     _poolFlayedOne,
     _poolFleshformer,
     _poolFlowstoneCharger,
+    _poolForgingTheTyriteSword,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
     _poolFractalize,
@@ -683,6 +690,7 @@ const shard: CardShard = {
     _poolHamletVanguard,
     _poolHammerheadMaggiaBoss,
     _poolHarabazDruid,
+    _poolHaraldKingOfSkemfar,
     _poolHardHittingQuestion,
     _poolHardlightContainment,
     _poolHazeriderDrake,
@@ -899,6 +907,7 @@ const shard: CardShard = {
     _poolSpicyOatmealPizza,
     _poolSpiderBot,
     _poolSpiderManToTheRescue,
+    _poolSpiritOfTheAldergard,
     _poolSpitFlame,
     _poolSplatterTechnique,
     _poolSpringleafDrum,
@@ -965,6 +974,7 @@ const shard: CardShard = {
     _poolUnderfootUnderdogs,
     _poolUnflinchingHortimancer,
     _poolUnstableExperiment,
+    _poolValorOfTheWorthy,
     _poolVampireChampion,
     _poolVaultSkirge,
     _poolVenomizedCat,

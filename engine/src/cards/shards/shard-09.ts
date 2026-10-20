@@ -92,6 +92,7 @@ import _poolClarionConqueror from "../pool/clarion-conqueror.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolColleenWingStreetSamurai from "../pool/colleen-wing-street-samurai.js";
+import _poolColossalPlow from "../pool/colossal-plow.js";
 import _poolConsumingAberration from "../pool/consuming-aberration.js";
 import _poolCopyCatchers from "../pool/copy-catchers.js";
 import _poolCorridorMonitor from "../pool/corridor-monitor.js";
@@ -620,6 +621,7 @@ const shard: CardShard = {
     _poolClericClass,
     _poolClingingDarkness,
     _poolColleenWingStreetSamurai,
+    _poolColossalPlow,
     _poolConsumingAberration,
     _poolCopyCatchers,
     _poolCorridorMonitor,

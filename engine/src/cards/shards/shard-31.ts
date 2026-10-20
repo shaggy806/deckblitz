@@ -126,6 +126,7 @@ import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
 import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
+import _poolDoomskarTitan from "../pool/doomskar-titan.js";
 import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
@@ -184,6 +185,7 @@ import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
 import _poolGatheringStone from "../pool/gathering-stone.js";
 import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
+import _poolGiantsGrasp from "../pool/giants-grasp.js";
 import _poolGideonsLawkeeper from "../pool/gideons-lawkeeper.js";
 import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
@@ -368,6 +370,7 @@ import _poolRitualOfRestoration from "../pool/ritual-of-restoration.js";
 import _poolRobobrainWarMind from "../pool/robobrain-war-mind.js";
 import _poolRockBadger from "../pool/rock-badger.js";
 import _poolRollingTemblor from "../pool/rolling-temblor.js";
+import _poolRootlessYew from "../pool/rootless-yew.js";
 import _poolRubblebeltMaaka from "../pool/rubblebelt-maaka.js";
 import _poolRufusShinra from "../pool/rufus-shinra.js";
 import _poolRuggedPrairie from "../pool/rugged-prairie.js";
@@ -472,6 +475,7 @@ import _poolUnfathomableTruths from "../pool/unfathomable-truths.js";
 import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
 import _poolValiantVeteran from "../pool/valiant-veteran.js";
+import _poolValkyriesSword from "../pool/valkyries-sword.js";
 import _poolValorSinger from "../pool/valor-singer.js";
 import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
@@ -650,6 +654,7 @@ const shard: CardShard = {
     _poolDisturbedSlumber,
     _poolDivineArrow,
     _poolDizzySpell,
+    _poolDoomskarTitan,
     _poolDorotheaVengefulVictim,
     _poolDrMadisonLi,
     _poolDragonMoose,
@@ -708,6 +713,7 @@ const shard: CardShard = {
     _poolGatheringStone,
     _poolGenesisChamber,
     _poolGhostlyFlicker,
+    _poolGiantsGrasp,
     _poolGideonsLawkeeper,
     _poolGiftOfFangs,
     _poolGimlisFury,
@@ -892,6 +898,7 @@ const shard: CardShard = {
     _poolRobobrainWarMind,
     _poolRockBadger,
     _poolRollingTemblor,
+    _poolRootlessYew,
     _poolRubblebeltMaaka,
     _poolRufusShinra,
     _poolRuggedPrairie,
@@ -996,6 +1003,7 @@ const shard: CardShard = {
     _poolUnnaturalPredation,
     _poolValeriaRichardsPrecocious,
     _poolValiantVeteran,
+    _poolValkyriesSword,
     _poolValorSinger,
     _poolVampireCutthroat,
     _poolVanguardSuppressor,

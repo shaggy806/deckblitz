@@ -126,6 +126,7 @@ import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolEleshNornMotherOfMachines from "../pool/elesh-norn-mother-of-machines.js";
+import _poolElvenBow from "../pool/elven-bow.js";
 import _poolElvenFortress from "../pool/elven-fortress.js";
 import _poolElvishPromenade from "../pool/elvish-promenade.js";
 import _poolEndriderSpikespitter from "../pool/endrider-spikespitter.js";
@@ -177,9 +178,11 @@ import _poolGhostlySentinel from "../pool/ghostly-sentinel.js";
 import _poolGideonsMemorial from "../pool/gideons-memorial.js";
 import _poolGigglingSkitterspike from "../pool/giggling-skitterspike.js";
 import _poolGisaTheHellraiser from "../pool/gisa-the-hellraiser.js";
+import _poolGladewalkerRitualist from "../pool/gladewalker-ritualist.js";
 import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
+import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinOffensive from "../pool/goblin-offensive.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
@@ -493,6 +496,7 @@ import _poolWharfInfiltrator from "../pool/wharf-infiltrator.js";
 import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWildRide from "../pool/wild-ride.js";
+import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
@@ -649,6 +653,7 @@ const shard: CardShard = {
     _poolEchoInspector,
     _poolElementalMascot,
     _poolEleshNornMotherOfMachines,
+    _poolElvenBow,
     _poolElvenFortress,
     _poolElvishPromenade,
     _poolEndriderSpikespitter,
@@ -700,9 +705,11 @@ const shard: CardShard = {
     _poolGideonsMemorial,
     _poolGigglingSkitterspike,
     _poolGisaTheHellraiser,
+    _poolGladewalkerRitualist,
     _poolGlassworksShatteredYard,
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
+    _poolGnottvoldSlumbermound,
     _poolGoblinOffensive,
     _poolGodPharaohsStatue,
     _poolGravelgillScoundrel,
@@ -1016,6 +1023,7 @@ const shard: CardShard = {
     _poolWhirlwindAdept,
     _poolWhiteWidowYelenaBelova,
     _poolWildRide,
+    _poolWingsOfTheCosmos,
     _poolWispdrinkerVampire,
     _poolWithstandDeath,
     _poolWoodcallerAutomaton,

@@ -8575,6 +8575,86 @@
   "replacement:learn-replacement": {
    "family": "replacement:new-event-replacements",
    "example": "Retriever Phoenix"
+  },
+  "effect:grant-activated-dynamic-target-filter": {
+   "family": "effect:target-spec-additions",
+   "example": "Firja's Retribution: a granted ability's target filter read at grant time, against the granter"
+  },
+  "effect:player-next-untap-step-skip-filter": {
+   "example": "Icebreaker Kraken"
+  },
+  "filter:shares-creature-type-with-this-way": {
+   "family": "effect:this-way-results",
+   "example": "Resplendent Marshal"
+  },
+  "filter:attached-to-source": {
+   "family": "effect:target-spec-additions",
+   "example": "Shackles of Treachery: \"Equipment attached to it\""
+  },
+  "cost:alternative-cost-exile-from-graveyard": {
+   "family": "cost:conditional-alternative-cost",
+   "example": "Stalwart Valkyrie"
+  },
+  "static:prohibit-cast-from-graveyard-or-library": {
+   "example": "Weathered Runestone"
+  },
+  "cost:spend-only-chosen-type-or-filter": {
+   "example": "The Ringhart Crest"
+  },
+  "filter:foretold": {
+   "example": "Alrund, God of the Cosmos"
+  },
+  "static:cant-block-alone": {
+   "example": "Craven Hulk (beside static:cant-attack-alone)"
+  },
+  "amount:most-cards-in-hand-among-players": {
+   "family": "effect:amount-greatest-count-among-players",
+   "example": "Tales of the Ancestors"
+  },
+  "trigger:exiled-by-your-spell-or-ability": {
+   "example": "Hero of Bretagard"
+  },
+  "amount:foretold-cards-you-own-in-exile": {
+   "example": "Niko Defies Destiny"
+  },
+  "effect:mana-spend-only-foretell": {
+   "example": "Niko Defies Destiny"
+  },
+  "condition:was-nth-spell-cast-this-turn": {
+   "example": "Codespell Cleric"
+  },
+  "filter:same-name-as-card-in-your-graveyard": {
+   "example": "Frostpyre Arcanist (only nameUnlike exists)"
+  },
+  "static:foretell-cost-zero-first-each-turn": {
+   "example": "Ranar the Ever-Watchful"
+  },
+  "trigger:exiled-from-hand-or-by-your-effect": {
+   "example": "Ranar the Ever-Watchful"
+  },
+  "keyword:hexproof-from-planeswalkers": {
+   "example": "Eradicator Valkyrie"
+  },
+  "static:foretell-cost-reduction-any-turn": {
+   "example": "Cosmos Charger"
+  },
+  "effect:add-mana-two-different-colors": {
+   "example": "Open the Omenpaths"
+  },
+  "cost:spend-only-foretell": {
+   "example": "Karfell Harbinger"
+  },
+  "effect:shuffle-chosen-graveyard-cards-into-libraries": {
+   "example": "The Three Seasons"
+  },
+  "trigger:activates-boast": {
+   "example": "Frenzied Raider"
+  },
+  "condition:snow-mana-of-spell-colors": {
+   "example": "Boreal Outrider: snow mana of the spell's colours — manaSpentFrom keeps the origin, not each unit's colour"
+  },
+  "effect:spend-snow-as-any-color": {
+   "example": "Draugr Necromancer"
   }
  }
 }

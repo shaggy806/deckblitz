@@ -381,6 +381,7 @@ import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
 import _poolSinisterMonolith from "../pool/sinister-monolith.js";
 import _poolSisayWeatherlightCaptain from "../pool/sisay-weatherlight-captain.js";
+import _poolSkemfarAvenger from "../pool/skemfar-avenger.js";
 import _poolSkitteringPrecursor from "../pool/skittering-precursor.js";
 import _poolSkyknightLegionnaire from "../pool/skyknight-legionnaire.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
@@ -453,6 +454,7 @@ import _poolValleyRotcaller from "../pool/valley-rotcaller.js";
 import _poolVarisSilverymoonRanger from "../pool/varis-silverymoon-ranger.js";
 import _poolVaultOfChampions from "../pool/vault-of-champions.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
+import _poolVengefulReaper from "../pool/vengeful-reaper.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
 import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
@@ -881,6 +883,7 @@ const shard: CardShard = {
     _poolSinisterHideout,
     _poolSinisterMonolith,
     _poolSisayWeatherlightCaptain,
+    _poolSkemfarAvenger,
     _poolSkitteringPrecursor,
     _poolSkyknightLegionnaire,
     _poolSlateOfAncestry,
@@ -953,6 +956,7 @@ const shard: CardShard = {
     _poolVarisSilverymoonRanger,
     _poolVaultOfChampions,
     _poolVengefulBloodwitch,
+    _poolVengefulReaper,
     _poolVenserShaperSavant,
     _poolVerdantCatacombs,
     _poolVernadiShieldmate,

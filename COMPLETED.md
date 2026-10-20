@@ -86,6 +86,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Kaldheim and Kaldheim Commander, whole** (batch 112): their last 182 cards, 116 authored, with
+  snow mana built (rule 107.4h — an `{S}` pip paid only with mana from a snow source, and "the
+  amount of {S} spent"), plus Search for Glory, which it unblocked; 66 blocked. The batch's
+  agents batched their tool calls: 0.66M tokens per authored card against Strixhaven's 1.11M
+  (2026-10-20).
 - **Strixhaven: School of Mages, whole** (batch 111): its last 161 cards, 117 authored, with
   learn built as the optional rummage alone (rule 701.48a — no deck here has a sideboard, so no
   Lesson is outside the game; `learn()`, and the scaffolder reads "Learn."); 44 blocked. The

@@ -158,6 +158,7 @@ import _poolFieldCreeper from "../pool/field-creeper.js";
 import _poolFieryHellhound from "../pool/fiery-hellhound.js";
 import _poolFireNationSentinels from "../pool/fire-nation-sentinels.js";
 import _poolFireslinger from "../pool/fireslinger.js";
+import _poolFirjaJudgeOfValor from "../pool/firja-judge-of-valor.js";
 import _poolFlamekinBrawler from "../pool/flamekin-brawler.js";
 import _poolFlaringCinder from "../pool/flaring-cinder.js";
 import _poolFlensingRaptor from "../pool/flensing-raptor.js";
@@ -181,6 +182,7 @@ import _poolFyndhornBrownie from "../pool/fyndhorn-brownie.js";
 import _poolGalewindMoose from "../pool/galewind-moose.js";
 import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
+import _poolGatesOfIstfell from "../pool/gates-of-istfell.js";
 import _poolGatheringPlace from "../pool/gathering-place.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
@@ -370,6 +372,7 @@ import _poolScorchingShot from "../pool/scorching-shot.js";
 import _poolScourgeDevil from "../pool/scourge-devil.js";
 import _poolScrappyBruiser from "../pool/scrappy-bruiser.js";
 import _poolScreechingPhoenix from "../pool/screeching-phoenix.js";
+import _poolSculptorOfWinter from "../pool/sculptor-of-winter.js";
 import _poolSeaOfClouds from "../pool/sea-of-clouds.js";
 import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
@@ -467,6 +470,7 @@ import _poolUtromScientists from "../pool/utrom-scientists.js";
 import _poolValiantGuard from "../pool/valiant-guard.js";
 import _poolVampiresVengeance from "../pool/vampires-vengeance.js";
 import _poolVarragothBloodskySire from "../pool/varragoth-bloodsky-sire.js";
+import _poolVaultRobber from "../pool/vault-robber.js";
 import _poolVengeance from "../pool/vengeance.js";
 import _poolVengefulRebel from "../pool/vengeful-rebel.js";
 import _poolViashinoSandsprinter from "../pool/viashino-sandsprinter.js";
@@ -673,6 +677,7 @@ const shard: CardShard = {
     _poolFieryHellhound,
     _poolFireNationSentinels,
     _poolFireslinger,
+    _poolFirjaJudgeOfValor,
     _poolFlamekinBrawler,
     _poolFlaringCinder,
     _poolFlensingRaptor,
@@ -696,6 +701,7 @@ const shard: CardShard = {
     _poolGalewindMoose,
     _poolGarnaBloodfistOfKeld,
     _poolGarrisonExcavator,
+    _poolGatesOfIstfell,
     _poolGatheringPlace,
     _poolGiantsBoulder,
     _poolGiftOfParadise,
@@ -885,6 +891,7 @@ const shard: CardShard = {
     _poolScourgeDevil,
     _poolScrappyBruiser,
     _poolScreechingPhoenix,
+    _poolSculptorOfWinter,
     _poolSeaOfClouds,
     _poolSealOfRemoval,
     _poolSecludedCourtyard,
@@ -982,6 +989,7 @@ const shard: CardShard = {
     _poolValiantGuard,
     _poolVampiresVengeance,
     _poolVarragothBloodskySire,
+    _poolVaultRobber,
     _poolVengeance,
     _poolVengefulRebel,
     _poolViashinoSandsprinter,

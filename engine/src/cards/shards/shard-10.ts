@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _pool2Mace from "../pool/2-mace.js";
+import _poolAbsorbIdentity from "../pool/absorb-identity.js";
 import _poolAbstergoEntertainment from "../pool/abstergo-entertainment.js";
 import _poolAdultGoldDragon from "../pool/adult-gold-dragon.js";
 import _poolAerithLastAncient from "../pool/aerith-last-ancient.js";
@@ -174,6 +175,7 @@ import _poolGhaltaAndMavren from "../pool/ghalta-and-mavren.js";
 import _poolGhostShip from "../pool/ghost-ship.js";
 import _poolGiantInheritance from "../pool/giant-inheritance.js";
 import _poolGiantWarthog from "../pool/giant-warthog.js";
+import _poolGiantsAmulet from "../pool/giants-amulet.js";
 import _poolGiftOfGranite from "../pool/gift-of-granite.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
@@ -216,6 +218,7 @@ import _poolImperialCosmographer from "../pool/imperial-cosmographer.js";
 import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
+import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
@@ -348,10 +351,12 @@ import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
+import _poolRunAshore from "../pool/run-ashore.js";
 import _poolRushwoodDryad from "../pool/rushwood-dryad.js";
 import _poolRustElemental from "../pool/rust-elemental.js";
 import _poolRustShieldRampager from "../pool/rust-shield-rampager.js";
 import _poolRustvaleBridge from "../pool/rustvale-bridge.js";
+import _poolRuthlessWinnower from "../pool/ruthless-winnower.js";
 import _poolSacredNectar from "../pool/sacred-nectar.js";
 import _poolSaheeliTheSunsBrilliance from "../pool/saheeli-the-suns-brilliance.js";
 import _poolSallyPrideLionessLeader from "../pool/sally-pride-lioness-leader.js";
@@ -480,6 +485,7 @@ import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWandOfOrcus from "../pool/wand-of-orcus.js";
 import _poolWanderingMusicians from "../pool/wandering-musicians.js";
+import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
@@ -520,6 +526,7 @@ import _tokensVehicleToken from "../tokens/vehicle-token.js";
 const shard: CardShard = {
   pool: [
     _pool2Mace,
+    _poolAbsorbIdentity,
     _poolAbstergoEntertainment,
     _poolAdultGoldDragon,
     _poolAerithLastAncient,
@@ -690,6 +697,7 @@ const shard: CardShard = {
     _poolGhostShip,
     _poolGiantInheritance,
     _poolGiantWarthog,
+    _poolGiantsAmulet,
     _poolGiftOfGranite,
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
@@ -732,6 +740,7 @@ const shard: CardShard = {
     _poolIndathaCrystal,
     _poolInescapableBlaze,
     _poolInspiringRoar,
+    _poolIronVerdict,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
     _poolJeskaiBanner,
@@ -864,10 +873,12 @@ const shard: CardShard = {
     _poolRotatingFireplace,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
+    _poolRunAshore,
     _poolRushwoodDryad,
     _poolRustElemental,
     _poolRustShieldRampager,
     _poolRustvaleBridge,
+    _poolRuthlessWinnower,
     _poolSacredNectar,
     _poolSaheeliTheSunsBrilliance,
     _poolSallyPrideLionessLeader,
@@ -996,6 +1007,7 @@ const shard: CardShard = {
     _poolWallOfFire,
     _poolWandOfOrcus,
     _poolWanderingMusicians,
+    _poolWarhornBlast,
     _poolWarrenInstigator,
     _poolWaterspoutWarden,
     _poolWeddingAnnouncement,

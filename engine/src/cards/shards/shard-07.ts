@@ -38,6 +38,7 @@ import _poolBladeBlizzardKitsune from "../pool/blade-blizzard-kitsune.js";
 import _poolBlazingHellhound from "../pool/blazing-hellhound.js";
 import _poolBlightKeeper from "../pool/blight-keeper.js";
 import _poolBlightedFen from "../pool/blighted-fen.js";
+import _poolBlizzardBrawl from "../pool/blizzard-brawl.js";
 import _poolBloodCelebrant from "../pool/blood-celebrant.js";
 import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
@@ -97,6 +98,7 @@ import _poolDosansOldestChant from "../pool/dosans-oldest-chant.js";
 import _poolDragonstormForecaster from "../pool/dragonstorm-forecaster.js";
 import _poolDragonstorm from "../pool/dragonstorm.js";
 import _poolDrakeHatcher from "../pool/drake-hatcher.js";
+import _poolDreadRider from "../pool/dread-rider.js";
 import _poolDreadmalkin from "../pool/dreadmalkin.js";
 import _poolDreamdrinkerVampire from "../pool/dreamdrinker-vampire.js";
 import _poolDruidOfTheAnima from "../pool/druid-of-the-anima.js";
@@ -438,6 +440,7 @@ import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTorGiant from "../pool/tor-giant.js";
+import _poolTormentorsHelm from "../pool/tormentors-helm.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
 import _poolToweringGibbon from "../pool/towering-gibbon.js";
 import _poolTrainingGrounds from "../pool/training-grounds.js";
@@ -469,6 +472,7 @@ import _poolVoyageHome from "../pool/voyage-home.js";
 import _poolVraskaTheCuttingGlare from "../pool/vraska-the-cutting-glare.js";
 import _poolWailOfWar from "../pool/wail-of-war.js";
 import _poolWakandanDroneFlock from "../pool/wakandan-drone-flock.js";
+import _poolWakingTheTrolls from "../pool/waking-the-trolls.js";
 import _poolWallOfLimbs from "../pool/wall-of-limbs.js";
 import _poolWallOfRazors from "../pool/wall-of-razors.js";
 import _poolWallOfTears from "../pool/wall-of-tears.js";
@@ -567,6 +571,7 @@ const shard: CardShard = {
     _poolBlazingHellhound,
     _poolBlightKeeper,
     _poolBlightedFen,
+    _poolBlizzardBrawl,
     _poolBloodCelebrant,
     _poolBloodTollHarpy,
     _poolBloodsoakedChampion,
@@ -626,6 +631,7 @@ const shard: CardShard = {
     _poolDragonstormForecaster,
     _poolDragonstorm,
     _poolDrakeHatcher,
+    _poolDreadRider,
     _poolDreadmalkin,
     _poolDreamdrinkerVampire,
     _poolDruidOfTheAnima,
@@ -967,6 +973,7 @@ const shard: CardShard = {
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
     _poolTorGiant,
+    _poolTormentorsHelm,
     _poolTowerOfFortunes,
     _poolToweringGibbon,
     _poolTrainingGrounds,
@@ -998,6 +1005,7 @@ const shard: CardShard = {
     _poolVraskaTheCuttingGlare,
     _poolWailOfWar,
     _poolWakandanDroneFlock,
+    _poolWakingTheTrolls,
     _poolWallOfLimbs,
     _poolWallOfRazors,
     _poolWallOfTears,

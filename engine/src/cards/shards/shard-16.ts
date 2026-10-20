@@ -36,6 +36,7 @@ import _poolAxgardArmory from "../pool/axgard-armory.js";
 import _poolBaldinCenturyHerdmaster from "../pool/baldin-century-herdmaster.js";
 import _poolBattleRageBlessing from "../pool/battle-rage-blessing.js";
 import _poolBayFalcon from "../pool/bay-falcon.js";
+import _poolBeardedAxe from "../pool/bearded-axe.js";
 import _poolBeastKinRanger from "../pool/beast-kin-ranger.js";
 import _poolBeetlebackChief from "../pool/beetleback-chief.js";
 import _poolBelladonnaTook from "../pool/belladonna-took.js";
@@ -105,6 +106,7 @@ import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
+import _poolDivineGambit from "../pool/divine-gambit.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
@@ -585,6 +587,7 @@ const shard: CardShard = {
     _poolBaldinCenturyHerdmaster,
     _poolBattleRageBlessing,
     _poolBayFalcon,
+    _poolBeardedAxe,
     _poolBeastKinRanger,
     _poolBeetlebackChief,
     _poolBelladonnaTook,
@@ -654,6 +657,7 @@ const shard: CardShard = {
     _poolDemonicDread,
     _poolDesolateLighthouse,
     _poolDiscipleOfMalice,
+    _poolDivineGambit,
     _poolDoorOfDestinies,
     _poolDragonTempest,
     _poolDragonTurtle,

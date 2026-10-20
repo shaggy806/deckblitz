@@ -33,6 +33,7 @@ import _poolArtificersAssistant from "../pool/artificers-assistant.js";
 import _poolAshenRider from "../pool/ashen-rider.js";
 import _poolAshrootAnimist from "../pool/ashroot-animist.js";
 import _poolAttunedHunter from "../pool/attuned-hunter.js";
+import _poolAuguryRaven from "../pool/augury-raven.js";
 import _poolAuntMay from "../pool/aunt-may.js";
 import _poolAuraBlast from "../pool/aura-blast.js";
 import _poolAzoriusLocket from "../pool/azorius-locket.js";
@@ -88,6 +89,7 @@ import _poolCorpseBlockade from "../pool/corpse-blockade.js";
 import _poolCorrodingDragonstorm from "../pool/corroding-dragonstorm.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
+import _poolCrownOfSkemfar from "../pool/crown-of-skemfar.js";
 import _poolCrystalGrotto from "../pool/crystal-grotto.js";
 import _poolCursebreak from "../pool/cursebreak.js";
 import _poolDainsCompany from "../pool/dains-company.js";
@@ -324,6 +326,7 @@ import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverrun from "../pool/overrun.js";
 import _poolOxiddaDaredevil from "../pool/oxidda-daredevil.js";
 import _poolPathToExile from "../pool/path-to-exile.js";
+import _poolPathToTheWorldTree from "../pool/path-to-the-world-tree.js";
 import _poolPerimeterCaptain from "../pool/perimeter-captain.js";
 import _poolPerniciousDeed from "../pool/pernicious-deed.js";
 import _poolPhantomMonster from "../pool/phantom-monster.js";
@@ -341,6 +344,7 @@ import _poolPuppeteerClique from "../pool/puppeteer-clique.js";
 import _poolPygmyAllosaurus from "../pool/pygmy-allosaurus.js";
 import _poolRagingKavu from "../pool/raging-kavu.js";
 import _poolRakishCrew from "../pool/rakish-crew.js";
+import _poolRampageOfTheValkyries from "../pool/rampage-of-the-valkyries.js";
 import _poolRangingRaptors from "../pool/ranging-raptors.js";
 import _poolRaucousTheater from "../pool/raucous-theater.js";
 import _poolRealmScorcherHellkite from "../pool/realm-scorcher-hellkite.js";
@@ -570,6 +574,7 @@ const shard: CardShard = {
     _poolAshenRider,
     _poolAshrootAnimist,
     _poolAttunedHunter,
+    _poolAuguryRaven,
     _poolAuntMay,
     _poolAuraBlast,
     _poolAzoriusLocket,
@@ -625,6 +630,7 @@ const shard: CardShard = {
     _poolCorrodingDragonstorm,
     _poolCourtOfBounty,
     _poolCrookclawElder,
+    _poolCrownOfSkemfar,
     _poolCrystalGrotto,
     _poolCursebreak,
     _poolDainsCompany,
@@ -861,6 +867,7 @@ const shard: CardShard = {
     _poolOverrun,
     _poolOxiddaDaredevil,
     _poolPathToExile,
+    _poolPathToTheWorldTree,
     _poolPerimeterCaptain,
     _poolPerniciousDeed,
     _poolPhantomMonster,
@@ -878,6 +885,7 @@ const shard: CardShard = {
     _poolPygmyAllosaurus,
     _poolRagingKavu,
     _poolRakishCrew,
+    _poolRampageOfTheValkyries,
     _poolRangingRaptors,
     _poolRaucousTheater,
     _poolRealmScorcherHellkite,

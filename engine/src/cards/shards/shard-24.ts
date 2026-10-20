@@ -33,6 +33,7 @@ import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
+import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBaneAlleyBlackguard from "../pool/bane-alley-blackguard.js";
 import _poolBannersRaised from "../pool/banners-raised.js";
@@ -347,6 +348,7 @@ import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
 import _poolShantottoTacticianMagician from "../pool/shantotto-tactician-magician.js";
+import _poolShepherdOfTheCosmos from "../pool/shepherd-of-the-cosmos.js";
 import _poolShepherdingSpirits from "../pool/shepherding-spirits.js";
 import _poolShootTheSheriff from "../pool/shoot-the-sheriff.js";
 import _poolShrikeForce from "../pool/shrike-force.js";
@@ -517,6 +519,7 @@ const shard: CardShard = {
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
     _poolAvenSquire,
+    _poolAxgardBraggart,
     _poolBalefulStrix,
     _poolBaneAlleyBlackguard,
     _poolBannersRaised,
@@ -831,6 +834,7 @@ const shard: CardShard = {
     _poolSeiferAlmasy,
     _poolSelflessPoliceCaptain,
     _poolShantottoTacticianMagician,
+    _poolShepherdOfTheCosmos,
     _poolShepherdingSpirits,
     _poolShootTheSheriff,
     _poolShrikeForce,
