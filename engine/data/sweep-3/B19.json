@@ -267,6 +267,13 @@
         "engine/src/cards/pool/darksteel-colossus.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Worldspine Wurm",
+      "files": [
+        "engine/src/cards/pool/worldspine-wurm.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -374,13 +381,6 @@
         "new:additive-counter-replacement"
       ],
       "why": "\"That many plus one\": would-add-counter only multiplies (Doubling Season); no additive form, and no order asked beside a doubler (rule 616.1)."
-    },
-    {
-      "name": "Worldspine Wurm",
-      "needs": [
-        "new:self-put-into-graveyard-from-anywhere-trigger"
-      ],
-      "why": "\"When ~ is put into a graveyard from anywhere, shuffle it in\": put-into-graveyard can't watch its own arrival."
     },
     {
       "name": "Bruenor Battlehammer",

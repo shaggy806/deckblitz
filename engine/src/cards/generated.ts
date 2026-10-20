@@ -15364,6 +15364,7 @@ import _poolWorldShaper from "./pool/world-shaper.js";
 import _poolWorldWeary from "./pool/world-weary.js";
 import _poolWorldgorgerDragon from "./pool/worldgorger-dragon.js";
 import _poolWorldlyTutor from "./pool/worldly-tutor.js";
+import _poolWorldspineWurm from "./pool/worldspine-wurm.js";
 import _poolWormholeSerpent from "./pool/wormhole-serpent.js";
 import _poolWornPowerstone from "./pool/worn-powerstone.js";
 import _poolWortBoggartAuntie from "./pool/wort-boggart-auntie.js";
@@ -16007,6 +16008,7 @@ import _tokensWormToken from "./tokens/worm-token.js";
 import _tokensWraithToken from "./tokens/wraith-token.js";
 import _tokensWurmToken66 from "./tokens/wurm-token-6-6.js";
 import _tokensWurmTokenBaruWurmspeaker from "./tokens/wurm-token-baru-wurmspeaker.js";
+import _tokensWurmTokenTrample from "./tokens/wurm-token-trample.js";
 import _tokensWurmToken from "./tokens/wurm-token.js";
 import _tokensXXDemonTokenFlying from "./tokens/x-x-demon-token-flying.js";
 import _tokensXXDinosaurTokenTrample from "./tokens/x-x-dinosaur-token-trample.js";
@@ -31396,6 +31398,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorldWeary,
   _poolWorldgorgerDragon,
   _poolWorldlyTutor,
+  _poolWorldspineWurm,
   _poolWormholeSerpent,
   _poolWornPowerstone,
   _poolWortBoggartAuntie,
@@ -32045,6 +32048,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensWraithToken,
   _tokensWurmToken66,
   _tokensWurmTokenBaruWurmspeaker,
+  _tokensWurmTokenTrample,
   _tokensWurmToken,
   _tokensXXDemonTokenFlying,
   _tokensXXDinosaurTokenTrample,

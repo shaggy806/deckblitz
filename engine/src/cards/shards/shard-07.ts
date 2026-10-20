@@ -515,6 +515,7 @@ import _tokensPlantTokenDefender from "../tokens/plant-token-defender.js";
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
+import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
 import _tokensXXGolemTokenHaste from "../tokens/x-x-golem-token-haste.js";
 import _tokensZombieBerserkerToken from "../tokens/zombie-berserker-token.js";
 
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
     _tokensWraithToken,
+    _tokensWurmTokenTrample,
     _tokensXXGolemTokenHaste,
     _tokensZombieBerserkerToken,
   ],

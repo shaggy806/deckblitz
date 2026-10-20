@@ -20951,7 +20951,9 @@ export class Game {
       shuffleIntoLibrary: (target) => {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
-        if (object === undefined || object.zone !== "battlefield") return;
+        // A permanent, or a card in a graveyard: Worldspine Wurm's "shuffle
+        // it into its owner's library" as it's put there.
+        if (object === undefined || (object.zone !== "battlefield" && object.zone !== "graveyard")) return;
         // Its owner shuffles it into their library (rule 701.24a): put there,
         // then that library shuffled — even when a token ceased to exist on
         // the way or a replacement sent it elsewhere (Chaos Warp's ruling).
@@ -34429,6 +34431,9 @@ export class Game {
         if (card === undefined || card.zone !== "graveyard") return false;
         if (spec.from !== undefined && from !== spec.from) return false;
         if (spec.notFrom !== undefined && from === spec.notFrom) return false;
+        // "When this is put into a graveyard from anywhere" (Worldspine Wurm):
+        // only the card itself, which functions there (`fromGraveyard`).
+        if (spec.who === "self" && id !== self.id) return false;
         if (!this.matchesWhoPlayer(spec.who, card.owner, self)) return false;
         return (
           spec.filter === undefined ||
