@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-3707 already implemented / 1293 missing (marks refreshed 2026-10-20)
+3713 already implemented / 1287 missing (marks refreshed 2026-10-20)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -975,7 +975,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   979  Last March of the Ents                   {6}{G}{G}        Sorcery
 [ ]   980  Moraug, Fury of Akoum                    {4}{R}{R}        Legendary Creature — Minotaur Warrior
 [ ]   981  Inspiring Statuary                       {3}              Artifact
-[ ]   982  Blightsteel Colossus                     {12}             Artifact Creature — Phyrexian Golem
+[x]   982  Blightsteel Colossus                     {12}             Artifact Creature — Phyrexian Golem
 [x]   983  Kardur, Doomscourge                      {2}{B}{R}        Legendary Creature — Demon Berserker
 [x]   984  Mask of Memory                           {2}              Artifact — Equipment
 [x]   985  Kodama of the East Tree                  {4}{G}{G}        Legendary Creature — Spirit
@@ -2286,10 +2286,10 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2293  Umbral Mantle                            {3}              Artifact — Equipment
 [x]  2294  Lightning Strike                         {1}{R}           Instant
 [ ]  2295  The Cabbage Merchant                     {2}{G}           Legendary Creature — Human Citizen
-[ ]  2296  Nexus of Fate                            {5}{U}{U}        Instant
+[x]  2296  Nexus of Fate                            {5}{U}{U}        Instant
 [x]  2297  Blur                                     {2}{U}           Instant
 [x]  2298  Rest in Peace                            {1}{W}           Enchantment
-[ ]  2299  Grafted Exoskeleton                      {4}              Artifact — Equipment
+[x]  2299  Grafted Exoskeleton                      {4}              Artifact — Equipment
 [x]  2300  Elvish Visionary                         {1}{G}           Creature — Elf Shaman
 [x]  2301  Brago, King Eternal                      {2}{W}{U}        Legendary Creature — Spirit Noble
 [x]  2302  Sheltering Landscape                     {0}              Land
@@ -2398,7 +2398,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2405  Mimic Vat                                {3}              Artifact
 [x]  2406  Outpost Siege                            {3}{R}           Enchantment
 [x]  2407  Naturalize                               {1}{G}           Instant
-[ ]  2408  Darksteel Colossus                       {11}             Artifact Creature — Golem
+[x]  2408  Darksteel Colossus                       {11}             Artifact Creature — Golem
 [x]  2409  Codex Shredder                           {1}              Artifact
 [x]  2410  Liliana's Caress                         {1}{B}           Enchantment
 [x]  2411  Wavebreak Hippocamp                      {2}{U}           Enchantment Creature — Horse Fish
@@ -3948,7 +3948,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3955  Composer of Spring                       {1}{G}           Creature — Satyr Bard
 [x]  3956  Broken Wings                             {2}{G}           Instant
 [x]  3957  Wilson, Refined Grizzly                  {1}{G}           Legendary Creature — Bear Warrior
-[ ]  3958  Solemnity                                {2}{W}           Enchantment
+[x]  3958  Solemnity                                {2}{W}           Enchantment
 [x]  3959  Slippery Bogbonder                       {3}{G}           Creature — Human Druid
 [x]  3960  Ramunap Ruins                            {0}              Land — Desert
 [ ]  3961  Scavenger's Talent                       {B}              Enchantment — Class
@@ -4463,7 +4463,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4470  Last Chance                              {R}{R}           Sorcery
 [ ]  4471  Swashbuckler Extraordinaire              {2}{R}           Creature — Dragon Rogue Warrior
 [x]  4472  Fireball                                 {X}{R}           Sorcery
-[ ]  4473  Abzan Charm                              {W}{B}{G}        Instant
+[x]  4473  Abzan Charm                              {W}{B}{G}        Instant
 [x]  4474  Nanogene Conversion                      {3}{U}           Sorcery
 [ ]  4475  Ob Nixilis, Captive Kingpin              {2}{B}{R}        Legendary Creature — Demon
 [x]  4476  Alpine Meadow                            {0}              Snow Land — Mountain Plains
