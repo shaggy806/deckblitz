@@ -172,7 +172,6 @@ there and move this line to `COMPLETED.md`.
 - **A trigger's top-level `trigger-object` condition is always false**: it only works inside a `conditional` (Obscura Ascendancy used a filter plus a resolution check).
 - **`cast-now`'s `play` plays a land only from exile**: "play a land from the top of your library" (Ziatora's Envoy) is refused.
 - **A debug entry's enters trigger waits a priority round** (117.5): `debugSpawn` with `announceEntry` (the harness's `enter`) leaves the trigger pending until the next step.
-- **"Exile … until this leaves the battlefield" returns through a trigger** (610.3): the return should be an immediate one-shot effect, not a leaves-the-battlefield ability on the stack (48 cards — Banishing Light, Borrowed Time…).
 - **"Cast from your graveyard" checks the zone, not whose graveyard** (Patrician Geist, Green Goblin): a spell cast from an opponent's graveyard also gets the discount.
 - **`look-and-choose` to exile always links the card to its source** (607.2a): Shadow Kin's exile is linked, so a copied "return the linked card" ability could return it.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
@@ -193,7 +192,6 @@ there and move this line to `COMPLETED.md`.
 - **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **The least X a top-of-library cast allows is searched only up to the mana a player can make.**
 - **Not modeled**: battles, dungeons/Initiative, banding, Companion, snow sources, word-replacing text change (612.2).
-- **An O-Ring's return is a triggered ability, not rule 610.3's one-shot effect.**
 - **End-step token removal resolves without the stack** (603.7, 701.21a).
 - **Replacement order is chosen for the affected player, never asked** (616.1).
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**

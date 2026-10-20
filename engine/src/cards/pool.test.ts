@@ -195,19 +195,20 @@ describe("triggered mana abilities", () => {
 });
 
 describe("exile until this leaves the battlefield", () => {
-  // `exile { untilSourceLeaves }` only exiles and marks the card; the return
-  // is the card's own `leaves-battlefield` ability running
-  // `return-exiled-by-source` (rule 610.3). Vault Guardsman shipped without
-  // one, so what it exiled never came back.
-  it("every card that exiles this way carries the return", () => {
+  // `exile { untilSourceLeaves }` returns the card itself as the source
+  // leaves — rule 610.3's one-shot effect, not a triggered ability. A
+  // `leaves-battlefield` ability running `return-exiled-by-source` beside it
+  // would be a second, empty trigger on the stack (and one that card text
+  // like Banishing Light's doesn't have).
+  it("no card that exiles this way also carries a return trigger", () => {
     const untilLeaves = /"kind":"exile"[^{}]*"untilSourceLeaves":true/;
-    const unreturned = [...POOL_CARDS, ...TOKEN_CARDS]
+    const doubled = [...POOL_CARDS, ...TOKEN_CARDS]
       .filter((def) => {
         const json = JSON.stringify(def);
-        return untilLeaves.test(json) && !json.includes('"return-exiled-by-source"');
+        return untilLeaves.test(json) && json.includes('"return-exiled-by-source"');
       })
       .map((def) => def.name);
-    expect(unreturned).toEqual([]);
+    expect(doubled).toEqual([]);
   });
 });
 

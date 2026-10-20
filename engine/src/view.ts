@@ -305,7 +305,7 @@ export interface VisibleObject {
   readonly preparedSpell?: ObjectId;
   readonly preparedBy?: ObjectId;
   /** On a permanent: the cards in exile linked to it — what an O-Ring holds
-   * until it leaves (rule 720.2 — Banishing Light), or cards exiled with it
+   * until it leaves (rule 610.3 — Banishing Light), or cards exiled with it
    * that it lets someone play (Theater of Horrors, Maralen), or exiled with
    * it (rule 607.2a — a hideaway card, Mosswort Bridge's). Ids only: a
    * card exiled face down (rule 406.3) is in the list, but its identity

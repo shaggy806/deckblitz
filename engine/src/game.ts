@@ -17988,7 +17988,7 @@ export class Game {
     // "Until [this] leaves the battlefield" (rule 610.4): right after the
     // event — so a wrath that took Oubliette with it doesn't reach what it
     // held.
-    if (batch.phaseInAfter.length > 0) this.phaseInUntilLeft(batch.phaseInAfter);
+    if (batch.phaseInAfter.length > 0) this.afterUntilSourcesLeft(batch.phaseInAfter);
     if (batch.deferred.length === 0 || batch.left.length + batch.deferred.length < 2) return;
     // The other deferred commanders too: whichever of them is answered
     // later still left with the ones answered first (the seed drops any
@@ -20618,6 +20618,11 @@ export class Game {
         this.exileByEffect(target, untilSourceLeaves === true ? source : undefined);
         // "…with a croak counter on it": on the card this put there.
         const exiled = target.kind === "object" ? this.state.objects[target.object] : undefined;
+        // "Until [this] leaves the battlefield" (rule 610.3): it comes back
+        // as the source leaves in the stint it's in now.
+        if (untilSourceLeaves === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before) {
+          exiled.exiledUntil = { source, zoneChangeCount: this.state.objects[source]?.zoneChangeCount ?? 0 };
+        }
         // "Cards you exiled" (Haldan): this effect's controller exiled it.
         if (exiled?.zone === "exile" && exiled.zoneChangeCount !== before) exiled.exiledByPlayer = controller;
         if (
@@ -27405,6 +27410,34 @@ export class Game {
     return order;
   }
 
+  /** Whether any card waits in exile "until" its source leaves (610.3). */
+  private anyExiledUntil(): boolean {
+    return this.state.zones.shared.exile.some((id) => this.state.objects[id]?.exiledUntil !== undefined);
+  }
+
+  /** The one-shot effects "until [this] leaves the battlefield" creates once
+   * one of `left` has left (rules 610.3, 610.4): what phased out until then
+   * phases in, and what was exiled until then returns. */
+  private afterUntilSourcesLeft(left: readonly { readonly source: ObjectId; readonly zoneChangeCount: number }[]): void {
+    this.phaseInUntilLeft(left);
+    this.returnUntilLeft(left);
+  }
+
+  /** What was exiled "until" one of `left` left the battlefield, in the
+   * stint it left, returns to the battlefield under its owner's control —
+   * all at once (rule 610.3, 610.3d), right after that event and without
+   * the stack. A token exiled this way ceased to exist (111.7); a card that
+   * moved on from exile since lost the link. */
+  private returnUntilLeft(left: readonly { readonly source: ObjectId; readonly zoneChangeCount: number }[]): void {
+    const returning = this.state.zones.shared.exile.filter((id) => {
+      const object = this.state.objects[id];
+      const until = object?.exiledUntil;
+      if (until === undefined || object.isToken) return false;
+      return left.some((l) => l.source === until.source && l.zoneChangeCount === until.zoneChangeCount);
+    });
+    if (returning.length > 0) this.returnExiledCards(returning);
+  }
+
   /** What phased out "until" one of `left` left the battlefield, in the
    * stint it left, phases in (rule 610.4) — tapped, if it said so. One that
    * has phased in some other way since isn't waiting on it any more (610.4a). */
@@ -33660,11 +33693,12 @@ export class Game {
     object.entry = entry;
     object.castFrom = undefined;
     delete object.convokedBy;
-    // The O-Ring link (rule 720.2) dies with any move: a card that leaves
+    // The O-Ring link (rule 610.3) dies with any move: a card that leaves
     // exile some other way is no longer the one the Banishing Light took, so
     // nothing comes back when the Light does. `exileByEffect` sets this
     // *after* its own move, so an exile doesn't clear its own mark.
     object.exiledBy = undefined;
+    object.exiledUntil = undefined;
     // And who exiled it ("cards you exiled" — Haldan): that was this stint.
     object.exiledByPlayer = undefined;
     // Likewise a delayed flicker return's link (Norin the Wary, rule 610.3).
@@ -33895,12 +33929,13 @@ export class Game {
         else this.endWhileSourceEffects([id]);
       }
       // What phased out "until [this] leaves the battlefield" phases in
-      // (rule 610.4) — right after the event it left in.
+      // (rule 610.4), and what was exiled until then returns (610.3) —
+      // right after the event it left in.
       const stint = object.lastKnown?.zoneChangeCount;
-      if (stint !== undefined && phasedOutIds(this.state).length > 0) {
+      if (stint !== undefined && (phasedOutIds(this.state).length > 0 || this.anyExiledUntil())) {
         const left = { source: id, zoneChangeCount: stint };
         if (this.leaveBatch !== null) this.leaveBatch.phaseInAfter.push(left);
-        else this.phaseInUntilLeft([left]);
+        else this.afterUntilSourcesLeft([left]);
       }
     }
     if (leftGraveyard !== undefined) this.noteGraveyardDeparture(id, leftGraveyard);

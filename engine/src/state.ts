@@ -151,10 +151,18 @@ export interface GameObject {
   /**
    * This card is in exile because of an "exile until ~ leaves the
    * battlefield" ability, and this is the id of the permanent that did it
-   * (rule 720.2 — Banishing Light). Set *after* the move to exile, since
+   * (rule 610.3 — Banishing Light). Set *after* the move to exile, since
    * `moveObject` clears zone-scoped state on the way.
    */
   exiledBy?: ObjectId;
+  /**
+   * Exiled "until [source] leaves the battlefield" (rule 610.3 — Banishing
+   * Light): the source and the stint it was in. When that source leaves the
+   * battlefield in that stint, the card returns at once, under its owner's
+   * control — a one-shot effect right after the event, not a triggered
+   * ability (`returnUntilLeft`). Cleared by any move, like `exiledBy`.
+   */
+  exiledUntil?: { readonly source: ObjectId; readonly zoneChangeCount: number };
   /**
    * The player whose effect put this card into exile — what "cards **you
    * exiled**" means (Haldan, Avid Arcanist's `playFromExile.exiledByYou`).

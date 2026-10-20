@@ -49,13 +49,5 @@ export default defineCard({
       resolve: null,
       text: ENTER_TEXT,
     },
-    {
-      // The exile's linked return (rule 610.3).
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this creature leaves the battlefield, return the exiled card.",
-    },
   ],
 });

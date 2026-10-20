@@ -21,16 +21,6 @@ export default defineCard({
       resolve: null,
       text: ENTER_TEXT,
     },
-    {
-      // "Until this enchantment leaves the battlefield": `untilSourceLeaves`
-      // only links the exile (rule 610.3); the return is this trigger, as
-      // Banishing Light's. Without it the card never came back.
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this enchantment leaves the battlefield, return the exiled card.",
-    },
   ],
   activated: [
     {

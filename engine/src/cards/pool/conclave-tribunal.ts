@@ -20,12 +20,5 @@ export default defineCard({
         "When Conclave Tribunal enters, exile target nonland permanent an opponent " +
         "controls until Conclave Tribunal leaves the battlefield.",
     },
-    {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When Conclave Tribunal leaves the battlefield, return the exiled card.",
-    },
   ],
 });

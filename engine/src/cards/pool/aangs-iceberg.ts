@@ -38,13 +38,6 @@ export default defineCard({
       resolve: null,
       text: ENTER_TEXT,
     },
-    {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this enchantment leaves the battlefield, return the exiled card.",
-    },
   ],
   activated: [
     {

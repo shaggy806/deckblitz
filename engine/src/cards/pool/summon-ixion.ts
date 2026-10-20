@@ -58,12 +58,5 @@ export default defineCard({
     },
   ],
   triggered: [
-    {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this Saga leaves the battlefield, return the exiled card.",
-    },
   ],
 });

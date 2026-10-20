@@ -35,13 +35,6 @@ export default defineCard({
       text: EXILE,
     },
     // Its linked half (rule 610.3): the card comes back as the Aura leaves.
-    {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this Aura leaves the battlefield, return the exiled card.",
-    },
     // Fertile Ground's trigger.
     {
       trigger: { on: "tapped-for-mana", who: "attached" },

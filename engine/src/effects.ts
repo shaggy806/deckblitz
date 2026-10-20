@@ -1832,15 +1832,15 @@ export type EffectSpec =
        * as it's exiled, there. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
       /**
-       * Exile **until this source leaves the battlefield** — an "O-Ring"
-       * (Banishing Light, Conclave Tribunal). Rule 720.2: one ability that
-       * exiles and sets up a linked delayed trigger, so the card carries a
-       * second `leaves-battlefield` ability running `return-exiled-by-source`.
+       * Exile **until this source leaves the battlefield** (Banishing Light,
+       * Conclave Tribunal — rule 610.3): the card returns, under its owner's
+       * control, as a one-shot effect right after the source leaves — no
+       * triggered ability, so the card carries none (`GameObject.exiledUntil`,
+       * the source's stint; `exiledBy` for "cards exiled with it").
        *
-       * Marks `GameObject.exiledBy` with the source's id, which is what links
-       * the two halves. If the source has left before the exile happens (or
-       * is back as a new object), nothing is exiled at all (rule 610.3a/b); if
-       * the exiled card moves on to somewhere else, nothing comes back.
+       * If the source has left before the exile happens (or is back as a new
+       * object), nothing is exiled at all (rule 610.3a/b); if the exiled card
+       * moves on to somewhere else, nothing comes back.
        */
       readonly untilSourceLeaves?: boolean;
       /**

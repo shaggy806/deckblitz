@@ -45,14 +45,5 @@ export default defineCard({
       resolve: null,
       text: TEXT,
     },
-    {
-      // The return half of "until Abdel Adrian leaves the battlefield", as
-      // an O-Ring's is (AUTHORING, "An O-Ring").
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When Abdel Adrian leaves the battlefield, return the exiled cards.",
-    },
   ],
 });

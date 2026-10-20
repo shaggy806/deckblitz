@@ -20,12 +20,5 @@ export default defineCard({
         "When Banishing Light enters, exile target nonland permanent an opponent " +
         "controls until Banishing Light leaves the battlefield.",
     },
-    {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When Banishing Light leaves the battlefield, return the exiled card.",
-    },
   ],
 });

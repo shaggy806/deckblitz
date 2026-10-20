@@ -41,14 +41,6 @@ export default defineCard({
       resolve: null,
       text: ENTER_TEXT,
     },
-    {
-      // The other half of the O-Ring (rule 610.3a — Banishing Light's shape).
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this creature leaves the battlefield, return the exiled card.",
-    },
   ],
   activated: [
     {

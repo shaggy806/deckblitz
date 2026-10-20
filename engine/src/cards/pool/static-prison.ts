@@ -44,13 +44,6 @@ export default defineCard({
       text: ENTER_TEXT,
     },
     {
-      trigger: { on: "leaves-battlefield", who: "self" },
-      targets: [],
-      effect: { kind: "return-exiled-by-source" },
-      resolve: null,
-      text: "When this enchantment leaves the battlefield, return the exiled card.",
-    },
-    {
       trigger: { on: "step-begins", step: "precombat-main", who: "you" },
       targets: [],
       effect: {
