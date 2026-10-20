@@ -142,9 +142,11 @@ function addedCards() {
     const m = /^\s*name:\s*"((?:[^"\\]|\\.)*)"/m.exec(source) ?? /roomCard\(\s*"((?:[^"\\]|\\.)*)"/.exec(source);
     if (m === null) continue;
     const name = JSON.parse(`"${m[1]}"`);
-    // A double-faced card's back face has its own file but isn't a card a
-    // deck can hold: its front face (also new) stands for it.
-    const front = /^\s*faces:\s*\[\s*"((?:[^"\\]|\\.)*)"/m.exec(source);
+    // A double-faced card's back face, or a split card's half, has its own
+    // file but isn't a card a deck can hold: the faces list's first name (the
+    // front face, the whole split card — also new) stands for it. The list is
+    // inline (`faces: [...]`) or a `const FACES = [...]` the file shares.
+    const front = /^\s*(?:faces:|const FACES =)\s*\[\s*"((?:[^"\\]|\\.)*)"/m.exec(source);
     if (front !== null && JSON.parse(`"${front[1]}"`) !== name) continue;
     // Nor is a prepare spell that is no card of its own (rule 722 — Enroot):
     // the preparation card that names it (also new) brings it into games.
