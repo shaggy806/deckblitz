@@ -343,6 +343,7 @@ import _poolAmberGristleOmaul from "./pool/amber-gristle-omaul.js";
 import _poolAmbitionsCost from "./pool/ambitions-cost.js";
 import _poolAmbitiousAetherborn from "./pool/ambitious-aetherborn.js";
 import _poolAmbitiousAssault from "./pool/ambitious-assault.js";
+import _poolAmbitiousFarmhand from "./pool/ambitious-farmhand.js";
 import _poolAmblingStormshell from "./pool/ambling-stormshell.js";
 import _poolAmbrosiaWhiteheart from "./pool/ambrosia-whiteheart.js";
 import _poolAmbulatoryEdifice from "./pool/ambulatory-edifice.js";
@@ -1694,6 +1695,7 @@ import _poolBrilliantWings from "./pool/brilliant-wings.js";
 import _poolBrimstoneDragon from "./pool/brimstone-dragon.js";
 import _poolBrimstoneRoundup from "./pool/brimstone-roundup.js";
 import _poolBrimstoneTrebuchet from "./pool/brimstone-trebuchet.js";
+import _poolBrimstoneVandal from "./pool/brimstone-vandal.js";
 import _poolBrindleBoar from "./pool/brindle-boar.js";
 import _poolBrineShaman from "./pool/brine-shaman.js";
 import _poolBrinebarrowIntruder from "./pool/brinebarrow-intruder.js";
@@ -1888,8 +1890,10 @@ import _poolCampusRenovation from "./pool/campus-renovation.js";
 import _poolCanalMonitor from "./pool/canal-monitor.js";
 import _poolCancel from "./pool/cancel.js";
 import _poolCandelabraOfTawnos from "./pool/candelabra-of-tawnos.js";
+import _poolCandlegroveWitch from "./pool/candlegrove-witch.js";
 import _poolCandlekeepSage from "./pool/candlekeep-sage.js";
 import _poolCandlelightVigil from "./pool/candlelight-vigil.js";
+import _poolCandlelitCavalry from "./pool/candlelit-cavalry.js";
 import _poolCandlestick from "./pool/candlestick.js";
 import _poolCandyGrapple from "./pool/candy-grapple.js";
 import _poolCandyTrail from "./pool/candy-trail.js";
@@ -2993,7 +2997,9 @@ import _poolDawngladeRegent from "./pool/dawnglade-regent.js";
 import _poolDawnhandEulogist from "./pool/dawnhand-eulogist.js";
 import _poolDawnhartDisciple from "./pool/dawnhart-disciple.js";
 import _poolDawnhartGeist from "./pool/dawnhart-geist.js";
+import _poolDawnhartMentor from "./pool/dawnhart-mentor.js";
 import _poolDawnhartRejuvenator from "./pool/dawnhart-rejuvenator.js";
+import _poolDawnhartWardens from "./pool/dawnhart-wardens.js";
 import _poolDawningAngel from "./pool/dawning-angel.js";
 import _poolDawnrayArcher from "./pool/dawnray-archer.js";
 import _poolDawnsLightArcher from "./pool/dawns-light-archer.js";
@@ -3627,6 +3633,7 @@ import _poolDualSunTechnique from "./pool/dual-sun-technique.js";
 import _poolDualcasterMage from "./pool/dualcaster-mage.js";
 import _poolDubiousDelicacy from "./pool/dubious-delicacy.js";
 import _poolDuelTactics from "./pool/duel-tactics.js";
+import _poolDuelcraftTrainer from "./pool/duelcraft-trainer.js";
 import _poolDuelistOfDeepFaith from "./pool/duelist-of-deep-faith.js";
 import _poolDuelistsHeritage from "./pool/duelists-heritage.js";
 import _poolDuergarCaveGuard from "./pool/duergar-cave-guard.js";
@@ -4552,6 +4559,7 @@ import _poolFirescreamer from "./pool/firescreamer.js";
 import _poolFireshrieker from "./pool/fireshrieker.js";
 import _poolFireslinger from "./pool/fireslinger.js";
 import _poolFirespitterWhelp from "./pool/firespitter-whelp.js";
+import _poolFirmamentSage from "./pool/firmament-sage.js";
 import _poolFirstResponder from "./pool/first-responder.js";
 import _poolFirstSphereGargantua from "./pool/first-sphere-gargantua.js";
 import _poolFirstTimeFlyer from "./pool/first-time-flyer.js";
@@ -8984,6 +8992,7 @@ import _poolOculus from "./pool/oculus.js";
 import _poolOdiousTrow from "./pool/odious-trow.js";
 import _poolOdricBloodCursed from "./pool/odric-blood-cursed.js";
 import _poolOdricLunarchMarshal from "./pool/odric-lunarch-marshal.js";
+import _poolOdricsOutrider from "./pool/odrics-outrider.js";
 import _poolOdunosRiverTrawler from "./pool/odunos-river-trawler.js";
 import _poolOffenderAtLarge from "./pool/offender-at-large.js";
 import _poolOfferImmortality from "./pool/offer-immortality.js";
@@ -10552,6 +10561,7 @@ import _poolRiteOfTheMoth from "./pool/rite-of-the-moth.js";
 import _poolRitesOfFlourishing from "./pool/rites-of-flourishing.js";
 import _poolRithsAttendant from "./pool/riths-attendant.js";
 import _poolRitualChamber from "./pool/ritual-chamber.js";
+import _poolRitualGuardian from "./pool/ritual-guardian.js";
 import _poolRitualOfRejuvenation from "./pool/ritual-of-rejuvenation.js";
 import _poolRitualOfRestoration from "./pool/ritual-of-restoration.js";
 import _poolRitualOfSteel from "./pool/ritual-of-steel.js";
@@ -11194,6 +11204,7 @@ import _poolSeasideHaven from "./pool/seaside-haven.js";
 import _poolSeasonOfGrowth from "./pool/season-of-growth.js";
 import _poolSeasonOfRenewal from "./pool/season-of-renewal.js";
 import _poolSeasonalRitual from "./pool/seasonal-ritual.js";
+import _poolSeasonedCathar from "./pool/seasoned-cathar.js";
 import _poolSeasonedConsultant from "./pool/seasoned-consultant.js";
 import _poolSeasonedMarshal from "./pool/seasoned-marshal.js";
 import _poolSeasonedWarrenguard from "./pool/seasoned-warrenguard.js";
@@ -12317,6 +12328,7 @@ import _poolStalkingPredator from "./pool/stalking-predator.js";
 import _poolStalkingVengeance from "./pool/stalking-vengeance.js";
 import _poolStallForTime from "./pool/stall-for-time.js";
 import _poolStallOut from "./pool/stall-out.js";
+import _poolStalwartPathlighter from "./pool/stalwart-pathlighter.js";
 import _poolStalwartShieldBearers from "./pool/stalwart-shield-bearers.js";
 import _poolStalwartsOfOsgiliath from "./pool/stalwarts-of-osgiliath.js";
 import _poolStampedeSurfer from "./pool/stampede-surfer.js";
@@ -12694,6 +12706,7 @@ import _poolSunlitMarsh from "./pool/sunlit-marsh.js";
 import _poolSunmanePegasus from "./pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "./pool/sunpearl-kirin.js";
 import _poolSunpetalGrove from "./pool/sunpetal-grove.js";
+import _poolSunriseCavalier from "./pool/sunrise-cavalier.js";
 import _poolSunscapeApprentice from "./pool/sunscape-apprentice.js";
 import _poolSunscapeFamiliar from "./pool/sunscape-familiar.js";
 import _poolSunscapeMaster from "./pool/sunscape-master.js";
@@ -16164,6 +16177,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAmbitionsCost,
   _poolAmbitiousAetherborn,
   _poolAmbitiousAssault,
+  _poolAmbitiousFarmhand,
   _poolAmblingStormshell,
   _poolAmbrosiaWhiteheart,
   _poolAmbulatoryEdifice,
@@ -17515,6 +17529,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrimstoneDragon,
   _poolBrimstoneRoundup,
   _poolBrimstoneTrebuchet,
+  _poolBrimstoneVandal,
   _poolBrindleBoar,
   _poolBrineShaman,
   _poolBrinebarrowIntruder,
@@ -17709,8 +17724,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCanalMonitor,
   _poolCancel,
   _poolCandelabraOfTawnos,
+  _poolCandlegroveWitch,
   _poolCandlekeepSage,
   _poolCandlelightVigil,
+  _poolCandlelitCavalry,
   _poolCandlestick,
   _poolCandyGrapple,
   _poolCandyTrail,
@@ -18814,7 +18831,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDawnhandEulogist,
   _poolDawnhartDisciple,
   _poolDawnhartGeist,
+  _poolDawnhartMentor,
   _poolDawnhartRejuvenator,
+  _poolDawnhartWardens,
   _poolDawningAngel,
   _poolDawnrayArcher,
   _poolDawnsLightArcher,
@@ -19448,6 +19467,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDualcasterMage,
   _poolDubiousDelicacy,
   _poolDuelTactics,
+  _poolDuelcraftTrainer,
   _poolDuelistOfDeepFaith,
   _poolDuelistsHeritage,
   _poolDuergarCaveGuard,
@@ -20373,6 +20393,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFireshrieker,
   _poolFireslinger,
   _poolFirespitterWhelp,
+  _poolFirmamentSage,
   _poolFirstResponder,
   _poolFirstSphereGargantua,
   _poolFirstTimeFlyer,
@@ -24805,6 +24826,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOdiousTrow,
   _poolOdricBloodCursed,
   _poolOdricLunarchMarshal,
+  _poolOdricsOutrider,
   _poolOdunosRiverTrawler,
   _poolOffenderAtLarge,
   _poolOfferImmortality,
@@ -26373,6 +26395,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRitesOfFlourishing,
   _poolRithsAttendant,
   _poolRitualChamber,
+  _poolRitualGuardian,
   _poolRitualOfRejuvenation,
   _poolRitualOfRestoration,
   _poolRitualOfSteel,
@@ -27015,6 +27038,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeasonOfGrowth,
   _poolSeasonOfRenewal,
   _poolSeasonalRitual,
+  _poolSeasonedCathar,
   _poolSeasonedConsultant,
   _poolSeasonedMarshal,
   _poolSeasonedWarrenguard,
@@ -28138,6 +28162,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStalkingVengeance,
   _poolStallForTime,
   _poolStallOut,
+  _poolStalwartPathlighter,
   _poolStalwartShieldBearers,
   _poolStalwartsOfOsgiliath,
   _poolStampedeSurfer,
@@ -28515,6 +28540,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSunmanePegasus,
   _poolSunpearlKirin,
   _poolSunpetalGrove,
+  _poolSunriseCavalier,
   _poolSunscapeApprentice,
   _poolSunscapeFamiliar,
   _poolSunscapeMaster,

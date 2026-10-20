@@ -780,6 +780,11 @@ export function parseTrigger(clause) {
     return [{ on: "explores", who: "you", filter: { type: "creature" }, ...(m[1] ? { revealed: m[1] } : {}) }];
   }
   if (/^Whenever you attack$/.test(c)) return [{ on: "attack-with", who: "you", atLeast: 1 }];
+  // Day and night (rule 731.1a).
+  if (/^Whenever day becomes night or night becomes day$/.test(c)) return [{ on: "day-night-changes" }];
+  if ((m = /^Whenever (day becomes night|night becomes day)$/.exec(c))) {
+    return [{ on: "day-night-changes", becomes: m[1] === "day becomes night" ? "night" : "day" }];
+  }
   // "When the fourth plan counter is put on this enchantment" (a Plan, Midnight Clock): the placement crossing N.
   if ((m = /^When the (second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) (\S+) counter is put on (?:~|this [a-z]+)$/.exec(c))) {
     const nth = ["second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"].indexOf(m[1]) + 2;
@@ -1771,6 +1776,8 @@ export function parseFace(face, ctx = {}) {
     // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.
     if ((m = /^Plot ((?:\{[^}]+\})+)$/.exec(line))) { out.plot = { cost: m[1] }; continue; }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
+    // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
+    if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.
     if ((m = /^Sneak ((?:\{[^}]+\})+)$/.exec(line))) { out.sneak = { cost: m[1] }; continue; }
     // Web-slinging [cost] (rule 702.188a): an alternative cost returning a tapped creature you control.
@@ -1948,6 +1955,12 @@ export function parseFace(face, ctx = {}) {
       if (restrictions.includes("as a sorcery")) ability.sorcerySpeed = true;
       if (restrictions.includes("once each turn")) ability.oncePerTurn = true;
       if (restrictions.includes("during your turn")) ability.condition = { kind: "your-turn" };
+      // Coven's "Activate only if you control three or more creatures with
+      // different powers" (Midnight Hunt).
+      rest = rest.replace(/ Activate only if you control three or more creatures with different powers\.$/, () => {
+        ability.condition = { kind: "coven" };
+        return "";
+      });
       if (/Activate only /.test(rest)) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
@@ -2203,6 +2216,10 @@ const STATIC_CONDITION_SUFFIXES = [
  * raid (Alesha), morbid (Liliana's Devotee), void (Elegy Acolyte), revolt
  * (Hidden Stockpile) and celebration (Pests of Honor). */
 const INTERVENING_IFS = {
+  // Coven (Midnight Hunt) and day/night (rule 731.1).
+  "if you control three or more creatures with different powers,": { kind: "coven" },
+  "if it's night,": { kind: "day-night", is: "night" },
+  "if it's day,": { kind: "day-night", is: "day" },
   "if you attacked this turn,": { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
   "if a creature died this turn,": { kind: "creature-died-this-turn" },
   "if a nonland permanent left the battlefield this turn or a spell was warped this turn,": VOID_CONDITION,

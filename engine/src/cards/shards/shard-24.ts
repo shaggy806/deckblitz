@@ -333,6 +333,7 @@ import _poolSeafaringWerewolf from "../pool/seafaring-werewolf.js";
 import _poolSeagrafSkaab from "../pool/seagraf-skaab.js";
 import _poolSeamRip from "../pool/seam-rip.js";
 import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
+import _poolSeasonedCathar from "../pool/seasoned-cathar.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
@@ -803,6 +804,7 @@ const shard: CardShard = {
     _poolSeagrafSkaab,
     _poolSeamRip,
     _poolSearingSpearAskari,
+    _poolSeasonedCathar,
     _poolSeedshipImpact,
     _poolSeiferAlmasy,
     _poolSelflessPoliceCaptain,

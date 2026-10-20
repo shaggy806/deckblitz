@@ -160,6 +160,7 @@ import _poolFerocification from "../pool/ferocification.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
+import _poolFirmamentSage from "../pool/firmament-sage.js";
 import _poolFissure from "../pool/fissure.js";
 import _poolFlourishingGrapple from "../pool/flourishing-grapple.js";
 import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
@@ -688,6 +689,7 @@ const shard: CardShard = {
     _poolFierceWitchstalker,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
+    _poolFirmamentSage,
     _poolFissure,
     _poolFlourishingGrapple,
     _poolFlowstoneStrike,

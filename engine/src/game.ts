@@ -18248,6 +18248,12 @@ export class Game {
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
         );
+      case "day-night-changes":
+        return (
+          event.type === "day-night-changed" &&
+          event.previous !== null &&
+          (spec.becomes === undefined || event.value === spec.becomes)
+        );
       case "trains":
         return (
           event.type === "counter-added" &&
@@ -26129,8 +26135,9 @@ export class Game {
    */
   private setDayNight(value: "day" | "night"): void {
     if (this.state.dayNight === value) return;
+    const previous = this.state.dayNight;
     this.state.dayNight = value;
-    this.emit({ type: "day-night-changed", value });
+    this.emit({ type: "day-night-changed", value, previous });
     for (const id of [...this.state.zones.shared.battlefield]) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
@@ -33764,6 +33771,11 @@ export class Game {
         } else if (entering.transformed) {
           object.face = 1;
         }
+      }
+      // "If it's neither day nor night, it becomes day as this creature
+      // enters" (Brimstone Vandal) — the same as a daybound card's (731.1).
+      if (this.state.dayNight === null && this.registry.get(rulesTextName(object)).becomesDayAsEnters) {
+        this.setDayNight("day");
       }
       // A Saga enters with a lore counter (rule 714.3a), firing its chapter I
       // ability — two under Doubling Season, firing chapter II as well. A

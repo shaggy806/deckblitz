@@ -387,6 +387,7 @@ import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
 import _poolSummitProwler from "../pool/summit-prowler.js";
 import _poolSummoningMateria from "../pool/summoning-materia.js";
 import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
+import _poolSunriseCavalier from "../pool/sunrise-cavalier.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
 import _poolSwiftbladeVindicator from "../pool/swiftblade-vindicator.js";
 import _poolSwiftwingAssailant from "../pool/swiftwing-assailant.js";
@@ -874,6 +875,7 @@ const shard: CardShard = {
     _poolSummitProwler,
     _poolSummoningMateria,
     _poolSunderTheGateway,
+    _poolSunriseCavalier,
     _poolSuperShredder,
     _poolSwiftbladeVindicator,
     _poolSwiftwingAssailant,

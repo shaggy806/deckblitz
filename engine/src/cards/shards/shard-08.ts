@@ -67,6 +67,7 @@ import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
 import _poolCalderaLake from "../pool/caldera-lake.js";
 import _poolCallTheGatewatch from "../pool/call-the-gatewatch.js";
+import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
@@ -92,6 +93,7 @@ import _poolDainsCompany from "../pool/dains-company.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
+import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
 import _poolDeathsprout from "../pool/deathsprout.js";
 import _poolDeception from "../pool/deception.js";
@@ -595,6 +597,7 @@ const shard: CardShard = {
     _poolCabalEvangel,
     _poolCalderaLake,
     _poolCallTheGatewatch,
+    _poolCandlegroveWitch,
     _poolCandlestick,
     _poolCaptiveWeird,
     _poolCarnageAltar,
@@ -620,6 +623,7 @@ const shard: CardShard = {
     _poolDanithaSpearOfAgony,
     _poolDarksteelAxe,
     _poolDavenantArcher,
+    _poolDawnhartWardens,
     _poolDeathcurseOgre,
     _poolDeathsprout,
     _poolDeception,

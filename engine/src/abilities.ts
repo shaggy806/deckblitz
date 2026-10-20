@@ -1012,6 +1012,17 @@ export type TriggerSpec =
     }
   | {
       /**
+       * "Whenever day becomes night or night becomes day" (rule 731.1a): the
+       * game lost one designation and gained the other. The first "it
+       * becomes day" (from neither) isn't one. `becomes` narrows it to one
+       * direction ("whenever night becomes day"). Sourceless of any player:
+       * it fires for every permanent with it, whoever's turn it is.
+       */
+      readonly on: "day-night-changes";
+      readonly becomes?: "day" | "night";
+    }
+  | {
+      /**
        * "When this creature exploits a creature" (rule 702.110b): its
        * exploit ability's controller sacrificed a creature as that ability
        * resolved (the `sacrifice` with `exploit: true` that `exploit()`

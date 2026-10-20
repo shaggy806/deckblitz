@@ -14,6 +14,7 @@ import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
+import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
@@ -61,6 +62,7 @@ import _poolBrilliantPlan from "../pool/brilliant-plan.js";
 import _poolCabarettiInitiate from "../pool/cabaretti-initiate.js";
 import _poolCancel from "../pool/cancel.js";
 import _poolCandlelightVigil from "../pool/candlelight-vigil.js";
+import _poolCandlelitCavalry from "../pool/candlelit-cavalry.js";
 import _poolCantWakeUp from "../pool/cant-wake-up.js";
 import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
@@ -512,6 +514,7 @@ const shard: CardShard = {
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
     _poolAltarsReap,
+    _poolAmbitiousFarmhand,
     _poolAmbushWolf,
     _poolAmuletOfVigor,
     _poolAngelicSleuth,
@@ -559,6 +562,7 @@ const shard: CardShard = {
     _poolCabarettiInitiate,
     _poolCancel,
     _poolCandlelightVigil,
+    _poolCandlelitCavalry,
     _poolCantWakeUp,
     _poolCaptainAmericaTeamLeader,
     _poolCarrionCall,

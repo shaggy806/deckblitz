@@ -699,6 +699,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Seafaring Werewolf": "https://cards.scryfall.io/art_crop/back/a/b/ab17c8fa-4c06-4542-848a-e3f2f9f47c27.jpg",
   "Searstep Pathway": "https://cards.scryfall.io/art_crop/back/0/c/0ce39a19-f51d-4a35-ae80-5b82eb15fcff.jpg",
   "Seasonal Ritual": "https://cards.scryfall.io/art_crop/back/2/a/2a0d430f-da84-4752-940c-8457c525aac9.jpg",
+  "Seasoned Cathar": "https://cards.scryfall.io/art_crop/back/3/6/36cb9b12-98a3-4770-9ae0-a3b02f057c2e.jpg",
   "Secret Rendezvous": "9be712b3-14ed-4a73-b3d3-5b76b2c5db64",
   "Seek Thrills": "https://cards.scryfall.io/art_crop/back/3/f/3f5acc0d-33a6-476f-95ca-a1ad788334dd.jpg",
   "Seek the Beast": "https://cards.scryfall.io/art_crop/back/7/2/72c130e2-1e17-4996-a5ae-231155d68261.jpg",

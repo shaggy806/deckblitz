@@ -423,6 +423,7 @@ import _poolSquirmingEmergence from "../pool/squirming-emergence.js";
 import _poolSramSeniorEdificer from "../pool/sram-senior-edificer.js";
 import _poolSramsExpertise from "../pool/srams-expertise.js";
 import _poolStalkingPredator from "../pool/stalking-predator.js";
+import _poolStalwartPathlighter from "../pool/stalwart-pathlighter.js";
 import _poolStalwartsOfOsgiliath from "../pool/stalwarts-of-osgiliath.js";
 import _poolStarlingAerialAlly from "../pool/starling-aerial-ally.js";
 import _poolStarlitSoothsayer from "../pool/starlit-soothsayer.js";
@@ -945,6 +946,7 @@ const shard: CardShard = {
     _poolSramSeniorEdificer,
     _poolSramsExpertise,
     _poolStalkingPredator,
+    _poolStalwartPathlighter,
     _poolStalwartsOfOsgiliath,
     _poolStarlingAerialAlly,
     _poolStarlitSoothsayer,

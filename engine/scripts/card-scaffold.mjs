@@ -207,6 +207,7 @@ function faceSource(face, ctx) {
     plot: parsed.plot,
     mayhem: parsed.mayhem,
     rebound: parsed.rebound,
+    becomesDayAsEnters: parsed.becomesDayAsEnters,
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,
     impending: parsed.impending,

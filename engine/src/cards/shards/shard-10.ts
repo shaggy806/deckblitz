@@ -124,6 +124,7 @@ import _poolDragonbackAssault from "../pool/dragonback-assault.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
+import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
 import _poolEclipsedMerrow from "../pool/eclipsed-merrow.js";
@@ -278,6 +279,7 @@ import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
 import _poolOashraCultivator from "../pool/oashra-cultivator.js";
+import _poolOdricsOutrider from "../pool/odrics-outrider.js";
 import _poolOgreBattledriver from "../pool/ogre-battledriver.js";
 import _poolOldRutstein from "../pool/old-rutstein.js";
 import _poolOnduGiant from "../pool/ondu-giant.js";
@@ -622,6 +624,7 @@ const shard: CardShard = {
     _poolDreadShade,
     _poolDryadsRevival,
     _poolDuelTactics,
+    _poolDuelcraftTrainer,
     _poolDutyBeyondDeath,
     _poolEchoOfDusk,
     _poolEclipsedMerrow,
@@ -776,6 +779,7 @@ const shard: CardShard = {
     _poolNorthPoleGates,
     _poolNullpriestOfOblivion,
     _poolOashraCultivator,
+    _poolOdricsOutrider,
     _poolOgreBattledriver,
     _poolOldRutstein,
     _poolOnduGiant,

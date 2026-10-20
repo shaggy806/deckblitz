@@ -56,6 +56,7 @@ import _poolBoonBringerValkyrie from "../pool/boon-bringer-valkyrie.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
+import _poolBrimstoneVandal from "../pool/brimstone-vandal.js";
 import _poolBroodbirthViper from "../pool/broodbirth-viper.js";
 import _poolBruvacTheGrandiloquent from "../pool/bruvac-the-grandiloquent.js";
 import _poolBulwarkGiant from "../pool/bulwark-giant.js";
@@ -553,6 +554,7 @@ const shard: CardShard = {
     _poolBottomlessPit,
     _poolBountifulPromenade,
     _poolBrazenUpstart,
+    _poolBrimstoneVandal,
     _poolBroodbirthViper,
     _poolBruvacTheGrandiloquent,
     _poolBulwarkGiant,

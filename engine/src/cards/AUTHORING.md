@@ -1322,6 +1322,10 @@ atLeast: N }`. The emblem's "legendary and can't be blocked by creatures with
 greater power" is built in. Not yet: "a creature other than ~", "your
 Ring-bearer's power", and Nazgûl's nine-copy deck rule.
 
+**Coven** (Innistrad: Midnight Hunt's ability word) is the condition `{ kind: "coven" }`: three or more distinct powers among the creatures you control, read as it's checked — an intervening-if's `condition` ("at the beginning of combat on your turn, if you control three or more creatures with different powers", checked again on resolution) or an activated ability's "Activate only if …". The scaffolder writes both.
+
+**Day and night** (rule 731): "whenever day becomes night or night becomes day" is `{ on: "day-night-changes" }` (`becomes: "night"` for one direction) — the first "it becomes day", from neither, isn't one (731.1a). "If it's neither day nor night, it becomes day as this creature enters" is `becomesDayAsEnters: true` (daybound does it through the keyword); "if it's night" is the condition `{ kind: "day-night", is: "night" }`; "it becomes night" is the `day-night` effect.
+
 **Training** (rule 702.149 — Innistrad: Midnight Hunt and Crimson Vow) is `training()` from `helpers.ts` in `triggered` (the scaffolder writes it out): an `attacks` trigger with `withGreaterPower: true` — this creature and another with greater power attacking, judged as it triggers — putting a +1/+1 counter on it marked `training: true`. "Whenever this creature trains" (702.149c) is `{ on: "trains", who: "self" }`, which only that marked counter fires. "Creatures you control have training" grants `training()` with `grantsTriggered`, each instance triggering apart (702.149b).
 
 **Exploit** (rule 702.110 — Dragons of Tarkir, Crimson Vow) is `exploit()` in `triggered`: an enters trigger that `may` `sacrifice` a creature with `exploit: true`. "When this creature exploits a creature" (702.110b) is `{ on: "exploits", who: "self" }` — it fires when the creature sacrificed itself, too — and "whenever a creature you control exploits a nontoken creature" (Skull Skaab) is `who: "you-control"` with a `filter` on the creature sacrificed, as it last existed.

@@ -652,6 +652,20 @@ function evalStaticCondition(
     }
     case "threshold":
       return state.zones.perPlayer[you].graveyard.length >= 7;
+    case "day-night":
+      return state.dayNight === condition.is;
+    case "coven": {
+      const powers = new Set<number>();
+      for (const id of state.zones.shared.battlefield) {
+        const object = state.objects[id];
+        if (object === undefined || object.controller !== you) continue;
+        const chars = computeCharacteristics(state, registry, id);
+        if (!chars.types.includes("creature")) continue;
+        powers.add(chars.power);
+        if (powers.size >= 3) return true;
+      }
+      return false;
+    }
     case "cards-in-graveyard": {
       let n = 0;
       for (const id of state.zones.perPlayer[you].graveyard) {

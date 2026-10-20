@@ -702,6 +702,15 @@ export type StaticCondition =
   | { readonly kind: "cards-in-exile"; readonly atLeast: number; readonly filter?: CardFilter }
   /** Threshold (rule 702.27) — seven or more cards in your graveyard. */
   | { readonly kind: "threshold" }
+  /** "If it's night" / "if it's day" (rule 731.1): the game has that
+   * designation now — neither before it first becomes day or night. Wolf
+   * Strike. */
+  | { readonly kind: "day-night"; readonly is: "day" | "night" }
+  /** Coven (Midnight Hunt's ability word): "if you control three or more
+   * creatures with different powers" — at least three distinct powers among
+   * the creatures you control, read as it's checked. Identical tokens in a
+   * stack share one power. */
+  | { readonly kind: "coven" }
   /** At least `atLeast` cards in your graveyard matching `filter` — Oversold
    * Cemetery's "if you have four or more creature cards in your graveyard".
    * Threshold is this with seven and no filter. */
@@ -2438,6 +2447,11 @@ export interface CardDefinition {
    * the printed cost, targets, or effect at all, unlike `overload`/`kicker`.
    */
   readonly convoke: boolean;
+  /** "If it's neither day nor night, it becomes day as this creature
+   * enters" (rule 731.1 — Midnight Hunt's day/night cards that aren't
+   * daybound): it becomes day as the permanent enters, if it's neither. A
+   * daybound card does this through its keyword (702.145d). */
+  readonly becomesDayAsEnters: boolean;
   /**
    * Delve (rule 702.66 — Treasure Cruise): "For each generic mana in this
    * spell's total cost, you may exile a card from your graveyard rather than
@@ -2947,6 +2961,7 @@ const PRINTED_ABILITY: {
   freeCastIf: (def) => def.freeCastIf !== null,
   alternativeCost: (def) => def.alternativeCost !== null,
   convoke: (def) => def.convoke,
+  becomesDayAsEnters: (def) => def.becomesDayAsEnters,
   delve: (def) => def.delve,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
@@ -3124,6 +3139,7 @@ interface CardDraft {
     readonly tapCreatures: { readonly count: number; readonly filter: CardFilter };
   };
   convoke?: boolean;
+  becomesDayAsEnters?: boolean;
   delve?: boolean;
   selfCostReduction?: {
     readonly condition: StaticCondition;
@@ -3276,6 +3292,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     freeCastIf: draft.freeCastIf ?? null,
     alternativeCost: draft.alternativeCost ?? null,
     convoke: draft.convoke ?? false,
+    becomesDayAsEnters: draft.becomesDayAsEnters ?? false,
     delve: draft.delve ?? false,
     selfCostReduction: draft.selfCostReduction ?? null,
     costPerExtraTarget: draft.costPerExtraTarget ?? null,

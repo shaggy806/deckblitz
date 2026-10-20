@@ -161,9 +161,12 @@ export type GameEvent =
       readonly first: boolean;
     })
   | (Base & {
-      /** The game became day or night (rule 726 — ROADMAP Phase 10b). */
+      /** The game became day or night (rule 731 — ROADMAP Phase 10b).
+       * `previous` is what it was: `null` the first time (neither), which
+       * isn't "day becomes night or night becomes day" (731.1a). */
       readonly type: "day-night-changed";
       readonly value: "day" | "night";
+      readonly previous: "day" | "night" | null;
     })
   | (Base & {
       /** A `counter` effect / ward tried to counter a spell that can't be
