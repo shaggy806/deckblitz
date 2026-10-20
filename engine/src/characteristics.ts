@@ -620,7 +620,9 @@ function evalStaticCondition(
       let n = 0;
       for (const id of state.zones.shared.exile) {
         const card = state.objects[id];
-        if (card === undefined || card.isToken) continue;
+        // A "card" (rule 108.2): not a token, nor a copy of a card — a
+        // prepared spell's copy waiting in exile (`becomePrepared`).
+        if (card === undefined || card.isToken || card.isCopy === true) continue;
         if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) continue;
         n += 1;
       }

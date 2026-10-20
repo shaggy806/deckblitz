@@ -272,6 +272,16 @@ describe("Dreadlight Monstrosity", () => {
     activate(game, crab, 0);
     expect(keywords(game, crab).has("unblockable")).toBe(true);
   });
+
+  it("a prepared spell's copy in exile isn't a card you own (rule 108.2)", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const crab = spawn(game, "Dreadlight Monstrosity");
+    const year = spawn(game, "Studious First-Year");
+    game.debugApplyEffect(A, { kind: "become-prepared", target: 0 }, [ref(year)]);
+    expect(game.state.zones.shared.exile.some((id) => game.state.objects[id].isCopy === true)).toBe(true);
+    expect(() => activate(game, crab, 0)).toThrow();
+  });
 });
 
 describe("Markov Waltzer", () => {
