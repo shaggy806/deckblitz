@@ -23271,6 +23271,16 @@ export class Game {
   /** Shuffle `player`'s whole library with the game's seeded RNG, and
    * announce it. Shared by library searches and "shuffle ~ into its owner's
    * library" (White Sun's Zenith). */
+  /** Whether `object` carries its own "if this would be put into a graveyard
+   * from anywhere, … shuffle it into its owner's library instead" right now:
+   * printed (by its rules text), and not a permanent that has lost its
+   * abilities or is face down. */
+  private shufflesItselfInstead(object: GameObject): boolean {
+    if (!this.registry.has(rulesTextName(object))) return false;
+    if (!this.registry.get(rulesTextName(object)).shufflesIntoLibraryInstead) return false;
+    return object.zone !== "battlefield" || (object.faceDown === undefined && !hasLostAbilities(object));
+  }
+
   private shuffleLibraryOf(player: PlayerId): void {
     const library = this.state.zones.perPlayer[player].library;
     const order = shuffle([...library], this.rng);
@@ -33442,6 +33452,23 @@ export class Game {
           );
         }
       }
+    }
+
+    // "If this would be put into a graveyard from anywhere, reveal it and
+    // shuffle it into its owner's library instead" (Blightsteel Colossus):
+    // the card's own replacement, ahead of Rest in Peace's exile — the order
+    // its owner would pick (rule 616.1). Its owner reveals it where it was
+    // hidden or about to be (a hand, a library); a commander is still
+    // offered the command zone on its way into the library (903.9b).
+    if (to === "graveyard" && this.shufflesItselfInstead(object)) {
+      const owner = object.owner;
+      const from = object.zone;
+      if (from === "hand" || from === "library" || from === "battlefield") {
+        this.emit({ type: "cards-revealed", player: owner, objects: [id], from });
+      }
+      const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "shuffle" });
+      this.shuffleLibraryOf(owner);
+      return moved;
     }
 
     // Rest in Peace (rule 614): whatever would be put into a graveyard is

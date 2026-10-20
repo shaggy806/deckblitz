@@ -46,6 +46,7 @@ import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBladestitchedSkaab from "../pool/bladestitched-skaab.js";
 import _poolBlastingStation from "../pool/blasting-station.js";
 import _poolBlightsowerThallid from "../pool/blightsower-thallid.js";
+import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
@@ -573,6 +574,7 @@ const shard: CardShard = {
     _poolBladestitchedSkaab,
     _poolBlastingStation,
     _poolBlightsowerThallid,
+    _poolBlightsteelColossus,
     _poolBloomvineRegent,
     _poolBlurSliver,
     _poolBobReluctantHydraAgent,

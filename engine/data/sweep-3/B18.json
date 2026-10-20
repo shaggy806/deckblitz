@@ -290,6 +290,13 @@
         "engine/src/cards/pool/conduit-of-ruin.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Nexus of Fate",
+      "files": [
+        "engine/src/cards/pool/nexus-of-fate.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -413,13 +420,6 @@
         "new:combat-damage-to-you-trigger"
       ],
       "why": "'Whenever a creature deals combat damage to you': the per-creature combat damage trigger can't narrow the player dealt damage to you."
-    },
-    {
-      "name": "Nexus of Fate",
-      "needs": [
-        "new:shuffle-into-library-instead"
-      ],
-      "why": "'If it would be put into a graveyard from anywhere, reveal it and shuffle it into its owner's library instead'; only 'exile instead' exists. Darksteel Colossus waits on it too."
     },
     {
       "name": "Grafted Exoskeleton",

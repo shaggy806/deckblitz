@@ -732,6 +732,13 @@
         "engine/src/cards/pool/teysa-opulent-oligarch.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Progenitus",
+      "files": [
+        "engine/src/cards/pool/progenitus.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1259,13 +1266,6 @@
         "new:cost-reduction-permanents-sacrificed-this-turn"
       ],
       "why": "no 'permanents sacrificed this turn' cost-reduction count"
-    },
-    {
-      "name": "Progenitus",
-      "needs": [
-        "new:shuffle-into-library-instead-of-graveyard"
-      ],
-      "why": "no 'if this would be put into a graveyard from anywhere, shuffle it into its owner's library instead' replacement"
     },
     {
       "name": "Fiery Gambit",

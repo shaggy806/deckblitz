@@ -260,6 +260,13 @@
         "engine/src/cards/pool/abundant-growth.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Darksteel Colossus",
+      "files": [
+        "engine/src/cards/pool/darksteel-colossus.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -283,13 +290,6 @@
         "new:evoke-exile-card-cost"
       ],
       "why": "Evoke—Exile a red card from your hand: evoke takes only a mana cost (evokeCostsOf)."
-    },
-    {
-      "name": "Darksteel Colossus",
-      "needs": [
-        "new:self-shuffle-replacement-from-anywhere"
-      ],
-      "why": "\"If it would be put into a graveyard from anywhere, shuffle it into its owner's library instead\" (BACKLOG, Engine rules gaps)."
     },
     {
       "name": "Perch Protection",

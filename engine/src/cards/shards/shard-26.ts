@@ -223,6 +223,7 @@ import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKnife from "../pool/knife.js";
 import _poolKnightsOfDolAmroth from "../pool/knights-of-dol-amroth.js";
+import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
@@ -717,6 +718,7 @@ const shard: CardShard = {
     _poolKinTreeSeverance,
     _poolKnife,
     _poolKnightsOfDolAmroth,
+    _poolLegacyWeapon,
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
     _poolLiesaShroudOfDusk,

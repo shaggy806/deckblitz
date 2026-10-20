@@ -2580,6 +2580,17 @@ export interface CardDefinition {
    * `null` for a normal card. */
   readonly exchangeTextOnEnter: CardFilter | null;
   /**
+   * "If this would be put into a graveyard from anywhere, reveal it and
+   * shuffle it into its owner's library instead" (Blightsteel Colossus,
+   * Nexus of Fate, Progenitus) — the card's own replacement effect, from
+   * every zone: a death, a discard, a mill, a countered or resolved spell.
+   * Not while it's a permanent that has lost its abilities. Beside another
+   * replacement (Rest in Peace), the order its owner would pick: this one
+   * (rule 616.1). A commander shuffled this way is still offered the
+   * command zone (903.9b).
+   */
+  readonly shufflesIntoLibraryInstead: boolean;
+  /**
    * Devour N (rule 702.82): "As this object enters, you may sacrifice any
    * number of creatures. This permanent enters with N +1/+1 counters on it
    * for each creature sacrificed this way." `filter` is what may be devoured
@@ -3004,6 +3015,7 @@ const PRINTED_ABILITY: {
   splitSecond: (def) => def.splitSecond,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
+  shufflesIntoLibraryInstead: (def) => def.shufflesIntoLibraryInstead,
   devour: (def) => def.devour !== null,
   chooseCreatureTypeOnEnter: (def) => def.chooseCreatureTypeOnEnter,
   chooseOnEnter: (def) => def.chooseOnEnter !== null,
@@ -3187,6 +3199,7 @@ interface CardDraft {
   splitSecond?: boolean;
   copyOnEnter?: CopyOnEnter;
   exchangeTextOnEnter?: CardFilter;
+  shufflesIntoLibraryInstead?: boolean;
   devour?: { readonly multiplier: number; readonly filter: CardFilter };
   chooseCreatureTypeOnEnter?: boolean;
   chooseOnEnter?: readonly string[];
@@ -3335,6 +3348,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     splitSecond: draft.splitSecond ?? false,
     copyOnEnter: draft.copyOnEnter ?? null,
     exchangeTextOnEnter: draft.exchangeTextOnEnter ?? null,
+    shufflesIntoLibraryInstead: draft.shufflesIntoLibraryInstead ?? false,
     devour: draft.devour ?? null,
     chooseCreatureTypeOnEnter: draft.chooseCreatureTypeOnEnter ?? false,
     chooseOnEnter: draft.chooseOnEnter ?? readAheadChoices(draft),

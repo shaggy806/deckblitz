@@ -316,6 +316,7 @@ import _poolPrimevalHerald from "../pool/primeval-herald.js";
 import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
+import _poolProgenitus from "../pool/progenitus.js";
 import _poolPromptoArgentum from "../pool/prompto-argentum.js";
 import _poolProtectorOfGondor from "../pool/protector-of-gondor.js";
 import _poolPuppetCrafting from "../pool/puppet-crafting.js";
@@ -819,6 +820,7 @@ const shard: CardShard = {
     _poolPrismaticUndercurrents,
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
+    _poolProgenitus,
     _poolPromptoArgentum,
     _poolProtectorOfGondor,
     _poolPuppetCrafting,

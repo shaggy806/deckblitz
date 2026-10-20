@@ -149,6 +149,13 @@
     "engine/src/cards/pool/scapeshift.ts"
    ],
    "tested": true
+  },
+  {
+   "name": "Blightsteel Colossus",
+   "files": [
+    "engine/src/cards/pool/blightsteel-colossus.ts"
+   ],
+   "tested": true
   }
  ],
  "blocked": [
@@ -231,13 +238,6 @@
     "trigger:counters-put-first-time-each-turn"
    ],
    "why": "Mentor exists; the granted 'for the first time each turn' counters trigger doesn't (once per turn isn't the same: it counts events from before the ability was there)."
-  },
-  {
-   "name": "Blightsteel Colossus",
-   "needs": [
-    "replacement:shuffle-into-library-instead"
-   ],
-   "why": "Infect exists; 'if it would be put into a graveyard from anywhere, shuffle it into its owner's library instead' doesn't."
   },
   {
    "name": "Great Train Heist",

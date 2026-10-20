@@ -4032,6 +4032,11 @@ clause (section 9):
   infect or wither damage, a move (122.5), a Saga's lore counter — a cost that would put them
   can't be paid, and a permanent enters without them unless the static enters with it.
   Energy counts as a player counter; a card in exile isn't a permanent and still gets them.
+- A card's own "if this would be put into a graveyard from anywhere, reveal it and shuffle it
+  into its owner's library instead" (Blightsteel Colossus, Nexus of Fate, Progenitus) is the
+  definition's `shufflesIntoLibraryInstead: true`, not a static: it works from every zone (a
+  death, a discard, a mill, a resolved or countered spell), goes ahead of Rest in Peace's exile
+  (the order its owner would pick), and not once the permanent has lost its abilities.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets

@@ -120,6 +120,7 @@ import _poolCryptCreeper from "../pool/crypt-creeper.js";
 import _poolCryptbreaker from "../pool/cryptbreaker.js";
 import _poolCustodianOfTheTrove from "../pool/custodian-of-the-trove.js";
 import _poolDarkConfidant from "../pool/dark-confidant.js";
+import _poolDarksteelColossus from "../pool/darksteel-colossus.js";
 import _poolDauntlessDismantler from "../pool/dauntless-dismantler.js";
 import _poolDawnToDusk from "../pool/dawn-to-dusk.js";
 import _poolDealGoneBad from "../pool/deal-gone-bad.js";
@@ -631,6 +632,7 @@ const shard: CardShard = {
     _poolCryptbreaker,
     _poolCustodianOfTheTrove,
     _poolDarkConfidant,
+    _poolDarksteelColossus,
     _poolDauntlessDismantler,
     _poolDawnToDusk,
     _poolDealGoneBad,

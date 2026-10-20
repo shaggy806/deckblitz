@@ -269,6 +269,7 @@ import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNebulaDragon from "../pool/nebula-dragon.js";
 import _poolNecrosquito from "../pool/necrosquito.js";
+import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
 import _poolNightmareShepherd from "../pool/nightmare-shepherd.js";
@@ -742,6 +743,7 @@ const shard: CardShard = {
     _poolNashiSearcherInTheDark,
     _poolNebulaDragon,
     _poolNecrosquito,
+    _poolNexusOfFate,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
     _poolNightmareShepherd,

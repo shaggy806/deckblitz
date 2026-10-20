@@ -372,6 +372,13 @@
         "engine/src/cards/pool/batterskull.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Blightsteel Colossus",
+      "files": [
+        "engine/src/cards/pool/blightsteel-colossus.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -396,13 +403,6 @@
         "decision:variable-target-count"
       ],
       "why": "'Any number of target creature cards that each have a different mana value X or less': a variable target count with a constraint across the set."
-    },
-    {
-      "name": "Blightsteel Colossus",
-      "needs": [
-        "new:infect"
-      ],
-      "why": "Infect, and 'if it would be put into a graveyard from anywhere, shuffle it into its owner's library instead'."
     },
     {
       "name": "Approach of the Second Sun",

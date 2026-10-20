@@ -46,10 +46,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton): no
   unattach event or trigger — an equip elsewhere, the Equipment leaving, the creature ceasing to
   be a creature.
-- **A card's own "if this would be put into a graveyard from anywhere, reveal it and shuffle it
-  into its owner's library instead"** (Blightsteel Colossus, the Darksteel Colossus family) — a
-  self-replacement working from every zone, which beside Rest in Peace also needs its owner to
-  choose the order (rule 616.1).
 - **A set rule on a graveyard choice**: "up to two creature cards with total mana value 4 or
   less" (Lively Dirge's second mode). `together` exists only on a library search
   (`zone-choice-together.ts` takes a new rule cheaply, and the clients already read it).

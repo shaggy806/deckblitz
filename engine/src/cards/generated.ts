@@ -1343,6 +1343,7 @@ import _poolBlightning from "./pool/blightning.js";
 import _poolBlightreaperThallid from "./pool/blightreaper-thallid.js";
 import _poolBlightsoilDruid from "./pool/blightsoil-druid.js";
 import _poolBlightsowerThallid from "./pool/blightsower-thallid.js";
+import _poolBlightsteelColossus from "./pool/blightsteel-colossus.js";
 import _poolBlightstepPathway from "./pool/blightstep-pathway.js";
 import _poolBlightwidow from "./pool/blightwidow.js";
 import _poolBlindCreeper from "./pool/blind-creeper.js";
@@ -2988,6 +2989,7 @@ import _poolDarkslickShores from "./pool/darkslick-shores.js";
 import _poolDarkstarAugur from "./pool/darkstar-augur.js";
 import _poolDarksteelAxe from "./pool/darksteel-axe.js";
 import _poolDarksteelCitadel from "./pool/darksteel-citadel.js";
+import _poolDarksteelColossus from "./pool/darksteel-colossus.js";
 import _poolDarksteelForge from "./pool/darksteel-forge.js";
 import _poolDarksteelGargoyle from "./pool/darksteel-gargoyle.js";
 import _poolDarksteelIngot from "./pool/darksteel-ingot.js";
@@ -7478,6 +7480,7 @@ import _poolLeechGauntlet from "./pool/leech-gauntlet.js";
 import _poolLeechriddenSwamp from "./pool/leechridden-swamp.js";
 import _poolLeelaSevateemWarrior from "./pool/leela-sevateem-warrior.js";
 import _poolLeeringOnlooker from "./pool/leering-onlooker.js";
+import _poolLegacyWeapon from "./pool/legacy-weapon.js";
 import _poolLegionExtruder from "./pool/legion-extruder.js";
 import _poolLegionLeadership from "./pool/legion-leadership.js";
 import _poolLegionLieutenant from "./pool/legion-lieutenant.js";
@@ -8865,6 +8868,7 @@ import _poolNewBenalia from "./pool/new-benalia.js";
 import _poolNewGenerationsTechnique from "./pool/new-generations-technique.js";
 import _poolNewHorizons from "./pool/new-horizons.js";
 import _poolNewsHelicopter from "./pool/news-helicopter.js";
+import _poolNexusOfFate from "./pool/nexus-of-fate.js";
 import _poolNexusWardens from "./pool/nexus-wardens.js";
 import _poolNeyamShaiMurad from "./pool/neyam-shai-murad.js";
 import _poolNezahalPrimalTide from "./pool/nezahal-primal-tide.js";
@@ -9885,6 +9889,7 @@ import _poolProfoundJourney from "./pool/profound-journey.js";
 import _poolProftConsultingDetective from "./pool/proft-consulting-detective.js";
 import _poolProftsEideticMemory from "./pool/profts-eidetic-memory.js";
 import _poolProgenitorMimic from "./pool/progenitor-mimic.js";
+import _poolProgenitus from "./pool/progenitus.js";
 import _poolProjectDeathlokSoldier from "./pool/project-deathlok-soldier.js";
 import _poolProjektorInspector from "./pool/projektor-inspector.js";
 import _poolPrologueToPhyresis from "./pool/prologue-to-phyresis.js";
@@ -17334,6 +17339,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlightreaperThallid,
   _poolBlightsoilDruid,
   _poolBlightsowerThallid,
+  _poolBlightsteelColossus,
   _poolBlightstepPathway,
   _poolBlightwidow,
   _poolBlindCreeper,
@@ -18979,6 +18985,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDarkstarAugur,
   _poolDarksteelAxe,
   _poolDarksteelCitadel,
+  _poolDarksteelColossus,
   _poolDarksteelForge,
   _poolDarksteelGargoyle,
   _poolDarksteelIngot,
@@ -23469,6 +23476,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeechriddenSwamp,
   _poolLeelaSevateemWarrior,
   _poolLeeringOnlooker,
+  _poolLegacyWeapon,
   _poolLegionExtruder,
   _poolLegionLeadership,
   _poolLegionLieutenant,
@@ -24856,6 +24864,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNewGenerationsTechnique,
   _poolNewHorizons,
   _poolNewsHelicopter,
+  _poolNexusOfFate,
   _poolNexusWardens,
   _poolNeyamShaiMurad,
   _poolNezahalPrimalTide,
@@ -25876,6 +25885,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProftConsultingDetective,
   _poolProftsEideticMemory,
   _poolProgenitorMimic,
+  _poolProgenitus,
   _poolProjectDeathlokSoldier,
   _poolProjektorInspector,
   _poolPrologueToPhyresis,
