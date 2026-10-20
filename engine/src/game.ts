@@ -28953,13 +28953,19 @@ export class Game {
         const entry = { object: event.object, count: object?.stackCount ?? 1 };
         (history.left ??= []).push({ ...entry, stint: lki.zoneChangeCount });
         if (event.toZone !== "graveyard" && event.toZone !== "exile") return;
-        if (event.toZone === "exile") (history.exiled ??= []).push(entry);
-        else if (lki.types.includes("creature")) (history.died ??= []).push(entry);
+        // Each with the stint it left, so "another creature died" can tell
+        // the source's own earlier stint (a different object, rule 400.7)
+        // from the one it's in now.
+        if (event.toZone === "exile") (history.exiled ??= []).push({ ...entry, stint: lki.zoneChangeCount });
+        else if (lki.types.includes("creature")) (history.died ??= []).push({ ...entry, stint: lki.zoneChangeCount });
         return;
       }
       case "permanent-sacrificed": {
         const history = historyOf(event.player);
-        if (history !== undefined) (history.sacrificed ??= []).push({ object: event.object, count: 1 });
+        const stint = (this.state.objects[event.object]?.lastKnown ?? this.state.ceasedTokens?.[event.object])?.zoneChangeCount;
+        if (history !== undefined) {
+          (history.sacrificed ??= []).push({ object: event.object, count: 1, ...(stint !== undefined ? { stint } : {}) });
+        }
         return;
       }
       case "scried": {

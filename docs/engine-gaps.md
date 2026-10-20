@@ -60,7 +60,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   trigger would fire once per object for Brago or Eerie Interlude rather than once (rule 603.2c:
   one event, one trigger). Nothing in the pool reads that batch yet; Aang, Airbending Master
   (`trigger:leaves-batch-trigger`) will, so fix it with that trigger (found building airbend, batch 65).
-- **A `turn-history` condition's `excludeSelf` compares object ids.** Rule 400.7 makes a permanent that left and came back a new object, but an object keeps its id across zone changes, so a `turn-history` `died` (or `left`) condition with `excludeSelf` skips the source's own earlier stints too: White Glove Gourmand that died and came back the same turn doesn't count its own death as "another Human" (Éowyn and Wary Farmer use the same shape). **Fix (outline):** record the stint (`zoneChangeCount`) with each turn-history entry and exclude only the source's current stint. Found by batch 90's agents (2026-10-16).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
   (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast

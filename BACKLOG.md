@@ -180,7 +180,6 @@ there and move this line to `COMPLETED.md`.
 - **Suspend's time-counter triggers don't use the stack** (702.62a).
 - **A mass effect's filter can't read a dynamic amount**: `battlefieldMatching` gives `{ amount }` operands no context, so they match nothing (Zar Ojanen waits; check existing cards).
 - **"It gains 'if this would leave, exile it'" is a flag, not an ability** (613.1f): `exileIfItWouldLeave` survives ability loss (Geth, Thane of Contracts; Llanowar Greenwidow waits).
-- **A `turn-history` condition's `excludeSelf` compares object ids** (400.7): a permanent that died and came back is a new object, but White Glove Gourmand's "another Human died" skips its own earlier death.
 - **"Whenever a creature you control deals combat damage to that player this turn"** (Great Train Heist).
 - **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton).
 - **A card's own "if this would be put into a graveyard from anywhere … shuffle it into its library instead"** (Blightsteel Colossus).

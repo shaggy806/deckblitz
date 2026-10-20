@@ -928,7 +928,7 @@ function evalStaticCondition(
         condition.what,
         condition.filter,
         you,
-        condition.excludeSelf === true ? source.id : undefined,
+        condition.excludeSelf === true ? { id: source.id, stint: source.zoneChangeCount ?? 0 } : undefined,
       );
       return n >= (condition.atLeast ?? 1);
     }
@@ -1177,8 +1177,9 @@ export function damageDealtThisTurn(
  * `asEntered` snapshot). A permanent that has left the battlefield is matched as it
  * last existed there — a `left` entry as it was in the stint it left (rule
  * 603.10a), though it has come back and left again since; a card put into a
- * graveyard (`descended`), as it is now. `except` leaves one object out
- * ("another Human").
+ * graveyard (`descended`), as it is now. `except` leaves one object out in
+ * one stint ("another Human" — the source as it is now): the same card in
+ * an earlier stint was a different object (rule 400.7) and counts.
  */
 export function turnHistoryCount(
   state: GameState,
@@ -1187,12 +1188,15 @@ export function turnHistoryCount(
   what: TurnHistoryKind,
   filter: CardFilter | undefined,
   you: PlayerId,
-  except?: ObjectId,
+  except?: { readonly id: ObjectId; readonly stint: number },
 ): number {
   let n = 0;
   for (const player of players) {
     for (const entry of state.players[player]?.turnHistory?.[what] ?? []) {
-      if (entry.object === except) continue;
+      if (except !== undefined && entry.object === except.id) {
+        const at = entry.stint ?? entry.asEntered?.zoneChangeCount;
+        if (at === undefined || at === except.stint) continue;
+      }
       if (filter !== undefined) {
         const snapshot =
           entry.asEntered ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));

@@ -2879,10 +2879,12 @@ export interface CombatId {
 export interface TurnHistoryEntry {
   readonly object: ObjectId;
   readonly count: number;
-  /** For a permanent that left the battlefield (`left`): the battlefield
-   * stint it left — its `LastKnownInfo.zoneChangeCount` — so it's matched as
-   * it was *then* (rule 603.10a), not as a later stint left it, once it has
-   * come back and left again. */
+  /** For a permanent that left the battlefield (`left`, `died`, `exiled`,
+   * `sacrificed`): the battlefield stint it left — its
+   * `LastKnownInfo.zoneChangeCount` — so it's matched as it was *then* (rule
+   * 603.10a), not as a later stint left it, and so "another creature died"
+   * can tell the source's own earlier stint (a different object, 400.7)
+   * from the one it's in now. */
   readonly stint?: number;
   /** For a permanent that entered (`entered`): what it was as it entered,
    * after its replacement effects — so "if an artifact entered the
