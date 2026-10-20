@@ -129,6 +129,7 @@ import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
 import _poolEiganjoExemplar from "../pool/eiganjo-exemplar.js";
 import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
+import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
@@ -604,6 +605,7 @@ const shard: CardShard = {
     _poolEiganjoExemplar,
     _poolElementalSpectacle,
     _poolEleshNornGrandCenobite,
+    _poolElvishHunter,
     _poolElvishVisionary,
     _poolEntsFury,
     _poolErode,

@@ -649,6 +649,13 @@
         "engine/src/cards/pool/sylvan-awakening.ts"
       ],
       "tested": true
+    },
+    {
+      "name": "Kefnet's Monument",
+      "files": [
+        "engine/src/cards/pool/kefnets-monument.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -847,13 +854,6 @@
         "new:cant-pay-life-or-sacrifice-creatures-for-costs"
       ],
       "why": "no static forbidding paying life or sacrificing creatures as costs"
-    },
-    {
-      "name": "Kefnet's Monument",
-      "needs": [
-        "new:doesnt-untap-without-tapping"
-      ],
-      "why": "'doesn't untap during its controller's next untap step' exists only on the tap effect, which taps the creature; Kefnet's doesn't tap it"
     },
     {
       "name": "Secluded Glen",

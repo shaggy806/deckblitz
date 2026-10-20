@@ -1573,6 +1573,11 @@ export type EffectSpec =
        * (Junk Winder) — whoever controls it then; tapped by this or already
        * (`GameObject.skipsNextUntap`). */
       readonly doesntUntapNext?: boolean;
+      /** With `doesntUntapNext`: **only** that — "target creature doesn't
+       * untap during its controller's next untap step" with no "tap it"
+       * (Kefnet's Monument, Wall of Frost, Ajani Vengeant's +1): it stays
+       * tapped or untapped as it is. */
+      readonly onlyDoesntUntap?: boolean;
     }
   | {
       /** `target` accepts `"trigger-object"` for an untargeted "untap it"
@@ -5598,7 +5603,7 @@ export interface EffectApi {
     spec?: Extract<EffectSpec, { kind: "add-mana" }>,
   ): void;
   /** `doesntUntapNext`: see the `tap` {@link EffectSpec}. */
-  tapPermanent(target: TargetRef, doesntUntapNext?: boolean): void;
+  tapPermanent(target: TargetRef, doesntUntapNext?: boolean, onlyDoesntUntap?: boolean): void;
   /** `id` becomes prepared (rule 722.3a — `Game.becomePrepared`): each
    * token of a compacted stack, singly. */
   becomePrepared(id: ObjectId): void;
@@ -8407,7 +8412,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "tap": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.tapPermanent(target, spec.doesntUntapNext === true);
+      if (target !== undefined) ctx.tapPermanent(target, spec.doesntUntapNext === true, spec.onlyDoesntUntap === true);
       return;
     }
     case "untap": {

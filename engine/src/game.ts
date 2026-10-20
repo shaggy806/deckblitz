@@ -20406,16 +20406,17 @@ export class Game {
           spec === undefined ? undefined : this.manaTagFor(this.state.objects[source], spec),
           this.manaOriginOf(source),
         ),
-      tapPermanent: (target, doesntUntapNext) => {
+      tapPermanent: (target, doesntUntapNext, onlyDoesntUntap) => {
         if (doesntUntapNext !== true || target.kind !== "object") {
           this.setTapped(target, true);
           return;
         }
         if (this.state.objects[target.object]?.zone !== "battlefield") return;
         // Tapped or not already, its controller's next untap step passes it
-        // by — one token of a stack, not the rest.
+        // by — one token of a stack, not the rest. "Doesn't untap" alone
+        // leaves it as it is.
         const id = this.splitOneFromStack(target.object);
-        this.setTapped({ kind: "object", object: id }, true);
+        if (onlyDoesntUntap !== true) this.setTapped({ kind: "object", object: id }, true);
         const object = this.state.objects[id];
         object.skipsNextUntap = true;
       },

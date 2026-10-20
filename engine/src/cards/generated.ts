@@ -1000,6 +1000,7 @@ import _poolBarkchannelPathway from "./pool/barkchannel-pathway.js";
 import _poolBarkformHarvester from "./pool/barkform-harvester.js";
 import _poolBarkhideMauler from "./pool/barkhide-mauler.js";
 import _poolBarktoothWarbeard from "./pool/barktooth-warbeard.js";
+import _poolBarlsCage from "./pool/barls-cage.js";
 import _poolBaronAirshipKingdom from "./pool/baron-airship-kingdom.js";
 import _poolBaronBertramGraywater from "./pool/baron-bertram-graywater.js";
 import _poolBaronStruckerHydraOverlord from "./pool/baron-strucker-hydra-overlord.js";
@@ -3951,6 +3952,7 @@ import _poolElvishHandservant from "./pool/elvish-handservant.js";
 import _poolElvishHarbinger from "./pool/elvish-harbinger.js";
 import _poolElvishHerder from "./pool/elvish-herder.js";
 import _poolElvishHexhunter from "./pool/elvish-hexhunter.js";
+import _poolElvishHunter from "./pool/elvish-hunter.js";
 import _poolElvishHydromancer from "./pool/elvish-hydromancer.js";
 import _poolElvishLookout from "./pool/elvish-lookout.js";
 import _poolElvishLyrist from "./pool/elvish-lyrist.js";
@@ -6288,6 +6290,7 @@ import _poolHourOfDefeat from "./pool/hour-of-defeat.js";
 import _poolHourOfReckoning from "./pool/hour-of-reckoning.js";
 import _poolHourOfVictory from "./pool/hour-of-victory.js";
 import _poolHouseCartographer from "./pool/house-cartographer.js";
+import _poolHouseGuildmage from "./pool/house-guildmage.js";
 import _poolHoverBarrier from "./pool/hover-barrier.js";
 import _poolHoverguardObserver from "./pool/hoverguard-observer.js";
 import _poolHovermyr from "./pool/hovermyr.js";
@@ -7087,6 +7090,7 @@ import _poolKeeperOfTheQuietHour from "./pool/keeper-of-the-quiet-hour.js";
 import _poolKeepersOfTheFaith from "./pool/keepers-of-the-faith.js";
 import _poolKefkaCourtMage from "./pool/kefka-court-mage.js";
 import _poolKefkaRulerOfRuin from "./pool/kefka-ruler-of-ruin.js";
+import _poolKefnetsMonument from "./pool/kefnets-monument.js";
 import _poolKeiTakahashi from "./pool/kei-takahashi.js";
 import _poolKeigaTheTideStar from "./pool/keiga-the-tide-star.js";
 import _poolKeldonHalberdier from "./pool/keldon-halberdier.js";
@@ -11925,6 +11929,7 @@ import _poolSkyknightLegionnaire from "./pool/skyknight-legionnaire.js";
 import _poolSkyknightSquire from "./pool/skyknight-squire.js";
 import _poolSkyknightVanguard from "./pool/skyknight-vanguard.js";
 import _poolSkylasher from "./pool/skylasher.js";
+import _poolSkylineCascade from "./pool/skyline-cascade.js";
 import _poolSkylineDespot from "./pool/skyline-despot.js";
 import _poolSkylinePredator from "./pool/skyline-predator.js";
 import _poolSkymarchBloodletter from "./pool/skymarch-bloodletter.js";
@@ -11983,6 +11988,7 @@ import _poolSleddingOtterPenguin from "./pool/sledding-otter-penguin.js";
 import _poolSledgeClassSeedship from "./pool/sledge-class-seedship.js";
 import _poolSleekSchooner from "./pool/sleek-schooner.js";
 import _poolSleepCursedFaerie from "./pool/sleep-cursed-faerie.js";
+import _poolSleeperDart from "./pool/sleeper-dart.js";
 import _poolSleightOfHand from "./pool/sleight-of-hand.js";
 import _poolSliceFromTheShadows from "./pool/slice-from-the-shadows.js";
 import _poolSliceInTwain from "./pool/slice-in-twain.js";
@@ -12596,6 +12602,7 @@ import _poolStirringHopesinger from "./pool/stirring-hopesinger.js";
 import _poolStitchInTime from "./pool/stitch-in-time.js";
 import _poolStitchTogether from "./pool/stitch-together.js";
 import _poolStitchedAssistant from "./pool/stitched-assistant.js";
+import _poolStitchersGraft from "./pool/stitchers-graft.js";
 import _poolStitchersSupplier from "./pool/stitchers-supplier.js";
 import _poolStockUp from "./pool/stock-up.js";
 import _poolStockingThePantry from "./pool/stocking-the-pantry.js";
@@ -17002,6 +17009,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBarkformHarvester,
   _poolBarkhideMauler,
   _poolBarktoothWarbeard,
+  _poolBarlsCage,
   _poolBaronAirshipKingdom,
   _poolBaronBertramGraywater,
   _poolBaronStruckerHydraOverlord,
@@ -19953,6 +19961,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElvishHarbinger,
   _poolElvishHerder,
   _poolElvishHexhunter,
+  _poolElvishHunter,
   _poolElvishHydromancer,
   _poolElvishLookout,
   _poolElvishLyrist,
@@ -22290,6 +22299,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHourOfReckoning,
   _poolHourOfVictory,
   _poolHouseCartographer,
+  _poolHouseGuildmage,
   _poolHoverBarrier,
   _poolHoverguardObserver,
   _poolHovermyr,
@@ -23089,6 +23099,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKeepersOfTheFaith,
   _poolKefkaCourtMage,
   _poolKefkaRulerOfRuin,
+  _poolKefnetsMonument,
   _poolKeiTakahashi,
   _poolKeigaTheTideStar,
   _poolKeldonHalberdier,
@@ -27927,6 +27938,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkyknightSquire,
   _poolSkyknightVanguard,
   _poolSkylasher,
+  _poolSkylineCascade,
   _poolSkylineDespot,
   _poolSkylinePredator,
   _poolSkymarchBloodletter,
@@ -27985,6 +27997,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSledgeClassSeedship,
   _poolSleekSchooner,
   _poolSleepCursedFaerie,
+  _poolSleeperDart,
   _poolSleightOfHand,
   _poolSliceFromTheShadows,
   _poolSliceInTwain,
@@ -28598,6 +28611,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStitchInTime,
   _poolStitchTogether,
   _poolStitchedAssistant,
+  _poolStitchersGraft,
   _poolStitchersSupplier,
   _poolStockUp,
   _poolStockingThePantry,

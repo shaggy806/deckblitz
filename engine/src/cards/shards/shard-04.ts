@@ -29,6 +29,7 @@ import _poolAviationPioneer from "../pool/aviation-pioneer.js";
 import _poolAysenBureaucrats from "../pool/aysen-bureaucrats.js";
 import _poolBackOnTrack from "../pool/back-on-track.js";
 import _poolBaelothBarritylEntertainer from "../pool/baeloth-barrityl-entertainer.js";
+import _poolBarlsCage from "../pool/barls-cage.js";
 import _poolBaronyVampire from "../pool/barony-vampire.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
 import _poolBashToBits from "../pool/bash-to-bits.js";
@@ -523,6 +524,7 @@ const shard: CardShard = {
     _poolAysenBureaucrats,
     _poolBackOnTrack,
     _poolBaelothBarritylEntertainer,
+    _poolBarlsCage,
     _poolBaronyVampire,
     _poolBarrinMasterWizard,
     _poolBashToBits,

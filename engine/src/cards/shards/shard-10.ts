@@ -202,6 +202,7 @@ import _poolHobbitsSting from "../pool/hobbits-sting.js";
 import _poolHonoredKnightCaptain from "../pool/honored-knight-captain.js";
 import _poolHoodedHydra from "../pool/hooded-hydra.js";
 import _poolHopeEstheim from "../pool/hope-estheim.js";
+import _poolHouseGuildmage from "../pool/house-guildmage.js";
 import _poolHullbreakerHorror from "../pool/hullbreaker-horror.js";
 import _poolHuntedWitness from "../pool/hunted-witness.js";
 import _poolIanTheReckless from "../pool/ian-the-reckless.js";
@@ -707,6 +708,7 @@ const shard: CardShard = {
     _poolHonoredKnightCaptain,
     _poolHoodedHydra,
     _poolHopeEstheim,
+    _poolHouseGuildmage,
     _poolHullbreakerHorror,
     _poolHuntedWitness,
     _poolIanTheReckless,

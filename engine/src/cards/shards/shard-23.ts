@@ -401,6 +401,7 @@ import _poolSpiderwigBoggart from "../pool/spiderwig-boggart.js";
 import _poolSporecapSpider from "../pool/sporecap-spider.js";
 import _poolSpringbloomDruid from "../pool/springbloom-druid.js";
 import _poolStensiaUprising from "../pool/stensia-uprising.js";
+import _poolStitchersGraft from "../pool/stitchers-graft.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -905,6 +906,7 @@ const shard: CardShard = {
     _poolSporecapSpider,
     _poolSpringbloomDruid,
     _poolStensiaUprising,
+    _poolStitchersGraft,
     _poolStormHerd,
     _poolStrawSoldiers,
     _poolStripedRiverwinder,

@@ -384,6 +384,7 @@ import _poolSiegeZombie from "../pool/siege-zombie.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
+import _poolSkylineCascade from "../pool/skyline-cascade.js";
 import _poolSlaughterSinger from "../pool/slaughter-singer.js";
 import _poolSlinnVodaTheRisingDeep from "../pool/slinn-voda-the-rising-deep.js";
 import _poolSnarlingWarg from "../pool/snarling-warg.js";
@@ -871,6 +872,7 @@ const shard: CardShard = {
     _poolSigardaChampionOfLight,
     _poolSilverRaven,
     _poolSkithiryxTheBlightDragon,
+    _poolSkylineCascade,
     _poolSlaughterSinger,
     _poolSlinnVodaTheRisingDeep,
     _poolSnarlingWarg,

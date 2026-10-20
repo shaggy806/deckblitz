@@ -381,6 +381,7 @@ import _poolSkybladeOfTheLegion from "../pool/skyblade-of-the-legion.js";
 import _poolSkyshroudFalcon from "../pool/skyshroud-falcon.js";
 import _poolSkyskipperDuo from "../pool/skyskipper-duo.js";
 import _poolSleddingOtterPenguin from "../pool/sledding-otter-penguin.js";
+import _poolSleeperDart from "../pool/sleeper-dart.js";
 import _poolSlimyDualleech from "../pool/slimy-dualleech.js";
 import _poolSlinzaTheSpikedStampede from "../pool/slinza-the-spiked-stampede.js";
 import _poolSlithStrider from "../pool/slith-strider.js";
@@ -916,6 +917,7 @@ const shard: CardShard = {
     _poolSkyshroudFalcon,
     _poolSkyskipperDuo,
     _poolSleddingOtterPenguin,
+    _poolSleeperDart,
     _poolSlimyDualleech,
     _poolSlinzaTheSpikedStampede,
     _poolSlithStrider,
