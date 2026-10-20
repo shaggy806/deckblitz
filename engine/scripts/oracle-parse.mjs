@@ -1057,6 +1057,21 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if (re("investigate").test(s)) return { kind: "create-token", token: "Clue Token", count: 1 };
+  // Learn (rule 701.48a): the rummage alone — no deck here has a sideboard,
+  // so there's no Lesson outside the game to fetch (`learn()` in helpers.ts).
+  if (re("learn").test(s)) {
+    return {
+      kind: "may",
+      prompt: "Learn: discard a card to draw a card?",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "discard", target: "you", amount: 1 },
+          { kind: "conditional", condition: { kind: "this-way", what: "discarded" }, then: { kind: "draw", amount: 1 } },
+        ],
+      },
+    };
+  }
   // Amass [type] N (rule 701.47): "Amass Orcs 2." — the type singular.
   if ((m = re(`amass ([A-Z][a-z]+) (\\d+)`).exec(s))) {
     const plural = m[1];

@@ -167,6 +167,7 @@ import _poolGlarbCalamitysAugur from "../pool/glarb-calamitys-augur.js";
 import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
+import _poolGnarledProfessor from "../pool/gnarled-professor.js";
 import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
 import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
@@ -656,6 +657,7 @@ const shard: CardShard = {
     _poolGliderKids,
     _poolGlintWeaver,
     _poolGloriousCharge,
+    _poolGnarledProfessor,
     _poolGnottvoldHermit,
     _poolGoblinBlastRunner,
     _poolGoblinChampion,

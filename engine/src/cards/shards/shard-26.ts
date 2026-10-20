@@ -292,6 +292,7 @@ import _poolOpportunity from "../pool/opportunity.js";
 import _poolOpt from "../pool/opt.js";
 import _poolOrcSureshot from "../pool/orc-sureshot.js";
 import _poolOrderOfTheSacredBell from "../pool/order-of-the-sacred-bell.js";
+import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
@@ -796,6 +797,7 @@ const shard: CardShard = {
     _poolOpt,
     _poolOrcSureshot,
     _poolOrderOfTheSacredBell,
+    _poolOvergrownArch,
     _poolPacksBetrayal,
     _poolPearlMedallion,
     _poolPestProblem,

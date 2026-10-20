@@ -14,6 +14,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS, createDefaultRegistry, defineCard } from "../cards.js";
+import { learn } from "../cards/helpers.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -1073,6 +1074,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const fiend = face("Madness—{2}{B}, Pay 8 life.", "Creature — Demon");
     expect(fiend.madness).toBeUndefined();
     expect(fiend.complete).toBe(false);
+  });
+
+  it("learn (rule 701.48a): the rummage alone, as `learn()` writes it — no sideboard, so no Lesson to fetch", () => {
+    expect(parseSentence("Learn.", ctx())).toEqual(learn());
+    const eyetwitch = face(
+      "Flying\nWhen this creature dies, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)",
+      "Creature — Eye Bat",
+    );
+    expect(eyetwitch.triggered[0].effect).toEqual(learn());
+    expect(eyetwitch.complete).toBe(true);
   });
 
   it("venturing (rule 701.49): 'venture into the dungeon' and 'into Undercity'", () => {

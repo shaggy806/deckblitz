@@ -308,6 +308,7 @@ import _poolPippinWardenOfIsengard from "../pool/pippin-warden-of-isengard.js";
 import _poolPlagueNurse from "../pool/plague-nurse.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
+import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
 import _poolPravaOfTheSteelLegion from "../pool/prava-of-the-steel-legion.js";
@@ -821,6 +822,7 @@ const shard: CardShard = {
     _poolPlagueNurse,
     _poolPlanarBridge,
     _poolPlatedSpider,
+    _poolPoetsQuill,
     _poolPoisonTheWaters,
     _poolPowerbalance,
     _poolPravaOfTheSteelLegion,

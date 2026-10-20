@@ -208,6 +208,7 @@ import _poolHauntedGuardian from "../pool/haunted-guardian.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydrosurge from "../pool/hydrosurge.js";
 import _poolIgneousGolem from "../pool/igneous-golem.js";
+import _poolIgneousInspiration from "../pool/igneous-inspiration.js";
 import _poolIhsansShade from "../pool/ihsans-shade.js";
 import _poolIllicitShipment from "../pool/illicit-shipment.js";
 import _poolIllvoiGaleblade from "../pool/illvoi-galeblade.js";
@@ -716,6 +717,7 @@ const shard: CardShard = {
     _poolHydaelynTheMothercrystal,
     _poolHydrosurge,
     _poolIgneousGolem,
+    _poolIgneousInspiration,
     _poolIhsansShade,
     _poolIllicitShipment,
     _poolIllvoiGaleblade,

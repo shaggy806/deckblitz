@@ -88,6 +88,7 @@ import _poolCombustionMan from "../pool/combustion-man.js";
 import _poolConscriptedInfantry from "../pool/conscripted-infantry.js";
 import _poolCoordinatedClobbering from "../pool/coordinated-clobbering.js";
 import _poolCopperHostCrusher from "../pool/copper-host-crusher.js";
+import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
@@ -313,6 +314,7 @@ import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPrimaryResearch from "../pool/primary-research.js";
 import _poolPrimordialSage from "../pool/primordial-sage.js";
 import _poolPrizedGriffin from "../pool/prized-griffin.js";
+import _poolProfessorOfSymbology from "../pool/professor-of-symbology.js";
 import _poolPsychicCorrosion from "../pool/psychic-corrosion.js";
 import _poolPsychicFrog from "../pool/psychic-frog.js";
 import _poolPsychicWhorl from "../pool/psychic-whorl.js";
@@ -575,6 +577,7 @@ const shard: CardShard = {
     _poolConscriptedInfantry,
     _poolCoordinatedClobbering,
     _poolCopperHostCrusher,
+    _poolCramSession,
     _poolCremate,
     _poolCribSwap,
     _poolCudgelTroll,
@@ -800,6 +803,7 @@ const shard: CardShard = {
     _poolPrimaryResearch,
     _poolPrimordialSage,
     _poolPrizedGriffin,
+    _poolProfessorOfSymbology,
     _poolPsychicCorrosion,
     _poolPsychicFrog,
     _poolPsychicWhorl,

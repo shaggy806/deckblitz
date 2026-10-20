@@ -293,6 +293,7 @@ import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPlanarPortal from "../pool/planar-portal.js";
 import _poolPlanetaryAnnihilation from "../pool/planetary-annihilation.js";
 import _poolPlunderingBarbarian from "../pool/plundering-barbarian.js";
+import _poolPopQuiz from "../pool/pop-quiz.js";
 import _poolPowerBoost from "../pool/power-boost.js";
 import _poolPrimevalTitan from "../pool/primeval-titan.js";
 import _poolPrincessLucrezia from "../pool/princess-lucrezia.js";
@@ -784,6 +785,7 @@ const shard: CardShard = {
     _poolPlanarPortal,
     _poolPlanetaryAnnihilation,
     _poolPlunderingBarbarian,
+    _poolPopQuiz,
     _poolPowerBoost,
     _poolPrimevalTitan,
     _poolPrincessLucrezia,

@@ -24,6 +24,7 @@ import _poolApostleOfInvasion from "../pool/apostle-of-invasion.js";
 import _poolApprenticeWizard from "../pool/apprentice-wizard.js";
 import _poolArachnoidAdaptation from "../pool/arachnoid-adaptation.js";
 import _poolArcadesTheStrategist from "../pool/arcades-the-strategist.js";
+import _poolArcaneSubtraction from "../pool/arcane-subtraction.js";
 import _poolArcboundHybrid from "../pool/arcbound-hybrid.js";
 import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
@@ -135,6 +136,7 @@ import _poolEvolutionCharm from "../pool/evolution-charm.js";
 import _poolExclude from "../pool/exclude.js";
 import _poolExcoriate from "../pool/excoriate.js";
 import _poolExpensiveTaste from "../pool/expensive-taste.js";
+import _poolEyetwitch from "../pool/eyetwitch.js";
 import _poolFaerieInvaders from "../pool/faerie-invaders.js";
 import _poolFaerieMastermind from "../pool/faerie-mastermind.js";
 import _poolFalconAndRedwing from "../pool/falcon-and-redwing.js";
@@ -407,6 +409,7 @@ import _poolSpringLeafAvenger from "../pool/spring-leaf-avenger.js";
 import _poolSpymastersVault from "../pool/spymasters-vault.js";
 import _poolStaffOfEdenVaultsKey from "../pool/staff-of-eden-vaults-key.js";
 import _poolStaffOfZegon from "../pool/staff-of-zegon.js";
+import _poolStarPupil from "../pool/star-pupil.js";
 import _poolSteadfastCathar from "../pool/steadfast-cathar.js";
 import _poolStealEnchantment from "../pool/steal-enchantment.js";
 import _poolStickFearlessMentor from "../pool/stick-fearless-mentor.js";
@@ -544,6 +547,7 @@ const shard: CardShard = {
     _poolApprenticeWizard,
     _poolArachnoidAdaptation,
     _poolArcadesTheStrategist,
+    _poolArcaneSubtraction,
     _poolArcboundHybrid,
     _poolArchmageOfRunes,
     _poolArchonOfSunsGrace,
@@ -655,6 +659,7 @@ const shard: CardShard = {
     _poolExclude,
     _poolExcoriate,
     _poolExpensiveTaste,
+    _poolEyetwitch,
     _poolFaerieInvaders,
     _poolFaerieMastermind,
     _poolFalconAndRedwing,
@@ -927,6 +932,7 @@ const shard: CardShard = {
     _poolSpymastersVault,
     _poolStaffOfEdenVaultsKey,
     _poolStaffOfZegon,
+    _poolStarPupil,
     _poolSteadfastCathar,
     _poolStealEnchantment,
     _poolStickFearlessMentor,

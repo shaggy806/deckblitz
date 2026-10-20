@@ -360,6 +360,7 @@ import _poolSpellSnip from "../pool/spell-snip.js";
 import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
+import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
 import _poolStarlitAngel from "../pool/starlit-angel.js";
 import _poolStaunchCrewmate from "../pool/staunch-crewmate.js";
@@ -826,6 +827,7 @@ const shard: CardShard = {
     _poolSpiderManNoir,
     _poolSpikedCorridor,
     _poolSpiritMascot,
+    _poolSpitefulSquad,
     _poolSplendidReclamation,
     _poolStarlitAngel,
     _poolStaunchCrewmate,

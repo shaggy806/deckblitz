@@ -206,6 +206,7 @@ import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
 import _poolGruesomeRealization from "../pool/gruesome-realization.js";
 import _poolGuardChange from "../pool/guard-change.js";
+import _poolGuidingVoice from "../pool/guiding-voice.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
 import _poolHammerhand from "../pool/hammerhand.js";
@@ -719,6 +720,7 @@ const shard: CardShard = {
     _poolGrubStoriedMatriarch,
     _poolGruesomeRealization,
     _poolGuardChange,
+    _poolGuidingVoice,
     _poolGwennaEyesOfGaea,
     _poolHagraSharpshooter,
     _poolHammerhand,

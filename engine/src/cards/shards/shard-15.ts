@@ -385,6 +385,7 @@ import _poolSoltariFootSoldier from "../pool/soltari-foot-soldier.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
+import _poolSpellSatchel from "../pool/spell-satchel.js";
 import _poolSpellscornCoven from "../pool/spellscorn-coven.js";
 import _poolSpellstutterSprite from "../pool/spellstutter-sprite.js";
 import _poolSpiderUk from "../pool/spider-uk.js";
@@ -881,6 +882,7 @@ const shard: CardShard = {
     _poolSoulGuideLantern,
     _poolSoulWarden,
     _poolSpartanVeteran,
+    _poolSpellSatchel,
     _poolSpellscornCoven,
     _poolSpellstutterSprite,
     _poolSpiderUk,
