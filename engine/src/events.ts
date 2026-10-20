@@ -708,6 +708,17 @@ export type GameEvent =
       readonly after: number;
     })
   | (Base & {
+      /** An Aura or Equipment stopped being attached to a permanent while it
+       * stayed on the battlefield — attached to something else, unattached by
+       * an effect or a state-based action, or what it was attached to left.
+       * Its own leaving while attached is its `permanent-left-battlefield`.
+       * Grafted Exoskeleton's "becomes unattached from a permanent". */
+      readonly type: "permanent-unattached";
+      readonly object: ObjectId;
+      /** What it was attached to. */
+      readonly from: ObjectId;
+    })
+  | (Base & {
       readonly type: "keyword-granted";
       readonly object: ObjectId;
       readonly keyword: string;

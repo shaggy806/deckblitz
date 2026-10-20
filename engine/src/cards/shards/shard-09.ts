@@ -180,6 +180,7 @@ import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
 import _poolGoldmeadowNomad from "../pool/goldmeadow-nomad.js";
 import _poolGoldveinHydra from "../pool/goldvein-hydra.js";
 import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.js";
+import _poolGraftedWargear from "../pool/grafted-wargear.js";
 import _poolGrahamObrien from "../pool/graham-obrien.js";
 import _poolGraspOfPhantoms from "../pool/grasp-of-phantoms.js";
 import _poolGriptide from "../pool/griptide.js";
@@ -685,6 +686,7 @@ const shard: CardShard = {
     _poolGoldmeadowNomad,
     _poolGoldveinHydra,
     _poolGoreclawTerrorOfQalSisma,
+    _poolGraftedWargear,
     _poolGrahamObrien,
     _poolGraspOfPhantoms,
     _poolGriptide,

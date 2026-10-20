@@ -43,9 +43,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   delayed trigger lasting the turn, keyed on a target player (Great Train Heist's third mode),
   and "if it's your combat phase" as a condition (its first). `DelayedCombatDamage` watches one
   creature only.
-- **"Whenever this Equipment becomes unattached from a permanent"** (Grafted Exoskeleton): no
-  unattach event or trigger — an equip elsewhere, the Equipment leaving, the creature ceasing to
-  be a creature.
 - **A set rule on a graveyard choice**: "up to two creature cards with total mana value 4 or
   less" (Lively Dirge's second mode). `together` exists only on a library search
   (`zone-choice-together.ts` takes a new rule cheaply, and the clients already read it).

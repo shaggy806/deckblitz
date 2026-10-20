@@ -188,6 +188,7 @@ import _poolGoldForgedSentinel from "../pool/gold-forged-sentinel.js";
 import _poolGoldenEgg from "../pool/golden-egg.js";
 import _poolGoldnightCommander from "../pool/goldnight-commander.js";
 import _poolGolemsHeart from "../pool/golems-heart.js";
+import _poolGraftedExoskeleton from "../pool/grafted-exoskeleton.js";
 import _poolGrahaTiaScionReborn from "../pool/graha-tia-scion-reborn.js";
 import _poolGrandEntrywayElegantRotunda from "../pool/grand-entryway-elegant-rotunda.js";
 import _poolGraspingLongneck from "../pool/grasping-longneck.js";
@@ -683,6 +684,7 @@ const shard: CardShard = {
     _poolGoldenEgg,
     _poolGoldnightCommander,
     _poolGolemsHeart,
+    _poolGraftedExoskeleton,
     _poolGrahaTiaScionReborn,
     _poolGrandEntrywayElegantRotunda,
     _poolGraspingLongneck,

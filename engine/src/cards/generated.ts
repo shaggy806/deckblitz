@@ -1965,6 +1965,7 @@ import _poolCaptainSisay from "./pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "./pool/captain-storm-cosmium-raider.js";
 import _poolCaptainsCall from "./pool/captains-call.js";
 import _poolCaptainsDefense from "./pool/captains-defense.js";
+import _poolCaptainsHook from "./pool/captains-hook.js";
 import _poolCaptivatingCave from "./pool/captivating-cave.js";
 import _poolCaptivatingCrew from "./pool/captivating-crew.js";
 import _poolCaptivatingUnicorn from "./pool/captivating-unicorn.js";
@@ -5554,8 +5555,10 @@ import _poolGrafMole from "./pool/graf-mole.js";
 import _poolGrafReaver from "./pool/graf-reaver.js";
 import _poolGraftSurgeon from "./pool/graft-surgeon.js";
 import _poolGraftedButcher from "./pool/grafted-butcher.js";
+import _poolGraftedExoskeleton from "./pool/grafted-exoskeleton.js";
 import _poolGraftedGrowth from "./pool/grafted-growth.js";
 import _poolGraftedIdentity from "./pool/grafted-identity.js";
+import _poolGraftedWargear from "./pool/grafted-wargear.js";
 import _poolGrahaTiaScionReborn from "./pool/graha-tia-scion-reborn.js";
 import _poolGrahaTia from "./pool/graha-tia.js";
 import _poolGrahamObrien from "./pool/graham-obrien.js";
@@ -17961,6 +17964,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaptainStormCosmiumRaider,
   _poolCaptainsCall,
   _poolCaptainsDefense,
+  _poolCaptainsHook,
   _poolCaptivatingCave,
   _poolCaptivatingCrew,
   _poolCaptivatingUnicorn,
@@ -21550,8 +21554,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrafReaver,
   _poolGraftSurgeon,
   _poolGraftedButcher,
+  _poolGraftedExoskeleton,
   _poolGraftedGrowth,
   _poolGraftedIdentity,
+  _poolGraftedWargear,
   _poolGrahaTiaScionReborn,
   _poolGrahaTia,
   _poolGrahamObrien,

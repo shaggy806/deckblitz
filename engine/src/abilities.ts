@@ -707,6 +707,17 @@ export type TriggerSpec =
       readonly otherOnly?: boolean;
     }
   | {
+      /** "Whenever this Equipment becomes unattached from a permanent"
+       * (Grafted Exoskeleton, Captain's Hook): attached to something else,
+       * unattached by an effect or a state-based action, what it was attached
+       * to leaving the battlefield — or this leaving while attached, read as
+       * it last existed (rule 603.10a). Its trigger object is the permanent
+       * it was attached to: "sacrifice that permanent" is a `sacrifice-target`
+       * of `"trigger-object"`. */
+      readonly on: "becomes-unattached";
+      readonly who: "self";
+    }
+  | {
       /** A permanent left the battlefield — for any destination (graveyard,
        * exile, hand, library, command zone). Broader than `"dies"`, which
        * only fires for a move to a graveyard. Rule 603.6d / 700.4. */

@@ -18198,6 +18198,15 @@ export class Game {
         // The card played: the land on the battlefield, the spell on the stack.
         return this.triggerFilterOk(spec.filter, event.object, self);
       }
+      case "becomes-unattached":
+        // Its own leaving while attached is becoming unattached too (as it
+        // last existed — 603.10a).
+        return (
+          (event.type === "permanent-unattached" && event.object === self.id) ||
+          (event.type === "permanent-left-battlefield" &&
+            event.object === self.id &&
+            this.state.objects[self.id]?.lastKnown?.attachedTo !== undefined)
+        );
       case "leaves-battlefield":
         // Read as it last existed on the battlefield, like `dies`.
         return (
@@ -18687,6 +18696,14 @@ export class Game {
    * an intervening-if is asked about as the ability triggers (rule 603.4) —
    * the same object it's asked about again on resolution. */
   private eventTriggerObject(trigger: TriggerSpec, event: GameEvent): ObjectId | undefined {
+    // "That permanent": what the Equipment was attached to.
+    if (trigger.on === "becomes-unattached") {
+      return event.type === "permanent-unattached"
+        ? event.from
+        : event.type === "permanent-left-battlefield"
+          ? this.state.objects[event.object]?.lastKnown?.attachedTo
+          : undefined;
+    }
     return (
       // A damage trigger's object: the permanent dealt it, for the
       // receiving end; the source that dealt it ("it deals that much
@@ -22084,8 +22101,10 @@ export class Game {
         if (target.kind !== "object") return;
         const object = this.state.objects[target.object];
         if (object === undefined || object.zone !== "battlefield" || object.attachedTo === null) return;
+        const from = object.attachedTo;
         object.attachedTo = null;
         invalidateComputedCache();
+        this.emit({ type: "permanent-unattached", object: target.object, from });
       },
       attach: (target, attachment) => {
         if (attachment === undefined) {
@@ -25410,8 +25429,10 @@ export class Game {
       const auraDef = this.registry.get(printedCardName(aura));
       if (!auraDef.subtypes.includes("Aura")) return;
       if (!this.canEnchantPlayer(source, target.player, aura.controller, auraDef)) return;
+      const previous = aura.attachedTo;
       aura.attachedTo = null;
       aura.attachedToPlayer = target.player;
+      if (previous !== null) this.emit({ type: "permanent-unattached", object: source, from: previous });
       this.state.timestampSeq += 1;
       aura.timestamp = this.state.timestampSeq;
       invalidateComputedCache();
@@ -25430,8 +25451,14 @@ export class Game {
     // it's unattached from that creature (rule 702.151b) — however it was
     // attached, reconfigure or not.
     const reconfigured = def.subtypes.includes("Equipment") && this.hasReconfigure(source);
+    const previous = sourceObject.attachedTo;
     sourceObject.attachedTo = targetId;
     delete sourceObject.attachedToPlayer;
+    // Moved off what it was on: it became unattached from that (Grafted
+    // Exoskeleton re-equipped).
+    if (previous !== null && previous !== targetId) {
+      this.emit({ type: "permanent-unattached", object: source, from: previous });
+    }
     // An Aura or Equipment gets a new timestamp as it becomes attached (rule
     // 613.7e) — which is what a control-granting Aura moved onto a creature
     // is weighed against the other control effects on it by.
@@ -27508,6 +27535,7 @@ export class Game {
       const on = this.state.objects[host.id];
       if (on?.zone !== "battlefield" || (on.zoneChangeCount ?? 0) !== host.zoneChangeCount) {
         this.state.objects[id].attachedTo = null;
+        this.emit({ type: "permanent-unattached", object: id, from: host.id });
       }
     }
     invalidateComputedCache();
@@ -28593,6 +28621,11 @@ export class Game {
       if (object.attachedTo !== id) continue;
       object.attachedTo = null;
       invalidateComputedCache();
+      // One leaving in the same event as what it was on becomes unattached
+      // by its own leaving (its `permanent-left-battlefield`), once.
+      if (this.leaveBatch?.snapshots.has(other) !== true) {
+        this.emit({ type: "permanent-unattached", object: other, from: id });
+      }
     }
   }
 
@@ -31800,8 +31833,10 @@ export class Game {
         const subtypes = this.registry.get(printedCardName(object)).subtypes;
         if (subtypes.includes("Aura")) continue;
         if (subtypes.includes("Equipment") && this.canEquip(id, object.attachedTo)) continue;
+        const from = object.attachedTo;
         object.attachedTo = null;
         invalidateComputedCache();
+        this.emit({ type: "permanent-unattached", object: id, from });
         changed = true;
       }
 
@@ -32031,8 +32066,10 @@ export class Game {
       if (object.owner !== player || object.attachedTo === null) continue;
       const host = this.state.objects[object.attachedTo];
       if (host !== undefined && host.owner !== player) {
+        const from = object.attachedTo;
         object.attachedTo = null;
         invalidateComputedCache();
+        this.emit({ type: "permanent-unattached", object: id, from });
       }
     }
 
