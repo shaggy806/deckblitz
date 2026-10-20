@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, hand, lands, life, loyalty, ref, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, cast, hand, lands, life, loyalty, ref, spawn, table, toHand, toStep, zone } from "./harness.js";
 
 describe("mass effects over a target player's permanents", () => {
   it("River's Rebuke returns only that player's nonland permanents", () => {
@@ -66,5 +66,33 @@ describe("Ajani Vengeant", () => {
     loyalty(game, ajani, -7, { atLeast: 7, targets: [ref(B)] });
     expect(zone(game, theirLand)).toBe("graveyard");
     expect(zone(game, myLand)).toBe("battlefield");
+  });
+});
+
+describe("Settle the Wreckage", () => {
+  it("exiles the attackers, and their controller may fetch that many basic lands, tapped", () => {
+    const { game, a } = table({ deck: "Forest" });
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = spawn(game, "Hill Giant");
+    for (const land of ["Plains", "Plains", "Island", "Island"]) spawn(game, land, B);
+    a.declareAttackersFn = () => [
+      { attacker: bears, defender: B },
+      { attacker: giant, defender: B },
+    ];
+    a.chooseModesFn = () => [0];
+    // She takes as many as she may.
+    a.chooseFromZoneFn = (_view, eligible, _min, max) => eligible.slice(0, max);
+    toStep(game, "declare-blockers");
+    const wreck = toHand(game, "Settle the Wreckage", B);
+    // Alice passes; Bob, holding priority in the declare-blockers step, casts it.
+    game.dispatch({ type: "pass-priority", player: A });
+    cast(game, wreck, { player: B, targets: [ref(A)] });
+    expect(zone(game, bears)).toBe("exile");
+    expect(zone(game, giant)).toBe("exile");
+    const forests = game.state.zones.shared.battlefield.filter(
+      (id) => game.state.objects[id].cardName === "Forest" && game.state.objects[id].controller === A,
+    );
+    expect(forests).toHaveLength(2);
+    expect(forests.every((id) => game.state.objects[id].tapped)).toBe(true);
   });
 });

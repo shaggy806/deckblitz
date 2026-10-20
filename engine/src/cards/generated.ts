@@ -11498,6 +11498,7 @@ import _poolSetessanGriffin from "./pool/setessan-griffin.js";
 import _poolSetessanSkirmisher from "./pool/setessan-skirmisher.js";
 import _poolSetessanTraining from "./pool/setessan-training.js";
 import _poolSetonKrosanProtector from "./pool/seton-krosan-protector.js";
+import _poolSettleTheWreckage from "./pool/settle-the-wreckage.js";
 import _poolSettlementBlacksmith from "./pool/settlement-blacksmith.js";
 import _poolSetzerWanderingGambler from "./pool/setzer-wandering-gambler.js";
 import _poolSevenTailMentor from "./pool/seven-tail-mentor.js";
@@ -27524,6 +27525,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSetessanSkirmisher,
   _poolSetessanTraining,
   _poolSetonKrosanProtector,
+  _poolSettleTheWreckage,
   _poolSettlementBlacksmith,
   _poolSetzerWanderingGambler,
   _poolSevenTailMentor,

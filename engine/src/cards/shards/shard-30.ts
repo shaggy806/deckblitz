@@ -384,6 +384,7 @@ import _poolSephirothsIntervention from "../pool/sephiroths-intervention.js";
 import _poolSerpentWarrior from "../pool/serpent-warrior.js";
 import _poolSerumVisions from "../pool/serum-visions.js";
 import _poolSetessanSkirmisher from "../pool/setessan-skirmisher.js";
+import _poolSettleTheWreckage from "../pool/settle-the-wreckage.js";
 import _poolShadowGlider from "../pool/shadow-glider.js";
 import _poolShanidSleepersScourge from "../pool/shanid-sleepers-scourge.js";
 import _poolShatteringBlow from "../pool/shattering-blow.js";
@@ -892,6 +893,7 @@ const shard: CardShard = {
     _poolSerpentWarrior,
     _poolSerumVisions,
     _poolSetessanSkirmisher,
+    _poolSettleTheWreckage,
     _poolShadowGlider,
     _poolShanidSleepersScourge,
     _poolShatteringBlow,

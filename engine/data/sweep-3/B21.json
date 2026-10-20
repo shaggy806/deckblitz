@@ -725,6 +725,13 @@
         "engine/src/cards/pool/ulvenwald-tracker.ts"
       ],
       "tested": false
+    },
+    {
+      "name": "Settle the Wreckage",
+      "files": [
+        "engine/src/cards/pool/settle-the-wreckage.ts"
+      ],
+      "tested": true
     }
   ],
   "blocked": [
@@ -1385,13 +1392,6 @@
         "new:draw-replacement-look-and-choose"
       ],
       "why": "no draw replacement that looks at three and bins the rest"
-    },
-    {
-      "name": "Settle the Wreckage",
-      "needs": [
-        "new:exile-all-target-player-scope"
-      ],
-      "why": "exile-all can't be scoped to a targeted player's permanents, nor search 'that many' for that player"
     },
     {
       "name": "Rampaging Yao Guai",
