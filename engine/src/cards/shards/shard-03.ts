@@ -65,6 +65,7 @@ import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolCondemn from "../pool/condemn.js";
 import _poolCondescend from "../pool/condescend.js";
+import _poolConfrontThePast from "../pool/confront-the-past.js";
 import _poolCoriMountainStalwart from "../pool/cori-mountain-stalwart.js";
 import _poolCorruptedConscience from "../pool/corrupted-conscience.js";
 import _poolCranialRam from "../pool/cranial-ram.js";
@@ -300,6 +301,7 @@ import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
 import _poolRocHunter from "../pool/roc-hunter.js";
+import _poolRowanScholarOfSparks from "../pool/rowan-scholar-of-sparks.js";
 import _poolRowansGrimSearch from "../pool/rowans-grim-search.js";
 import _poolRubblebeltRecluse from "../pool/rubblebelt-recluse.js";
 import _poolRumbleArena from "../pool/rumble-arena.js";
@@ -532,6 +534,7 @@ const shard: CardShard = {
     _poolCompelBrutality,
     _poolCondemn,
     _poolCondescend,
+    _poolConfrontThePast,
     _poolCoriMountainStalwart,
     _poolCorruptedConscience,
     _poolCranialRam,
@@ -767,6 +770,7 @@ const shard: CardShard = {
     _poolRithsAttendant,
     _poolRoarOfEndlessSong,
     _poolRocHunter,
+    _poolRowanScholarOfSparks,
     _poolRowansGrimSearch,
     _poolRubblebeltRecluse,
     _poolRumbleArena,

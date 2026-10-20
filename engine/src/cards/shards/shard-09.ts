@@ -63,7 +63,9 @@ import _poolBlossomingSands from "../pool/blossoming-sands.js";
 import _poolBoaConstrictor from "../pool/boa-constrictor.js";
 import _poolBoardingParty from "../pool/boarding-party.js";
 import _poolBoneFlute from "../pool/bone-flute.js";
+import _poolBookwurm from "../pool/bookwurm.js";
 import _poolBorosSwiftblade from "../pool/boros-swiftblade.js";
+import _poolBrackishTrudge from "../pool/brackish-trudge.js";
 import _poolBrazenDwarf from "../pool/brazen-dwarf.js";
 import _poolBreathOfMalfegor from "../pool/breath-of-malfegor.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
@@ -111,6 +113,7 @@ import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
+import _poolDivideByZero from "../pool/divide-by-zero.js";
 import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
@@ -313,6 +316,7 @@ import _poolPestilentSyphoner from "../pool/pestilent-syphoner.js";
 import _poolPhyrexianDebaser from "../pool/phyrexian-debaser.js";
 import _poolPhytoburst from "../pool/phytoburst.js";
 import _poolPickUpThePace from "../pool/pick-up-the-pace.js";
+import _poolPillardropRescuer from "../pool/pillardrop-rescuer.js";
 import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
@@ -329,6 +333,7 @@ import _poolPricklyBoggart from "../pool/prickly-boggart.js";
 import _poolPrimalRage from "../pool/primal-rage.js";
 import _poolPrimalWitchstalker from "../pool/primal-witchstalker.js";
 import _poolPrisonBreak from "../pool/prison-break.js";
+import _poolProfessorOfZoomancy from "../pool/professor-of-zoomancy.js";
 import _poolProfessorZeiAnthropologist from "../pool/professor-zei-anthropologist.js";
 import _poolProsperousBandit from "../pool/prosperous-bandit.js";
 import _poolPunySnack from "../pool/puny-snack.js";
@@ -586,7 +591,9 @@ const shard: CardShard = {
     _poolBoaConstrictor,
     _poolBoardingParty,
     _poolBoneFlute,
+    _poolBookwurm,
     _poolBorosSwiftblade,
+    _poolBrackishTrudge,
     _poolBrazenDwarf,
     _poolBreathOfMalfegor,
     _poolBrothersOfFire,
@@ -634,6 +641,7 @@ const shard: CardShard = {
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDisownedAncestor,
+    _poolDivideByZero,
     _poolDoomWhisperer,
     _poolDoomskar,
     _poolDragonRoost,
@@ -836,6 +844,7 @@ const shard: CardShard = {
     _poolPhyrexianDebaser,
     _poolPhytoburst,
     _poolPickUpThePace,
+    _poolPillardropRescuer,
     _poolPlagueStinger,
     _poolPlantBeans,
     _poolPlateau,
@@ -852,6 +861,7 @@ const shard: CardShard = {
     _poolPrimalRage,
     _poolPrimalWitchstalker,
     _poolPrisonBreak,
+    _poolProfessorOfZoomancy,
     _poolProfessorZeiAnthropologist,
     _poolProsperousBandit,
     _poolPunySnack,

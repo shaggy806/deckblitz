@@ -139,6 +139,7 @@ import _poolForgingTheAnchor from "../pool/forging-the-anchor.js";
 import _poolForumOfAmity from "../pool/forum-of-amity.js";
 import _poolFragmentOfKonda from "../pool/fragment-of-konda.js";
 import _poolFranklinRichardsAscendant from "../pool/franklin-richards-ascendant.js";
+import _poolFumingEffigy from "../pool/fuming-effigy.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
@@ -454,6 +455,7 @@ import _poolVoidmageProdigy from "../pool/voidmage-prodigy.js";
 import _poolVolcanicSpite from "../pool/volcanic-spite.js";
 import _poolVolrathsStronghold from "../pool/volraths-stronghold.js";
 import _poolVoraciousBibliophile from "../pool/voracious-bibliophile.js";
+import _poolVortexRunner from "../pool/vortex-runner.js";
 import _poolVoteOut from "../pool/vote-out.js";
 import _poolWanderOff from "../pool/wander-off.js";
 import _poolWandertaleMentor from "../pool/wandertale-mentor.js";
@@ -631,6 +633,7 @@ const shard: CardShard = {
     _poolForumOfAmity,
     _poolFragmentOfKonda,
     _poolFranklinRichardsAscendant,
+    _poolFumingEffigy,
     _poolGaryClone,
     _poolGeothermalKami,
     _poolGhastlyDeathTyrant,
@@ -946,6 +949,7 @@ const shard: CardShard = {
     _poolVolcanicSpite,
     _poolVolrathsStronghold,
     _poolVoraciousBibliophile,
+    _poolVortexRunner,
     _poolVoteOut,
     _poolWanderOff,
     _poolWandertaleMentor,

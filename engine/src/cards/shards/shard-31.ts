@@ -39,6 +39,7 @@ import _poolBallroom from "../pool/ballroom.js";
 import _poolBaradDur from "../pool/barad-dur.js";
 import _poolBarbarianRiftcutter from "../pool/barbarian-riftcutter.js";
 import _poolBashfulBeastie from "../pool/bashful-beastie.js";
+import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
@@ -129,6 +130,7 @@ import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
 import _poolDrMadisonLi from "../pool/dr-madison-li.js";
 import _poolDragonMoose from "../pool/dragon-moose.js";
 import _poolDragonlairSpider from "../pool/dragonlair-spider.js";
+import _poolDragonsguardElite from "../pool/dragonsguard-elite.js";
 import _poolDragonspeakerShaman from "../pool/dragonspeaker-shaman.js";
 import _poolDreadReturn from "../pool/dread-return.js";
 import _poolDreamSpoilers from "../pool/dream-spoilers.js";
@@ -282,6 +284,7 @@ import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
+import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagmaquake from "../pool/magmaquake.js";
 import _poolMalcolmTheEyes from "../pool/malcolm-the-eyes.js";
 import _poolMalevolentRumble from "../pool/malevolent-rumble.js";
@@ -559,6 +562,7 @@ const shard: CardShard = {
     _poolBaradDur,
     _poolBarbarianRiftcutter,
     _poolBashfulBeastie,
+    _poolBasicConjuration,
     _poolBatteringCraghorn,
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
@@ -649,6 +653,7 @@ const shard: CardShard = {
     _poolDrMadisonLi,
     _poolDragonMoose,
     _poolDragonlairSpider,
+    _poolDragonsguardElite,
     _poolDragonspeakerShaman,
     _poolDreadReturn,
     _poolDreamSpoilers,
@@ -802,6 +807,7 @@ const shard: CardShard = {
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
     _poolLuckyOffering,
+    _poolMageDuel,
     _poolMagmaquake,
     _poolMalcolmTheEyes,
     _poolMalevolentRumble,

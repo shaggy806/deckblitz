@@ -92,6 +92,7 @@ import _poolCramSession from "../pool/cram-session.js";
 import _poolCremate from "../pool/cremate.js";
 import _poolCribSwap from "../pool/crib-swap.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
+import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
 import _poolCyclopsOfOneEyedPass from "../pool/cyclops-of-one-eyed-pass.js";
@@ -168,6 +169,7 @@ import _poolFrilledMystic from "../pool/frilled-mystic.js";
 import _poolFrodoBaggins from "../pool/frodo-baggins.js";
 import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
+import _poolFrostTrickster from "../pool/frost-trickster.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
 import _poolFuriousSpinesplitter from "../pool/furious-spinesplitter.js";
 import _poolFurnaceStrider from "../pool/furnace-strider.js";
@@ -581,6 +583,7 @@ const shard: CardShard = {
     _poolCremate,
     _poolCribSwap,
     _poolCudgelTroll,
+    _poolCulminationOfStudies,
     _poolCycleOfRenewal,
     _poolCyclonicRift,
     _poolCyclopsOfOneEyedPass,
@@ -657,6 +660,7 @@ const shard: CardShard = {
     _poolFrodoBaggins,
     _poolFrogmite,
     _poolFrontlineRebel,
+    _poolFrostTrickster,
     _poolFungalFortitude,
     _poolFuriousSpinesplitter,
     _poolFurnaceStrider,

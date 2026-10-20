@@ -137,6 +137,7 @@ import _poolEttercap from "../pool/ettercap.js";
 import _poolExcavationTechnique from "../pool/excavation-technique.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
 import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
+import _poolExpandedAnatomy from "../pool/expanded-anatomy.js";
 import _poolExploreTheUnderdark from "../pool/explore-the-underdark.js";
 import _poolExtractFromDarkness from "../pool/extract-from-darkness.js";
 import _poolEyeOfRamos from "../pool/eye-of-ramos.js";
@@ -205,6 +206,7 @@ import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
 import _poolHowlersHeavy from "../pool/howlers-heavy.js";
 import _poolHulkingBugbear from "../pool/hulking-bugbear.js";
+import _poolHumiliate from "../pool/humiliate.js";
 import _poolHungryLynx from "../pool/hungry-lynx.js";
 import _poolHuntersInsight from "../pool/hunters-insight.js";
 import _poolHurloonMinotaur from "../pool/hurloon-minotaur.js";
@@ -218,6 +220,7 @@ import _poolImotiCelebrantOfBounty from "../pool/imoti-celebrant-of-bounty.js";
 import _poolImperialCeratops from "../pool/imperial-ceratops.js";
 import _poolInTheTrenches from "../pool/in-the-trenches.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
+import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInterdisciplinaryMascot from "../pool/interdisciplinary-mascot.js";
@@ -656,6 +659,7 @@ const shard: CardShard = {
     _poolExcavationTechnique,
     _poolExcommunicate,
     _poolExdeathVoidWarlock,
+    _poolExpandedAnatomy,
     _poolExploreTheUnderdark,
     _poolExtractFromDarkness,
     _poolEyeOfRamos,
@@ -724,6 +728,7 @@ const shard: CardShard = {
     _poolHowToStartARiot,
     _poolHowlersHeavy,
     _poolHulkingBugbear,
+    _poolHumiliate,
     _poolHungryLynx,
     _poolHuntersInsight,
     _poolHurloonMinotaur,
@@ -737,6 +742,7 @@ const shard: CardShard = {
     _poolImperialCeratops,
     _poolInTheTrenches,
     _poolInfirmaryHealer,
+    _poolInfuseWithVitality,
     _poolIngeniousArtillerist,
     _poolInspiredFire,
     _poolInterdisciplinaryMascot,

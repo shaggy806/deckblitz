@@ -25,6 +25,7 @@ import _poolAshBarrens from "../pool/ash-barrens.js";
 import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
+import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
 import _poolAuramancer from "../pool/auramancer.js";
 import _poolAutarchMammoth from "../pool/autarch-mammoth.js";
@@ -81,6 +82,7 @@ import _poolColdCaseCracker from "../pool/cold-case-cracker.js";
 import _poolColiseumBehemoth from "../pool/coliseum-behemoth.js";
 import _poolCombatProfessor from "../pool/combat-professor.js";
 import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
+import _poolContainmentBreach from "../pool/containment-breach.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
 import _poolCouncilsDeliberation from "../pool/councils-deliberation.js";
 import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
@@ -112,6 +114,7 @@ import _poolDuelForDominance from "../pool/duel-for-dominance.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEdgarMoonlitSovereign from "../pool/edgar-moonlit-sovereign.js";
+import _poolEfreetFlamepainter from "../pool/efreet-flamepainter.js";
 import _poolEiganjoCastle from "../pool/eiganjo-castle.js";
 import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElegantRotunda from "../pool/elegant-rotunda.js";
@@ -356,6 +359,7 @@ import _poolRonomUnicorn from "../pool/ronom-unicorn.js";
 import _poolRootboundCrag from "../pool/rootbound-crag.js";
 import _poolRubblebeltBraggart from "../pool/rubblebelt-braggart.js";
 import _poolRuinRat from "../pool/ruin-rat.js";
+import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSamutTheDrivingForce from "../pool/samut-the-driving-force.js";
@@ -378,6 +382,7 @@ import _poolShriekingDrake from "../pool/shrieking-drake.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
+import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
@@ -569,6 +574,7 @@ const shard: CardShard = {
     _poolAshnodFleshMechanist,
     _poolAssembleTheLegion,
     _poolAtlaPalaniNestTender,
+    _poolAugustaDeanOfOrder,
     _poolAuraOfSilence,
     _poolAuramancer,
     _poolAutarchMammoth,
@@ -625,6 +631,7 @@ const shard: CardShard = {
     _poolColiseumBehemoth,
     _poolCombatProfessor,
     _poolCombineChrysalis,
+    _poolContainmentBreach,
     _poolContaminantGrafter,
     _poolCouncilsDeliberation,
     _poolCourtOfGarenbrig,
@@ -656,6 +663,7 @@ const shard: CardShard = {
     _poolDuskwielder,
     _poolDwarvenTrader,
     _poolEdgarMoonlitSovereign,
+    _poolEfreetFlamepainter,
     _poolEiganjoCastle,
     _poolElectroduplicate,
     _poolElegantRotunda,
@@ -900,6 +908,7 @@ const shard: CardShard = {
     _poolRootboundCrag,
     _poolRubblebeltBraggart,
     _poolRuinRat,
+    _poolRushedRebirth,
     _poolSacredFoundry,
     _poolSallySparrow,
     _poolSamutTheDrivingForce,
@@ -922,6 +931,7 @@ const shard: CardShard = {
     _poolShrink,
     _poolShroudedShepherd,
     _poolSigilOfMyrkul,
+    _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
     _poolSisterhoodOfKarn,

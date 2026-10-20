@@ -1,0 +1,1151 @@
+{
+ "batch": "B111",
+ "status": "complete",
+ "ranks": "Strixhaven: School of Mages (STX, 2021-04-23): the rest of the set; with learn (the rummage alone — no sideboard)",
+ "authored": [
+  {
+   "name": "Accomplished Alchemist",
+   "files": [
+    "engine/src/cards/pool/accomplished-alchemist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teach by Example",
+   "files": [
+    "engine/src/cards/pool/teach-by-example.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blot Out the Sky",
+   "files": [
+    "engine/src/cards/pool/blot-out-the-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Callous Bloodmage",
+   "files": [
+    "engine/src/cards/pool/callous-bloodmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witherbloom Command",
+   "files": [
+    "engine/src/cards/pool/witherbloom-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venerable Warsinger",
+   "files": [
+    "engine/src/cards/pool/venerable-warsinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rushed Rebirth",
+   "files": [
+    "engine/src/cards/pool/rushed-rebirth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quintorius, Field Historian",
+   "files": [
+    "engine/src/cards/pool/quintorius-field-historian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quandrix Apprentice",
+   "files": [
+    "engine/src/cards/pool/quandrix-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Archway Commons",
+   "files": [
+    "engine/src/cards/pool/archway-commons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lorehold Command",
+   "files": [
+    "engine/src/cards/pool/lorehold-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Show of Confidence",
+   "files": [
+    "engine/src/cards/pool/show-of-confidence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infuse with Vitality",
+   "files": [
+    "engine/src/cards/pool/infuse-with-vitality.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Body of Research",
+   "files": [
+    "engine/src/cards/pool/body-of-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Augmenter Pugilist // Echoing Equation",
+   "files": [
+    "engine/src/cards/pool/augmenter-pugilist.ts",
+    "engine/src/cards/pool/echoing-equation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emergent Sequence",
+   "files": [
+    "engine/src/cards/pool/emergent-sequence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rowan, Scholar of Sparks // Will, Scholar of Frost",
+   "files": [
+    "engine/src/cards/pool/rowan-scholar-of-sparks.ts",
+    "engine/src/cards/pool/will-scholar-of-frost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Campus Guide",
+   "files": [
+    "engine/src/cards/pool/campus-guide.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plargg, Dean of Chaos // Augusta, Dean of Order",
+   "files": [
+    "engine/src/cards/pool/plargg-dean-of-chaos.ts",
+    "engine/src/cards/pool/augusta-dean-of-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quandrix Cultivator",
+   "files": [
+    "engine/src/cards/pool/quandrix-cultivator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Expanded Anatomy",
+   "files": [
+    "engine/src/cards/pool/expanded-anatomy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pest Summoning",
+   "files": [
+    "engine/src/cards/pool/pest-summoning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Containment Breach",
+   "files": [
+    "engine/src/cards/pool/containment-breach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bookwurm",
+   "files": [
+    "engine/src/cards/pool/bookwurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootha, Mercurial Artist",
+   "files": [
+    "engine/src/cards/pool/rootha-mercurial-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mascot Exhibition",
+   "files": [
+    "engine/src/cards/pool/mascot-exhibition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Practical Research",
+   "files": [
+    "engine/src/cards/pool/practical-research.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dramatic Finale",
+   "files": [
+    "engine/src/cards/pool/dramatic-finale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Team Pennant",
+   "files": [
+    "engine/src/cards/pool/team-pennant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Creative Outburst",
+   "files": [
+    "engine/src/cards/pool/creative-outburst.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tenured Inkcaster",
+   "files": [
+    "engine/src/cards/pool/tenured-inkcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tempted by the Oriq",
+   "files": [
+    "engine/src/cards/pool/tempted-by-the-oriq.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spell Satchel",
+   "files": [
+    "engine/src/cards/pool/spell-satchel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scurrid Colony",
+   "files": [
+    "engine/src/cards/pool/scurrid-colony.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Biblioplex Assistant",
+   "files": [
+    "engine/src/cards/pool/biblioplex-assistant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Go Blank",
+   "files": [
+    "engine/src/cards/pool/go-blank.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Honor Troll",
+   "files": [
+    "engine/src/cards/pool/honor-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silverquill Command",
+   "files": [
+    "engine/src/cards/pool/silverquill-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Efreet Flamepainter",
+   "files": [
+    "engine/src/cards/pool/efreet-flamepainter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Explosive Welcome",
+   "files": [
+    "engine/src/cards/pool/explosive-welcome.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eyetwitch",
+   "files": [
+    "engine/src/cards/pool/eyetwitch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Biblioplex",
+   "files": [
+    "engine/src/cards/pool/the-biblioplex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Professor of Zoomancy",
+   "files": [
+    "engine/src/cards/pool/professor-of-zoomancy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mentor's Guidance",
+   "files": [
+    "engine/src/cards/pool/mentors-guidance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonsguard Elite",
+   "files": [
+    "engine/src/cards/pool/dragonsguard-elite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reduce to Memory",
+   "files": [
+    "engine/src/cards/pool/reduce-to-memory.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Star Pupil",
+   "files": [
+    "engine/src/cards/pool/star-pupil.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Divide by Zero",
+   "files": [
+    "engine/src/cards/pool/divide-by-zero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Poet's Quill",
+   "files": [
+    "engine/src/cards/pool/poets-quill.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mercurial Transformation",
+   "files": [
+    "engine/src/cards/pool/mercurial-transformation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basic Conjuration",
+   "files": [
+    "engine/src/cards/pool/basic-conjuration.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sparring Regimen",
+   "files": [
+    "engine/src/cards/pool/sparring-regimen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Culmination of Studies",
+   "files": [
+    "engine/src/cards/pool/culmination-of-studies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frost Trickster",
+   "files": [
+    "engine/src/cards/pool/frost-trickster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mage Hunter",
+   "files": [
+    "engine/src/cards/pool/mage-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Humiliate",
+   "files": [
+    "engine/src/cards/pool/humiliate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Devouring Tendrils",
+   "files": [
+    "engine/src/cards/pool/devouring-tendrils.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lorehold Excavation",
+   "files": [
+    "engine/src/cards/pool/lorehold-excavation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortifying Draught",
+   "files": [
+    "engine/src/cards/pool/fortifying-draught.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunt for Specimens",
+   "files": [
+    "engine/src/cards/pool/hunt-for-specimens.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Confront the Past",
+   "files": [
+    "engine/src/cards/pool/confront-the-past.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reject",
+   "files": [
+    "engine/src/cards/pool/reject.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fractal Summoning",
+   "files": [
+    "engine/src/cards/pool/fractal-summoning.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Field Trip",
+   "files": [
+    "engine/src/cards/pool/field-trip.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pilgrim of the Ages",
+   "files": [
+    "engine/src/cards/pool/pilgrim-of-the-ages.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fuming Effigy",
+   "files": [
+    "engine/src/cards/pool/fuming-effigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Infusion",
+   "files": [
+    "engine/src/cards/pool/essence-infusion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Biomathematician",
+   "files": [
+    "engine/src/cards/pool/biomathematician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline Invocation",
+   "files": [
+    "engine/src/cards/pool/leyline-invocation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Closing Statement",
+   "files": [
+    "engine/src/cards/pool/closing-statement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Big Play",
+   "files": [
+    "engine/src/cards/pool/big-play.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Make Your Mark",
+   "files": [
+    "engine/src/cards/pool/make-your-mark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bayou Groff",
+   "files": [
+    "engine/src/cards/pool/bayou-groff.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thunderous Orator",
+   "files": [
+    "engine/src/cards/pool/thunderous-orator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overgrown Arch",
+   "files": [
+    "engine/src/cards/pool/overgrown-arch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Enthusiastic Study",
+   "files": [
+    "engine/src/cards/pool/enthusiastic-study.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lorehold Apprentice",
+   "files": [
+    "engine/src/cards/pool/lorehold-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonebinder's Familiar",
+   "files": [
+    "engine/src/cards/pool/stonebinders-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonebound Mentor",
+   "files": [
+    "engine/src/cards/pool/stonebound-mentor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bury in Books",
+   "files": [
+    "engine/src/cards/pool/bury-in-books.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spectacle Mage",
+   "files": [
+    "engine/src/cards/pool/spectacle-mage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Manifestation Sage",
+   "files": [
+    "engine/src/cards/pool/manifestation-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ardent Dustspeaker",
+   "files": [
+    "engine/src/cards/pool/ardent-dustspeaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mage Duel",
+   "files": [
+    "engine/src/cards/pool/mage-duel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadewing Laureate",
+   "files": [
+    "engine/src/cards/pool/shadewing-laureate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master Symmetrist",
+   "files": [
+    "engine/src/cards/pool/master-symmetrist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismari Apprentice",
+   "files": [
+    "engine/src/cards/pool/prismari-apprentice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Returned Pastcaller",
+   "files": [
+    "engine/src/cards/pool/returned-pastcaller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mascot Interception",
+   "files": [
+    "engine/src/cards/pool/mascot-interception.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spiteful Squad",
+   "files": [
+    "engine/src/cards/pool/spiteful-squad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Reckless Amplimancer",
+   "files": [
+    "engine/src/cards/pool/reckless-amplimancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pillardrop Rescuer",
+   "files": [
+    "engine/src/cards/pool/pillardrop-rescuer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Guiding Voice",
+   "files": [
+    "engine/src/cards/pool/guiding-voice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dueling Coach",
+   "files": [
+    "engine/src/cards/pool/dueling-coach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reflective Golem",
+   "files": [
+    "engine/src/cards/pool/reflective-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnarled Professor",
+   "files": [
+    "engine/src/cards/pool/gnarled-professor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Snow Day",
+   "files": [
+    "engine/src/cards/pool/snow-day.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pop Quiz",
+   "files": [
+    "engine/src/cards/pool/pop-quiz.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Strix",
+   "files": [
+    "engine/src/cards/pool/dream-strix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Study Break",
+   "files": [
+    "engine/src/cards/pool/study-break.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Torrent Sculptor // Flamethrower Sonata",
+   "files": [
+    "engine/src/cards/pool/torrent-sculptor.ts",
+    "engine/src/cards/pool/flamethrower-sonata.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cram Session",
+   "files": [
+    "engine/src/cards/pool/cram-session.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcane Subtraction",
+   "files": [
+    "engine/src/cards/pool/arcane-subtraction.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pigment Storm",
+   "files": [
+    "engine/src/cards/pool/pigment-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Igneous Inspiration",
+   "files": [
+    "engine/src/cards/pool/igneous-inspiration.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tome Shredder",
+   "files": [
+    "engine/src/cards/pool/tome-shredder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Blood Age General",
+   "files": [
+    "engine/src/cards/pool/blood-age-general.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Brackish Trudge",
+   "files": [
+    "engine/src/cards/pool/brackish-trudge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Professor of Symbology",
+   "files": [
+    "engine/src/cards/pool/professor-of-symbology.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Silverquill Pledgemage",
+   "files": [
+    "engine/src/cards/pool/silverquill-pledgemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismari Pledgemage",
+   "files": [
+    "engine/src/cards/pool/prismari-pledgemage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stonerise Spirit",
+   "files": [
+    "engine/src/cards/pool/stonerise-spirit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Square Up",
+   "files": [
+    "engine/src/cards/pool/square-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arrogant Poet",
+   "files": [
+    "engine/src/cards/pool/arrogant-poet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vortex Runner",
+   "files": [
+    "engine/src/cards/pool/vortex-runner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Promising Duskmage",
+   "files": [
+    "engine/src/cards/pool/promising-duskmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise of Extus",
+   "files": [
+    "engine/src/cards/pool/rise-of-extus.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Academic Dispute",
+   "needs": [
+    "effect:must-block-this-turn"
+   ],
+   "why": "\"blocks this turn if able\""
+  },
+  {
+   "name": "Academic Probation",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "the first mode names a card"
+  },
+  {
+   "name": "Blex, Vexing Pest // Search for Blex",
+   "needs": [
+    "effect:put-into-hand-this-way"
+   ],
+   "why": "\"you lose 3 life for each card you put into your hand this way\": a library-to-hand look-and-choose records no this-way count"
+  },
+  {
+   "name": "Daemogoth Woe-Eater",
+   "needs": [
+    "trigger:self-sacrifice-trigger"
+   ],
+   "why": "\"when you sacrifice this creature\": the sacrifice trigger can't name its own object"
+  },
+  {
+   "name": "Detention Vortex",
+   "needs": [
+    "static:attached-activated-abilities-prohibited",
+    "effect:opponents-may-activate"
+   ],
+   "why": "\"enchanted permanent's activated abilities can't be activated\", and an ability only opponents may activate"
+  },
+  {
+   "name": "Devastating Mastery",
+   "needs": [
+    "condition:alternative-cost-paid",
+    "effect:opponent-chooses-permanents-to-bounce"
+   ],
+   "why": "the alternative-cost condition, and an opponent choosing up to two of their nonland permanents"
+  },
+  {
+   "name": "Draconic Intervention",
+   "needs": [
+    "cost:additional-cost-exile-from-graveyard",
+    "replacement:target-exile-if-dies-this-turn"
+   ],
+   "why": "an additional cost exiling a graveyard card whose mana value is X; exile-if-it-dies for those dealt damage"
+  },
+  {
+   "name": "Dragon's Approach",
+   "needs": [
+    "cost:may-exile-self-and-named-from-graveyard",
+    "mechanic:deck-any-number-copies"
+   ],
+   "why": "exiling it and four named cards from the graveyard; the any-number deck exemption"
+  },
+  {
+   "name": "Ecological Appreciation",
+   "needs": [
+    "effect:opponent-chooses-from-found"
+   ],
+   "why": "an opponent picks two of the found cards to shuffle back"
+  },
+  {
+   "name": "Elemental Expressionist",
+   "needs": [
+    "replacement:grant-exile-if-would-leave"
+   ],
+   "why": "no effect grants \"if it would leave the battlefield, exile it instead\" to an existing creature"
+  },
+  {
+   "name": "Elite Spellbinder",
+   "needs": [
+    "zone:exile-owner-may-play",
+    "zone:exiled-from-hand-play-permission-taxed"
+   ],
+   "why": "an opponent's exiled card its owner may play for {2} more"
+  },
+  {
+   "name": "Exhilarating Elocution",
+   "needs": [
+    "effect:pump-all-except-target"
+   ],
+   "why": "modify-pt-all has no exceptTarget"
+  },
+  {
+   "name": "Fervent Mastery",
+   "needs": [
+    "condition:alternative-cost-paid",
+    "decision:discard-any-number"
+   ],
+   "why": "\"if the {2}{R}{R} cost was paid\", and the opponent's discard-any-number-then-draw"
+  },
+  {
+   "name": "First Day of Class",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"whenever a creature you control enters this turn\" for the rest of the turn"
+  },
+  {
+   "name": "Flamescroll Celebrant // Revel in Silence",
+   "needs": [
+    "effect:prohibit-loyalty-abilities"
+   ],
+   "why": "prohibit's abilities is all-or-nothing, not loyalty abilities alone"
+  },
+  {
+   "name": "Flunk",
+   "needs": [
+    "amount:cards-in-hand-of-target-controller"
+   ],
+   "why": "cardsInHand can't name the controller of target 0"
+  },
+  {
+   "name": "Golden Ratio",
+   "needs": [
+    "effect:count-distinct-powers"
+   ],
+   "why": "the number of different powers among creatures you control"
+  },
+  {
+   "name": "Harness Infinity",
+   "needs": [
+    "effect:exchange-hand-and-graveyard"
+   ],
+   "why": "exchanging hand and graveyard isn't a discard (the ruling)"
+  },
+  {
+   "name": "Illuminate History",
+   "needs": [
+    "decision:discard-any-number"
+   ],
+   "why": "discard any number of cards, then draw that many"
+  },
+  {
+   "name": "Ingenious Mastery",
+   "needs": [
+    "condition:alternative-cost-paid"
+   ],
+   "why": "no mana-only printed alternative cost, and no \"if the {2}{U} cost was paid\""
+  },
+  {
+   "name": "Jadzi, Oracle of Arcavios // Journey to the Oracle",
+   "needs": [
+    "effect:cast-now-alternative-mana-cost",
+    "effect:spell-returns-itself-to-hand"
+   ],
+   "why": "cast-now can't cast by paying {1} rather than the mana cost, and a spell can't return itself to hand as it resolves"
+  },
+  {
+   "name": "Kasmina, Enigma Sage",
+   "needs": [
+    "cost:loyalty-x"
+   ],
+   "why": "loyaltyCost is a fixed number: no −X"
+  },
+  {
+   "name": "Kianne, Dean of Substance // Imbraham, Dean of Theory",
+   "needs": [
+    "effect:count-distinct-mana-values",
+    "decision:choose-face-up-exiled-card"
+   ],
+   "why": "distinct mana values among your study-counter exiled cards; putting one into hand"
+  },
+  {
+   "name": "Maelstrom Muse",
+   "needs": [
+    "effect:next-spell-cost-reduction"
+   ],
+   "why": "only the next instant or sorcery spell this turn costs less"
+  },
+  {
+   "name": "Mage Hunters' Onslaught",
+   "needs": [
+    "effect:delayed-trigger-rest-of-turn"
+   ],
+   "why": "\"whenever a creature blocks this turn\" needs a trigger lasting the rest of the turn"
+  },
+  {
+   "name": "Mavinda, Students' Advocate",
+   "needs": [
+    "cost:cost-increase-if-targets"
+   ],
+   "why": "costs {8} more if the granted spell doesn't target a creature you control"
+  },
+  {
+   "name": "Mila, Crafty Companion // Lukka, Wayward Bonder",
+   "needs": [
+    "trigger:opponent-attacks-your-planeswalkers"
+   ],
+   "why": "\"whenever an opponent attacks one or more planeswalkers you control\" counts only planeswalker defenders"
+  },
+  {
+   "name": "Multiple Choice",
+   "needs": [
+    "decision:choose-player"
+   ],
+   "why": "the X=2 mode's \"you may choose a player\" includes yourself; choose-opponent covers opponents only"
+  },
+  {
+   "name": "Necrotic Fumes",
+   "needs": [
+    "cost:exile-creature-cost"
+   ],
+   "why": "an additional cost of exiling a creature you control"
+  },
+  {
+   "name": "Pestilent Cauldron // Restorative Burst",
+   "needs": [
+    "effect:targets-from-single-graveyard"
+   ],
+   "why": "\"four target cards from a single graveyard\""
+  },
+  {
+   "name": "Radiant Scrollwielder",
+   "needs": [
+    "zone:impulse-exile-instead"
+   ],
+   "why": "a cast-this-turn permission that exiles the spell instead of the graveyard"
+  },
+  {
+   "name": "Retriever Phoenix",
+   "needs": [
+    "replacement:learn-replacement"
+   ],
+   "why": "\"if you would learn, you may instead return this card\""
+  },
+  {
+   "name": "Selfless Glyphweaver // Deadly Vanity",
+   "needs": [
+    "effect:destroy-all-except-chosen"
+   ],
+   "why": "choose a creature or planeswalker, then destroy all others"
+  },
+  {
+   "name": "Serpentine Curve",
+   "needs": [
+    "amount:count-in-exile"
+   ],
+   "why": "X counts instant and sorcery cards you own in exile and in your graveyard"
+  },
+  {
+   "name": "Shaile, Dean of Radiance // Embrose, Dean of Shadow",
+   "needs": [
+    "filter:entered-under-your-control-this-turn"
+   ],
+   "why": "creatures that entered under your control this turn, whoever controls them now"
+  },
+  {
+   "name": "Silverquill Silencer",
+   "needs": [
+    "decision:choose-card-name"
+   ],
+   "why": "choose a card name as it enters"
+  },
+  {
+   "name": "Strict Proctor",
+   "needs": [
+    "effect:counter-ability",
+    "trigger:ability-triggered-by-entering"
+   ],
+   "why": "nothing triggers on a permanent entering causing a triggered ability to trigger"
+  },
+  {
+   "name": "Symmetry Sage",
+   "needs": [
+    "effect:set-base-power-only"
+   ],
+   "why": "setting base power alone"
+  },
+  {
+   "name": "Tanazir Quandrix",
+   "needs": [
+    "effect:animate-all-except-source"
+   ],
+   "why": "\"other creatures you control have base P/T\" — animate-all has no exceptSource"
+  },
+  {
+   "name": "Teachings of the Archaics",
+   "needs": [
+    "condition:opponent-more-cards-in-hand"
+   ],
+   "why": "nothing compares one opponent's hand size to yours"
+  },
+  {
+   "name": "Test of Talents",
+   "needs": [
+    "effect:extract-same-name"
+   ],
+   "why": "search the countered spell's controller's zones for same-named cards, draw for each from hand"
+  },
+  {
+   "name": "Uvilda, Dean of Perfection // Nassari, Dean of Expression",
+   "needs": [
+    "effect:exiled-card-gains-trigger",
+    "mechanic:hone-counters"
+   ],
+   "why": "the hone-counter card in exile gains an upkeep trigger and a cheaper cast"
+  },
+  {
+   "name": "Valentin, Dean of the Vein // Lisette, Dean of the Root",
+   "needs": [
+    "replacement:exile-instead-when-you-do"
+   ],
+   "why": "the would-die exile replacement can't fire a \"when you do, you may pay {2}\" each time it applies"
+  },
+  {
+   "name": "Verdant Mastery",
+   "needs": [
+    "condition:alternative-cost-paid",
+    "effect:search-split-count"
+   ],
+   "why": "the alternative cost, and splitting found lands among an opponent's battlefield, yours and your hand"
+  }
+ ]
+}

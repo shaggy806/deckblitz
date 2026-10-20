@@ -138,6 +138,7 @@ import _poolEntrapmentManeuver from "../pool/entrapment-maneuver.js";
 import _poolErdwalRipper from "../pool/erdwal-ripper.js";
 import _poolEruditeWizard from "../pool/erudite-wizard.js";
 import _poolEsperSentinel from "../pool/esper-sentinel.js";
+import _poolEssenceInfusion from "../pool/essence-infusion.js";
 import _poolEssenceOfAntiquity from "../pool/essence-of-antiquity.js";
 import _poolEthercasteKnight from "../pool/ethercaste-knight.js";
 import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
@@ -410,6 +411,7 @@ import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoulShred from "../pool/soul-shred.js";
+import _poolSparringRegimen from "../pool/sparring-regimen.js";
 import _poolSpeakSecrets from "../pool/speak-secrets.js";
 import _poolSphereGrid from "../pool/sphere-grid.js";
 import _poolSpiderHamPeterPorker from "../pool/spider-ham-peter-porker.js";
@@ -673,6 +675,7 @@ const shard: CardShard = {
     _poolErdwalRipper,
     _poolEruditeWizard,
     _poolEsperSentinel,
+    _poolEssenceInfusion,
     _poolEssenceOfAntiquity,
     _poolEthercasteKnight,
     _poolEtherswornSphinx,
@@ -945,6 +948,7 @@ const shard: CardShard = {
     _poolSmelt,
     _poolSokkasHaiku,
     _poolSoulShred,
+    _poolSparringRegimen,
     _poolSpeakSecrets,
     _poolSphereGrid,
     _poolSpiderHamPeterPorker,

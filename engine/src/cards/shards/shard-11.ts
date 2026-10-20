@@ -117,6 +117,7 @@ import _poolDemystify from "../pool/demystify.js";
 import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
 import _poolDevoteeOfStrength from "../pool/devotee-of-strength.js";
+import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDiningRoom from "../pool/dining-room.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
@@ -269,6 +270,7 @@ import _poolLoamdraggerGiant from "../pool/loamdragger-giant.js";
 import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
+import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMasterPakku from "../pool/master-pakku.js";
 import _poolMeditationPuzzle from "../pool/meditation-puzzle.js";
@@ -468,6 +470,7 @@ import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
+import _poolThunderousOrator from "../pool/thunderous-orator.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
 import _poolTineShrike from "../pool/tine-shrike.js";
@@ -658,6 +661,7 @@ const shard: CardShard = {
     _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
     _poolDevoteeOfStrength,
+    _poolDevouringTendrils,
     _poolDimirGuildmage,
     _poolDiningRoom,
     _poolDiscipleOfGrace,
@@ -810,6 +814,7 @@ const shard: CardShard = {
     _poolLootDispute,
     _poolLootTheKeyToEverything,
     _poolManaCylix,
+    _poolManifestationSage,
     _poolMaraudingMako,
     _poolMasterPakku,
     _poolMeditationPuzzle,
@@ -1009,6 +1014,7 @@ const shard: CardShard = {
     _poolTheThingBenGrimm,
     _poolThornscapeApprentice,
     _poolThunderfootBaloth,
+    _poolThunderousOrator,
     _poolTimeEbb,
     _poolTimeOfNeed,
     _poolTineShrike,

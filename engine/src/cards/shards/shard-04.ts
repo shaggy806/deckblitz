@@ -196,6 +196,7 @@ import _poolHowlpackPiper from "../pool/howlpack-piper.js";
 import _poolHulkingGoblin from "../pool/hulking-goblin.js";
 import _poolHumongulus from "../pool/humongulus.js";
 import _poolHungryForMore from "../pool/hungry-for-more.js";
+import _poolHuntForSpecimens from "../pool/hunt-for-specimens.js";
 import _poolHydraInfiltration from "../pool/hydra-infiltration.js";
 import _poolIceOut from "../pool/ice-out.js";
 import _poolImposingVantasaur from "../pool/imposing-vantasaur.js";
@@ -307,6 +308,7 @@ import _poolPowerstoneEngineer from "../pool/powerstone-engineer.js";
 import _poolPrideGuardian from "../pool/pride-guardian.js";
 import _poolPriestOfTheCrossing from "../pool/priest-of-the-crossing.js";
 import _poolPrimalHuntbeast from "../pool/primal-huntbeast.js";
+import _poolPromisingDuskmage from "../pool/promising-duskmage.js";
 import _poolPropheticPrism from "../pool/prophetic-prism.js";
 import _poolProsperousInnkeeper from "../pool/prosperous-innkeeper.js";
 import _poolProvokeTheTrolls from "../pool/provoke-the-trolls.js";
@@ -323,8 +325,10 @@ import _poolRampagingGeoderm from "../pool/rampaging-geoderm.js";
 import _poolRangersLongbow from "../pool/rangers-longbow.js";
 import _poolRaucousEntertainer from "../pool/raucous-entertainer.js";
 import _poolRazeTheEffigy from "../pool/raze-the-effigy.js";
+import _poolRecklessAmplimancer from "../pool/reckless-amplimancer.js";
 import _poolReckonersBargain from "../pool/reckoners-bargain.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
+import _poolReflectiveGolem from "../pool/reflective-golem.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
 import _poolResourcefulDefense from "../pool/resourceful-defense.js";
@@ -376,6 +380,7 @@ import _poolSlaughterTheStrong from "../pool/slaughter-the-strong.js";
 import _poolSlimebind from "../pool/slimebind.js";
 import _poolSlitherBlade from "../pool/slither-blade.js";
 import _poolSnowCoveredWastes from "../pool/snow-covered-wastes.js";
+import _poolSnowDay from "../pool/snow-day.js";
 import _poolSongMadRuins from "../pool/song-mad-ruins.js";
 import _poolSongMadTreachery from "../pool/song-mad-treachery.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
@@ -698,6 +703,7 @@ const shard: CardShard = {
     _poolHulkingGoblin,
     _poolHumongulus,
     _poolHungryForMore,
+    _poolHuntForSpecimens,
     _poolHydraInfiltration,
     _poolIceOut,
     _poolImposingVantasaur,
@@ -809,6 +815,7 @@ const shard: CardShard = {
     _poolPrideGuardian,
     _poolPriestOfTheCrossing,
     _poolPrimalHuntbeast,
+    _poolPromisingDuskmage,
     _poolPropheticPrism,
     _poolProsperousInnkeeper,
     _poolProvokeTheTrolls,
@@ -825,8 +832,10 @@ const shard: CardShard = {
     _poolRangersLongbow,
     _poolRaucousEntertainer,
     _poolRazeTheEffigy,
+    _poolRecklessAmplimancer,
     _poolReckonersBargain,
     _poolRedtoothVanguard,
+    _poolReflectiveGolem,
     _poolRequitingHex,
     _poolResearchAssistant,
     _poolResourcefulDefense,
@@ -878,6 +887,7 @@ const shard: CardShard = {
     _poolSlimebind,
     _poolSlitherBlade,
     _poolSnowCoveredWastes,
+    _poolSnowDay,
     _poolSongMadRuins,
     _poolSongMadTreachery,
     _poolSonicShrieker,

@@ -242,6 +242,7 @@ import _poolLoamDryad from "../pool/loam-dryad.js";
 import _poolLoanShark from "../pool/loan-shark.js";
 import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
+import _poolLoreholdExcavation from "../pool/lorehold-excavation.js";
 import _poolLotlethGiant from "../pool/lotleth-giant.js";
 import _poolLuminousAngel from "../pool/luminous-angel.js";
 import _poolLydiaFrye from "../pool/lydia-frye.js";
@@ -324,6 +325,7 @@ import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
 import _poolReefWorm from "../pool/reef-worm.js";
 import _poolReitoSentinel from "../pool/reito-sentinel.js";
+import _poolReject from "../pool/reject.js";
 import _poolRelicRetriever from "../pool/relic-retriever.js";
 import _poolReplicationSpecialist from "../pool/replication-specialist.js";
 import _poolRestlessAnchorage from "../pool/restless-anchorage.js";
@@ -753,6 +755,7 @@ const shard: CardShard = {
     _poolLoanShark,
     _poolLongstalkBrawl,
     _poolLoransEscape,
+    _poolLoreholdExcavation,
     _poolLotlethGiant,
     _poolLuminousAngel,
     _poolLydiaFrye,
@@ -835,6 +838,7 @@ const shard: CardShard = {
     _poolRedoubledStormsinger,
     _poolReefWorm,
     _poolReitoSentinel,
+    _poolReject,
     _poolRelicRetriever,
     _poolReplicationSpecialist,
     _poolRestlessAnchorage,

@@ -44,6 +44,7 @@ import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
 import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
+import _poolBigPlay from "../pool/big-play.js";
 import _poolBirdsOfParadise from "../pool/birds-of-paradise.js";
 import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
@@ -392,6 +393,7 @@ import _poolSteppeLynx from "../pool/steppe-lynx.js";
 import _poolStewardOfValeron from "../pool/steward-of-valeron.js";
 import _poolStimulusPackage from "../pool/stimulus-package.js";
 import _poolStonewingAntagonizer from "../pool/stonewing-antagonizer.js";
+import _poolStudyBreak from "../pool/study-break.js";
 import _poolSubterraneanScout from "../pool/subterranean-scout.js";
 import _poolSuccumbToTheCold from "../pool/succumb-to-the-cold.js";
 import _poolSummitProwler from "../pool/summit-prowler.js";
@@ -544,6 +546,7 @@ const shard: CardShard = {
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
     _poolBeyondTheQuiet,
+    _poolBigPlay,
     _poolBirdsOfParadise,
     _poolBlastZone,
     _poolBloodServitor,
@@ -892,6 +895,7 @@ const shard: CardShard = {
     _poolStewardOfValeron,
     _poolStimulusPackage,
     _poolStonewingAntagonizer,
+    _poolStudyBreak,
     _poolSubterraneanScout,
     _poolSuccumbToTheCold,
     _poolSummitProwler,

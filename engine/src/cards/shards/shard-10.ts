@@ -153,6 +153,7 @@ import _poolFecundity from "../pool/fecundity.js";
 import _poolFeedTheSwarm from "../pool/feed-the-swarm.js";
 import _poolFeralAbomination from "../pool/feral-abomination.js";
 import _poolFestivalOfEmbers from "../pool/festival-of-embers.js";
+import _poolFieldTrip from "../pool/field-trip.js";
 import _poolFinalReward from "../pool/final-reward.js";
 import _poolFixerTechnoTerror from "../pool/fixer-techno-terror.js";
 import _poolFleshbagMarauder from "../pool/fleshbag-marauder.js";
@@ -256,6 +257,7 @@ import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
+import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
@@ -667,6 +669,7 @@ const shard: CardShard = {
     _poolFeedTheSwarm,
     _poolFeralAbomination,
     _poolFestivalOfEmbers,
+    _poolFieldTrip,
     _poolFinalReward,
     _poolFixerTechnoTerror,
     _poolFleshbagMarauder,
@@ -770,6 +773,7 @@ const shard: CardShard = {
     _poolManifoldKey,
     _poolMarduDevotee,
     _poolMarduHateblade,
+    _poolMascotInterception,
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMerfolkMesmerist,

@@ -64,6 +64,7 @@ import _poolBubbleUp from "../pool/bubble-up.js";
 import _poolBuildersTalent from "../pool/builders-talent.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
+import _poolCampusGuide from "../pool/campus-guide.js";
 import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
 import _poolCaptainsHook from "../pool/captains-hook.js";
@@ -137,6 +138,7 @@ import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolExecute from "../pool/execute.js";
 import _poolExpeditionMap from "../pool/expedition-map.js";
+import _poolExplosiveWelcome from "../pool/explosive-welcome.js";
 import _poolExpressiveIteration from "../pool/expressive-iteration.js";
 import _poolExtinguishAllHope from "../pool/extinguish-all-hope.js";
 import _poolExtusOriqOverlord from "../pool/extus-oriq-overlord.js";
@@ -244,6 +246,7 @@ import _poolLumberknot from "../pool/lumberknot.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
+import _poolMasterSymmetrist from "../pool/master-symmetrist.js";
 import _poolMausoleumGuard from "../pool/mausoleum-guard.js";
 import _poolMeganticSliver from "../pool/megantic-sliver.js";
 import _poolMemoryDrain from "../pool/memory-drain.js";
@@ -544,6 +547,7 @@ const shard: CardShard = {
     _poolBuildersTalent,
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
+    _poolCampusGuide,
     _poolCaptainSisay,
     _poolCaptainStormCosmiumRaider,
     _poolCaptainsHook,
@@ -617,6 +621,7 @@ const shard: CardShard = {
     _poolErode,
     _poolExecute,
     _poolExpeditionMap,
+    _poolExplosiveWelcome,
     _poolExpressiveIteration,
     _poolExtinguishAllHope,
     _poolExtusOriqOverlord,
@@ -724,6 +729,7 @@ const shard: CardShard = {
     _poolMaestrosCharm,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,
+    _poolMasterSymmetrist,
     _poolMausoleumGuard,
     _poolMeganticSliver,
     _poolMemoryDrain,

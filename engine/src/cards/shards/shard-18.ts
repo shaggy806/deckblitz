@@ -18,6 +18,7 @@ import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
 import _poolArchmagesCharm from "../pool/archmages-charm.js";
 import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
+import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAvengerOfZendikar from "../pool/avenger-of-zendikar.js";
 import _poolAvianChangeling from "../pool/avian-changeling.js";
@@ -105,6 +106,7 @@ import _poolDragonBlood from "../pool/dragon-blood.js";
 import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
+import _poolDreamStrix from "../pool/dream-strix.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
@@ -548,6 +550,7 @@ const shard: CardShard = {
     _poolArchfiendOfDespair,
     _poolArchmagesCharm,
     _poolArchpriestOfShadows,
+    _poolArdentDustspeaker,
     _poolAuntiesSentence,
     _poolAvengerOfZendikar,
     _poolAvianChangeling,
@@ -635,6 +638,7 @@ const shard: CardShard = {
     _poolDragonlordsServant,
     _poolDragonwingGlider,
     _poolDreadmawsIre,
+    _poolDreamStrix,
     _poolDrelnoch,
     _poolDroverGrizzly,
     _poolDuskmantleOperative,

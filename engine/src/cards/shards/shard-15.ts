@@ -260,6 +260,7 @@ import _poolLightningDiadem from "../pool/lightning-diadem.js";
 import _poolLightningRigCrew from "../pool/lightning-rig-crew.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
+import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
 import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
 import _poolLostVale from "../pool/lost-vale.js";
 import _poolLothoCorruptShirriff from "../pool/lotho-corrupt-shirriff.js";
@@ -272,6 +273,7 @@ import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMarvelousMelee from "../pool/marvelous-melee.js";
+import _poolMascotExhibition from "../pool/mascot-exhibition.js";
 import _poolMasterPiandao from "../pool/master-piandao.js";
 import _poolMeagerMeal from "../pool/meager-meal.js";
 import _poolMeanderingRiver from "../pool/meandering-river.js";
@@ -321,6 +323,7 @@ import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
+import _poolPilgrimOfTheAges from "../pool/pilgrim-of-the-ages.js";
 import _poolPiranhaMarsh from "../pool/piranha-marsh.js";
 import _poolPitchburnDevils from "../pool/pitchburn-devils.js";
 import _poolPlatoonDispenser from "../pool/platoon-dispenser.js";
@@ -342,6 +345,7 @@ import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
+import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolRerouteSystems from "../pool/reroute-systems.js";
 import _poolRescind from "../pool/rescind.js";
 import _poolRestlessBivouac from "../pool/restless-bivouac.js";
@@ -393,6 +397,7 @@ import _poolSpincrusher from "../pool/spincrusher.js";
 import _poolSpitefulPrankster from "../pool/spiteful-prankster.js";
 import _poolSpittingDilophosaurus from "../pool/spitting-dilophosaurus.js";
 import _poolSproutingGoblin from "../pool/sprouting-goblin.js";
+import _poolSquareUp from "../pool/square-up.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
 import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
@@ -757,6 +762,7 @@ const shard: CardShard = {
     _poolLightningRigCrew,
     _poolLlanowarLoamspeaker,
     _poolLoranOfTheThirdPath,
+    _poolLoreholdApprentice,
     _poolLoreholdPledgemage,
     _poolLostVale,
     _poolLothoCorruptShirriff,
@@ -769,6 +775,7 @@ const shard: CardShard = {
     _poolMarrowBats,
     _poolMarshLurker,
     _poolMarvelousMelee,
+    _poolMascotExhibition,
     _poolMasterPiandao,
     _poolMeagerMeal,
     _poolMeanderingRiver,
@@ -818,6 +825,7 @@ const shard: CardShard = {
     _poolPearlOfWisdom,
     _poolPetrifyingMeddler,
     _poolPiercingExhale,
+    _poolPilgrimOfTheAges,
     _poolPiranhaMarsh,
     _poolPitchburnDevils,
     _poolPlatoonDispenser,
@@ -839,6 +847,7 @@ const shard: CardShard = {
     _poolRazakethsRite,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
+    _poolReduceToMemory,
     _poolRerouteSystems,
     _poolRescind,
     _poolRestlessBivouac,
@@ -890,6 +899,7 @@ const shard: CardShard = {
     _poolSpitefulPrankster,
     _poolSpittingDilophosaurus,
     _poolSproutingGoblin,
+    _poolSquareUp,
     _poolStatureYoungAvenger,
     _poolStingingVitriol,
     _poolStormchaserDrake,

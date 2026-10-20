@@ -148,6 +148,7 @@ import _poolFirebendingStudent from "../pool/firebending-student.js";
 import _poolFiveHundredYearDiary from "../pool/five-hundred-year-diary.js";
 import _poolFlameOfAnor from "../pool/flame-of-anor.js";
 import _poolFlameshape from "../pool/flameshape.js";
+import _poolFlamethrowerSonata from "../pool/flamethrower-sonata.js";
 import _poolFleetingEffigy from "../pool/fleeting-effigy.js";
 import _poolFlowerfootSwordmaster from "../pool/flowerfoot-swordmaster.js";
 import _poolForumFamiliar from "../pool/forum-familiar.js";
@@ -169,6 +170,7 @@ import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGnarledProfessor from "../pool/gnarled-professor.js";
 import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
+import _poolGoBlank from "../pool/go-blank.js";
 import _poolGoblinBlastRunner from "../pool/goblin-blast-runner.js";
 import _poolGoblinChampion from "../pool/goblin-champion.js";
 import _poolGoblinKing from "../pool/goblin-king.js";
@@ -307,6 +309,7 @@ import _poolPhyrexianWalker from "../pool/phyrexian-walker.js";
 import _poolPicturesOfSpiderMan from "../pool/pictures-of-spider-man.js";
 import _poolPiperOfTheSwarm from "../pool/piper-of-the-swarm.js";
 import _poolPiperWrightPublickReporter from "../pool/piper-wright-publick-reporter.js";
+import _poolPlarggDeanOfChaos from "../pool/plargg-dean-of-chaos.js";
 import _poolPotionOfHealing from "../pool/potion-of-healing.js";
 import _poolPrecipitousDrop from "../pool/precipitous-drop.js";
 import _poolPrimalWellspring from "../pool/primal-wellspring.js";
@@ -331,6 +334,7 @@ import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
+import _poolRoothaMercurialArtist from "../pool/rootha-mercurial-artist.js";
 import _poolRunOutOfTown from "../pool/run-out-of-town.js";
 import _poolRunawayBoulder from "../pool/runaway-boulder.js";
 import _poolRustwingFalcon from "../pool/rustwing-falcon.js";
@@ -398,6 +402,7 @@ import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTemporalCleansing from "../pool/temporal-cleansing.js";
+import _poolTemptedByTheOriq from "../pool/tempted-by-the-oriq.js";
 import _poolTendrilsOfAgony from "../pool/tendrils-of-agony.js";
 import _poolTendrilsOfDespair from "../pool/tendrils-of-despair.js";
 import _poolTerminalAgony from "../pool/terminal-agony.js";
@@ -421,6 +426,7 @@ import _poolThrivingGrove from "../pool/thriving-grove.js";
 import _poolTobiasDoomedConqueror from "../pool/tobias-doomed-conqueror.js";
 import _poolTomBombadil from "../pool/tom-bombadil.js";
 import _poolTorgalAFineHound from "../pool/torgal-a-fine-hound.js";
+import _poolTorrentSculptor from "../pool/torrent-sculptor.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
 import _poolTortoiseFormation from "../pool/tortoise-formation.js";
 import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
@@ -638,6 +644,7 @@ const shard: CardShard = {
     _poolFiveHundredYearDiary,
     _poolFlameOfAnor,
     _poolFlameshape,
+    _poolFlamethrowerSonata,
     _poolFleetingEffigy,
     _poolFlowerfootSwordmaster,
     _poolForumFamiliar,
@@ -659,6 +666,7 @@ const shard: CardShard = {
     _poolGloriousCharge,
     _poolGnarledProfessor,
     _poolGnottvoldHermit,
+    _poolGoBlank,
     _poolGoblinBlastRunner,
     _poolGoblinChampion,
     _poolGoblinKing,
@@ -797,6 +805,7 @@ const shard: CardShard = {
     _poolPicturesOfSpiderMan,
     _poolPiperOfTheSwarm,
     _poolPiperWrightPublickReporter,
+    _poolPlarggDeanOfChaos,
     _poolPotionOfHealing,
     _poolPrecipitousDrop,
     _poolPrimalWellspring,
@@ -821,6 +830,7 @@ const shard: CardShard = {
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
+    _poolRoothaMercurialArtist,
     _poolRunOutOfTown,
     _poolRunawayBoulder,
     _poolRustwingFalcon,
@@ -888,6 +898,7 @@ const shard: CardShard = {
     _poolTarkirDuneshaper,
     _poolTeamTactics,
     _poolTemporalCleansing,
+    _poolTemptedByTheOriq,
     _poolTendrilsOfAgony,
     _poolTendrilsOfDespair,
     _poolTerminalAgony,
@@ -911,6 +922,7 @@ const shard: CardShard = {
     _poolTobiasDoomedConqueror,
     _poolTomBombadil,
     _poolTorgalAFineHound,
+    _poolTorrentSculptor,
     _poolTorstenVonUrsus,
     _poolTortoiseFormation,
     _poolTrailblazingHistorian,

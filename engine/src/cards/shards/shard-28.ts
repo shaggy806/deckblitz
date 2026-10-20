@@ -53,6 +53,7 @@ import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBlackMarket from "../pool/black-market.js";
 import _poolBloatedProcessor from "../pool/bloated-processor.js";
 import _poolBlockadeRunner from "../pool/blockade-runner.js";
+import _poolBloodAgeGeneral from "../pool/blood-age-general.js";
 import _poolBloodGlutton from "../pool/blood-glutton.js";
 import _poolBloodKnight from "../pool/blood-knight.js";
 import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
@@ -493,6 +494,7 @@ import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
+import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
@@ -567,6 +569,7 @@ const shard: CardShard = {
     _poolBlackMarket,
     _poolBloatedProcessor,
     _poolBlockadeRunner,
+    _poolBloodAgeGeneral,
     _poolBloodGlutton,
     _poolBloodKnight,
     _poolBloodbraidChallenger,
@@ -1007,6 +1010,7 @@ const shard: CardShard = {
     _poolWhisperAgent,
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
+    _poolWillScholarOfFrost,
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWorldChampionCelestialWeapon,

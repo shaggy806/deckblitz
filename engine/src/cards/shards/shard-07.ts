@@ -234,6 +234,7 @@ import _poolLounge from "../pool/lounge.js";
 import _poolLure from "../pool/lure.js";
 import _poolLurkingNightstalker from "../pool/lurking-nightstalker.js";
 import _poolLuxknightBreacher from "../pool/luxknight-breacher.js";
+import _poolMageHunter from "../pool/mage-hunter.js";
 import _poolMagicPot from "../pool/magic-pot.js";
 import _poolMagnificentEnd from "../pool/magnificent-end.js";
 import _poolMakindiGriffin from "../pool/makindi-griffin.js";
@@ -397,6 +398,7 @@ import _poolSpreadingRot from "../pool/spreading-rot.js";
 import _poolStaffOfCompleation from "../pool/staff-of-compleation.js";
 import _poolStarscapeCleric from "../pool/starscape-cleric.js";
 import _poolStarvedRusalka from "../pool/starved-rusalka.js";
+import _poolStonebindersFamiliar from "../pool/stonebinders-familiar.js";
 import _poolStormcallersBoon from "../pool/stormcallers-boon.js";
 import _poolStormscapeApprentice from "../pool/stormscape-apprentice.js";
 import _poolStratozeppelid from "../pool/stratozeppelid.js";
@@ -433,6 +435,7 @@ import _poolThundertrapTrainer from "../pool/thundertrap-trainer.js";
 import _poolTidalTerror from "../pool/tidal-terror.js";
 import _poolTimberlandGuide from "../pool/timberland-guide.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
+import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTorGiant from "../pool/tor-giant.js";
 import _poolTowerOfFortunes from "../pool/tower-of-fortunes.js";
@@ -759,6 +762,7 @@ const shard: CardShard = {
     _poolLure,
     _poolLurkingNightstalker,
     _poolLuxknightBreacher,
+    _poolMageHunter,
     _poolMagicPot,
     _poolMagnificentEnd,
     _poolMakindiGriffin,
@@ -922,6 +926,7 @@ const shard: CardShard = {
     _poolStaffOfCompleation,
     _poolStarscapeCleric,
     _poolStarvedRusalka,
+    _poolStonebindersFamiliar,
     _poolStormcallersBoon,
     _poolStormscapeApprentice,
     _poolStratozeppelid,
@@ -958,6 +963,7 @@ const shard: CardShard = {
     _poolTidalTerror,
     _poolTimberlandGuide,
     _poolTimeWipe,
+    _poolTomeShredder,
     _poolToothyImaginaryFriend,
     _poolTorGiant,
     _poolTowerOfFortunes,

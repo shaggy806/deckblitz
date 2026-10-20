@@ -343,6 +343,8 @@ import _poolProwlingCaracal from "../pool/prowling-caracal.js";
 import _poolPublicThoroughfare from "../pool/public-thoroughfare.js";
 import _poolPuppetMasterStringPuller from "../pool/puppet-master-string-puller.js";
 import _poolPymParticles from "../pool/pym-particles.js";
+import _poolQuandrixApprentice from "../pool/quandrix-apprentice.js";
+import _poolQuandrixCultivator from "../pool/quandrix-cultivator.js";
 import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRadioactiveMan from "../pool/radioactive-man.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
@@ -422,6 +424,7 @@ import _poolTatteredRatter from "../pool/tattered-ratter.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfSilence from "../pool/temple-of-silence.js";
 import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
+import _poolTenuredInkcaster from "../pool/tenured-inkcaster.js";
 import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolTheAesirEscapeValhalla from "../pool/the-aesir-escape-valhalla.js";
@@ -839,6 +842,8 @@ const shard: CardShard = {
     _poolPublicThoroughfare,
     _poolPuppetMasterStringPuller,
     _poolPymParticles,
+    _poolQuandrixApprentice,
+    _poolQuandrixCultivator,
     _poolRabbleRousing,
     _poolRadioactiveMan,
     _poolRakdosCharm,
@@ -918,6 +923,7 @@ const shard: CardShard = {
     _poolTemperedSteel,
     _poolTempleOfSilence,
     _poolTempleOfTriumph,
+    _poolTenuredInkcaster,
     _poolTeyoDiamondbladeMage,
     _poolThalisseReverentMedium,
     _poolTheAesirEscapeValhalla,

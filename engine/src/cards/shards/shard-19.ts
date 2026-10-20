@@ -40,6 +40,7 @@ import _poolBenalishTrapper from "../pool/benalish-trapper.js";
 import _poolBewilder from "../pool/bewilder.js";
 import _poolBeyeenVeil from "../pool/beyeen-veil.js";
 import _poolBhaalsInvoker from "../pool/bhaals-invoker.js";
+import _poolBiblioplexAssistant from "../pool/biblioplex-assistant.js";
 import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
@@ -51,6 +52,7 @@ import _poolBlightsteelColossus from "../pool/blightsteel-colossus.js";
 import _poolBloomvineRegent from "../pool/bloomvine-regent.js";
 import _poolBlurSliver from "../pool/blur-sliver.js";
 import _poolBobReluctantHydraAgent from "../pool/bob-reluctant-hydra-agent.js";
+import _poolBodyOfResearch from "../pool/body-of-research.js";
 import _poolBogNaughty from "../pool/bog-naughty.js";
 import _poolBoldwyrAggressor from "../pool/boldwyr-aggressor.js";
 import _poolBoneyardDesecrator from "../pool/boneyard-desecrator.js";
@@ -126,6 +128,7 @@ import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
+import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
@@ -168,6 +171,7 @@ import _poolForerunnerOfTheEmpire from "../pool/forerunner-of-the-empire.js";
 import _poolFormidableSpeaker from "../pool/formidable-speaker.js";
 import _poolFortifiedVillage from "../pool/fortified-village.js";
 import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
+import _poolFractalSummoning from "../pool/fractal-summoning.js";
 import _poolFugue from "../pool/fugue.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
@@ -442,6 +446,7 @@ import _poolStarnheimMemento from "../pool/starnheim-memento.js";
 import _poolStartFromScratch from "../pool/start-from-scratch.js";
 import _poolSteelWreckingBall from "../pool/steel-wrecking-ball.js";
 import _poolStirringHopesinger from "../pool/stirring-hopesinger.js";
+import _poolStoneboundMentor from "../pool/stonebound-mentor.js";
 import _poolStonyVoicedGoblins from "../pool/stony-voiced-goblins.js";
 import _poolStormbreathDragon from "../pool/stormbreath-dragon.js";
 import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
@@ -577,6 +582,7 @@ const shard: CardShard = {
     _poolBewilder,
     _poolBeyeenVeil,
     _poolBhaalsInvoker,
+    _poolBiblioplexAssistant,
     _poolBiosynthicBurst,
     _poolBirninZanaPlaza,
     _poolBitterReunion,
@@ -588,6 +594,7 @@ const shard: CardShard = {
     _poolBloomvineRegent,
     _poolBlurSliver,
     _poolBobReluctantHydraAgent,
+    _poolBodyOfResearch,
     _poolBogNaughty,
     _poolBoldwyrAggressor,
     _poolBoneyardDesecrator,
@@ -663,6 +670,7 @@ const shard: CardShard = {
     _poolDiversionSpecialist,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,
+    _poolDramaticFinale,
     _poolDreadFugue,
     _poolDrossSkullbomb,
     _poolDualcasterMage,
@@ -705,6 +713,7 @@ const shard: CardShard = {
     _poolFormidableSpeaker,
     _poolFortifiedVillage,
     _poolFractalAnomaly,
+    _poolFractalSummoning,
     _poolFugue,
     _poolFurtiveCourier,
     _poolGaladrielOfLothlorien,
@@ -979,6 +988,7 @@ const shard: CardShard = {
     _poolStartFromScratch,
     _poolSteelWreckingBall,
     _poolStirringHopesinger,
+    _poolStoneboundMentor,
     _poolStonyVoicedGoblins,
     _poolStormbreathDragon,
     _poolStreakingOilgorger,

@@ -86,6 +86,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Strixhaven: School of Mages, whole** (batch 111): its last 161 cards, 117 authored, with
+  learn built as the optional rummage alone (rule 701.48a — no deck here has a sideboard, so no
+  Lesson is outside the game; `learn()`, and the scaffolder reads "Learn."); 44 blocked. The
+  first batch whose agents had the generated vocabulary digest (`card:digest`) (2026-10-20).
 - **Modern Horizons 2 and Commander 2021, whole** (batch 110): their last 157 cards, 109
   authored, with madness built (rule 702.35 — every discard through one `discardCards`, a card
   with madness exiled instead and its trigger a `cast-now` for the madness cost), plus 4 older

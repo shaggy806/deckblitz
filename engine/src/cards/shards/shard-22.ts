@@ -19,6 +19,7 @@ import _poolAnnoyedAltisaur from "../pool/annoyed-altisaur.js";
 import _poolAnowonTheRuinSage from "../pool/anowon-the-ruin-sage.js";
 import _poolAppaLoyalSkyBison from "../pool/appa-loyal-sky-bison.js";
 import _poolArchivist from "../pool/archivist.js";
+import _poolArchwayCommons from "../pool/archway-commons.js";
 import _poolArdentMilitia from "../pool/ardent-militia.js";
 import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js";
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
@@ -42,6 +43,7 @@ import _poolBlackWidowIntelExpert from "../pool/black-widow-intel-expert.js";
 import _poolBlindingDrone from "../pool/blinding-drone.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
+import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
 import _poolBoneclubBerserker from "../pool/boneclub-berserker.js";
 import _poolBoulderbranchGolem from "../pool/boulderbranch-golem.js";
@@ -335,6 +337,7 @@ import _poolResurrection from "../pool/resurrection.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRiotDevils from "../pool/riot-devils.js";
+import _poolRiseOfExtus from "../pool/rise-of-extus.js";
 import _poolRishkarsExpertise from "../pool/rishkars-expertise.js";
 import _poolRooftopBypass from "../pool/rooftop-bypass.js";
 import _poolRosethornAcolyte from "../pool/rosethorn-acolyte.js";
@@ -362,6 +365,7 @@ import _poolSeekersFolly from "../pool/seekers-folly.js";
 import _poolSeismicSpike from "../pool/seismic-spike.js";
 import _poolSentinelsOfGlenElendra from "../pool/sentinels-of-glen-elendra.js";
 import _poolSentryOfTheUnderworld from "../pool/sentry-of-the-underworld.js";
+import _poolShadewingLaureate from "../pool/shadewing-laureate.js";
 import _poolSharuumTheHegemon from "../pool/sharuum-the-hegemon.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
 import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
@@ -427,6 +431,7 @@ import _poolTerrorOfMountVelus from "../pool/terror-of-mount-velus.js";
 import _poolTevalTheBalancedScale from "../pool/teval-the-balanced-scale.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
+import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
 import _poolTheSackvilleBagginses from "../pool/the-sackville-bagginses.js";
@@ -533,6 +538,7 @@ const shard: CardShard = {
     _poolAnowonTheRuinSage,
     _poolAppaLoyalSkyBison,
     _poolArchivist,
+    _poolArchwayCommons,
     _poolArdentMilitia,
     _poolArixmethesSlumberingIsle,
     _poolArkOfBlight,
@@ -556,6 +562,7 @@ const shard: CardShard = {
     _poolBlindingDrone,
     _poolBloomTender,
     _poolBloomingBlast,
+    _poolBlotOutTheSky,
     _poolBogInitiate,
     _poolBoneclubBerserker,
     _poolBoulderbranchGolem,
@@ -849,6 +856,7 @@ const shard: CardShard = {
     _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRiotDevils,
+    _poolRiseOfExtus,
     _poolRishkarsExpertise,
     _poolRooftopBypass,
     _poolRosethornAcolyte,
@@ -876,6 +884,7 @@ const shard: CardShard = {
     _poolSeismicSpike,
     _poolSentinelsOfGlenElendra,
     _poolSentryOfTheUnderworld,
+    _poolShadewingLaureate,
     _poolSharuumTheHegemon,
     _poolShepherdOfRot,
     _poolShinraReinforcements,
@@ -941,6 +950,7 @@ const shard: CardShard = {
     _poolTevalTheBalancedScale,
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
+    _poolTheBiblioplex,
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
     _poolTheSackvilleBagginses,

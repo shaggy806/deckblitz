@@ -39,6 +39,7 @@ import _poolBatheInGold from "../pool/bathe-in-gold.js";
 import _poolBeamsawProspector from "../pool/beamsaw-prospector.js";
 import _poolBeastAttack from "../pool/beast-attack.js";
 import _poolBigfinBouncer from "../pool/bigfin-bouncer.js";
+import _poolBiomathematician from "../pool/biomathematician.js";
 import _poolBiomechanEngineer from "../pool/biomechan-engineer.js";
 import _poolBirthingBoughs from "../pool/birthing-boughs.js";
 import _poolBlackWidowAgileAvenger from "../pool/black-widow-agile-avenger.js";
@@ -67,6 +68,7 @@ import _poolCacklingProwler from "../pool/cackling-prowler.js";
 import _poolCageOfHands from "../pool/cage-of-hands.js";
 import _poolCalderaPyremaw from "../pool/caldera-pyremaw.js";
 import _poolCallTheMountainChocobo from "../pool/call-the-mountain-chocobo.js";
+import _poolCallousBloodmage from "../pool/callous-bloodmage.js";
 import _poolCaparoctiSunborn from "../pool/caparocti-sunborn.js";
 import _poolCaptainAmericaWingsOfFreedom from "../pool/captain-america-wings-of-freedom.js";
 import _poolCaptainOfTheWatch from "../pool/captain-of-the-watch.js";
@@ -412,6 +414,7 @@ import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
+import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
@@ -563,6 +566,7 @@ const shard: CardShard = {
     _poolBeamsawProspector,
     _poolBeastAttack,
     _poolBigfinBouncer,
+    _poolBiomathematician,
     _poolBiomechanEngineer,
     _poolBirthingBoughs,
     _poolBlackWidowAgileAvenger,
@@ -591,6 +595,7 @@ const shard: CardShard = {
     _poolCageOfHands,
     _poolCalderaPyremaw,
     _poolCallTheMountainChocobo,
+    _poolCallousBloodmage,
     _poolCaparoctiSunborn,
     _poolCaptainAmericaWingsOfFreedom,
     _poolCaptainOfTheWatch,
@@ -936,6 +941,7 @@ const shard: CardShard = {
     _poolStarkIndustries,
     _poolSterlingKeykeeper,
     _poolStitchInTime,
+    _poolStoneriseSpirit,
     _poolStoneworkPuma,
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,

@@ -8526,6 +8526,55 @@
   "trigger:enchanted-player-draws": {
    "family": "mechanic:curses",
    "example": "Curse of Fool's Wisdom"
+  },
+  "effect:spell-returns-itself-to-hand": {
+   "example": "Journey to the Oracle: a spell returning itself to its owner's hand as it resolves"
+  },
+  "trigger:ability-triggered-by-entering": {
+   "example": "Strict Proctor: a permanent entering causes a triggered ability to trigger"
+  },
+  "replacement:grant-exile-if-would-leave": {
+   "family": "replacement:new-event-replacements",
+   "example": "Elemental Expressionist"
+  },
+  "trigger:opponent-attacks-your-planeswalkers": {
+   "example": "Mila, Crafty Companion"
+  },
+  "condition:alternative-cost-paid": {
+   "family": "cost:conditional-alternative-cost",
+   "example": "The Strixhaven Masteries: 'if the {2}{U} cost was paid'"
+  },
+  "effect:exchange-hand-and-graveyard": {
+   "example": "Harness Infinity"
+  },
+  "effect:pump-all-except-target": {
+   "family": "effect:target-spec-additions",
+   "example": "Exhilarating Elocution"
+  },
+  "effect:opponent-chooses-permanents-to-bounce": {
+   "family": "effect:choices-by-other-players",
+   "example": "Devastating Mastery"
+  },
+  "effect:animate-all-except-source": {
+   "example": "Tanazir Quandrix: 'other creatures you control have base power and toughness'"
+  },
+  "filter:entered-under-your-control-this-turn": {
+   "example": "Shaile, Dean of Radiance"
+  },
+  "amount:cards-in-hand-of-target-controller": {
+   "example": "Flunk"
+  },
+  "effect:prohibit-loyalty-abilities": {
+   "family": "effect:cast-and-activate-restrictions",
+   "example": "Revel in Silence"
+  },
+  "effect:destroy-all-except-chosen": {
+   "family": "effect:choices-by-other-players",
+   "example": "Deadly Vanity"
+  },
+  "replacement:learn-replacement": {
+   "family": "replacement:new-event-replacements",
+   "example": "Retriever Phoenix"
   }
  }
 }

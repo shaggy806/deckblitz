@@ -323,6 +323,7 @@ import _poolPermissionDenied from "../pool/permission-denied.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
 import _poolPlaguemawBeast from "../pool/plaguemaw-beast.js";
+import _poolPracticalResearch from "../pool/practical-research.js";
 import _poolPrimoTheUnbounded from "../pool/primo-the-unbounded.js";
 import _poolPrimordialPlasm from "../pool/primordial-plasm.js";
 import _poolProphetOfDistortion from "../pool/prophet-of-distortion.js";
@@ -844,6 +845,7 @@ const shard: CardShard = {
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
     _poolPlaguemawBeast,
+    _poolPracticalResearch,
     _poolPrimoTheUnbounded,
     _poolPrimordialPlasm,
     _poolProphetOfDistortion,

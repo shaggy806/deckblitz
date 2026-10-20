@@ -216,6 +216,7 @@ import _poolHaythamKenway from "../pool/haytham-kenway.js";
 import _poolHeliodTheRadiantDawn from "../pool/heliod-the-radiant-dawn.js";
 import _poolHelmOfTheGods from "../pool/helm-of-the-gods.js";
 import _poolHeroesForHire from "../pool/heroes-for-hire.js";
+import _poolHonorTroll from "../pool/honor-troll.js";
 import _poolHookblade from "../pool/hookblade.js";
 import _poolHoverguardObserver from "../pool/hoverguard-observer.js";
 import _poolHowlingGiant from "../pool/howling-giant.js";
@@ -272,6 +273,7 @@ import _poolMassacreGirlMostWanted from "../pool/massacre-girl-most-wanted.js";
 import _poolMeandersGuide from "../pool/meanders-guide.js";
 import _poolMechanicalMobster from "../pool/mechanical-mobster.js";
 import _poolMentalJourney from "../pool/mental-journey.js";
+import _poolMercurialTransformation from "../pool/mercurial-transformation.js";
 import _poolMerfolkTraders from "../pool/merfolk-traders.js";
 import _poolMerrowCommerce from "../pool/merrow-commerce.js";
 import _poolMillikin from "../pool/millikin.js";
@@ -320,6 +322,7 @@ import _poolPatronWizard from "../pool/patron-wizard.js";
 import _poolPeacewalkerColossus from "../pool/peacewalker-colossus.js";
 import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
 import _poolPensiveProfessor from "../pool/pensive-professor.js";
+import _poolPestSummoning from "../pool/pest-summoning.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
 import _poolPincherBeetles from "../pool/pincher-beetles.js";
@@ -452,6 +455,7 @@ import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTauntingSliver from "../pool/taunting-sliver.js";
 import _poolTavernScoundrel from "../pool/tavern-scoundrel.js";
+import _poolTeamPennant from "../pool/team-pennant.js";
 import _poolTellahGreatSage from "../pool/tellah-great-sage.js";
 import _poolTermagantSwarm from "../pool/termagant-swarm.js";
 import _poolTerminalVelocity from "../pool/terminal-velocity.js";
@@ -762,6 +766,7 @@ const shard: CardShard = {
     _poolHeliodTheRadiantDawn,
     _poolHelmOfTheGods,
     _poolHeroesForHire,
+    _poolHonorTroll,
     _poolHookblade,
     _poolHoverguardObserver,
     _poolHowlingGiant,
@@ -818,6 +823,7 @@ const shard: CardShard = {
     _poolMeandersGuide,
     _poolMechanicalMobster,
     _poolMentalJourney,
+    _poolMercurialTransformation,
     _poolMerfolkTraders,
     _poolMerrowCommerce,
     _poolMillikin,
@@ -866,6 +872,7 @@ const shard: CardShard = {
     _poolPeacewalkerColossus,
     _poolPeerPastTheVeil,
     _poolPensiveProfessor,
+    _poolPestSummoning,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,
     _poolPincherBeetles,
@@ -998,6 +1005,7 @@ const shard: CardShard = {
     _poolTatyova,
     _poolTauntingSliver,
     _poolTavernScoundrel,
+    _poolTeamPennant,
     _poolTellahGreatSage,
     _poolTermagantSwarm,
     _poolTerminalVelocity,

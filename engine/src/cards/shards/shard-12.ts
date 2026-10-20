@@ -249,6 +249,7 @@ import _poolMarbleDiamond from "../pool/marble-diamond.js";
 import _poolMarwynThePreserver from "../pool/marwyn-the-preserver.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
+import _poolMentorsGuidance from "../pool/mentors-guidance.js";
 import _poolMerrowReejerey from "../pool/merrow-reejerey.js";
 import _poolMetamorphicBlast from "../pool/metamorphic-blast.js";
 import _poolMigratoryRoute from "../pool/migratory-route.js";
@@ -374,6 +375,7 @@ import _poolSiblingRivalry from "../pool/sibling-rivalry.js";
 import _poolSigilOfTheEmptyThrone from "../pool/sigil-of-the-empty-throne.js";
 import _poolSilence from "../pool/silence.js";
 import _poolSilvanRally from "../pool/silvan-rally.js";
+import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
 import _poolSinisterHideout from "../pool/sinister-hideout.js";
@@ -473,6 +475,7 @@ import _poolWildernessReclamation from "../pool/wilderness-reclamation.js";
 import _poolWildsize from "../pool/wildsize.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
+import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
 import _poolWolfbat from "../pool/wolfbat.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
@@ -746,6 +749,7 @@ const shard: CardShard = {
     _poolMarwynThePreserver,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
+    _poolMentorsGuidance,
     _poolMerrowReejerey,
     _poolMetamorphicBlast,
     _poolMigratoryRoute,
@@ -871,6 +875,7 @@ const shard: CardShard = {
     _poolSigilOfTheEmptyThrone,
     _poolSilence,
     _poolSilvanRally,
+    _poolSilverquillPledgemage,
     _poolSimulacrumShaper,
     _poolSinewSliver,
     _poolSinisterHideout,
@@ -970,6 +975,7 @@ const shard: CardShard = {
     _poolWildsize,
     _poolWilheltTheRotcleaver,
     _poolWitchBlessedMeadow,
+    _poolWitherbloomCommand,
     _poolWitheringCurse,
     _poolWolfbat,
     _poolWreckingBeast,

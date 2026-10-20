@@ -23,6 +23,7 @@ import _poolArcboundWorker from "../pool/arcbound-worker.js";
 import _poolArcoFlagellant from "../pool/arco-flagellant.js";
 import _poolArmoredPegasus from "../pool/armored-pegasus.js";
 import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
+import _poolArrogantPoet from "../pool/arrogant-poet.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
 import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
@@ -33,6 +34,7 @@ import _poolBaSingSe from "../pool/ba-sing-se.js";
 import _poolBandage from "../pool/bandage.js";
 import _poolBastionOfRemembrance from "../pool/bastion-of-remembrance.js";
 import _poolBastionProtector from "../pool/bastion-protector.js";
+import _poolBayouGroff from "../pool/bayou-groff.js";
 import _poolBearDown from "../pool/bear-down.js";
 import _poolBebopWarthogWarrior from "../pool/bebop-warthog-warrior.js";
 import _poolBejeweledWarg from "../pool/bejeweled-warg.js";
@@ -77,6 +79,7 @@ import _poolCindervines from "../pool/cindervines.js";
 import _poolClaimTheFirstborn from "../pool/claim-the-firstborn.js";
 import _poolClayFiredBricks from "../pool/clay-fired-bricks.js";
 import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
+import _poolClosingStatement from "../pool/closing-statement.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
@@ -249,6 +252,7 @@ import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLoomingAltisaur from "../pool/looming-altisaur.js";
 import _poolLootThePathfinder from "../pool/loot-the-pathfinder.js";
 import _poolLordOfTheNazgul from "../pool/lord-of-the-nazgul.js";
+import _poolLoreholdCommand from "../pool/lorehold-command.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
@@ -345,6 +349,7 @@ import _poolRequisitionRaid from "../pool/requisition-raid.js";
 import _poolRescuerChwinga from "../pool/rescuer-chwinga.js";
 import _poolRestartSequence from "../pool/restart-sequence.js";
 import _poolRetrieveTheEsper from "../pool/retrieve-the-esper.js";
+import _poolReturnedPastcaller from "../pool/returned-pastcaller.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
@@ -402,6 +407,7 @@ import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulmender from "../pool/soulmender.js";
 import _poolSparasHeadquarters from "../pool/sparas-headquarters.js";
 import _poolSpawnbedProtector from "../pool/spawnbed-protector.js";
+import _poolSpectacleMage from "../pool/spectacle-mage.js";
 import _poolSpectacularPileup from "../pool/spectacular-pileup.js";
 import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
@@ -426,6 +432,7 @@ import _poolTaintedPeak from "../pool/tainted-peak.js";
 import _poolTameshiRealityArchitect from "../pool/tameshi-reality-architect.js";
 import _poolTarSnare from "../pool/tar-snare.js";
 import _poolTatteredDrake from "../pool/tattered-drake.js";
+import _poolTeachByExample from "../pool/teach-by-example.js";
 import _poolTerramorphicExpanse from "../pool/terramorphic-expanse.js";
 import _poolTetherTechnician from "../pool/tether-technician.js";
 import _poolTextbookTabulator from "../pool/textbook-tabulator.js";
@@ -532,6 +539,7 @@ const shard: CardShard = {
     _poolArcoFlagellant,
     _poolArmoredPegasus,
     _poolArnimZolaBioFanatic,
+    _poolArrogantPoet,
     _poolAshenMonstrosity,
     _poolAssaultIntercessor,
     _poolAssaultZeppelid,
@@ -542,6 +550,7 @@ const shard: CardShard = {
     _poolBandage,
     _poolBastionOfRemembrance,
     _poolBastionProtector,
+    _poolBayouGroff,
     _poolBearDown,
     _poolBebopWarthogWarrior,
     _poolBejeweledWarg,
@@ -586,6 +595,7 @@ const shard: CardShard = {
     _poolClaimTheFirstborn,
     _poolClayFiredBricks,
     _poolCliffhavenVampire,
+    _poolClosingStatement,
     _poolCloudCrusader,
     _poolCombatCelebrant,
     _poolConcertedCare,
@@ -758,6 +768,7 @@ const shard: CardShard = {
     _poolLoomingAltisaur,
     _poolLootThePathfinder,
     _poolLordOfTheNazgul,
+    _poolLoreholdCommand,
     _poolLotusCobra,
     _poolLoyalApprentice,
     _poolMachinistsArsenal,
@@ -854,6 +865,7 @@ const shard: CardShard = {
     _poolRescuerChwinga,
     _poolRestartSequence,
     _poolRetrieveTheEsper,
+    _poolReturnedPastcaller,
     _poolReverberatingSummons,
     _poolReverentHoplite,
     _poolReyavMasterSmith,
@@ -911,6 +923,7 @@ const shard: CardShard = {
     _poolSoulmender,
     _poolSparasHeadquarters,
     _poolSpawnbedProtector,
+    _poolSpectacleMage,
     _poolSpectacularPileup,
     _poolSpiderManBrooklynVisionary,
     _poolSpineOfIshSah,
@@ -935,6 +948,7 @@ const shard: CardShard = {
     _poolTameshiRealityArchitect,
     _poolTarSnare,
     _poolTatteredDrake,
+    _poolTeachByExample,
     _poolTerramorphicExpanse,
     _poolTetherTechnician,
     _poolTextbookTabulator,

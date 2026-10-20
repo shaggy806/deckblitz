@@ -33,6 +33,7 @@ import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
 import _poolArtificerClass from "../pool/artificer-class.js";
 import _poolAshcoatBear from "../pool/ashcoat-bear.js";
 import _poolAtomize from "../pool/atomize.js";
+import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
@@ -89,6 +90,7 @@ import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
 import _poolCracklingDoom from "../pool/crackling-doom.js";
 import _poolCrashAndBurn from "../pool/crash-and-burn.js";
+import _poolCreativeOutburst from "../pool/creative-outburst.js";
 import _poolCrenellatedWall from "../pool/crenellated-wall.js";
 import _poolCroakingCounterpart from "../pool/croaking-counterpart.js";
 import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
@@ -115,6 +117,7 @@ import _poolDuskshellCrawler from "../pool/duskshell-crawler.js";
 import _poolEagleOfDeliverance from "../pool/eagle-of-deliverance.js";
 import _poolEarthElemental from "../pool/earth-elemental.js";
 import _poolEarthshakerDreadmaw from "../pool/earthshaker-dreadmaw.js";
+import _poolEchoingEquation from "../pool/echoing-equation.js";
 import _poolEdgarCharmedGroom from "../pool/edgar-charmed-groom.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
@@ -296,6 +299,7 @@ import _poolOvergrownArch from "../pool/overgrown-arch.js";
 import _poolPacksBetrayal from "../pool/packs-betrayal.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPestProblem from "../pool/pest-problem.js";
+import _poolPigmentStorm from "../pool/pigment-storm.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
@@ -538,6 +542,7 @@ const shard: CardShard = {
     _poolArtificerClass,
     _poolAshcoatBear,
     _poolAtomize,
+    _poolAugmenterPugilist,
     _poolAuntieOolCursewretch,
     _poolAutonSoldier,
     _poolAwakenTheInferno,
@@ -594,6 +599,7 @@ const shard: CardShard = {
     _poolCrackedEarthTechnique,
     _poolCracklingDoom,
     _poolCrashAndBurn,
+    _poolCreativeOutburst,
     _poolCrenellatedWall,
     _poolCroakingCounterpart,
     _poolCurseOfTheRestlessDead,
@@ -620,6 +626,7 @@ const shard: CardShard = {
     _poolEagleOfDeliverance,
     _poolEarthElemental,
     _poolEarthshakerDreadmaw,
+    _poolEchoingEquation,
     _poolEdgarCharmedGroom,
     _poolEliteArrester,
     _poolElvishArchdruid,
@@ -801,6 +808,7 @@ const shard: CardShard = {
     _poolPacksBetrayal,
     _poolPearlMedallion,
     _poolPestProblem,
+    _poolPigmentStorm,
     _poolPilferedPlans,
     _poolPillarOfTheParuns,
     _poolPixieQueen,

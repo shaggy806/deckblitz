@@ -115,6 +115,7 @@ import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
 import _poolDrumhunter from "../pool/drumhunter.js";
+import _poolDuelingCoach from "../pool/dueling-coach.js";
 import _poolDukharaPeafowl from "../pool/dukhara-peafowl.js";
 import _poolDwarvenShortsword from "../pool/dwarven-shortsword.js";
 import _poolEastMarkCavalier from "../pool/east-mark-cavalier.js";
@@ -131,6 +132,7 @@ import _poolElvishArchivist from "../pool/elvish-archivist.js";
 import _poolElvishLookout from "../pool/elvish-lookout.js";
 import _poolElvishVatkeeper from "../pool/elvish-vatkeeper.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
+import _poolEmergentSequence from "../pool/emergent-sequence.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
@@ -310,6 +312,7 @@ import _poolPyreticPrankster from "../pool/pyretic-prankster.js";
 import _poolQasaliSlingers from "../pool/qasali-slingers.js";
 import _poolQuakeAgentOfSHIELD from "../pool/quake-agent-of-s-h-i-e-l-d.js";
 import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
+import _poolQuintoriusFieldHistorian from "../pool/quintorius-field-historian.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
 import _poolRageThrower from "../pool/rage-thrower.js";
@@ -352,6 +355,7 @@ import _poolSawbladeSkinripper from "../pool/sawblade-skinripper.js";
 import _poolScanTheClouds from "../pool/scan-the-clouds.js";
 import _poolScionOfTheSwarm from "../pool/scion-of-the-swarm.js";
 import _poolScrapyardSteelbreaker from "../pool/scrapyard-steelbreaker.js";
+import _poolScurridColony from "../pool/scurrid-colony.js";
 import _poolScuzzbackScrapper from "../pool/scuzzback-scrapper.js";
 import _poolSeekerOfTheWay from "../pool/seeker-of-the-way.js";
 import _poolSentinelsEyes from "../pool/sentinels-eyes.js";
@@ -360,6 +364,7 @@ import _poolSerraAscendant from "../pool/serra-ascendant.js";
 import _poolShamblingRemains from "../pool/shambling-remains.js";
 import _poolShivanDevastator from "../pool/shivan-devastator.js";
 import _poolShivanOasis from "../pool/shivan-oasis.js";
+import _poolShowOfConfidence from "../pool/show-of-confidence.js";
 import _poolSigardianSavior from "../pool/sigardian-savior.js";
 import _poolSilverShroudCostume from "../pool/silver-shroud-costume.js";
 import _poolSilverbackElder from "../pool/silverback-elder.js";
@@ -471,6 +476,7 @@ import _poolVatOfRebirth from "../pool/vat-of-rebirth.js";
 import _poolVectisSilencers from "../pool/vectis-silencers.js";
 import _poolVeiledAscension from "../pool/veiled-ascension.js";
 import _poolVelaTheNightClad from "../pool/vela-the-night-clad.js";
+import _poolVenerableWarsinger from "../pool/venerable-warsinger.js";
 import _poolVesselOfVolatility from "../pool/vessel-of-volatility.js";
 import _poolVigorbloomVanguard from "../pool/vigorbloom-vanguard.js";
 import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
@@ -624,6 +630,7 @@ const shard: CardShard = {
     _poolDragonCursedHalls,
     _poolDrillworksMole,
     _poolDrumhunter,
+    _poolDuelingCoach,
     _poolDukharaPeafowl,
     _poolDwarvenShortsword,
     _poolEastMarkCavalier,
@@ -640,6 +647,7 @@ const shard: CardShard = {
     _poolElvishLookout,
     _poolElvishVatkeeper,
     _poolEmberethBlaze,
+    _poolEmergentSequence,
     _poolEpicProportions,
     _poolEriettesWhisper,
     _poolErrantDoomsayers,
@@ -819,6 +827,7 @@ const shard: CardShard = {
     _poolQasaliSlingers,
     _poolQuakeAgentOfSHIELD,
     _poolQuestForTheNecropolis,
+    _poolQuintoriusFieldHistorian,
     _poolQuirionRanger,
     _poolRadioactiveSpider,
     _poolRageThrower,
@@ -861,6 +870,7 @@ const shard: CardShard = {
     _poolScanTheClouds,
     _poolScionOfTheSwarm,
     _poolScrapyardSteelbreaker,
+    _poolScurridColony,
     _poolScuzzbackScrapper,
     _poolSeekerOfTheWay,
     _poolSentinelsEyes,
@@ -869,6 +879,7 @@ const shard: CardShard = {
     _poolShamblingRemains,
     _poolShivanDevastator,
     _poolShivanOasis,
+    _poolShowOfConfidence,
     _poolSigardianSavior,
     _poolSilverShroudCostume,
     _poolSilverbackElder,
@@ -980,6 +991,7 @@ const shard: CardShard = {
     _poolVectisSilencers,
     _poolVeiledAscension,
     _poolVelaTheNightClad,
+    _poolVenerableWarsinger,
     _poolVesselOfVolatility,
     _poolVigorbloomVanguard,
     _poolVilespawnSpider,

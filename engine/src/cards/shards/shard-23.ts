@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
+import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAgonyWarp from "../pool/agony-warp.js";
 import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
@@ -159,6 +160,7 @@ import _poolFlensermite from "../pool/flensermite.js";
 import _poolFomoriVault from "../pool/fomori-vault.js";
 import _poolFoolishFate from "../pool/foolish-fate.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
+import _poolFortifyingDraught from "../pool/fortifying-draught.js";
 import _poolFoulPlay from "../pool/foul-play.js";
 import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
@@ -246,6 +248,7 @@ import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
+import _poolLeylineInvocation from "../pool/leyline-invocation.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLostLegion from "../pool/lost-legion.js";
@@ -253,6 +256,7 @@ import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLuluLoyalHollyphant from "../pool/lulu-loyal-hollyphant.js";
 import _poolLumenClassFrigate from "../pool/lumen-class-frigate.js";
 import _poolMabelValleyHero from "../pool/mabel-valley-hero.js";
+import _poolMakeYourMark from "../pool/make-your-mark.js";
 import _poolMakindiOx from "../pool/makindi-ox.js";
 import _poolMammothSpider from "../pool/mammoth-spider.js";
 import _poolManaPrism from "../pool/mana-prism.js";
@@ -320,6 +324,8 @@ import _poolPortentTracker from "../pool/portent-tracker.js";
 import _poolPrimalBeyond from "../pool/primal-beyond.js";
 import _poolPrimeSpeakerZegana from "../pool/prime-speaker-zegana.js";
 import _poolPrimevalHerald from "../pool/primeval-herald.js";
+import _poolPrismariApprentice from "../pool/prismari-apprentice.js";
+import _poolPrismariPledgemage from "../pool/prismari-pledgemage.js";
 import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
@@ -519,6 +525,7 @@ import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
 const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
+    _poolAccomplishedAlchemist,
     _poolAgonyWarp,
     _poolAirNomadLegacy,
     _poolAjaniTheGreathearted,
@@ -674,6 +681,7 @@ const shard: CardShard = {
     _poolFomoriVault,
     _poolFoolishFate,
     _poolForsakenThresher,
+    _poolFortifyingDraught,
     _poolFoulPlay,
     _poolFreyaliseLlanowarsFury,
     _poolFrogButler,
@@ -761,6 +769,7 @@ const shard: CardShard = {
     _poolLavaAxe,
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
+    _poolLeylineInvocation,
     _poolLightningBlast,
     _poolLightningBlow,
     _poolLostLegion,
@@ -768,6 +777,7 @@ const shard: CardShard = {
     _poolLuluLoyalHollyphant,
     _poolLumenClassFrigate,
     _poolMabelValleyHero,
+    _poolMakeYourMark,
     _poolMakindiOx,
     _poolMammothSpider,
     _poolManaPrism,
@@ -835,6 +845,8 @@ const shard: CardShard = {
     _poolPrimalBeyond,
     _poolPrimeSpeakerZegana,
     _poolPrimevalHerald,
+    _poolPrismariApprentice,
+    _poolPrismariPledgemage,
     _poolPrismaticUndercurrents,
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
